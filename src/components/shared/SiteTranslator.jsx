@@ -14,8 +14,10 @@ import { producedWords, markProduced } from '@/components/shared/translationMemo
 // Four things keep it smooth, and each one matters:
 //  1. The words we already hold go in BEFORE the browser paints — a page read in this
 //     tongue before is never seen in English, not even for a frame.
-//  2. What we hold is applied and what we are missing is collected in ONE pass; the missing
-//     words then leave in short pieces, one after another, instead of one lump that waits.
+//  2. What we hold is applied and what we are missing is collected in ONE pass; the missing words
+//     then leave in short pieces, so no single ask can time out — and the page is written ONCE,
+//     when they are all in hand. One write is a page that settles; a write after every piece is a
+//     page that keeps shifting under the reader's thumb, which is what made it feel restless.
 //  3. The English a word was written in is remembered per node, so a translated word is
 //     never fed back in for a second translation, and the engine never chases its own
 //     writes around the page.
@@ -37,13 +39,16 @@ const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'CODE', 'PRE', 'INPUT'
 // every word in it English AND refuses the words behind it while it hangs — which is how a page
 // ends up half in a tongue and half in English. Short pieces mean the words arrive while the reader
 // is already reading, and one slow piece never costs the rest.
-const PIECE_SIZE = 40;      // words per ask, with room for the record's frame alongside them
-const PIECE_CHARS = 1200;
+const PIECE_SIZE = 64;      // words per ask, with room for the record's frame alongside them
+const PIECE_CHARS = 2000;
 const DICT_LIMIT = 8000;
 const SETTLE_MS = 260;    // let a new page render before the first ask
 const REFRESH_MS = 120;   // a word React rewrote goes back at once, not after a beat
 
 const originals = new Map(); // text node -> the words the app wrote in it
+// The words this engine last wrote into a node, so its own writing is never mistaken for the app's
+// and fed back in for a second translation.
+const ourWritten = new WeakMap(); // text node / box -> the last words we put there
 
 // The tongue a reader already holds on this device. A new name for it, deliberately: every
 // dictionary written under the old key was made while two engines were translating each
@@ -106,8 +111,15 @@ async function pullTongue(lang, force = false) {
 // in the reader's tongue, and put back into English the moment they leave that tongue.
 const readWord = (node) => (node.nodeType === Node.TEXT_NODE ? node.nodeValue : node.getAttribute('placeholder'));
 const writeWord = (node, value) => {
-  if (node.nodeType === Node.TEXT_NODE) node.nodeValue = value;
-  else node.setAttribute('placeholder', value);
+  if (node.nodeType === Node.TEXT_NODE) {
+    if (node.nodeValue === value) return; // already says it: no write, no layout change
+    node.nodeValue = value;
+  } else {
+    if (node.getAttribute('placeholder') === value) return;
+    node.setAttribute('placeholder', value);
+  }
+  // Remembered so the page's change-watcher can tell our writing from the app's own.
+  ourWritten.set(node, value);
 };
 
 function translatable(node) {
@@ -251,27 +263,30 @@ export default function SiteTranslator() {
     repaint(dict);
   }, [repaint]);
 
-  // A word met on the page is put in the queue, once. One piece leaves at a time and the next goes
-  // the moment the last has landed, so a long page fills in while the reader is reading it.
+  // A word met on the page is put in the queue, once. Pieces leave one after another so that no
+  // single ask is big enough to time out — and the page itself is not touched until they are all in.
   const enqueue = useCallback((word) => {
     if (!word || asked.current.has(word)) return;
     asked.current.add(word);
     queue.current.add(word);
   }, []);
 
-  // One short piece, answered. What comes back goes straight onto the page. If nothing comes back,
-  // those words are free to be asked again rather than written off for the rest of the visit.
+  // One short piece, answered. What comes back fills the tongue and waits there with the rest, and
+  // the page is written once, when every piece of this pass is in. If nothing comes back, those
+  // words are free to be asked again rather than written off for the rest of the visit.
   const askPiece = useCallback(async (lang, words) => {
     const dict = dictRef.current; // the tongue this piece was asked for
     try {
       const payload = Object.fromEntries(words.map((s, i) => [`s${i}`, s]));
       const res = await base44.functions.invoke('translateClimate', { lang, strings: payload });
       const out = res?.data?.translations || res?.translations;
-      if (!out || typeof out !== 'object') { words.forEach((w) => asked.current.delete(w)); return; }
+      if (!out || typeof out !== 'object') { words.forEach((w) => asked.current.delete(w)); return false; }
       // The reader has moved to another tongue, or another page: this answer is not for what is on
       // the screen now, so it is let go. Nothing is lost — the words are kept on the record's side,
       // and the tongue is read again the moment it is wanted.
-      if (dictRef.current !== dict) return;
+      if (dictRef.current !== dict) return false;
+      // The piece only fills the tongue. Nothing is written to the page here: the page is written
+      // once, when every piece of this pass is in hand (see drain).
       words.forEach((s, i) => {
         const t = out[`s${i}`];
         if (typeof t === 'string' && t.trim()) {
@@ -279,21 +294,17 @@ export default function SiteTranslator() {
           markProduced([t.trim()]); // we made this word — it is never a source
         }
       });
-      translated.current = new Set(Object.values(dict));
-      saveDict(lang, dict);
-      paint(dict); // the answer goes straight back onto the page
-      // The tongue has grown — which also means the record's frame may have just been corrected.
-      // So the whole current tongue is taken once more, right now, and put on the page: a reader
-      // reading in that tongue never has to come back to be given the better wording.
-      if (Number(res?.data?.made || 0) > 0) await refreshTongue(lang, true);
+      return Number(res?.data?.made || 0) > 0;
     } catch {
       // A piece that does not arrive leaves its words in English for now and is asked again on the
       // next page. It never holds up the pieces behind it.
       words.forEach((w) => asked.current.delete(w));
+      return false;
     }
-  }, [paint, refreshTongue]);
+  }, []);
 
-  // The queue, drained: pieces leave one after another until the page has nothing left waiting.
+  // The queue, drained: pieces leave one after another until the page has nothing left waiting, and
+  // then the page is written once — the one moment in this whole file where the reader's words change.
   const drain = useCallback(async () => {
     if (working.current) return; // the piece in flight picks up whatever is waiting when it lands
     const lang = chosen;
@@ -302,7 +313,10 @@ export default function SiteTranslator() {
     working.current = true;
     setTranslating(true);
     const tongue = dictRef.current; // the tongue this page is reading in
+    let made = false;
     try {
+      // Every piece is asked for first, and the page is left exactly as it is while they are on
+      // their way — see the end of this block for why nothing is written until they are all in hand.
       while (queue.current.size) {
         // The reader has changed tongue, or page: what is still waiting belongs to the new one,
         // which has its own pass. Nothing is lost by letting it go.
@@ -314,7 +328,21 @@ export default function SiteTranslator() {
           piece.push(w);
         }
         piece.forEach((w) => queue.current.delete(w));
-        await askPiece(lang, piece);
+        if (await askPiece(lang, piece)) made = true;
+      }
+      // ── ONE SETTLE, NOT A DRIBBLE ──
+      // The tongue the pieces filled is kept on the device once, and the whole page is written in
+      // one go. Written after every piece, the page shifted under the reader after every piece and
+      // never felt still; written once, it settles once — and a reader is never left finishing a
+      // sentence in one tongue that began in another.
+      saveDict(lang, tongue);
+      if (dictRef.current === tongue) {
+        translated.current = new Set(Object.values(tongue));
+        paint(tongue);
+        // The tongue has grown — which also means the record's frame may have just been corrected.
+        // So the whole current tongue is taken once more, and put on the page: a reader reading in
+        // that tongue never has to come back to be given the better wording.
+        if (made) await refreshTongue(lang, true);
       }
     } finally {
       working.current = false;
@@ -322,7 +350,7 @@ export default function SiteTranslator() {
       // A word that arrived as the last piece landed still gets its turn.
       if (queue.current.size && dictRef.current === tongue) drain();
     }
-  }, [chosen, askPiece, setTranslating]);
+  }, [chosen, askPiece, paint, refreshTongue, setTranslating]);
 
   const run = useCallback(() => {
     const lang = chosen;
@@ -370,9 +398,18 @@ export default function SiteTranslator() {
     const touched = new Set();
     const observer = new MutationObserver((records) => {
       for (const record of records) {
-        if (record.type === 'characterData') { touched.add(record.target); continue; }
+        // Our own writing is not news. Without this the engine wakes itself up after every word it
+        // puts on the page — a loop of its own making, and a page quietly working the whole time it
+        // is being read.
+        if (record.type === 'characterData') {
+          if (ourWritten.get(record.target) === record.target.nodeValue) continue;
+          touched.add(record.target); continue;
+        }
         // A hint the app has just put back into English is a word that changed, like any other.
-        if (record.type === 'attributes') { touched.add(record.target); continue; }
+        if (record.type === 'attributes') {
+          if (ourWritten.get(record.target) === record.target.getAttribute('placeholder')) continue;
+          touched.add(record.target); continue;
+        }
         record.addedNodes.forEach((node) => eachWord(node, (n) => touched.add(n)));
       }
       if (!touched.size) return;
