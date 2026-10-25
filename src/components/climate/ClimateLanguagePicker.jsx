@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Languages } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
 import { refuseAncientScript } from './ancientScripts';
@@ -9,6 +9,16 @@ export default function ClimateLanguagePicker({ lang, onChange, translating, t }
   const [otherOpen, setOtherOpen] = useState(false);
   const [manual, setManual] = useState('');
   const [refusal, setRefusal] = useState('');
+  const manualRef = useRef(null);
+
+  // Never hand a finger the keyboard before the field is on screen, or the keys come up
+  // over the very box being typed into. Desktop goes straight in.
+  useEffect(() => {
+    if (!otherOpen) return;
+    if (window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) { manualRef.current?.focus(); return; }
+    const timer = setTimeout(() => manualRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 260);
+    return () => clearTimeout(timer);
+  }, [otherOpen]);
 
   const commit = () => {
     const typed = manual.trim();
@@ -46,12 +56,14 @@ export default function ClimateLanguagePicker({ lang, onChange, translating, t }
       {otherOpen && (
         <div className="mt-2 flex items-center gap-2">
           <input
-            autoFocus
+            ref={manualRef}
             value={manual}
-            onChange={e => setManual(e.target.value)}
+            onChange={e => { setManual(e.target.value); if (refusal) setRefusal(''); }}
             onKeyDown={e => { if (e.key === 'Enter') commit(); }}
             placeholder={t.lang_placeholder}
-            className="flex-1 min-w-0 bg-record-paper border border-record-ink px-3 py-2 min-h-[40px] text-[12px] text-record-ink outline-none"
+            autoComplete="off"
+            autoCapitalize="words"
+            className="flex-1 min-w-0 bg-record-paper border border-record-ink px-3 py-2 min-h-[40px] text-[16px] sm:text-[12px] text-record-ink outline-none"
           />
           <button
             type="button"

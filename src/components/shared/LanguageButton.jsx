@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Languages, X } from 'lucide-react';
 import { LANGS, useSiteLanguage } from '@/components/shared/SiteLanguage';
 import { refuseAncientScript } from '@/components/climate/ancientScripts';
@@ -12,6 +12,19 @@ export default function LanguageButton({ tone = 'dark' }) {
   const [open, setOpen] = useState(false);
   const [other, setOther] = useState('');
   const [refusal, setRefusal] = useState('');
+  const otherRef = useRef(null);
+
+  // A phone is never handed the keyboard before the field is on screen: the keys would
+  // come up over the box being typed into. Desktop may go straight in.
+  useEffect(() => {
+    if (!open) return;
+    const timer = setTimeout(() => {
+      const field = otherRef.current;
+      if (!field || document.activeElement === field) return;
+      field.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [open]);
 
   // An ancient script is refused in the open, never quietly swapped for a machine's guess.
   const commitOther = () => {
@@ -89,11 +102,14 @@ export default function LanguageButton({ tone = 'dark' }) {
               <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Any language on Earth</p>
               <div className="flex items-center gap-2">
                 <input
+                  ref={otherRef}
                   value={other}
-                  onChange={e => setOther(e.target.value)}
+                  onChange={e => { setOther(e.target.value); if (refusal) setRefusal(''); }}
                   onKeyDown={e => { if (e.key === 'Enter') commitOther(); }}
                   placeholder="Type it, e.g. Yoruba, Scots Gaelic, Kurdish"
-                  className="flex-1 min-w-0 bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
+                  autoComplete="off"
+                  autoCapitalize="words"
+                  className="flex-1 min-w-0 bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
                 />
                 <button
                   onClick={commitOther}

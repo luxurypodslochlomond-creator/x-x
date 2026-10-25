@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, ChevronDown, Search } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
+import { refuseAncientScript } from './ancientScripts';
 
 // ── EVERY TONGUE — the record's own list ──
 // A browser's own dropdown cannot be dressed. It opens in the operating system's
@@ -19,8 +20,10 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
   const [query, setQuery] = useState('');
   const [otherOpen, setOtherOpen] = useState(false);
   const [manual, setManual] = useState('');
+  const [refusal, setRefusal] = useState('');
   const wrapRef = useRef(null);
   const searchRef = useRef(null);
+  const manualRef = useRef(null);
 
   const ink = tone === 'ink';
   const accent = ink ? '#e2602a' : '#b3261e';
@@ -57,11 +60,26 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     if (window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) searchRef.current?.focus();
   }, [open]);
 
+  // The same rule for the "type it yourself" field, which is at the very bottom of the
+  // panel and so sits exactly where the keyboard comes up. A finger is never given the
+  // keyboard before the field has been brought into view; a mouse can go straight in.
+  useEffect(() => {
+    if (!otherOpen) return;
+    if (window.matchMedia?.('(hover: hover) and (pointer: fine)').matches) { manualRef.current?.focus(); return; }
+    const timer = setTimeout(() => manualRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 260);
+    return () => clearTimeout(timer);
+  }, [otherOpen]);
+
   const close = () => { setOpen(false); setQuery(''); setOtherOpen(false); };
   const choose = (code) => { onChange(code); close(); };
   const commit = () => {
-    if (!manual.trim()) return;
-    onChange(manual.trim());
+    const typed = manual.trim();
+    if (!typed) return;
+    // An ancient script is refused here in the open, never quietly swapped for a guess.
+    const refused = refuseAncientScript(typed);
+    if (refused) { setRefusal(refused); return; }
+    setRefusal('');
+    onChange(typed);
     setManual('');
     close();
   };
@@ -107,7 +125,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search a language"
                 aria-label="Search a language"
-                className={`w-full border pl-8 pr-2 py-2 min-h-[38px] text-[12px] font-mono outline-none ${field}`}
+                className={`w-full border pl-8 pr-2 py-2 min-h-[38px] text-[16px] sm:text-[12px] font-mono outline-none ${field}`}
               />
             </div>
           </div>
@@ -154,13 +172,15 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
             {otherOpen ? (
               <div className="flex items-center gap-2">
                 <input
-                  autoFocus
+                  ref={manualRef}
                   value={manual}
-                  onChange={(e) => setManual(e.target.value)}
+                  onChange={(e) => { setManual(e.target.value); if (refusal) setRefusal(''); }}
                   onKeyDown={(e) => { if (e.key === 'Enter') commit(); }}
                   placeholder="e.g. Kiswahili, Basque, Bislama"
                   aria-label="Type any language on Earth"
-                  className={`flex-1 min-w-0 border px-3 py-2 min-h-[38px] text-[12px] font-mono outline-none ${field}`}
+                  autoComplete="off"
+                  autoCapitalize="words"
+                  className={`flex-1 min-w-0 border px-3 py-2 min-h-[38px] text-[16px] sm:text-[12px] font-mono outline-none ${field}`}
                 />
                 <button
                   type="button"
@@ -187,6 +207,12 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
               >
                 ✨ Any other language on Earth…
               </button>
+            )}
+
+            {refusal && (
+              <p className={`mt-2 text-[11px] font-mono leading-relaxed ${dim}`} style={{ borderLeft: `2px solid ${accent}`, paddingLeft: 8 }}>
+                {refusal}
+              </p>
             )}
           </div>
         </div>
