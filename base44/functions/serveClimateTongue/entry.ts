@@ -1,4 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
+import { isChromeKey, plainOfChromeKey } from '../../shared/recordChrome.ts';
 
 // ── A MADE TONGUE IS HANDED OUT LIKE A PUBLISHED FILE ──
 // The record's wording is finite and identical for everyone, so a tongue that has been made is
@@ -48,8 +49,17 @@ export default async function(req) {
     const rows = await base44.asServiceRole.entities.ClimateTongue.filter({ lang });
     const list = Array.isArray(rows) ? rows : ((rows && rows.items) || []);
     const tongue = list[0] || null;
-    const dict = (tongue && tongue.dict) || {};
-    const words = Object.keys(dict).length;
+    const held = (tongue && tongue.dict) || {};
+
+    // The record's own frame — nav, footer, masthead — is kept apart from the body's words so a
+    // wording that reads wrong can be replaced by a better one. A reader knows nothing of that:
+    // the frame is handed over as the plain word it stands for, and it is written in last, so the
+    // current wording wins over any word left behind from before the frame was kept apart.
+    const dict = {};
+    for (const [key, value] of Object.entries(held)) if (!isChromeKey(key)) dict[key] = value;
+    for (const [key, value] of Object.entries(held)) if (isChromeKey(key)) dict[plainOfChromeKey(key)] = value;
+
+    const words = Object.keys(held).length;
 
     // No tongue yet: a reader's first visit in this language is what makes it. Nothing to hand out.
     if (!words) return hand({ version: null, dict: {} }, 60);

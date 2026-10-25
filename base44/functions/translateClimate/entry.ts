@@ -1,4 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
+import { RECORD_CHROME, chromeKey } from '../../shared/recordChrome.ts';
 
 // ── A TONGUE OF THE RECORD IS MADE ONCE ──
 // The record's words are finite: the same copy, read by everyone. So a tongue is never made
@@ -41,23 +42,43 @@ export default async function(req) {
     const held = await holdTongue(base44, lang);
     const tongue = { ...((held && held.dict) || {}) };
 
-    // 2. Only what this tongue is missing is asked for.
-    const missing = [...new Set(asked)].filter(w => !tongue[w]);
+    // 2. Only what this tongue is missing is asked for — and the record's own frame is always
+    // part of it. The nav, the footer and the masthead are read by everyone on every page, so
+    // they are kept in every tongue whatever page a reader happened to arrive on: a tongue once
+    // read was left without its footer for good, because a frame word is only ever asked for if
+    // it happens to be on the page in front of that one reader. The frame goes in first, so a
+    // long page can never push it off the end of what is asked for.
+    // A frame word is held when the frame's own entry is held, even though the plain word it
+    // stands for has been cleared away — otherwise every reader would pay to have it made again,
+    // over and over, in a wording that may differ each time.
+    const missing = [...new Set(asked)].filter(w => !tongue[w] && !tongue[chromeKey(w)]);
+    const frameMissing = Object.keys(RECORD_CHROME).filter(w => !tongue[chromeKey(w)]);
     let made = 0;
-    if (missing.length) {
-      const fresh = await makeWords(base44, missing, lang);
-      const added = Object.keys(fresh).length;
+    if (missing.length || frameMissing.length) {
+      const fresh = await makeWords(base44, [...frameMissing, ...missing], lang);
+      // A frame word is stored apart from the body's words, so a wording that reads wrong in a
+      // tongue — a wire returned as an electrical cable — can be replaced without touching the
+      // record's own copy.
+      const shaped = {};
+      for (const [word, translation] of Object.entries(fresh)) {
+        if (RECORD_CHROME[word]) shaped[chromeKey(word)] = translation;
+        else shaped[word] = translation;
+      }
+      const added = Object.keys(shaped).length;
       if (added) {
-        Object.assign(tongue, fresh);
+        Object.assign(tongue, shaped);
         made = added;
         await keepTongue(base44, held, lang, tongue);
       }
     }
 
-    // 3. The whole tongue, handed back keyed the way it was asked for.
+    // 3. The whole tongue, handed back keyed the way it was asked for. A frame word is read from
+    // the frame's own entry first, so what a reader is handed is the current wording.
     const translations = {};
     for (const [key, word] of Object.entries(strings)) {
-      translations[key] = (typeof word === 'string' && tongue[word]) || word;
+      // The frame's own entry wins over any plain word left from before it was kept apart: what
+      // is handed back is the wording the record stands behind now, not an older one.
+      translations[key] = (typeof word === 'string' && (tongue[chromeKey(word)] || tongue[word])) || word;
     }
 
     return Response.json({ translations, kept: Object.keys(tongue).length, made });
@@ -103,6 +124,9 @@ async function keepTongue(base44, held, lang, dict) {
     const latest = await holdTongue(base44, lang);
     const row = latest || held;
     const merged = { ...((row && row.dict) || {}), ...(dict || {}) };
+    // A frame word the tongue already held under its plain name is left where it is and simply
+    // never read again: the frame's own entry is what is served, so nothing has to be pruned and
+    // no reader is charged for a word the tongue could already stand behind.
     const body = { dict: merged, words: Object.keys(merged).length, last_made: new Date().toISOString() };
     if (row && row.id) await base44.asServiceRole.entities.ClimateTongue.update(row.id, body);
     else await base44.asServiceRole.entities.ClimateTongue.create({ lang, ...body });
@@ -127,7 +151,16 @@ async function makeWords(base44, words, lang) {
 
 async function askOnce(base44, words, lang) {
   const payload = Object.fromEntries(words.map((w, i) => ['w' + i, w]));
-  const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${lang} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain. Return ONLY the JSON object.
+
+  // A frame word never stands alone: it is a name for a place on the record, and the reader
+  // meets it in a bar with no sentence around it. So the thing it means travels with it, and the
+  // model is told to take the noun sense a place is named with rather than guess at the word.
+  const frame = words.filter(w => RECORD_CHROME[w]);
+  const frameNote = frame.length
+    ? `\n\nSome of these are the record's own frame — the words of its navigation bar, its footer and its masthead, read on every page with no sentence around them. Translate each one as the thing it means here, in the noun sense a place is named with, short and plain — never as the same word standing alone, and never as a verb:\n${frame.map(w => `- "${w}" — ${RECORD_CHROME[w]}`).join('\n')}`
+    : '';
+
+  const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${lang} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain.${frameNote} Return ONLY the JSON object.
 
 JSON:
 ${JSON.stringify(payload)}`;

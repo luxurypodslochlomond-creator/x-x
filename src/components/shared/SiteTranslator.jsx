@@ -59,21 +59,24 @@ function saveDict(lang, dict) {
 // the browser holds it, the edge holds it, and the platform is only asked when a tongue has
 // actually grown. A reader therefore costs the platform nothing for words, whether there are ten
 // of them or ten million. The keys below are worded so they can never be mistaken for a tongue.
-const TONGUE_CHECK_MS = 12 * 60 * 60 * 1000; // the record's wording changes rarely: look twice a day
 const versionKey = (lang) => `uf51_tonguever_${lang}`;
-const checkedKey = (lang) => `uf51_tongueat_${lang}`;
 
-async function pullTongue(lang) {
+// Once per visit, not once every twelve hours. A tongue is a published file, and a reader who
+// arrives holding an older copy of it must be handed the current one — otherwise a word the
+// record has corrected stays wrong on their device, and the reader is shown wording the record
+// no longer stands behind. The file is held at the edge, so this costs a reader almost nothing.
+const checkedThisVisit = new Set();
+
+async function pullTongue(lang, force = false) {
   try {
-    const known = Number(localStorage.getItem(checkedKey(lang)) || 0);
-    if (known && Date.now() - known < TONGUE_CHECK_MS) return false;
+    if (!force && checkedThisVisit.has(lang)) return false;
+    checkedThisVisit.add(lang);
     const mine = localStorage.getItem(versionKey(lang)) || '';
     const q = `lang=${encodeURIComponent(lang)}${mine ? `&v=${encodeURIComponent(mine)}` : ''}`;
     let res = await fetch(`/functions/serveClimateTongue?${q}`);
     if (!res.ok) res = await fetch(`/api/functions/serveClimateTongue?${q}`);
     if (!res.ok) return false;
     const body = await res.json();
-    localStorage.setItem(checkedKey(lang), String(Date.now()));
     if (body.version) localStorage.setItem(versionKey(lang), String(body.version));
     else localStorage.removeItem(versionKey(lang));
     if (body.unchanged || !body.dict) return false;
@@ -185,6 +188,46 @@ export default function SiteTranslator() {
     });
   }, []);
 
+  // ── A CORRECTED WORD REPLACES THE ONE IT CORRECTS ──
+  // Until now a word already standing on the page was left alone: the swap only happened while
+  // the page still held the English to look the word up by. So a tongue the record had improved
+  // could never reach the reader who most needed it — the one already reading in that tongue, who
+  // would have kept the older wording for good. Here the English each node was written in is
+  // looked up every time, so the record's current wording is what stands on the page. A count or
+  // a date the app wrote itself is not ours, and is left exactly where it is.
+  const repaint = useCallback((dict) => {
+    const produced = producedWords();
+    originals.forEach((raw, node) => {
+      if (!node.isConnected) { originals.delete(node); return; }
+      const source = (raw || '').trim();
+      const fresh = source ? dict[source] : null;
+      if (!fresh || fresh === source) return;
+      const now = node.nodeValue;
+      if (now === null || now === raw) return;
+      const standing = now.trim();
+      // Only a word we put there is replaced — the wording this tongue was showing a moment ago,
+      // or any word this engine has produced. A count or a date the app wrote is left alone.
+      if (!translated.current.has(standing) && !produced.has(standing)) return;
+      const next = now.replace(source, fresh);
+      if (next !== now) node.nodeValue = next;
+    });
+  }, []);
+
+  // The tongue as a whole, once — every page of the record at once, not one page's worth of words
+  // at a time. It comes off the edge (see pullTongue), and the device keeps it from then on, so
+  // this page and every page after it are read in the right tongue with nothing asked for at all.
+  // When it arrives, it is put on the page as well as kept: a reader is never left standing in the
+  // wording the record has just replaced.
+  const refreshTongue = useCallback(async (lang, force = false) => {
+    const arrived = await pullTongue(lang, force);
+    if (!arrived) return;
+    const dict = loadDict(lang);
+    dictRef.current = dict;
+    translated.current = new Set(Object.values(dict));
+    markProduced(Object.values(dict)); // our own words — none of them is ever fed back in as English
+    repaint(dict);
+  }, [repaint]);
+
   const ask = useCallback(async (lang, strings, dict) => {
     if (!strings.length || asking.current) return false;
     asking.current = true;
@@ -205,6 +248,10 @@ export default function SiteTranslator() {
       translated.current = new Set(Object.values(dict));
       saveDict(lang, dict);
       paint(dict); // the answer goes straight back onto the page
+      // The tongue has grown — which also means the record's frame may have just been corrected.
+      // So the whole current tongue is taken once more, right now, and put on the page: a reader
+      // reading in that tongue never has to come back to be given the better wording.
+      if (Number(res?.data?.made || 0) > 0) await refreshTongue(lang, true);
       return true;
     } catch {
       return false; // a word that never arrives simply stays English
@@ -212,7 +259,7 @@ export default function SiteTranslator() {
       asking.current = false;
       setTranslating(false);
     }
-  }, [paint, setTranslating]);
+  }, [paint, refreshTongue, setTranslating]);
 
   const run = useCallback(async () => {
     const lang = chosen;
@@ -233,18 +280,6 @@ export default function SiteTranslator() {
     // A very long page can hold more words than one ask. The rest follow, quietly.
     if (answered && missing.length > batch.length) setTimeout(run, 350);
   }, [chosen, restore, sweep, ask, setTranslating]);
-
-  // The tongue as a whole, once — every page of the record at once, not one page's worth of words
-  // at a time. It comes off the edge (see pullTongue), and the device keeps it from then on, so
-  // this page and every page after it are read in the right tongue with nothing asked for at all.
-  const refreshTongue = useCallback(async (lang) => {
-    const arrived = await pullTongue(lang);
-    if (!arrived) return;
-    const dict = loadDict(lang);
-    dictRef.current = dict;
-    translated.current = new Set(Object.values(dict));
-    markProduced(Object.values(dict)); // our own words — none of them is ever fed back in as English
-  }, []);
 
   // A new tongue, or a new page: the words we hold go in before the browser paints.
   useLayoutEffect(() => {
@@ -269,7 +304,7 @@ export default function SiteTranslator() {
     setTranslating(true); // what is left is on its way
 
     const timer = setTimeout(async () => {
-      await refreshTongue(lang); // the whole tongue, off the edge — one cached read, twice a day at most
+      await refreshTongue(lang); // the whole tongue, off the edge — one cached read, once a visit
       run();
     }, SETTLE_MS);
     return () => clearTimeout(timer);
