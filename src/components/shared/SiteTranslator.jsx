@@ -99,7 +99,19 @@ async function pullTongue(lang, force = false) {
 // the record's own hand-written copy — one store, so no engine ever translates another's
 // words. See that file for why this matters.
 
+// ── A BOX'S HINT IS COPY TOO ──
+// The grey line inside a box is the one piece of the record's writing every reader meets before
+// they write anything, and it is held ON the element rather than written inside it — so the engine
+// walked straight past it. It is read and written here like any other word: a hint is handed over
+// in the reader's tongue, and put back into English the moment they leave that tongue.
+const readWord = (node) => (node.nodeType === Node.TEXT_NODE ? node.nodeValue : node.getAttribute('placeholder'));
+const writeWord = (node, value) => {
+  if (node.nodeType === Node.TEXT_NODE) node.nodeValue = value;
+  else node.setAttribute('placeholder', value);
+};
+
 function translatable(node) {
+  if (node.nodeType !== Node.TEXT_NODE) return !node.closest('[data-no-translate]');
   const parent = node.parentElement;
   if (!parent) return false;
   if (SKIP_TAGS.has(parent.tagName)) return false;
@@ -129,19 +141,22 @@ export default function SiteTranslator() {
   // The chosen tongue on the root, so the layout can behave for any script (see index.css).
   useEffect(() => { document.documentElement.dataset.tongue = chosen || 'en'; }, [chosen]);
 
-  const eachTextNode = useCallback((root, fn) => {
+  // Every word in one piece of the page: the lines of text, and the hints held by the boxes.
+  const eachWord = useCallback((root, fn) => {
     if (root.nodeType === Node.TEXT_NODE) { fn(root); return; }
     if (root.nodeType !== Node.ELEMENT_NODE) return;
     if (root.closest('[data-no-translate]')) return;
+    if (root.hasAttribute('placeholder') && translatable(root)) fn(root);
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     let node;
     while ((node = walker.nextNode())) fn(node);
+    root.querySelectorAll('[placeholder]').forEach((el) => { if (translatable(el)) fn(el); });
   }, []);
 
   // One visit to one text node. If its translation is held, it goes on the page. If
   // nothing is held for it, the English it was written in comes back to be asked for.
   const visit = useCallback((node, dict) => {
-    const raw = node.nodeValue;
+    const raw = readWord(node);
     if (!raw || !translatable(node)) return null;
     const held = originals.get(node);
     if (held === undefined) originals.set(node, raw);
@@ -157,28 +172,28 @@ export default function SiteTranslator() {
     const t = dict[source];
     if (t && t !== source && raw.includes(source)) {
       const next = raw.replace(source, t);
-      if (node.nodeValue !== next) node.nodeValue = next;
+      if (readWord(node) !== next) writeWord(node, next);
       return null;
     }
     return worthAsking(source) && !dict[source] ? source : null;
   }, []);
 
   const paint = useCallback((dict) => {
-    eachTextNode(document.body, (node) => { visit(node, dict); });
-  }, [eachTextNode, visit]);
+    eachWord(document.body, (node) => { visit(node, dict); });
+  }, [eachWord, visit]);
 
   const sweep = useCallback((dict) => {
     const missing = new Set();
-    eachTextNode(document.body, (node) => {
+    eachWord(document.body, (node) => {
       const need = visit(node, dict);
       if (need && !asked.current.has(need)) missing.add(need);
     });
     return [...missing];
-  }, [eachTextNode, visit]);
+  }, [eachWord, visit]);
 
   const restore = useCallback(() => {
     originals.forEach((raw, node) => {
-      try { if (node.nodeValue !== raw) node.nodeValue = raw; } catch { /* node gone */ }
+      try { if (readWord(node) !== raw) writeWord(node, raw); } catch { /* node gone */ }
     });
   }, []);
 
@@ -190,8 +205,8 @@ export default function SiteTranslator() {
     const produced = producedWords();
     originals.forEach((raw, node) => {
       try {
-        const now = node.nodeValue;
-        if (now && produced.has(now.trim())) node.nodeValue = raw;
+        const now = readWord(node);
+        if (now && produced.has(now.trim())) writeWord(node, raw);
       } catch { /* node gone */ }
     });
   }, []);
@@ -210,14 +225,14 @@ export default function SiteTranslator() {
       const source = (raw || '').trim();
       const fresh = source ? dict[source] : null;
       if (!fresh || fresh === source) return;
-      const now = node.nodeValue;
+      const now = readWord(node);
       if (now === null || now === raw) return;
       const standing = now.trim();
       // Only a word we put there is replaced — the wording this tongue was showing a moment ago,
       // or any word this engine has produced. A count or a date the app wrote is left alone.
       if (!translated.current.has(standing) && !produced.has(standing)) return;
       const next = now.replace(source, fresh);
-      if (next !== now) node.nodeValue = next;
+      if (next !== now) writeWord(node, next);
     });
   }, []);
 
@@ -356,7 +371,9 @@ export default function SiteTranslator() {
     const observer = new MutationObserver((records) => {
       for (const record of records) {
         if (record.type === 'characterData') { touched.add(record.target); continue; }
-        record.addedNodes.forEach((node) => eachTextNode(node, (n) => touched.add(n)));
+        // A hint the app has just put back into English is a word that changed, like any other.
+        if (record.type === 'attributes') { touched.add(record.target); continue; }
+        record.addedNodes.forEach((node) => eachWord(node, (n) => touched.add(n)));
       }
       if (!touched.size) return;
       clearTimeout(timer);
@@ -369,9 +386,9 @@ export default function SiteTranslator() {
         if (queue.current.size) drain();
       }, REFRESH_MS);
     });
-    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['placeholder'] });
     return () => { observer.disconnect(); clearTimeout(timer); };
-  }, [chosen, drain, eachTextNode, enqueue, visit]);
+  }, [chosen, drain, eachWord, enqueue, visit]);
 
   return null;
 }
