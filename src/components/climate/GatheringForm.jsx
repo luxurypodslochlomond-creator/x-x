@@ -124,29 +124,29 @@ export default function GatheringForm({ onClose }) {
         <div className="space-y-3">
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Gathering name *</label>
-            <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Seagrass Restorers — West Coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Seagrass Restorers — West Coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
           </div>
 
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Topic *</label>
-            <input value={form.topic} onChange={e => set('topic', e.target.value)} placeholder="e.g. Saving seagrasses" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.topic} onChange={e => set('topic', e.target.value)} placeholder="e.g. Saving seagrasses" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">What you and others are working on, in a few words. This is how someone finds you.</p>
           </div>
 
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Region (rough) *</label>
-            <input value={form.region} onChange={e => set('region', e.target.value)} placeholder="e.g. West coast, Scotland" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.region} onChange={e => set('region', e.target.value)} placeholder="e.g. West coast, Scotland" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">Rough only — a coastline, a country, a city. Never a street or an exact place.</p>
           </div>
 
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What you are doing together *</label>
-            <textarea value={form.description} onChange={e => set('description', e.target.value)} placeholder="Plain language — what you are working on, and what someone joining in would do" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+            <textarea value={form.description} onChange={e => set('description', e.target.value)} placeholder="Plain language — what you are working on, and what someone joining in would do" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
           </div>
 
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">The one contact line you want shown</label>
-            <input value={form.contact_email} onChange={e => set('contact_email', e.target.value)} placeholder="you@example.org — or leave empty" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.contact_email} onChange={e => set('contact_email', e.target.value)} placeholder="you@example.org — or leave empty" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
               This is the only line the record ever shows. Leave it empty and your gathering prints as an open one — "contact line being arranged" — never a made-up address. Your own email below is kept apart from it and is never published.
             </p>
@@ -160,11 +160,11 @@ export default function GatheringForm({ onClose }) {
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Your name *</label>
-                <input value={form.submitter_name} onChange={e => set('submitter_name', e.target.value)} placeholder="Your name" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <input value={form.submitter_name} onChange={e => set('submitter_name', e.target.value)} placeholder="Your name" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Your email *</label>
-                <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
             </div>
           </div>

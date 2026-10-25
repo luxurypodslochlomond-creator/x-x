@@ -15,7 +15,7 @@ import { fingerprintMaster } from './masterPrint';
 // format instead of asking the artist to describe their own file. What is printed is
 // the file's own truth, not a promise.
 
-const FIELD = 'w-full px-3 py-3 min-h-[44px] bg-[#f7f1e5] border-2 border-[#141210]/25 focus:border-[#141210] text-[13px] font-mono text-[#141210] outline-none transition-colors';
+const FIELD = 'w-full px-3 py-3 min-h-[44px] bg-[#f7f1e5] border-2 border-[#141210]/25 focus:border-[#141210] text-[16px] sm:text-[13px] font-mono text-[#141210] outline-none transition-colors';
 const LABEL = 'block text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246] mb-1.5';
 
 export default function MusicSubmitForm({ onSubmitted }) {

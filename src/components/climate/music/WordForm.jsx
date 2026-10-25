@@ -9,7 +9,7 @@ import { Check, AlertTriangle } from 'lucide-react';
 // nothing corrected. A clean line goes up the moment it is left; a flagged one waits for
 // a keeper, and the person is told which of the two happened.
 
-const FIELD = 'w-full px-3 py-3 min-h-[44px] bg-[#f7f1e5] border-2 border-[#141210]/25 focus:border-[#141210] text-[13px] font-mono text-[#141210] outline-none transition-colors';
+const FIELD = 'w-full px-3 py-3 min-h-[44px] bg-[#f7f1e5] border-2 border-[#141210]/25 focus:border-[#141210] text-[16px] sm:text-[13px] font-mono text-[#141210] outline-none transition-colors';
 const LABEL = 'block text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246] mb-1.5';
 
 export default function WordForm({ trackId, onLeft }) {

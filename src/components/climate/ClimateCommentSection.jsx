@@ -128,14 +128,14 @@ export default function ClimateCommentSection({ entryId, entryType }) {
               value={name}
               onChange={e => setName(e.target.value)}
               placeholder="Your name"
-              className="bg-[#efe7d6] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
+              className="bg-[#efe7d6] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
             />
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="Your email"
-              className="bg-[#efe7d6] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
+              className="bg-[#efe7d6] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]"
             />
           </div>
           <textarea
@@ -143,7 +143,7 @@ export default function ClimateCommentSection({ entryId, entryType }) {
             onChange={e => setContent(e.target.value)}
             placeholder="Share your knowledge, experience, or question…"
             rows={3}
-            className="w-full bg-[#efe7d6] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none"
+            className="w-full bg-[#efe7d6] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none"
           />
           {error && <p className="text-[10px] font-mono text-[#b3261e] mt-2">{error}</p>}
           <button

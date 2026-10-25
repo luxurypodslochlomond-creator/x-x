@@ -39,7 +39,7 @@ export default function AmountPicker({ amount, onChange, t }) {
             value={custom}
             onChange={e => handleCustom(e.target.value)}
             placeholder={t.amount_placeholder}
-            className="w-full bg-transparent px-2 py-3 min-h-[44px] text-[13px] text-record-ink placeholder-record-muted outline-none"
+            className="w-full bg-transparent px-2 py-3 min-h-[44px] text-[16px] sm:text-[13px] text-record-ink placeholder-record-muted outline-none"
           />
         </div>
       </label>

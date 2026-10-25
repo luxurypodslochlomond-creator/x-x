@@ -211,7 +211,7 @@ export default function ClimateSubmitForm({ onClose }) {
         <div className="space-y-3">
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Title *</label>
-            <input value={form.title} onChange={e => set('title', e.target.value)} placeholder={entryType === 'action' ? "e.g. Mangrove planting day, Cardigan Bay" : "e.g. Mangrove restoration, Cardigan Bay"} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.title} onChange={e => set('title', e.target.value)} placeholder={entryType === 'action' ? "e.g. Mangrove planting day, Cardigan Bay" : "e.g. Mangrove restoration, Cardigan Bay"} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
           </div>
 
           {entryType === 'action' ? (
@@ -236,12 +236,12 @@ export default function ClimateSubmitForm({ onClose }) {
 
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What's happening *</label>
-                <textarea value={form.description || ''} onChange={e => set('description', e.target.value)} placeholder="What, why, and how to join — plain language" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+                <textarea value={form.description || ''} onChange={e => set('description', e.target.value)} placeholder="What, why, and how to join — plain language" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
               </div>
 
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">One contact link *</label>
-                <input value={form.contact_link} onChange={e => set('contact_link', e.target.value)} placeholder="Email, WhatsApp, Signal, or signup URL" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <input value={form.contact_link} onChange={e => set('contact_link', e.target.value)} placeholder="Email, WhatsApp, Signal, or signup URL" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
                 <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">The platform never sees the messages. One link only — people contact you directly.</p>
               </div>
             </>
@@ -249,17 +249,17 @@ export default function ClimateSubmitForm({ onClose }) {
             <>
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Summary *</label>
-                <textarea value={form.summary} onChange={e => set('summary', e.target.value)} placeholder="One or two sentences — what and why" rows={2} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+                <textarea value={form.summary} onChange={e => set('summary', e.target.value)} placeholder="One or two sentences — what and why" rows={2} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
               </div>
 
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">More details</label>
-                <textarea value={form.details} onChange={e => set('details', e.target.value)} placeholder="Full description — how it works, evidence, who's involved" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+                <textarea value={form.details} onChange={e => set('details', e.target.value)} placeholder="Full description — how it works, evidence, who's involved" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
               </div>
 
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Image URL (copyright-free)</label>
-                <input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
             </>
           )}
@@ -274,28 +274,28 @@ export default function ClimateSubmitForm({ onClose }) {
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Country</label>
-              <input value={form.country} onChange={e => set('country', e.target.value)} placeholder="e.g. Uruguay" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              <input value={form.country} onChange={e => set('country', e.target.value)} placeholder="e.g. Uruguay" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
             <div>
               <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Region (rough)</label>
-              <input value={form.region_rough} onChange={e => set('region_rough', e.target.value)} placeholder="e.g. West coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              <input value={form.region_rough} onChange={e => set('region_rough', e.target.value)} placeholder="e.g. West coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
           </div>
 
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Source link</label>
-            <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+            <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">Every entry on the record carries a link to its origin. Without one it waits for a person to find it — or it is left out.</p>
           </div>
 
           <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Source author</label>
-              <input value={form.source_author} onChange={e => set('source_author', e.target.value)} placeholder="e.g. Jack Leitzell" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              <input value={form.source_author} onChange={e => set('source_author', e.target.value)} placeholder="e.g. Jack Leitzell" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
             <div>
               <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Source date</label>
-              <input value={form.source_date} onChange={e => set('source_date', e.target.value)} placeholder="e.g. 21 April 2025" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              <input value={form.source_date} onChange={e => set('source_date', e.target.value)} placeholder="e.g. 21 April 2025" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
           </div>
 
@@ -307,11 +307,11 @@ export default function ClimateSubmitForm({ onClose }) {
             <div className="grid grid-cols-2 gap-2">
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Your name *</label>
-                <input value={form.submitter_name} onChange={e => set('submitter_name', e.target.value)} placeholder="Your name" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <input value={form.submitter_name} onChange={e => set('submitter_name', e.target.value)} placeholder="Your name" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
               <div>
                 <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Your email *</label>
-                <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
               </div>
             </div>
             <p className="text-[10px] font-mono text-[#5a5246] mt-3 leading-relaxed">

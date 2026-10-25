@@ -67,7 +67,7 @@ export default function ClimatePhotoForm({ onSaved, onClose }) {
     }
   };
 
-  const field = 'w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]';
+  const field = 'w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]';
   const label = 'text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1';
 
   return (

@@ -35,7 +35,7 @@ export default function NameChoice({ visibility, onVisibility, name, onName, t }
             onChange={e => onName(e.target.value)}
             maxLength={40}
             placeholder={t.name_placeholder}
-            className="mt-1 w-full border-2 border-record-ink/25 focus:border-record-ink bg-record-paper px-3 py-3 min-h-[44px] text-[13px] text-record-ink placeholder-record-muted outline-none"
+            className="mt-1 w-full border-2 border-record-ink/25 focus:border-record-ink bg-record-paper px-3 py-3 min-h-[44px] text-[16px] sm:text-[13px] text-record-ink placeholder-record-muted outline-none"
           />
         </label>
       )}
