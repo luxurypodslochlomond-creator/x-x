@@ -2,11 +2,13 @@ import React from "react";
 import { Shield } from "lucide-react";
 import SponsorRouteLadder from "@/components/admin/SponsorRouteLadder";
 import SponsorRouteWatch from "@/components/admin/SponsorRouteWatch";
+import SponsorRoutePlan from "@/components/admin/SponsorRoutePlan";
 
 const FEES = [
   ["Worker + Temporary Worker sponsor licence", "£611", "under 8 weeks · £750 priority = 10 working days"],
   ["Certificate of sponsorship", "£55 Creative Worker · £525 Worker route", "the day the licence lands"],
   ["Creative Worker visa", "£340 + £1,035 a year health surcharge", "3 weeks from abroad · 8 weeks from inside"],
+  ["Super priority on the visa (optional)", "£1,000", "decision the next working day · £500 = 5 working days"],
   ["Global Talent (his own, no sponsor)", "£561 endorsement + £205 visa", "up to 8 weeks endorsement · no fast track"],
   ["Immigration skills charge", "£480 a year (small sponsor)", "Skilled Worker only"],
 ];
@@ -34,6 +36,8 @@ export default function AdminSponsorRoute() {
             26 October 2026.
           </p>
         </div>
+
+        <SponsorRoutePlan />
 
         <section className="mt-10">
           <h2 className="border-b-2 border-[#1a1612] pb-2 font-mono text-xs font-bold uppercase tracking-widest beadie-ink">
