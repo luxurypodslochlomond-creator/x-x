@@ -130,7 +130,11 @@ export const ROAD_DOC = {
       title: "THE DUTIES",
       kicker: "What the CIC must do, and what he cannot do.",
       blocks: [
-        { type: "para", text: "The CIC, before and while he is sponsored." },
+        { type: "para", text: "The CIC, before and while he is sponsored. Paid through PAYE, he is an employee in law from his first day, so two duties arrive with that on top of the sponsorship ones." },
+        { type: "bullets", items: [
+          "Employers' liability insurance from the day he starts: at least five million pounds of cover, from an insurer authorised in the United Kingdom. Compulsory, and fined by the day when it is missing.",
+          "A written statement of employment particulars on or before his first day: who the CIC is, his role, his pay, his hours, his place of work, his notice and his holiday."
+        ] },
         { type: "bullets", items: [
           "A right to work check before his first day, done online, with the record kept.",
           "Keep his contact details, address, passport copy, role and pay.",
@@ -150,6 +154,27 @@ export const ROAD_DOC = {
     },
     {
       n: "08",
+      title: "THE EVIDENCE",
+      kicker: "Ten documents at most, from the last five years. The floor is two of press and two of appearances.",
+      blocks: [
+        { type: "para", text: "The case is decided here, not on the forms. The forms only have to be right. Everything below is dated, traced to its origin, and in English or certified." },
+        { type: "callout", label: "THE FLOOR, BEFORE A SINGLE LETTER IS WRITTEN", text: "An artistic CV. Three letters of support, dated for this application, one from a United Kingdom organisation working in his field. Two pieces of media recognition. Two proofs of appearances." },
+        { type: "check", items: [
+          "Artistic CV or résumé, showing a professional track record.",
+          "Three letters of support: dated, signed, and one from a United Kingdom organisation in his field.",
+          "Two pieces of media recognition.",
+          "Two proofs of appearances.",
+          "The Government's eligible prize list checked first. A prize on it removes the endorsement step.",
+          "A certified translation for every document not in English, showing the translator's name, contact details, signature and company stamp.",
+          "Every link opened and working. Reviews and listings need a screenshot, and paywalled articles need the full screenshot."
+        ] },
+        { type: "para", text: "Then the rest, up to ten documents in total, each one its own document and none longer than two pages. Write each item down as it is gathered, so nothing is chased late." },
+        { type: "writein", head: ["WHAT IT IS", "WHERE IT IS", "DATE"], rows: 8 },
+        { type: "note", text: "Screenshots count as evidence. A dead link does not. Keep this list with the file, and keep the originals." }
+      ]
+    },
+    {
+      n: "09",
       title: "THE SIX THINGS",
       kicker: "Do all six and this is as near certain as the law allows.",
       blocks: [

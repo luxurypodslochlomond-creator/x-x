@@ -125,6 +125,51 @@ const drawCallout = (doc, b, y, head) => {
   return y + h + 6;
 };
 
+const drawChecks = (doc, items, y, head) => {
+  items.forEach((item) => {
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10.5);
+    const lines = doc.splitTextToSize(item, W - 26);
+    y = room(doc, y, lines.length * 16.3 + 9, head);
+    doc.setDrawColor(INK[0], INK[1], INK[2]);
+    doc.setLineWidth(0.7);
+    doc.rect(M, y - 8.5, 9, 9);
+    ink(doc, INK);
+    doc.text(lines, M + 26, y);
+    y += lines.length * 16.3 + 11;
+  });
+  return y + 2;
+};
+
+const drawWriteIn = (doc, b, y, head) => {
+  const widths = [0.46, 0.36, 0.18].map((w) => w * W);
+  y = room(doc, y, 46 + b.rows * 30, head);
+  doc.setFillColor(BONE[0], BONE[1], BONE[2]);
+  doc.rect(M, y - 12, W, 26, "F");
+  let x = M + 6;
+  b.head.forEach((label, i) => {
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(8.2);
+    ink(doc, MUTED);
+    doc.text(label, x, y + 3);
+    x += widths[i];
+  });
+  y += 34;
+  for (let r = 0; r < b.rows; r += 1) {
+    y = room(doc, y, 34, head);
+    doc.setDrawColor(200, 192, 178);
+    doc.setLineWidth(0.4);
+    doc.line(M, y, A4_W - M, y);
+    let tick = M + 6;
+    for (let c = 1; c < widths.length; c += 1) {
+      tick += widths[c - 1];
+      doc.line(tick - 6, y - 4, tick - 6, y);
+    }
+    y += 30;
+  }
+  return y + 8;
+};
+
 const drawBlocks = (doc, blocks, y, head) => {
   blocks.forEach((b) => {
     if (b.type === "para") {
@@ -141,6 +186,10 @@ const drawBlocks = (doc, blocks, y, head) => {
       y = drawTable(doc, b, y, head);
     } else if (b.type === "callout") {
       y = drawCallout(doc, b, y, head);
+    } else if (b.type === "check") {
+      y = drawChecks(doc, b.items, y, head);
+    } else if (b.type === "writein") {
+      y = drawWriteIn(doc, b, y, head);
     } else if (b.type === "note") {
       doc.setFont("courier", "normal");
       doc.setFontSize(8.6);
@@ -227,7 +276,7 @@ const drawSection = (doc, s) => {
   doc.setFont("courier", "bold");
   doc.setFontSize(9.6);
   ink(doc, RED);
-  doc.text(`SECTION ${s.n} / 08`, M, 100, { charSpace: 2 });
+  doc.text(`SECTION ${s.n} / ${String(ROAD_DOC.sections.length).padStart(2, "0")}`, M, 100, { charSpace: 2 });
   doc.setFont("helvetica", "bold");
   doc.setFontSize(30);
   ink(doc, INK);
