@@ -9,7 +9,7 @@ const BOTTOM = A4_H - 84;
 
 const PAPER = [244, 239, 228];
 const BONE = [239, 231, 214];
-const INK = [20, 18, 16];
+const INK = [26, 22, 18];
 const RED = [179, 38, 30];
 const MUTED = [107, 98, 88];
 
