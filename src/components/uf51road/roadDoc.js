@@ -22,7 +22,8 @@ export const ROAD_DOC = {
           "Route two, Global Talent. Strongest. No sponsor, no licence, no job offer. The judgement is made by arts professionals rather than a Home Office caseworker. Up to five years, renewable without limit, and the road to citizenship.",
           "What we do: file both. Whichever lands first he is lawfully here, and the switch to Global Talent can be made from inside the United Kingdom."
         ] },
-        { type: "callout", label: "THE JOB TITLE, EXACTLY", text: "Performer · Creative Engagement. Occupation: musician, performing artist." }
+        { type: "callout", label: "THE JOB TITLE, EXACTLY", text: "Performer · Creative Engagement. Occupation: musician, performing artist." },
+        { type: "note", text: "If a door closes, the other is already open. The refusal letter gives its reason, and the reason is fixable. A licence refusal is a fresh application with the gap closed, and the fee paid again. A visa refusal costs the fee already paid, and the route is a fresh application, or a review where one is offered. Neither decision touches the other: two separate judgements on the same man. What a refusal really costs is time." }
       ]
     },
     {
@@ -60,6 +61,7 @@ export const ROAD_DOC = {
           ["Super priority, decision by end of next working day", "1,000"],
           ["MERRICK TOTAL", "2,375"]
         ] },
+        { type: "callout", label: "THE MONEY THAT IS NOT A FEE", text: "£1,270 of his own money, held for 28 days in a row, with statements in his name ending no more than 31 days before he applies — unless the CIC certifies his maintenance on the certificate. Settle which, before the application is filed, not the day before." },
         { type: "callout", label: "BOTH TOGETHER, FASTEST", text: "£3,791 and he is here in weeks. Skip super priority and it is £2,791 with about three weeks to wait. Take priority instead of super priority and it is £3,291 with about five working days to wait." },
         { type: "para", text: "And the other door, for comparison. Global Talent costs £766 in Government fees: £561 at endorsement and £205 at the visa, plus £1,035 per year of health surcharge. Three years all in is £3,871, and with it he may be employed, self employed and a director, and change his work without telling anyone." },
         { type: "note", text: "No Immigration Skills Charge on the Creative Worker route. Each later certificate is another £55. Fees change every April. Check before paying." }
@@ -176,6 +178,7 @@ export const ROAD_DOC = {
           ["The signed contract.", "The role, the fee and the dates, on paper."],
           ["The visa decision confirmation, and the share code, printed.", "Because a phone can die, and the desk cannot wait."],
           ["Proof of where he lives in Prague.", "He applies from the country he actually lives in, and the file says so."],
+          ["Bank statements for the 28 days, in his name, ending within 31 days of applying.", "Unless the certificate carries the CIC's certification of maintenance, this is what shows the money is there."],
           ["Appointment confirmation and biometrics receipt, from the Prague centre.", "He is not admitted to the appointment without them."],
           ["Tuberculosis certificate, only where the Government's listed countries require it.", "Checked on GOV.UK against his travel history before the appointment, never assumed."]
         ] },
