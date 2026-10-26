@@ -52,7 +52,7 @@ export default function AdminSponsorRoute() {
 
         <section className="mt-10">
           <h2 className="border-b-2 border-[#1a1612] pb-2 font-mono text-xs font-bold uppercase tracking-widest beadie-ink">
-            The ladder
+            The steps, in order
           </h2>
           <div className="mt-4">
             <SponsorRouteLadder />
