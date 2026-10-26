@@ -165,7 +165,7 @@ const drawCover = (doc) => {
   doc.setFont("courier", "normal");
   doc.setFontSize(9.4);
   ink(doc, PAPER);
-  doc.text("EMPLOYEE No. 01 · SCOTLAND", M, 150, { charSpace: 1.4 });
+  doc.text("WORKER No. 01 · SCOTLAND", M, 150, { charSpace: 1.4 });
   doc.setFont("helvetica", "bold");
   doc.setFontSize(78);
   ink(doc, PAPER);
@@ -187,6 +187,10 @@ const drawCover = (doc) => {
   ink(doc, PAPER);
   doc.text("A record of the route, the money, the dates, the job title,", M, 448);
   doc.text("the people to call, the duties owed, and the way he stays.", M, 466);
+  doc.setFont("courier", "bold");
+  doc.setFontSize(11.5);
+  ink(doc, RED);
+  doc.text(ROAD_DOC.cover_line, M, 496, { charSpace: 1.4 });
   doc.setDrawColor(RED[0], RED[1], RED[2]);
   doc.setLineWidth(1.2);
   doc.rect(M, 512, W, 156);

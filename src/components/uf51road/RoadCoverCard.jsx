@@ -10,7 +10,7 @@ export default function RoadCoverCard() {
         {ROAD_DOC.brand}
       </p>
       <p className="mt-2 font-mono text-[10px] tracking-[0.24em] text-record-paper/70">
-        EMPLOYEE No. 01 · SCOTLAND
+        WORKER No. 01 · SCOTLAND
       </p>
 
       <h2 className="mt-8 font-display text-5xl sm:text-6xl font-black leading-[0.95] tracking-tight">
@@ -28,6 +28,10 @@ export default function RoadCoverCard() {
       <p className="mt-6 max-w-md font-mono text-[11px] leading-relaxed text-record-paper/80">
         A record of the route, the money, the dates, the job title, the people to call, the duties
         owed, and the way he stays.
+      </p>
+
+      <p className="mt-5 font-mono text-[11px] font-black tracking-[0.18em] text-[#b3261e]">
+        {ROAD_DOC.cover_line}
       </p>
 
       <div className="mt-8 border border-[#b3261e] p-4">

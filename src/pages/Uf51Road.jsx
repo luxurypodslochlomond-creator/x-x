@@ -22,7 +22,7 @@ export default function Uf51Road() {
     <div className="min-h-screen bg-record-paper text-record-ink px-4 py-8 sm:px-6 sm:py-12">
       <div className="mx-auto max-w-3xl">
         <p className="font-mono text-[10px] font-black tracking-[0.3em] text-[#b3261e]">
-          UF51 · EMPLOYEE No. 01
+          UF51 · WORKER No. 01
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl font-black tracking-tight">
           The road, in one file

@@ -4,10 +4,11 @@
 export const ROAD_DOC = {
   brand: "UNIVERSAL FREQUENCY 51 CIC",
   title: "THE ROAD",
-  subtitle: "FOR OUR FIRST EMPLOYEE",
+  subtitle: "FOR OUR FIRST WORKER",
   subject: "MERRICK STARR",
   role: "PERFORMER · CREATIVE ENGAGEMENT",
   version: "VERSION 1 · 26 OCTOBER 2026",
+  cover_line: "The road is long. The file is ready.",
   made: "Made for Merrick Starr by Universal Frequency 51 CIC, Scotland.",
   sections: [
     {
@@ -129,7 +130,7 @@ export const ROAD_DOC = {
       title: "THE DUTIES",
       kicker: "For the CIC once he is here, and the lines he cannot cross.",
       blocks: [
-        { type: "para", text: "The CIC, before and during his employment." },
+        { type: "para", text: "The CIC, before and while he is sponsored." },
         { type: "bullets", items: [
           "A right to work check before his first day, done online, with the record kept.",
           "Keep his contact details, address, passport copy, role and pay.",
@@ -174,7 +175,7 @@ export const ROAD_DOC = {
   ],
   signoff: {
     title: "SIGNED INTO THE RECORD",
-    text: "This record was made on 26 October 2026 for Universal Frequency 51 CIC and for Merrick Starr, its first employee. Every figure, date and address in it was checked against GOV.UK on that day. It is a record of a route and not legal advice, and it is kept for the two people named below.",
+    text: "This record was made on 26 October 2026 for Universal Frequency 51 CIC and for Merrick Starr, the first person it sponsors. Every figure, date and address in it was checked against GOV.UK on that day. It is a record of a route and not legal advice, and it is kept for the two people named below.",
     lines: ["For Universal Frequency 51 CIC · Brian Hughes", "The artist · Merrick Starr", "Date"]
   }
 };
