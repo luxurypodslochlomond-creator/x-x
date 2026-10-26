@@ -8,19 +8,19 @@ export const ROAD_DOC = {
   subject: "MERRICK STARR",
   role: "PERFORMER · CREATIVE ENGAGEMENT",
   version: "VERSION 1 · 26 OCTOBER 2026",
-  cover_line: "The road is long. The file is ready.",
+  cover_line: "Every figure checked. Nothing guessed.",
   made: "Made for Merrick Starr by Universal Frequency 51 CIC, Scotland.",
   sections: [
     {
       n: "01",
       title: "THE VERDICT",
-      kicker: "Two doors. Both open. Whichever opens first, he walks through.",
+      kicker: "Two routes. Both filed. The first one through is the one he uses.",
       blocks: [
-        { type: "para", text: "Merrick Starr comes to the United Kingdom as a performer, sponsored by Universal Frequency 51 CIC. There are two lawful roads and we walk both at once." },
+        { type: "para", text: "Merrick Starr comes to the United Kingdom as a performer, sponsored by Universal Frequency 51 CIC. There are two lawful routes and both are filed at once." },
         { type: "bullets", items: [
-          "Door one, the Creative Worker visa. Fastest. The CIC holds a sponsor licence and assigns him a certificate. Twelve months, extendable to twenty four. No English test. No salary threshold. No Immigrations Skills Charge.",
-          "Door two, Global Talent. Strongest. No sponsor, no licence, no job offer. The judgement is made by arts professionals rather than a Home Office caseworker. Up to five years, renewable without limit, and the road to citizenship.",
-          "The play: file both. Whichever lands first he is lawfully here, and the switch to Global Talent can be made from inside the United Kingdom."
+          "Route one, the Creative Worker visa. Fastest. The CIC holds a sponsor licence and assigns him a certificate. Twelve months, extendable to twenty four. No English test. No salary threshold. No Immigrations Skills Charge.",
+          "Route two, Global Talent. Strongest. No sponsor, no licence, no job offer. The judgement is made by arts professionals rather than a Home Office caseworker. Up to five years, renewable without limit, and the road to citizenship.",
+          "What we do: file both. Whichever lands first he is lawfully here, and the switch to Global Talent can be made from inside the United Kingdom."
         ] },
         { type: "callout", label: "THE JOB TITLE, EXACTLY", text: "Performer · Creative Engagement. Occupation: musician, performing artist." }
       ]
@@ -28,7 +28,7 @@ export const ROAD_DOC = {
     {
       n: "02",
       title: "THE JOB TITLE",
-      kicker: "Get this right and half the refusal risk disappears.",
+      kicker: "Most refusals start here.",
       blocks: [
         { type: "para", text: "On the licence the type is Temporary Worker. On his certificate the role is written exactly as this:" },
         { type: "callout", label: "ON THE CERTIFICATE", text: "Performer · Creative Engagement · musician, performing artist · fixed term engagement with an end date." },
@@ -68,7 +68,7 @@ export const ROAD_DOC = {
     {
       n: "04",
       title: "THE DATES",
-      kicker: "Who does what, and when. Nothing chased from the wrong end.",
+      kicker: "Who does what, and when.",
       blocks: [
         { type: "table", head: ["WHEN", "WHAT", "WHO"], widths: [0.16, 0.62, 0.22], rows: [
           ["This week", "The CIC registers for PAYE with HMRC. A few days, no fee. Payroll must exist before he works.", "CIC"],
@@ -103,7 +103,7 @@ export const ROAD_DOC = {
     {
       n: "06",
       title: "GLOBAL TALENT",
-      kicker: "The door the Home Office barely has to decide.",
+      kicker: "The decision goes to an assessor, not a caseworker.",
       blocks: [
         { type: "para", text: "Refusal risk lives in one decision per route. On Global Talent that decision belongs to Arts Council England, whose assessors judge whether he is a leader, or a future leader, in his specialist area of practice. Their endorsement goes back to UKVI and the visa stage is administration. He needs no sponsor, no licence, no job offer, no salary level and no English test. With that visa he may be an employee, self employed and a director of a company, and he may change or stop work without telling the Home Office." },
         { type: "bullets", items: [
@@ -128,7 +128,7 @@ export const ROAD_DOC = {
     {
       n: "07",
       title: "THE DUTIES",
-      kicker: "For the CIC once he is here, and the lines he cannot cross.",
+      kicker: "What the CIC must do, and what he cannot do.",
       blocks: [
         { type: "para", text: "The CIC, before and while he is sponsored." },
         { type: "bullets", items: [
@@ -159,7 +159,7 @@ export const ROAD_DOC = {
           "Every document ready before he leaves the United Kingdom.",
           "The right licence type and the right occupation on the certificate.",
           "He leaves on time and never overstays.",
-          "Everything on the form is true. An honest file that fails still leaves a road; a false one that wins takes the licence back."
+          "Everything on the form is true. An honest file that fails can be fixed; a false one that wins takes the licence back."
         ] },
         { type: "para", text: "And the traps, named so nobody walks into them." },
         { type: "bullets", items: [
