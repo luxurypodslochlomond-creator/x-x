@@ -130,6 +130,7 @@ const ClimateMapPage = React.lazy(() => import('./pages/ClimateMapPage'));
 const AdminClimateCategoriesPage = React.lazy(() => import('./pages/AdminClimateCategories'));
 const AdminClimatePhotosPage = React.lazy(() => import('./pages/AdminClimatePhotos'));
 const AdminSecureVaultPage = React.lazy(() => import('./pages/AdminSecureVault'));
+const AdminSponsorRoutePage = React.lazy(() => import('./pages/AdminSponsorRoute'));
 const ClimateImpactPage = React.lazy(() => import('./pages/ClimateImpact'));
 const ClimateTermsPage = React.lazy(() => import('./pages/ClimateTerms'));
 const ClimatePrivacyPage = React.lazy(() => import('./pages/ClimatePrivacy'));
@@ -297,6 +298,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminClimatePhotos" element={<LayoutWrapper currentPageName="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/ClimateImpact" element={<ClimateLayout currentPage="ClimateImpact"><ClimateImpactPage /></ClimateLayout>} />
       <Route path="/ClimateTerms" element={<ClimateLayout currentPage="ClimateTerms"><ClimateTermsPage /></ClimateLayout>} />
       <Route path="/ClimatePrivacy" element={<ClimateLayout currentPage="ClimatePrivacy"><ClimatePrivacyPage /></ClimateLayout>} />

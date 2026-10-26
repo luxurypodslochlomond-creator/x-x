@@ -634,6 +634,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Climate Categories", url: createPageUrl("AdminClimateCategories"), icon: Tag, description: "Add, edit, and reorder categories" },
       { title: "Top Crawl Photos", url: createPageUrl("AdminClimatePhotos"), icon: Image, description: "Credited pictures · shrunk for phones" },
       { title: "🔐 Secure Vault", url: createPageUrl("AdminSecureVault"), icon: Lock, description: "Private records · admins only" },
+      { title: "🎟️ Sponsor Route", url: createPageUrl("AdminSponsorRoute"), icon: Shield, description: "CIC sponsorship ladder · costs · dates" },
     ] : [];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
