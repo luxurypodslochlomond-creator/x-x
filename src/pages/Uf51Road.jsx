@@ -29,7 +29,8 @@ export default function Uf51Road() {
         </h1>
         <p className="mt-3 max-w-xl font-mono text-[11px] leading-relaxed text-record-muted">
           One file for Merrick: the job title, the money, the dates, the people to ring, the duties,
-          the evidence to gather, and the route to settlement. Download it, keep it, hand it to him.
+          the papers to carry, the evidence to gather, and the route to settlement. Download it, keep it,
+          hand it to him.
         </p>
 
         <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-3">

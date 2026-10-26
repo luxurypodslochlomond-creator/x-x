@@ -154,6 +154,48 @@ export const ROAD_DOC = {
     },
     {
       n: "08",
+      title: "THE FILE",
+      kicker: "Every paper, both sides, and the contract it all hangs on. Complete before it is asked for.",
+      blocks: [
+        { type: "para", text: "One folder. Everything in it named, dated and finished early, so nothing is chased from Scotland while he is abroad and nothing is missing on the day it matters." },
+        { type: "para", text: "What the CIC holds, and when it exists." },
+        { type: "table", head: ["PAPER", "WHEN IT EXISTS"], widths: [0.66, 0.34], rows: [
+          ["PAYE registration with HMRC.", "Before the licence is filed. Payroll must exist first."],
+          ["The company details as held at Companies House, and a written decision of the directors that the CIC will sponsor him.", "Before the licence is filed. It shows the role is real and the CIC decided it."],
+          ["Temporary Worker sponsor licence, and the licence number.", "Decision within ten working days on the priority service."],
+          ["His certificate of sponsorship, assigned.", "The day the licence lands. Its start date is his real start date."],
+          ["Employers' liability insurance, five million minimum, insurer authorised in the United Kingdom.", "In place before his first day."],
+          ["The signed contract: written statement of employment particulars.", "Signed by both, before or on his first day."],
+          ["The right to work check, dated, with the share code kept.", "Before his first day."],
+          ["His record: address, contact, passport copy, role and pay, hours, and every report, dated.", "Kept through the sponsorship and for a year after it ends."]
+        ] },
+        { type: "para", text: "What he carries, on paper, in his hand luggage. Not in the hold, and not only on a phone." },
+        { type: "table", head: ["PAPER", "WHAT IT IS FOR"], widths: [0.40, 0.60], rows: [
+          ["Passport, valid well beyond the trip.", "The permission itself is online: an eVisa in his UKVI account, proved by a share code."],
+          ["The certificate number, and the CIC's sponsor letter.", "The two facts the border asks for, in writing."],
+          ["The signed contract.", "The role, the fee and the dates, on paper."],
+          ["The visa decision confirmation, and the share code, printed.", "Because a phone can die, and the desk cannot wait."],
+          ["Proof of where he lives in Prague.", "He applies from the country he actually lives in, and the file says so."],
+          ["Appointment confirmation and biometrics receipt, from the Prague centre.", "He is not admitted to the appointment without them."],
+          ["Tuberculosis certificate, only where the Government's listed countries require it.", "Checked on GOV.UK against his travel history before the appointment, never assumed."]
+        ] },
+        { type: "callout", label: "THE CONTRACT IS THE SPINE", text: "A fixed term engagement, signed by both, dated, and in the file before the certificate is assigned." },
+        { type: "bullets", items: [
+          "The parties: Universal Frequency 51 CIC and Merrick Starr.",
+          "The role, exactly: Performer · Creative Engagement · musician, performing artist.",
+          "A fixed term with an end date, and no promise of permanent work.",
+          "The fee, at or above the National Minimum Wage for his age, paid through PAYE at the figure on the certificate.",
+          "The hours, the place of work in Scotland, the notice either side gives, and the holiday he is owed.",
+          "That the engagement is genuine, the programme and dates it belongs to, and the unique contribution he makes to creative life in the United Kingdom.",
+          "That his own gigs and releases earn through the CIC while the Creative Worker visa is his permission. That is a condition of the visa, not a preference.",
+          "Both signatures, both dates, and a copy each."
+        ] },
+        { type: "callout", label: "AT THE BORDER", text: "His permission is not a holiday and not a job hunt. His words and his papers say the same three things: performer, Universal Frequency 51 CIC, and the date he starts. He may enter up to fourteen days before that date, and not before." },
+        { type: "note", text: "Never: a day worked before the licence and the certificate exist. Never cash. Never the fee out of his own pocket. Never a change left unreported. Any one of the four takes the licence, and his permission with it." }
+      ]
+    },
+    {
+      n: "09",
       title: "THE EVIDENCE",
       kicker: "Ten documents at most, from the last five years. The floor is two of press and two of appearances.",
       blocks: [
@@ -174,7 +216,7 @@ export const ROAD_DOC = {
       ]
     },
     {
-      n: "09",
+      n: "10",
       title: "THE SIX THINGS",
       kicker: "Do all six and this is as near certain as the law allows.",
       blocks: [
