@@ -106,6 +106,7 @@ const CB51JoinPage = React.lazy(() => import('./pages/CB51Join'));
 const CB51MainPage = React.lazy(() => import('./pages/CB51'));
 const CB51HowPage = React.lazy(() => import('./pages/CB51How'));
 const WalshyPitchPage = React.lazy(() => import('./pages/WalshyPitch'));
+const MerrickPlanPage = React.lazy(() => import('./pages/MerrickPlan'));
 const ZappPage = React.lazy(() => import('./pages/Zapp'));
 const ZappAboutPage = React.lazy(() => import('./pages/ZappAbout'));
 const ZappTermsPage = React.lazy(() => import('./pages/ZappTerms'));
@@ -265,6 +266,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ background: '#f7f5f0' }}><div className="w-8 h-8 rounded-full animate-spin" style={{ border: '2px solid rgba(8,145,178,0.2)', borderTopColor: '#0891b2' }} /></div>}><CB51MainPage /></Suspense>} />
       <Route path="/CB51How" element={<CB51HowPage />} />
       <Route path="/WalshyPitch" element={<WalshyPitchPage />} />
+      <Route path="/MerrickPlan" element={<MerrickPlanPage />} />
       <Route path="/Zapp" element={<ZappPage />} />
       <Route path="/ZappAbout" element={<ZappAboutPage />} />
       <Route path="/ZappTerms" element={<ZappTermsPage />} />

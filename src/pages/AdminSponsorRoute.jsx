@@ -2,7 +2,6 @@ import React from "react";
 import { Shield } from "lucide-react";
 import SponsorRouteLadder from "@/components/admin/SponsorRouteLadder";
 import SponsorRouteWatch from "@/components/admin/SponsorRouteWatch";
-import SponsorRoutePlan from "@/components/admin/SponsorRoutePlan";
 
 const FEES = [
   ["Worker + Temporary Worker sponsor licence", "£611", "under 8 weeks · £750 priority = 10 working days"],
@@ -36,8 +35,6 @@ export default function AdminSponsorRoute() {
             26 October 2026.
           </p>
         </div>
-
-        <SponsorRoutePlan />
 
         <section className="mt-10">
           <h2 className="border-b-2 border-[#1a1612] pb-2 font-mono text-xs font-bold uppercase tracking-widest beadie-ink">
