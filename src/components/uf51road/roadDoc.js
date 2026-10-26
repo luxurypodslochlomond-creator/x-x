@@ -82,6 +82,8 @@ export const ROAD_DOC = {
           ["Return", "He may enter up to fourteen days before the start date on his certificate. Answer the border plainly: performer, sponsored by Universal Frequency 51 CIC. Carry the certificate and the contract on paper.", "Merrick"],
           ["12 months", "Extend to twenty four months, or switch to Global Talent, applied for before his leave expires.", "Both"]
         ] },
+        { type: "callout", label: "A VISIT IS NOT A DOOR", text: "Christmas does not need this document. As a Czech national he comes as a visitor for up to six months with no visa at all, and may be paid for one specific, pre-booked engagement of his own profession — a gig, a session, a show — up to a month long on the permitted paid engagement rules, with the organiser's paperwork in his hand. The CIC's role cannot start on a visit, paid or not. A visit counts for nothing towards the licence or the visa and it stops no clock: the certificate runs while he is here, and his application is still made in Prague." },
+        { type: "note", text: "At the border as a visitor he satisfies the officer he is a visitor who leaves: a return ticket, somewhere to stay, and the organiser's invitation if he plays. Anything longer than a visit is the three month creative concession, and it stays off the table: it cannot be extended from inside the United Kingdom, which is why it was ruled out." },
         { type: "note", text: "There is no stamp in his passport. His permission is an eVisa, held online in his UKVI account, and a share code is how he proves it. Never overstay: it costs the extension, the licence, and his good character for citizenship." }
       ]
     },
