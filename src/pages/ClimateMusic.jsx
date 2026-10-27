@@ -5,6 +5,7 @@ import { Music, Plus, X, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import TrackPlate from '@/components/climate/music/TrackPlate';
 import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
+import MusicFind from '@/components/climate/music/MusicFind';
 import { givenStamp } from '@/components/climate/music/stamp';
 
 // ── THE RECORD'S MUSIC ──────────────────────────────────────────────────────────
@@ -26,22 +27,53 @@ export default function ClimateMusic() {
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState(null);
   const [doorOpen, setDoorOpen] = useState(false);
+  const [word, setWord] = useState('');
+  const [kind, setKind] = useState('');
+  const [kinds, setKinds] = useState([]);
+  const [total, setTotal] = useState(0);
 
+  // A word finds a track by what the record actually holds — its title, the artist's
+  // name, and the words either of them gave with it. Never by how many people played
+  // it, because nothing here is counted. The asking happens on the record itself, not
+  // on a copy of it kept in this browser, so a track given a minute ago is as findable
+  // as one given last year.
   const load = useCallback(async () => {
     setLoading(true);
     try {
-      const { items } = await base44.entities.ClimateTrack.filter(
-        { status: 'published' },
-        { sort: 'created_date', limit: 50 },
-      );
+      const query = { status: 'published' };
+      if (kind) query.kind = kind;
+      const asked = word.trim();
+      if (asked) {
+        query.$or = [
+          { title: { $regex: asked, $options: 'i' } },
+          { artist_name: { $regex: asked, $options: 'i' } },
+          { statement: { $regex: asked, $options: 'i' } },
+          { lyric: { $regex: asked, $options: 'i' } },
+          { tracklist: { $regex: asked, $options: 'i' } },
+        ];
+      }
+      const { items } = await base44.entities.ClimateTrack.filter(query, { sort: '-created_date', limit: 50 });
       setTracks(items);
       setActiveId((current) => (current && items.some((t) => t.id === current) ? current : items[0]?.id || null));
+      // The shelves offered are the kinds actually standing on the record — read off the
+      // record itself, so no chip can ever promise a kind that has no music on it.
+      if (!asked && !kind) {
+        setKinds((prev) => (prev.length ? prev : [...new Set(items.map((t) => t.kind).filter(Boolean))]));
+      }
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [word, kind]);
 
-  useEffect(() => { load(); }, [load]);
+  // A word is not sent letter by letter: it waits a moment, then asks once.
+  useEffect(() => {
+    const id = setTimeout(load, word.trim() ? 300 : 0);
+    return () => clearTimeout(id);
+  }, [load, word]);
+
+  useEffect(() => {
+    base44.entities.ClimateTrack.count({ status: 'published' }).then(setTotal);
+  }, []);
 
   const active = tracks.find((t) => t.id === activeId) || null;
 
@@ -55,19 +87,46 @@ export default function ClimateMusic() {
       returnLabel="Back to the record"
       footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone who comes to hear it, and whether it may be taken is the giver\u2019s own choice, said on the track itself. What is printed beside each track is the file's own truth: its format comes out of the master's header, its date is the moment the record took it in, and its fingerprint is read on the artist's own device before the file is ever sent — so nothing here has to be taken on trust."
     >
+      <MusicFind
+        word={word}
+        onWord={setWord}
+        kind={kind}
+        onKind={setKind}
+        kinds={kinds}
+        shown={tracks.length}
+        total={total || tracks.length}
+        loading={loading}
+      />
+
       {loading ? (
         <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
           <RefreshCw className="w-5 h-5 animate-spin text-[#5a5246] mx-auto mb-3" />
           <p className="text-[11px] font-mono text-[#5a5246]">Bringing the music through…</p>
         </div>
       ) : tracks.length === 0 ? (
-        <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
-          <Music className="w-7 h-7 text-[#e2602a] mx-auto mb-3" />
-          <p className="text-[12px] font-black font-mono uppercase text-[#141210]">No music on the record yet</p>
-          <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
-            The first track to arrive stands here. Yours can be it.
-          </p>
-        </div>
+        word.trim() || kind ? (
+          <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
+            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">Nothing on the record holds that</p>
+            <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
+              Try an artist's name, a word from a title, or the kind of piece it is. Every track on the record is
+              searched — nothing is held back from a look.
+            </p>
+            <button
+              onClick={() => { setWord(''); setKind(''); }}
+              className="mt-4 px-4 min-h-[44px] border-2 border-[#141210] bg-[#efe7d6] text-[11px] font-black font-mono uppercase text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+            >
+              Show everything on the record
+            </button>
+          </div>
+        ) : (
+          <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
+            <Music className="w-7 h-7 text-[#e2602a] mx-auto mb-3" />
+            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">No music on the record yet</p>
+            <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
+              The first track to arrive stands here. Yours can be it.
+            </p>
+          </div>
+        )
       ) : (
         <>
           {/* The rail — only when there is more than one track to choose between. */}
