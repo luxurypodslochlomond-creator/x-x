@@ -4,12 +4,12 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import GuideBand from '@/components/climate/GuideBand';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
-import MusicSignalIcon from '@/components/climate/music/MusicSignalIcon';
+import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 
 // The record's own mark for music, at the size of the words it stands beside. The note
 // glyph is gone from this page: the fork is the record's, and the guide of the record's
 // own buttons should not point at music with somebody else's sign.
-const FORK = <MusicSignalIcon size={13} className="text-[#141210] flex-shrink-0" />;
+const FORK = <COOLASFUCKTuningFork size={15} tone="signal" className="flex-shrink-0" />;
 
 // ── THE BUTTONS ──────────────────────────────────────────────────────────────────
 // What Janine asked for, kept in the record's own hand: the list of buttons, in the

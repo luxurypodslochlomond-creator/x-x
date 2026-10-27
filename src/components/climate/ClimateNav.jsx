@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Search as SearchIcon } from 'lucide-react';
-import MusicSignalIcon from '@/components/climate/music/MusicSignalIcon';
+import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 
 // ── THE WAY THROUGH THE RECORD ───────────────────────────────────────────────────
 // Two different kinds of thing live in this bar, and they are drawn differently on
@@ -54,7 +54,7 @@ function PlaceLink({ item, active }) {
       aria-current={active ? 'page' : undefined}
       className={`pb-1 whitespace-nowrap border-b-2 transition-colors ${tone}`}
     >
-      {item.glyph ? <MusicSignalIcon size={19} /> : item.label}
+      {item.glyph ? <COOLASFUCKTuningFork size={19} tone="signal" /> : item.label}
     </Link>
   );
 }
@@ -79,7 +79,7 @@ function MobileLink({ item, active, quiet }) {
             : `text-[11px] font-black uppercase tracking-wide whitespace-nowrap ${active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'}`
         }`}
       >
-        {item.glyph ? <MusicSignalIcon size={21} /> : item.label}
+        {item.glyph ? <COOLASFUCKTuningFork size={21} tone="signal" /> : item.label}
       </span>
     </Link>
   );

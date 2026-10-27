@@ -47,6 +47,7 @@ import {
 } from 'lucide-react';
 
 import { COOLASFUCKHeart, COOLASFUCKWaves, COOLASFUCKHouse, COOLASFUCKHouse51, COOLASFUCKSorted, COOLASFUCKPaw } from '@/components/shared/COOLASFUCKIcon';
+import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 import CustomSaxIcon from '@/components/shared/CustomSaxIcon';
 import LiveClock from '@/components/shared/LiveClock';
 import { AnonymousAuthProvider } from '@/components/shared/AnonymousAuth';
@@ -471,7 +472,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 4. MUSIC & RESEARCH
     const musicNav = [
-      { title: "Radio51", url: createPageUrl("Radio"), icon: Music, highlight: true, description: "Lossless music library" },
+      { title: "Radio51", url: createPageUrl("Radio"), icon: COOLASFUCKTuningFork, highlight: true, description: "Lossless music library" },
       { title: "Create Demos", url: createPageUrl("LearnGuitar"), icon: Mic2, description: "Studio tools" },
       { title: "Generate Logo", url: createPageUrl("GenerateLogo"), icon: Sparkles, description: "AI logos for anyone" },
       { title: "Resonance Lab", url: createPageUrl("ResonanceLab"), icon: Waves, description: "PROVE connection is real" },
