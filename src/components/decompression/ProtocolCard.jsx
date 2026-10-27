@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 
 export default function ProtocolCard({ protocol, index, onClick, variant = 'default' }) {
   // Safely handle icon - protocol.icon might be a component or undefined
@@ -73,8 +74,8 @@ export default function ProtocolCard({ protocol, index, onClick, variant = 'defa
                     🔊 Speaker OK
                   </span>
                 )}
-                <span className="bg-purple-900/60 px-2 py-1 border-2 border-purple-500/50 font-mono text-purple-300">
-                  🎵 {protocol.frequency}Hz
+                <span className="bg-purple-900/60 px-2 py-1 border-2 border-purple-500/50 font-mono text-purple-300 flex items-center gap-1.5">
+                  <COOLASFUCKTuningFork size={14} /> {protocol.frequency}Hz
                 </span>
                 <span className="bg-pink-900/60 px-2 py-1 border-2 border-pink-500/50 font-mono text-pink-300">
                   ⏱️ {protocol.duration}m

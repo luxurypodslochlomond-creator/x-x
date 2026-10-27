@@ -42,7 +42,7 @@ import LanguageButton from '@/components/shared/LanguageButton';
 import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
-  Menu, X, Heart, Home, LogOut, Sparkles, Music, Map, User, Globe,
+  Menu, X, Heart, Home, LogOut, Sparkles, Map, User, Globe,
   BookOpen, Shield, Target, Briefcase, FileText, Settings, Search, Brain, Calculator, GraduationCap, Zap, AlertTriangle, Mic2, Lightbulb, Building, Play, Pause, Atom, Eye, Scale, Users, WifiOff, CheckCircle, Waves, ChevronDown, ChevronRight, Calendar, DollarSign, Moon, Signal, ArrowLeft, Radio, Activity, Mail, Dna, Lock, Paintbrush, Trophy, Image, Share2, Handshake, Bell, Tag
 } from 'lucide-react';
 
@@ -499,7 +499,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Welcome", url: createPageUrl("Welcome"), icon: Home, description: "Start here" },
       { title: "Funder Brief", url: createPageUrl("FunderBrief"), icon: COOLASFUCKWaves, description: "One-pager for funders" },
       { title: "For Businesses", url: createPageUrl("CorporateBuyer"), icon: Building, description: "Fund real people healing Earth" },
-      { title: "For Artists", url: createPageUrl("ForMusicians"), icon: Music, description: "CB51 — artist management platform" },
+      { title: "For Artists", url: createPageUrl("ForMusicians"), icon: COOLASFUCKTuningFork, description: "CB51 — artist management platform" },
       { title: "Research Partnerships", url: createPageUrl("PetSounds51ResearchOutreach"), icon: Brain, description: "Contact academic teams" },
       { title: "See the Impact", url: createPageUrl("ProofOfImpactVisual"), icon: Eye, description: "Visual explainer" },
       { title: "Why Help UF51", url: createPageUrl("WhyHelpUF51"), icon: Heart, description: "For partners" },
@@ -526,7 +526,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "The AI That Tells You To Leave", url: createPageUrl("AI51AntiExtractionArticle"), icon: FileText, description: "Anti-extraction press" },
       { title: "OPEN SOURCE", url: createPageUrl("OpenSourceDeclaration"), icon: Globe, description: "Free forever" },
       { title: "Why Open = More $", url: createPageUrl("OpenSourceFundingProof"), icon: DollarSign, description: "Red Hat $34B proof" },
-      { title: "🎵 Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: Waves, description: "Every frequency" },
+      { title: "Frequency Library", url: createPageUrl("UniversalFrequencyLibrary"), icon: COOLASFUCKTuningFork, description: "Every frequency" },
       { title: "Technical Whitepaper", url: createPageUrl("Whitepaper"), icon: FileText, description: "Deep dive" },
       { title: "Deploy Anywhere", url: createPageUrl("DeployUF51Anywhere"), icon: Globe, description: "5-min global scale" },
       { title: "Unstoppable Architecture", url: createPageUrl("UnstoppableArchitecture"), icon: Shield, description: "Resilience design" },
