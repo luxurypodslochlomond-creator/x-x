@@ -5,6 +5,7 @@ import { ROAD_DOC } from "@/components/uf51road/roadDoc";
 import { buildRoadPdf } from "@/components/uf51road/buildRoadPdf";
 import RoadCoverCard from "@/components/uf51road/RoadCoverCard";
 import RoadSectionList from "@/components/uf51road/RoadSectionList";
+import RoadContactsCard from "@/components/uf51road/RoadContactsCard";
 
 export default function Uf51Road() {
   const [busy, setBusy] = useState(false);
@@ -57,6 +58,18 @@ export default function Uf51Road() {
           </p>
           <div className="mt-4">
             <RoadSectionList />
+          </div>
+        </div>
+
+        <div className="mt-9">
+          <p className="font-mono text-[10px] font-black tracking-[0.3em] text-[#b3261e]">
+            THE PEOPLE TO RING
+          </p>
+          <p className="mt-2 font-mono text-[11px] leading-relaxed text-record-muted">
+            The same list the file prints. Tap a number and it dials, tap a page and it opens.
+          </p>
+          <div className="mt-4">
+            <RoadContactsCard />
           </div>
         </div>
 

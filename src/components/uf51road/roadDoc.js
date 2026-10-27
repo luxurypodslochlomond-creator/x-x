@@ -1,6 +1,8 @@
 // The road, as a document of record. Every fee, date and address here was checked
 // against GOV.UK on 26 October 2026. Fees change each April, so it says so out loud.
 
+import { ROAD_CONTACTS } from "@/components/uf51road/roadContacts";
+
 export const ROAD_DOC = {
   brand: "UNIVERSAL FREQUENCY 51 CIC",
   title: "THE ROAD",
@@ -33,6 +35,8 @@ export const ROAD_DOC = {
       blocks: [
         { type: "para", text: "On the licence the type is Temporary Worker. On his certificate the role is written exactly as this:" },
         { type: "callout", label: "ON THE CERTIFICATE", text: "Performer · Creative Engagement · musician, performing artist · fixed term engagement with an end date." },
+        { type: "callout", label: "WHAT THE CERTIFICATE ITSELF CARRIES", text: "The CIC's name, address and sponsor licence number. His name, date of birth, nationality, passport number, and the country he applies from. The role, exactly as above, with the occupation taken from the Government's list for musicians and performing artists. The salary, the hours, and the start and end dates of the fixed term. The fee: £55, paid by the CIC, never by him." },
+        { type: "note", text: "The certificate is not the visa, and the certificate is not the licence. It must be used within three months of the day it is assigned: the application is filed inside that window, or a fresh certificate is asked for. Its start date is his real start date, and if that date moves before he applies, the certificate is updated on the system, never corrected by hand. The CIC requests its yearly allocation of certificates in the Sponsor Management System: ask for two, so the extension is already there." },
         { type: "bullets", items: [
           "A fixed term engagement with an end date. Never a permanent position: temporary work routes cannot fill one.",
           "A real fee, paid through PAYE, at the figure written on the certificate.",
@@ -92,16 +96,8 @@ export const ROAD_DOC = {
       title: "THE CONTACTS",
       kicker: "The people to ring, the addresses to use, and who answers what.",
       blocks: [
-        { type: "table", head: ["WHO", "FOR", "HOW"], widths: [0.26, 0.30, 0.44], rows: [
-          ["Sponsorship, employer and education helpline", "Licences, certificates, reporting", "0300 123 4699 · Monday to Friday, 9am to 4pm"],
-          ["Business Helpdesk", "Licence fees, sponsor size questions", "businesshelpdesk@homeoffice.gov.uk"],
-          ["Sponsor Management System", "Assigning certificates, reporting changes", "Login comes with the licence"],
-          ["Visa application centre, Prague", "Biometrics, passport", "VFS Global, International Business Center, Praha 8 · visa.vfsglobal.com/gbr/en/cze"],
-          ["Arts Council England", "Global Talent endorsement format questions", "artscouncil.org.uk/quality-work/global-talent-visa · nothing is sent to them directly"],
-          ["Regulated immigration adviser", "Signing off the file before it is filed", "gov.uk/find-an-immigration-adviser · OISC registered only"],
-          ["Citizens Advice Scotland", "Free, independent advice", "citizensadvice.org.uk/scotland"]
-        ] },
-        { type: "note", text: "Filing pages: gov.uk/uk-visa-sponsorship-employers/apply-for-your-licence · gov.uk/creative-worker-visa · gov.uk/global-talent-arts-culture · gov.uk/faster-decision-visa-settlement. Confirm the Prague centre's address and opening hours on its own site before travelling: centres move." }
+        { type: "table", head: ["WHO", "FOR", "HOW"], widths: [0.26, 0.30, 0.44], rows: ROAD_CONTACTS.map((c) => [c.who, c.what, c.how]) },
+        { type: "note", text: "Filing pages: gov.uk/uk-visa-sponsorship-employers/apply-for-your-licence (the licence) · gov.uk/creative-worker-visa (his visa) · gov.uk/global-talent and gov.uk/global-talent-arts-culture (the other door) · gov.uk/faster-decision-visa-settlement (priority is bought when the application is made, not after). Confirm the Prague centre's address, phone and opening hours on its own page before travelling: centres move. A number found in a hurry is a number dialled wrong." }
       ]
     },
     {
