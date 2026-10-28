@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 import useMusicGlobe from './useMusicGlobe';
+import PresenceMark from './PresenceMark';
 
 // ── THE DECK ────────────────────────────────────────────────────────────────────
 // The sphere is the player, and it stands at the head of the page: the first thing a
@@ -218,6 +219,12 @@ export default function MusicDeck({ track }) {
       >
         {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
       </button>
+
+      {/* Whether anyone else is here — a mark, no words. Nothing about a listener
+          leaves their device: it says only that the room is not empty. */}
+      <span className="absolute top-[62px] right-[22px] z-10">
+        <PresenceMark />
+      </span>
 
       {!broken && (
         <div className="px-4 lg:px-9 bg-[#efe7d6] pt-1">

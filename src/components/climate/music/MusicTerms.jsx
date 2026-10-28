@@ -41,6 +41,11 @@ const TERMS = [
     check: 'The same name is on the track, on its card, and on the page it plays from. Nothing is credited to the record.',
   },
   {
+    label: 'The mark only says someone is here',
+    body: 'A small mark at the sphere warms while another page has this record open at the same moment. It is not a count, not a place and not a person: whether the room is empty, said without words.',
+    check: 'Open the record on two devices: the mark warms on both, and goes cold and still when one closes. Nothing is written down anywhere, so there is no history to read back and no figure to rank.',
+  },
+  {
     label: 'Nobody is studied here',
     body: 'Listening leaves nothing behind: no account, no email, no profile, no record of what you heard. A line left under a track is given, not harvested.',
     check: 'A listener is never asked who they are. A line comes off only for something unlawful, and the record says so on the track, in the open.',
