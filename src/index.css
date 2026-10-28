@@ -298,3 +298,17 @@ html[data-tongue]:not([data-tongue="en"]) .truncate {
   text-overflow: clip;
   white-space: normal;
 }
+
+/* ── REST FOR THOSE WHO ASK FOR IT ──
+   The record's grain and glow are constant movement. For anyone who has told their
+   device that movement makes them ill, the record goes still: same content, same
+   colour, nothing moving on its own. Never a barrier, for anyone. */
+@media (prefers-reduced-motion: reduce) {
+  .twcc-scanlines::before { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

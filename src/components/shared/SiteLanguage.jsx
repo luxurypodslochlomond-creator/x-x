@@ -55,6 +55,16 @@ export function SiteLanguageProvider({ children }) {
 
   const chosen = lang === 'auto' ? autoLang : lang;
 
+  // Tell the machine the tongue, not just the page. Without this a screen reader
+  // reads Yoruba, French or Cherokee with English pronunciation — the one barrier
+  // a language-first record must never leave standing. data-tongue also switches
+  // on the script coverage and the "let it wrap" rules already waiting in index.css.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.lang = chosen || 'en';
+    root.setAttribute('data-tongue', (chosen || 'en').split('-')[0].toLowerCase());
+  }, [chosen]);
+
   return (
     <LanguageContext.Provider value={{
       lang,
