@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Music, Plus, X, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import TrackPlate from '@/components/climate/music/TrackPlate';
+import MusicDeck from '@/components/climate/music/MusicDeck';
 import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
 import MusicFind from '@/components/climate/music/MusicFind';
 import { givenStamp } from '@/components/climate/music/stamp';
@@ -87,6 +88,14 @@ export default function ClimateMusic() {
       returnLabel="Back to the record"
       footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone who comes to hear it, and whether it may be taken is the giver\u2019s own choice, said on the track itself. What is printed beside each track is the file's own truth: its format comes out of the master's header, its date is the moment the record took it in, and its fingerprint is read on the artist's own device before the file is ever sent — so nothing here has to be taken on trust."
     >
+      {/* The sphere stands first, before anything asks for a word: you should be able to
+          see and hear a piece, and feel whether it resonates, before you go looking. */}
+      {active && (
+        <div className="mb-4" id="music-deck">
+          <MusicDeck track={active} />
+        </div>
+      )}
+
       <MusicFind
         word={word}
         onWord={setWord}
@@ -137,7 +146,12 @@ export default function ClimateMusic() {
                 return (
                   <button
                     key={track.id}
-                    onClick={() => setActiveId(track.id)}
+                    onClick={() => {
+                      setActiveId(track.id);
+                      // The sphere is the head of the page: choosing a track brings you back
+                      // to it, so what you picked is the thing you are looking at.
+                      document.getElementById('music-deck')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
                     className={`w-full flex items-center gap-3 px-3 py-3 min-h-[52px] text-left border-b border-[#141210]/10 last:border-b-0 transition-colors ${
                       on ? 'bg-[#141210] text-[#efe7d6]' : 'text-[#141210] active:bg-[#141210]/10'
                     }`}

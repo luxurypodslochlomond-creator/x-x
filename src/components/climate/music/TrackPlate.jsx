@@ -1,5 +1,4 @@
 import React from 'react';
-import MusicDeck from './MusicDeck';
 import ShareCardButton from '../ShareCardButton';
 import { buildTransmissionShareCard } from '../shareCardImage';
 import { clock } from './audioSpec';
@@ -47,10 +46,8 @@ export default function TrackPlate({ track }) {
 
   return (
     <div className="border-t-4 border-[#e2602a]">
-      {/* A statement printed under the player with no attribution reads as the record
-          saying it — and the record only ever says what it can stand behind. A giver's
-          line stays their line, so it is named as theirs, in the place it is shown. */}
-      <MusicDeck track={track} />
+      {/* The sphere and its controls stand at the head of the page; what follows is the
+          standing of the track itself. A giver's line is named as theirs where it is shown. */}
 
       <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 lg:px-10 py-4 border-t-2 border-[#141210] flex items-start gap-3">
         <div className="flex-1 min-w-0">
