@@ -2,6 +2,7 @@ import React from 'react';
 import ShareCardButton from '../ShareCardButton';
 import { buildTransmissionShareCard } from '../shareCardImage';
 import { clock } from './audioSpec';
+import VerifyMaster from './VerifyMaster';
 import { givenStamp } from './stamp';
 import ListenerWords from './ListenerWords';
 
@@ -111,6 +112,7 @@ export default function TrackPlate({ track }) {
             SHA-256, read from the master on the artist's own device before the file was sent — not taken afterwards, and not touched since.
             It is the record's receipt for the file: the bytes kept here are the bytes handed over, and that can be checked instead of trusted.
           </p>
+          <VerifyMaster url={track.audio_url} print={track.master_sha256} />
         </details>
       )}
 
