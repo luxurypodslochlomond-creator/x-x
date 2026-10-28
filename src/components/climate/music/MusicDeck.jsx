@@ -9,10 +9,11 @@ import PresenceMark from './PresenceMark';
 // listener meets is a world made of light turning with the sound, not a list asking to
 // be searched.
 //
-// It is not decoration moving on a timer. The browser reads the master as it plays and
-// the sphere answers it band by band — near points bright, far points dim, so it reads
-// as depth rather than as a drawing, and the whole thing breathes with what you hear.
-// That is how you tell whether a piece resonates before you have the words for it.
+// It is not decoration moving on a timer. The browser reads the master as it plays and the
+// field answers it band by band — every point hearing its own part of the sound — and it
+// keeps the last second of that answer where it was, dimming, so you see where the music
+// has just been rather than a frame of where it is. That is how you tell whether a piece
+// resonates before you have the words for it.
 //
 // One tap anywhere starts it: no account, nothing counted, nothing converted, the file
 // whole and untouched. Where a device or a file will not be read for the picture, the
@@ -25,15 +26,13 @@ const fmt = (seconds) => {
   return `${m}:${String(s).padStart(2, '0')}`;
 };
 
-const RING = 2 * Math.PI * 48;
-
 export default function MusicDeck({ track }) {
   const audioRef = useRef(null);
   const canvasRef = useRef(null);
+  const trailRef = useRef(null);
   const playingRef = useRef(false);
   const pctRef = useRef(0);
   const graphRef = useRef(null);
-  const levelRef = useRef({ bass: 0, mid: 0, treble: 0 });
 
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
@@ -50,7 +49,6 @@ export default function MusicDeck({ track }) {
     setTime(0);
     setBroken(false);
     setLength(track.seconds || 0);
-    levelRef.current = { bass: 0, mid: 0, treble: 0 };
   }, [track.id, track.seconds]);
 
   useEffect(() => { playingRef.current = playing; }, [playing]);
@@ -73,8 +71,10 @@ export default function MusicDeck({ track }) {
       const ctx = new Ctx();
       const source = ctx.createMediaElementSource(el);
       const analyser = ctx.createAnalyser();
-      analyser.fftSize = 512;
-      analyser.smoothingTimeConstant = 0.72;
+      // Fine enough to tell one low note from the next, and quick enough that a hit is
+      // still a hit by the time it reaches the eye.
+      analyser.fftSize = 1024;
+      analyser.smoothingTimeConstant = 0.6;
       source.connect(analyser);
       analyser.connect(ctx.destination);
       graphRef.current = { ctx, analyser, data: new Uint8Array(analyser.frequencyBinCount) };
@@ -89,7 +89,7 @@ export default function MusicDeck({ track }) {
     graphRef.current = null;
   }, []);
 
-  useMusicGlobe({ canvasRef, graphRef, playingRef, levelRef });
+  useMusicGlobe({ canvasRef, trailRef, graphRef, playingRef });
 
   if (!track.audio_url) return null;
 
@@ -158,32 +158,27 @@ export default function MusicDeck({ track }) {
         aria-label={playing ? `Pause ${track.title}` : `Play ${track.title}`}
         className="relative block w-full text-left h-[min(104vw,430px)] lg:h-[470px] select-none touch-manipulation"
       >
-        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" aria-hidden="true" />
+        {/* The field is drawn into the trail layer, which is never cleared: each frame is
+            laid over the last and the past is washed a little toward the ink, so what you
+            see is the music's own recent memory sitting where it happened. The canvas
+            beneath it is the live source that is read each frame. */}
+        <canvas ref={trailRef} className="absolute inset-0 w-full h-full" aria-hidden="true" />
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-0" aria-hidden="true" />
 
         <span
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(226,96,42,0.08) 0%, transparent 60%)' }}
+          style={{ background: 'radial-gradient(ellipse at center, rgba(226,96,42,0.06) 0%, transparent 62%)' }}
         />
 
-        {/* The piece's place in the whole, worn as the sphere's own outer ring. */}
-        <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <svg viewBox="0 0 100 100" className="h-[80%] aspect-square" aria-hidden="true">
-            <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(239,231,214,0.14)" strokeWidth="1.2" />
-            {pct > 0 && (
-              <circle
-                cx="50"
-                cy="50"
-                r="48"
-                fill="none"
-                stroke="#e2602a"
-                strokeWidth="1.6"
-                strokeDasharray={RING}
-                strokeDashoffset={RING * (1 - pct)}
-                transform="rotate(-90 50 50)"
-              />
-            )}
-          </svg>
-        </span>
+        {/* The field leaves by the top and the bottom of the frame: no edge, no cage. */}
+        <span
+          className="absolute inset-x-0 top-0 h-[36%] pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, rgba(20,18,16,0.82) 0%, rgba(20,18,16,0) 100%)' }}
+        />
+        <span
+          className="absolute inset-x-0 bottom-0 h-[32%] pointer-events-none"
+          style={{ background: 'linear-gradient(to top, rgba(20,18,16,0.86) 0%, rgba(20,18,16,0) 100%)' }}
+        />
 
         <span className="absolute left-4 right-16 top-4 block">
           <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#e2602a]">
@@ -227,7 +222,12 @@ export default function MusicDeck({ track }) {
       </span>
 
       {!broken && (
-        <div className="px-4 lg:px-9 bg-[#efe7d6] pt-1">
+        <div className="bg-[#efe7d6]">
+          {/* where the piece has reached: under the field, not drawn around it */}
+          <div className="h-[3px] w-full bg-[#141210]">
+            <div className="h-full bg-[#e2602a]" style={{ width: `${pct * 100}%` }} />
+          </div>
+          <div className="px-4 lg:px-9 pt-1">
           <input
             type="range"
             className="deck-groove"
@@ -247,6 +247,7 @@ export default function MusicDeck({ track }) {
           <div className="flex items-center justify-between px-1">
             <span className="text-[10px] font-mono text-[#5a5246]">{fmt(time)}</span>
             <span className="text-[10px] font-mono text-[#5a5246]">{fmt(length)}</span>
+          </div>
           </div>
         </div>
       )}
