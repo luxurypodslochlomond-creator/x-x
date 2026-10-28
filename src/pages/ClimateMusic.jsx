@@ -7,6 +7,7 @@ import TrackPlate from '@/components/climate/music/TrackPlate';
 import MusicDeck from '@/components/climate/music/MusicDeck';
 import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
 import MusicFind from '@/components/climate/music/MusicFind';
+import MusicTerms from '@/components/climate/music/MusicTerms';
 import { givenStamp } from '@/components/climate/music/stamp';
 
 // ── THE RECORD'S MUSIC ──────────────────────────────────────────────────────────
@@ -200,6 +201,10 @@ export default function ClimateMusic() {
           </div>
         )}
       </div>
+
+      {/* The record's own terms, at the foot of the page: what it claims, and how any
+          stranger can test each claim. Free is a condition here, not a price. */}
+      <MusicTerms />
     </ClimateRecordShell>
   );
 }
