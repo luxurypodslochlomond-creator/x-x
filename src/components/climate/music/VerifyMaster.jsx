@@ -39,12 +39,18 @@ export default function VerifyMaster({ url, print }) {
   return (
     <div className="mt-3">
       {state === 'idle' && (
-        <button
-          onClick={check}
-          className="w-full px-3 py-3 min-h-[44px] border-2 border-[#141210] bg-[#f7f1e5] text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
-        >
-          Check this file against its print
-        </button>
+        <>
+          <button
+            onClick={check}
+            className="w-full px-3 py-3 min-h-[44px] border-2 border-[#141210] bg-[#f7f1e5] text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+          >
+            Check this file against its print
+          </button>
+          <p className="mt-1.5 text-[9px] font-mono text-[#5a5246] leading-relaxed">
+            Done on this device, and only here: the print is compared in your browser and then forgotten. Nothing is sent
+            to the record, nothing is kept, and no one is told you looked.
+          </p>
+        </>
       )}
 
       {state === 'reading' && (
