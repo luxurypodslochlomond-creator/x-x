@@ -37,6 +37,27 @@ const TRACK_CARD = {
 export default function Transmission() {
   return (
     <div className="border-t-4 border-[#e2602a]">
+      {/* ── THE NAME ON IT ── the music sat here with no word above it, so a reader meeting
+             it did not know it was the record's music, or that more had been given than this
+             one track. Named plainly, with the way through to everything given so far. No
+             glow, no player started, nothing asked for. */}
+      <div id="music" className="bg-[#141210] text-[#efe7d6] px-5 lg:px-10 py-3 lg:py-4 flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2vw, 28px)', letterSpacing: '-0.02em' }}>
+            Music
+          </h2>
+          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mt-0.5">
+            Given to the record · free · nothing to buy
+          </p>
+        </div>
+        <Link
+          to={createPageUrl('ClimateMusic')}
+          className="shrink-0 px-3 py-2 border border-[#efe7d6]/40 hover:border-[#e2602a] hover:text-[#e2602a] text-[10px] font-black font-mono uppercase whitespace-nowrap transition-colors"
+        >
+          All the music →
+        </Link>
+      </div>
+
       {/* ── THE INSTRUMENT ── the art and the transport in one panel: press play, the picture stays ── */}
       <TransmissionConsole
         audioUrl={TRANSMISSION_URL}

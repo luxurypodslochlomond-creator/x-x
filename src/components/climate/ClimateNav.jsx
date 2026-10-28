@@ -17,18 +17,23 @@ import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 // the quiet words, last of them, and it is a word like the rest — found on purpose by a
 // reader who wants it, never worn as a glow on the way to an entry.
 
+// Music stands with the places you read. It was moved down into the quiet words, last of
+// them, and that buried it: a reader who came for the music could not find it at all. The
+// objection was to a glow — the music asking to be heard before a single entry had been
+// read — and that stands. So it is a plain word here, no lit mark, no icon, no pull. Found
+// on purpose, exactly like Record or Wire, and never wearing a light on the way to an entry.
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
+  { label: 'Music', page: 'ClimateMusic' },
 ];
 
 const ABOUT = [
   { label: 'Founder', page: 'ClimateFounder' },
   { label: 'Support', page: 'ClimateSupport' },
   { label: 'Method', page: 'ClimateMethod' },
-  { label: 'Music', page: 'ClimateMusic' },
 ];
 
 // Every door in this bar is a word, music included. A lit mark was tried here and taken
@@ -97,14 +102,17 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
       }`}
     >
       <SearchIcon className="w-3.5 h-3.5" />
-      <span>Search</span>
+      {/* On a phone the box keeps its icon and its spoken name, and gives up the printed
+          word — so the five places beside it, music among them, all stand on the screen
+          without a swipe. A door you cannot see is not a door. */}
+      <span className="hidden sm:inline">Search</span>
     </Link>
   );
 
   // On a phone: two lines, every door on the screen at once — nothing hidden, nothing to
-  // swipe, no fade hinting at something you cannot see. The four places you read lead the
-  // first line with Search; the record's own quiet words sit underneath, music last of
-  // them. A door you cannot see is not a door.
+  // swipe, no fade hinting at something you cannot see. The places you read lead the first
+  // line with Search, music standing among them as a word like the rest; the record's own
+  // quiet words about itself sit underneath. A door you cannot see is not a door.
   if (variant === 'mobile') {
     return (
       <nav aria-label="The record" className="flex flex-col px-2 py-0.5">
