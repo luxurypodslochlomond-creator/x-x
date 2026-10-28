@@ -1,18 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
+import useMusicGlobe from './useMusicGlobe';
 
 // ── THE DECK ────────────────────────────────────────────────────────────────────
 // The sphere is the player, and it stands at the head of the page: the first thing a
-// listener meets is the sound turning, not a list asking to be searched.
+// listener meets is a world made of light turning with the sound, not a list asking to
+// be searched.
 //
 // It is not decoration moving on a timer. The browser reads the master as it plays and
-// the sphere answers it — the low end swells the ball and the centre, the mids carry it
-// round, the top end lights the lines. So what you see is the piece you are hearing,
-// which is how you tell whether a thing resonates before you have words for it.
+// the sphere answers it band by band — near points bright, far points dim, so it reads
+// as depth rather than as a drawing, and the whole thing breathes with what you hear.
+// That is how you tell whether a piece resonates before you have the words for it.
 //
 // One tap anywhere starts it: no account, nothing counted, nothing converted, the file
-// whole and untouched. If a device or a file refuses to be read for the picture, the
+// whole and untouched. Where a device or a file will not be read for the picture, the
 // sound still plays plainly — the listening is never traded for the looking.
 
 const fmt = (seconds) => {
@@ -22,7 +24,7 @@ const fmt = (seconds) => {
   return `${m}:${String(s).padStart(2, '0')}`;
 };
 
-const SIGNAL = '#e2602a';
+const RING = 2 * Math.PI * 48;
 
 export default function MusicDeck({ track }) {
   const audioRef = useRef(null);
@@ -86,139 +88,7 @@ export default function MusicDeck({ track }) {
     graphRef.current = null;
   }, []);
 
-  // The sphere: it turns with the master, and answers it band by band.
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return undefined;
-    const ctx = canvas.getContext('2d');
-    let frame = 0;
-    let spin = 0;
-
-    const draw = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = canvas.clientWidth;
-      const h = canvas.clientHeight;
-      if (!w || !h) return;
-      if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
-        canvas.width = Math.round(w * dpr);
-        canvas.height = Math.round(h * dpr);
-      }
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-
-      // read the master as it plays
-      const graph = graphRef.current;
-      let heard = { bass: 0, mid: 0, treble: 0 };
-      if (graph && playingRef.current) {
-        graph.analyser.getByteFrequencyData(graph.data);
-        const d = graph.data;
-        const n = d.length;
-        const band = (from, to) => {
-          const a = Math.max(0, Math.floor(n * from));
-          const b = Math.max(a + 1, Math.floor(n * to));
-          let sum = 0;
-          for (let i = a; i < b; i += 1) sum += d[i];
-          return sum / ((b - a) * 255);
-        };
-        heard = { bass: band(0, 0.08), mid: band(0.08, 0.3), treble: band(0.3, 0.7) };
-      }
-      const prev = levelRef.current;
-      const level = {
-        bass: prev.bass + (heard.bass - prev.bass) * 0.28,
-        mid: prev.mid + (heard.mid - prev.mid) * 0.24,
-        treble: prev.treble + (heard.treble - prev.treble) * 0.3,
-      };
-      levelRef.current = level;
-
-      const cx = w / 2;
-      const cy = h / 2;
-      const R = Math.min(w * 0.3, h * 0.29) * (1 + 0.16 * level.bass);
-      spin += playingRef.current ? 0.0018 + 0.012 * level.mid : 0.001;
-
-      // longitudes that turn with the sound
-      ctx.lineWidth = 1 + level.mid;
-      for (let i = 0; i < 12; i += 1) {
-        const lon = spin + (i * Math.PI) / 6;
-        let prevPoint = null;
-        for (let s = 0; s <= 44; s += 1) {
-          const lat = (s / 44) * Math.PI * 2;
-          const px = R * Math.cos(lat) * Math.cos(lon);
-          const pz = R * Math.cos(lat) * Math.sin(lon);
-          const py = R * Math.sin(lat);
-          const persp = 1 + (0.26 * pz) / R;
-          const sx = cx + px * persp;
-          const sy = cy + py * persp;
-          if (prevPoint) {
-            ctx.strokeStyle = pz > 0
-              ? `rgba(239, 231, 214, ${0.28 + 0.45 * level.treble})`
-              : `rgba(239, 231, 214, ${0.08 + 0.14 * level.treble})`;
-            ctx.beginPath();
-            ctx.moveTo(prevPoint[0], prevPoint[1]);
-            ctx.lineTo(sx, sy);
-            ctx.stroke();
-          }
-          prevPoint = [sx, sy];
-        }
-      }
-
-      // latitudes that hold, breathing with the low end
-      ctx.strokeStyle = `rgba(239, 231, 214, ${0.14 + 0.3 * level.bass})`;
-      for (let j = 1; j < 6; j += 1) {
-        const lat = -Math.PI / 2 + (j / 6) * Math.PI;
-        const ring = Math.abs(R * Math.cos(lat));
-        ctx.beginPath();
-        ctx.ellipse(cx, cy + R * Math.sin(lat), ring, ring * 0.26, 0, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      ctx.strokeStyle = 'rgba(239, 231, 214, 0.3)';
-      ctx.beginPath();
-      ctx.arc(cx, cy, R, 0, Math.PI * 2);
-      ctx.stroke();
-
-      // the sound leaving the sphere, when it is loud
-      if (level.bass > 0.04) {
-        ctx.strokeStyle = `rgba(226, 96, 42, ${0.1 + level.bass * 0.5})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.arc(cx, cy, R * (1.06 + 0.22 * level.bass), 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      // the progress, worn as the sphere's own outer ring
-      const rr = R * 1.2;
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = 'rgba(239, 231, 214, 0.14)';
-      ctx.beginPath();
-      ctx.arc(cx, cy, rr, 0, Math.PI * 2);
-      ctx.stroke();
-
-      const head = -Math.PI / 2 + Math.PI * 2 * pctRef.current;
-      if (pctRef.current > 0) {
-        ctx.strokeStyle = SIGNAL;
-        ctx.beginPath();
-        ctx.arc(cx, cy, rr, -Math.PI / 2, head);
-        ctx.stroke();
-        ctx.fillStyle = SIGNAL;
-        ctx.beginPath();
-        ctx.arc(cx + Math.cos(head) * rr, cy + Math.sin(head) * rr, 4, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      // the centre: the stylus, beating with what is actually there
-      ctx.fillStyle = `rgba(226, 96, 42, ${0.3 + 0.6 * level.mid})`;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 3.5 + 9 * level.bass, 0, Math.PI * 2);
-      ctx.fill();
-    };
-
-    const loop = () => {
-      draw();
-      frame = requestAnimationFrame(loop);
-    };
-    frame = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(frame);
-  }, []);
+  useMusicGlobe({ canvasRef, graphRef, playingRef, levelRef });
 
   if (!track.audio_url) return null;
 
@@ -291,12 +161,28 @@ export default function MusicDeck({ track }) {
 
         <span
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(226,96,42,0.07) 0%, transparent 62%)' }}
+          style={{ background: 'radial-gradient(ellipse at center, rgba(226,96,42,0.08) 0%, transparent 60%)' }}
         />
-        <span
-          className="absolute inset-0 pointer-events-none opacity-[0.06]"
-          style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)' }}
-        />
+
+        {/* The piece's place in the whole, worn as the sphere's own outer ring. */}
+        <span className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <svg viewBox="0 0 100 100" className="h-[80%] aspect-square" aria-hidden="true">
+            <circle cx="50" cy="50" r="48" fill="none" stroke="rgba(239,231,214,0.14)" strokeWidth="1.2" />
+            {pct > 0 && (
+              <circle
+                cx="50"
+                cy="50"
+                r="48"
+                fill="none"
+                stroke="#e2602a"
+                strokeWidth="1.6"
+                strokeDasharray={RING}
+                strokeDashoffset={RING * (1 - pct)}
+                transform="rotate(-90 50 50)"
+              />
+            )}
+          </svg>
+        </span>
 
         <span className="absolute left-4 right-16 top-4 block">
           <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#e2602a]">
