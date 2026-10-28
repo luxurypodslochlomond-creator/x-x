@@ -6,38 +6,34 @@ import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 
 // ── THE WAY THROUGH THE RECORD ───────────────────────────────────────────────────
 // Two different kinds of thing live in this bar, and they are drawn differently on
-// purpose. Places you can read — Record, Wire, Map, Impact — and the quiet trio about
+// purpose. Places you can read — Record, Wire, Map, Impact — and the quiet words about
 // the record itself. Then one action: Search, which wears a box and an icon so it can
 // never read as one more word in a list. Nothing is removed from the record; the door
 // that matters most just looks like a door.
 //
-// Last of the places is the music, and it is drawn as the record's own mark rather than
-// a word: one track, given to the record, is recognised at a glance, and the door stays
-// light enough not to compete with the reading. The mark is made here — a tuning fork
-// with sound leaving it — because the note glyph everyone else uses belongs to the
-// platform that drew it, and this door belongs to the artists who gave the work. It
-// carries a name a screen reader can speak, and the page it opens says in words what
-// the mark means — so nothing is asked of a reader who cannot see it.
+// The music stood here once as the one lit mark in the bar, and that was wrong. It asked
+// to be heard before a single entry had been read, and the record is for crises and
+// solutions first. Janine said it plainly: do not invite the music. So it has gone to
+// the quiet words, last of them, and it is a word like the rest — found on purpose by a
+// reader who wants it, never worn as a glow on the way to an entry.
 
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
-  { page: 'ClimateMusic', aria: 'Music — given to the record', glyph: true },
 ];
 
 const ABOUT = [
   { label: 'Founder', page: 'ClimateFounder' },
   { label: 'Support', page: 'ClimateSupport' },
   { label: 'Method', page: 'ClimateMethod' },
+  { label: 'Music', page: 'ClimateMusic' },
 ];
 
-// The music door is the one thing in this bar that is not a word, and it is lit rather
-// than printed: signal orange, with a glow that lifts it off the ink so it reads as a
-// live thing at a glance — the same orange the record uses for its own signal. It
-// carries a name for anyone who cannot see it, and the page it opens says in words
-// what it means.
+// Every door in this bar is a word, music included. A lit mark was tried here and taken
+// off: a glow among the places you read is an invitation, and this record does not
+// invite anyone away from an entry.
 function PlaceLink({ item, active }) {
   const tone = item.glyph
     ? 'flex items-center text-[#e2602a] drop-shadow-[0_0_7px_rgba(226,96,42,0.75)] hover:text-[#ffb27a] hover:drop-shadow-[0_0_14px_rgba(226,96,42,1)] hover:scale-110 transition-transform'
@@ -107,8 +103,8 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
 
   // On a phone: two lines, every door on the screen at once — nothing hidden, nothing to
   // swipe, no fade hinting at something you cannot see. The four places you read lead the
-  // first line with Search; the record's own three sit quietly underneath. A door you
-  // cannot see is not a door.
+  // first line with Search; the record's own quiet words sit underneath, music last of
+  // them. A door you cannot see is not a door.
   if (variant === 'mobile') {
     return (
       <nav aria-label="The record" className="flex flex-col px-2 py-0.5">
