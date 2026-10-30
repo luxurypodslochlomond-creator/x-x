@@ -4,8 +4,8 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 // The gift buys nothing on the page: Stripe gets the amount and the giver's
 // payment details, and the only other thing collected is whether a name is shown.
 
-const MIN_AMOUNT = 100;      // £1
-const MAX_AMOUNT = 500000;   // £5,000
+const MIN_AMOUNT = 100;         // £1
+const MAX_AMOUNT = 2500000;     // £25,000 — a person or an institution may give any size they choose
 const VISIBILITIES = ['anonymous', 'public', 'private'];
 
 // A name that will stand in public: letters in any script, marks, spaces,
@@ -29,12 +29,11 @@ export default async function (req) {
 
     const body = await req.json().catch(() => ({}));
     const amount = Math.round(Number(body.amount));
-    const frequency = body.frequency === 'monthly' ? 'monthly' : 'one_time';
     const visibility = VISIBILITIES.includes(body.visibility) ? body.visibility : 'anonymous';
     const displayName = visibility === 'anonymous' ? '' : cleanDisplayName(body.display_name);
 
     if (!Number.isFinite(amount) || amount < MIN_AMOUNT || amount > MAX_AMOUNT) {
-      return Response.json({ error: 'Please choose an amount between £1 and £5,000.' }, { status: 400 });
+      return Response.json({ error: 'Please choose an amount between £1 and £25,000.' }, { status: 400 });
     }
     if (visibility !== 'anonymous' && displayName.length < 2) {
       return Response.json({ error: 'Please add the name you would like shown, or give without one.' }, { status: 400 });
@@ -50,12 +49,12 @@ export default async function (req) {
     }
 
     const appId = Deno.env.get('BASE44_APP_ID') || '';
-    const productName = frequency === 'monthly'
-      ? 'Keeping the climate record — each month'
-      : 'Keeping the climate record';
+    // One gift, never a standing order. The record does not take money off people
+    // every month: a gift is a decision someone makes once, at whatever size they choose.
+    const productName = 'Keeping the climate record';
 
     const params = new URLSearchParams();
-    params.set('mode', frequency === 'monthly' ? 'subscription' : 'payment');
+    params.set('mode', 'payment');
     params.set('line_items[0][quantity]', '1');
     params.set('line_items[0][price_data][currency]', 'gbp');
     params.set('line_items[0][price_data][unit_amount]', String(amount));
@@ -63,20 +62,14 @@ export default async function (req) {
     params.set('line_items[0][price_data][product_data][description]',
       'A gift that buys nothing on the page. No advertising, no sponsorship, no place for sale.');
 
-    if (frequency === 'monthly') {
-      params.set('line_items[0][price_data][recurring][interval]', 'month');
-      params.set('subscription_data[metadata][base44_app_id]', appId);
-      params.set('subscription_data[metadata][type]', 'climate_support');
-    } else {
-      params.set('payment_intent_data[statement_descriptor]', 'CLIMATE RECORD');
-    }
+    params.set('payment_intent_data[statement_descriptor]', 'CLIMATE RECORD');
 
     params.set('billing_address_collection', 'auto');
     params.set('success_url', `${appUrl}/ClimateSupport?support=thanks&session_id={CHECKOUT_SESSION_ID}`);
     params.set('cancel_url', `${appUrl}/ClimateSupport`);
     params.set('metadata[base44_app_id]', appId);
     params.set('metadata[type]', 'climate_support');
-    params.set('metadata[frequency]', frequency);
+    params.set('metadata[frequency]', 'one_time');
     params.set('metadata[visibility]', visibility);
     if (displayName) params.set('metadata[display_name]', displayName);
 
@@ -98,7 +91,7 @@ export default async function (req) {
       return Response.json({ error: 'We could not open the payment page. Please try again.' }, { status: 502 });
     }
 
-    console.log(`[ClimateSupport] opened a ${frequency} session for ${amount} gbp (${visibility})`);
+    console.log(`[ClimateSupport] opened a one-off gift session for ${amount} gbp (${visibility})`);
     return Response.json({ url: data.url });
   } catch (error) {
     console.error('[ClimateSupport] Error:', error.message);
