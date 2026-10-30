@@ -40,7 +40,24 @@ self.addEventListener('activate', (event) => {
 });
 
 ${serviceWorkerFetch}
-self.addEventListener('fetch', (event) => appFetch(event, CACHE_NAME));
+self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  const url = new URL(request.url);
+  // Keep the existing offline API fallback separate from page/script caching.
+  if (request.method === 'GET' && url.origin === self.location.origin && url.pathname.includes('/api/functions/')) {
+    event.respondWith(
+      fetch(request).then(response => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(request))
+    );
+    return;
+  }
+  appFetch(event, CACHE_NAME);
+});
 
 // Background sync for when connection returns
 self.addEventListener('sync', (event) => {
