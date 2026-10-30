@@ -125,6 +125,9 @@ export default function ExtractionProofCovenant() {
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.18em] text-[#e2602a] leading-relaxed">
           This is the time. And this is the record of the time.
         </p>
+        <p className="text-[9px] font-mono text-[#efe7d6]/40 mt-2">
+          Laurie Anderson · O Superman, 1981
+        </p>
       </section>
     </ClimateRecordShell>
   );

@@ -17,6 +17,9 @@ export default function HowYouEarnPage() {
             <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#efe7d6] opacity-60">
               THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.
             </p>
+            <p className="font-mono text-[8px] tracking-[0.2em] text-[#efe7d6]/35 mt-1">
+              Laurie Anderson · O Superman, 1981
+            </p>
           </div>
           <Sparkles className="w-16 h-16 text-[#b3261e] mx-auto" />
           <div className="font-mono font-black tracking-[0.3em] text-[11px] text-[#b3261e]">

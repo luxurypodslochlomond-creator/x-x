@@ -27,6 +27,9 @@ export default function ClimateMapPage() {
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
+        <span className="text-[7px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/25">
+          Laurie Anderson · O Superman, 1981
+        </span>
         <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
           x = x
         </div>

@@ -83,10 +83,13 @@ export default function AletheiaPage() {
 
   return (
     <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative flex flex-col">
-      {/* Epigraph */}
+      {/* Epigraph — her words, and her name under them */}
       <div className="bg-[#1a1612] py-2 px-4 text-center">
         <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#efe7d6] opacity-60">
           THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.
+        </p>
+        <p className="font-mono text-[8px] tracking-[0.2em] text-[#efe7d6]/35 mt-1">
+          Laurie Anderson · O Superman, 1981
         </p>
       </div>
 

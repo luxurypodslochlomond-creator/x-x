@@ -794,6 +794,9 @@ export default function TogetherChangeClimate() {
         <p className="px-4 pt-8 text-center text-[17px] text-[#141210] bg-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>
           This is the time. And this is the record of the time.
         </p>
+        <p className="px-4 pt-1 text-center text-[9px] font-mono uppercase tracking-[0.15em] text-[#5a5246] bg-[#efe7d6]">
+          Laurie Anderson · O Superman, 1981
+        </p>
         <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[14px] text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline" style={{ fontFamily: 'var(--font-reading)' }}>
           {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>
