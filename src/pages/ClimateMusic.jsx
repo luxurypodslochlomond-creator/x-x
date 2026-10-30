@@ -8,6 +8,7 @@ import MusicDeck from '@/components/climate/music/MusicDeck';
 import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
 import MusicFind from '@/components/climate/music/MusicFind';
 import MusicTerms from '@/components/climate/music/MusicTerms';
+import ThemeSignal from '@/components/climate/music/ThemeSignal';
 import { givenStamp } from '@/components/climate/music/stamp';
 
 // ── THE RECORD'S MUSIC ──────────────────────────────────────────────────────────
@@ -33,6 +34,9 @@ export default function ClimateMusic() {
   const [kind, setKind] = useState('');
   const [kinds, setKinds] = useState([]);
   const [total, setTotal] = useState(0);
+  const [themeTrack, setThemeTrack] = useState(null);
+  // A keeper alone decides which piece stands as the record's theme; nobody else ever sees the control.
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // A word finds a track by what the record actually holds — its title, the artist's
   // name, and the words either of them gave with it. Never by how many people played
@@ -77,6 +81,28 @@ export default function ClimateMusic() {
     base44.entities.ClimateTrack.count({ status: 'published' }).then(setTotal);
   }, []);
 
+  // The theme is read off the record itself, never from a list kept here, so the day it is
+  // given it is simply standing.
+  useEffect(() => {
+    base44.entities.ClimateTrack.filter({ status: 'published', theme: true }, { limit: 1 })
+      .then((page) => setThemeTrack(page.items?.[0] || null))
+      .catch(() => setThemeTrack(null));
+  }, []);
+
+  useEffect(() => {
+    base44.auth.me().then((u) => setIsAdmin(u?.role === 'admin')).catch(() => setIsAdmin(false));
+  }, []);
+
+  const markTheme = async (track) => {
+    if (!track) return;
+    const already = themeTrack?.id === track.id;
+    // A theme is a signal, not a prize: marking another piece takes it off the last.
+    await base44.entities.ClimateTrack.updateMany({ theme: true }, { $set: { theme: false } });
+    if (!already) await base44.entities.ClimateTrack.update(track.id, { theme: true });
+    const page = await base44.entities.ClimateTrack.filter({ theme: true }, { limit: 1 });
+    setThemeTrack(page.items?.[0] || null);
+  };
+
   const active = tracks.find((t) => t.id === activeId) || null;
 
   return (
@@ -89,6 +115,9 @@ export default function ClimateMusic() {
       returnLabel="Back to the record"
       footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone who comes to hear it, and whether it may be taken is the giver\u2019s own choice, said on the track itself. What is printed beside each track is the file's own truth: its format comes out of the master's header, its date is the moment the record took it in, and its fingerprint is read on the artist's own device before the file is ever sent — so nothing here has to be taken on trust."
     >
+      {/* The record's own signal, above the field — pressed to play, never played at anyone. */}
+      <ThemeSignal track={themeTrack} />
+
       {/* The sphere stands first, before anything asks for a word: you should be able to
           see and hear a piece, and feel whether it resonates, before you go looking. */}
       {active && (
@@ -173,6 +202,15 @@ export default function ClimateMusic() {
           )}
 
           <TrackPlate track={active} />
+
+          {isAdmin && (
+            <button
+              onClick={() => markTheme(active)}
+              className="mt-3 w-full px-3 py-3 min-h-[44px] border-2 border-[#141210]/30 text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+            >
+              {themeTrack?.id === active?.id ? 'Standing as the theme · take it down' : 'Stand this piece as the record\u2019s theme'}
+            </button>
+          )}
         </>
       )}
 

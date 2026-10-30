@@ -70,6 +70,11 @@
       "type": "string",
       "description": "A picture the artist made for the track, if they gave one, stored publicly. Shown with the track and carried on its card."
     },
+    "theme": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set by a keeper on the one piece that stands as the record's own signal \u2014 the theme a reader meets first. It gives that track no rank, no count and no better place in the list: the theme is heard exactly like every other piece, pressed to play and never played at anyone, and the rest of the record is its equal. Only one track carries it; marking another takes it off the last, because a theme is a signal, not a prize."
+    },
     "words_note": {
       "type": "string",
       "description": "The keeper's note, in the open, about a line taken down from under this work: that one came off, when, and on what grounds. Written by a keeper and never by anyone else, kept as their own text, newest first. It never reprints the line \u2014 taking something down is not the same as erasing that it happened \u2014 and it exists because a line vanishing without trace would be the one silent edit on a record that corrects everything else in daylight."
