@@ -13,6 +13,11 @@ export function saveClimatePhotos(photos) {
 
 export async function storeClimatePhotos(photos) {
   if (!('caches' in window)) return;
+  // A phone on a metered or slow link should not pull the whole photograph set down in
+  // the background: the record still reads online, and the offline copy waits for a
+  // connection that can afford it.
+  const link = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if (link?.saveData || /2g/.test(link?.effectiveType || '')) return;
   try {
     const cache = await caches.open(PHOTO_CACHE);
     for (let i = 0; i < photos.length; i += 4) {

@@ -20,6 +20,7 @@ export default function ClimatePhotoSlide({ photo, onOpen }) {
             alt={photo.caption || 'Photograph on the record'}
             width="1800"
             height="1200"
+            loading="lazy"
             decoding="async"
             draggable="false"
             className="absolute inset-0 h-full w-full object-cover"

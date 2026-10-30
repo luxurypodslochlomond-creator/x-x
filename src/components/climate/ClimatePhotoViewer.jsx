@@ -29,6 +29,7 @@ export default function ClimatePhotoViewer({ photos, startIndex, onClose }) {
           key={photo.id}
           src={photo.display_url || photo.image_url}
           alt={photo.caption || 'Photograph on the record'}
+          decoding="async"
           draggable="false"
           style={{ transform: `translate(${zoom.x}px, ${zoom.y}px) scale(${zoom.scale})` }}
           className="absolute inset-0 h-full w-full object-contain"
