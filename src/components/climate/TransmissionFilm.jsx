@@ -26,7 +26,12 @@ export default function TransmissionFilm() {
         Stoneymollan, above Loch Lomond — ancient land, a special place, and where the film was
         made. Ten seconds of it, so far.
       </p>
-      <TapToPlayFilm url={FILM_URL} title={FILM_TITLE} credit={FILM_CREDIT} poster={FILM_POSTER} />
+      {/* A small still, not a wall of picture: the record's close should stay calm, and the
+          film is one tap away for anyone who wants it. */}
+      <TapToPlayFilm url={FILM_URL} title={FILM_TITLE} poster={FILM_POSTER} compact />
+      <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+        {FILM_CREDIT}
+      </p>
     </div>
   );
 }

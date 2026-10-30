@@ -16,14 +16,14 @@ const youtubeId = (url = '') => {
 // natively: no third party in the middle, and the picture comes straight from us.
 const fileVideo = (url = '') => /\.(mp4|webm|mov|m4v)(\?.*)?$/i.test(String(url));
 
-export default function TapToPlayFilm({ url, title, credit, poster }) {
+export default function TapToPlayFilm({ url, title, credit, poster, compact = false }) {
   const [playing, setPlaying] = useState(false);
   const id = youtubeId(url);
   const isFile = !id && fileVideo(url);
   if (!id && !isFile) return null;
 
   return (
-    <figure className="mt-4 border-2 border-[#141210] bg-[#141210]">
+    <figure className={`mt-4 border-2 border-[#141210] bg-[#141210]${compact ? ' w-[190px] max-w-full sm:w-[240px]' : ''}`}>
       {playing ? (
         <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
           {id ? (
@@ -67,12 +67,14 @@ export default function TapToPlayFilm({ url, title, credit, poster }) {
           ) : null}
           <span className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.1), rgba(20,18,16,0.74))' }} />
           <span className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-3">
-            <span className="w-14 h-14 flex items-center justify-center rounded-full bg-[#3fbf7f] border-2 border-[#141210]">
-              <Play className="w-6 h-6 text-[#141210]" fill="#141210" />
+            <span className={`${compact ? 'w-9 h-9' : 'w-14 h-14'} flex items-center justify-center rounded-full bg-[#3fbf7f] border-2 border-[#141210]`}>
+              <Play className={compact ? 'w-4 h-4 text-[#141210]' : 'w-6 h-6 text-[#141210]'} fill="#141210" />
             </span>
-            <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6] text-center">
-              Tap to play · it never plays by itself
-            </span>
+            {!compact && (
+              <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6] text-center">
+                Tap to play · it never plays by itself
+              </span>
+            )}
           </span>
         </button>
       )}
