@@ -624,7 +624,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   // to know before they open it.
   let y = 118;
   ctx.font = `900 20px ${MONO}`;
-  const badgeText = 'THE MANUAL';
+  const badgeText = guide.badge || 'THE MANUAL';
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = INK;
   ctx.fillRect(PAD, y - 24, badgeW, 36);

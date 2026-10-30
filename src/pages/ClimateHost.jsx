@@ -3,6 +3,8 @@ import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import HostAnswer from '@/components/climate/HostAnswer';
 import CopyLine from '@/components/climate/CopyLine';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 import { recordAddress } from '@/components/climate/recordAddress';
 
 // ── FOR JANINE, BEFORE IT IS SHARED ────────────────────────────────────────────
@@ -25,6 +27,27 @@ const DOORS = [
   { label: 'Privacy', page: 'ClimatePrivacy', what: 'What is kept, what is never kept, and who can read it.' },
 ];
 
+// The page's own card, built from the page's own verdicts — so it can be handed on the
+// way the manual and a wire entry are, as a picture with the address already on it,
+// rather than as a line of text somebody has to retype.
+const HOST_CARD = {
+  id: 'for-janine',
+  badge: 'FOR JANINE',
+  title: 'Straight answers',
+  headline: 'Straight answers, before the record is shared',
+  marker: 'Your five questions · in your order · nothing rounded up',
+  body: 'What is silent, what is ready, what a host must supply, and the seven doors that let anyone check every line.',
+  inside: [
+    '01 · Nothing plays by itself',
+    '02 · Ready to be seen, not handed over',
+    '03 · Five lines to include',
+    '04 · Six things a host supplies',
+    '05 · Seven doors, every one live',
+  ],
+  closing: 'Check any line before you quote it. Every claim here has a door beside it.',
+  url_path: '/ClimateHost',
+};
+
 function Check({ done, children }) {
   return (
     <li className="flex items-start gap-2 text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed">
@@ -40,19 +63,18 @@ export default function ClimateHost() {
       eyebrow="For Janine · before it is shared"
       marker="Your questions, in your order · nothing rounded up"
       title="Straight answers, before you share it"
-      statement="You asked five things, and closed with an invitation. Here they are in your order, answered plainly, with the door that lets you check each one for yourself."
+      statement="The five things you asked, in your order, answered plainly — each one with the door that lets you check it for yourself."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International."
     >
-      <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mb-8 lg:mb-10">
-        Two answers below are no, or not yet. They are written the same size as the yeses, because a host
-        who finds a gap later stops trusting the whole page. Where a thing is not built, this says it is
-        not built, and names what it would take.
+      <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mb-6">
+        Two answers below are no, or not yet, set in the same size as the yeses. Where a thing is not
+        built, this says so and names what it would take.
       </p>
 
-      {/* The page's own address, at the top, because the thing Brian actually needs to do
-          with this page is send it. One line, one button, no hunting in a footer. */}
+      {/* The page's own address, at the top, because the thing a host actually needs to
+          do with this page is send it. One line, one button, no hunting in a footer. */}
       <div className="border-2 border-[#141210] bg-[#f7f1e5] px-3 py-2.5 mb-8 lg:mb-10 flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">This page, to send</p>
@@ -60,6 +82,16 @@ export default function ClimateHost() {
           <p className="text-[10px] font-mono text-[#5a5246] leading-snug mt-1">One link. It opens this page on the record. Nothing to install, no account, no sign-in.</p>
         </div>
         <CopyLine text={recordAddress(createPageUrl('ClimateHost'))} label="Copy" />
+      </div>
+
+      {/* Hand it on as a card, the way a track and a wire entry travel: the picture
+          carries the address, so it cannot arrive with its link cut off. */}
+      <div className="mb-8 lg:mb-10">
+        <ShareCardButton
+          entry={HOST_CARD}
+          build={buildGuideShareCard}
+          label="Share these answers as a card"
+        />
       </div>
 
       <HostAnswer
@@ -73,8 +105,8 @@ export default function ClimateHost() {
         ]}
       >
         <p>No sound starts anywhere on this record unless a reader presses play. There is no background music, no autoplay video, no sound behind a page. Nothing is left running over somebody's reading.</p>
-        <p>Music sits in one room of its own, entered on purpose. Every file in it was handed over by the artist at the door and is stored exactly as it was given, never re-encoded, never trimmed. Each track says on its face whether it may be taken away or only heard here, and that choice was the artist's, made once, not ours.</p>
-        <p>One piece may stand at the head of that room as the record's signal, and that place is empty right now. If Dillon's is the piece chosen for it, it sits there on the same terms: pressed to play, never played at anyone, and it gives no track a better place in the list. Nothing is marked as the signal until you and he settle it.</p>
+        <p>Music sits in one room of its own, entered on purpose. Every file was handed over by the artist at the door and is stored exactly as given, never re-encoded. Each track says whether it may be taken away or only heard here, and that choice was the artist's, made once.</p>
+        <p>One piece may stand at the head of that room as the record's signal, and that place is empty right now. Nothing is marked as the signal until a host and the artist settle it.</p>
         <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
           <strong>And the part you actually asked for.</strong> You asked for the music to be removed. So there
           are two honest options, and the choice is yours, not ours: leave the room as it is, silent until
@@ -93,7 +125,7 @@ export default function ClimateHost() {
           { label: 'The impact', to: createPageUrl('ClimateImpact') },
         ]}
       >
-        <p>They are two different doors, and it is worth not letting them look like one in front of a host. <strong>Yes</strong> to sharing the record now, for comments and for finding the right host. <strong>Not yet</strong> to handing it over, because a handover is a list, and the list is short but real.</p>
+        <p>Two different doors, worth not letting look like one in front of a host. <strong>Yes</strong> to sharing the record now. <strong>Not yet</strong> to handing it over, because a handover is a list, and the list is short but real.</p>
         <p className="font-black text-[#141210] mt-2">What a host can already see for themselves:</p>
         <ul className="space-y-1.5 mt-1">
           <Check done>Every entry names where it came from, and says whether one source, two independent sources, or an official record stands behind it.</Check>
@@ -188,17 +220,10 @@ export default function ClimateHost() {
         </div>
       </HostAnswer>
 
-      <HostAnswer
-        n="06"
-        label="you offered"
-        ask="We look forward to your family visit, Dillon and his girlfriend as well. Spring would be best when the flowers are beginning to bloom, but you are also welcome before then."
-        verdict="Spring, then"
-        tone="yes"
-      >
-        <p>We would like that very much. Spring it is, with the flowers coming up. Dillon and his girlfriend are asked in their own right and will answer for themselves. And if we are passing before then, we will knock.</p>
-        <p>Thank you for trusting us with something this size. If anything on this page reads as a no, tell us and it becomes the next thing done.</p>
-        <p className="font-black">Brian</p>
-      </HostAnswer>
+      <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] border-t-2 border-[#141210]/20 pt-3">
+        Anything above that reads as a no becomes the next thing done, and the page is corrected in the
+        open when it changes.
+      </p>
     </ClimateRecordShell>
   );
 }
