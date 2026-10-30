@@ -40,7 +40,7 @@ export default function ClimateHost() {
       eyebrow="For Janine · before it is shared"
       marker="Your questions, in your order · nothing rounded up"
       title="Straight answers, before you share it"
-      statement="You asked five things, and a sixth at the end. Here they are in the order you asked them, answered plainly, with the door that lets you check each one for yourself."
+      statement="You asked five things, and closed with an invitation. Here they are in your order, answered plainly, with the door that lets you check each one for yourself."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International."
@@ -74,7 +74,7 @@ export default function ClimateHost() {
       >
         <p>No sound starts anywhere on this record unless a reader presses play. There is no background music, no autoplay video, no sound behind a page. Nothing is left running over somebody's reading.</p>
         <p>Music sits in one room of its own, entered on purpose. Every file in it was handed over by the artist at the door and is stored exactly as it was given, never re-encoded, never trimmed. Each track says on its face whether it may be taken away or only heard here, and that choice was the artist's, made once, not ours.</p>
-        <p>Dillon's theme will stand at the head of that room as the record's signal. It is heard like every other piece: pressed to play, never played at anyone, and it gives no track a better place in the list.</p>
+        <p>One piece may stand at the head of that room as the record's signal, and that place is empty right now. If Dillon's is the piece chosen for it, it sits there on the same terms: pressed to play, never played at anyone, and it gives no track a better place in the list. Nothing is marked as the signal until you and he settle it.</p>
         <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
           <strong>And the part you actually asked for.</strong> You asked for the music to be removed. So there
           are two honest options, and the choice is yours, not ours: leave the room as it is, silent until
@@ -191,11 +191,12 @@ export default function ClimateHost() {
 
       <HostAnswer
         n="06"
+        label="you offered"
         ask="We look forward to your family visit, Dillon and his girlfriend as well. Spring would be best when the flowers are beginning to bloom, but you are also welcome before then."
         verdict="Spring, then"
         tone="yes"
       >
-        <p>We would like that very much. Spring it is, with the flowers coming up, Dillon and his girlfriend with us. And if we are passing before then, we will knock.</p>
+        <p>We would like that very much. Spring it is, with the flowers coming up. Dillon and his girlfriend are asked in their own right and will answer for themselves. And if we are passing before then, we will knock.</p>
         <p>Thank you for trusting us with something this size. If anything on this page reads as a no, tell us and it becomes the next thing done.</p>
         <p className="font-black">Brian</p>
       </HostAnswer>

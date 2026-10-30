@@ -12,7 +12,7 @@ const TONES = {
   part: { text: 'text-[#8a5a12]', border: 'border-[#8a5a12]', bg: 'bg-[#8a5a12]/5' },
 };
 
-export default function HostAnswer({ n, ask, verdict, tone = 'yes', children, doors = [] }) {
+export default function HostAnswer({ n, ask, verdict, tone = 'yes', label = 'you asked', children, doors = [] }) {
   const t = TONES[tone] || TONES.yes;
 
   return (
@@ -20,7 +20,7 @@ export default function HostAnswer({ n, ask, verdict, tone = 'yes', children, do
       <div className="flex items-baseline gap-2 mb-2">
         <span className="text-[10px] font-black font-mono text-[#e2602a]">{n}</span>
         <span className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">
-          you asked
+          {label}
         </span>
       </div>
 
