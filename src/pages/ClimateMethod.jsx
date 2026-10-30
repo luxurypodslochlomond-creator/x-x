@@ -65,7 +65,7 @@ export default function ClimateMethod() {
 
       <Block n="05" title="Who decides">
         <p>The screen is a machine. The decision is a person's. No entry is published on a machine's judgement, and no machine's opinion is treated as a finding — it produces an advisory note that a human reads.</p>
-        <p>The record has one named editor, and that name sits at the top of the record rather than in the small print. The editor's name, the platform's contact address and Horizon International's role as the record's custodian are being settled with the founder, and this page is updated the moment they are. Until then, this page says so rather than inventing a masthead.</p>
+        <p>The record is meant to stand behind one named editor, and that name belongs at the top of the record rather than in the small print. That name, the platform's contact address and Horizon International's role as the record's custodian are still being settled with the founder, and this page is updated the moment they are. Until then, it says so rather than inventing a masthead.</p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
 
@@ -84,7 +84,13 @@ export default function ClimateMethod() {
         <p>An entry is citable and checkable on its own, and the source link takes you to the thing itself rather than to us describing it. That is the point: don't take our word, follow the link.</p>
       </Block>
 
-      <Block n="09" title="What this record refuses to do">
+      <Block n="09" title="The record's music">
+        <p>Music is given to this record, not licensed to it. The artist keeps their name and keeps their rights; the master is stored exactly as it was given and served whole; no play is counted, nothing is ranked, and no one pays for a place on the page.</p>
+        <p>Nothing here starts by itself. Every piece is heard because a reader pressed play, and the record's own theme is held to the same rule: it stands as a signal, credited to its composer, taking no rank above the rest of the music.</p>
+        <p>A piece held back is paused, not removed: its master is kept whole and untouched, and its place returns when it is released.</p>
+      </Block>
+
+      <Block n="10" title="What this record refuses to do">
         <p>No anonymous claims. No volume chasing — no target of entries per day, because that pressure is what fills a page with junk. No trending, no recommendations, and nothing that rewards a reader for returning.</p>
         <p>No republishing another publisher's work to keep a page full. And no pretending that speed is the same as accuracy: an entry can wait an hour for a source, and often should.</p>
       </Block>

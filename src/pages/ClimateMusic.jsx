@@ -160,9 +160,10 @@ export default function ClimateMusic() {
         ) : (
           <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
             <Music className="w-7 h-7 text-[#e2602a] mx-auto mb-3" />
-            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">No music on the record yet</p>
+            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">No music is standing yet</p>
             <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
-              The first track to arrive stands here. Yours can be it.
+              Nothing has been deleted: music already given is standing by, whole and untouched. The first piece to stand
+              here will be the record's theme. Yours can follow it.
             </p>
           </div>
         )
