@@ -109,7 +109,6 @@ export default function ClimateHost() {
           <Check done={false}><strong>A named editor.</strong> The record intends one named, accountable editor and a contact line. That name is being settled with you, and this page says so instead of inventing a masthead.</Check>
           <Check done={false}><strong>A monthly figure.</strong> Nobody has signed a running cost to a named party yet. A host asks this on day one, and it should be answered before the conversation starts.</Check>
           <Check done={false}><strong>The domain and the sending domain,</strong> both in the host's name rather than ours. A record whose address belongs to somebody else is not handed over, it is lent.</Check>
-          <Check done={false}><strong>One number to check.</strong> There is a litter total on the wider platform that is larger than it should be. It is being audited or removed, because it is the first figure anyone tests.</Check>
         </ul>
         <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 py-2.5 mt-3">
           So: share it as a record for comment now, and describe the handover as a short list being closed,
@@ -166,12 +165,12 @@ export default function ClimateHost() {
       >
         <p>Every line below opens the real thing, and the address beside it can be copied straight into a letter or an email. Nothing here is a mock-up and nothing is behind a door.</p>
 
-        <div className="border-2 border-[#141210] divide-y-2 divide-[#141210]/15 mt-2">
+        <div className="border-2 border-[#141210] mt-2 grid sm:grid-cols-2">
           {DOORS.map((d) => {
             const path = createPageUrl(d.page);
             const address = recordAddress(path);
             return (
-              <div key={d.page} className="px-3 py-2.5 flex items-start justify-between gap-3">
+              <div key={d.page} className="px-3 py-2.5 flex items-start justify-between gap-3 border-b border-[#141210]/15">
                 <div className="min-w-0">
                   <a
                     href={path}

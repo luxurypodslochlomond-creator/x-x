@@ -9,6 +9,7 @@ import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
 import MusicFind from '@/components/climate/music/MusicFind';
 import MusicTerms from '@/components/climate/music/MusicTerms';
 import ThemeSignal from '@/components/climate/music/ThemeSignal';
+import Transmission from '@/components/climate/Transmission';
 import { givenStamp } from '@/components/climate/music/stamp';
 
 // ── THE RECORD'S MUSIC ──────────────────────────────────────────────────────────
@@ -106,6 +107,7 @@ export default function ClimateMusic() {
   const active = tracks.find((t) => t.id === activeId) || null;
 
   return (
+    <>
     <ClimateRecordShell
       eyebrow="The record's music"
       marker="Given to the record · never sold · no plays counted, no cut taken"
@@ -245,5 +247,11 @@ export default function ClimateMusic() {
           stranger can test each claim. Free is a condition here, not a price. */}
       <MusicTerms />
     </ClimateRecordShell>
+
+    {/* The transmission stands here now, in the music room, where a reader has come on
+        purpose to listen. It no longer crosses the record's front page, so nothing asks
+        to be heard before the reading has started. Full width, under the page's column. */}
+    <Transmission />
+    </>
   );
 }

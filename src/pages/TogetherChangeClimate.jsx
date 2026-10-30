@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
-import Transmission from '@/components/climate/Transmission';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import GatheringForm from '@/components/climate/GatheringForm';
@@ -770,11 +769,6 @@ export default function TogetherChangeClimate() {
         {/* ── DEFINITIONS ── each term in the words of the body that defined it,
                and the way through to that body so it can be checked. ── */}
         <DefinitionsBand heading={t.defs} />
-
-        {/* ── TRANSMISSION ── lower down, and found rather than announced: a reader who
-               has read the whole record meets the music at the end of it. It was sitting
-               above the reading, where it asked to be heard before anything was said. ── */}
-        <Transmission />
 
         {/* ── GOVERNANCE ── */}
         <section className="px-4 lg:px-10 py-5 lg:py-8 bg-[#1e3a2b] text-[#efe7d6]">
