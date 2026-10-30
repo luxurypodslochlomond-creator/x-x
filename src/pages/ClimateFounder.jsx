@@ -131,6 +131,17 @@ export default function ClimateFounder() {
             </span>
           </a>
 
+          {/* Gill's own line, not a claim about Gill: her grandmother, Barbera — an artist
+              in her own right. No link is invented for her; the name stands beside Gill's. */}
+          <div className="mt-2 border-l-2 border-[#e2602a] bg-[#efe7d6] px-3 py-2">
+            <span className="block text-[11px] font-black font-mono uppercase tracking-[0.08em] text-[#141210]">
+              Barbera
+            </span>
+            <span className="block text-[9px] font-mono text-[#5a5246] mt-0.5">
+              GBB's grandmother · artist
+            </span>
+          </div>
+
           <a
             href="https://uf51.love"
             target="_blank"
@@ -144,6 +155,17 @@ export default function ClimateFounder() {
               uf51.love
             </span>
           </a>
+
+          {/* My ma — no surname invented, no address asked for. The one line is the whole
+              of it: read it in a mirror and it says the other thing back. */}
+          <div className="mt-2 border-l-2 border-[#e2602a] bg-[#efe7d6] px-3 py-2">
+            <span className="block text-[11px] font-black font-mono uppercase tracking-[0.08em] text-[#141210]">
+              My Ma
+            </span>
+            <span className="block text-[10px] font-black font-mono text-[#e2602a] mt-0.5 tracking-[0.12em]">
+              WoW = MoM
+            </span>
+          </div>
 
           <a
             href="mailto:family@uf51.love"
