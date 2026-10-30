@@ -4,11 +4,13 @@
  * Caches the app shell so BuzzStop works fully offline after first visit
  */
 
-Deno.serve((req) => {
+import { serviceWorkerFetch } from '../../shared/serviceWorkerFetch.ts';
+
+export default async function(req) {
   const swCode = `
 // BuzzStop Service Worker — Offline Cache
 // Version bump to force fresh install
-const CACHE_NAME = 'buzzstop-v3';
+const CACHE_NAME = 'buzzstop-v4';
 
 const CACHE_URLS = [
   '/BuzzStop',
@@ -36,7 +38,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.filter(k => k !== CACHE_NAME).map(k => {
+        keys.filter(k => /^buzzstop-v[0-9]+$/.test(k) && k !== CACHE_NAME).map(k => {
           console.log('[BuzzStop SW] Clearing old cache:', k);
           return caches.delete(k);
         })
@@ -45,44 +47,8 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch: Cache-first for pages, network-first for API calls
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  // Skip non-same-origin and API calls
-  if (!event.request.url.startsWith(self.location.origin)) return;
-  if (event.request.url.includes('/api/')) return;
-
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) {
-        // Serve from cache, refresh in background
-        fetch(event.request).then(fresh => {
-          if (fresh && fresh.ok) {
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(event.request, fresh.clone()).catch(() => {});
-            });
-          }
-        }).catch(() => {});
-        return cached;
-      }
-
-      // Not in cache — fetch from network and cache it
-      return fetch(event.request).then(response => {
-        if (response && response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, clone).catch(() => {});
-          });
-        }
-        return response;
-      }).catch(() => {
-        // Total offline fallback
-        return caches.match('/BuzzStop');
-      });
-    })
-  );
-});
+${serviceWorkerFetch}
+self.addEventListener('fetch', (event) => appFetch(event, CACHE_NAME));
 
 console.log('[BuzzStop SW] Loaded ✓ — offline ready');
 `;
@@ -94,4 +60,4 @@ console.log('[BuzzStop SW] Loaded ✓ — offline ready');
       'Service-Worker-Allowed': '/',
     },
   });
-});
+}

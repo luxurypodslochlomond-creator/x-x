@@ -3,10 +3,12 @@
  * Registers at /sw.js
  */
 
-Deno.serve((req) => {
+import { serviceWorkerFetch } from '../../shared/serviceWorkerFetch.ts';
+
+export default async function(req) {
    const swCode = `
 // CB51 Service Worker - Push Notifications + Offline
-const CACHE_NAME = 'cb51-v5'; // bumped to fix notification icons
+const CACHE_NAME = 'cb51-v6';
 
 self.addEventListener('install', (event) => {
   console.log('[SW] CB51 installing...');
@@ -18,7 +20,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        keys.filter(key => /^cb51-v[0-9]+$/.test(key) && key !== CACHE_NAME).map(key => caches.delete(key))
       );
     }).then(() => clients.claim())
   );
@@ -54,33 +56,8 @@ self.addEventListener('push', (event) => {
   );
 });
 
-// Cache assets on fetch (passive caching)
-self.addEventListener('fetch', (event) => {
-  // Only cache GET requests
-  if (event.request.method !== 'GET') return;
-  
-  // Skip API calls and non-same-origin
-  if (event.request.url.includes('/api/') || !event.request.url.startsWith(self.location.origin)) return;
-
-  // Network first, cache fallback
-  event.respondWith(
-    fetch(event.request).then(response => {
-      // Cache successful responses
-      if (response.ok) {
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, clone).catch(() => {});
-        });
-      }
-      return response;
-    }).catch(() => {
-      // Try cache on network failure
-      return caches.match(event.request).then(cached => {
-        return cached || new Response('Offline', { status: 503 });
-      });
-    })
-  );
-});
+${serviceWorkerFetch}
+self.addEventListener('fetch', (event) => appFetch(event, CACHE_NAME));
 
 // Handle notification clicks + action buttons
 self.addEventListener('notificationclick', (event) => {
@@ -151,4 +128,4 @@ console.log('[SW] CB51 Service Worker loaded');
       'Service-Worker-Allowed': '/',
     },
   });
-});
+}

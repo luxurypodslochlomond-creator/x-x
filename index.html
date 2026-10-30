@@ -49,16 +49,50 @@
       (function () {
         var key = 'uf51_build_reload';
         var marker = '_uf51_reload';
-        window.__uf51RecoverBuild = function () {
+        var recovering = false;
+        window.__uf51RecoverBuild = function (force) {
+          if (recovering) return true;
           if (navigator.onLine === false) return false;
           var url = new URL(window.location.href);
           var last = Number(url.searchParams.get(marker) || 0);
           try { last = Math.max(last, Number(sessionStorage.getItem(key) || 0)); } catch (_) {}
-          if (Date.now() - last < 60000) return false;
+          if (!force && Date.now() - last < 60000) return false;
+          recovering = true;
           var now = Date.now();
           try { sessionStorage.setItem(key, String(now)); } catch (_) {}
           url.searchParams.set(marker, String(now));
-          window.location.replace(url.href);
+          var repairs = [];
+          // Refresh our workers without removing push subscriptions.
+          if ('serviceWorker' in navigator) repairs.push(
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+              return Promise.allSettled(registrations.filter(function (registration) {
+                var worker = registration.active || registration.waiting || registration.installing;
+                return worker && /\/(?:serveServiceWorker|serveClimateServiceWorker|serveSortedServiceWorker|buzzstopServiceWorker|sw\.js|buzzstop-sw\.js)(?:\?|$)/.test(new URL(worker.scriptURL).pathname);
+              }).map(function (registration) { return registration.update(); }));
+            })
+          );
+          // A query on the page alone does not invalidate cached module responses.
+          // Remove only downloaded code/pages from our caches, never saved work or photos.
+          if ('caches' in window) repairs.push(caches.keys().then(function (names) {
+            return Promise.allSettled(names.filter(function (name) {
+              return /^(?:cb51-v\d+|twcc-v\d+|buzzstop-v\d+|sorted-v\d+-offline)$/.test(name);
+            }).map(function (name) {
+              return caches.open(name).then(function (cache) {
+                return cache.keys().then(function (requests) {
+                  return Promise.allSettled(requests.map(function (request) {
+                    return cache.match(request).then(function (response) {
+                      var type = response && response.headers.get('Content-Type') || '';
+                      if (/html|javascript|ecmascript|text\/css/i.test(type)) return cache.delete(request);
+                    });
+                  }));
+                });
+              });
+            }));
+          }));
+          Promise.race([
+            Promise.allSettled(repairs),
+            new Promise(function (resolve) { setTimeout(resolve, 5000); })
+          ]).then(function () { window.location.replace(url.href); });
           return true;
         };
         function failed(event) {
@@ -77,16 +111,13 @@
           var button = document.createElement('button');
           button.textContent = 'Try again';
           button.style.cssText = 'font:inherit;padding:12px 20px;border:2px solid currentColor;background:transparent;color:inherit;cursor:pointer';
-          button.onclick = function () {
-            var url = new URL(window.location.href);
-            url.searchParams.set(marker, String(Date.now()));
-            window.location.replace(url.href);
-          };
+          button.onclick = function () { window.__uf51RecoverBuild(true); };
           loading.appendChild(button);
         }
         function moduleFailure(error) {
           return /Importing a module script failed|Failed to fetch dynamically imported module|error loading dynamically imported module|Outdated Optimize Dep|Unable to preload CSS/i.test(String(error && error.message || error || ''));
         }
+        window.__uf51IsModuleLoadError = moduleFailure;
         window.addEventListener('error', function (event) {
           var target = event.target;
           if ((target && target.tagName === 'SCRIPT' && target.type === 'module') ||

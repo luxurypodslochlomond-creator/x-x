@@ -38,6 +38,7 @@ class GlobalErrorBoundary extends React.Component {
     }
 
     componentDidCatch(error, errorInfo) {
+        if (window.__uf51IsModuleLoadError?.(error) && window.__uf51RecoverBuild?.()) return;
         const errorMsg = error?.message?.toLowerCase() || '';
         const isNetworkError = 
             !navigator.onLine ||

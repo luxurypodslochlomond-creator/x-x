@@ -4,10 +4,12 @@
  * Registers at /sorted-sw.js
  */
 
-Deno.serve((req) => {
+import { serviceWorkerFetch } from '../../shared/serviceWorkerFetch.ts';
+
+export default async function(req) {
   const swCode = `
 // SORTED Offline-First Service Worker
-const CACHE_NAME = 'sorted-v1-offline';
+const CACHE_NAME = 'sorted-v2-offline';
 const ASSETS_TO_CACHE = [
   '/',
   '/Sorted',
@@ -31,68 +33,14 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        keys.filter(key => /^sorted-v[0-9]+-offline$/.test(key) && key !== CACHE_NAME).map(key => caches.delete(key))
       );
     }).then(() => clients.claim())
   );
 });
 
-// Fetch — offline first, then network
-self.addEventListener('fetch', (event) => {
-  const url = event.request.url;
-  
-  // Skip non-GET requests
-  if (event.request.method !== 'GET') return;
-  
-  // Skip external requests
-  if (!url.startsWith(self.location.origin)) return;
-  
-  // API calls — network only (AI analysis needs server)
-  if (url.includes('/api/functions/')) {
-    event.respondWith(
-      fetch(event.request).then(response => {
-        // Cache successful API responses briefly
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, clone);
-          });
-        }
-        return response;
-      }).catch(() => {
-        // Offline — show cached if available
-        return caches.match(event.request);
-      })
-    );
-    return;
-  }
-  
-  // Static assets — cache first, then network
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) {
-        // Return cached immediately
-        return cached;
-      }
-      // Fetch from network
-      return fetch(event.request).then(response => {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, clone);
-          });
-        }
-        return response;
-      });
-    }).catch(() => {
-      // Total offline — show fallback
-      if (event.request.destination === 'document') {
-        return caches.match('/');
-      }
-      return new Response('Offline', { status: 503 });
-    })
-  );
-});
+${serviceWorkerFetch}
+self.addEventListener('fetch', (event) => appFetch(event, CACHE_NAME));
 
 // Background sync for when connection returns
 self.addEventListener('sync', (event) => {
@@ -118,4 +66,4 @@ console.log('[SORTED SW] Loaded — works offline anywhere ♾️❤️');
       'Service-Worker-Allowed': '/',
     },
   });
-});
+}

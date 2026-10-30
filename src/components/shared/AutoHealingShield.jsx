@@ -24,6 +24,7 @@ class AutoHealingShield extends React.Component {
     }
 
     componentDidCatch(error, errorInfo) {
+        if (window.__uf51IsModuleLoadError?.(error) && window.__uf51RecoverBuild?.()) return;
         console.error('🛡️ Shield caught error:', error, errorInfo);
         this.setState({ error, errorInfo, isHealing: false });
     }

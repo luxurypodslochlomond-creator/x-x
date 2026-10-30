@@ -4,10 +4,12 @@
  * Caches page assets for offline PWA use — network first, cache fallback.
  */
 
+import { serviceWorkerFetch } from '../../shared/serviceWorkerFetch.ts';
+
 export default async function(req) {
   try {
   const swCode = `
-const CACHE = 'twcc-v2';
+const CACHE = 'twcc-v3';
 const PHOTO_CACHE = 'twcc-photos-v1';
 
 self.addEventListener('install', (e) => { self.skipWaiting(); });
@@ -20,6 +22,7 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+${serviceWorkerFetch}
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
@@ -38,40 +41,7 @@ self.addEventListener('fetch', (e) => {
     })());
     return;
   }
-  // Skip API/function calls — those are handled client-side via localStorage cache
-  if (url.pathname.includes('/api/') || url.pathname.includes('/functions/')) return;
-
-  if (url.origin !== self.location.origin) return;
-  // Revalidate page HTML; an old shell can reference files from a previous publish.
-  const navigation = e.request.mode === 'navigate';
-  const script = e.request.destination === 'script';
-  const style = e.request.destination === 'style';
-  const usable = (res) => res && res.ok && (
-    script ? /javascript|ecmascript/i.test(res.headers.get('Content-Type') || '') :
-    style ? /text\\/css/i.test(res.headers.get('Content-Type') || '') : true
-  );
-  e.respondWith((async () => {
-    const cache = await caches.open(CACHE);
-    try {
-      const response = await fetch(e.request, navigation ? { cache: 'no-cache' } : undefined);
-      if (usable(response)) {
-        e.waitUntil(cache.put(e.request, response.clone()).catch(() => {}));
-        return response;
-      }
-      // Never replace a working script with an HTML error/fallback page.
-      const cached = await cache.match(e.request);
-      return usable(cached) ? cached : response;
-    } catch (_) {
-      const cached = await cache.match(e.request);
-      if (usable(cached)) return cached;
-      // Only a page navigation can receive HTML, never a script or stylesheet.
-      if (!navigation) return Response.error();
-      return new Response(
-        '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Offline</title></head><body style="background:#141210;color:#e9eeec;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh;margin:0"><div style="text-align:center"><p style="color:#7fc9e4;font-size:12px;letter-spacing:0.2em">OFFLINE</p><p style="font-size:11px;opacity:0.5">Reconnect to continue</p></div></body></html>',
-        { status: 503, headers: { 'Content-Type': 'text/html' } }
-      );
-    }
-  })());
+  appFetch(e, CACHE);
 });
 `;
 

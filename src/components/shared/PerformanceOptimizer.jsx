@@ -95,11 +95,6 @@ export default function PerformanceOptimizer() {
         `;
         document.head.appendChild(style);
 
-        // OFFLINE-FIRST CACHING
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(() => {});
-        }
-
         // CLEANUP
         return () => {
             observer.disconnect();
