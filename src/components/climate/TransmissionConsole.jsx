@@ -30,7 +30,11 @@ export default function TransmissionConsole({ audioUrl, artistName, trackTitle, 
         @keyframes tx-bar { from { transform: translateY(-10%); } to { transform: translateY(1000%); } }
         @keyframes tx-flick { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .7; } }
       `}</style>
-      {hasAudio && <audio ref={audioElRef} src={audioUrl} loop preload="metadata" crossOrigin="anonymous" />}
+      {/* preload="none" — the front page is where a host and a reader land, and the record
+          says nothing is spent until someone chooses to listen. With "metadata" the browser
+          still reached for the master's header on every visit, before any press. Now the
+          first byte of Dillon's track is fetched when a person presses play, and not before. */}
+      {hasAudio && <audio ref={audioElRef} src={audioUrl} loop preload="none" crossOrigin="anonymous" />}
 
       <TransmissionTransport
         hasAudio={hasAudio}
