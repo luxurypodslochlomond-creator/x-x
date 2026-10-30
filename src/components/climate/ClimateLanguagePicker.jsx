@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Languages } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
-import { refuseAncientScript } from './ancientScripts';
 
 // The record's own language control, in one place: the preset list, plus
 // "type any language on Earth" for anything not on it.
@@ -23,9 +22,6 @@ export default function ClimateLanguagePicker({ lang, onChange, translating, t }
   const commit = () => {
     const typed = manual.trim();
     if (!typed) return;
-    // An ancient script is refused here, in the open, rather than silently swapped for a guess.
-    const refused = refuseAncientScript(typed);
-    if (refused) { setRefusal(refused); return; }
     setRefusal('');
     onChange(typed);
     setManual('');

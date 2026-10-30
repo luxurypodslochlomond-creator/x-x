@@ -1,9 +1,15 @@
 import React from 'react';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
+import { isAncientScript, ANCIENT_SCRIPT_NOTE } from './ancientScripts';
 
+// The honest line under the record. It never hides a failure, and it never lets a
+// machine's wording in a tongue nobody can check pass as an inscription.
 export default function LanguageStatus() {
   const { chosen, translationError, retryLanguage } = useSiteLanguage();
-  if (!translationError && chosen !== 'chr') return null;
+  const note = isAncientScript(chosen)
+    ? ANCIENT_SCRIPT_NOTE
+    : chosen === 'chr' ? 'Cherokee is machine-translated, not checked by a speaker.' : '';
+  if (!translationError && !note) return null;
   return (
     <div data-no-translate className="border-t border-record-signal/20 px-5 py-2 text-[11px] font-mono leading-relaxed text-record-paper/80">
       {translationError ? (
@@ -11,7 +17,7 @@ export default function LanguageStatus() {
           <span>{translationError}</span>
           <button type="button" onClick={retryLanguage} className="shrink-0 border border-record-signal px-2 py-1 text-record-paper focus-visible:outline focus-visible:outline-record-signal">Try again</button>
         </div>
-      ) : <p>Cherokee is machine-translated, not checked by a speaker.</p>}
+      ) : <p>{note}</p>}
     </div>
   );
 }

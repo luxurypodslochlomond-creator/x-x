@@ -8,11 +8,23 @@
 // ends up in two or three languages at once: Gaelic left standing under an Italian
 // heading, a Spanish headline re-translated into Scots.
 //
-// So every word we produce is remembered in here. Nothing in this store is ever asked to
-// be translated again, and nothing in it is ever treated as a source.
+// So every word we produce is remembered in here, held apart per tongue — a French word
+// never blocks the Spanish for the same English — and nothing in this store is ever asked
+// to be translated again, or treated as a source.
 
-const produced = new Set();
+const produced = new Map();
 let loaded = false;
+
+const bucket = (lang) => {
+  const key = String(lang || 'und');
+  if (!produced.has(key)) produced.set(key, new Set());
+  return produced.get(key);
+};
+
+const add = (lang, values) => {
+  const set = bucket(lang);
+  values.forEach((v) => { if (typeof v === 'string' && v.trim()) set.add(v.trim()); });
+};
 
 // Tongues already translated on this device are ours too — a reader who comes back, or
 // switches back, must never see them translated a second time.
@@ -23,9 +35,11 @@ function loadFromDevice() {
     for (const key of keys) {
       if (!key) continue;
       // A tongue as it stands now — made from the English, never from another tongue.
-      if (key.startsWith('uf51_tongue_')) {
+      // The record's own hand-written copy is held the same way, under its own key.
+      const match = /^(?:uf51_tongue_|climate51_t_)(.+)$/.exec(key);
+      if (match) {
         const dict = JSON.parse(localStorage.getItem(key) || '{}');
-        Object.values(dict).forEach((v) => { if (typeof v === 'string' && v) produced.add(v.trim()); });
+        add(match[1], Object.values(dict || {}));
       }
       // Words from before the record had one engine. Some were made out of other translations,
       // so they are neither trusted nor kept: they come off the device.
@@ -36,14 +50,14 @@ function loadFromDevice() {
   } catch { /* private mode — we simply start with nothing remembered */ }
 }
 
-export function producedWords() {
+export function producedWords(lang) {
   if (!loaded) { loaded = true; loadFromDevice(); }
-  return produced;
+  return bucket(lang);
 }
 
 // A page that translates its own copy tells us what it put on the screen, so the shared
 // engine leaves those words exactly where they are.
-export function markProduced(values) {
+export function markProduced(values, lang) {
   if (!values) return;
-  values.forEach((v) => { if (typeof v === 'string' && v.trim()) produced.add(v.trim()); });
+  add(lang, values);
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Languages, X } from 'lucide-react';
 import { LANGS, useSiteLanguage } from '@/components/shared/SiteLanguage';
-import { refuseAncientScript } from '@/components/climate/ancientScripts';
 
 // The one language control for the whole platform. Reads and writes the same choice the
 // record uses, so a tongue picked here is already picked when the reader opens the record.
@@ -26,12 +25,11 @@ export default function LanguageButton({ tone = 'dark' }) {
     return () => clearTimeout(timer);
   }, [open]);
 
-  // An ancient script is refused in the open, never quietly swapped for a machine's guess.
+  // Every tongue is taken, ancient scripts included — the whole platform goes into the
+  // reader's script, and the record says plainly when an ancient wording cannot be checked.
   const commitOther = () => {
     const typed = other.trim();
     if (!typed) return;
-    const refused = refuseAncientScript(typed);
-    if (refused) { setRefusal(refused); return; }
     setRefusal('');
     setLanguage(typed);
     setOther('');

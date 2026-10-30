@@ -26,14 +26,9 @@ export default async function(req) {
       return Response.json({ translations: strings || {}, kept: 0, made: 0 });
     }
 
-    // An ancient script is refused at the door, not invented. Nobody alive can check a
-    // machine's wording in it, so anything produced would be a guess published as fact.
-    // Refused here as well as in the reader's own language box, because a call can arrive
-    // without going through it. The reader keeps English; nothing false reaches the page.
-    if (isRefusedScript(String(lang))) {
-      console.log('refused an ancient script:', lang);
-      return Response.json({ translations: null, refused: true }, { status: 200 });
-    }
+    // Every tongue is made, ancient scripts included. What a machine cannot check is said
+    // out loud on the page instead of being quietly withheld: a reader is never left in
+    // English because their script is old.
 
     const asked = Object.values(strings).filter(s => typeof s === 'string' && s.trim());
     if (!asked.length) return Response.json({ translations: strings, kept: 0, made: 0 });
@@ -90,23 +85,6 @@ export default async function(req) {
   }
 }
 
-// ── SCRIPTS THE RECORD WILL NOT PUT A MACHINE'S WORDS INTO ──
-// The scripts below have no living community writing them, so a machine's wording in them
-// cannot be checked by anyone. A real inscription is still welcome on the record as a quoted
-// line, with its published reading and its source named beside it. Kept in step with the
-// reader's own language box (src/components/climate/ancientScripts.js).
-const REFUSED_SCRIPTS = [
-  'hieroglyph', 'hieratic', 'egyptian demotic', 'ancient egyptian', 'middle egyptian', 'old egyptian',
-  'cuneiform', 'sumerian', 'akkadian', 'hittite', 'elamite',
-  'linear a', 'linear b', 'rongorongo', 'proto-sinaitic', 'ugaritic', 'oracle bone',
-  'maya glyph', 'mayan glyph', 'maya hieroglyph', 'mayan hieroglyph', 'maya script', 'mayan script',
-];
-
-function isRefusedScript(lang) {
-  const asked = lang.toLowerCase();
-  return REFUSED_SCRIPTS.some(term => asked.includes(term));
-}
-
 async function holdTongue(base44, lang) {
   try {
     const rows = await base44.asServiceRole.entities.ClimateTongue.filter({ lang });
@@ -151,7 +129,21 @@ async function makeWords(base44, words, lang) {
   return out;
 }
 
+// A word the model stumbled on must never cost the reader the rest of the page: whatever
+// comes back missing is asked for again, half at a time, before the record gives up on it.
 async function askOnce(base44, words, lang) {
+  const first = await askModel(base44, words, lang);
+  const missing = words.filter(w => !first[w]);
+  if (!missing.length) return first;
+  const out = { ...first };
+  const cut = Math.ceil(missing.length / 2);
+  for (const half of [missing.slice(0, cut), missing.slice(cut)]) {
+    if (half.length) Object.assign(out, await askModel(base44, half, lang));
+  }
+  return out;
+}
+
+async function askModel(base44, words, lang) {
   const payload = Object.fromEntries(words.map((w, i) => ['w' + i, w]));
 
   // A frame word never stands alone: it is a name for a place on the record, and the reader
@@ -162,9 +154,21 @@ async function askOnce(base44, words, lang) {
     ? `\n\nSome of these are the record's own frame — the words of its navigation bar, its footer and its masthead, read on every page with no sentence around them. Translate each one as the thing it means here, in the noun sense a place is named with, short and plain — never as the same word standing alone, and never as a verb:\n${frame.map(w => `- "${w}" — ${RECORD_CHROME[w]}`).join('\n')}`
     : '';
 
+  // A tongue named in its own terms is taken as that tongue. The Anunnaki wrote in Sumerian,
+  // Easter Island's glyphs are Rongorongo, so a reader who arrives with either word is given
+  // the script they meant rather than a guess at a language that does not exist.
+  const NAMED = {
+    annunaki: 'Sumerian (cuneiform, the script of the Anunnaki inscriptions)',
+    anunnaki: 'Sumerian (cuneiform, the script of the Anunnaki inscriptions)',
+    'ancient sumerian': 'Sumerian (cuneiform)',
+    rongorongo: 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
+    'easter island': 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
+    'easter island script': 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
+  };
+  const named = NAMED[String(lang).trim().toLowerCase()];
   const target = /^(chr|cherokee|tsalagi|ᏣᎳᎩ)$/i.test(String(lang).trim())
     ? 'Cherokee (ᏣᎳᎩ, ISO 639-3 chr), written in the Cherokee syllabary, not Latin transliteration. Cherokee is a living language. Do not invent words: return an empty value for any wording you cannot translate reliably'
-    : lang;
+    : (named || lang);
   const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${target} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain.${frameNote} Return ONLY the JSON object.
 
 JSON:

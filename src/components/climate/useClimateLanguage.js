@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
+import { markProduced } from '@/components/shared/translationMemory';
 
 // ── EVERY TONGUE · NOBODY LEFT BEHIND ──
 // Janine's "all languages" spec, lifted to shared ground: a broad preset list, and
@@ -65,6 +66,11 @@ export const LANGS = [
   { code: 'chr', label: 'Cherokee (Tsalagi)' },
   { code: 'la', label: 'Latina (Latin)' },
   { code: 'grc', label: 'Ἀρχαία ἑλληνική (Ancient Greek)' },
+  { code: 'egy', label: '𓂀 Ancient Egyptian (hieroglyphs)' },
+  { code: 'sux', label: '𒀭 Sumerian (cuneiform)' },
+  { code: 'akk', label: 'Akkadian (cuneiform)' },
+  { code: 'annunaki', label: '𒀭 Annunaki (Sumerian)' },
+  { code: 'rongorongo', label: '🗿 Rongorongo (Easter Island)' },
 ];
 
 export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
@@ -90,28 +96,48 @@ export function useClimateLanguage(baseStrings) {
 
   const chosen = lang === 'auto' ? autoLang : lang;
 
+  // ── ONE TONGUE FOR THE WHOLE RECORD, PAGE BY PAGE ADDED TO IT ──
+  // A tongue is held as one dictionary of English word → that tongue, so every page adds
+  // to the same tongue instead of the first page's wording standing in for all of them.
+  // That is what left a reader with a translated top and an English body: the page read a
+  // dictionary made from another page's words, and its own words were never asked for.
+  // Only what the tongue is actually missing is asked for, and every reply is merged in.
+  const stringsKey = JSON.stringify(baseStrings || {});
+
   useEffect(() => {
     if (!chosen || chosen === 'auto' || chosen === 'en') { setLiveStrings(null); return; }
-    const cacheKey = 'climate51_t_support_' + chosen;
-    try {
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) { setLiveStrings(JSON.parse(cached)); return; }
-    } catch { /* ignore */ }
+    const cacheKey = 'climate51_t_' + chosen;
+    let dict = {};
+    try { dict = JSON.parse(localStorage.getItem(cacheKey) || '{}') || {}; } catch { dict = {}; }
+
+    // What the page shows for each of its own words: the tongue if the tongue has it,
+    // the English if it does not — so no word is ever dropped from the page.
+    const settle = () => {
+      markProduced(Object.values(dict), chosen);
+      setLiveStrings(Object.fromEntries(Object.entries(baseStrings || {})
+        .map(([key, value]) => [key, (typeof value === 'string' && dict[value]) || value])));
+    };
+
+    const english = [...new Set(Object.values(baseStrings || {}).filter((value) => typeof value === 'string' && value.trim()))];
+    const need = english.filter((word) => !dict[word]);
+    if (!need.length) { settle(); return; }
+
     let cancelled = false;
     setTranslating(true);
-    base44.functions.invoke('translateClimate', { lang: chosen, strings: { ...baseStrings } })
-      .then(res => {
-        if (cancelled) return;
-        const out = res?.data?.translations || res?.translations;
-        if (out && out.heading) {
-          setLiveStrings(out);
-          try { localStorage.setItem(cacheKey, JSON.stringify(out)); } catch { /* storage full */ }
-        }
+    const strings = Object.fromEntries(need.map((word, index) => ['s' + index, word]));
+    base44.functions.invoke('translateClimate', { lang: chosen, strings })
+      .then((res) => {
+        const out = res?.data?.translations || res?.translations || {};
+        need.forEach((word, index) => {
+          const value = out['s' + index];
+          if (typeof value === 'string' && value.trim()) dict[word] = value.trim();
+        });
+        try { localStorage.setItem(cacheKey, JSON.stringify(dict)); } catch { /* storage full */ }
       })
-      .catch(() => { /* fall back to English silently */ })
-      .finally(() => { if (!cancelled) setTranslating(false); });
+      .catch(() => { /* the words we already hold are still shown */ })
+      .finally(() => { if (!cancelled) { settle(); setTranslating(false); } });
     return () => { cancelled = true; };
-  }, [chosen, baseStrings]);
+  }, [chosen, stringsKey]);
 
   const setLanguage = (code) => {
     setLang(code);

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
-import { refuseAncientScript } from './ancientScripts';
+
 import TonguePickerDialog from '@/components/climate/TonguePickerDialog';
 import TonguePickerPanel from '@/components/climate/TonguePickerPanel';
 
@@ -83,12 +83,12 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     setOtherOpen(false);
   };
   const choose = (code) => { onChange(code); close(); };
+  // Every tongue is taken, ancient scripts included. Nothing is refused at the door: the
+  // whole record goes into the reader's script, and the page says out loud that an ancient
+  // wording is a machine's attempt that nobody alive can check.
   const commit = () => {
     const typed = manual.trim();
     if (!typed) return;
-    // An ancient script is refused here in the open, never quietly swapped for a guess.
-    const refused = refuseAncientScript(typed);
-    if (refused) { setRefusal(refused); return; }
     setRefusal('');
     onChange(typed);
     setManual('');

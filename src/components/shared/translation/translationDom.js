@@ -1,6 +1,15 @@
+import { producedWords } from '@/components/shared/translationMemory';
+
 const tracked = new Map();
 const SKIP = 'script, style, noscript, code, pre, textarea, select, option, [data-no-translate], [translate="no"], [contenteditable="true"]';
 const KEEP = new Set(['X = X', 'UF51', 'SORTED', 'CB51', 'PETSOUNDS51', 'PET SOUNDS51', 'ZAPP', 'MAGIC51', 'LEARN51', 'TRACKT', 'BUZZSTOP', 'BUZZTRIP', 'CTRL51', 'SHED51', 'PROF51', 'EARTH51', 'ALETHEIA', 'HORIZON INTERNATIONAL']);
+
+// Our own wording is never a source. Without this a page that already carries the
+// record's own translation had that translation translated again — the "dupes": two
+// tongues standing on one page, one of them made out of the other. Held per tongue, so a
+// French word never blocks the Spanish for the same English.
+const tongue = () => document.documentElement.dataset.tongue || 'und';
+const ours = (text) => producedWords(tongue()).has(text);
 
 const read = (node) => node.nodeType === Node.TEXT_NODE ? node.nodeValue : node.getAttribute('placeholder');
 const parentOf = (node) => node.nodeType === Node.TEXT_NODE ? node.parentElement : node;
@@ -47,7 +56,7 @@ export function visitWord(node, dict, english = false) {
     tracked.set(node, entry);
   }
   const source = entry.source.trim();
-  if (english || !source || KEEP.has(source.toUpperCase()) || !/\p{L}/u.test(source) || /^(https?:\/\/|\S+@\S+\.\S+)/i.test(source)) {
+  if (english || !source || KEEP.has(source.toUpperCase()) || ours(source) || !/\p{L}/u.test(source) || /^(https?:\/\/|\S+@\S+\.\S+)/i.test(source)) {
     write(node, entry.source, entry);
     return null;
   }

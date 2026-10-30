@@ -1,30 +1,26 @@
-// ── SCRIPTS THE RECORD WILL NOT PUT A MACHINE'S WORDS INTO ──
-// Every other tongue here can be checked by people who actually speak it. These cannot.
-// The scripts below have no living community writing them, so a machine's wording in them
-// could not be checked by anyone — and a guess printed in the record's own voice is exactly
-// the thing the record exists to refuse.
+// ── ANCIENT SCRIPTS ──
+// The record carries machine wording into every tongue a reader asks for, ancient scripts
+// included: hieroglyphs, cuneiform, Linear B. Nobody alive writes some of these, so a
+// machine's wording in them cannot be checked by anyone — and the record never pretends
+// otherwise. The note below stands on the page while such a tongue is chosen, so what a
+// reader gets is the whole record in their script, marked honestly as a machine's attempt.
 //
-// This is not a closed door. A real inscription is welcome as a quoted line: the signs
-// themselves, the published reading, and the source named beside it — somebody's actual
-// work, carried, never invented.
-//
-// Matched against the words a reader types, so "Egyptian hieroglyphs", "cuneiform" and
-// "Mayan glyphs" are refused — while living languages that merely sound close (Mayan
-// languages such as Yucatec or K'iche', Demotic Greek) are left alone.
+// A real inscription, quoted with its reading and its source named beside it, is still the
+// stronger door, and that door stays open.
 
-const REFUSED = [
-  'hieroglyph', 'hieratic', 'egyptian demotic', 'ancient egyptian', 'middle egyptian', 'old egyptian',
-  'cuneiform', 'sumerian', 'akkadian', 'hittite', 'elamite',
-  'linear a', 'linear b', 'rongorongo', 'proto-sinaitic', 'ugaritic', 'oracle bone',
+const ANCIENT = [
+  'hieroglyph', 'hieratic', 'egyptian demotic', 'ancient egyptian', 'middle egyptian', 'old egyptian', 'egy',
+  'cuneiform', 'sumerian', 'akkadian', 'hittite', 'elamite', 'sux', 'akk',
+  'linear a', 'linear b', 'rongorongo', 'easter island', 'annunaki', 'anunnaki', 'proto-sinaitic', 'ugaritic', 'oracle bone',
   'maya glyph', 'mayan glyph', 'maya hieroglyph', 'mayan hieroglyph', 'maya script', 'mayan script',
 ];
 
-// The plain answer a reader gets instead, said once in the same words wherever they type.
-export const ANCIENT_SCRIPT_REFUSAL =
-  "The record will not machine-translate an ancient script: nobody alive can check a machine's wording in it, so it would be a guess printed as fact. A real inscription, quoted with its source named beside it, is the honest door — and that door is open.";
+// Said plainly, wherever such a tongue is read.
+export const ANCIENT_SCRIPT_NOTE =
+  "Machine wording in an ancient script — nobody alive can check it. Read it as a machine's attempt, not an inscription.";
 
-export function refuseAncientScript(text) {
+export function isAncientScript(text) {
   const asked = String(text || '').toLowerCase();
-  if (!asked.trim()) return null;
-  return REFUSED.some(term => asked.includes(term)) ? ANCIENT_SCRIPT_REFUSAL : null;
+  if (!asked.trim()) return false;
+  return ANCIENT.includes(asked) || ANCIENT.some(term => asked.includes(term));
 }
