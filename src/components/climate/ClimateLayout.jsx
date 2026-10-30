@@ -25,6 +25,7 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // is handed the link, and finds it again at the foot of any page of the record.
 const FOOTER_LINKS = [
   { label: 'The Buttons', page: 'ClimateGuide' },
+  { label: 'Handover', page: 'ClimateHost' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
@@ -89,7 +90,7 @@ export default function ClimateLayout({ children, currentPage }) {
   useEffect(() => {
     if (navigator.connection?.saveData) return;
     const timer = setTimeout(() => {
-      ['TogetherChangeClimate', 'ClimateSearch', 'ClimateWire', 'ClimateMethod', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateTerms', 'ClimatePrivacy']
+      ['TogetherChangeClimate', 'ClimateSearch', 'ClimateWire', 'ClimateMethod', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateHost', 'ClimateTerms', 'ClimatePrivacy']
         .forEach(prefetchPath);
     }, 1200);
     return () => clearTimeout(timer);
