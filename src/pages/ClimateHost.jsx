@@ -51,6 +51,17 @@ export default function ClimateHost() {
         not built, and names what it would take.
       </p>
 
+      {/* The page's own address, at the top, because the thing Brian actually needs to do
+          with this page is send it. One line, one button, no hunting in a footer. */}
+      <div className="border-2 border-[#141210] bg-[#f7f1e5] px-3 py-2.5 mb-8 lg:mb-10 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">This page, to send</p>
+          <p className="text-[11px] lg:text-[12px] font-mono text-[#141210] break-all mt-1">{recordAddress(createPageUrl('ClimateHost'))}</p>
+          <p className="text-[10px] font-mono text-[#5a5246] leading-snug mt-1">One link. It opens this page on the record. Nothing to install, no account, no sign-in.</p>
+        </div>
+        <CopyLine text={recordAddress(createPageUrl('ClimateHost'))} label="Copy" />
+      </div>
+
       <HostAnswer
         n="01"
         ask="Please remove music and any other background trials that need to be cleared from the platform."
