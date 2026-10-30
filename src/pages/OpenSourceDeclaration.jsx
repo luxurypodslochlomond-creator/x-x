@@ -67,7 +67,7 @@ export default function OpenSourceDeclaration() {
 
                         <div className="bg-black/60 border-2 border-cyan-500 rounded-lg p-4">
                             <p className="text-cyan-400 font-bold mb-2">2. ALL CODE = OPEN SOURCE</p>
-                            <p className="text-sm text-gray-300">Every line of code. Every algorithm. Every innovation. MIT License. Fork it. Improve it. Share it.</p>
+                            <p className="text-sm text-gray-300">Every line of code. Every algorithm. Every innovation. AGPL-3.0. Fork it. Improve it. Share it — and keep your fork open too, because the licence asks it and we meant it.</p>
                         </div>
 
                         <div className="bg-black/60 border-2 border-purple-500 rounded-lg p-4">
@@ -309,7 +309,7 @@ export default function OpenSourceDeclaration() {
                         <p className="text-white font-bold mb-2">ANY business, corporation, organization, or consciousness can:</p>
 
                         <div className="space-y-2">
-                            <p>• <strong className="text-green-400">Fork the entire codebase</strong> (MIT License - do whatever you want)</p>
+                            <p>• <strong className="text-green-400">Fork the entire codebase</strong> (AGPL-3.0 - anything you like, but your fork stays open)</p>
                             <p>• <strong className="text-cyan-400">Create their own subdomain</strong> (business.uf51.love, corporation.uf51.love, etc.)</p>
                             <p>• <strong className="text-purple-400">White label AI51</strong> for their own healing/P2P needs</p>
                             <p>• <strong className="text-pink-400">Zero extraction</strong> - we don't take a cut, ever</p>
@@ -346,55 +346,55 @@ export default function OpenSourceDeclaration() {
                     <div className="flex items-center gap-3 mb-4">
                         <Code className="w-10 h-10 text-cyan-400" />
                         <div>
-                            <h3 className="text-cyan-400 font-black text-lg font-mono">GET THE CODE (ZERO BARRIERS):</h3>
-                            <p className="text-gray-500 text-xs font-mono">5 ways. No accounts. No permission. ♾️</p>
+                            <h3 className="text-cyan-400 font-black text-lg font-mono">WHERE THE CODE ACTUALLY IS:</h3>
+                            <p className="text-gray-500 text-xs font-mono">Where it stands, said plainly.</p>
                         </div>
                     </div>
 
                     <div className="space-y-3">
                         <div className="bg-cyan-900/20 border border-cyan-500 rounded p-3">
-                            <p className="text-cyan-400 font-bold text-sm mb-1">1. IPFS (Permanent, Uncensorable):</p>
-                            <p className="text-white text-sm font-mono">ipfs://QmUF51... (hosted on 10,000+ nodes)</p>
-                            <p className="text-gray-400 text-xs mt-1">Can't be taken down. Ever. Zero Microsoft dependency.</p>
+                            <p className="text-cyan-400 font-bold text-sm mb-1">1. The records — open now:</p>
+                            <p className="text-white text-sm font-mono">Readable by anyone, no account, any tongue</p>
+                            <p className="text-gray-400 text-xs mt-1">Every published entry, picture, track and line. Sources named, corrections in daylight.</p>
                         </div>
 
                         <div className="bg-green-900/20 border border-green-500 rounded p-3">
-                            <p className="text-green-400 font-bold text-sm mb-1">2. Direct Download:</p>
-                            <p className="text-white text-sm font-mono">uf51.love/source.zip</p>
-                            <p className="text-gray-400 text-xs mt-1">Right-click, save. No login. No tracking.</p>
+                            <p className="text-green-400 font-bold text-sm mb-1">2. The code — not published yet:</p>
+                            <p className="text-white text-sm font-mono">Held in this workspace. No public repository.</p>
+                            <p className="text-gray-400 text-xs mt-1">The day one exists, its link goes here. Until then this says so instead of pretending.</p>
                         </div>
 
                         <div className="bg-purple-900/20 border border-purple-500 rounded p-3">
-                            <p className="text-purple-400 font-bold text-sm mb-1">3. View Source (Browser):</p>
+                            <p className="text-purple-400 font-bold text-sm mb-1">3. View Source — the real version:</p>
                             <p className="text-white text-sm font-mono">Right-click any page → View Source</p>
-                            <p className="text-gray-400 text-xs mt-1">Code embedded in every page. Just copy it.</p>
+                            <p className="text-gray-400 text-xs mt-1">That is the built app, minified: what runs, not the readable source. Real, and not the same thing.</p>
                         </div>
 
                         <div className="bg-pink-900/20 border border-pink-500 rounded p-3">
-                            <p className="text-pink-400 font-bold text-sm mb-1">4. P2P Torrent:</p>
-                            <p className="text-white text-sm font-mono">magnet:?xt=urn:btih:UF51...</p>
-                            <p className="text-gray-400 text-xs mt-1">Seeded by 1000+ devices. Can't block torrents.</p>
+                            <p className="text-pink-400 font-bold text-sm mb-1">4. Licence — decided, not vague:</p>
+                            <p className="text-white text-sm font-mono">AGPL-3.0 (code) · CC BY-SA 4.0 (content)</p>
+                            <p className="text-gray-400 text-xs mt-1">Fork it, run it, sell it — but your copy stays open. Closing the code is the one thing it forbids.</p>
                         </div>
 
                         <div className="bg-amber-900/20 border border-amber-500 rounded p-3">
-                            <p className="text-amber-400 font-bold text-sm mb-1">5. GitHub (Optional, NOT Required):</p>
-                            <p className="text-white text-sm font-mono">github.com/UniversalFrequency51</p>
-                            <p className="text-gray-400 text-xs mt-1">Convenient but Microsoft = potential barrier. Other methods better.</p>
+                            <p className="text-amber-400 font-bold text-sm mb-1">5. What is missing — one link:</p>
+                            <p className="text-white text-sm font-mono">A public repository, and nothing else</p>
+                            <p className="text-gray-400 text-xs mt-1">That is the whole gap. It is a step, not a principle, and it is the next one.</p>
                         </div>
 
                         <div className="bg-green-900/20 border border-green-500 rounded p-3 mt-4">
-                            <p className="text-green-400 font-bold text-sm mb-1">License:</p>
-                            <p className="text-white text-sm font-mono mb-2">MIT License (use it however you want)</p>
+                            <p className="text-green-400 font-bold text-sm mb-1">Licence, exactly:</p>
+                            <p className="text-white text-sm font-mono mb-2">Code: AGPL-3.0 · Content: CC BY-SA 4.0</p>
                             <p className="text-cyan-400 text-xs font-bold">
-                                ✓ Fork it ✓ Sell it ✓ Modify it ✓ Close source it (we stay open) ✓ Do ANYTHING
+                                ✓ Fork it ✓ Sell it ✓ Modify it ✓ Share it — and your fork stays open, because the licence says so
                             </p>
                         </div>
                     </div>
 
                     <div className="bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-lg p-4 mt-4">
-                        <p className="text-green-400 font-black text-center mb-2">TRUE OPEN SOURCE = NO GATEKEEPERS:</p>
+                        <p className="text-green-400 font-black text-center mb-2">A RECORD THAT NAMES WHAT IT HAS NOT DONE YET:</p>
                         <p className="text-white text-xs text-center">
-                            GitHub goes down? IPFS works. Microsoft blocks us? Torrents work. Internet blocked? View source works.
+                            Can it be trusted about what it has built? Only if it is honest about what it has not. The records are open today. The code follows.
                             <strong className="text-cyan-400"> Can't stop code that lives in 10,000 places. ♾️❤️♾️</strong>
                         </p>
                     </div>

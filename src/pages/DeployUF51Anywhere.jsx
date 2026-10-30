@@ -103,22 +103,22 @@ export default function DeployUF51Anywhere() {
                             
                             <div className="space-y-3">
                                 <div className="bg-green-900/20 border-2 border-green-500 rounded p-4">
-                                    <p className="text-green-400 font-bold text-sm mb-2">🌍 GET THE CODE (ZERO BARRIERS):</p>
+                                    <p className="text-green-400 font-bold text-sm mb-2">🌍 WHERE THE CODE ACTUALLY IS:</p>
                                     <div className="space-y-2">
                                         <div className="bg-black/60 border border-cyan-500 rounded p-3">
-                                            <p className="text-cyan-400 font-bold text-xs mb-2">OPTION 1: IPFS (NO GITHUB NEEDED):</p>
+                                            <p className="text-cyan-400 font-bold text-xs mb-2">OPTION 1: THE CODE — NOT PUBLISHED YET:</p>
                                             <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
-                                                ipfs://QmUF51code (permanent, uncensorable)
+                                                held in this workspace · no public repository
                                             </code>
-                                            <p className="text-gray-400 text-xs">Can't be taken down. Lives on 10,000+ nodes. Zero Microsoft dependency.</p>
+                                            <p className="text-gray-400 text-xs">Said plainly so the rest of this page can be trusted. The link goes here the day it exists.</p>
                                         </div>
                                         
                                         <div className="bg-black/60 border border-purple-500 rounded p-3">
-                                            <p className="text-purple-400 font-bold text-xs mb-2">OPTION 2: DIRECT DOWNLOAD:</p>
+                                            <p className="text-purple-400 font-bold text-xs mb-2">OPTION 2: THE RECORDS — OPEN NOW:</p>
                                             <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
-                                                uf51.love/source.zip (no account needed)
+                                                uf51.love/TogetherChangeClimate
                                             </code>
-                                            <p className="text-gray-400 text-xs">Right-click, save. No login. No tracking. Just code.</p>
+                                            <p className="text-gray-400 text-xs">Every published entry, picture and track, readable by anyone. No account, no tracking, no permission.</p>
                                         </div>
 
                                         <div className="bg-black/60 border border-pink-500 rounded p-3">
@@ -126,23 +126,23 @@ export default function DeployUF51Anywhere() {
                                             <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
                                                 Right-click page → View Source → Copy all
                                             </code>
-                                            <p className="text-gray-400 text-xs">Code embedded in every page. Zero barriers. Just copy.</p>
+                                            <p className="text-gray-400 text-xs">That is the built app, minified: what runs, not the readable source.</p>
                                         </div>
 
                                         <div className="bg-black/60 border border-green-500 rounded p-3">
-                                            <p className="text-green-400 font-bold text-xs mb-2">OPTION 4: P2P TORRENT:</p>
+                                            <p className="text-green-400 font-bold text-xs mb-2">OPTION 4: LICENCE — ALREADY DECIDED:</p>
                                             <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
-                                                magnet:?xt=urn:btih:UF51... (BitTorrent)
+                                                AGPL-3.0 (code) · CC BY-SA 4.0 (content)
                                             </code>
-                                            <p className="text-gray-400 text-xs">Seeded by 1000+ devices. Always available. Can't block torrents.</p>
+                                            <p className="text-gray-400 text-xs">Fork it, run it, sell it — your copy stays open. Closing the code is the one thing it forbids.</p>
                                         </div>
 
                                         <div className="bg-black/60 border border-amber-500 rounded p-3">
-                                            <p className="text-amber-400 font-bold text-xs mb-2">OPTION 5: GitHub (OPTIONAL):</p>
+                                            <p className="text-amber-400 font-bold text-xs mb-2">OPTION 5: WHAT IS MISSING — ONE LINK:</p>
                                             <code className="block bg-black px-2 py-1 text-xs text-white font-mono mb-1">
-                                                github.com/UniversalFrequency51/uf51
+                                                a public repository, and nothing else
                                             </code>
-                                            <p className="text-gray-400 text-xs">Convenient but NOT required. Microsoft can't gatekeep us.</p>
+                                            <p className="text-gray-400 text-xs">That is the whole gap between this page and the promise. It is a step, not a principle.</p>
                                         </div>
                                     </div>
                                     <p className="text-green-400 font-bold text-xs mt-3 text-center">
@@ -320,7 +320,7 @@ export default function DeployUF51Anywhere() {
                             <Code className="w-10 h-10 text-pink-400 mb-3 mx-auto" />
                             <p className="text-pink-400 font-black text-center mb-2">DEVELOPERS</p>
                             <p className="text-gray-300 text-xs text-center">
-                                Fork, improve, contribute back. MIT License = do what you want. Just share improvements.
+                                Fork, improve, contribute back. AGPL-3.0 = anything you like, but your fork stays open.
                             </p>
                         </div>
                         <div className="bg-black border-2 border-yellow-500 rounded-lg p-4">
@@ -419,7 +419,7 @@ export default function DeployUF51Anywhere() {
                                 <div className="bg-green-900/20 border border-green-500 rounded p-3">
                                     <p className="text-green-400 font-bold mb-1">Steps:</p>
                                     <ol className="space-y-1 ml-4 list-decimal">
-                                        <li>Fork UF51 (MIT License - legal for govt use)</li>
+                                        <li>Fork UF51 (AGPL-3.0 - legal for govt use)</li>
                                         <li>Deploy: scotland-healing.gov.uk (own domain)</li>
                                         <li>Promote via NHS Scotland / public health</li>
                                         <li>Citizens install PWA on phones</li>
@@ -521,7 +521,7 @@ export default function DeployUF51Anywhere() {
                         <div className="bg-black border-4 border-cyan-500 rounded-xl p-4">
                             <p className="text-cyan-400 font-black text-sm mb-3">✅ LEGAL/ETHICAL COMPLETE:</p>
                             <ul className="space-y-1 text-xs text-white">
-                                <li>✓ Open source (MIT License)</li>
+                                <li>✓ Open source (AGPL-3.0)</li>
                                 <li>✓ Zero patents (public domain)</li>
                                 <li>✓ Privacy-first (P2P = no tracking)</li>
                                 <li>✓ Frequency-locked (can't weaponize)</li>

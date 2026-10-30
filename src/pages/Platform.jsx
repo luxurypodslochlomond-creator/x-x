@@ -9,33 +9,33 @@ import { platformSupporterCheckout } from '@/functions/platformSupporterCheckout
 const OPEN_APIS = [
   {
     name: "Learn51 AI",
-    endpoint: "/api/learn",
+    endpoint: "endpoint comes with your key",
     description: "Socratic tutoring engine. Supports 40+ languages. Returns structured lesson content with follow-up questions. No user data stored server-side.",
     what_you_can_build: "Tutoring apps, classroom tools, homework assistants, language learning platforms, accessibility tools for neurodiverse learners.",
     color: "#06b6d4",
-    status: "open",
+    status: "beta",
     free_tier: "1,000 req/month",
-    example: `fetch('https://uf51.love/api/learn', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    question: "Why is the sky blue?",\n    age: 9,\n    language: "en"\n  })\n})`
+    example: `fetch('<endpoint from your key>', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    question: "Why is the sky blue?",\n    age: 9,\n    language: "en"\n  })\n})`
   },
   {
     name: "Healing Frequencies",
-    endpoint: "/api/frequencies",
+    endpoint: "endpoint comes with your key",
     description: "Database of 500+ frequency protocols referenced against published research. Returns Hz values, durations, and source citations. Covers sleep, pain, anxiety, focus. Human and animal protocols.",
     what_you_can_build: "Wellness apps, sleep tools, meditation platforms, clinical ambient systems, veterinary sound therapy tools.",
     color: "#ec4899",
-    status: "open",
+    status: "beta",
     free_tier: "1,000 req/month",
-    example: `fetch('https://uf51.love/api/frequencies', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    condition: "anxiety",\n    species: "human"\n  })\n})`
+    example: `fetch('<endpoint from your key>', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    condition: "anxiety",\n    species: "human"\n  })\n})`
   },
   {
     name: "Cleanup Intelligence",
-    endpoint: "/api/cleanup",
+    endpoint: "endpoint comes with your key",
     description: "Litter photo verification via AI. Returns weight estimate (kg), detected items, brand identification, GPS validation, and fraud risk score. All submissions are IPFS-backed for auditability.",
     what_you_can_build: "Environmental reporting tools, council waste dashboards, school eco programmes, ESG compliance tracking, citizen science apps.",
     color: "#10b981",
-    status: "open",
+    status: "beta",
     free_tier: "500 req/month",
-    example: `fetch('https://uf51.love/api/cleanup', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    photo_url: "https://...",\n    location: { lat: 55.8642, lng: -4.2518 }\n  })\n})`
+    example: `fetch('<endpoint from your key>', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer YOUR_API_KEY',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    photo_url: "https://...",\n    location: { lat: 55.8642, lng: -4.2518 }\n  })\n})`
   },
   {
     name: "AI51 Core",
@@ -57,11 +57,11 @@ const CLOSED_PRODUCTS = [
 
 const WHO_ITS_FOR = [
   { who: "Developers", what: "REST APIs, Bearer token auth, JSON in/out. No proprietary SDK required. Works with any stack.", icon: Code },
-  { who: "Educators & NGOs", what: "Learn51 API is free at 1,000 req/month. Supports 40+ languages. No attribution required.", icon: Globe },
+  { who: "Educators & NGOs", what: "Learn51 is in closed beta now; 1,000 req/month free once it opens. 40+ languages. No attribution required.", icon: Globe },
   { who: "Researchers", what: "Access the frequency database and cleanup dataset. Cite freely. We'll link back to published work.", icon: BookOpen },
   { who: "Artists & Musicians", what: "CB51 is a separate SaaS product, not an open API. Email us for early access.", icon: Music },
   { who: "Health & Wellness", what: "Frequencies API returns Hz, duration, and peer-reviewed citations. Build your own protocol layer.", icon: Heart },
-  { who: "Enterprise & Corporate", what: "Cleanup Intelligence API supports ESG reporting. IPFS audit trail included in every response.", icon: Building },
+  { who: "Enterprise & Corporate", what: "Cleanup Intelligence aims at ESG reporting, with a proof trail behind each submission. Closed beta — ask for a key.", icon: Building },
 ];
 
 const CodeBlock = ({ code }) => {
@@ -87,8 +87,8 @@ const CodeBlock = ({ code }) => {
 };
 
 const PLATFORM_STATS = [
-  { label: "Open APIs (live)", value: "3", icon: Code, color: "#06b6d4" },
-  { label: "Free tier (req/month)", value: "1,000", icon: Activity, color: "#10b981" },
+  { label: "APIs live today", value: "0", icon: Code, color: "#06b6d4" },
+  { label: "Free tier once live", value: "1,000", icon: Activity, color: "#10b981" },
   { label: "User data stored", value: "None", icon: Shield, color: "#ec4899" },
   { label: "UK legal structure", value: "CIC", icon: Building, color: "#f59e0b" },
 ];
@@ -142,7 +142,6 @@ export default function Platform() {
   const activeCurrency = CURRENCIES.find(c => c.code === currency) || CURRENCIES[0];
 
   const handleOneOffDonation = async (amountDisplay, key) => {
-    if (window.self !== window.top) { alert('Checkout works from the published app only.'); return; }
     const isZero = ZERO_DECIMAL_CURRENCIES.includes(currency);
     const amount_pence = isZero ? Math.round(amountDisplay) : Math.round(amountDisplay * 100);
     setSupportLoading(key);
@@ -182,14 +181,14 @@ export default function Platform() {
         >
           <p className="text-[#b3261e] font-mono text-xs tracking-widest mb-6 uppercase">UF51 Open Platform · API Documentation</p>
           <h1 className="text-5xl md:text-6xl font-black leading-tight mb-6">
-            Open APIs.<br />
-            <span className="text-[#b3261e]">Free tier. No sales call.</span>
+            API keys.<br />
+            <span className="text-[#b3261e]">No sales call. No pretending.</span>
           </h1>
           <p className="text-lg text-[#6b6258] max-w-2xl mx-auto leading-relaxed mb-4">
-            Three open REST APIs — AI tutoring, healing frequencies, and litter intelligence. Bearer token auth. JSON in, JSON out. 1,000 free requests per month. Key in your inbox in seconds.
+            Three APIs — AI tutoring, healing frequencies, litter intelligence — are in closed beta. Ask for a key and it lands in your inbox with the exact endpoint for what you are building. Nothing here is live yet, and this page will not say otherwise.
           </p>
           <p className="text-[#6b6258] text-sm">
-            UF51 is a UK-registered Community Interest Company. Open APIs are permanently open. Subscription products fund the infrastructure.
+            UF51 is a UK-registered Community Interest Company. The intent is permanent: open endpoints, free tier, no sales call. Subscription products fund the infrastructure.
           </p>
         </motion.div>
       </div>
@@ -395,8 +394,8 @@ export default function Platform() {
                   <span className="font-mono text-sm px-3 py-1 border" style={{ color: OPEN_APIS[activeApi].color, borderColor: OPEN_APIS[activeApi].color + '40' }}>
                     {OPEN_APIS[activeApi].endpoint}
                   </span>
-                  {OPEN_APIS[activeApi].status === 'open'
-                    ? <span className="text-[#1e3a2b] text-xs font-mono">LIVE</span>
+                  {OPEN_APIS[activeApi].status === 'beta'
+                    ? <span className="text-[#b8860b] text-xs font-mono">CLOSED BETA</span>
                     : <span className="text-[#b8860b] text-xs font-mono">COMING 2026</span>
                   }
                 </div>
@@ -530,8 +529,8 @@ export default function Platform() {
           <div className="grid md:grid-cols-3 gap-6 text-sm">
             <div className="border border-[#1a1612]/15 p-5">
               <p className="text-[#b3261e] font-mono text-xs mb-2">OPEN APIs</p>
-              <p className="font-bold mb-1 text-[#1a1612]">Free. Permanently.</p>
-              <p className="text-[#6b6258]">Learn51, Frequencies, Cleanup Intelligence. 1,000 req/month free. No time limit. Key tied to stated purpose.</p>
+              <p className="font-bold mb-1 text-[#1a1612]">Free, once live.</p>
+              <p className="text-[#6b6258]">Learn51, Frequencies, Cleanup Intelligence — all three in closed beta today. 1,000 req/month free when they open. Key tied to stated purpose.</p>
             </div>
             <div className="border border-[#1a1612]/15 p-5">
               <p className="text-[#b8860b] font-mono text-xs mb-2">SUBSCRIPTIONS</p>
@@ -670,7 +669,7 @@ export default function Platform() {
               );
             })}
           </div>
-          <CodeBlock code={`// Example: healing frequency lookup\nconst res = await fetch('https://uf51.love/api/frequencies', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer uf51_your_key_here',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ condition: 'sleep', species: 'human' })\n});\n\nconst { frequencies, protocols } = await res.json();\n// → [{hz: 432, name: "Deep Sleep", duration_mins: 20}, ...]`} />
+          <CodeBlock code={`// Example: healing frequency lookup\nconst res = await fetch('<endpoint from your key>', {\n  method: 'POST',\n  headers: {\n    'Authorization': 'Bearer uf51_your_key_here',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({ condition: 'sleep', species: 'human' })\n});\n\nconst { frequencies, protocols } = await res.json();\n// → [{hz: 432, name: "Deep Sleep", duration_mins: 20}, ...]`} />
         </div>
 
         {/* CHANGELOG */}

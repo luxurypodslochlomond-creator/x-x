@@ -26,7 +26,7 @@ export default function OpenSourcePage() {
                         The code. The protocols. The math. All visible. Always. Zero secrets.
                     </p>
                     <p className="text-sm text-pink-400 font-mono mt-3">
-                        Zero GitHub corporate. Decentralized IPFS. Pure transparency ♾️❤️♾️
+                        No corporate gatekeeper. No lock on the record. Pure transparency ♾️❤️♾️
                     </p>
                 </header>
 
@@ -175,7 +175,7 @@ export default function OpenSourcePage() {
                                     GitHub = Microsoft = corporate ownership of your code. We refuse that model.
                                 </p>
                                 <p className="text-green-400 font-bold text-sm">
-                                    ✓ UF51 code lives on IPFS (decentralized, uncensorable, eternal)
+                                    The code is not published anywhere yet. When it is, the link is here — no permission needed then either.
                                 </p>
                             </div>
 
@@ -200,7 +200,7 @@ export default function OpenSourcePage() {
                                     </div>
                                 </div>
                                 <p className="text-green-400 font-black text-sm mt-4">
-                                    💚 You don't need our permission to audit the code. It's YOURS. Right now. ♾️
+                                    You do not need our permission to look. What your browser runs is readable today; the readable source follows. ♾️
                                 </p>
                             </div>
 
@@ -301,7 +301,7 @@ export default function OpenSourcePage() {
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4 text-gray-300">
-                        <p className="text-lg font-bold text-white">CC BY-SA 4.0 + MIT Hybrid (Maximum Freedom + Protection)</p>
+                        <p className="text-lg font-bold text-white">AGPL-3.0 for the code · CC BY-SA 4.0 for the content</p>
                         
                         <div className="bg-green-900/30 border-2 border-green-500/50 p-4 rounded-lg mb-4">
                             <p className="text-green-300 font-black mb-2">✓ YOU CAN:</p>
@@ -326,8 +326,8 @@ export default function OpenSourcePage() {
                         </div>
 
                         <div className="p-4 bg-pink-900/20 rounded-lg border-l-4 border-pink-500">
-                            <p className="font-bold text-pink-300 mb-2">Why CC BY-SA + MIT Hybrid?</p>
-                            <p className="text-sm mb-3">MIT = maximum freedom. CC BY-SA = prevents corporate capture.</p>
+                            <p className="font-bold text-pink-300 mb-2">Why copyleft, not MIT?</p>
+                            <p className="text-sm mb-3">MIT lets a fork be closed for ever. AGPL and CC BY-SA do not: your copy stays open, so healing code cannot be privatised.</p>
                             <p className="text-sm text-white">
                                 If you fork UF51 → Your version MUST stay open source. 
                                 <strong className="text-green-400"> Healing code can't be privatized. Love can't be locked away.</strong>
