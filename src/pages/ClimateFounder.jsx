@@ -129,6 +129,9 @@ export default function ClimateFounder() {
               instagram.com/gillianbrowninteriors
             </span>
           </a>
+          <p className="text-[8.5px] font-mono uppercase tracking-[0.14em] text-[#5a5246]/80 mt-1.5 leading-relaxed">
+            For putting up with all of it — and helping build it
+          </p>
 
           <a
             href="https://uf51.love"
