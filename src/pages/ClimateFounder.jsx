@@ -117,7 +117,7 @@ export default function ClimateFounder() {
           </span>
 
           <a
-            href="https://overlochlomond.com"
+            href="https://www.instagram.com/gillianbrowninteriors"
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-2 border border-[#141210]/20 bg-[#efe7d6] px-3 py-2 active:bg-[#e2602a] transition-colors"
@@ -126,7 +126,7 @@ export default function ClimateFounder() {
               Gillian Barbera Brown · GBB
             </span>
             <span className="block text-[9px] font-mono text-[#5a5246] break-all mt-0.5">
-              overlochlomond.com
+              instagram.com/gillianbrowninteriors
             </span>
           </a>
 
