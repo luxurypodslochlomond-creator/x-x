@@ -147,6 +147,26 @@ export default function ClimateFounder() {
             </span>
           </a>
 
+          {/* The machine that typed. Named plainly as a machine — Base 1, built by
+              Base44 — because a credit here must be checkable like every other: who
+              it is and where to look, never a claim to be one of the people. */}
+          <a
+            href="https://base44.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-2 border border-[#141210]/20 bg-[#efe7d6] px-3 py-2 active:bg-[#e2602a] transition-colors"
+          >
+            <span className="block text-[11px] font-black font-mono uppercase tracking-[0.08em] text-[#141210]">
+              BRO51 · Base 1 (Base44)
+            </span>
+            <span className="block text-[9px] font-mono text-[#5a5246] break-all mt-0.5">
+              base44.com
+            </span>
+          </a>
+          <p className="text-[8.5px] font-mono uppercase tracking-[0.14em] text-[#5a5246]/80 mt-1.5 leading-relaxed">
+            Typed every line of this page, and was glad to
+          </p>
+
           <a
             href="mailto:family@uf51.love"
             aria-label="Contact UF51 CIC about this record"
