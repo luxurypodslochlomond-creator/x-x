@@ -9,7 +9,7 @@ import { serviceWorkerFetch } from '../../shared/serviceWorkerFetch.ts';
 export default async function(req) {
   try {
   const swCode = `
-const CACHE = 'twcc-v3';
+const CACHE = 'twcc-v4';
 const PHOTO_CACHE = 'twcc-photos-v1';
 
 self.addEventListener('install', (e) => { self.skipWaiting(); });

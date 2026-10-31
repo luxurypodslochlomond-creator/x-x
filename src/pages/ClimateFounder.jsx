@@ -115,13 +115,11 @@ export default function ClimateFounder() {
             Made in Scotland from photons
           </span>
 
-          <span className="block mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">
+          <p className="mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
             Platform by
-          </span>
-
-          <span className="block mt-1 text-[11px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">
-            Brian Hughes
-          </span>
+            <br />
+            <span className="text-[11px]">Brian Hughes</span>
+          </p>
 
           <a
             href="mailto:family@uf51.love"
