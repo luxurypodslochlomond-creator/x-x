@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import { secrets } from 'base44:runtime';
+import { keeperInbox } from '../../shared/keeperInbox.ts';
 
 // ── A LISTENER LEAVES A LINE ────────────────────────────────────────────────────
 // Why a piece lands cannot be read out of a file, and this record does not ask a
@@ -112,11 +113,11 @@ The listener's line: ${word.slice(0, 600)}`,
 
     // 3. A keeper is told only when a person is actually needed, so "held" never means "forgotten".
     const appUrl = (req.headers.get('x-base44-app-url') || 'https://uf51.love').replace(/\/$/, '');
-    const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
-    if (adminEmail) {
+    const keepers = flagged ? keeperInbox(secrets) : [];
+    for (const keeper of keepers) {
       try {
         await base44.asServiceRole.integrations.Core.SendEmail({
-          to: adminEmail,
+          to: keeper,
           from_name: 'Together We Can Change Climate',
           subject: `A listener's line held for a look: ${String(track.title || 'a track')}`,
           html: `<div style="font-family: monospace; max-width: 500px; margin: 0 auto; padding: 20px; background: #f4efe4;">
@@ -135,7 +136,7 @@ The listener's line: ${word.slice(0, 600)}`,
           </div>`,
         });
       } catch (emailError) {
-        console.error('climateWordSubmit: held-line email failed:', emailError.message);
+        console.error(`climateWordSubmit: held-line email to ${keeper} failed:`, emailError.message);
       }
     }
 

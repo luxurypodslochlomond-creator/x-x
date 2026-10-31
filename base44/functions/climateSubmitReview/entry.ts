@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import { secrets } from 'base44:runtime';
+import { keeperInbox } from '../../shared/keeperInbox.ts';
 
 export default async function(req: Request): Promise<Response> {
   try {
@@ -120,12 +121,12 @@ Content: ${fullContent.slice(0, 2000)}`,
     // The record's real home is the fallback — never the platform's temporary app address,
     // which must not travel out in an email or stand in front of a review panel.
     const appUrl = (req.headers.get('x-base44-app-url') || 'https://uf51.love').replace(/\/$/, '');
-    const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
-    if (adminEmail) {
+    const keepers = flagged ? keeperInbox(secrets) : [];
+    for (const keeper of keepers) {
       try {
         const title = data.title || data.headline || data.name || (data.content ? data.content.slice(0, 60) : 'Untitled');
         await base44.asServiceRole.integrations.Core.SendEmail({
-          to: adminEmail,
+          to: keeper,
           from_name: 'Together We Can Change Climate',
           subject: `Climate submission held for a check: ${title}`,
           html: `<div style="font-family: monospace; max-width: 500px; margin: 0 auto; padding: 20px; background: #f4efe4;">
@@ -145,7 +146,7 @@ Content: ${fullContent.slice(0, 2000)}`,
       } catch (emailError) {
         // Email failure never blocks a submission, but it must not be invisible either:
         // a held entry nobody is told about is the one failure that matters here.
-        console.error('climateSubmitReview: held-entry email failed:', emailError.message);
+        console.error(`climateSubmitReview: held-entry email to ${keeper} failed:`, emailError.message);
       }
     }
 

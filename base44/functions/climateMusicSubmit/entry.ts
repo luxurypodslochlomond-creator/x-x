@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import { secrets } from 'base44:runtime';
+import { keeperInbox } from '../../shared/keeperInbox.ts';
 
 // ── A TRACK ARRIVES ─────────────────────────────────────────────────────────────
 // Music is given to this record by the artist who made it, and it is read at once —
@@ -143,11 +144,11 @@ The works inside it, as the selector listed them (a set only): ${String(data.tra
     //    The way back is built from the app's own public address as the server sets it — never a
     //    temporary platform host, which must not stand in front of a review panel.
     const appUrl = (req.headers.get('x-base44-app-url') || 'https://uf51.love').replace(/\/$/, '');
-    const adminEmail = flagged ? secrets.get('CLIMATE_ADMIN_EMAIL') : null;
-    if (adminEmail) {
+    const keepers = flagged ? keeperInbox(secrets) : [];
+    for (const keeper of keepers) {
       try {
         await base44.asServiceRole.integrations.Core.SendEmail({
-          to: adminEmail,
+          to: keeper,
           from_name: 'Together We Can Change Climate',
           subject: `Music held for a look: ${title} — ${artistName}`,
           html: `<div style="font-family: monospace; max-width: 500px; margin: 0 auto; padding: 20px; background: #f4efe4;">
@@ -166,7 +167,7 @@ The works inside it, as the selector listed them (a set only): ${String(data.tra
           </div>`,
         });
       } catch (emailError) {
-        console.error('climateMusicSubmit: held-track email failed:', emailError.message);
+        console.error(`climateMusicSubmit: held-track email to ${keeper} failed:`, emailError.message);
       }
     }
 
