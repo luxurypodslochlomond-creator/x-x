@@ -107,28 +107,17 @@ export default function ClimateFounder() {
         </p>
 
         {/* Build credit. Held apart from her own credentials by a rule, so it reads as
-            who built the page, never as a title she holds. Each name links to its own
-            site, so the claim is checkable. No title is written against them — only who
-            they are and where to look. The address is never printed, it only opens in
-            the mail app when tapped. */}
+            who built the page, never as a title she holds. No badge, no handle: the
+            platform is named plainly and the CIC is the only address, and it never
+            prints itself — it opens the mail app when tapped. */}
         <div className="mt-6 pt-5 border-t border-[#141210]/15 max-w-[320px] mx-auto">
           <span className="block text-[10px] font-black font-mono uppercase tracking-[0.15em] text-[#e2602a]">
             Made in Scotland from photons
           </span>
 
-          <a
-            href="https://uf51.love"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block mt-2 border border-[#141210]/20 bg-[#efe7d6] px-3 py-2 active:bg-[#e2602a] transition-colors"
-          >
-            <span className="block text-[11px] font-black font-mono uppercase tracking-[0.08em] text-[#141210]">
-              Brian Hughes · BH
-            </span>
-            <span className="block text-[9px] font-mono text-[#5a5246] break-all mt-0.5">
-              uf51.love
-            </span>
-          </a>
+          <span className="block mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">
+            Platform by Brian Hughes
+          </span>
 
           <a
             href="mailto:family@uf51.love"
