@@ -116,7 +116,11 @@ export default function ClimateFounder() {
           </span>
 
           <span className="block mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">
-            Platform by Brian Hughes
+            Platform by
+          </span>
+
+          <span className="block mt-1 text-[11px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">
+            Brian Hughes
           </span>
 
           <a
