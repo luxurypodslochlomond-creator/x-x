@@ -1,0 +1,74 @@
+{
+  "name": "ClimateWorkLog",
+  "type": "object",
+  "description": "The record's own diary: what Janine said, what a keeper decided, what is still missing, and what the weekly source check found. It exists because none of that survives in a conversation, in a message, or in somebody's memory \u2014 a decision that is not written down is a decision that will be re-made, differently, in six months. Nothing here is published and nothing is counted: a reader never sees this table, and an entry here never changes an entry on the record. A note is kept as it was written, with the day it was written, and a correction is a second note rather than an edited first one. Admin-only in every direction \u2014 read, add, change and remove.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "feedback",
+        "decision",
+        "gap",
+        "next",
+        "note",
+        "sweep"
+      ],
+      "default": "note",
+      "description": "What this line is: feedback \u2014 something Janine or a host said; decision \u2014 a choice made, and why; gap \u2014 something on the record that is missing or thin; next \u2014 work agreed but not yet done; note \u2014 context worth keeping; sweep \u2014 written by the weekly source check, never by a person."
+    },
+    "title": {
+      "type": "string",
+      "description": "The line in a few words, so the list can be read at a glance. Required."
+    },
+    "body": {
+      "type": "string",
+      "description": "The detail: what was said, what was decided, what is still needed. Kept in the words it was given in \u2014 never tidied up afterwards."
+    },
+    "from_who": {
+      "type": "string",
+      "description": "Who this came from, when it came from someone other than the keeper writing it down \u2014 e.g. 'Janine M. H. Selendy', 'a host', 'the weekly source check'. Left empty when it is the keeper's own note."
+    },
+    "entry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "The day this happened or was said \u2014 not the day it was typed in. That difference is the whole point of a dated log."
+    },
+    "pinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hold this at the top of the log, for the thing being worked on now."
+    },
+    "done": {
+      "type": "boolean",
+      "default": false,
+      "description": "For a 'next' line: it is finished. Kept rather than deleted, because a log you can quietly delete is not a record of anything."
+    }
+  },
+  "required": [
+    "kind",
+    "title",
+    "entry_date"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -18,6 +18,15 @@ const ENTITIES = [
   'ClimateCategory',
   'ClimateTrack',
   'ClimateWord',
+  // The kept copies of what each source actually said, on the day it was cited. Without
+  // these the file leaving here carries the claims and not the proof — the record would
+  // be exporting its conclusions and keeping its evidence, which is the one thing it
+  // promised never to do. A copy is not a reprint: it travels with its source, its date
+  // and its fingerprint, exactly as it sits on the record.
+  'ClimateSourceArchive',
+  // And the record's own diary: what Janine said, what was decided, what is still missing.
+  // A handover that leaves the decisions behind hands over an archive nobody can steer.
+  'ClimateWorkLog',
 ];
 
 const ALWAYS_DROP = ['submitter_email', 'author_email', 'email', 'created_by_id', 'ai_assessment', 'flagged'];
@@ -61,7 +70,7 @@ export default async function (req) {
 
     const counts = Object.fromEntries(Object.entries(record).map(([k, v]) => [k, v.length]));
     return Response.json({
-      what_this_is: 'Together We Can Change Climate — a whole copy of the record. Every entry carries its source, its signer, how well it is known, and any correction made in daylight. No contact addresses are included.',
+      what_this_is: 'Together We Can Change Climate — a whole copy of the record. Every entry carries its source, its signer, how well it is known, and any correction made in daylight. ClimateSourceArchive holds the kept copy of what each source said, with the date it was taken and the fingerprint of the exact words, so a quote can be checked after the link has died. ClimateWorkLog holds the decisions, the feedback and the open gaps. No contact addresses are included.',
       exported_at: new Date().toISOString(),
       counts,
       record,

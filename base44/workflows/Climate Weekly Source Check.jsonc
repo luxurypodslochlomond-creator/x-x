@@ -1,0 +1,48 @@
+{
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 7 * * 1",
+      "one_time_date": null,
+      "timezone": "Europe/London",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "climate_weekly_source_check",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "sweep_sources": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "climateSweepSources",
+            "args": {
+              "apply": false,
+              "log": true
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Check every source",
+            "description": "Proposes origins \u00b7 never writes one"
+          }
+        }
+      }
+    ]
+  },
+  "name": "Climate Weekly Source Check",
+  "description": "Once a week the record reads itself: every published entry is checked for a link to its origin, the machine goes looking for the ones that have none, and the finding is written into the keeper's log. It proposes and never writes a source, and it never changes an entry."
+}

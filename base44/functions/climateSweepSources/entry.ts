@@ -28,7 +28,7 @@ const RESEARCH_LIMIT = 5;
 export default async function (req: Request): Promise<Response> {
   try {
     const base44 = createClientFromRequest(req);
-    const { apply = false } = await req.json().catch(() => ({}));
+    const { apply = false, log = false } = await req.json().catch(() => ({}));
 
     // 1. Every published entry with no link to its origin.
     const missing: any[] = [];
@@ -110,8 +110,41 @@ Existing advisory note: ${item.assessment || '(none)'}`,
       }
     }
 
+    // 4. Written down. A check nobody watched is not a check, so when the weekly job asks
+    // for it the finding goes into the record's own log — where a person will see it —
+    // instead of scrolling away in a run history. Only on request: the panel already shows
+    // its answer to whoever pressed it.
+    let logged = false;
+    if (log) {
+      try {
+        const found = missing.filter((i) => i.candidate_url);
+        const lines: string[] = [];
+        if (found.length) {
+          lines.push(`${found.length} candidate ${found.length === 1 ? 'origin' : 'origins'} found, waiting for a person to confirm:`);
+          for (const i of found) lines.push(`· ${i.title} — ${i.candidate_url}`);
+        }
+        if (missing.length > found.length) {
+          lines.push(`${missing.length - found.length} could not be researched automatically and need looking at by hand.`);
+        }
+        lines.push('The sweep proposes and never writes a source. Nothing on the record was changed by this run.');
+        await base44.entities.ClimateWorkLog.create({
+          kind: 'sweep',
+          title: missing.length === 0
+            ? 'Every entry on the record still traces to an origin'
+            : `${missing.length} ${missing.length === 1 ? 'entry' : 'entries'} on the record with no source link`,
+          body: lines.join('\n'),
+          from_who: 'The weekly source check',
+          entry_date: new Date().toISOString().slice(0, 10),
+        });
+        logged = true;
+      } catch (e: any) {
+        console.error('climateSweepSources log failed:', e.message);
+      }
+    }
+
     return Response.json({
       applied: apply,
+      logged,
       missing_total: missing.length,
       researched: toResearch.length,
       held,
