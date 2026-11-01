@@ -24,9 +24,10 @@ export default function HandlerBrief() {
 
       <div className="bg-[#f7f1e5] px-3 py-3">
         <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210]">
-          <strong>One named person who keeps the record running.</strong> The editor decides what goes on it.
-          The handler makes sure it is still there tomorrow. Two people, on purpose — that is the whole reason
-          the role is written down here rather than left as &ldquo;the host&rdquo;.
+          <strong>The role comes first; whoever holds it comes second.</strong> It can be held by one named
+          person or by an entity &mdash; a library, a university centre, a trust, or a body the founder already
+          works with. Either way the job is the same five things, and either way there is a name on it at any
+          given moment.
         </p>
 
         <div className="mt-3 border border-[#141210]/25">
@@ -50,8 +51,9 @@ export default function HandlerBrief() {
           call at night.
         </p>
         <p className="text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#141210] mt-1.5">
-          <strong>Where one comes from:</strong> the host&rsquo;s own web or operations person, or one named
-          volunteer with a track record. Ask an organisation for one name, never a team.
+          <strong>Where one comes from:</strong> the host&rsquo;s own web or operations team, an institution
+          that already does this for a living, or one named volunteer with a track record. Whoever holds it,
+          the record shows one name and one way to reach them.
         </p>
 
         <p className="mt-3 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5 text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#141210]">

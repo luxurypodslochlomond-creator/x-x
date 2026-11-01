@@ -6,6 +6,8 @@ import CopyLine from '@/components/climate/CopyLine';
 import CostLadder from '@/components/climate/CostLadder';
 import SendThisPage from '@/components/climate/host/SendThisPage';
 import HandlerBrief from '@/components/climate/host/HandlerBrief';
+import HandlerOrEditor from '@/components/climate/host/HandlerOrEditor';
+import WhoHoldsTheKeys from '@/components/climate/host/WhoHoldsTheKeys';
 import { recordAddress } from '@/components/climate/recordAddress';
 
 // ── FOR JANINE, BEFORE IT IS SHARED ────────────────────────────────────────────
@@ -144,7 +146,11 @@ export default function ClimateHost() {
           <li><strong>5. Two named people with admin:</strong> an editor, who decides what goes on the record, and a handler, who keeps it running. One person doing both is a single point of failure. The handler's job is written out in full below.</li>
           <li><strong>6. A way out.</strong> The data exports, so no host can hold the record hostage and no host is trapped by it. That protects them as much as the record.</li>
         </ol>
+        <HandlerOrEditor />
+
         <HandlerBrief />
+
+        <WhoHoldsTheKeys />
 
         <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 py-2.5 mt-3">
           The cost of all six is below: <strong>£1,000 a year</strong> at today's size, and £10,000 for ten years.
