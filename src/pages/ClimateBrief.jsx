@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
-import { ArrowRight, Globe, Languages, Shield, Leaf, Check } from 'lucide-react';
-import { recordOrigin } from '@/components/climate/recordAddress';
+import { ArrowRight, Globe, Shield, Check } from 'lucide-react';
 
 // ── A factual one-pager for Janine M. H. Selendy & Horizon International ──
 // Honest about what is live, what is planned, and what is not built yet.
@@ -222,84 +221,6 @@ export default function ClimateBrief() {
               The live record is at <span className="font-bold text-[#1a1612]">/TogetherChangeClimate</span>. We will add nothing we cannot stand behind.
             </p>
           </div>
-        </section>
-
-        {/* ── EMAIL TO JANINE — copy-paste ready ── */}
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-              Email to Janine
-            </h2>
-            <button
-              onClick={() => {
-                const text = document.getElementById('janine-email').innerText;
-                navigator.clipboard.writeText(text).then(() => {
-                  const btn = document.getElementById('copy-btn');
-                  const orig = btn.innerHTML;
-                  btn.innerHTML = '<span class="text-[10px] font-black font-mono uppercase">Copied ✓</span>';
-                  setTimeout(() => { btn.innerHTML = orig; }, 2000);
-                });
-              }}
-              id="copy-btn"
-              className="flex items-center gap-1.5 px-3 py-2 bg-[#1a1612] text-[#efe7d6] text-[10px] font-black font-mono uppercase active:bg-[#e2602a] active:text-[#1a1612]"
-            >
-              Copy email
-            </button>
-          </div>
-          <div id="janine-email" className="bg-[#efe7d6] border-2 border-[#1a1612] px-5 py-5 text-[12px] font-mono text-[#1a1612] leading-relaxed whitespace-pre-wrap select-all">
-{`Dear Janine,
-
-You gave us a spec. We built it. Here is where each part stands today — done, planned, or not built.
-
-DONE — live right now:
-
-- Two entry types: Solutions and Climate Crises, as you specified.
-- Your 20-category taxonomy is in and filterable, and has grown to 32 as the record took entries. ${stats.categories} carry entries today; the rest are wired up and waiting.
-- Rough location only — country and region, no coordinates. Your privacy stance, kept.
-- A transmission map: solutions and actions plotted by country and self-identified nation, rough regions only, never precise pins.
-- Every entry screened for spam as it arrives; clear entries go on the record at once, anything unclear waits for a human check.
-- Copyright-free images only, credit stored on each.
-- Every entry links to its source.
-- Scale field: individual, community, city, country, global.
-- Groups: people on the same topic in the same area can form one. Email required, per your spec. The platform stores no messages.
-- Actions: cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each carries one contact link — the organiser is contacted directly. The platform sees none of it.
-- The interface speaks 65 tongues — 8 written out by hand, 57 made by machine, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. You can also free-type any tongue on Earth and it translates live. Where a tongue is a machine's attempt, the page says so rather than passing it off as a human's.
-- Entry text itself translates too — when a reader picks a language, the actual solution and crisis content (title, summary, details) translates live, with a "view original (English)" toggle so nothing is hidden. Accuracy is transparent.
-- No advertising, no sponsorship, and no way for money to buy a place on the record. Stated on the page, held in the code.
-- Open source, with a public covenant on how it resists capture.
-- No likes, no upvotes, no ranking, no algorithm. Every entry is equal because it is true. We call this x = x. There is no score field and no weight field in the database — the absence of a ranking algorithm is the feature.
-
-PLANNED — not yet built:
-
-- ${32 - stats.categories} of the 32 categories have no entry yet and need their first ones.
-- Linking ground-action photos to the record as visual proof — designed, not built.
-
-WE WILL NOT DO:
-
-- No advertising, ever.
-- No sponsorship. Money never buys a place on the record.
-- No likes, ranking, or engagement algorithms.
-- No precise location tracking.
-- No private messaging stored on the platform.
-- No speculative or unverified claims shown as fact.
-- No mixing this record with token or crypto mechanics. The climate record stands alone, as a public service.
-
-WHERE THE NUMBERS STAND TODAY:
-
-${stats.entries} solutions and crises — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions, plus ${stats.wire} dated, sourced entries on the wire. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 32 categories filled. 65 tongues, 8 written by hand. These are live and grow as the community adds entries.
-
-The live record and this brief are at the links below.
-
-This is built in your honour, and in honour of Horizon International. Your 40 years are the foundation.
-
-Brian
-
-Live record: ${recordOrigin()}/TogetherChangeClimate
-This brief: ${recordOrigin()}/ClimateBrief`}
-          </div>
-          <p className="text-[10px] font-mono text-[#6b6258] mt-2 leading-relaxed">
-            Tap "Copy email" to copy the whole message, or tap and hold to select the text manually.
-          </p>
         </section>
 
         {/* ── FOOTER ── */}
