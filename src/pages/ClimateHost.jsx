@@ -4,6 +4,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import HostAnswer from '@/components/climate/HostAnswer';
 import CopyLine from '@/components/climate/CopyLine';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import CostLadder from '@/components/climate/CostLadder';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 import { recordAddress } from '@/components/climate/recordAddress';
 
@@ -139,7 +140,7 @@ export default function ClimateHost() {
           <Check done={false}><strong>A public repository.</strong> The source is not published. That means a host cannot yet build it, audit it, or leave with it. This is the largest gap and it is a step, not a principle. Saying it now is cheaper than being caught by it later.</Check>
           <Check done={false}><strong>Locked citations.</strong> Fingerprinting each entry and pinning it so a citation cannot drift is designed, and not yet written. Until then a quote can be checked against the entry, but not frozen permanently.</Check>
           <Check done={false}><strong>A named editor.</strong> The record intends one named, accountable editor and a contact line. That name is being settled with you, and this page says so instead of inventing a masthead.</Check>
-          <Check done={false}><strong>A monthly figure.</strong> Nobody has signed a running cost to a named party yet. A host asks this on day one, and it should be answered before the conversation starts.</Check>
+          <Check done><strong>The figure.</strong> Now published on this page — see <em>What keeping it alive costs</em> below: £1,000 a year at today's size, £10,000 for ten years. It is the keeper's own number, and it says so.</Check>
           <Check done={false}><strong>The domain and the sending domain,</strong> both in the host's name rather than ours. A record whose address belongs to somebody else is not handed over, it is lent.</Check>
         </ul>
         <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 py-2.5 mt-3">
@@ -183,11 +184,15 @@ export default function ClimateHost() {
           <li><strong>5. Two named people:</strong> an editor, who decides what goes on the record, and a handler, who keeps it running. Both need admin. One person doing both is a single point of failure.</li>
           <li><strong>6. A way out.</strong> The data exports, so no host can hold the record hostage, and no host is trapped by it either. That protects them as much as it protects the record.</li>
         </ol>
-        <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5 mt-3">
-          The monthly figure is the one still open, and it belongs in your first letter rather than your third
-          conversation. It is being worked out now, and it will be a number a small organisation can carry.
+        <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 py-2.5 mt-3">
+          The figure used to be the open one. It is answered below, in the same plain terms, so it can go in
+          a first letter instead of a third conversation.
         </p>
       </HostAnswer>
+
+      {/* The number, where a host will actually look for it — on the page that
+          answers their questions, not tucked into a footer. */}
+      <CostLadder />
 
       <HostAnswer
         n="05"
