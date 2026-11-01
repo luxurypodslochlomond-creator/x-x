@@ -16,6 +16,7 @@ import ShareCardButton from '@/components/climate/ShareCardButton';
 import SignedBy from '@/components/climate/SignedBy';
 import { buildEntryShareCard } from '@/components/climate/shareCardImage';
 import SourceBlock from '@/components/climate/SourceBlock';
+import SourceArchiveNote from '@/components/climate/SourceArchiveNote';
 import VerificationBadge from '@/components/climate/VerificationBadge';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { VERIFICATION_NOTE } from '@/components/climate/verification';
@@ -218,6 +219,8 @@ export default function ClimateDetail() {
             accessed={record.created_date}
           />
 
+          <SourceArchiveNote entryId={record.id} sourceUrl={record.source_url} />
+
           <RecordCitation
             citation={`Together We Can Change Climate. "${record.title}" — ${meta.label}${record.region_rough ? ', ' + record.region_rough : ''}. ${recordAddress()}`}
             note={record.source_url
@@ -346,6 +349,8 @@ export default function ClimateDetail() {
           sourceDate={record.source_date}
           accessed={record.created_date}
         />
+
+        <SourceArchiveNote entryId={record.id} sourceUrl={record.source_url} />
 
         <RecordCitation
           citation={`${record.source_name ? record.source_name + '. ' : ''}"${record.title}" Together We Can Change Climate — ${isSolution ? 'solution' : 'climate crisis'}${record.country ? ', ' + record.country : ''}. ${recordAddress()}`}

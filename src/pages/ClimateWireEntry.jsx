@@ -6,6 +6,7 @@ import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import RecordCitation from '@/components/climate/RecordCitation';
 import { recordAddress } from '@/components/climate/recordAddress';
 import SourceBlock from '@/components/climate/SourceBlock';
+import SourceArchiveNote from '@/components/climate/SourceArchiveNote';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import SignedBy from '@/components/climate/SignedBy';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
@@ -91,6 +92,8 @@ export default function ClimateWireEntry() {
               kindLabel={entry.kind}
               accessed={entry.created_date}
             />
+
+            <SourceArchiveNote entryId={entry.id} sourceUrl={entry.source_url} />
 
             <RecordCitation
               citation={citation}

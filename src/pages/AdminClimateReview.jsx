@@ -8,6 +8,7 @@ import SourceLinkRow from '@/components/admin/SourceLinkRow';
 import ListenerLinesPanel from '@/components/admin/ListenerLinesPanel';
 import SignUnsignedEntries from '@/components/admin/SignUnsignedEntries';
 import RecordExportPanel from '@/components/admin/RecordExportPanel';
+import ArchiveSourcesPanel from '@/components/admin/ArchiveSourcesPanel';
 
 export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
@@ -404,6 +405,7 @@ export default function AdminClimateReview() {
 
         <SignUnsignedEntries onSigned={loadAll} />
         <RecordExportPanel />
+        <ArchiveSourcesPanel />
 
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-[#1a1612]/15 text-center">

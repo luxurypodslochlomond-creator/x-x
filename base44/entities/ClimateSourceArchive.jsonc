@@ -1,0 +1,77 @@
+{
+  "name": "ClimateSourceArchive",
+  "type": "object",
+  "description": "A copy of what a source actually said, kept on the day it was cited. Links rot: journals move, pages vanish, and a quote nobody can open is exactly the failure this record exists to prevent. So the words themselves are kept here, as they stood when the entry was placed on the record, with a fingerprint of that exact copy. This is a copy for reading, not a claim of ownership: the source keeps its own name, its own rights and its own address, and the record always sends the reader to the origin first. Only a keeper may add, change or remove a copy, and a copy is never edited afterwards \u2014 a changed page is kept as a second copy with its own date, because a copy that could be quietly rewritten would be worth nothing.",
+  "properties": {
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "action",
+        "news"
+      ],
+      "description": "Which kind of entry this copy was taken for."
+    },
+    "entry_id": {
+      "type": "string",
+      "description": "The id of the entry on the record that cites this source. A copy always belongs to an entry, never floats."
+    },
+    "entry_title": {
+      "type": "string",
+      "description": "The entry's title at the time the copy was taken, so the copy can be read without opening the database."
+    },
+    "source_url": {
+      "type": "string",
+      "description": "The origin itself, exactly as the entry gives it."
+    },
+    "source_name": {
+      "type": "string",
+      "description": "Who says so \u2014 the body, journal, publisher or person the entry names."
+    },
+    "fetched_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this copy was taken. Every copy carries its own date, because a page is only ever true on a day."
+    },
+    "http_status": {
+      "type": "number",
+      "description": "What the origin answered when the copy was taken."
+    },
+    "chars": {
+      "type": "number",
+      "description": "How much was kept, so a reader can see whether a copy is the whole page or an excerpt."
+    },
+    "content_sha256": {
+      "type": "string",
+      "description": "The fingerprint of the exact words kept here. If the page changes, the fingerprint changes, and a new copy is taken rather than the old one being altered."
+    },
+    "archived_text": {
+      "type": "string",
+      "description": "The words as they stood, read from the origin itself and kept unchanged. Never edited, never summarised, never tidied."
+    }
+  },
+  "required": [
+    "entry_type",
+    "entry_id",
+    "source_url",
+    "fetched_at"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
