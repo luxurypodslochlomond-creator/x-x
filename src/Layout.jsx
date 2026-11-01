@@ -3,7 +3,6 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { motion, AnimatePresence } from 'framer-motion';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import AutoHealingShield from '@/components/shared/AutoHealingShield';
@@ -25,7 +24,6 @@ import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwo
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
-import SiteTranslator from '@/components/shared/SiteTranslator';
 import LanguageButton from '@/components/shared/LanguageButton';
 
 // import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
@@ -43,6 +41,9 @@ const PendingMessageSender = React.lazy(() => import('@/components/shared/Pendin
 const TruthCheckProtocol = React.lazy(() => import('@/components/ai51/TruthCheckProtocol'));
 const AI51MemoryVault = React.lazy(() => import('@/components/ai51/AI51MemoryVault'));
 const CB51OfflineHandler = React.lazy(() => import('@/components/scott/CB51OfflineHandler'));
+// The translator scans the page after it paints. It is not needed for the first
+// screen, so it no longer travels with the shell.
+const SiteTranslator = React.lazy(() => import('@/components/shared/SiteTranslator'));
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
   Menu, X, Heart, Home, LogOut, Sparkles, Map, User, Globe,
@@ -136,16 +137,11 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
         </div>
       </button>
 
-      <AnimatePresence initial={false}>
-      {isOpen && (
-        <motion.div
-          key="nav-content"
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.26, ease: [0.32, 0.72, 0, 1] }}
-          style={{ overflow: 'hidden' }}
-        >
+      <div
+        className="grid transition-[grid-template-rows] duration-300 ease-out"
+        style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+      >
+        <div className="overflow-hidden min-h-0">
         <div className="flex flex-col gap-1 mb-2 pt-1">
           {items.map(item => {
             const IconComponent = item.icon;
@@ -176,9 +172,8 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
             );
           })}
         </div>
-        </motion.div>
-      )}
-      </AnimatePresence>
+        </div>
+      </div>
     </>
   );
 };
@@ -683,7 +678,9 @@ const LayoutInner = ({ children, currentPageName }) => {
       {/* <RealtimeDebugger /> */}
       {/* <PerformanceMonitor /> */}
       <GlobalErrorBoundary>
-      <SiteTranslator />
+      <React.Suspense fallback={null}>
+        <SiteTranslator />
+      </React.Suspense>
       <style>{`
         @media (display-mode: standalone) { body { -webkit-touch-callout: none; -webkit-user-select: none; } }
         @media print { header, aside, .floating-music-player, nav, footer { display: none !important; } main { margin: 0 !important; padding: 0 !important; } }
@@ -759,15 +756,13 @@ const LayoutInner = ({ children, currentPageName }) => {
                 </Link>
               )}
               {!isCB51Page && !isPS51Page && currentPageName !== 'AI51' && (
-                <motion.button
+                <button
                   onClick={() => navigate(createPageUrl("AI51"))}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex flex-col items-center justify-center px-3 py-2 border-2 border-pink-400 rounded-lg bg-black/40 hover:bg-black/60 transition-colors"
+                  className="flex flex-col items-center justify-center px-3 py-2 border-2 border-pink-400 rounded-lg bg-black/40 hover:bg-black/60 transition-transform hover:scale-105 active:scale-95"
                 >
                   <span className="text-pink-400 font-black font-mono text-sm leading-none">AI</span>
                   <span className="text-pink-400 font-black font-mono text-xs leading-none">51</span>
-                </motion.button>
+                </button>
               )}
               {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
                 <button onClick={() => setMobileMenuOpen(!isMobileMenuOpen)} className="p-2 rounded-lg hover:bg-cyan-500/20 transition-colors">

@@ -246,6 +246,20 @@ button:focus-visible {
 @keyframes sorted-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes sorted-exit { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-8px); } }
 
+/* The between-pages spinner, in plain CSS so no animation library has to
+   download before the first page can appear. */
+.uf51-page-overlay { animation: uf51-overlay-in 90ms ease-out; }
+.uf51-page-spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(249, 115, 22, 0.2);
+  border-top-color: #f97316;
+  animation: uf51-spin 0.6s linear infinite;
+}
+@keyframes uf51-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes uf51-spin { to { transform: rotate(360deg); } }
+
 /* ── NATIVE TOUCH FEEL ──
    Taps land with no 300ms double-tap wait and no grey browser flash,
    so every control answers your finger like it's part of the phone. */
