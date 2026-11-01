@@ -24,8 +24,10 @@ const DOORS = [
   { label: 'The record', page: 'TogetherChangeClimate', what: 'Front page: solutions, crises, actions, gatherings.' },
   { label: 'How it is made', page: 'ClimateMethod', what: 'Sources, verification, who decides, corrections.' },
   { label: 'The impact', page: 'ClimateImpact', what: 'Where it has been read.' },
-  { label: 'Every button', page: 'ClimateGuide', what: 'Each control and the one thing it does.' },
+  { label: 'The Buttons', page: 'ClimateGuide', what: 'Each control and the one thing it does.' },
   { label: 'The music room', page: 'ClimateMusic', what: 'Given music. Nothing plays until pressed.' },
+  { label: 'The Brief', page: 'ClimateBrief', what: 'What is live, what is planned, and what is not built.' },
+  { label: 'The Handover', page: 'ClimateHandover', what: 'What changes hands, what it costs, who holds it, what is open.' },
   { label: 'Terms', page: 'ClimateTerms', what: 'The ground it stands on.' },
   { label: 'Privacy', page: 'ClimatePrivacy', what: 'What is kept, and what never is.' },
 ];
@@ -65,7 +67,7 @@ export default function ClimateHost() {
         tone="yes"
         doors={[
           { label: 'See the music room', to: createPageUrl('ClimateMusic') },
-          { label: 'How music is given', to: createPageUrl('ClimateGuide') },
+          { label: 'Every music control', to: createPageUrl('ClimateGuide') },
         ]}
       >
         <p>No music, no video and no sound starts anywhere on this record until a reader presses play. There is nothing running behind a page while somebody reads.</p>

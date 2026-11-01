@@ -41,7 +41,7 @@ const FOOTER_LINKS = [
   // with nothing linking to it — the honesty existed and no reader could reach it.
   // A record that hides its own gaps behind a typed address is not one. So it sits here,
   // in the foot of every page, for anyone, not only for a host.
-  { label: 'The handover', page: 'ClimateHandover' },
+  { label: 'The Handover', page: 'ClimateHandover' },
 ];
 
 export default function ClimateLayout({ children, currentPage }) {

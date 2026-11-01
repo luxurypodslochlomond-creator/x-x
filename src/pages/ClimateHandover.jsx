@@ -52,7 +52,7 @@ const OPEN = [
 export default function ClimateHandover() {
   return (
     <ClimateRecordShell
-      eyebrow="For the next host"
+      eyebrow="The Handover · for the next host"
       marker="What changes hands · in what order"
       title="Before you take it on"
       statement="Six things move, six things the record will not let you do, three that are still open, and one plain line on which account holds it today. No pitch, no adjective: the list you would want if it were your name on it."
