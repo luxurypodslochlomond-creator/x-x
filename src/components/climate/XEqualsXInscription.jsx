@@ -2,34 +2,39 @@ import React from 'react';
 
 // The mark, performed once and then left alone.
 //
-// Two of the three lines below are mathematics and cannot be argued with — they were
-// true before anyone agreed, and they are true if nobody ever opens this page. The third
-// line is not mathematics at all. Keeping those two kinds of sentence apart, out loud, is
-// the only thing that stops the mark turning into a slogan.
+// Built like a museum plate, not a poster: hairline rules, numbered evidence, nothing
+// competing with the sentence it stands next to. Three of the four numbered lines are
+// mathematics and cannot be argued with. The fourth is not mathematics at all, and
+// saying so out loud is the only thing stopping the mark turning into a slogan.
 //
-// Nothing here is decorated. An inscription is not a poster: it says the thing, once, and
-// then it stops talking.
+// Then the voice. Big Science, 1982 — an answering machine as a voice talking into a
+// room that has emptied out. It is here because a recording is the one piece of
+// technology this page actually uses, and it was never a claim about the future.
 
-const LINES = [
+const EVIDENCE = [
   {
+    n: '01',
     mark: '1 = 1',
     origin: 'Identity',
-    text: 'True by definition, inside any system that has an equals sign — and empty, because it tells the person reading it nothing at all about themselves.',
+    text: 'True by definition inside any system that has an equals sign — and empty, because it says nothing at all about the person reading it.',
   },
   {
+    n: '02',
     mark: 'E = hν',
     origin: 'Planck 1900 · Einstein 1905',
     text: 'Energy is exchanged in whole multiples of hν, sized by its frequency. Planck found the rule and was uneasy about where it led; Einstein took it literally and said the light itself arrives in packets. Measured ever since, and indifferent to who is watching.',
   },
   {
+    n: '03',
     mark: 'resonance',
     origin: 'Coupling',
-    text: 'A thing driven near its own natural frequency answers with a large swing, and two things tuned alike pass energy between them — a glass, a bridge, a room, two clocks on one wall. That is a fact about coupling. It is not a claim about intention.',
+    text: 'A thing driven near its own natural frequency answers with a large swing, and two things tuned alike pass energy between them — a glass, a bridge, a room, two clocks on one wall. A fact about coupling. Not a claim about intention.',
   },
   {
+    n: '04',
     mark: 'equal worth',
     origin: 'Not physics',
-    text: 'This one is nowhere in the mathematics. It is a decision, taken on purpose by people who could have decided otherwise, and the only line on this page that can be refused.',
+    text: 'Nowhere in the mathematics. A decision, taken on purpose by people who could have decided otherwise, and the only line here that can be refused.',
   },
 ];
 
@@ -53,14 +58,34 @@ export default function XEqualsXInscription() {
         </p>
       </div>
 
-      <div className="mt-5 space-y-4">
-        {LINES.map(({ mark, origin, text }) => (
-          <div key={mark} className="border-l-4 border-l-[#e2602a] pl-3.5">
-            <p className="font-mono font-black text-[17px] leading-none text-[#141210]">
+      <div className="mt-7">
+        <p className="font-mono text-[15px] leading-[1.85] text-[#141210]">
+          <span className="font-black">Big Science</span>, 1982 — a recorded voice on a
+          telephone line, still speaking into a room that has emptied out.
+        </p>
+        <p className="mt-3 font-mono text-[15px] leading-[1.85] text-[#141210]">
+          A recording does not travel in time. It waits. That is the only technology on this
+          page, and it is older than print: someone says a thing now, and a stranger hears it
+          later.
+        </p>
+        <p className="mt-3 font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-[#6b6258]">
+          Laurie Anderson · Big Science · 1982
+        </p>
+      </div>
+
+      <div className="mt-8">
+        {EVIDENCE.map(({ n, mark, origin, text }) => (
+          <div key={n} className="border-t border-[#141210]/25 pt-3 pb-4">
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="font-mono text-[9.5px] font-black tracking-[0.18em] text-[#6b6258]">
+                {n}
+              </p>
+              <p className="font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-[#e2602a] text-right">
+                {origin}
+              </p>
+            </div>
+            <p className="mt-2 font-mono font-black text-[19px] leading-none tracking-[-0.02em] text-[#141210]">
               {mark}
-            </p>
-            <p className="mt-1 font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-[#6b6258]">
-              {origin}
             </p>
             <p className="mt-2 font-mono text-[11.5px] leading-relaxed text-[#141210]">
               {text}
@@ -69,10 +94,9 @@ export default function XEqualsXInscription() {
         ))}
       </div>
 
-      <p className="mt-5 bg-[#f7f1e5] border-2 border-[#141210] border-l-8 border-l-[#e2602a] px-4 py-3 text-[11.5px] font-mono leading-relaxed text-[#141210]">
-        Addressed to whoever arrives later. That is the oldest technology there is, and this
-        record claims nothing newer. It is not conscious and it does not love you back. The
-        people keeping it might.
+      <p className="mt-4 border-t-2 border-[#141210] pt-4 font-mono text-[11.5px] leading-relaxed text-[#141210]">
+        Addressed to whoever arrives later. The record is not conscious and does not love you
+        back. The people keeping it might.
       </p>
     </section>
   );
