@@ -18,8 +18,8 @@ const RUNGS = [
   { reads: '100,000', cost: '£3,000', what: 'Every kept copy grows. A tongue is translated once and then served, so readers cost almost nothing.' },
   { reads: '1 million', cost: '£12,000', what: 'Pictures and music are the weight now, and a second person is needed on the record.' },
   { reads: '10 million', cost: '£60,000', what: 'Serving the record stays cheap. Serving every copy and every tongue quickly does not.' },
-  { reads: '100 million', cost: '£300,000', what: 'Real hosting contracts, real staff, and a reserve kept for moving the record if it has to move.' },
-  { reads: '1 billion', cost: '£2,500,000', what: 'No longer one keeper’s work. This is the rung where it has to belong to an institution or a library.' },
+  { reads: '100 million', cost: '£150k–£400k', what: 'Real hosting contracts, real staff, and a reserve kept for moving the record if it has to move. A range, because past here it is a model, not a bill.' },
+  { reads: '1 billion', cost: '£1m–£3m', what: 'No longer one keeper’s work, and the record would be rebuilt rather than simply paid for at a higher rate. This is the rung it belongs to an institution or a library.' },
 ];
 
 export default function CostLadder() {
@@ -40,6 +40,13 @@ export default function CostLadder() {
           Reading is cheap. What is expensive is what the record keeps: a copy of every cited source, every
           picture, every master given to the music room, and every tongue already translated. So cost
           follows storage, not popularity.
+        </p>
+        <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mt-2">
+          What keeps it light, by design: it is text first. No video, no advertising, no analytics pixels, no
+          third-party scripts. Pictures are shrunk in the browser before they are kept, a tongue is translated
+          once and then served, and a copy of a source is kept once rather than fetched again. Nothing on this
+          record runs a server of its own. A reader costs almost nothing; a thousand new pages of someone
+          else&rsquo;s words, kept forever, cost something.
         </p>
 
         <div className="mt-4 border border-[#141210]/25">
@@ -63,6 +70,14 @@ export default function CostLadder() {
 
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.1em] text-[#5a5246] mt-2">
           Reads a year · annual cost · what changes
+        </p>
+
+        <p className="mt-3 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5 text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#141210]">
+          <strong>Which of these is real.</strong> Only the first rung is a figure actually being paid:
+          £1,000 a year, and £10,000 for ten years. Everything above it is a model built on what storage and
+          serving cost today, and it assumes growth this record has never had. It is published so a funder can
+          see the shape of the cost, not so anyone quotes two million pounds at a meeting. At those sizes the
+          record would be rebuilt on cheaper foundations, not simply billed harder.
         </p>
 
         <div className="mt-4 pt-3 border-t-2 border-[#141210]/20">
