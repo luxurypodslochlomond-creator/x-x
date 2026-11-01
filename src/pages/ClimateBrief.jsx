@@ -86,7 +86,7 @@ export default function ClimateBrief() {
             </p>
           </div>
           <p className="text-[13px] leading-relaxed text-[#1a1612]">
-            Your spec asked for a universal, honest, non-speculative repository for verified climate solutions. No engagement metrics. No ranking. No advertising. No sponsorship. Money never buys a place on the record. Rough locations only, to protect privacy while staying verifiable. Reviewed before publication. Copyright-free images. Every language on Earth, over time.
+            Your spec asked for a universal, honest, non-speculative repository for verified climate solutions. No engagement metrics on any reader — reach is counted by place alone, never per person, and never as a score. No ranking. No advertising. No sponsorship. Money never buys a place on the record. Rough locations only, to protect privacy while staying verifiable. Reviewed before publication. Copyright-free images. Every language on Earth, over time.
           </p>
           <p className="text-[13px] leading-relaxed text-[#1a1612] mt-3">
             That is what we built. This brief shows exactly where each part of your spec stands today.
@@ -101,7 +101,7 @@ export default function ClimateBrief() {
           <div className="space-y-2.5">
             {[
               ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
-              ['Your category taxonomy', 'All 20 categories are implemented in the database and filterable on the page. 12 of 20 already have seeded entries; the rest are supported and ready.'],
+              ['Your category taxonomy', 'Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. 16 of them carry entries today; the rest are supported and ready.'],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
               ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.'],
               ['Copyright-free images only', 'Every image is sourced from copyright-free pools (Unsplash). Image credit is stored on each entry.'],
@@ -109,7 +109,7 @@ export default function ClimateBrief() {
               ['Scale field', 'Individual, community, city, country, global — your spec, implemented.'],
               ['Groups', 'People working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.'],
               ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.'],
-              ['60+ interface languages', 'The page interface is preset in 8 languages and AI-translated live into 60+ more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori, Ancient Greek. You can also free-type any language on Earth.'],
+              ['65 tongues · 8 written by hand', 'The interface is written out by hand in 8 languages and machine-made into 57 more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. Where a tongue is a machine\'s attempt — the ancient scripts especially — the page says so plainly rather than passing it off as an inscription. You can also free-type any tongue on Earth.'],
               ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.'],
               ['Open source, extraction-proof', 'The platform code is open. A public covenant explains how it resists corporate capture.'],
               ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.'],
@@ -135,10 +135,10 @@ export default function ClimateBrief() {
             {[
               [String(stats.entries), `entries on the record (${stats.solutions} solutions, ${stats.crises} crises)`],
               [String(stats.locations), 'locations represented — countries and regions'],
-              [String(stats.categories), 'of 20 categories with entries'],
+              [String(stats.categories), 'of 32 categories with entries'],
               [String(stats.actions), 'ground actions listed'],
               [String(stats.groups), 'community groups formed'],
-              ['60+', 'languages the interface speaks'],
+              ['65', 'tongues the interface speaks'],
             ].map(([num, label]) => (
               <div key={label} className="bg-[#1a1612] text-[#efe7d6] px-4 py-4">
                 <div className="text-[28px] font-black font-mono text-[#e2602a] leading-none">{num}</div>
@@ -249,7 +249,7 @@ You gave us a spec. We built it. Here is where each part stands today — done, 
 DONE — live right now:
 
 - Two entry types: Solutions and Climate Crises, as you specified.
-- Your full 20-category taxonomy is in and filterable. 12 of 20 have entries; the other 8 are wired up and waiting.
+- Your 20-category taxonomy is in and filterable, and has grown to 32 as the record took entries. 18 carry entries today; the rest are wired up and waiting.
 - Rough location only — country and region, no coordinates. Your privacy stance, kept.
 - A transmission map: solutions and actions plotted by country and self-identified nation, rough regions only, never precise pins.
 - Every entry screened for spam as it arrives; clear entries go on the record at once, anything unclear waits for a human check.
@@ -258,7 +258,7 @@ DONE — live right now:
 - Scale field: individual, community, city, country, global.
 - Groups: people on the same topic in the same area can form one. Email required, per your spec. The platform stores no messages.
 - Actions: cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each carries one contact link — the organiser is contacted directly. The platform sees none of it.
-- The interface speaks 60+ languages, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. You can also free-type any language on Earth and it translates live.
+- The interface speaks 65 tongues — 8 written out by hand, 57 made by machine, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. You can also free-type any tongue on Earth and it translates live. Where a tongue is a machine's attempt, the page says so rather than passing it off as a human's.
 - Entry text itself translates too — when a reader picks a language, the actual solution and crisis content (title, summary, details) translates live, with a "view original (English)" toggle so nothing is hidden. Accuracy is transparent.
 - No advertising, no sponsorship, and no way for money to buy a place on the record. Stated on the page, held in the code.
 - Open source, with a public covenant on how it resists capture.
@@ -281,7 +281,7 @@ WE WILL NOT DO:
 
 WHERE THE NUMBERS STAND TODAY:
 
-${stats.entries} entries on the record — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 20 categories filled. 60+ languages. These are live and grow as the community adds entries.
+${stats.entries} entries on the record — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 32 categories filled. 65 tongues, 8 written by hand. These are live and grow as the community adds entries.
 
 The live record and this brief are at the links below.
 

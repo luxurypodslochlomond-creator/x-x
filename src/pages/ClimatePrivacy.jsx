@@ -79,7 +79,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              You can ask us what we hold about you. You can ask us to correct it. You can ask us to remove your submission. Ask, and we will do it — the contact address is published here as soon as the record's permanent home is arranged.
+              You can ask us what we hold about you. You can ask us to correct it. You can ask us to remove your submission. Ask, and we will do it. Write to <a href="mailto:family@uf51.love" className="underline underline-offset-4 decoration-[#e2602a]">family@uf51.love</a> — a person reads it and answers.
             </p>
           </div>
         </section>
@@ -183,7 +183,7 @@ export default function ClimatePrivacy() {
         {/* CONTACT */}
         <section className="mt-8 pt-6 border-t-2 border-[#141210]">
           <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
-            Questions about your data? A contact address will be published here as soon as the record's permanent home is arranged. Until then, nothing you give us is sold, shared, or handed to anyone.
+            Questions about your data? Write to <a href="mailto:family@uf51.love" className="text-[#141210] underline underline-offset-4 decoration-[#e2602a]">family@uf51.love</a> — a person reads it and answers. The organisation that will hold the record permanently is still being arranged, and will be named here when it is. Until then, nothing you give us is sold, shared, or handed to anyone.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link to={createPageUrl('ClimateTerms')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#141210] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#e2602a] transition-colors">
