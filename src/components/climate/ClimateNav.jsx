@@ -34,6 +34,7 @@ const ABOUT = [
   { label: 'Founder', page: 'ClimateFounder' },
   { label: 'Support', page: 'ClimateSupport' },
   { label: 'Method', page: 'ClimateMethod' },
+  { label: 'Corrections', page: 'ClimateCorrections' },
 ];
 
 // Every door in this bar is a word, music included. A lit mark was tried here and taken

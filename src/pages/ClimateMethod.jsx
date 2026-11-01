@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 
 // How this record is made — the page that answers a panel, a journalist or a sceptic
@@ -72,6 +74,13 @@ export default function ClimateMethod() {
       <Block n="06" title="Corrections, in daylight">
         <p>When an entry is wrong, it is corrected on the entry itself with the date it was corrected and what changed. Nothing is quietly edited, and nothing disappears.</p>
         <p>Every review decision — who looked at an entry, when, and what the advisory note said — is kept in an audit trail. That trail is what a research panel, a funder or a regulator can ask for, and it exists from the first day rather than being reconstructed later.</p>
+        <p>
+          Every correction on this record, gathered in one place and dated, is on{' '}
+          <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
+            corrections, in daylight
+          </Link>
+          {' '}— including an honest count of nought when there is nothing to show yet.
+        </p>
       </Block>
 
       <Block n="07" title="Money, and what it cannot buy">
