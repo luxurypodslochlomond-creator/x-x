@@ -1,6 +1,8 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
+import XEqualsXDeepTime from '@/components/climate/XEqualsXDeepTime';
+import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 import XEqualsXContext from '@/components/climate/XEqualsXContext';
 import XEqualsXPrinciples from '@/components/climate/XEqualsXPrinciples';
@@ -21,7 +23,11 @@ export default function XEqualsX() {
       returnLabel="Back to the record"
       footer="x = x is the record's covenant: an emergency does not matter less because fewer people are watching. The record is built in honour of Janine M. H. Selendy and Horizon International."
     >
+      <XEqualsXCut />
+
       <XEqualsXInscription />
+
+      <XEqualsXDeepTime />
 
       <XEqualsXCodicil />
 

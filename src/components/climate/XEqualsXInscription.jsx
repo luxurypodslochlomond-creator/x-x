@@ -44,6 +44,14 @@ export default function XEqualsXInscription() {
     <section aria-labelledby="the-mark" className="pb-8 border-b-2 border-[#141210]">
       {/* The stone */}
       <div className="relative bg-[#141210] overflow-hidden -mx-4 px-5 py-10">
+        {/* The letters are struck, not typed: the noise pushes their edges a fraction of a
+            pixel, the way ink spreads into stone that was cut by a hand. */}
+        <svg className="absolute w-0 h-0" aria-hidden="true" focusable="false">
+          <filter id="x-mark-strike">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="grain" />
+            <feDisplacementMap in="SourceGraphic" in2="grain" scale="1.7" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.06]"
           style={{
@@ -63,7 +71,10 @@ export default function XEqualsXInscription() {
             The mark · read it as an equation
           </h2>
 
-          <p className="mt-6 font-mono font-black text-[76px] leading-[0.8] tracking-[-0.06em] text-[#efe7d6]">
+          <p
+            className="mt-6 font-mono font-black text-[76px] leading-[0.8] tracking-[-0.06em] text-[#efe7d6]"
+            style={{ filter: 'url(#x-mark-strike)' }}
+          >
             x = x
           </p>
 
