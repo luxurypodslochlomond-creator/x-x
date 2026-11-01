@@ -36,6 +36,12 @@ const FOOTER_LINKS = [
   { label: 'Privacy', page: 'ClimatePrivacy' },
   { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'The Brief', page: 'ClimateBrief' },
+  // The page that says what it costs to keep this alive, what it will not let a host
+  // do, who holds the keys today, and what is still open. It was written and then left
+  // with nothing linking to it — the honesty existed and no reader could reach it.
+  // A record that hides its own gaps behind a typed address is not one. So it sits here,
+  // in the foot of every page, for anyone, not only for a host.
+  { label: 'The handover', page: 'ClimateHandover' },
 ];
 
 export default function ClimateLayout({ children, currentPage }) {

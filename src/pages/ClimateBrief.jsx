@@ -78,6 +78,9 @@ export default function ClimateBrief() {
           <p className="text-[11px] font-mono text-[#6b6258] mt-3 leading-relaxed">
             What we have built from your spec — what is live today, what is planned, and what is not yet built. Written plainly, because your 40 years deserve nothing less than the truth.
           </p>
+          <p className="text-[12px] font-mono text-[#1a1612] mt-4 leading-relaxed">
+            One thing about this page, since it is a list of claims about our own work and anyone can write a list: each line here can be checked against the record itself. Every entry names where it came from, every correction carries its date on the entry, and what is still missing, what it costs to keep alive, and who holds the keys today are said in the open, at the foot of every page.
+          </p>
         </div>
 
         {/* ── THE PRINCIPLE ── */}
@@ -106,6 +109,7 @@ export default function ClimateBrief() {
               ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
               ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. ${stats.categories} of them carry entries today; the rest are supported and ready.`],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
+              ['A map of where it is happening', 'Both entry types on a rough-region map, reachable from the record itself — no precise pins, and no reader tracked while they look.'],
               ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.'],
               ['Copyright-free images only', 'Where a picture is shown it comes from a copyright-free pool and carries its credit on the entry. A credit is a thank you, not a permission — so an entry with no cleared picture shows none, rather than borrowing one from somebody else\u2019s page.'],
               ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.'],
@@ -165,7 +169,6 @@ export default function ClimateBrief() {
               ['Entry translation by community', 'The interface is translated now. Entries themselves (the solution text) are translated by our community over time — not automatically, because accuracy matters more than speed.'],
               ['Categories still to fill', `${32 - stats.categories} of the 32 categories have no entry yet. The database and the filters support them; they need their first entries, not new code.`],
               ['Photo51 evidence link', 'Connecting ground-action photos (cleanups, plantings) to the climate record, so an action can carry visual proof without storing personal data.'],
-              ['Mapping view', 'A rough-region map of where solutions and crises are happening — privacy-respecting, no precise pins.'],
             ].map(([title, body]) => (
               <div key={title} className="flex gap-3 bg-[#efe7d6] border border-[#1a1612]/15 border-l-4 border-l-[#b8860b] px-4 py-3">
                 <div>
