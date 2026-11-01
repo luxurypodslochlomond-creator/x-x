@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import CorrectionRow from '@/components/climate/CorrectionRow';
+import WhoSigns from '@/components/climate/WhoSigns';
 import useCorrections from '@/components/climate/useCorrections';
 
 // ── CORRECTIONS, IN DAYLIGHT ──────────────────────────────────────────────────
@@ -30,7 +31,7 @@ export default function ClimateCorrections() {
       <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
         A correction is a change to something already on the record. When one is made, the entry
         carries the note itself — what changed, and the date it was changed — and it appears here.
-        The note is printed exactly as the keeper wrote it: never shortened, never softened, never
+        The note is printed exactly as the person who signed it wrote it: never shortened, never softened, never
         folded into a summary.
       </p>
       <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
@@ -40,7 +41,7 @@ export default function ClimateCorrections() {
       </p>
 
       <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 lg:px-5 py-2.5 lg:py-3.5 text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] mb-7">
-        Only a keeper can write a correction, and every one of them is written where you are
+        Only a signer can write a correction, and every one of them is written where you are
         reading it now. A correction that could be made quietly would not be a correction — it
         would be an edit.
       </p>
@@ -92,7 +93,8 @@ export default function ClimateCorrections() {
             The screen that reads each entry as it arrives is a machine. It produces an advisory
             note and nothing else. It cannot publish an entry, it cannot hold one back on its own
             authority, and its opinion is never treated as a finding. A person reads what it said
-            and decides, and every decision is kept with who made it, when, and what the note said.
+            and decides, and every decision is written to an audit trail: who looked, when, and
+            what the note said.
           </p>
           <p>
             What the machine is not allowed to do is the part that matters to anyone being asked to
@@ -114,6 +116,8 @@ export default function ClimateCorrections() {
           .
         </p>
       </section>
+
+      <WhoSigns />
     </ClimateRecordShell>
   );
 }
