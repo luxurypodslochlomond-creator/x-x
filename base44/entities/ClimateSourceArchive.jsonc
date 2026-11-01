@@ -1,7 +1,7 @@
 {
   "name": "ClimateSourceArchive",
   "type": "object",
-  "description": "A copy of what a source actually said, kept on the day it was cited. Links rot: journals move, pages vanish, and a quote nobody can open is exactly the failure this record exists to prevent. So the words themselves are kept here, as they stood when the entry was placed on the record, with a fingerprint of that exact copy. This is a copy for reading, not a claim of ownership: the source keeps its own name, its own rights and its own address, and the record always sends the reader to the origin first. Only a keeper may add, change or remove a copy, and a copy is never edited afterwards \u2014 a changed page is kept as a second copy with its own date, because a copy that could be quietly rewritten would be worth nothing.",
+  "description": "A copy of what a source actually said, kept on the day it was cited. Links rot: journals move, pages vanish, and a quote nobody can open is exactly the failure this record exists to prevent. So the words themselves are kept here, as they stood when the entry was placed on the record, with a fingerprint of that exact copy. This is a copy for checking, not a claim of ownership and not a reprint: the source keeps its name, its own rights and its own address, the record always sends the reader to the origin first, and a reader is shown only an excerpt of a copy while the whole of it stays with a keeper. Only a keeper may add, change or remove a copy, and a copy is never edited afterwards \u2014 a changed page is kept as a second copy with its own date, because a copy that could be quietly rewritten would be worth nothing. Only a keeper may read this table back; readers are served an excerpt by the climateSourceNote function.",
   "properties": {
     "entry_type": {
       "type": "string",
@@ -47,7 +47,7 @@
     },
     "archived_text": {
       "type": "string",
-      "description": "The words as they stood, read from the origin itself and kept unchanged. Never edited, never summarised, never tidied."
+      "description": "The words as they stood, read from the origin itself and kept unchanged. Never edited, never summarised, never tidied. Held for checking a quote, not for republishing the source: a reader is served only a short excerpt of this."
     }
   },
   "required": [
@@ -57,7 +57,11 @@
     "fetched_at"
   ],
   "rls": {
-    "read": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "create": {
       "user_condition": {
         "role": "admin"
