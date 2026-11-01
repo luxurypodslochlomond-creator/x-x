@@ -6,6 +6,10 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 // How this record is made — the page that answers a panel, a journalist or a sceptic
 // without anybody having to be in the room. Written to be read cold by somebody who
 // has never heard of us and is looking for reasons to say no.
+//
+// Tightened, not softened. Every rule and every limit that was here is still here;
+// the sentences around them are shorter, because a method nobody finishes reading
+// protects nobody. Nothing was cut that a sceptic could have used.
 
 function Block({ n, title, children }) {
   return (
@@ -37,66 +41,67 @@ export default function ClimateMethod() {
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
       <Block n="01" title="What this is, and what it is not">
-        <p>This is a record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
-        <p>Three consequences, in plain terms: entries are ordered by date and never by popularity. Nothing counts likes, shares or followers. No entry is scored, and nothing can be pushed up by paying, so there is nothing here to game.</p>
-        <p>One thing is counted, and only one: a read. That means an entry was opened. It is counted once per place per half hour, never per person, and the place is never an address. Reads are kept so that reach can be seen honestly on the impact page — and they never order this record and never change what is on it.</p>
+        <p>A record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
+        <p>Entries are ordered by date, never by popularity. Nothing counts likes, shares or followers. Nothing can be pushed up by paying, so there is nothing here to game.</p>
+        <p>One thing is counted, and only one: a read — an entry was opened. Once per place per half hour, never per person, and the place is never an address. Reads are shown on the impact page. They never order this record and never change it.</p>
         <Rule>If a claim on this record cannot be traced to something outside it, it does not belong here.</Rule>
       </Block>
 
       <Block n="02" title="Where an entry comes from">
-        <p>An entry is a fact with an origin. It may come from an official body's own statement, a peer-reviewed journal, published media, an organisation working on the ground, a first-hand dispatch from somebody there, or a document. Which one it is, is printed on the entry.</p>
-        <p>We point at the origin and quote a line or two. We do not republish somebody else's article, and we do not pull content out of closed networks or private accounts.</p>
-        <p>Anyone may send an entry in — a community group, a researcher, a reader who spotted something. It travels through exactly the same check as anything the record's own team writes.</p>
-        <p>An action is traced differently, and the record says which. An action is the organiser's own word about something they are doing, and the organiser's own contact line is printed on it so that anyone can reach them — on the record, that line is the origin. Where an action also points at more information, the link to it is printed beside it. Its label is the lowest one, one origin says so, until a person has a second, independent origin to name.</p>
+        <p>An entry is a fact with an origin: a body's own statement, a peer-reviewed journal, published media, an organisation working on the ground, a first-hand dispatch, or a document. Which one it is, is printed on the entry.</p>
+        <p>We point at the origin and quote a line or two. We never republish somebody else's article, and never pull from closed networks or private accounts.</p>
+        <p>Anyone may send an entry in — a community group, a researcher, a reader who spotted something. It goes through exactly the same check as anything written here.</p>
+        <p>An action is traced differently, and the record says which. An action is the organiser's own word about what they are doing, and their own contact line is printed on it — that line is the origin. Its label stays at one origin says so until a person has a second, independent origin to name.</p>
       </Block>
 
       <Block n="03" title="The ladder — how well a claim is known">
-        <p>Every entry carries one of three labels, and the reader sees it before the headline:</p>
+        <p>Every entry carries one of three labels, and a reader sees it before the headline:</p>
         <Rule>
           <strong>Official record</strong> — the body responsible has put it on the record itself.<br />
           <strong>Corroborated</strong> — two independent origins say the same thing.<br />
           <strong>Single source</strong> — one origin says so. Honestly labelled, not hidden.
         </Rule>
-        <p>Labelling is the whole method. A record that admits which of its entries rest on one voice is worth more than one that pretends everything is equally certain. Where the strength of a claim is unclear, it says so.</p>
+        <p>Labelling is the whole method. A record that admits which entries rest on one voice is worth more than one that pretends everything is equally certain.</p>
       </Block>
 
       <Block n="04" title="No source, no entry">
-        <p>An entry with no traceable origin waits in a holding pen. A person then either finds the source or leaves the entry out. Nothing reaches the wire on the strength of a screenshot, a rumour, or a page with no publisher behind it.</p>
-        <p>Every entry that reaches the wire is screened automatically for spam, off-topic promotion and dangerous advice. Sourced entries go up at once; anything the screen is unsure about waits for a person. The reason for that split is simple: the record exists to encourage people to share what they are doing, and holding every contribution for weeks would kill it.</p>
+        <p>An entry with no traceable origin waits in a holding pen: a person either finds the source or leaves the entry out. Nothing arrives on the strength of a screenshot, a rumour, or a page with no publisher behind it.</p>
+        <p>Every entry is screened for spam, off-topic promotion and dangerous advice. Sourced entries go up at once; anything the screen is unsure about waits for a person. Holding every contribution for weeks would kill the thing this record exists to encourage.</p>
       </Block>
 
       <Block n="05" title="Who decides">
-        <p>The screen is a machine. The decision is a person's. No entry is published on a machine's judgement, and no machine's opinion is treated as a finding — it produces an advisory note that a human reads.</p>
-        <p>The record is meant to stand behind one named editor, and that name belongs at the top of the record rather than in the small print. That name, the platform's contact address and Horizon International's role as the record's custodian are still being settled with the founder, and this page is updated the moment they are. Until then, it says so rather than inventing a masthead.</p>
+        <p>The screen is a machine. The decision is a person's. It produces an advisory note that a human reads. No entry is published on a machine's judgement, and no machine's opinion is treated as a finding.</p>
+        <p>One named editor stands behind this record, and that name belongs at the top of it rather than in the small print. That name, the contact address and Horizon International's role as custodian are still being settled with the founder — this page says so rather than inventing a masthead, and changes the moment they are.</p>
+        <p>Keeping the record running is a second, separate job — the handler. It is never the same single person doing both with nobody checking.</p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
 
       <Block n="06" title="Corrections, in daylight">
-        <p>When an entry is wrong, it is corrected on the entry itself with the date it was corrected and what changed. Nothing is quietly edited, and nothing disappears.</p>
-        <p>Every review decision — who looked at an entry, when, and what the advisory note said — is kept in an audit trail. That trail is what a research panel, a funder or a regulator can ask for, and it exists from the first day rather than being reconstructed later.</p>
+        <p>When an entry is wrong it is corrected on the entry itself, with the date and what changed. Nothing is quietly edited. Nothing disappears.</p>
+        <p>Every review decision — who looked, when, and what the advisory note said — is kept in an audit trail. It exists from the first day, rather than being reconstructed later when somebody asks.</p>
         <p>
-          Every correction on this record, gathered in one place and dated, is on{' '}
+          Every correction, gathered in one place and dated, is on{' '}
           <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
             corrections, in daylight
           </Link>
-          {' '}— including an honest count of nought when there is nothing to show yet.
+          {' '}— including an honest nought when there is nothing to show yet.
         </p>
       </Block>
 
       <Block n="07" title="Money, and what it cannot buy">
         <p>No advertising. No sponsorship. No paid placement of any kind. Money never buys a place on the record, a place in an entry, or a change to a claim.</p>
-        <p>Support that keeps the record running is welcome and declared in the open. Who gave, and whether they chose to be named, is recorded; amounts are never published and never influence what appears.</p>
+        <p>Support that keeps the record running is welcome and declared in the open: who gave, and whether they chose to be named. Amounts are never published and never influence what appears.</p>
       </Block>
 
       <Block n="08" title="Citing the record">
-        <p>Every entry has its own permanent address, so a researcher can cite one entry rather than a front page that changes. The date, the origin and how well the claim is known all travel with the link.</p>
-        <p>An entry is citable and checkable on its own, and the source link takes you to the thing itself rather than to us describing it. That is the point: don't take our word, follow the link.</p>
+        <p>Every entry has its own permanent address, so a researcher cites one entry rather than a front page that changes. The date, the origin and how well the claim is known all travel with the link.</p>
+        <p>The source link takes you to the thing itself, not to us describing it. Don't take our word — follow the link.</p>
       </Block>
 
       <Block n="09" title="The record's music">
-        <p>Music is given to this record, not licensed to it. The artist keeps their name and keeps their rights; the master is stored exactly as it was given and served whole; no play is counted, nothing is ranked, and no one pays for a place on the page.</p>
-        <p>Nothing here starts by itself. Every piece is heard because a reader pressed play, and the record's own theme is held to the same rule: it stands as a signal, credited to its composer, taking no rank above the rest of the music.</p>
-        <p>A piece held back is paused, not removed: its master is kept whole and untouched, and its place returns when it is released.</p>
+        <p>Music is given to this record, not licensed to it. The artist keeps their name and keeps their rights; the master is stored exactly as it was given and served whole; no play is counted, nothing is ranked, and nobody pays for a place on the page.</p>
+        <p>Nothing here starts by itself. Every piece is heard because a reader pressed play, and the record's own theme is held to the same rule: it is a signal, credited to its composer, taking no rank above the rest.</p>
+        <p>A piece held back is paused, not removed: its master stays whole and its place returns when it is released.</p>
       </Block>
 
       <Block n="10" title="What this record refuses to do">

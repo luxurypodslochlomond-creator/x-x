@@ -29,15 +29,13 @@ export default function ClimateCorrections() {
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
       <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
-        A correction is a change to something already on the record. When one is made, the entry
-        carries the note itself — what changed, and the date it was changed — and it appears here.
-        The note is printed exactly as the person who signed it wrote it: never shortened, never softened, never
-        folded into a summary.
+        A correction is a change to something already on the record. The entry carries the note itself —
+        what changed, and the date — and it appears here, printed exactly as the person who signed it
+        wrote it. Never shortened, never softened.
       </p>
       <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
-        Nothing is deleted to make this page look better. An entry that turns out to be wrong keeps
-        its place and gains a correction, because a record with a gap in it is harder to check than
-        a record with a mistake it owned.
+        Nothing is deleted to tidy this page up. An entry that turns out to be wrong keeps its place and
+        gains a correction: a record with a mistake it owned is easier to check than one with a gap in it.
       </p>
 
       <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 lg:px-5 py-2.5 lg:py-3.5 text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] mb-7">
@@ -65,8 +63,8 @@ export default function ClimateCorrections() {
 
       {corrections && corrections.length === 0 && (
         <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] py-3">
-          No corrections have been made yet. That is not a boast — it is how early this is. The
-          moment one is made it appears here, dated, with the entry it belongs to.
+          No corrections yet. That is not a boast — it is how early this is. The first one appears
+          here, dated, with the entry it belongs to.
         </p>
       )}
 
@@ -90,22 +88,19 @@ export default function ClimateCorrections() {
         </div>
         <div className="space-y-2.5 text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">
           <p>
-            The screen that reads each entry as it arrives is a machine. It produces an advisory
-            note and nothing else. It cannot publish an entry, it cannot hold one back on its own
-            authority, and its opinion is never treated as a finding. A person reads what it said
-            and decides, and every decision is written to an audit trail: who looked, when, and
-            what the note said.
+            The screen that reads each entry is a machine. It produces an advisory note and nothing
+            else: it cannot publish an entry, cannot hold one back on its own authority, and its
+            opinion is never a finding. A person reads it and decides, and every decision goes into
+            the audit trail — who looked, when, what the note said.
           </p>
           <p>
-            What the machine is not allowed to do is the part that matters to anyone being asked to
-            trust a system that uses machine help: it never writes a claim onto this record, never
-            signs one, and never corrects one. People do that, under their own names.
+            It never writes a claim onto this record, never signs one, never corrects one. People do
+            that, under their own names.
           </p>
           <p>
             And when those people get something wrong, it is published here, in the same size of
-            letters as the entry itself. That is the only honest way to ask anybody to trust a
-            record with a machine in it — show where the advice was taken, and show where the humans
-            were wrong.
+            letters as the entry. Show where the advice was taken, and show where the humans were
+            wrong — that is the only honest way to ask anyone to trust a record with a machine in it.
           </p>
         </div>
         <p className="mt-3 text-[11px] font-mono leading-relaxed text-[#5a5246]">
