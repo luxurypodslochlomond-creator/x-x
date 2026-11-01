@@ -189,8 +189,6 @@ export default function ClimateTerms() {
           </div>
         </section>
 
-        {/* FOOT */}
-        <p className="text-center mt-10 text-[9px] font-mono font-black tracking-[0.3em] text-[#5a5246]/40">x = x</p>
       </div>
     </ClimateRecordShell>
   );

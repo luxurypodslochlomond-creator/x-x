@@ -25,6 +25,7 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // is handed the link, and finds it again at the foot of any page of the record.
 const FOOTER_LINKS = [
   { label: 'The Buttons', page: 'ClimateGuide' },
+  { label: 'The Brief', page: 'ClimateBrief' },
   { label: 'For Janine', page: 'ClimateHost' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
