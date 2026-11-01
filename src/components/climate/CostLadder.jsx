@@ -42,11 +42,12 @@ export default function CostLadder() {
           follows storage, not popularity.
         </p>
         <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mt-2">
-          What keeps it light, by design: it is text first. No video, no advertising, no analytics pixels, no
-          third-party scripts. Pictures are shrunk in the browser before they are kept, a tongue is translated
-          once and then served, and a copy of a source is kept once rather than fetched again. Nothing on this
-          record runs a server of its own. A reader costs almost nothing; a thousand new pages of someone
-          else&rsquo;s words, kept forever, cost something.
+          What keeps it light, by design: it is text first. No video of its own, no advertising, no tracking
+          pixels, no third-party analytics — the page fetches a font and nothing else from outside. Pictures
+          are shrunk in the browser before they are kept, a tongue is translated once and then served, and a
+          copy of a source is kept once rather than fetched again. Nothing on this record runs a server of its
+          own. A reader costs almost nothing; a thousand pages of someone else&rsquo;s words, kept forever,
+          cost something.
         </p>
 
         <div className="mt-4 border border-[#141210]/25">
