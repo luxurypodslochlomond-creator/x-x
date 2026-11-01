@@ -8,18 +8,30 @@ import { Archive, ChevronDown } from 'lucide-react';
 // rights, and the record's job is to send the reader there, not to replace it.
 export default function SourceArchiveNote({ entryId, sourceUrl }) {
   const [copy, setCopy] = useState(null);
+  const [asked, setAsked] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     let live = true;
     if (!entryId) return undefined;
     base44.functions.invoke('climateSourceNote', { entry_id: entryId })
-      .then(res => { if (live && res.data?.found) setCopy(res.data); })
-      .catch(() => {});
+      .then(res => { if (!live) return; if (res.data?.found) setCopy(res.data); setAsked(true); })
+      .catch(() => { if (live) setAsked(true); });
     return () => { live = false; };
   }, [entryId]);
 
-  if (!copy) return null;
+  // Where no copy could be taken, the entry says so rather than showing nothing. It
+  // does not name a reason it cannot know: a reader is told what is and is not held,
+  // never why.
+  if (!copy) {
+    if (!asked || !sourceUrl) return null;
+    return (
+      <p className="mt-2 border-l-4 border-l-[#141210]/20 pl-3 text-[10px] font-mono leading-relaxed text-[#6b6258]">
+        No copy of this source is kept here. The link above goes to the origin itself, and this entry cannot show you
+        what it said on the day.
+      </p>
+    );
+  }
 
   const when = new Date(copy.fetched_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 

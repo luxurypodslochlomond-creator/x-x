@@ -97,7 +97,7 @@ export default function ClimateHost() {
           <Check done>No account needed to read anything, in any language, on any phone.</Check>
           <Check done>Nothing is ranked, counted for popularity, or paid into a better position.</Check>
           <Check done>The method is written down, so a sceptic can check the record without asking us anything.</Check>
-          <Check done>Citations are frozen as they stood: 29 of the 39 cited pages were read on the day and copied with a fingerprint, so a quote cannot drift. The ten that refused to be read say so on their own entry.</Check>
+          <Check done>Citations are frozen as they stood: 29 of the 39 cited pages were read on the day and copied with a fingerprint, so a quote cannot drift. The ten that could not be read carry no copy, and their entries say so plainly instead of letting a link stand in for the proof.</Check>
         </ul>
 
         <p className="font-black text-[#141210] mt-4">Still open — each one is a step, not a principle:</p>

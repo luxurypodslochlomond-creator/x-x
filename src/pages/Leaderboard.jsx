@@ -90,9 +90,12 @@ const HealerCard = ({ user, cleanups, proofs, tracks, rank }) => {
     const badges = calculateBadges(user, cleanups, proofs, tracks);
     const topBadge = badges[0] || HealerBadges.soul_spark;
     
+    // Only checked cleanups count toward a rank. A claim nothing has verified does not
+    // put anybody top of a public list, however large the number on it.
+    const confirmedCleanups = (cleanups || []).filter(c => c.verification_status === 'instant_paid' || c.verification_status === 'fully_verified');
     const totalImpact = {
-        weight: cleanups?.reduce((sum, c) => sum + (c.litter_weight || 0), 0) || 0,
-        cleanups: cleanups?.length || 0,
+        weight: confirmedCleanups.reduce((sum, c) => sum + (c.litter_weight || 0), 0),
+        cleanups: confirmedCleanups.length,
         love: proofs?.length || 0,
         frequencies: tracks?.length || 0,
         souls_reached: tracks?.reduce((sum, t) => sum + (t.play_count || 0), 0) || 0
