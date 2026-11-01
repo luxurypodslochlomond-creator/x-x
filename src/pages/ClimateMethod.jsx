@@ -44,6 +44,7 @@ export default function ClimateMethod() {
         <p>A record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
         <p>Entries are ordered by date, never by popularity. Nothing counts likes, shares or followers. Nothing can be pushed up by paying, so there is nothing here to game.</p>
         <p>One thing is counted, and only one: a read — an entry was opened. Once per place per half hour, never per person, and the place is never an address. Reads are shown on the impact page. They never order this record and never change it.</p>
+        <p>It reports what is working; it does not promise that it adds up. A catalogue of solutions is not evidence of improvement, and this record will not blur the two — the reader does that arithmetic, with the sources in front of them.</p>
         <Rule>If a claim on this record cannot be traced to something outside it, it does not belong here.</Rule>
       </Block>
 
