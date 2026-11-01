@@ -23,13 +23,17 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // They sit in one quiet place, in the footer of every page of the record. The Buttons —
 // the page that lists every button and what it does — sits here too: a host or handler
 // is handed the link, and finds it again at the foot of any page of the record.
+// Terms and Privacy come first because on a phone this rail starts at its left edge:
+// they used to be the last two, which meant a reader on a handset had to swipe to find
+// the two links that say what the record does with their words and their address.
+// They stay in the foot of every page, where a reader looks for them.
 const FOOTER_LINKS = [
+  { label: 'Terms', page: 'ClimateTerms' },
+  { label: 'Privacy', page: 'ClimatePrivacy' },
   { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'The Brief', page: 'ClimateBrief' },
   { label: 'For Janine', page: 'ClimateHost' },
   { label: 'For a host', page: 'ClimateHandover' },
-  { label: 'Terms', page: 'ClimateTerms' },
-  { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
 
 export default function ClimateLayout({ children, currentPage }) {

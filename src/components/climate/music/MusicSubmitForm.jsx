@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Music, Check, AlertTriangle } from 'lucide-react';
 import { readMasterSpec } from './audioSpec';
 import { fingerprintMaster } from './masterPrint';
+import { createPageUrl } from '@/utils';
 
 // ── GIVE THE RECORD YOUR TRACK ──────────────────────────────────────────────────
 // The artist's own door, and nothing is asked of them that costs them anything: no
@@ -260,6 +261,9 @@ export default function MusicSubmitForm({ onSubmitted }) {
       <div>
         <label className={LABEL} htmlFor="track-email">Your email <span className="normal-case tracking-normal">— used only to reach you about this track, never published</span></label>
         <input id="track-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={FIELD} placeholder="you@example.com" />
+        <p className="text-[10px] font-mono text-[#6b6258] mt-1.5 leading-relaxed">
+          Your address is kept so the record can reach you about this track, and is never shown to a listener. What that means, in full: <a href={createPageUrl('ClimatePrivacy')} target="_blank" rel="noopener noreferrer" className="underline text-[#141210]">Privacy page</a>.
+        </p>
       </div>
 
       {/* The honeypot: a person never sees it, a bot fills it in. */}
