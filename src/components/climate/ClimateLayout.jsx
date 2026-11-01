@@ -27,13 +27,15 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // they used to be the last two, which meant a reader on a handset had to swipe to find
 // the two links that say what the record does with their words and their address.
 // They stay in the foot of every page, where a reader looks for them.
+// Kept off the public foot, on purpose: "For Janine" and "For a host" are working pages —
+// they name what is unfinished, what a handover costs, and who holds the keys. Both say so
+// themselves at the top. They stay live at their own addresses, handed over by link to the
+// person they were written for, and are never a door on the record a passing reader can open.
 const FOOTER_LINKS = [
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
   { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'The Brief', page: 'ClimateBrief' },
-  { label: 'For Janine', page: 'ClimateHost' },
-  { label: 'For a host', page: 'ClimateHandover' },
 ];
 
 export default function ClimateLayout({ children, currentPage }) {

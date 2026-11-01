@@ -15,8 +15,10 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 export default function ClimateBrief() {
   // The brief tells her the numbers are live — so they are. Counted from the
   // database on every visit; today's verified figures are the fallback.
+  // The fallbacks are today's real figures, so a failed count can never print a number that
+  // was true weeks ago. Every figure below is re-counted from the database on each visit.
   const [stats, setStats] = useState({
-    entries: 14, solutions: 6, crises: 8, locations: 10, categories: 12, actions: 3, groups: 4,
+    entries: 19, solutions: 10, crises: 9, wire: 18, locations: 13, categories: 16, actions: 3, groups: 4,
   });
 
   useEffect(() => {
@@ -25,18 +27,20 @@ export default function ClimateBrief() {
       // counting distinct values in the browser: the record no longer hands out the address
       // a submitter gave, and a field held back that way also stops a browser's own
       // counting query. The two numbers still come from the real published entries.
-      const [solutions, crises, facets, actions, groups] = await Promise.all([
+      const [solutions, crises, facets, actions, groups, wire] = await Promise.all([
         base44.entities.ClimateSolution.count({ entry_type: 'solution', status: 'published' }),
         base44.entities.ClimateSolution.count({ entry_type: 'climate_crisis', status: 'published' }),
         base44.functions.invoke('climateRecordFacets', {}).then(r => r?.data || {}),
         base44.entities.ClimateAction.count({ status: 'published' }),
         base44.entities.ClimateGroup.count({}),
+        base44.entities.ClimateNews.count({ status: 'published' }),
       ]);
       setStats(prev => ({
         ...prev,
         entries: solutions + crises,
         solutions,
         crises,
+        wire,
         locations: facets.countries ?? prev.locations,
         categories: facets.categories ?? prev.categories,
         actions,
@@ -101,10 +105,10 @@ export default function ClimateBrief() {
           <div className="space-y-2.5">
             {[
               ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
-              ['Your category taxonomy', 'Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. 16 of them carry entries today; the rest are supported and ready.'],
+              ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. ${stats.categories} of them carry entries today; the rest are supported and ready.`],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
               ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.'],
-              ['Copyright-free images only', 'Every image is sourced from copyright-free pools (Unsplash). Image credit is stored on each entry.'],
+              ['Copyright-free images only', 'Where a picture is shown it comes from a copyright-free pool and carries its credit on the entry. A credit is a thank you, not a permission — so an entry with no cleared picture shows none, rather than borrowing one from somebody else\u2019s page.'],
               ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.'],
               ['Scale field', 'Individual, community, city, country, global — your spec, implemented.'],
               ['Groups', 'People working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.'],
@@ -134,6 +138,7 @@ export default function ClimateBrief() {
           <div className="grid grid-cols-2 gap-2.5">
             {[
               [String(stats.entries), `entries on the record (${stats.solutions} solutions, ${stats.crises} crises)`],
+              [String(stats.wire), 'dated, sourced entries on the wire'],
               [String(stats.locations), 'locations represented — countries and regions'],
               [String(stats.categories), 'of 32 categories with entries'],
               [String(stats.actions), 'ground actions listed'],
@@ -159,7 +164,7 @@ export default function ClimateBrief() {
           <div className="space-y-2.5">
             {[
               ['Entry translation by community', 'The interface is translated now. Entries themselves (the solution text) are translated by our community over time — not automatically, because accuracy matters more than speed.'],
-              ['8 empty categories', 'Heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination. The database and filters support them; we need to seed the first entries.'],
+              ['Categories still to fill', `${32 - stats.categories} of the 32 categories have no entry yet. The database and the filters support them; they need their first entries, not new code.`],
               ['Photo51 evidence link', 'Connecting ground-action photos (cleanups, plantings) to the climate record, so an action can carry visual proof without storing personal data.'],
               ['Mapping view', 'A rough-region map of where solutions and crises are happening — privacy-respecting, no precise pins.'],
             ].map(([title, body]) => (
@@ -249,7 +254,7 @@ You gave us a spec. We built it. Here is where each part stands today — done, 
 DONE — live right now:
 
 - Two entry types: Solutions and Climate Crises, as you specified.
-- Your 20-category taxonomy is in and filterable, and has grown to 32 as the record took entries. 18 carry entries today; the rest are wired up and waiting.
+- Your 20-category taxonomy is in and filterable, and has grown to 32 as the record took entries. ${stats.categories} carry entries today; the rest are wired up and waiting.
 - Rough location only — country and region, no coordinates. Your privacy stance, kept.
 - A transmission map: solutions and actions plotted by country and self-identified nation, rough regions only, never precise pins.
 - Every entry screened for spam as it arrives; clear entries go on the record at once, anything unclear waits for a human check.
@@ -266,7 +271,7 @@ DONE — live right now:
 
 PLANNED — not yet built:
 
-- 8 categories are empty and need their first entries: heat, coastal protection, zooplankton, phytoplankton, rewilding, transport, electric vehicles, solar desalination.
+- ${32 - stats.categories} of the 32 categories have no entry yet and need their first ones.
 - Linking ground-action photos to the record as visual proof — designed, not built.
 
 WE WILL NOT DO:
@@ -281,7 +286,7 @@ WE WILL NOT DO:
 
 WHERE THE NUMBERS STAND TODAY:
 
-${stats.entries} entries on the record — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 32 categories filled. 65 tongues, 8 written by hand. These are live and grow as the community adds entries.
+${stats.entries} solutions and crises — ${stats.solutions} solutions, ${stats.crises} crises — across ${stats.locations} countries and regions, plus ${stats.wire} dated, sourced entries on the wire. ${stats.actions} ground actions. ${stats.groups} community groups. ${stats.categories} of 32 categories filled. 65 tongues, 8 written by hand. These are live and grow as the community adds entries.
 
 The live record and this brief are at the links below.
 
