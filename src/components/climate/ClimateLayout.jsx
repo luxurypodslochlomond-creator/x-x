@@ -156,13 +156,15 @@ export default function ClimateLayout({ children, currentPage }) {
               {item.label}
             </Link>
           ))}
-            <Link
-              to="/XEqualsX"
-              className="text-[10px] font-mono font-black tracking-[0.2em] text-[#b3261e] hover:text-[#141210] transition-colors"
-            >
-              x = x
-            </Link>
           </div>
+          {/* x = x stands on its own line: not another link in a row, but the line the
+              whole record rests on — the covenant, said once, at the foot of every page. */}
+          <Link
+            to="/XEqualsX"
+            className="mt-2.5 block text-center text-[11px] font-mono font-black tracking-[0.3em] text-[#b3261e] hover:text-[#141210] transition-colors"
+          >
+            x = x
+          </Link>
         </div>
       </footer>
     </div>
