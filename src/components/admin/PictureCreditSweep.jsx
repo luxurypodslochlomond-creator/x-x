@@ -18,10 +18,27 @@ const PLATFORM_ONLY = /^(unsplash|pexels|pixabay|freepik|wikimedia commons|flick
 
 const creditIsPlatformOnly = (credit) => PLATFORM_ONLY.test(String(credit || '').trim());
 
+// A credit is not a licence. A picture shown from the publisher's own server is not held by
+// the record at all: nothing was given, nothing was asked, and if they move the file the entry
+// breaks. Two kinds of address are fine — one served from this app, and Unsplash's own CDN,
+// which is built to be embedded under its licence.
+const LICENSED_CDN = /^images\.unsplash\.com$/i;
+
+function isHeldHere(url) {
+  if (!url || !/^https?:/i.test(url)) return true;
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, '');
+    return LICENSED_CDN.test(host) || /base44/i.test(host);
+  } catch {
+    return true;
+  }
+}
+
 // What this entry needs, worst first. Null means nothing to do.
 function gapFor(entry) {
   const hasPicture = Boolean(entry.image_url);
   const credit = String(entry.image_credit || '').trim();
+  if (hasPicture && !isHeldHere(entry.image_url)) return 'held_elsewhere';
   if (credit && !hasPicture) return 'credit_only';
   if (credit && creditIsPlatformOnly(credit)) return 'credit_needs_a_name';
   if (!hasPicture && !credit) return 'needs_picture';
@@ -29,6 +46,10 @@ function gapFor(entry) {
 }
 
 const NEED = {
+  held_elsewhere: {
+    label: 'Shown from their server, not held here',
+    said: 'a credit is not a permission — either the file is kept here with the publisher\'s leave, or the entry carries the link and no picture',
+  },
   credit_only: {
     label: 'Credit stands, picture does not',
     said: 'the credit is on the entry but no picture is held here — either add the picture or the credit is claiming something a reader cannot see',
@@ -43,7 +64,7 @@ const NEED = {
   },
 };
 
-const ORDER = ['credit_only', 'credit_needs_a_name', 'needs_picture'];
+const ORDER = ['held_elsewhere', 'credit_only', 'credit_needs_a_name', 'needs_picture'];
 
 export default function PictureCreditSweep() {
   const [rows, setRows] = useState(null);
@@ -84,9 +105,10 @@ export default function PictureCreditSweep() {
 
       {!rows && (
         <p className="text-[10px] font-mono text-[#6b6258] leading-relaxed mb-2">
-          Check every solution, crisis and wire entry for the three things that go wrong quietly: a credit with no
-          picture under it, a credit naming a platform instead of a photographer, and no picture at all. It reports
-          only — it will never write a credit or guess who took a picture.
+          Check every solution, crisis and wire entry for the four things that go wrong quietly: a picture shown from
+          somebody else's server, a credit with no picture under it, a credit naming a platform instead of a
+          photographer, and no picture at all. It reports only — it will never write a credit, guess who took a
+          picture, or fetch one from anybody's page.
         </p>
       )}
 
