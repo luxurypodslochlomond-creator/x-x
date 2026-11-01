@@ -207,9 +207,12 @@ export default function Learn51Layout() {
       {/* Page content */}
       <Outlet />
       {/* Dignified support link */}
-      <div className="text-center py-6 border-t border-white/5">
-        <Link to="/SupportLearn51" className="text-white/20 hover:text-violet-400 text-xs transition-colors">
+      <div className="text-center py-6 border-t border-white/5 space-y-2">
+        <Link to="/SupportLearn51" className="block text-white/20 hover:text-violet-400 text-xs transition-colors">
           ♾️ Keep Learn51 free — donate
+        </Link>
+        <Link to="/XEqualsX" className="block text-white/15 hover:text-white/40 text-[10px] tracking-[0.3em] font-mono transition-colors">
+          x = x
         </Link>
       </div>
 

@@ -151,6 +151,13 @@ export default function ClimateLayout({ children, currentPage }) {
               </Link>
             </React.Fragment>
           ))}
+            <span className="text-[#6b6258]/40 text-[10px] font-mono">·</span>
+            <Link
+              to="/XEqualsX"
+              className="text-[10px] font-mono font-black tracking-[0.2em] text-[#b3261e] hover:text-[#141210] transition-colors"
+            >
+              x = x
+            </Link>
           </div>
         </div>
       </footer>

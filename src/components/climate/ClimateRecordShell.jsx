@@ -33,7 +33,14 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
           <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">{marker}</span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">x = x</div>
+        {/* The mark, and the way to it — every page of the record carries it, and it goes
+            to the page that says what it means. */}
+        <Link
+          to="/XEqualsX"
+          className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none hover:text-[#efe7d6] transition-colors"
+        >
+          x = x
+        </Link>
       </div>
 
       {/* Hero — cold ink, the beacon, the page says what it is */}

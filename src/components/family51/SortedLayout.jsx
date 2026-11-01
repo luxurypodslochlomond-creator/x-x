@@ -64,7 +64,17 @@ export default function SortedLayout({ children, currentPage }) {
       <main style={{ maxWidth: '100vw', overflowX: 'hidden', paddingTop: '20px', position: 'relative', zIndex: 1 }}>
         {children}
       </main>
-      
+
+      {/* The mark travels with the family, not just the record. Quiet, but it goes somewhere. */}
+      <div style={{ textAlign: 'center', padding: '18px 20px 26px', position: 'relative', zIndex: 1 }}>
+        <Link
+          to="/XEqualsX"
+          style={{ fontSize: 10, letterSpacing: '0.3em', fontWeight: 800, color: '#8a7f6b', textDecoration: 'none' }}
+        >
+          x = x
+        </Link>
+      </div>
+
     </div>
   );
 }
