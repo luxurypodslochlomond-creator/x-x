@@ -19,7 +19,7 @@ import SourceBlock from '@/components/climate/SourceBlock';
 import SourceArchiveNote from '@/components/climate/SourceArchiveNote';
 import VerificationBadge from '@/components/climate/VerificationBadge';
 import { recordAddress } from '@/components/climate/recordAddress';
-import { VERIFICATION_NOTE } from '@/components/climate/verification';
+import { verificationNoteOf } from '@/components/climate/verification';
 import VerificationControl from '@/components/admin/VerificationControl';
 
 const CATEGORIES = [
@@ -193,7 +193,7 @@ export default function ClimateDetail() {
             <VerificationBadge entry={record} />
           </div>
           <p className="mt-2 text-[11px] font-mono text-[#5a5246] leading-relaxed">
-            {VERIFICATION_NOTE[record.verification] || VERIFICATION_NOTE.single_source}
+            {verificationNoteOf(record)}
           </p>
           {record.corroborating_source && (
             <p className="mt-1.5 text-[11px] font-mono text-[#141210]">Second origin · {record.corroborating_source}</p>
@@ -307,7 +307,7 @@ export default function ClimateDetail() {
           <VerificationBadge entry={record} />
         </div>
         <p className="mt-2.5 text-[11px] font-mono text-[#5a5246] leading-relaxed">
-          {VERIFICATION_NOTE[record.verification] || VERIFICATION_NOTE.single_source}
+          {verificationNoteOf(record)}
         </p>
         {record.corroborating_source && (
           <p className="mt-1.5 text-[11px] font-mono text-[#141210]">Second origin · {record.corroborating_source}</p>

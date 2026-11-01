@@ -30,6 +30,14 @@ const VERIFICATION = {
   single_source: { label: 'Single source', bg: INK, fg: BONE },
 };
 
+// 'Corroborated' travels on a card only where a second origin is actually named on the
+// entry — the same rule the page keeps, so a picture sent elsewhere cannot overstate it.
+const badgeFor = (entry) => (
+  entry?.verification === 'corroborated' && !String(entry?.corroborating_source || '').trim()
+    ? VERIFICATION.single_source
+    : VERIFICATION[entry?.verification] || VERIFICATION.single_source
+);
+
 const KIND = { emergency: 'Emergency', milestone: 'Milestone', initiative: 'Initiative' };
 
 // Break words into lines that fit the width, with a hard cap and an honest ellipsis.
@@ -148,7 +156,7 @@ export async function buildWireShareCard(entry, options = {}) {
   }
 
   // How well it is known, what kind of entry it is.
-  const badge = VERIFICATION[entry.verification] || VERIFICATION.single_source;
+  const badge = badgeFor(entry);
   ctx.font = `900 20px ${MONO}`;
   const badgeText = badge.label.toUpperCase();
   const badgeW = ctx.measureText(badgeText).width + 32;
@@ -481,7 +489,7 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   }
 
   // How well it is known, and what kind of entry it is.
-  const badge = VERIFICATION[entry.verification] || VERIFICATION.single_source;
+  const badge = badgeFor(entry);
   ctx.font = `900 20px ${MONO}`;
   const badgeText = badge.label.toUpperCase();
   const badgeW = ctx.measureText(badgeText).width + 32;

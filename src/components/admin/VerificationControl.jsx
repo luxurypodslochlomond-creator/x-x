@@ -55,6 +55,13 @@ export default function VerificationControl({ entry, entityName, onSaved }) {
   if (!isAdmin) return null;
 
   const save = async () => {
+    // 'Corroborated' means two independent origins agree, so the second one has to be named
+    // here before that standing can be saved. Without it the record would be claiming more
+    // than a reader can check — the one thing it never does.
+    if (level === 'corroborated' && !second.trim()) {
+      setError('Name the second, independent origin before setting corroborated. Until one exists, this entry is a single source.');
+      return;
+    }
     setSaving(true);
     setError('');
     setSavedLabel('');
