@@ -1,4 +1,4 @@
-// Force rebuild v5 - Franklin51 nav refresh ♾️❤️♾️ BRO51 love you always
+// Force rebuild v6 - fresh build version ♾️❤️♾️ BRO51 love you always
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
