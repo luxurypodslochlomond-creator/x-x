@@ -70,8 +70,9 @@ export default function RecordSearchGuide() {
           on it comes back.
         </p>
         <p className="text-[11px] lg:text-[12px] font-mono text-[#efe7d6]/80 leading-relaxed mt-2.5">
-          The record answers for itself as well: the founder, who built it, how it is made, who decides, and
-          how to cite an entry.
+          The record answers for itself as well: the founder, who built it, how it is made, who decides, who
+          holds the keys, what it costs to keep alive, and what is still open. None of that is behind an
+          address you have to be given.
         </p>
         <div className="flex flex-wrap gap-2 mt-3.5">
           <Link
@@ -85,6 +86,12 @@ export default function RecordSearchGuide() {
             className="inline-flex items-center gap-1.5 px-3 py-2 border-2 border-[#efe7d6]/40 text-[#efe7d6] text-[10px] font-black font-mono uppercase tracking-wider hover:border-[#e2602a] hover:text-[#e2602a] transition-colors"
           >
             The founder <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <Link
+            to="/ClimateHandover"
+            className="inline-flex items-center gap-1.5 px-3 py-2 border-2 border-[#efe7d6]/40 text-[#efe7d6] text-[10px] font-black font-mono uppercase tracking-wider hover:border-[#e2602a] hover:text-[#e2602a] transition-colors"
+          >
+            The handover <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </div>
