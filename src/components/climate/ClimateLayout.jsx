@@ -27,6 +27,7 @@ const FOOTER_LINKS = [
   { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'The Brief', page: 'ClimateBrief' },
   { label: 'For Janine', page: 'ClimateHost' },
+  { label: 'For a host', page: 'ClimateHandover' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];

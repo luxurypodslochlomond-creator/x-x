@@ -50,6 +50,8 @@ const StatCard = ({ icon: Icon, label, value, unit, color, glow }) => (
 
 const CountyLeaderboard = ({ cleanups }) => {
     const countyStats = cleanups.reduce((acc, cleanup) => {
+        // An unverified claim does not win a place here. Same rule the totals use.
+        if (cleanup.verification_status === 'pending_verification' || cleanup.verification_status === 'rejected') return acc;
         const county = cleanup.county || 'Unknown';
         if (!acc[county]) {
             acc[county] = { count: 0, weight: 0 };
@@ -158,10 +160,13 @@ export default function GlobalImpactPage() {
         return <QuantumLoader />;
     }
 
-    const totalWeight = cleanups.reduce((sum, c) => sum + (c.litter_weight || 0), 0);
+    // The weight is counted over the same cleanups the verified count uses: a claim that
+    // nothing has checked is not impact, however large the number on it.
+    const verifiedList = cleanups.filter(c => c.verification_status === 'instant_paid' || c.verification_status === 'fully_verified');
+    const totalWeight = verifiedList.reduce((sum, c) => sum + (c.litter_weight || 0), 0);
     const totalTokens = users.reduce((sum, u) => sum + (u.love_balance || 0), 0);
     const totalUsers = users.length;
-    const verifiedCleanups = cleanups.filter(c => c.verification_status === 'instant_paid' || c.verification_status === 'fully_verified').length;
+    const verifiedCleanups = verifiedList.length;
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-black via-indigo-950/50 to-black text-white p-6 md:p-12">

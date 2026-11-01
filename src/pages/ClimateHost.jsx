@@ -5,6 +5,7 @@ import HostAnswer from '@/components/climate/HostAnswer';
 import CopyLine from '@/components/climate/CopyLine';
 import CostLadder from '@/components/climate/CostLadder';
 import SendThisPage from '@/components/climate/host/SendThisPage';
+import NoteToJanine from '@/components/climate/host/NoteToJanine';
 import HandlerBrief from '@/components/climate/host/HandlerBrief';
 import HandlerOrEditor from '@/components/climate/host/HandlerOrEditor';
 import WhoHoldsTheKeys from '@/components/climate/host/WhoHoldsTheKeys';
@@ -87,7 +88,7 @@ export default function ClimateHost() {
           { label: 'The impact', to: createPageUrl('ClimateImpact') },
         ]}
       >
-        <p><strong>Yes</strong> to showing the record now. <strong>Not yet</strong> to handing it over: a handover is a short list of things that must exist, and four of them do not yet.</p>
+        <p><strong>Yes</strong> to showing the record now. <strong>Not yet</strong> to handing it over: a handover is a short list of things that must exist, and three of them do not yet.</p>
 
         <p className="font-black text-[#141210] mt-4">What anyone can check for themselves, today:</p>
         <ul className="space-y-1.5 mt-1">
@@ -96,20 +97,21 @@ export default function ClimateHost() {
           <Check done>No account needed to read anything, in any language, on any phone.</Check>
           <Check done>Nothing is ranked, counted for popularity, or paid into a better position.</Check>
           <Check done>The method is written down, so a sceptic can check the record without asking us anything.</Check>
+          <Check done>Citations are frozen as they stood: 29 of the 39 cited pages were read on the day and copied with a fingerprint, so a quote cannot drift. The ten that refused to be read say so on their own entry.</Check>
         </ul>
 
         <p className="font-black text-[#141210] mt-4">Still open — each one is a step, not a principle:</p>
         <ul className="space-y-1.5 mt-1">
           <Check done={false}><strong>The source is not published.</strong> Until it is, a host cannot build it, audit it, or leave with it. This is the largest gap on the record.</Check>
-          <Check done={false}><strong>Citations are not yet frozen.</strong> Fingerprinting each entry so a quote cannot drift is designed, not built. Today a quote is checked against the entry, not pinned.</Check>
           <Check done={false}><strong>No named editor yet.</strong> The record is meant to carry one accountable name and a contact line. That is being settled with you, and this page will not invent a masthead in the meantime.</Check>
           <Check done={false}><strong>No domain in a host's name.</strong> A record whose address belongs to somebody else is lent, not handed over.</Check>
         </ul>
 
         <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 py-2.5 mt-3">
-          Closed since the last draft: the cost. It is on this page, in answer 04, with the figure a letter can
-          carry. So: share it as a record open for comment, and describe the handover as a short list being
-          closed. That holds, and a promise does not.
+          Closed since the last draft: the cost, and the freezing of citations. The figure a letter can carry is on
+          this page, in answer 04. Every cited source has been read and copied as it stood, and the ten origins that
+          refused to be read are named rather than hidden. So: share it as a record open for comment, and describe
+          the handover as a short list being closed. That holds, and a promise does not.
         </p>
       </HostAnswer>
 
@@ -129,6 +131,8 @@ export default function ClimateHost() {
           </div>
           <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210]">{INTRO_PARAGRAPH}</p>
         </div>
+
+        <NoteToJanine />
       </HostAnswer>
 
       <HostAnswer
