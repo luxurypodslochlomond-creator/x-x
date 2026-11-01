@@ -46,7 +46,7 @@ const REFUSALS = [
 const OPEN = [
   ['The platform\'s source is not published yet.', 'Until it is, a host cannot build it, audit it or leave with it. This is the largest gap, and it is a step, not a principle.'],
   ['Thirty-nine sources, twenty-nine kept.', 'Each cited page was read on the day it went on the record and copied, with a fingerprint, so a quote cannot drift. Ten origins would not be read: a journal, a UN agency site, a news site, a PDF host, and YouTube, which answered too often in one go. Those ten entries still link to the origin, and each says plainly that no copy is held rather than letting the link stand in for the proof.'],
-  ['No named editor on the masthead yet.', 'The record carries one accountable name and a contact line, or it says "unsigned" in the same size as everything else. It will not invent a name in the meantime.'],
+  ['No keeper named on the masthead yet.', 'Every published entry already carries the name of the person who signed it on: nineteen solutions, seventeen on the wire, three actions. What is missing is one accountable keeper for the whole record, with a contact line a reader can use. Until that name is real the record says "unsigned" in the same size as everything else, and will not invent one in the meantime.'],
 ];
 
 export default function ClimateHandover() {
