@@ -4,6 +4,14 @@
  * Bots get proper meta HTML, real browsers get redirected to the app
  */
 
+// ── THE PICTURE THAT MAKES THE CARD ──
+// WhatsApp, Facebook, LinkedIn and iMessage all refuse an SVG as a preview image. Hand them
+// one and they drop the whole card, leaving a naked URL in the message — which is exactly
+// what a raw "api/functions/ogRedirect?page=..." looks like arriving in a chat. So the card
+// is a real PNG, held on storage and served as it is: no drawing at fetch time, so a crawler
+// that gives up in a few hundred milliseconds still gets its picture.
+const RECORD_CARD = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/845968049_generated_image.png';
+
 const PAGE_META = {
 
   // ── SORTED ──────────────────────────────────────────────────────────────
@@ -140,25 +148,25 @@ const PAGE_META = {
   TogetherChangeClimate: {
     title: 'Together We Can Change Climate — Record of the Time',
     description: 'A public record of climate emergencies and the positive actions that work. Verified solutions, real actions, every language on Earth, nobody left behind.',
-    image: '/api/functions/serveClimateOGImage',
+    image: RECORD_CARD,
     color: '#0f5f7a',
   },
   ClimatePlatform: {
     title: 'Together We Can Change Climate — Record of the Time',
     description: 'A public record of climate emergencies and the positive actions that work. Verified solutions, real actions, every language on Earth, nobody left behind.',
-    image: '/api/functions/serveClimateOGImage',
+    image: RECORD_CARD,
     color: '#0f5f7a',
   },
   ClimateMap: {
     title: 'Transmission Map — Together We Can Change Climate',
     description: 'Every climate solution, crisis and action on one map. See what is working, and where help is needed most.',
-    image: '/api/functions/serveClimateOGImage',
+    image: RECORD_CARD,
     color: '#0f5f7a',
   },
   ClimateImpact: {
     title: 'Global Impact — Together We Can Change Climate',
     description: 'How far the climate record has travelled. Readers by country and nation, solutions shared, actions taken.',
-    image: '/api/functions/serveClimateOGImage',
+    image: RECORD_CARD,
     color: '#0f5f7a',
   },
 
@@ -177,18 +185,35 @@ Deno.serve(async (req) => {
   const origin = `https://${host}`;
   
   const meta = PAGE_META[page] || PAGE_META.default;
-  const imageUrl = origin + meta.image;
+  // A card held on storage carries its own whole address; one drawn by a function is
+  // relative to wherever the record is standing.
+  const imageUrl = /^https?:\/\//.test(meta.image) ? meta.image : origin + meta.image;
   const pageUrl = `${origin}/${page}`;
 
   // Check if this is a social media crawler (not a real browser)
   const userAgent = req.headers.get('user-agent') || '';
-  const isCrawler = /whatsapp|telegram|twitterbot|facebookexternalhit|linkedinbot|slackbot|discordbot|iMessage|applebot|curl|python|bot/i.test(userAgent);
+  // Every unfurler that matters, not just the obvious ones. A crawler that is not named
+  // here is answered with a redirect, follows it to a page that has no tags of its own,
+  // and sends the message on with nothing but a bare link.
+  const isCrawler = /whatsapp|telegram|twitterbot|facebookexternalhit|facebookcatalog|linkedinbot|slackbot|slack-imgproxy|discordbot|imessage|applebot|skypeuripreview|vkshare|redditbot|pinterest|embedly|iframely|google-pagerenderer|bingpreview|snapchat|mastodon|bluesky|cardyb|curl|python|bot/i.test(userAgent);
 
   if (!isCrawler) {
     // Real browser — redirect to the actual page
     return new Response(null, {
       status: 302,
       headers: { 'Location': pageUrl }
+    });
+  }
+
+  // Some unfurlers ask with HEAD before they ask with GET. Answering that with a redirect
+  // is the same as having no card at all, so it is given the headers a GET would carry.
+  if (req.method === 'HEAD') {
+    return new Response(null, {
+      status: 200,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=300',
+      },
     });
   }
 
@@ -204,6 +229,8 @@ Deno.serve(async (req) => {
   <meta property="og:title" content="${meta.title}" />
   <meta property="og:description" content="${meta.description}" />
   <meta property="og:image" content="${imageUrl}" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="${meta.title}" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -224,7 +251,9 @@ Deno.serve(async (req) => {
     status: 200,
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'public, max-age=3600',
+      // Five minutes, not an hour: a unfurler that failed once must not be stuck with that
+      // failure for the rest of the day. WhatsApp in particular caches a miss hard.
+      'Cache-Control': 'public, max-age=300',
     }
   });
 });
