@@ -41,6 +41,9 @@ export default function ClimatePrivacy() {
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
               When you read an entry, we record the country you are reading from, so we can see the global reach of the record. We do not store your IP address. We do not know who you are. We only know someone in your country read something.
             </p>
+            <p className="mt-2 text-[12px] font-mono leading-relaxed text-[#5a5246]">
+              You may also choose to name your own nation or region — Scotland, Catalonia, Kurdistan, anywhere a country code fails you. That choice is kept in your own browser. It is only sent with a view if you pick it, and it is never linked to who you are.
+            </p>
           </div>
         </section>
 
@@ -176,6 +179,21 @@ export default function ClimatePrivacy() {
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#e2602a] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
               This record is run today as a public service by the team that built it. The organisation that will permanently hold and run it — and the person accountable for your data — will be named here before the record moves to its own home, which is being arranged now. Until then, every privacy question is answered personally by the people running the record, and your data is never passed to anyone else.
+            </p>
+          </div>
+        </section>
+
+        {/* 14. MUSIC AND LISTENER LINES */}
+        <section className="mb-6">
+          <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            14 · Music and Listener Lines
+          </h2>
+          <div className="bg-[#f7f1e5] border border-[#141210] p-4 space-y-2">
+            <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
+              If you give the record a track, we hold the exact master file you sent, the picture and words you gave with it, and your email — used only to reach you about your own work, never shown on a card and never handed to a listener. The format, length and fingerprint of the file are read from the file itself, so what the record says about your master is the master's own truth.
+            </p>
+            <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
+              A listener's line is different. We ask for no email and no account, a name only if they choose to give one, and the line is kept exactly as written. If a line ever has to come down for something unlawful, the line is not reprinted and the removal is stated on the track itself — a removal here is never silent.
             </p>
           </div>
         </section>

@@ -39,10 +39,13 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4 space-y-2">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              Solutions (a positive action to replicate), crises (an emergency to alert the world to), actions (cleanups, plantings, meetings), and comments on entries.
+              Solutions (a positive action to replicate), crises (an emergency to alert the world to), actions (cleanups, plantings, meetings), entries for the wire (what changed, where, who says so), gatherings of people working on the same thing, and comments on entries.
+            </p>
+            <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
+              Music is given, never bought. If you made a track you may hand it to the record: your master is stored exactly as you gave it, your name stays on the work, your rights stay yours, and you decide once whether anyone may take the copy or only hear it here. Nothing on this record is sold, licensed or counted for money. A listener may leave a line under a track in their own words; a listener is never asked for an email, and their line is never edited.
             </p>
             <p className="text-[12px] font-mono leading-relaxed text-[#5a5246]">
-              Your email is required. We use it to contact you about your submission. We do not publish it, sell it, or spam you.
+              Your email is required to submit an entry, an action, a gathering or a track. We use it to contact you about your submission. We do not publish it, sell it, or spam you.
             </p>
           </div>
         </section>
@@ -55,6 +58,10 @@ export default function ClimateTerms() {
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#1e3a2b] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
               An AI advisory note screens every submission for spam and relevance. The AI never judges the science, and it never decides. Clear entries go on the record at once. Anything it flags waits for a real person to check. That is the promise.
+            </p>
+            <p className="mt-3 text-[12px] font-mono leading-relaxed text-[#141210]">
+              Every entry carries the printed name of the person who put it on the record. A machine can never fill that name — it has none to sign with — so an entry with no name says plainly that it is unsigned rather than showing nothing. When an entry turns out to be wrong, it is corrected in the open with the date it was corrected, never quietly edited or deleted, and every correction is gathered at{' '}
+              <Link to={createPageUrl('ClimateCorrections')} className="underline underline-offset-4 decoration-[#e2602a] font-black">corrections, in daylight</Link>.
             </p>
           </div>
         </section>
@@ -138,7 +145,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              If you see content that is yours, false, stolen, or harmful, tell us with the entry title and the reason, at the contact address published here once the record's permanent home is arranged. A human reviews every takedown request within seven days. If the claim is valid, the entry is removed or corrected. This is our takedown process.
+              If you see content that is yours, false, stolen, or harmful, tell us with the entry title and the reason at <a href="mailto:family@uf51.love" className="underline underline-offset-4 decoration-[#e2602a]">family@uf51.love</a>. A human reviews every takedown request within seven days. If the claim is valid, the entry is removed or corrected. This is our takedown process.
             </p>
           </div>
         </section>
