@@ -1,15 +1,12 @@
 import React from 'react';
 
-// The mark, performed once and then left alone.
+// The mark, cut once into ink and left alone.
 //
-// Built like a museum plate, not a poster: hairline rules, numbered evidence, nothing
-// competing with the sentence it stands next to. Three of the four numbered lines are
-// mathematics and cannot be argued with. The fourth is not mathematics at all, and
-// saying so out loud is the only thing stopping the mark turning into a slogan.
+// The rest of this page is paper and hairlines, so the mark gets the one black stone on
+// it: full-bleed, reversed out, framed like an engraved plate — the way a thing is set
+// when it is meant to be read by someone who was not there when it was cut.
 //
-// Then the voice. Big Science, 1982 — an answering machine as a voice talking into a
-// room that has emptied out. It is here because a recording is the one piece of
-// technology this page actually uses, and it was never a claim about the future.
+// No decoration. An inscription says the thing, once, and then it stops talking.
 
 const EVIDENCE = [
   {
@@ -45,23 +42,45 @@ const EVIDENCE = [
 export default function XEqualsXInscription() {
   return (
     <section aria-labelledby="the-mark" className="pb-8 border-b-2 border-[#141210]">
-      <h2
-        id="the-mark"
-        className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-[#6b6258]"
-      >
-        The mark · read it as an equation
-      </h2>
+      {/* The stone */}
+      <div className="relative bg-[#141210] overflow-hidden -mx-4 px-5 py-10">
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.06]"
+          style={{
+            background:
+              'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)',
+            animation: 'twcc-scan 3s linear infinite',
+          }}
+        />
+        <div className="absolute inset-2 border border-[#efe7d6]/20 pointer-events-none" />
+        <div className="absolute inset-[13px] border border-[#efe7d6]/10 pointer-events-none" />
 
-      <div className="mt-3 border-y-2 border-[#141210] py-6">
-        <p className="font-mono font-black text-[60px] leading-[0.85] tracking-[-0.05em] text-[#141210]">
-          x = x
-        </p>
-        <p className="mt-3 font-mono text-[11.5px] leading-relaxed text-[#141210] max-w-[34ch]">
-          An identity, not a promise. True before it is agreed with — and chosen where it is
-          not.
-        </p>
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <h2
+            id="the-mark"
+            className="font-mono text-[8.5px] font-black uppercase tracking-[0.32em] text-[#efe7d6]/55"
+          >
+            The mark · read it as an equation
+          </h2>
+
+          <p className="mt-6 font-mono font-black text-[76px] leading-[0.8] tracking-[-0.06em] text-[#efe7d6]">
+            x = x
+          </p>
+
+          <span className="mt-7 block w-10 h-px bg-[#e2602a]" />
+
+          <p className="mt-5 font-mono text-[11.5px] leading-relaxed text-[#efe7d6]/80 max-w-[26ch]">
+            An identity, not a promise. True before it is agreed with — and chosen where it is
+            not.
+          </p>
+
+          <p className="mt-8 font-mono text-[9px] font-black uppercase tracking-[0.22em] text-[#e2602a]/85">
+            A sentence can outlast the hand that cut it
+          </p>
+        </div>
       </div>
 
+      {/* The voice — why a recording is here at all */}
       <div className="mt-7">
         <p className="font-mono text-[15px] leading-[1.85] text-[#141210]">
           <span className="font-black">Big Science</span>, 1982 — a recorded voice on a
@@ -77,6 +96,7 @@ export default function XEqualsXInscription() {
         </p>
       </div>
 
+      {/* The evidence */}
       <div className="mt-8">
         {EVIDENCE.map(({ n, mark, origin, text, check }) => (
           <div key={n} className="border-t border-[#141210]/25 pt-3 pb-4">
