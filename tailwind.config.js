@@ -22,6 +22,7 @@ module.exports = {
           signal: 'rgb(var(--record-signal) / <alpha-value>)',
           red: 'rgb(var(--record-red) / <alpha-value>)',
           muted: 'rgb(var(--record-muted) / <alpha-value>)',
+          mark: 'rgb(var(--record-mark) / <alpha-value>)',
         },
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

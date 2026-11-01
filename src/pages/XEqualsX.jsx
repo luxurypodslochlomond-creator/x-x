@@ -1,6 +1,8 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
+import XEqualsXEveryone from '@/components/climate/XEqualsXEveryone';
+import XEqualsXInfinity from '@/components/climate/XEqualsXInfinity';
 import XEqualsXDeepTime from '@/components/climate/XEqualsXDeepTime';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
@@ -28,7 +30,11 @@ export default function XEqualsX() {
 
       <XEqualsXInscription />
 
+      <XEqualsXEveryone />
+
       <XEqualsXDeepTime />
+
+      <XEqualsXInfinity />
 
       <XEqualsXResearchPanel />
 
