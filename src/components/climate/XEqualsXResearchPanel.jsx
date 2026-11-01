@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import VerificationBadge from '@/components/climate/VerificationBadge';
-import { verificationNoteOf, verificationOf } from '@/components/climate/verification';
+
 
 // The research panel.
 //
@@ -32,7 +31,7 @@ export default function XEqualsXResearchPanel() {
     return () => { live = false; };
   }, []);
 
-  const corroborated = claims ? claims.filter((c) => verificationOf(c).label === 'Corroborated').length : 0;
+  const checkable = claims ? claims.filter((c) => c.domain !== 'decision').length : 0;
 
   return (
     <section aria-labelledby="research-panel" className="py-8 border-b-2 border-[#141210]">
@@ -68,8 +67,7 @@ export default function XEqualsXResearchPanel() {
       {claims !== null && claims.length > 0 && (
         <>
           <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-[#6b6258]">
-            {claims.length} claim{claims.length === 1 ? '' : 's'} · {corroborated} corroborated by a
-            second named origin
+            {claims.length} claim{claims.length === 1 ? '' : 's'} · {checkable} you can check yourself
           </p>
 
           <div className="mt-5">
@@ -100,7 +98,6 @@ export default function XEqualsXResearchPanel() {
                 )}
 
                 <div className="mt-3 flex items-center gap-2 flex-wrap">
-                  <VerificationBadge entry={c} />
                   {c.origin_url ? (
                     <a
                       href={c.origin_url}
@@ -116,10 +113,6 @@ export default function XEqualsXResearchPanel() {
                     </span>
                   )}
                 </div>
-
-                <p className="mt-2 font-mono text-[9.5px] leading-relaxed text-[#6b6258]">
-                  {verificationNoteOf(c)}
-                </p>
 
                 {c.checked_note && (
                   <p className="mt-1.5 font-mono text-[9.5px] leading-relaxed text-[#6b6258]">
@@ -139,6 +132,13 @@ export default function XEqualsXResearchPanel() {
               </div>
             ))}
           </div>
+
+          <p className="mt-5 border-t border-[#141210]/25 pt-3 font-mono text-[10px] leading-relaxed text-[#6b6258]">
+            The record’s own scale — single source, corroborated, official record — was written for
+            news about events, and it is not stretched over the laws here. A measured law does not
+            become truer because two people said it. What makes each line checkable is said on the
+            line itself, and where nothing can be checked, the line says that instead.
+          </p>
         </>
       )}
     </section>
