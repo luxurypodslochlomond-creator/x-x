@@ -201,6 +201,9 @@ export default function ClimateDetail() {
             <div className="mt-3 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
               <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
               <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{record.correction_note}</p>
+              <Link to="/ClimateCorrections" className="mt-1.5 inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] underline">
+                Every correction, in daylight
+              </Link>
             </div>
           )}
 
@@ -310,6 +313,9 @@ export default function ClimateDetail() {
           <div className="mt-4 border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
             <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
             <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{record.correction_note}</p>
+            <Link to="/ClimateCorrections" className="mt-1.5 inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] underline">
+              Every correction, in daylight
+            </Link>
           </div>
         )}
 

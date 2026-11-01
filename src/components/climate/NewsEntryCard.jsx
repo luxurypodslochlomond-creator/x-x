@@ -67,6 +67,9 @@ export default function NewsEntryCard({ entry, linked = true }) {
         <div className="mt-3 mx-4 bg-[#b3261e]/5 border-l-4 border-l-[#b3261e] px-3 py-2.5">
           <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
           <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{entry.correction_note}</p>
+          <Link to="/ClimateCorrections" className="mt-1.5 inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] underline">
+            Every correction, in daylight
+          </Link>
         </div>
       )}
 

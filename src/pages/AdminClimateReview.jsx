@@ -6,6 +6,7 @@ import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, 
 import ProvenanceSweep from '@/components/admin/ProvenanceSweep';
 import SourceLinkRow from '@/components/admin/SourceLinkRow';
 import ListenerLinesPanel from '@/components/admin/ListenerLinesPanel';
+import SignUnsignedEntries from '@/components/admin/SignUnsignedEntries';
 
 export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
@@ -399,6 +400,8 @@ export default function AdminClimateReview() {
             </div>
           </div>
         )}
+
+        <SignUnsignedEntries onSigned={loadAll} />
 
         {/* Footer */}
         <div className="mt-8 pt-4 border-t border-[#1a1612]/15 text-center">
