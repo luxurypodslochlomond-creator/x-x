@@ -226,6 +226,13 @@ button:focus-visible {
   animation: twcc-scan 0.8s linear infinite;
 }
 @keyframes twcc-scan { 0% { background-position: 0 0; } 100% { background-position: 0 3px; } }
+
+/* On a phone the record's grain holds still: the texture stays exactly as it looks,
+   but the whole page stops repainting sixty times a second, which is what made
+   scrolling and tapping feel juddery in the hand. */
+@media (max-width: 1023px) {
+  .twcc-scanlines::before { animation: none; }
+}
 @keyframes twcc-flicker {
   0%, 100% { opacity: 1; }
   47% { opacity: 1; }

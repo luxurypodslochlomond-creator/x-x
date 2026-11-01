@@ -127,36 +127,9 @@ seedTranslations(T);
      // had been wearing the same blue as every other link here, so the most urgent entry
      // on the page read as the calmest thing on it.
      const isSolution = item.entry_type === 'solution';
-     const hasImage = !!item.image_url;
-
-     // ── Text-card fallback — for Janine's archive entries with rich text but no image.
-     // Paper background, signal beacon, prominent title. Looks intentional, not broken. ──
-     if (!hasImage) {
-       return (
-         <Link
-           to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-           className={`relative text-left overflow-hidden bg-[#f7f1e5] border border-[#141210] active:border-[#e2602a] ${
-             isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
-           } min-h-[110px] lg:min-h-[168px] flex flex-col justify-between active:scale-95 transition-transform duration-100 p-2.5`}
-           >
-           <div className="flex items-center justify-between">
-             <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}`}>
-               {isSolution ? 'Solution' : 'Crisis'}
-             </div>
-             <SignalBeacon size={14} color={isSolution ? '#1e3a2b' : '#b3261e'} />
-             </div>
-             <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-4">
-             {item.title}
-             </h3>
-             {item.region_rough && (
-             <div className="flex items-center gap-1 text-[#5a5246]">
-               <MapPin className="w-3 h-3" />
-               <span className="text-[9px] font-black font-mono uppercase tracking-widest">{item.region_rough}</span>
-             </div>
-             )}
-         </Link>
-       );
-     }
+     // Every card carries a picture. An entry that arrived without one wears the
+     // picture of its own category, so the grid never reads as half-broken.
+     const cardImage = item.image_url || CATEGORY_IMAGE(item.category);
 
      return (
        <Link
@@ -166,7 +139,7 @@ seedTranslations(T);
          } min-h-[110px] lg:min-h-[168px] flex items-end active:scale-95 transition-transform duration-100`}
        >
          <img
-           src={item.image_url}
+           src={cardImage}
            alt=""
            loading="lazy"
            decoding="async"

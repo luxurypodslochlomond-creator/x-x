@@ -245,12 +245,16 @@ export default function ClimateDetail() {
 
   // Solution / Crisis detail
   const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
+  // The picture the card showed is the picture you land on. An entry without its own
+  // photograph keeps its category's, so the door never opens onto a blank where a
+  // picture was standing.
+  const heroImage = record.image_url || CATEGORY_IMAGE(record.category);
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
-      {/* Hero — photo when available, paper-and-beacon when not (matches the text-card) */}
-      {record.image_url ? (
+      {/* Hero — photo when available, paper-and-beacon when not */}
+      {heroImage ? (
         <div className="relative h-64 lg:h-[420px] bg-[#141210]">
-          <img src={record.image_url} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
+          <img src={heroImage} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
@@ -273,8 +277,12 @@ export default function ClimateDetail() {
         </div>
       )}
 
+      {/* The entry keeps its colour through the door — green for a solution, red for a
+          crisis: the same mark its card wore, so tapping through never changes it. */}
+      <div className="h-1.5" style={{ background: isSolution ? '#1e3a2b' : '#b3261e' }} />
+
       <div className="p-5 lg:px-10 lg:py-10 lg:max-w-[820px] lg:mx-auto">
-        <div className="flex items-center gap-1.5 text-[#1e3a2b] mb-1">
+        <div className={`flex items-center gap-1.5 mb-1 ${isSolution ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}`}>
           <SignalCode code={catCode} size="md" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
         <h1 data-no-translate className="text-2xl lg:text-4xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
