@@ -34,7 +34,8 @@ const BUTTONS_CARD = {
     '03 · Reading one entry',
     '04 · Every tongue on Earth',
     '05 · The first five minutes',
-    '06 · When you are the handler',
+    '06 · The foot of every page',
+    '07 · When you are the handler',
   ],
   closing: "Nothing on it needs memorising: the record's buttons are words, and each one says what it does.",
   url_path: '/ClimateGuide',
@@ -86,6 +87,11 @@ const BAR = [
     label: 'Method',
     to: createPageUrl('ClimateMethod'),
     what: 'How the record is made: what is allowed on it, and what is not.',
+  },
+  {
+    label: 'Corrections',
+    to: createPageUrl('ClimateCorrections'),
+    what: 'When the record is corrected, the correction stays in the open with the date it was made.',
   },
 ];
 
@@ -200,6 +206,32 @@ const HANDLER = [
   },
 ];
 
+// The foot of every page. Four doors a reader should never have to hunt for: what this
+// record is, what it keeps, what it admits is not built, and what it costs to carry.
+// This page is the fifth of them, which is why it is not listed inside itself.
+const FOOT = [
+  {
+    label: 'Terms',
+    to: createPageUrl('ClimateTerms'),
+    what: 'The ground it stands on: what this record is, and what it is not.',
+  },
+  {
+    label: 'Privacy',
+    to: createPageUrl('ClimatePrivacy'),
+    what: 'What is kept, and what never is. No reader is tracked.',
+  },
+  {
+    label: 'The Brief',
+    to: createPageUrl('ClimateBrief'),
+    what: 'What is live, what is planned, and what is not built.',
+  },
+  {
+    label: 'The Handover',
+    to: createPageUrl('ClimateHandover'),
+    what: 'What changes hands, what it costs, who holds it today, and what is still open.',
+  },
+];
+
 export default function ClimateGuide() {
   return (
     <ClimateRecordShell
@@ -224,7 +256,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The bar at the top of every page"
-        note="These nine ride on every page of the record. Search wears a box and an icon, so it reads as a door; the places you read follow it, and then the glyph for the music given to the record; the last three are the record itself."
+        note="These ten ride on every page of the record. Search wears a box and an icon, so it reads as a door; the places you read follow it, and then the glyph for the music given to the record; the last four are the record itself."
         items={BAR}
       />
 
@@ -258,6 +290,13 @@ export default function ClimateGuide() {
 
       <GuideBand
         number="06"
+        heading="The foot of every page"
+        note="Four more sit in the foot of every page, beside this one. A reader should not have to hunt for the record's terms, for what it keeps, for what it admits is not built, or for what it costs to carry."
+        items={FOOT}
+      />
+
+      <GuideBand
+        number="07"
         heading="When you are the handler"
         note="Four buttons sit behind the keeper’s door, on the address the record was given for you. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
         items={HANDLER}

@@ -10,7 +10,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 export default function ClimatePrivacy() {
   return (
     <ClimateRecordShell
-      eyebrow="TWCC · Privacy"
+      eyebrow="Privacy"
       marker="What we hold · what we don't"
       title="What We Hold, What We Don't"
       statement="No tracking. No selling. No surprises. Here is exactly what happens."

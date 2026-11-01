@@ -10,7 +10,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 export default function ClimateTerms() {
   return (
     <ClimateRecordShell
-      eyebrow="TWCC · Terms"
+      eyebrow="Terms"
       marker="The ground we stand on"
       title="The Ground We Stand On"
       statement="Not legal jargon. Just honest ground rules for the record. Read it in a minute."
