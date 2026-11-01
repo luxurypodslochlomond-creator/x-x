@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { Archive, ChevronDown } from 'lucide-react';
 
@@ -59,6 +60,12 @@ export default function SourceArchiveNote({ entryId, sourceUrl }) {
           </p>
           <p className="mt-1 text-[9px] font-mono text-[#6b6258] break-all">
             {sourceUrl} · fingerprint {copy.content_sha256?.slice(0, 16)}…
+          </p>
+          {/* A copy taken from somebody is theirs to object to. Asking is all it takes. */}
+          <p className="mt-2 text-[9px] font-mono leading-relaxed text-[#6b6258]">
+            If you publish this source and would rather a copy were not kept here, say so and it comes off. The
+            link to your page stays; the copy goes.{' '}
+            <Link to="/ClimateCorrections" className="underline text-[#0f5f7a]">Ask the keeper</Link>
           </p>
         </div>
       )}

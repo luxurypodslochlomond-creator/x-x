@@ -10,6 +10,16 @@ import SignUnsignedEntries from '@/components/admin/SignUnsignedEntries';
 import RecordExportPanel from '@/components/admin/RecordExportPanel';
 import ArchiveSourcesPanel from '@/components/admin/ArchiveSourcesPanel';
 
+// A queue nobody works is a queue that lies. The date alone is easy to walk past, so each
+// entry says how long it has been waiting and shouts once it has waited a week. The record's
+// promise is that a person decides — this is how that stays true instead of becoming a
+// sentence on a method page.
+const waitedDays = (created) => {
+  const ms = Date.now() - new Date(created).getTime();
+  if (!Number.isFinite(ms) || ms < 0) return null;
+  return Math.floor(ms / 86400000);
+};
+
 export default function AdminClimateReview() {
   const [solutions, setSolutions] = useState([]);
   const [actions, setActions] = useState([]);
@@ -269,6 +279,15 @@ export default function AdminClimateReview() {
         {item.submitter_email && <span>✉ {item.submitter_email}</span>}
         {item.author_email && <span>✉ {item.author_email}</span>}
         <span>{new Date(item.created_date).toLocaleString()}</span>
+        {(() => {
+          const d = waitedDays(item.created_date);
+          if (d === null) return null;
+          return (
+            <span className={d >= 7 ? 'text-[#b3261e] font-black' : ''}>
+              {d === 0 ? 'waiting since today' : `waiting ${d} day${d === 1 ? '' : 's'}`}
+            </span>
+          );
+        })()}
       </div>
 
       {/* Actions */}

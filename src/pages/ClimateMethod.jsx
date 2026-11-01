@@ -51,6 +51,16 @@ export default function ClimateMethod() {
       <Block n="02" title="Where an entry comes from">
         <p>An entry is a fact with an origin: a body's own statement, a peer-reviewed journal, published media, an organisation working on the ground, a first-hand dispatch, or a document. Which one it is, is printed on the entry.</p>
         <p>We point at the origin and quote a line or two. We never republish somebody else's article, and never pull from closed networks or private accounts.</p>
+        <p>
+          Links rot, so where a copy of what a source said can be taken, it is kept and dated — the words as
+          they stood, with a fingerprint of that exact copy — and a reader is shown only an excerpt of it. The
+          origin keeps its name, its rights and its own address, and every entry sends the reader there first.
+          If you publish a source and would rather a copy were not kept,{' '}
+          <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
+            say so
+          </Link>{' '}
+          and it comes off. The link to your page stays; the copy goes.
+        </p>
         <p>Anyone may send an entry in — a community group, a researcher, a reader who spotted something. It goes through exactly the same check as anything written here.</p>
         <p>An action is traced differently, and the record says which. An action is the organiser's own word about what they are doing, and their own contact line is printed on it — that line is the origin. Its label stays at one origin says so until a person has a second, independent origin to name.</p>
       </Block>
