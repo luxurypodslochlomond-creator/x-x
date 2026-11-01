@@ -1,5 +1,6 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXContext from '@/components/climate/XEqualsXContext';
 import XEqualsXPrinciples from '@/components/climate/XEqualsXPrinciples';
 import XEqualsXEvidence from '@/components/climate/XEqualsXEvidence';
@@ -19,7 +20,9 @@ export default function XEqualsX() {
       returnLabel="Back to the record"
       footer="x = x is the record's covenant: an emergency does not matter less because fewer people are watching. The record is built in honour of Janine M. H. Selendy and Horizon International."
     >
-      <section className="pb-6 border-b-2 border-[#141210]">
+      <XEqualsXInscription />
+
+      <section className="py-6 border-b-2 border-[#141210]">
         <p className="bg-[#f7f1e5] border-2 border-[#141210] border-l-8 border-l-[#e2602a] px-4 py-4 text-[12.5px] font-mono leading-relaxed text-[#141210]">
           On this climate record, x = x means equal human worth. An emergency does not matter less because fewer people are watching. Equal worth is not equal size: a crisis affecting millions is still a larger crisis, and we count that honestly. What we refuse is the smaller one being treated as though it never happened.
         </p>
