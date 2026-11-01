@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import SignedBy from '@/components/climate/SignedBy';
 
 // One entry on the wire. Dated, sourced, and plain about what is known. No likes,
 // no counters, nothing to game. How well it is known waits on the entry itself —
@@ -85,6 +86,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
             Read the source <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
         )}
+        <SignedBy name={entry.editor} compact />
         {linked && <div className="ml-auto self-center"><ShareCardButton entry={entry} compact /></div>}
       </div>
     </article>

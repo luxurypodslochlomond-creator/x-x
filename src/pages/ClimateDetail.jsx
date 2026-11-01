@@ -13,6 +13,7 @@ import SignalCode from '@/components/climate/SignalCode';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCitation from '@/components/climate/RecordCitation';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import SignedBy from '@/components/climate/SignedBy';
 import { buildEntryShareCard } from '@/components/climate/shareCardImage';
 import SourceBlock from '@/components/climate/SourceBlock';
 import VerificationBadge from '@/components/climate/VerificationBadge';
@@ -327,6 +328,10 @@ export default function ClimateDetail() {
             {record.submitter_name && <p>Submitted by {record.submitter_name}</p>}
           </div>
         )}
+
+        <div className="mt-5">
+          <SignedBy name={record.editor} />
+        </div>
 
         <SourceBlock
           sourceName={record.source_name}

@@ -18,6 +18,7 @@ export default function AdminClimateReview() {
   const [activeTab, setActiveTab] = useState('solutions');
   const [busy, setBusy] = useState(null);
   const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [auditLogs, setAuditLogs] = useState([]);
 
   const loadAll = useCallback(async () => {
@@ -49,8 +50,16 @@ export default function AdminClimateReview() {
   useEffect(() => { loadAll(); }, [loadAll]);
 
   useEffect(() => {
-    base44.auth.me().then(u => setUserEmail(u?.email || '')).catch(() => {});
+    base44.auth.me().then(u => {
+      setUserEmail(u?.email || '');
+      setUserName((u?.full_name || '').trim() || u?.email || '');
+    }).catch(() => {});
   }, []);
+
+  // A published entry carries the name of the person who signed it onto the record.
+  // Without this, publishing leaves the entry unsigned and the record has to say so.
+  const SIGNED_ENTITIES = ['ClimateSolution', 'ClimateAction', 'ClimateNews'];
+  const signPatch = (entityName) => (SIGNED_ENTITIES.includes(entityName) && userName ? { editor: userName } : {});
 
   const publish = async (entityName, id) => {
     setBusy(id);
@@ -65,7 +74,7 @@ export default function AdminClimateReview() {
         reviewer_email: userEmail,
         ai_assessment: item?.ai_assessment || '',
       });
-      await base44.entities[entityName].update(id, { status: 'published' });
+      await base44.entities[entityName].update(id, { status: 'published', ...signPatch(entityName) });
       await loadAll();
     } catch (e) {
       alert('Failed to publish: ' + e.message);
@@ -124,7 +133,7 @@ export default function AdminClimateReview() {
           reviewer_email: userEmail,
           ai_assessment: item.ai_assessment || '',
         });
-        await base44.entities[item._entity].update(item.id, { status: 'published' });
+        await base44.entities[item._entity].update(item.id, { status: 'published', ...signPatch(item._entity) });
       }
       await loadAll();
     } catch (e) {

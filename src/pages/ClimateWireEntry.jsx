@@ -7,6 +7,7 @@ import RecordCitation from '@/components/climate/RecordCitation';
 import { recordAddress } from '@/components/climate/recordAddress';
 import SourceBlock from '@/components/climate/SourceBlock';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import SignedBy from '@/components/climate/SignedBy';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
 
 // One entry on its own permanent address. A researcher cites this page, not the front
@@ -61,6 +62,10 @@ export default function ClimateWireEntry() {
         {entry && (
           <>
             <NewsEntryCard entry={entry} linked={false} />
+
+            <div className="mt-3 px-1">
+              <SignedBy name={entry.editor} date={entry.reviewed_date} />
+            </div>
 
             {/* Janine's films — a still frame that opens on tap, never on its own. */}
             <TapToPlayFilm

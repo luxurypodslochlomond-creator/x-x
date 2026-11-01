@@ -81,6 +81,10 @@
       "type": "string",
       "description": "A correction, in the open, with the date it was made. Entries on the record are corrected in daylight, never silently."
     },
+    "editor": {
+      "type": "string",
+      "description": "The named person who signed this entry onto the record. Shown on the entry beside its source, so a reader can hold a person to it. Written when a person publishes the entry, never by the entry's own text. Left empty it means the entry is unsigned, and the entry says so plainly rather than showing nothing \u2014 a machine can never fill this, because it has no name to sign with."
+    },
     "status": {
       "type": "string",
       "enum": [
