@@ -14,12 +14,17 @@ const LINES = [
   {
     mark: '1 = 1',
     origin: 'Identity',
-    text: 'True before anyone agrees with it, and true if nobody ever reads this. It is also empty — it tells the person reading it nothing whatsoever about themselves.',
+    text: 'True by definition, inside any system that has an equals sign — and empty, because it tells the person reading it nothing at all about themselves.',
   },
   {
     mark: 'E = hν',
-    origin: 'Planck · 1900',
-    text: 'Light arrives in packets, and each packet is sized by its frequency. Tested, exact, and indifferent to who is watching. Resonance is the ordinary consequence: two things tuned alike hand each other energy — a glass, a bridge, a room. Coupling, not intention.',
+    origin: 'Planck 1900 · Einstein 1905',
+    text: 'Energy is exchanged in whole multiples of hν, sized by its frequency. Planck found the rule and was uneasy about where it led; Einstein took it literally and said the light itself arrives in packets. Measured ever since, and indifferent to who is watching.',
+  },
+  {
+    mark: 'resonance',
+    origin: 'Coupling',
+    text: 'A thing driven near its own natural frequency answers with a large swing, and two things tuned alike pass energy between them — a glass, a bridge, a room, two clocks on one wall. That is a fact about coupling. It is not a claim about intention.',
   },
   {
     mark: 'equal worth',
