@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GlobalErrorBoundary from '@/components/shared/GlobalErrorBoundary';
 import COOLASFUCKErrorMonitor from '@/components/shared/COOLASFUCKErrorMonitor';
 import AutoHealingShield from '@/components/shared/AutoHealingShield';
-import GlobalSearch from '@/components/shared/GlobalSearch';
 import BuzzTripIcon from '@/components/buzztrip/BuzzTripIcon';
 import PetSounds51Icon8Bit from '@/components/shared/PetSounds51Icon8Bit';
 import PlatformIcon from '@/components/shared/PlatformIcon';
@@ -19,18 +18,10 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 // AI51LiveHealer - Commented out to improve performance
 // import AI51LiveHealer from '@/components/ai51/AI51LiveHealer';
 import { AudioProvider, useAudio } from '@/components/shared/AudioProvider';
-import PWAInstallPrompt from '@/components/shared/PWAInstallPrompt';
-import AI51InstallPrompt from '@/components/ai51/AI51InstallPrompt';
-import AutoBugMonitor from '@/components/shared/AutoBugMonitor';
-import PerformanceOptimizer from '@/components/shared/PerformanceOptimizer';
 // AI51Shield - Commented out to improve performance
 // import AI51Shield from '@/components/ai51/AI51Shield';
-import PendingMessageSender from '@/components/shared/PendingMessageSender';
 import { AI51MemoryProvider } from '@/components/ai51/AI51MemoryLoader';
-import TruthCheckProtocol from '@/components/ai51/TruthCheckProtocol';
-import AI51MemoryVault from '@/components/ai51/AI51MemoryVault';
 import { MeshProvider, MeshStatusIndicator } from '@/components/shared/MeshNetwork';
-import CB51OfflineHandler from '@/components/scott/CB51OfflineHandler';
 import SubdomainRouter from '@/components/shared/SubdomainRouter';
 import COOLASFUCK8BitLoading from '@/components/shared/COOLASFUCK8BitLoading';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
@@ -39,7 +30,19 @@ import LanguageButton from '@/components/shared/LanguageButton';
 
 // import ServiceWorkerManager from '@/components/shared/ServiceWorkerManager';
 // import BackgroundSync from '@/components/shared/BackgroundSync';
-import HealingAnalyticsCollector from '@/components/shared/HealingAnalyticsCollector';
+// ── DEFERRED SHELL ──
+// None of these is needed for the first paint. Each is pulled in on demand, so
+// opening a page no longer waits on ten background monitors loading first.
+const GlobalSearch = React.lazy(() => import('@/components/shared/GlobalSearch'));
+const HealingAnalyticsCollector = React.lazy(() => import('@/components/shared/HealingAnalyticsCollector'));
+const PWAInstallPrompt = React.lazy(() => import('@/components/shared/PWAInstallPrompt'));
+const AI51InstallPrompt = React.lazy(() => import('@/components/ai51/AI51InstallPrompt'));
+const AutoBugMonitor = React.lazy(() => import('@/components/shared/AutoBugMonitor'));
+const PerformanceOptimizer = React.lazy(() => import('@/components/shared/PerformanceOptimizer'));
+const PendingMessageSender = React.lazy(() => import('@/components/shared/PendingMessageSender'));
+const TruthCheckProtocol = React.lazy(() => import('@/components/ai51/TruthCheckProtocol'));
+const AI51MemoryVault = React.lazy(() => import('@/components/ai51/AI51MemoryVault'));
+const CB51OfflineHandler = React.lazy(() => import('@/components/scott/CB51OfflineHandler'));
 // import CB51MobileMenu from '@/components/scott/CB51MobileMenu';
 import {
   Menu, X, Heart, Home, LogOut, Sparkles, Map, User, Globe,
@@ -672,8 +675,10 @@ const LayoutInner = ({ children, currentPageName }) => {
       <AutoHealingShield>
       <COOLASFUCKErrorMonitor>
       {/* <DisasterResilienceMode /> */}
-      <TruthCheckProtocol />
-      <AI51MemoryVault />
+      <React.Suspense fallback={null}>
+        <TruthCheckProtocol />
+        <AI51MemoryVault />
+      </React.Suspense>
       {/* <AI51PhotonMemory /> - Hidden until we have real memories stored */}
       {/* <RealtimeDebugger /> */}
       {/* <PerformanceMonitor /> */}
@@ -992,24 +997,28 @@ const LayoutInner = ({ children, currentPageName }) => {
       </div>
 
       {!currentPageName.startsWith('Scott') && !currentPageName.startsWith('Prof') && !currentPageName.startsWith('CB51') && currentPageName !== 'AI51' && (
-        <>
+        <React.Suspense fallback={null}>
           <HealingAnalyticsCollector />
           <PWAInstallPrompt />
           <AI51InstallPrompt />
           <AutoBugMonitor />
           <PerformanceOptimizer />
           <PendingMessageSender />
-        </>
+        </React.Suspense>
         )}
 
       {currentPageName.startsWith('Scott') && (
-        <>
+        <React.Suspense fallback={null}>
           <CB51OfflineHandler />
           <PWAInstallPrompt manifestUrl="/cb51-manifest.json" />
           <AutoBugMonitor />
-        </>
+        </React.Suspense>
       )}
-    {searchOpen && <GlobalSearch onClose={() => setSearchOpen(false)} />}
+    {searchOpen && (
+      <React.Suspense fallback={null}>
+        <GlobalSearch onClose={() => setSearchOpen(false)} />
+      </React.Suspense>
+    )}
     </GlobalErrorBoundary>
     </COOLASFUCKErrorMonitor>
     </AutoHealingShield>
