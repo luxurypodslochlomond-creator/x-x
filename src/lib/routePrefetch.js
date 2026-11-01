@@ -52,6 +52,29 @@ const HUBS = {
   climatebrief: () => import('@/pages/ClimateBrief'),
   climateterms: () => import('@/pages/ClimateTerms'),
   climateprivacy: () => import('@/pages/ClimatePrivacy'),
+  // The rest of the record's own doors. Without these, moving Record → Wire → an entry
+  // → Method → Music waited on a chunk while the doors either side of them were already
+  // in hand — the record felt fast in some places and slow in others for no reason a
+  // reader could see.
+  climatewire: () => import('@/pages/ClimateWire'),
+  climatewireentry: () => import('@/pages/ClimateWireEntry'),
+  climatemethod: () => import('@/pages/ClimateMethod'),
+  climatesearch: () => import('@/pages/ClimateSearch'),
+  climateguide: () => import('@/pages/ClimateGuide'),
+  climatemusic: () => import('@/pages/ClimateMusic'),
+  climatehost: () => import('@/pages/ClimateHost'),
+  climatereachplace: () => import('@/pages/ClimateReachPlace'),
+  xequalsx: () => import('@/pages/XEqualsX'),
+  extractionproofcovenant: () => import('@/pages/ExtractionProofCovenant'),
+  uf51token: () => import('@/pages/UF51Token'),
+  uf51threadjournal: () => import('@/pages/UF51ThreadJournal'),
+
+  // SORTED — its own shell, its own doors
+  sorted: () => import('@/pages/SortedHome'),
+  sortedabout: () => import('@/pages/SortedAbout'),
+  sortedfaq: () => import('@/pages/SortedFAQ'),
+  sortedfororgs: () => import('@/pages/SortedForOrgs'),
+  sortedglobalaccess: () => import('@/pages/SortedGlobalAccess'),
 };
 
 const started = new Set();
