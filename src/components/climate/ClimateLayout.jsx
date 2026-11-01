@@ -140,24 +140,22 @@ export default function ClimateLayout({ children, currentPage }) {
       {children}
 
       <footer className="border-t-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-4">
-        {/* One line, always one. In a tongue whose words are longer, the line slides inside
-            itself rather than wrapping into a second one — so the foot of every page of the
-            record keeps the same height and nothing the reader is looking at moves while a
-            tongue is being written in. */}
-        <div className="max-w-[1100px] mx-auto overflow-x-auto climate-nav-rail">
-          <div className="flex items-center justify-center gap-3 w-max mx-auto">
-          {FOOTER_LINKS.map((item, i) => (
-            <React.Fragment key={item.page}>
-              {i > 0 && <span className="text-[#6b6258]/40 text-[10px] font-mono">·</span>}
-              <Link
-                to={createPageUrl(item.page)}
-                className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors"
-              >
-                {item.label}
-              </Link>
-            </React.Fragment>
+        {/* The foot of the page wraps instead of sliding sideways. It was one scrolling line
+            before, centred and wider than a phone — which clipped whichever links sat at its
+            start, so Terms and Privacy could be off-screen no matter where they were put.
+            Wrapping costs a second line on a handset and loses nothing: every link on the foot
+            of the record is now visible without a gesture, in any tongue. */}
+        <div className="max-w-[1100px] mx-auto">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
+          {FOOTER_LINKS.map((item) => (
+            <Link
+              key={item.page}
+              to={createPageUrl(item.page)}
+              className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors"
+            >
+              {item.label}
+            </Link>
           ))}
-            <span className="text-[#6b6258]/40 text-[10px] font-mono">·</span>
             <Link
               to="/XEqualsX"
               className="text-[10px] font-mono font-black tracking-[0.2em] text-[#b3261e] hover:text-[#141210] transition-colors"
