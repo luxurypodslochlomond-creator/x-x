@@ -106,27 +106,35 @@ export default function ClimateBrief() {
           </h2>
           <div className="space-y-2.5">
             {[
-              ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.'],
-              ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. ${stats.categories} of them carry entries today; the rest are supported and ready.`],
-              ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.'],
-              ['A map of where it is happening', 'Both entry types on a rough-region map, reachable from the record itself — no precise pins, and no reader tracked while they look.'],
-              ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.'],
-              ['Copyright-free images only', 'Where a picture is shown it comes from a copyright-free pool and carries its credit on the entry. A credit is a thank you, not a permission — so an entry with no cleared picture shows none, rather than borrowing one from somebody else\u2019s page.'],
-              ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.'],
-              ['Scale field', 'Individual, community, city, country, global — your spec, implemented.'],
-              ['Groups', 'People working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.'],
-              ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.'],
-              ['65 tongues · 8 written by hand', 'The interface is written out by hand in 8 languages and machine-made into 57 more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. Where a tongue is a machine\'s attempt — the ancient scripts especially — the page says so plainly rather than passing it off as an inscription. You can also free-type any tongue on Earth.'],
-              ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.'],
-              ['Open source, extraction-proof', 'The platform code is open. A public covenant explains how it resists corporate capture.'],
-              ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.'],
-              ['The x = x covenant', 'No likes, no upvotes, no ranking, no algorithm. Every entry sits beside every other entry as an equal, because it is true.'],
-            ].map(([title, body]) => (
+              ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.', '/TogetherChangeClimate', 'See both on the record'],
+              ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. ${stats.categories} of them carry entries today; the rest are supported and ready.`, '/TogetherChangeClimate', 'Filter by category'],
+              ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.', '/ClimateMethod', 'How place is held'],
+              ['A map of where it is happening', 'Both entry types on a rough-region map, reachable from the record itself — no precise pins, and no reader tracked while they look.', '/ClimateMap', 'Open the map'],
+              ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.', '/ClimateMethod', 'How screening works'],
+              ['Copyright-free images only', 'Where a picture is shown it comes from a copyright-free pool and carries its credit on the entry. A credit is a thank you, not a permission — so an entry with no cleared picture shows none, rather than borrowing one from somebody else\u2019s page.', '/ClimateMethod', 'Picture rules'],
+              ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.', '/ClimateMethod', 'What a source has to be'],
+              ['Scale field', 'Individual, community, city, country, global — your spec, implemented.', '/TogetherChangeClimate', 'See it on an entry'],
+              ['Groups', 'People working on the same topic in the same area can form a group. Email is required, per your spec. The platform stores no messages.', '/TogetherChangeClimate', 'See the gatherings'],
+              ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.', '/TogetherChangeClimate', 'See the actions'],
+              ['65 tongues · 8 written by hand', 'The interface is written out by hand in 8 languages and machine-made into 57 more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. Where a tongue is a machine\'s attempt — the ancient scripts especially — the page says so plainly rather than passing it off as an inscription. You can also free-type any tongue on Earth.', '/TogetherChangeClimate', 'Choose a tongue'],
+              ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.', '/ClimateHandover', 'What it costs, and who pays'],
+              ['Open source, extraction-proof', 'The platform code is open. A public covenant explains how it resists corporate capture.', '/ExtractionProofCovenant', 'Read the covenant'],
+              ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.', '/TogetherChangeClimate', 'Open any entry'],
+              ['The x = x covenant', 'No likes, no upvotes, no ranking, no algorithm. Every entry sits beside every other entry as an equal, because it is true.', '/XEqualsX', 'Read x = x'],
+            ].map(([title, body, to, check]) => (
               <div key={title} className="flex gap-3 bg-[#efe7d6] border border-[#1a1612]/15 border-l-4 border-l-[#1e3a2b] px-4 py-3">
                 <Check className="w-4 h-4 text-[#1e3a2b] flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-[12px] font-black font-mono uppercase text-[#1a1612] leading-tight">{title}</h4>
                   <p className="text-[12px] font-mono text-[#3a342c] leading-relaxed mt-1">{body}</p>
+                  {to && (
+                    <Link
+                      to={to}
+                      className="mt-2 inline-flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-wide text-[#1e3a2b] underline decoration-dotted underline-offset-2"
+                    >
+                      {check} <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  )}
                 </div>
               </div>
             ))}
@@ -214,6 +222,35 @@ export default function ClimateBrief() {
           </div>
         </section>
 
+        {/* ── WHERE TO CHECK IT ──
+            The intro above promises that every claim here can be checked against the record
+            itself. A promise nobody can act on is the one thing this page cannot contain, so
+            the four places that do the checking are named and linked, here, before the honour. */}
+        <section className="mb-8">
+          <h2 className="font-black uppercase text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
+            Where to check this page
+          </h2>
+          <div className="border-2 border-[#1a1612] divide-y-2 divide-[#1a1612]">
+            {[
+              ['/ClimateMethod', 'The Method', 'What this record can say, what it cannot, and how each entry is sourced.'],
+              ['/ClimateCorrections', 'Corrections, in the open', 'Everything that has been changed, with its date and its reason. Nothing is fixed quietly.'],
+              ['/ClimateHandover', 'The Handover', 'What it costs to keep alive, what is still missing, and who holds the keys today.'],
+              ['/ClimateGuide', 'The Buttons', 'Every control on the record, and exactly what it does.'],
+            ].map(([to, title, body]) => (
+              <Link key={to} to={to} className="flex items-start gap-3 bg-[#efe7d6] px-4 py-3 active:bg-[#e2602a]/15">
+                <ArrowRight className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#b3261e]" />
+                <div>
+                  <h4 className="text-[12px] font-black font-mono uppercase text-[#1a1612] leading-tight">{title}</h4>
+                  <p className="text-[11.5px] font-mono text-[#3a342c] leading-relaxed mt-1">{body}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <p className="text-[10px] font-mono text-[#6b6258] mt-3 leading-relaxed">
+            If any line above cannot be checked in one of those four places, treat it as unproven — including the flattering ones.
+          </p>
+        </section>
+
         {/* ── HONOUR ── */}
         <section className="mb-8">
           <div className="border-t-2 border-[#1a1612] pt-6">
@@ -221,7 +258,11 @@ export default function ClimateBrief() {
               This platform is built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us. Your 40 years are the foundation. Our job is to carry the record honestly, in every tongue, to every person on Earth.
             </p>
             <p className="text-[11px] font-mono text-[#6b6258] mt-4 leading-relaxed">
-              The live record is at <span className="font-bold text-[#1a1612]">/TogetherChangeClimate</span>. We will add nothing we cannot stand behind.
+              The live record is at{' '}
+              <Link to="/TogetherChangeClimate" className="font-bold text-[#1a1612] underline decoration-[#b3261e] decoration-2 underline-offset-2">
+                /TogetherChangeClimate
+              </Link>
+              . We will add nothing we cannot stand behind.
             </p>
           </div>
         </section>
