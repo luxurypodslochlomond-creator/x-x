@@ -115,10 +115,21 @@ export default function ClimateFounder() {
             Made in Scotland from photons
           </span>
 
+          {/* Two different things, named as two different things. The platform has a
+              builder, and it is honest to say so. The record is not "by" anyone: it is
+              kept. A record signed as one man's work would be exactly what this one
+              exists not to be, and a reader fifty years from now would be right to
+              distrust it. The keeper is named — the author is not invented. */}
           <p className="mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
-            Platform by
+            Platform built by
             <br />
             <span className="text-[11px]">Brian Hughes</span>
+          </p>
+
+          <p className="mt-3 pt-3 border-t border-[#141210]/10 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
+            Record kept by
+            <br />
+            <span className="text-[11px]">UF51 CIC</span>
           </p>
 
           <a
