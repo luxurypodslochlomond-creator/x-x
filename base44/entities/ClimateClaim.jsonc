@@ -1,0 +1,121 @@
+{
+  "name": "ClimateClaim",
+  "type": "object",
+  "description": "A claim the record makes about the world, kept as a record rather than as a sentence typed into a page. Every line of the x = x page's research panel is one of these: what is claimed, who says so, where to check it, how well it is actually known, and what it does not establish. Held here so a claim can be corrected, archived or argued with in the open \u2014 a sentence in a component can be changed quietly by whoever holds the code, and that is exactly the failure this table exists to prevent. Public to read once published; only a keeper may add, change or remove one, and the verification level is set by a person, never by the claim's own text.",
+  "properties": {
+    "mark": {
+      "type": "string",
+      "description": "The claim stated as shortly as it can be, e.g. 'E = h\u03bd' or 'equal worth'. Required."
+    },
+    "plain": {
+      "type": "string",
+      "description": "What the claim actually says, in plain speech, with no persuasion in it. Required."
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "mathematics",
+        "physics",
+        "arithmetic",
+        "decision"
+      ],
+      "default": "physics",
+      "description": "What kind of claim this is, so a reader can see where it can and cannot be checked: mathematics \u2014 true by definition; physics \u2014 measured; arithmetic \u2014 the panel's own sums; decision \u2014 not a finding at all, a choice people made. Required."
+    },
+    "does_not_establish": {
+      "type": "string",
+      "description": "The line the claim cannot be stretched to, said out loud on the claim itself. Required on anything a reader might be tempted to over-read."
+    },
+    "origin_name": {
+      "type": "string",
+      "description": "Who says so \u2014 the person, paper or body the claim traces to. Required."
+    },
+    "origin_author": {
+      "type": "string",
+      "description": "Who wrote it, when the origin states a name. Kept exactly as the origin gives it, never guessed."
+    },
+    "origin_date": {
+      "type": "string",
+      "description": "When the origin was published, as the origin states it \u2014 '1900', '1665', '1905'. Never guessed."
+    },
+    "origin_url": {
+      "type": "string",
+      "description": "The link to the origin itself, so a reader can go and check rather than take the record's word for it."
+    },
+    "checked_note": {
+      "type": "string",
+      "description": "Where a person would go to check this themselves \u2014 the citation, the experiment, the book it is in. Written for someone who is not a specialist."
+    },
+    "verification": {
+      "type": "string",
+      "enum": [
+        "single_source",
+        "corroborated",
+        "official_record"
+      ],
+      "default": "single_source",
+      "description": "How well this claim is known: single_source \u2014 one origin says so; corroborated \u2014 two independent origins agree and both are named; official_record \u2014 the body itself put it on the record. Left at single_source until a second origin is actually named, because that is the honest answer. Set by a keeper, never by the claim's own text."
+    },
+    "corroborating_source": {
+      "type": "string",
+      "description": "A second, independent origin agreeing with this claim, when one exists \u2014 named here, never guessed. A 'corroborated' label with nothing in this field is read back as a single source."
+    },
+    "correction_note": {
+      "type": "string",
+      "description": "A correction, in the open, with the date it was made. Claims are corrected in daylight, never silently."
+    },
+    "editor": {
+      "type": "string",
+      "description": "The named person who signed this claim onto the record. Left empty the claim is shown as unsigned, because a machine has no name to sign with."
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0,
+      "description": "Order in the panel \u2014 lower comes first."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "published",
+        "draft"
+      ],
+      "default": "published",
+      "description": "Only published claims appear in the panel. A claim held back waits for a person."
+    }
+  },
+  "required": [
+    "mark",
+    "plain",
+    "domain",
+    "origin_name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

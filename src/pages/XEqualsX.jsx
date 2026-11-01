@@ -3,6 +3,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXDeepTime from '@/components/climate/XEqualsXDeepTime';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
+import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 import XEqualsXContext from '@/components/climate/XEqualsXContext';
 import XEqualsXPrinciples from '@/components/climate/XEqualsXPrinciples';
@@ -28,6 +29,8 @@ export default function XEqualsX() {
       <XEqualsXInscription />
 
       <XEqualsXDeepTime />
+
+      <XEqualsXResearchPanel />
 
       <XEqualsXCodicil />
 
