@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
+import { tongueMatches, languageFromTyped } from './tongueNames';
 
 import TonguePickerDialog from '@/components/climate/TonguePickerDialog';
 import TonguePickerPanel from '@/components/climate/TonguePickerPanel';
@@ -43,10 +44,11 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
 
   const chosen = lang === 'auto' ? detected : lang;
 
+  // A tongue answers to its own name and to its English one, accents aside — "French" and
+  // "Français" are the same tongue, and a finger without é should not be turned away.
   const found = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return LANGS;
-    return LANGS.filter(l => l.label.toLowerCase().includes(q) || l.code.toLowerCase().includes(q));
+    if (!query.trim()) return LANGS;
+    return LANGS.filter(l => tongueMatches(l, query));
   }, [query]);
 
   // Escape closes it, and so does a tap anywhere else — the record never traps a reader.
@@ -90,7 +92,9 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     const typed = manual.trim();
     if (!typed) return;
     setRefusal('');
-    onChange(typed);
+    // Typed in the English word for a tongue already on the list? Take the tongue it means,
+    // so the reader lands on the kept one instead of making a second Français by another name.
+    onChange(languageFromTyped(typed, LANGS) || typed);
     setManual('');
     close();
   };

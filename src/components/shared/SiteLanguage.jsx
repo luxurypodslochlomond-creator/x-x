@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { LANGS, RTL_LANGS } from '@/components/climate/useClimateLanguage';
+import { TONGUE_EN, foldTongue } from '@/components/climate/tongueNames';
 
 // ── ONE TONGUE, EVERYWHERE ──
 // The record already let a reader pick any language on Earth. This lifts that choice
@@ -14,7 +15,14 @@ const LanguageContext = createContext(null);
 
 function normalizeLanguage(value) {
   const text = String(value || '').trim();
-  const match = LANGS.find((item) => item.code.toLowerCase() === text.toLowerCase() || item.label.toLowerCase() === text.toLowerCase());
+  // A tongue is matched by its own name, its English name, its code, and with accents off —
+  // so "french", "Français" and "fr" all land on the same tongue everywhere on the platform.
+  const match = LANGS.find((item) =>
+    item.code.toLowerCase() === text.toLowerCase() ||
+    item.label.toLowerCase() === text.toLowerCase() ||
+    foldTongue(item.label) === foldTongue(text) ||
+    foldTongue(TONGUE_EN[item.code]) === foldTongue(text)
+  );
   if (match) return match.code;
   if (/^(cherokee|tsalagi|ᏣᎳᎩ)$/i.test(text)) return 'chr';
   return text || 'auto';
