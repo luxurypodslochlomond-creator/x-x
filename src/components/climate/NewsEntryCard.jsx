@@ -51,9 +51,13 @@ export default function NewsEntryCard({ entry, linked = true }) {
         </figure>
       )}
 
-      {/* A film or a picture is never shown without its credit — even when there is no frame. */}
+      {/* A picture is never shown without its credit — and a credit is never left standing
+          alone as though something were there. Where the credit is on the entry but no frame
+          is held here, it says exactly that, so nobody reads it as a picture that failed. */}
       {entry.image_credit && !entry.image_url && (
-        <p className="px-4 pt-2.5 text-[9px] font-mono uppercase tracking-wide text-[#5a5246]">{entry.image_credit}</p>
+        <p className="px-4 pt-2.5 text-[9px] font-mono uppercase tracking-wide text-[#5a5246]">
+          Picture credited, not held here · {entry.image_credit}
+        </p>
       )}
 
       {entry.replicable && (

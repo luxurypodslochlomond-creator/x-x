@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Check, X, AlertTriangle, FileText, MessageSquare, Calendar, Eye, Leaf, RefreshCw, Globe, Tag, Music, Play } from 'lucide-react';
 import ProvenanceSweep from '@/components/admin/ProvenanceSweep';
+import PictureCreditSweep from '@/components/admin/PictureCreditSweep';
 import SourceLinkRow from '@/components/admin/SourceLinkRow';
 import ListenerLinesPanel from '@/components/admin/ListenerLinesPanel';
 import SignUnsignedEntries from '@/components/admin/SignUnsignedEntries';
@@ -360,6 +361,9 @@ export default function AdminClimateReview() {
 
         {/* Provenance sweep — no entry without its origin */}
         <ProvenanceSweep />
+
+        {/* Picture and credit sweep — every picture carries who made it */}
+        <PictureCreditSweep />
 
         {/* Tabs */}
         <div className="flex gap-1 mb-4 sticky top-0 bg-[#f4efe4] py-2 z-10">
