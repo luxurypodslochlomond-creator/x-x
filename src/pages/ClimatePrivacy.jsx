@@ -54,7 +54,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#e2602a] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              When you submit, an AI reads it first and writes an advisory note. The AI checks for spam, harmful content, and whether the submission is relevant to climate. It does not judge the science, and it never decides anything on its own. Clear entries go on the record at once; anything it flags waits for a real person to check.
+              An AI reads your submission first and writes an advisory note: spam, harmful content, relevance to climate. It never judges the science, never decides, and never trains on what you send. The note is kept in the audit trail. A person makes every decision.
             </p>
           </div>
         </section>
@@ -118,7 +118,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              Your submission stays on the record for the life of the record, unless you ask us to remove it. Your contact email is kept until you withdraw consent. The AI advisory note is kept as part of the audit trail. Country-level reading data is aggregated and kept indefinitely, with no link to any person. We do not keep your data longer than needed.
+              Your submission stays for the life of the record, unless you ask us to remove it. Your email is kept until you withdraw consent. The advisory note stays in the audit trail. Country data is aggregated, with no link to any person. Nothing is kept longer than that.
             </p>
           </div>
         </section>

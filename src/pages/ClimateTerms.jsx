@@ -57,7 +57,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#1e3a2b] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              An AI advisory note screens every submission for spam and relevance. The AI never judges the science, and it never decides. Clear entries go on the record at once. Anything it flags waits for a real person to check. That is the promise.
+              An AI advisory note screens every submission for spam, harmful content and relevance. It never judges the science, never decides, and never trains on what you send. Clear entries go on at once; anything it flags waits for a real person. The note is kept in the audit trail.
             </p>
             <p className="mt-3 text-[12px] font-mono leading-relaxed text-[#141210]">
               Every entry carries the printed name of the person who put it on the record. A machine can never fill that name — it has none to sign with — so an entry with no name says plainly that it is unsigned rather than showing nothing. When an entry turns out to be wrong, it is corrected in the open with the date it was corrected, never quietly edited or deleted, and every correction is gathered at{' '}
@@ -102,22 +102,10 @@ export default function ClimateTerms() {
           </div>
         </section>
 
-        {/* 7. THE AI ADVISORY NOTE */}
+        {/* 7. HOW LONG WE KEEP IT */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            07 · The AI Advisory Note
-          </h2>
-          <div className="bg-[#f7f1e5] border-l-4 border-l-[#e2602a] border border-[#141210] p-4">
-            <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              When you submit, an AI screens the text for spam, harmful content, and relevance to climate. Clear entries go on the record straight away; anything unclear is held and a note is written for the human reviewer. The AI does not judge the science and does not train on your submission. The note is kept as part of the audit trail, and your text stays on the record unless you ask us to remove it.
-            </p>
-          </div>
-        </section>
-
-        {/* 8. HOW LONG WE KEEP IT */}
-        <section className="mb-6">
-          <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            08 · How Long We Keep It
+            07 · How Long We Keep It
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4 space-y-2">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
@@ -129,7 +117,7 @@ export default function ClimateTerms() {
         {/* 9. IF YOU'RE UNDER 13 */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            09 · If You're Under 13
+            08 · If You're Under 13
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#1e3a2b] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
@@ -141,7 +129,7 @@ export default function ClimateTerms() {
         {/* 10. TAKING SOMETHING DOWN */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            10 · Taking Something Down
+            09 · Taking Something Down
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
@@ -153,7 +141,7 @@ export default function ClimateTerms() {
         {/* 11. WHEN THINGS GO WRONG */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            11 · When Things Go Wrong
+            10 · When Things Go Wrong
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
@@ -165,7 +153,7 @@ export default function ClimateTerms() {
         {/* 12. THE LAW THAT APPLIES */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            12 · The Law That Applies
+            11 · The Law That Applies
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
@@ -177,7 +165,7 @@ export default function ClimateTerms() {
         {/* 13. WHEN THESE CHANGE */}
         <section className="mb-6">
           <h2 className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            13 · When These Change
+            12 · When These Change
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
