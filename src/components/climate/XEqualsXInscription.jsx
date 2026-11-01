@@ -17,24 +17,28 @@ const EVIDENCE = [
     mark: '1 = 1',
     origin: 'Identity',
     text: 'True by definition inside any system that has an equals sign — and empty, because it says nothing at all about the person reading it.',
+    check: 'Needs no source, which is the whole point of it. It holds wherever an equals sign holds.',
   },
   {
     n: '02',
     mark: 'E = hν',
     origin: 'Planck 1900 · Einstein 1905',
     text: 'Energy is exchanged in whole multiples of hν, sized by its frequency. Planck found the rule and was uneasy about where it led; Einstein took it literally and said the light itself arrives in packets. Measured ever since, and indifferent to who is watching.',
+    check: 'Planck, Zur Theorie des Gesetzes der Energieverteilung im Normalspectrum, 1900. Einstein, Annalen der Physik 17, 1905.',
   },
   {
     n: '03',
     mark: 'resonance',
     origin: 'Coupling',
     text: 'A thing driven near its own natural frequency answers with a large swing, and two things tuned alike pass energy between them — a glass, a bridge, a room, two clocks on one wall. A fact about coupling. Not a claim about intention.',
+    check: 'Huygens, two pendulums hung on one beam falling into step, 1665. Any textbook on coupled oscillators since.',
   },
   {
     n: '04',
     mark: 'equal worth',
     origin: 'Not physics',
     text: 'Nowhere in the mathematics. A decision, taken on purpose by people who could have decided otherwise, and the only line here that can be refused.',
+    check: 'No source exists for this one. It is a decision, and the plate under it is signed — or plainly unsigned.',
   },
 ];
 
@@ -74,7 +78,7 @@ export default function XEqualsXInscription() {
       </div>
 
       <div className="mt-8">
-        {EVIDENCE.map(({ n, mark, origin, text }) => (
+        {EVIDENCE.map(({ n, mark, origin, text, check }) => (
           <div key={n} className="border-t border-[#141210]/25 pt-3 pb-4">
             <div className="flex items-baseline justify-between gap-3">
               <p className="font-mono text-[9.5px] font-black tracking-[0.18em] text-[#6b6258]">
@@ -89,6 +93,9 @@ export default function XEqualsXInscription() {
             </p>
             <p className="mt-2 font-mono text-[11.5px] leading-relaxed text-[#141210]">
               {text}
+            </p>
+            <p className="mt-2 font-mono text-[10px] leading-relaxed text-[#6b6258]">
+              {check}
             </p>
           </div>
         ))}
