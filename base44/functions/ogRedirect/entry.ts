@@ -7,10 +7,10 @@
 // ── THE PICTURE THAT MAKES THE CARD ──
 // WhatsApp, Facebook, LinkedIn and iMessage all refuse an SVG as a preview image. Hand them
 // one and they drop the whole card, leaving a naked URL in the message — which is exactly
-// what a raw "api/functions/ogRedirect?page=..." looks like arriving in a chat. So the card
-// is a real PNG, held on storage and served as it is: no drawing at fetch time, so a crawler
-// that gives up in a few hundred milliseconds still gets its picture.
-const RECORD_CARD = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/845968049_generated_image.png';
+// what a raw "api/functions/ogRedirect?page=..." looks like arriving in a chat. So the record
+// draws its own card as real PNG bytes, at the 1.91:1 shape a link preview actually wants:
+// paper, one signal pulse, no lettering that could be misspelled.
+const RECORD_CARD = '/api/functions/serveClimateIcon?w=1200&h=630';
 
 const PAGE_META = {
 

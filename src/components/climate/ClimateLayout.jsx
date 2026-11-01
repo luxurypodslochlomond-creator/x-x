@@ -65,7 +65,9 @@ export default function ClimateLayout({ children, currentPage }) {
       el.setAttribute('content', value);
     };
 
-    const card = `${recordOrigin()}/api/functions/serveClimateOGImage`;
+    // A real PNG at the shape a link card wants. The SVG that stood here before was refused
+    // by every platform that draws one, so a shared record arrived as a bare link.
+    const card = `${recordOrigin()}/api/functions/serveClimateIcon?w=1200&h=630`;
     setMeta('name', 'description', DESCRIPTION);
     setMeta('property', 'og:title', TITLE);
     setMeta('property', 'og:description', DESCRIPTION);
@@ -87,6 +89,16 @@ export default function ClimateLayout({ children, currentPage }) {
       document.head.appendChild(icon);
     }
     icon.href = '/api/functions/serveFavicon?type=climate';
+
+    // iPhone ignores the manifest's icons and takes this one, so "Add to Home Screen" puts the
+    // record's own mark on the phone instead of a screenshot of whatever page was open.
+    let appleIcon = document.querySelector('link[rel="apple-touch-icon"]');
+    if (!appleIcon) {
+      appleIcon = document.createElement('link');
+      appleIcon.rel = 'apple-touch-icon';
+      document.head.appendChild(appleIcon);
+    }
+    appleIcon.href = '/api/functions/serveClimateIcon?size=180';
 
     let manifest = document.querySelector('link[rel="manifest"]');
     if (!manifest) {

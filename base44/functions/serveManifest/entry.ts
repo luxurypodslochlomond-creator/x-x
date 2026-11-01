@@ -101,9 +101,13 @@ Deno.serve(async (req) => {
       orientation: "portrait-primary",
       background_color: "#141210",
       theme_color: "#b3261e",
+      // Real PNGs, at the sizes they claim to be. The icons here used to point at the SVG
+      // card while telling the phone it was a 192 and a 512 PNG — a phone that checks, and
+      // Android does, then has no icon to put on the Home Screen.
       icons: [
-        { src: "/api/functions/serveClimateOGImage", sizes: "192x192", type: "image/png", purpose: "any" },
-        { src: "/api/functions/serveClimateOGImage", sizes: "512x512", type: "image/png", purpose: "any" }
+        { src: "/api/functions/serveClimateIcon?size=192", sizes: "192x192", type: "image/png", purpose: "any" },
+        { src: "/api/functions/serveClimateIcon?size=512", sizes: "512x512", type: "image/png", purpose: "any" },
+        { src: "/api/functions/serveClimateIcon?size=512", sizes: "512x512", type: "image/png", purpose: "maskable" }
       ],
       categories: ["education", "news"],
       shortcuts: [
@@ -112,14 +116,14 @@ Deno.serve(async (req) => {
           short_name: "Map",
           description: "Where the record is being read",
           url: "/ClimateMap",
-          icons: [{ src: "/api/functions/serveClimateOGImage", sizes: "192x192" }]
+          icons: [{ src: "/api/functions/serveClimateIcon?size=192", sizes: "192x192", type: "image/png" }]
         },
         {
           name: "Global Impact",
           short_name: "Impact",
           description: "Reach by country and nation",
           url: "/ClimateImpact",
-          icons: [{ src: "/api/functions/serveClimateOGImage", sizes: "192x192" }]
+          icons: [{ src: "/api/functions/serveClimateIcon?size=192", sizes: "192x192", type: "image/png" }]
         }
       ]
     } : {
