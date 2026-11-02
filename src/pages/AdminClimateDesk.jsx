@@ -7,15 +7,25 @@ import { RefreshCw, ArrowRight } from 'lucide-react';
 // ten minutes finding out whether anything is waiting, and a record nobody can see the state of
 // is a record that quietly stops being tended. Nothing here changes anything: it is a window,
 // and every number is a way in to the page where the work actually happens.
-const Figure = ({ value, label, tone, note }) => (
-  <div className="border-2 border-record-ink/20 bg-record-bone p-3">
-    <p className="text-2xl font-black leading-none mb-1" style={{ color: tone }}>
-      {value}
-    </p>
-    <p className="text-[9px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">{label}</p>
-    {note && <p className="text-[9px] font-mono text-record-muted mt-1 leading-tight">{note}</p>}
-  </div>
-);
+// A number you cannot open is a number you have to remember where to act on. Each figure now
+// carries the door to the page where that number is actually dealt with: waiting goes to the
+// queue, unopened goes to the room where a source is opened, and checks goes to who is checking.
+const Figure = ({ value, label, tone, note, to }) => {
+  const body = (
+    <>
+      <p className="text-2xl font-black leading-none mb-1" style={{ color: tone }}>
+        {value}
+      </p>
+      <p className="text-[9px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">{label}</p>
+      {note && <p className="text-[9px] font-mono text-record-muted mt-1 leading-tight">{note}</p>}
+      {to && <span className="block text-[8px] font-mono uppercase tracking-[0.15em] text-record-muted mt-1.5">open</span>}
+    </>
+  );
+  const box = 'border-2 border-record-ink/20 bg-record-bone p-3';
+  return to
+    ? <Link to={to} className={`${box} block active:bg-record-paper`}>{body}</Link>
+    : <div className={box}>{body}</div>;
+};
 
 export default function AdminClimateDesk() {
   const [d, setD] = useState(null);
@@ -68,9 +78,9 @@ export default function AdminClimateDesk() {
         </p>
 
         <div className="grid grid-cols-3 gap-2 mb-6">
-          <Figure value={d.waitingTotal} label="waiting" tone="#1a1612" note="held for a person" />
-          <Figure value={d.unchecked} label="unopened" tone="#b3261e" note="no one has checked" />
-          <Figure value={d.recentChecks} label="checks / 7d" tone="#1e3a2b" note="last seven days" />
+          <Figure value={d.waitingTotal} label="waiting" tone="#1a1612" note="held for a person" to="/AdminClimateReview" />
+          <Figure value={d.unchecked} label="unopened" tone="#b3261e" note="no one has checked" to="/ClimateChecking" />
+          <Figure value={d.recentChecks} label="checks / 7d" tone="#1e3a2b" note="last seven days" to="/AdminClimateCheckers" />
         </div>
 
         {d.contested > 0 && (
