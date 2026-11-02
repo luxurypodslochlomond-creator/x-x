@@ -54,7 +54,7 @@ export default function AdminClimateDesk() {
   }
 
   return (
-    <div className="min-h-screen bg-record-paper pb-24">
+    <div className="pb-16">
       <div className="max-w-2xl mx-auto px-4 pt-8">
         <div className="flex items-start justify-between gap-3 mb-1">
           <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the desk</p>

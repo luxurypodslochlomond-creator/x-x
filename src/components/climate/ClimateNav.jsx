@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Search as SearchIcon } from 'lucide-react';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
+import useKeeper from '@/components/climate/useKeeper';
+
+// ── THE KEEPER'S DOOR ──
+// The desk used to sit in the app's own admin list, which put the record's working page in a
+// room belonging to something else. If the record is going to stand on its own one day, it has
+// to carry the things needed to tend it. So the door is here, in the record's own bar, and only
+// a keeper sees it: to a reader the record looks exactly as it did.
+const KEEPER_WORD = { label: 'Desk', page: 'AdminClimateDesk', aria: "The keeper's desk" };
 
 // ── THE WAY THROUGH THE RECORD ───────────────────────────────────────────────────
 // Two different kinds of thing live in this bar, and they are drawn differently on
@@ -89,6 +97,7 @@ function MobileLink({ item, active, quiet }) {
 
 export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   const isActive = (page) => currentPage === page;
+  const keeper = useKeeper();
   const searchActive = isActive('ClimateSearch');
 
   const searchBox = (
@@ -138,6 +147,12 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
             {ABOUT.map((item) => (
               <MobileLink key={item.page} item={item} active={isActive(item.page)} quiet />
             ))}
+            {keeper && (
+              <>
+                <span className="w-px h-4 bg-[#efe7d6]/20" />
+                <MobileLink item={KEEPER_WORD} active={isActive(KEEPER_WORD.page)} quiet />
+              </>
+            )}
           </div>
         </div>
       </nav>
@@ -155,6 +170,12 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
       {ABOUT.map((item) => (
         <PlaceLink key={item.page} item={item} active={isActive(item.page)} />
       ))}
+      {keeper && (
+        <>
+          <span className="w-px h-4 bg-[#efe7d6]/20" />
+          <PlaceLink item={KEEPER_WORD} active={isActive(KEEPER_WORD.page)} />
+        </>
+      )}
     </nav>
   );
 }

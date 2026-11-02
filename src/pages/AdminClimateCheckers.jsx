@@ -69,7 +69,7 @@ export default function AdminClimateCheckers() {
   };
 
   return (
-    <div className="min-h-screen bg-record-paper pb-24">
+    <div className="pb-16">
       <div className="max-w-2xl mx-auto px-4 pt-8">
         <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-3">keepers only</p>
         <h1 className="font-black text-record-ink text-2xl leading-tight mb-2">People who check the record</h1>

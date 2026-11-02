@@ -311,8 +311,8 @@ const AuthenticatedApp = () => {
       <Route path="/AdminClimatePhotos" element={<LayoutWrapper currentPageName="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminClimateLog" element={<LayoutWrapper currentPageName="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/ClimateChecking" element={<ClimateLayout currentPage="ClimateChecking"><ClimateCheckingPage /></ClimateLayout>} />
-      <Route path="/AdminClimateCheckers" element={<LayoutWrapper currentPageName="AdminClimateCheckers"><AdminOnly><AdminClimateCheckersPage /></AdminOnly></LayoutWrapper>} />
-      <Route path="/AdminClimateDesk" element={<LayoutWrapper currentPageName="AdminClimateDesk"><AdminOnly><AdminClimateDeskPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><AdminOnly><AdminClimateCheckersPage /></AdminOnly></ClimateLayout>} />
+      <Route path="/AdminClimateDesk" element={<ClimateLayout currentPage="AdminClimateDesk"><AdminOnly><AdminClimateDeskPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/Uf51Road" element={<LayoutWrapper currentPageName="Uf51Road"><AdminOnly><Uf51RoadPage /></AdminOnly></LayoutWrapper>} />

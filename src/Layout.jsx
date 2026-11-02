@@ -598,7 +598,6 @@ const LayoutInner = ({ children, currentPageName }) => {
     // Show BUILD section if logged in as admin OR if inside the Base44 builder iframe
     const isInBuilder = window.self !== window.top && window.location.hostname.includes('base44');
     const adminNav = (user?.role === 'admin' || isInBuilder) ? [
-      { title: "🧭 Climate Desk", url: createPageUrl("AdminClimateDesk"), icon: Eye, description: "The record at a glance · counted now" },
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
       { title: "Logo Upload", url: createPageUrl("AdminLogoUpload"), icon: Image, description: "Update UF51 branding" },
       { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, description: "Device intel" },
