@@ -37,7 +37,7 @@ const STEPS = [
 const REFUSALS = [
   ['Rank an entry. There is no ordering by attention, and no popularity count to buy.', 'built in'],
   ['Sell a placement, a colour, a position, or a "verified" mark.', 'built in'],
-  ['Track a reader. No pixels, no advertising, no third-party analytics, no session recording.', 'built in'],
+  ['Track a reader. No advertising, no third-party analytics, no session recording, and no address kept. A view is counted once per entry, by country only, with no identifier — that count is all the impact page shows.', 'built in'],
   ['Let a machine sign. A signature is a person\'s name, and a machine has none to give.', 'built in'],
   ['Edit an entry quietly. A correction is written on the entry, with its date, and stays there.', 'a keeper\'s word'],
   ['Take an entry down without saying so. A removal leaves a dated note in its place.', 'a keeper\'s word'],
@@ -45,8 +45,8 @@ const REFUSALS = [
 
 const OPEN = [
   ['The platform\'s source is not published yet.', 'Until it is, a host cannot build it, audit it or leave with it. This is the largest gap, and it is a step, not a principle.'],
-  ['Thirty-nine sources, twenty-nine kept.', 'Each cited page was read on the day it went on the record and copied, with a fingerprint, so a quote cannot drift. Ten origins would not be read: a journal, a UN agency site, a news site, a PDF host, and YouTube, which answered too often in one go. Those ten entries still link to the origin, and each says plainly that no copy is held rather than letting the link stand in for the proof.'],
-  ['No keeper named on the masthead yet.', 'Every published entry already carries the name of the person who signed it on: nineteen solutions, seventeen on the wire, three actions. What is missing is one accountable keeper for the whole record, with a contact line a reader can use. Until that name is real the record says "unsigned" in the same size as everything else, and will not invent one in the meantime.'],
+  ['Thirty-nine sources cited, twenty-nine kept — counted 2 November 2026.', 'Each cited page that would answer was read on the day it went on the record and copied, with a fingerprint, so a quote cannot drift. Ten origins would not be read: a journal, a UN agency site, a news site, a PDF host, and YouTube, which answered too often in one go. Those ten entries still link to the origin, and each says plainly that no copy is held rather than letting the link stand in for the proof. Both figures are counted from the record on the day they are written, never estimated, and dated so they cannot quietly go stale.'],
+  ['No keeper named on the masthead yet.', 'Thirty-nine of the forty published entries carry the name of the person who signed them on — counted 2 November 2026: ten solutions, nine crises, eighteen on the wire, three actions. The one that does not carry a name says so in the same size as everything else, and the four gatherings carry an organiser rather than a signer, and say that. What is missing is one accountable keeper for the whole record, with a contact line a reader can use, and the record will not invent one in the meantime.'],
 ];
 
 export default function ClimateHandover() {
