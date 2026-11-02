@@ -1,7 +1,7 @@
 {
   "name": "SortedCase",
   "type": "object",
-  "description": "Saved case history for SORTED subscribers",
+  "description": "Saved case history for SORTED subscribers. The person's own letter, reply and follow-ups live only on their device; what reaches this table is a short, anonymised pattern so the tool can learn from real cases. Even so, it is still a line about somebody's debt, eviction or dispute, so it is not readable by anyone but a keeper: a guest may add one (the tool works with no account), and nobody can read the table back, change another person's line or remove one. A keeper may read it only to answer a request like 'delete my server data', which is served by the deleteSortedCases function.",
   "properties": {
     "tool": {
       "type": "string",
@@ -48,7 +48,21 @@
     "ai_result"
   ],
   "rls": {
-    "read": {},
-    "write": {}
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
