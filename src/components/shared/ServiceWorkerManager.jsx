@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isPreviewSandbox } from '@/lib/previewWorkers';
 
 /**
  * SERVICE WORKER MANAGER
@@ -8,6 +9,7 @@ import { useEffect } from 'react';
 
 export default function ServiceWorkerManager() {
     useEffect(() => {
+        if (isPreviewSandbox()) return;
         if ('serviceWorker' in navigator) {
             // Register service worker
             navigator.serviceWorker.register('/sw.js')

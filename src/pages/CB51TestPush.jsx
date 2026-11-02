@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Bell, Send, Radio } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { registerWorker } from '@/lib/previewWorkers';
 
 /**
  * CB51 PUSH NOTIFICATION TESTER
@@ -31,7 +32,11 @@ export default function CB51TestPush() {
       setStatus('✅ Permission granted! Registering service worker...');
       
       // Register service worker
-      const registration = await navigator.serviceWorker.register('/api/functions/serveServiceWorker');
+      const registration = await registerWorker('/api/functions/serveServiceWorker');
+      if (!registration) {
+        setStatus('Service workers are off in the editor preview.');
+        return;
+      }
       await navigator.serviceWorker.ready;
       
       setStatus('✅ Service worker ready! Subscribing to push...');

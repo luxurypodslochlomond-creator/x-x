@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, BellOff, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { registerWorker } from '@/lib/previewWorkers';
 
 export default function PushNotifications() {
     const [permission, setPermission] = useState(Notification.permission);
@@ -20,7 +21,7 @@ export default function PushNotifications() {
             if (result === 'granted') {
                 // Register service worker for push
                 if ('serviceWorker' in navigator) {
-                    const registration = await navigator.serviceWorker.register('/sw.js');
+                    const registration = await registerWorker('/sw.js');
                     console.log('Service Worker registered:', registration);
                 }
             }

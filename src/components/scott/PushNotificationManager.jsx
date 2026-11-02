@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, BellOff } from 'lucide-react';
 import CB51NotificationStatus from './CB51NotificationStatus';
+import { isPreviewSandbox, registerWorker } from '@/lib/previewWorkers';
 
 /**
  * PushNotificationManager - Web Push Notifications for CB51
@@ -73,6 +74,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
   };
 
   const initializePushNotifications = async () => {
+        if (isPreviewSandbox()) { setIsLoading(false); return; }
         let timeoutId = null;
         try {
             setIsLoading(true);
@@ -84,7 +86,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
             });
 
             const registration = await Promise.race([
-              navigator.serviceWorker.register(`${swPath}?v=${Date.now()}`, { scope: '/' }),
+              registerWorker(`${swPath}?v=${Date.now()}`, { scope: '/' }),
               timeoutPromise
             ]);
 
@@ -109,6 +111,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
         };
 
   const requestNotificationPermission = async () => {
+    if (isPreviewSandbox()) return;
     try {
       setIsLoading(true);
       const { base44 } = await import('@/api/base44Client');
@@ -122,7 +125,7 @@ export default function PushNotificationManager({ onSubscriptionChange }) {
 
       // Step 2: Register service worker if not already
       if (!navigator.serviceWorker.controller) {
-        await navigator.serviceWorker.register(`/api/functions/serveServiceWorker?v=${Date.now()}`, { scope: '/' });
+        await registerWorker(`/api/functions/serveServiceWorker?v=${Date.now()}`, { scope: '/' });
       }
 
       // Step 3: Get VAPID key

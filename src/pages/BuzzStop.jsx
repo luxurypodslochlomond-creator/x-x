@@ -5,6 +5,7 @@ import { createPageUrl } from '@/utils';
 import { ArrowLeft, Menu, X, Scale, Eye, Info as InfoIcon, Wifi, WifiOff, AlertCircle } from 'lucide-react';
 import BuzzStopReportWidget from '@/components/healing/BuzzStopReportWidget';
 import { AnimatePresence, motion } from 'framer-motion';
+import { isPreviewSandbox } from '@/lib/previewWorkers';
 
 const BuzzStopMark = () => (
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
@@ -25,7 +26,7 @@ export default function BuzzStopPage() {
 
   useEffect(() => {
     // Register service worker for offline support
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && !isPreviewSandbox()) {
       navigator.serviceWorker.register('/api/functions/buzzstopServiceWorker')
         .then((reg) => {
           console.log('BuzzStop offline cache ready ✓');

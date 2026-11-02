@@ -10,6 +10,7 @@ import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import { recordOrigin } from '@/components/climate/recordAddress';
+import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SignalCode from '@/components/climate/SignalCode';
@@ -194,7 +195,7 @@ export default function TogetherChangeClimate() {
   const { categories } = useClimateCategories();
 
   useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && !isPreviewSandbox()) {
       navigator.serviceWorker.register('/api/functions/serveClimateServiceWorker', { scope: '/' }).catch(() => {});
     }
     const onOnline = () => setIsOffline(false);

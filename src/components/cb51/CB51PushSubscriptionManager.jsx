@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Bell, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { registerWorker } from '@/lib/previewWorkers';
 
 /**
  * CB51 PUSH SUBSCRIPTION MANAGER
@@ -61,13 +62,14 @@ export default function CB51PushSubscriptionManager({ userEmail }) {
   const getOrCreateRegistration = async () => {
     const existing = await navigator.serviceWorker.getRegistration('/');
     if (existing) { existing.update().catch(() => {}); return existing; }
-    return await navigator.serviceWorker.register('/api/functions/serveServiceWorker', { scope: '/' });
+    return await registerWorker('/api/functions/serveServiceWorker', { scope: '/' });
   };
 
   const subscribe = async () => {
     setIsLoading(true);
     try {
       const registration = await getOrCreateRegistration();
+      if (!registration) { setIsLoading(false); return; }
       await navigator.serviceWorker.ready;
 
       let vapidPublicKey = localStorage.getItem('VAPID_PUBLIC_KEY');

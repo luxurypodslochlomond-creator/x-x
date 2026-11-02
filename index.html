@@ -48,6 +48,33 @@
     <!-- Catch failed module downloads before the app's imports start. -->
     <script id="uf51-boot-recovery">
       (function () {
+        // ── THE EDITOR PREVIEW NEVER RECOVERS ──────────────────────────────────
+        // The preview runs on its own host. A background worker stored there keeps
+        // serving an old copy of the app's code, and this script's answer to that is
+        // to reload the page — so it reloads forever and the editor gives up before
+        // the app starts. On that host we install nothing, reload nothing, and clear
+        // whatever is already stored, every load, so it cannot come back.
+        // The published app is a different hostname: none of this reaches it.
+        if (window.location.hostname.indexOf('preview-sandbox--') === 0) {
+          window.__uf51RecoverBuild = function () { return false; };
+          window.__uf51IsModuleLoadError = function () { return false; };
+          try {
+            if ('serviceWorker' in navigator) {
+              navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                registrations.forEach(function (registration) {
+                  registration.unregister().catch(function () {});
+                });
+              }).catch(function () {});
+            }
+            if ('caches' in window) {
+              caches.keys().then(function (names) {
+                names.forEach(function (name) { caches.delete(name).catch(function () {}); });
+              }).catch(function () {});
+            }
+          } catch (_) {}
+          return;
+        }
+
         var key = 'uf51_build_reload';
         var marker = '_uf51_reload';
         var recovering = false;
