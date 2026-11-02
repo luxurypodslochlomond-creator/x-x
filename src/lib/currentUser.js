@@ -13,8 +13,3 @@ export function currentUser() {
   }
   return pending;
 }
-
-// For a sign-out or a fresh sign-in: the answer is allowed to change after that.
-export function forgetUser() {
-  pending = null;
-}
