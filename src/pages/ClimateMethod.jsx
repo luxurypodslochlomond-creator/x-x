@@ -81,7 +81,7 @@ export default function ClimateMethod() {
       </Block>
 
       <Block n="05" title="Who decides">
-        <p>The screen is a machine. The decision is a person's. It produces an advisory note that a human reads. No entry is published on a machine's judgement, and no machine's opinion is treated as a finding.</p>
+        <p>The screen is a machine, and it is allowed to say only one thing: clean enough to go up, or wait for a person. It never says that a claim is true, it never sets how well a claim is known, and it never signs an entry with anybody's name. Anything it is unsure of waits for a person, and that person's decision is the one that counts.</p>
         <p>One named editor stands behind this record, and that name belongs at the top of it rather than in the small print. That name, the contact address and Horizon International's role as custodian are still being settled with the founder — this page says so rather than inventing a masthead, and changes the moment they are.</p>
         <p>Keeping the record running is a second, separate job — the handler. It is never the same single person doing both with nobody checking.</p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
@@ -89,7 +89,7 @@ export default function ClimateMethod() {
 
       <Block n="06" title="Corrections, in daylight">
         <p>When an entry is wrong it is corrected on the entry itself, with the date and what changed. Nothing is quietly edited. Nothing disappears.</p>
-        <p>Every review decision — who looked, when, and what the advisory note said — is kept in an audit trail. It exists from the first day, rather than being reconstructed later when somebody asks.</p>
+        <p>Every decision a person makes — who looked, when, and what the advisory note said — is kept in an audit trail. It exists from the first day, rather than being reconstructed later when somebody asks. An entry the screen cleared asked nothing of a person, so no decision is claimed for it.</p>
         <p>
           Every correction, gathered in one place and dated, is on{' '}
           <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
