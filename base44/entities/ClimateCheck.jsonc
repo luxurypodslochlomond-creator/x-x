@@ -1,0 +1,76 @@
+{
+  "name": "ClimateCheck",
+  "type": "object",
+  "description": "A checker's note on an entry: did the source open, and does it say what the entry claims. Written only by the checking function, after it has confirmed the person is on the guest list, so a note always carries the name of someone who was actually allowed to write it. It changes nothing on the entry itself: a keeper reads these notes and decides. Several notes on one entry are expected and welcome, because two independent people opening a link and agreeing is exactly what turns a single source into a corroborated one. Notes are never edited by the checker afterwards and never deleted when their access ends, because a check that could be quietly rewritten would be worth nothing.",
+  "properties": {
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "action",
+        "comment",
+        "news",
+        "group",
+        "track"
+      ],
+      "description": "Which kind of entry was checked."
+    },
+    "entry_id": {
+      "type": "string",
+      "description": "The entry it was checked against. A note always belongs to an entry, never floats."
+    },
+    "entry_title": {
+      "type": "string",
+      "description": "The entry's title at the time it was checked, so a note can be read without opening the database."
+    },
+    "checker_name": {
+      "type": "string",
+      "description": "The name the check is signed with, taken from the guest list rather than from the browser, so nobody can sign as somebody else."
+    },
+    "checker_email": {
+      "type": "string",
+      "description": "The address of the person who checked, taken from their own sign-in. Never shown to a reader."
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "holds",
+        "does_not_hold",
+        "cannot_tell"
+      ],
+      "description": "holds - the origin opened and says what the entry claims. does_not_hold - it opened and says something else, or does not support the claim. cannot_tell - it could not be opened, or the claim is not checkable from it. Three answers, because 'I could not get in' is not the same as 'it is wrong'."
+    },
+    "note": {
+      "type": "string",
+      "description": "The checker's own words about what they found. Required when the answer is anything other than 'holds', because 'it does not hold' without a reason is not something a keeper can act on."
+    }
+  },
+  "required": [
+    "entry_type",
+    "entry_id",
+    "verdict",
+    "checker_email"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

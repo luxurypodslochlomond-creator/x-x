@@ -10,6 +10,7 @@ import ListenerLinesPanel from '@/components/admin/ListenerLinesPanel';
 import SignUnsignedEntries from '@/components/admin/SignUnsignedEntries';
 import RecordExportPanel from '@/components/admin/RecordExportPanel';
 import ArchiveSourcesPanel from '@/components/admin/ArchiveSourcesPanel';
+import CheckerNotes from '@/components/admin/CheckerNotes';
 
 // A queue nobody works is a queue that lies. The date alone is easy to walk past, so each
 // entry says how long it has been waiting and shouts once it has waited a week. The record's
@@ -262,6 +263,9 @@ export default function AdminClimateReview() {
           {item.details}
         </p>
       )}
+
+      {/* What the checkers found, in their own names, before the keeper decides. */}
+      <CheckerNotes entryId={item.id} />
 
       {/* AI Assessment */}
       {item.ai_assessment && (

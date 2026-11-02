@@ -1,0 +1,53 @@
+{
+  "name": "ClimateChecker",
+  "type": "object",
+  "description": "A person allowed to check entries on the record, and nothing else. This is the guest list, not the keys: a line here lets someone read entries that are waiting and write a note in their own name, and a line removed stops that at once. It grants no power to publish, change or delete anything, and it never lets the person holding it see a submitter's email. Kept apart from the app's admin role on purpose, because a checker is a pair of eyes and admin is the whole machine. A keeper adds and removes these; nobody can add themselves.",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "The exact address the checker signs in with. Required, and what the checking page matches against, so it is never guessed or partly filled."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name their notes are signed with, so a line of checking carries a person rather than an address."
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether they may check today. Turned off it stops access immediately and keeps the record of what they wrote, because ending access is not the same as erasing work."
+    },
+    "note": {
+      "type": "string",
+      "description": "Why this person is on the list, e.g. 'Trebuchet volunteer, coastal restoration'. Kept so a keeper in a year knows who they were and why."
+    },
+    "added_by": {
+      "type": "string",
+      "description": "The keeper who put them on the list."
+    }
+  },
+  "required": [
+    "email"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

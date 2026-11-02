@@ -1,0 +1,174 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import { base44 } from '@/api/base44Client';
+import { UserPlus, Pause, Play, Trash2, RefreshCw } from 'lucide-react';
+
+// The guest list for checking. Deliberately not the same as admin: a checker reads what is
+// waiting and says what they find, and that is all. Making somebody an admin to let them do
+// that would hand them every submitter's address and the delete button as well, which is a
+// much worse trade than it looks on the day you make it.
+export default function AdminClimateCheckers() {
+  const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [note, setNote] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    const rows = await base44.entities.ClimateChecker.list({ sort: '-created_date', limit: 200 });
+    setList(rows?.items || rows || []);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  const add = async () => {
+    const clean = email.trim().toLowerCase();
+    if (!clean || !clean.includes('@')) { setMessage('That address does not look right.'); return; }
+    setBusy(true);
+    setMessage('');
+    try {
+      const me = await base44.auth.me();
+      await base44.entities.ClimateChecker.create({
+        email: clean,
+        name: name.trim(),
+        active: true,
+        note: note.trim(),
+        added_by: me?.email || '',
+      });
+      let invited = true;
+      try {
+        await base44.users.inviteUser(clean, 'user');
+      } catch (e) {
+        invited = false;
+      }
+      setMessage(
+        invited
+          ? `${clean} is on the list and has been sent an invitation.`
+          : `${clean} is on the list. They already had an account, so no invitation was needed.`
+      );
+      setEmail(''); setName(''); setNote('');
+      load();
+    } catch (e) {
+      setMessage(e?.message || 'That did not save.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const toggle = async (row) => {
+    await base44.entities.ClimateChecker.update(row.id, { active: !row.active });
+    load();
+  };
+
+  const remove = async (row) => {
+    await base44.entities.ClimateChecker.delete(row.id);
+    load();
+  };
+
+  return (
+    <div className="min-h-screen bg-record-paper pb-24">
+      <div className="max-w-2xl mx-auto px-4 pt-8">
+        <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-3">keepers only</p>
+        <h1 className="font-black text-record-ink text-2xl leading-tight mb-2">People who check the record</h1>
+        <p className="text-sm text-record-ink/75 leading-relaxed mb-6">
+          Someone on this list can open entries that are waiting and write a note saying whether each source holds up.
+          They cannot publish, edit or delete anything, and they never see a submitter's email address. Only you and the
+          other keepers can add or remove names.
+        </p>
+
+        <div className="bg-record-bone border-2 border-record-ink/20 p-4 mb-8">
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-3">add a checker</p>
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="their email address"
+            inputMode="email"
+            className="w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink"
+          />
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="their name, as their notes will be signed"
+            className="w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink"
+          />
+          <input
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="why (optional), e.g. Trebuchet volunteer"
+            className="w-full min-h-[44px] px-3 mb-3 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink"
+          />
+          <button
+            onClick={add}
+            disabled={busy}
+            className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 bg-record-ink text-record-paper text-[10px] font-black font-mono uppercase tracking-[0.2em] disabled:opacity-40"
+          >
+            <UserPlus className="w-4 h-4" /> {busy ? 'adding' : 'add and invite'}
+          </button>
+          {message && <p className="text-[11px] font-mono text-record-ink/80 mt-3 leading-relaxed">{message}</p>}
+        </div>
+
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink">
+            on the list · {list.length}
+          </p>
+          <button onClick={load} className="text-[10px] font-mono uppercase text-record-muted inline-flex items-center gap-1">
+            <RefreshCw className="w-3 h-3" /> refresh
+          </button>
+        </div>
+
+        {loading && <p className="text-[11px] font-mono text-record-muted">loading</p>}
+
+        {!loading && !list.length && (
+          <p className="text-[12px] text-record-ink/70 leading-relaxed border-2 border-record-ink/15 bg-record-bone p-4">
+            Nobody yet. Add the first checker above and they will get an email with a link to set their password.
+          </p>
+        )}
+
+        <div className="space-y-2">
+          {list.map((row) => (
+            <div key={row.id} className="bg-record-bone border-2 border-record-ink/20 p-3">
+              <div className="flex items-start justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-[12px] font-black text-record-ink truncate">{row.name || row.email}</p>
+                  <p className="text-[10px] font-mono text-record-muted truncate">{row.email}</p>
+                  {row.note && <p className="text-[10px] font-mono text-record-muted truncate">{row.note}</p>}
+                </div>
+                <span
+                  className="text-[9px] font-mono font-black uppercase px-2 py-1 border flex-shrink-0"
+                  style={{
+                    color: row.active ? '#1e3a2b' : '#b3261e',
+                    borderColor: row.active ? 'rgba(30,58,43,0.4)' : 'rgba(179,38,30,0.4)',
+                  }}
+                >
+                  {row.active ? 'checking' : 'paused'}
+                </span>
+              </div>
+              <div className="flex gap-2 mt-3">
+                <button
+                  onClick={() => toggle(row)}
+                  className="flex-1 min-h-[40px] inline-flex items-center justify-center gap-1.5 border-2 border-record-ink/30 text-[9px] font-black font-mono uppercase text-record-ink"
+                >
+                  {row.active ? <><Pause className="w-3 h-3" /> pause</> : <><Play className="w-3 h-3" /> restore</>}
+                </button>
+                <button
+                  onClick={() => remove(row)}
+                  className="flex-1 min-h-[40px] inline-flex items-center justify-center gap-1.5 border-2 border-record-red/40 text-[9px] font-black font-mono uppercase text-record-red"
+                >
+                  <Trash2 className="w-3 h-3" /> remove
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="text-[10px] font-mono text-record-muted leading-relaxed mt-8 border-t border-record-ink/15 pt-4">
+          Pausing or removing ends access immediately. Notes they already wrote stay on the record and stay in their
+          name, because the checking they did was real whether or not they can check tomorrow.
+        </p>
+      </div>
+    </div>
+  );
+}
