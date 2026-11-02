@@ -6,6 +6,7 @@ import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
+import KeeperDoor from '@/components/climate/KeeperDoor';
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
@@ -176,6 +177,10 @@ export default function ClimateLayout({ children, currentPage }) {
               {item.label}
             </Link>
           ))}
+          {/* The one word on this foot that is not a page: the way back in for a keeper on a
+              device the record does not yet recognise. It sits among the other quiet words,
+              and it never asks anyone to type their address. */}
+          <KeeperDoor />
           </div>
           {/* x = x stands on its own line: not another link in a row, but the line the
               whole record rests on — the covenant, said once, at the foot of every page. */}
