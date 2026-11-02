@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
+import { currentUser } from '@/lib/currentUser';
 import { Lock, ArrowRight } from 'lucide-react';
 
 // ADMINS ONLY — the door on the record's working screens.
@@ -15,9 +16,9 @@ export default function AdminOnly({ children }) {
 
   useEffect(() => {
     let cancelled = false;
-    base44.auth.me()
-      .then((user) => { if (!cancelled) setState(user?.role === 'admin' ? 'admin' : 'denied'); })
-      .catch(() => { if (!cancelled) setState('denied'); });
+    // The same answer the record's bar and the keeper's door are already waiting on, so the
+    // gate opens one round trip sooner instead of asking again.
+    currentUser().then((user) => { if (!cancelled) setState(user?.role === 'admin' ? 'admin' : 'denied'); });
     return () => { cancelled = true; };
   }, []);
 

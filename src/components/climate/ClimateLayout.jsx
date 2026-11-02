@@ -45,6 +45,15 @@ const FOOTER_LINKS = [
   { label: 'The Handover', page: 'ClimateHandover' },
 ];
 
+// Pages where someone is waiting on an answer, not reading. See the prefetch effect below.
+const WORKING_PAGES = [
+  'AdminClimateDesk',
+  'AdminClimateCheckers',
+  'AdminClimateReview',
+  'AdminClimateLog',
+  'ClimateChecking',
+];
+
 export default function ClimateLayout({ children, currentPage }) {
   const location = useLocation();
 
@@ -116,6 +125,11 @@ export default function ClimateLayout({ children, currentPage }) {
   // library, and should only load when a reader actually asks for it.
   useEffect(() => {
     if (navigator.connection?.saveData) return;
+    // The record's working screens are the one place a keeper is waiting on an answer rather
+    // than reading. Warming ten page chunks behind them spends the phone's connection on pages
+    // nobody asked for, while the desk is still counting. Nothing is lost: the reader arriving
+    // on those pages later still gets them warm from the pages that do warm them.
+    if (WORKING_PAGES.includes(currentPage)) return;
     const timer = setTimeout(() => {
       ['TogetherChangeClimate', 'ClimateSearch', 'ClimateWire', 'ClimateMethod', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateHost', 'ClimateTerms', 'ClimatePrivacy']
         .forEach(prefetchPath);
