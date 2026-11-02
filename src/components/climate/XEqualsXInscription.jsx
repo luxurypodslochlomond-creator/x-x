@@ -60,10 +60,6 @@ export default function XEqualsXInscription() {
           is a record where the loudest emergency wins — and that record is no use to the people
           who need it.
         </p>
-        <p>
-          That is the whole job here: show what is working and what is breaking, and never let
-          either be buried because it happened somewhere unfashionable.
-        </p>
       </div>
 
       <p className="mt-4 bg-[#f7f1e5] border-2 border-[#141210] border-l-8 border-l-[#e2602a] px-4 py-3 font-mono text-[12px] font-black leading-relaxed text-[#141210]">

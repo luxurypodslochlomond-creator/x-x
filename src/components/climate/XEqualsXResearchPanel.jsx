@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 
@@ -28,7 +29,7 @@ export default function XEqualsXResearchPanel() {
     <section aria-labelledby="promises" className="py-7 border-b-2 border-[#141210]">
       <RecordSectionHeading
         eyebrow="Kept as records, so they can be corrected"
-        title="What this page promises."
+        title="What this record promises."
       />
 
       <p className="font-mono text-[11.5px] leading-relaxed text-[#141210]">
@@ -102,6 +103,18 @@ export default function XEqualsXResearchPanel() {
             None of these is signed yet — a machine cannot sign, and no person has put their name
             here. When one does, it will show. A promise is checked the only way a promise can be:
             open an entry, follow its origin, and see whether the rule held.
+          </p>
+
+          <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-[#5a5246]">
+            How an entry is actually made — where it came from, how well it is known, who signed
+            it — is the record&apos;s protocol, kept on{' '}
+            <Link
+              to="/ClimateMethod"
+              className="text-[#141210] underline decoration-[#e2602a] decoration-2 underline-offset-2"
+            >
+              How the record works
+            </Link>
+            .
           </p>
         </div>
       )}

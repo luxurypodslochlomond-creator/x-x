@@ -26,8 +26,8 @@ const LIMITS = [
   },
   {
     n: '03',
-    title: 'What was left out, on purpose',
-    text: 'Every argument that would have made the mark easier to like — borrowed physics, borrowed poetry, a phrase that sounds like a revelation. A decision dressed as a discovery stops being either. Anyone adding to this page has to add to its limits in the same breath.',
+    title: 'What must not be added',
+    text: 'No borrowed physics, no borrowed poetry, and no sentence that sounds like a revelation. A decision dressed up as a discovery stops being either. Anyone adding to this page has to add to these limits in the same breath.',
   },
   {
     n: '04',

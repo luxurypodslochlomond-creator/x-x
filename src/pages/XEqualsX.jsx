@@ -2,17 +2,21 @@ import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
-import XEqualsXRefuses from '@/components/climate/XEqualsXRefuses';
-import XEqualsXRule from '@/components/climate/XEqualsXRule';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
-import XEqualsXPlatform from '@/components/climate/XEqualsXPlatform';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 
 // x = x — the covenant.
 //
-// One page, one job: say what x = x means on this record, state the rules the record
-// actually keeps, and show where those rules came from. No essay, no borrowed physics,
-// no allusion. Anything a reader cannot check against the record itself does not live here.
+// Three moves, in this order, and nothing else:
+//   1. what the mark means;
+//   2. what the record promises — held as records, so a keeper can correct them in daylight;
+//   3. the limits — what the mark does NOT claim.
+//
+// How an entry is actually made (where it comes from, how well it is known, who signs it) is
+// the record's protocol, and it lives on How the record works. Repeating it here made this
+// page a manual, and a manual read a second time is how a covenant turns into noise. The
+// platform's other tools are not on this page either: this is the climate record's covenant,
+// and their promises belong to them.
 
 export default function XEqualsX() {
   return (
@@ -29,13 +33,7 @@ export default function XEqualsX() {
 
       <XEqualsXInscription />
 
-      <XEqualsXRefuses />
-
-      <XEqualsXRule />
-
       <XEqualsXResearchPanel />
-
-      <XEqualsXPlatform />
 
       <XEqualsXCodicil />
     </ClimateRecordShell>
