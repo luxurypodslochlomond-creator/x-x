@@ -1,35 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// The codicil: the small instrument at the foot of the inscription.
+// The codicil: the small instrument at the foot of the covenant.
 //
-// A mark without a date, a source and a signature is a poster. This is what makes the
-// page quotable without being lieable: every limit the mark has is written underneath it,
-// in the same hand, and left visible.
+// A mark without a date, a limit and a signature is a poster. This is what makes the page
+// quotable without being lieable: every limit the mark has is written underneath it, in the
+// same hand, and left visible.
 //
-// It ends unsigned because no person has typed a name into it yet. That is the record's
-// own rule for every entry, and there is no reason this page should be the exception.
+// It ends unsigned because no person has typed a name into it yet. That is the record's own
+// rule for every entry, and there is no reason this page should be the exception.
 
 const CLAUSES = [
   {
     n: 'i',
     title: 'What is claimed',
-    text: 'Four lines: one identity, one measured rule, one mechanism, one decision. Three can be checked against a library. The fourth can be checked against nothing, and is marked so no reader mistakes it for the third kind.',
+    text: 'One thing only: that equal human worth is a decision this record takes, on purpose, and holds itself to. Everything else on this page describes what the record does. That part can be checked by using it.',
   },
   {
     n: 'ii',
     title: 'What is not claimed',
-    text: 'That the mathematics obliges anyone to be good. It does not. That this page is conscious, or that it knows you. Nothing above is a prediction, and none of it makes anybody safer.',
+    text: 'That every claim on the record is equally true. That a crisis affecting millions is the same size as one affecting a few. That the record knows you, or is conscious, or that anything here makes anybody safer. None of that is claimed, and none of it is true.',
   },
   {
     n: 'iii',
     title: 'What was left out, on purpose',
-    text: 'Every argument that would have made the mark easier to like. A tautology persuades nobody, and the moment it is dressed as a revelation it stops being true. Anyone adding to this page must add to its faults in the same breath.',
+    text: 'Every argument that would have made the mark easier to like — borrowed physics, borrowed poetry, a phrase that sounds like a revelation. A decision dressed as a discovery stops being either. Anyone adding to this page has to add to its limits in the same breath.',
   },
   {
     n: 'iv',
     title: 'What must not be lost',
-    text: 'The sources, the date, and the name of whoever took responsibility. A reader a thousand years from now should be able to check the physics, doubt the moral line, and still find a person. If any of the three goes missing, the page has failed even where every sentence on it is true.',
+    text: 'The date, the name of whoever took responsibility, and the link to how the record works. A reader arriving years from now should be able to check the rules, doubt the sentence, and still find a person. If any of the three goes missing, the page has failed even where every line on it is true.',
   },
   {
     n: 'v',
@@ -40,7 +40,7 @@ const CLAUSES = [
 
 export default function XEqualsXCodicil() {
   return (
-    <section aria-labelledby="the-codicil" className="py-7 border-b-2 border-[#141210]">
+    <section aria-labelledby="the-codicil" className="py-7">
       <div className="flex items-baseline justify-between gap-3">
         <h2
           id="the-codicil"
@@ -54,7 +54,7 @@ export default function XEqualsXCodicil() {
       </div>
 
       <p className="mt-3 font-mono text-[11.5px] leading-relaxed text-[#141210]">
-        Attached to the mark above, so that it cannot be quoted without its limits.
+        Attached to the covenant above, so that it cannot be quoted without its limits.
       </p>
 
       <div className="mt-5">
@@ -81,7 +81,7 @@ export default function XEqualsXCodicil() {
           <dt className="text-[9.5px] font-black uppercase tracking-[0.18em] text-[#6b6258]">
             Placed on the record
           </dt>
-          <dd className="text-[11.5px] text-[#141210]">1 November 2026</dd>
+          <dd className="text-[11.5px] text-[#141210]">2 November 2026</dd>
         </div>
         <div>
           <dt className="text-[9.5px] font-black uppercase tracking-[0.18em] text-[#6b6258]">
@@ -95,9 +95,12 @@ export default function XEqualsXCodicil() {
         </div>
         <div>
           <dt className="text-[9.5px] font-black uppercase tracking-[0.18em] text-[#6b6258]">
-            To correct it, or to take it up
+            To check the rules, correct a line, or take it up
           </dt>
           <dd className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11.5px]">
+            <Link to="/ClimateMethod" className="underline decoration-[#e2602a] decoration-2 underline-offset-2">
+              How the record works
+            </Link>
             <Link to="/ClimateCorrections" className="underline decoration-[#e2602a] decoration-2 underline-offset-2">
               Corrections, in the open
             </Link>

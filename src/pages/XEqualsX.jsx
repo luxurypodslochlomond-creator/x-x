@@ -1,56 +1,46 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
-import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
-import XEqualsXEveryone from '@/components/climate/XEqualsXEveryone';
-import XEqualsXInfinity from '@/components/climate/XEqualsXInfinity';
-import XEqualsXDeepTime from '@/components/climate/XEqualsXDeepTime';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
-import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
-import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
-import XEqualsXContext from '@/components/climate/XEqualsXContext';
+import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXPrinciples from '@/components/climate/XEqualsXPrinciples';
-import XEqualsXEvidence from '@/components/climate/XEqualsXEvidence';
+import XEqualsXRefuses from '@/components/climate/XEqualsXRefuses';
+import XEqualsXRule from '@/components/climate/XEqualsXRule';
+import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
+import XEqualsXPlatform from '@/components/climate/XEqualsXPlatform';
+import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 
-// The meaning of the mark, said in the record's own voice. It wears the same cold
-// bands as the Founder and Support pages, so x = x reads as part of one place —
-// paper, ink, one orange signal.
+// x = x — the covenant.
+//
+// One page, one job: say what x = x means on this record, state the rules the record
+// actually keeps, and show where those rules came from. No essay, no borrowed physics,
+// no allusion. Anything a reader cannot check against the record itself does not live here.
 
 export default function XEqualsX() {
   return (
     <ClimateRecordShell
-      eyebrow="Record of the Time · The meaning of the mark"
-      marker="The mark · equal worth on the record"
+      eyebrow="Record of the Time · The covenant"
+      marker="The rule this record is held to"
       title="Nobody above anybody."
-      statement="x = x. Equal human worth — read the record, act beyond the screen, and nothing here needs you to stay."
+      statement="x = x. Equal human worth — a decision, taken on purpose, and the rule every page of this record is kept to."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
-      footer="x = x is the record's covenant: an emergency does not matter less because fewer people are watching. The record is built in honour of Janine M. H. Selendy and Horizon International."
+      footer="x = x is the covenant the climate record is held to. The record is built in honour of Janine M. H. Selendy and Horizon International."
     >
       <XEqualsXCut />
 
       <XEqualsXInscription />
 
-      <XEqualsXEveryone />
+      <XEqualsXPrinciples />
 
-      <XEqualsXDeepTime />
+      <XEqualsXRefuses />
 
-      <XEqualsXInfinity />
+      <XEqualsXRule />
 
       <XEqualsXResearchPanel />
 
+      <XEqualsXPlatform />
+
       <XEqualsXCodicil />
-
-      <section className="py-6 border-b-2 border-[#141210]">
-        <p className="bg-[#f7f1e5] border-2 border-[#141210] border-l-8 border-l-[#e2602a] px-4 py-4 text-[12.5px] font-mono leading-relaxed text-[#141210]">
-          On this climate record, x = x means equal human worth. An emergency does not matter less because fewer people are watching. Equal worth is not equal size: a crisis affecting millions is still a larger crisis, and we count that honestly. What we refuse is the smaller one being treated as though it never happened.
-        </p>
-      </section>
-
-      <div className="space-y-6 pt-6">
-        <XEqualsXContext />
-        <XEqualsXPrinciples />
-        <XEqualsXEvidence />
-      </div>
     </ClimateRecordShell>
   );
 }

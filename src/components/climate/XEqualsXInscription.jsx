@@ -1,14 +1,11 @@
 import React from 'react';
 
-// The mark, in its own colour.
+// The mark, in its own colour, and nothing else.
 //
-// Cobalt is the only colour on this page that is allowed to mean something: it belongs to
-// x = x and to nothing else here. The record's own signal is orange; the mark is not the
-// record's branding, it is the one line the record rests on, so it gets its own field.
-//
-// No engraving filter, no stone, no turbulence. A colour, a letterform and two hairlines.
-// That is the whole design, and it is enough — a thing that has to look ancient is asking
-// to be believed, which is the opposite of what this page is for.
+// Cobalt belongs to x = x and to nothing else on the record: the record's own signal is
+// orange, and the mark is the line the record rests on. A letterform and two hairlines.
+// No engraving, no stone, no poem — a thing that has to look ancient is asking to be
+// believed, which is the opposite of what this page is for.
 
 export default function XEqualsXInscription() {
   return (
@@ -29,32 +26,29 @@ export default function XEqualsXInscription() {
             x = x
           </p>
 
-          <p className="mt-7 max-w-[26ch] font-mono text-[11.5px] leading-relaxed text-[#efe7d6]/85">
-            Not a slogan and not a hope. True before anyone agrees with it — and chosen where it
-            is not.
+          <p className="mt-7 max-w-[27ch] font-mono text-[11.5px] leading-relaxed text-[#efe7d6]/85">
+            Equal human worth. A decision, taken on purpose — not a discovery, and not a slogan.
           </p>
         </div>
       </div>
 
-      {/* The voice — why a recording is here at all */}
-      <div className="mt-7">
-        <p className="font-mono text-[15px] leading-[1.85] text-[#141210]">
-          <span className="font-black">Big Science</span>, 1982 — a recorded voice on a
-          telephone line, still speaking into a room that has emptied out.
+      <div className="mt-6 space-y-3 font-mono text-[12.5px] leading-relaxed text-[#141210]">
+        <p>
+          On this record, x = x means one thing: every person on the far end of an entry is
+          worth the same as the person reading it. Nobody’s emergency is smaller because fewer
+          people are watching.
         </p>
-        <p className="mt-3 font-mono text-[15px] leading-[1.85] text-[#141210]">
-          A recording does not travel in time. It waits. That is the only technology on this
-          page, and it is older than print: someone says a thing now, and a stranger hears it
-          later.
-        </p>
-        <p className="mt-3 font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-[#6b6258]">
-          Laurie Anderson · Big Science · 1982
+        <p>
+          Nothing in the world obliges anyone to hold that. We hold it because the alternative
+          is a record where the loudest emergency wins — and that record is no use to the
+          people who need it.
         </p>
       </div>
 
-      <p className="mt-4 border-t-2 border-[#141210] pt-4 font-mono text-[11.5px] leading-relaxed text-[#141210]">
-        Addressed to whoever arrives later. The record is not conscious and does not love you
-        back. The people keeping it might.
+      <p className="mt-4 bg-[#f7f1e5] border-2 border-[#141210] border-l-8 border-l-[#e2602a] px-4 py-3 font-mono text-[12px] font-black leading-relaxed text-[#141210]">
+        Equal worth is not equal size. A crisis affecting millions is still a larger crisis, and
+        we count that honestly. What we refuse is the smaller one being treated as though it
+        never happened.
       </p>
     </section>
   );
