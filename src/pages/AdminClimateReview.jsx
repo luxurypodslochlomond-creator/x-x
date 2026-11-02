@@ -278,7 +278,7 @@ export default function AdminClimateReview() {
       )}
 
       {/* Submitter info */}
-      <div className="flex items-center gap-3 text-[9px] font-mono text-[#6b6258] mb-3">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[9px] font-mono text-[#6b6258] mb-3">
         {item.submitter_name && <span>By: {item.submitter_name}</span>}
         {item.author_name && <span>By: {item.author_name}</span>}
         {item.submitter_email && <span>✉ {item.submitter_email}</span>}
@@ -323,11 +323,11 @@ export default function AdminClimateReview() {
       <div className="relative z-10 max-w-2xl mx-auto p-4 pb-12">
         {/* Header */}
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between mb-2">
             <h1 className="font-black uppercase text-[#1a1612]" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.02em' }}>
               Review Queue
             </h1>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button onClick={publishAllClean} disabled={busy === 'bulk'} className="flex items-center gap-1.5 px-3 py-2 border-2 border-[#1e3a2b] text-[#1e3a2b] text-[10px] font-black font-mono uppercase bg-[#efe7d6] active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors disabled:opacity-50">
                 {busy === 'bulk' ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Check className="w-3.5 h-3.5" />} Publish all clean
               </button>
@@ -348,7 +348,7 @@ export default function AdminClimateReview() {
         </div>
 
         {/* Quick stats */}
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex flex-wrap items-center gap-2 mb-4">
           <div className="flex-1 flex items-center gap-2 px-3 py-2.5 bg-[#efe7d6] border border-[#1a1612]/15">
             <AlertTriangle className="w-3.5 h-3.5 text-[#b3261e] flex-shrink-0" />
             <span className="text-[10px] font-mono text-[#1a1612]"><b className="font-black">{solutions.length + actions.length + comments.length + news.length + groups.length + tracks.length}</b> pending</span>
@@ -373,14 +373,14 @@ export default function AdminClimateReview() {
         {/* Not sticky any more: the record's own masthead is the thing that holds the top of
             the screen now, and a second bar pinned under it would sit behind it and vanish.
             The tabs scroll with the page, exactly as they read. */}
-        <div className="flex gap-1 mb-4 py-2">
+        <div className="grid grid-cols-3 gap-1 mb-4 py-2 sm:flex">
           {tabs.map(tab => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex-1 flex flex-col items-center gap-1 px-2 py-3 border-2 transition-colors ${
+                className={`flex flex-col items-center justify-center gap-1 px-1.5 py-2.5 sm:flex-1 sm:px-2 sm:py-3 border-2 transition-colors ${
                   activeTab === tab.id
                     ? 'bg-[#1a1612] text-[#efe7d6] border-[#1a1612]'
                     : 'bg-[#efe7d6] text-[#1a1612] border-[#1a1612]/20'
@@ -421,7 +421,7 @@ export default function AdminClimateReview() {
             <p className="text-[9px] font-black font-mono uppercase text-[#6b6258] mb-2">Review Log</p>
             <div className="space-y-1">
               {auditLogs.map(log => (
-                <div key={log.id} className="flex items-center gap-2 text-[9px] font-mono text-[#6b6258] border-l-2 border-l-[#1a1612]/20 pl-2">
+                <div key={log.id} className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[9px] font-mono text-[#6b6258] border-l-2 border-l-[#1a1612]/20 pl-2">
                   <span className={log.action === 'published' ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}>
                     {log.action === 'published' ? '✓ Published' : '✗ Rejected'}
                   </span>
