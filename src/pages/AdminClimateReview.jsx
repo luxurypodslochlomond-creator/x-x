@@ -319,7 +319,7 @@ export default function AdminClimateReview() {
   const currentEntity = { solutions: 'ClimateSolution', actions: 'ClimateAction', comments: 'ClimateComment', news: 'ClimateNews', groups: 'ClimateGroup', tracks: 'ClimateTrack' }[activeTab];
 
   return (
-    <div className="min-h-screen bg-[#f4efe4] twcc-scanlines relative">
+    <div className="pb-4">
       <div className="relative z-10 max-w-2xl mx-auto p-4 pb-12">
         {/* Header */}
         <div className="mb-6">
@@ -370,7 +370,10 @@ export default function AdminClimateReview() {
         <PictureCreditSweep />
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-4 sticky top-0 bg-[#f4efe4] py-2 z-10">
+        {/* Not sticky any more: the record's own masthead is the thing that holds the top of
+            the screen now, and a second bar pinned under it would sit behind it and vanish.
+            The tabs scroll with the page, exactly as they read. */}
+        <div className="flex gap-1 mb-4 py-2">
           {tabs.map(tab => {
             const Icon = tab.icon;
             return (
@@ -434,12 +437,8 @@ export default function AdminClimateReview() {
         <RecordExportPanel />
         <ArchiveSourcesPanel />
 
-        {/* Footer */}
-        <div className="mt-8 pt-4 border-t border-[#1a1612]/15 text-center">
-          <p className="text-[9px] font-mono text-[#6b6258]">
-            Together We Can Change Climate · Review Queue · x = x
-          </p>
-        </div>
+        {/* The record's own foot closes the page now, and x = x stands there once. This page
+            is inside the record, not beside it. */}
       </div>
     </div>
   );

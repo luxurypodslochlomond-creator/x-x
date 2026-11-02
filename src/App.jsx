@@ -305,7 +305,7 @@ const AuthenticatedApp = () => {
       <Route path="/XEqualsX" element={<ClimateLayout currentPage="XEqualsX"><XEqualsXPage /></ClimateLayout>} />
       <Route path="/ClimateBrief" element={<ClimateLayout currentPage="ClimateBrief"><ClimateBriefPage /></ClimateLayout>} />
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminOnly><AdminUF51BudgetPage /></AdminOnly></LayoutWrapper>} />
-      <Route path="/AdminClimateReview" element={<LayoutWrapper currentPageName="AdminClimateReview"><AdminOnly><AdminClimateReviewPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminClimateReview" element={<ClimateLayout currentPage="AdminClimateReview"><AdminOnly><AdminClimateReviewPage /></AdminOnly></ClimateLayout>} />
       <Route path="/ClimateMap" element={<ClimateLayout currentPage="ClimateMap"><ClimateMapPage /></ClimateLayout>} />
       <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminClimatePhotos" element={<LayoutWrapper currentPageName="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></LayoutWrapper>} />

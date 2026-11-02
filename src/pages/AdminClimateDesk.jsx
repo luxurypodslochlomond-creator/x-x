@@ -148,10 +148,16 @@ export default function AdminClimateDesk() {
 
         <div className="grid grid-cols-2 gap-2 mt-6">
           {[
+            // Every tool the record needs, reachable from this one screen. A keeper should
+            // never have to remember an address to tend the thing they are responsible for.
+            { to: '/AdminClimateReview', label: 'review queue' },
+            { to: '/AdminClimateCheckers', label: 'the guest list' },
+            { to: '/AdminClimateLog', label: "keeper's log" },
+            { to: '/AdminClimateCategories', label: 'categories' },
+            { to: '/AdminClimatePhotos', label: 'top crawl' },
             { to: '/ClimateCorrections', label: 'corrections' },
             { to: '/ClimateMethod', label: 'the method' },
             { to: '/ClimateHandover', label: 'handover' },
-            { to: '/AdminClimateLog', label: "keeper's log" },
           ].map((l) => (
             <Link
               key={l.to}
