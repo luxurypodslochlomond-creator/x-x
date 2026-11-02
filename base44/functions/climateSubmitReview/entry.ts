@@ -98,7 +98,22 @@ Content: ${fullContent.slice(0, 2000)}`,
     }
 
     const status = flagged ? 'draft' : 'published';
-    const recordData = { ...data, status, flagged, ai_assessment: aiAssessment };
+
+    // ── WHAT A SUBMITTER MAY NOT SAY ABOUT THEMSELVES ──
+    // This payload arrives from a public form, so it can never be allowed to set the
+    // things the record uses to say how well an entry is known, or who signed it on.
+    // An entry that could arrive already marked "official record", already carrying a
+    // corroborating source, or already signed with someone else's name would make every
+    // honest entry on the record unverifiable by association — one of those and a panel
+    // is entitled to doubt the other ten thousand. Stripped here, so these fields can
+    // only ever be written by a person afterwards, in the review room, under their name.
+    const {
+      verification, corroborating_source, correction_note, editor, reviewed_date,
+      featured, id, created_date, updated_date, created_by_id,
+      ...submitted
+    } = data;
+
+    const recordData = { ...submitted, status, flagged, ai_assessment: aiAssessment };
     let record;
 
     if (type === 'comment') {
