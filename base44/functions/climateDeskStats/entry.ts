@@ -17,6 +17,14 @@ const KINDS = [
   { type: 'track', entity: 'ClimateTrack', label: 'tracks' },
 ];
 
+// A keeper opens this page, steps into the review queue, and comes back. Counting the whole
+// record again for that return trip is work nobody sees. So the last answer is kept for a
+// minute and handed back with its own counted time still on it — the page says when it was
+// counted, so nothing here claims to be newer than it is. "count again" asks for a fresh
+// count and always gets one.
+const CACHE_MS = 60 * 1000;
+let CACHE = { at: 0, data: null };
+
 export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
@@ -25,10 +33,18 @@ export default async function (req) {
       return Response.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
+    const body = await req.json().catch(() => ({}));
+    if (body?.fresh !== true && CACHE.data && Date.now() - CACHE.at < CACHE_MS) {
+      return Response.json(CACHE.data);
+    }
+
     const db = base44.asServiceRole.entities;
     const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
-    const [per, checkerList, recentChecks, logPage, openNext, sweepPage] = await Promise.all([
+    // The diary used to be three separate questions — the last six lines, how many jobs are
+    // still owed, and the last sweep. They are all the same table, so they are now one read
+    // and the three answers are taken out of it here.
+    const [per, checkerList, recentChecks, workLogPage] = await Promise.all([
       Promise.all(
         KINDS.map(async (k) => {
           const [drafts, published] = await Promise.all([
