@@ -37,11 +37,14 @@ export default function KeeperDoor() {
     );
   }
 
-  // Everyone else: one tap, straight to the account they already hold, back to the desk.
+  // Everyone else: the app's own sign-in page, which takes any address and returns them to
+  // the desk rather than the front of the app. It used to demand a Google account, which was
+  // wrong: the record asks a keeper to prove their own address, not to hand Google their
+  // identity. Both ways in are on that page, and the door still costs one tap.
   return (
     <button
       type="button"
-      onClick={() => base44.auth.loginWithProvider('google', createPageUrl(DESK))}
+      onClick={() => base44.auth.redirectToLogin(createPageUrl(DESK))}
       aria-label="Keepers — sign in to the record's desk"
       className={WORD_CLASS}
     >

@@ -34,7 +34,7 @@ export default function ClimateChecking() {
       setEntries(res.data.entries || []);
       setChecks(res.data.checks || []);
     } catch (e) {
-      setError(e?.response?.status === 403 ? 'not_a_checker' : 'That did not load. Try again in a moment.');
+      setError(e?.response?.status === 403 ? 'not_a_checker' : e?.response?.status === 401 ? 'signed_out' : 'That did not load. Try again in a moment.');
     } finally {
       setLoading(false);
     }
@@ -73,6 +73,31 @@ export default function ClimateChecking() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-record-paper">
         <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-record-muted">opening the queue</span>
+      </div>
+    );
+  }
+
+  // An invited checker who is not carrying a session lands here. They are not told they are
+  // not on the list — they are told the truth: the room is by invitation, and the way in is
+  // their own address. No Google account is needed: the record uses the app's own sign-in,
+  // which sends a code to the address a keeper added.
+  if (error === 'signed_out') {
+    return (
+      <div className="min-h-[60vh] bg-record-paper px-5 py-16">
+        <div className="max-w-xl mx-auto border-2 border-record-ink/20 bg-record-bone p-6">
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-record-red mb-3">this room is by invitation</p>
+          <h1 className="font-black text-record-ink text-xl mb-3">Sign in with the address you were added under.</h1>
+          <p className="text-sm text-record-ink/80 leading-relaxed mb-4">
+            Any address works, and no Google account is needed. A code comes to your own inbox.
+          </p>
+          <button
+            type="button"
+            onClick={() => base44.auth.redirectToLogin(window.location.href)}
+            className="border-2 border-record-ink bg-record-ink text-record-bone font-black uppercase tracking-wide text-xs px-4 py-2"
+          >
+            Sign in to check
+          </button>
+        </div>
       </div>
     );
   }

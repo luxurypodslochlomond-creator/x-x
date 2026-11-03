@@ -13,7 +13,7 @@ export default function ClimatePrivacy() {
       eyebrow="Privacy"
       marker="What we hold · what we don't"
       title="What We Hold, What We Don't"
-      statement="No tracking. No selling. No surprises. Here is exactly what happens."
+      statement="Counted by country, never by person. No selling. No surprises. Here is exactly what happens."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change."
