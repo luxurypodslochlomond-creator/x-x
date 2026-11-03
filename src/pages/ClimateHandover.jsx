@@ -27,7 +27,7 @@ const STEPS = [
   ['The domain, in the host\'s name, with its certificate.', 'Every citation points at it. An address belonging to somebody else is a record lent, not handed over.'],
   ['A sending domain, also theirs.', 'Sign-in and password emails come from it. A record that cannot send its own email cannot keep its own readers.'],
   ['A plan sized to storage, not to visits.', 'Reading is cheap. Pictures and music are the weight.'],
-  ['Two named people with admin, chosen by the founder.', 'An editor, who decides what goes on, and a handler, who keeps it running. Janine Selendy names both — and names the handler who follows — so the role is never left to whoever answers first. One person doing both is a single point of failure, and the separation is written on the record itself.'],
+  ['Two named keepers with admin, chosen by the founder.', 'One signs what goes on the record, one keeps it running. Janine Selendy names both — and names the keeper who follows — so the role is never left to whoever answers first. One person doing both is a single point of failure, and the separation is written on the record itself.'],
   ['The way out, tested once.', 'The record exports in full, without contact details, so no host can hold it hostage and no host is trapped by it. Export it before launch, not after a falling out.'],
 ];
 
@@ -93,8 +93,8 @@ export default function ClimateHandover() {
         <p>
           Four of these the build enforces: there is nothing to buy, nothing counting, and no field a machine can sign.
           Two rest on a keeper&rsquo;s word, and the tag says which. The code cannot stop a person with admin from
-          deleting an entry; it is said here rather than dressed up as a lock, and it is the whole reason the editor and
-          the handler are two people.
+          deleting an entry; it is said here rather than dressed up as a lock, and it is the whole reason the two keepers
+          are two people.
         </p>
         <ul className="space-y-1.5">
           {REFUSALS.map(([r, by], i) => (
@@ -118,7 +118,7 @@ export default function ClimateHandover() {
         <p>
           What the builder keeps once it changes hands is <strong className="text-[#141210]">nothing of the
           record</strong>: no account, no key, no veto, and no seat. Building is not keeping. Neither role is the
-          builder&rsquo;s by default — the founder names the editor and the handler, and the handler who follows, and
+          builder&rsquo;s by default — the founder names both keepers, and the keeper who follows, and
           she may name the builder to either one if she chooses. That choice is hers each time, and it is never assumed.
         </p>
         <p>
@@ -148,7 +148,7 @@ export default function ClimateHandover() {
           <li><strong className="text-[#141210]">Day one.</strong> Export the record and keep the file somewhere that is not the record. That is the host's own insurance, and it takes a minute.</li>
           <li><strong className="text-[#141210]">Day two.</strong> Move the workspace. Point the domain at it and check a citation on an entry opens the new address.</li>
           <li><strong className="text-[#141210]">Day three.</strong> Set the sending domain and send yourself a password reset. If that email does not arrive, nothing else about the record matters yet.</li>
-          <li><strong className="text-[#141210]">Day four.</strong> Put the editor and the handler where the record can show them, named by the founder — or leave both saying "unsigned" until they are real names. A host does not fill these in for the record.</li>
+          <li><strong className="text-[#141210]">Day four.</strong> Put both keepers where the record can show them, named by the founder — or leave both saying "unsigned" until they are real names. A host does not fill these in for the record.</li>
           <li><strong className="text-[#141210]">Day five.</strong> Read the review queue for the first time. Nothing publishes itself without a person, and that is the job.</li>
         </ol>
       </Block>

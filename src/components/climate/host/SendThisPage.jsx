@@ -16,7 +16,7 @@ const CARD = {
   headline: 'Your five questions, answered in your order',
   marker: 'Nothing rounded up',
   body: 'What is silent, what is ready, what a host must supply, what it costs, and the doors that let anyone check every line.',
-  inside: ['01 · Nothing plays by itself', '02 · Seen now, handed over later', '03 · What your introduction should say', '04 · What the handler needs', '05 · Every door, live'],
+  inside: ['01 · Nothing plays by itself', '02 · Seen now, handed over later', '03 · What your introduction should say', '04 · What the keeper needs', '05 · Every door, live'],
   closing: 'Check any line before you quote it. Every claim has a door beside it.',
   url_path: '/ClimateHost',
 };

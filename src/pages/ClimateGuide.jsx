@@ -13,7 +13,7 @@ const FORK = <COOLASFUCKTuningFork size={15} tone="signal" className="flex-shrin
 
 // ── THE BUTTONS ──────────────────────────────────────────────────────────────────
 // What Janine asked for, kept in the record's own hand: the list of buttons, in the
-// order a host or handler meets them, each one saying what it does in a single line.
+// order a host or keeper meets them, each one saying what it does in a single line.
 // It is a page of the record rather than a document beside it, so it wears the same
 // paper, the same ink and the same lettering — and so the buttons it names can be
 // tapped straight from the list. Nothing is described that is not there, and nothing
@@ -35,7 +35,7 @@ const BUTTONS_CARD = {
     '04 · Every tongue on Earth',
     '05 · The first five minutes',
     '06 · The foot of every page',
-    '07 · When you are the handler',
+    '07 · When you are the keeper',
   ],
   closing: "Nothing on it needs memorising: the record's buttons are words, and each one says what it does.",
   url_path: '/ClimateGuide',
@@ -183,7 +183,7 @@ const FIRST = [
   },
 ];
 
-const HANDLER = [
+const KEEPER_DOORS = [
   {
     label: 'The desk',
     door: true,
@@ -256,7 +256,7 @@ export default function ClimateGuide() {
       statement="Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="Handed to a host or handler, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
+      footer="Handed to a host or keeper, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
     >
       {/* The manual's own door out: one tap draws the whole page as a card, so a host or a
           keeper can take it with them and hand it on the way a track or an entry travels. */}
@@ -312,9 +312,9 @@ export default function ClimateGuide() {
 
       <GuideBand
         number="07"
-        heading="When you are the handler"
+        heading="When you are the keeper"
         note="Seven buttons sit behind the keeper’s door, on the address the record was given for you, in the order you will use them. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
-        items={HANDLER}
+        items={KEEPER_DOORS}
       />
     </ClimateRecordShell>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-// ── WHO THE HANDLER IS, EXACTLY ────────────────────────────────────────────────
+// ── WHO THE KEEPER IS, EXACTLY ─────────────────────────────────────────────────
 // Janine's own wording was "the host should handle all traffic". That is a role
 // nobody can hire against, so it is named here instead: one person, what they do,
 // how long it takes, what they need to know, and what they are not.
@@ -19,7 +19,7 @@ export default function HandlerBrief() {
   return (
     <div className="border-2 border-[#141210] mt-4">
       <div className="bg-[#141210] px-3 py-2">
-        <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#efe7d6]">Who the handler is</p>
+        <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#efe7d6]">Who the keeper is</p>
       </div>
 
       <div className="bg-[#f7f1e5] px-3 py-3">

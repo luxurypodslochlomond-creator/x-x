@@ -22,7 +22,7 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 
 // Terms and Privacy are kept off the reading nav — they are legal ground, not the record.
 // They sit in one quiet place, in the footer of every page of the record. The Buttons —
-// the page that lists every button and what it does — sits here too: a host or handler
+// the page that lists every button and what it does — sits here too: a host or keeper
 // is handed the link, and finds it again at the foot of any page of the record.
 // Terms and Privacy come first because on a phone this rail starts at its left edge:
 // they used to be the last two, which meant a reader on a handset had to swipe to find
