@@ -259,7 +259,7 @@ export default function ClimateGuide() {
       footer="Handed to a host or handler, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
     >
       {/* The manual's own door out: one tap draws the whole page as a card, so a host or a
-          handler can take it with them and hand it on the way a track or an entry travels. */}
+          keeper can take it with them and hand it on the way a track or an entry travels. */}
       <div className="mb-6">
         <ShareCardButton
           entry={BUTTONS_CARD}
