@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { RefreshCw, ArrowRight } from 'lucide-react';
+import DeskOrientation from '@/components/admin/DeskOrientation';
 
 // One page, counted when you open it. The record has enough doors now that a keeper can lose
 // ten minutes finding out whether anything is waiting, and a record nobody can see the state of
@@ -102,6 +103,8 @@ export default function AdminClimateDesk() {
           <Figure value={d.unchecked} label="unopened" tone="#b3261e" note="no one has checked" to="/ClimateChecking" />
           <Figure value={d.recentChecks} label="checks / 7d" tone="#1e3a2b" note="last seven days" to="/AdminClimateCheckers" />
         </div>
+
+        <DeskOrientation />
 
         {d.contested > 0 && (
           <Link to="/AdminClimateReview" className="block border-2 border-record-red bg-record-red/5 p-3 mb-6">
