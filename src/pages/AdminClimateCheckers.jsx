@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
 import { UserPlus, Pause, Play, Trash2, RefreshCw } from 'lucide-react';
+import AddKeeper from '@/components/climate/AddKeeper';
 
 // The guest list for checking. Deliberately not the same as admin: a checker reads what is
 // waiting and says what they find, and that is all. Making somebody an admin to let them do
@@ -109,6 +110,8 @@ export default function AdminClimateCheckers() {
           </button>
           {message && <p className="text-[11px] font-mono text-record-ink/80 mt-3 leading-relaxed">{message}</p>}
         </div>
+
+        <AddKeeper onAdded={load} />
 
         <div className="flex items-center justify-between mb-3">
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink">
