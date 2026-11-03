@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Check, X, HelpCircle, ExternalLink, RefreshCw } from 'lucide-react';
 
@@ -84,6 +86,11 @@ export default function ClimateChecking() {
           <p className="text-sm text-record-ink/80 leading-relaxed">
             This room opens for people a keeper has added by name. Ask for your email address to be put on the list,
             and it will open on your next sign-in.
+          </p>
+          <p className="text-sm text-record-ink/80 leading-relaxed mt-3">
+            <Link to={createPageUrl('ClimateFellows')} className="font-black text-record-red underline">
+              What checking involves, and how to ask
+            </Link>
           </p>
         </div>
       </div>

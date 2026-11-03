@@ -245,6 +245,11 @@ const FOOT = [
     to: createPageUrl('ClimateHandover'),
     what: 'What changes hands, what it costs, who holds it today, and what is still open.',
   },
+  {
+    label: 'Fellows',
+    to: createPageUrl('ClimateFellows'),
+    what: 'How to help carry the record: what a checker does, and how to ask to be one.',
+  },
 ];
 
 export default function ClimateGuide() {
@@ -306,7 +311,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="Four more sit in the foot of every page, beside this one. A reader should not have to hunt for the record's terms, for what it keeps, for what it admits is not built, or for what it costs to carry."
+        note="Five more sit in the foot of every page, beside this one. A reader should not have to hunt for the record's terms, for what it keeps, for what it admits is not built, for what it costs to carry, or for how to help carry it."
         items={FOOT}
       />
 
