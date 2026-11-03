@@ -309,9 +309,13 @@ const AuthenticatedApp = () => {
       <Route path="/AdminUF51Budget" element={<LayoutWrapper currentPageName="AdminUF51Budget"><AdminOnly><AdminUF51BudgetPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminClimateReview" element={<ClimateLayout currentPage="AdminClimateReview"><AdminOnly><AdminClimateReviewPage /></AdminOnly></ClimateLayout>} />
       <Route path="/ClimateMap" element={<ClimateLayout currentPage="ClimateMap"><ClimateMapPage /></ClimateLayout>} />
-      <Route path="/AdminClimateCategories" element={<LayoutWrapper currentPageName="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></LayoutWrapper>} />
-      <Route path="/AdminClimatePhotos" element={<LayoutWrapper currentPageName="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></LayoutWrapper>} />
-      <Route path="/AdminClimateLog" element={<LayoutWrapper currentPageName="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></LayoutWrapper>} />
+      {/* The record's own working pages wear the record's shell. These three were built
+          before the record had a shell and were still mounted inside UF51's, so a keeper
+          walking from the desk into the log, the categories or the crawl left the record
+          and landed in a different product's sidebar. Same gate, same pages, right home. */}
+      <Route path="/AdminClimateCategories" element={<ClimateLayout currentPage="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></ClimateLayout>} />
+      <Route path="/AdminClimatePhotos" element={<ClimateLayout currentPage="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></ClimateLayout>} />
+      <Route path="/AdminClimateLog" element={<ClimateLayout currentPage="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></ClimateLayout>} />
       <Route path="/ClimateChecking" element={<ClimateLayout currentPage="ClimateChecking"><ClimateCheckingPage /></ClimateLayout>} />
       <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><AdminOnly><AdminClimateCheckersPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminClimateDesk" element={<ClimateLayout currentPage="AdminClimateDesk"><AdminOnly><AdminClimateDeskPage /></AdminOnly></ClimateLayout>} />
