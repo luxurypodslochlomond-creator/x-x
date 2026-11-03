@@ -185,9 +185,24 @@ const FIRST = [
 
 const HANDLER = [
   {
+    label: 'The desk',
+    door: true,
+    what: 'Start here. What is waiting for a decision, what nobody has opened yet, and who is checking — every number a way in to the page where it is dealt with.',
+  },
+  {
     label: 'Review queue',
     door: true,
     what: 'Every submission waits for a person. Publish it, hold it, or turn it away — the screener\u2019s note is advice only.',
+  },
+  {
+    label: 'The guest list',
+    door: true,
+    what: 'The people allowed to check an entry and nothing else. Add one and they are invited; take one off and it stops that moment. They never see who sent an entry.',
+  },
+  {
+    label: "Keeper's log",
+    door: true,
+    what: 'The record\u2019s own diary: what a host said, what was decided and why, and what is still owed. A decision that is not written down gets re-made, differently, in six months.',
   },
   {
     label: 'Categories',
@@ -298,7 +313,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="07"
         heading="When you are the handler"
-        note="Four buttons sit behind the keeper’s door, on the address the record was given for you. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
+        note="Seven buttons sit behind the keeper’s door, on the address the record was given for you, in the order you will use them. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
         items={HANDLER}
       />
     </ClimateRecordShell>
