@@ -257,7 +257,6 @@ const NextGenTech = lazy(() => import('./pages/NextGenTech'));
 const NotifyMeCashOut = lazy(() => import('./pages/NotifyMeCashOut'));
 const OfflineLibrary = lazy(() => import('./pages/OfflineLibrary'));
 const OpenSource = lazy(() => import('./pages/OpenSource'));
-const OpenSourceDeclaration = lazy(() => import('./pages/OpenSourceDeclaration'));
 const OpenSourceFundingProof = lazy(() => import('./pages/OpenSourceFundingProof'));
 const OurCommitment = lazy(() => import('./pages/OurCommitment'));
 const P2PFoodRescue = lazy(() => import('./pages/P2PFoodRescue'));
@@ -615,7 +614,6 @@ export const PAGES = {
     "NotifyMeCashOut": NotifyMeCashOut,
     "OfflineLibrary": OfflineLibrary,
     "OpenSource": OpenSource,
-    "OpenSourceDeclaration": OpenSourceDeclaration,
     "OpenSourceFundingProof": OpenSourceFundingProof,
     "OurCommitment": OurCommitment,
     "P2PFoodRescue": P2PFoodRescue,

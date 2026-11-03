@@ -286,6 +286,10 @@ const AuthenticatedApp = () => {
       {/* The covenant is the record's own page — it wears the record's shell and its nav,
           so a reader arriving from the record's governance line stays in the record. */}
       <Route path="/ExtractionProofCovenant" element={<ClimateLayout currentPage="ExtractionProofCovenant"><ExtractionProofCovenantPage /></ClimateLayout>} />
+      {/* One pledge, one address — the old /OpenSourceDeclaration address used to carry a
+          separate declaration that disagreed with this one. It now opens this page, so a
+          reader (or a reviewer) can never find two versions of the same promise. */}
+      <Route path="/OpenSourceDeclaration" element={<ClimateLayout currentPage="ExtractionProofCovenant"><ExtractionProofCovenantPage /></ClimateLayout>} />
       <Route path="/UF51Overview" element={<LayoutWrapper currentPageName="UF51Overview"><UF51OverviewPage /></LayoutWrapper>} />
       <Route path="/TogetherChangeClimate" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
       <Route path="/ClimatePlatform" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
