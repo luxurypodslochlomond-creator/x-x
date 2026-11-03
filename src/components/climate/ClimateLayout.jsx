@@ -15,7 +15,7 @@ import { recordAddress, recordOrigin } from '@/components/climate/recordAddress'
 // x = x.
 
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
-const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally. Every language on Earth.';
+const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — in any tongue a reader names, living or long dead.';
 
 // The way through the record lives in ClimateNav: places to read, and one action —
 // Search — drawn as a control so it can never be lost in a list of words.

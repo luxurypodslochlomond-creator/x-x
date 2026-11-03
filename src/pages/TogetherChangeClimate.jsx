@@ -218,7 +218,7 @@ export default function TogetherChangeClimate() {
     const url = origin + '/api/functions/ogRedirect?page=TogetherChangeClimate';
     const shareData = {
       title: 'Together we can change the course of climate change',
-      text: 'A public record of climate emergencies and the positive actions that work — every language on Earth.',
+      text: 'A public record of climate emergencies and the positive actions that work — in any tongue a reader names, living or long dead.',
       url,
     };
     try {

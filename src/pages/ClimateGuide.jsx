@@ -32,7 +32,7 @@ const BUTTONS_CARD = {
     '01 · The bar at the top of every page',
     '02 · Sending something in',
     '03 · Reading one entry',
-    '04 · Every tongue on Earth',
+    '04 · Every tongue a reader can name',
     '05 · The first five minutes',
     '06 · The foot of every page',
     '07 · When you are the keeper',
@@ -296,8 +296,8 @@ export default function ClimateGuide() {
 
       <GuideBand
         number="04"
-        heading="Every tongue on Earth"
-        note="Nobody is left out of the record for the language they were born into."
+        heading="Every tongue a reader can name"
+        note="Nobody is left out of the record for the language they were born into. Living tongues are carried whole; dead scripts are carried too, marked plainly as a machine's attempt, because nobody alive can check one."
         items={TONGUE}
       />
 
