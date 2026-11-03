@@ -484,8 +484,8 @@ export default function Platform() {
               },
               {
                 layer: "04",
-                title: "Open source — anyone can audit it",
-                body: "Anyone can read the values filter. Any researcher can verify it works. Any developer can fork it and make it stricter. Transparency is the security. Not a dashboard that says 'trust us'.",
+                title: "Open source — being published",
+                body: "The commitment is AGPL-3.0: no patent, no proprietary core, no lock on it. The repository is being opened, and this page links to it the day it lands. Then any researcher can read the values filter and verify it works, and any developer can fork it and make it stricter. Until that day the covenant is a written promise — and we say so, rather than claim a repository you cannot open.",
                 icon: Code,
                 color: "#8b5cf6"
               },
