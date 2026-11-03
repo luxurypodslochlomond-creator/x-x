@@ -79,16 +79,25 @@ export default function XEqualsXResearchPanel() {
                   </p>
                 )}
 
-                {c.origin_url && (
-                  <a
-                    href={c.origin_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-block font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#141210] underline decoration-dotted underline-offset-2 hover:text-[#b3261e]"
-                  >
-                    {c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}
-                  </a>
-                )}
+                {/* Who says so, always. Most of these are the record's own decisions,
+                    and a decision has nothing to click — but a reader is still owed the
+                    line saying whose it is, and whether it is a finding at all. */}
+                <p className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#141210]">
+                  {c.domain === 'decision' ? 'A decision, not a finding' : (c.domain || null)}
+                  {c.domain ? ' · ' : ''}
+                  {c.origin_url ? (
+                    <a
+                      href={c.origin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-dotted underline-offset-2 hover:text-[#b3261e]"
+                    >
+                      {c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}
+                    </a>
+                  ) : (
+                    <span>{c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}</span>
+                  )}
+                </p>
 
                 {c.correction_note && (
                   <p className="mt-1.5 font-mono text-[9.5px] leading-relaxed text-[#b3261e]">
