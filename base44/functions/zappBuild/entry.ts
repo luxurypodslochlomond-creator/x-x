@@ -1,6 +1,8 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.40';
 import {
   COMBINED_BUILD_PROMPT,
+  QUICK_BUILD_PROMPT,
+  UPGRADE_PROMPT,
   REMIX_PROMPT,
   scanHtmlForDanger,
 } from '../../shared/zappSafety.ts';
@@ -30,24 +32,48 @@ Deno.serve(async (req) => {
     // so the model evolves the real app instead of rebuilding from the text idea.
     const existingHtml = String(body?.existingHtml || '').slice(0, 20000);
 
-    const prompt = existingHtml
-      ? `${REMIX_PROMPT} "${idea}"
+    // Two passes on a first build, one on a remix:
+    //  - stage:'quick'  → small and complete, so the kid is playing in seconds
+    //  - upgrade:true   → the same app made fuller, asked for from the app that
+    //                     already plays, so nothing is waiting on it
+    // Both passes go through the identical output scan below: the fast door is
+    // not a looser door.
+    const isUpgrade = body?.upgrade === true;
+    const isQuick = body?.stage === 'quick';
 
-${existingHtml}
-
-CRITICAL: keep all the good parts of the existing app. Make ONLY the requested change. Same safety rules apply. Output ONLY the complete evolved single-file HTML starting with <!DOCTYPE html>. No JSON. No markdown. No explanation.`
-      : `${COMBINED_BUILD_PROMPT} "${idea}"
-
-CRITICAL BEFORE YOU OUTPUT:
+    const CRITICAL_BEFORE_YOU_OUTPUT = `CRITICAL BEFORE YOU OUTPUT:
 - Every button you mention MUST have an onclick handler that works
 - Every state variable MUST be initialised before use
 - Test the full app flow in your head: start → interact → complete → restart
 - The Restart / Reset button MUST fully reset ALL state variables back to defaults
 - NO placeholder text like "// add logic here" — write the complete working code
 - FOR GAMES: use a COMPACT D-pad (small clustered arrows in one corner), NOT big full-width buttons. Movement controls must be tiny. The play area is the star, not the buttons.
-- KEEP CODE TIGHT — under 150 lines of JS. Build only what the kid asked for.
+- KEEP CODE TIGHT — under 150 lines of JS. Build only what the kid asked for.`;
+
+    let prompt;
+    if (isUpgrade && existingHtml) {
+      prompt = `${UPGRADE_PROMPT} "${idea}"
+
+${existingHtml}
+
+${CRITICAL_BEFORE_YOU_OUTPUT}
+
+Output ONLY the complete evolved single-file HTML starting with <!DOCTYPE html>. No JSON. No markdown. No explanation.`;
+    } else if (existingHtml) {
+      prompt = `${REMIX_PROMPT} "${idea}"
+
+${existingHtml}
+
+CRITICAL: keep all the good parts of the existing app. Make ONLY the requested change. Same safety rules apply. Output ONLY the complete evolved single-file HTML starting with <!DOCTYPE html>. No JSON. No markdown. No explanation.`;
+    } else if (isQuick) {
+      prompt = `${QUICK_BUILD_PROMPT} "${idea}"`;
+    } else {
+      prompt = `${COMBINED_BUILD_PROMPT} "${idea}"
+
+${CRITICAL_BEFORE_YOU_OUTPUT}
 
 Output ONLY the raw HTML starting with <!DOCTYPE html>. No JSON. No markdown. No explanation.`;
+    }
 
     const runBuild = async () => {
       // No response_json_schema → InvokeLLM returns a raw string, which is

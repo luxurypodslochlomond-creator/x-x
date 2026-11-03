@@ -14,8 +14,10 @@ const BUILD_STAGES = [
   { shape: 'spectrum', text: 'almost there...' },
 ];
 
-// Target build time for progress bar (seconds). Tighter prompt → faster builds.
-const TARGET_TIME = 24;
+// The first pass now asks for a small, complete app, so the honest target is a
+// few seconds rather than half a minute. The bar caps at 95% and waits instead
+// of lying its way to 100%.
+const TARGET_TIME = 10;
 
 // How long each stage shows before advancing (ms)
 const STAGE_DURATION = 2800;
@@ -33,6 +35,8 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
   const [buildTime, setBuildTime] = useState(0);
   const [sparks, setSparks] = useState([]);
   const [fellBack, setFellBack] = useState(false);
+  const [upgradeHtml, setUpgradeHtml] = useState('');
+  const upgradeRef = useRef({ cancelled: false });
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
   const stageRef = useRef(null);
@@ -104,10 +108,13 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
     // retry once before ever showing the error. A safety BLOCKED is never retried.
     // For remix, existingHtml is passed separately so the server evolves the
     // real app instead of rebuilding from the text idea.
-    const attempt = async () => {
+    const attempt = async (opts = {}) => {
       try {
         const payload = { idea: buildIdea };
         if (existingHtml) payload.existingHtml = existingHtml;
+        if (opts.stage) payload.stage = opts.stage;
+        if (opts.existingHtml) payload.existingHtml = opts.existingHtml;
+        if (opts.upgrade) payload.upgrade = true;
         const res = await base44.functions.invoke('zappBuild', payload);
         // The SDK returns an axios-style object — the JSON is on .data, NOT res.
         // Reading res.html directly silently breaks EVERY build (the bug that
@@ -136,12 +143,34 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
       }
     };
 
+    // The fuller version is asked for AFTER the kid is already playing, and it is
+    // asked for from the app that works. If it never lands, nobody is worse off:
+    // the fast one is real, and it is theirs.
+    const fireUpgrade = async (firstHtml) => {
+      try {
+        const res = await base44.functions.invoke('zappBuild', {
+          idea: buildIdea,
+          existingHtml: firstHtml,
+          upgrade: true,
+        });
+        const result = res?.data ?? res;
+        if (!mountedRef.current || upgradeRef.current.cancelled) return;
+        const html = result?.html || '';
+        if (result?.blocked || !html || html.length < 200) return;
+        setUpgradeHtml(html);
+      } catch {
+        // Nothing to tell a kid about this — their app is already on screen.
+      }
+    };
+
     const succeed = (html) => {
       clearInterval(stageRef.current); clearInterval(timerRef.current);
       const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : idea;
       setBuiltHtml(html); setAppTitle(title); setIsDone(true);
       if (onComplete) onComplete(html, title);
+      // A remix is already the kid's own change — never quietly second-guess it.
+      if (!existingHtml) fireUpgrade(html);
     };
     const giveUp = (msg) => {
       clearInterval(stageRef.current); clearInterval(timerRef.current);
@@ -157,8 +186,11 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
     };
 
     try {
-      let res = await attempt();
-      if (res.fail) res = await attempt(); // one silent retry — flaky model / network
+      // A first build goes small and complete so it lands in seconds. A remix
+      // keeps the full pass: that app is already whole, and must not be shrunk.
+      const firstStage = existingHtml ? {} : { stage: 'quick' };
+      let res = await attempt(firstStage);
+      if (res.fail) res = await attempt(firstStage); // one silent retry — flaky model / network
       if (res.blocked) { giveUp(res.reason || "let's try a different idea!"); return; }
       if (res.html) { succeed(res.html); return; }
       showFallback();
@@ -192,6 +224,19 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
     a.download = `${appTitle || 'my-app'}.html`;
     a.click();
     URL.revokeObjectURL(url);
+  };
+
+  // The kid chooses this. Nothing swaps under their thumb mid-game, and a score
+  // they are proud of is never silently wiped by an upgrade they didn't ask for.
+  const applyUpgrade = () => {
+    if (!upgradeHtml) return;
+    upgradeRef.current.cancelled = true;
+    const titleMatch = upgradeHtml.match(/<title[^>]*>(.*?)<\/title>/i);
+    const title = titleMatch ? titleMatch[1].trim() : (appTitle || idea);
+    setBuiltHtml(upgradeHtml);
+    setAppTitle(title);
+    setUpgradeHtml('');
+    if (onComplete) onComplete(upgradeHtml, title);
   };
 
   // ERROR STATE
@@ -409,9 +454,28 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         </div>
       )}
 
+      {/* The fuller version landed while they were already playing. It waits for
+          a tap, so the app they are holding never changes under them. */}
+      <AnimatePresence>
+        {upgradeHtml && isDone && !fellBack && !savedId && (
+          <motion.button
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            onClick={applyUpgrade}
+            whileTap={{ scale: 0.99 }}
+            className="flex-shrink-0 overflow-hidden w-full flex items-center justify-center gap-2 py-2.5 text-xs font-black"
+            style={{ background: 'rgba(52,211,153,0.12)', borderBottom: '1px solid rgba(52,211,153,0.35)', color: '#6ee7b7' }}
+          >
+            <ZappGeometricIcon shape="star" size={16} color="#6ee7b7" accent="#a7f3d0" />
+            even better version ready — tap to try it
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Celebrate banner — appears briefly after build, nudges to save */}
       <AnimatePresence>
-        {onSave && !fellBack && (
+        {onSave && !fellBack && !upgradeHtml && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}

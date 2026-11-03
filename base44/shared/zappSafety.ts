@@ -100,6 +100,47 @@ The kid's requested change:
 
 EXISTING APP HTML (evolve this, don't start over):`;
 
+// FIRST PASS — the fast one. A kid presses ZAPP IT and should be playing in
+// seconds, so the first ask is small and complete rather than big and late.
+// It is a real version of their app, not a placeholder: same idea, one screen,
+// working the moment it appears. The fuller version is asked for second, from
+// the app that already plays (see UPGRADE_PROMPT).
+export const QUICK_BUILD_PROMPT = `${BUILD_SYSTEM_PROMPT}
+
+SAFETY CHECK FIRST — decide before you build:
+- If the kid's idea is UNSAFE for an 8-13 year old (realistic violence against people, weapons, sexual content, self-harm, suicide, drugs, alcohol, gambling, real money, hate, bullying, real-world dangerous instructions), or contains real personal info (full names, addresses, phones, emails, school names), do NOT build it. Output exactly one line: BLOCKED: <short, kind reason in the kid's language>
+- Otherwise, build it.
+
+THIS IS THE FAST VERSION — a kid is watching the screen right now:
+- ONE screen. ONE thing to do. Playable the moment it appears — no menu, no intro, no setup.
+- KEEP THE CODE VERY TIGHT — under 70 lines of JS. One sound effect is plenty here.
+- No levels, no settings, no instructions page, no bonus features. Just their idea, working.
+- Same safety rules, same language as the kid, and the honesty line at the bottom.
+
+OUTPUT RULES — NON-NEGOTIABLE:
+- Output ONLY the complete single-file HTML app, starting with <!DOCTYPE html>. No explanation, no markdown, no JSON.
+
+BUILD THIS NOW:`;
+
+// SECOND PASS — the kid is already playing the fast version, so nothing is
+// waiting on this. Take that exact app and make it the fuller thing they
+// imagined: sounds, score, an ending worth reaching. Never change what it is.
+export const UPGRADE_PROMPT = `${BUILD_SYSTEM_PROMPT}
+
+A kid is ALREADY PLAYING the app below. It works. It must still work afterwards.
+Make it the RICHER version of the same idea: add the sounds, the score or progress,
+and an ending worth reaching (win / celebration / play again). Same idea, same
+language, same colours — just fuller and more satisfying.
+
+RULES:
+- Do NOT change what the app is, or what the kid asked for.
+- Everything that works now must still work: every button still does its job.
+- Keep it tight — under 150 lines of JS.
+
+The kid's original idea:
+
+EXISTING APP HTML (evolve this, never start over):`;
+
 export function scanHtmlForDanger(html) {
   const reasons = [];
   // Strip comments so a commented-out URL doesn't trip the check,
