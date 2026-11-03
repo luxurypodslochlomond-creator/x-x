@@ -39,7 +39,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              When you read an entry, we record the country you are reading from, so we can see the global reach of the record. We do not store your IP address. We do not know who you are. We only know someone in your country read something.
+              When you open an entry, we record two things: which entry was opened, and the country it was opened from — once per entry per country per half hour. That pairing is what lets the impact page show what is being read and where. We do not store your IP address, and nothing in that record points at a person: we know someone in your country opened that entry, and nothing more.
             </p>
             <p className="mt-2 text-[12px] font-mono leading-relaxed text-[#5a5246]">
               You may also choose to name your own nation or region — Scotland, Catalonia, Kurdistan, anywhere a country code fails you. That choice is kept in your own browser. It is only sent with a view if you pick it, and it is never linked to who you are.
@@ -54,7 +54,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#e2602a] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              An AI reads your submission first and writes an advisory note: spam, harmful content, relevance to climate. It never judges the science, never decides, and never trains on what you send. The note is kept in the audit trail. A person makes every decision.
+              An AI reads your submission first and writes an advisory note: spam, harmful content, relevance to climate. It never judges the science, never decides, and what you send is never used by us to train anything. The note is kept in the audit trail. A person makes every decision.
             </p>
           </div>
         </section>
@@ -130,7 +130,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#e2602a] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              The record runs on cloud infrastructure provided by Base44, which may process data outside the UK and EEA. Where data leaves the UK or EEA, it is protected by Standard Contractual Clauses and the provider's binding corporate rules, as required by UK GDPR. We hold the minimum data needed to run a public record, and we do not give it to advertisers, brokers, or third parties.
+              The record runs on cloud infrastructure provided by Base44, which may process data outside the UK and EEA. Where data leaves the UK or EEA, it is covered by the provider's data processing terms and, where the law requires it, Standard Contractual Clauses. We hold the minimum data needed to run a public record, and we do not give it to advertisers, brokers, or third parties.
             </p>
           </div>
         </section>
