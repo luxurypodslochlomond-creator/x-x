@@ -28,7 +28,7 @@ export default function ClimateMapPage() {
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
         <span className="text-[7px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/25">
-          Laurie Anderson · O Superman, 1981
+          Laurie Anderson · From the Air, Big Science, 1982
         </span>
         <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
           x = x
@@ -50,7 +50,7 @@ export default function ClimateMapPage() {
             style={{ animation: 'twcc-flicker 7s linear 1s infinite' }}
           >
             <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse" />
-            <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">O Superman · O Superman</span>
+            <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">From the Air · Big Science</span>
           </div>
         </div>
         <div className="mx-auto w-full max-w-[520px] text-center">

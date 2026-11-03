@@ -126,7 +126,7 @@ export default function ExtractionProofCovenant() {
           This is the time. And this is the record of the time.
         </p>
         <p className="text-[9px] font-mono text-[#efe7d6]/40 mt-2">
-          Laurie Anderson · O Superman, 1981
+          Laurie Anderson · From the Air, Big Science, 1982
         </p>
       </section>
     </ClimateRecordShell>

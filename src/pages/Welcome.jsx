@@ -126,7 +126,7 @@ export default function WelcomePage() {
               THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.
             </p>
             <p className="font-mono text-[8px] tracking-[0.2em] text-[#efe7d6]/35 mt-1">
-              Laurie Anderson · O Superman, 1981
+              Laurie Anderson · From the Air, Big Science, 1982
             </p>
           </div>
 
