@@ -26,7 +26,9 @@ export default function ZappGallery({ onPlay, onRemix }) {
   const handlePlay = async (item) => {
     // Increment play count
     try {
-      await base44.entities.ZappCreation.update(item.id, { play_count: (item.play_count || 0) + 1 });
+      // The counter is moved on the server, so a visitor never holds a write on a
+      // creation just to press play.
+      await base44.functions.invoke('zappPlay', { id: item.id });
     } catch {}
     setPlaying(item);
   };

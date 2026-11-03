@@ -1,7 +1,7 @@
 {
   "name": "ZappCreation",
   "type": "object",
-  "description": "A kid's saved ZAPP creation \u2014 no accounts needed, just pride",
+  "description": "A kid's saved ZAPP creation \u2014 no accounts needed, just pride. The gallery is the point, so anyone may read one and play it; a creation is never hidden behind a login. What nobody may do from a browser is change one: a creation is written once by the save function (which has already screened the HTML) and from then on only its play count moves, through the zappPlay function. A child's app can therefore never be rewritten or deleted by a stranger through the same door that lets them watch it.",
   "properties": {
     "title": {
       "type": "string",
@@ -34,12 +34,30 @@
     "play_count": {
       "type": "number",
       "default": 0,
-      "description": "How many times kids played this app"
+      "description": "How many times kids played this app \u2014 moved only by the zappPlay function, never set from a browser"
     }
   },
   "required": [
     "title",
     "idea",
     "html"
-  ]
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }
