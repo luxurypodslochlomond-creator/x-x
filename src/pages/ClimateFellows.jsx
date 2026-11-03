@@ -100,6 +100,7 @@ export default function ClimateFellows() {
       <Block n="09" title="How to be let in">
         <p>Ask to be put on the checking list. One line, with your name exactly as you want it signed and the address you will sign in with. That is the whole application.</p>
         <p>Then read the <Go to="ClimateMethod">method</Go> — not to learn a system, but because it is the standard your notes will be held to, and you should see it before you put your name to anything.</p>
+        <p>There are only two words inside this record. A <strong>keeper</strong> decides what goes on it. A <strong>checker</strong> reads a source and signs what they found — and that is what you are. "Fellow" is Trebuchet's word for you, and a good one; on the record it is a note on your line, not a third kind of person with its own keys.</p>
         <Rule>A machine can never sign this record. It has no name to sign with. Everything here rests on that one line.</Rule>
       </Block>
     </ClimateRecordShell>
