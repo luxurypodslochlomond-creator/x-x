@@ -229,6 +229,16 @@ export default function TogetherChangeClimate() {
   useEffect(() => {
     const getCache = () => { try { return JSON.parse(localStorage.getItem('twcc_data_cache')); } catch { return null; } };
     const saveCache = (s, g, a) => { try { localStorage.setItem('twcc_data_cache', JSON.stringify({ solutions: s, groups: g, actions: a, ts: Date.now() })); } catch {} };
+    // The entries kept on the device from the last visit are put on the page at once, so the
+    // record is already standing when the finger lifts. The live read still happens and takes
+    // over the moment it answers — the cache only saves the wait, it never outranks the record.
+    const cached = getCache();
+    if (cached) {
+      setItems(cached.solutions || []);
+      setGroups(cached.groups || []);
+      setActions(cached.actions || []);
+      setLoading(false);
+    }
     Promise.allSettled([
       base44.entities.ClimateSolution.list(),
       base44.entities.ClimateGroup.list(),
