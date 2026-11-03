@@ -27,7 +27,7 @@ const PILLARS = [
     n: '02',
     status: 'LICENCE IN PLACE',
     title: 'AGPL-3.0',
-    body: 'The GNU AGPL-3.0 licence is already written into this project. Fully open source, with one condition: anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible. Making the code itself public is the step that follows.',
+    body: 'The GNU AGPL-3.0 licence is already written into this project. Fully open source, with one condition: anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible. There is no public repository today: the code is held in a private workspace, and what is open is the record itself — every published entry, its source, and its corrections. The day a repository exists, its link goes here and this line changes. Until then the page says so plainly, rather than letting a reader find out the hard way.',
   },
   {
     n: '03',
