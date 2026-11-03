@@ -32,11 +32,11 @@ export default function AdminClimateDesk() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (fresh = false) => {
     setLoading(true);
     setError('');
     try {
-      const res = await base44.functions.invoke('climateDeskStats', {});
+      const res = await base44.functions.invoke('climateDeskStats', fresh ? { fresh: true } : {});
       setD(res.data);
     } catch (e) {
       setError(e?.response?.data?.error || 'That did not load. Try again.');
@@ -47,10 +47,30 @@ export default function AdminClimateDesk() {
 
   useEffect(() => { load(); }, [load]);
 
+  // The desk is a counted page, so it is always a moment behind the finger. It shows itself
+  // straight away and fills in, rather than holding a blank screen until the count is done.
   if (loading && !d) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-record-paper">
-        <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-record-muted">counting</span>
+      <div className="pb-16">
+        <div className="max-w-2xl mx-auto px-4 pt-8">
+          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-1">the desk</p>
+          <h1 className="font-black text-record-ink text-2xl leading-tight mb-1">The record, at a glance.</h1>
+          <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-record-muted mb-6 animate-pulse">counting</p>
+          <div className="grid grid-cols-3 gap-2 mb-6">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="border-2 border-record-ink/10 bg-record-bone p-3 animate-pulse">
+                <div className="h-5 w-8 bg-record-ink/10 mb-2" />
+                <div className="h-2 w-full bg-record-ink/10" />
+              </div>
+            ))}
+          </div>
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="border-2 border-record-ink/10 bg-record-bone p-3 mb-2 animate-pulse">
+              <div className="h-2 w-1/3 bg-record-ink/10 mb-2" />
+              <div className="h-2 w-2/3 bg-record-ink/10" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -68,7 +88,7 @@ export default function AdminClimateDesk() {
       <div className="max-w-2xl mx-auto px-4 pt-8">
         <div className="flex items-start justify-between gap-3 mb-1">
           <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the desk</p>
-          <button onClick={load} className="inline-flex items-center gap-1 text-[9px] font-mono uppercase text-record-muted">
+          <button onClick={() => load(true)} className="inline-flex items-center gap-1 text-[9px] font-mono uppercase text-record-muted">
             <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} /> count again
           </button>
         </div>

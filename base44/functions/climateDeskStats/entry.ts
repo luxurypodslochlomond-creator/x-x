@@ -64,9 +64,7 @@ export default async function (req) {
       ),
       db.ClimateChecker.list({ sort: '-created_date', limit: 200 }),
       db.ClimateCheck.count({ created_date: { $gte: since } }),
-      db.ClimateWorkLog.list({ sort: '-entry_date', limit: 6 }),
-      db.ClimateWorkLog.count({ kind: 'next', done: false }),
-      db.ClimateWorkLog.filter({ kind: 'sweep' }, { sort: '-entry_date', limit: 1 }),
+      db.ClimateWorkLog.list({ sort: '-entry_date', limit: 200 }),
     ]);
 
     const waitingIds = per.flatMap((p) => p.ids);
@@ -93,10 +91,12 @@ export default async function (req) {
       tally[key] = (tally[key] || 0) + 1;
     });
 
-    const log = logPage?.items || logPage || [];
-    const lastSweep = (sweepPage?.items || sweepPage || [])[0] || null;
+    const diary = workLogPage?.items || workLogPage || [];
+    const log = diary.slice(0, 6);
+    const openNext = diary.filter((l) => l.kind === 'next' && !l.done).length;
+    const lastSweep = diary.find((l) => l.kind === 'sweep') || null;
 
-    return Response.json({
+    const answer = {
       waiting: per,
       waitingTotal: waitingIds.length,
       unchecked,
@@ -115,7 +115,10 @@ export default async function (req) {
       openNext,
       lastSweep,
       as_of: new Date().toISOString(),
-    });
+    };
+
+    CACHE = { at: Date.now(), data: answer };
+    return Response.json(answer);
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
