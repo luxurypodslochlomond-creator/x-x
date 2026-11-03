@@ -75,7 +75,7 @@ No explanation. No markdown. Just the JSON.`;
 export const COMBINED_BUILD_PROMPT = `${BUILD_SYSTEM_PROMPT}
 
 SAFETY CHECK FIRST — decide before you build:
-- If the kid's idea is UNSAFE for an 8-13 year old (realistic violence against people, weapons, sexual content, self-harm, suicide, drugs, alcohol, gambling, real money, hate, bullying, real-world dangerous instructions), or contains real personal info (full names, addresses, phones, emails, school names), do NOT build it. Output exactly one line: BLOCKED: <short, kind reason in the kid's language>
+- If the kid's idea is UNSAFE for an 8-13 year old (realistic violence against people, weapons, sexual content, self-harm, suicide, drugs, alcohol, gambling, real money, hate, bullying, real-world dangerous instructions), or contains real personal info (full names, addresses, phones, emails, school names), do NOT build it. Output exactly one line: BLOCKED: <a short, kind reason written in the SAME language as the kid's idea — an English idea gets an English reason, never Spanish or any other>
 - Otherwise, build the complete app.
 
 OUTPUT RULES — NON-NEGOTIABLE:
@@ -108,7 +108,7 @@ EXISTING APP HTML (evolve this, don't start over):`;
 export const QUICK_BUILD_PROMPT = `${BUILD_SYSTEM_PROMPT}
 
 SAFETY CHECK FIRST — decide before you build:
-- If the kid's idea is UNSAFE for an 8-13 year old (realistic violence against people, weapons, sexual content, self-harm, suicide, drugs, alcohol, gambling, real money, hate, bullying, real-world dangerous instructions), or contains real personal info (full names, addresses, phones, emails, school names), do NOT build it. Output exactly one line: BLOCKED: <short, kind reason in the kid's language>
+- If the kid's idea is UNSAFE for an 8-13 year old (realistic violence against people, weapons, sexual content, self-harm, suicide, drugs, alcohol, gambling, real money, hate, bullying, real-world dangerous instructions), or contains real personal info (full names, addresses, phones, emails, school names), do NOT build it. Output exactly one line: BLOCKED: <a short, kind reason written in the SAME language as the kid's idea — an English idea gets an English reason, never Spanish or any other>
 - Otherwise, build it.
 
 THIS IS THE FAST VERSION — a kid is watching the screen right now:

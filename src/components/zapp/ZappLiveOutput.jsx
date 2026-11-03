@@ -35,8 +35,10 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
   const [buildTime, setBuildTime] = useState(0);
   const [sparks, setSparks] = useState([]);
   const [fellBack, setFellBack] = useState(false);
-  const [upgradeHtml, setUpgradeHtml] = useState('');
-  const upgradeRef = useRef({ cancelled: false });
+  // "bigger" is a choice a kid makes, never a strip that pops up begging for a
+  // tap. No reward loop, no nagging: one build gives them something real to play.
+  const [growing, setGrowing] = useState(false);
+  const [grown, setGrown] = useState(false);
   const hasStarted = useRef(false);
   const timerRef = useRef(null);
   const stageRef = useRef(null);
@@ -143,34 +145,12 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
       }
     };
 
-    // The fuller version is asked for AFTER the kid is already playing, and it is
-    // asked for from the app that works. If it never lands, nobody is worse off:
-    // the fast one is real, and it is theirs.
-    const fireUpgrade = async (firstHtml) => {
-      try {
-        const res = await base44.functions.invoke('zappBuild', {
-          idea: buildIdea,
-          existingHtml: firstHtml,
-          upgrade: true,
-        });
-        const result = res?.data ?? res;
-        if (!mountedRef.current || upgradeRef.current.cancelled) return;
-        const html = result?.html || '';
-        if (result?.blocked || !html || html.length < 200) return;
-        setUpgradeHtml(html);
-      } catch {
-        // Nothing to tell a kid about this — their app is already on screen.
-      }
-    };
-
     const succeed = (html) => {
       clearInterval(stageRef.current); clearInterval(timerRef.current);
       const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : idea;
       setBuiltHtml(html); setAppTitle(title); setIsDone(true);
       if (onComplete) onComplete(html, title);
-      // A remix is already the kid's own change — never quietly second-guess it.
-      if (!existingHtml) fireUpgrade(html);
     };
     const giveUp = (msg) => {
       clearInterval(stageRef.current); clearInterval(timerRef.current);
@@ -226,17 +206,32 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
     URL.revokeObjectURL(url);
   };
 
-  // The kid chooses this. Nothing swaps under their thumb mid-game, and a score
-  // they are proud of is never silently wiped by an upgrade they didn't ask for.
-  const applyUpgrade = () => {
-    if (!upgradeHtml) return;
-    upgradeRef.current.cancelled = true;
-    const titleMatch = upgradeHtml.match(/<title[^>]*>(.*?)<\/title>/i);
-    const title = titleMatch ? titleMatch[1].trim() : (appTitle || idea);
-    setBuiltHtml(upgradeHtml);
-    setAppTitle(title);
-    setUpgradeHtml('');
-    if (onComplete) onComplete(upgradeHtml, title);
+  // One deliberate tap, one credit, only when a kid wants more. This is the whole
+  // idea of ZAPP in one button: a thing you can already play is enough, and
+  // knowing that is half of what we are showing them about technology.
+  const handleGrow = async () => {
+    if (growing || grown || !builtHtml) return;
+    setGrowing(true);
+    try {
+      const res = await base44.functions.invoke('zappBuild', {
+        idea,
+        existingHtml: builtHtml,
+        upgrade: true,
+      });
+      const result = res?.data ?? res;
+      const html = result?.html || '';
+      if (result?.blocked || !html || html.length < 200) return;
+      const titleMatch = html.match(/<title[^>]*>(.*?)<\/title>/i);
+      const title = titleMatch ? titleMatch[1].trim() : (appTitle || idea);
+      setBuiltHtml(html);
+      setAppTitle(title);
+      setGrown(true);
+      if (onComplete) onComplete(html, title);
+    } catch {
+      // Leave them with the app that already works — nothing for a kid to carry.
+    } finally {
+      setGrowing(false);
+    }
   };
 
   // ERROR STATE
@@ -454,28 +449,9 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         </div>
       )}
 
-      {/* The fuller version landed while they were already playing. It waits for
-          a tap, so the app they are holding never changes under them. */}
-      <AnimatePresence>
-        {upgradeHtml && isDone && !fellBack && !savedId && (
-          <motion.button
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            onClick={applyUpgrade}
-            whileTap={{ scale: 0.99 }}
-            className="flex-shrink-0 overflow-hidden w-full flex items-center justify-center gap-2 py-2.5 text-xs font-black"
-            style={{ background: 'rgba(52,211,153,0.12)', borderBottom: '1px solid rgba(52,211,153,0.35)', color: '#6ee7b7' }}
-          >
-            <ZappGeometricIcon shape="star" size={16} color="#6ee7b7" accent="#a7f3d0" />
-            even better version ready — tap to try it
-          </motion.button>
-        )}
-      </AnimatePresence>
-
       {/* Celebrate banner — appears briefly after build, nudges to save */}
       <AnimatePresence>
-        {onSave && !fellBack && !upgradeHtml && (
+        {onSave && !fellBack && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -522,6 +498,14 @@ export default function ZappLiveOutput({ idea, blueprint, buildFlavor, builderMo
         </span>
         <div className="flex items-center gap-1.5 flex-shrink-0 ml-auto">
 
+          {!fellBack && !grown && !savedId && (
+            <motion.button onClick={handleGrow} disabled={growing} whileTap={{ scale: 0.95 }}
+              className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
+              style={{ background: 'rgba(52,211,153,0.12)', border: '1px solid rgba(52,211,153,0.3)', color: '#6ee7b7', opacity: growing ? 0.6 : 1 }}>
+              <ZappGeometricIcon shape="star" size={14} color="#6ee7b7" accent="#a7f3d0" />
+              {growing ? 'growing…' : 'bigger'}
+            </motion.button>
+          )}
           {onSave && !fellBack && (
             <motion.button onClick={onSave} whileTap={{ scale: 0.95 }}
               className="px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5"
