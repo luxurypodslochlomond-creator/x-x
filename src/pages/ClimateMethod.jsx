@@ -83,7 +83,7 @@ export default function ClimateMethod() {
       <Block n="05" title="Who decides">
         <p>The screen is a machine, and it is allowed to say only one thing: clean enough to go up, or wait for a person. It never says that a claim is true, it never sets how well a claim is known, and it never signs an entry with anybody's name. Anything it is unsure of waits for a person, and that person's decision is the one that counts.</p>
         <p>One named keeper signs this record, and that name belongs at the top of it rather than in the small print. That name, the contact address and Horizon International's role as custodian are still being settled with the founder — this page says so rather than inventing a masthead, and changes the moment they are.</p>
-        <p>Keeping the record running is a second, separate job, and it is held by a second keeper. It is never the same single person doing both with nobody checking.</p>
+        <p>Keeping the record running is a second, separate job, and the rule is that a second keeper holds it — never the same single person doing both with nobody checking. Until that second name is on the record, this page says so rather than implying it.</p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
 

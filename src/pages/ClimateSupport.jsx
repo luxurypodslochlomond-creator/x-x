@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
-import ClimateLanguagePicker from '@/components/climate/ClimateLanguagePicker';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import { SUPPORT_STRINGS } from '@/components/climate/support/supportStrings';
 import DonationForm from '@/components/climate/support/DonationForm';
@@ -14,13 +13,13 @@ import SupportThanks from '@/components/climate/support/SupportThanks';
 // sale — this is the page that has to keep that true, so a gift buys nothing here:
 // no place, no position, no mention. Names stand in the order they arrived.
 //
-// Every tongue on Earth: the page carries the same language control as the record, reads the
-// same remembered tongue, and is translated by the one engine the whole record uses — the
-// same ask and the same memory as every other page, so nothing is ever translated twice.
+// Every tongue on Earth: the record's own bar in the header carries the language on this page,
+// exactly as it does on every other page — one control, one remembered tongue, one engine, so
+// nothing is ever translated twice. This page adds no second picker of its own.
 // It wears the same cold bands as the Founder page, so the record reads as one place.
 
 export default function ClimateSupport() {
-  const { lang, setLanguage, isRTL, translating } = useSiteLanguage();
+  const { isRTL } = useSiteLanguage();
   const [result, setResult] = useState(null);
   const [wall, setWall] = useState({ names: [], supporters: 0 });
   const [loadingWall, setLoadingWall] = useState(true);
@@ -71,10 +70,6 @@ export default function ClimateSupport() {
       returnLabel={t.back}
       footer={`${t.pledge_2} ${t.pledge_3}`}
     >
-      <div className="border border-[#141210] bg-[#f7f1e5] px-3 py-2.5">
-        <ClimateLanguagePicker lang={lang} onChange={setLanguage} translating={translating} t={t} />
-      </div>
-
       <p className="mt-6 text-[12px] font-mono leading-relaxed text-[#141210]">{t.intro}</p>
 
       <div className="mt-6 space-y-6">

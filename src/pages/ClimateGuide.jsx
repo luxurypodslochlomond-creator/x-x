@@ -246,7 +246,7 @@ const FOOT = [
     what: 'What changes hands, what it costs, who holds it today, and what is still open.',
   },
   {
-    label: 'Fellows',
+    label: 'Checkers',
     to: createPageUrl('ClimateFellows'),
     what: 'How to help carry the record: what a checker does, and how to ask to be one.',
   },

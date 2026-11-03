@@ -46,7 +46,7 @@ const FOOTER_LINKS = [
   // The page that says how to help carry the record — what a checker is, and how to ask to
   // be one. It was written and then left with nothing linking to it, which made it a page
   // only its author could open. Anyone who wants to help should be able to find the way in.
-  { label: 'Fellows', page: 'ClimateFellows' },
+  { label: 'Checkers', page: 'ClimateFellows' },
 ];
 
 // Pages where someone is waiting on an answer, not reading. See the prefetch effect below.
