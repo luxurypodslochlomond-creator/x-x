@@ -195,7 +195,12 @@ export default function TogetherChangeClimate() {
   const { categories } = useClimateCategories();
 
   useEffect(() => {
-    if ('serviceWorker' in navigator && !isPreviewSandbox()) {
+    // One worker per scope, and this app already installs its own across the whole origin.
+    // Registering a second one here silently replaced it: push subscriptions were dropped
+    // and the cache was swapped out from under a page that was still loading its files,
+    // which is what broke a route with "Importing a module script failed". So the record's
+    // worker only fills a scope nothing is holding.
+    if ('serviceWorker' in navigator && !isPreviewSandbox() && !navigator.serviceWorker.controller) {
       navigator.serviceWorker.register('/api/functions/serveClimateServiceWorker', { scope: '/' }).catch(() => {});
     }
     const onOnline = () => setIsOffline(false);
