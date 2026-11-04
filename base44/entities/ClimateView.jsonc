@@ -1,7 +1,7 @@
 {
   "name": "ClimateView",
   "type": "object",
-  "description": "Anonymous view tracking for climate entries \u2014 records only the country (from request geo-headers, no IP stored) and the entry viewed. Readers may optionally self-identify their nation/region (e.g. Scotland, Catalonia, Kurdistan) \u2014 voluntary, stored in their browser, never tracked. Powers the global impact view. Admin-only reads; anyone can create a view record.",
+  "description": "Anonymous view tracking for climate entries \u2014 records only the country (from request geo-headers, no IP stored) and the entry viewed. Readers may optionally self-identify their nation/region (e.g. Scotland, Catalonia, Kurdistan) \u2014 voluntary, stored in their browser, never tracked. Powers the global impact view. Admin-only reads; a view is counted by the record's own server as a reader opens an entry, never written straight from a browser, so the readership figures a funder or a research panel is shown cannot be inflated by anyone who wants them to look bigger.",
   "properties": {
     "entry_id": {
       "type": "string",
@@ -35,7 +35,11 @@
         "role": "admin"
       }
     },
-    "create": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "update": {
       "user_condition": {
         "role": "admin"

@@ -59,13 +59,29 @@ export default function AdminClimateCheckers() {
     }
   };
 
+  // Pausing or ending someone's access used to happen in silence, which is how an honest
+  // record ends up with people wondering whether they did something wrong. The letter goes
+  // after the change has actually landed, and a failed letter never undoes the change.
+  const tell = (row, state) =>
+    base44.functions
+      .invoke('climateCheckerNotice', { email: row.email, name: row.name, state })
+      .catch(() => {});
+
   const toggle = async (row) => {
     await base44.entities.ClimateChecker.update(row.id, { active: !row.active });
+    tell(row, row.active ? 'paused' : 'restored');
+    setMessage(
+      row.active
+        ? `${row.email} is paused and has been told. Notes they already wrote stay in their name.`
+        : `${row.email} can check again and has been told.`
+    );
     load();
   };
 
   const remove = async (row) => {
     await base44.entities.ClimateChecker.delete(row.id);
+    tell(row, 'removed');
+    setMessage(`${row.email} has ended and has been told. What they wrote stays on the record.`);
     load();
   };
 
