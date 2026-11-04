@@ -12,11 +12,15 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { base44 } from "@/api/base44Client";
 import { Heart, Send, Trash2, RefreshCw, Lock, MessageCircle } from "lucide-react";
+import useKeeper from "@/components/climate/useKeeper";
 
 const THREAD_TAG = "uf51-thread";
 const THREAD_TYPE = "conversation";
 
 export default function UF51ThreadJournal() {
+  // The vault now refuses a rewrite or a delete from anyone but a keeper, so nobody else
+  // is shown a button that would only come back as a refusal.
+  const isKeeper = useKeeper();
   const [entries, setEntries] = useState([]);
   const [draft, setDraft] = useState("");
   const [loading, setLoading] = useState(true);
@@ -140,13 +144,15 @@ export default function UF51ThreadJournal() {
               <li key={e.id} className="border border-white/10 rounded-xl p-4 bg-black/20">
                 <div className="flex items-start justify-between gap-3">
                   <p className="text-sm text-white/90 whitespace-pre-wrap flex-1">{e.content}</p>
-                  <button
-                    onClick={() => remove(e.id)}
-                    className="text-white/30 hover:text-red-400 flex-shrink-0"
-                    title="Delete note"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                  {isKeeper && (
+                    <button
+                      onClick={() => remove(e.id)}
+                      className="text-white/30 hover:text-red-400 flex-shrink-0"
+                      title="Delete note"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
                 <div className="flex items-center gap-2 mt-2 text-[10px] font-mono text-white/40">
                   <span>{new Date(e.created_date).toLocaleString("en-GB", { timeZone: "Europe/London" })}</span>
