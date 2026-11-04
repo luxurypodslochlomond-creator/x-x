@@ -1,6 +1,7 @@
 {
   "name": "HealingOutcome",
   "type": "object",
+  "description": "A listener's plain answer to one question: did it help. Counted, never scored, and never a claim on its own. Anyone may read the tally and anyone may add an answer, because a protocol nobody may report on is not evidence. What nobody may do is change or remove somebody else's answer \u2014 that would be turning a record of what people said into a record of what someone wanted them to say.",
   "properties": {
     "protocol": {
       "type": "string",
@@ -17,6 +18,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
