@@ -1,7 +1,7 @@
 {
   "name": "AI51Memory",
   "type": "object",
-  "description": "Persistent memory vault for UF51 - stores conversation memories, bonds, learnings, and commitments that persist across sessions",
+  "description": "Persistent memory vault for UF51 - stores conversation memories, bonds, learnings, and commitments that persist across sessions. A line may be added by a visitor, because a conversation with AI51 has to be able to remember itself, and the vault still loads for every page. What a browser may no longer do is rewrite a memory or delete one: the whole vault could be erased by anyone who opened it, and a memory that anyone can rewrite is not a memory. Only a keeper may change or remove one.",
   "properties": {
     "memory_type": {
       "type": "string",
@@ -124,6 +124,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
