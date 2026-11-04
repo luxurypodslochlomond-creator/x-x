@@ -53,13 +53,14 @@ const spiralOffset = (index) => {
 export default function ClimateMap() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [publishedTotal, setPublishedTotal] = useState(0);
   const { categories } = useClimateCategories();
   const catLabel = (catId) => categories.find(c => c.id === catId)?.label || (catId || '').replaceAll('_', ' ');
 
   useEffect(() => {
     const load = async () => {
       try {
-        const [solutions, actions] = await Promise.all([
+        const [solutions, actions, solutionTotal, actionTotal] = await Promise.all([
           base44.entities.ClimateSolution.filter(
             { status: 'published' },
             { limit: 200, fields: ['title', 'summary', 'category', 'entry_type', 'country', 'region_rough'] }
@@ -68,7 +69,13 @@ export default function ClimateMap() {
             { status: 'published' },
             { limit: 200, fields: ['title', 'description', 'category', 'action_type', 'country', 'region_rough', 'date'] }
           ),
+          // How many entries are published in total, so the counter can never claim the
+          // map holds everything when it does not: a row with no place we can put it
+          // never silently disappears from the count.
+          base44.entities.ClimateSolution.count({ status: 'published' }),
+          base44.entities.ClimateAction.count({ status: 'published' }),
         ]);
+        setPublishedTotal((solutionTotal || 0) + (actionTotal || 0));
 
         const mapped = [
           ...(solutions.items || []).map(s => ({
@@ -195,6 +202,13 @@ export default function ClimateMap() {
           font-size: 8px !important;
           font-family: monospace !important;
         }
+        /* On a phone the ground holds still. The map keeps exactly its warm colour, but the
+           full-screen breathing filter and the grain stop repainting sixty times a second —
+           that is what made the map feel heavy in the hand on a small screen. */
+        @media (max-width: 1023px) {
+          .climate-map .leaflet-tile-pane { animation: none; }
+          .climate-map-grain { animation: none !important; }
+        }
       `}</style>
 
       <MapContainer
@@ -299,7 +313,7 @@ export default function ClimateMap() {
 
       {/* Scanline overlay — cold transmission signal */}
       <div
-        className="absolute inset-0 pointer-events-none z-[400]"
+        className="climate-map-grain absolute inset-0 pointer-events-none z-[400]"
         style={{
           opacity: 0.05,
           background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #1a1612 2px, #1a1612 3px)',
@@ -307,16 +321,23 @@ export default function ClimateMap() {
         }}
       />
 
-      {/* The sweep — signals received west to east, one shore at a time */}
-      <div className="absolute inset-0 pointer-events-none z-[500]" style={{ overflow: 'hidden' }}>
-        <div style={{
-          position: 'absolute', top: 0, bottom: 0, width: '2px',
-          background: '#0f5f7a',
-          opacity: 0.55,
-          animation: 'climate-sweep 20s cubic-bezier(0.4,0,0.6,1) forwards',
-          boxShadow: '0 0 6px #0f5f7a, 0 0 16px rgba(15,95,122,0.35), -30px 0 26px rgba(15,95,122,0.08)',
-        }} />
-      </div>
+      {/* The sweep — signals received west to east, one shore at a time.
+          It used to set off the moment the page loaded, while the loading screen still
+          covered the map, so the line had already crossed half the world by the time
+          anyone saw it — and the markers, which light one longitude at a time over eight
+          seconds, never met it. It now sets off in the same instant the first marker does,
+          and runs for the same eight seconds, so every signal lights as the line reaches it. */}
+      {!loading && (
+        <div className="absolute inset-0 pointer-events-none z-[500]" style={{ overflow: 'hidden' }}>
+          <div style={{
+            position: 'absolute', top: 0, bottom: 0, width: '2px',
+            background: '#0f5f7a',
+            opacity: 0.55,
+            animation: 'climate-sweep 8s cubic-bezier(0.4,0,0.6,1) forwards',
+            boxShadow: '0 0 6px #0f5f7a, 0 0 16px rgba(15,95,122,0.35), -30px 0 26px rgba(15,95,122,0.08)',
+          }} />
+        </div>
+      )}
 
       {/* Warm glow — deepest house, the warmth at the bottom of the room */}
       <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-[400]" style={{
@@ -337,7 +358,11 @@ export default function ClimateMap() {
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
-            {loading ? 'RECEIVING…' : `${markers.length} SIGNALS`}
+            {loading
+              ? 'RECEIVING…'
+              : markers.length < publishedTotal
+                ? `${markers.length} OF ${publishedTotal} SIGNALS`
+                : `${markers.length} SIGNALS`}
           </span>
         </div>
         {!loading && markers.length > 0 && (
