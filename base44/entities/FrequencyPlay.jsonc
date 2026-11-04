@@ -1,7 +1,7 @@
 {
   "name": "FrequencyPlay",
   "type": "object",
-  "description": "Tracks when and where healing frequencies are transmitted (played). Auto-expires after 24 hours.",
+  "description": "Tracks when and where healing frequencies are transmitted (played). Auto-expires after 24 hours. Anyone may add a play and anyone may read the map, because a play nobody may see is not a play \u2014 but only a keeper may change or remove one. Without that, a browser could wipe the map or rewrite where a healing was played.",
   "properties": {
     "track_id": {
       "type": "string",
@@ -48,6 +48,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }

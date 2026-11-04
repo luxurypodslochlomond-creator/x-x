@@ -1,6 +1,6 @@
 {
   "name": "BluetoothTransmission",
-  "description": "Logs Bluetooth device-to-device music sharing. Offline mesh network. Artist still gets paid when recipient connects.",
+  "description": "Logs Bluetooth device-to-device music sharing. Offline mesh network. Artist still gets paid when recipient connects. Anyone may add a line and anyone may read one, because the sharing log is the point of it \u2014 but a line is written once and never rewritten or removed from a browser: only a keeper may change or take one down, and the artist's credit is set by the app's own server.",
   "type": "object",
   "properties": {
     "track_id": {
@@ -59,6 +59,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
