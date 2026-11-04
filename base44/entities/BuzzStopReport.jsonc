@@ -1,7 +1,7 @@
 {
   "name": "BuzzStopReport",
   "type": "object",
-  "description": "User-submitted problem reports for BuzzStop tinnitus relief tool",
+  "description": "User-submitted problem reports for the BuzzStop tinnitus tool. A report is somebody describing a symptom in their own words, so it is admin-only in every direction: read, add, change and remove. Nothing writes to this table today.",
   "properties": {
     "user_issue": {
       "type": "string",
@@ -36,6 +36,20 @@
         "role": "admin"
       }
     },
-    "write": {}
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }

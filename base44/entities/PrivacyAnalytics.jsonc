@@ -1,6 +1,7 @@
 {
   "name": "PrivacyAnalytics",
   "type": "object",
+  "description": "Aggregate counts of what happened on the platform \u2014 no names, no addresses. Written by the app's own server code, never by a browser, so it is admin-only in every direction: read, add, change and remove. A visitor's page view still gets counted; what changes is that nobody can read the counts back or invent them.",
   "properties": {
     "event_type": {
       "type": "string",
@@ -55,5 +56,27 @@
   },
   "required": [
     "event_type"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

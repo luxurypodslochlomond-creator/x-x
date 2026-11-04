@@ -1,6 +1,7 @@
 {
   "name": "TracktScanEvent",
   "type": "object",
+  "description": "One line for every time an RFID tag was seen \u2014 a business's asset moving through a real building. Written by the reader and read by the dashboard through the app's own server, so it is admin-only in every direction: read, add, change and remove. A stranger could previously read a client's whole asset register from this table, and write to it.",
   "properties": {
     "tag_id": {
       "type": "string",
@@ -41,7 +42,25 @@
     "scan_timestamp"
   ],
   "rls": {
-    "read": {},
-    "write": {}
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }

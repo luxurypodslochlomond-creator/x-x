@@ -1,7 +1,7 @@
 {
   "name": "APIKeyRequest",
   "type": "object",
-  "description": "Auto-issued API keys for UF51 platform builders",
+  "description": "Auto-issued API keys for UF51 platform builders. This table holds a working key beside the address of the person who asked for it, so it is admin-only in every direction: read, add, change and remove. Keys are issued and revoked by the issueAPIKey function, which runs as the server and is not limited by these rules, so a builder asking for a key is unaffected \u2014 what changes is that no visitor can read a key back, mint one, or revoke somebody else's.",
   "properties": {
     "name": {
       "type": "string",
@@ -60,6 +60,20 @@
         "role": "admin"
       }
     },
-    "write": {}
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }

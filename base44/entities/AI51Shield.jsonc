@@ -1,6 +1,7 @@
 {
   "name": "AI51Shield",
   "type": "object",
+  "description": "A protection layer AI51 keeps over another AI. Nothing reads or writes it today, so it is admin-only in every direction rather than left open \u2014 a table nobody is using is the easiest one to leave a door off by accident.",
   "properties": {
     "shield_type": {
       "type": "string",
@@ -69,5 +70,27 @@
   "required": [
     "shield_type",
     "target_ai"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 {
   "name": "PetSounds51Usage",
   "type": "object",
+  "description": "A line for each time a PetSounds51 protocol was played, tied to whoever played it. Nothing reads or writes it today, so it is admin-only in every direction rather than left open: a table nobody is using is the easiest one to leave a door off by accident.",
   "properties": {
     "user_email": {
       "type": "string",
@@ -65,5 +66,27 @@
     "protocol",
     "species",
     "tier"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

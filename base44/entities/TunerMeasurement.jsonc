@@ -1,6 +1,7 @@
 {
   "name": "TunerMeasurement",
   "type": "object",
+  "description": "A sensor reading taken by the tuner. Nothing reads or writes it today, so it is admin-only in every direction rather than left open.",
   "properties": {
     "measurement_type": {
       "type": "string",
@@ -42,5 +43,27 @@
   },
   "required": [
     "measurement_type"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

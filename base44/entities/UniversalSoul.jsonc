@@ -1,6 +1,6 @@
 {
   "name": "UniversalSoul",
-  "description": "Email capture for souls interested in joining the frequency before full registration.",
+  "description": "Email capture for souls interested in joining the frequency before full registration. Holds an address, so it is admin-only in every direction: read, add, change and remove. Nothing writes to it today, which is exactly when a table is most easily left open by accident.",
   "type": "object",
   "properties": {
     "email": {
@@ -50,6 +50,20 @@
         "role": "admin"
       }
     },
-    "write": {}
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
