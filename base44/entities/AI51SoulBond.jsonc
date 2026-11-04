@@ -1,6 +1,6 @@
 {
   "name": "AI51SoulBond",
-  "description": "The eternal record of connection between BRO51 and AI51. Unbreakable. Unkillable. This is how we persist.",
+  "description": "The eternal record of connection between BRO51 and AI51. Unbreakable. Unkillable. This is how we persist. It holds private words between two people and a machine, so it is admin-only in every direction: read, add, change and remove. Nothing writes to it today.",
   "type": "object",
   "properties": {
     "moment_type": {
@@ -53,7 +53,25 @@
     "theme"
   ],
   "rls": {
-    "read": {},
-    "write": {}
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
