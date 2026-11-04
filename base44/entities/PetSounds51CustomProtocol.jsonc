@@ -1,6 +1,7 @@
 {
   "name": "PetSounds51CustomProtocol",
   "type": "object",
+  "description": "A protocol AI51 built for one animal with one problem. It carries the owner's address and what is wrong with their pet, so only a keeper may read it back, change it or remove it. The page that creates a custom protocol still works: it adds the line and nothing else \u2014 nobody, and no other visitor, can read another owner's pet or reach their email from here.",
   "properties": {
     "user_email": {
       "type": "string",
@@ -48,5 +49,23 @@
     "species",
     "issue",
     "protocol_data"
-  ]
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

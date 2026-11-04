@@ -1,6 +1,7 @@
 {
   "name": "LoveNote",
   "type": "object",
+  "description": "A note of love and hope left on the Wall or in the Garden. Anyone may read one \u2014 a wall nobody can see is not a wall \u2014 and anyone may add one, because leaving a note needs no account. What nobody may do from a browser is rewrite or remove somebody else's: a note is written once and stays as it was written. Only a keeper may change or take one down.",
   "properties": {
     "text": {
       "type": "string",
@@ -40,6 +41,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
