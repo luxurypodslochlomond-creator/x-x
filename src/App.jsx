@@ -207,13 +207,26 @@ const AuthenticatedApp = () => {
         </LayoutWrapper>
       } />
       <Route path="/PetSounds51" element={<PetSounds51 />} />
+      {/* ── ONE DOOR ON EVERY WORKING SCREEN ──
+          The tables behind these screens were already locked by their own rules, so a stranger
+          arriving at one of them got an empty, broken-looking page rather than an answer. Now
+          every screen whose name begins with Admin is behind the same door the desk already
+          uses: a visitor sees "Admins only", a keeper sees the screen. The door decides nothing
+          about the data — the permission rules still do — it only stops a working screen from
+          ever being someone else's blank page. */}
       {Object.entries(Pages).map(([path, Page]) => (
         <Route
           key={path}
           path={`/${path}`}
           element={
             <LayoutWrapper currentPageName={path}>
-              <Page />
+              {path.startsWith('Admin') ? (
+                <AdminOnly>
+                  <Page />
+                </AdminOnly>
+              ) : (
+                <Page />
+              )}
             </LayoutWrapper>
           }
         />
