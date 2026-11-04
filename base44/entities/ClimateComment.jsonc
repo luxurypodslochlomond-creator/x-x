@@ -1,7 +1,7 @@
 {
   "name": "ClimateComment",
   "type": "object",
-  "description": "Public comments on climate entries \u2014 solutions, crises, and actions. Email required per Janine's spec. Reviewed before publication (spam filter oversight). A commenter's email is kept so the record can reach them about their own comment, and is never handed to a reader: the words stand, the address stays theirs.",
+  "description": "Public comments on climate entries \u2014 solutions, crises, and actions. Email required per Janine's spec. Reviewed before publication (spam filter oversight). A commenter's email is kept so the record can reach them about their own comment, and is never handed to a reader: the words stand, the address stays theirs. A comment is written through the record's own review door, which decides draft or live; nobody writes one straight at the table, so no comment can put itself up under someone else's entry with the word 'published' in its hand.",
   "properties": {
     "entry_id": {
       "type": "string",
@@ -74,7 +74,11 @@
         }
       ]
     },
-    "create": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "update": {
       "user_condition": {
         "role": "admin"
