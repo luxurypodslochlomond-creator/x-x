@@ -1,7 +1,7 @@
 {
   "name": "ClimateGroup",
   "type": "object",
-  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. An organiser starts their own gathering; the record carries the introduction, never the conversation. The record shows only the address an organiser deliberately chooses to publish here; it never publishes the address of whoever happened to add the entry.",
+  "description": "Region/topic gatherings on the 'Together We Change Climate' platform \u2014 people working on the same thing in an area can share ideas directly. An organiser starts their own gathering; the record carries the introduction, never the conversation. The record shows only the address an organiser deliberately chooses to publish here; it never publishes the address of whoever happened to add the entry. A gathering is started through the record's own review door, which decides draft or live; the table itself will not take one written straight into it.",
   "properties": {
     "name": {
       "type": "string",
@@ -78,7 +78,11 @@
         }
       ]
     },
-    "create": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "update": {
       "user_condition": {
         "role": "admin"
