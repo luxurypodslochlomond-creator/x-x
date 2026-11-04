@@ -1,6 +1,7 @@
 {
   "name": "VisitorsPledge",
   "type": "object",
+  "description": "A promise a visitor made to the Earth, written in their own words and signed with their name. Anyone may read the book and anyone may add a page \u2014 that is what a book of pledges is for \u2014 but nobody may rewrite or tear out another person's page: only a keeper may change or remove one.",
   "properties": {
     "name": {
       "type": "string",
@@ -40,6 +41,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
