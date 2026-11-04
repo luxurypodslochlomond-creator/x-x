@@ -1,6 +1,7 @@
 {
   "name": "FraudFlag",
   "type": "object",
+  "description": "A flag raised against a submission somebody thinks is dishonest. Anyone may raise one, because a person who spots a fake should not need an account to say so, and nobody may read the flags back: a public list of who accused whom is a worse thing than the fraud. Only a keeper may read a flag, close it, or remove one.",
   "properties": {
     "submission_id": {
       "type": "string",
@@ -54,6 +55,16 @@
         "role": "admin"
       }
     },
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
