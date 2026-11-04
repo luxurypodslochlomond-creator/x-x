@@ -1,6 +1,7 @@
 {
   "name": "FrequencyAnalytics",
   "type": "object",
+  "description": "A line for each listening session \u2014 how long, where, on what. It is the evidence behind the healing claims, so it cannot be written or changed by a browser: only a keeper may add, change or remove a line, and only a keeper may read one back. The sessions themselves are recorded by the app's own server code, which is not limited by these rules, so nothing a listener does stops working.",
   "properties": {
     "protocol_id": {
       "type": "string",
@@ -85,6 +86,20 @@
         "role": "admin"
       }
     },
-    "write": {}
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
