@@ -1,6 +1,7 @@
 {
   "name": "PS51SessionLog",
   "type": "object",
+  "description": "One line for each PetSounds51 session: which protocol, which animal, how long. It is evidence, so a browser may add a line and nothing more \u2014 only a keeper may read the table back, change a line or remove one. The page that logs a session still works exactly as before.",
   "properties": {
     "protocol": {
       "type": "string",
@@ -60,6 +61,16 @@
         "role": "admin"
       }
     },
-    "write": {}
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
