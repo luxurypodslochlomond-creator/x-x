@@ -207,6 +207,18 @@ const AuthenticatedApp = () => {
         </LayoutWrapper>
       } />
       <Route path="/PetSounds51" element={<PetSounds51 />} />
+      {/* TRACKT — nine pages were imported here and not one of them had a route, so the
+          TRACKT product sitting in the main nav opened the not-found page. Each page
+          already wears its own TracktLayout, so nothing is wrapped around them. */}
+      <Route path="/Trackt" element={<TracktPage />} />
+      <Route path="/TracktAbout" element={<TracktAboutPage />} />
+      <Route path="/TracktRoadmap" element={<TracktRoadmapPage />} />
+      <Route path="/TracktHowItWorks" element={<TracktHowItWorksPage />} />
+      <Route path="/TracktWhyBuy" element={<TracktWhyBuyPage />} />
+      <Route path="/TracktPricing" element={<TracktPricingPage />} />
+      <Route path="/TracktTerms" element={<TracktTermsPage />} />
+      <Route path="/TracktPrivacy" element={<TracktPrivacyPage />} />
+      <Route path="/TracktDashboard" element={<TracktDashboardPage />} />
       {/* ── ONE DOOR ON EVERY WORKING SCREEN ──
           The tables behind these screens were already locked by their own rules, so a stranger
           arriving at one of them got an empty, broken-looking page rather than an answer. Now
