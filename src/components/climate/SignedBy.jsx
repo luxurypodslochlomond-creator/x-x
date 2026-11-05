@@ -23,9 +23,14 @@ export default function SignedBy({ name, date, compact = false, className = '' }
     );
   }
 
+  // "Signed" alone read as authorship, and that was the wrong thing to say. Most of these
+  // entries were written by a body — the WMO, a journal, a coastal programme — and carried
+  // onto the record by a person. So the line says what actually happened: who put it here.
+  // The origin's own author sits on the source line, where it belongs, and the two can no
+  // longer be mistaken for each other.
   return (
     <span className={`text-[9px] font-black font-mono uppercase tracking-widest text-[#5a5246] ${className}`}>
-      Signed{' '}
+      Put on the record by{' '}
       <span className="text-[11px] font-black normal-case tracking-normal text-[#141210]">{signer}</span>
       {date && <span className="font-normal normal-case tracking-normal text-[#5a5246]"> · checked {date}</span>}
     </span>

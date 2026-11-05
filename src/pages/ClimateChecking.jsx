@@ -34,7 +34,14 @@ export default function ClimateChecking() {
       setEntries(res.data.entries || []);
       setChecks(res.data.checks || []);
     } catch (e) {
-      setError(e?.response?.status === 403 ? 'not_a_checker' : e?.response?.status === 401 ? 'signed_out' : 'That did not load. Try again in a moment.');
+      // A paused place and a stranger's place are not the same answer. The record says which.
+      setError(
+        e?.response?.status === 403
+          ? e?.response?.data?.paused ? 'paused' : 'not_a_checker'
+          : e?.response?.status === 401
+            ? 'signed_out'
+            : 'That did not load. Try again in a moment.'
+      );
     } finally {
       setLoading(false);
     }
@@ -97,6 +104,27 @@ export default function ClimateChecking() {
           >
             Sign in to check
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Paused is not the same as never invited. Their notes are still on the record, signed with
+  // their name, and the door in front of them should say so rather than pretending they were
+  // never here.
+  if (error === 'paused') {
+    return (
+      <div className="min-h-[60vh] bg-record-paper px-5 py-16">
+        <div className="max-w-xl mx-auto border-2 border-record-ink/20 bg-record-bone p-6">
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-record-red mb-3">your place is paused</p>
+          <h1 className="font-black text-record-ink text-xl mb-3">You are on the record. Your key is closed for now.</h1>
+          <p className="text-sm text-record-ink/80 leading-relaxed">
+            Checking has been paused on this address. It is not a judgement on the work you did: the notes you wrote
+            are still on the record, still in your name, and nothing has been taken off.
+          </p>
+          <p className="text-sm text-record-ink/80 leading-relaxed mt-3">
+            If this is a surprise, ask a keeper to open it again — it is one line, and it reopens at your next sign-in.
+          </p>
         </div>
       </div>
     );

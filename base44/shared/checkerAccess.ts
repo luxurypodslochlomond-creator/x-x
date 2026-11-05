@@ -22,13 +22,19 @@ export async function resolveChecker(base44) {
 
   const isAdmin = user.role === 'admin';
 
+  // Read the line whether or not it is open today. A paused checker is not a stranger, and
+  // telling them the same "not on the list" as someone who never asked is the record being
+  // polite about a decision it made — which reads, to the person, as if their work was
+  // nothing. So the two answers are different, and the paused one says so.
   const rows = await base44.asServiceRole.entities.ClimateChecker.filter({
     email: user.email,
-    active: true,
   });
   const list = rows?.items || rows || [];
   const line = list[0] || null;
 
+  if (line && !line.active && !isAdmin) {
+    return { error: 'Your place on this record is paused', status: 403, paused: true };
+  }
   if (!line && !isAdmin) return { error: 'Not a checker on this record', status: 403 };
 
   return {

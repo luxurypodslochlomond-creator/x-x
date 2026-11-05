@@ -41,7 +41,7 @@ export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
     const who = await resolveChecker(base44);
-    if (who.error) return Response.json({ error: who.error }, { status: who.status });
+    if (who.error) return Response.json({ error: who.error, paused: Boolean(who.paused) }, { status: who.status });
 
     const results = await Promise.allSettled(
       KINDS.map((k) =>
