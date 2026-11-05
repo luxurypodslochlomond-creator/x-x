@@ -3,91 +3,94 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import CopyLine from '@/components/climate/CopyLine';
-import YaleLetter from '@/components/climate/host/YaleLetter';
 
-// ── WHAT GOES TO YALE ─────────────────────────────────────────────────────────
-// Two documents in one page, because a letter to a place like Yale is never just a
-// letter: it is a short covering letter and an enclosure that answers everything the
-// letter is too polite to spell out.
+// ── THE SUMMARY ──────────────────────────────────────────────────────────────
+// Not a pitch, and not a letter. Janine asked for the one thing that would help
+// her write to Yale in her own words: where this actually is, and what it needs.
+// So the page leads with what does not exist. A record that hides its gaps is a
+// brochure, and the first thing a reader like Yale checks is whether the gaps
+// have been declared before they were found.
 //
-//   The letter    — hers, in her voice, signed by her.
-//   The enclosure — the record's own account of itself: what it is, what is unusual,
-//                   where it honestly stands, what is left before launch, what is asked.
-//
-// Every figure below was counted from the record. The launch list is finite and small
-// on purpose: a reader should finish it knowing exactly what is stopping this, and how
-// little of it is.
+// Nothing on this page asks her for money, because she has said she has none for
+// it and neither do we. The ask is people and carrying. That is the whole summary.
 
-const FIGURES = [
-  { n: '19', label: 'entries published', sub: '10 solutions · 9 crises' },
-  { n: '3', label: 'actions on the record', sub: 'each with an organiser’s own contact line' },
-  { n: '18', label: 'wire entries', sub: 'dated and sourced, none unsigned' },
-  { n: '13', label: 'countries', sub: 'rough regions only, never a precise location' },
-  { n: '16', label: 'independent origins', sub: 'named on the entry, every time' },
-  { n: '44', label: 'sealed entries', sub: 'fingerprinted and checkable by anyone' },
-  { n: '29', label: 'citations frozen', sub: 'copied as they stood, with a fingerprint' },
-  { n: '65', label: 'tongues', sub: '8 written by hand, 57 machine-made, said so' },
+const EXISTS = [
+  '19 published entries — 10 solutions, 9 crises',
+  'Every one of them carries a working link to its origin. No entry survives without one.',
+  '44 cryptographic seals — each entry fingerprinted, checkable in a reader’s own browser',
+  '18 wire entries, dated and sourced',
+  '3 actions, each with an organiser’s own contact line',
+  '65 tongues, every one labelled by how it was made',
+  'No account needed to read any of it. No tracking, no advertising, no paid placement.',
 ];
 
-const LAUNCH = [
+const NOT_YET = [
+  '0 independent verdicts. The checking office is built and nobody has signed into it.',
+  '14 of 19 entries carry no statement of how well they are known.',
+  '4 of 4 gatherings have no contact line, so nobody can actually join one yet.',
+  'No named keeper. The record says so rather than inventing a masthead.',
+  'The code is not public, so it cannot yet be audited or carried away.',
+  '19 entries are signed with a name that did not write them.',
+];
+
+const NEEDS = [
   {
-    n: '1',
-    what: 'Sign every entry with the name of the person who actually published it',
-    why: 'All nineteen currently carry the founder’s name, and she did not write them. It is the first thing a panel checks, and the last thing a record can be careless about.',
-    how: 'One evening. A keeper, one entry at a time.',
+    n: '01',
+    title: 'One reader with standing',
+    body: 'A person, ideally inside an institution that teaches this, who reads the method and says in public whether it holds. Not an endorsement of the contents — a verdict on the method. If it fails, that gets published too.',
   },
   {
-    n: '2',
-    what: 'Name the keeper',
-    why: 'A record meant to carry one accountable name and one contact line. Right now it carries neither, and a masthead will not be invented in the meantime.',
-    how: 'A decision, not work. One name and one address.',
+    n: '02',
+    title: 'People who check',
+    body: 'A checker reads an entry, follows its source, and signs their name to what they found. There are none. This is the only item on this page that cannot be built, bought, or automated — it is the reason for writing to anyone at all.',
   },
   {
-    n: '3',
-    what: 'Set the standing on every entry',
-    why: 'Six entries say how well they are known. Fourteen say nothing, which is honest but thin: a reader should never have to guess.',
-    how: 'An afternoon. A keeper, reading each source once.',
-  },
-  {
-    n: '4',
-    what: 'Publish the source',
-    why: 'Until the code is public a host cannot audit it, build it, or leave with it. This is the largest single gap on the record.',
-    how: 'Days, not weeks. It is written and it exports.',
-  },
-  {
-    n: '5',
-    what: 'One launch address of its own',
-    why: 'A record whose address belongs to somebody else is lent, not handed over. Every citation printed today points at a domain that can change hands.',
-    how: 'An afternoon and a small yearly cost.',
-  },
-  {
-    n: '6',
-    what: 'The first independent verdicts',
-    why: 'Not needed to show the record. Needed before anyone may call it checked. This is the one item on the list that money does not close.',
-    how: 'People. The reason for the letter.',
+    n: '03',
+    title: 'Somebody to carry it',
+    body: 'The technology, its building and its upkeep — and a fair living for the two people in Scotland who build it, so that tending this is the work rather than something done after it. Hosting itself is £1,000 a year at this size, £10,000 for ten years.',
   },
 ];
 
-const ASKS = [
-  { n: '01', title: 'A named academic sponsor', body: 'One person who reads the method and says in public whether it holds. Not an endorsement of the contents: a verdict on the method. If it fails, that is published too.' },
-  { n: '02', title: 'A checker corps, with one named lead', body: 'People who read an entry, follow its source, and sign their name to what they found. The only item on any list here that cannot be bought.' },
-  { n: '03', title: 'Consideration of carrying it', body: 'The technology, its building, and its maintenance for as long as it is carried. Hosting itself is £1,000 a year at present size, and £10,000 for ten years. Said plainly so nobody has to ask twice.' },
-  { n: '04', title: 'A fair living for the two who build it', body: 'Not a contract and not a salary negotiation: two people in Scotland who would go on building it, able to look after their family while they do. Every figure is published on the record, and neither founder takes a penny from it.' },
-  { n: '05', title: 'An honest verdict, in the open', body: 'If the answer is no, the record carries on and says so. If it is yes, the terms are published on the record where anyone can read them.' },
+const MISSING = [
+  ['Sign every entry honestly', 'All nineteen carry the founder’s name and she did not write them. One evening’s work, and the first thing a panel checks.'],
+  ['Name the keeper', 'A decision, not work. One accountable name and one contact line.'],
+  ['State the standing on all nineteen', 'Five do. Fourteen do not. An afternoon.'],
+  ['Publish the code', 'Days rather than months. Until then nothing here can honestly be called auditable.'],
 ];
 
-const PARTS = [
-  'Letterhead and the company number',
-  'A date and a named recipient',
-  'A Re: line that says what this is and what is asked',
-  'Who is writing, and why now',
-  'What the record is, in one paragraph',
-  'Three things that make it different',
-  'Where it honestly stands',
-  'A numbered ask',
-  'An enclosure index',
-  'A signature block',
-];
+const NO_MONEY =
+  'Nobody in this has the money for it. The founder it is built in honour of has said plainly that she does not, the two who built it are a community interest company in Scotland with no reserves, and no grant has been taken. That is why nothing on this page asks anybody for a cheque. It asks for people who can check it and a host who can carry it — and says so in that order, because the people matter more and are harder to get.';
+
+const PLAIN = `THE SUMMARY — where the climate record is, and what it needs
+
+WHAT IT IS
+A public record of the climate solutions that work and the crises that need saying out loud. Every entry names its origin, states how well it is known, and carries a fingerprint anyone can check in their own browser. Nothing is ranked, nothing is advertised, nothing can be paid into a better position, and no account is needed to read any of it.
+
+WHAT EXISTS TONIGHT
+19 published entries (10 solutions, 9 crises), every one with a working link to its origin.
+44 cryptographic seals, each recomputable by a reader without trusting us.
+18 wire entries, dated and sourced. 3 actions with organiser contact lines. 65 tongues, each labelled by how it was made.
+
+WHAT DOES NOT EXIST YET
+0 independent verdicts — the checking office is built and empty.
+14 of 19 entries carry no statement of how well they are known.
+4 of 4 gatherings have no contact line yet.
+No named keeper, and 19 entries signed with a name that did not write them.
+The code is not public, so it cannot yet be audited or carried away.
+
+WHAT IT NEEDS
+1. One reader with standing — someone who reads the method and says in public whether it holds. Not an endorsement of the contents: a verdict on the method.
+2. People who check — a checker reads an entry, follows its source, and signs their name. There are none, and this cannot be built or bought.
+3. Somebody to carry it — the technology, its upkeep, and a fair living for the two people who build it. Hosting is £1,000 a year at this size, £10,000 for ten years.
+
+WHAT IS STILL MISSING BEFORE IT COULD BE CALLED FINISHED
+Sign the entries honestly. Name the keeper. State the standing on all nineteen. Publish the code. All of it is days of work except the first, which is an evening.
+
+WHY IT HOLDS UP
+The seal is the whole argument: an entry is fingerprinted by the server, and the fingerprint is recomputed in the reader's browser. If the words move, the fingerprints stop matching and the record says so in public. Nobody has to trust the people who built this to check it.
+
+ON MONEY
+Nobody in this has any. The founder it honours has said she does not, the two who built it are an asset-locked community interest company with no reserves, and no grant has been taken. Nothing here asks for a cheque. It asks for people who can check it, and a host who can carry it.`;
 
 function Section({ n, title, children }) {
   return (
@@ -108,99 +111,71 @@ function Section({ n, title, children }) {
   );
 }
 
-const ONE_PARAGRAPH =
-  'Together We Can Change the Course of Climate Change is a public record of the climate solutions that work and the crises that need saying out loud. Every entry names its origin and states how well it is known, and every entry carries a fingerprint anyone can check in their own browser. Nothing is ranked, nothing is advertised, and nothing can be paid into a better position. It needs no account to read, it is built to be checked and copied, and it is looking for a host to carry it.';
+function Column({ tone, heading, items }) {
+  return (
+    <div className="border-2 border-[#141210]">
+      <p className={`px-3 py-2 text-[9.5px] font-black font-mono uppercase tracking-[0.18em] border-b-2 border-[#141210] ${tone}`}>
+        {heading}
+      </p>
+      <ul className="divide-y divide-[#141210]/12">
+        {items.map((t) => (
+          <li key={t} className="px-3 py-2 text-[11px] lg:text-[11.5px] font-mono leading-relaxed text-[#141210]">
+            {t}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 export default function ClimateYaleBrief() {
   return (
     <ClimateRecordShell
-      eyebrow="For Janine · the letter and what goes with it"
-      marker="A covering letter · an enclosure · what is left before launch"
-      title="What Yale would be sent"
-      statement="A short letter in her voice, and the enclosure a place like Yale reads before it answers: what this is, what is unusual, where it honestly stands, what is still missing, and what is being asked."
+      eyebrow="For Janine · the summary, to use as she likes"
+      marker="Where it is · what it needs · what is still missing"
+      title="The Summary"
+      statement="One page, no asking voice. What exists tonight, what does not, what it would take, and who it is for. Written to be handed over, copied whole, or read straight into a letter of her own."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
-      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and offered to a host, not sold to one."
+      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International."
     >
-      <Section n="00" title="What a letter like this is expected to carry">
-        <p>
-          A university reads a letter like this against a shape it already knows. Miss a part and it reads as an
-          approach from somebody who does not know how institutions decide. All ten are here.
-        </p>
-        <ul className="grid sm:grid-cols-2 gap-x-4 gap-y-1.5 mt-1">
-          {PARTS.map((p) => (
-            <li key={p} className="flex items-start gap-2 text-[11.5px] leading-snug">
-              <span className="font-black text-[#1e3a2b] flex-shrink-0">✓</span>
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5 mt-2">
-          Two things only she can fill: the recipient's name, and her own account of her work. Nothing
-          biographical has been invented anywhere on this page, because a letter that guessed at a life's work
-          would fail at the first thing Yale checked.
-        </p>
-      </Section>
-
-      <Section n="01" title="The letter">
-        <YaleLetter />
-      </Section>
-
-      <div className="border-t-2 border-[#141210]/20 pt-6 mb-8">
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#5a5246]">
-          The enclosure · what the letter refers to
-        </p>
+      <div className="flex flex-wrap items-center gap-2 mb-7">
+        <CopyLine text={PLAIN} label="Copy the summary" />
+        <Link
+          to={createPageUrl('ClimateHost')}
+          className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors"
+        >
+          Her five questions, answered
+        </Link>
       </div>
 
-      <Section n="02" title="The record, in one paragraph">
-        <div className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 lg:px-5 py-3 lg:py-4">
-          <div className="flex items-center justify-between gap-3 mb-2">
-            <span className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">Paste this anywhere</span>
-            <CopyLine text={ONE_PARAGRAPH} label="Copy paragraph" />
-          </div>
-          <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed">{ONE_PARAGRAPH}</p>
-        </div>
-      </Section>
-
-      <Section n="03" title="Where it stands today">
-        <p>Counted from the record this week, not projected.</p>
-        <div className="grid grid-cols-2 sm:grid-cols-4 border-2 border-[#141210] mt-1">
-          {FIGURES.map((f, i) => (
-            <div key={f.label} className={`px-3 py-3 border-[#141210]/15 ${i % 2 === 0 ? 'border-r' : ''} ${i < FIGURES.length - 2 ? 'border-b' : ''} sm:border-b sm:border-r`}>
-              <p className="font-black text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '26px' }}>{f.n}</p>
-              <p className="text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] mt-1.5 leading-snug">{f.label}</p>
-              <p className="text-[9.5px] font-mono text-[#5a5246] leading-snug mt-0.5">{f.sub}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section n="04" title="What is still missing before launch">
+      <Section n="01" title="What this is">
         <p>
-          Six things. Not a roadmap, and not a wish list: the whole distance between what exists tonight and a
-          record that could be handed to a host without a caveat. Four of the six are days of work.
+          A public record of the climate solutions that work and the crises that need saying out loud. Every entry
+          names its origin, states how well it is known, and carries a fingerprint anyone can check in their own
+          browser.
         </p>
+        <p>
+          It is not a feed. Nothing is ranked, nothing is advertised, nothing can be paid into a better position, and
+          no account is needed to read any of it — in any language, on any phone.
+        </p>
+      </Section>
+
+      <Section n="02" title="Where it is, exactly">
+        <p>
+          Counted from the record, not projected. The right-hand column is the honest half, and it is printed first
+          on purpose: a reader like Yale looks for whether the gaps were declared before they were found.
+        </p>
+        <div className="grid sm:grid-cols-2 gap-3 mt-1">
+          <Column tone="bg-[#1e3a2b]/10 text-[#1e3a2b]" heading="Exists tonight" items={EXISTS} />
+          <Column tone="bg-[#b3261e]/10 text-[#b3261e]" heading="Does not exist yet" items={NOT_YET} />
+        </div>
+      </Section>
+
+      <Section n="03" title="What it needs">
+        <p>Three things, in the order that matters. The first two are why a letter gets written at all.</p>
         <div className="border-2 border-[#141210] divide-y divide-[#141210]/15 mt-1">
-          {LAUNCH.map((item) => (
-            <div key={item.n} className="px-3 lg:px-4 py-3">
-              <div className="flex items-baseline gap-2">
-                <span className="text-[9.5px] font-black font-mono text-[#b3261e]">{item.n}</span>
-                <h3 className="text-[11.5px] lg:text-[12.5px] font-black font-mono uppercase tracking-wide text-[#141210] leading-snug">{item.what}</h3>
-              </div>
-              <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#3a342c] mt-1.5">{item.why}</p>
-              <p className="text-[10px] font-mono uppercase tracking-wide text-[#8a8375] mt-1.5">{item.how}</p>
-            </div>
-          ))}
-        </div>
-        <p>
-          Five of the six are ours. The sixth is why this page exists: no amount of building closes it, and it is
-          the only one that changes what the record is rather than what it has.
-        </p>
-      </Section>
-
-      <Section n="05" title="What is being asked of a host">
-        <div className="border-2 border-[#141210] divide-y divide-[#141210]/15">
-          {ASKS.map((a) => (
+          {NEEDS.map((a) => (
             <div key={a.n} className="px-3 lg:px-4 py-3">
               <div className="flex items-baseline gap-2">
                 <span className="text-[9.5px] font-black font-mono text-[#b3261e]">{a.n}</span>
@@ -212,76 +187,44 @@ export default function ClimateYaleBrief() {
         </div>
       </Section>
 
-      <Section n="06" title="The ground it stands on">
+      <Section n="04" title="What is still missing">
+        <p>Days of work, not years. Said out loud so nobody has to discover it.</p>
+        <div className="border-2 border-[#141210] divide-y divide-[#141210]/15 mt-1">
+          {MISSING.map(([what, why]) => (
+            <div key={what} className="px-3 lg:px-4 py-2.5">
+              <p className="text-[10.5px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">{what}</p>
+              <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#3a342c] mt-1">{why}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section n="05" title="Why it holds up">
         <p>
-          The whole covenant is one line, and it is the record's own: <strong>x = x</strong>. A thing is what it
-          is. Nothing on the record may be dressed up, and no one who tends it is above the rule they apply to it.
+          The seal is the whole argument. An entry is fingerprinted by the record's own server, and that fingerprint
+          is recomputed in the reader's browser. If the words move, the fingerprints stop matching and the record
+          says so about itself, in public. Nobody has to trust the people who built this in order to check it.
         </p>
         <p>
-          From that follows the extraction-proof part, written down and published rather than promised: no
-          advertising, no paid placement, no ranking, no lock-in, and a full export on request. Any host may leave
-          with everything, and the record may leave any host. That protects them as much as it protects this.
-        </p>
-        <p>
-          It was built in Scotland by two directors of an asset-locked community interest company, around caring
-          for family, and at no cost to its founder. What the record now asks is that the two people who build it
-          can live by building it: a fair living each, so that tending this is the work rather than something done
-          after it. A host covering the technology, the building and the maintenance is not overhead — it is the
-          difference between a record that lasts ten years and one that lasts until somebody gets tired.
-        </p>
-        <p>
-          Stated plainly, because it is the question every panel asks and usually has to ask twice: the builders
-          are paid, the founder is not, and the company's assets are locked so nobody can ever take the record
-          private or sell it on.
+          What it refuses matters as much: no anonymous claims, no trending, no volume targets, no advertising, no
+          paid placement, no lock-in. Any host may leave with everything.
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
-          <Link to={createPageUrl('XEqualsX')} className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">x = x</Link>
-          <Link to="/ExtractionProofCovenant" className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">Extraction-proof</Link>
-          <Link to={createPageUrl('ClimateSeals')} className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">The seal</Link>
+          <Link to={createPageUrl('ClimateSeals')} className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">Check a seal</Link>
           <Link to={createPageUrl('ClimateMethod')} className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">The method</Link>
           <Link to={createPageUrl('ClimateHandover')} className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">What changes hands</Link>
         </div>
       </Section>
 
-      <Section n="07" title="If anybody checks">
-        <p>
-          Due diligence here is not a document to be taken on trust. It is four things anybody can look at
-          tonight, one they cannot yet, and the record says which is which.
-        </p>
-        <div className="border-2 border-[#141210] divide-y divide-[#141210]/15 mt-1">
-          {[
-            ['The company', 'SC870603, a community interest company registered in Scotland and asset-locked. Nothing built here can be taken private, floated, or sold on by whoever happens to hold the keys.'],
-            ['The words', 'Every entry shows the origin it came from, on the entry itself, with a working link. No entry survives without one.'],
-            ['The fingerprints', 'Every published entry is sealed, and the seal is recomputed in the reader\u2019s own browser rather than on our server. A reader never has to trust us to check us. That is the entire design.'],
-            ['The money', '£1,000 a year at present size, stated in public, with the builder\u2019s costs published beside it and neither founder drawing from it.'],
-            ['The code', 'Not public yet. This is the real gap, it is the largest one, and it is days of work rather than months. Until it closes, nothing here should be called auditable.'],
-          ].map(([title, body]) => (
-            <div key={title} className="px-3 lg:px-4 py-2.5">
-              <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">{title}</p>
-              <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#3a342c] mt-1">{body}</p>
-            </div>
-          ))}
+      <Section n="06" title="On money">
+        <div className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 lg:px-5 py-3 lg:py-4">
+          <p>{NO_MONEY}</p>
         </div>
-        <p>
-          Two things will not be claimed here, because claiming them would be the first lie on the record. It is
-          not on a chain, and it is not peer-to-peer: it is a database on a server, and it says so. What it does
-          have is a full export and no lock-in, so it can be lifted whole and carried on somewhere else — by a
-          host, by a reader, by two people who are no longer young, or by nobody at all. A thing that can leave is
-          harder to hold hostage than a thing that swears it cannot die.
-        </p>
-      </Section>
-
-      <Section n="08" title="If the answer is no">
-        <p>
-          The record carries on. It is not built to need any particular host, and it will say plainly what it is
-          and is not, whether or not anybody funds it. A no costs the record nothing except time, and is better
-          than a maybe that lasts a year.
-        </p>
       </Section>
 
       <p className="text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#5a5246] border-t-2 border-[#141210]/20 pt-3">
-        Every figure on this page was counted from the record. Where a thing is not built it says so, and this
-        page is corrected in the open when that changes.
+        Every figure here was counted from the record. When something on this page stops being true it gets
+        corrected in the open, like anything else on it.
       </p>
     </ClimateRecordShell>
   );

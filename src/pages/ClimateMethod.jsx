@@ -89,7 +89,7 @@ export default function ClimateMethod() {
 
       <Block n="06" title="Corrections, in daylight">
         <p>When an entry is wrong it is corrected on the entry itself, with the date and what changed. Nothing is quietly edited. Nothing disappears.</p>
-        <p>Every decision a person makes — who looked, when, and what the advisory note said — is kept in an audit trail. It exists from the first day, rather than being reconstructed later when somebody asks. An entry the screen cleared asked nothing of a person, so no decision is claimed for it.</p>
+        <p>Every decision a person makes — who looked, when, and what the advisory note said — goes into an audit trail. The table for it is built and it is empty: nineteen entries were published before it was wired, and that gap is said here rather than filled in afterwards. It fills from the first real decision onward, and an entry the screen cleared asks nothing of a person, so no decision is claimed for it.</p>
         <p>
           An audit trail keeps a person honest. It does not catch a quiet edit made at the table itself. So every
           published entry also carries a fingerprint of its own words, taken when it was sealed and checkable by
