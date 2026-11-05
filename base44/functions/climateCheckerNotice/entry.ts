@@ -39,9 +39,12 @@ export default async function (req) {
       return Response.json({ error: 'Nothing to send' }, { status: 400 });
     }
 
-    // The record's own address, never one derived from the request's host.
-    const origin = req.headers.get('X-Base44-App-Url') || '';
-    const recordUrl = origin ? `${origin}/ClimateChecking` : 'https://cb51.io/ClimateChecking';
+    // The record's own address — the one a keeper would say out loud.
+    // Never a host derived from the request, and never whichever domain the app happens
+    // to answer on: this app also answers on cb51.io, whose front door is a different
+    // product entirely. A letter from the record must not hand a checker a band page.
+    const RECORD_HOME = 'https://uf51.love';
+    const recordUrl = `${RECORD_HOME}/ClimateChecking`;
 
     await base44.asServiceRole.integrations.Core.SendEmail({
       to: clean,
