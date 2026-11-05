@@ -34,7 +34,7 @@ export default function AddKeeper({ onAdded }) {
       // honest answer is to say so, not to claim an email went out.
       setMessage(
         e?.response?.status === 409 || /already|exists/i.test(e?.message || '')
-          ? 'That address already has an account here, so no invitation was sent. Their role is changed from the app user list.'
+          ? 'That address already has an account, so no new letter was sent. To give them the keys, open the desk roster — the account is already waiting for them.'
           : (e?.message || 'That did not go through. Nothing was sent.')
       );
     } finally {

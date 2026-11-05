@@ -9,6 +9,7 @@ import AddKeeper from '@/components/climate/AddKeeper';
 // much worse trade than it looks on the day you make it.
 export default function AdminClimateCheckers() {
   const [list, setList] = useState([]);
+  const [keepers, setKeepers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -19,7 +20,10 @@ export default function AdminClimateCheckers() {
   const load = useCallback(async () => {
     setLoading(true);
     const rows = await base44.entities.ClimateChecker.list({ sort: '-created_date', limit: 200 });
+    // Keepers are read back here so the desk can show the whole list of people itself.
+    const people = await base44.entities.User.list().catch(() => []);
     setList(rows?.items || rows || []);
+    setKeepers((people?.items || people || []).filter((p) => p.role === 'admin'));
     setLoading(false);
   }, []);
 
@@ -95,10 +99,21 @@ export default function AdminClimateCheckers() {
           They cannot publish, edit or delete anything, and they never see a submitter's email address. Only you and the
           other keepers can add or remove names.
         </p>
-        <p className="text-[11px] font-mono text-record-muted leading-relaxed mb-6 border-l-2 border-record-ink/25 pl-3">
-          A keeper can always check — the checking door lets them straight in. So a keeper is added once, not twice:
-          they do not need a line on this list as well.
-        </p>
+        {/* The keys, shown here in the desk rather than looked up somewhere else. A keeper
+            could always check — the checking door lets them straight in — but that was only
+            written in code, so on this page a keeper appeared to be nobody. */}
+        <div className="border-2 border-record-ink/25 bg-record-bone p-3 mb-4">
+          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-2">
+            who holds the keys · {keepers.length}
+          </p>
+          {keepers.map((k) => (
+            <p key={k.id} className="text-[11px] font-mono text-record-ink/85 truncate">{k.full_name || k.email}</p>
+          ))}
+          <p className="text-[10px] font-mono text-record-muted mt-2 leading-relaxed">
+            A keeper publishes, corrects, signs, adds people — and can always check. They are added once, above;
+            they never need a line on the checker list as well.
+          </p>
+        </div>
 
         <div className="bg-record-bone border-2 border-record-ink/20 p-4 mb-8">
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-3">add a checker</p>
