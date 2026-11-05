@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import HostAnswer from '@/components/climate/HostAnswer';
@@ -54,11 +55,27 @@ export default function ClimateHost() {
     >
       <SendThisPage />
 
-      <p className="text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#5a5246] border-l-4 border-l-[#141210]/30 px-3 py-2 mb-8">
+      <p className="text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#5a5246] border-l-4 border-l-[#141210]/30 px-3 py-2 mb-3">
         One caution before you pass this on: it is written for you, not for a host. It names what is still
         unfinished. A host should hear that from you, in your own words, not find it as a footnote in a
         brochure. Send them the record and the method page; keep this page for your own check.
       </p>
+
+      <div className="border-2 border-[#141210] bg-[#f7f1e5] px-3 lg:px-4 py-3 mb-8 flex flex-wrap items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">When it goes to a host</p>
+          <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] mt-1">
+            The brief written for their eyes, with the figures counted from the record and a letter for you to
+            sign.
+          </p>
+        </div>
+        <Link
+          to={createPageUrl('ClimateYaleBrief')}
+          className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors flex-shrink-0"
+        >
+          Open the brief
+        </Link>
+      </div>
 
       <HostAnswer
         n="01"
