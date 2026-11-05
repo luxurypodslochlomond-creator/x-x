@@ -154,6 +154,7 @@ const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrectio
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
+const ClimateKeeperRoomPage = React.lazy(() => import('./pages/ClimateKeeperRoom'));
 
 
 
@@ -334,6 +335,10 @@ const AuthenticatedApp = () => {
           browser rather than on our server. The one page that lets a sceptic verify
           the record without trusting anybody who built it. */}
       <Route path="/ClimateSeals" element={<ClimateLayout currentPage="ClimateSeals"><ClimateSealsPage /></ClimateLayout>} />
+      {/* The keeper's own room: where the founder says yes or not yet. Deliberately NOT
+          behind the app's admin door — the record checks her against its own guest list on
+          the server, so she holds the record's keys and none of the building's. */}
+      <Route path="/ClimateKeeperRoom" element={<ClimateLayout currentPage="ClimateKeeperRoom"><ClimateKeeperRoomPage /></ClimateLayout>} />
       <Route path="/ClimateFellows" element={<ClimateLayout currentPage="ClimateFellows"><ClimateFellowsPage /></ClimateLayout>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and

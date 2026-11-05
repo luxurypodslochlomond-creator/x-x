@@ -1,20 +1,25 @@
 {
   "name": "ClimateChecker",
   "type": "object",
-  "description": "A person allowed to check entries on the record, and nothing else. This is the guest list, not the keys: a line here lets someone read entries that are waiting and write a note in their own name, and a line removed stops that at once. It grants no power to publish, change or delete anything, and it never lets the person holding it see a submitter's email. Kept apart from the app's admin role on purpose, because a checker is a pair of eyes and admin is the whole machine. A keeper adds and removes these; nobody can add themselves.",
+  "description": "Who may come into the record, and what they may do once inside. One list, two kinds of line: a checker is a pair of eyes \u2014 they read what is waiting and write a note in their own name, and that is all; a keeper is the person the record answers to \u2014 the founder \u2014 and they alone may put an entry on the record or hold it back. The flag on the line decides which, so the record has one guest list rather than two that drift apart. Neither kind can see a submitter's email, and neither holds the app's admin keys: being the keeper of this record gives the record's own power and nothing else in the building. A keeper adds and removes these lines; nobody can add themselves.",
   "properties": {
     "email": {
       "type": "string",
-      "description": "The exact address the checker signs in with. Required, and what the checking page matches against, so it is never guessed or partly filled."
+      "description": "The exact address the checker signs in with. Required, and what the record matches against, so it is never guessed or partly filled."
     },
     "name": {
       "type": "string",
       "description": "The name their notes are signed with, so a line of checking carries a person rather than an address."
     },
+    "is_keeper": {
+      "type": "boolean",
+      "default": false,
+      "description": "This line is the keeper: they may publish an entry onto the record or hold it back, and their name is written into the audit trail when they do. Left false it is a checker \u2014 a pair of eyes, with no power to publish, change or delete anything. A keeper does not need to be an administrator of the app, and should not be: the record's keys are not the building's keys."
+    },
     "active": {
       "type": "boolean",
       "default": true,
-      "description": "Whether they may check today. Turned off it stops access immediately and keeps the record of what they wrote, because ending access is not the same as erasing work."
+      "description": "Whether they may come in today. Turned off it stops access immediately and keeps the record of what they wrote, because ending access is not the same as erasing work."
     },
     "note": {
       "type": "string",

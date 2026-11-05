@@ -10,7 +10,7 @@ import useKeeper from '@/components/climate/useKeeper';
 // room belonging to something else. If the record is going to stand on its own one day, it has
 // to carry the things needed to tend it. So the door is here, in the record's own bar, and only
 // a keeper sees it: to a reader the record looks exactly as it did.
-const KEEPER_WORD = { label: 'Desk', page: 'AdminClimateDesk', aria: "The keeper's desk" };
+const KEEPER_WORD = { label: 'Room', page: 'ClimateKeeperRoom', aria: "The keeper's room" };
 
 // ── THE WAY THROUGH THE RECORD ───────────────────────────────────────────────────
 // Two different kinds of thing live in this bar, and they are drawn differently on

@@ -1,7 +1,7 @@
 {
   "name": "ClimateAuditLog",
   "type": "object",
-  "description": "Audit trail for climate submission reviews \u2014 records who reviewed, what action was taken, and the AI advisory note that informed the decision. Covers solutions, crises, actions, comments, gatherings, entries on the wire, and the music given to the record. Admin-only access. This is the accountability record review panels ask for.",
+  "description": "Audit trail for the climate record \u2014 who decided, what they decided, and the AI note that sat beside the decision but never made it. One line every time a keeper puts an entry on the record or holds it back, so the answer to 'who allowed this' is a row rather than a shrug. Covers solutions, crises, actions, comments, gatherings, entries on the wire, and the music given to the record. Admin-only access, because the reviewer's own address is in it and that address belongs to the person who took the decision, not to the public. This is the accountability record review panels ask for.",
   "properties": {
     "entity_type": {
       "type": "string",
@@ -27,17 +27,23 @@
       "type": "string",
       "enum": [
         "published",
+        "held",
         "rejected"
       ],
-      "description": "Review action taken by the human reviewer"
+      "enumColors": [
+        "green",
+        "yellow",
+        "red"
+      ],
+      "description": "What the keeper decided. published \u2014 it is on the record. held \u2014 it waits, untouched: a hold is a not-yet and is never counted as a rejection, because calling it one would put a word in a person's mouth."
     },
     "reviewer_email": {
       "type": "string",
-      "description": "Email of the admin who performed the review"
+      "description": "The address of the keeper who took the decision. This is the accountability line: it names a person, so a reader can hold someone to the decision. Never shown to a visitor."
     },
     "ai_assessment": {
       "type": "string",
-      "description": "The AI advisory note that informed the human decision"
+      "description": "The AI advisory note, or the keeper's own reason for holding an entry. Kept as it was at the moment of the decision rather than re-read later."
     }
   },
   "required": [
