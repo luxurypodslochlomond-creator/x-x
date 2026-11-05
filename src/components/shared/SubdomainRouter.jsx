@@ -33,7 +33,16 @@ export default function SubdomainRouter({ children }) {
         
         // Get subdomain (first part before uf51.love)
         const subdomain = parts.length > 2 ? parts[0] : null;
-        
+
+        // ── A DOOR THAT CARRIES A KEY IS NEVER REDIRECTED ──
+        // An invitation or a password link arrives with its key in the address. Turning
+        // that address into /CB51 throws the key away, so someone invited to the record
+        // lands on a product page with no way in and no idea why. Which product a domain
+        // belongs to is a decision for a visitor who arrived empty-handed — never for
+        // someone who came here to set a password.
+        const carried = window.location.search + window.location.hash;
+        if (/token|invite|access_token|type=|recovery|reset|password/i.test(carried)) return;
+
         // Route based on domain/subdomain ONLY if on root
         if (location.pathname === '/' || location.pathname === '/Welcome') {
             if (isEarth51Domain) {
