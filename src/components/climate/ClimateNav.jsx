@@ -42,6 +42,7 @@ const ABOUT = [
   { label: 'Founder', page: 'ClimateFounder' },
   { label: 'Support', page: 'ClimateSupport' },
   { label: 'Method', page: 'ClimateMethod' },
+  { label: 'Seal', page: 'ClimateSeals' },
   { label: 'Corrections', page: 'ClimateCorrections' },
 ];
 
