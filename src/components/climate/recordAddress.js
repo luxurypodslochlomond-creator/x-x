@@ -10,22 +10,11 @@
 
 export const RECORD_HOME = 'https://uf51.love';
 
-// Addresses that are never the record's home: the editor's preview frame, the platform's
-// own app address, and a machine only the person building it can reach.
-function isTemporary(hostname) {
-  return (
-    !hostname ||
-    hostname.includes('base44.app') ||
-    hostname.includes('preview--') ||
-    hostname === 'localhost'
-  );
-}
-
-// Where the record lives, as the reader's browser knows it — or its real home when the
-// browser is standing in a temporary room.
+// The record has one home until Janine gives it its own address. This app also
+// answers on other products' domains; visiting the record through one of those
+// must never make citations, cards or shared links adopt that product's address.
 export function recordOrigin() {
-  if (typeof window === 'undefined') return RECORD_HOME;
-  return isTemporary(window.location.hostname) ? RECORD_HOME : window.location.origin;
+  return RECORD_HOME;
 }
 
 // The address of a page on the record: this page, unless another path is named.

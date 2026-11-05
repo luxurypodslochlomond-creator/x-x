@@ -1,125 +1,51 @@
-<!--
-  The invitation, in the record's own skin — paper, ink, one signal red button.
-  Deliberately plain: it is the first thing a person sees of this place, and a first
-  email that sells is a first email that lies. No logo band, no slogan, no brand
-  shouting its own name: the sender's address is already the identity.
-
-  Kept generic on purpose, because every invitation in this app arrives through this
-  one template — a checker's invite and a band member's invite should not each need
-  a copy. Only {{action_url}} is dynamic, and it must stay in the button, or the
-  platform sends its own version instead.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>You have been invited</title>
+  <title>An invitation to the record</title>
 </head>
-<body style="margin:0;padding:0;background-color:#f4efe4;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4efe4;margin:0;padding:0;">
-    <tr>
-      <td align="center" style="padding:0;">
-        <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;margin:0 auto;background-color:#f4efe4;">
-
-          <!-- masthead: the record's own mark, in ink on paper -->
-          <tr>
-            <td style="padding:34px 32px 0 32px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td style="font-family:'Courier New',Courier,monospace;font-size:10px;font-weight:bold;letter-spacing:0.22em;text-transform:uppercase;color:#6b6258;">
-                    UF51&nbsp;CIC &middot; The&nbsp;Record
-                  </td>
-                  <td align="right" style="font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:bold;letter-spacing:0.16em;color:#1a1612;">
-                    x&nbsp;=&nbsp;x
-                  </td>
-                </tr>
-              </table>
-              <div style="height:1px;background-color:#1a1612;margin-top:12px;"></div>
-            </td>
-          </tr>
-
-          <!-- headline -->
-          <tr>
-            <td style="padding:30px 32px 0 32px;">
-              <h1 style="margin:0 0 12px 0;font-family:'Oswald',Arial,sans-serif;font-size:32px;line-height:1.05;font-weight:700;letter-spacing:-0.01em;text-transform:uppercase;color:#1a1612;">
-                You have been invited in.
-              </h1>
-              <p style="margin:0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.65;color:#1a1612;">
-                Someone who keeps this record asked for you by name. Use the button below to set a password and sign in.
-              </p>
-            </td>
-          </tr>
-
-          <!-- the one action -->
-          <tr>
-            <td style="padding:26px 32px 0 32px;">
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td style="background-color:#b3261e;border-radius:4px;">
-                    <a href="{{action_url}}" style="display:inline-block;padding:15px 30px;font-family:'Oswald',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#ffffff;text-decoration:none;border-radius:4px;">
-                      Set your password
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- what it is for -->
-          <tr>
-            <td style="padding:30px 32px 0 32px;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#efe7d6;border-radius:4px;">
-                <tr>
-                  <td style="padding:22px 24px;">
-                    <p style="margin:0 0 12px 0;font-family:'Courier New',Courier,monospace;font-size:10px;font-weight:bold;letter-spacing:0.18em;text-transform:uppercase;color:#6b6258;">
-                      What you are signing in for
-                    </p>
-                    <p style="margin:0 0 12px 0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#1a1612;">
-                      Use the button above, set a password, and you are in. That is the whole of what this email asks of you.
-                    </p>
-                    <p style="margin:0 0 12px 0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#1a1612;">
-                      What you are being asked to do here, the person who invited you will tell you in their own words. This email is only the door. Nothing has been assumed about you, and nothing you do once you are in is published, sent to anyone, or charged to anyone without a person deciding it first.
-                    </p>
-                    <p style="margin:0 0 12px 0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#1a1612;">
-                      Where it leads: the record. If you were asked to check, then Checking — one entry waiting for a second pair of eyes, one source to open, one of three answers, and your name at the foot of it. If you were asked to keep the record, then the desk, where entries are published, corrected and signed. Nothing else is asked of you either way, and nothing you write is published without a person deciding it.
-                    </p>
-                    <p style="margin:0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;line-height:1.65;color:#1a1612;">
-                      If you are not sure what you have been asked to do, ask whoever invited you before you do anything. That is not a delay. It is the correct order.
-                    </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-          <!-- honesty footer -->
-          <tr>
-            <td style="padding:26px 32px 0 32px;">
-              <p style="margin:0;font-family:'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;line-height:1.65;color:#6b6258;">
-                If you were not expecting this, you can ignore it. Nothing happens until you set a password, and this link is the only way in.
-              </p>
-            </td>
-          </tr>
-
-          <tr>
-            <td style="padding:18px 32px 0 32px;">
-              <div style="height:1px;background-color:#1a1612;opacity:0.2;"></div>
-            </td>
-          </tr>
-
-          <tr>
-            <td style="padding:16px 32px 40px 32px;">
-              <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:10px;line-height:1.7;color:#6b6258;">
-                If the button does not work, copy this address into your browser:<br>
-                <span style="color:#b3261e;word-break:break-all;">{{action_url}}</span>
-              </p>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
+<body style="margin:0;padding:0;background-color:#ffffff;color:#1a1612;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Come on in. The climate record is here.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;margin:0 auto;">
+        <tr>
+          <td style="padding:22px 28px;background-color:#b3261e;color:#ffffff;">
+            <p style="margin:0;font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:bold;letter-spacing:0.15em;line-height:1.5;">RECORD OF THE TIME &nbsp; / &nbsp; x = x</p>
+            <p style="margin:8px 0 0;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;line-height:1.5;">Together we can change the course of climate change</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:36px 28px 24px;">
+            <h1 style="margin:0 0 12px;font-family:'Oswald',Impact,'Arial Narrow',Arial,sans-serif;font-size:48px;font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#1a1612;">Come on in.</h1>
+            <p style="margin:0;font-family:'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.6;color:#6b6258;">You’re invited to help look after the climate record.</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 28px 30px;">
+            <p style="margin:0 0 12px;font-family:'Courier New',Courier,monospace;font-size:10px;font-weight:bold;line-height:1.5;letter-spacing:0.14em;color:#6b6258;">01 / YOUR PERSONAL INVITATION</p>
+            <p style="margin:0 0 20px;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.6;">First, use this link to set up your sign-in.</p>
+            <a href="{{action_url}}" style="display:inline-block;padding:15px 24px;border-radius:4px;background-color:#b3261e;color:#ffffff;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:700;line-height:1.4;text-decoration:none;">Set up my sign-in &rarr;</a>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px;background-color:#efe7d6;">
+            <p style="margin:0 0 14px;font-family:'Courier New',Courier,monospace;font-size:10px;font-weight:bold;line-height:1.5;letter-spacing:0.14em;color:#6b6258;">02 / OUR CLIMATE RECORD</p>
+            <h2 style="margin:0 0 12px;font-family:'Oswald',Impact,'Arial Narrow',Arial,sans-serif;font-size:30px;font-weight:700;line-height:1.15;">This is the place.</h2>
+            <p style="margin:0 0 20px;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;line-height:1.6;">Once you’ve set up your sign-in, open the record here. Checking is for checking sources. The Desk is for keepers.</p>
+            <a href="https://uf51.love/TogetherChangeClimate" style="display:inline-block;padding:15px 24px;border:1px solid #b3261e;border-radius:4px;color:#b3261e;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:700;line-height:1.4;text-decoration:none;">Open the climate record &rarr;</a>
+            <p style="margin:16px 0 0;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;line-height:1.6;word-break:break-all;"><a href="https://uf51.love/TogetherChangeClimate" style="color:#6b6258;text-decoration:underline;">uf51.love/TogetherChangeClimate</a></p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:26px 28px 34px;">
+            <p style="margin:0 0 18px;font-family:'Segoe UI',Arial,sans-serif;font-size:13px;line-height:1.6;color:#6b6258;">Not expecting this? You can leave it here.</p>
+            <p style="margin:0;font-family:'Segoe UI',Arial,sans-serif;font-size:11px;line-height:1.6;color:#6b6258;">Personal invitation button not opening? Copy this link into your browser. Keep it to yourself.<br><a href="{{action_url}}" style="color:#b3261e;word-break:break-all;">{{action_url}}</a></p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
   </table>
 </body>
 </html>
