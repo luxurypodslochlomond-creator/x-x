@@ -153,6 +153,7 @@ const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
 const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrections'));
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
+const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
 
 
 
@@ -329,6 +330,10 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateHost" element={<ClimateLayout currentPage="ClimateHost"><ClimateHostPage /></ClimateLayout>} />
       <Route path="/ClimateHandover" element={<ClimateLayout currentPage="ClimateHandover"><ClimateHandoverPage /></ClimateLayout>} />
       <Route path="/ClimateCorrections" element={<ClimateLayout currentPage="ClimateCorrections"><ClimateCorrectionsPage /></ClimateLayout>} />
+      {/* The seal: every entry fingerprinted, and the check run in the reader's own
+          browser rather than on our server. The one page that lets a sceptic verify
+          the record without trusting anybody who built it. */}
+      <Route path="/ClimateSeals" element={<ClimateLayout currentPage="ClimateSeals"><ClimateSealsPage /></ClimateLayout>} />
       <Route path="/ClimateFellows" element={<ClimateLayout currentPage="ClimateFellows"><ClimateFellowsPage /></ClimateLayout>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and

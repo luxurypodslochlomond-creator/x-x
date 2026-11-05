@@ -91,6 +91,11 @@ export default function ClimateMethod() {
         <p>When an entry is wrong it is corrected on the entry itself, with the date and what changed. Nothing is quietly edited. Nothing disappears.</p>
         <p>Every decision a person makes — who looked, when, and what the advisory note said — is kept in an audit trail. It exists from the first day, rather than being reconstructed later when somebody asks. An entry the screen cleared asked nothing of a person, so no decision is claimed for it.</p>
         <p>
+          An audit trail keeps a person honest. It does not catch a quiet edit made at the table itself. So every
+          published entry also carries a fingerprint of its own words, taken when it was sealed and checkable by
+          anyone in their own browser: <a href="/ClimateSeals" className="font-black underline decoration-2 underline-offset-2 hover:text-[#b3261e]">see every seal and check it yourself</a>.
+        </p>
+        <p>
           Every correction, gathered in one place and dated, is on{' '}
           <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
             corrections, in daylight

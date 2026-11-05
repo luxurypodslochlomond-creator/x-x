@@ -1,0 +1,73 @@
+{
+  "name": "ClimateSeal",
+  "type": "object",
+  "description": "A fingerprint of an entry's words as they stood, taken by the record's own server and never by a browser. Anyone can recompute it from the entry itself in their own browser, so a reader never has to trust this table, this platform, or us: if the words change without a new seal, the fingerprints stop matching and the record says so in public. Each seal keeps the hash of the seal before it, so a correction is a visible new link rather than a quiet overwrite, and removing a link breaks the chain for everyone to see. It holds no personal data of any kind, which is why it can be read by anyone \u2014 a seal nobody may check proves nothing. Only a keeper may write one. A seal never says an entry is true; it says only that these are the words that were sealed, and that nothing has moved since.",
+  "properties": {
+    "entry_type": {
+      "type": "string",
+      "enum": [
+        "solution",
+        "action",
+        "news",
+        "track",
+        "group"
+      ],
+      "description": "What kind of entry this seal covers."
+    },
+    "entry_id": {
+      "type": "string",
+      "description": "The id of the entry sealed. The fingerprint is bound to this id, so words copied onto a different record do not carry a valid seal with them."
+    },
+    "entry_title": {
+      "type": "string",
+      "description": "The entry's title as it stood when sealed, for a reader scanning the list. Never used to compute the fingerprint itself."
+    },
+    "version": {
+      "type": "number",
+      "description": "Which seal this is for that entry: 1 for the first, then 2, 3, and so on. A corrected entry gets a new version, never a rewritten one."
+    },
+    "hash": {
+      "type": "string",
+      "description": "The SHA-256 fingerprint of the entry's canonical line: its id, its type, and the fields that carry its claim, in a fixed order. Anyone can recompute this from the live entry."
+    },
+    "prev_hash": {
+      "type": "string",
+      "description": "The fingerprint of the seal immediately before this one, empty only for a first seal. This is what makes a silent edit visible: a new seal must point at the one it replaced."
+    },
+    "sealed_at": {
+      "type": "string",
+      "description": "When this seal was taken, as an exact instant."
+    },
+    "sealed_by_role": {
+      "type": "string",
+      "enum": [
+        "keeper"
+      ],
+      "description": "Who took the seal. Kept as a role rather than a name, because a seal is a fact about words, and putting a person's address in a public table would be an extraction of its own."
+    }
+  },
+  "required": [
+    "entry_type",
+    "entry_id",
+    "version",
+    "hash"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
