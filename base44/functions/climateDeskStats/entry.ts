@@ -1,4 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
+import { resolveChecker } from '../../shared/checkerAccess.ts';
 
 // The desk: the state of the record in one answer, so a keeper never has to open eight pages
 // to find out what is waiting. Every number here is counted when the page asks, never remembered
@@ -28,10 +29,17 @@ let CACHE = { at: 0, data: null };
 export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me().catch(() => null);
-    if (!user || user.role !== 'admin') {
-      return Response.json({ error: 'Unauthorized' }, { status: 403 });
+
+    // The desk is the record's own desk, so the record's own guest list decides who reads it:
+    // a keeper may count the record they answer for without being an administrator of the whole
+    // building. An admin still gets in — whoever built the record has to be able to open it —
+    // and anyone else is refused, because this answer names every person on the list.
+    const who = await resolveChecker(base44);
+    if (who.error) return Response.json({ error: who.error, paused: Boolean(who.paused) }, { status: who.status });
+    if (!who.isKeeper) {
+      return Response.json({ error: 'Only a keeper may read the desk' }, { status: 403 });
     }
+    const isAdmin = who.user?.role === 'admin';
 
     const body = await req.json().catch(() => ({}));
     if (body?.fresh !== true && CACHE.data && Date.now() - CACHE.at < CACHE_MS) {
@@ -97,17 +105,21 @@ export default async function (req) {
     const lastSweep = diary.find((l) => l.kind === 'sweep') || null;
 
     const answer = {
+      isAdmin,
       waiting: per,
       waitingTotal: waitingIds.length,
       unchecked,
       contested,
       checksOnWaiting: checks.length,
       recentChecks,
+      // The desk says who holds the keys as well as who is checking: a roster that cannot tell
+      // a keeper from a checker is not a roster of who answers for the record.
       checkers: checkers.map((c) => ({
         id: c.id,
         name: c.name,
         email: c.email,
         active: c.active,
+        is_keeper: Boolean(c.is_keeper),
         notes: tally[c.email] || 0,
       })),
       latestChecks: checks.slice(0, 5),

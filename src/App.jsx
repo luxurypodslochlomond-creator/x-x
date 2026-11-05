@@ -4,6 +4,7 @@ const RedirectToSorted = () => <Navigate to="/Sorted" replace />;
 import SortedPageTransition from '@/components/shared/SortedPageTransition';
 import RoutePrefetcher from '@/components/shared/RoutePrefetcher';
 import AdminOnly from '@/components/shared/AdminOnly';
+import KeeperKey from '@/components/climate/KeeperKey';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -362,7 +363,10 @@ const AuthenticatedApp = () => {
       <Route path="/AdminClimateLog" element={<ClimateLayout currentPage="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></ClimateLayout>} />
       <Route path="/ClimateChecking" element={<ClimateLayout currentPage="ClimateChecking"><ClimateCheckingPage /></ClimateLayout>} />
       <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><AdminOnly><AdminClimateCheckersPage /></AdminOnly></ClimateLayout>} />
-      <Route path="/AdminClimateDesk" element={<ClimateLayout currentPage="AdminClimateDesk"><AdminOnly><AdminClimateDeskPage /></AdminOnly></ClimateLayout>} />
+      {/* The desk is the record's own desk, so it opens to the record's own keys. Behind the
+          building's admin door, a keeper invited to hold them was stopped on the one page built
+          for her and told "Admins only". KeeperKey asks the record instead. */}
+      <Route path="/AdminClimateDesk" element={<ClimateLayout currentPage="AdminClimateDesk"><KeeperKey><AdminClimateDeskPage /></KeeperKey></ClimateLayout>} />
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/Uf51Road" element={<LayoutWrapper currentPageName="Uf51Road"><AdminOnly><Uf51RoadPage /></AdminOnly></LayoutWrapper>} />

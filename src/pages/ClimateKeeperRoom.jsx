@@ -223,6 +223,19 @@ export default function ClimateKeeperRoom() {
               See the seals
             </Link>
           </p>
+
+          {/* The way on from the deciding to the counting, so a keeper never has to remember an
+              address to find out what state the record is in or who else holds the keys. */}
+          <Link
+            to={createPageUrl('AdminClimateDesk')}
+            className="mt-4 flex items-center justify-between border-2 border-[#141210] bg-[#efe7d6] px-3 py-3"
+          >
+            <span>
+              <span className="block text-[9px] font-mono font-black uppercase tracking-[0.2em] text-[#b3261e]">the desk</span>
+              <span className="block text-[11px] font-mono text-[#5a5246] mt-1">What is waiting, who is checking, who else holds the keys.</span>
+            </span>
+            <ArrowRight className="w-4 h-4 text-[#141210] flex-shrink-0" />
+          </Link>
         </>
       )}
     </ClimateRecordShell>

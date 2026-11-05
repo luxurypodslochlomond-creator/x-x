@@ -48,6 +48,19 @@ const COPY = {
   },
 };
 
+// A keeper does not hear the checker's letter. Saying "you cannot publish, edit or delete
+// anything" to the person who was just handed the keys is the record telling her the opposite
+// of what it did, in the same breath — and it happened, to the first keeper it invited.
+const KEEPER_BODY = {
+  invited:
+    'You hold the keys to this record. You can put an entry on it or hold it back, sign what you publish, say how well something is known, and add or remove anyone else on the list. Your room is where whatever is waiting sits, one tap each — yes, or not yet. You are not an administrator of the whole building: the record\u2019s keys are the keys you were given, and no others.',
+  paused:
+    'Your key to the record is closed for now. Nothing you put on it has been taken off, and nothing you signed has been unsigned. If this is a surprise, reply to this letter and the other keeper will tell you why.',
+  restored: 'Your key is open again, and the record answers to you as it did before.',
+  removed:
+    'Your place on the record has ended. Everything you put on it stays, signed with your name, because ending access is not erasing work.',
+};
+
 export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
@@ -68,8 +81,25 @@ export default async function (req) {
     // to answer on: this app also answers on cb51.io, whose front door is a different
     // product entirely. A letter from the record must not hand a checker a band page.
     const RECORD_HOME = 'https://uf51.love';
-    const recordUrl = `${RECORD_HOME}/ClimateChecking`;
     const who = String(name || '').trim() || clean;
+
+    // Keeper or checker? The record's own line decides — never the request, or anybody could
+    // ask for the warmer letter. Read back from the guest list before a word is written.
+    let isKeeper = false;
+    try {
+      const row = row_id
+        ? await base44.asServiceRole.entities.ClimateChecker.get(String(row_id))
+        : (await base44.asServiceRole.entities.ClimateChecker.filter({ email: clean }))[0];
+      isKeeper = Boolean(row?.is_keeper);
+    } catch (rowError) {
+      console.error('climateCheckerNotice: could not read the roster line', rowError?.message);
+    }
+
+    // Where the letter sends them: a keeper's work is in her room, a checker's is in the queue.
+    // Sending a keeper to the checking queue is how the first invitation ended up in the wrong
+    // place, with the person holding the keys shown a screen that could not use them.
+    const recordUrl = isKeeper ? `${RECORD_HOME}/ClimateKeeperRoom` : `${RECORD_HOME}/ClimateChecking`;
+    const letterBody = (isKeeper && KEEPER_BODY[state]) || copy.body;
 
     // The record first. A letter that failed to send must never mean the change went
     // unrecorded — the row is the accountability, the email is only courtesy.
@@ -92,7 +122,7 @@ export default async function (req) {
         variables: {
           first_name: String(name || '').trim() || 'there',
           headline: copy.headline,
-          body: copy.body,
+          body: letterBody,
           record_url: recordUrl,
         },
       });

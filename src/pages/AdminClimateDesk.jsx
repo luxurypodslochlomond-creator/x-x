@@ -28,6 +28,11 @@ const Figure = ({ value, label, tone, note, to }) => {
     : <div className={box}>{body}</div>;
 };
 
+// A figure that is also a door when there is somewhere to go, and just a figure when there is
+// not. A keeper is never sent through a door that would refuse her.
+const Panel = ({ to, className, children }) =>
+  to ? <Link to={to} className={className}>{children}</Link> : <div className={className}>{children}</div>;
+
 export default function AdminClimateDesk() {
   const [d, setD] = useState(null);
   const [error, setError] = useState('');
@@ -84,6 +89,11 @@ export default function AdminClimateDesk() {
     );
   }
 
+  // A keeper reads this desk through the record's own door, not the building's. Her queue is her
+  // room, and the pages that belong to the building's admins are simply not offered to her — a
+  // link that ends in "Admins only" is a dead end dressed up as a way through.
+  const isAdmin = d?.isAdmin !== false;
+
   return (
     <div className="pb-16">
       <div className="max-w-2xl mx-auto px-4 pt-8">
@@ -98,11 +108,22 @@ export default function AdminClimateDesk() {
           counted {new Date(d.as_of).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         </p>
 
-        <div className="grid grid-cols-3 gap-2 mb-6">
-          <Figure value={d.waitingTotal} label="waiting" tone="#1a1612" note="held for a person" to="/AdminClimateReview" />
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          <Figure value={d.waitingTotal} label="waiting" tone="#1a1612" note="held for a person" to={isAdmin ? '/AdminClimateReview' : '/ClimateKeeperRoom'} />
           <Figure value={d.unchecked} label="unopened" tone="#b3261e" note="no one has checked" to="/ClimateChecking" />
-          <Figure value={d.recentChecks} label="checks / 7d" tone="#1e3a2b" note="last seven days" to="/AdminClimateCheckers" />
+          <Figure value={d.recentChecks} label="checks / 7d" tone="#1e3a2b" note="last seven days" to={isAdmin ? '/AdminClimateCheckers' : undefined} />
         </div>
+
+        {/* A keeper's way in to the work itself, one tap from the counts. */}
+        {!isAdmin && (
+          <Link to="/ClimateKeeperRoom" className="flex items-center justify-between border-2 border-record-red bg-record-red/5 px-3 py-3 mb-6">
+            <span>
+              <span className="block text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-red">your room</span>
+              <span className="block text-[11px] font-mono text-record-ink/75 mt-1">Everything waiting, one tap each: yes, or not yet.</span>
+            </span>
+            <ArrowRight className="w-4 h-4 text-record-red flex-shrink-0" />
+          </Link>
+        )}
 
         <DeskOrientation />
 
@@ -116,7 +137,7 @@ export default function AdminClimateDesk() {
         )}
 
         <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-2">waiting, by kind</p>
-        <Link to="/AdminClimateReview" className="block bg-record-bone border-2 border-record-ink/20 divide-y divide-record-ink/10 mb-2">
+        <Panel to={isAdmin ? '/AdminClimateReview' : '/ClimateKeeperRoom'} className="block bg-record-bone border-2 border-record-ink/20 divide-y divide-record-ink/10 mb-2">
           {d.waiting.map((k) => (
             <div key={k.type} className="flex items-center justify-between px-3 py-2">
               <span className="text-[11px] font-mono text-record-ink">{k.label}</span>
@@ -127,13 +148,15 @@ export default function AdminClimateDesk() {
             </div>
           ))}
           <div className="flex items-center justify-between px-3 py-2">
-            <span className="text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">open the review queue</span>
+            <span className="text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">
+              {isAdmin ? 'open the review queue' : 'open your room'}
+            </span>
             <ArrowRight className="w-3.5 h-3.5 text-record-ink" />
           </div>
-        </Link>
+        </Panel>
 
         <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mt-6 mb-2">who is checking</p>
-        <Link to="/AdminClimateCheckers" className="block bg-record-bone border-2 border-record-ink/20 divide-y divide-record-ink/10 mb-2">
+        <Panel to={isAdmin ? '/AdminClimateCheckers' : null} className="block bg-record-bone border-2 border-record-ink/20 divide-y divide-record-ink/10 mb-2">
           {!d.checkers.length && (
             <p className="px-3 py-3 text-[11px] font-mono text-record-muted">
               Nobody on the list yet. Add one and they get an invitation.
@@ -142,25 +165,30 @@ export default function AdminClimateDesk() {
           {d.checkers.map((c) => (
             <div key={c.id} className="flex items-center justify-between px-3 py-2">
               <span className="min-w-0">
-                <span className="text-[11px] font-mono text-record-ink block truncate">{c.name || c.email}</span>
+                <span className="text-[11px] font-mono text-record-ink block truncate">
+                  {c.name || c.email}
+                  {c.is_keeper ? <span className="text-[9px] font-black uppercase tracking-[0.15em] text-record-red"> · keys</span> : null}
+                </span>
                 <span className="text-[9px] font-mono text-record-muted block truncate">{c.email}</span>
               </span>
               <span className="flex items-center gap-2 flex-shrink-0">
                 <span className="text-[9px] font-mono uppercase" style={{ color: c.active ? '#1e3a2b' : '#b3261e' }}>
-                  {c.active ? 'checking' : 'paused'}
+                  {c.active ? (c.is_keeper ? 'keeper' : 'checking') : 'paused'}
                 </span>
                 <span className="text-[11px] font-mono text-record-muted">{c.notes} notes</span>
               </span>
             </div>
           ))}
           <div className="flex items-center justify-between px-3 py-2">
-            <span className="text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">the guest list</span>
-            <ArrowRight className="w-3.5 h-3.5 text-record-ink" />
+            <span className="text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">
+              {isAdmin ? 'the guest list' : 'the whole list, in one place'}
+            </span>
+            {isAdmin && <ArrowRight className="w-3.5 h-3.5 text-record-ink" />}
           </div>
-        </Link>
+        </Panel>
 
         <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mt-6 mb-2">the diary</p>
-        <Link to="/AdminClimateLog" className="block bg-record-bone border-2 border-record-ink/20 divide-y divide-record-ink/10 mb-2">
+        <Panel to={isAdmin ? '/AdminClimateLog' : null} className="block bg-record-bone border-2 border-record-ink/20 divide-y divide-record-ink/10 mb-2">
           {!d.log.length && <p className="px-3 py-3 text-[11px] font-mono text-record-muted">Nothing written yet.</p>}
           {d.log.slice(0, 4).map((l) => (
             <div key={l.id} className="px-3 py-2">
@@ -175,19 +203,24 @@ export default function AdminClimateDesk() {
             <span className="text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-ink">
               {d.openNext} still owed
             </span>
-            <ArrowRight className="w-3.5 h-3.5 text-record-ink" />
+            {isAdmin && <ArrowRight className="w-3.5 h-3.5 text-record-ink" />}
           </div>
-        </Link>
+        </Panel>
 
         <div className="grid grid-cols-2 gap-2 mt-6">
           {[
             // Every tool the record needs, reachable from this one screen. A keeper should
             // never have to remember an address to tend the thing they are responsible for.
-            { to: '/AdminClimateReview', label: 'review queue' },
-            { to: '/AdminClimateCheckers', label: 'the guest list' },
-            { to: '/AdminClimateLog', label: "keeper's log" },
-            { to: '/AdminClimateCategories', label: 'categories' },
-            { to: '/AdminClimatePhotos', label: 'top crawl' },
+            { to: '/ClimateKeeperRoom', label: 'your room' },
+            ...(isAdmin
+              ? [
+                  { to: '/AdminClimateReview', label: 'review queue' },
+                  { to: '/AdminClimateCheckers', label: 'the guest list' },
+                  { to: '/AdminClimateLog', label: "keeper's log" },
+                  { to: '/AdminClimateCategories', label: 'categories' },
+                  { to: '/AdminClimatePhotos', label: 'top crawl' },
+                ]
+              : []),
             { to: '/ClimateCorrections', label: 'corrections' },
             { to: '/ClimateMethod', label: 'the method' },
             { to: '/ClimateHandover', label: 'handover' },
