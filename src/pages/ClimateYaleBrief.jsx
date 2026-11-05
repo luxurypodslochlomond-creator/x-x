@@ -71,8 +71,9 @@ const LAUNCH = [
 const ASKS = [
   { n: '01', title: 'A named academic sponsor', body: 'One person who reads the method and says in public whether it holds. Not an endorsement of the contents: a verdict on the method. If it fails, that is published too.' },
   { n: '02', title: 'A checker corps, with one named lead', body: 'People who read an entry, follow its source, and sign their name to what they found. The only item on any list here that cannot be bought.' },
-  { n: '03', title: 'Consideration of carrying it', body: 'The hosting is £1,000 a year at present size, and £10,000 for ten years. That is the cheapest part of this and it is stated plainly so nobody has to ask twice.' },
-  { n: '04', title: 'An honest verdict, in the open', body: 'If the answer is no, the record carries on and says so. If it is yes, the terms are published on the record where anyone can read them.' },
+  { n: '03', title: 'Consideration of carrying it', body: 'The technology, its building, and its maintenance for as long as it is carried. Hosting itself is £1,000 a year at present size, and £10,000 for ten years. Said plainly so nobody has to ask twice.' },
+  { n: '04', title: 'A fair living for the two who build it', body: 'Not a contract and not a salary negotiation: two people in Scotland who would go on building it, able to look after their family while they do. Every figure is published on the record, and neither founder takes a penny from it.' },
+  { n: '05', title: 'An honest verdict, in the open', body: 'If the answer is no, the record carries on and says so. If it is yes, the terms are published on the record where anyone can read them.' },
 ];
 
 const PARTS = [
@@ -222,9 +223,16 @@ export default function ClimateYaleBrief() {
           with everything, and the record may leave any host. That protects them as much as it protects this.
         </p>
         <p>
-          It was built in Scotland by two directors of a community interest company, around caring for family, and
-          the company has no paid staff. The record was built at no cost to its founder. That is not a plea: it is
-          the reason it can be offered instead of sold.
+          It was built in Scotland by two directors of an asset-locked community interest company, around caring
+          for family, and at no cost to its founder. What the record now asks is that the two people who build it
+          can live by building it: a fair living each, so that tending this is the work rather than something done
+          after it. A host covering the technology, the building and the maintenance is not overhead — it is the
+          difference between a record that lasts ten years and one that lasts until somebody gets tired.
+        </p>
+        <p>
+          Stated plainly, because it is the question every panel asks and usually has to ask twice: the builders
+          are paid, the founder is not, and the company's assets are locked so nobody can ever take the record
+          private or sell it on.
         </p>
         <div className="flex flex-wrap gap-2 pt-1">
           <Link to={createPageUrl('XEqualsX')} className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">x = x</Link>
@@ -235,7 +243,35 @@ export default function ClimateYaleBrief() {
         </div>
       </Section>
 
-      <Section n="07" title="If the answer is no">
+      <Section n="07" title="If anybody checks">
+        <p>
+          Due diligence here is not a document to be taken on trust. It is four things anybody can look at
+          tonight, one they cannot yet, and the record says which is which.
+        </p>
+        <div className="border-2 border-[#141210] divide-y divide-[#141210]/15 mt-1">
+          {[
+            ['The company', 'SC870603, a community interest company registered in Scotland and asset-locked. Nothing built here can be taken private, floated, or sold on by whoever happens to hold the keys.'],
+            ['The words', 'Every entry shows the origin it came from, on the entry itself, with a working link. No entry survives without one.'],
+            ['The fingerprints', 'Every published entry is sealed, and the seal is recomputed in the reader\u2019s own browser rather than on our server. A reader never has to trust us to check us. That is the entire design.'],
+            ['The money', '£1,000 a year at present size, stated in public, with the builder\u2019s costs published beside it and neither founder drawing from it.'],
+            ['The code', 'Not public yet. This is the real gap, it is the largest one, and it is days of work rather than months. Until it closes, nothing here should be called auditable.'],
+          ].map(([title, body]) => (
+            <div key={title} className="px-3 lg:px-4 py-2.5">
+              <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">{title}</p>
+              <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#3a342c] mt-1">{body}</p>
+            </div>
+          ))}
+        </div>
+        <p>
+          Two things will not be claimed here, because claiming them would be the first lie on the record. It is
+          not on a chain, and it is not peer-to-peer: it is a database on a server, and it says so. What it does
+          have is a full export and no lock-in, so it can be lifted whole and carried on somewhere else — by a
+          host, by a reader, by two people who are no longer young, or by nobody at all. A thing that can leave is
+          harder to hold hostage than a thing that swears it cannot die.
+        </p>
+      </Section>
+
+      <Section n="08" title="If the answer is no">
         <p>
           The record carries on. It is not built to need any particular host, and it will say plainly what it is
           and is not, whether or not anybody funds it. A no costs the record nothing except time, and is better

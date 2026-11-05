@@ -48,7 +48,7 @@ First, a named academic sponsor who will read the method and say in public wheth
 
 Second, a checker corps with one named lead: students, perhaps, in a department that already teaches this.
 
-Third, consideration of carrying it, including the hosting, which is modest: one thousand pounds a year at its present size.
+Third, consideration of carrying it: the hosting, which is modest at one thousand pounds a year at its present size, the technology that will need building and maintaining, and a fair living for the two people in Scotland who build it and would go on building it. A record nobody can afford to tend is not a record that lasts.
 
 I am not asking for an answer now. I am asking for a conversation, and for somebody to read the method page before the front page, because the method is where this either stands or it does not.
 
