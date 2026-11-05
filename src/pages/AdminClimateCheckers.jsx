@@ -95,6 +95,10 @@ export default function AdminClimateCheckers() {
           They cannot publish, edit or delete anything, and they never see a submitter's email address. Only you and the
           other keepers can add or remove names.
         </p>
+        <p className="text-[11px] font-mono text-record-muted leading-relaxed mb-6 border-l-2 border-record-ink/25 pl-3">
+          A keeper can always check — the checking door lets them straight in. So a keeper is added once, not twice:
+          they do not need a line on this list as well.
+        </p>
 
         <div className="bg-record-bone border-2 border-record-ink/20 p-4 mb-8">
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-3">add a checker</p>

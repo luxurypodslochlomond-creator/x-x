@@ -4,61 +4,79 @@
     <mj-preview>{{body}}</mj-preview>
     <mj-attributes>
       <mj-all font-family="'Segoe UI', Arial, Helvetica, sans-serif" />
-      <mj-section background-color="#f4efe4" padding="0 32px" />
-      <mj-text color="#1a1612" font-size="15px" line-height="1.65" padding="0" />
-      <mj-class name="h" font-family="Oswald, Arial, sans-serif" font-weight="700" />
+      <mj-section background-color="#f4efe4" padding="0 28px" />
+      <mj-text color="#1a1612" font-size="16px" line-height="1.6" padding="0" />
+      <mj-class name="h" font-family="Oswald, Impact, 'Arial Narrow', Arial, sans-serif" font-weight="700" />
+      <mj-class name="mono" font-family="'Courier New', Courier, monospace" />
     </mj-attributes>
   </mj-head>
   <mj-body background-color="#f4efe4">
-    <mj-section background-color="#b3261e" padding="18px 32px">
+
+    <mj-section background-color="#141210" padding="20px 28px">
       <mj-column>
-        <mj-image src="https://media.base44.com/images/public/6889f31e76713b9cd47e043c/cc3f0c1b8_logo.png" width="104px" align="left" padding="0" alt="SORTED" />
-        <mj-text color="#ffffff" mj-class="h" font-size="15px" padding="10px 0 0 0" letter-spacing="1px">
-          TOGETHER WE CAN CHANGE CLIMATE
+        <mj-text mj-class="mono" font-size="11px" font-weight="bold" color="#efe7d6" letter-spacing="3px" padding="0">
+          RECORD OF THE TIME
+        </mj-text>
+        <mj-text mj-class="mono" font-size="10px" color="#e2602a" letter-spacing="2px" padding="6px 0 0 0">
+          TOGETHER WE CAN CHANGE CLIMATE · x = x
         </mj-text>
       </mj-column>
     </mj-section>
 
-    <mj-section padding="36px 32px 8px">
+    <mj-section background-color="#e2602a" padding="10px 28px">
       <mj-column>
-        <mj-text color="#6b6258" font-size="11px" letter-spacing="2px" padding="0 0 14px 0">
-          THE RECORD
+        <mj-text mj-class="mono" font-size="10px" font-weight="bold" color="#141210" letter-spacing="3px" padding="0">
+          YOUR PLACE ON THE RECORD
         </mj-text>
-        <mj-text mj-class="h" font-size="30px" line-height="1.15" padding="0 0 10px 0">
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="34px 28px 0">
+      <mj-column>
+        <mj-text mj-class="h" font-size="40px" line-height="1.02" letter-spacing="-1px" padding="0 0 14px 0">
           {{headline}}
         </mj-text>
-        <mj-text color="#6b6258" font-size="15px" line-height="1.65" padding="0">
-          Hello {{first_name}},
+        <mj-text mj-class="mono" font-size="11px" color="#6b6258" letter-spacing="2px" padding="0">
+          {{first_name}}
         </mj-text>
       </mj-column>
     </mj-section>
 
-    <mj-section padding="18px 32px 8px">
+    <mj-section padding="22px 28px 0">
       <mj-column>
-        <mj-text font-size="16px" line-height="1.7" padding="0">
+        <mj-text font-size="17px" line-height="1.65" padding="0">
           {{body}}
         </mj-text>
       </mj-column>
     </mj-section>
 
-    <mj-section padding="20px 32px 32px">
+    <mj-section padding="30px 28px 0">
       <mj-column>
-        <mj-text font-size="14px" line-height="1.7" padding="0" color="#1a1612">
-          Everything you did stays on the record, in your name, exactly as you wrote it. Nothing is taken off
-          because a name came off the list.
+        <mj-button href="{{record_url}}" background-color="#b3261e" color="#ffffff" border-radius="4px" inner-padding="16px 26px" align="left" font-family="'Segoe UI', Arial, sans-serif" font-size="15px" font-weight="700" padding="0">
+          Open the record →
+        </mj-button>
+        <mj-text mj-class="mono" font-size="10px" color="#6b6258" padding="14px 0 0 0" line-height="1.7">
+          <a href="{{record_url}}" style="color:#6b6258;">{{record_url}}</a>
         </mj-text>
       </mj-column>
     </mj-section>
 
-    <mj-section padding="0 32px 36px">
+    <mj-section padding="34px 28px 0">
       <mj-column>
-        <mj-divider border-color="#1a1612" border-width="1px" padding="0 0 16px 0" />
-        <mj-text font-size="13px" color="#6b6258" line-height="1.7" padding="0">
-          Signed by the keepers of the record.
-          <br />
-          <a href="{{record_url}}" style="color:#b3261e;text-decoration:none;">{{record_url}}</a>
+        <mj-divider border-color="#141210" border-width="2px" padding="0 0 14px 0" />
+        <mj-text font-size="13px" color="#6b6258" line-height="1.65" padding="0">
+          Everything you did stays on the record, in your name, exactly as you wrote it. Nothing is taken off because a name came off the list.
         </mj-text>
       </mj-column>
     </mj-section>
+
+    <mj-section padding="28px 28px 36px">
+      <mj-column>
+        <mj-text mj-class="mono" font-size="10px" color="#141210" letter-spacing="3px" font-weight="bold" padding="0">
+          x = x
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
   </mj-body>
 </mjml>
