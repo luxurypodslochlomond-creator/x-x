@@ -422,8 +422,20 @@ export default function AdminClimateReview() {
             <div className="space-y-1">
               {auditLogs.map(log => (
                 <div key={log.id} className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[9px] font-mono text-[#6b6258] border-l-2 border-l-[#1a1612]/20 pl-2">
-                  <span className={log.action === 'published' ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}>
-                    {log.action === 'published' ? '✓ Published' : '✗ Rejected'}
+                  {/* An access change is neither a publication nor a rejection: someone was
+                      given the keys, paused, let back in or taken off the list. Saying
+                      "rejected" over a person's name would be the record telling a lie about
+                      a decision nobody made. */}
+                  <span className={['published', 'access_granted', 'access_restored'].includes(log.action) ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}>
+                    {{
+                      published: '✓ Published',
+                      held: '⏸ Held',
+                      rejected: '✗ Rejected',
+                      access_granted: '🔑 Given the keys',
+                      access_paused: '⏸ Access paused',
+                      access_restored: '🔑 Access restored',
+                      access_removed: '✗ Taken off the list',
+                    }[log.action] || log.action}
                   </span>
                   <span className="truncate flex-1">{log.entity_title}</span>
                   <span className="text-right whitespace-nowrap">{log.reviewer_email}</span>

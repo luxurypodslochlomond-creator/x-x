@@ -25,18 +25,49 @@ export default function AddKeeper({ onAdded }) {
     setBusy(true);
     setMessage('');
     try {
-      await base44.users.inviteUser(clean, 'admin');
-      setMessage(`${name.trim() || clean} holds the keys now and has been sent the invitation.`);
+      // A keeper of the record is NOT an administrator of the app. They are invited as an
+      // ordinary user and given a keeper line on the record itself, which is the only power
+      // they need: publish, correct, sign, and add people to this list. Handing out the app's
+      // admin role would also hand over the vault, the finance and every submitter's address,
+      // and being admin is how the record's keys used to leak out of the record.
+      const me = await base44.auth.me().catch(() => null);
+      const created = await base44.entities.ClimateChecker.create({
+        email: clean,
+        name: name.trim() || clean,
+        is_keeper: true,
+        active: true,
+        note: 'Keeper — holds the record’s keys',
+        added_by: me?.email || '',
+      });
+
+      let invited = true;
+      try {
+        await base44.users.inviteUser(clean, 'user');
+      } catch (e) {
+        invited = false;
+      }
+
+      // Their line on the record, the letter if they need one, and a note to you that it
+      // happened. Never fatal to the addition: the key is already in their hand.
+      await base44.functions
+        .invoke('climateCheckerNotice', {
+          email: clean,
+          name: name.trim(),
+          state: 'invited',
+          person_letter: !invited,
+          row_id: created?.id || '',
+        })
+        .catch(() => {});
+
+      setMessage(
+        invited
+          ? `${name.trim() || clean} holds the keys now and has been sent the invitation.`
+          : `${name.trim() || clean} holds the keys now. They already had an account, so no new sign-in letter was sent — they can go straight in.`
+      );
       setEmail(''); setName('');
       onAdded?.();
     } catch (e) {
-      // An address that is already an app user cannot be invited a second time. The
-      // honest answer is to say so, not to claim an email went out.
-      setMessage(
-        e?.response?.status === 409 || /already|exists/i.test(e?.message || '')
-          ? 'That address already has an account, so no new letter was sent. To give them the keys, open the desk roster — the account is already waiting for them.'
-          : (e?.message || 'That did not go through. Nothing was sent.')
-      );
+      setMessage(e?.message || 'That did not go through. Nothing was changed.');
     } finally {
       setBusy(false);
     }

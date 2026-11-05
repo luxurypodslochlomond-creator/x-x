@@ -36,7 +36,7 @@ export default function AdminClimateCheckers() {
     setMessage('');
     try {
       const me = await base44.auth.me();
-      await base44.entities.ClimateChecker.create({
+      const created = await base44.entities.ClimateChecker.create({
         email: clean,
         name: name.trim(),
         active: true,
@@ -49,6 +49,16 @@ export default function AdminClimateCheckers() {
       } catch (e) {
         invited = false;
       }
+      // Being counted in is written on the record, the same as being counted out.
+      await base44.functions
+        .invoke('climateCheckerNotice', {
+          email: clean,
+          name: name.trim(),
+          state: 'invited',
+          person_letter: !invited,
+          row_id: created?.id || '',
+        })
+        .catch(() => {});
       setMessage(
         invited
           ? `${clean} is on the list and has been sent an invitation.`
