@@ -50,6 +50,8 @@ Second, a checker corps with one named lead: students, perhaps, in a department 
 
 Third, consideration of carrying it: the hosting, which is modest at one thousand pounds a year at its present size, the technology that will need building and maintaining, and a fair living for the two people in Scotland who build it and would go on building it. A record nobody can afford to tend is not a record that lasts.
 
+One thing about who carries it belongs in a letter like this, because it is the difference between a project and an institution. The record is held by Universal Frequency 51, a community interest company registered in Scotland, whose directors are [Gill's full name] and Brian Hughes. It is they who built it, at no cost to me, and they who have agreed to go on building and tending it. My own wish, and theirs, is that this outlasts all of us: not something that ends when its founder stops writing, but a record an institution can carry and a small number of people can be paid to keep, for as long as it is worth reading. That is why I am asking for a living rather than a fee for the code. The code is nothing without people who will still be answering the letters in ten years.
+
 I am not asking for an answer now. I am asking for a conversation, and for somebody to read the method page before the front page, because the method is where this either stands or it does not.
 
 The record is enclosed in outline, with the figures counted from it this week and a plain list of what is still missing before it could be launched properly. I would rather be told plainly that it is not a fit than be encouraged politely.
@@ -89,9 +91,10 @@ export default function YaleLetter() {
 
       <div className="px-4 lg:px-6 py-3 border-t border-[#141210]/20">
         <p className="text-[10.5px] font-mono leading-relaxed text-[#5a5246]">
-          Two things are hers alone to fill: the recipient's name, and her own account of her work. Nothing
-          biographical has been invented here — the record does not know what she published, where, or when, and
-          a letter that guessed at a life's work would be the first thing Yale checked.
+          Three things are hers alone to fill: the recipient's name, her own account of her work, and Gill's full
+          name in the directors' paragraph. Nothing biographical has been invented here — the record does not know
+          what she published, where, or when, and a letter that guessed at a life's work would be the first thing
+          Yale checked.
         </p>
       </div>
     </div>
