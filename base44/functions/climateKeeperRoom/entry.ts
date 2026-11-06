@@ -84,10 +84,24 @@ export default async function (req) {
 
     // Who am I here? Answered without needing the queue, so the record's own bar can ask
     // once and offer the door to the right person.
+    // A keeper is a checker as well: the two are one person with two capacities, and the
+    // record already answers yes to both. The reason for a refusal is returned so the
+    // workroom can tell a stranger apart from someone who has been paused.
     if (action === 'whoami') {
       const who = await resolveChecker(base44);
-      if (who.error) return Response.json({ isKeeper: false, isChecker: false });
-      return Response.json({ isKeeper: who.isKeeper, isChecker: who.isChecker, name: who.name });
+      if (who.error) {
+        return Response.json({
+          isKeeper: false,
+          isChecker: false,
+          reason: who.error,
+          paused: Boolean(who.paused),
+        });
+      }
+      return Response.json({
+        isKeeper: who.isKeeper,
+        isChecker: who.isChecker,
+        name: who.name,
+      });
     }
 
     const who = await requireKeeper(base44);

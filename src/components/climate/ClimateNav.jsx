@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { Search as SearchIcon } from 'lucide-react';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
-import useKeeper from '@/components/climate/useKeeper';
+import { useRecordCapacity } from '@/components/climate/useKeeper';
 
 // ── THE KEEPER'S DOOR ──
 // The desk used to sit in the app's own admin list, which put the record's working page in a
@@ -98,7 +98,10 @@ function MobileLink({ item, active, quiet }) {
 
 export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   const isActive = (page) => currentPage === page;
-  const keeper = useKeeper();
+  // Either capacity opens the workroom: a keeper decides, a checker looks, and one person is
+  // often both. A door only one of them could see was a door the other had to remember.
+  const capacity = useRecordCapacity();
+  const keeper = capacity.isKeeper || capacity.isChecker;
   const searchActive = isActive('ClimateSearch');
 
   const searchBox = (
