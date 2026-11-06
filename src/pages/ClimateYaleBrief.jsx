@@ -15,24 +15,27 @@ import YaleLetter from '@/components/climate/host/YaleLetter';
 // Nothing on this page asks her for money, because she has said she has none for
 // it and neither do we. The ask is people and carrying. That is the whole summary.
 
+// Every line with a figure in it walks to the thing it counts. A number a reader cannot
+// reach is a number asking to be believed, and this page exists precisely so that nobody
+// has to take our word for anything on it.
 const EXISTS = [
-  '19 published entries — 10 solutions, 9 crises',
-  'Every one of them carries a working link to its origin. No entry survives without one.',
-  '44 cryptographic seals — each entry fingerprinted, checkable in a reader’s own browser',
-  '18 wire entries, dated and sourced',
-  '3 actions, each with an organiser’s own contact line',
-  '65 tongues, every one labelled by how it was made',
-  'Three named keepers on the roster: Gillian Barbara Brown, Brian Hughes, Janine Selendy',
-  'No account needed to read any of it. No tracking, no advertising, no paid placement.',
+  { t: '19 published entries — 10 solutions, 9 crises', to: 'TogetherChangeClimate' },
+  { t: 'Every one of them carries a working link to its origin. No entry survives without one.', to: 'TogetherChangeClimate' },
+  { t: '44 cryptographic seals — each entry fingerprinted, checkable in a reader’s own browser', to: 'ClimateSeals' },
+  { t: '18 wire entries, dated and sourced', to: 'ClimateWire' },
+  { t: '3 actions, each with an organiser’s own contact line', to: 'TogetherChangeClimate' },
+  { t: '65 tongues, every one labelled by how it was made', to: 'TogetherChangeClimate' },
+  { t: 'Three named keepers on the roster: Gillian Barbara Brown, Brian Hughes, Janine Selendy', to: 'ClimateHandover' },
+  { t: 'No account needed to read any of it. No tracking, no advertising, no paid placement.', to: 'ClimatePrivacy' },
 ];
 
 const NOT_YET = [
-  '0 independent verdicts. The checking office is built and nobody has signed into it.',
-  '14 of 19 entries carry no statement of how well they are known.',
-  '4 of 4 gatherings have no contact line, so nobody can actually join one yet.',
-  'Every entry is unsigned. Nothing is attributed to a person who did not write it, and each entry says plainly that it is unsigned.',
-  'The code is not public, so it cannot yet be audited or carried away.',
-  'No checker has yet been invited, so the checking office has had nobody in it.',
+  { t: '0 independent verdicts. The checking office is built and nobody has signed into it.', to: 'ClimateFellows' },
+  { t: '14 of 19 entries carry no statement of how well they are known.', to: 'ClimateMethod' },
+  { t: '4 of 4 gatherings have no contact line, so nobody can actually join one yet.', to: 'TogetherChangeClimate' },
+  { t: 'Every entry is unsigned. Nothing is attributed to a person who did not write it, and each entry says plainly that it is unsigned.', to: 'ClimateMethod' },
+  { t: 'The code is not public, so it cannot yet be audited or carried away.', to: 'ExtractionProofCovenant' },
+  { t: 'No checker has yet been invited, so the checking office has had nobody in it.', to: 'ClimateFellows' },
 ];
 
 const NEEDS = [
@@ -125,9 +128,15 @@ function Column({ tone, heading, items }) {
         {heading}
       </p>
       <ul className="divide-y divide-[#141210]/12">
-        {items.map((t) => (
-          <li key={t} className="px-3 py-2 text-[11px] lg:text-[11.5px] font-mono leading-relaxed text-[#141210]">
-            {t}
+        {items.map((item) => (
+          <li key={item.t}>
+            <Link
+              to={createPageUrl(item.to)}
+              className="group flex items-start gap-2 px-3 py-2 text-[11px] lg:text-[11.5px] font-mono leading-relaxed text-[#141210] hover:bg-[#141210]/5 hover:text-[#b3261e] transition-colors"
+            >
+              <span className="flex-1">{item.t}</span>
+              <span aria-hidden="true" className="text-[#141210]/35 group-hover:text-[#b3261e] flex-shrink-0">→</span>
+            </Link>
           </li>
         ))}
       </ul>
@@ -144,7 +153,7 @@ export default function ClimateYaleBrief() {
       statement="One page, no asking voice. What exists tonight, what does not, what it would take, and who it is for. Written to be handed over, copied whole, or read straight into a letter of her own."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
-      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International."
+      footer="Forty years of her work, carried into a record that does not need her to be alive to defend it — and cannot be bought out from under the people it was built for. For Janine. For whoever is reading it in a hundred years."
     >
       <div className="flex flex-wrap items-center gap-2 mb-7">
         <CopyLine text={PLAIN} label="Copy the summary" />
@@ -153,6 +162,14 @@ export default function ClimateYaleBrief() {
           className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors"
         >
           Her five questions, answered
+        </Link>
+        {/* The letter stands on two pages on purpose: here, and in the brief she would
+            actually hand over. Whichever door she opens, the letter is behind it. */}
+        <Link
+          to={createPageUrl('ClimateBrief')}
+          className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors"
+        >
+          The brief, with the letter
         </Link>
       </div>
 

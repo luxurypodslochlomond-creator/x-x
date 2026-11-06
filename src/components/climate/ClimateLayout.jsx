@@ -24,18 +24,13 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // They sit in one quiet place, in the footer of every page of the record. The Buttons —
 // the page that lists every button and what it does — sits here too: a host or keeper
 // is handed the link, and finds it again at the foot of any page of the record.
-// Terms and Privacy come first because on a phone this rail starts at its left edge:
-// they used to be the last two, which meant a reader on a handset had to swipe to find
-// the two links that say what the record does with their words and their address.
-// They stay in the foot of every page, where a reader looks for them.
-// Kept off the public foot, on purpose: "For Janine" and "For a host" are working pages —
-// they name what is unfinished, what a handover costs, and who holds the keys. Both say so
-// themselves at the top. They stay live at their own addresses, handed over by link to the
-// person they were written for, and are never a door on the record a passing reader can open.
+// The order is the reading order, not an accident. What the record IS comes first — the
+// brief you would hand somebody, and the two pages that say plainly what it costs and how
+// to help carry it — and the legal ground comes last, where a foot of a page is expected to
+// keep it. Terms and Privacy used to lead because the rail could not be swiped on a handset;
+// the foot wraps now, so nothing can be off-screen and the grouping can be honest instead
+// of defensive.
 const FOOTER_LINKS = [
-  { label: 'Terms', page: 'ClimateTerms' },
-  { label: 'Privacy', page: 'ClimatePrivacy' },
-  { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'The Brief', page: 'ClimateBrief' },
   // The page that says what it costs to keep this alive, what it will not let a host
   // do, who holds the keys today, and what is still open. It was written and then left
@@ -47,6 +42,9 @@ const FOOTER_LINKS = [
   // be one. It was written and then left with nothing linking to it, which made it a page
   // only its author could open. Anyone who wants to help should be able to find the way in.
   { label: 'Checkers', page: 'ClimateFellows' },
+  { label: 'The Buttons', page: 'ClimateGuide' },
+  { label: 'Terms', page: 'ClimateTerms' },
+  { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
 
 // Pages where someone is waiting on an answer, not reading. See the prefetch effect below.
