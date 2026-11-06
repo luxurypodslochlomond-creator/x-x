@@ -11,6 +11,7 @@ import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
 import KeeperDoor from '@/components/climate/KeeperDoor';
 import RecordCover from '@/components/climate/RecordCover';
+import RecordGrain from '@/components/climate/RecordGrain';
 import RecordCosmos from '@/components/climate/RecordCosmos';
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
@@ -166,7 +167,10 @@ export default function ClimateLayout({ children, currentPage }) {
           it and a record that is a picture. Cheap to run, too: one composited layer, no
           repaint per scroll, nothing downloaded that a phone was not already sent. */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-        <RecordCover position="center 42%" strength={0.08} priority />
+        <RecordCover position="center 42%" strength={0.17} priority />
+        {/* The sheet has a surface, not just a colour: tooth and foxing over the painting,
+            under every word. See RecordGrain — it is drawn, not downloaded. */}
+        <RecordGrain />
       </div>
 
       <div className="relative" style={{ zIndex: 1 }}>
