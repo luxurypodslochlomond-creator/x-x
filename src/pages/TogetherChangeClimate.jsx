@@ -181,14 +181,16 @@ const KIND_WORDS = {
 const ALL_KIND_WORDS = new Set(Object.values(KIND_WORDS).flat());
 const kindOfWord = (word) => Object.keys(KIND_WORDS).find(k => KIND_WORDS[k].includes(word)) || null;
 
+import useRecordViewState from '@/components/climate/useRecordViewState';
+
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
   const [groups, setGroups] = useState([]);
   const [actions, setActions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedType, setSelectedType] = useState('all');
+  const [query, setQuery] = useRecordViewState('query', '');
+  const [selectedCategory, setSelectedCategory] = useRecordViewState('category', 'all');
+  const [selectedType, setSelectedType] = useRecordViewState('kind', 'all');
   const { isRTL } = useSiteLanguage();
   const [copied, setCopied] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
@@ -663,7 +665,7 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── CONTENT ── */}
-      <div ref={contentRef} className="bg-[#efe7d6]">
+      <div id="record-entries" ref={contentRef} className="bg-[#efe7d6]">
         {loading ? (
           <div className="flex flex-col items-center py-20">
             <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />

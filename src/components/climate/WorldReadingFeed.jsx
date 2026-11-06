@@ -72,7 +72,7 @@ export default function WorldReadingFeed({ stories }) {
               <p className="text-[13px] font-bold text-[#141210] leading-snug mb-1.5" style={{ fontFamily: 'var(--font-body)' }}>
                 {s.title}
               </p>
-              <p className="text-[10px] font-mono text-[#5a5246]">
+              <p className="record-meta text-[#5a5246]">
                 Reaching <span className="font-black text-[#b3261e]">{s.countries}</span> {s.countries === 1 ? 'country' : 'countries'}
                 <span className="text-[#141210]/30 mx-1.5">·</span>
                 <span className="font-black text-[#141210]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'read' : 'reads'}

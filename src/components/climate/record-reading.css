@@ -1,0 +1,84 @@
+/* One reading treatment for the whole record. Prose is not a terminal label.
+   The legacy pages retain their structures, photographs, controls and factual colours. */
+.record-pages {
+  --font-reading: var(--font-record-reading);
+  font-family: var(--font-reading);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.record-pages :is(p, blockquote, li):not(.uppercase):not(.font-black):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *) {
+  font-family: var(--font-reading) !important;
+  font-size: clamp(1.0625rem, 1.015rem + .2vw, 1.1875rem) !important;
+  line-height: 1.68 !important;
+  letter-spacing: 0;
+  font-kerning: normal;
+  font-variant-ligatures: common-ligatures;
+  overflow-wrap: break-word;
+  max-inline-size: 65ch;
+}
+.record-pages blockquote:not([data-record-technical] *) {
+  font-size: clamp(1.35rem, 1.1rem + .8vw, 1.9rem) !important;
+  line-height: 1.48 !important;
+  max-inline-size: 43ch;
+}
+.record-pages p.uppercase { font-size: .6875rem; line-height: 1.5; }
+.record-pages p.break-all { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; line-height: 1.6; }
+.record-pages .record-meta {
+  font-family: var(--font-body);
+  font-size: .75rem;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+.record-pages :is(p, blockquote) { animation: none !important; }
+.record-pages .twcc-scanlines::before { content: none; }
+.record-pages :is(input, textarea, select):not(dialog *):not([role="dialog"] *) { font-size: 1rem; }
+
+/* One continuous sheet, not successively opaque sheets hiding the painting.
+   Controls and dialogs keep their solid backgrounds. Light panels are a wash of
+   the same paper, not a second artwork or a blur over the words. */
+.record-pages :is(div, section, article, p)[class~="bg-[#efe7d6]"]:not(dialog *):not([role="dialog"] *),
+.record-pages :is(div, section, article, p)[class~="bg-[#f4efe4]"]:not(dialog *):not([role="dialog"] *),
+.record-pages :is(div, section, article)[class~="bg-record-paper"]:not(dialog *):not([role="dialog"] *),
+.record-pages :is(div, section, article)[class~="bg-record-bone"]:not(dialog *):not([role="dialog"] *) { background-color: transparent; }
+.record-pages :is(div, section, article)[class~="bg-[#f7f1e5]"]:not(dialog *):not([role="dialog"] *) {
+  background-color: rgb(var(--record-paper) / .6);
+}
+
+/* Older pages with a solid opening now use the same plate as the shared shell.
+   An opening already carrying its own cover is left alone. No picture is added
+   to buttons, maps, media players or the entry photographs. */
+.record-pages > div > :is(div, section)[class~="bg-[#241d16]"]:not(:has(> img[aria-hidden="true"])),
+.record-pages > div > :is(div, section)[class~="bg-[#141210]"]:not(:has(> img[aria-hidden="true"])) {
+  background-color: rgb(var(--record-earth));
+  background-image: linear-gradient(rgb(var(--record-earth) / .86), rgb(var(--record-earth) / .93)), var(--record-cover);
+  background-size: cover;
+  background-position: center 40%;
+}
+.climate-record [class~="bg-[#241d16]"] [class~="text-[#e2602a]"],
+.climate-record [class~="bg-[#241d16]"] [class~="hover:text-[#e2602a]"]:hover {
+  color: rgb(var(--record-light-signal));
+}
+.climate-record [class~="bg-[#241d16]"] [class~="border-[#e2602a]"] {
+  border-color: rgb(var(--record-light-signal));
+}
+.record-pages :is([class~="text-[#efe7d6]/40"], [class~="text-[#efe7d6]/45"], [class~="text-[#efe7d6]/60"]) {
+  color: rgb(var(--record-bone) / .78);
+}
+.record-pages [class~="text-[#5a5246]/60"] { color: rgb(var(--record-muted)); }
+
+/* The small detail is useful: a clear door, a visible focus, and the line that
+   was opened marked on return. No animated flourish asks to be watched. */
+.record-pages a { text-underline-offset: .22em; }
+.record-pages :is(a, button, input, textarea, select):focus-visible,
+.record-pages a[data-record-returned] {
+  outline: 2px solid rgb(var(--record-ocean) / .75);
+  outline-offset: 4px;
+}
+.record-pages [id] { scroll-margin-top: 11rem; }
+.record-pages ::selection { background: rgb(var(--record-light-signal) / .42); }
+@media print {
+  .record-pages { background: rgb(var(--record-paper)); }
+  .record-pages a[data-record-returned] { outline: none; }
+}
+html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }

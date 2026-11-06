@@ -18,6 +18,14 @@
 
    Warm paper has always been the ground. The words are stated plainly on it. */
 @font-face {
+  font-family: 'Record Caslon';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/adobe-caslon-400-normal.woff2') format('woff2');
+}
+
+@font-face {
   font-family: 'Record Cherokee';
   font-style: normal;
   font-weight: 100 900;
@@ -131,6 +139,10 @@ button:focus-visible {
     /* The mark's own colour — cobalt. It belongs to x = x and to nothing else on the
        record: the orange is the record's signal, this is the line it rests on. */
     --record-mark: 27 43 240;
+    --font-record-reading: 'Record Caslon', 'Source Serif 4', Georgia, serif;
+    --record-earth: 36 29 22;
+    --record-ocean: 15 95 122;
+    --record-light-signal: 127 201 228;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
@@ -174,6 +186,10 @@ button:focus-visible {
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
     --record-mark: 27 43 240;
+    --font-record-reading: 'Record Caslon', 'Source Serif 4', Georgia, serif;
+    --record-earth: 36 29 22;
+    --record-ocean: 15 95 122;
+    --record-light-signal: 127 201 228;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
@@ -238,8 +254,7 @@ button:focus-visible {
    widens them later is spending contrast, and contrast is the one thing a public record
    cannot borrow back from anywhere. If it ever needs to come down, bring these numbers
    up, not the other way round. */
-.record-field .bg-\[\#efe7d6\] { background-color: rgba(239, 231, 214, 0.88); }
-.record-field .bg-\[\#f4efe4\] { background-color: rgba(244, 239, 228, 0.9); }
+/* The record's continuous paper and reading treatment live in record-reading.css. */
 
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
 .beadie-paper { background-color: #f4efe4; }

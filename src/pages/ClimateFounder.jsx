@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useRecordBack from '@/components/climate/useRecordBack';
 import { ArrowLeft, ArrowRight, Globe, BookOpen, Film, Award, Heart } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
@@ -36,14 +37,14 @@ const ACHIEVEMENTS = [
 ];
 
 export default function ClimateFounder() {
-  const navigate = useNavigate();
+  const back = useRecordBack();
 
   return (
     <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Header — paper, beacon, back */}
       <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
         <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
-          <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+          <button onClick={back} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">The Founder</span>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import useRecordBack from '@/components/climate/useRecordBack';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
@@ -19,7 +20,7 @@ function countryName(code) {
 // Not who read them. Not when. Just that they landed — the signal, not the surveiller.
 export default function ClimateReachPlace() {
   const { placeType, place } = useParams();
-  const navigate = useNavigate();
+  const back = useRecordBack('/ClimateImpact');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -65,7 +66,8 @@ export default function ClimateReachPlace() {
       {/* Header */}
       <div className="flex items-center gap-3 px-4 lg:px-10 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
         <button
-          onClick={() => navigate(-1)}
+          onClick={back}
+          aria-label="Back to the page I came from"
           className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
         >
           <ArrowLeft className="w-5 h-5" />
@@ -145,7 +147,7 @@ export default function ClimateReachPlace() {
                   <p className="text-[13px] font-bold text-[#141210] leading-snug mb-1.5">
                     {s.title}
                   </p>
-                  <p className="text-[10px] font-mono text-[#5a5246]">
+                  <p className="record-meta text-[#5a5246]">
                     <span className="font-black text-[#b3261e]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'read' : 'reads'} from {displayName}
                   </p>
                 </Link>

@@ -29,8 +29,8 @@ function fmtAccessed(d) {
 
 const Row = ({ label, children }) => (
   <div className="grid grid-cols-[74px_1fr] gap-2 items-baseline">
-    <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#0f5f7a]">{label}</span>
-    <span className="text-[11px] lg:text-[12px] font-mono text-[#141210] leading-relaxed min-w-0">{children}</span>
+    <span className="text-[11px] font-black font-mono uppercase tracking-widest text-record-ocean">{label}</span>
+    <span className="text-[13px] lg:text-[14px] font-body text-record-ink leading-relaxed min-w-0">{children}</span>
   </div>
 );
 

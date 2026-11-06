@@ -361,12 +361,12 @@ const AuthenticatedApp = () => {
       <Route path="/AdminClimateCategories" element={<ClimateLayout currentPage="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminClimatePhotos" element={<ClimateLayout currentPage="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminClimateLog" element={<ClimateLayout currentPage="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></ClimateLayout>} />
-      <Route path="/ClimateChecking" element={<ClimateLayout currentPage="ClimateChecking"><ClimateCheckingPage /></ClimateLayout>} />
+      <Route path="/ClimateChecking" element={<Navigate to="/ClimateKeeperRoom?tab=check" replace />} />
       <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><AdminOnly><AdminClimateCheckersPage /></AdminOnly></ClimateLayout>} />
       {/* The desk is the record's own desk, so it opens to the record's own keys. Behind the
           building's admin door, a keeper invited to hold them was stopped on the one page built
           for her and told "Admins only". KeeperKey asks the record instead. */}
-      <Route path="/AdminClimateDesk" element={<ClimateLayout currentPage="AdminClimateDesk"><KeeperKey><AdminClimateDeskPage /></KeeperKey></ClimateLayout>} />
+      <Route path="/AdminClimateDesk" element={<Navigate to="/ClimateKeeperRoom?tab=desk" replace />} />
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/Uf51Road" element={<LayoutWrapper currentPageName="Uf51Road"><AdminOnly><Uf51RoadPage /></AdminOnly></LayoutWrapper>} />

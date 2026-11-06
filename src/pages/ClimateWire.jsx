@@ -5,6 +5,7 @@ import { ArrowRight, Plus } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import NewsSubmitForm from '@/components/climate/NewsSubmitForm';
+import useRecordViewState from '@/components/climate/useRecordViewState';
 
 // The wire — the record's front page. What changed, where, who says so, and what can be
 // copied from it. Ordered by date, never by attention. Nothing counts here: no likes,
@@ -20,7 +21,7 @@ const FILTERS = [
 export default function ClimateWire() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useRecordViewState('verification', 'all');
   const [formOpen, setFormOpen] = useState(false);
   const [reload, setReload] = useState(0);
 

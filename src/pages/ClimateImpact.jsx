@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useRecordBack from '@/components/climate/useRecordBack';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
@@ -43,7 +44,7 @@ function isKnownCountryName(input) {
 }
 
 export default function ClimateImpact() {
-  const navigate = useNavigate();
+  const back = useRecordBack();
   // Shares one read of the numbers with the record's impact strip: tapping through
   // from the record shows them at once, and the page refreshes them behind the scenes.
   const { data: stats, isPending, refetch } = useClimateImpactStats();
@@ -107,9 +108,9 @@ export default function ClimateImpact() {
 
       {/* Header */}
       <div className="flex items-center gap-3 px-4 py-3 bg-[#241d16] border-b-2 border-[#e2602a]">
-        <Link to={createPageUrl('TogetherChangeClimate')} className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+        <button onClick={back} aria-label="Back to the page I came from" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
           <ArrowLeft className="w-5 h-5" />
-        </Link>
+        </button>
         <div>
           <h1 className="font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
             Global Impact
@@ -130,9 +131,9 @@ export default function ClimateImpact() {
           className="text-center"
         >
           <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">Reads of the record</p>
-          <div className="font-black text-[#e2602a] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(64px, 22vw, 96px)', letterSpacing: '-0.04em' }}>
+          <Link to="#reading-map" aria-label={`${total.toLocaleString()} reads, open the map of reads`} className="block font-black text-[#e2602a] leading-none underline decoration-1 underline-offset-8" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(64px, 22vw, 96px)', letterSpacing: '-0.04em' }}>
             {total.toLocaleString()}
-          </div>
+          </Link>
           <p className="text-[9px] font-mono text-[#efe7d6]/45 mt-3 leading-relaxed max-w-[320px] mx-auto">
             An entry opened. A place is counted once per entry per half hour. This is never a count of people.
           </p>
@@ -140,7 +141,7 @@ export default function ClimateImpact() {
             <div className="text-center">
               <div className="flex items-center gap-1.5 justify-center">
                 <Globe className="w-4 h-4 text-[#efe7d6]/60" />
-                <span className="font-black text-[#efe7d6]" style={{ fontSize: '28px' }}>{countries.length}</span>
+                <Link to={countries.length ? '#countries' : '#reading-map'} aria-label={`${countries.length} countries, open country breakdown`} className="font-black text-[#efe7d6] underline decoration-1 underline-offset-4" style={{ fontSize: '28px' }}>{countries.length}</Link>
               </div>
               <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Countries</p>
             </div>
@@ -148,7 +149,7 @@ export default function ClimateImpact() {
             <div className="text-center">
               <div className="flex items-center gap-1.5 justify-center">
                 <Eye className="w-4 h-4 text-[#efe7d6]/60" />
-                <span className="font-black text-[#efe7d6]" style={{ fontSize: '28px' }}>{entries}</span>
+                <Link to="/TogetherChangeClimate#record-entries" aria-label={`${entries} entries, open the entries on the record`} className="font-black text-[#efe7d6] underline decoration-1 underline-offset-4" style={{ fontSize: '28px' }}>{entries}</Link>
               </div>
               <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Entries listed</p>
             </div>
@@ -158,7 +159,7 @@ export default function ClimateImpact() {
                 <div className="text-center">
                   <div className="flex items-center gap-1.5 justify-center">
                     <MapPin className="w-4 h-4 text-[#efe7d6]/60" />
-                    <span className="font-black text-[#efe7d6]" style={{ fontSize: '28px' }}>{regions.length}</span>
+                    <Link to="#nations" aria-label={`${regions.length} nations, open nation breakdown`} className="font-black text-[#efe7d6] underline decoration-1 underline-offset-4" style={{ fontSize: '28px' }}>{regions.length}</Link>
                   </div>
                   <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Nations</p>
                 </div>
@@ -175,7 +176,7 @@ export default function ClimateImpact() {
       </div>
 
       {/* Reader-impact map — the planet lighting up as people read */}
-      <div className="px-5 lg:px-0 pt-6 lg:pt-12 pb-2 mx-auto max-w-[820px]">
+      <div id="reading-map" className="px-5 lg:px-0 pt-6 lg:pt-12 pb-2 mx-auto max-w-[820px]">
         <div className="flex items-center gap-2 mb-3">
           <Globe className="w-4 h-4 text-[#b3261e]" />
           <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
@@ -218,7 +219,7 @@ export default function ClimateImpact() {
             onChange={(e) => { setReaderRegion(e.target.value); setCountryNotice(false); }}
             placeholder="e.g. Scotland, Catalonia, Kurdistan…"
             maxLength={60}
-            className="flex-1 px-3 py-2.5 bg-[#efe7d6] border-2 border-[#141210]/20 focus:border-[#e2602a] text-[12px] font-mono text-[#141210] placeholder:text-[#5a5246]/50 outline-none transition-colors"
+            className="flex-1 min-w-0 px-3 py-2.5 bg-[#efe7d6] border-2 border-[#141210]/20 focus:border-[#e2602a] text-[12px] font-mono text-[#141210] placeholder:text-[#5a5246]/50 outline-none transition-colors"
             onKeyDown={(e) => { if (e.key === 'Enter') saveRegion(); }}
           />
           <button
@@ -242,7 +243,7 @@ export default function ClimateImpact() {
 
       {/* Self-identified nations / regions */}
       {regions.length > 0 && (
-        <div className="px-5 py-6">
+        <div id="nations" className="px-5 py-6">
           <div className="flex items-center gap-2 mb-4">
             <MapPin className="w-4 h-4 text-[#b3261e]" />
             <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
@@ -258,9 +259,8 @@ export default function ClimateImpact() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25, delay: i * 0.03 }}
-                onClick={() => navigate(createPageUrl(`ClimateReachPlace/nation/${encodeURIComponent(r.region)}`))}
-                className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
+                <Link to={`/ClimateReachPlace/nation/${encodeURIComponent(r.region)}`} aria-label={`${r.region}, ${r.views.toLocaleString()} reads, open the stories`} className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20 active:bg-[#efe7d6] transition-colors">
                 <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/5 border border-[#b3261e]/20">
                   <SignalBeacon size={22} />
                 </span>
@@ -269,6 +269,7 @@ export default function ClimateImpact() {
                 <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
                   <div className="h-full bg-[#b3261e] rounded-full" style={{ width: `${Math.max(4, (r.views / regions[0].views) * 100)}%` }} />
                 </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -277,7 +278,7 @@ export default function ClimateImpact() {
 
       {/* Countries list */}
       {countries.length > 0 && (
-        <div className="px-5 py-6">
+        <div id="countries" className="px-5 py-6">
           <div className="flex items-center gap-2 mb-4">
             <Users className="w-4 h-4 text-[#1e3a2b]" />
             <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
@@ -292,9 +293,8 @@ export default function ClimateImpact() {
                 initial={{ opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25, delay: i * 0.03 }}
-                onClick={() => navigate(createPageUrl(`ClimateReachPlace/country/${c.country}`))}
-                className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15 active:bg-[#efe7d6] cursor-pointer transition-colors"
               >
+                <Link to={`/ClimateReachPlace/country/${c.country}`} aria-label={`${countryName(c.country)}, ${c.views.toLocaleString()} reads, open the stories`} className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15 active:bg-[#efe7d6] transition-colors">
                 <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/5 border border-[#b3261e]/20">
                   <SignalBeacon size={22} />
                 </span>
@@ -303,6 +303,7 @@ export default function ClimateImpact() {
                 <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
                   <div className="h-full bg-[#e2602a] rounded-full" style={{ width: `${Math.max(4, (c.views / countries[0].views) * 100)}%` }} />
                 </div>
+                </Link>
               </motion.div>
             ))}
           </div>

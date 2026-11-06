@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import useRecordBack from '@/components/climate/useRecordBack';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand, Globe } from 'lucide-react';
@@ -69,6 +70,7 @@ function fmtDate(d) {
 export default function ClimateDetail() {
   const { type, id } = useParams();
   const navigate = useNavigate();
+  const back = useRecordBack();
   const [record, setRecord] = useState(null);
   const [allItems, setAllItems] = useState([]);
   const [allActions, setAllActions] = useState([]);
@@ -137,7 +139,7 @@ export default function ClimateDetail() {
       <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
         {/* Sticky header — native back, action-type colour band */}
         <div className="flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
-          <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+          <button onClick={back} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="flex items-center gap-2 min-w-0">
@@ -266,7 +268,7 @@ export default function ClimateDetail() {
         <div className="relative h-64 lg:h-[420px] bg-[#241d16]">
           <img src={heroImage} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.06) contrast(1.04)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
-          <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+          <button onClick={back} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div className="absolute bottom-4 lg:bottom-6 left-5 lg:left-10 right-5 lg:right-10">
@@ -277,7 +279,7 @@ export default function ClimateDetail() {
         </div>
       ) : (
         <div className="relative min-h-[180px] lg:min-h-[300px] bg-[#f7f1e5] border-b-2 border-[#141210] flex flex-col items-center justify-center gap-3 px-5 lg:px-10 py-8">
-          <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+          <button onClick={back} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#b3261e'} />

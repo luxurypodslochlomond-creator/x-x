@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import WorkroomTabs from '@/components/climate/WorkroomTabs';
@@ -24,7 +25,7 @@ import AdminClimateDesk from '@/pages/AdminClimateDesk';
 export default function ClimateKeeperRoom() {
   const [state, setState] = useState('checking'); // checking | ready | signed_out | paused | not_on_list | error
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
-  const [tab, setTab] = useState('check');
+  const [params, setParams] = useSearchParams();
 
   const load = useCallback(async () => {
     setState('checking');
@@ -33,7 +34,6 @@ export default function ClimateKeeperRoom() {
       const d = res.data || {};
       if (d.isKeeper || d.isChecker) {
         setWho(d);
-        setTab(d.isKeeper ? 'decide' : 'check');
         setState('ready');
         return;
       }
@@ -47,20 +47,21 @@ export default function ClimateKeeperRoom() {
 
   useEffect(() => { load(); }, [load]);
 
-  const tabs = [
-    ...(who.isKeeper ? [{ key: 'decide', label: 'Decide' }] : []),
-    { key: 'check', label: 'Check' },
-    { key: 'desk', label: 'Counts' },
-    { key: 'score', label: 'What it holds' },
-  ];
+  const tabs = who.isKeeper
+    ? [{ key: 'decide', label: 'Decide' }, { key: 'check', label: 'Check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Record facts' }]
+    : [{ key: 'check', label: 'Check' }];
+  const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
+  const setTab = (key) => setParams({ tab: key });
 
   return (
     <ClimateRecordShell
       eyebrow="The workroom"
-      marker="Decide · check · count · score"
-      title={who.isKeeper ? 'Everything the record needs, in one room' : 'Open the source, say what you find'}
+      marker="Public record · invited workroom"
+      title={state !== 'ready' ? 'The workroom' : who.isKeeper ? 'Everything the record needs, in one room' : 'Open the source, say what you find'}
       statement={
-        who.isKeeper
+        state !== 'ready'
+          ? 'The record is open to everyone. Working here is by invitation: keepers decide what is published; checkers open sources and leave signed notes.'
+          : who.isKeeper
           ? 'What is waiting for a yes, what is waiting for a pair of eyes, the counts, and what the record actually holds. You hold the keys and you may also check — a keeper reading a link is the same work, done by someone who cares.'
           : 'What is waiting to be opened, where each entry is claimed from, and how the record is doing. Nothing you do here publishes, edits or deletes anything.'
       }
@@ -81,7 +82,7 @@ export default function ClimateKeeperRoom() {
       {state === 'signed_out' && (
         <Door
           heading="The workroom is by invitation"
-          body="Sign in with the address a keeper added to the record. Any address works, and no Google account is needed — a code comes to your own inbox."
+          body="Sign in with the address a keeper added to the record. Reading the public record needs no account; working here needs an invitation."
           actionLabel="Sign in to the record"
           onAction={() => base44.auth.redirectToLogin(window.location.href)}
         />
@@ -116,11 +117,11 @@ export default function ClimateKeeperRoom() {
 
       {state === 'ready' && (
         <>
-          <WorkroomTabs tabs={tabs} active={tab} onChange={setTab} />
+          {tabs.length > 1 && <WorkroomTabs tabs={tabs} active={tab} onChange={setTab} />}
           {tab === 'decide' && who.isKeeper && <DecideQueue />}
           {tab === 'check' && <ClimateChecking />}
-          {tab === 'desk' && <AdminClimateDesk />}
-          {tab === 'score' && <DueDiligencePanel />}
+          {tab === 'desk' && who.isKeeper && <AdminClimateDesk />}
+          {tab === 'score' && who.isKeeper && <DueDiligencePanel />}
         </>
       )}
     </ClimateRecordShell>

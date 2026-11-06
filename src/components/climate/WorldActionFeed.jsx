@@ -79,7 +79,7 @@ export default function WorldActionFeed({ actions }) {
                 <p className="text-[13px] font-bold text-[#141210] leading-snug mb-1.5" style={{ fontFamily: 'var(--font-body)' }}>
                   {a.title}
                 </p>
-                <p className="text-[10px] font-mono text-[#5a5246]">
+                <p className="record-meta text-[#5a5246]">
                   {a.date && <span className="font-black text-[#1e3a2b]">{formatDate(a.date)}</span>}
                   {a.date && place && <span className="text-[#141210]/30 mx-1.5">·</span>}
                   {place && <span>{place}</span>}

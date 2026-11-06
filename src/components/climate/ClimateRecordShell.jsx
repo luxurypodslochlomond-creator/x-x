@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useRecordBack from '@/components/climate/useRecordBack';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
@@ -7,7 +8,7 @@ import RecordCover from '@/components/climate/RecordCover';
 // The record's page shell — the same cold bands the Founder page wears, so every
 // page of the record reads as one place: paper, ink, one ocean signal, x = x.
 export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, children }) {
-  const navigate = useNavigate();
+  const back = useRecordBack(returnTo);
 
   return (
     <div dir={dir} className="climate-record twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
@@ -17,7 +18,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
         <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
           <button
-            onClick={() => navigate(-1)}
+            onClick={back}
             aria-label="Back"
             className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
           >

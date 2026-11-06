@@ -104,7 +104,7 @@ export default function AdminClimateDesk() {
           </button>
         </div>
         <h1 className="font-black text-record-ink text-2xl leading-tight mb-1">The record, at a glance.</h1>
-        <p className="text-[10px] font-mono text-record-muted mb-6">
+        <p className="record-meta text-record-muted mb-6">
           counted {new Date(d.as_of).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         </p>
 

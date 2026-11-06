@@ -10,7 +10,7 @@ import { useRecordCapacity } from '@/components/climate/useKeeper';
 // room belonging to something else. If the record is going to stand on its own one day, it has
 // to carry the things needed to tend it. So the door is here, in the record's own bar, and only
 // a keeper sees it: to a reader the record looks exactly as it did.
-const KEEPER_WORD = { label: 'Room', page: 'ClimateKeeperRoom', aria: "The keeper's room" };
+const KEEPER_WORD = { label: 'Workroom', page: 'ClimateKeeperRoom', aria: 'The workroom for invited keepers and checkers' };
 
 // ── THE WAY THROUGH THE RECORD ───────────────────────────────────────────────────
 // Two different kinds of thing live in this bar, and they are drawn differently on
@@ -80,7 +80,7 @@ function MobileLink({ item, active, quiet }) {
       aria-label={item.aria}
       aria-current={active ? 'page' : undefined}
       className={`min-h-[42px] flex items-center px-1.5 transition-colors active:text-[#e2602a] ${
-        quiet ? 'text-[#efe7d6]/45' : 'text-[#efe7d6]/80'
+        quiet ? 'text-[#efe7d6]/70' : 'text-[#efe7d6]/80'
       }`}
     >
       <span
