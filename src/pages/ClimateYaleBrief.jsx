@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import CopyLine from '@/components/climate/CopyLine';
+import YaleLetter from '@/components/climate/host/YaleLetter';
 
 // ── THE SUMMARY ──────────────────────────────────────────────────────────────
 // Not a pitch, and not a letter. Janine asked for the one thing that would help
@@ -21,6 +22,7 @@ const EXISTS = [
   '18 wire entries, dated and sourced',
   '3 actions, each with an organiser’s own contact line',
   '65 tongues, every one labelled by how it was made',
+  'Three named keepers on the roster: Gillian Barbara Brown, Brian Hughes, Janine Selendy',
   'No account needed to read any of it. No tracking, no advertising, no paid placement.',
 ];
 
@@ -28,9 +30,9 @@ const NOT_YET = [
   '0 independent verdicts. The checking office is built and nobody has signed into it.',
   '14 of 19 entries carry no statement of how well they are known.',
   '4 of 4 gatherings have no contact line, so nobody can actually join one yet.',
-  'No named keeper. The record says so rather than inventing a masthead.',
+  'Every entry is unsigned. Nothing is attributed to a person who did not write it, and each entry says plainly that it is unsigned.',
   'The code is not public, so it cannot yet be audited or carried away.',
-  '19 entries are signed with a name that did not write them.',
+  'No checker has yet been invited, so the checking office has had nobody in it.',
 ];
 
 const NEEDS = [
@@ -52,8 +54,8 @@ const NEEDS = [
 ];
 
 const MISSING = [
-  ['Sign every entry honestly', 'All nineteen carry the founder’s name and she did not write them. One evening’s work, and the first thing a panel checks.'],
-  ['Name the keeper', 'A decision, not work. One accountable name and one contact line.'],
+  ['Put a real name on every entry', 'Keepers sign their own when they are ready. Until then the record says each entry is unsigned rather than borrowing a name.'],
+  ['Invite the first checkers', 'Two or three named volunteers, and the checking office stops being empty.'],
   ['State the standing on all nineteen', 'Five do. Fourteen do not. An afternoon.'],
   ['Publish the code', 'Days rather than months. Until then nothing here can honestly be called auditable.'],
 ];
@@ -70,21 +72,26 @@ WHAT EXISTS TONIGHT
 19 published entries (10 solutions, 9 crises), every one with a working link to its origin.
 44 cryptographic seals, each recomputable by a reader without trusting us.
 18 wire entries, dated and sourced. 3 actions with organiser contact lines. 65 tongues, each labelled by how it was made.
+Three named keepers on the roster: Gillian Barbara Brown, Brian Hughes, Janine Selendy.
 
 WHAT DOES NOT EXIST YET
 0 independent verdicts — the checking office is built and empty.
 14 of 19 entries carry no statement of how well they are known.
 4 of 4 gatherings have no contact line yet.
-No named keeper, and 19 entries signed with a name that did not write them.
+Every entry is unsigned, and each one says so rather than borrowing a name.
 The code is not public, so it cannot yet be audited or carried away.
+No checker has yet been invited, so nobody has been in the checking office.
 
 WHAT IT NEEDS
 1. One reader with standing — someone who reads the method and says in public whether it holds. Not an endorsement of the contents: a verdict on the method.
 2. People who check — a checker reads an entry, follows its source, and signs their name. There are none, and this cannot be built or bought.
 3. Somebody to carry it — the technology, its upkeep, and a fair living for the two people who build it. Hosting is £1,000 a year at this size, £10,000 for ten years.
 
-WHAT IS STILL MISSING BEFORE IT COULD BE CALLED FINISHED
-Sign the entries honestly. Name the keeper. State the standing on all nineteen. Publish the code. All of it is days of work except the first, which is an evening.
+WHAT STILL HAS TO HAPPEN BEFORE IT COULD BE CALLED FINISHED
+Put a real name on every entry, as keepers are ready to sign their own. Invite the first checkers. State the standing on all nineteen. Publish the code.
+
+ONE CORRECTION, MADE IN THE OPEN
+39 entries previously carried the founder's name. She did not write them. All 39 were set back to unsigned on 6 November 2026, and this line is the record of it.
 
 WHY IT HOLDS UP
 The seal is the whole argument: an entry is fingerprinted by the server, and the fingerprint is recomputed in the reader's browser. If the words move, the fingerprints stop matching and the record says so in public. Nobody has to trust the people who built this to check it.
@@ -170,6 +177,10 @@ export default function ClimateYaleBrief() {
           <Column tone="bg-[#1e3a2b]/10 text-[#1e3a2b]" heading="Exists tonight" items={EXISTS} />
           <Column tone="bg-[#b3261e]/10 text-[#b3261e]" heading="Does not exist yet" items={NOT_YET} />
         </div>
+        <p className="text-[11px] font-mono leading-relaxed text-[#5a5246] border-l-4 border-l-[#141210]/25 pl-3 mt-1">
+          One correction, made in the open: 39 entries previously carried the founder’s name. She did not write
+          them. All 39 were set back to unsigned on 6 November 2026.
+        </p>
       </Section>
 
       <Section n="03" title="What it needs">
@@ -222,7 +233,18 @@ export default function ClimateYaleBrief() {
         </div>
       </Section>
 
-      <p className="text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#5a5246] border-t-2 border-[#141210]/20 pt-3">
+      <Section n="07" title="The letter, ready to send">
+        <p>
+          Written in the shape a university expects: a date, a named recipient, what is being asked in one
+          breath, then the ask, the enclosures and the signature. Only three things in it are blank, and all
+          three are hers — the date, the recipient’s name and department, and anything of her own work she
+          wants to add. Nothing biographical has been invented.
+        </p>
+      </Section>
+
+      <YaleLetter />
+
+      <p className="text-[11px] lg:text-[12px] font-mono leading-relaxed text-[#5a5246] border-t-2 border-[#141210]/20 pt-3 mt-8">
         Every figure here was counted from the record. When something on this page stops being true it gets
         corrected in the open, like anything else on it.
       </p>

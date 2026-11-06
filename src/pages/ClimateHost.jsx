@@ -122,7 +122,7 @@ export default function ClimateHost() {
         <p className="font-black text-[#141210] mt-4">Still open — each one is a step, not a principle:</p>
         <ul className="space-y-1.5 mt-1">
           <Check done={false}><strong>The source is not published.</strong> Until it is, a host cannot build it, audit it, or leave with it. This is the largest gap on the record.</Check>
-          <Check done={false}><strong>No named keeper yet.</strong> The record is meant to carry one accountable name and a contact line. That is being settled with you, and this page will not invent a masthead in the meantime.</Check>
+          <Check done={true}><strong>The keepers are named.</strong> Gillian Barbara Brown, Brian Hughes and Janine M. H. Selendy hold the record's keys between them, and no entry may be published without one of them saying yes. Your own line stays yours to keep or hand on.</Check>
           <Check done={false}><strong>No domain in a host's name.</strong> A record whose address belongs to somebody else is lent, not handed over.</Check>
         </ul>
 
