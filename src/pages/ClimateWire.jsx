@@ -35,10 +35,10 @@ export default function ClimateWire() {
   }, [filter, reload]);
 
   return (
-    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
 
       {/* Cold epigraph band — same mark the rest of the record wears */}
-      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">The wire · a public record, not a feed</span>
@@ -48,7 +48,7 @@ export default function ClimateWire() {
       </div>
 
       {/* Hero — cold ink, the beacon, the page says exactly what it is */}
-      <div className="relative bg-[#141210] overflow-hidden">
+      <div className="relative bg-[#241d16] overflow-hidden">
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
           <SignalBeacon size={44} color="#7fc9e4" />
@@ -58,7 +58,7 @@ export default function ClimateWire() {
           >
             The Wire
           </h1>
-          <p className="text-[12px] lg:text-[14px] font-mono leading-relaxed text-[#efe7d6]/70 max-w-sm lg:max-w-2xl" style={{ animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
+          <p className="text-[13px] lg:text-[15px] leading-[1.65] text-[#efe7d6]/80 max-w-sm lg:max-w-2xl" style={{ fontFamily: 'var(--font-reading)', animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
             What changed, where, and who says so — every entry carrying its source, and what others can copy from it. No likes. No ranking. No volume.
           </p>
         </div>

@@ -69,7 +69,7 @@ export default function WorldReadingFeed({ stories }) {
                   </span>
                 )}
               </div>
-              <p className="text-[13px] font-bold text-[#141210] leading-snug mb-1.5" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+              <p className="text-[13px] font-bold text-[#141210] leading-snug mb-1.5" style={{ fontFamily: 'var(--font-body)' }}>
                 {s.title}
               </p>
               <p className="text-[10px] font-mono text-[#5a5246]">

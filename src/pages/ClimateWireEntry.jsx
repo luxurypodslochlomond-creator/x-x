@@ -33,7 +33,7 @@ export default function ClimateWireEntry() {
     : '';
 
   return (
-    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
       <div className="flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
         <Link to="/ClimateWire" aria-label="Back to the wire" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
           <ArrowLeft className="w-5 h-5" />

@@ -49,7 +49,7 @@ export default function ClimateBrief() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612]" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @media print {
           .no-print { display: none !important; }

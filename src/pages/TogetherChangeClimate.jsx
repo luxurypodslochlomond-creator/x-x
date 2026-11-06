@@ -151,8 +151,10 @@ seedTranslations(T);
            style={{ filter: 'saturate(1.06) contrast(1.04)' }}
            onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
            />
-         {/* Gradient scrim — guarantees title readability on any image */}
-         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
+         {/* Gradient scrim — guarantees title readability on any image. A colour photograph can
+             be bright white at its foot, so the scrim holds a touch harder than it did over grey:
+             the cream words are never asked to fight the picture for the last inch. */}
+         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 28%, rgba(20,18,16,0.72) 62%, rgba(20,18,16,0.92) 100%)' }} />
          <div className="relative p-2.5 w-full">
            <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ef5a4a]'}`}>
              {isSolution ? 'Solution' : 'Crisis'}

@@ -10,7 +10,7 @@ const ClimateMap = React.lazy(() => import('@/components/climate/ClimateMap'));
 
 export default function ClimateMapPage() {
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#1a1612]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="min-h-screen bg-[#efe7d6] text-[#1a1612]" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
@@ -19,7 +19,7 @@ export default function ClimateMapPage() {
       `}</style>
 
       {/* BIG SCIENCE EPIGRAPH */}
-      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
@@ -36,7 +36,7 @@ export default function ClimateMapPage() {
       </div>
 
       {/* HEADER */}
-      <div className="bg-[#141210] px-4 py-4 border-b-2 border-[#e2602a]/30">
+      <div className="bg-[#241d16] px-4 py-4 border-b-2 border-[#e2602a]/30">
         <div className="flex items-center justify-between gap-3">
           <Link
             to={createPageUrl("TogetherChangeClimate")}
@@ -85,7 +85,7 @@ export default function ClimateMapPage() {
       </div>
 
       {/* FOOTER */}
-      <div className="bg-[#141210] px-4 py-4 border-t-2 border-[#e2602a]/20">
+      <div className="bg-[#241d16] px-4 py-4 border-t-2 border-[#e2602a]/20">
         <p className="text-[8px] font-mono font-black tracking-[0.3em] text-center text-[#efe7d6]/25">
           x = x
         </p>

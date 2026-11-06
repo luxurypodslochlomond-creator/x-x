@@ -162,7 +162,7 @@ export default function ClimateMap() {
         }
         .climate-map .leaflet-container {
           background: #efe7d6;
-          font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+          font-family: var(--font-body);
         }
         .climate-map .leaflet-popup-content-wrapper {
           background: #efe7d6;
@@ -234,7 +234,7 @@ export default function ClimateMap() {
         {markers.map((m) => (
           <Marker key={m.id} position={m.coord} icon={makeIcon(m.type, m.coord[1])}>
             <Popup>
-              <div style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+              <div style={{ fontFamily: 'var(--font-body)' }}>
                 <div style={{
                   background: m.type === 'climate_crisis' ? '#b3261e' : m.type === 'action' ? '#1e3a2b' : '#1a1612',
                   color: '#efe7d6',

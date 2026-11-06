@@ -38,7 +38,7 @@ export default function ClimateFounder() {
   const navigate = useNavigate();
 
   return (
-    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Header — paper, beacon, back */}
       <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
         <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">

@@ -134,7 +134,7 @@ export default function ClimateDetail() {
     const Icon = meta.icon;
     const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
     return (
-      <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+      <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
         {/* Sticky header — native back, action-type colour band */}
         <div className="flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
           <button onClick={() => navigate(-1)} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
@@ -172,7 +172,7 @@ export default function ClimateDetail() {
           )}
 
           <EntryLanguageStatus translation={tr} />
-          <p data-no-translate className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('description')}</p>
+          <p data-no-translate className="text-[15.5px] lg:text-[17px] text-[#141210] leading-[1.7] lg:leading-[1.75] mt-5" style={{ fontFamily: 'var(--font-reading)' }}>{tr.field('description')}</p>
 
           {record.source_url && (
             <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
@@ -257,11 +257,14 @@ export default function ClimateDetail() {
   // picture was standing.
   const heroImage = record.image_url || CATEGORY_IMAGE(record.category);
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
-      {/* Hero — photo when available, paper-and-beacon when not */}
+    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
+      {/* Hero — photo when available, paper-and-beacon when not. The picture you tapped keeps
+          its own colour through the door: it used to be drained to grey here, so an entry about
+          a river came up as a black-and-white photograph of a river — the greyest thing on the
+          page the reader had just decided to care about. */}
       {heroImage ? (
-        <div className="relative h-64 lg:h-[420px] bg-[#141210]">
-          <img src={heroImage} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'grayscale(1) contrast(1.35)' }} />
+        <div className="relative h-64 lg:h-[420px] bg-[#241d16]">
+          <img src={heroImage} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.06) contrast(1.04)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
           <button onClick={() => navigate(-1)} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
@@ -300,7 +303,7 @@ export default function ClimateDetail() {
           <span>{record.country}{record.region_rough ? ` · ${record.region_rough}` : ''}</span>
         </div>
         <EntryLanguageStatus translation={tr} />
-        <p data-no-translate className="text-[14px] lg:text-[15px] font-mono text-[#141210] leading-relaxed lg:leading-[1.85] mt-5">{tr.field('details') || tr.field('summary')}</p>
+        <p data-no-translate className="text-[15.5px] lg:text-[17px] text-[#141210] leading-[1.7] lg:leading-[1.75] mt-5" style={{ fontFamily: 'var(--font-reading)' }}>{tr.field('details') || tr.field('summary')}</p>
         <div className="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-mono font-bold uppercase">
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>

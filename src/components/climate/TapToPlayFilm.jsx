@@ -62,7 +62,7 @@ export default function TapToPlayFilm({ url, title, credit, poster, compact = fa
               loading="lazy"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: 'grayscale(1) contrast(1.2)' }}
+              style={{ filter: 'saturate(1.06) contrast(1.04)' }}
             />
           ) : null}
           <span className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.1), rgba(20,18,16,0.74))' }} />

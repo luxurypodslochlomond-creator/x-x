@@ -61,7 +61,7 @@ export default function ClimateReachPlace() {
   };
 
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Header */}
       <div className="flex items-center gap-3 px-4 lg:px-10 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
         <button

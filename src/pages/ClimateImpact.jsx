@@ -99,14 +99,14 @@ export default function ClimateImpact() {
   const entries = stats?.published_entries || 0;
 
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @keyframes impact-breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
         @keyframes impact-enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
 
       {/* Header */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
+      <div className="flex items-center gap-3 px-4 py-3 bg-[#241d16] border-b-2 border-[#e2602a]">
         <Link to={createPageUrl('TogetherChangeClimate')} className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
           <ArrowLeft className="w-5 h-5" />
         </Link>
@@ -119,7 +119,7 @@ export default function ClimateImpact() {
       </div>
 
       {/* Big numbers */}
-      <div className="px-5 py-8 bg-[#141210]">
+      <div className="px-5 py-8 bg-[#241d16]">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
           Together we can change the course of climate change
         </p>
