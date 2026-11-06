@@ -109,10 +109,19 @@ button:focus-visible {
     --font-display: 'Oswald', Impact, 'Haettenschweiler', 'Arial Narrow', system-ui, sans-serif;
     --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-script: 'Record Cherokee', ui-monospace, SFMono-Regular, Menlo, monospace;
-    /* The human voice of the record is the record's own lettering, given air. One
-       face for everything, so a tongue we have not seen yet is never handed a
-       fallback: there is nothing to fall back from. */
-    --font-reading: ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* THE READING VOICE IS NOW A READING FACE.
+       It was the machine's own lettering given air — same monospace, larger and
+       looser — on the argument that one face for everything means a tongue we
+       have not seen yet is never handed a fallback. That was a designer's
+       argument, and it lost to a reader's: Nicolas Selendy, looking at the
+       record for the first time, said it gave off a coding/programming vibe.
+       He was right. Monospace everywhere makes prose look like a listing.
+       So the voice is a news serif and the machine keeps its own face for
+       facts — dates, sources, counts, labels, buttons. Nothing is lost in a
+       tongue we have not met: the serif falls back to Georgia and then to
+       whatever that device reads best in, which is what every newspaper on
+       earth does. Warm paper, signal red and the covenant all stay. */
+    --font-reading: 'Source Serif 4', Georgia, 'Times New Roman', serif;
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;

@@ -144,8 +144,16 @@ export default function ClimateLayout({ children, currentPage }) {
   return (
     <SiteLanguageProvider>
     <SiteTranslator />
-    <div className="climate-record min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
-      <header className="sticky top-0 z-50 bg-[#141210] border-b-2 border-[#e2602a]">
+    {/* The record's body is read, not compiled. Every page used to set monospace across the
+        whole frame, so a paragraph of plain English arrived in the same lettering as a date or
+        a field name — which is what made the record feel like a terminal to a reader who had
+        never seen it before. The machine keeps its voice for the facts (every label, count,
+        source and button still carries it); the sentences people wrote, and the sentences
+        people read, are set in a face meant for reading. */}
+    <div className="climate-record min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'var(--font-body)' }}>
+      {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
+          top to the record instead of a dark screen with a page beneath it. */}
+      <header className="sticky top-0 z-50 bg-[#241d16] border-b-2 border-[#e2602a]">
         {/* Desktop — the record's masthead on the left, the way through the record on the
             right. The item you are reading is marked with a rule, not only a colour, so it
             still reads on a bad screen or a projector in a panel room. */}

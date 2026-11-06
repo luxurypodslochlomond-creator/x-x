@@ -135,7 +135,7 @@ seedTranslations(T);
      return (
        <Link
          to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-         className={`relative text-left overflow-hidden bg-[#141210] border border-[#141210] active:border-[#e2602a] ${
+         className={`relative text-left overflow-hidden bg-[#241d16] border border-[#241d16] active:border-[#e2602a] ${
            isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
          } min-h-[110px] lg:min-h-[168px] flex items-end active:scale-95 transition-transform duration-100`}
        >
@@ -145,16 +145,19 @@ seedTranslations(T);
            loading="lazy"
            decoding="async"
            className="absolute inset-0 w-full h-full object-cover"
-           style={{ filter: 'grayscale(1) contrast(1.25)' }}
+           /* Colour, not grey. Every photograph on this page was drained to black and white,
+              which is half of why the whole record read as a machine's print-out. A news
+              page shows the place itself. The scrim below still guarantees the words. */
+           style={{ filter: 'saturate(1.06) contrast(1.04)' }}
            onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
-         />
+           />
          {/* Gradient scrim — guarantees title readability on any image */}
          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 30%, rgba(20,18,16,0.85) 100%)' }} />
          <div className="relative p-2.5 w-full">
            <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ef5a4a]'}`}>
              {isSolution ? 'Solution' : 'Crisis'}
            </div>
-           <h3 className="text-[13px] font-black font-mono uppercase leading-tight text-[#efe7d6] line-clamp-3 mt-0.5">
+           <h3 className="text-[13.5px] font-black leading-snug text-[#efe7d6] line-clamp-3 mt-0.5">
              {item.title}
            </h3>
          </div>
@@ -334,7 +337,7 @@ export default function TogetherChangeClimate() {
   }, [liveGroups, query]);
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/40" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/20" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
@@ -342,7 +345,11 @@ export default function TogetherChangeClimate() {
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } } body { background: #141210 !important; }
+        @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+        /* The page used to sit on a black field, so the record read as a screen inside a
+           dark room. It sits on the record's own deep paper now: less black, and the
+           pictures and the paper carry the page instead of a terminal surround. */
+        body { background: #e3dccb !important; }
       `}</style>
 
       {isOffline && (
@@ -359,7 +366,7 @@ export default function TogetherChangeClimate() {
              still holds the page open; the material now sits under her words, where it
              belongs. Her words are the record's first transmission, so they get its plate. ── */}
       <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
-        <div className="relative mx-auto max-w-[760px] bg-[#141210] border-2 border-[#141210] px-5 pt-6 pb-6 overflow-hidden">
+        <div className="relative mx-auto max-w-[760px] bg-[#241d16] border-2 border-[#241d16] px-5 pt-6 pb-6 overflow-hidden">
           {/* The record's grain, inside her plate — the same texture the hero wears */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.07]"
@@ -431,18 +438,22 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── HERO — two bands, bone and ink. The only colour in this block is one word. ── */}
-      <div className="relative bg-[#141210] overflow-hidden" style={{ minHeight: 'clamp(460px, 62vh, 620px)' }}>
+      {/* The masthead's field was near-black, which put the whole record in a dark room before a
+          single word had been read. It is deep earth now — still deep enough to carry the light
+          type, and warm enough to belong to the paper below it. The photograph keeps its own
+          colour for the same reason the cards do: this is a record of real places. */}
+      <div className="relative bg-[#241d16] overflow-hidden" style={{ minHeight: 'clamp(460px, 62vh, 620px)' }}>
         <img
           src={IMAGES.global}
           alt=""
           fetchpriority="high"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'grayscale(1) contrast(1.35)', mixBlendMode: 'screen', opacity: 0.46 }}
+          style={{ filter: 'saturate(1.05) contrast(1.05)', mixBlendMode: 'screen', opacity: 0.42 }}
         />
         {/* Neutral wash, no blue in it: a blue wash over a full-width picture is a blue
             field by another name, and the blue has to stay small to mean anything. */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.42), rgba(20,18,16,.54) 45%, #141210 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.38), rgba(36,29,22,.5) 45%, #241d16 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
@@ -489,7 +500,7 @@ export default function TogetherChangeClimate() {
         {/* Closing band — ink, not a second colour. It was the brightest slab on the record,
              and that slab spent the blue before a single entry had been read, so there was
              nothing left for the blue to point at. The record opens deep and stays deep. */}
-        <div className="relative z-10 bg-[#141210] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
+        <div className="relative z-10 bg-[#241d16] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
           {/* The record's own sentence, in its own voice — sentence case, on the deep
               band. Everything else in this band stays as it was. */}
           <p className="text-[16px] leading-[1.7] max-w-[360px] lg:max-w-[620px] text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>{t.sub}</p>
@@ -525,7 +536,7 @@ export default function TogetherChangeClimate() {
       )}
 
       {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
-      <div className="px-4 lg:px-10 py-2 bg-[#141210] flex items-center justify-between gap-3">
+      <div className="px-4 lg:px-10 py-2 bg-[#241d16] flex items-center justify-between gap-3">
         <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
           {t.live}
@@ -702,7 +713,7 @@ export default function TogetherChangeClimate() {
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
                 {filteredGroups.map(g => (
                   <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
-                    <h4 className="text-[12px] font-black font-mono uppercase text-[#141210] leading-tight">{g.name}</h4>
+                    <h4 className="text-[13.5px] font-black text-[#141210] leading-snug">{g.name}</h4>
                     {g.topic && (
                       <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
                     )}
@@ -710,7 +721,7 @@ export default function TogetherChangeClimate() {
                       <MapPin className="w-3 h-3" />
                       <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
-                    <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">{g.description}</p>
+                    <p className="text-[12.5px] text-[#3a342c] leading-relaxed mt-2">{g.description}</p>
                     {g.contact_email ? (
                       <a href={`mailto:${g.contact_email}`} className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
                         Contact organizer →
