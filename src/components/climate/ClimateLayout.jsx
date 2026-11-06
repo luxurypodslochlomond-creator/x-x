@@ -8,6 +8,7 @@ import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
 import KeeperDoor from '@/components/climate/KeeperDoor';
 import RecordCover from '@/components/climate/RecordCover';
+import RecordCosmos from '@/components/climate/RecordCosmos';
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
@@ -230,6 +231,18 @@ export default function ClimateLayout({ children, currentPage }) {
         <div className="relative h-14 sm:h-20 overflow-hidden" aria-hidden="true">
           <RecordCover position="center 76%" strength={0.95} />
           <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.22) 0%, rgba(36,29,22,.5) 55%, rgba(36,29,22,.88) 100%)' }} />
+          {/* THE SMALLEST DETAIL ─────────────────────────────────────────────────────────
+              The same sky at the foot of every page: a solar system 28 pixels across, drawn in
+              hairlines. Nobody will see it on the way past, and that is the point — it is there
+              for the reader who stops, and for the one who zooms until the speck becomes a
+              world on its orbit. Geometry, not a picture: nothing new to download, nothing
+              repainting, and it is still drawn at ten thousand per cent. It breathes (four
+              minutes to a revolution, nine seconds to a breath) so the foot of the record is
+              never quite still; anyone who has asked their device for less movement gets it
+              perfectly still. */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <RecordCosmos size={28} className="opacity-80" />
+          </div>
         </div>
 
         <div className="px-4 py-4">

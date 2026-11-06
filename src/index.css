@@ -294,6 +294,21 @@ button:focus-visible {
 @keyframes uf51-overlay-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes uf51-spin { to { transform: rotate(360deg); } }
 
+/* ── THE SMALLEST DETAIL ──────────────────────────────────────────────────────────────
+   The mark at the foot of every page (RecordCosmos): the world takes four minutes to come
+   round its orbit, and the sun brightens and dims over nine seconds, the way breath does.
+   Two elements, two animations, both transform/opacity only — so the compositor does the
+   work and nothing on the page repaints or re-renders for it.
+
+   The numbers are the argument again. A sun that beat once a second would be a heartbeat and
+   this record is not a pet; a world that came round in a few seconds would be a spinner. At
+   four minutes and nine seconds it is only ever caught mid-movement, which is how you know
+   something living is there without being asked to watch it. */
+@keyframes record-cosmos-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes record-cosmos-breathe { 0%, 100% { opacity: 0.72; } 50% { opacity: 1; } }
+.record-cosmos-turn { animation: record-cosmos-turn 240s linear infinite; }
+.record-cosmos-breathe { animation: record-cosmos-breathe 9s ease-in-out infinite; }
+
 /* ── NATIVE TOUCH FEEL ──
    Taps land with no 300ms double-tap wait and no grey browser flash,
    so every control answers your finger like it's part of the phone. */
