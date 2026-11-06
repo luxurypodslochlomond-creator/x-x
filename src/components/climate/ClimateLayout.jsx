@@ -149,7 +149,29 @@ export default function ClimateLayout({ children, currentPage }) {
         never seen it before. The machine keeps its voice for the facts (every label, count,
         source and button still carries it); the sentences people wrote, and the sentences
         people read, are set in a face meant for reading. */}
-    <div className="climate-record min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="climate-record record-field min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'var(--font-body)' }}>
+      {/* THE FIELD ─────────────────────────────────────────────────────────────────────
+          The cover, laid under the whole record and pinned there — the same canvas, at the
+          same scale, on every page, in every tongue. Not a decorative splash behind one
+          headline: the ground the book is printed on. Held back by a warm veil so not one
+          sentence ever has to fight for its life, and fixed rather than scrolling, so the
+          painting stays put while the record moves over it — the way a wall stays still
+          while you walk along it.
+
+          Every sheet of the record is a hair translucent on top of this (see the field rule
+          in index.css), so the colour comes up through the page instead of being pasted
+          behind a paragraph. That is the difference between a record that has a picture in
+          it and a record that is a picture. Cheap to run, too: one composited layer, no
+          repaint per scroll, nothing downloaded that a phone was not already sent. */}
+      <div aria-hidden="true" className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <RecordCover position="center 42%" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(180deg, rgba(239,231,214,.58) 0%, rgba(239,231,214,.5) 45%, rgba(244,239,228,.64) 100%)' }}
+        />
+      </div>
+
+      <div className="relative" style={{ zIndex: 1 }}>
       {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
           top to the record instead of a dark screen with a page beneath it. */}
       <header className="sticky top-0 z-50 bg-[#241d16] border-b-2 border-[#e2602a] relative overflow-hidden">
@@ -243,6 +265,7 @@ export default function ClimateLayout({ children, currentPage }) {
         </div>
         </div>
       </footer>
+      </div>
     </div>
     </SiteLanguageProvider>
   );

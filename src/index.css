@@ -220,6 +220,27 @@ button:focus-visible {
   }
 }
 
+/* ── THE FIELD ────────────────────────────────────────────────────────────────────
+   The record is no longer printed on blank paper. It is printed on its own painting.
+
+   The 4K canvas that hangs at the door now runs, fixed, under every page of the book,
+   held back by a warm veil — and every bone sheet and paper surface inside the record
+   is a hair translucent, so the painting comes up through the page the way a colour
+   plate comes up through handmade paper. Never wallpaper. Ground.
+
+   One rule for the whole record, not a picture pasted into fourteen pages: turn any
+   page, in any tongue, and the room is still the same room. That is the difference
+   between a book and a folder of printouts, and it is the whole reason this exists.
+
+   The numbers are the argument, and they are deliberately timid. A sheet at 0.88 bone
+   over a canvas veiled to about half leaves a few per cent of colour — enough for the
+   eye to feel the ground, far too little to touch 15.5px reading text. Anyone who
+   widens them later is spending contrast, and contrast is the one thing a public record
+   cannot borrow back from anywhere. If it ever needs to come down, bring these numbers
+   up, not the other way round. */
+.record-field .bg-\[\#efe7d6\] { background-color: rgba(239, 231, 214, 0.88); }
+.record-field .bg-\[\#f4efe4\] { background-color: rgba(244, 239, 228, 0.9); }
+
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
 .beadie-paper { background-color: #f4efe4; }
 .beadie-bone { background-color: #efe7d6; }
