@@ -51,7 +51,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
           the corrections should feel the same hand under all of them — one painting, one room,
           the same paper. It is kept low enough that not one word loses its ground. */}
       <div className="relative bg-[#241d16] overflow-hidden">
-        <RecordCover position="center 32%" strength={0.42} blend="screen" />
+        <RecordCover position="center 32%" strength={0.5} blend="screen" />
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.5), rgba(36,29,22,.72) 55%, #241d16 100%)' }} />
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">

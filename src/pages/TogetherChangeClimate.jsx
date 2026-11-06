@@ -378,7 +378,10 @@ export default function TogetherChangeClimate() {
               opens the page, so the page has one hand under it from the first line to the
               last. Held back far enough that her sentence never has to fight it, and cool
               where the words are warm, because the words have to win. */}
-          <RecordCover position="center 46%" strength={0.55} />
+          {/* A different part of the same canvas: the earth's own ground, not the sky. Two
+              crops of one work read as a book printed from one painting; the same crop twice
+              in one fold reads as a duplicated image. */}
+          <RecordCover position="center 84%" strength={0.45} />
           <div
             className="absolute inset-0 pointer-events-none"
             style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.58) 0%, rgba(36,29,22,.68) 45%, rgba(36,29,22,.88) 100%)' }}

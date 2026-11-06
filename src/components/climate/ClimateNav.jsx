@@ -79,7 +79,7 @@ function MobileLink({ item, active, quiet }) {
       to={createPageUrl(item.page)}
       aria-label={item.aria}
       aria-current={active ? 'page' : undefined}
-      className={`min-h-[44px] flex items-center px-2 transition-colors active:text-[#e2602a] ${
+      className={`min-h-[42px] flex items-center px-1.5 transition-colors active:text-[#e2602a] ${
         quiet ? 'text-[#efe7d6]/45' : 'text-[#efe7d6]/80'
       }`}
     >
@@ -87,7 +87,7 @@ function MobileLink({ item, active, quiet }) {
         className={`pb-0.5 border-b-2 ${
           item.glyph
             ? 'flex items-center text-[#e2602a] drop-shadow-[0_0_8px_rgba(226,96,42,0.8)]'
-            : `text-[11px] font-black uppercase tracking-wide whitespace-nowrap ${active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'}`
+            : `text-[10px] font-black uppercase whitespace-nowrap ${active ? 'text-[#e2602a] border-[#e2602a]' : 'border-transparent'}`
         }`}
       >
         {item.glyph ? <COOLASFUCKTuningFork size={21} tone="signal" /> : item.label}
@@ -130,24 +130,26 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   if (variant === 'mobile') {
     return (
       <nav aria-label="The record" className="flex flex-col px-2 py-0.5">
-        {/* Always two lines, never three and never one. This bar is stuck to the top of the
-            screen, so while it wrapped, every tongue that arrived made its words longer, the
-            lines re-wrapped, the bar changed height and the whole page moved under the reader.
-            Two lines of fixed height cannot do that: while a tongue's words fit, the line is
-            centred exactly as before; the moment they grow past the screen, the line slides
-            under the thumb instead of stacking, and the bar's height never changes. Nothing is
-            hidden — every door stays in the bar, at every width, in every tongue. */}
-        <div className="overflow-x-auto climate-nav-rail">
-          <div className="flex items-center gap-x-1 w-max mx-auto">
-            {searchBox}
-            <span className="w-px h-4 bg-[#efe7d6]/20" />
-            {PLACES.map((item) => (
-              <MobileLink key={item.page} item={item} active={isActive(item.page)} />
-            ))}
-          </div>
+        {/* EVERY DOOR ON THE GLASS ────────────────────────────────────────────────────────
+            These two lines used to slide sideways: a door that would not fit was still in the
+            bar, but it was past the edge of the phone, and a door past the edge is not a door.
+            A reader had to discover, inside a bar stuck to the top of the screen, that it could
+            be swiped — and nothing said so.
+
+            So nothing slides now. The words are set a shade smaller and the two lines wrap
+            instead: every place the record can be read, and every quiet word about the record
+            itself, stands on the screen at once, on the narrowest handset, without a gesture
+            and without a hint. In a tongue whose words run longer than English the line takes a
+            third row rather than hiding anything — the bar grows by one thumb's height, which
+            is a fair price for not losing a door. */}
+        <div className="flex flex-wrap items-center justify-center gap-x-0.5">
+          {searchBox}
+          <span className="w-px h-4 bg-[#efe7d6]/20" />
+          {PLACES.map((item) => (
+            <MobileLink key={item.page} item={item} active={isActive(item.page)} />
+          ))}
         </div>
-        <div className="overflow-x-auto climate-nav-rail">
-          <div className="flex items-center gap-x-2 w-max mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-x-1.5">
             {ABOUT.map((item) => (
               <MobileLink key={item.page} item={item} active={isActive(item.page)} quiet />
             ))}
@@ -157,7 +159,6 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
                 <MobileLink item={KEEPER_WORD} active={isActive(KEEPER_WORD.page)} quiet />
               </>
             )}
-          </div>
         </div>
       </nav>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Globe, BookOpen, Film, Award, Heart } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
+import RecordCover from '@/components/climate/RecordCover';
 
 // ── Janine's life work — factual, dignified, no contact details (per her wish).
 // This page exists so her legacy has a home on the platform she inspired.
@@ -63,8 +64,16 @@ export default function ClimateFounder() {
         </div>
       </div>
 
-      {/* Hero — the Beirut moment, cold ink, the awakening */}
+      {/* Hero — the Beirut moment, cold ink, the awakening.
+          The record's painting stands in the ground behind her sentence now. This is the one
+          page where the reader is told what started the whole thing — a girl in harbour water
+          at fifteen — so the plate is not flat ink any more: it is the living earth, held far
+          back and cooled, and her words sit lit in front of it. The same work, at another
+          depth, so the founder's page and the record's front page are printed from one book
+          rather than looking like two products by the same hand. */}
       <div className="relative bg-[#141210] overflow-hidden">
+        <RecordCover position="center 18%" strength={0.4} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.6) 0%, rgba(20,18,16,.74) 55%, rgba(20,18,16,.92) 100%)' }} />
         {/* O Superman — the pilot's voice, cold in the corner */}
         <div className="absolute top-3 left-5 z-20 flex items-center gap-1.5 pointer-events-none" style={{ animation: 'twcc-flicker 7s linear 2s infinite' }}>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse" />
@@ -221,8 +230,12 @@ export default function ClimateFounder() {
         </div>
       </div>
 
-      {/* Her vision — the mantra, cold ink */}
+      {/* Her vision — the mantra, in the light of the same painting. The last dark block of
+          her page carries the work at its warmest crop: a book should not close on a slab of
+          ink after opening on a world. */}
       <div className="relative bg-[#141210] px-5 lg:px-10 py-10 lg:py-20 text-center overflow-hidden">
+        <RecordCover position="center 62%" strength={0.42} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.72) 0%, rgba(20,18,16,.8) 50%, rgba(20,18,16,.9) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
           <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
