@@ -7,6 +7,7 @@ import SiteTranslator from '@/components/shared/SiteTranslator';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
 import KeeperDoor from '@/components/climate/KeeperDoor';
+import RecordCover from '@/components/climate/RecordCover';
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
@@ -151,11 +152,21 @@ export default function ClimateLayout({ children, currentPage }) {
     <div className="climate-record min-h-screen bg-[#f4efe4]" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
           top to the record instead of a dark screen with a page beneath it. */}
-      <header className="sticky top-0 z-50 bg-[#241d16] border-b-2 border-[#e2602a]">
+      <header className="sticky top-0 z-50 bg-[#241d16] border-b-2 border-[#e2602a] relative overflow-hidden">
+        {/* THE SPINE ─────────────────────────────────────────────────────────────────────
+            The cover runs along the top of every page of the record, held far back. Not so you
+            can look at it here — you look at it at the door — but so the room is the same room
+            when you turn a page. A record whose masthead is flat ink on fourteen pages and a
+            painting on one of them is fourteen documents stapled together; this is one book.
+            The gradient under it is the whole trick: the picture gives the header its warmth,
+            the gradient guarantees not one word of navigation ever has to fight for its life. */}
+        <RecordCover position="center 20%" strength={0.38} blend="screen" />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.62) 0%, rgba(36,29,22,.8) 60%, rgba(36,29,22,.9) 100%)' }} />
+
         {/* Desktop — the record's masthead on the left, the way through the record on the
             right. The item you are reading is marked with a rule, not only a colour, so it
             still reads on a bad screen or a projector in a panel room. */}
-        <div className="hidden sm:flex max-w-[1100px] mx-auto px-4 lg:px-10 py-3 items-center justify-between gap-8">
+        <div className="relative z-10 hidden sm:flex max-w-[1100px] mx-auto px-4 lg:px-10 py-3 items-center justify-between gap-8">
           <Link
             to={createPageUrl('TogetherChangeClimate')}
             className="flex items-center gap-2.5 flex-shrink-0 group"
@@ -172,19 +183,34 @@ export default function ClimateLayout({ children, currentPage }) {
 
         {/* Mobile — the rail, on one line: centred while the words fit, thumb-scrollable
             the moment they do not. The rail owns its own scroller. */}
-        <div className="sm:hidden">
+        <div className="relative z-10 sm:hidden">
           <ClimateNav currentPage={currentPage} variant="mobile" />
         </div>
 
         {/* Every tongue on Earth — in the header, on every page of the record. */}
-        <div className="max-w-[1100px] mx-auto">
+        <div className="relative z-10 max-w-[1100px] mx-auto">
           <ClimateLanguageBar />
         </div>
       </header>
 
       {children}
 
-      <footer className="border-t-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-4">
+      <footer className="border-t-2 border-[#141210]/15 bg-[#efe7d6]">
+        {/* THE ENDPAPER ──────────────────────────────────────────────────────────────────
+            A strip of the cover closes every page. A book opens on its painting and shuts on a
+            slice of the same picture; that is not decoration, it is the binding telling you it
+            held. This is the last thing a reader sees before the record ends, and it is the
+            same work they met at the door — so a page is a page of one book, not a printout.
+
+            No words sit on it, on purpose. The credit is said once, on the front, where the
+            picture is shown at full strength and can be looked at properly. A credit repeated
+            at the foot of every page would stop being a credit and start being a watermark. */}
+        <div className="relative h-14 sm:h-20 overflow-hidden" aria-hidden="true">
+          <RecordCover position="center 76%" strength={0.95} />
+          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.22) 0%, rgba(36,29,22,.5) 55%, rgba(36,29,22,.88) 100%)' }} />
+        </div>
+
+        <div className="px-4 py-4">
         {/* The foot of the page wraps instead of sliding sideways. It was one scrolling line
             before, centred and wider than a phone — which clipped whichever links sat at its
             start, so Terms and Privacy could be off-screen no matter where they were put.
@@ -214,6 +240,7 @@ export default function ClimateLayout({ children, currentPage }) {
           >
             x = x
           </Link>
+        </div>
         </div>
       </footer>
     </div>

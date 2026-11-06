@@ -44,7 +44,8 @@ const CATEGORIES = [
   { id: 'other', label: 'Other', icon: Globe },
 ];
 
-import { CATEGORY_IMAGE, IMAGES } from '@/components/climate/categoryImages';
+import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
+import RecordCover from '@/components/climate/RecordCover';
 
 // ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [
@@ -377,15 +378,7 @@ export default function TogetherChangeClimate() {
               opens the page, so the page has one hand under it from the first line to the
               last. Held back far enough that her sentence never has to fight it, and cool
               where the words are warm, because the words have to win. */}
-          <img
-            src={IMAGES.cover}
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: 'center 46%', opacity: 0.55 }}
-          />
+          <RecordCover position="center 46%" strength={0.55} />
           <div
             className="absolute inset-0 pointer-events-none"
             style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.58) 0%, rgba(36,29,22,.68) 45%, rgba(36,29,22,.88) 100%)' }}
@@ -478,14 +471,7 @@ export default function TogetherChangeClimate() {
             shown as a picture rather than hidden as a texture. The scrim does one job
             only: hold the words up where they sit. Everything below the limb is quiet in
             the painting itself, so the title keeps its ground without a black slab. */}
-        <img
-          src={IMAGES.cover}
-          alt=""
-          fetchpriority="high"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ objectPosition: 'center 34%', filter: 'saturate(1.06) contrast(1.02)' }}
-        />
+        <RecordCover position="center 34%" priority className="!pointer-events-none" style={{ filter: 'saturate(1.06) contrast(1.02)' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18,14,10,.34) 0%, rgba(18,14,10,.06) 30%, rgba(26,21,16,.52) 62%, rgba(36,29,22,.92) 86%, #241d16 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
