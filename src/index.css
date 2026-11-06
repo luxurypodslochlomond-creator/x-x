@@ -17,14 +17,29 @@
    voice, the record's own why, its close. Nothing administrative is set in it.
 
    Warm paper has always been the ground. The words are stated plainly on it. */
-@font-face {
-  font-family: 'Record Caslon';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/adobe-caslon-400-normal.woff2') format('woff2');
-}
+/* ── THE RECORD'S READING VOICE, FOR EVERY TONGUE AND EVERY YEAR ─────────────────
+   A downloaded typeface is a promise somebody else has to keep. A licence can be
+   withdrawn, a CDN can go dark, a file can 404, and a Latin-only face leaves the
+   reader in Arabic, Devanagari, Chinese or Cherokee staring at rows of empty boxes.
+   None of that is acceptable on a record meant to outlive all of us.
 
+   So the reading voice is not a file. It is a stack, and it resolves to the face
+   each device ALREADY ships for each script — which is how every newspaper and every
+   operating system on earth has answered this question for thirty years. Latin prose
+   lands on Georgia: drawn for a screen in 1996, still present on Windows, macOS and
+   iOS, with the large x-height and sturdy strokes that keep 17px comfortable instead
+   of hairline-thin. Anything Georgia lacks falls to 'Iowan Old Style', 'Charter' or
+   'Noto Serif' before ever reaching a generic.
+
+   Then every other script lands on its own native reading face — Arabic on Geeza Pro
+   or Naskh, Devanagari on Sangam or Nirmala, Hebrew on Arial Hebrew, Chinese on Songti
+   or Hiragino, Cherokee on Noto Sans Cherokee. A browser picks, per character, the
+   first family in the list that actually has that glyph, so this one list reads in
+   every tongue the record speaks without a single byte downloaded, without a font
+   swap moving the page under the reader's eye, and without a glyph ever going missing.
+
+   Nothing here can expire, be revoked, be paywalled, or be taken down. That is the
+   whole test, and it is the only one that matters at deep time. */
 @font-face {
   font-family: 'Record Cherokee';
   font-style: normal;
@@ -139,7 +154,27 @@ button:focus-visible {
     /* The mark's own colour — cobalt. It belongs to x = x and to nothing else on the
        record: the orange is the record's signal, this is the line it rests on. */
     --record-mark: 27 43 240;
-    --font-record-reading: 'Record Caslon', 'Source Serif 4', Georgia, serif;
+    --font-record-reading:
+      Georgia, 'Iowan Old Style', 'Charter', 'Noto Serif', 'Times New Roman',
+      'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
+      'Noto Sans Devanagari', 'Devanagari Sangam MN', 'Nirmala UI',
+      'Noto Sans Bengali', 'Bangla Sangam MN',
+      'Noto Sans Gurmukhi', 'Gurmukhi MN',
+      'Noto Sans Gujarati', 'Gujarati Sangam MN',
+      'Noto Sans Tamil', 'Tamil Sangam MN',
+      'Noto Sans Telugu', 'Telugu Sangam MN',
+      'Noto Sans Kannada', 'Kannada Sangam MN',
+      'Noto Sans Malayalam', 'Malayalam Sangam MN',
+      'Noto Sans Sinhala', 'Sinhala Sangam MN',
+      'Noto Sans Thai', 'Thonburi',
+      'Noto Sans Hebrew', 'Arial Hebrew',
+      'Noto Sans Ethiopic', 'Kefa',
+      'Noto Sans Armenian', 'Mshtakan',
+      'Noto Sans Georgian', 'Sylfaen',
+      'Songti SC', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK SC',
+      'Noto Sans CJK SC', 'Microsoft YaHei', 'Malgun Gothic',
+      'Noto Sans Cherokee',
+      system-ui, -apple-system, 'Segoe UI', sans-serif;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
     --record-light-signal: 127 201 228;
@@ -186,7 +221,27 @@ button:focus-visible {
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
     --record-mark: 27 43 240;
-    --font-record-reading: 'Record Caslon', 'Source Serif 4', Georgia, serif;
+    --font-record-reading:
+      Georgia, 'Iowan Old Style', 'Charter', 'Noto Serif', 'Times New Roman',
+      'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
+      'Noto Sans Devanagari', 'Devanagari Sangam MN', 'Nirmala UI',
+      'Noto Sans Bengali', 'Bangla Sangam MN',
+      'Noto Sans Gurmukhi', 'Gurmukhi MN',
+      'Noto Sans Gujarati', 'Gujarati Sangam MN',
+      'Noto Sans Tamil', 'Tamil Sangam MN',
+      'Noto Sans Telugu', 'Telugu Sangam MN',
+      'Noto Sans Kannada', 'Kannada Sangam MN',
+      'Noto Sans Malayalam', 'Malayalam Sangam MN',
+      'Noto Sans Sinhala', 'Sinhala Sangam MN',
+      'Noto Sans Thai', 'Thonburi',
+      'Noto Sans Hebrew', 'Arial Hebrew',
+      'Noto Sans Ethiopic', 'Kefa',
+      'Noto Sans Armenian', 'Mshtakan',
+      'Noto Sans Georgian', 'Sylfaen',
+      'Songti SC', 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK SC',
+      'Noto Sans CJK SC', 'Microsoft YaHei', 'Malgun Gothic',
+      'Noto Sans Cherokee',
+      system-ui, -apple-system, 'Segoe UI', sans-serif;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
     --record-light-signal: 127 201 228;

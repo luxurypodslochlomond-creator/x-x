@@ -14,6 +14,7 @@
   letter-spacing: 0;
   font-kerning: normal;
   font-variant-ligatures: common-ligatures;
+  text-wrap: pretty;
   overflow-wrap: break-word;
   max-inline-size: 65ch;
 }
