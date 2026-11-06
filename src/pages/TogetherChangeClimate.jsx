@@ -827,16 +827,7 @@ export default function TogetherChangeClimate() {
         <p className="px-4 pt-1 text-center text-[9px] font-mono uppercase tracking-[0.15em] text-[#5a5246] bg-[#efe7d6]">
           Laurie Anderson · From the Air, Big Science, 1982
         </p>
-        <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[14px] text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline" style={{ fontFamily: 'var(--font-reading)' }}>
-          {t.honour} <span className="text-[#b3261e]">→</span>
-        </Link>
-        {/* Builder attribution, without a separate design-influence credit. */}
-        <div className="px-4 pb-10 pt-1 text-center bg-record-bone">
-          <p className="text-xs font-body text-record-muted leading-relaxed">
-            Built by Brian Hughes ·{' '}
-            <Link to="/Welcome" className="hover:text-record-ink underline underline-offset-2 transition-colors">UF51 CIC</Link>
-          </p>
-        </div>
+        <div className="pb-10 bg-[#efe7d6]" />
       </div>
 
       {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}
