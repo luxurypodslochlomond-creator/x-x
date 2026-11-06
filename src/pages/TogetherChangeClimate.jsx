@@ -830,16 +830,11 @@ export default function TogetherChangeClimate() {
         <Link to={createPageUrl('ClimateFounder')} className="block px-4 py-6 text-center text-[14px] text-[#5a5246] bg-[#efe7d6] hover:text-[#b3261e] transition-colors active:underline" style={{ fontFamily: 'var(--font-reading)' }}>
           {t.honour} <span className="text-[#b3261e]">→</span>
         </Link>
-        {/* ── CREDITS ── the record names who built it. Asked for by the founder, and
-               right on a record that expects every entry to carry its origin. ── */}
-        <div className="px-4 pb-10 pt-1 text-center bg-[#efe7d6] space-y-1.5">
-          <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed">
-            Platform built by Brian Hughes ·{' '}
-            <Link to={createPageUrl('Welcome')} className="text-[#5a5246] hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
-            {' '}· Scotland
-          </p>
-          <p className="text-[9px] font-mono text-[#5a5246]/60 leading-relaxed">
-            Signal palette after Brian Beadie — Glasgow
+        {/* Builder attribution, without a separate design-influence credit. */}
+        <div className="px-4 pb-10 pt-1 text-center bg-record-bone">
+          <p className="text-xs font-body text-record-muted leading-relaxed">
+            Built by Brian Hughes ·{' '}
+            <Link to="/Welcome" className="hover:text-record-ink underline underline-offset-2 transition-colors">UF51 CIC</Link>
           </p>
         </div>
       </div>
