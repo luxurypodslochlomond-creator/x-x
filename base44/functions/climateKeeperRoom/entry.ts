@@ -26,6 +26,10 @@ const KIND = {
   track: { entity: 'ClimateTrack', seal: 'track' },
 };
 
+// The kinds of entry that carry a person's name on them. A group, a comment and a track are
+// signed by the record in other ways; these three carry the editor field.
+const SIGNABLE = ['solution', 'action', 'news'];
+
 const TITLE = (r) =>
   r.title || r.headline || r.name || (r.content ? r.content.slice(0, 70) : '') || 'Untitled';
 
@@ -127,9 +131,12 @@ export default async function (req) {
       if (!record) return Response.json({ error: 'That entry is no longer here' }, { status: 404 });
 
       const publishing = decision === 'publish';
-      await base44.asServiceRole.entities[kind.entity].update(id, {
-        status: publishing ? 'published' : 'draft',
-      });
+      // Her yes is also her signature. The name written on an entry is the person who put it
+      // there — so when the keeper says yes in this room, her own name goes on the entry, from
+      // the roster line she signed in with, never typed in and never borrowed from anyone.
+      const patch = { status: publishing ? 'published' : 'draft' };
+      if (publishing && SIGNABLE.includes(type)) patch.editor = who.name;
+      await base44.asServiceRole.entities[kind.entity].update(id, patch);
 
       // Her decision, written down: who, what, and the note that sat beside it.
       try {
@@ -175,6 +182,53 @@ export default async function (req) {
       }
 
       return Response.json({ success: true, status: publishing ? 'published' : 'held', sealed });
+    }
+
+    // ── HER NAME ON WHAT IS ALREADY UP ──────────────────────────────────────────
+    // The name on an entry belongs to the person who put it there. Entries published before
+    // signing existed — or signed on her behalf — can carry a name that is not true, and only
+    // she can settle that. One line at a time: hers, or not hers. A no is not a deletion: the
+    // entry stays exactly where it is and reads plainly "unsigned". Nothing is guessed here,
+    // and nothing is written on a stranger's behalf.
+    if (action === 'names') {
+      const mine = String(who.name || '').trim().toLowerCase();
+      const results = await Promise.allSettled(
+        SIGNABLE.map((t) =>
+          base44.asServiceRole.entities[KIND[t].entity].filter(
+            { status: 'published' },
+            { sort: '-created_date', limit: 100 }
+          )
+        )
+      );
+      const rows = [];
+      results.forEach((settled, i) => {
+        if (settled.status !== 'fulfilled') return;
+        const list = settled.value?.items || settled.value || [];
+        list.forEach((r) => {
+          const signed = String(r.editor || '').trim();
+          if (signed.toLowerCase() === mine) return;
+          rows.push({ type: SIGNABLE[i], id: r.id, title: TITLE(r), editor: signed });
+        });
+      });
+      return Response.json({ isKeeper: true, name: who.name, rows });
+    }
+
+    if (action === 'sign') {
+      const { type, id, isMine } = body;
+      if (!SIGNABLE.includes(type) || !id) {
+        return Response.json({ error: 'Missing type or id' }, { status: 400 });
+      }
+      let entry;
+      try {
+        entry = await base44.asServiceRole.entities[KIND[type].entity].get(id);
+      } catch (e) {
+        return Response.json({ error: 'That entry is no longer here' }, { status: 404 });
+      }
+      if (!entry) return Response.json({ error: 'That entry is no longer here' }, { status: 404 });
+
+      const name = isMine ? who.name : '';
+      await base44.asServiceRole.entities[KIND[type].entity].update(id, { editor: name });
+      return Response.json({ success: true, editor: name });
     }
 
     return Response.json({ error: 'Unknown action' }, { status: 400 });

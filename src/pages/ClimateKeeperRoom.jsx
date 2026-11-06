@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { ArrowRight, Check, ExternalLink, Hand, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import NameOnTheRecord from '@/components/climate/NameOnTheRecord';
 
 // ── THE KEEPER'S ROOM ────────────────────────────────────────────────────────
 // Her page, not the builder's. Three things on it: what is waiting, where each one came
@@ -214,6 +215,8 @@ export default function ClimateKeeperRoom() {
               <Card key={`${item.type}-${item.id}`} item={item} onDecide={decide} busy={busy === item.id} />
             ))
           )}
+
+          <NameOnTheRecord />
 
           <p className="mt-5 text-[10.5px] font-mono leading-relaxed text-[#5a5246]">
             Every yes and every not-yet is written down with your name and the time, so a reader who asks who
