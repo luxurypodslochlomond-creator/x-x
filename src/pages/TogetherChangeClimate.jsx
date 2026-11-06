@@ -445,17 +445,27 @@ export default function TogetherChangeClimate() {
           type, and warm enough to belong to the paper below it. The photograph keeps its own
           colour for the same reason the cards do: this is a record of real places. */}
       <div className="relative bg-[#241d16] overflow-hidden" style={{ minHeight: 'clamp(460px, 62vh, 620px)' }}>
+        {/* THE COVER, AT FULL STRENGTH ────────────────────────────────────────────────
+            This picture used to be a stock photograph of the planet, blended into the
+            band at forty-two per cent so it read as texture rather than as a picture.
+            The effect was a dark room with a faint smudge in it: the record's own front
+            door had less colour than any entry behind it, and a page about the living
+            world opened in grey.
+
+            Artists put a cover on the thing they made. So the record has one, painted for
+            it rather than borrowed — the living earth, in space, in colour — and it is
+            shown as a picture rather than hidden as a texture. The scrim does one job
+            only: hold the words up where they sit. Everything below the limb is quiet in
+            the painting itself, so the title keeps its ground without a black slab. */}
         <img
-          src={IMAGES.global}
+          src={IMAGES.cover}
           alt=""
           fetchpriority="high"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: 'saturate(1.05) contrast(1.05)', mixBlendMode: 'screen', opacity: 0.42 }}
+          style={{ objectPosition: 'center 34%', filter: 'saturate(1.06) contrast(1.02)' }}
         />
-        {/* Neutral wash, no blue in it: a blue wash over a full-width picture is a blue
-            field by another name, and the blue has to stay small to mean anything. */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.38), rgba(36,29,22,.5) 45%, #241d16 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18,14,10,.34) 0%, rgba(18,14,10,.06) 30%, rgba(26,21,16,.52) 62%, rgba(36,29,22,.92) 86%, #241d16 100%)' }} />
         {/* Scanline texture — cold transmission signal */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
@@ -509,6 +519,12 @@ export default function TogetherChangeClimate() {
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
           <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#efe7d6] tracking-[0.09em]" style={{ opacity: 0.8 }}>
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
+          </p>
+          {/* A picture earns its credit, and a credit says where a picture came from. This
+              one came from nowhere else: it was painted for the record, so nobody's work
+              is being used and nobody's name is being borrowed to make a page look better. */}
+          <p className="text-[8px] font-mono uppercase tracking-[0.18em] mt-2.5 text-[#efe7d6]/45">
+            Cover · painted for the record
           </p>
         </div>
       </div>
