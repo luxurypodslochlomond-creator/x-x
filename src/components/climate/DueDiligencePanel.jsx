@@ -1,13 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { ArrowRight, Check, RefreshCw, X } from 'lucide-react';
+import { ArrowRight, RefreshCw } from 'lucide-react';
 
-// ── THE DUE DILIGENCE PASS, ON THE PAGE ──────────────────────────────────────
-// Ten questions a research panel asks before it lends its name, each one counted from the
-// record rather than answered by a model. The score is the number of rows that are true —
-// nothing else. It is shown to the keeper first, because it is far more useful as a list of
-// what is missing than as a mark.
+// ── WHAT THE RECORD HOLDS ────────────────────────────────────────────────────
+// The questions a research panel asks before it lends its name, each one answered by counting
+// rows in the record rather than by asking a model.
+//
+// There is no score here, and there was one for about an hour. A mark out of ten turns a
+// record into a product being rated, and this record is not being sold, ranked or graded —
+// it is being kept. So the same counts are shown as plain facts: what is held, and what is
+// still open. Nothing is hidden because it looks bad; nothing is dressed up because it looks
+// good. A person reading it in fifty years gets the state of the thing, not a verdict on it.
 export default function DueDiligencePanel() {
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
@@ -55,22 +59,13 @@ export default function DueDiligencePanel() {
     );
   }
 
-  const { score, rows, counts, as_of } = data;
-  const open = rows.filter((r) => !r.pass);
-
+  const { rows, counts, as_of } = data;
   return (
     <div>
       <div className="flex items-stretch border-2 border-[#141210] bg-[#efe7d6] mb-3">
-        <div className="flex flex-col justify-center px-4 py-3 border-r-2 border-[#141210] flex-shrink-0">
-          <p className="text-[28px] font-black leading-none text-[#141210]" style={{ fontFamily: 'var(--font-display)' }}>
-            {score.passed}
-            <span className="text-[#8a8375]">/{score.total}</span>
-          </p>
-          <p className="text-[9px] font-mono font-black uppercase tracking-[0.16em] text-[#5a5246] mt-1">{score.percent}%</p>
-        </div>
-        <div className="px-3 py-3 min-w-0">
+        <div className="px-3 py-3 min-w-0 flex-1">
           <p className="text-[11px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]">
-            {open.length === 0 ? 'Nothing outstanding' : `${open.length} still open`}
+            What the record holds, today
           </p>
           <p className="text-[10px] font-mono leading-snug text-[#5a5246] mt-1">
             {counts.published} published · {counts.seals} sealed · {counts.checks} checks · {counts.keepers} keepers ·{' '}
@@ -91,18 +86,16 @@ export default function DueDiligencePanel() {
 
       <div className="border-2 border-[#141210] divide-y divide-[#141210]/15">
         {rows.map((r) => (
-          <div key={r.key} className="flex items-start gap-2 px-3 py-2.5 bg-[#f7f1e5]">
-            <span
-              className="flex-shrink-0 w-5 h-5 flex items-center justify-center border-2 mt-0.5"
-              style={{
-                borderColor: r.pass ? '#1e3a2b' : '#b3261e',
-                background: r.pass ? '#1e3a2b' : 'transparent',
-              }}
-            >
-              {r.pass ? <Check className="w-3 h-3 text-[#f4efe4]" /> : <X className="w-3 h-3 text-[#b3261e]" />}
-            </span>
+          <div key={r.key} className="px-3 py-2.5 bg-[#f7f1e5]">
             <div className="min-w-0 flex-1">
-              <p className="text-[11.5px] font-black leading-snug text-[#141210]">{r.test}</p>
+              <div className="flex items-baseline justify-between gap-2">
+                <p className="text-[11.5px] font-black leading-snug text-[#141210]">{r.test}</p>
+                {!r.pass && (
+                  <span className="flex-shrink-0 text-[9px] font-black font-mono uppercase tracking-[0.1em] text-[#b3261e]">
+                    still open
+                  </span>
+                )}
+              </div>
               <p className="text-[10.5px] font-mono leading-relaxed text-[#5a5246] mt-1">{r.detail}</p>
               {r.fix ? (
                 <Link
@@ -118,10 +111,11 @@ export default function DueDiligencePanel() {
       </div>
 
       <p className="text-[10px] font-mono leading-relaxed text-[#5a5246] mt-4 border-t border-[#141210]/15 pt-3">
-        Ten questions, each answered by counting rows rather than by asking a model. A machine&apos;s approval
-        would be an opinion with no evidence behind it, and a panel would be right to disregard it — so it is not
-        counted here at all. This is what the record actually holds, and it is meant to be run again as the
-        record changes.
+        No mark, no grade, no percentage: the record is not being sold or rated, and a number out of ten would
+        only invite someone to chase it. These are counts, and every one can be checked against the record
+        itself. A machine&apos;s approval is not among them — an AI nodding at a record is an opinion with no
+        evidence behind it, and anyone would be right to disregard it. Run it again as the record changes; the
+        facts are allowed to move, and they are meant to.
       </p>
     </div>
   );

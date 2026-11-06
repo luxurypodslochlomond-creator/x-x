@@ -51,7 +51,7 @@ export default function ClimateKeeperRoom() {
     ...(who.isKeeper ? [{ key: 'decide', label: 'Decide' }] : []),
     { key: 'check', label: 'Check' },
     { key: 'desk', label: 'Counts' },
-    { key: 'score', label: 'Score' },
+    { key: 'score', label: 'What it holds' },
   ];
 
   return (
@@ -61,7 +61,7 @@ export default function ClimateKeeperRoom() {
       title={who.isKeeper ? 'Everything the record needs, in one room' : 'Open the source, say what you find'}
       statement={
         who.isKeeper
-          ? 'What is waiting for a yes, what is waiting for a pair of eyes, the counts, and the honest score. You hold the keys and you may also check — a keeper reading a link is the same work, done by someone who cares.'
+          ? 'What is waiting for a yes, what is waiting for a pair of eyes, the counts, and what the record actually holds. You hold the keys and you may also check — a keeper reading a link is the same work, done by someone who cares.'
           : 'What is waiting to be opened, where each entry is claimed from, and how the record is doing. Nothing you do here publishes, edits or deletes anything.'
       }
       returnTo="/TogetherChangeClimate"
