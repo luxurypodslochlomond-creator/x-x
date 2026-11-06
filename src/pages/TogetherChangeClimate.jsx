@@ -369,6 +369,27 @@ export default function TogetherChangeClimate() {
              belongs. Her words are the record's first transmission, so they get its plate. ── */}
       <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="relative mx-auto max-w-[760px] bg-[#241d16] border-2 border-[#241d16] px-5 pt-6 pb-6 overflow-hidden">
+          {/* THE COVER BEHIND HER WORDS ─────────────────────────────────────────────────
+              Her line used to sit on a flat dark plate: the right idea (a deep ground, so the
+              words carry) with nothing behind it, which is why it read as a card rather than
+              as a voice in a room. The record's own painting now stands in the ground behind
+              her — the living earth, in the dark, lit from one side. It is the same work that
+              opens the page, so the page has one hand under it from the first line to the
+              last. Held back far enough that her sentence never has to fight it, and cool
+              where the words are warm, because the words have to win. */}
+          <img
+            src={IMAGES.cover}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: 'center 46%', opacity: 0.55 }}
+          />
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.58) 0%, rgba(36,29,22,.68) 45%, rgba(36,29,22,.88) 100%)' }}
+          />
           {/* The record's grain, inside her plate — the same texture the hero wears */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.07]"
