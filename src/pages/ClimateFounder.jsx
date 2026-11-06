@@ -85,7 +85,10 @@ export default function ClimateFounder() {
 
         <div className="relative z-10 px-6 lg:px-10 py-12 lg:py-20 flex flex-col items-center justify-center gap-5 text-center min-h-[300px] lg:min-h-[400px]">
           <SignalBeacon size={48} color="#7fc9e4" />
-          <blockquote className="text-[14px] lg:text-[18px] font-mono leading-relaxed text-[#efe7d6] max-w-md lg:max-w-3xl italic" style={{ animation: 'twcc-epigraph 1.4s ease-out .2s both' }}>
+          {/* Her own sentence, in the record's reading voice — it was set in monospace,
+              italic, which is the lettering of a listing pretending to be a quotation.
+              These are the most human words on the page and they now look like it. */}
+          <blockquote className="text-[#efe7d6] max-w-md lg:max-w-3xl italic" style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(20px, 2.4vw, 27px)', lineHeight: 1.5, animation: 'twcc-epigraph 1.4s ease-out .2s both' }}>
             “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
           </blockquote>
           <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#e2602a]" style={{ animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
@@ -103,7 +106,7 @@ export default function ClimateFounder() {
 
       {/* Name & role — bone band */}
       <div className="px-5 lg:px-10 py-8 lg:py-14 text-center border-b-2 border-[#141210] bg-[#f7f1e5]">
-        <h1 className="font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.4vw, 54px)', letterSpacing: '-0.02em' }}>
+        <h1 className="uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.4vw, 54px)', letterSpacing: '0.004em' }}>
           Janine M. H. Selendy
         </h1>
         {/* Her role gets its own line and one clear step above the sentence that
@@ -240,7 +243,7 @@ export default function ClimateFounder() {
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
           <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
-          <p className="text-[14px] lg:text-[19px] font-black font-mono uppercase leading-relaxed max-w-sm lg:max-w-2xl mx-auto text-[#efe7d6]">
+          <p className="max-w-sm lg:max-w-2xl mx-auto text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(21px, 2.6vw, 30px)', lineHeight: 1.42 }}>
             “Together we can change the course of climate change.”
           </p>
         </div>

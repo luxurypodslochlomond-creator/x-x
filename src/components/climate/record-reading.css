@@ -83,3 +83,42 @@
   .record-pages a[data-record-returned] { outline: none; }
 }
 html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
+
+/* ── THE CUT, AT EVERY SIZE ────────────────────────────────────────────────────────
+   Two corrections, and between them they are most of the reason the record was reading
+   as a leaflet rather than as a printed page.
+
+   The first: a heading is set at the face's own weight. Every heading used to lean on a
+   synthesised black, which in a cut serif smears the thick strokes and makes a big line
+   look smudged and dull — heavy without being strong. Size and air carry the hierarchy
+   now, and the tracking comes back to almost nothing, so a line sits as words rather
+   than as a row of blocks.
+
+   The second: the floor. Labels were arriving at seven, eight and nine pixels — small
+   enough that a reader leans in, and repeated often enough that the page shimmers with
+   little grey marks. That shimmer is what "flat, no life" actually looks like: not
+   enough contrast in scale, too much incident at the bottom of it. Nothing on this
+   record is set below eleven pixels any more, and the wide letterspacing that made
+   those specks look like fragments of code is pulled back, so a label reads as a caption
+   and the page gets quieter the closer you look.
+
+   Sizes are corrected from below only. Nothing is made smaller, so no layout tightens
+   around a word that used to fit. */
+.record-pages :is(h1, h2, h3, h4) {
+  font-weight: 400 !important;
+  letter-spacing: 0.004em !important;
+}
+.record-pages :is(h1, h2) { line-height: 1.04 !important; }
+
+.record-pages :is(
+  [class*="text-[7px]"],
+  [class*="text-[8px]"],
+  [class*="text-[9px]"]
+):not(dialog *):not([role="dialog"] *) {
+  font-size: 0.6875rem !important;
+  letter-spacing: 0.1em !important;
+  line-height: 1.55 !important;
+}
+.record-pages [class*="text-[10px]"]:not(dialog *):not([role="dialog"] *) {
+  letter-spacing: 0.1em !important;
+}

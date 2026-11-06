@@ -138,7 +138,7 @@ seedTranslations(T);
          to={`/ClimateDetail/${item.entry_type}/${item.id}`}
          className={`relative text-left overflow-hidden bg-[#241d16] border border-[#241d16] active:border-[#e2602a] ${
            isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
-         } min-h-[110px] lg:min-h-[168px] flex items-end active:scale-95 transition-transform duration-100`}
+         } aspect-[4/3] flex items-end active:scale-95 transition-transform duration-100`}
        >
          <img
            src={cardImage}
@@ -160,7 +160,10 @@ seedTranslations(T);
            <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ef5a4a]'}`}>
              {isSolution ? 'Solution' : 'Crisis'}
            </div>
-           <h3 className="text-[13.5px] font-black leading-snug text-[#efe7d6] line-clamp-3 mt-0.5">
+           {/* A cut serif needs a little more size than a condensed sans did to hold its
+               own over a photograph, so the card title gains a step and tightens its
+               leading. Same words, same place, just not faint. */}
+           <h3 className="text-[15px] leading-[1.28] text-[#efe7d6] line-clamp-3 mt-1">
              {item.title}
            </h3>
          </div>
@@ -345,8 +348,6 @@ export default function TogetherChangeClimate() {
     <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/20" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes twcc-stamp { from { opacity: 0; transform: rotate(-17deg) scale(1.02); } to { opacity: .9; transform: rotate(-17deg) scale(1); } }
-        @keyframes twcc-stamp-pulse { 0%, 100% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6; } 50% { box-shadow: inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6, 0 0 24px rgba(15,95,122,.55); } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
@@ -388,11 +389,11 @@ export default function TogetherChangeClimate() {
             className="absolute inset-0 pointer-events-none"
             style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.58) 0%, rgba(36,29,22,.68) 45%, rgba(36,29,22,.88) 100%)' }}
           />
-          {/* The record's grain, inside her plate — the same texture the hero wears */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.07]"
-            style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }}
-          />
+          {/* No ruled texture inside her plate. The scanline was the record's attempt to
+              look like a transmission, and it did the opposite of what it was for: a warm
+              paper ground, a painted sky and a moving set of rules over the top of them is
+              three textures arguing, and the winning feeling is noise. The painting, the
+              grain and the words are enough. Air is the thing that reads as alive. */}
 
           <div className="relative z-10 flex flex-col items-center gap-4 text-center">
             <div className="flex items-center justify-center gap-2">
@@ -478,8 +479,8 @@ export default function TogetherChangeClimate() {
             the painting itself, so the title keeps its ground without a black slab. */}
         <RecordCover position="center 34%" priority className="!pointer-events-none" style={{ filter: 'saturate(1.06) contrast(1.02)' }} />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18,14,10,.34) 0%, rgba(18,14,10,.06) 30%, rgba(26,21,16,.52) 62%, rgba(36,29,22,.92) 86%, #241d16 100%)' }} />
-        {/* Scanline texture — cold transmission signal */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+        {/* The rules are gone from here too — see the note on her plate above. What is
+            left over the painting is only the scrim that holds the title up. */}
 
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
         <div className="relative z-10 bg-[#efe7d6] px-5 lg:px-10 py-3 flex items-center justify-between gap-3"
@@ -505,37 +506,35 @@ export default function TogetherChangeClimate() {
               clear step above every other page's title (30-35px), still the largest.
               From 782px up it is the same 72px it always was. */}
           <h1 className="font-black uppercase leading-[0.94] max-w-[360px] lg:max-w-[640px] relative z-10 text-[#efe7d6]"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 9.2vw, 72px)', letterSpacing: '-0.035em' }}>
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 9.2vw, 72px)', letterSpacing: '0.004em' }}>
             {t.title_a}<br />
             <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
           </h1>
-          {/* Record-of-the-time seal — the stamp of truth (desktop only, avoids mobile title overlap) */}
-          <div className="hidden lg:flex absolute right-12 top-20 w-[104px] h-[104px] pointer-events-none items-center justify-center"
-            style={{ transform: 'rotate(-17deg)', animation: 'twcc-stamp .25s ease-out .1s both, twcc-stamp-pulse 3.2s ease-in-out .6s infinite' }}>
-            <div className="absolute inset-0 rounded-full border-8 border-[#e2602a]" style={{ boxShadow: 'inset 0 0 0 3px #141210, 0 0 0 2px #efe7d6' }} />
-            <div className="relative text-center" style={{ opacity: 0.9 }}>
-              <div className="text-[7px] font-black font-mono uppercase tracking-[0.1em] text-[#e2602a] leading-none">Record</div>
-              <div className="text-[6px] font-mono text-[#efe7d6]/70 leading-none mt-0.5">of the</div>
-              <div className="text-[7px] font-black font-mono uppercase tracking-[0.1em] text-[#e2602a] leading-none mt-0.5">Time</div>
-            </div>
-          </div>
+          {/* The tilted rubber stamp is gone. It was three of the smallest words on the
+              page, rotated, pulsing, and set in a ring that pulled the eye before the
+              title did — the one element on the opening that was pure costume. The name
+              of the record is already said in the masthead above and in the voice at the
+              top of this page; saying it a third time in a badge made the page busier and
+              no clearer. */}
         </div>
 
         {/* Closing band — ink, not a second colour. It was the brightest slab on the record,
              and that slab spent the blue before a single entry had been read, so there was
              nothing left for the blue to point at. The record opens deep and stays deep. */}
-        <div className="relative z-10 bg-[#241d16] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both, twcc-flicker 7s linear 1.2s infinite' }}>
+        {/* The flicker is gone. A sentence that blinks is a trick, and a trick is the
+            cheapest way to look alive; the line reads better held steady. */}
+        <div className="relative z-10 bg-[#241d16] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
           {/* The record's own sentence, in its own voice — sentence case, on the deep
               band. Everything else in this band stays as it was. */}
           <p className="text-[16px] leading-[1.7] max-w-[360px] lg:max-w-[620px] text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>{t.sub}</p>
           {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
-          <p className="text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-[#efe7d6] tracking-[0.09em]" style={{ opacity: 0.8 }}>
+          <p className="text-[11px] font-black font-mono uppercase leading-relaxed mt-3 text-[#efe7d6]/75 tracking-[0.06em]">
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
           </p>
           {/* A picture earns its credit, and a credit says where a picture came from. This
               one came from nowhere else: it was painted for the record, so nobody's work
               is being used and nobody's name is being borrowed to make a page look better. */}
-          <p className="text-[8px] font-mono uppercase tracking-[0.18em] mt-2.5 text-[#efe7d6]/45">
+          <p className="text-[10px] font-mono uppercase tracking-[0.14em] mt-2.5 text-[#efe7d6]/55">
             Cover · painted for the record
           </p>
         </div>

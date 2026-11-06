@@ -167,7 +167,7 @@ export default function ClimateLayout({ children, currentPage }) {
           it and a record that is a picture. Cheap to run, too: one composited layer, no
           repaint per scroll, nothing downloaded that a phone was not already sent. */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-        <RecordCover position="center 42%" strength={0.17} priority />
+        <RecordCover position="center 42%" strength={0.23} priority />
         {/* The sheet has a surface, not just a colour: tooth and foxing over the painting,
             under every word. See RecordGrain — it is drawn, not downloaded. */}
         <RecordGrain />
@@ -196,8 +196,15 @@ export default function ClimateLayout({ children, currentPage }) {
             className="flex items-center gap-2.5 flex-shrink-0 group"
             aria-label="Record of the Time — the record's front page"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-            <span className="text-[#efe7d6] font-black font-mono text-[11px] uppercase tracking-[0.2em] leading-none group-hover:text-[#e2602a] transition-colors">
+            {/* The record says its own name in its own voice. It was a monospaced label in
+                capitals, spaced out like a field name — the same lettering as a date or a
+                count, which meant the one line that names the whole thing sounded like
+                metadata. One pulse was enough too: the dot is a mark, not a heartbeat. */}
+            <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] flex-shrink-0" />
+            <span
+              className="text-[#efe7d6] text-[18px] leading-none group-hover:text-[#e2602a] transition-colors"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
               Record of the Time
             </span>
           </Link>

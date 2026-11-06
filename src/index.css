@@ -1,22 +1,21 @@
 /* Oswald is loaded from index.html, off the critical path — first paint never waits on a font. */
 
-/* ── THE READING VOICE ──────────────────────────────────────────────────────────
-   The record claims two voices. It has one face: the machine's lettering.
+/* ── THE RECORD HAS ONE VOICE NOW ────────────────────────────────────────────────
+   This file has argued with itself about the reading voice three times, and the reason
+   is worth keeping: every argument was about which face to use, when the real fault was
+   that the record had too many faces at once.
 
-   That is not a shortage, it is the point. A second, warmer face was tried and
-   taken off. Every voice this record listens to — Anderson's pilot, Janine at
-   fifteen in the harbour, a group saying what it actually did — arrives through
-   the same lettering a date and a source arrive in. The feeling comes from the
-   restraint, not from the typeface; a warm book serif is the language people are
-   already tuned out of.
+   Two earlier answers are recorded below because both are still true in their own way.
+   Monospace for everything made prose look like a listing — Nicolas said so, and he was
+   right. A news serif for prose fixed that but left the headlines in a condensed poster
+   face, so the page still had two voices and no middle. The answer is neither: the record
+   is set in one chiselled serif, from the largest headline to the smallest caption, and
+   everything below is hierarchy by size and air alone.
 
-   So the human voice is not a different face. It is the same face, given air:
-   larger, looser, a longer line, and rare enough that seeing it still means
-   something. MACHINE (monospace) carries everything, including the words.
-   READING (--font-reading) is set apart by size and rhythm alone — a quoted
-   voice, the record's own why, its close. Nothing administrative is set in it.
+   Monospace survives, deliberately small: dates, counts, codes, the x = x line. It is the
+   machine's mark, not the record's voice.
 
-   Warm paper has always been the ground. The words are stated plainly on it. */
+   The history below is kept as the record of that argument, not as the current setting. */
 /* ── THE RECORD'S READING VOICE — OURS, AND FOR EVERY TONGUE ────────────────────
    Georgia was a system default, and a system default is the voice of a memo. The
    record does not borrow the machine's clothes for its own words.
@@ -46,6 +45,29 @@
   font-display: swap;
   src: url('https://fonts.gstatic.com/s/notosanscherokee/v25/KFO6Cm6Yu8uF-29fiz9vQF9YWK6Z8O1eb1uxOVg.woff2') format('woff2');
   unicode-range: U+13A0-13FF, U+AB70-ABBF;
+}
+
+/* ── THE RECORD'S VOICE, CUT NOT PRINTED ────────────────────────────────────────
+   Every headline on this record was condensed uppercase, tightly tracked — the voice
+   of a poster for a gig, not the voice of a record of the world. That is what read
+   "shouty": nothing could be said quietly, because the face had only one volume.
+
+   Adobe Caslon is a chiselled face: the letters are cut with a blade rather than drawn
+   with a pen, so a headline at forty pixels reads as something carved into the page
+   instead of something shouted off it. It is the same face the record's sentences are
+   set in, which is the other half of the fix — a record with one voice and many sizes
+   is tight; a record with five voices and five colours is a leaflet.
+
+   One weight only, on purpose. Hierarchy comes from size and air, never from a
+   synthesised bold, because a faked weight in a cut serif looks exactly like what it
+   is. If the file cannot arrive, it falls back to a system serif of the same cut and
+   the page is still the page. */
+@font-face {
+  font-family: 'Adobe Caslon';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/adobe-caslon-400-normal.woff2') format('woff2');
 }
 
 @tailwind base;
@@ -154,7 +176,7 @@ button:focus-visible {
        record: the orange is the record's signal, this is the line it rests on. */
     --record-mark: 27 43 240;
     --font-record-reading:
-      'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
+      'Adobe Caslon', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
       'Noto Sans Devanagari', 'Devanagari Sangam MN', 'Nirmala UI',
       'Noto Sans Bengali', 'Bangla Sangam MN',
@@ -221,7 +243,7 @@ button:focus-visible {
     --record-muted: 107 98 88;
     --record-mark: 27 43 240;
     --font-record-reading:
-      'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
+      'Adobe Caslon', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
       'Noto Sans Devanagari', 'Devanagari Sangam MN', 'Nirmala UI',
       'Noto Sans Bengali', 'Bangla Sangam MN',
@@ -309,6 +331,13 @@ button:focus-visible {
    cannot borrow back from anywhere. If it ever needs to come down, bring these numbers
    up, not the other way round. */
 /* The record's continuous paper and reading treatment live in record-reading.css. */
+
+/* ── ONE FACE, FOR THE WHOLE RECORD ───────────────────────────────────────────────
+   The display token is rewritten inside the record only, so every heading on every page
+   of it is the same cut as its paragraphs. Nothing outside the record changes: the other
+   products keep their own voice. */
+:root { --record-display: 'Adobe Caslon', 'Iowan Old Style', Georgia, 'Times New Roman', serif; }
+.climate-record { --font-display: var(--record-display); }
 
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
 .beadie-paper { background-color: #f4efe4; }
