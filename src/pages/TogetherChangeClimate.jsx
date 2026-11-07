@@ -465,7 +465,7 @@ export default function TogetherChangeClimate() {
         <div className="flex items-center justify-center gap-2 flex-wrap mt-3">
           <Link
             to="/XEqualsX"
-            className="text-[12px] font-black font-mono text-[#0f5f7a] tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
+            className="text-[12px] font-black font-mono text-record-mark tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
           >
             x = x
           </Link>

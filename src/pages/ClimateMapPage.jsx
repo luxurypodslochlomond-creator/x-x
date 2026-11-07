@@ -30,7 +30,7 @@ export default function ClimateMapPage() {
         <span className="text-[7px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/25">
           Laurie Anderson · From the Air, Big Science, 1982
         </span>
-        <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
+        <div className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none">
           x = x
         </div>
       </div>
@@ -99,7 +99,7 @@ export default function ClimateMapPage() {
 
       {/* FOOTER */}
       <div className="bg-[#241d16] px-4 py-4 border-t-2 border-[#e2602a]/20">
-        <p className="text-[8px] font-mono font-black tracking-[0.3em] text-center text-[#efe7d6]/25">
+        <p className="text-[8px] font-mono font-black tracking-[0.3em] text-center text-[#cc2d2a]">
           x = x
         </p>
         <p className="text-[8px] font-mono text-center mt-1 text-[#efe7d6]/40">

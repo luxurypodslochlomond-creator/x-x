@@ -172,11 +172,24 @@ button:focus-visible {
     --record-signal: 226 96 42;
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
-    /* The mark's own colour — the record's red, not cobalt. x = x is the line the whole
-       record rests on, and it is said in the one red the record already uses for the
-       things it will not soften. Cobalt is retired: a second, brighter blue sitting on
-       warm paper read as a different product's colour rather than as this one's mark. */
-    --record-mark: 179 38 30;
+    /* ── THE MARK'S RED IS BORROWED, AND IT SAYS SO ───────────────────────────────
+       x = x is not printed in the record's warning red, and not in the cobalt it wore
+       for a while. It is printed in the red of Laurie Anderson's sleeve for O Superman,
+       the single at the heart of Big Science, and it is measured off that artwork rather
+       than picked by taste: #CC2D2A, the mean of the reds carrying that sleeve.
+
+       One honest note, kept here so nobody has to guess later: the 1982 sleeve of Big
+       Science itself is monochrome — a face and a white shape in a grey field, no red on
+       it anywhere. So this is the red of that record's own artwork and not of the album
+       cover, and every place the record names the source it says "the O Superman sleeve"
+       rather than pretending the big cover was red. A borrowed colour is only worth
+       borrowing if the borrowing is stated.
+
+       It sits a hair warmer and brighter than --record-red, so the mark and the record's
+       warnings are never mistaken for one another. One value, one place: every x = x on
+       the platform reads this token, or the measured constant copied from it where a
+       canvas, a PDF or a served image cannot read CSS. */
+    --record-mark: 204 45 42;
     --font-record-reading:
       'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
@@ -243,7 +256,9 @@ button:focus-visible {
     --record-signal: 226 96 42;
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
-    --record-mark: 179 38 30;
+    /* The same borrowed red in the dark block: the mark does not change colour when the
+       room does, because it is ink and not a theme. */
+    --record-mark: 204 45 42;
     --font-record-reading:
       'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',

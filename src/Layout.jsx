@@ -986,7 +986,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   platform's own foot. It was near-invisible bone-on-bone, which made the one line
                   the whole thing rests on the quietest thing on the page. */}
               <p className="text-center py-2 font-mono font-black tracking-[0.3em] text-[11px]">
-                <Link to="/XEqualsX" className="text-[#b3261e] hover:text-[#e2602a] transition-colors">x = x</Link>
+                <Link to="/XEqualsX" className="text-record-mark hover:text-[#e2602a] transition-colors">x = x</Link>
               </p>
               <p className="text-xs text-center pb-1">
                 <Link to="/ExtractionProofCovenant" className="text-green-500/70 hover:text-green-400 font-mono tracking-wide">

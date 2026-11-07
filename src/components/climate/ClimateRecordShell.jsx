@@ -39,7 +39,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
             to the page that says what it means. */}
         <Link
           to="/XEqualsX"
-          className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none hover:text-[#efe7d6] transition-colors"
+          className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none hover:text-[#efe7d6] transition-colors"
         >
           x = x
         </Link>

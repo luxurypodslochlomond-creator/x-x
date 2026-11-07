@@ -6,6 +6,9 @@ Deno.serve(async (req) => {
     const INK = '#1a1612';
     const SIGNAL = '#b3261e';
     const SIGNAL_BRIGHT = '#7fc9e4';
+    // The mark's own red, measured off Laurie Anderson's O Superman sleeve (#CC2D2A).
+    // Same value as --record-mark in the app; an SVG cannot read a CSS token.
+    const MARK = '#cc2d2a';
     const MUTED = '#5e706e';
     const BONE = '#e9eeec';
 
@@ -30,8 +33,8 @@ Deno.serve(async (req) => {
         </text>
         <circle cx="820" cy="26" r="3" fill="${SIGNAL_BRIGHT}"/>
 
-        <!-- x = x covenant — burning signal red -->
-        <text x="600" y="110" font-family="monospace" font-size="22" font-weight="900" fill="${SIGNAL}" text-anchor="middle" letter-spacing="6">
+        <!-- x = x covenant — the mark's own borrowed red, never the warning red -->
+        <text x="600" y="110" font-family="monospace" font-size="22" font-weight="900" fill="${MARK}" text-anchor="middle" letter-spacing="6">
           x = x · y = y · 1 = 1
         </text>
 
@@ -42,7 +45,7 @@ Deno.serve(async (req) => {
           <text x="0" y="-18" font-family="monospace" font-size="11" font-weight="900" fill="${SIGNAL}" text-anchor="middle" letter-spacing="2">RECORD OF</text>
           <text x="0" y="2" font-family="monospace" font-size="11" font-weight="900" fill="${SIGNAL}" text-anchor="middle" letter-spacing="2">THE TIME</text>
           <line x1="-30" y1="14" x2="30" y2="14" stroke="${SIGNAL}" stroke-width="1" opacity="0.5"/>
-          <text x="0" y="32" font-family="monospace" font-size="8" font-weight="700" fill="${SIGNAL}" text-anchor="middle" letter-spacing="1.5" opacity="0.7">x = x</text>
+          <text x="0" y="32" font-family="monospace" font-size="8" font-weight="700" fill="${MARK}" text-anchor="middle" letter-spacing="1.5" opacity="0.85">x = x</text>
         </g>
 
         <!-- Main headline -->

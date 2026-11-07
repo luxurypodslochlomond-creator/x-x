@@ -85,7 +85,8 @@ export function buildLetterPdf() {
   doc.setFontSize(7);
   doc.text('Together we can change the course of climate change.', L, 284);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(179, 38, 30);
+  // The mark's own red — the O Superman sleeve's, #CC2D2A — never the record's warning red.
+  doc.setTextColor(204, 45, 42);
   doc.text('x = x', R, 284, { align: 'right' });
 
   doc.save('letter-climate-record.pdf');

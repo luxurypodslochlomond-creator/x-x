@@ -11,6 +11,9 @@ const PAPER = [244, 239, 228];
 const BONE = [239, 231, 214];
 const INK = [26, 22, 18];
 const RED = [179, 38, 30];
+// x = x prints in its own borrowed red — the O Superman sleeve's #CC2D2A — so the mark
+// never reads as a warning. Same number as --record-mark; a PDF cannot read CSS.
+const MARK = [204, 45, 42];
 const MUTED = [107, 98, 88];
 
 const sheet = (doc) => {
@@ -259,7 +262,7 @@ const drawCover = (doc) => {
   doc.text(ROAD_DOC.made.toUpperCase(), M + 18, 636, { charSpace: 0.6 });
   doc.setFont("courier", "bold");
   doc.setFontSize(16);
-  ink(doc, RED);
+  ink(doc, MARK);
   doc.text("x = x", M, 762, { charSpace: 4 });
   doc.setFont("courier", "normal");
   doc.setFontSize(9);
@@ -315,7 +318,7 @@ const drawSignoff = (doc) => {
   });
   doc.setFont("courier", "bold");
   doc.setFontSize(24);
-  ink(doc, RED);
+  ink(doc, MARK);
   doc.text("x = x", M, 720, { charSpace: 6 });
   doc.setFont("courier", "normal");
   doc.setFontSize(9.4);

@@ -250,7 +250,7 @@ export default function Franklin51Page() {
         {/* the covenant */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="text-center py-6">
-          <p className="font-mono font-black tracking-[0.3em] text-2xl text-[#b3261e]">x = x</p>
+          <p className="font-mono font-black tracking-[0.3em] text-2xl text-record-mark">x = x</p>
           <p className="font-mono text-[10px] text-[#6b6258] tracking-widest mt-2">
             every photograph is equal because it is true
           </p>

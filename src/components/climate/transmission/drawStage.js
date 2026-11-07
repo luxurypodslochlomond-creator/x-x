@@ -218,7 +218,8 @@ function drawHud(ctx, c, S, live) {
   const on = c.E > 0.5;
   ctx.textAlign = 'left';
   ctx.fillStyle = `rgba(${SIG},0.95)`; ctx.fillText('EARTH · 51 MHz', 26, 24);
-  ctx.fillStyle = `rgba(${BONE},0.6)`; ctx.fillText('x = x', 26, 36);
+  // The mark keeps its own borrowed red on the stage too, not the stage's bone.
+  ctx.fillStyle = 'rgba(204,45,42,0.95)'; ctx.fillText('x = x', 26, 36);
   const deg = (((-S.rot * 180) / Math.PI) % 360 + 360) % 360;
   ctx.fillText(`LON ${deg <= 180 ? deg.toFixed(1) + '°E' : (360 - deg).toFixed(1) + '°W'}`, 26, c.h - 12);
   ctx.textAlign = 'right';

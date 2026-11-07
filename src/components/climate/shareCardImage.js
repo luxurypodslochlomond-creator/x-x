@@ -15,6 +15,10 @@ const PAPER = '#f4efe4';
 const BONE = '#efe7d6';
 const INK = '#141210';
 const SIGNAL = '#b3261e';
+// The mark's red, measured off Laurie Anderson's sleeve for O Superman — the single at the
+// heart of Big Science (#CC2D2A, the mean of the reds carrying that sleeve). A canvas cannot
+// read a CSS token, so the same number is copied here; change one you change all four.
+const MARK = '#cc2d2a';
 const SIGNAL_BRIGHT = '#7fc9e4';
 const MUTED = '#5a5246';
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
@@ -231,11 +235,9 @@ export async function buildWireShareCard(entry, options = {}) {
   ctx.font = `900 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
-  ctx.fillStyle = BONE;
-  ctx.globalAlpha = 0.6;
+  ctx.fillStyle = MARK;
   ctx.font = `900 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
-  ctx.globalAlpha = 1;
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
@@ -384,11 +386,9 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   ctx.font = `900 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
-  ctx.fillStyle = BONE;
-  ctx.globalAlpha = 0.6;
+  ctx.fillStyle = MARK;
   ctx.font = `900 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
-  ctx.globalAlpha = 1;
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
@@ -565,11 +565,9 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   ctx.font = `900 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
-  ctx.fillStyle = BONE;
-  ctx.globalAlpha = 0.6;
+  ctx.fillStyle = MARK;
   ctx.font = `900 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
-  ctx.globalAlpha = 1;
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
@@ -703,11 +701,9 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   ctx.font = `900 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
-  ctx.fillStyle = BONE;
-  ctx.globalAlpha = 0.6;
+  ctx.fillStyle = MARK;
   ctx.font = `900 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
-  ctx.globalAlpha = 1;
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;

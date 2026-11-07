@@ -76,7 +76,7 @@ export default function Uf51Road() {
         <p className="mt-8 font-mono text-[11px] leading-relaxed text-record-muted">
           {ROAD_DOC.made} Fees change every April, so the file carries its own date and says so.
         </p>
-        <p className="mt-6 font-mono text-sm font-black tracking-[0.35em] text-[#b3261e]">x = x</p>
+        <p className="mt-6 font-mono text-sm font-black tracking-[0.35em] text-record-mark">x = x</p>
       </div>
     </div>
   );

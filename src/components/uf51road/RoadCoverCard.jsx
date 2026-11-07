@@ -44,7 +44,7 @@ export default function RoadCoverCard() {
         </p>
       </div>
 
-      <p className="mt-8 font-mono text-lg font-black tracking-[0.3em] text-[#b3261e]">x = x</p>
+      <p className="mt-8 font-mono text-lg font-black tracking-[0.3em] text-record-mark">x = x</p>
     </div>
   );
 }

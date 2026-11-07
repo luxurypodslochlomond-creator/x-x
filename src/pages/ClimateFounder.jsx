@@ -60,7 +60,7 @@ export default function ClimateFounder() {
           </span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <div className="text-[10px] font-black font-mono text-[#e2602a] tracking-[0.2em] leading-none">
+        <div className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none">
           x = x
         </div>
       </div>

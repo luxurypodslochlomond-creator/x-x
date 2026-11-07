@@ -259,7 +259,7 @@ export default function AletheiaPage() {
 
       {/* Footer covenant */}
       <div className="text-center pb-4">
-        <p className="font-mono font-black tracking-[0.3em] text-[10px] text-[#b3261e]">x = x</p>
+        <p className="font-mono font-black tracking-[0.3em] text-[10px] text-record-mark">x = x</p>
         <p className="font-mono text-[9px] text-[#6b6258] mt-1">Every claim is an entry on the record, with the origin that entry carries. Not on the record? It says so.</p>
       </div>
     </div>

@@ -22,7 +22,7 @@ export default function HowYouEarnPage() {
             </p>
           </div>
           <Sparkles className="w-16 h-16 text-[#b3261e] mx-auto" />
-          <div className="font-mono font-black tracking-[0.3em] text-[11px] text-[#b3261e]">
+          <div className="font-mono font-black tracking-[0.3em] text-[11px] text-record-mark">
             x = x
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-[#1a1612] leading-none tracking-tight">

@@ -141,7 +141,7 @@ export default function WelcomePage() {
           </h1>
 
           {/* x = x — the covenant. We are all one. */}
-          <div className="font-mono font-black tracking-[0.3em] text-[11px] text-[#b3261e]">
+          <div className="font-mono font-black tracking-[0.3em] text-[11px] text-record-mark">
             x = x
           </div>
 

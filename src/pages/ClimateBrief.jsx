@@ -114,7 +114,7 @@ export default function ClimateBrief() {
           <div className="text-[9px] font-black font-mono uppercase tracking-[0.24em] text-[#b3261e] mb-3">01 · What this is</div>
 
           <div className="bg-[#241d16] text-[#efe7d6] px-5 py-5 mb-5">
-            <div className="text-[26px] font-black font-mono tracking-[0.3em] text-center text-[#e2602a]">x = x</div>
+            <div className="text-[26px] font-black font-mono tracking-[0.3em] text-center text-record-mark">x = x</div>
             <p className="text-[12px] leading-[1.7] text-center mt-3 text-[#efe7d6]/85 max-w-sm mx-auto" style={{ fontFamily: 'var(--font-reading)' }}>
               A solution in Nepal is equal to a solution in Niger. Not because of votes, not because of reach — because
               both are true. A crisis in the Sahel stands level with a crisis in Cardigan Bay.

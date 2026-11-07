@@ -211,7 +211,7 @@ export default function Learn51Layout() {
         <Link to="/SupportLearn51" className="block text-white/20 hover:text-violet-400 text-xs transition-colors">
           ♾️ Keep Learn51 free — donate
         </Link>
-        <Link to="/XEqualsX" className="block text-white/15 hover:text-white/40 text-[10px] tracking-[0.3em] font-mono transition-colors">
+        <Link to="/XEqualsX" className="block text-[#cc2d2a] hover:text-white/60 text-[10px] tracking-[0.3em] font-mono transition-colors">
           x = x
         </Link>
       </div>
