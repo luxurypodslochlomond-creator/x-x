@@ -97,14 +97,13 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
       <div className="mt-4 flex items-start gap-3.5">
         {loaded && hotN > 0 && (
           <span
-            className="shrink-0 text-[#b3261e]"
+            className="shrink-0 text-[#b3261e] text-[46px] sm:text-[74px]"
             style={{
               fontFamily: 'var(--font-reading)',
-              fontSize: '74px',
               fontWeight: 600,
               lineHeight: 0.76,
               letterSpacing: '-0.04em',
-              marginTop: '6px',
+              marginTop: '4px',
             }}
             aria-hidden="true"
           >
@@ -112,10 +111,9 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
           </span>
         )}
         <h2
-          className="min-w-0 text-[#141210]"
+          className={`min-w-0 text-[#141210] ${hotN > 0 ? 'text-[19px] sm:text-[23px]' : 'text-[25px] sm:text-[29px]'}`}
           style={{
             fontFamily: 'var(--font-reading)',
-            fontSize: hotN > 0 ? '23px' : '29px',
             fontWeight: 600,
             lineHeight: 1.16,
             letterSpacing: '-0.015em',
@@ -135,9 +133,9 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
           One line, not a chat window — a chatbot bolted onto the front of the shed would
           put a second, softer voice in front of the record's own rules, and the rules are
           the whole point of the room. */}
-      <div className="mb-5 mt-5 border-l-2 border-[#b3261e] pl-3.5">
+      <div className="mb-4 mt-4 border-l-2 border-[#b3261e] pl-3">
         <p
-          className="text-[14px] leading-[1.6] text-[#2b2622]"
+          className="text-[13px] leading-[1.55] text-[#2b2622] sm:text-[14px]"
           style={{ fontFamily: 'var(--font-reading)', fontStyle: 'italic', textWrap: 'pretty' }}
         >
           I'm sitting here with you. Push a door and we'll go through it line by line — I'll
