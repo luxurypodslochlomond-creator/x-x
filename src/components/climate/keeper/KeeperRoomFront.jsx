@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { ArrowRight, RefreshCw } from 'lucide-react';
-import { MarkKey } from './KeeperMarks';
 import ShedIndex from './ShedIndex';
 
 // ── WHAT WANTS YOU FIRST ─────────────────────────────────────────────────────────
@@ -14,8 +13,10 @@ import ShedIndex from './ShedIndex';
 // Nothing here decides anything: these are doors, and the work happens in the room
 // behind them, where the name is signed and the seal is taken.
 //
-// It is set the way the record sets its own pages — one voice, many sizes, warm paper,
-// air around the words. Not a control panel: a note left on a table for one person.
+// Set as a page of the record and nothing more: paper, hairline, one red number. The
+// shape it wore before — warm card, round seals, a pill to press — was colour doing the
+// work type should do, and it dated the room. A keeper does not need to be charmed into
+// the work; they need to see what is waiting.
 export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
   const [waiting, setWaiting] = useState(null);
   const [toCheck, setToCheck] = useState(null);
@@ -45,66 +46,49 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
     waiting === null
       ? 'Looking at what wants you…'
       : n === 0
-        ? 'Nothing wants your yes.'
-        : `${n} ${n === 1 ? 'thing wants' : 'things want'} your yes.`;
+      ? 'Nothing is waiting on you.'
+      : `${n} ${n === 1 ? 'entry is' : 'entries are'} waiting for a keeper.`;
 
   return (
-    <section
-      className="mb-5 rounded-2xl border border-[#141210]/12 bg-[#efe7d6] px-4 lg:px-5 pt-4 pb-4"
-      style={{ boxShadow: '0 18px 34px -30px rgba(20,18,16,0.6)' }}
-    >
-      <div className="flex items-center justify-between gap-3">
-        <p className="text-[9.5px] font-mono uppercase tracking-[0.22em] text-[#b3261e] leading-none">
-          The shed{name ? ` · ${name}` : ''}
+    <section className="mb-6">
+      <div className="flex items-baseline justify-between gap-3 border-b border-[#141210]/20 pb-2">
+        <p className="text-[9.5px] font-mono uppercase tracking-[0.2em] text-[#6b5f4f]">
+          Keeper{name ? ` · ${name}` : ''}
         </p>
         <button
           onClick={load}
-          className="flex items-center gap-1.5 text-[11px] text-[#6b5f4f] hover:text-[#b3261e] transition-colors min-h-[32px] px-1"
+          className="flex items-center gap-1.5 text-[11.5px] text-[#6b5f4f] active:text-[#b3261e] transition-colors min-h-[32px]"
         >
           <RefreshCw className="w-3 h-3" /> {failed ? 'count again' : 'recount'}
         </button>
       </div>
 
-      {/* The one thing. Everything below it is deliberately smaller. */}
-      <div className="mt-3 flex items-start gap-3">
-        <span className="w-11 h-11 rounded-full border border-[#141210]/12 bg-[#f4efe4] flex items-center justify-center flex-shrink-0 mt-0.5">
-          <MarkKey size={22} className="text-[#b3261e]" />
-        </span>
-        <div className="min-w-0">
-          <p
-            className="text-[#141210] leading-[1.15] font-semibold"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 5vw, 29px)', letterSpacing: '-0.01em' }}
-          >
-            {headline}
-          </p>
-          <p
-            className="mt-2 text-[14px] leading-[1.6] text-[#3a342c]"
-            style={{ fontFamily: 'var(--font-reading)' }}
-          >
-            Yes or not yet, one entry at a time. Nothing else in this room is more urgent.
-          </p>
-        </div>
-      </div>
+      {/* The one thing, and everything below it smaller than it. */}
+      <p
+        className="mt-4 text-[#141210] font-semibold"
+        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 5.4vw, 31px)', lineHeight: 1.15, letterSpacing: '-0.01em' }}
+      >
+        {headline}
+      </p>
+      <p className="mt-2 text-[14.5px] leading-[1.65] text-[#3a342c]" style={{ fontFamily: 'var(--font-reading)' }}>
+        Yes or not yet, one entry at a time. Nothing else in this room is more urgent.
+      </p>
 
       <button
         onClick={() => onGo('decide')}
-        className="mt-4 w-full flex items-center justify-between gap-3 min-h-[54px] px-5 rounded-full bg-[#141210] text-[#f4efe4] active:bg-[#b3261e] transition-colors"
+        className="mt-4 inline-flex items-center gap-2 min-h-[44px] text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#b3261e] active:text-[#b3261e] transition-colors"
       >
-        <span className="text-[13.5px] font-semibold">
-          {n > 0 ? 'Take them one at a time' : 'Open the queue'}
-        </span>
+        {n > 0 ? 'Take them one at a time' : 'Open the queue'}
         <ArrowRight className="w-4 h-4" />
       </button>
 
-      {/* Every other door, in one square: the work, then the record it answers to. */}
       {isKeeper && (
-        <ShedIndex waiting={waiting} toCheck={toCheck} isChecker={isChecker} onGo={onGo} />
+        <div className="mt-6">
+          <ShedIndex waiting={waiting} toCheck={toCheck} isChecker={isChecker} onGo={onGo} />
+        </div>
       )}
 
-      <p
-        className="mt-4 pt-3.5 border-t border-[#141210]/10 text-[12.5px] leading-relaxed text-[#6b5f4f]"
-        style={{ fontFamily: 'var(--font-reading)' }}
-      >
+      <p className="mt-6 pt-3 border-t border-[#141210]/12 text-[12.5px] leading-relaxed text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>
         One decision at a time, in daylight, signed with a name — that is the part that will still be readable in a thousand years.
       </p>
     </section>
