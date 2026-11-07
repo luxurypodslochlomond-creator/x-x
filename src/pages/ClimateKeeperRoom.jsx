@@ -52,8 +52,8 @@ export default function ClimateKeeperRoom() {
   // Plain verbs, in the order the work actually happens: what is waiting for a yes, then what
   // is waiting for a pair of eyes, then the counts. A keeper's first tab is their next job.
   const tabs = who.isKeeper
-    ? [{ key: 'decide', label: 'To decide' }, { key: 'check', label: 'To check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Sourcing' }]
-    : [{ key: 'check', label: 'To check' }];
+    ? [{ key: 'decide', label: 'Yes or not yet' }, { key: 'check', label: 'Read & note' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Sourcing' }]
+    : [{ key: 'check', label: 'Read & note' }];
   const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
   // Choosing a door takes you into the room rather than leaving you at the top of a page to
   // scroll down: the front and the index are where a choice is made, and the choice opens
