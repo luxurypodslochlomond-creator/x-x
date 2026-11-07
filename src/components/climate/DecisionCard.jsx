@@ -15,7 +15,7 @@ const TONE = {
 
 export default function DecisionCard({ item, onDecide, busy }) {
   return (
-    <article className="border-2 border-[#141210] bg-[#f7f1e5] mb-3">
+    <article className="border border-[#141210]/25 bg-[#f7f1e5] mb-3">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-[#141210]/20">
         <span
           className={`text-[9px] font-black font-mono uppercase tracking-[0.14em] px-1.5 py-0.5 ${
@@ -27,9 +27,9 @@ export default function DecisionCard({ item, onDecide, busy }) {
       </div>
 
       <div className="px-3 py-3">
-        <h3 className="text-[13.5px] font-black leading-snug text-[#141210]">{item.title}</h3>
+        <h3 className="text-[15px] font-semibold leading-snug text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>{item.title}</h3>
         {item.body ? (
-          <p className="text-[12px] font-mono leading-relaxed text-[#3a342c] mt-2">{item.body}</p>
+          <p className="text-[13.5px] leading-[1.6] text-[#3a342c] mt-1.5" style={{ fontFamily: 'var(--font-reading)' }}>{item.body}</p>
         ) : null}
 
         {item.source_url ? (
@@ -53,7 +53,7 @@ export default function DecisionCard({ item, onDecide, busy }) {
         ) : null}
 
         {item.ai ? (
-          <p className="mt-2.5 text-[10.5px] font-mono leading-snug text-[#8a8375] border-t border-[#141210]/15 pt-2">
+          <p className="mt-2.5 text-[11px] leading-snug text-[#6b5f4f] border-t border-[#141210]/12 pt-2" style={{ fontFamily: 'var(--font-reading)' }}>
             A note, not a decision: {item.ai}
           </p>
         ) : null}
@@ -67,11 +67,11 @@ export default function DecisionCard({ item, onDecide, busy }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 border-t-2 border-[#141210]">
+      <div className="grid grid-cols-2 border-t border-[#141210]/25">
         <button
           onClick={() => onDecide(item, 'hold')}
           disabled={busy}
-          className="flex items-center justify-center gap-1.5 min-h-[52px] px-2 py-3 text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] border-r-2 border-[#141210] active:bg-[#141210]/10 disabled:opacity-40 transition-colors"
+          className="flex items-center justify-center gap-1.5 min-h-[52px] px-2 py-3 text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] border-r border-[#141210]/25 active:bg-[#141210]/10 disabled:opacity-40 transition-colors"
         >
           <Hand className="w-4 h-4" /> Not yet
         </button>

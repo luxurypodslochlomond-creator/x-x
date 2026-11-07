@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
-import { UserPlus, Pause, Play, Trash2, RefreshCw } from 'lucide-react';
+import { UserPlus, Pause, Play, Trash2, RefreshCw, KeyRound, Eye } from 'lucide-react';
 import AddKeeper from '@/components/climate/AddKeeper';
 
 // The guest list for checking. Deliberately not the same as admin: a checker reads what is
@@ -112,39 +112,41 @@ export default function AdminClimateCheckers() {
         {/* The keys, shown here in the desk rather than looked up somewhere else. A keeper
             could always check — the checking door lets them straight in — but that was only
             written in code, so on this page a keeper appeared to be nobody. */}
-        <div className="border-2 border-record-ink/25 bg-record-bone p-3 mb-4">
-          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-2">
-            who holds the keys · {keepers.length}
+        <div className="border-t border-record-ink/20 pt-3 mb-5">
+          <p className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.18em] text-record-muted mb-1.5">
+            <KeyRound className="w-3 h-3" /> who holds the keys · {keepers.length}
           </p>
           {keepers.map((k) => (
-            <p key={k.id} className="text-[11px] font-mono text-record-ink/85 truncate">{k.full_name || k.email}</p>
+            <p key={k.id} className="text-[13px] text-record-ink truncate" style={{ fontFamily: 'var(--font-reading)' }}>{k.full_name || k.email}</p>
           ))}
-          <p className="text-[10px] font-mono text-record-muted mt-2 leading-relaxed">
+          <p className="text-[12px] text-record-muted mt-2 leading-[1.6]" style={{ fontFamily: 'var(--font-reading)' }}>
             A keeper publishes, corrects, signs, adds people — and can always check. They are added once, above;
             they never need a line on the checker list as well.
           </p>
         </div>
 
-        <div className="bg-record-bone border-2 border-record-ink/20 p-4 mb-8">
-          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink mb-3">add a checker</p>
+        <div className="border-t border-record-ink/20 pt-3 mb-8">
+          <p className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.18em] text-record-muted mb-2">
+            <UserPlus className="w-3 h-3" /> add a checker
+          </p>
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="their email address"
             inputMode="email"
-            className="w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink"
+            className="w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border border-record-ink/30 text-record-ink"
           />
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="their name, as their notes will be signed"
-            className="w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink"
+            className="w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border border-record-ink/30 text-record-ink"
           />
           <input
             value={note}
             onChange={(e) => setNote(e.target.value)}
             placeholder="why (optional), e.g. Trebuchet volunteer"
-            className="w-full min-h-[44px] px-3 mb-3 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink"
+            className="w-full min-h-[44px] px-3 mb-3 text-[13px] font-mono bg-record-paper border border-record-ink/30 text-record-ink"
           />
           <button
             onClick={add}
@@ -158,9 +160,15 @@ export default function AdminClimateCheckers() {
 
         <AddKeeper onAdded={load} />
 
-        <div className="flex items-center justify-between mb-3">
-          <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-ink">
-            on the list · {list.length}
+        <div className="flex items-center justify-between gap-3 border-t border-record-ink/20 pt-3 mb-2">
+          <p className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.18em] text-record-muted">
+            <Eye className="w-3 h-3" /> on the list · {list.length}
+            {!loading && list.length > 0 && (
+              <span className="text-record-ink/70 normal-case tracking-normal">
+                · {list.filter((r) => r.active).length} checking
+                {list.filter((r) => !r.active).length > 0 && ` · ${list.filter((r) => !r.active).length} paused`}
+              </span>
+            )}
           </p>
           <button onClick={load} className="text-[10px] font-mono uppercase text-record-muted inline-flex items-center gap-1">
             <RefreshCw className="w-3 h-3" /> refresh
@@ -170,19 +178,19 @@ export default function AdminClimateCheckers() {
         {loading && <p className="text-[11px] font-mono text-record-muted">loading</p>}
 
         {!loading && !list.length && (
-          <p className="text-[12px] text-record-ink/70 leading-relaxed border-2 border-record-ink/15 bg-record-bone p-4">
+          <p className="text-[13px] text-record-ink/75 leading-[1.6] border-t border-record-ink/15 py-3" style={{ fontFamily: 'var(--font-reading)' }}>
             Nobody yet. Add the first checker above and they will get an email with a link to set their password.
           </p>
         )}
 
         <div className="space-y-2">
           {list.map((row) => (
-            <div key={row.id} className="bg-record-bone border-2 border-record-ink/20 p-3">
+            <div key={row.id} className="border-b border-record-ink/12 py-3">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <p className="text-[12px] font-black text-record-ink truncate">{row.name || row.email}</p>
-                  <p className="text-[10px] font-mono text-record-muted truncate">{row.email}</p>
-                  {row.note && <p className="text-[10px] font-mono text-record-muted truncate">{row.note}</p>}
+                  <p className="text-[14px] font-semibold text-record-ink truncate" style={{ fontFamily: 'var(--font-reading)' }}>{row.name || row.email}</p>
+                  <p className="text-[11px] font-mono text-record-muted truncate">{row.email}</p>
+                  {row.note && <p className="text-[12px] text-record-muted truncate" style={{ fontFamily: 'var(--font-reading)' }}>{row.note}</p>}
                 </div>
                 <span
                   className="text-[9px] font-mono font-black uppercase px-2 py-1 border flex-shrink-0"
@@ -194,18 +202,18 @@ export default function AdminClimateCheckers() {
                   {row.active ? 'checking' : 'paused'}
                 </span>
               </div>
-              <div className="flex gap-2 mt-3">
+              <div className="flex gap-4 mt-2">
                 <button
                   onClick={() => toggle(row)}
-                  className="flex-1 min-h-[40px] inline-flex items-center justify-center gap-1.5 border-2 border-record-ink/30 text-[9px] font-black font-mono uppercase text-record-ink"
+                  className="min-h-[36px] inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.1em] text-record-ink/80 active:text-record-ink"
                 >
-                  {row.active ? <><Pause className="w-3 h-3" /> pause</> : <><Play className="w-3 h-3" /> restore</>}
+                  {row.active ? <><Pause className="w-3.5 h-3.5" /> pause</> : <><Play className="w-3.5 h-3.5" /> restore</>}
                 </button>
                 <button
                   onClick={() => remove(row)}
-                  className="flex-1 min-h-[40px] inline-flex items-center justify-center gap-1.5 border-2 border-record-red/40 text-[9px] font-black font-mono uppercase text-record-red"
+                  className="min-h-[36px] inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.1em] text-record-red/85 active:text-record-red"
                 >
-                  <Trash2 className="w-3 h-3" /> remove
+                  <Trash2 className="w-3.5 h-3.5" /> remove
                 </button>
               </div>
             </div>
