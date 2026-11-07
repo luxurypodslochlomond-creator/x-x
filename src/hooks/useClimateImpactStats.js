@@ -11,8 +11,11 @@ export function useClimateImpactStats() {
       const res = await base44.functions.invoke('climateImpactStats', {});
       return res?.data || res;
     },
+    // The strip used to poll every minute, and every answer re-rendered the whole impact
+    // page underneath it — a page holding a map. The number is a count of reads, not a
+    // live score, so five minutes is honest and the page stops twitching while you read it.
     staleTime: 60000,
-    refetchInterval: 60000,
+    refetchInterval: 300000,
     refetchOnWindowFocus: false,
     retry: false,
   });

@@ -68,9 +68,11 @@ export default function ClimateImpactMap({ stats }) {
           0% { transform: scale(0.8); opacity: 0.7; }
           100% { transform: scale(2.4); opacity: 0; }
         }
+        /* Same fault as the record's map, and the same fix: a CSS filter animated over a
+           tile pane forces a full repaint of every tile, every frame. The colour is kept,
+           the perpetual repaint is not. */
         .impact-map .leaflet-tile-pane {
           filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7);
-          animation: impact-breathe 7s ease-in-out infinite;
         }
         .impact-map .leaflet-container {
           background: #efe7d6;

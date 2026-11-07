@@ -61,13 +61,19 @@ const FOOTER_LINKS = [
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
 
-// Pages where someone is waiting on an answer, not reading. See the prefetch effect below.
+// Pages that are already spending the phone's connection on something heavier than a page,
+// so warming ten more in the background would only take the wire away from them.
+//   the record's working screens — someone is waiting on an answer, not reading;
+//   the two maps — a mapping library and a hundred tiles are the most expensive thing on
+//   the record, and prefetching page chunks underneath them is what made them stutter.
 const WORKING_PAGES = [
   'AdminClimateDesk',
   'AdminClimateCheckers',
   'AdminClimateReview',
   'AdminClimateLog',
   'ClimateChecking',
+  'ClimateMap',
+  'ClimateImpact',
 ];
 
 export default function ClimateLayout({ children, currentPage }) {

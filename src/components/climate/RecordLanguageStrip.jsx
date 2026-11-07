@@ -11,7 +11,11 @@ import TonguePicker from './TonguePicker';
 export default function RecordLanguageStrip({ lang, detected, onChange, translating, tone = 'ink' }) {
   const ink = tone === 'ink';
   const dim = ink ? 'text-[#efe7d6]/60' : 'text-[#5a5246]';
-  const accent = ink ? '#7fc9e4' : '#b3261e';
+  // The control's colour was a pale blue borrowed from the sky in the cover painting, and it
+  // was the one cold thing in a warm room: it read as another product's button sitting in the
+  // record's own header. The record's colour of us is the signal — the same orange that marks
+  // the masthead, the rule under the title and the way through to a crisis.
+  const accent = ink ? '#e2602a' : '#b3261e';
 
   return (
     <div className={ink ? 'relative bg-[#141210] border-b border-[#e2602a]/20' : 'relative bg-[#efe7d6] border-b-2 border-[#141210]'}>

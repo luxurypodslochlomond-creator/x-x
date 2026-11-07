@@ -17,7 +17,11 @@ const makeIcon = (type, longitude = 0) => {
   if (isCrisis) {
     return L.divIcon({
       className: 'climate-marker-crisis',
-      html: `<div style="${fadeIn}"><div style="position:relative;width:14px;height:14px;"><div style="position:absolute;inset:-6px;border:2px solid #b3261e;border-radius:50%;animation:climate-ping 2s ease-out infinite ${delay}s;"></div><div style="position:absolute;inset:0;width:14px;height:14px;background:#b3261e;border:2px solid #efe7d6;border-radius:50%;box-shadow:0 0 10px rgba(179,38,30,0.7);"></div></div></div>`,
+      /* A crisis used to wear a pulse that rang outward forever. On a map holding two
+         hundred crises that is two hundred animations that never stop, and on a phone they
+         are what makes the map feel sticky under a finger. The marker keeps its warning
+         colour, its halo and its glow — it simply stops pulsing when nothing is happening. */
+      html: `<div style="${fadeIn}"><div style="position:relative;width:14px;height:14px;"><div style="position:absolute;inset:-6px;border:2px solid #b3261e;border-radius:50%;opacity:.55;"></div><div style="position:absolute;inset:0;width:14px;height:14px;background:#b3261e;border:2px solid #efe7d6;border-radius:50%;box-shadow:0 0 10px rgba(179,38,30,0.7);"></div></div></div>`,
       iconSize: [14, 14],
       iconAnchor: [7, 7],
       popupAnchor: [0, -8],
@@ -156,9 +160,15 @@ export default function ClimateMap() {
           0%, 100% { filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7); }
           50% { filter: sepia(0.32) contrast(0.9) brightness(1.12) hue-rotate(-6deg) saturate(0.75); }
         }
+        /* ── THE MAP HOLDS STILL ─────────────────────────────────────────────────────
+           This was a seven-second breathing animation on the tile pane: a CSS filter
+           changing every frame over a hundred map tiles. A filter on a tile pane cannot be
+           done by the compositor — the browser has to repaint every tile, sixty times a
+           second, for as long as the page is open. That is the whole of the lag on this
+           page, and the same fault was on the impact map. The warm colour stays exactly as
+           it was; only the perpetual repaint is gone. */
         .climate-map .leaflet-tile-pane {
           filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7);
-          animation: climate-breathe 7s ease-in-out infinite;
         }
         .climate-map .leaflet-container {
           background: #efe7d6;

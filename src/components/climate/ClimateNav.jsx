@@ -62,10 +62,14 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
       to={createPageUrl('ClimateSearch')}
       aria-current={searchActive ? 'page' : undefined}
       aria-label="Search the record"
-      className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-2.5 min-h-[44px] sm:min-h-0 border-2 text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors ${
+      /* Search is the one control in this bar, and it now wears the record's own red rather
+         than an outline the same weight as the words beside it. A reader who wants to look
+         something up should not have to read six words first to find the way in. Where you
+         are is still said in the signal orange, so the box cannot look like the current page. */
+      className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-2.5 min-h-[44px] sm:min-h-0 border-2 border-[#b3261e] text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors ${
         searchActive
-          ? 'bg-[#e2602a] border-[#e2602a] text-[#141210]'
-          : 'border-[#efe7d6]/35 text-[#efe7d6] hover:border-[#e2602a] hover:text-[#e2602a]'
+          ? 'bg-[#e2602a] text-[#141210]'
+          : 'bg-[#b3261e] text-[#f4efe4] hover:bg-[#e2602a] hover:text-[#141210]'
       }`}
     >
       <SearchIcon className="w-3.5 h-3.5" />

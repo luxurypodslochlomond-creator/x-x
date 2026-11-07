@@ -176,7 +176,7 @@ button:focus-visible {
        record: the orange is the record's signal, this is the line it rests on. */
     --record-mark: 27 43 240;
     --font-record-reading:
-      'Adobe Caslon', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
+      'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
       'Noto Sans Devanagari', 'Devanagari Sangam MN', 'Nirmala UI',
       'Noto Sans Bengali', 'Bangla Sangam MN',
@@ -243,7 +243,7 @@ button:focus-visible {
     --record-muted: 107 98 88;
     --record-mark: 27 43 240;
     --font-record-reading:
-      'Adobe Caslon', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
+      'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
       'Noto Sans Devanagari', 'Devanagari Sangam MN', 'Nirmala UI',
       'Noto Sans Bengali', 'Bangla Sangam MN',
@@ -336,7 +336,20 @@ button:focus-visible {
    The display token is rewritten inside the record only, so every heading on every page
    of it is the same cut as its paragraphs. Nothing outside the record changes: the other
    products keep their own voice. */
-:root { --record-display: 'Adobe Caslon', 'Iowan Old Style', Georgia, 'Times New Roman', serif; }
+/* ── THE RECORD'S VOICE, CUT FOR A SCREEN RATHER THAN A PRESS ───────────────────
+   Caslon was a chiselled face, and it was the right argument at the time: one voice,
+   many sizes, hierarchy from air rather than from a faked bold. But a face cut for a
+   printing press three centuries ago reads as an antique on a phone — Nicolas called
+   it twee, and he was right, because a record of this morning's emergencies was being
+   set in the lettering of a museum label.
+
+   Source Serif 4 is the same kind of voice — a serif, one weight, no shouting — but
+   drawn for screens, with the tighter spacing and the larger x-height that make a
+   headline at forty pixels read as current instead of as costumed. And it is already
+   travelling with the site, so this is the one change here that makes the record both
+   cooler and faster: an antique face the browser was downloading is now simply not
+   asked for. */
+:root { --record-display: 'Source Serif 4', 'Literata', Georgia, serif; }
 .climate-record { --font-display: var(--record-display); }
 
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
