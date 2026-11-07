@@ -84,9 +84,9 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
     : 'Nothing needs your eyes today. Every door on the board still opens.';
 
   return (
-    <section className="mb-5">
+    <section className="mb-6">
       <div className="flex items-baseline justify-between gap-3">
-        <p className="text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>
+        <p className="text-[12px] text-[#8a7f6d]" style={{ fontFamily: 'var(--font-reading)' }}>
           The shed{name ? ` · ${name}` : ''}
         </p>
         <button
@@ -98,13 +98,26 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
         </button>
       </div>
 
+      {/* The one thing the room has to say, said as the biggest thing in it. It used to be
+          nineteen pixels under a label and a recount button — the same weight as the small
+          print around it — which is how a room tells you nothing much is happening. */}
       <h2
-        className="mt-1.5 text-[#1a1612] font-semibold"
-        style={{ fontFamily: 'var(--font-reading)', fontSize: '19px', lineHeight: 1.3, letterSpacing: '0' }}
+        className="mt-2 text-[#141210]"
+        style={{
+          fontFamily: 'var(--font-reading)',
+          fontSize: '27px',
+          fontWeight: 600,
+          lineHeight: 1.2,
+          letterSpacing: '-0.01em',
+          textWrap: 'pretty',
+        }}
       >
         {headline}
       </h2>
-      <p className="mt-1 mb-3 text-[13.5px] leading-[1.5] text-[#2b2622]" style={{ fontFamily: 'var(--font-reading)' }}>
+      <p
+        className="mt-2 text-[14px] leading-[1.55] text-[#2b2622]"
+        style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
+      >
         {under}
       </p>
 
@@ -116,12 +129,12 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
           One line, not a chat window — a chatbot bolted onto the front of the shed would
           put a second, softer voice in front of the record's own rules, and the rules are
           the whole point of the room. */}
-      <div className="mb-4 border-l-2 border-[#b3261e] pl-3">
+      <div className="mb-5 mt-5 border-l-2 border-[#b3261e] pl-3.5">
         <p
-          className="text-[12.5px] leading-[1.5] text-[#2b2622]"
-          style={{ fontFamily: 'var(--font-reading)' }}
+          className="text-[14px] leading-[1.6] text-[#2b2622]"
+          style={{ fontFamily: 'var(--font-reading)', fontStyle: 'italic', textWrap: 'pretty' }}
         >
-          I'm sitting here with you. Tap a door and we'll go through it line by line — I'll
+          I'm sitting here with you. Push a door and we'll go through it line by line — I'll
           fetch the source and read it beside you, you say the yes.
         </p>
       </div>
