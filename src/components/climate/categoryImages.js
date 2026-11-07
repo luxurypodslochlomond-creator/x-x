@@ -35,7 +35,12 @@ export const CATEGORY_IMAGE = (cat) => {
     renewable_energy: IMAGES.renewable, electric_vehicles: IMAGES.renewable, solar_desalination: IMAGES.renewable,
     seagrasses: IMAGES.seagrass, oceans: IMAGES.oceans, zooplankton: IMAGES.oceans, phytoplankton: IMAGES.oceans,
     agriculture: IMAGES.agriculture, water: IMAGES.water, drought: IMAGES.drought,
-    urban_geodesign: IMAGES.plastic, transportation: IMAGES.global,
+    /* Two designations were simply wrong and are gone: a plastic-waste photograph stood
+       for urban design, and a photograph of the planet from orbit stood for transport.
+       A picture that is not of the thing it sits on is a caption that lies, so both fall
+       back to the record's own ground instead. Crises are not illustrated from this map at
+       all — see SolutionCard: a crisis shows its own photograph or none. */
+
     extreme_weather: IMAGES.heat, heat: IMAGES.heat, flooding: IMAGES.flooding,
     forest_preservation: IMAGES.forest, rewilding: IMAGES.forest,
     other: IMAGES.global,

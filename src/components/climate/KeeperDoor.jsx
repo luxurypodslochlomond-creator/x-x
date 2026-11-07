@@ -7,10 +7,10 @@ export default function KeeperDoor() {
   return (
     <Link
       to="/ClimateKeeperRoom"
-      aria-label="Workroom — invited keepers and checkers"
+      aria-label="Your desk — invited keepers and checkers"
       className="text-[10px] font-mono font-black uppercase text-record-muted hover:text-record-red transition-colors"
     >
-      Workroom
+      Desk
     </Link>
   );
 }

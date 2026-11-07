@@ -47,23 +47,25 @@ export default function ClimateKeeperRoom() {
 
   useEffect(() => { load(); }, [load]);
 
+  // Plain verbs, in the order the work actually happens: what is waiting for a yes, then what
+  // is waiting for a pair of eyes, then the counts. A keeper's first tab is their next job.
   const tabs = who.isKeeper
-    ? [{ key: 'decide', label: 'Decide' }, { key: 'check', label: 'Check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Record facts' }]
-    : [{ key: 'check', label: 'Check' }];
+    ? [{ key: 'decide', label: 'To decide' }, { key: 'check', label: 'To check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Facts' }]
+    : [{ key: 'check', label: 'To check' }];
   const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
   const setTab = (key) => setParams({ tab: key });
 
   return (
     <ClimateRecordShell
-      eyebrow="The workroom"
-      marker="Public record · invited workroom"
-      title={state !== 'ready' ? 'The workroom' : who.isKeeper ? 'Everything the record needs, in one room' : 'Open the source, say what you find'}
+      eyebrow="Your desk"
+      marker="Public record · invited desk"
+      title={state !== 'ready' ? 'Your desk' : who.isKeeper ? 'One thing at a time.' : 'Open the source, say what you find.'}
       statement={
         state !== 'ready'
-          ? 'The record is open to everyone. Working here is by invitation: keepers decide what is published; checkers open sources and leave signed notes.'
+          ? 'The record is open to everyone. Working on it is by invitation: keepers decide what goes on it; checkers open sources and sign their notes.'
           : who.isKeeper
-          ? 'What is waiting for a yes, what is waiting for a pair of eyes, the counts, and what the record actually holds. You hold the keys and you may also check — a keeper reading a link is the same work, done by someone who cares.'
-          : 'What is waiting to be opened, where each entry is claimed from, and how the record is doing. Nothing you do here publishes, edits or deletes anything.'
+          ? 'Your next job is the first tab. Yes or not yet, one entry at a time — everything else here can wait until it is asked for.'
+          : 'What is waiting to be opened, and where each entry is claimed from. Nothing you do here publishes, edits or deletes anything.'
       }
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
@@ -81,7 +83,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'signed_out' && (
         <Door
-          heading="The workroom is by invitation"
+          heading="The desk is by invitation"
           body="Sign in with the address a keeper added to the record. Reading the public record needs no account; working here needs an invitation."
           actionLabel="Sign in to the record"
           onAction={() => base44.auth.redirectToLogin(window.location.href)}
@@ -99,7 +101,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'not_on_list' && (
         <Door
-          heading="The workroom opens by invitation"
+          heading="The desk opens by invitation"
           body="This room is for the people the record answers to and the people who agreed to look. Ask for your address to be put on the record's list, and it opens on your next sign-in."
           actionLabel="What checking involves"
           onAction={() => { window.location.href = '/ClimateFellows'; }}
@@ -108,7 +110,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'error' && (
         <Door
-          heading="The workroom could not be opened"
+          heading="The desk could not be opened"
           body="Nothing is lost — everything waiting is still waiting. Try once more."
           actionLabel="Try again"
           onAction={load}

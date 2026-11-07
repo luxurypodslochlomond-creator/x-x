@@ -36,8 +36,15 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // keep it. Terms and Privacy used to lead because the rail could not be swiped on a handset;
 // the foot wraps now, so nothing can be off-screen and the grouping can be honest instead
 // of defensive.
+// Every word that used to crowd the top of every page lives here instead: who founded the
+// record, how it is checked, how it is sealed and how it is corrected. The bar carries where
+// you read; the foot carries what the record is. That is the whole of the simplification.
 const FOOTER_LINKS = [
   { label: 'The Brief', page: 'ClimateBrief' },
+  { label: 'Founder', page: 'ClimateFounder' },
+  { label: 'Method', page: 'ClimateMethod' },
+  { label: 'Seal', page: 'ClimateSeals' },
+  { label: 'Corrections', page: 'ClimateCorrections' },
   // The page that says what it costs to keep this alive, what it will not let a host
   // do, who holds the keys today, and what is still open. It was written and then left
   // with nothing linking to it — the honesty existed and no reader could reach it.
@@ -48,6 +55,7 @@ const FOOTER_LINKS = [
   // be one. It was written and then left with nothing linking to it, which made it a page
   // only its author could open. Anyone who wants to help should be able to find the way in.
   { label: 'Checkers', page: 'ClimateFellows' },
+  { label: 'Support', page: 'ClimateSupport' },
   { label: 'The Buttons', page: 'ClimateGuide' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },

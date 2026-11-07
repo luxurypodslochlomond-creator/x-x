@@ -129,9 +129,14 @@ seedTranslations(T);
      // had been wearing the same blue as every other link here, so the most urgent entry
      // on the page read as the calmest thing on it.
      const isSolution = item.entry_type === 'solution';
-     // Every card carries a picture. An entry that arrived without one wears the
-     // picture of its own category, so the grid never reads as half-broken.
-     const cardImage = item.image_url || CATEGORY_IMAGE(item.category);
+     // A solution may wear its category's picture when it arrived without one of its own.
+     // A crisis may not. The category fallback put a beach of coral sand over a coral
+     // emergency, because a category picture is the picture of the topic, not of the event —
+     // and illustrating somebody's emergency with a pleasant stock photo of the same subject
+     // is the record telling a softer story than the entry does. A crisis shows the photograph
+     // it was given, or it shows the record's own plate and says its line on it. Nothing is
+     // invented to fill the frame.
+     const cardImage = item.image_url || (isSolution ? CATEGORY_IMAGE(item.category) : null);
 
      return (
        <Link
@@ -140,18 +145,26 @@ seedTranslations(T);
            isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
          } aspect-[4/3] flex items-end active:scale-95 transition-transform duration-100`}
        >
-         <img
-           src={cardImage}
-           alt=""
-           loading="lazy"
-           decoding="async"
-           className="absolute inset-0 w-full h-full object-cover"
-           /* Colour, not grey. Every photograph on this page was drained to black and white,
-              which is half of why the whole record read as a machine's print-out. A news
-              page shows the place itself. The scrim below still guarantees the words. */
-           style={{ filter: 'saturate(1.06) contrast(1.04)' }}
-           onError={(e) => { e.currentTarget.src = CATEGORY_IMAGE(item.category); }}
+         {cardImage ? (
+           <img
+             src={cardImage}
+             alt=""
+             loading="lazy"
+             decoding="async"
+             className="absolute inset-0 w-full h-full object-cover"
+             /* Colour, not grey. Every photograph on this page was drained to black and white,
+                which is half of why the whole record read as a machine's print-out. A news
+                page shows the place itself. The scrim below still guarantees the words. */
+             style={{ filter: 'saturate(1.06) contrast(1.04)' }}
+             /* A picture that will not open leaves the plate, never a substitute image: what
+                stands in for a photograph is the entry's own words, not a different picture. */
+             onError={(e) => { e.currentTarget.style.display = 'none'; }}
            />
+         ) : (
+           /* The plate: the entry's kind, on the record's own deep ground, with the crisis rule
+              held at the top. No photograph, because there was none to show. */
+           <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #2a2219 0%, #241d16 55%, #1a140f 100%)' }} />
+         )}
          {/* Gradient scrim — guarantees title readability on any image. A colour photograph can
              be bright white at its foot, so the scrim holds a touch harder than it did over grey:
              the cream words are never asked to fight the picture for the last inch. */}
