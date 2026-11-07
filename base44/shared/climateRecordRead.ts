@@ -5,11 +5,15 @@
 // exactly the same rule of access (row-level security), or they would disagree about what
 // the record holds — and a record that disagrees with itself is worth nothing to a panel.
 
+// Every word an entry carries, not only the headline: a photographer's name, a second
+// source named beside the first, the person who signed it, the correction that was made in
+// daylight. A reader who types any of those should land on the entry, because on this record
+// they are part of what the entry says.
 export const FIELDS: Record<string, string[]> = {
-  ClimateSolution: ['title', 'summary', 'details', 'category', 'subcategory', 'region_rough', 'country', 'source_name', 'source_url', 'source_author'],
-  ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country', 'source_url'],
+  ClimateSolution: ['title', 'summary', 'details', 'category', 'subcategory', 'region_rough', 'country', 'source_name', 'source_url', 'source_author', 'image_credit', 'corroborating_source', 'editor', 'correction_note'],
+  ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country', 'source_url', 'category', 'corroborating_source', 'editor', 'correction_note'],
   ClimateGroup: ['name', 'topic', 'region', 'description'],
-  ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'source_url', 'source_author', 'publisher_type', 'where_label', 'country', 'category'],
+  ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'source_url', 'source_author', 'publisher_type', 'where_label', 'country', 'category', 'image_credit', 'corroborating_source', 'editor', 'correction_note'],
 };
 
 // Words that carry no meaning on their own. Dropped before the cap, so a question asked in

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { ArrowRight, Plus } from 'lucide-react';
+import { ArrowRight, Plus, Search, X } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import NewsSubmitForm from '@/components/climate/NewsSubmitForm';
@@ -24,6 +24,10 @@ export default function ClimateWire() {
   const [filter, setFilter] = useRecordViewState('verification', 'all');
   const [formOpen, setFormOpen] = useState(false);
   const [reload, setReload] = useState(0);
+  // The wire has its own search, because somebody standing on the wire should not have to
+  // leave it to find something they remember reading here. It reads every word an entry
+  // carries and it runs in the browser, so asking costs the record nothing.
+  const [q, setQ] = useState(() => new URLSearchParams(window.location.search).get('q') || '');
 
   useEffect(() => {
     let cancelled = false;
@@ -34,6 +38,19 @@ export default function ClimateWire() {
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
   }, [filter, reload]);
+
+  // Every word an entry carries — headline, what changed, what can be copied, the source,
+  // the place, the picture credit, the second source, the person who signed it. Every word
+  // given must be present, so "seagrass scotland" finds entries holding both.
+  const words = q.trim().toLowerCase().split(/\s+/).filter((w) => w.length > 1);
+  const holds = (e) =>
+    [e.headline, e.what_changed, e.replicable, e.source_name, e.source_author, e.where_label,
+      e.country, e.category, e.publisher_type, e.when_label, e.image_credit,
+      e.corroborating_source, e.editor]
+      .filter(Boolean).join(' ').toLowerCase();
+  const shown = words.length
+    ? entries.filter((e) => { const h = holds(e); return words.every((w) => h.includes(w)); })
+    : entries;
 
   return (
     <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
@@ -98,9 +115,48 @@ export default function ClimateWire() {
           </div>
         </div>
 
+        {/* Search the wire, on the wire. The field is part of the page rather than a detour
+            through another screen: the words stay where the entries are. */}
+        <div className="mt-6 relative">
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#5a5246] pointer-events-none" />
+          <input
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            placeholder="Search the wire — a place, a subject, a source…"
+            aria-label="Search the wire"
+            className="w-full min-h-[48px] pl-9 pr-10 py-3 bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] text-[12px] font-mono placeholder:text-[#5a5246] focus:outline-none focus:border-[#e2602a]"
+          />
+          {q && (
+            <button
+              onClick={() => setQ('')}
+              aria-label="Clear the search"
+              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-[#5a5246] hover:text-[#b3261e] transition-colors"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+
+        {words.length > 0 && (
+          <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
+            {shown.length === 0
+              ? 'No entry on the wire holds those words.'
+              : `${shown.length} of ${entries.length} ${entries.length === 1 ? 'entry holds' : 'entries hold'} ${words.length === 1 ? 'that word' : 'every one of those words'}.`}{' '}
+            <Link
+              to={`/ClimateSearch?q=${encodeURIComponent(q.trim())}`}
+              className="text-[#e2602a] font-black underline decoration-dotted underline-offset-2"
+            >
+              Search the whole record →
+            </Link>
+          </p>
+        )}
+
         <div className="mt-4 flex items-baseline justify-between gap-3">
           <p className="text-[10px] font-mono uppercase tracking-widest text-[#5a5246]">
-            {loading ? 'Reading the wire…' : `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`}
+            {loading ? 'Reading the wire…' : words.length > 0
+              ? `${shown.length} of ${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`
+              : `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`}
           </p>
           <Link to="/ClimateMethod" className="text-[10px] font-black font-mono uppercase tracking-wide text-[#e2602a] underline">How this record is made</Link>
         </div>
@@ -113,15 +169,17 @@ export default function ClimateWire() {
             </div>
           )}
 
-          {!loading && entries.length === 0 && (
+          {!loading && shown.length === 0 && (
             <div className="bg-[#f7f1e5] border-2 border-[#141210]/30 p-6 text-center">
               <p className="text-[12px] font-mono text-[#141210] leading-relaxed">
-                Nothing on the wire under this heading yet. The record opens with the founder's own words — send the first entry and it goes up with its source.
+                {words.length > 0
+                  ? 'Nothing on the wire holds those words. Try one of them, or search the whole record above.'
+                  : "Nothing on the wire under this heading yet. The record opens with the founder's own words — send the first entry and it goes up with its source."}
               </p>
             </div>
           )}
 
-          {!loading && entries.map(entry => <NewsEntryCard key={entry.id} entry={entry} />)}
+          {!loading && shown.map(entry => <NewsEntryCard key={entry.id} entry={entry} />)}
         </div>
 
         {/* Why it looks like this */}
