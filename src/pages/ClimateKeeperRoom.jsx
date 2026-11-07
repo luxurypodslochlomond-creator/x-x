@@ -50,13 +50,14 @@ export default function ClimateKeeperRoom() {
   // Plain verbs, in the order the work actually happens: what is waiting for a yes, then what
   // is waiting for a pair of eyes, then the counts. A keeper's first tab is their next job.
   const tabs = who.isKeeper
-    ? [{ key: 'decide', label: 'To decide' }, { key: 'check', label: 'To check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Facts' }]
+    ? [{ key: 'decide', label: 'To decide' }, { key: 'check', label: 'To check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Sourcing' }]
     : [{ key: 'check', label: 'To check' }];
   const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
   const setTab = (key) => setParams({ tab: key });
 
   return (
     <ClimateRecordShell
+      compact
       eyebrow="Your desk"
       marker="Public record · invited desk"
       title={state !== 'ready' ? 'Your desk' : who.isKeeper ? 'One thing at a time.' : 'Open the source, say what you find.'}

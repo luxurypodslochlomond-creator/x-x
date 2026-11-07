@@ -57,6 +57,14 @@ export default function DecisionCard({ item, onDecide, busy }) {
             A note, not a decision: {item.ai}
           </p>
         ) : null}
+
+        {/* What each of the two answers actually does, said beside the buttons rather than in a
+            footnote under the whole queue — on a phone that footnote was never read, so a keeper
+            was pressing the one irreversible answer without knowing what it did. */}
+        <p className="mt-3 text-[10.5px] font-mono leading-snug text-[#5a5246]">
+          <span className="font-black text-[#1e3a2b]">On the record</span> — it goes public, and it is sealed.{' '}
+          <span className="font-black text-[#141210]">Not yet</span> — it waits. Nothing is lost.
+        </p>
       </div>
 
       <div className="grid grid-cols-2 border-t-2 border-[#141210]">

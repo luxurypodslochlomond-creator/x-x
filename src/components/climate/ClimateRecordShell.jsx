@@ -7,7 +7,11 @@ import RecordCover from '@/components/climate/RecordCover';
 
 // The record's page shell — the same cold bands the Founder page wears, so every
 // page of the record reads as one place: paper, ink, one ocean signal, x = x.
-export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, children }) {
+// `compact` is for the rooms where somebody has come to work rather than to read — the desk,
+// above all. It keeps the way out, the page's name and the foot, and drops the covenant band
+// and the hero: a keeper opening her own desk should meet the first thing waiting, not two
+// hundred pixels of ceremony before it. Every reading page of the record is unchanged.
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, children }) {
   const back = useRecordBack(returnTo);
 
   return (
@@ -28,6 +32,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
         </div>
       </div>
 
+      {!compact && (<>
       {/* Cold epigraph band — the covenant mark, same as the record */}
       <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
@@ -71,7 +76,9 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
         </div>
       </div>
 
-      <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-14">{children}</div>
+      </>)}
+
+      <div className={`max-w-2xl lg:max-w-3xl mx-auto px-4 ${compact ? 'py-4 lg:py-8' : 'py-8 lg:py-14'}`}>{children}</div>
 
       {/* Signal band — the way back to the record */}
       <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
