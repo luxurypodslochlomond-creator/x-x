@@ -1,6 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
-import { UserPlus, Pause, Play, Trash2, RefreshCw, KeyRound, Eye } from 'lucide-react';
+import { UserPlus, Pause, Play, Trash2, RefreshCw, KeyRound, Eye, History } from 'lucide-react';
+
+const VERBS = {
+  access_granted: 'was added',
+  access_paused: 'was paused',
+  access_restored: 'was let back in',
+  access_removed: 'was taken off',
+};
+
+const whenLine = (iso) => {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+};
 import AddKeeper from '@/components/climate/AddKeeper';
 import AccessSecondKey from '@/components/climate/AccessSecondKey';
 
@@ -24,6 +38,8 @@ export default function GuestList() {
   const [waiting, setWaiting] = useState([]);
   const [solo, setSolo] = useState(false);
   const [owner, setOwner] = useState(false);
+  const [history, setHistory] = useState([]);
+  const [showHistory, setShowHistory] = useState(false);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -42,6 +58,8 @@ export default function GuestList() {
     setWaiting(d.waiting || []);
     setSolo(Boolean(d.solo));
     setOwner(Boolean(d.owner));
+    const past = await call({ action: 'history' }).catch(() => null);
+    setHistory(past?.data?.history || []);
     setLoading(false);
   }, []);
 
@@ -225,6 +243,49 @@ export default function GuestList() {
         stay on the record in their name, because the checking they did was real whether or not they can check
         tomorrow. Every change here is written into the audit trail with both keepers' names.
       </p>
+
+      {/* The proof, one line per change: who, what, and the exact minute. It is folded away by
+          default because the shed is for the next job, not for reading yesterday — but it is one
+          tap from the same page where the change is made, which is where a fair question gets
+          asked. */}
+      <div className="mt-6 border-t border-[#141210]/15 pt-3">
+        <button
+          onClick={() => setShowHistory((v) => !v)}
+          className="w-full flex items-center justify-between gap-2 min-h-[44px] text-left"
+        >
+          <span className="text-[12.5px] text-[#6b5f4f]" style={reading}>
+            <History className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+            What has changed here
+            {history.length > 0 && <span> · {history.length}</span>}
+          </span>
+          <span className="text-[12.5px] text-[#b3261e]" style={reading}>{showHistory ? 'hide' : 'show'}</span>
+        </button>
+
+        {showHistory && (
+          <div className="pt-1">
+            {!history.length && (
+              <p className="text-[14px] text-[#3a342c] leading-[1.6]" style={reading}>
+                Nothing has changed yet. The first line here will be the first person added.
+              </p>
+            )}
+            {history.map((h) => (
+              <div key={h.id} className="py-2.5 border-b border-[#141210]/10 last:border-0">
+                <p className="text-[14px] text-[#141210] leading-[1.5]" style={reading}>
+                  <span className="font-semibold">{h.title || h.by || 'someone'}</span>{' '}
+                  <span className="text-[#3a342c]">{VERBS[h.action] || h.action}</span>
+                </p>
+                <p className="text-[12px] text-[#6b5f4f]" style={reading}>
+                  {whenLine(h.when)}
+                  {h.by ? ` · ${h.by}` : ''}
+                </p>
+                {h.note && (
+                  <p className="text-[12.5px] text-[#3a342c] leading-[1.55] mt-0.5" style={reading}>{h.note}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -220,6 +220,29 @@ export default async function (req) {
       });
     }
 
+    // ── WHO CHANGED IT, AND WHEN ────────────────────────────────────────────────
+    // The question "who shut that person out, and when" is answered by a row, not a shrug — and
+    // the person asking it is a keeper, not an administrator, so the answer lives on this door.
+    // The table itself stays closed to browsers; what comes back is keeper lines only, and only
+    // to a hand the record already accepts.
+    if (action === 'history') {
+      const found = await base44.asServiceRole.entities[AUDIT].filter(
+        { entity_type: 'keeper' },
+        { sort: '-created_date', limit: 40 }
+      );
+      const rows = found?.items || found || [];
+      return Response.json({
+        history: rows.map((r) => ({
+          id: r.id,
+          action: r.action || '',
+          title: r.entity_title || '',
+          when: r.created_date || '',
+          by: r.reviewer_email || '',
+          note: r.ai_assessment || '',
+        })),
+      });
+    }
+
     // ── ASKING ──────────────────────────────────────────────────────────────────
     if (action === 'request') {
       const change = String(body?.change || '');
