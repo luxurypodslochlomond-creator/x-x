@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useRecordBack from '@/components/climate/useRecordBack';
-import { ArrowLeft, ArrowRight, Globe, BookOpen, Film, Award, Heart } from 'lucide-react';
+import RecordBackBar from '@/components/climate/RecordBackBar';
+import { ArrowRight, Globe, BookOpen, Film, Award, Heart } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
 
@@ -37,19 +37,10 @@ const ACHIEVEMENTS = [
 ];
 
 export default function ClimateFounder() {
-  const back = useRecordBack();
-
   return (
     <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
-      {/* Header — paper, beacon, back */}
-      <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
-        <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
-          <button onClick={back} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">The Founder</span>
-        </div>
-      </div>
+      {/* Header — paper, the way back, the page's name: the record's one bar. */}
+      <RecordBackBar eyebrow="The Founder" />
 
       {/* Cold epigraph — the covenant mark, same as the record */}
       <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import useRecordBack from '@/components/climate/useRecordBack';
+import RecordBackBar from '@/components/climate/RecordBackBar';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Eye, Radio, Heart } from 'lucide-react';
+import { Eye, Radio, Heart } from 'lucide-react';
 
 // Converts an ISO 2-letter country code to a display name.
 function countryName(code) {
@@ -20,7 +20,6 @@ function countryName(code) {
 // Not who read them. Not when. Just that they landed — the signal, not the surveiller.
 export default function ClimateReachPlace() {
   const { placeType, place } = useParams();
-  const back = useRecordBack('/ClimateImpact');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -63,24 +62,12 @@ export default function ClimateReachPlace() {
 
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
-      {/* Header */}
-      <div className="flex items-center gap-3 px-4 lg:px-10 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
-        <button
-          onClick={back}
-          aria-label="Back to the page I came from"
-          className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
-        >
-          <ArrowLeft className="w-5 h-5" />
-        </button>
-        <div className="min-w-0">
-          <h1 className="font-black uppercase text-[#efe7d6] leading-none truncate" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-            {displayName}
-          </h1>
-          <p className="text-[9px] font-mono text-[#e2602a] uppercase tracking-widest mt-0.5">
-            {placeType === 'country' ? 'Country' : 'Nation'} · Stories that reached here
-          </p>
-        </div>
-      </div>
+      {/* The same paper bar and the same way back as every page of the record; the dark
+          poster below it is the page's own voice, not a second navigation. */}
+      <RecordBackBar
+        eyebrow={`${displayName} · ${placeType === 'country' ? 'country' : 'nation'}`}
+        fallback="/ClimateImpact"
+      />
 
       {/* Big number */}
       <div className="px-5 lg:px-10 py-8 lg:py-12 bg-[#141210]">

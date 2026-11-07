@@ -1,48 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useRecordBack from '@/components/climate/useRecordBack';
+import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordWorldMap from '@/components/climate/RecordWorldMap';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 /* ── THE MAP IS A PAGE OF THE RECORD, NOT A POSTER ABOUT IT ────────────────────────
-   This page used to be the last survivor of the record's old costume: a cold dark
-   masthead, a condensed uppercase headline reading TRANSMISSION MAP, two beacon dots
-   pulsing at the edges of a quotation, a flicker on the source line, a scanline over
-   the whole map and a signal line that crossed the world in eight seconds. Fourteen
-   pages wore the record's clothes and this one wore the clothes of the thing the
-   record replaced.
+   This page wore the clothes of the thing the record replaced: a cold masthead, a
+   condensed uppercase headline, two beacon dots pulsing round a quotation, a scanline
+   over the world and a signal line crossing it in eight seconds. It also said SIGNALS
+   where the record says entries, and TRANSMISSION where the record says reads — a
+   reader who came here from the brief was handed a different publication.
 
-   The fix is not a restyle for its own sake. It is that the map had stopped using the
-   record's words: it said SIGNALS where the record says entries, TRANSMISSION where the
-   record says reads, and it named a Laurie Anderson album three times on one screen.
-   A reader who came here from the brief was being handed a different publication and
-   asked to believe it was the same one.
-
-   So it is built now out of the record's own parts — the paper header, the covenant
-   band with x = x, the cover painting behind the title, the orange way back — which is
-   exactly what ClimateRecordShell does for the pages that fit in a column. The map is
-   the one page that cannot live in a column, so it wears the same bands around a
-   full-bleed map instead. */
+   So it is built from the record's own parts: the same paper bar and the same way back
+   as every other page (one component, so it cannot drift again), the covenant band, the
+   cover painting, the orange band at the foot. And one rule for the words: a page whose
+   copy is a single statement puts that statement in the middle of the measure, not
+   ragged against the left edge of a column it does not fill. */
 export default function ClimateMapPage() {
-  const back = useRecordBack('/TogetherChangeClimate');
-
   return (
     <div className="climate-record min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
-      {/* Header — paper, the way out, the page's name. Scrolls with the page. */}
-      <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
-        <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
-          <button
-            onClick={back}
-            aria-label="Back"
-            className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">The record · Map</span>
-        </div>
-      </div>
+      <RecordBackBar eyebrow="The record · Map" />
 
       {/* Covenant band — the mark every page of the record carries, and the way to it. */}
       <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20">
@@ -65,13 +44,14 @@ export default function ClimateMapPage() {
           <SignalBeacon size={40} color="#7fc9e4" />
           <h1
             className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.6vw, 54px)', letterSpacing: '-0.02em' }}
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 3.2vw, 46px)', letterSpacing: '-0.02em' }}
           >
             Map
           </h1>
           <p className="text-[13px] lg:text-[15px] leading-[1.65] text-[#efe7d6]/80 max-w-sm lg:max-w-2xl" style={{ fontFamily: 'var(--font-reading)' }}>
-            A solution, a crisis or an action can say roughly where it is. This is every entry that does,
-            standing where it stands. Region only — never a precise location, and never a person.
+            A solution, a crisis, an action, or a line on the wire can say roughly where it is. This is
+            every entry that does, standing where it stands. Region only — never a precise location,
+            and never a person.
           </p>
         </div>
       </div>
@@ -87,24 +67,31 @@ export default function ClimateMapPage() {
         </div>
       </div>
 
-      {/* What a mark means, and what the plate will not do. */}
-      <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-6">
-        <p className="text-[13px] lg:text-[15px] leading-[1.7] text-[#141210]/80" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
-          A mark is only ever set where an entry says it is, to the region and no finer — never a precise
-          location, and never a person. An entry with no place it can honestly be put is not guessed at and
-          not dropped: it is simply not on the plate, and the count above it says how many of the record's
-          published entries are here.
+      {/* What a mark means, and what the plate will not do. One statement, so it sits in
+          the middle of its own measure instead of hanging off the left of a wide column. */}
+      <div className="max-w-[1100px] mx-auto px-4 lg:px-10 py-7 lg:py-9 text-center">
+        <p className="mx-auto max-w-[46ch] text-[13px] lg:text-[15px] leading-[1.75] text-[#141210]/80" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
+          A mark is only ever set where an entry says it is, to the region and no finer. An entry with no
+          place it can honestly be put is not guessed at and not dropped — it is simply not on the plate,
+          and the count above it says how many of the record's published entries are here.
         </p>
       </div>
 
-      {/* Signal band — the way back to the record */}
-      <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
+      {/* Signal band — the way on, and the way back. The plate and the impact page are two
+          halves of one question (where is this happening, and who is reading it), so neither
+          leaves you stranded on the other side of the record. */}
+      <div className="bg-[#e2602a] px-5 lg:px-10 py-6 lg:py-8 text-center">
         <Link
           to="/TogetherChangeClimate"
           className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors"
         >
           Back to the record <ArrowRight className="w-4 h-4" />
         </Link>
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]/75">
+          <Link to="/ClimateImpact" className="hover:text-[#141210] transition-colors">Who is reading →</Link>
+          <Link to="/ClimateWire" className="hover:text-[#141210] transition-colors">The wire →</Link>
+          <Link to="/ClimateSearch" className="hover:text-[#141210] transition-colors">Search the record →</Link>
+        </div>
       </div>
 
       <p className="px-5 pb-9 pt-6 text-center text-[11px] font-mono text-[#5a5246] leading-relaxed">

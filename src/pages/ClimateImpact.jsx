@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import useRecordBack from '@/components/climate/useRecordBack';
+import RecordBackBar from '@/components/climate/RecordBackBar';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
+import { Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
 import ImpactWorldMap from '@/components/climate/ImpactWorldMap';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
@@ -117,7 +117,6 @@ function Ledger({ rows, tone, href, label }) {
    and what is being done about it, in two columns that stay a readable width instead of
    running the length of the monitor. On a phone it is still one calm column. */
 export default function ClimateImpact() {
-  const back = useRecordBack();
   // Shares one read of the numbers with the record's impact strip: tapping through
   // from the record shows them at once, and the page refreshes them behind the scenes.
   const { data: stats, isPending, refetch } = useClimateImpactStats();
@@ -174,20 +173,8 @@ export default function ClimateImpact() {
 
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
-      {/* Header */}
-      <div className="bg-[#241d16] border-b-2 border-[#e2602a]">
-        <div className="mx-auto max-w-[1240px] flex items-center gap-3 px-4 lg:px-8 py-3">
-          <button onClick={back} aria-label="Back to the page I came from" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <div>
-            <h1 className="font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-              Global Impact
-            </h1>
-            <p className="text-[9px] font-mono text-[#e2602a] uppercase tracking-widest mt-0.5">The record of the time</p>
-          </div>
-        </div>
-      </div>
+      {/* The same bar, the same way back, as every other page of the record. */}
+      <RecordBackBar eyebrow="The record · Impact" />
 
       {/* ── THE NUMBER AND THE PLANET, AS ONE BLOCK ── */}
       <div className="relative overflow-hidden bg-[#241d16] border-b-4 border-b-[#e2602a]">
@@ -195,25 +182,39 @@ export default function ClimateImpact() {
           <SignalBeacon size={380} />
         </div>
 
-        <div className="relative mx-auto max-w-[1240px] px-5 lg:px-8 pt-7 pb-6 lg:py-10 lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-12 lg:items-center">
+        <div className="relative mx-auto max-w-[1100px] px-5 lg:px-8 pt-7 pb-6 lg:py-10 lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-12 lg:items-center">
           <div className="min-w-0">
-            <p className="text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#e2602a] leading-relaxed lg:max-w-[280px]">
-              Together we can change the course of climate change
+            {/* ── NO SHOUTING ────────────────────────────────────────────────────────
+                This block used to say two things at full volume: a slogan set in tracked
+                black capitals, and a numeral a hundred and thirty pixels tall. Both were
+                asked to make a young record feel bigger than it is, and both did the
+                opposite — a record that bellows reads as unsure of itself. The sentence is
+                now a sentence, in the reading voice, and the count is a figure at a size you
+                can meet rather than one that meets you. Quiet is the more confident of the
+                two, and it is the only honest one when the number is still small. */}
+            <p
+              className="text-[14px] lg:text-[16px] leading-[1.6] text-[#efe7d6]/75 max-w-[32ch]"
+              style={{ fontFamily: 'var(--font-reading)' }}
+            >
+              Together we can change the course of climate change.
             </p>
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
               <a
                 href="#reading-map"
                 aria-label={`${total.toLocaleString()} reads, open the map of reads`}
-                className="block mt-4 font-black text-[#e2602a] leading-[0.8] -ml-1 hover:text-[#f07a3a] transition-colors"
-                style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(74px, 13vw, 132px)', letterSpacing: '-0.055em' }}
+                className="block mt-3 font-black text-[#efe7d6] leading-[0.95] hover:text-[#e2602a] transition-colors"
+                style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px, 6vw, 62px)', letterSpacing: '-0.03em' }}
               >
                 {total.toLocaleString()}
               </a>
               {/* "Reads of the record" claimed more than it counted: the number is reads of
-                  the entries — solutions, crises and actions — and the wire, the gatherings
-                  and the music are on the record without being in it. */}
-              <p className="text-[9px] font-mono uppercase tracking-[0.22em] text-[#efe7d6]/45 mt-2">
-                Reads of these entries
+                  the entries — solutions, crises, actions and the wire — and the gatherings
+                  and the music stand on the record without being in it. */}
+              <p
+                className="text-[11px] leading-relaxed text-[#efe7d6]/50 mt-2 max-w-[34ch]"
+                style={{ fontFamily: 'var(--font-reading)' }}
+              >
+                reads of the entries on this record.
               </p>
             </motion.div>
           </div>
@@ -237,7 +238,7 @@ export default function ClimateImpact() {
           </div>
         </div>
 
-        <div className="relative mx-auto max-w-[1240px] grid grid-cols-3 border-t border-[#efe7d6]/15">
+        <div className="relative mx-auto max-w-[1100px] grid grid-cols-3 border-t border-[#efe7d6]/15">
           <ImpactPlate icon={Globe} to={countries.length ? '#countries' : '#reading-map'} value={countries.length} label="Countries" />
           <ImpactPlate icon={Eye} to="/TogetherChangeClimate#record-entries" value={entries} label="Entries" />
           <ImpactPlate icon={MapPin} to={regions.length ? '#nations' : '#reading-map'} value={regions.length} label="Nations" muted={regions.length === 0} />
@@ -245,7 +246,7 @@ export default function ClimateImpact() {
 
         {/* The number was labelled "Entries", which read as everything on the record — it is
             not. Said plainly, so nobody reading a funder's page has to guess what it covers. */}
-        <p className="relative mx-auto max-w-[1240px] px-5 lg:px-8 py-3 text-[8px] font-mono text-[#efe7d6]/40 leading-relaxed border-t border-[#efe7d6]/10">
+        <p className="relative mx-auto max-w-[1100px] px-5 lg:px-8 py-3 text-[8px] font-mono text-[#efe7d6]/40 leading-relaxed border-t border-[#efe7d6]/10">
           Entries listed = the solutions, the crises and the actions. The wire, the gatherings and the music stand on the record too, and are not part of this count. A place is counted once per entry per half hour.
         </p>
       </div>
@@ -253,7 +254,7 @@ export default function ClimateImpact() {
       {/* ── THE RECEIPTS — two columns on a desktop, one calm column on a phone ── */}
       {regions.length > 0 && (
         <div id="nations" className="px-5 lg:px-8 py-6 bg-[#efe7d6]">
-          <div className="mx-auto max-w-[1240px]">
+          <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="w-4 h-4 text-[#b3261e]" />
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
@@ -273,8 +274,8 @@ export default function ClimateImpact() {
       )}
 
       {countries.length > 0 && (
-        <div id="countries" className="px-5 lg:px-8 py-6 bg-[#efe7d6]">
-          <div className="mx-auto max-w-[1240px]">
+        <div id="countries" className={`px-5 lg:px-8 py-6 bg-[#efe7d6] ${regions.length ? 'border-t border-[#141210]/10' : ''}`}>
+          <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <Users className="w-4 h-4 text-[#1e3a2b]" />
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
@@ -293,7 +294,7 @@ export default function ClimateImpact() {
       )}
 
       {/* Reading and acting, side by side on a desktop: the two halves of the same signal. */}
-      <div className="mx-auto max-w-[1240px] lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+      <div className="mx-auto max-w-[1100px] lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
         <WorldReadingFeed stories={stats?.top_stories || []} />
         <WorldActionFeed actions={stats?.upcoming_actions || []} />
       </div>
@@ -360,7 +361,15 @@ export default function ClimateImpact() {
         <p className="text-[9px] font-mono text-[#5a5246] text-center leading-relaxed">
           No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry. A place is counted once per entry per half hour, so what you see here is reads counted — never people, and never inflated. The signal, not the surveiller.
         </p>
-        <p className="mt-3 text-center font-mono text-[13px] font-black tracking-[0.3em] text-record-mark">
+        {/* Where else this leads. Impact answers who is reading and the plate answers where
+            things are; a reader who has finished one of those questions should not have to
+            go back to the front of the book to ask the other. */}
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]/75">
+          <Link to="/ClimateMap" className="hover:text-[#b3261e] transition-colors">The plate →</Link>
+          <Link to="/ClimateWire" className="hover:text-[#b3261e] transition-colors">The wire →</Link>
+          <Link to="/TogetherChangeClimate" className="hover:text-[#b3261e] transition-colors">The record →</Link>
+        </div>
+        <p className="mt-4 text-center font-mono text-[13px] font-black tracking-[0.3em] text-record-mark">
           x = x
         </p>
       </div>

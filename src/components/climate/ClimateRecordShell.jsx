@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useRecordBack from '@/components/climate/useRecordBack';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import RecordBackBar from '@/components/climate/RecordBackBar';
+import { ArrowRight } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
 
@@ -12,25 +12,12 @@ import RecordCover from '@/components/climate/RecordCover';
 // and the hero: a keeper opening her own desk should meet the first thing waiting, not two
 // hundred pixels of ceremony before it. Every reading page of the record is unchanged.
 export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, children }) {
-  const back = useRecordBack(returnTo);
-
   return (
     <div dir={dir} className="climate-record twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Header — paper, the way out, the page's name. It scrolls with the page, and
           does not pin: the record's masthead above it already owns the top edge, and a
           second bar pinned to the same edge sat over the nav and ate the taps. */}
-      <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
-        <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
-          <button
-            onClick={back}
-            aria-label="Back"
-            className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </button>
-          <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{eyebrow}</span>
-        </div>
-      </div>
+      <RecordBackBar eyebrow={eyebrow} fallback={returnTo} />
 
       {!compact && (<>
       {/* Cold epigraph band — the covenant mark, same as the record */}

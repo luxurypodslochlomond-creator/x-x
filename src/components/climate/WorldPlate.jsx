@@ -13,6 +13,8 @@ const TONES = {
   crisis: { fill: '#b3261e', shape: 'rounded-full', size: 10 },
   solution: { fill: '#141210', shape: 'rounded-full', size: 8 },
   action: { fill: '#1e3a2b', shape: 'rotate-45', size: 8 },
+  // A line on the wire. The record's ocean, not its warning: a report is not an emergency.
+  wire: { fill: '#0f5f7a', shape: 'rounded-full', size: 7 },
   country: { fill: '#b3261e', shape: 'rounded-full', size: 9 },
   nation: { fill: '#0f5f7a', shape: 'rounded-full', size: 9 },
 };

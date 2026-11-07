@@ -26,7 +26,10 @@ export default function RecordWorldMap() {
   useEffect(() => {
     const load = async () => {
       try {
-        const [solutions, actions, solutionTotal, actionTotal] = await Promise.all([
+        // The wire is on the plate too. Its own country field was put there "for the wire's
+        // place line and for mapping" — a report about Benin is about Benin, wherever it was
+        // written — so the map would have been telling half the record and calling it all of it.
+        const [solutions, actions, news, solutionTotal, actionTotal, newsTotal] = await Promise.all([
           base44.entities.ClimateSolution.filter(
             { status: 'published' },
             { limit: 200, fields: ['title', 'summary', 'category', 'entry_type', 'country', 'region_rough'] }
@@ -35,13 +38,18 @@ export default function RecordWorldMap() {
             { status: 'published' },
             { limit: 200, fields: ['title', 'description', 'category', 'action_type', 'country', 'region_rough'] }
           ),
-          // The total is counted separately so the plate can never claim to hold
+          base44.entities.ClimateNews.filter(
+            { status: 'published' },
+            { limit: 200, fields: ['headline', 'what_changed', 'category', 'country', 'where_label'] }
+          ).catch(() => ({ items: [] })),
+          // The totals are counted separately so the plate can never claim to hold
           // everything: an entry with no place it can honestly be put is not dropped
           // from the count, it is admitted.
           base44.entities.ClimateSolution.count({ status: 'published' }),
           base44.entities.ClimateAction.count({ status: 'published' }),
+          base44.entities.ClimateNews.count({ status: 'published' }).catch(() => 0),
         ]);
-        setPublishedTotal((solutionTotal || 0) + (actionTotal || 0));
+        setPublishedTotal((solutionTotal || 0) + (actionTotal || 0) + (newsTotal || 0));
         setEntries([
           ...(solutions.items || []).map((s) => ({
             id: `solution-${s.id}`, entryId: s.id, type: s.entry_type === 'climate_crisis' ? 'crisis' : 'solution',
@@ -50,6 +58,10 @@ export default function RecordWorldMap() {
           ...(actions.items || []).map((a) => ({
             id: `action-${a.id}`, entryId: a.id, type: 'action',
             title: a.title, summary: a.description || '', category: a.category, country: a.country, region: a.region_rough,
+          })),
+          ...((news.items || [])).map((n) => ({
+            id: `wire-${n.id}`, entryId: n.id, type: 'wire',
+            title: n.headline, summary: n.what_changed || '', category: n.category, country: n.country, region: n.where_label,
           })),
         ]);
       } catch {
@@ -90,6 +102,7 @@ export default function RecordWorldMap() {
     crisis: marks.filter((m) => m.type === 'crisis').length,
     solution: marks.filter((m) => m.type === 'solution').length,
     action: marks.filter((m) => m.type === 'action').length,
+    wire: marks.filter((m) => m.type === 'wire').length,
   }), [marks]);
 
   return (
@@ -108,6 +121,7 @@ export default function RecordWorldMap() {
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#b3261e' }} />{counts.crisis}</span>
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#141210' }} />{counts.solution}</span>
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rotate-45" style={{ background: '#1e3a2b' }} />{counts.action}</span>
+          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#0f5f7a' }} />{counts.wire}</span>
         </div>
       </div>
 
@@ -126,11 +140,15 @@ export default function RecordWorldMap() {
               <span
                 className="text-[8px] font-black font-mono uppercase tracking-[0.14em] px-1.5 py-0.5"
                 style={{
-                  background: picked.type === 'crisis' ? '#b3261e' : picked.type === 'action' ? '#1e3a2b' : '#141210',
+                  background:
+                    picked.type === 'crisis' ? '#b3261e'
+                    : picked.type === 'action' ? '#1e3a2b'
+                    : picked.type === 'wire' ? '#0f5f7a'
+                    : '#141210',
                   color: '#efe7d6',
                 }}
               >
-                {picked.type === 'crisis' ? 'Crisis' : picked.type === 'action' ? 'Action' : 'Solution'}
+                {picked.type === 'crisis' ? 'Crisis' : picked.type === 'action' ? 'Action' : picked.type === 'wire' ? 'Wire' : 'Solution'}
               </span>
               {picked.country && (
                 <span className="text-[8px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246]">{picked.country}</span>
@@ -153,7 +171,11 @@ export default function RecordWorldMap() {
             )}
             <div className="flex items-center gap-3 mt-2">
               <Link
-                to={`/ClimateDetail/${picked.type === 'action' ? 'action' : 'solution'}/${picked.entryId}`}
+                to={
+                  picked.type === 'wire'
+                    ? `/ClimateWireEntry/${picked.entryId}`
+                    : `/ClimateDetail/${picked.type === 'action' ? 'action' : 'solution'}/${picked.entryId}`
+                }
                 className="inline-flex items-center gap-1.5 text-[10px] font-black font-mono uppercase text-[#efe7d6] bg-[#141210] px-2.5 py-1.5"
               >
                 Open the entry →
@@ -169,7 +191,7 @@ export default function RecordWorldMap() {
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : 'Press a mark to read what stands there. Red is a crisis, black a solution, green an action.'}
+              : 'Press a mark to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire.'}
           </p>
         )}
       </div>

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import RecordBackBar from '@/components/climate/RecordBackBar';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import RecordCitation from '@/components/climate/RecordCitation';
 import { recordAddress } from '@/components/climate/recordAddress';
@@ -34,13 +35,13 @@ export default function ClimateWireEntry() {
 
   return (
     <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
-      <div className="flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210] bg-[#efe7d6]">
-        <Link to="/ClimateWire" aria-label="Back to the wire" className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
-          <ArrowLeft className="w-5 h-5" />
-        </Link>
-        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">One entry · permanent address</span>
-        {entry && <div className="ml-auto"><ShareCardButton entry={entry} compact /></div>}
-      </div>
+      {/* Arrive here from a mark on the map and back returns you to the map, not to the
+          top of the wire: the same bar, the same behaviour, as every other page. */}
+      <RecordBackBar
+        eyebrow="One entry · permanent address"
+        fallback="/ClimateWire"
+        right={entry ? <ShareCardButton entry={entry} compact /> : null}
+      />
 
       <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 lg:px-6 py-6 lg:py-12">
         {loading && (
