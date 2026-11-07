@@ -225,8 +225,9 @@ export default function ClimateMap() {
         center={[20, 0]}
         zoom={2}
         zoomSnap={0}
-        minZoom={0}
-        maxZoom={10}
+        /* The floor is set from the frame's own size by FitWorld, so the world always covers
+           it. A fixed floor of 0 let a desktop zoom out past the world and sit in grey. */
+        maxZoom={8}
         maxBounds={WORLD_BOUNDS}
         maxBoundsViscosity={1}
         scrollWheelZoom={true}
@@ -359,7 +360,7 @@ export default function ClimateMap() {
       <div
         className="absolute inset-0 pointer-events-none z-[400]"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 55%, rgba(237,242,240,0.35) 100%)',
+          background: 'radial-gradient(ellipse at center, transparent 55%, rgba(239,231,214,0.4) 100%)',
         }}
       />
 

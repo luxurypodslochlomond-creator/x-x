@@ -10,7 +10,10 @@ const ClimateMap = React.lazy(() => import('@/components/climate/ClimateMap'));
 
 export default function ClimateMapPage() {
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#1a1612]" style={{ fontFamily: 'var(--font-body)' }}>
+    /* No background of its own: the record's painting and grain stay under this page the way
+       they stay under every other page. A flat bone slab here was the one sheet in the book
+       printed on plain paper. */
+    <div className="min-h-screen text-[#1a1612]" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }

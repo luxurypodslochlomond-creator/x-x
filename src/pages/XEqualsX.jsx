@@ -24,10 +24,12 @@ export default function XEqualsX() {
       eyebrow="Record of the Time · The covenant"
       marker="The rule this record is held to"
       title="Nobody above anybody."
-      statement="x = x. Equal human worth — a decision, taken on purpose, and the rule every page of this record is kept to."
+      /* The mark is not dropped into either sentence. It stands on its own line, in its own
+         red, in the band above — and the words refer to it. */
+      statement="Equal human worth — a decision, taken on purpose, and the rule every page of this record is kept to."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
-      footer="x = x is the covenant the climate record is held to. The record is built in honour of Janine M. H. Selendy and Horizon International."
+      footer="The covenant the climate record is held to. The record is built in honour of Janine M. H. Selendy and Horizon International."
     >
       <XEqualsXCut />
 

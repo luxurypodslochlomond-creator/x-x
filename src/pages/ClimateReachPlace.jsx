@@ -170,7 +170,10 @@ export default function ClimateReachPlace() {
       {/* Footer */}
       <div className="px-5 lg:px-10 py-6 lg:py-8 border-t-2 border-[#141210]/10">
         <p className="text-[9px] font-mono text-[#5a5246] text-center leading-relaxed">
-          No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry — the signal, not the surveiller. x = x.
+          No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry — the signal, not the surveiller.
+        </p>
+        <p className="mt-3 text-center font-mono text-[13px] font-black tracking-[0.3em] text-record-mark">
+          x = x
         </p>
       </div>
     </div>

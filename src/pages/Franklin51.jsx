@@ -285,7 +285,11 @@ export default function Franklin51Page() {
 
         {/* footer */}
         <p className="text-center font-mono text-[9px] text-[#6b6258]/50 tracking-[0.3em] pt-4">
-          FRANKLIN51 · x = x · ♾️
+          FRANKLIN51 · ♾️
+        </p>
+        {/* The mark on its own line, in its own red: not a word inside a strip of words. */}
+        <p className="pt-1.5 text-center font-mono text-[11px] font-black tracking-[0.3em] text-record-mark">
+          x = x
         </p>
 
       </div>

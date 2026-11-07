@@ -71,8 +71,11 @@ export default function XEqualsXInscription() {
       </div>
 
       <div className="mt-5 space-y-3 font-mono text-[12.5px] leading-relaxed text-[#141210]">
+        {/* The mark is not written inside this sentence: it stands above it, in its own red,
+            and the prose refers to it. Three characters of algebra mid-paragraph read as
+            punctuation, and the one promise the record is held to should never be punctuation. */}
         <p>
-          On this record, x = x means one thing: every person at the far end of an entry is
+          On this record the mark means one thing: every person at the far end of an entry is
           worth the same as the person reading it. Nobody’s emergency is smaller because nobody
           is filming it.
         </p>

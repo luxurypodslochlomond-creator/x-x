@@ -178,7 +178,14 @@ export default function ClimateBrief() {
               ['Every entry fingerprinted', 'Each published entry is sealed by the record\'s own server, and the fingerprint is recomputed in the reader\'s browser. If the words move without a new seal, the fingerprints stop matching and the record says so in public.', '/ClimateSeals', 'Check a seal yourself'],
               ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.', '/ClimateHandover', 'What it costs, and who pays'],
               ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.', '/TogetherChangeClimate', 'Open any entry'],
-              ['The x = x covenant', 'No likes, no upvotes, no ranking, no algorithm. Every entry sits beside every other entry as an equal, because it is true.', '/XEqualsX', 'Read x = x'],
+              // The mark gets its own line inside the card, in its own red — inside a sentence
+              // it read as punctuation rather than the promise the whole record is held to.
+              ['The covenant', (
+                <>
+                  <span className="mb-1.5 block font-mono text-[13px] font-black tracking-[0.3em] text-record-mark">x = x</span>
+                  No likes, no upvotes, no ranking, no algorithm. Every entry sits beside every other entry as an equal, because it is true.
+                </>
+              ), '/XEqualsX', 'Read the covenant'],
             ].map(([title, body, to, check]) => (
               <div key={title} className="flex gap-3 bg-[#efe7d6] border border-[#1a1612]/15 border-l-4 border-l-[#1e3a2b] px-4 py-3">
                 <Check className="w-4 h-4 text-[#1e3a2b] flex-shrink-0 mt-0.5" />
