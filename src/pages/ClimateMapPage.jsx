@@ -1,14 +1,10 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import useRecordBack from '@/components/climate/useRecordBack';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
-import ClimateMapPlaceholder from '@/components/climate/ClimateMapPlaceholder';
+import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-
-// The mapping library is 150kB on its own. Loaded this way, the page's masthead
-// paints immediately and the map streams in behind a placeholder that holds its space.
-const ClimateMap = React.lazy(() => import('@/components/climate/ClimateMap'));
 
 /* ── THE MAP IS A PAGE OF THE RECORD, NOT A POSTER ABOUT IT ────────────────────────
    This page used to be the last survivor of the record's old costume: a cold dark
@@ -80,20 +76,24 @@ export default function ClimateMapPage() {
         </div>
       </div>
 
-      {/* The map, edge to edge. It is the page. */}
-      <div className="relative w-full overflow-hidden border-b-2 border-[#141210]/40" style={{ height: 'clamp(420px, calc(100dvh - 260px), 860px)' }}>
-        <Suspense fallback={<ClimateMapPlaceholder />}>
-          <ClimateMap />
-        </Suspense>
+      {/* ── THE PLANET, WHOLE ──────────────────────────────────────────────────────
+          Not a slippy map with tiles, edges and a grey panel on a wide screen. A plate:
+          every coast on Earth as a stipple of ink, equirectangular, so the Arctic is at the
+          top edge and Antarctica along the bottom and the whole world fits whatever frame
+          it is given. Phone and desktop see the same planet, drawn the same way. */}
+      <div className="w-full bg-[#efe7d6] border-b-2 border-[#141210]/40">
+        <div className="max-w-[1100px] mx-auto px-4 lg:px-10 py-6 lg:py-8">
+          <RecordWorldMap />
+        </div>
       </div>
 
-      {/* What a dot is, said in the record's words rather than a legend's. */}
+      {/* What a mark means, and what the plate will not do. */}
       <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-6">
         <p className="text-[13px] lg:text-[15px] leading-[1.7] text-[#141210]/80" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
-          A red mark is a crisis, a black mark a solution, a green mark an action. Marks in the same country
-          are set apart a little so none hides another. An entry with no place it can honestly be put is not
-          guessed at and not dropped: it is simply not on the map, and the count above the map says how many
-          of the record's published entries are here.
+          A mark is only ever set where an entry says it is, to the region and no finer — never a precise
+          location, and never a person. An entry with no place it can honestly be put is not guessed at and
+          not dropped: it is simply not on the plate, and the count above it says how many of the record's
+          published entries are here.
         </p>
       </div>
 
