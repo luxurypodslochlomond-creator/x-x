@@ -22,7 +22,10 @@ export default async function(req) {
 
       const [solReach, actReach] = await Promise.all([
         base44.asServiceRole.entities.ClimateView.aggregate({
-          query: { ...query, entry_type: 'solution' },
+          // A crisis is an entry on the same record, stored in the same table as a solution —
+          // its reads were simply never asked for here, so a country's page listed the good
+          // news and left out the emergency that reader had also opened. Both, always.
+          query: { ...query, entry_type: { $in: ['solution', 'climate_crisis'] } },
           groupBy: 'entry_id',
           count: true,
           limit: 50,
@@ -109,7 +112,9 @@ export default async function(req) {
     // No dopamine, no ranking by "popularity" — just honest reach signal for the contributor and the panel.
     const [solutionReach, actionReach] = await Promise.all([
       base44.asServiceRole.entities.ClimateView.aggregate({
-        query: { entry_type: 'solution' },
+        // As above: a climate crisis is read on this record too, and leaving it out of the
+        // reach figures made the emergencies look unread while every solution was counted.
+        query: { entry_type: { $in: ['solution', 'climate_crisis'] } },
         groupBy: 'entry_id',
         count: true,
         countDistinct: 'country',

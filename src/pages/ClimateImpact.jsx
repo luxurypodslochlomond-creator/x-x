@@ -47,9 +47,15 @@ function isKnownCountryName(input) {
 // the numeral is the thing, the label is a caption beneath it, and the whole plate is
 // the way through to the breakdown.
 function ImpactPlate({ icon: Icon, to, value, label, muted }) {
+  // Two of these plates point at a section of this same page, one at another page. A router
+  // Link to "#countries" is a route, not a jump: it changed the address and moved nobody, so a
+  // reader pressed the number of countries and the page stood still. The ones that stay on this
+  // page are real anchors now, and they scroll to what they name.
+  const Comp = to.startsWith('#') ? 'a' : Link;
+  const where = to.startsWith('#') ? { href: to } : { to };
   return (
-    <Link
-      to={to}
+    <Comp
+      {...where}
       aria-label={`${value.toLocaleString()} ${label.toLowerCase()}, open the breakdown`}
       className={`flex flex-col items-center justify-center gap-1 px-1 py-4 border-r border-[#efe7d6]/15 last:border-r-0 active:bg-[#e2602a]/10 transition-colors ${muted ? 'opacity-35' : ''}`}
     >
@@ -58,7 +64,7 @@ function ImpactPlate({ icon: Icon, to, value, label, muted }) {
         {value.toLocaleString()}
       </span>
       <span className="text-[7.5px] font-mono uppercase tracking-[0.12em] text-[#efe7d6]/40">{label}</span>
-    </Link>
+    </Comp>
   );
 }
 
@@ -197,14 +203,14 @@ export default function ClimateImpact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <Link
-                to="#reading-map"
+              <a
+                href="#reading-map"
                 aria-label={`${total.toLocaleString()} reads, open the map of reads`}
                 className="block mt-4 font-black text-[#e2602a] leading-[0.8] -ml-1"
                 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(74px, 26vw, 128px)', letterSpacing: '-0.055em' }}
               >
                 {total.toLocaleString()}
-              </Link>
+              </a>
               <p className="text-[9px] font-mono uppercase tracking-[0.22em] text-[#efe7d6]/45 mt-2">
                 Reads of the record
               </p>
