@@ -14,10 +14,17 @@ import {
 // are standing in is the one wearing the red line. Nothing is folded away: a door you
 // cannot see is a door you have to remember.
 //
-// Still a page of the record, not a dashboard — the marks are drawn, the grid is
-// hairlines, and the only red is the line saying where you are.
+// Two bands, because the board holds two different kinds of thing and mixing them made
+// a keeper work out on every visit which of the five was a job and which was a look:
+//   · the work — what wants a person, ordered so the lightest job is nearest the thumb.
+//     A queue of five entries that each take one decision comes before a sourcing sweep
+//     that could eat an evening. Easiest first is not laziness; it is how a nervous person
+//     starts at all.
+//   · the record — where you go to read, search and check, which changes nothing.
+// And one door is tagged "start here", chosen by what is actually waiting rather than by
+// its position: if two people are at the gate, the gate is the start of the day.
 const WORK = [
-  { key: 'decide', Mark: MarkKey, label: 'Yes or not yet', note: 'One entry at a time', count: 'decide' },
+  { key: 'decide', Mark: MarkKey, label: 'Yes or not yet', note: 'One entry, one decision', count: 'decide' },
   { key: 'check', Mark: MarkEye, label: 'Read & note', note: 'Open the source, sign a note', count: 'check' },
   { key: 'people', Mark: MarkGate, label: 'Who may come in', note: 'Keepers and checkers', count: 'asks' },
   { key: 'desk', Mark: MarkLedger, label: 'Counts', note: 'What the record holds' },
@@ -25,10 +32,25 @@ const WORK = [
 ];
 
 const RECORD = [
-  { to: '/ClimateSearch', Mark: MarkSearch, label: 'Search the record' },
+  { to: '/ClimateSearch', Mark: MarkSearch, label: 'Search' },
   { to: '/ClimateSeals', Mark: MarkSeal, label: 'The seals' },
   { to: '/ClimateWire', Mark: MarkWire, label: 'The wire' },
 ];
+
+function BandLabel({ children, right }) {
+  return (
+    <div className="flex items-baseline justify-between gap-3 pb-1.5">
+      <span className="font-mono text-[9px] font-black uppercase tracking-[0.22em] text-[#6b5f4f]">
+        {children}
+      </span>
+      {right && (
+        <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#8a7f6d]">
+          {right}
+        </span>
+      )}
+    </div>
+  );
+}
 
 export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, onGo }) {
   // A checker is a pair of eyes and nothing else, so their wall carries the one plate their
@@ -38,59 +60,82 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
     ? WORK.filter((t) => t.key === 'check')
     : WORK;
 
+  const has = (t) => typeof (t.count ? counts[t.count] : null) === 'number' && counts[t.count] > 0;
+  // The start of the day is whichever open door actually has somebody behind it. If
+  // nothing wants you, it is simply the lightest job, which is the first plate.
+  const startKey = (tiles.find(has) || tiles[0])?.key;
+
   return (
     <div>
+      <BandLabel right={tiles.length > 1 ? 'easiest first' : null}>
+        {tiles.length > 1 ? 'The work' : 'Your work'}
+      </BandLabel>
+
       <div className="grid grid-cols-2 sm:grid-cols-3 border-t border-l border-[#141210]/20">
         {tiles.map((t) => {
           const Mark = t.Mark;
           const n = t.count ? counts[t.count] : null;
           const on = active === t.key;
           const hot = typeof n === 'number' && n > 0;
+          const start = t.key === startKey;
           return (
             <button
               key={t.key}
               type="button"
               onClick={() => onGo(t.key)}
-              className={`relative text-left p-3.5 min-h-[128px] border-b border-r border-[#141210]/20 active:bg-[#141210]/10 transition-colors ${tiles.length === 1 ? 'col-span-2 sm:col-span-3' : ''}`}
+              className={`relative overflow-hidden text-left p-3 min-h-[150px] border-b border-r border-[#141210]/20 active:bg-[#141210]/10 transition-colors ${tiles.length === 1 ? 'col-span-2 sm:col-span-3' : ''}`}
               style={on ? { background: 'rgba(20,18,16,0.04)' } : {}}
             >
-              {on && <span className="absolute top-0 left-0 right-0 bg-[#b3261e]" style={{ height: '2px' }} />}
-              <Mark size={46} className="text-[#141210]" />
+              {on && <span className="absolute top-0 left-0 right-0 bg-[#b3261e]" style={{ height: '3px' }} />}
+
+              {start && (
+                <span className="absolute top-2.5 right-2.5 font-mono text-[8px] font-black uppercase tracking-[0.16em] text-[#b3261e]">
+                  start here
+                </span>
+              )}
+              {hot ? (
+                <span
+                  className="block font-black leading-none text-[#b3261e]"
+                  style={{ fontFamily: 'var(--font-reading)', fontSize: '22px' }}
+                >
+                  {n}
+                </span>
+              ) : (
+                <span className="block text-[22px] leading-none text-transparent select-none">·</span>
+              )}
+
+              <Mark size={50} className="mt-1 text-[#141210]" />
+
               <span
-                className="block mt-2.5 text-[14px] leading-tight text-[#141210]"
+                className="block mt-2 text-[14px] leading-tight text-[#141210]"
                 style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}
               >
                 {t.label}
               </span>
               <span
-                className="block mt-0.5 text-[11.5px] leading-snug text-[#6b5f4f]"
+                className="block mt-0.5 text-[11px] leading-snug text-[#6b5f4f]"
                 style={{ fontFamily: 'var(--font-reading)' }}
               >
                 {t.note}
               </span>
-              {hot && (
-                <span className="absolute top-3 right-3 font-mono text-[14px] font-black text-[#b3261e] leading-none">
-                  {n}
-                </span>
-              )}
             </button>
           );
         })}
       </div>
 
-      <p className="mt-4 text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>
-        Or leave the shed for the record
-      </p>
-      <div className="mt-1 grid grid-cols-3 border-t border-l border-[#141210]/20">
+      <div className="mt-4">
+        <BandLabel right="changes nothing">The record</BandLabel>
+      </div>
+      <div className="grid grid-cols-3 border-t border-l border-[#141210]/20">
         {RECORD.map((r) => {
           const Mark = r.Mark;
           return (
             <Link
               key={r.to}
               to={r.to}
-              className="flex flex-col items-start gap-1.5 p-2.5 min-h-[76px] border-b border-r border-[#141210]/20 active:bg-[#141210]/5 transition-colors"
+              className="flex flex-col items-start gap-2 p-2.5 min-h-[92px] border-b border-r border-[#141210]/20 active:bg-[#141210]/5 transition-colors"
             >
-              <Mark size={26} className="text-[#141210]" />
+              <Mark size={32} className="text-[#141210]" />
               <span
                 className="text-[11.5px] leading-tight text-[#141210]"
                 style={{ fontFamily: 'var(--font-reading)' }}

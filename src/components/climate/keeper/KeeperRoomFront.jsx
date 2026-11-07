@@ -108,6 +108,24 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
         {under}
       </p>
 
+      {/* ── SOMEBODY BESIDE YOU ────────────────────────────────────────────────
+          A keeper doing this alone at eleven at night is how a record gets abandoned, and
+          this one is kept by one person. So the room says out loud that the sorting is a
+          conversation rather than an exam: the AI sits beside her, reads the source with
+          her, and never holds the pen.
+          One line, not a chat window — a chatbot bolted onto the front of the shed would
+          put a second, softer voice in front of the record's own rules, and the rules are
+          the whole point of the room. */}
+      <div className="mb-4 border-l-2 border-[#b3261e] pl-3">
+        <p
+          className="text-[12.5px] leading-[1.5] text-[#2b2622]"
+          style={{ fontFamily: 'var(--font-reading)' }}
+        >
+          I'm sitting here with you. Tap a door and we'll go through it line by line — I'll
+          fetch the source and read it beside you, you say the yes.
+        </p>
+      </div>
+
       <ShedPortal
         counts={{ decide: waiting, check: toCheck, asks }}
         isKeeper={isKeeper}
