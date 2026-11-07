@@ -59,9 +59,9 @@ export default function ClimateKeeperRoom() {
   return (
     <ClimateRecordShell
       compact
-      eyebrow={who.isKeeper ? "Keeper's shed" : "Your desk"}
+      eyebrow="The shed"
       marker="Public record · invited room"
-      title={state !== 'ready' ? 'Your desk' : who.isKeeper ? 'One thing at a time.' : 'Open the source, say what you find.'}
+      title={state !== 'ready' ? 'The shed' : who.isKeeper ? 'One thing at a time.' : 'Open the source, say what you find.'}
       statement={
         state !== 'ready'
           ? 'The record is open to everyone. Working on it is by invitation: keepers decide what goes on it; checkers open sources and sign their notes.'
@@ -85,7 +85,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'signed_out' && (
         <Door
-          heading="The desk is by invitation"
+          heading="The shed is by invitation"
           body="Sign in with the address a keeper added to the record. Reading the public record needs no account; working here needs an invitation."
           actionLabel="Sign in to the record"
           onAction={() => base44.auth.redirectToLogin(window.location.href)}
@@ -103,7 +103,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'not_on_list' && (
         <Door
-          heading="The desk opens by invitation"
+          heading="The shed opens by invitation"
           body="This room is for the people the record answers to and the people who agreed to look. Ask for your address to be put on the record's list, and it opens on your next sign-in."
           actionLabel="What checking involves"
           onAction={() => { window.location.href = '/ClimateFellows'; }}
@@ -112,7 +112,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'error' && (
         <Door
-          heading="The desk could not be opened"
+          heading="The shed could not be opened"
           body="Nothing is lost — everything waiting is still waiting. Try once more."
           actionLabel="Try again"
           onAction={load}

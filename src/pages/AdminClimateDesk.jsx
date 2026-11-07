@@ -59,7 +59,7 @@ export default function AdminClimateDesk() {
     return (
       <div className="pb-16">
         <div className="max-w-2xl mx-auto px-4 pt-8">
-          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-1">the desk</p>
+          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-1">the shed</p>
           <h1 className="font-black text-record-ink text-2xl leading-tight mb-1">The record, at a glance.</h1>
           <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-record-muted mb-6 animate-pulse">counting</p>
           <div className="grid grid-cols-3 gap-2 mb-6">
@@ -98,7 +98,7 @@ export default function AdminClimateDesk() {
     <div className="pb-16">
       <div className="max-w-2xl mx-auto px-4 pt-8">
         <div className="flex items-start justify-between gap-3 mb-1">
-          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the desk</p>
+          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the shed</p>
           <button onClick={() => load(true)} className="inline-flex items-center gap-1 text-[9px] font-mono uppercase text-record-muted">
             <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} /> count again
           </button>
