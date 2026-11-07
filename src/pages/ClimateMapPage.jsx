@@ -4,6 +4,7 @@ import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordWorldMap from '@/components/climate/RecordWorldMap';
+import NextActionNear from '@/components/climate/NextActionNear';
 import { ArrowRight } from 'lucide-react';
 
 /* ── THE MAP IS A PAGE OF THE RECORD, NOT A POSTER ABOUT IT ────────────────────────
@@ -66,6 +67,10 @@ export default function ClimateMapPage() {
           <RecordWorldMap />
         </div>
       </div>
+
+      {/* The plate says where the record stands. This says what is happening there soon —
+          the only question that turns reading a map into turning up somewhere. */}
+      <NextActionNear />
 
       {/* What a mark means, and what the plate will not do. One statement, so it sits in
           the middle of its own measure instead of hanging off the left of a wide column. */}
