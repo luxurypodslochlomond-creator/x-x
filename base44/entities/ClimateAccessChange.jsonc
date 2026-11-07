@@ -1,0 +1,106 @@
+{
+  "name": "ClimateAccessChange",
+  "type": "object",
+  "description": "A change to who may enter the record, asked by one keeper and agreed by another before it happens. One person alone can add nothing, pause nobody, restore nobody and remove nobody; the record's guest list moves only when two different keepers say so. The line is kept after it is settled, so a refusal, a withdrawal and a completed change are all still there to be read \u2014 an access change that vanished when it was cancelled would be indistinguishable from one that never happened. Read, written, changed and closed by the record's own server against its guest list, so the browser never holds these rows and nobody can write one straight into the table with the word 'applied' in its hand.",
+  "properties": {
+    "change": {
+      "type": "string",
+      "enum": [
+        "add",
+        "pause",
+        "restore",
+        "remove"
+      ],
+      "description": "What is being asked: put somebody on the list, stop them coming in, let them back in, or take them off it."
+    },
+    "target_row_id": {
+      "type": "string",
+      "description": "The roster line this is about, for pause, restore and remove. Empty when the change is an add, because there is no line yet."
+    },
+    "target_email": {
+      "type": "string",
+      "description": "The address of the person the change is about. Kept so the pending line can be read without opening the roster."
+    },
+    "target_name": {
+      "type": "string",
+      "description": "Their name as the record will sign them. Empty means the address alone."
+    },
+    "target_is_keeper": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this change is about a keeper, who holds the keys, rather than a checker, who is a pair of eyes."
+    },
+    "note": {
+      "type": "string",
+      "description": "Why this person is on the list, carried over from the roster so a second keeper knows who they are agreeing about a year later."
+    },
+    "requested_by": {
+      "type": "string",
+      "description": "The keeper who asked. They may never confirm their own line \u2014 that is the whole point of the second key."
+    },
+    "requested_by_name": {
+      "type": "string",
+      "description": "The name the request is signed with, so the second keeper sees a person rather than an address."
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When it was asked."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "applied",
+        "cancelled"
+      ],
+      "default": "waiting",
+      "enumColors": [
+        "yellow",
+        "green",
+        "gray"
+      ],
+      "description": "waiting \u2014 asked, nothing changed yet. applied \u2014 a second keeper agreed and it happened. cancelled \u2014 withdrawn, or refused because it would have left the record without a keeper. Nothing is deleted, so a change that did not happen is still on the record as something that was considered."
+    },
+    "confirmed_by": {
+      "type": "string",
+      "description": "The second keeper who agreed, the one the change is written against in the audit trail."
+    },
+    "applied_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When it actually landed."
+    },
+    "reason": {
+      "type": "string",
+      "description": "Why the first keeper is asking, in their own words, kept as they wrote it."
+    }
+  },
+  "required": [
+    "change",
+    "requested_by",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

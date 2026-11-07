@@ -25,45 +25,22 @@ export default function AddKeeper({ onAdded }) {
     setBusy(true);
     setMessage('');
     try {
-      // A keeper of the record is NOT an administrator of the app. They are invited as an
-      // ordinary user and given a keeper line on the record itself, which is the only power
-      // they need: publish, correct, sign, and add people to this list. Handing out the app's
-      // admin role would also hand over the vault, the finance and every submitter's address,
-      // and being admin is how the record's keys used to leak out of the record.
-      const me = await base44.auth.me().catch(() => null);
-      const created = await base44.entities.ClimateChecker.create({
+      // A keeper of the record is NOT an administrator of the app, and the keys are never
+      // handed over by one hand. This asks the record's own server: the line is added, the
+      // person is invited and told, and the audit trail is written — but only once a second
+      // keeper has agreed, unless there is nobody else holding the keys to ask.
+      const res = await base44.functions.invoke('climateAccessChange', {
+        action: 'request',
+        change: 'add',
         email: clean,
         name: name.trim() || clean,
         is_keeper: true,
-        active: true,
         note: 'Keeper — holds the record’s keys',
-        added_by: me?.email || '',
       });
+      const data = res?.data || {};
+      if (data.error) throw new Error(data.error);
 
-      let invited = true;
-      try {
-        await base44.users.inviteUser(clean, 'user');
-      } catch (e) {
-        invited = false;
-      }
-
-      // Their line on the record, the letter if they need one, and a note to you that it
-      // happened. Never fatal to the addition: the key is already in their hand.
-      await base44.functions
-        .invoke('climateCheckerNotice', {
-          email: clean,
-          name: name.trim(),
-          state: 'invited',
-          person_letter: !invited,
-          row_id: created?.id || '',
-        })
-        .catch(() => {});
-
-      setMessage(
-        invited
-          ? `${name.trim() || clean} holds the keys now and has been sent the invitation.`
-          : `${name.trim() || clean} holds the keys now. They already had an account, so no new sign-in letter was sent — they can go straight in.`
-      );
+      setMessage(data.message || 'Asked.');
       setEmail(''); setName('');
       onAdded?.();
     } catch (e) {
@@ -77,10 +54,11 @@ export default function AddKeeper({ onAdded }) {
 
   return (
     <div className="bg-record-bone border-2 border-record-ink/40 p-4 mb-8">
-      <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-red mb-2">or add a keeper</p>
-      <p className="text-[11px] font-mono text-record-ink/75 leading-relaxed mb-3">
+      <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-red mb-2">or ask for a keeper</p>
+      <p className="text-[12px] text-record-ink/75 leading-[1.6] mb-3" style={{ fontFamily: 'var(--font-reading)' }}>
         A keeper holds every key: publishing, correcting, setting how well something is known, signing the record,
-        and inviting anyone else. They also see the address of everyone who submitted. Fewer people, more keys.
+        and inviting anyone else. They also see the address of everyone who submitted. Fewer people, more keys —
+        so this is asked here and agreed by another keeper before the keys change hands.
       </p>
       <input
         value={email}

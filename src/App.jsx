@@ -380,7 +380,10 @@ const AuthenticatedApp = () => {
       <Route path="/AdminClimatePhotos" element={<ClimateLayout currentPage="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminClimateLog" element={<ClimateLayout currentPage="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></ClimateLayout>} />
       <Route path="/ClimateChecking" element={<Navigate to="/ClimateKeeperRoom?tab=check" replace />} />
-      <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><AdminOnly><AdminClimateCheckersPage /></AdminOnly></ClimateLayout>} />
+      {/* The guest list is the record's own, so it opens to the record's own keys. Behind the
+          app's admin door, the second keeper who has to agree to every access change could
+          never reach the page that asks them — and a two-key rule nobody can turn is a lock. */}
+      <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><KeeperKey><AdminClimateCheckersPage /></KeeperKey></ClimateLayout>} />
       {/* The desk is the record's own desk, so it opens to the record's own keys. Behind the
           building's admin door, a keeper invited to hold them was stopped on the one page built
           for her and told "Admins only". KeeperKey asks the record instead. */}

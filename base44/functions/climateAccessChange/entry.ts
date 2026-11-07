@@ -1,0 +1,379 @@
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
+import { requireKeeper } from '../../shared/checkerAccess.ts';
+
+// ── WHO MAY COME IN, AND NEVER BY ONE HAND ────────────────────────────────────
+// The guest list is the most dangerous thing on this record: it decides who can open a
+// person's entry and who cannot, and until now a single keeper could pause or remove
+// anybody in one tap, with no second voice in it. That is not a record, it is a lever.
+//
+// So access moves by two keys. One keeper asks; a different keeper agrees; only then does
+// anything change. The keeper who asked can never agree to their own line — the server
+// refuses it, not the page, because a rule held only in a browser is a suggestion. There is
+// exactly one exception and it is the honest one: if a single keeper is the only active
+// keeper on the record, there is no second key that exists to ask, so their word stands and
+// the audit line says plainly that it stood alone.
+//
+// Two more floors, because a fair rule must not have a hole in it:
+//   • the record can never be left with nobody holding the keys — the last active keeper
+//     cannot be paused or removed, by anybody, however many agree;
+//   • every settled ask is written into the audit trail with the name of the hand that landed
+//     it, and every ask that was withdrawn or refused is kept as a line rather than deleted.
+//
+// Roster rows are read and written with the service role: the keepers manage this list, and a
+// keeper is not an administrator of the building. That was always true of the code and it is
+// now true of the table too — no browser writes a ClimateChecker or an access change directly.
+
+const ROSTER = 'ClimateChecker';
+const CHANGES = 'ClimateAccessChange';
+const AUDIT = 'ClimateAuditLog';
+
+const VERB = { add: 'Add', pause: 'Pause', restore: 'Restore', remove: 'Remove' };
+
+const lower = (v) => String(v || '').trim().toLowerCase();
+
+async function rosterOf(base44) {
+  const rows = await base44.asServiceRole.entities[ROSTER].list({ sort: 'created_date', limit: 300 });
+  return rows?.items || rows || [];
+}
+
+function shapeLine(row) {
+  return {
+    id: row.id,
+    email: row.email || '',
+    name: row.name || '',
+    note: row.note || '',
+    is_keeper: Boolean(row.is_keeper),
+    active: Boolean(row.active),
+  };
+}
+
+async function logIt(base44, { rowId, title, action, reviewer, note }) {
+  try {
+    await base44.asServiceRole.entities[AUDIT].create({
+      entity_type: 'keeper',
+      entity_id: rowId || '',
+      entity_title: title || '',
+      action,
+      reviewer_email: reviewer,
+      ai_assessment: note || '',
+    });
+  } catch (e) {
+    console.error('climateAccessChange: audit line failed:', e.message);
+  }
+}
+
+async function tell(base44, payload) {
+  try {
+    await base44.asServiceRole.functions.invoke('climateCheckerNotice', payload);
+  } catch (e) {
+    console.error('climateAccessChange: notice failed:', e.message);
+  }
+}
+
+// The one place access actually moves. Called for a solo keeper (no second key exists) and for
+// a second keeper agreeing to somebody else's ask, so there is a single path and no quieter one.
+async function applyChange(base44, change, who, basis) {
+  const by = who.user?.email || '';
+  const basisNote =
+    basis === 'solo'
+      ? `Only one keeper held the keys, so there was no second key to ask. Asked and done by ${who.name || by}.`
+      : `Asked by ${change.requested_by_name || change.requested_by}; agreed by ${who.name || by}.`;
+
+  if (change.change === 'add') {
+    const email = lower(change.target_email);
+    if (!email || !email.includes('@')) return { ok: false, status: 400, message: 'That address does not look right.' };
+    const rows = await rosterOf(base44);
+    if (rows.some((r) => lower(r.email) === email)) {
+      return { ok: false, status: 409, message: 'That address is already on the list.' };
+    }
+
+    const created = await base44.asServiceRole.entities[ROSTER].create({
+      email,
+      name: change.target_name || email,
+      is_keeper: Boolean(change.target_is_keeper),
+      active: true,
+      note: change.note || '',
+      added_by: change.requested_by || by,
+    });
+
+    let invited = false;
+    try {
+      await base44.users.inviteUser(email, 'user');
+      invited = true;
+    } catch (e) {
+      invited = false;
+    }
+
+    await tell(base44, {
+      email,
+      name: change.target_name || email,
+      state: 'invited',
+      person_letter: !invited,
+      row_id: created?.id || '',
+    });
+
+    await logIt(base44, {
+      rowId: created?.id || '',
+      title: `${change.target_name || email}${change.target_is_keeper ? ' · keeper' : ' · checker'}`,
+      action: 'access_granted',
+      reviewer: by,
+      note: basisNote,
+    });
+
+    return {
+      ok: true,
+      message: change.target_is_keeper
+        ? `${change.target_name || email} holds the keys now and has been told.`
+        : `${change.target_name || email} is on the list and has been told.`,
+    };
+  }
+
+  const id = String(change.target_row_id || '');
+  if (!id) return { ok: false, status: 400, message: 'That line is missing.' };
+  const row = await base44.asServiceRole.entities[ROSTER]
+    .get(id)
+    .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
+  if (!row) return { ok: false, status: 404, message: 'That person is no longer on the list.' };
+
+  const title = `${row.name || row.email}${row.is_keeper ? ' · keeper' : ' · checker'}`;
+
+  // The floor: the record is never left with nobody holding the keys.
+  if ((change.change === 'pause' || change.change === 'remove') && row.is_keeper) {
+    const rows = await rosterOf(base44);
+    const others = rows.filter((r) => r.active && r.is_keeper && r.id !== row.id).length;
+    if (others === 0) {
+      return {
+        ok: false,
+        status: 409,
+        message: 'The record must always have one keeper holding the keys. Add another keeper first, then this can happen.',
+      };
+    }
+  }
+
+  if (change.change === 'pause') {
+    await base44.asServiceRole.entities[ROSTER].update(row.id, { active: false });
+    await tell(base44, { email: row.email, name: row.name, state: 'paused' });
+    await logIt(base44, { rowId: row.id, title, action: 'access_paused', reviewer: by, note: basisNote });
+    return { ok: true, message: `${row.email} is paused and has been told. Notes they already wrote stay in their name.` };
+  }
+
+  if (change.change === 'restore') {
+    await base44.asServiceRole.entities[ROSTER].update(row.id, { active: true });
+    await tell(base44, { email: row.email, name: row.name, state: 'restored' });
+    await logIt(base44, { rowId: row.id, title, action: 'access_restored', reviewer: by, note: basisNote });
+    return { ok: true, message: `${row.email} can come in again and has been told.` };
+  }
+
+  if (change.change === 'remove') {
+    await base44.asServiceRole.entities[ROSTER].delete(row.id);
+    await tell(base44, { email: row.email, name: row.name, state: 'removed' });
+    await logIt(base44, { rowId: row.id, title, action: 'access_removed', reviewer: by, note: basisNote });
+    return { ok: true, message: `${row.email} is off the list and has been told. What they wrote stays on the record.` };
+  }
+
+  return { ok: false, status: 400, message: 'Unknown change.' };
+}
+
+export default async function (req) {
+  try {
+    const base44 = createClientFromRequest(req);
+    const body = await req.json().catch(() => ({}));
+    const action = body?.action || 'roster';
+
+    const who = await requireKeeper(base44);
+    if (who.error) return Response.json({ error: who.error }, { status: who.status });
+
+    const me = lower(who.user?.email);
+
+    // ── WHAT IS ON THE LIST, AND WHAT IS WAITING ON A SECOND KEY ────────────────
+    if (action === 'roster') {
+      const rows = await rosterOf(base44);
+      const pending = await base44.asServiceRole.entities[CHANGES].filter(
+        { status: 'waiting' },
+        { sort: 'created_date', limit: 50 }
+      );
+      const waiting = (pending?.items || pending || []).map((w) => ({
+        id: w.id,
+        change: w.change,
+        verb: VERB[w.change] || w.change,
+        target_name: w.target_name || w.target_email || '',
+        target_email: w.target_email || '',
+        target_is_keeper: Boolean(w.target_is_keeper),
+        requested_by: w.requested_by || '',
+        requested_by_name: w.requested_by_name || w.requested_by || '',
+        when: w.requested_at || w.created_date || '',
+        mine: lower(w.requested_by) === me,
+      }));
+
+      const activeKeepers = rows.filter((r) => r.active && r.is_keeper).length;
+
+      return Response.json({
+        me,
+        name: who.name,
+        solo: activeKeepers <= 1,
+        keepers: rows.filter((r) => r.is_keeper).map(shapeLine),
+        checkers: rows.filter((r) => !r.is_keeper).map(shapeLine),
+        waiting,
+      });
+    }
+
+    // ── ASKING ──────────────────────────────────────────────────────────────────
+    if (action === 'request') {
+      const change = String(body?.change || '');
+      if (!VERB[change]) return Response.json({ error: 'Unknown change' }, { status: 400 });
+
+      const rows = await rosterOf(base44);
+
+      const draft = {
+        change,
+        target_row_id: '',
+        target_email: '',
+        target_name: '',
+        target_is_keeper: false,
+        note: '',
+        reason: String(body?.reason || '').slice(0, 400),
+        requested_by: who.user?.email || '',
+        requested_by_name: who.name || who.user?.email || '',
+        requested_at: new Date().toISOString(),
+        status: 'waiting',
+      };
+
+      if (change === 'add') {
+        const email = lower(body?.email);
+        const name = String(body?.name || '').trim();
+        if (!email || !email.includes('@')) {
+          return Response.json({ error: 'That address does not look right.' }, { status: 400 });
+        }
+        if (rows.some((r) => lower(r.email) === email)) {
+          return Response.json({ error: 'That address is already on the list.' }, { status: 409 });
+        }
+        draft.target_email = email;
+        draft.target_name = name || email;
+        draft.target_is_keeper = Boolean(body?.is_keeper);
+        draft.note = String(body?.note || '').trim().slice(0, 300);
+      } else {
+        const id = String(body?.row_id || '');
+        if (!id) return Response.json({ error: 'Missing row_id' }, { status: 400 });
+        const row = rows.find((r) => r.id === id);
+        if (!row) return Response.json({ error: 'That person is no longer on the list.' }, { status: 404 });
+        draft.target_row_id = row.id;
+        draft.target_email = lower(row.email);
+        draft.target_name = row.name || row.email || '';
+        draft.target_is_keeper = Boolean(row.is_keeper);
+        draft.note = row.note || '';
+      }
+
+      // Refused before it is even asked, so nobody waits on a thing that can never happen.
+      if ((change === 'pause' || change === 'remove') && draft.target_is_keeper) {
+        const others = rows.filter((r) => r.active && r.is_keeper && r.id !== draft.target_row_id).length;
+        if (others === 0) {
+          return Response.json(
+            { error: 'The record must always have one keeper holding the keys. Add another keeper first.' },
+            { status: 409 }
+          );
+        }
+      }
+
+      const activeKeepers = rows.filter((r) => r.active && r.is_keeper).length;
+      if (activeKeepers <= 1) {
+        const done = await applyChange(base44, draft, who, 'solo');
+        if (!done.ok) return Response.json({ error: done.message }, { status: done.status || 400 });
+        return Response.json({ applied: true, solo: true, message: done.message });
+      }
+
+      // One ask at a time per person and per change, so a desk cannot fill with duplicates of
+      // the same request and nobody has to work out which line to agree to.
+      const pending = await base44.asServiceRole.entities[CHANGES].filter(
+        { status: 'waiting' },
+        { sort: 'created_date', limit: 50 }
+      );
+      const existing = (pending?.items || pending || []).find(
+        (w) =>
+          w.change === change &&
+          ((draft.target_row_id && w.target_row_id === draft.target_row_id) ||
+            (draft.target_email && lower(w.target_email) === draft.target_email))
+      );
+      if (existing) {
+        return Response.json({
+          applied: false,
+          waiting: true,
+          message: `Already asked. ${existing.requested_by_name || existing.requested_by} is waiting for a second keeper to agree.`,
+        });
+      }
+
+      const created = await base44.asServiceRole.entities[CHANGES].create(draft);
+      return Response.json({
+        applied: false,
+        waiting: true,
+        id: created?.id || '',
+        message:
+          'Asked. Nothing has changed yet — a second keeper has to agree before anybody gains or loses access.',
+      });
+    }
+
+    // ── THE SECOND KEY ──────────────────────────────────────────────────────────
+    if (action === 'confirm') {
+      const changeId = String(body?.change_id || '');
+      if (!changeId) return Response.json({ error: 'Missing change_id' }, { status: 400 });
+
+      const rec = await base44.asServiceRole.entities[CHANGES]
+        .get(changeId)
+        .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
+      if (!rec) return Response.json({ error: 'That request is no longer here.' }, { status: 404 });
+      if (rec.status !== 'waiting') {
+        return Response.json({ error: 'That request has already been settled.' }, { status: 409 });
+      }
+
+      // The heart of it: the hand that asked may never be the hand that agrees.
+      if (lower(rec.requested_by) === me) {
+        return Response.json(
+          { error: 'A second keeper has to agree to this. You cannot confirm your own request.' },
+          { status: 403 }
+        );
+      }
+
+      const done = await applyChange(base44, rec, who, 'second');
+      if (!done.ok) {
+        // A refusal is kept as a line rather than deleted: a change that could not happen is
+        // still part of what was considered.
+        await base44.asServiceRole.entities[CHANGES]
+          .update(changeId, { status: 'cancelled', confirmed_by: who.user?.email || '' })
+          .catch(() => {});
+        return Response.json({ error: done.message }, { status: done.status || 400 });
+      }
+
+      await base44.asServiceRole.entities[CHANGES]
+        .update(changeId, {
+          status: 'applied',
+          confirmed_by: who.user?.email || '',
+          applied_at: new Date().toISOString(),
+        })
+        .catch(() => {});
+
+      return Response.json({ applied: true, message: done.message });
+    }
+
+    // ── WITHDRAWING ─────────────────────────────────────────────────────────────
+    if (action === 'cancel') {
+      const changeId = String(body?.change_id || '');
+      if (!changeId) return Response.json({ error: 'Missing change_id' }, { status: 400 });
+
+      const rec = await base44.asServiceRole.entities[CHANGES]
+        .get(changeId)
+        .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
+      if (!rec) return Response.json({ error: 'That request is no longer here.' }, { status: 404 });
+      if (rec.status !== 'waiting') {
+        return Response.json({ error: 'That request has already been settled.' }, { status: 409 });
+      }
+
+      await base44.asServiceRole.entities[CHANGES]
+        .update(changeId, { status: 'cancelled', confirmed_by: who.user?.email || '' });
+      return Response.json({ cancelled: true, message: 'Withdrawn. Nothing was changed, and the line stays on the record as withdrawn.' });
+    }
+
+    return Response.json({ error: 'Unknown action' }, { status: 400 });
+  } catch (error) {
+    console.error('climateAccessChange failed:', error.message);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
