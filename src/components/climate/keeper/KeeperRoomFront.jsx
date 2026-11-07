@@ -58,6 +58,8 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
 
   const n = waiting ?? 0;
   const checks = typeof toCheck === 'number' ? toCheck : 0;
+  // The number the room opens on: what is actually waiting, whoever is waiting for it.
+  const hotN = n > 0 ? n : checks;
 
   const headline = !loaded
     ? 'Looking at what wants you…'
@@ -98,28 +100,52 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
         </button>
       </div>
 
-      {/* The one thing the room has to say, said as the biggest thing in it. It used to be
-          nineteen pixels under a label and a recount button — the same weight as the small
-          print around it — which is how a room tells you nothing much is happening. */}
-      <h2
-        className="mt-2 text-[#141210]"
-        style={{
-          fontFamily: 'var(--font-reading)',
-          fontSize: '27px',
-          fontWeight: 600,
-          lineHeight: 1.2,
-          letterSpacing: '-0.01em',
-          textWrap: 'pretty',
-        }}
-      >
-        {headline}
-      </h2>
-      <p
-        className="mt-2 text-[14px] leading-[1.55] text-[#2b2622]"
-        style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
-      >
-        {under}
-      </p>
+      {/* ── THE OPENING LINE IS THE COVER ───────────────────────────────────────
+          The room used to open at nineteen pixels, under a label and a recount button, in
+          the same weight as the small print around it — which is how a room tells you
+          nothing much is happening. Now the count is set enormous in the record's red, the
+          sentence it belongs to sits beside it like a caption to a plate, and the whole
+          thing reads before anything is tapped. */}
+      <div className="mt-3 flex items-start gap-3">
+        {loaded && hotN > 0 && (
+          <span
+            className="shrink-0 text-[#b3261e]"
+            style={{
+              fontFamily: 'var(--font-reading)',
+              fontSize: '62px',
+              fontWeight: 600,
+              lineHeight: 0.82,
+              letterSpacing: '-0.03em',
+              marginTop: '2px',
+            }}
+            aria-hidden="true"
+          >
+            {hotN}
+          </span>
+        )}
+        <div className="min-w-0">
+          <h2
+            className="text-[#141210]"
+            style={{
+              fontFamily: 'var(--font-reading)',
+              fontSize: hotN > 0 ? '21px' : '26px',
+              fontWeight: 600,
+              lineHeight: 1.22,
+              letterSpacing: '-0.01em',
+              textWrap: 'pretty',
+              marginTop: hotN > 0 ? '4px' : '0',
+            }}
+          >
+            {headline}
+          </h2>
+          <p
+            className="mt-1.5 text-[13.5px] leading-[1.55] text-[#2b2622]"
+            style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
+          >
+            {under}
+          </p>
+        </div>
+      </div>
 
       {/* ── SOMEBODY BESIDE YOU ────────────────────────────────────────────────
           A keeper doing this alone at eleven at night is how a record gets abandoned, and

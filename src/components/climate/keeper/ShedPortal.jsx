@@ -4,31 +4,25 @@ import {
   MarkKey, MarkEye, MarkLedger, MarkRoot, MarkGate, MarkSearch, MarkSeal, MarkWire,
 } from './KeeperMarks';
 
-// ── THE DOORS ARE WRITING, NOT CELLS ────────────────────────────────────────────
-// The board used to be a two-column grid of hairline boxes with a number, a mark, a label
-// and a note crammed into 150 pixels each. It was tidy, and it read like a form: five
-// identical cells is how a council tells you which department to queue in, and nothing
-// about a room where somebody decides what goes on the record should feel like queueing.
+// ── THE BOARD, DRAWN RATHER THAN FILLED IN ──────────────────────────────────────
+// Two earlier versions of this wall are worth remembering, because both were tidy and
+// both were wrong. The first was a two-column grid of identical hairline cells, which is
+// how a council tells you which department to queue in. The second was a list of rows,
+// which is how a settings menu tells you what it can do. Neither had a centre, so the eye
+// had nowhere to land and the room felt like paperwork about a room.
 //
-// So the boxes are gone. A door is now a line of writing you read once — the mark beside
-// it, the thing it does said in a sentence, and the number wanting you at the far edge in
-// the record's red. One hairline between each. Nothing is drawn around anything, because a
-// border is what you put round a field on a form.
-//
-// Two groups, still, because the board holds two different kinds of thing and mixing them
-// made a keeper work out on every visit which of the five was a job and which was a look:
-//   · the work — what wants a person, ordered so the lightest job is nearest the thumb.
-//     A queue of one decision comes before a sourcing sweep that could eat an evening.
-//     Easiest first is not laziness; it is how a nervous person starts at all.
-//   · the record — where you go to read, search and check, which changes nothing.
-// And one door says "start here", chosen by what is actually waiting rather than by its
-// position: if somebody is at the gate, the gate is the start of the day.
+// This is a plate you read, not a form you fill. The door that wants you today is given
+// the whole width and the largest engraving, because that is the thing a person came here
+// to do. The rest sit beneath it at their own weights — two wide, then a narrow one and a
+// broad one — so the wall has an order before you read a word of it. The number wanting
+// you hangs in the corner of its plate in the record's red, and nothing is drawn round
+// anything else: a box means a field, and none of these are fields.
 const WORK = [
-  { key: 'decide', Mark: MarkKey, label: 'Yes or not yet', note: 'One entry, one decision', count: 'decide' },
-  { key: 'check', Mark: MarkEye, label: 'Read & note', note: 'Open the source, sign a note', count: 'check' },
-  { key: 'people', Mark: MarkGate, label: 'Who may come in', note: 'Keepers and checkers', count: 'asks' },
-  { key: 'desk', Mark: MarkLedger, label: 'Counts', note: 'What the record holds' },
-  { key: 'score', Mark: MarkRoot, label: 'Sourcing', note: 'How well it is known' },
+  { key: 'decide', Mark: MarkKey, label: 'Yes or not yet', note: 'One entry, one decision', count: 'decide', span: 6, height: 148, mark: 60, lead: true },
+  { key: 'check', Mark: MarkEye, label: 'Read & note', note: 'The source, signed by you', count: 'check', span: 3, height: 118, mark: 36 },
+  { key: 'people', Mark: MarkGate, label: 'Who may come in', note: 'Keepers and checkers', count: 'asks', span: 3, height: 118, mark: 36 },
+  { key: 'desk', Mark: MarkLedger, label: 'Counts', note: 'What it holds', span: 2, height: 104, mark: 28 },
+  { key: 'score', Mark: MarkRoot, label: 'Sourcing', note: 'How well it is known', span: 4, height: 104, mark: 32 },
 ];
 
 const RECORD = [
@@ -53,14 +47,17 @@ function BandLabel({ children, right }) {
 }
 
 export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, onGo }) {
-  // A checker is a pair of eyes and nothing else, so their wall carries the one door their
-  // line opens. A keeper who also checks keeps all five: an empty decision queue is a quiet
-  // day, not a lost key.
-  const tiles = isChecker && !isKeeper ? WORK.filter((t) => t.key === 'check') : WORK;
+  // A checker is a pair of eyes and nothing else, so their wall carries the one plate their
+  // line opens, and it takes the whole width because it is the whole day. A keeper who also
+  // checks keeps all five: an empty decision queue is a quiet day, not a lost key.
+  const soloChecker = isChecker && !isKeeper;
+  const tiles = soloChecker
+    ? WORK.filter((t) => t.key === 'check').map((t) => ({ ...t, span: 6, height: 168, mark: 52, lead: true }))
+    : WORK;
 
   const has = (t) => typeof (t.count ? counts[t.count] : null) === 'number' && counts[t.count] > 0;
   // The start of the day is whichever open door actually has somebody behind it. If nothing
-  // wants you, it is simply the lightest job, which is the first line.
+  // wants you, it is simply the lightest job, which is the first plate.
   const startKey = (tiles.find(has) || tiles[0])?.key;
 
   return (
@@ -69,7 +66,7 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
         {tiles.length > 1 ? 'What wants a person' : 'What wants you'}
       </BandLabel>
 
-      <div className="border-t border-[#141210]/20">
+      <div className="grid grid-cols-6 gap-2">
         {tiles.map((t) => {
           const Mark = t.Mark;
           const n = t.count ? counts[t.count] : null;
@@ -81,60 +78,57 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
               key={t.key}
               type="button"
               onClick={() => onGo(t.key)}
-              className={`flex w-full items-start gap-3 border-b border-[#141210]/20 py-3.5 text-left transition-colors active:bg-[#141210]/5 ${
-                on ? 'bg-[#141210]/5' : ''
-              }`}
+              className={`relative flex flex-col justify-between overflow-hidden border p-3 text-left transition-colors active:bg-[#141210]/5 ${
+                start ? 'border-[#141210]/25 bg-[#efe7d6]' : 'border-[#141210]/15 bg-[#f4efe4]'
+              } ${on ? 'border-[#b3261e]/60' : ''}`}
+              style={{ gridColumn: `span ${t.span}`, minHeight: `${t.height}px` }}
             >
-              <span
-                className="mt-0.5 shrink-0"
-                style={{ color: hot || on ? '#b3261e' : '#141210' }}
-              >
-                <Mark size={32} />
+              {/* The number that wants you, hung in the corner of its own plate. */}
+              {hot && (
+                <span
+                  className="absolute right-2.5 top-1.5 leading-none text-[#b3261e]"
+                  style={{
+                    fontFamily: 'var(--font-reading)',
+                    fontSize: t.lead ? '30px' : '22px',
+                    fontWeight: 600,
+                  }}
+                >
+                  {n}
+                </span>
+              )}
+
+              <span style={{ color: on ? '#b3261e' : '#141210' }}>
+                <Mark size={t.mark} />
               </span>
 
-              <span className="min-w-0 flex-1">
+              <span className="mt-3 block">
                 <span
                   className="block text-[#141210]"
                   style={{
                     fontFamily: 'var(--font-reading)',
-                    fontSize: '17px',
+                    fontSize: t.lead ? '21px' : '15px',
                     fontWeight: 600,
-                    lineHeight: 1.25,
+                    lineHeight: 1.2,
+                    letterSpacing: t.lead ? '-0.01em' : '0',
                     color: on ? '#b3261e' : '#141210',
                   }}
                 >
                   {t.label}
                 </span>
-                <span
-                  className="mt-0.5 block text-[12.5px] leading-snug text-[#6b5f4f]"
-                  style={{ fontFamily: 'var(--font-reading)' }}
-                >
-                  {t.note}
-                </span>
+                {t.note && (
+                  <span
+                    className="mt-1 block text-[12px] leading-snug text-[#6b5f4f]"
+                    style={{ fontFamily: 'var(--font-reading)' }}
+                  >
+                    {t.note}
+                  </span>
+                )}
                 {start && (
                   <span
-                    className="mt-1 block text-[11.5px] leading-snug text-[#b3261e]"
+                    className="mt-1.5 block text-[12px] text-[#b3261e]"
                     style={{ fontFamily: 'var(--font-reading)' }}
                   >
                     start here
-                  </span>
-                )}
-              </span>
-
-              <span className="shrink-0 pl-2 text-right">
-                {hot ? (
-                  <span
-                    className="block leading-none text-[#b3261e]"
-                    style={{ fontFamily: 'var(--font-reading)', fontSize: '26px', fontWeight: 600 }}
-                  >
-                    {n}
-                  </span>
-                ) : (
-                  <span
-                    className="block leading-none text-[#8a7f6d]"
-                    style={{ fontFamily: 'var(--font-reading)', fontSize: '18px' }}
-                  >
-                    →
                   </span>
                 )}
               </span>
@@ -143,23 +137,20 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
         })}
       </div>
 
-      <div className="mt-5">
+      <div className="mt-6">
         <BandLabel right="changes nothing">Just to read</BandLabel>
       </div>
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#141210]/20 pt-3">
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#141210]/15 pt-3">
         {RECORD.map((r) => {
           const Mark = r.Mark;
           return (
             <Link
               key={r.to}
               to={r.to}
-              className="flex items-center gap-1.5 text-[#141210] active:text-[#b3261e] transition-colors"
+              className="flex items-center gap-1.5 text-[#141210] transition-colors active:text-[#b3261e]"
             >
               <Mark size={18} className="text-[#6b5f4f]" />
-              <span
-                className="text-[12.5px]"
-                style={{ fontFamily: 'var(--font-reading)' }}
-              >
+              <span className="text-[12.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
                 {r.label}
               </span>
             </Link>
