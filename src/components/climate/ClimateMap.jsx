@@ -8,11 +8,18 @@ import { base44 } from '@/api/base44Client';
 import { resolveCoords } from './countryCentroids';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 
-const makeIcon = (type, longitude = 0) => {
+/* ── THE MARKS DO NOT MAKE AN ENTRANCE ─────────────────────────────────────────────
+   Every mark used to light one longitude at a time over eight seconds, so the world
+   filled in from west to east — a signal arriving, an album's idea of a transmission.
+   The cost of that piece of theatre was that a reader who reached the map was shown
+   half a world and had to wait for the other half, on every visit, for a fact.
+
+   A mark is information. It appears in four hundred milliseconds and then it stays
+   absolutely still, which is the only thing a map of what is happening should do. */
+const makeIcon = (type) => {
   const isCrisis = type === 'climate_crisis';
   const isAction = type === 'action';
-  const delay = ((longitude + 180) / 360) * 8;
-  const fadeIn = `animation:climate-marker-in 0.9s cubic-bezier(0.2,0.8,0.2,1) ${delay}s both;`;
+  const fadeIn = 'animation:climate-marker-in 0.4s ease-out both;';
 
   if (isCrisis) {
     return L.divIcon({
@@ -30,7 +37,7 @@ const makeIcon = (type, longitude = 0) => {
   if (isAction) {
     return L.divIcon({
       className: 'climate-marker-action',
-      html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1e3a2b;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div></div>`,
+      html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1e3a2b;border-radius:50%;animation:climate-reveal 0.6s ease-out 0.2s both;"></div><div style="width:11px;height:11px;background:#1e3a2b;border:2px solid #efe7d6;transform:rotate(45deg);box-shadow:0 0 8px rgba(30,58,43,0.5);"></div></div></div>`,
       iconSize: [11, 11],
       iconAnchor: [5, 5],
       popupAnchor: [0, -6],
@@ -39,7 +46,7 @@ const makeIcon = (type, longitude = 0) => {
   // solution
   return L.divIcon({
     className: 'climate-marker-solution',
-    html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1a1612;border-radius:50%;animation:climate-reveal 0.8s ease-out ${delay + 0.9}s both;"></div><div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div></div>`,
+    html: `<div style="${fadeIn}"><div style="position:relative;width:11px;height:11px;"><div style="position:absolute;inset:-4px;border:1px solid #1a1612;border-radius:50%;animation:climate-reveal 0.6s ease-out 0.2s both;"></div><div style="width:11px;height:11px;background:#1a1612;border:2px solid #efe7d6;box-shadow:0 0 6px rgba(26,22,18,0.5);"></div></div></div>`,
     iconSize: [11, 11],
     iconAnchor: [5, 5],
     popupAnchor: [0, -6],
@@ -138,27 +145,13 @@ export default function ClimateMap() {
   return (
     <div className="relative w-full h-full">
       <style>{`
-        @keyframes climate-ping {
-          0% { transform: scale(0.8); opacity: 0.9; }
-          100% { transform: scale(3); opacity: 0; }
-        }
         @keyframes climate-marker-in {
           from { opacity: 0; transform: scale(0.15); }
           to { opacity: 1; transform: scale(1); }
         }
-        @keyframes climate-sweep {
-          0% { left: -5%; opacity: 0; }
-          5% { opacity: 1; }
-          95% { opacity: 1; }
-          100% { left: 105%; opacity: 0; }
-        }
         @keyframes climate-reveal {
           0% { transform: scale(0.5); opacity: 0.9; }
           100% { transform: scale(3.5); opacity: 0; }
-        }
-        @keyframes climate-breathe {
-          0%, 100% { filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7); }
-          50% { filter: sepia(0.32) contrast(0.9) brightness(1.12) hue-rotate(-6deg) saturate(0.75); }
         }
         /* ── THE MAP HOLDS STILL ─────────────────────────────────────────────────────
            This was a seven-second breathing animation on the tile pane: a CSS filter
@@ -217,7 +210,6 @@ export default function ClimateMap() {
            that is what made the map feel heavy in the hand on a small screen. */
         @media (max-width: 1023px) {
           .climate-map .leaflet-tile-pane { animation: none; }
-          .climate-map-grain { animation: none !important; }
         }
       `}</style>
 
@@ -243,7 +235,7 @@ export default function ClimateMap() {
         />
 
         {markers.map((m) => (
-          <Marker key={m.id} position={m.coord} icon={makeIcon(m.type, m.coord[1])}>
+          <Marker key={m.id} position={m.coord} icon={makeIcon(m.type)}>
             <Popup>
               <div style={{ fontFamily: 'var(--font-body)' }}>
                 <div style={{
@@ -262,7 +254,7 @@ export default function ClimateMap() {
                     width: '5px', height: '5px', borderRadius: '50%',
                     background: '#efe7d6', display: 'inline-block',
                   }} />
-                  {m.type === 'climate_crisis' ? 'CRISIS SIGNAL' : m.type === 'action' ? 'ACTION SIGNAL' : 'SOLUTION SIGNAL'}
+                  {m.type === 'climate_crisis' ? 'CRISIS' : m.type === 'action' ? 'ACTION' : 'SOLUTION'}
                 </div>
                 <div style={{ padding: '10px 12px' }}>
                   <div style={{
@@ -322,39 +314,12 @@ export default function ClimateMap() {
         ))}
       </MapContainer>
 
-      {/* Scanline overlay — cold transmission signal */}
-      <div
-        className="climate-map-grain absolute inset-0 pointer-events-none z-[400]"
-        style={{
-          opacity: 0.05,
-          background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #1a1612 2px, #1a1612 3px)',
-          animation: 'twcc-scan 3s linear infinite',
-        }}
-      />
-
-      {/* The sweep — signals received west to east, one shore at a time.
-          It used to set off the moment the page loaded, while the loading screen still
-          covered the map, so the line had already crossed half the world by the time
-          anyone saw it — and the markers, which light one longitude at a time over eight
-          seconds, never met it. It now sets off in the same instant the first marker does,
-          and runs for the same eight seconds, so every signal lights as the line reaches it. */}
-      {!loading && (
-        <div className="absolute inset-0 pointer-events-none z-[500]" style={{ overflow: 'hidden' }}>
-          <div style={{
-            position: 'absolute', top: 0, bottom: 0, width: '2px',
-            background: '#0f5f7a',
-            opacity: 0.55,
-            animation: 'climate-sweep 8s cubic-bezier(0.4,0,0.6,1) forwards',
-            boxShadow: '0 0 6px #0f5f7a, 0 0 16px rgba(15,95,122,0.35), -30px 0 26px rgba(15,95,122,0.08)',
-          }} />
-        </div>
-      )}
-
-      {/* Warm glow — deepest house, the warmth at the bottom of the room */}
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none z-[400]" style={{
-        height: '45%',
-        background: 'linear-gradient(to top, rgba(15,95,122,0.05), transparent)',
-      }} />
+      {/* ── NOTHING MOVES ACROSS THE MAP ─────────────────────────────────────────────
+          A scanline sat over the whole map, a signal line crossed the world in eight
+          seconds on every visit, and a cool glow rose from the bottom edge. All three
+          went the same way as the album they came from: this map is a page of the record
+          now, and the record does not overlay a drawing on top of its own facts. What is
+          left is the paper's own vignette at the edges, which does not move. */}
 
       {/* Vignette — the edges fade into paper */}
       <div
@@ -364,55 +329,40 @@ export default function ClimateMap() {
         }}
       />
 
-      {/* Signal counter — top right */}
-      <div className="absolute top-3 right-3 z-[1000] bg-[#141210]/95 border border-[#e2602a]/40 px-3 py-2 pointer-events-none">
-        <div className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
-            {loading
-              ? 'RECEIVING…'
-              : markers.length < publishedTotal
-                ? `${markers.length} OF ${publishedTotal} SIGNALS`
-                : `${markers.length} SIGNALS`}
+      {/* ── SAID IN THE RECORD'S WORDS, ON THE RECORD'S PAPER ────────────────────────
+          This was a near-black panel with a pulsing dot reading N SIGNALS, and a dark
+          legend box in the corner — a dashboard bolted onto the drawing. The record does
+          not have signals; it has entries, and it counts them out loud, including the ones
+          it cannot place. So the count is a line of paper type that admits the gap, and the
+          legend is three words on the same paper as the page beneath it. */}
+      <div className="absolute top-3 right-3 z-[1000] bg-[#efe7d6]/95 border border-[#141210]/40 px-2.5 py-2 pointer-events-none">
+        <span className="text-[9px] font-bold font-mono text-[#141210]">
+          {loading
+            ? 'Placing the entries…'
+            : markers.length < publishedTotal
+              ? `${markers.length} of ${publishedTotal} entries placed`
+              : `${markers.length} entries placed`}
+        </span>
+        {!loading && markers.length < publishedTotal && (
+          <span className="block text-[8px] font-mono text-[#5a5246] mt-0.5">
+            the rest have no place they can honestly be put
           </span>
-        </div>
-        {!loading && markers.length > 0 && (
-          <div className="flex gap-2 mt-1 text-[7px] font-mono font-bold text-[#efe7d6]/60">
-            <span><span style={{ color: '#b3261e' }}>●</span> {crisisCount}</span>
-            <span><span style={{ color: '#1a1612' }}>■</span> {solutionCount}</span>
-            <span><span style={{ color: '#1e3a2b' }}>◆</span> {actionCount}</span>
-          </div>
         )}
       </div>
 
-      {/* Legend — bottom left */}
-      <div className="absolute bottom-3 left-3 z-[1000] bg-[#efe7d6]/95 border-2 border-[#1a1612] p-2.5 pointer-events-none">
-        <div className="text-[7px] font-black font-mono uppercase tracking-widest text-[#1a1612] mb-1.5">LEGEND</div>
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#b3261e] border border-[#efe7d6]" />
-          <span className="text-[8px] font-mono font-bold text-[#1a1612]">CRISIS</span>
-        </div>
-        <div className="flex items-center gap-2 mb-1">
-          <div className="w-2.5 h-2.5 bg-[#1a1612] border border-[#efe7d6]" />
-          <span className="text-[8px] font-mono font-bold text-[#1a1612]">SOLUTION</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 bg-[#1e3a2b] border border-[#efe7d6] rotate-45" />
-          <span className="text-[8px] font-mono font-bold text-[#1a1612]">ACTION</span>
+      {/* Legend — bottom left, on the page's own paper */}
+      <div className="absolute bottom-3 left-3 z-[1000] bg-[#efe7d6]/95 border border-[#141210]/40 px-2.5 py-2 pointer-events-none">
+        <div className="flex items-center gap-3 text-[9px] font-mono text-[#141210]">
+          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#b3261e]" />{crisisCount}</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 bg-[#1a1612]" />{solutionCount}</span>
+          <span className="flex items-center gap-1"><span className="w-2 h-2 bg-[#1e3a2b] rotate-45" />{actionCount}</span>
         </div>
       </div>
 
-      {/* Loading overlay */}
+      {/* While the entries are being placed, the page says so quietly. */}
       {loading && (
         <div className="absolute inset-0 z-[1100] bg-[#efe7d6] flex items-center justify-center pointer-events-none">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#b3261e] animate-pulse" />
-              <span className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#1a1612]">RECEIVING SIGNALS</span>
-              <span className="w-2 h-2 rounded-full bg-[#b3261e] animate-pulse" />
-            </div>
-            <div className="text-[8px] font-mono text-[#6b6258] tracking-widest">from a warming world…</div>
-          </div>
+          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#5a5246]">Placing the entries…</span>
         </div>
       )}
     </div>

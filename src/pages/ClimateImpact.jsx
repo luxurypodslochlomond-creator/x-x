@@ -211,8 +211,12 @@ export default function ClimateImpact() {
               >
                 {total.toLocaleString()}
               </a>
+              {/* "Reads of the record" claimed more than it counted: the number is reads of
+                  the entries — solutions, crises and actions — and the wire, the gatherings
+                  and the music are on the record without being in it. A number that describes
+                  itself as bigger than it is does the record's honesty no favours. */}
               <p className="text-[9px] font-mono uppercase tracking-[0.22em] text-[#efe7d6]/45 mt-2">
-                Reads of the record
+                Reads of these entries
               </p>
             </motion.div>
           </div>

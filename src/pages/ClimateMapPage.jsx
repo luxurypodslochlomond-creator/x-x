@@ -1,114 +1,117 @@
 import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
-import { ArrowLeft } from 'lucide-react';
+import useRecordBack from '@/components/climate/useRecordBack';
+import SignalBeacon from '@/components/climate/SignalBeacon';
+import RecordCover from '@/components/climate/RecordCover';
 import ClimateMapPlaceholder from '@/components/climate/ClimateMapPlaceholder';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 // The mapping library is 150kB on its own. Loaded this way, the page's masthead
 // paints immediately and the map streams in behind a placeholder that holds its space.
 const ClimateMap = React.lazy(() => import('@/components/climate/ClimateMap'));
 
+/* ── THE MAP IS A PAGE OF THE RECORD, NOT A POSTER ABOUT IT ────────────────────────
+   This page used to be the last survivor of the record's old costume: a cold dark
+   masthead, a condensed uppercase headline reading TRANSMISSION MAP, two beacon dots
+   pulsing at the edges of a quotation, a flicker on the source line, a scanline over
+   the whole map and a signal line that crossed the world in eight seconds. Fourteen
+   pages wore the record's clothes and this one wore the clothes of the thing the
+   record replaced.
+
+   The fix is not a restyle for its own sake. It is that the map had stopped using the
+   record's words: it said SIGNALS where the record says entries, TRANSMISSION where the
+   record says reads, and it named a Laurie Anderson album three times on one screen.
+   A reader who came here from the brief was being handed a different publication and
+   asked to believe it was the same one.
+
+   So it is built now out of the record's own parts — the paper header, the covenant
+   band with x = x, the cover painting behind the title, the orange way back — which is
+   exactly what ClimateRecordShell does for the pages that fit in a column. The map is
+   the one page that cannot live in a column, so it wears the same bands around a
+   full-bleed map instead. */
 export default function ClimateMapPage() {
+  const back = useRecordBack('/TogetherChangeClimate');
+
   return (
-    /* No background of its own: the record's painting and grain stay under this page the way
-       they stay under every other page. A flat bone slab here was the one sheet in the book
-       printed on plain paper. */
-    <div className="min-h-screen text-[#1a1612]" style={{ fontFamily: 'var(--font-body)' }}>
-      <style>{`
-        @keyframes twcc-epigraph { from { opacity: 0; letter-spacing: 0.3em; } to { opacity: 1; letter-spacing: 0.15em; } }
-        @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
-        @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
-        @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; } }
-      `}</style>
-
-      {/* BIG SCIENCE EPIGRAPH */}
-      <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
-        <div className="flex items-center justify-center gap-2 w-full">
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
-            This is the time. And this is the record of the time.
-          </span>
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+    <div className="climate-record min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
+      {/* Header — paper, the way out, the page's name. Scrolls with the page. */}
+      <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
+        <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
+          <button
+            onClick={back}
+            aria-label="Back"
+            className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">The record · Map</span>
         </div>
-        <span className="text-[7px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/25">
-          Laurie Anderson · From the Air, Big Science, 1982
+      </div>
+
+      {/* Covenant band — the mark every page of the record carries, and the way to it. */}
+      <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20">
+        <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
+          Every entry the record holds, set where it happened
         </span>
-        <div className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none">
+        <Link
+          to="/XEqualsX"
+          className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none hover:text-[#efe7d6] transition-colors"
+        >
           x = x
-        </div>
+        </Link>
       </div>
 
-      {/* HEADER */}
-      <div className="bg-[#241d16] px-4 py-4 border-b-2 border-[#e2602a]/30">
-        <div className="flex items-center justify-between gap-3">
-          <Link
-            to={createPageUrl("TogetherChangeClimate")}
-            className="flex items-center gap-2 text-[#efe7d6] hover:text-[#e2602a] transition-colors flex-shrink-0"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-[10px] font-black font-mono uppercase tracking-widest">RECORD</span>
-          </Link>
-          <div
-            className="flex items-center gap-1.5 pointer-events-none"
-            style={{ animation: 'twcc-flicker 7s linear 1s infinite' }}
-          >
-            <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse" />
-            <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">From the Air · Big Science</span>
-          </div>
-        </div>
-        <div className="mx-auto w-full max-w-[520px] text-center">
+      {/* Hero — the cover painting, the page's name, and the one thing the map promises. */}
+      <div className="relative bg-[#241d16] overflow-hidden">
+        <RecordCover position="center 32%" strength={0.5} blend="screen" />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.5), rgba(36,29,22,.72) 55%, #241d16 100%)' }} />
+        <div className="relative z-10 px-6 lg:px-10 py-9 lg:py-12 flex flex-col items-center justify-center gap-3 text-center">
+          <SignalBeacon size={40} color="#7fc9e4" />
           <h1
-            className="font-black uppercase leading-[0.95] text-[#efe7d6] mt-3"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(32px, 9vw, 48px)',
-              letterSpacing: '-0.035em',
-            }}
+            className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"
+            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.6vw, 54px)', letterSpacing: '-0.02em' }}
           >
-            TRANSMISSION<br />
-            <span className="text-[#e2602a]">MAP</span>
+            Map
           </h1>
-          <p className="text-[11px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.14em] mx-auto max-w-[330px]">
-            Together we can change the course of climate change
-          </p>
-          <p className="text-[10px] font-bold uppercase leading-relaxed mt-2 text-[#efe7d6]/70 tracking-wide mx-auto max-w-[330px]">
-            Signals from a warming world — after Janine Selendy
-          </p>
-          <p className="text-[8px] font-black font-mono uppercase leading-relaxed mt-2 text-[#e2602a] tracking-[0.1em]" style={{ opacity: 0.7 }}>
-            Every signal · every shore · nobody left behind
+          <p className="text-[13px] lg:text-[15px] leading-[1.65] text-[#efe7d6]/80 max-w-sm lg:max-w-2xl" style={{ fontFamily: 'var(--font-reading)' }}>
+            A solution, a crisis or an action can say roughly where it is. This is every entry that does,
+            standing where it stands. Region only — never a precise location, and never a person.
           </p>
         </div>
       </div>
 
-      {/* MAP ──────────────────────────────────────────────────────────────────────────
-          On a desktop this was a 720-pixel box with square edges floating in the middle of
-          a wide screen: the map this record actually is, shown as a widget pasted onto a
-          page. It now takes the whole width and the height that is left, with the frame
-          doing the work a frame should — holding the map inside the record rather than
-          cropping it. A phone is unchanged: full width, its own height. */}
-      <div
-        className="relative w-full overflow-hidden border-y-2 border-[#e2602a]/25"
-        style={{ height: 'clamp(400px, calc(100dvh - 300px), 900px)' }}
-      >
+      {/* The map, edge to edge. It is the page. */}
+      <div className="relative w-full overflow-hidden border-b-2 border-[#141210]/40" style={{ height: 'clamp(420px, calc(100dvh - 260px), 860px)' }}>
         <Suspense fallback={<ClimateMapPlaceholder />}>
           <ClimateMap />
         </Suspense>
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[900]"
-          style={{ boxShadow: 'inset 0 0 24px rgba(36,29,22,0.28), inset 0 0 120px rgba(36,29,22,0.22)' }}
-        />
       </div>
 
-      {/* FOOTER */}
-      <div className="bg-[#241d16] px-4 py-4 border-t-2 border-[#e2602a]/20">
-        <p className="text-[8px] font-mono font-black tracking-[0.3em] text-center text-[#cc2d2a]">
-          x = x
-        </p>
-        <p className="text-[8px] font-mono text-center mt-1 text-[#efe7d6]/40">
-          A public service · for the world · no ads · no sponsorship · support welcome
+      {/* What a dot is, said in the record's words rather than a legend's. */}
+      <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-6">
+        <p className="text-[13px] lg:text-[15px] leading-[1.7] text-[#141210]/80" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
+          A red mark is a crisis, a black mark a solution, a green mark an action. Marks in the same country
+          are set apart a little so none hides another. An entry with no place it can honestly be put is not
+          guessed at and not dropped: it is simply not on the map, and the count above the map says how many
+          of the record's published entries are here.
         </p>
       </div>
+
+      {/* Signal band — the way back to the record */}
+      <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
+        <Link
+          to="/TogetherChangeClimate"
+          className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors"
+        >
+          Back to the record <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
+
+      <p className="px-5 pb-9 pt-6 text-center text-[11px] font-mono text-[#5a5246] leading-relaxed">
+        Platform built by Brian Hughes ·{' '}
+        <Link to="/Welcome" className="hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
+        {' '}· Scotland
+      </p>
     </div>
   );
 }
