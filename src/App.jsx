@@ -351,13 +351,14 @@ const AuthenticatedApp = () => {
       {/* A letter is one person writing to another, so it is not printed on the brief and
           not linked from the record. It opens only to a keeper's key. */}
       <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />
-      {/* ── THE STUDIO — out of the record, in its own world ──
-          These three addresses are the same room: the masthead stays above the tool, so
-          ZAPP and the logo room are entered with context rather than as loose products.
+      {/* ── THE STUDIO — the record's own workshop ──
+          These three addresses are one room, and the room is inside the record: the record's
+          masthead, nav and foot stay above and below it, so a child who taps Studio from the
+          nav has not left the book, and one who then taps ZAPP still knows where they are.
           Both tools already work without an account, so nothing here needs a gate. */}
-      <Route path="/Studio" element={<StudioShell><StudioPage /></StudioShell>} />
-      <Route path="/Studio/Zapp" element={<StudioShell><ZappPage /></StudioShell>} />
-      <Route path="/Studio/Logo" element={<StudioShell><GenerateLogoPage /></StudioShell>} />
+      <Route path="/Studio" element={<ClimateLayout currentPage="Studio"><StudioShell><StudioPage /></StudioShell></ClimateLayout>} />
+      <Route path="/Studio/Zapp" element={<ClimateLayout currentPage="Studio"><StudioShell><ZappPage /></StudioShell></ClimateLayout>} />
+      <Route path="/Studio/Logo" element={<ClimateLayout currentPage="Studio"><StudioShell><GenerateLogoPage /></StudioShell></ClimateLayout>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and
           reached from the page that answers her questions. */}

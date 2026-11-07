@@ -18,12 +18,18 @@ import { useRecordCapacity } from '@/components/climate/useKeeper';
 // The single word for the working room is DESK. It was called the workroom, the keeper room,
 // the checking room and the desk in four different places, and a person holding the keys had
 // to learn our vocabulary before they could do a day's work. One room, one word.
+// Studio is the sixth place, and it belongs on this line rather than in a separate menu of its
+// own: it is where a reader makes something out of what they have just read, which makes it a
+// room in the record rather than a product standing beside it. Only the word is quiet — the
+// room behind it is not, and it is not called a children's section, because a thing labelled
+// "for children" is a thing a child puts down.
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
   { label: 'Music', page: 'ClimateMusic' },
+  { label: 'Studio', page: 'Studio' },
 ];
 
 const DESK = { label: 'Desk', page: 'ClimateKeeperRoom', aria: 'Your desk — decide what is waiting, or check a source' };

@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Zap, Sparkles } from 'lucide-react';
+import { Zap, Sparkles, Pencil } from 'lucide-react';
 
-// ── THE STUDIO'S OWN WORLD ────────────────────────────────────────────────────
-// This used to live inside the climate record, which meant clicking ZAPP dropped you
-// out of the record and into a page with no relation to anything you had just been
-// looking at. A room is a room: the Studio has its own masthead, its own palette and
-// its own three doors, and it keeps them above every tool inside it, so wherever a
-// child lands they are still in the same place and know which way is out.
+// ── THE STUDIO'S OWN STRIP, INSIDE THE RECORD ────────────────────────────────
+// The Studio is a room in the record, so the record's masthead, its nav and its foot stay
+// above and below every page in here — that is what makes it feel like part of the same book
+// rather than a product bolted on.
 //
-// The look is a workbench, not a website: cream board, a cobalt grid drawn behind it,
-// ink borders and hard offset shadows like prints pinned up. No gradients shouting,
-// no glow, nothing that costs a phone a repaint.
+// What this strip adds is the one thing the record's nav cannot say: which of the studio's
+// three doors you are standing in. Without it, tapping ZAPP from the Studio opened a page
+// that looked like nothing you had just been doing. With it, the room is still named above
+// the tool, and the way back out is one word away.
+//
+// Set in the record's own bone and ink. No second palette, no second masthead.
 const DOORS = [
-  { to: '/Studio', label: 'The Studio', icon: Home },
+  { to: '/Studio', label: 'Studio', icon: Pencil },
   { to: '/Studio/Zapp', label: 'ZAPP', icon: Zap },
   { to: '/Studio/Logo', label: 'Logo Room', icon: Sparkles },
 ];
@@ -22,71 +23,38 @@ export default function StudioShell({ children }) {
   const { pathname } = useLocation();
 
   return (
-    <div className="min-h-screen bg-[#FBF5E6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
-      <header className="sticky top-0 z-40 border-b-4 border-[#141210] bg-[#FBF5E6]/95 backdrop-blur-sm">
-        <div className="flex items-center justify-between gap-2 px-4 pt-3">
-          <Link to="/Studio" className="flex items-center gap-2">
-            <span className="grid h-9 w-9 -rotate-6 place-items-center border-2 border-[#141210] bg-[#1B2BF0]">
-              <span className="font-black leading-none text-[#FBF5E6]" style={{ fontFamily: 'var(--font-display)', fontSize: '18px' }}>
-                S
-              </span>
-            </span>
-            <span className="font-black uppercase leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '23px', letterSpacing: '-0.02em' }}>
-              Studio
-            </span>
-          </Link>
-          <span className="rotate-2 border-2 border-[#141210] bg-[#E2602A] px-2 py-1 text-[8px] font-black font-mono uppercase tracking-[0.14em]">
-            no sign-up
+    <div>
+      <div className="border-b-2 border-[#1a1612]/15 bg-[#efe7d6]">
+        <div className="mx-auto flex max-w-[1100px] flex-wrap items-center gap-x-3 gap-y-2 px-4 py-2.5 lg:px-10">
+          <span className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#6b6258]">
+            The Studio
+          </span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+            {DOORS.map(({ to, label, icon: Icon }) => {
+              const active = pathname === to;
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  aria-current={active ? 'page' : undefined}
+                  className={`flex min-h-[32px] items-center gap-1 border-b-2 pb-0.5 text-[10px] font-black font-mono uppercase tracking-wider transition-colors ${
+                    active
+                      ? 'border-[#e2602a] text-[#e2602a]'
+                      : 'border-transparent text-[#1a1612]/65 hover:border-[#1a1612]/40 hover:text-[#1a1612]'
+                  }`}
+                >
+                  <Icon className="h-3 w-3" />
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+          <span className="w-full text-[10px] font-mono leading-relaxed text-[#6b6258]">
+            No account, no name, no age, no email. What you make stays on your own device.
           </span>
         </div>
-
-        <nav aria-label="The Studio" className="climate-nav-rail flex gap-1.5 overflow-x-auto px-4 pb-3 pt-3">
-          {DOORS.map(({ to, label, icon: Icon }) => {
-            const active = pathname === to;
-            return (
-              <Link
-                key={to}
-                to={to}
-                aria-current={active ? 'page' : undefined}
-                className={`flex min-h-[40px] flex-shrink-0 items-center gap-1.5 border-2 border-[#141210] px-3 text-[10px] font-black font-mono uppercase tracking-[0.12em] transition-colors ${
-                  active ? 'bg-[#1B2BF0] text-[#FBF5E6]' : 'bg-[#FBF5E6] text-[#141210] active:bg-[#EFE7D6]'
-                }`}
-                style={active ? {} : { boxShadow: '3px 3px 0 #141210' }}
-              >
-                <Icon className="h-3.5 w-3.5" />
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
-      </header>
-
-      <main className="relative">
-        {/* The board: cobalt graph paper, drawn rather than downloaded. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              'linear-gradient(to right, rgba(27,43,240,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(27,43,240,0.07) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        <div className="relative">{children}</div>
-      </main>
-
-      <footer className="border-t-4 border-[#141210] px-4 py-5">
-        <p className="text-[11px] font-mono leading-relaxed">
-          Nothing here asks for your name, your age or your email. What you make stays on your own device.
-        </p>
-        <p className="mt-3 text-[11px] font-mono leading-relaxed">
-          Looking for something worth building about?{' '}
-          <Link to="/TogetherChangeClimate" className="border-b-2 border-[#1B2BF0] font-black text-[#1B2BF0]">
-            The record
-          </Link>{' '}
-          has it.
-        </p>
-      </footer>
+      </div>
+      {children}
     </div>
   );
 }
