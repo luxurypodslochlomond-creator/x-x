@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { resolveCoords } from './countryCentroids';
 import { nudge } from './worldPlate';
 import WorldPlate from './WorldPlate';
+import PlatePlaceIndex from './PlatePlaceIndex';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 
 /* ── THE RECORD, SET WHERE IT HAPPENED ─────────────────────────────────────────────
@@ -105,6 +106,10 @@ export default function RecordWorldMap() {
     wire: marks.filter((m) => m.type === 'wire').length,
   }), [marks]);
 
+  // One press opens, a second press on the same thing puts it down — the same act whether
+  // it came from a mark on the plate or a name in the index under it.
+  const pick = (m) => setPicked((prev) => (prev?.id === m.id ? null : m));
+
   return (
     <div className="border-2 border-[#141210] bg-[#f7f1e5]">
       {/* The count and the key, on the same paper as the plate — a plate is captioned
@@ -128,9 +133,13 @@ export default function RecordWorldMap() {
       <WorldPlate
         marks={marks}
         selectedId={picked?.id}
-        onSelect={(m) => setPicked((prev) => (prev?.id === m.id ? null : m))}
+        onSelect={pick}
         label={`The world, with ${marks.length} entries of the record set where they happened`}
       />
+
+      {/* The plate read out: the places it actually holds, so a reader never has to hunt
+          for a dot to find out where the record is standing. */}
+      <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
 
       {/* What you pressed, said underneath the planet in the record's own words. */}
       <div className="border-t border-[#141210]/20 px-3 py-3 min-h-[86px]">
@@ -191,7 +200,7 @@ export default function RecordWorldMap() {
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : 'Press a mark to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire.'}
+              : 'Press a mark, or a place named above it, to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire — a line stands where the thing is, never where it was written from.'}
           </p>
         )}
       </div>
