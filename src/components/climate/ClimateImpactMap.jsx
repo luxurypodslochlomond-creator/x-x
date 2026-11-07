@@ -48,9 +48,18 @@ export default function ClimateImpactMap({ stats }) {
   }, [countries, regions]);
 
   if (points.length === 0) {
+    // An empty map is still a map. Four still rings, drawn in the same hairlines as the
+    // record's foot, so a reader waiting for the first signal sees the shape of what is
+    // coming rather than a grey box with a paragraph in it.
     return (
-      <div className="px-5 py-12 text-center bg-[#f7f1e5] border-y border-[#141210]/10">
-        <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[280px] mx-auto">
+      <div className="relative px-5 py-16 text-center bg-[#f7f1e5] border-y border-[#141210]/10 overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {[120, 210, 300, 400].map((s) => (
+            <span key={s} className="absolute rounded-full" style={{ width: s, height: s, border: '1px solid rgba(179,38,30,0.16)' }} />
+          ))}
+          <span className="absolute w-2 h-2 rounded-full" style={{ background: '#b3261e', boxShadow: '0 0 0 6px rgba(179,38,30,0.12)' }} />
+        </div>
+        <p className="relative text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
           The map will light up as the record is read around the world. Every dot is a place reads came from. No IP. No tracker. Just the signal.
         </p>
       </div>
@@ -58,7 +67,7 @@ export default function ClimateImpactMap({ stats }) {
   }
 
   return (
-    <div className="relative w-full h-[340px] sm:h-[560px]">
+    <div className="relative w-full h-[340px] sm:h-[500px] lg:h-[600px]">
       <style>{`
         @keyframes impact-breathe {
           0%, 100% { filter: sepia(0.28) contrast(0.88) brightness(1.06) hue-rotate(-8deg) saturate(0.7); }
@@ -129,33 +138,42 @@ export default function ClimateImpactMap({ stats }) {
           const r = dotRadius(p.views);
           const isNation = p.kind === 'nation';
           const fill = isNation ? '#0f5f7a' : '#b3261e';
+          const go = () => {
+            const place = isNation ? encodeURIComponent(p.label) : p.code;
+            navigate(createPageUrl(`ClimateReachPlace/${isNation ? 'nation' : 'country'}/${place}`));
+          };
           return (
-            <CircleMarker
-              key={`${p.kind}-${i}`}
-              center={p.coord}
-              radius={r}
-              pathOptions={{
-                color: isNation ? '#0f5f7a' : '#b3261e',
-                weight: isNation ? 2 : 1.5,
-                fillColor: fill,
-                fillOpacity: 0.55,
-              }}
-              eventHandlers={{
-                click: () => {
-                  const place = isNation ? encodeURIComponent(p.label) : p.code;
-                  navigate(createPageUrl(`ClimateReachPlace/${isNation ? 'nation' : 'country'}/${place}`));
-                },
-              }}
-            >
-              <Tooltip direction="top" offset={[0, -r]} opacity={1}>
-                <span style={{ display: 'block', fontWeight: 900 }}>
-                  {isNation ? '🏳️ ' : ''}{p.label}
-                </span>
-                <span style={{ display: 'block', opacity: 0.7, fontSize: '9px', marginTop: '2px' }}>
-                  {p.views.toLocaleString()} {p.views === 1 ? 'read' : 'reads'}
-                </span>
-              </Tooltip>
-            </CircleMarker>
+            <React.Fragment key={`${p.kind}-${i}`}>
+              {/* The halo a signal leaves in the air: a place that has been read is not a
+                  bare dot, it is a place with something happening around it. Drawn as a
+                  ring rather than an animation, so a hundred of them cost nothing. */}
+              <CircleMarker
+                center={p.coord}
+                radius={r * 2.1}
+                interactive={false}
+                pathOptions={{ color: fill, weight: 1, opacity: 0.35, fillColor: fill, fillOpacity: 0.1 }}
+              />
+              <CircleMarker
+                center={p.coord}
+                radius={r}
+                pathOptions={{
+                  color: isNation ? '#0f5f7a' : '#b3261e',
+                  weight: isNation ? 2 : 1.5,
+                  fillColor: fill,
+                  fillOpacity: 0.78,
+                }}
+                eventHandlers={{ click: go }}
+              >
+                <Tooltip direction="top" offset={[0, -r]} opacity={1}>
+                  <span style={{ display: 'block', fontWeight: 900 }}>
+                    {isNation ? '🏳️ ' : ''}{p.label}
+                  </span>
+                  <span style={{ display: 'block', opacity: 0.7, fontSize: '9px', marginTop: '2px' }}>
+                    {p.views.toLocaleString()} {p.views === 1 ? 'read' : 'reads'}
+                  </span>
+                </Tooltip>
+              </CircleMarker>
+            </React.Fragment>
           );
         })}
       </MapContainer>

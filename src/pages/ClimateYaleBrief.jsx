@@ -188,7 +188,7 @@ export default function ClimateYaleBrief() {
       <Section n="02" title="Where it is, exactly">
         <p>
           Counted from the record, not projected. The right-hand column is the honest half, and it is printed first
-          on purpose: a reader like Yale looks for whether the gaps were declared before they were found.
+          on purpose: an institute looks for whether the gaps were declared before they were found.
         </p>
         <div className="grid sm:grid-cols-2 gap-3 mt-1">
           <Column tone="bg-[#1e3a2b]/10 text-[#1e3a2b]" heading="Exists tonight" items={EXISTS} />
@@ -252,10 +252,10 @@ export default function ClimateYaleBrief() {
 
       <Section n="07" title="The letter, ready to send">
         <p>
-          Written in the shape a university expects: a date, a named recipient, what is being asked in one
-          breath, then the ask, the enclosures and the signature. Only three things in it are blank, and all
-          three are hers — the date, the recipient’s name and department, and anything of her own work she
-          wants to add. Nothing biographical has been invented.
+          Three paragraphs, and no fourth: where the record stands, what is genuinely missing, and what it
+          needs. Dated the day it is printed, signed with her name, and with three blanks that are hers alone
+          — the name, the department, the institution. Download it as a PDF, or copy the text into her own
+          letter. Nothing biographical has been invented.
         </p>
       </Section>
 

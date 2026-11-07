@@ -813,16 +813,21 @@ export default function TogetherChangeClimate() {
         <DefinitionsBand heading={t.defs} />
 
         {/* ── GOVERNANCE ── */}
-        <section className="px-4 lg:px-10 py-5 lg:py-8 bg-[#1e3a2b] text-[#efe7d6]">
+        <section className="px-4 lg:px-10 py-8 lg:py-14 bg-[#1e3a2b] text-[#efe7d6]">
           <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.govern}</h2>
-          <p className="text-[15px] leading-[1.75] text-[#efe7d6] max-w-full lg:max-w-[640px]" style={{ fontFamily: 'var(--font-reading)' }}>{t.govern_body}</p>
-          <Link to={createPageUrl('ExtractionProofCovenant')} className="inline-flex items-center gap-2 mt-4 px-3 py-2 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors">
-            {t.covenant} <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-          <a href="https://www.solutions-site.org/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-2 px-3 py-2 bg-[#efe7d6] text-[#1e3a2b] text-[10px] font-black font-mono uppercase border border-[#efe7d6] hover:bg-[#e2602a] hover:text-[#141210] transition-colors">
-            Horizon Solutions Site ↗
-          </a>
-          <p className="text-[11px] font-mono text-[#efe7d6]/80 mt-4 pt-4 border-t border-[#efe7d6]/20 leading-relaxed">
+          <p className="text-[15px] leading-[1.75] text-[#efe7d6] max-w-full lg:max-w-[640px]" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>{t.govern_body}</p>
+          {/* The two ways out of this paragraph, side by side and the same size. They were a
+              stack of two differently-cut buttons with a line of small print under them, which
+              made the foot of the page read as an afterthought to the argument above it. */}
+          <div className="grid gap-2 sm:grid-cols-2 max-w-[640px] mt-6">
+            <Link to={createPageUrl('ExtractionProofCovenant')} className="flex items-center justify-center gap-2 min-h-[48px] px-3 py-3 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors text-center">
+              {t.covenant} <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
+            </Link>
+            <a href="https://www.solutions-site.org/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 min-h-[48px] px-3 py-3 bg-[#efe7d6] text-[#1e3a2b] text-[10px] font-black font-mono uppercase border border-[#efe7d6] hover:bg-[#e2602a] hover:text-[#141210] transition-colors text-center">
+              Horizon Solutions Site ↗
+            </a>
+          </div>
+          <p className="text-[11px] font-mono text-[#efe7d6]/80 mt-6 pt-5 border-t border-[#efe7d6]/20 leading-relaxed max-w-[640px]">
             {t.family}{' '}
             <Link to={createPageUrl('NewCleanup')} className="text-[#e2602a] hover:text-[#efe7d6] font-black uppercase">
               {t.action} →
@@ -832,14 +837,19 @@ export default function TogetherChangeClimate() {
 
         {/* Terms and Privacy now sit in the shared footer, on every page of the record. */}
 
-        {/* The thesis, where it belongs — at the close, once the record has been read. */}
-        <p className="px-4 pt-8 text-center text-[17px] text-[#141210] bg-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>
-          This is the time. And this is the record of the time.
-        </p>
-        <p className="px-4 pt-1 text-center text-[9px] font-mono uppercase tracking-[0.15em] text-[#5a5246] bg-[#efe7d6]">
-          Laurie Anderson · From the Air, Big Science, 1982
-        </p>
-        <div className="pb-10 bg-[#efe7d6]" />
+        {/* The thesis, where it belongs — at the close, once the record has been read.
+            It used to be two lines of text followed by forty pixels of nothing: the page
+            ended in a gap rather than in a sentence. It closes properly now — air above,
+            a short rule, and the ground it stands on. */}
+        <section className="px-5 pt-12 pb-14 lg:pt-16 lg:pb-20 bg-[#efe7d6] text-center">
+          <p className="text-[17px] lg:text-[19px] leading-[1.5] text-[#141210] mx-auto max-w-[420px]" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
+            This is the time. And this is the record of the time.
+          </p>
+          <p className="mt-3 text-[9px] font-mono uppercase tracking-[0.15em] text-[#5a5246]">
+            Laurie Anderson · From the Air, Big Science, 1982
+          </p>
+          <div className="mx-auto mt-7 h-px w-16 bg-[#141210]/25" />
+        </section>
       </div>
 
       {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}

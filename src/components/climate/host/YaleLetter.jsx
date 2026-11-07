@@ -1,100 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Download } from 'lucide-react';
 import CopyLine from '@/components/climate/CopyLine';
+import { buildLetterPdf } from './letterPdf';
+import { LETTER_PARAGRAPHS, LETTER_SUBJECT, LETTER_FULL, letterDate } from './letterText';
 
-// ── THE LETTER, WRITTEN IN THE SHAPE A UNIVERSITY EXPECTS ────────────────────
-// A letter to a place like Yale has a known anatomy: who it is from and their company
-// number, a date, a named recipient, a Re: line that says what it is and what is being
-// asked in one breath, then body, then a numbered ask, then enclosures, then a signature
-// block. Every one of those parts is here.
+// ── THE LETTER, IN THREE PARAGRAPHS ───────────────────────────────────────────
+// The long version was a form with a letter trapped inside it. This is the thing
+// itself: where the record stands, what is genuinely missing, and what it needs —
+// said once each, in the order a reader checks them. Dated the day it is printed,
+// with three blanks that are hers: the name, the department, the institution.
 //
-// Two things in it are deliberately general, and Janine must make them specific before
-// it is sent: the recipient's name, and her own account of her life's work. Her actual
-// record — what she published, where, and when — is hers and is not invented here.
-
-export const LETTER_HEAD = `UNIVERSAL FREQUENCY 51 CIC
-Together We Can Change the Course of Climate Change
-Community Interest Company, registered in Scotland, SC870603
-
-[date]
-
-[recipient name]
-[department]
-Yale University`;
-
-export const LETTER_SUBJECT =
-  'Re: A public record of the climate solutions that work, offered to a host, and a request for the people to check it';
-
-export const LETTER_BODY = `Dear [name],
-
-I founded Horizon International to publish what is working on this planet and what is being lost, without flattery. That work has always depended on the energy of a small number of people, and on being believed because of who was saying it rather than because anyone could check it.
-
-That is the problem I have spent the last while trying to solve, and I would like to put the result in front of you.
-
-Together We Can Change the Course of Climate Change is a public record, not a feed. Every entry names where it came from and states how well it is known. Nothing is ranked, nothing is advertised, and nothing can be paid into a better position. It needs no account to read, in any language, on any phone. It was built by a community interest company, at no cost to me, and it is offered to a host rather than sold to one.
-
-Three things about it are unusual enough to be worth your time.
-
-The first is that every published entry carries a fingerprint of its own words. Anyone can recompute it in their own browser and see whether the text has moved since it was sealed. If an entry is changed quietly, the record says so about itself, in public. A correction is a new link in a chain, never an overwrite.
-
-The second is that it says how well each entry is known, on the face of it and before the headline: one origin, two independent origins, or an official record. It will not print the middle one without a second origin actually named, which is why most of the record currently reads single source. That is the honest answer rather than a shortfall in the code.
-
-The third is what it does not have. It has no independent checking yet. The office exists, the method is written, and nobody has yet signed a verdict in it. Nineteen published entries are a demonstration of a method, not a body of evidence.
-
-That is the whole reason I am writing. The machinery is built. What it needs is people: someone independent who reads an entry, follows its source, and puts their name to what they found. I cannot build that. A university can.
-
-So I am asking three things of Yale, in the order that matters to me.
-
-First, a named academic sponsor who will read the method and say in public whether it holds. Not an endorsement of anything on the record: a verdict on how it is made. If it does not hold, that verdict should be published too.
-
-Second, a checker corps with one named lead: students, perhaps, in a department that already teaches this.
-
-Third, consideration of carrying it: the hosting, which is modest at one thousand pounds a year at its present size, the technology that will need building and maintaining, and a fair living for the two people in Scotland who build it and would go on building it. A record nobody can afford to tend is not a record that lasts.
-
-One thing about who carries it belongs in a letter like this, because it is the difference between a project and an institution. The record is held by Universal Frequency 51, a community interest company registered in Scotland, whose directors are Gillian Barbara Brown and Brian Hughes. It is they who built it, at no cost to me, and they who have agreed to go on building and tending it. My own wish, and theirs, is that this outlasts all of us: not something that ends when its founder stops writing, but a record an institution can carry and a small number of people can be paid to keep, for as long as it is worth reading. That is why I am asking for a living rather than a fee for the code. The code is nothing without people who will still be answering the letters in ten years.
-
-I am not asking for an answer now. I am asking for a conversation, and for somebody to read the method page before the front page, because the method is where this either stands or it does not.
-
-The record is enclosed in outline, with the figures counted from it this week and a plain list of what is still missing before it could be launched properly. I would rather be told plainly that it is not a fit than be encouraged politely.
-
-With every good wish,
-
-Janine M. H. Selendy
-Founder, Horizon International
-
-Encl. — the record in outline; the method page; the address of every page named`;
-
-export const LETTER_FULL = `${LETTER_HEAD}\n\n${LETTER_SUBJECT}\n\n${LETTER_BODY}`;
-
+// Nothing here claims it is launched, verified, funded or partnered. Every gap is
+// named before anybody else can find it, which is the only reason the rest of it
+// can be believed. The words live in letterText so the PDF prints the same letter.
 export default function YaleLetter() {
+  const [making, setMaking] = useState(false);
+
+  const download = async () => {
+    setMaking(true);
+    try {
+      buildLetterPdf();
+    } finally {
+      setMaking(false);
+    }
+  };
+
   return (
     <div className="border-2 border-[#141210] bg-[#f7f1e5] mt-3">
-      <div className="flex items-center justify-between gap-3 px-4 lg:px-5 py-2.5 border-b border-[#141210]/20">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-4 lg:px-5 py-2.5 border-b border-[#141210]/20">
         <span className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">
-          Draft for Janine to change and sign
+          Dated today · three paragraphs · hers to sign
         </span>
-        <CopyLine text={LETTER_FULL} label="Copy whole letter" />
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={download}
+            disabled={making}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 border-2 border-[#141210] bg-[#141210] text-[#efe7d6] text-[9px] font-black font-mono uppercase tracking-wide active:bg-[#e2602a] active:text-[#141210] transition-colors disabled:opacity-60"
+          >
+            <Download className="w-3 h-3" /> {making ? 'Making…' : 'PDF'}
+          </button>
+          <CopyLine text={LETTER_FULL} label="Copy letter" />
+        </div>
       </div>
 
-      <div className="px-4 lg:px-6 py-4 lg:py-6">
-        <p className="text-[9.5px] font-mono uppercase tracking-[0.14em] leading-relaxed text-[#5a5246] whitespace-pre-line mb-4">
-          {LETTER_HEAD}
+      <div className="px-4 lg:px-7 py-5 lg:py-7">
+        <p className="text-[9.5px] font-mono uppercase tracking-[0.14em] leading-relaxed text-[#5a5246] whitespace-pre-line">
+          {`UNIVERSAL FREQUENCY 51 CIC
+Together We Can Change the Course of Climate Change
+Community Interest Company, registered in Scotland, SC870603`}
         </p>
 
-        <p className="text-[11px] lg:text-[12px] font-mono font-bold text-[#141210] leading-snug mb-4 pb-3 border-b border-[#141210]/20">
+        <p className="text-[10px] font-mono text-[#8a8375] mt-3">{letterDate()}</p>
+
+        <div className="mt-3 text-[11px] font-mono text-[#5a5246] leading-relaxed whitespace-pre-line border-l-2 border-[#141210]/20 pl-2.5">
+          {`[Name]
+[Role or department]
+[Institution]`}
+        </div>
+
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.1em] text-[#141210] leading-snug mt-5 mb-4 pb-3 border-b border-[#141210]/20">
           {LETTER_SUBJECT}
         </p>
 
-        <div className="space-y-3 text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.8] text-[#141210] whitespace-pre-line">
-          {LETTER_BODY}
+        <p className="text-[13px] leading-[1.75] text-[#141210] mb-3" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
+          Dear [Name],
+        </p>
+
+        {LETTER_PARAGRAPHS.map((para, i) => (
+          <p
+            key={i}
+            className="text-[13px] lg:text-[14px] leading-[1.8] text-[#141210] mb-3.5"
+            style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
+          >
+            {para}
+          </p>
+        ))}
+
+        <div className="mt-5 pt-4 border-t border-[#141210]/15">
+          <p className="text-[13px] leading-[1.7] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
+            With every good wish,
+          </p>
+          <p className="mt-4 text-[14px] font-black text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
+            Janine M. H. Selendy
+          </p>
+          <p className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#5a5246] mt-0.5">Founder, Horizon International</p>
         </div>
       </div>
 
       <div className="px-4 lg:px-6 py-3 border-t border-[#141210]/20">
         <p className="text-[10.5px] font-mono leading-relaxed text-[#5a5246]">
-          Two things are hers alone to fill: the recipient's name, and her own account of her work. Her name, Gillian
-          Barbara Brown's and Brian Hughes' are on the letter as they are on the company. Nothing biographical has been
-          invented here — the record does not know what she published, where, or when, and a letter that guessed at a
-          life's work would be the first thing Yale checked.
+          Three blanks, and all three are hers: the name, the department and the institution. Nothing biographical has
+          been invented — a letter that guessed at her life's work would be the first thing anyone checked.
         </p>
       </div>
     </div>

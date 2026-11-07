@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ChevronDown } from 'lucide-react';
 import { LANGS } from './useClimateLanguage';
 import { tongueMatches, languageFromTyped } from './tongueNames';
@@ -25,6 +26,9 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
   const [manual, setManual] = useState('');
   const [refusal, setRefusal] = useState('');
   const wrapRef = useRef(null);
+  const triggerRef = useRef(null);
+  const panelRef = useRef(null);
+  const [anchor, setAnchor] = useState(null);
   const searchRef = useRef(null);
   const manualRef = useRef(null);
   const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 639px)').matches);
@@ -51,11 +55,35 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     return LANGS.filter(l => tongueMatches(l, query));
   }, [query]);
 
+  // The panel is drawn into the page rather than inside the strip it was opened from.
+  // It used to be absolutely positioned inside the record's masthead, and every masthead
+  // on the record is overflow-hidden so the cover cannot bleed out of it — which meant
+  // the list was there, and clipped to nothing. Measured from the button, drawn on the
+  // body, and it can never be cut off again.
+  useEffect(() => {
+    if (!open || mobile) return;
+    const place = () => {
+      const r = triggerRef.current?.getBoundingClientRect();
+      if (r) setAnchor({ top: r.bottom, right: Math.max(8, window.innerWidth - r.right) });
+    };
+    place();
+    window.addEventListener('resize', place);
+    window.addEventListener('scroll', place, true);
+    return () => {
+      window.removeEventListener('resize', place);
+      window.removeEventListener('scroll', place, true);
+    };
+  }, [open, mobile]);
+
   // Escape closes it, and so does a tap anywhere else — the record never traps a reader.
   useEffect(() => {
     if (!open || mobile) return;
     const onKey = (e) => { if (e.key === 'Escape') close(); };
-    const onDown = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) close(); };
+    const onDown = (e) => {
+      if (wrapRef.current?.contains(e.target)) return;
+      if (panelRef.current?.contains(e.target)) return;
+      close();
+    };
     document.addEventListener('keydown', onKey);
     document.addEventListener('pointerdown', onDown);
     return () => {
@@ -114,6 +142,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
   return (
     <div ref={wrapRef} className="relative flex-1 min-w-0">
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => (open ? close() : setOpen(true))}
         aria-haspopup={mobile ? 'dialog' : 'listbox'}
@@ -127,7 +156,13 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
         <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      {open && (mobile ? <TonguePickerDialog onClose={close}>{content}</TonguePickerDialog> : content)}
+      {open && mobile && <TonguePickerDialog onClose={close}>{content}</TonguePickerDialog>}
+      {open && !mobile && anchor && createPortal(
+        <div ref={panelRef} style={{ position: 'fixed', top: anchor.top, right: anchor.right, zIndex: 80 }}>
+          {content}
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

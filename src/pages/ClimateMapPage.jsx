@@ -77,11 +77,24 @@ export default function ClimateMapPage() {
         </div>
       </div>
 
-      {/* MAP */}
-      <div className="relative mx-auto w-full lg:max-w-[720px]" style={{ height: 'calc(100vh - 240px)', minHeight: '380px', maxHeight: '720px' }}>
+      {/* MAP ──────────────────────────────────────────────────────────────────────────
+          On a desktop this was a 720-pixel box with square edges floating in the middle of
+          a wide screen: the map this record actually is, shown as a widget pasted onto a
+          page. It now takes the whole width and the height that is left, with the frame
+          doing the work a frame should — holding the map inside the record rather than
+          cropping it. A phone is unchanged: full width, its own height. */}
+      <div
+        className="relative w-full overflow-hidden border-y-2 border-[#e2602a]/25"
+        style={{ height: 'clamp(400px, calc(100dvh - 300px), 900px)' }}
+      >
         <Suspense fallback={<ClimateMapPlaceholder />}>
           <ClimateMap />
         </Suspense>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[900]"
+          style={{ boxShadow: 'inset 0 0 24px rgba(36,29,22,0.28), inset 0 0 120px rgba(36,29,22,0.22)' }}
+        />
       </div>
 
       {/* FOOTER */}

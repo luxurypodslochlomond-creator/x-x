@@ -176,7 +176,7 @@ export default function ClimateImpact() {
       </div>
 
       {/* Reader-impact map — the planet lighting up as people read */}
-      <div id="reading-map" className="px-5 lg:px-0 pt-6 lg:pt-12 pb-2 mx-auto max-w-[820px]">
+      <div id="reading-map" className="px-5 lg:px-6 pt-6 lg:pt-12 pb-2 mx-auto max-w-[1100px]">
         <div className="flex items-center gap-2 mb-3">
           <Globe className="w-4 h-4 text-[#b3261e]" />
           <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
@@ -184,7 +184,7 @@ export default function ClimateImpact() {
           </h2>
           <div className="flex-1 h-px bg-[#141210]/20" />
         </div>
-        <div className="border-2 border-[#141210]/15 overflow-hidden mx-auto w-full sm:max-w-[640px] lg:max-w-[820px]">
+        <div className="border-y-2 border-[#141210]/20 overflow-hidden w-full -mx-5 px-0 sm:mx-0">
           <ClimateImpactMap stats={stats} />
         </div>
         <p className="text-[9px] font-mono text-[#5a5246] mt-2 leading-relaxed">
