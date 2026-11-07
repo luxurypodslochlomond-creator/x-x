@@ -150,3 +150,20 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
   font-size: 0.75rem !important;
   letter-spacing: 0.08em !important;
 }
+
+/* ── THE GROUND, PUT BACK ON A DESKTOP ────────────────────────────────────────────
+   The painting was never decoration inside the record: it is the room the record is laid
+   on. On a wide screen the book is centred at its own width again and the earth and space
+   come back around it, either side, the way they were before the paper above them was made
+   solid overnight. The reading column keeps its clean sheet exactly as it is — no sentence
+   loses a single point of contrast — and nothing on a handset changes at all. */
+@media (min-width: 1024px) {
+  .record-book {
+    max-width: 1100px;
+    margin-inline: auto;
+    box-shadow:
+      0 0 0 1px rgb(var(--record-ink) / 0.12),
+      0 34px 90px -34px rgb(var(--record-ink) / 0.5);
+  }
+  .record-ground { opacity: 0.52 !important; }
+}

@@ -191,13 +191,13 @@ export default function ClimateLayout({ children, currentPage }) {
         {/* Held further back than it was. The cover is the room, not the wallpaper: at
             twenty-three per cent it was still reading as texture behind the page and
             nothing looked clean. */}
-        <RecordCover position="center 42%" strength={0.14} priority />
+        <RecordCover position="center 42%" strength={0.14} priority className="record-ground" />
         {/* The sheet has a surface, not just a colour: tooth and foxing over the painting,
             under every word. See RecordGrain — it is drawn, not downloaded. */}
         <RecordGrain />
       </div>
 
-      <div className="relative" style={{ zIndex: 1 }}>
+      <div className="relative record-book" style={{ zIndex: 1 }}>
       {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
           top to the record instead of a dark screen with a page beneath it. */}
       <header className="sticky top-0 z-50 bg-[#241d16] border-b-2 border-[#e2602a] relative overflow-hidden">

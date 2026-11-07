@@ -4,17 +4,14 @@ import { base44 } from '@/api/base44Client';
 
 // What this page promises.
 //
-// The page's promises are held as records, not typed into a component, so a keeper can
-// correct one in daylight instead of editing it quietly. Every promise says what it does
-// NOT establish — that line is the point, not decoration.
+// The promises are held as records, not typed into a component, so a keeper can correct one
+// in daylight instead of editing it quietly. Every promise says what it does NOT establish —
+// that line is the point, not decoration.
 //
-// Kept deliberately plain: six lines, no badges, no jargon, and one signature note at the
-// foot rather than six. A list a reader scrolls past has failed to be read.
-//
-// It used to borrow the record's shared section band, which sets its heading in condensed
-// capitals at twenty-six pixels with a rule running out to the edge. On this page that band
-// was the loudest thing on screen and it announced a section of six short lines. The heading
-// here is the same size as every other heading on the page, in the same hand.
+// The framing around them is gone. It used to be four paragraphs explaining what a promise
+// is before the reader got to a promise, and two more after the last one. The heading says
+// it, each line says its own limit, and the one thing that cannot be shortened — that none
+// of these is signed yet — is kept to a single line.
 
 export default function XEqualsXResearchPanel() {
   const [claims, setClaims] = useState(null);
@@ -30,7 +27,7 @@ export default function XEqualsXResearchPanel() {
   }, []);
 
   return (
-    <section aria-labelledby="promises" className="py-9 border-t border-[#141210]/15 border-b border-[#141210]/15">
+    <section aria-labelledby="promises" className="py-8 border-b border-[#141210]/15">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <div
           id="promises"
@@ -41,12 +38,11 @@ export default function XEqualsXResearchPanel() {
         >
           What this record promises
         </div>
-        <p className="font-mono text-[12.5px] text-[#5a5246]">Kept as records, so they can be corrected</p>
+        <p className="font-mono text-[12.5px] text-[#5a5246]">Kept as records</p>
       </div>
 
-      <p className="mt-3">
-        Not findings about the world — promises about how the record behaves. Every one of them
-        can be tested by using the record for five minutes.
+      <p className="mt-2">
+        Not findings. Promises about how the record behaves, each one testable in five minutes.
       </p>
 
       {error && (
@@ -62,64 +58,50 @@ export default function XEqualsXResearchPanel() {
       )}
 
       {!error && claims !== null && claims.length > 0 && (
-        <div className="mt-6">
-          {claims.map((c, i) => (
-            <div key={c.id} className="grid grid-cols-[28px_1fr] gap-x-3 border-t border-[#141210]/20 pt-4 pb-5">
-              <p className="font-mono text-[12.5px] text-[#5a5246]">{String(i + 1).padStart(2, '0')}</p>
-
-              <div>
-                <div
-                  className="text-[#141210]"
-                  style={{ fontFamily: 'var(--font-display)', fontSize: '17px', lineHeight: 1.3 }}
-                >
-                  {c.mark}
-                </div>
-
-                <p className="mt-1.5">{c.plain}</p>
-
-                {c.does_not_establish && (
-                  <p className="mt-2 text-[#5a5246]">
-                    <span className="font-mono text-[12.5px] tracking-[0.06em]">Does not establish. </span>
-                    {c.does_not_establish}
-                  </p>
-                )}
-
-                {/* Who says so, always. Most of these are the record's own decisions, and a
-                    decision has nothing to click — but a reader is still owed the line saying
-                    whose it is, and whether it is a finding at all. */}
-                <p className="mt-2 font-mono text-[12.5px] leading-relaxed text-[#5a5246]">
-                  {c.domain === 'decision' ? 'A decision, not a finding' : (c.domain || null)}
-                  {c.domain ? ' · ' : ''}
-                  {c.origin_url ? (
-                    <a
-                      href={c.origin_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline decoration-dotted underline-offset-2 hover:text-[#b3261e]"
-                    >
-                      {c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}
-                    </a>
-                  ) : (
-                    <span>{c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}</span>
-                  )}
-                </p>
-
-                {c.correction_note && (
-                  <p className="mt-1.5 text-[#b3261e]">Correction: {c.correction_note}</p>
-                )}
+        <div className="mt-5">
+          {claims.map((c) => (
+            <div key={c.id} className="border-t border-[#141210]/20 pt-4 pb-4">
+              <div
+                className="text-[#141210]"
+                style={{ fontFamily: 'var(--font-display)', fontSize: '17px', lineHeight: 1.3 }}
+              >
+                {c.mark}
               </div>
+
+              <p className="mt-1.5">{c.plain}</p>
+
+              {c.does_not_establish && (
+                <p className="mt-2 text-[#5a5246]">
+                  <span className="font-mono text-[12.5px] tracking-[0.06em]">Does not establish. </span>
+                  {c.does_not_establish}
+                </p>
+              )}
+
+              <p className="mt-2 font-mono text-[12.5px] leading-relaxed text-[#5a5246]">
+                {c.domain === 'decision' ? 'A decision, not a finding' : (c.domain || null)}
+                {c.domain ? ' · ' : ''}
+                {c.origin_url ? (
+                  <a
+                    href={c.origin_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-dotted underline-offset-2 hover:text-[#b3261e]"
+                  >
+                    {c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}
+                  </a>
+                ) : (
+                  <span>{c.origin_name}{c.origin_date ? ` · ${c.origin_date}` : ''}</span>
+                )}
+              </p>
+
+              {c.correction_note && (
+                <p className="mt-1.5 text-[#b3261e]">Correction: {c.correction_note}</p>
+              )}
             </div>
           ))}
 
-          <p className="mt-1 border-t border-[#141210]/20 pt-4 text-[#5a5246]">
-            None of these is signed yet — a machine cannot sign, and no person has put their name
-            here. When one does, it will show. A promise is checked the only way a promise can be:
-            open an entry, follow its origin, and see whether the rule held.
-          </p>
-
-          <p className="mt-4 text-[#5a5246]">
-            How an entry is actually made — where it came from, how well it is known, who signed
-            it — is the record&apos;s protocol, kept on{' '}
+          <p className="mt-1 border-t border-[#141210]/20 pt-3 text-[#5a5246]">
+            None is signed yet — a machine cannot sign. How an entry is actually made is kept on{' '}
             <Link
               to="/ClimateMethod"
               className="text-[#141210] underline decoration-[#e2602a] underline-offset-2"
