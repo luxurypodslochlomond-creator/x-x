@@ -90,7 +90,7 @@ export default function XEqualsXPlate() {
             <span className="font-black uppercase tracking-[0.14em] text-[#b3261e]">
               What is borrowed.
             </span>{' '}
-            One number: #CC2D2A, her red, measured and named — the reason the mark on this
+            One number: #CC2D2A, Laurie Anderson’s red, measured and named — the reason the mark on this
             page is the colour it is. Nothing else came from her, or from anybody. If she
             ever asks for that red to come off, it comes off the same day, and the removal is
             printed here rather than done quietly.

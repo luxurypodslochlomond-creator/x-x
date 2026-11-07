@@ -3,6 +3,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXPlate from '@/components/climate/XEqualsXPlate';
+import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 
@@ -37,6 +38,10 @@ export default function XEqualsX() {
       <XEqualsXInscription />
 
       <XEqualsXPlate />
+
+      {/* Right after "what is borrowed", because a debt named and a person thanked belong
+          beside each other — and never as a general thank-you list. */}
+      <XEqualsXThanks />
 
       <XEqualsXResearchPanel />
 
