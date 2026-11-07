@@ -31,7 +31,7 @@ export default function WorldActionFeed({ actions }) {
   if (!actions || actions.length === 0) return null;
 
   return (
-    <div className="px-5 py-6 bg-[#f7f1e5] border-y border-[#141210]/10">
+    <div id="acting" className="px-5 py-6 bg-[#f7f1e5] border-y border-[#141210]/10 scroll-mt-16">
       <style>{`
         @keyframes action-pulse { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
       `}</style>

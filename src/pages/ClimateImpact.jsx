@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { motion } from 'framer-motion';
-import { Globe, Eye, Users, MapPin, Heart } from 'lucide-react';
-import ImpactWorldMap from '@/components/climate/ImpactWorldMap';
+import { Globe, Users, MapPin, Heart } from 'lucide-react';
+import ImpactSignal from '@/components/climate/ImpactSignal';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import WorldReadingFeed from '@/components/climate/WorldReadingFeed';
 import WorldActionFeed from '@/components/climate/WorldActionFeed';
@@ -41,31 +40,6 @@ const knownCountryNames = (() => {
 function isKnownCountryName(input) {
   if (!input) return false;
   return knownCountryNames.has(input.trim().toLowerCase());
-}
-
-// One of the three counts that hang off the poster. A plate, not a row: the numeral is
-// the thing, the label is a caption beneath it, and the plate is the way through to the
-// breakdown it names.
-function ImpactPlate({ icon: Icon, to, value, label, muted }) {
-  // Two of these plates point at a section of this same page, one at another page. A router
-  // Link to "#countries" is a route, not a jump: it changed the address and moved nobody, so a
-  // reader pressed the number of countries and the page stood still. The ones that stay on this
-  // page are real anchors now, and they scroll to what they name.
-  const Comp = to.startsWith('#') ? 'a' : Link;
-  const where = to.startsWith('#') ? { href: to } : { to };
-  return (
-    <Comp
-      {...where}
-      aria-label={`${value.toLocaleString()} ${label.toLowerCase()}, open the breakdown`}
-      className={`flex flex-col items-center justify-center gap-1 px-1 py-4 lg:py-5 border-r border-[#efe7d6]/15 last:border-r-0 hover:bg-[#efe7d6]/5 active:bg-[#e2602a]/10 transition-colors ${muted ? 'opacity-35' : ''}`}
-    >
-      <Icon className="w-3.5 h-3.5 text-[#efe7d6]/50" />
-      <span className="font-black font-mono text-[#efe7d6] leading-none" style={{ fontSize: '27px', letterSpacing: '-0.03em' }}>
-        {value.toLocaleString()}
-      </span>
-      <span className="text-[7.5px] font-mono uppercase tracking-[0.12em] text-[#efe7d6]/40">{label}</span>
-    </Comp>
-  );
 }
 
 // ── THE BREAKDOWN, AS A LEDGER RATHER THAN A LIST ──
@@ -169,87 +143,14 @@ export default function ClimateImpact() {
   const total = stats?.total_views || 0;
   const countries = stats?.countries || [];
   const regions = stats?.regions || [];
-  const entries = stats?.published_entries || 0;
 
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       {/* The same bar, the same way back, as every other page of the record. */}
       <RecordBackBar eyebrow="The record · Impact" />
 
-      {/* ── THE NUMBER AND THE PLANET, AS ONE BLOCK ── */}
-      <div className="relative overflow-hidden bg-[#241d16] border-b-4 border-b-[#e2602a]">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-20 opacity-[0.12]">
-          <SignalBeacon size={380} />
-        </div>
-
-        <div className="relative mx-auto max-w-[1100px] px-5 lg:px-8 pt-7 pb-6 lg:py-10 lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-12 lg:items-center">
-          <div className="min-w-0">
-            {/* ── NO SHOUTING ────────────────────────────────────────────────────────
-                This block used to say two things at full volume: a slogan set in tracked
-                black capitals, and a numeral a hundred and thirty pixels tall. Both were
-                asked to make a young record feel bigger than it is, and both did the
-                opposite — a record that bellows reads as unsure of itself. The sentence is
-                now a sentence, in the reading voice, and the count is a figure at a size you
-                can meet rather than one that meets you. Quiet is the more confident of the
-                two, and it is the only honest one when the number is still small. */}
-            <p
-              className="text-[14px] lg:text-[16px] leading-[1.6] text-[#efe7d6]/75 max-w-[32ch]"
-              style={{ fontFamily: 'var(--font-reading)' }}
-            >
-              Together we can change the course of climate change.
-            </p>
-            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-              <a
-                href="#reading-map"
-                aria-label={`${total.toLocaleString()} reads, open the map of reads`}
-                className="block mt-3 font-black text-[#efe7d6] leading-[0.95] hover:text-[#e2602a] transition-colors"
-                style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px, 6vw, 62px)', letterSpacing: '-0.03em' }}
-              >
-                {total.toLocaleString()}
-              </a>
-              {/* "Reads of the record" claimed more than it counted: the number is reads of
-                  the entries — solutions, crises, actions and the wire — and the gatherings
-                  and the music stand on the record without being in it. */}
-              <p
-                className="text-[11px] leading-relaxed text-[#efe7d6]/50 mt-2 max-w-[34ch]"
-                style={{ fontFamily: 'var(--font-reading)' }}
-              >
-                reads of the entries on this record.
-              </p>
-            </motion.div>
-          </div>
-
-          {/* The planet. On a phone it stands under the number; on a desktop beside it,
-              because the count of reads and the world those reads came from are one fact. */}
-          <div id="reading-map" className="mt-6 lg:mt-0 min-w-0">
-            <div className="flex items-center gap-2 mb-2.5">
-              <Globe className="w-4 h-4 text-[#e2602a] flex-shrink-0" />
-              <h2 className="font-black uppercase text-[#efe7d6] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '18px', letterSpacing: '-0.01em' }}>
-                Where the world is reading
-              </h2>
-              <div className="flex-1 h-px bg-[#efe7d6]/20" />
-            </div>
-            <ImpactWorldMap stats={stats} />
-            <p className="mt-2.5 text-[9px] font-mono text-[#efe7d6]/45 leading-relaxed">
-              Every dot is a place reads came from — not a person, and not anybody's location: red is a country
-              (from geo, no IP stored), blue a self-identified nation with no country code of its own. The planet,
-              lighting up — honestly.
-            </p>
-          </div>
-        </div>
-
-        <div className="relative mx-auto max-w-[1100px] grid grid-cols-3 border-t border-[#efe7d6]/15">
-          <ImpactPlate icon={Globe} to={countries.length ? '#countries' : '#reading-map'} value={countries.length} label="Countries" />
-          <ImpactPlate icon={Eye} to="/TogetherChangeClimate#record-entries" value={entries} label="Entries" />
-          <ImpactPlate icon={MapPin} to={regions.length ? '#nations' : '#reading-map'} value={regions.length} label="Nations" muted={regions.length === 0} />
-        </div>
-
-        {/* The number was labelled "Entries", which read as everything on the record — it is
-            not. Said plainly, so nobody reading a funder's page has to guess what it covers. */}
-        <p className="relative mx-auto max-w-[1100px] px-5 lg:px-8 py-3 text-[8px] font-mono text-[#efe7d6]/40 leading-relaxed border-t border-[#efe7d6]/10">
-          Entries listed = the solutions, the crises and the actions. The wire, the gatherings and the music stand on the record too, and are not part of this count. A place is counted once per entry per half hour.
-        </p>
-      </div>
+      {/* ── THE SIGNAL: ONE SENTENCE, EVERY FIGURE A DOOR ── */}
+      <ImpactSignal stats={stats} />
 
       {/* ── THE RECEIPTS — two columns on a desktop, one calm column on a phone ── */}
       {regions.length > 0 && (
@@ -260,9 +161,15 @@ export default function ClimateImpact() {
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
                 By Nation
               </h2>
-              <span className="text-[9px] font-mono text-[#5a5246] uppercase tracking-wider">Self-identified</span>
               <div className="flex-1 h-px bg-[#141210]/20" />
             </div>
+            {/* A nation line is the reader's own word, and saying so is the whole point of it. */}
+            <p className="text-[10px] text-[#5a5246] leading-relaxed mb-4 max-w-[62ch]" style={{ fontFamily: 'var(--font-reading)' }}>
+              A nation here is a reader who typed its name for themselves — Scotland, Catalonia, Kurdistan.
+              One voice can name a nation once and then be counted on every entry it opens afterwards, so the
+              figure beside it is reads, never a headcount. A place with its own country code never appears on
+              this list, and nobody is ever named.
+            </p>
             <Ledger
               rows={regions}
               tone="red"
@@ -283,6 +190,14 @@ export default function ClimateImpact() {
               </h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
             </div>
+            {/* The honest caveat, before the numbers rather than under them: a country of
+                connection is not a country of people, and on this record that distinction is
+                the difference between evidence and a vanity figure. */}
+            <p className="text-[10px] text-[#5a5246] leading-relaxed mb-4 max-w-[62ch]" style={{ fontFamily: 'var(--font-reading)' }}>
+              A country here is where the connection came from, not where the reader is. An office, a server
+              or a VPN can stand anywhere, and one network can serve a whole country — so read this as reach,
+              never as a headcount.
+            </p>
             <Ledger
               rows={countries}
               tone="orange"
@@ -310,7 +225,8 @@ export default function ClimateImpact() {
               </p>
               <p className="text-[10px] text-[#5a5246] leading-snug mt-0.5">
                 Some nations — Scotland, Catalonia, Kurdistan — don't have their own country code.
-                If yours doesn't show above, add it here. Voluntary. Stays in your browser. Nobody tracked.
+                If yours doesn't show above, add it here. Voluntary, and kept in your browser: from then on
+                it is counted with the entries you read, never with you.
               </p>
             </div>
           </div>

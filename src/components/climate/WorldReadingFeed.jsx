@@ -27,7 +27,7 @@ export default function WorldReadingFeed({ stories }) {
     createPageUrl(`ClimateDetail/${s.type}/${s.id}`);
 
   return (
-    <div className="px-5 py-6">
+    <div id="reading" className="px-5 py-6 scroll-mt-16">
       <style>{`
         @keyframes feed-signal { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
       `}</style>
