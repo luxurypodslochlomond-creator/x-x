@@ -172,9 +172,11 @@ button:focus-visible {
     --record-signal: 226 96 42;
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
-    /* The mark's own colour — cobalt. It belongs to x = x and to nothing else on the
-       record: the orange is the record's signal, this is the line it rests on. */
-    --record-mark: 27 43 240;
+    /* The mark's own colour — the record's red, not cobalt. x = x is the line the whole
+       record rests on, and it is said in the one red the record already uses for the
+       things it will not soften. Cobalt is retired: a second, brighter blue sitting on
+       warm paper read as a different product's colour rather than as this one's mark. */
+    --record-mark: 179 38 30;
     --font-record-reading:
       'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
@@ -241,7 +243,7 @@ button:focus-visible {
     --record-signal: 226 96 42;
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
-    --record-mark: 27 43 240;
+    --record-mark: 179 38 30;
     --font-record-reading:
       'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',

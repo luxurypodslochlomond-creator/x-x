@@ -293,7 +293,7 @@ export default function ClimateLayout({ children, currentPage }) {
               whole record rests on — the covenant, said once, at the foot of every page. */}
           <Link
             to="/XEqualsX"
-            className="mt-2.5 block text-center text-[11px] font-mono font-black tracking-[0.3em] text-[#b3261e] hover:text-[#141210] transition-colors"
+            className="mt-2.5 block text-center text-[12px] font-mono font-black tracking-[0.3em] text-[#b3261e] hover:text-[#e2602a] transition-colors"
           >
             x = x
           </Link>

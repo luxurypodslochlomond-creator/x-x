@@ -197,9 +197,9 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
               ? '1.5px solid rgba(167,139,250,0.3)'
               : '1.5px solid rgba(255,255,255,0.07)',
             boxShadow: isFocused
-              ? '0 0 0 4px rgba(124,58,237,0.12), 0 20px 60px rgba(124,58,237,0.2)'
+              ? '0 0 0 4px rgba(226,96,42,0.14), 0 20px 60px rgba(226,96,42,0.18)'
               : value.length > 0
-              ? '0 8px 32px rgba(124,58,237,0.1)'
+              ? '0 8px 32px rgba(226,96,42,0.1)'
               : 'none',
           }}
         >
@@ -222,7 +222,7 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
             style={{
               fontSize: 17,
               fontWeight: 500,
-              caretColor: '#a78bfa',
+              caretColor: '#e2602a',
               color: 'rgba(255,255,255,0.9)',
             }}
           />
@@ -248,11 +248,11 @@ export default function ZappCreator({ onSubmit, onBreakItDown }) {
                 padding: '10px 22px',
                 borderRadius: 14,
                 background: value.trim().length >= 3
-                  ? 'linear-gradient(135deg, #7c3aed 0%, #db2777 100%)'
-                  : 'rgba(255,255,255,0.04)',
-                color: value.trim().length >= 3 ? '#fff' : 'rgba(255,255,255,0.15)',
+                  ? 'linear-gradient(135deg, #b3261e 0%, #e2602a 100%)'
+                  : 'rgba(244,239,228,0.06)',
+                color: value.trim().length >= 3 ? '#f4efe4' : 'rgba(244,239,228,0.3)',
                 boxShadow: value.trim().length >= 3
-                  ? '0 0 24px rgba(124,58,237,0.6), 0 4px 16px rgba(219,39,119,0.3)'
+                  ? '0 0 22px rgba(226,96,42,0.45), 0 4px 16px rgba(179,38,30,0.3)'
                   : 'none',
                 border: value.trim().length >= 3
                   ? 'none'

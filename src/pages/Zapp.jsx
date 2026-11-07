@@ -18,9 +18,9 @@ const Bolt = ({ size = 28 }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
     <defs>
       <linearGradient id="bolt-g" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#a78bfa" />
-        <stop offset="50%" stopColor="#f472b6" />
-        <stop offset="100%" stopColor="#60a5fa" />
+        <stop offset="0%" stopColor="#e2602a" />
+        <stop offset="50%" stopColor="#b3261e" />
+        <stop offset="100%" stopColor="#f4efe4" />
       </linearGradient>
     </defs>
     <polygon points="19,2 8,18 15,18 13,30 24,14 17,14" fill="url(#bolt-g)" />
@@ -155,19 +155,23 @@ export default function Zapp() {
   return (
     <GlobalErrorBoundary>
     <div
-      className="text-white overflow-hidden"
-      style={{ background: '#0a0a0f', fontFamily: "'Inter', system-ui, sans-serif", height: '100dvh', display: 'flex', flexDirection: 'column' }}
+      className="overflow-hidden text-[#f4efe4]"
+      style={{ background: '#1a1612', fontFamily: 'var(--font-body)', height: '100dvh', display: 'flex', flexDirection: 'column' }}
     >
-      {/* Ambient background */}
+      {/* THE BOARD ──────────────────────────────────────────────────────────────────
+          This used to float on a black field with violet and magenta clouds behind it, which
+          is a different product's weather entirely — so ZAPP read as something bolted onto the
+          record rather than a room in it. It stands on the record's own ink now, the warm dark
+          of the masthead, with one signal-orange glow and the grid of a workshop.
+          Everything a child makes keeps its own colour. The room around it belongs to the book. */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div style={{ position: 'absolute', top: '-10%', left: '20%', width: 500, height: 500, borderRadius: '50%', background: 'radial-gradient(circle, rgba(124,58,237,0.15) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-        <div style={{ position: 'absolute', bottom: '-10%', right: '20%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(219,39,119,0.10) 0%, transparent 70%)', filter: 'blur(60px)' }} />
-        <div style={{ position: 'absolute', top: '40%', right: '5%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)', filter: 'blur(50px)' }} />
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: `linear-gradient(rgba(120,80,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(120,80,255,0.025) 1px, transparent 1px)`, backgroundSize: '50px 50px' }} />
+        <div style={{ position: 'absolute', top: '-12%', left: '8%', width: 480, height: 480, borderRadius: '50%', background: 'radial-gradient(circle, rgba(226,96,42,0.16) 0%, transparent 70%)', filter: 'blur(70px)' }} />
+        <div style={{ position: 'absolute', bottom: '-14%', right: '4%', width: 420, height: 420, borderRadius: '50%', background: 'radial-gradient(circle, rgba(179,38,30,0.14) 0%, transparent 70%)', filter: 'blur(70px)' }} />
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(244,239,228,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(244,239,228,0.035) 1px, transparent 1px)', backgroundSize: '44px 44px' }} />
       </div>
 
       {/* Header */}
-      <header className="relative z-20 flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+      <header className="relative z-20 flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid rgba(244,239,228,0.12)' }}>
         <motion.button
           onClick={handleReset}
           className="flex items-center gap-2.5"
@@ -175,17 +179,17 @@ export default function Zapp() {
           whileTap={{ scale: 0.97 }}
         >
           <motion.div
-            animate={phase === 'home' ? { filter: ['drop-shadow(0 0 8px rgba(167,139,250,0.8))', 'drop-shadow(0 0 20px rgba(244,114,182,1))', 'drop-shadow(0 0 8px rgba(167,139,250,0.8))'] } : {}}
+            animate={phase === 'home' ? { filter: ['drop-shadow(0 0 6px rgba(226,96,42,0.7))', 'drop-shadow(0 0 16px rgba(226,96,42,1))', 'drop-shadow(0 0 6px rgba(226,96,42,0.7))'] } : {}}
             transition={{ duration: 2, repeat: Infinity }}
           >
             <Bolt size={32} />
           </motion.div>
           <span className="font-black text-2xl tracking-tight" style={{
-            background: 'linear-gradient(135deg, #a78bfa 0%, #f472b6 50%, #60a5fa 100%)',
+            background: 'linear-gradient(135deg, #f4efe4 0%, #e2602a 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
           }}>ZAPP</span>
           {phase === 'home' && (
-            <span className="text-white/25 text-xs font-semibold hidden sm:block">build anything · AI · for kids</span>
+            <span className="text-[#f4efe4]/45 text-xs font-semibold hidden sm:block">build anything · AI · for kids</span>
           )}
         </motion.button>
 
@@ -196,14 +200,14 @@ export default function Zapp() {
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
             style={{
-              background: phase === 'gallery' ? 'rgba(251,191,36,0.15)' : 'rgba(255,255,255,0.04)',
-              border: phase === 'gallery' ? '1px solid rgba(251,191,36,0.5)' : '1px solid rgba(255,255,255,0.08)',
-              color: phase === 'gallery' ? '#fbbf24' : 'rgba(255,255,255,0.3)',
+              background: phase === 'gallery' ? 'rgba(226,96,42,0.16)' : 'rgba(244,239,228,0.05)',
+              border: phase === 'gallery' ? '1px solid rgba(226,96,42,0.5)' : '1px solid rgba(244,239,228,0.14)',
+              color: phase === 'gallery' ? '#e2602a' : 'rgba(244,239,228,0.45)',
             }}
           >
             {phase === 'gallery' ? (
               <>
-                <ZappGeometricIcon shape="zap" size={16} color="#fbbf24" accent="#fde68a" />
+                <ZappGeometricIcon shape="zap" size={16} color="#e2602a" accent="#f2d3a0" />
                 <span className="hidden sm:inline">build yours</span>
               </>
             ) : (
@@ -219,9 +223,9 @@ export default function Zapp() {
             onClick={() => setBuilderMode(!builderMode)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all"
             style={{
-              background: builderMode ? 'rgba(167,139,250,0.15)' : 'rgba(255,255,255,0.04)',
-              border: builderMode ? '1px solid rgba(167,139,250,0.5)' : '1px solid rgba(255,255,255,0.08)',
-              color: builderMode ? '#c4b5fd' : 'rgba(255,255,255,0.2)',
+              background: builderMode ? 'rgba(244,239,228,0.12)' : 'rgba(244,239,228,0.05)',
+              border: builderMode ? '1px solid rgba(244,239,228,0.45)' : '1px solid rgba(244,239,228,0.14)',
+              color: builderMode ? '#f4efe4' : 'rgba(244,239,228,0.3)',
             }}
           >
             <span className="font-mono text-[11px]">{builderMode ? '</>' : '<>'}</span>
@@ -240,8 +244,8 @@ export default function Zapp() {
               <span className="hidden sm:inline text-xs font-bold" style={{ color: buddy.accent }}>{buddy.name}</span>
             </motion.button>
           )}
-          <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: 'rgba(52,211,153,0.85)' }}>
-            <span className="w-2 h-2 rounded-full bg-emerald-400" style={{ boxShadow: '0 0 8px rgba(52,211,153,0.8)' }} />
+          <div className="flex items-center gap-1.5 text-xs font-bold" style={{ color: 'rgba(226,96,42,0.9)' }}>
+            <span className="w-2 h-2 rounded-full bg-[#e2602a]" style={{ boxShadow: '0 0 8px rgba(226,96,42,0.7)' }} />
             kid-safe · checked · free
           </div>
         </div>
@@ -253,7 +257,7 @@ export default function Zapp() {
           {phase === 'play' && directPlay ? (
             <motion.div key="play" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col" style={{ height: '100%' }}>
               <div className="flex items-center justify-between px-4 py-2 flex-shrink-0"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.4)' }}>
+                style={{ borderBottom: '1px solid rgba(244,239,228,0.12)', background: 'rgba(26,22,18,0.6)' }}>
                 <div className="flex items-center gap-2">
                   {directPlay.emoji && /^[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}]/u.test(directPlay.emoji)
                     ? <span className="text-xl">{directPlay.emoji}</span>
@@ -267,15 +271,15 @@ export default function Zapp() {
                     onClick={() => { setShowRemix(directPlay); }}
                     whileTap={{ scale: 0.95 }}
                     className="px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5"
-                    style={{ background: 'rgba(244,114,182,0.15)', border: '1px solid rgba(244,114,182,0.4)', color: '#f472b6' }}
+                    style={{ background: 'rgba(226,96,42,0.16)', border: '1px solid rgba(226,96,42,0.45)', color: '#e2602a' }}
                   >
-                    <ZappGeometricIcon shape="shuffle" size={14} color="#f472b6" accent="#f9a8d4" /> remix
+                    <ZappGeometricIcon shape="shuffle" size={14} color="#e2602a" accent="#f2d3a0" /> remix
                   </motion.button>
                   <motion.button
                     onClick={handleReset}
                     whileTap={{ scale: 0.95 }}
                     className="px-4 py-1.5 rounded-lg text-xs font-black text-white flex items-center gap-1.5"
-                    style={{ background: 'linear-gradient(135deg, #7c3aed, #db2777)' }}
+                    style={{ background: 'linear-gradient(135deg, #b3261e, #e2602a)' }}
                   >
                     <ZappGeometricIcon shape="zap" size={14} color="#fff" accent="#fff" /> build new
                   </motion.button>
@@ -350,14 +354,14 @@ export default function Zapp() {
       </AnimatePresence>
 
       {/* Footer — always visible */}
-      <footer className="relative z-20 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 px-4 flex-shrink-0" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-        <Link to="/ZappAbout" className="text-white/50 hover:text-white text-xs font-semibold transition-colors">About</Link>
-        <span className="text-white/15">·</span>
-        <Link to="/ZappTerms" className="text-white/50 hover:text-white text-xs font-semibold transition-colors">Terms</Link>
-        <span className="text-white/15">·</span>
-        <Link to="/ZappPrivacy" className="text-white/50 hover:text-white text-xs font-semibold transition-colors">Privacy</Link>
-        <span className="text-white/15 hidden sm:inline">·</span>
-        <span className="text-white/25 text-xs">kid-safe · no account · built by UF51</span>
+      <footer className="relative z-20 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 px-4 flex-shrink-0" style={{ borderTop: '1px solid rgba(244,239,228,0.1)' }}>
+        <Link to="/ZappAbout" className="text-[#f4efe4]/55 hover:text-[#e2602a] text-xs font-semibold transition-colors">About</Link>
+        <span className="text-[#f4efe4]/20">·</span>
+        <Link to="/ZappTerms" className="text-[#f4efe4]/55 hover:text-[#e2602a] text-xs font-semibold transition-colors">Terms</Link>
+        <span className="text-[#f4efe4]/20">·</span>
+        <Link to="/ZappPrivacy" className="text-[#f4efe4]/55 hover:text-[#e2602a] text-xs font-semibold transition-colors">Privacy</Link>
+        <span className="text-[#f4efe4]/20 hidden sm:inline">·</span>
+        <span className="text-[#f4efe4]/35 text-xs">kid-safe · no account · a room in the record</span>
       </footer>
 
       {/* Remix Modal */}

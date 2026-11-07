@@ -26,7 +26,7 @@ export default function XEqualsXInscription() {
 
         <div className="px-4 py-9 text-center">
           <p
-            className="select-none font-black leading-[0.82] text-[#1b2bf0]"
+            className="select-none font-black leading-[0.82] text-[#b3261e]"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(62px, 17vw, 96px)', letterSpacing: '-0.045em' }}
           >
             x = x
