@@ -13,12 +13,17 @@ export default function RecordLanguageStrip({ lang, detected, onChange, translat
   const dim = ink ? 'text-[#efe7d6]/60' : 'text-[#5a5246]';
   // The control's colour was a pale blue borrowed from the sky in the cover painting, and it
   // was the one cold thing in a warm room: it read as another product's button sitting in the
-  // record's own header. The record's colour of us is the signal — the same orange that marks
-  // the masthead, the rule under the title and the way through to a crisis.
-  const accent = ink ? '#e2602a' : '#b3261e';
+  // record's own header. It then wore the signal orange, which is the record's colour for a
+  // way through to something urgent — and a language is not urgent, it is a promise.
+  //
+  // So the tongue wears the mark's red, the same ink as x = x, because it is the same
+  // sentence: everyone is here on the same footing, in whatever tongue they arrived in. The
+  // orange stays for what it was for — the crisis, the way through, the thing that cannot
+  // wait — and the record stops needing a second red to say "this matters".
+  const accent = ink ? '#cc2d2a' : '#b3261e';
 
   return (
-    <div className={ink ? 'relative bg-[#141210] border-b border-[#e2602a]/20' : 'relative bg-[#efe7d6] border-b-2 border-[#141210]'}>
+    <div className={ink ? 'relative bg-[#141210] border-b border-[#cc2d2a]/25' : 'relative bg-[#efe7d6] border-b-2 border-[#141210]'}>
       <div className="px-5 py-2.5 flex items-center gap-2.5">
         <Languages className="w-4 h-4 flex-shrink-0" style={{ color: accent }} />
         <span className={`w-[5.5rem] flex-shrink-0 overflow-hidden text-ellipsis whitespace-nowrap text-[9px] font-black font-mono uppercase tracking-widest ${dim}`}>Every tongue</span>

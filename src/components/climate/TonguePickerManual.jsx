@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function TonguePickerManual({ theme, otherOpen, setOtherOpen, manual, setManual, refusal, setRefusal, manualRef, onCommit }) {
-  const { divide, field, dim, rowIdle, accent, ink } = theme;
+  const { divide, field, dim, rowIdle, accent } = theme;
   return (
     <div className={`flex-shrink-0 max-h-[45%] overflow-y-auto p-2 border-t-2 ${divide}`}>
       {otherOpen ? (
@@ -14,7 +14,9 @@ export default function TonguePickerManual({ theme, otherOpen, setOtherOpen, man
             className={`flex-1 min-w-0 border px-3 py-2 min-h-[38px] text-[16px] sm:text-[12px] font-mono outline-none ${field}`} />
           <button type="button" onClick={onCommit}
             className="flex-shrink-0 px-3 py-2 min-h-[38px] text-[10px] font-black font-mono uppercase"
-            style={{ background: accent, color: ink ? 'rgb(var(--record-ink))' : 'rgb(var(--record-paper))' }}>Go</button>
+            /* Ink on the mark's red is too close to read; paper on it is not. So the one
+               filled control in the picker is written in paper, like the mark itself. */
+            style={{ background: accent, color: 'rgb(var(--record-paper))' }}>Go</button>
           <button type="button" onClick={() => { manualRef.current?.blur(); setOtherOpen(false); setManual(''); }} aria-label="Cancel"
             className={`flex-shrink-0 w-[38px] h-[38px] flex items-center justify-center border text-base leading-none ${field}`}>×</button>
         </div>

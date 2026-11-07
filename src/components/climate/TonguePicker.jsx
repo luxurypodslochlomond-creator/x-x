@@ -41,7 +41,11 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
   }, []);
 
   const ink = tone === 'ink';
-  const accent = ink ? '#e2602a' : '#b3261e';
+  // The panel's rule is the mark's red — x = x — rather than the signal orange. The orange
+  // on this record means "this cannot wait"; a list of the world's tongues means the
+  // opposite, that nobody is in a hurry here and nobody is turned away. Same ink as the
+  // line at the foot of every page, so the door and the promise look like one thing.
+  const accent = ink ? '#cc2d2a' : '#b3261e';
   const field = ink
     ? 'border-[#efe7d6]/25 bg-transparent text-[#efe7d6]'
     : 'border-[#141210] bg-[#f7f1e5] text-[#141210]';
@@ -127,10 +131,10 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     close();
   };
 
-  const panel = ink ? 'bg-[#141210] border-[#e2602a] text-[#efe7d6]' : 'bg-[#f7f1e5] border-[#141210] text-[#141210]';
+  const panel = ink ? 'bg-[#141210] border-[#cc2d2a] text-[#efe7d6]' : 'bg-[#f7f1e5] border-[#141210] text-[#141210]';
   const divide = ink ? 'border-[#efe7d6]/15' : 'border-[#141210]/15';
   const rowIdle = ink ? 'text-[#efe7d6] hover:bg-[#efe7d6]/10' : 'text-[#141210] hover:bg-[#141210]/5';
-  const rowOn = ink ? 'text-[#efe7d6] bg-[#e2602a]/20' : 'text-[#141210] bg-[#b3261e]/10';
+  const rowOn = ink ? 'text-[#efe7d6] bg-[#cc2d2a]/25' : 'text-[#141210] bg-[#b3261e]/10';
   const dim = ink ? 'text-[#efe7d6]/55' : 'text-[#5a5246]';
   const content = open && (
     <TonguePickerPanel theme={{ ink, accent, field, panel, divide, rowIdle, rowOn, dim }}
