@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { ArrowRight, RefreshCw } from 'lucide-react';
+import { ArrowRight, RefreshCw, ChevronDown } from 'lucide-react';
 import ShedIndex from './ShedIndex';
+import ShedPlate from './ShedPlate';
 
-// ── WHAT WANTS YOU FIRST ─────────────────────────────────────────────────────────
-// A keeper opens this room and the room answers one question before any other: what
-// wants your yes. Everything else stands below that and quieter than it, because a
-// person who has to work out where to start will start in the wrong place on a bad
-// morning, and the record cannot afford that.
+// ── ONE THING, AND THE REST PUT AWAY ────────────────────────────────────────────
+// This room used to open with a headline, a line of explanation, a button, three groups of
+// doors and four more links before the work itself — correct, and too much to hold at once
+// on a phone. A room that explains itself is a room you have to read before you can work in.
 //
-// The counts are asked for when the page opens and never remembered from yesterday.
-// Nothing here decides anything: these are doors, and the work happens in the room
-// behind them, where the name is signed and the seal is taken.
+// So the front does one thing: it names the single job in front of you, in a sentence, and
+// puts one finger on it. Everything else in the shed still exists and is one tap away under
+// "the rest of the shed", which is open by itself on the quiet days when there is no job to
+// point at — a dead end is worse than a list.
 //
-// Set as a page of the record and nothing more: paper, hairline, one red number. The
-// shape it wore before — warm card, round seals, a pill to press — was colour doing the
-// work type should do, and it dated the room. A keeper does not need to be charmed into
-// the work; they need to see what is waiting.
+// Nothing here decides anything. These are doors, and the work happens in the room behind
+// them, where the name is signed and the seal is taken.
 export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
   const [waiting, setWaiting] = useState(null);
   const [toCheck, setToCheck] = useState(null);
   const [failed, setFailed] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const load = async () => {
     setFailed(false);
@@ -41,56 +41,94 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
 
   useEffect(() => { load(); }, []);
 
+  const known = typeof waiting === 'number';
   const n = waiting ?? 0;
-  const headline =
-    waiting === null
-      ? 'Looking at what wants you…'
-      : n === 0
-      ? 'Nothing is waiting on you.'
-      : `${n} ${n === 1 ? 'entry is' : 'entries are'} waiting for a keeper.`;
+  const checks = typeof toCheck === 'number' ? toCheck : 0;
+
+  const job =
+    n > 0
+      ? { go: 'decide', label: 'Take them one at a time', to: 'Yes or not yet' }
+      : checks > 0
+      ? { go: 'check', label: 'Open a source, write a note', to: 'Read & note' }
+      : null;
+
+  const headline = !known
+    ? 'Looking at what wants you…'
+    : n > 0
+    ? n === 1
+      ? 'One entry wants your yes.'
+      : `${n} entries want your yes.`
+    : checks > 0
+    ? checks === 1
+      ? 'One source is waiting to be read.'
+      : `${checks} sources are waiting to be read.`
+    : 'Nothing is waiting on you.';
+
+  const under = !known
+    ? 'One second.'
+    : job && job.go === 'decide'
+    ? 'Yes puts it on the record, sealed and signed with your name. Not yet leaves it waiting, untouched.'
+    : job
+    ? 'Open where it is claimed from and say what you find. Your note is signed in your name; nothing is published or changed.'
+    : 'The queue is clear. Nothing needs your name today — the rest of the shed is below.';
+
+  const showIndex = open || (!job && known);
 
   return (
-    <section className="mb-6">
-      <div className="flex items-baseline justify-between gap-3 border-b border-[#141210]/20 pb-2">
-        <p className="text-[9.5px] font-mono uppercase tracking-[0.2em] text-[#6b5f4f]">
-          Keeper{name ? ` · ${name}` : ''}
+    <section className="mb-5">
+      <div className="flex items-baseline justify-between gap-3">
+        <p className="text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>
+          The shed{name ? ` · ${name}` : ''}
         </p>
         <button
           onClick={load}
-          className="flex items-center gap-1.5 text-[11.5px] text-[#6b5f4f] active:text-[#b3261e] transition-colors min-h-[32px]"
+          className="flex items-center gap-1.5 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
+          style={{ fontFamily: 'var(--font-reading)' }}
         >
           <RefreshCw className="w-3 h-3" /> {failed ? 'count again' : 'recount'}
         </button>
       </div>
 
-      {/* The one thing, and everything below it smaller than it. */}
-      <p
-        className="mt-4 text-[#141210] font-semibold"
-        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(24px, 5.4vw, 31px)', lineHeight: 1.15, letterSpacing: '-0.01em' }}
+      {/* The plate: the room's one picture, and the only red mark on it. */}
+      <div className="border-y border-[#141210]/20 py-4 my-4 flex justify-center">
+        <ShedPlate height={96} className="text-[#141210]" />
+      </div>
+
+      <h2
+        className="text-[#141210] font-semibold"
+        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(23px, 5.2vw, 29px)', lineHeight: 1.15, letterSpacing: '-0.01em' }}
       >
         {headline}
-      </p>
+      </h2>
       <p className="mt-2 text-[14.5px] leading-[1.65] text-[#3a342c]" style={{ fontFamily: 'var(--font-reading)' }}>
-        Yes or not yet, one entry at a time. Nothing else in this room is more urgent.
+        {under}
       </p>
+
+      {job && (
+        <button
+          onClick={() => onGo(job.go)}
+          className="mt-4 inline-flex items-center gap-2 min-h-[44px] text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#b3261e] active:text-[#b3261e] transition-colors"
+        >
+          {job.label}
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      )}
 
       <button
-        onClick={() => onGo('decide')}
-        className="mt-4 inline-flex items-center gap-2 min-h-[44px] text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#b3261e] active:text-[#b3261e] transition-colors"
+        onClick={() => setOpen(!open)}
+        aria-expanded={showIndex ? 'true' : 'false'}
+        className="mt-5 w-full min-h-[44px] flex items-center justify-between gap-2 border-t border-[#141210]/20 pt-3 text-[13px] text-[#6b5f4f] active:text-[#141210] transition-colors"
+        style={{ fontFamily: 'var(--font-reading)' }}
       >
-        {n > 0 ? 'Take them one at a time' : 'Open the queue'}
-        <ArrowRight className="w-4 h-4" />
+        <span>{showIndex ? 'Put the rest of the shed away' : 'The rest of the shed'}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${showIndex ? 'rotate-180' : ''}`} />
       </button>
 
-      {isKeeper && (
-        <div className="mt-6">
+      {showIndex && (
+        <div className="mt-3">
           <ShedIndex waiting={waiting} toCheck={toCheck} isChecker={isChecker} onGo={onGo} />
         </div>
       )}
-
-      <p className="mt-6 pt-3 border-t border-[#141210]/12 text-[12.5px] leading-relaxed text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>
-        One decision at a time, in daylight, signed with a name — that is the part that will still be readable in a thousand years.
-      </p>
     </section>
   );
 }

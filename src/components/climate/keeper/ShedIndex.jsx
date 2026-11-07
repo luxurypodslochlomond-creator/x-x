@@ -66,8 +66,8 @@ export default function ShedIndex({ waiting, toCheck, isChecker, onGo }) {
         return (
           <div key={g.title} className="mb-4 last:mb-0">
             <div className="flex items-baseline justify-between gap-3 border-b border-[#141210]/25 pb-1.5 mb-0.5">
-              <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#6b5f4f]">{g.title}</p>
-              {!known && <span className="text-[9px] font-mono text-[#6b5f4f]/70">…</span>}
+              <p className="text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>{g.title}</p>
+              {!known && <span className="text-[12px] text-[#6b5f4f]/70">…</span>}
             </div>
 
             {/* The quiet answer, said rather than left blank. */}
@@ -112,13 +112,13 @@ export default function ShedIndex({ waiting, toCheck, isChecker, onGo }) {
         );
       })}
 
-      <p className="mt-5 mb-1.5 text-[9px] font-mono uppercase tracking-[0.18em] text-[#6b5f4f]">The record</p>
+      <p className="mt-6 mb-1.5 text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>The record itself</p>
       <div className="border-t border-[#141210]/25">
         {RECORD.map((r) => (
           <Link
             key={r.to}
             to={r.to}
-            className="flex items-center justify-between gap-3 py-2.5 border-b border-[#141210]/12 text-[13px] text-[#141210] active:bg-[#141210]/5 transition-colors"
+            className="flex items-center justify-between gap-3 py-3 border-b border-[#141210]/12 text-[13.5px] text-[#141210] active:bg-[#141210]/5 transition-colors"
             style={{ fontFamily: 'var(--font-reading)' }}
           >
             <span className="min-w-0">{r.label}</span>
