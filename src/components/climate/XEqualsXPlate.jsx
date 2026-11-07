@@ -1,20 +1,19 @@
 import React from 'react';
 
 // ── THE PLATE ──────────────────────────────────────────────────────────────────
-// The mark, printed in its own red, at the size it deserves: one field, one rule,
-// three characters. Nothing else in the frame.
+// The first version of this plate was a failure, and it is worth writing down why so
+// nobody rebuilds it: it was a red field with one white rule and a mark in paper. That
+// is not a tribute to a sleeve, it is the sleeve, redrawn in CSS by somebody who should
+// have known better. A record that promises it takes nothing from a person cannot open
+// by imitating an artist's artwork and calling the imitation a colour.
 //
-// What is NOT here is the point. The record borrows one measured number — #CC2D2A —
-// and draws everything else itself. No sleeve, no cover, no portrait, no photograph
-// of somebody's artwork sits behind these words. That is not caution for its own
-// sake: a record that says it cannot be extracted from, and then takes an artist's
-// cover because it would look good, has answered its own question badly.
+// So the plate is paper and ink now, and the only borrowed thing left is one measured
+// number, used once: a short stretch of red where the line speaks. Everything else is
+// drawn here, by hand, in the record's own voice.
 //
-// And the honest half: the colour is still borrowed, from a person who is alive and
-// reachable. So the plate carries its own condition — if she ever asks for it to come
-// down, it comes down, and the taking-down is written here rather than done quietly.
-// That is the same rule as every correction on this record, applied to the record's
-// own ink.
+// What the line says is the argument. It runs flat, drops where the record is quiet,
+// and comes back where somebody speaks. A frequency is only saved if somebody keeps it
+// exactly as it was given to them. That is the whole of it.
 
 export default function XEqualsXPlate() {
   return (
@@ -25,58 +24,76 @@ export default function XEqualsXPlate() {
             id="the-plate"
             className="text-[8.5px] font-black font-mono uppercase tracking-[0.28em] text-[#5a5246]"
           >
-            The plate
+            The frequency
           </h2>
           <span className="text-[8.5px] font-black font-mono uppercase tracking-[0.2em] text-[#b3261e]">
-            Drawn, not borrowed
+            Kept, not copied
           </span>
         </div>
 
-        {/* The field. Red to the edges, the mark in paper, one rule along the foot. */}
-        <div
-          className="relative overflow-hidden px-4 pb-14 pt-12 text-center"
-          style={{ background: 'rgb(var(--record-mark))' }}
-        >
-          <p
-            className="relative select-none font-black leading-[0.82]"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(64px, 19vw, 104px)',
-              letterSpacing: '-0.045em',
-              color: '#f7f1e5',
-            }}
+        {/* Drawn by hand: one line, ink, with one stretch of red where it speaks. */}
+        <figure className="px-3 pt-6 pb-4">
+          <svg
+            viewBox="0 0 600 120"
+            role="img"
+            aria-label="A thin hand-drawn line running flat, dipping low, and rising again, with one short stretch of it in the record's red."
+            className="w-full h-auto"
+            style={{ display: 'block' }}
           >
-            x = x
-          </p>
-          <span
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 right-0 h-[7px]"
-            style={{ background: '#f7f1e5' }}
-          />
-        </div>
+            <path
+              d="M0 60 L118 60 L132 24 L146 98 L160 60 L228 60 L242 46 L256 74 L270 60 L352 60 L366 16 L380 106 L394 60 L466 60 L480 50 L494 70 L508 60 L600 60"
+              fill="none"
+              stroke="#141210"
+              strokeWidth="1.7"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M352 60 L366 16 L380 106 L394 60"
+              fill="none"
+              style={{ stroke: 'rgb(var(--record-mark))' }}
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <line
+              x1="0"
+              y1="60"
+              x2="600"
+              y2="60"
+              stroke="#141210"
+              strokeWidth="0.6"
+              strokeDasharray="2 5"
+              opacity="0.28"
+            />
+          </svg>
+          <figcaption className="mt-3 font-mono text-[8.5px] uppercase tracking-[0.16em] text-[#5a5246]">
+            Drawn here · ink and one measure of red · nothing traced
+          </figcaption>
+        </figure>
 
-        <div className="px-4 py-4 space-y-3 font-mono text-[11.5px] leading-relaxed text-[#141210]">
+        <div className="border-t border-[#141210]/20 px-4 py-4 space-y-3 font-mono text-[11.5px] leading-relaxed text-[#141210]">
           <p>
-            Every line in the field above is drawn here: one red, one rule, three characters.
-            No sleeve, no cover, no portrait, no scanned artwork of anybody's — because the
-            page that promises nothing can be taken from a person cannot begin by taking
-            something from one.
+            The line drops where the record is quiet, and comes back up where somebody
+            speaks. That is the whole promise in a shape: nothing about a place or a person
+            is allowed to stay flattened because nobody was looking at the time.
           </p>
           <p className="text-[11px] text-[#5a5246]">
-            The red is the only borrowed thing on this page, and it is borrowed as a number
-            rather than as a picture: #CC2D2A, measured off the sleeve of{' '}
-            <em>O Superman</em>, 1982. Anyone can sample it and check.
+            A frequency is only saved if somebody keeps it exactly as it was handed over.
+            Not improved, not tidied, not made to sound more like what people already
+            agree with.
           </p>
         </div>
 
         <div className="border-t border-[#141210]/20 px-4 py-3">
           <p className="font-mono text-[11px] leading-relaxed text-[#141210]">
             <span className="font-black uppercase tracking-[0.14em] text-[#b3261e]">
-              If she says no.
+              What is borrowed.
             </span>{' '}
-            If Laurie Anderson ever asks for this red to come off her record, it comes off —
-            the same day, and the removal is printed here in the open rather than done
-            quietly. The same rule as every correction on this record, turned on its own ink.
+            One number: #CC2D2A, her red, measured and named — the reason the mark on this
+            page is the colour it is. Nothing else came from her, or from anybody. If she
+            ever asks for that red to come off, it comes off the same day, and the removal is
+            printed here rather than done quietly.
           </p>
         </div>
       </div>
