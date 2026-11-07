@@ -157,7 +157,12 @@ const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief')
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
 const ClimateKeeperRoomPage = React.lazy(() => import('./pages/ClimateKeeperRoom'));
 const ClimateLetterToJaninePage = React.lazy(() => import('./pages/ClimateLetterToJanine'));
-const ClimateStudioPage = React.lazy(() => import('./pages/ClimateStudio'));
+// THE STUDIO — its own room, with its own masthead, so ZAPP and the logo room open
+// inside a place that still has context around them instead of dropping a child onto a
+// page that looks like nothing they were just doing.
+const StudioPage = React.lazy(() => import('./pages/Studio'));
+const StudioShell = React.lazy(() => import('./components/studio/StudioShell'));
+const GenerateLogoPage = React.lazy(() => import('./pages/GenerateLogo'));
 
 
 
@@ -346,10 +351,13 @@ const AuthenticatedApp = () => {
       {/* A letter is one person writing to another, so it is not printed on the brief and
           not linked from the record. It opens only to a keeper's key. */}
       <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />
-      {/* The Studio: the one room on the record built for making rather than reading, and
-          the only place ZAPP and the logo room are gathered together. It needs no gate of
-          its own — both tools already work without an account. */}
-      <Route path="/ClimateStudio" element={<ClimateLayout currentPage="ClimateStudio"><ClimateStudioPage /></ClimateLayout>} />
+      {/* ── THE STUDIO — out of the record, in its own world ──
+          These three addresses are the same room: the masthead stays above the tool, so
+          ZAPP and the logo room are entered with context rather than as loose products.
+          Both tools already work without an account, so nothing here needs a gate. */}
+      <Route path="/Studio" element={<StudioShell><StudioPage /></StudioShell>} />
+      <Route path="/Studio/Zapp" element={<StudioShell><ZappPage /></StudioShell>} />
+      <Route path="/Studio/Logo" element={<StudioShell><GenerateLogoPage /></StudioShell>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and
           reached from the page that answers her questions. */}

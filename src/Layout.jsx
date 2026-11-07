@@ -432,7 +432,11 @@ const LayoutInner = ({ children, currentPageName }) => {
   const navs = React.useMemo(() => {
     // 1. PRODUCTS (paid / subscription tools)
     const productsNav = [
-      { title: "ZAPP", url: createPageUrl("Zapp"), icon: Zap, highlight: true, description: "Build anything with AI · for kids" },
+      // The Studio is the door now, and ZAPP opens inside it — so a child who taps ZAPP
+      // lands in a place with a masthead, a way out and a reason, rather than on a page
+      // that could belong to anything.
+      { title: "STUDIO", url: "/Studio", icon: Sparkles, highlight: true, description: "Make a game · draw a mark · no sign-up" },
+      { title: "ZAPP", url: "/Studio/Zapp", icon: Zap, highlight: true, description: "Build anything with AI · for kids" },
 
       { title: "SORTED", url: createPageUrl("Sorted"), icon: COOLASFUCKSorted, highlight: true, description: "Decode scary letters · subscription" },
       { title: "PetSounds51", url: createPageUrl("PetSounds51"), icon: COOLASFUCKPaw, highlight: true, description: "Sound therapy for animals · subscription" },
