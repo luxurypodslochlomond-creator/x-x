@@ -86,7 +86,7 @@ export default function ClimateKeeperRoom() {
             className="w-5 h-5 rounded-full animate-spin"
             style={{ border: '2px solid rgba(20,18,16,0.15)', borderTopColor: '#b3261e' }}
           />
-          <span className="text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">Looking at the record</span>
+          <span className="text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>Looking at the record</span>
         </div>
       )}
 
@@ -154,18 +154,21 @@ export default function ClimateKeeperRoom() {
 
 function Door({ heading, body, actionLabel, onAction }) {
   return (
-    <div className="border-2 border-[#141210] bg-[#efe7d6] p-4 lg:p-6">
-      <p className="font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '20px' }}>
+    <div className="rounded-2xl border border-[#141210]/12 bg-[#efe7d6] p-5 lg:p-6">
+      <p className="font-semibold text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '21px', letterSpacing: '-0.01em' }}>
         {heading}
       </p>
-      <p className="text-[12px] font-mono leading-relaxed text-[#3a342c]">{body}</p>
+      <p className="text-[14px] leading-[1.6] text-[#3a342c]" style={{ fontFamily: 'var(--font-reading)' }}>{body}</p>
       <button
         onClick={onAction}
-        className="mt-4 w-full flex items-center justify-center gap-2 min-h-[52px] px-4 py-3 bg-[#b3261e] text-[#f4efe4] text-[11px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#141210] active:border-[#141210] transition-colors"
+        className="mt-4 w-full flex items-center justify-center gap-2 min-h-[52px] px-4 py-3 rounded-full bg-[#b3261e] text-[#f4efe4] text-[13.5px] font-semibold active:bg-[#141210] transition-colors"
       >
         {actionLabel} <ArrowRight className="w-4 h-4" />
       </button>
-      <button onClick={() => window.location.reload()} className="mt-3 flex items-center gap-1.5 text-[10px] font-mono uppercase text-[#5a5246]">
+      <button
+        onClick={() => window.location.reload()}
+        className="mt-3 flex items-center gap-1.5 text-[12px] text-[#6b5f4f] active:text-[#141210] transition-colors"
+      >
         <RefreshCw className="w-3 h-3" /> reload the page
       </button>
     </div>

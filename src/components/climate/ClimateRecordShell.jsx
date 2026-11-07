@@ -69,7 +69,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
 
       {/* Signal band — the way back to the record */}
       <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
-        <Link to={returnTo} className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors">
+        <Link to={returnTo} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#141210] text-[#efe7d6] text-[13px] font-semibold active:bg-[#efe7d6] active:text-[#141210] transition-colors">
           {returnLabel} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
