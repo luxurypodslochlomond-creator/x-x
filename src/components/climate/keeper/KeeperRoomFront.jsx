@@ -95,12 +95,12 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
       </div>
 
       <h2
-        className="text-[#141210] font-semibold"
-        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(23px, 5.2vw, 29px)', lineHeight: 1.15, letterSpacing: '-0.01em' }}
+        className="text-[#1a1612] font-semibold"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: '21px', lineHeight: 1.35, letterSpacing: '0' }}
       >
         {headline}
       </h2>
-      <p className="mt-2 text-[14.5px] leading-[1.65] text-[#3a342c]" style={{ fontFamily: 'var(--font-reading)' }}>
+      <p className="mt-2 text-[15px] leading-[1.7] text-[#2b2622]" style={{ fontFamily: 'var(--font-reading)' }}>
         {under}
       </p>
 

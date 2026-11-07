@@ -8,6 +8,7 @@ import KeeperRoomFront from '@/components/climate/keeper/KeeperRoomFront';
 import DecideQueue from '@/components/climate/DecideQueue';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 import ClimateChecking from '@/pages/ClimateChecking';
+import GuestList from '@/components/climate/keeper/GuestList';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 
 // ── THE WORKROOM ─────────────────────────────────────────────────────────────
@@ -52,7 +53,13 @@ export default function ClimateKeeperRoom() {
   // Plain verbs, in the order the work actually happens: what is waiting for a yes, then what
   // is waiting for a pair of eyes, then the counts. A keeper's first tab is their next job.
   const tabs = who.isKeeper
-    ? [{ key: 'decide', label: 'Yes or not yet' }, { key: 'check', label: 'Read & note' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Sourcing' }]
+    ? [
+        { key: 'decide', label: 'Yes or not yet' },
+        { key: 'check', label: 'Read & note' },
+        { key: 'people', label: 'Who may come in' },
+        { key: 'desk', label: 'Counts' },
+        { key: 'score', label: 'Sourcing' },
+      ]
     : [{ key: 'check', label: 'Read & note' }];
   const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
   // Choosing a door takes you into the room rather than leaving you at the top of a page to
@@ -143,6 +150,7 @@ export default function ClimateKeeperRoom() {
           <div ref={roomRef} className="scroll-mt-3">
             {tab === 'decide' && who.isKeeper && <DecideQueue />}
             {tab === 'check' && <ClimateChecking />}
+            {tab === 'people' && who.isKeeper && <GuestList />}
             {tab === 'desk' && who.isKeeper && <AdminClimateDesk />}
             {tab === 'score' && who.isKeeper && <DueDiligencePanel />}
           </div>
@@ -155,10 +163,10 @@ export default function ClimateKeeperRoom() {
 function Door({ heading, body, actionLabel, onAction }) {
   return (
     <div className="border-t border-[#141210]/20 pt-4">
-      <p className="font-semibold text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', lineHeight: 1.2, letterSpacing: '-0.01em' }}>
+      <p className="font-semibold text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-reading)', fontSize: '21px', lineHeight: 1.35 }}>
         {heading}
       </p>
-      <p className="text-[14.5px] leading-[1.65] text-[#3a342c]" style={{ fontFamily: 'var(--font-reading)' }}>{body}</p>
+      <p className="text-[15px] leading-[1.7] text-[#2b2622]" style={{ fontFamily: 'var(--font-reading)' }}>{body}</p>
       <button
         onClick={onAction}
         className="mt-4 inline-flex items-center gap-2 min-h-[44px] text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#b3261e] active:text-[#b3261e] transition-colors"
