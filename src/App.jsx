@@ -157,6 +157,7 @@ const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief')
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
 const ClimateKeeperRoomPage = React.lazy(() => import('./pages/ClimateKeeperRoom'));
 const ClimateLetterToJaninePage = React.lazy(() => import('./pages/ClimateLetterToJanine'));
+const ClimateStudioPage = React.lazy(() => import('./pages/ClimateStudio'));
 
 
 
@@ -345,6 +346,10 @@ const AuthenticatedApp = () => {
       {/* A letter is one person writing to another, so it is not printed on the brief and
           not linked from the record. It opens only to a keeper's key. */}
       <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />
+      {/* The Studio: the one room on the record built for making rather than reading, and
+          the only place ZAPP and the logo room are gathered together. It needs no gate of
+          its own — both tools already work without an account. */}
+      <Route path="/ClimateStudio" element={<ClimateLayout currentPage="ClimateStudio"><ClimateStudioPage /></ClimateLayout>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and
           reached from the page that answers her questions. */}

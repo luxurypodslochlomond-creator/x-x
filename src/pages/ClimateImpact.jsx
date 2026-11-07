@@ -43,6 +43,63 @@ function isKnownCountryName(input) {
   return knownCountryNames.has(input.trim().toLowerCase());
 }
 
+// One of the three counts that hang off the bottom of the poster. A plate, not a row:
+// the numeral is the thing, the label is a caption beneath it, and the whole plate is
+// the way through to the breakdown.
+function ImpactPlate({ icon: Icon, to, value, label, muted }) {
+  return (
+    <Link
+      to={to}
+      aria-label={`${value.toLocaleString()} ${label.toLowerCase()}, open the breakdown`}
+      className={`flex flex-col items-center justify-center gap-1 px-1 py-4 border-r border-[#efe7d6]/15 last:border-r-0 active:bg-[#e2602a]/10 transition-colors ${muted ? 'opacity-35' : ''}`}
+    >
+      <Icon className="w-3.5 h-3.5 text-[#efe7d6]/50" />
+      <span className="font-black font-mono text-[#efe7d6] leading-none" style={{ fontSize: '27px', letterSpacing: '-0.03em' }}>
+        {value.toLocaleString()}
+      </span>
+      <span className="text-[7.5px] font-mono uppercase tracking-[0.12em] text-[#efe7d6]/40">{label}</span>
+    </Link>
+  );
+}
+
+// ── THE BREAKDOWN, AS A LEDGER RATHER THAN A LIST ──
+// Rows of name, number and bar read as a table, and a table on a phone is a column you
+// scroll forever. These are plates instead: two across, the leading place given the full
+// width and the biggest numeral, so the shape of the readership is legible before a word
+// of it has been read.
+function Ledger({ rows, tone, href, label }) {
+  const accent = tone === 'red' ? 'text-[#b3261e]' : 'text-[#e2602a]';
+  const bar = tone === 'red' ? 'bg-[#b3261e]' : 'bg-[#e2602a]';
+  const top = rows[0]?.views || 1;
+
+  return (
+    <div className="grid grid-cols-2 gap-px bg-[#141210]/15 border border-[#141210]/15">
+      {rows.map((row, i) => (
+        <Link
+          key={href(row)}
+          to={href(row)}
+          aria-label={`${label(row)}, ${row.views.toLocaleString()} reads, open the stories`}
+          className={`relative flex flex-col justify-between bg-[#f7f1e5] active:bg-[#efe7d6] transition-colors p-3 ${i === 0 ? 'col-span-2' : ''}`}
+        >
+          {i === 0 && (
+            <span aria-hidden="true" className="pointer-events-none absolute -right-2 -top-4 opacity-[0.12]">
+              <SignalBeacon size={80} />
+            </span>
+          )}
+          <span className="text-[8px] font-mono tracking-[0.2em] text-[#5a5246]/70">{String(i + 1).padStart(2, '0')}</span>
+          <span className="relative mt-2 flex items-end justify-between gap-1.5">
+            <span className={`font-mono font-bold text-[#141210] leading-[1.15] break-words ${i === 0 ? 'text-[15px]' : 'text-[11px]'}`}>{label(row)}</span>
+            <span className={`font-black font-mono flex-shrink-0 ${accent} ${i === 0 ? 'text-[21px]' : 'text-[13px]'}`}>{row.views.toLocaleString()}</span>
+          </span>
+          <span className={`relative mt-2.5 block bg-[#141210]/10 ${i === 0 ? 'h-1.5' : 'h-1'}`}>
+            <span className={`block h-full ${bar}`} style={{ width: `${Math.max(4, (row.views / top) * 100)}%` }} />
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 export default function ClimateImpact() {
   const back = useRecordBack();
   // Shares one read of the numbers with the record's impact strip: tapping through
@@ -119,75 +176,78 @@ export default function ClimateImpact() {
         </div>
       </div>
 
-      {/* Big numbers */}
-      <div className="px-5 py-8 bg-[#241d16]">
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
-          Together we can change the course of climate change
-        </p>
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center"
-        >
-          <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 mb-2">Reads of the record</p>
-          <Link to="#reading-map" aria-label={`${total.toLocaleString()} reads, open the map of reads`} className="block font-black text-[#e2602a] leading-none underline decoration-1 underline-offset-8" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(64px, 22vw, 96px)', letterSpacing: '-0.04em' }}>
-            {total.toLocaleString()}
-          </Link>
-          <p className="text-[9px] font-mono text-[#efe7d6]/45 mt-3 leading-relaxed max-w-[320px] mx-auto">
-            An entry opened. A place is counted once per entry per half hour. This is never a count of people.
-          </p>
-          <div className="flex items-center justify-center gap-4 mt-5">
-            <div className="text-center">
-              <div className="flex items-center gap-1.5 justify-center">
-                <Globe className="w-4 h-4 text-[#efe7d6]/60" />
-                <Link to={countries.length ? '#countries' : '#reading-map'} aria-label={`${countries.length} countries, open country breakdown`} className="font-black text-[#efe7d6] underline decoration-1 underline-offset-4" style={{ fontSize: '28px' }}>{countries.length}</Link>
-              </div>
-              <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Countries</p>
-            </div>
-            <div className="w-px h-8 bg-[#efe7d6]/20" />
-            <div className="text-center">
-              <div className="flex items-center gap-1.5 justify-center">
-                <Eye className="w-4 h-4 text-[#efe7d6]/60" />
-                <Link to="/TogetherChangeClimate#record-entries" aria-label={`${entries} entries, open the entries on the record`} className="font-black text-[#efe7d6] underline decoration-1 underline-offset-4" style={{ fontSize: '28px' }}>{entries}</Link>
-              </div>
-              <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Entries listed</p>
-            </div>
-            {regions.length > 0 && (
-              <>
-                <div className="w-px h-8 bg-[#efe7d6]/20" />
-                <div className="text-center">
-                  <div className="flex items-center gap-1.5 justify-center">
-                    <MapPin className="w-4 h-4 text-[#efe7d6]/60" />
-                    <Link to="#nations" aria-label={`${regions.length} nations, open nation breakdown`} className="font-black text-[#efe7d6] underline decoration-1 underline-offset-4" style={{ fontSize: '28px' }}>{regions.length}</Link>
-                  </div>
-                  <p className="text-[8px] font-mono uppercase tracking-widest text-[#efe7d6]/40 mt-1">Nations</p>
-                </div>
-              </>
-            )}
+      {/* ── THE NUMBERS, AS A POSTER RATHER THAN A COLUMN ──
+          This block was a centred stack: label, number, note, three counts, another note —
+          five centred lines one under the other, and nothing on the page had a shape. A
+          record of the planet's attention should look like one: the number runs off the
+          right edge, the caveat runs up the side of it, the beacon sits behind it, and the
+          three counts hang off the bottom as plates rather than sitting politely below. */}
+      <div className="relative overflow-hidden bg-[#241d16]">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-16 opacity-[0.14]">
+          <SignalBeacon size={330} />
+        </div>
+
+        <div className="relative px-5 pt-7 pb-5 flex items-start justify-between gap-2">
+          <div className="min-w-0 flex-1">
+            <p className="text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#e2602a] leading-relaxed max-w-[200px]">
+              Together we can change the course of climate change
+            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Link
+                to="#reading-map"
+                aria-label={`${total.toLocaleString()} reads, open the map of reads`}
+                className="block mt-4 font-black text-[#e2602a] leading-[0.8] -ml-1"
+                style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(74px, 26vw, 128px)', letterSpacing: '-0.055em' }}
+              >
+                {total.toLocaleString()}
+              </Link>
+              <p className="text-[9px] font-mono uppercase tracking-[0.22em] text-[#efe7d6]/45 mt-2">
+                Reads of the record
+              </p>
+            </motion.div>
           </div>
-          {/* The big number was labelled "Entries", which read as everything on the record — it is
-              not. It is the three doors that carry reach. Said plainly here so nobody reading a
-              funder's page has to guess what the figure covers. */}
-          <p className="text-[8px] font-mono text-[#efe7d6]/40 mt-3 leading-relaxed max-w-[320px] mx-auto">
-            Entries listed = the solutions, the crises and the actions on the record. The wire, the gatherings and the music given to it stand on the record too, and are not part of this count.
+          <p
+            aria-hidden="true"
+            className="flex-shrink-0 pt-1 text-[8px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40 whitespace-nowrap"
+            style={{ writingMode: 'vertical-rl' }}
+          >
+            reads · never people
           </p>
-        </motion.div>
+        </div>
+
+        <div className="relative grid grid-cols-3 border-t border-[#efe7d6]/15">
+          <ImpactPlate icon={Globe} to={countries.length ? '#countries' : '#reading-map'} value={countries.length} label="Countries" />
+          <ImpactPlate icon={Eye} to="/TogetherChangeClimate#record-entries" value={entries} label="Entries" />
+          <ImpactPlate icon={MapPin} to={regions.length ? '#nations' : '#reading-map'} value={regions.length} label="Nations" muted={regions.length === 0} />
+        </div>
+
+        {/* The number was labelled "Entries", which read as everything on the record — it is
+            not. Said plainly, so nobody reading a funder's page has to guess what it covers. */}
+        <p className="relative px-5 py-3 text-[8px] font-mono text-[#efe7d6]/40 leading-relaxed border-t border-[#efe7d6]/10">
+          Entries listed = the solutions, the crises and the actions. The wire, the gatherings and the music stand on the record too, and are not part of this count. A place is counted once per entry per half hour.
+        </p>
       </div>
 
-      {/* Reader-impact map — the planet lighting up as people read */}
-      <div id="reading-map" className="px-5 lg:px-6 pt-6 lg:pt-12 pb-2 mx-auto max-w-[1100px]">
-        <div className="flex items-center gap-2 mb-3">
-          <Globe className="w-4 h-4 text-[#b3261e]" />
-          <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
+      {/* ── THE PLANET, EDGE TO EDGE ──
+          It sat in the same padded column as the paragraphs, so the one whole-world thing on
+          the page was the width of a column of text. It now runs the full glass and meets the
+          dark block above it at a signal rule, so the page interlocks instead of stacking. */}
+      <div id="reading-map" className="relative z-10 bg-[#efe7d6] border-t-4 border-t-[#e2602a]">
+        <div className="flex items-center gap-2 px-5 pt-6 pb-3">
+          <Globe className="w-4 h-4 text-[#b3261e] flex-shrink-0" />
+          <h2 className="font-black uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
             Where the world is reading
           </h2>
           <div className="flex-1 h-px bg-[#141210]/20" />
         </div>
-        <div className="border-y-2 border-[#141210]/20 overflow-hidden w-full -mx-5 px-0 sm:mx-0">
+        <div className="overflow-hidden border-y-2 border-[#141210]/20">
           <ClimateImpactMap stats={stats} />
         </div>
-        <p className="text-[9px] font-mono text-[#5a5246] mt-2 leading-relaxed">
+        <p className="px-5 pt-3 pb-1 text-[9px] font-mono text-[#5a5246] leading-relaxed max-w-[720px]">
           Every dot is a place reads came from — not a person, and not anybody's location: red is a country (from geo, no IP stored), blue a self-identified nation with no country code of its own. Dot size is how many reads were counted there. The planet, lighting up — honestly.
         </p>
       </div>
@@ -252,27 +312,12 @@ export default function ClimateImpact() {
             <span className="text-[9px] font-mono text-[#5a5246] uppercase tracking-wider">Self-identified</span>
             <div className="flex-1 h-px bg-[#141210]/20" />
           </div>
-          <div className="space-y-1.5">
-            {regions.map((r, i) => (
-              <motion.div
-                key={r.region}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.25, delay: i * 0.03 }}
-              >
-                <Link to={`/ClimateReachPlace/nation/${encodeURIComponent(r.region)}`} aria-label={`${r.region}, ${r.views.toLocaleString()} reads, open the stories`} className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#b3261e]/20 active:bg-[#efe7d6] transition-colors">
-                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/5 border border-[#b3261e]/20">
-                  <SignalBeacon size={22} />
-                </span>
-                <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{r.region}</span>
-                <span className="text-[12px] font-black font-mono text-[#b3261e]">{r.views.toLocaleString()}</span>
-                <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
-                  <div className="h-full bg-[#b3261e] rounded-full" style={{ width: `${Math.max(4, (r.views / regions[0].views) * 100)}%` }} />
-                </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+          <Ledger
+            rows={regions}
+            tone="red"
+            href={(r) => `/ClimateReachPlace/nation/${encodeURIComponent(r.region)}`}
+            label={(r) => r.region}
+          />
         </div>
       )}
 
@@ -286,27 +331,12 @@ export default function ClimateImpact() {
             </h2>
             <div className="flex-1 h-px bg-[#141210]/20" />
           </div>
-          <div className="space-y-1.5">
-            {countries.map((c, i) => (
-              <motion.div
-                key={c.country}
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.25, delay: i * 0.03 }}
-              >
-                <Link to={`/ClimateReachPlace/country/${c.country}`} aria-label={`${countryName(c.country)}, ${c.views.toLocaleString()} reads, open the stories`} className="flex items-center gap-3 px-3 py-2.5 bg-[#f7f1e5] border border-[#141210]/15 active:bg-[#efe7d6] transition-colors">
-                <span className="w-7 h-7 flex items-center justify-center bg-[#b3261e]/5 border border-[#b3261e]/20">
-                  <SignalBeacon size={22} />
-                </span>
-                <span className="text-[12px] font-mono font-bold text-[#141210] flex-1 truncate">{countryName(c.country)}</span>
-                <span className="text-[12px] font-black font-mono text-[#e2602a]">{c.views.toLocaleString()}</span>
-                <div className="w-16 h-1.5 bg-[#141210]/10 rounded-full overflow-hidden flex-shrink-0">
-                  <div className="h-full bg-[#e2602a] rounded-full" style={{ width: `${Math.max(4, (c.views / countries[0].views) * 100)}%` }} />
-                </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+          <Ledger
+            rows={countries}
+            tone="orange"
+            href={(c) => `/ClimateReachPlace/country/${c.country}`}
+            label={(c) => countryName(c.country)}
+          />
         </div>
       )}
 
