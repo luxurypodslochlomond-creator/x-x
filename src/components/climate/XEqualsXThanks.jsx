@@ -38,17 +38,22 @@ export default function XEqualsXThanks() {
       </h2>
 
       <p className="mt-3">
-        Two people are thanked here, each for one thing only. Both were learned from without
+        Two people are thanked here, each for something specific. Both were learned from without
         being asked first, so the debt is written down rather than assumed, and it stops where
         the actual debt stops.
       </p>
 
       <div className="mt-6 space-y-5">
-        <Debt name="Laurie Anderson" reason="for the red">
-          #CC2D2A is measured off her sleeve for O Superman (1982) and is the only thing on this
-          page that came from somebody else’s work. Nothing else of hers is used, quoted or
-          redrawn. If she would rather the colour or her name came off, both come off the same
-          day, and the taking-off is printed here rather than done quietly.
+        <Debt name="Laurie Anderson" reason="for the red, and for the name">
+          #CC2D2A is measured off her sleeve for O Superman (1982). The phrase the record is
+          named after — “the record of the time” — is hers too, from <em>From the Air</em> on{' '}
+          <em>Big Science</em>. Those two things, one colour and five words used as a name, are
+          the whole of what has been taken.
+          {' '}Her lyrics are not printed anywhere on this record. A line of somebody’s song set
+          as the record’s own closing sentence is a borrow, however neatly it is signed, so the
+          pages that used to carry it now say the sentence in their own voice and credit the
+          naming here instead. If she would rather the colour or the name came off, both come
+          off the same day, and the taking-off is printed on this page rather than done quietly.
         </Debt>
 
         <Debt name="Lou Reed" reason="for saying it once">

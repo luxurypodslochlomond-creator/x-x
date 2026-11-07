@@ -82,7 +82,7 @@ export default function WhitepaperPage() {
           </p>
 
           <RedBanner className="mt-8 max-w-2xl mx-auto">
-            This is the time. And this is the record of the time.
+            This is the time. So this is the record we keep of it.
           </RedBanner>
 
           <div className="text-xs mt-6 space-y-1" style={{ color: MUTED }}>
@@ -544,7 +544,7 @@ export default function WhitepaperPage() {
         {/* ── FOOTER ── */}
         <footer className="text-center py-8 space-y-3 mt-8" style={{ borderTop: `1px solid ${BORDER}` }}>
           <RedBanner className="max-w-2xl mx-auto">
-            This is the time. And this is the record of the time.
+            This is the time. So this is the record we keep of it.
           </RedBanner>
           <div className="flex items-center justify-center gap-2 pt-4">
             <Clock className="w-4 h-4" style={{ color: MUTED }} />

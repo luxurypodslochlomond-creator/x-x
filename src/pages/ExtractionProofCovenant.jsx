@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 
@@ -123,10 +124,18 @@ export default function ExtractionProofCovenant() {
           and fund — by leaving the honest path as the shortest one through the code.
         </p>
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.18em] text-[#e2602a] leading-relaxed">
-          This is the time. And this is the record of the time.
+          This is the time. So this is the record we keep of it.
         </p>
-        <p className="text-[9px] font-mono text-[#efe7d6]/40 mt-2">
-          Laurie Anderson · From the Air, Big Science, 1982
+        {/* Her lyric used to be printed here as the close, with her name under it. It is not
+            printed any more: a line of somebody's song carrying your argument is a borrow,
+            however neatly it is signed. What stays is the naming, said as naming. */}
+        <p className="text-[10px] font-mono text-[#efe7d6]/50 mt-2 leading-relaxed">
+          Named after a line by Laurie Anderson — <span className="italic">From the Air</span>,{' '}
+          <span className="italic">Big Science</span> (1982). Not an endorsement. See{' '}
+          <Link to="/XEqualsX" className="underline decoration-dotted underline-offset-2 hover:text-[#e2602a]">
+            what is owed
+          </Link>
+          .
         </p>
       </section>
     </ClimateRecordShell>

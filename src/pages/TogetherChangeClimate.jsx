@@ -843,10 +843,23 @@ export default function TogetherChangeClimate() {
             a short rule, and the ground it stands on. */}
         <section className="px-5 pt-12 pb-14 lg:pt-16 lg:pb-20 bg-[#efe7d6] text-center">
           <p className="text-[17px] lg:text-[19px] leading-[1.5] text-[#141210] mx-auto max-w-[420px]" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
-            This is the time. And this is the record of the time.
+            This is the time. So this is the record we keep of it.
           </p>
-          <p className="mt-3 text-[9px] font-mono uppercase tracking-[0.15em] text-[#5a5246]">
-            Laurie Anderson · From the Air, Big Science, 1982
+          {/* ── HER NAME, NOT HER WORDS ──────────────────────────────────────────────
+              This close used to print two lines of her lyrics as the record's own last
+              sentence, and it was the one place on the page where we were not keeping our
+              side of the bargain: a lyric set as your thesis asks somebody else's work to
+              carry your argument, and even with her name under it a reader cannot tell
+              where her thought stops and ours starts.
+
+              So her words are not reprinted here, or anywhere else on the record. What is
+              left is the one thing we genuinely took — the phrase that named this thing —
+              said out loud as hers, with the limit on it stated in the same breath. */}
+          <p className="mt-3 text-[10px] font-mono text-[#5a5246] mx-auto max-w-[46ch] leading-relaxed">
+            The record takes its name from a line by Laurie Anderson — “the record of the time”,
+            from <span className="italic">From the Air</span> on <span className="italic">Big Science</span> (1982).
+            The sentence above is ours. Hers is the thought and the name; she has not read this,
+            been asked, or endorsed any of it.
           </p>
           <div className="mx-auto mt-7 h-px w-16 bg-[#141210]/25" />
         </section>
