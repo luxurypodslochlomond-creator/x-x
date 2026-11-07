@@ -26,7 +26,7 @@ export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClim
         >
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246] min-w-0 truncate">
+        <span className="text-[11px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246] min-w-0 truncate">
           {eyebrow}
         </span>
         {right ? <div className="ml-auto flex-shrink-0">{right}</div> : null}

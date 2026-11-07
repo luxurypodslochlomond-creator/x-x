@@ -55,7 +55,7 @@ function PlaceLink({ item, active, desk }) {
       to={createPageUrl(item.page)}
       aria-label={item.aria}
       aria-current={active ? 'page' : undefined}
-      className={`pb-1 whitespace-nowrap border-b-2 text-[11px] font-black uppercase tracking-wider transition-colors ${tone}`}
+      className={`pb-1 whitespace-nowrap border-b-2 text-[12px] font-black uppercase tracking-[0.1em] transition-colors ${tone}`}
     >
       {item.label}
     </Link>
@@ -80,7 +80,7 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
          and the record's rule is that a single red carries everything it means by intent: the
          promise at the foot and the way in at the top are the same ink. Where you are is still
          said in the signal orange, so the box can never be mistaken for the current page. */
-      className={`flex items-center gap-1.5 border-2 border-record-mark px-3 py-1.5 text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors sm:min-h-0 sm:px-2.5 min-h-[44px] ${
+      className={`flex items-center gap-1.5 border-2 border-record-mark px-3 py-1.5 text-[11px] font-black font-mono uppercase tracking-[0.1em] whitespace-nowrap transition-colors sm:min-h-0 sm:px-2.5 min-h-[44px] ${
         searchActive
           ? 'bg-[#e2602a] border-[#e2602a] text-[#141210]'
           : 'bg-record-mark text-[#f4efe4] hover:bg-[#e2602a] hover:border-[#e2602a] hover:text-[#141210]'

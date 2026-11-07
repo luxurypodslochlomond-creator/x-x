@@ -1,13 +1,26 @@
 /* One reading treatment for the whole record. Prose is not a terminal label.
    The legacy pages retain their structures, photographs, controls and factual colours. */
+/* ── A PAGE IS A SHEET, NOT A WINDOW ────────────────────────────────────────────
+   The painting belongs above the page (the masthead) and below it (the endpaper).
+   It does not belong under the words. Every sheet here had been made see-through so
+   the cover could "come up through the paper", and the honest result was paragraphs
+   competing with a picture: no clear ground, and nothing on the page reading as firm.
+   The reading column is now a real sheet — warm paper at ninety-five per cent — so a
+   sentence sits on paper and the cover does its work at the edges, where a cover goes. */
 .record-pages {
   --font-reading: var(--font-record-reading);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  background-color: rgb(var(--record-paper) / .955);
 }
 
-.record-pages :is(p, blockquote, li):not(.uppercase):not(.font-black):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *) {
+/* The machine keeps its own voice, at its own size. This rule used to catch every
+   paragraph, including the ones deliberately set small and monospaced — a plate's note,
+   a caption, a count — and blow them up to seventeen-pixel serif, which is what made the
+   record's sizes look wrong page after page: half of each page at reading size and half
+   of it at eight pixels. Monospaced passages are excluded now. */
+.record-pages :is(p, blockquote, li):not(.uppercase):not(.font-black):not(.font-mono):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *) {
   font-family: var(--font-reading) !important;
   font-size: clamp(1.0625rem, 1.015rem + .2vw, 1.1875rem) !important;
   line-height: 1.68 !important;
@@ -23,7 +36,14 @@
   line-height: 1.48 !important;
   max-inline-size: 43ch;
 }
-.record-pages p.uppercase { font-size: .6875rem; line-height: 1.5; }
+.record-pages p.uppercase { font-size: .75rem; line-height: 1.5; }
+/* A monospaced note is still read by a person. It stays the machine's lettering — that is
+   the point of it — but it is set at a size a phone can hold without leaning in. */
+.record-pages :is(p, li, blockquote).font-mono:not(.uppercase) {
+  font-size: .8125rem !important;
+  line-height: 1.65 !important;
+  max-inline-size: 62ch;
+}
 .record-pages p.break-all { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .75rem; line-height: 1.6; }
 .record-pages .record-meta {
   font-family: var(--font-body);
@@ -35,13 +55,15 @@
 .record-pages .twcc-scanlines::before { content: none; }
 .record-pages :is(input, textarea, select):not(dialog *):not([role="dialog"] *) { font-size: 1rem; }
 
-/* One continuous sheet, not successively opaque sheets hiding the painting.
-   Controls and dialogs keep their solid backgrounds. Light panels are a wash of
-   the same paper, not a second artwork or a blur over the words. */
+/* Panels are surfaces, not holes. A plate, a callout, a note kept on the record is a
+   piece of paper laid on the page, so it holds a colour instead of dissolving into the
+   picture behind it. */
 .record-pages :is(div, section, article, p)[class~="bg-[#efe7d6]"]:not(dialog *):not([role="dialog"] *),
 .record-pages :is(div, section, article, p)[class~="bg-[#f4efe4]"]:not(dialog *):not([role="dialog"] *),
 .record-pages :is(div, section, article)[class~="bg-record-paper"]:not(dialog *):not([role="dialog"] *),
-.record-pages :is(div, section, article)[class~="bg-record-bone"]:not(dialog *):not([role="dialog"] *) { background-color: transparent; }
+.record-pages :is(div, section, article)[class~="bg-record-bone"]:not(dialog *):not([role="dialog"] *) {
+  background-color: rgb(var(--record-bone));
+}
 .record-pages :is(div, section, article)[class~="bg-[#f7f1e5]"]:not(dialog *):not([role="dialog"] *) {
   background-color: rgb(var(--record-paper) / .6);
 }
@@ -110,15 +132,21 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
 }
 .record-pages :is(h1, h2) { line-height: 1.04 !important; }
 
+/* The floor, and it is one floor. Seven, eight, eight-and-a-half, nine and ten pixels all
+   arrived as separate decisions and together they made the page shimmer. Every label on
+   the record now sits at twelve pixels or above. The earlier version of this rule matched
+   exact strings, so a size of eight-and-a-half slipped through untouched — which is why
+   the page still had specks on it after the last correction. It matches the whole range now. */
 .record-pages :is(
-  [class*="text-[7px]"],
-  [class*="text-[8px]"],
-  [class*="text-[9px]"]
+  [class*="text-[7"],
+  [class*="text-[8"],
+  [class*="text-[9"]
 ):not(dialog *):not([role="dialog"] *) {
-  font-size: 0.6875rem !important;
-  letter-spacing: 0.1em !important;
-  line-height: 1.55 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.5 !important;
 }
 .record-pages [class*="text-[10px]"]:not(dialog *):not([role="dialog"] *) {
-  letter-spacing: 0.1em !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
 }

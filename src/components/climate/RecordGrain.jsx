@@ -36,8 +36,11 @@ const noiseLayer = (frequency, octaves, size, opacity, blend) => {
   };
 };
 
-const TOOTH = noiseLayer(0.82, 3, 160, 0.5, 'overlay');
-const FOXING = noiseLayer(0.011, 4, 640, 0.1, 'multiply');
+// Both weights came down hard. At half opacity the tooth was not paper fibre, it was
+// grit on the glass: every page looked slightly dirty behind the words, which reads as
+// a bad screen rather than a good sheet. The sheet now carries the grain, not the page.
+const TOOTH = noiseLayer(0.82, 3, 160, 0.2, 'overlay');
+const FOXING = noiseLayer(0.011, 4, 640, 0.05, 'multiply');
 
 export default function RecordGrain() {
   return (

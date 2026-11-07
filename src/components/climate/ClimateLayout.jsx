@@ -188,7 +188,10 @@ export default function ClimateLayout({ children, currentPage }) {
           it and a record that is a picture. Cheap to run, too: one composited layer, no
           repaint per scroll, nothing downloaded that a phone was not already sent. */}
       <div aria-hidden="true" className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-        <RecordCover position="center 42%" strength={0.23} priority />
+        {/* Held further back than it was. The cover is the room, not the wallpaper: at
+            twenty-three per cent it was still reading as texture behind the page and
+            nothing looked clean. */}
+        <RecordCover position="center 42%" strength={0.14} priority />
         {/* The sheet has a surface, not just a colour: tooth and foxing over the painting,
             under every word. See RecordGrain — it is drawn, not downloaded. */}
         <RecordGrain />
@@ -286,7 +289,7 @@ export default function ClimateLayout({ children, currentPage }) {
             <Link
               key={item.page}
               to={createPageUrl(item.page)}
-              className="text-[10px] font-mono font-black uppercase text-[#6b6258] hover:text-[#b3261e] transition-colors"
+              className="text-[11px] font-mono font-black uppercase tracking-[0.08em] text-[#6b6258] hover:text-[#b3261e] transition-colors"
             >
               {item.label}
             </Link>

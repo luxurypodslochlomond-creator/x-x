@@ -13,7 +13,12 @@ import RecordCover from '@/components/climate/RecordCover';
 // hundred pixels of ceremony before it. Every reading page of the record is unchanged.
 export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, children }) {
   return (
-    <div dir={dir} className="climate-record twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
+    /* The transmission grain is gone from under the reading. It sat over the whole page at
+       three per cent — invisible until you tried to read a paragraph through it, at which
+       point the ground never looked clean however much the paper was lightened. A record of
+       the world is read, not scanned: the grain stays on the cover and the masthead, and
+       every page of the record is now plain, clear paper. */
+    <div dir={dir} className="climate-record min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Header — paper, the way out, the page's name. It scrolls with the page, and
           does not pin: the record's masthead above it already owns the top edge, and a
           second bar pinned to the same edge sat over the nav and ate the taps. */}
@@ -24,7 +29,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">{marker}</span>
+          <span className="text-[11px] font-black font-mono uppercase tracking-[0.14em] text-[#efe7d6]/75 text-center leading-tight">{marker}</span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
         {/* The mark, and the way to it — every page of the record carries it, and it goes
@@ -49,9 +54,17 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
           <SignalBeacon size={44} color="#7fc9e4" />
+          {/* THE TITLE IS SET, NOT SHOUTED ───────────────────────────────────────────
+              Every page of the record opened with its name in condensed capitals at
+              fifty-four pixels. That is a poster's voice, and on a record of this
+              morning's emergencies it reads as a leaflet — nothing can be said quietly
+              because the face has only one volume. The title is now sentence case, in
+              the record's own cut, at a size a phone can hold as a title rather than
+              as a shout. Hierarchy comes from the air around it, which is the only
+              honest way to make two lines look different in weight. */}
           <h1
-            className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.6vw, 54px)', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
+            className="text-[#efe7d6] max-w-[22ch] lg:max-w-[26ch]"
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'clamp(27px, 4.4vw, 44px)', lineHeight: 1.12, letterSpacing: '-0.005em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
           >
             {title}
           </h1>
@@ -75,11 +88,11 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       </div>
 
       {footer && (
-        <p className="px-5 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">{footer}</p>
+        <p className="px-5 py-6 lg:py-8 text-center text-[11px] lg:text-[12px] font-mono text-[#5a5246]/80 leading-relaxed max-w-md lg:max-w-2xl mx-auto">{footer}</p>
       )}
 
       {/* The credit — every page of the record names who built it. */}
-      <p className="px-5 pb-9 text-center text-[11px] font-mono text-[#5a5246] leading-relaxed">
+      <p className="px-5 pb-9 text-center text-[12px] font-mono text-[#5a5246] leading-relaxed">
         Platform built by Brian Hughes ·{' '}
         <Link to="/Welcome" className="hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
         {' '}· Scotland
