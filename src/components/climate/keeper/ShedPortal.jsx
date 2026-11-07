@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  MarkKey, MarkEye, MarkLedger, MarkRoot, MarkGate, MarkSearch, MarkSeal, MarkWire,
+  MarkStamp, MarkEye, MarkLedger, MarkRoot, MarkGate, MarkSearch, MarkSeal, MarkWire,
 } from './KeeperMarks';
 
 // ── MARKS ON PAPER, NOT CARDS ON A PAGE ─────────────────────────────────────────
@@ -10,21 +10,43 @@ import {
 // carried a frame, a label, a helper line under the label and a number in a corner,
 // because that is what a dashboard does, and a dashboard is the least cool thing on earth.
 //
-// So all of it is gone. There are no frames here and nothing is boxed, because nothing on
-// this wall is a field to fill in. There is one door given the whole width and a mark the
-// size of a hand — the job somebody came to do — and then the other doors as bare
-// engravings on the paper, in a quiet pair below a hairline. A helper line only where a
-// person genuinely cannot guess (the one door that decides something).
+// So no frames, nothing boxed: nothing on this wall is a field to fill in. There is one door
+// given the whole width and a mark the size of a hand — the job somebody came to do — and
+// then the other doors as engravings on the paper, ruled off from one another the way a
+// book's contents page rules off its lines.
 //
-// The only chrome left is two rules that run the full width of the sheet and one number in
-// the record's red. That is the whole design, and it is the whole point: on this record,
-// restraint is the look, and anything added to it is a loss.
+// What changed after somebody tried to use it on a phone: it was beautiful and it was a
+// guessing game. A mark and two words is a riddle if you have not been shown the room, and
+// "Sourcing" tells a person nothing until they have opened it once. So every door now says,
+// in one short line of plain words, what happens if you push it — and every mark is drawn
+// for the job behind its door rather than for the shape it makes. That is the whole
+// correction: not more furniture, just no riddles.
+//
+// The only chrome is still a hairline and one number in the record's red.
 const WORK = [
-  { key: 'decide', Mark: MarkKey, label: 'Yes or not yet', note: 'Yes puts it on the record, sealed and signed with your name.', count: 'decide' },
-  { key: 'check', Mark: MarkEye, label: 'Read & note', note: 'Your note is signed in your own name.', count: 'check' },
-  { key: 'people', Mark: MarkGate, label: 'Who may come in', count: 'asks' },
-  { key: 'desk', Mark: MarkLedger, label: 'Counts' },
-  { key: 'score', Mark: MarkRoot, label: 'Sourcing' },
+  {
+    key: 'decide',
+    Mark: MarkStamp,
+    label: 'Yes or not yet',
+    note: 'Read it, then put it on the record or leave it waiting.',
+    count: 'decide',
+  },
+  {
+    key: 'check',
+    Mark: MarkEye,
+    label: 'Read & note',
+    note: 'Open where an entry is claimed from and say what you find.',
+    count: 'check',
+  },
+  {
+    key: 'people',
+    Mark: MarkGate,
+    label: 'Who may come in',
+    note: 'Add a person, pause them, or take them off the list.',
+    count: 'asks',
+  },
+  { key: 'desk', Mark: MarkLedger, label: 'Counts', note: 'What the record holds, and how much of it.' },
+  { key: 'score', Mark: MarkRoot, label: 'Sourcing', note: 'Where each claim came from, and how well it is known.' },
 ];
 
 const RECORD = [
@@ -37,8 +59,8 @@ function Numeral({ n, size }) {
   if (!(typeof n === 'number' && n > 0)) return null;
   return (
     <span
-      className="leading-none text-[#b3261e]"
-      style={{ fontFamily: 'var(--font-reading)', fontSize: size, fontWeight: 600, letterSpacing: '-0.02em' }}
+      className="shrink-0 leading-none text-[#b3261e]"
+      style={{ fontFamily: 'var(--font-reading)', fontSize: size, fontWeight: 600, letterSpacing: '-0.03em' }}
     >
       {n}
     </span>
@@ -51,7 +73,8 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
   const soloChecker = isChecker && !isKeeper;
   const tiles = soloChecker ? WORK.filter((t) => t.key === 'check') : WORK;
 
-  const has = (t) => typeof (t.count ? counts[t.count] : null) === 'number' && counts[t.count] > 0;
+  const countOf = (t) => (t.count ? counts[t.count] : null);
+  const has = (t) => typeof countOf(t) === 'number' && countOf(t) > 0;
   // The door given the width is whichever one actually has somebody behind it; on a quiet
   // day it is the lightest job, so the wall never opens on nothing.
   const leadKey = (tiles.find(has) || tiles[0])?.key;
@@ -59,6 +82,7 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
   const rest = tiles.filter((t) => t.key !== leadKey);
 
   const Lead = lead?.Mark;
+  const leadOn = active === lead?.key;
 
   return (
     <div>
@@ -67,35 +91,33 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
         <button
           type="button"
           onClick={() => onGo(lead.key)}
-          className="flex w-full items-start gap-4 text-left"
+          aria-current={leadOn ? 'true' : undefined}
+          className="-mx-2 flex w-full items-start gap-4 rounded-sm px-2 py-1 text-left transition-colors active:bg-[#141210]/5"
         >
-          <span
-            className="shrink-0"
-            style={{ color: active === lead.key ? '#b3261e' : '#141210' }}
-          >
-            <Lead size={74} />
+          <span className="shrink-0 pt-0.5" style={{ color: leadOn ? '#b3261e' : '#141210' }}>
+            <Lead size={72} />
           </span>
           <span className="min-w-0 flex-1 pt-1">
             <span className="flex items-start justify-between gap-2">
               <span
-                className="block text-[#141210]"
+                className="block"
                 style={{
                   fontFamily: 'var(--font-reading)',
-                  fontSize: '25px',
+                  fontSize: '26px',
                   fontWeight: 600,
-                  lineHeight: 1.14,
-                  letterSpacing: '-0.015em',
-                  color: active === lead.key ? '#b3261e' : '#141210',
+                  lineHeight: 1.12,
+                  letterSpacing: '-0.02em',
+                  color: leadOn ? '#b3261e' : '#141210',
                 }}
               >
                 {lead.label}
               </span>
-              <Numeral n={lead.count ? counts[lead.count] : null} size="30px" />
+              <Numeral n={countOf(lead)} size="34px" />
             </span>
             {lead.note && (
               <span
-                className="mt-1.5 block text-[12.5px] leading-[1.5] text-[#6b5f4f]"
-                style={{ fontFamily: 'var(--font-reading)' }}
+                className="mt-2 block text-[13.5px] leading-[1.5] text-[#5c5145]"
+                style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
               >
                 {lead.note}
               </span>
@@ -104,9 +126,9 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
         </button>
       </div>
 
-      {/* ── THE OTHER DOORS — bare engravings, nothing drawn round them ───────── */}
+      {/* ── THE OTHER DOORS — engravings ruled off like a contents page ───────── */}
       {rest.length > 0 && (
-        <div className="mt-5 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-[#141210]/20 pt-5">
+        <div className="mt-5 border-t border-[#141210]/20">
           {rest.map((t) => {
             const Mark = t.Mark;
             const on = active === t.key;
@@ -115,32 +137,34 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
                 key={t.key}
                 type="button"
                 onClick={() => onGo(t.key)}
-                className="flex items-start gap-2.5 text-left"
+                aria-current={on ? 'true' : undefined}
+                className="-mx-2 flex w-full items-center gap-3.5 border-b border-[#141210]/12 px-2 py-3.5 text-left transition-colors active:bg-[#141210]/5"
               >
-                <span
-                  className="shrink-0"
-                  style={{ color: on ? '#b3261e' : '#141210' }}
-                >
-                  <Mark size={34} />
+                <span className="shrink-0" style={{ color: on ? '#b3261e' : '#141210' }}>
+                  <Mark size={44} />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span
-                    className="block text-[14px]"
+                    className="block"
                     style={{
                       fontFamily: 'var(--font-reading)',
+                      fontSize: '18px',
                       fontWeight: 600,
-                      lineHeight: 1.25,
+                      lineHeight: 1.2,
+                      letterSpacing: '-0.01em',
                       color: on ? '#b3261e' : '#141210',
                     }}
                   >
                     {t.label}
                   </span>
-                  {typeof (t.count ? counts[t.count] : null) === 'number' && counts[t.count] > 0 && (
-                    <span className="mt-0.5 block">
-                      <Numeral n={counts[t.count]} size="16px" />
-                    </span>
-                  )}
+                  <span
+                    className="mt-1 block text-[12.5px] leading-[1.45] text-[#6b5f4f]"
+                    style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
+                  >
+                    {t.note}
+                  </span>
                 </span>
+                <Numeral n={countOf(t)} size="22px" />
               </button>
             );
           })}
@@ -148,16 +172,16 @@ export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, o
       )}
 
       {/* ── TO READ, WHICH CHANGES NOTHING ───────────────────────────────────── */}
-      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#141210]/20 pt-3.5">
+      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-[#141210]/20 pt-3.5">
         {RECORD.map((r) => {
           const Mark = r.Mark;
           return (
             <Link
               key={r.to}
               to={r.to}
-              className="flex items-center gap-1.5 text-[#6b5f4f] transition-colors active:text-[#b3261e]"
+              className="-my-2 flex items-center gap-1.5 py-2 text-[#6b5f4f] transition-colors active:text-[#b3261e]"
             >
-              <Mark size={17} />
+              <Mark size={18} />
               <span className="text-[12.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
                 {r.label}
               </span>

@@ -4,33 +4,41 @@ import React from 'react';
 // Drawn here as strokes rather than borrowed from an icon set, because a stock set says
 // "dashboard" and this room is not a dashboard.
 //
-// They were hairlines, and a hairline at 46px on a phone is a smudge you have to squint
-// at. A door you have to squint at is a door you do not want to open — so the weight has
-// gone up, and each mark now carries one solid form rather than being all outline: the
-// filled bow of the key, the filled pupil of the eye, the filled keyhole in the gate.
-// That solid is what makes the thing an object instead of a diagram, and it is the only
-// difference between a mark you read and a mark you want to press.
+// Every mark is drawn for the job behind the door, and for nothing else:
+//   the stamp   — a yes pressed onto the page, which is the only thing a keeper does here
+//   the eye     — a pair of eyes opening a source, which is the whole of checking
+//   the doorway — who may come in; a keyhole, because that door is answered with a key
+//   the ledger  — what the record holds, counted
+//   the root    — where a claim came from, and where that came from
+//   the lens, the seal, the mast — finding a thing again, a fingerprint anyone can check,
+//   and something said from far off and heard here
 //
-// One weight, one colour (currentColor), no second colour, no shadow. They still sit in
-// the type the way an engraving sits in a page.
+// They were hairlines once, and a hairline at forty pixels on a phone is a smudge you have
+// to squint at. A door you squint at is a door you do not want to open, so the weight has
+// gone up and each mark carries one solid mass — the inked stamp, the pupil, the keyhole,
+// the spine of the book. That solid is the difference between a diagram and an object.
+//
+// One weight, one colour (currentColor), no second colour, no shadow. They sit in the type
+// the way an engraving sits in a page — so they read at 18px and carry at 76px.
 const BASE = {
   viewBox: '0 0 40 40',
   fill: 'none',
   stroke: 'currentColor',
-  strokeWidth: 2.1,
+  strokeWidth: 2.4,
   strokeLinecap: 'round',
   strokeLinejoin: 'round',
 };
 
-// The yes. A heavy old key: solid bow, cut shaft, two teeth.
-export function MarkKey({ size = 46, className = '' }) {
+// The yes. A stamp coming down on the page: handled, inked, and already leaving its line.
+export function MarkStamp({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="20" cy="10.5" r="6.4" />
-      <circle cx="20" cy="10.5" r="2.5" fill="currentColor" stroke="none" />
-      <path d="M20 17.2v16.3" />
-      <path d="M20 26.6h6.4" />
-      <path d="M20 31.8h4.2" />
+      <path d="M15.4 4.8h9.2a1.6 1.6 0 0 1 1.6 1.6v3.4h-12.4V6.4a1.6 1.6 0 0 1 1.6-1.6Z" />
+      <path d="M20 9.8v3.6" />
+      <path d="M8.8 13.4h22.4a1.4 1.4 0 0 1 1.4 1.4v6.4H7.4v-6.4a1.4 1.4 0 0 1 1.4-1.4Z" fill="currentColor" stroke="none" />
+      <path d="M5.6 24.2h28.8" />
+      <path d="M11.6 30.4h16.8" />
+      <path d="M15.2 35.4h9.6" />
     </svg>
   );
 }
@@ -39,25 +47,12 @@ export function MarkKey({ size = 46, className = '' }) {
 export function MarkEye({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M4.6 19.6c6.2-8.2 24.6-8.2 30.8 0-6.2 8.2-24.6 8.2-30.8 0Z" />
-      <circle cx="20" cy="19.6" r="4.9" />
-      <circle cx="20" cy="19.6" r="2.1" fill="currentColor" stroke="none" />
-      <path d="M20 3.6v3.2" />
-      <path d="M7.6 7l2.2 2.6" />
-      <path d="M32.4 7l-2.2 2.6" />
-    </svg>
-  );
-}
-
-// What the record holds. An open ledger, ruled, with entries already written.
-export function MarkLedger({ size = 46, className = '' }) {
-  return (
-    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M20 12.8c-4.4-2.8-9.6-3.2-14-2.5V31.4c4.4-.7 9.6-.3 14 2.5 4.4-2.8 9.6-3.2 14-2.5V10.3c-4.4-.7-9.6-.3-14 2.5Z" />
-      <path d="M20 12.8v21.1" />
-      <path d="M10.6 16.4h5.2M10.6 21h5.2M10.6 25.6h3.6" />
-      <path d="M24.2 16.4h5.2M24.2 21h5.2M26 25.6h3.4" />
-      <path d="M20 6.2v3.4" />
+      <path d="M3.8 20.4c6.6-8.8 25.8-8.8 32.4 0-6.6 8.8-25.8 8.8-32.4 0Z" />
+      <circle cx="20" cy="20.4" r="5.2" />
+      <circle cx="20" cy="20.4" r="2.3" fill="currentColor" stroke="none" />
+      <path d="M20 4.4v3.4" />
+      <path d="M7.4 8.2l2.4 2.8" />
+      <path d="M32.6 8.2l-2.4 2.8" />
     </svg>
   );
 }
@@ -66,10 +61,23 @@ export function MarkLedger({ size = 46, className = '' }) {
 export function MarkGate({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M9 34V15.6a11 11 0 0 1 22 0V34" />
-      <path d="M5.4 34h29.2" />
-      <circle cx="20" cy="20.4" r="2.4" fill="currentColor" stroke="none" />
-      <path d="M20 22.6v4.6" />
+      <path d="M8.4 33.8V15.4a11.6 11.6 0 0 1 23.2 0v18.4" />
+      <path d="M4.4 33.8h31.2" />
+      <circle cx="20" cy="19.6" r="2.6" fill="currentColor" stroke="none" />
+      <path d="M20 22v5" />
+    </svg>
+  );
+}
+
+// What the record holds. An open ledger, ruled, with entries already written.
+export function MarkLedger({ size = 46, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M20 12.6c-4.6-2.9-10-3.3-14.6-2.6v21.6c4.6-.7 10-.3 14.6 2.6 4.6-2.9 10-3.3 14.6-2.6V10c-4.6-.7-10-.3-14.6 2.6Z" />
+      <path d="M20 12.6v21.6" />
+      <path d="M10.2 16.4h5.4M10.2 21.2h5.4M10.2 26h3.8" />
+      <path d="M24.4 16.4h5.4M24.4 21.2h5.4M26.2 26h3.6" />
+      <circle cx="20" cy="6.2" r="2" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -78,10 +86,10 @@ export function MarkGate({ size = 46, className = '' }) {
 export function MarkSearch({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="17" cy="17" r="9.2" />
-      <path d="M23.7 23.7l9.4 9.4" />
-      <path d="M12.6 17h8.8" />
-      <circle cx="17" cy="17" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="16.6" cy="16.6" r="9.6" />
+      <path d="M23.8 23.8l10 10" />
+      <path d="M11.8 16.6h9.6" />
+      <circle cx="16.6" cy="16.6" r="1.8" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -90,9 +98,9 @@ export function MarkSearch({ size = 46, className = '' }) {
 export function MarkSeal({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="20" cy="16" r="9" />
-      <circle cx="20" cy="16" r="3.2" fill="currentColor" stroke="none" />
-      <path d="M14.2 23.4L10.4 35l9.6-4.3 9.6 4.3-3.8-11.6" />
+      <circle cx="20" cy="15.8" r="9.4" />
+      <circle cx="20" cy="15.8" r="3.6" fill="currentColor" stroke="none" />
+      <path d="M13.6 23.6L9.4 35.4l10.6-4.6 10.6 4.6-4.2-11.8" />
     </svg>
   );
 }
@@ -101,9 +109,9 @@ export function MarkSeal({ size = 46, className = '' }) {
 export function MarkWire({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="20" cy="27.6" r="2.6" fill="currentColor" stroke="none" />
-      <path d="M13 20.8a9.8 9.8 0 0 1 14 0" />
-      <path d="M7.6 14.4a17 17 0 0 1 24.8 0" />
+      <circle cx="20" cy="27.4" r="2.8" fill="currentColor" stroke="none" />
+      <path d="M12.6 20.4a10.4 10.4 0 0 1 14.8 0" />
+      <path d="M7 13.6a18 18 0 0 1 26 0" />
     </svg>
   );
 }
@@ -113,13 +121,28 @@ export function MarkWire({ size = 46, className = '' }) {
 export function MarkRoot({ size = 46, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="20" cy="7" r="3" fill="currentColor" stroke="none" />
-      <path d="M20 10.4v6.4" />
-      <path d="M20 16.8c-3.6 2.8-7.8 4.2-12.2 4.4" />
-      <path d="M20 16.8c3.6 2.8 7.8 4.2 12.2 4.4" />
-      <path d="M20 16.8v8.8" />
-      <path d="M20 25.6c-2.4 1.8-5 2.8-8 3.4" />
-      <path d="M20 25.6c2.4 1.8 5 2.8 8 3.4" />
+      <circle cx="20" cy="6.6" r="3.2" fill="currentColor" stroke="none" />
+      <path d="M20 10.2v6.6" />
+      <path d="M20 16.8c-3.8 3-8.2 4.4-12.8 4.6" />
+      <path d="M20 16.8c3.8 3 8.2 4.4 12.8 4.6" />
+      <path d="M20 16.8v8.6" />
+      <path d="M20 25.4c-2.6 2-5.4 3-8.6 3.6" />
+      <path d="M20 25.4c2.6 2 5.4 3 8.6 3.6" />
+      <path d="M20 33.8v3" />
+    </svg>
+  );
+}
+
+// The key that used to stand for the yes. Kept, because access to this room is by the
+// record's own list and a key is still what opens it — used on the doors that say so.
+export function MarkKey({ size = 46, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="10.8" r="6.6" />
+      <circle cx="20" cy="10.8" r="2.6" fill="currentColor" stroke="none" />
+      <path d="M20 17.6v16.6" />
+      <path d="M20 26.4h6.6" />
+      <path d="M20 31.8h4.4" />
     </svg>
   );
 }
