@@ -30,8 +30,11 @@ const RECORD = [
   { to: '/ClimateWire', Mark: MarkWire, label: 'The wire' },
 ];
 
-export default function ShedPortal({ counts = {}, isChecker, active, onGo }) {
-  const tiles = isChecker && !counts.decide && !counts.asks
+export default function ShedPortal({ counts = {}, isKeeper, isChecker, active, onGo }) {
+  // A checker is a pair of eyes and nothing else, so their wall carries the one plate their
+  // line opens. A keeper who also checks keeps all five: an empty decision queue is a quiet
+  // day, not a lost key.
+  const tiles = isChecker && !isKeeper
     ? WORK.filter((t) => t.key === 'check')
     : WORK;
 
@@ -48,7 +51,7 @@ export default function ShedPortal({ counts = {}, isChecker, active, onGo }) {
               key={t.key}
               type="button"
               onClick={() => onGo(t.key)}
-              className="relative text-left p-3.5 min-h-[128px] border-b border-r border-[#141210]/20 active:bg-[#141210]/10 transition-colors"
+              className={`relative text-left p-3.5 min-h-[128px] border-b border-r border-[#141210]/20 active:bg-[#141210]/10 transition-colors ${tiles.length === 1 ? 'col-span-2 sm:col-span-3' : ''}`}
               style={on ? { background: 'rgba(20,18,16,0.04)' } : {}}
             >
               {on && <span className="absolute top-0 left-0 right-0 bg-[#b3261e]" style={{ height: '2px' }} />}

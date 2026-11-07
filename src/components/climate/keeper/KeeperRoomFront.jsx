@@ -20,10 +20,12 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
   const [waiting, setWaiting] = useState(null);
   const [toCheck, setToCheck] = useState(null);
   const [asks, setAsks] = useState(null);
+  const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
 
   const load = async () => {
     setFailed(false);
+    setLoaded(false);
     try {
       if (isKeeper) {
         const q = await base44.functions
@@ -45,16 +47,19 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
       }
     } catch (e) {
       setFailed(true);
+    } finally {
+      // A checker has no decision queue, so its count is never a number. Without this the
+      // room would tell a checker "Looking at what wants you…" for as long as it stayed open.
+      setLoaded(true);
     }
   };
 
   useEffect(() => { load(); }, []);
 
-  const known = typeof waiting === 'number';
   const n = waiting ?? 0;
   const checks = typeof toCheck === 'number' ? toCheck : 0;
 
-  const headline = !known
+  const headline = !loaded
     ? 'Looking at what wants you…'
     : n > 0
     ? n === 1
@@ -66,13 +71,17 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
       : `${checks} sources are waiting to be read.`
     : 'Nothing is waiting on you.';
 
-  const under = !known
+  const under = !loaded
     ? 'One second.'
     : n > 0
     ? 'Yes puts it on the record, sealed and signed with your name. Not yet leaves it waiting, untouched.'
     : checks > 0
-    ? 'Open where it is claimed from and say what you find. Your note is signed in your name; nothing is published or changed.'
-    : 'Nothing needs your name today. Everything else is one tap away below.';
+    ? isKeeper
+      ? 'Open where it is claimed from and say what you find. Your note is signed in your name; nothing is published or changed.'
+      : 'Open where each entry is claimed from and say what you find. Your note is signed in your name; nothing here publishes, edits or deletes anything.'
+    : isKeeper
+    ? 'Nothing needs your name today. Everything else is one tap away below.'
+    : 'Nothing needs your eyes today. Every door on the board still opens.';
 
   return (
     <section className="mb-5">
@@ -101,6 +110,7 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
 
       <ShedPortal
         counts={{ decide: waiting, check: toCheck, asks }}
+        isKeeper={isKeeper}
         isChecker={isChecker}
         active={active}
         onGo={onGo}

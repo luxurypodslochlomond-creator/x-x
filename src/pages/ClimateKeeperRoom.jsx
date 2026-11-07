@@ -134,18 +134,16 @@ export default function ClimateKeeperRoom() {
 
       {state === 'ready' && (
         <>
-          {/* The room answers the keeper's first question before it offers anything else:
-              what wants your yes. A checker has no such front — their whole job is the one
-              page below, and it already opens with its own sentence. */}
-          {who.isKeeper && (
-            <KeeperRoomFront
-              name={who.name}
-              isKeeper={who.isKeeper}
-              isChecker={who.isChecker}
-              active={tab}
-              onGo={setTab}
-            />
-          )}
+          {/* One board for everyone the record says yes to. A keeper's board is five plates;
+              a checker's is the one plate their line opens, sitting at full width rather
+              than beside a hole — the same wall, only the doors they may walk through. */}
+          <KeeperRoomFront
+            name={who.name}
+            isKeeper={who.isKeeper}
+            isChecker={who.isChecker}
+            active={tab}
+            onGo={setTab}
+          />
           <div ref={roomRef} className="scroll-mt-3">
             {/* One way round the shed, and it is the board above. This is only the thumb's
                 way back up to it, so nobody is ever stranded in a room looking for a tab
