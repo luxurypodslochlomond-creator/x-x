@@ -205,7 +205,7 @@ export default function NextActionNear() {
                       {a.title}
                     </span>
                     <span className="block text-[12px] text-[#5a5246] mt-1" style={{ fontFamily: 'var(--font-reading)' }}>
-                      {a.date ? <span className="font-semibold text-[#1e3a2b]">{day(a.date)}</span> : <span>Date not given yet</span>}
+                      {a.date ? <span className="font-semibold text-[#1e3a2b]">{day(a.date)}</span> : <span>No fixed date — ask the organiser</span>}
                       {where && <span className="mx-1.5 text-[#141210]/30">·</span>}
                       {where}
                     </span>
