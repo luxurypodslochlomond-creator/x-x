@@ -48,13 +48,13 @@ export default function ShedPortal({ counts = {}, isChecker, active, onGo }) {
               key={t.key}
               type="button"
               onClick={() => onGo(t.key)}
-              className="relative text-left p-3 min-h-[104px] border-b border-r border-[#141210]/20 active:bg-[#141210]/5 transition-colors"
-              style={on ? { background: 'rgba(20,18,16,0.035)' } : {}}
+              className="relative text-left p-3.5 min-h-[128px] border-b border-r border-[#141210]/20 active:bg-[#141210]/10 transition-colors"
+              style={on ? { background: 'rgba(20,18,16,0.04)' } : {}}
             >
               {on && <span className="absolute top-0 left-0 right-0 bg-[#b3261e]" style={{ height: '2px' }} />}
-              <Mark size={30} className={on || hot ? 'text-[#141210]' : 'text-[#6b5f4f]'} />
+              <Mark size={46} className="text-[#141210]" />
               <span
-                className="block mt-2 text-[13.5px] leading-tight text-[#141210]"
+                className="block mt-2.5 text-[14px] leading-tight text-[#141210]"
                 style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}
               >
                 {t.label}
@@ -66,7 +66,7 @@ export default function ShedPortal({ counts = {}, isChecker, active, onGo }) {
                 {t.note}
               </span>
               {hot && (
-                <span className="absolute top-2.5 right-2.5 font-mono text-[11px] font-black text-[#b3261e] leading-none">
+                <span className="absolute top-3 right-3 font-mono text-[14px] font-black text-[#b3261e] leading-none">
                   {n}
                 </span>
               )}
@@ -87,7 +87,7 @@ export default function ShedPortal({ counts = {}, isChecker, active, onGo }) {
               to={r.to}
               className="flex flex-col items-start gap-1.5 p-2.5 min-h-[76px] border-b border-r border-[#141210]/20 active:bg-[#141210]/5 transition-colors"
             >
-              <Mark size={22} className="text-[#6b5f4f]" />
+              <Mark size={26} className="text-[#141210]" />
               <span
                 className="text-[11.5px] leading-tight text-[#141210]"
                 style={{ fontFamily: 'var(--font-reading)' }}
