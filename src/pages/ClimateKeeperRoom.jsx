@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import WorkroomTabs from '@/components/climate/WorkroomTabs';
+import KeeperRoomFront from '@/components/climate/keeper/KeeperRoomFront';
 import DecideQueue from '@/components/climate/DecideQueue';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 import ClimateChecking from '@/pages/ClimateChecking';
@@ -58,8 +59,8 @@ export default function ClimateKeeperRoom() {
   return (
     <ClimateRecordShell
       compact
-      eyebrow="Your desk"
-      marker="Public record · invited desk"
+      eyebrow={who.isKeeper ? "Keeper's shed" : "Your desk"}
+      marker="Public record · invited room"
       title={state !== 'ready' ? 'Your desk' : who.isKeeper ? 'One thing at a time.' : 'Open the source, say what you find.'}
       statement={
         state !== 'ready'
@@ -120,6 +121,17 @@ export default function ClimateKeeperRoom() {
 
       {state === 'ready' && (
         <>
+          {/* The room answers the keeper's first question before it offers anything else:
+              what wants your yes. A checker has no such front — their whole job is the one
+              page below, and it already opens with its own sentence. */}
+          {who.isKeeper && (
+            <KeeperRoomFront
+              name={who.name}
+              isKeeper={who.isKeeper}
+              isChecker={who.isChecker}
+              onGo={setTab}
+            />
+          )}
           {tabs.length > 1 && <WorkroomTabs tabs={tabs} active={tab} onChange={setTab} />}
           {tab === 'decide' && who.isKeeper && <DecideQueue />}
           {tab === 'check' && <ClimateChecking />}
