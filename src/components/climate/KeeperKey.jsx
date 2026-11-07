@@ -54,7 +54,7 @@ export default function KeeperKey({ children }) {
               Keepers only
             </p>
             <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed">
-              This is the record's desk — what is waiting, who is checking, and the count of what is on
+              This is the record's shed — what is waiting, who is checking, and the count of what is on
               the record. It names every person on the list, so it opens to a keeper of this record and
               to nobody else. Your address is not on that list yet.
             </p>
@@ -69,7 +69,7 @@ export default function KeeperKey({ children }) {
               Sign in to the record
             </p>
             <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed">
-              The desk belongs to the record, not to the building. Sign in with the address a keeper
+              The shed belongs to the record, not to the building. Sign in with the address a keeper
               invited, and this page opens where you left it.
             </p>
             <button

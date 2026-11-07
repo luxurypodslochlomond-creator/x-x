@@ -39,7 +39,7 @@ const PLACES = [
   { label: 'Founder', page: 'ClimateFounder', aria: 'Who founded the record, and why' },
 ];
 
-const DESK = { label: 'Desk', page: 'ClimateKeeperRoom', aria: 'Your desk — decide what is waiting, or check a source' };
+const DESK = { label: 'Shed', page: 'ClimateKeeperRoom', aria: 'The shed — decide what is waiting, or check a source' };
 
 function PlaceLink({ item, active, desk }) {
   // The desk is the one door here that is work rather than reading, so it is drawn a shade
