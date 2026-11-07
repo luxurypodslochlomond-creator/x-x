@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { currentUser } from '@/lib/currentUser';
-import { Lock, ArrowRight, KeyRound } from 'lucide-react';
+import { ArrowRight, KeyRound } from 'lucide-react';
 
 // ── THE RECORD'S OWN DOOR ON THE RECORD'S OWN DESK ───────────────────────────────
 //
@@ -13,6 +13,12 @@ import { Lock, ArrowRight, KeyRound } from 'lucide-react';
 // So the question is the record's: a line on its guest list with the keeper flag set. An app
 // admin still opens it (whoever built the record has to be able to test it), and anybody else
 // is told plainly what this is, with one tap back to sign in as themselves.
+//
+// And it is written as a sentence now, not a warning. It was three lines of uppercase mono on
+// a dark plate — a door that made the person standing at it feel accused before they had done
+// anything. Same question, same rule, said in the record's reading voice.
+const reading = { fontFamily: 'var(--font-reading)' };
+
 export default function KeeperKey({ children }) {
   const [state, setState] = useState('checking'); // checking | open | anon | denied
 
@@ -42,43 +48,34 @@ export default function KeeperKey({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f4efe4] twcc-scanlines relative flex items-center justify-center p-6">
-      <div className="relative z-10 max-w-md w-full bg-[#efe7d6] border-2 border-[#1a1612] p-6 text-center">
-        {state === 'denied' ? (
-          <>
-            <Lock className="w-8 h-8 text-[#b3261e] mx-auto mb-3" />
-            <p
-              className="font-black uppercase text-[#1a1612] mb-2"
-              style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.01em' }}
-            >
-              Keepers only
-            </p>
-            <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed">
-              This is the record's shed — what is waiting, who is checking, and the count of what is on
-              the record. It names every person on the list, so it opens to a keeper of this record and
-              to nobody else. Your address is not on that list yet.
-            </p>
-          </>
-        ) : (
-          <>
-            <KeyRound className="w-8 h-8 text-[#b3261e] mx-auto mb-3" />
-            <p
-              className="font-black uppercase text-[#1a1612] mb-2"
-              style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.01em' }}
-            >
-              Sign in to the record
-            </p>
-            <p className="text-[11px] font-mono text-[#6b6258] leading-relaxed">
-              The shed belongs to the record, not to the building. Sign in with the address a keeper
-              invited, and this page opens where you left it.
-            </p>
-            <button
-              onClick={() => base44.auth.redirectToLogin(window.location.href)}
-              className="mt-5 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[48px] bg-[#b3261e] text-[#f4efe4] text-[11px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#1a1612] active:border-[#1a1612] transition-colors"
-            >
-              Sign in <ArrowRight className="w-4 h-4" />
-            </button>
-          </>
+    <div className="min-h-screen bg-[#f4efe4] flex items-center justify-center px-5">
+      <div className="max-w-md w-full border-t border-[#141210]/25 pt-6">
+        <KeyRound className="w-6 h-6 text-[#b3261e] mb-3" />
+        <p className="text-[#1a1612] font-semibold mb-2" style={{ ...reading, fontSize: '21px', lineHeight: 1.35 }}>
+          {state === 'denied' ? 'This room is by invitation' : 'Sign in to the record'}
+        </p>
+        <p className="text-[15px] leading-[1.7] text-[#2b2622] mb-5" style={reading}>
+          {state === 'denied'
+            ? 'What is waiting, who is checking, and how much is on the record — this room names people, so it opens to a keeper of this record. Your address is not on that list yet, and asking is one line: a keeper can add you in a moment.'
+            : 'Shed work belongs to the record, not to the building. Sign in with the address a keeper invited and this page opens where you left it.'}
+        </p>
+        {state === 'anon' && (
+          <button
+            onClick={() => base44.auth.redirectToLogin(window.location.href)}
+            className="w-full inline-flex items-center justify-center gap-2 min-h-[48px] px-4 bg-[#1a1612] text-[#f4efe4] text-[14px] font-semibold active:bg-[#b3261e] transition-colors"
+            style={reading}
+          >
+            Sign in <ArrowRight className="w-4 h-4" />
+          </button>
+        )}
+        {state === 'denied' && (
+          <a
+            href="/ClimateFellows"
+            className="inline-flex items-center gap-2 min-h-[44px] text-[14px] font-semibold text-[#141210] border-b-2 border-[#b3261e]"
+            style={reading}
+          >
+            What checking involves <ArrowRight className="w-4 h-4" />
+          </a>
         )}
       </div>
     </div>

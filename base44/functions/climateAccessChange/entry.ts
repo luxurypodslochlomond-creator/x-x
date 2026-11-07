@@ -77,6 +77,8 @@ async function applyChange(base44, change, who, basis) {
   const basisNote =
     basis === 'solo'
       ? `Only one keeper held the keys, so there was no second key to ask. Asked and done by ${who.name || by}.`
+      : basis === 'owner'
+      ? `The owner's word stood alone: ${who.name || by} holds the building's keys, so no second keeper was asked, and the record says so here.`
       : `Asked by ${change.requested_by_name || change.requested_by}; agreed by ${who.name || by}.`;
 
   if (change.change === 'add') {
@@ -211,6 +213,7 @@ export default async function (req) {
         me,
         name: who.name,
         solo: activeKeepers <= 1,
+        owner: who.user?.role === 'admin',
         keepers: rows.filter((r) => r.is_keeper).map(shapeLine),
         checkers: rows.filter((r) => !r.is_keeper).map(shapeLine),
         waiting,
@@ -274,11 +277,19 @@ export default async function (req) {
         }
       }
 
+      // Two keys — unless there is genuinely only one hand to ask, or the hand belongs to the
+      // person who owns the building. That second exception is stated plainly rather than
+      // hidden: an administrator can already read and write this very table through the
+      // record's own permission rules, so refusing them here would protect nobody. It would
+      // only make the shed harder to use than the back door, which is how a fair rule gets a
+      // reputation for being in the way. So the owner's word stands, and the audit line says
+      // out loud that it stood alone. Keepers still need each other.
       const activeKeepers = rows.filter((r) => r.active && r.is_keeper).length;
-      if (activeKeepers <= 1) {
-        const done = await applyChange(base44, draft, who, 'solo');
+      const owner = who.user?.role === 'admin';
+      if (activeKeepers <= 1 || owner) {
+        const done = await applyChange(base44, draft, who, activeKeepers <= 1 ? 'solo' : 'owner');
         if (!done.ok) return Response.json({ error: done.message }, { status: done.status || 400 });
-        return Response.json({ applied: true, solo: true, message: done.message });
+        return Response.json({ applied: true, solo: activeKeepers <= 1, owner, message: done.message });
       }
 
       // One ask at a time per person and per change, so a desk cannot fill with duplicates of

@@ -23,6 +23,7 @@ export default function GuestList() {
   const [checkers, setCheckers] = useState([]);
   const [waiting, setWaiting] = useState([]);
   const [solo, setSolo] = useState(false);
+  const [owner, setOwner] = useState(false);
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -40,6 +41,7 @@ export default function GuestList() {
     setCheckers(d.checkers || []);
     setWaiting(d.waiting || []);
     setSolo(Boolean(d.solo));
+    setOwner(Boolean(d.owner));
     setLoading(false);
   }, []);
 
@@ -155,6 +157,8 @@ export default function GuestList() {
         <span className="font-semibold">Two keys.</span>{' '}
         {solo
           ? 'You are the only keeper holding the keys today, so for now your word is enough — and the record says so. The moment a second keeper exists, nothing moves without both.'
+          : owner
+          ? 'You hold the building\'s keys, so your own ask lands straight away — and the audit line says plainly that it stood alone. Every other keeper still needs a second name before anything moves.'
           : 'One keeper asks, a different keeper agrees, and only then does anything change. The keeper who asked can never agree to their own request, and the last keeper can never be taken off.'}
       </p>
 
