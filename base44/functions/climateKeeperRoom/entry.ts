@@ -125,6 +125,58 @@ export default async function (req) {
         rows.forEach((r) => waiting.push(shape(k, r)));
       });
       waiting.sort((a, b) => String(a.when).localeCompare(String(b.when)));
+
+      // ── THE NOTES AND WHAT WAS ALREADY SAID ──────────────────────────────────
+      // A keeper used to decide with the entry in front of her and the checking nowhere
+      // near it: the person who opened the source had written their finding on another
+      // page, and the one making the decision had to remember it. So the notes travel with
+      // the entry now — the whole point of a second pair of eyes is that they are beside
+      // the yes.
+      //
+      // And a held entry is still a draft, so it came back into this queue looking exactly
+      // like something new, which is how a keeper ends up re-deciding the same thing twice.
+      // The date of her own hold is carried with it, so the entry says "you held this" and
+      // sorts to the bottom instead of pretending to be new work.
+      const ids = waiting.map((w) => w.id);
+      if (ids.length) {
+        const [notePages, holdPages] = await Promise.allSettled([
+          base44.asServiceRole.entities.ClimateCheck.filter(
+            { entry_id: { $in: ids } },
+            { sort: '-created_date', limit: 200 }
+          ),
+          base44.asServiceRole.entities.ClimateAuditLog.filter(
+            { entity_id: { $in: ids }, action: 'held' },
+            { sort: '-created_date', limit: 200 }
+          ),
+        ]);
+
+        const noteRows =
+          notePages.status === 'fulfilled' ? notePages.value?.items || notePages.value || [] : [];
+        const holdRows =
+          holdPages.status === 'fulfilled' ? holdPages.value?.items || holdPages.value || [] : [];
+
+        const byEntry = new Map();
+        noteRows.forEach((c) => {
+          const list = byEntry.get(c.entry_id) || [];
+          list.push({ verdict: c.verdict || '', name: c.checker_name || '', note: c.note || '' });
+          byEntry.set(c.entry_id, list);
+        });
+
+        const heldAt = new Map();
+        holdRows.forEach((h) => {
+          if (!heldAt.has(h.entity_id)) heldAt.set(h.entity_id, h.created_date || '');
+        });
+
+        waiting.forEach((w) => {
+          w.notes = (byEntry.get(w.id) || []).slice(0, 3);
+          w.held_when = heldAt.get(w.id) || '';
+        });
+
+        // Never held comes first; something she has already said not-yet about waits below
+        // the new work, and is still one tap from being reopened.
+        waiting.sort((a, b) => Boolean(a.held_when) - Boolean(b.held_when));
+      }
+
       return Response.json({ isKeeper: true, name: who.name, waiting });
     }
 

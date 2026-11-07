@@ -33,7 +33,7 @@ const Figure = ({ value, label, tone, note, to }) => {
 const Panel = ({ to, className, children }) =>
   to ? <Link to={to} className={className}>{children}</Link> : <div className={className}>{children}</div>;
 
-export default function AdminClimateDesk() {
+export default function AdminClimateDesk({ plain = false }) {
   const [d, setD] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -95,27 +95,40 @@ export default function AdminClimateDesk() {
   const isAdmin = d?.isAdmin !== false;
 
   return (
-    <div className="pb-16">
-      <div className="max-w-2xl mx-auto px-4 pt-8">
+    <div className={plain ? 'pb-4' : 'pb-16'}>
+      <div className={plain ? '' : 'max-w-2xl mx-auto px-4 pt-8'}>
+        {/* Opened as a room inside the shed, the page's own name and eyebrow would be the
+            room announcing itself inside itself. The count and the figure a keeper can tap
+            are the only things that need to be here. */}
         <div className="flex items-start justify-between gap-3 mb-1">
-          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the shed</p>
-          <button onClick={() => load(true)} className="inline-flex items-center gap-1 text-[9px] font-mono uppercase text-record-muted">
+          {plain ? (
+            <p className="text-[13px] text-[#3a342c]" style={{ fontFamily: 'var(--font-reading)' }}>
+              What the record holds, counted just now.
+            </p>
+          ) : (
+            <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the shed</p>
+          )}
+          <button onClick={() => load(true)} className="inline-flex items-center gap-1 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e]" style={{ fontFamily: 'var(--font-reading)' }}>
             <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} /> count again
           </button>
         </div>
-        <h1 className="font-black text-record-ink text-2xl leading-tight mb-1">The record, at a glance.</h1>
-        <p className="record-meta text-record-muted mb-6">
+        {!plain && <h1 className="font-black text-record-ink text-2xl leading-tight mb-1">The record, at a glance.</h1>}
+        <p className="record-meta text-record-muted mb-5">
           counted {new Date(d.as_of).toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
         </p>
 
         <div className="grid grid-cols-3 gap-2 mb-4">
-          <Figure value={d.waitingTotal} label="waiting" tone="#1a1612" note="held for a person" to={isAdmin ? '/AdminClimateReview' : '/ClimateKeeperRoom'} />
-          <Figure value={d.unchecked} label="unopened" tone="#b3261e" note="no one has checked" to="/ClimateChecking" />
+          {/* Every figure is a way to the room where that number is dealt with — and for a
+              keeper those rooms are the shed's own doors, never a page that answers
+              "Admins only" the moment it opens. */}
+          <Figure value={d.waitingTotal} label="waiting" tone="#1a1612" note="held for a person" to={isAdmin ? '/AdminClimateReview' : '/ClimateKeeperRoom?tab=decide'} />
+          <Figure value={d.unchecked} label="unopened" tone="#b3261e" note="no one has checked" to="/ClimateKeeperRoom?tab=check" />
           <Figure value={d.recentChecks} label="checks / 7d" tone="#1e3a2b" note="last seven days" to={isAdmin ? '/AdminClimateCheckers' : undefined} />
         </div>
 
-        {/* A keeper's way in to the work itself, one tap from the counts. */}
-        {!isAdmin && (
+        {/* A keeper's way in to the work itself, one tap from the counts — dropped when the
+            desk is opened as a room inside the shed, because the doors are already above it. */}
+        {!isAdmin && !plain && (
           <Link to="/ClimateKeeperRoom" className="flex items-center justify-between border-2 border-record-red bg-record-red/5 px-3 py-3 mb-6">
             <span>
               <span className="block text-[10px] font-mono font-black uppercase tracking-[0.15em] text-record-red">your room</span>
@@ -211,7 +224,7 @@ export default function AdminClimateDesk() {
           {[
             // Every tool the record needs, reachable from this one screen. A keeper should
             // never have to remember an address to tend the thing they are responsible for.
-            { to: '/ClimateKeeperRoom', label: 'your room' },
+            ...(plain ? [] : [{ to: '/ClimateKeeperRoom', label: 'your room' }]),
             ...(isAdmin
               ? [
                   { to: '/AdminClimateReview', label: 'review queue' },

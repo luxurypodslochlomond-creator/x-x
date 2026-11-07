@@ -13,6 +13,21 @@ const TONE = {
   Comment: 'bg-[#efe7d6] text-[#141210] border border-[#141210]',
 };
 
+// The three answers a checker can give, in the keeper's words — the same three that were
+// offered to them, so a note reads as something a person said rather than a code.
+const VERDICT = {
+  holds: 'the source says it',
+  does_not_hold: 'it does not',
+  cannot_tell: 'could not tell',
+};
+
+const whenLine = (iso) => {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '';
+  return d.toLocaleString('en-GB', { day: 'numeric', month: 'short' });
+};
+
 export default function DecisionCard({ item, onDecide, busy }) {
   return (
     <article className="border border-[#141210]/25 bg-[#f7f1e5] mb-3">
@@ -55,6 +70,31 @@ export default function DecisionCard({ item, onDecide, busy }) {
         {item.ai ? (
           <p className="mt-2.5 text-[11px] leading-snug text-[#6b5f4f] border-t border-[#141210]/12 pt-2" style={{ fontFamily: 'var(--font-reading)' }}>
             A note, not a decision: {item.ai}
+          </p>
+        ) : null}
+
+        {/* What the pair of eyes actually found, beside the yes it belongs to. Written in
+            their own names, never edited afterwards, and never a decision themselves. */}
+        {item.notes?.length > 0 && (
+          <div className="mt-2.5 border-t border-[#141210]/12 pt-2">
+            <p className="text-[10px] font-mono font-black uppercase tracking-[0.14em] text-[#5a5246] mb-1">
+              {item.notes.length === 1 ? 'what checking found' : `what checking found · ${item.notes.length}`}
+            </p>
+            {item.notes.map((c, i) => (
+              <p key={i} className="text-[12px] leading-[1.5] text-[#3a342c] mt-0.5" style={{ fontFamily: 'var(--font-reading)' }}>
+                <span className="font-semibold text-[#141210]">{VERDICT[c.verdict] || c.verdict}</span>
+                {c.name ? ` · ${c.name}` : ''}
+                {c.note ? ` — ${c.note}` : ''}
+              </p>
+            ))}
+          </div>
+        )}
+
+        {/* Her own earlier answer, carried back with the entry so it does not read as new.
+            Nothing is lost by holding, and nothing is hidden by it either. */}
+        {item.held_when ? (
+          <p className="mt-2 text-[11px] font-mono text-[#6b5f4f] leading-snug">
+            You held this on {whenLine(item.held_when)}. It is still here, untouched.
           </p>
         ) : null}
 

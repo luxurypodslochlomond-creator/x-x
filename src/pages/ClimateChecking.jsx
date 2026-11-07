@@ -16,7 +16,7 @@ const ANSWERS = [
 
 const WORD = { holds: 'source says it', does_not_hold: 'it does not', cannot_tell: 'could not tell' };
 
-export default function ClimateChecking() {
+export default function ClimateChecking({ plain = false, onChange }) {
   const [me, setMe] = useState(null);
   const [entries, setEntries] = useState([]);
   const [checks, setChecks] = useState([]);
@@ -69,6 +69,7 @@ export default function ClimateChecking() {
       setChecks((c) => [{ ...saved, entry_id: entry.id, checker_name: saved.checker_name, note: d.note || '' }, ...c]);
       setEntries((list) => list.filter((x) => x.id !== entry.id));
       setDrafts((p) => { const n = { ...p }; delete n[entry.id]; return n; });
+      onChange?.();
     } catch (e) {
       setError(e?.response?.data?.error || 'That note did not save. Try again.');
     } finally {
@@ -78,8 +79,8 @@ export default function ClimateChecking() {
 
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center bg-record-paper">
-        <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-record-muted">opening the queue</span>
+      <div className={plain ? 'py-8' : 'min-h-[60vh] flex items-center justify-center bg-record-paper'}>
+        <span className="text-[11px] font-mono tracking-[0.25em] uppercase text-record-muted">opening the queue</span>
       </div>
     );
   }
@@ -151,17 +152,25 @@ export default function ClimateChecking() {
   }
 
   return (
-    <div className="min-h-screen bg-record-paper pb-24">
-      <div className="max-w-2xl mx-auto px-4 pt-8">
-        <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-3">checking the record</p>
-        <h1 className="font-black text-record-ink text-2xl leading-tight mb-2">
+    <div className={plain ? '' : 'min-h-screen bg-record-paper pb-24'}>
+      <div className={plain ? '' : 'max-w-2xl mx-auto px-4 pt-8'}>
+        {!plain && (
+          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-3">checking the record</p>
+        )}
+        {/* Inside the shed this is a room, not a page: the headline steps down so the work
+            is the loudest thing on the screen, and the long explanation of what checking is
+            waits until the room is opened on its own. */}
+        <h1
+          className={plain ? 'text-[17px] font-semibold leading-snug text-record-ink mb-1' : 'font-black text-record-ink text-2xl leading-tight mb-2'}
+          style={{ fontFamily: 'var(--font-reading)' }}
+        >
           {me?.name ? `${me.name}, open the source and say what you find.` : 'Open the source and say what you find.'}
         </h1>
-        <p className="text-sm text-record-ink/75 leading-relaxed mb-1">
-          You are not approving anything. Nothing you do here publishes, edits or deletes an entry: you say whether the
-          link opens and whether it says what the entry claims, and a keeper decides with your words in front of them.
+        <p className={plain ? 'text-[13.5px] text-record-ink/75 leading-relaxed mb-1' : 'text-sm text-record-ink/75 leading-relaxed mb-1'} style={{ fontFamily: 'var(--font-reading)' }}>
+          Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the
+          entry claims, and a keeper decides with your words in front of them.
         </p>
-        <p className="text-[11px] font-mono text-record-muted mb-6">
+        <p className="text-[12px] font-mono text-record-muted mb-5">
           {entries.length} {entries.length === 1 ? 'entry is' : 'entries are'} waiting · signed as {me?.name}
         </p>
 

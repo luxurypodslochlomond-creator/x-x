@@ -8,7 +8,7 @@ import NameOnTheRecord from '@/components/climate/NameOnTheRecord';
 // What is waiting for a decision, and nothing else. Saying yes puts the entry on the record
 // and seals it in the same breath; saying not-yet holds it without calling it a rejection.
 // Both carry her name into the audit trail, so "who allowed this" is a row rather than a shrug.
-export default function DecideQueue() {
+export default function DecideQueue({ onChange }) {
   const [state, setState] = useState('checking');
   const [items, setItems] = useState([]);
   const [name, setName] = useState('');
@@ -44,6 +44,9 @@ export default function DecideQueue() {
         decision,
       });
       setItems((prev) => prev.filter((i) => !(i.id === item.id && i.type === item.type)));
+      // The row of doors above this room carries the same numbers. A yes taken here is one
+      // fewer waiting up there, said immediately rather than at the next page load.
+      onChange?.();
       setSaid(
         decision === 'publish'
           ? res.data?.sealed

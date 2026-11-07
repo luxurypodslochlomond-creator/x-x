@@ -1,24 +1,28 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, RefreshCw } from 'lucide-react';
+import { ArrowRight, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
-import KeeperRoomFront from '@/components/climate/keeper/KeeperRoomFront';
+import ShedRail from '@/components/climate/keeper/ShedRail';
 import DecideQueue from '@/components/climate/DecideQueue';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 import ClimateChecking from '@/pages/ClimateChecking';
 import GuestList from '@/components/climate/keeper/GuestList';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 
-// ── THE WORKROOM ─────────────────────────────────────────────────────────────
-// The record had three working pages — a keeper's room, a checking room and a desk — and a
-// person holding both capacities had to remember which address did what. This is one room
-// with four rooms in it: decide, check, the counts, and the score.
+// ── THE SHED ──────────────────────────────────────────────────────────────────
+// One working room, and the work is at the top of it.
 //
-// It opens to whoever the record says yes to, and it shows them only the rooms their own
-// line allows. A keeper may also check: the two are one person with two capacities, and
-// checking your own decisions is not checking, but opening a link is the same work whoever
-// does it.
+// This page has been a corridor three times. First a headline, a paragraph, a button, a
+// folded list of doors and a row of tabs that reached the same doors a second way. Then a
+// board of plates with the room somewhere beneath it. Both were handsome and both made a
+// keeper read the room before she could work in it — and the words meant to explain the
+// room were passed to a shell that only draws them when it is not compact, so they were
+// never on the screen at all.
+//
+// So: who you are and what is waiting — one sentence, one line of counts — then one row of
+// doors, then the work, in the same scroll. Tapping a door swaps what is underneath it
+// without moving the page, so nothing you were looking at jumps away.
 //
 // Nothing here is decided in the browser. Every room is answered by the record's own server
 // against its own guest list, so holding a keeper's line gives the record's keys and none of
@@ -26,8 +30,8 @@ import AdminClimateDesk from '@/pages/AdminClimateDesk';
 export default function ClimateKeeperRoom() {
   const [state, setState] = useState('checking'); // checking | ready | signed_out | paused | not_on_list | error
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
+  const [counts, setCounts] = useState(null);
   const [params, setParams] = useSearchParams();
-  const roomRef = useRef(null);
 
   const load = useCallback(async () => {
     setState('checking');
@@ -49,39 +53,70 @@ export default function ClimateKeeperRoom() {
 
   useEffect(() => { load(); }, [load]);
 
-  // Plain verbs, in the order the work actually happens: what is waiting for a yes, then what
-  // is waiting for a pair of eyes, then the counts. A keeper's first tab is their next job.
-  const tabs = who.isKeeper
-    ? [
-        { key: 'decide', label: 'Yes or not yet' },
-        { key: 'check', label: 'Read & note' },
-        { key: 'people', label: 'Who may come in' },
-        { key: 'desk', label: 'Counts' },
-        { key: 'score', label: 'Sourcing' },
-      ]
-    : [{ key: 'check', label: 'Read & note' }];
-  const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
-  // Choosing a door takes you into the room rather than leaving you at the top of a page to
-  // scroll down: the front and the index are where a choice is made, and the choice opens
-  // under the thumb that made it.
-  const setTab = (key) => {
-    setParams({ tab: key });
-    requestAnimationFrame(() => roomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-  };
+  // The three numbers on the doors, asked once when the room opens and again whenever
+  // something in it changes — so a decision taken in a room is reflected in the row above it
+  // without the keeper having to hunt for a refresh.
+  const count = useCallback(async () => {
+    const [q, r, c] = await Promise.allSettled([
+      who.isKeeper
+        ? base44.functions.invoke('climateKeeperRoom', { action: 'queue' })
+        : Promise.resolve(null),
+      who.isKeeper
+        ? base44.functions.invoke('climateAccessChange', { action: 'roster' })
+        : Promise.resolve(null),
+      who.isChecker ? base44.functions.invoke('checkerQueue', {}) : Promise.resolve(null),
+    ]);
+    setCounts({
+      yes: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : null,
+      asks: r.status === 'fulfilled' ? (r.value?.data?.waiting || []).length : null,
+      read: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : null,
+    });
+  }, [who]);
+
+  useEffect(() => {
+    if (state === 'ready') count();
+  }, [state, count]);
+
+  const rooms = who.isKeeper
+    ? ['decide', 'check', 'people', 'counts', 'sourcing']
+    : ['check'];
+  const tab = rooms.includes(params.get('tab')) ? params.get('tab') : rooms[0];
+  const go = (key) => setParams({ tab: key });
+
+  const n = counts || {};
+  const yes = n.yes || 0;
+  const read = n.read || 0;
+  const asks = n.asks || 0;
+
+  const headline = !counts
+    ? 'Looking at the record…'
+    : yes > 0
+    ? yes === 1
+      ? 'One entry wants your yes.'
+      : `${yes} entries want your yes.`
+    : read > 0
+    ? read === 1
+      ? 'One source is waiting to be read.'
+      : `${read} sources are waiting to be read.`
+    : asks > 0
+    ? 'Someone is asking to come in.'
+    : 'Nothing is waiting on you.';
+
+  // The state of the room in one line, in the same order as the doors below it.
+  const line = [
+    who.isKeeper ? `${yes} to decide` : null,
+    `${read} to read`,
+    who.isKeeper ? (asks ? `${asks} asking to come in` : 'nobody at the door') : null,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
+  const reading = { fontFamily: 'var(--font-reading)' };
 
   return (
     <ClimateRecordShell
       compact
       eyebrow="The shed"
-      marker="Public record · invited room"
-      title={state !== 'ready' ? 'The shed' : who.isKeeper ? 'One thing at a time.' : 'Open the source, say what you find.'}
-      statement={
-        state !== 'ready'
-          ? 'The record is open to everyone. Working on it is by invitation: keepers decide what goes on it; checkers open sources and sign their notes.'
-          : who.isKeeper
-          ? 'Your next job is the first tab. Yes or not yet, one entry at a time — everything else here can wait until it is asked for.'
-          : 'What is waiting to be opened, and where each entry is claimed from. Nothing you do here publishes, edits or deletes anything.'
-      }
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change."
@@ -92,7 +127,7 @@ export default function ClimateKeeperRoom() {
             className="w-5 h-5 rounded-full animate-spin"
             style={{ border: '2px solid rgba(20,18,16,0.15)', borderTopColor: '#b3261e' }}
           />
-          <span className="text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>Looking at the record</span>
+          <span className="text-[12.5px] text-[#6b5f4f]" style={reading}>Looking at the record</span>
         </div>
       )}
 
@@ -134,33 +169,49 @@ export default function ClimateKeeperRoom() {
 
       {state === 'ready' && (
         <>
-          {/* One board for everyone the record says yes to. A keeper's board is five plates;
-              a checker's is the one plate their line opens, sitting at full width rather
-              than beside a hole — the same wall, only the doors they may walk through. */}
-          <KeeperRoomFront
-            name={who.name}
-            isKeeper={who.isKeeper}
-            isChecker={who.isChecker}
-            active={tab}
-            onGo={setTab}
-          />
-          <div ref={roomRef} className="scroll-mt-3">
-            {/* One way round the shed, and it is the board above. This is only the thumb's
-                way back up to it, so nobody is ever stranded in a room looking for a tab
-                that no longer exists. */}
+          <div className="flex items-baseline justify-between gap-3">
+            <p className="text-[12px] text-[#8a7f6d]" style={reading}>
+              {who.name || 'The shed'}
+              {who.isKeeper ? ' · keeper' : ' · checker'}
+            </p>
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="flex items-center gap-1.5 min-h-[38px] mb-1 text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
-              style={{ fontFamily: 'var(--font-reading)' }}
+              onClick={count}
+              className="flex items-center gap-1.5 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
+              style={reading}
             >
-              <ArrowLeft className="w-3.5 h-3.5" /> all the doors
+              <RefreshCw className="w-3 h-3" /> count again
             </button>
-            {tab === 'decide' && who.isKeeper && <DecideQueue />}
-            {tab === 'check' && <ClimateChecking />}
-            {tab === 'people' && who.isKeeper && <GuestList />}
-            {tab === 'desk' && who.isKeeper && <AdminClimateDesk />}
-            {tab === 'score' && who.isKeeper && <DueDiligencePanel />}
           </div>
+
+          <h1
+            className="mt-1 text-[#141210] text-[23px] sm:text-[27px]"
+            style={{ ...reading, fontWeight: 600, lineHeight: 1.16, letterSpacing: '-0.015em', textWrap: 'pretty' }}
+          >
+            {headline}
+          </h1>
+          <p className="mt-1.5 text-[13px] text-[#3a342c]" style={reading}>{line}</p>
+
+          <ShedRail isKeeper={who.isKeeper} active={tab} counts={counts || {}} onGo={go} />
+
+          <div className="pt-5">
+            {tab === 'decide' && who.isKeeper && <DecideQueue onChange={count} />}
+            {tab === 'check' && <ClimateChecking plain onChange={count} />}
+            {tab === 'people' && who.isKeeper && <GuestList />}
+            {tab === 'counts' && who.isKeeper && <AdminClimateDesk plain />}
+            {tab === 'sourcing' && who.isKeeper && <DueDiligencePanel />}
+          </div>
+
+          {/* The room says out loud that the sorting is a conversation rather than an exam:
+              one person keeps this record, and a keeper doing it alone at eleven at night is
+              how a record gets abandoned. One line, never a chat window — the rules of the
+              record stay the only voice that decides anything here. */}
+          <p
+            className="mt-6 border-l-2 border-[#b3261e] pl-3 text-[13px] italic leading-[1.55] text-[#2b2622]"
+            style={reading}
+          >
+            I&apos;m here with you. Open a door and we&apos;ll go through it line by line — I&apos;ll
+            bring the source up beside you, you say the yes.
+          </p>
         </>
       )}
     </ClimateRecordShell>
