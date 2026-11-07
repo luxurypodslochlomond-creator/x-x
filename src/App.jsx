@@ -156,6 +156,7 @@ const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
 const ClimateKeeperRoomPage = React.lazy(() => import('./pages/ClimateKeeperRoom'));
+const ClimateLetterToJaninePage = React.lazy(() => import('./pages/ClimateLetterToJanine'));
 
 
 
@@ -341,6 +342,9 @@ const AuthenticatedApp = () => {
           the server, so she holds the record's keys and none of the building's. */}
       <Route path="/ClimateKeeperRoom" element={<ClimateLayout currentPage="ClimateKeeperRoom"><ClimateKeeperRoomPage /></ClimateLayout>} />
       <Route path="/ClimateFellows" element={<ClimateLayout currentPage="ClimateFellows"><ClimateFellowsPage /></ClimateLayout>} />
+      {/* A letter is one person writing to another, so it is not printed on the brief and
+          not linked from the record. It opens only to a keeper's key. */}
+      <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and
           reached from the page that answers her questions. */}

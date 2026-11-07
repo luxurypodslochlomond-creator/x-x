@@ -65,8 +65,8 @@ export default function ClimateHost() {
         <div className="min-w-0">
           <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">When it goes to a host</p>
           <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] mt-1">
-            The brief written for their eyes, with the figures counted from the record and a letter for you to
-            sign.
+            The brief written for their eyes, with the figures counted from the record. The letter is kept
+            private, behind your own key.
           </p>
         </div>
         <Link

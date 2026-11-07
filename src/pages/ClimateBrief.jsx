@@ -4,13 +4,13 @@ import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { ArrowRight, Globe, Shield, Check } from 'lucide-react';
 import RecordToday from '@/components/climate/brief/RecordToday';
-import YaleLetter from '@/components/climate/host/YaleLetter';
 
 // ── A BRIEF FOR JANINE M. H. SELENDY & HORIZON INTERNATIONAL ─────────────────
 // The order of this page is the order she asked for, and it is the order a stranger reads
 // in: what this is and why it exists, said in sunny weather and in one breath — then where
 // it actually stands tonight and where it is going — then what it would take to carry it
-// into a future longer than any of us — then her own letter, ready to send.
+// for good. The letter itself is not printed here: a letter is one person writing to
+// another, so it lives on its own page, behind a keeper's key.
 //
 // Nothing is removed to make that order. What is live, what is planned, what it will never
 // do, and where every claim can be checked are all still here, standing where they belong
@@ -168,7 +168,7 @@ export default function ClimateBrief() {
               ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. ${stats.categories} of them carry entries today; the rest are supported and ready.`, '/TogetherChangeClimate', 'Filter by category'],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.', '/ClimateMethod', 'How place is held'],
               ['A map of where it is happening', 'Both entry types on a rough-region map, reachable from the record itself — no precise pins, and a read is counted by country alone, never by person.', '/ClimateMap', 'Open the map'],
-              ['Screened as it arrives, never queued', 'Every entry carries a status field (draft / reviewed / published). An AI advisory note screens each submission — clear entries go on the record at once, anything flagged waits for a human check.', '/ClimateMethod', 'How screening works'],
+              ['Screened as it arrives — by a machine, and it says so', 'Every entry carries a status field (draft / reviewed / published). A machine reads each submission as it arrives: clear entries go on the record at once, anything it flags waits for a person. A machine can hold an entry back. It can never make one trusted — that takes a person reading the source and signing their name, and there are not enough of those yet.', '/ClimateMethod', 'How screening works'],
               ['Copyright-free images only', 'Where a picture is shown it comes from a copyright-free pool and carries its credit on the entry. A credit is a thank you, not a permission — so an entry with no cleared picture shows none, rather than borrowing one from somebody else\u2019s page.', '/ClimateMethod', 'Picture rules'],
               ['Source name + source URL', 'Every entry links to its original source — Horizon Solutions Site, peer-reviewed articles, verified reporting.', '/ClimateMethod', 'What a source has to be'],
               ['Scale field', 'Individual, community, city, country, global — your spec, implemented.', '/TogetherChangeClimate', 'See it on an entry'],
@@ -222,14 +222,15 @@ export default function ClimateBrief() {
           <div className="text-[9px] font-black font-mono uppercase tracking-[0.24em] text-[#b3261e] mb-3">03 · What it takes to carry it into the future</div>
           <p className="text-[14px] leading-[1.7] text-[#1a1612]" style={{ fontFamily: 'var(--font-reading)' }}>
             The machinery is built. What it cannot manufacture is people. So this is the whole ask, in the order that
-            matters — and none of it is a fee for software:
+            matters — and none of it is a fee for software. Nor is it an ask for ten years, or a hundred: a record is
+            either kept for good or it is a project, and this one is built to be kept for good.
           </p>
 
           <div className="border-2 border-[#1a1612] divide-y divide-[#1a1612]/15 mt-4">
             {[
               ['01', 'People who check', 'A checker reads an entry, follows its source, and signs their name to what they found. There are none yet. This is the only item here that cannot be built, bought or automated — a checker corps with one named lead, students perhaps, in a department that already teaches this.'],
               ['02', 'One reader with standing', 'Someone who reads the method and says in public whether it holds. Not an endorsement of the contents: a verdict on the method. If it fails, that verdict gets published too.'],
-              ['03', 'Somebody to carry it', 'The hosting, which is modest — one thousand pounds a year at this size, ten thousand for a decade — the technology that will need building and maintaining, and a fair living for the two people in Scotland who build it, so that tending this is the work rather than something done after it.'],
+              ['03', 'Somebody to carry it', 'The hosting, which is modest — one thousand pounds a year at this size, and the same again every year after it with no end date — the technology that will need building and maintaining, and a fair living for the two people in Scotland who keep it, so that tending this is the work rather than something done after it.'],
             ].map(([n, title, body]) => (
               <div key={n} className="px-4 py-4 bg-[#efe7d6]">
                 <div className="flex items-baseline gap-2">
@@ -268,7 +269,7 @@ export default function ClimateBrief() {
               ['/ClimateCorrections', 'Corrections, in the open', 'Everything that has been changed, with its date and its reason. Nothing is fixed quietly.'],
               ['/ClimateHandover', 'The Handover', 'What it costs to keep alive, what is still missing, and who holds the keys today.'],
               ['/ClimateGuide', 'The Buttons', 'Every control on the record, and exactly what it does.'],
-              ['/ClimateYaleBrief', 'The one-page summary', 'The figures, the gaps and the ask on a single page, written to be handed over or read straight into a letter of her own.'],
+              ['/ClimateYaleBrief', 'The one-page summary', 'The figures, the gaps and the ask on a single page, for whoever carries it next.'],
             ].map(([to, title, body]) => (
               <Link key={to} to={to} className="flex items-start gap-3 bg-[#efe7d6] px-4 py-3 active:bg-[#e2602a]/15">
                 <ArrowRight className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#b3261e]" />
@@ -284,34 +285,15 @@ export default function ClimateBrief() {
           </p>
         </section>
 
-        {/* ── 04 · THE LETTER ── */}
-        <section className="mb-10">
-          <div className="text-[9px] font-black font-mono uppercase tracking-[0.24em] text-[#b3261e] mb-3">04 · Her letter, ready to send</div>
-          <p className="text-[14px] leading-[1.7] text-[#1a1612] mb-4" style={{ fontFamily: 'var(--font-reading)' }}>
-            Written in the shape a university expects — a date, a named recipient, what is being asked in one breath, then
-            the ask, the enclosures and the signature — and then, in the middle of it, the part that is not a form at all:
-            what it takes for a record to outlast the people who made it. Only three things in it are blank, and all three
-            are hers: the date, the recipient's name and department, and anything of her own work she wants to add.
-          </p>
-          <YaleLetter />
-          <div className="flex flex-wrap gap-2 mt-4">
-            <Link to={createPageUrl('ClimateYaleBrief')} className="px-3 py-2 border-2 border-[#1a1612] text-[10px] font-black font-mono uppercase tracking-wide text-[#1a1612] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">
-              The one-page summary
-            </Link>
-            <Link to={createPageUrl('ClimateHost')} className="px-3 py-2 border-2 border-[#1a1612] text-[10px] font-black font-mono uppercase tracking-wide text-[#1a1612] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors">
-              Her five questions, answered
-            </Link>
-          </div>
-        </section>
-
         {/* ── THE FOOTING ── */}
         <section className="mb-8">
           <div className="border-t-2 border-[#1a1612] pt-6">
             <p className="text-[15px] leading-[1.7] text-[#1a1612]" style={{ fontFamily: 'var(--font-reading)' }}>
               Forty years she has carried this, and nothing here would exist without them. So the record is hers in the only
               way that lasts: it does not need her to be alive to defend it, it does not need our permission to be read,
-              and it cannot be bought out from under the people it was built for. Whoever is holding it in a hundred years
-              will be able to check it the same way you can check it tonight.
+              and it cannot be bought out from under the people it was built for. Whoever is holding it in a century — or in
+              a thousand years, if there are still people here to hold it — will be able to check it the same way you can
+              check it tonight.
             </p>
             <p className="text-[11px] font-mono text-[#6b6258] mt-4 leading-relaxed">
               Built in honour of Janine M. H. Selendy and Horizon International. Released to the world, the planet, all of

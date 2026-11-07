@@ -163,13 +163,13 @@ export default function ClimateYaleBrief() {
         >
           Her five questions, answered
         </Link>
-        {/* The letter stands on two pages on purpose: here, and in the brief she would
-            actually hand over. Whichever door she opens, the letter is behind it. */}
+        {/* The letter is no longer printed on this page or on the brief: a letter belongs
+            to the person who signs it, so it sits behind the record's own key. */}
         <Link
           to={createPageUrl('ClimateBrief')}
           className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors"
         >
-          The brief, with the letter
+          The brief
         </Link>
       </div>
 
