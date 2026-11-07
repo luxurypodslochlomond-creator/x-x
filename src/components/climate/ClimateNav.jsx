@@ -22,13 +22,21 @@ import { useRecordCapacity } from '@/components/climate/useKeeper';
 // read as a website's menu rather than as a book's own way through. They are not places to
 // read: Music is where you listen, Studio is where you make — both are rooms you step into
 // after the record has been read, and both carry their own quiet place in the foot of every
-// page, with the whole of the record behind them. What is left is the reading itself: four
+// page, with the whole of the record behind them. What is left is the reading itself: five
 // doors, one word each, and one control.
+// Founder is the fifth door, and it is here rather than only at the foot for one reason:
+// the first question a stranger asks of a record that says it can be trusted — a funder, a
+// reviewer, a journalist, a sceptic — is who is behind it. A record that answers that only
+// in its own footer is hiding its accountability at the exact moment somebody looks for it.
+// The foot still carries it, because the foot is the complete index of what the record is
+// and a reviewer scans it; the bar carries it because nobody should have to scroll to the
+// bottom of a book to find out whose name is on it.
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
+  { label: 'Founder', page: 'ClimateFounder', aria: 'Who founded the record, and why' },
 ];
 
 const DESK = { label: 'Desk', page: 'ClimateKeeperRoom', aria: 'Your desk — decide what is waiting, or check a source' };
