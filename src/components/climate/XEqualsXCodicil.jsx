@@ -10,6 +10,10 @@ import { Link } from 'react-router-dom';
 // Called the limits, not a codicil: the word "codicil" is what a lawyer calls this, and a
 // reader should not have to ask what a heading means.
 //
+// It was set in tracked capitals with orange numerals and three all-caps labels — five
+// headings shouting at five paragraphs that were only trying to be read. The numerals stay,
+// because they are how a limit is cited. Everything else is now spoken, not announced.
+//
 // It ends unsigned because no person has typed a name into it yet. That is the record's own
 // rule for every entry, and there is no reason this page should be the exception.
 
@@ -43,71 +47,65 @@ const LIMITS = [
 
 export default function XEqualsXCodicil() {
   return (
-    <section aria-labelledby="the-limits" className="py-7">
-      <div className="flex items-baseline justify-between gap-3">
-        <h2
+    <section aria-labelledby="the-limits" className="pt-9">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <div
           id="the-limits"
-          className="font-mono text-[10px] font-black uppercase tracking-[0.3em] text-[#5a5246]"
+          role="heading"
+          aria-level={2}
+          className="text-[#141210]"
+          style={{ fontFamily: 'var(--font-display)', fontSize: '21px', lineHeight: 1.25 }}
         >
           The limits
-        </h2>
-        <p className="font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-[#e2602a]">
-          Read with the mark
-        </p>
+        </div>
+        <p className="font-mono text-[12.5px] text-[#5a5246]">Read with the mark</p>
       </div>
 
-      <p className="mt-3 font-mono text-[11.5px] leading-relaxed text-[#141210]">
+      <p className="mt-3">
         Attached to the covenant above, so that it cannot be quoted without them.
       </p>
 
-      <div className="mt-5">
+      <div className="mt-6">
         {LIMITS.map(({ n, title, text }) => (
-          <div
-            key={n}
-            className="grid grid-cols-[26px_1fr] gap-x-1 border-t border-[#141210]/25 pt-3 pb-4"
-          >
-            <p className="font-mono text-[10.5px] font-black text-[#e2602a]">{n}</p>
+          <div key={n} className="grid grid-cols-[28px_1fr] gap-x-3 border-t border-[#141210]/20 pt-4 pb-5">
+            <p className="font-mono text-[12.5px] text-[#5a5246]">{n}</p>
             <div>
-              <p className="font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-[#141210]">
+              <div
+                className="text-[#141210]"
+                style={{ fontFamily: 'var(--font-display)', fontSize: '17px', lineHeight: 1.3 }}
+              >
                 {title}
-              </p>
-              <p className="mt-1.5 font-mono text-[11px] leading-relaxed text-[#141210]">
-                {text}
-              </p>
+              </div>
+              <p className="mt-1.5">{text}</p>
             </div>
           </div>
         ))}
       </div>
 
-      <dl className="mt-2 border-t-2 border-[#141210] pt-4 space-y-3 font-mono">
+      <dl className="mt-1 border-t border-[#141210]/20 pt-5 space-y-4">
         <div>
-          <dt className="text-[9.5px] font-black uppercase tracking-[0.18em] text-[#5a5246]">
-            Placed on the record
-          </dt>
-          <dd className="text-[11.5px] text-[#141210]">2 November 2026</dd>
+          <dt className="font-mono text-[12.5px] text-[#5a5246]">Placed on the record</dt>
+          <dd className="mt-1">2 November 2026</dd>
         </div>
         <div>
-          <dt className="text-[9.5px] font-black uppercase tracking-[0.18em] text-[#5a5246]">
-            Signed
-          </dt>
-          <dd className="text-[11.5px] text-[#141210]">
-            Not yet. A machine cannot sign, and no person has typed a name here. So this page
-            is unsigned, and says so, rather than leaving a blank line where a person should
-            be.
+          <dt className="font-mono text-[12.5px] text-[#5a5246]">Signed</dt>
+          <dd className="mt-1">
+            Not yet. A machine cannot sign, and no person has typed a name here. So this page is
+            unsigned, and says so, rather than leaving a blank line where a person should be.
           </dd>
         </div>
         <div>
-          <dt className="text-[9.5px] font-black uppercase tracking-[0.18em] text-[#5a5246]">
+          <dt className="font-mono text-[12.5px] text-[#5a5246]">
             To check the rules, correct a line, or take it up
           </dt>
-          <dd className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11.5px]">
-            <Link to="/ClimateMethod" className="underline decoration-[#e2602a] decoration-2 underline-offset-2">
+          <dd className="mt-1.5 flex flex-col gap-1.5">
+            <Link to="/ClimateMethod" className="underline decoration-[#e2602a] underline-offset-2">
               How the record works
             </Link>
-            <Link to="/ClimateCorrections" className="underline decoration-[#e2602a] decoration-2 underline-offset-2">
+            <Link to="/ClimateCorrections" className="underline decoration-[#e2602a] underline-offset-2">
               Corrections, in the open
             </Link>
-            <Link to="/ClimateHandover" className="underline decoration-[#e2602a] decoration-2 underline-offset-2">
+            <Link to="/ClimateHandover" className="underline decoration-[#e2602a] underline-offset-2">
               Who holds the keys
             </Link>
           </dd>

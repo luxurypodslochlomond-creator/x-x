@@ -1,79 +1,68 @@
 import React from 'react';
 
-// The mark — printed, not projected.
+// ── THE MARK ───────────────────────────────────────────────────────────────────
+// This plate used to be a framed box with a two-pixel black border, a hard offset shadow,
+// two all-caps labels in track-spaced capitals at each end, and one more all-caps line at
+// the foot. Every one of those was a shout, and four shouts around one sentence is not a
+// covenant, it is a poster.
 //
-// The mark has its own red and to nothing else on the record: the record's own signal is
-// orange, its warnings are --record-red, and the mark is the line it rests on. It is the red
-// of Laurie Anderson's O Superman sleeve, measured off the artwork (#CC2D2A) — not chosen by
-// taste, and not the cobalt it wore for a while, which read as a different website's colour.
-// It is ink ON PAPER either way: a mark has to be printed in the reader's own language or it
-// reads as an advert.
-// A plate: one colour, one rule, one signal. No engraving, no stone, no poem.
+// So the plate is quiet now, and only three things carry weight: the mark itself, the line
+// that says what it means, and the red. Nothing is framed twice, nothing is capitalised at
+// the reader, and the one accent — the measured red — appears in exactly two places: the
+// mark and the swatch that names where it came from.
+//
+// The mark is set in the record's own cut at regular weight rather than black. It is cut,
+// not bellowed, and at that weight it still holds the centre of the page.
 
 export default function XEqualsXInscription() {
   return (
-    <section aria-labelledby="the-mark" className="pb-7 border-b-2 border-[#141210]">
-      <div className="border-2 border-[#141210] bg-[#f7f1e5] shadow-[5px_5px_0_0_rgba(20,18,16,0.14)]">
-        <div className="flex items-center justify-between gap-2 border-b border-[#141210]/20 px-3.5 py-2">
-          <h2
-            id="the-mark"
-            className="text-[8.5px] font-black font-mono uppercase tracking-[0.28em] text-[#5a5246]"
-          >
-            The mark
-          </h2>
-          <span className="text-[8.5px] font-black font-mono uppercase tracking-[0.2em] text-[#b3261e]">
-            The covenant
+    <section aria-labelledby="the-mark" className="pb-9 border-b border-[#141210]/15">
+      <h2 id="the-mark" className="sr-only">
+        The mark
+      </h2>
+
+      <div className="border border-[#141210]/20 bg-[#f7f1e5] px-5 py-10 text-center">
+        <p
+          className="select-none text-record-mark"
+          style={{
+            fontFamily: 'var(--font-display)',
+            fontWeight: 400,
+            fontSize: 'clamp(52px, 14vw, 78px)',
+            lineHeight: 1,
+            letterSpacing: '-0.02em',
+          }}
+        >
+          x = x
+        </p>
+
+        <div className="mx-auto mt-6 h-[2px] w-9 bg-record-mark" />
+
+        <div
+          className="mt-5 text-[#141210]"
+          style={{ fontFamily: 'var(--font-display)', fontSize: '19px', lineHeight: 1.3 }}
+        >
+          Equal human worth.
+        </div>
+        <p className="mx-auto mt-1.5 max-w-[30ch] font-mono text-[13px] leading-relaxed text-[#5a5246]">
+          A decision, taken on purpose. Not a discovery, and not a slogan.
+        </p>
+
+        {/* Where the red comes from. Kept because a borrowed colour is only worth
+            borrowing if the borrowing is stated — and stated quietly, at the size a
+            footnote is read at, not as a badge. */}
+        <div className="mt-6 flex items-center justify-center gap-2">
+          <span
+            aria-hidden="true"
+            className="h-2.5 w-2.5 border border-[#141210]/40"
+            style={{ background: 'rgb(var(--record-mark))' }}
+          />
+          <span className="font-mono text-[12.5px] leading-relaxed text-[#5a5246]">
+            #CC2D2A, the red of the O Superman sleeve, 1982
           </span>
-        </div>
-
-        <div className="px-4 py-9 text-center">
-          <p
-            className="select-none font-black leading-[0.82] text-record-mark"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(62px, 17vw, 96px)', letterSpacing: '-0.045em' }}
-          >
-            x = x
-          </p>
-
-          <div className="mx-auto mt-6 h-[2px] w-14 bg-record-mark" />
-
-          <p className="mt-5 text-[12.5px] font-black font-mono uppercase tracking-[0.1em] text-[#141210]">
-            Equal human worth.
-          </p>
-          <p className="mx-auto mt-2 max-w-[26ch] text-[11px] font-mono leading-relaxed text-[#5a5246]">
-            A decision, taken on purpose. Not a discovery, and not a slogan.
-          </p>
-
-          {/* ── WHERE THE RED COMES FROM ────────────────────────────────────────────
-              The finest detail on this page is the ink, so it is named rather than
-              assumed. The mark is printed in the red of Laurie Anderson's sleeve for
-              O Superman — the single at the heart of Big Science — measured off the
-              artwork: the mean of the reds that carry that sleeve, #CC2D2A. The album's
-              own cover is monochrome, which is why this says the sleeve and not the
-              cover: a borrowed colour is only worth borrowing if the borrowing is
-              stated. Anyone can sample the sleeve and check this number. */}
-          <div className="mt-5 flex items-center justify-center gap-2">
-            <span
-              aria-hidden="true"
-              className="h-3 w-3 border border-[#141210]"
-              style={{ background: 'rgb(var(--record-mark))' }}
-            />
-            <span className="font-mono text-[8.5px] font-black uppercase tracking-[0.14em] text-[#5a5246]">
-              #CC2D2A · the red of the O Superman sleeve, 1982
-            </span>
-          </div>
-        </div>
-
-        <div className="border-t border-[#141210]/20 px-3.5 py-2">
-          <p className="text-[8.5px] font-mono uppercase tracking-[0.16em] text-[#5a5246]">
-            Applies to every entry · every person · every page
-          </p>
         </div>
       </div>
 
-      <div className="mt-5 space-y-3 font-mono text-[12.5px] leading-relaxed text-[#141210]">
-        {/* The mark is not written inside this sentence: it stands above it, in its own red,
-            and the prose refers to it. Three characters of algebra mid-paragraph read as
-            punctuation, and the one promise the record is held to should never be punctuation. */}
+      <div className="mt-6 space-y-4">
         <p>
           On this record the mark means one thing: every person at the far end of an entry is
           worth the same as the person reading it. Nobody’s emergency is smaller because nobody
@@ -81,15 +70,18 @@ export default function XEqualsXInscription() {
         </p>
         <p>
           Nothing in the world obliges anyone to hold that. We hold it because the alternative
-          is a record where the loudest emergency wins — and that record is no use to the people
+          is a record where the loudest emergency wins, and that record is no use to the people
           who need it.
         </p>
       </div>
 
-      <p className="mt-4 bg-[#f7f1e5] border-2 border-[#141210] border-l-8 border-l-[#e2602a] px-4 py-3 font-mono text-[12px] font-black leading-relaxed text-[#141210]">
-        Equal worth is not equal size. A crisis affecting millions is still a larger crisis, and
-        we count that honestly. What we refuse is the smaller one being treated as though it
-        never happened.
+      {/* The one limit that keeps the sentence honest, said once, in the same voice as
+          everything else on the page. It was a boxed block in black with a thick orange
+          bar down one side; the bar was doing the arguing, not the words. */}
+      <p className="mt-6 border-t border-[#141210]/20 pt-4">
+        Equal worth is not equal size. A crisis affecting millions is still a larger crisis,
+        and we count that honestly. What we refuse is the smaller one being treated as though
+        it never happened.
       </p>
     </section>
   );

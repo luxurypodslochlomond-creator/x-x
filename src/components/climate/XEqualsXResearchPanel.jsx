@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 
 // What this page promises.
 //
@@ -11,6 +10,11 @@ import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 //
 // Kept deliberately plain: six lines, no badges, no jargon, and one signature note at the
 // foot rather than six. A list a reader scrolls past has failed to be read.
+//
+// It used to borrow the record's shared section band, which sets its heading in condensed
+// capitals at twenty-six pixels with a rule running out to the edge. On this page that band
+// was the loudest thing on screen and it announced a section of six short lines. The heading
+// here is the same size as every other heading on the page, in the same hand.
 
 export default function XEqualsXResearchPanel() {
   const [claims, setClaims] = useState(null);
@@ -26,63 +30,64 @@ export default function XEqualsXResearchPanel() {
   }, []);
 
   return (
-    <section aria-labelledby="promises" className="py-7 border-b-2 border-[#141210]">
-      <RecordSectionHeading
-        eyebrow="Kept as records, so they can be corrected"
-        title="What this record promises."
-      />
+    <section aria-labelledby="promises" className="py-9 border-t border-[#141210]/15 border-b border-[#141210]/15">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <div
+          id="promises"
+          role="heading"
+          aria-level={2}
+          className="text-[#141210]"
+          style={{ fontFamily: 'var(--font-display)', fontSize: '21px', lineHeight: 1.25 }}
+        >
+          What this record promises
+        </div>
+        <p className="font-mono text-[12.5px] text-[#5a5246]">Kept as records, so they can be corrected</p>
+      </div>
 
-      <p className="font-mono text-[11.5px] leading-relaxed text-[#141210]">
+      <p className="mt-3">
         Not findings about the world — promises about how the record behaves. Every one of them
         can be tested by using the record for five minutes.
       </p>
 
       {error && (
-        <p className="mt-4 font-mono text-[11.5px] leading-relaxed text-[#b3261e]">
-          This section could not be read just now: {error}
-        </p>
+        <p className="mt-4 text-[#b3261e]">This section could not be read just now: {error}</p>
       )}
 
       {!error && claims === null && (
-        <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#5a5246]">
-          Reading…
-        </p>
+        <p className="mt-4 font-mono text-[12.5px] text-[#5a5246]">Reading…</p>
       )}
 
       {!error && claims !== null && claims.length === 0 && (
-        <p className="mt-4 font-mono text-[11.5px] leading-relaxed text-[#141210]">
-          None are on the record yet. Until they are, this page promises nothing.
-        </p>
+        <p className="mt-4">None are on the record yet. Until they are, this page promises nothing.</p>
       )}
 
-      {claims !== null && claims.length > 0 && (
-        <div className="mt-4">
+      {!error && claims !== null && claims.length > 0 && (
+        <div className="mt-6">
           {claims.map((c, i) => (
-            <div key={c.id} className="grid grid-cols-[26px_1fr] gap-x-1 border-t border-[#141210]/25 pt-3 pb-4">
-              <p className="font-mono text-[10.5px] font-black text-[#e2602a]">
-                {String(i + 1).padStart(2, '0')}
-              </p>
+            <div key={c.id} className="grid grid-cols-[28px_1fr] gap-x-3 border-t border-[#141210]/20 pt-4 pb-5">
+              <p className="font-mono text-[12.5px] text-[#5a5246]">{String(i + 1).padStart(2, '0')}</p>
 
               <div>
-                <p className="font-mono font-black text-[16px] leading-tight tracking-[-0.01em] text-[#141210]">
+                <div
+                  className="text-[#141210]"
+                  style={{ fontFamily: 'var(--font-display)', fontSize: '17px', lineHeight: 1.3 }}
+                >
                   {c.mark}
-                </p>
+                </div>
 
-                <p className="mt-1.5 font-mono text-[11.5px] leading-relaxed text-[#141210]">
-                  {c.plain}
-                </p>
+                <p className="mt-1.5">{c.plain}</p>
 
                 {c.does_not_establish && (
-                  <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-[#5a5246]">
-                    <span className="text-[9px] font-black uppercase tracking-[0.14em]">Does not establish </span>
+                  <p className="mt-2 text-[#5a5246]">
+                    <span className="font-mono text-[12.5px] tracking-[0.06em]">Does not establish. </span>
                     {c.does_not_establish}
                   </p>
                 )}
 
-                {/* Who says so, always. Most of these are the record's own decisions,
-                    and a decision has nothing to click — but a reader is still owed the
-                    line saying whose it is, and whether it is a finding at all. */}
-                <p className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#141210]">
+                {/* Who says so, always. Most of these are the record's own decisions, and a
+                    decision has nothing to click — but a reader is still owed the line saying
+                    whose it is, and whether it is a finding at all. */}
+                <p className="mt-2 font-mono text-[12.5px] leading-relaxed text-[#5a5246]">
                   {c.domain === 'decision' ? 'A decision, not a finding' : (c.domain || null)}
                   {c.domain ? ' · ' : ''}
                   {c.origin_url ? (
@@ -100,26 +105,24 @@ export default function XEqualsXResearchPanel() {
                 </p>
 
                 {c.correction_note && (
-                  <p className="mt-1.5 font-mono text-[9.5px] leading-relaxed text-[#b3261e]">
-                    Correction: {c.correction_note}
-                  </p>
+                  <p className="mt-1.5 text-[#b3261e]">Correction: {c.correction_note}</p>
                 )}
               </div>
             </div>
           ))}
 
-          <p className="mt-1 border-t-2 border-[#141210] pt-3.5 font-mono text-[10.5px] leading-relaxed text-[#5a5246]">
+          <p className="mt-1 border-t border-[#141210]/20 pt-4 text-[#5a5246]">
             None of these is signed yet — a machine cannot sign, and no person has put their name
             here. When one does, it will show. A promise is checked the only way a promise can be:
             open an entry, follow its origin, and see whether the rule held.
           </p>
 
-          <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-[#5a5246]">
+          <p className="mt-4 text-[#5a5246]">
             How an entry is actually made — where it came from, how well it is known, who signed
             it — is the record&apos;s protocol, kept on{' '}
             <Link
               to="/ClimateMethod"
-              className="text-[#141210] underline decoration-[#e2602a] decoration-2 underline-offset-2"
+              className="text-[#141210] underline decoration-[#e2602a] underline-offset-2"
             >
               How the record works
             </Link>
