@@ -73,18 +73,6 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
       : `${checks} sources are waiting to be read.`
     : 'Nothing is waiting on you.';
 
-  const under = !loaded
-    ? 'One second.'
-    : n > 0
-    ? 'Yes puts it on the record, sealed and signed with your name. Not yet leaves it waiting, untouched.'
-    : checks > 0
-    ? isKeeper
-      ? 'Open where it is claimed from and say what you find. Your note is signed in your name; nothing is published or changed.'
-      : 'Open where each entry is claimed from and say what you find. Your note is signed in your name; nothing here publishes, edits or deletes anything.'
-    : isKeeper
-    ? 'Nothing needs your name today. Everything else is one tap away below.'
-    : 'Nothing needs your eyes today. Every door on the board still opens.';
-
   return (
     <section className="mb-6">
       <div className="flex items-baseline justify-between gap-3">
@@ -106,45 +94,37 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onG
           nothing much is happening. Now the count is set enormous in the record's red, the
           sentence it belongs to sits beside it like a caption to a plate, and the whole
           thing reads before anything is tapped. */}
-      <div className="mt-3 flex items-start gap-3">
+      <div className="mt-4 flex items-start gap-3.5">
         {loaded && hotN > 0 && (
           <span
             className="shrink-0 text-[#b3261e]"
             style={{
               fontFamily: 'var(--font-reading)',
-              fontSize: '62px',
+              fontSize: '74px',
               fontWeight: 600,
-              lineHeight: 0.82,
-              letterSpacing: '-0.03em',
-              marginTop: '2px',
+              lineHeight: 0.76,
+              letterSpacing: '-0.04em',
+              marginTop: '6px',
             }}
             aria-hidden="true"
           >
             {hotN}
           </span>
         )}
-        <div className="min-w-0">
-          <h2
-            className="text-[#141210]"
-            style={{
-              fontFamily: 'var(--font-reading)',
-              fontSize: hotN > 0 ? '21px' : '26px',
-              fontWeight: 600,
-              lineHeight: 1.22,
-              letterSpacing: '-0.01em',
-              textWrap: 'pretty',
-              marginTop: hotN > 0 ? '4px' : '0',
-            }}
-          >
-            {headline}
-          </h2>
-          <p
-            className="mt-1.5 text-[13.5px] leading-[1.55] text-[#2b2622]"
-            style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
-          >
-            {under}
-          </p>
-        </div>
+        <h2
+          className="min-w-0 text-[#141210]"
+          style={{
+            fontFamily: 'var(--font-reading)',
+            fontSize: hotN > 0 ? '23px' : '29px',
+            fontWeight: 600,
+            lineHeight: 1.16,
+            letterSpacing: '-0.015em',
+            textWrap: 'pretty',
+            marginTop: hotN > 0 ? '0' : '2px',
+          }}
+        >
+          {headline}
+        </h2>
       </div>
 
       {/* ── SOMEBODY BESIDE YOU ────────────────────────────────────────────────
