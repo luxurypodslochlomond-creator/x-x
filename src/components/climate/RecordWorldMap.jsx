@@ -5,6 +5,7 @@ import { resolveCoords } from './countryCentroids';
 import { nudge } from './worldPlate';
 import WorldPlate from './WorldPlate';
 import PlatePlaceIndex from './PlatePlaceIndex';
+import VerificationBadge from './VerificationBadge';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 
 /* ── THE RECORD, SET WHERE IT HAPPENED ─────────────────────────────────────────────
@@ -33,15 +34,27 @@ export default function RecordWorldMap() {
         const [solutions, actions, news, solutionTotal, actionTotal, newsTotal] = await Promise.all([
           base44.entities.ClimateSolution.filter(
             { status: 'published' },
-            { limit: 200, fields: ['title', 'summary', 'category', 'entry_type', 'country', 'region_rough'] }
+            {
+              limit: 200,
+              fields: ['title', 'summary', 'category', 'entry_type', 'country', 'region_rough',
+                'verification', 'corroborating_source', 'source_name', 'source_url'],
+            }
           ),
           base44.entities.ClimateAction.filter(
             { status: 'published' },
-            { limit: 200, fields: ['title', 'description', 'category', 'action_type', 'country', 'region_rough'] }
+            {
+              limit: 200,
+              fields: ['title', 'description', 'category', 'action_type', 'country', 'region_rough',
+                'verification', 'corroborating_source', 'source_url'],
+            }
           ),
           base44.entities.ClimateNews.filter(
             { status: 'published' },
-            { limit: 200, fields: ['headline', 'what_changed', 'category', 'country', 'where_label'] }
+            {
+              limit: 200,
+              fields: ['headline', 'what_changed', 'category', 'country', 'where_label',
+                'verification', 'corroborating_source', 'source_name', 'source_url'],
+            }
           ).catch(() => ({ items: [] })),
           // The totals are counted separately so the plate can never claim to hold
           // everything: an entry with no place it can honestly be put is not dropped
@@ -55,14 +68,20 @@ export default function RecordWorldMap() {
           ...(solutions.items || []).map((s) => ({
             id: `solution-${s.id}`, entryId: s.id, type: s.entry_type === 'climate_crisis' ? 'crisis' : 'solution',
             title: s.title, summary: s.summary || '', category: s.category, country: s.country, region: s.region_rough,
+            verification: s.verification, corroborating_source: s.corroborating_source,
+            source_name: s.source_name, source_url: s.source_url,
           })),
           ...(actions.items || []).map((a) => ({
             id: `action-${a.id}`, entryId: a.id, type: 'action',
             title: a.title, summary: a.description || '', category: a.category, country: a.country, region: a.region_rough,
+            verification: a.verification, corroborating_source: a.corroborating_source,
+            source_name: a.source_name, source_url: a.source_url,
           })),
           ...((news.items || [])).map((n) => ({
             id: `wire-${n.id}`, entryId: n.id, type: 'wire',
             title: n.headline, summary: n.what_changed || '', category: n.category, country: n.country, region: n.where_label,
+            verification: n.verification, corroborating_source: n.corroborating_source,
+            source_name: n.source_name, source_url: n.source_url,
           })),
         ]);
       } catch {
@@ -109,6 +128,12 @@ export default function RecordWorldMap() {
   // One press opens, a second press on the same thing puts it down — the same act whether
   // it came from a mark on the plate or a name in the index under it.
   const pick = (m) => setPicked((prev) => (prev?.id === m.id ? null : m));
+
+  // Everything standing in the same place as what was pressed. A place with three entries
+  // would otherwise show only the first and hide the other two behind a dot nobody
+  // happens to hit twice, which is the map keeping something back.
+  const here = picked ? marks.filter((m) => (m.country || '') === (picked.country || '')) : [];
+  const placeAt = here.findIndex((m) => m.id === picked?.id);
 
   return (
     <div className="border-2 border-[#141210] bg-[#f7f1e5]">
@@ -162,6 +187,15 @@ export default function RecordWorldMap() {
               {picked.country && (
                 <span className="text-[8px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246]">{picked.country}</span>
               )}
+              {here.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => pick(here[(placeAt + 1) % here.length])}
+                  className="ml-auto text-[9px] font-black font-mono uppercase tracking-[0.1em] text-[#5a5246] underline decoration-dotted underline-offset-2"
+                >
+                  {placeAt + 1}/{here.length} here · next →
+                </button>
+              )}
             </div>
             <p className="text-[14px] font-black leading-snug text-[#141210]">{picked.title}</p>
             {picked.summary && (
@@ -178,6 +212,26 @@ export default function RecordWorldMap() {
                 {picked.summary}
               </p>
             )}
+            {/* A dot that cannot say who says so is a rumour with a coordinate. How well
+                the entry is known, and the origin behind it, are read here before the
+                entry is opened — the same words the entry's own page uses. */}
+            <div className="flex flex-wrap items-center gap-2 mt-2">
+              <VerificationBadge entry={picked} />
+              {picked.source_name && (
+                picked.source_url ? (
+                  <a
+                    href={picked.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[9px] font-mono uppercase tracking-[0.08em] text-[#3a342c] underline decoration-dotted underline-offset-2"
+                  >
+                    {picked.source_name} ↗
+                  </a>
+                ) : (
+                  <span className="text-[9px] font-mono uppercase tracking-[0.08em] text-[#5a5246]">{picked.source_name}</span>
+                )
+              )}
+            </div>
             <div className="flex items-center gap-3 mt-2">
               <Link
                 to={
