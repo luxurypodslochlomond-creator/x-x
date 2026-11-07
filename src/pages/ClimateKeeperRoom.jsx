@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, RefreshCw } from 'lucide-react';
@@ -27,6 +27,7 @@ export default function ClimateKeeperRoom() {
   const [state, setState] = useState('checking'); // checking | ready | signed_out | paused | not_on_list | error
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
   const [params, setParams] = useSearchParams();
+  const roomRef = useRef(null);
 
   const load = useCallback(async () => {
     setState('checking');
@@ -54,7 +55,13 @@ export default function ClimateKeeperRoom() {
     ? [{ key: 'decide', label: 'To decide' }, { key: 'check', label: 'To check' }, { key: 'desk', label: 'Counts' }, { key: 'score', label: 'Sourcing' }]
     : [{ key: 'check', label: 'To check' }];
   const tab = tabs.some(t => t.key === params.get('tab')) ? params.get('tab') : tabs[0].key;
-  const setTab = (key) => setParams({ tab: key });
+  // Choosing a door takes you into the room rather than leaving you at the top of a page to
+  // scroll down: the front and the index are where a choice is made, and the choice opens
+  // under the thumb that made it.
+  const setTab = (key) => {
+    setParams({ tab: key });
+    requestAnimationFrame(() => roomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  };
 
   return (
     <ClimateRecordShell
@@ -133,10 +140,12 @@ export default function ClimateKeeperRoom() {
             />
           )}
           {tabs.length > 1 && <WorkroomTabs tabs={tabs} active={tab} onChange={setTab} />}
-          {tab === 'decide' && who.isKeeper && <DecideQueue />}
-          {tab === 'check' && <ClimateChecking />}
-          {tab === 'desk' && who.isKeeper && <AdminClimateDesk />}
-          {tab === 'score' && who.isKeeper && <DueDiligencePanel />}
+          <div ref={roomRef} className="scroll-mt-3">
+            {tab === 'decide' && who.isKeeper && <DecideQueue />}
+            {tab === 'check' && <ClimateChecking />}
+            {tab === 'desk' && who.isKeeper && <AdminClimateDesk />}
+            {tab === 'score' && who.isKeeper && <DueDiligencePanel />}
+          </div>
         </>
       )}
     </ClimateRecordShell>

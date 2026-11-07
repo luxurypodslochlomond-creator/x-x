@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { ArrowRight, RefreshCw } from 'lucide-react';
-import { MarkKey, MarkEye, MarkLedger, MarkRoot } from './KeeperMarks';
+import { MarkKey } from './KeeperMarks';
+import ShedIndex from './ShedIndex';
 
 // ── WHAT WANTS YOU FIRST ─────────────────────────────────────────────────────────
 // A keeper opens this room and the room answers one question before any other: what
@@ -73,8 +74,7 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
               className="mt-2 text-[12.5px] leading-relaxed text-[#3a342c]"
               style={{ fontFamily: 'var(--font-reading)' }}
             >
-              Yes or not yet, one entry at a time. The record signs your name, seals the words and
-              keeps the line — nothing else in this room is more urgent than that.
+              Yes or not yet, one entry at a time. Nothing else in this room is more urgent.
             </p>
           </div>
         </div>
@@ -90,56 +90,14 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
         </button>
       </div>
 
-      {/* The quieter doors. */}
+      {/* Every other door, in one square: the work, then the record it answers to. */}
       {isKeeper && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 border-t-2 border-[#141210]">
-          {isChecker && (
-            <Door
-              Mark={MarkEye}
-              label="A second look"
-              count={toCheck}
-              note="Open the source, say what you find"
-              onClick={() => onGo('check')}
-            />
-          )}
-          <Door
-            Mark={MarkLedger}
-            label="What the record holds"
-            note="The counts, and who holds the keys"
-            onClick={() => onGo('desk')}
-          />
-          <Door
-            Mark={MarkRoot}
-            label="Where it came from"
-            note="Sourcing, and entries with no origin"
-            onClick={() => onGo('score')}
-          />
-        </div>
+        <ShedIndex waiting={waiting} toCheck={toCheck} isChecker={isChecker} onGo={onGo} />
       )}
 
       <p className="px-4 lg:px-6 py-3 border-t border-[#141210]/20 text-[9.5px] font-mono uppercase tracking-[0.12em] text-[#5a5246] leading-relaxed">
         One decision at a time, in daylight, signed with a name — that is the part that will still be readable in a thousand years.
       </p>
     </section>
-  );
-}
-
-function Door({ Mark, label, count, note, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className="flex items-start gap-3 px-4 py-3.5 text-left min-h-[62px] border-b-2 sm:border-b-0 sm:border-r-2 border-[#141210]/20 last:border-b-0 sm:last:border-r-0 hover:bg-[#141210]/5 active:bg-[#141210]/10 transition-colors"
-    >
-      <Mark size={24} className="text-[#141210] flex-shrink-0 mt-0.5" />
-      <span className="min-w-0">
-        <span className="flex items-baseline gap-2">
-          <span className="text-[9.5px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">{label}</span>
-          {typeof count === 'number' && (
-            <span className="text-[10px] font-black font-mono text-[#b3261e] leading-none">{count}</span>
-          )}
-        </span>
-        <span className="block text-[10px] font-mono text-[#5a5246] leading-snug mt-1">{note}</span>
-      </span>
-    </button>
   );
 }
