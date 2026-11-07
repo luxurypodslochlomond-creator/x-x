@@ -1,5 +1,6 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import RecordEpigraph from '@/components/climate/RecordEpigraph';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXPlate from '@/components/climate/XEqualsXPlate';
@@ -33,6 +34,13 @@ export default function XEqualsX() {
       returnLabel="Back to the record"
       footer="The covenant the climate record is held to. The record is built in honour of Janine M. H. Selendy and Horizon International."
     >
+      {/* Her line opens the page, because the thought this covenant is kept to was said
+          out loud by somebody else first, in 1982, and pretending otherwise would be the
+          first lie on a page about not lying. */}
+      <section className="mb-10">
+        <RecordEpigraph />
+      </section>
+
       <XEqualsXCut />
 
       <XEqualsXInscription />

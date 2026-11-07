@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import RecordEpigraph from '@/components/climate/RecordEpigraph';
 
 // ── THE COVENANT, SAID IN THE RECORD'S OWN VOICE ───────────────────────────────
 // This page used to open as its own small website: its own bands, its own type sizes,
@@ -123,17 +124,13 @@ export default function ExtractionProofCovenant() {
           You cannot stop bad actors from using AI. You can make the good version the easiest one to build, use
           and fund — by leaving the honest path as the shortest one through the code.
         </p>
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.18em] text-[#e2602a] leading-relaxed">
-          This is the time. So this is the record we keep of it.
-        </p>
-        {/* Her lyric used to be printed here as the close, with her name under it. It is not
-            printed any more: a line of somebody's song carrying your argument is a borrow,
-            however neatly it is signed. What stays is the naming, said as naming. */}
-        <p className="text-[10px] font-mono text-[#efe7d6]/50 mt-2 leading-relaxed">
-          Named after a line by Laurie Anderson — <span className="italic">From the Air</span>,{' '}
-          <span className="italic">Big Science</span> (1982). Not an endorsement. See{' '}
+        {/* The close of the argument is her line, marked as hers — quoted, signed, and with the
+            limit on it stated underneath, because the whole page is about saying plainly what
+            something is and what it is not. */}
+        <RecordEpigraph dark compact label="The line this record is named after" />
+        <p className="mt-3 text-[10px] font-mono text-[#efe7d6]/50 leading-relaxed">
           <Link to="/XEqualsX" className="underline decoration-dotted underline-offset-2 hover:text-[#e2602a]">
-            what is owed
+            What is borrowed, and what is owed
           </Link>
           .
         </p>
