@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { Search as SearchIcon } from 'lucide-react';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
 
-// ── THE WAY THROUGH THE RECORD — ONE LINE, SIX DOORS ───────────────────────────
+// ── THE WAY THROUGH THE RECORD — ONE LINE, FOUR DOORS ──────────────────────────
 // This bar had eleven words on it: five places to read, then five quiet words about the
 // record itself, then the workroom. On a phone it wrapped to two rows and still moved the
 // page down as you read it, and a rail of eleven destinations is what makes a thing read as
@@ -18,18 +18,17 @@ import { useRecordCapacity } from '@/components/climate/useKeeper';
 // The single word for the working room is DESK. It was called the workroom, the keeper room,
 // the checking room and the desk in four different places, and a person holding the keys had
 // to learn our vocabulary before they could do a day's work. One room, one word.
-// Studio is the sixth place, and it belongs on this line rather than in a separate menu of its
-// own: it is where a reader makes something out of what they have just read, which makes it a
-// room in the record rather than a product standing beside it. Only the word is quiet — the
-// room behind it is not, and it is not called a children's section, because a thing labelled
-// "for children" is a thing a child puts down.
+// Music and Studio used to stand here too, and they were the two words that made the line
+// read as a website's menu rather than as a book's own way through. They are not places to
+// read: Music is where you listen, Studio is where you make — both are rooms you step into
+// after the record has been read, and both carry their own quiet place in the foot of every
+// page, with the whole of the record behind them. What is left is the reading itself: four
+// doors, one word each, and one control.
 const PLACES = [
   { label: 'Record', page: 'TogetherChangeClimate' },
   { label: 'Wire', page: 'ClimateWire' },
   { label: 'Map', page: 'ClimateMap' },
   { label: 'Impact', page: 'ClimateImpact' },
-  { label: 'Music', page: 'ClimateMusic' },
-  { label: 'Studio', page: 'Studio' },
 ];
 
 const DESK = { label: 'Desk', page: 'ClimateKeeperRoom', aria: 'Your desk — decide what is waiting, or check a source' };
@@ -68,14 +67,15 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
       to={createPageUrl('ClimateSearch')}
       aria-current={searchActive ? 'page' : undefined}
       aria-label="Search the record"
-      /* Search is the one control in this bar, and it now wears the record's own red rather
-         than an outline the same weight as the words beside it. A reader who wants to look
-         something up should not have to read six words first to find the way in. Where you
-         are is still said in the signal orange, so the box cannot look like the current page. */
-      className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-2.5 min-h-[44px] sm:min-h-0 border-2 border-[#b3261e] text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors ${
+      /* Search is the one control in this bar, and it wears the same red as x = x — the mark's
+         own, not the record's warning red. Two reds on one bar read as one red and one mistake,
+         and the record's rule is that a single red carries everything it means by intent: the
+         promise at the foot and the way in at the top are the same ink. Where you are is still
+         said in the signal orange, so the box can never be mistaken for the current page. */
+      className={`flex items-center gap-1.5 border-2 border-record-mark px-3 py-1.5 text-[10px] font-black font-mono uppercase tracking-wider whitespace-nowrap transition-colors sm:min-h-0 sm:px-2.5 min-h-[44px] ${
         searchActive
-          ? 'bg-[#e2602a] text-[#141210]'
-          : 'bg-[#b3261e] text-[#f4efe4] hover:bg-[#e2602a] hover:text-[#141210]'
+          ? 'bg-[#e2602a] border-[#e2602a] text-[#141210]'
+          : 'bg-record-mark text-[#f4efe4] hover:bg-[#e2602a] hover:border-[#e2602a] hover:text-[#141210]'
       }`}
     >
       <SearchIcon className="w-3.5 h-3.5" />
@@ -91,12 +91,20 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
   return (
     <nav
       aria-label="The record"
-      className={`flex items-center gap-x-3 gap-y-1 px-2 py-0.5 ${
-        mobile ? 'flex-wrap justify-center' : 'flex-wrap lg:flex-nowrap lg:justify-end lg:gap-4'
+      className={`flex items-center gap-x-3 gap-y-1 ${
+        mobile ? 'flex-wrap justify-center px-2 py-0.5' : 'flex-wrap lg:flex-nowrap lg:justify-end lg:gap-5'
       }`}
     >
-      {searchBox}
-      <span aria-hidden="true" className="w-px h-4 bg-[#efe7d6]/20" />
+      {/* A handset gets Search first, because a thumb should not have to read four words before
+          it finds the one control. A desktop gets it last, at the end of the line, so the row
+          reads left to right as the record's four ways in and then one thing to press — and so
+          the control stops sitting between the masthead and the first door it belongs after. */}
+      {mobile && (
+        <>
+          {searchBox}
+          <span aria-hidden="true" className="w-px h-4 bg-[#efe7d6]/20" />
+        </>
+      )}
       {PLACES.map((item) => (
         <PlaceLink key={item.page} item={item} active={isActive(item.page)} />
       ))}
@@ -104,6 +112,12 @@ export default function ClimateNav({ currentPage, variant = 'desktop' }) {
         <>
           <span aria-hidden="true" className="w-px h-4 bg-[#efe7d6]/20" />
           <PlaceLink item={DESK} active={isActive(DESK.page)} desk />
+        </>
+      )}
+      {!mobile && (
+        <>
+          <span aria-hidden="true" className="h-4 w-px bg-[#efe7d6]/20" />
+          {searchBox}
         </>
       )}
     </nav>

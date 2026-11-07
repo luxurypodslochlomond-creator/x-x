@@ -57,6 +57,13 @@ const FOOTER_LINKS = [
   { label: 'Checkers', page: 'ClimateFellows' },
   { label: 'Support', page: 'ClimateSupport' },
   { label: 'The Buttons', page: 'ClimateGuide' },
+  // The two rooms, at the foot rather than at the top. Neither is somewhere you go to read:
+  // Music is where you listen, Studio is where you make, and both are things you do once the
+  // record has been read — so they sit at the end of the page rather than in the middle of
+  // the reading line, and the top of every page stops reading like a menu of products.
+  // They are not buried among the legal words either: they stand together, as rooms.
+  { label: 'Music', page: 'ClimateMusic' },
+  { label: 'Studio', page: 'Studio' },
   { label: 'Terms', page: 'ClimateTerms' },
   { label: 'Privacy', page: 'ClimatePrivacy' },
 ];
