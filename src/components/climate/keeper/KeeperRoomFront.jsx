@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { ArrowRight, RefreshCw, ChevronDown } from 'lucide-react';
-import ShedIndex from './ShedIndex';
-import ShedPlate from './ShedPlate';
+import { RefreshCw } from 'lucide-react';
+import ShedPortal from './ShedPortal';
 
-// ── ONE THING, AND THE REST PUT AWAY ────────────────────────────────────────────
-// This room used to open with a headline, a line of explanation, a button, three groups of
-// doors and four more links before the work itself — correct, and too much to hold at once
-// on a phone. A room that explains itself is a room you have to read before you can work in.
+// ── THE FRONT IS A BOARD, NOT A PARAGRAPH ───────────────────────────────────────
+// This room used to open with a headline, a line of explanation, a button for the one
+// job, then a folded-away list of doors, then a row of tabs to reach the same doors a
+// second way. Every one of those was reasonable and together they were a corridor:
+// to get anywhere you had to read the room first.
 //
-// So the front does one thing: it names the single job in front of you, in a sentence, and
-// puts one finger on it. Everything else in the shed still exists and is one tap away under
-// "the rest of the shed", which is open by itself on the quiet days when there is no job to
-// point at — a dead end is worse than a list.
+// So the front says one thing — how much wants you — and then it is a board of marks.
+// A tap lands in the room; the number wanting you sits on the mark itself; the room you
+// are in wears the red line. Nothing is folded away, because a door you cannot see is a
+// door you have to remember.
 //
-// Nothing here decides anything. These are doors, and the work happens in the room behind
-// them, where the name is signed and the seal is taken.
-export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
+// Nothing here decides anything. These are marks on a wall, and the work happens in the
+// room behind them, where the name is signed and the seal is taken.
+export default function KeeperRoomFront({ name, isKeeper, isChecker, active, onGo }) {
   const [waiting, setWaiting] = useState(null);
   const [toCheck, setToCheck] = useState(null);
+  const [asks, setAsks] = useState(null);
   const [failed, setFailed] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const load = async () => {
     setFailed(false);
     try {
       if (isKeeper) {
-        const res = await base44.functions.invoke('climateKeeperRoom', { action: 'queue' });
-        if (res.data?.error) setFailed(true);
-        else setWaiting((res.data?.waiting || []).length);
+        const q = await base44.functions
+          .invoke('climateKeeperRoom', { action: 'queue' })
+          .catch(() => null);
+        if (!q) setFailed(true);
+        else setWaiting((q.data?.waiting || []).length);
+
+        // Somebody asking to be put on the list is the quietest thing in the shed and the
+        // most time-sensitive: a person is waiting at a door. It gets a number of its own.
+        const r = await base44.functions
+          .invoke('climateAccessChange', { action: 'roster' })
+          .catch(() => null);
+        if (r?.data?.waiting) setAsks(r.data.waiting.length);
       }
       if (isChecker) {
         const res = await base44.functions.invoke('checkerQueue', {});
@@ -45,13 +54,6 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
   const n = waiting ?? 0;
   const checks = typeof toCheck === 'number' ? toCheck : 0;
 
-  const job =
-    n > 0
-      ? { go: 'decide', label: 'Take them one at a time', to: 'Yes or not yet' }
-      : checks > 0
-      ? { go: 'check', label: 'Open a source, write a note', to: 'Read & note' }
-      : null;
-
   const headline = !known
     ? 'Looking at what wants you…'
     : n > 0
@@ -66,13 +68,11 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
 
   const under = !known
     ? 'One second.'
-    : job && job.go === 'decide'
+    : n > 0
     ? 'Yes puts it on the record, sealed and signed with your name. Not yet leaves it waiting, untouched.'
-    : job
+    : checks > 0
     ? 'Open where it is claimed from and say what you find. Your note is signed in your name; nothing is published or changed.'
-    : 'The queue is clear. Nothing needs your name today — the rest of the shed is below.';
-
-  const showIndex = open || (!job && known);
+    : 'Nothing needs your name today. Everything else is one tap away below.';
 
   return (
     <section className="mb-5">
@@ -89,46 +89,22 @@ export default function KeeperRoomFront({ name, isKeeper, isChecker, onGo }) {
         </button>
       </div>
 
-      {/* The plate: the room's one picture, and the only red mark on it. */}
-      <div className="border-y border-[#141210]/20 py-4 my-4 flex justify-center">
-        <ShedPlate height={96} className="text-[#141210]" />
-      </div>
-
       <h2
-        className="text-[#1a1612] font-semibold"
-        style={{ fontFamily: 'var(--font-reading)', fontSize: '21px', lineHeight: 1.35, letterSpacing: '0' }}
+        className="mt-2 text-[#1a1612] font-semibold"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: '21px', lineHeight: 1.3, letterSpacing: '0' }}
       >
         {headline}
       </h2>
-      <p className="mt-2 text-[15px] leading-[1.7] text-[#2b2622]" style={{ fontFamily: 'var(--font-reading)' }}>
+      <p className="mt-1.5 mb-4 text-[14px] leading-[1.6] text-[#2b2622]" style={{ fontFamily: 'var(--font-reading)' }}>
         {under}
       </p>
 
-      {job && (
-        <button
-          onClick={() => onGo(job.go)}
-          className="mt-4 inline-flex items-center gap-2 min-h-[44px] text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#b3261e] active:text-[#b3261e] transition-colors"
-        >
-          {job.label}
-          <ArrowRight className="w-4 h-4" />
-        </button>
-      )}
-
-      <button
-        onClick={() => setOpen(!open)}
-        aria-expanded={showIndex ? 'true' : 'false'}
-        className="mt-5 w-full min-h-[44px] flex items-center justify-between gap-2 border-t border-[#141210]/20 pt-3 text-[13px] text-[#6b5f4f] active:text-[#141210] transition-colors"
-        style={{ fontFamily: 'var(--font-reading)' }}
-      >
-        <span>{showIndex ? 'Put the rest of the shed away' : 'The rest of the shed'}</span>
-        <ChevronDown className={`w-4 h-4 transition-transform ${showIndex ? 'rotate-180' : ''}`} />
-      </button>
-
-      {showIndex && (
-        <div className="mt-3">
-          <ShedIndex waiting={waiting} toCheck={toCheck} isChecker={isChecker} onGo={onGo} />
-        </div>
-      )}
+      <ShedPortal
+        counts={{ decide: waiting, check: toCheck, asks }}
+        isChecker={isChecker}
+        active={active}
+        onGo={onGo}
+      />
     </section>
   );
 }

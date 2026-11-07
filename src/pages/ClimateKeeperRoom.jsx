@@ -1,9 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, RefreshCw } from 'lucide-react';
+import { ArrowRight, ArrowLeft, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
-import WorkroomTabs from '@/components/climate/WorkroomTabs';
 import KeeperRoomFront from '@/components/climate/keeper/KeeperRoomFront';
 import DecideQueue from '@/components/climate/DecideQueue';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
@@ -143,11 +142,21 @@ export default function ClimateKeeperRoom() {
               name={who.name}
               isKeeper={who.isKeeper}
               isChecker={who.isChecker}
+              active={tab}
               onGo={setTab}
             />
           )}
-          {tabs.length > 1 && <WorkroomTabs tabs={tabs} active={tab} onChange={setTab} />}
           <div ref={roomRef} className="scroll-mt-3">
+            {/* One way round the shed, and it is the board above. This is only the thumb's
+                way back up to it, so nobody is ever stranded in a room looking for a tab
+                that no longer exists. */}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center gap-1.5 min-h-[38px] mb-1 text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
+              style={{ fontFamily: 'var(--font-reading)' }}
+            >
+              <ArrowLeft className="w-3.5 h-3.5" /> all the doors
+            </button>
             {tab === 'decide' && who.isKeeper && <DecideQueue />}
             {tab === 'check' && <ClimateChecking />}
             {tab === 'people' && who.isKeeper && <GuestList />}

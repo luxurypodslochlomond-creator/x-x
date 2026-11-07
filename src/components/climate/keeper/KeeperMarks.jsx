@@ -54,6 +54,51 @@ export function MarkLedger({ size = 28, className = '' }) {
   );
 }
 
+// Who may come in. A doorway with a keyhole in it: the list, and the one thing it decides.
+export function MarkGate({ size = 28, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M9.5 33.5V16a10.5 10.5 0 0 1 21 0v17.5" />
+      <path d="M6.2 33.5h27.6" />
+      <circle cx="20" cy="21" r="1.9" />
+      <path d="M20 22.9v4.3" />
+    </svg>
+  );
+}
+
+// Finding a thing again. A lens on the page.
+export function MarkSearch({ size = 28, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="17.4" cy="17.4" r="8.6" />
+      <path d="M23.7 23.7l8 8" />
+      <path d="M13.6 17.4h7.6" />
+    </svg>
+  );
+}
+
+// The seal. A stamp on a ribbon: the fingerprint anybody can recompute and nobody can fake.
+export function MarkSeal({ size = 28, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="16.5" r="8.4" />
+      <circle cx="20" cy="16.5" r="3.8" />
+      <path d="M14.6 23.6L11.2 34l8.8-4 8.8 4-3.4-10.4" />
+    </svg>
+  );
+}
+
+// The wire. Something said from far off, heard here.
+export function MarkWire({ size = 28, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="26.5" r="2" />
+      <path d="M13.4 20.4a9.4 9.4 0 0 1 13.2 0" />
+      <path d="M8.4 14.6a16.4 16.4 0 0 1 23.2 0" />
+    </svg>
+  );
+}
+
 // Where it came from. An origin going down into roots: the source, and the sources of
 // the sources, which is the only reason an entry is allowed to exist here.
 export function MarkRoot({ size = 28, className = '' }) {
