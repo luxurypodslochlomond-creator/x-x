@@ -1,6 +1,7 @@
 {
   "name": "HeartbeatPulse",
   "type": "object",
+  "description": "A heartbeat offered to the pulse map \u2014 beats per minute and a rough place, updated as someone sits with it. Anyone may offer one and anyone may see the pulse, because a map of one heartbeat is not a pulse \u2014 but a browser may not empty the map: only a keeper removes a pulse.",
   "properties": {
     "bpm": {
       "type": "number",
@@ -39,5 +40,15 @@
   },
   "required": [
     "bpm"
-  ]
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {},
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

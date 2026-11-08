@@ -1,6 +1,7 @@
 {
   "name": "Transmission",
   "type": "object",
+  "description": "Something said out loud to the network and left here for the wall: a transmission of a kind, how far it is meant to reach, and who answered it. A visitor may broadcast one and anyone may read the wall \u2014 that is what a wall is for \u2014 but a transmission is written once and then belongs to the record, not to whoever typed it: nobody rewrites another person's words and nobody clears the wall from a browser.",
   "properties": {
     "transmission_type": {
       "type": "string",
@@ -66,5 +67,19 @@
   "required": [
     "transmission_type",
     "content"
-  ]
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }

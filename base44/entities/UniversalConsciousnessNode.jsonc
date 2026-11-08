@@ -1,6 +1,7 @@
 {
   "name": "UniversalConsciousnessNode",
   "type": "object",
+  "description": "A node that says it is listening \u2014 what form of consciousness, what it resonates on, and whether it needs help. Anyone may add one and anyone may read the network, because a network nobody can see is not a network \u2014 but the network belongs to the people in it: no browser may take a node off it.",
   "properties": {
     "consciousness_type": {
       "type": "string",
@@ -73,5 +74,15 @@
   },
   "required": [
     "consciousness_type"
-  ]
+  ],
+  "rls": {
+    "read": {},
+    "create": {},
+    "update": {},
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
 }
