@@ -1,58 +1,21 @@
 import React from 'react';
 
-// ── THE MARK ───────────────────────────────────────────────────────────────────
-// Janine read this page and said it was too confusing because we were talking too much.
-// She was right, and it is worth writing down why: the mark was inside a box, at the top
-// of an essay that explained it twice, and the explanation had grown to ninety words
-// saying what the three words above it already said.
-//
-// So the box is gone and most of the prose with it. What is left is the mark, larger than
-// anything else on the page, one line saying what it means, one line saying what it is not,
-// and the one limit that keeps it honest. Everything else this page used to say is still
-// said — in the limits at the foot, kept as records, where it can be checked.
-
 export default function XEqualsXInscription() {
   return (
-    <section aria-labelledby="the-mark" className="pb-8 border-b border-[#141210]/15">
-      <h2 id="the-mark" className="sr-only">
-        The mark
-      </h2>
-
-      <div className="pt-2 pb-6 text-center">
-        <p
-          className="select-none text-record-mark"
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 400,
-            fontSize: 'clamp(84px, 27vw, 236px)',
-            lineHeight: 0.9,
-            letterSpacing: '-0.03em',
-          }}
-        >
-          x = x
-        </p>
-
-        <p
-          className="mt-4 text-[#141210]"
-          style={{ fontFamily: 'var(--font-display)', fontSize: '20px', lineHeight: 1.25 }}
-        >
-          Equal human worth.
-        </p>
-        <p className="mx-auto mt-1 max-w-[26ch] font-mono text-[12.5px] leading-relaxed text-[#5a5246]">
-          A decision, taken on purpose. Not a discovery, not a slogan.
-        </p>
-
-        {/* The colour chip and its hex code came off. A swatch with "#CC2D2A · the O
-            Superman sleeve, 1982" printed under the mark was pointing a stranger at a
-            record sleeve for no reason they could use, and it is the clearest tell that
-            a machine assembled the page: a design element that exists to explain its own
-            provenance rather than to do a job. The red stays exactly as it is. It simply
-            stops announcing its own hex, which is what a colour on a record should do. */}
+    <section aria-labelledby="the-covenant" className="pb-2 pt-6 sm:pt-10">
+      <div className="mb-7 flex items-baseline justify-between gap-4">
+        <span className="font-body text-3xl tracking-tight text-record-mark" aria-label="x equals x">x = x</span>
+        <span className="record-meta text-record-muted">The covenant</span>
       </div>
-
-      <p className="mt-1 border-t border-[#141210]/20 pt-4">
-        Equal worth is not equal size. A crisis of millions is still larger, and we count that
-        honestly. What we refuse is the smaller one being treated as though it never happened.
+      <h1 id="the-covenant" className="font-body text-5xl sm:text-7xl text-record-ink">
+        Nobody above<br />anybody.
+      </h1>
+      <div className="mt-7 max-w-[48ch] space-y-4">
+        <p>Good work happens far from the loudest microphone. So do disasters. This record gives both somewhere to stay.</p>
+        <p>An entry needs a source, not a following. A correction needs to be seen, not quietly written over.</p>
+      </div>
+      <p className="record-meta mt-6 border-l-2 border-record-mark pl-4 text-record-muted">
+        Equal human worth. Not equal evidence, and not equal scale.
       </p>
     </section>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import GuideBand from '@/components/climate/GuideBand';
+import { RECORD_FOOTER_GROUPS } from '@/components/climate/recordFooterLinks';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
@@ -42,57 +43,12 @@ const BUTTONS_CARD = {
 };
 
 const BAR = [
-  {
-    label: 'Search',
-    to: createPageUrl('ClimateSearch'),
-    what: 'Type what you are looking for. It reads the record, and nothing else.',
-  },
-  {
-    label: 'Record',
-    to: createPageUrl('TogetherChangeClimate'),
-    what: 'The front page: solutions that work, the crises that need saying out loud, actions and gatherings.',
-  },
-  {
-    label: 'Wire',
-    to: createPageUrl('ClimateWire'),
-    what: 'Dated, sourced entries: what changed, where, and who says so. A public record, not a feed.',
-  },
-  {
-    label: 'Map',
-    to: createPageUrl('ClimateMap'),
-    what: 'The whole record by place.',
-  },
-  {
-    label: 'Impact',
-    to: createPageUrl('ClimateImpact'),
-    what: 'How many people have read the record, and from which countries. No one is tracked.',
-  },
-  {
-    label: 'Music',
-    icon: FORK,
-    to: createPageUrl('ClimateMusic'),
-    what: 'The music given to the record: Dillon Squire\u2019s track, free to listen, the master whole, nothing to buy. The glyph is the door.',
-  },
-  {
-    label: 'Founder',
-    to: createPageUrl('ClimateFounder'),
-    what: 'Janine M. H. Selendy, and the work the record stands on.',
-  },
-  {
-    label: 'Support',
-    to: createPageUrl('ClimateSupport'),
-    what: 'Keep the record running. A gift, given, not sold.',
-  },
-  {
-    label: 'Method',
-    to: createPageUrl('ClimateMethod'),
-    what: 'How the record is made: what is allowed on it, and what is not.',
-  },
-  {
-    label: 'Corrections',
-    to: createPageUrl('ClimateCorrections'),
-    what: 'When the record is corrected, the correction stays in the open with the date it was made.',
-  },
+  { label: 'Search', to: '/ClimateSearch', what: 'Look up a place or subject in the record.' },
+  { label: 'Record', to: '/TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
+  { label: 'Wire', to: '/ClimateWire', what: 'Dated, sourced accounts of what changed.' },
+  { label: 'Map', to: '/ClimateMap', what: 'Explore the record by place.' },
+  { label: 'Impact', to: '/ClimateImpact', what: 'Readership counts by country and region.' },
+  { label: 'Founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy and the work the record stands on.' },
 ];
 
 const SEND = [
@@ -221,35 +177,14 @@ const KEEPER_DOORS = [
   },
 ];
 
-// The foot of every page. Four doors a reader should never have to hunt for: what this
-// record is, what it keeps, what it admits is not built, and what it costs to carry.
-// This page is the fifth of them, which is why it is not listed inside itself.
+// Use the same destinations and labels as the shared footer.
 const FOOT = [
-  {
-    label: 'Terms',
-    to: createPageUrl('ClimateTerms'),
-    what: 'The ground it stands on: what this record is, and what it is not.',
-  },
-  {
-    label: 'Privacy',
-    to: createPageUrl('ClimatePrivacy'),
-    what: 'What is kept, and what never is. No reader is tracked.',
-  },
-  {
-    label: 'The Brief',
-    to: createPageUrl('ClimateBrief'),
-    what: 'What is live, what is planned, and what is not built.',
-  },
-  {
-    label: 'The Handover',
-    to: createPageUrl('ClimateHandover'),
-    what: 'What changes hands, what it costs, who holds it today, and what is still open.',
-  },
-  {
-    label: 'Checkers',
-    to: createPageUrl('ClimateFellows'),
-    what: 'How to help carry the record: what a checker does, and how to ask to be one.',
-  },
+  ...RECORD_FOOTER_GROUPS.flatMap((group) => group.links.map((item) => ({
+    label: item.label, to: item.to, what: `Under “${group.label}”. ${item.description}`,
+  }))),
+  { label: 'x = x', to: '/XEqualsX', what: 'The covenant: equal human worth, with the promises and their limits.' },
+  { label: 'Terms', to: '/ClimateTerms', what: 'The record’s terms, always visible below the three groups.' },
+  { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, always visible below the three groups.' },
 ];
 
 export default function ClimateGuide() {
@@ -276,7 +211,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The bar at the top of every page"
-        note="These ten ride on every page of the record. Search wears a box and an icon, so it reads as a door; the places you read follow it, and then the glyph for the music given to the record; the last four are the record itself."
+        note="The top bar is for reading: Search, Record, Wire, Map, Impact and Founder. Invited keepers and checkers also see the Shed."
         items={BAR}
       />
 
@@ -311,7 +246,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="Five more sit in the foot of every page, beside this one. A reader should not have to hunt for the record's terms, for what it keeps, for what it admits is not built, for what it costs to carry, or for how to help carry it."
+        note="Three groups replace the long row of links: About this record, Check the record and Take part. Tap a group to reveal its links. The covenant, Terms, Privacy and keeper / checker sign-in remain underneath; the working screens omit the extra sign-in link."
         items={FOOT}
       />
 

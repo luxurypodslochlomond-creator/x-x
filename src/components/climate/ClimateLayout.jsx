@@ -9,10 +9,10 @@ import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
-import KeeperDoor from '@/components/climate/KeeperDoor';
+import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordGrain from '@/components/climate/RecordGrain';
-import RecordCosmos from '@/components/climate/RecordCosmos';
+
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
@@ -26,47 +26,7 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // The way through the record lives in ClimateNav: places to read, and one action —
 // Search — drawn as a control so it can never be lost in a list of words.
 
-// Terms and Privacy are kept off the reading nav — they are legal ground, not the record.
-// They sit in one quiet place, in the footer of every page of the record. The Buttons —
-// the page that lists every button and what it does — sits here too: a host or keeper
-// is handed the link, and finds it again at the foot of any page of the record.
-// The order is the reading order, not an accident. What the record IS comes first — the
-// brief you would hand somebody, and the two pages that say plainly what it costs and how
-// to help carry it — and the legal ground comes last, where a foot of a page is expected to
-// keep it. Terms and Privacy used to lead because the rail could not be swiped on a handset;
-// the foot wraps now, so nothing can be off-screen and the grouping can be honest instead
-// of defensive.
-// Every word that used to crowd the top of every page lives here instead: who founded the
-// record, how it is checked, how it is sealed and how it is corrected. The bar carries where
-// you read; the foot carries what the record is. That is the whole of the simplification.
-const FOOTER_LINKS = [
-  { label: 'The Brief', page: 'ClimateBrief' },
-  { label: 'Founder', page: 'ClimateFounder' },
-  { label: 'Method', page: 'ClimateMethod' },
-  { label: 'Seal', page: 'ClimateSeals' },
-  { label: 'Corrections', page: 'ClimateCorrections' },
-  // The page that says what it costs to keep this alive, what it will not let a host
-  // do, who holds the keys today, and what is still open. It was written and then left
-  // with nothing linking to it — the honesty existed and no reader could reach it.
-  // A record that hides its own gaps behind a typed address is not one. So it sits here,
-  // in the foot of every page, for anyone, not only for a host.
-  { label: 'The Handover', page: 'ClimateHandover' },
-  // The page that says how to help carry the record — what a checker is, and how to ask to
-  // be one. It was written and then left with nothing linking to it, which made it a page
-  // only its author could open. Anyone who wants to help should be able to find the way in.
-  { label: 'Checkers', page: 'ClimateFellows' },
-  { label: 'Support', page: 'ClimateSupport' },
-  { label: 'The Buttons', page: 'ClimateGuide' },
-  // The two rooms, at the foot rather than at the top. Neither is somewhere you go to read:
-  // Music is where you listen, Studio is where you make, and both are things you do once the
-  // record has been read — so they sit at the end of the page rather than in the middle of
-  // the reading line, and the top of every page stops reading like a menu of products.
-  // They are not buried among the legal words either: they stand together, as rooms.
-  { label: 'Music', page: 'ClimateMusic' },
-  { label: 'Studio', page: 'Studio' },
-  { label: 'Terms', page: 'ClimateTerms' },
-  { label: 'Privacy', page: 'ClimatePrivacy' },
-];
+// The footer groups the supporting pages by purpose instead of presenting one flat menu.
 
 // Pages that are already spending the phone's connection on something heavier than a page,
 // so warming ten more in the background would only take the wire away from them.
@@ -250,66 +210,7 @@ export default function ClimateLayout({ children, currentPage }) {
 
       <main ref={readingRef} className="record-pages">{children}</main>
 
-      <footer className="border-t-2 border-[#141210]/15 bg-[#efe7d6]">
-        {/* THE ENDPAPER ──────────────────────────────────────────────────────────────────
-            A strip of the cover closes every page. A book opens on its painting and shuts on a
-            slice of the same picture; that is not decoration, it is the binding telling you it
-            held. This is the last thing a reader sees before the record ends, and it is the
-            same work they met at the door — so a page is a page of one book, not a printout.
-
-            No words sit on it, on purpose. The credit is said once, on the front, where the
-            picture is shown at full strength and can be looked at properly. A credit repeated
-            at the foot of every page would stop being a credit and start being a watermark. */}
-        <div className="relative h-14 sm:h-20 overflow-hidden" aria-hidden="true">
-          <RecordCover position="center 76%" strength={0.95} />
-          <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.22) 0%, rgba(36,29,22,.5) 55%, rgba(36,29,22,.88) 100%)' }} />
-          {/* THE SMALLEST DETAIL ─────────────────────────────────────────────────────────
-              The same sky at the foot of every page: a solar system 28 pixels across, drawn in
-              hairlines. Nobody will see it on the way past, and that is the point — it is there
-              for the reader who stops, and for the one who zooms until the speck becomes a
-              world on its orbit. Geometry, not a picture: nothing new to download, nothing
-              repainting, and it is still drawn at ten thousand per cent. It breathes (four
-              minutes to a revolution, nine seconds to a breath) so the foot of the record is
-              never quite still; anyone who has asked their device for less movement gets it
-              perfectly still. */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <RecordCosmos size={28} className="opacity-80" />
-          </div>
-        </div>
-
-        <div className="px-4 py-4">
-        {/* The foot of the page wraps instead of sliding sideways. It was one scrolling line
-            before, centred and wider than a phone — which clipped whichever links sat at its
-            start, so Terms and Privacy could be off-screen no matter where they were put.
-            Wrapping costs a second line on a handset and loses nothing: every link on the foot
-            of the record is now visible without a gesture, in any tongue. */}
-        <div className="max-w-[1100px] mx-auto">
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
-          {FOOTER_LINKS.map((item) => (
-            <Link
-              key={item.page}
-              to={createPageUrl(item.page)}
-              className="text-[11px] font-mono font-black uppercase tracking-[0.08em] text-[#6b6258] hover:text-[#b3261e] transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
-          {/* The one word on this foot that is not a page: the way back in for a keeper on a
-              device the record does not yet recognise. It sits among the other quiet words,
-              and it never asks anyone to type their address. */}
-          {!WORKING_PAGES.includes(currentPage) && <KeeperDoor />}
-          </div>
-          {/* x = x stands on its own line: not another link in a row, but the line the
-              whole record rests on — the covenant, said once, at the foot of every page. */}
-          <Link
-            to="/XEqualsX"
-            className="mt-2.5 block text-center text-[12px] font-mono font-black tracking-[0.3em] text-record-mark hover:text-[#e2602a] transition-colors"
-          >
-            x = x
-          </Link>
-        </div>
-        </div>
-      </footer>
+      <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} />
       </div>
     </div>
     </SiteLanguageProvider>
