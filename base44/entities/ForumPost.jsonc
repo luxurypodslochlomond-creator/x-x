@@ -1,6 +1,7 @@
 {
   "name": "ForumPost",
   "type": "object",
+  "description": "A discussion started on the community wall. Anyone may read the wall and anyone may start a thread \u2014 that is what a wall is for \u2014 but the addresses that pass through it belong to the people who typed them. The poster's own email and the list of people who said they are coming are kept so the wall can organise the thread and the event, and neither is ever handed to another reader: only an administrator may read them back.",
   "properties": {
     "title": {
       "type": "string",
@@ -33,7 +34,14 @@
     },
     "author_email": {
       "type": "string",
-      "description": "Email of author (for permissions)"
+      "description": "Email of author, kept for permissions. Never handed to another reader: only an administrator may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "is_ai51_post": {
       "type": "boolean",
@@ -78,7 +86,14 @@
       "items": {
         "type": "string"
       },
-      "description": "Emails of people who said they're coming"
+      "description": "Emails of people who said they're coming. It is a list of real addresses, so it is never handed to another reader: only an administrator may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "likes_count": {
       "type": "number",
@@ -107,7 +122,20 @@
   ],
   "rls": {
     "read": {},
-    "write": {
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
       "$or": [
         {
           "created_by": "{{user.email}}"
