@@ -33,14 +33,14 @@ export default function RecordEpigraph({ dark = false, compact = false, label = 
       <div className="h-px w-full" style={{ backgroundColor: rule }} />
 
       <figcaption
-        className="mt-3 text-[10px] font-mono uppercase tracking-[0.22em]"
+        className="mt-3 text-[12px] font-mono uppercase tracking-[0.2em]"
         style={{ color: quiet }}
       >
         {label}
       </figcaption>
 
       <blockquote
-        className={`mt-3 ${compact ? 'text-[16px] lg:text-[17px]' : 'text-[20px] lg:text-[23px]'} leading-[1.4]`}
+        className={`mt-4 ${compact ? 'text-[17px] lg:text-[18px]' : 'text-[24px] lg:text-[31px]'} leading-[1.32]`}
         style={{ fontFamily: 'var(--font-reading)', color: ink, textWrap: 'pretty' }}
       >
         <span style={{ color: red }}>“</span>
@@ -50,17 +50,19 @@ export default function RecordEpigraph({ dark = false, compact = false, label = 
       </blockquote>
 
       <p
-        className="mt-3 text-[10px] font-mono uppercase tracking-[0.16em]"
+        className="mt-4 text-[12px] font-mono uppercase tracking-[0.14em]"
         style={{ color: quiet }}
       >
         Laurie Anderson <span style={{ color: red }}>·</span> From the Air{' '}
         <span style={{ color: red }}>·</span> Big Science, 1982
       </p>
 
-      <p className="mt-3 max-w-[40ch] font-mono text-[11px] leading-relaxed" style={{ color: quiet }}>
-        Two lines of her song, set here as hers and never as the record’s own voice. The record
-        takes its name from the second one, and the red those words are printed in is measured off
-        her sleeve for O Superman. She has not read this page, been asked, or agreed to any of it.
+      {/* One sentence, not a paragraph. The debt itself — the red, the removal terms — is
+          written in full under "What is owed", where it can be read as a debt rather than as
+          a caption. */} 
+      <p className="mt-4 max-w-[52ch] text-[13px] leading-relaxed" style={{ color: quiet }}>
+        Two lines of her song, printed as hers: the record takes its name from the second one, and
+        she has not read this page.
       </p>
 
       <div className="mt-4 h-px w-full" style={{ backgroundColor: rule }} />

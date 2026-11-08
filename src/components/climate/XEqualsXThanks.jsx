@@ -32,9 +32,9 @@ export default function XEqualsXThanks() {
 
       <div className="mt-4 space-y-5">
         <Debt name="Laurie Anderson" reason="for the red, and for the name">
-          #CC2D2A is measured off her sleeve for O Superman. “The record of the time” is her
-          phrase, from <em>From the Air</em>. That is the whole of it. If she asks, both come off
-          the same day, and the removal is printed here rather than done quietly.
+          #CC2D2A is measured off her sleeve for O Superman, and “the record of the time” is her
+          phrase. If she asks, both come off the same day, and the removal is printed here rather
+          than done quietly.
         </Debt>
 
         <Debt name="Lou Reed" reason="for saying it once">

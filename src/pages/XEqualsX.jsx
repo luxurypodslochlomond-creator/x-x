@@ -7,6 +7,9 @@ import XEqualsXPlate from '@/components/climate/XEqualsXPlate';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
+import XEqualsXWhy from '@/components/climate/XEqualsXWhy';
+import XEqualsXMachine from '@/components/climate/XEqualsXMachine';
+import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
 
 // x = x — the covenant.
 //
@@ -16,11 +19,19 @@ import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 // so the page now opens with the thing she was looking for.
 //
 // Then five things, and nothing else:
+// Then the argument. The page used to explain itself for six sections and never say what
+// it was FOR, which is why it read flat: a covenant describing its own rules is a contract,
+// not a reason to care. So the order now earns the limits instead of assuming them —
+//
 //   1. what the mark means;
 //   2. whose line it is, and the limits of that debt;
-//   3. what the record promises — held as records, correctable in daylight;
-//   4. what is owed to two people, each said once;
-//   5. the limits — what the mark does NOT claim.
+//   3. WHY the record has to exist — what is lost when nobody writes it down;
+//   4. what the record promises — held as records, correctable in daylight;
+//   5. the machine speaking for itself, since a record about who decided cannot leave out
+//      the thing that helped type it;
+//   6. what a reader can verify without trusting us, which is the whole claim;
+//   7. what is owed to two people, each said once;
+//   8. the limits — what the mark does NOT claim.
 //
 // How an entry is actually made is the record's protocol, and it lives on How the record
 // works. Repeating it here made this page a manual, and a manual read a second time is how
@@ -47,7 +58,13 @@ export default function XEqualsX() {
         <RecordEpigraph />
       </section>
 
+      <XEqualsXWhy />
+
       <XEqualsXPlate />
+
+      <XEqualsXMachine />
+
+      <XEqualsXCheck />
 
       <XEqualsXThanks />
 

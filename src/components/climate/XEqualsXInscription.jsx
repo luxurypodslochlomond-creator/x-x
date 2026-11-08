@@ -24,8 +24,8 @@ export default function XEqualsXInscription() {
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 400,
-            fontSize: 'clamp(66px, 23vw, 132px)',
-            lineHeight: 0.95,
+            fontSize: 'clamp(84px, 27vw, 236px)',
+            lineHeight: 0.9,
             letterSpacing: '-0.03em',
           }}
         >
