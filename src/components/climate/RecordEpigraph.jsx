@@ -57,12 +57,25 @@ export default function RecordEpigraph({ dark = false, compact = false, label = 
         <span style={{ color: red }}>·</span> Big Science, 1982
       </p>
 
-      {/* One sentence, not a paragraph. The debt itself — the red, the removal terms — is
-          written in full under "What is owed", where it can be read as a debt rather than as
-          a caption. */} 
-      <p className="mt-4 max-w-[52ch] text-[13px] leading-relaxed" style={{ color: quiet }}>
-        Two lines of her song, printed as hers: the record takes its name from the second one, and
-        she has not read this page.
+      {/* ── THE PLAIN LINE, AND WHY IT HAD TO BE ADDED ────────────────────────────
+          A reader met that quote with no way in. The founder himself, reading his own
+          record back, called her "Maurice Anderson" — and when the person who built the
+          page cannot hold the reference, no reviewer can either. A quotation that needs
+          you to know a 1982 single before it means anything is not a quotation, it is a
+          password.
+
+          So the meaning is said here, in the record's own voice and its own reading size:
+          what the line actually means, and what the record did with it. Nobody now has to
+          know who she is to understand why the page is called what it is called. The debt
+          itself — the red, the removal terms — is written in full under "What is owed",
+          where it can be read as a debt rather than as a caption. */}
+      <p
+        className="mt-4 max-w-[54ch] text-[15px] leading-[1.6]"
+        style={{ fontFamily: 'var(--font-reading)', color: ink }}
+      >
+        In plain words: the time is now, and this is the record of it. The record took its name
+        from that second line, and she has not read this page — so it is a quotation, not an
+        endorsement.
       </p>
 
       <div className="mt-4 h-px w-full" style={{ backgroundColor: rule }} />
