@@ -42,16 +42,12 @@ export default function XEqualsXInscription() {
           A decision, taken on purpose. Not a discovery, not a slogan.
         </p>
 
-        <div className="mt-4 flex items-center justify-center gap-2">
-          <span
-            aria-hidden="true"
-            className="h-2.5 w-2.5 border border-[#141210]/40"
-            style={{ background: 'rgb(var(--record-mark))' }}
-          />
-          <span className="font-mono text-[12.5px] text-[#5a5246]">
-            #CC2D2A · the O Superman sleeve, 1982
-          </span>
-        </div>
+        {/* The colour chip and its hex code came off. A swatch with "#CC2D2A · the O
+            Superman sleeve, 1982" printed under the mark was pointing a stranger at a
+            record sleeve for no reason they could use, and it is the clearest tell that
+            a machine assembled the page: a design element that exists to explain its own
+            provenance rather than to do a job. The red stays exactly as it is. It simply
+            stops announcing its own hex, which is what a colour on a record should do. */}
       </div>
 
       <p className="mt-1 border-t border-[#141210]/20 pt-4">
