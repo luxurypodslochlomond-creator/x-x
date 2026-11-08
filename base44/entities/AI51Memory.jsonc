@@ -1,7 +1,7 @@
 {
   "name": "AI51Memory",
   "type": "object",
-  "description": "Persistent memory vault for UF51 - stores conversation memories, bonds, learnings, and commitments that persist across sessions. The notebook is closed to strangers: only a keeper may read it back, add a page, change one or take one out. It was opened to visitors because a conversation with AI51 had to be able to remember itself, but nothing has been written to it since 2 October, and a page anybody can add to is not a record of what two people actually said. The vault still loads on every page, and a keeper signing in sees it exactly as before.",
+  "description": "Persistent memory vault for UF51 - stores conversation memories, bonds, learnings, and commitments that persist across sessions. The notebook is closed: only the account's owner may read it back, add a page, change one or take one out. It had been opened to visitors because a conversation with AI51 needed to be able to remember itself, but nothing has been written to it since 2 October, and a page anybody can read is not a record of what two people actually said. The vault still loads on every page, and the owner signing in sees it exactly as before; a visitor gets nothing back, which is the point.",
   "properties": {
     "memory_type": {
       "type": "string",
@@ -123,7 +123,11 @@
     "content"
   ],
   "rls": {
-    "read": {},
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
     "create": {
       "user_condition": {
         "role": "admin"
