@@ -1,6 +1,7 @@
 {
   "name": "ForumComment",
   "type": "object",
+  "description": "A reply on the community wall. Anyone may read the thread and anyone signed in may add a comment \u2014 that is what a wall is for \u2014 but the address a commenter typed to sign their words stays theirs: it is kept so the wall can reach them about their own comment, and it is never handed to another reader.",
   "properties": {
     "post_id": {
       "type": "string",
@@ -16,7 +17,14 @@
     },
     "author_email": {
       "type": "string",
-      "description": "Email of commenter"
+      "description": "Email of commenter. Kept so the wall can reach them about their own comment, and never handed to another reader: only an administrator may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
     },
     "is_ai51_comment": {
       "type": "boolean",
@@ -39,7 +47,20 @@
   ],
   "rls": {
     "read": {},
-    "write": {
+    "create": {},
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
       "$or": [
         {
           "created_by": "{{user.email}}"
