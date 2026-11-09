@@ -28,7 +28,8 @@ import RecordEpigraph from '@/components/climate/RecordEpigraph';
 // FIRST: two plates of the same mark, one above the other, the second with eight arcs
 // leaving it that read as a signal fault rather than as light. A reader arriving cold
 // asked what the two drawn things were meant to be — which is the whole review, in one
-// question. There is one plate now and it names its own parts: one, and another.
+// question. There is one plate now, and it is the mark itself, typeset: x = x, large, in
+// the borrowed red, with nothing drawn round it. It was never a diagram.
 //
 // SECOND: her quote sat four bands away from the band that explains what was borrowed
 // from her, so the same debt was told twice in two places and the page seemed to repeat
