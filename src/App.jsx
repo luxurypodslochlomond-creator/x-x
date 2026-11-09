@@ -387,7 +387,11 @@ const AuthenticatedApp = () => {
       {/* The desk is the record's own desk, so it opens to the record's own keys. Behind the
           building's admin door, a keeper invited to hold them was stopped on the one page built
           for her and told "Admins only". KeeperKey asks the record instead. */}
-      <Route path="/AdminClimateDesk" element={<Navigate to="/ClimateKeeperRoom?tab=desk" replace />} />
+      {/* The desk was sent to ?tab=desk, and the shed's rooms are decide, check, people,
+          counts and sourcing — so "desk" matched nothing, the room fell back to the first
+          door, and the counts page could not be reached from its own address at all. The
+          desk is the counts room; it now lands on it. */}
+      <Route path="/AdminClimateDesk" element={<Navigate to="/ClimateKeeperRoom?tab=counts" replace />} />
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/Uf51Road" element={<LayoutWrapper currentPageName="Uf51Road"><AdminOnly><Uf51RoadPage /></AdminOnly></LayoutWrapper>} />

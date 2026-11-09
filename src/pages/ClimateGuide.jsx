@@ -124,7 +124,7 @@ const FIRST = [
     what: 'Look up a country or a subject you already know about, and see what the record holds.',
   },
   {
-    label: '5. Open Readership',
+    label: '5. Open Impact',
     to: createPageUrl('ClimateImpact'),
     what: 'Who is reading, in countries — and how a reader can name their own nation.',
   },

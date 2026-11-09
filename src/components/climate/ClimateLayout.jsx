@@ -193,15 +193,13 @@ export default function ClimateLayout({ children, currentPage }) {
               </span>
             </Link>
 
-            <div className="hidden shrink-0 sm:block">
-              <ClimateNav currentPage={currentPage} />
-            </div>
           </div>
 
-          {/* The index on a phone, under the name, so it reads as the record's own contents. */}
-          <div className="sm:hidden">
-            <ClimateNav currentPage={currentPage} />
-          </div>
+          {/* The index, under the name, at every size. It used to sit beside the title on a
+              desktop and under it on a phone, which meant the record's own contents changed
+              place depending on the glass they were read on. One position, always: the name,
+              then the six doors, then the rule, then the terms. */}
+          <ClimateNav currentPage={currentPage} />
 
           <RecordRule />
 
