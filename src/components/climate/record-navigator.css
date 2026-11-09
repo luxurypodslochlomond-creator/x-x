@@ -11,27 +11,27 @@
   color: rgb(var(--record-ink));
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
-  /* The way in is present, not announced. At rest each door sits back to a little over
-     half ink — enough to find, too little to compete with the page. Only the door you
-     are standing in, and the one under your finger, come forward. */
-  opacity: .58;
-  transition: opacity .18s ease, color .18s ease;
+  /* Full ink at rest, always. It was dimmed to a little over half to be "subtle", and
+     subtle turned out to mean faint: the one way through the record read as smudges at
+     the foot of the glass instead of as the record's own hand. Gillian missed it. What
+     makes this quiet is the size of the drawing and the thinness of the chrome around
+     it, not how pale the ink is — a printed mark is either on the page or it is not. */
+  transition: color .18s ease;
 }
 .rec-art-drawing { display: block; flex-shrink: 0; }
 .rec-art-drawing svg { display: block; overflow: visible; }
-/* The caption is a printer's label under a cut mark: small, tracked, quiet. It stays,
-   because a mark nobody can name is a puzzle at the door — it just no longer speaks
-   at the same volume as the record. */
+/* The caption is a printer's label under a cut mark: it names the drawing, in words a
+   reader already knows. Sentence case at eleven pixels, as it was — small, but said
+   plainly rather than whisperingly. */
 .rec-art-caption {
   font-family: var(--font-body);
-  font-size: 9.5px;
+  font-size: 11px;
   font-weight: 400;
   line-height: 1.2;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   text-align: center;
 }
-.rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); opacity: 1; }
+.rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); }
 .rec-art-door-active .rec-art-caption { font-weight: 700; }
 .rec-art-door:focus-visible {
   outline: 2px solid rgb(var(--record-mark));
@@ -59,11 +59,10 @@
   margin-inline: auto;
 }
 .rec-art-rail > .rec-art-door { flex: 1; min-width: 0; }
-/* The marks came down by nearly half. Six drawings at forty-eight pixels across a phone
-   is a banner, and a banner at the foot of a printed page turns a book into an app. The
-   one you are in carries a short rule instead of a bigger drawing, so the dock says
-   where you are once rather than shouting it. */
-.rec-art-rail .rec-art-drawing { height: 26px; display: flex; align-items: center; }
+/* The marks are the record's hand: drawn, inked, and big enough to be recognised at a
+   glance without naming them first. The one you are standing in carries a short rule
+   above it, so the dock says where you are once rather than shouting it. */
+.rec-art-rail .rec-art-drawing { height: 38px; display: flex; align-items: center; }
 .rec-art-rail .rec-art-door-active .rec-art-drawing {
   box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark));
 }

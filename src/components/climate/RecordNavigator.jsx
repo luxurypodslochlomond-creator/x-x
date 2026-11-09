@@ -8,7 +8,7 @@ export default function RecordNavigator({ currentPage }) {
     <nav aria-label="The way through the record" className="rec-art-navigator">
       <div className="rec-art-rail">
         {PRIMARY_NAV.map(({ label, to, page, what }) => (
-          <RecordNavDoor key={to} to={to} label={label} what={what} active={currentPage === page} size={26} />
+          <RecordNavDoor key={to} to={to} label={label} what={what} active={currentPage === page} size={38} />
         ))}
       </div>
     </nav>
