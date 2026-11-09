@@ -166,10 +166,11 @@ export default function ClimateLayout({ children, currentPage }) {
           the page read as an afterthought bolted onto a document.
 
           It is one piece of printed matter now. The mark is cut into the top edge. The
-          record says its name, the index numbers itself beside it, a hairline closes the
-          line, and the tongue and x = x sit on the same line at the foot of the masthead
-          as a printer's imprint. Nothing is a box; nothing announces itself; nobody has to
-          work out which part is navigation.
+          record says its name, the five doors sit beside it — one drawn mark and one word
+          each, no numbering — and a hairline drawn by hand closes the line. Under it, as a
+          printer's imprint, the record states its own terms in four words and offers the
+          tongue it is being read in. Nothing is a box; nothing announces itself; nobody has
+          to work out which part is navigation.
 
           On a phone it stops being sticky on purpose: a printed page does not pin ninety
           pixels of itself to the top of the glass. The way through the record is one tap
@@ -197,15 +198,15 @@ export default function ClimateLayout({ children, currentPage }) {
             </div>
           </div>
 
-          <RecordRule />
-
-          {/* The index on a phone, below the line, so it reads as the record's own contents. */}
+          {/* The index on a phone, under the name, so it reads as the record's own contents. */}
           <div className="sm:hidden">
             <ClimateNav currentPage={currentPage} />
           </div>
 
-          {/* The imprint line: how the record is kept, the tongue this page is being
-              read in, and the mark. One line of printed matter, not a second menu. */}
+          <RecordRule />
+
+          {/* The imprint line: how the record is kept, and the tongue this page is being
+              read in. One line of printed matter, not a second menu. */}
           <RecordImprint />
         </div>
       </header>

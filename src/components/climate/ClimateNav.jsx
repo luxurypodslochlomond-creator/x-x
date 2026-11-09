@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
 import { MarkBrief, MarkSignal, MarkHorizon, MarkPortrait, MarkLens } from './RecordFootMarks';
 
-// ── THE INDEX, IN THE SAME HAND AS THE PAGE ───────────────────────────────────
-// A row of plain words is a website's menu. So each door now carries the same hairline
-// engraving the rest of the record is drawn with — a folded sheet, a message going out,
-// a world in three lines, a bust on its plinth, a lens. One hand, one weight, no second
-// colour, and no picture that means something other than the door it stands on.
+// ── THE WAY THROUGH THE RECORD ─────────────────────────────────────────────────
+// This has been through several hands: plain words, then nine drawn doors, then words
+// again, then marks with a printed contents number above each one. The numbers were the
+// last thing to go, and they went for a plain reason — a number beside an icon is two
+// systems saying the same thing, and a reader had to decide which one to trust. A door
+// needs one mark and one word.
 //
-// The figure above the word keeps it a printed contents page rather than a toolbar. On a
-// phone the figure comes off, because a masthead is not the place to make somebody count.
+// So: the same five hairline engravings, sitting beside their names, in the same order on
+// every screen. On a phone the mark sits above the word because a thumb needs the target
+// square; on a wider page it sits beside it, because a line reads across. Nothing is
+// numbered, nothing is abbreviated, and the current page is said in the mark, in the word,
+// and in one hairline under it — never in a colour alone.
 const MARKS = {
   '/TogetherChangeClimate': MarkBrief,
   '/ClimateWire': MarkSignal,
@@ -23,9 +27,9 @@ export default function ClimateNav({ currentPage }) {
   return (
     <nav
       aria-label="Main navigation"
-      className="grid grid-cols-5 gap-x-1 sm:flex sm:flex-wrap sm:items-start sm:justify-end sm:gap-x-6 lg:gap-x-8"
+      className="grid grid-cols-5 gap-x-1 sm:flex sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-5 lg:gap-x-7"
     >
-      {PRIMARY_NAV.map(({ label, to, page }, i) => {
+      {PRIMARY_NAV.map(({ label, to, page }) => {
         const active = currentPage === page;
         const Mark = MARKS[to] || MarkBrief;
         return (
@@ -33,28 +37,19 @@ export default function ClimateNav({ currentPage }) {
             key={to}
             to={to}
             aria-current={active ? 'page' : undefined}
-            className={`group flex min-h-[52px] flex-col items-center justify-center gap-1 px-1 py-1.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red sm:min-h-0 sm:items-start sm:gap-1 sm:px-0 ${
+            className={`group flex min-h-[52px] flex-col items-center justify-center gap-1 px-1 py-1.5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red sm:min-h-[44px] sm:flex-row sm:gap-1.5 sm:px-0 ${
               active ? 'text-record-red' : 'text-record-ink hover:text-record-red'
-            } transition-colors`}
+            }`}
           >
-            <Mark size={19} className="shrink-0 sm:mb-0.5" />
+            <Mark size={18} className="shrink-0" />
             <span
-              aria-hidden="true"
-              className={`hidden font-mono text-[12px] leading-none tabular-nums sm:block ${
-                active ? 'text-record-mark' : 'text-record-muted'
+              className={`border-b pb-0.5 text-[12px] leading-none transition-colors sm:text-[14px] ${
+                active ? 'border-record-mark' : 'border-transparent group-hover:border-record-ink/25'
               }`}
+              style={{ fontFamily: 'var(--font-display)' }}
             >
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <span className="text-[12px] leading-none sm:text-[14.5px]" style={{ fontFamily: 'var(--font-display)' }}>
               {label}
             </span>
-            <span
-              aria-hidden="true"
-              className={`block h-px w-full transition-colors ${
-                active ? 'bg-record-mark' : 'bg-transparent group-hover:bg-record-ink/25'
-              }`}
-            />
           </Link>
         );
       })}
