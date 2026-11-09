@@ -168,7 +168,10 @@ export default function ClimateLayout({ children, currentPage }) {
           plus the home indicator. Measured from the marks themselves rather than guessed
           at, because a dock that sits over the last line of a page is a dock that has
           eaten a sentence. */}
-      <div className="relative record-book pb-[calc(104px+env(safe-area-inset-bottom))]" style={{ zIndex: 1 }}>
+      {/* The strip is given back only where the dock exists. On a wide screen the rail is
+          the masthead's job alone, so the foot of the page keeps its own margin and nothing
+          is held open under a bar that is not there. */}
+      <div className="relative record-book pb-[calc(104px+env(safe-area-inset-bottom))] lg:pb-0" style={{ zIndex: 1 }}>
       {/* Both ends of the record use the same drawn doors, and both are pinned now: the
           record's name at the top of the glass, the way through it at the foot, so the
           reader is never more than one thumb from either. */}

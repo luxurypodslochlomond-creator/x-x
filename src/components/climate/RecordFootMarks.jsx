@@ -231,6 +231,38 @@ export function MarkCovenant({ size = 26, className = '' }) {
   );
 }
 
+// ── THE TWO DOORS THAT HAD NO MARK ────────────────────────────────────────────
+// Terms and Privacy sat in the foot as a pair of typed words, which is how the record's
+// own promises ended up looking like the small print they are instead of like the two
+// doors they are. Both are drawn here, and both had to be told apart from everything
+// already on the sheet: a folio, a lock, a seal, an open lock. So neither is an object.
+
+// The terms: a page of clauses with one line signed at the foot. A sheet, not a book,
+// and a signature rather than a stamp — the record is offered on terms a person agreed
+// to, which is why the nib's stroke crosses the ruled line instead of sitting on it.
+export function MarkTerms({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
+      <path d="M9.6 5.4h14.6L30.4 11.6V34.6H9.6Z" />
+      <path d="M23.9 5.6v6.2h6.3" />
+      <path d="M13.4 15.6h13M13.4 20.2h13M13.4 24.6h8.2" opacity=".55" />
+      <path d="M13 31.6c2.6-2.6 4.6-1.4 5.7-.2 1 1.1 2.4.9 3.9-.7 1.2-1.3 2.4-1.4 3.6-.4" className="text-record-mark" strokeWidth="1.9" />
+    </svg>
+  );
+}
+
+// What is not shown: three lines of print with one taken out. Not an eye, not a lock, and
+// not a shield — the record does not promise to defend you, it promises not to print you.
+// A solid bar where a line should be says exactly that, and nothing else, at any size.
+export function MarkPrivacy({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
+      <path d="M8.6 11.2h22.8M8.6 16.9h14.2M12.4 30.4h19M8.6 35h10" opacity=".55" />
+      <rect x="8.4" y="21.4" width="23.2" height="4.6" className="text-record-mark" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // The room where something is made rather than read.
 export function MarkStudio({ size = 26, className = '' }) {
   return (

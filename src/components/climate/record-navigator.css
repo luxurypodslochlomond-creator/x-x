@@ -42,7 +42,12 @@
    clipped instead. So the caption keeps its weight and the place is said twice, neither
    of which costs a pixel — the ink goes to the mark's red, and a short rule is drawn over
    the drawing itself, the way a bookmark sits on a line of print rather than in it. */
-.rec-mast-doors .rec-art-caption { white-space: nowrap; max-width: 100%; }
+.rec-mast-doors .rec-art-caption {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
 .rec-mast-doors .rec-art-door-active .rec-art-drawing,
 .rec-art-rail .rec-art-door-active .rec-art-drawing { box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark)); }
 .rec-art-door:focus-visible {
@@ -140,5 +145,17 @@
 .rec-art-rail .rec-art-drawing { height: 30px; display: flex; align-items: center; }
 .rec-art-rail .rec-art-door-active .rec-art-drawing {
   box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark));
+}
+/* ── ON A WIDE SCREEN THE MASTHEAD IS THE BAR ────────────────────────────────────
+   The dock is a phone's tab bar: a thumb's reach from the bottom of a narrow glass. On a
+   desktop it hung pinned to the foot of a two-metre window, repeating every mark that was
+   already a hand's width above it — and the colophon then printed them a third time. Three
+   copies of one way through is not three times as clear; it is a page that does not know
+   which of its own ends is the front.
+
+   So the dock is a phone's, and only a phone's. Everything it carries is in the masthead
+   at this width, in the same hand, one hairline from the record's name. */
+@media (min-width: 1024px) {
+  .rec-art-navigator { display: none; }
 }
 @media print { .rec-art-navigator { display: none; } }

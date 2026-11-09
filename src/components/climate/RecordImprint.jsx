@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
+import { PRIMARY_NAV, TRUST_NAV } from '@/components/climate/recordFooterLinks';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
 import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
@@ -26,17 +26,21 @@ const WAY_IN = [
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
 ];
 
-// How it is kept: why it exists, how an entry is checked, what has been corrected. Terms
-// and Privacy are just as much a part of that trust, and they are in the contents sheet
-// and the foot — they have no mark of their own yet, and two doors wearing the same mark
-// side by side would be worse than none. Say the word and they get their own cut.
-const KEPT = [
+// The rulebook: why the record exists, how an entry is checked, what has been corrected,
+// and the terms and privacy it is offered under. All five are the same kind of thing — the
+// promises behind the entries rather than entries — so they sit together behind one
+// hairline, each with a mark cut for it and no other door.
+const RULEBOOK = [
   { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'Method', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
+  ...TRUST_NAV,
 ];
 
-const CELL = 'w-[54px] shrink-0 sm:w-[60px] !min-h-0 !py-1';
+// One fixed width for every cell, wide enough for the longest word on the row. This is the
+// whole fix: a door cannot push its neighbours aside if it was never given a width of its
+// own to grow into.
+const CELL = 'w-[58px] shrink-0 sm:w-[68px] !min-h-0 !py-1';
 
 export default function RecordImprint({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
@@ -61,7 +65,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             making either one smaller. Left of it, the record. Right of it, its rulebook. */}
         <span aria-hidden="true" className="mx-1 hidden w-px shrink-0 self-center bg-record-ink/20 lg:block" style={{ height: 34 }} />
 
-        {KEPT.map(({ label, to, what }) => (
+        {RULEBOOK.map(({ label, to, what }) => (
           <RecordNavDoor
             key={to}
             to={to}

@@ -17,6 +17,8 @@ import {
   MarkHost,
   MarkSupport,
   MarkCovenant,
+  MarkTerms,
+  MarkPrivacy,
 } from './RecordFootMarks';
 
 // ── ONE HAND FOR EVERY DOOR ────────────────────────────────────────────────────
@@ -38,6 +40,8 @@ const MARKS = {
   '/ClimateMethod': MarkMethod,
   '/ClimateCorrections': MarkCorrection,
   '/ClimateGuide': MarkContents,
+  '/ClimateTerms': MarkTerms,
+  '/ClimatePrivacy': MarkPrivacy,
 
   // What can be checked, and what is given.
   '/ClimateSeals': MarkSeal,

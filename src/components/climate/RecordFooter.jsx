@@ -2,11 +2,21 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
-import { ELSEWHERE_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks';
+import { ELSEWHERE_NAV } from '@/components/climate/recordFooterLinks';
 
-// The colophon keeps the doors not carried by the primary navigation.
-const ALL_PAGES = FOOTER_NAV.find((door) => door.to === '/ClimateGuide');
-const REST = [...ELSEWHERE_NAV, ALL_PAGES].filter(Boolean);
+// ── THE FOOT CARRIES ONLY WHAT THE HEAD DOES NOT ────────────────────────────────
+// This nav used to print the top of the page a second time: Contents was in both, the
+// founder was in both, and Terms and Privacy stood a third time as typed words under it.
+// A foot that says what the head has just said teaches a reader that neither one matters,
+// and it turns the end of a page into a menu instead of a colophon.
+//
+// So the division is by width, not by taste. Every door below is one the masthead does not
+// carry at that width: the founder leaves the foot at md, where the masthead takes him on;
+// the terms, the privacy and the keeper's door leave at lg, where the masthead takes those.
+// Contents is not here at all any more — it is in the masthead at every width and in the
+// dock on a phone, so a third printing of it was the least useful line on the page.
+const REST = ELSEWHERE_NAV;
+const LEAVES_THE_FOOT_AT = { '/ClimateFounder': 'md:hidden' };
 // A door to the room you are standing in is not a door. The foot offers only ways out.
 
 export default function RecordFooter({ showKeeper = true, onOpenContents, contentsOpen }) {
@@ -57,9 +67,8 @@ export default function RecordFooter({ showKeeper = true, onOpenContents, conten
         <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-start gap-x-5 gap-y-5">
           {REST.filter((door) => door.to !== pathname).map(({ label, to, what }) => (
             <RecordNavDoor key={to} to={to} label={label} what={what}
-              active={to === '/ClimateGuide' ? contentsOpen : pathname === to} size={28}
-              asButton={to === '/ClimateGuide'} onClick={to === '/ClimateGuide' ? onOpenContents : undefined}
-              expanded={contentsOpen} controls="record-contents" className="w-[calc((100%-2.5rem)/3)] sm:w-24" />
+              active={pathname === to} size={28}
+              className={`w-[calc((100%-2.5rem)/3)] sm:w-24 ${LEAVES_THE_FOOT_AT[to] || ''}`} />
           ))}
         </nav>
 
@@ -72,14 +81,18 @@ export default function RecordFooter({ showKeeper = true, onOpenContents, conten
               key={to}
               to={to}
               aria-current={pathname === to ? 'page' : undefined}
-              className={`inline-block py-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
+              className={`inline-block py-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red lg:hidden ${
                 pathname === to ? 'text-record-red' : 'text-record-muted'
               }`}
             >
               {label}
             </Link>
           ))}
-          {showKeeper && <KeeperDoor />}
+          {showKeeper && (
+            <span className="lg:hidden">
+              <KeeperDoor />
+            </span>
+          )}
         </div>
       </div>
     </footer>
