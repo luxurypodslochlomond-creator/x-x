@@ -185,7 +185,7 @@ export default function ClimateGuide() {
     <ClimateRecordShell
       compact
       eyebrow="The record · every door"
-      title="Index"
+      title="Contents"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
       footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
@@ -204,7 +204,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Wire, Map, Music and Search. The foot also opens Why, Method, Corrections and the Index. An invited keeper also sees the keeper’s door there."
+        note="The same drawings at the top and foot of the screen open Record, Wire, Map, Music and Search. The foot also opens Why, Method, Corrections and the Contents. An invited keeper also sees the keeper’s door there."
         items={BAR}
       />
 
@@ -239,7 +239,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="How we check entries, Corrections and the Index. Terms, Privacy and keeper access sit below. The Index opens every way through the record on one screen, without leaving the page."
+        note="How we check entries, Corrections and the Contents. Terms, Privacy and keeper access sit below. The Contents opens every way through the record on one screen, without leaving the page."
         items={FOOT}
       />
 

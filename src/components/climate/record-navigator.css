@@ -56,7 +56,9 @@
   /* Above the masthead's own layer: the way out of a page is never something a header
      can cover, on the one screen where the header is pinned. */
   z-index: 60;
-  padding: .2rem .4rem max(.3rem, env(safe-area-inset-bottom));
+  /* Top padding gives back what the rule between the rows takes, so the whole rail
+     keeps its height and nothing on the page is pushed under it. */
+  padding: .14rem .4rem max(.3rem, env(safe-area-inset-bottom));
   /* A sheet of the record's own paper, not a bar bolted under it: translucent, so the
      page is still felt through the way out, and so the foot of the record never looks
      like a different material to the top. */
@@ -80,7 +82,23 @@
   max-width: 600px;
   margin-inline: auto;
 }
-.rec-art-rail + .rec-art-rail { margin-top: .05rem; }
+/* ── THE RULE BETWEEN THE TWO ROWS ──────────────────────────────────────────────
+   Ten marks, one size, one ink, no separation: the eye read a flat grid rather than a
+   way through, because nothing said the top row is the record and the bottom row is how
+   it is kept. Every cell was already equal — equal is not the same as composed.
+
+   One hairline does what a rule does in print: it separates two kinds of thing without
+   making either one smaller, paler or lesser. The marks stay at full ink and the same
+   size, because the last time this rail was made "subtle" it became smudges.
+
+   It is paid for rather than added: the navigator's top padding gives back the pixels
+   the rule takes, so the rail is exactly as tall as it was and no line of a page is
+   pushed under it. */
+.rec-art-rail + .rec-art-rail {
+  margin-top: .12rem;
+  padding-top: .3rem;
+  border-top: 1px solid rgb(var(--record-ink) / .13);
+}
 .rec-art-rail > .rec-art-door,
 .rec-art-rail > .rec-art-door-wrap { flex: 1; min-width: 0; }
 /* No hairline before the tongue any more. It was there to stop the tongue reading as a

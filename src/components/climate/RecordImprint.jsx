@@ -5,7 +5,7 @@ import { useRecordCapacity } from '@/components/climate/useKeeper';
 import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
 
-const CAPTIONS = { '/XEqualsX': 'Why', '/ClimateMethod': 'Method', '/ClimateCorrections': 'Corrections', '/ClimateGuide': 'Index' };
+const CAPTIONS = { '/XEqualsX': 'Why', '/ClimateMethod': 'Method', '/ClimateCorrections': 'Corrections', '/ClimateGuide': 'Contents' };
 
 export default function RecordImprint({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();

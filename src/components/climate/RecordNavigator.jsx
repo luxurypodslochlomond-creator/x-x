@@ -35,7 +35,7 @@ export default function RecordNavigator({ currentPage, onOpenContents, contentsO
         ))}
         <RecordNavDoor
           to="/ClimateGuide"
-          label="Index"
+          label="Contents"
           what="Every way through the record, on one screen."
           size={30}
           asButton
