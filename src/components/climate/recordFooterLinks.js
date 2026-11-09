@@ -32,7 +32,7 @@ export const FOOTER_NAV = [
   { label: 'Why this record', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
-  { label: 'Contents', to: '/ClimateGuide', what: 'Open the drawn index of the record.' },
+  { label: 'Index', to: '/ClimateGuide', what: 'Every way through the record, on one screen.' },
 ];
 
 // ── THE REST OF THE BOOK ───────────────────────────────────────────────────────
