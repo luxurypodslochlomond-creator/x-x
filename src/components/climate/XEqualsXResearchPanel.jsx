@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
+import RecordBand from './RecordBand';
 
 // What this page promises.
 //
@@ -27,21 +28,8 @@ export default function XEqualsXResearchPanel() {
   }, []);
 
   return (
-    <section aria-labelledby="promises" className="py-8 border-b border-[#141210]/15">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <div
-          id="promises"
-          role="heading"
-          aria-level={2}
-          className="text-[#141210]"
-          style={{ fontFamily: 'var(--font-display)', fontSize: '21px', lineHeight: 1.25 }}
-        >
-          What this record promises
-        </div>
-        <p className="font-mono text-[12.5px] text-[#5a5246]">Kept as records</p>
-      </div>
-
-      <p className="mt-2">
+    <RecordBand id="promises" label="Kept as records" title="What this record promises">
+      <p>
         Not findings. Promises about how the record behaves, each one testable in five minutes.
       </p>
 
@@ -112,6 +100,6 @@ export default function XEqualsXResearchPanel() {
           </p>
         </div>
       )}
-    </section>
+    </RecordBand>
   );
 }

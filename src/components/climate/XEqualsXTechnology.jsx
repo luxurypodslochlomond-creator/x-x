@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RecordBand from './RecordBand';
 
 // ── THE MARK IS A SPECIFICATION ────────────────────────────────────────────────
 // The founder's correction, and it was the right one: x = x is not only a sentence about
@@ -46,25 +47,8 @@ const MECHANISMS = [
 
 export default function XEqualsXTechnology() {
   return (
-    <section aria-labelledby="mechanisms" className="my-10">
-      <div className="flex items-baseline justify-between gap-3 border-t border-record-ink/25 pt-5">
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-record-muted">
-          The technology
-        </p>
-        <p aria-hidden="true" className="font-mono text-[12px] text-record-mark">
-          x = x
-        </p>
-      </div>
-
-      <h2
-        id="mechanisms"
-        className="mt-3 max-w-[22ch] text-[27px] leading-[1.08] text-record-ink lg:text-[32px]"
-        style={{ fontFamily: 'var(--font-display)' }}
-      >
-        The mark is a specification
-      </h2>
-
-      <p className="mt-3 max-w-[48ch] text-record-ink">
+    <RecordBand id="mechanisms" label="The technology" title="The mark is a specification">
+      <p className="max-w-[48ch] text-record-ink">
         Equal worth is a decision, so it needs machinery that will not quietly break it. Three
         parts of this record do that work, and a reader can test all three from a phone.
       </p>
@@ -96,6 +80,6 @@ export default function XEqualsXTechnology() {
           </li>
         ))}
       </ol>
-    </section>
+    </RecordBand>
   );
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import RecordBand from './RecordBand';
 
 // ── WHY THE RECORD HAS TO EXIST ────────────────────────────────────────────────
 // This page explained itself for six sections and never once said what it was for.
@@ -26,21 +27,8 @@ const LOST = [
 
 export default function XEqualsXWhy() {
   return (
-    <section aria-labelledby="why" className="py-10 border-b border-[#141210]/15">
-      {/* role="heading" rather than an <h2>: the record's own stylesheet forces a 1.04
-          line-height on every h2, which crushes a two-line heading on a phone. Same
-          semantics, the air this line needs. */}
-      <div
-        id="why"
-        role="heading"
-        aria-level={2}
-        className="text-[#141210]"
-        style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'clamp(24px, 5.4vw, 30px)', lineHeight: 1.16 }}
-      >
-        Why this had to be written down
-      </div>
-
-      <p className="mt-3 max-w-[48ch]">
+    <RecordBand id="why" label="The argument" title="Why this had to be written down">
+      <p className="max-w-[48ch]">
         Most of what is said about the climate this year will not survive the year. The post
         scrolls past, the page is rewritten, the figure is quietly revised, and in twelve months
         nobody can show what it said or who said it. A claim with no record behind it is a rumour
@@ -65,6 +53,6 @@ export default function XEqualsXWhy() {
         None of that is grand. It is the plain reason this platform exists: so that a thing said in
         good faith can still be argued with a year later, by somebody who was not in the room.
       </p>
-    </section>
+    </RecordBand>
   );
 }

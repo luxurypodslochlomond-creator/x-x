@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RecordBand from './RecordBand';
 
 // ── WHAT CAN BE CHECKED WITHOUT TRUSTING US ───────────────────────────────────
 // The page has said a promise is worth nothing unless it can be checked. This is where it
@@ -48,17 +49,8 @@ const PROOF = [
 
 export default function XEqualsXCheck() {
   return (
-    <section aria-labelledby="checkable" className="py-10 border-b border-[#141210]/15">
-      <div
-        id="checkable"
-        role="heading"
-        aria-level={2}
-        className="text-[#141210]"
-        style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'clamp(21px, 4.6vw, 25px)', lineHeight: 1.2 }}
-      >
-        What you can check without trusting us
-      </div>
-      <p className="mt-2 max-w-[46ch] text-[#5a5246]">
+    <RecordBand id="checkable" label="Checkable" title="What you can check without trusting us">
+      <p className="max-w-[46ch] text-record-muted">
         Three things on this record can be verified by a reader rather than taken on our word.
       </p>
 
@@ -81,6 +73,6 @@ export default function XEqualsXCheck() {
           </div>
         ))}
       </div>
-    </section>
+    </RecordBand>
   );
 }

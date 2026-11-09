@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RecordBand from './RecordBand';
 
 // The limits, attached to the covenant.
 //
@@ -41,21 +42,8 @@ const LIMITS = [
 
 export default function XEqualsXCodicil() {
   return (
-    <section aria-labelledby="the-limits" className="pt-8">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <div
-          id="the-limits"
-          role="heading"
-          aria-level={2}
-          className="text-[#141210]"
-          style={{ fontFamily: 'var(--font-display)', fontSize: '21px', lineHeight: 1.25 }}
-        >
-          The limits
-        </div>
-        <p className="font-mono text-[12.5px] text-[#5a5246]">Read with the mark</p>
-      </div>
-
-      <div className="mt-4">
+    <RecordBand id="the-limits" label="Read with the mark" title="The limits">
+      <div>
         {LIMITS.map(({ n, title, text }) => (
           <div key={n} className="grid grid-cols-[28px_1fr] gap-x-3 border-t border-[#141210]/20 pt-3.5 pb-4">
             <p className="font-mono text-[12.5px] text-[#5a5246]">{n}</p>
@@ -99,6 +87,6 @@ export default function XEqualsXCodicil() {
           </dd>
         </div>
       </dl>
-    </section>
+    </RecordBand>
   );
 }
