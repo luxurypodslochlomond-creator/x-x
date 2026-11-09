@@ -50,6 +50,7 @@ const MARKS = {
   '/ClimateBrief': MarkBrief,
   '/ClimateImpact': MarkReadership,
   '/ClimateHost': MarkHost,
+  '/ClimateKeeperRoom': MarkHost,
   '/ClimateSupport': MarkSupport,
   '/ExtractionProofCovenant': MarkCovenant,
 };

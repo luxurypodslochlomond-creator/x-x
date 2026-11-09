@@ -26,8 +26,8 @@ const FORK = <COOLASFUCKTuningFork size={15} tone="signal" className="flex-shrin
 // the manual on the record says. Nothing is added for the card and nothing is dropped.
 const BUTTONS_CARD = {
   id: 'the-buttons',
-  title: 'All pages & guide',
-  headline: 'All pages & guide — every way through the record',
+  title: 'Contents & guide',
+  headline: 'Contents & guide — every way through the record',
   marker: 'Every way through the record · nothing hidden',
   body: 'Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there.',
   inside: [
@@ -185,7 +185,7 @@ export default function ClimateGuide() {
     <ClimateRecordShell
       compact
       eyebrow="The record · every door"
-      title="All pages"
+      title="Contents"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
       footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
@@ -204,7 +204,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The six drawings at the foot of the screen open Record, Wire, Map, Impact, Founder and Search. The smaller drawings under the masthead open Why, Method, Corrections and All pages. An invited reviewer also sees the shed there."
+        note="The same six drawings at the top and foot of the screen open Record, Wire, Map, Impact, Founder and Search. The smaller drawings under the masthead open Why, Method, Corrections and Contents. An invited reviewer also sees the shed there."
         items={BAR}
       />
 
@@ -239,7 +239,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="How we check entries, Corrections and All pages. Terms, Privacy and reviewer access sit below. All pages opens the full directory above this guide."
+        note="How we check entries, Corrections and Contents. Terms, Privacy and reviewer access sit below. Contents opens the drawn index without leaving the page."
         items={FOOT}
       />
 

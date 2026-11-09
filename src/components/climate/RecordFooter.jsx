@@ -8,7 +8,7 @@ import { ELSEWHERE_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLink
 const ALL_PAGES = FOOTER_NAV.find((door) => door.to === '/ClimateGuide');
 const REST = [...ELSEWHERE_NAV, ALL_PAGES].filter(Boolean);
 
-export default function RecordFooter({ showKeeper = true }) {
+export default function RecordFooter({ showKeeper = true, onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
 
   return (
@@ -45,7 +45,10 @@ export default function RecordFooter({ showKeeper = true }) {
 
         <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-start gap-x-5 gap-y-5">
           {REST.map(({ label, to, what }) => (
-            <RecordNavDoor key={to} to={to} label={label} what={what} active={pathname === to} size={28} className="w-[calc((100%-2.5rem)/3)] sm:w-24" />
+            <RecordNavDoor key={to} to={to} label={label} what={what}
+              active={to === '/ClimateGuide' ? contentsOpen : pathname === to} size={28}
+              asButton={to === '/ClimateGuide'} onClick={to === '/ClimateGuide' ? onOpenContents : undefined}
+              expanded={contentsOpen} controls="record-contents" className="w-[calc((100%-2.5rem)/3)] sm:w-24" />
           ))}
         </nav>
 

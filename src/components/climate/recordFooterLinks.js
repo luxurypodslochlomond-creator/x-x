@@ -30,7 +30,7 @@ export const FOOTER_NAV = [
   { label: 'Why this record', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
-  { label: 'All pages', to: '/ClimateGuide', what: 'Every public destination, followed by the guide.' },
+  { label: 'Contents', to: '/ClimateGuide', what: 'Open the drawn index of the record.' },
 ];
 
 // ── THE REST OF THE BOOK ───────────────────────────────────────────────────────
@@ -59,6 +59,14 @@ export const PAGE_INDEX = [
   ...ELSEWHERE_NAV,
   ...SUPPORTING_PAGES,
   { label: 'Open-source covenant', to: '/ExtractionProofCovenant', what: 'The terms under which the record is shared.' },
+];
+
+// One drawn index for the contents sheet and its permanent page. Never link it to itself.
+export const CONTENT_GROUPS = [
+  { title: 'The record', doors: PRIMARY_NAV },
+  { title: 'How it is kept', doors: [...FOOTER_NAV.filter(({ to }) => to !== '/ClimateGuide'), PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovenant')] },
+  { title: 'Elsewhere', doors: ELSEWHERE_NAV },
+  { title: 'Behind the record', doors: SUPPORTING_PAGES },
 ];
 
 export default SUPPORTING_PAGES;

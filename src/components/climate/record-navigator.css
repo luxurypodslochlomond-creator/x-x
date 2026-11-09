@@ -8,6 +8,9 @@
   min-width: 44px;
   min-height: 44px;
   padding: .2rem 0 .1rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
   color: rgb(var(--record-ink));
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;

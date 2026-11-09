@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import useRecordScroll from '@/components/climate/useRecordScroll';
 import { IMAGES } from '@/components/climate/categoryImages';
 import '@/components/climate/record-reading.css';
@@ -14,6 +14,7 @@ import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordGrain from '@/components/climate/RecordGrain';
+import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
@@ -46,6 +47,9 @@ const WORKING_PAGES = [
 export default function ClimateLayout({ children, currentPage }) {
   const location = useLocation();
   const readingRef = useRef(null);
+  const [contentsOpen, setContentsOpen] = useState(false);
+  const openContents = useCallback(() => setContentsOpen(true), []);
+  const closeContents = useCallback(() => setContentsOpen(false), []);
   useRecordScroll(readingRef);
 
   // Her identity, not UF51's. Runs once per climate page.
@@ -158,28 +162,11 @@ export default function ClimateLayout({ children, currentPage }) {
       </div>
 
       <div className="relative record-book" style={{ zIndex: 1 }}>
-      {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
-          top to the record instead of a dark screen with a page beneath it. */}
-      {/* ── THE MASTHEAD ───────────────────────────────────────────────────────────────
-          It used to be three stacked bands: a name, five equal text links, then a heavy
-          language bar with its own background and its own border. Three strips of chrome
-          on a phone before a single word of the record — which is precisely why the top of
-          the page read as an afterthought bolted onto a document.
-
-          It is one piece of printed matter now. The mark is cut into the top edge. The
-          record says its name, the five doors sit beside it — one drawn mark and one word
-          each, no numbering — and a hairline drawn by hand closes the line. Under it, as a
-          printer's imprint, the record states its own terms in four words and offers the
-          tongue it is being read in. Nothing is a box; nothing announces itself; nobody has
-          to work out which part is navigation.
-
-          On a phone it stops being sticky on purpose: a printed page does not pin ninety
-          pixels of itself to the top of the glass. The way through the record is one tap
-          up, and the colophon at the foot carries the mark and every door back. */}
+      {/* Both ends of the record use the same drawn doors. */}
       <header className="relative z-50 bg-record-paper text-record-ink sm:sticky sm:top-0">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className="mx-auto max-w-[1100px] px-4 lg:px-10">
-          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-0 pt-3.5">
+          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
             <Link
               to={createPageUrl('TogetherChangeClimate')}
               className="group flex min-w-0 items-baseline gap-2"
@@ -194,32 +181,23 @@ export default function ClimateLayout({ children, currentPage }) {
               </span>
             </Link>
 
-            {/* ── THE WAY IN, AT THE TOP ──────────────────────────────────────────
-                This row was written, and then never mounted: the masthead was left with a
-                hairline where the six doors had been, so a reader arriving at the top of
-                the record found its name and no way through it. It is mounted here, as it
-                was drawn — six words in the record's own hand, the one you are standing in
-                the only thing in colour. The drawn marks carry the same six doors at the
-                foot of the glass (see RecordNavigator), so the way through the record is
-                under the eye at the top and under the thumb at the bottom. */}
             <ClimateNav currentPage={currentPage} />
           </div>
 
           <RecordRule />
 
-          {/* The imprint line: how the record is kept, and the tongue this page is being
-              read in. One line of printed matter, not a second menu. */}
-          <RecordImprint />
+          <RecordImprint onOpenContents={openContents} contentsOpen={contentsOpen} />
         </div>
       </header>
 
       <main ref={readingRef} className="record-pages">{children}</main>
 
-      <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} />
+      <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />
 
       {/* No spacer at the foot any more: the dock is part of the page's own flow now (it
           pins without being bolted over the book), so nothing needs an inch given back. */}
       <RecordNavigator currentPage={currentPage} />
+      <RecordPagesPanel open={contentsOpen} onClose={closeContents} />
       </div>
     </div>
     </SiteLanguageProvider>
