@@ -39,7 +39,12 @@ const noiseLayer = (frequency, octaves, size, opacity, blend) => {
 // Both weights came down hard. At half opacity the tooth was not paper fibre, it was
 // grit on the glass: every page looked slightly dirty behind the words, which reads as
 // a bad screen rather than a good sheet. The sheet now carries the grain, not the page.
-const TOOTH = noiseLayer(0.82, 3, 160, 0.2, 'overlay');
+// ── THE TOOTH CAME DOWN AGAIN, AND THIS IS WHY ──────────────────────────────────
+// At a fifth it was still fighting the painting: over the flat dark of the sky an overlay
+// of fine noise does not read as the fibre of paper, it reads as out-of-focus stars. The
+// sheet has plenty of tooth at a tenth — a reader can feel the surface and cannot see the
+// grit — and the sky behind it stays sky.
+const TOOTH = noiseLayer(0.82, 3, 160, 0.1, 'overlay');
 const FOXING = noiseLayer(0.011, 4, 640, 0.05, 'multiply');
 
 export default function RecordGrain() {

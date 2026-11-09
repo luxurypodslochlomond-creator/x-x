@@ -11,8 +11,12 @@
   --font-reading: var(--font-record-reading);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  background-color: rgb(var(--record-paper) / .955);
+  /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
+     This forced greyscale smoothing on every word of the record, which is what you do
+     to a screen you do not trust and which, on most screens, is what makes a serif at
+     seventeen pixels look soft: it thins the strokes and throws away the sub-pixel
+     rendering the reader's own machine had already worked out. The record no longer
+     decides how a device draws letters. It sets them, and lets the glass do the rest. */
 }
 
 /* The machine keeps its own voice, at its own size. This rule used to catch every
@@ -175,5 +179,15 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
       0 0 0 1px rgb(var(--record-ink) / 0.12),
       0 34px 90px -34px rgb(var(--record-ink) / 0.5);
   }
-  .record-ground { opacity: 0.52 !important; }
+  /* ── THE PAINTING IS A ROOM, NOT A COAT OF PAINT ───────────────────────────────
+     At fifty-two per cent the plate was doing two jobs at once and neither well: it was
+     too faint to be looked at and too strong to be behind anything. Measured against a
+     wide screen, half a plate of a sky that carries noise at the level of the pixel is a
+     field of static — the "blurry stars" — sitting either side of the words and a few
+     per cent of it coming up through the sheet under them, which is what made a sentence
+     look out of focus that was perfectly sharp.
+     At thirty-six it is what it was always meant to be: the light in the room the record
+     is printed in. The painting loses nothing — it is still the same plate, still at its
+     own resolution, still the ground of every page. */
+  .record-ground { opacity: 0.36 !important; }
 }

@@ -62,9 +62,13 @@
   /* A sheet of the record's own paper, not a bar bolted under it: translucent, so the
      page is still felt through the way out, and so the foot of the record never looks
      like a different material to the top. */
+  /* ── THE SHEET IS THE PAPER, NOT THE BLUR ────────────────────────────────────────
+     There was a six-pixel backdrop blur under this rail, which had to be recomputed for
+     every scroll frame across the whole width of the glass — the single most expensive
+     thing on a page that already carries a very large painting, and invisible anyway
+     under paper at ninety-three per cent. A sheet of the record's own paper is enough:
+     what a reader sees through it is paper, so nothing is lost but the stutter. */
   background: rgb(var(--record-paper) / .93);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
   border-top: 1px solid rgb(var(--record-ink) / .14);
   box-shadow: 0 -10px 18px -14px rgb(var(--record-ink) / .35);
 }

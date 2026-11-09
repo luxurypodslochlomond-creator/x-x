@@ -389,12 +389,14 @@ button:focus-visible {
 }
 @keyframes twcc-scan { 0% { background-position: 0 0; } 100% { background-position: 0 3px; } }
 
-/* On a phone the record's grain holds still: the texture stays exactly as it looks,
-   but the whole page stops repainting sixty times a second, which is what made
-   scrolling and tapping feel juddery in the hand. */
-@media (max-width: 1023px) {
-  .twcc-scanlines::before { animation: none; }
-}
+/* ── THE GRAIN HOLDS STILL, ON EVERY SCREEN ───────────────────────────────────────
+   This rule used to stop the animation on phones only, on the reasoning that a desktop
+   had the power to spare. It does not, and the cost was not theoretical: this is a
+   background-position animation on a full-page pseudo-element, which a browser cannot
+   hand to the graphics card — so the whole record was repainted sixty times a second,
+   forever, while scrolling. That is the stutter in the hand and the heat in the laptop,
+   for a movement at three per cent that nobody can see.
+   The texture is exactly as it looks. It simply does not crawl. */
 @keyframes twcc-flicker {
   0%, 100% { opacity: 1; }
   47% { opacity: 1; }
