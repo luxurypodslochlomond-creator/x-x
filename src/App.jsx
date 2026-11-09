@@ -371,7 +371,7 @@ const AuthenticatedApp = () => {
           honesty that makes the rest of it believable. She still hands it over herself —
           the page prints and copies — so nothing has been taken away from her; it simply is
           not standing open in the street while she writes her introduction. */}
-      <Route path="/ClimateYaleBrief" element={<ClimateLayout currentPage="ClimateYaleBrief"><KeeperKey><ClimateYaleBriefPage /></KeeperKey></ClimateLayout>} />
+      <Route path="/ClimateHostBrief" element={<ClimateLayout currentPage="ClimateYaleBrief"><KeeperKey><ClimateYaleBriefPage /></KeeperKey></ClimateLayout>} />
       <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />

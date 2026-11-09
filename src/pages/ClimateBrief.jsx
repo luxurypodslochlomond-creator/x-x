@@ -276,7 +276,7 @@ export default function ClimateBrief() {
               ['/ClimateCorrections', 'Corrections, in the open', 'Everything that has been changed, with its date and its reason. Nothing is fixed quietly.'],
               ['/ClimateHandover', 'The Handover', 'What it costs to keep alive, what is still missing, and who holds the keys today.'],
               ['/ClimateGuide', 'All pages & guide', 'Every public page, followed by a guide to the controls.'],
-              ['/ClimateYaleBrief', 'The one-page summary', 'The figures, the gaps and the ask on a single page, for whoever carries it next.'],
+              ['/ClimateHostBrief', 'The one-page summary', 'The figures, the gaps and the ask on a single page, for whoever carries it next.'],
             ].map(([to, title, body]) => (
               <Link key={to} to={to} className="flex items-start gap-3 bg-[#efe7d6] px-4 py-3 active:bg-[#e2602a]/15">
                 <ArrowRight className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#b3261e]" />

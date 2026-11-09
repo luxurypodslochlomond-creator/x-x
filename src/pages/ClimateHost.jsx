@@ -70,7 +70,7 @@ export default function ClimateHost() {
           </p>
         </div>
         <Link
-          to={createPageUrl('ClimateYaleBrief')}
+          to="/ClimateHostBrief"
           className="px-3 py-2 border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wide text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors flex-shrink-0"
         >
           Open the brief
