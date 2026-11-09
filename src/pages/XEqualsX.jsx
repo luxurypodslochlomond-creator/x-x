@@ -1,8 +1,8 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
-import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
-import XEqualsXLightPlate from '@/components/climate/XEqualsXLightPlate';
+import XEqualsXCovenantField from '@/components/climate/XEqualsXCovenantField';
+import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
 import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
@@ -40,16 +40,21 @@ export default function XEqualsX() {
     >
       <XEqualsXCut />
 
-      <XEqualsXInscription />
+      {/* One plate, and the reader's arrival is what draws it. It runs past the reading
+          measure on purpose: the page's only drawing is printed bigger than its type,
+          and it breaks the column so the page stops reading as a form. */}
+      <XEqualsXCovenantField />
 
-      {/* Whose record this is, before any argument about why it exists. */}
-      <XEqualsXFounderNote />
+      {/* Two columns rather than two more blocks in a stack: what the covenant is, and
+          whose record it is, read side by side instead of one after the other. */}
+      <div className="grid gap-8 sm:grid-cols-[1.1fr_.9fr] sm:gap-10">
+        <XEqualsXInscription />
+        {/* Whose record this is, before any argument about why it exists. */}
+        <XEqualsXFounderNote />
+      </div>
 
-      {/* The covenant, drawn. */}
-      <XEqualsXMarkPlate />
-
-      {/* What a reader meets before a word of it: light. */}
-      <XEqualsXLightPlate />
+      {/* The context the page never had: the conversation, the hand, the borrowed red. */}
+      <XEqualsXWhereItComesFrom />
 
       {/* One real entry, not a screenshot of one. */}
       <RecordInPractice />

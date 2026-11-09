@@ -1,0 +1,64 @@
+/* ── x = x — ONE DRAWING, AND THE READER'S ARRIVAL DRAWS IT ────────────────────
+   The page used to be a stack of figures, every one the same width, every one framed
+   the same way, all of them already finished before anyone looked. A finished drawing
+   says nothing back. This one is laid down as the reader reaches it: the ground first,
+   then two people standing on it, then the light leaving the space between them.
+
+   It is not decoration and it is not a progress bar. It is the one thing on the page
+   that answers the fact that somebody is here.
+
+   The plate breaks the column. Every other piece of the page is set inside the reading
+   measure; this one runs past both edges, because a plate in a book is printed bigger
+   than the type. That is the difference between a page that has an illustration in it
+   and a page that is printed. */
+.xc-plate {
+  margin-inline: -1rem;
+  padding-inline: 0;
+}
+
+/* The plate bleeds exactly as far as the page's own gutter, never further — a plate
+   that overflows the glass gives a phone a sideways scroll, which is the one thing a
+   printed page never does. */
+@media (min-width: 640px) {
+  .xc-plate { margin-inline: -1rem; }
+}
+
+.xc-plate svg { display: block; overflow: visible; }
+
+/* Nothing is visible until it is drawn. */
+.xc-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.33, 0, 0.2, 1);
+}
+
+.xc-plate.is-drawn .xc-line { stroke-dashoffset: 0; }
+
+/* The mark itself keeps working after the hand has stopped: a slow, barely-there
+   change in weight, the way ink sits differently on paper depending on the light.
+   Seven seconds is long enough that a reader never catches it starting. */
+.xc-breath {
+  animation: xc-breath 7s ease-in-out infinite;
+}
+
+@keyframes xc-breath {
+  0%, 100% { opacity: 0.82; }
+  50% { opacity: 1; }
+}
+
+/* The context block: the margin says what the paragraph is, the paragraph says it. */
+.xc-note {
+  display: grid;
+  gap: 0.35rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .xc-note { grid-template-columns: 9.5rem 1fr; }
+  .xc-note dt { text-align: right; padding-top: 0.25rem; }
+  .xc-note dd { margin: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xc-line { stroke-dashoffset: 0; transition: none; }
+  .xc-breath { animation: none; opacity: 1; }
+}

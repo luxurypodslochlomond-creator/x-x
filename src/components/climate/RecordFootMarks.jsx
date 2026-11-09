@@ -147,12 +147,19 @@ export function MarkLens({ size = 26, className = '' }) {
 // thinner than the stroke, and each mark drawn for one door and no other. A mark
 // that could sit beside any word is an illustration, not a door.
 
-// The mark itself, at the size of a word. Two strokes of exactly the same length.
+// The mark itself, at the size of a word. Two strokes of exactly the same length,
+// standing on one line.
+//
+// It used to be drawn as two crossing diagonals with a red bar through the middle,
+// which at twenty-six pixels read as a four-pointed star — and a star is the one thing
+// this mark must never be. Nothing here is a flourish: two uprights, one ground, and
+// the equals between them. It cannot be mistaken for a badge, an award or a logo.
 export function MarkEqual({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M4.6 11.1l7.7 17.1M4.2 27.8 12.9 11M27.3 11.4l8 16.7M27 28.4l8.7-17.7" />
-      <path d="M16.1 17.2l7.7-.2M15.9 23l8 .2" className="text-record-mark" strokeWidth="2" />
+      <path d="M10.5 8.6c-.5 6.3-.7 13.2-.4 20.1M29.3 8.4c.5 6.2.7 13.1.4 20" />
+      <path d="M6.4 28.7h27.2" opacity=".5" strokeWidth="1" />
+      <path d="M16.4 16.2h7.4M16.3 21.2h7.6" className="text-record-mark" strokeWidth="2.2" />
     </svg>
   );
 }
