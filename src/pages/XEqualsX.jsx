@@ -17,21 +17,23 @@ import XEqualsXMachine from '@/components/climate/XEqualsXMachine';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
-import XEqualsXLightPlate from '@/components/climate/XEqualsXLightPlate';
 import RecordEpigraph from '@/components/climate/RecordEpigraph';
 
-// ── WHY THIS RECORD ────────────────────────────────────────────────────────────
+// ── THE TERMS OF THIS RECORD ───────────────────────────────────────────────────
 // A reader decides whether a page is worth their eye in about a second, and that
-// decision is made by light, not by argument. So the argument has moved down the page
-// and the drawings have moved up: the mark, then the light, then a real entry they can
-// follow to its source, then three objects that carry the reason in a single line each.
+// decision is made by the drawing, not by the argument. So the page is: the mark,
+// the field, the terms, one case with its sources, then one real entry a reader can
+// follow to its origin.
 //
-// Nothing has been removed from the record to do this. The full argument, the three
-// things a reader can check without trusting us, the promises, the limits, the note
-// from the machine and the debt owed to a borrowed colour are all still here, gathered
-// in one place a reviewer can open when they want the paper trail rather than the page.
+// The plate about photons is gone. It argued that light reaches a reader before a
+// sentence does, which is true and was still the author's own mythology printed on a
+// public record — the page is about what this record binds itself to, not about how
+// its maker thinks seeing works. The mark plates stay because they are the mark.
 //
-// Art first. Evidence one touch away. That is the order a stranger actually reads in.
+// Nothing has been removed from the record to do this. The long argument, the three
+// things a reader can check without trusting us, the six hard readers, the promises,
+// the limits, the note from the machine and the debt owed to a borrowed colour are all
+// still here, in the fold a reviewer opens when they want the paper trail.
 export default function XEqualsX() {
   return (
     <ClimateRecordShell
@@ -72,10 +74,9 @@ export default function XEqualsX() {
           cosmology to be felt — only the sources, which sit under it. */}
       <XEqualsXWhoIsCredited />
 
-      {/* Light, then the record itself — not a description of it, an entry out of it that
-          a reader can follow to its source. The connection to the climate platform is the
-          thing being proved, so it comes before the argument for it. */}
-      <XEqualsXLightPlate />
+      {/* The record itself — not a description of it, an entry out of it that a reader
+          can follow to its source. The connection to the climate platform is the thing
+          being proved, so it comes before any argument for it. */}
       <RecordInPractice />
 
       {/* Two columns rather than two more blocks in a stack: what the covenant is, and
