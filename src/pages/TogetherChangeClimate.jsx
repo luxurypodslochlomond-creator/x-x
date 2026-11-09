@@ -816,12 +816,13 @@ export default function TogetherChangeClimate() {
               Horizon Solutions Site ↗
             </a>
           </div>
-          <p className="text-[11px] font-mono text-[#efe7d6]/80 mt-6 pt-5 border-t border-[#efe7d6]/20 leading-relaxed max-w-[640px]">
-            {t.family}{' '}
-            <Link to={createPageUrl('NewCleanup')} className="text-[#e2602a] hover:text-[#efe7d6] font-black uppercase">
-              {t.action} →
-            </Link>
-          </p>
+          {/* HELD at Janine's request, 9 November 2026. The line that stood here — "this
+              platform is one part of UF51's Planetary Healing family… TAKE ACTION" — is
+              not on the page. Read by a potential host it argues that the record is one
+              product inside somebody else's company, which is exactly the confusion a
+              funder or an institute cannot afford to carry. The record does not need it:
+              everything it claims is already on the page, with a source. Nothing deleted —
+              the words are in the tongue dictionaries, waiting, if she ever wants them back. */}
         </section>
 
         {/* Terms and Privacy now sit in the shared footer, on every page of the record. */}

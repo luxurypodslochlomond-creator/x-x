@@ -139,6 +139,17 @@ export default function ClimateMusic() {
         loading={loading}
       />
 
+      {/* Her rule, printed rather than assumed: music is heard by a person before it stands
+          here, and the test is cultural — no war symbols, no unkind reference of any kind,
+          only what is positive. Until a piece has passed that, it is held: nothing given is
+          deleted, and only the record's own theme stands while the check is being made. */}
+      <p className="mb-4 border-l-4 border-l-[#141210]/25 pl-3 text-[11px] font-mono leading-relaxed text-[#5a5246]">
+        Every piece is heard by a person before it stands here. Music is checked for cultural
+        sensitivity first — no war symbols, no unkind reference of any kind, only what is
+        positive — so music is held while that check is made, and the record&rsquo;s own theme
+        is what stands until it is done.
+      </p>
+
       {loading ? (
         <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
           <RefreshCw className="w-5 h-5 animate-spin text-[#5a5246] mx-auto mb-3" />

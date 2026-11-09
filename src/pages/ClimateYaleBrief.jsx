@@ -63,6 +63,14 @@ const MISSING = [
   ['Publish the code', 'Days rather than months. Until then nothing here can honestly be called auditable.'],
 ];
 
+const YALE = [
+  { name: 'Yale Planetary Solutions · climate action areas', url: 'https://planetarysolutions.yale.edu/action-areas-overview/climate', why: 'The university’s own climate action map. Closest fit for a record of what works.' },
+  { name: 'Planetary Solutions Impact Accelerator · FY2026', url: 'https://ventures.yale.edu/planetary-solutions-impact-accelerator-fy-2026', why: 'The accelerator cohort — the people already judging what is worth carrying.' },
+  { name: 'Yale Climate Connections', url: 'https://yaleclimateconnections.org/', why: 'Daily public climate reporting. Readers who would test the wire against their own.' },
+  { name: 'Yale School of the Environment · climate centres & programmes', url: 'https://environment.yale.edu/research-impact/centers-programs-and-initiatives/yale-climate-connections', why: 'The research side: where a verdict on the method could actually be given.' },
+  { name: 'Yale Environment 360 · about', url: 'https://e360.yale.edu/about', why: 'Long-form, sourced writing. The nearest existing thing to what this record is trying to be.' },
+];
+
 const NO_MONEY =
   'Nobody in this has the money for it. The founder it is built in honour of has said plainly that she does not, the two who built it are a community interest company in Scotland with no reserves, and no grant has been taken. That is why nothing on this page asks anybody for a cheque. It asks for people who can check it and a host who can carry it — and says so in that order, because the people matter more and are harder to get.';
 
@@ -212,6 +220,41 @@ export default function ClimateYaleBrief() {
               <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#3a342c] mt-1.5">{a.body}</p>
             </div>
           ))}
+        </div>
+        {/* The doors she already knows, named as she named them. She sent these five on
+            9 November 2026 while carrying this to New Haven, and a brief that did not name
+            them would be asking her to do the mapping in her head. Nothing here says any of
+            them has agreed to anything — they are the places that already do this work, and
+            so the places where one reader with standing could plausibly be found. */}
+        <div className="mt-4">
+          <p className="text-[9.5px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246]">
+            The doors already open to her · named as she named them
+          </p>
+          <ul className="mt-2 border-2 border-[#141210] divide-y divide-[#141210]/15">
+            {YALE.map((y) => (
+              <li key={y.url}>
+                <a
+                  href={y.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-start gap-2 px-3 py-2.5 hover:bg-[#141210]/5 transition-colors"
+                >
+                  <span className="flex-1 min-w-0">
+                    <span className="block text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] group-hover:text-[#b3261e]">
+                      {y.name}
+                    </span>
+                    <span className="block text-[10.5px] font-mono leading-relaxed text-[#5a5246] mt-0.5">{y.why}</span>
+                  </span>
+                  <span aria-hidden="true" className="text-[#141210]/35 group-hover:text-[#b3261e] flex-shrink-0">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="text-[11px] font-mono leading-relaxed text-[#5a5246] mt-2">
+            None of them has been asked yet, and none is named as an endorser. They are the
+            institutions closest to this work, which makes them the likeliest place to find
+            the one thing on this page that cannot be built: a reader with standing.
+          </p>
         </div>
       </Section>
 
