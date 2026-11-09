@@ -1,78 +1,68 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
-import RecordNavDoor from '@/components/climate/RecordNavDoor';
-import { ELSEWHERE_NAV } from '@/components/climate/recordFooterLinks';
 
-// ── THE FOOT CARRIES ONLY WHAT THE HEAD DOES NOT ────────────────────────────────
-// This nav used to print the top of the page a second time: Contents was in both, the
-// founder was in both, and Terms and Privacy stood a third time as typed words under it.
-// A foot that says what the head has just said teaches a reader that neither one matters,
-// and it turns the end of a page into a menu instead of a colophon.
+// ── THE FOOT IS A COLOPHON AGAIN, NOT A SECOND MENU ─────────────────────────────
+// The doors that stood here — entry fingerprints, readership, the founder, becoming a
+// checker, hosting the record — were each already offered somewhere a reader passes on the
+// way in: the founder in the masthead, every one of them in the contents sheet, and the
+// fingerprints and the readership on the entries and the record pages themselves. So the
+// foot printed a third copy of the way through, hung off the bottom of every page, and the
+// one thing a printed record does put at its foot — the mark, and who made it — was pushed
+// into a corner beside a row of doors, competing with them for the same line.
 //
-// So the division is by width, not by taste. Every door below is one the masthead does not
-// carry at that width: the founder leaves the foot at md, where the masthead takes him on;
-// the terms, the privacy and the keeper's door leave at lg, where the masthead takes those.
-// Contents is not here at all any more — it is in the masthead at every width and in the
-// dock on a phone, so a third printing of it was the least useful line on the page.
-const REST = ELSEWHERE_NAV;
-const LEAVES_THE_FOOT_AT = { '/ClimateFounder': 'md:hidden' };
-// A door to the room you are standing in is not a door. The foot offers only ways out.
-
-export default function RecordFooter({ showKeeper = true, onOpenContents, contentsOpen }) {
+// What is left is the colophon and nothing else: the mark, one line saying what it is, a
+// printer's short rule, and the imprint. All of it centred on the page's own axis, because
+// a colophon is set to the middle of a sheet, not to its left edge. Nothing has been taken
+// off the record — the doors are in the masthead at the top of this page and in Contents.
+//
+// The mark does not advertise itself to a reader already standing in front of it. On the
+// page that explains x = x, the colophon keeps its imprint and says nothing about the mark.
+export default function RecordFooter({ showKeeper = true }) {
   const { pathname } = useLocation();
-
-  // ── THE MARK DOES NOT ADVERTISE ITSELF TO A READER ALREADY STANDING IN FRONT OF IT ──
-  // At the foot of every other page the colophon prints x = x large and points at the page
-  // that explains it. On the page that explains it, that is the mark printed twice with a
-  // link to itself: the reader scrolls past the terms of the mark, reaches the foot, and is
-  // offered the mark again, as though they had not just read it. So on that one page the
-  // colophon keeps its imprint and its doors and says nothing about the mark.
   const standingAtTheMark = pathname === '/XEqualsX';
 
   return (
-    <footer className="mt-4 border-t border-record-ink/20 bg-record-paper text-record-ink">
-      <div className="mx-auto max-w-[1100px] px-4 pb-9 pt-10 lg:px-10">
-        <div className="sm:flex sm:items-end sm:justify-between sm:gap-12">
-          {!standingAtTheMark && (
-            <div className="min-w-0">
-              <Link
-                to="/XEqualsX"
-                className="block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
-                style={{
-                  fontFamily: 'var(--font-reading)',
-                  fontSize: 'clamp(38px, 10.5vw, 58px)',
-                  lineHeight: 0.82,
-                  letterSpacing: '-0.03em',
-                }}
-              >
-                x = x
-              </Link>
-              <p className="mt-4 max-w-[40ch] text-[13.5px] leading-relaxed text-record-muted">
-                The mark this record is built on. Read what it means, and what it does not.
-              </p>
-            </div>
-          )}
+    <footer className="mt-6 border-t border-record-ink/20 bg-record-paper text-record-ink">
+      <div className="mx-auto flex max-w-[1100px] flex-col items-center px-4 pb-10 pt-12 text-center lg:px-10">
+        {!standingAtTheMark && (
+          <>
+            <Link
+              to="/XEqualsX"
+              aria-label="x = x — what the mark means, and what it does not"
+              className="block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-record-red"
+              style={{
+                fontFamily: 'var(--font-reading)',
+                fontSize: 'clamp(46px, 9.5vw, 70px)',
+                lineHeight: 0.86,
+                letterSpacing: '-0.035em',
+              }}
+            >
+              x = x
+            </Link>
+            <p className="mt-5 max-w-[42ch] text-[13.5px] leading-relaxed text-record-muted">
+              The mark this record is built on. Read what it means, and what it does not.
+            </p>
+          </>
+        )}
 
-          {/* The imprint sits opposite the mark, the way a printer puts one at the foot of
-              a sheet and never mentions it again. */}
-          <p className="mt-6 shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-record-muted sm:mt-0 sm:pb-1 sm:text-right">
-            Made in Scotland from photons
-            <span className="mt-1 block text-[12.5px] normal-case tracking-normal">
-              A public service · for the world
-            </span>
-          </p>
-        </div>
+        {/* The printer's short rule: the sheet has ended, and what follows is the imprint
+            rather than more of the page. */}
+        <span
+          aria-hidden="true"
+          className={`block h-px w-16 bg-record-ink/25 ${standingAtTheMark ? 'mt-0' : 'mt-10'}`}
+        />
 
-        <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-start gap-x-5 gap-y-5">
-          {REST.filter((door) => door.to !== pathname).map(({ label, to, what }) => (
-            <RecordNavDoor key={to} to={to} label={label} what={what}
-              active={pathname === to} size={28}
-              className={`w-[calc((100%-2.5rem)/3)] sm:w-24 ${LEAVES_THE_FOOT_AT[to] || ''}`} />
-          ))}
-        </nav>
+        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-record-muted">
+          Made in Scotland from photons
+          <span className="mt-1.5 block text-[12.5px] normal-case tracking-[0.02em]">
+            A public service · for the world
+          </span>
+        </p>
 
-        <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1">
+        {/* The record's promises, on a phone, where the masthead has not room for them.
+            On a wide screen both are in the masthead, so this row is not printed at all. */}
+        <div className="mt-6 flex flex-wrap items-baseline justify-center gap-x-6 gap-y-1 lg:hidden">
           {[
             { label: 'Terms', to: '/ClimateTerms' },
             { label: 'Privacy', to: '/ClimatePrivacy' },
@@ -81,18 +71,14 @@ export default function RecordFooter({ showKeeper = true, onOpenContents, conten
               key={to}
               to={to}
               aria-current={pathname === to ? 'page' : undefined}
-              className={`inline-block py-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red lg:hidden ${
+              className={`inline-block py-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
                 pathname === to ? 'text-record-red' : 'text-record-muted'
               }`}
             >
               {label}
             </Link>
           ))}
-          {showKeeper && (
-            <span className="lg:hidden">
-              <KeeperDoor />
-            </span>
-          )}
+          {showKeeper && <KeeperDoor />}
         </div>
       </div>
     </footer>
