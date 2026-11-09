@@ -3,6 +3,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXCovenantField from '@/components/climate/XEqualsXCovenantField';
 import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
+import XEqualsXNoteFromTheBuilder from '@/components/climate/XEqualsXNoteFromTheBuilder';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
 import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
@@ -33,7 +34,7 @@ export default function XEqualsX() {
     <ClimateRecordShell
       eyebrow="Why this record"
       title="Nobody above anybody."
-      statement="A record of what works on this planet — every entry with its source, every correction in the open, and nobody above anybody in it."
+      statement="Kept in Scotland. Every entry with its source, every correction in the open, no funder's name on the door — and nobody above anybody in it."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Built in honour of Janine M. H. Selendy and Horizon International. The phrase ‘the record of the time’ is Laurie Anderson’s, from From the Air, Big Science, 1982. No endorsement is claimed."
@@ -45,6 +46,16 @@ export default function XEqualsX() {
           and it breaks the column so the page stops reading as a form. */}
       <XEqualsXCovenantField />
 
+      {/* Him. The page had a section for the founder and none for the person who made
+          it, which is why it read as a document about a principle rather than something
+          somebody did. First person, signed, and no credential asked for. */}
+      <XEqualsXNoteFromTheBuilder />
+
+      {/* And then the record itself, straight away — not a description of it, an entry
+          out of it that a reader can follow to its source. The connection to the climate
+          platform is the thing being proved, so it comes before the argument for it. */}
+      <RecordInPractice />
+
       {/* Two columns rather than two more blocks in a stack: what the covenant is, and
           whose record it is, read side by side instead of one after the other. */}
       <div className="grid gap-8 sm:grid-cols-[1.1fr_.9fr] sm:gap-10">
@@ -55,9 +66,6 @@ export default function XEqualsX() {
 
       {/* The context the page never had: the conversation, the hand, the borrowed red. */}
       <XEqualsXWhereItComesFrom />
-
-      {/* One real entry, not a screenshot of one. */}
-      <RecordInPractice />
 
       {/* The reason, in three marks and three lines. */}
       <XEqualsXLostMarks />
