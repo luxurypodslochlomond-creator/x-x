@@ -35,7 +35,16 @@
   text-align: center;
 }
 .rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); }
-.rec-art-door-active .rec-art-caption { font-weight: 700; }
+/* ── WHERE YOU ARE, WITHOUT MAKING ANYTHING MOVE ─────────────────────────────────
+   The door you are standing in used to set its caption in bold, which is the one way to
+   mark a place that changes the width of the word doing the marking: every neighbour
+   shifted a pixel sideways as you turned a page, and in a fixed cell the longer word was
+   clipped instead. So the caption keeps its weight and the place is said twice, neither
+   of which costs a pixel — the ink goes to the mark's red, and a short rule is drawn over
+   the drawing itself, the way a bookmark sits on a line of print rather than in it. */
+.rec-mast-doors .rec-art-caption { white-space: nowrap; max-width: 100%; }
+.rec-mast-doors .rec-art-door-active .rec-art-drawing,
+.rec-art-rail .rec-art-door-active .rec-art-drawing { box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark)); }
 .rec-art-door:focus-visible {
   outline: 2px solid rgb(var(--record-mark));
   outline-offset: 3px;
