@@ -108,18 +108,19 @@ export default function Transmission() {
       {/* ── ON THE RECORD ── provenance and a citation, so the work can be checked and quoted ── */}
       <TransmissionRecord />
 
-      {/* ── KEPT BY PEOPLE ── the honest moment to ask is the moment someone has just listened ── */}
-      <div className="bg-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210] flex items-center gap-3">
-        <div className="flex-1 min-w-0">
-          <p className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]">Free to read. Free to listen. Nothing for sale.</p>
-          <p className="text-[11px] font-mono text-[#5a5246] mt-1 leading-relaxed">The record is kept online by the people who read it — not by ads, and never by selling the music.</p>
-        </div>
-        <Link
-          to={createPageUrl('ClimateSupport')}
-          className="flex-shrink-0 px-3 py-2.5 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
-        >
-          Keep it going →
-        </Link>
+      {/* ── NOTHING FOR SALE, AND NOBODY ASKED ──
+          This strip used to say "the record is kept online by the people who read it" and
+          ended in a "Keep it going" button that went to the support page. Both came off on
+          9 November, at the founder's word: what it costs and who pays is handled by a host,
+          worked out with them, and not asked of a reader in the meantime. The band stays, as
+          a statement, and asks for nothing — which is also the honest thing to say while
+          giving is shut. */}
+      <div className="bg-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210]">
+        <p className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]">Free to read. Free to listen. Nothing for sale.</p>
+        <p className="text-[11px] font-mono text-[#5a5246] mt-1 leading-relaxed">
+          No ads, no sponsorship, and nothing to buy. How the record is paid for is a question
+          for whoever carries it next, and it is not asked of you here.
+        </p>
       </div>
     </div>
   );
