@@ -2,7 +2,7 @@ import React from 'react';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import GuideBand from '@/components/climate/GuideBand';
-import { RECORD_FOOTER_GROUPS } from '@/components/climate/recordFooterLinks';
+import FOOTER_DOORS from '@/components/climate/recordFooterLinks';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
@@ -177,14 +177,13 @@ const KEEPER_DOORS = [
   },
 ];
 
-// Use the same destinations and labels as the shared footer.
+// The same nine doors, in the same order, as the foot of every page. One word each.
 const FOOT = [
-  ...RECORD_FOOTER_GROUPS.flatMap((group) => group.links.map((item) => ({
-    label: item.label, to: item.to, what: `Under “${group.label}”. ${item.description}`,
-  }))),
+  ...FOOTER_DOORS.map((item) => ({ label: item.label, to: item.to, what: item.what })),
+  { label: 'Guide', to: '/ClimateGuide', what: 'This page: every control, and the one thing each does.' },
   { label: 'x = x', to: '/XEqualsX', what: 'The covenant: equal human worth, with the promises and their limits.' },
-  { label: 'Terms', to: '/ClimateTerms', what: 'The record’s terms, always visible below the three groups.' },
-  { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, always visible below the three groups.' },
+  { label: 'Terms', to: '/ClimateTerms', what: 'The ground the record stands on.' },
+  { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, and what it never does.' },
 ];
 
 export default function ClimateGuide() {
@@ -246,7 +245,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="Three groups replace the long row of links: About this record, Check the record and Take part. Tap a group to reveal its links. The covenant, Terms, Privacy and keeper / checker sign-in remain underneath; the working screens omit the extra sign-in link."
+        note="Nine doors, one word each, each with a hand-drawn mark for the thing behind it. No headings and no descriptions: press the mark. The covenant, the Guide, Terms, Privacy and the keeper / checker sign-in sit in a quiet line beneath them."
         items={FOOT}
       />
 

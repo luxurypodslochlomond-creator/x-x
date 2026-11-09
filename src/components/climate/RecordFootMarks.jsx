@@ -1,0 +1,114 @@
+import React from 'react';
+
+// ── THE MARKS AT THE FOOT ──────────────────────────────────────────────────────
+// The foot of the record used to be a list of links with a sentence under each, and a
+// sentence under a link is a menu explaining itself. It is nine doors now, and each one
+// is a word beside a mark drawn for that door and nothing else.
+//
+// Same hand as the shed's marks: one weight, currentColor, no second colour, one solid
+// mass in each so the mark is an object rather than a diagram. They are read at 26px on
+// a phone, which is why nothing here has a line thinner than the stroke.
+const BASE = {
+  viewBox: '0 0 40 40',
+  fill: 'none',
+  stroke: 'currentColor',
+  strokeWidth: 2.4,
+  strokeLinecap: 'round',
+  strokeLinejoin: 'round',
+};
+
+// What this is. A sheet, folded at the corner, already numbered.
+export function MarkBrief({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M10.6 4.6h12.8L30.4 11.6v23.8H10.6Z" />
+      <path d="M23 4.6v7h7.4" />
+      <path d="M15 19.6h10.6M15 24.6h10.6M15 29.6h6.4" />
+    </svg>
+  );
+}
+
+// Whose record this is. A bust on its plinth, not a logo.
+export function MarkPortrait({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="14.4" r="6.4" />
+      <path d="M8.4 32.4c0-6.4 5.2-11.6 11.6-11.6s11.6 5.2 11.6 11.6" />
+      <path d="M8.4 35.4h23.2" />
+    </svg>
+  );
+}
+
+// How it is made. A pair of dividers set to the page.
+export function MarkMethod({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="7.2" r="2.6" fill="currentColor" stroke="none" />
+      <path d="M18.8 9.6L10.4 33.4" />
+      <path d="M21.2 9.6l8.4 23.8" />
+      <path d="M14.4 23.4h11.2" />
+    </svg>
+  );
+}
+
+// A correction, in proofreader's hand: the line as it stands, and the insertion rising
+// to its point. Nothing is quietly deleted on this record.
+export function MarkCorrection({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M5.6 14.6h28.8" />
+      <path d="M20 33.4l-6.6-8.4" />
+      <path d="M20 33.4l6.6-8.4" />
+      <path d="M20 6.6v6.4" />
+    </svg>
+  );
+}
+
+// The people who check. Two pairs of eyes, set to the same page.
+export function MarkCheckers({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="13" cy="22.4" r="6.2" />
+      <circle cx="27" cy="22.4" r="6.2" />
+      <path d="M19.2 22.4h1.6" />
+      <path d="M6.8 22.4H4.4M33.2 22.4h2.4" />
+    </svg>
+  );
+}
+
+// What changes hands. One set of hands to another, and the direction said out loud.
+export function MarkHandover({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="8.2" cy="30.2" r="3.2" fill="currentColor" stroke="none" />
+      <circle cx="31.8" cy="10.4" r="3.2" fill="currentColor" stroke="none" />
+      <path d="M10.6 27.4C15.4 17 23.6 13.2 28.4 12.6" />
+      <path d="M24.2 8.8l4.6 3.8-3.6 4.4" />
+    </svg>
+  );
+}
+
+// The music given to the record. A fork, struck once.
+export function MarkMusic({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M14.4 6.4v12.2a5.6 5.6 0 0 0 11.2 0V6.4" />
+      <path d="M20 24.2v10.4" />
+      <path d="M15.6 34.6h8.8" />
+    </svg>
+  );
+}
+
+// The room where something is made rather than read.
+export function MarkStudio({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path
+        d="M20 3.8c0 9.4 4.4 13.8 13.8 13.8C24.4 17.6 20 22 20 31.4 20 22 15.6 17.6 6.2 17.6 15.6 17.6 20 13.2 20 3.8Z"
+        fill="currentColor"
+        stroke="none"
+      />
+      <path d="M20 35.4v1.2" />
+    </svg>
+  );
+}

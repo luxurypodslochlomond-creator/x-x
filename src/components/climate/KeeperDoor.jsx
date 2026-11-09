@@ -8,9 +8,9 @@ export default function KeeperDoor() {
     <Link
       to="/ClimateKeeperRoom"
       aria-label="Sign in to the shed — invited keepers and checkers"
-      className="inline-flex min-h-11 items-center text-xs font-body text-record-muted hover:text-record-red underline underline-offset-4"
+      className="inline-flex min-h-11 items-center font-body text-[11.5px] text-record-muted transition-colors hover:text-record-red"
     >
-      Keeper / checker sign-in
+      Keeper sign-in
     </Link>
   );
 }
