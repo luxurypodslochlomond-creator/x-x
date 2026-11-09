@@ -36,8 +36,9 @@ import RecordBand from '@/components/climate/RecordBand';
 // SECOND — the technology was at the foot, inside a collapsed section. x = x is not only
 // a sentence about people; it is the rule the seals, the second key and the log are built
 // to hold. Those three come before the argument for them, because the first question a
-// research institute asks is not "is this beautiful", it is "what stops you lying, and can
-// I confirm it without you".
+// careful reviewer asks is not "is this beautiful", it is "what stops you lying, and can
+// I confirm it without you". No institution is named as a backer anywhere on this page:
+// a letterhead implied but not named is borrowed authority, and x = x has none.
 //
 // THIRD — the 1844 telegraph case was carrying the middle of the page on its own. It is
 // the best documented instance of the thing the page is about, and it is still here, still

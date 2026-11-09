@@ -14,13 +14,13 @@ import { MarkEqual } from './RecordFootMarks';
 // looks as though it expects one.
 const NOTES = [
   {
-    term: 'The conversation',
+    term: 'The question it began as',
     body: (
       <>
-        It began with one message, from one person at one research institute. That institute has
-        not read this and has not agreed to it, and nothing here is written to win its approval.
-        The same holds for every other university, funder and letterhead: this is written for
-        whoever reads it.
+        Whether a record could be kept whole — every entry traced to the source that said it,
+        nothing absorbed, dropped or renamed on the way — instead of being admired and lost. No
+        university, funder or letterhead has read this or agreed to it, and none is relied on: a
+        name above a claim has never once made the claim true.
       </>
     ),
   },

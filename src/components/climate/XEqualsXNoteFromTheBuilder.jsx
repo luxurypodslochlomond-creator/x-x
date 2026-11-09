@@ -6,10 +6,16 @@ import { MarkPortrait } from './RecordFootMarks';
 // made it. Which is why it read as a document about a principle rather than something
 // a person did: there was a founder with a biography and a builder with no name at all.
 //
-// So: first person, short, nothing sold. Where it was built, who it was for, why Yale
-// came up and why it is not the point, and the two people it owes something to — said
-// as debts rather than as credentials. A reader can disagree with all of it. The one
-// thing they cannot do is not know who wrote it.
+// So: first person, short, nothing sold. Where it was built, whose work it was built
+// around, and the two people it owes something to — said as debts rather than as
+// credentials. A reader can disagree with all of it. The one thing they cannot do is not
+// know who wrote it.
+//
+// An unnamed "research institute" stood in this note, and it is gone. It read as borrowed
+// authority — a letterhead implied without one being named, which is the exact thing this
+// page is written against — and it put a relationship on the record that nobody had agreed
+// to. No university, funder or institute is named here as a backer, because none of them is
+// one. The work is named, and the person who did it is named.
 //
 // Signed, because an unsigned page asking to be trusted is the exact thing this record
 // was built against.
@@ -32,15 +38,17 @@ export default function XEqualsXNoteFromTheBuilder() {
           funder, not for a panel, and not for any institution's approval.
         </p>
         <p>
-          It began with one message, from one person at one research institute, asking whether a
-          record like this could exist. It was a good conversation, and it ended the way those
-          conversations usually end — with the thing being admired rather than made. So I made it.
-          That is the whole of my qualification: I am the one who did the work.
+          It began as a question about one person's life work — forty years of it, gathered by
+          Janine Selendy — and whether it could be kept whole and traceable instead of being
+          admired and then lost. So I made it. That is the whole of my qualification: I am the one
+          who did the work.
         </p>
         <p>
-          The institute is not the audience. You are, whoever you are, reading this on whatever
-          screen you have. But it is built to be taken apart by people whose whole job is to take
-          things apart — every claim sourced, every limit stated, nothing asked for on trust.
+          Her name is on the record because the work is hers. Mine is on this page because the page
+          is mine. Nobody else's is on either, and no letterhead stands behind it: no university,
+          funder or institute has read this or agreed to it, and none is relied on. It is built to
+          be taken apart by whoever wants to — every claim sourced, every limit stated, nothing
+          asked for on trust.
         </p>
         <p>
           It is meant to look like a record somebody kept, because that is what it is. Not a brand,

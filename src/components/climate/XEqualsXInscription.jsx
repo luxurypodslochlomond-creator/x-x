@@ -25,6 +25,17 @@ export default function XEqualsXInscription() {
         x = x is the whole of it. Whoever did the work keeps their name on it, and the record is
         what keeps it there after the room empties.
       </p>
+      {/* The absolute, said where it can be checked. x = x is only worth the ink if the
+          record itself takes nothing off the person reading it: no account, no fee, no address
+          kept. That is the difference between a record and a harvest, and it is the reason
+          nothing here is for sale. */}
+      <p className="mt-4 max-w-[46ch] text-record-ink">
+        And nothing is taken off the reader to hold it up: no account, no fee, no address kept —
+        a view is counted by country, and that is all. The work goes back out with the name of
+        the person who did it still on it. That is the opposite of extraction, and it is why
+        none of this is for sale.
+      </p>
+
       <p className="record-meta mt-3 text-record-muted">
         Equal human worth. Not equal evidence, and not equal scale.
       </p>
