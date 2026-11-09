@@ -7,31 +7,42 @@ import { ELSEWHERE_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLink
 // The colophon keeps the doors not carried by the primary navigation.
 const ALL_PAGES = FOOTER_NAV.find((door) => door.to === '/ClimateGuide');
 const REST = [...ELSEWHERE_NAV, ALL_PAGES].filter(Boolean);
+// A door to the room you are standing in is not a door. The foot offers only ways out.
 
 export default function RecordFooter({ showKeeper = true, onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
+
+  // ── THE MARK DOES NOT ADVERTISE ITSELF TO A READER ALREADY STANDING IN FRONT OF IT ──
+  // At the foot of every other page the colophon prints x = x large and points at the page
+  // that explains it. On the page that explains it, that is the mark printed twice with a
+  // link to itself: the reader scrolls past the terms of the mark, reaches the foot, and is
+  // offered the mark again, as though they had not just read it. So on that one page the
+  // colophon keeps its imprint and its doors and says nothing about the mark.
+  const standingAtTheMark = pathname === '/XEqualsX';
 
   return (
     <footer className="mt-4 border-t border-record-ink/20 bg-record-paper text-record-ink">
       <div className="mx-auto max-w-[1100px] px-4 pb-9 pt-10 lg:px-10">
         <div className="sm:flex sm:items-end sm:justify-between sm:gap-12">
-          <div className="min-w-0">
-            <Link
-              to="/XEqualsX"
-              className="block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
-              style={{
-                fontFamily: 'var(--font-reading)',
-                fontSize: 'clamp(38px, 10.5vw, 58px)',
-                lineHeight: 0.82,
-                letterSpacing: '-0.03em',
-              }}
-            >
-              x = x
-            </Link>
-            <p className="mt-4 max-w-[40ch] text-[13.5px] leading-relaxed text-record-muted">
-              The mark this record is built on. Read what it means, and what it does not.
-            </p>
-          </div>
+          {!standingAtTheMark && (
+            <div className="min-w-0">
+              <Link
+                to="/XEqualsX"
+                className="block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
+                style={{
+                  fontFamily: 'var(--font-reading)',
+                  fontSize: 'clamp(38px, 10.5vw, 58px)',
+                  lineHeight: 0.82,
+                  letterSpacing: '-0.03em',
+                }}
+              >
+                x = x
+              </Link>
+              <p className="mt-4 max-w-[40ch] text-[13.5px] leading-relaxed text-record-muted">
+                The mark this record is built on. Read what it means, and what it does not.
+              </p>
+            </div>
+          )}
 
           {/* The imprint sits opposite the mark, the way a printer puts one at the foot of
               a sheet and never mentions it again. */}
@@ -44,7 +55,7 @@ export default function RecordFooter({ showKeeper = true, onOpenContents, conten
         </div>
 
         <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-start gap-x-5 gap-y-5">
-          {REST.map(({ label, to, what }) => (
+          {REST.filter((door) => door.to !== pathname).map(({ label, to, what }) => (
             <RecordNavDoor key={to} to={to} label={label} what={what}
               active={to === '/ClimateGuide' ? contentsOpen : pathname === to} size={28}
               asButton={to === '/ClimateGuide'} onClick={to === '/ClimateGuide' ? onOpenContents : undefined}
