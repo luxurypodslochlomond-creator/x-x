@@ -3,8 +3,8 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXCovenantField from '@/components/climate/XEqualsXCovenantField';
 import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
-import XEqualsXNoteFromTheBuilder from '@/components/climate/XEqualsXNoteFromTheBuilder';
 import XEqualsXSurvives from '@/components/climate/XEqualsXSurvives';
+import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
 import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
@@ -57,6 +57,18 @@ export default function XEqualsX() {
           breaks the column so the page stops reading as a form. */}
       <XEqualsXCovenantField />
 
+      {/* ── WHY, BEFORE WHOSE ─────────────────────────────────────────────────────
+          The argument for the record was folded away under a summary line, which meant
+          the page opened on a mark and then asked the reader to take it on faith. It is
+          out here now, first after the plates: what is lost when nobody writes it down,
+          in three plain statements, before anything about who asked for it. */}
+      <XEqualsXWhy />
+
+      {/* And what it demands of the thing it is printed on — the record, the platform,
+          and the people who inherit it. Each demand carries its limit, because a section
+          with no limits in it is selling something. */}
+      <XEqualsXWhatItAsks />
+
       {/* The case that gives the mark teeth, and the reason it stands this high on the page.
           Somebody built the thing; somebody else's name went on it. That is the oldest
           grievance in art, in science and in every workshop on earth, and it needs no
@@ -98,16 +110,11 @@ export default function XEqualsX() {
         <summary className="cursor-pointer py-4 font-body text-lg text-record-ink marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
           The argument, the proof, and the limits
         </summary>
-        <XEqualsXWhy />
         <XEqualsXCheck />
         <XEqualsXResearchPanel />
         <XEqualsXCodicil />
         <XEqualsXMachine />
         <XEqualsXThanks />
-        {/* Who made it, kept — but no longer the frame of the page. The page is about why
-            x = x is right, not about the person who typed it; a reader who wants the hand
-            behind it opens this and finds it signed. */}
-        <XEqualsXNoteFromTheBuilder />
       </details>
 
       <p className="record-meta text-record-muted">This covenant is not yet signed by a person.</p>
