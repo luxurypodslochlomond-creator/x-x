@@ -22,13 +22,13 @@ export default function LanguageStatus() {
       : '';
   if (!translationError && !note) return null;
   return (
-    <div data-no-translate className="border-t border-record-signal/20 px-5 py-2 text-[11px] font-mono leading-relaxed text-record-paper/80">
+    <div data-no-translate className="px-0 pb-1 pt-2 text-[12px] leading-relaxed text-record-muted">
       {translationError ? (
-        <div role="status" className="flex items-center justify-between gap-3">
+        <div role="status" className="flex items-start justify-between gap-3">
           <span>{translationError}</span>
-          <button type="button" onClick={retryLanguage} className="shrink-0 border border-record-signal px-2 py-1 text-record-paper focus-visible:outline focus-visible:outline-record-signal">Try again</button>
+          <button type="button" onClick={retryLanguage} className="shrink-0 border border-record-mark px-2 py-1 text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red">Try again</button>
         </div>
-      ) : <p>{note}</p>}
+      ) : <p className="max-w-[62ch]">{note}</p>}
     </div>
   );
 }

@@ -1,20 +1,28 @@
 import React from 'react';
 
+// The statement itself now lives on the plate, where it is printed at the size it
+// deserves rather than as a second heading under the first. What stays here is the
+// opening of the argument, so a reader arriving from the plate is already inside it.
 export default function XEqualsXInscription() {
   return (
-    <section aria-labelledby="the-covenant" className="pb-2 pt-6 sm:pt-10">
-      <div className="mb-7 flex items-baseline justify-between gap-4">
-        <span className="font-body text-3xl tracking-tight text-record-mark" aria-label="x equals x">x = x</span>
-        <span className="record-meta text-record-muted">The covenant</span>
+    <section aria-labelledby="the-covenant" className="pb-2 pt-2">
+      <div className="flex items-baseline justify-between gap-4 border-b border-record-ink/20 pb-2">
+        <span id="the-covenant" className="font-mono text-[12px] uppercase tracking-[0.16em] text-record-muted">
+          The covenant
+        </span>
+        <span aria-label="x equals x" className="font-mono text-[13px] text-record-mark">x = x</span>
       </div>
-      <h1 id="the-covenant" className="font-body text-5xl sm:text-7xl text-record-ink">
-        Nobody above<br />anybody.
-      </h1>
-      <div className="mt-7 max-w-[48ch] space-y-4">
-        <p>Good work happens far from the loudest microphone. So do disasters. This record gives both somewhere to stay.</p>
-        <p>An entry needs a source, not a following. A correction needs to be seen, not quietly written over.</p>
+      <div className="mt-5 max-w-[48ch] space-y-4">
+        <p>
+          Good work happens far from the loudest microphone. So do disasters. This record gives
+          both somewhere to stay.
+        </p>
+        <p>
+          An entry needs a source, not a following. A correction needs to be seen, not quietly
+          written over.
+        </p>
       </div>
-      <p className="record-meta mt-6 border-l-2 border-record-mark pl-4 text-record-muted">
+      <p className="record-meta mt-5 border-l-2 border-record-mark pl-4 text-record-muted">
         Equal human worth. Not equal evidence, and not equal scale.
       </p>
     </section>

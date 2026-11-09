@@ -3,30 +3,76 @@ import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
 import { FOOTER_NAV } from '@/components/climate/recordFooterLinks';
 
+// ── THE COLOPHON ───────────────────────────────────────────────────────────────
+// The foot of a printed record is not a menu bolted on underneath: it is the page that
+// says who made the thing and what it stands on. Ours has one mark worth printing at
+// any size — x = x — and three doors into how the record is kept.
+//
+// So the mark is set once, large, in its own red, and it is a real door to the page
+// that says what it means. The housekeeping sits opposite it as a short column, and
+// the rest is air. Nothing here explains itself, because a colophon never does.
 export default function RecordFooter({ showKeeper = true }) {
   const { pathname } = useLocation();
+
   return (
-    <footer className="border-t-2 border-record-red bg-record-paper font-body text-record-ink">
-      <div className="mx-auto max-w-[1100px] px-4 py-3 lg:px-10">
-        <nav aria-label="About the record and all pages" className="flex flex-wrap items-center gap-x-5">
-          {FOOTER_NAV.map(({ label, to }) => (
+    <footer className="mt-4 border-t border-record-ink/20 bg-record-paper text-record-ink">
+      <div className="mx-auto max-w-[1100px] px-4 pb-8 pt-8 lg:px-10">
+        <div className="grid gap-8 sm:grid-cols-[1.1fr_1fr_auto] sm:gap-10">
+          {/* The mark, and the only sentence it needs. */}
+          <div>
             <Link
-              key={to}
-              to={to}
-              aria-current={pathname === to ? 'page' : undefined}
-              className={`inline-flex min-h-12 items-center text-sm leading-snug hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red ${pathname === to ? 'text-record-red underline underline-offset-4' : ''}`}
+              to="/XEqualsX"
+              className="inline-block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
+              style={{ fontFamily: 'var(--font-reading)', fontSize: '38px', lineHeight: 1, letterSpacing: '-0.01em' }}
             >
-              {label}
+              x = x
             </Link>
-          ))}
-        </nav>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-5 border-t border-record-ink/15 pt-2">
-          <span aria-hidden="true" className="font-mono text-xs tracking-[0.15em] text-record-mark">x = x</span>
-          <nav aria-label="Privacy, terms and reviewer access" className="flex flex-wrap items-center gap-x-4 text-xs text-record-muted">
-            <Link to="/ClimateTerms" aria-current={pathname === '/ClimateTerms' ? 'page' : undefined} className="inline-flex min-h-11 items-center hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red">Terms</Link>
-            <Link to="/ClimatePrivacy" aria-current={pathname === '/ClimatePrivacy' ? 'page' : undefined} className="inline-flex min-h-11 items-center hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red">Privacy</Link>
+            <p className="mt-3 max-w-[30ch] text-[13px] leading-relaxed text-record-muted">
+              The mark this record is built on. Read what it means, and what it does not.
+            </p>
+          </div>
+
+          {/* How the record is kept — three doors, set as an index. */}
+          <nav aria-label="How the record is kept" className="flex flex-col">
+            {FOOTER_NAV.map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                aria-current={pathname === to ? 'page' : undefined}
+                className={`flex min-h-[44px] items-center border-t border-record-ink/15 text-[14px] leading-snug transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
+                  pathname === to ? 'text-record-red' : ''
+                }`}
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Housekeeping, and the way in for the people who keep it. */}
+          <nav aria-label="Privacy, terms and reviewer access" className="flex flex-col sm:items-end sm:text-right">
+            {[
+              { label: 'Terms', to: '/ClimateTerms' },
+              { label: 'Privacy', to: '/ClimatePrivacy' },
+            ].map(({ label, to }) => (
+              <Link
+                key={to}
+                to={to}
+                aria-current={pathname === to ? 'page' : undefined}
+                className={`flex min-h-[44px] items-center text-[13px] text-record-muted transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
+                  pathname === to ? 'text-record-red' : ''
+                }`}
+              >
+                {label}
+              </Link>
+            ))}
             {showKeeper && <KeeperDoor />}
           </nav>
+        </div>
+
+        <div className="mt-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-record-ink/15 pt-3">
+          <span className="text-[12px] text-record-muted">Record of the Time</span>
+          <span className="text-[12px] text-record-muted">A public service · for the world</span>
         </div>
       </div>
     </footer>

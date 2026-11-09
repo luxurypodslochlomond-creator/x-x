@@ -158,38 +158,62 @@ export default function ClimateLayout({ children, currentPage }) {
       <div className="relative record-book" style={{ zIndex: 1 }}>
       {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
           top to the record instead of a dark screen with a page beneath it. */}
-      <header className="sticky top-0 z-50 border-b-2 border-record-red bg-record-paper text-record-ink">
-        {/* Plain paper keeps navigation distinct from the cover and the entries. */}
-        <div className="relative z-10 hidden sm:flex max-w-[1100px] mx-auto px-4 lg:px-10 py-3 items-center justify-between gap-8">
-          <Link
-            to={createPageUrl('TogetherChangeClimate')}
-            className="flex items-center gap-2.5 flex-shrink-0 group"
-            aria-label="Record of the Time — the record's front page"
-          >
-            {/* The record says its own name in its own voice. It was a monospaced label in
-                capitals, spaced out like a field name — the same lettering as a date or a
-                count, which meant the one line that names the whole thing sounded like
-                metadata. One pulse was enough too: the dot is a mark, not a heartbeat. */}
-            <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-record-mark flex-shrink-0" />
-            <span
-              className="text-record-ink text-[18px] leading-none group-hover:text-record-red transition-colors"
-              style={{ fontFamily: 'var(--font-display)' }}
+      {/* ── THE MASTHEAD ───────────────────────────────────────────────────────────────
+          It used to be three stacked bands: a name, five equal text links, then a heavy
+          language bar with its own background and its own border. Three strips of chrome
+          on a phone before a single word of the record — which is precisely why the top of
+          the page read as an afterthought bolted onto a document.
+
+          It is one piece of printed matter now. The mark is cut into the top edge. The
+          record says its name, the index numbers itself beside it, a hairline closes the
+          line, and the tongue and x = x sit on the same line at the foot of the masthead
+          as a printer's imprint. Nothing is a box; nothing announces itself; nobody has to
+          work out which part is navigation.
+
+          On a phone it stops being sticky on purpose: a printed page does not pin ninety
+          pixels of itself to the top of the glass. The way through the record is one tap
+          up, and the colophon at the foot carries the mark and every door back. */}
+      <header className="relative z-50 bg-record-paper text-record-ink sm:sticky sm:top-0">
+        <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
+        <div className="mx-auto max-w-[1100px] px-4 lg:px-10">
+          <div className="flex items-baseline justify-between gap-6 pt-3.5">
+            <Link
+              to={createPageUrl('TogetherChangeClimate')}
+              className="group flex min-w-0 items-baseline gap-2"
+              aria-label="Record of the Time — the record's front page"
             >
-              Record of the Time
-            </span>
-          </Link>
+              <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 -translate-y-[3px] bg-record-mark" />
+              <span
+                className="text-[21px] leading-[1.05] text-record-ink transition-colors group-hover:text-record-red sm:text-[26px]"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Record of the Time
+              </span>
+            </Link>
 
-          <ClimateNav currentPage={currentPage} />
-        </div>
+            <div className="hidden shrink-0 sm:block">
+              <ClimateNav currentPage={currentPage} />
+            </div>
+          </div>
 
-        {/* Five named destinations, in the same order on every screen. */}
-        <div className="relative z-10 sm:hidden">
-          <ClimateNav currentPage={currentPage} variant="mobile" />
-        </div>
+          <div aria-hidden="true" className="mt-2 h-px w-full bg-record-ink/15" />
 
-        {/* Every tongue on Earth — in the header, on every page of the record. */}
-        <div className="relative z-10 max-w-[1100px] mx-auto">
-          <ClimateLanguageBar tone="paper" />
+          {/* The index on a phone, below the line, so it reads as the record's own contents. */}
+          <div className="sm:hidden">
+            <ClimateNav currentPage={currentPage} />
+          </div>
+
+          {/* The imprint line: the tongue this page is being read in, and the mark. */}
+          <div className="flex items-center justify-between gap-4 pb-2 sm:pt-1.5">
+            <ClimateLanguageBar tone="paper" />
+            <Link
+              to="/XEqualsX"
+              className="shrink-0 pb-1 text-[15px] leading-none text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
+              style={{ fontFamily: 'var(--font-reading)' }}
+            >
+              x = x
+            </Link>
+          </div>
         </div>
       </header>
 
