@@ -4,6 +4,7 @@ import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
 import XEqualsXLightPlate from '@/components/climate/XEqualsXLightPlate';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
+import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXWhy from '@/components/climate/XEqualsXWhy';
@@ -55,6 +56,9 @@ export default function XEqualsX() {
 
       {/* The reason, in three marks and three lines. */}
       <XEqualsXLostMarks />
+
+      {/* The same argument proved once, by a case with its sources attached. */}
+      <XEqualsXWhoIsCredited />
 
       {/* Her words, her red, her name — and the limit said under them. */}
       <RecordEpigraph />

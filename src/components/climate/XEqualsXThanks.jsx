@@ -48,16 +48,9 @@ export default function XEqualsXThanks() {
         agrees with a word of it.
       </p>
 
-      {/* The honest version of a coincidence, said as one. Yale is where this record's
-          founder did her work, and Yale is where a man learned to send a message without a
-          voice. That is an affinity between two ideas, not a relationship between two
-          institutions — and saying which one it is costs nothing and keeps the page clean. */}
-      <p className="mt-3 max-w-[52ch] text-[#5a5246]">
-        One more, said carefully. Samuel Morse and Alfred Vail gave the world a way to send a
-        message in dots and dashes; Morse had graduated from Yale in 1810. This record sends its
-        own in one red equal sign. That is an affinity between two ideas, not a connection
-        between two institutions: nothing here is endorsed by Yale, or by anyone else.
-      </p>
+      {/* Morse has moved up the page, out of a thank-you and into the argument. He is not a
+          debt: he is the case that makes the case. A name dropped in gratitude here would
+          only have been a second, weaker telling of the same point. */}
     </section>
   );
 }

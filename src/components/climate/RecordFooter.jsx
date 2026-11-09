@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
 import { FOOTER_NAV } from '@/components/climate/recordFooterLinks';
+import { markFor } from '@/components/climate/pageMarks';
 
 // ── THE COLOPHON ───────────────────────────────────────────────────────────────
 // The foot of a printed record is not a menu bolted on underneath: it is the page that
@@ -34,19 +35,27 @@ export default function RecordFooter({ showKeeper = true }) {
 
           {/* How the record is kept — three doors, set as an index. */}
           <nav aria-label="How the record is kept" className="flex flex-col">
-            {FOOTER_NAV.map(({ label, to }) => (
-              <Link
-                key={to}
-                to={to}
-                aria-current={pathname === to ? 'page' : undefined}
-                className={`flex min-h-[44px] items-center border-t border-record-ink/15 text-[14px] leading-snug transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
-                  pathname === to ? 'text-record-red' : ''
-                }`}
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
-                {label}
-              </Link>
-            ))}
+            {FOOTER_NAV.map(({ label, to }) => {
+              /* The four doors of the colophon now carry the same drawn marks as the
+                 masthead, so a reader who has learned the hand at the top meets it again
+                 at the foot. Terms and privacy stay as small type: they are housekeeping,
+                 not doors, and marking them would make every line look equally important. */
+              const Mark = markFor(to);
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  aria-current={pathname === to ? 'page' : undefined}
+                  className={`group flex min-h-[44px] items-center gap-2.5 border-t border-record-ink/15 text-[14px] leading-snug transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
+                    pathname === to ? 'text-record-red' : ''
+                  }`}
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  <Mark size={17} className="shrink-0 opacity-75 transition-opacity group-hover:opacity-100" />
+                  <span>{label}</span>
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Housekeeping, and the way in for the people who keep it. */}

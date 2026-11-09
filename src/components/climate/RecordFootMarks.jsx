@@ -135,6 +135,92 @@ export function MarkLens({ size = 26, className = '' }) {
   );
 }
 
+// ── THE MARKS BEYOND THE MASTHEAD ─────────────────────────────────────────────
+// Only five doors ever had a mark. Every other page on the record — why it exists,
+// how an entry is checked, the corrections, the seals, the music, the keeper's own
+// door — was a line of plain text in a list. That is why the record looked like it
+// had a drawn front and a typed back: one hand for the way in, another for everything
+// behind it. These are drawn in the same hand, for exactly those doors.
+//
+// The same rules hold: one weight, currentColor, one solid mass at most, nothing
+// thinner than the stroke, and each mark drawn for one door and no other. A mark
+// that could sit beside any word is an illustration, not a door.
+
+// The mark itself, at the size of a word. Two strokes of exactly the same length.
+export function MarkEqual({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M9.6 15.4h20.8M9.6 24.6h20.8" />
+    </svg>
+  );
+}
+
+// Every way through the record. A contents page: dots against their lines.
+export function MarkContents({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M10.6 4.6h18.8v30.8H10.6Z" />
+      <circle cx="15.4" cy="13.6" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="15.4" cy="20" r="1.5" fill="currentColor" stroke="none" />
+      <circle cx="15.4" cy="26.4" r="1.5" fill="currentColor" stroke="none" />
+      <path d="M19.8 13.6h5.6M19.8 20h5.6M19.8 26.4h5.6" />
+    </svg>
+  );
+}
+
+// Who is reading. A tally, not an eye: four strokes and one across them, which is
+// how people counted things long before anything was counted for them.
+export function MarkReadership({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M11.4 12v16M16.6 12v16M21.8 12v16M27 12v16" />
+      <path d="M8.4 20h21.2" />
+    </svg>
+  );
+}
+
+// An entry's fingerprint. A seal, with its ribbon still on it.
+export function MarkSeal({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="17.6" r="9.6" />
+      <path d="M15.4 26.2 13.6 35.4l6.4-3.4 6.4 3.4-1.8-9.2" />
+    </svg>
+  );
+}
+
+// The person who agrees to carry the record. A key handed over, not a crown.
+export function MarkHost({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="12.6" cy="12.6" r="4.6" />
+      <path d="M16 16l15.8 15.8" />
+      <path d="M26.2 26.2l3.4-3.4M30.8 30.8l3.4-3.4" />
+    </svg>
+  );
+}
+
+// What is offered and shared. A bowl held out — a plate, not a pocket.
+export function MarkSupport({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M8.6 18.6h22.8" />
+      <path d="M11.4 18.6c0 8.8 3.8 15.2 8.6 15.2s8.6-6.4 8.6-15.2" />
+    </svg>
+  );
+}
+
+// The terms the record is shared under. A lock with its shackle open, said once.
+export function MarkCovenant({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M11 19.4h18v14.2H11Z" />
+      <path d="M15.2 19.4v-5.2a5 5 0 0 1 9.4-2.4" />
+      <circle cx="20" cy="26.4" r="1.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // The room where something is made rather than read.
 export function MarkStudio({ size = 26, className = '' }) {
   return (

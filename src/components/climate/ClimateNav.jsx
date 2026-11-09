@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
-import { MarkBrief, MarkSignal, MarkHorizon, MarkPortrait, MarkLens } from './RecordFootMarks';
+import { markFor } from './pageMarks';
 
 // ── THE WAY THROUGH THE RECORD ─────────────────────────────────────────────────
 // This has been through several hands: plain words, then nine drawn doors, then words
@@ -15,14 +15,8 @@ import { MarkBrief, MarkSignal, MarkHorizon, MarkPortrait, MarkLens } from './Re
 // square; on a wider page it sits beside it, because a line reads across. Nothing is
 // numbered, nothing is abbreviated, and the current page is said in the mark, in the word,
 // and in one hairline under it — never in a colour alone.
-const MARKS = {
-  '/TogetherChangeClimate': MarkBrief,
-  '/ClimateWire': MarkSignal,
-  '/ClimateMap': MarkHorizon,
-  '/ClimateFounder': MarkPortrait,
-  '/ClimateSearch': MarkLens,
-};
-
+// The five doors and their marks now come from pageMarks, which holds the mark for every
+// door on the record — so the masthead cannot fall out of step with the foot or the index.
 export default function ClimateNav({ currentPage }) {
   return (
     <nav
@@ -31,7 +25,7 @@ export default function ClimateNav({ currentPage }) {
     >
       {PRIMARY_NAV.map(({ label, to, page }) => {
         const active = currentPage === page;
-        const Mark = MARKS[to] || MarkBrief;
+        const Mark = markFor(to);
         return (
           <Link
             key={to}
