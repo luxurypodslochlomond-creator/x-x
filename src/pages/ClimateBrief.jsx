@@ -176,7 +176,7 @@ export default function ClimateBrief() {
               ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.', '/TogetherChangeClimate', 'See the actions'],
               ['65 tongues · 8 written by hand', 'The interface is written out by hand in 8 languages and machine-made into 57 more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. Where a tongue is a machine\'s attempt — the ancient scripts especially — the page says so plainly rather than passing it off as an inscription. You can also free-type any tongue on Earth.', '/TogetherChangeClimate', 'Choose a tongue'],
               ['Every entry fingerprinted', 'Each published entry is sealed by the record\'s own server, and the fingerprint is recomputed in the reader\'s browser. If the words move without a new seal, the fingerprints stop matching and the record says so in public.', '/ClimateSeals', 'Check a seal yourself'],
-              ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.', '/ClimateHandover', 'What it costs, and who pays'],
+              ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.', '/ClimateMethod', 'Where that rule is written'],
               ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.', '/TogetherChangeClimate', 'Open any entry'],
               // The mark gets its own line inside the card, in its own red — inside a sentence
               // it read as punctuation rather than the promise the whole record is held to.
@@ -274,7 +274,6 @@ export default function ClimateBrief() {
             {[
               ['/ClimateMethod', 'The Method', 'What this record can say, what it cannot, and how each entry is sourced.'],
               ['/ClimateCorrections', 'Corrections, in the open', 'Everything that has been changed, with its date and its reason. Nothing is fixed quietly.'],
-              ['/ClimateHandover', 'The Handover', 'What it costs to keep alive, what is still missing, and who holds the keys today.'],
               ['/ClimateGuide', 'All pages & guide', 'Every public page, followed by a guide to the controls.'],
               ['/ClimateHostBrief', 'The one-page summary', 'The figures, the gaps and the ask on a single page, for whoever carries it next.'],
             ].map(([to, title, body]) => (

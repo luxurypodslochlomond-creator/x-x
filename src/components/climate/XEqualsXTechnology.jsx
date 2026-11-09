@@ -30,8 +30,8 @@ const MECHANISMS = [
       'Nobody gets onto the guest list alone. A change needs a second, different keeper, and both names are written into the log with the date.',
     held:
       'The one exception is an administrator, who can already reach that table directly — and when they act alone, the line records that the decision stood alone.',
-    to: '/ClimateHandover',
-    cta: 'Who holds the keys',
+    to: '/ClimateMethod',
+    cta: 'Where the rule is written',
   },
   {
     n: '03',

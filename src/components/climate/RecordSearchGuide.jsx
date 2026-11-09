@@ -87,12 +87,6 @@ export default function RecordSearchGuide() {
           >
             The founder <ArrowRight className="w-3.5 h-3.5" />
           </Link>
-          <Link
-            to="/ClimateHandover"
-            className="inline-flex items-center gap-1.5 px-3 py-2 border-2 border-[#efe7d6]/40 text-[#efe7d6] text-[10px] font-black font-mono uppercase tracking-wider hover:border-[#e2602a] hover:text-[#e2602a] transition-colors"
-          >
-            The handover <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
       </div>
     </div>

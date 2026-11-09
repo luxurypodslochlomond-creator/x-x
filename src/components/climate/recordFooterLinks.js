@@ -75,7 +75,9 @@ export const TRUST_NAV = [
 
 export const SUPPORTING_PAGES = [
   { label: 'Project brief', to: '/ClimateBrief', what: 'What is live, what is planned, and what is still missing.' },
-  { label: 'Costs & responsibility', to: '/ClimateHandover', what: 'What it costs, who holds the keys, and what is still open.' },
+  // "Costs & responsibility" came off the foot with the handover sheet it pointed at: the
+  // founder asked, on 9 November, that what it costs and what is still open be saved for
+  // conversations with a potential host. The page is kept whole behind a keeper's key.
   { label: 'Studio', to: '/Studio', what: 'Create with ZAPP and the logo tool.' },
 ];
 

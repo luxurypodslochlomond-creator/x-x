@@ -28,7 +28,6 @@ const DOORS = [
   { label: 'The Buttons', page: 'ClimateGuide', what: 'Each control and the one thing it does.' },
   { label: 'The music room', page: 'ClimateMusic', what: 'Given music. Nothing plays until pressed.' },
   { label: 'The Brief', page: 'ClimateBrief', what: 'What is live, what is planned, and what is not built.' },
-  { label: 'The Handover', page: 'ClimateHandover', what: 'What changes hands, what it costs, who holds it, what is open.' },
   { label: 'Terms', page: 'ClimateTerms', what: 'The ground it stands on.' },
   { label: 'Privacy', page: 'ClimatePrivacy', what: 'What is kept, and what never is.' },
 ];

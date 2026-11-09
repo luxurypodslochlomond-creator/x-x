@@ -81,9 +81,6 @@ export default function XEqualsXCodicil() {
             <Link to="/ClimateCorrections" className="underline decoration-[#e2602a] underline-offset-2">
               Corrections, in the open
             </Link>
-            <Link to="/ClimateHandover" className="underline decoration-[#e2602a] underline-offset-2">
-              Who holds the keys
-            </Link>
           </dd>
         </div>
       </dl>

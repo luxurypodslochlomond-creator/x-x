@@ -337,7 +337,15 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateGuide" element={<ClimateLayout currentPage="ClimateGuide"><ClimateGuidePage /></ClimateLayout>} />
       <Route path="/ClimateMusic" element={<ClimateLayout currentPage="ClimateMusic"><ClimateMusicPage /></ClimateLayout>} />
       <Route path="/ClimateHost" element={<ClimateLayout currentPage="ClimateHost"><ClimateHostPage /></ClimateLayout>} />
-      <Route path="/ClimateHandover" element={<ClimateLayout currentPage="ClimateHandover"><ClimateHandoverPage /></ClimateLayout>} />
+      {/* ── SAVED, NOT STANDING OPEN ─────────────────────────────────────────────────
+          "Please save this… for when we are discussing with a potential host" — the founder,
+          9 November. So the handover sheet is kept whole and taken off the open record: it
+          opens to a keeper's key, the way the host brief does, and the keeper hands it over
+          herself when there is somebody to hand it to. Its public links came off the same
+          day — the foot, the search guide, the brief, the host page and the three places
+          x = x pointed at it — because a door that opens onto a locked page is worse than
+          no door at all. */}
+      <Route path="/ClimateHandover" element={<ClimateLayout currentPage="ClimateHandover"><KeeperKey><ClimateHandoverPage /></KeeperKey></ClimateLayout>} />
       <Route path="/ClimateCorrections" element={<ClimateLayout currentPage="ClimateCorrections"><ClimateCorrectionsPage /></ClimateLayout>} />
       {/* The seal: every entry fingerprinted, and the check run in the reader's own
           browser rather than on our server. The one page that lets a sceptic verify
