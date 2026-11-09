@@ -155,6 +155,23 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
   letter-spacing: 0.08em !important;
 }
 
+/* ── THE PAINTING ARRIVES, IT DOES NOT BLOCK ─────────────────────────────────────
+   The plate is handed over at its own size and never re-encoded, so it is sharp — and
+   thirty megabytes sharp. It used to be asked for at high priority, which put a picture
+   nobody can see until the words are up ahead of the page's own scripts and fonts: the
+   record waited on the room instead of the page.
+
+   It is now requested at ordinary priority and comes up under the reader once it has
+   actually arrived, from nothing, over half a second. Opacity only — the compositor does
+   the whole of it, no filter, no blur, no repaint per scroll — so the room fills in
+   behind a page that is already readable, and a returning reader whose copy is cached
+   sees it on the first frame with no flicker at all. */
+.record-cover {
+  opacity: var(--cover-strength, 1);
+  transition: opacity 520ms ease-out;
+}
+.record-cover[data-ready="false"] { opacity: 0; }
+
 /* ── THE GROUND, PUT BACK ON A DESKTOP ────────────────────────────────────────────
    The painting was never decoration inside the record: it is the room the record is laid
    on. On a wide screen the book is centred at its own width again and the earth and space
@@ -189,5 +206,7 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
      At thirty-six it is what it was always meant to be: the light in the room the record
      is printed in. The painting loses nothing — it is still the same plate, still at its
      own resolution, still the ground of every page. */
-  .record-ground { opacity: 0.36 !important; }
+  /* Held through the strength, not an important opacity, so the fade still runs and the
+     painting still comes up to exactly the value it was tuned to. */
+  .record-ground { --cover-strength: 0.36 !important; }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { IMAGES } from '@/components/climate/categoryImages';
 
 // ── THE COVER, IN ONE PLACE ───────────────────────────────────────────────────────────────
@@ -19,17 +19,47 @@ import { IMAGES } from '@/components/climate/categoryImages';
 // the whole plate soft, because a laptop screen at twice the pixel density wants nearly four
 // thousand across, and a copy made at 2560 is a copy being stretched. The painting goes to the
 // glass at its own size, unedited, and nothing is re-encoded on the way.
+//
+// That decision stands: a soft ground is a cheap-looking ground, and the master is bigger than
+// the largest screen it will ever be shown on, so it is only ever downscaled. What was wrong
+// was not the size of the file but its RANK. It used to be asked for eagerly, at high priority
+// — so a thirty-megabyte painting queued ahead of the page's own scripts and fonts, and the
+// record waited on a picture that nobody can even see until the words are there. The painting
+// is the room, not the content: it is now requested at ordinary priority, it fades up only
+// once it has actually arrived, and the reader gets warm paper and their page first, with the
+// room filling in behind them a moment later. Same file, same sharpness, nothing blocking.
 export default function RecordCover({ position = 'center 34%', strength = 1, blend, priority = false, className = '', style }) {
+  const [ready, setReady] = useState(false);
+
+  // A cached image can finish before React attaches onLoad, so the element is also asked
+  // whether it is already complete. Without this the ground would stay invisible for the
+  // reader who comes back — the one visitor a cache is meant to reward.
+  const markReady = useCallback((node) => {
+    if (node?.complete) setReady(true);
+  }, []);
+
   return (
     <img
+      ref={markReady}
       src={IMAGES.cover}
       alt=""
       aria-hidden="true"
       loading={priority ? 'eager' : 'lazy'}
-      fetchpriority={priority ? 'high' : 'auto'}
+      // Ordinary priority, deliberately: the painting never outranks the page.
+      fetchpriority={priority ? 'auto' : 'low'}
       decoding="async"
-      className={`absolute inset-0 w-full h-full object-cover pointer-events-none select-none ${className}`}
-      style={{ objectPosition: position, opacity: strength, mixBlendMode: blend, ...style }}
+      onLoad={() => setReady(true)}
+      data-ready={ready ? 'true' : 'false'}
+      className={`record-cover absolute inset-0 w-full h-full object-cover pointer-events-none select-none ${className}`}
+      style={{
+        objectPosition: position,
+        // The strength is handed to the stylesheet rather than set as an inline opacity, so
+        // the record's own rules can still hold the ground back further on a wide screen —
+        // which an inline value would have blocked. See .record-cover in record-reading.css.
+        '--cover-strength': strength,
+        mixBlendMode: blend,
+        ...style,
+      }}
     />
   );
 }
