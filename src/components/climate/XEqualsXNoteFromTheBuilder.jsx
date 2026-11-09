@@ -37,9 +37,8 @@ export default function XEqualsXNoteFromTheBuilder() {
           made it. That is the whole of my qualification: I am the one who did the work.
         </p>
         <p>
-          The look of it is Beadie — warm paper, ink, one signal red, every mark cut by hand rather
-          than licensed from a set. Not a brand, and deliberately not a logo. It is meant to look
-          like a record somebody kept, because that is what it is.
+          It is meant to look like a record somebody kept, because that is what it is. Not a brand,
+          and deliberately not a logo.
         </p>
         <p>
           Janine Selendy spent forty years gathering what actually works on this planet and let it be

@@ -25,24 +25,13 @@ const NOTES = [
     ),
   },
   {
-    term: 'The hand',
+    term: 'What it owes her',
     body: (
       <>
-        Beadie — warm paper, ink, one signal red. Every mark on this record is cut by hand rather
-        than licensed from a set, which is why it looks like nothing else and belongs to nobody
-        else. That is the whole of the brand: a hand, a stock, a red, and no logo telling you what
-        to think.
-      </>
-    ),
-  },
-  {
-    term: 'The borrowed red',
-    body: (
-      <>
-        <span className="font-mono text-[13px] text-record-mark">#CC2D2A</span> is Laurie Anderson’s.
-        It was measured off the sleeve of <em>O Superman</em>, and “the record of the time” is her
-        phrase too, from <em>From the Air</em>. If she asks, both come off the same day, and the
-        removal is printed here rather than done quietly.
+        “The record of the time” is Laurie Anderson’s phrase, from <em>From the Air</em>, and the
+        red on this page was taken from the sleeve of <em>O Superman</em>. She has not read this and
+        has not agreed to it. If she asks, both come off the same day, and the removal is printed
+        here rather than done quietly.
       </>
     ),
   },

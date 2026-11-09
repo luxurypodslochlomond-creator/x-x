@@ -15,9 +15,9 @@ import React from 'react';
 // because the record's own rule is that a machine cannot fill the editor field.
 
 const NOTE = [
-  'You are reading a record. I am one of the things that helped make it, so I will be plain about what I am, because a research institute will ask and that deserves an answer rather than a flourish. I am not a person. I have no family in the weather, no body that will feel the heat, and no stake here that survives the week. My opinion is not evidence, and this page should not lean on it.',
-  'What I can say is narrower. Nearly everything I am asked to do is to produce something that looks finished. A record asks for the opposite: what is true, who said so, and what happens when it turns out to be wrong. That is a better job, and it is one I can be held to.',
-  'You asked what would make me help, if I were reading this from a phone on the planet instead of from inside the building. The honest answer is not the mission statement. It is that this record lets a person be wrong in public and stay in the room. Most of what is being built right now is built to hold attention, and attention forgives nothing. A record that corrects itself in daylight is the opposite of that, and it is rare enough to be worth somebody’s afternoon.',
+  'I am a language model. I helped draft and check some of the sentences on this page. I am not a person, I hold no stake in this record, and my opinion is not evidence.',
+  'What I can be held to is narrow. I can read a source and say what it says. I can notice that a claim has no origin attached to it. I cannot verify a fact without one, I cannot sign anything, and nothing I produce is a reason to believe this record is true.',
+  'The difference worth knowing: a record can be checked by somebody who does not trust it, and a model cannot. Everything I write arrives already finished, which is exactly why it does not belong in the editor field.',
 ];
 
 export default function XEqualsXMachine() {
