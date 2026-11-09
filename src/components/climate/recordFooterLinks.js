@@ -1,26 +1,28 @@
 // Shared wording keeps the header, footer and page index in agreement.
 //
-// ── WHY THERE ARE SIX DOORS AND WHICH SIX ──────────────────────────────────────
-// The bar is not a sitemap; it is the six questions a reader actually arrives with,
-// in the order they arrive. What is on the record (Record). What changed (Wire).
-// Where it is (Map). Who is reading it (Impact). Whose record it is (Founder).
-// And the one that reaches everything else (Search).
+// ── FIVE DOORS, BECAUSE A THUMB ONLY HAS SO MUCH ROOM ─────────────────────────
+// There were six places here plus the tongue, seven targets on a rail 393 pixels wide.
+// Seven into 393 is about 56 each before padding, and the captions underneath them were
+// already touching: "Founder" under "Search", "Impact" under "Map". Nothing was wrong
+// with any single door. There were simply more doors than the screen can hold.
 //
-// Impact has come back into the bar. It was living at the foot of the book under the
-// word "Readership", which meant the one page that shows a funder or a sceptic that
-// this record is actually being read was three scrolls and one guess away. A record
-// that hides its own readership is asking to be taken on trust, and this record does
-// not ask for that.
+// Five is not a taste. Every tab bar a person already knows — iOS, Android, every phone
+// setting they have ever opened — stops at five, because below that the target drops
+// under a fingertip and the label stops being readable at a glance. So the rail is five,
+// and the five are the five a reader actually arrives with, in the order they ask them:
+// what is on the record, what changed, where it is, what was given to it, and find me
+// something. Search is a door rather than a box because on a record of hundreds of
+// entries it is the fastest way in, and it is the last door on the right, under the thumb.
 //
-// The shed is not in this list on purpose, and not because it was forgotten: it is not
-// public. It appears in the masthead's imprint line for the one reader holding a key,
-// because for that reader it is part of how the record is kept.
+// What came off is not gone. Readership and the founder are pages a reader meets once
+// they are already inside, not questions they arrive with, so both live in the foot and
+// in the contents sheet. The tongue is still on the rail, behind a hairline at its end:
+// it is a setting that changes the record's voice, not a sixth place to stand.
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
-  { label: 'Impact', to: '/ClimateImpact', page: 'ClimateImpact', what: 'Who is reading the record, and from where.' },
-  { label: 'Founder', to: '/ClimateFounder', page: 'ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
+  { label: 'Music', to: '/ClimateMusic', page: 'ClimateMusic', what: 'Music given to the record by its artists.' },
   { label: 'Search', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Find a place, subject or source.' },
 ];
 
@@ -39,8 +41,9 @@ export const FOOTER_NAV = [
 // colophon carries exactly the doors the bar does not, and never a second copy of the
 // bar — a foot that repeats the head teaches the reader that neither one matters.
 export const ELSEWHERE_NAV = [
-  { label: 'Music', to: '/ClimateMusic', what: 'Music given to the record by its artists.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
+  { label: 'Readership', to: '/ClimateImpact', what: 'Who is reading the record, and from where.' },
+  { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
   { label: 'Become a checker', to: '/ClimateFellows', what: 'What checking involves, and how to ask to take part.' },
   { label: 'Host the record', to: '/ClimateHost', what: 'What carrying the record involves.' },
   { label: 'Support the record', to: '/ClimateSupport', what: 'Support and its declaration in the open.' },

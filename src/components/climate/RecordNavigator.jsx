@@ -12,8 +12,9 @@ import '@/components/climate/record-navigator.css';
 // rail lives here now, in the one place a thumb can always reach, and the masthead keeps
 // only the record's name and the line about how it is kept.
 //
-// The tongue rides in the same rail as the seventh mark: it is a way through the record
-// too, so it is cut in the same hand rather than dressed as a form control.
+// The tongue rides in the same rail as the last mark, behind a hairline: it is a way
+// through the record too, so it is cut in the same hand rather than dressed as a form
+// control — but it is a setting and not a sixth place to stand, so the rule separates it.
 export default function RecordNavigator({ currentPage }) {
   return (
     <nav aria-label="The way through the record" className="rec-art-navigator">

@@ -75,6 +75,14 @@
 }
 .rec-art-rail > .rec-art-door,
 .rec-art-rail > .rec-art-door-wrap { flex: 1; min-width: 0; }
+/* Five places, then the tongue behind a hairline. Without the rule the tongue read as a
+   sixth destination and the rail as six equal things; with it the rail says what it is —
+   five ways into the record, and one control that changes the voice it is read in. */
+.rec-art-rail > .rec-art-door-wrap:last-child {
+  border-left: 1px solid rgb(var(--record-ink) / .18);
+  margin-left: .15rem;
+  padding-left: .35rem;
+}
 /* A tongue's name is sometimes two words and the rail has six other marks to hold, so
    its caption is allowed a second line. The other six stay on one, because they are one
    word each and a rail of two-line labels would read as a paragraph. */

@@ -35,7 +35,7 @@ import RecordEpigraph from '@/components/climate/RecordEpigraph';
 export default function XEqualsX() {
   return (
     <ClimateRecordShell
-      eyebrow="Why this record"
+      eyebrow="The terms of this record"
       title="Nobody above anybody."
       statement="Kept in Scotland. Every entry with its source, every correction in the open, no funder's name on the door — and nobody above anybody in it."
       returnTo="/TogetherChangeClimate"
@@ -57,31 +57,20 @@ export default function XEqualsX() {
           breaks the column so the page stops reading as a form. */}
       <XEqualsXCovenantField />
 
-      {/* ── WHY, BEFORE WHOSE ─────────────────────────────────────────────────────
-          The argument for the record was folded away under a summary line, which meant
-          the page opened on a mark and then asked the reader to take it on faith. It is
-          out here now, first after the plates: what is lost when nobody writes it down,
-          in three plain statements, before anything about who asked for it. */}
-      <XEqualsXWhy />
-
-      {/* And what it demands of the thing it is printed on — the record, the platform,
-          and the people who inherit it. Each demand carries its limit, because a section
-          with no limits in it is selling something. */}
+      {/* ── THE MESSAGE IS THE TERMS, NOT THE CASE FOR THEM ────────────────────────
+          "Why this had to be written down" was printed here for one draft, and it was
+          the wrong thing on this page: an argument invites a counter-argument, and a
+          counter-argument is a conversation — not an art object. What a tight reader
+          wants from a covenant is the terms and where they run out, in lines short
+          enough to check against the record while standing up. The argument is folded
+          below, where the proof already sits. */}
       <XEqualsXWhatItAsks />
 
-      {/* The case that gives the mark teeth, and the reason it stands this high on the page.
+      {/* The case that gives the mark teeth, and the only evidence on the spine.
           Somebody built the thing; somebody else's name went on it. That is the oldest
           grievance in art, in science and in every workshop on earth, and it needs no
-          cosmology to be felt — only the sources, which are attached below. */}
+          cosmology to be felt — only the sources, which sit under it. */}
       <XEqualsXWhoIsCredited />
-
-      {/* ── THE PAGE PUT THROUGH THE SIX HARDEST READERS ─────────────────────────
-          The point of the page is not that somebody built it. It is why x = x is right
-          and why a record needs it — so the readers most likely to refuse it are handed
-          the floor: a research institute, an art critic, the person whose red was
-          borrowed, a physicist, the founder, and the machine. Each gets their real
-          question, and the answer includes where it runs out. */}
-      <XEqualsXSurvives />
 
       {/* Light, then the record itself — not a description of it, an entry out of it that
           a reader can follow to its source. The connection to the climate platform is the
@@ -110,6 +99,15 @@ export default function XEqualsX() {
         <summary className="cursor-pointer py-4 font-body text-lg text-record-ink marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
           The argument, the proof, and the limits
         </summary>
+        <XEqualsXWhy />
+        {/* ── THE PAGE PUT THROUGH THE SIX HARDEST READERS ─────────────────────────
+            Folded because six questions and six answers is an interrogation, not an art
+            object — and it is the proof the summary line promises. The readers most
+            likely to refuse the mark are handed the floor: a research institute, an art
+            critic, the person whose red was borrowed, a physicist, the founder, and the
+            machine. Each gets their real question, and the answer includes where it runs
+            out. */}
+        <XEqualsXSurvives />
         <XEqualsXCheck />
         <XEqualsXResearchPanel />
         <XEqualsXCodicil />
