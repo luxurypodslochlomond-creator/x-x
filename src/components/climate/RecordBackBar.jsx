@@ -10,23 +10,24 @@ import { ArrowLeft } from 'lucide-react';
    place, the one control a reader touches on every single page has to be the same
    control: same size, same place, same behaviour, every time.
 
-   The behaviour is the only interesting part, and it is deliberately dull: go back to
-   the page you came from. If you arrived from a link in a message, there is no page
-   you came from, so back opens the record rather than showing you a dead end. */
+   It was a black-rimmed block with a fat arrow in it — a button from another product
+   sitting under a printed page. It is now a hairline and a drawn arrow in the record's
+   own ink: the same hand as the doors, so the way out belongs to the same book. */
 export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClimate', right }) {
   const back = useRecordBack(fallback);
 
   return (
-    <div className="border-b-2 border-[#141210] bg-[#efe7d6]">
-      <div className="max-w-[1100px] mx-auto flex items-center gap-3 px-4 lg:px-10 py-3">
+    <div className="border-b border-record-ink/15">
+      <div className="mx-auto flex max-w-[1100px] items-center gap-3 px-4 py-2 lg:px-10">
         <button
+          type="button"
           onClick={back}
           aria-label="Back"
-          className="w-11 h-11 flex items-center justify-center bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0"
+          className="flex min-h-[44px] min-w-[44px] items-center justify-center text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="h-5 w-5" strokeWidth={1.6} />
         </button>
-        <span className="text-[11px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246] min-w-0 truncate">
+        <span className="min-w-0 truncate font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">
           {eyebrow}
         </span>
         {right ? <div className="ml-auto flex-shrink-0">{right}</div> : null}

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ChevronDown } from 'lucide-react';
+import MarkTongue from '@/components/climate/MarkTongue';
 import { LANGS } from './useClimateLanguage';
 import { tongueMatches, languageFromTyped } from './tongueNames';
 
@@ -152,20 +152,19 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
         aria-haspopup={mobile ? 'dialog' : 'listbox'}
         aria-expanded={open}
         aria-label="Choose the record's language"
-        className={`flex min-h-[36px] w-full cursor-pointer items-center gap-1.5 border-0 bg-transparent p-0 text-left text-[14px] outline-none ${ink ? 'text-[#efe7d6]' : 'text-[#141210]'}`}
+        className={`flex min-h-[44px] w-full cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-left text-[14px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-mark ${ink ? 'text-[#efe7d6]' : 'text-record-ink'}`}
       >
-        {/* A language is named in its own words and never translated: a control that
-            renames itself in the tongue you are leaving cannot be trusted or used.
-            And it is not drawn as a form field: on a printed page the tongue is a word,
-            underscored the way a proper name is, and the arrow is a hairline. */}
+        {/* The drawn mouth is the door, exactly as the six at the foot of the glass are
+            doors: a mark cut for this one thing, and a plain name under it. A language is
+            still named in its own words and never translated. */}
+        <MarkTongue size={26} className={`shrink-0 ${open ? 'text-record-mark' : ''}`} />
         <span
           data-no-translate
-          className="block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap border-b pb-0.5"
-          style={{ borderColor: accent, fontFamily: 'var(--font-reading)' }}
+          className="rec-art-caption block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap pb-0.5"
+          style={{ borderBottom: `1px solid ${accent}` }}
         >
           {lang === 'auto' ? `Auto — ${nameFor(detected)}` : nameFor(lang)}
         </span>
-        <ChevronDown className={`h-3 w-3 flex-shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
       {open && mobile && <TonguePickerDialog onClose={close}>{content}</TonguePickerDialog>}

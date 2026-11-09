@@ -2,99 +2,74 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { ArrowRight } from 'lucide-react';
-import SignalBeacon from '@/components/climate/SignalBeacon';
-import RecordCover from '@/components/climate/RecordCover';
+import { MarkEqual } from '@/components/climate/RecordFootMarks';
 
-// The record's page shell — the same cold bands the Founder page wears, so every
-// page of the record reads as one place: paper, ink, one ocean signal, x = x.
-// `compact` is for the rooms where somebody has come to work rather than to read — the desk,
-// above all. It keeps the way out, the page's name and the foot, and drops the covenant band
-// and the hero: a keeper opening her own desk should meet the first thing waiting, not two
-// hundred pixels of ceremony before it. Every reading page of the record is unchanged.
+// The record's page shell. It used to be a second room: a black-rimmed way out, a dark
+// epigraph band, a dark hero, an orange band at the foot — so a reader who walked from the
+// masthead into any of the seventeen pages that wear this shell left the printed record and
+// arrived in a different product. Two shells on one book is what made the middle of the
+// record feel unattached to its top and bottom.
+//
+// It is now the same sheet as the rest: paper, ink, a hairline way out, the page's own name
+// in the record's cut, the x = x mark in the record's borrowed red, and the way back stated
+// once. Nothing was removed — the eyebrow, the statement, the foot and the credit are all
+// still said. `compact` still drops the opening block for the rooms where somebody has come
+// to work rather than to read.
 export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, children }) {
   return (
-    /* The transmission grain is gone from under the reading. It sat over the whole page at
-       three per cent — invisible until you tried to read a paragraph through it, at which
-       point the ground never looked clean however much the paper was lightened. A record of
-       the world is read, not scanned: the grain stays on the cover and the masthead, and
-       every page of the record is now plain, clear paper. */
-    <div dir={dir} className="climate-record min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
-      {/* Header — paper, the way out, the page's name. It scrolls with the page, and
-          does not pin: the record's masthead above it already owns the top edge, and a
-          second bar pinned to the same edge sat over the nav and ate the taps. */}
+    <div dir={dir} className="climate-record relative min-h-screen bg-record-paper text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow={eyebrow} fallback={returnTo} />
 
-      {!compact && (<>
-      {/* Cold epigraph band — the covenant mark, same as the record */}
-      <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
-        <div className="flex items-center justify-center gap-2 w-full">
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[11px] font-black font-mono uppercase tracking-[0.14em] text-[#efe7d6]/75 text-center leading-tight">{marker}</span>
-          <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
+      {!compact && (
+        <div className="border-b border-record-ink/15">
+          <div className="mx-auto max-w-[1100px] px-4 py-9 lg:px-10 lg:py-12">
+            {marker && (
+              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">{marker}</p>
+            )}
+            <h1
+              className="mt-2 max-w-[24ch] text-[27px] leading-[1.08] lg:text-[42px]"
+              style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.005em' }}
+            >
+              {title}
+            </h1>
+            {statement && (
+              <p className="mt-3 max-w-[48ch] text-[13.5px] leading-relaxed text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
+                {statement}
+              </p>
+            )}
+            {/* The mark, and the way to what it means — carried on every page of the record. */}
+            <Link
+              to="/XEqualsX"
+              className="mt-5 inline-flex items-center gap-2 text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
+            >
+              <MarkEqual size={26} />
+              <span className="font-mono text-[11.5px] uppercase tracking-[0.18em]">Why this record</span>
+            </Link>
+          </div>
         </div>
-        {/* The mark, and the way to it — every page of the record carries it, and it goes
-            to the page that says what it means. */}
-        <Link
-          to="/XEqualsX"
-          className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none hover:text-[#efe7d6] transition-colors"
-        >
-          x = x
-        </Link>
-      </div>
+      )}
 
-      {/* Hero — deep earth, the beacon, the page says what it is.
-          The record's cover stands behind every page of the record, faintly, at the top of the
-          page. Not decoration for its own sake: it is what stops fourteen separate pages feeling
-          like fourteen separate documents. A reader who moves from the brief to the method to
-          the corrections should feel the same hand under all of them — one painting, one room,
-          the same paper. It is kept low enough that not one word loses its ground. */}
-      <div className="relative bg-[#241d16] overflow-hidden">
-        <RecordCover position="center 32%" strength={0.5} blend="screen" />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.5), rgba(36,29,22,.72) 55%, #241d16 100%)' }} />
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
-        <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
-          <SignalBeacon size={44} color="#7fc9e4" />
-          {/* THE TITLE IS SET, NOT SHOUTED ───────────────────────────────────────────
-              Every page of the record opened with its name in condensed capitals at
-              fifty-four pixels. That is a poster's voice, and on a record of this
-              morning's emergencies it reads as a leaflet — nothing can be said quietly
-              because the face has only one volume. The title is now sentence case, in
-              the record's own cut, at a size a phone can hold as a title rather than
-              as a shout. Hierarchy comes from the air around it, which is the only
-              honest way to make two lines look different in weight. */}
-          <h1
-            className="text-[#efe7d6] max-w-[22ch] lg:max-w-[26ch]"
-            style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 'clamp(27px, 4.4vw, 44px)', lineHeight: 1.12, letterSpacing: '-0.005em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}
+      <div className={`mx-auto max-w-2xl px-4 lg:max-w-3xl ${compact ? 'py-4 lg:py-8' : 'py-8 lg:py-14'}`}>{children}</div>
+
+      {/* The way back to the record, stated once, in the record's own hand. */}
+      <div className="border-t border-record-ink/15">
+        <div className="mx-auto max-w-[1100px] px-4 py-6 lg:px-10 lg:py-8">
+          <Link
+            to={returnTo}
+            className="inline-flex items-center gap-2 text-[13.5px] text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
           >
-            {title}
-          </h1>
-          {statement && (
-            <p className="text-[13px] lg:text-[15px] leading-[1.65] text-[#efe7d6]/80 max-w-sm lg:max-w-2xl" style={{ fontFamily: 'var(--font-reading)', animation: 'twcc-epigraph 1.4s ease-out .4s both' }}>
-              {statement}
-            </p>
-          )}
+            {returnLabel} <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
+          </Link>
         </div>
-      </div>
-
-      </>)}
-
-      <div className={`max-w-2xl lg:max-w-3xl mx-auto px-4 ${compact ? 'py-4 lg:py-8' : 'py-8 lg:py-14'}`}>{children}</div>
-
-      {/* Signal band — the way back to the record */}
-      <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
-        <Link to={returnTo} className="inline-flex items-center gap-2 text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#141210]/60 pb-0.5 active:border-[#141210] transition-colors">
-          {returnLabel} <ArrowRight className="w-4 h-4" />
-        </Link>
       </div>
 
       {footer && (
-        <p className="px-5 py-6 lg:py-8 text-center text-[11px] lg:text-[12px] font-mono text-[#5a5246]/80 leading-relaxed max-w-md lg:max-w-2xl mx-auto">{footer}</p>
+        <p className="mx-auto max-w-md px-5 py-6 text-center font-mono text-[11px] leading-relaxed text-record-muted lg:max-w-2xl lg:py-8 lg:text-[12px]">{footer}</p>
       )}
 
-      {/* The credit — every page of the record names who built it. */}
-      <p className="px-5 pb-9 text-center text-[12px] font-mono text-[#5a5246] leading-relaxed">
+      <p className="px-5 pb-9 text-center font-mono text-[12px] leading-relaxed text-record-muted">
         Platform built by Brian Hughes ·{' '}
-        <Link to="/Welcome" className="hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
+        <Link to="/Welcome" className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red">UF51 CIC</Link>
         {' '}· Scotland
       </p>
     </div>

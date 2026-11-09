@@ -27,7 +27,7 @@ export default function XEqualsXCut() {
   return (
     <div aria-hidden="true" className="fixed left-0 top-0 h-full w-[2px] z-[5] pointer-events-none bg-[#141210]/10">
       <div
-        className="w-full bg-[#e2602a]"
+        className="w-full bg-record-mark"
         style={{ height: `${progress * 100}%`, transition: 'height 140ms linear' }}
       />
     </div>
