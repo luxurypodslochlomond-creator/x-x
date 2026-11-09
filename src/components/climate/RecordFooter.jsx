@@ -21,7 +21,7 @@ export default function RecordFooter({ showKeeper = true }) {
               className="block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
               style={{
                 fontFamily: 'var(--font-reading)',
-                fontSize: 'clamp(46px, 13vw, 74px)',
+                fontSize: 'clamp(38px, 10.5vw, 58px)',
                 lineHeight: 0.82,
                 letterSpacing: '-0.03em',
               }}
@@ -45,7 +45,7 @@ export default function RecordFooter({ showKeeper = true }) {
 
         <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-start gap-x-5 gap-y-5">
           {REST.map(({ label, to, what }) => (
-            <RecordNavDoor key={to} to={to} label={label} what={what} active={pathname === to} size={40} className="w-[calc((100%-2.5rem)/3)] sm:w-24" />
+            <RecordNavDoor key={to} to={to} label={label} what={what} active={pathname === to} size={28} className="w-[calc((100%-2.5rem)/3)] sm:w-24" />
           ))}
         </nav>
 

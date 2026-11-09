@@ -4,25 +4,34 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: .25rem;
+  gap: .1rem;
   min-width: 44px;
   min-height: 44px;
-  padding: .35rem .15rem;
+  padding: .2rem 0 .1rem;
   color: rgb(var(--record-ink));
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
+  /* The way in is present, not announced. At rest each door sits back to a little over
+     half ink — enough to find, too little to compete with the page. Only the door you
+     are standing in, and the one under your finger, come forward. */
+  opacity: .58;
+  transition: opacity .18s ease, color .18s ease;
 }
 .rec-art-drawing { display: block; flex-shrink: 0; }
 .rec-art-drawing svg { display: block; overflow: visible; }
+/* The caption is a printer's label under a cut mark: small, tracked, quiet. It stays,
+   because a mark nobody can name is a puzzle at the door — it just no longer speaks
+   at the same volume as the record. */
 .rec-art-caption {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: 0;
+  line-height: 1.2;
+  letter-spacing: .08em;
+  text-transform: uppercase;
   text-align: center;
 }
-.rec-art-door:hover, .rec-art-door-active { color: rgb(var(--record-mark)); }
+.rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); opacity: 1; }
 .rec-art-door-active .rec-art-caption { font-weight: 700; }
 .rec-art-door:focus-visible {
   outline: 2px solid rgb(var(--record-mark));
@@ -33,9 +42,14 @@
   inset-inline: 0;
   bottom: 0;
   z-index: 40;
-  padding: .3rem .65rem max(.35rem, env(safe-area-inset-bottom));
-  background: rgb(var(--record-paper));
-  border-top: 1px solid rgb(var(--record-ink) / .14);
+  padding: .1rem .5rem max(.15rem, env(safe-area-inset-bottom));
+  /* A sheet of the record's own paper, not a bar bolted under it: translucent, so the
+     page is still felt through the way out, and so the foot of the record never looks
+     like a different material to the top. */
+  background: rgb(var(--record-paper) / .93);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid rgb(var(--record-ink) / .09);
 }
 .rec-art-rail {
   display: flex;
@@ -45,9 +59,13 @@
   margin-inline: auto;
 }
 .rec-art-rail > .rec-art-door { flex: 1; min-width: 0; }
-.rec-art-rail .rec-art-drawing { height: 48px; display: flex; align-items: center; }
+/* The marks came down by nearly half. Six drawings at forty-eight pixels across a phone
+   is a banner, and a banner at the foot of a printed page turns a book into an app. The
+   one you are in carries a short rule instead of a bigger drawing, so the dock says
+   where you are once rather than shouting it. */
+.rec-art-rail .rec-art-drawing { height: 26px; display: flex; align-items: center; }
 .rec-art-rail .rec-art-door-active .rec-art-drawing {
-  box-shadow: 0 -2px 0 -1px rgb(var(--record-mark));
+  box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark));
 }
 @media (min-width: 640px) {
   .rec-art-navigator { inset-inline: auto; left: 50%; width: min(600px, 100%); transform: translateX(-50%); }

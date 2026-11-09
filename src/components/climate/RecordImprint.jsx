@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import { FOOTER_NAV } from '@/components/climate/recordFooterLinks';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
 import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
@@ -15,9 +14,25 @@ export default function RecordImprint() {
 
   return (
     <div className="flex flex-col gap-1 pb-2.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6 sm:pt-1.5">
-      <nav aria-label="How this record is kept" className="flex flex-wrap items-center justify-between gap-2 sm:justify-start sm:gap-5">
+      {/* ── ONE DRAWN HAND, NOT TWO ──────────────────────────────────────────────
+          These four doors were drawings too, so a phone met six cut marks at the foot of
+          the glass and another four at the top of the page. Two rows of the same
+          instrument is what made the record feel like it was being operated rather than
+          read. The drawn navigation is the dock, and only the dock; the masthead states
+          the record's terms in words, as a printer's imprint does. */}
+      <nav aria-label="How this record is kept" className="flex flex-wrap items-baseline gap-x-4 gap-y-1 sm:gap-x-5">
         {FOOTER_NAV.map(({ label, to, what }) => (
-          <RecordNavDoor key={to} to={to} label={CAPTIONS[to] || label} what={`${label}. ${what}`} active={pathname === to} size={38} />
+          <Link
+            key={to}
+            to={to}
+            title={`${label}. ${what}`}
+            aria-current={pathname === to ? 'page' : undefined}
+            className={`py-1.5 text-[10px] uppercase leading-none tracking-[0.1em] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
+              pathname === to ? 'text-record-red' : 'text-record-ink/55'
+            }`}
+          >
+            {CAPTIONS[to] || label}
+          </Link>
         ))}
 
         {hasKey && (
