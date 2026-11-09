@@ -29,7 +29,7 @@
 .xc-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.5s cubic-bezier(0.33, 0, 0.2, 1);
+  transition: stroke-dashoffset 1.5s ease-out;
 }
 
 .xc-plate.is-drawn .xc-line { stroke-dashoffset: 0; }
@@ -58,7 +58,18 @@
   .xc-note dd { margin: 0; }
 }
 
+/* The opening's hairline is drawn, not printed: the reader's arrival is the hand that
+   pulls it across the page. One and a quarter seconds, left to right, and then it is
+   simply a line — no loop, nothing asking to be watched twice. */
+.x-open-rule { transform-origin: left center; animation: x-open-rule 1.25s ease-out both; }
+
+@keyframes x-open-rule {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .xc-line { stroke-dashoffset: 0; transition: none; }
   .xc-breath { animation: none; opacity: 1; }
+  .x-open-rule { animation: none; transform: none; }
 }

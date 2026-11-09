@@ -55,6 +55,10 @@ export default function XEqualsXWhoIsCredited() {
           page that says nobody is above anybody does not get to leave that out and keep the
           borrowed prestige.
         </p>
+        <p>
+          It is the clearest recorded case of the thing this whole page is about — and the reason
+          the record seals the work rather than trusting the name above it.
+        </p>
       </div>
 
       <div className="mt-6 border-t border-record-ink/15">

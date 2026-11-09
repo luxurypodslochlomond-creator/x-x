@@ -1,91 +1,102 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import XEqualsXCut from '@/components/climate/XEqualsXCut';
+import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
-import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
-import XEqualsXSurvives from '@/components/climate/XEqualsXSurvives';
+import XEqualsXTechnology from '@/components/climate/XEqualsXTechnology';
+import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
-import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
-import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
 import RecordInPractice from '@/components/climate/RecordInPractice';
+import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
+import RecordEpigraph from '@/components/climate/RecordEpigraph';
+import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
+import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXWhy from '@/components/climate/XEqualsXWhy';
+import XEqualsXSurvives from '@/components/climate/XEqualsXSurvives';
 import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
-import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 import XEqualsXMachine from '@/components/climate/XEqualsXMachine';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
-import XEqualsXCut from '@/components/climate/XEqualsXCut';
-import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
-import RecordEpigraph from '@/components/climate/RecordEpigraph';
+import RecordBand from '@/components/climate/RecordBand';
 
 // ── THE TERMS OF THIS RECORD ───────────────────────────────────────────────────
-// The page reads in one line now, and the line is: the mark, what it means, what it
-// binds, what is lost without it, the case that proves the point, an entry a reader can
-// follow, whose record it is, where the mark came from, her words, then the dossier.
+// The page reads in one movement now, and the movement is the point: the mark, what it
+// actually is, the machinery that holds it, the promises kept as records, the terms, what
+// is lost without it, one entry a reader can follow, whose record it is, her words, and
+// then the debts and the case they rest on.
 //
-// Two things were wrong before this and both were structural rather than editorial.
+// Three things were wrong, and all three were structural.
 //
-// FIRST: two plates of the same mark, one above the other, the second with eight arcs
-// leaving it that read as a signal fault rather than as light. A reader arriving cold
-// asked what the two drawn things were meant to be — which is the whole review, in one
-// question. There is one plate now, and it is the mark itself, typeset: x = x, large, in
-// the borrowed red, with nothing drawn round it. It was never a diagram.
+// FIRST — the opening said itself twice. The shell printed the title and the statement,
+// then the page printed the mark and the statement again, so the first screen was three
+// centred blocks in the middle of a column: no weight, nothing leading, and nothing to
+// look at. It is one sheet now, running the full width of the page.
 //
-// SECOND: her quote sat four bands away from the band that explains what was borrowed
-// from her, so the same debt was told twice in two places and the page seemed to repeat
-// itself. Provenance and the quotation are one movement now: the phrase, the red, her
-// name, her words, and the limit under them.
+// SECOND — the technology was at the foot, inside a collapsed section. x = x is not only
+// a sentence about people; it is the rule the seals, the second key and the log are built
+// to hold. Those three come before the argument for them, because the first question a
+// research institute asks is not "is this beautiful", it is "what stops you lying, and can
+// I confirm it without you".
 //
-// The institutional footer is gone from the shell on this page. It named a research
-// institute and a founder and then said "no endorsement is claimed" — a disclaimer under
-// a name is the shape of a claim, and the page already states both debts in its own body,
-// in full, where they can be read as debts.
+// THIRD — the 1844 telegraph case was carrying the middle of the page on its own. It is
+// the best documented instance of the thing the page is about, and it is still here, still
+// cited rather than thanked — but at the end, under the debts, as the case the argument
+// rests on rather than as the argument itself. The dots are not the subject of this record.
+// They are one proof that a name can come off the work that made it, and that the machinery
+// of a record is how it stays on.
 export default function XEqualsX() {
   return (
     <ClimateRecordShell
-      eyebrow="The terms of this record"
-      title="Nobody above anybody."
-      statement="Every entry with its source. Every correction in the open. No funder’s name on the door."
+      compact
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
     >
       <XEqualsXCut />
 
-      <XEqualsXMarkPlate />
+      <XEqualsXOpening />
 
       <XEqualsXInscription />
+
+      <XEqualsXTechnology />
+
+      <XEqualsXResearchPanel />
 
       <XEqualsXWhatItAsks />
 
       <XEqualsXLostMarks />
-
-      <XEqualsXWhoIsCredited />
 
       {/* Not a description of the record — an entry out of it, with a link to its origin. */}
       <RecordInPractice />
 
       <XEqualsXFounderNote />
 
-      <XEqualsXWhereItComesFrom />
-
       <div className="my-10">
         <RecordEpigraph />
       </div>
 
-      <details className="mb-5 border-y border-record-ink/25 py-1">
-        <summary className="cursor-pointer py-4 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-record-muted marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
-          The long version — the argument, the six readers, the limits
-        </summary>
-        <XEqualsXWhy />
-        <XEqualsXSurvives />
-        <XEqualsXCheck />
-        <XEqualsXResearchPanel />
-        <XEqualsXCodicil />
-        <XEqualsXMachine />
-        <XEqualsXThanks />
-      </details>
+      <XEqualsXWhereItComesFrom />
 
-      <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-muted">
+      {/* The case, and the debts the case rests on, together at the end. */}
+      <XEqualsXWhoIsCredited />
+
+      <RecordBand id="long-version" label="For the record" title="The long version">
+        <details className="border-t border-record-ink/15 pt-1">
+          <summary className="cursor-pointer py-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-record-muted marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
+            The argument, the six readers, what can be checked, the limits
+          </summary>
+          <div className="pt-2">
+            <XEqualsXWhy />
+            <XEqualsXSurvives />
+            <XEqualsXCheck />
+            <XEqualsXCodicil />
+            <XEqualsXMachine />
+            <XEqualsXThanks />
+          </div>
+        </details>
+      </RecordBand>
+
+      <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">
         Not yet signed by a person.
       </p>
     </ClimateRecordShell>

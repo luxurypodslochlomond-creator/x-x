@@ -5,7 +5,7 @@ import React from 'react';
 // opening of the argument, so a reader arriving from the plate is already inside it.
 export default function XEqualsXInscription() {
   return (
-    <section aria-labelledby="the-covenant" className="pb-2 pt-2">
+    <section aria-labelledby="the-covenant" className="pb-2 pt-7">
       <div className="flex items-baseline justify-between gap-4 border-b border-record-ink/20 pb-2">
         <span id="the-covenant" className="font-mono text-[12px] uppercase tracking-[0.16em] text-record-muted">
           The covenant
