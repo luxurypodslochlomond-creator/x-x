@@ -6,7 +6,7 @@ import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
 
 // Supporting doors share the same drawn hand as the main navigation.
-const CAPTIONS = { '/XEqualsX': 'Why', '/ClimateMethod': 'Method', '/ClimateCorrections': 'Corrections', '/ClimateGuide': 'All pages' };
+const CAPTIONS = { '/XEqualsX': 'Why', '/ClimateMethod': 'Method', '/ClimateCorrections': 'Corrections', '/ClimateGuide': 'Contents' };
 
 export default function RecordImprint() {
   const { pathname } = useLocation();

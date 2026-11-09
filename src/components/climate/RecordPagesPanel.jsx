@@ -59,14 +59,14 @@ export default function RecordPagesPanel({ open, onClose }) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Every way through the record"
+      aria-label="Contents of the record"
       className="fixed inset-0 z-[95] overflow-y-auto bg-record-paper text-record-ink"
     >
       <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
       <div className="mx-auto max-w-[720px] px-4 pb-16 pt-4 lg:px-8">
         <div className="flex items-baseline justify-between gap-6">
           <span className="text-[23px] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-            Every way through
+            Contents of the record
           </span>
           <button
             ref={closeRef}
