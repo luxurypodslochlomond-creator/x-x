@@ -13,7 +13,8 @@ import React from 'react';
 export default function XEqualsXMarkPlate() {
   return (
     <figure className="my-8 border-y border-record-ink/25 py-8">
-      <p
+      <div
+        role="img"
         aria-label="x equals x"
         className="select-none text-center text-record-mark"
         style={{
@@ -24,7 +25,7 @@ export default function XEqualsXMarkPlate() {
         }}
       >
         x&nbsp;=&nbsp;x
-      </p>
+      </div>
 
       <figcaption className="mx-auto mt-6 max-w-[36ch] text-center">
         <span className="block text-[15.5px] leading-[1.5] text-record-ink">
