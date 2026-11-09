@@ -7,8 +7,9 @@ import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
-import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
 import ClimateNav from '@/components/climate/ClimateNav';
+import RecordImprint from '@/components/climate/RecordImprint';
+import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordGrain from '@/components/climate/RecordGrain';
@@ -196,24 +197,16 @@ export default function ClimateLayout({ children, currentPage }) {
             </div>
           </div>
 
-          <div aria-hidden="true" className="mt-2 h-px w-full bg-record-ink/15" />
+          <RecordRule />
 
           {/* The index on a phone, below the line, so it reads as the record's own contents. */}
           <div className="sm:hidden">
             <ClimateNav currentPage={currentPage} />
           </div>
 
-          {/* The imprint line: the tongue this page is being read in, and the mark. */}
-          <div className="flex items-center justify-between gap-4 pb-2 sm:pt-1.5">
-            <ClimateLanguageBar tone="paper" />
-            <Link
-              to="/XEqualsX"
-              className="shrink-0 pb-1 text-[15px] leading-none text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
-              style={{ fontFamily: 'var(--font-reading)' }}
-            >
-              x = x
-            </Link>
-          </div>
+          {/* The imprint line: how the record is kept, the tongue this page is being
+              read in, and the mark. One line of printed matter, not a second menu. */}
+          <RecordImprint />
         </div>
       </header>
 
