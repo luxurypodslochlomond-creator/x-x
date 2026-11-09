@@ -22,7 +22,10 @@ export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
-  { label: 'Music', to: '/ClimateMusic', page: 'ClimateMusic', what: 'Music given to the record by its artists.' },
+  // Music is off the rail at Janine's request, 9 November 2026: "it would be helpful to
+  // not distract by inviting music… it will take viewers away from the entries of
+  // solutions and crises." The page still exists, and still holds only the record's own
+  // theme, but nothing on the record invites anybody to it any more.
   { label: 'Search', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Find a place, subject or source.' },
 ];
 
@@ -57,7 +60,10 @@ export const ELSEWHERE_NAV = [
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
   { label: 'Become a checker', to: '/ClimateFellows', what: 'What checking involves, and how to ask to take part.' },
   { label: 'Host the record', to: '/ClimateHost', what: 'What carrying the record involves.' },
-  { label: 'Support the record', to: '/ClimateSupport', what: 'Support and its declaration in the open.' },
+  // Support is off the record's doors at Janine's request, 9 November: "Donations can be
+  // handled by a host. Please save this… for when we are discussing with a potential
+  // host." The page is kept, in full and without her name on it — it simply is not being
+  // offered to a reader while a host is being found.
 ];
 
 export const SUPPORTING_PAGES = [

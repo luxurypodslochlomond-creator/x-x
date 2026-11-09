@@ -130,12 +130,9 @@ export default function ClimateFounder() {
             <span className="text-[11px]">Brian Hughes</span>
           </p>
 
-          <p className="mt-3 pt-3 border-t border-[#141210]/10 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
-            Record kept by
-            <br />
-            <span className="text-[11px]">UF51 CIC</span>
-          </p>
-
+          {/* "Record kept by UF51 CIC" was taken off here at Janine's request, 9 November:
+              "'Kept by…' adds confusion and uncertainty" for a potential host. The credit
+              above says who built the page and stops there. */}
           <a
             href="mailto:family@uf51.love"
             aria-label="Contact UF51 CIC about this record"

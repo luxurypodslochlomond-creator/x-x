@@ -645,7 +645,9 @@ export default function TogetherChangeClimate() {
                 }`}
               >{t.actions}</button>
             </div>
-            <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund} · {t.donate}</p>
+            {/* "Support welcome" is off this line at Janine's request, 9 November: donations
+                are for a host to handle, and are being saved for those conversations. */}
+            <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund}</p>
           </div>
 
           <div className="lg:w-[320px] lg:flex-shrink-0">

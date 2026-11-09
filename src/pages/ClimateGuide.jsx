@@ -6,12 +6,10 @@ import { PRIMARY_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks'
 import RecordPageIndex from '@/components/climate/RecordPageIndex';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
-import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
 
 // The record's own mark for music, at the size of the words it stands beside. The note
 // glyph is gone from this page: the fork is the record's, and the guide of the record's
 // own buttons should not point at music with somebody else's sign.
-const FORK = <COOLASFUCKTuningFork size={15} tone="signal" className="flex-shrink-0" />;
 
 // ── THE BUTTONS ──────────────────────────────────────────────────────────────────
 // What Janine asked for, kept in the record's own hand: the list of buttons, in the
@@ -62,12 +60,9 @@ const SEND = [
     to: createPageUrl('TogetherChangeClimate'),
     what: 'People working on the same thing in one area. A name, a topic, a region, and one contact line.',
   },
-  {
-    label: 'Give the record your track',
-    icon: FORK,
-    to: createPageUrl('ClimateMusic'),
-    what: 'The artist\u2019s own door, on the music page: no account, no signature, no fee, and their name stays on the work. A track is read at once, not queued — a clean one goes up the moment it is given, and the record prints the master\u2019s real format, read out of the file\u2019s own header. A set can be given the same way: one continuous work by a selector with many works inside it, kept whole and never cut into chapters, with the works inside it shown as the selector\u2019s own text and taken on their word. Nothing is ever converted, and the giver\u2019s own choice about the master is said on the track: offered to take whole, or heard here only. Where it is offered, the file is there to keep — so a format a browser will not stream is never a door closed.',
-  },
+  // The door for artists is closed at Janine's request, 9 November 2026 — no invitation
+  // to give music, because it takes a reader away from the entries of solutions and
+  // crises. The music page and what was already given are untouched.
 ];
 
 const READING = [
@@ -204,14 +199,14 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Wire, Map, Music and Search. The foot also opens Why, Method, Corrections and the Contents. An invited keeper also sees the keeper’s door there."
+        note="The same drawings at the top and foot of the screen open Record, Wire, Map and Search. The foot also opens Why, Method, Corrections and the Contents. An invited keeper also sees the keeper’s door there."
         items={BAR}
       />
 
       <GuideBand
         number="02"
         heading="Sending something in"
-        note="Anyone may send an entry in. A person reads every entry before it stands on the record, and the sender’s email is used only to reach them about it. Music is the one exception, and it is deliberate: a track needs no source and no gate, so a clean one is on the record the moment it is given, and only a flagged one waits."
+        note="Anyone may send an entry in. A person reads every entry before it stands on the record, and the sender’s email is used only to reach them about it."
         items={SEND}
       />
 

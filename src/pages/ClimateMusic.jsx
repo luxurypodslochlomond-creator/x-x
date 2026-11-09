@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
-import { Music, Plus, X, RefreshCw } from 'lucide-react';
+import { Music, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import TrackPlate from '@/components/climate/music/TrackPlate';
 import MusicDeck from '@/components/climate/music/MusicDeck';
-import MusicSubmitForm from '@/components/climate/music/MusicSubmitForm';
 import MusicFind from '@/components/climate/music/MusicFind';
 import MusicTerms from '@/components/climate/music/MusicTerms';
 import ThemeSignal from '@/components/climate/music/ThemeSignal';
@@ -34,7 +33,6 @@ export default function ClimateMusic() {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeId, setActiveId] = useState(null);
-  const [doorOpen, setDoorOpen] = useState(false);
   const [word, setWord] = useState('');
   const [kind, setKind] = useState('');
   const [kinds, setKinds] = useState([]);
@@ -240,31 +238,11 @@ export default function ClimateMusic() {
         </>
       )}
 
-      {/* The artist's door — closed until an artist opens it, so the page stays the music. */}
-      <div className="mt-6">
-        {!doorOpen ? (
-          <button
-            onClick={() => setDoorOpen(true)}
-            className="w-full flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#efe7d6] text-[#141210] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#1a1612] active:text-[#efe7d6] transition-colors"
-          >
-            <Plus className="w-4 h-4" /> Your track belongs here too
-          </button>
-        ) : (
-          <div className="border-2 border-[#141210] bg-[#efe7d6] p-4">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <p className="text-[11px] font-black font-mono uppercase tracking-widest text-[#141210]">Give the record your track</p>
-              <button
-                onClick={() => setDoorOpen(false)}
-                aria-label="Close"
-                className="w-11 h-11 flex items-center justify-center border-2 border-[#141210] text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors flex-shrink-0"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-            <MusicSubmitForm onSubmitted={load} />
-          </div>
-        )}
-      </div>
+      {/* The door for artists is closed at Janine's request, 9 November 2026: "it would be
+          helpful to not distract by inviting music… it will take viewers away from the
+          entries of solutions and crises." Nothing already given has been touched — the
+          record's own theme still stands, and the terms below still say what the record
+          promises about a master. Nothing new is invited. */}
 
       {/* The record's own terms, at the foot of the page: what it claims, and how any
           stranger can test each claim. Free is a condition here, not a price. */}

@@ -94,13 +94,11 @@ export default function ClimateFellows() {
 
       <Block n="08" title="You do not have to wait for anything to be settled">
         <p>The record is already live and open. It does not need a name agreed, a launch date fixed, or a committee's permission before somebody can start reading sources.</p>
-        {/* Janine, by email, 9 November: "Please change to belongs to the platform team.
-            Those are real questions and they belong to Janine and to Horizon International,
-            not to you." So the owner is named as a team and not as a person — the questions
-            about the name and the launch are the platform team's, which is her and Horizon
-            International together, and they are not the reader's to settle. Her own words are
-            kept, because a sentence she wrote is not mine to improve. */}
-        <p>Those are real questions and they belong to the platform team, to Janine and to Horizon International — not to you. If the name does change, it changes in the open, and every entry keeps its address either way.</p>
+        {/* Janine, by email, 9 November: "Please change to belongs to the platform team."
+            Her correction, in her words — the questions about the name and the launch are the
+            platform team's, and they are not the reader's to settle. Nothing here names her as
+            the owner of them, because she asked for exactly that. */}
+        <p>Those are real questions and they belong to the platform team — not to you. If the name does change, it changes in the open, and every entry keeps its address either way.</p>
       </Block>
 
       <Block n="09" title="How to be let in">
