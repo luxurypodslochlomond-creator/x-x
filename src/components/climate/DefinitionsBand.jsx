@@ -8,16 +8,15 @@ import { DEFINITIONS } from './climateDefinitions';
 
 export default function DefinitionsBand({ heading }) {
   return (
-    <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
-      <div className="flex items-center gap-2 mb-1">
+    <section className="px-4 lg:px-10 py-7 lg:py-11">
+      <div className="flex items-baseline gap-2.5 mb-2">
         <h2
-          className="font-black uppercase text-[#141210]"
-          style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}
+          className="text-[#141210]"
+          style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(27px, 7.2vw, 44px)', lineHeight: 1.0, letterSpacing: '-0.02em', fontWeight: 400 }}
         >
           {heading}
         </h2>
-        <div className="flex-1 h-px bg-[#141210]/20" />
-        <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{DEFINITIONS.length}</span>
+        <span className="font-mono text-[11px] text-[#1e3a2b]">{DEFINITIONS.length}</span>
       </div>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
         In the words of the body that defined them. Follow the source and read it there.

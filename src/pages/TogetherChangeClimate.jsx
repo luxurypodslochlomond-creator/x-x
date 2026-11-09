@@ -124,7 +124,7 @@ const T = {
 
 seedTranslations(T);
 
- function SolutionCard({ item }) {
+ function SolutionCard({ item, lead = false }) {
      // Green says solution, red says emergency. A crisis card wears the record's red — it
      // had been wearing the same blue as every other link here, so the most urgent entry
      // on the page read as the calmest thing on it.
@@ -143,7 +143,7 @@ seedTranslations(T);
          to={`/ClimateDetail/${item.entry_type}/${item.id}`}
          className={`relative text-left overflow-hidden bg-[#241d16] border border-[#241d16] active:border-[#e2602a] ${
            isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
-         } aspect-[4/3] flex items-end active:scale-95 transition-transform duration-100`}
+         } ${lead ? 'col-span-2 aspect-[16/11]' : 'aspect-[4/3]'} flex items-end active:scale-95 transition-transform duration-100`}
        >
          {cardImage ? (
            <img
@@ -169,14 +169,17 @@ seedTranslations(T);
              be bright white at its foot, so the scrim holds a touch harder than it did over grey:
              the cream words are never asked to fight the picture for the last inch. */}
          <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 28%, rgba(20,18,16,0.72) 62%, rgba(20,18,16,0.92) 100%)' }} />
-         <div className="relative p-2.5 w-full">
+         <div className={`relative w-full ${lead ? 'p-4' : 'p-2.5'}`}>
            <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ef5a4a]'}`}>
              {isSolution ? 'Solution' : 'Crisis'}
            </div>
            {/* A cut serif needs a little more size than a condensed sans did to hold its
                own over a photograph, so the card title gains a step and tightens its
                leading. Same words, same place, just not faint. */}
-           <h3 className="text-[15px] leading-[1.28] text-[#efe7d6] line-clamp-3 mt-1">
+           <h3
+             className={`text-[#efe7d6] line-clamp-3 mt-1 ${lead ? 'text-[21px] leading-[1.2]' : 'text-[15px] leading-[1.28]'}`}
+             style={lead ? { fontFamily: 'var(--font-reading)', letterSpacing: '-0.01em' } : undefined}
+           >
              {item.title}
            </h3>
          </div>
@@ -198,6 +201,25 @@ const ALL_KIND_WORDS = new Set(Object.values(KIND_WORDS).flat());
 const kindOfWord = (word) => Object.keys(KIND_WORDS).find(k => KIND_WORDS[k].includes(word)) || null;
 
 import useRecordViewState from '@/components/climate/useRecordViewState';
+
+// ── THE SECTION HEADS STOPPED SHOUTING ────────────────────────────────────────
+// Every heading on this page was condensed uppercase with a hairline run out to the edge
+// and a count pinned to the end of it — seven times down one page. Seven ledgers under
+// seven rules is what made a record of the living world read like a spreadsheet, and no
+// amount of redrawing the marks was ever going to fix it, because the marks were never
+// the problem: the frame around everything was.
+//
+// A section head is set in the record's reading voice now, in sentence case, big enough
+// to be the only thing on its line. The count stays — it is a fact and this record does
+// not hide facts — but it sits beside the word like a page number instead of closing a
+// rule. Same seven headings, same words, with the filing cabinet taken off them.
+const SECTION = {
+  fontFamily: 'var(--font-reading)',
+  fontSize: 'clamp(27px, 7.2vw, 44px)',
+  lineHeight: 1.0,
+  letterSpacing: '-0.02em',
+  fontWeight: 400,
+};
 
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
@@ -563,16 +585,15 @@ export default function TogetherChangeClimate() {
       {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
              The space is held while the record loads, so nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
-        <div className="px-4 lg:px-10 py-5 lg:py-8 bg-[#efe7d6] border-b-2 border-[#141210]">
-          <div className="flex items-center gap-2 mb-3">
-            <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.featured}</h2>
-            <div className="flex-1 h-px bg-[#141210]/20" />
-            <span className="text-[10px] font-black font-mono text-[#e2602a]">{featured.length}</span>
+        <div className="px-4 lg:px-10 py-7 lg:py-10 bg-[#efe7d6]">
+          <div className="flex items-baseline gap-2.5 mb-4">
+            <h2 className="text-[#141210]" style={SECTION}>{t.featured}</h2>
+            <span className="font-mono text-[11px] text-[#e2602a]">{featured.length}</span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
             {loading
               ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
-              : featured.map((item) => <SolutionCard key={item.id} item={item} />)}
+              : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
           </div>
         </div>
       )}
@@ -592,7 +613,7 @@ export default function TogetherChangeClimate() {
              The search that reaches everything is the one pill in the header: one
              search, not two. On a desktop that reads as a working toolbar; on a phone
              it stacks. ── */}
-      <div className="px-4 lg:px-10 py-4 lg:py-6 bg-[#efe7d6] border-b-2 border-[#141210]">
+      <div className="px-4 lg:px-10 pb-5 pt-2 lg:pb-6 bg-[#efe7d6]">
         <div className="lg:flex lg:items-start lg:gap-8">
           <div className="lg:flex-1 lg:min-w-0">
             <div className="flex gap-2 mb-3 lg:max-w-[540px]">
@@ -643,7 +664,7 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
-      <div className="px-4 lg:px-10 py-3 lg:py-4 bg-[#efe7d6] border-b-2 border-[#141210]">
+      <div className="px-4 lg:px-10 pb-4 lg:pb-5 bg-[#efe7d6]">
         <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x lg:flex-wrap lg:overflow-x-visible lg:mx-0 lg:px-0" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
           <button
             onClick={() => setSelectedCategory('all')}
@@ -675,11 +696,10 @@ export default function TogetherChangeClimate() {
         ) : (
           <>
             {showEntries && solutions.length > 0 && (
-              <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
-                <div className="flex items-center gap-2 mb-3">
-                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.solutions}</h2>
-                  <div className="flex-1 h-px bg-[#141210]/20" />
-                  <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{solutions.length}</span>
+              <section className="px-4 lg:px-10 py-7 lg:py-11">
+                <div className="flex items-baseline gap-2.5 mb-4">
+                  <h2 className="text-[#141210]" style={SECTION}>{t.solutions}</h2>
+                  <span className="font-mono text-[11px] text-[#1e3a2b]">{solutions.length}</span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {solutions.map((item, i) => (
@@ -691,11 +711,10 @@ export default function TogetherChangeClimate() {
               </section>
             )}
             {showEntries && crises.length > 0 && (
-              <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
-                <div className="flex items-center gap-2 mb-3">
-                  <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.crises}</h2>
-                  <div className="flex-1 h-px bg-[#141210]/20" />
-                  <span className="text-[10px] font-black font-mono text-[#b3261e]">{crises.length}</span>
+              <section className="px-4 lg:px-10 py-7 lg:py-11">
+                <div className="flex items-baseline gap-2.5 mb-4">
+                  <h2 className="text-[#141210]" style={SECTION}>{t.crises}</h2>
+                  <span className="font-mono text-[11px] text-[#b3261e]">{crises.length}</span>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {crises.map((item, i) => (
@@ -726,11 +745,10 @@ export default function TogetherChangeClimate() {
                gathering, and the record carries ONLY the one contact line they chose to publish.
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {(selectedType === 'all' || selectedType === 'groups') && (
-          <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
-            <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.groups}</h2>
-              <div className="flex-1 h-px bg-[#141210]/20" />
-              <span className="text-[10px] font-black font-mono text-[#1e3a2b]">{filteredGroups.length}</span>
+          <section className="px-4 lg:px-10 py-7 lg:py-11">
+            <div className="flex items-baseline gap-2.5 mb-2">
+              <h2 className="text-[#141210]" style={SECTION}>{t.groups}</h2>
+              <span className="font-mono text-[11px] text-[#1e3a2b]">{filteredGroups.length}</span>
             </div>
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3">{t.groups_sub}</p>
             <button
@@ -773,11 +791,10 @@ export default function TogetherChangeClimate() {
 
         {/* ── ACTIONS — Janine's spec: cleanups, plantings, meetings, policy submissions. x = x — equal alongside Solutions and Crises ── */}
         {(selectedType === 'all' || selectedType === 'actions') && (
-          <section className="px-4 lg:px-10 py-5 lg:py-8 border-b-2 border-[#141210]">
-            <div className="flex items-center gap-2 mb-1">
-              <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.actions}</h2>
-              <div className="flex-1 h-px bg-[#141210]/20" />
-              <span className="text-[10px] font-black font-mono text-[#e2602a]">{filteredActions.length}</span>
+          <section className="px-4 lg:px-10 py-7 lg:py-11">
+            <div className="flex items-baseline gap-2.5 mb-2">
+              <h2 className="text-[#141210]" style={SECTION}>{t.actions}</h2>
+              <span className="font-mono text-[11px] text-[#e2602a]">{filteredActions.length}</span>
             </div>
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3">{t.actions_sub}</p>
             {filteredActions.length > 0 ? (
@@ -803,7 +820,7 @@ export default function TogetherChangeClimate() {
 
         {/* ── GOVERNANCE ── */}
         <section className="px-4 lg:px-10 py-8 lg:py-14 bg-[#1e3a2b] text-[#efe7d6]">
-          <h2 className="font-black uppercase text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(25px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>{t.govern}</h2>
+          <h2 className="text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(27px, 7.2vw, 44px)', lineHeight: 1.0, letterSpacing: '-0.02em', fontWeight: 400 }}>{t.govern}</h2>
           <p className="text-[15px] leading-[1.75] text-[#efe7d6] max-w-full lg:max-w-[640px]" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>{t.govern_body}</p>
           {/* The two ways out of this paragraph, side by side and the same size. They were a
               stack of two differently-cut buttons with a line of small print under them, which

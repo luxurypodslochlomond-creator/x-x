@@ -81,17 +81,20 @@ Community Interest Company, registered in Scotland, SC870603`}
           <p className="text-[13px] leading-[1.7] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
             With every good wish,
           </p>
-          <p className="mt-4 text-[14px] font-black text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
-            Janine M. H. Selendy
-          </p>
-          <p className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#5a5246] mt-0.5">Founder, Horizon International</p>
+          {/* It is her letter to send, so it is her hand that signs it. This printed her
+              name and her title under words she had not written, on a page anyone can
+              open and a PDF anyone can download — and she has asked, plainly, not to be
+              named on things she did not write. The line is a blank now. */}
+          <p aria-hidden="true" className="mt-6 mb-1.5 h-4 w-[230px] max-w-full border-b border-[#141210]/40" />
+          <p className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#5a5246]">Signature — hers to add</p>
         </div>
       </div>
 
       <div className="px-4 lg:px-6 py-3 border-t border-[#141210]/20">
         <p className="text-[10.5px] font-mono leading-relaxed text-[#5a5246]">
-          Three blanks, and all three are hers: the name, the department and the institution. Nothing biographical has
-          been invented — a letter that guessed at her life's work would be the first thing anyone checked.
+          Four blanks, and all four are hers: the name, the department, the institution and the signature. Nothing
+          biographical has been invented and nothing is signed for her — a letter that guessed at her life's work, or
+          put her name under words she had not read, would be the first thing anyone checked.
         </p>
       </div>
     </div>

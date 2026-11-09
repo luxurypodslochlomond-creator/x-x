@@ -16,12 +16,14 @@ const GESTURES = [
 
 export default function SmallGesturesBand() {
   return (
-    <section className="px-4 py-5 border-b-2 border-[#141210]">
-      <div className="flex items-center gap-2 mb-1">
-        <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '26px', letterSpacing: '-0.025em' }}>
+    <section className="px-4 py-7">
+      <div className="flex items-baseline gap-2.5 mb-2">
+        <h2
+          className="text-[#141210]"
+          style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(26px, 6.8vw, 40px)', lineHeight: 1.02, letterSpacing: '-0.02em', fontWeight: 400 }}
+        >
           The smallest gestures
         </h2>
-        <div className="flex-1 h-px bg-[#141210]/20" />
       </div>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
         Small enough to start today, and free.

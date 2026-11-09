@@ -17,8 +17,8 @@ export const LETTER_SUBJECT =
 
 export const LETTER_SIGN_OFF = `With every good wish,
 
-Janine M. H. Selendy
-Founder, Horizon International`;
+____________________________________
+Signature · name · role — hers to add`;
 
 export const LETTER_FULL = `UNIVERSAL FREQUENCY 51 CIC
 Together We Can Change the Course of Climate Change

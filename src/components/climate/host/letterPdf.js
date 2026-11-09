@@ -69,14 +69,18 @@ export function buildLetterPdf() {
   y += 2;
   doc.text('With every good wish,', L, y);
   y += 12;
-  doc.setFont('times', 'bold');
-  doc.setFontSize(11.5);
-  doc.text('Janine M. H. Selendy', L, y);
-  y += 5;
+  // The letter is hers to send, so it is signed in her hand and not in ours. It printed
+  // her name and her title under words she had not written, which is the one thing a
+  // letter of this kind cannot do.
+  doc.setDrawColor(26, 22, 18);
+  doc.setLineWidth(0.3);
+  y += 8;
+  doc.line(L, y, L + 62, y);
+  y += 6;
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(107, 98, 88);
-  doc.text('Founder, Horizon International', L, y);
+  doc.text('Signature · name · role — hers to add', L, y);
 
   // Foot — the line the whole record rests on
   doc.setDrawColor(26, 22, 18);
