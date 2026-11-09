@@ -21,7 +21,11 @@ export default function XEqualsXInscription() {
           written over.
         </p>
       </div>
-      <p className="record-meta mt-5 border-l-2 border-record-mark pl-4 text-record-muted">
+      <p className="mt-5 border-l-2 border-record-mark pl-4 text-record-ink">
+        x = x is the whole of it. Whoever did the work keeps their name on it, and the record is
+        what keeps it there after the room empties.
+      </p>
+      <p className="record-meta mt-3 text-record-muted">
         Equal human worth. Not equal evidence, and not equal scale.
       </p>
     </section>

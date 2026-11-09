@@ -51,6 +51,12 @@ export default function XEqualsX() {
           somebody did. First person, signed, and no credential asked for. */}
       <XEqualsXNoteFromTheBuilder />
 
+      {/* The case that gives the mark teeth, and the reason it stands this high on the page.
+          Somebody built the thing; somebody else's name went on it. That is the oldest
+          grievance in art, in science and in every workshop on earth, and it needs no
+          cosmology to be felt — only the sources, which are attached below. */}
+      <XEqualsXWhoIsCredited />
+
       {/* And then the record itself, straight away — not a description of it, an entry
           out of it that a reader can follow to its source. The connection to the climate
           platform is the thing being proved, so it comes before the argument for it. */}
@@ -69,9 +75,6 @@ export default function XEqualsX() {
 
       {/* The reason, in three marks and three lines. */}
       <XEqualsXLostMarks />
-
-      {/* The same argument proved once, by a case with its sources attached. */}
-      <XEqualsXWhoIsCredited />
 
       {/* Her words, her red, her name — and the limit said under them. */}
       <RecordEpigraph />
