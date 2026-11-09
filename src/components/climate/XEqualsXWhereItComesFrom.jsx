@@ -9,18 +9,21 @@ import '@/components/climate/x-equals-x-field.css';
 // brand. So: the conversation it started in, the hand it is printed with, and the one
 // colour on it that belongs to somebody else.
 //
-// The first line is the whole point of the section. It began in a conversation about
-// Yale. No pass from Yale is asked for here, and none is offered. An institution
-// agreeing with you has never once made a thing true — and a record that borrowed a
-// letterhead to look serious would be doing exactly what this one exists to refuse.
+// The first line is the whole point of the section. It began in one conversation, with
+// one research institute, and that institute is not its audience. No pass is asked for
+// here and none is offered. An institution agreeing with you has never once made a thing
+// true — and a record that borrowed a letterhead to look serious would be doing exactly
+// what this one exists to refuse.
 const NOTES = [
   {
     term: 'The conversation',
     body: (
       <>
-        It started with a message about Yale. No pass from Yale is asked for here, and none is
-        offered — nor from any other university, funder or letterhead. An institution agreeing with
-        you has never once made a thing true. A source is a source. A name on a crest is not.
+        It started with one message, from one person at one research institute. No pass from it is
+        asked for here, and none is offered — nor from any other university, funder or letterhead.
+        It is written for anyone who reads, not for the people who might approve it. An institution
+        agreeing with you has never once made a thing true. A source is a source. A name on a crest
+        is not.
       </>
     ),
   },

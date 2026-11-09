@@ -29,12 +29,18 @@ export default function XEqualsXNoteFromTheBuilder() {
       <div className="mt-4 max-w-[54ch] space-y-3.5 text-[15.5px] leading-[1.62] text-record-ink">
         <p>
           I built this in a shed in Scotland, on a phone, in the gaps between other work. Not for a
-          funder, not for a panel, and not for Yale.
+          funder, not for a panel, and not for any institution's approval.
         </p>
         <p>
-          Someone I love sent me a message about Yale. It was a good conversation, and it ended the
-          way those conversations usually end — with the thing being admired rather than made. So I
-          made it. That is the whole of my qualification: I am the one who did the work.
+          It began with one message, from one person at one research institute, asking whether a
+          record like this could exist. It was a good conversation, and it ended the way those
+          conversations usually end — with the thing being admired rather than made. So I made it.
+          That is the whole of my qualification: I am the one who did the work.
+        </p>
+        <p>
+          The institute is not the audience. You are, whoever you are, reading this on whatever
+          screen you have. But it is built to be taken apart by people whose whole job is to take
+          things apart — every claim sourced, every limit stated, nothing asked for on trust.
         </p>
         <p>
           It is meant to look like a record somebody kept, because that is what it is. Not a brand,

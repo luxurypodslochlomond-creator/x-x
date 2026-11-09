@@ -82,6 +82,12 @@
   line-height: 1.05;
   overflow-wrap: anywhere;
 }
+/* The tongue is the one mark that opens something rather than going somewhere, so when it
+   is open it carries a small glow in the record's borrowed red — the only glow in the rail,
+   because a rail where everything glows says nothing about where you are. */
+.rec-art-door-wrap .rec-art-door-active .rec-art-drawing {
+  filter: drop-shadow(0 0 6px rgb(var(--record-mark) / .45));
+}
 /* The marks are the record's hand: drawn, inked, and big enough to be recognised at a
    glance without naming them first. The one you are standing in carries a short rule
    above it, so the dock says where you are once rather than shouting it. */

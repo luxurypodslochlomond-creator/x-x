@@ -15,6 +15,8 @@ import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 import XEqualsXMachine from '@/components/climate/XEqualsXMachine';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
 import XEqualsXCut from '@/components/climate/XEqualsXCut';
+import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
+import XEqualsXLightPlate from '@/components/climate/XEqualsXLightPlate';
 import RecordEpigraph from '@/components/climate/RecordEpigraph';
 
 // ── WHY THIS RECORD ────────────────────────────────────────────────────────────
@@ -41,9 +43,17 @@ export default function XEqualsX() {
     >
       <XEqualsXCut />
 
+      {/* ── THE PAGE OPENS ON A DRAWING, NOT ON A SENTENCE ────────────────────────
+          Two plates were drawn for this page and then never printed: the mark itself,
+          two upright strokes held at exactly the same height, and the light leaving a
+          small source in widening waves. Both are here now, at the top, because a reader
+          decides in about a second and that decision is made by light rather than by
+          argument. Nothing is claimed by them that the page does not go on to check. */}
+      <XEqualsXMarkPlate />
+
       {/* One plate, and the reader's arrival is what draws it. It runs past the reading
-          measure on purpose: the page's only drawing is printed bigger than its type,
-          and it breaks the column so the page stops reading as a form. */}
+          measure on purpose: the page's drawing is printed bigger than its type, and it
+          breaks the column so the page stops reading as a form. */}
       <XEqualsXCovenantField />
 
       {/* Him. The page had a section for the founder and none for the person who made
@@ -57,9 +67,10 @@ export default function XEqualsX() {
           cosmology to be felt — only the sources, which are attached below. */}
       <XEqualsXWhoIsCredited />
 
-      {/* And then the record itself, straight away — not a description of it, an entry
-          out of it that a reader can follow to its source. The connection to the climate
-          platform is the thing being proved, so it comes before the argument for it. */}
+      {/* Light, then the record itself — not a description of it, an entry out of it that
+          a reader can follow to its source. The connection to the climate platform is the
+          thing being proved, so it comes before the argument for it. */}
+      <XEqualsXLightPlate />
       <RecordInPractice />
 
       {/* Two columns rather than two more blocks in a stack: what the covenant is, and

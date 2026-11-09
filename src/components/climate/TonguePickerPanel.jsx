@@ -7,7 +7,7 @@ import TonguePickerManual from '@/components/climate/TonguePickerManual';
 export default function TonguePickerPanel({ theme, mobile, above = false, onClose, searchRef, query, setQuery, listProps, manualProps }) {
   const { panel, divide, dim, field } = theme;
   return (
-    <div className={`flex flex-col min-h-0 overflow-hidden border-2 ${mobile ? 'h-full' : above ? 'absolute right-0 bottom-full mb-1 z-[60] w-[min(92vw,560px)] max-h-[min(72vh,540px)] shadow-2xl shadow-black/50' : 'absolute right-0 top-full mt-1 z-[60] w-[min(92vw,560px)] max-h-[min(72vh,540px)] shadow-2xl shadow-black/50'} ${panel}`}>
+    <div className={`flex flex-col min-h-0 overflow-hidden border-2 ${mobile ? 'h-full' : above ? 'absolute right-0 bottom-full mb-1 z-[60] w-[min(92vw,560px)] max-h-[min(72vh,540px)] shadow-2xl shadow-black/50' : 'absolute right-0 top-full mt-1 z-[60] w-[min(92vw,560px)] max-h-[min(72vh,540px)] shadow-[0_18px_50px_-18px_rgba(20,18,16,.45)]'} ${panel}`}>
       <div className={`flex-shrink-0 flex items-center justify-between gap-2 px-3 py-2 border-b-2 ${divide}`}>
         {/* The label is set in the record's own bone rather than in the mark's red: the red is
             the rule and the ticks on this dark panel, and nine-pixel red on near-black is the
