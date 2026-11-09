@@ -29,7 +29,10 @@ export const SUPPORT_STRINGS = {
     name_input_label: 'The name to show',
     name_placeholder: 'Name',
 
-    wall_heading: 'Kept by',
+    // "Kept by" read as a claim about who owns or runs the record, which is exactly the
+    // confusion a host cannot afford to carry. "Given by" says only what the wall is: the
+    // names of people who chose to give.
+    wall_heading: 'Given by',
     wall_sub: 'Names stand in the order they arrived — never by size. A £2 gift and a £500 gift read exactly the same here. Anonymous gifts are counted, and never named.',
     wall_empty: 'No names yet. The record is young, and this wall is new.',
     wall_none: 'Nobody has given yet.',

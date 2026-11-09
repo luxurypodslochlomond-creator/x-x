@@ -26,6 +26,10 @@ import { givenStamp } from '@/components/climate/music/stamp';
 // The band at the foot of the record is the same band, not a copy of it — one
 // component, drawn in both places.
 
+// A cultural check is a person hearing every piece, not a machine reading its title.
+// While it is being made, the record's own theme is the only music that stands.
+const MUSIC_HOLD = true;
+
 export default function ClimateMusic() {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,6 +52,13 @@ export default function ClimateMusic() {
     setLoading(true);
     try {
       const query = { status: 'published' };
+      // ── HELD AT JANINE'S ASKING, 9 NOVEMBER 2026 ──
+      // "Music needs to be checked for cultural sensitivity… no war symbols, no unkind
+      // references of any kind, only positive." Until each piece has been heard by a
+      // person against that test, only the record's own theme stands. Nothing is deleted:
+      // every track given is still on the record, whole and untouched, waiting. Turn this
+      // off (or set theme on the pieces that have passed) and they stand again.
+      if (MUSIC_HOLD) query.theme = true;
       if (kind) query.kind = kind;
       const asked = word.trim();
       if (asked) {
@@ -79,7 +90,7 @@ export default function ClimateMusic() {
   }, [load, word]);
 
   useEffect(() => {
-    base44.entities.ClimateTrack.count({ status: 'published' }).then(setTotal);
+    base44.entities.ClimateTrack.count(MUSIC_HOLD ? { status: 'published', theme: true } : { status: 'published' }).then(setTotal);
   }, []);
 
   // The theme is read off the record itself, never from a list kept here, so the day it is
@@ -160,8 +171,9 @@ export default function ClimateMusic() {
           <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
             <p className="text-[12px] font-black font-mono uppercase text-[#141210]">Nothing on the record holds that</p>
             <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
-              Try an artist's name, a word from a title, or the kind of piece it is. Every track on the record is
-              searched — nothing is held back from a look.
+              {MUSIC_HOLD
+                ? 'While the cultural check is being made, only the record\u2019s theme stands here. Nothing given has been taken away — every piece is waiting, whole, and will be searchable again once a person has heard it.'
+                : 'Try an artist\u2019s name, a word from a title, or the kind of piece it is. Every track on the record is searched — nothing is held back from a look.'}
             </p>
             <button
               onClick={() => { setWord(''); setKind(''); }}
