@@ -1,28 +1,50 @@
 import React from 'react';
-import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
+import { PRIMARY_NAV, RAIL_SECOND_NAV } from '@/components/climate/recordFooterLinks';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import '@/components/climate/record-navigator.css';
 
-// ── ONE RAIL, NOT TWO ────────────────────────────────────────────────────────────
-// These six marks were drawn twice on every page: once in the masthead and once in the
-// dock pinned at the foot. Same drawings, same captions, same active state, forty pixels
-// apart at the top of the page and then again at the bottom — which does not make the way
-// through the record twice as clear, it makes it look like a page with two headers. The
-// rail lives here now, in the one place a thumb can always reach, and the masthead keeps
-// only the record's name and the line about how it is kept.
+// ── TWO ROWS OF THE SAME HAND ───────────────────────────────────────────────────
+// This rail used to be one row of five, and everything behind the record — why it
+// exists, how an entry is checked, its corrections, its index, the tongue it is read
+// in — was only reachable by opening a sheet first. A reader could not even see that
+// those doors existed without asking for a list of them.
 //
-// The tongue rides in the same rail as the last mark, behind a hairline: it is a way
-// through the record too, so it is cut in the same hand rather than dressed as a form
-// control — but it is a setting and not a sixth place to stand, so the rule separates it.
-export default function RecordNavigator({ currentPage }) {
+// It is ten marks now, five and five: the five ways into the record on the top row,
+// the five ways to understand it and keep it on the second. Equal cells, equal ink,
+// equal size, so the second row is not a lesser row or a submenu — it is the other
+// half of the same way through. The tongue rides at the end of the second row, in the
+// same hand, because a record that promises nobody is turned away has to show the
+// door it is read in.
+//
+// What this costs is said plainly: the rail is about twice as tall, so a phone gives
+// it about a hundred and fifteen pixels permanently (see the foot padding in
+// ClimateLayout). That is the honest price of every door being one tap away, and it is
+// the price this record chose to pay rather than hide half its doors behind a sheet.
+export default function RecordNavigator({ currentPage, onOpenContents, contentsOpen }) {
   return (
     <nav aria-label="The way through the record" className="rec-art-navigator">
       <div className="rec-art-rail">
         {PRIMARY_NAV.map(({ label, to, page, what }) => (
-          <RecordNavDoor key={to} to={to} label={label} what={what} active={currentPage === page} size={38} />
+          <RecordNavDoor key={to} to={to} label={label} what={what} active={currentPage === page} size={30} />
         ))}
-        <RecordTongueDoor />
+      </div>
+      <div className="rec-art-rail">
+        {RAIL_SECOND_NAV.map(({ label, to, what }) => (
+          <RecordNavDoor key={to} to={to} label={label} what={what} size={30} />
+        ))}
+        <RecordNavDoor
+          to="/ClimateGuide"
+          label="Index"
+          what="Every way through the record, on one screen."
+          size={30}
+          asButton
+          onClick={onOpenContents}
+          expanded={contentsOpen}
+          controls="record-contents"
+          active={contentsOpen}
+        />
+        <RecordTongueDoor size={30} />
       </div>
     </nav>
   );

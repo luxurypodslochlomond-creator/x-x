@@ -163,7 +163,12 @@ export default function ClimateLayout({ children, currentPage }) {
       {/* The strip at the foot is the room the dock sits over. It is given back here
           rather than by a spacer inside the page, so every page of the record — including
           the ones written after this one — ends clear of the rail without knowing about it. */}
-      <div className="relative record-book pb-[76px]" style={{ zIndex: 1 }}>
+      {/* The rail is two rows of five marks now, not one, so the foot of the book gives
+          back the strip it is actually covered by: about a hundred and eighteen pixels
+          plus the home indicator. Measured from the marks themselves rather than guessed
+          at, because a dock that sits over the last line of a page is a dock that has
+          eaten a sentence. */}
+      <div className="relative record-book pb-[calc(104px+env(safe-area-inset-bottom))]" style={{ zIndex: 1 }}>
       {/* Both ends of the record use the same drawn doors, and both are pinned now: the
           record's name at the top of the glass, the way through it at the foot, so the
           reader is never more than one thumb from either. */}
@@ -198,7 +203,7 @@ export default function ClimateLayout({ children, currentPage }) {
 
       {/* No spacer at the foot any more: the dock is part of the page's own flow now (it
           pins without being bolted over the book), so nothing needs an inch given back. */}
-      <RecordNavigator currentPage={currentPage} />
+      <RecordNavigator currentPage={currentPage} onOpenContents={openContents} contentsOpen={contentsOpen} />
       <RecordPagesPanel open={contentsOpen} onClose={closeContents} />
       </div>
     </div>

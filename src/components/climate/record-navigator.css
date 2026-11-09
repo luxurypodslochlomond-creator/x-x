@@ -56,7 +56,7 @@
   /* Above the masthead's own layer: the way out of a page is never something a header
      can cover, on the one screen where the header is pinned. */
   z-index: 60;
-  padding: .25rem .5rem max(.4rem, env(safe-area-inset-bottom));
+  padding: .2rem .4rem max(.3rem, env(safe-area-inset-bottom));
   /* A sheet of the record's own paper, not a bar bolted under it: translucent, so the
      page is still felt through the way out, and so the foot of the record never looks
      like a different material to the top. */
@@ -66,30 +66,36 @@
   border-top: 1px solid rgb(var(--record-ink) / .14);
   box-shadow: 0 -10px 18px -14px rgb(var(--record-ink) / .35);
 }
+/* ── TWO ROWS, FIVE AND FIVE ─────────────────────────────────────────────────────
+   One row of five held the way in and nothing else, so every door behind the record —
+   why it exists, how an entry is checked, its corrections, its index, the tongue — was
+   only visible once a reader asked for a list of it. Two rows of five put the whole way
+   through on the glass, in one hand, in equal cells, so the second row reads as the
+   other half of the same thing and not as a lesser one. */
 .rec-art-rail {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch;
+  gap: .1rem;
   max-width: 600px;
   margin-inline: auto;
 }
+.rec-art-rail + .rec-art-rail { margin-top: .05rem; }
 .rec-art-rail > .rec-art-door,
 .rec-art-rail > .rec-art-door-wrap { flex: 1; min-width: 0; }
-/* Five places, then the tongue behind a hairline. Without the rule the tongue read as a
-   sixth destination and the rail as six equal things; with it the rail says what it is —
-   five ways into the record, and one control that changes the voice it is read in. */
-.rec-art-rail > .rec-art-door-wrap:last-child {
-  border-left: 1px solid rgb(var(--record-ink) / .18);
-  margin-left: .15rem;
-  padding-left: .35rem;
-}
-/* A tongue's name is sometimes two words and the rail has six other marks to hold, so
-   its caption is allowed a second line. The other six stay on one, because they are one
-   word each and a rail of two-line labels would read as a paragraph. */
+/* No hairline before the tongue any more. It was there to stop the tongue reading as a
+   sixth destination in a row of five; in two equal rows of five, every cell is a door and
+   the tongue is one of the ten. A rule would now only make the last cell look different
+   from the nine beside it. */
+/* One line each, because two rows have to be the same height. A long name is cut with an
+   ellipsis rather than made shorter — every mark keeps its own word. */
+.rec-art-rail .rec-art-caption,
 .rec-art-caption-twin {
-  white-space: normal;
-  line-height: 1.05;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1.15;
 }
 /* The tongue is the one mark that opens something rather than going somewhere, so when it
    is open it carries a small glow in the record's borrowed red — the only glow in the rail,
@@ -100,7 +106,7 @@
 /* The marks are the record's hand: drawn, inked, and big enough to be recognised at a
    glance without naming them first. The one you are standing in carries a short rule
    above it, so the dock says where you are once rather than shouting it. */
-.rec-art-rail .rec-art-drawing { height: 38px; display: flex; align-items: center; }
+.rec-art-rail .rec-art-drawing { height: 30px; display: flex; align-items: center; }
 .rec-art-rail .rec-art-door-active .rec-art-drawing {
   box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark));
 }

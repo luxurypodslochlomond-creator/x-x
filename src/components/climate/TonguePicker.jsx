@@ -22,7 +22,7 @@ const nameFor = (code) => {
 // The trigger is a door in the record's drawn rail — the same mark, the same caption,
 // the same full ink at rest as the six destinations beside it. A tongue is not a setting
 // bolted onto the page: it is one more way through the record, so it is cut in the same hand.
-export default function TonguePicker({ lang, detected, onChange, tone = 'paper' }) {
+export default function TonguePicker({ lang, detected, onChange, tone = 'paper', size = 44 }) {
   const [open, setOpen] = useState(false);
   const [above, setAbove] = useState(false);
   const [query, setQuery] = useState('');
@@ -166,11 +166,14 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'paper' 
         title={`The tongue it is read in: ${lang === 'auto' ? `Auto — ${nameFor(detected)}` : nameFor(lang)}`}
         className={`rec-art-door w-full ${open ? 'rec-art-door-active' : ''}`}
       >
-        <span className="rec-art-drawing" aria-hidden="true"><MarkTongue size={38} /></span>
-        {/* Two lines, because a tongue's name can be long and the rail has six other marks
-            to hold. Never translated: a tongue is named in its own words and in English. */}
-        <span data-no-translate className="rec-art-caption rec-art-caption-twin">
-          {lang === 'auto' ? <>Auto<br />{nameFor(detected)}</> : nameFor(lang)}
+        <span className="rec-art-drawing" aria-hidden="true"><MarkTongue size={size} /></span>
+        {/* One line, because the rail is now ten marks in two equal rows and a two-line
+            caption in one cell would make the second row taller than the first. The name
+            of the tongue is the one thing worth the space; that it was chosen for you is
+            said in the title and the label, where it belongs. Never translated: a tongue
+            is named in its own words. */}
+        <span data-no-translate className="rec-art-caption">
+          {lang === 'auto' ? nameFor(detected) : nameFor(lang)}
         </span>
       </button>
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import RecordPageIndex from '@/components/climate/RecordPageIndex';
+import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
 
 // ── THE INDEX, ON ONE SCREEN ───────────────────────────────────────────────────
 // This sheet was a page of drawn doors that ran past the top and bottom of a phone: a
@@ -59,7 +59,7 @@ export default function RecordPagesPanel({ open, onClose }) {
         </p>
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-          <RecordPageIndex compact showHeading={false} showKeeper={false} onNavigate={onClose} />
+          <RecordIndexPlate onNavigate={onClose} />
         </div>
 
         <Link

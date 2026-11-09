@@ -26,6 +26,17 @@ export const PRIMARY_NAV = [
   { label: 'Search', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Find a place, subject or source.' },
 ];
 
+// ── THE RAIL'S SECOND ROW ─────────────────────────────────────────────────────
+// The way in is five marks on the top row. These three are the half of the record a
+// reader needs once they are standing in it: why it exists, how an entry is checked,
+// and what has been corrected. The index and the tongue finish the row, so the rail
+// carries ten doors in two equal rows of five and nothing is hidden behind a sheet.
+export const RAIL_SECOND_NAV = [
+  { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  { label: 'Method', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
+  { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
+];
+
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.
 export const FOOTER_NAV = [
