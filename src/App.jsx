@@ -361,8 +361,17 @@ const AuthenticatedApp = () => {
       <Route path="/Studio/Logo" element={<ClimateLayout currentPage="Studio"><StudioShell><GenerateLogoPage /></StudioShell></ClimateLayout>} />
       {/* The brief a host reads before it agrees to carry anything, and the letter the
           founder signs. Not in the navigation: it is written for one conversation, and
-          reached from the page that answers her questions. */}
-      <Route path="/ClimateYaleBrief" element={<ClimateLayout currentPage="ClimateYaleBrief"><ClimateYaleBriefPage /></ClimateLayout>} />
+          reached from the page that answers her questions.
+
+          It is behind the keeper's key now, and it was on an open address before. A letter
+          addressed to a named institution, which says out loud what the record has not got
+          and leaves the signature to be added by hand, is a document for one correspondent
+          and not a page for the world: anybody could find it, quote it back at Yale before
+          Yale had read it, or read the gaps as a public confession rather than as the
+          honesty that makes the rest of it believable. She still hands it over herself —
+          the page prints and copies — so nothing has been taken away from her; it simply is
+          not standing open in the street while she writes her introduction. */}
+      <Route path="/ClimateYaleBrief" element={<ClimateLayout currentPage="ClimateYaleBrief"><KeeperKey><ClimateYaleBriefPage /></KeeperKey></ClimateLayout>} />
       <Route path="/UF51Token" element={<LayoutWrapper currentPageName="UF51Token"><UF51TokenPage /></LayoutWrapper>} />
       <Route path="/UF51ThreadJournal" element={<LayoutWrapper currentPageName="UF51ThreadJournal"><UF51ThreadJournalPage /></LayoutWrapper>} />
       <Route path="/Franklin51" element={<LayoutWrapper currentPageName="Franklin51"><Franklin51Page /></LayoutWrapper>} />
