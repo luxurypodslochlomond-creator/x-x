@@ -8,6 +8,7 @@ import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import RecordNavigator from '@/components/climate/RecordNavigator';
+import ClimateNav from '@/components/climate/ClimateNav';
 import RecordImprint from '@/components/climate/RecordImprint';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
@@ -178,7 +179,7 @@ export default function ClimateLayout({ children, currentPage }) {
       <header className="relative z-50 bg-record-paper text-record-ink sm:sticky sm:top-0">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className="mx-auto max-w-[1100px] px-4 lg:px-10">
-          <div className="flex items-baseline justify-between gap-6 pt-3.5">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-0 pt-3.5">
             <Link
               to={createPageUrl('TogetherChangeClimate')}
               className="group flex min-w-0 items-baseline gap-2"
@@ -193,13 +194,17 @@ export default function ClimateLayout({ children, currentPage }) {
               </span>
             </Link>
 
+            {/* ── THE WAY IN, AT THE TOP ──────────────────────────────────────────
+                This row was written, and then never mounted: the masthead was left with a
+                hairline where the six doors had been, so a reader arriving at the top of
+                the record found its name and no way through it. It is mounted here, as it
+                was drawn — six words in the record's own hand, the one you are standing in
+                the only thing in colour. The drawn marks carry the same six doors at the
+                foot of the glass (see RecordNavigator), so the way through the record is
+                under the eye at the top and under the thumb at the bottom. */}
+            <ClimateNav currentPage={currentPage} />
           </div>
 
-          {/* The six doors used to sit here as one line of type, and a line of type at the top
-              of a phone is a line you have to remember. The way through the record is the dock
-              at the foot of the glass now — drawn marks, in reach of the thumb, following the
-              reader down the page (see RecordNavigator). The top of the record is left to do
-              what a masthead does: say whose record this is, then get out of the way. */}
           <RecordRule />
 
           {/* The imprint line: how the record is kept, and the tongue this page is being

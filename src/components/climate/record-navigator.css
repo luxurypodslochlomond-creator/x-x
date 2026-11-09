@@ -41,15 +41,18 @@
   position: fixed;
   inset-inline: 0;
   bottom: 0;
-  z-index: 40;
-  padding: .1rem .5rem max(.15rem, env(safe-area-inset-bottom));
+  /* Above the masthead's own layer: the way out of a page is never something a header
+     can cover, on the one screen where the header is pinned. */
+  z-index: 60;
+  padding: .25rem .5rem max(.4rem, env(safe-area-inset-bottom));
   /* A sheet of the record's own paper, not a bar bolted under it: translucent, so the
      page is still felt through the way out, and so the foot of the record never looks
      like a different material to the top. */
   background: rgb(var(--record-paper) / .93);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  border-top: 1px solid rgb(var(--record-ink) / .09);
+  border-top: 1px solid rgb(var(--record-ink) / .14);
+  box-shadow: 0 -10px 18px -14px rgb(var(--record-ink) / .35);
 }
 .rec-art-rail {
   display: flex;
