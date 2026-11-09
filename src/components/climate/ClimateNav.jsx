@@ -1,54 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
-import { markFor } from './pageMarks';
 
 // ── THE WAY THROUGH THE RECORD ─────────────────────────────────────────────────
-// Six doors, one drawn mark and one word each, in the order a reader arrives: what is
-// on the record, what changed, where it is, who is reading it, whose record it is, and
-// the one that reaches everything else.
+// This was a ruled grid of six cells, each with a small drawn mark above a word. It looked
+// like software, and here is why: six equal cells, six equal marks, six equal words is a
+// tab bar wearing a paper colour. Nothing on it had any more weight than anything else, so
+// nothing on it led anywhere — which is exactly what "clunky" means.
 //
-// It is a ruled block of printed contents, not a row of buttons. On a phone the six sit
-// three across and two down, each in its own ruled cell, mark above word, so every door
-// has a thumb-sized square and nothing has to be swiped or folded away to be found. On a
-// wider page the same six sit in one line to the right, mark beside word, because a line
-// reads across. Nothing is abbreviated, nothing is numbered, and the current page is said
-// twice over — in the word's colour and in a hairline under it — never in colour alone.
+// A sleeve is not built that way. Big Science puts huge air around a few words and lets one
+// line of small type do all the explaining. So the bar is not a row of buttons now: it is
+// one line of type. Six words, set in the record's own serif at a size a thumb can read,
+// spaced wide, on paper, with no borders, no cells, no boxes and no icons. The current page
+// is the only thing in colour, and it is the only thing wearing a rule.
 //
-// The marks all come from pageMarks, so the masthead, the foot and the contents page can
-// never drift into three different hands.
+// The drawn marks have not gone — they are on the plates and the share cards, at the size
+// they were cut for. A 40px engraving shrunk to 18px beside a word is not a mark any more,
+// it is an icon, and icons are what made the menu look like a template.
+//
+// On a phone the six wrap onto two lines rather than shrinking, because a word squeezed to
+// fit six-across is a word nobody reads.
 export default function ClimateNav({ currentPage }) {
   return (
     <nav
       aria-label="Main navigation"
-      className="-mx-4 mt-2 grid grid-cols-3 border-y border-record-ink/15 sm:mx-0 sm:mt-3 sm:flex sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-6 sm:border-y-0 lg:gap-x-9"
+      className="mt-2.5 flex flex-wrap items-baseline gap-x-5 gap-y-0 sm:mt-4 sm:justify-end sm:gap-x-9"
     >
       {PRIMARY_NAV.map(({ label, to, page }) => {
         const active = currentPage === page;
-        const Mark = markFor(to);
         return (
           <Link
             key={to}
             to={to}
             aria-current={active ? 'page' : undefined}
-            className={`group relative flex min-h-[64px] flex-col items-center justify-center gap-1.5 px-1 py-3 transition-colors [&:nth-child(n+4)]:border-t [&:nth-child(n+4)]:border-record-ink/15 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-record-red sm:min-h-[44px] sm:flex-row sm:gap-2 sm:border-0 sm:px-0 sm:py-1 ${
-              active ? 'text-record-red' : 'text-record-ink hover:text-record-red'
+            className={`inline-block border-b py-2.5 text-[15px] leading-none transition-colors sm:py-2 sm:text-[16px] ${
+              active
+                ? 'border-record-mark text-record-red'
+                : 'border-transparent text-record-ink/85 hover:border-record-ink/30 hover:text-record-red'
             }`}
+            style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.005em' }}
           >
-            <Mark
-              size={21}
-              className={`shrink-0 transition-opacity sm:h-[18px] sm:w-[18px] ${
-                active ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'
-              }`}
-            />
-            <span
-              className={`border-b pb-0.5 text-[13px] leading-none sm:text-[14px] ${
-                active ? 'border-record-mark' : 'border-transparent group-hover:border-record-ink/25'
-              }`}
-              style={{ fontFamily: 'var(--font-display)', letterSpacing: '0.01em' }}
-            >
-              {label}
-            </span>
+            {label}
           </Link>
         );
       })}

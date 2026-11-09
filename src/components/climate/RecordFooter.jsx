@@ -1,104 +1,100 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
-import { FOOTER_NAV, ELSEWHERE_NAV } from '@/components/climate/recordFooterLinks';
-import { markFor } from '@/components/climate/pageMarks';
+import { ELSEWHERE_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks';
 
 // ── THE COLOPHON ───────────────────────────────────────────────────────────────
-// The foot of a printed record is not a second menu: it is the page that says who made
-// the thing, what it stands on, and where the parts that were not on the way in can be
-// found. So it does three jobs and no more — the mark and whose record this is; the four
-// doors that state the record's terms; and the five doors the masthead does not carry.
+// It was three columns of small rows, each row carrying a tick of a drawn mark — a sitemap.
+// A sitemap at the foot of a record is the single clearest sign that a page was assembled
+// rather than composed, and it is why the bottom of this one felt wrong: equal columns,
+// equal rows, equal weight, nothing to look at.
 //
-// The bar is not repeated down here. It used to be, and a foot that says exactly what
-// the head already said is why the bottom of the page felt wrong: nothing at the foot
-// was new, so the eye learned to skip the whole column.
-const FootDoor = ({ to, label, active }) => {
-  const Mark = markFor(to);
-  return (
-    <Link
-      to={to}
-      aria-current={active ? 'page' : undefined}
-      className={`group flex min-h-[44px] items-center gap-2.5 border-t border-record-ink/15 text-[14px] leading-snug transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
-        active ? 'text-record-red' : ''
-      }`}
-      style={{ fontFamily: 'var(--font-display)' }}
-    >
-      <Mark size={17} className="shrink-0 opacity-75 transition-opacity group-hover:opacity-100" />
-      <span>{label}</span>
-    </Link>
-  );
-};
+// The back of a sleeve does two things. It prints the mark large, and it lets one run of
+// type carry everything else. So: x = x at the size of a statement, one line saying what it
+// means, the imprint opposite, and then the doors as words on a line — spaced wide, no
+// ticks, no headings, no boxes.
+//
+// And only the doors the masthead does not carry. The four terms of the record are stated
+// at the top of every page; printing them again down here is what made the foot feel like
+// a second copy of the head.
+const ALL_PAGES = FOOTER_NAV.find((door) => door.to === '/ClimateGuide');
+const REST = [...ELSEWHERE_NAV, ALL_PAGES].filter(Boolean);
 
 export default function RecordFooter({ showKeeper = true }) {
   const { pathname } = useLocation();
 
+  const Door = ({ to, label }) => (
+    <Link
+      to={to}
+      aria-current={pathname === to ? 'page' : undefined}
+      className={`inline-block border-b py-1.5 text-[16px] leading-none transition-colors ${
+        pathname === to
+          ? 'border-record-mark text-record-red'
+          : 'border-transparent text-record-ink/85 hover:border-record-ink/30 hover:text-record-red'
+      }`}
+      style={{ fontFamily: 'var(--font-display)' }}
+    >
+      {label}
+    </Link>
+  );
+
   return (
     <footer className="mt-4 border-t border-record-ink/20 bg-record-paper text-record-ink">
-      <div className="mx-auto max-w-[1100px] px-4 pb-8 pt-9 lg:px-10">
-        <div className="grid gap-8 sm:grid-cols-[1.15fr_1fr_1fr] sm:gap-10">
-          {/* The mark, whose record this is, and the only sentence either needs. */}
-          <div>
+      <div className="mx-auto max-w-[1100px] px-4 pb-9 pt-10 lg:px-10">
+        <div className="sm:flex sm:items-end sm:justify-between sm:gap-12">
+          <div className="min-w-0">
             <Link
               to="/XEqualsX"
-              className="inline-block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
-              style={{ fontFamily: 'var(--font-reading)', fontSize: '38px', lineHeight: 1, letterSpacing: '-0.01em' }}
+              className="block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
+              style={{
+                fontFamily: 'var(--font-reading)',
+                fontSize: 'clamp(46px, 13vw, 74px)',
+                lineHeight: 0.82,
+                letterSpacing: '-0.03em',
+              }}
             >
               x = x
             </Link>
-            <p className="mt-3 max-w-[34ch] text-[13px] leading-relaxed text-record-muted">
+            <p className="mt-4 max-w-[40ch] text-[13.5px] leading-relaxed text-record-muted">
               The mark this record is built on. Read what it means, and what it does not.
             </p>
-            <p className="mt-4 max-w-[34ch] border-t border-record-ink/15 pt-3 text-[12.5px] leading-relaxed text-record-ink/80">
-              <span className="block" style={{ fontFamily: 'var(--font-display)' }}>Record of the Time</span>
-              A public record of climate emergencies, and of the actions that actually work.
-            </p>
           </div>
 
-          {/* How the record is kept — the same four doors that are stated at the top. */}
-          <nav aria-label="How the record is kept" className="flex flex-col">
-            <p className="mb-1 font-mono text-[12px] uppercase tracking-[0.16em] text-record-muted">How it is kept</p>
-            {FOOTER_NAV.map(({ label, to }) => (
-              <FootDoor key={to} to={to} label={label} active={pathname === to} />
-            ))}
-          </nav>
-
-          {/* The rest of the book — only the doors the masthead does not carry. */}
-          <nav aria-label="Elsewhere on the record" className="flex flex-col">
-            <p className="mb-1 font-mono text-[12px] uppercase tracking-[0.16em] text-record-muted">The rest of the book</p>
-            {ELSEWHERE_NAV.map(({ label, to }) => (
-              <FootDoor key={to} to={to} label={label} active={pathname === to} />
-            ))}
-          </nav>
+          {/* The imprint sits opposite the mark, the way a printer puts one at the foot of
+              a sheet and never mentions it again. */}
+          <p className="mt-6 shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-record-muted sm:mt-0 sm:pb-1 sm:text-right">
+            Made in Scotland from photons
+            <span className="mt-1 block text-[12.5px] normal-case tracking-normal">
+              A public service · for the world
+            </span>
+          </p>
         </div>
 
-        {/* Housekeeping, the way in for the people who keep it, and the imprint. */}
-        <div className="mt-7 flex flex-col gap-4 border-t border-record-ink/15 pt-4 sm:flex-row sm:items-center sm:justify-between">
-          <nav aria-label="Privacy, terms and reviewer access" className="flex flex-wrap items-center gap-x-5 gap-y-1">
-            {[
-              { label: 'Terms', to: '/ClimateTerms' },
-              { label: 'Privacy', to: '/ClimatePrivacy' },
-            ].map(({ label, to }) => (
-              <Link
-                key={to}
-                to={to}
-                aria-current={pathname === to ? 'page' : undefined}
-                className={`flex min-h-[40px] items-center text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
-                  pathname === to ? 'text-record-red' : 'text-record-muted'
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
-            {showKeeper && <KeeperDoor />}
-          </nav>
+        {/* The doors, as words on a line. Everything here is something the masthead does
+            not already carry, so the foot is never a second copy of the head. */}
+        <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-baseline gap-x-6 gap-y-1">
+          {REST.map(({ label, to }) => (
+            <Door key={to} to={to} label={label} />
+          ))}
+        </nav>
 
-          <div className="flex flex-col gap-1 sm:items-end">
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-record-muted">
-              Made in Scotland from photons
-            </span>
-            <span className="text-[12px] text-record-muted">A public service · for the world</span>
-          </div>
+        <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-1">
+          {[
+            { label: 'Terms', to: '/ClimateTerms' },
+            { label: 'Privacy', to: '/ClimatePrivacy' },
+          ].map(({ label, to }) => (
+            <Link
+              key={to}
+              to={to}
+              aria-current={pathname === to ? 'page' : undefined}
+              className={`inline-block py-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
+                pathname === to ? 'text-record-red' : 'text-record-muted'
+              }`}
+            >
+              {label}
+            </Link>
+          ))}
+          {showKeeper && <KeeperDoor />}
         </div>
       </div>
     </footer>

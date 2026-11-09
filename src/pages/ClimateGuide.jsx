@@ -184,7 +184,7 @@ export default function ClimateGuide() {
   return (
     <ClimateRecordShell
       compact
-      eyebrow="All pages"
+      eyebrow="The record · every door"
       title="All pages"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
@@ -204,7 +204,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The bar at the top of every page"
-        note="The same five links for everyone: Record, Latest, Map, About and Search. Reviewer access is separate, at the foot of the page."
+        note="The same six doors for everyone: Record, Wire, Map, Impact, Founder and Search. The record’s terms sit under them, and the keeper’s shed appears there only for a reader already holding a key."
         items={BAR}
       />
 
