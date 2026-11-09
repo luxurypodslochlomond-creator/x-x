@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { CONTENT_GROUPS } from '@/components/climate/recordFooterLinks';
 import KeeperDoor from '@/components/climate/KeeperDoor';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
+import { markFor } from '@/components/climate/pageMarks';
 import '@/components/climate/record-navigator.css';
 
 // ── TWO FORMS OF THE SAME INDEX ────────────────────────────────────────────────
@@ -22,21 +23,31 @@ export default function RecordPageIndex({ showHeading = true, showKeeper = true,
             <section key={title}>
               <h2 className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-record-muted">{title}</h2>
               <ul>
-                {doors.map(({ label, to }) => (
-                  <li key={to}>
-                    <Link
-                      to={to}
-                      onClick={onNavigate}
-                      aria-current={pathname === to ? 'page' : undefined}
-                      className={`block py-[3px] text-[13px] leading-snug sm:text-[14px] ${
-                        pathname === to ? 'text-record-mark' : 'text-record-ink'
-                      }`}
-                      style={{ fontFamily: 'var(--font-reading)' }}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
+                {doors.map(({ label, to }) => {
+                  // The drawing comes with the name, the same drawing the door carries on
+                  // the page itself — so the index and the record are one hand, and a reader
+                  // who has learnt a mark at the foot of a page finds it again here.
+                  const Mark = markFor(to);
+                  const on = pathname === to;
+                  return (
+                    <li key={to}>
+                      <Link
+                        to={to}
+                        onClick={onNavigate}
+                        aria-current={on ? 'page' : undefined}
+                        className={`flex items-center gap-1.5 py-[3px] text-[13px] leading-snug sm:text-[14px] ${
+                          on ? 'text-record-mark' : 'text-record-ink'
+                        }`}
+                        style={{ fontFamily: 'var(--font-reading)' }}
+                      >
+                        <span aria-hidden="true" className={on ? 'shrink-0 text-record-mark' : 'shrink-0 text-record-ink/70'}>
+                          <Mark size={15} />
+                        </span>
+                        <span>{label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
           ))}
