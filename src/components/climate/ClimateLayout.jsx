@@ -160,9 +160,14 @@ export default function ClimateLayout({ children, currentPage }) {
         <RecordGrain />
       </div>
 
-      <div className="relative record-book" style={{ zIndex: 1 }}>
-      {/* Both ends of the record use the same drawn doors. */}
-      <header className="relative z-50 bg-record-paper text-record-ink sm:sticky sm:top-0">
+      {/* The strip at the foot is the room the dock sits over. It is given back here
+          rather than by a spacer inside the page, so every page of the record — including
+          the ones written after this one — ends clear of the rail without knowing about it. */}
+      <div className="relative record-book pb-[76px]" style={{ zIndex: 1 }}>
+      {/* Both ends of the record use the same drawn doors, and both are pinned now: the
+          record's name at the top of the glass, the way through it at the foot, so the
+          reader is never more than one thumb from either. */}
+      <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className="mx-auto max-w-[1100px] px-4 lg:px-10">
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">

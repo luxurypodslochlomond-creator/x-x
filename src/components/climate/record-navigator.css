@@ -41,15 +41,16 @@
   outline-offset: 3px;
 }
 .rec-art-navigator {
-  /* ── PINNED, BUT PART OF THE PAGE ────────────────────────────────────────────
-     This was `position: fixed`, and in a container that is not the size of a phone
-     screen — the builder's preview panel sizes the page to its whole length — a fixed
-     bar has no bottom edge to attach to, so it went missing exactly when you wanted to
-     look at it. Sticky does the same job on a real screen (it pins to the foot of the
-     glass and follows the reader down the page) but it lives in the page's own flow, so
-     if the container is taller than any screen the dock is simply at the end of the
-     record rather than nowhere. Same dock, no disappearing. */
-  position: sticky;
+  /* ── PINNED TO THE GLASS, LIKE A PHONE'S OWN TAB BAR ─────────────────────────
+     It sat in the page's flow and pinned at the end of it, which meant the way through
+     the record only arrived once you had already read to the bottom — a tab bar you have
+     to reach the end of the page to find is not a tab bar. Now it is fixed to the foot of
+     the glass for the whole read, above the home indicator, and the book gives back the
+     strip of itself it sits over (see the foot padding in ClimateLayout) so not one line
+     is ever hidden behind it. */
+  position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
   width: 100%;
   /* Above the masthead's own layer: the way out of a page is never something a header

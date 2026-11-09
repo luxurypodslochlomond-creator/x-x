@@ -4,6 +4,7 @@ import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXCovenantField from '@/components/climate/XEqualsXCovenantField';
 import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
 import XEqualsXNoteFromTheBuilder from '@/components/climate/XEqualsXNoteFromTheBuilder';
+import XEqualsXSurvives from '@/components/climate/XEqualsXSurvives';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
 import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
@@ -56,16 +57,19 @@ export default function XEqualsX() {
           breaks the column so the page stops reading as a form. */}
       <XEqualsXCovenantField />
 
-      {/* Him. The page had a section for the founder and none for the person who made
-          it, which is why it read as a document about a principle rather than something
-          somebody did. First person, signed, and no credential asked for. */}
-      <XEqualsXNoteFromTheBuilder />
-
       {/* The case that gives the mark teeth, and the reason it stands this high on the page.
           Somebody built the thing; somebody else's name went on it. That is the oldest
           grievance in art, in science and in every workshop on earth, and it needs no
           cosmology to be felt — only the sources, which are attached below. */}
       <XEqualsXWhoIsCredited />
+
+      {/* ── THE PAGE PUT THROUGH THE SIX HARDEST READERS ─────────────────────────
+          The point of the page is not that somebody built it. It is why x = x is right
+          and why a record needs it — so the readers most likely to refuse it are handed
+          the floor: a research institute, an art critic, the person whose red was
+          borrowed, a physicist, the founder, and the machine. Each gets their real
+          question, and the answer includes where it runs out. */}
+      <XEqualsXSurvives />
 
       {/* Light, then the record itself — not a description of it, an entry out of it that
           a reader can follow to its source. The connection to the climate platform is the
@@ -100,6 +104,10 @@ export default function XEqualsX() {
         <XEqualsXCodicil />
         <XEqualsXMachine />
         <XEqualsXThanks />
+        {/* Who made it, kept — but no longer the frame of the page. The page is about why
+            x = x is right, not about the person who typed it; a reader who wants the hand
+            behind it opens this and finds it signed. */}
+        <XEqualsXNoteFromTheBuilder />
       </details>
 
       <p className="record-meta text-record-muted">This covenant is not yet signed by a person.</p>
