@@ -14,7 +14,6 @@ import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesF
 import XEqualsXWhoIsCredited from '@/components/climate/XEqualsXWhoIsCredited';
 import XEqualsXWhy from '@/components/climate/XEqualsXWhy';
 import XEqualsXSurvives from '@/components/climate/XEqualsXSurvives';
-import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
 import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 import XEqualsXMachine from '@/components/climate/XEqualsXMachine';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
@@ -84,12 +83,11 @@ export default function XEqualsX() {
       <RecordBand id="long-version" label="For the record" title="The long version">
         <details className="border-t border-record-ink/15 pt-1">
           <summary className="cursor-pointer py-3 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-record-muted marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
-            The argument, the six readers, what can be checked, the limits
+            The argument, the six readers, the limits
           </summary>
           <div className="pt-2">
             <XEqualsXWhy />
             <XEqualsXSurvives />
-            <XEqualsXCheck />
             <XEqualsXCodicil />
             <XEqualsXMachine />
             <XEqualsXThanks />
