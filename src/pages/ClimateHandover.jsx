@@ -27,7 +27,11 @@ const STEPS = [
   ['The domain, in the host\'s name, with its certificate.', 'Every citation points at it. An address belonging to somebody else is a record lent, not handed over.'],
   ['A sending domain, also theirs.', 'Sign-in and password emails come from it. A record that cannot send its own email cannot keep its own readers.'],
   ['A plan sized to storage, not to visits.', 'Reading is cheap. Pictures and music are the weight.'],
-  ['Two named keepers with admin, chosen by the founder.', 'One signs what goes on the record, one keeps it running. Janine Selendy names both — and names the keeper who follows — so the role is never left to whoever answers first. One person doing both is a single point of failure, and the separation is written on the record itself.'],
+  // "Janine Selendy names both" is gone. She asked, on 9 November, that this block be kept
+  // "but without my name added" — it is written to be read by a host she is talking to, and
+  // a list that drops her name into it hands the host a person to go around. The founder
+  // still names both keepers; the page simply says founder.
+  ['Two named keepers with admin, chosen by the founder.', 'One signs what goes on the record, one keeps it running. The founder names both — and names the keeper who follows — so the role is never left to whoever answers first. One person doing both is a single point of failure, and the separation is written on the record itself.'],
   ['The way out, tested once.', 'The record exports in full, without contact details, so no host can hold it hostage and no host is trapped by it. Export it before launch, not after a falling out.'],
 ];
 
@@ -58,7 +62,7 @@ export default function ClimateHandover() {
       statement="Six things move, six things the record will not let you do, three that are still open, and one plain line on which account holds it today. No pitch, no adjective: the list you would want if it were your name on it."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International."
+      footer="Together we can change the course of climate change."
     >
       <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210]">
         Taking this on is a small, boring job done consistently. If you want to know what the record actually is

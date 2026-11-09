@@ -2,7 +2,11 @@
 // into any language on Earth in a single live translation.
 export const SUPPORT_STRINGS = {
   en: {
-    heading: 'The record is kept by people.',
+    // "The record is kept by people" was the last "kept by" left standing after Janine asked
+    // for that reading to come off the record: to anyone sizing it up, "kept by" answers the
+    // question "so who holds it?" with a shrug. The page's whole point is that nothing here
+    // is for sale, so it says that instead, and names nobody as the keeper.
+    heading: 'Nothing on this record is for sale.',
     eyebrow: '● Keeping the record',
     intro: 'Nothing on this record is for sale — not a place, not a position, not a mention in an entry. Gifts keep the record itself: the keeping of it, the human check on everything flagged, and the translation into every language. They buy nothing else.',
 
