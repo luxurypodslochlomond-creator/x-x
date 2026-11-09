@@ -60,10 +60,6 @@ export default function RecordPagesPanel({ open, onClose }) {
           </button>
         </div>
 
-        <p className="mb-3 shrink-0 font-mono text-[9px] uppercase tracking-[0.18em] text-record-muted">
-          Every way through the record · nothing hidden
-        </p>
-
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
           <RecordIndexPlate onNavigate={onClose} />
         </div>

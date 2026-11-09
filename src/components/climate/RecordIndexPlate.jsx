@@ -30,19 +30,23 @@ export default function RecordIndexPlate({ onNavigate }) {
             <span className="font-mono text-[9px] uppercase leading-none tracking-[0.16em] text-record-muted">{title}</span>
             <span aria-hidden="true" className="h-px flex-1 bg-record-ink/20" />
           </h2>
-          {/* Four columns on every handset: the cell is wide enough for a mark and two
-              short words, and every door of the record lands on one screen. */}
-          <nav aria-label={title} className="grid grid-cols-4 items-start gap-x-1 gap-y-0.5 sm:grid-cols-5 sm:gap-x-3">
+          {/* ── FEWER ACROSS, SO EACH ONE CAN BE READ ────────────────────────────────
+              Four and five across packed fifteen doors onto a screen and read as a wall:
+              the marks came down to twenty-eight pixels and the names under them to two
+              squeezed words. Three across on a phone and four on a wide sheet costs a
+              little height and buys back the thing an index is for — a name you can read
+              without leaning in. */}
+          <nav aria-label={title} className="grid grid-cols-3 items-start gap-x-2 gap-y-1 sm:grid-cols-4 sm:gap-x-4">
             {doors.map(({ label, to, what }) => (
               <RecordNavDoor
                 key={to}
                 to={to}
                 label={label}
                 what={what}
-                size={28}
+                size={32}
                 active={pathname === to}
                 onClick={onNavigate}
-                className="w-full !min-h-0 !py-1"
+                className="w-full !min-h-0 !py-1.5"
               />
             ))}
           </nav>

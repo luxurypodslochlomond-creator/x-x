@@ -66,6 +66,13 @@ export const ELSEWHERE_NAV = [
   // offered to a reader while a host is being found.
 ];
 
+// The terms it is kept under. These were reachable only from the foot, which put the
+// record's own promises at the end of the longest scroll on the site.
+export const TRUST_NAV = [
+  { label: 'Terms', to: '/ClimateTerms', what: 'The terms this record is offered under.' },
+  { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record collects, and what it refuses to.' },
+];
+
 export const SUPPORTING_PAGES = [
   { label: 'Project brief', to: '/ClimateBrief', what: 'What is live, what is planned, and what is still missing.' },
   { label: 'Costs & responsibility', to: '/ClimateHandover', what: 'What it costs, who holds the keys, and what is still open.' },
@@ -77,6 +84,7 @@ export const PAGE_INDEX = [
   ...PRIMARY_NAV,
   ...FOOTER_NAV,
   ...ELSEWHERE_NAV,
+  ...TRUST_NAV,
   ...SUPPORTING_PAGES,
   { label: 'Open-source covenant', to: '/ExtractionProofCovenant', what: 'The terms under which the record is shared.' },
 ];
@@ -84,7 +92,7 @@ export const PAGE_INDEX = [
 // One drawn index for the contents sheet and its permanent page. Never link it to itself.
 export const CONTENT_GROUPS = [
   { title: 'The record', doors: PRIMARY_NAV },
-  { title: 'How it is kept', doors: [...FOOTER_NAV.filter(({ to }) => to !== '/ClimateGuide'), PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovenant')] },
+  { title: 'How it is kept', doors: [...FOOTER_NAV.filter(({ to }) => to !== '/ClimateGuide'), ...TRUST_NAV, PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovenant')] },
   { title: 'Elsewhere', doors: ELSEWHERE_NAV },
   { title: 'Behind the record', doors: SUPPORTING_PAGES },
 ];

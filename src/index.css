@@ -452,6 +452,10 @@ html {
 /* The record's way through, on a phone: one line under the thumb, no bar drawn. */
 .climate-nav-rail { scrollbar-width: none; -webkit-tap-highlight-color: transparent; }
 .climate-nav-rail::-webkit-scrollbar { display: none; }
+/* The set line at the top of a page: on a narrow glass it slides rather than wraps,
+   so the masthead is the same height in every tongue and no door ever jumps a row. */
+.rec-nav-line { scrollbar-width: none; -webkit-tap-highlight-color: transparent; }
+.rec-nav-line::-webkit-scrollbar { display: none; }
 .climate-photo-dialog {
   position: fixed;
   inset: 0;
