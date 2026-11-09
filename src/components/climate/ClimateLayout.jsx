@@ -8,7 +8,6 @@ import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import RecordNavigator from '@/components/climate/RecordNavigator';
-import ClimateNav from '@/components/climate/ClimateNav';
 import RecordImprint from '@/components/climate/RecordImprint';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
@@ -180,8 +179,6 @@ export default function ClimateLayout({ children, currentPage }) {
                 Record of the Time
               </span>
             </Link>
-
-            <ClimateNav currentPage={currentPage} />
           </div>
 
           <RecordRule />

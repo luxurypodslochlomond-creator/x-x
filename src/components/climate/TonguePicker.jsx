@@ -19,8 +19,12 @@ const nameFor = (code) => {
   return hit ? hit.label : code;
 };
 
-export default function TonguePicker({ lang, detected, onChange, tone = 'ink' }) {
+// The trigger is a door in the record's drawn rail — the same mark, the same caption,
+// the same full ink at rest as the six destinations beside it. A tongue is not a setting
+// bolted onto the page: it is one more way through the record, so it is cut in the same hand.
+export default function TonguePicker({ lang, detected, onChange, tone = 'paper' }) {
   const [open, setOpen] = useState(false);
+  const [above, setAbove] = useState(false);
   const [query, setQuery] = useState('');
   const [otherOpen, setOtherOpen] = useState(false);
   const [manual, setManual] = useState('');
@@ -68,7 +72,13 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
     if (!open || mobile) return;
     const place = () => {
       const r = triggerRef.current?.getBoundingClientRect();
-      if (r) setAnchor({ top: r.bottom, right: Math.max(8, window.innerWidth - r.right) });
+      if (!r) return;
+      // The tongue now lives in the rail at the foot of the glass, so a panel that only ever
+      // opened downward would open off the bottom of the phone-shaped window. It opens upward
+      // when the door is in the lower half of the screen, and downward when it is high up.
+      const flip = r.top > window.innerHeight * 0.55;
+      setAbove(flip);
+      setAnchor({ top: flip ? r.top : r.bottom, right: Math.max(8, window.innerWidth - r.right) });
     };
     place();
     window.addEventListener('resize', place);
@@ -138,13 +148,14 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
   const dim = ink ? 'text-[#efe7d6]/55' : 'text-[#5a5246]';
   const content = open && (
     <TonguePickerPanel theme={{ ink, accent, field, panel, divide, rowIdle, rowOn, dim }}
+      above={above}
       mobile={mobile} onClose={close} searchRef={searchRef} query={query} setQuery={setQuery}
       listProps={{ found, lang, detected, chosen, nameFor, onChoose: choose }}
       manualProps={{ otherOpen, setOtherOpen, manual, setManual, refusal, setRefusal, manualRef, onCommit: commit }} />
   );
 
   return (
-    <div ref={wrapRef} className="relative flex-1 min-w-0">
+    <div ref={wrapRef} className="rec-art-door-wrap relative min-w-0 flex-1">
       <button
         ref={triggerRef}
         type="button"
@@ -152,18 +163,14 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'ink' })
         aria-haspopup={mobile ? 'dialog' : 'listbox'}
         aria-expanded={open}
         aria-label="Choose the record's language"
-        className={`flex min-h-[44px] w-full cursor-pointer items-center gap-2 border-0 bg-transparent p-0 text-left text-[14px] outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-mark ${ink ? 'text-[#efe7d6]' : 'text-record-ink'}`}
+        title={`The tongue it is read in: ${lang === 'auto' ? `Auto — ${nameFor(detected)}` : nameFor(lang)}`}
+        className={`rec-art-door w-full ${open ? 'rec-art-door-active' : ''}`}
       >
-        {/* The drawn mouth is the door, exactly as the six at the foot of the glass are
-            doors: a mark cut for this one thing, and a plain name under it. A language is
-            still named in its own words and never translated. */}
-        <MarkTongue size={26} className={`shrink-0 ${open ? 'text-record-mark' : ''}`} />
-        <span
-          data-no-translate
-          className="rec-art-caption block min-w-0 overflow-hidden text-ellipsis whitespace-nowrap pb-0.5"
-          style={{ borderBottom: `1px solid ${accent}` }}
-        >
-          {lang === 'auto' ? `Auto — ${nameFor(detected)}` : nameFor(lang)}
+        <span className="rec-art-drawing" aria-hidden="true"><MarkTongue size={38} /></span>
+        {/* Two lines, because a tongue's name can be long and the rail has six other marks
+            to hold. Never translated: a tongue is named in its own words and in English. */}
+        <span data-no-translate className="rec-art-caption rec-art-caption-twin">
+          {lang === 'auto' ? <>Auto<br />{nameFor(detected)}</> : nameFor(lang)}
         </span>
       </button>
 

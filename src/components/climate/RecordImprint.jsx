@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { FOOTER_NAV } from '@/components/climate/recordFooterLinks';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
-import ClimateLanguageBar from '@/components/climate/ClimateLanguageBar';
+import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
 
 const CAPTIONS = { '/XEqualsX': 'Why', '/ClimateMethod': 'Method', '/ClimateCorrections': 'Corrections', '/ClimateGuide': 'Contents' };
@@ -22,8 +22,12 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
         ))}
         {(isKeeper || isChecker) && <RecordNavDoor to="/ClimateKeeperRoom" label="The shed" size={32} active={pathname === '/ClimateKeeperRoom'} />}
       </nav>
+      {/* The tongue itself is the seventh mark in the rail at the foot of the glass. What
+          stays up here is the record's honesty line about that tongue — who made the wording
+          and whether a speaker has checked it — because that sentence belongs beside the
+          record's own name, not behind a door. */}
       <div className="min-w-0 sm:max-w-[19rem] sm:shrink-0">
-        <ClimateLanguageBar tone="paper" />
+        <LanguageStatus />
       </div>
     </div>
   );

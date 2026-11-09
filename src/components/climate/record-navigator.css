@@ -72,7 +72,16 @@
   max-width: 600px;
   margin-inline: auto;
 }
-.rec-art-rail > .rec-art-door { flex: 1; min-width: 0; }
+.rec-art-rail > .rec-art-door,
+.rec-art-rail > .rec-art-door-wrap { flex: 1; min-width: 0; }
+/* A tongue's name is sometimes two words and the rail has six other marks to hold, so
+   its caption is allowed a second line. The other six stay on one, because they are one
+   word each and a rail of two-line labels would read as a paragraph. */
+.rec-art-caption-twin {
+  white-space: normal;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
 /* The marks are the record's hand: drawn, inked, and big enough to be recognised at a
    glance without naming them first. The one you are standing in carries a short rule
    above it, so the dock says where you are once rather than shouting it. */
