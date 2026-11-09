@@ -7,7 +7,7 @@ import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
-import ClimateNav from '@/components/climate/ClimateNav';
+import RecordNavigator from '@/components/climate/RecordNavigator';
 import RecordImprint from '@/components/climate/RecordImprint';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
@@ -195,12 +195,11 @@ export default function ClimateLayout({ children, currentPage }) {
 
           </div>
 
-          {/* The index, under the name, at every size. It used to sit beside the title on a
-              desktop and under it on a phone, which meant the record's own contents changed
-              place depending on the glass they were read on. One position, always: the name,
-              then the six doors, then the rule, then the terms. */}
-          <ClimateNav currentPage={currentPage} />
-
+          {/* The six doors used to sit here as one line of type, and a line of type at the top
+              of a phone is a line you have to remember. The way through the record is the dock
+              at the foot of the glass now — drawn marks, in reach of the thumb, following the
+              reader down the page (see RecordNavigator). The top of the record is left to do
+              what a masthead does: say whose record this is, then get out of the way. */}
           <RecordRule />
 
           {/* The imprint line: how the record is kept, and the tongue this page is being
@@ -212,6 +211,13 @@ export default function ClimateLayout({ children, currentPage }) {
       <main ref={readingRef} className="record-pages">{children}</main>
 
       <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} />
+
+      {/* The dock stands over the last inch of any page, so the colophon is given the same
+          inch back at its foot — otherwise the one thing nobody can reach is the last line
+          of the record, which would be a ridiculous way to end a book. */}
+      <div aria-hidden="true" className="h-[74px] sm:h-[86px]" />
+
+      <RecordNavigator currentPage={currentPage} />
       </div>
     </div>
     </SiteLanguageProvider>

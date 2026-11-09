@@ -1,0 +1,55 @@
+/* ── THE NAVIGATOR'S OWN TWO GESTURES ────────────────────────────────────────────
+   Nothing here is decoration. There are exactly two behaviours on the dock, and both
+   are there to answer the thing a mark cannot say on its own: which door you are
+   standing behind, and that it heard you.
+
+   The door you are behind is lifted and enlarged — a hair, not a hop, because a mark
+   that jumps is a button and a mark that settles is a printed thing being handed to
+   you. The mark draws itself when you arrive on its page: a third of a second of
+   ink appearing, which is the only motion the record allows itself in a menu.
+
+   Everything is transform and opacity only, so the phone's compositor does the work
+   and the page underneath never repaints for a navigation bar. Anyone who has told
+   their device that movement makes them ill gets the same dock, standing still — the
+   global reduced-motion rule in index.css already stills these, so nothing here
+   needs to say it twice. */
+
+.rec-nav-mark {
+  display: block;
+  transform: translateY(0) scale(1);
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.3, 1), color 180ms ease;
+}
+
+.rec-nav-on .rec-nav-mark {
+  transform: translateY(-2px) scale(1.12);
+}
+
+@keyframes rec-nav-ink {
+  from {
+    opacity: 0.15;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rec-nav-on .rec-nav-mark svg {
+  animation: rec-nav-ink 300ms ease-out both;
+}
+
+/* The pip under the door you are behind: a mark, not a highlight bar. */
+.rec-nav-pip {
+  display: block;
+  height: 4px;
+  width: 4px;
+  transform: rotate(45deg) scale(0.4);
+  opacity: 0;
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.rec-nav-on .rec-nav-pip {
+  opacity: 1;
+  transform: rotate(45deg) scale(1);
+}
