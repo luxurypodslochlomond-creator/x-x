@@ -38,9 +38,17 @@
   outline-offset: 3px;
 }
 .rec-art-navigator {
-  position: fixed;
-  inset-inline: 0;
+  /* ── PINNED, BUT PART OF THE PAGE ────────────────────────────────────────────
+     This was `position: fixed`, and in a container that is not the size of a phone
+     screen — the builder's preview panel sizes the page to its whole length — a fixed
+     bar has no bottom edge to attach to, so it went missing exactly when you wanted to
+     look at it. Sticky does the same job on a real screen (it pins to the foot of the
+     glass and follows the reader down the page) but it lives in the page's own flow, so
+     if the container is taller than any screen the dock is simply at the end of the
+     record rather than nowhere. Same dock, no disappearing. */
+  position: sticky;
   bottom: 0;
+  width: 100%;
   /* Above the masthead's own layer: the way out of a page is never something a header
      can cover, on the one screen where the header is pinned. */
   z-index: 60;
@@ -68,8 +76,5 @@
 .rec-art-rail .rec-art-drawing { height: 38px; display: flex; align-items: center; }
 .rec-art-rail .rec-art-door-active .rec-art-drawing {
   box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark));
-}
-@media (min-width: 640px) {
-  .rec-art-navigator { inset-inline: auto; left: 50%; width: min(600px, 100%); transform: translateX(-50%); }
 }
 @media print { .rec-art-navigator { display: none; } }

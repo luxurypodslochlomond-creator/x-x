@@ -1,5 +1,6 @@
 import React from 'react';
 import TonguePicker from './TonguePicker';
+import MarkTongue from './MarkTongue';
 
 // ── EVERY TONGUE ON EARTH ──
 // The record's own language control, in the record's own voice. It says which
@@ -19,6 +20,9 @@ export default function RecordLanguageStrip({ lang, detected, onChange, translat
 
   return (
     <div className="flex min-w-0 max-w-[19rem] flex-1 items-center gap-2">
+      {/* The drawn mark, so the tongue is a door like every other door on this record
+          rather than the one control that arrived as a form. */}
+      <MarkTongue size={17} className={`shrink-0 ${ink ? 'text-[#efe7d6]/70' : 'text-record-muted'}`} />
       <span
         data-no-translate
         className={`shrink-0 font-mono text-[12px] uppercase tracking-[0.14em] ${ink ? 'text-[#efe7d6]/60' : 'text-record-muted'}`}

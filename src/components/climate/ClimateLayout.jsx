@@ -217,11 +217,8 @@ export default function ClimateLayout({ children, currentPage }) {
 
       <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} />
 
-      {/* The dock stands over the last inch of any page, so the colophon is given the same
-          inch back at its foot — otherwise the one thing nobody can reach is the last line
-          of the record, which would be a ridiculous way to end a book. */}
-      <div aria-hidden="true" className="h-[calc(76px+env(safe-area-inset-bottom))]" />
-
+      {/* No spacer at the foot any more: the dock is part of the page's own flow now (it
+          pins without being bolted over the book), so nothing needs an inch given back. */}
       <RecordNavigator currentPage={currentPage} />
       </div>
     </div>
