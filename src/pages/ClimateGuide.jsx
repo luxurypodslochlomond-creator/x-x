@@ -32,7 +32,7 @@ const BUTTONS_CARD = {
   body: 'Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there.',
   inside: [
     'All public pages',
-    '01 · The bar at the top of every page',
+    '01 · The drawn navigation on every page',
     '02 · Sending something in',
     '03 · Reading one entry',
     '04 · Every tongue a reader can name',
@@ -40,7 +40,7 @@ const BUTTONS_CARD = {
     '06 · The foot of every page',
     '07 · When you are the keeper',
   ],
-  closing: "Nothing on it needs memorising: the record's buttons are words, and each one says what it does.",
+  closing: 'The same drawn marks lead to the same places on every page, with a short name beneath each one.',
   url_path: '/ClimateGuide',
 };
 
@@ -188,7 +188,7 @@ export default function ClimateGuide() {
       title="All pages"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="Handed to a host or keeper, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
+      footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
     >
       <RecordPageIndex />
       <h2 className="mb-5 border-t border-record-ink/20 pt-7 text-2xl text-record-ink">Using the record</h2>
@@ -203,8 +203,8 @@ export default function ClimateGuide() {
 
       <GuideBand
         number="01"
-        heading="The bar at the top of every page"
-        note="The same six doors for everyone: Record, Wire, Map, Impact, Founder and Search. The record’s terms sit under them, and the keeper’s shed appears there only for a reader already holding a key."
+        heading="The drawn navigation on every page"
+        note="The six drawings at the foot of the screen open Record, Wire, Map, Impact, Founder and Search. The smaller drawings under the masthead open Why, Method, Corrections and All pages. An invited reviewer also sees the shed there."
         items={BAR}
       />
 

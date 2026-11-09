@@ -7,23 +7,11 @@ import {
   SUPPORTING_PAGES,
 } from '@/components/climate/recordFooterLinks';
 import KeeperDoor from '@/components/climate/KeeperDoor';
+import { markFor } from '@/components/climate/pageMarks';
 
-// ── THE CONTENTS PAGE ──────────────────────────────────────────────────────────
-// What was here was a two-column grid of rows, each row a small drawn mark beside a word.
-// Nineteen of them, all the same size, all the same weight, all boxed into the same cell —
-// which is a sitemap, not a contents page, and it is the page that made the whole record
-// feel like an old website. Nothing on it was bigger than anything else, so the eye had
-// nowhere to land and read it as a list of admin links.
-//
-// A contents page in a book does the opposite: four short headings, each followed by big
-// type you can scan from across the room, and one quiet line under each saying what the
-// chapter is. No icons. No boxes. A hairline between entries instead of a border around
-// them. That is all this is now.
-//
-// It also no longer prints its own "All pages" heading: the page around it already says
-// that, and saying it twice was half of why the top of the screen read as clutter.
+// The directory uses the same drawings as the persistent navigation.
 const GROUPS = [
-  { title: 'The bar at the top', doors: PRIMARY_NAV },
+  { title: 'The main navigation', doors: PRIMARY_NAV },
   { title: 'How the record is kept', doors: FOOTER_NAV },
   { title: 'The rest of the book', doors: ELSEWHERE_NAV },
   { title: 'For a host or a keeper', doors: SUPPORTING_PAGES },
@@ -67,19 +55,17 @@ export default function RecordPageIndex() {
                 <li key={to} className="border-t border-record-ink/15">
                   <Link
                     to={to}
-                    className="group block py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
+                    className="group flex items-center gap-5 py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
                   >
-                    <span
-                      className="block text-[19px] leading-tight text-record-ink transition-colors group-hover:text-record-red sm:text-[21px]"
-                      style={{ fontFamily: 'var(--font-display)' }}
-                    >
-                      {label}
+                    <span aria-hidden="true" className="shrink-0 text-record-ink group-hover:text-record-red">
+                      {React.createElement(markFor(to), { size: 50 })}
                     </span>
-                    {what && (
-                      <span className="mt-1 block max-w-[46ch] text-[13px] leading-snug text-record-muted">
-                        {what}
+                    <span className="min-w-0">
+                      <span className="block text-[19px] leading-tight text-record-ink transition-colors group-hover:text-record-red sm:text-[21px]" style={{ fontFamily: 'var(--font-display)' }}>
+                        {label}
                       </span>
-                    )}
+                      {what && <span className="mt-1 block max-w-[46ch] text-[13px] leading-snug text-record-muted">{what}</span>}
+                    </span>
                   </Link>
                 </li>
               ))}

@@ -215,7 +215,7 @@ export default function ClimateLayout({ children, currentPage }) {
       {/* The dock stands over the last inch of any page, so the colophon is given the same
           inch back at its foot — otherwise the one thing nobody can reach is the last line
           of the record, which would be a ridiculous way to end a book. */}
-      <div aria-hidden="true" className="h-[74px] sm:h-[86px]" />
+      <div aria-hidden="true" className="h-[calc(100px+env(safe-area-inset-bottom))]" />
 
       <RecordNavigator currentPage={currentPage} />
       </div>

@@ -1,55 +1,55 @@
-/* ── THE NAVIGATOR'S OWN TWO GESTURES ────────────────────────────────────────────
-   Nothing here is decoration. There are exactly two behaviours on the dock, and both
-   are there to answer the thing a mark cannot say on its own: which door you are
-   standing behind, and that it heard you.
-
-   The door you are behind is lifted and enlarged — a hair, not a hop, because a mark
-   that jumps is a button and a mark that settles is a printed thing being handed to
-   you. The mark draws itself when you arrive on its page: a third of a second of
-   ink appearing, which is the only motion the record allows itself in a menu.
-
-   Everything is transform and opacity only, so the phone's compositor does the work
-   and the page underneath never repaints for a navigation bar. Anyone who has told
-   their device that movement makes them ill gets the same dock, standing still — the
-   global reduced-motion rule in index.css already stills these, so nothing here
-   needs to say it twice. */
-
-.rec-nav-mark {
-  display: block;
-  transform: translateY(0) scale(1);
-  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.3, 1), color 180ms ease;
+/* The drawings carry navigation; captions only name them. */
+.rec-art-door {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: .35rem .15rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
-
-.rec-nav-on .rec-nav-mark {
-  transform: translateY(-2px) scale(1.12);
+.rec-art-drawing { display: block; flex-shrink: 0; }
+.rec-art-drawing svg { display: block; overflow: visible; }
+.rec-art-caption {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-align: center;
 }
-
-@keyframes rec-nav-ink {
-  from {
-    opacity: 0.15;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.rec-art-door:hover, .rec-art-door-active { color: rgb(var(--record-mark)); }
+.rec-art-door-active .rec-art-caption { font-weight: 700; }
+.rec-art-door:focus-visible {
+  outline: 2px solid rgb(var(--record-mark));
+  outline-offset: 3px;
 }
-
-.rec-nav-on .rec-nav-mark svg {
-  animation: rec-nav-ink 300ms ease-out both;
+.rec-art-navigator {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 40;
+  padding: .3rem .65rem max(.35rem, env(safe-area-inset-bottom));
+  background: rgb(var(--record-paper));
+  border-top: 1px solid rgb(var(--record-ink) / .14);
 }
-
-/* The pip under the door you are behind: a mark, not a highlight bar. */
-.rec-nav-pip {
-  display: block;
-  height: 4px;
-  width: 4px;
-  transform: rotate(45deg) scale(0.4);
-  opacity: 0;
-  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.7, 0.3, 1);
+.rec-art-rail {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 600px;
+  margin-inline: auto;
 }
-
-.rec-nav-on .rec-nav-pip {
-  opacity: 1;
-  transform: rotate(45deg) scale(1);
+.rec-art-rail > .rec-art-door { flex: 1; min-width: 0; }
+.rec-art-rail .rec-art-drawing { height: 48px; display: flex; align-items: center; }
+.rec-art-rail .rec-art-door-active .rec-art-drawing {
+  box-shadow: 0 -2px 0 -1px rgb(var(--record-mark));
 }
+@media (min-width: 640px) {
+  .rec-art-navigator { inset-inline: auto; left: 50%; width: min(600px, 100%); transform: translateX(-50%); }
+}
+@media print { .rec-art-navigator { display: none; } }

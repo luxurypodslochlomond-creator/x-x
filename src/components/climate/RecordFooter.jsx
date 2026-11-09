@@ -1,42 +1,15 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
+import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import { ELSEWHERE_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks';
 
-// ── THE COLOPHON ───────────────────────────────────────────────────────────────
-// It was three columns of small rows, each row carrying a tick of a drawn mark — a sitemap.
-// A sitemap at the foot of a record is the single clearest sign that a page was assembled
-// rather than composed, and it is why the bottom of this one felt wrong: equal columns,
-// equal rows, equal weight, nothing to look at.
-//
-// The back of a sleeve does two things. It prints the mark large, and it lets one run of
-// type carry everything else. So: x = x at the size of a statement, one line saying what it
-// means, the imprint opposite, and then the doors as words on a line — spaced wide, no
-// ticks, no headings, no boxes.
-//
-// And only the doors the masthead does not carry. The four terms of the record are stated
-// at the top of every page; printing them again down here is what made the foot feel like
-// a second copy of the head.
+// The colophon keeps the doors not carried by the primary navigation.
 const ALL_PAGES = FOOTER_NAV.find((door) => door.to === '/ClimateGuide');
 const REST = [...ELSEWHERE_NAV, ALL_PAGES].filter(Boolean);
 
 export default function RecordFooter({ showKeeper = true }) {
   const { pathname } = useLocation();
-
-  const Door = ({ to, label }) => (
-    <Link
-      to={to}
-      aria-current={pathname === to ? 'page' : undefined}
-      className={`inline-block border-b py-1.5 text-[16px] leading-none transition-colors ${
-        pathname === to
-          ? 'border-record-mark text-record-red'
-          : 'border-transparent text-record-ink/85 hover:border-record-ink/30 hover:text-record-red'
-      }`}
-      style={{ fontFamily: 'var(--font-display)' }}
-    >
-      {label}
-    </Link>
-  );
 
   return (
     <footer className="mt-4 border-t border-record-ink/20 bg-record-paper text-record-ink">
@@ -70,11 +43,9 @@ export default function RecordFooter({ showKeeper = true }) {
           </p>
         </div>
 
-        {/* The doors, as words on a line. Everything here is something the masthead does
-            not already carry, so the foot is never a second copy of the head. */}
-        <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-baseline gap-x-6 gap-y-1">
-          {REST.map(({ label, to }) => (
-            <Door key={to} to={to} label={label} />
+        <nav aria-label="Elsewhere on the record" className="mt-9 flex flex-wrap items-start gap-x-5 gap-y-5">
+          {REST.map(({ label, to, what }) => (
+            <RecordNavDoor key={to} to={to} label={label} what={what} active={pathname === to} size={40} className="w-[calc((100%-2.5rem)/3)] sm:w-24" />
           ))}
         </nav>
 
