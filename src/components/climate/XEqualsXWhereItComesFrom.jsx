@@ -9,21 +9,25 @@ import '@/components/climate/x-equals-x-field.css';
 // brand. So: the conversation it started in, the hand it is printed with, and the one
 // colour on it that belongs to somebody else.
 //
-// The first line is the whole point of the section. It began in one conversation, with
-// one research institute, and that institute is not its audience. No pass is asked for
-// here and none is offered. An institution agreeing with you has never once made a thing
-// true — and a record that borrowed a letterhead to look serious would be doing exactly
-// what this one exists to refuse.
+// The first line is the whole point of the section: one conversation, one research
+// institute, and that institute is not its audience.
+//
+// What was cut from it, and why it stays cut: three sentences arguing with a reviewer
+// who had not arrived — "no pass is asked for here", "an institution agreeing with you
+// has never once made a thing true", "a name on a crest is not one". All true, all
+// defensive, and all of it addressed to the one reader who was already going to say no.
+// A page that answers an objection before it is made looks as though it expects one, and
+// a reviewer laughs at that. The facts do the work: it began there, they have not agreed,
+// and that is the whole of it.
 const NOTES = [
   {
     term: 'The conversation',
     body: (
       <>
-        It started with one message, from one person at one research institute. No pass from it is
-        asked for here, and none is offered — nor from any other university, funder or letterhead.
-        It is written for anyone who reads, not for the people who might approve it. An institution
-        agreeing with you has never once made a thing true. A source is a source. A name on a crest
-        is not.
+        It began with one message, from one person at one research institute. That institute has not
+        read this and has not agreed to it, and nothing here is written to win its approval. The
+        same holds for every other university, funder and letterhead: this is written for whoever
+        reads it.
       </>
     ),
   },

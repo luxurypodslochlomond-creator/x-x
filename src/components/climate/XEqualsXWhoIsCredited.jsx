@@ -58,8 +58,8 @@ export default function XEqualsXWhoIsCredited() {
 
       <div className="mt-4 max-w-[52ch] space-y-4">
         <p>
-          A message can cross a country in dots. What cannot travel is the name of the person who
-          made the dots work: it stays where the room was, and the room empties.
+          A message can cross a country in dots. The name of the person who made the dots work
+          does not travel at all.
         </p>
         <p>
           Alfred Vail built and paid for the telegraph machinery and turned it into a working
@@ -73,11 +73,6 @@ export default function XEqualsXWhoIsCredited() {
           most notorious proslavery advocates of his era, and he stood for mayor on a nativist
           ticket. A page that says nobody is above anybody does not get to leave that out and keep
           the borrowed prestige.
-        </p>
-        <p>
-          That is the whole argument of this record, and it fits in a sentence: whatever is done on
-          this planet that works is only worth anything if the next person can find it, check where
-          it came from, and see that it was somebody’s work.
         </p>
       </div>
 
