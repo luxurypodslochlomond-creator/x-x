@@ -1,100 +1,80 @@
 import React from 'react';
+import RecordBand from './RecordBand';
 
-// ── WHO GETS REMEMBERED ────────────────────────────────────────────────────────
-// The page used to keep Morse in "What is owed", as a thank-you. That was the wrong
-// shelf, and it was also the reason the page read as a mood rather than an argument: a
-// borrowed name dropped in gratitude says nothing a reader can check, and it invites the
-// one question the record cannot dodge — why this name, and not the uncomfortable part
-// of it.
+// ── THE CASE, NOT THE ESSAY ────────────────────────────────────────────────────
+// The founder asked the right question about this section: why is Morse here at all, and
+// is it even valid? It is valid, and it is here for one reason only — it is the best
+// documented case on earth of the thing this page is about: the man who built the working
+// machine lost the name, and the man whose name went on the patent kept it.
 //
-// So he is here as evidence instead, and the evidence is a case rather than a compliment.
-// Alfred Vail built the machinery and turned the dots into an alphabet; the patents
-// carried Morse's name, and the history carried his name only. That is the whole reason
-// a record exists: not to praise anybody, but to keep the name of the person who did the
-// work attached to the work after the room empties.
+// What was cut: four paragraphs of my own argument wrapped round it, and the long formal
+// citation strings, which read as legal boilerplate ("L words" — the founder's words) and
+// made a reader scroll past the evidence rather than check it. The sources are now named
+// the way a person names a source: who it is, and what it says.
 //
-// And Morse's own record is stated, because a page that says nobody is above anybody
-// cannot quietly leave out the parts of a man's life that contradict it. Yale's own
-// research project records him as a leading proslavery advocate; he stood for mayor on a
-// nativist ticket. Naming both facts is what makes the rest of this page worth reading,
-// and it is why he is cited rather than thanked.
-//
-// Nothing here is endorsed by Yale, by the Smithsonian, or by anyone else. Both are named
-// because they are where the claim comes from — an origin, not an ally.
+// Morse is cited, never thanked. Both facts about him are printed, because a page that
+// says nobody is above anybody cannot quietly leave out the parts of a man that contradict
+// it — and because naming only the convenient half would make the rest of the page worth
+// nothing.
 
 const SOURCES = [
   {
-    label: 'Smithsonian Institution Archives — “A Forgotten History: Alfred Vail and Samuel Morse”, Courtney Bellizzi, 24 May 2011',
+    who: 'Smithsonian Institution Archives',
+    says: 'Vail built and financed the machines and worked out the simpler dot-and-dash alphabet. The patents carried Morse’s name.',
     href: 'https://siarchives.si.edu/blog/forgotten-history-alfred-vail-and-samuel-morse',
-    what: 'Vail built and financed the machines and developed the simpler dot-and-dash alphabet; the patents carried Morse’s name.',
   },
   {
-    label: 'Yale & Slavery Research Project — “Samuel F.B. Morse: Artist, Inventor, White Supremacist”',
+    who: 'Yale & Slavery Research Project',
+    says: 'Morse, Yale 1810, recorded by his own university as one of the most notorious proslavery advocates of his era.',
     href: 'https://yaleandslavery.yale.edu/',
-    what: 'Yale’s own project records Morse, B.A. 1810, as one of the most notorious proslavery advocates of his era.',
   },
   {
-    label: 'Library of Congress — Samuel Morse papers, timeline 1791–1839',
+    who: 'Library of Congress — Morse papers',
+    says: 'Graduated Yale College in 1810, and later stood for mayor on a nativist, anti-immigration ticket.',
     href: 'https://www.loc.gov/collections/samuel-morse-papers/articles-and-essays/timeline/1791-1839/',
-    what: 'Morse graduated from Yale College in 1810, and later ran for mayor on a nativist, anti-immigration ticket.',
   },
 ];
 
 export default function XEqualsXWhoIsCredited() {
   return (
-    <section aria-labelledby="who-is-credited" className="my-10 border-y border-record-ink/20 py-7">
-      <div className="flex items-baseline justify-between gap-4 border-b border-record-ink/20 pb-2">
-        <span id="who-is-credited" className="font-mono text-[12px] uppercase tracking-[0.16em] text-record-muted">
-          Why any of this is written down
-        </span>
-      </div>
-
-      <div
-        className="mt-5 text-record-ink"
-        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(21px, 4.6vw, 26px)', lineHeight: 1.18 }}
-      >
-        Who gets remembered
-      </div>
-
-      <div className="mt-4 max-w-[52ch] space-y-4">
+    <RecordBand id="who-is-credited" label="The case · 1844" title="The name that stayed">
+      <div className="max-w-[52ch] space-y-4 text-[15.5px] leading-[1.6] text-record-ink">
         <p>
-          A message can cross a country in dots. The name of the person who made the dots work
-          does not travel at all.
+          A message crossed a country in dots. The name of the man who made the dots work did not
+          travel with it.
         </p>
         <p>
           Alfred Vail built and paid for the telegraph machinery and turned it into a working
-          alphabet. The patents carried Morse’s name, and the history carried his alone. The
-          invention was never the hard part. Keeping the name of the person who did the work
-          attached to the work is the hard part, and it is the only thing a record does that a feed
-          cannot.
+          alphabet. The patents carried Morse’s name. The history carried Morse’s name. The
+          invention was never the hard part — keeping the name of the person who did the work
+          attached to the work is the hard part.
         </p>
         <p>
-          Morse is named here, not thanked. Yale’s own research project records him as one of the
-          most notorious proslavery advocates of his era, and he stood for mayor on a nativist
-          ticket. A page that says nobody is above anybody does not get to leave that out and keep
-          the borrowed prestige.
+          Morse is named here, not thanked. His own university records him as one of the most
+          notorious proslavery advocates of his era, and he stood for mayor on a nativist ticket. A
+          page that says nobody is above anybody does not get to leave that out and keep the
+          borrowed prestige.
         </p>
       </div>
 
-      <div className="mt-6 border-t border-record-ink/15 pt-4">
-        {SOURCES.map(({ label, href, what }) => (
-          <div key={href} className="border-b border-record-ink/10 py-3 last:border-b-0">
+      <div className="mt-6 border-t border-record-ink/15">
+        {SOURCES.map(({ who, says, href }) => (
+          <div key={href} className="border-b border-record-ink/10 py-3">
             <a
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[12.5px] leading-relaxed text-record-red underline decoration-dotted underline-offset-2 transition-colors hover:text-record-ink"
+              className="font-mono text-[11px] uppercase tracking-[0.14em] text-record-red transition-colors hover:text-record-ink"
             >
-              {label}
+              {who} ↗
             </a>
-            <p className="record-meta mt-1 text-record-muted">{what}</p>
+            <p className="mt-1.5 max-w-[50ch] text-[14px] leading-[1.5] text-record-muted">{says}</p>
           </div>
         ))}
-        <p className="record-meta mt-4 text-record-muted">
-          Cited, not endorsed. Nothing here is approved by Yale, by the Smithsonian, or by anyone
-          else — they are named because they are where the claim comes from.
+        <p className="mt-3 font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.12em] text-record-muted">
+          Cited, not endorsed. Named because they are where the claim comes from.
         </p>
       </div>
-    </section>
+    </RecordBand>
   );
 }

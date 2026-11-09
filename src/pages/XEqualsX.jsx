@@ -1,7 +1,6 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
-import XEqualsXCovenantField from '@/components/climate/XEqualsXCovenantField';
 import XEqualsXWhereItComesFrom from '@/components/climate/XEqualsXWhereItComesFrom';
 import XEqualsXSurvives from '@/components/climate/XEqualsXSurvives';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
@@ -20,94 +19,63 @@ import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
 import RecordEpigraph from '@/components/climate/RecordEpigraph';
 
 // ── THE TERMS OF THIS RECORD ───────────────────────────────────────────────────
-// A reader decides whether a page is worth their eye in about a second, and that
-// decision is made by the drawing, not by the argument. So the page is: the mark,
-// the field, the terms, one case with its sources, then one real entry a reader can
-// follow to its origin.
+// The page reads in one line now, and the line is: the mark, what it means, what it
+// binds, what is lost without it, the case that proves the point, an entry a reader can
+// follow, whose record it is, where the mark came from, her words, then the dossier.
 //
-// The plate about photons is gone. It argued that light reaches a reader before a
-// sentence does, which is true and was still the author's own mythology printed on a
-// public record — the page is about what this record binds itself to, not about how
-// its maker thinks seeing works. The mark plates stay because they are the mark.
+// Two things were wrong before this and both were structural rather than editorial.
 //
-// Nothing has been removed from the record to do this. The long argument, the three
-// things a reader can check without trusting us, the six hard readers, the promises,
-// the limits, the note from the machine and the debt owed to a borrowed colour are all
-// still here, in the fold a reviewer opens when they want the paper trail.
+// FIRST: two plates of the same mark, one above the other, the second with eight arcs
+// leaving it that read as a signal fault rather than as light. A reader arriving cold
+// asked what the two drawn things were meant to be — which is the whole review, in one
+// question. There is one plate now and it names its own parts: one, and another.
+//
+// SECOND: her quote sat four bands away from the band that explains what was borrowed
+// from her, so the same debt was told twice in two places and the page seemed to repeat
+// itself. Provenance and the quotation are one movement now: the phrase, the red, her
+// name, her words, and the limit under them.
+//
+// The institutional footer is gone from the shell on this page. It named a research
+// institute and a founder and then said "no endorsement is claimed" — a disclaimer under
+// a name is the shape of a claim, and the page already states both debts in its own body,
+// in full, where they can be read as debts.
 export default function XEqualsX() {
   return (
     <ClimateRecordShell
       eyebrow="The terms of this record"
       title="Nobody above anybody."
-      statement="Kept in Scotland. Every entry with its source, every correction in the open, no funder's name on the door — and nobody above anybody in it."
+      statement="Every entry with its source. Every correction in the open. No funder’s name on the door."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
-      footer="Built in honour of Janine M. H. Selendy and Horizon International. The phrase ‘the record of the time’ is Laurie Anderson’s, from From the Air, Big Science, 1982. No endorsement is claimed."
     >
       <XEqualsXCut />
 
-      {/* ── THE PAGE OPENS ON A DRAWING, NOT ON A SENTENCE ────────────────────────
-          Two plates were drawn for this page and then never printed: the mark itself,
-          two upright strokes held at exactly the same height, and the light leaving a
-          small source in widening waves. Both are here now, at the top, because a reader
-          decides in about a second and that decision is made by light rather than by
-          argument. Nothing is claimed by them that the page does not go on to check. */}
       <XEqualsXMarkPlate />
 
-      {/* One plate, and the reader's arrival is what draws it. It runs past the reading
-          measure on purpose: the page's drawing is printed bigger than its type, and it
-          breaks the column so the page stops reading as a form. */}
-      <XEqualsXCovenantField />
+      <XEqualsXInscription />
 
-      {/* ── THE MESSAGE IS THE TERMS, NOT THE CASE FOR THEM ────────────────────────
-          "Why this had to be written down" was printed here for one draft, and it was
-          the wrong thing on this page: an argument invites a counter-argument, and a
-          counter-argument is a conversation — not an art object. What a tight reader
-          wants from a covenant is the terms and where they run out, in lines short
-          enough to check against the record while standing up. The argument is folded
-          below, where the proof already sits. */}
       <XEqualsXWhatItAsks />
 
-      {/* The case that gives the mark teeth, and the only evidence on the spine.
-          Somebody built the thing; somebody else's name went on it. That is the oldest
-          grievance in art, in science and in every workshop on earth, and it needs no
-          cosmology to be felt — only the sources, which sit under it. */}
-      <XEqualsXWhoIsCredited />
-
-      {/* The record itself — not a description of it, an entry out of it that a reader
-          can follow to its source. The connection to the climate platform is the thing
-          being proved, so it comes before any argument for it. */}
-      <RecordInPractice />
-
-      {/* Two columns rather than two more blocks in a stack: what the covenant is, and
-          whose record it is, read side by side instead of one after the other. */}
-      <div className="grid gap-8 sm:grid-cols-[1.1fr_.9fr] sm:gap-10">
-        <XEqualsXInscription />
-        {/* Whose record this is, before any argument about why it exists. */}
-        <XEqualsXFounderNote />
-      </div>
-
-      {/* The context the page never had: the conversation, the hand, the borrowed red. */}
-      <XEqualsXWhereItComesFrom />
-
-      {/* The reason, in three marks and three lines. */}
       <XEqualsXLostMarks />
 
-      {/* Her words, her red, her name — and the limit said under them. */}
-      <RecordEpigraph />
+      <XEqualsXWhoIsCredited />
+
+      {/* Not a description of the record — an entry out of it, with a link to its origin. */}
+      <RecordInPractice />
+
+      <XEqualsXFounderNote />
+
+      <XEqualsXWhereItComesFrom />
+
+      <div className="my-10">
+        <RecordEpigraph />
+      </div>
 
       <details className="mb-5 border-y border-record-ink/25 py-1">
-        <summary className="cursor-pointer py-4 font-body text-lg text-record-ink marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
-          The argument, the proof, and the limits
+        <summary className="cursor-pointer py-4 font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-record-muted marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
+          The long version — the argument, the six readers, the limits
         </summary>
         <XEqualsXWhy />
-        {/* ── THE PAGE PUT THROUGH THE SIX HARDEST READERS ─────────────────────────
-            Folded because six questions and six answers is an interrogation, not an art
-            object — and it is the proof the summary line promises. The readers most
-            likely to refuse the mark are handed the floor: a research institute, an art
-            critic, the person whose red was borrowed, a physicist, the founder, and the
-            machine. Each gets their real question, and the answer includes where it runs
-            out. */}
         <XEqualsXSurvives />
         <XEqualsXCheck />
         <XEqualsXResearchPanel />
@@ -116,7 +84,9 @@ export default function XEqualsX() {
         <XEqualsXThanks />
       </details>
 
-      <p className="record-meta text-record-muted">This covenant is not yet signed by a person.</p>
+      <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-muted">
+        Not yet signed by a person.
+      </p>
     </ClimateRecordShell>
   );
 }

@@ -1,46 +1,56 @@
 import React from 'react';
 
-// ── THE MARK, DRAWN RATHER THAN EXPLAINED ─────────────────────────────────────
-// x = x is not a slogan and it is not a diagram of a formula. It is two people, and
-// neither one is taller than the other. So the page shows two upright strokes, the
-// same height to the millimetre, with the record's own equal sign set between them at
-// the height of a chest — not above the pair, not below them.
+// ── THE MARK, AND NOTHING ELSE ─────────────────────────────────────────────────
+// There were two plates here for the same mark, one above the other: a small one, then a
+// wide one with eight arcs leaving the space between the strokes. Two drawings of one
+// glyph read as a mistake, and the arcs read as a signal or a fault — nobody arriving
+// cold could tell they were meant to be light. The founder's own words were the verdict:
+// "what are the two drawn things… make sense to me?"
 //
-// The hairlines are the only red on the page here: one across the tops, to show the
-// two heads are level, and one along the ground, to show they stand on the same earth.
-// Nothing else is measured, because nothing else about a person is up for measuring.
+// So there is one plate, and it names its own parts. Two upright strokes, set level with
+// a hairline across their tops, standing on one line, with the record's red equals between
+// them. Under the left stroke the word "one". Under the right, "another". Nothing else is
+// drawn, because nothing else is claimed: x = x is not a formula and not a diagram of one.
 //
-// The strokes are not ruled. They lean a little and they thicken and thin, because a
-// hand made them — and a hand is the only honest way to draw a decision.
+// The strokes are not ruled straight. They lean and they thicken slightly, because a hand
+// made them, and a hand is the only honest way to draw a decision.
 export default function XEqualsXMarkPlate() {
   return (
-    <figure className="my-10 border-y border-record-ink/20 py-9">
+    <figure className="my-8 border-y border-record-ink/25 py-7">
       <svg
-        viewBox="0 0 260 214"
+        viewBox="0 0 400 258"
         role="img"
-        aria-label="Two upright strokes of exactly the same height, drawn by hand, with an equal sign set between them."
-        className="mx-auto block h-auto w-full max-w-[248px]"
+        aria-label="Two hand-drawn upright strokes of exactly the same height, standing on one line, with a red equal sign between them. Labelled: one, and another."
+        className="mx-auto block h-auto w-full max-w-[330px]"
       >
-        {/* the same earth, drawn once */}
-        <line x1="34" y1="184" x2="226" y2="184" stroke="#141210" strokeWidth=".8" opacity=".3" />
-
-        {/* two, standing */}
-        <path d="M64 58c-2.6 40-3.4 84-2.2 121.5" fill="none" stroke="#141210" strokeWidth="2.6" strokeLinecap="round" />
-        <path d="M196 58c2.2 39.6 3 83.4 1.8 121.5" fill="none" stroke="#141210" strokeWidth="2.6" strokeLinecap="round" />
-
         {/* the level they are held at */}
-        <line x1="55" y1="58" x2="205" y2="58" stroke="rgb(var(--record-mark))" strokeWidth="1" strokeDasharray="2 6" opacity=".85" />
+        <line x1="94" y1="46" x2="306" y2="46" stroke="rgb(var(--record-mark))" strokeWidth="1" strokeDasharray="2 6" opacity="0.55" />
 
-        {/* the mark itself, set where a chest would be */}
-        <g stroke="rgb(var(--record-mark))" strokeWidth="3.4" strokeLinecap="round" className="x-equals-x-light">
-          <line x1="113" y1="104" x2="147" y2="104" />
-          <line x1="113" y1="134" x2="147" y2="134" />
+        {/* one earth, drawn once */}
+        <line x1="12" y1="200" x2="388" y2="200" stroke="#141210" strokeWidth="0.8" strokeDasharray="2 6" opacity="0.3" />
+
+        {/* two, standing, neither taller */}
+        <path d="M126 46c-2.4 40-3 92-2 154" fill="none" stroke="#141210" strokeWidth="3" strokeLinecap="round" />
+        <path d="M274 46c2.2 39 2.8 91 1.8 154" fill="none" stroke="#141210" strokeWidth="3" strokeLinecap="round" />
+
+        {/* the mark itself, at the height of a chest */}
+        <g stroke="rgb(var(--record-mark))" strokeWidth="6" strokeLinecap="round">
+          <line x1="170" y1="107" x2="230" y2="107" />
+          <line x1="170" y1="143" x2="230" y2="143" />
+        </g>
+
+        {/* what the two things are called, so nobody has to guess */}
+        <g fill="rgb(var(--record-muted))" fontFamily="ui-monospace, Menlo, monospace" fontSize="9.5" letterSpacing="2.2" textAnchor="middle">
+          <text x="126" y="226">ONE</text>
+          <text x="274" y="226">ANOTHER</text>
         </g>
       </svg>
 
-      <figcaption className="mx-auto mt-6 max-w-[36ch] text-center text-[15px] leading-[1.6] text-record-ink">
-        Two, at the same height.
-        <span className="mt-1 block text-record-muted">Not a measurement. A decision.</span>
+      <figcaption className="mx-auto mt-5 max-w-[34ch] text-center">
+        <span className="block text-[15.5px] leading-[1.5] text-record-ink">Two, at the same height.</span>
+        <span className="mt-1.5 block font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.16em] text-record-muted">
+          Neither above the other. Everything else here follows from that.
+        </span>
       </figcaption>
     </figure>
   );
