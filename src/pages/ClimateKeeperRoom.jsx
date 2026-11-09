@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShedRail from '@/components/climate/keeper/ShedRail';
+import RoomHead from '@/components/climate/keeper/RoomHead';
 import DecideQueue from '@/components/climate/DecideQueue';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 import ClimateChecking from '@/pages/ClimateChecking';
@@ -192,6 +193,8 @@ export default function ClimateKeeperRoom() {
           <p className="mt-1.5 text-[13px] text-[#3a342c]" style={reading}>{line}</p>
 
           <ShedRail isKeeper={who.isKeeper} active={tab} counts={counts || {}} onGo={go} />
+
+          <RoomHead tab={tab} />
 
           <div className="pt-5">
             {tab === 'decide' && who.isKeeper && <DecideQueue onChange={count} />}
