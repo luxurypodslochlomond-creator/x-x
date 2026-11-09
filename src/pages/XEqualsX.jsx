@@ -1,7 +1,9 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
-import XEqualsXPlate from '@/components/climate/XEqualsXPlate';
+import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
+import XEqualsXLightPlate from '@/components/climate/XEqualsXLightPlate';
+import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXWhy from '@/components/climate/XEqualsXWhy';
 import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
@@ -13,19 +15,17 @@ import XEqualsXCut from '@/components/climate/XEqualsXCut';
 import RecordEpigraph from '@/components/climate/RecordEpigraph';
 
 // ── WHY THIS RECORD ────────────────────────────────────────────────────────────
-// This page was pared back to a heading and two paragraphs, and that was the wrong
-// instinct: a covenant is not a summary. What it lost was the plate it is printed on,
-// the drawing that says what it is for, the argument for why any of it had to be
-// written down, the note from the machine that helped type it, and the page that names
-// whose words and whose colour this record borrowed. Take those out and what is left
-// is a policy page with good type — which is exactly what a reviewer opens, reads
-// once, and closes.
+// A reader decides whether a page is worth their eye in about a second, and that
+// decision is made by light, not by argument. So the argument has moved down the page
+// and the drawings have moved up: the mark, then the light, then a real entry they can
+// follow to its source, then three objects that carry the reason in a single line each.
 //
-// So the whole of it is here, in the order a stranger meets it: the mark, the
-// statement, one real entry they can follow to its source, why it had to be written
-// down, what can be checked without trusting us, what it owes, what it cannot do, and
-// then the promises and limits in full. Nothing is claimed that is not also limited,
-// and the seam between borrowed and own is visible everywhere it happens.
+// Nothing has been removed from the record to do this. The full argument, the three
+// things a reader can check without trusting us, the promises, the limits, the note
+// from the machine and the debt owed to a borrowed colour are all still here, gathered
+// in one place a reviewer can open when they want the paper trail rather than the page.
+//
+// Art first. Evidence one touch away. That is the order a stranger actually reads in.
 export default function XEqualsX() {
   return (
     <ClimateRecordShell
@@ -36,34 +36,36 @@ export default function XEqualsX() {
       returnLabel="Back to the record"
       footer="Built in honour of Janine M. H. Selendy and Horizon International. The phrase ‘the record of the time’ is Laurie Anderson’s, from From the Air, Big Science, 1982. No endorsement is claimed."
     >
-      {/* The incision down the edge of the page, drawn by the hand holding the phone. */}
       <XEqualsXCut />
 
       <XEqualsXInscription />
 
-      {/* The one drawing on the page, and the reason there is only one. */}
-      <XEqualsXPlate />
+      {/* The covenant, drawn. */}
+      <XEqualsXMarkPlate />
 
-      {/* A real entry, not a screenshot of one. Follow it to its source and decide. */}
+      {/* What a reader meets before a word of it: light. */}
+      <XEqualsXLightPlate />
+
+      {/* One real entry, not a screenshot of one. */}
       <RecordInPractice />
 
-      <XEqualsXWhy />
-
-      <XEqualsXCheck />
+      {/* The reason, in three marks and three lines. */}
+      <XEqualsXLostMarks />
 
       {/* Her words, her red, her name — and the limit said under them. */}
       <RecordEpigraph />
 
-      <details className="mb-5 border-b border-record-ink/25 pb-5">
-        <summary className="cursor-pointer py-3 font-body text-lg text-record-ink marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
-          Read the promises and their limits
+      <details className="mb-5 border-y border-record-ink/25 py-1">
+        <summary className="cursor-pointer py-4 font-body text-lg text-record-ink marker:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red focus-visible:outline-offset-4">
+          The argument, the proof, and the limits
         </summary>
+        <XEqualsXWhy />
+        <XEqualsXCheck />
         <XEqualsXResearchPanel />
         <XEqualsXCodicil />
+        <XEqualsXMachine />
+        <XEqualsXThanks />
       </details>
-
-      <XEqualsXMachine />
-      <XEqualsXThanks />
 
       <p className="record-meta text-record-muted">This covenant is not yet signed by a person.</p>
     </ClimateRecordShell>

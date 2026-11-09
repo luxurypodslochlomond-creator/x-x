@@ -157,6 +157,16 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
    come back around it, either side, the way they were before the paper above them was made
    solid overnight. The reading column keeps its clean sheet exactly as it is — no sentence
    loses a single point of contrast — and nothing on a handset changes at all. */
+/* ── ONE MEASURE OF LIGHT ─────────────────────────────────────────────────────────
+   The red in the drawings is the only moving thing on this page, and it is almost not
+   moving: nine seconds from dim to full and back, so a reader never catches it changing,
+   only notices it has. Anything faster is a pulse asking to be watched. */
+@keyframes x-equals-x-light { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.x-equals-x-light { animation: x-equals-x-light 9s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .x-equals-x-light { animation: none; opacity: 1; }
+}
+
 @media (min-width: 1024px) {
   .record-book {
     max-width: 1100px;
