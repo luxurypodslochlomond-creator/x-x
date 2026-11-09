@@ -34,12 +34,15 @@ export default function RecordPagesPanel({ open, onClose }) {
       className="climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none flex-col overflow-hidden border-0 bg-record-paper p-0 font-body text-record-ink backdrop:bg-record-paper">
       <div aria-hidden="true" className="h-[3px] w-full shrink-0 bg-record-mark" />
       <div className="mx-auto flex min-h-0 w-full max-w-[760px] flex-1 flex-col px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-4 sm:px-8 sm:pt-6">
-        <div className="mb-4 flex shrink-0 items-start justify-between gap-4">
+        {/* ── THE SHEET HAS A MASTHEAD, LIKE EVERY OTHER PAGE OF THE RECORD ──────
+            "Index" was set the same size as a section heading with a line of small type
+            under it, so the sheet opened without ever saying it had opened. It now opens
+            the way a printed contents page does: a word above, the title at full size,
+            and a rule drawn under it — a plate, not a panel. */}
+        <div className="mb-3 flex shrink-0 items-start justify-between gap-4 border-b border-record-ink pb-2.5">
           <div>
-            <h1 id="record-contents-title" className="font-display text-[26px] leading-none sm:text-[32px]">Index</h1>
-            <p className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.18em] text-record-muted">
-              Every way through the record · nothing hidden
-            </p>
+            <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">Contents</p>
+            <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[42px]">Index</h1>
           </div>
           <button type="button" autoFocus onClick={onClose} aria-label="Close the index" className="rec-art-door">
             <span className="rec-art-drawing" aria-hidden="true">
@@ -51,6 +54,10 @@ export default function RecordPagesPanel({ open, onClose }) {
           </button>
         </div>
 
+        <p className="mb-3 shrink-0 font-mono text-[9px] uppercase tracking-[0.18em] text-record-muted">
+          Every way through the record · nothing hidden
+        </p>
+
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
           <RecordPageIndex compact showHeading={false} showKeeper={false} onNavigate={onClose} />
         </div>
@@ -58,10 +65,12 @@ export default function RecordPagesPanel({ open, onClose }) {
         <Link
           to="/ClimateGuide"
           onClick={onClose}
-          className="mt-3 shrink-0 border-t border-record-ink/15 pt-3 text-[11px] uppercase tracking-[0.14em] text-record-muted hover:text-record-ink"
-          style={{ fontFamily: 'var(--font-reading)' }}
+          className="group mt-3 flex shrink-0 items-center justify-between gap-3 border-t border-record-ink pt-2.5"
         >
-          The written guide, line by line →
+          <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
+            The written guide, line by line
+          </span>
+          <span aria-hidden="true" className="font-mono text-[13px] text-record-mark transition-transform group-hover:translate-x-0.5">→</span>
         </Link>
       </div>
     </dialog>, document.body

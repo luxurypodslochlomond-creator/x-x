@@ -18,10 +18,24 @@ export default function RecordPageIndex({ showHeading = true, showKeeper = true,
   if (compact) {
     return (
       <div className="text-record-ink">
-        <div className="grid grid-cols-2 gap-x-5 gap-y-3 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-5">
-          {CONTENT_GROUPS.map(({ title, doors }) => (
+        {/* ── SET AS A PRINTED INDEX, NOT AS A GRID OF LINKS ─────────────────────
+            The names were floating in white space, each one its own little island, which
+            is what a menu looks like. An index is ruled: a numeral for the part, the part
+            named, and every entry sitting on a hairline so the eye runs down a column
+            instead of hopping between islands. Nothing is boxed — the rules are one pixel
+            of ink, the same hairline the rail and the foot are drawn with. The drawings sit
+            in their own column so every name starts on the same vertical, and they stay at
+            full ink: a mark at seventy per cent is a smudge, not an engraving. */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4 sm:gap-x-8">
+          {CONTENT_GROUPS.map(({ title, doors }, part) => (
             <section key={title}>
-              <h2 className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-record-muted">{title}</h2>
+              <h2 className="mb-1.5 flex items-center gap-1.5">
+                <span className="font-mono text-[8.5px] leading-none tabular-nums text-record-mark">
+                  {String(part + 1).padStart(2, '0')}
+                </span>
+                <span className="font-mono text-[9px] uppercase leading-none tracking-[0.16em] text-record-muted">{title}</span>
+                <span aria-hidden="true" className="h-px flex-1 bg-record-ink/20" />
+              </h2>
               <ul>
                 {doors.map(({ label, to }) => {
                   // The drawing comes with the name, the same drawing the door carries on
@@ -30,20 +44,20 @@ export default function RecordPageIndex({ showHeading = true, showKeeper = true,
                   const Mark = markFor(to);
                   const on = pathname === to;
                   return (
-                    <li key={to}>
+                    <li key={to} className="border-b border-record-ink/12">
                       <Link
                         to={to}
                         onClick={onNavigate}
                         aria-current={on ? 'page' : undefined}
-                        className={`flex items-center gap-1.5 py-[3px] text-[13px] leading-snug sm:text-[14px] ${
+                        className={`flex items-center gap-1.5 py-[5px] text-[13.5px] leading-tight sm:text-[14px] ${
                           on ? 'text-record-mark' : 'text-record-ink'
                         }`}
                         style={{ fontFamily: 'var(--font-reading)' }}
                       >
-                        <span aria-hidden="true" className={on ? 'shrink-0 text-record-mark' : 'shrink-0 text-record-ink/70'}>
-                          <Mark size={15} />
+                        <span aria-hidden="true" className="flex w-[19px] shrink-0 justify-center">
+                          <Mark size={16} />
                         </span>
-                        <span>{label}</span>
+                        <span className="truncate">{label}</span>
                       </Link>
                     </li>
                   );
