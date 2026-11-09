@@ -26,6 +26,18 @@ const WAY_IN = [
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
 ];
 
+// ── ONE ROW, AND IT IS THE WHOLE RECORD ─────────────────────────────────────────
+// There used to be a second copy of this row pinned to the foot of a phone, and behind it
+// this masthead hid the rulebook and the founder on a narrow glass to keep itself short.
+// That is the arrangement that left a reader saying the index had gone from the top and a
+// navigation had turned up at the bottom: two half-menus, one of which ate a hundred
+// pixels of every page for the trouble.
+//
+// One row, at the top, carrying everything — the five ways in, the founder, the rulebook,
+// the contents and the tongue. On a phone it runs on past the edge of the glass and is
+// slid sideways, which is a thing a reader already knows how to do; nothing is hidden and
+// nothing is repeated. The foot of the book keeps its own margin again.
+//
 // The rulebook: why the record exists, how an entry is checked, what has been corrected,
 // and the terms and privacy it is offered under. All five are the same kind of thing — the
 // promises behind the entries rather than entries — so they sit together behind one
@@ -57,13 +69,13 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             what={what}
             size={34}
             active={pathname === to}
-            className={`${CELL} ${to === '/ClimateFounder' ? 'hidden md:inline-flex' : ''}`}
+            className={CELL}
           />
         ))}
 
         {/* A hairline does what it does in print: it separates two kinds of thing without
             making either one smaller. Left of it, the record. Right of it, its rulebook. */}
-        <span aria-hidden="true" className="mx-1 hidden w-px shrink-0 self-center bg-record-ink/20 lg:block" style={{ height: 34 }} />
+        <span aria-hidden="true" className="mx-1 w-px shrink-0 self-center bg-record-ink/20" style={{ height: 34 }} />
 
         {RULEBOOK.map(({ label, to, what }) => (
           <RecordNavDoor
@@ -73,7 +85,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             what={what}
             size={34}
             active={pathname === to}
-            className={`${CELL} hidden lg:inline-flex`}
+            className={CELL}
           />
         ))}
 
@@ -97,7 +109,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             what="The keeper's own room."
             size={34}
             active={pathname === '/ClimateKeeperRoom'}
-            className={`${CELL} hidden lg:inline-flex`}
+            className={CELL}
           />
         )}
 

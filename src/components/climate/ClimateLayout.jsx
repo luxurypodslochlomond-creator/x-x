@@ -7,7 +7,6 @@ import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
-import RecordNavigator from '@/components/climate/RecordNavigator';
 import RecordImprint from '@/components/climate/RecordImprint';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
@@ -160,21 +159,15 @@ export default function ClimateLayout({ children, currentPage }) {
         <RecordGrain />
       </div>
 
-      {/* The strip at the foot is the room the dock sits over. It is given back here
-          rather than by a spacer inside the page, so every page of the record — including
-          the ones written after this one — ends clear of the rail without knowing about it. */}
-      {/* The rail is two rows of five marks now, not one, so the foot of the book gives
-          back the strip it is actually covered by: about a hundred and eighteen pixels
-          plus the home indicator. Measured from the marks themselves rather than guessed
-          at, because a dock that sits over the last line of a page is a dock that has
-          eaten a sentence. */}
-      {/* The strip is given back only where the dock exists. On a wide screen the rail is
-          the masthead's job alone, so the foot of the page keeps its own margin and nothing
-          is held open under a bar that is not there. */}
-      <div className="relative record-book pb-[calc(104px+env(safe-area-inset-bottom))] lg:pb-0" style={{ zIndex: 1 }}>
-      {/* Both ends of the record use the same drawn doors, and both are pinned now: the
-          record's name at the top of the glass, the way through it at the foot, so the
-          reader is never more than one thumb from either. */}
+      {/* ── ONE WAY THROUGH, AND IT IS AT THE TOP ──────────────────────────────────
+          The strip at the foot of this block used to hold open a hundred and four pixels
+          plus the home indicator, for a dock of drawn doors pinned over the book. The dock
+          is gone: the same marks stand in the masthead, on every screen size, and a phone
+          no longer gives a quarter of a page away to a second copy of its own index. So the
+          foot of the book keeps its own margin again, and nothing is held open under a bar
+          that is not there. The masthead still pins, so the way through is one thumb away
+          from the top of any page. */}
+      <div className="relative record-book" style={{ zIndex: 1 }}>
       <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className="mx-auto max-w-[1100px] px-4 lg:px-10">
@@ -204,9 +197,6 @@ export default function ClimateLayout({ children, currentPage }) {
 
       <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />
 
-      {/* No spacer at the foot any more: the dock is part of the page's own flow now (it
-          pins without being bolted over the book), so nothing needs an inch given back. */}
-      <RecordNavigator currentPage={currentPage} onOpenContents={openContents} contentsOpen={contentsOpen} />
       <RecordPagesPanel open={contentsOpen} onClose={closeContents} />
       </div>
     </div>
