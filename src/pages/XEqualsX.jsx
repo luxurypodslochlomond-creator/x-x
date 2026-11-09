@@ -4,6 +4,7 @@ import XEqualsXInscription from '@/components/climate/XEqualsXInscription';
 import XEqualsXMarkPlate from '@/components/climate/XEqualsXMarkPlate';
 import XEqualsXLightPlate from '@/components/climate/XEqualsXLightPlate';
 import XEqualsXLostMarks from '@/components/climate/XEqualsXLostMarks';
+import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXWhy from '@/components/climate/XEqualsXWhy';
 import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
@@ -31,7 +32,7 @@ export default function XEqualsX() {
     <ClimateRecordShell
       eyebrow="Why this record"
       title="Nobody above anybody."
-      statement="Equal human worth, held as a decision this record takes on purpose — and the limits it holds itself to, said in the open."
+      statement="A record of what works on this planet — every entry with its source, every correction in the open, and nobody above anybody in it."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Built in honour of Janine M. H. Selendy and Horizon International. The phrase ‘the record of the time’ is Laurie Anderson’s, from From the Air, Big Science, 1982. No endorsement is claimed."
@@ -39,6 +40,9 @@ export default function XEqualsX() {
       <XEqualsXCut />
 
       <XEqualsXInscription />
+
+      {/* Whose record this is, before any argument about why it exists. */}
+      <XEqualsXFounderNote />
 
       {/* The covenant, drawn. */}
       <XEqualsXMarkPlate />

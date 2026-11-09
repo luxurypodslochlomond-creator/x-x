@@ -14,8 +14,7 @@ export default function XEqualsXInscription() {
       </div>
       <div className="mt-5 max-w-[48ch] space-y-4">
         <p>
-          Good work happens far from the loudest microphone. So do disasters. This record gives
-          both somewhere to stay.
+          Good work happens far from the loudest microphone. This record is where it gets kept.
         </p>
         <p>
           An entry needs a source, not a following. A correction needs to be seen, not quietly

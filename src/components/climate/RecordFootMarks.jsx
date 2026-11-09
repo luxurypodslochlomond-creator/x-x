@@ -99,6 +99,42 @@ export function MarkMusic({ size = 26, className = '' }) {
   );
 }
 
+// What travels. A message going out in dots and dashes — the oldest way anyone found
+// to send a thing further than a voice reaches.
+export function MarkSignal({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="7.4" cy="14.4" r="2.2" fill="currentColor" stroke="none" />
+      <circle cx="14.8" cy="14.4" r="2.2" fill="currentColor" stroke="none" />
+      <path d="M21.6 14.4h10.8" />
+      <path d="M7.4 25.6h9.4M21.6 25.6h4.4" />
+    </svg>
+  );
+}
+
+// Where a thing is. A world drawn in three lines: the rim, the equator, one meridian.
+export function MarkHorizon({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="20" cy="20" r="12.6" />
+      <path d="M7.4 20h25.2" />
+      <path d="M20 7.4c4.8 6.2 4.8 19 0 25.2" />
+      <circle cx="20" cy="20" r="2.2" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+// Looking for something in particular. One lens, one hairline handle, nothing else.
+export function MarkLens({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <circle cx="17.6" cy="17.6" r="9.4" />
+      <path d="M24.4 24.6 32.4 32.6" />
+      <path d="M13.2 17.6h8.8" />
+    </svg>
+  );
+}
+
 // The room where something is made rather than read.
 export function MarkStudio({ size = 26, className = '' }) {
   return (

@@ -71,7 +71,11 @@ export default function RecordFooter({ showKeeper = true }) {
         </div>
 
         <div className="mt-6 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-record-ink/15 pt-3">
-          <span className="text-[12px] text-record-muted">Record of the Time</span>
+          {/* Where it was made, and out of what. Not a badge: an imprint, the way a
+              printer puts one at the foot of a sheet and never mentions it again. */}
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-record-muted">
+            Made in Scotland from photons
+          </span>
           <span className="text-[12px] text-record-muted">A public service · for the world</span>
         </div>
       </div>

@@ -1,13 +1,16 @@
 // Shared wording keeps the header, footer and page index in agreement.
+// The fourth door is the person, not a topic. A record that asks a reader to trust it
+// should say whose record it is before it says anything else about itself.
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
-  { label: 'About', to: '/XEqualsX', page: 'XEqualsX', what: 'Why this record exists, with its promises and limits.' },
+  { label: 'Founder', to: '/ClimateFounder', page: 'ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
   { label: 'Search', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Find a place, subject or source.' },
 ];
 
 export const FOOTER_NAV = [
+  { label: 'Why this record', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
   { label: 'All pages', to: '/ClimateGuide', what: 'Every public destination, followed by the guide.' },
@@ -16,6 +19,7 @@ export const FOOTER_NAV = [
 const SUPPORTING_PAGES = [
   { label: 'Project brief', to: '/ClimateBrief', what: 'What is live, what is planned, and what is still missing.' },
   { label: 'Founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy and the work behind the record.' },
+  { label: 'Why this record', to: '/XEqualsX', what: 'The covenant, drawn rather than argued.' },
   { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and understand what it proves.' },
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
