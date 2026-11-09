@@ -23,10 +23,8 @@ import { recordAddress, recordOrigin } from '@/components/climate/recordAddress'
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
 const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — in any tongue a reader names, living or long dead.';
 
-// The way through the record lives in ClimateNav: places to read, and one action —
-// Search — drawn as a control so it can never be lost in a list of words.
-
-// The footer groups the supporting pages by purpose instead of presenting one flat menu.
+// Public navigation stays the same for every reader. Reviewer access belongs in the footer.
+// The full directory lives on the existing guide page, not in a second menu on every page.
 
 // Pages that are already spending the phone's connection on something heavier than a page,
 // so warming ten more in the background would only take the wire away from them.
@@ -160,20 +158,8 @@ export default function ClimateLayout({ children, currentPage }) {
       <div className="relative record-book" style={{ zIndex: 1 }}>
       {/* Deep earth, not near-black: the masthead and the plate under it now read as one warm
           top to the record instead of a dark screen with a page beneath it. */}
-      <header className="sticky top-0 z-50 bg-[#241d16] border-b-2 border-[#e2602a] relative overflow-hidden">
-        {/* THE SPINE ─────────────────────────────────────────────────────────────────────
-            The cover runs along the top of every page of the record, held far back. Not so you
-            can look at it here — you look at it at the door — but so the room is the same room
-            when you turn a page. A record whose masthead is flat ink on fourteen pages and a
-            painting on one of them is fourteen documents stapled together; this is one book.
-            The gradient under it is the whole trick: the picture gives the header its warmth,
-            the gradient guarantees not one word of navigation ever has to fight for its life. */}
-        <RecordCover position="center 20%" strength={0.38} blend="screen" />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.62) 0%, rgba(36,29,22,.8) 60%, rgba(36,29,22,.9) 100%)' }} />
-
-        {/* Desktop — the record's masthead on the left, the way through the record on the
-            right. The item you are reading is marked with a rule, not only a colour, so it
-            still reads on a bad screen or a projector in a panel room. */}
+      <header className="sticky top-0 z-50 border-b-2 border-record-red bg-record-paper text-record-ink">
+        {/* Plain paper keeps navigation distinct from the cover and the entries. */}
         <div className="relative z-10 hidden sm:flex max-w-[1100px] mx-auto px-4 lg:px-10 py-3 items-center justify-between gap-8">
           <Link
             to={createPageUrl('TogetherChangeClimate')}
@@ -184,9 +170,9 @@ export default function ClimateLayout({ children, currentPage }) {
                 capitals, spaced out like a field name — the same lettering as a date or a
                 count, which meant the one line that names the whole thing sounded like
                 metadata. One pulse was enough too: the dot is a mark, not a heartbeat. */}
-            <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] flex-shrink-0" />
+            <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-record-mark flex-shrink-0" />
             <span
-              className="text-[#efe7d6] text-[18px] leading-none group-hover:text-[#e2602a] transition-colors"
+              className="text-record-ink text-[18px] leading-none group-hover:text-record-red transition-colors"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Record of the Time
@@ -196,15 +182,14 @@ export default function ClimateLayout({ children, currentPage }) {
           <ClimateNav currentPage={currentPage} />
         </div>
 
-        {/* Mobile — the rail, on one line: centred while the words fit, thumb-scrollable
-            the moment they do not. The rail owns its own scroller. */}
+        {/* Five named destinations, in the same order on every screen. */}
         <div className="relative z-10 sm:hidden">
           <ClimateNav currentPage={currentPage} variant="mobile" />
         </div>
 
         {/* Every tongue on Earth — in the header, on every page of the record. */}
         <div className="relative z-10 max-w-[1100px] mx-auto">
-          <ClimateLanguageBar />
+          <ClimateLanguageBar tone="paper" />
         </div>
       </header>
 

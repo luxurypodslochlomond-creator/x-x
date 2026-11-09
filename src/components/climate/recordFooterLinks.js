@@ -1,21 +1,37 @@
-import {
-  MarkBrief, MarkPortrait, MarkMethod, MarkCorrection, MarkCheckers, MarkHandover, MarkMusic, MarkStudio,
-} from '@/components/climate/RecordFootMarks';
-import { MarkSeal } from '@/components/climate/keeper/KeeperMarks';
-
-// Nine doors at the foot of every page. One word each — the mark says the rest.
-// No groups: the three headings that stood here were our filing system, not a reader's,
-// and "Take part" had quietly collected the music, the studio and the checking office.
-const LABELS = [
-  { label: 'Brief', to: '/ClimateBrief', mark: MarkBrief, what: 'What is live, what is planned, and what is still missing.' },
-  { label: 'Janine', to: '/ClimateFounder', mark: MarkPortrait, what: 'Janine M. H. Selendy and the work the record stands on.' },
-  { label: 'Method', to: '/ClimateMethod', mark: MarkMethod, what: 'How an entry is sourced, screened and allowed on the record.' },
-  { label: 'Seals', to: '/ClimateSeals', mark: MarkSeal, what: 'The fingerprints, and the limits of what they prove.' },
-  { label: 'Corrections', to: '/ClimateCorrections', mark: MarkCorrection, what: 'Everything changed, with the date and the reason.' },
-  { label: 'Checkers', to: '/ClimateFellows', mark: MarkCheckers, what: 'What a checker does, and how to ask to be one.' },
-  { label: 'Handover', to: '/ClimateHandover', mark: MarkHandover, what: 'What it costs, who holds the keys, and what is still open.' },
-  { label: 'Music', to: '/ClimateMusic', mark: MarkMusic, what: 'The music given to the record, played from the record.' },
-  { label: 'Studio', to: '/Studio', mark: MarkStudio, what: 'The record’s own making room: ZAPP and the logo tool.' },
+// Shared wording keeps the header, footer and page index in agreement.
+export const PRIMARY_NAV = [
+  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
+  { label: 'Latest', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
+  { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
+  { label: 'About', to: '/XEqualsX', page: 'XEqualsX', what: 'Why this record exists, with its promises and limits.' },
+  { label: 'Search', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Find a place, subject or source.' },
 ];
 
-export default LABELS;
+export const FOOTER_NAV = [
+  { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
+  { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
+  { label: 'All pages', to: '/ClimateGuide', what: 'Every public destination, followed by the guide.' },
+];
+
+const SUPPORTING_PAGES = [
+  { label: 'Project brief', to: '/ClimateBrief', what: 'What is live, what is planned, and what is still missing.' },
+  { label: 'Founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy and the work behind the record.' },
+  { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
+  { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and understand what it proves.' },
+  { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
+  { label: 'Become a checker', to: '/ClimateFellows', what: 'What checking involves, and how to ask to take part.' },
+  { label: 'Costs & responsibility', to: '/ClimateHandover', what: 'What it costs, who holds the keys, and what is still open.' },
+  { label: 'Music', to: '/ClimateMusic', what: 'Music given to the record by its artists.' },
+  { label: 'Studio', to: '/Studio', what: 'Create with ZAPP and the logo tool.' },
+];
+
+export const PAGE_INDEX = [
+  ...PRIMARY_NAV,
+  { label: 'Readership', to: '/ClimateImpact', what: 'Anonymous reading counts by country and region.' },
+  ...SUPPORTING_PAGES,
+  { label: 'Host the record', to: '/ClimateHost', what: 'What carrying the record involves.' },
+  { label: 'Support the record', to: '/ClimateSupport', what: 'Support and its declaration in the open.' },
+  { label: 'Open-source covenant', to: '/ExtractionProofCovenant', what: 'The terms under which the record is shared.' },
+];
+
+export default SUPPORTING_PAGES;

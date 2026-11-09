@@ -8,7 +8,6 @@ import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import GatheringForm from '@/components/climate/GatheringForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
-import RecordEpigraph from '@/components/climate/RecordEpigraph';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import { isPreviewSandbox } from '@/lib/previewWorkers';
@@ -638,18 +637,7 @@ export default function TogetherChangeClimate() {
             <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-2">
               Been sent an email? Paste it in — we read it and fill the form in for you. No account needed, nothing to install.
             </p>
-            <Link
-              to={createPageUrl("ClimateMap")}
-              className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
-            >
-              <MapPin className="w-4 h-4" /> Transmission Map
-            </Link>
-            <Link
-              to={createPageUrl("ClimateImpact")}
-              className="mt-2 w-full flex items-center justify-center gap-2 px-4 py-3 min-h-[44px] bg-[#1e3a2b] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
-            >
-              <Globe className="w-4 h-4" /> Global Impact
-            </Link>
+
           </div>
         </div>
       </div>
@@ -838,19 +826,7 @@ export default function TogetherChangeClimate() {
 
         {/* Terms and Privacy now sit in the shared footer, on every page of the record. */}
 
-        {/* The thesis, where it belongs — at the close, once the record has been read.
-            It used to be two lines of text followed by forty pixels of nothing: the page
-            ended in a gap rather than in a sentence. It closes properly now — air above,
-            a short rule, and the ground it stands on. */}
-        <section className="px-5 pt-12 pb-14 lg:pt-16 lg:pb-20 bg-[#efe7d6] text-center">
-          {/* The last word on the page is hers, and it says so — a quotation in quotation
-              marks, signed, with the limit under it. Taking her line out was tidy and gutless;
-              printing it as if it were the record's own sentence was the actual fault. This is
-              the third way, and the only honest one: her words, her red, her name, and what she
-              has and has not agreed to, all visible at once. */}
-          <RecordEpigraph label="The line this record is named after" />
-          <div className="mx-auto mt-7 h-px w-16 bg-[#141210]/25" />
-        </section>
+
       </div>
 
       {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}

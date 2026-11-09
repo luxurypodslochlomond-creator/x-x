@@ -2,7 +2,8 @@ import React from 'react';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import GuideBand from '@/components/climate/GuideBand';
-import FOOTER_DOORS from '@/components/climate/recordFooterLinks';
+import { PRIMARY_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks';
+import RecordPageIndex from '@/components/climate/RecordPageIndex';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 import COOLASFUCKTuningFork from '@/components/shared/COOLASFUCKTuningFork';
@@ -25,11 +26,12 @@ const FORK = <COOLASFUCKTuningFork size={15} tone="signal" className="flex-shrin
 // the manual on the record says. Nothing is added for the card and nothing is dropped.
 const BUTTONS_CARD = {
   id: 'the-buttons',
-  title: 'The Buttons',
-  headline: 'The Buttons — every way through the record',
+  title: 'All pages & guide',
+  headline: 'All pages & guide — every way through the record',
   marker: 'Every way through the record · nothing hidden',
   body: 'Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there.',
   inside: [
+    'All public pages',
     '01 · The bar at the top of every page',
     '02 · Sending something in',
     '03 · Reading one entry',
@@ -42,14 +44,7 @@ const BUTTONS_CARD = {
   url_path: '/ClimateGuide',
 };
 
-const BAR = [
-  { label: 'Search', to: '/ClimateSearch', what: 'Look up a place or subject in the record.' },
-  { label: 'Record', to: '/TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
-  { label: 'Wire', to: '/ClimateWire', what: 'Dated, sourced accounts of what changed.' },
-  { label: 'Map', to: '/ClimateMap', what: 'Explore the record by place.' },
-  { label: 'Impact', to: '/ClimateImpact', what: 'Readership counts by country and region.' },
-  { label: 'Founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy and the work the record stands on.' },
-];
+const BAR = PRIMARY_NAV;
 
 const SEND = [
   {
@@ -119,9 +114,9 @@ const FIRST = [
     what: 'Read it, then read where it came from. Nothing on the record stands without an origin.',
   },
   {
-    label: '3. Open the Wire',
+    label: '3. Open Latest',
     to: createPageUrl('ClimateWire'),
-    what: 'The dated entries. Press Send an entry to the wire to see the form a reader fills in.',
+    what: 'Dated, sourced entries. Press Send an entry to the wire to see the submission form.',
   },
   {
     label: '4. Press Search',
@@ -129,7 +124,7 @@ const FIRST = [
     what: 'Look up a country or a subject you already know about, and see what the record holds.',
   },
   {
-    label: '5. Open Impact',
+    label: '5. Open Readership',
     to: createPageUrl('ClimateImpact'),
     what: 'Who is reading, in countries — and how a reader can name their own nation.',
   },
@@ -177,28 +172,27 @@ const KEEPER_DOORS = [
   },
 ];
 
-// The same nine doors, in the same order, as the foot of every page. One word each.
+// The footer stays short; the directory above carries every other public destination.
 const FOOT = [
-  ...FOOTER_DOORS.map((item) => ({ label: item.label, to: item.to, what: item.what })),
-  { label: 'Guide', to: '/ClimateGuide', what: 'This page: every control, and the one thing each does.' },
-  { label: 'x = x', to: '/XEqualsX', what: 'The covenant: equal human worth, with the promises and their limits.' },
-  { label: 'Terms', to: '/ClimateTerms', what: 'The ground the record stands on.' },
+  ...FOOTER_NAV,
+  { label: 'Terms', to: '/ClimateTerms', what: 'The terms under which the record is used.' },
   { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, and what it never does.' },
+  { label: 'Reviewer sign-in', to: '/ClimateKeeperRoom', what: 'The existing entrance for invited keepers and checkers. Signed-in reviewers see Review entries.' },
 ];
 
 export default function ClimateGuide() {
   return (
     <ClimateRecordShell
-      eyebrow="The Buttons"
-      marker="Every way through the record · nothing hidden"
-      title="The Buttons"
-      statement="Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there."
+      compact
+      eyebrow="All pages"
+      title="All pages"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
       footer="Handed to a host or keeper, this page is the whole of the manual. Nothing on it needs memorising: the record’s buttons are words, and each one says what it does."
     >
-      {/* The manual's own door out: one tap draws the whole page as a card, so a host or a
-          keeper can take it with them and hand it on the way a track or an entry travels. */}
+      <RecordPageIndex />
+      <h2 className="mb-5 border-t border-record-ink/20 pt-7 text-2xl text-record-ink">Using the record</h2>
+      {/* The existing guide remains available below the directory. */}
       <div className="mb-6">
         <ShareCardButton
           entry={BUTTONS_CARD}
@@ -210,7 +204,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The bar at the top of every page"
-        note="The top bar is for reading: Search, Record, Wire, Map, Impact and Founder. Invited keepers and checkers also see the Shed."
+        note="The same five links for everyone: Record, Latest, Map, About and Search. Reviewer access is separate, at the foot of the page."
         items={BAR}
       />
 
@@ -245,7 +239,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="Nine doors, one word each, each with a hand-drawn mark for the thing behind it. No headings and no descriptions: press the mark. The covenant, the Guide, Terms, Privacy and the keeper / checker sign-in sit in a quiet line beneath them."
+        note="How we check entries, Corrections and All pages. Terms, Privacy and reviewer access sit below. All pages opens the full directory above this guide."
         items={FOOT}
       />
 
