@@ -1,59 +1,131 @@
-/* One short reading, with the supporting material opened by the reader. */
-.x-equals-x-page {
-  font-family: var(--font-reading);
+/* Scoped to this page: the shared reading rules must not turn the signal back into serif prose. */
+#x-equals-x {
+  --font-reading: var(--font-body);
+  --font-display: var(--font-body);
   color: rgb(var(--record-ink));
-  max-inline-size: 48ch;
-  margin-inline: auto;
+  font-family: var(--font-body);
   padding-bottom: 1.5rem;
 }
-
-.record-pages .x-equals-x-page :is(p, li, dd) {
-  font-family: var(--font-reading) !important;
+#x-equals-x :is(p, li, dd, figcaption) {
+  font-family: var(--font-body) !important;
   font-size: 1rem !important;
-  line-height: 1.65 !important;
+  line-height: 1.6 !important;
   letter-spacing: normal;
+  max-inline-size: none;
   overflow-wrap: break-word;
 }
-
-.record-pages .x-equals-x-page .record-meta,
-.record-pages .x-equals-x-page figcaption {
-  font-size: .8125rem !important;
-  line-height: 1.6 !important;
+#x-equals-x :is(h1, h2, h3, h4) {
+  font-family: var(--font-body) !important;
+  font-weight: 650 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.035em !important;
 }
-
-.record-pages .x-equals-x-page :is(h1, h2) {
-  line-height: 1.15 !important;
-}
-
-.record-pages .x-equals-x-page blockquote {
-  font-size: 1.25rem !important;
+#x-equals-x h2 { font-size: 1.6875rem; }
+#x-equals-x .covenant-kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: .75rem !important;
   line-height: 1.5 !important;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
-
-.x-equals-x-page .covenant-detail > summary {
-  cursor: pointer;
-  padding-block: .875rem;
-  font-size: 1rem;
-  color: rgb(var(--record-ink));
+#x-equals-x :is(.covenant-caption, .record-meta, figcaption) {
+  font-size: .8125rem !important;
+  line-height: 1.55 !important;
 }
-
-.x-equals-x-page .covenant-detail > summary::marker {
-  color: rgb(var(--record-mark));
+#x-equals-x .covenant-signal {
+  position: relative;
+  isolation: isolate;
+  margin: -1rem -1rem 0;
+  padding: 1.25rem 1rem 1.5rem;
+  overflow: hidden;
+  color: rgb(var(--record-paper));
+  background: rgb(var(--record-ink));
+  border-bottom: 4px solid rgb(var(--record-signal));
 }
-
-.x-equals-x-page .covenant-detail > summary:focus-visible {
-  outline: 2px solid rgb(var(--record-mark));
-  outline-offset: 4px;
+#x-equals-x .covenant-signal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .045;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgb(var(--record-paper)) 3px, rgb(var(--record-paper)) 4px);
 }
-
-/* No pulsing ink, drawing effects, progress marks or moving text on this page. */
-.x-equals-x-page,
-.x-equals-x-page * {
-  animation: none !important;
-  transition: none !important;
+.covenant-signal-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.covenant-signal-top > span:first-child { color: rgb(var(--record-signal)); }
+.covenant-signal-top > span:last-child { color: rgb(var(--record-paper) / .65); }
+#x-equals-x .covenant-equation {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: .18em;
+  margin: 2.5rem 0 1.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: clamp(5rem, 23vw, 8rem);
+  font-weight: 800 !important;
+  line-height: 1 !important;
+  letter-spacing: -.08em !important;
+  color: rgb(var(--record-signal));
 }
-
-html[data-tongue="th"] #root .x-equals-x-page :is(p, li, dd, blockquote) {
-  line-height: 1.95 !important;
-  overflow-wrap: normal !important;
+.covenant-equation > span:nth-child(2) { color: rgb(var(--record-paper)); }
+#x-equals-x .covenant-signal h2 { text-align: center; font-size: clamp(1.6875rem, 5.5vw, 2.75rem); }
+#x-equals-x .covenant-signal-copy { max-inline-size: 37ch; margin: 1.25rem auto 0; text-align: center; color: rgb(var(--record-paper) / .88); }
+#x-equals-x .covenant-limit { margin-top: 1rem; color: rgb(var(--record-paper) / .67); text-align: center; }
+#x-equals-x .covenant-dedication { margin-top: 2rem; color: rgb(var(--record-paper) / .73); text-align: center; }
+.covenant-body { padding-top: 2rem; }
+.covenant-founder { margin-bottom: 2.5rem; max-inline-size: 54ch; }
+.covenant-founder a { text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-terms { margin: 1.5rem 0 0; }
+.covenant-term { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: .75rem; padding-block: 1rem; }
+.covenant-term::before { content: attr(data-number); grid-row: span 2; padding-top: .2rem; color: rgb(var(--record-red)); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8125rem; }
+.covenant-term dt { grid-column: 2; font-size: 1.25rem; font-weight: 650; letter-spacing: -.025em; }
+#x-equals-x .covenant-term dd { grid-column: 2; margin-top: .4rem; color: rgb(var(--record-muted)); }
+.covenant-example { margin-block: 2.75rem; }
+#x-equals-x .covenant-example h2 { margin: .5rem 0 1.5rem; }
+.covenant-entry { padding: 1.25rem; background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-ink)); }
+#x-equals-x .covenant-entry h3 { margin-top: .5rem; font-size: 1.5rem; }
+.covenant-entry h3 a { text-decoration: none; }
+.covenant-trace { list-style: none; margin-top: 1.5rem; padding: 0; }
+#x-equals-x .covenant-trace li { position: relative; padding: 0 0 1.25rem 1.6rem; border-inline-start: 1px solid rgb(var(--record-ink) / .25); }
+#x-equals-x .covenant-trace li:last-child { padding-bottom: 0; border-color: transparent; }
+.covenant-trace li::before { content: ''; position: absolute; inset-inline-start: -.28rem; top: .3rem; width: .5rem; height: .5rem; background: rgb(var(--record-red)); border-radius: 50%; }
+.covenant-trace-label { display: block; margin-bottom: .3rem; color: rgb(var(--record-muted)); }
+.covenant-trace a { text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-entry-open { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3rem; margin-top: 1rem; font-weight: 600; }
+.covenant-share { margin-block: 2rem; text-align: center; }
+#x-equals-x .covenant-share > button { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); border-color: rgb(var(--record-ink)); font-family: var(--font-body); font-size: 1rem; font-weight: 600; text-transform: none; }
+#x-equals-x .covenant-share > p { margin-top: .75rem; color: rgb(var(--record-muted)); }
+.covenant-detail > summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; min-height: 3.5rem; font-size: 1.125rem; font-weight: 600; }
+.covenant-detail > summary::-webkit-details-marker { display: none; }
+.covenant-detail > summary::after { content: '+'; font-size: 1.5rem; font-weight: 400; color: rgb(var(--record-red)); }
+.covenant-detail[open] > summary::after { content: '−'; }
+#x-equals-x .covenant-detail > summary:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
+.covenant-check { margin-top: 1.5rem; }
+.covenant-check dt { font-weight: 650; font-size: 1.125rem; }
+.covenant-check dd { margin-top: .4rem; color: rgb(var(--record-muted)); }
+.covenant-check a { display: inline-flex; align-items: center; min-height: 2.75rem; color: rgb(var(--record-ink)); text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-reading { margin-top: 2.5rem; padding-top: 1.5rem; }
+.covenant-book { display: grid; grid-template-columns: minmax(0, 5rem) minmax(0, 1fr); align-items: start; gap: 1.25rem; margin-top: 1.25rem; }
+.covenant-book img { display: block; width: 100%; height: auto; box-shadow: .3rem .4rem 0 rgb(var(--record-ink) / .12); }
+#x-equals-x .covenant-book h3 { font-size: 1.5rem; }
+#x-equals-x .covenant-book p { margin-top: .4rem; }
+.covenant-book a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+#x-equals-x, #x-equals-x * { animation: none !important; transition: none !important; }
+@media (min-width: 640px) {
+  #x-equals-x .covenant-signal { padding: 1.5rem 2rem 2rem; }
+  .covenant-body { padding-inline: 1rem; }
+  .covenant-book { grid-template-columns: 7rem minmax(0, 1fr); }
+}
+@media (min-width: 1024px) {
+  #x-equals-x .covenant-signal { margin-top: -2rem; }
+}
+html[data-tongue="th"] #x-equals-x { --font-body: 'Noto Serif Thai', Thonburi, serif; }
+html[data-tongue="th"] #root #x-equals-x :is(p, li, dd, blockquote) { line-height: 1.95 !important; overflow-wrap: normal !important; }
+html[data-tongue="th"] #x-equals-x .covenant-kicker { letter-spacing: 0; }
+html[data-tongue="chr"] #x-equals-x { --font-body: var(--font-script); }
+@media print {
+  #x-equals-x .covenant-signal { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+  #x-equals-x .covenant-signal :is(p, span) { color: inherit; }
+  #x-equals-x .covenant-signal::before { content: none; }
+  .covenant-share { display: none; }
 }

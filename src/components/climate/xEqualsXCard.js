@@ -1,45 +1,10 @@
-// ── THE COVENANT, AS ONE PICTURE ───────────────────────────────────────────────
-// The page could not be passed on, which for a covenant is the whole point of it. Every
-// wire entry and every track already leaves as a card; the one page that says what the
-// record is for had no card at all, so it could only travel as a screenshot with its
-// source cut off.
-//
-// What the card carries is deliberately the same four things the page promises: the mark,
-// the sentence it means, the three terms, and the empty signature line. That last one is
-// the reason it is art rather than a poster — a card that says "not yet signed by a
-// person" cannot pretend to authority, and that is exactly what makes it worth sending.
-//
-// Drawn on the reader's own device, like every other card here. Nothing of theirs leaves
-// it and no server draws anything.
+import { COVENANT, COVENANT_TERMS } from '@/components/climate/xEqualsXCopy';
 
 const W = 1080;
 const H = 1350;
-
-const PAPER = '#f4efe4';
-const INK = '#141210';
-const MARK = '#cc2d2a';
-const MUTED = '#5a5246';
-
-// A canvas cannot read a CSS token and cannot wait for a webfont, so the card asks for the
-// record's own faces and falls back to two that are on every phone on earth. A picture that
-// arrives set in the wrong face is worse than one that arrives slightly plainer.
-const SERIF = "'Source Serif 4', Georgia, 'Times New Roman', serif";
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
-
 const PAD = 84;
 const MAXW = W - PAD * 2;
-
-const TERMS = [
-  ['01', 'The source stays with the work.'],
-  ['02', 'Corrections stay visible.'],
-  ['03', 'Money does not buy authority.'],
-];
-
-// The card says what the page now opens with, so the thing Bri sends and the thing a
-// reader lands on are the same sentence. It has to be true standing alone, in a message
-// thread, with no page around it: what x = x refuses, and what it holds instead.
-const MEANING =
-  'A solution is a solution. An action is an action. A person is a person. Nothing here is ranked by who shouts loudest, or lifted because somebody paid.';
+const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 
 const letterSpacing = (g, value) => {
   if ('letterSpacing' in g) g.letterSpacing = value;
@@ -67,95 +32,65 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   canvas.width = W;
   canvas.height = H;
   const g = canvas.getContext('2d');
+  const theme = getComputedStyle(document.documentElement);
+  const color = (name) => `rgb(${theme.getPropertyValue(`--record-${name}`).trim()})`;
+  const paper = color('paper');
+  const ink = color('ink');
+  const signal = color('signal');
+  const muted = color('muted');
+  const sans = theme.getPropertyValue('--font-body').trim() || 'system-ui, sans-serif';
 
-  g.fillStyle = PAPER;
+  g.fillStyle = paper;
   g.fillRect(0, 0, W, H);
-
+  g.fillStyle = ink;
+  g.fillRect(0, 0, W, 780);
+  g.fillStyle = signal;
+  g.fillRect(0, 772, W, 8);
   g.textBaseline = 'alphabetic';
-
-  // ── the imprint line: where this comes from, and what it is ──
-  g.font = `600 26px ${MONO}`;
-  letterSpacing(g, '5px');
-  g.fillStyle = MUTED;
-  g.textAlign = 'left';
-  g.fillText('THE RECORD OF THE TIME', PAD, 104);
-  g.textAlign = 'right';
-  g.fillStyle = MARK;
-  g.fillText('THE COVENANT', W - PAD, 104);
-  letterSpacing(g, '0px');
-
-  // ── the mark: three characters, at the size a mark takes ──
-  // Measured rather than guessed, so no device draws it wider than the sheet.
-  let markSize = 300;
-  g.font = `700 ${markSize}px ${SERIF}`;
-  const markText = 'x\u00A0=\u00A0x';
-  if (g.measureText(markText).width > MAXW) {
-    markSize = Math.floor((markSize * MAXW) / g.measureText(markText).width);
-    g.font = `700 ${markSize}px ${SERIF}`;
-  }
-  g.fillStyle = MARK;
-  g.textAlign = 'center';
-  g.fillText(markText, W / 2, 440);
-  g.textAlign = 'left';
-
-  // ── the sentence, and the rule it sits under ──
-  g.fillStyle = MARK;
-  g.fillRect(PAD, 508, MAXW, 3);
-
-  g.font = `400 72px ${SERIF}`;
-  g.fillStyle = INK;
-  g.fillText('Nobody above anybody.', PAD, 606);
-
-  g.font = `400 34px ${SERIF}`;
-  g.fillStyle = MUTED;
-  wrap(g, MEANING, MAXW).slice(0, 4).forEach((line, i) => {
-    g.fillText(line, PAD, 678 + i * 48);
-  });
-
-  // ── the three terms, numbered, as on the page ──
-  let y = 900;
-  TERMS.forEach(([no, term]) => {
-    g.font = `600 26px ${MONO}`;
-    letterSpacing(g, '3px');
-    g.fillStyle = MARK;
-    g.fillText(no, PAD, y);
-    letterSpacing(g, '1px');
-    g.fillStyle = INK;
-    g.fillText(term.toUpperCase(), PAD + 74, y);
-    y += 62;
-  });
-  letterSpacing(g, '0px');
-
-  // ── the unsigned line: the reason this cannot pretend to authority ──
-  g.fillStyle = 'rgba(20,18,16,0.22)';
-  g.fillRect(PAD, 1148, MAXW, 2);
-
-  g.font = `600 26px ${MONO}`;
+  g.font = `600 25px ${MONO}`;
+  g.fillStyle = signal;
   letterSpacing(g, '4px');
-  g.fillStyle = MUTED;
-  const unsigned = 'NOT YET SIGNED BY A PERSON';
-  g.fillText(unsigned, PAD, 1206);
-  // the ruled space where a signature goes, left empty on purpose
-  const unsignedWidth = g.measureText(unsigned).width;
-  g.fillStyle = 'rgba(20,18,16,0.35)';
-  g.fillRect(PAD + unsignedWidth + 28, 1190, MAXW - unsignedWidth - 28, 2);
+  g.fillText('THE PRINCIPLE', PAD, 92);
+  g.fillStyle = paper;
+  g.textAlign = 'right';
+  g.fillText('RECORD OF THE TIME', W - PAD, 92);
   letterSpacing(g, '0px');
 
-  // ── where to find it ──
+  g.font = `800 250px ${MONO}`;
+  g.textAlign = 'center';
+  const step = 180;
+  ['x', '=', 'x'].forEach((mark, index) => {
+    g.fillStyle = index === 1 ? paper : signal;
+    g.fillText(mark, W / 2 + (index - 1) * step, 350);
+  });
+  g.fillStyle = paper;
+  g.font = `700 76px ${sans}`;
+  g.fillText(COVENANT.title, W / 2, 478);
+  g.fillText(COVENANT.distinction, W / 2, 566);
+  g.font = `400 32px ${sans}`;
+  wrap(g, COVENANT.meaning, MAXW).forEach((line, index) => {
+    g.fillText(line, W / 2, 638 + index * 44);
+  });
+
+  g.textAlign = 'left';
+  COVENANT_TERMS.forEach(({ number, title }, index) => {
+    const y = 872 + index * 91;
+    g.font = `500 27px ${MONO}`;
+    g.fillStyle = muted;
+    g.fillText(number, PAD, y);
+    g.font = `600 43px ${sans}`;
+    g.fillStyle = ink;
+    g.fillText(title, PAD + 83, y);
+  });
+  g.font = `400 29px ${sans}`;
+  g.fillStyle = muted;
+  wrap(g, COVENANT.limit, MAXW).forEach((line, index) => g.fillText(line, PAD, 1158 + index * 40));
+  g.font = `500 24px ${MONO}`;
+  g.fillText('NOT YET SIGNED BY A PERSON', PAD, 1244);
   const address = String(origin || '').replace(/^https?:\/\//, '');
   if (address) {
-    g.font = `500 23px ${MONO}`;
-    letterSpacing(g, '1px');
-    g.fillStyle = MUTED;
-    g.fillText(address, PAD, 1298);
+    g.font = `400 24px ${sans}`;
+    wrap(g, address, MAXW).forEach((line, index) => g.fillText(line, PAD, 1303 + index * 29));
   }
-  g.font = `700 23px ${MONO}`;
-  letterSpacing(g, '4px');
-  g.fillStyle = MARK;
-  g.textAlign = 'right';
-  g.fillText('x = x', W - PAD, 1298);
-  g.textAlign = 'left';
-  letterSpacing(g, '0px');
-
   return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
 }

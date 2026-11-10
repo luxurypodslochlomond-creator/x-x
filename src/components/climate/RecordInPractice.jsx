@@ -13,24 +13,29 @@ export default function RecordInPractice() {
   const entry = data?.items?.[0];
   const sourceUrl = /^https?:\/\//i.test(entry?.source_url || '') ? entry.source_url : null;
   return (
-    <section aria-labelledby="record-in-practice" className="my-10 border-y border-record-ink/30 py-6">
-      <h2 id="record-in-practice" className="font-body text-xl text-record-ink">Here is one entry. Follow it.</h2>
-      <p className="mt-3 text-record-muted">Read the account, then go to its source. Decide what it supports.</p>
-      {isPending && <p role="status" className="record-meta mt-5 text-record-muted">Opening an entry from the record…</p>}
-      {isError && <p role="alert" className="record-meta mt-5 text-record-red">This example could not be loaded. The record is still linked below.</p>}
-      {!isPending && !isError && !entry && <p className="record-meta mt-5 text-record-muted">No published solution to show yet.</p>}
+    <section aria-labelledby="record-in-practice" className="covenant-example">
+      <p className="covenant-kicker text-record-muted">From the record</p>
+      <h2 id="record-in-practice">One entry. Its evidence.</h2>
+      {isPending && <p role="status" className="covenant-caption text-record-muted">Opening an entry from the record…</p>}
+      {isError && <p role="alert" className="covenant-caption text-record-red">The example could not be loaded. <Link to="/TogetherChangeClimate" className="underline">Open the record instead.</Link></p>}
+      {!isPending && !isError && !entry && <p className="covenant-caption text-record-muted">No published solution to show yet.</p>}
       {entry && (
-        <article className="mt-6 border-l-2 border-record-mark pl-4 sm:pl-6">
-          <div className="record-meta mb-3 text-record-muted">From the record{entry.country ? ` · ${entry.country}` : ''}</div>
-          <h3 className="font-body text-2xl leading-snug text-record-ink">
-            <Link to={`/ClimateDetail/solution/${entry.id}`} className="underline decoration-record-ink/25 underline-offset-4 hover:text-record-red">{entry.title}</Link>
-          </h3>
-          <p className="mt-4">{entry.summary}</p>
-          <p className="record-meta mt-4 text-record-muted">Source: {entry.source_name || 'Not named'}<br />{STANDING[entry.verification] || 'Standing not stated'} · {entry.editor ? `Signed by ${entry.editor}` : 'No editor signature yet'}</p>
-          {sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center text-base text-record-red underline underline-offset-4">Read the original source <span className="sr-only"> (opens a new tab)</span></a>}
+        <article className="covenant-entry">
+          {entry.country && <p className="covenant-kicker text-record-muted">{entry.country}</p>}
+          <h3><Link to={`/ClimateDetail/solution/${entry.id}`}>{entry.title}</Link></h3>
+          <p className="mt-3">{entry.summary}</p>
+          <ol className="covenant-trace" aria-label="Source, evidence and editorial signature">
+            <li>
+              <span className="covenant-trace-label covenant-kicker">Source</span>
+              {sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{entry.source_name || 'Original source'} ↗<span className="sr-only"> (opens a new tab)</span></a> : <span>{entry.source_name || 'Not named'}</span>}
+            </li>
+            <li><span className="covenant-trace-label covenant-kicker">Evidence</span>{STANDING[entry.verification] || 'Standing not stated'}</li>
+            <li><span className="covenant-trace-label covenant-kicker">Editor</span>{entry.editor ? `Signed by ${entry.editor}` : 'Not yet signed'}</li>
+          </ol>
+          {entry.correction_note && <p className="covenant-caption mt-4 text-record-muted">Correction: {entry.correction_note}</p>}
+          <Link to={`/ClimateDetail/solution/${entry.id}`} className="covenant-entry-open"><span>Read the full entry</span><span aria-hidden="true">→</span></Link>
         </article>
       )}
-      <Link to="/TogetherChangeClimate" className="mt-6 inline-flex min-h-11 items-center text-base font-semibold text-record-ink underline underline-offset-4">Open the record →</Link>
     </section>
   );
 }
