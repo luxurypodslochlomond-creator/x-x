@@ -70,7 +70,7 @@ export default function ClimateReachPlace() {
       />
 
       {/* Big number */}
-      <div className="px-5 lg:px-10 py-8 lg:py-12 bg-[#141210]">
+      <div className="px-4 lg:px-10 py-8 lg:py-12 bg-[#141210]">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
           Together we can change the course of climate change
         </p>
@@ -94,7 +94,7 @@ export default function ClimateReachPlace() {
       </div>
 
       {/* Honest framing */}
-      <div className="px-5 lg:px-10 py-4 lg:py-6 bg-[#f7f1e5] border-b border-[#141210]/10">
+      <div className="px-4 lg:px-10 py-4 lg:py-6 bg-[#f7f1e5] border-b border-[#141210]/10">
         <div className="flex items-start gap-2.5">
           <Heart className="w-4 h-4 text-[#b3261e] flex-shrink-0 mt-0.5" />
           <p className="text-[10px] text-[#5a5246] leading-relaxed">

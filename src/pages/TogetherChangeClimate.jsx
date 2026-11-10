@@ -518,7 +518,7 @@ export default function TogetherChangeClimate() {
             left over the painting is only the scrim that holds the title up. */}
 
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
-        <div className="relative z-10 bg-[#efe7d6] px-5 lg:px-10 py-3 flex items-center justify-between gap-3"
+        <div className="relative z-10 bg-[#efe7d6] px-4 lg:px-10 py-3 flex items-center justify-between gap-3"
           style={{ animation: 'twcc-enter .25s ease-out both' }}>
           <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
           <button
@@ -532,7 +532,7 @@ export default function TogetherChangeClimate() {
         </div>
 
         {/* Ink band */}
-        <div className="relative z-10 px-5 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
+        <div className="relative z-10 px-4 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
           {/* The record's own name — the one heading on the record allowed to lead.
               It was built so the phone's width beat the floor: 11vw gave 43px on a
               393px screen and 47px at 430px, which made this the largest opening
@@ -558,7 +558,7 @@ export default function TogetherChangeClimate() {
              nothing left for the blue to point at. The record opens deep and stays deep. */}
         {/* The flicker is gone. A sentence that blinks is a trick, and a trick is the
             cheapest way to look alive; the line reads better held steady. */}
-        <div className="relative z-10 bg-[#241d16] px-5 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
+        <div className="relative z-10 bg-[#241d16] px-4 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
           {/* The record's own sentence, in its own voice — sentence case, on the deep
               band. Everything else in this band stays as it was. */}
           <p className="text-[16px] leading-[1.7] max-w-[360px] lg:max-w-[620px] text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>{t.sub}</p>

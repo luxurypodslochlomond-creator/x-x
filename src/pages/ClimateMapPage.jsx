@@ -41,7 +41,7 @@ export default function ClimateMapPage() {
       <div className="relative bg-[#241d16] overflow-hidden">
         <RecordCover position="center 32%" strength={0.5} blend="screen" />
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.5), rgba(36,29,22,.72) 55%, #241d16 100%)' }} />
-        <div className="relative z-10 px-6 lg:px-10 py-9 lg:py-12 flex flex-col items-center justify-center gap-3 text-center">
+        <div className="relative z-10 px-4 lg:px-10 py-9 lg:py-12 flex flex-col items-center justify-center gap-3 text-center">
           <SignalBeacon size={40} color="#7fc9e4" />
           <h1
             className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"

@@ -154,7 +154,7 @@ export default function ClimateImpact() {
 
       {/* ── THE RECEIPTS — two columns on a desktop, one calm column on a phone ── */}
       {regions.length > 0 && (
-        <div id="nations" className="px-5 lg:px-8 py-6 bg-[#efe7d6]">
+        <div id="nations" className="px-4 lg:px-8 py-6 bg-[#efe7d6]">
           <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="w-4 h-4 text-[#b3261e]" />
@@ -181,7 +181,7 @@ export default function ClimateImpact() {
       )}
 
       {countries.length > 0 && (
-        <div id="countries" className={`px-5 lg:px-8 py-6 bg-[#efe7d6] ${regions.length ? 'border-t border-[#141210]/10' : ''}`}>
+        <div id="countries" className={`px-4 lg:px-8 py-6 bg-[#efe7d6] ${regions.length ? 'border-t border-[#141210]/10' : ''}`}>
           <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <Users className="w-4 h-4 text-[#1e3a2b]" />
@@ -216,7 +216,7 @@ export default function ClimateImpact() {
 
       {/* Self-identification — "Where are you reading from?" */}
       <div className="bg-[#f7f1e5] border-y border-[#141210]/10">
-        <div className="mx-auto max-w-2xl px-5 py-6">
+        <div className="mx-auto max-w-2xl px-4 py-6">
           <div className="flex items-start gap-2.5 mb-3">
             <Heart className="w-4 h-4 text-[#b3261e] flex-shrink-0 mt-0.5" />
             <div>
@@ -261,7 +261,7 @@ export default function ClimateImpact() {
       </div>
 
       {total === 0 && (
-        <div className="px-5 py-16 text-center">
+        <div className="px-4 py-16 text-center">
           <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
             The record is live. As people around the world read it, this page will come alive — every country, every nation, every read counted.
@@ -273,7 +273,7 @@ export default function ClimateImpact() {
       )}
 
       {/* Footer */}
-      <div className="mx-auto max-w-2xl px-5 py-6 border-t-2 border-[#141210]/10">
+      <div className="mx-auto max-w-2xl px-4 py-6 border-t-2 border-[#141210]/10">
         <p className="text-[9px] font-mono text-[#5a5246] text-center leading-relaxed">
           No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry. A place is counted once per entry per half hour, so what you see here is reads counted — never people, and never inflated. The signal, not the surveiller.
         </p>

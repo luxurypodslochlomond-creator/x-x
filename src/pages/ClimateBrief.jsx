@@ -86,7 +86,7 @@ export default function ClimateBrief() {
         </Link>
       </div>
 
-      <div className="brief-page max-w-2xl mx-auto px-6 py-10">
+      <div className="brief-page max-w-2xl mx-auto px-4 py-10">
 
         {/* ── LETTERHEAD ── */}
         <div className="border-b-2 border-[#1a1612] pb-6 mb-8">
