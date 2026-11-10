@@ -28,6 +28,26 @@
   letter-spacing: .12em;
   text-transform: uppercase;
 }
+/* One label for every section on the page, with a short stroke of the borrowed red in
+   front of it. It is the only repeated mark here, and it is what stops six sections from
+   reading as six pieces of work. */
+#x-equals-x .covenant-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: .6875rem !important;
+  line-height: 1.5 !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-label::before {
+  content: '';
+  display: inline-block;
+  width: 1.15rem;
+  height: 2px;
+  margin-inline-end: .6rem;
+  vertical-align: middle;
+  background: rgb(var(--record-mark));
+}
 #x-equals-x :is(.covenant-caption, .record-meta, figcaption) {
   font-size: .8125rem !important;
   line-height: 1.55 !important;
@@ -73,13 +93,30 @@
 #x-equals-x .covenant-limit { margin-top: 1rem; color: rgb(var(--record-paper) / .67); text-align: center; }
 #x-equals-x .covenant-dedication { margin-top: 2rem; color: rgb(var(--record-paper) / .73); text-align: center; }
 .covenant-body { padding-top: 2rem; }
+#x-equals-x .covenant-body h2 { margin-top: .35rem; }
 .covenant-founder { margin-bottom: 2.5rem; max-inline-size: 54ch; }
 .covenant-founder a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
-.covenant-terms { margin: 1.5rem 0 0; }
-.covenant-term { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: .75rem; padding-block: 1rem; }
-.covenant-term::before { content: attr(data-number); grid-row: span 2; padding-top: .2rem; color: rgb(var(--record-red)); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8125rem; }
-.covenant-term dt { grid-column: 2; font-size: 1.25rem; font-weight: 650; letter-spacing: -.025em; }
-#x-equals-x .covenant-term dd { grid-column: 2; margin-top: .4rem; color: rgb(var(--record-muted)); }
+/* ── THE COMMITMENTS, SET AS A PLATE ──────────────────────────────────────────
+   They were three small numbered lines, the number at caption size, and that is what
+   made the heart of the page look like a footnote. A heavy rule opens the block, a
+   hairline closes each commitment, and the number is set large in the borrowed red so
+   the eye lands on 01 · 02 · 03 before it lands on a word. One edge for every title and
+   every sentence: nothing is indented differently from anything else. */
+.covenant-terms { margin: 1.75rem 0 0; border-top: 2px solid rgb(var(--record-ink)); }
+.covenant-term { display: grid; grid-template-columns: 3rem minmax(0, 1fr); column-gap: .9rem; padding-block: 1.35rem; border-bottom: 1px solid rgb(var(--record-ink) / .16); }
+.covenant-term::before {
+  content: attr(data-number);
+  grid-row: span 2;
+  padding-top: .1rem;
+  color: rgb(var(--record-mark));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+#x-equals-x .covenant-term dt { grid-column: 2; font-size: 1.5rem; font-weight: 700; line-height: 1.06; letter-spacing: -.035em; }
+#x-equals-x .covenant-term dd { grid-column: 2; margin-top: .45rem; color: rgb(var(--record-muted)); }
 .covenant-example { margin-block: 2.75rem; }
 #x-equals-x .covenant-example h2 { margin: .5rem 0 1.5rem; }
 .covenant-entry { padding: 1.25rem; background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-ink)); }
@@ -88,23 +125,37 @@
 .covenant-trace { list-style: none; margin-top: 1.5rem; padding: 0; }
 #x-equals-x .covenant-trace li { position: relative; padding: 0 0 1.25rem 1.6rem; border-inline-start: 1px solid rgb(var(--record-ink) / .25); }
 #x-equals-x .covenant-trace li:last-child { padding-bottom: 0; border-color: transparent; }
-.covenant-trace li::before { content: ''; position: absolute; inset-inline-start: -.28rem; top: .3rem; width: .5rem; height: .5rem; background: rgb(var(--record-red)); border-radius: 50%; }
+.covenant-trace li::before { content: ''; position: absolute; inset-inline-start: -.28rem; top: .3rem; width: .5rem; height: .5rem; background: rgb(var(--record-mark)); border-radius: 50%; }
 .covenant-trace-label { display: block; margin-bottom: .3rem; color: rgb(var(--record-muted)); }
 .covenant-trace a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
 .covenant-entry-open { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3rem; margin-top: 1rem; font-weight: 600; }
 .covenant-share { margin-block: 2rem; text-align: center; }
 #x-equals-x .covenant-share > button { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); border-color: rgb(var(--record-ink)); font-family: var(--font-body); font-size: 1rem; font-weight: 600; text-transform: none; }
 #x-equals-x .covenant-share > p { margin-top: .75rem; color: rgb(var(--record-muted)); }
-.covenant-detail > summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; cursor: pointer; list-style: none; min-height: 3.5rem; font-size: 1.125rem; font-weight: 600; }
-.covenant-detail > summary::-webkit-details-marker { display: none; }
-.covenant-detail > summary::after { content: '+'; font-size: 1.5rem; font-weight: 400; color: rgb(var(--record-red)); }
-.covenant-detail[open] > summary::after { content: '−'; }
-#x-equals-x .covenant-detail > summary:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
-.covenant-check { margin-top: 1.5rem; }
-.covenant-check dt { font-weight: 650; font-size: 1.125rem; }
-.covenant-check dd { margin-top: .4rem; color: rgb(var(--record-muted)); }
-.covenant-check a { display: inline-flex; align-items: center; min-height: 2.75rem; color: rgb(var(--record-ink)); text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
-.covenant-reading { margin-top: 2.5rem; padding-top: 1.5rem; }
+/* ── THREE LIMITS, THREE DRAWN DOORS ──────────────────────────────────────────
+   The mark is the door and the whole row is the target, drawn in the same hand as the
+   masthead, so a reader who has learnt that a drawing means a way through uses the same
+   knowledge here. No underlined sentence to hunt for at the end of a paragraph. */
+.covenant-limits-section { margin-block: 2.75rem; }
+.covenant-limits { list-style: none; margin: 1.5rem 0 0; padding: 0; border-top: 2px solid rgb(var(--record-ink)); }
+.covenant-limit { border-bottom: 1px solid rgb(var(--record-ink) / .16); }
+.covenant-limit a {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: .95rem;
+  padding-block: 1.2rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  transition: color .18s ease;
+}
+.covenant-limit a:hover { color: rgb(var(--record-mark)); }
+.covenant-limit a:focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 3px; }
+.covenant-limit-mark { display: block; padding-top: .05rem; }
+#x-equals-x .covenant-limit-says { display: block; font-size: 1rem; line-height: 1.55; }
+#x-equals-x .covenant-limit-where { display: block; margin-top: .45rem; color: currentColor; opacity: .6; }
+.covenant-limit-arrow { padding-top: .1rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.covenant-reading { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgb(var(--record-ink) / .16); }
 .covenant-book { display: grid; grid-template-columns: minmax(0, 5rem) minmax(0, 1fr); align-items: start; gap: 1.25rem; margin-top: 1.25rem; }
 .covenant-book img { display: block; width: 100%; height: auto; box-shadow: .3rem .4rem 0 rgb(var(--record-ink) / .12); }
 #x-equals-x .covenant-book h3 { font-size: 1.5rem; }

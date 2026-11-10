@@ -2,7 +2,7 @@ import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
-import XEqualsXTechnology from '@/components/climate/XEqualsXTechnology';
+import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
@@ -11,23 +11,26 @@ import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import '@/components/climate/x-equals-x-page.css';
 
+// ── ONE ARGUMENT, READ STRAIGHT DOWN ────────────────────────────────────────────
+// Nothing on this page is folded away any more. The two drop-downs held the whole of the
+// page's evidence behind a summary line, so a reader who never opened one read a poster
+// and a reader who opened one got a filing cabinet: the drawers were the reason the page
+// felt like it had been assembled rather than written.
+//
+// What is left is the order a sceptic reads in. What the principle is. What it asks of
+// this record. What it looks like on one real entry. What it still cannot do, with a
+// drawn door to the working for each limit. What has been promised. What to read next.
 export default function XEqualsX() {
   return (
     <ClimateRecordShell compact returnTo="/TogetherChangeClimate" returnLabel="Back to the record">
-      <article id="x-equals-x" className="x-equals-x-page" aria-label="The x equals x covenant">
+      <article id="x-equals-x" className="x-equals-x-page" aria-label="x = x — the principle">
         <XEqualsXOpening />
         <div className="covenant-body">
           <XEqualsXFounderNote />
           <XEqualsXWhatItAsks />
           <RecordInPractice />
-          <details className="covenant-detail" id="mechanisms">
-            <summary>The technology and its limits</summary>
-            <XEqualsXTechnology />
-          </details>
-          <details className="covenant-detail" id="recorded-commitments">
-            <summary>Recorded commitments</summary>
-            <XEqualsXResearchPanel />
-          </details>
+          <XEqualsXLimits />
+          <XEqualsXResearchPanel />
           <XEqualsXThanks />
           <div className="covenant-share">
             <ShareCardButton

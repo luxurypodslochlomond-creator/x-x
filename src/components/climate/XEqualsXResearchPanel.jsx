@@ -9,11 +9,10 @@ import RecordBand from './RecordBand';
 // in daylight instead of editing it quietly. Every promise says what it does NOT establish —
 // that line is the point, not decoration.
 //
-// The framing around them is gone. It used to be four paragraphs explaining what a promise
-// is before the reader got to a promise, and two more after the last one. The heading says
-// it, each line says its own limit, and the one thing that cannot be shortened — that none
-// of these is signed yet — is kept to a single line.
-
+// The framing around them is gone. It opened with a sentence explaining what the list was,
+// which the heading already said, and it closed with a paragraph about signatures. Each
+// promise now carries its own limit, and the one thing that cannot be shortened — nothing
+// here is signed yet — is a single line at the end of the list.
 export default function XEqualsXResearchPanel() {
   const [claims, setClaims] = useState(null);
   const [error, setError] = useState(null);
@@ -28,25 +27,23 @@ export default function XEqualsXResearchPanel() {
   }, []);
 
   return (
-    <RecordBand id="promises" label="Supporting detail" title="Recorded commitments">
-      <p>The published commitments, their sources and their stated limits.</p>
-
+    <RecordBand id="promises" label="In its own words" title="Recorded commitments">
       {error && (
-        <p className="mt-4 text-[#b3261e]">This section could not be read just now: {error}</p>
+        <p className="text-[#b3261e]">This section could not be read just now: {error}</p>
       )}
 
       {!error && claims === null && (
-        <p className="mt-4 font-mono text-[12.5px] text-[#5a5246]">Reading…</p>
+        <p className="font-mono text-[12.5px] text-[#5a5246]">Reading…</p>
       )}
 
       {!error && claims !== null && claims.length === 0 && (
-        <p className="mt-4">None are on the record yet. Until they are, this page promises nothing.</p>
+        <p>None are on the record yet. Until they are, this page promises nothing.</p>
       )}
 
       {!error && claims !== null && claims.length > 0 && (
-        <div className="mt-5">
+        <div>
           {claims.map((c) => (
-            <div key={c.id} className="border-t border-[#141210]/20 pt-4 pb-4">
+            <div key={c.id} className="border-t border-[#141210]/20 pt-4 pb-4 first:border-t-0 first:pt-0">
               <div
                 className="text-[#141210]"
                 style={{ fontFamily: 'var(--font-display)', fontSize: '17px', lineHeight: 1.3 }}
@@ -87,12 +84,12 @@ export default function XEqualsXResearchPanel() {
           ))}
 
           <p className="mt-1 border-t border-[#141210]/20 pt-3 text-[#5a5246]">
-            None is signed yet — a machine cannot sign. How an entry is actually made is kept on{' '}
+            None is signed. A machine cannot sign.{' '}
             <Link
               to="/ClimateMethod"
               className="text-record-ink underline decoration-record-mark underline-offset-2"
             >
-              How the record works
+              How an entry is made
             </Link>
             .
           </p>
