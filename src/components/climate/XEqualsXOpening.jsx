@@ -30,7 +30,7 @@ export default function XEqualsXOpening() {
         </h1>
 
         <p className="covenant-purpose">
-          <em>A solution is a solution. An action is an action. A person is a person.</em>
+          A solution is a solution. An action is an action. A person is a person.
         </p>
         <p className="covenant-hero-detail">
           <strong>No algorithm ranks them. No money amplifies them.</strong>{' '}

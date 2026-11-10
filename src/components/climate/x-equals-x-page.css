@@ -1,4 +1,5 @@
-/* Founder parity: display-serif titles, italic reading voice, 13px mono facts.
+/* Founder parity: centred opening and bands, left-aligned card content.
+   Reading text is upright; italics are reserved for the founder's direct quotation.
    This page opts out of the shared prose enlargement so each role keeps its own size. */
 #x-equals-x.covenant-page {
   position: relative;
@@ -14,7 +15,8 @@
   font-size: inherit;
   line-height: inherit;
   letter-spacing: 0;
-  text-align: start;
+  /* Follow the containing section, rather than overriding its centred alignment. */
+  text-align: inherit;
   overflow-wrap: break-word;
 }
 #x-equals-x strong { font-weight: 700; }
@@ -118,7 +120,6 @@
   text-wrap: pretty;
   color: rgb(var(--record-bone));
 }
-#x-equals-x .covenant-purpose em { font-style: italic; }
 #x-equals-x .covenant-hero-detail {
   margin: 0;
   max-inline-size: 32rem;
