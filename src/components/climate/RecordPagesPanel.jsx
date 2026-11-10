@@ -46,12 +46,16 @@ export default function RecordPagesPanel({ open, onClose }) {
         <div className="mb-3 flex shrink-0 items-start justify-between gap-4 border-b border-record-ink pb-2.5">
           <div>
             <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">The record</p>
-            {/* It has been called Contents, then Index, and now Every door. Contents was
-                accurate and flat; Index was wrong, because an index is alphabetical and
-                there is not one here. The mark that opens this sheet is called Doors, so the
-                sheet it opens is named for the same thing — and "every door" says the promise
-                out loud: nothing is behind a guess, nothing is past the edge of the glass. */}
-            <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[42px]">Every door</h1>
+            {/* It has been called Contents, then Index, then Every door — and "every door" was
+                the one word on this sheet that was not true. The music and the support page
+                came off the record's doors at the founder's request on 9 November, and the
+                handover sheet is behind a key, so three doors exist that this sheet does not
+                draw. A keeper can see the gap; a sceptic would find it first.
+
+                "Every open door" is true and is the same promise said honestly: everything
+                drawn here opens to anybody who taps it, nothing is behind a guess, and nothing
+                is past the edge of the glass. What is not open is not claimed. */}
+            <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[42px]">Every open door</h1>
           </div>
           <button type="button" autoFocus onClick={onClose}           aria-label="Close every door" className="rec-art-door">
             <span className="rec-art-drawing" aria-hidden="true">

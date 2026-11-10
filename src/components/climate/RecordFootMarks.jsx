@@ -211,7 +211,14 @@ export function MarkSeal({ size = 26, className = '' }) {
   );
 }
 
-// The person who agrees to carry the record. A key handed over, not a crown.
+// The room the record answers to. A key handed over, not a crown.
+//
+// This was drawn for hosting the record and stayed on the host's door while the keeper's
+// room borrowed a key from somewhere else — so the same drawing opened two doors, which is
+// the one thing a mark may never do. The host now carries "what changes hands", and this
+// key belongs to one room: the keeper's, on the masthead, in this sheet, and here at the
+// foot of every page, where the keeper's door used to be a plain square beside sixteen
+// engravings.
 export function MarkHost({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">

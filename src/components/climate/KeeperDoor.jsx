@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
+import { MarkHost } from '@/components/climate/RecordFootMarks';
 
 // The way in for the people who keep the record.
 //
@@ -25,10 +26,12 @@ export default function KeeperDoor() {
         hasKey ? 'text-record-red' : 'text-record-muted'
       }`}
     >
-      <span
-        aria-hidden="true"
-        className="block h-[6px] w-[6px] shrink-0 bg-current opacity-60"
-      />
+      {/* The same key the sheet draws. It was a six-pixel square here — a full stop beside
+          a room's name, at the foot of every page and on the guide's index, while every
+          neighbouring door had an engraving. One door, one drawing, in all three places. */}
+      <span aria-hidden="true" className="shrink-0">
+        <MarkHost size={18} />
+      </span>
       {hasKey ? 'The keeper’s room' : 'Keeper’s room — sign in'}
     </Link>
   );

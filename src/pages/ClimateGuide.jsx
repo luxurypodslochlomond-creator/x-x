@@ -24,9 +24,9 @@ import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 // the manual on the record says. Nothing is added for the card and nothing is dropped.
 const BUTTONS_CARD = {
   id: 'the-buttons',
-  title: 'Index & guide',
-  headline: 'Index & guide — every way through the record',
-  marker: 'Every way through the record · nothing hidden',
+  title: 'The guide',
+  headline: 'The guide — every control on the record',
+  marker: 'Every control, written out · and where it leads',
   body: 'Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there.',
   inside: [
     'All public pages',
@@ -179,8 +179,8 @@ export default function ClimateGuide() {
   return (
     <ClimateRecordShell
       compact
-      eyebrow="The record · every door"
-      title="Contents"
+      eyebrow="The record · the way through"
+      title="The guide"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
       footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."

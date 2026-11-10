@@ -58,7 +58,12 @@ export const FOOTER_NAV = [
   { label: 'Why this record', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
-  { label: 'Contents', to: '/ClimateGuide', what: 'Every way through the record, on one screen.' },
+  // "Contents" pointed here, and this is not the contents — the contents is the sheet the
+  // masthead's Doors mark opens. This is the written guide: every control on the record, in
+  // the order a reader meets it, and where each one leads. A name that promises one thing
+  // and delivers another is the only kind of dishonesty this record can actually commit, so
+  // the label now says what is behind it.
+  { label: 'The guide', to: '/ClimateGuide', what: 'Every control on the record, written out, and where each one leads.' },
 ];
 
 // ── THE REST OF THE BOOK ───────────────────────────────────────────────────────
