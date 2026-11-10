@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { CONTENT_GROUPS } from '@/components/climate/recordFooterLinks';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
+import { useRecordCapacity } from '@/components/climate/useKeeper';
 import '@/components/climate/record-navigator.css';
 
 // ── THE INDEX AS A PLATE OF DOORS, NOT A LIST OF NAMES ──────────────────────────
@@ -18,10 +19,20 @@ import '@/components/climate/record-navigator.css';
 // both read the same list and the same marks.
 export default function RecordIndexPlate({ onNavigate }) {
   const { pathname } = useLocation();
+  const { isKeeper, isChecker } = useRecordCapacity();
+
+  // ── THE SHED MOVED HERE WITH THE RULEBOOK ──────────────────────────────────────
+  // The masthead is six marks with nothing past the edge of the glass, so the keeper's own
+  // room came off it. It is still a door, and it is still the record's rather than the
+  // building's: this sheet is where a keeper opens it, and a reader who holds no keys is
+  // never shown a door that would turn them away.
+  const groups = isKeeper || isChecker
+    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: 'The shed', to: '/ClimateKeeperRoom', what: "The keeper's own room." }] }]
+    : CONTENT_GROUPS;
 
   return (
     <div className="text-record-ink">
-      {CONTENT_GROUPS.map(({ title, doors }, part) => (
+      {groups.map(({ title, doors }, part) => (
         <section key={title} className="mb-2.5 first:mt-0">
           <h2 className="mb-1 flex items-center gap-1.5">
             <span className="font-mono text-[9px] leading-none tabular-nums text-record-mark">

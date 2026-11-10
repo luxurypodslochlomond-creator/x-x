@@ -110,6 +110,68 @@
 }
 html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
 
+/* ── THAI IS SET AS THAI ──────────────────────────────────────────────────────────
+   Three things break when Thai is dropped into a page whose rhythm was measured on Latin,
+   and every one of them was wrong on this record until this rule existed.
+
+   The voice. Thai now arrives in Noto Serif Thai (declared in index.css), so the sentence a
+   Bangkok reader meets is the same cut as the sentence a Glasgow reader meets. Source Serif
+   stays first in the list on purpose: a browser picks per character, so the Latin words on a
+   Thai page — names, sources, x = x, every URL — keep the record's own lettering and only the
+   Thai characters swap. One page, two scripts, one voice.
+
+   The marks. Thai stacks: an above-vowel sits over the consonant, and a tone mark sits over
+   that vowel. At the record's 1.04 leading the tone mark of one line lands in the vowels of
+   the line above, which is the single most obvious "nobody looked at this" a page can wear.
+   Headlines open up to 1.45 and body copy to 1.95 — generous by Latin standards, ordinary by
+   Thai ones, where the marks occupy the line above the letters by design.
+
+   The capitals. There are none in Thai, so `uppercase tracking-[0.3em]` did nothing to the
+   glyphs and simply scattered the words across three-tenths of an em of air, which reads as
+   broken spacing rather than as a label. Tracking goes to zero across the record in Thai,
+   including the small-type floor: a label in Thai is a label by size and colour, the way a
+   label in a Thai newspaper is.
+
+   Nothing here touches any other tongue: every rule is behind html[data-tongue="th"], which
+   is only ever set when a reader has chosen Thai. */
+html[data-tongue="th"] .climate-record {
+  --record-display: 'Source Serif 4', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, serif;
+}
+html[data-tongue="th"] .record-pages {
+  --font-reading: 'Source Serif 4', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, system-ui, serif;
+}
+/* An ID beats the !important rhythm rules above without having to repeat them, and it keeps
+   the whole override in one place instead of sprinkling !important through the file. */
+html[data-tongue="th"] #root .record-pages :is(p, blockquote, li):not(.font-mono):not(.uppercase) {
+  font-size: clamp(1.125rem, 1.06rem + .32vw, 1.25rem) !important;
+  line-height: 1.95 !important;
+}
+html[data-tongue="th"] .record-pages :is(h1, h2) { line-height: 1.45 !important; }
+html[data-tongue="th"] .record-pages :is(h3, h4) { line-height: 1.55 !important; }
+html[data-tongue="th"] .record-pages blockquote { line-height: 1.8 !important; }
+html[data-tongue="th"] #root .record-pages :is(
+  .uppercase,
+  [class*="tracking-"],
+  [class*="text-[7"],
+  [class*="text-[8"],
+  [class*="text-[9"],
+  [class*="text-[10px]"]
+) {
+  letter-spacing: 0 !important;
+}
+/* A display heading set tighter than its own leading was a deliberate Latin move — the lines
+   of a big headline sitting as one block. In Thai the same tightness cuts the marks off. */
+html[data-tongue="th"] .climate-record :is([class*="leading-none"], [class*="leading-[0."]) {
+  line-height: 1.4 !important;
+}
+/* Thai has no word spaces, so a line breaks wherever the dictionary says a word ends. The
+   browser segments it correctly; what it must never be told is to break mid-word to fit. */
+html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  line-break: normal;
+}
+
 /* ── THE CUT, AT EVERY SIZE ────────────────────────────────────────────────────────
    Two corrections, and between them they are most of the reason the record was reading
    as a leaflet rather than as a printed page.

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
+import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 
 // ── THE INDEX, ON ONE SCREEN ───────────────────────────────────────────────────
 // This sheet was a page of drawn doors that ran past the top and bottom of a phone: a
@@ -63,16 +64,34 @@ export default function RecordPagesPanel({ open, onClose }) {
           <RecordIndexPlate onNavigate={onClose} />
         </div>
 
-        <Link
-          to="/ClimateGuide"
-          onClick={onClose}
-          className="group mt-3 flex shrink-0 items-center justify-between gap-3 border-t border-record-ink pt-2.5"
-        >
-          <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
-            The written guide, line by line
-          </span>
-          <span aria-hidden="true" className="font-mono text-[13px] text-record-mark transition-transform group-hover:translate-x-0.5">→</span>
-        </Link>
+        <div className="mt-3 shrink-0 border-t border-record-ink pt-2.5">
+          <Link
+            to="/ClimateGuide"
+            onClick={onClose}
+            className="group flex items-center justify-between gap-3"
+          >
+            <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
+              The written guide, line by line
+            </span>
+            <span aria-hidden="true" className="font-mono text-[13px] text-record-mark transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
+
+          {/* ── THE TONGUE, WHERE A SETTING BELONGS ─────────────────────────────────
+              It stood in the masthead until the row had to become six marks with nothing
+              past the edge, and it is the one door up there that does not go anywhere: it
+              changes the record's own voice. So it is kept with the guide, below the last
+              rule, where a reader looking for how to change something already looks — and
+              it is still a drawn mark with its own name, not a grey dropdown, because a
+              tongue is not a preference. Nothing is turned away, and nothing is hidden. */}
+          <div className="mt-1 flex items-center justify-between gap-3 border-t border-record-ink/15 pt-1.5">
+            <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
+              The tongue
+            </span>
+            <div className="flex shrink-0 items-center [&>div]:flex-none">
+              <RecordTongueDoor size={26} />
+            </div>
+          </div>
+        </div>
       </div>
     </dialog>, document.body
   );
