@@ -8,7 +8,7 @@ export default function XEqualsXFounderNote() {
       <p className="covenant-kicker">More than forty years of work</p>
       <h2 id="janines-work"><Link to="/ClimateFounder">Janine M. H. Selendy</Link></h2>
       <p>
-        Founder of Horizon International. Four decades bringing together work on health,
+        <strong>Founder of Horizon International.</strong> Four decades bringing together work on health,
         the environment and poverty, through the Solutions Site, books and documentaries.
       </p>
       <blockquote className="covenant-founder-words">

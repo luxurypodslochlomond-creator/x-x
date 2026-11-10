@@ -31,7 +31,7 @@ import '@/components/climate/x-equals-x-page.css';
 // hold a column, and a column was the thing flattening the page.
 export default function XEqualsX() {
   return (
-    <div id="x-equals-x" className="covenant-page">
+    <div id="x-equals-x" className="covenant-page" data-record-technical>
       <RecordBackBar eyebrow="The principle" />
 
       {/* The covenant mark, as her page carries it: one small dark strip, the mark in red. */}

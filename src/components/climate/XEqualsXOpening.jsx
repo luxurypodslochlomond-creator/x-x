@@ -23,16 +23,18 @@ export default function XEqualsXOpening() {
       <div className="covenant-hero-scan" aria-hidden="true" />
 
       <div className="covenant-hero-inner">
-        <SignalBeacon size={34} color="#7fc9e4" />
+        <SignalBeacon size={48} color="rgb(var(--record-light-signal))" />
 
         <h1 id="the-principle" className="covenant-equation" aria-label="x equals x" translate="no">
           <span aria-hidden="true">x</span><span aria-hidden="true">=</span><span aria-hidden="true">x</span>
         </h1>
 
         <p className="covenant-purpose">
-          A solution is a solution. An action is an action. A person is a person.
-          No algorithm ranks them. No money amplifies them. The record is the record
-          — every entry held to the same standard, never ranked by how loud it is.
+          <em>A solution is a solution. An action is an action. A person is a person.</em>
+        </p>
+        <p className="covenant-hero-detail">
+          <strong>No algorithm ranks them. No money amplifies them.</strong>{' '}
+          The record is the record — every entry held to the same standard, never ranked by how loud it is.
         </p>
 
         <p className="covenant-front-note">
