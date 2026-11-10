@@ -1,5 +1,19 @@
-/* One small, centred opening; the work and its evidence stay readable below it.
-   All overrides belong to this page, not to the record's other rooms. */
+/* ── x = x — A PLATE, NOT A MEMO ─────────────────────────────────────────────────
+   This page is the one that joins Janine Selendy's forty years of work to the record's
+   refusal of extraction, so it cannot look like a policy document. It did: six bands of
+   equal width, equal weight and equal colour, stacked one under the other at a single
+   measure, with every animation switched off. That is not restraint, it is a ribbon of
+   text — which is exactly why it read as linear and flat.
+
+   What is here now is a printed plate and then a sheet. The mark is set as a mark, at
+   a size a phone cannot ignore; the promise is set in the record's reading voice beside
+   it; the two things a reader can do with a covenant sit in the first screen. Below, the
+   page alternates between paper and two bone plates, so the eye has something to land on
+   instead of a single grey column. Nothing loops and nothing pulses: one arrival, then
+   stillness, because a page arguing against the feed cannot be a slot machine.
+
+   Every number below is a decision, not a flavour. */
+
 #root .covenant-shell {
   --font-body: var(--font-record-ui);
   background-color: rgb(var(--record-paper));
@@ -7,124 +21,410 @@
 }
 .covenant-shell > :first-child { border-bottom: 0; }
 .covenant-shell > :first-child > div { padding-block: 0; }
-.covenant-shell .record-shell-content { padding-block: .75rem 1.5rem; }
+/* The plate is the top of the page: no inset above it, and the foot of the shell keeps
+   its own air below. */
+.covenant-shell .record-shell-content { padding-block: 0 1.5rem; }
 .covenant-shell .record-shell-return { border-top: 0; }
 .covenant-shell .record-shell-return > div { display: flex; justify-content: center; padding-block: 1rem; }
 .covenant-shell .record-shell-credit { max-width: 32rem; margin-inline: auto; font-family: var(--font-body); }
+
 #x-equals-x {
-  --font-reading: var(--font-body);
-  --font-display: var(--font-body);
-  max-width: 36rem;
+  max-width: 34rem;
   margin-inline: auto;
   color: rgb(var(--record-ink));
   font-family: var(--font-body);
-  font-weight: 400;
 }
-#x-equals-x :is(p, li, dd, figcaption, blockquote) {
-  font-family: var(--font-body) !important;
-  font-size: 1rem !important;
-  line-height: 1.6 !important;
-  letter-spacing: normal;
-  max-inline-size: none;
-  overflow-wrap: break-word;
-  text-align: start;
+
+/* ── THE PLATE ────────────────────────────────────────────────────────────────────
+   Ink, full width of the page's own gutter and not a pixel more — a plate that overflows
+   the glass gives a phone a sideways scroll, and no printed page does that. */
+#x-equals-x .covenant-front {
+  margin-inline: -1rem;
+  padding: 1.25rem 1rem 1.35rem;
+  background-color: rgb(var(--record-ink));
+  color: rgb(var(--record-paper));
 }
-#x-equals-x :is(h1, h2, h3, h4, dt) {
-  font-family: var(--font-body) !important;
-  font-weight: 700 !important;
-  line-height: 1.25 !important;
-  letter-spacing: -.02em !important;
-  text-wrap: balance;
+
+/* The two corners the share card also carries, so the page and the picture are one
+   object rather than two designs of the same promise. */
+#x-equals-x .covenant-front-imprint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-paper) / 0.62);
 }
-#x-equals-x h2 { font-size: 1.375rem; }
-#x-equals-x h3 { font-size: 1.125rem; }
-#x-equals-x :is(.covenant-caption, .record-meta, figcaption) { font-size: .8125rem !important; line-height: 1.5 !important; }
-#x-equals-x :is(.covenant-kicker, .covenant-label) { font-size: .75rem !important; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-opening { padding-block: .25rem .75rem; text-align: center; }
-#x-equals-x .covenant-opening :is(p, h2) { text-align: center; margin-inline: auto; }
+
+/* ── THE MARK ─────────────────────────────────────────────────────────────────────
+   Set in the machine's own lettering, huge, tight, because x = x is not a heading — it
+   is the mark the whole record is signed with. The two x's carry the borrowed red and
+   the equals sign stays paper, the same rhythm as the card: red, paper, red.
+
+   Signal orange is used on ink rather than the deeper mark red, because the mark red at
+   this size on this ground measures under three to one and goes muddy. A mark nobody can
+   see is not a mark. */
 #x-equals-x .covenant-equation {
   display: flex;
-  justify-content: center;
   align-items: baseline;
-  gap: .22em;
-  margin: 0 0 .75rem;
-  font-size: 4rem;
-  font-weight: 400 !important;
-  line-height: 1 !important;
-  letter-spacing: 0 !important;
+  justify-content: flex-start;
+  gap: 0.1em;
+  margin: 0.55rem 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(4.5rem, 25vw, 7.5rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.78 !important;
+  letter-spacing: -0.055em !important;
+  color: rgb(var(--record-signal));
+}
+#x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-paper)); }
+
+#x-equals-x .covenant-purpose {
+  margin: 1.05rem 0 0;
+  max-inline-size: 34ch;
+  font-family: var(--font-record-reading);
+  font-size: clamp(1.0625rem, 1rem + 0.55vw, 1.25rem) !important;
+  line-height: 1.52 !important;
+  letter-spacing: 0;
+  text-wrap: pretty;
+  color: rgb(var(--record-paper));
+}
+
+#x-equals-x .covenant-front-note {
+  margin: 0.85rem 0 0;
+  max-inline-size: 42ch;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.55 !important;
+  color: rgb(var(--record-paper) / 0.62);
+}
+
+#x-equals-x .covenant-front-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.3rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--record-paper) / 0.22);
+}
+#x-equals-x .covenant-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: rgb(var(--record-paper));
+  text-decoration: none;
+}
+#x-equals-x .covenant-open span { color: rgb(var(--record-signal)); }
+#x-equals-x .covenant-open:hover span { color: rgb(var(--record-paper)); }
+
+/* Passing it on is an action of the plate, not a footnote of the page. Drawn as a paper
+   outline on ink so it reads as the second thing to do, not the last. */
+#x-equals-x .covenant-front .covenant-share button {
+  width: auto;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
+  background-color: transparent;
+  border: 1px solid rgb(var(--record-paper) / 0.55);
+  color: rgb(var(--record-paper));
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-transform: none;
+}
+#x-equals-x .covenant-front .covenant-share button:hover {
+  background-color: rgb(var(--record-paper));
+  border-color: rgb(var(--record-paper));
+  color: rgb(var(--record-ink));
+}
+
+/* ── THE SHEET BELOW ──────────────────────────────────────────────────────────────
+   One hairline per band, one measure, and two bone plates so the page breathes between
+   statement and evidence instead of running on. */
+#x-equals-x .covenant-body > section {
+  margin: 0;
+  padding-block: 1.6rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.16);
+}
+#x-equals-x .covenant-body > section:first-child { border-top: 0; padding-top: 1.5rem; }
+
+#x-equals-x .covenant-body > :is(.covenant-example, .covenant-commitments) {
+  margin-block: 0;
+  margin-inline: -1rem;
+  padding: 1.7rem 1rem !important;
+  background-color: rgb(var(--record-bone));
+  border-top: 0 !important;
+}
+
+#x-equals-x :is(.covenant-kicker, .covenant-label) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 0.75rem !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x h2 {
+  margin-block: 0 0.8rem;
+  font-size: clamp(1.375rem, 1.2rem + 1vw, 1.625rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.01em !important;
+}
+#x-equals-x .covenant-caption {
+  font-family: var(--font-body) !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.55 !important;
+  color: rgb(var(--record-muted));
+}
+
+/* ── JANINE, SAID AT THE SIZE SHE IS OWED ────────────────────────────────────────
+   Her sentence is the reason the record exists, so it is the largest human line on the
+   page — set in the reading voice and given the mark as a rule in the margin, the way a
+   quotation is marked in print rather than quoted inside a paragraph. */
+#x-equals-x #whose-record h2 { margin: 0.3rem 0 0.7rem; }
+#x-equals-x #whose-record h2 a { color: inherit; text-decoration: none; }
+#x-equals-x .covenant-founder-words {
+  margin: 1.15rem 0 0.9rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgb(var(--record-mark));
+  max-inline-size: 30ch;
+  font-family: var(--font-record-reading) !important;
+  font-size: clamp(1.35rem, 1.12rem + 1.1vw, 1.75rem) !important;
+  line-height: 1.34 !important;
+  letter-spacing: -0.005em;
+  text-wrap: pretty;
+}
+#x-equals-x .covenant-founder-source { margin-top: 0.9rem; }
+#x-equals-x .covenant-founder-source a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-source-name { display: block; margin-top: 0.25rem; }
+#x-equals-x cite { font-style: normal; }
+
+/* ── THE THREE TERMS, AS A COUNTED SEQUENCE ──────────────────────────────────────
+   Three definition rows of identical weight are a glossary. A three-step sequence with
+   the numerals at display size is an argument the eye can count. */
+#x-equals-x .covenant-evidence-standard { margin-bottom: 1.1rem; }
+#x-equals-x .covenant-terms { display: grid; gap: 0; margin: 0; }
+#x-equals-x .covenant-term {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  column-gap: 0.85rem;
+  padding-block: 1.05rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.14);
+}
+#x-equals-x .covenant-term:first-child { border-top: 0; padding-top: 0.35rem; }
+#x-equals-x .covenant-term::before {
+  content: attr(data-number);
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  padding-top: 0.15rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
   color: rgb(var(--record-mark));
 }
-#x-equals-x .covenant-opening h2 { font-size: 1.5rem; font-weight: 400 !important; letter-spacing: -.015em !important; }
-#x-equals-x .covenant-purpose { max-width: none; margin-top: .75rem; }
-#x-equals-x .covenant-principle-note { margin-top: 1rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-open { display: inline-flex; align-items: center; gap: .6rem; min-height: 2.75rem; margin-top: .65rem; font-size: .9375rem; font-weight: 700; }
-#x-equals-x .covenant-open span { color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-body { padding-top: 1.75rem; }
-#x-equals-x .covenant-founder h2 { margin-block: .4rem .8rem; }
-#x-equals-x .covenant-founder h2 a { text-decoration: none; }
-#x-equals-x .covenant-founder-words { margin-block: 1.1rem .8rem; font-size: 1.25rem !important; line-height: 1.4 !important; text-wrap: pretty; }
-#x-equals-x .covenant-founder-source { margin-top: .85rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-founder-source a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
-#x-equals-x cite { font-style: normal; }
-#x-equals-x .covenant-source-name { display: block; margin-top: .25rem; }
-#x-equals-x #terms { margin-top: 2.25rem; }
-#x-equals-x .covenant-section-heading { margin-bottom: .8rem; }
-#x-equals-x .covenant-evidence-standard { margin-bottom: 1.25rem; }
-#x-equals-x .covenant-terms { display: grid; gap: 1rem; margin: 0; }
-#x-equals-x .covenant-term { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); column-gap: .5rem; }
-#x-equals-x .covenant-term::before { content: attr(data-number); grid-column: 1; grid-row: 1 / span 2; padding-top: .2rem; font-size: .75rem; font-variant-numeric: tabular-nums; color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-term dt { grid-column: 2; font-size: 1.0625rem; }
-#x-equals-x .covenant-term dd { grid-column: 2; margin-top: .25rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-standard { margin-top: 1rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-example { margin-block: 2.25rem; }
-#x-equals-x .covenant-example h2 { margin: .4rem 0 1rem; }
-#x-equals-x .covenant-entry { padding: 0; background: transparent; }
-#x-equals-x .covenant-entry h3 { margin-top: .4rem; font-size: 1.375rem; text-wrap: pretty; }
-#x-equals-x .covenant-trace { list-style: none; display: grid; gap: .65rem; margin-top: 1rem; padding: 0; }
-#x-equals-x .covenant-trace li { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); gap: .5rem; align-items: baseline; }
-#x-equals-x .covenant-trace-label { font-size: .75rem; color: rgb(var(--record-muted)); }
+#x-equals-x .covenant-term dt {
+  grid-column: 2;
+  font-size: 1.1875rem;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+#x-equals-x .covenant-term dd {
+  grid-column: 2;
+  margin: 0.3rem 0 0;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-standard { margin-top: 1.1rem; }
+
+/* ── ONE ENTRY, ITS EVIDENCE ─────────────────────────────────────────────────────
+   A specimen, on bone: the entry, then the three lines that let a reader check it. The
+   trace is the point, so it is ruled like a table rather than run together as prose. */
+#x-equals-x .covenant-example h2 { margin: 0.3rem 0 1rem; }
+#x-equals-x .covenant-entry h3 {
+  margin-top: 0.35rem;
+  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.4375rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.012em !important;
+  text-wrap: pretty;
+}
+#x-equals-x .covenant-entry h3 a { color: inherit; text-decoration: none; }
+#x-equals-x .covenant-trace {
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+}
+#x-equals-x .covenant-trace li {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  gap: 0.5rem;
+  align-items: baseline;
+}
 #x-equals-x .covenant-trace a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-entry-open { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.75rem; margin-top: .75rem; font-size: .9375rem; font-weight: 700; }
+#x-equals-x .covenant-entry-open {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  margin-top: 0.9rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.16);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+}
 #x-equals-x .covenant-entry-open > :last-child { color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-limits-section { margin-block: 2.25rem; }
-#x-equals-x .covenant-limits-section h2 { margin-top: .4rem; }
-#x-equals-x .covenant-limits { list-style: none; margin-top: .5rem; padding: 0; }
-#x-equals-x .covenant-limit a { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr) auto; gap: .65rem; padding-block: .8rem; color: rgb(var(--record-ink)); text-decoration: none; }
+
+/* ── THE LIMITS, A DOOR EACH ────────────────────────────────────────────────────── */
+#x-equals-x .covenant-limits { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+#x-equals-x .covenant-limit a {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
+  gap: 0.8rem;
+  align-items: start;
+  padding-block: 0.95rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.14);
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+}
+#x-equals-x .covenant-limit:first-child a { border-top: 0; }
 #x-equals-x .covenant-limit-mark svg { width: 1.5rem; height: 1.5rem; }
 #x-equals-x .covenant-limit-says { display: block; }
-#x-equals-x .covenant-limit-where { display: block; margin-top: .4rem; font-size: .75rem; color: rgb(var(--record-muted)); }
+#x-equals-x .covenant-limit-where { display: block; margin-top: 0.35rem; }
 #x-equals-x .covenant-limit-arrow { color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-commitments { border: 0; margin-block: 2.25rem; padding-top: 0; }
-#x-equals-x .covenant-commitments > div:first-child p { font-size: .75rem !important; text-transform: none; letter-spacing: normal; }
-#x-equals-x .covenant-commitment { padding-block: .9rem; }
-#x-equals-x .covenant-commitment:first-child { padding-top: 0; }
+
+/* ── WHAT THE RECORD PROMISES ────────────────────────────────────────────────────
+   The marks on these are sentences — "equal worth ≠ equal size", "no ranking" — and they
+   were being set as small bold captions. They are the best lines on the page. */
+#x-equals-x .covenant-commitment {
+  padding-block: 1.15rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.14);
+}
+#x-equals-x .covenant-commitment:first-child { border-top: 0; padding-top: 0.2rem; }
+#x-equals-x .covenant-commitment h3 {
+  font-family: var(--font-record-reading) !important;
+  font-size: clamp(1.25rem, 1.08rem + 0.8vw, 1.5rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
 #x-equals-x .covenant-commitment-limit { color: rgb(var(--record-muted)); }
 #x-equals-x .covenant-limit-label { font-weight: 700; }
-#x-equals-x .covenant-signature-note { margin-top: .5rem; }
-#x-equals-x .covenant-reading { margin-top: 2rem; }
-#x-equals-x .covenant-reading-label { margin-bottom: .3rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-book-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.75rem; padding-block: .4rem; color: rgb(var(--record-ink)); text-decoration: none; }
-#x-equals-x .covenant-book-link strong { display: block; font-size: 1.0625rem; font-weight: 700; }
-#x-equals-x .covenant-book-author { display: block; margin-top: .15rem; font-size: .8125rem; line-height: 1.5; }
-#x-equals-x .covenant-book-arrow { flex-shrink: 0; color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-reading-note { margin-top: .3rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .25rem 1.5rem; margin-top: 1.25rem; }
-#x-equals-x .covenant-working { display: inline-flex; align-items: center; gap: .6rem; min-height: 2.75rem; font-size: .9375rem; font-weight: 700; }
-#x-equals-x .covenant-working span { color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-share > button { width: auto; min-height: 2.75rem; padding: .5rem 0; background: transparent; color: rgb(var(--record-ink)); border: 0; font-family: var(--font-body); font-size: .9375rem; font-weight: 700; text-transform: none; }
-#x-equals-x .covenant-dedication { margin-top: 1.25rem; text-align: center; color: rgb(var(--record-muted)); }
-#x-equals-x :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-ink)); outline-offset: 4px; }
-#x-equals-x, #x-equals-x * { animation: none !important; transition: none !important; }
-@media (min-width: 640px) {
-  .covenant-shell .record-shell-content { padding-block: 1.25rem 2rem; }
-  #x-equals-x .covenant-equation { font-size: 5rem; }
-  #x-equals-x .covenant-opening h2 { font-size: 1.75rem; }
-  #x-equals-x .covenant-body { padding-top: 2rem; }
+#x-equals-x .covenant-signature-note { margin-top: 0.9rem; }
+#x-equals-x .covenant-signature-note a {
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-mark));
 }
+
+/* ── FURTHER READING, AND THE WAY FURTHER ──────────────────────────────────────── */
+#x-equals-x .covenant-reading-label { margin-bottom: 0.3rem; }
+#x-equals-x .covenant-book-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 2.75rem;
+  padding-block: 0.35rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+}
+#x-equals-x .covenant-book-link strong { display: block; font-size: 1.0625rem; }
+#x-equals-x .covenant-book-author { display: block; margin-top: 0.15rem; font-size: 0.8125rem; color: rgb(var(--record-muted)); }
+#x-equals-x .covenant-book-arrow { flex-shrink: 0; color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-reading-note { margin-top: 0.3rem; }
+
+#x-equals-x .covenant-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1.25rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.16);
+}
+#x-equals-x .covenant-working {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+}
+#x-equals-x .covenant-working span { color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-actions .covenant-share button {
+  width: auto;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
+  background-color: rgb(var(--record-ink));
+  border: 1px solid rgb(var(--record-ink));
+  color: rgb(var(--record-paper));
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-transform: none;
+}
+#x-equals-x .covenant-actions .covenant-share button:hover {
+  background-color: rgb(var(--record-mark));
+  border-color: rgb(var(--record-mark));
+  color: rgb(var(--record-paper));
+}
+#x-equals-x .covenant-dedication { padding-top: 1rem; text-align: center; }
+#x-equals-x .covenant-dedication a { color: inherit; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
+
+/* ── ONE ARRIVAL, THEN STILLNESS ─────────────────────────────────────────────────
+   The plate comes up once, half a second, and never again. No loop, no drift, no glow:
+   movement that repeats is the thing this page is against. */
+@keyframes covenant-arrive {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+#x-equals-x .covenant-front { animation: covenant-arrive 520ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+#x-equals-x .covenant-share button,
+#x-equals-x :is(.covenant-open, .covenant-working, .covenant-limit a, .covenant-entry-open, .covenant-book-link) {
+  transition: background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
+}
+#x-equals-x .covenant-limit a:hover { color: rgb(var(--record-red)); }
+
+#x-equals-x :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-ink)); outline-offset: 4px; }
+#x-equals-x .covenant-front :is(a, button):focus-visible { outline-color: rgb(var(--record-paper)); }
+
+@media (min-width: 640px) {
+  #x-equals-x .covenant-front { padding: 1.5rem 1.25rem 1.6rem; margin-inline: -1.25rem; }
+  #x-equals-x .covenant-body > :is(.covenant-example, .covenant-commitments) { margin-inline: -1.25rem; padding-inline: 1.25rem !important; }
+  .covenant-shell .record-shell-content { padding-block: 0 2rem; }
+}
+
 html[data-tongue="th"] #x-equals-x { --font-body: 'Noto Serif Thai', Thonburi, serif; }
-html[data-tongue="th"] #root #x-equals-x :is(p, li, dd, blockquote) { line-height: 1.95 !important; overflow-wrap: normal !important; }
+html[data-tongue="th"] #x-equals-x :is(p, li, dd, blockquote) { line-height: 1.95 !important; overflow-wrap: normal !important; }
+html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !important; }
 html[data-tongue="th"] #root #x-equals-x :is(h2, h3, dt) { line-height: 1.45 !important; letter-spacing: 0 !important; }
 html[data-tongue="chr"] #x-equals-x { --font-body: var(--font-script); }
+
+@media (prefers-reduced-motion: reduce) {
+  #x-equals-x .covenant-front { animation: none; }
+}
+
 @media print {
-  #x-equals-x :is(.covenant-actions, .covenant-open) { display: none; }
+  #x-equals-x :is(.covenant-actions, .covenant-front-actions) { display: none; }
+  #x-equals-x .covenant-front {
+    margin-inline: 0;
+    padding-inline: 0;
+    background: none;
+    color: rgb(var(--record-ink));
+  }
+  #x-equals-x .covenant-front :is(.covenant-purpose, .covenant-front-note, .covenant-front-imprint, .covenant-open) { color: rgb(var(--record-ink)); }
+  #x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-ink)); }
 }
