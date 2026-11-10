@@ -34,7 +34,9 @@ export default function XEqualsXThanks() {
         <Debt name="Laurie Anderson" reason="for the red, and for the name">
           The red on this record is taken from her sleeve for O Superman, and “the record of the
           time” is her phrase. She has not read this and has not agreed to it. If she asks, both
-          come off the same day, and the removal is printed here rather than done quietly.
+          come off the same day, and the removal is printed here rather than done quietly. Janine
+          Selendy, whose record this is, asked that she be mentioned once and not again: it is
+          written here because a limit agreed in private is a limit nobody can check.
         </Debt>
 
         <Debt name="Lou Reed" reason="for saying it once">
