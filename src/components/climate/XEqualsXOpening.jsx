@@ -26,36 +26,40 @@ export default function XEqualsXOpening() {
         The terms of this record
       </p>
 
-      {/* The mark itself. Not a diagram, not an illustration — three characters, breathing
-          at nine seconds so a reader notices it has moved rather than watches it move. */}
-      <div
-        role="img"
-        aria-label="x equals x"
-        className="x-equals-x-light mt-4 select-none text-record-mark"
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(92px, 33vw, 172px)',
-          lineHeight: 0.82,
-          letterSpacing: '-0.02em',
-        }}
-      >
-        x&nbsp;=&nbsp;x
-      </div>
-
-      <div aria-hidden="true" className="x-open-rule mt-6 h-[2px] w-full bg-record-mark" />
-
       <h1
         id="the-terms"
-        className="mt-6 max-w-[18ch] text-[34px] leading-[1.02] text-record-ink lg:text-[44px]"
+        className="mt-4 max-w-[18ch] text-[34px] leading-[1.02] text-record-ink lg:text-[44px]"
         style={{ fontFamily: 'var(--font-display)' }}
       >
         Nobody above anybody.
       </h1>
 
+      {/* The mark, after the sentence rather than above it. At 172px it was the loudest
+          thing on the platform and it was the page's own title said back to the person who
+          had just tapped it, with the meaning pushed off the first screen. A mark should
+          sit where it can be read, not where it can shout: three characters at the size a
+          mark takes, breathing at nine seconds so a reader notices it has moved rather than
+          watches it move. */}
+      <div
+        role="img"
+        aria-label="x equals x"
+        className="x-equals-x-light mt-3 select-none text-record-mark"
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(52px, 16vw, 88px)',
+          lineHeight: 0.9,
+          letterSpacing: '-0.01em',
+        }}
+      >
+        x&nbsp;=&nbsp;x
+      </div>
+
+      <div aria-hidden="true" className="x-open-rule mt-4 h-[2px] w-full bg-record-mark" />
+
       <p className="mt-4 max-w-[46ch] text-record-ink">
-        x = x is not a line on a poster. It is a decision — equal worth, taken on purpose by
-        people who could have decided otherwise — and then a set of machines built to hold it.
-        Every part of it below can be checked by a stranger, without asking us.
+        Nothing above the line and nothing hidden below it. Nobody takes more than they give,
+        and the record is bound by the same rule it asks of everyone else. Every part of it
+        below can be checked by a stranger, without asking us.
       </p>
 
       <ul className="mt-7 space-y-2 border-t border-record-ink/15 pt-4">

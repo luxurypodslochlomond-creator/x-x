@@ -18,6 +18,8 @@ import XEqualsXCodicil from '@/components/climate/XEqualsXCodicil';
 import XEqualsXMachine from '@/components/climate/XEqualsXMachine';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
 import RecordBand from '@/components/climate/RecordBand';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 
 // ── THE TERMS OF THIS RECORD ───────────────────────────────────────────────────
 // The page reads in one movement now, and the movement is the point: the mark, what it
@@ -63,6 +65,27 @@ export default function XEqualsX() {
       <XEqualsXResearchPanel />
 
       <XEqualsXWhatItAsks />
+
+      {/* ── PASS IT ON ────────────────────────────────────────────────────────────
+          A covenant that cannot be passed on is a notice. This leaves as one picture —
+          the mark, the sentence, the three terms, and the empty line where a signature
+          goes — so what people put on Facebook or WhatsApp is the covenant itself and
+          not a screenshot of it with the source cut off. The unsigned line is the point:
+          the card says out loud that nobody has signed it, so it cannot borrow authority
+          on the way. */}
+      <div className="my-10 border-t border-record-ink/25 pt-6">
+        <p className="max-w-[46ch] text-[15.5px] leading-[1.6] text-record-ink">
+          If it holds, pass it on. One tap draws it as a card you can post anywhere — the mark,
+          the three terms, and the empty line where a name would go.
+        </p>
+        <div className="mt-3">
+          <ShareCardButton
+            entry={{ id: 'x-equals-x', title: 'x = x' }}
+            build={buildCovenantCard}
+            label="Pass the covenant on"
+          />
+        </div>
+      </div>
 
       <XEqualsXLostMarks />
 
