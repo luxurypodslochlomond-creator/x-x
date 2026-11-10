@@ -1,0 +1,59 @@
+/* One short reading, with the supporting material opened by the reader. */
+.x-equals-x-page {
+  font-family: var(--font-reading);
+  color: rgb(var(--record-ink));
+  max-inline-size: 48ch;
+  margin-inline: auto;
+  padding-bottom: 1.5rem;
+}
+
+.record-pages .x-equals-x-page :is(p, li, dd) {
+  font-family: var(--font-reading) !important;
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+  letter-spacing: normal;
+  overflow-wrap: break-word;
+}
+
+.record-pages .x-equals-x-page .record-meta,
+.record-pages .x-equals-x-page figcaption {
+  font-size: .8125rem !important;
+  line-height: 1.6 !important;
+}
+
+.record-pages .x-equals-x-page :is(h1, h2) {
+  line-height: 1.15 !important;
+}
+
+.record-pages .x-equals-x-page blockquote {
+  font-size: 1.25rem !important;
+  line-height: 1.5 !important;
+}
+
+.x-equals-x-page .covenant-detail > summary {
+  cursor: pointer;
+  padding-block: .875rem;
+  font-size: 1rem;
+  color: rgb(var(--record-ink));
+}
+
+.x-equals-x-page .covenant-detail > summary::marker {
+  color: rgb(var(--record-mark));
+}
+
+.x-equals-x-page .covenant-detail > summary:focus-visible {
+  outline: 2px solid rgb(var(--record-mark));
+  outline-offset: 4px;
+}
+
+/* No pulsing ink, drawing effects, progress marks or moving text on this page. */
+.x-equals-x-page,
+.x-equals-x-page * {
+  animation: none !important;
+  transition: none !important;
+}
+
+html[data-tongue="th"] #root .x-equals-x-page :is(p, li, dd, blockquote) {
+  line-height: 1.95 !important;
+  overflow-wrap: normal !important;
+}

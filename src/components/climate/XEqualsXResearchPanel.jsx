@@ -28,10 +28,8 @@ export default function XEqualsXResearchPanel() {
   }, []);
 
   return (
-    <RecordBand id="promises" label="Kept as records" title="What this record promises">
-      <p>
-        Not findings. Promises about how the record behaves, each one testable in five minutes.
-      </p>
+    <RecordBand id="promises" label="Supporting detail" title="Recorded commitments">
+      <p>The published commitments, their sources and their stated limits.</p>
 
       {error && (
         <p className="mt-4 text-[#b3261e]">This section could not be read just now: {error}</p>

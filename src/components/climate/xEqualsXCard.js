@@ -30,13 +30,13 @@ const PAD = 84;
 const MAXW = W - PAD * 2;
 
 const TERMS = [
-  ['01', 'Every entry names what said it.'],
-  ['02', 'No funder’s name on the door.'],
-  ['03', 'Anyone can check it without us.'],
+  ['01', 'The source stays with the work.'],
+  ['02', 'Corrections stay visible.'],
+  ['03', 'Money does not buy authority.'],
 ];
 
 const MEANING =
-  'Nothing above the line and nothing hidden below it. Nobody takes more than they give, and the record is bound by the rule it asks of everyone else.';
+  'Every person has equal worth. A claim still has to stand up to evidence. A principle we choose, not a scientific finding.';
 
 const letterSpacing = (g, value) => {
   if ('letterSpacing' in g) g.letterSpacing = value;
