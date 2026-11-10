@@ -90,7 +90,7 @@ export default function XEqualsXResearchPanel() {
             None is signed yet — a machine cannot sign. How an entry is actually made is kept on{' '}
             <Link
               to="/ClimateMethod"
-              className="text-[#141210] underline decoration-[#e2602a] underline-offset-2"
+              className="text-record-ink underline decoration-record-mark underline-offset-2"
             >
               How the record works
             </Link>

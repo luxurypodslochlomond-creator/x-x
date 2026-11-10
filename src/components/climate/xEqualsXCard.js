@@ -36,7 +36,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   const color = (name) => `rgb(${theme.getPropertyValue(`--record-${name}`).trim()})`;
   const paper = color('paper');
   const ink = color('ink');
-  const signal = color('signal');
+  const signal = color('mark');
   const muted = color('muted');
   const sans = theme.getPropertyValue('--font-body').trim() || 'system-ui, sans-serif';
 

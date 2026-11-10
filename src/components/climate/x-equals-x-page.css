@@ -40,7 +40,7 @@
   overflow: hidden;
   color: rgb(var(--record-paper));
   background: rgb(var(--record-ink));
-  border-bottom: 4px solid rgb(var(--record-signal));
+  border-bottom: 4px solid rgb(var(--record-mark));
 }
 #x-equals-x .covenant-signal::before {
   content: '';
@@ -52,7 +52,7 @@
   background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgb(var(--record-paper)) 3px, rgb(var(--record-paper)) 4px);
 }
 .covenant-signal-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-.covenant-signal-top > span:first-child { color: rgb(var(--record-signal)); }
+.covenant-signal-top > span:first-child { color: rgb(var(--record-mark)); }
 .covenant-signal-top > span:last-child { color: rgb(var(--record-paper) / .65); }
 #x-equals-x .covenant-equation {
   display: flex;
@@ -65,7 +65,7 @@
   font-weight: 800 !important;
   line-height: 1 !important;
   letter-spacing: -.08em !important;
-  color: rgb(var(--record-signal));
+  color: rgb(var(--record-mark));
 }
 .covenant-equation > span:nth-child(2) { color: rgb(var(--record-paper)); }
 #x-equals-x .covenant-signal h2 { text-align: center; font-size: clamp(1.6875rem, 5.5vw, 2.75rem); }
@@ -74,7 +74,7 @@
 #x-equals-x .covenant-dedication { margin-top: 2rem; color: rgb(var(--record-paper) / .73); text-align: center; }
 .covenant-body { padding-top: 2rem; }
 .covenant-founder { margin-bottom: 2.5rem; max-inline-size: 54ch; }
-.covenant-founder a { text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-founder a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
 .covenant-terms { margin: 1.5rem 0 0; }
 .covenant-term { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); column-gap: .75rem; padding-block: 1rem; }
 .covenant-term::before { content: attr(data-number); grid-row: span 2; padding-top: .2rem; color: rgb(var(--record-red)); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8125rem; }
@@ -90,7 +90,7 @@
 #x-equals-x .covenant-trace li:last-child { padding-bottom: 0; border-color: transparent; }
 .covenant-trace li::before { content: ''; position: absolute; inset-inline-start: -.28rem; top: .3rem; width: .5rem; height: .5rem; background: rgb(var(--record-red)); border-radius: 50%; }
 .covenant-trace-label { display: block; margin-bottom: .3rem; color: rgb(var(--record-muted)); }
-.covenant-trace a { text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-trace a { text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
 .covenant-entry-open { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3rem; margin-top: 1rem; font-weight: 600; }
 .covenant-share { margin-block: 2rem; text-align: center; }
 #x-equals-x .covenant-share > button { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); border-color: rgb(var(--record-ink)); font-family: var(--font-body); font-size: 1rem; font-weight: 600; text-transform: none; }
@@ -103,13 +103,13 @@
 .covenant-check { margin-top: 1.5rem; }
 .covenant-check dt { font-weight: 650; font-size: 1.125rem; }
 .covenant-check dd { margin-top: .4rem; color: rgb(var(--record-muted)); }
-.covenant-check a { display: inline-flex; align-items: center; min-height: 2.75rem; color: rgb(var(--record-ink)); text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-check a { display: inline-flex; align-items: center; min-height: 2.75rem; color: rgb(var(--record-ink)); text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
 .covenant-reading { margin-top: 2.5rem; padding-top: 1.5rem; }
 .covenant-book { display: grid; grid-template-columns: minmax(0, 5rem) minmax(0, 1fr); align-items: start; gap: 1.25rem; margin-top: 1.25rem; }
 .covenant-book img { display: block; width: 100%; height: auto; box-shadow: .3rem .4rem 0 rgb(var(--record-ink) / .12); }
 #x-equals-x .covenant-book h3 { font-size: 1.5rem; }
 #x-equals-x .covenant-book p { margin-top: .4rem; }
-.covenant-book a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; text-decoration: underline; text-decoration-color: rgb(var(--record-signal)); }
+.covenant-book a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
 #x-equals-x, #x-equals-x * { animation: none !important; transition: none !important; }
 @media (min-width: 640px) {
   #x-equals-x .covenant-signal { padding: 1.5rem 2rem 2rem; }
