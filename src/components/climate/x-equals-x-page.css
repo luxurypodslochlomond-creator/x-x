@@ -55,7 +55,8 @@
   color: rgb(var(--record-mark));
 }
 #x-equals-x .covenant-opening h2 { font-size: 1.5rem; font-weight: 400 !important; letter-spacing: -.015em !important; }
-#x-equals-x .covenant-purpose { max-width: 30ch; margin-top: .75rem; }
+#x-equals-x .covenant-purpose { max-width: none; margin-top: .75rem; }
+#x-equals-x .covenant-principle-note { margin-top: 1rem; color: rgb(var(--record-muted)); }
 #x-equals-x .covenant-open { display: inline-flex; align-items: center; gap: .6rem; min-height: 2.75rem; margin-top: .65rem; font-size: .9375rem; font-weight: 700; }
 #x-equals-x .covenant-open span { color: rgb(var(--record-mark)); }
 #x-equals-x .covenant-body { padding-top: 1.75rem; }
