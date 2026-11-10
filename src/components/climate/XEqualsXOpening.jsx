@@ -23,7 +23,7 @@ export default function XEqualsXOpening() {
       <div className="covenant-hero-scan" aria-hidden="true" />
 
       <div className="covenant-hero-inner">
-        <SignalBeacon size={34} color="#e2602a" />
+        <SignalBeacon size={34} color="#7fc9e4" />
 
         <h1 id="the-principle" className="covenant-equation" aria-label="x equals x" translate="no">
           <span aria-hidden="true">x</span><span aria-hidden="true">=</span><span aria-hidden="true">x</span>

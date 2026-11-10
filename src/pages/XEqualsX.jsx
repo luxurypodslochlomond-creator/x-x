@@ -53,7 +53,7 @@ export default function XEqualsX() {
 
       {/* Her, in the record's own bone band — the same band her page opens with. */}
       <div className="covenant-band covenant-band--centre">
-        <SignalBeacon size={30} color="#e2602a" />
+        <SignalBeacon size={30} color="#7fc9e4" />
         <XEqualsXFounderNote />
       </div>
 
