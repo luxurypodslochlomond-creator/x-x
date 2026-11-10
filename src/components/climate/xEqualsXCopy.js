@@ -10,16 +10,16 @@ export const COVENANT_TERMS = [
   {
     number: '01',
     title: 'Keep the source.',
-    plain: 'Name who did the work and where the claim comes from. Reputation is not a substitute for evidence.',
+    plain: 'Name the work. Link to its origin.',
   },
   {
     number: '02',
     title: 'Show the correction.',
-    plain: 'Say what changed and when. Keep uncertainty visible rather than smoothing it away.',
+    plain: 'Keep the original. Date the change. Leave uncertainty visible.',
   },
   {
     number: '03',
     title: 'No paid priority.',
-    plain: 'Funding must not buy placement or a softer evidence standard.',
+    plain: 'Money buys neither placement nor a softer evidence standard.',
   },
 ];
