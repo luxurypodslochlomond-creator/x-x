@@ -16,7 +16,7 @@ import '@/components/climate/x-equals-x-page.css';
 // The principle, Janine's context and the full supporting record belong together.
 export default function XEqualsX() {
   return (
-    <ClimateRecordShell compact returnTo="/TogetherChangeClimate" returnLabel="Back to the record">
+    <ClimateRecordShell compact className="covenant-shell" eyebrow="The principle" returnTo="/TogetherChangeClimate" returnLabel="Back to the record">
       <article id="x-equals-x" className="x-equals-x-page" aria-label="x = x — the principle">
         <XEqualsXOpening />
         <div className="covenant-body">

@@ -1,16 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// One sentence, and it is the whole of the claim: this is a public record, built around
-// one person's work, so useful work can be found and checked. It used to run to a second
-// clause explaining why that is worth doing, which the rest of the page then explained
-// again — the repetition a reader notices before they can name it.
+// Her published words and original work, not borrowed institutional authority.
 export default function XEqualsXFounderNote() {
   return (
-    <p id="whose-record" className="covenant-founder">
-      A public record of climate emergencies and the work that answers them, built around{' '}
-      <Link to="/ClimateFounder">Janine M. H. Selendy’s forty years</Link> of gathering what
-      works.
-    </p>
+    <section id="whose-record" className="covenant-founder" aria-labelledby="janines-work">
+      <p className="covenant-kicker">More than forty years of work</p>
+      <h2 id="janines-work"><Link to="/ClimateFounder">Janine M. H. Selendy</Link></h2>
+      <p>
+        Founder of Horizon International. Four decades bringing together work on health,
+        the environment and poverty, through the Solutions Site, books and documentaries.
+      </p>
+      <blockquote className="covenant-founder-words">
+        “Together we can change the course of climate change.”
+      </blockquote>
+      <p>
+        Her request is the purpose of this record: share climate emergencies and positive
+        actions internationally, so others can learn from the work and act.
+      </p>
+      <p className="covenant-caption covenant-founder-source">
+        Her words, in{' '}
+        <a href="https://www.solutions-site.org/node/1648" target="_blank" rel="noopener noreferrer">
+          <cite>The Changing Course of Climate Change</cite> · 2026 ↗
+          <span className="sr-only"> (opens a new tab)</span>
+        </a>
+        <span className="covenant-source-name">Horizon International Solutions Site</span>
+      </p>
+    </section>
   );
 }

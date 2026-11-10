@@ -38,6 +38,22 @@
    the files can be copied, self-hosted and handed to whoever keeps this record next.
    The machine keeps its own face for facts — dates, sources, counts, labels, buttons.
    Warm paper, signal red and the covenant all stay. */
+/* The covenant's screen voice, with real regular and bold faces. */
+@font-face {
+  font-family: 'Record UI';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/helvetica-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Record UI';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://media.base44.com/files/public/builder-assets/wix-fonts/helvetica-700-normal.woff2') format('woff2');
+}
+
 @font-face {
   font-family: 'Record Cherokee';
   font-style: normal;
@@ -176,6 +192,7 @@ button:focus-visible {
     --font-display: 'Oswald', Impact, 'Haettenschweiler', 'Arial Narrow', system-ui, sans-serif;
     --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-script: 'Record Cherokee', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-record-ui: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     /* THE READING VOICE IS NOW A READING FACE.
        It was the machine's own lettering given air — same monospace, larger and
        looser — on the argument that one face for everything means a tongue we
@@ -273,6 +290,7 @@ button:focus-visible {
   }
   .dark {
     --font-script: 'Record Cherokee', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-record-ui: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;

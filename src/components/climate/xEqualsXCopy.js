@@ -1,5 +1,5 @@
 export const COVENANT = {
-  title: 'Equal worth.',
+  title: 'We are all one.',
   distinction: 'Not equal evidence.',
   meaning: 'The same standard for every claim. Keep its source, name what is uncertain, and show what changes.',
   limit: 'An editorial commitment, not a certificate of truth.',

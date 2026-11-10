@@ -7,6 +7,7 @@ module.exports = {
       fontFamily: {
         display: ['var(--font-display)'],
         body: ['var(--font-body)'],
+        'record-ui': ['var(--font-record-ui)'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Record Cherokee', 'monospace'],
       },
   		borderRadius: {

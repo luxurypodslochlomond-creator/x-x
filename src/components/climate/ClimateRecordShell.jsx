@@ -15,9 +15,9 @@ import { MarkEqual } from '@/components/climate/RecordFootMarks';
 // once. Nothing was removed — the eyebrow, the statement, the foot and the credit are all
 // still said. `compact` still drops the opening block for the rooms where somebody has come
 // to work rather than to read.
-export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, children }) {
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, className = '', children }) {
   return (
-    <div dir={dir} className="climate-record relative min-h-screen bg-record-paper text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
+    <div dir={dir} className={`climate-record relative min-h-screen bg-record-paper text-record-ink ${className}`} style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow={eyebrow} fallback={returnTo} />
 
       {!compact && (
@@ -49,10 +49,10 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
         </div>
       )}
 
-      <div className={`mx-auto max-w-2xl px-4 lg:max-w-3xl ${compact ? 'py-4 lg:py-8' : 'py-8 lg:py-14'}`}>{children}</div>
+      <div className={`record-shell-content mx-auto max-w-2xl px-4 lg:max-w-3xl ${compact ? 'py-4 lg:py-8' : 'py-8 lg:py-14'}`}>{children}</div>
 
       {/* The way back to the record, stated once, in the record's own hand. */}
-      <div className="border-t border-record-ink/15">
+      <div className="record-shell-return border-t border-record-ink/15">
         <div className="mx-auto max-w-[1100px] px-4 py-6 lg:px-10 lg:py-8">
           <Link
             to={returnTo}
@@ -68,7 +68,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       )}
 
       {/* One left edge: the foot sits at the same 4 units as every paragraph above it. */}
-      <p className="px-4 pb-9 text-center font-mono text-[12px] leading-relaxed text-record-muted">
+      <p className="record-shell-credit px-4 pb-9 text-center font-mono text-[12px] leading-relaxed text-record-muted">
         Platform built by Brian Hughes ·{' '}
         <Link to="/Welcome" className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red">UF51 CIC</Link>
         {' '}· Scotland

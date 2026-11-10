@@ -27,7 +27,7 @@ export default function XEqualsXResearchPanel() {
   }, []);
 
   return (
-    <RecordBand id="promises" label="In its own words" title="Recorded commitments">
+    <RecordBand id="promises" label="In its own words" title="Recorded commitments" className="covenant-commitments">
       {error && (
         <p className="text-[#b3261e]">This section could not be read just now: {error}</p>
       )}
@@ -43,24 +43,19 @@ export default function XEqualsXResearchPanel() {
       {!error && claims !== null && claims.length > 0 && (
         <div>
           {claims.map((c) => (
-            <div key={c.id} className="border-t border-[#141210]/20 pt-4 pb-4 first:border-t-0 first:pt-0">
-              <div
-                className="text-[#141210]"
-                style={{ fontFamily: 'var(--font-display)', fontSize: '17px', lineHeight: 1.3 }}
-              >
-                {c.mark}
-              </div>
+            <div key={c.id} className="covenant-commitment">
+              <h3>{c.mark}</h3>
 
               <p className="mt-1.5">{c.plain}</p>
 
               {c.does_not_establish && (
-                <p className="mt-2 text-[#5a5246]">
-                  <span className="font-mono text-[12.5px] tracking-[0.06em]">Does not establish. </span>
+                <p className="covenant-commitment-limit mt-2 text-record-muted">
+                  <span className="covenant-limit-label">Does not establish. </span>
                   {c.does_not_establish}
                 </p>
               )}
 
-              <p className="mt-2 font-mono text-[12.5px] leading-relaxed text-[#5a5246]">
+              <p className="covenant-caption covenant-commitment-source mt-2 text-record-muted">
                 {c.domain === 'decision' ? 'A decision, not a finding' : (c.domain || null)}
                 {c.domain ? ' · ' : ''}
                 {c.origin_url ? (
@@ -83,7 +78,7 @@ export default function XEqualsXResearchPanel() {
             </div>
           ))}
 
-          <p className="mt-1 border-t border-[#141210]/20 pt-3 text-[#5a5246]">
+          <p className="covenant-caption covenant-signature-note text-record-muted">
             None is signed. A machine cannot sign.{' '}
             <Link
               to="/ClimateMethod"
