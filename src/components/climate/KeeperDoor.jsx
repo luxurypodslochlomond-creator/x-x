@@ -15,13 +15,25 @@ import { MarkHost } from '@/components/climate/RecordFootMarks';
 // garden, and it is warm in her mouth and meaningless on a stranger's screen — this record
 // had already found that out once, when a rail mark called "Shed" was opened by nobody. A
 // door names the room it opens, so the label is the room's own name.
+//
+// And it names the room the person holding the key is actually walking into. A checker
+// holds a key too, and had no business signing in at a door named after somebody else's
+// job. It is one room either way — the record checks its guest list on the server and
+// gives each key its own powers once inside — but a door you were invited to should use
+// your name for it, not the other person's.
 export default function KeeperDoor() {
   const { isKeeper, isChecker } = useRecordCapacity();
   const hasKey = isKeeper || isChecker;
+  const label = isKeeper ? 'The keeper’s room' : isChecker ? 'The checker’s room' : 'Keeper’s room — sign in';
+  const spoken = isKeeper
+    ? 'Open the keeper’s room — where the record is decided'
+    : isChecker
+    ? 'Open the checker’s room — where a checker writes their notes'
+    : 'Sign in to the keeper’s room';
   return (
     <Link
       to="/ClimateKeeperRoom"
-      aria-label={hasKey ? 'Open the keeper’s room — the record’s working room' : 'Sign in to the keeper’s room'}
+      aria-label={spoken}
       className={`inline-flex min-h-[40px] items-center gap-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
         hasKey ? 'text-record-red' : 'text-record-muted'
       }`}
@@ -32,7 +44,7 @@ export default function KeeperDoor() {
       <span aria-hidden="true" className="shrink-0">
         <MarkHost size={18} />
       </span>
-      {hasKey ? 'The keeper’s room' : 'Keeper’s room — sign in'}
+      {label}
     </Link>
   );
 }

@@ -23,7 +23,7 @@ function SuccessScreen({ entryType, onClose, published }) {
       </p>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
         {published
-          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A reviewer can take it down, and we would email you first.'
+          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A keeper can take it down, and we would email you first.'
           : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}
       </p>
       <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">

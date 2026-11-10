@@ -57,7 +57,7 @@ export default function RecordPagesPanel({ open, onClose }) {
                 is past the edge of the glass. What is not open is not claimed. */}
             <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[42px]">Every open door</h1>
           </div>
-          <button type="button" autoFocus onClick={onClose}           aria-label="Close every door" className="rec-art-door">
+          <button type="button" autoFocus onClick={onClose}           aria-label="Close the doors" className="rec-art-door">
             <span className="rec-art-drawing" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                 <path d="M7.1 6.4c5.8 5.7 11.7 12.8 18.1 19M25.4 6.9C19.2 13 12.6 20 6.8 25.3" />

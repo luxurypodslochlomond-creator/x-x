@@ -172,7 +172,7 @@ const FOOT = [
   ...FOOTER_NAV,
   { label: 'Terms', to: '/ClimateTerms', what: 'The terms under which the record is used.' },
   { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, and what it never does.' },
-  { label: 'Reviewer sign-in', to: '/ClimateKeeperRoom', what: 'The existing entrance for invited keepers and checkers. Signed-in reviewers see Review entries.' },
+  { label: 'The keeper’s room', to: '/ClimateKeeperRoom', what: 'Where invited keepers decide and checkers write their notes — one door, two kinds of key.' },
 ];
 
 export default function ClimateGuide() {
@@ -199,7 +199,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Wire, Map and Search. The foot also opens Why, Method, Corrections and the Contents. An invited keeper also sees the keeper’s door there."
+        note="The same drawings at the top and foot of the screen open Record, Wire, Map and Search. The foot also opens Why, Method, Corrections and this guide. An invited keeper also sees the keeper’s door there."
         items={BAR}
       />
 
@@ -234,7 +234,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="How we check entries, Corrections and the Contents. Terms, Privacy and keeper access sit below. The Contents opens every way through the record on one screen, without leaving the page."
+        note="How we check entries, Corrections and this guide. Terms, Privacy and keeper access sit below. The doors mark opens every open door on one screen, without leaving the page."
         items={FOOT}
       />
 

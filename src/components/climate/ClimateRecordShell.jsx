@@ -64,10 +64,11 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       </div>
 
       {footer && (
-        <p className="mx-auto max-w-md px-5 py-6 text-center font-mono text-[11px] leading-relaxed text-record-muted lg:max-w-2xl lg:py-8 lg:text-[12px]">{footer}</p>
+        <p className="mx-auto max-w-md px-4 py-6 text-center font-mono text-[11px] leading-relaxed text-record-muted lg:max-w-2xl lg:py-8 lg:text-[12px]">{footer}</p>
       )}
 
-      <p className="px-5 pb-9 text-center font-mono text-[12px] leading-relaxed text-record-muted">
+      {/* One left edge: the foot sits at the same 4 units as every paragraph above it. */}
+      <p className="px-4 pb-9 text-center font-mono text-[12px] leading-relaxed text-record-muted">
         Platform built by Brian Hughes ·{' '}
         <Link to="/Welcome" className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red">UF51 CIC</Link>
         {' '}· Scotland
