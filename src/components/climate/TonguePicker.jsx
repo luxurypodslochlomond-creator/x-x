@@ -22,7 +22,14 @@ const nameFor = (code) => {
 // The trigger is a door in the record's drawn rail — the same mark, the same caption,
 // the same full ink at rest as the six destinations beside it. A tongue is not a setting
 // bolted onto the page: it is one more way through the record, so it is cut in the same hand.
-export default function TonguePicker({ lang, detected, onChange, tone = 'paper', size = 44 }) {
+// ── TWO WAYS TO ASK, ONE LIST ────────────────────────────────────────────────────
+// `inline` changes only the trigger's clothes, never the panel: in the rail the tongue is
+// a door among doors, stacked mark-over-caption like every other door. On the masthead's
+// name line — where it now signs the page beside the record's own name — it is a single
+// line, mark then the tongue's own word, because there it is not a destination at all.
+// Search, the manual entry, the honesty line and the promise are the same component, so
+// there is one list of the world's tongues on this record and no second copy to drift.
+export default function TonguePicker({ lang, detected, onChange, tone = 'paper', size = 44, inline = false }) {
   const [open, setOpen] = useState(false);
   const [above, setAbove] = useState(false);
   const [query, setQuery] = useState('');
@@ -155,7 +162,7 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'paper',
   );
 
   return (
-    <div ref={wrapRef} className="rec-art-door-wrap relative min-w-0 flex-1">
+    <div ref={wrapRef} className={inline ? 'relative min-w-0 shrink-0' : 'rec-art-door-wrap relative min-w-0 flex-1'}>
       <button
         ref={triggerRef}
         type="button"
@@ -164,15 +171,17 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'paper',
         aria-expanded={open}
         aria-label="Choose the record's language"
         title={`The tongue it is read in: ${lang === 'auto' ? `Auto — ${nameFor(detected)}` : nameFor(lang)}`}
-        className={`rec-art-door w-full ${open ? 'rec-art-door-active' : ''}`}
+        className={inline
+          ? `rec-tongue-mark ${open ? 'rec-tongue-mark-on' : ''}`
+          : `rec-art-door w-full ${open ? 'rec-art-door-active' : ''}`}
       >
-        <span className="rec-art-drawing" aria-hidden="true"><MarkTongue size={size} /></span>
+        <span className={inline ? 'block shrink-0' : 'rec-art-drawing'} aria-hidden="true"><MarkTongue size={size} /></span>
         {/* One line, because the rail is now ten marks in two equal rows and a two-line
             caption in one cell would make the second row taller than the first. The name
             of the tongue is the one thing worth the space; that it was chosen for you is
             said in the title and the label, where it belongs. Never translated: a tongue
             is named in its own words. */}
-        <span data-no-translate className="rec-art-caption">
+        <span data-no-translate className={inline ? 'rec-tongue-name max-w-[8.5rem] truncate' : 'rec-art-caption'}>
           {lang === 'auto' ? nameFor(detected) : nameFor(lang)}
         </span>
       </button>

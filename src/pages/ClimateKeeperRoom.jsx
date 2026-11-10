@@ -161,7 +161,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'error' && (
         <Door
-          heading="The shed could not be opened"
+          heading="The keeper's room could not be opened"
           body="Nothing is lost — everything waiting is still waiting. Try once more."
           actionLabel="Try again"
           onAction={load}
@@ -172,7 +172,7 @@ export default function ClimateKeeperRoom() {
         <>
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-[12px] text-[#8a7f6d]" style={reading}>
-              {who.name || 'The shed'}
+              {who.name || "The keeper's room"}
               {who.isKeeper ? ' · keeper' : ' · checker'}
             </p>
             <button

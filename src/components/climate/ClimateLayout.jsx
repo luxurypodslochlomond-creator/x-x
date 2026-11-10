@@ -8,6 +8,7 @@ import { prefetchPath } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import RecordImprint from '@/components/climate/RecordImprint';
+import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
@@ -185,6 +186,15 @@ export default function ClimateLayout({ children, currentPage }) {
                 Record of the Time
               </span>
             </Link>
+
+            {/* ── THE READER'S OWN TONGUE, ON THE IMPRINT LINE ───────────────────────
+                Not a seventh door in the rail below: it goes nowhere, it changes the voice
+                of the page you are already standing on. It is set opposite the record's own
+                name, the record signing on the left and the reader answering on the right,
+                and it names the tongue in that tongue's own words so it explains itself
+                without a label. Always on the glass, never a cell stolen from a door, and it
+                cannot push one aside whatever a tongue is called. */}
+            <RecordTongueDoor size={18} inline />
           </div>
 
           <RecordRule />

@@ -54,6 +54,54 @@
   outline: 2px solid rgb(var(--record-mark));
   outline-offset: 3px;
 }
+/* ── THE TONGUE, ON THE NAME LINE ────────────────────────────────────────────────
+   The one control on this record that changes the record rather than going somewhere, and
+   it has now been in both wrong places. In the rail it read as a seventh destination among
+   six ways through — a setting pretending to be a page. Buried in the sheet it read as
+   hidden, which for the reader it exists for is worse: someone in Bangkok should not have
+   to go looking for the door that lets them read in Thai.
+
+   So it is neither. It sits on the masthead's own line, opposite the record's name: the
+   record signing as itself on the left, the reader's own tongue answering on the right. Two
+   signatures on one line — which is where a language belongs on a printed record, in the
+   imprint, not in the table of contents.
+
+   It is subtle by being small and quiet in colour, never by being hidden: the mark is
+   eighteen pixels and the tongue is named in its own words beside it — "English", "ไทย",
+   "Português" — so a reader who has never seen the lips knows what it is without being
+   taught a word. Never translated, because a tongue names itself. Full ink on hover, the
+   borrowed red when open, a forty-pixel thumb target, one line always. */
+.rec-tongue-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--record-muted));
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .18s ease;
+}
+.rec-tongue-mark:hover,
+.rec-tongue-mark:active,
+.rec-tongue-mark-on { color: rgb(var(--record-mark)); }
+.rec-tongue-mark:focus-visible {
+  outline: 2px solid rgb(var(--record-mark));
+  outline-offset: 3px;
+}
+.rec-tongue-name {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
 .rec-art-navigator {
   /* ── PINNED TO THE GLASS, LIKE A PHONE'S OWN TAB BAR ─────────────────────────
      It sat in the page's flow and pinned at the end of it, which meant the way through

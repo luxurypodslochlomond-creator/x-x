@@ -21,13 +21,22 @@ export default function RecordIndexPlate({ onNavigate }) {
   const { pathname } = useLocation();
   const { isKeeper, isChecker } = useRecordCapacity();
 
-  // ── THE SHED MOVED HERE WITH THE RULEBOOK ──────────────────────────────────────
+  // ── THE KEEPER'S ROOM CAME HERE WITH THE RULEBOOK ──────────────────────────────
   // The masthead is six marks with nothing past the edge of the glass, so the keeper's own
   // room came off it. It is still a door, and it is still the record's rather than the
   // building's: this sheet is where a keeper opens it, and a reader who holds no keys is
   // never shown a door that would turn them away.
+  //
+  // It is called "The keeper's room" and it is not called "the shed" any more. The shed was
+  // the founder's own word and it is a good word in her mouth — a hut at the end of a garden
+  // where things get made — but a label has to work for someone who was handed a key and a
+  // link, has never spoken to her, and has to decide what is behind it in half a second. This
+  // record already learned that once: the rail carried a mark called "Shed" and readers did
+  // not understand it, so it came off. Reusing the word in the index would have brought the
+  // same confusion back in a quieter place. The room is named after what it is, and after the
+  // page it opens, which is already called the keeper's room on its own door.
   const groups = isKeeper || isChecker
-    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: 'The shed', to: '/ClimateKeeperRoom', what: "The keeper's own room." }] }]
+    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: "The keeper's room", to: '/ClimateKeeperRoom', what: 'Your own room: decide, check, people, counts.' }] }]
     : CONTENT_GROUPS;
 
   return (

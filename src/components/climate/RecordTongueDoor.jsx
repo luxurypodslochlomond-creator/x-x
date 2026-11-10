@@ -11,7 +11,7 @@ import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 // So it is a door now, cut at the same size as the other six, in the same rail, with its
 // caption set the same way. Nothing else changed: the same list of every tongue, the same
 // honesty line, the same promise that nobody is turned away.
-export default function RecordTongueDoor({ size = 44 }) {
+export default function RecordTongueDoor({ size = 44, inline = false }) {
   const { lang, autoLang, setLanguage } = useSiteLanguage();
-  return <TonguePicker lang={lang} detected={autoLang} onChange={setLanguage} tone="paper" size={size} />;
+  return <TonguePicker lang={lang} detected={autoLang} onChange={setLanguage} tone="paper" size={size} inline={inline} />;
 }

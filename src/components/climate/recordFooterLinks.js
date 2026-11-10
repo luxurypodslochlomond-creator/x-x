@@ -16,8 +16,12 @@
 //
 // What came off is not gone. Readership and the founder are pages a reader meets once
 // they are already inside, not questions they arrive with, so both live in the foot and
-// in the contents sheet. The tongue is still on the rail, behind a hairline at its end:
-// it is a setting that changes the record's voice, not a sixth place to stand.
+// in the contents sheet.
+//
+// The tongue is not in this list and should not be. A door goes somewhere; the tongue
+// changes the voice of the page you are already standing on, which is why it sits on the
+// masthead's own name line — the record's name on one side, the reader's tongue answering
+// on the other — instead of taking a cell from a place to stand.
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
@@ -37,10 +41,11 @@ export const PRIMARY_NAV = [
 ];
 
 // ── THE RAIL'S SECOND ROW ─────────────────────────────────────────────────────
-// The way in is five marks on the top row. These three are the half of the record a
-// reader needs once they are standing in it: why it exists, how an entry is checked,
-// and what has been corrected. The index and the tongue finish the row, so the rail
-// carries ten doors in two equal rows of five and nothing is hidden behind a sheet.
+// These three are the half of the record a reader needs once they are standing in it: why
+// it exists, how an entry is checked, and what has been corrected. They were drawn as a
+// second row of the rail for a while; the rail is one row of six now, so they are printed
+// in the "How it is kept" part of the sheet and stay here as the one place their wording
+// is written down.
 export const RAIL_SECOND_NAV = [
   { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'Method', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },

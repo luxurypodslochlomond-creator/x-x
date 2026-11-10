@@ -20,10 +20,12 @@ import '@/components/climate/record-navigator.css';
 // What left the row did not leave the record. The rulebook (why it exists, how an entry is
 // checked, what has been corrected, the terms and privacy) is exactly what the sheet already
 // prints under "How it is kept", so nothing was duplicated to keep it there. The founder was
-// never a question a reader arrives with. The shed opens from the sheet for the two people
-// who hold the keys. And the tongue — the one mark that changes the record's voice instead
-// of going somewhere — now sits in the sheet, called what it is, because a setting belongs
-// in a list of settings and not in the middle of the way through.
+// never a question a reader arrives with. The keeper's room opens from the sheet for the
+// two people who hold the keys. And the tongue — the one control that changes the record's
+// voice instead of going somewhere — is above this row on the masthead's name line, opposite
+// the record's own name, naming itself in its own words. Not in the row (it is not a place
+// to stand) and not only in the sheet (language is not a buried setting on a record that
+// promises nobody is left behind).
 const WAY_IN = PRIMARY_NAV;
 
 // Equal share, always. Every cell is one sixth of the row whatever it contains, so no door
