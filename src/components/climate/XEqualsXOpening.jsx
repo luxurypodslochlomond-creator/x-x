@@ -37,10 +37,6 @@ export default function XEqualsXOpening() {
           The record is the record — every entry held to the same standard, never ranked by how loud it is.
         </p>
 
-        <p className="covenant-front-note">
-          This is what an honest record looks like. This is the opposite of the feed.
-        </p>
-
         <div className="covenant-hero-actions">
           <Link to="/TogetherChangeClimate" className="covenant-btn">
             Read the record <ArrowRight className="w-4 h-4" />

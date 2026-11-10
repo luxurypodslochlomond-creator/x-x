@@ -10,7 +10,6 @@ import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
-import { COVENANT } from '@/components/climate/xEqualsXCopy';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import '@/components/climate/x-equals-x-page.css';
@@ -88,10 +87,6 @@ export default function XEqualsX() {
             />
           </div>
         </div>
-
-        <p className="covenant-dedication">
-          <Link to="/ClimateFounder">{COVENANT.dedication}</Link>
-        </p>
       </div>
 
       {/* Her page closes on the signal band and the way back. So does this one. */}
