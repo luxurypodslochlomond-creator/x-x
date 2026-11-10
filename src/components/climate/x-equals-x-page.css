@@ -1,4 +1,4 @@
-/* One sheet for the principle and its separate, full-length working. */
+/* The principle and its supporting record stay on one continuous sheet. */
 #x-equals-x {
   --font-reading: var(--font-body);
   --font-display: var(--font-body);
@@ -39,7 +39,11 @@
   color: rgb(var(--record-mark));
 }
 #x-equals-x .covenant-opening h2 { font-size: 2.125rem; letter-spacing: -.045em !important; }
+#x-equals-x .covenant-purpose { margin-top: 1rem; }
+#x-equals-x .covenant-evidence-standard { margin-top: 1rem; color: rgb(var(--record-muted)); }
 #x-equals-x .covenant-body { padding-top: 2rem; }
+#x-equals-x #terms { margin-top: 2rem; }
+#x-equals-x .covenant-section-heading { margin-bottom: 1.4rem; }
 #x-equals-x .covenant-terms { display: grid; gap: 1.4rem; margin: 0; }
 #x-equals-x .covenant-term dt { font-size: 1.6875rem; font-weight: 650; line-height: 1.15; letter-spacing: -.035em; }
 #x-equals-x .covenant-term dd { margin-top: .35rem; color: rgb(var(--record-muted)); }
