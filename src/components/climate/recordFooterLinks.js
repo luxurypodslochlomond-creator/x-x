@@ -22,6 +22,13 @@ export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
+  // ── REACH, AND WHY IT IS ON THE RAIL ────────────────────────────────────────
+  // Readership sat only in the foot and in the contents sheet, which for a record whose
+  // whole argument is that it can be seen and checked is the wrong place for the one page
+  // that shows who is reading it and from where. It is called Reach rather than Impact
+  // because Impact sounds like a funder's spreadsheet and this is a fact about a page: how
+  // far it has got, in how many tongues. Reach is also a word the record already uses.
+  { label: 'Reach', to: '/ClimateImpact', page: 'ClimateImpact', what: 'Who is reading the record, from where, in which tongue.' },
   // Music is off the rail at Janine's request, 9 November 2026: "it would be helpful to
   // not distract by inviting music… it will take viewers away from the entries of
   // solutions and crises." The page still exists, and still holds only the record's own
@@ -56,7 +63,8 @@ export const FOOTER_NAV = [
 // bar — a foot that repeats the head teaches the reader that neither one matters.
 export const ELSEWHERE_NAV = [
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
-  { label: 'Readership', to: '/ClimateImpact', what: 'Who is reading the record, and from where.' },
+  // Reach came off this list when it went onto the rail: one door, one place. A foot that
+  // repeats the masthead teaches a reader that neither one matters.
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
   { label: 'Become a checker', to: '/ClimateFellows', what: 'What checking involves, and how to ask to take part.' },
   { label: 'Host the record', to: '/ClimateHost', what: 'What carrying the record involves.' },

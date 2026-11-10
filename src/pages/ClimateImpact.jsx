@@ -147,7 +147,7 @@ export default function ClimateImpact() {
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       {/* The same bar, the same way back, as every other page of the record. */}
-      <RecordBackBar eyebrow="The record · Impact" />
+      <RecordBackBar eyebrow="The record · Reach" />
 
       {/* ── THE SIGNAL: ONE SENTENCE, EVERY FIGURE A DOOR ── */}
       <ImpactSignal stats={stats} />

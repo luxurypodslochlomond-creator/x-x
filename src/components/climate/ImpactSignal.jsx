@@ -62,7 +62,7 @@ export default function ImpactSignal({ stats }) {
       <div className="relative mx-auto max-w-[1100px] px-5 lg:px-8 pt-6 pb-7 lg:pt-9 lg:pb-9">
         {/* The plate's own head rule — a printed page says who it is before it says anything. */}
         <div className="flex items-baseline justify-between gap-4 border-b border-[#efe7d6]/20 pb-2.5">
-          <p className="text-[8px] font-mono uppercase tracking-[0.26em] text-[#e2602a]">Global impact</p>
+          <p className="text-[8px] font-mono uppercase tracking-[0.26em] text-[#e2602a]">How far it has got</p>
           <p className="text-[8px] font-mono uppercase tracking-[0.2em] text-[#efe7d6]/40">The record of the time</p>
         </div>
 

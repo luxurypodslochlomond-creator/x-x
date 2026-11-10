@@ -21,10 +21,14 @@ import '@/components/climate/record-navigator.css';
 // line can move when you turn a page or choose a tongue. The marks are cut at thirty-four
 // rather than thirty-two, which is the size at which a stroke stops being a grey smudge
 // and starts being ink.
-const WAY_IN = [
-  ...PRIMARY_NAV,
-  { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
-];
+// ── FIVE, AND NOTHING PAST THE EDGE ─────────────────────────────────────────────
+// The row carried the founder as a sixth cell, which pushed it past 393 pixels and meant
+// the last doors — the rulebook, the contents, the tongue — were only reachable by sliding
+// the row sideways. A reader does not discover a sideways-scrolling menu; they conclude
+// the menu is short. So the row is the five a reader arrives with and nothing else, and
+// the founder (who is met once inside, not on the way in) keeps her place in the foot and
+// in the sheet. Nothing has been removed; one thing has stopped hiding five others.
+const WAY_IN = PRIMARY_NAV;
 
 // ── ONE ROW, AND IT IS THE WHOLE RECORD ─────────────────────────────────────────
 // There used to be a second copy of this row pinned to the foot of a phone, and behind it
@@ -89,9 +93,14 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
           />
         ))}
 
+        {/* ── DOORS, NOT CONTENTS ────────────────────────────────────────────────
+            "Contents" is the correct word for a printed book and the wrong word for a
+            thumb: it names a list rather than an act. The record already calls its way
+            through doors everywhere else — the shed has rooms, the masthead has a
+            rulebook — so the mark that opens them all is called after them. */}
         <RecordNavDoor
           to="/ClimateGuide"
-          label="Contents"
+          label="Doors"
           what="Every way through the record, on one screen."
           size={34}
           asButton

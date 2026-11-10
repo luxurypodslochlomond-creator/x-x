@@ -41,16 +41,15 @@ export default function RecordPagesPanel({ open, onClose }) {
             and a rule drawn under it — a plate, not a panel. */}
         <div className="mb-3 flex shrink-0 items-start justify-between gap-4 border-b border-record-ink pb-2.5">
           <div>
-            <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">The record · every door</p>
-            {/* It said Contents in small type and Index in large type in the same block.
-                Contents is the right word and Index was the wrong one: a contents page lists
-                what is in a book, in the order you read it, which is exactly what this is.
-                An index is an alphabetical list of subjects at the back, and there is not one
-                here. The word above now says what the sheet is for; the word below says what
-                it is, and they are no longer arguing. */}
-            <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[42px]">Contents</h1>
+            <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">The record</p>
+            {/* It has been called Contents, then Index, and now Every door. Contents was
+                accurate and flat; Index was wrong, because an index is alphabetical and
+                there is not one here. The mark that opens this sheet is called Doors, so the
+                sheet it opens is named for the same thing — and "every door" says the promise
+                out loud: nothing is behind a guess, nothing is past the edge of the glass. */}
+            <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[42px]">Every door</h1>
           </div>
-          <button type="button" autoFocus onClick={onClose} aria-label="Close the contents" className="rec-art-door">
+          <button type="button" autoFocus onClick={onClose}           aria-label="Close every door" className="rec-art-door">
             <span className="rec-art-drawing" aria-hidden="true">
               <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                 <path d="M7.1 6.4c5.8 5.7 11.7 12.8 18.1 19M25.4 6.9C19.2 13 12.6 20 6.8 25.3" />
