@@ -12,8 +12,8 @@ import '@/components/climate/record-navigator.css';
 // document about the record rather than the record.
 //
 // So the sheet is now what the rail is: every door of the record, cut in the same hand,
-// at a size a thumb can see it at, in four equal columns. All of them, in four parts, on
-// one screen — the ways in, how it is kept, what is elsewhere, and what is behind it.
+// at a size a thumb can see it at — three across on a handset, four on a wide sheet. All of
+// them, in three parts, on one screen: the ways in, how it is kept, and what is elsewhere.
 // Nothing is added and nothing is dropped: it is the same CONTENT_GROUPS the written
 // guide prints, drawn instead of typed, and it can never drift from the rail because
 // both read the same list and the same marks.

@@ -2,15 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
-import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
+import { markFor } from '@/components/climate/pageMarks';
+
+// The guide's own mark, fetched once from the same map the doors read, so the foot can
+// never be drawn in a different hand to the sheet above it.
+const GuideMark = markFor('/ClimateGuide');
 
 // ── THE INDEX, ON ONE SCREEN ───────────────────────────────────────────────────
 // This sheet was a page of drawn doors that ran past the top and bottom of a phone: a
 // reader who opened the index to find their way had to scroll the index itself, which is
-// the one thing an index may never ask. It is now a printed index — plain names, in
-// columns, small enough that every door of the record is in front of the eye at once on
-// any handset, and legible rather than squeezed. The drawings keep their job on the
-// written guide, where there is a page to give them.
+// the one thing an index may never ask. It is drawn doors still — but three across on a
+// handset and four on a wide sheet, at a size a thumb can see, in three parts, so every
+// door of the record is in front of the eye at once without a scroll.
 //
 // The sheet is a fixed column, not a long page: rule, name, index, close. The body may
 // scroll only if a device is smaller than anything a phone has been since the index was
@@ -65,32 +68,31 @@ export default function RecordPagesPanel({ open, onClose }) {
         </div>
 
         <div className="mt-3 shrink-0 border-t border-record-ink pt-2.5">
+          {/* ── ONE FOOT, AND IT IS DRAWN LIKE EVERYTHING ABOVE IT ───────────────────
+              Two lines stood here: the written guide with an arrow, and beneath a second
+              rule, the tongue. The tongue was the leftover in that pair — it was parked
+              here when it had no home anywhere, and then took its own place on the
+              masthead's name line, so this foot had quietly become a second front door to
+              one setting. It has gone from here and is still exactly where a reader changes
+              it, at the top of every page.
+              The guide keeps the foot. It carries its own mark now, fetched from the same
+              map the doors read, because a bare line of text under sixteen drawn doors was
+              the one thing on the sheet that did not belong to the sheet. */}
           <Link
             to="/ClimateGuide"
             onClick={onClose}
             className="group flex items-center justify-between gap-3"
           >
-            <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
-              The written guide, line by line
+            <span className="flex items-center gap-2.5">
+              <span aria-hidden="true" className="shrink-0 text-record-ink">
+                <GuideMark size={26} />
+              </span>
+              <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
+                Every control, written out
+              </span>
             </span>
             <span aria-hidden="true" className="font-mono text-[13px] text-record-mark transition-transform group-hover:translate-x-0.5">→</span>
           </Link>
-
-          {/* ── THE TONGUE, WHERE A SETTING BELONGS ─────────────────────────────────
-              It stood in the masthead until the row had to become six marks with nothing
-              past the edge, and it is the one door up there that does not go anywhere: it
-              changes the record's own voice. So it is kept with the guide, below the last
-              rule, where a reader looking for how to change something already looks — and
-              it is still a drawn mark with its own name, not a grey dropdown, because a
-              tongue is not a preference. Nothing is turned away, and nothing is hidden. */}
-          <div className="mt-1 flex items-center justify-between gap-3 border-t border-record-ink/15 pt-1.5">
-            <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
-              The tongue
-            </span>
-            <div className="flex shrink-0 items-center [&>div]:flex-none">
-              <RecordTongueDoor size={26} />
-            </div>
-          </div>
         </div>
       </div>
     </dialog>, document.body

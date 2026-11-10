@@ -30,6 +30,18 @@ export function MarkBrief({ size = 26, className = '' }) {
   );
 }
 
+// What is planned, and what is still missing. One page, folded at its corner, its last line
+// stopped short — a brief that says out loud where it runs out.
+export function MarkPlan({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
+      <path d="M9.6 5.4h15.2l6.2 6.2v23H9.6z" />
+      <path d="M24.4 5.6v6.4h6.4" />
+      <path d="M14.6 17.4h9.4M14.6 22.8h9.4M14.6 28.2h5.2" />
+    </svg>
+  );
+}
+
 // A continuous-line human profile, not a generic account badge.
 export function MarkPortrait({ size = 26, className = '' }) {
   return (

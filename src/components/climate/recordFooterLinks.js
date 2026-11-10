@@ -105,11 +105,21 @@ export const PAGE_INDEX = [
 ];
 
 // One drawn index for the contents sheet and its permanent page. Never link it to itself.
+//
+// ── THREE PARTS, NOT FOUR ─────────────────────────────────────────────────────
+// There were four, and the fourth held two doors — the brief and the studio — alone under a
+// heading of its own. On a handset the sheet sets three doors across, so four parts fell as
+// 3+2, 3+3, 3+1 and a lonely pair, and three of the four edges ended short. That is what read
+// as an imbalance; nobody had to count it to feel it.
+//
+// The brief and the studio are things written about the record and made with it, which is
+// what Elsewhere already means, so they go there: 5, 6, 6, and one short row in the whole
+// sheet instead of three. Nothing is dropped, renamed or reordered — the same seventeen
+// doors, in one fewer part.
 export const CONTENT_GROUPS = [
   { title: 'The record', doors: PRIMARY_NAV },
   { title: 'How it is kept', doors: [...FOOTER_NAV.filter(({ to }) => to !== '/ClimateGuide'), ...TRUST_NAV, PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovenant')] },
-  { title: 'Elsewhere', doors: ELSEWHERE_NAV },
-  { title: 'Behind the record', doors: SUPPORTING_PAGES },
+  { title: 'Elsewhere', doors: [...ELSEWHERE_NAV, ...SUPPORTING_PAGES] },
 ];
 
 export default SUPPORTING_PAGES;

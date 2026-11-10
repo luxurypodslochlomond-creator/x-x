@@ -1,5 +1,6 @@
 import {
   MarkBrief,
+  MarkPlan,
   MarkSignal,
   MarkHorizon,
   MarkPortrait,
@@ -50,10 +51,18 @@ const MARKS = {
   '/ClimateMusic': MarkMusic,
   '/Studio': MarkStudio,
 
-  // What is written about it, and what it costs to carry.
-  '/ClimateBrief': MarkBrief,
+  // ── WHAT IS WRITTEN ABOUT IT, AND WHAT IT COSTS TO CARRY ──────────────────────
+  // Two marks were doing double duty on the sheet, and that, not the arithmetic, is what
+  // made it look wrong: the open folio was drawn for both the record and the project brief,
+  // and the key was drawn for both the host and the keeper's room. A reader caught the same
+  // picture twice under two different names in one glance and the page stopped reading as a
+  // page. The folio belongs to the record itself, so the brief gets its own page drawn for
+  // it; and the key belongs to whoever actually holds the record's keys, so the host takes
+  // the mark of a thing changing hands, which was drawn for exactly that and was sitting
+  // unused once the handover sheet came off the doors. One new drawing, one swap.
+  '/ClimateBrief': MarkPlan,
   '/ClimateImpact': MarkReadership,
-  '/ClimateHost': MarkHost,
+  '/ClimateHost': MarkHandover,
   '/ClimateKeeperRoom': MarkHost,
   '/ClimateSupport': MarkSupport,
   '/ExtractionProofCovenant': MarkCovenant,
