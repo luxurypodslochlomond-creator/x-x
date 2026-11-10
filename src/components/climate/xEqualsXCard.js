@@ -35,8 +35,11 @@ const TERMS = [
   ['03', 'Money does not buy authority.'],
 ];
 
+// The card says what the page now opens with, so the thing Bri sends and the thing a
+// reader lands on are the same sentence. It has to be true standing alone, in a message
+// thread, with no page around it: what x = x refuses, and what it holds instead.
 const MEANING =
-  'Every person has equal worth. A claim still has to stand up to evidence. A principle we choose, not a scientific finding.';
+  'A solution is a solution. An action is an action. A person is a person. Nothing here is ranked by who shouts loudest, or lifted because somebody paid.';
 
 const letterSpacing = (g, value) => {
   if ('letterSpacing' in g) g.letterSpacing = value;

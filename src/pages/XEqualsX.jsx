@@ -17,7 +17,9 @@ export default function XEqualsX() {
         <XEqualsXOpening />
         <XEqualsXFounderNote />
         <XEqualsXWhatItAsks />
-        <div className="pb-9 pt-7">
+        {/* The hand-off sits under the mark, centred, because the page now opens centred and
+            passing it on is the page's own last word rather than a widget at the side. */}
+        <div className="pb-9 pt-7 text-center">
           <ShareCardButton
             entry={{ id: 'x-equals-x', title: 'x = x' }}
             build={buildCovenantCard}
@@ -34,6 +36,13 @@ export default function XEqualsX() {
           <summary>Context and credits</summary>
           <XEqualsXThanks />
         </details>
+
+        {/* Who made it, said plainly and centred, in the same breath as the dedication at the
+            top — a record that asks for no letterhead still owes the reader the names of the
+            people who built it. */}
+        <p className="mt-8 border-t border-record-ink/15 pt-5 text-center font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-muted">
+          Built by Brian Hughes and Jake · UF51 CIC · Scotland
+        </p>
       </article>
     </ClimateRecordShell>
   );
