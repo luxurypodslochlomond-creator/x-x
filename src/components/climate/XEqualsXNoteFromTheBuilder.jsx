@@ -56,7 +56,7 @@ export default function XEqualsXNoteFromTheBuilder() {
         </p>
         <p>
           Janine Selendy spent forty years gathering what actually works on this planet and let it be
-          opened to everyone. Laurie Anderson wrote a record in 1982 that taught me a flat sentence
+          opened to everyone. Laurie Anderson wrote a single in 1981 that taught me a flat sentence
           can be the loudest thing in a room. I borrowed one of her reds and one of her phrases to
           say thank you with — in the open, where she can take them back.
         </p>

@@ -118,17 +118,10 @@ export default function WelcomePage() {
 
         {/* HERO — BIG SCIENCE cold opening */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative text-center space-y-5 max-w-3xl mx-auto">
-          {/* Epigraph band — Laurie's cold opening. The words are hers, so her name
-              stands under them: a record that asks every entry to carry its origin
-              cannot borrow a line and leave the maker off it. */}
-          <div className="bg-[#1a1612] py-2 px-4 -mx-6 mb-4">
-            <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#efe7d6] opacity-60">
-              THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.
-            </p>
-            <p className="font-mono text-[8px] tracking-[0.2em] text-[#efe7d6]/35 mt-1">
-              Laurie Anderson · From the Air, Big Science, 1982
-            </p>
-          </div>
+          {/* Her couplet opened this page, and two others, in the same month. Janine
+              Selendy — whose record this is — asked that she not be mentioned more than
+              once, so the borrowed line is declared on x = x alone, where it can be taken
+              back. Nothing is lost: the whole debt is still written out there, in full. */}
 
           {/* O Superman — the pilot's voice, cold in the corner */}
           <div className="absolute -top-4 left-0 flex items-center gap-1.5 pointer-events-none" style={{ animation: 'twcc-flicker 7s linear 2s infinite' }}>

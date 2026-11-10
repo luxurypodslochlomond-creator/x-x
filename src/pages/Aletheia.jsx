@@ -83,15 +83,8 @@ export default function AletheiaPage() {
 
   return (
     <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative flex flex-col">
-      {/* Epigraph — her words, and her name under them */}
-      <div className="bg-[#1a1612] py-2 px-4 text-center">
-        <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#efe7d6] opacity-60">
-          THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.
-        </p>
-        <p className="font-mono text-[8px] tracking-[0.2em] text-[#efe7d6]/35 mt-1">
-          Laurie Anderson · From the Air, Big Science, 1982
-        </p>
-      </div>
+      {/* The borrowed couplet came off this page: the host of the record asked that it not
+          be waved about, and x = x is where it is declared, once, where it can be taken back. */}
 
       <div className="flex-1 flex flex-col items-center justify-start px-6 pt-8 pb-6 max-w-2xl mx-auto w-full relative z-10">
         {/* Title */}

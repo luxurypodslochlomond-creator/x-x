@@ -13,14 +13,9 @@ export default function HowYouEarnPage() {
 
         {/* HEADER */}
         <header className="text-center space-y-4">
-          <div className="bg-[#1a1612] py-2 px-4 -mx-6 mb-2">
-            <p className="font-mono text-[10px] font-black tracking-[0.2em] text-[#efe7d6] opacity-60">
-              THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.
-            </p>
-            <p className="font-mono text-[8px] tracking-[0.2em] text-[#efe7d6]/35 mt-1">
-              Laurie Anderson · From the Air, Big Science, 1982
-            </p>
-          </div>
+          {/* The borrowed couplet came off this page: the host of the record asked that it
+              not be waved about, and x = x is where it is declared, once, where it can be
+              taken back. */}
           <Sparkles className="w-16 h-16 text-[#b3261e] mx-auto" />
           <div className="font-mono font-black tracking-[0.3em] text-[11px] text-record-mark">
             x = x
