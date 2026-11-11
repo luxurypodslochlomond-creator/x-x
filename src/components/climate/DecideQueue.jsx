@@ -122,8 +122,14 @@ export default function DecideQueue({ onChange, plain = false }) {
           </p>
         </div>
       ) : (
-        items.map((item) => (
-          <DecisionCard key={`${item.type}-${item.id}`} item={item} onDecide={decide} busy={busy === item.id} />
+        items.map((item, i) => (
+          <DecisionCard
+            key={`${item.type}-${item.id}`}
+            item={item}
+            onDecide={decide}
+            busy={busy === item.id}
+            first={i === 0}
+          />
         ))
       )}
 

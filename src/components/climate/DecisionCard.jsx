@@ -28,7 +28,7 @@ const whenLine = (iso) => {
   return d.toLocaleString('en-GB', { day: 'numeric', month: 'short' });
 };
 
-export default function DecisionCard({ item, onDecide, busy }) {
+export default function DecisionCard({ item, onDecide, busy, first = false }) {
   return (
     <article className="border border-[#141210]/25 bg-[#f7f1e5] mb-3">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-[#141210]/20">
@@ -100,11 +100,18 @@ export default function DecisionCard({ item, onDecide, busy }) {
 
         {/* What each of the two answers actually does, said beside the buttons rather than in a
             footnote under the whole queue — on a phone that footnote was never read, so a keeper
-            was pressing the one irreversible answer without knowing what it did. */}
-        <p className="mt-3 text-[12.5px] leading-[1.6] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
-          <span className="font-black text-[#1e3a2b]">On the record</span> — it goes public, and it is sealed.{' '}
-          <span className="font-black text-[#141210]">Not yet</span> — it waits. Nothing is lost.
-        </p>
+            was pressing the one irreversible answer without knowing what it did.
+
+            Said once, on the first card. It used to be printed on all of them, which meant a
+            keeper with twenty-two waiting read the same two sentences twenty-two times and had
+            to scroll past them every single time to reach the buttons. The words still stand
+            where the first answer is given; after that the card is the entry and the two buttons. */}
+        {first && (
+          <p className="mt-3 text-[12.5px] leading-[1.6] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
+            <span className="font-black text-[#1e3a2b]">On the record</span> — it goes public, and it is sealed.{' '}
+            <span className="font-black text-[#141210]">Not yet</span> — it waits. Nothing is lost.
+          </p>
+        )}
       </div>
 
       <div className="grid grid-cols-2 border-t border-[#141210]/25">
