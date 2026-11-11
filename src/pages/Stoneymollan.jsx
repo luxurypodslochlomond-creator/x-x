@@ -101,8 +101,9 @@ export default function Stoneymollan() {
           the whole length of the loch to Ben Lomond, and minutes from our door.
         </p>
         <p className="mx-auto mt-3 max-w-[44ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
-          A king died across the water at Cardross. A queen of five sailed for France from
-          Dumbarton. Rob Roy raided the island in front of you.
+          A king died at his manor in the parish below. A queen of five sailed for France
+          from Dumbarton, six miles down the vale. The island in front of you was raided
+          for its cattle.
         </p>
       </div>
 
