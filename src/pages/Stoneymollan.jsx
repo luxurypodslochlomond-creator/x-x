@@ -107,27 +107,33 @@ export default function Stoneymollan() {
           <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
             Name &amp; mark &middot; Andrew Shandy
           </p>
-          {/* ── THE NAME IS OLDER THAN EVERYTHING ON THIS SHEET ──
-              Bro asked for this to be said next to Andrew's credit, and asked me to check
-              it first. Checked, and it holds — with one honest limit, which is why the line
-              is worded the way it is.
+          {/* ── THE NAME IS OLDER THAN EVERYTHING ON THIS SHEET — BUT NOT NEOLITHIC ──
+              Bro asked for this beside Andrew's credit, then asked me to double-check he
+              wasn't selling the place short: was it not older still, a stony hill or a
+              mound, dust from the Neolithic? So I went and read rather than agreed.
 
-              What is certain: the name is on the ground before the cabins, before the road
-              as a road, before any of the things this page is selling. It is not English
-              either. Its tail is Gaelic — "mullach", a summit, or its dimunitive "mullán",
-              a hillock — which is exactly what the place is: a shoulder of muir above the
-              loch. The Muir and the Road both carry the name in records older than anyone
-              living.
+              What the local record actually says. The Vale of Leven's own place-name notes
+              derive Stoneymollan the same way as Mollanbowie — probably from the Gaelic
+              "muileann", a MILL — and point out the hillside and its burn were an ideal
+              spot for one. Said locally, the old track is "Staney Mullan". So the one thing
+              the evidence argues against is a mound: the reading is a mill, on a burn, on a
+              hill. (A summit reading — "mullach" — is the other candidate, and is not what
+              the local notes give.)
 
-              What is NOT certain, and is not going to be invented here: what the first part
-              of it was. No source I can reach fixes a settled reading of the whole word, and
-              a record that guesses "the stone of the hillock" because it sounds tidy would
-              be doing the same thing as a brochure. So the page says the two things that are
-              true — it is old, it is Gaelic — and says out loud that the meaning is not
-              settled. A place that has been called the same thing for centuries does not
-              need us to translate it. */}
+              What IS old, and is not in doubt: the name is on the ground long before the
+              cabins, and the road under it is a coffin road — the dead of Balloch carried
+              over the hill to the burial ground at St Mahew's, Cardross — and a drovers'
+              road before the tolls on the shore. That is real antiquity, and it is medieval,
+              not Neolithic. Irving's Book of Dumbartonshire already has Stoneymollan as a
+              named land, so it is a name on record, not one invented for a brochure.
+
+              The genuine prehistoric on that ridge is on the next hill along — Carman Hill,
+              with its fort and standing stones, at the end of the same walk. Not here, and
+              not in this name. So the line under the credit says what is true: old, Gaelic,
+              probably a mill, and no settled reading of the whole word. Bro asked me to
+              check, so nothing here is dressed up to sound older than the evidence allows. */}
           <p className="mt-1 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink/75">
-            On record long before the cabins &middot; a Gaelic name, and no settled reading of it
+            Older than the cabins &middot; Gaelic, probably a mill &middot; and no settled reading of it
           </p>
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
