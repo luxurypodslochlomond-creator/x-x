@@ -39,14 +39,20 @@ function Mark({ className = 'h-12 w-12', strokeWidth = 1.6, children }) {
 }
 
 /* 01 — The path. A way round the shoulder of the hill, and the one painted blaze
-   a walker follows. The blaze is the only colour: it is the thing you look for. */
+   a walker follows.
+
+   It was drawn as a flag on a pole, and a flag says somebody is claiming the top.
+   A blaze says nothing of the kind: it is a slash of paint on a post, the size of a
+   thumb, put there so the next person knows which way the ground went. So the pole
+   and the pennant are gone and what is left is one short red mark laid across the
+   walking line — still the only colour on the band, still the thing you look for,
+   and now quiet enough to be a waymark rather than a summit. */
 export function Waymark({ className }) {
   return (
     <Mark className={className}>
       <path d="M3.1 20.7c4.3-1.1 6-3.4 5.4-6.1-.6-2.7.7-4.8 3.4-6.4 2.1-1.2 4.1-1.8 5.8-2.2" />
-      <path d="M15.9 3.5v6.6" />
-      <path d="M15.9 3.5h4.5l-1.6 2.5h-2.9Z" fill={RED} stroke="none" />
       <path d="M3.4 21.9h7.2" />
+      <path d="M9.4 12.1 12 11.3" stroke={RED} strokeWidth={2.3} />
     </Mark>
   );
 }
@@ -66,31 +72,46 @@ export function MunroMark({ className }) {
   );
 }
 
-/* 03 — The island. The largest freshwater island in Britain, with the tower still
-   standing in its trees, and the loch under it in the loch's own blue. */
+/* 03 — The island. The largest freshwater island in Britain: the land lying in the
+   water, the old tower still standing in its wood, and the loch drawn as one line
+   under it in the loch's own blue.
+
+   The trees were circles on sticks before — lollipops, which is a shape for a map
+   key and not for a wood. Trees on a shoreline are crowns and nothing else, so they
+   are two small arches now, and the tower is a plain box with one string course,
+   which is what is actually left of it. One colour, one line of water. */
 export function IslandMark({ className }) {
   return (
     <Mark className={className}>
       <path d="M3 16.1c1.7-1.4 4.4-2.1 9-2.1s7.3.7 9 2.1c-1.5 2-4.7 3.1-9 3.1s-7.5-1.1-9-3.1Z" />
-      <path d="M9.2 13.5V9.8M13 13.5V8.3" />
-      <circle cx="9.2" cy="8.3" r="1.5" />
-      <circle cx="13" cy="6.8" r="1.7" />
-      <path d="M16.5 13.2V9.5h2.8v3.7" />
-      <circle cx="17.9" cy="11.3" r="0.72" fill={MOSS} stroke="none" />
+      <path d="M5.2 14.9c.6-1.7 2-1.9 2.5-.4" />
+      <path d="M8.3 14.4c.7-1.9 2.3-2.1 2.8-.5" />
+      <path d="M14.4 14.4V9.7h3.2v4.7" />
+      <path d="M14.4 11.8h3.2" />
       <path d="M2.2 21h19.6" stroke={OCEAN} />
     </Mark>
   );
 }
 
-/* 04 — Kings, raiders and a queen of five. A coronet with no claim on it, and the
-   blade under it. Nothing heraldic is being borrowed or asserted here. */
+/* 04 — Kings, raiders and a queen of five.
+
+   This was a crown set on a stand, and a crown on a stand is a golf tee: the eye
+   read the thing underneath as a pin and the whole mark went odd. The stand was
+   there to make it "not heraldic", and it made it worse.
+
+   So the crown has simply come off — tipped over and lying on the ground line, in
+   the same three points and one band it always had. Nothing is being claimed by a
+   crown on its side, and it says the true thing about this band: the kings here are
+   all somebody's memory now, and the ground they were kings of is still the ground. */
 export function CrownBladeMark({ className }) {
   return (
     <Mark className={className}>
-      <path d="M4.6 8.1 7.7 11.4 12 5.3l4.3 6.1 3.1-3.3" />
-      <path d="M6 11.8h12l-.9 3.7H6.9Z" />
-      <circle cx="12" cy="13.6" r="1" fill={HEATHER} stroke="none" />
-      <path d="M12 16.6v4.7M9.3 21.4h5.4" />
+      <path d="M3.2 19.6h17.6" />
+      <g transform="rotate(-15 12 15.8)">
+        <path d="M5.9 15.2 9.1 12.7 12 15.1 14.9 12.7 18.1 15.2" />
+        <path d="M6.6 15.4h10.8l-.9 3.1H7.5Z" />
+        <circle cx="12" cy="16.9" r="0.8" fill={HEATHER} stroke="none" />
+      </g>
     </Mark>
   );
 }
