@@ -190,7 +190,7 @@ export default function ClimateKeeperRoom() {
 
           {who.isKeeper && yes > 0 && (
             <Section label="Entries to decide">
-              <DecideQueue onChange={count} />
+              <DecideQueue plain onChange={count} />
             </Section>
           )}
 

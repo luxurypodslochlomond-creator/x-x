@@ -101,7 +101,7 @@ export default function DecisionCard({ item, onDecide, busy }) {
         {/* What each of the two answers actually does, said beside the buttons rather than in a
             footnote under the whole queue — on a phone that footnote was never read, so a keeper
             was pressing the one irreversible answer without knowing what it did. */}
-        <p className="mt-3 text-[10.5px] font-mono leading-snug text-[#5a5246]">
+        <p className="mt-3 text-[12.5px] leading-[1.6] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
           <span className="font-black text-[#1e3a2b]">On the record</span> — it goes public, and it is sealed.{' '}
           <span className="font-black text-[#141210]">Not yet</span> — it waits. Nothing is lost.
         </p>
@@ -111,14 +111,16 @@ export default function DecisionCard({ item, onDecide, busy }) {
         <button
           onClick={() => onDecide(item, 'hold')}
           disabled={busy}
-          className="flex items-center justify-center gap-1.5 min-h-[52px] px-2 py-3 text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] border-r border-[#141210]/25 active:bg-[#141210]/10 disabled:opacity-40 transition-colors"
+          className="flex items-center justify-center gap-1.5 min-h-[54px] px-2 py-3 text-[14px] font-semibold text-[#141210] border-r border-[#141210]/25 active:bg-[#141210]/10 disabled:opacity-40 transition-colors"
+          style={{ fontFamily: 'var(--font-reading)' }}
         >
           <Hand className="w-4 h-4" /> Not yet
         </button>
         <button
           onClick={() => onDecide(item, 'publish')}
           disabled={busy}
-          className="flex items-center justify-center gap-1.5 min-h-[52px] px-2 py-3 text-[11px] font-black font-mono uppercase tracking-wide bg-[#1e3a2b] text-[#f4efe4] active:bg-[#141210] disabled:opacity-40 transition-colors"
+          className="flex items-center justify-center gap-1.5 min-h-[54px] px-2 py-3 text-[14px] font-semibold bg-[#1e3a2b] text-[#f4efe4] active:bg-[#141210] disabled:opacity-40 transition-colors"
+          style={{ fontFamily: 'var(--font-reading)' }}
         >
           <Check className="w-4 h-4" /> On the record
         </button>

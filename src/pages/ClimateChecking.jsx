@@ -157,9 +157,8 @@ export default function ClimateChecking({ plain = false, onChange }) {
         {!plain && (
           <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-3">checking the record</p>
         )}
-        {/* Inside the shed this is a room, not a page: the headline steps down so the work
-            is the loudest thing on the screen, and the long explanation of what checking is
-            waits until the room is opened on its own. */}
+        {/* Inside the keeper's room this is part of a page, not a page of its own: the
+            headline steps down so the work is the loudest thing on the screen. */}
         <h1
           className={plain ? 'text-[17px] font-semibold leading-snug text-record-ink mb-1' : 'font-black text-record-ink text-2xl leading-tight mb-2'}
           style={{ fontFamily: 'var(--font-reading)' }}
@@ -170,12 +169,14 @@ export default function ClimateChecking({ plain = false, onChange }) {
           Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the
           entry claims, and a keeper decides with your words in front of them.
         </p>
-        <p className="text-[12px] font-mono text-record-muted mb-5">
-          {entries.length} {entries.length === 1 ? 'entry is' : 'entries are'} waiting · signed as {me?.name}
-        </p>
+        {!plain && (
+          <p className="text-[12px] text-record-muted mb-5" style={{ fontFamily: 'var(--font-reading)' }}>
+            {entries.length} {entries.length === 1 ? 'entry is' : 'entries are'} waiting · signed as {me?.name}
+          </p>
+        )}
 
         {error && error !== 'not_a_checker' && (
-          <p className="text-[11px] font-mono text-record-red border-l-4 border-l-record-red pl-3 mb-5">{error}</p>
+          <p className="text-[12.5px] text-record-red border-l-4 border-l-record-red pl-3 mb-5 leading-snug" style={{ fontFamily: 'var(--font-reading)' }}>{error}</p>
         )}
 
         {!entries.length && (
@@ -192,13 +193,13 @@ export default function ClimateChecking({ plain = false, onChange }) {
             const already = checks.filter((c) => c.entry_id === entry.id);
             return (
               <div key={entry.id} className="bg-record-bone border-2 border-record-ink/20 p-4">
-                <p className="text-[9px] font-mono font-black uppercase tracking-[0.2em] text-record-muted mb-1">
+                <p className="text-[10.5px] font-mono uppercase tracking-[0.16em] text-record-muted mb-1.5">
                   {entry.type === 'comment' ? 'comment' : entry.type}
                   {entry.source_name ? ` · ${entry.source_name}` : ''}
                 </p>
-                <h2 className="font-black text-record-ink text-base leading-snug mb-2">{entry.title}</h2>
+                <h2 className="text-record-ink text-[17px] leading-snug mb-2" style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}>{entry.title}</h2>
                 {entry.body && entry.body !== entry.title && (
-                  <p className="text-[12px] text-record-ink/80 leading-relaxed mb-3 line-clamp-4">{entry.body}</p>
+                  <p className="text-[14.5px] text-record-ink/85 leading-[1.65] mb-3 line-clamp-4" style={{ fontFamily: 'var(--font-reading)' }}>{entry.body}</p>
                 )}
 
                 {entry.source_url ? (
@@ -206,34 +207,38 @@ export default function ClimateChecking({ plain = false, onChange }) {
                     href={entry.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 min-h-[44px] px-3 mb-3 border-2 border-record-ink text-[10px] font-black font-mono uppercase text-record-ink active:bg-record-ink active:text-record-paper"
+                    className="inline-flex items-center gap-2 min-h-[44px] px-3.5 mb-3 border-2 border-record-ink text-[13px] font-semibold text-record-ink active:bg-record-ink active:text-record-paper"
+                    style={{ fontFamily: 'var(--font-reading)' }}
                   >
-                    <ExternalLink className="w-3.5 h-3.5" /> open the source
+                    <ExternalLink className="w-3.5 h-3.5" /> Open the source
                   </a>
                 ) : (
-                  <p className="text-[10px] font-mono uppercase text-record-red mb-3">no source link on this entry</p>
+                  <p className="text-[12.5px] text-record-red leading-snug mb-3" style={{ fontFamily: 'var(--font-reading)' }}>No source link on this entry</p>
                 )}
 
                 {already.length > 0 && (
                   <div className="border-l-4 border-l-record-ink/30 bg-record-paper/60 pl-2 py-1 mb-3">
                     {already.map((c) => (
-                      <p key={c.id} className="text-[10px] font-mono text-record-ink/70 leading-relaxed">
-                        <span className="font-black uppercase">{WORD[c.verdict] || c.verdict} · {c.checker_name}</span>
+                      <p key={c.id} className="text-[12.5px] text-record-ink/75 leading-[1.6]" style={{ fontFamily: 'var(--font-reading)' }}>
+                        <span className="font-semibold">{WORD[c.verdict] || c.verdict} · {c.checker_name}</span>
                         {c.note ? ` — ${c.note}` : ''}
                       </p>
                     ))}
                   </div>
                 )}
 
-                <div className="grid grid-cols-3 gap-2 mb-2">
+                {/* One under the other on a phone, three across only when there is room. Three
+                    nine-pixel labels in a row is not a choice anyone can read at eleven at night. */}
+                <div className="grid grid-cols-1 gap-2 mb-2 sm:grid-cols-3">
                   {ANSWERS.map(({ id, label, tone, Icon }) => {
                     const on = d.verdict === id;
                     return (
                       <button
                         key={id}
                         onClick={() => setDraft(entry.id, { verdict: id })}
-                        className="flex flex-col items-center justify-center gap-1 min-h-[52px] px-1 border-2 text-[9px] font-black font-mono uppercase leading-tight"
+                        className="flex items-center justify-center gap-2 min-h-[50px] px-3 border-2 text-[14px] leading-tight sm:flex-col sm:gap-1 sm:px-1 sm:text-[11.5px]"
                         style={{
+                          fontFamily: 'var(--font-reading)',
                           borderColor: on ? tone : 'rgba(26,22,18,0.25)',
                           color: on ? '#f4efe4' : tone,
                           background: on ? tone : 'transparent',
@@ -252,7 +257,8 @@ export default function ClimateChecking({ plain = false, onChange }) {
                     onChange={(e) => setDraft(entry.id, { note: e.target.value })}
                     rows={3}
                     placeholder="What did you find? A few words is enough."
-                    className="w-full p-2 text-[12px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink mb-2"
+                    className="w-full min-h-[46px] p-2.5 text-[14px] bg-record-paper border-2 border-record-ink/25 text-record-ink mb-2"
+                    style={{ fontFamily: 'var(--font-reading)' }}
                   />
                 )}
                 {d.verdict === 'holds' && (
@@ -261,16 +267,18 @@ export default function ClimateChecking({ plain = false, onChange }) {
                     onChange={(e) => setDraft(entry.id, { note: e.target.value })}
                     rows={2}
                     placeholder="Anything worth adding (optional)."
-                    className="w-full p-2 text-[12px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink mb-2"
+                    className="w-full min-h-[46px] p-2.5 text-[14px] bg-record-paper border-2 border-record-ink/25 text-record-ink mb-2"
+                    style={{ fontFamily: 'var(--font-reading)' }}
                   />
                 )}
 
                 <button
                   onClick={() => save(entry)}
                   disabled={!d.verdict || saving === entry.id}
-                  className="w-full min-h-[44px] bg-record-ink text-record-paper text-[10px] font-black font-mono uppercase tracking-[0.2em] disabled:opacity-30"
+                  className="w-full min-h-[48px] bg-record-ink text-record-paper text-[14px] font-semibold tracking-[0.02em] disabled:opacity-30"
+                  style={{ fontFamily: 'var(--font-reading)' }}
                 >
-                  {saving === entry.id ? 'saving' : 'put my name to it'}
+                  {saving === entry.id ? 'Saving…' : 'Put my name to it'}
                 </button>
               </div>
             );
@@ -279,12 +287,13 @@ export default function ClimateChecking({ plain = false, onChange }) {
 
         <button
           onClick={load}
-          className="mt-8 inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] text-record-muted"
+          className="mt-8 inline-flex min-h-[40px] items-center gap-2 text-[13px] text-record-muted"
+          style={{ fontFamily: 'var(--font-reading)' }}
         >
-          <RefreshCw className="w-3.5 h-3.5" /> look again
+          <RefreshCw className="w-3.5 h-3.5" /> Look again
         </button>
 
-        <p className="text-[10px] font-mono text-record-muted leading-relaxed mt-8 border-t border-record-ink/15 pt-4">
+        <p className="text-[12.5px] text-record-muted leading-[1.7] mt-8 border-t border-record-ink/15 pt-4" style={{ fontFamily: 'var(--font-reading)' }}>
           Your notes are kept in your name and are never edited afterwards. If your access is ended, what you found stays
           on the record: ending access is not the same as erasing work.
         </p>

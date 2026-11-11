@@ -8,7 +8,7 @@ import NameOnTheRecord from '@/components/climate/NameOnTheRecord';
 // What is waiting for a decision, and nothing else. Saying yes puts the entry on the record
 // and seals it in the same breath; saying not-yet holds it without calling it a rejection.
 // Both carry her name into the audit trail, so "who allowed this" is a row rather than a shrug.
-export default function DecideQueue({ onChange }) {
+export default function DecideQueue({ onChange, plain = false }) {
   const [state, setState] = useState('checking');
   const [items, setItems] = useState([]);
   const [name, setName] = useState('');
@@ -88,18 +88,23 @@ export default function DecideQueue({ onChange }) {
 
   return (
     <>
-      <div className="flex items-center justify-between gap-3 mb-4">
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">
-          {items.length === 0 ? 'Nothing is waiting' : `${items.length} waiting`}
-          {name ? ` · ${name}` : ''}
-        </p>
-        <button
-          onClick={load}
-          className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase text-[#5a5246] hover:text-[#b3261e] transition-colors"
-        >
-          <RefreshCw className="w-3.5 h-3.5" /> Look again
-        </button>
-      </div>
+      {/* Inside the keeper's room the room has already said how many are waiting and already
+          offers a count, so saying it twice makes the page feel like more work than it is. */}
+      {!plain && (
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <p className="text-[12.5px] text-[#6b5f4f]" style={{ fontFamily: 'var(--font-reading)' }}>
+            {items.length === 0 ? 'Nothing is waiting' : `${items.length} waiting`}
+            {name ? ` · ${name}` : ''}
+          </p>
+          <button
+            onClick={load}
+            className="flex min-h-[36px] items-center gap-1.5 text-[12px] text-[#5a5246] hover:text-[#b3261e] transition-colors"
+            style={{ fontFamily: 'var(--font-reading)' }}
+          >
+            <RefreshCw className="w-3.5 h-3.5" /> Look again
+          </button>
+        </div>
+      )}
 
       {said && (
         <p className="mb-3 px-3 py-2 border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 text-[11.5px] font-mono text-[#141210]">
@@ -124,7 +129,7 @@ export default function DecideQueue({ onChange }) {
 
       <NameOnTheRecord />
 
-      <p className="mt-5 text-[10.5px] font-mono leading-relaxed text-[#5a5246]">
+      <p className="mt-5 text-[12.5px] leading-[1.7] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
         Every yes and every not-yet is written down with your name and the time, so a reader who asks who decided
         can be answered. Nothing expires: anything you hold stays exactly where it is.{' '}
         <Link to="/ClimateSeals" className="underline decoration-2 underline-offset-2 hover:text-[#b3261e]">
