@@ -353,7 +353,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         : isClimatePage
         ? 'Verified climate solutions & crises — after Janine Selendy. Readable in any tongue a reader names, living or long dead. Nobody left behind. The noise is loud. The record is louder.'
         : currentPageName === 'Stoneymollan'
-        ? 'Balloch to Cardross: six and a half kilometres of coffin road over the muir, with two Neolithic cairns in the wood below it.'
+        ? 'Mist, beeches and two Neolithic cairns, on a morning walk over the old coffin road above Loch Lomond. A view down the whole loch to Ben Lomond.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
       'og:image': ogImageUrl.startsWith('http') ? ogImageUrl : ogOrigin + ogImageUrl,
       'og:type': 'website',

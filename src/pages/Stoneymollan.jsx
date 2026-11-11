@@ -109,18 +109,18 @@ const MARKS = [
   },
 ];
 
-/* The place itself — no captions. Only a plain description per picture, for a screen
-   reader. Nothing here tells anyone what to think about what they are looking at. */
+/* The place itself, with a short label under each picture — what you are looking at,
+   named plainly, so the rail reads like a walk rather than a gallery. */
 const PLACES = [
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png', alt: 'A red roof in the field below Stoneymollan' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg', alt: 'Sitting on a rock above the water' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg', alt: 'A gate on the way up the muir' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg', alt: 'The muir, and the loch beyond it' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg', alt: 'A walker and a dog in the field' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg', alt: 'A tree-lined track' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg', alt: 'Mossy branches of an old tree' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg', alt: 'A dog among fallen branches' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg', alt: 'The trunk of an old tree, deep in moss' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png', caption: 'A red roof in the field below' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg', caption: 'Sitting above the water' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg', caption: 'The gate on the way up' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg', caption: 'The muir, and the loch beneath it' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg', caption: 'The dog, out in the field' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg', caption: 'The track through the trees' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg', caption: 'The beeches, deep in moss' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg', caption: 'Out of the wood' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg', caption: 'The old trunk' },
 ];
 
 export default function Stoneymollan() {
@@ -246,11 +246,14 @@ export default function Stoneymollan() {
             <figure key={place.url} className="w-52 flex-shrink-0 snap-start">
               <img
                 src={place.url}
-                alt={place.alt}
+                alt={place.caption}
                 loading="lazy"
                 className="w-full border border-record-ink/20 object-cover"
                 style={{ aspectRatio: '4 / 5' }}
               />
+              <figcaption className="mt-2 text-center text-[14px] leading-snug text-record-muted" style={READING}>
+                {place.caption}
+              </figcaption>
             </figure>
           ))}
         </div>

@@ -137,7 +137,7 @@ export async function buildStoneymollanCard(options = {}) {
   // The lead, in the page's own words rather than a paraphrase of them.
   ctx.fillStyle = INK;
   ctx.font = `400 52px ${SERIF}`;
-  const lead = wrapLines(ctx, 'A road people have carried their dead along for centuries.', MAXW - 60, 3);
+  const lead = wrapLines(ctx, 'Mist, beeches and two Neolithic cairns, over Loch Lomond.', MAXW - 60, 3);
   lead.forEach((line, i) => ctx.fillText(line, W / 2, 900 + i * 60));
 
   // What is on it, in as much detail as the card has room for.
@@ -145,7 +145,7 @@ export async function buildStoneymollanCard(options = {}) {
   ctx.font = `500 24px ${MONO}`;
   const body = wrapLines(
     ctx,
-    'Two Neolithic cairns in the wood at the bottom of the garden \u00b7 a king died in the parish it ends in \u00b7 a tree in that wood took a lightning strike',
+    'A morning walk on the old coffin road \u00b7 cabins at the top of it \u00b7 a view down the whole loch to Ben Lomond',
     MAXW - 90,
     4,
   );
