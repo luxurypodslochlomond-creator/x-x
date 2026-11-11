@@ -13,9 +13,15 @@ import React from 'react';
    people who map their own streets, and no account, no tracking and no key. Nothing on
    this page asks a reader to sign their journey over to an advertising company. */
 
+/* The frame is the road itself, not a pin somebody guessed at: it runs from the Balloch
+   roundabout, where Stoneymollan Road begins, west and up to Upper Stoneymollan — the
+   point OpenStreetMap actually records for the top of the road (56.0015, -4.6189).
+   An earlier version of this page dropped a marker on a coordinate invented for the
+   cabins. There is no public pin for a house, so there is none here: the marker sits on
+   the road, and the gate is sent to a guest when they book. */
 const OSM_EMBED =
-  'https://www.openstreetmap.org/export/embed.html?bbox=-4.6800%2C55.9650%2C-4.5400%2C56.0300&layer=mapnik&marker=56.0030%2C-4.6050';
-const OSM_LINK = 'https://www.openstreetmap.org/?mlat=56.0030&mlon=-4.6050#map=14/56.0030/-4.6050';
+  'https://www.openstreetmap.org/export/embed.html?bbox=-4.6500%2C55.9930%2C-4.5550%2C56.0110&layer=mapnik&marker=56.0015%2C-4.6189';
+const OSM_LINK = 'https://www.openstreetmap.org/search?query=Stoneymollan%20Road%2C%20Balloch';
 
 export default function TheHillDrawn() {
   return (
@@ -79,6 +85,12 @@ export default function TheHillDrawn() {
           <text x="282" y="170" textAnchor="middle" fontSize="9" letterSpacing="1.6" className="fill-record-ink font-mono">
             BALLOCH
           </text>
+          <text x="282" y="182" textAnchor="middle" fontSize="8" letterSpacing="1.2" className="fill-record-red font-mono">
+            ROUNDABOUT
+          </text>
+          <text x="248" y="140" textAnchor="middle" fontSize="8" letterSpacing="1.2" className="fill-record-red font-mono">
+            TURN LEFT
+          </text>
           <text x="48" y="222" textAnchor="start" fontSize="9" letterSpacing="1.6" className="fill-record-ink font-mono">
             CARDROSS
           </text>
@@ -105,13 +117,17 @@ export default function TheHillDrawn() {
           className="block h-[240px] w-full"
           style={{ border: 0 }}
         />
+        <p className="border-t border-record-ink/20 px-3 py-2 font-mono text-[10.5px] uppercase leading-[1.7] tracking-[0.1em] text-record-ink/85">
+          The real road, from the Balloch roundabout up to Upper Stoneymollan. The cabins are
+          off it &middot; we send the gate when you book.
+        </p>
         <a
           href={OSM_LINK}
           target="_blank"
           rel="noopener noreferrer"
           className="flex min-h-[46px] items-center justify-center border-t border-record-ink/20 font-mono text-[10.5px] uppercase tracking-[0.12em] text-record-ink active:bg-record-ink active:text-record-paper"
         >
-          Open in OpenStreetMap
+          Open the road on OpenStreetMap
         </a>
       </div>
     </div>

@@ -32,12 +32,17 @@ const STOPS = [
   {
     tag: 'Rail',
     name: 'Balloch',
-    fact: 'The station sits at the foot of the village, with the loch in front of you.',
+    fact: 'The last stop on the line. The village is behind you and the loch in front of you.',
   },
   {
     tag: 'Road',
-    name: 'The foot of the road',
-    fact: 'A mile and a half of climbing to the top. Five minutes in a taxi; on foot it never flattens, and there is no pavement for the last of it.',
+    name: 'The roundabout',
+    fact: 'Turn left here, up Stoneymollan Road. Straight on takes you up the side of the loch and away from the hill.',
+  },
+  {
+    tag: 'Road',
+    name: 'All the way up',
+    fact: 'The best part of two miles of climbing: past the last houses, then narrow between the trees. Keep going — the cabins are at the top of it. There is no pavement and no lighting on the last stretch.',
   },
   {
     tag: 'Here',

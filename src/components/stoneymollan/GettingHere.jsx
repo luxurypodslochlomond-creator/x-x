@@ -4,6 +4,7 @@ import { RouteMark } from '@/components/stoneymollan/BandMarks';
 import WayInStrip from '@/components/stoneymollan/WayInStrip';
 import TheHillDrawn from '@/components/stoneymollan/TheHillDrawn';
 import WayInMachine from '@/components/stoneymollan/WayInMachine';
+import OnTheLastMile from '@/components/stoneymollan/OnTheLastMile';
 
 /* ── THE WAY IN ─────────────────────────────────────────────────────────────────
    This used to be two paragraphs and a Google box, which is the shape of every
@@ -37,6 +38,10 @@ export default function GettingHere() {
 
         <div className="mt-7">
           <WayInStrip />
+        </div>
+
+        <div className="mt-8">
+          <OnTheLastMile />
         </div>
 
         <div className="mt-8 border-t border-record-ink/20 pt-6">
