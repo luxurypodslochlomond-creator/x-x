@@ -11,7 +11,7 @@ export default function ThisMonth() {
 
   return (
     <div className="mt-4 border-t border-record-ink/20 pt-3">
-      <p className="text-center font-mono text-[10.5px] uppercase leading-[1.8] tracking-[0.13em] text-record-ink/75">
+      <p className="text-center font-mono text-[11.5px] uppercase leading-[1.8] tracking-[0.1em] text-record-ink">
         <span className="text-record-red">{month.name}</span>
         <span className="px-1.5 text-record-ink/25">/</span>
         what you might see
@@ -25,7 +25,7 @@ export default function ThisMonth() {
       <p className="mt-2 text-center">
         <a
           href="#year"
-          className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-ink/75 underline decoration-record-ink/25 underline-offset-4 hover:text-record-ink"
+          className="font-mono text-[11px] uppercase tracking-[0.13em] text-record-ink underline decoration-record-ink/30 underline-offset-4 hover:text-record-red"
         >
           the whole year &darr;
         </a>

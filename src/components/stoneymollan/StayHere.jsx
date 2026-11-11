@@ -23,7 +23,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           towards the foot of the page rather than arriving all at once. */}
       <EmberBed strength={0.6} />
       <div className="relative mx-auto w-full max-w-[44rem] px-6 py-10">
-        <p className="text-center font-mono text-[10.5px] uppercase tracking-[0.22em] text-record-ink/75">
+        <p className="text-center font-mono text-[11.5px] uppercase tracking-[0.15em] text-record-ink">
           Over Loch Lomond &middot; Brian &amp; Gillian
         </p>
 
@@ -52,7 +52,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           John Muir Way and the Three Lochs Way start at the end of our tree-lined drive.
         </p>
 
-        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[10px] uppercase leading-[2] tracking-[0.14em] text-record-ink/70">
+        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[11px] uppercase leading-[2] tracking-[0.12em] text-record-ink">
           2 hillside cabins
           <span className="px-1.5 text-record-ink/25">/</span>
           hot tub
@@ -70,7 +70,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           <p className="text-center text-[17px] italic leading-[1.5]" style={READING}>
             &ldquo;This place is unreal. It is almost beyond words how special it is.&rdquo;
           </p>
-          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-record-ink/70">
+          <p className="mt-2 text-center font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink">
             Ben, Ibiza &middot; July 2024 &middot; 10/10
           </p>
         </div>
@@ -99,7 +99,7 @@ export default function StayHere({ shareImage, shareCredit }) {
             Check dates &middot; book direct
             <ArrowUpRight className="h-4 w-4" />
           </a>
-          <p className="mt-2 text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.13em] text-record-ink/70">
+          <p className="mt-2 text-center font-mono text-[11px] uppercase leading-[1.9] tracking-[0.11em] text-record-ink/85">
             Straight to us, not a platform. What they take stays on the hill.
           </p>
         </div>

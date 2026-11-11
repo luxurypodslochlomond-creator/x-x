@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordRule from '@/components/climate/RecordRule';
 import PageBand from '@/components/stoneymollan/PageBand';
+import { BAND_MARKS } from '@/components/stoneymollan/BandMarks';
 import FrostFilm from '@/components/stoneymollan/FrostFilm';
 import StayHere from '@/components/stoneymollan/StayHere';
 import WhoCameThrough from '@/components/stoneymollan/WhoCameThrough';
@@ -21,7 +22,7 @@ const READING = { fontFamily: 'var(--font-record-reading)' };
 /* One sheet, set down the middle of the page and measured so a line of it never runs
    wider than a hand can hold. Everything on it hangs off that centre line. */
 const SHEET = 'mx-auto w-full max-w-[44rem] px-6';
-const BODY = 'mx-auto max-w-[46ch] text-center text-[16.5px] leading-[1.68]';
+const BODY = 'mx-auto max-w-[46ch] text-center text-[17px] leading-[1.72]';
 
 const FILM =
   'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/6fc9cc3fc_stoneymollan-ben.mov';
@@ -80,7 +81,7 @@ export default function Stoneymollan() {
               can be had in theirs. It is the same choice the rest of the platform
               keeps, so a reader who picks Gaelic here keeps it on the next page. */}
           <div className="flex items-start justify-between gap-2">
-            <p className="font-mono text-[10.5px] uppercase tracking-[0.26em] text-record-ink/75">
+            <p className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-record-ink">
               Over Loch Lomond
             </p>
             <MastheadTongue />
@@ -107,19 +108,19 @@ export default function Stoneymollan() {
               Stoneymollan
             </h1>
           </div>
-          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-record-ink/70">
+          <p className="mt-2 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
             Mark &middot; Andrew Shandy
           </p>
           <RecordRule />
-          <p className="mt-1 text-center font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.18em] text-record-ink/75">
+          <p className="mt-1 text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
             Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
           </p>
-          <p className="text-center font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.18em] text-record-red">
+          <p className="text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-red">
             John Muir Way, Section 1 &middot; Three Lochs Way
           </p>
           {/* Said in their own words — the same three that head their Instagram — because it is
               the truest short answer to "what is it", and it lets the wrong guest go quietly. */}
-          <p className="text-center font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.18em] text-record-ink/75">
+          <p className="text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
             Hillside cabins &middot; hot tub &middot; sauna &middot; fire pit
           </p>
           <MastheadDoors />
@@ -152,9 +153,9 @@ export default function Stoneymollan() {
             ))}
           </div>
 
-          <p className="mt-5 font-mono text-[10px] uppercase leading-[1.9] tracking-[0.16em] text-record-ink/70">
-            Photos <span className="px-1.5 text-record-ink/25">/</span> Gill
-            <span className="px-1.5 text-record-ink/25">/</span> Film &middot; Ben Santiago
+          <p className="mt-5 font-mono text-[11px] uppercase leading-[1.9] tracking-[0.13em] text-record-ink">
+            Photos <span className="px-1.5 text-record-ink/40">/</span> Gill
+            <span className="px-1.5 text-record-ink/40">/</span> Film &middot; Ben Santiago
           </p>
         </PageBand>
       </div>
@@ -171,11 +172,11 @@ export default function Stoneymollan() {
         >
           Mist, beeches, and the whole loch beneath you.
         </p>
-        <p className="mx-auto mt-4 max-w-[42ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
+        <p className="mx-auto mt-4 max-w-[42ch] text-center text-[17px] leading-[1.72]" style={READING}>
           The John Muir Way crosses the muir above the cabins — six and a half kilometres of
           it, the loch the whole way to Ben Lomond, a minute from the door.
         </p>
-        <p className="mx-auto mt-3 max-w-[42ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
+        <p className="mx-auto mt-3 max-w-[42ch] text-center text-[17px] leading-[1.72]" style={READING}>
           A king died in the parish below. A queen of five sailed for France six miles down
           the vale. The island in front of you was raided for its cattle. None of it is
           scenery.
@@ -195,6 +196,7 @@ export default function Stoneymollan() {
             number={mark.number}
             label={mark.label}
             title={mark.title}
+            mark={BAND_MARKS[mark.number]}
           >
             <div className="space-y-3">
               {mark.body.map((para) => (
@@ -205,7 +207,7 @@ export default function Stoneymollan() {
             </div>
             {mark.people && <WhoCameThrough people={mark.people} />}
             {mark.source && (
-              <p className="mx-auto mt-4 max-w-[40ch] font-mono text-[10px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink/70">
+              <p className="mx-auto mt-4 max-w-[40ch] font-mono text-[11px] uppercase leading-[1.9] tracking-[0.12em] text-record-ink/85">
                 {mark.source}
               </p>
             )}
@@ -227,7 +229,7 @@ export default function Stoneymollan() {
       {/* ── THE PLACES ── */}
       <section className="border-t border-record-ink/25 bg-record-bone">
         <div className={`${SHEET} pb-4 pt-8`}>
-          <p className="text-center font-mono text-[10.5px] uppercase tracking-[0.22em] text-record-ink/75">
+          <p className="text-center font-mono text-[11.5px] uppercase tracking-[0.16em] text-record-ink">
             The places
           </p>
         </div>
@@ -244,7 +246,7 @@ export default function Stoneymollan() {
                 className="w-full border border-record-ink/20 object-cover"
                 style={{ aspectRatio: '4 / 5' }}
               />
-              <figcaption className="mt-2 text-center text-[14px] leading-snug text-record-muted" style={READING}>
+              <figcaption className="mt-2 text-center text-[15px] leading-snug text-record-ink/85" style={READING}>
                 {place.caption}
               </figcaption>
             </figure>
@@ -270,13 +272,13 @@ export default function Stoneymollan() {
             </Link>
             <Link
               to="/"
-              className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-ink/70 underline decoration-record-ink/25 underline-offset-4"
+              className="font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink underline decoration-record-ink/30 underline-offset-4"
             >
               Universal Frequency 51
             </Link>
-            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-record-ink/70">
-              Film &middot; Ben Santiago <span className="px-1 text-record-ink/25">/</span> Photos &middot; Gill
-              <span className="px-1 text-record-ink/25">/</span> Mark &middot; Andrew Shandy
+            <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink">
+              Film &middot; Ben Santiago <span className="px-1 text-record-ink/40">/</span> Photos &middot; Gill
+              <span className="px-1 text-record-ink/40">/</span> Mark &middot; Andrew Shandy
             </p>
           </div>
         </div>

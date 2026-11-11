@@ -8,7 +8,7 @@ import React from 'react';
 export default function FrostFilm({ src, poster }) {
   return (
     <section className="border-t border-record-ink/25 pt-5">
-      <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
+      <p className="text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
         Up the hill &middot; John Muir Way <span className="px-2 text-record-ink/25">/</span> Film
         &middot; Ben Santiago
       </p>
@@ -26,7 +26,7 @@ export default function FrostFilm({ src, poster }) {
         </video>
       </div>
       <p
-        className="mx-auto mt-3 max-w-[44ch] text-center text-[15px] leading-relaxed text-record-muted"
+        className="mx-auto mt-3 max-w-[44ch] text-center text-[15.5px] leading-relaxed text-record-ink/85"
         style={{ fontFamily: 'var(--font-record-reading)' }}
       >
         Up on the John Muir Way — the hill path that climbs straight off the top of our own

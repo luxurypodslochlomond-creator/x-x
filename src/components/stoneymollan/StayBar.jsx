@@ -17,7 +17,7 @@ export default function StayBar() {
           href={BOOK_DIRECT}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex min-h-[44px] flex-1 items-center justify-center border-2 border-record-signal bg-record-signal px-3 font-mono text-[10.5px] uppercase tracking-[0.14em] text-record-paper active:bg-record-ink"
+          className="flex min-h-[44px] flex-1 items-center justify-center border-2 border-record-signal bg-record-signal px-3 font-mono text-[11.5px] uppercase tracking-[0.1em] text-record-paper active:bg-record-ink"
         >
           Check dates &middot; book direct
         </a>

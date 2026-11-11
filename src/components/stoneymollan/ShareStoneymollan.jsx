@@ -82,7 +82,7 @@ export default function ShareStoneymollan({ imageUrl, imageCredit }) {
 
       <button
         onClick={copyLink}
-        className="mt-2 flex min-h-[44px] w-full items-center justify-center gap-2 border border-record-ink/30 px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.14em] text-record-muted transition-colors active:bg-record-bone"
+        className="mt-2 flex min-h-[44px] w-full items-center justify-center gap-2 border border-record-ink/30 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink transition-colors active:bg-record-bone"
       >
         {copied ? <Check className="h-3.5 w-3.5" /> : <Link2 className="h-3.5 w-3.5" />}
         {copied ? 'Link copied' : 'Copy the link'}

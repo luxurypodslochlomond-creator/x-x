@@ -57,7 +57,7 @@ export default function WhoCameThrough({ people }) {
                 <span className="text-[18px] leading-tight" style={{ fontFamily: 'var(--record-display)' }}>
                   {person.name}
                 </span>
-                <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-record-ink/70">
+                <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-record-ink/85">
                   {person.dates}
                 </span>
               </div>

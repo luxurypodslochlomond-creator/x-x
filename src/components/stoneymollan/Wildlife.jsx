@@ -50,7 +50,7 @@ export default function Wildlife() {
               <li key={name} className="flex items-start gap-3 py-3.5 text-left">
                 <Mark className="mt-0.5 h-6 w-6 shrink-0 text-record-ink/70" />
                 <div>
-                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-ink">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink">
                     {name}
                   </p>
                   <p className="mt-1 text-[15px] leading-[1.6] text-record-ink/80" style={READING}>
@@ -71,7 +71,7 @@ export default function Wildlife() {
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">
             <MyceliumMark className="mx-auto h-9 w-9 text-record-mark" />
-            <p className="mt-3 text-center font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-ink/75">
+            <p className="mt-3 text-center font-mono text-[11.5px] uppercase tracking-[0.14em] text-record-ink">
               Underneath
             </p>
             <p className="mx-auto mt-3 max-w-[46ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
@@ -84,7 +84,7 @@ export default function Wildlife() {
             </p>
           </div>
 
-          <p className="mx-auto mt-5 max-w-[40ch] font-mono text-[10px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink/70">
+          <p className="mx-auto mt-5 max-w-[40ch] font-mono text-[11px] uppercase leading-[1.9] tracking-[0.12em] text-record-ink/85">
             Scottish Wildlife Trust &middot; RSPB Scotland Loch Lomond &middot; NatureScot &middot; The Clydesider, 2022
           </p>
         </PageBand>

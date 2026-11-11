@@ -36,7 +36,7 @@ export default function TheYear() {
               type="button"
               onClick={() => setChosen(i)}
               aria-pressed={chosen === i}
-              className={`relative border py-2 font-mono text-[11px] uppercase tracking-[0.08em] transition-colors ${
+              className={`relative border py-2.5 font-mono text-[12px] uppercase tracking-[0.06em] transition-colors ${
                 chosen === i
                   ? 'border-record-ink bg-record-ink text-record-paper'
                   : 'border-record-ink/30 text-record-ink/85 hover:border-record-ink/60 hover:text-record-ink'
@@ -57,7 +57,7 @@ export default function TheYear() {
 
         <div className="mx-auto mt-6 max-w-[42ch] space-y-4 border-t border-record-ink/20 pt-4">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-red">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-record-red">
               {month.name} &middot; on the hill
             </p>
             <p className="mt-1 text-[16px] leading-[1.65]" style={READING}>
@@ -65,7 +65,7 @@ export default function TheYear() {
             </p>
           </div>
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink/75">
+            <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink">
               Underfoot
             </p>
             <p className="mt-1 text-[16px] leading-[1.65]" style={READING}>
@@ -74,7 +74,7 @@ export default function TheYear() {
           </div>
         </div>
 
-        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink/70">
+        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[11px] uppercase leading-[1.9] tracking-[0.12em] text-record-ink/85">
           A normal month, not a promise. The hill does not read the calendar, a warm week
           moves everything by a fortnight, and a lot of this is one animal on a good
           morning. You can walk the whole hill and see none of it.
