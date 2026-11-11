@@ -31,76 +31,97 @@ function Mark({ className = 'h-6 w-6', strokeWidth = 1.9, children }) {
   );
 }
 
-/* Book direct — a key, with the red in its bow. The one we want pressed. */
+/* Book direct — a skeleton key, the red in its bow, hanging a hair off true.
+   The bow is drawn as an oval rather than a ring because a ring is a machine's
+   circle: this one was cut by eye and is very slightly wider than it is tall, with
+   the hole sitting left of centre. The two bits are deliberately unequal. */
 export function KeyMark({ className }) {
   return (
     <Mark className={className}>
-      <path d="M4.3 5.9 8.2 2.3l3.9 3.6-3.9 3.6L4.3 5.9Z" />
-      <path d="M11.4 8.4 20.4 18.6" />
-      <path d="M16.6 14.6l2.1-1.8" />
-      <path d="M18.6 17l2.1-1.8" />
-      <circle cx="8.2" cy="5.9" r="1.15" fill={ACCENT} stroke="none" />
+      <ellipse cx="6.5" cy="6.2" rx="3.15" ry="3.35" />
+      <path d="M8.85 8.6 19.6 18.5" />
+      <path d="M13.4 12.9 15 11.2" />
+      <path d="M15.9 15.2 17.5 13.5" />
+      <circle cx="6.8" cy="5.85" r="1.05" fill={ACCENT} stroke="none" />
     </Mark>
   );
 }
 
-/* The stay — a cabin with its door lit. */
+/* The stay — the cabin in elevation, eaves overshooting the walls the way a real
+   one does, a chimney that leans into the roof with one curl of smoke coming off it,
+   and the door lit. That curl is the whole mark: a bothy with a fire in it. */
 export function CabinMark({ className }) {
   return (
     <Mark className={className}>
-      <path d="M2.5 11.1 12 3.3l9.5 7.8" />
-      <path d="M4.8 9.9v10.3h14.4V9.9" />
-      <path d="M16.9 6.1V3.2h1.8v4.5" />
-      <path d="M10 20.2v-5h4v5Z" fill={ACCENT} stroke="none" />
+      <path d="M1.9 11.6 12 3.6l10.1 8" />
+      <path d="M4.7 10.4v10.2h14.6V10.4" />
+      <path d="M2.4 20.6h19.2" />
+      <path d="M15.7 6.6V4.2h1.7v4.3" />
+      <path d="M17.2 3.5c1.2-.4 1.5-1.8.5-2.3" />
+      <path d="M10.7 20.6v-4.7h2.7v4.7Z" fill={ACCENT} stroke="none" />
     </Mark>
   );
 }
 
-/* The road — the cross on the old stone, in red. */
+/* The road — a leaning standing stone with a cross cut into it, in red, and the
+   grass it is standing in. Surveyed rather than decorated: a stone, a ground line,
+   two ticks of grass, and the cut that gave the old road its name. */
 export function CrossStoneMark({ className }) {
   return (
     <Mark className={className}>
-      <path d="M12 3.2v7.7" stroke={ACCENT} />
-      <path d="M8.6 6.2h6.8" stroke={ACCENT} />
-      <path d="M7.4 20.6c-.6-3.4.9-4.5 4.6-4.5s5.2 1.1 4.6 4.5" />
-      <path d="M9.6 16.1h4.8" />
+      <path d="M10.3 20.4 12.5 4.2l1.2-.5 1.4 16.7Z" />
+      <path d="M5.2 20.6h13.6" />
+      <path d="M12.7 7.9l.6 4.6" stroke={ACCENT} />
+      <path d="M11.2 9.4l4.2.4" stroke={ACCENT} />
+      <path d="M7.6 18.6l1.1-.9M16.2 18.4l-1.1-.8" />
     </Mark>
   );
 }
 
-/* Instagram — a camera with a red lens, not somebody else's logo. */
+/* Instagram — a rangefinder camera, drawn rather than licensed: a squared body with
+   a top plate line, a shutter button, a viewfinder window, and the lens in red with
+   one pale point of light in it. Nothing here is anybody else's logo. */
 export function CameraMark({ className }) {
   return (
     <Mark className={className}>
-      <rect x="3.1" y="6.3" width="17.8" height="13.1" rx="3.4" />
-      <path d="M8.6 6.1 9.7 4.2h4.6l1.1 1.9" />
-      <circle cx="12" cy="12.9" r="3.6" fill={ACCENT} stroke="none" />
-      <circle cx="13.2" cy="11.7" r="0.9" fill={GLINT} stroke="none" />
-      <circle cx="17.4" cy="9.4" r="0.8" fill="currentColor" stroke="none" />
+      <path d="M3.1 8.5h17.8v11.1H3.1Z" />
+      <path d="M3.1 11.2h17.8" />
+      <path d="M6.1 8.5V7.2h2.2" />
+      <path d="M16.6 9.4h2.4" />
+      <circle cx="11.3" cy="15.1" r="3.5" />
+      <circle cx="11.3" cy="15.1" r="1.5" fill={ACCENT} stroke="none" />
+      <circle cx="12.4" cy="14" r="0.65" fill={GLINT} stroke="none" />
     </Mark>
   );
 }
 
-/* Contact — an envelope with a wax seal, in red. */
+/* Contact — a letter sealed in wax, in red, with the notch a thumb leaves in a seal. */
 export function EnvelopeMark({ className }) {
   return (
     <Mark className={className}>
-      <rect x="2.8" y="6" width="18.4" height="12.4" rx="1.7" />
-      <path d="M3.4 7.3 12 13.4l8.6-6.1" />
-      <circle cx="12" cy="16.6" r="2" fill={ACCENT} stroke="none" />
+      <path d="M2.9 6.2h18.2v12.2H2.9Z" />
+      <path d="M3.3 7.1 12 13.6l8.7-6.5" />
+      <circle cx="12" cy="16.5" r="2" fill={ACCENT} stroke="none" />
+      <path d="M10.9 16.5h2.2" stroke={GLINT} strokeWidth={1.1} />
     </Mark>
   );
 }
 
-/* Red squirrel — the over-curled tail is the whole animal, and the eye is red. */
+/* Red squirrel — the tail is the animal: one sweep up from the rump and over the
+   back, curling inwards until it stops on itself. Ears, a forepaw, two feet and a
+   red eye are all it takes; anything more and it stops being a squirrel and becomes
+   a pattern at twenty-six pixels. */
 export function SquirrelMark({ className }) {
   return (
     <Mark className={className} strokeWidth={1.7}>
-      <path d="M15.3 19.7c-2.9 0-4.9-2-4.9-4.9 0-2.3 1.4-3.8 3.5-4" />
-      <path d="M15.3 19.7c1.8 0 3.1-1.2 3.1-2.9 0-1.5-1-2.5-2.3-2.8" />
-      <path d="M17.1 13.9c2.3-.6 3.2-2.8 2.2-4.7-1-1.9-3.5-2.3-5-.9-1 .9-1.1 2.3-.4 3.3" />
-      <path d="M13.9 9.9c-.2-1.2-1.1-2-2.3-2.1" />
-      <circle cx="12.2" cy="10.4" r="0.7" fill={ACCENT} stroke="none" />
+      <path d="M8.4 19.4c-2.9-.7-4.6-3.4-3.9-6.2.7-2.8 3.5-4.4 6.1-3.6 1.9.6 3 2.5 2.7 4.4" />
+      <path d="M13.2 14c-.2 1.1-1.2 1.8-2.3 1.5" />
+      <path d="M8.4 19.4c0-2.7 1.6-4.7 4.1-5.4" />
+      <path d="M12.5 14c0-1.5 1.2-2.7 2.7-2.7s2.7 1.2 2.7 2.7c0 1.1-.6 2-1.6 2.4" />
+      <path d="M15.4 11.4l.5-1.8" />
+      <path d="M11.3 16.6l1.7-.7" />
+      <path d="M9.9 20.3c.8.4 1.9.4 2.7 0" />
+      <circle cx="15.3" cy="12.8" r="0.75" fill={ACCENT} stroke="none" />
     </Mark>
   );
 }
