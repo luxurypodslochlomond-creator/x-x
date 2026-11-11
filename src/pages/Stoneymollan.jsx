@@ -4,6 +4,8 @@ import RecordRule from '@/components/climate/RecordRule';
 import PageBand from '@/components/stoneymollan/PageBand';
 import FrostFilm from '@/components/stoneymollan/FrostFilm';
 import StayHere from '@/components/stoneymollan/StayHere';
+import WhoCameThrough from '@/components/stoneymollan/WhoCameThrough';
+import { MARKS } from '@/components/stoneymollan/history';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -35,79 +37,10 @@ const MORNING = [
   },
 ];
 
-const MARKS = [
-  {
-    number: '01',
-    label: 'What the road is',
-    title: 'The coffin road',
-    body: [
-      'Balloch, over the muir, down to the clachan of Kirkton and St Mahew’s Chapel at Cardross: just under seven kilometres, walked by the bearers with a coffin carried between them.',
-      'Feet first, so the spirit could not turn back for home. The coffin was never set down on the ground. Streams cross the route the whole way along, because running water was said to stop a spirit following.',
-    ],
-  },
-  {
-    number: '02',
-    title: 'The Cross Stone Road',
-    body: [
-      'That is what the first Ordnance Survey maps call it. There was a cross stone on the way, where the bearers set the coffin down and rested.',
-      'The base of it is still at the roadside. The cross itself went missing around 1880.',
-    ],
-  },
-  {
-    number: '03',
-    title: 'A king in the parish',
-    body: [
-      'Robert the Bruce kept his manor at Cardross, and died there on 7 June 1329. The old road ends in that same parish.',
-      'Historians still argue about exactly where the manor stood. The parish they do not argue about.',
-    ],
-  },
-  {
-    number: '04',
-    title: 'Bandit country',
-    body: [
-      'Rob Roy MacGregor drove cattle across these hills three hundred years ago, and lifted them. He was out in the Fifteen, and he fought at Sheriffmuir in 1715.',
-      'A road empty of everything was a useful road in the dark, when you were moving something that was not yours.',
-    ],
-  },
-  {
-    number: '05',
-    title: 'The way through',
-    body: [
-      'Stoneymollan Muir is Section 1 of the John Muir Way — Helensburgh to Balloch, nine miles of it, and on to Dunbar, 134 in all. The Three Lochs Way crosses it too.',
-      'John Muir was born in Dunbar and founded the Sierra Club. The path that carries his name now runs over a road far older than he was.',
-    ],
-  },
-  {
-    number: '06',
-    title: 'The beeches',
-    body: [
-      'The avenue of beeches along the route is reckoned two to three hundred years old — planted to line the way, the trunks deep in moss now, framing the path like a nave.',
-    ],
-  },
-  {
-    number: '07',
-    label: 'The bottom of the garden',
-    title: 'Two cairns in Cameron Wood',
-    body: [
-      'Cameron Wood is the one at the bottom of the garden, and there are two old cairns in it. Both are older than the coffin road by a few thousand years.',
-      'The lower one is Round Hill: an earth and stone mound thirty metres by twenty, two and a half metres high, with white quartz still pushing up through the soil. Stand on the top of it and you look straight up the loch to Ben Lomond.',
-      'The upper one is a Neolithic chambered long cairn, laid east-southeast to west-northwest. Thirty metres by eighteen when it was first written down in 1845; twenty by ten now. Two rows of graves, twenty to twenty-five of them, with flint arrowheads taken out of them that year. A cup-marked boulder sits by a tree at the edge of it — nine cups, if you can find them. One stone cist survives.',
-      'It had already been opened and robbed before 1845. Nobody has looked after it since: most of it is gone, and the forestry is planted over what is left. It is one of the oldest things in this parish and the least looked after.',
-      'There are two ways up to it. The path runs through the plantation — the same line the coffin road takes — and comes out above the trees onto the muir, a couple of hundred metres of it. When the foresters are working, you go round the outside along the field edge instead and pick the track up again above the wood.',
-    ],
-    source: 'Recorded at NS372822 · New Statistical Account, 1845 · Megalithic Portal',
-  },
-  {
-    number: '08',
-    label: 'What people say',
-    title: 'The strike',
-    body: [
-      'A tree in that wood took a lightning strike. It stands split down the length of it, and people who walk there stop at it.',
-      'The cairns, the cross stone and the strike are said to sit on a ley line — a straight line drawn between old places, the kind a dowser finds with a rod. Nothing has ever measured one, and this record says so rather than dressing it up.',
-      'What is true is that people have been drawing lines between these places for a very long time, and that this hill carries more old marks on it than most.',
-    ],
-  },
-];
+/* The history lives in its own file — every date in it was checked against a record
+   rather than remembered, and the order is deliberate: John Muir first, because that is
+   why a stranger comes; the coffin road further down, because that is what they find
+   once they are here. */
 
 /* The place itself, with a short label under each picture — what you are looking at,
    named plainly, so the rail reads like a walk rather than a gallery. */
@@ -167,6 +100,10 @@ export default function Stoneymollan() {
           Six and a half kilometres of the John Muir Way runs over the muir above us — the view
           the whole length of the loch to Ben Lomond, and minutes from our door.
         </p>
+        <p className="mx-auto mt-3 max-w-[44ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
+          A king died across the water at Cardross. A queen of five sailed for France from
+          Dumbarton. Rob Roy raided the island in front of you.
+        </p>
       </div>
 
       {/* ── THE MORNING ── */}
@@ -222,6 +159,7 @@ export default function Stoneymollan() {
                 </p>
               ))}
             </div>
+            {mark.people && <WhoCameThrough people={mark.people} />}
             {mark.source && (
               <p className="mx-auto mt-4 max-w-[40ch] font-mono text-[9.5px] uppercase leading-[1.9] tracking-[0.16em] text-record-muted">
                 {mark.source}

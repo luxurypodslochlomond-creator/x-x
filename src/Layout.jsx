@@ -353,7 +353,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         : isClimatePage
         ? 'Verified climate solutions & crises — after Janine Selendy. Readable in any tongue a reader names, living or long dead. Nobody left behind. The noise is loud. The record is louder.'
         : currentPageName === 'Stoneymollan'
-        ? 'Mist, beeches and the whole loch beneath you: a morning walk on the John Muir Way over Loch Lomond, two Neolithic cairns in the wood below, and cabins at the top of the road.'
+        ? 'Mist, beeches and the whole loch beneath you: the John Muir Way over Loch Lomond, a king dead across the water, old cairns in the wood, and cabins at the top of the road.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
       'og:image': ogImageUrl.startsWith('http') ? ogImageUrl : ogOrigin + ogImageUrl,
       'og:type': 'website',
