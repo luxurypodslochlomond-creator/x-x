@@ -6,6 +6,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import DecideQueue from '@/components/climate/DecideQueue';
 import ClimateChecking from '@/pages/ClimateChecking';
 import GuestList from '@/components/climate/keeper/GuestList';
+import RoomMasthead from '@/components/climate/keeper/RoomMasthead';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 
@@ -34,7 +35,8 @@ export default function ClimateKeeperRoom() {
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
   const [counts, setCounts] = useState(null);
   const [params] = useSearchParams();
-  const [people, setPeople] = useState(null);
+  const [view, setView] = useState(null);
+  const [failed, setFailed] = useState(false);
   const [extra, setExtra] = useState(
     ['counts', 'sourcing'].includes(params.get('tab')) ? params.get('tab') : null
   );
@@ -72,6 +74,12 @@ export default function ClimateKeeperRoom() {
       base44.functions.invoke('checkerQueue', {}),
     ]);
     const roster = r.status === 'fulfilled' ? r.value?.data : null;
+    // A count that failed and a count that came back empty are not the same answer. Before
+    // this, a dropped request was stored as a zero — so a keeper was told she was finished by
+    // a page that had not managed to ask the question. The room now says which it is.
+    setFailed(
+      (who.isKeeper && (q.status === 'rejected' || r.status === 'rejected')) || c.status === 'rejected'
+    );
     setCounts({
       yes: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : 0,
       read: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : 0,
@@ -88,9 +96,15 @@ export default function ClimateKeeperRoom() {
   const yes = n.yes || 0;
   const read = n.read || 0;
   const asks = n.asks || 0;
-  const total = yes + read + asks;
+  // Counted once. An entry waiting for a decision sits in the checking queue as well, so
+  // adding the two figures together told a keeper she had twice the work she had. The room
+  // counts entries and people; reading a source is a second look at an entry already counted,
+  // and the masthead gives it its own cell rather than its own place in the total.
+  const total = who.isKeeper ? yes + asks : read;
 
-  const headline = !counts
+  const headline = failed
+    ? 'The record could not be counted just now.'
+    : !counts
     ? 'Looking at the record…'
     : total === 0
     ? "Nothing is waiting. You're done."
@@ -98,17 +112,11 @@ export default function ClimateKeeperRoom() {
     ? 'One thing is waiting for you.'
     : `${total} things are waiting for you.`;
 
-  const line = [
-    yes ? `${yes} ${yes === 1 ? 'entry' : 'entries'} to decide` : null,
-    read ? `${read} ${read === 1 ? 'source' : 'sources'} to read` : null,
-    asks ? `${asks} ${asks === 1 ? 'person' : 'people'} asking to come in` : null,
-  ]
-    .filter(Boolean)
-    .join(' · ');
-
-  // Someone at the door opens the list by itself; otherwise it stays folded away behind one
-  // line, because most days nobody is asking and most days this is not the job.
-  const peopleOpen = people === null ? asks > 0 : people;
+  // Where the room opens: the work actually in front of her, never a guess. A checker's room
+  // has the one door, so she is never shown a mark she cannot open.
+  const activeView = !who.isKeeper
+    ? 'sources'
+    : view || (yes > 0 ? 'decide' : asks > 0 ? 'access' : 'sources');
 
   return (
     <ClimateRecordShell
@@ -186,44 +194,49 @@ export default function ClimateKeeperRoom() {
           >
             {headline}
           </h1>
-          {line && <p className="mt-1.5 text-[13px] text-[#3a342c]" style={reading}>{line}</p>}
+          {/* The masthead: three marks, three numbers, one glance. This is the whole answer to
+              "what is going on and what needs attention" — and it is the same three jobs the
+              record already had, said in a word each instead of a paragraph. */}
+          <RoomMasthead
+            counts={{ sources: read, decide: yes, access: asks }}
+            keeper={who.isKeeper}
+            view={activeView}
+            onView={setView}
+            failed={failed}
+          />
 
-          {who.isKeeper && yes > 0 && (
-            <Section label="Entries to decide">
+          {failed && (
+            <p className="mt-3 text-[13px] leading-[1.6] text-[#b3261e]" style={reading}>
+              Nothing is lost. This is the page failing to ask, not the record being empty.{' '}
+              <button onClick={count} className="underline decoration-2 underline-offset-2">
+                Ask again
+              </button>
+            </p>
+          )}
+
+          {/* One job at a time. Each room owns its own empty state, so nothing is ever shown
+              as finished by the page that chose not to draw it. */}
+          {activeView === 'decide' && who.isKeeper && (
+            <div className="mt-5">
               <DecideQueue plain onChange={count} />
-            </Section>
+            </div>
           )}
 
-          {/* A source only appears when one is actually waiting. There is no empty room to
-              walk into, because an empty room is one more thing to check before leaving. */}
-          {read > 0 && (
-            <Section label="Sources to read">
+          {activeView === 'sources' && (
+            <div className="mt-5">
               <ClimateChecking plain onChange={count} />
-            </Section>
+            </div>
           )}
 
-          {who.isKeeper && peopleOpen && (
-            <Section label={asks ? 'Someone is asking to come in' : 'Who holds a key'}>
+          {activeView === 'access' && who.isKeeper && (
+            <div className="mt-5">
               <GuestList />
-            </Section>
+            </div>
           )}
 
           {who.isKeeper && (
             <div className="mt-8 border-t border-[#141210]/12 pt-3">
-              {!peopleOpen && (
-                <button
-                  onClick={() => setPeople(true)}
-                  className="flex min-h-[36px] w-full items-center justify-between text-left text-[12.5px] text-[#6b5f4f] active:text-[#b3261e]"
-                  style={reading}
-                >
-                  <span>
-                    {n.people ? `${n.people} ${n.people === 1 ? 'person holds' : 'people hold'} a key` : 'Who holds a key'}
-                  </span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              )}
-
-              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+              <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
                 <Quiet
                   on={extra === 'counts'}
                   onClick={() => setExtra(extra === 'counts' ? null : 'counts')}
@@ -245,15 +258,6 @@ export default function ClimateKeeperRoom() {
         </>
       )}
     </ClimateRecordShell>
-  );
-}
-
-function Section({ label, children }) {
-  return (
-    <section className="mt-7">
-      <p className="mb-2.5 text-[12.5px] text-[#8a7f6d]" style={reading}>{label}</p>
-      {children}
-    </section>
   );
 }
 
