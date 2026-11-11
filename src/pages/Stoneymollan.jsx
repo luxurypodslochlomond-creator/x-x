@@ -104,40 +104,15 @@ export default function Stoneymollan() {
           <h1 className="mt-5 flex justify-center">
             <StoneymollanLogotype className="w-full max-w-[17rem] sm:max-w-[21rem]" />
           </h1>
-          {/* Bro's call: no need to label what it is or call it a mark — the hand is
-              obvious under the name, so it is simply credited. A credit names the person;
-              it does not have to explain the craft. */}
+          {/* Bro's word for it, and the right one: a mark. It says what the thing is —
+              a drawn hand, a maker's sign — and it names him, which is the reason it has
+              any right to sit at the top of the page. */}
           <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
-            Andrew Shandy
+            Mark by Andrew Shandy
           </p>
-          {/* ── THE NAME IS OLDER THAN EVERYTHING ON THIS SHEET — BUT NOT NEOLITHIC ──
-              Bro asked for this beside Andrew's credit, then asked me to double-check he
-              wasn't selling the place short: was it not older still, a stony hill or a
-              mound, dust from the Neolithic? So I went and read rather than agreed.
-
-              What the local record actually says. The Vale of Leven's own place-name notes
-              derive Stoneymollan the same way as Mollanbowie — probably from the Gaelic
-              "muileann", a MILL — and point out the hillside and its burn were an ideal
-              spot for one. Said locally, the old track is "Staney Mullan". So the one thing
-              the evidence argues against is a mound: the reading is a mill, on a burn, on a
-              hill. (A summit reading — "mullach" — is the other candidate, and is not what
-              the local notes give.)
-
-              What IS old, and is not in doubt: the name is on the ground long before the
-              cabins, and the road under it is a coffin road — the dead of Balloch carried
-              over the hill to the burial ground at St Mahew's, Cardross — and a drovers'
-              road before the tolls on the shore. That is real antiquity, and it is medieval,
-              not Neolithic. Irving's Book of Dumbartonshire already has Stoneymollan as a
-              named land, so it is a name on record, not one invented for a brochure.
-
-              The genuine prehistoric on that ridge is on the next hill along — Carman Hill,
-              with its fort and standing stones, at the end of the same walk. Not here, and
-              not in this name. So the line under the credit says what is true: old, Gaelic,
-              probably a mill, and no settled reading of the whole word. Bro asked me to
-              check, so nothing here is dressed up to sound older than the evidence allows. */}
-          <p className="mt-1 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink/75">
-            Older than the cabins &middot; Gaelic, probably a mill &middot; and no settled reading of it
-          </p>
+          {/* The etymology line has come off — Bro's call, and he is right: the credit
+              belongs to the hand that drew it, and a name's history is what the history
+              bands below are for, not a footnote under the title. */}
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
             Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
@@ -312,7 +287,7 @@ export default function Stoneymollan() {
             </Link>
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink">
               Film &middot; Ben Santiago <span className="px-1 text-record-ink/40">/</span> Photos &middot; Gill
-              <span className="px-1 text-record-ink/40">/</span> Art &middot; Andrew Shandy
+              <span className="px-1 text-record-ink/40">/</span> Mark &middot; Andrew Shandy
             </p>
           </div>
         </div>
