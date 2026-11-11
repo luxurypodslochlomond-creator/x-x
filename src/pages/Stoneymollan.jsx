@@ -15,7 +15,7 @@ import Wildlife from '@/components/stoneymollan/Wildlife';
 import GettingHere from '@/components/stoneymollan/GettingHere';
 import StayBar from '@/components/stoneymollan/StayBar';
 import EmberBed from '@/components/stoneymollan/EmberBed';
-import { STONEYMOLLAN_MARK } from '@/components/stoneymollan/mark';
+import StoneymollanLogotype from '@/components/stoneymollan/StoneymollanLogotype';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -90,30 +90,22 @@ export default function Stoneymollan() {
             </p>
             <MastheadTongue />
           </div>
-          {/* ── THE SIGN ──
-              The mark used to float above the name on its own line, which is exactly why it
-              looked planted there: a logo above a heading is a logo above a heading. So it
-              sits IN the name now, the way a crest sits on a door — one object, cut and
-              written by different hands — and the line under it says whose hands, which is
-              the reason it has any right to be at the top of the page at all.
+          {/* ── THE WHOLE LOCKUP, HIS ──
+              The symbol and the name were two objects: his mark, and a typeface underneath
+              standing in for his lettering. That is what "not sure about the font" was
+              actually about — the name of the place was in a font that belongs to nobody
+              here, sitting under a drawing that belongs to Andrew. It is now the drawing
+              all the way down: symbol, letters, one artwork, one hand.
 
-              His file stays untouched: multiply drops the white of it into the paper, so it
-              reads as ink rather than as a picture with a box round it. The record's little
-              red square has stood aside for it. */}
-          <div className="mt-5 flex items-center justify-center gap-3">
-            <img
-              src={STONEYMOLLAN_MARK}
-              alt=""
-              aria-hidden="true"
-              className="block h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
-              style={{ mixBlendMode: 'multiply' }}
-            />
-            <h1 className="stoneymollan-title text-[30px] leading-none sm:text-[40px]">
-              Stoneymollan
-            </h1>
-          </div>
-          <p className="mt-2 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
-            Mark &middot; Andrew Shandy
+              His file is untouched and uncropped. It is set on the paper with multiply, so
+              the white it was made on disappears and only the ink is left, and the line
+              beneath says whose hand it is — which is the reason it has any right to be at
+              the top of the page at all. */}
+          <h1 className="mt-5 flex justify-center">
+            <StoneymollanLogotype className="w-full max-w-[13.5rem] sm:max-w-[17rem]" />
+          </h1>
+          <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
+            Name &amp; mark &middot; Andrew Shandy
           </p>
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
