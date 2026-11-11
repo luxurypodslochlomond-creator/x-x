@@ -8,7 +8,7 @@ import WhoCameThrough from '@/components/stoneymollan/WhoCameThrough';
 import { MARKS } from '@/components/stoneymollan/history';
 import MastheadDoors from '@/components/stoneymollan/MastheadDoors';
 import ThisMonth from '@/components/stoneymollan/ThisMonth';
-import LanguageButton from '@/components/shared/LanguageButton';
+import MastheadTongue from '@/components/stoneymollan/MastheadTongue';
 import Wildlife from '@/components/stoneymollan/Wildlife';
 import StayBar from '@/components/stoneymollan/StayBar';
 
@@ -79,7 +79,7 @@ export default function Stoneymollan() {
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-record-muted">
               Over Loch Lomond
             </p>
-            <LanguageButton tone="paper" />
+            <MastheadTongue />
           </div>
           <div className="mt-3 flex items-center justify-center gap-2.5">
             <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 bg-record-mark" />
