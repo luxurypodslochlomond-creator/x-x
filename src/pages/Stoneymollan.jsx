@@ -13,6 +13,8 @@ import TheYear from '@/components/stoneymollan/TheYear';
 import MastheadTongue from '@/components/stoneymollan/MastheadTongue';
 import Wildlife from '@/components/stoneymollan/Wildlife';
 import GettingHere from '@/components/stoneymollan/GettingHere';
+import TheCairnsNote from '@/components/stoneymollan/TheCairnsNote';
+import TheStrikeNote from '@/components/stoneymollan/TheStrikeNote';
 import StayBar from '@/components/stoneymollan/StayBar';
 import EmberBed from '@/components/stoneymollan/EmberBed';
 import StoneymollanLogotype from '@/components/stoneymollan/StoneymollanLogotype';
@@ -227,6 +229,14 @@ export default function Stoneymollan() {
                 {mark.source}
               </p>
             )}
+            {/* ── THE TWO BANDS THAT ASK TO BE CHECKED ──
+                Every band here names its origin. These two make the biggest claims on
+                the sheet — twenty-odd graves and a hill that answers to nobody — so
+                their names become doors: the national inventory, the parish survey,
+                and, on the strike, the difference between what is old in the world and
+                what is new on the internet. */}
+            {mark.number === '11' && <TheCairnsNote />}
+            {mark.number === '12' && <TheStrikeNote />}
           </PageBand>
         ))}
       </div>

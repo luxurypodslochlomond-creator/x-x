@@ -1,6 +1,7 @@
 import React from 'react';
 import PageBand from './PageBand';
 import { SquirrelMark, DeerMark, PawMark, OtterMark, BirdMark, MyceliumMark } from './StoneymollanIcons';
+import TheSquirrelsNote from './TheSquirrelsNote';
 
 const READING = { fontFamily: 'var(--font-record-reading)' };
 
@@ -84,6 +85,12 @@ export default function Wildlife() {
             west-coast woodland being as rare a thing as it is unglamorous. That wood is
             this hill: the loch straight below it, and the rain that makes it what it is.
           </p>
+
+          {/* The one line here likely to be repeated by a reader is the fifty years,
+              so it gets a door: what is published, and which part is memory. */}
+          <div className="mt-3 text-center">
+            <TheSquirrelsNote />
+          </div>
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">
             <MyceliumMark className="mx-auto h-12 w-12 text-record-mark" />
