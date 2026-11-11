@@ -1,4 +1,5 @@
 import React from 'react';
+import { TAXI_NUMBER, TAXI_TEL } from '@/components/stoneymollan/links';
 
 /* ── THE LAST MILE, AND THE PERSON DOING IT ALONE ────────────────────────────────
    Two things belong together, and neither is a map.
@@ -21,9 +22,6 @@ import React from 'react';
 
 const READING = { fontFamily: 'var(--font-record-reading)' };
 const SERIF = { fontFamily: 'var(--record-display)' };
-
-const TAXI_NUMBER = '01389 721020';
-const TAXI_TEL = 'tel:+441389721020';
 
 export default function OnTheLastMile() {
   return (

@@ -6,7 +6,7 @@ import React from 'react';
    squirrel whose tail overshoots, a base stone that leans. That is the difference
    between something cut by hand and something generated.
 
-   And each of the six doors carries exactly one stroke of the borrowed red: the
+   And every door carries exactly one stroke of the borrowed red: the
    key's hole, the cabin's lit door, the cross on the old stone, the camera's lens,
    the wax on the envelope. One red mark per door, so the row reads as a set of
    stamps struck onto the same sheet as the type rather than a row of app buttons. */
@@ -208,6 +208,22 @@ export function MapMark({ className }) {
       <path d="M8.2 4.7v14.3M15.8 6.8v14.2" />
       <path d="M4.5 17c2.4-3.2 4.3-5 6.5-5.9 1.8-.7 3.4-.5 4.9.3" stroke={ACCENT} />
       <circle cx="16" cy="11.4" r="1.2" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}
+
+/* Getting picked up — a handset lifted off its cradle. Not a smartphone outline,
+   because there is no smartphone up that hill and the mark would be a decade out of
+   date by the next one; a receiver with a cup at each end is the shape everybody still
+   knows. The red is the button under it, which is the one part a thumb touches. */
+export function CallMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.75}>
+      <path d="M4.1 11.9c0-1.4 1.1-2.5 2.5-2.5h10.8c1.4 0 2.5 1.1 2.5 2.5v1.7H4.1Z" />
+      <path d="M4.1 13.6v2.1c0 .7.6 1.3 1.3 1.3h1.2c.7 0 1.3-.6 1.3-1.3v-.8" />
+      <path d="M19.9 13.6v2.1c0 .7-.6 1.3-1.3 1.3h-1.2c-.7 0-1.3-.6-1.3-1.3v-.8" />
+      <path d="M6.6 20.5h10.8" />
+      <circle cx="12" cy="12.7" r="1.15" fill={ACCENT} stroke="none" />
     </Mark>
   );
 }
