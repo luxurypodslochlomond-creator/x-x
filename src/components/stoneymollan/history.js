@@ -38,6 +38,7 @@ export const MARKS = [
     title: 'Up the loch to Ben Lomond',
     body: [
       'The hill stands above the west shore at the south end of the loch, and from the top the ground falls away and the water opens: Ben Lomond at the head of it, 974 metres, the most southerly of Scotland’s Munros.',
+      'What you are looking along is a line. The Highland Boundary Fault runs across the loch through the islands in front of you — Inchcailloch, Torrinch, Creinch, Inchmurrin — and on out to Ben Bowie. North of it is the Highlands and south of it is the Lowlands, and this hill sits on the break between the two. It is why the ground under you is what it is, and why a road crosses here at all.',
       'At the foot of the loch, below the hill: Balloch Castle. The Earls of Lennox built the first one here about 1238 and later moved their seat out to Inchmurrin. The house standing now was built in 1808 for John Buchanan of Ardoch, to plans by Robert Lugar, and the park around it is the one you walk down through into Balloch.',
     ],
     source: 'Historic Environment Scotland · Canmore · Worsley, Loch Lomond (1988)',
@@ -117,11 +118,14 @@ export const MARKS = [
     label: 'The argument the road ran through',
     title: 'Independence',
     body: [
-      'On 23 and 24 June 1314 Bruce broke Edward II’s army at Bannockburn, about twenty-five miles east of here. On 6 April 1320 the Declaration of Arbroath was sealed. In 1328 England recognised Scotland as independent.',
-      'On 1 May 1707 the Act of Union ended that. On 18 September 2014 Scotland was asked again and answered No, 55 to 45, on a turnout of nearly eighty-five per cent.',
+      'The earl who held this ground went with Bruce. Malcolm of Lennox had marched on Carlisle with him in 1296, and on 23 and 24 June 1314 he led his Lennox men at Bannockburn, about twenty-five miles east of here, where Bruce broke Edward II’s army. The deer park the same king kept on Inchmurrin — the island in front of you — was his hand on this water.',
+      'On 6 April 1320 the Declaration of Arbroath was sealed. In 1328 England recognised Scotland as independent, and Bruce died the next year five or six miles south of this hill, at Cardross.',
+      'On 1 May 1707 the Act of Union ended it. On 18 September 2014 Scotland was asked again and answered No, 55.3 to 44.7, on a turnout of 84.6 per cent — the highest in the United Kingdom since 1910.',
+      'And the hill was not a spectator in that one. The council area it stands in, West Dunbartonshire, was one of only four in the country that voted Yes, with Dundee, Glasgow and North Lanarkshire, on the same day most of Scotland did not.',
+      'The song everybody knows belongs to this argument too. “Ye’ll tak the high road and I’ll tak the low road” is usually explained as a Jacobite prisoner’s last words — the high road home for the living, the low road for the dead — and nobody actually knows whether that is right. The song was printed without a gloss and the story came later. It is sung in every language now regardless, which is the most Scottish outcome available.',
       'None of it was settled on this hill. But this was the kind of road such things were carried along, and the people who walked it stood on every side of every one of those arguments.',
     ],
-    source: 'Bannockburn · Declaration of Arbroath, 1320 · Electoral Commission, 2014',
+    source: 'Bannockburn, 1314 · Declaration of Arbroath, 1320 · Treaty of Edinburgh–Northampton, 1328 · Electoral Commission, 2014',
   },
   {
     number: '06',
@@ -138,7 +142,7 @@ export const MARKS = [
     title: 'Cameron House and the Smolletts',
     body: [
       'Cameron House keeps a fourteenth-century castle inside a nineteenth-century mansion, on the shore two miles south of here. The ground was the Earls of Lennox’s first, then the Dennistouns of Colgrain’s and the Charteris family’s; the Smolletts held it for generations after.',
-      'Tobias Smollett was entertained at the house by his cousin James in 1766. James Boswell and Samuel Johnson stayed the night there in 1772, on their way to the Hebrides.',
+      'Tobias Smollett was entertained at the house by his cousin James in 1766. James Boswell and Samuel Johnson stayed the night there in 1773, on their way to the Hebrides.',
       'Cameron Wood — the one at the bottom of the garden, with the two cairns in it — is on the old Cameron home farm ground, which reaches up this hill.',
     ],
     source: 'Historic Environment Scotland · Boswell’s Journal of a Tour to the Hebrides, 1773',

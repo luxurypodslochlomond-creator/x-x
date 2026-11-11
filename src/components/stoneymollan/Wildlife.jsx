@@ -32,7 +32,7 @@ const LIFE = [
   {
     Mark: BirdMark,
     name: 'Osprey',
-    line: 'Over the loch between April and October, fishing. Big, slow wingbeats, and then a dive.',
+    line: 'Over the loch from mid-March into September, fishing. Big, slow wingbeats, and then a dive. The park authority’s own window, not a guess.',
   },
 ];
 
@@ -64,9 +64,9 @@ export default function Wildlife() {
           <p className="mx-auto mt-5 max-w-[46ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
             In summer the west-coast oakwoods fill with wood warbler, redstart and pied
             flycatcher — birds that have almost nowhere else left in Britain. Loch Lomond’s
-            woods are one of the last places in Europe where the mosses and lichens grow
-            thick enough to be worth counting in hundreds of species. This hill is the same
-            rain, the same west coast, a few miles down the road.
+            woods are among the most important in Europe for mosses and lichens, this wet
+            west-coast woodland being as rare a thing as it is unglamorous. This hill is the
+            same rain, the same coast, a few miles down the road.
           </p>
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">

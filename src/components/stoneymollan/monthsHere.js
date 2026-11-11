@@ -36,7 +36,10 @@ export const MONTHS = [
     short: 'Feb',
     name: 'February',
     see: 'Great spotted woodpeckers drumming — heard far more often than seen. The first noise of the year.',
-    under: 'Coltsfoot on the bank, and the first celandine. Frogspawn in the pools by the end of the month, most years.',
+    /* Frogspawn in February is a mild west-coast year, not the rule — most years it waits
+       for March. The old line said "most years", which would have had a guest on the hill
+       in a cold February looking at three weeks of nothing. */
+    under: 'Coltsfoot on the bank, and the first celandine. Frogspawn in the pools in a mild one — most years it waits for March.',
   },
   {
     short: 'Mar',

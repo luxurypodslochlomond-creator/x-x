@@ -79,6 +79,12 @@ export default function TheYear() {
           moves everything by a fortnight, and a lot of this is one animal on a good
           morning. You can walk the whole hill and see none of it.
         </p>
+
+        <p className="mx-auto mt-3 max-w-[40ch] text-center font-mono text-[11px] uppercase leading-[1.9] tracking-[0.12em] text-record-ink">
+          If you pick: take a little and leave the rest. Never dig a plant up. And never eat
+          a mushroom you are not certain of — on this hill that last one matters more than
+          the other two.
+        </p>
       </PageBand>
     </div>
   );
