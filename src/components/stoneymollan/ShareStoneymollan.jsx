@@ -1,70 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Share2, Check, Link2 } from 'lucide-react';
 import ShareCardPreview from '@/components/climate/ShareCardPreview';
-import { recordAddress } from '@/components/climate/recordAddress';
-import { buildStoneymollanCard } from './stoneymollanCard';
+import useStoneymollanShare from './useStoneymollanShare';
 
-// ── PASS THE ROAD ON ──
-// One tap, the same way a record page leaves a phone: where the device gives the page
-// its share sheet, the card goes straight into it; where it refuses the sheet — the
-// editor's own frame, a browser inside another app — the card is put on screen to keep
-// and pass on, never a silent download. The link is the page's own address, so what a
-// friend opens is this page and not the record's front door.
+/* The big way off the page: the card, the sheet, or the link. The doing of it lives in
+   useStoneymollanShare, because the bar at the foot of a phone needs the same thing. */
 export default function ShareStoneymollan({ imageUrl, imageCredit }) {
-  const [state, setState] = useState('idle');
-  const [card, setCard] = useState(null);
-  const [copied, setCopied] = useState(false);
-
-  const link = recordAddress('/Stoneymollan');
-
-  const share = async () => {
-    if (state === 'building') return;
-    setState('building');
-
-    try {
-      const blob = await buildStoneymollanCard({ image_url: imageUrl, image_credit: imageCredit, link });
-      if (!blob) throw new Error('The card could not be drawn.');
-      const file = new File([blob], 'stoneymollan.png', { type: 'image/png' });
-      const title = 'Stoneymollan';
-      const line = `Mist, beeches, hillside cabins and the whole loch beneath you, on the John Muir Way over Loch Lomond — ${link}`;
-
-      const carriesFile = !!(navigator.canShare && navigator.canShare({ files: [file] }));
-      const hasSheet = carriesFile || !!navigator.share;
-
-      if (hasSheet) {
-        try {
-          await navigator.share(carriesFile ? { files: [file], title, text: line } : { title, text: line });
-          setState('shared');
-          setTimeout(() => setState('idle'), 3500);
-          return;
-        } catch (err) {
-          // Dismissing the sheet is a change of mind, not a failure.
-          if (err?.name === 'AbortError') { setState('idle'); return; }
-        }
-      }
-
-      setCard({ blob, fileName: file.name });
-      setState('idle');
-    } catch (err) {
-      setState('idle');
-      throw err;
-    }
-  };
-
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(link);
-    } catch {
-      const field = document.createElement('textarea');
-      field.value = link;
-      document.body.appendChild(field);
-      field.select();
-      document.execCommand('copy');
-      field.remove();
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
+  const { state, card, copied, link, share, copyLink, closeCard } = useStoneymollanShare({ imageUrl, imageCredit });
 
   const Icon = state === 'shared' ? Check : Share2;
   const label = state === 'building' ? 'Drawing the card…' : state === 'shared' ? 'Shared' : 'Share this page';
@@ -90,7 +32,7 @@ export default function ShareStoneymollan({ imageUrl, imageCredit }) {
 
       <ShareCardPreview
         open={!!card}
-        onClose={() => setCard(null)}
+        onClose={closeCard}
         blob={card?.blob}
         fileName={card?.fileName}
         link={link}

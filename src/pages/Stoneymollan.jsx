@@ -102,7 +102,7 @@ export default function Stoneymollan() {
               beneath says whose hand it is — which is the reason it has any right to be at
               the top of the page at all. */}
           <h1 className="mt-5 flex justify-center">
-            <StoneymollanLogotype className="w-full max-w-[13.5rem] sm:max-w-[17rem]" />
+            <StoneymollanLogotype className="w-full max-w-[17rem] sm:max-w-[21rem]" />
           </h1>
           <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
             Name &amp; mark &middot; Andrew Shandy
@@ -287,7 +287,7 @@ export default function Stoneymollan() {
         </div>
       </footer>
 
-      <StayBar />
+      <StayBar shareImage={MORNING[0].url} shareCredit="Gill" />
     </div>
   );
 }

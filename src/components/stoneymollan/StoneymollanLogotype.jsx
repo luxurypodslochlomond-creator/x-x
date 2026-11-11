@@ -28,7 +28,14 @@ export default function StoneymollanLogotype({ className = '' }) {
       decoding="async"
       draggable={false}
       className={`block select-none ${className}`}
-      style={{ mixBlendMode: 'multiply' }}
+      /* Two things, and neither one touches the drawing. Multiply drops the white he
+         drew on into the paper, so only his ink is left. The opacity is an ink weight,
+         not a recolour: a scanner hands back pure black, and pure black on warm paper
+         is harder than everything set around it — the page's own ink sits at #1a1612.
+         Held at 0.88 over this paper his black lands at almost exactly that, so the name
+         belongs to the sheet instead of being the loudest thing on it. Turn the number
+         up towards 1 to have it starker, down to 0.8 to have it softer. */
+      style={{ mixBlendMode: 'multiply', opacity: 0.88 }}
     />
   );
 }

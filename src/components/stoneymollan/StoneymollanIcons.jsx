@@ -244,6 +244,18 @@ export function CallMark({ className }) {
    took off the island, the quill is a writer's and the mountain is a walker's. */
 
 /* A king — the band, three points, and one red stone. */
+/* Pass it on — a road going up and off the edge of the page, with its arrowhead on the
+   end of it. The same drawn road the rest of the sheet uses, doing the one thing a share
+   button actually means: here, this goes to you. */
+export function ShareMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M4.2 19.8c2.6-.2 4.2-1.6 5.6-3.6 1.6-2.3 3.1-4 5.4-4h4.6" />
+      <path d="M16.6 8.9 20 12.2l-3.4 3.3" />
+    </Mark>
+  );
+}
+
 export function CrownMark({ className }) {
   return (
     <Mark className={className} strokeWidth={1.7}>
