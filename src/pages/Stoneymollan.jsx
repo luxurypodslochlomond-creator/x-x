@@ -63,13 +63,14 @@ const PLACES = [
 
 export default function Stoneymollan() {
   return (
-    <div className="relative min-h-screen bg-record-paper pb-20 text-record-ink twcc-scanlines md:pb-0">
+    <div className="stoneymollan-page relative min-h-screen bg-record-paper pb-20 text-record-ink twcc-scanlines md:pb-0">
+      <MastheadDoors mobile />
       {/* ── THE MASTHEAD ──
           The record's own top, set down the middle: a bar of the mark's red across the
           page, then the name with its little square, ruled under by a hand-drawn line,
           then the facts of the place in the machine's small voice. */}
       <header className="relative z-10">
-        <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
+        <div aria-hidden="true" className="hidden h-[3px] w-full bg-record-mark md:block" />
         <div className={`${SHEET} pt-5`}>
           {/* The tongue sits where a record puts it — in the corner, above the name, so
               somebody who cannot read the English knows at once that the whole sheet

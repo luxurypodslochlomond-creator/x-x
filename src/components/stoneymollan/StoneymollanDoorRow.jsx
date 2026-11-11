@@ -1,0 +1,30 @@
+import React from 'react';
+import { BOOK_DIRECT, INSTAGRAM, EMAIL } from '@/components/stoneymollan/links';
+import { KeyMark, CabinMark, CrossStoneMark, CameraMark, EnvelopeMark, SquirrelMark } from '@/components/stoneymollan/StoneymollanIcons';
+
+const DOORS = [
+  { label: 'Book', href: BOOK_DIRECT, Mark: KeyMark, external: true, primary: true, tilt: -3 },
+  { label: 'Stay', href: '#stay', Mark: CabinMark, tilt: 1.6 },
+  { label: 'Wild', href: '#wildlife', Mark: SquirrelMark, tilt: -1.4 },
+  { label: 'History', href: '#history', Mark: CrossStoneMark, tilt: 2.4 },
+  { label: 'Insta', href: INSTAGRAM, Mark: CameraMark, external: true, tilt: -2.1 },
+  { label: 'Email', href: `mailto:${EMAIL}`, Mark: EnvelopeMark, tilt: 1.1 },
+];
+
+export default function StoneymollanDoorRow() {
+  return (
+    <ul className="mx-auto grid w-full max-w-[44rem] grid-cols-6 gap-x-1">
+      {DOORS.map(({ label, href, Mark, external, primary, tilt }) => (
+        <li key={label} className="min-w-0">
+          <a href={href} {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            className={`flex flex-col items-center gap-1.5 border-b-2 pb-1.5 transition-colors active:opacity-50 ${primary ? 'border-record-mark text-record-ink' : 'border-record-ink/15 text-record-ink/80 hover:border-record-ink/45 hover:text-record-ink'}`}>
+            <span className="block" style={{ transform: `rotate(${tilt}deg)` }}>
+              <Mark className="h-[26px] w-[26px]" />
+            </span>
+            <span className="block w-full text-center font-mono text-[8px] uppercase leading-none tracking-[0.08em] indent-[0.08em]">{label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}

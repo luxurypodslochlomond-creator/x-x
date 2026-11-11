@@ -701,7 +701,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         @keyframes glow-pulse { 0%, 100% { filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.8)); } 50% { filter: drop-shadow(0 0 20px rgba(236, 72, 153, 1)); } }
       `}</style>
       
-      <div className="min-h-screen text-[#1a1612] overflow-x-hidden twcc-scanlines relative bg-[#f4efe4]">
+      <div data-stoneymollan={currentPageName === 'Stoneymollan' || undefined} className="min-h-screen text-[#1a1612] overflow-x-hidden twcc-scanlines relative bg-[#f4efe4]">
         
         {isOffline && (
           <div className="fixed top-0 left-0 right-0 z-[70] flex items-center justify-center gap-2 py-1 px-4 bg-black/70 backdrop-blur-sm border-b border-white/10">

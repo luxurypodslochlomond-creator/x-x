@@ -1,0 +1,22 @@
+@media (max-width: 767px) {
+  /* Hidden horizontal overflow creates a non-scrolling ancestor that traps sticky.
+     Clip keeps the same horizontal bounds without intercepting page scrolling. */
+  [data-stoneymollan],
+  [data-stoneymollan] > main {
+    overflow-x: clip !important;
+    overflow-y: visible !important;
+  }
+
+  /* The shared optimiser applies perspective to every element. On this mobile
+     page, keep viewport controls out of those artificial 3D containing blocks. */
+  html:has([data-stoneymollan]),
+  body:has([data-stoneymollan]),
+  #root:has([data-stoneymollan]),
+  [data-stoneymollan],
+  [data-stoneymollan] > main,
+  .stoneymollan-page {
+    perspective: none !important;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+  }
+}
