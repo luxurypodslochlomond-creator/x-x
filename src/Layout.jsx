@@ -332,10 +332,16 @@ const LayoutInner = ({ children, currentPageName }) => {
       ogImageUrl = '/api/functions/serveSortedOGImage';
     } else if (isClimatePage) {
       ogImageUrl = '/api/functions/serveClimateOGImage';
+    } else if (currentPageName === 'Stoneymollan') {
+      // Stoneymollan is its own page with its own picture — Gill's first light over the
+      // water — rather than the platform's house card, so a link shared into WhatsApp
+      // opens as the road and not as the whole ecosystem.
+      ogImageUrl = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/f84d01fa3_stoneymollan-sunrise.png';
     }
 
     const ogTags = {
-      'og:title': isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Can Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
+      'og:title': currentPageName === 'Stoneymollan' ? 'Stoneymollan — the coffin road over Loch Lomond'
+        : isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Can Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : isPS51Page
@@ -346,8 +352,10 @@ const LayoutInner = ({ children, currentPageName }) => {
         ? 'Got a scary letter? Stuck in a dispute? SORTED decodes it in seconds — plain English, any language, nothing stored.'
         : isClimatePage
         ? 'Verified climate solutions & crises — after Janine Selendy. Readable in any tongue a reader names, living or long dead. Nobody left behind. The noise is loud. The record is louder.'
+        : currentPageName === 'Stoneymollan'
+        ? 'Balloch to Cardross: six and a half kilometres of coffin road over the muir, with two Neolithic cairns in the wood below it.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
-      'og:image': ogOrigin + ogImageUrl,
+      'og:image': ogImageUrl.startsWith('http') ? ogImageUrl : ogOrigin + ogImageUrl,
       'og:type': 'website',
       'og:url': isClimatePage ? ogOrigin + window.location.pathname : window.location.href,
       'og:image:width': '1200',

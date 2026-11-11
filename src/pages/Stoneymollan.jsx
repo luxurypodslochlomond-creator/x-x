@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RecordRule from '@/components/climate/RecordRule';
 import PageBand from '@/components/stoneymollan/PageBand';
 import FrostFilm from '@/components/stoneymollan/FrostFilm';
+import ShareStoneymollan from '@/components/stoneymollan/ShareStoneymollan';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -92,6 +93,7 @@ const MARKS = [
       'The lower one is Round Hill: an earth and stone mound thirty metres by twenty, two and a half metres high, with white quartz still pushing up through the soil. Stand on the top of it and you look straight up the loch to Ben Lomond.',
       'The upper one is a Neolithic chambered long cairn, laid east-southeast to west-northwest. Thirty metres by eighteen when it was first written down in 1845; twenty by ten now. Two rows of graves, twenty to twenty-five of them, with bones and flint arrowheads taken out of them that year. A cup-marked boulder sits by a tree at the edge of it — nine cups, if you can find them. One stone cist survives.',
       'It had already been opened and robbed before 1845. Nobody has looked after it since: most of it is gone, and the forestry is planted over what is left. It is one of the oldest things in this parish and the least looked after.',
+      'There are two ways up to it. The path runs through the plantation — the same line the coffin road takes — and comes out above the trees onto the muir, a couple of hundred metres of it. When the foresters are working, you go round the outside along the field edge instead and pick the track up again above the wood.',
     ],
     source: 'Recorded at NS372822 · New Statistical Account, 1845 · Megalithic Portal',
   },
@@ -310,6 +312,10 @@ export default function Stoneymollan() {
               We answer between 10 and 5
             </p>
           </div>
+
+          {/* Hand it on — the card carries the name, the road and the distance, so what
+              arrives on somebody's phone is the page and not a bare link. */}
+          <ShareStoneymollan imageUrl={MORNING[0].url} imageCredit="Gill" />
         </div>
       </section>
 
