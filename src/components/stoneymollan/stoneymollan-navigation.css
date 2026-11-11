@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap');
+
+/* The name is set in overlochlomond.com's own typeface. */
+.stoneymollan-title {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
 @media (max-width: 767px) {
   /* Hidden horizontal overflow creates a non-scrolling ancestor that traps sticky.
      Clip keeps the same horizontal bounds without intercepting page scrolling. */

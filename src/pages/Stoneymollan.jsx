@@ -85,8 +85,7 @@ export default function Stoneymollan() {
           <div className="mt-3 flex items-center justify-center gap-2.5">
             <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 bg-record-mark" />
             <h1
-              className="text-[34px] leading-[1.02] tracking-tight sm:text-[42px]"
-              style={SERIF}
+              className="stoneymollan-title text-[30px] leading-[1.02] sm:text-[40px]"
             >
               Stoneymollan
             </h1>
