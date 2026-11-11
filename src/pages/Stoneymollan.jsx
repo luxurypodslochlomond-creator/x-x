@@ -11,6 +11,8 @@ import ThisMonth from '@/components/stoneymollan/ThisMonth';
 import MastheadTongue from '@/components/stoneymollan/MastheadTongue';
 import Wildlife from '@/components/stoneymollan/Wildlife';
 import StayBar from '@/components/stoneymollan/StayBar';
+import EmberBed from '@/components/stoneymollan/EmberBed';
+import { STONEYMOLLAN_MARK } from '@/components/stoneymollan/mark';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -82,20 +84,30 @@ export default function Stoneymollan() {
             </p>
             <MastheadTongue />
           </div>
-          <div className="mt-3 flex items-center justify-center gap-2.5">
-            <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 bg-record-mark" />
-            <h1
-              className="stoneymollan-title text-[30px] leading-[1.02] sm:text-[40px]"
-            >
-              Stoneymollan
-            </h1>
-          </div>
+          {/* Andrew Shandy's mark, printed above the name the way it is cut into the sign at
+              the top of the road. It is his file, untouched — multiply drops the white of it
+              into the paper, so it reads as ink rather than as a picture with a box round it.
+              The record's little red square has stood aside for it: this page wears his mark. */}
+          <img
+            src={STONEYMOLLAN_MARK}
+            alt="The Stoneymollan mark, drawn by Andrew Shandy"
+            className="mx-auto mt-4 block h-14 w-14 object-contain"
+            style={{ mixBlendMode: 'multiply' }}
+          />
+          <h1 className="stoneymollan-title mt-2 text-center text-[30px] leading-[1.02] sm:text-[40px]">
+            Stoneymollan
+          </h1>
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-muted">
             Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
           </p>
           <p className="text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-signal">
             John Muir Way, Section 1 &middot; Three Lochs Way
+          </p>
+          {/* Said in their own words — the same three that head their Instagram — because it is
+              the truest short answer to "what is it", and it lets the wrong guest go quietly. */}
+          <p className="text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-muted">
+            Hillside cabins &middot; hot tub &middot; sauna &middot; fire pit
           </p>
           <MastheadDoors />
           <ThisMonth />
@@ -224,8 +236,9 @@ export default function Stoneymollan() {
       <StayHere shareImage={MORNING[0].url} shareCredit="Gill" />
 
       {/* ── THE FOOT ── */}
-      <footer className="border-t border-record-ink/25">
-        <div className={`${SHEET} py-9`}>
+      <footer className="relative overflow-hidden border-t border-record-ink/25">
+        <EmberBed />
+        <div className={`${SHEET} relative py-9`}>
           <p className="mx-auto max-w-[40ch] text-center text-[17px] leading-[1.6]" style={READING}>
             We are so lucky here. Can&rsquo;t quite believe we were given the chance.
           </p>
@@ -241,6 +254,7 @@ export default function Stoneymollan() {
             </Link>
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">
               Film &middot; Ben Santiago <span className="px-1 text-record-ink/25">/</span> Photos &middot; Gill
+              <span className="px-1 text-record-ink/25">/</span> Mark &middot; Andrew Shandy
             </p>
           </div>
         </div>

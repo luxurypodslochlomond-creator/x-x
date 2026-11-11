@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import ShareStoneymollan from './ShareStoneymollan';
+import EmberBed from './EmberBed';
 import { BOOK_DIRECT, WEBSITE, EMAIL } from './links';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
@@ -14,8 +15,14 @@ const READING = { fontFamily: 'var(--font-record-reading)' };
  */
 export default function StayHere({ shareImage, shareCredit }) {
   return (
-    <section id="stay" className="scroll-mt-20 border-t border-record-ink/25 bg-record-paper">
-      <div className="mx-auto w-full max-w-[44rem] px-6 py-10">
+    <section
+      id="stay"
+      className="relative overflow-hidden scroll-mt-20 border-t border-record-ink/25 bg-record-paper"
+    >
+      {/* The fire is further down the hill than the name, so it starts here and grows
+          towards the foot of the page rather than arriving all at once. */}
+      <EmberBed strength={0.6} />
+      <div className="relative mx-auto w-full max-w-[44rem] px-6 py-10">
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
           Over Loch Lomond &middot; Brian &amp; Gillian
         </p>
@@ -34,7 +41,9 @@ export default function StayHere({ shareImage, shareCredit }) {
           <p>Wood-fired hot tub.</p>
           <p>Wood-fired sauna.</p>
           <p>Cold water plunge.</p>
-          <p>Fire pit, under the stars.</p>
+          {/* The one line on the page with the fire on it, so it carries a little of the
+              light. A glow, not a flame: nothing moves, and the words stay sharp. */}
+          <p style={{ textShadow: '0 0 22px rgba(226,96,42,0.55)' }}>Fire pit, under the stars.</p>
           <p className="text-record-signal">A view that turns all the way round.</p>
         </div>
 
@@ -69,6 +78,15 @@ export default function StayHere({ shareImage, shareCredit }) {
         <p className="mx-auto mt-5 max-w-[40ch] text-center text-[15px] leading-relaxed text-record-muted" style={READING}>
           Glasgow airport, 25 minutes. Edinburgh, an hour and a quarter. Say the word and one of
           us will meet you in the Defender.
+        </p>
+
+        {/* Who this is for, said plainly and warmly before anybody books. The reviews that
+            hurt were never about the place; they were somebody arriving at a hillside cabin
+            expecting a hotel. Saying so here costs nothing and spares both sides the week. */}
+        <p className="mx-auto mt-5 max-w-[38ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
+          A cabin, a fire, and a hill that does as it likes. No bar, no lobby, nobody on call.
+          If you are after a hotel, we are the wrong door &mdash; and we would rather tell you
+          that here than have you find it out up the track.
         </p>
 
         <div className="mx-auto mt-6 w-full max-w-[20rem]">

@@ -26,7 +26,7 @@ export default function ShareStoneymollan({ imageUrl, imageCredit }) {
       if (!blob) throw new Error('The card could not be drawn.');
       const file = new File([blob], 'stoneymollan.png', { type: 'image/png' });
       const title = 'Stoneymollan';
-      const line = `Mist, beeches and the whole loch beneath you, on the John Muir Way over Loch Lomond — ${link}`;
+      const line = `Mist, beeches, hillside cabins and the whole loch beneath you, on the John Muir Way over Loch Lomond — ${link}`;
 
       const carriesFile = !!(navigator.canShare && navigator.canShare({ files: [file] }));
       const hasSheet = carriesFile || !!navigator.share;

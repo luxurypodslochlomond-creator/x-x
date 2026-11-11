@@ -53,6 +53,12 @@
          exists. The browser fetches only the script it is actually displaying. -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Noto+Serif:wght@400;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Noto+Serif:wght@400;600&display=swap" /></noscript>
+    <!-- STONEYMOLLAN'S OWN VOICE. The name on the stay's page is set in the face their own
+         website uses, so a guest arriving from overlochlomond.com meets the same lettering
+         rather than a stranger's. Only the @font-face rules are fetched here; the files
+         themselves only arrive on a page that actually sets the name. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" /></noscript>
     
     <!-- INSTANT PAINT: Critical CSS inlined -->
     <style>
@@ -261,6 +267,18 @@
             desc: 'AI-powered tinnitus relief. Radar-based frequency engine. Free. No signup.',
             image: 'https://uf51.love/api/functions/serveOGImage',
             url: 'https://uf51.love/BuzzStop'
+          };
+        } else if (path === 'stoneymollan') {
+          // The stay is the one page on here a guest will forward to somebody who is choosing
+          // where to go, and WhatsApp, iMessage and Telegram never run the app's script — they
+          // read these tags and nothing else. So the card they see is written here by hand:
+          // Gill's own sunrise, the name of the place, and the three things that are actually
+          // up the track, so nobody arrives expecting a hotel.
+          meta = {
+            title: 'Stoneymollan \u2014 hillside cabins over Loch Lomond',
+            desc: 'Mist, beeches and the whole loch beneath you. Two hillside cabins with a wood-fired hot tub, sauna and fire pit, straight off the John Muir Way. Book direct.',
+            image: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/f84d01fa3_stoneymollan-sunrise.png',
+            url: 'https://uf51.love/Stoneymollan'
           };
         } else if (path === 'togetherchangeclimate' || path === 'climateplatform') {
           meta = {

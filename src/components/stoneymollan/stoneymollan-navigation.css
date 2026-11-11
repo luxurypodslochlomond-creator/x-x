@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap');
-
-/* The name is set in overlochlomond.com's own typeface. */
+/* The name is set in overlochlomond.com's own typeface, loaded in index.html. */
 .stoneymollan-title {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 800;

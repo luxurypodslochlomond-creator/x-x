@@ -9,6 +9,8 @@
 // A canvas cannot read a CSS token, so the record's numbers are copied here. Change
 // one, change all four: src/index.css owns them.
 
+import { STONEYMOLLAN_MARK, MARK_CREDIT } from './mark';
+
 const W = 1080;
 const H = 1350;
 
@@ -80,7 +82,10 @@ export async function buildStoneymollanCard(options = {}) {
     ]);
   } catch { /* the system faces still read fine */ }
 
-  const img = await loadImage(options.image_url);
+  const [img, mark] = await Promise.all([
+    loadImage(options.image_url),
+    loadImage(STONEYMOLLAN_MARK),
+  ]);
 
   // Paper, cold scanline grain.
   ctx.fillStyle = PAPER;
@@ -97,59 +102,71 @@ export async function buildStoneymollanCard(options = {}) {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'alphabetic';
 
+  // Andrew Shandy's mark at the head of the card, printed into the paper rather than
+  // sitting on it: multiply drops the white of his file away, so what travels is his
+  // drawing and nothing else. If his picture cannot be reached the card still draws.
+  if (mark) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'multiply';
+    const size = 104;
+    ctx.drawImage(mark, (W - size) / 2, 44, size, size);
+    ctx.restore();
+  }
+
   ctx.fillStyle = MUTED;
   ctx.font = `700 20px ${MONO}`;
-  ctx.fillText('O V E R   L O C H   L O M O N D', W / 2, 96);
+  ctx.fillText('O V E R   L O C H   L O M O N D', W / 2, 200);
 
   ctx.fillStyle = INK;
   ctx.font = `400 86px ${SERIF}`;
-  ctx.fillText('Stoneymollan', W / 2, 184);
+  ctx.fillText('Stoneymollan', W / 2, 288);
 
   ctx.strokeStyle = 'rgba(20,18,16,0.55)';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(PAD, 218);
-  ctx.lineTo(W - PAD, 218);
+  ctx.moveTo(PAD, 322);
+  ctx.lineTo(W - PAD, 322);
   ctx.stroke();
 
   ctx.fillStyle = MUTED;
   ctx.font = `700 19px ${MONO}`;
-  ctx.fillText('BALLOCH \u2192 CARDROSS  \u00b7  6.75 KM  \u00b7  OVER THE MUIR', W / 2, 256);
+  ctx.fillText('BALLOCH \u2192 CARDROSS  \u00b7  6.75 KM  \u00b7  OVER THE MUIR', W / 2, 358);
   ctx.fillStyle = SIGNAL;
   ctx.font = `700 18px ${MONO}`;
-  ctx.fillText('JOHN MUIR WAY, SECTION 1  \u00b7  THREE LOCHS WAY', W / 2, 290);
+  ctx.fillText('JOHN MUIR WAY, SECTION 1  \u00b7  THREE LOCHS WAY', W / 2, 392);
 
   // The picture, with the hand that made it kept inside the frame.
   if (img) {
-    drawCover(ctx, img, PAD, 330, MAXW, 470);
+    drawCover(ctx, img, PAD, 422, MAXW, 436);
     ctx.strokeStyle = 'rgba(20,18,16,0.35)';
     ctx.lineWidth = 2;
-    ctx.strokeRect(PAD, 330, MAXW, 470);
+    ctx.strokeRect(PAD, 422, MAXW, 436);
     if (options.image_credit) {
       ctx.fillStyle = 'rgba(20,18,16,0.8)';
-      ctx.fillRect(PAD, 762, MAXW, 38);
+      ctx.fillRect(PAD, 858, MAXW, 38);
       ctx.fillStyle = PAPER;
       ctx.font = `700 17px ${MONO}`;
-      ctx.fillText(options.image_credit.toUpperCase(), W / 2, 787);
+      ctx.fillText(options.image_credit.toUpperCase(), W / 2, 883);
     }
   }
 
   // The lead, in the page's own words rather than a paraphrase of them.
   ctx.fillStyle = INK;
   ctx.font = `400 52px ${SERIF}`;
-  const lead = wrapLines(ctx, 'Mist, beeches, and the whole loch beneath you.', MAXW - 60, 3);
-  lead.forEach((line, i) => ctx.fillText(line, W / 2, 900 + i * 60));
+  const lead = wrapLines(ctx, 'Mist, beeches, and the whole loch beneath you.', MAXW - 60, 2);
+  lead.forEach((line, i) => ctx.fillText(line, W / 2, 966 + i * 60));
 
-  // What is on it, in as much detail as the card has room for.
+  // What is on it, in as much detail as the card has room for — and said in their own
+  // words, so the card cannot be forwarded to somebody expecting a hotel.
   ctx.fillStyle = 'rgba(20,18,16,0.82)';
   ctx.font = `500 24px ${MONO}`;
   const body = wrapLines(
     ctx,
-    'A morning walk on the John Muir Way, straight off our own drive \u00b7 cabins at the top of it \u00b7 the view the whole length of the loch to Ben Lomond',
+    'A morning walk on the John Muir Way, straight off our own drive \u00b7 hillside cabins at the top of it \u00b7 the whole length of the loch to Ben Lomond',
     MAXW - 90,
-    4,
+    3,
   );
-  body.forEach((line, i) => ctx.fillText(line, W / 2, 1010 + i * 40));
+  body.forEach((line, i) => ctx.fillText(line, W / 2, 1064 + i * 38));
 
   // Footer — the address a reader can check, and the covenant.
   ctx.fillStyle = INK;
@@ -160,6 +177,11 @@ export async function buildStoneymollanCard(options = {}) {
   ctx.fillStyle = MARK;
   ctx.font = `700 26px ${MONO}`;
   ctx.fillText('x  =  x', W / 2, FOOTER_TOP + 118);
+
+  // The hand that drew the mark is named on the card, as it is on the page.
+  ctx.fillStyle = 'rgba(244,239,228,0.5)';
+  ctx.font = `700 15px ${MONO}`;
+  ctx.fillText(MARK_CREDIT.toUpperCase(), W / 2, FOOTER_TOP + 152);
 
   return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
 }
