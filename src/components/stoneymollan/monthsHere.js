@@ -95,7 +95,12 @@ export const MONTHS = [
   {
     short: 'Nov',
     name: 'November',
-    see: 'A red squirrel now and then — one, if you are lucky, not a wood full of them. Woodcock in the wet wood at dusk, if you are quiet.',
+    /* Bro asked whether November was right, and it is — reds do not hibernate, so they are
+       about all winter, and with the leaves off the beeches this is genuinely one of the
+       better months to actually see one working the mast. Which is what the line now says,
+       because a bare "a red squirrel now and then" threw away the best fact we have about
+       the month. The hedge stays: one, on a good morning, is still the truth. */
+    see: 'Red squirrels working the mast under the beeches — the leaves being down is what lets you see one. One, if you are lucky, not a wood full of them. Woodcock in the wet wood at dusk, if you are quiet.',
     under: 'Beech leaves down, the avenue showing its bones again. Wood blewit and clouded agaric in the litter, in a mild one.',
   },
   {

@@ -113,21 +113,33 @@ export function EnvelopeMark({ className }) {
   );
 }
 
-/* Red squirrel — the tail is the animal: one sweep up from the rump and over the
-   back, curling inwards until it stops on itself. The red is the inner curl of that
-   tail rather than the eye, because at twenty-six pixels an eye is a single dot and
-   a red dot disappears, while a red curl reads across a room. Ears, a forepaw and two
-   feet are all the rest it needs. */
+/* Red squirrel — redrawn. The old one was a body with a loop beside it, and beside is
+   the problem: at twenty-six pixels a loop next to a blob reads as a bubble, not an
+   animal. It also drew the whole creature, which nothing else on this sheet does — the
+   deer is the head, the bird is the bend of the wings, the otter is a head in the water.
+   One identifying part, drawn well, is what makes a mark legible at the size it is
+   actually seen.
+
+   So this is the two things that are unmistakably a red squirrel and nothing else: the
+   plume, sweeping up behind the rump and curling over the head, and the tufted ear —
+   tufts are the one field sign that separates a red from a grey. The red is the inner
+   curl of the plume, for the same reason as before: a red dot the size of an eye is
+   invisible from a metre away, while a red line reads across a room. Nothing else is
+   filled, nothing else is coloured, and the whole animal sits inside a 24-unit box. */
 export function SquirrelMark({ className }) {
   return (
     <Mark className={className} strokeWidth={1.7}>
-      <path d="M9.6 19.8C6 19.1 3.7 15.9 4.7 12.4c1-3.4 4.4-5.4 7.7-4.6 2.4.6 3.9 2.7 3.7 5" />
-      <path d="M15.6 12.8c-.3 1.3-1.6 2.1-2.9 1.8" stroke={ACCENT} />
-      <path d="M9.6 19.8c.3-3.4 2.4-6 5.5-6.7" />
-      <path d="M14.9 13.1c0-1.9 1.6-3.4 3.5-3.4s3.5 1.5 3.5 3.4c0 1.3-.8 2.5-2 3" />
-      <path d="M18.4 9.7l.4-2.1" />
-      <path d="M13.4 16.6l1.9-.7" />
-      <path d="M10.7 20.9c1 .5 2.3.5 3.2 0" />
+      <path d="M9.1 18.7C5.3 17.7 3.2 13.5 5 9.9c1.4-2.8 4.4-4.4 7.3-3.9" />
+      <path d="M12.5 6c1.6.2 2.8 1.4 3.1 2.9" />
+      <path
+        d="M10.5 16.5c-2.1-.6-3.3-2.6-2.8-4.6.4-1.8 1.9-3.1 3.7-3.3"
+        stroke={ACCENT}
+      />
+      <path d="M13.6 9.6c1.4-1.3 3.6-1.2 4.9.2 1.2 1.3 1.1 3.3-.2 4.5-1.1 1-2.7 1.1-3.9.3" />
+      <path d="M15.6 7.1 15.1 4.9" />
+      <path d="M17.1 7.3l.4-1.8" />
+      <path d="M17.6 12.7l1.4.6" />
+      <circle cx="16" cy="10.7" r="0.62" fill="currentColor" stroke="none" />
     </Mark>
   );
 }
@@ -244,14 +256,23 @@ export function CallMark({ className }) {
    took off the island, the quill is a writer's and the mountain is a walker's. */
 
 /* A king — the band, three points, and one red stone. */
-/* Pass it on — a road going up and off the edge of the page, with its arrowhead on the
-   end of it. The same drawn road the rest of the sheet uses, doing the one thing a share
-   button actually means: here, this goes to you. */
+/* Pass it on — a paper dart, and the crease of the fold in red.
+
+   The last one was a road bending away with an arrowhead on the end, which is a
+   signpost: it says "this way", not "have it". A share is a person deciding somebody
+   else should see a thing, and the oldest gesture for that is taking the page you are
+   holding, folding it, and throwing it to them. So: the page, folded, in flight.
+
+   It is also the one mark on the sheet that is made of the same material as the sheet.
+   The doors are places, animals and objects; this is paper, sent. Drawn as two strokes
+   only — the dart's own outline, and the spine where it was creased — because at
+   twenty pixels on a phone bar every extra line is noise, and the silhouette of a dart
+   is one of the few shapes nobody needs teaching. */
 export function ShareMark({ className }) {
   return (
     <Mark className={className} strokeWidth={1.7}>
-      <path d="M4.2 19.8c2.6-.2 4.2-1.6 5.6-3.6 1.6-2.3 3.1-4 5.4-4h4.6" />
-      <path d="M16.6 8.9 20 12.2l-3.4 3.3" />
+      <path d="M20.9 4.3 3.1 11.5l6.9 2.5 3.4 5.7Z" />
+      <path d="M20.9 4.3 10 14" stroke={ACCENT} />
     </Mark>
   );
 }
