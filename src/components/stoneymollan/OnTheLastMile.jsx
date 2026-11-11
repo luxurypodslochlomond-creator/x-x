@@ -3,10 +3,11 @@ import React from 'react';
 /* ── THE LAST MILE, AND THE PERSON DOING IT ALONE ────────────────────────────────
    Two things belong together, and neither is a map.
 
-   The first is the taxi, and it is here for exactly one reason: the Defender is off
-   the road while it is up for sale, so we cannot come and get anybody. Saying that out
-   loud is the point. A page that quietly leaves the collection out is a page that
-   leaves a guest standing at a station wondering why nobody came.
+   The first is the taxi, and it is here for one honest reason: the house likes to
+   collect a guest when it can, but looking after the people already up the hill comes
+   first, so a lift is a maybe and a taxi is a certainty. Saying that out loud is the
+   point. A page that quietly leaves the collection out leaves a guest standing at a
+   station wondering why nobody came.
 
    The number is Wright's own, off their own site and their own shop front on Main
    Street in Alexandria — 01389 721020, twenty-four hours. It is not a guess and it is
@@ -33,8 +34,9 @@ export default function OnTheLastMile() {
         </p>
 
         <p className="mt-2 text-[16px] leading-[1.68] text-record-ink/90" style={READING}>
-          We would come and fetch you ourselves, but our Defender is off the road while it is up
-          for sale. So the climb is by taxi or on your own feet — and the climb is worth it.
+          We will come and get you if we can — but we cannot always manage it, because looking
+          after the people already here comes first. So do not bank on the lift. Wright&rsquo;s is
+          the sure thing, and the climb is worth it either way.
         </p>
 
         <a

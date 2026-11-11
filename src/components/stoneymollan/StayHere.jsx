@@ -76,8 +76,8 @@ export default function StayHere({ shareImage, shareCredit }) {
         </div>
 
         <p className="mx-auto mt-5 max-w-[40ch] text-center text-[15.5px] leading-relaxed text-record-ink/85" style={READING}>
-          Glasgow airport, 25 minutes. Edinburgh, an hour and a quarter. Say the word and one of
-          us will meet you in the Defender.
+          Glasgow airport, 25 minutes. Edinburgh, an hour and a quarter. We will fetch you from
+          the station if we can &mdash; and if we cannot, Wright&rsquo;s Taxis will, on 01389 721020.
         </p>
 
         {/* Who this is for, said plainly and warmly before anybody books. The reviews that
