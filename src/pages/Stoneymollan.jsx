@@ -16,6 +16,7 @@ import GettingHere from '@/components/stoneymollan/GettingHere';
 import StayBar from '@/components/stoneymollan/StayBar';
 import EmberBed from '@/components/stoneymollan/EmberBed';
 import StoneymollanLogotype from '@/components/stoneymollan/StoneymollanLogotype';
+import { WEBSITE } from '@/components/stoneymollan/links';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -84,11 +85,24 @@ export default function Stoneymollan() {
               somebody who cannot read the English knows at once that the whole sheet
               can be had in theirs. It is the same choice the rest of the platform
               keeps, so a reader who picks Gaelic here keeps it on the next page. */}
-          <div className="flex items-start justify-between gap-2">
-            <p className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-record-ink">
-              Over Loch Lomond
-            </p>
-            <MastheadTongue />
+          {/* The address of the place, set down the middle as the one line above the name,
+              and a link that opens their own site in a new window so nobody loses the hill
+              they were reading about. The wordmark beside it used to say "Over Loch Lomond"
+              on the left, which read as a label rather than the way to the actual website —
+              the address says both, plainly, in the same breath. The tongue stays in the
+              corner where a record keeps it, clear of the centred line. */}
+          <div className="relative flex items-center justify-center">
+            <a
+              href={WEBSITE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[11.5px] uppercase tracking-[0.2em] text-record-ink underline decoration-record-ink/25 underline-offset-4 hover:decoration-record-ink"
+            >
+              www.overlochlomond.com
+            </a>
+            <div className="absolute right-0 top-1/2 -translate-y-1/2">
+              <MastheadTongue />
+            </div>
           </div>
           {/* ── THE WHOLE LOCKUP, HIS ──
               The symbol and the name were two objects: his mark, and a typeface underneath
