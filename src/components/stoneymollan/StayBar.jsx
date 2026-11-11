@@ -1,11 +1,19 @@
 import React from 'react';
-import { BOOK_DIRECT, EMAIL } from './links';
-import { EnvelopeMark } from './StoneymollanIcons';
+import { BOOK_DIRECT, EMAIL, CALL_TEL } from './links';
+import { CallMark, EnvelopeMark } from './StoneymollanIcons';
 
-/* A phone has one job on this page: get somebody to the booking. So on a narrow
-   screen only, one line sits at the foot of the glass with the door on it — the
-   direct one, in the record's red, with the email beside it for anyone who would
-   rather ask a question first. Desktop keeps the page clean; it has the room. */
+/* A phone has three jobs on this page, and they are in the order somebody needs them:
+   book it, ring us, or write to us.
+
+   The call is here as well as in the doors at the top because the two do different
+   work. The door at the top is for a person planning — they read the page, decide,
+   then go back up to the marks. This bar is for the person already on the train,
+   thumb out, bag between their feet: they need the number without travelling up the
+   sheet to find it. On a laptop it does not appear at all; a mouse has the room.
+
+   Nothing here moves, wraps or shifts. Three fixed shapes on one line, the booking
+   the only one in the record's red, so the row reads the same on every phone from a
+   five-year-old Android to the newest iPhone, with the home-bar inset respected. */
 export default function StayBar() {
   return (
     <div
@@ -19,7 +27,15 @@ export default function StayBar() {
           rel="noopener noreferrer"
           className="flex min-h-[44px] flex-1 items-center justify-center border-2 border-record-signal bg-record-signal px-3 font-mono text-[11.5px] uppercase tracking-[0.1em] text-record-paper active:bg-record-ink"
         >
-          Check dates &middot; book direct
+          Book direct
+        </a>
+        <a
+          href={CALL_TEL}
+          aria-label="Call Brian and Gillian at the top of the hill"
+          className="flex min-h-[44px] items-center justify-center gap-1.5 border-2 border-record-ink px-2.5 font-mono text-[11.5px] uppercase tracking-[0.1em] text-record-ink active:bg-record-ink active:text-record-paper"
+        >
+          <CallMark className="h-4 w-4" />
+          Call
         </a>
         <a
           href={`mailto:${EMAIL}`}

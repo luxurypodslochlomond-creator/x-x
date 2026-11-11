@@ -27,23 +27,24 @@ export default function OnTheLastMile() {
           The last two miles
         </p>
 
+        {/* The number is the loudest thing in the block, on its own line, because a
+            number set beside a label is a number a nervous person misreads. One shape,
+            one tap, and it dials from a phone in any country. */}
         <a
           href={CALL_TEL}
-          className="mt-3 flex min-h-[56px] items-center justify-between gap-3 border border-record-ink bg-record-paper px-4 active:bg-record-ink active:text-record-paper"
+          className="mt-3 block border border-record-ink bg-record-paper px-4 py-3 text-center active:bg-record-ink active:text-record-paper"
         >
-          <span className="font-mono text-[11px] uppercase leading-tight tracking-[0.14em]">
-            Ring us
-            <span className="mt-1 block text-[10px] tracking-[0.1em] opacity-70">
-              At the top of the hill
-            </span>
+          <span className="block font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">
+            Ring us &mdash; we are at the top of the road
           </span>
-          <span className="font-mono text-[15px] font-black tracking-[0.04em]">{CALL_NUMBER}</span>
+          <span className="mt-1 block font-mono text-[21px] font-black leading-none tracking-[0.02em]">
+            {CALL_NUMBER}
+          </span>
         </a>
 
         <p className="mt-3 text-[15px] leading-[1.6] text-record-ink/85" style={READING}>
-          Ring before you leave the station. We will come down for you if we can &mdash; and if
-          we cannot, we will tell you straight rather than leave you guessing. The number is
-          written the way it is written so it dials from any phone, anywhere.
+          Ring before you leave the station. If we can come down for you, we will. If we
+          cannot, we will say so straight and tell you what to do instead.
         </p>
       </div>
 
