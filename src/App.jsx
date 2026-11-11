@@ -269,6 +269,12 @@ const AuthenticatedApp = () => {
       <Route path="/WristHealingTerms" element={<WristHealingTermsPage />} />
       <Route path="/WristHealingPrivacy" element={<WristHealingPrivacyPage />} />
       <Route path="/Shed51" element={<Shed51Page />} />
+      {/* ── STONEYMOLLAN ──
+          The page has been sitting in the nav and imported in this file since it was
+          built, with no route anywhere: every tap on it fell through to the not-found
+          page, which is why the nav looked like a door onto nothing. Same wrapper the
+          rest of UF51's pages wear, so it opens inside the site and not beside it. */}
+      <Route path="/Stoneymollan" element={<LayoutWrapper currentPageName="Stoneymollan"><StoneymollanPage /></LayoutWrapper>} />
       <Route path="/Sorted" element={<SortedLayout currentPage="Sorted"><SortedHome /></SortedLayout>} />
       <Route path="/SortedTerms" element={<SortedLayout currentPage="SortedTerms"><SortedTermsPage /></SortedLayout>} />
       <Route path="/SortedPrivacy" element={<SortedLayout currentPage="SortedPrivacy"><SortedPrivacyPage /></SortedLayout>} />

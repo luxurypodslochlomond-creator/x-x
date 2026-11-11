@@ -1,288 +1,269 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import FrostFilm from '@/components/stoneymollan/FrostFilm';
 
-const IMAGES = [
+const SERIF = { fontFamily: 'var(--record-display)' };
+const READING = { fontFamily: 'var(--font-record-reading)' };
+
+const FILM =
+  'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/6fc9cc3fc_stoneymollan-ben.mov';
+
+/* Gill's morning, 11 November — frost on the muir before the sun was up. */
+const MORNING = [
   {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png",
-    caption: "Home — Stoneymollan, standing in the golden muir",
-    subtitle: "Golden light across ancient moorland"
+    url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/9f0ca0c7a_stoneymollan-path.jpeg',
+    caption: 'The path, first frost',
+    line: 'A worn way through the whin. The bearers walked this way on mornings like this one.',
   },
   {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg",
-    caption: "The resting stone",
-    subtitle: "Where coffins rested for eight centuries"
+    url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/e5be7e8c5_stoneymollan-bench.png',
+    caption: 'The bench',
+    line: 'Mist so low you could hear the hill before you saw it.',
   },
   {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg",
-    caption: "Gill and Bunny on the muir",
-    subtitle: "Loch Lomond stretching into the distance"
+    url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/f84d01fa3_stoneymollan-sunrise.png',
+    caption: 'Sunrise over the Clyde',
+    line: 'East to west is the way the dead were carried. The light does it the other way round.',
   },
-  {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg",
-    caption: "The wild moorland",
-    subtitle: "Unchanged landscape, thousand years deep"
-  },
-  {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg",
-    caption: "Surveying the kingdom",
-    subtitle: "Walking the path of ancient bearers"
-  },
-  {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg",
-    caption: "The coffin road",
-    subtitle: "Beech avenue lined the sacred passage"
-  },
-  {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg",
-    caption: "Ancient beech",
-    subtitle: "Moss-covered witness to centuries"
-  },
-  {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg",
-    caption: "Forest spirit",
-    subtitle: "The old trees remember"
-  },
-  {
-    url: "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg",
-    caption: "Cathedral of trees",
-    subtitle: "Looking up through living history"
-  }
 ];
 
-const LOGO_URL = "https://media.base44.com/images/public/6889f31e76713b9cd47e043c/5c334744c_Logo-Icon-Dark.png";
+const MARKS = [
+  {
+    number: '01',
+    title: 'The road of the dead',
+    body: [
+      'They carried them from Balloch, over the muir, down to the clachan of Kirkton and St Mahew’s Chapel at Cardross. Just under seven kilometres, on foot, with a coffin.',
+      'Feet first, so the spirit could not turn back for home. The coffin was never allowed to touch the ground. Streams cross the route the whole way along, because running water was said to stop a spirit following.',
+    ],
+  },
+  {
+    number: '02',
+    title: 'The Cross Stone Road',
+    body: [
+      'That is what the first Ordnance Survey maps call it. There was a cross stone on the way, where the bearers set the coffin down and rested.',
+      'The base of it is still at the roadside. The cross itself went missing around 1880.',
+    ],
+  },
+  {
+    number: '03',
+    title: 'The King died in the parish',
+    body: [
+      'Robert the Bruce died at his manor of Cardross on 7 June 1329. The road of the dead ends in that same parish.',
+      'Historians still argue about exactly where the manor stood. The parish they do not argue about.',
+    ],
+  },
+  {
+    number: '04',
+    title: 'Bandit country',
+    body: [
+      'Rob Roy MacGregor drove cattle across these hills three hundred years ago, and lifted them. He was out in the Fifteen, and he fought at Sheriffmuir in 1715.',
+      'A road empty of everything except the dead is a useful road in the dark, when you are moving something that is not yours.',
+    ],
+  },
+  {
+    number: '05',
+    title: 'The way through',
+    body: [
+      'Stoneymollan Muir is Section 1 of the John Muir Way — Helensburgh to Balloch, nine miles of it, and on to Dunbar, 134 in all. The Three Lochs Way crosses it too.',
+      'John Muir was born in Dunbar and founded the Sierra Club. The path that carries his name now runs over a road far older than he was.',
+    ],
+  },
+  {
+    number: '06',
+    title: 'The beeches',
+    body: [
+      'The avenue of beeches along the route is reckoned two to three hundred years old — planted to line the way, the trunks deep in moss now, framing the path like a nave.',
+    ],
+  },
+];
 
-const StoneymollanLogo = ({ size = 60 }) => (
-  <img
-    src={LOGO_URL}
-    alt="Stoneymollan Logo"
-    width={size}
-    height={size}
-    style={{ objectFit: 'contain', filter: 'invert(1) sepia(1) saturate(3) hue-rotate(80deg) brightness(0.9)' }}
-  />
-);
-
-const HistorySection = ({ title, children, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay, duration: 0.6 }}
-    className="border border-green-500/30 bg-black/40 backdrop-blur-sm rounded-xl p-6 md:p-8 mb-6"
-  >
-    <h2 className="text-xl md:text-2xl font-black text-green-300 mb-5" style={{ fontFamily: 'Georgia, serif', fontWeight: '600', letterSpacing: '0.02em' }}>
-      {title}
-    </h2>
-    <div className="text-gray-200 space-y-4 leading-relaxed" style={{ fontFamily: 'Georgia, serif', fontSize: '1.05rem' }}>
-      {children}
-    </div>
-  </motion.div>
-);
+const PLACES = [
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png', caption: 'Home, standing in the muir' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg', caption: 'The resting stone' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg', caption: 'Gill and Bunny on the muir' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg', caption: 'The wild moorland' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg', caption: 'Walking the old way' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg', caption: 'The coffin road' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg', caption: 'Ancient beech' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg', caption: 'Forest spirit' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg', caption: 'Cathedral of trees' },
+];
 
 export default function Stoneymollan() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-
-  const handleCarouselNav = (direction) => {
-    if (direction === 'next') {
-      setCarouselIndex((carouselIndex + 1) % IMAGES.length);
-    } else {
-      setCarouselIndex((carouselIndex - 1 + IMAGES.length) % IMAGES.length);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#f4efe4] text-[#1a1612] twcc-scanlines relative">
-
-      {/* HERO */}
-      <div className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-25"
-          style={{ backgroundImage: `url(${IMAGES[0].url})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#050f05]" />
-
-        <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="flex justify-center mb-6"
-          >
-            <StoneymollanLogo size={100} />
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-5xl md:text-7xl font-black mb-4 tracking-tight"
-            style={{ fontFamily: 'monospace', textShadow: '0 0 40px rgba(34,197,94,0.4)', letterSpacing: '0.05em' }}
+    <div className="relative min-h-screen bg-record-paper text-record-ink twcc-scanlines">
+      {/* ── THE MASTHEAD ── */}
+      <header className="relative z-10 border-b border-record-ink/15">
+        <div className="mx-auto max-w-3xl px-5 pb-9 pt-11 md:pt-16">
+          <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-record-muted">
+            Balloch &rarr; Cardross &middot; 6.75 km &middot; coffin road
+          </p>
+          <h1
+            className="mt-4 text-[clamp(2.7rem,13vw,5.2rem)] font-black leading-[0.9] tracking-tight"
+            style={SERIF}
           >
             Stoneymollan
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-green-400 font-mono text-lg mb-2"
-          >
-            Muir • Coffin Road • Loch Lomond
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="text-gray-400 text-sm font-mono"
-          >
-            1000 years of Scottish history beneath your feet
-          </motion.p>
+          </h1>
+          <p className="mt-5 max-w-xl text-[17px] leading-relaxed" style={READING}>
+            A road people have been carrying their dead along for centuries. Six and a half
+            kilometres of it runs over the muir above us &mdash; minutes from our door.
+          </p>
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-record-signal">
+            John Muir Way &middot; Section 1 &nbsp;·&nbsp; Three Lochs Way
+          </p>
         </div>
+      </header>
+
+      {/* ── THE MORNING ── */}
+      <section className="relative z-10 border-b border-record-ink/15 bg-record-bone">
+        <div className="mx-auto max-w-3xl px-5 py-8">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="font-mono text-[10px] uppercase tracking-[0.34em] text-record-muted">
+              The morning
+            </h2>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-muted">
+              11 November
+            </p>
+          </div>
+
+          <figure className="mt-4">
+            <img
+              src={MORNING[0].url}
+              alt={MORNING[0].caption}
+              className="w-full border border-record-ink/15 object-cover"
+              style={{ aspectRatio: '4 / 3' }}
+            />
+            <figcaption className="mt-3">
+              <p className="text-[16px] leading-snug" style={SERIF}>
+                {MORNING[0].caption}
+              </p>
+              <p className="mt-1 text-[15px] leading-relaxed text-record-muted" style={READING}>
+                {MORNING[0].line}
+              </p>
+            </figcaption>
+          </figure>
+
+          <div className="mt-6 grid grid-cols-2 gap-3">
+            {MORNING.slice(1).map((shot) => (
+              <figure key={shot.url}>
+                <img
+                  src={shot.url}
+                  alt={shot.caption}
+                  className="w-full border border-record-ink/15 object-cover"
+                  style={{ aspectRatio: '3 / 4' }}
+                />
+                <figcaption className="mt-2">
+                  <p className="text-[15px] leading-snug" style={SERIF}>
+                    {shot.caption}
+                  </p>
+                  <p className="mt-1 text-[14px] leading-relaxed text-record-muted" style={READING}>
+                    {shot.line}
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-record-muted">
+            Photos &middot; Gill
+          </p>
+        </div>
+      </section>
+
+      {/* ── THE FILM ── */}
+      <div className="relative z-10">
+        <FrostFilm src={FILM} poster={MORNING[2].url} />
       </div>
 
-      {/* CAROUSEL - FULL WIDTH IMMERSIVE */}
-      <div className="w-full mb-12">
-        {/* MAIN CAROUSEL */}
-        <div className="relative w-full overflow-hidden">
-          <motion.div
-            key={carouselIndex}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4 }}
-            className="relative w-full"
-            style={{ aspectRatio: '16/9' }}
-          >
-            <img 
-              src={IMAGES[carouselIndex].url} 
-              alt={IMAGES[carouselIndex].caption}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            
-            {/* MINIMAL CAPTION OVERLAY */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <h3 className="text-xl md:text-2xl font-black text-white mb-1" style={{ fontFamily: 'Georgia, serif' }}>
-                  {IMAGES[carouselIndex].caption}
-                </h3>
-                <p className="text-green-300/70 text-xs md:text-sm">
-                  {IMAGES[carouselIndex].subtitle}
-                </p>
-              </motion.div>
-            </div>
+      {/* ── THE MARKS ── */}
+      <section className="relative z-10 border-t border-record-ink/15">
+        <div className="mx-auto max-w-3xl px-5 py-10">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.34em] text-record-muted">
+            What the road is
+          </h2>
 
-            {/* COUNTER */}
-            <div className="absolute top-6 right-6 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full border border-green-500/30">
-              <span className="text-green-400 text-xs font-mono">
-                {String(carouselIndex + 1).padStart(2, '0')} / {String(IMAGES.length).padStart(2, '0')}
-              </span>
-            </div>
-          </motion.div>
-
-          {/* NAV ARROWS */}
-          <button
-            onClick={() => handleCarouselNav('prev')}
-            className="absolute left-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center transition-all border border-green-500/30 hover:border-green-500/60"
-          >
-            <span className="text-white text-xl">←</span>
-          </button>
-          <button
-            onClick={() => handleCarouselNav('next')}
-            className="absolute right-6 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center transition-all border border-green-500/30 hover:border-green-500/60"
-          >
-            <span className="text-white text-xl">→</span>
-          </button>
+          <div className="mt-6 space-y-8">
+            {MARKS.map((mark) => (
+              <article key={mark.number} className="border-t border-record-ink/15 pt-5">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-[11px] tracking-[0.2em] text-record-signal">
+                    {mark.number}
+                  </span>
+                  <h3 className="text-[22px] font-black leading-tight tracking-tight" style={SERIF}>
+                    {mark.title}
+                  </h3>
+                </div>
+                <div className="mt-3 space-y-3">
+                  {mark.body.map((para) => (
+                    <p key={para} className="text-[16px] leading-[1.65]" style={READING}>
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
+      </section>
 
-        {/* THUMBNAIL STRIP */}
-        <div className="max-w-5xl mx-auto px-6 flex gap-2 md:gap-3 overflow-x-auto py-4">
-          {IMAGES.map((img, i) => (
-            <motion.button
-              key={i}
-              onClick={() => setCarouselIndex(i)}
-              className={`flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
-                i === carouselIndex 
-                  ? 'border-green-400 ring-2 ring-green-500/50' 
-                  : 'border-green-500/20 hover:border-green-500/40'
-              }`}
-              style={{ width: '70px', height: '70px', minWidth: '70px' }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <img 
-                src={img.url} 
-                alt={img.caption}
-                className="w-full h-full object-cover"
+      {/* ── THE PLACES ── */}
+      <section className="relative z-10 border-t border-record-ink/15 bg-record-bone">
+        <div className="mx-auto max-w-3xl px-5 py-8">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.34em] text-record-muted">
+            The places
+          </h2>
+        </div>
+        <div
+          className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-8"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {PLACES.map((place) => (
+            <figure key={place.url} className="w-56 flex-shrink-0 snap-start">
+              <img
+                src={place.url}
+                alt={place.caption}
+                loading="lazy"
+                className="w-full border border-record-ink/15 object-cover"
+                style={{ aspectRatio: '4 / 5' }}
               />
-            </motion.button>
+              <figcaption
+                className="mt-2 text-[14px] leading-snug text-record-muted"
+                style={READING}
+              >
+                {place.caption}
+              </figcaption>
+            </figure>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* HISTORY */}
-      <div className="max-w-3xl mx-auto px-6 pb-16">
-
-        <HistorySection title="The Coffin Road" delay={0.1}>
-          <p>Stoneymollan Muir is home to one of Scotland's most poignant ancient routes — a <strong className="text-green-300">coffin road</strong>, also known as a corpse road or lych way.</p>
-          <p>For centuries, Highland communities had no local consecrated burial ground. When someone died, the family and neighbours were legally required to carry the coffin along designated paths to the nearest parish church — sometimes <strong className="text-green-300">miles across open moorland</strong>, rain, wind and all.</p>
-          <p>Bearers would take turns carrying the weight, resting the coffin on flat <strong className="text-green-300">"resting stones"</strong> along the route. Some of those stones may still be there today, hidden in the grass beside the path.</p>
-        </HistorySection>
-
-        <HistorySection title="The Ancient Beech Avenue" delay={0.2}>
-          <p>The extraordinary avenue of beech trees lining the coffin road are estimated to be <strong className="text-green-300">200-300 years old</strong> — planted deliberately to line the route, their thick trunks now draped in deep green moss.</p>
-          <p>These trees have stood through Jacobite risings, Highland Clearances, two World Wars, and every Scottish winter imaginable. Their roots are intertwined with the history of everyone who ever walked this path.</p>
-          <p>What makes them remarkable is how they <strong className="text-green-300">frame the path like a cathedral nave</strong> — as if nature itself was honouring the processions that passed beneath them.</p>
-        </HistorySection>
-
-        <HistorySection title="The Kingdom of Strathclyde" delay={0.3}>
-          <p>The place name <strong className="text-green-300">Stoneymollan</strong> likely derives from ancient Gaelic — this entire area sits within what was once the <strong className="text-green-300">Kingdom of Strathclyde</strong>, one of the early medieval kingdoms of Scotland, dating to at least the 6th and 7th century.</p>
-          <p>The <strong className="text-green-300">Earls of Lennox</strong> — the great medieval lords of this region — controlled these lands for centuries. Their stronghold, Balloch Castle, sits directly below Stoneymollan Muir, and they would have looked up at this very hillside from its walls.</p>
-          <p>Loch Lomond was a <strong className="text-green-300">strategic frontier</strong> — the boundary between Highland and Lowland Scotland, between Gaelic and Scots culture, between clan law and crown law.</p>
-        </HistorySection>
-
-        <HistorySection title="Robert the Bruce" delay={0.4}>
-          <p><strong className="text-green-300">Robert the Bruce</strong> knew this landscape intimately. In the years before Bannockburn (1314), he campaigned extensively around Loch Lomond — hiding, regrouping, fighting back from near-total defeat.</p>
-          <p>There is a famous story of Bruce and his men crossing Loch Lomond by finding a single small boat and ferrying his army across <strong className="text-green-300">one man at a time</strong> — reading to his men from a chivalric romance to keep morale up as they waited.</p>
-          <p>Paths like the one you walked were the veins of his world. The land you stood on was the land that made Scotland.</p>
-        </HistorySection>
-
-        <HistorySection title="The John Muir Way" delay={0.5}>
-          <p><strong className="text-green-300">John Muir</strong> — the Scottish-born father of the modern conservation movement and founder of the concept of National Parks — was born in Dunbar in 1838. He emigrated to America and his writings inspired the creation of Yosemite, Sequoia and countless other protected wild places.</p>
-          <p>The <strong className="text-green-300">John Muir Way</strong> runs 134 miles coast to coast across Scotland — from Helensburgh on the Clyde to Dunbar on the East Lothian coast — passing right through Stoneymollan Muir above Loch Lomond.</p>
-          <p>That ancient coffin road is now a <strong className="text-green-300">living trail of healing</strong> — walked by thousands every year, connecting people back to the wild, ancient Scotland that Muir loved so deeply.</p>
-        </HistorySection>
-
-        {/* FOOTER SOUL */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-12 pt-8 border-t border-green-500/20"
-        >
-          <StoneymollanLogo size={60} />
-          <p className="text-green-400 font-mono mt-4 text-sm">
-            "The clearest way into the Universe is through a forest wilderness."
+      {/* ── THE FOOT ── */}
+      <footer className="relative z-10 border-t border-record-ink/15">
+        <div className="mx-auto max-w-3xl px-5 py-10">
+          <p className="text-[17px] leading-relaxed" style={READING}>
+            We are so lucky here. Can&rsquo;t quite believe we were given the chance.
           </p>
-          <p className="text-gray-500 text-xs mt-2">— John Muir</p>
-          <a
-            href="https://www.overlochlomond.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-4 text-green-400 hover:text-green-300 font-mono text-sm border border-green-500/30 hover:border-green-500/60 px-4 py-2 rounded-lg transition-all"
-          >
-            overlochlomond.com
-          </a>
-          <p className="text-green-500/40 text-xs mt-4 font-mono">
-            ♾️ Stoneymollan • March 2026
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-record-muted">
+            Film &middot; Ben Santiago &nbsp;·&nbsp; Photos &middot; Gill
           </p>
-        </motion.div>
-      </div>
-
-
+          <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <a
+              href="https://www.overlochlomond.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[11px] uppercase tracking-[0.2em] text-record-signal underline decoration-record-signal/30 underline-offset-4 hover:decoration-record-signal"
+            >
+              overlochlomond.com
+            </a>
+            <Link
+              to="/XEqualsX"
+              className="font-mono text-[11px] tracking-[0.3em] text-record-mark"
+            >
+              x = x
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
