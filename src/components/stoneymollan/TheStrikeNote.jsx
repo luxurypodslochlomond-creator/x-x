@@ -26,7 +26,7 @@ const PARAGRAPHS = [
   'The old part of it is real. Lightning has been read as a god speaking almost everywhere there are storms: the oak at Dodona answered for Zeus, Thor\u2019s hammer was the thunder, and a flint arrowhead turned up in a Scottish field was called a thunderbolt and kept for luck. That is thousands of years of people standing under a sky that was talking to them.',
   'The sentence itself is not old. \u201CA potent sign of sudden transformation, divine intervention and a wake-up call rather than a negative omen\u201D is modern spiritual writing \u2014 it has no author, no tradition behind it and no origin anyone can name. That does not make it unkind. It makes it unsourced.',
   'What this record gives you is in the band above: a tree in that wood took a strike and stands split down its length, and what people make of it is what people make of it. We will print the tree. We will not print a meaning as though it were a measurement.',
-  'And one plain thing, because this is a hill you walk on: a struck tree is not shelter. If thunder is close enough to hear, get off the muir and down to a building or a car, and leave the split trunk to itself.',
+  'And one plain thing, because it is a hill you walk: a struck tree is not shelter. If the sky starts, get down to a building or a car and leave the split trunk to itself. That is not a warning about this hill \u2014 it is what you would do in thunder anywhere on earth.',
 ];
 
 export default function TheStrikeNote() {

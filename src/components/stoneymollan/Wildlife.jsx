@@ -2,6 +2,8 @@ import React from 'react';
 import PageBand from './PageBand';
 import { SquirrelMark, DeerMark, PawMark, OtterMark, BirdMark, MyceliumMark } from './StoneymollanIcons';
 import TheSquirrelsNote from './TheSquirrelsNote';
+import TheWoodBirdsNote from './TheWoodBirdsNote';
+import TheMyceliumNote from './TheMyceliumNote';
 
 const READING = { fontFamily: 'var(--font-record-reading)' };
 
@@ -78,6 +80,12 @@ export default function Wildlife() {
             ))}
           </ul>
 
+          {/* The one line here likely to be repeated by a reader is the fifty years,
+              so it gets a door: what is published, and which part is memory. */}
+          <div className="mt-3 text-center">
+            <TheSquirrelsNote />
+          </div>
+
           <p className="mx-auto mt-5 max-w-[46ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
             In summer the west-coast oakwoods fill with wood warbler, redstart and pied
             flycatcher — birds that have almost nowhere else left in Britain. Loch Lomond’s
@@ -86,10 +94,11 @@ export default function Wildlife() {
             this hill: the loch straight below it, and the rain that makes it what it is.
           </p>
 
-          {/* The one line here likely to be repeated by a reader is the fifty years,
-              so it gets a door: what is published, and which part is memory. */}
+          {/* The oakwoods paragraph carries a count and a superlative, so it gets a
+              door of its own: who counted the birds, and whose words the "among the
+              most important in Europe" belongs to. */}
           <div className="mt-3 text-center">
-            <TheSquirrelsNote />
+            <TheWoodBirdsNote />
           </div>
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">
@@ -105,6 +114,9 @@ export default function Wildlife() {
               young ones through it is still being argued over by the people who study it,
               so this page won’t tell you they are.
             </p>
+            <div className="mt-3 text-center">
+              <TheMyceliumNote />
+            </div>
           </div>
 
           <p className="mx-auto mt-5 max-w-[40ch] font-mono text-[11px] uppercase leading-[1.9] tracking-[0.12em] text-record-ink/85">

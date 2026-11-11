@@ -15,6 +15,8 @@ import Wildlife from '@/components/stoneymollan/Wildlife';
 import GettingHere from '@/components/stoneymollan/GettingHere';
 import TheCairnsNote from '@/components/stoneymollan/TheCairnsNote';
 import TheStrikeNote from '@/components/stoneymollan/TheStrikeNote';
+import TheBeechesNote from '@/components/stoneymollan/TheBeechesNote';
+import TheOldRoadNote from '@/components/stoneymollan/TheOldRoadNote';
 import StayBar from '@/components/stoneymollan/StayBar';
 import EmberBed from '@/components/stoneymollan/EmberBed';
 import StoneymollanLogotype from '@/components/stoneymollan/StoneymollanLogotype';
@@ -235,6 +237,8 @@ export default function Stoneymollan() {
                 their names become doors: the national inventory, the parish survey,
                 and, on the strike, the difference between what is old in the world and
                 what is new on the internet. */}
+            {mark.number === '06' && <TheOldRoadNote />}
+            {mark.number === '10' && <TheBeechesNote />}
             {mark.number === '11' && <TheCairnsNote />}
             {mark.number === '12' && <TheStrikeNote />}
           </PageBand>
