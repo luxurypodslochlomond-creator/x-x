@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Check, X, HelpCircle, ExternalLink, RefreshCw } from 'lucide-react';
+import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
+import KeeperEntryText from '@/components/climate/keeper/KeeperEntryText';
 
 // The checking room. One page, three buttons, no training: open the source, then say whether
 // it says what the entry claims. A volunteer here is not junior staff being kept away from the
@@ -17,6 +19,9 @@ const ANSWERS = [
 const WORD = { holds: 'source says it', does_not_hold: 'it does not', cannot_tell: 'could not tell' };
 
 export default function ClimateChecking({ plain = false, onChange }) {
+  const compact = useKeeperMobile() && plain;
+  const Entry = compact ? 'details' : 'div';
+  const RecordNote = compact ? 'details' : React.Fragment;
   const [me, setMe] = useState(null);
   const [entries, setEntries] = useState([]);
   const [checks, setChecks] = useState([]);
@@ -167,7 +172,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
           </h1>
         )}
         <p className={plain ? 'text-[13.5px] text-record-ink/75 leading-relaxed mb-1' : 'text-sm text-record-ink/75 leading-relaxed mb-1'} style={{ fontFamily: 'var(--font-reading)' }}>
-          {plain
+          {compact ? 'Does the source support this entry?' : plain
             ? 'Open the link, then say what you find. Nothing here publishes or edits anything.'
             : 'Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the entry claims, and a keeper decides with your words in front of them.'}
         </p>
@@ -190,17 +195,24 @@ export default function ClimateChecking({ plain = false, onChange }) {
         )}
 
         <div className="space-y-3">
-          {entries.map((entry) => {
+          {entries.map((entry, index) => {
             const d = drafts[entry.id] || {};
             const already = checks.filter((c) => c.entry_id === entry.id);
             return (
-              <div key={entry.id} className="bg-record-bone border-2 border-record-ink/20 p-3">
-                <p className="text-[10.5px] font-mono uppercase tracking-[0.16em] text-record-muted mb-1.5">
-                  {entry.type === 'comment' ? 'comment' : entry.type}
-                  {entry.source_name ? ` · ${entry.source_name}` : ''}
-                </p>
-                <h2 className="text-record-ink text-[17px] leading-snug mb-2" style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}>{entry.title}</h2>
-                {entry.body && entry.body !== entry.title && (
+              <Entry key={entry.id} className="room-check-entry bg-record-bone border-2 border-record-ink/20 p-3" {...(compact ? { open: index === 0, name: 'keeper-sources' } : {})}>
+                {compact ? (
+                  <summary className="room-check-summary">
+                    <span><span className="room-check-kind">{entry.source_name || entry.type}</span><span className="room-check-title">{entry.title}</span></span>
+                    <span className="room-check-toggle" aria-hidden="true" />
+                  </summary>
+                ) : <>
+                  <p className="text-[10.5px] font-mono uppercase tracking-[0.16em] text-record-muted mb-1.5">
+                    {entry.type === 'comment' ? 'comment' : entry.type}{entry.source_name ? ` · ${entry.source_name}` : ''}
+                  </p>
+                  <h2 className="text-record-ink text-[17px] leading-snug mb-2" style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}>{entry.title}</h2>
+                </>}
+                <div className={compact ? 'room-check-body' : ''}>
+                {entry.body && entry.body !== entry.title && (compact ? <KeeperEntryText text={entry.body} /> :
                   <p className="text-[14.5px] text-record-ink/85 leading-[1.65] mb-3 line-clamp-4" style={{ fontFamily: 'var(--font-reading)' }}>{entry.body}</p>
                 )}
 
@@ -209,7 +221,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
                     href={entry.source_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 min-h-[44px] px-3.5 mb-3 border-2 border-record-ink text-[13px] font-semibold text-record-ink active:bg-record-ink active:text-record-paper"
+                    className="room-source-link inline-flex items-center gap-2 min-h-[44px] px-3.5 mb-3 border-2 border-record-ink text-[13px] font-semibold text-record-ink active:bg-record-ink active:text-record-paper"
                     style={{ fontFamily: 'var(--font-reading)' }}
                   >
                     <ExternalLink className="w-3.5 h-3.5" /> Open the source
@@ -240,7 +252,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
                     because nothing had been chosen yet. The three answers fit across a hand;
                     the note and the save only appear once there is something to save, so the
                     card is never more form than it is entry. */}
-                <div className="grid grid-cols-3 gap-1.5">
+                <div className="room-check-answers grid grid-cols-3 gap-1.5">
                   {ANSWERS.map(({ id, short, tone, Icon }) => {
                     const on = d.verdict === id;
                     return (
@@ -270,6 +282,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
                       value={d.note || ''}
                       onChange={(e) => setDraft(entry.id, { note: e.target.value })}
                       rows={2}
+                      aria-label="Your checking note"
                       placeholder={
                         d.verdict === 'holds'
                           ? 'Anything worth adding (optional).'
@@ -282,18 +295,19 @@ export default function ClimateChecking({ plain = false, onChange }) {
                       type="button"
                       onClick={() => save(entry)}
                       disabled={saving === entry.id}
-                      className="w-full min-h-[44px] bg-record-ink text-record-paper text-[14px] font-semibold active:opacity-80 disabled:opacity-50"
+                      className="room-check-save w-full min-h-[44px] bg-record-ink text-record-paper text-[14px] font-semibold active:opacity-80 disabled:opacity-50"
                       style={{ fontFamily: 'var(--font-reading)' }}
                     >
                       {saving === entry.id ? 'Saving…' : 'Save my note'}
                     </button>
                   </div>
-                ) : (
+                ) : !compact ? (
                   <p className="mt-1.5 text-[12px] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
                     Pick one of the three and a box appears for your words.
                   </p>
-                )}
-              </div>
+                ) : null}
+                </div>
+              </Entry>
             );
           })}
         </div>
@@ -306,10 +320,13 @@ export default function ClimateChecking({ plain = false, onChange }) {
           <RefreshCw className="w-3.5 h-3.5" /> Look again
         </button>
 
-        <p className="text-[12.5px] text-record-muted leading-[1.7] mt-8 border-t border-record-ink/15 pt-4" style={{ fontFamily: 'var(--font-reading)' }}>
-          Your notes are kept in your name and are never edited afterwards. If your access is ended, what you found stays
-          on the record: ending access is not the same as erasing work.
-        </p>
+        <RecordNote {...(compact ? { className: 'room-details' } : {})}>
+          {compact && <summary>About checking</summary>}
+          <p className="text-[12.5px] text-record-muted leading-[1.7] mt-8 border-t border-record-ink/15 pt-4" style={{ fontFamily: 'var(--font-reading)' }}>
+            Your notes are kept in your name and are never edited afterwards. If your access is ended, what you found stays
+            on the record: ending access is not the same as erasing work.
+          </p>
+        </RecordNote>
       </div>
     </div>
   );

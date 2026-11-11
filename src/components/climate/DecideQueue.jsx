@@ -4,11 +4,14 @@ import { base44 } from '@/api/base44Client';
 import { RefreshCw } from 'lucide-react';
 import DecisionCard from '@/components/climate/DecisionCard';
 import NameOnTheRecord from '@/components/climate/NameOnTheRecord';
+import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 
 // What is waiting for a decision, and nothing else. Saying yes puts the entry on the record
 // and seals it in the same breath; saying not-yet holds it without calling it a rejection.
 // Both carry her name into the audit trail, so "who allowed this" is a row rather than a shrug.
 export default function DecideQueue({ onChange, plain = false }) {
+  const compact = useKeeperMobile() && plain;
+  const RecordNote = compact ? 'details' : React.Fragment;
   const [state, setState] = useState('checking');
   const [items, setItems] = useState([]);
   const [name, setName] = useState('');
@@ -116,12 +119,12 @@ export default function DecideQueue({ onChange, plain = false }) {
       )}
 
       {items.length === 0 ? (
-        <div className="border-2 border-[#141210] bg-[#efe7d6] px-4 py-8 text-center">
+        <div className="room-empty border-2 border-[#141210] bg-[#efe7d6] px-4 py-8 text-center">
           <p className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '18px' }}>
             The record is caught up
           </p>
           <p className="text-[11.5px] font-mono leading-relaxed text-[#5a5246] mt-2">
-            Nothing has been sent in that needs you. This is where it will appear when something does.
+            {compact ? 'Nothing needs a decision.' : 'Nothing has been sent in that needs you. This is where it will appear when something does.'}
           </p>
         </div>
       ) : (
@@ -133,11 +136,12 @@ export default function DecideQueue({ onChange, plain = false }) {
               onDecide={decide}
               busy={busy === item.id}
               first={i === 0}
+              compact={compact}
             />
           ))}
 
           {items.length > 1 && (
-            <div className="flex items-center justify-between gap-3 border border-[#141210]/20 bg-[#f7f1e5] px-3 py-2.5">
+            <div className="room-queue-more flex items-center justify-between gap-3 border border-[#141210]/20 bg-[#f7f1e5] px-3 py-2.5">
               <p className="text-[12.5px] leading-snug text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
                 {all
                   ? `${items.length} waiting`
@@ -155,15 +159,16 @@ export default function DecideQueue({ onChange, plain = false }) {
         </>
       )}
 
-      <NameOnTheRecord />
+      <NameOnTheRecord compact={compact} />
 
-      <p className="mt-5 text-[12.5px] leading-[1.7] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
-        Every yes and every not-yet is written down with your name and the time, so a reader who asks who decided
-        can be answered. Nothing expires: anything you hold stays exactly where it is.{' '}
-        <Link to="/ClimateSeals" className="underline decoration-2 underline-offset-2 hover:text-[#b3261e]">
-          See the seals
-        </Link>
-      </p>
+      <RecordNote {...(compact ? { className: 'room-details mt-4' } : {})}>
+        {compact && <summary>Decisions and seals</summary>}
+        <p className="mt-5 text-[12.5px] leading-[1.7] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
+          Every yes and every not-yet is written down with your name and the time, so a reader who asks who decided
+          can be answered. Nothing expires: anything you hold stays exactly where it is.{' '}
+          <Link to="/ClimateSeals" className="underline decoration-2 underline-offset-2 hover:text-[#b3261e]">See the seals</Link>
+        </p>
+      </RecordNote>
     </>
   );
 }

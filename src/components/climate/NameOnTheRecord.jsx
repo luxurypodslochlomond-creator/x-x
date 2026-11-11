@@ -12,7 +12,7 @@ import { Check, X } from 'lucide-react';
 // and the entry reads plainly "unsigned" — the words stay exactly where they are. Nothing
 // is deleted, nothing is hidden, and the record shows what happened either way.
 
-export default function NameOnTheRecord() {
+export default function NameOnTheRecord({ compact = false }) {
   const [rows, setRows] = useState(null);
   const [busy, setBusy] = useState(null);
   const [said, setSaid] = useState('');
@@ -50,14 +50,14 @@ export default function NameOnTheRecord() {
   if (!rows || rows.length === 0) return null;
 
   return (
-    <details className="mt-5 border-2 border-[#141210] bg-[#f7f1e5]">
+    <details className={`${compact ? 'room-signatures' : ''} mt-5 border-2 border-[#141210] bg-[#f7f1e5]`}>
       <summary className="list-none cursor-pointer px-3 py-3 flex items-center justify-between gap-3">
         <span>
           <span className="block text-[9px] font-black font-mono uppercase tracking-[0.2em] text-[#b3261e]">
-            your name on the record
+            {compact ? 'Confirm signatures' : 'your name on the record'}
           </span>
           <span className="block text-[11.5px] font-mono text-[#5a5246] mt-1">
-            {rows.length} {rows.length === 1 ? 'entry carries' : 'entries carry'} a name that is not yours, or no name at all.
+            {compact ? `${rows.length} to review` : `${rows.length} ${rows.length === 1 ? 'entry carries' : 'entries carry'} a name that is not yours, or no name at all.`}
           </span>
         </span>
         <span className="text-[10px] font-black font-mono uppercase text-[#141210] flex-shrink-0">Open</span>

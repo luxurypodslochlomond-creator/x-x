@@ -17,6 +17,7 @@ const whenLine = (iso) => {
 };
 import AddKeeper from '@/components/climate/AddKeeper';
 import AccessSecondKey from '@/components/climate/AccessSecondKey';
+import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 
 // ── WHO MAY COME INTO THE RECORD ──────────────────────────────────────────────
 // This lived on its own address, which meant a keeper had to know the address existed
@@ -33,6 +34,9 @@ import AccessSecondKey from '@/components/climate/AccessSecondKey';
 // holds whatever the page does. The one honest exception: while there is only one keeper on
 // the record there is no second key to ask, so their word stands and the record says so.
 export default function GuestList() {
+  const mobile = useKeeperMobile();
+  const AddPanel = mobile ? 'details' : 'div';
+  const AccessGuide = mobile ? 'details' : React.Fragment;
   const [keepers, setKeepers] = useState([]);
   const [checkers, setCheckers] = useState([]);
   const [waiting, setWaiting] = useState([]);
@@ -188,18 +192,21 @@ export default function GuestList() {
           </p>
         )}
         {keepers.map((row) => <Row key={row.id} row={row} />)}
-        <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2" style={reading}>
-          <span className="font-semibold">Two keys.</span>{' '}
-          {solo
-            ? 'You are the only keeper holding the keys today, so your word is enough — and the record says so. Once a second keeper exists, nothing moves without both.'
-            : owner
-            ? 'You hold the building\u2019s keys, so your own asks land straight away and the audit line says they stood alone. Every other keeper needs a second name.'
-            : 'One keeper asks and a different keeper agrees before anything moves. The last keeper can never be taken off.'}
-        </p>
+        <AccessGuide {...(mobile ? { className: 'room-details' } : {})}>
+          {mobile && <summary>How access works</summary>}
+          <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2" style={reading}>
+            <span className="font-semibold">Two keys.</span>{' '}
+            {solo
+              ? 'You are the only keeper holding the keys today, so your word is enough — and the record says so. Once a second keeper exists, nothing moves without both.'
+              : owner
+              ? 'You hold the building’s keys, so your own asks land straight away and the audit line says they stood alone. Every other keeper needs a second name.'
+              : 'One keeper asks and a different keeper agrees before anything moves. The last keeper can never be taken off.'}
+          </p>
+        </AccessGuide>
       </div>
 
-      <div className="border-t border-[#141210]/20 pt-3 mb-4">
-        <p className={label} style={reading}><UserPlus className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />Ask somebody to check</p>
+      <AddPanel className={mobile ? 'room-details mb-4' : 'border-t border-[#141210]/20 pt-3 mb-4'}>
+        {mobile ? <summary>Add a checker</summary> : <p className={label} style={reading}><UserPlus className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />Ask somebody to check</p>}
         <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mb-2" style={reading}>
           A checker opens what is waiting and says whether each source holds up. They cannot publish, edit or delete
           anything, and they never see who submitted it.
@@ -213,13 +220,14 @@ export default function GuestList() {
           className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#1a1612] text-[#f4efe4] text-[14px] font-semibold disabled:opacity-40"
           style={reading}
         >
-          <UserPlus className="w-4 h-4" /> {busy ? 'asking' : 'Add them to the checking list'}
+          <UserPlus className="w-4 h-4" /> {busy ? 'asking' : mobile ? 'Add checker' : 'Add them to the checking list'}
         </button>
-      </div>
+      </AddPanel>
 
-      <div className="mb-6">
+      <AddPanel className={mobile ? 'room-details mb-6' : 'mb-6'}>
+        {mobile && <summary>Add a keeper</summary>}
         <AddKeeper onAdded={load} />
-      </div>
+      </AddPanel>
 
       <div className="flex items-center justify-between gap-3 border-t border-[#141210]/20 pt-4 mb-1">
         <p className={`${label} mb-0`} style={reading}>
@@ -242,11 +250,14 @@ export default function GuestList() {
 
       {checkers.map((row) => <Row key={row.id} row={row} />)}
 
-      <p className="text-[13px] text-[#6b5f4f] leading-[1.7] mt-8 border-t border-[#141210]/15 pt-4" style={reading}>
-        Pausing or taking somebody off ends their access straight away, and they are told. Notes they already wrote
-        stay on the record in their name, because the checking they did was real whether or not they can check
-        tomorrow. Every change here is written into the audit trail with both keepers' names.
-      </p>
+      <AccessGuide {...(mobile ? { className: 'room-details mt-4' } : {})}>
+        {mobile && <summary>Access and saved notes</summary>}
+        <p className="text-[13px] text-[#6b5f4f] leading-[1.7] mt-8 border-t border-[#141210]/15 pt-4" style={reading}>
+          Pausing or taking somebody off ends their access straight away, and they are told. Notes they already wrote
+          stay on the record in their name, because the checking they did was real whether or not they can check
+          tomorrow. Every change here is written into the audit trail with both keepers' names.
+        </p>
+      </AccessGuide>
 
       {/* The proof, one line per change: who, what, and the exact minute. It is folded away by
           default because the shed is for the next job, not for reading yesterday — but it is one

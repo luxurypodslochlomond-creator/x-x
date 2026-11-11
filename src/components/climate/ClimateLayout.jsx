@@ -220,7 +220,9 @@ export default function ClimateLayout({ children, currentPage }) {
 
       <main ref={readingRef} className="record-pages">{children}</main>
 
-      <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />
+      <div className={isRoom ? 'hidden lg:block' : 'contents'}>
+        <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />
+      </div>
 
       <RecordPagesPanel open={contentsOpen} onClose={closeContents} />
       </div>

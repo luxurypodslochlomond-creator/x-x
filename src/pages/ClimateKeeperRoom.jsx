@@ -14,17 +14,8 @@ import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 // underneath the same header. See the file for why that was the real fault.
 import '@/components/climate/keeper/keeper-room.css';
 
-// ── WHAT A KEEPER SEES FIRST IS THE WORK ───────────────────────────────────────
-// This room has been through several shapes, and every one of them opened with prose: a
-// masthead, a row of cells, a paragraph explaining what the room was for. A person holding
-// the keys at eleven at night does not want to be introduced to the room — she wants the
-// thing that is waiting, and two buttons underneath it.
-//
-// So the order is now the order of her evening: who she is, then one plain sentence saying
-// how much is waiting, then the work itself, then the four doors (Decide, Check, People,
-// Record) at the bottom of the glass where her thumb already is — not at the top, where
-// they cost her the first screen. Nothing was removed, and nothing decides in a browser:
-// every answer here is given by the record's own server against its own guest list.
+// Identity, current work, then its index. Navigation belongs above the job on mobile;
+// decisions and access still go through the record's server and its own guest list.
 const reading = { fontFamily: 'var(--font-reading)' };
 
 // The old addresses still work. Each one lands on the door it always meant.
@@ -136,6 +127,7 @@ export default function ClimateKeeperRoom() {
   return (
     <ClimateRecordShell
       compact
+      className="keeper-workspace-shell"
       eyebrow="Keeper's room"
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
@@ -188,20 +180,19 @@ export default function ClimateKeeperRoom() {
       )}
 
       {state === 'ready' && (
-        // Room at the foot of the glass for the dock, so the last entry is never hidden
-        // under the way between jobs. Nothing is held open on a wide screen.
-        <div className="keeper-room pb-24 lg:pb-0">
+        <div className="keeper-room">
           <div className="flex items-baseline justify-between gap-3">
-            <p className="text-[13px] text-[#6b5f4f]" style={reading}>
+            <p className="room-identity text-[13px] text-[#6b5f4f]" style={reading}>
               <span className="font-semibold text-[#141210]">{who.name || 'Keeper'}</span>
               {who.isKeeper ? ' · keeper' : ' · checker'}
             </p>
             <button
               onClick={count}
-              className="flex items-center gap-1.5 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
+              aria-label="Refresh waiting work"
+              className="room-refresh flex items-center gap-1.5 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
               style={reading}
             >
-              <RefreshCw className="w-3 h-3" /> count again
+              <RefreshCw className="w-3 h-3" /><span className="hidden lg:inline">count again</span>
             </button>
           </div>
 
@@ -215,7 +206,7 @@ export default function ClimateKeeperRoom() {
           {/* The names, not a padlock and a number. Said once, thin, on one line — the door
               to change the list is in the dock below, so this is not also a button. */}
           {who.isKeeper && (
-            <p className="mt-1 flex items-start gap-1.5 text-[12px] leading-snug text-[#6b5f4f]" style={reading}>
+            <p className="room-keepers mt-1 flex items-start gap-1.5 text-[12px] leading-snug text-[#6b5f4f]" style={reading}>
               <KeyRound className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-[#b3261e]" strokeWidth={2.2} />
               <span>
                 Keys held by {keeperNames || 'you'}
@@ -224,8 +215,7 @@ export default function ClimateKeeperRoom() {
             </p>
           )}
 
-          {/* Four doors, in the order of a keeper's evening, at the thumb on a phone and
-              under the sentence on a wide screen. */}
+          {/* The work's own index, directly above the work on every screen. */}
           <WorkDock
             counts={{ decide: yes, check: read, people: asks }}
             keeper={who.isKeeper}
