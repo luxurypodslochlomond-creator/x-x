@@ -7,6 +7,8 @@ import StayHere from '@/components/stoneymollan/StayHere';
 import WhoCameThrough from '@/components/stoneymollan/WhoCameThrough';
 import { MARKS } from '@/components/stoneymollan/history';
 import MastheadDoors from '@/components/stoneymollan/MastheadDoors';
+import ThisMonth from '@/components/stoneymollan/ThisMonth';
+import LanguageButton from '@/components/shared/LanguageButton';
 import Wildlife from '@/components/stoneymollan/Wildlife';
 import StayBar from '@/components/stoneymollan/StayBar';
 
@@ -69,9 +71,16 @@ export default function Stoneymollan() {
       <header className="relative z-10">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className={`${SHEET} pt-5`}>
-          <p className="text-center font-mono text-[10px] uppercase tracking-[0.3em] text-record-muted">
-            Over Loch Lomond
-          </p>
+          {/* The tongue sits where a record puts it — in the corner, above the name, so
+              somebody who cannot read the English knows at once that the whole sheet
+              can be had in theirs. It is the same choice the rest of the platform
+              keeps, so a reader who picks Gaelic here keeps it on the next page. */}
+          <div className="flex items-start justify-between gap-2">
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-record-muted">
+              Over Loch Lomond
+            </p>
+            <LanguageButton tone="paper" />
+          </div>
           <div className="mt-3 flex items-center justify-center gap-2.5">
             <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 bg-record-mark" />
             <h1
@@ -89,6 +98,7 @@ export default function Stoneymollan() {
             John Muir Way, Section 1 &middot; Three Lochs Way
           </p>
           <MastheadDoors />
+          <ThisMonth />
         </div>
       </header>
 
