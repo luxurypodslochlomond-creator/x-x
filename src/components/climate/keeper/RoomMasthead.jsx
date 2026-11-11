@@ -17,14 +17,12 @@ import { MarkStamp, MarkEye, MarkGate } from './KeeperMarks';
 // Nothing here is a notification badge. A number means a piece of work exists, never
 // that something is unread or unclicked — a count that can only be cleared by clicking
 // is a slot machine, and this room is a desk.
+// ── ORDER IS AN ARGUMENT ───────────────────────────────────────────────────────
+// These stood Sources, Decide, Access — which is the order of the system, not the order of
+// a keeper's day. It opened on the checker's job and put a padlock called "Access" last,
+// which is a word for a door, not for the three people who hold the record's keys. So the
+// keeper's own job is first, and the third cell is called what it is: People.
 const ROOMS = [
-  {
-    id: 'sources',
-    Mark: MarkEye,
-    word: 'Sources',
-    unit: 'to read',
-    line: 'Open a source and say what you found. Nothing on this side decides anything.',
-  },
   {
     id: 'decide',
     Mark: MarkStamp,
@@ -34,9 +32,16 @@ const ROOMS = [
     keeperOnly: true,
   },
   {
+    id: 'sources',
+    Mark: MarkEye,
+    word: 'Sources',
+    unit: 'to read',
+    line: 'Open a source and say what you found. Nothing on this side decides anything.',
+  },
+  {
     id: 'access',
     Mark: MarkGate,
-    word: 'Access',
+    word: 'People',
     unit: 'asking in',
     line: 'Who holds a key, and who is asking for one. Nothing here moves on one hand alone.',
     keeperOnly: true,

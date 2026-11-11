@@ -167,19 +167,11 @@ export default function GuestList() {
 
   return (
     <div className="pb-10">
-      <p className="text-[15px] leading-[1.7] text-[#2b2622] mb-2" style={reading}>
-        A checker opens what is waiting and writes a note saying whether each source holds up. They cannot publish,
-        edit or delete anything, and they never see who submitted it. A keeper holds the keys and does the deciding.
-      </p>
-      <p className="text-[14px] leading-[1.7] text-[#3a342c] mb-5" style={reading}>
-        <span className="font-semibold">Two keys.</span>{' '}
-        {solo
-          ? 'You are the only keeper holding the keys today, so for now your word is enough — and the record says so. The moment a second keeper exists, nothing moves without both.'
-          : owner
-          ? 'You hold the building\'s keys, so your own ask lands straight away — and the audit line says plainly that it stood alone. Every other keeper still needs a second name before anything moves.'
-          : 'One keeper asks, a different keeper agrees, and only then does anything change. The keeper who asked can never agree to their own request, and the last keeper can never be taken off.'}
-      </p>
-
+      {/* The two paragraphs that stood at the top of this list are gone from it. One of them
+          explained what a checker is, the other explained the two-key rule — so a keeper who
+          opened People to see who holds the keys was taught a job first and shown a name
+          last. Both facts are still said, in the place each one belongs: the checker line
+          sits above the form that adds a checker, and the two-key line sits under the keys. */}
       <AccessSecondKey items={waiting} onConfirm={confirm} onCancel={cancel} busy={busy} />
 
       {message && (
@@ -196,10 +188,22 @@ export default function GuestList() {
           </p>
         )}
         {keepers.map((row) => <Row key={row.id} row={row} />)}
+        <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2" style={reading}>
+          <span className="font-semibold">Two keys.</span>{' '}
+          {solo
+            ? 'You are the only keeper holding the keys today, so your word is enough — and the record says so. Once a second keeper exists, nothing moves without both.'
+            : owner
+            ? 'You hold the building\u2019s keys, so your own asks land straight away and the audit line says they stood alone. Every other keeper needs a second name.'
+            : 'One keeper asks and a different keeper agrees before anything moves. The last keeper can never be taken off.'}
+        </p>
       </div>
 
       <div className="border-t border-[#141210]/20 pt-4 mb-6">
         <p className={label} style={reading}><UserPlus className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />Ask somebody to check</p>
+        <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mb-2" style={reading}>
+          A checker opens what is waiting and says whether each source holds up. They cannot publish, edit or delete
+          anything, and they never see who submitted it.
+        </p>
         <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="their email address" inputMode="email" className={field} />
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="their name, as their notes will be signed" className={field} />
         <input value={note} onChange={(e) => setNote(e.target.value)} placeholder="why (optional), e.g. Trebuchet volunteer" className={`${field} mb-3`} />
