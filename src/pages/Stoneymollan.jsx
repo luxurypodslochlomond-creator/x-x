@@ -80,7 +80,7 @@ export default function Stoneymollan() {
               can be had in theirs. It is the same choice the rest of the platform
               keeps, so a reader who picks Gaelic here keeps it on the next page. */}
           <div className="flex items-start justify-between gap-2">
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-record-muted">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.26em] text-record-ink/75">
               Over Loch Lomond
             </p>
             <MastheadTongue />
@@ -107,19 +107,19 @@ export default function Stoneymollan() {
               Stoneymollan
             </h1>
           </div>
-          <p className="mt-2 text-center font-mono text-[9px] uppercase tracking-[0.22em] text-record-muted">
+          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-record-ink/70">
             Mark &middot; Andrew Shandy
           </p>
           <RecordRule />
-          <p className="mt-1 text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-muted">
+          <p className="mt-1 text-center font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.18em] text-record-ink/75">
             Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
           </p>
-          <p className="text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-signal">
+          <p className="text-center font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.18em] text-record-red">
             John Muir Way, Section 1 &middot; Three Lochs Way
           </p>
           {/* Said in their own words — the same three that head their Instagram — because it is
               the truest short answer to "what is it", and it lets the wrong guest go quietly. */}
-          <p className="text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-muted">
+          <p className="text-center font-mono text-[10.5px] uppercase leading-[1.9] tracking-[0.18em] text-record-ink/75">
             Hillside cabins &middot; hot tub &middot; sauna &middot; fire pit
           </p>
           <MastheadDoors />
@@ -152,7 +152,7 @@ export default function Stoneymollan() {
             ))}
           </div>
 
-          <p className="mt-5 font-mono text-[10px] uppercase leading-[1.9] tracking-[0.18em] text-record-muted">
+          <p className="mt-5 font-mono text-[10px] uppercase leading-[1.9] tracking-[0.16em] text-record-ink/70">
             Photos <span className="px-1.5 text-record-ink/25">/</span> Gill
             <span className="px-1.5 text-record-ink/25">/</span> Film &middot; Ben Santiago
           </p>
@@ -205,7 +205,7 @@ export default function Stoneymollan() {
             </div>
             {mark.people && <WhoCameThrough people={mark.people} />}
             {mark.source && (
-              <p className="mx-auto mt-4 max-w-[40ch] font-mono text-[9.5px] uppercase leading-[1.9] tracking-[0.16em] text-record-muted">
+              <p className="mx-auto mt-4 max-w-[40ch] font-mono text-[10px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink/70">
                 {mark.source}
               </p>
             )}
@@ -227,7 +227,7 @@ export default function Stoneymollan() {
       {/* ── THE PLACES ── */}
       <section className="border-t border-record-ink/25 bg-record-bone">
         <div className={`${SHEET} pb-4 pt-8`}>
-          <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
+          <p className="text-center font-mono text-[10.5px] uppercase tracking-[0.22em] text-record-ink/75">
             The places
           </p>
         </div>
@@ -274,7 +274,7 @@ export default function Stoneymollan() {
             >
               Universal Frequency 51
             </Link>
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">
+            <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-record-ink/70">
               Film &middot; Ben Santiago <span className="px-1 text-record-ink/25">/</span> Photos &middot; Gill
               <span className="px-1 text-record-ink/25">/</span> Mark &middot; Andrew Shandy
             </p>

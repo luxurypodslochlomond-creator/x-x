@@ -11,13 +11,13 @@ export default function ThisMonth() {
 
   return (
     <div className="mt-4 border-t border-record-ink/20 pt-3">
-      <p className="text-center font-mono text-[9.5px] uppercase leading-[1.8] tracking-[0.14em] text-record-muted">
-        <span className="text-record-signal">{month.name}</span>
+      <p className="text-center font-mono text-[10.5px] uppercase leading-[1.8] tracking-[0.13em] text-record-ink/75">
+        <span className="text-record-red">{month.name}</span>
         <span className="px-1.5 text-record-ink/25">/</span>
         what you might see
       </p>
       <p
-        className="mx-auto mt-1 max-w-[40ch] text-center text-[13px] leading-[1.6] text-record-ink/80"
+        className="mx-auto mt-1 max-w-[40ch] text-center text-[14.5px] leading-[1.62] text-record-ink"
         style={{ fontFamily: 'var(--font-record-reading)' }}
       >
         {month.see}
@@ -25,7 +25,7 @@ export default function ThisMonth() {
       <p className="mt-2 text-center">
         <a
           href="#year"
-          className="font-mono text-[9px] uppercase tracking-[0.18em] text-record-muted underline decoration-record-ink/25 underline-offset-4 hover:text-record-ink"
+          className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-ink/75 underline decoration-record-ink/25 underline-offset-4 hover:text-record-ink"
         >
           the whole year &darr;
         </a>

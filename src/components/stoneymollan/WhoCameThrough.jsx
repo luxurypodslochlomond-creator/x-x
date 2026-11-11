@@ -42,12 +42,12 @@ export default function WhoCameThrough({ people }) {
       {people.map((person, i) => {
         const Mark = MARKS_BY_NAME[person.name];
         return (
-          <li key={person.name} className="flex items-start gap-3 py-3.5 text-left">
+          <li key={person.name} className="sm-person flex items-start gap-3 py-3.5 text-left">
             {Mark && (
               <span
                 aria-hidden="true"
-                className="mt-[5px] shrink-0 text-record-ink/75"
-                style={{ transform: `rotate(${TILT[i % TILT.length]}deg)` }}
+                className="sm-person-mark mt-[5px] shrink-0 text-record-ink/80"
+                style={{ '--sm-p-tilt': `${TILT[i % TILT.length]}deg` }}
               >
                 <Mark className="h-[19px] w-[19px]" />
               </span>
@@ -57,12 +57,12 @@ export default function WhoCameThrough({ people }) {
                 <span className="text-[18px] leading-tight" style={{ fontFamily: 'var(--record-display)' }}>
                   {person.name}
                 </span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-record-muted">
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-record-ink/70">
                   {person.dates}
                 </span>
               </div>
               <p
-                className="mt-1.5 text-[15.5px] leading-[1.62] text-record-ink/85"
+                className="mt-1.5 text-[15.5px] leading-[1.62] text-record-ink/90"
                 style={{ fontFamily: 'var(--font-record-reading)' }}
               >
                 {person.line}

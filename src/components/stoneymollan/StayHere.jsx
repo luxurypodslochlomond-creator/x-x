@@ -23,7 +23,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           towards the foot of the page rather than arriving all at once. */}
       <EmberBed strength={0.6} />
       <div className="relative mx-auto w-full max-w-[44rem] px-6 py-10">
-        <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
+        <p className="text-center font-mono text-[10.5px] uppercase tracking-[0.22em] text-record-ink/75">
           Over Loch Lomond &middot; Brian &amp; Gillian
         </p>
 
@@ -44,7 +44,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           {/* The one line on the page with the fire on it, so it carries a little of the
               light. A glow, not a flame: nothing moves, and the words stay sharp. */}
           <p style={{ textShadow: '0 0 22px rgba(226,96,42,0.55)' }}>Fire pit, under the stars.</p>
-          <p className="text-record-signal">A view that turns all the way round.</p>
+          <p className="text-record-red">A view that turns all the way round.</p>
         </div>
 
         <p className="mx-auto mt-5 max-w-[42ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
@@ -52,7 +52,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           John Muir Way and the Three Lochs Way start at the end of our tree-lined drive.
         </p>
 
-        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[9.5px] uppercase leading-[2] tracking-[0.16em] text-record-muted">
+        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[10px] uppercase leading-[2] tracking-[0.14em] text-record-ink/70">
           2 hillside cabins
           <span className="px-1.5 text-record-ink/25">/</span>
           hot tub
@@ -70,12 +70,12 @@ export default function StayHere({ shareImage, shareCredit }) {
           <p className="text-center text-[17px] italic leading-[1.5]" style={READING}>
             &ldquo;This place is unreal. It is almost beyond words how special it is.&rdquo;
           </p>
-          <p className="mt-2 text-center font-mono text-[9.5px] uppercase tracking-[0.16em] text-record-muted">
+          <p className="mt-2 text-center font-mono text-[10px] uppercase tracking-[0.14em] text-record-ink/70">
             Ben, Ibiza &middot; July 2024 &middot; 10/10
           </p>
         </div>
 
-        <p className="mx-auto mt-5 max-w-[40ch] text-center text-[15px] leading-relaxed text-record-muted" style={READING}>
+        <p className="mx-auto mt-5 max-w-[40ch] text-center text-[15.5px] leading-relaxed text-record-ink/85" style={READING}>
           Glasgow airport, 25 minutes. Edinburgh, an hour and a quarter. Say the word and one of
           us will meet you in the Defender.
         </p>
@@ -99,7 +99,7 @@ export default function StayHere({ shareImage, shareCredit }) {
             Check dates &middot; book direct
             <ArrowUpRight className="h-4 w-4" />
           </a>
-          <p className="mt-2 text-center font-mono text-[9.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-muted">
+          <p className="mt-2 text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.13em] text-record-ink/70">
             Straight to us, not a platform. What they take stays on the hill.
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           </a>
           <a
             href={`mailto:${EMAIL}`}
-            className="font-mono text-[11px] tracking-[0.06em] text-record-muted underline decoration-record-ink/20 underline-offset-4 hover:decoration-record-ink"
+            className="font-mono text-[11px] tracking-[0.06em] text-record-ink/80 underline decoration-record-ink/25 underline-offset-4 hover:decoration-record-ink"
           >
             10-5@overlochlomond.com
           </a>

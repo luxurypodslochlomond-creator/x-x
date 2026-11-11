@@ -39,6 +39,25 @@
   letter-spacing: 0.14em;
 }
 
+/* ── AND THE KINGS' MARKS MOVE TOO ─────────────────────────────────────────────
+   The seven marks beside the names in the history are cut the same way as the doors,
+   and set at the same kind of tilt — so they answer a hand the same way: they straighten
+   out of the lean and take the record's red. A list is not a row of buttons, so nothing
+   lifts and nothing glows; it is only the stamp settling under a finger.
+
+   The tilt arrives as a variable for the same reason as above: an inline transform
+   would win over this file and the mark could never move at all. */
+.sm-person-mark {
+  display: block;
+  transform: rotate(var(--sm-p-tilt, 0deg));
+  transition: transform 300ms cubic-bezier(0.34, 1.4, 0.64, 1), color 240ms ease;
+}
+.sm-person:hover .sm-person-mark,
+.sm-person:active .sm-person-mark {
+  transform: rotate(0deg) scale(1.14);
+  color: rgb(var(--record-red));
+}
+
 /* The row settles once, left to right, the way a hand lays six things down on a table. */
 @keyframes sm-door-in {
   from { opacity: 0; transform: translateY(5px); }

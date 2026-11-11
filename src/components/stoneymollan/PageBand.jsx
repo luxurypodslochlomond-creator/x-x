@@ -12,8 +12,8 @@ export default function PageBand({ label, title, number, children, first = false
   return (
     <section className={`${first ? '' : 'border-t border-record-ink/25'} pt-5`}>
       {(label || number) && (
-        <p className="text-center font-mono text-[10px] uppercase leading-[1.8] tracking-[0.24em] text-record-muted">
-          {number && <span className="text-record-signal">{number}</span>}
+        <p className="text-center font-mono text-[10.5px] uppercase leading-[1.8] tracking-[0.2em] text-record-ink/75">
+          {number && <span className="text-record-red">{number}</span>}
           {number && label && <span className="px-2 text-record-ink/25">/</span>}
           {label}
         </p>

@@ -25,7 +25,7 @@ export default function StoneymollanDoorRow() {
             <span className="sm-door-mark" style={{ '--sm-tilt': `${tilt}deg` }}>
               <Mark className="h-[26px] w-[26px]" />
             </span>
-            <span className="sm-door-label block w-full text-center font-mono text-[8px] uppercase leading-none tracking-[0.08em] indent-[0.08em]">{label}</span>
+            <span className="sm-door-label block w-full text-center font-mono text-[9.5px] uppercase leading-none tracking-[0.06em]">{label}</span>
           </a>
         </li>
       ))}

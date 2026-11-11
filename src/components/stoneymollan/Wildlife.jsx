@@ -71,7 +71,7 @@ export default function Wildlife() {
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">
             <MyceliumMark className="mx-auto h-9 w-9 text-record-mark" />
-            <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">
+            <p className="mt-3 text-center font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-ink/75">
               Underneath
             </p>
             <p className="mx-auto mt-3 max-w-[46ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
@@ -84,7 +84,7 @@ export default function Wildlife() {
             </p>
           </div>
 
-          <p className="mx-auto mt-5 max-w-[40ch] font-mono text-[9.5px] uppercase leading-[1.9] tracking-[0.16em] text-record-muted">
+          <p className="mx-auto mt-5 max-w-[40ch] font-mono text-[10px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink/70">
             Scottish Wildlife Trust &middot; RSPB Scotland Loch Lomond &middot; NatureScot &middot; The Clydesider, 2022
           </p>
         </PageBand>
