@@ -477,6 +477,14 @@ button:focus-visible {
    something living is there without being asked to watch it. */
 @keyframes record-cosmos-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes record-cosmos-breathe { 0%, 100% { opacity: 0.72; } 50% { opacity: 1; } }
+/* ── LIGHT BEHIND THE INK ─────────────────────────────────────────────────────────
+   The warm ground under Stoneymollan's name breathes at thirteen seconds a breath: slow
+   enough that you only ever catch it mid-movement, the way you catch a fire. Opacity
+   only, so the compositor does the work and nothing on the page repaints for it. The
+   global less-movement rule below turns it perfectly still for anyone who asks. */
+@keyframes stoneymollan-light { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.9; } }
+.stoneymollan-light { animation: stoneymollan-light 13s ease-in-out infinite; }
+
 .record-cosmos-turn { animation: record-cosmos-turn 240s linear infinite; }
 .record-cosmos-breathe { animation: record-cosmos-breathe 9s ease-in-out infinite; }
 
