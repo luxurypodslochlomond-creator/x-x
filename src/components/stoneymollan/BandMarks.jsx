@@ -205,6 +205,19 @@ export function StrikeMark({ className }) {
   );
 }
 
+/* How you get here — a signpost. One arm for the road and one for the path, on the
+   same post, because both are real and the second one is the better of the two. */
+export function RouteMark({ className }) {
+  return (
+    <Mark className={className}>
+      <path d="M11.4 21.1V4.4" />
+      <path d="M9.4 21.2h4" />
+      <path d="M11.4 6.4h7.2l2 2.1-2 2.1h-7.2Z" fill={RED} stroke={RED} strokeWidth={1.2} />
+      <path d="M11.4 11.8H4.2l-2 2.1 2 2.1h7.2Z" />
+    </Mark>
+  );
+}
+
 export const BAND_MARKS = {
   '01': Waymark,
   '02': MunroMark,

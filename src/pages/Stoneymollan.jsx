@@ -12,6 +12,7 @@ import ThisMonth from '@/components/stoneymollan/ThisMonth';
 import TheYear from '@/components/stoneymollan/TheYear';
 import MastheadTongue from '@/components/stoneymollan/MastheadTongue';
 import Wildlife from '@/components/stoneymollan/Wildlife';
+import GettingHere from '@/components/stoneymollan/GettingHere';
 import StayBar from '@/components/stoneymollan/StayBar';
 import EmberBed from '@/components/stoneymollan/EmberBed';
 import { STONEYMOLLAN_MARK } from '@/components/stoneymollan/mark';
@@ -33,8 +34,11 @@ const FILM =
    and none of that describes anything the picture does not show. */
 const MORNING = [
   {
-    url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/9f0ca0c7a_stoneymollan-path.jpeg',
-    alt: 'Bare trees and frost at Stoneymollan',
+    /* Gill’s, the same morning the mist was down: the coffin road running into it.
+       This is the picture the page opens on and the picture the share card carries,
+       because it is the road itself rather than a view of a view. */
+    url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/3c964a099_stoneymollan-mist.jpg',
+    alt: 'The coffin road running into mist at Stoneymollan, bare trees on both sides',
   },
   {
     url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/e5be7e8c5_stoneymollan-bench.png',
@@ -253,6 +257,13 @@ export default function Stoneymollan() {
           ))}
         </div>
       </section>
+
+      {/* ── HOW TO GET HERE ──
+          Two ways and both true: the road up from Balloch, and the old coffin road over
+          the muir that the long-distance paths now share. It sits right before the stay,
+          because the first question anyone asks after the photographs is how you get to
+          the top of it. */}
+      <GettingHere />
 
       {/* ── THE STAY ──
           What is actually up here, in short lines rather than a paragraph, and one way to

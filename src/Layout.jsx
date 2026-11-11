@@ -333,10 +333,11 @@ const LayoutInner = ({ children, currentPageName }) => {
     } else if (isClimatePage) {
       ogImageUrl = '/api/functions/serveClimateOGImage';
     } else if (currentPageName === 'Stoneymollan') {
-      // Stoneymollan is its own page with its own picture — Gill's first light over the
-      // water — rather than the platform's house card, so a link shared into WhatsApp
-      // opens as the road and not as the whole ecosystem.
-      ogImageUrl = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/f84d01fa3_stoneymollan-sunrise.png';
+      // Stoneymollan is its own page with its own picture — Gill's, taken the morning the
+      // mist was down: the coffin road running into it, bare trees either side. That is
+      // the road itself rather than a view of a view, which is what a link shared into
+      // WhatsApp should open as — not the whole ecosystem's house card.
+      ogImageUrl = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/3c964a099_stoneymollan-mist.jpg';
     }
 
     const ogTags = {

@@ -47,7 +47,7 @@ export const MARKS = [
     label: 'The island in front of you',
     title: 'Inchmurrin',
     body: [
-      'Inchmurrin is Eilean Mhirin — St Mirin’s island, named for the man who carried the faith up the Clyde. It is the largest island in the loch, and the largest freshwater island in Britain. From the top of the field you can count the trees on it.',
+      'Inchmurrin is Eilean Mhirin — St Mirin’s island, named for the man who carried the faith up the Clyde. It is the largest island in the loch, and the largest freshwater island in Britain and Ireland. From the top of the field you can count the trees on it.',
       'Its castle was built for the Earls of Lennox and finished by 1393, standing inside a deer park Robert the Bruce is said to have laid out nearly a century before. The family had held the ground at Balloch since the eleventh century; this was the seat they moved out to — an island in the middle of their own water.',
       'In 1425 James I executed her husband, her father and two of her sons, and Isabella, Countess of Lennox, went to live in that castle and took her grandchildren with her. It was about the last ground the family had left to go to.',
       'James VI came over to hunt in August 1585, while plague was in Edinburgh, and again in 1617 on his only return to Scotland. The Duke of Lennox wrote ahead that year asking the keeper of the island for food for “a good nombre of sharpe stomaches”.',
