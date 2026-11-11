@@ -1,5 +1,5 @@
 import React from 'react';
-import { BOOK_DIRECT, INSTAGRAM, EMAIL, TAXI_TEL } from '@/components/stoneymollan/links';
+import { BOOK_DIRECT, INSTAGRAM, EMAIL, CALL_TEL } from '@/components/stoneymollan/links';
 import { KeyMark, CabinMark, CrossStoneMark, CameraMark, EnvelopeMark, SquirrelMark, MapMark, CallMark } from '@/components/stoneymollan/StoneymollanIcons';
 
 /* ── EIGHT DOORS, IN TWO ROWS ON A PHONE ──────────────────────────────────────
@@ -12,14 +12,16 @@ import { KeyMark, CabinMark, CrossStoneMark, CameraMark, EnvelopeMark, SquirrelM
    the top of a phone screen and buys back every door on the page.
 
    The order is the order a stranger meets them. First the four that do something — book
-   it, sleep in it, find it, ring somebody to come up the hill for you. Then the four that
-   tell you what you have walked into: the history, what lives here, the pictures, the
-   letter. */
+   it, sleep in it, find it, and ring us. Then the four that tell you what you have walked
+   into: the history, what lives here, the pictures, the letter. */
+
+/* The call door dials our own number in full international form, so a guest on a French
+   or an American phone gets through on the same tap somebody in Balloch does. */
 const DOORS = [
   { label: 'Book', href: BOOK_DIRECT, Mark: KeyMark, external: true, primary: true, tilt: -3 },
   { label: 'Stay', href: '#stay', Mark: CabinMark, tilt: 1.6 },
   { label: 'Map', href: '#getting-here', Mark: MapMark, tilt: -1.9 },
-  { label: 'Taxi', href: TAXI_TEL, Mark: CallMark, tilt: 2.2 },
+  { label: 'Call', href: CALL_TEL, Mark: CallMark, tilt: 2.2 },
   { label: 'History', href: '#history', Mark: CrossStoneMark, tilt: 2.4 },
   { label: 'Wild', href: '#wildlife', Mark: SquirrelMark, tilt: -1.4 },
   { label: 'Insta', href: INSTAGRAM, Mark: CameraMark, external: true, tilt: -2.1 },

@@ -193,7 +193,7 @@ export default function Stoneymollan() {
       </div>
 
       {/* ── THE MARKS ── */}
-      <div id="history" className={`${SHEET} scroll-mt-20 space-y-9 pb-12`}>
+      <div id="history" className={`${SHEET} scroll-mt-[116px] space-y-9 pb-12 md:scroll-mt-20`}>
         {MARKS.map((mark) => (
           <PageBand
             key={mark.number}

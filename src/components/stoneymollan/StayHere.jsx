@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import ShareStoneymollan from './ShareStoneymollan';
 import EmberBed from './EmberBed';
-import { BOOK_DIRECT, WEBSITE, EMAIL } from './links';
+import { BOOK_DIRECT, WEBSITE, EMAIL, CALL_NUMBER } from './links';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -17,7 +17,7 @@ export default function StayHere({ shareImage, shareCredit }) {
   return (
     <section
       id="stay"
-      className="relative overflow-hidden scroll-mt-20 border-t border-record-ink/25 bg-record-paper"
+      className="relative overflow-hidden scroll-mt-[116px] border-t border-record-ink/25 bg-record-paper md:scroll-mt-20"
     >
       {/* The fire is further down the hill than the name, so it starts here and grows
           towards the foot of the page rather than arriving all at once. */}
@@ -77,7 +77,7 @@ export default function StayHere({ shareImage, shareCredit }) {
 
         <p className="mx-auto mt-5 max-w-[40ch] text-center text-[15.5px] leading-relaxed text-record-ink/85" style={READING}>
           Glasgow airport, 25 minutes. Edinburgh, an hour and a quarter. We will fetch you from
-          the station if we can &mdash; and if we cannot, Wright&rsquo;s Taxis will, on 01389 721020.
+          the station if we can &mdash; ring us on {CALL_NUMBER} and we will tell you straight.
         </p>
 
         {/* Who this is for, said plainly and warmly before anybody books. The reviews that

@@ -26,7 +26,7 @@ const JMW = 'https://johnmuirway.org/';
 
 export default function GettingHere() {
   return (
-    <div id="getting-here" className="mx-auto w-full max-w-[44rem] scroll-mt-20 px-6 pb-12">
+    <div id="getting-here" className="mx-auto w-full max-w-[44rem] scroll-mt-[116px] px-6 pb-12 md:scroll-mt-20">
       <PageBand label="Getting here" mark={RouteMark}>
         <p
           className="mx-auto mt-1 max-w-[40ch] text-center text-[15.5px] leading-[1.65] text-record-ink/90"
