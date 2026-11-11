@@ -88,15 +88,10 @@ export default function RoomMasthead({ counts, keeper, view, onView, failed }) {
         })}
       </div>
 
-      {/* What this particular job is, said once, under the mark you just chose. */}
-      {chosen?.line && (
-        <p
-          className="mt-3 text-[13px] leading-[1.55] text-[#3a342c]"
-          style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}
-        >
-          {chosen.line}
-        </p>
-      )}
+      {/* The sentence that used to sit here — "one entry at a time: on the record, or not
+          yet…" — has gone. It was a third block of explanation stacked above the work, and
+          the same two words are already printed on the buttons that do it. The marks name
+          the jobs; the page does not need to introduce them first. */}
     </div>
   );
 }

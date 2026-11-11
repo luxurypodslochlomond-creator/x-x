@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, RefreshCw } from 'lucide-react';
+import { ArrowRight, KeyRound, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import DecideQueue from '@/components/climate/DecideQueue';
 import ClimateChecking from '@/pages/ClimateChecking';
@@ -40,6 +40,10 @@ export default function ClimateKeeperRoom() {
   const [extra, setExtra] = useState(
     ['counts', 'sourcing'].includes(params.get('tab')) ? params.get('tab') : null
   );
+  // Who actually holds the record's keys, kept from the same roster call that produces the
+  // counts — so the room can answer "who are the keepers" without a second request and
+  // without sending a keeper into a cell that only ever showed a number.
+  const [keys, setKeys] = useState({ keepers: [], checkers: [] });
 
   const load = useCallback(async () => {
     setState('checking');
@@ -86,6 +90,10 @@ export default function ClimateKeeperRoom() {
       asks: roster?.waiting?.length || 0,
       people: roster?.keepers?.length || 0,
     });
+    setKeys({
+      keepers: roster?.keepers || [],
+      checkers: roster?.checkers || [],
+    });
   }, [who]);
 
   useEffect(() => {
@@ -93,6 +101,13 @@ export default function ClimateKeeperRoom() {
   }, [state, count]);
 
   const n = counts || {};
+  // The names, in the order the record holds them. A keeper asking "who are the keepers"
+  // should get three names, not the word Clear beside a padlock.
+  const keeperNames = keys.keepers
+    .filter((k) => k.active)
+    .map((k) => k.name || k.email)
+    .join(' · ');
+  const checkingNow = keys.checkers.filter((c) => c.active).length;
   const yes = n.yes || 0;
   const read = n.read || 0;
   const asks = n.asks || 0;
@@ -194,6 +209,37 @@ export default function ClimateKeeperRoom() {
           >
             {headline}
           </h1>
+
+          {/* ── WHO HOLDS THE KEYS ──────────────────────────────────────────────────
+              The Access cell could only ever say a number, so when nothing was waiting it
+              said "clear" — which read as "nobody here", when in fact three people hold this
+              record's keys. The names belong on the page, not behind a padlock: a keeper
+              should be able to see who she is keeping the record with before she decides
+              anything, and tap through to the list only if she wants to change it. */}
+          {who.isKeeper && (
+            <button
+              onClick={() => setView('access')}
+              className="mt-2.5 flex w-full items-center gap-2.5 min-h-[46px] border-y border-[#141210]/12 py-2 text-left active:bg-[#efe7d6]/70 transition-colors"
+            >
+              <KeyRound className="w-3.5 h-3.5 flex-shrink-0 text-[#b3261e]" />
+              <span className="min-w-0 flex-1" style={reading}>
+                <span
+                  className="block text-[10px] uppercase tracking-[0.12em] text-[#8a7f6d]"
+                  style={{ fontFamily: 'ui-monospace, monospace' }}
+                >
+                  keys held by
+                </span>
+                <span className="block text-[13.5px] font-semibold text-[#141210] leading-snug">
+                  {keeperNames || 'you'}
+                  {checkingNow > 0 && (
+                    <span className="font-normal text-[#6b5f4f]"> · {checkingNow} checking</span>
+                  )}
+                </span>
+              </span>
+              <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 text-[#8a7f6d]" />
+            </button>
+          )}
+
           {/* The masthead: three marks, three numbers, one glance. This is the whole answer to
               "what is going on and what needs attention" — and it is the same three jobs the
               record already had, said in a word each instead of a paragraph. */}
