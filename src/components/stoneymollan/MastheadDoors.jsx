@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BOOK_DIRECT, INSTAGRAM, EMAIL } from './links';
 import {
   KeyMark,
@@ -30,31 +30,82 @@ const DOORS = [
   { label: 'Email', href: `mailto:${EMAIL}`, Mark: EnvelopeMark, tilt: 1.1 },
 ];
 
+/* ── THE INDEX STAYS ON THE SHEET ──────────────────────────────────────────────
+   Six doors are no use once they have scrolled away on a page this long. So the
+   row docks: the moment it leaves the top of the screen it becomes the top of the
+   screen — the same six marks, the same hand-cut tilts, on a strip of the record's
+   own paper with one hairline under it, and the page runs on beneath.
+
+   What it is not: a bar. No shadow, no white, no second set of marks drawn smaller
+   for the occasion. Same marks, same row, simply nearer the top of the glass.
+
+   The tongue is left exactly where it is, above the name, because a language is
+   something you choose once and the doors are something you use the whole way
+   down. Docking the tongue would put a control in the reader's way at every
+   scroll; letting it go with the name is correct.
+
+   The slot it came out of keeps its height while the row is away, so the page
+   never jumps up by a row when it docks. */
 export default function MastheadDoors() {
+  const navRef = useRef(null);
+  const slotRef = useRef(null);
+  const [docked, setDocked] = useState(false);
+  const [railHeight, setRailHeight] = useState(0);
+
+  useEffect(() => {
+    const measure = () => setRailHeight(navRef.current?.offsetHeight || 0);
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const slot = slotRef.current;
+      if (slot) setDocked(slot.getBoundingClientRect().top <= 0);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <nav aria-label="Stoneymollan" className="mt-5 border-t border-record-ink/20 pt-4">
-      <ul className="grid grid-cols-6 gap-x-1">
-        {DOORS.map(({ label, href, Mark, external, primary, tilt }) => (
-          <li key={label} className="min-w-0">
-            <a
-              href={href}
-              {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-              className={`flex flex-col items-center gap-1.5 border-b-2 pb-1.5 transition-colors active:opacity-50 ${
-                primary
-                  ? 'border-record-mark text-record-ink'
-                  : 'border-record-ink/15 text-record-ink/80 hover:border-record-ink/45 hover:text-record-ink'
-              }`}
-            >
-              <span className="block" style={{ transform: `rotate(${tilt}deg)` }}>
-                <Mark className="h-[26px] w-[26px]" />
-              </span>
-              <span className="block w-full text-center font-mono text-[8px] uppercase leading-none tracking-[0.08em] indent-[0.08em]">
-                {label}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div ref={slotRef} className="mt-5 border-t border-record-ink/20 pt-4">
+      {/* The space the row came out of — held open so nothing shifts under the thumb. */}
+      <div aria-hidden="true" style={{ height: docked ? railHeight : 0 }} />
+
+      <nav
+        ref={navRef}
+        aria-label="Stoneymollan"
+        className={
+          docked
+            ? 'fixed inset-x-0 top-0 z-40 border-b border-record-ink/20 bg-record-paper px-6 pb-1.5 pt-2'
+            : ''
+        }
+      >
+        <ul className="mx-auto grid w-full max-w-[44rem] grid-cols-6 gap-x-1">
+          {DOORS.map(({ label, href, Mark, external, primary, tilt }) => (
+            <li key={label} className="min-w-0">
+              <a
+                href={href}
+                {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                className={`flex flex-col items-center gap-1.5 border-b-2 pb-1.5 transition-colors active:opacity-50 ${
+                  primary
+                    ? 'border-record-mark text-record-ink'
+                    : 'border-record-ink/15 text-record-ink/80 hover:border-record-ink/45 hover:text-record-ink'
+                }`}
+              >
+                <span className="block" style={{ transform: `rotate(${tilt}deg)` }}>
+                  <Mark className="h-[26px] w-[26px]" />
+                </span>
+                <span className="block w-full text-center font-mono text-[8px] uppercase leading-none tracking-[0.08em] indent-[0.08em]">
+                  {label}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }

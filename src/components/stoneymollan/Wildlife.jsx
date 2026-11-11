@@ -38,7 +38,7 @@ const LIFE = [
 
 export default function Wildlife() {
   return (
-    <section id="wildlife" className="scroll-mt-4 border-t border-record-ink/25 bg-record-bone">
+    <section id="wildlife" className="scroll-mt-20 border-t border-record-ink/25 bg-record-bone">
       <div className="mx-auto w-full max-w-[44rem] px-6 py-10">
         <PageBand first label="The wood is not empty" title="What lives here">
           <p className="mx-auto max-w-[46ch] text-center text-[16.5px] leading-[1.68]" style={READING}>

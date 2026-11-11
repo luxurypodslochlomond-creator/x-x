@@ -14,7 +14,7 @@ const READING = { fontFamily: 'var(--font-record-reading)' };
  */
 export default function StayHere({ shareImage, shareCredit }) {
   return (
-    <section id="stay" className="scroll-mt-4 border-t border-record-ink/25 bg-record-paper">
+    <section id="stay" className="scroll-mt-20 border-t border-record-ink/25 bg-record-paper">
       <div className="mx-auto w-full max-w-[44rem] px-6 py-10">
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
           Over Loch Lomond &middot; Brian &amp; Gillian
