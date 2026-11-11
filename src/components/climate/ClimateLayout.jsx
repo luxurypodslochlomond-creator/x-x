@@ -43,12 +43,27 @@ const WORKING_PAGES = [
   'ClimateImpact',
 ];
 
+// ── THE ONE ROOM THAT IS WORKED, NOT READ ─────────────────────────────────────
+// Every other page of the record is read, so it carries the record's rule and the imprint
+// of doors beneath its name: that is the book. The keeper's room is worked — and on a phone
+// that rail of six doors was eating the top of the glass and pushing the first entry below
+// the fold, so a keeper scrolled before she could decide anything.
+//
+// Nothing is taken away from the record. This one screen simply stops drawing the rule and
+// the doors it is not walking through; the name stays, pinned, and the name is the way back.
+// The six doors are still on the front page she lands on, the tongue door still stands beside
+// her, and the room's own "Back to the record" line still sits under the strip. One page, not
+// all of them: the public record keeps the masthead it was drawn around.
+const ROOM_PAGES = ['ClimateKeeperRoom'];
+
 export default function ClimateLayout({ children, currentPage }) {
   const location = useLocation();
   const readingRef = useRef(null);
   const [contentsOpen, setContentsOpen] = useState(false);
   const openContents = useCallback(() => setContentsOpen(true), []);
   const closeContents = useCallback(() => setContentsOpen(false), []);
+  // Worked, not read. See ROOM_PAGES.
+  const isRoom = ROOM_PAGES.includes(currentPage);
   useRecordScroll(readingRef);
 
   // Her identity, not UF51's. Runs once per climate page.
@@ -171,7 +186,7 @@ export default function ClimateLayout({ children, currentPage }) {
       <div className="relative record-book" style={{ zIndex: 1 }}>
       <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
-        <div className="mx-auto max-w-[1100px] px-4 lg:px-10">
+        <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
             <Link
               to={createPageUrl('TogetherChangeClimate')}
@@ -197,9 +212,9 @@ export default function ClimateLayout({ children, currentPage }) {
             <RecordTongueDoor size={18} inline />
           </div>
 
-          <RecordRule />
+          {!isRoom && <RecordRule />}
 
-          <RecordImprint onOpenContents={openContents} contentsOpen={contentsOpen} />
+          {!isRoom && <RecordImprint onOpenContents={openContents} contentsOpen={contentsOpen} />}
         </div>
       </header>
 
