@@ -109,7 +109,7 @@ export default function DecisionCard({ item, onDecide, busy, first = false, comp
             where the first answer is given; after that the card is the entry and the two buttons. */}
         {first && (
           <p className="room-meta mt-2.5 text-[12px] leading-[1.5] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
-            {compact ? 'Publish makes it public. Not yet keeps it waiting.' : <>
+            {compact ? 'Publish: public. Not yet: held.' : <>
               <span className="font-black text-[#1e3a2b]">On the record</span> — it goes public, and it is sealed.{' '}
               <span className="font-black text-[#141210]">Not yet</span> — it waits. Nothing is lost.
             </>}

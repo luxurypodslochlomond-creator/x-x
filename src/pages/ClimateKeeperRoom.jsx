@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowRight, KeyRound, RefreshCw } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import DecideQueue from '@/components/climate/DecideQueue';
 import ClimateChecking from '@/pages/ClimateChecking';
 import GuestList from '@/components/climate/keeper/GuestList';
 import WorkDock from '@/components/climate/keeper/WorkDock';
+import RoomOverview from '@/components/climate/keeper/RoomOverview';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 // One set of measures for everything standing inside the room, so tapping between Decide,
@@ -127,7 +128,7 @@ export default function ClimateKeeperRoom() {
   return (
     <ClimateRecordShell
       compact
-      className="keeper-workspace-shell"
+      className={state === 'ready' ? 'keeper-workspace-shell keeper-workspace-ready' : 'keeper-workspace-shell'}
       eyebrow="Keeper's room"
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
@@ -181,39 +182,16 @@ export default function ClimateKeeperRoom() {
 
       {state === 'ready' && (
         <div className="keeper-room">
-          <div className="flex items-baseline justify-between gap-3">
-            <p className="room-identity text-[13px] text-[#6b5f4f]" style={reading}>
-              <span className="font-semibold text-[#141210]">{who.name || 'Keeper'}</span>
-              {who.isKeeper ? ' · keeper' : ' · checker'}
-            </p>
-            <button
-              onClick={count}
-              aria-label="Refresh waiting work"
-              className="room-refresh flex items-center gap-1.5 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e] transition-colors"
-              style={reading}
-            >
-              <RefreshCw className="w-3 h-3" /><span className="hidden lg:inline">count again</span>
-            </button>
-          </div>
-
-          <h1
-            className="room-title mt-1 text-[#141210] text-[22px] sm:text-[24px]"
-            style={{ ...reading, fontWeight: 600, lineHeight: 1.18, letterSpacing: '-0.012em', textWrap: 'pretty' }}
-          >
-            {headline}
-          </h1>
-
-          {/* The names, not a padlock and a number. Said once, thin, on one line — the door
-              to change the list is in the dock below, so this is not also a button. */}
-          {who.isKeeper && (
-            <p className="room-keepers mt-1 flex items-start gap-1.5 text-[12px] leading-snug text-[#6b5f4f]" style={reading}>
-              <KeyRound className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-[#b3261e]" strokeWidth={2.2} />
-              <span>
-                Keys held by {keeperNames || 'you'}
-                {checkingNow > 0 && <span className="text-[#8a7f6d]"> · {checkingNow} checking</span>}
-              </span>
-            </p>
-          )}
+          <RoomOverview
+            who={who}
+            headline={headline}
+            total={total}
+            counted={Boolean(counts)}
+            failed={failed}
+            keeperNames={keeperNames}
+            checkingNow={checkingNow}
+            onRefresh={count}
+          />
 
           {/* The work's own index, directly above the work on every screen. */}
           <WorkDock
@@ -235,7 +213,7 @@ export default function ClimateKeeperRoom() {
 
           {/* One job at a time. Each room owns its own empty state, so nothing is ever shown
               as finished by the page that chose not to draw it. */}
-          <div className="mt-3">
+          <div className="room-work-panel mt-3">
             {activeView === 'decide' && who.isKeeper && <DecideQueue plain onChange={count} />}
             {activeView === 'check' && <ClimateChecking plain onChange={count} />}
             {activeView === 'people' && who.isKeeper && <GuestList />}

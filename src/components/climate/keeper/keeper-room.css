@@ -113,27 +113,34 @@
   #root .keeper-workspace-shell { min-height: 0; }
   #root .keeper-workspace-shell > p,
   #root .keeper-workspace-shell .record-shell-return { display: none; }
-  #root .keeper-workspace-shell .record-shell-content { padding-block: 12px 28px; }
+  #root .keeper-workspace-ready > .record-back-bar { display: none; }
+  #root .keeper-workspace-shell .record-shell-content { padding-block: 4px 24px; }
   #root .keeper-room { --font-reading: var(--font-body); --font-display: var(--font-body); }
   #root .keeper-room :is(p, li, blockquote) { font-family: var(--font-body) !important; font-size: 16px !important; line-height: 1.5 !important; }
   #root .keeper-room :is(input, textarea, select) { font-size: 16px !important; }
-  #root .keeper-room .room-title { font-size: 24px !important; font-weight: 700 !important; }
-  #root .keeper-room :is(.room-identity, .room-keepers, .room-meta) { font-size: 13px !important; line-height: 1.4 !important; }
-  #root .keeper-room .room-refresh { min-width: 44px; min-height: 44px; justify-content: flex-end; }
+  #root .keeper-room .room-overview { grid-template-columns: minmax(0, 1fr) auto 44px; align-items: center; column-gap: 6px; }
+  #root .keeper-room .room-identity { grid-area: 1 / 1; font-size: 20px !important; font-weight: 700; line-height: 1.2 !important; color: rgb(var(--record-ink)); }
+  #root .keeper-room .room-title { grid-area: 1 / 2; margin: 0; font-size: 13px !important; font-weight: 500 !important; line-height: 1.3 !important; letter-spacing: 0 !important; color: rgb(var(--record-muted)); }
+  #root .keeper-room .room-refresh { grid-area: 1 / 3; min-width: 44px; min-height: 44px; justify-content: center; }
   #root .keeper-room .room-refresh svg { width: 16px; height: 16px; }
-  #root .keeper-room .room-keepers { margin-top: 8px; }
+  #root .keeper-room .room-keepers { grid-area: 2 / 1 / 3 / -1; margin-top: 0; font-size: 13px !important; line-height: 1.4 !important; }
   #root .keeper-room .room-keepers > svg { display: none; }
+  #root .keeper-room .room-meta { font-size: 13px !important; line-height: 1.4 !important; }
 
-  #root .keeper-room .room-work-nav { position: static; margin-top: 18px; border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .22); background: transparent; }
-  #root .keeper-room .room-work-nav button { min-height: 44px; padding: 8px 3px; flex-direction: row; gap: 5px; border: 0; background: transparent; }
-  #root .keeper-room .room-work-nav .room-nav-word { font-family: var(--font-body); font-size: 14px; line-height: 1.25; font-weight: 500; color: rgb(var(--record-muted)) !important; }
+  #root .keeper-room .room-work-nav { position: static; margin-top: 10px; border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .22); background: transparent; }
+  #root .keeper-room .room-work-nav button { min-height: 62px; padding: 6px 3px; flex-direction: column; gap: 4px; border: 0; background: transparent; }
+  #root .keeper-room .room-work-nav .room-nav-mark { display: flex; color: rgb(var(--record-ink)); }
+  #root .keeper-room .room-work-nav .room-nav-mark svg { width: 26px; height: 26px; color: inherit; }
+  #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-mark { color: rgb(var(--record-mark)); }
+  #root .keeper-room .room-work-nav .room-nav-word { font-family: var(--font-body); font-size: 12px; line-height: 1.25; font-weight: 500; color: rgb(var(--record-muted)) !important; }
   #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-word { font-weight: 700; color: rgb(var(--record-ink)) !important; }
-  #root .keeper-room .room-work-nav :is(.room-nav-mark, .room-nav-detail) { display: none; }
-  #root .keeper-room .room-work-nav .room-nav-dot { display: block; width: 4px; height: 4px; background: rgb(var(--record-mark)); }
+  #root .keeper-room .room-work-nav .room-nav-detail { display: none; }
+  #root .keeper-room .room-work-nav .room-nav-dot { display: block; position: absolute; top: 7px; right: calc(50% - 18px); width: 4px; height: 4px; border-radius: 50%; background: rgb(var(--record-mark)); }
   #root .keeper-room .room-work-nav .room-nav-indicator { top: auto; bottom: -1px; }
   #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-indicator { background: rgb(var(--record-mark)); }
 
-  #root .keeper-room .room-review { margin-top: 20px; border: 0; background: transparent; }
+  #root .keeper-room .room-work-panel { margin-top: 0; }
+  #root .keeper-room .room-review { margin-top: 14px; border: 0; background: transparent; }
   #root .keeper-room .room-review > div { padding-inline: 0; border: 0; }
   #root .keeper-room .room-review-type { padding: 0; border: 0; background: transparent; color: rgb(var(--record-mark)); font-size: 12px !important; font-family: var(--font-body); font-weight: 600; letter-spacing: .04em !important; }
   #root .keeper-room .room-review .room-review-title { font-size: 20px !important; line-height: 1.25 !important; font-weight: 700 !important; }
@@ -141,10 +148,10 @@
   #root .keeper-room summary::-webkit-details-marker { display: none; }
   #root .keeper-room .room-text-link { color: rgb(var(--record-red)); font-size: 13px; text-decoration: underline; text-underline-offset: .2em; }
   #root .keeper-room .room-source-link { min-height: 44px; max-width: 100%; flex-wrap: wrap; margin-block: 6px; padding: 0; border: 0; background: transparent; color: rgb(var(--record-ink)); font: 500 14px/1.4 var(--font-body); text-decoration: underline; text-decoration-thickness: 1px; }
-  #root .keeper-room .room-review-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; padding-block: 8px; }
+  #root .keeper-room .room-review-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 8px; padding-block: 6px; }
   #root .keeper-room .room-review-actions button { min-width: 92px; min-height: 44px; padding: 10px 18px; border: 1px solid rgb(var(--record-ink) / .3); font-size: 14px; border-radius: 3px; background: transparent; color: rgb(var(--record-ink)); }
   #root .keeper-room .room-review-actions button:last-child { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); border-color: rgb(var(--record-ink)); }
-  #root .keeper-room .room-review-actions svg { display: none; }
+  #root .keeper-room .room-review-actions svg { display: block; width: 16px; height: 16px; }
   #root .keeper-room .room-queue-more { padding-inline: 0; border: 0; background: transparent; }
   #root .keeper-room .room-queue-more p { font-size: 13px !important; }
   #root .keeper-room .room-empty { padding: 20px 0; border: 0; background: transparent; text-align: left; }

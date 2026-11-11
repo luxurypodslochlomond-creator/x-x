@@ -17,7 +17,7 @@ export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClim
   const back = useRecordBack(fallback);
 
   return (
-    <div className="border-b border-record-ink/15">
+    <div className="record-back-bar border-b border-record-ink/15">
       <div className="mx-auto flex max-w-[1100px] items-center gap-3 px-4 py-2 lg:px-10">
         <button
           type="button"

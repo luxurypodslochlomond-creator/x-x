@@ -145,7 +145,7 @@ export default function DecideQueue({ onChange, plain = false }) {
               <p className="text-[12.5px] leading-snug text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
                 {all
                   ? `${items.length} waiting`
-                  : `${items.length - 1} more waiting after this one`}
+                  : compact ? `${items.length - 1} more` : `${items.length - 1} more waiting after this one`}
               </p>
               <button
                 onClick={() => setAll((v) => !v)}

@@ -1,8 +1,8 @@
 import React from 'react';
 import { MarkStamp, MarkEye, MarkGate, MarkLedger } from './KeeperMarks';
 
-// Mobile uses a quiet text index above the work, not a second masthead at the foot.
-// The desktop marks and counts keep their existing presentation.
+// Four marks and one word per job. The phone keeps its index above the work;
+// only the overview carries a count, so one queue never looks like two.
 const TABS = [
   { id: 'decide', Mark: MarkStamp, word: 'Decide', unit: 'to decide', keeperOnly: true },
   { id: 'check', Mark: MarkEye, word: 'Check', unit: 'to read' },
