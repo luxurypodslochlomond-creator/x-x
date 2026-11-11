@@ -166,8 +166,9 @@ export default function ClimateChecking({ plain = false, onChange }) {
           {me?.name ? `${me.name}, open the source and say what you find.` : 'Open the source and say what you find.'}
         </h1>
         <p className={plain ? 'text-[13.5px] text-record-ink/75 leading-relaxed mb-1' : 'text-sm text-record-ink/75 leading-relaxed mb-1'} style={{ fontFamily: 'var(--font-reading)' }}>
-          Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the
-          entry claims, and a keeper decides with your words in front of them.
+          {plain
+            ? 'Open the link, then say what you find. Nothing here publishes or edits anything.'
+            : 'Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the entry claims, and a keeper decides with your words in front of them.'}
         </p>
         {!plain && (
           <p className="text-[12px] text-record-muted mb-5" style={{ fontFamily: 'var(--font-reading)' }}>

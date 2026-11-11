@@ -6,43 +6,43 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import DecideQueue from '@/components/climate/DecideQueue';
 import ClimateChecking from '@/pages/ClimateChecking';
 import GuestList from '@/components/climate/keeper/GuestList';
-import RoomMasthead from '@/components/climate/keeper/RoomMasthead';
+import WorkDock from '@/components/climate/keeper/WorkDock';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 
-// ── ONE PAGE, ONE LIST, THEN OUT ───────────────────────────────────────────────
-// This room used to be a shed with five doors — decide, read, people, counts, sources —
-// and a mark inside each one. Every one of those words was ours, not hers: they named how
-// the thing is built, not what she came here to do. To take one decision she had to learn a
-// map first, and a person holding the keys at eleven at night does not want a map.
+// ── WHAT A KEEPER SEES FIRST IS THE WORK ───────────────────────────────────────
+// This room has been through several shapes, and every one of them opened with prose: a
+// masthead, a row of cells, a paragraph explaining what the room was for. A person holding
+// the keys at eleven at night does not want to be introduced to the room — she wants the
+// thing that is waiting, and two buttons underneath it.
 //
-// So the shed is gone. There is one page. It says how many things are waiting in plain words,
-// and then it puts every one of them in the same scroll, each with its own two buttons:
-// an entry says yes or not yet, a source says what you found, a person says let them in. You
-// work down the list and you leave. When the list is empty the page says so and stops, because
-// a page that can never finish is a headache even when there is nothing on it.
-//
-// Reading is not work, so it is not on the page. What the record holds and where a claim comes
-// from live behind two quiet lines at the foot for whoever wants them — they were never jobs.
-//
-// Nothing is decided in a browser. Every answer here is given by the record's own server
-// against its own guest list, so holding a keeper's line gives the record's keys and none of
-// the building's.
+// So the order is now the order of her evening: who she is, then one plain sentence saying
+// how much is waiting, then the work itself, then the four doors (Decide, Check, People,
+// Record) at the bottom of the glass where her thumb already is — not at the top, where
+// they cost her the first screen. Nothing was removed, and nothing decides in a browser:
+// every answer here is given by the record's own server against its own guest list.
 const reading = { fontFamily: 'var(--font-reading)' };
+
+// The old addresses still work. Each one lands on the door it always meant.
+const FROM_TAB = {
+  decide: 'decide',
+  check: 'check',
+  sources: 'check',
+  people: 'people',
+  access: 'people',
+  counts: 'record',
+  sourcing: 'record',
+};
 
 export default function ClimateKeeperRoom() {
   const [state, setState] = useState('checking'); // checking | ready | signed_out | paused | not_on_list | error
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
   const [counts, setCounts] = useState(null);
   const [params] = useSearchParams();
-  const [view, setView] = useState(null);
+  const [view, setView] = useState(FROM_TAB[params.get('tab')] || null);
   const [failed, setFailed] = useState(false);
-  const [extra, setExtra] = useState(
-    ['counts', 'sourcing'].includes(params.get('tab')) ? params.get('tab') : null
-  );
   // Who actually holds the record's keys, kept from the same roster call that produces the
-  // counts — so the room can answer "who are the keepers" without a second request and
-  // without sending a keeper into a cell that only ever showed a number.
+  // counts — so the room can name them without a second request.
   const [keys, setKeys] = useState({ keepers: [], checkers: [] });
 
   const load = useCallback(async () => {
@@ -80,20 +80,16 @@ export default function ClimateKeeperRoom() {
     const roster = r.status === 'fulfilled' ? r.value?.data : null;
     // A count that failed and a count that came back empty are not the same answer. Before
     // this, a dropped request was stored as a zero — so a keeper was told she was finished by
-    // a page that had not managed to ask the question. The room now says which it is.
+    // a page that had not managed to ask the question.
     setFailed(
       (who.isKeeper && (q.status === 'rejected' || r.status === 'rejected')) || c.status === 'rejected'
     );
     setCounts({
-      yes: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : 0,
-      read: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : 0,
-      asks: roster?.waiting?.length || 0,
-      people: roster?.keepers?.length || 0,
+      decide: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : 0,
+      check: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : 0,
+      people: roster?.waiting?.length || 0,
     });
-    setKeys({
-      keepers: roster?.keepers || [],
-      checkers: roster?.checkers || [],
-    });
+    setKeys({ keepers: roster?.keepers || [], checkers: roster?.checkers || [] });
   }, [who]);
 
   useEffect(() => {
@@ -101,37 +97,37 @@ export default function ClimateKeeperRoom() {
   }, [state, count]);
 
   const n = counts || {};
-  // The names, in the order the record holds them. A keeper asking "who are the keepers"
-  // should get three names, not the word Clear beside a padlock.
+  // The names, in the order the record holds them. A keeper should be able to see who she is
+  // keeping the record with before she decides anything.
   const keeperNames = keys.keepers
     .filter((k) => k.active)
     .map((k) => k.name || k.email)
     .join(' · ');
   const checkingNow = keys.checkers.filter((c) => c.active).length;
-  const yes = n.yes || 0;
-  const read = n.read || 0;
-  const asks = n.asks || 0;
+  const yes = n.decide || 0;
+  const read = n.check || 0;
+  const asks = n.people || 0;
   // Counted once. An entry waiting for a decision sits in the checking queue as well, so
-  // adding the two figures together told a keeper she had twice the work she had. The room
-  // counts entries and people; reading a source is a second look at an entry already counted,
-  // and the masthead gives it its own cell rather than its own place in the total.
+  // adding the two figures together told a keeper she had twice the work she had. Reading a
+  // source is a second look at an entry already counted, so it keeps its own door rather
+  // than its own place in the total.
   const total = who.isKeeper ? yes + asks : read;
 
   const headline = failed
-    ? 'The record could not be counted just now.'
+    ? 'The record could not be counted.'
     : !counts
     ? 'Looking at the record…'
     : total === 0
-    ? "Nothing is waiting. You're done."
+    ? 'Nothing waiting.'
     : total === 1
-    ? 'One thing is waiting for you.'
-    : `${total} things are waiting for you.`;
+    ? 'One thing waiting.'
+    : `${total} things waiting.`;
 
   // Where the room opens: the work actually in front of her, never a guess. A checker's room
   // has the one door, so she is never shown a mark she cannot open.
   const activeView = !who.isKeeper
-    ? 'sources'
-    : view || (yes > 0 ? 'decide' : asks > 0 ? 'access' : 'sources');
+    ? 'check'
+    : view || (yes > 0 ? 'decide' : asks > 0 ? 'people' : 'check');
 
   return (
     <ClimateRecordShell
@@ -188,10 +184,12 @@ export default function ClimateKeeperRoom() {
       )}
 
       {state === 'ready' && (
-        <>
+        // Room at the foot of the glass for the dock, so the last entry is never hidden
+        // under the way between jobs. Nothing is held open on a wide screen.
+        <div className="pb-24 lg:pb-0">
           <div className="flex items-baseline justify-between gap-3">
-            <p className="text-[12px] text-[#8a7f6d]" style={reading}>
-              {who.name || 'Keeper'}
+            <p className="text-[13px] text-[#6b5f4f]" style={reading}>
+              <span className="font-semibold text-[#141210]">{who.name || 'Keeper'}</span>
               {who.isKeeper ? ' · keeper' : ' · checker'}
             </p>
             <button
@@ -204,47 +202,28 @@ export default function ClimateKeeperRoom() {
           </div>
 
           <h1
-            className="mt-1 text-[#141210] text-[23px] sm:text-[27px]"
-            style={{ ...reading, fontWeight: 600, lineHeight: 1.16, letterSpacing: '-0.015em', textWrap: 'pretty' }}
+            className="mt-1 text-[#141210] text-[25px] sm:text-[28px]"
+            style={{ ...reading, fontWeight: 600, lineHeight: 1.12, letterSpacing: '-0.015em', textWrap: 'pretty' }}
           >
             {headline}
           </h1>
 
-          {/* ── WHO HOLDS THE KEYS ──────────────────────────────────────────────────
-              The Access cell could only ever say a number, so when nothing was waiting it
-              said "clear" — which read as "nobody here", when in fact three people hold this
-              record's keys. The names belong on the page, not behind a padlock: a keeper
-              should be able to see who she is keeping the record with before she decides
-              anything, and tap through to the list only if she wants to change it. */}
+          {/* The names, not a padlock and a number. Said once, thin, on one line — the door
+              to change the list is in the dock below, so this is not also a button. */}
           {who.isKeeper && (
-            <button
-              onClick={() => setView('access')}
-              className="mt-2.5 flex w-full items-center gap-2.5 min-h-[46px] border-y border-[#141210]/12 py-2 text-left active:bg-[#efe7d6]/70 transition-colors"
-            >
-              <KeyRound className="w-3.5 h-3.5 flex-shrink-0 text-[#b3261e]" />
-              <span className="min-w-0 flex-1" style={reading}>
-                <span
-                  className="block text-[10px] uppercase tracking-[0.12em] text-[#8a7f6d]"
-                  style={{ fontFamily: 'ui-monospace, monospace' }}
-                >
-                  keys held by
-                </span>
-                <span className="block text-[13.5px] font-semibold text-[#141210] leading-snug">
-                  {keeperNames || 'you'}
-                  {checkingNow > 0 && (
-                    <span className="font-normal text-[#6b5f4f]"> · {checkingNow} checking</span>
-                  )}
-                </span>
+            <p className="mt-1.5 flex items-start gap-1.5 text-[12.5px] leading-snug text-[#6b5f4f]" style={reading}>
+              <KeyRound className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-[#b3261e]" strokeWidth={2.2} />
+              <span>
+                Keys held by {keeperNames || 'you'}
+                {checkingNow > 0 && <span className="text-[#8a7f6d]"> · {checkingNow} checking</span>}
               </span>
-              <ArrowRight className="w-3.5 h-3.5 flex-shrink-0 text-[#8a7f6d]" />
-            </button>
+            </p>
           )}
 
-          {/* The masthead: three marks, three numbers, one glance. This is the whole answer to
-              "what is going on and what needs attention" — and it is the same three jobs the
-              record already had, said in a word each instead of a paragraph. */}
-          <RoomMasthead
-            counts={{ sources: read, decide: yes, access: asks }}
+          {/* Four doors, in the order of a keeper's evening, at the thumb on a phone and
+              under the sentence on a wide screen. */}
+          <WorkDock
+            counts={{ decide: yes, check: read, people: asks }}
             keeper={who.isKeeper}
             view={activeView}
             onView={setView}
@@ -262,62 +241,23 @@ export default function ClimateKeeperRoom() {
 
           {/* One job at a time. Each room owns its own empty state, so nothing is ever shown
               as finished by the page that chose not to draw it. */}
-          {activeView === 'decide' && who.isKeeper && (
-            <div className="mt-5">
-              <DecideQueue plain onChange={count} />
-            </div>
-          )}
+          <div className="mt-4">
+            {activeView === 'decide' && who.isKeeper && <DecideQueue plain onChange={count} />}
+            {activeView === 'check' && <ClimateChecking plain onChange={count} />}
+            {activeView === 'people' && who.isKeeper && <GuestList />}
 
-          {activeView === 'sources' && (
-            <div className="mt-5">
-              <ClimateChecking plain onChange={count} />
-            </div>
-          )}
-
-          {activeView === 'access' && who.isKeeper && (
-            <div className="mt-5">
-              <GuestList />
-            </div>
-          )}
-
-          {who.isKeeper && (
-            <div className="mt-8 border-t border-[#141210]/12 pt-3">
-              <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
-                <Quiet
-                  on={extra === 'counts'}
-                  onClick={() => setExtra(extra === 'counts' ? null : 'counts')}
-                >
-                  What the record holds
-                </Quiet>
-                <Quiet
-                  on={extra === 'sourcing'}
-                  onClick={() => setExtra(extra === 'sourcing' ? null : 'sourcing')}
-                >
-                  Where a claim comes from
-                </Quiet>
+            {/* What the record holds, and where a claim comes from — two questions a panel
+                asks, kept on one door rather than under a long page of footnotes. */}
+            {activeView === 'record' && who.isKeeper && (
+              <div className="space-y-7">
+                <AdminClimateDesk plain />
+                <DueDiligencePanel />
               </div>
-
-              {extra === 'counts' && <div className="pt-4"><AdminClimateDesk plain /></div>}
-              {extra === 'sourcing' && <div className="pt-4"><DueDiligencePanel /></div>}
-            </div>
-          )}
-        </>
+            )}
+          </div>
+        </div>
       )}
     </ClimateRecordShell>
-  );
-}
-
-function Quiet({ on, onClick, children }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`min-h-[34px] text-[12px] transition-colors ${
-        on ? 'text-[#b3261e]' : 'text-[#8a7f6d] active:text-[#141210]'
-      }`}
-      style={reading}
-    >
-      {children}
-    </button>
   );
 }
 

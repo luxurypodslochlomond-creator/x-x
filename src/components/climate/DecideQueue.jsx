@@ -14,6 +14,9 @@ export default function DecideQueue({ onChange, plain = false }) {
   const [name, setName] = useState('');
   const [busy, setBusy] = useState(null);
   const [said, setSaid] = useState('');
+  // One entry at a time, with the rest behind one line. Twenty-two open cards is a scroll a
+  // keeper has to survive before she can start; one card and a count is a job she can finish.
+  const [all, setAll] = useState(false);
 
   const load = useCallback(async () => {
     setState('checking');
@@ -122,15 +125,34 @@ export default function DecideQueue({ onChange, plain = false }) {
           </p>
         </div>
       ) : (
-        items.map((item, i) => (
-          <DecisionCard
-            key={`${item.type}-${item.id}`}
-            item={item}
-            onDecide={decide}
-            busy={busy === item.id}
-            first={i === 0}
-          />
-        ))
+        <>
+          {(all ? items : items.slice(0, 1)).map((item, i) => (
+            <DecisionCard
+              key={`${item.type}-${item.id}`}
+              item={item}
+              onDecide={decide}
+              busy={busy === item.id}
+              first={i === 0}
+            />
+          ))}
+
+          {items.length > 1 && (
+            <div className="flex items-center justify-between gap-3 border border-[#141210]/20 bg-[#f7f1e5] px-3 py-2.5">
+              <p className="text-[12.5px] leading-snug text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
+                {all
+                  ? `${items.length} waiting`
+                  : `${items.length - 1} more waiting after this one`}
+              </p>
+              <button
+                onClick={() => setAll((v) => !v)}
+                className="min-h-[36px] text-[12px] font-semibold text-[#b3261e] underline decoration-2 underline-offset-2"
+                style={{ fontFamily: 'var(--font-reading)' }}
+              >
+                {all ? 'one at a time' : 'see all'}
+              </button>
+            </div>
+          )}
+        </>
       )}
 
       <NameOnTheRecord />
