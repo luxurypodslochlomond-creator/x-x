@@ -39,10 +39,10 @@ const MARKS = [
   {
     number: '01',
     label: 'What the road is',
-    title: 'The road of the dead',
+    title: 'The coffin road',
     body: [
-      'They carried them from Balloch, over the muir, down to the clachan of Kirkton and St Mahew’s Chapel at Cardross. Just under seven kilometres, on foot, with a coffin.',
-      'Feet first, so the spirit could not turn back for home. The coffin was never allowed to touch the ground. Streams cross the route the whole way along, because running water was said to stop a spirit following.',
+      'Balloch, over the muir, down to the clachan of Kirkton and St Mahew’s Chapel at Cardross: just under seven kilometres, walked by the bearers with a coffin carried between them.',
+      'Feet first, so the spirit could not turn back for home. The coffin was never set down on the ground. Streams cross the route the whole way along, because running water was said to stop a spirit following.',
     ],
   },
   {
@@ -55,9 +55,9 @@ const MARKS = [
   },
   {
     number: '03',
-    title: 'The King died in the parish',
+    title: 'A king in the parish',
     body: [
-      'Robert the Bruce died at his manor of Cardross on 7 June 1329. The road of the dead ends in that same parish.',
+      'Robert the Bruce kept his manor at Cardross, and died there on 7 June 1329. The old road ends in that same parish.',
       'Historians still argue about exactly where the manor stood. The parish they do not argue about.',
     ],
   },
@@ -66,7 +66,7 @@ const MARKS = [
     title: 'Bandit country',
     body: [
       'Rob Roy MacGregor drove cattle across these hills three hundred years ago, and lifted them. He was out in the Fifteen, and he fought at Sheriffmuir in 1715.',
-      'A road empty of everything except the dead is a useful road in the dark, when you are moving something that is not yours.',
+      'A road empty of everything was a useful road in the dark, when you were moving something that was not yours.',
     ],
   },
   {
@@ -89,9 +89,9 @@ const MARKS = [
     label: 'The bottom of the garden',
     title: 'Two cairns in Cameron Wood',
     body: [
-      'Cameron Wood is the one at the bottom of the garden, and there are two burial cairns in it. Both are older than the coffin road by a few thousand years.',
+      'Cameron Wood is the one at the bottom of the garden, and there are two old cairns in it. Both are older than the coffin road by a few thousand years.',
       'The lower one is Round Hill: an earth and stone mound thirty metres by twenty, two and a half metres high, with white quartz still pushing up through the soil. Stand on the top of it and you look straight up the loch to Ben Lomond.',
-      'The upper one is a Neolithic chambered long cairn, laid east-southeast to west-northwest. Thirty metres by eighteen when it was first written down in 1845; twenty by ten now. Two rows of graves, twenty to twenty-five of them, with bones and flint arrowheads taken out of them that year. A cup-marked boulder sits by a tree at the edge of it — nine cups, if you can find them. One stone cist survives.',
+      'The upper one is a Neolithic chambered long cairn, laid east-southeast to west-northwest. Thirty metres by eighteen when it was first written down in 1845; twenty by ten now. Two rows of graves, twenty to twenty-five of them, with flint arrowheads taken out of them that year. A cup-marked boulder sits by a tree at the edge of it — nine cups, if you can find them. One stone cist survives.',
       'It had already been opened and robbed before 1845. Nobody has looked after it since: most of it is gone, and the forestry is planted over what is left. It is one of the oldest things in this parish and the least looked after.',
       'There are two ways up to it. The path runs through the plantation — the same line the coffin road takes — and comes out above the trees onto the muir, a couple of hundred metres of it. When the foresters are working, you go round the outside along the field edge instead and pick the track up again above the wood.',
     ],
@@ -147,7 +147,7 @@ export default function Stoneymollan() {
           </div>
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-muted">
-            Balloch &rarr; Cardross &middot; 6.75 km &middot; coffin road
+            Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
           </p>
           <p className="text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-signal">
             John Muir Way, Section 1 &middot; Three Lochs Way
@@ -161,11 +161,11 @@ export default function Stoneymollan() {
           className="mx-auto max-w-[22ch] text-center text-[28px] leading-[1.1] tracking-tight sm:text-[36px]"
           style={SERIF}
         >
-          A road people have carried their dead along for centuries.
+          Mist, beeches, and the whole loch beneath you.
         </p>
         <p className="mx-auto mt-4 max-w-[44ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
-          Six and a half kilometres of it runs over the muir above us. It is minutes from our
-          door.
+          Six and a half kilometres of the John Muir Way runs over the muir above us — the view
+          the whole length of the loch to Ben Lomond, and minutes from our door.
         </p>
       </div>
 

@@ -340,7 +340,7 @@ const LayoutInner = ({ children, currentPageName }) => {
     }
 
     const ogTags = {
-      'og:title': currentPageName === 'Stoneymollan' ? 'Stoneymollan — the coffin road over Loch Lomond'
+      'og:title': currentPageName === 'Stoneymollan' ? 'Stoneymollan — a morning walk on the John Muir Way over Loch Lomond'
         : isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Can Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
@@ -353,7 +353,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         : isClimatePage
         ? 'Verified climate solutions & crises — after Janine Selendy. Readable in any tongue a reader names, living or long dead. Nobody left behind. The noise is loud. The record is louder.'
         : currentPageName === 'Stoneymollan'
-        ? 'Mist, beeches and two Neolithic cairns, on a morning walk over the old coffin road above Loch Lomond. A view down the whole loch to Ben Lomond.'
+        ? 'Mist, beeches and the whole loch beneath you: a morning walk on the John Muir Way over Loch Lomond, two Neolithic cairns in the wood below, and cabins at the top of the road.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',
       'og:image': ogImageUrl.startsWith('http') ? ogImageUrl : ogOrigin + ogImageUrl,
       'og:type': 'website',

@@ -114,7 +114,7 @@ export async function buildStoneymollanCard(options = {}) {
 
   ctx.fillStyle = MUTED;
   ctx.font = `700 19px ${MONO}`;
-  ctx.fillText('BALLOCH \u2192 CARDROSS  \u00b7  6.75 KM  \u00b7  COFFIN ROAD', W / 2, 256);
+  ctx.fillText('BALLOCH \u2192 CARDROSS  \u00b7  6.75 KM  \u00b7  OVER THE MUIR', W / 2, 256);
   ctx.fillStyle = SIGNAL;
   ctx.font = `700 18px ${MONO}`;
   ctx.fillText('JOHN MUIR WAY, SECTION 1  \u00b7  THREE LOCHS WAY', W / 2, 290);
@@ -137,7 +137,7 @@ export async function buildStoneymollanCard(options = {}) {
   // The lead, in the page's own words rather than a paraphrase of them.
   ctx.fillStyle = INK;
   ctx.font = `400 52px ${SERIF}`;
-  const lead = wrapLines(ctx, 'Mist, beeches and two Neolithic cairns, over Loch Lomond.', MAXW - 60, 3);
+  const lead = wrapLines(ctx, 'Mist, beeches, and the whole loch beneath you.', MAXW - 60, 3);
   lead.forEach((line, i) => ctx.fillText(line, W / 2, 900 + i * 60));
 
   // What is on it, in as much detail as the card has room for.
@@ -145,7 +145,7 @@ export async function buildStoneymollanCard(options = {}) {
   ctx.font = `500 24px ${MONO}`;
   const body = wrapLines(
     ctx,
-    'A morning walk on the old coffin road \u00b7 cabins at the top of it \u00b7 a view down the whole loch to Ben Lomond',
+    'A morning walk on the John Muir Way, straight off our own drive \u00b7 cabins at the top of it \u00b7 the view the whole length of the loch to Ben Lomond',
     MAXW - 90,
     4,
   );
