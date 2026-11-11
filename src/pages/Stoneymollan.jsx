@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RecordRule from '@/components/climate/RecordRule';
 import PageBand from '@/components/stoneymollan/PageBand';
 import FrostFilm from '@/components/stoneymollan/FrostFilm';
-import ShareStoneymollan from '@/components/stoneymollan/ShareStoneymollan';
+import StayHere from '@/components/stoneymollan/StayHere';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -21,17 +21,17 @@ const MORNING = [
   {
     url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/9f0ca0c7a_stoneymollan-path.jpeg',
     caption: 'The path, first frost',
-    line: 'Frost on the stone. The bearers walked this way on mornings like this one.',
+    line: 'The bench, the trees, and the whole hill white with it.',
   },
   {
     url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/e5be7e8c5_stoneymollan-bench.png',
-    caption: 'The bench',
-    line: 'Mist so low you could hear the hill before you saw it.',
+    caption: 'First frost',
+    line: 'Nobody sitting on it yet. The sun is barely over the shoulder of the hill.',
   },
   {
     url: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/f84d01fa3_stoneymollan-sunrise.png',
-    caption: 'First light',
-    line: 'Mist on the water, frost underfoot — a morning that shows you why nobody hurried a coffin over this hill.',
+    caption: 'Sunrise over the field',
+    line: 'Mist lying flat across the field with the trees standing up out of it.',
   },
 ];
 
@@ -110,15 +110,15 @@ const MARKS = [
 ];
 
 const PLACES = [
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png', caption: 'Home, standing in the muir' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg', caption: 'The resting stone' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg', caption: 'Gill and Bunny on the muir' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg', caption: 'The wild moorland' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg', caption: 'Walking the old way' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg', caption: 'The coffin road' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg', caption: 'Ancient beech' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg', caption: 'Forest spirit' },
-  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg', caption: 'Cathedral of trees' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bbf887cc6_IMG_8405.png', caption: 'A red roof in the field below' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b78d8da95_image.jpg', caption: 'Sitting above the water' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/bf4016447_image.jpg', caption: 'The gate on the way up' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/91e4d7d1e_image.jpg', caption: 'The muir, and the loch beneath it' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/040ae5497_image.jpg', caption: 'The dog, out in the field' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/6cf600d78_image.jpg', caption: 'The track through the trees' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/d2ad7a1a0_image.jpg', caption: 'Moss, branches, and a lot of weather' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/7e35c473e_image.jpg', caption: 'Out of the wood' },
+  { url: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/47dc2b93d_image.jpg', caption: 'The old trunk' },
 ];
 
 export default function Stoneymollan() {
@@ -273,51 +273,10 @@ export default function Stoneymollan() {
         </div>
       </section>
 
-      {/* ── US ──
-          Not a booking panel and not a plug: the same centre line, the same rule, and
-          the two honest ways to reach us. The address is literal — we answer it
-          between ten and five, which is where the name comes from. */}
-      <section className="border-t border-record-ink/25 bg-record-paper">
-        <div className={`${SHEET} py-10`}>
-          <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
-            Over Loch Lomond
-          </p>
-          <h2
-            className="mx-auto mt-3 max-w-[24ch] text-center text-[25px] leading-[1.14] tracking-tight"
-            style={SERIF}
-          >
-            We keep the cabins at the foot of the hill this road runs over.
-          </h2>
-          <p className={`${BODY} mt-3`}>
-            Come and walk it. We will tell you where to start, where the cross stone base lies,
-            and which bit of the muir to be off before dark.
-          </p>
-
-          <div className="mx-auto mt-6 flex max-w-[22rem] flex-col items-center gap-2 border-t border-record-ink/20 pt-5">
-            <a
-              href="https://www.overlochlomond.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-mono text-[12px] uppercase tracking-[0.14em] text-record-signal underline decoration-record-signal/30 underline-offset-4 hover:decoration-record-signal"
-            >
-              overlochlomond.com
-            </a>
-            <a
-              href="mailto:10-5@overlochlomond.com"
-              className="font-mono text-[12px] tracking-[0.06em] text-record-ink underline decoration-record-ink/25 underline-offset-4 hover:decoration-record-ink"
-            >
-              10-5@overlochlomond.com
-            </a>
-            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">
-              We answer between 10 and 5
-            </p>
-          </div>
-
-          {/* Hand it on — the card carries the name, the road and the distance, so what
-              arrives on somebody's phone is the page and not a bare link. */}
-          <ShareStoneymollan imageUrl={MORNING[0].url} imageCredit="Gill" />
-        </div>
-      </section>
+      {/* ── THE STAY ──
+          What is actually up here, in short lines rather than a paragraph, and one way to
+          book that pays nobody in the middle. */}
+      <StayHere shareImage={MORNING[0].url} shareCredit="Gill" />
 
       {/* ── THE FOOT ── */}
       <footer className="border-t border-record-ink/25">
