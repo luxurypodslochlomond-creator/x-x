@@ -104,8 +104,11 @@ export default function Stoneymollan() {
           <h1 className="mt-5 flex justify-center">
             <StoneymollanLogotype className="w-full max-w-[17rem] sm:max-w-[21rem]" />
           </h1>
+          {/* Bro's call: no need to label what it is or call it a mark — the hand is
+              obvious under the name, so it is simply credited. A credit names the person;
+              it does not have to explain the craft. */}
           <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
-            Name &amp; mark &middot; Andrew Shandy
+            Andrew Shandy
           </p>
           {/* ── THE NAME IS OLDER THAN EVERYTHING ON THIS SHEET — BUT NOT NEOLITHIC ──
               Bro asked for this beside Andrew's credit, then asked me to double-check he
@@ -309,7 +312,7 @@ export default function Stoneymollan() {
             </Link>
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink">
               Film &middot; Ben Santiago <span className="px-1 text-record-ink/40">/</span> Photos &middot; Gill
-              <span className="px-1 text-record-ink/40">/</span> Mark &middot; Andrew Shandy
+              <span className="px-1 text-record-ink/40">/</span> Art &middot; Andrew Shandy
             </p>
           </div>
         </div>
