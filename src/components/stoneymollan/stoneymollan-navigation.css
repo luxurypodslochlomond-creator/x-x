@@ -6,6 +6,49 @@
   letter-spacing: 0.02em;
 }
 
+/* ── THE DOORS HAVE A PULSE ────────────────────────────────────────────────────
+   Six hand-cut marks, each set at its own degree or two of tilt so the row reads as
+   stamped rather than laid out. A stamp does not move on its own — but a hand reaching
+   for one does, so the marks answer a finger: they straighten out of the tilt, lift a
+   little, and the label under them takes the record's red. On a phone the whole door
+   presses instead.
+
+   The tilt arrives as a variable rather than an inline transform, which is the whole
+   reason this works: an inline transform would win over the stylesheet and nothing
+   could ever move. Nothing loops here and nothing drifts, so the row is still a printed
+   index and not a strip of app buttons. */
+.sm-door-mark {
+  display: block;
+  transform: rotate(var(--sm-tilt, 0deg));
+  transition: transform 280ms cubic-bezier(0.34, 1.4, 0.64, 1), filter 280ms ease;
+}
+.sm-door:hover .sm-door-mark,
+.sm-door:focus-visible .sm-door-mark {
+  transform: rotate(0deg) translateY(-3px) scale(1.1);
+  filter: drop-shadow(0 2px 3px rgba(20, 18, 16, 0.22));
+}
+.sm-door:active .sm-door-mark {
+  transform: rotate(0deg) translateY(0) scale(0.94);
+}
+.sm-door-label {
+  transition: color 200ms ease, letter-spacing 240ms ease;
+}
+.sm-door:hover .sm-door-label,
+.sm-door:focus-visible .sm-door-label {
+  color: rgb(var(--record-red));
+  letter-spacing: 0.14em;
+}
+
+/* The row settles once, left to right, the way a hand lays six things down on a table. */
+@keyframes sm-door-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.sm-door-item {
+  animation: sm-door-in 460ms cubic-bezier(0.22, 0.9, 0.3, 1) both;
+  animation-delay: calc(var(--sm-i, 0) * 45ms);
+}
+
 @media (max-width: 767px) {
   /* Hidden horizontal overflow creates a non-scrolling ancestor that traps sticky.
      Clip keeps the same horizontal bounds without intercepting page scrolling. */

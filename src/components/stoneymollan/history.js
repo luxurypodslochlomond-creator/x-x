@@ -13,6 +13,12 @@
 // Where a thing rests on one popular history rather than on a record — Rob Roy's raid on
 // Inchmurrin, the exact site of Bruce's manor — it is attributed or hedged rather than
 // stated. A hill this small does not need to invent anything.
+//
+// And three: Inchmurrin. The island was a sentence inside another entry, which is not
+// what an island you look at out of the window deserves. It has its own band now, and the
+// band ends where the family actually lives with it — the first thing in the morning and
+// the last thing at night — without putting a word of sentiment on the page. Same facts,
+// same sources, cut back to what earns its keep.
 
 export const MARKS = [
   {
@@ -20,9 +26,9 @@ export const MARKS = [
     label: 'The path that carries his name',
     title: 'John Muir, and the way over the muir',
     body: [
-      'John Muir was born in Dunbar on 21 April 1838 and left Scotland for Wisconsin in 1849, aged eleven. He walked, he wrote, he founded the Sierra Club. He died in 1914.',
+      'John Muir was born in Dunbar on 21 April 1838 and left Scotland for Wisconsin at eleven. He walked, he wrote, he founded the Sierra Club, and he argued to the end of his life in 1914 that wild ground is worth more standing than sold.',
       'In April 2014 a path of 134 miles was opened between Helensburgh on the Clyde and Dunbar on the North Sea, and named for him. Its first section is this one: Helensburgh, over Stoneymollan Muir, down into Balloch — nine miles or so, and the stretch above these cabins is part of it.',
-      'No record says he ever walked it. The road was old before his name went on it: the coffin road it follows had been carrying people across this muir for centuries. That is the better story anyway — a memorial laid over a route that had been worn in long before anyone thought it worth naming.',
+      'No record says he ever walked it. The road was old before his name went on it: the coffin road it follows had been carrying people across this muir for centuries. That is the better story anyway — a memorial laid over a route worn in long before anyone thought it worth naming.',
     ],
     source: 'John Muir Way · John Muir Birthplace Trust',
   },
@@ -32,13 +38,26 @@ export const MARKS = [
     title: 'Up the loch to Ben Lomond',
     body: [
       'The hill stands above the west shore at the south end of the loch, and from the top the ground falls away and the water opens: Ben Lomond at the head of it, 974 metres, the most southerly of Scotland’s Munros.',
-      'The island nearest this end is Inchmurrin — St Mirin’s island, the largest and most southerly in the loch — lying just below the hill. Its ruined castle was probably built for Duncan, the eighth Earl of Lennox, and was described as newly erected in the late fourteenth century; it stood inside a deer park Robert the Bruce is said to have laid out on the island in the early 1300s. Isabella, Countess of Lennox, went to live in it in 1425, after her husband, her father and two of her sons were executed by James I. James VI came over to hunt on it. And the loch’s historians record that Rob Roy raided it.',
       'At the foot of the loch, below the hill: Balloch Castle. The Earls of Lennox built the first one here about 1238 and later moved their seat out to Inchmurrin. The house standing now was built in 1808 for John Buchanan of Ardoch, to plans by Robert Lugar, and the park around it is the one you walk down through into Balloch.',
     ],
     source: 'Historic Environment Scotland · Canmore · Worsley, Loch Lomond (1988)',
   },
   {
     number: '03',
+    label: 'The island in front of you',
+    title: 'Inchmurrin',
+    body: [
+      'Inchmurrin is Eilean Mhirin — St Mirin’s island, named for the man who carried the faith up the Clyde. It is the largest island in the loch, and the largest freshwater island in Britain. From the top of the field you can count the trees on it.',
+      'Its castle was built for the Earls of Lennox and finished by 1393, standing inside a deer park Robert the Bruce is said to have laid out nearly a century before. The family had held the ground at Balloch since the eleventh century; this was the seat they moved out to — an island in the middle of their own water.',
+      'In 1425 James I executed her husband, her father and two of her sons, and Isabella, Countess of Lennox, went to live in that castle and took her grandchildren with her. It was about the last ground the family had left to go to.',
+      'James VI came over to hunt in August 1585, while plague was in Edinburgh, and again in 1617 on his only return to Scotland. The Duke of Lennox wrote ahead that year asking the keeper of the island for food for “a good nombre of sharpe stomaches”.',
+      'Rob Roy’s men took the cattle off it — the loch’s historians record that they held every boat on the Endrick and the loch to do it. Railing an island takes more planning than raiding a road, which is likely why it is still being told three hundred years later.',
+      'The ruin is still in the trees and the island is still worked. From up here it is the first thing you look at in the morning and the last thing you lose when the light goes.',
+    ],
+    source: 'Canmore · Historic Environment Scotland · Worsley, Loch Lomond (1988)',
+  },
+  {
+    number: '04',
     label: 'Who was near, and how near',
     title: 'Kings, raiders, and a queen five years old',
     body: [
@@ -94,18 +113,18 @@ export const MARKS = [
     source: 'Historic Environment Scotland · Canmore · Oxford Dictionary of National Biography · Worsley, Loch Lomond (1988)',
   },
   {
-    number: '04',
+    number: '05',
     label: 'The argument the road ran through',
     title: 'Independence',
     body: [
       'On 23 and 24 June 1314 Bruce broke Edward II’s army at Bannockburn, about twenty-five miles east of here. On 6 April 1320 the Declaration of Arbroath was sealed. In 1328 England recognised Scotland as independent.',
       'On 1 May 1707 the Act of Union ended that. On 18 September 2014 Scotland was asked again and answered No, 55 to 45, on a turnout of nearly eighty-five per cent.',
-      'None of it was settled on this hill. But this road was the sort of road such things were carried along, and the people who walked it stood on every side of every one of those arguments.',
+      'None of it was settled on this hill. But this was the kind of road such things were carried along, and the people who walked it stood on every side of every one of those arguments.',
     ],
     source: 'Bannockburn · Declaration of Arbroath, 1320 · Electoral Commission, 2014',
   },
   {
-    number: '05',
+    number: '06',
     label: 'Why the road is still here',
     title: 'A road nobody watched',
     body: [
@@ -114,7 +133,7 @@ export const MARKS = [
     ],
   },
   {
-    number: '06',
+    number: '07',
     label: 'The door next to ours',
     title: 'Cameron House and the Smolletts',
     body: [
@@ -125,7 +144,7 @@ export const MARKS = [
     source: 'Historic Environment Scotland · Boswell’s Journal of a Tour to the Hebrides, 1773',
   },
   {
-    number: '07',
+    number: '08',
     label: 'What the road is',
     title: 'The coffin road',
     body: [
@@ -136,7 +155,7 @@ export const MARKS = [
     source: 'Helensburgh Heritage Trust · ScotWays heritage path record',
   },
   {
-    number: '08',
+    number: '09',
     title: 'The Cross Stone Road',
     body: [
       'That was its name in the nineteenth century, because there was a stone cross at the high point of the path, where the bearers set the coffin down and rested.',
@@ -144,14 +163,14 @@ export const MARKS = [
     ],
   },
   {
-    number: '09',
+    number: '10',
     title: 'The beeches',
     body: [
       'The avenue of beeches along the route is reckoned two to three hundred years old — planted to line the way, the trunks deep in moss now, framing the path like a nave.',
     ],
   },
   {
-    number: '10',
+    number: '11',
     label: 'The bottom of the garden',
     title: 'Two cairns in Cameron Wood',
     body: [
@@ -164,7 +183,7 @@ export const MARKS = [
     source: 'Canmore · New Statistical Account, 1845 · Megalithic Portal',
   },
   {
-    number: '11',
+    number: '12',
     label: 'What people say',
     title: 'The strike',
     body: [

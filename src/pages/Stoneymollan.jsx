@@ -8,6 +8,7 @@ import WhoCameThrough from '@/components/stoneymollan/WhoCameThrough';
 import { MARKS } from '@/components/stoneymollan/history';
 import MastheadDoors from '@/components/stoneymollan/MastheadDoors';
 import ThisMonth from '@/components/stoneymollan/ThisMonth';
+import TheYear from '@/components/stoneymollan/TheYear';
 import MastheadTongue from '@/components/stoneymollan/MastheadTongue';
 import Wildlife from '@/components/stoneymollan/Wildlife';
 import StayBar from '@/components/stoneymollan/StayBar';
@@ -84,19 +85,31 @@ export default function Stoneymollan() {
             </p>
             <MastheadTongue />
           </div>
-          {/* Andrew Shandy's mark, printed above the name the way it is cut into the sign at
-              the top of the road. It is his file, untouched — multiply drops the white of it
-              into the paper, so it reads as ink rather than as a picture with a box round it.
-              The record's little red square has stood aside for it: this page wears his mark. */}
-          <img
-            src={STONEYMOLLAN_MARK}
-            alt="The Stoneymollan mark, drawn by Andrew Shandy"
-            className="mx-auto mt-4 block h-14 w-14 object-contain"
-            style={{ mixBlendMode: 'multiply' }}
-          />
-          <h1 className="stoneymollan-title mt-2 text-center text-[30px] leading-[1.02] sm:text-[40px]">
-            Stoneymollan
-          </h1>
+          {/* ── THE SIGN ──
+              The mark used to float above the name on its own line, which is exactly why it
+              looked planted there: a logo above a heading is a logo above a heading. So it
+              sits IN the name now, the way a crest sits on a door — one object, cut and
+              written by different hands — and the line under it says whose hands, which is
+              the reason it has any right to be at the top of the page at all.
+
+              His file stays untouched: multiply drops the white of it into the paper, so it
+              reads as ink rather than as a picture with a box round it. The record's little
+              red square has stood aside for it. */}
+          <div className="mt-5 flex items-center justify-center gap-3">
+            <img
+              src={STONEYMOLLAN_MARK}
+              alt=""
+              aria-hidden="true"
+              className="block h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
+              style={{ mixBlendMode: 'multiply' }}
+            />
+            <h1 className="stoneymollan-title text-[30px] leading-none sm:text-[40px]">
+              Stoneymollan
+            </h1>
+          </div>
+          <p className="mt-2 text-center font-mono text-[9px] uppercase tracking-[0.22em] text-record-muted">
+            Mark &middot; Andrew Shandy
+          </p>
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-muted">
             Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
@@ -113,25 +126,6 @@ export default function Stoneymollan() {
           <ThisMonth />
         </div>
       </header>
-
-      {/* ── THE LEAD ── */}
-      <div className={`${SHEET} pb-10 pt-9`}>
-        <p
-          className="mx-auto max-w-[22ch] text-center text-[28px] leading-[1.1] tracking-tight sm:text-[36px]"
-          style={SERIF}
-        >
-          Mist, beeches, and the whole loch beneath you.
-        </p>
-        <p className="mx-auto mt-4 max-w-[44ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
-          Six and a half kilometres of the John Muir Way runs over the muir above us — the view
-          the whole length of the loch to Ben Lomond, and minutes from our door.
-        </p>
-        <p className="mx-auto mt-3 max-w-[44ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
-          A king died at his manor in the parish below. A queen of five sailed for France
-          from Dumbarton, six miles down the vale. The island in front of you was raided
-          for its cattle.
-        </p>
-      </div>
 
       {/* ── THE MORNING ── */}
       <div className={`${SHEET} pb-10`}>
@@ -163,6 +157,29 @@ export default function Stoneymollan() {
             <span className="px-1.5 text-record-ink/25">/</span> Film &middot; Ben Santiago
           </p>
         </PageBand>
+      </div>
+
+      {/* ── THE LEAD ──
+          Moved below the photographs: the top of the page was words, words, words before
+          anything had been shown. Now the hill is in front of you first and the line lands
+          after it, which is also how you would show somebody a place. Shorter than it was —
+          three facts and a sting, no adjectives doing the work pictures can do. */}
+      <div className={`${SHEET} pb-10`}>
+        <p
+          className="mx-auto max-w-[22ch] text-center text-[28px] leading-[1.1] tracking-tight sm:text-[36px]"
+          style={SERIF}
+        >
+          Mist, beeches, and the whole loch beneath you.
+        </p>
+        <p className="mx-auto mt-4 max-w-[42ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
+          The John Muir Way crosses the muir above the cabins — six and a half kilometres of
+          it, the loch the whole way to Ben Lomond, a minute from the door.
+        </p>
+        <p className="mx-auto mt-3 max-w-[42ch] text-center text-[16.5px] leading-[1.68]" style={READING}>
+          A king died in the parish below. A queen of five sailed for France six miles down
+          the vale. The island in front of you was raided for its cattle. None of it is
+          scenery.
+        </p>
       </div>
 
       {/* ── THE FILM ── */}
@@ -201,6 +218,11 @@ export default function Stoneymollan() {
           Red squirrels are back in the park below after fifty years away, which is
           the single best fact about this hill and was nowhere on this page. */}
       <Wildlife />
+
+      {/* ── THE YEAR, MONTH BY MONTH ──
+          The masthead shows the month you are in; this is the whole year, and you can
+          walk it. Somebody planning a week in October can look at October. */}
+      <TheYear />
 
       {/* ── THE PLACES ── */}
       <section className="border-t border-record-ink/25 bg-record-bone">
