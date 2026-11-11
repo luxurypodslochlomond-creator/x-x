@@ -57,11 +57,24 @@ export default function WorkDock({ counts, keeper, view, onView, failed }) {
               >
                 {word}
               </span>
+              {/* ── ONLY THE DOOR YOU ARE IN PRINTS A NUMBER ──────────────────────────
+                  There are two queues here that hold the same twenty-two entries, so the
+                  dock was saying "22 to decide" beside "22 to read" — two alarms, one pile,
+                  and a keeper left choosing between them without being told which was hers.
+                  Now the door she is standing in says the number out loud, and the rest only
+                  say whether anything is behind them, with one small red mark. Quiet, and it
+                  cannot lie about how much work exists. */}
               <span
                 className="font-mono text-[9.5px] uppercase leading-none tracking-[0.05em]"
                 style={{ color: on && waiting ? '#b3261e' : '#8a7f6d' }}
               >
-                {n === null ? '\u00a0' : n === 0 ? 'clear' : unit ? `${n} ${unit}` : `${n}`}
+                {on ? (
+                  n === null ? '\u00a0' : n === 0 ? 'clear' : unit ? `${n} ${unit}` : `${n}`
+                ) : waiting ? (
+                  <span aria-label="work waiting" className="block h-[5px] w-[5px] rounded-full bg-[#b3261e]" />
+                ) : (
+                  '\u00a0'
+                )}
               </span>
               <span className={`absolute inset-x-0 top-0 h-[2px] ${on ? 'bg-[#1e3a2b]' : 'bg-transparent'}`} />
             </button>

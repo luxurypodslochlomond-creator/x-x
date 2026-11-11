@@ -122,46 +122,46 @@ export default function GuestList() {
   const field = 'w-full min-h-[46px] px-3 mb-2 text-[14px] bg-[#faf6ec] border border-[#141210]/25 text-[#141210] placeholder:text-[#8a7f70]';
   const reading = { fontFamily: 'var(--font-reading)' };
 
+  // ── ONE PERSON, ONE LINE AND A HALF ─────────────────────────────────────────
+  // Every row used to be a name, an address, a note, a badge and two full-width action
+  // words, so three keepers filled a phone screen with three people. The same facts are
+  // here: the name and their standing on one line, the address and the reason under it,
+  // and the two things you can do to them at the end of the same row — one tap, no scroll.
   const Row = ({ row }) => (
-    <div className="border-b border-[#141210]/12 py-3">
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <p className="text-[15px] font-semibold text-[#141210] leading-snug" style={reading}>
-            {row.name || row.email}
-          </p>
-          <p className="text-[12px] text-[#6b5f4f] break-all" style={reading}>{row.email}</p>
-          {row.note && <p className="text-[12.5px] text-[#6b5f4f] leading-snug" style={reading}>{row.note}</p>}
-        </div>
-        <span
-          className="text-[11px] px-2 py-1 border flex-shrink-0 whitespace-nowrap"
-          style={{
-            ...reading,
-            color: row.active ? '#1e3a2b' : '#b3261e',
-            borderColor: row.active ? 'rgba(30,58,43,0.35)' : 'rgba(179,38,30,0.35)',
-            background: row.active ? 'rgba(30,58,43,0.05)' : 'rgba(179,38,30,0.05)',
-          }}
-        >
-          {row.is_keeper ? (row.active ? 'has the keys' : 'keys paused') : (row.active ? 'checking' : 'paused')}
-        </span>
+    <div className="flex items-center gap-2 border-b border-[#141210]/12 py-1.5">
+      <div className="min-w-0 flex-1">
+        <p className="flex items-baseline gap-1.5 text-[14px] leading-tight" style={reading}>
+          <span className="truncate font-semibold text-[#141210]">{row.name || row.email}</span>
+          <span
+            className="flex-shrink-0 font-mono text-[9.5px] uppercase tracking-[0.06em]"
+            style={{ color: row.active ? '#1e3a2b' : '#b3261e' }}
+          >
+            {row.is_keeper ? (row.active ? 'keys' : 'paused') : row.active ? 'checking' : 'paused'}
+          </span>
+        </p>
+        <p className="truncate text-[11.5px] text-[#6b5f4f]" style={reading}>
+          {row.email}
+          {row.note ? ` · ${row.note}` : ''}
+        </p>
       </div>
-      <div className="flex flex-wrap gap-5 mt-1.5">
-        <button
-          onClick={() => ask({ change: row.active ? 'pause' : 'restore', row_id: row.id })}
-          disabled={busy}
-          className="min-h-[40px] inline-flex items-center gap-1.5 text-[13px] text-[#141210] border-b border-[#141210]/40 active:text-[#b3261e] disabled:opacity-40"
-          style={reading}
-        >
-          {row.active ? <><Pause className="w-3.5 h-3.5" /> pause</> : <><Play className="w-3.5 h-3.5" /> let them back in</>}
-        </button>
-        <button
-          onClick={() => ask({ change: 'remove', row_id: row.id })}
-          disabled={busy}
-          className="min-h-[40px] inline-flex items-center gap-1.5 text-[13px] text-[#b3261e] border-b border-[#b3261e]/40 disabled:opacity-40"
-          style={reading}
-        >
-          <Trash2 className="w-3.5 h-3.5" /> take off the list
-        </button>
-      </div>
+      <button
+        onClick={() => ask({ change: row.active ? 'pause' : 'restore', row_id: row.id })}
+        disabled={busy}
+        aria-label={row.active ? `Pause ${row.name || row.email}` : `Let ${row.name || row.email} back in`}
+        className="inline-flex min-h-[40px] flex-shrink-0 items-center gap-1 px-1.5 text-[11.5px] text-[#141210] active:text-[#b3261e] disabled:opacity-40"
+        style={reading}
+      >
+        {row.active ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+        {row.active ? 'pause' : 'back in'}
+      </button>
+      <button
+        onClick={() => ask({ change: 'remove', row_id: row.id })}
+        disabled={busy}
+        aria-label={`Take ${row.name || row.email} off the list`}
+        className="inline-flex min-h-[40px] flex-shrink-0 items-center px-1.5 text-[#b3261e] active:opacity-60 disabled:opacity-40"
+      >
+        <Trash2 className="h-3.5 w-3.5" />
+      </button>
     </div>
   );
 

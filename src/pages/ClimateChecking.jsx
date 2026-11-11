@@ -9,9 +9,9 @@ import { Check, X, HelpCircle, ExternalLink, RefreshCw } from 'lucide-react';
 // real machine — they are the pair of eyes the record promises, and this is the whole of their
 // job. Nothing on this page can publish, edit or delete anything.
 const ANSWERS = [
-  { id: 'holds', label: 'The source says it', tone: '#1e3a2b', Icon: Check },
-  { id: 'does_not_hold', label: 'It does not', tone: '#b3261e', Icon: X },
-  { id: 'cannot_tell', label: 'Could not tell', tone: '#b8860b', Icon: HelpCircle },
+  { id: 'holds', label: 'The source says it', short: 'Says it', tone: '#1e3a2b', Icon: Check },
+  { id: 'does_not_hold', label: 'It does not', short: 'Does not', tone: '#b3261e', Icon: X },
+  { id: 'cannot_tell', label: 'Could not tell', short: "Can't tell", tone: '#b8860b', Icon: HelpCircle },
 ];
 
 const WORD = { holds: 'source says it', does_not_hold: 'it does not', cannot_tell: 'could not tell' };
@@ -159,12 +159,13 @@ export default function ClimateChecking({ plain = false, onChange }) {
         )}
         {/* Inside the keeper's room this is part of a page, not a page of its own: the
             headline steps down so the work is the loudest thing on the screen. */}
-        <h1
-          className={plain ? 'text-[17px] font-semibold leading-snug text-record-ink mb-1' : 'font-black text-record-ink text-2xl leading-tight mb-2'}
-          style={{ fontFamily: 'var(--font-reading)' }}
-        >
-          {me?.name ? `${me.name}, open the source and say what you find.` : 'Open the source and say what you find.'}
-        </h1>
+        {/* Inside the room the sentence above has already told her what she is doing. A
+            second heading saying it again was the "two headers stacked" the page wore. */}
+        {!plain && (
+          <h1 className="font-black text-record-ink text-2xl leading-tight mb-2" style={{ fontFamily: 'var(--font-reading)' }}>
+            {me?.name ? `${me.name}, open the source and say what you find.` : 'Open the source and say what you find.'}
+          </h1>
+        )}
         <p className={plain ? 'text-[13.5px] text-record-ink/75 leading-relaxed mb-1' : 'text-sm text-record-ink/75 leading-relaxed mb-1'} style={{ fontFamily: 'var(--font-reading)' }}>
           {plain
             ? 'Open the link, then say what you find. Nothing here publishes or edits anything.'
@@ -214,7 +215,12 @@ export default function ClimateChecking({ plain = false, onChange }) {
                     <ExternalLink className="w-3.5 h-3.5" /> Open the source
                   </a>
                 ) : (
-                  <p className="text-[12.5px] text-record-red leading-snug mb-3" style={{ fontFamily: 'var(--font-reading)' }}>No source link on this entry</p>
+                  // A comment has nothing to open, so it is not a fault and it must not be
+                  // printed in the record's warning red. It asks for the same thing in the
+                  // same words, quietly: read it, then say what you make of it.
+                  <p className="text-[12.5px] text-record-muted leading-snug mb-2.5" style={{ fontFamily: 'var(--font-reading)' }}>
+                    No link on this one — read the words, then say what you make of them.
+                  </p>
                 )}
 
                 {already.length > 0 && (
@@ -228,59 +234,65 @@ export default function ClimateChecking({ plain = false, onChange }) {
                   </div>
                 )}
 
-                {/* One under the other on a phone, three across only when there is room. Three
-                    nine-pixel labels in a row is not a choice anyone can read at eleven at night. */}
-                <div className="grid grid-cols-1 gap-2 mb-2 sm:grid-cols-3">
-                  {ANSWERS.map(({ id, label, tone, Icon }) => {
+                {/* ── THREE ANSWERS, ONE ROW ─────────────────────────────────────────
+                    Four full-width buttons stacked under every entry made one comment taller
+                    than the phone, and the last of them sat there greyed out looking broken
+                    because nothing had been chosen yet. The three answers fit across a hand;
+                    the note and the save only appear once there is something to save, so the
+                    card is never more form than it is entry. */}
+                <div className="grid grid-cols-3 gap-1.5">
+                  {ANSWERS.map(({ id, short, tone, Icon }) => {
                     const on = d.verdict === id;
                     return (
                       <button
                         key={id}
+                        type="button"
                         onClick={() => setDraft(entry.id, { verdict: id })}
-                        className="flex items-center justify-center gap-2 min-h-[50px] px-3 border-2 text-[14px] leading-tight sm:flex-col sm:gap-1 sm:px-1 sm:text-[11.5px]"
+                        aria-pressed={on}
+                        className="flex min-h-[44px] flex-col items-center justify-center gap-0.5 border px-1 py-1.5 text-[11.5px] leading-none transition-colors active:opacity-70"
                         style={{
                           fontFamily: 'var(--font-reading)',
-                          borderColor: on ? tone : 'rgba(26,22,18,0.25)',
+                          borderColor: on ? tone : 'rgba(26,22,18,0.28)',
                           color: on ? '#f4efe4' : tone,
                           background: on ? tone : 'transparent',
                         }}
                       >
-                        <Icon className="w-4 h-4" />
-                        {label}
+                        <Icon className="h-3.5 w-3.5" />
+                        {short}
                       </button>
                     );
                   })}
                 </div>
 
-                {d.verdict && d.verdict !== 'holds' && (
-                  <textarea
-                    value={d.note || ''}
-                    onChange={(e) => setDraft(entry.id, { note: e.target.value })}
-                    rows={3}
-                    placeholder="What did you find? A few words is enough."
-                    className="w-full min-h-[46px] p-2.5 text-[14px] bg-record-paper border-2 border-record-ink/25 text-record-ink mb-2"
-                    style={{ fontFamily: 'var(--font-reading)' }}
-                  />
+                {d.verdict ? (
+                  <div className="mt-2">
+                    <textarea
+                      value={d.note || ''}
+                      onChange={(e) => setDraft(entry.id, { note: e.target.value })}
+                      rows={2}
+                      placeholder={
+                        d.verdict === 'holds'
+                          ? 'Anything worth adding (optional).'
+                          : 'What did you find? A few words is enough.'
+                      }
+                      className="w-full min-h-[44px] p-2.5 text-[15px] bg-record-paper border border-record-ink/25 text-record-ink mb-1.5"
+                      style={{ fontFamily: 'var(--font-reading)' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => save(entry)}
+                      disabled={saving === entry.id}
+                      className="w-full min-h-[44px] bg-record-ink text-record-paper text-[14px] font-semibold active:opacity-80 disabled:opacity-50"
+                      style={{ fontFamily: 'var(--font-reading)' }}
+                    >
+                      {saving === entry.id ? 'Saving…' : 'Save my note'}
+                    </button>
+                  </div>
+                ) : (
+                  <p className="mt-1.5 text-[12px] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
+                    Pick one of the three and a box appears for your words.
+                  </p>
                 )}
-                {d.verdict === 'holds' && (
-                  <textarea
-                    value={d.note || ''}
-                    onChange={(e) => setDraft(entry.id, { note: e.target.value })}
-                    rows={2}
-                    placeholder="Anything worth adding (optional)."
-                    className="w-full min-h-[46px] p-2.5 text-[14px] bg-record-paper border-2 border-record-ink/25 text-record-ink mb-2"
-                    style={{ fontFamily: 'var(--font-reading)' }}
-                  />
-                )}
-
-                <button
-                  onClick={() => save(entry)}
-                  disabled={!d.verdict || saving === entry.id}
-                  className="w-full min-h-[48px] bg-record-ink text-record-paper text-[14px] font-semibold tracking-[0.02em] disabled:opacity-30"
-                  style={{ fontFamily: 'var(--font-reading)' }}
-                >
-                  {saving === entry.id ? 'Saving…' : 'Put my name to it'}
-                </button>
               </div>
             );
           })}
