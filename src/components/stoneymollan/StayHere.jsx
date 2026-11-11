@@ -34,6 +34,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           <p>Wood-fired hot tub.</p>
           <p>Wood-fired sauna.</p>
           <p>Cold water plunge.</p>
+          <p>Fire pit, under the stars.</p>
           <p className="text-record-signal">A view that turns all the way round.</p>
         </div>
 

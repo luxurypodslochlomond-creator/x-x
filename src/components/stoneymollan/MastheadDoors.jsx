@@ -48,7 +48,7 @@ export default function MastheadDoors() {
               <span className="block" style={{ transform: `rotate(${tilt}deg)` }}>
                 <Mark className="h-[26px] w-[26px]" />
               </span>
-              <span className="truncate font-mono text-[8px] uppercase leading-none tracking-[0.08em]">
+              <span className="block w-full text-center font-mono text-[8px] uppercase leading-none tracking-[0.08em] indent-[0.08em]">
                 {label}
               </span>
             </a>

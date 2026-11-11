@@ -47,33 +47,39 @@ export function KeyMark({ className }) {
   );
 }
 
-/* The stay — the cabin in elevation, eaves overshooting the walls the way a real
-   one does, a chimney that leans into the roof with one curl of smoke coming off it,
-   and the door lit. That curl is the whole mark: a bothy with a fire in it. */
+/* The stay — the cabin in elevation, eaves overshooting the walls the way a real one
+   does, an open door, and the fire where it actually is: out in the yard, in the pit.
+   There is no chimney and no smoke, because these cabins do not burn wood inside
+   them. The fire is beside the house, not in it, and it is the one red on the mark. */
 export function CabinMark({ className }) {
   return (
     <Mark className={className}>
-      <path d="M1.9 11.6 12 3.6l10.1 8" />
-      <path d="M4.7 10.4v10.2h14.6V10.4" />
-      <path d="M2.4 20.6h19.2" />
-      <path d="M15.7 6.6V4.2h1.7v4.3" />
-      <path d="M17.2 3.5c1.2-.4 1.5-1.8.5-2.3" />
-      <path d="M10.7 20.6v-4.7h2.7v4.7Z" fill={ACCENT} stroke="none" />
+      <path d="M1.8 12.2 8 6.2l6.2 6" />
+      <path d="M3.3 11.2v9.2" />
+      <path d="M12.7 11.2v9.2" />
+      <path d="M2.6 20.4h18.8" />
+      <path d="M6.7 20.4v-4.4h2.7v4.4" />
+      <path
+        d="M17.6 20.4c-1.9-1.7-1.8-4.3.1-6 .4-.3.7-.7.9-1.1.5 1.4 1.7 2.2 2.1 3.4.6 1.7-.5 3.4-2.2 3.7-.3.1-.6.1-.9 0Z"
+        fill={ACCENT}
+        stroke="none"
+      />
     </Mark>
   );
 }
 
-/* The road — a leaning standing stone with a cross cut into it, in red, and the
-   grass it is standing in. Surveyed rather than decorated: a stone, a ground line,
-   two ticks of grass, and the cut that gave the old road its name. */
+/* The road — a leaning standing stone with a cross cut into it, in red, wide enough
+   at the foot to stand level with the other five marks instead of reading as a thin
+   line between two heavy ones. Surveyed rather than decorated: a stone, a ground
+   line, two ticks of grass, and the cut that gave the old road its name. */
 export function CrossStoneMark({ className }) {
   return (
     <Mark className={className}>
-      <path d="M10.3 20.4 12.5 4.2l1.2-.5 1.4 16.7Z" />
-      <path d="M5.2 20.6h13.6" />
-      <path d="M12.7 7.9l.6 4.6" stroke={ACCENT} />
-      <path d="M11.2 9.4l4.2.4" stroke={ACCENT} />
-      <path d="M7.6 18.6l1.1-.9M16.2 18.4l-1.1-.8" />
+      <path d="M8.8 20.4 11.9 3.8l1.4-.2 1.7 16.8Z" />
+      <path d="M4.4 20.6h15.2" />
+      <path d="M12.4 8.3l.5 4.7" stroke={ACCENT} />
+      <path d="M10.7 10l4.6.4" stroke={ACCENT} />
+      <path d="M6.4 18.8l1.3-1M17.7 18.6l-1.3-1" />
     </Mark>
   );
 }
@@ -108,20 +114,20 @@ export function EnvelopeMark({ className }) {
 }
 
 /* Red squirrel — the tail is the animal: one sweep up from the rump and over the
-   back, curling inwards until it stops on itself. Ears, a forepaw, two feet and a
-   red eye are all it takes; anything more and it stops being a squirrel and becomes
-   a pattern at twenty-six pixels. */
+   back, curling inwards until it stops on itself. The red is the inner curl of that
+   tail rather than the eye, because at twenty-six pixels an eye is a single dot and
+   a red dot disappears, while a red curl reads across a room. Ears, a forepaw and two
+   feet are all the rest it needs. */
 export function SquirrelMark({ className }) {
   return (
     <Mark className={className} strokeWidth={1.7}>
-      <path d="M8.4 19.4c-2.9-.7-4.6-3.4-3.9-6.2.7-2.8 3.5-4.4 6.1-3.6 1.9.6 3 2.5 2.7 4.4" />
-      <path d="M13.2 14c-.2 1.1-1.2 1.8-2.3 1.5" />
-      <path d="M8.4 19.4c0-2.7 1.6-4.7 4.1-5.4" />
-      <path d="M12.5 14c0-1.5 1.2-2.7 2.7-2.7s2.7 1.2 2.7 2.7c0 1.1-.6 2-1.6 2.4" />
-      <path d="M15.4 11.4l.5-1.8" />
-      <path d="M11.3 16.6l1.7-.7" />
-      <path d="M9.9 20.3c.8.4 1.9.4 2.7 0" />
-      <circle cx="15.3" cy="12.8" r="0.75" fill={ACCENT} stroke="none" />
+      <path d="M9.6 19.8C6 19.1 3.7 15.9 4.7 12.4c1-3.4 4.4-5.4 7.7-4.6 2.4.6 3.9 2.7 3.7 5" />
+      <path d="M15.6 12.8c-.3 1.3-1.6 2.1-2.9 1.8" stroke={ACCENT} />
+      <path d="M9.6 19.8c.3-3.4 2.4-6 5.5-6.7" />
+      <path d="M14.9 13.1c0-1.9 1.6-3.4 3.5-3.4s3.5 1.5 3.5 3.4c0 1.3-.8 2.5-2 3" />
+      <path d="M18.4 9.7l.4-2.1" />
+      <path d="M13.4 16.6l1.9-.7" />
+      <path d="M10.7 20.9c1 .5 2.3.5 3.2 0" />
     </Mark>
   );
 }
