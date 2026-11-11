@@ -41,7 +41,10 @@ const LIFE = [
     Mark: BirdMark,
     name: 'Osprey',
     tilt: '-rotate-[1.3deg]',
-    line: 'Over the loch from mid-March into September, fishing. Big, slow wingbeats, and then a dive. The park authority’s own window, not a guess.',
+    /* The month list says the last week of March, so this says the same thing. Two
+       slightly different spring dates on one sheet is the kind of smear a reader
+       notices even when neither of them is wrong. */
+    line: 'Over the loch from the last week of March into September, fishing. Big, slow wingbeats, and then a dive. The park authority’s own window, not a guess.',
   },
 ];
 
@@ -78,8 +81,8 @@ export default function Wildlife() {
             In summer the west-coast oakwoods fill with wood warbler, redstart and pied
             flycatcher — birds that have almost nowhere else left in Britain. Loch Lomond’s
             woods are among the most important in Europe for mosses and lichens, this wet
-            west-coast woodland being as rare a thing as it is unglamorous. This hill is the
-            same rain, the same coast, a few miles down the road.
+            west-coast woodland being as rare a thing as it is unglamorous. That wood is
+            this hill: the loch straight below it, and the rain that makes it what it is.
           </p>
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">

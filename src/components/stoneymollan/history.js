@@ -152,7 +152,11 @@ export const MARKS = [
     label: 'What the road is',
     title: 'The coffin road',
     body: [
-      'Balloch, over the muir, down to the clachan of Kirkton and St Mahew’s Chapel at Cardross: about five miles, walked by the bearers with the coffin shouldered between them.',
+      /* The masthead gives this road as 6.75 km, which is a shade over four miles —
+         so "about five miles" on the same sheet was asking a reader to notice a
+         disagreement. Both are a walk of the same road, and "four or five" holds
+         whichever way you measure it. */
+      'Balloch, over the muir, down to the clachan of Kirkton and St Mahew’s Chapel at Cardross: four or five miles, walked by the bearers with the coffin shouldered between them.',
       'Feet first, so the spirit could not turn back for home. The coffin was never set down on the ground. Streams cross the route the whole way along, because running water was said to stop a spirit following.',
       'Two long-distance paths carry it now, the Three Lochs Way and the John Muir Way — which is why a road built for the dead is walked by thousands of the living every year.',
     ],

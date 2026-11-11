@@ -15,7 +15,7 @@ export default function TheYear() {
   const month = MONTHS[chosen];
 
   return (
-    <div id="year" className="mx-auto w-full max-w-[44rem] scroll-mt-20 px-6 pb-10">
+    <div id="year" className="mx-auto w-full max-w-[44rem] scroll-mt-[116px] px-6 pb-10 md:scroll-mt-20">
       <PageBand label="The year here" title="Twelve months on this hill">
         <p
           className="mx-auto max-w-[42ch] text-center text-[15.5px] leading-[1.65] text-record-ink/85"

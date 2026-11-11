@@ -132,17 +132,23 @@ export function SquirrelMark({ className }) {
   );
 }
 
-/* Roe deer — antlers, and the long face. */
+/* Roe deer — the head, seen straight on. The old mark was two antlers over a stick,
+   and at thirty-two pixels inside a plate it stopped being a deer and became a fork;
+   a roe's real signature is the narrow long face and the big swept-back ears, so the
+   face and the ears carry it and the antlers are only a pair of short spikes with one
+   brow tine each. Two eyes, because an animal with no eyes reads as a symbol and not
+   as something you might actually meet in the long grass at the top. */
 export function DeerMark({ className }) {
   return (
     <Mark className={className} strokeWidth={1.7}>
-      <path d="M12 20.3v-5.5" />
-      <path d="M9.2 12.6c0-1.7 1.2-3 2.8-3s2.8 1.3 2.8 3" />
-      <path d="M9.2 10.5 7.8 7.3l-1.9.7" />
-      <path d="M14.8 10.5 16.2 7.3l1.9.7" />
-      <path d="M7.8 7.3 6.7 4.6" />
-      <path d="M16.2 7.3l1.1-2.7" />
-      <path d="M7.8 7.3 6 8.1" />
+      <path d="M12 9.6c1.9 0 3.2 1.6 3.2 3.7 0 2.3-1.5 4.4-3.2 5.5-1.7-1.1-3.2-3.2-3.2-5.5 0-2.1 1.3-3.7 3.2-3.7Z" />
+      <path d="M9 11.6C6.8 10.8 5.2 9 4.6 6.9c1.8.1 3.6 1.1 4.6 2.8" />
+      <path d="M15 11.6c2.2-.8 3.8-2.6 4.4-4.7-1.8.1-3.6 1.1-4.6 2.8" />
+      <path d="M10.5 9.7 9.8 7 8.3 5.4M10 7.8l1.2-.6" />
+      <path d="M13.5 9.7 14.2 7l1.5-1.6M14 7.8l-1.2-.6" />
+      <circle cx="10.6" cy="13" r="0.62" fill="currentColor" stroke="none" />
+      <circle cx="13.4" cy="13" r="0.62" fill="currentColor" stroke="none" />
+      <path d="M11.1 16.1h1.8" />
     </Mark>
   );
 }

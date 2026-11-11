@@ -125,7 +125,7 @@ export default function Stoneymollan() {
           {/* Said in their own words — the same three that head their Instagram — because it is
               the truest short answer to "what is it", and it lets the wrong guest go quietly. */}
           <p className="text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
-            Hillside cabins &middot; hot tub &middot; sauna &middot; fire pit
+            Hillside cabins &middot; hot tub &middot; sauna &middot; cold water barrel &middot; fire pit
           </p>
           <MastheadDoors />
           <ThisMonth />
