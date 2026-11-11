@@ -1,13 +1,10 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import ShareStoneymollan from './ShareStoneymollan';
+import { BOOK_DIRECT, WEBSITE, EMAIL } from './links';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
-
-// The direct booking engine on their own site. Never a platform: a booking taken here
-// is a booking that reaches Brian and Gillian, which is the whole point of the block.
-const BOOK_DIRECT = 'https://hotels.cloudbeds.com/reservation/CD3LLY';
 
 /**
  * The stay — what is actually up here, said in short lines instead of a paragraph, and
@@ -17,7 +14,7 @@ const BOOK_DIRECT = 'https://hotels.cloudbeds.com/reservation/CD3LLY';
  */
 export default function StayHere({ shareImage, shareCredit }) {
   return (
-    <section className="border-t border-record-ink/25 bg-record-paper">
+    <section id="stay" className="scroll-mt-4 border-t border-record-ink/25 bg-record-paper">
       <div className="mx-auto w-full max-w-[44rem] px-6 py-10">
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.24em] text-record-muted">
           Over Loch Lomond &middot; Brian &amp; Gillian
@@ -90,7 +87,7 @@ export default function StayHere({ shareImage, shareCredit }) {
 
         <div className="mx-auto mt-5 flex flex-col items-center gap-1.5">
           <a
-            href="https://www.overlochlomond.com"
+            href={WEBSITE}
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink underline decoration-record-ink/25 underline-offset-4 hover:decoration-record-ink"
@@ -98,7 +95,7 @@ export default function StayHere({ shareImage, shareCredit }) {
             overlochlomond.com
           </a>
           <a
-            href="mailto:10-5@overlochlomond.com"
+            href={`mailto:${EMAIL}`}
             className="font-mono text-[11px] tracking-[0.06em] text-record-muted underline decoration-record-ink/20 underline-offset-4 hover:decoration-record-ink"
           >
             10-5@overlochlomond.com

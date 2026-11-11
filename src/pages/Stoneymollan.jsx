@@ -6,6 +6,9 @@ import FrostFilm from '@/components/stoneymollan/FrostFilm';
 import StayHere from '@/components/stoneymollan/StayHere';
 import WhoCameThrough from '@/components/stoneymollan/WhoCameThrough';
 import { MARKS } from '@/components/stoneymollan/history';
+import MastheadDoors from '@/components/stoneymollan/MastheadDoors';
+import Wildlife from '@/components/stoneymollan/Wildlife';
+import StayBar from '@/components/stoneymollan/StayBar';
 
 const SERIF = { fontFamily: 'var(--record-display)' };
 const READING = { fontFamily: 'var(--font-record-reading)' };
@@ -58,7 +61,7 @@ const PLACES = [
 
 export default function Stoneymollan() {
   return (
-    <div className="relative min-h-screen bg-record-paper text-record-ink twcc-scanlines">
+    <div className="relative min-h-screen bg-record-paper pb-20 text-record-ink twcc-scanlines md:pb-0">
       {/* ── THE MASTHEAD ──
           The record's own top, set down the middle: a bar of the mark's red across the
           page, then the name with its little square, ruled under by a hand-drawn line,
@@ -85,6 +88,7 @@ export default function Stoneymollan() {
           <p className="text-center font-mono text-[10px] uppercase leading-[1.9] tracking-[0.2em] text-record-signal">
             John Muir Way, Section 1 &middot; Three Lochs Way
           </p>
+          <MastheadDoors />
         </div>
       </header>
 
@@ -145,7 +149,7 @@ export default function Stoneymollan() {
       </div>
 
       {/* ── THE MARKS ── */}
-      <div className={`${SHEET} space-y-9 pb-12`}>
+      <div id="history" className={`${SHEET} space-y-9 pb-12`}>
         {MARKS.map((mark) => (
           <PageBand
             key={mark.number}
@@ -169,6 +173,12 @@ export default function Stoneymollan() {
           </PageBand>
         ))}
       </div>
+
+      {/* ── WHAT LIVES HERE ──
+          The wood is a plantation with old trees in it, and it is full of animals.
+          Red squirrels are back in the park below after fifty years away, which is
+          the single best fact about this hill and was nowhere on this page. */}
+      <Wildlife />
 
       {/* ── THE PLACES ── */}
       <section className="border-t border-record-ink/25 bg-record-bone">
@@ -213,12 +223,20 @@ export default function Stoneymollan() {
             <Link to="/XEqualsX" className="font-mono text-[11px] tracking-[0.3em] text-record-mark">
               x = x
             </Link>
+            <Link
+              to="/"
+              className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-ink/70 underline decoration-record-ink/25 underline-offset-4"
+            >
+              Universal Frequency 51
+            </Link>
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">
               Film &middot; Ben Santiago <span className="px-1 text-record-ink/25">/</span> Photos &middot; Gill
             </p>
           </div>
         </div>
       </footer>
+
+      <StayBar />
     </div>
   );
 }

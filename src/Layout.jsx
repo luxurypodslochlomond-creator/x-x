@@ -711,7 +711,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         )}
 
         {/* MOBILE HEADER */}
-        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && currentPageName !== 'Stoneymollan' && (
         <header className={`lg:hidden sticky ${isOffline ? 'top-6' : 'top-0'} left-0 right-0 z-[60] bg-[#f4efe4]/95 backdrop-blur-xl border-b border-[#1a1612]/15`}>
           <div className="flex items-center justify-between p-4">
             {(currentPageName.startsWith('Scott') || currentPageName.startsWith('CB51')) ? (
@@ -797,7 +797,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
 
         {/* MOBILE MENU */}
-                  {isMobileMenuOpen && currentPageName !== 'Platform' && (
+                  {isMobileMenuOpen && currentPageName !== 'Platform' && currentPageName !== 'Stoneymollan' && (
                     <div className={`lg:hidden fixed inset-x-0 bottom-0 ${isOffline ? 'top-[90px]' : 'top-[72px]'} bg-[#f4efe4] z-[55] overflow-y-auto pb-6`} style={{ animation: 'sorted-enter 0.24s cubic-bezier(0,0,0.2,1)' }}>
                       <div className="p-3 pt-6 space-y-2 flex flex-col items-stretch">
                           <LanguageButton tone="paper" />
@@ -868,7 +868,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                   )}
 
         {/* DESKTOP SIDEBAR */}
-        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && (
+        {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && currentPageName !== 'Stoneymollan' && (
         <aside className={`hidden lg:block fixed left-0 ${isOffline ? 'top-6' : 'top-0'} w-80 h-screen border-r border-[#1a1612]/15 bg-[#f4efe4]/95 overflow-y-auto z-50`}>
           <div className="p-6 border-b border-[#1a1612]/15">
             <Link to={createPageUrl(isCB51Page ? "CB51" : isPS51Page ? "PetSounds51" : "Welcome")} className="flex items-center gap-3 mb-4">
@@ -984,7 +984,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                             </aside>
                             )}
 
-        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' ? 'lg:pt-6' : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
+        <main className={`${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && currentPageName !== 'Stoneymollan' ? 'lg:ml-80' : ''} ${currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && currentPageName !== 'Family51' && currentPageName !== 'Stoneymollan' ? 'lg:pt-6' : ''} min-h-screen w-full`} style={{ willChange: 'contents', maxWidth: '100vw', overflowX: 'hidden' }}>
           {children}
               {currentPageName !== 'AI51' && currentPageName !== 'Earth51' && currentPageName !== 'BuzzStop' && currentPageName !== 'Platform' && !isTracktPage && !isSortedSubPage && !isSortedPage && (
               <footer className="border-t border-[#1a1612]/15 bg-[#efe7d6]/60">
