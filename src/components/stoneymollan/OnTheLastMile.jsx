@@ -11,10 +11,15 @@ import { CALL_NUMBER, CALL_TEL } from '@/components/stoneymollan/links';
    or in Boston, and reads aloud as something a stranger abroad can actually dial.
 
    The second is for whoever arrives on their own. Not a warning box, not a lecture —
-   four plain facts about the last two miles that somebody should have told them before
+   four plain facts about the last mile and a half that somebody should have told them before
    they set off in the dark. The road has no pavement and no lights for the last of it,
    the hill postcode covers a lot of hillside, and a message is easier to send from the
-   village than from the top of it. */
+   village than from the top of it.
+
+   "The last two miles" stood at the head of this for months and was wrong. Measured
+   along the road from Balloch station to the top, the climb is about a mile and a half
+   — the same figure the way-in machine is given — so that is what the block says now,
+   in the heading and in the safety line below. */
 
 const READING = { fontFamily: 'var(--font-record-reading)' };
 const SERIF = { fontFamily: 'var(--record-display)' };
@@ -24,7 +29,7 @@ export default function OnTheLastMile() {
     <div className="mx-auto w-full max-w-[38rem] text-left">
       <div className="border border-record-ink/25 bg-record-bone px-4 py-5">
         <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-red">
-          The last two miles
+          The last mile and a half
         </p>
 
         {/* The number is the loudest thing in the block, on its own line, because a

@@ -62,14 +62,17 @@ export default function WayInMachine() {
   return (
     <div className="mx-auto w-full max-w-[38rem] text-left">
       <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-red">
-        Work it out
+        The way in, worked out
       </p>
-      <h3 className="mt-1.5 text-[22px] leading-tight text-record-ink" style={SERIF}>
-        Tell it where you are coming from.
+      {/* It used to say "Tell it where you are coming from", which was the page
+          telling the reader what to do — the voice of a form at a wake. Now it simply
+          says what the two boxes are for, and the button does the asking. */}
+      <h3 className="mt-1.5 text-[22px] leading-[1.15] text-record-ink" style={SERIF}>
+        Where you&rsquo;re coming from, and when.
       </h3>
-      <p className="mt-1.5 text-[15px] leading-[1.6] text-record-ink/85" style={READING}>
-        A city, an airport, a station, a postcode — and when. It will give you the ways in,
-        the honest times, and what to check before you set off.
+      <p className="mt-1.5 text-[14.5px] leading-[1.5] text-record-ink/85" style={READING}>
+        A city, an airport, a station, a postcode — and the hour you land. It reads today&rsquo;s
+        trains and flights and gives you the ways in, with what to check before you set off.
       </p>
 
       <div className="mt-4 space-y-3">
@@ -93,7 +96,7 @@ export default function WayInMachine() {
         disabled={busy || !from.trim()}
         className="mt-4 flex min-h-[48px] w-full items-center justify-center border-2 border-record-ink px-4 font-mono text-[11.5px] uppercase tracking-[0.13em] text-record-ink transition-colors active:bg-record-ink active:text-record-paper disabled:border-record-ink/25 disabled:text-record-ink/40"
       >
-        {busy ? 'Working it out…' : 'Work it out'}
+        {busy ? 'Working it out…' : 'Show me the way in'}
       </button>
 
       {error && (
