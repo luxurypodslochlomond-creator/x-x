@@ -180,7 +180,7 @@ export default function GuestList() {
         </p>
       )}
 
-      <div className="border-t border-[#141210]/20 pt-4 mb-6">
+      <div className="border-t border-[#141210]/20 pt-3 mb-4">
         <p className={label} style={reading}><KeyRound className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />People who hold the keys</p>
         {!loading && !keepers.length && (
           <p className="text-[14px] text-[#3a342c] py-1" style={reading}>
@@ -198,7 +198,7 @@ export default function GuestList() {
         </p>
       </div>
 
-      <div className="border-t border-[#141210]/20 pt-4 mb-6">
+      <div className="border-t border-[#141210]/20 pt-3 mb-4">
         <p className={label} style={reading}><UserPlus className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />Ask somebody to check</p>
         <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mb-2" style={reading}>
           A checker opens what is waiting and says whether each source holds up. They cannot publish, edit or delete

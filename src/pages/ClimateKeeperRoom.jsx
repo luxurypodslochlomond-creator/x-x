@@ -9,6 +9,10 @@ import GuestList from '@/components/climate/keeper/GuestList';
 import WorkDock from '@/components/climate/keeper/WorkDock';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
+// One set of measures for everything standing inside the room, so tapping between Decide,
+// Check, People and Record no longer swaps the type scale, the width or the padding
+// underneath the same header. See the file for why that was the real fault.
+import '@/components/climate/keeper/keeper-room.css';
 
 // ── WHAT A KEEPER SEES FIRST IS THE WORK ───────────────────────────────────────
 // This room has been through several shapes, and every one of them opened with prose: a
@@ -186,7 +190,7 @@ export default function ClimateKeeperRoom() {
       {state === 'ready' && (
         // Room at the foot of the glass for the dock, so the last entry is never hidden
         // under the way between jobs. Nothing is held open on a wide screen.
-        <div className="pb-24 lg:pb-0">
+        <div className="keeper-room pb-24 lg:pb-0">
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-[13px] text-[#6b5f4f]" style={reading}>
               <span className="font-semibold text-[#141210]">{who.name || 'Keeper'}</span>
@@ -202,8 +206,8 @@ export default function ClimateKeeperRoom() {
           </div>
 
           <h1
-            className="mt-1 text-[#141210] text-[25px] sm:text-[28px]"
-            style={{ ...reading, fontWeight: 600, lineHeight: 1.12, letterSpacing: '-0.015em', textWrap: 'pretty' }}
+            className="room-title mt-1 text-[#141210] text-[22px] sm:text-[24px]"
+            style={{ ...reading, fontWeight: 600, lineHeight: 1.18, letterSpacing: '-0.012em', textWrap: 'pretty' }}
           >
             {headline}
           </h1>
@@ -211,7 +215,7 @@ export default function ClimateKeeperRoom() {
           {/* The names, not a padlock and a number. Said once, thin, on one line — the door
               to change the list is in the dock below, so this is not also a button. */}
           {who.isKeeper && (
-            <p className="mt-1.5 flex items-start gap-1.5 text-[12.5px] leading-snug text-[#6b5f4f]" style={reading}>
+            <p className="mt-1 flex items-start gap-1.5 text-[12px] leading-snug text-[#6b5f4f]" style={reading}>
               <KeyRound className="mt-[3px] h-3.5 w-3.5 flex-shrink-0 text-[#b3261e]" strokeWidth={2.2} />
               <span>
                 Keys held by {keeperNames || 'you'}
@@ -241,7 +245,7 @@ export default function ClimateKeeperRoom() {
 
           {/* One job at a time. Each room owns its own empty state, so nothing is ever shown
               as finished by the page that chose not to draw it. */}
-          <div className="mt-4">
+          <div className="mt-3">
             {activeView === 'decide' && who.isKeeper && <DecideQueue plain onChange={count} />}
             {activeView === 'check' && <ClimateChecking plain onChange={count} />}
             {activeView === 'people' && who.isKeeper && <GuestList />}

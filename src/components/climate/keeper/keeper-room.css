@@ -1,0 +1,109 @@
+/* ── THE ROOM, SET ONCE ──────────────────────────────────────────────────────────
+   The reason this page felt like tapping between five different websites is not colour
+   and not spacing on any one component. Each pane — deciding, checking, people, the
+   record — was built on its own day, and each arrived with its own type scale, its own
+   padding, its own heading weight, and its own idea of how wide a line should be. The
+   header stayed still, the body underneath changed shape, and the eye read that as
+   "out of place."
+
+   So the room gets one set of measures, applied once, to everything standing inside it.
+   Nothing is re-designed here and no component is rewritten: this file only stops each
+   pane shouting in its own voice.
+
+   Two rules matter more than the rest:
+   - the reading face at fifteen pixels on a 1.5 rhythm, because seventeen with book
+     leading is a page of a book, and this is a desk;
+   - one heading size inside the work, so a card's title, a section's name and a block's
+     label are hierarchy by weight and air rather than by three competing sizes.
+
+   The record's own pages are untouched: every rule is behind `.keeper-room`. */
+
+#root .keeper-room {
+  /* One left edge, one measure. Nothing inside the room may set its own width. */
+  --room-measure: 34rem;
+}
+
+/* ── PROSE IS SMALL HERE, ON PURPOSE ─────────────────────────────────────────── */
+#root .keeper-room :is(p, li, blockquote) {
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  max-inline-size: none !important;
+  letter-spacing: 0 !important;
+  text-wrap: pretty;
+}
+#root .keeper-room :is(blockquote) {
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+}
+/* A machine label stays the machine's own lettering — it is just not allowed to grow. */
+#root .keeper-room :is(p, li).font-mono {
+  font-size: 12.5px !important;
+  line-height: 1.5 !important;
+}
+
+/* ── ONE HEADING SIZE UNDER THE ROOM'S OWN NAME ──────────────────────────────── */
+#root .keeper-room :is(h1, h2, h3, h4):not(.room-title) {
+  font-size: 15px !important;
+  line-height: 1.35 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+/* The room's own sentence is the loudest thing here, and it is the only thing that is:
+   how much is waiting. Everything below it is work, and work is set at working size. */
+#root .keeper-room .room-title {
+  font-size: 22px !important;
+  line-height: 1.18 !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.012em !important;
+}
+
+/* ── FRAMES ARE HAIRLINES, NOT BOXES ─────────────────────────────────────────── */
+/* A two-pixel frame on every card, form and panel is what made the room read as a pile
+   of boxes rather than as a sheet with work on it. One hairline, and the paper does the
+   separating. Buttons keep their weight: a control should look like something you press. */
+#root .keeper-room :is(div, article, section)[class*="border-2"]:not([class*="border-l-"]):not([class*="border-t-"]) {
+  border-width: 1px !important;
+}
+
+/* ── NO PANEL GETS ITS OWN CENTRED COLUMN ────────────────────────────────────── */
+/* These panes were pages once, and a page centres itself. Inside the room they must sit
+   on the room's left edge, or the text jumps sideways every time a tab is tapped. */
+#root .keeper-room [class*="max-w-2xl"],
+#root .keeper-room [class*="mx-auto"] {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* ── AND NO PANEL INSISTS ON A SCREEN OF ITS OWN ─────────────────────────────── */
+/* A sixty-viewport-height empty state was there to stop a lonely paragraph floating on a
+   blank page. Inside a room it just hands the keeper white space to scroll through. */
+#root .keeper-room [class*="min-h-[60vh]"],
+#root .keeper-room [class*="min-h-screen"] {
+  min-height: 0 !important;
+}
+
+/* ── THE RHYTHM ──────────────────────────────────────────────────────────────── */
+/* Vertical air was being asked for twice: once by the section, once by the block inside
+   it. These are the two places it doubled, brought back to one step each. */
+#root .keeper-room [class*="py-10"],
+#root .keeper-room [class*="py-16"] {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+}
+#root .keeper-room [class*="pb-10"] {
+  padding-bottom: 16px !important;
+}
+
+/* ── FIELDS AND CONTROLS ─────────────────────────────────────────────────────── */
+/* Text set at one rem inside a field is right on a phone and enormous inside a card that
+   is already holding eleven-pixel labels. Fields stay a finger tall, and no taller. */
+#root .keeper-room :is(input, textarea, select) {
+  font-size: 15px !important;
+  min-height: 44px;
+  border-radius: 0;
+}
+#root .keeper-room textarea {
+  min-height: 64px;
+  padding: 10px 12px !important;
+}

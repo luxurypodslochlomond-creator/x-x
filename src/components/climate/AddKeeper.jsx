@@ -53,7 +53,7 @@ export default function AddKeeper({ onAdded }) {
   const field = 'w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink';
 
   return (
-    <div className="bg-record-bone border-2 border-record-ink/40 p-4 mb-8">
+    <div className="bg-record-bone border-2 border-record-ink/40 p-3 mb-4">
       <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-red mb-2">or ask for a keeper</p>
       <p className="text-[12px] text-record-ink/75 leading-[1.6] mb-3" style={{ fontFamily: 'var(--font-reading)' }}>
         A keeper holds every key: publishing, correcting, setting how well something is known, signing the record,

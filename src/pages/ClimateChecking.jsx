@@ -188,12 +188,12 @@ export default function ClimateChecking({ plain = false, onChange }) {
           </div>
         )}
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {entries.map((entry) => {
             const d = drafts[entry.id] || {};
             const already = checks.filter((c) => c.entry_id === entry.id);
             return (
-              <div key={entry.id} className="bg-record-bone border-2 border-record-ink/20 p-4">
+              <div key={entry.id} className="bg-record-bone border-2 border-record-ink/20 p-3">
                 <p className="text-[10.5px] font-mono uppercase tracking-[0.16em] text-record-muted mb-1.5">
                   {entry.type === 'comment' ? 'comment' : entry.type}
                   {entry.source_name ? ` · ${entry.source_name}` : ''}

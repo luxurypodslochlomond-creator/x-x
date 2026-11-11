@@ -8,17 +8,15 @@ import { MarkStamp, MarkEye, MarkGate, MarkLedger } from './KeeperMarks';
 // thumb already is, and the work starts at the top of the page.
 //
 // The marks are the record's own engravings, not a stock icon set: that is the difference
-// between a page of this book and a page of any dashboard on earth. A word sits under each
-// one, because a mark nobody can name is a puzzle, and a puzzle at eleven at night is a
-// headache.
+// between a page of this book and a page of any dashboard on earth.
 //
-// Green, not red, for "you are here": on this record red means a warning or a mark, and a
-// keeper who is simply standing in the right room should not be told something is wrong.
-// Red stays for the thing that actually wants her: a number above zero.
-//
-// Nothing here is a notification badge. A number means a piece of work exists, never that
-// something is unread or unclicked — a count that can only be cleared by clicking is a
-// slot machine, and this room is a desk.
+// ── ONE RED, NOT FOUR ─────────────────────────────────────────────────────────
+// There are four numbers here and only ever one thing to do next. When every waiting
+// number was printed in signal red, the dock said "22 to decide, 22 to read" at the same
+// volume as the warning red the record keeps for a danger — and it left a keeper choosing
+// between two identical alarms. Now the room chooses: the door she is standing in is the
+// one that carries the red, and the rest are stated quietly in ink so she can still see
+// they exist. Nothing is hidden; nothing competes.
 const TABS = [
   { id: 'decide', Mark: MarkStamp, word: 'Decide', unit: 'to decide', keeperOnly: true },
   { id: 'check', Mark: MarkEye, word: 'Check', unit: 'to read' },
@@ -32,7 +30,7 @@ export default function WorkDock({ counts, keeper, view, onView, failed }) {
   return (
     <nav
       aria-label="The room's jobs"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#141210]/20 bg-[#efe7d6] pb-[env(safe-area-inset-bottom)] lg:static lg:mt-4 lg:border-y lg:pb-0"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-[#141210]/20 bg-[#efe7d6] pb-[env(safe-area-inset-bottom)] lg:static lg:mt-3 lg:border-y lg:pb-0"
     >
       <div className="mx-auto flex max-w-[520px]">
         {tabs.map(({ id, Mark, word, unit }, i) => {
@@ -48,20 +46,20 @@ export default function WorkDock({ counts, keeper, view, onView, failed }) {
               type="button"
               onClick={() => onView(id)}
               aria-pressed={on}
-              className={`relative flex min-h-[62px] flex-1 flex-col items-center justify-center gap-1 px-1 py-2 transition-colors ${
+              className={`relative flex min-h-[56px] flex-1 flex-col items-center justify-center gap-[3px] px-1 py-1.5 transition-colors ${
                 i < tabs.length - 1 ? 'border-r border-[#141210]/15' : ''
               } ${on ? 'bg-[#f4efe4]' : 'active:bg-[#f4efe4]/70'}`}
             >
-              <Mark size={21} className={on ? 'text-[#1e3a2b]' : waiting ? 'text-[#b3261e]' : 'text-[#4a443a]'} />
+              <Mark size={19} className={on ? 'text-[#1e3a2b]' : waiting ? 'text-[#b3261e]' : 'text-[#4a443a]'} />
               <span
-                className="text-[11px] font-semibold leading-none"
+                className="text-[10.5px] font-semibold leading-none"
                 style={{ fontFamily: 'var(--font-reading)', color: on ? '#1e3a2b' : '#141210' }}
               >
                 {word}
               </span>
               <span
-                className="font-mono text-[10px] uppercase leading-none tracking-[0.06em]"
-                style={{ color: waiting ? '#b3261e' : '#8a7f6d' }}
+                className="font-mono text-[9.5px] uppercase leading-none tracking-[0.05em]"
+                style={{ color: on && waiting ? '#b3261e' : '#8a7f6d' }}
               >
                 {n === null ? '\u00a0' : n === 0 ? 'clear' : unit ? `${n} ${unit}` : `${n}`}
               </span>

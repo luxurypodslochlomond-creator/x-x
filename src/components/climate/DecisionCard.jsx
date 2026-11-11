@@ -30,8 +30,8 @@ const whenLine = (iso) => {
 
 export default function DecisionCard({ item, onDecide, busy, first = false }) {
   return (
-    <article className="border border-[#141210]/25 bg-[#f7f1e5] mb-3">
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-[#141210]/20">
+    <article className="border border-[#141210]/25 bg-[#f7f1e5] mb-2.5">
+      <div className="flex items-center gap-2 px-3 py-1.5 border-b border-[#141210]/20">
         <span
           className={`text-[9px] font-black font-mono uppercase tracking-[0.14em] px-1.5 py-0.5 ${
             TONE[item.label] || 'bg-[#efe7d6] text-[#141210]'
@@ -41,10 +41,10 @@ export default function DecisionCard({ item, onDecide, busy, first = false }) {
         </span>
       </div>
 
-      <div className="px-3 py-3">
+      <div className="px-3 py-2.5">
         <h3 className="text-[15px] font-semibold leading-snug text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>{item.title}</h3>
         {item.body ? (
-          <p className="text-[13.5px] leading-[1.6] text-[#3a342c] mt-1.5" style={{ fontFamily: 'var(--font-reading)' }}>{item.body}</p>
+          <p className="text-[14px] leading-[1.5] text-[#3a342c] mt-1" style={{ fontFamily: 'var(--font-reading)' }}>{item.body}</p>
         ) : null}
 
         {item.source_url ? (
@@ -107,7 +107,7 @@ export default function DecisionCard({ item, onDecide, busy, first = false }) {
             to scroll past them every single time to reach the buttons. The words still stand
             where the first answer is given; after that the card is the entry and the two buttons. */}
         {first && (
-          <p className="mt-3 text-[12.5px] leading-[1.6] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
+          <p className="mt-2.5 text-[12px] leading-[1.5] text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
             <span className="font-black text-[#1e3a2b]">On the record</span> — it goes public, and it is sealed.{' '}
             <span className="font-black text-[#141210]">Not yet</span> — it waits. Nothing is lost.
           </p>
@@ -118,7 +118,7 @@ export default function DecisionCard({ item, onDecide, busy, first = false }) {
         <button
           onClick={() => onDecide(item, 'hold')}
           disabled={busy}
-          className="flex items-center justify-center gap-1.5 min-h-[54px] px-2 py-3 text-[14px] font-semibold text-[#141210] border-r border-[#141210]/25 active:bg-[#141210]/10 disabled:opacity-40 transition-colors"
+          className="flex items-center justify-center gap-1.5 min-h-[50px] px-2 py-3 text-[14px] font-semibold text-[#141210] border-r border-[#141210]/25 active:bg-[#141210]/10 disabled:opacity-40 transition-colors"
           style={{ fontFamily: 'var(--font-reading)' }}
         >
           <Hand className="w-4 h-4" /> Not yet
@@ -126,7 +126,7 @@ export default function DecisionCard({ item, onDecide, busy, first = false }) {
         <button
           onClick={() => onDecide(item, 'publish')}
           disabled={busy}
-          className="flex items-center justify-center gap-1.5 min-h-[54px] px-2 py-3 text-[14px] font-semibold bg-[#1e3a2b] text-[#f4efe4] active:bg-[#141210] disabled:opacity-40 transition-colors"
+          className="flex items-center justify-center gap-1.5 min-h-[50px] px-2 py-3 text-[14px] font-semibold bg-[#1e3a2b] text-[#f4efe4] active:bg-[#141210] disabled:opacity-40 transition-colors"
           style={{ fontFamily: 'var(--font-reading)' }}
         >
           <Check className="w-4 h-4" /> On the record
