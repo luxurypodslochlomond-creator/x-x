@@ -197,3 +197,95 @@ export function MyceliumMark({ className }) {
     </Mark>
   );
 }
+
+/* ── THE PEOPLE'S MARKS ────────────────────────────────────────────────────────
+   Same hand, same 24-unit grid, same one stroke of the borrowed red as the six
+   doors above — so a list of kings reads as part of the same stamped sheet rather
+   than a set of bullet points. Nothing here is a heraldic invention: the crown is a
+   coronet with no claim on it, the sword is a blade and a crossguard, the castle is
+   the tower that actually stands in the trees on Inchmurrin, the ship is the one a
+   five-year-old queen sailed from Dumbarton, the hoof is the cattle Rob Roy's men
+   took off the island, the quill is a writer's and the mountain is a walker's. */
+
+/* A king — the band, three points, and one red stone. */
+export function CrownMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M4.2 10.3 7.6 14 12 7.4l4.4 6.6 3.4-3.7" />
+      <path d="M5.7 14.5h12.6l-1 4.3H6.7Z" />
+      <circle cx="12" cy="16.6" r="1.15" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}
+
+/* A blade, standing — and the red at the pommel where a hand went. */
+export function SwordMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M12 3.3 13 5.6v10.4h-2V5.6Z" />
+      <path d="M8.4 16.4h7.2" />
+      <path d="M12 16.6v3.2" />
+      <circle cx="12" cy="20.6" r="1.05" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}
+
+/* The tower that is still standing in the trees on the island — three merlons, one
+   window lit in red, and the ground it stands on. */
+export function CastleMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M7 20.3V10.4h10v9.9" />
+      <path d="M7 10.4V7.7h2.1v1.7M10.9 10.4V7.7h2.1v1.7M14.8 10.4V7.7h2.1v1.7" />
+      <path d="M4.4 20.5h15.2" />
+      <circle cx="12" cy="13.4" r="1.05" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}
+
+/* A hull, a mast, and a red sail taking a five-year-old queen out of reach. */
+export function ShipMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M3.9 16.3h16.2l-2.3 3.3H6.2Z" />
+      <path d="M12 16.1V4.3" />
+      <path d="M12.7 6.1 18 15.1h-5.3Z" fill={ACCENT} stroke={ACCENT} strokeWidth={1.1} />
+      <path d="M9.9 8.6 6.9 15.1h3" />
+    </Mark>
+  );
+}
+
+/* A cloven hoof — cattle lifted off an island, and every boat on the water held
+   to do it. The cleft is the red. */
+export function HoofMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M6.7 10.4c0-3.2 2.4-5.7 5.4-5.7s5.4 2.5 5.4 5.7c0 4.4-2.2 8.1-5.4 8.1s-5.4-3.7-5.4-8.1Z" />
+      <path d="M12 5.4v12.4" stroke={ACCENT} />
+      <path d="M8.6 17.9c.8.7 2 1.1 3.4 1.1s2.6-.4 3.4-1.1" />
+    </Mark>
+  );
+}
+
+/* A feather and its nib — the man who preferred this loch to Garda and Geneva. */
+export function QuillMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M4.7 19.3C6 12.9 11 5.6 19.5 4.5c-.8 8.3-7.1 13.2-13.9 14.3" />
+      <path d="M7.1 17 15.7 8.4" />
+      <path d="M4.9 19.2 8.2 15.9" />
+      <circle cx="4.7" cy="19.4" r="1" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}
+
+/* A hill, and what the walker went to find on top of it. */
+export function MountainMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M3.2 19.4 9.5 8.3l3.4 6.5 2-3.5 5.9 8.1Z" />
+      <path d="M2.4 20.6h19.2" />
+      <circle cx="9.5" cy="5.7" r="1.15" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}

@@ -53,7 +53,7 @@ export const MONTHS = [
   {
     short: 'May',
     name: 'May',
-    see: 'Bluebells at their best and the wood warbler at full voice. On a good year, the best month on this hill.',
+    see: 'Bluebells coming in — at their best from late in the month, and running on into June. The wood warbler in full voice: heard, almost never seen.',
     under: 'Oak coming into leaf over the bluebells, while the light still gets through.',
   },
   {

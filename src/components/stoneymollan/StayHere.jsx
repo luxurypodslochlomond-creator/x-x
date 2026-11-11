@@ -40,7 +40,7 @@ export default function StayHere({ shareImage, shareCredit }) {
         >
           <p>Wood-fired hot tub.</p>
           <p>Wood-fired sauna.</p>
-          <p>Cold water plunge.</p>
+          <p>Cold water barrel.</p>
           {/* The one line on the page with the fire on it, so it carries a little of the
               light. A glow, not a flame: nothing moves, and the words stay sharp. */}
           <p style={{ textShadow: '0 0 22px rgba(226,96,42,0.55)' }}>Fire pit, under the stars.</p>
@@ -59,7 +59,7 @@ export default function StayHere({ shareImage, shareCredit }) {
           <span className="px-1.5 text-record-ink/25">/</span>
           sauna
           <span className="px-1.5 text-record-ink/25">/</span>
-          cold plunge
+          cold barrel
           <span className="px-1.5 text-record-ink/25">/</span>
           360&deg; views
           <span className="px-1.5 text-record-ink/25">/</span>
