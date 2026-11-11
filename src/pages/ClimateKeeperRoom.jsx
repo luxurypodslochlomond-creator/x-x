@@ -3,36 +3,41 @@ import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight, RefreshCw } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
-import ShedRail from '@/components/climate/keeper/ShedRail';
-import RoomHead from '@/components/climate/keeper/RoomHead';
 import DecideQueue from '@/components/climate/DecideQueue';
-import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 import ClimateChecking from '@/pages/ClimateChecking';
 import GuestList from '@/components/climate/keeper/GuestList';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
+import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 
-// ── THE SHED ──────────────────────────────────────────────────────────────────
-// One working room, and the work is at the top of it.
+// ── ONE PAGE, ONE LIST, THEN OUT ───────────────────────────────────────────────
+// This room used to be a shed with five doors — decide, read, people, counts, sources —
+// and a mark inside each one. Every one of those words was ours, not hers: they named how
+// the thing is built, not what she came here to do. To take one decision she had to learn a
+// map first, and a person holding the keys at eleven at night does not want a map.
 //
-// This page has been a corridor three times. First a headline, a paragraph, a button, a
-// folded list of doors and a row of tabs that reached the same doors a second way. Then a
-// board of plates with the room somewhere beneath it. Both were handsome and both made a
-// keeper read the room before she could work in it — and the words meant to explain the
-// room were passed to a shell that only draws them when it is not compact, so they were
-// never on the screen at all.
+// So the shed is gone. There is one page. It says how many things are waiting in plain words,
+// and then it puts every one of them in the same scroll, each with its own two buttons:
+// an entry says yes or not yet, a source says what you found, a person says let them in. You
+// work down the list and you leave. When the list is empty the page says so and stops, because
+// a page that can never finish is a headache even when there is nothing on it.
 //
-// So: who you are and what is waiting — one sentence, one line of counts — then one row of
-// doors, then the work, in the same scroll. Tapping a door swaps what is underneath it
-// without moving the page, so nothing you were looking at jumps away.
+// Reading is not work, so it is not on the page. What the record holds and where a claim comes
+// from live behind two quiet lines at the foot for whoever wants them — they were never jobs.
 //
-// Nothing here is decided in the browser. Every room is answered by the record's own server
+// Nothing is decided in a browser. Every answer here is given by the record's own server
 // against its own guest list, so holding a keeper's line gives the record's keys and none of
 // the building's.
+const reading = { fontFamily: 'var(--font-reading)' };
+
 export default function ClimateKeeperRoom() {
   const [state, setState] = useState('checking'); // checking | ready | signed_out | paused | not_on_list | error
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
   const [counts, setCounts] = useState(null);
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
+  const [people, setPeople] = useState(null);
+  const [extra, setExtra] = useState(
+    ['counts', 'sourcing'].includes(params.get('tab')) ? params.get('tab') : null
+  );
 
   const load = useCallback(async () => {
     setState('checking');
@@ -54,9 +59,8 @@ export default function ClimateKeeperRoom() {
 
   useEffect(() => { load(); }, [load]);
 
-  // The three numbers on the doors, asked once when the room opens and again whenever
-  // something in it changes — so a decision taken in a room is reflected in the row above it
-  // without the keeper having to hunt for a refresh.
+  // What is waiting, asked once when the page opens and again after anything is answered —
+  // so the line at the top is a fact about now, never a number carried over from before.
   const count = useCallback(async () => {
     const [q, r, c] = await Promise.allSettled([
       who.isKeeper
@@ -65,12 +69,14 @@ export default function ClimateKeeperRoom() {
       who.isKeeper
         ? base44.functions.invoke('climateAccessChange', { action: 'roster' })
         : Promise.resolve(null),
-      who.isChecker ? base44.functions.invoke('checkerQueue', {}) : Promise.resolve(null),
+      base44.functions.invoke('checkerQueue', {}),
     ]);
+    const roster = r.status === 'fulfilled' ? r.value?.data : null;
     setCounts({
-      yes: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : null,
-      asks: r.status === 'fulfilled' ? (r.value?.data?.waiting || []).length : null,
-      read: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : null,
+      yes: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : 0,
+      read: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : 0,
+      asks: roster?.waiting?.length || 0,
+      people: roster?.keepers?.length || 0,
     });
   }, [who]);
 
@@ -78,46 +84,36 @@ export default function ClimateKeeperRoom() {
     if (state === 'ready') count();
   }, [state, count]);
 
-  const rooms = who.isKeeper
-    ? ['decide', 'check', 'people', 'counts', 'sourcing']
-    : ['check'];
-  const tab = rooms.includes(params.get('tab')) ? params.get('tab') : rooms[0];
-  const go = (key) => setParams({ tab: key });
-
   const n = counts || {};
   const yes = n.yes || 0;
   const read = n.read || 0;
   const asks = n.asks || 0;
+  const total = yes + read + asks;
 
   const headline = !counts
     ? 'Looking at the record…'
-    : yes > 0
-    ? yes === 1
-      ? 'One entry wants your yes.'
-      : `${yes} entries want your yes.`
-    : read > 0
-    ? read === 1
-      ? 'One source is waiting to be read.'
-      : `${read} sources are waiting to be read.`
-    : asks > 0
-    ? 'Someone is asking to come in.'
-    : 'Nothing is waiting on you.';
+    : total === 0
+    ? "Nothing is waiting. You're done."
+    : total === 1
+    ? 'One thing is waiting for you.'
+    : `${total} things are waiting for you.`;
 
-  // The state of the room in one line, in the same order as the doors below it.
   const line = [
-    who.isKeeper ? `${yes} to decide` : null,
-    `${read} to read`,
-    who.isKeeper ? (asks ? `${asks} asking to come in` : 'nobody at the door') : null,
+    yes ? `${yes} ${yes === 1 ? 'entry' : 'entries'} to decide` : null,
+    read ? `${read} ${read === 1 ? 'source' : 'sources'} to read` : null,
+    asks ? `${asks} ${asks === 1 ? 'person' : 'people'} asking to come in` : null,
   ]
     .filter(Boolean)
     .join(' · ');
 
-  const reading = { fontFamily: 'var(--font-reading)' };
+  // Someone at the door opens the list by itself; otherwise it stays folded away behind one
+  // line, because most days nobody is asking and most days this is not the job.
+  const peopleOpen = people === null ? asks > 0 : people;
 
   return (
     <ClimateRecordShell
       compact
-      eyebrow="The shed"
+      eyebrow="Keeper's room"
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change."
@@ -134,9 +130,9 @@ export default function ClimateKeeperRoom() {
 
       {state === 'signed_out' && (
         <Door
-          heading="The shed is by invitation"
+          heading="This room is by invitation"
           body="Sign in with the address a keeper added to the record. Reading the public record needs no account; working here needs an invitation."
-          actionLabel="Sign in to the record"
+          actionLabel="Sign in"
           onAction={() => base44.auth.redirectToLogin(window.location.href)}
         />
       )}
@@ -152,8 +148,8 @@ export default function ClimateKeeperRoom() {
 
       {state === 'not_on_list' && (
         <Door
-          heading="The shed opens by invitation"
-          body="This room is for the people the record answers to and the people who agreed to look. Ask for your address to be put on the record's list, and it opens on your next sign-in."
+          heading="This room is by invitation"
+          body="It is for the people the record answers to and the people who agreed to look. Ask for your address to be put on the list, and it opens on your next sign-in."
           actionLabel="What checking involves"
           onAction={() => { window.location.href = '/ClimateFellows'; }}
         />
@@ -161,7 +157,7 @@ export default function ClimateKeeperRoom() {
 
       {state === 'error' && (
         <Door
-          heading="The keeper's room could not be opened"
+          heading="The room could not be opened"
           body="Nothing is lost — everything waiting is still waiting. Try once more."
           actionLabel="Try again"
           onAction={load}
@@ -172,7 +168,7 @@ export default function ClimateKeeperRoom() {
         <>
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-[12px] text-[#8a7f6d]" style={reading}>
-              {who.name || "The keeper's room"}
+              {who.name || 'Keeper'}
               {who.isKeeper ? ' · keeper' : ' · checker'}
             </p>
             <button
@@ -190,34 +186,88 @@ export default function ClimateKeeperRoom() {
           >
             {headline}
           </h1>
-          <p className="mt-1.5 text-[13px] text-[#3a342c]" style={reading}>{line}</p>
+          {line && <p className="mt-1.5 text-[13px] text-[#3a342c]" style={reading}>{line}</p>}
 
-          <ShedRail isKeeper={who.isKeeper} active={tab} counts={counts || {}} onGo={go} />
+          {who.isKeeper && yes > 0 && (
+            <Section label="Entries to decide">
+              <DecideQueue onChange={count} />
+            </Section>
+          )}
 
-          <RoomHead tab={tab} />
+          {/* A source only appears when one is actually waiting. There is no empty room to
+              walk into, because an empty room is one more thing to check before leaving. */}
+          {read > 0 && (
+            <Section label="Sources to read">
+              <ClimateChecking plain onChange={count} />
+            </Section>
+          )}
 
-          <div className="pt-5">
-            {tab === 'decide' && who.isKeeper && <DecideQueue onChange={count} />}
-            {tab === 'check' && <ClimateChecking plain onChange={count} />}
-            {tab === 'people' && who.isKeeper && <GuestList />}
-            {tab === 'counts' && who.isKeeper && <AdminClimateDesk plain />}
-            {tab === 'sourcing' && who.isKeeper && <DueDiligencePanel />}
-          </div>
+          {who.isKeeper && peopleOpen && (
+            <Section label={asks ? 'Someone is asking to come in' : 'Who holds a key'}>
+              <GuestList />
+            </Section>
+          )}
 
-          {/* The room says out loud that the sorting is a conversation rather than an exam:
-              one person keeps this record, and a keeper doing it alone at eleven at night is
-              how a record gets abandoned. One line, never a chat window — the rules of the
-              record stay the only voice that decides anything here. */}
-          <p
-            className="mt-6 border-l-2 border-[#b3261e] pl-3 text-[13px] italic leading-[1.55] text-[#2b2622]"
-            style={reading}
-          >
-            I&apos;m here with you. Open a door and we&apos;ll go through it line by line — I&apos;ll
-            bring the source up beside you, you say the yes.
-          </p>
+          {who.isKeeper && (
+            <div className="mt-8 border-t border-[#141210]/12 pt-3">
+              {!peopleOpen && (
+                <button
+                  onClick={() => setPeople(true)}
+                  className="flex min-h-[36px] w-full items-center justify-between text-left text-[12.5px] text-[#6b5f4f] active:text-[#b3261e]"
+                  style={reading}
+                >
+                  <span>
+                    {n.people ? `${n.people} ${n.people === 1 ? 'person holds' : 'people hold'} a key` : 'Who holds a key'}
+                  </span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
+              )}
+
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                <Quiet
+                  on={extra === 'counts'}
+                  onClick={() => setExtra(extra === 'counts' ? null : 'counts')}
+                >
+                  What the record holds
+                </Quiet>
+                <Quiet
+                  on={extra === 'sourcing'}
+                  onClick={() => setExtra(extra === 'sourcing' ? null : 'sourcing')}
+                >
+                  Where a claim comes from
+                </Quiet>
+              </div>
+
+              {extra === 'counts' && <div className="pt-4"><AdminClimateDesk plain /></div>}
+              {extra === 'sourcing' && <div className="pt-4"><DueDiligencePanel /></div>}
+            </div>
+          )}
         </>
       )}
     </ClimateRecordShell>
+  );
+}
+
+function Section({ label, children }) {
+  return (
+    <section className="mt-7">
+      <p className="mb-2.5 text-[12.5px] text-[#8a7f6d]" style={reading}>{label}</p>
+      {children}
+    </section>
+  );
+}
+
+function Quiet({ on, onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`min-h-[34px] text-[12px] transition-colors ${
+        on ? 'text-[#b3261e]' : 'text-[#8a7f6d] active:text-[#141210]'
+      }`}
+      style={reading}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -227,21 +277,13 @@ function Door({ heading, body, actionLabel, onAction }) {
       <p className="font-semibold text-[#1a1612] mb-2" style={{ fontFamily: 'var(--font-reading)', fontSize: '21px', lineHeight: 1.35 }}>
         {heading}
       </p>
-      <p className="text-[15px] leading-[1.7] text-[#2b2622]" style={{ fontFamily: 'var(--font-reading)' }}>{body}</p>
+      <p className="text-[15px] leading-[1.7] text-[#2b2622]" style={reading}>{body}</p>
       <button
         onClick={onAction}
         className="mt-4 inline-flex items-center gap-2 min-h-[44px] text-[13.5px] font-semibold text-[#141210] border-b-2 border-[#b3261e] active:text-[#b3261e] transition-colors"
       >
         {actionLabel} <ArrowRight className="w-4 h-4" />
       </button>
-      <div>
-        <button
-          onClick={() => window.location.reload()}
-          className="mt-3 flex items-center gap-1.5 text-[12px] text-[#6b5f4f] active:text-[#141210] transition-colors"
-        >
-          <RefreshCw className="w-3 h-3" /> reload the page
-        </button>
-      </div>
     </div>
   );
 }
