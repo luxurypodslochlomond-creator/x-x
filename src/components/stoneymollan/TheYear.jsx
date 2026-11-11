@@ -74,9 +74,10 @@ export default function TheYear() {
           </div>
         </div>
 
-        <p className="mx-auto mt-5 max-w-[38ch] text-center font-mono text-[9.5px] uppercase leading-[1.9] tracking-[0.16em] text-record-muted">
-          A normal month, not a promise. The hill does not read the calendar — a warm week
-          moves everything by a fortnight either way.
+        <p className="mx-auto mt-5 max-w-[40ch] text-center font-mono text-[9.5px] uppercase leading-[1.9] tracking-[0.16em] text-record-muted">
+          A normal month, not a promise. The hill does not read the calendar, a warm week
+          moves everything by a fortnight, and a lot of this is one animal on a good
+          morning. You can walk the whole hill and see none of it.
         </p>
       </PageBand>
     </div>
