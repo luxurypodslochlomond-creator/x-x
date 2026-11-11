@@ -87,7 +87,10 @@ export const MONTHS = [
     short: 'Oct',
     name: 'October',
     see: 'Redwings and fieldfares in on the berries, up from Scandinavia — you hear them before you see them. Squirrels caching.',
-    under: 'Mushrooms at their best in a wet autumn: ceps, chanterelles, fly agaric under the birch. Beech mast all over the path.',
+    /* Fly agaric is named because it is the red one everybody photographs — and it is
+       marked as look-only, because a month list of mushrooms that includes it without
+       saying so is the one line on this page that could actually hurt someone. */
+    under: 'Mushrooms at their best in a wet autumn: ceps and chanterelles for the pot, and fly agaric under the birch for looking at only. Beech mast all over the path.',
   },
   {
     short: 'Nov',

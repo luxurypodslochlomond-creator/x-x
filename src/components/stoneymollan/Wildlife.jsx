@@ -8,30 +8,39 @@ const READING = { fontFamily: 'var(--font-record-reading)' };
    west-coast oakwoods are the last refuge for, and the fungal threads under all of
    it — with the argument about the threads left standing, because it genuinely is
    still an argument. */
+/* Each mark is set down on its own plate, a little off true and straightening under a
+   finger — the same stamped tilt the doors use, so the animals belong to the same sheet
+   as the history instead of sitting in a list of bullet points. The tilt is a literal
+   class string, never built from a variable, or the build would strip it. */
 const LIFE = [
   {
     Mark: SquirrelMark,
     name: 'Red squirrel',
+    tilt: '-rotate-[1.6deg]',
     line: 'Back in Balloch park after more than fifty years away. You hear one before you see it — scrabbling in the canopy, then a russet blur going round the far side of a trunk.',
   },
   {
     Mark: DeerMark,
     name: 'Roe deer',
+    tilt: 'rotate-[1.2deg]',
     line: 'In the long grass at the top, at first and last light. Usually a shape you half-see and then doubt.',
   },
   {
     Mark: PawMark,
     name: 'Badger and fox',
+    tilt: '-rotate-[0.8deg]',
     line: 'The field edges, after dark. The wood is at its busiest when there is nothing to see.',
   },
   {
     Mark: OtterMark,
     name: 'Otter',
+    tilt: 'rotate-[1.8deg]',
     line: 'The Leven below the loch, and the shallows at the foot of it.',
   },
   {
     Mark: BirdMark,
     name: 'Osprey',
+    tilt: '-rotate-[1.3deg]',
     line: 'Over the loch from mid-March into September, fishing. Big, slow wingbeats, and then a dive. The park authority’s own window, not a guess.',
   },
 ];
@@ -46,14 +55,18 @@ export default function Wildlife() {
           </p>
 
           <ul className="mx-auto mt-5 max-w-[46ch] divide-y divide-record-ink/15 border-y border-record-ink/25">
-            {LIFE.map(({ Mark, name, line }) => (
-              <li key={name} className="flex items-start gap-3 py-3.5 text-left">
-                <Mark className="mt-0.5 h-6 w-6 shrink-0 text-record-ink/70" />
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-record-ink">
+            {LIFE.map(({ Mark, name, line, tilt }) => (
+              <li key={name} className="flex items-start gap-4 py-4 text-left">
+                <span
+                  className={`mt-0.5 flex h-12 w-12 shrink-0 items-center justify-center border border-record-ink/30 bg-record-paper transition-transform duration-200 ease-out hover:rotate-0 active:rotate-0 ${tilt}`}
+                >
+                  <Mark className="h-8 w-8 text-record-ink" />
+                </span>
+                <div className="min-w-0">
+                  <p className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-record-ink">
                     {name}
                   </p>
-                  <p className="mt-1 text-[15px] leading-[1.6] text-record-ink/80" style={READING}>
+                  <p className="mt-1 text-[15.5px] leading-[1.6] text-record-ink/90" style={READING}>
                     {line}
                   </p>
                 </div>
@@ -70,7 +83,7 @@ export default function Wildlife() {
           </p>
 
           <div className="mx-auto mt-7 max-w-[46ch] border-t border-record-ink/20 pt-6">
-            <MyceliumMark className="mx-auto h-9 w-9 text-record-mark" />
+            <MyceliumMark className="mx-auto h-12 w-12 text-record-mark" />
             <p className="mt-3 text-center font-mono text-[11.5px] uppercase tracking-[0.14em] text-record-ink">
               Underneath
             </p>
@@ -85,7 +98,8 @@ export default function Wildlife() {
           </div>
 
           <p className="mx-auto mt-5 max-w-[40ch] font-mono text-[11px] uppercase leading-[1.9] tracking-[0.12em] text-record-ink/85">
-            Scottish Wildlife Trust &middot; RSPB Scotland Loch Lomond &middot; NatureScot &middot; The Clydesider, 2022
+            Scottish Wildlife Trust &middot; RSPB Scotland Loch Lomond &middot; NatureScot &middot; Loch Lomond
+            &amp; Trossachs National Park Authority &middot; The Clydesider, 2022
           </p>
         </PageBand>
       </div>
