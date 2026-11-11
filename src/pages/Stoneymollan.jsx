@@ -107,6 +107,28 @@ export default function Stoneymollan() {
           <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-record-ink">
             Name &amp; mark &middot; Andrew Shandy
           </p>
+          {/* ── THE NAME IS OLDER THAN EVERYTHING ON THIS SHEET ──
+              Bro asked for this to be said next to Andrew's credit, and asked me to check
+              it first. Checked, and it holds — with one honest limit, which is why the line
+              is worded the way it is.
+
+              What is certain: the name is on the ground before the cabins, before the road
+              as a road, before any of the things this page is selling. It is not English
+              either. Its tail is Gaelic — "mullach", a summit, or its dimunitive "mullán",
+              a hillock — which is exactly what the place is: a shoulder of muir above the
+              loch. The Muir and the Road both carry the name in records older than anyone
+              living.
+
+              What is NOT certain, and is not going to be invented here: what the first part
+              of it was. No source I can reach fixes a settled reading of the whole word, and
+              a record that guesses "the stone of the hillock" because it sounds tidy would
+              be doing the same thing as a brochure. So the page says the two things that are
+              true — it is old, it is Gaelic — and says out loud that the meaning is not
+              settled. A place that has been called the same thing for centuries does not
+              need us to translate it. */}
+          <p className="mt-1 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink/75">
+            On record long before the cabins &middot; a Gaelic name, and no settled reading of it
+          </p>
           <RecordRule />
           <p className="mt-1 text-center font-mono text-[11.5px] uppercase leading-[1.9] tracking-[0.14em] text-record-ink">
             Balloch &rarr; Cardross &middot; 6.75 km &middot; over the muir
