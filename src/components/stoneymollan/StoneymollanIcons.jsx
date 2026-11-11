@@ -198,6 +198,20 @@ export function MyceliumMark({ className }) {
   );
 }
 
+/* The way in — a folded map with the road cut across it in red and a dot where the
+   tarmac runs out. Two creases, unevenly spaced, because a map that has been folded
+   into a coat pocket twice is never folded evenly. */
+export function MapMark({ className }) {
+  return (
+    <Mark className={className} strokeWidth={1.7}>
+      <path d="M2.7 6.8 8.2 4.7l7.6 2.1 5.5-2.1v14.3l-5.5 2.1-7.6-2.1-5.5 2.1Z" />
+      <path d="M8.2 4.7v14.3M15.8 6.8v14.2" />
+      <path d="M4.5 17c2.4-3.2 4.3-5 6.5-5.9 1.8-.7 3.4-.5 4.9.3" stroke={ACCENT} />
+      <circle cx="16" cy="11.4" r="1.2" fill={ACCENT} stroke="none" />
+    </Mark>
+  );
+}
+
 /* ── THE PEOPLE'S MARKS ────────────────────────────────────────────────────────
    Same hand, same 24-unit grid, same one stroke of the borrowed red as the six
    doors above — so a list of kings reads as part of the same stamped sheet rather
