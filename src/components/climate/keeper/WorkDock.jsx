@@ -41,8 +41,11 @@ export default function WorkDock({ counts, keeper, view, onView, failed }) {
                 className="room-nav-word text-[10.5px] font-semibold leading-none"
                 style={{ fontFamily: 'var(--font-reading)', color: on ? '#1e3a2b' : '#141210' }}
               >
-                <span className="lg:hidden">{id === 'decide' ? 'Review' : id === 'check' ? 'Sources' : word}</span>
-                <span className="hidden lg:inline">{word}</span>
+                {/* One name per job, on the phone and on the desk. The phone used to call the
+                    same two doors "Review" and "Sources" while the desk called them "Decide" and
+                    "Check", so a keeper moving between the two had to work out that they were
+                    the same room. Same word everywhere: Decide, Check, People, Record. */}
+                {word}
               </span>
               {!on && waiting && <span className="room-nav-dot hidden" aria-label="Work waiting" />}
               {/* ── ONLY THE DOOR YOU ARE IN PRINTS A NUMBER ──────────────────────────

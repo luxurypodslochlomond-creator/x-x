@@ -3,6 +3,9 @@ import { KeyRound, RefreshCw } from 'lucide-react';
 
 export default function RoomOverview({ who, headline, total, counted, failed, keeperNames, checkingNow, onRefresh }) {
   const status = failed ? 'Count unavailable' : !counted ? 'Counting…' : total === 0 ? 'All clear' : `${total} waiting`;
+  // What the number means, said in the markup so the colour can follow it: waiting carries the
+  // record's signal red, a clear room stays quiet, and a count that failed is neither.
+  const state = failed ? 'failed' : !counted ? 'counting' : total === 0 ? 'clear' : 'waiting';
   return (
     <div className="room-overview grid grid-cols-[1fr_auto] items-baseline gap-x-3 font-body lg:font-display">
       <p className="room-identity col-start-1 row-start-1 text-[13px] text-record-muted">
@@ -17,7 +20,7 @@ export default function RoomOverview({ who, headline, total, counted, failed, ke
       >
         <RefreshCw className="h-3 w-3" /><span className="hidden lg:inline">count again</span>
       </button>
-      <h1 className="room-title col-span-2 col-start-1 row-start-2 mt-1 text-[22px] text-record-ink">
+      <h1 data-state={state} className="room-title col-span-2 col-start-1 row-start-2 mt-1 text-[22px] text-record-ink">
         <span className="hidden lg:inline">{headline}</span>
         <span className="lg:hidden">{status}</span>
       </h1>
