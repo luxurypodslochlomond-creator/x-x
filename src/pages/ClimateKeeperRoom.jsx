@@ -129,7 +129,7 @@ export default function ClimateKeeperRoom() {
     <ClimateRecordShell
       compact
       className={state === 'ready' ? 'keeper-workspace-shell keeper-workspace-ready' : 'keeper-workspace-shell'}
-      eyebrow="Keeper's room"
+      eyebrow={state === 'ready' && !who.isKeeper ? 'Checking the record' : "Keeper's room"}
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change."

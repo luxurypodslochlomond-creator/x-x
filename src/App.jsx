@@ -404,7 +404,13 @@ const AuthenticatedApp = () => {
       <Route path="/AdminClimateCategories" element={<ClimateLayout currentPage="AdminClimateCategories"><AdminOnly><AdminClimateCategoriesPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminClimatePhotos" element={<ClimateLayout currentPage="AdminClimatePhotos"><AdminOnly><AdminClimatePhotosPage /></AdminOnly></ClimateLayout>} />
       <Route path="/AdminClimateLog" element={<ClimateLayout currentPage="AdminClimateLog"><AdminOnly><AdminClimateLogPage /></AdminOnly></ClimateLayout>} />
-      <Route path="/ClimateChecking" element={<Navigate to="/ClimateKeeperRoom?tab=check" replace />} />
+      {/* ── THE CHECKER'S OWN ADDRESS ──────────────────────────────────────────────
+          This used to bounce to the keeper's room, so the one letter we send to a
+          volunteer landed them in a page titled "Keeper's room" — someone else's desk,
+          with someone else's words on it. A pair of eyes was being handed the keys'
+          furniture to stand in. So the queue has its own address again: the record's
+          masthead, the record's foot, and nothing on it but the work they agreed to do. */}
+      <Route path="/ClimateChecking" element={<ClimateLayout currentPage="ClimateChecking"><ClimateCheckingPage /></ClimateLayout>} />
       {/* The guest list is the record's own, so it opens to the record's own keys. Behind the
           app's admin door, the second keeper who has to agree to every access change could
           never reach the page that asks them — and a two-key rule nobody can turn is a lock. */}

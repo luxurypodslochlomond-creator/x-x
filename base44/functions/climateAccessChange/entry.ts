@@ -64,7 +64,11 @@ async function logIt(base44, { rowId, title, action, reviewer, note }) {
 
 async function tell(base44, payload) {
   try {
-    await base44.asServiceRole.functions.invoke('climateCheckerNotice', payload);
+    // Sent as the keeper who made the change, never as the building. The letter's own guard
+    // asks for a keeper of this record, and a service-role call carries no keeper at all —
+    // which is how a letter that was meant to go out quietly stayed inside the building and
+    // nobody was told. Same change, same words, just the hand that actually made it.
+    await base44.functions.invoke('climateCheckerNotice', payload);
   } catch (e) {
     console.error('climateAccessChange: notice failed:', e.message);
   }
@@ -79,6 +83,8 @@ async function applyChange(base44, change, who, basis) {
       ? `Only one keeper held the keys, so there was no second key to ask. Asked and done by ${who.name || by}.`
       : basis === 'owner'
       ? `The owner's word stood alone: ${who.name || by} holds the building's keys, so no second keeper was asked, and the record says so here.`
+      : basis === 'single'
+      ? `One keeper's word: ${who.name || by}. A checker is a pair of eyes and not a set of keys, so adding a checker, pausing one or ending one is a single decision — and it is written here so it was never quiet.`
       : `Asked by ${change.requested_by_name || change.requested_by}; agreed by ${who.name || by}.`;
 
   if (change.change === 'add') {
@@ -298,6 +304,20 @@ export default async function (req) {
             { status: 409 }
           );
         }
+      }
+
+      // ── A CHECKER IS A PAIR OF EYES, NOT A SET OF KEYS ────────────────────────
+      // The two-key rule exists because access to this record is power: who may read a
+      // person's entry, and who may put one on the record. A checker holds neither. Making
+      // the keeper of the record wait for a second keeper to agree before she can add a
+      // volunteer is how a record earns a reputation for being difficult — and with two
+      // serious researchers waiting to start, difficult is the one thing it cannot afford.
+      // So one keeper's word adds, pauses, restores or takes off a checker, and the audit
+      // line says plainly whose word it was. Adding or removing the KEYS still needs two.
+      if (!draft.target_is_keeper) {
+        const done = await applyChange(base44, draft, who, 'single');
+        if (!done.ok) return Response.json({ error: done.message }, { status: done.status || 400 });
+        return Response.json({ applied: true, single: true, message: done.message });
       }
 
       // Two keys — unless there is genuinely only one hand to ask, or the hand belongs to the

@@ -200,7 +200,7 @@ export default function GuestList() {
               ? 'You are the only keeper holding the keys today, so your word is enough — and the record says so. Once a second keeper exists, nothing moves without both.'
               : owner
               ? 'You hold the building’s keys, so your own asks land straight away and the audit line says they stood alone. Every other keeper needs a second name.'
-              : 'One keeper asks and a different keeper agrees before anything moves. The last keeper can never be taken off.'}
+              : 'A checker is one keeper’s decision: added, paused or taken off on your word, and written down with your name either way. The keys are the ones that need two — one keeper asks and a different keeper agrees before anybody gains or loses them. The last keeper can never be taken off.'}
           </p>
         </AccessGuide>
       </div>

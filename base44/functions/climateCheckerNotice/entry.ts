@@ -1,4 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
+import { requireKeeper } from '../../shared/checkerAccess.ts';
 
 // ── ONE CHANGE, TWO LETTERS, ONE LINE ON THE RECORD ──────────────────────────
 // Someone on the checking list hears from the record when they are put on it, when
@@ -64,10 +65,13 @@ const KEEPER_BODY = {
 export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
-    const user = await base44.auth.me().catch(() => null);
-    if (!user || user.role !== 'admin') {
-      return Response.json({ error: 'Forbidden' }, { status: 403 });
-    }
+    // A keeper of this record may send this letter — not only an administrator of the
+    // building. It is the keeper who moves the list, so it must be the keeper who can send
+    // the letter that goes with it; asking for the building's keys here is how a volunteer
+    // could be added and never written to.
+    const keyholder = await requireKeeper(base44);
+    if (keyholder.error) return Response.json({ error: keyholder.error }, { status: keyholder.status });
+    const user = keyholder.user;
 
     const { email, name, state, person_letter, row_id } = await req.json();
     const clean = String(email || '').trim().toLowerCase();
@@ -101,16 +105,10 @@ export default async function (req) {
     const recordUrl = isKeeper ? `${RECORD_HOME}/ClimateKeeperRoom` : `${RECORD_HOME}/ClimateChecking`;
     const letterBody = (isKeeper && KEEPER_BODY[state]) || copy.body;
 
-    // The record first. A letter that failed to send must never mean the change went
-    // unrecorded — the row is the accountability, the email is only courtesy.
-    await base44.asServiceRole.entities.ClimateAuditLog.create({
-      entity_type: 'keeper',
-      entity_id: String(row_id || ''),
-      entity_title: who,
-      action: copy.audit,
-      reviewer_email: user.email,
-      ai_assessment: `${copy.log} — by ${user.full_name || user.email}`,
-    });
+    // The accountability line is written by the door that actually moved the list, one line
+    // per change. This function used to write a second copy of it, so a change that landed
+    // would have appeared twice in the audit trail — the same decision, twice, as though two
+    // people had made it. One change, one line.
 
     // Their letter, when there is one to send. Skipped when the platform's own
     // invitation has just gone out, because that one already carries their sign-in link.
@@ -150,7 +148,7 @@ export default async function (req) {
       }
     }
 
-    return Response.json({ sent: true, state, audited: true, keeper_notified: notified });
+    return Response.json({ sent: true, state, keeper_notified: notified });
   } catch (error) {
     console.error('climateCheckerNotice failed', error?.message);
     return Response.json({ error: error?.message || 'That did not send' }, { status: 500 });
