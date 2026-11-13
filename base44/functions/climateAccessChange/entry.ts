@@ -36,7 +36,14 @@ async function rosterOf(base44) {
   return rows?.items || rows || [];
 }
 
-function shapeLine(row) {
+// ── WHAT THE KEEPER ACTUALLY KNOWS ABOUT EACH PERSON ─────────────────────────
+// A list that only says "on it" leaves the keeper asking the one question she cannot
+// answer from it: has this person turned up yet? So each line carries its evidence, and
+// only evidence: how many notes they have signed and when the last one was, and whether
+// they have written their own line on the roll. Nothing here is a guess about an email
+// being opened — a letter cannot be read back, and the record will not pretend it can.
+function shapeLine(row, evidence) {
+  const e = (evidence && evidence.get(lower(row.email))) || { notes: 0, last: '' };
   return {
     id: row.id,
     email: row.email || '',
@@ -44,6 +51,10 @@ function shapeLine(row) {
     note: row.note || '',
     is_keeper: Boolean(row.is_keeper),
     active: Boolean(row.active),
+    asked: row.created_date || '',
+    notes: e.notes,
+    last_note: e.last,
+    line_written: Boolean(String(row.public_line || '').trim()),
   };
 }
 
@@ -215,13 +226,30 @@ export default async function (req) {
 
       const activeKeepers = rows.filter((r) => r.active && r.is_keeper).length;
 
+      // One read of the notes, folded by address: the checking table is the only honest
+      // source for "has this person done any of the work", so it is read rather than asked.
+      const evidence = new Map();
+      try {
+        const page = await base44.asServiceRole.entities.ClimateCheck.list({ sort: '-created_date', limit: 500 });
+        (page?.items || page || []).forEach((c) => {
+          const key = lower(c.checker_email);
+          if (!key) return;
+          const e = evidence.get(key) || { notes: 0, last: '' };
+          e.notes += 1;
+          if (!e.last) e.last = c.created_date || '';
+          evidence.set(key, e);
+        });
+      } catch (e) {
+        console.error('climateAccessChange: could not read the checking notes', e?.message);
+      }
+
       return Response.json({
         me,
         name: who.name,
         solo: activeKeepers <= 1,
         owner: who.user?.role === 'admin',
-        keepers: rows.filter((r) => r.is_keeper).map(shapeLine),
-        checkers: rows.filter((r) => !r.is_keeper).map(shapeLine),
+        keepers: rows.filter((r) => r.is_keeper).map((r) => shapeLine(r, evidence)),
+        checkers: rows.filter((r) => !r.is_keeper).map((r) => shapeLine(r, evidence)),
         waiting,
       });
     }

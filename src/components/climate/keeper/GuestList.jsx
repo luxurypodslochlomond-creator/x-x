@@ -131,6 +131,30 @@ export default function GuestList() {
   // words, so three keepers filled a phone screen with three people. The same facts are
   // here: the name and their standing on one line, the address and the reason under it,
   // and the two things you can do to them at the end of the same row — one tap, no scroll.
+  // ── ASKED, OR ACTUALLY HERE? ────────────────────────────────────────────────
+  // The list used to say "checking" beside somebody who had never opened the queue, which
+  // left a keeper unable to tell a volunteer who was already working from one who had
+  // simply been asked. The record cannot see an email being opened and will not pretend to,
+  // so this says only what is on it: the day they were asked, the notes they have signed,
+  // and whether they have written their own line. A keeper reading it knows where each
+  // person stands without having to ask anybody.
+  const shortDay = (iso) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+  };
+
+  const standing = (row) => {
+    if (!row.active) return 'paused · what they wrote stays';
+    if (row.notes > 0) {
+      return `${row.notes} ${row.notes === 1 ? 'note' : 'notes'}${row.last_note ? ` · last ${shortDay(row.last_note)}` : ''}`;
+    }
+    if (row.line_written) return 'wrote their line · no notes yet';
+    if (row.is_keeper) return `holding the keys since ${shortDay(row.asked) || 'today'}`;
+    return `asked ${shortDay(row.asked) || 'today'} · not in yet`;
+  };
+
   const Row = ({ row }) => (
     <div className="flex items-center gap-2 border-b border-[#141210]/12 py-1.5">
       <div className="min-w-0 flex-1">
@@ -140,13 +164,14 @@ export default function GuestList() {
             className="flex-shrink-0 font-mono text-[9.5px] uppercase tracking-[0.06em]"
             style={{ color: row.active ? '#1e3a2b' : '#b3261e' }}
           >
-            {row.is_keeper ? (row.active ? 'keys' : 'paused') : row.active ? 'checking' : 'paused'}
+            {row.is_keeper ? (row.active ? 'keys' : 'paused') : !row.active ? 'paused' : row.notes > 0 ? 'checking' : 'asked'}
           </span>
         </p>
         <p className="truncate text-[11.5px] text-[#6b5f4f]" style={reading}>
           {row.email}
           {row.note ? ` · ${row.note}` : ''}
         </p>
+        <p className="truncate font-mono text-[10px] tracking-[0.04em] text-[#8a7f70]">{standing(row)}</p>
       </div>
       <button
         onClick={() => ask({ change: row.active ? 'pause' : 'restore', row_id: row.id })}
