@@ -96,7 +96,14 @@ export const SUPPORTING_PAGES = [
   // "Costs & responsibility" came off the foot with the handover sheet it pointed at: the
   // founder asked, on 9 November, that what it costs and what is still open be saved for
   // conversations with a potential host. The page is kept whole behind a keeper's key.
-  { label: 'Studio', to: '/Studio', what: 'Create with ZAPP and the logo tool.' },
+  //
+  // ── THE STUDIO CAME OFF THE RECORD'S DOORS ────────────────────────────────────
+  // The Studio is a good room and it is not this record's business. It stood on the
+  // contents sheet among the doors of a climate record — a child's workshop beside the
+  // founding letter — and a research panel opening that sheet would have to work out which
+  // of these things belongs to the record and which is somebody else's product using the
+  // same paper. The page is not deleted and the platform's own navigation still carries it;
+  // it simply is not offered as a door of the record.
 ];
 
 // The contents page: every public door once, in the order a reader meets it.

@@ -36,7 +36,7 @@ export default function ThemeSignal({ track }) {
   if (!track) {
     return (
       <p className="mb-4 border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-3 text-[10px] font-mono leading-relaxed text-[#5a5246]">
-        <span className="text-[#e2602a] font-black uppercase tracking-widest">The theme is being made. </span>
+        <span className="text-[#e2602a] font-black uppercase tracking-widest">The theme is being made by Dillon Squire. </span>
         When it arrives it stands here, pressed to play — nothing on this record ever plays at you, and nothing here is counted.
       </p>
     );
