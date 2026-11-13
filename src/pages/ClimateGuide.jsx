@@ -29,7 +29,6 @@ const BUTTONS_CARD = {
   marker: 'Every control, written out · and where it leads',
   body: 'Every button on the record, in the order you will meet it, and the one thing each one does. Tap a line and it takes you there.',
   inside: [
-    'All public pages',
     '01 · The drawn navigation on every page',
     '02 · Sending something in',
     '03 · Reading one entry',
@@ -37,6 +36,7 @@ const BUTTONS_CARD = {
     '05 · The first five minutes',
     '06 · The foot of every page',
     '07 · When you are the keeper',
+    'Every open door, printed',
   ],
   closing: 'The same drawn marks lead to the same places on every page, with a short name beneath each one.',
   url_path: '/ClimateGuide',
@@ -185,9 +185,7 @@ export default function ClimateGuide() {
       returnLabel="Back to the record"
       footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
     >
-      <RecordPageIndex />
-      <h2 className="mb-5 border-t border-record-ink/20 pt-7 text-2xl text-record-ink">Using the record</h2>
-      {/* The existing guide remains available below the directory. */}
+      {/* The manual's own card, before the writing: the whole guide can leave in one piece. */}
       <div className="mb-6">
         <ShareCardButton
           entry={BUTTONS_CARD}
@@ -195,6 +193,8 @@ export default function ClimateGuide() {
           label="Share the manual as a card"
         />
       </div>
+
+      <h2 className="mb-5 text-2xl text-record-ink">Using the record</h2>
 
       <GuideBand
         number="01"
@@ -244,6 +244,22 @@ export default function ClimateGuide() {
         note="Seven buttons sit behind the keeper’s door, on the address the record was given for you, in the order you will use them. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
         items={KEEPER_DOORS}
       />
+
+      {/* ── THE DOORS, TYPED ────────────────────────────────────────────────────────
+          This page used to open with the drawn index under its own "Index" title, so the
+          manual began with a second masthead: a reader met a menu on top of the writing,
+          which is why the page felt like two pages stapled together. The sheet already
+          opens the doors from anywhere, in drawn marks and on one screen. What the guide
+          needs is that same list in print, for the hand carrying the page away — so it
+          stands here at the foot and carries the same name as the sheet, so nobody has to
+          work out whether they are two different things. They are not: one list, two forms. */}
+      <section className="mt-10 border-t border-record-ink pt-6">
+        <h2 className="mb-1 text-2xl text-record-ink">Every open door</h2>
+        <p className="mb-5 text-[11px] font-mono uppercase tracking-[0.16em] text-record-muted">
+          The sheet&rsquo;s doors, printed · the same list, typed
+        </p>
+        <RecordPageIndex compact />
+      </section>
     </ClimateRecordShell>
   );
 }
