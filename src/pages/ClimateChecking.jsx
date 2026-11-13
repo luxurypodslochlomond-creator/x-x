@@ -189,7 +189,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
         {!entries.length && (
           <div className="border-2 border-record-ink/15 bg-record-bone p-6">
             <p className="text-sm text-record-ink/80 leading-relaxed">
-              Nothing is waiting. Everything submitted has been looked at. Come back when the next one arrives.
+              Nothing is waiting. Everything that has come in has been looked at. The next entry to arrive will appear here.
             </p>
           </div>
         )}
