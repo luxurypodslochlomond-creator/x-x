@@ -251,7 +251,7 @@ export default function GuestList() {
       {checkers.map((row) => <Row key={row.id} row={row} />)}
 
       <AccessGuide {...(mobile ? { className: 'room-details mt-4' } : {})}>
-        {mobile && <summary>Access and saved notes</summary>}
+        {mobile && <summary>Pausing somebody, and the audit trail</summary>}
         <p className="text-[13px] text-[#6b5f4f] leading-[1.7] mt-8 border-t border-[#141210]/15 pt-4" style={reading}>
           Pausing or taking somebody off ends their access straight away, and they are told. Notes they already wrote
           stay on the record in their name, because the checking they did was real whether or not they can check

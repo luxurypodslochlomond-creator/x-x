@@ -82,7 +82,7 @@ const READING = [
   },
   {
     label: 'Share this entry as a card',
-    what: 'On every entry\u2019s own page, on the wire, on every track, and in the band under the music on the front page. One tap draws the card and offers it to the share sheet already on the device, picture and link together. It is drawn portrait, for a phone, not as a wide desktop banner, so it goes into a post as it is. The origin, the place and how well it is known ride inside the picture, so nothing goes out with its source cut off. Where a device has no share sheet, the card is put on screen to keep and pass on, never a silent download. Nothing is counted, and nothing follows anyone. This page has one of its own, above the bands, so the whole manual can be taken in one piece and handed on.',
+    what: 'On every entry\u2019s own page, on the wire, and on every track in the music room. One tap draws the card and offers it to the share sheet already on the device, picture and link together. It is drawn portrait, for a phone, not as a wide desktop banner, so it goes into a post as it is. The origin, the place and how well it is known ride inside the picture, so nothing goes out with its source cut off. Where a device has no share sheet, the card is put on screen to keep and pass on, never a silent download. Nothing is counted, and nothing follows anyone. This page has one of its own, above the bands, so the whole manual can be taken in one piece and handed on.',
   },
   {
     label: 'Correction',
@@ -119,9 +119,9 @@ const FIRST = [
     what: 'Look up a country or a subject you already know about, and see what the record holds.',
   },
   {
-    label: '5. Open Impact',
+    label: '5. Open Reach',
     to: createPageUrl('ClimateImpact'),
-    what: 'Who is reading, in countries — and how a reader can name their own nation.',
+    what: 'Who is reading, in countries, and in which tongue — and how a reader can name their own nation.',
   },
   {
     label: '6. Change the language',
@@ -129,41 +129,31 @@ const FIRST = [
   },
 ];
 
+// ── THE FOUR ROOMS, WHICH IS WHAT IS ACTUALLY THERE ──────────────────────────────
+// This list used to name seven buttons "in the order you will use them" — and the room
+// has four. The extra three were pages a keeper reaches from inside the Record room, so
+// a host reading this guide was being told there were seven doors and would have gone
+// looking. What a keeper meets, in order, is here: Decide, Check, People, Record.
 const KEEPER_DOORS = [
   {
-    label: 'The desk',
+    label: 'Decide',
     door: true,
-    what: 'Start here. What is waiting for a decision, what nobody has opened yet, and who is checking — every number a way in to the page where it is dealt with.',
+    what: 'One entry at a time: on the record, or not yet. Both are written down in your name, and \u201cnot yet\u201d is never counted as a rejection.',
   },
   {
-    label: 'Review queue',
+    label: 'Check',
     door: true,
-    what: 'Every submission waits for a person. Publish it, hold it, or turn it away — the screener\u2019s note is advice only.',
+    what: 'Read the sources behind an entry and say what you found. This room decides nothing — it is a second pair of eyes, and a checker is given this one only.',
   },
   {
-    label: 'The guest list',
+    label: 'People',
     door: true,
-    what: 'The people allowed to check an entry and nothing else. Add one and they are invited; take one off and it stops that moment. They never see who sent an entry.',
+    what: 'Who holds a key and who is asking for one. Nothing here moves on one hand alone: one keeper proposes, a second keeper agrees.',
   },
   {
-    label: "Keeper's log",
+    label: 'Record',
     door: true,
-    what: 'The record\u2019s own diary: what a host said, what was decided and why, and what is still owed. A decision that is not written down gets re-made, differently, in six months.',
-  },
-  {
-    label: 'Categories',
-    door: true,
-    what: 'Add, rename and reorder the record\u2019s categories without a developer, months or years from now.',
-  },
-  {
-    label: 'Top crawl photos',
-    door: true,
-    what: 'The credited pictures across the top of the record, shrunk before they are stored so a phone opens them fast.',
-  },
-  {
-    label: 'How well an entry is known',
-    door: true,
-    what: 'Set an entry\u2019s standing yourself: single source, corroborated, or the body\u2019s own record — left alone until a second origin is actually named.',
+    what: 'What the record holds and where a claim came from: how much is waiting, how much nobody has opened, and how many checks were made this week. Every number is a way in to the page where it is dealt with.',
   },
 ];
 
@@ -199,7 +189,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Wire, Map and Search. The foot also opens Why, Method, Corrections and this guide. An invited keeper also sees the keeper’s door there."
+        note="The same drawings at the top and foot of the screen open Record, Wire, Map, Reach and Search. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited keeper also sees the keeper’s door there."
         items={BAR}
       />
 
@@ -234,14 +224,14 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="How we check entries, Corrections and this guide. Terms, Privacy and keeper access sit below. The doors mark opens every open door on one screen, without leaving the page."
+        note="How we check entries, Corrections and this guide. Terms, Privacy and keeper access sit below. The Doors mark in the masthead opens every open door on one screen, without leaving the page."
         items={FOOT}
       />
 
       <GuideBand
         number="07"
         heading="When you are the keeper"
-        note="Seven buttons sit behind the keeper’s door, on the address the record was given for you, in the order you will use them. A reader never sees them, and nothing on the record goes up or comes down without one of them being used."
+        note="Four rooms sit behind the keeper’s door, in the order a keeper meets them. A checker is given the second one only. A reader never sees any of them, and nothing goes on the record or comes off it without one of them being used."
         items={KEEPER_DOORS}
       />
 
