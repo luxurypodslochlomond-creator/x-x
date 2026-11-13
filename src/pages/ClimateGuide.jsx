@@ -256,7 +256,7 @@ export default function ClimateGuide() {
       <section className="mt-10 border-t border-record-ink pt-6">
         <h2 className="mb-1 text-2xl text-record-ink">Every open door</h2>
         <p className="mb-5 text-[11px] font-mono uppercase tracking-[0.16em] text-record-muted">
-          The sheet&rsquo;s doors, printed · the same list, typed
+          Contents · the same list the sheet opens, printed
         </p>
         <RecordPageIndex compact />
       </section>

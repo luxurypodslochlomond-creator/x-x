@@ -45,7 +45,13 @@ export default function RecordPagesPanel({ open, onClose }) {
             and a rule drawn under it — a plate, not a panel. */}
         <div className="mb-3 flex shrink-0 items-start justify-between gap-4 border-b border-record-ink pb-2.5">
           <div>
-            <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">The record</p>
+            {/* ── THE PLAIN WORD ABOVE THE TRUE ONE ────────────────────────────────
+                "Every open door" is the honest title and it is the record's own word —
+                but a host or a checker opening this for the first time should never have
+                to work out what they are looking at. So the small line above it says
+                "Contents", the word every book on earth uses. The metaphor is the title;
+                the plain word is the frame around it. Neither is left to be guessed. */}
+            <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">Contents</p>
             {/* It has been called Contents, then Index, then Every door — and "every door" was
                 the one word on this sheet that was not true. The music and the support page
                 came off the record's doors at the founder's request on 9 November, and the
