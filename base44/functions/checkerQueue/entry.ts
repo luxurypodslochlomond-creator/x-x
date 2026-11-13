@@ -55,30 +55,55 @@ export default async function (req) {
     const who = await resolveChecker(base44);
     if (who.error) return Response.json({ error: who.error, paused: Boolean(who.paused) }, { status: who.status });
 
-    const results = await Promise.allSettled(
-      KINDS.map((k) =>
-        base44.asServiceRole.entities[k.entity].filter(
-          { status: 'draft' },
-          { sort: '-created_date', limit: 25 }
-        )
-      )
-    );
+    // ── BOTH KINDS OF WORK, BECAUSE ONLY ONE OF THEM WAS IN HERE ────────────────────
+    // This queue served drafts and nothing else. The record has none: 44 entries stand
+    // published — 19 solutions, 3 actions, 18 on the wire, 4 gatherings — and not one of
+    // them has ever been opened by a second pair of eyes. So an invited volunteer's first
+    // morning was an empty page while the record stood there unchecked, and the only thing
+    // the queue did hold was songs. That is the opposite of what they came for and the
+    // opposite of what a research panel is being shown.
+    //
+    // So the queue carries both now: what is waiting to go on, and what is already on and
+    // nobody has yet looked at. A draft comes first, because a keeper is about to decide on
+    // it. A published entry stays only until somebody has left a word against it, so the
+    // queue cannot quietly become the same twelve entries for ever.
+    const reads = [];
+    KINDS.forEach((k) => {
+      reads.push(
+        base44.asServiceRole.entities[k.entity].filter({ status: 'draft' }, { sort: '-created_date', limit: 25 }),
+        base44.asServiceRole.entities[k.entity].filter({ status: 'published' }, { sort: 'created_date', limit: 40 })
+      );
+    });
+    const results = await Promise.allSettled(reads);
 
-    const entries = [];
-    KINDS.forEach((k, i) => {
-      const settled = results[i];
+    const waiting = [];
+    const onRecord = [];
+    const collect = (settled, type, into) => {
       if (settled.status !== 'fulfilled') return;
       const rows = settled.value?.items || settled.value || [];
       rows.forEach((r) => {
-        entries.push({
-          type: k.type,
-          id: r.id,
-          created_date: r.created_date,
-          ...shape(k.type, r),
-        });
+        into.push({ type, id: r.id, created_date: r.created_date, ...shape(type, r) });
       });
+    };
+    KINDS.forEach((k, i) => {
+      collect(results[i * 2], k.type, waiting);
+      collect(results[i * 2 + 1], k.type, onRecord);
     });
-    entries.sort((a, b) => new Date(a.created_date) - new Date(b.created_date));
+
+    let looked = new Set();
+    if (onRecord.length) {
+      const page = await base44.asServiceRole.entities.ClimateCheck.filter(
+        { entry_id: { $in: onRecord.map((e) => e.id) } },
+        { sort: '-created_date', limit: 500 }
+      );
+      (page?.items || page || []).forEach((c) => looked.add(c.entry_id));
+    }
+
+    const oldestFirst = (a, b) => new Date(a.created_date) - new Date(b.created_date);
+    const entries = [
+      ...waiting.sort(oldestFirst),
+      ...onRecord.filter((e) => !looked.has(e.id)).sort(oldestFirst),
+    ];
 
     // Everyone's notes, not just this person's: seeing that a colleague already opened this
     // link and what they found is the difference between repeating work and corroborating it.
