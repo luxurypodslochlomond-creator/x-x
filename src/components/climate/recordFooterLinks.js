@@ -72,17 +72,17 @@ export const FOOTER_NAV = [
 // colophon carries exactly the doors the bar does not, and never a second copy of the
 // bar — a foot that repeats the head teaches the reader that neither one matters.
 export const ELSEWHERE_NAV = [
-  // ── THE MUSIC ROOM IS OFF THE RECORD FOR NOW ─────────────────────────────────
-  // The founder, 13 November 2026: "remove the music please as it's confusing for
-  // Janine — she just wants the theme from Dillon… we will come back to the music but
-  // can't have the other tracks in just now." So the door is off the contents sheet and
-  // the page is not deleted, not emptied and not re-scoped: the room, its terms, the
-  // theme control and every piece given to the record all stay exactly where they are,
-  // and putting this one line back is what returns it to the book. Nothing is lost by a
-  // door being closed; something is lost by a room being swept.
-  //
-  // The comment below is the history of the room's place on the rail, kept as it was.
-  // ── THE MUSIC ROOM IS A DOOR AGAIN, BUT NOT ON THE RAIL ─────────────────────
+  // ── THE MUSIC ROOM STAYS, AND ONLY THE THEME IS IN IT ────────────────────────
+  // The founder, 13 November 2026, half an hour after asking for the door off: "wasn't
+  // room it was the tracks you enticed there… a taxi driver uploaded them which was very
+  // kind but we need to mention the music door — Janine is speaking with Dillon too." So
+  // the door stays open and the room stays findable; what changed is the room's contents.
+  // MUSIC_HOLD holds every piece given until a person has heard it, and only the record's
+  // theme stands — so a reader arriving today finds one honest line saying the theme is
+  // being made with Dillon, and no shelf of somebody else's uploads to mistake for the
+  // record's own signal. The tracks are not deleted and not judged: a taxi driver gave
+  // them in good faith, and they wait their turn on the record.
+  // ── THE MUSIC ROOM IS A DOOR HERE, BUT NOT ON THE RAIL ─────────────────────
   // It comes back here, on the contents sheet, where a reader who goes looking for the
   // music finds it: the record's theme, and the pieces given to it, each one pressed to
   // play and never played at anybody.
@@ -94,6 +94,7 @@ export const ELSEWHERE_NAV = [
   // the contents sheet invites nobody: you have to open the sheet and choose it. So the
   // request is kept and the room is reachable, which is the only version of this that
   // doesn't put the record in the position of quietly undoing her instruction.
+  { label: 'The music room', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.

@@ -25,6 +25,7 @@ const DOORS = [
   { label: 'The record', page: 'TogetherChangeClimate', what: 'Front page: solutions, crises, actions, gatherings.' },
   { label: 'How it is made', page: 'ClimateMethod', what: 'Sources, verification, who decides, corrections.' },
   { label: 'The impact', page: 'ClimateImpact', what: 'Where it has been read.' },
+  { label: 'The music room', page: 'ClimateMusic', what: 'The record’s theme, pressed to play.' },
   { label: 'The Buttons', page: 'ClimateGuide', what: 'Each control and the one thing it does.' },
   { label: 'The Brief', page: 'ClimateBrief', what: 'What is live, what is planned, and what is not built.' },
   { label: 'Terms', page: 'ClimateTerms', what: 'The ground it stands on.' },
@@ -80,11 +81,14 @@ export default function ClimateHost() {
         ask="Please remove music and any other background trials that need to be cleared from the platform."
         verdict="Nothing plays by itself"
         tone="yes"
-        doors={[{ label: 'Every music control', to: createPageUrl('ClimateGuide') }]}
+        doors={[
+          { label: 'See the music room', to: createPageUrl('ClimateMusic') },
+          { label: 'Every music control', to: createPageUrl('ClimateGuide') },
+        ]}
       >
         <p>No music, no video and no sound starts anywhere on this record until a reader presses play. There is nothing running behind a page while somebody reads.</p>
         <p>Music lives in one room, entered on purpose and pressed to play. Every file was handed over by its artist and kept exactly as given, never re-encoded. Each track prints the artist's own choice: take it whole, or heard here only.</p>
-        <p>One piece may stand at the head of that room as the record's signal. That place is empty right now, and stays empty until a host and the artist settle it.</p>
+        <p>One piece stands as the record's signal, and that place is being settled with the artist now: Dillon Squire is making it, and it will stand at the head of the room, pressed to play, the day it is given. Until then the room says so plainly, and the other pieces given to the record wait to be heard by a person rather than standing there in the meantime.</p>
         <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2.5">
           <strong>The part you actually asked for.</strong> You asked for the music to come off. It can — in one
           step, and nothing else on the record depends on it. Say the word and the room closes until a host is
