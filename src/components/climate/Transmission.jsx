@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
+import { base44 } from '@/api/base44Client';
 import TransmissionConsole from './TransmissionConsole';
 import TransmissionRecord from './TransmissionRecord';
 import TransmissionFilm, { FILM_POSTER } from './TransmissionFilm';
@@ -8,39 +9,49 @@ import ShareCardButton from './ShareCardButton';
 import { buildTransmissionShareCard } from './shareCardImage';
 
 // ── THE TRANSMISSION ──
-// Dillon Squire's track, given free to the record and credited to him by name.
-// It is not a stream and not for sale: nothing here charges for it, and the page
-// says so, so nobody has to wonder. Served lossless — the master exactly as it
-// left the studio, nothing thrown away between the desk and the listener. The console only pulls the file when a person presses
-// play, so nothing is spent until someone chooses to listen. The music drives the
-// picture — the scope and the falling spectrogram move to his sound, not a synth.
-const TRANSMISSION_URL = 'https://media.base44.com/files/public/6889f31e76713b9cd47e043c/06f236f63_DS_XRAYGIRL_MSTGB2_44_16.wav';
-const TRACK_TITLE = 'X-Ray Girl';
+// This panel used to BE one track: Dillon Squire's "X-Ray Girl" was written into the code
+// itself — the file, the title, the spec, the share card, the film credit. So when the
+// track was taken off the record at Janine's asking, the panel went on playing it, because
+// nothing that plays music should have been naming a song in its own source.
+//
+// Now the panel asks the record which piece stands as the theme, and plays that one. No
+// theme, no playback: while the theme is being made the panel says so in a line and the
+// instrument stays dark. Nothing here plays at a reader who has not pressed it, and there
+// is no hard-coded track for anybody to forget about again.
+//
+// The console still pulls the file only when a hand presses play, so nothing is spent
+// until someone chooses to listen, and the music still drives the picture.
 const DEDICATION = 'For the planet · for all of us';
 
-// ── PASS IT ON ── the track leaves as the same kind of card the wire entries do: who made
-// it, that it was given and not sold, the master's real spec, and where it lives. The card
-// is drawn on the reader's own device, so a share needs no server and nobody is tracked.
-const TRACK_CARD = {
-  id: 'dillon-squire-x-ray-girl',
-  headline: 'X-Ray Girl — Dillon Squire, given free to the record',
-  title: TRACK_TITLE,
-  artist: 'Dillon Squire',
-  dedication: DEDICATION,
-  spec: 'WAV · 44.1 kHz · 16-bit',
-  body: 'Made for the record and given to it. Free to listen — nothing to buy, no paywall, no ad. His name stays on it, and the record never charges for it.',
-  image_url: FILM_POSTER,
-  image_credit: "Frame from Dillon Squire's film · Stoneymollan, Loch Lomond, Scotland",
-  url_path: '/TogetherChangeClimate',
-};
-
 export default function Transmission() {
+  const [track, setTrack] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    base44.entities.ClimateTrack.filter({ status: 'published', theme: true }, { limit: 1 })
+      .then((page) => setTrack(page.items?.[0] || null))
+      .catch(() => setTrack(null))
+      .finally(() => setLoaded(true));
+  }, []);
+
+  const card = track && {
+    id: track.id,
+    headline: `${track.title} — ${track.artist_name}, given free to the record`,
+    title: track.title,
+    artist: track.artist_name,
+    dedication: DEDICATION,
+    spec: track.spec || 'WAV · 44.1 kHz · 16-bit',
+    body: 'Made for the record and given to it. Free to listen — nothing to buy, no paywall, no ad. The name stays on it, and the record never charges for it.',
+    image_url: track.cover_url || FILM_POSTER,
+    image_credit: track.cover_url ? '' : "Frame from Dillon Squire's film · Stoneymollan, Loch Lomond, Scotland",
+    url_path: '/ClimateMusic',
+  };
+
   return (
     <div className="border-t-4 border-[#e2602a]">
       {/* ── THE NAME ON IT ── the music sat here with no word above it, so a reader meeting
-             it did not know it was the record's music, or that more had been given than this
-             one track. Named plainly, with the way through to everything given so far. No
-             glow, no player started, nothing asked for. */}
+             it did not know it was the record's music. Named plainly, with the way through
+             to everything given so far. No glow, no player started, nothing asked for. */}
       <div id="music" className="bg-[#141210] text-[#efe7d6] px-5 lg:px-10 py-3 lg:py-4 flex items-center justify-between gap-3">
         <div className="min-w-0">
           <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2vw, 28px)', letterSpacing: '-0.02em' }}>
@@ -58,63 +69,50 @@ export default function Transmission() {
         </Link>
       </div>
 
-      {/* ── THE INSTRUMENT ── the art and the transport in one panel: press play, the picture stays ── */}
-      <TransmissionConsole
-        audioUrl={TRANSMISSION_URL}
-        artistName="Dillon Squire"
-        trackTitle={TRACK_TITLE}
-        dedication={DEDICATION}
-      />
-
-      {/* ── THE FILM ── Dillon's film from Stoneymollan, the ground this is all for ── */}
-      <TransmissionFilm />
-
-      {/* ── THE GIFT ── said out loud, so nobody has to wonder what it costs ── */}
-      <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210] flex items-start gap-3">
-        <div className="flex-1 min-w-0">
-          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">Given, not sold</p>
-          <p className="text-[13px] leading-relaxed text-[#efe7d6]/90">
-            Dillon Squire made this for the record and gave it to it. Free to listen, nothing
-            to buy, no paywall, no ad. His name stays on it, and the record never charges for it.
+      {!loaded ? (
+        <div className="bg-[#141210] px-5 lg:px-10 py-10 text-center">
+          <p className="text-[11px] font-mono text-[#efe7d6]/45">Bringing the theme through…</p>
+        </div>
+      ) : !track ? (
+        /* No theme yet. The instrument is dark rather than playing somebody else's piece. */
+        <div className="bg-[#141210] text-[#efe7d6] px-5 lg:px-10 py-8 border-t border-[#efe7d6]/10">
+          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-2">The theme</p>
+          <p className="text-[13px] leading-relaxed text-[#efe7d6]/85">
+            The record's theme is being made by Dillon Squire. It will stand here, pressed to play.
           </p>
         </div>
-        <ShareCardButton entry={TRACK_CARD} build={buildTransmissionShareCard} compact />
-      </div>
+      ) : (
+        <>
+          {/* ── THE INSTRUMENT ── the art and the transport in one panel: press play, the picture stays ── */}
+          <TransmissionConsole
+            audioUrl={track.audio_url}
+            artistName={track.artist_name}
+            trackTitle={track.title}
+            dedication={DEDICATION}
+          />
 
-      {/* ── HONEST CAPTION ── passes the panel, feels the truth ── */}
-      <div className="bg-[#141210] text-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t border-[#efe7d6]/10">
-        <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-2">
-          The signal
-        </p>
-        <p className="text-[13px] leading-relaxed text-[#efe7d6]/80">
-          The transmission is tuned to the Earth's resonance — 7.83 Hz, the cavity
-          between the planet's surface and the ionosphere, measured since 1952.
-          Resonance is real physics: when a frequency matches a system's natural
-          frequency, the amplitude increases. That is not mysticism, it is how
-          resonance works.
-        </p>
-        <p className="text-[13px] leading-relaxed text-[#efe7d6]/80 mt-3">
-          Zero loss means one thing, exactly: nothing is thrown away between Dillon's
-          desk and your ears. Every streaming service discards most of a file to save
-          bandwidth. This does not — what arrives is the master, whole.
-        </p>
-        <p className="text-[12px] leading-relaxed text-[#efe7d6]/55 mt-2">
-          It is not a promise of magic from a phone speaker. A master is only as good
-          as what it comes out of — headphones, a stereo, a car. Give it one of those
-          and you hear the record he actually made.
-        </p>
-      </div>
+          {/* ── THE FILM ── Dillon's film from Stoneymollan, the ground this is all for ── */}
+          <TransmissionFilm />
 
-      {/* ── ON THE RECORD ── provenance and a citation, so the work can be checked and quoted ── */}
-      <TransmissionRecord />
+          {/* ── THE GIFT ── said out loud, so nobody has to wonder what it costs ── */}
+          <div className="bg-[#1e3a2b] text-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210] flex items-start gap-3">
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#e2602a] mb-1.5">Given, not sold</p>
+              <p className="text-[13px] leading-relaxed text-[#efe7d6]/90">
+                {track.artist_name} made this for the record and gave it to it. Free to listen, nothing
+                to buy, no paywall, no ad. The name stays on it, and the record never charges for it.
+              </p>
+            </div>
+            {card && <ShareCardButton entry={card} build={buildTransmissionShareCard} compact />}
+          </div>
+
+          {/* ── ON THE RECORD ── provenance and a citation, so the work can be checked and quoted ── */}
+          <TransmissionRecord />
+        </>
+      )}
 
       {/* ── NOTHING FOR SALE, AND NOBODY ASKED ──
-          This strip used to say "the record is kept online by the people who read it" and
-          ended in a "Keep it going" button that went to the support page. Both came off on
-          9 November, at the founder's word: what it costs and who pays is handled by a host,
-          worked out with them, and not asked of a reader in the meantime. The band stays, as
-          a statement, and asks for nothing — which is also the honest thing to say while
-          giving is shut. */}
+          A statement, and it asks for nothing — the honest thing to say while giving is shut. */}
       <div className="bg-[#efe7d6] px-5 lg:px-10 py-4 lg:py-6 border-t-2 border-[#141210]">
         <p className="text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]">Free to read. Free to listen. Nothing for sale.</p>
         <p className="text-[11px] font-mono text-[#5a5246] mt-1 leading-relaxed">
