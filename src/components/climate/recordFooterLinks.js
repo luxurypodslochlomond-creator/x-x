@@ -100,6 +100,15 @@ export const ELSEWHERE_NAV = [
   // repeats the masthead teaches a reader that neither one matters.
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
   { label: 'Become a checker', to: '/ClimateFellows', what: 'What checking involves, and how to ask to take part.' },
+  // ── THE ROLL, AND WHY IT IS A DOOR HERE AND NOT ON THE RAIL ────────────────
+  // The founder, 13 November: something coolasfuck for the checkers and volunteers that
+  // is not a social network — their names, their own words, and the work that is actually
+  // theirs, so they can see themselves on the record and Janine can see them too. It goes
+  // beside the page that asks people to join, because the two questions are one: what is
+  // this, and who is already doing it. A reader has to choose the sheet to find it, which
+  // is right — a roll is not a room everybody walks into, and a volunteer's few lines
+  // should not be dressed up as a feed.
+  { label: 'Who is checking', to: '/ClimateRoll', what: 'The people on the record’s list, in their own words, and what they have signed.' },
   { label: 'Host the record', to: '/ClimateHost', what: 'What carrying the record involves.' },
   // Support is off the record's doors at Janine's request, 9 November: "Donations can be
   // handled by a host. Please save this… for when we are discussing with a potential

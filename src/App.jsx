@@ -154,6 +154,7 @@ const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
 const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrections'));
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
+const ClimateRollPage = React.lazy(() => import('./pages/ClimateRoll'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
 const ClimateKeeperRoomPage = React.lazy(() => import('./pages/ClimateKeeperRoom'));
@@ -364,6 +365,12 @@ const AuthenticatedApp = () => {
           the server, so she holds the record's keys and none of the building's. */}
       <Route path="/ClimateKeeperRoom" element={<ClimateLayout currentPage="ClimateKeeperRoom"><ClimateKeeperRoomPage /></ClimateLayout>} />
       <Route path="/ClimateFellows" element={<ClimateLayout currentPage="ClimateFellows"><ClimateFellowsPage /></ClimateLayout>} />
+      {/* The roll: the people who check this record, in their own words. Its door sits on
+          the contents sheet beside "Become a checker", and at the foot of the fellows page,
+          because the two questions belong together: what checking is, and who is already
+          doing it. It is not on the five-door rail and should not be — a roll is something
+          a reader goes looking for, and a volunteer is proud of, not a room everyone enters. */}
+      <Route path="/ClimateRoll" element={<ClimateLayout currentPage="ClimateRoll"><ClimateRollPage /></ClimateLayout>} />
       {/* A letter is one person writing to another, so it is not printed on the brief and
           not linked from the record. It opens only to a keeper's key. */}
       <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />

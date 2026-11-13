@@ -1,7 +1,7 @@
 {
   "name": "ClimateChecker",
   "type": "object",
-  "description": "Who may come into the record, and what they may do once inside. One list, two kinds of line: a checker is a pair of eyes \u2014 they read what is waiting and write a note in their own name, and that is all; a keeper is the person the record answers to \u2014 the founder \u2014 and they alone may put an entry on the record or hold it back. The flag on the line decides which, so the record has one guest list rather than two that drift apart. Neither kind can see a submitter's email, and neither holds the app's admin keys: being the keeper of this record gives the record's own power and nothing else in the building. A keeper adds and removes these lines; nobody can add themselves.",
+  "description": "Who may come into the record, and what they may do once inside. One list, two kinds of line: a checker is a pair of eyes \u2014 they read what is waiting and write a note in their own name, and that is all; a keeper is the person the record answers to \u2014 the founder \u2014 and they alone may put an entry on the record or hold it back. The flag on the line decides which, so the record has one guest list rather than two that drift apart. Neither kind can see a submitter's email, and neither holds the app's admin keys: being the keeper of this record gives the record's own power and nothing else in the building. A keeper adds and removes these lines; nobody can add themselves. A person's own line for the public roll is written by that person and by nobody else: it is empty until they write it, and emptying it takes them off the roll without touching their place on the list.",
   "properties": {
     "email": {
       "type": "string",
@@ -23,7 +23,16 @@
     },
     "note": {
       "type": "string",
-      "description": "Why this person is on the list, e.g. 'Trebuchet volunteer, coastal restoration'. Kept so a keeper in a year knows who they were and why."
+      "description": "Why this person is on the list, e.g. 'Trebuchet volunteer, coastal restoration'. Kept so a keeper in a year knows who they were and why. This is the record's own note and is never published."
+    },
+    "public_line": {
+      "type": "string",
+      "description": "A few words about themselves, written by the person it is about and by no one else, to stand beside their name on the record's roll. This is the only thing about a person that is ever shown to a reader, and it is theirs: a keeper cannot write it for them, a machine cannot fill it in, and an empty field means they are not on the roll at all \u2014 the list itself stays private. Their address is never part of it and never shown."
+    },
+    "public_line_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When they last wrote or cleared their line, so a reader is never shown words as though they were written freshly when they were not."
     },
     "added_by": {
       "type": "string",
