@@ -26,7 +26,6 @@ const DOORS = [
   { label: 'How it is made', page: 'ClimateMethod', what: 'Sources, verification, who decides, corrections.' },
   { label: 'The impact', page: 'ClimateImpact', what: 'Where it has been read.' },
   { label: 'The Buttons', page: 'ClimateGuide', what: 'Each control and the one thing it does.' },
-  { label: 'The music room', page: 'ClimateMusic', what: 'Given music. Nothing plays until pressed.' },
   { label: 'The Brief', page: 'ClimateBrief', what: 'What is live, what is planned, and what is not built.' },
   { label: 'Terms', page: 'ClimateTerms', what: 'The ground it stands on.' },
   { label: 'Privacy', page: 'ClimatePrivacy', what: 'What is kept, and what never is.' },
@@ -81,10 +80,7 @@ export default function ClimateHost() {
         ask="Please remove music and any other background trials that need to be cleared from the platform."
         verdict="Nothing plays by itself"
         tone="yes"
-        doors={[
-          { label: 'See the music room', to: createPageUrl('ClimateMusic') },
-          { label: 'Every music control', to: createPageUrl('ClimateGuide') },
-        ]}
+        doors={[{ label: 'Every music control', to: createPageUrl('ClimateGuide') }]}
       >
         <p>No music, no video and no sound starts anywhere on this record until a reader presses play. There is nothing running behind a page while somebody reads.</p>
         <p>Music lives in one room, entered on purpose and pressed to play. Every file was handed over by its artist and kept exactly as given, never re-encoded. Each track prints the artist's own choice: take it whole, or heard here only.</p>

@@ -72,6 +72,16 @@ export const FOOTER_NAV = [
 // colophon carries exactly the doors the bar does not, and never a second copy of the
 // bar — a foot that repeats the head teaches the reader that neither one matters.
 export const ELSEWHERE_NAV = [
+  // ── THE MUSIC ROOM IS OFF THE RECORD FOR NOW ─────────────────────────────────
+  // The founder, 13 November 2026: "remove the music please as it's confusing for
+  // Janine — she just wants the theme from Dillon… we will come back to the music but
+  // can't have the other tracks in just now." So the door is off the contents sheet and
+  // the page is not deleted, not emptied and not re-scoped: the room, its terms, the
+  // theme control and every piece given to the record all stay exactly where they are,
+  // and putting this one line back is what returns it to the book. Nothing is lost by a
+  // door being closed; something is lost by a room being swept.
+  //
+  // The comment below is the history of the room's place on the rail, kept as it was.
   // ── THE MUSIC ROOM IS A DOOR AGAIN, BUT NOT ON THE RAIL ─────────────────────
   // It comes back here, on the contents sheet, where a reader who goes looking for the
   // music finds it: the record's theme, and the pieces given to it, each one pressed to
@@ -84,7 +94,6 @@ export const ELSEWHERE_NAV = [
   // the contents sheet invites nobody: you have to open the sheet and choose it. So the
   // request is kept and the room is reachable, which is the only version of this that
   // doesn't put the record in the position of quietly undoing her instruction.
-  { label: 'The music room', to: '/ClimateMusic', what: 'The theme, and the music given to the record. Nothing plays until pressed.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.
