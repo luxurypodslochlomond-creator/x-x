@@ -78,16 +78,20 @@ export default async function (req) {
 
     const waiting = [];
     const onRecord = [];
-    const collect = (settled, type, into) => {
+    // The pool a line came from is sent with it, because a checker deserves to know whether
+    // they are the last word on something about to go up or a second pair of eyes on
+    // something already standing there. It was invisible before: two very different jobs
+    // printed the same on the card.
+    const collect = (settled, type, into, state) => {
       if (settled.status !== 'fulfilled') return;
       const rows = settled.value?.items || settled.value || [];
       rows.forEach((r) => {
-        into.push({ type, id: r.id, created_date: r.created_date, ...shape(type, r) });
+        into.push({ type, id: r.id, created_date: r.created_date, state, ...shape(type, r) });
       });
     };
     KINDS.forEach((k, i) => {
-      collect(results[i * 2], k.type, waiting);
-      collect(results[i * 2 + 1], k.type, onRecord);
+      collect(results[i * 2], k.type, waiting, 'waiting');
+      collect(results[i * 2 + 1], k.type, onRecord, 'on_record');
     });
 
     let looked = new Set();

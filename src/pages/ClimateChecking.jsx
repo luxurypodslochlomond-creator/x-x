@@ -18,6 +18,14 @@ const ANSWERS = [
 
 const WORD = { holds: 'source says it', does_not_hold: 'it does not', cannot_tell: 'could not tell' };
 
+// The queue is oldest first, so the date is the whole of the explanation for the order.
+const when = (d) => {
+  if (!d) return '';
+  const t = new Date(d);
+  if (Number.isNaN(t.getTime())) return '';
+  return t.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+};
+
 export default function ClimateChecking({ plain = false, onChange }) {
   const compact = useKeeperMobile() && plain;
   const Entry = compact ? 'details' : 'div';
@@ -202,12 +210,20 @@ export default function ClimateChecking({ plain = false, onChange }) {
               <Entry key={entry.id} className="room-check-entry bg-record-bone border-2 border-record-ink/20 p-3" {...(compact ? { open: index === 0, name: 'keeper-sources' } : {})}>
                 {compact ? (
                   <summary className="room-check-summary">
-                    <span><span className="room-check-kind">{entry.source_name || entry.type}</span><span className="room-check-title">{entry.title}</span></span>
+                    <span><span className="room-check-kind">{[entry.source_name || entry.type, when(entry.created_date)].filter(Boolean).join(' · ')}</span><span className="room-check-title">{entry.title}</span></span>
                     <span className="room-check-toggle" aria-hidden="true" />
                   </summary>
                 ) : <>
                   <p className="text-[10.5px] font-mono uppercase tracking-[0.16em] text-record-muted mb-1.5">
-                    {entry.type === 'comment' ? 'comment' : entry.type}{entry.source_name ? ` · ${entry.source_name}` : ''}
+                    {entry.type === 'group' ? 'gathering' : entry.type}{entry.source_name ? ` · ${entry.source_name}` : ''}
+                  </p>
+                  {/* The date, and which job this is. The queue runs oldest first, so the date
+                      is the explanation for the order — and "waiting to go on" and "on the
+                      record" are two different promises being asked of a volunteer. */}
+                  <p className="text-[11px] text-record-muted mb-1.5" style={{ fontFamily: 'var(--font-reading)' }}>
+                    {entry.state === 'on_record'
+                      ? `On the record since ${when(entry.created_date)} · nobody has looked yet`
+                      : `Waiting to go on · sent in ${when(entry.created_date)}`}
                   </p>
                   <h2 className="text-record-ink text-[17px] leading-snug mb-2" style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}>{entry.title}</h2>
                 </>}
