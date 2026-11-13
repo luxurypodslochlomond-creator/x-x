@@ -148,7 +148,14 @@ const KEEPER_DOORS = [
   {
     label: 'People',
     door: true,
-    what: 'Who holds a key and who is asking for one. Nothing here moves on one hand alone: one keeper proposes, a second keeper agrees.',
+    // Janine, by email, 13 November: "we have two excellent sounding volunteers to do
+    // research and checks. How do I get them started on the platform?" — answered here, on
+    // the page she was handed, because this is the only page she has. The line also had to
+    // stop claiming two keys for everything: a checker is a pair of eyes and one keeper's
+    // word puts them on the list. Only the keys themselves need two. Saying otherwise made
+    // a keeper expect a delay that never comes, and made the record sound harder to join
+    // than it is.
+    what: 'Who holds a key and who is asking for one — and the door a volunteer comes in by: type their name and address, and the record writes to them with their way in. One keeper\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The keys themselves move on two: one keeper proposes, a second agrees.',
   },
   {
     label: 'Record',

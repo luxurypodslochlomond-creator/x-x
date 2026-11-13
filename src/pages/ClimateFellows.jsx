@@ -123,7 +123,12 @@ export default function ClimateFellows() {
       </Block>
 
       <Block n="09" title="How to be let in">
-        <p>Ask to be put on the checking list. One line, with your name exactly as you want it signed and the address you will sign in with. That is the whole application.</p>
+        {/* This said "ask to be put on the checking list" and gave nobody a way to ask. A
+            volunteer arriving from a shared card had the instruction and no door, and a keeper
+            reading it still had to work out that the invitation is made in her own room. Both
+            halves are written now, in the order they happen. */}
+        <p>One line to a keeper: your name exactly as you want it signed, and the address you will sign in with. That is the whole application — no form, no interview, and no account to create first.</p>
+        <p>A keeper types both onto the list from the <strong>People</strong> door in her room, and the record writes to you at that address with your way in. One keeper&rsquo;s word is enough, because a pair of eyes is not a set of keys. If the letter has not come within a day, it is worth a second ask rather than a wait.</p>
         <p>Then read the <Go to="ClimateMethod">method</Go> — not to learn a system, but because it is the standard your notes will be held to, and you should see it before you put your name to anything.</p>
         <p>There are only two words inside this record. A <strong>keeper</strong> decides what goes on it. A <strong>checker</strong> reads a source and signs what they found — and that is what you are. "Fellow" is Trebuchet's word for you, and a good one; on the record it is a note on your line, not a third kind of person with its own keys.</p>
         <Rule>A machine can never sign this record. It has no name to sign with. Everything here rests on that one line.</Rule>
