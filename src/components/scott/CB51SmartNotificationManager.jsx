@@ -62,7 +62,7 @@ export default function CB51SmartNotificationManager({ artistId }) {
         color: '#ec4899',
         priority: 'urgent',
         timestamp: now,
-        action: () => window.location.href = `/cb51?tab=gigs`
+        action: () => window.location.href = `/CB51?tab=gigs`
       });
     }
 
@@ -99,7 +99,7 @@ export default function CB51SmartNotificationManager({ artistId }) {
         color: '#f59e0b',
         priority: 'medium',
         timestamp: now,
-        action: () => window.location.href = `/cb51?tab=calendar`
+        action: () => window.location.href = `/CB51?tab=calendar`
       });
     }
 
@@ -167,7 +167,7 @@ export default function CB51SmartNotificationManager({ artistId }) {
               </div>
             </div>
             <button
-              onClick={() => window.location.href = '/cb51'}
+              onClick={() => window.location.href = '/CB51'}
               className="mt-3 w-full bg-white text-black py-2 rounded font-bold text-sm hover:bg-gray-100 transition-colors"
             >
               Check now

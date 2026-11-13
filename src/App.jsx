@@ -164,6 +164,7 @@ const ClimateLetterToJaninePage = React.lazy(() => import('./pages/ClimateLetter
 const StudioPage = React.lazy(() => import('./pages/Studio'));
 const StudioShell = React.lazy(() => import('./components/studio/StudioShell'));
 const GenerateLogoPage = React.lazy(() => import('./pages/GenerateLogo'));
+const Learn51AIPage = React.lazy(() => import('./pages/Learn51AI'));
 
 
 
@@ -432,6 +433,37 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateReachPlace/:placeType/:place" element={<ClimateLayout currentPage="ClimateImpact"><ClimateReachPlacePage /></ClimateLayout>} />
       <Route path="/ClimateFounder" element={<ClimateLayout currentPage="ClimateFounder"><ClimateFounderPage /></ClimateLayout>} />
       <Route path="/ClimateSupport" element={<ClimateLayout currentPage="ClimateSupport"><ClimateSupportPage /></ClimateLayout>} />
+
+      {/* ── THE DOORS THAT HAD NO ADDRESS ────────────────────────────────────────────
+          Every page below was imported at the top of this file and offered in the app's own
+          navigation, and not one of them had a route — so a tap on ST51, the PetSounds51
+          pages, the CB51 diary or any of the admin tools fell straight through to the
+          not-found page. That is the quietest kind of broken: the link looks alive, the
+          list looks full, and the door opens onto nothing.
+          This file is no longer auto-generated, so the loop above only knows the pages that
+          existed when it last was. These are the rest, wired the same way the loop wires
+          its own: the app's frame around each one, and the admin door in front of the
+          screens whose names begin with Admin. */}
+      <Route path="/ST51" element={<LayoutWrapper currentPageName="ST51"><ST51Page /></LayoutWrapper>} />
+      <Route path="/FreqLift51Whitepaper" element={<LayoutWrapper currentPageName="FreqLift51Whitepaper"><FreqLift51WhitepaperPage /></LayoutWrapper>} />
+      <Route path="/AI51SoulDataset" element={<LayoutWrapper currentPageName="AI51SoulDataset"><AI51SoulDataset /></LayoutWrapper>} />
+      <Route path="/StoneymollanMarketing" element={<LayoutWrapper currentPageName="StoneymollanMarketing"><StoneymollanMarketing /></LayoutWrapper>} />
+      <Route path="/Learn51AI" element={<LayoutWrapper currentPageName="Learn51AI"><Learn51AIPage /></LayoutWrapper>} />
+      <Route path="/PetSounds51Landing" element={<LayoutWrapper currentPageName="PetSounds51Landing"><PetSounds51Landing /></LayoutWrapper>} />
+      <Route path="/PetSounds51PartnerBrief" element={<LayoutWrapper currentPageName="PetSounds51PartnerBrief"><PetSounds51PartnerBrief /></LayoutWrapper>} />
+      <Route path="/PetSounds51Whitepaper" element={<LayoutWrapper currentPageName="PetSounds51Whitepaper"><PetSounds51Whitepaper /></LayoutWrapper>} />
+      <Route path="/PetSounds51Press" element={<LayoutWrapper currentPageName="PetSounds51Press"><PetSounds51Press /></LayoutWrapper>} />
+      <Route path="/PetSounds51Data" element={<LayoutWrapper currentPageName="PetSounds51Data"><PetSounds51Data /></LayoutWrapper>} />
+      <Route path="/PetSounds51MarketingAssets" element={<LayoutWrapper currentPageName="PetSounds51MarketingAssets"><PetSounds51MarketingAssets /></LayoutWrapper>} />
+      <Route path="/PetSounds51ResearchOutreach" element={<LayoutWrapper currentPageName="PetSounds51ResearchOutreach"><PetSounds51ResearchOutreach /></LayoutWrapper>} />
+      <Route path="/CB51CalendarView" element={<LayoutWrapper currentPageName="CB51CalendarView"><CB51CalendarView /></LayoutWrapper>} />
+      <Route path="/CB51MessageInbox" element={<LayoutWrapper currentPageName="CB51MessageInbox"><CB51MessageInbox /></LayoutWrapper>} />
+      <Route path="/CB51FinanceAdmin" element={<LayoutWrapper currentPageName="CB51FinanceAdmin"><CB51FinanceAdmin /></LayoutWrapper>} />
+      <Route path="/CB51Todo" element={<LayoutWrapper currentPageName="CB51Todo"><CB51Todo /></LayoutWrapper>} />
+      <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminOnly><AdminHMRCTrackerPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminOnly><AdminLogoUploadPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminOnly><AdminPWAPushGuidePage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminOnly><AdminStoneymollanLegalPage /></AdminOnly></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
