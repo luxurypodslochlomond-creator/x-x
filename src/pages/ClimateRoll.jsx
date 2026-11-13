@@ -96,6 +96,20 @@ export default function ClimateRoll() {
             {totals.signers ? ` · by ${totals.signers} ${totals.signers === 1 ? 'person' : 'people'}` : ''}
           </p>
 
+          {/* ── WHY A KEEPER'S NAME CAN BE ON A PAGE ABOUT CHECKING ───────────────
+              The founder asked, and it is a fair question: if this is the volunteers'
+              page, why are the three of us on it? Because a keeper reads what is waiting
+              like anybody else — holding the keys does not mean you stop reading sources
+              — and because a line only ever appears where its owner wrote one. So being
+              here is a choice each keeper makes by writing, and not writing keeps them
+              off it. Said out loud, because otherwise it looks like a rule nobody set. */}
+          <p className="mt-3 max-w-[52ch] text-[13.5px] leading-[1.65] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
+            Everyone who checks this record appears here, keepers included — a keeper reads what is waiting like
+            anybody else, and carries the keys besides. It is never automatic: a name appears only where its owner
+            wrote a line, so a keeper who would rather the roll carried only the volunteers leaves their own line
+            empty and stays off it. Nothing else about them changes.
+          </p>
+
           {people.length > 0 ? (
             <div className="mt-7">
               {people.map((p) => (

@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { resolveChecker } from '../../shared/checkerAccess.ts';
+import { tellKeepers } from '../../shared/tellKeepers.ts';
 
 // ── THE ROLL ────────────────────────────────────────────────────────────────
 // The one place on this record where a person is shown as a person: the name they sign
@@ -46,11 +47,26 @@ export default async function (req) {
       const mine = rows.find((r) => lower(r.email) === lower(who.user?.email));
       if (!mine) return Response.json({ error: 'You are not on the list.' }, { status: 403 });
 
+      const wasEmpty = !String(mine.public_line || '').trim();
       const line = String(body?.line || '').replace(/\s+/g, ' ').trim().slice(0, LIMIT);
       await db.ClimateChecker.update(mine.id, {
         public_line: line,
         public_line_at: line ? new Date().toISOString() : '',
       });
+
+      // ── THE MOMENT SOMEBODY ACTUALLY STANDS UP ─────────────────────────────
+      // Being put on the list is not the same as turning up. This is the volunteer
+      // saying who they are, in their own words, in public — the first thing they do
+      // that is theirs alone — so a keeper hears it once, on the first line, and never
+      // on an edit. Clearing the line says nothing: that is somebody stepping back, and
+      // the record does not send a letter about a person choosing to be quieter.
+      if (line && wasEmpty) {
+        await tellKeepers(base44, {
+          headline: `${mine.name || 'A volunteer'} has put their line on the roll`,
+          line: `They wrote these words themselves: \u201C${line}\u201D`,
+        });
+      }
+
       return Response.json({ saved: true, line });
     }
 
