@@ -72,6 +72,19 @@ export const FOOTER_NAV = [
 // colophon carries exactly the doors the bar does not, and never a second copy of the
 // bar — a foot that repeats the head teaches the reader that neither one matters.
 export const ELSEWHERE_NAV = [
+  // ── THE MUSIC ROOM IS A DOOR AGAIN, BUT NOT ON THE RAIL ─────────────────────
+  // It comes back here, on the contents sheet, where a reader who goes looking for the
+  // music finds it: the record's theme, and the pieces given to it, each one pressed to
+  // play and never played at anybody.
+  //
+  // It does not go back on the five-door rail, and that is not an oversight. Janine asked
+  // for it in writing on 9 November: "it would be helpful to not distract by inviting
+  // music… it will take viewers away from the entries of solutions and crises." That was
+  // about arrival — the row a reader meets before they have read a single entry. A door on
+  // the contents sheet invites nobody: you have to open the sheet and choose it. So the
+  // request is kept and the room is reachable, which is the only version of this that
+  // doesn't put the record in the position of quietly undoing her instruction.
+  { label: 'The music room', to: '/ClimateMusic', what: 'The theme, and the music given to the record. Nothing plays until pressed.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.
