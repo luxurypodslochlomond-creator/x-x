@@ -121,10 +121,9 @@ export default function ClimateMusic() {
       eyebrow="The record's music"
       marker="Given to the record · never sold · no plays counted, no cut taken"
       title="Music"
-      statement="Music made for the record and given to it. Free to listen, the master whole, and the artist's name kept on it."
+      statement="Music given to the record. Free to hear, the master whole, the artist's name kept on it."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="A track stands here because an artist gave it to the record. Nothing is bought, sold, licensed or counted: no plays, no ranking, no cut — and no one pays for a place on this page. A master is stored exactly as it was given and served whole to anyone who comes to hear it, and whether it may be taken is the giver\u2019s own choice, said on the track itself. What is printed beside each track is the file's own truth: its format comes out of the master's header, its date is the moment the record took it in, and its fingerprint is read on the artist's own device before the file is ever sent — so nothing here has to be taken on trust."
     >
       {/* The record's own signal, above the field — pressed to play, never played at anyone. */}
       <ThemeSignal track={themeTrack} />
@@ -153,10 +152,7 @@ export default function ClimateMusic() {
           only what is positive. Until a piece has passed that, it is held: nothing given is
           deleted, and only the record's own theme stands while the check is being made. */}
       <p className="mb-4 border-l-4 border-l-[#141210]/25 pl-3 text-[11px] font-mono leading-relaxed text-[#5a5246]">
-        Every piece is heard by a person before it stands here. Music is checked for cultural
-        sensitivity first — no war symbols, no unkind reference of any kind, only what is
-        positive — so music is held while that check is made, and the record&rsquo;s own theme
-        is what stands until it is done.
+        Every piece is heard by a person first: no war symbols, nothing unkind, only what is positive.
       </p>
 
       {loading ? (
@@ -170,8 +166,8 @@ export default function ClimateMusic() {
             <p className="text-[12px] font-black font-mono uppercase text-[#141210]">Nothing on the record holds that</p>
             <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
               {MUSIC_HOLD
-                ? 'While the cultural check is being made, only the record\u2019s theme stands here. Nothing given has been taken away — every piece is waiting, whole, and will be searchable again once a person has heard it.'
-                : 'Try an artist\u2019s name, a word from a title, or the kind of piece it is. Every track on the record is searched — nothing is held back from a look.'}
+                ? 'While the check is being made, only the record\u2019s theme stands here.'
+                : 'Try an artist\u2019s name, a word from a title, or the kind of piece it is.'}
             </p>
             <button
               onClick={() => { setWord(''); setKind(''); }}
@@ -183,10 +179,9 @@ export default function ClimateMusic() {
         ) : (
           <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
             <Music className="w-7 h-7 text-[#e2602a] mx-auto mb-3" />
-            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">No music is standing yet</p>
+            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">The theme is on its way</p>
             <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
-              Nothing has been deleted: music already given is standing by, whole and untouched. The first piece to stand
-              here will be the record's theme. Yours can follow it.
+              Nothing given has been deleted. The first piece to stand here will be the record's theme.
             </p>
           </div>
         )
