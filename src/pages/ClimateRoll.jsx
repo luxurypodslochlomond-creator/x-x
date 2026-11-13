@@ -65,7 +65,8 @@ export default function ClimateRoll() {
           <p className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-record-red">your card</p>
           <p className="mt-2 mb-3 max-w-[46ch] text-[13px] leading-[1.6] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
             What you have checked, on one sheet you can hand to anyone who asks. No address, no account, no score —
-            and it says plainly that the record vouches for nobody and every entry on it can be opened and checked.
+            and it says plainly that a name here is not a rating: what the record stands behind is every entry, each
+            one carrying who says so, open for anyone to check.
           </p>
           <ShareCardButton
             entry={{ ...data.me, title: data.me.name }}

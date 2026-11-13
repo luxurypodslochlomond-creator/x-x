@@ -14,9 +14,12 @@ import { recordOrigin } from '../recordAddress';
 //  · Every number on it is counted from the checks table when the card is drawn — there
 //    is no field anyone can type a total into.
 //  · It carries the person's own words and none written for them.
-//  · It never says the record vouches for anybody. It says the opposite, in the record's
-//    own words, and it tells the reader every entry named on it can be opened and
-//    checked. That is the whole offer to an institution: verify, don't trust.
+//  · It takes responsibility without pretending to judge a person. The first wording here
+//    was "this record vouches for nobody", and the founder would not have it: vouching is
+//    a responsibility, he said, not something to wash your hands of. He was right. So the
+//    card now says what the record actually stands behind — every entry named on it, each
+//    of which carries its source and can be opened and checked by anyone. A name here is
+//    a person who read this record with us; it is not a rating of them.
 //
 // Drawn on the person's own device. No account, no follower, no address printed, and
 // nothing of theirs leaves the phone it was made on.
@@ -195,12 +198,13 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
     ctx.fillText(`+ ${count - signed.length} more on the record`, PAD, y + 6);
   }
 
-  // The sentence that does the real work: no vouching, and an offer to be checked.
+  // The sentence that does the real work: no rating of a person, and the record standing
+  // behind what it can actually be held to — the entries, and their sources.
   ctx.fillStyle = MUTED;
   ctx.font = `500 22px ${MONO}`;
   const close = wrapLines(
     ctx,
-    'This record vouches for nobody. Every entry named here can be opened on the record, where it carries its source, and checked by anyone.',
+    'Being named here is not a rating. What the record stands behind is every entry: each one says who says so, and anyone can open it and check.',
     MAXW,
     3,
   );
