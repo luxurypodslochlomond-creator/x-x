@@ -35,10 +35,17 @@ export default function ThemeSignal({ track }) {
 
   if (!track) {
     return (
-      <p className="mb-4 border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-3 text-[10px] font-mono leading-relaxed text-[#5a5246]">
-        <span className="text-[#e2602a] font-black uppercase tracking-widest">The theme is being made by Dillon Squire. </span>
-        It will stand here, pressed to play.
-      </p>
+      <section className="mb-4 border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-4">
+        <div className="flex items-center gap-1.5 mb-2 text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#e2602a]">
+          <COOLASFUCKTuningFork size={12} tone="signal" /> The record's theme
+        </div>
+        <p className="text-[13px] leading-relaxed text-[#1a1612]">
+          The theme is being made by Dillon Squire. It will stand here, pressed to play.
+        </p>
+        <p className="mt-2 text-[11px] leading-relaxed text-[#5a5246]">
+          Nothing given to the record has been deleted. Every piece is waiting its turn to be heard.
+        </p>
+      </section>
     );
   }
 

@@ -136,16 +136,20 @@ export default function ClimateMusic() {
         </div>
       )}
 
-      <MusicFind
-        word={word}
-        onWord={setWord}
-        kind={kind}
-        onKind={setKind}
-        kinds={kinds}
-        shown={tracks.length}
-        total={total || tracks.length}
-        loading={loading}
-      />
+      {/* A field of one piece is not a shelf to search: while the theme is the only thing
+          standing, asking a reader to look through it is furniture, not music. */}
+      {tracks.length > 1 && (
+        <MusicFind
+          word={word}
+          onWord={setWord}
+          kind={kind}
+          onKind={setKind}
+          kinds={kinds}
+          shown={tracks.length}
+          total={total || tracks.length}
+          loading={loading}
+        />
+      )}
 
       {/* Her rule, printed rather than assumed: music is heard by a person before it stands
           here, and the test is cultural — no war symbols, no unkind reference of any kind,
@@ -176,15 +180,7 @@ export default function ClimateMusic() {
               Show everything on the record
             </button>
           </div>
-        ) : (
-          <div className="border-2 border-[#141210]/15 bg-[#efe7d6] px-4 py-10 text-center">
-            <Music className="w-7 h-7 text-[#e2602a] mx-auto mb-3" />
-            <p className="text-[12px] font-black font-mono uppercase text-[#141210]">The theme is on its way</p>
-            <p className="text-[11px] font-mono text-[#5a5246] mt-2 leading-relaxed">
-              Nothing given has been deleted. The first piece to stand here will be the record's theme.
-            </p>
-          </div>
-        )
+        ) : null
       ) : (
         <>
           {/* The rail — only when there is more than one track to choose between. */}
