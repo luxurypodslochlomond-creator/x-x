@@ -342,6 +342,14 @@ export default function ClimateChecking({ plain = false, onChange }) {
             Your notes are kept in your name and are never edited afterwards. If your access is ended, what you found stays
             on the record: ending access is not the same as erasing work.
           </p>
+          {/* A volunteer arrives here and would never learn the roll exists, because it is
+              deliberately not on the rail. One quiet line, so their own words are findable
+              on the first morning rather than only if somebody remembers to mention it. */}
+          <p className="text-[12.5px] text-record-muted leading-[1.7] mt-2" style={{ fontFamily: 'var(--font-reading)' }}>
+            Your own words, if you want them, sit beside your name on{' '}
+            <Link to="/ClimateRoll" className="text-record-red underline">the roll of people who check this record</Link>.
+            Write them or clear them whenever you like — nobody else can touch them.
+          </p>
         </RecordNote>
       </div>
     </div>

@@ -54,7 +54,7 @@ const COPY = {
 // of what it did, in the same breath — and it happened, to the first keeper it invited.
 const KEEPER_BODY = {
   invited:
-    'You hold the keys to this record. You can put an entry on it or hold it back, sign what you publish, say how well something is known, and add or remove anyone else on the list. Your room is where whatever is waiting sits, one tap each — yes, or not yet. You are not an administrator of the whole building: the record\u2019s keys are the keys you were given, and no others.',
+    'You hold the keys to this record. You can put an entry on it or hold it back, sign what you publish, say how well something is known, and add or remove anyone else on the list \u2014 one word of yours puts a checker on it, and handing over the keys takes two of you. Your room is where whatever is waiting sits, one tap each — yes, or not yet. You are not an administrator of the whole building: the record\u2019s keys are the keys you were given, and no others.',
   paused:
     'Your key to the record is closed for now. Nothing you put on it has been taken off, and nothing you signed has been unsigned. If this is a surprise, reply to this letter and the other keeper will tell you why.',
   restored: 'Your key is open again, and the record answers to you as it did before.',
