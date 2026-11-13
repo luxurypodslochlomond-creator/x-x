@@ -269,7 +269,7 @@ export default function GuestList() {
 
       {!loading && !checkers.length && (
         <p className="text-[14px] text-[#3a342c] leading-[1.6] py-2" style={reading}>
-          Nobody checking yet. Ask above and they get a letter with a link to set a password.
+          Nobody checking yet. Ask above and they get an email with a link to set a password.
         </p>
       )}
 
