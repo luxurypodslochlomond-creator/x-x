@@ -63,7 +63,7 @@ export default async function (req) {
       const key = lower(c.checker_email);
       if (!key) return;
       if (!signedBy.has(key)) signedBy.set(key, []);
-      signedBy.get(key).push({ title: c.entry_title || '', type: c.entry_type || '' });
+      signedBy.get(key).push({ title: c.entry_title || '', type: c.entry_type || '', when: c.created_date || '' });
     });
 
     const onList = rows.filter((r) => r.active !== false);
@@ -96,10 +96,17 @@ export default async function (req) {
       const viewer = await base44.auth.me();
       const mine = viewer?.email ? rows.find((r) => lower(r.email) === lower(viewer.email)) : null;
       if (mine && mine.active !== false) {
+        // Their own card is drawn from the same rows as the roll, so what it says about
+        // them is what the record already says — never a second set of numbers.
+        const signed = signedBy.get(lower(mine.email)) || [];
         me = {
+          id: mine.id,
           name: mine.name || '',
           line: String(mine.public_line || '').trim(),
           is_keeper: Boolean(mine.is_keeper),
+          since: mine.created_date || '',
+          signed_count: signed.length,
+          signed: signed.slice(0, 6),
         };
       }
     } catch (e) {
