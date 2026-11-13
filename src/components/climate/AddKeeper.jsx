@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { KeyRound } from 'lucide-react';
+import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 
 // ── ADD A KEEPER, FROM THE RECORD'S OWN DESK ────────────────────────────────
 //
@@ -13,7 +14,18 @@ import { KeyRound } from 'lucide-react';
 // ink, one signal-red button, x = x at the top. Nothing about it looks like a
 // dashboard, because the person receiving it is being invited to the record, not to
 // a piece of software.
+//
+// ── AND IT WEARS THE DESK'S CLOTHES NOW ───────────────────────────────────────
+// This block was built before the room had a language, and it never learned it: a bone
+// card with a hard border, a shouting mono label in red capitals and a filled red slab
+// at the bottom, sitting directly under the checker form — so the People door showed two
+// forms that looked like two different products, and the loudest thing on the page was a
+// big red button inviting a keeper. Nothing about the job changed here. It is the same
+// three fields and the same server call; it simply stands in the same type, the same
+// quiet fields and the same one action as the form above it, because a keeper reading
+// this door should see one desk and not two.
 export default function AddKeeper({ onAdded }) {
+  const mobile = useKeeperMobile();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [busy, setBusy] = useState(false);
@@ -50,12 +62,18 @@ export default function AddKeeper({ onAdded }) {
     }
   };
 
-  const field = 'w-full min-h-[44px] px-3 mb-2 text-[13px] font-mono bg-record-paper border-2 border-record-ink/25 text-record-ink';
+  const field = 'w-full min-h-[46px] px-3 mb-2 text-[14px] bg-[#faf6ec] border border-[#141210]/25 text-[#141210] placeholder:text-[#8a7f70]';
+  const reading = { fontFamily: 'var(--font-reading)' };
 
   return (
-    <div className="bg-record-bone border-2 border-record-ink/40 p-3 mb-4">
-      <p className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-record-red mb-2">or ask for a keeper</p>
-      <p className="text-[12px] text-record-ink/75 leading-[1.6] mb-3" style={{ fontFamily: 'var(--font-reading)' }}>
+    <div>
+      {!mobile && (
+        <p className="text-[12.5px] text-[#6b5f4f] mb-2" style={reading}>
+          <KeyRound className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+          Ask for a keeper
+        </p>
+      )}
+      <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mb-2" style={reading}>
         A keeper holds every key: publishing, correcting, setting how well something is known, signing the record,
         and inviting anyone else. They also see the address of everyone who submitted. Fewer people, more keys —
         so this is asked here and agreed by another keeper before the keys change hands.
@@ -71,16 +89,21 @@ export default function AddKeeper({ onAdded }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
         placeholder="their name, as they will sign"
-        className={field}
+        className={`${field} mb-3`}
       />
       <button
         onClick={add}
         disabled={busy}
-        className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 bg-record-red text-record-paper text-[10px] font-black font-mono uppercase tracking-[0.2em] disabled:opacity-40"
+        className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#1a1612] text-[#f4efe4] text-[14px] font-semibold disabled:opacity-40"
+        style={reading}
       >
-        <KeyRound className="w-4 h-4" /> {busy ? 'sending' : 'add and invite as keeper'}
+        <KeyRound className="w-4 h-4" /> {busy ? 'asking' : mobile ? 'Ask for a keeper' : 'Add them and ask for the keys'}
       </button>
-      {message && <p className="text-[11px] font-mono text-record-ink/80 mt-3 leading-relaxed">{message}</p>}
+      {message && (
+        <p className="text-[14px] leading-[1.6] text-[#141210] mt-3 border-l-2 border-[#b3261e]/50 pl-3" style={reading}>
+          {message}
+        </p>
+      )}
     </div>
   );
 }

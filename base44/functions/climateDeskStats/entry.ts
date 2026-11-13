@@ -15,7 +15,10 @@ const KINDS = [
   { type: 'comment', entity: 'ClimateComment', label: 'comments' },
   { type: 'news', entity: 'ClimateNews', label: 'wire entries' },
   { type: 'group', entity: 'ClimateGroup', label: 'gatherings' },
-  { type: 'track', entity: 'ClimateTrack', label: 'tracks' },
+  // Music is not counted here either. A track arrives through its own door and is played by
+  // the music room; it is never a job waiting on this desk. It was one row of this count, and
+  // a row reading "tracks · 20 waiting" told a keeper she owed the record a day of work that
+  // nobody was asking her for. What she decides is counted here; what she listens to is not.
 ];
 
 // A keeper opens this page, steps into the review queue, and comes back. Counting the whole

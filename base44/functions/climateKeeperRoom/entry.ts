@@ -26,6 +26,17 @@ const KIND = {
   track: { entity: 'ClimateTrack', seal: 'track' },
 };
 
+// ── WHAT THIS ROOM ASKS HER TO DECIDE ────────────────────────────────────────
+// Music is not on this list, deliberately. A track is a gift the record plays, and it
+// arrives through its own door with its own screener — it is not an entry the founder
+// of a climate record puts on a climate record. It was on the list, and twenty pieces
+// waiting as drafts turned her queue into a scroll of song titles and her headline into
+// "20 things waiting", which is a day of climate work that does not exist. A keeper who
+// opened this room to decide whether a source holds up should never have to step past a
+// tracklist to find it. The music room keeps its own door and its own keeper control, so
+// nothing was taken away from the tracks: they simply stopped arriving here.
+const QUEUE = ['solution', 'action', 'comment', 'news', 'group'];
+
 // The kinds of entry that carry a person's name on them. A group, a comment and a track are
 // signed by the record in other ways; these three carry the editor field.
 const SIGNABLE = ['solution', 'action', 'news'];
@@ -108,7 +119,7 @@ export default async function (req) {
     if (who.error) return Response.json({ error: who.error }, { status: who.status });
 
     if (action === 'queue') {
-      const keys = Object.keys(KIND);
+      const keys = QUEUE;
       const results = await Promise.allSettled(
         keys.map((k) =>
           base44.asServiceRole.entities[KIND[k].entity].filter(
