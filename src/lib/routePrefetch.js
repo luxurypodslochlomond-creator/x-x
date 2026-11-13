@@ -64,6 +64,14 @@ const HUBS = {
   climatemusic: () => import('@/pages/ClimateMusic'),
   climatehost: () => import('@/pages/ClimateHost'),
   climatereachplace: () => import('@/pages/ClimateReachPlace'),
+  // Three doors on the contents sheet were still cold when tapped — the fingerprints,
+  // the corrections and the volunteers — and the keeper's room is cold for the one person
+  // who opens it while a queue is waiting on her. A door that has to think before it opens
+  // is the same door twice, so they are warmed like every other: on the touch, not before.
+  climateseals: () => import('@/pages/ClimateSeals'),
+  climatecorrections: () => import('@/pages/ClimateCorrections'),
+  climatefellows: () => import('@/pages/ClimateFellows'),
+  climatekeeperroom: () => import('@/pages/ClimateKeeperRoom'),
   xequalsx: () => import('@/pages/XEqualsX'),
   extractionproofcovenant: () => import('@/pages/ExtractionProofCovenant'),
   uf51token: () => import('@/pages/UF51Token'),

@@ -91,7 +91,7 @@ export default function RecordPagesPanel({ open, onClose }) {
           <Link
             to="/ClimateGuide"
             onClick={onClose}
-            className="group flex items-center justify-between gap-3"
+            className="group flex items-center justify-between gap-3 px-1 py-1 -mx-1 active:bg-record-ink/5"
           >
             <span className="flex items-center gap-2.5">
               <span aria-hidden="true" className="shrink-0 text-record-ink">

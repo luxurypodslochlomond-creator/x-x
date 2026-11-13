@@ -35,6 +35,26 @@
   text-align: center;
 }
 .rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); }
+/* ── A TAP HAS TO BE ANSWERED AT ONCE ─────────────────────────────────────────────
+   Every control in the record sets -webkit-tap-highlight-color: transparent, and that is
+   right: a grey box flashing over a drawn mark is the browser putting its hand over the
+   record's. But on a phone the only answer a door then gave was its ink turning red over
+   an eighth of a second — on a mark thirty-two pixels across, in a grid of them, that is
+   very nearly nothing. So the door looked as if it had not heard the tap, and a thumb
+   tapped it again. On a slower phone, where the next page's code still has to arrive,
+   the pause was long enough to read as "this is broken".
+
+   The press is now drawn, and drawn on the instant: the cell fills behind the mark the
+   moment a finger lands, the ink goes to the record's red, and it stays until the finger
+   lifts. A fill and a colour, nothing else — no shift, no shadow, no change of size, so
+   nothing in the grid moves under the thumb, and nothing has to be laid out again while
+   a page is loading. `transition: none` is the point of it: an acknowledgement that fades
+   in over 180ms is not an acknowledgement. */
+.rec-art-door:active {
+  background-color: rgb(var(--record-ink) / 0.09);
+  transition: none;
+}
+.rec-art-door:active .rec-art-caption { color: rgb(var(--record-mark)); }
 /* ── WHERE YOU ARE, WITHOUT MAKING ANYTHING MOVE ─────────────────────────────────
    The door you are standing in used to set its caption in bold, which is the one way to
    mark a place that changes the width of the word doing the marking: every neighbour
