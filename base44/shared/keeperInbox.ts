@@ -25,3 +25,34 @@ export function keeperInbox(secrets: { get: (name: string) => string | null | un
 
   return [...new Set([...hosts, BACKSTOP_ADDRESS])];
 }
+
+// ── EVERY KEEPER ON THE LIST, NOT ONLY THE HOST'S INBOX ─────────────────────────
+// The record will stand on its own one day, and on that day the person holding its keys
+// must be the one it writes to. Until now every keeper letter went to CLIMATE_ADMIN_EMAIL
+// plus the family backstop, which meant a keeper could be put on the list, handed the keys,
+// and never hear a word when somebody joined, wrote their line or signed their first check.
+// That is a hole, not a preference: the letters existed and reached the wrong room.
+//
+// So the roster is read and its active keepers are written to individually, alongside the
+// host inbox. Nobody is told about themselves, because the caller takes their own address
+// out of the list before writing, and one refused delivery still never takes the rest down.
+export async function keeperAddresses(
+  base44: any,
+  secrets: { get: (name: string) => string | null | undefined }
+): Promise<string[]> {
+  const fromRoster: string[] = [];
+  try {
+    const page = await base44.asServiceRole.entities.ClimateChecker.list({ sort: 'created_date', limit: 300 });
+    const rows = page?.items || page || [];
+    rows.forEach((row: any) => {
+      if (row?.is_keeper && row?.active !== false) {
+        const address = String(row.email || '').trim().toLowerCase();
+        if (looksLikeAddress(address)) fromRoster.push(address);
+      }
+    });
+  } catch (e) {
+    console.error('keeperInbox: could not read the roster', (e as any)?.message);
+  }
+
+  return [...new Set([...fromRoster, ...keeperInbox(secrets)])];
+}

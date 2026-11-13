@@ -13,7 +13,7 @@
 // Sent with the service role because both moments happen on the volunteer's own session,
 // and a volunteer must never be able to mail a keeper at will: they trigger it by doing
 // the work, and the letter carries only what the record already knows about them.
-import { keeperInbox } from './keeperInbox.ts';
+import { keeperAddresses } from './keeperInbox.ts';
 
 const RECORD = 'https://uf51.love';
 
@@ -27,7 +27,7 @@ export async function tellKeepers(
   base44,
   { headline, line }: { headline: string; line: string }
 ): Promise<number> {
-  const addresses = keeperInbox({ get: (name: string) => Deno.env.get(name) });
+  const addresses = await keeperAddresses(base44, { get: (name: string) => Deno.env.get(name) });
   let sent = 0;
 
   // One address at a time, so a refused delivery never takes the others down with it.

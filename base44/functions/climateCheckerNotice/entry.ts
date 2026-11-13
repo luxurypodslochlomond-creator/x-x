@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { requireKeeper } from '../../shared/checkerAccess.ts';
+import { keeperAddresses } from '../../shared/keeperInbox.ts';
 
 // ── ONE CHANGE, TWO LETTERS, ONE LINE ON THE RECORD ──────────────────────────
 // Someone on the checking list hears from the record when they are put on it, when
@@ -128,8 +129,11 @@ export default async function (req) {
 
     // And the keeper is told, so nothing about the list changes without them hearing it.
     let notified = false;
-    const keeper = Deno.env.get('CLIMATE_ADMIN_EMAIL') || user.email;
-    if (keeper) {
+    // Every active keeper on the roster hears, as well as the host inbox — and never the
+    // person the change is about, so nobody is written to about themselves.
+    const addressed = (await keeperAddresses(base44, { get: (name: string) => Deno.env.get(name) }))
+      .filter((address) => address !== clean);
+    for (const keeper of addressed) {
       try {
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: keeper,
@@ -139,7 +143,7 @@ export default async function (req) {
 <p style="font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:bold;letter-spacing:0.16em;color:#b3261e;margin:0 0 16px;">RECORD OF THE TIME &nbsp;/&nbsp; x = x</p>
 <h1 style="font-family:'Oswald',Impact,'Arial Narrow',Arial,sans-serif;font-size:30px;line-height:1.1;margin:0 0 12px;">${who} ${copy.past}</h1>
 <p style="font-size:15px;line-height:1.6;margin:0 0 14px;">${copy.keeper}</p>
-<p style="font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.7;color:#6b6258;margin:0;">Written on the record by ${user.full_name || user.email}, with the date and the hour.<br><a href="${RECORD_HOME}/ClimateChecking" style="color:#b3261e;">${RECORD_HOME}/ClimateChecking</a></p>
+<p style="font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.7;color:#6b6258;margin:0;">Written on the record by ${user.full_name || user.email}, with the date and the hour.<br><a href="${RECORD_HOME}/ClimateKeeperRoom?tab=people" style="color:#b3261e;">${RECORD_HOME}/ClimateKeeperRoom</a></p>
 </div>`,
         });
         notified = true;
