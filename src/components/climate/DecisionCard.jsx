@@ -26,7 +26,7 @@ const whenLine = (iso) => {
   if (!iso) return '';
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return '';
-  return d.toLocaleString('en-GB', { day: 'numeric', month: 'short' });
+  return d.toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 };
 
 export default function DecisionCard({ item, onDecide, busy, first = false, compact = false }) {
@@ -41,6 +41,15 @@ export default function DecisionCard({ item, onDecide, busy, first = false, comp
         >
           {item.label}
         </span>
+        {/* When it arrived. Her queue runs oldest first and this card is one entry at a time,
+            so without a date she cannot tell a thing sent this morning from a thing that has
+            been sitting since the summer — and "how long has this waited" is the only question
+            a fair record has to be able to answer about its own backlog. */}
+        {item.when ? (
+          <span className="ml-auto text-[10px] font-mono uppercase tracking-[0.12em] text-[#5a5246]">
+            sent {whenLine(item.when)}
+          </span>
+        ) : null}
       </div>
 
       <div className="px-3 py-2.5">
