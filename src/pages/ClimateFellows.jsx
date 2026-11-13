@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 
 // The note a Fellow reads before they arrive — written to answer the only question
 // a good volunteer actually has: will my hour here be worth anything, and will it
@@ -35,6 +37,25 @@ function Go({ to, children }) {
     </Link>
   );
 }
+
+// ── THE PAGE AS A CARD ─────────────────────────────────────────────────────────
+// So it can be handed on without anybody writing an email. It carries the page's own
+// words rather than a paraphrase, and its own address — the rule every card on this
+// record keeps, because a page that travels as a screenshot arrives with its link cut
+// off and nothing to open.
+const FELLOWS_CARD = {
+  badge: 'BECOME A CHECKER',
+  marker: 'Three jobs · what you keep · what we will not ask',
+  title: 'If you are coming to help',
+  body: 'There is no programme to complete here. There are three jobs, each of which puts something real on the record — or shows you why it should not.',
+  inside: [
+    'Check three entries already waiting',
+    'Bring one thing that deserves to be here',
+    'Find one entry you think is wrong',
+  ],
+  closing: 'An hour is the real commitment. Nobody is counting it, and nobody will ask you for it.',
+  url_path: '/ClimateFellows',
+};
 
 export default function ClimateFellows() {
   return (
@@ -107,6 +128,24 @@ export default function ClimateFellows() {
         <p>There are only two words inside this record. A <strong>keeper</strong> decides what goes on it. A <strong>checker</strong> reads a source and signs what they found — and that is what you are. "Fellow" is Trebuchet's word for you, and a good one; on the record it is a note on your line, not a third kind of person with its own keys.</p>
         <Rule>A machine can never sign this record. It has no name to sign with. Everything here rests on that one line.</Rule>
       </Block>
+
+      {/* ── PASS IT ON ────────────────────────────────────────────────────────────
+          Janine asked how to get two researchers started. The answer turned out not to
+          be an email at all: this page is the answer, and a card lets her hand it to
+          them without either of us writing the same thing twice. */}
+      <section className="border-t-2 border-[#141210] pt-5 mt-9">
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#6b6258] mb-1.5">
+          Pass it on
+        </p>
+        <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
+          If you know somebody who should read this — a researcher, a student, somebody with an hour — send them this page as a card. It carries its own address, so they land here rather than on a screenshot.
+        </p>
+        <ShareCardButton
+          entry={FELLOWS_CARD}
+          build={buildGuideShareCard}
+          label="Send this page as a card"
+        />
+      </section>
     </ClimateRecordShell>
   );
 }
