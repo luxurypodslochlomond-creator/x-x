@@ -54,7 +54,13 @@ const WORKING_PAGES = [
 // The six doors are still on the front page she lands on, the tongue door still stands beside
 // her, and the room's own "Back to the record" line still sits under the strip. One page, not
 // all of them: the public record keeps the masthead it was drawn around.
-const ROOM_PAGES = ['ClimateKeeperRoom'];
+// The checker's queue is worked too, and it was the last working screen still wearing the
+// reading book's chrome: a volunteer who signed in to answer three questions about three
+// sources was handed the record's whole foot — the founder, the host page, the covenants,
+// the doors — and could scroll past a bookshelf before reaching the first entry. That is
+// the same fault the keeper's room had, and it takes the same answer. The name stays, the
+// name is the way home, and the work is the only thing on the glass.
+const ROOM_PAGES = ['ClimateKeeperRoom', 'ClimateChecking'];
 
 export default function ClimateLayout({ children, currentPage }) {
   const location = useLocation();
