@@ -4,6 +4,7 @@ import ComicReader from '@/components/climate/cartoons/ComicReader';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonWall from '@/components/climate/cartoons/CartoonWall';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
+import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import '@/components/climate/cartoons/cartoon-room.css';
 
 export default function ClimateCartoons() {
@@ -17,6 +18,7 @@ export default function ClimateCartoons() {
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
     >
       <ComicReader />
+      <CartoonWhy />
       <CartoonRoomActions />
       <CartoonWall />
       <CartoonSources />
