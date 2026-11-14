@@ -150,6 +150,7 @@ const ClimateSearchPage = React.lazy(() => import('./pages/ClimateSearch'));
 const ClimateWireEntryPage = React.lazy(() => import('./pages/ClimateWireEntry'));
 const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
+const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
 const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrections'));
@@ -345,6 +346,11 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateWireEntry/:id" element={<ClimateLayout currentPage="ClimateWire"><ClimateWireEntryPage /></ClimateLayout>} />
       <Route path="/ClimateGuide" element={<ClimateLayout currentPage="ClimateGuide"><ClimateGuidePage /></ClimateLayout>} />
       <Route path="/ClimateMusic" element={<ClimateLayout currentPage="ClimateMusic"><ClimateMusicPage /></ClimateLayout>} />
+      {/* ── THE ROOM OF CARTOONS ──
+          Opened for Janine's 29 November workshop, prepared before the day rather than
+          during it. Public to read, like every other room on the record: a wall nobody
+          may look at is a noticeboard, not a record. Drawings sent in wait for a keeper. */}
+      <Route path="/ClimateCartoons" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsPage /></ClimateLayout>} />
       <Route path="/ClimateHost" element={<ClimateLayout currentPage="ClimateHost"><ClimateHostPage /></ClimateLayout>} />
       {/* ── SAVED, NOT STANDING OPEN ─────────────────────────────────────────────────
           "Please save this… for when we are discussing with a potential host" — the founder,

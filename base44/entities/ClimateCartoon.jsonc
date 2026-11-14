@@ -1,0 +1,96 @@
+{
+  "name": "ClimateCartoon",
+  "type": "object",
+  "description": "A drawing given to the record for the room of cartoons, opened for Janine's workshop on 29 November 2026. Every drawing carries the same three things: who drew it, where it came from, and one line in the drawer's own words on what it is for. A drawing sent in from the open page waits for a keeper \u2014 nothing goes on the wall because it was typed into a table with the word 'published' in its hand. The record's machine may add one line about what it can see in a drawing; that line is kept separately from the drawer's words, because a machine's reading is not a person's, and it is labelled as what it is. The sender's own email is kept so the record can reach them about their drawing, and is never shown to a reader.",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "What the drawing is called, if it has a name. Left empty the wall shows the artist's name alone rather than inventing a title."
+    },
+    "artist_name": {
+      "type": "string",
+      "description": "Who drew it. Required, and never the person who happened to send it in: the name on the wall belongs to the hand that made the drawing."
+    },
+    "origin": {
+      "type": "string",
+      "description": "Where it came from \u2014 the workshop, the school, the class, the group, the page it was first printed on. Said in the sender's own words."
+    },
+    "for_line": {
+      "type": "string",
+      "description": "One line, in the drawer's own words, on what the drawing is for. The record never writes this for them and never corrects it."
+    },
+    "image_url": {
+      "type": "string",
+      "description": "The drawing itself, stored publicly so the wall can show it to anyone without a sign-in. Shrunk in the browser before it was stored, so it opens fast on a phone at a workshop."
+    },
+    "machine_line": {
+      "type": "string",
+      "description": "The record's machine reading of the drawing, kept exactly as the machine said it \u2014 whether or not the sender kept it as their line. Kept apart so nobody later mistakes a machine's sentence for the drawer's."
+    },
+    "credit": {
+      "type": "string",
+      "description": "Who holds the drawing, where that is not the artist personally \u2014 e.g. '\u00a9 Council on Energy, Environment and Water, 2026'. Shown with the drawing and never separated from it."
+    },
+    "source_url": {
+      "type": "string",
+      "description": "A link to where the drawing was first published, when it was published somewhere. The record points at drawings it was not given rather than copying them, and this is the pointing."
+    },
+    "submitter_email": {
+      "type": "string",
+      "description": "The email of whoever sent the drawing in, used only to reach them about it. Never shown on the wall and never handed to a reader: only a keeper may read it back.",
+      "rls": {
+        "read": {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published"
+      ],
+      "default": "draft",
+      "description": "A drawing arrives as a draft and waits for a keeper: a picture cannot be sourced by a machine, and the record will not put a drawing on the wall on a machine's word. published means a keeper has seen it and said yes."
+    },
+    "keeper_note": {
+      "type": "string",
+      "description": "The keeper's own reason, when a drawing was held back. Kept so the next keeper knows what was decided and why, rather than finding a drawing that simply never appeared."
+    }
+  },
+  "required": [
+    "artist_name",
+    "image_url"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": "published"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

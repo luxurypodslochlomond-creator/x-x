@@ -60,6 +60,11 @@ const SEND = [
     to: createPageUrl('TogetherChangeClimate'),
     what: 'People working on the same thing in one area. A name, a topic, a region, and one contact line.',
   },
+  {
+    label: 'Bring a drawing to the wall',
+    to: '/ClimateCartoons',
+    what: 'The room opened for the 29 November workshop on cartoons for climate: who drew it, where it came from, one line on what it is for — and the record’s machine reading, offered in the drawer’s hands to rewrite.',
+  },
   // The door for artists is closed at Janine's request, 9 November 2026 — no invitation
   // to give music, because it takes a reader away from the entries of solutions and
   // crises. The music page and what was already given are untouched.
