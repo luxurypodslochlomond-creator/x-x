@@ -95,6 +95,13 @@ export const ELSEWHERE_NAV = [
   // request is kept and the room is reachable, which is the only version of this that
   // doesn't put the record in the position of quietly undoing her instruction.
   { label: 'The music room', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
+  // ── THE ROOM OF CARTOONS ────────────────────────────────────────────────────
+  // Janine asked for a space for cartoons for the workshop of 29 November. A door on the
+  // contents sheet rather than on the rail, for the same reason the music room is here:
+  // the rail is the five questions a reader arrives with, and this is a room a reader goes
+  // looking for — and, on the day, a link that can be handed straight to the people on the
+  // call without changing the front page of the record the week before a workshop.
+  { label: 'Cartoons — DRAWN51', to: '/ClimateCartoons', what: 'The room for drawings: who drew it, where it came from, one line on what it is for — and the record’s machine reading, offered to the drawer to rewrite.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.

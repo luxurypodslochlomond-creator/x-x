@@ -20,6 +20,7 @@ import {
   MarkCovenant,
   MarkTerms,
   MarkPrivacy,
+  MarkPencil,
 } from './RecordFootMarks';
 
 // ── ONE HAND FOR EVERY DOOR ────────────────────────────────────────────────────
@@ -50,6 +51,9 @@ const MARKS = {
   '/ClimateHandover': MarkHandover,
   '/ClimateMusic': MarkMusic,
   '/Studio': MarkStudio,
+  // The room of cartoons, opened for the workshop on 29 November. A pencil of its own,
+  // because it is the only door on the record that leads to something somebody drew by hand.
+  '/ClimateCartoons': MarkPencil,
 
   // ── WHAT IS WRITTEN ABOUT IT, AND WHAT IT COSTS TO CARRY ──────────────────────
   // Two marks were doing double duty on the sheet, and that, not the arithmetic, is what

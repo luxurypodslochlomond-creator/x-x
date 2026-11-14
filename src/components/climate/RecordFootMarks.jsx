@@ -111,6 +111,23 @@ export function MarkMusic({ size = 26, className = '' }) {
   );
 }
 
+// A pencil, sharpened, and the dot it has just made.
+//
+// The door for the room of cartoons. It is one object rather than a diagram — the barrel
+// as two lines, the cap, the two cuts of the point — and the single solid mass is the mark
+// the pencil has just left, in the record's borrowed red. Drawn in the same hand as the
+// rest: one weight, currentColor, nothing thinner than the stroke, because it is read at
+// twenty-six pixels on a phone.
+export function MarkPencil({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M21.4 11.6 9.6 23.4M28.2 18.4 16.4 30.2" />
+      <path d="M21.4 11.6 28.2 18.4M9.6 23.4 5.8 33.6M16.4 30.2 5.8 33.6" />
+      <circle cx="5.8" cy="33.6" r="1.7" className="text-record-mark" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // What travels. A message going out in dots and dashes — the oldest way anyone found
 // to send a thing further than a voice reaches.
 export function MarkSignal({ size = 26, className = '' }) {
