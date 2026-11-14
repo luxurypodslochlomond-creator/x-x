@@ -101,7 +101,7 @@ export const ELSEWHERE_NAV = [
   // the rail is the five questions a reader arrives with, and this is a room a reader goes
   // looking for — and, on the day, a link that can be handed straight to the people on the
   // call without changing the front page of the record the week before a workshop.
-  { label: 'The big picture', to: '/ClimateCartoons', what: 'A room of drawings for the climate — a pencil you can use on the page, and a wall. Any age, any hand, any language.' },
+  { label: 'The big picture', to: '/ClimateCartoons', what: 'Make a three-panel cartoon on the page, sign it, and put it on a wall. Any age, any hand, any language.' },
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.
