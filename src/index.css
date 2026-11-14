@@ -251,6 +251,10 @@ button:focus-visible {
       'Noto Sans CJK SC', 'Microsoft YaHei', 'Malgun Gothic',
       'Noto Sans Cherokee',
       system-ui, serif;
+    --cartoon-paper: 255 248 233;
+    --cartoon-sun: 255 212 71;
+    --cartoon-sky: 211 234 247;
+    --cartoon-mint: 197 231 205;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
     --record-light-signal: 127 201 228;
@@ -321,6 +325,10 @@ button:focus-visible {
       'Noto Sans CJK SC', 'Microsoft YaHei', 'Malgun Gothic',
       'Noto Sans Cherokee',
       system-ui, serif;
+    --cartoon-paper: 255 248 233;
+    --cartoon-sun: 255 212 71;
+    --cartoon-sky: 211 234 247;
+    --cartoon-mint: 197 231 205;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
     --record-light-signal: 127 201 228;

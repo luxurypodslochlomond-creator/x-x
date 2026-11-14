@@ -16,6 +16,12 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+        cartoon: {
+          paper: 'rgb(var(--cartoon-paper) / <alpha-value>)',
+          sun: 'rgb(var(--cartoon-sun) / <alpha-value>)',
+          sky: 'rgb(var(--cartoon-sky) / <alpha-value>)',
+          mint: 'rgb(var(--cartoon-mint) / <alpha-value>)',
+        },
         record: {
           paper: 'rgb(var(--record-paper) / <alpha-value>)',
           bone: 'rgb(var(--record-bone) / <alpha-value>)',
