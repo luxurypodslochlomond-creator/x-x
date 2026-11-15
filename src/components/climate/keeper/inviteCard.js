@@ -34,7 +34,7 @@ const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
 
 const ROWS = [
-  { label: 'ONE ADDRESS', line: 'A record of what people are doing about the climate, with a source on every entry.' },
+  { label: 'ONE ADDRESS', line: 'A record of what people are doing about the climate, with a source on every entry. No account needed to add one.' },
   { label: 'ONE DOOR', line: 'Open it and tap Submit a solution, crisis, or action. Paste the page it came from and the form fills itself in.' },
   { label: 'ONE YES', line: 'Nothing goes up until a keeper reads it. That is the whole of why a reader can trust the page.' },
 ];

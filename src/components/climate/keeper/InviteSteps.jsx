@@ -23,13 +23,13 @@ const RECORD = 'https://uf51.love';
 const STEPS = [
   {
     n: '1',
-    title: 'Sign in',
-    line: 'The invitation comes to the address you type here. The button inside sets a password; after that it is always that same address, at uf51.love. Nothing to install and no second account.',
+    title: 'Add something straight away, with no account at all',
+    line: 'Open the record and tap "Submit a solution, crisis, or action". Paste the page it came from into the box at the top and the form fills itself in. No sign-in, nothing to install, and their email stays private.',
   },
   {
     n: '2',
-    title: 'Add an initiative',
-    line: 'Open the record and tap "Submit a solution, crisis, or action". Paste the page it came from into the box at the top and the form fills itself in. Their name travels with it and their email stays private.',
+    title: 'Sign in only for the two things that need a name',
+    line: 'Their own line on the roll, and checking what other people have sent. The invitation email sets the password, and the address you type here is the only key there is — nothing else to remember. If they use Google, that is one tap and no password at all.',
   },
   {
     n: '3',
