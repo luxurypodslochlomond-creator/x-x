@@ -6,7 +6,6 @@ import SignalBeacon from '@/components/climate/SignalBeacon';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import NewsSubmitForm from '@/components/climate/NewsSubmitForm';
 import useRecordViewState from '@/components/climate/useRecordViewState';
-import RecordCredit from '@/components/climate/RecordCredit';
 
 // The wire — the record's front page. What changed, where, who says so, and what can be
 // copied from it. Ordered by date, never by attention. Nothing counts here: no likes,
@@ -202,7 +201,7 @@ export default function ClimateWire() {
       <p className="px-4 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">
         The wire is part of Together We Can Change Climate — a public service record built in honour of Janine M. H. Selendy and Horizon International. No advertising, no sponsorship, and money never buys a place on it.
       </p>
-      <RecordCredit className="px-4 pb-9 text-[11px] text-[#5a5246]" />
+
 
       {formOpen && <NewsSubmitForm onClose={() => setFormOpen(false)} onSent={() => setReload(r => r + 1)} />}
     </div>

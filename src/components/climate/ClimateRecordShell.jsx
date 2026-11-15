@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import RecordCredit from '@/components/climate/RecordCredit';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { ArrowRight } from 'lucide-react';
 import { MarkEqual } from '@/components/climate/RecordFootMarks';
@@ -69,9 +68,8 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       )}
 
       {/* One left edge: the foot sits at the same 4 units as every paragraph above it. */}
-      {/* Who made this, in three different senses — see RecordCredit for why the three
-          words are kept apart rather than folded into one name. */}
-      <RecordCredit className="record-shell-credit px-4 pb-9 text-[12px] text-record-muted" />
+      {/* The credit is not printed here: the record's own foot carries it once, on every
+          page, so a page inside the shell does not show it twice. */}
     </div>
   );
 }

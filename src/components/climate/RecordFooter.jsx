@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import KeeperDoor from '@/components/climate/KeeperDoor';
+import RecordCredit from '@/components/climate/RecordCredit';
 
 // ── THE FOOT IS A COLOPHON AGAIN, NOT A SECOND MENU ─────────────────────────────
 // The doors that stood here — entry fingerprints, readership, the founder, becoming a
@@ -59,6 +60,10 @@ export default function RecordFooter({ showKeeper = true }) {
             A public service · for the world
           </span>
         </p>
+
+        {/* Who built it, set as the last thing on the sheet: an eyebrow, the three names,
+            and the company. One copy, printed here, so no page carries the credit twice. */}
+        <RecordCredit className="mt-10" />
 
         {/* The record's promises, on a phone, where the masthead has not room for them.
             On a wide screen both are in the masthead, so this row is not printed at all. */}
