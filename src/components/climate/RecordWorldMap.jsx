@@ -8,6 +8,18 @@ import PlatePlaceIndex from './PlatePlaceIndex';
 import VerificationBadge from './VerificationBadge';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 
+// How long ago the newest thing on the plate arrived, in words rather than a timestamp.
+// The plate has no clock on it; this is the one place it admits that time passes.
+function whenItArrived(iso) {
+  const days = Math.floor((Date.now() - new Date(iso).getTime()) / 86400000);
+  if (!Number.isFinite(days) || days < 0) return null;
+  if (days === 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 30) return `${days} days ago`;
+  const months = Math.floor(days / 30);
+  return months === 1 ? 'a month ago' : `${months} months ago`;
+}
+
 /* ── THE RECORD, SET WHERE IT HAPPENED ─────────────────────────────────────────────
    Every published solution, crisis and action that names a place, standing on the plate.
    Nothing is animated, nothing slides in, nothing pulses: a mark is information, so it
@@ -37,7 +49,7 @@ export default function RecordWorldMap() {
             {
               limit: 200,
               fields: ['title', 'summary', 'category', 'entry_type', 'country', 'region_rough',
-                'verification', 'corroborating_source', 'source_name', 'source_url'],
+                'verification', 'corroborating_source', 'source_name', 'source_url', 'created_date'],
             }
           ),
           base44.entities.ClimateAction.filter(
@@ -45,7 +57,7 @@ export default function RecordWorldMap() {
             {
               limit: 200,
               fields: ['title', 'description', 'category', 'action_type', 'country', 'region_rough',
-                'verification', 'corroborating_source', 'source_url'],
+                'verification', 'corroborating_source', 'source_url', 'created_date'],
             }
           ),
           base44.entities.ClimateNews.filter(
@@ -53,7 +65,7 @@ export default function RecordWorldMap() {
             {
               limit: 200,
               fields: ['headline', 'what_changed', 'category', 'country', 'where_label',
-                'verification', 'corroborating_source', 'source_name', 'source_url'],
+                'verification', 'corroborating_source', 'source_name', 'source_url', 'created_date'],
             }
           ).catch(() => ({ items: [] })),
           // The totals are counted separately so the plate can never claim to hold
@@ -69,19 +81,19 @@ export default function RecordWorldMap() {
             id: `solution-${s.id}`, entryId: s.id, type: s.entry_type === 'climate_crisis' ? 'crisis' : 'solution',
             title: s.title, summary: s.summary || '', category: s.category, country: s.country, region: s.region_rough,
             verification: s.verification, corroborating_source: s.corroborating_source,
-            source_name: s.source_name, source_url: s.source_url,
+            source_name: s.source_name, source_url: s.source_url, arrived: s.created_date,
           })),
           ...(actions.items || []).map((a) => ({
             id: `action-${a.id}`, entryId: a.id, type: 'action',
             title: a.title, summary: a.description || '', category: a.category, country: a.country, region: a.region_rough,
             verification: a.verification, corroborating_source: a.corroborating_source,
-            source_name: a.source_name, source_url: a.source_url,
+            source_name: a.source_name, source_url: a.source_url, arrived: a.created_date,
           })),
           ...((news.items || [])).map((n) => ({
             id: `wire-${n.id}`, entryId: n.id, type: 'wire',
             title: n.headline, summary: n.what_changed || '', category: n.category, country: n.country, region: n.where_label,
             verification: n.verification, corroborating_source: n.corroborating_source,
-            source_name: n.source_name, source_url: n.source_url,
+            source_name: n.source_name, source_url: n.source_url, arrived: n.created_date,
           })),
         ]);
       } catch {
@@ -125,6 +137,14 @@ export default function RecordWorldMap() {
     wire: marks.filter((m) => m.type === 'wire').length,
   }), [marks]);
 
+  // A plate with no dates on it says the record has finished. One line under the count,
+  // saying when the newest entry standing here arrived — so a reader can tell a living
+  // record from one that stopped last March, without scrolling to anything.
+  const newestArrival = useMemo(() => {
+    const stamps = entries.map((e) => e.arrived).filter(Boolean).sort();
+    return stamps.length ? whenItArrived(stamps[stamps.length - 1]) : null;
+  }, [entries]);
+
   // One press opens, a second press on the same thing puts it down — the same act whether
   // it came from a mark on the plate or a name in the index under it.
   const pick = (m) => setPicked((prev) => (prev?.id === m.id ? null : m));
@@ -146,6 +166,11 @@ export default function RecordWorldMap() {
             : marks.length < publishedTotal
               ? `${marks.length} of ${publishedTotal} entries placed`
               : `${marks.length} ${marks.length === 1 ? 'entry' : 'entries'} placed`}
+          {!loading && newestArrival && (
+            <span className="mt-1 block font-normal normal-case tracking-[0.02em] text-[#5a5246]">
+              Newest standing here arrived {newestArrival}.
+            </span>
+          )}
         </p>
         <div className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#141210]">
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#b3261e' }} />{counts.crisis}</span>

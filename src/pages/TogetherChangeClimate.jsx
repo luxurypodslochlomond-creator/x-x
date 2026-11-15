@@ -379,18 +379,32 @@ export default function TogetherChangeClimate() {
     });
   }, [liveGroups, query]);
 
+  // ── THE PAGE IS PRINTED, NOT POSTED ────────────────────────────────────────────
+  // This front page was a 1100-pixel column centred inside a darker field, with a hairline
+  // down each side and a drop shadow under it, on a background colour of its own making.
+  // That is exactly what a page looks like when it is a website pretending to be a sheet: a
+  // card floating on a colour, casting a shadow at nobody.
+  //
+  // The founder's page — the one Brian kept pointing at — does none of that. Its bands run
+  // the width of the record, edge to edge, and the paper it is printed on is the record's
+  // own. So this page is the same now: no column, no side rules, no shadow, and the darker
+  // surround gone with them, because a record has one ground and does not put a second one
+  // behind itself to sit on.
+  //
+  // Nothing inside changed. Every band was already padded to the edge and had its own
+  // measure for prose, so all that has gone is the frame around the frame.
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen mx-auto max-w-[1100px] bg-[#efe7d6] text-[#141210] border-x border-[#141210]/10 shadow-2xl shadow-black/20" style={{ fontFamily: 'var(--font-body)' }}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
         @keyframes twcc-epigraph { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-scan { from { background-position: 0 0; } to { background-position: 0 3px; } }
         @media (prefers-reduced-motion: reduce) { * { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
-        /* The page used to sit on a black field, so the record read as a screen inside a
-           dark room. It sits on the record's own deep paper now: less black, and the
-           pictures and the paper carry the page instead of a terminal surround. */
-        body { background: #e3dccb !important; }
+        /* The page used to paint the whole window a darker paper than the record's, so the
+           column above looked like a sheet laid on a table with a shadow under it. That
+           second colour was the gutter, and the gutter was the thing that read as an old
+           website. The record supplies its own ground; this page no longer paints one. */
       `}</style>
 
       {isOffline && (
