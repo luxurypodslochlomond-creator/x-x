@@ -5,6 +5,7 @@ import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
+import RecordCredit from '@/components/climate/RecordCredit';
 import { ArrowRight } from 'lucide-react';
 
 /* ── THE MAP IS A PAGE OF THE RECORD, NOT A POSTER ABOUT IT ────────────────────────
@@ -99,11 +100,7 @@ export default function ClimateMapPage() {
         </div>
       </div>
 
-      <p className="px-5 pb-9 pt-6 text-center text-[11px] font-mono text-[#5a5246] leading-relaxed">
-        Platform built by Brian Hughes ·{' '}
-        <Link to="/Welcome" className="hover:text-[#b3261e] underline decoration-dotted underline-offset-2 transition-colors">UF51 CIC</Link>
-        {' '}· Scotland
-      </p>
+      <RecordCredit className="px-5 pb-9 pt-6 text-[11px] text-[#5a5246]" />
     </div>
   );
 }

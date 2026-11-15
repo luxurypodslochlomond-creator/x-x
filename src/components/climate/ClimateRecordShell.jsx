@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import RecordCredit from '@/components/climate/RecordCredit';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { ArrowRight } from 'lucide-react';
 import { MarkEqual } from '@/components/climate/RecordFootMarks';
@@ -68,11 +69,9 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       )}
 
       {/* One left edge: the foot sits at the same 4 units as every paragraph above it. */}
-      <p className="record-shell-credit px-4 pb-9 text-center font-mono text-[12px] leading-relaxed text-record-muted">
-        Platform built by Brian Hughes ·{' '}
-        <Link to="/Welcome" className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red">UF51 CIC</Link>
-        {' '}· Scotland
-      </p>
+      {/* Who made this, in three different senses — see RecordCredit for why the three
+          words are kept apart rather than folded into one name. */}
+      <RecordCredit className="record-shell-credit px-4 pb-9 text-[12px] text-record-muted" />
     </div>
   );
 }

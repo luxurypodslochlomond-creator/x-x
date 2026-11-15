@@ -119,16 +119,28 @@ export default function ClimateFounder() {
             Made in Scotland from photons
           </span>
 
-          {/* Two different things, named as two different things. The platform has a
-              builder, and it is honest to say so. The record is not "by" anyone: it is
-              kept. A record signed as one man's work would be exactly what this one
-              exists not to be, and a reader fifty years from now would be right to
-              distrust it. The keeper is named — the author is not invented. */}
-          <p className="mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
-            Platform built by
-            <br />
-            <span className="text-[11px]">Brian Hughes</span>
-          </p>
+          {/* ── THREE DIFFERENT JOBS, THREE DIFFERENT WORDS ─────────────────────────
+              This read "Platform built by Brian Hughes", which was true and also not the
+              whole truth: it gave one person the credit for the creating, the building and
+              the making at once. Brian corrected it himself, 15 November — the creating is
+              Gillian Barbara Brown's, the building is his, and the making was done with
+              BRO51, the AI.
+
+              They stay as three separate lines because "created", "built" and "made with"
+              mean three different things, and a page that blurs them is doing the exact
+              thing this record exists not to do. The AI is named as an AI and not as a
+              person: it can hold a tool's credit honestly, and a person's only by lying. */}
+          <div className="mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
+            <span className="block text-[9px] text-[#6b6258]">Created by</span>
+            <span className="block text-[11px] mb-2">Gillian Barbara Brown</span>
+            <span className="block text-[9px] text-[#6b6258]">Built by</span>
+            <span className="block text-[11px] mb-2">Brian Hughes</span>
+            <span className="block text-[9px] text-[#6b6258]">Made with</span>
+            <span className="block text-[11px]">BRO51</span>
+            <span className="block mt-1 text-[9px] font-normal normal-case tracking-[0.06em] text-[#6b6258]">
+              the AI this record was built alongside
+            </span>
+          </div>
 
           {/* "Record kept by UF51 CIC" was taken off here at Janine's request, 9 November:
               "'Kept by…' adds confusion and uncertainty" for a potential host. The credit

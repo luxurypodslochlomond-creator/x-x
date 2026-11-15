@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import RecordBackBar from '@/components/climate/RecordBackBar';
+import RecordCredit from '@/components/climate/RecordCredit';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXFounderNote from '@/components/climate/XEqualsXFounderNote';
@@ -96,9 +97,7 @@ export default function XEqualsX() {
         </Link>
       </div>
 
-      <p className="covenant-foot">
-        Platform built by Brian Hughes · UF51 CIC · Scotland
-      </p>
+      <RecordCredit className="covenant-foot" />
     </div>
   );
 }
