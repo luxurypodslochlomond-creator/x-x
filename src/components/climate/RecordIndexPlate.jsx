@@ -42,28 +42,29 @@ export default function RecordIndexPlate({ onNavigate }) {
   return (
     <div className="text-record-ink">
       {groups.map(({ title, doors }, part) => (
-        <section key={title} className="mb-2.5 first:mt-0">
-          <h2 className="mb-1 flex items-center gap-1.5">
-            <span className="font-mono text-[9px] leading-none tabular-nums text-record-mark">
+        <section key={title} className="mb-3 first:mt-0 sm:mb-5">
+          <h2 className="mb-1.5 flex items-center gap-1.5 sm:mb-2.5">
+            <span className="font-mono text-[9px] leading-none tabular-nums text-record-mark sm:text-[10px]">
               {String(part + 1).padStart(2, '0')}
             </span>
-            <span className="font-mono text-[9px] uppercase leading-none tracking-[0.16em] text-record-muted">{title}</span>
+            <span className="font-mono text-[9px] uppercase leading-none tracking-[0.16em] text-record-muted sm:text-[10px]">{title}</span>
             <span aria-hidden="true" className="h-px flex-1 bg-record-ink/20" />
           </h2>
           {/* ── FEWER ACROSS, SO EACH ONE CAN BE READ ────────────────────────────────
-              Four and five across packed fifteen doors onto a screen and read as a wall:
-              the marks came down to twenty-eight pixels and the names under them to two
-              squeezed words. Three across on a phone and four on a wide sheet costs a
-              little height and buys back the thing an index is for — a name you can read
-              without leaning in. */}
-          <nav aria-label={title} className="grid grid-cols-3 items-start gap-x-2 gap-y-1 sm:grid-cols-4 sm:gap-x-4">
+              Four and five across packed fifteen doors onto a phone and read as a wall:
+              the names came down to two squeezed words each. Three across on a handset is
+              the floor. A wide sheet then has room to go the other way — five across, in a
+              plate that has an edge and a margin — so the same index is four short rows on
+              a desk instead of seven tall ones, and the marks can be the size the record
+              draws them instead of the size a narrow column allows. */}
+          <nav aria-label={title} className="rec-index-grid grid grid-cols-3 items-start gap-x-2 gap-y-1.5 sm:grid-cols-4 sm:gap-x-4 sm:gap-y-2">
             {doors.map(({ label, to, what }) => (
               <RecordNavDoor
                 key={to}
                 to={to}
                 label={label}
                 what={what}
-                size={32}
+                size={34}
                 active={pathname === to}
                 onClick={onNavigate}
                 className="w-full !min-h-0 !py-1.5"

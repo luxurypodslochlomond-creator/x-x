@@ -227,3 +227,93 @@
   .rec-art-navigator { display: none; }
 }
 @media print { .rec-art-navigator { display: none; } }
+
+/* ── THE SHEET OF DOORS, COMING INTO THE ROOM ────────────────────────────────────
+   It used to appear: mounted and shown as a modal in the same frame, with no transition
+   anywhere on it. A thumb tapped "Doors" and the entire glass changed at once, which the
+   eye reads as the tap having been missed rather than answered — and once the tap has
+   failed once, the second one is a hammer.
+
+   Now it rises the way a sheet of paper comes up out of a drawer: a short distance, a
+   slight settle, transform and opacity only. Nothing here is a repaint of the page behind
+   it, so a phone that is already working hard to hold a large painting does not have to
+   re-render any of it to open a list. On a wide screen the same sheet is a plate that
+   settles into place rather than sliding up the whole window, because a desktop has paper
+   outside the plate and a phone has not.
+
+   The leaving beat is 170ms and is the same motion reversed, so a door tapped by mistake
+   does not flash. Reduced-motion readers get none of it — the global rule in index.css
+   already takes every animation to an instant, and nothing is hidden waiting for one. */
+@keyframes rec-doors-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes rec-doors-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(14px); }
+}
+@keyframes rec-scrim-in { from { opacity: 0; } to { opacity: 1; } }
+
+.rec-doors[open] { display: flex; }
+.rec-doors::backdrop { animation: rec-scrim-in .2s ease-out both; }
+.rec-doors[data-state="in"] .rec-doors-plate { animation: rec-doors-in .24s cubic-bezier(.2, .8, .2, 1) both; }
+.rec-doors[data-state="out"] .rec-doors-plate { animation: rec-doors-out .17s ease-in both; }
+
+/* The plate itself: the whole glass on a phone, a sheet with an edge and a margin on a
+   desktop. It was a 760-pixel column of full window height on every screen, which on a
+   wide monitor left six hundred pixels of empty paper under the last door. */
+.rec-doors-plate { box-shadow: 0 -18px 40px -30px rgb(var(--record-ink) / .5); }
+@media (min-width: 640px) {
+  .rec-doors { align-items: center !important; padding: 3vh 1.25rem !important; }
+  .rec-doors-plate {
+    height: auto !important;
+    max-height: 92dvh !important;
+    max-width: 880px;
+    border: 1px solid rgb(var(--record-ink) / .22);
+    box-shadow: 0 30px 70px -44px rgb(var(--record-ink) / .55);
+  }
+  @keyframes rec-doors-in {
+    from { opacity: 0; transform: translateY(8px) scale(.994); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+
+/* ── THE DOORS THEMSELVES, ARRIVING IN ORDER ─────────────────────────────────────
+   Sixteen drawn marks landing as one grey block is what made this sheet read as a
+   document about the record rather than as the record's own hand. Each door comes up
+   behind the one before it, by forty milliseconds, and stops: a stagger long enough to be
+   felt, short enough that the last door is in place before a thumb can reach it. Nothing
+   moves after it lands, and the whole thing is opacity and transform.
+
+   Hover gives the cell a bone wash on a machine with a pointer, so the sheet answers the
+   cursor; a phone keeps its press-fill from the rule above, which is drawn on the instant
+   because an acknowledgement that fades in is not an acknowledgement. */
+@keyframes rec-door-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rec-index-grid > * { animation: rec-door-in .26s cubic-bezier(.2, .8, .2, 1) both; }
+.rec-index-grid > *:nth-child(1) { animation-delay: .03s; }
+.rec-index-grid > *:nth-child(2) { animation-delay: .07s; }
+.rec-index-grid > *:nth-child(3) { animation-delay: .11s; }
+.rec-index-grid > *:nth-child(4) { animation-delay: .15s; }
+.rec-index-grid > *:nth-child(5) { animation-delay: .19s; }
+.rec-index-grid > *:nth-child(6) { animation-delay: .23s; }
+.rec-index-grid > *:nth-child(7) { animation-delay: .27s; }
+.rec-index-grid > *:nth-child(8) { animation-delay: .30s; }
+.rec-index-grid > *:nth-child(n+9) { animation-delay: .33s; }
+.rec-index-grid .rec-art-door { border-radius: 2px; }
+@media (hover: hover) {
+  .rec-index-grid .rec-art-door:hover { background-color: rgb(var(--record-bone)); }
+}
+/* Where you are, in this sheet, is a filled cell and the record's red — the same two
+   signals the masthead uses, so a reader learns them once. */
+.rec-index-grid .rec-art-door-active { background-color: rgb(var(--record-bone)); }
+.rec-index-grid .rec-art-door-active .rec-art-caption { color: rgb(var(--record-mark)); }
+
+/* A wide sheet has room for five across, so an index of twenty doors is four short rows
+   instead of seven tall ones — the difference between a list you scan and a list you
+   read down. */
+@media (min-width: 1024px) {
+  .rec-index-grid { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+}

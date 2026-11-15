@@ -54,7 +54,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#e2602a] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              An AI reads your submission first and writes an advisory note: spam, harmful content, relevance to climate. It never judges the science, never decides, and what you send is never used by us to train anything. The note is kept in the audit trail. A person makes every decision.
+              An AI reads your submission first and writes an advisory note: spam, harmful content, relevance to climate. It never judges the science, and what you send is never used by us to train anything. The note is kept on the entry. An entry that carries the link to its source, and that the screen finds nothing wrong with, goes on the record as it arrives. Anything the screen is unsure of waits for a person. When a person decides, their name is on the entry as its editor — and an entry the screen cleared carries no editor name, because no person decided it.
             </p>
           </div>
         </section>

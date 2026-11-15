@@ -54,7 +54,7 @@ const SEND = [
   {
     label: 'Submit a solution, crisis, or action',
     to: createPageUrl('TogetherChangeClimate'),
-    what: 'Read the record, then fill the form. A person reads every one before it goes on.',
+    what: 'Read the record, then fill the form. An entry that carries its source goes on as it arrives; one without a source, or one the screening is unsure of, waits for a person.',
   },
   {
     label: 'Start a gathering',

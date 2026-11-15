@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import CorrectionRow from '@/components/climate/CorrectionRow';
+import RecordSaySomething from '@/components/climate/RecordSaySomething';
 import WhoSigns from '@/components/climate/WhoSigns';
 import useCorrections from '@/components/climate/useCorrections';
 
@@ -43,6 +44,16 @@ export default function ClimateCorrections() {
         reading it now. A correction that could be made quietly would not be a correction — it
         would be an edit.
       </p>
+
+      {/* ── THE DOOR THE OTHER PAGES WERE PROMISING ──────────────────────────────
+          The privacy page told readers to write to six asterisks; the terms page sent
+          takedown requests to the same place; and "How this record is made" sent anyone
+          who wanted a copied source taken down to this page — which had no way to ask.
+          Three promises, no door. This is the door, and it stands here because a
+          correction is what most of those messages turn out to be. */}
+      <div className="mb-7">
+        <RecordSaySomething />
+      </div>
 
       {/* The count, before the list. It is the number this page is for, and it is stated in
           the same size whether it is nought or ninety. */}

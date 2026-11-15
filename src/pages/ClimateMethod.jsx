@@ -56,7 +56,7 @@ export default function ClimateMethod() {
           they stood, with a fingerprint of that exact copy — and a reader is shown only an excerpt of it. The
           origin keeps its name, its rights and its own address, and every entry sends the reader there first.
           If you publish a source and would rather a copy were not kept,{' '}
-          <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
+          <Link to="/ClimateCorrections#say" className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
             say so
           </Link>{' '}
           and it comes off. The link to your page stays; the copy goes.

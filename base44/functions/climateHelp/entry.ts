@@ -30,15 +30,19 @@ sold on the record itself.
 HOW AN ENTRY CARRIES ITS PROOF
 Every entry names the body, journal, document or person it came from, with a link. Every entry
 says out loud how well it is known: one source, corroborated by a second independent origin, or
-the body's own official record. A person reads every entry before it stands, and that person's
-name is written on the entry as its editor. When an entry is corrected, the correction stays in
+the body's own official record. An entry that carries the link to its source, and that the screen
+finds nothing wrong with, goes on the record as it arrives; one with no source, or one the screen
+is unsure of, waits for a person who either finds the source or leaves it out. When a person
+publishes or holds an entry, their name is on it as its editor; an entry the screen cleared
+carries no editor name, because no person decided it. When an entry is corrected, the correction stays in
 the open with the date it was made. Sealed entries carry a fingerprint any reader can recompute
 in their own browser, so a reader never has to trust the record's word for it.
 
 WHO MAY DO WHAT
 A reader: no account, no email, every published page.
-A sender: anyone may send an entry in. It is read by a person before it stands. The sender's
-email is used only to reach them about that entry and is never shown to anybody.
+A sender: anyone may send an entry in, with no account. A sourced entry the screen finds nothing
+wrong with goes up at once; anything else waits for a person. The sender's email is used only to
+reach them about that entry and is never shown to anybody.
 A checker: invited by a keeper. A pair of eyes. They open the sources behind an entry and write
 a note in their own name — it holds up, it does not, or they could not tell. They cannot publish,
 change or delete anything, and their address is never shown.
@@ -57,9 +61,9 @@ verify. Music and the room of cartoons: what was given to the record.
 
 WHAT THE RECORD WILL NOT CLAIM
 It does not hold everything: at global scale it holds a signed, verifiable fraction and says so
-on its face. A machine drafts and fetches; a machine never publishes. A held entry is private
-until a person decides. Nobody is asked to be on the roll; a person writes their own line or is
-not shown at all.
+on its face. A machine drafts, fetches and screens for spam; it can let a sourced entry through,
+but it never invents a source and never overrules a keeper. A held entry is private until a person
+decides. Nobody is asked to be on the roll; a person writes their own line or is not shown at all.
 `.trim();
 
 // The only addresses this can ever offer. Anything a model writes that is not here is dropped.
