@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
-import { ArrowRight, Globe, BookOpen, Film, Award, Heart } from 'lucide-react';
+import { ArrowRight, Globe, BookOpen, Film, Award } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
-import RecordCredit from '@/components/climate/RecordCredit';
 
 // ── Janine's life work — factual, dignified, no contact details (per her wish).
 // This page exists so her legacy has a home on the platform she inspired.
@@ -15,25 +14,21 @@ const ACHIEVEMENTS = [
     icon: Globe,
     title: 'Horizon International',
     body: 'Founder of Horizon International, at Yale University and formerly a Guest of Harvard University. For forty years it worked to find and advance solutions to the interrelated concerns of global health, environment, and poverty.',
-    color: '#1e3a2b',
   },
   {
     icon: BookOpen,
     title: 'Two Books, 75 Experts',
     body: 'She conceived and was Editor of two books, with original chapters written by 75 experts, published by Wiley-Blackwell with Horizon International: Water and Sanitation-Related Diseases and the Environment — Challenges, Interventions, and Preventive Measures, and Water and Sanitation-Related Diseases and the Changing Environment — Challenges, Interventions, and Preventive Measures. The Late Dr. Paul Farmer, University Professor at Harvard and Co-Founder of Partners In Health, wrote the Foreword.',
-    color: '#1e3a2b',
   },
   {
     icon: Film,
     title: '20 Television Documentaries',
     body: 'Under her direction as Executive Producer, Producer, and Director, Horizon International produced 20 television documentaries — many addressing climate change, from the loss of coral reefs to sustainable energy. Swedish, German, Chinese, and Mexican TV stations were among the co-producers. Lynn Redgrave, Raso Ouedraogo, Johan Forssblad, and Sam Waterston were among the hosts and narrators.',
-    color: '#0f5f7a',
   },
   {
     icon: Award,
     title: 'Recognition & Attribution',
     body: 'National Science Foundation PI for a grant on oceans. Collaborator with several UN entities. Lecturer at Harvard, Yale, Tufts, and Johns Hopkins. Speaker at the World Bank, for the Government of Pakistan, and for the Princess Chulabhorn conference in Thailand. Cancer research at Tufts New-England Medical Center. The UN attributed her and her Horizon team with advancing shea butter production and use by women and children. IUCN, WWF, and the government of Peru attributed her with helping save the vicuña. Horizon International endorsed the One Health Initiative in 2013 — medicine, veterinary science and the environment working as one — joining more than 700 scientists and physicians worldwide. Fellow Emeritus of the Explorers Club, 1996.',
-    color: '#1e3a2b',
   },
 ];
 
@@ -120,15 +115,14 @@ export default function ClimateFounder() {
             Made in Scotland from photons
           </span>
 
-          {/* The record's own plate, printed here rather than typed out again by hand:
-              created, built and made with stay three separate words, because they mean
-              three separate things. One file owns the credit now, so the foot of the
-              record and this page can never drift apart again. */}
-          <RecordCredit stacked className="mt-4" />
+          {/* The plate is not printed here. It stood under her name for one evening and it
+              was in the wrong place twice over: a printer's colophon belongs at the foot of
+              the sheet, not between the founder's name and her work, and the record already
+              prints it at the foot of every page. What stays is the one line that belongs to
+              this page — where it was made — and the only address the record gives.
 
-          {/* "Record kept by UF51 CIC" was taken off here at Janine's request, 9 November:
-              "'Kept by…' adds confusion and uncertainty" for a potential host. The credit
-              above says who built the page and stops there. */}
+              "Record kept by UF51 CIC" was taken off here at Janine's request, 9 November:
+              "'Kept by…' adds confusion and uncertainty" for a potential host. */}
           <a
             href="mailto:family@uf51.love"
             aria-label="Contact UF51 CIC about this record"
@@ -146,12 +140,16 @@ export default function ClimateFounder() {
         <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>
           The Record of the Work
         </h2>
+        {/* One rule and one accent for every card. These four used to carry the record's
+            semantic colours as decoration — the green that means "action" and the ocean that
+            means "a wire entry" — so a colour that means something on the map meant nothing
+            here. On this page the only accent is the record's own signal. */}
         {ACHIEVEMENTS.map((a, i) => {
           const Icon = a.icon;
           return (
-            <div key={a.title} className="bg-[#f7f1e5] border border-[#141210] border-t-4 p-5 lg:p-7" style={{ borderTopColor: a.color, animation: `twcc-epigraph .5s ease-out ${0.1 * i}s both` }}>
+            <div key={a.title} className="bg-[#f7f1e5] border border-[#141210] border-t-4 p-5 lg:p-7" style={{ animation: `twcc-epigraph .5s ease-out ${0.1 * i}s both` }}>
               <div className="flex items-center gap-2 mb-3">
-                <Icon className="w-4 h-4" style={{ color: a.color }} />
+                <Icon className="w-4 h-4 text-[#e2602a]" />
                 <h3 className="text-[13px] font-black font-mono uppercase tracking-wide text-[#141210]">{a.title}</h3>
               </div>
               <p className="text-[12px] lg:text-[13.5px] font-mono text-[#141210] leading-relaxed lg:leading-[1.75]">{a.body}</p>
@@ -226,7 +224,11 @@ export default function ClimateFounder() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.72) 0%, rgba(20,18,16,.8) 50%, rgba(20,18,16,.9) 100%)' }} />
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10">
-          <Heart className="w-6 h-6 text-[#e2602a] mx-auto mb-4" />
+          {/* The same living beacon she is met with at the top of the page, so the page
+              opens and closes on one signal rather than on a heart that only sits there. */}
+          <div className="flex justify-center mb-4">
+            <SignalBeacon size={34} color="#e2602a" />
+          </div>
           <p className="max-w-sm lg:max-w-2xl mx-auto text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(21px, 2.6vw, 30px)', lineHeight: 1.42 }}>
             “Together we can change the course of climate change.”
           </p>
@@ -246,10 +248,10 @@ export default function ClimateFounder() {
         Horizon International · Yale University
       </p>
 
-      {/* Our voice, in our own footer — never placed under her words. */}
-      <p className="px-5 pb-8 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md mx-auto">
-        This record is built by us, to carry that vision forward — a public service, open to every nation and every tongue.
-      </p>
+      {/* Our voice used to be printed here as a small grey paragraph. It said, in one
+          sentence, what the record's own colophon now says in names at the foot of the
+          page — so it is not said twice. Her page closes on her, and the book closes on
+          who made it. */}
     </div>
   );
 }
