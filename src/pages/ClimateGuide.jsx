@@ -247,6 +247,93 @@ export default function ClimateGuide() {
         items={KEEPER_DOORS}
       />
 
+      {/* ── TWO JOBS, WALKED END TO END ─────────────────────────────────────────────
+          Janine, by email: "Please walk me through the steps I should have her follow to
+          sign in and find her way about." That is the whole reason these two bands exist.
+          The rooms above say what each door is; these say what a person actually does, in
+          the order they do it, in words that assume nothing.
+
+          Two rules held to throughout. Nothing is promised that the record does not do —
+          a checker still cannot publish, and a keeper still cannot put an entry up without
+          their own name on it. And "not yet" is named as what it is, because the fastest
+          way to lose a volunteer is to let them believe a hold means they were wrong. */}
+      <GuideBand
+        number="08"
+        heading="If you are a checker, end to end"
+        note="A checker is a pair of eyes. You read what is waiting, you say what you found, and you sign it with your own name. You cannot publish, change or delete anything — that is not a limit on your standing, it is what makes your note worth reading."
+        items={[
+          {
+            label: '1 · A keeper puts you on the list',
+            what: 'One keeper\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The record writes to you the same day with your way in, and names the keeper who put you there.',
+          },
+          {
+            label: '2 · Sign in with that address',
+            to: '/ClimateChecking',
+            what: 'The invitation opens the checking room. Use the address the keeper typed — that is the one the record knows you by. If you have not set a password yet, the sign-in screen sends you one.',
+          },
+          {
+            label: '3 · Open the first entry waiting',
+            to: '/ClimateChecking',
+            what: 'The queue is the work: entries a keeper wants a second opinion on. One at a time, newest first. Nothing is timed and nothing is counted against you.',
+          },
+          {
+            label: '4 · Open the origin, not just the entry',
+            what: 'Every entry carries the body, journal or document it came from, with a link. Read that. The entry is somebody\u2019s sentence about the source; the source is the thing you are checking.',
+          },
+          {
+            label: '5 · Say what you found, in your own words',
+            to: '/ClimateChecking',
+            what: 'Three answers: it holds up, it does not, or you could not tell. All three are useful and none is a failure — "I could not tell" is often the most honest line on a page. Your name goes on it.',
+          },
+          {
+            label: '6 · What happens next is not yours to carry',
+            what: 'A keeper reads your note and decides: on the record, or not yet. A hold is never counted as you being wrong. Your note stays on the entry either way.',
+          },
+          {
+            label: '7 · Your line on the roll, if you want one',
+            to: '/ClimateRoll',
+            what: 'A few words about yourself, written by you and by nobody else, standing beside your name. Leave it empty and you are simply not shown — the list itself stays private, and your address is never on it.',
+          },
+        ]}
+      />
+
+      <GuideBand
+        number="09"
+        heading="If you are the keeper, end to end"
+        note="The keeper is the person the record answers to. Everything below is one sitting\u2019s work, in the order it is done; none of it needs anybody else\u2019s permission except the second key, which is the point of the second key."
+        items={[
+          {
+            label: '1 · Put a volunteer on the list',
+            to: '/ClimateKeeperRoom?tab=people',
+            what: 'People, then their name and address. A checker is on with one keeper\u2019s word. A second keeper needs a second keeper: you propose, they agree, and only then do the keys move.',
+          },
+          {
+            label: '2 · Tell the record to tap your screen',
+            to: '/ClimateKeeperRoom?tab=people',
+            what: 'The line at the top of People, one tap, on a phone or a laptop. After that you are tapped when something needs you and the letters stop — a letter is only sent when nobody\u2019s device answered.',
+          },
+          {
+            label: '3 · Decide, one entry at a time',
+            to: '/ClimateKeeperRoom?tab=decide',
+            what: 'Read the entry and its origin, then say yes or not yet. Yes writes your name on the entry as its editor and a line in the audit trail. Not yet keeps it exactly as it is, with your reason beside it. Both are decisions and both are recorded.',
+          },
+          {
+            label: '4 · Seal what you published',
+            to: '/ClimateSeals',
+            what: 'A fingerprint of the entry\u2019s words as they stood. Anyone can recompute it in their own browser, so a reader never has to trust us. If the words change without a new seal, the record says so in public.',
+          },
+          {
+            label: '5 · Read where the record is thin',
+            to: '/ClimateKeeperRoom?tab=counts',
+            what: 'How much is waiting, how much nobody has opened, and how many checks were made this week. Every number is a door into the page where that work is done.',
+          },
+          {
+            label: '6 · If you are ever unsure, do nothing',
+            what: 'An entry that waits is not a failure; an entry that goes up unread is. Nothing on this record punishes a keeper for taking another day.',
+          },
+        ]}
+      />
+
       {/* ── THE DOORS, TYPED ────────────────────────────────────────────────────────
           This page used to open with the drawn index under its own "Index" title, so the
           manual began with a second masthead: a reader met a menu on top of the writing,
