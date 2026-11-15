@@ -216,7 +216,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="02"
         heading="Sending something in"
-        note="Anyone may send an entry in. A person reads every entry before it stands on the record, and the sender’s email is used only to reach them about it."
+        note="Anyone may send an entry in. An entry that carries the link to its source — and that the screening reads as clean — goes on the record as it arrives; one without a source, or one the screening is unsure of, waits for a person. The sender’s email is used only to reach them about it, and is never shown to a reader."
         items={SEND}
       />
 

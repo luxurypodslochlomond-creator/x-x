@@ -20,21 +20,29 @@ import InviteCard from './InviteCard';
 
 const RECORD = 'https://uf51.love';
 
+// ── CORRECTED 15 NOVEMBER, 23:20 ─────────────────────────────────────────────
+// These three steps said "Nothing they send is live until you say yes." That was
+// untrue, and it was the sentence a keeper copied into her own email. An entry that
+// arrives with the link to its source, and that the screening reads as clean, goes on
+// the record as it arrives; only one without a source, or one the screen is unsure of,
+// waits for a person. So the steps now say that, and they put the link first — because
+// the link is the one thing that decides. A promise the code does not keep is worse
+// than a smaller promise it does.
 const STEPS = [
   {
     n: '1',
-    title: 'Add something straight away, with no account at all',
-    line: 'Open the record and tap "Submit a solution, crisis, or action". Paste the page it came from into the box at the top and the form fills itself in. No sign-in, nothing to install, and their email stays private.',
+    title: 'Add it straight away, with no account at all',
+    line: 'Open the record and tap "Submit a solution, crisis, or action". Paste the link to where it came from into the box at the top and the form fills itself in. Name and address go on the form so the record can reach them about it; the address is never shown to a reader, and nobody signs in to do this.',
   },
   {
     n: '2',
-    title: 'Sign in only for the two things that need a name',
-    line: 'Their own line on the roll, and checking what other people have sent. The invitation email sets the password, and the address you type here is the only key there is — nothing else to remember. If they use Google, that is one tap and no password at all.',
+    title: 'The honest bit: the link is what decides',
+    line: `An entry that carries its source link, and that the screening reads as clean, goes on the record as it arrives. One with no source — or one the screening is unsure of — waits for you, and you either find the link or leave it out. That is not a delay to apologise for: it is the reason a reader can trust the page. What is waiting sits at ${RECORD}/ClimateChecking.`,
   },
   {
     n: '3',
-    title: 'The honest bit: it waits for a keeper',
-    line: `Nothing they send is live until you say yes. That is not a delay to apologise for, it is the reason a reader can trust the page. What is waiting to be checked sits at ${RECORD}/ClimateChecking.`,
+    title: 'Sign in only for the two things that need a name',
+    line: 'Their own line on the roll, and checking what other people have sent. The invitation email sets the password, and the address you type here is the only key there is — nothing else to remember.',
   },
 ];
 
@@ -45,7 +53,7 @@ export default function InviteSteps() {
   const message = [
     `Hello${name.trim() ? ` ${name.trim()}` : ''},`,
     '',
-    'You have a place on the record. One address, one door, one yes, and it takes a minute:',
+    'You have a place on the record. One address, one link, and it takes a minute:',
     '',
     ...STEPS.map((s) => `${s.n}. ${s.title}. ${s.line}`),
     '',
