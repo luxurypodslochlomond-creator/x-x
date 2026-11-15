@@ -18,6 +18,7 @@ const whenLine = (iso) => {
 import AddKeeper from '@/components/climate/AddKeeper';
 import AccessSecondKey from '@/components/climate/AccessSecondKey';
 import InviteSteps from '@/components/climate/keeper/InviteSteps';
+import InviteCard from '@/components/climate/keeper/InviteCard';
 import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 
 // ── WHO MAY COME INTO THE RECORD ──────────────────────────────────────────────
@@ -51,6 +52,7 @@ export default function GuestList() {
   const [note, setNote] = useState('');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
+  const [cardName, setCardName] = useState('');
 
   const call = (payload) => base44.functions.invoke('climateAccessChange', payload);
 
@@ -229,6 +231,29 @@ export default function GuestList() {
               : 'A checker is one keeper’s decision: added, paused or taken off on your word, and written down with your name either way. The keys are the ones that need two — one keeper asks and a different keeper agrees before anybody gains or loses them. The last keeper can never be taken off.'}
           </p>
         </AccessGuide>
+
+        {/* ── THE CARD THAT TEACHES THE JOB ──────────────────────────────────────
+            Janine asked to be walked through it, and the honest answer is that a keeper
+            should not have to be walked through a thing three times down a telephone. The
+            card names her, says the three taps — her room, the people door, and the one
+            thing that waits for a second keeper — and lands in a message thread where she
+            can keep it. Drawn on the device it is drawn on, from nothing but a name typed
+            here. */}
+        <details className="room-details mt-3">
+          <summary>The card to send a keeper</summary>
+          <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-2" style={reading}>
+            Three taps, said on a picture she can keep: her room, the people door, and the one
+            thing that waits for a second keeper. Type her name and send it — no address goes
+            with it that she was not already given.
+          </p>
+          <input
+            value={cardName}
+            onChange={(e) => setCardName(e.target.value)}
+            placeholder="her first name, for the card (optional)"
+            className={field}
+          />
+          <InviteCard name={cardName} variant="keeper" />
+        </details>
       </div>
 
       <AddPanel className={mobile ? 'room-details mb-4' : 'border-t border-[#141210]/20 pt-3 mb-4'}>

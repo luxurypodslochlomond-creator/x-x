@@ -39,6 +39,19 @@ const ROWS = [
   { label: 'ONE YES', line: 'Nothing goes up until a keeper reads it. That is the whole of why a reader can trust the page.' },
 ];
 
+// ── THE OTHER SIDE OF THE SAME CARD ──────────────────────────────────────────
+// One card for the person being asked, and now one for the keeper doing the asking. Janine
+// asked to be walked through it; a list of steps in a room she has to find first is not a
+// walkthrough, it is homework. These three lines are the whole of her job — her room, the
+// people door, and the one thing that deliberately waits for a second keeper. Said on a
+// picture she can keep on her phone, because that is where she will be standing when she
+// does it.
+const KEEPER_ROWS = [
+  { label: 'YOUR ROOM', line: 'Sign in at the address your invitation came to, and open the keeper\u2019s room. Whatever is waiting sits there, one tap each: yes, or not yet.' },
+  { label: 'THE PEOPLE DOOR', line: 'Tap People. Under the keys, type their name, their address and one word on why. A checker is your word alone, and it lands the moment you say it.' },
+  { label: 'THE KEYS TAKE TWO', line: 'Handing over the keys is the only thing that waits: one keeper asks, a different keeper agrees. The last keeper can never be taken off.' },
+];
+
 function wrap(ctx, text, maxWidth, maxLines) {
   const words = String(text || '').split(/\s+/).filter(Boolean);
   const lines = [];
@@ -64,6 +77,8 @@ function fit(ctx, text, maxWidth) {
 export async function buildInviteCard(person = {}, options = {}) {
   const origin = String(options.origin || recordOrigin() || 'uf51.love').replace(/^https?:\/\//, '');
   const name = String(person.name || '').trim();
+  const keeper = Boolean(options.keeper);
+  const rows = keeper ? KEEPER_ROWS : ROWS;
 
   const canvas = document.createElement('canvas');
   canvas.width = W;
@@ -101,7 +116,7 @@ export async function buildInviteCard(person = {}, options = {}) {
 
   let y = 118;
   ctx.font = `900 20px ${MONO}`;
-  const badge = 'YOU ARE INVITED';
+  const badge = keeper ? 'FOR THE KEEPER' : 'YOU ARE INVITED';
   const badgeW = ctx.measureText(badge).width + 32;
   ctx.fillStyle = INK;
   ctx.fillRect(PAD, y - 24, badgeW, 36);
@@ -111,19 +126,26 @@ export async function buildInviteCard(person = {}, options = {}) {
   y += 64;
   ctx.fillStyle = INK;
   ctx.font = `900 72px ${DISPLAY}`;
-  const head = wrap(ctx, name ? name.toUpperCase() : 'A PLACE ON THE RECORD', MAXW, 2);
+  const head = wrap(ctx, name ? name.toUpperCase() : keeper ? 'THE KEYS' : 'A PLACE ON THE RECORD', MAXW, 2);
   const headBase = y + 72;
   head.forEach((line, i) => ctx.fillText(line, PAD, headBase + i * 78));
   y = headBase + 78 * (head.length - 1) + 40;
 
   ctx.fillStyle = MUTED;
   ctx.font = `500 24px ${MONO}`;
-  const intro = wrap(ctx, 'has a place on the record. It is one page, it takes a minute, and it is free.', MAXW, 2);
+  const intro = wrap(
+    ctx,
+    keeper
+      ? 'holds the keys to this record. Putting somebody else on it takes three taps, and here they are.'
+      : 'has a place on the record. It is one page, it takes a minute, and it is free.',
+    MAXW,
+    2
+  );
   intro.forEach((line, i) => ctx.fillText(line, PAD, y + i * 34));
   y += 34 * (intro.length - 1) + 72;
 
   // The three things, said once each. No numbers, because the card is not a manual.
-  ROWS.forEach((row) => {
+  rows.forEach((row) => {
     ctx.fillStyle = SIGNAL;
     ctx.font = `900 18px ${MONO}`;
     ctx.fillText(row.label, PAD, y);
@@ -137,7 +159,11 @@ export async function buildInviteCard(person = {}, options = {}) {
 
   ctx.fillStyle = MUTED;
   ctx.font = `500 22px ${MONO}`;
-  ctx.fillText('Together we can change climate.', PAD, Math.min(y + 16, FOOTER_TOP - 44));
+  ctx.fillText(
+    keeper ? 'A keeper puts the name on it. The record keeps the note.' : 'Together we can change climate.',
+    PAD,
+    Math.min(y + 16, FOOTER_TOP - 44)
+  );
 
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
@@ -151,7 +177,7 @@ export async function buildInviteCard(person = {}, options = {}) {
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
-  ctx.fillText(fit(ctx, `${origin}/TogetherChangeClimate`, MAXW), PAD, FOOTER_TOP + 100);
+  ctx.fillText(fit(ctx, `${origin}${keeper ? '/ClimateKeeperRoom' : '/TogetherChangeClimate'}`, MAXW), PAD, FOOTER_TOP + 100);
 
   ctx.fillStyle = SIGNAL;
   ctx.fillRect(0, 74, 8, H - 74);

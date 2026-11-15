@@ -8,18 +8,25 @@ import { recordAddress, recordOrigin } from '../recordAddress';
 // can land in an email to one person or a group chat of eight without anything being
 // retyped. Where the sheet is refused — the editor's frame, a locked-down browser — the
 // card is put on screen to keep, never quietly dropped into Downloads.
-export default function InviteCard({ name = '' }) {
+export default function InviteCard({ name = '', variant = 'person' }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
+  const keeper = variant === 'keeper';
 
   const share = async () => {
     if (state === 'building') return;
     setState('building');
     try {
-      const blob = await buildInviteCard({ name }, { origin: recordOrigin() });
+      const blob = await buildInviteCard({ name }, { origin: recordOrigin(), keeper });
       if (!blob) throw new Error('The card could not be drawn.');
-      const file = new File([blob], 'record-of-the-time-invitation.png', { type: 'image/png' });
-      const title = name.trim() ? `An invitation, ${name.trim()}` : 'An invitation to the record';
+      const file = new File(
+        [blob],
+        keeper ? 'record-of-the-time-the-keys.png' : 'record-of-the-time-invitation.png',
+        { type: 'image/png' }
+      );
+      const title = name.trim()
+        ? keeper ? `The keys, ${name.trim()}` : `An invitation, ${name.trim()}`
+        : keeper ? 'The keys to the record' : 'An invitation to the record';
       const line = recordAddress();
 
       const carriesFile = !!(navigator.canShare && navigator.canShare({ files: [file] }));
@@ -53,7 +60,11 @@ export default function InviteCard({ name = '' }) {
         style={reading}
       >
         <Icon className="w-4 h-4" />
-        {state === 'building' ? 'Drawing their card…' : state === 'shared' ? 'Sent' : 'Draw their card'}
+        {state === 'building'
+          ? 'Drawing the card…'
+          : state === 'shared'
+            ? 'Sent'
+            : keeper ? 'Draw the keeper’s card' : 'Draw their card'}
       </button>
       <ShareCardPreview
         open={!!card}
@@ -61,7 +72,7 @@ export default function InviteCard({ name = '' }) {
         blob={card?.blob}
         fileName={card?.fileName}
         link={recordAddress()}
-        headline={name.trim() ? `An invitation, ${name.trim()}` : 'An invitation to the record'}
+        headline={name.trim() ? `${keeper ? 'The keys' : 'An invitation'}, ${name.trim()}` : 'An invitation to the record'}
       />
     </div>
   );
