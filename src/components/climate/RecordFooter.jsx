@@ -41,9 +41,10 @@ export default function RecordFooter({ showKeeper = true }) {
             >
               x = x
             </Link>
-            <p className="mt-5 max-w-[42ch] text-[13.5px] leading-relaxed text-record-muted">
-              The mark this record is built on. Read what it means, and what it does not.
-            </p>
+            {/* The sentence that used to sit here explained the mark and then told the reader
+                to go and read what it meant, which is a footnote lecturing the page it is
+                printed on. The mark is already a link to its own page and already says so in
+                its label. A foot should let a reader leave, not detain them. */}
           </>
         )}
 
