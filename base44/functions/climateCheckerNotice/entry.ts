@@ -21,7 +21,7 @@ const COPY = {
     past: 'is on the record',
     log: 'Given a place on the list',
     headline: 'You are on the record',
-    body: 'You have a place on the record, and two things are open to you. You can send an initiative in: open the record, tap "Submit a solution, crisis, or action", and paste the page it came from. It goes to a keeper before it appears. And you can open whatever is waiting to be checked, follow it to its source, and put your name to what you find. You cannot publish, edit or delete anything, and you never see the address of the person who submitted.',
+    body: 'Two things are open to you. You can send an initiative in: open the record, tap "Submit a solution, crisis, or action", and paste the page it came from. It goes to a keeper before it appears. And you can open whatever is waiting to be checked, follow it to its source, and put your name to what you find. You cannot publish, edit or delete anything, and you never see the address of the person who submitted.',
     keeper: 'They have a way in now. Every change to that list is written on the record from here on, yours included.',
   },
   paused: {
@@ -87,6 +87,10 @@ export default async function (req) {
     // product entirely. A letter from the record must not hand a checker a band page.
     const RECORD_HOME = 'https://uf51.love';
     const who = String(name || '').trim() || clean;
+    // The keeper whose hand actually moved the list. Their name goes into the letter, because
+    // the alternative is the record writing to a stranger about itself in its own voice — and
+    // a person who cannot see who vouched for them has no one to reply to.
+    const inviter = String(keyholder.name || user.full_name || user.email || '').trim();
 
     // Keeper or checker? The record's own line decides — never the request, or anybody could
     // ask for the warmer letter. Read back from the guest list before a word is written.
@@ -112,7 +116,15 @@ export default async function (req) {
       : state === 'invited'
         ? `${RECORD_HOME}/TogetherChangeClimate`
         : `${RECORD_HOME}/ClimateChecking`;
-    const letterBody = (isKeeper && KEEPER_BODY[state]) || copy.body;
+    // ── A PERSON VOUCHED, AND THE LETTER SAYS WHICH ONE ────────────────────────────
+    // This letter used to arrive saying only that "you have a place on the record", as though
+    // the record had decided it by itself. It had not. Somebody looked at a person's work,
+    // thought they belonged here, and put their name on the list — and the first line of the
+    // letter is now that person's name, so the person reading it knows who to thank and who to
+    // ask. The record is the thing that keeps the note. It is not the thing that invited them.
+    const letterBody =
+      (state === 'invited' && inviter ? `You have a place on the record, put there by ${inviter}. ` : '') +
+      ((isKeeper && KEEPER_BODY[state]) || copy.body);
 
     // The accountability line is written by the door that actually moved the list, one line
     // per change. This function used to write a second copy of it, so a change that landed

@@ -29,11 +29,11 @@ import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 // find, and that is all. Making somebody an admin to let them do that would hand them every
 // submitter's address and the delete button as well.
 //
-// And nobody moves this list alone. Every change — putting a pair of eyes on, handing over
-// the keys, pausing, restoring, taking somebody off — is asked by one keeper and agreed by a
-// different one before it happens. The rule lives on the server, not on this page, so it
-// holds whatever the page does. The one honest exception: while there is only one keeper on
-// the record there is no second key to ask, so their word stands and the record says so.
+// And the list moves by a rule, not a mood. A pair of eyes is one keeper's decision — added,
+// paused or ended on her word, and the audit line carries her name so it was never quiet.
+// The keys are the ones that take two: one keeper asks, a different keeper agrees. The rule
+// lives on the server, not on this page, so it holds whatever the page does. The one honest
+// exception: while there is only one keeper on the record there is no second key to ask.
 export default function GuestList() {
   const mobile = useKeeperMobile();
   const AddPanel = mobile ? 'details' : 'div';
@@ -283,7 +283,8 @@ export default function GuestList() {
         <p className="text-[13px] text-[#6b5f4f] leading-[1.7] mt-8 border-t border-[#141210]/15 pt-4" style={reading}>
           Pausing or taking somebody off ends their access straight away, and they are told. Notes they already wrote
           stay on the record in their name, because the checking they did was real whether or not they can check
-          tomorrow. Every change here is written into the audit trail with both keepers' names.
+          tomorrow. Every change here is written into the audit trail with the name of the keeper
+          whose word it was — both names when the keys change hands.
         </p>
       </AccessGuide>
 
