@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
 import { createPageUrl } from '@/utils';
 import { ArrowRight, Globe, Shield, Check } from 'lucide-react';
 import RecordToday from '@/components/climate/brief/RecordToday';
+import { useRecordFigures, show, TONGUES, HAND_WRITTEN_TONGUES } from '@/components/climate/recordFigures';
 
 // ── A BRIEF FOR JANINE M. H. SELENDY & HORIZON INTERNATIONAL ─────────────────
 // The order of this page is the order she asked for, and it is the order a stranger reads
@@ -19,54 +19,28 @@ import RecordToday from '@/components/climate/brief/RecordToday';
 // And every figure is a door: a count nobody can walk to is a number asking to be believed.
 
 export default function ClimateBrief() {
-  // The brief tells her the numbers are live — so they are. Counted from the
-  // database on every visit; today's verified figures are the fallback.
-  // The fallbacks are today's real figures, so a failed count can never print a number that
-  // was true weeks ago. Every figure below is re-counted from the database on each visit.
-  const [stats, setStats] = useState({
-    entries: 19, solutions: 10, crises: 9, wire: 18, locations: 13, categories: 16, actions: 3, groups: 4, seals: 44,
-  });
-
-  useEffect(() => {
-    (async () => {
-      // Locations and categories are counted on the server, not by listing the record and
-      // counting distinct values in the browser: the record no longer hands out the address
-      // a submitter gave, and a field held back that way also stops a browser's own
-      // counting query. The two numbers still come from the real published entries.
-      const [solutions, crises, facets, actions, groups, wire, seals] = await Promise.all([
-        base44.entities.ClimateSolution.count({ entry_type: 'solution', status: 'published' }),
-        base44.entities.ClimateSolution.count({ entry_type: 'climate_crisis', status: 'published' }),
-        base44.functions.invoke('climateRecordFacets', {}).then(r => r?.data || {}),
-        base44.entities.ClimateAction.count({ status: 'published' }),
-        base44.entities.ClimateGroup.count({}),
-        base44.entities.ClimateNews.count({ status: 'published' }),
-        base44.entities.ClimateSeal.count({}),
-      ]);
-      setStats(prev => ({
-        ...prev,
-        entries: solutions + crises,
-        solutions,
-        crises,
-        wire,
-        locations: facets.countries ?? prev.locations,
-        categories: facets.categories ?? prev.categories,
-        actions,
-        groups,
-        seals,
-      }));
-    })();
-  }, []);
+  // ── NOTHING ON THIS PAGE IS TYPED IN ────────────────────────────────────────────
+  // There used to be a block of figures written here, described in a comment as "today's real
+  // figures, so a failed count can never print a number that was true weeks ago". The comment
+  // was wrong and the figures proved it: by the time anyone checked, seals were typed as 44
+  // against 93 real, and categories as 16 while the taxonomy was 32. A fallback is only ever
+  // the last number somebody typed, and the last number somebody typed is a memory.
+  //
+  // So every figure is asked of the record as the page opens, and if an answer does not come
+  // back the plate prints a dash. That is the whole discipline of this page: a number we
+  // cannot count tonight does not get to stand in for one we counted once.
+  const f = useRecordFigures();
 
   // Each plate walks to the thing it counted.
   const figures = [
-    { n: String(stats.entries), label: `entries on the record · ${stats.solutions} solutions, ${stats.crises} crises`, to: '/TogetherChangeClimate' },
-    { n: String(stats.seals), label: 'fingerprints, each one checkable in your own browser', to: '/ClimateSeals' },
-    { n: String(stats.wire), label: 'dated, sourced entries on the wire', to: '/ClimateWire' },
-    { n: String(stats.locations), label: 'locations represented — countries and regions', to: '/ClimateMap' },
-    { n: String(stats.actions), label: 'ground actions listed', to: '/TogetherChangeClimate' },
-    { n: String(stats.groups), label: 'community gatherings formed', to: '/TogetherChangeClimate' },
-    { n: `${stats.categories}/32`, label: 'categories carrying entries today', to: '/TogetherChangeClimate' },
-    { n: '65', label: 'tongues the interface speaks', to: '/TogetherChangeClimate' },
+    { n: show(f?.entries), label: `entries on the record · ${show(f?.solutions)} solutions, ${show(f?.crises)} crises`, to: '/TogetherChangeClimate' },
+    { n: show(f?.seals), label: 'fingerprints, each one checkable in your own browser', to: '/ClimateSeals' },
+    { n: show(f?.wire), label: 'dated, sourced entries on the wire', to: '/ClimateWire' },
+    { n: show(f?.locations), label: 'locations represented — countries and regions', to: '/ClimateMap' },
+    { n: show(f?.actions), label: 'ground actions listed', to: '/TogetherChangeClimate' },
+    { n: show(f?.groups), label: 'community gatherings formed', to: '/TogetherChangeClimate' },
+    { n: `${show(f?.categoriesUsed)}/${show(f?.categoriesTotal)}`, label: 'categories carrying entries today', to: '/TogetherChangeClimate' },
+    { n: String(TONGUES), label: 'tongues the interface speaks', to: '/TogetherChangeClimate' },
   ];
 
   return (
@@ -158,14 +132,16 @@ export default function ClimateBrief() {
           </h2>
           <RecordToday figures={figures} />
           <p className="text-[10px] font-mono text-[#6b6258] mt-3 leading-relaxed">
-            Counted from the database on every visit, not typed in once. Press any figure to see what it is counting.
+            Counted from the database as this page opens, never typed in once — and a dash means the
+            count could not be made tonight, in which case we would rather show nothing than last
+            month&rsquo;s figure in today&rsquo;s clothes. Press any figure to see what it is counting.
           </p>
 
           <h3 className="mt-7 mb-3 text-[11px] font-black font-mono uppercase tracking-[0.16em] text-[#1e3a2b]">Live now</h3>
           <div className="space-y-2.5">
             {[
               ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.', '/TogetherChangeClimate', 'See both on the record'],
-              ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to 32, all filterable on the page. ${stats.categories} of them carry entries today; the rest are supported and ready.`, '/TogetherChangeClimate', 'Filter by category'],
+              ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to ${show(f?.categoriesTotal)}, all filterable on the page. ${show(f?.categoriesUsed)} of them carry entries today; the rest are supported and ready.`, '/TogetherChangeClimate', 'Filter by category'],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.', '/ClimateMethod', 'How place is held'],
               ['A map of where it is happening', 'Both entry types on a rough-region map, reachable from the record itself — no precise pins, and a read is counted by country alone, never by person.', '/ClimateMap', 'Open the map'],
               ['Screened as it arrives — by a machine, and it says so', 'Every entry carries a status field (draft / reviewed / published). A machine reads each submission as it arrives: clear entries go on the record at once, anything it flags waits for a person. A machine can hold an entry back. It can never make one trusted — that takes a person reading the source and signing their name, and there are not enough of those yet.', '/ClimateMethod', 'How screening works'],
@@ -174,7 +150,7 @@ export default function ClimateBrief() {
               ['Scale field', 'Individual, community, city, country, global — your spec, implemented.', '/TogetherChangeClimate', 'See it on an entry'],
               ['Gatherings', 'People working on the same topic in the same area can form one. Email is required, per your spec. The platform stores no messages.', '/TogetherChangeClimate', 'See the gatherings'],
               ['Actions', 'Cleanups, plantings, meetings, policy submissions, workshops, monitoring. Each action carries one contact link — the organiser is contacted directly. The platform never sees the conversation.', '/TogetherChangeClimate', 'See the actions'],
-              ['65 tongues · 8 written by hand', 'The interface is written out by hand in 8 languages and machine-made into 57 more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. Where a tongue is a machine\'s attempt — the ancient scripts especially — the page says so plainly rather than passing it off as an inscription. You can also free-type any tongue on Earth.', '/TogetherChangeClimate', 'Choose a tongue'],
+              [`${TONGUES} tongues · ${HAND_WRITTEN_TONGUES} written by hand`, `The interface is written out by hand in ${HAND_WRITTEN_TONGUES} languages and machine-made into ${TONGUES - HAND_WRITTEN_TONGUES} more, including Gàidhlig, Cymraeg, Quechua, Hawaiian, Te Reo Māori and Ancient Greek. Both figures are read from the code that serves them, so neither can drift away from the tongue list. Where a tongue is a machine\'s attempt — the ancient scripts especially — the page says so plainly rather than passing it off as an inscription. You can also free-type any tongue on Earth.`, '/TogetherChangeClimate', 'Choose a tongue'],
               ['Every entry fingerprinted', 'Each published entry is sealed by the record\'s own server, and the fingerprint is recomputed in the reader\'s browser. If the words move without a new seal, the fingerprints stop matching and the record says so in public.', '/ClimateSeals', 'Check a seal yourself'],
               ['No advertising, no sponsorship, no influence', 'Stated on the page, and held in the code — there is no ad network on the record, and a gift never buys a place, a position, or a mention in an entry. Givers choose whether their name stands in public.', '/ClimateMethod', 'Where that rule is written'],
               ['Full-screen detail pages', 'Every entry opens on its own page with its full body, source link, and related entries — native back-button, mobile-first.', '/TogetherChangeClimate', 'Open any entry'],
@@ -210,7 +186,7 @@ export default function ClimateBrief() {
             {[
               ['The checking office, staffed', 'The office is built and empty. Independent people reading entries, following sources and signing their names is the next real step, and the only one that cannot be automated.'],
               ['Entry translation by community', 'The interface is translated now. Entries themselves (the solution text) are translated by our community over time — not automatically, because accuracy matters more than speed.'],
-              ['Categories still to fill', `${32 - stats.categories} of the 32 categories have no entry yet. The database and the filters support them; they need their first entries, not new code.`],
+              ['Categories still to fill', `${show(f?.categoriesTotal == null || f?.categoriesUsed == null ? null : f.categoriesTotal - f.categoriesUsed)} of the ${show(f?.categoriesTotal)} categories have no entry yet. The database and the filters support them; they need their first entries, not new code.`],
               ['Photo51 evidence link', 'Connecting ground-action photos (cleanups, plantings) to the climate record, so an action can carry visual proof without storing personal data.'],
               ['The code, in public', 'The licence and the covenant are in place. The repository itself is being published — until it is, nothing here can honestly be called auditable, and the covenant says so in its own words.'],
             ].map(([title, body]) => (

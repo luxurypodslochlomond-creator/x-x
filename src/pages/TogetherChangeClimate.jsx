@@ -191,6 +191,13 @@ seedTranslations(T);
 // word". The record answers it: the button above moves to that kind and the list follows,
 // so the box and the buttons can never disagree. A kind word is never also searched as
 // text, or a search for "crises" would come back empty on a page full of them.
+// ── WHICH TONGUES ARE WRITTEN BY HAND, COUNTED RATHER THAN CLAIMED ──
+// The brief and the summary both used to say "written by hand in 8 languages and machine-made
+// into 57 more". The 8 was right by luck and the 57 had been wrong for months. This export is
+// the list of dictionaries that actually exist in this file, so the figure printed anywhere
+// else is read from the thing itself and cannot drift away from it.
+export const HAND_WRITTEN = Object.keys(T);
+
 const KIND_WORDS = {
   solution: ['solution', 'solutions'],
   climate_crisis: ['crisis', 'crises', 'emergency', 'emergencies'],

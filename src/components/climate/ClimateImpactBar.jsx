@@ -21,6 +21,11 @@ export default function ClimateImpactBar() {
       <p className="text-[10px] font-mono text-[#efe7d6]/80 leading-tight text-center">
         {isPending ? (
           <span className="text-[#efe7d6]/25 tracking-[0.3em]">···</span>
+        ) : !stats ? (
+          // A count that could not be made is not a zero. Before this branch existed, a failed
+          // count printed "Be the first to read the record" on a record that had been read
+          // hundreds of times — the most flattering possible reading of a broken query.
+          <>Reads could not be counted from here just now<span className="text-[#e2602a]/60 ml-1">→</span></>
         ) : views > 0 ? (
           <>
             <span className="font-black text-[#e2602a]">{views}</span> {views === 1 ? 'read' : 'reads'} of the record, from{' '}
