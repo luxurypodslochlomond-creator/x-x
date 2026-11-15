@@ -39,16 +39,15 @@ export default async function (req) {
     // its own clock and language settings, and that is the first thing believed. The header
     // is kept only as a fallback for a device that states nothing. Neither is a person. No
     // IP, no cookie, no device identifier is stored, before or after this change.
+    // ── THE HEADER FALLBACK IS GONE, BECAUSE IT WAS THE BUG ────────────────────
+    // This still read the geo-header whenever the device stated nothing, which is the
+    // one thing this file's own note above says it no longer does — and it is the exact
+    // mechanism that reported 398 reads from one country. A header describes the machine
+    // answering for the reader, never the reader. So the place is the reader's, or it is
+    // empty: an unnamed read shares one window per entry and is undercounted by that,
+    // which is the direction a readership figure is allowed to err in.
     const stated = String(reader_country || '').toUpperCase().trim();
-    const country = /^[A-Z]{2}$/.test(stated) && stated !== 'XX' && stated !== 'ZZ'
-      ? stated
-      : (
-          req.headers.get('cf-ipcountry') ||
-          req.headers.get('x-vercel-ip-country') ||
-          req.headers.get('x-country-code') ||
-          req.headers.get('x-appengine-country') ||
-          ''
-        ).toUpperCase();
+    const country = /^[A-Z]{2}$/.test(stated) && stated !== 'XX' && stated !== 'ZZ' ? stated : '';
 
     // Sanitize reader_region — trim, cap length, strip HTML
     const cleanRegion = reader_region

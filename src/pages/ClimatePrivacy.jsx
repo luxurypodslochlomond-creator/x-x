@@ -118,7 +118,7 @@ export default function ClimatePrivacy() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              Your submission stays for the life of the record, unless you ask us to remove it. Your email is kept until you withdraw consent. The advisory note stays in the audit trail. Country data is aggregated, with no link to any person. Nothing is kept longer than that.
+              Your submission stays for the life of the record, unless you ask us to remove it. Your email is kept until you withdraw consent. The advisory note stays on the entry itself, where anyone can read it. Country data is aggregated, with no link to any person. Nothing is kept longer than that.
             </p>
           </div>
         </section>

@@ -82,14 +82,21 @@ export default function ClimateMethod() {
 
       <Block n="05" title="Who decides">
         <p>The screen is a machine, and it is allowed to say only one thing: clean enough to go up, or wait for a person. It never says that a claim is true, it never sets how well a claim is known, and it never signs an entry with anybody's name. Anything it is unsure of waits for a person, and that person's decision is the one that counts.</p>
-        <p>One named keeper signs this record, and that name belongs at the top of it rather than in the small print. That name, the contact address and Horizon International's role as custodian are still being settled with the founder — this page says so rather than inventing a masthead, and changes the moment they are.</p>
-        <p>Keeping the record running is a second, separate job, and the rule is that a second keeper holds it — never the same single person doing both with nobody checking. Until that second name is on the record, this page says so rather than implying it.</p>
+        <p>Three people hold the record's keys: Janine M. H. Selendy, after whose work and Horizon International this record is made; Gillian Barbara Brown; and Brian Hughes, who built it. No keeper can add or remove another alone — it takes two of them — so that rule lives in the record rather than in a promise on a page.</p>
+        <p>Keeping the record running is a second, separate job from deciding what goes on it, and the person holding it is not the founder. Anyone may write to <a href="mailto:family@uf51.love" className="font-black underline decoration-2 underline-offset-2 hover:text-[#b3261e]">family@uf51.love</a> and a person answers.</p>
+        <p>
+          One thing is not yet as it should be, and this page says it rather than letting the paragraph above stand
+          unqualified: the entries placed on this record in its first weeks went up on the screen's word, before a
+          person was signing, and they carry no keeper's name. Every entry placed from here is either signed by the
+          keeper who published it or prints plainly that it is unsigned. Nothing on this record pretends that a person
+          signed what nobody signed.
+        </p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
 
       <Block n="06" title="Corrections, in daylight">
         <p>When an entry is wrong it is corrected on the entry itself, with the date and what changed. Nothing is quietly edited. Nothing disappears.</p>
-        <p>Every decision a person makes — who looked, when, and what the advisory note said — goes into an audit trail. The table for it is built and it holds no rows yet: entries were published before it was wired, and that gap is said here rather than filled in afterwards. It fills from the first real decision onward, and an entry the screen cleared asks nothing of a person, so no decision is claimed for it.</p>
+        <p>Every decision a person makes — who looked, when, and what the advisory note said — goes into an audit trail. It holds only decisions that were really taken: the entries that went on before it was wired carry no line in it, and that gap is said here rather than filled in afterwards. An entry the screen cleared asks nothing of a person, so no decision is claimed for it.</p>
         <p>
           An audit trail keeps a person honest. It does not catch a quiet edit made at the table itself. So every
           published entry also carries a fingerprint of its own words, taken when it was sealed and checkable by
