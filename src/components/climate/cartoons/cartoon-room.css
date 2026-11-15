@@ -33,7 +33,11 @@
 .comic-gesture { display: inline-block; margin: 0 .1rem .75rem; padding: .3rem .55rem; border: 2px solid rgb(var(--record-ink)); border-radius: 3px; background: rgb(var(--cartoon-mint)); font-size: .62rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; transform: rotate(-1.2deg); }
 .comic-frame { border: 3px solid rgb(var(--record-ink)); background: rgb(var(--cartoon-paper)); box-shadow: 4px 5px 0 rgb(var(--record-ink)); border-radius: 3px 9px 4px 7px; overflow: hidden; }
 .comic-stage { position: relative; }
-.comic-stage img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: rgb(var(--cartoon-sky)); }
+/* Every panel is the same size, whatever shape the drawing arrived in. `contain` left a
+   band of sky above or below the strips that were not square, so the drawings looked like
+   different sizes as you swiped — the one thing a comic strip cannot do. `cover` fills the
+   frame edge to edge and crops only the empty margin, so the eye moves and nothing jumps. */
+.comic-stage img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 45%; background: rgb(var(--cartoon-sky)); }
 .record-pages .cartoon-room .comic-speech {
   position: absolute; top: .75rem; left: .75rem; z-index: 1; max-width: 83%; padding: .65rem .9rem;
   border: 2px solid rgb(var(--record-ink)); border-radius: 47% 53% 44% 42% / 36% 43% 48% 47%;

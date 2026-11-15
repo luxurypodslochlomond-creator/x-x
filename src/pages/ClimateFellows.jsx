@@ -5,36 +5,138 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 
-// The note a Fellow reads before they arrive — written to answer the only question
-// a good volunteer actually has: will my hour here be worth anything, and will it
-// still have my name on it in a year.
-//
-// This is deliberately not onboarding. There is no course, no tour, no dashboard to
-// learn. Three jobs, what they keep, and what we will not do to them.
+// The note a volunteer reads before they arrive. It used to be nine blocks of prose at
+// twelve pixels — a briefing document, and nobody reads a briefing document on a phone.
+// The job is one sentence, so the page is now that sentence, three cards, and the way in.
+// Nothing has been dropped that a person needs; the words that were doing the persuading
+// rather than the explaining have gone.
 
-function Block({ n, title, children }) {
-  return (
-    <section className="mb-7 lg:mb-10">
-      <div className="flex items-baseline gap-2 mb-2">
-        <span className="text-[10px] font-black font-mono text-[#e2602a]">{n}</span>
-        <h2 className="font-black uppercase text-[#141210] leading-tight" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>{title}</h2>
-      </div>
-      <div className="space-y-2.5 lg:space-y-3.5 text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">{children}</div>
-    </section>
-  );
+const JOBS = [
+  { n: '01', title: 'Check three entries', line: 'Pick the ones you half believe, not the easy ones.' },
+  { n: '02', title: 'Bring one thing', line: 'Something working that others could copy — with its origin attached. Not a screenshot.' },
+  { n: '03', title: 'Find one you think is wrong', line: 'Not to be polite about it. This is the most useful hour anybody gives this record.' },
+];
+
+const KEEP = [
+  'Your name on what you wrote, permanently. Nobody can edit it afterwards, and a correction is a second note in the open.',
+  'A link you can send anyone. Every entry has its own address, with your note underneath it.',
+  'Your email stays private. The record keeps it only to reach you about your own notes.',
+];
+
+const NOT = [
+  'No training course, no dashboard to learn, no weekly call to sit through.',
+  'No quota, and no word like “content”.',
+  'Nothing rewritten under your name. Nothing published as yours that you did not write.',
+];
+
+function Label({ children }) {
+  return <p className="text-[10px] font-black font-mono uppercase tracking-[0.22em] text-[#6b6258] mb-2">{children}</p>;
 }
 
-function Rule({ children }) {
+export default function ClimateFellows() {
   return (
-    <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 lg:px-5 py-2.5 lg:py-4 text-[11.5px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">{children}</p>
-  );
-}
+    <ClimateRecordShell
+      eyebrow="For whoever is coming to help"
+      marker="The job · what you keep · the way in"
+      title="If you are coming to help"
+      statement="Open the link. Read what the source actually says. Then say whether it holds. That is the whole job."
+      returnTo="/TogetherChangeClimate"
+      returnLabel="Back to the record"
+      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
+    >
+      {/* ── THE ONE RULE ── */}
+      <section className="border-2 border-[#141210] bg-[#1e3a2b] px-4 py-5 lg:px-6 lg:py-6 mb-9">
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.22em] text-[#f4efe4]/60 mb-2">The one rule</p>
+        <p className="text-[#f4efe4] leading-tight" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 6vw, 34px)', letterSpacing: '-0.01em' }}>
+          No source, no entry.
+        </p>
+        <p className="text-[12px] font-mono text-[#f4efe4]/75 leading-relaxed mt-2">
+          If a claim cannot be traced to something outside this record, it does not go up.
+        </p>
+      </section>
 
-function Go({ to, children }) {
-  return (
-    <Link to={createPageUrl(to)} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
-      {children}
-    </Link>
+      {/* ── THREE JOBS ── */}
+      <section className="mb-9">
+        <Label>Three sessions, not a programme</Label>
+        <div className="grid gap-3 lg:grid-cols-3">
+          {JOBS.map(job => (
+            <div key={job.n} className="border-2 border-[#141210] bg-[#efe7d6] p-4">
+              <span className="inline-grid place-items-center min-w-[1.9rem] h-[1.9rem] border-2 border-[#141210] bg-[#e2602a] text-[#f4efe4] text-[11px] font-black font-mono -rotate-3 mb-3">{job.n}</span>
+              <h2 className="font-black uppercase text-[#141210] leading-tight mb-1.5" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(18px, 5vw, 22px)' }}>{job.title}</h2>
+              <p className="text-[13px] text-[#141210]/80 leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>{job.line}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-[11.5px] font-mono text-[#6b6258] leading-relaxed mt-3">
+          An hour is the real commitment. Nobody is counting it, and nobody will ask you for it.
+        </p>
+      </section>
+
+      {/* ── KEEP / NOT ── */}
+      <section className="grid gap-4 lg:grid-cols-2 mb-9">
+        <div>
+          <Label>What you keep</Label>
+          <ul className="space-y-2.5">
+            {KEEP.map(line => (
+              <li key={line} className="relative pl-5 text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+                <span className="absolute left-0 top-0 text-[#1e3a2b] font-black">✓</span>{line}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <Label>What we will not do</Label>
+          <ul className="space-y-2.5">
+            {NOT.map(line => (
+              <li key={line} className="relative pl-5 text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+                <span className="absolute left-0 top-0 text-[#b3261e] font-black">✕</span>{line}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ── THE WAY IN ── */}
+      <section className="border-t-2 border-[#141210] pt-5 mb-9">
+        <Label>The way in — no form, no interview</Label>
+        <ol className="space-y-2.5 mb-5">
+          <li className="text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+            <strong>One line to a keeper:</strong> your name exactly as you want it signed, and the address you will sign in with.
+          </li>
+          <li className="text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+            <strong>A keeper types both onto the list</strong> and the record writes to you at that address with your way in. One keeper’s word is enough — a pair of eyes is not a set of keys.
+          </li>
+          <li className="text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+            <strong>Then read the <Link to={createPageUrl('ClimateMethod')} className="border-b-2 border-[#141210] font-bold">method</Link></strong> — it is the standard your notes will be held to. Put a line of your own on <Link to="/ClimateRoll" className="border-b-2 border-[#141210] font-bold">the roll</Link> whenever you like.
+          </li>
+        </ol>
+        <Link
+          to={createPageUrl('ClimateChecking')}
+          className="inline-flex w-full lg:w-auto items-center justify-center min-h-[52px] px-6 bg-[#141210] text-[#f4efe4] text-[13px] font-black font-mono uppercase tracking-[0.16em] active:translate-y-px"
+        >
+          Open the checking page
+        </Link>
+      </section>
+
+      {/* ── THE HONEST PART ── */}
+      <section className="border-l-4 border-l-[#e2602a] bg-[#e2602a]/10 px-4 py-3 mb-9">
+        <p className="text-[12.5px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+          Most of it is boring. Most entries are broadly right and nobody will read your note on them. The interesting ones are rare — which is exactly why finding one is worth the afternoon. Stop after three sessions and you owe this record nothing.
+        </p>
+        <p className="text-[12.5px] text-[#141210]/70 leading-relaxed mt-2" style={{ fontFamily: 'var(--font-reading)' }}>
+          Two words inside this record: a <strong>keeper</strong> decides what goes on it, a <strong>checker</strong> reads a source and signs what they found. That is what you are. “Fellow” is Trebuchet’s word for it, and a good one.
+        </p>
+      </section>
+
+      {/* ── PASS IT ON ── */}
+      <section className="border-t-2 border-[#141210] pt-5">
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#6b6258] mb-1.5">Pass it on</p>
+        <p className="text-[13px] text-[#141210] leading-relaxed mb-3" style={{ fontFamily: 'var(--font-reading)' }}>
+          Know somebody with an hour — a researcher, a student? Send them this page as a card. It carries its own address, so they land here rather than on a screenshot.
+        </p>
+        <ShareCardButton entry={FELLOWS_CARD} build={buildGuideShareCard} label="Send this page as a card" />
+      </section>
+    </ClimateRecordShell>
   );
 }
 
@@ -45,9 +147,9 @@ function Go({ to, children }) {
 // off and nothing to open.
 const FELLOWS_CARD = {
   badge: 'BECOME A CHECKER',
-  marker: 'Three jobs · what you keep · what we will not ask',
+  marker: 'The job · what you keep · the way in',
   title: 'If you are coming to help',
-  body: 'There is no programme to complete here. There are three jobs, each of which puts something real on the record — or shows you why it should not.',
+  body: 'Open the link. Read what the source actually says. Then say whether it holds. That is the whole job.',
   inside: [
     'Check three entries already waiting',
     'Bring one thing that deserves to be here',
@@ -56,102 +158,3 @@ const FELLOWS_CARD = {
   closing: 'An hour is the real commitment. Nobody is counting it, and nobody will ask you for it.',
   url_path: '/ClimateFellows',
 };
-
-export default function ClimateFellows() {
-  return (
-    <ClimateRecordShell
-      eyebrow="For whoever is coming to help"
-      marker="Three jobs · what you keep · what we will not ask"
-      title="If you are coming to help"
-      statement="There is no programme to complete here. There are three jobs, each of which puts something real on the record — or shows you why it should not."
-      returnTo="/TogetherChangeClimate"
-      returnLabel="Back to the record"
-      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
-    >
-      <Block n="01" title="Thirty seconds, if you have not seen this">
-        <p>This record holds two things: positive climate initiatives worth copying, and emerging crises worth knowing about. Every entry carries where it came from, how well it is actually known, and the name of the person who signed it onto the record.</p>
-        <p>That is the whole idea. It is not a feed, it is not a campaign, and it does not make money from anybody's attention.</p>
-        <Rule>No source, no entry. If a claim cannot be traced to something outside this record, it does not go up.</Rule>
-      </Block>
-
-      <Block n="02" title="The job, in one sentence">
-        <p>A person opens a link, reads what the source actually says, and then says one of three things: it holds, it does not hold, or it cannot be told from here.</p>
-        <p>That is the checking. Everything else on this record already works — the pages, the addresses, the corrections, the music. What it is short of is somebody reading a source and answering honestly.</p>
-        <p>Which means the useful thing about you here is not your degree. It is that you will actually open the link.</p>
-      </Block>
-
-      <Block n="03" title="The first hour, exactly">
-        <p>Not a tour, and not a meeting. Open the <Go to="ClimateChecking">checking page</Go>, take one entry that is already waiting, follow its link to the origin, read it, and answer.</p>
-        <p>The three answers are not the same thing, and the record keeps them apart on purpose: <strong>it holds</strong>, <strong>it does not hold</strong>, <strong>it cannot be told from here</strong>. A link that will not open is not a lie. Saying so is not a failure, and it is not the same as saying the entry is wrong.</p>
-        <p>Write what you found in your own words. Short is fine. Somebody will read it and it will carry your name.</p>
-        <Rule>An hour is the real commitment. Nobody is counting it, and nobody will ask you for it.</Rule>
-      </Block>
-
-      <Block n="04" title="Your first three sessions">
-        <p><strong>One — check three entries already waiting.</strong> Pick them yourself. Do not pick the easy ones; pick the ones you half believe.</p>
-        <p><strong>Two — bring one thing that deserves to be here.</strong> Something working that others could copy, or a crisis the world should know about — with its origin attached: the body that said it, the journal, the document. Not a screenshot and not a headline from somewhere that will not name itself.</p>
-        <p><strong>Three — find one entry on this record you think is wrong.</strong> Not to be polite about it. This is the most valuable hour anybody can give this record, and it is how you find out whether it is real.</p>
-        <Rule>Nothing on this record has ever improved because somebody was kind about it.</Rule>
-      </Block>
-
-      <Block n="05" title="What you keep">
-        <p>Your name on what you wrote, permanently. A note is signed from the checking list rather than from your browser, so nobody can sign as you — and it can never be edited afterwards. A correction is a second note, with its own date, in the open.</p>
-        <p>A link you can send anyone. Every entry has its own permanent address, and your note sits under the entry it was written on.</p>
-        <p>A line of what you actually did that can be checked by clicking it. To a fellowship panel or an employer that is worth more than a certificate saying you took part.</p>
-        <p>Your address is never shown to a reader. The record keeps it so it can reach you about your own notes. That is all it is for.</p>
-      </Block>
-
-      <Block n="06" title="What we will not do">
-        <p>No training course. No dashboard to learn before you are allowed to start. No weekly call you have to sit through to count as involved.</p>
-        <p>No quota, no target of entries per week, and no word like "content". Nothing you sign will be rewritten under your name by anybody, and nothing will be published as yours that you did not write.</p>
-        <p>We will not put you in front of a number either. If you check five entries in an afternoon, the record says five.</p>
-      </Block>
-
-      <Block n="07" title="The honest part">
-        <p>Most of it is boring. Most entries are broadly right, and nobody will ever read your note on them. The interesting ones are rare — that is exactly why finding one is worth the afternoon.</p>
-        <p>If you stop after three sessions, that was a real contribution and you owe this record nothing. Volunteers leave. What you wrote stays, with your name on it.</p>
-        <p>And if you tell us something on this record is wrong, it will be corrected on the entry itself, with the date and what changed. In daylight, not quietly.</p>
-      </Block>
-
-      <Block n="08" title="You do not have to wait for anything to be settled">
-        <p>The record is already live and open. It does not need a name agreed, a launch date fixed, or a committee's permission before somebody can start reading sources.</p>
-        {/* Janine, by email, 9 November: "Please change to belongs to the platform team."
-            Her correction, in her words — the questions about the name and the launch are the
-            platform team's, and they are not the reader's to settle. Nothing here names her as
-            the owner of them, because she asked for exactly that. */}
-        <p>Those are real questions and they belong to the platform team — not to you. If the name does change, it changes in the open, and every entry keeps its address either way.</p>
-      </Block>
-
-      <Block n="09" title="How to be let in">
-        {/* This said "ask to be put on the checking list" and gave nobody a way to ask. A
-            volunteer arriving from a shared card had the instruction and no door, and a keeper
-            reading it still had to work out that the invitation is made in her own room. Both
-            halves are written now, in the order they happen. */}
-        <p>One line to a keeper: your name exactly as you want it signed, and the address you will sign in with. That is the whole application — no form, no interview, and no account to create first.</p>
-        <p>A keeper types both onto the list from the <strong>People</strong> door in her room, and the record writes to you at that address with your way in. One keeper&rsquo;s word is enough, because a pair of eyes is not a set of keys. If the email has not come within a day, it is worth a second ask rather than a wait.</p>
-        <p>Then read the <Go to="ClimateMethod">method</Go> — not to learn a system, but because it is the standard your notes will be held to, and you should see it before you put your name to anything.</p>
-        <p>Once you are in, you can put a few words of your own on <Link to="/ClimateRoll" className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">the roll</Link> — your name, your line, and what you have actually signed. Nobody writes it for you, and nothing on it is a score.</p>
-        <p>There are only two words inside this record. A <strong>keeper</strong> decides what goes on it. A <strong>checker</strong> reads a source and signs what they found — and that is what you are. "Fellow" is Trebuchet's word for you, and a good one; on the record it is a note on your line, not a third kind of person with its own keys.</p>
-        <Rule>A machine can never sign this record. It has no name to sign with. Everything here rests on that one line.</Rule>
-      </Block>
-
-      {/* ── PASS IT ON ────────────────────────────────────────────────────────────
-          Janine asked how to get two researchers started. The answer turned out not to
-          be an email at all: this page is the answer, and a card lets her hand it to
-          them without either of us writing the same thing twice. */}
-      <section className="border-t-2 border-[#141210] pt-5 mt-9">
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#6b6258] mb-1.5">
-          Pass it on
-        </p>
-        <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
-          If you know somebody who should read this — a researcher, a student, somebody with an hour — send them this page as a card. It carries its own address, so they land here rather than on a screenshot.
-        </p>
-        <ShareCardButton
-          entry={FELLOWS_CARD}
-          build={buildGuideShareCard}
-          label="Send this page as a card"
-        />
-      </section>
-    </ClimateRecordShell>
-  );
-}

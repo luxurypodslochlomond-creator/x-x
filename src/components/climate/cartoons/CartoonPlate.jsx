@@ -12,12 +12,17 @@ export default function CartoonPlate({ cartoon }) {
 
   return (
     <figure className="border border-record-ink/20 bg-record-bone/50">
-      <img
-        src={image_url}
-        alt={title || `A drawing by ${artist_name}`}
-        loading="lazy"
-        className="block h-auto w-full"
-      />
+      {/* One frame for every drawing on the wall, so a wall of pictures reads as a wall and
+          not as a pile of different-shaped things. The drawing itself is never cropped: it
+          sits whole inside the frame, with the paper showing round it. */}
+      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden bg-record-paper/70">
+        <img
+          src={image_url}
+          alt={title || `A drawing by ${artist_name}`}
+          loading="lazy"
+          className="block h-full w-full object-contain"
+        />
+      </div>
       <figcaption className="px-3 py-3 lg:px-4 lg:py-4">
         {title && (
           <p className="text-[15px] font-semibold leading-[1.3] text-record-ink" style={reading}>
