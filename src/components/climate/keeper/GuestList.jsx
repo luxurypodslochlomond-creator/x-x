@@ -18,6 +18,7 @@ const whenLine = (iso) => {
 
 import AccessSecondKey from '@/components/climate/AccessSecondKey';
 import InviteSteps from '@/components/climate/keeper/InviteSteps';
+import KeeperPhone from '@/components/climate/keeper/KeeperPhone';
 import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 
 // ── WHO MAY COME INTO THE RECORD ──────────────────────────────────────────────
@@ -241,6 +242,10 @@ export default function GuestList() {
           {message}
         </p>
       )}
+
+      {/* Being told is part of access: this is the door you are on when you add somebody, so
+          it is where you make sure you will hear that they arrived. */}
+      <KeeperPhone />
 
       {/* ── WHO IS ON THE RECORD, IN ONE PLACE ──────────────────────────────────
           The keys stood at the top and the checkers at the bottom, with two forms and a card

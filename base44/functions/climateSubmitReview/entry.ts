@@ -1,6 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
 import { secrets } from 'base44:runtime';
 import { keeperInbox } from '../../shared/keeperInbox.ts';
+import { pushKeepers } from '../../shared/keeperPush.ts';
 
 export default async function(req: Request): Promise<Response> {
   try {
@@ -142,7 +143,26 @@ Content: ${fullContent.slice(0, 2000)}`,
     // founder noticed before anyone else did: she sent an invitation, then had to go looking
     // to find out whether it had worked. Clean or held, the keeper is told — the letter is
     // only louder when a person is genuinely needed.
-    const keepers = keeperInbox(secrets);
+    // ── A TAP, NOT A LETTER ───────────────────────────────────────────────────────
+    // Something has just arrived and a keeper is the only one who can decide about it. That
+    // belongs on a phone, not in an inbox nobody reads. If a device took it, the letters are
+    // skipped entirely; if nobody's phone answered, every address is written to exactly as
+    // before, so this can never become the change that made a held entry go unnoticed.
+    const arrivedTitle = data.title || data.headline || data.name || (data.content ? data.content.slice(0, 60) : 'Untitled');
+    const tapped = await pushKeepers(
+      base44,
+      {
+        title: flagged ? `Waiting for you: ${arrivedTitle}` : `On the record: ${arrivedTitle}`,
+        body: flagged
+          ? `A new ${type} is held until a person looks at it.`
+          : `A new ${type} went up. Nothing is asked of you.`,
+        url: flagged ? '/ClimateKeeperRoom?tab=decide' : '/TogetherChangeClimate',
+        tag: flagged ? 'record-waiting' : 'record-arrived',
+      },
+      secrets
+    ).catch(() => 0);
+
+    const keepers = tapped > 0 ? [] : keeperInbox(secrets);
     for (const keeper of keepers) {
       try {
         const title = data.title || data.headline || data.name || (data.content ? data.content.slice(0, 60) : 'Untitled');

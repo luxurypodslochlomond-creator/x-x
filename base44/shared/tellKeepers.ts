@@ -14,6 +14,7 @@
 // and a volunteer must never be able to mail a keeper at will: they trigger it by doing
 // the work, and the letter carries only what the record already knows about them.
 import { keeperAddresses } from './keeperInbox.ts';
+import { pushKeepers } from './keeperPush.ts';
 
 const RECORD = 'https://uf51.love';
 
@@ -27,7 +28,26 @@ export async function tellKeepers(
   base44,
   { headline, line }: { headline: string; line: string }
 ): Promise<number> {
-  const addresses = await keeperAddresses(base44, { get: (name: string) => Deno.env.get(name) });
+  const env = { get: (name: string) => Deno.env.get(name) };
+
+  // ── THE PHONE SPEAKS FIRST ────────────────────────────────────────────────────
+  // If a keeper's device took this, no letter is written: the work is already on the glass
+  // in front of them, and a second copy in an inbox is the thing Brian called boring. The
+  // letter still exists for the case that matters — nobody's phone answered — because a
+  // keeper hearing nothing is the one failure this record cannot afford.
+  const reached = await pushKeepers(
+    base44,
+    {
+      title: headline,
+      body: line.length > 180 ? `${line.slice(0, 178)}…` : line,
+      url: '/ClimateKeeperRoom?tab=people',
+    },
+    env
+  ).catch(() => 0);
+
+  if (reached > 0) return reached;
+
+  const addresses = await keeperAddresses(base44, env);
   let sent = 0;
 
   // One address at a time, so a refused delivery never takes the others down with it.
