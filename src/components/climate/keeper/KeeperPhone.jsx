@@ -128,7 +128,7 @@ export default function KeeperPhone() {
   if (state === 'on') {
     return (
       <p className="text-[12px] text-[#1e3a2b] mb-5 flex items-center gap-1.5" style={reading}>
-        <Bell className="w-3.5 h-3.5" /> Your phone is on — the record will tap you here, not your inbox.
+        <Bell className="w-3.5 h-3.5" /> This screen is on — tapped when something needs you, never emailed about it.
         <button onClick={hush} disabled={busy} className="text-[11.5px] text-[#6b5f4f] underline ml-1 disabled:opacity-40">
           turn off
         </button>
@@ -159,9 +159,9 @@ export default function KeeperPhone() {
   return (
     <div className="border border-[#141210]/20 p-2.5 mb-5 flex items-center gap-3">
       <div className="min-w-0 flex-1">
-        <p className="text-[13.5px] font-semibold text-[#141210] leading-tight" style={reading}>Tell my phone, not my inbox</p>
+        <p className="text-[13.5px] font-semibold text-[#141210] leading-tight" style={reading}>Tell this screen, not my inbox</p>
         <p className="text-[11.5px] leading-[1.5] text-[#6b5f4f]" style={reading}>
-          A tap when something is waiting for you. No letter. No app store.
+          Phone or laptop, whichever you keep the record open on. It says one thing — something is waiting for you — and never anything else. Off by default, and yours to switch off.
         </p>
       </div>
       <button
