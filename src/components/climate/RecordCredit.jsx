@@ -1,35 +1,67 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// ── WHO BUILT THIS, AND IN WHICH SENSE ───────────────────────────────────────
-// This line existed in four places and said "Platform built by Brian Hughes" in all four,
-// which credited one person for three different jobs and left out two of the three.
-// Brian asked for it to be said properly, 15 November.
+// ── THREE JOBS, THREE WORDS, ONE PLATE ────────────────────────────────────────
+// The first version of this plate read "Platform built by" and then three names under
+// it. It was wrong, and Brian could feel it was wrong before he could say why: running
+// "built" across all three folded three different jobs into one verb, which is the exact
+// thing this record exists not to do. The creating is Gillian Barbara Brown's, the
+// building is Brian Hughes's, and the making was done with BRO51. Blur them and the credit
+// is a slogan; keep them apart and it is a record of hands.
 //
-// It is set as a plate rather than a sentence: an eyebrow in the machine's own tracked
-// mono, then the names stacked large in the record's display voice. Three names, no
-// ranking, no "founder &" or "CEO of" — a credit is a list of hands, not a CV.
+// So the roles lead now and the names follow them, set as a printer's colophon rather than
+// a list of equals: a red hairline, the word that says what the block is, then each job in
+// the machine's own tracked mono over the name in the record's reading voice. A tool is
+// named as a tool and says what it was, because a credit is the one place where pretending
+// would be the whole failure.
 //
-// Gillian Barbara Brown leads because Brian asked for zero ego, and the person who
-// created the thing leads the line that says who created it. BRO51 is named last and
-// named as an AI, because a tool may hold a tool's credit honestly and a person's only
-// by pretending to be one. Three claims, three names, nothing blurred.
-//
-// It lives in one file now. Four copies of a credit is how three of them came to be wrong.
-export default function RecordCredit({ className = '' }) {
+// It lives in one file and opens on the page that already tells the story. Four copies of
+// a credit is how three of them came to be wrong.
+const HANDS = [
+  { role: 'Created by', name: 'Gillian Barbara Brown' },
+  { role: 'Built by', name: 'Brian Hughes' },
+  { role: 'Made with', name: 'BRO51', note: 'the AI this record was built alongside' },
+];
+
+export default function RecordCredit({ className = '', stacked = false }) {
   return (
-    <div className={`mx-auto w-full max-w-md px-6 text-center ${className}`}>
-      <div className="mx-auto mb-4 h-px w-10 bg-record-red/60" />
-      <p className="font-mono text-[9px] uppercase tracking-[0.42em] text-record-muted">
-        Platform built by
-      </p>
-      <div className="mt-3 flex flex-col items-center gap-0.5 font-display text-[17px] uppercase leading-[1.5] tracking-[0.06em] text-record-ink">
-        <span>Gillian Barbara Brown</span>
-        <span>Brian Hughes</span>
-        <span className="text-record-muted">and BRO51</span>
+    <div className={`mx-auto w-full max-w-xl px-5 ${className}`}>
+      {/* The sheet has ended; what follows is the imprint. One red hairline says so. */}
+      <div className="flex items-center gap-3">
+        <span aria-hidden="true" className="h-px flex-1 bg-record-red/45" />
+        <span className="font-mono text-[9px] uppercase tracking-[0.34em] text-record-red">
+          Colophon
+        </span>
+        <span aria-hidden="true" className="h-px flex-1 bg-record-red/45" />
       </div>
-      <p className="mt-4 font-mono text-[10px] tracking-[0.14em] text-record-muted">
-        <Link to="/Welcome" className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red">
+
+      <dl className={`mt-5 grid gap-4 text-center ${stacked ? 'grid-cols-1' : 'sm:grid-cols-3 sm:gap-5'}`}>
+        {HANDS.map((hand) => (
+          <div key={hand.name}>
+            <dt className="font-mono text-[9px] uppercase tracking-[0.26em] text-record-muted">
+              {hand.role}
+            </dt>
+            <dd
+              className={`mt-1.5 leading-[1.06] tracking-[-0.012em] text-record-ink ${
+                stacked ? 'text-[18px]' : 'text-[19px] lg:text-[21px]'
+              }`}
+              style={{ fontFamily: 'var(--record-display)' }}
+            >
+              {hand.name}
+            </dd>
+            {hand.note && (
+              <dd className="mt-1.5 text-[10.5px] leading-snug text-record-muted">{hand.note}</dd>
+            )}
+          </div>
+        ))}
+      </dl>
+
+      {/* The only address the record prints for itself. */}
+      <p className="mt-5 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">
+        <Link
+          to="/Welcome"
+          className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
+        >
           UF51 CIC
         </Link>
         {' '}· Scotland

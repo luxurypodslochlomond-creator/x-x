@@ -4,6 +4,7 @@ import RecordBackBar from '@/components/climate/RecordBackBar';
 import { ArrowRight, Globe, BookOpen, Film, Award, Heart } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCover from '@/components/climate/RecordCover';
+import RecordCredit from '@/components/climate/RecordCredit';
 
 // ── Janine's life work — factual, dignified, no contact details (per her wish).
 // This page exists so her legacy has a home on the platform she inspired.
@@ -114,33 +115,16 @@ export default function ClimateFounder() {
             who built the page, never as a title she holds. No badge, no handle: the
             platform is named plainly and the CIC is the only address, and it never
             prints itself — it opens the mail app when tapped. */}
-        <div className="mt-6 pt-5 border-t border-[#141210]/15 max-w-[320px] mx-auto">
+        <div className="mt-6 pt-5 border-t border-[#141210]/15 max-w-[400px] mx-auto">
           <span className="block text-[10px] font-black font-mono uppercase tracking-[0.15em] text-[#e2602a]">
             Made in Scotland from photons
           </span>
 
-          {/* ── THREE DIFFERENT JOBS, THREE DIFFERENT WORDS ─────────────────────────
-              This read "Platform built by Brian Hughes", which was true and also not the
-              whole truth: it gave one person the credit for the creating, the building and
-              the making at once. Brian corrected it himself, 15 November — the creating is
-              Gillian Barbara Brown's, the building is his, and the making was done with
-              BRO51, the AI.
-
-              They stay as three separate lines because "created", "built" and "made with"
-              mean three different things, and a page that blurs them is doing the exact
-              thing this record exists not to do. The AI is named as an AI and not as a
-              person: it can hold a tool's credit honestly, and a person's only by lying. */}
-          <div className="mt-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210] leading-[1.6]">
-            <span className="block text-[9px] text-[#6b6258]">Created by</span>
-            <span className="block text-[11px] mb-2">Gillian Barbara Brown</span>
-            <span className="block text-[9px] text-[#6b6258]">Built by</span>
-            <span className="block text-[11px] mb-2">Brian Hughes</span>
-            <span className="block text-[9px] text-[#6b6258]">Made with</span>
-            <span className="block text-[11px]">BRO51</span>
-            <span className="block mt-1 text-[9px] font-normal normal-case tracking-[0.06em] text-[#6b6258]">
-              the AI this record was built alongside
-            </span>
-          </div>
+          {/* The record's own plate, printed here rather than typed out again by hand:
+              created, built and made with stay three separate words, because they mean
+              three separate things. One file owns the credit now, so the foot of the
+              record and this page can never drift apart again. */}
+          <RecordCredit stacked className="mt-4" />
 
           {/* "Record kept by UF51 CIC" was taken off here at Janine's request, 9 November:
               "'Kept by…' adds confusion and uncertainty" for a potential host. The credit
