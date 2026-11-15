@@ -48,7 +48,7 @@ export default function ImpactSignal({ stats }) {
   const entries = typeof stats?.published_entries === 'number' ? stats.published_entries : null;
   const countryCount = Array.isArray(stats?.countries) ? stats.countries.length : null;
   const regionCount = Array.isArray(stats?.regions) ? stats.regions.length : null;
-  const places = countryCount == null || regionCount == null ? null : countryCount + regionCount;
+
 
   return (
     <div className="relative overflow-hidden bg-[#241d16] border-b-4 border-b-[#e2602a]">
