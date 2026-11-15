@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ComicPanel from '@/components/climate/cartoons/ComicPanel';
 import { comicStories } from '@/components/climate/cartoons/comicStories';
@@ -6,6 +6,21 @@ import { comicStories } from '@/components/climate/cartoons/comicStories';
 export default function ComicReader() {
   const rail = useRef(null);
   const [active, setActive] = useState(0);
+
+  // A chip on the record's homepage names its cartoon in the address, so tapping
+  // "Walking" opens the walking strip rather than the top of the room.
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get('strip');
+    if (!wanted) return;
+    const index = comicStories.findIndex(story => story.id === wanted);
+    if (index < 0) return;
+    setActive(index);
+    const settle = requestAnimationFrame(() => {
+      const width = rail.current?.clientWidth || 0;
+      rail.current?.scrollTo({ left: index * width, behavior: 'auto' });
+    });
+    return () => cancelAnimationFrame(settle);
+  }, []);
   const turn = (step) => {
     const next = (active + step + comicStories.length) % comicStories.length;
     rail.current?.scrollTo({ left: next * rail.current.clientWidth, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });

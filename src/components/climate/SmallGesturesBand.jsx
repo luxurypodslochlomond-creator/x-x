@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { stripHref } from '@/components/climate/cartoons/comicStories';
 
 // Janine's list of the smallest gestures. Not advice, not a campaign — the things a
 // person can start today with nothing bought and nothing asked of anyone. x = x.
@@ -6,6 +8,9 @@ import React from 'react';
 // Mangrove planting was on this list. Janine asked for it to stand on its own — it is a
 // major item on the record, not a small gesture. It now lives under the Mangroves
 // category and its own entries, the Bonaire film among them.
+
+// Every line here has a cartoon of its own in the room, and tapping it opens that strip:
+// the gestures and the drawings are one thing on this record, not two lists that agree.
 const GESTURES = [
   'Repairing a sweater / cardigan',
   'Buying less',
@@ -30,16 +35,17 @@ export default function SmallGesturesBand() {
       </p>
       <div className="flex flex-wrap gap-2">
         {GESTURES.map(gesture => (
-          <span
+          <Link
             key={gesture}
-            className="px-3 py-2 bg-[#f7f1e5] border-2 border-[#141210] text-[11px] font-black font-mono uppercase tracking-wide text-[#141210]"
+            to={stripHref(gesture)}
+            className="px-3 py-2 bg-[#f7f1e5] border-2 border-[#141210] text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] underline decoration-transparent hover:decoration-[#141210] hover:bg-[#efe7d6] active:translate-y-px active:bg-[#141210] active:text-[#f7f1e5] transition-colors"
           >
             {gesture}
-          </span>
+          </Link>
         ))}
       </div>
       <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">
-        From Janine Selendy's own list for the record.
+        Tap one to see its cartoon. From Janine Selendy's own list for the record.
       </p>
     </section>
   );

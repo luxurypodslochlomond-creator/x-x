@@ -1,17 +1,17 @@
-// Six strips, and the ones that can stand beside a gesture say which one — so a child can
-// read a cartoon and then find the very same line on the record's list of the smallest
-// gestures. Nothing here lectures: the bird asks, the stone answers, and a grown-up is not
-// needed to enjoy it. Words are kept short on purpose, because the room is written to be
-// read by whoever is holding the phone, whatever their age.
+// Seven strips. The five that belong to one of Janine's smallest gestures come first, and
+// each carries the gesture's own words so a chip on the record's homepage can open its
+// cartoon directly. Two more follow that are simply about looking at the world differently.
+// Simple on purpose: the bird asks, the stone answers, and no grown-up is needed to enjoy it.
 export const comicStories = [
   {
-    id: 'shade',
-    title: 'A cool idea',
-    question: 'Is this the air-con?',
-    reply: 'Yes. Mind the roots.',
-    image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a46d7bec3_generated_image.png',
-    alt: 'A blackbird hauls an enormous homemade fan across a hot meadow. A small mossy stone is already relaxing in the cool shade of a smiling oak tree.',
-    theme: 'Shade, not another gadget.',
+    id: 'cardigan',
+    title: 'Elbow room',
+    question: 'It’s got a hole in it!',
+    reply: 'So we give it a patch. Not a bin.',
+    image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2cc825041_generated_image.png',
+    alt: 'A small blackbird sews a bright red patch onto the elbow of a cream wool cardigan. A mossy stone holds the spool of thread for it.',
+    theme: 'Mending is quicker than shopping.',
+    gesture: 'Repairing a sweater / cardigan',
   },
   {
     id: 'repair',
@@ -24,16 +24,6 @@ export const comicStories = [
     gesture: 'Buying less',
   },
   {
-    id: 'cardigan',
-    title: 'Elbow room',
-    question: 'It’s got a hole in it!',
-    reply: 'So we give it a patch. Not a bin.',
-    image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/2cc825041_generated_image.png',
-    alt: 'A small blackbird sews a bright red patch onto the elbow of a cream wool cardigan. A mossy stone holds the spool of thread for it.',
-    theme: 'Mending is quicker than shopping.',
-    gesture: 'Repairing a sweater / cardigan',
-  },
-  {
     id: 'walking',
     title: 'The long way round',
     question: 'Can’t we just take the car?',
@@ -42,6 +32,16 @@ export const comicStories = [
     alt: 'A blackbird in a little rucksack walks a hedge-lined lane with a mossy stone in tiny boots beside it. A red car sits asleep behind them with a cat curled on its roof.',
     theme: 'The walk is the good bit.',
     gesture: 'Walking',
+  },
+  {
+    id: 'transport',
+    title: 'The number 51',
+    question: 'Are we nearly there?',
+    reply: 'Nearly. And nobody had to drive.',
+    image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/395e10b8b_generated_image.png',
+    alt: 'A blackbird and a mossy stone ride the front seat of a red country bus past green hills, with a cat, a hedgehog and a bicycle aboard behind them.',
+    theme: 'One engine, and everybody aboard.',
+    gesture: 'Using mass transportation',
   },
   {
     id: 'food',
@@ -54,6 +54,15 @@ export const comicStories = [
     gesture: 'Not wasting food',
   },
   {
+    id: 'shade',
+    title: 'A cool idea',
+    question: 'Is this the air-con?',
+    reply: 'Yes. Mind the roots.',
+    image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a46d7bec3_generated_image.png',
+    alt: 'A blackbird hauls an enormous homemade fan across a hot meadow. A small mossy stone is already relaxing in the cool shade of a smiling oak tree.',
+    theme: 'Shade, not another gadget.',
+  },
+  {
     id: 'wind',
     title: 'A storm in a teacup',
     question: 'Can we turn the wind DOWN?',
@@ -63,3 +72,15 @@ export const comicStories = [
     theme: 'A different way to look at the wind.',
   },
 ];
+
+// The gesture's own words, exactly as the homepage prints them, pointing at its strip.
+// One place, so a chip and a cartoon can never drift apart.
+export const gestureStrips = {
+  'Repairing a sweater / cardigan': 'cardigan',
+  'Buying less': 'repair',
+  'Walking': 'walking',
+  'Using mass transportation': 'transport',
+  'Not wasting food': 'food',
+};
+
+export const stripHref = (gesture) => (gestureStrips[gesture] ? `/ClimateCartoons?strip=${gestureStrips[gesture]}` : '/ClimateCartoons');

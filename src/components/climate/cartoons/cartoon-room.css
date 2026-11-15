@@ -49,6 +49,7 @@
 .comic-panel-cardigan .comic-ending { background: rgb(var(--cartoon-mint)); }
 .comic-panel-walking .comic-ending { background: rgb(var(--cartoon-sky)); }
 .comic-panel-food .comic-ending { background: rgb(var(--cartoon-paper)); }
+.comic-panel-transport .comic-ending { background: rgb(var(--cartoon-sky)); }
 .record-pages .cartoon-room .comic-theme { margin: .75rem .1rem 0; font-size: .78rem; font-weight: 600; color: rgb(var(--record-muted)); }
 .comic-turner { display: flex; align-items: center; gap: .75rem; padding: .65rem .4rem 0; }
 .comic-turner button, .comic-load-more { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 3rem; padding: .65rem 1rem; border: 2px solid rgb(var(--record-ink)); border-radius: 3px; font-size: .9rem; font-weight: 800; touch-action: manipulation; transition: transform 100ms, box-shadow 100ms; }
