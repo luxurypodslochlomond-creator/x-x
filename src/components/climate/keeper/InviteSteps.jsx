@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Copy, Check } from 'lucide-react';
+import { Copy, Check, KeyRound } from 'lucide-react';
 import InviteCard from './InviteCard';
 
 // ── WHAT TO SEND THEM ─────────────────────────────────────────────────────────
@@ -111,12 +111,25 @@ export default function InviteSteps() {
       </div>
 
       <p className="text-[11.5px] leading-[1.6] text-[#6b5f4f] mt-2" style={reading}>
-        The card is for the person who has never heard of this record: their name, what it is,
-        and where to go. Send it with the email, or on its own into a group. Worth knowing
-        before you write: a person who adds initiatives and a person who checks them walk
-        through the same door. The record calls both a place on the list; only the keys are
-        different.
+        Their name, what the record is, and where to go: send it with the email or on its own
+        into a group.
       </p>
+
+      {/* ── AND THE OTHER CARD, FOR THE OTHER JOB ───────────────────────────────
+          Two cards, one place to find them — because a keeper looking for "what do I send
+          this person" should not have to know which of two doors the answer is behind. The
+          name typed above fills both, so nothing is typed twice. */}
+      <div className="border-t border-[#141210]/15 mt-4 pt-3">
+        <p className="text-[12.5px] text-[#6b5f4f] mb-2" style={reading}>
+          <KeyRound className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+          If they are going to hold the keys rather than check
+        </p>
+        <InviteCard name={name} variant="keeper" />
+        <p className="text-[11.5px] leading-[1.6] text-[#6b5f4f] mt-2" style={reading}>
+          The same card drawn for a keeper: her room, the people door, and the one thing that
+          waits for a second keeper.
+        </p>
+      </div>
     </details>
   );
 }
