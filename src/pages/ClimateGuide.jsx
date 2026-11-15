@@ -5,6 +5,7 @@ import GuideBand from '@/components/climate/GuideBand';
 import { PRIMARY_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks';
 import RecordPageIndex from '@/components/climate/RecordPageIndex';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import AskTheRecord from '@/components/climate/AskTheRecord';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
 
 // The record's own mark for music, at the size of the words it stands beside. The note
@@ -195,6 +196,13 @@ export default function ClimateGuide() {
           label="Share the manual as a card"
         />
       </div>
+
+      {/* ── ASK IT RATHER THAN WRITE TO SOMEBODY ────────────────────────────────────
+          The page a host or keeper is handed should be able to answer back. This sits above
+          the printed manual: a question typed here is answered from the same manual, in one
+          sentence, with the door to walk through — so nobody waits on an inbox to find out
+          what a button does, and nobody is given an answer the record cannot stand behind. */}
+      <AskTheRecord />
 
       <h2 className="mb-5 text-2xl text-record-ink">Using the record</h2>
 
