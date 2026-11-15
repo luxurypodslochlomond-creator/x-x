@@ -1,7 +1,7 @@
 {
   "name": "ClimateView",
   "type": "object",
-  "description": "Anonymous view tracking for climate entries \u2014 records only the country (from request geo-headers, no IP stored) and the entry viewed. Readers may optionally self-identify their nation/region (e.g. Scotland, Catalonia, Kurdistan) \u2014 voluntary, stored in their browser, never tracked. Powers the global impact view. Admin-only reads; a view is counted by the record's own server as a reader opens an entry, never written straight from a browser, so the readership figures a funder or a research panel is shown cannot be inflated by anyone who wants them to look bigger.",
+  "description": "Anonymous read tracking for climate entries \u2014 one row per entry opened, and nothing about the person who opened it. It holds the entry, and at most a coarse place: the country the reader's own device states from its clock and language settings, or empty when the device states nothing. It does not hold an IP address, a cookie, a device identifier or a name, and it cannot: none of those is ever sent to it. Readers may also name their own nation/region (e.g. Scotland, Catalonia, Kurdistan) \u2014 voluntary, kept in their browser, never tied to a person. Powers the global impact view. Admin-only reads; a read is counted by the record's own server as a reader opens an entry, never written straight from a browser, so the readership figures a funder or a research panel is shown cannot be inflated by anyone who wants them to look bigger. Two corrections are recorded here because both were real faults found on 15 November 2026 and both are the kind this table exists to refuse. First: the country used to be taken from the request's geo-headers, which describe the machine that answers for the reader rather than the reader, and the result was 398 reads all reported from one country on a record read mostly in another \u2014 so the place now comes from the reader's device, and stays empty rather than guessed. Second: the figure is a count of readings, never of people, and a failed count is returned as no figure at all rather than as zero.",
   "properties": {
     "entry_id": {
       "type": "string",
@@ -18,7 +18,7 @@
     },
     "country": {
       "type": "string",
-      "description": "ISO 2-letter country code from request geo-headers, or empty if unavailable. No IP address is ever stored."
+      "description": "The country the reader's own device states, as a 2-letter code, or empty when the device states nothing. Stated by the reader's device, not inferred from the network: a place the record guessed would be a false fact on a page about honesty, and guessing it is exactly how this table once reported every reader as being in one country. No IP address is ever stored."
     },
     "reader_region": {
       "type": "string",

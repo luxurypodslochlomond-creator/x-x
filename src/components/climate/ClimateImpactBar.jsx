@@ -12,8 +12,11 @@ import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 // It shares one read of the numbers with the impact page, so tapping through is instant.
 export default function ClimateImpactBar() {
   const { data: stats, isPending } = useClimateImpactStats();
-  const views = stats?.total_views || 0;
-  const countries = stats?.unique_countries || 0;
+  // "Could not be counted" and "nobody has read it" must never print the same words: the
+  // first is a fact about the server, the second is a fact about the record.
+  const counted = typeof stats?.total_views === 'number';
+  const views = counted ? stats.total_views : 0;
+  const countries = typeof stats?.unique_countries === 'number' ? stats.unique_countries : 0;
 
   return (
     <Link to={createPageUrl('ClimateImpact')} className="flex items-center justify-center gap-2 px-4 py-3 min-h-[42px] bg-[#141210] border-b-2 border-[#e2602a]/20 active:bg-[#e2602a]/10 transition-colors">
@@ -21,7 +24,7 @@ export default function ClimateImpactBar() {
       <p className="text-[10px] font-mono text-[#efe7d6]/80 leading-tight text-center">
         {isPending ? (
           <span className="text-[#efe7d6]/25 tracking-[0.3em]">···</span>
-        ) : !stats ? (
+        ) : !counted ? (
           // A count that could not be made is not a zero. Before this branch existed, a failed
           // count printed "Be the first to read the record" on a record that had been read
           // hundreds of times — the most flattering possible reading of a broken query.

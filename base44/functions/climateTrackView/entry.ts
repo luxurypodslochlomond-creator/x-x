@@ -22,20 +22,33 @@ const COUNT_WINDOW_MS = 30 * 60 * 1000;
 export default async function (req) {
   try {
     const base44 = createClientFromRequest(req);
-    const { entry_id, entry_type, reader_region } = await req.json();
+    const { entry_id, entry_type, reader_region, reader_country } = await req.json();
 
     if (!entry_id || !entry_type) {
       return Response.json({ ok: false, counted: false });
     }
 
-    // Derive country from request geo-headers (privacy-respecting — country only)
-    const country = (
-      req.headers.get('cf-ipcountry') ||
-      req.headers.get('x-vercel-ip-country') ||
-      req.headers.get('x-country-code') ||
-      req.headers.get('x-appengine-country') ||
-      ''
-    ).toUpperCase();
+    // ── THE PLACE IS THE READER'S, OR IT IS NOTHING ────────────────────────────
+    // On 15 November 2026 this table held 398 reads and every one of them came from the
+    // United States, on a record whose keeper reads it from Scotland. The geo-header was
+    // not describing the reader. It was describing the machine that answered the request
+    // on the reader's behalf, and that machine sits in one country for everybody — so the
+    // whole world was being reported as one address.
+    //
+    // So the place now comes from the reader's own device: the browser sends the region off
+    // its own clock and language settings, and that is the first thing believed. The header
+    // is kept only as a fallback for a device that states nothing. Neither is a person. No
+    // IP, no cookie, no device identifier is stored, before or after this change.
+    const stated = String(reader_country || '').toUpperCase().trim();
+    const country = /^[A-Z]{2}$/.test(stated) && stated !== 'XX' && stated !== 'ZZ'
+      ? stated
+      : (
+          req.headers.get('cf-ipcountry') ||
+          req.headers.get('x-vercel-ip-country') ||
+          req.headers.get('x-country-code') ||
+          req.headers.get('x-appengine-country') ||
+          ''
+        ).toUpperCase();
 
     // Sanitize reader_region — trim, cap length, strip HTML
     const cleanRegion = reader_region
@@ -67,6 +80,9 @@ export default async function (req) {
       }
 
       // 2. The same place reading the same entry again inside the window is the same read.
+      //    When no place could be named, every unnamed read shares one window per entry, so
+      //    an unnamed read can be undercounted by this and never inflated by it. A readership
+      //    figure should err towards too small, never towards too flattering.
       const recent = await base44.asServiceRole.entities.ClimateView.filter(
         { entry_id, country },
         { sort: '-created_date', limit: 1 }

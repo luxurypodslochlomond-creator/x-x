@@ -40,11 +40,15 @@ function Plate({ href, label, value, Icon }) {
 }
 
 export default function ImpactSignal({ stats }) {
-  const total = stats?.total_views || 0;
-  const entries = stats?.published_entries || 0;
-  const countryCount = (stats?.countries || []).length;
-  const regionCount = (stats?.regions || []).length;
-  const places = countryCount + regionCount;
+  // A count that never arrived is printed as a dash, never as a zero. A zero is a fact about
+  // the world — nobody has read this — and "we could not ask" is a fact about us. The two are
+  // not the same thing and they are not allowed to look the same here.
+  const num = (n) => (typeof n === 'number' && Number.isFinite(n) ? n.toLocaleString() : '—');
+  const total = typeof stats?.total_views === 'number' ? stats.total_views : null;
+  const entries = typeof stats?.published_entries === 'number' ? stats.published_entries : null;
+  const countryCount = Array.isArray(stats?.countries) ? stats.countries.length : null;
+  const regionCount = Array.isArray(stats?.regions) ? stats.regions.length : null;
+  const places = countryCount == null || regionCount == null ? null : countryCount + regionCount;
 
   return (
     <div className="relative overflow-hidden bg-[#241d16] border-b-4 border-b-[#e2602a]">
@@ -75,7 +79,7 @@ export default function ImpactSignal({ stats }) {
             letterSpacing: '-0.02em',
           }}
         >
-          The world is reading.
+          The record is being read.
         </h1>
 
         {/* THE NUMBER, with its caption. It opens the map, because the number and the
@@ -90,7 +94,7 @@ export default function ImpactSignal({ stats }) {
               letterSpacing: '-0.04em',
             }}
           >
-            {total.toLocaleString()}
+            {num(total)}
           </span>
           <span className="pb-1 text-[8px] lg:text-[9px] font-mono uppercase tracking-[0.16em] text-[#efe7d6]/55 leading-[1.5]">
             reads
@@ -104,8 +108,9 @@ export default function ImpactSignal({ stats }) {
           className="mt-3.5 text-[11px] lg:text-[12.5px] leading-[1.6] text-[#efe7d6]/55 max-w-[44ch]"
           style={{ fontFamily: 'var(--font-reading)' }}
         >
-          Counted once each, across {places.toLocaleString()} {places === 1 ? 'place' : 'places'} — and not one
-          reader named.
+          One opening is one read, counted once from each place — and not one reader named. A
+          place is only counted when a reader's own device says where it is: the record cannot
+          see you, and will not guess on your behalf.
         </p>
 
         {/* The three facts a body actually asks for: where, what, and who named themselves. */}
@@ -113,19 +118,19 @@ export default function ImpactSignal({ stats }) {
           <Plate
             href={countryCount ? '#countries' : '#reading-map'}
             label="Countries"
-            value={countryCount.toLocaleString()}
+            value={num(countryCount)}
             Icon={Globe}
           />
           <Plate
             href="#reading"
             label="Entries"
-            value={entries.toLocaleString()}
+            value={num(entries)}
             Icon={Eye}
           />
           <Plate
             href={regionCount ? '#nations' : '#reading-map'}
             label="Nations"
-            value={regionCount.toLocaleString()}
+            value={num(regionCount)}
             Icon={MapPin}
           />
         </div>

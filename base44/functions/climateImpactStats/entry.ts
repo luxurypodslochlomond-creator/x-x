@@ -208,14 +208,11 @@ export default async function(req) {
     });
   } catch (error) {
     console.error('climateImpactStats error:', error.message);
-    return Response.json({
-      total_views: 0,
-      unique_countries: 0,
-      countries: [],
-      regions: [],
-      published_entries: 0,
-      top_stories: [],
-      upcoming_actions: [],
-    }, { status: 200 });
+    // A failed count is not a zero. This used to answer with 0 reads, 0 countries and 0
+    // entries on any error, and the page printed all three as though they were facts about
+    // the world rather than a fact about us: the server could not look. The figures now come
+    // back absent, and every page that shows them prints a dash or says the count could not
+    // be reached. Nothing on this record is allowed to fail towards a number.
+    return Response.json({ counts_unavailable: true }, { status: 200 });
   }
 }

@@ -86,9 +86,40 @@ export default function ClimateDetail() {
         if (!cancelled) {
           setRecord(r);
           if (r) {
+            // ── A READ HAS TO BE A READER ────────────────────────────────────────────
+            // Two things were wrong with this call, and both made the readership figure
+            // say something that was not true.
+            //
+            // One: a page opened inside the builder's own frame is us at work on the
+            // record, not somebody reading it. Those openings were counted, which is how a
+            // record read mostly in Scotland came to report an audience entirely in the
+            // United States — the workshop's own address, printed as a place.
+            //
+            // Two: no place was sent at all, so the server had to guess one from the
+            // machine that answered the request. Now the reader's own device states where
+            // it is, from its clock and language settings, and that is what travels. If a
+            // device states nothing, the read is still counted — just without a place.
+            let workshop = true;
+            try { workshop = window.self !== window.top; } catch { workshop = true; }
+
             let reader_region = '';
             try { reader_region = localStorage.getItem('climate51_reader_region') || ''; } catch {}
-            base44.functions.invoke('climateTrackView', { entry_id: id, entry_type: type, reader_region }).catch(() => {});
+
+            let reader_country = '';
+            try {
+              const tag = Intl.DateTimeFormat().resolvedOptions().locale || navigator.language || '';
+              const region = String(tag).split('-')[1];
+              if (region && /^[A-Za-z]{2}$/.test(region)) reader_country = region.toUpperCase();
+            } catch { reader_country = ''; }
+
+            if (!workshop) {
+              base44.functions.invoke('climateTrackView', {
+                entry_id: id,
+                entry_type: type,
+                reader_region,
+                reader_country,
+              }).catch(() => {});
+            }
           }
         }
       })

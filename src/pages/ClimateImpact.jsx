@@ -149,9 +149,13 @@ export default function ClimateImpact() {
     );
   }
 
-  const total = stats?.total_views || 0;
-  const countries = stats?.countries || [];
-  const regions = stats?.regions || [];
+  // A count that could not be made is not a zero. `counted` is what lets this page tell the
+  // difference between "nobody has read it yet" and "the server could not answer", which are
+  // two completely different things to say to a funder holding this page.
+  const counted = typeof stats?.total_views === 'number';
+  const total = counted ? stats.total_views : 0;
+  const countries = Array.isArray(stats?.countries) ? stats.countries : [];
+  const regions = Array.isArray(stats?.regions) ? stats.regions : [];
 
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
@@ -273,11 +277,21 @@ export default function ClimateImpact() {
         </div>
       </div>
 
-      {total === 0 && (
+      {!counted && (
+        <div className="px-4 py-16 text-center">
+          <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
+          <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mx-auto">
+            The counts could not be reached from here just now. Nothing is being hidden and nothing
+            is being guessed: the figures will appear when the record can be asked again.
+          </p>
+        </div>
+      )}
+
+      {counted && total === 0 && (
         <div className="px-4 py-16 text-center">
           <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
-            The record is live. As people around the world read it, this page will come alive — every country, every nation, every read counted.
+            The record is live. As it is read, this page fills: every read counted, every nation a reader names, and a place only when a reader's own device says where it is.
           </p>
           <Link to={createPageUrl('TogetherChangeClimate')} className="mt-6 inline-block px-5 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
             Back to the record
@@ -295,8 +309,11 @@ export default function ClimateImpact() {
           the sheet, as it does on every other page. */}
       <div className="mx-auto max-w-2xl px-4 pb-1 pt-4">
         <p className="text-center text-[10.5px] leading-relaxed text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
-          No address is stored and nobody is named. A place is counted once per entry per half
-          hour, so every figure here is reads, never people.
+          No address is stored and nobody is named. One entry opened is one read, counted once
+          from each place in half an hour — so every figure here is reads, never people. A place
+          is counted only when a reader's own device states it: the record never guesses a reader's
+          country from the network, because on this record it once guessed wrong for every single
+          reader, and openings made by us while the record is being worked on are no longer counted.
         </p>
       </div>
     </div>
