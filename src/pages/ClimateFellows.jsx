@@ -124,7 +124,7 @@ export default function ClimateFellows() {
           Most of it is boring. Most entries are broadly right and nobody will read your note on them. The interesting ones are rare — which is exactly why finding one is worth the afternoon. Stop after three sessions and you owe this record nothing.
         </p>
         <p className="text-[12.5px] text-[#141210]/70 leading-relaxed mt-2" style={{ fontFamily: 'var(--font-reading)' }}>
-          Two words inside this record: a <strong>keeper</strong> decides what goes on it, a <strong>checker</strong> reads a source and signs what they found. That is what you are. “Fellow” is Trebuchet’s word for it, and a good one.
+          Two words inside this record: a <strong>keeper</strong> decides what goes on it, a <strong>checker</strong> reads a source and signs what they found. That is what you are. Volunteer, fellow, checker: the same person, and Trebuchet’s word “fellow” is a good one.
         </p>
       </section>
 

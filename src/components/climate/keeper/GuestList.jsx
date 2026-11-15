@@ -17,6 +17,7 @@ const whenLine = (iso) => {
 };
 import AddKeeper from '@/components/climate/AddKeeper';
 import AccessSecondKey from '@/components/climate/AccessSecondKey';
+import InviteSteps from '@/components/climate/keeper/InviteSteps';
 import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 
 // ── WHO MAY COME INTO THE RECORD ──────────────────────────────────────────────
@@ -248,6 +249,8 @@ export default function GuestList() {
           <UserPlus className="w-4 h-4" /> {busy ? 'asking' : mobile ? 'Add checker' : 'Add them to the checking list'}
         </button>
       </AddPanel>
+
+      <InviteSteps />
 
       <AddPanel className={mobile ? 'room-details mb-6' : 'mb-6'}>
         {mobile && <summary>Add a keeper</summary>}

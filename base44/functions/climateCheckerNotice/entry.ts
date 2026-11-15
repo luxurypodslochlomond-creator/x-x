@@ -21,7 +21,7 @@ const COPY = {
     past: 'is on the record',
     log: 'Given a place on the list',
     headline: 'You are on the record',
-    body: 'You are on the checking list. You can open whatever is waiting, follow an entry to its source, and put your name to what you find. You cannot publish, edit or delete anything, and you never see the address of the person who submitted.',
+    body: 'You have a place on the record, and two things are open to you. You can send an initiative in: open the record, tap "Submit a solution, crisis, or action", and paste the page it came from. It goes to a keeper before it appears. And you can open whatever is waiting to be checked, follow it to its source, and put your name to what you find. You cannot publish, edit or delete anything, and you never see the address of the person who submitted.',
     keeper: 'They have a way in now. Every change to that list is written on the record from here on, yours included.',
   },
   paused: {
@@ -103,7 +103,15 @@ export default async function (req) {
     // Where the letter sends them: a keeper's work is in her room, a checker's is in the queue.
     // Sending a keeper to the checking queue is how the first invitation ended up in the wrong
     // place, with the person holding the keys shown a screen that could not use them.
-    const recordUrl = isKeeper ? `${RECORD_HOME}/ClimateKeeperRoom` : `${RECORD_HOME}/ClimateChecking`;
+    // Someone invited is sent to the record itself, not to the checking queue: an invitation
+    // is the moment a person works out which door is theirs, and an empty queue teaches them
+    // nothing about the door they came to add an initiative through. Once they are in, the
+    // letters about their access point at the queue, which by then is their own work.
+    const recordUrl = isKeeper
+      ? `${RECORD_HOME}/ClimateKeeperRoom`
+      : state === 'invited'
+        ? `${RECORD_HOME}/TogetherChangeClimate`
+        : `${RECORD_HOME}/ClimateChecking`;
     const letterBody = (isKeeper && KEEPER_BODY[state]) || copy.body;
 
     // The accountability line is written by the door that actually moved the list, one line
