@@ -128,7 +128,7 @@ Content: ${fullContent.slice(0, 2000)}`,
       record = await base44.asServiceRole.entities.ClimateSolution.create(recordData);
     }
 
-    // 3. Email admin notification — only when a human is genuinely needed (non-critical)
+    // 3. The keeper's letter — sent whether the entry was held or went up clean (non-critical)
     // The way back is built from the app's own public address as the server sets it, so the
     // link stays right on whatever domain the record is served from — never a stale host.
     // The sender name is the record's own name: a handler should never open a climate email
@@ -136,26 +136,39 @@ Content: ${fullContent.slice(0, 2000)}`,
     // The record's real home is the fallback — never the platform's temporary app address,
     // which must not travel out in an email or stand in front of a review panel.
     const appUrl = (req.headers.get('x-base44-app-url') || 'https://uf51.love').replace(/\/$/, '');
-    const keepers = flagged ? keeperInbox(secrets) : [];
+    // ── A KEEPER HEARS IT EITHER WAY ─────────────────────────────────────────────
+    // This used to write only when an entry was held, so a clean entry went up in silence
+    // and the one person who had invited the author never heard that they had arrived. The
+    // founder noticed before anyone else did: she sent an invitation, then had to go looking
+    // to find out whether it had worked. Clean or held, the keeper is told — the letter is
+    // only louder when a person is genuinely needed.
+    const keepers = keeperInbox(secrets);
     for (const keeper of keepers) {
       try {
         const title = data.title || data.headline || data.name || (data.content ? data.content.slice(0, 60) : 'Untitled');
+        // A name typed into a public form goes into an email, so it is escaped here: the
+        // only markup in a keeper's letter should be the record's own.
+        const typedName = String(data.submitter_name || '').replace(/[&<>"]/g, (c: string) =>
+          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] as string)
+        );
+        const who = typedName ? ` by ${typedName}` : '';
         await base44.asServiceRole.integrations.Core.SendEmail({
           to: keeper,
           from_name: 'Together We Can Change Climate',
-          subject: `Climate submission held for a check: ${title}`,
+          subject: flagged
+            ? `Held for your check: ${title}`
+            : `On the record: ${title}`,
           html: `<div style="font-family: monospace; max-width: 500px; margin: 0 auto; padding: 20px; background: #f4efe4;">
             <div style="background: #b3261e; color: #fff; padding: 12px 20px; margin: -20px -20px 20px -20px;">
               <h2 style="margin: 0; font-size: 16px; letter-spacing: 0.1em;">TOGETHER WE CAN CHANGE CLIMATE</h2>
             </div>
-            <p style="color: #6b6258;">A new ${type} submission was held for a human check.</p>
+            <p style="color: #6b6258;">${flagged ? `A new ${type} submission${who} was held for a human check.` : `A new ${type}${who} has gone on the record. Nothing is asked of you — this is the record telling you that it happened.`}</p>
             <div style="background: #efe7d6; border: 2px solid #1a1612; padding: 16px; margin: 16px 0;">
               <p style="margin: 4px 0; color: #1a1612;"><strong>Title:</strong> ${title}</p>
-              <p style="margin: 4px 0; color: #1a1612;"><strong>AI Advisory Note:</strong> ${aiAssessment}</p>
-              <p style="margin: 4px 0; color: #1a1612;"><strong>Flagged:</strong> ${flagged ? 'Yes — needs attention' : 'No — looks clean'}</p>
-              <p style="margin: 4px 0; color: #6b6258; font-size: 11px;">Held for a human check — clean entries publish automatically.</p>
+              <p style="margin: 4px 0; color: #1a1612;"><strong>What the screen made of it:</strong> ${aiAssessment}</p>
+              <p style="margin: 4px 0; color: #6b6258; font-size: 11px;">${flagged ? 'Held back until a person looks. Nothing is on the record yet.' : 'Live now. If you would not keep it, say so in the room and it comes off.'}</p>
             </div>
-            <a href="${appUrl}/AdminClimateReview" style="background: #b3261e; color: #fff; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; font-family: monospace;">Review now</a>
+            <a href="${flagged ? `${appUrl}/AdminClimateReview` : `${appUrl}/TogetherChangeClimate`}" style="background: #b3261e; color: #fff; padding: 12px 24px; text-decoration: none; display: inline-block; font-weight: bold; font-family: monospace;">${flagged ? 'Look at it now' : 'See it on the record'}</a>
           </div>`
         });
       } catch (emailError) {

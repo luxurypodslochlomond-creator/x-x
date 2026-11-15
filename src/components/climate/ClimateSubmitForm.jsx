@@ -150,7 +150,7 @@ export default function ClimateSubmitForm({ onClose }) {
           kind={entryType === 'action' ? 'action' : entryType}
           categories={categories.map(c => ({ id: c.id, label: c.label }))}
           accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'category', 'country', 'region_rough']}
-          note="Been sent an email about this? Paste the whole mail — heading, link, quote and all. We read it and fill the form in."
+          note="Paste the link to it — yours or someone else's — with the sentences you want kept. We read the words you paste (we do not open the link) and fill the form in for you to check."
           onParsed={(f) => setForm(prev => entryType === 'action'
             ? { ...prev, title: f.title || prev.title, description: f.details || f.summary || prev.description, country: f.country || prev.country }
             : {

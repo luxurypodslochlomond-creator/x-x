@@ -8,6 +8,7 @@ import ClimateChecking from '@/pages/ClimateChecking';
 import GuestList from '@/components/climate/keeper/GuestList';
 import WorkDock from '@/components/climate/keeper/WorkDock';
 import RoomOverview from '@/components/climate/keeper/RoomOverview';
+import RecordLife from '@/components/climate/keeper/RecordLife';
 import AdminClimateDesk from '@/pages/AdminClimateDesk';
 import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
 // One set of measures for everything standing inside the room, so tapping between Decide,
@@ -227,6 +228,11 @@ export default function ClimateKeeperRoom() {
               </div>
             )}
           </div>
+
+          {/* The other half of the room: not what is left to do, but what the record has
+              actually done lately. A keeper should be able to close this page knowing the
+              thing is alive, whatever the queue says. */}
+          <RecordLife />
         </div>
       )}
     </ClimateRecordShell>

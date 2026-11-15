@@ -43,15 +43,15 @@ export default function SmartPaste({ kind, accept, onParsed, note, categories })
     <div className="mb-4 bg-[#efe7d6] border-2 border-[#141210]/25 p-3">
       <div className="flex items-center gap-2 mb-2">
         <Wand2 className="w-3.5 h-3.5 text-[#e2602a] flex-shrink-0" />
-        <span className="text-[10px] font-black font-mono uppercase text-[#141210]">Got an email? Paste it</span>
+        <span className="text-[10px] font-black font-mono uppercase text-[#141210]">Got a link or an email? Paste it</span>
       </div>
       <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mb-2">
-        {note || 'Paste the whole mail — heading, link, quote and all. We read it and fill the form in. Check it says what you mean before you send.'}
+        {note || 'Paste the link and a few sentences about it. We read only the words you paste — we do not open the link — then fill the form in for you to check.'}
       </p>
       <textarea
         value={text}
         onChange={(e) => { setText(e.target.value); setOutcome(null); }}
-        placeholder="Paste the email here…"
+        placeholder="Paste the link and the words here…"
         rows={4}
         className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none"
       />
@@ -68,14 +68,14 @@ export default function SmartPaste({ kind, accept, onParsed, note, categories })
         <div className="mt-2 space-y-1">
           {outcome.verified ? (
             <p className="text-[10px] font-mono text-[#1e3a2b] flex items-start gap-1.5">
-              <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" /> Form filled in. The origin link was found in your email and copied across exactly.
+              <Check className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" /> Form filled in. The origin link was found in what you pasted and copied across exactly.
             </p>
           ) : (
             <p className="text-[10px] font-mono text-[#b3261e] flex items-start gap-1.5">
               <AlertTriangle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
               {outcome.links > 0
-                ? 'Form filled in, but no origin link could be confirmed from your email. Paste the link to the source yourself — nothing goes on the record without one.'
-                : 'Form filled in. There was no link in that email at all, so the source link is empty — paste it yourself.'}
+                ? 'Form filled in, but no origin link could be confirmed from what you pasted. Paste the link to the source yourself — nothing goes on the record without one.'
+                : 'Form filled in. There was no link in what you pasted at all, so the source link is empty — paste it yourself.'}
             </p>
           )}
           {outcome.unsure && (
