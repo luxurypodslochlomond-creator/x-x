@@ -4,6 +4,7 @@ import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildGuideShareCard } from '@/components/climate/shareCardImage';
+import AskTheRecord from '@/components/climate/AskTheRecord';
 
 // The note a volunteer reads before they arrive. It used to be nine blocks of prose at
 // twelve pixels — a briefing document, and nobody reads a briefing document on a phone.
@@ -54,6 +55,18 @@ export default function ClimateFellows() {
           If a claim cannot be traced to something outside this record, it does not go up.
         </p>
       </section>
+
+      {/* ── ASK IT, BEFORE COMMITTING AN HOUR ────────────────────────────────────────
+          Somebody deciding whether to volunteer has four questions and no wish to email a
+          stranger to ask them. This answers from the manual, in their tongue, typed or spoken,
+          and refuses to guess — which is the same promise the checking itself makes. */}
+      <AskTheRecord
+        suggestions={[
+          'What does a checker actually do?',
+          'How much time does this really take?',
+          'Will my name be on what I write?',
+        ]}
+      />
 
       {/* ── THREE JOBS ── */}
       <section className="mb-9">

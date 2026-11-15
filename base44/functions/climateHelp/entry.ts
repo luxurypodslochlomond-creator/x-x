@@ -90,6 +90,10 @@ export default async function (req: Request): Promise<Response> {
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
     const question = String(body?.question || '').trim().slice(0, 400);
+    // The tongue the record is already set to, or "auto". It is only a hint for the reply —
+    // the real ear is the model's: a question written in Sumerian, Latin or Lakota is read as
+    // it stands, because a dictionary of ours would run out long before the tongues do.
+    const lang = String(body?.lang || 'auto').slice(0, 16);
 
     if (question.length < 3) {
       return Response.json({ error: 'Ask a question first.' }, { status: 400 });
@@ -111,6 +115,7 @@ HOW TO ANSWER — these are rules, not preferences:
 - If the question is not about this record, say plainly that the record answers for itself only, and offer the nearest useful door.
 - If the manual does not cover it, say so in one short sentence rather than guessing.
 - Then choose the 1 to 3 doors below where this person would actually go next. Use the exact path.
+- TONGUE: the reader's record is set to the tongue code "${lang}". If that is "auto" or "en", answer in the tongue the question itself is written in — read it from their own words, including a historical, indigenous or endangered tongue (Latin, Ancient Greek, Sumerian, Akkadian, Lakota, Cherokee, Rongorongo). Otherwise answer in that tongue, and if it genuinely has no word for something, keep that word as the manual has it rather than describing it at length. Door labels stay as given below; they are the record's own names for its rooms.
 
 THE DOORS (path — label)
 ${DOORS.map(([path, label]) => `${path} — ${label}`).join('\n')}

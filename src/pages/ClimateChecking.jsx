@@ -5,6 +5,7 @@ import { base44 } from '@/api/base44Client';
 import { Check, X, HelpCircle, ExternalLink, RefreshCw } from 'lucide-react';
 import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 import KeeperEntryText from '@/components/climate/keeper/KeeperEntryText';
+import AskTheRecord from '@/components/climate/AskTheRecord';
 
 // The checking room. One page, three buttons, no training: open the source, then say whether
 // it says what the entry claims. A volunteer here is not junior staff being kept away from the
@@ -189,6 +190,13 @@ export default function ClimateChecking({ plain = false, onChange }) {
             {entries.length} {entries.length === 1 ? 'entry is' : 'entries are'} waiting · signed as {me?.name}
           </p>
         )}
+
+        {/* A checker with a question should not have to leave the queue to ask it — nor wait
+            for anybody's inbox. It sits above the work, answered from the record's own manual
+            in whatever tongue they are reading in, typed or spoken. */}
+        <div className="mt-4">
+          <AskTheRecord suggestions={['What does a checker actually do?', 'Who decides after my note?', 'Can I publish anything myself?']} />
+        </div>
 
         {error && error !== 'not_a_checker' && (
           <p className="text-[12.5px] text-record-red border-l-4 border-l-record-red pl-3 mb-5 leading-snug" style={{ fontFamily: 'var(--font-reading)' }}>{error}</p>
