@@ -7,6 +7,9 @@ export default function ComicPanel({ story, index }) {
         <span className="comic-number" aria-hidden="true">0{index + 1}</span>
         <h2>{story.title}</h2>
       </div>
+      {story.gesture && (
+        <p className="comic-gesture record-meta" dir="auto">Smallest gesture · {story.gesture}</p>
+      )}
       <figure className="comic-frame">
         <div className="comic-stage">
           <p className="comic-speech record-meta" dir="auto">{story.question}</p>

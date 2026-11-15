@@ -28,6 +28,9 @@
 .comic-panel-heading { display: flex; align-items: center; gap: .65rem; margin-bottom: .6rem; }
 .comic-number { display: inline-grid; place-items: center; min-width: 1.8rem; height: 1.8rem; border: 2px solid rgb(var(--record-ink)); background: rgb(var(--cartoon-sun)); font-size: .75rem; font-weight: 900; transform: rotate(-7deg); }
 .record-pages .cartoon-room .comic-panel-heading h2 { font-size: 1rem; letter-spacing: -.02em !important; line-height: 1.2 !important; }
+/* A strip that stands beside one of Janine's smallest gestures says so, in the same chip
+   the record's own list uses — so a child reading a cartoon can find the line it came from. */
+.comic-gesture { display: inline-block; margin: 0 .1rem .75rem; padding: .3rem .55rem; border: 2px solid rgb(var(--record-ink)); border-radius: 3px; background: rgb(var(--cartoon-mint)); font-size: .62rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; transform: rotate(-1.2deg); }
 .comic-frame { border: 3px solid rgb(var(--record-ink)); background: rgb(var(--cartoon-paper)); box-shadow: 4px 5px 0 rgb(var(--record-ink)); border-radius: 3px 9px 4px 7px; overflow: hidden; }
 .comic-stage { position: relative; }
 .comic-stage img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: rgb(var(--cartoon-sky)); }
@@ -43,6 +46,9 @@
 .record-pages .cartoon-room .comic-reply { font-size: clamp(1rem, 4.5vw, 1.4rem); line-height: 1.22; font-weight: 900; text-align: center; }
 .comic-panel-repair .comic-ending { background: rgb(var(--cartoon-sky)); }
 .comic-panel-wind .comic-ending { background: rgb(var(--cartoon-mint)); }
+.comic-panel-cardigan .comic-ending { background: rgb(var(--cartoon-mint)); }
+.comic-panel-walking .comic-ending { background: rgb(var(--cartoon-sky)); }
+.comic-panel-food .comic-ending { background: rgb(var(--cartoon-paper)); }
 .record-pages .cartoon-room .comic-theme { margin: .75rem .1rem 0; font-size: .78rem; font-weight: 600; color: rgb(var(--record-muted)); }
 .comic-turner { display: flex; align-items: center; gap: .75rem; padding: .65rem .4rem 0; }
 .comic-turner button, .comic-load-more { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 3rem; padding: .65rem 1rem; border: 2px solid rgb(var(--record-ink)); border-radius: 3px; font-size: .9rem; font-weight: 800; touch-action: manipulation; transition: transform 100ms, box-shadow 100ms; }

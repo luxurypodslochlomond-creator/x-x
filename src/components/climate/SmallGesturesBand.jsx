@@ -7,7 +7,7 @@ import React from 'react';
 // major item on the record, not a small gesture. It now lives under the Mangroves
 // category and its own entries, the Bonaire film among them.
 const GESTURES = [
-  'Adding a sweater',
+  'Repairing a sweater / cardigan',
   'Buying less',
   'Walking',
   'Using mass transportation',

@@ -27,7 +27,7 @@ export default function ComicReader() {
         <span className="comic-position" aria-live="polite" aria-atomic="true">0{active + 1} / 0{comicStories.length}</span>
         <button type="button" onClick={() => turn(1)} className="comic-next">{active === comicStories.length - 1 ? 'From the top' : 'Next cartoon'}<ArrowRight size={20} /></button>
       </div>
-      <p className="comic-art-credit record-meta">New stories for this room · AI-generated illustrations.<br />Fiction, not workshop submissions or checked evidence.</p>
+      <p className="comic-art-credit record-meta">Written to be read by a child as easily as a grown-up. AI-generated illustrations.<br />Fiction, not workshop submissions or checked evidence.</p>
     </section>
   );
 }
