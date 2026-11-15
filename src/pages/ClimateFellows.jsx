@@ -18,10 +18,18 @@ const JOBS = [
   { n: '03', title: 'Find one you think is wrong', line: 'Not to be polite about it. This is the most useful hour anybody gives this record.' },
 ];
 
+// ── WHAT YOU KEEP, SAID AS IT ACTUALLY IS ──────────────────────────────────────
+// Two of these three lines were not true, and a volunteer would have found out the day
+// they wrote their first note. A checker's note is read by the keepers — it is not printed
+// under the entry for the world, because the note names a person and says what they found,
+// and printing that beside an entry would be a verdict on the origin, which the record is
+// not entitled to give. What is public is their line on the roll, and the count of what
+// they signed, drawn from the notes themselves. So the promise is the roll and the card,
+// not a link with your name underneath somebody else's page.
 const KEEP = [
-  'Your name on what you wrote, permanently. Nobody can edit it afterwards, and a correction is a second note in the open.',
-  'A link you can send anyone. Every entry has its own address, with your note underneath it.',
-  'Your email stays private. The record keeps it only to reach you about your own notes.',
+  'Your name on every note you write — and no way to rewrite one afterwards. There is no edit path for a note, and a note is never deleted when a person leaves.',
+  'Your name on the roll, with the work counted from your notes themselves, and a card you can hand to anyone who asks.',
+  'Your email stays private. It is never on the roll, never beside a note, and kept only to reach you about your own.',
 ];
 
 const NOT = [
@@ -137,7 +145,7 @@ export default function ClimateFellows() {
           Most of it is boring. Most entries are broadly right and nobody will read your note on them. The interesting ones are rare — which is exactly why finding one is worth the afternoon. Stop after three sessions and you owe this record nothing.
         </p>
         <p className="text-[12.5px] text-[#141210]/70 leading-relaxed mt-2" style={{ fontFamily: 'var(--font-reading)' }}>
-          Two words inside this record: a <strong>keeper</strong> decides what goes on it, a <strong>checker</strong> reads a source and signs what they found. That is what you are. Volunteer, fellow, checker: the same person, and Trebuchet’s word “fellow” is a good one.
+          Two words inside this record: a <strong>keeper</strong> holds the keys — anything the screen flags waits for one, and any of them can take an entry off — and a <strong>checker</strong> reads a source and signs what they found. That is what you are. Volunteer, fellow, checker: the same person, and Trebuchet’s word “fellow” is a good one.
         </p>
       </section>
 

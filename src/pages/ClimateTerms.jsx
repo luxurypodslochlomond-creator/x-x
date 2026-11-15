@@ -57,10 +57,10 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border-l-4 border-l-[#1e3a2b] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              An AI advisory note screens every submission for spam, harmful content and relevance. It never judges the science, never decides, and we do not train anything on what you send. Clear entries go on at once; anything it flags waits for a real person. The note is kept in the audit trail.
+              An AI advisory note screens every submission for spam, harmful content and relevance. It never judges the science, never decides, and we do not train anything on what you send. Clear entries go on at once; anything it flags waits for a real person. The note is kept on the entry itself, where anyone can read it.
             </p>
             <p className="mt-3 text-[12px] font-mono leading-relaxed text-[#141210]">
-              Every entry carries the printed name of the person who put it on the record. A machine can never fill that name — it has none to sign with — so an entry with no name says plainly that it is unsigned rather than showing nothing. When an entry turns out to be wrong, it is corrected in the open with the date it was corrected, never quietly edited or deleted, and every correction is gathered at{' '}
+              An entry a person puts on the record carries their printed name. A machine can never fill that name — it has none to sign with — so an entry that went up on the screen's word alone says plainly that it is unsigned rather than showing nothing. When an entry turns out to be wrong, it is corrected in the open with the date it was corrected, never quietly edited or deleted, and every correction is gathered at{' '}
               <Link to={createPageUrl('ClimateCorrections')} className="underline underline-offset-4 decoration-[#e2602a] font-black">corrections, in daylight</Link>.
             </p>
           </div>
@@ -97,7 +97,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              We trace every entry to the thing it came from, but this is a community record, not a peer-reviewed journal. We do not test whether a claim is true. Use your own judgment. Check the sources. Think for yourself.
+              Every entry is asked to name the thing it came from, and where a copy of that source has been kept, the entry says so and dates it. But this is a community record, not a peer-reviewed journal. We do not test whether a claim is true. Use your own judgment. Check the sources. Think for yourself.
             </p>
           </div>
         </section>
@@ -169,7 +169,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              These terms took effect on 19 October 2026. If we change them, we update the date at the top of this page and say what changed. If a change affects what we do with your submission, we tell you before it takes effect.
+              These terms took effect on 19 October 2026. If we change them, the date changes with them and the change is named here rather than slipped in. If a change affects what we do with your submission, we tell you before it takes effect.
             </p>
           </div>
         </section>
@@ -177,7 +177,9 @@ export default function ClimateTerms() {
         {/* CONTACT */}
         <section className="mt-8 pt-6 border-t-2 border-[#141210]">
           <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
-            Questions about these terms? A contact address will be published here as soon as the record's permanent home is arranged. Until then, this page is the promise — read it, question it, and tell us when we get it wrong.
+            Questions about these terms, or about anything on this page? Write to{' '}
+            <a href="mailto:family@uf51.love" className="text-[#141210] underline underline-offset-4 decoration-[#e2602a]">family@uf51.love</a>{' '}
+            — a person reads it and answers. The organisation that will hold the record permanently is still being arranged, and will be named here when it is. Until then, this page is the promise: read it, question it, and tell us when we get it wrong.
           </p>
           <div className="flex flex-wrap gap-2">
             <Link to={createPageUrl('ClimatePrivacy')} className="inline-flex items-center gap-2 px-3 py-2 bg-[#141210] text-[#efe7d6] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#e2602a] transition-colors">
