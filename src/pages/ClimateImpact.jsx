@@ -46,35 +46,44 @@ function isKnownCountryName(input) {
 // Rows of name, number and bar read as a table, and a table is a column you scroll
 // forever. These are plates instead: the leading place given the full width and the
 // biggest numeral, so the shape of the readership is legible before a word of it is read.
-function Ledger({ rows, tone, href, label }) {
+// `lead` decides whether the first row is given the whole width and the biggest numeral.
+// A country list earns that: it is a shape, and the shape should be legible before a word of
+// it is read. A nation list does not. A nation is a name one reader typed for themselves, so
+// the plate that made "Sudan · 34" the loudest thing on this page was taking one person's
+// reading and printing it at the size of a finding — which is exactly the vanity figure this
+// record exists to refuse. Nations are now set at the size they are: a list.
+function Ledger({ rows, tone, href, label, lead = true }) {
   const accent = tone === 'red' ? 'text-[#b3261e]' : 'text-[#e2602a]';
   const bar = tone === 'red' ? 'bg-[#b3261e]' : 'bg-[#e2602a]';
   const top = rows[0]?.views || 1;
 
   return (
     <div className="grid grid-cols-2 gap-px bg-[#141210]/15 border border-[#141210]/15">
-      {rows.map((row, i) => (
-        <Link
-          key={href(row)}
-          to={href(row)}
-          aria-label={`${label(row)}, ${row.views.toLocaleString()} reads, open the stories`}
-          className={`relative flex flex-col justify-between bg-[#f7f1e5] hover:bg-[#efe7d6] active:bg-[#efe7d6] transition-colors p-3 ${i === 0 ? 'col-span-2' : ''}`}
-        >
-          {i === 0 && (
-            <span aria-hidden="true" className="pointer-events-none absolute -right-2 -top-4 opacity-[0.12]">
-              <SignalBeacon size={80} />
+      {rows.map((row, i) => {
+        const isLead = lead && i === 0;
+        return (
+          <Link
+            key={href(row)}
+            to={href(row)}
+            aria-label={`${label(row)}, ${row.views.toLocaleString()} reads, open the stories`}
+            className={`relative flex flex-col justify-between bg-[#f7f1e5] hover:bg-[#efe7d6] active:bg-[#efe7d6] transition-colors p-3 ${isLead ? 'col-span-2' : ''}`}
+          >
+            {isLead && (
+              <span aria-hidden="true" className="pointer-events-none absolute -right-2 -top-4 opacity-[0.12]">
+                <SignalBeacon size={80} />
+              </span>
+            )}
+            <span className="text-[8px] font-mono tracking-[0.2em] text-[#5a5246]/70">{String(i + 1).padStart(2, '0')}</span>
+            <span className="relative mt-2 flex items-end justify-between gap-1.5">
+              <span className={`font-mono font-bold text-[#141210] leading-[1.15] break-words ${isLead ? 'text-[15px]' : 'text-[11px]'}`}>{label(row)}</span>
+              <span className={`font-black font-mono flex-shrink-0 ${accent} ${isLead ? 'text-[21px]' : 'text-[13px]'}`}>{row.views.toLocaleString()}</span>
             </span>
-          )}
-          <span className="text-[8px] font-mono tracking-[0.2em] text-[#5a5246]/70">{String(i + 1).padStart(2, '0')}</span>
-          <span className="relative mt-2 flex items-end justify-between gap-1.5">
-            <span className={`font-mono font-bold text-[#141210] leading-[1.15] break-words ${i === 0 ? 'text-[15px]' : 'text-[11px]'}`}>{label(row)}</span>
-            <span className={`font-black font-mono flex-shrink-0 ${accent} ${i === 0 ? 'text-[21px]' : 'text-[13px]'}`}>{row.views.toLocaleString()}</span>
-          </span>
-          <span className={`relative mt-2.5 block bg-[#141210]/10 ${i === 0 ? 'h-1.5' : 'h-1'}`}>
-            <span className={`block h-full ${bar}`} style={{ width: `${Math.max(4, (row.views / top) * 100)}%` }} />
-          </span>
-        </Link>
-      ))}
+            <span className={`relative mt-2.5 block bg-[#141210]/10 ${isLead ? 'h-1.5' : 'h-1'}`}>
+              <span className={`block h-full ${bar}`} style={{ width: `${Math.max(4, (row.views / top) * 100)}%` }} />
+            </span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
@@ -159,20 +168,24 @@ export default function ClimateImpact() {
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="w-4 h-4 text-[#b3261e]" />
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-                By Nation
+                Named by the reader
               </h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
             </div>
-            {/* A nation line is the reader's own word, and saying so is the whole point of it. */}
+            {/* The two headings on this page used to be "By Nation" and "By Country", and a
+                reader had to stop and work out the difference — which means the page had not
+                said it. It says it in the headings now. A nation here is a name the reader
+                typed about themselves, because some nations have no country code of their
+                own; a country below is where the connection came from. */}
             <p className="text-[10px] text-[#5a5246] leading-relaxed mb-4 max-w-[62ch]" style={{ fontFamily: 'var(--font-reading)' }}>
-              A nation here is a reader who typed its name for themselves — Scotland, Catalonia, Kurdistan.
-              One voice can name a nation once and then be counted on every entry it opens afterwards, so the
-              figure beside it is reads, never a headcount. A place with its own country code never appears on
-              this list, and nobody is ever named.
+              A name a reader gave for themselves — Scotland, Catalonia, Kurdistan — because some
+              nations have no country code of their own. One reader naming one nation is counted on
+              every entry they open, so this figure is usually one person reading, not a crowd.
             </p>
             <Ledger
               rows={regions}
               tone="red"
+              lead={false}
               href={(r) => `/ClimateReachPlace/nation/${encodeURIComponent(r.region)}`}
               label={(r) => r.region}
             />
@@ -186,7 +199,7 @@ export default function ClimateImpact() {
             <div className="flex items-center gap-2 mb-4">
               <Users className="w-4 h-4 text-[#1e3a2b]" />
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-                By Country
+                Where the connection came from
               </h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
             </div>
@@ -194,9 +207,9 @@ export default function ClimateImpact() {
                 connection is not a country of people, and on this record that distinction is
                 the difference between evidence and a vanity figure. */}
             <p className="text-[10px] text-[#5a5246] leading-relaxed mb-4 max-w-[62ch]" style={{ fontFamily: 'var(--font-reading)' }}>
-              A country here is where the connection came from, not where the reader is. An office, a server
-              or a VPN can stand anywhere, and one network can serve a whole country — so read this as reach,
-              never as a headcount.
+              Not where the reader is. An office, a server or a VPN stands anywhere, and one network
+              can serve a whole country — reach, never a headcount.
+              {countries.length === 1 && ' Every read so far has come from one place, so read that as a start rather than as reach.'}
             </p>
             <Ledger
               rows={countries}
@@ -272,21 +285,18 @@ export default function ClimateImpact() {
         </div>
       )}
 
-      {/* Footer */}
-      <div className="mx-auto max-w-2xl px-4 py-6 border-t-2 border-[#141210]/10">
-        <p className="text-[9px] font-mono text-[#5a5246] text-center leading-relaxed">
-          No IP addresses stored. No personal data tracked. Only the country, the nation you choose to share, and the entry. A place is counted once per entry per half hour, so what you see here is reads counted — never people, and never inflated. The signal, not the surveiller.
-        </p>
-        {/* Where else this leads. Impact answers who is reading and the plate answers where
-            things are; a reader who has finished one of those questions should not have to
-            go back to the front of the book to ask the other. */}
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[10px] font-black font-mono uppercase tracking-[0.12em] text-[#141210]/75">
-          <Link to="/ClimateMap" className="hover:text-[#b3261e] transition-colors">The plate →</Link>
-          <Link to="/ClimateWire" className="hover:text-[#b3261e] transition-colors">The wire →</Link>
-          <Link to="/TogetherChangeClimate" className="hover:text-[#b3261e] transition-colors">The record →</Link>
-        </div>
-        <p className="mt-4 text-center font-mono text-[13px] font-black tracking-[0.3em] text-record-mark">
-          x = x
+      {/* ── ONE PROMISE, AND THEN THE BOOK'S OWN FOOT ────────────────────────────────
+          This page used to end with a foot of its own: a paragraph of caveats set at nine
+          pixels, three arrow links, and x = x — and then the record's colophon printed x = x
+          again directly underneath it. Two feet on one sheet, the same mark twice, and the
+          record's own mark doing the work of a page's decoration. A page does not get its own
+          foot inside a book. What was worth keeping is one sentence, and it is the promise
+          rather than the decoration: nothing about a reader is stored. The colophon closes
+          the sheet, as it does on every other page. */}
+      <div className="mx-auto max-w-2xl px-4 pb-1 pt-4">
+        <p className="text-center text-[10.5px] leading-relaxed text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
+          No address is stored and nobody is named. A place is counted once per entry per half
+          hour, so every figure here is reads, never people.
         </p>
       </div>
     </div>

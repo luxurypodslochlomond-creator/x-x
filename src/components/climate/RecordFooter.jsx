@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import KeeperDoor from '@/components/climate/KeeperDoor';
 import RecordCredit from '@/components/climate/RecordCredit';
 
 // ── THE FOOT IS A COLOPHON AGAIN, NOT A SECOND MENU ─────────────────────────────
@@ -66,26 +65,19 @@ export default function RecordFooter({ showKeeper = true }) {
             and the company. One copy, printed here, so no page carries the credit twice. */}
         <RecordCredit className="mt-10" />
 
-        {/* The record's promises, on a phone, where the masthead has not room for them.
-            On a wide screen both are in the masthead, so this row is not printed at all. */}
-        <div className="mt-6 flex flex-wrap items-baseline justify-center gap-x-6 gap-y-1 lg:hidden">
-          {[
-            { label: 'Terms', to: '/ClimateTerms' },
-            { label: 'Privacy', to: '/ClimatePrivacy' },
-          ].map(({ label, to }) => (
-            <Link
-              key={to}
-              to={to}
-              aria-current={pathname === to ? 'page' : undefined}
-              className={`inline-block py-1.5 text-[13px] transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red ${
-                pathname === to ? 'text-record-red' : 'text-record-muted'
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-          {showKeeper && <KeeperDoor />}
-        </div>
+        {/* ── THE FOOT IS NAKED NOW ─────────────────────────────────────────────
+            A row of small doors used to be printed here on a phone: Terms, Privacy and the
+            keeper's key. None of the three was new. All three are on the contents sheet,
+            which is the door that already says every way through, and the keeper's key also
+            sits on the sheet for the two people who hold it. So the foot was printing a
+            second, smaller copy of the sheet — which makes the sheet look less complete
+            rather than the foot look more useful.
+            What is left is a colophon and nothing else: the mark, one line about where it
+            is made, and who made it. A printed sheet ends that way. If a reader wants the
+            terms, the doors are at the top of every page and one tap from here. */}
+        <span className="sr-only">
+          Terms, privacy and the keeper's door are on the record's contents sheet, in the masthead.
+        </span>
       </div>
     </footer>
   );
