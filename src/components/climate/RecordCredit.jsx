@@ -39,7 +39,12 @@ export default function RecordCredit({ className = '' }) {
         ))}
       </p>
 
-      {/* The only address the record prints for itself. */}
+      {/* The only address the record prints for itself.
+          "· Scotland" used to sit after it, and the foot already says Scotland four lines
+          above ("made in Scotland from photons"), so the sheet was printing the country
+          twice in one colophon — which reads as a template rather than as an imprint. The
+          company's name is the last thing said, and the country is said once, where it
+          means something. */}
       <p className="mt-2.5 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">
         <Link
           to="/Welcome"
@@ -47,7 +52,6 @@ export default function RecordCredit({ className = '' }) {
         >
           UF51 CIC
         </Link>
-        {' '}· Scotland
       </p>
     </div>
   );
