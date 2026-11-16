@@ -13,7 +13,22 @@ export default function RecordFooter() {
         x = x
       </Link>
       <p className="mt-6 text-base leading-relaxed">A public service for the world</p>
-      <p className="mt-2 text-sm leading-relaxed">Brian Hughes + Gillian Brown + Base44</p>
+
+      <span aria-hidden="true" className="mx-auto mt-7 block h-px w-16 bg-record-ink/25" />
+
+      <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-record-ink">
+        Universal Frequency 51 CIC
+      </p>
+      <p className="mt-2 text-sm leading-relaxed">
+        <a
+          href="mailto:family@uf51.love"
+          className="text-record-mark underline decoration-dotted underline-offset-4 transition-colors hover:text-record-red"
+        >
+          family@uf51.love
+        </a>
+      </p>
+
+      <p className="mt-6 text-sm leading-relaxed text-record-muted">Brian Hughes + Gillian Brown + Base44</p>
     </footer>
   );
 }
