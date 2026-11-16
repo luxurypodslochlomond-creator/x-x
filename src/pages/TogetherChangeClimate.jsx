@@ -724,7 +724,7 @@ export default function TogetherChangeClimate() {
           <div className="lg:w-[320px] lg:flex-shrink-0">
             <button
               onClick={() => setShowSubmit(true)}
-              className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-1.5 px-3 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[11px] lg:text-[10px] font-black font-mono uppercase whitespace-nowrap border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+              className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-1.5 px-2 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase tracking-[0.02em] whitespace-nowrap border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
             >
               <Plus className="w-3.5 h-3.5 flex-shrink-0" /> Submit a solution, crisis, group or action
             </button>
