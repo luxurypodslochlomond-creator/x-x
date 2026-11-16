@@ -2,38 +2,40 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import SignalCode from '@/components/climate/SignalCode';
 
-// ── THE SUBJECT DOOR ────────────────────────────────────────────────────────────
-// A phone used to be handed thirty-two subject pills in a sideways strip: two screens of
-// swiping to reach Zooplankton, and half of them opened a blank page. A strip tells you
-// how long the list is and nothing about the record.
+// ── THE SUBJECT LINE ────────────────────────────────────────────────────────────
+// This was a filled box: a caption, a divider, a label, a second line of counts and an
+// arrow — four things to say one thing. And it had quietly grown, because the record's own
+// type floor lifts every nine-pixel label to twelve, so a control designed to be small was
+// being drawn larger than the button that submits an entry.
 //
-// This is one line instead, shaped like the index plate it opens: what you are reading on
-// the left, how much of it there is on the right. Nothing hidden — the whole taxonomy is
-// one tap away, and the line itself says out loud that only sixteen of thirty-two subjects
-// carry anything yet. A record that admits where it is thin is worth more than one that
-// hides it behind a scroll.
-export default function SubjectDoor({ active, totalEntries, filled, totalSubjects, allLabel, onOpen }) {
+// It is a line of type now, the way an index marks itself on the edge of a page: what you
+// are reading on the left, how much of it there is on the right, a hairline under it, and
+// the whole width of the page to put your thumb on. Nothing is boxed, because a record
+// does not put a frame around the fact that you are standing in Water.
+export default function SubjectDoor({ active, totalEntries, allLabel, open = false, onOpen, onClose }) {
   return (
     <button
       type="button"
-      onClick={onOpen}
-      aria-haspopup="dialog"
-      className="lg:hidden w-full flex items-center gap-2.5 px-3 py-2.5 min-h-[56px] bg-[#efe7d6] border border-[#141210] active:border-[#e2602a] transition-colors text-left"
+      onClick={onClose ? () => (open ? onClose() : onOpen()) : onOpen}
+      aria-expanded={open}
+      aria-haspopup="true"
+      className="lg:hidden w-full flex items-center gap-2.5 py-3 min-h-[48px] border-b border-[#141210] text-left active:opacity-60 transition-opacity"
     >
-      <span className="text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246] leading-none">Subject</span>
-      <span className="w-px h-7 bg-[#141210]/25 flex-shrink-0" />
-      {active ? <SignalCode code={active.code} /> : null}
-      <span className="flex-1 min-w-0 flex flex-col">
-        <span className="text-[12px] font-black font-mono uppercase text-[#141210] truncate leading-tight">
-          {active ? active.label : allLabel}
-        </span>
-        <span className="text-[9px] font-mono uppercase tracking-wider text-[#5a5246] mt-1 truncate">
-          {active
-            ? `${active.count} ${active.count === 1 ? 'entry' : 'entries'}`
-            : `${totalEntries} entries · ${filled} of ${totalSubjects} subjects`}
-        </span>
+      <span className="flex-shrink-0 text-[11px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">
+        Subject
       </span>
-      <ChevronDown className="w-4 h-4 text-[#141210] flex-shrink-0" />
+      {active ? <SignalCode code={active.code} /> : null}
+      <span className="flex-1 min-w-0 truncate text-[13px] font-black font-mono uppercase text-[#141210]">
+        {active ? active.label : allLabel}
+      </span>
+      <span className="flex-shrink-0 text-[11px] font-mono text-[#5a5246]">
+        {active
+          ? `${active.count} ${active.count === 1 ? 'entry' : 'entries'}`
+          : `${totalEntries} entries`}
+      </span>
+      <ChevronDown
+        className={`w-4 h-4 flex-shrink-0 text-[#141210] transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+      />
     </button>
   );
 }

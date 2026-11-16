@@ -706,10 +706,30 @@ export default function TogetherChangeClimate() {
         <SubjectDoor
           active={activeSubject}
           totalEntries={items.length + actions.length}
-          filled={filledSubjects.length}
-          totalSubjects={subjectIndex.length}
           allLabel={t.all}
+          open={showIndex}
           onOpen={() => setShowIndex(true)}
+          onClose={() => setShowIndex(false)}
+        />
+        {/* The index opens under the line that asked for it, in the page — not over it. */}
+        <SubjectIndexSheet
+          open={showIndex}
+          onClose={() => setShowIndex(false)}
+          filled={filledSubjects}
+          empty={emptySubjects}
+          totalEntries={items.length + actions.length}
+          selected={selectedCategory}
+          allLabel={t.all}
+          onSelect={(id) => {
+            setSelectedCategory(id);
+            setShowIndex(false);
+            requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+          }}
+          onAdd={(subject) => {
+            setShowIndex(false);
+            setSubmitCategory(subject.id);
+            setShowSubmit(true);
+          }}
         />
         <div className="hidden lg:flex gap-1.5 flex-wrap" aria-label="Filter by subject">
           <button
@@ -899,26 +919,6 @@ export default function TogetherChangeClimate() {
 
 
       </div>
-
-      <SubjectIndexSheet
-        open={showIndex}
-        onClose={() => setShowIndex(false)}
-        filled={filledSubjects}
-        empty={emptySubjects}
-        totalEntries={items.length + actions.length}
-        selected={selectedCategory}
-        allLabel={t.all}
-        onSelect={(id) => {
-          setSelectedCategory(id);
-          setShowIndex(false);
-          requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-        }}
-        onAdd={(subject) => {
-          setShowIndex(false);
-          setSubmitCategory(subject.id);
-          setShowSubmit(true);
-        }}
-      />
 
       {showSubmit && (
         <ClimateSubmitForm

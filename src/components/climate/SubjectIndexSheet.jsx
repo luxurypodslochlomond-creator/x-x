@@ -1,133 +1,104 @@
-import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
+import React from 'react';
 import { X, Plus, Check } from 'lucide-react';
 import SignalCode from '@/components/climate/SignalCode';
-import { useBodyScrollLock } from '@/hooks/useBodyScrollLock';
 
-// ── THE INDEX ───────────────────────────────────────────────────────────────────
-// The whole taxonomy, full height, laid out like the back of a book: name, classification
-// code, and how many entries stand under it.
+// ── THE INDEX UNFOLDS IN THE PAGE ───────────────────────────────────────────────
+// This used to be a full-screen overlay: a second window with its own scroll, its own
+// stacking order, its own width and a body-scroll lock underneath it. On a phone that is
+// four things that can each go wrong, and they did — the list ran past the right edge, the
+// plus went with it, and the panel could open without the record underneath.
 //
-// The order is the honest one. What the record actually holds comes first, heaviest at the
-// top, so a reader sees at a glance where it is strong — seagrasses, drought — instead of
-// an alphabetical list of everything January wished for. The subjects holding nothing are
-// not hidden: they sit under their own heading, faded, and each one is a door. Tapping one
-// opens the entry form with that subject already chosen, through the same review as
-// everything else. An empty subject stops being a dead end and becomes the shortest way to
-// fill it.
+// The index now opens where it belongs: in the page, directly under the line that asked
+// for it. Same paper, same hand, nothing covered, nothing to measure wrongly. A subject
+// that holds nothing is still a door rather than a dead end — it opens the form with that
+// subject already chosen — and the count at the top still says out loud how much of the
+// taxonomy the record is carrying, because a record that admits where it is thin is worth
+// more than one that hides it behind a scroll.
 //
-// No sideways scrolling anywhere: a list down the page is what a thumb already knows.
+// The type is set at eleven to thirteen pixels on purpose: those sizes sit above the
+// record's floor, so nothing here is quietly grown.
 export default function SubjectIndexSheet({ open, onClose, filled, empty, totalEntries, selected, allLabel, onSelect, onAdd }) {
-  useBodyScrollLock(open);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [open, onClose]);
-
   if (!open) return null;
 
-  // ── THE INDEX HANGS ON THE WINDOW, NOT INSIDE THE PAGE ─────────────────────────
-  // It used to be drawn inside the record's own page, and the page reached it: a fixed
-  // panel nested in a page that is itself positioned, clipped or wider than the glass
-  // is measured against that page instead of the screen — which is exactly what broke
-  // it, the list running off the right edge with the "+" pushed out of reach on a
-  // phone. Hung on the window it cannot be reached by anything the page does, it always
-  // fits the device it is on, and the close button is never the thing that goes missing.
-  return createPortal(
-    <div
-      role="dialog"
-      aria-modal="true"
-      aria-label="Every subject on the record"
-      className="fixed inset-0 z-[110] w-full max-w-full overflow-x-hidden bg-[#f4efe4] flex flex-col"
-      style={{ animation: 'sorted-enter 0.2s cubic-bezier(0, 0, 0.2, 1)' }}
-    >
-      <div className="flex-shrink-0 bg-[#efe7d6] border-b-2 border-[#141210] px-4 pb-3 flex items-end justify-between gap-3"
-        style={{ paddingTop: 'max(0.85rem, env(safe-area-inset-top))' }}>
-        <div>
-          <p className="text-[9px] font-black font-mono uppercase tracking-[0.25em] text-[#e2602a]">The index</p>
-          <p className="text-[11px] font-mono text-[#5a5246] mt-1">
-            {filled.length + empty.length} subjects · {totalEntries} entries
-          </p>
-        </div>
+  return (
+    <div className="lg:hidden mt-3 border border-[#141210] bg-[#f4efe4]">
+      <div className="flex items-center justify-between gap-3 px-3 py-2 bg-[#efe7d6] border-b border-[#141210]">
+        <span className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#141210]">
+          {filled.length + empty.length} subjects · {totalEntries} entries
+        </span>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close the index"
-          className="w-11 h-11 flex items-center justify-center border border-[#141210] bg-[#efe7d6] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+          className="w-8 h-8 -mr-1 flex items-center justify-center text-[#141210] active:text-[#e2602a]"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4" />
         </button>
       </div>
 
-      <div className="flex-1 w-full overflow-y-auto overflow-x-hidden overscroll-contain px-4 pt-2"
-        style={{ paddingBottom: 'max(2rem, env(safe-area-inset-bottom))' }}>
-
+      <div className="px-3 pb-1">
         <button
           type="button"
           onClick={() => onSelect('all')}
-          className="w-full flex items-center gap-2.5 py-3.5 min-h-[52px] border-b border-[#141210]/25 text-left"
+          className="w-full flex items-center gap-2.5 py-3 min-h-[44px] border-b border-[#141210]/25 text-left"
         >
-          <span className="w-7 h-[18px] border border-[#141210]/40 flex items-center justify-center flex-shrink-0">
+          <span className="w-6 h-4 border border-[#141210]/40 flex items-center justify-center flex-shrink-0">
             <span className="grid grid-cols-2 gap-[2px]">
               {[0, 1, 2, 3].map(i => <span key={i} className="w-[3px] h-[3px] bg-[#141210] block" />)}
             </span>
           </span>
           <span className="flex-1 min-w-0 truncate text-[12px] font-black font-mono uppercase text-[#141210]">{allLabel}</span>
-          <span className="flex-shrink-0 text-[10px] font-mono text-[#5a5246]">{totalEntries}</span>
+          <span className="flex-shrink-0 text-[11px] font-mono text-[#5a5246]">{totalEntries}</span>
           {selected === 'all' ? <Check className="w-4 h-4 flex-shrink-0 text-[#e2602a]" /> : <span className="w-4 flex-shrink-0" />}
         </button>
 
-        <p className="text-[9px] font-black font-mono uppercase tracking-[0.25em] text-[#5a5246] mt-6 mb-1">On the record</p>
+        <div className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#5a5246] pt-4 pb-1">On the record</div>
         {filled.map(s => (
           <button
             key={s.id}
             type="button"
             onClick={() => onSelect(s.id)}
-            className="w-full flex items-center gap-2.5 py-3 min-h-[52px] border-b border-[#141210]/15 text-left active:bg-[#141210]/5"
+            className="w-full flex items-center gap-2.5 py-2.5 min-h-[44px] border-b border-[#141210]/15 text-left active:bg-[#141210]/5"
           >
             <SignalCode code={s.code} />
-            <span className="flex-1 min-w-0 text-[12px] font-black font-mono uppercase text-[#141210] truncate">{s.label}</span>
-            <span className="flex-shrink-0 text-[10px] font-mono text-[#5a5246]">{s.count}</span>
+            <span className="flex-1 min-w-0 truncate text-[12px] font-black font-mono uppercase text-[#141210]">{s.label}</span>
+            <span className="flex-shrink-0 text-[11px] font-mono text-[#5a5246]">{s.count}</span>
             {selected === s.id ? <Check className="w-4 h-4 flex-shrink-0 text-[#e2602a]" /> : <span className="w-4 flex-shrink-0" />}
           </button>
         ))}
 
         {empty.length > 0 && (
           <>
-            <p className="text-[9px] font-black font-mono uppercase tracking-[0.25em] text-[#5a5246] mt-6 mb-1">
+            <div className="text-[11px] font-mono uppercase tracking-[0.14em] text-[#5a5246] pt-4 pb-1">
               Nothing yet — {empty.length}
-            </p>
-            <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-1">
+            </div>
+            <div className="text-[11px] font-mono text-[#5a5246] leading-relaxed pb-1">
               Where the record is thinnest. Each one opens the form with its subject already set.
-            </p>
+            </div>
             {empty.map(s => (
               <button
                 key={s.id}
                 type="button"
                 onClick={() => onAdd(s)}
-                className="w-full flex items-center gap-2.5 py-3 min-h-[52px] border-b border-[#141210]/10 text-left active:bg-[#e2602a]/10"
+                className="w-full flex items-center gap-2.5 py-2.5 min-h-[44px] border-b border-[#141210]/10 text-left active:bg-[#e2602a]/10"
               >
                 <SignalCode code={s.code} />
                 <span className="flex-1 min-w-0">
-                  <span className="block text-[12px] font-black font-mono uppercase text-[#5a5246] truncate">{s.label}</span>
-                  <span className="block text-[9px] font-mono uppercase tracking-widest text-[#e2602a] mt-0.5">Send one in</span>
+                  <span className="block truncate text-[12px] font-black font-mono uppercase text-[#5a5246]">{s.label}</span>
+                  <span className="block text-[11px] font-mono uppercase tracking-[0.1em] text-[#e2602a] mt-0.5">Send one in</span>
                 </span>
-                <Plus className="w-4 h-4 text-[#e2602a] flex-shrink-0" />
+                <Plus className="w-4 h-4 flex-shrink-0 text-[#e2602a]" />
               </button>
             ))}
           </>
         )}
 
-        <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mt-6">
+        <div className="text-[11px] font-mono text-[#5a5246] leading-relaxed py-4">
           A subject is on this list whether or not the record holds anything under it — the taxonomy was
           given, not built from what we happened to have. Every entry still needs its source and a person to
           sign it.
-        </p>
+        </div>
       </div>
-    </div>,
-    document.body
+    </div>
   );
 }
