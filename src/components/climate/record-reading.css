@@ -250,6 +250,33 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
   .x-equals-x-light { animation: none; opacity: 1; }
 }
 
+/* ── THE BOOK IS A SHEET OF PAPER, ON EVERY GLASS ────────────────────────────────
+   This rule began as a wide-screen correction and it was the wrong width for the right
+   idea. The fault it answered — a sentence sitting on top of a painting, however faint,
+   reads as a sentence out of focus — was never a desktop fault. On a phone it was worse,
+   because there the sheet filled the whole glass and the painting was at fourteen per
+   cent under it: a reader saw a murk they could not name. That murk is what "blurry"
+   meant. Nothing was filtered and nothing was softened; a photograph under tracing paper
+   simply is not a photograph.
+
+   So the sheet holds its own paper at every width, and the painting is shown at the
+   strength it was painted for, in the room around the page. */
+.record-book {
+  background-color: rgb(var(--record-paper));
+  box-shadow:
+    0 0 0 1px rgb(var(--record-ink) / 0.14),
+    0 16px 44px -26px rgb(var(--record-ink) / 0.5);
+}
+
+/* ── AND A PHONE GIVES THE SHEET A MARGIN ────────────────────────────────────────
+   A hair of the room either side, so the page is a page standing on something rather
+   than a full-screen wall with a picture hidden behind it. Twelve pixels is the whole of
+   the decision and it is one number: wide enough for the ground to be seen as ground,
+   narrow enough that no line of any page loses a word to it. */
+@media (max-width: 1023px) {
+  .record-book { margin-inline: 12px; }
+}
+
 @media (min-width: 1024px) {
   /* ── THE BOOK HOLDS ITS OWN SHEET ON A DESK ───────────────────────────────────
      The painting was coming up through the reading column — a hair of it through every
@@ -264,24 +291,108 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
   .record-book {
     max-width: 1100px;
     margin-inline: auto;
-    background-color: rgb(var(--record-paper));
     box-shadow:
       0 0 0 1px rgb(var(--record-ink) / 0.12),
       0 34px 90px -34px rgb(var(--record-ink) / 0.5);
   }
-  /* ── THE PAINTING IS A ROOM, NOT A COAT OF PAINT ───────────────────────────────
-     This value has been argued over three times, and the argument is worth keeping.
-     At fifty-two per cent the plate was doing two jobs at once and neither well: too
-     faint to be looked at, too strong to be behind anything, and half a plate of a sky
-     that carries noise at the level of the pixel is a field of static — the "blurry
-     stars". At thirty-six it stopped being decoration and became light in the room, but
-     the column above it was still a hair translucent, so a few per cent of the painting
-     came up under the words and a sentence that was perfectly sharp looked out of focus.
-     The fault was never the strength. It was the painting being under text at all.
-     Now the column holds its own sheet, so the plate can be shown at full strength
-     either side of it — where there is nothing to read and nothing to spend. Nobody
-     loses contrast, and the reader finally sees the painting that was always there.
-     Held through the strength, not an important opacity, so the fade still runs and the
-     painting still comes up to exactly the value it was tuned to. */
-  .record-ground { --cover-strength: 0.9 !important; }
+}
+
+/* ── THE PAINTING IS A ROOM, NOT A COAT OF PAINT ─────────────────────────────────
+   This value has been argued over three times, and the argument is worth keeping.
+   At fifty-two per cent the plate was doing two jobs at once and neither well: too faint
+   to be looked at, too strong to be behind anything, and half a plate of a sky that
+   carries noise at the level of the pixel is a field of static — the "blurry stars".
+   At thirty-six it stopped being decoration and became light in the room. The fault was
+   never the strength; it was the painting standing under text.
+   Now no word stands on it at all, so it can be shown for what it is: the earth, in
+   colour, with the sea and the weather on it and the dark of space around it. No reader
+   loses a point of contrast — the sheet above it is solid paper — and the ground is the
+   same at every width, because a phone was always owed the room as much as a desk was. */
+.record-ground { --cover-strength: 0.9; }
+
+/* ── THE SKY, DRAWN ONCE ─────────────────────────────────────────────────────────
+   What the painting cannot say by itself is that the sky is a place rather than a
+   backdrop: it is the one thing up there that holds still. So the stars are placed by
+   hand, one gradient each, and they are placed once — no tiling, because three
+   overlapping lattices of stars at coprime sizes read as a grid the second a reader
+   looks for longer than that, and this record is a thing people look at.
+   They fall away towards the bottom of the frame, where the painting turns to earth and
+   weather and a star up there would be a lie.
+
+   The mask does that, one horizontal fade, and a screen blend keeps a star from ever
+   darkening the painting underneath it. Cost: one composited layer, painted once. */
+.record-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.record-sky-stars {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  background-image:
+    radial-gradient(circle at 7% 11%, rgba(255,248,233,.92) 0 .8px, rgba(255,248,233,0) 1.3px),
+    radial-gradient(circle at 14% 27%, rgba(255,247,226,.6) 0 .6px, rgba(255,247,226,0) 1.1px),
+    radial-gradient(circle at 21% 8%, rgba(198,226,240,.7) 0 .7px, rgba(198,226,240,0) 1.2px),
+    radial-gradient(circle at 27% 21%, rgba(255,248,233,.85) 0 .9px, rgba(255,248,233,0) 1.4px),
+    radial-gradient(circle at 33% 4%, rgba(255,247,226,.5) 0 .6px, rgba(255,247,226,0) 1px),
+    radial-gradient(circle at 39% 33%, rgba(255,248,233,.75) 0 .7px, rgba(255,248,233,0) 1.2px),
+    radial-gradient(circle at 44% 15%, rgba(214,232,244,.6) 0 .6px, rgba(214,232,244,0) 1.1px),
+    radial-gradient(circle at 51% 29%, rgba(255,248,233,.9) 0 .8px, rgba(255,248,233,0) 1.3px),
+    radial-gradient(circle at 57% 7%, rgba(255,247,226,.55) 0 .6px, rgba(255,247,226,0) 1px),
+    radial-gradient(circle at 63% 24%, rgba(255,248,233,.8) 0 .7px, rgba(255,248,233,0) 1.2px),
+    radial-gradient(circle at 69% 12%, rgba(198,226,240,.65) 0 .6px, rgba(198,226,240,0) 1.1px),
+    radial-gradient(circle at 74% 31%, rgba(255,248,233,.7) 0 .7px, rgba(255,248,233,0) 1.2px),
+    radial-gradient(circle at 81% 9%, rgba(255,247,226,.85) 0 .8px, rgba(255,247,226,0) 1.3px),
+    radial-gradient(circle at 88% 22%, rgba(255,248,233,.6) 0 .6px, rgba(255,248,233,0) 1px),
+    radial-gradient(circle at 94% 14%, rgba(214,232,244,.7) 0 .7px, rgba(214,232,244,0) 1.2px),
+    radial-gradient(circle at 4% 38%, rgba(255,248,233,.55) 0 .6px, rgba(255,248,233,0) 1px),
+    radial-gradient(circle at 11% 51%, rgba(255,247,226,.45) 0 .6px, rgba(255,247,226,0) 1px),
+    radial-gradient(circle at 18% 43%, rgba(255,248,233,.65) 0 .7px, rgba(255,248,233,0) 1.2px),
+    radial-gradient(circle at 30% 55%, rgba(198,226,240,.5) 0 .6px, rgba(198,226,240,0) 1px),
+    radial-gradient(circle at 46% 48%, rgba(255,248,233,.6) 0 .6px, rgba(255,248,233,0) 1.1px),
+    radial-gradient(circle at 59% 57%, rgba(255,247,226,.45) 0 .6px, rgba(255,247,226,0) 1px),
+    radial-gradient(circle at 66% 41%, rgba(255,248,233,.7) 0 .7px, rgba(255,248,233,0) 1.2px),
+    radial-gradient(circle at 78% 52%, rgba(214,232,244,.5) 0 .6px, rgba(214,232,244,0) 1px),
+    radial-gradient(circle at 85% 39%, rgba(255,248,233,.55) 0 .6px, rgba(255,248,233,0) 1px),
+    radial-gradient(circle at 96% 47%, rgba(255,247,226,.5) 0 .6px, rgba(255,247,226,0) 1px),
+    radial-gradient(circle at 9% 66%, rgba(255,248,233,.4) 0 .6px, rgba(255,248,233,0) 1px),
+    radial-gradient(circle at 37% 71%, rgba(198,226,240,.35) 0 .6px, rgba(198,226,240,0) 1px),
+    radial-gradient(circle at 71% 68%, rgba(255,248,233,.38) 0 .6px, rgba(255,248,233,0) 1px),
+    radial-gradient(circle at 91% 62%, rgba(255,247,226,.34) 0 .6px, rgba(255,247,226,0) 1px);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 40%, rgba(0,0,0,.45) 62%, transparent 78%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 40%, rgba(0,0,0,.45) 62%, transparent 78%);
+}
+
+/* ── AND ONCE IN A WHILE, SOMETHING CROSSES ──────────────────────────────────────
+   Rarity is the whole of it. One crosses about every minute and a fifth, the second on
+   its own much slower clock an offset behind it, and neither is on the glass for longer
+   than two seconds. A reader who is not looking up at that moment never sees one, which
+   is exactly what makes catching one worth anything at all. Transform and opacity only,
+   on an eight-pixel object, so the compositor carries it and the page never repaints. */
+.record-sky-streak {
+  position: absolute;
+  top: 15%;
+  left: 0;
+  width: 148px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,246,226,0) 0%, rgba(255,246,226,.7) 58%, rgba(255,255,255,.95) 100%);
+  opacity: 0;
+  transform: translate3d(-22vw, 0, 0) rotate(12deg);
+  animation: record-sky-streak 71s cubic-bezier(.33, 0, .67, 1) infinite;
+}
+.record-sky-streak-late {
+  top: 33%;
+  width: 104px;
+  animation-duration: 113s;
+  animation-delay: 37s;
+}
+@keyframes record-sky-streak {
+  0%, 96.4% { opacity: 0; transform: translate3d(-22vw, 0, 0) rotate(12deg); }
+  96.9% { opacity: .9; }
+  98.7% { opacity: .9; }
+  100% { opacity: 0; transform: translate3d(84vw, 26vh, 0) rotate(12deg); }
 }

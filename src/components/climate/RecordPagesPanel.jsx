@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
+import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
 import { markFor } from '@/components/climate/pageMarks';
 
@@ -46,6 +47,19 @@ export default function RecordPagesPanel({ open, onClose }) {
   // rather than torn out of the frame.
   const [mounted, setMounted] = useState(false);
   const [leaving, setLeaving] = useState(false);
+
+  // ── AND IT IS SEEN TO COME DOWN, NOT TO BLINK IN ────────────────────────────────
+  // Mounted and animated in the same frame is what "clunky" actually was. A sheet that
+  // is put into the document and started in the same frame is painted by some browsers
+  // already part-way through its own animation, or on the frame after it has finished —
+  // so the one motion the sheet has is the one motion the reader does not get. One frame
+  // of stillness before the motion costs nothing and guarantees the whole of it is seen.
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    if (!mounted) { setShown(false); return undefined; }
+    const frame = requestAnimationFrame(() => setShown(true));
+    return () => cancelAnimationFrame(frame);
+  }, [mounted]);
 
   // ── A DESK IS NOT A PHONE, AND THE LOCK IS THE DIFFERENCE ─────────────────────
   // On a handset the sheet covers the glass, so the page behind is held still. On a desk it
@@ -108,7 +122,7 @@ export default function RecordPagesPanel({ open, onClose }) {
       ref={dialogRef}
       id="record-contents"
       aria-labelledby="record-contents-title"
-      data-state={leaving ? 'out' : 'in'}
+      data-state={leaving ? 'out' : shown ? 'in' : 'pre'}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
       onClick={onDialogClick}
       className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
@@ -149,6 +163,22 @@ export default function RecordPagesPanel({ open, onClose }) {
           </div>
 
           <div className="mt-3 shrink-0 border-t border-record-ink pt-2.5">
+            {/* ── THE TONGUE, WHERE THE WAY THROUGH IS ───────────────────────────────
+                It stands on the masthead, opposite the record's own name, and that is
+                still where it belongs: the record signing on the left, the reader
+                answering on the right. But a reader who has opened this sheet has said
+                by opening it that they are looking for a way to change something, and
+                sending them back out to the masthead for the one control that changes
+                the voice of the page is a dead end this record should not have. Same
+                list, same component, same promise — the tongue names itself, and there
+                is no second copy of it to drift. */}
+            <div className="flex items-center justify-between gap-3 px-1">
+              <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
+                Read it in your own tongue
+              </span>
+              <RecordTongueDoor size={22} inline />
+            </div>
+
             {/* ── ONE FOOT, AND IT IS DRAWN LIKE EVERYTHING ABOVE IT ─────────────────
                 The tongue was the leftover in this pair — it was parked here when it had
                 no home anywhere, and then took its own place on the masthead's name line,

@@ -12,6 +12,7 @@ import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
+import RecordSky from '@/components/climate/RecordSky';
 import RecordGrain from '@/components/climate/RecordGrain';
 import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
 
@@ -157,7 +158,11 @@ export default function ClimateLayout({ children, currentPage }) {
         never seen it before. The machine keeps its voice for the facts (every label, count,
         source and button still carries it); the sentences people wrote, and the sentences
         people read, are set in a face meant for reading. */}
-    <div className="climate-record record-field min-h-screen bg-record-paper" style={{ fontFamily: 'var(--font-body)', '--record-cover': `url("${IMAGES.cover}")` }}>
+    {/* No paper on the root any more. It was painted here as well as on the book, so the
+        painting had nowhere to be seen on a phone — the sheet filled the glass and the
+        ground underneath it was covered twice over. The paper belongs to the book; the
+        root is the room the book stands in. */}
+    <div className="climate-record record-field min-h-screen" style={{ fontFamily: 'var(--font-body)', '--record-cover': `url("${IMAGES.cover}")` }}>
       {/* THE FIELD ─────────────────────────────────────────────────────────────────────
           The cover, laid under the whole record and pinned there — the same canvas, at the
           same scale, on every page, in every tongue. Not a decorative splash behind one
@@ -175,7 +180,12 @@ export default function ClimateLayout({ children, currentPage }) {
         {/* Held further back than it was. The cover is the room, not the wallpaper: at
             twenty-three per cent it was still reading as texture behind the page and
             nothing looked clean. */}
-        <RecordCover position="center 42%" strength={0.14} priority className="record-ground" />
+        <RecordCover position="center 42%" strength={0.9} priority className="record-ground" />
+        {/* ── AND THE SKY ABOVE IT ──────────────────────────────────────────────────
+            The painting is the planet. What it cannot hold on its own is the fact that the
+            sky is a place: stars held still, and now and then something crossing in front
+            of them. See RecordSky — it costs one layer and asks to be watched by nobody. */}
+        <RecordSky />
         {/* The sheet has a surface, not just a colour: tooth and foxing over the painting,
             under every word. See RecordGrain — it is drawn, not downloaded. */}
         <RecordGrain />
