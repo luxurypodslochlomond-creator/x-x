@@ -724,9 +724,9 @@ export default function TogetherChangeClimate() {
           <div className="lg:w-[320px] lg:flex-shrink-0">
             <button
               onClick={() => setShowSubmit(true)}
-              className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+              className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-1.5 px-3 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[11px] lg:text-[10px] font-black font-mono uppercase whitespace-nowrap border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
             >
-              <Plus className="w-4 h-4" /> Submit a solution, crisis, action, or group
+              <Plus className="w-3.5 h-3.5 flex-shrink-0" /> Submit a solution, crisis, group or action
             </button>
             <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-2">
               Been sent an email? Paste it in — we read it and fill the form in for you. No account needed, nothing to install.
