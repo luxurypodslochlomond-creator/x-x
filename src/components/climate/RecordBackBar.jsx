@@ -13,7 +13,7 @@ import { ArrowLeft } from 'lucide-react';
    It was a black-rimmed block with a fat arrow in it — a button from another product
    sitting under a printed page. It is now a hairline and a drawn arrow in the record's
    own ink: the same hand as the doors, so the way out belongs to the same book. */
-export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClimate', right }) {
+export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClimate', right, onBack, label }) {
   const back = useRecordBack(fallback);
 
   return (
@@ -21,11 +21,12 @@ export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClim
       <div className="mx-auto flex max-w-[1100px] items-center gap-3 px-4 py-2 lg:px-10">
         <button
           type="button"
-          onClick={back}
-          aria-label="Back"
-          className="flex min-h-[44px] min-w-[44px] items-center justify-center text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
+          onClick={onBack || back}
+          aria-label={label || 'Back'}
+          className="flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center gap-2 text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
         >
           <ArrowLeft className="h-5 w-5" strokeWidth={1.6} />
+          {label && <span className="font-body text-sm">{label}</span>}
         </button>
         <span className="min-w-0 truncate font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">
           {eyebrow}

@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useRecordSearch from '@/components/climate/useRecordSearch';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import RecordSearchLine from '@/components/climate/RecordSearchLine';
 import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
@@ -32,66 +32,7 @@ const SECTIONS = [
 ];
 
 export default function ClimateSearch() {
-  const navigate = useNavigate();
-  const [query, setQuery] = useState(() => new URLSearchParams(window.location.search).get('q') || '');
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const run = useCallback(async (text) => {
-    const q = String(text || '').trim();
-    if (q.length < 2) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await base44.functions.invoke('climateSearch', {
-        q,
-        lang: (typeof navigator !== 'undefined' && navigator.language) || 'en',
-      });
-      setData(res.data);
-    } catch (e) {
-      setError('The record could not be searched just now. Please try again.');
-      setData(null);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  // A search that arrives in the address is answered on the way in.
-  useEffect(() => {
-    const initial = new URLSearchParams(window.location.search).get('q');
-    if (initial && initial.trim().length >= 2) run(initial);
-  }, [run]);
-
-  const submit = (e) => {
-    e.preventDefault();
-    const q = query.trim();
-    if (q.length < 2) return;
-    navigate(`/ClimateSearch?q=${encodeURIComponent(q)}`, { replace: true });
-    run(q);
-  };
-
-  const onVoice = useCallback(
-    (text, isFinal) => {
-      setQuery(text);
-      if (isFinal && text.trim().length >= 2) {
-        navigate(`/ClimateSearch?q=${encodeURIComponent(text.trim())}`, { replace: true });
-        run(text);
-      }
-    },
-    [navigate, run]
-  );
-
-  // A subject tapped from the record's own list runs exactly the same search as typing it:
-  // one question, one address, and no second way of doing things.
-  const pick = useCallback(
-    (name) => {
-      setQuery(name);
-      navigate(`/ClimateSearch?q=${encodeURIComponent(name)}`, { replace: true });
-      run(name);
-    },
-    [navigate, run]
-  );
+  const { query, start, back, data, loading, error } = useRecordSearch();
 
   const results = data?.results;
   const sections = results ? SECTIONS.map((s) => ({ ...s, items: results[s.key] || [] })).filter((s) => s.items.length > 0) : [];
@@ -100,6 +41,9 @@ export default function ClimateSearch() {
 
   return (
     <ClimateRecordShell
+      mobileCompact
+      onBack={back}
+      backLabel="Back"
       eyebrow="Search the record"
       marker="Every entry carries its origin"
       title="Ask the record"
@@ -110,26 +54,23 @@ export default function ClimateSearch() {
     >
       <RecordSearchLine
         value={query}
-        onChange={setQuery}
-        onSubmit={submit}
-        onVoice={onVoice}
+        onSearch={start}
         loading={loading}
-        canSearch={query.trim().length >= 2}
       />
 
       <div className={data || loading ? 'hidden lg:block' : ''}>
-        <RecordSearchPrompts onPick={pick} disabled={loading} />
+        <RecordSearchPrompts onPick={start} disabled={loading} />
       </div>
 
       {loading && (
-        <p className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
+        <p role="status" className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#b3261e]" />
           Reading the whole record…
         </p>
       )}
 
       {!loading && error && (
-        <p className="mt-10 text-center text-[11px] font-mono uppercase tracking-widest text-[#b3261e]">{error}</p>
+        <p role="alert" className="mt-10 text-center text-[11px] font-mono uppercase tracking-widest text-[#b3261e]">{error}</p>
       )}
 
       {!loading && !error && data && (

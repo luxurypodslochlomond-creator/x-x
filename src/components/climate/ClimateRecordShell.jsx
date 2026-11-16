@@ -15,16 +15,16 @@ import { MarkEqual } from '@/components/climate/RecordFootMarks';
 // once. Nothing was removed — the eyebrow, the statement, the foot and the credit are all
 // still said. `compact` still drops the opening block for the rooms where somebody has come
 // to work rather than to read.
-export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, className = '', children }) {
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, mobileCompact = false, onBack, backLabel, className = '', children }) {
   return (
     <div dir={dir} className={`climate-record relative min-h-screen bg-record-paper text-record-ink ${className}`} style={{ fontFamily: 'var(--font-body)' }}>
-      <RecordBackBar eyebrow={eyebrow} fallback={returnTo} />
+      <RecordBackBar eyebrow={eyebrow} fallback={returnTo} onBack={onBack} label={backLabel} />
 
       {!compact && (
         <div className="record-shell-opening border-b border-record-ink/15">
-          <div className="mx-auto max-w-[1100px] px-4 py-9 lg:px-10 lg:py-12">
+          <div className={`mx-auto max-w-[1100px] px-4 lg:px-10 lg:py-12 ${mobileCompact ? 'py-5' : 'py-9'}`}>
             {marker && (
-              <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">{marker}</p>
+              <p className={`font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted ${mobileCompact ? 'hidden lg:block' : ''}`}>{marker}</p>
             )}
             <h1
               className="mt-2 max-w-[24ch] text-[27px] leading-[1.08] lg:text-[42px]"
@@ -33,14 +33,14 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
               {title}
             </h1>
             {statement && (
-              <p className="mt-3 max-w-[48ch] text-[13.5px] leading-relaxed text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
+              <p className={`mt-3 max-w-[48ch] text-[13.5px] leading-relaxed text-record-muted ${mobileCompact ? 'hidden lg:block' : ''}`} style={{ fontFamily: 'var(--font-reading)' }}>
                 {statement}
               </p>
             )}
             {/* The mark, and the way to what it means — carried on every page of the record. */}
             <Link
               to="/XEqualsX"
-              className="mt-5 inline-flex items-center gap-2 text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
+              className={`mt-5 items-center gap-2 text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red ${mobileCompact ? 'hidden lg:inline-flex' : 'inline-flex'}`}
             >
               <MarkEqual size={26} />
               <span className="font-mono text-[11.5px] uppercase tracking-[0.18em]">Why this record</span>
@@ -49,7 +49,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
         </div>
       )}
 
-      <div className={`record-shell-content mx-auto max-w-2xl px-4 lg:max-w-3xl ${compact ? 'py-4 lg:py-8' : 'py-8 lg:py-14'}`}>{children}</div>
+      <div className={`record-shell-content mx-auto max-w-2xl px-4 lg:max-w-3xl ${compact ? 'py-4 lg:py-8' : mobileCompact ? 'py-4 lg:py-14' : 'py-8 lg:py-14'}`}>{children}</div>
 
       {/* The way back to the record, stated once, in the record's own hand. */}
       <div className="record-shell-return border-t border-record-ink/15">
