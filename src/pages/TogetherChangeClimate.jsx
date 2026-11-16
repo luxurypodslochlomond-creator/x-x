@@ -321,6 +321,21 @@ export default function TogetherChangeClimate() {
   // Existing hand-written translations are seeded above, keyed by that exact source.
   const t = T.en;
 
+  // ── ONE PIGMENT PER ROOM ───────────────────────────────────────────────────────
+  // Green for what works, red for what is burning, ochre for the people gathered,
+  // orange for what is being done. Before, Groups wore Solutions' green and every door
+  // flashed orange on hover — so three doors borrowed the Actions colour and only the
+  // crises door looked like itself. A door now holds its own colour and nothing else:
+  // ink until it is chosen, then the pigment its own section heading, card edge and
+  // button already carry.
+  const doors = [
+    { key: 'solution', label: t.solutions, on: 'bg-[#1e3a2b] text-[#efe7d6]' },
+    { key: 'climate_crisis', label: t.crises_short, on: 'bg-[#b3261e] text-[#efe7d6]' },
+    { key: 'groups', label: t.groups, on: 'bg-[#9b6f28] text-[#efe7d6]' },
+    { key: 'actions', label: t.actions, on: 'bg-[#e2602a] text-[#141210]' },
+  ];
+  const openDoor = doors.find(d => d.key === selectedType);
+
   // One matching rule for the record's own box, and it is the rule the full search uses:
   // every word you type has to appear somewhere in the entry, in any order. Before, the
   // words had to sit together as one phrase, so an obvious search like "seagrass
@@ -661,19 +676,15 @@ export default function TogetherChangeClimate() {
                 can no longer break, whatever the label or the tongue. Colours unchanged:
                 the open door is filled, the rest stay the record's ink. */}
             <div className="grid grid-cols-4 gap-1.5 mb-3 lg:max-w-[540px]">
-              {[
-                { key: 'solution', label: t.solutions, on: 'bg-[#1e3a2b] text-[#efe7d6]', off: 'hover:bg-[#e2602a] hover:text-[#141210]' },
-                { key: 'climate_crisis', label: t.crises_short, on: 'bg-[#b3261e] text-[#efe7d6]', off: 'hover:bg-[#b3261e] hover:text-[#efe7d6]' },
-                { key: 'groups', label: t.groups, on: 'bg-[#1e3a2b] text-[#efe7d6]', off: 'hover:bg-[#e2602a] hover:text-[#141210]' },
-                { key: 'actions', label: t.actions, on: 'bg-[#e2602a] text-[#141210]', off: 'hover:bg-[#e2602a] hover:text-[#141210]' },
-              ].map(d => (
+              {doors.map(d => (
                 <button
                   key={d.key}
                   onClick={() => setSelectedType(selectedType === d.key ? 'all' : d.key)}
-                  className={`flex items-center justify-center text-center min-w-0 px-1 py-2.5 min-h-[44px] text-[10px] font-black font-mono uppercase leading-none border transition-colors duration-150 active:scale-95 ${
+                  aria-pressed={selectedType === d.key}
+                  className={`flex items-center justify-center text-center min-w-0 px-1 py-2.5 min-h-[44px] text-[10px] font-black font-mono uppercase leading-none border border-[#141210] transition-colors duration-150 active:scale-95 ${
                     selectedType === d.key
-                      ? `${d.on} border-[#141210]`
-                      : `bg-[#141210] text-[#efe7d6] border-[#141210] ${d.off}`
+                      ? d.on
+                      : 'bg-[#141210] text-[#efe7d6] hover:bg-[#2a231c]'
                   }`}
                 >{d.label}</button>
               ))}
@@ -770,6 +781,25 @@ export default function TogetherChangeClimate() {
           </div>
         ) : (
           <>
+            {/* ── WHICH ROOM YOU ARE STANDING IN ─────────────────────────────────────
+                A door narrows the record to one kind and carries you down to it, which used
+                to leave the doors off-screen with nothing on the page saying which room you
+                were in — the only way back was to remember to tap the same door again. This
+                line says it, in the record's voice, and takes you back to all four. A line,
+                not a bar of controls. */}
+            {openDoor && (
+              <button
+                onClick={() => setSelectedType('all')}
+                className="w-full flex items-center justify-between gap-3 px-4 lg:px-10 pt-5 pb-3 text-left"
+              >
+                <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#3a342c]">
+                  Showing {openDoor.label} only
+                </span>
+                <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e]">
+                  All four →
+                </span>
+              </button>
+            )}
             {showEntries && solutions.length > 0 && (
               <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-[#1e3a2b]" />
@@ -835,7 +865,7 @@ export default function TogetherChangeClimate() {
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {(selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="text-[#1e3a2b]" />
+            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="text-[#9b6f28]" />
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-2">{t.groups_sub}</p>
             {/* Said out loud, on the section itself, so nobody has to guess how far the record
                 has gone for them. A group is an introduction the organiser wrote; it carries no
@@ -844,7 +874,7 @@ export default function TogetherChangeClimate() {
             <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">Carried, not checked: this is the organiser's own line. Write to them and decide for yourself.</p>
             <button
               onClick={() => { setSubmitType('group'); setShowSubmit(true); }}
-              className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#1e3a2b] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
+              className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#9b6f28] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#7d581f] active:text-[#efe7d6] transition-colors"
             >
               <Users className="w-4 h-4" /> Start a group
             </button>
@@ -852,12 +882,12 @@ export default function TogetherChangeClimate() {
             {filteredGroups.length > 0 ? (
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
                 {filteredGroups.map(g => (
-                  <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
+                  <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#9b6f28] p-3.5">
                     <h4 className="text-[13.5px] font-black text-[#141210] leading-snug">{g.name}</h4>
                     {g.topic && (
-                      <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
+                      <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#9b6f28] border border-[#9b6f28] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
                     )}
-                    <div className="flex items-center gap-1.5 text-[#1e3a2b] mt-1.5">
+                    <div className="flex items-center gap-1.5 text-[#9b6f28] mt-1.5">
                       <MapPin className="w-3 h-3" />
                       <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
