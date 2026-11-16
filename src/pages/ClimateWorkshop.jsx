@@ -3,41 +3,39 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Printer } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import WorkshopStrip from '@/components/climate/workshop/WorkshopStrip';
 import { buildWorkshopShareCard, WORKSHOP_CARD } from '@/components/climate/workshopCard';
 
 // ── THE 29TH, WRITTEN DOWN SO NOBODY HAS TO WRITE IT ────────────────────────────
 // Janine asked for the agenda and the details. This is that, in one address she can send
-// to CEEW, to the festival's curator, or to a classroom — and it is written as a proposal,
-// because it is hers to cut: the hour belongs to the person giving it, and a page that
-// pretended otherwise would be us taking her session off her in the name of helping.
+// to CEEW, to the festival's curator, or to a classroom — written as a proposal, because
+// the hour is hers to cut, and a page that pretended otherwise would be us taking her
+// session off her in the name of helping.
 //
-// Three rules hold the page together. Nothing personal is on it: no addresses, no phone
-// numbers, no joining link, because a workshop's link is hers to hand out and her guests'
-// details are theirs. Everything about the festival is in the festival's own words. And
-// the offer is deliberately small — one eight-minute block about the record inside an hour
-// about African youth and democracy, because a longer one would be a different workshop.
+// It used to open with four paragraphs, which is exactly the fault it was warning against:
+// a workshop about drawings that had to be read to be understood. So the page now opens
+// with the strip, and the strip ends in an empty frame. A reader who never reads a word of
+// it still knows what the hour is: five frames, then the room's own.
+//
+// Three rules hold it together. Nothing personal is on it: no addresses, no phone numbers,
+// no joining link, because a workshop's link is hers to hand out and her guests' details
+// are theirs. Everything about the festival is in the festival's own words. And the offer
+// stays small — one eight-minute block about the record inside an hour about African youth
+// and democracy, because a longer one would be a different workshop.
 
 const HOUR = [
-  ['00:00', 'Four minutes · Why this hour exists', 'A cartoon can hold a hard idea without frightening the person holding it. That is the whole reason this is a workshop about drawings rather than a talk with slides.'],
+  ['00:00', 'Four minutes · Why this hour exists', 'A cartoon can hold a hard idea without frightening the person holding it. That is why this is a workshop about drawings rather than a talk with slides.'],
   ['00:04', 'Eight minutes · Three drawings, shown whole', 'Three cartoons from What On Earth!, with their credit kept on them. One question asked of the room and not answered for it: what did that make you feel, before it told you anything?'],
   ['00:12', 'Six minutes · How a fortnightly cartoon gets made', 'The idea, the artist, the science check, the publish — from the team who make them, if they join the discussion.'],
-  ['00:18', 'Eight minutes · Why collective action needs a record', 'One entry, its source, its seal, its keeper. No product, no sign-up, no price. Eight minutes, because eight is what this is worth to a room that came to draw.'],
-  ['00:26', 'Nineteen minutes · The draw', 'A strip is put up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil. No words needed: a panel without words reads in any tongue, and this record speaks sixty-five.'],
+  ['00:18', 'Eight minutes · Why collective action needs a record', 'One entry, its source, its seal, its keeper. No product, no sign-up, no price.'],
+  ['00:26', 'Nineteen minutes · The draw', 'The strip goes up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil.'],
   ['00:45', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.'],
-  ['00:52', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown. Nothing is sold and nothing is ranked.'],
+  ['00:52', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown.'],
   ['00:58', 'Two minutes · One ask', 'Draw one more, next week, somewhere that is not a workshop — and send it.'],
 ];
 
-const NOT_IN_IT = [
-  'No pitch and no logo slide.',
-  'No sign-up, no account and no price.',
-  'Nothing to install, on any phone in the room.',
-  'No ranking of anybody’s drawing.',
-  'No addresses collected beyond the name a person chooses to sign.',
-];
-
 const Section = ({ n, title, children }) => (
-  <section className="mt-9">
+  <section className="mt-8">
     <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-record-red">{n}</p>
     <h2 className="mt-1 text-[19px] leading-tight" style={{ fontFamily: 'var(--font-display)' }}>{title}</h2>
     <div className="mt-3">{children}</div>
@@ -48,20 +46,18 @@ export default function ClimateWorkshop() {
   return (
     <ClimateRecordShell
       eyebrow="The record · 29 November 2026"
-      marker="The eighth CartoonAFRICA International Biennial"
+      marker="8th CartoonAFRICA International Biennial · Benin City"
       title="The 29th, written down"
-      statement="The hour Janine Selendy is giving at the eighth CartoonAFRICA International Biennial — set out so the room knows what it is getting, and so she has something to send instead of writing it herself."
+      statement="One hour, five frames and a blank one. The session Janine Selendy is giving, set out so the room knows what it is getting before it arrives."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."
     >
       <style>{`@media print { .no-print { display: none !important; } }`}</style>
 
-      <p className="text-[14px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-        Collective action leaves no trace unless somebody keeps it. That is the only thing this hour adds: a record that
-        holds what a room draws, with the name of the hand that drew it and nothing about the person behind the hand.
-      </p>
-      <p className="mt-3 font-mono text-[11.5px] leading-relaxed text-record-muted">
+      <WorkshopStrip />
+
+      <p className="mt-4 font-mono text-[11px] leading-relaxed text-record-muted">
         8th CartoonAFRICA International Biennial · 28–30 November 2026 · National Museum, Benin City, Edo State, Nigeria ·
         hybrid. Workshop: Sunday 29 November, 3pm West Africa (2pm in Scotland).
       </p>
@@ -69,7 +65,7 @@ export default function ClimateWorkshop() {
       <Section n="01 · The hour" title="Sixty minutes, to the minute">
         <ol className="divide-y divide-record-ink/15 border-y border-record-ink/15">
           {HOUR.map(([time, head, body]) => (
-            <li key={time} className="grid grid-cols-[3.1rem_1fr] gap-3 py-3">
+            <li key={time} className="grid grid-cols-[3.1rem_1fr] gap-3 py-2.5">
               <span className="font-mono text-[11px] font-bold tabular-nums text-record-red">{time}</span>
               <div>
                 <h3 className="font-mono text-[11.5px] font-black uppercase leading-tight">{head}</h3>
@@ -82,10 +78,8 @@ export default function ClimateWorkshop() {
 
       <Section n="02 · Afterwards" title="What happens to the drawings">
         <p className="text-[13.5px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-          Each one can be sent in from a phone, and it waits for a keeper — a person, not a filter — before it goes on the
-          wall. It is kept with three things and no more: the drawer’s name, where it came from, and one line in their own
-          words about what it is for. A drawing is never sold, never ranked and never sponsored, and the sender’s address
-          is never shown to anybody.
+          Each one can be sent in from a phone, and it waits for a keeper — a person, not a filter — before it goes up. It
+          is kept with three things and no more: the drawer’s name, where it came from, and one line in their own words.
         </p>
         <Link to="/ClimateCartoons" className="mt-3 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide underline decoration-dotted underline-offset-4">
           See the room it goes into <ArrowRight className="h-3.5 w-3.5" />
@@ -94,7 +88,12 @@ export default function ClimateWorkshop() {
 
       <Section n="03 · Boundaries" title="What is not in this hour">
         <ul className="space-y-1.5">
-          {NOT_IN_IT.map((line) => (
+          {[
+            'No pitch and no logo slide.',
+            'No sign-up, no account, no price, nothing to install.',
+            'No ranking of anybody’s drawing, and no address published.',
+            'No picture of anybody: a room that was not photographed stays undrawn.',
+          ].map((line) => (
             <li key={line} className="text-[13px] leading-relaxed text-record-ink/85">— {line}</li>
           ))}
         </ul>
@@ -107,7 +106,7 @@ export default function ClimateWorkshop() {
         </p>
       </Section>
 
-      <div className="no-print mt-9 border-t border-record-ink/15 pt-4">
+      <div className="no-print mt-8 border-t border-record-ink/15 pt-4">
         <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-record-muted">Pass it on</p>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
           <ShareCardButton entry={WORKSHOP_CARD} build={buildWorkshopShareCard} label="Send the card" />
@@ -120,7 +119,7 @@ export default function ClimateWorkshop() {
           </button>
         </div>
         <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-muted">
-          The card carries the date, the place and the shape of the hour. No addresses, no joining link, nothing about anybody.
+          The card is our own drawing: an empty frame, the date and the place. No addresses, no joining link, nothing about anybody.
         </p>
       </div>
     </ClimateRecordShell>
