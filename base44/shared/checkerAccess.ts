@@ -42,6 +42,10 @@ export async function resolveChecker(base44) {
     name: line?.name || user.full_name || user.email,
     isKeeper: Boolean(line?.is_keeper) || isAdmin,
     isChecker: true,
+    // The address of the keeper whose word put this line here, as it was written at the
+    // time. It has always been on the row and was never once shown to the person it is
+    // about — see checkerQueue, which turns it back into a name.
+    addedBy: line?.added_by || '',
   };
 }
 

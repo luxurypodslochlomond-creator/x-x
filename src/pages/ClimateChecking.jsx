@@ -185,6 +185,14 @@ export default function ClimateChecking({ plain = false, onChange }) {
             ? 'Open the link, then say what you find. Nothing here publishes or edits anything.'
             : 'Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the entry claims, and a keeper decides with your words in front of them.'}
         </p>
+        {/* Whose word this is. The row has carried the keeper's address since the place was
+            given and it was never shown to the person it is about, so a volunteer arrived on
+            a list she could not see the edge of. One line, a name, on the first morning. */}
+        {me?.invited_by && (
+          <p className="text-[12px] text-record-muted mb-2" style={{ fontFamily: 'var(--font-reading)' }}>
+            {me.invited_by} put your name on this list.
+          </p>
+        )}
         {!plain && (
           <p className="text-[12px] text-record-muted mb-5" style={{ fontFamily: 'var(--font-reading)' }}>
             {entries.length} {entries.length === 1 ? 'entry is' : 'entries are'} waiting · signed as {me?.name}

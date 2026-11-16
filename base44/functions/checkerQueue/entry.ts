@@ -121,7 +121,21 @@ export default async function (req) {
       checks = page?.items || page || [];
     }
 
-    return Response.json({ checker: { name: who.name, email: who.user.email }, entries, checks });
+    // ── WHOSE WORD PUT THEM HERE ────────────────────────────────────────────────────
+    // Brian, 16 November: "you sure the checker knows who invited them?" They did not. The
+    // row has carried added_by since the place was given and it was never once shown to the
+    // person it is about, so a volunteer's first morning told them nothing about who had
+    // vouched for them. A guest list where nobody knows whose word they are on is just a
+    // door. So it is turned back into a name here — never an address, because the keeper's
+    // address belongs to the keeper — and said plainly on the page they land on.
+    let invitedBy = '';
+    if (who.addedBy && !who.isKeeper) {
+      const keeperRows = await base44.asServiceRole.entities.ClimateChecker.filter({ email: who.addedBy });
+      const keeperList = keeperRows?.items || keeperRows || [];
+      invitedBy = (keeperList.find((r) => r.is_keeper) || keeperList[0])?.name || '';
+    }
+
+    return Response.json({ checker: { name: who.name, email: who.user.email, invited_by: invitedBy }, entries, checks });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
