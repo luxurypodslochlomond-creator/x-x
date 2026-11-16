@@ -26,6 +26,7 @@ export default function KeeperPhone() {
   const [state, setState] = useState('checking');
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState('');
+  const [how, setHow] = useState(false);
 
   const isIOS = typeof navigator !== 'undefined' && /iPhone|iPad|iPod/.test(navigator.userAgent);
   const standalone = typeof window !== 'undefined'
@@ -136,12 +137,31 @@ export default function KeeperPhone() {
     );
   }
 
+  // ── AN APPLE RULE, NOT OURS ────────────────────────────────────────────────
+  // Brian, 16 November: "why does it have to be on home screen bro? It feels weird getting
+  // overly complex." He is right that it read as homework. It is not our condition: an
+  // iPhone only delivers a web push to a site that has been put on the home screen, and no
+  // amount of building changes that. So the fact stays — told plainly, in one line — and the
+  // chore goes behind a tap, for whoever actually wants the phone to work.
   if (state === 'ios') {
     return (
-      <p className="text-[12.5px] leading-[1.55] text-[#6b5f4f] border border-[#141210]/20 p-2.5 mb-5" style={reading}>
-        <BellOff className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
-        On an iPhone the record has to be on your home screen before it can tap you: Share → Add to Home Screen, then open it from there and come back to this line.
-      </p>
+      <div className="border border-[#141210]/20 p-2.5 mb-5" style={reading}>
+        <p className="text-[12.5px] leading-[1.55] text-[#6b5f4f]">
+          <BellOff className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+          On an iPhone the record can&rsquo;t tap you yet — Apple only allows that once the record is on the home screen. Until then, letters keep coming.
+          <button
+            onClick={() => setHow(!how)}
+            className="underline ml-1 text-[11.5px] text-[#6b5f4f]"
+          >
+            {how ? 'close' : 'how'}
+          </button>
+        </p>
+        {how && (
+          <p className="text-[11.5px] leading-[1.6] text-[#6b5f4f] mt-1.5">
+            In Safari, tap Share at the bottom of the screen, then Add to Home Screen. Open the record from the icon, then come back to this line.
+          </p>
+        )}
+      </div>
     );
   }
 
