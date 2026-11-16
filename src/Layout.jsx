@@ -352,7 +352,7 @@ const LayoutInner = ({ children, currentPageName }) => {
         : isSortedPage
         ? 'Got a scary letter? Stuck in a dispute? SORTED decodes it in seconds — plain English, any language, nothing stored.'
         : isClimatePage
-        ? 'Verified climate solutions & crises — after Janine Selendy. Readable in any tongue a reader names, living or long dead. Nobody left behind. The noise is loud. The record is louder.'
+        ? 'Verified climate solutions & crises — after Janine Selendy. Readable in any tongue a reader names. Nobody left behind. The noise is loud. The record is louder.'
         : currentPageName === 'Stoneymollan'
         ? 'Mist, beeches and the whole loch beneath you: the John Muir Way over Loch Lomond, the old coffin road under it, two cairns in the wood, and cabins at the top of the road.'
         : 'An ecosystem of tools that heal. PetSounds51. CB51 for artists. SORTED for legal help. Healing frequencies. Data sovereign. Open source. No corporate capture.',

@@ -9,7 +9,7 @@ import GatheringForm from '@/components/climate/GatheringForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
-import { recordOrigin } from '@/components/climate/recordAddress';
+import { shareRecord } from '@/components/climate/shareRecordCard';
 import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
@@ -264,24 +264,14 @@ export default function TogetherChangeClimate() {
   }, []);
 
   const handleShare = async () => {
-    const origin = recordOrigin();
-    // Share through the preview service. WhatsApp, Telegram and LinkedIn do not run
-    // JavaScript, so they only ever see the app's default tags — which are SORTED's.
-    // This link carries the record's own title and image; people still land on the platform.
-    const url = origin + '/api/functions/ogRedirect?page=TogetherChangeClimate';
-    const shareData = {
-      title: 'Together we can change the course of climate change',
-      text: 'A public record of climate emergencies and the positive actions that work — in any tongue a reader names, living or long dead.',
-      url,
-    };
-    try {
-      if (navigator.share) { await navigator.share(shareData); return; }
-    } catch { /* user cancelled */ }
-    try {
-      await navigator.clipboard.writeText(url);
+    // The picture travels with the message now, drawn on this device, with the record's
+    // own address under it — not a link to the preview service. A chat shows the card at
+    // once, and the address a person reads is the record's rather than a function's.
+    const result = await shareRecord();
+    if (result === 'copied') {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch { /* fallback silently */ }
+    }
   };
 
   useEffect(() => {

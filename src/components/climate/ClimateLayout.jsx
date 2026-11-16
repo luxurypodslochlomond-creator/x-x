@@ -23,7 +23,7 @@ import { recordAddress, recordOrigin } from '@/components/climate/recordAddress'
 // x = x.
 
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
-const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — in any tongue a reader names, living or long dead.';
+const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — in any language a reader names.';
 
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.
 // The full directory lives on the existing guide page, not in a second menu on every page.
