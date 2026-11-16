@@ -653,34 +653,30 @@ export default function TogetherChangeClimate() {
       <div className="px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         <div className="lg:flex lg:items-start lg:gap-8">
           <div className="lg:flex-1 lg:min-w-0">
-            <div className="flex gap-2 mb-3 lg:max-w-[540px]">
-              <button
-                onClick={() => setSelectedType(selectedType === 'solution' ? 'all' : 'solution')}
-                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-                  selectedType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-                }`}
-              >{t.solutions}</button>
-              <button
-                onClick={() => setSelectedType(selectedType === 'climate_crisis' ? 'all' : 'climate_crisis')}
-                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-                  selectedType === 'climate_crisis' ? 'bg-[#b3261e] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#b3261e] hover:text-[#efe7d6]'
-                }`}
-              >{t.crises}</button>
-              {/* The door is on the toolbar from the start, not only once a gathering exists:
-                  a kind with no entries yet still needs its way in, and the section below
-                  carries the honest empty state for it. */}
-              <button
-                onClick={() => setSelectedType(selectedType === 'groups' ? 'all' : 'groups')}
-                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-                  selectedType === 'groups' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-                }`}
-              >{t.groups}</button>
-              <button
-                onClick={() => setSelectedType(selectedType === 'actions' ? 'all' : 'actions')}
-                className={`flex-1 px-2 py-2.5 text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-                  selectedType === 'actions' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
-                }`}
-              >{t.actions}</button>
+            {/* Four doors, one line — on a phone as well as a desk.
+                They were a flex row, and a flex row lets its longest label push the others
+                about: "Climate Crises" took the room it wanted and the fourth door kept
+                dropping onto a row of its own, which made the bar twice as deep as the words
+                in it. A fixed four-column grid gives every door the same width and the row
+                can no longer break, whatever the label or the tongue. Colours unchanged:
+                the open door is filled, the rest stay the record's ink. */}
+            <div className="grid grid-cols-4 gap-1.5 mb-3 lg:max-w-[540px]">
+              {[
+                { key: 'solution', label: t.solutions, on: 'bg-[#1e3a2b] text-[#efe7d6]', off: 'hover:bg-[#e2602a] hover:text-[#141210]' },
+                { key: 'climate_crisis', label: t.crises, on: 'bg-[#b3261e] text-[#efe7d6]', off: 'hover:bg-[#b3261e] hover:text-[#efe7d6]' },
+                { key: 'groups', label: t.groups, on: 'bg-[#1e3a2b] text-[#efe7d6]', off: 'hover:bg-[#e2602a] hover:text-[#141210]' },
+                { key: 'actions', label: t.actions, on: 'bg-[#e2602a] text-[#141210]', off: 'hover:bg-[#e2602a] hover:text-[#141210]' },
+              ].map(d => (
+                <button
+                  key={d.key}
+                  onClick={() => setSelectedType(selectedType === d.key ? 'all' : d.key)}
+                  className={`min-w-0 px-1 py-2.5 min-h-[44px] text-[9px] font-black font-mono uppercase leading-[1.15] border transition-colors duration-150 active:scale-95 ${
+                    selectedType === d.key
+                      ? `${d.on} border-[#141210]`
+                      : `bg-[#141210] text-[#efe7d6] border-[#141210] ${d.off}`
+                  }`}
+                >{d.label}</button>
+              ))}
             </div>
             <div className="my-3 lg:hidden">
               <SubjectRail
