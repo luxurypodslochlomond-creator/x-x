@@ -9,8 +9,12 @@ import RecordSearchGuide from '@/components/climate/RecordSearchGuide';
 
 // ── SEARCH THE RECORD ────────────────────────────────────────────────────────────
 // Type it or say it. One query reads everything the record holds — solutions, climate
-// crises, actions, gatherings and the wire — instead of only what a phone happened to
-// download. A search has its own address, so a panel or a reader can be sent one.
+// crises, actions, gatherings, the wire, the music given to it, the drawings on its wall
+// and the people on its roll — instead of only what a phone happened to download. A
+// search has its own address, so a panel or a reader can be sent one.
+//
+// A name finds a person only if that person wrote a line for the roll themselves. The
+// guest list stays closed; the record will not hand out who works here.
 // It wears the record's own bands, because it is part of the record, not a utility
 // bolted onto it, and every result it returns carries the origin it came from.
 
@@ -20,6 +24,9 @@ const SECTIONS = [
   { key: 'actions', kind: 'action', label: 'Actions', tone: '#e2602a' },
   { key: 'gatherings', kind: 'gathering', label: 'Gatherings', tone: '#1e3a2b' },
   { key: 'wire', kind: 'wire', label: 'On the wire', tone: '#141210' },
+  { key: 'people', kind: 'person', label: 'On the roll', tone: '#b3261e' },
+  { key: 'tracks', kind: 'track', label: 'Music given to the record', tone: '#1e3a2b' },
+  { key: 'cartoons', kind: 'cartoon', label: 'Drawings', tone: '#e2602a' },
 ];
 
 export default function ClimateSearch() {
@@ -83,7 +90,7 @@ export default function ClimateSearch() {
       eyebrow="Search the record"
       marker="Every entry carries its origin"
       title="Search the record"
-      statement="Type it or say it. One question reads the whole record — every solution, climate crisis, action, gathering and wire entry on it, in whatever language it was written in."
+      statement="Type it or say it. One question reads the whole record — every solution, climate crisis, action, gathering, wire entry, piece of music, drawing and person on its roll, in whatever language it was written in."
       returnTo="/TogetherChangeClimate"
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
@@ -125,7 +132,7 @@ export default function ClimateSearch() {
           <div className="bg-[#efe7d6] border-2 border-[#141210] p-3">
             <p className="text-[11px] font-mono text-[#141210]">
               {data.total > 0
-                ? `${data.total} ${data.total === 1 ? 'entry' : 'entries'} on the record match “${data.query}”`
+                ? `${data.total} ${data.total === 1 ? 'result' : 'results'} on the record match “${data.query}”`
                 : about.length > 0
                   ? `No entries match “${data.query}” — but the record's own pages do.`
                   : `Nothing on the record matches “${data.query}” yet`}

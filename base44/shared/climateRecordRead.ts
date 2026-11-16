@@ -14,6 +14,10 @@ export const FIELDS: Record<string, string[]> = {
   ClimateAction: ['title', 'description', 'action_type', 'region_rough', 'country', 'source_url', 'category', 'corroborating_source', 'editor', 'correction_note'],
   ClimateGroup: ['name', 'topic', 'region', 'description'],
   ClimateNews: ['headline', 'what_changed', 'replicable', 'source_name', 'source_url', 'source_author', 'publisher_type', 'where_label', 'country', 'category', 'image_credit', 'corroborating_source', 'editor', 'correction_note'],
+  // The music and the drawings. A track is searchable by the words of the song as well as
+  // its title, and a set by its tracklist, because those are the words the giver gave.
+  ClimateTrack: ['title', 'artist_name', 'statement', 'lyric', 'tracklist', 'kind', 'spec'],
+  ClimateCartoon: ['title', 'artist_name', 'origin', 'for_line', 'credit'],
 };
 
 // Words that carry no meaning on their own. Dropped before the cap, so a question asked in

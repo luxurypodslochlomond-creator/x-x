@@ -1,5 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
-import { toWords, searchRecord, searchRecordAny, scoreMatches } from '../../shared/climateRecordRead.ts';
+import { toWords, searchRecord, searchRecordAny, scoreMatches, andAll, anyOf } from '../../shared/climateRecordRead.ts';
 import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 
 // CLIMATE RECORD SEARCH — one query, every kind of entry the record holds.
@@ -15,6 +15,65 @@ import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 // one shared module, so the search and the record's own answering engine can never disagree
 // about what the record holds.
 const searchAll = (base44: any, words: string[]) => searchRecord(base44, words, 12);
+
+const countEntries = (f: any) => f.solutions.length + f.actions.length + f.gatherings.length + f.news.length;
+const countRooms = (r: any) => r.tracks.length + r.cartoons.length + r.people.length;
+
+const shapeTrack = (i: any) => ({
+  id: i.id,
+  title: i.title,
+  artist_name: i.artist_name,
+  kind: i.kind || 'other',
+  spec: i.spec || '',
+});
+
+const shapeCartoon = (i: any) => ({
+  id: i.id,
+  title: i.title || '',
+  artist_name: i.artist_name,
+  origin: i.origin || '',
+  for_line: i.for_line || '',
+});
+
+// ── THE ROLL ────────────────────────────────────────────────────────────────────
+// The only people a reader may ever find by name are the ones who wrote a line for
+// themselves. The guest list is closed, so this is read with the service role and then
+// narrowed to the two things that are already public — a name, and that person's own
+// words. No address leaves this function. A keeper who has not written a line is not
+// findable at any price, which is why a search for their name can honestly come back
+// with nothing: the record will not hand out who works here.
+const readRoll = async (base44: any, words: string[], anyOfWords: boolean) => {
+  const page = await base44.asServiceRole.entities.ClimateChecker.list('-created_date', 200);
+  const rows = page.items || page || [];
+  const holdsWords = (hay: string) =>
+    anyOfWords ? words.some((w) => hay.includes(w)) : words.every((w) => hay.includes(w));
+  return rows
+    .filter((r: any) => r.active !== false && String(r.public_line || '').trim())
+    .filter((r: any) => holdsWords(`${r.name || ''} ${r.public_line}`.toLowerCase()))
+    .slice(0, 8)
+    .map((r: any) => ({
+      id: r.id,
+      name: r.name || 'On the record’s roll',
+      role: r.is_keeper ? 'keeper' : 'checker',
+      line: String(r.public_line).trim(),
+    }));
+};
+
+// Three rooms the shared reader does not cover: the music, the drawings, and the roll.
+// Read under the same rule as every entry — every word must be held, or any of them when
+// nothing held every word, and the reader is told which of the two happened.
+const readRooms = async (base44: any, words: string[], anyOfWords: boolean, limit: number) => {
+  const q = (entity: string) => (anyOfWords ? anyOf(entity, words) : andAll(entity, words));
+  const [tracks, cartoons] = await Promise.all([
+    base44.entities.ClimateTrack.filter(q('ClimateTrack'), { limit, sort: '-created_date' }),
+    base44.entities.ClimateCartoon.filter(q('ClimateCartoon'), { limit, sort: '-created_date' }),
+  ]);
+  return {
+    tracks: tracks.items || [],
+    cartoons: cartoons.items || [],
+    people: await readRoll(base44, words, anyOfWords),
+  };
+};
 
 const shapeSolution = (i) => ({
   id: i.id,
@@ -70,7 +129,8 @@ export default async function (req) {
     }
 
     let found = await searchAll(base44, words);
-    let total = found.solutions.length + found.actions.length + found.gatherings.length + found.news.length;
+    let rooms = await readRooms(base44, words, false, 8);
+    let total = countEntries(found) + countRooms(rooms);
 
     // Nothing on the record held every word. A question asked in plain speech ("what is
     // happening to seagrass meadows") must not come back empty because one word — "happening"
@@ -86,9 +146,11 @@ export default async function (req) {
         gatherings: scoreMatches(any.gatherings, 'ClimateGroup', words),
         news: scoreMatches(any.news, 'ClimateNews', words),
       };
-      const scoredTotal = scored.solutions.length + scored.actions.length + scored.gatherings.length + scored.news.length;
+      const scoredRooms = await readRooms(base44, words, true, 8);
+      const scoredTotal = countEntries(scored) + countRooms(scoredRooms);
       if (scoredTotal > 0) {
         found = scored;
+        rooms = scoredRooms;
         total = scoredTotal;
         loose = true;
       }
@@ -114,9 +176,11 @@ export default async function (req) {
         const enWords = toWords(english && english.english);
         if (enWords.length > 0) {
           const second = await searchAll(base44, enWords);
-          const secondTotal = second.solutions.length + second.actions.length + second.gatherings.length + second.news.length;
+          const secondRooms = await readRooms(base44, enWords, false, 8);
+          const secondTotal = countEntries(second) + countRooms(secondRooms);
           if (secondTotal > 0) {
             found = second;
+            rooms = secondRooms;
             total = secondTotal;
             translatedFrom = english.english;
             searched = enWords.join(' ');
@@ -144,6 +208,11 @@ export default async function (req) {
         actions: found.actions.map(shapeAction),
         gatherings: found.gatherings.map(shapeGroup),
         wire: found.news.map(shapeWire),
+        // A person on the roll, a piece of music given to the record, a drawing on its wall.
+        // Each carries only what is already public — never an address, never a guest list.
+        people: rooms.people,
+        tracks: rooms.tracks.map(shapeTrack),
+        cartoons: rooms.cartoons.map(shapeCartoon),
       },
     });
   } catch (error) {

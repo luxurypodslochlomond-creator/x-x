@@ -93,6 +93,62 @@ export default function RecordResultCard({ kind, item }) {
     );
   }
 
+  // A person on the roll — only ever findable because they wrote these words themselves.
+  if (kind === 'person') {
+    return (
+      <Link
+        to="/ClimateRoll"
+        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#b3261e] p-3.5 active:bg-[#efe7d6] transition-colors"
+      >
+        <Tag tone="#b3261e">{item.role === 'keeper' ? 'Keeper' : 'Checker'}</Tag>
+        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.name}</h3>
+        {item.line && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.line}</p>}
+        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">
+          In their own words · the roll →
+        </p>
+      </Link>
+    );
+  }
+
+  // A track given to the record, heard on its own page and never counted or sold.
+  if (kind === 'track') {
+    return (
+      <Link
+        to="/ClimateMusic"
+        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5 active:bg-[#efe7d6] transition-colors"
+      >
+        <Tag tone="#1e3a2b">{String(item.kind || 'music').replace(/_/g, ' ')}</Tag>
+        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
+        {item.artist_name && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.artist_name}</p>}
+        {item.spec && (
+          <p className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide mt-2">{item.spec}</p>
+        )}
+        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">
+          Given to the record · listen →
+        </p>
+      </Link>
+    );
+  }
+
+  // A drawing on the wall — the drawer's own line, their own name, where it came from.
+  if (kind === 'cartoon') {
+    return (
+      <Link
+        to="/ClimateCartoons"
+        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
+      >
+        <Tag tone="#e2602a">Drawing</Tag>
+        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">
+          {item.title || item.artist_name}
+        </h3>
+        {item.for_line && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.for_line}</p>}
+        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">
+          {[item.artist_name, item.origin].filter(Boolean).join(' · ')}
+        </p>
+      </Link>
+    );
+  }
+
   // On the wire — headline, what changed, when and where, and who says so.
   return (
     <Link
