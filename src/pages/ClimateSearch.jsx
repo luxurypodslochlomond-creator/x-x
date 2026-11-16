@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Loader2, Search as SearchIcon } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
-import RecordVoiceSearch from '@/components/climate/RecordVoiceSearch';
+import RecordSearchLine from '@/components/climate/RecordSearchLine';
+import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchGuide from '@/components/climate/RecordSearchGuide';
 
@@ -80,6 +80,17 @@ export default function ClimateSearch() {
     [navigate, run]
   );
 
+  // A subject tapped from the record's own list runs exactly the same search as typing it:
+  // one question, one address, and no second way of doing things.
+  const pick = useCallback(
+    (name) => {
+      setQuery(name);
+      navigate(`/ClimateSearch?q=${encodeURIComponent(name)}`, { replace: true });
+      run(name);
+    },
+    [navigate, run]
+  );
+
   const results = data?.results;
   const sections = results ? SECTIONS.map((s) => ({ ...s, items: results[s.key] || [] })).filter((s) => s.items.length > 0) : [];
   // The record's own pages — the founder, who built it, how it is made, how to cite it.
@@ -89,36 +100,26 @@ export default function ClimateSearch() {
     <ClimateRecordShell
       eyebrow="Search the record"
       marker="Every entry carries its origin"
-      title="Search the record"
-      statement="Type it or say it. One question reads the whole record — every solution, climate crisis, action, gathering, wire entry, piece of music, drawing and person on its roll, in whatever language it was written in."
+      title="Ask the record"
+      statement="Type it or say it. One question reads the whole record — every solution, crisis, action, gathering, wire entry, piece of music, drawing and person on its roll, in whatever language it was written in."
       returnTo="/TogetherChangeClimate"
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      <form onSubmit={submit} className="flex flex-col sm:flex-row gap-2">
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="A place, a topic, a creature, a source…"
-          aria-label="Search the record"
-          className="flex-1 min-h-[48px] px-3.5 bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] text-[13px] font-mono placeholder:text-[#5a5246] focus:outline-none focus:border-[#e2602a]"
-        />
-        <div className="flex gap-2">
-          <button
-            type="submit"
-            disabled={loading || query.trim().length < 2}
-            className="flex-1 sm:flex-none flex items-center justify-center gap-2 min-h-[48px] px-5 bg-[#141210] text-[#efe7d6] border-2 border-[#141210] text-[11px] font-black font-mono uppercase tracking-wider disabled:opacity-50 active:bg-[#e2602a] active:text-[#141210] transition-colors"
-          >
-            {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <SearchIcon className="w-4 h-4" />}
-            Search
-          </button>
-          <RecordVoiceSearch onTranscript={onVoice} disabled={loading} />
-        </div>
-      </form>
+      <RecordSearchLine
+        value={query}
+        onChange={setQuery}
+        onSubmit={submit}
+        onVoice={onVoice}
+        loading={loading}
+        canSearch={query.trim().length >= 2}
+      />
+
+      <RecordSearchPrompts onPick={pick} disabled={loading} />
 
       {loading && (
-        <p className="mt-10 text-center text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
+        <p className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#b3261e]" />
           Reading the whole record…
         </p>
       )}

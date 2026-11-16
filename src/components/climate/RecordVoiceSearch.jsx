@@ -7,7 +7,7 @@ import { Mic, Square } from 'lucide-react';
 const getRecognition = () =>
   typeof window === 'undefined' ? null : window.SpeechRecognition || window.webkitSpeechRecognition || null;
 
-export default function RecordVoiceSearch({ onTranscript, disabled }) {
+export default function RecordVoiceSearch({ onTranscript, disabled, variant }) {
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(true);
   const [error, setError] = useState(null);
@@ -106,6 +106,36 @@ export default function RecordVoiceSearch({ onTranscript, disabled }) {
   };
 
   if (!supported) return null;
+
+  // The mark: a mic sitting at the end of the search line instead of a second bordered
+  // button beside it. Same engine, same honesty when nothing was heard — the message just
+  // falls under the line rather than inside a box, so the page has one shape, not three.
+  if (variant === 'mark') {
+    return (
+      <>
+        <button
+          type="button"
+          onClick={toggle}
+          disabled={disabled}
+          aria-label={listening ? 'Stop listening' : 'Say your search'}
+          className={`grid h-11 w-11 flex-shrink-0 place-items-center transition-colors ${
+            listening ? 'text-[#b3261e]' : 'text-[#5a5246] active:text-[#b3261e]'
+          }`}
+        >
+          {listening ? <Square className="h-4 w-4" fill="currentColor" /> : <Mic className="h-5 w-5" />}
+        </button>
+        {(listening || error) && (
+          <p
+            className={`absolute left-0 right-0 top-full mt-2 text-[10px] font-mono leading-relaxed ${
+              error ? 'text-[#b3261e]' : 'text-[#5a5246]'
+            }`}
+          >
+            {error || 'Say a place, a topic, a creature, a word'}
+          </p>
+        )}
+      </>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-1.5">

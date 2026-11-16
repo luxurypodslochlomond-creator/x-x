@@ -5,6 +5,12 @@ import { ArrowRight } from 'lucide-react';
 // What a search actually reads, and where all of it comes from — shown before anyone has
 // typed a word. A reader, or a panel, sees the shape of the record without having to guess
 // at the right keywords first. Nothing here is a hint about ranking: the record has none.
+//
+// It used to be five bordered cards of identically weighted mono text — five bricks of the
+// same size in the same voice, which is what made the front of the search feel like a
+// leaflet about a product. It is an index sheet now: one rule per room, the room's name in
+// its own colour, and the sentence in the record's reading face. Same words, same honesty,
+// and the eye has somewhere to start.
 
 const KINDS = [
   {
@@ -32,28 +38,52 @@ const KINDS = [
     tone: '#141210',
     body: 'Dated entries: what changed, where, who says so, and what can be copied from it.',
   },
+  {
+    label: 'The music',
+    tone: '#1e3a2b',
+    body: 'Pieces given to the record by the artists who made them — searchable by their words as well as their names.',
+  },
+  {
+    label: 'The drawings',
+    tone: '#e2602a',
+    body: 'Pictures on the wall of the cartoons room, each with the hand that drew it and where it came from.',
+  },
+  {
+    label: 'The roll',
+    tone: '#b3261e',
+    body: 'The people who check this record — findable only by the line each of them wrote for themselves.',
+  },
 ];
 
 export default function RecordSearchGuide() {
   return (
     <div>
       <h2
-        className="font-black uppercase text-[#141210] leading-tight mb-1"
+        className="font-black uppercase text-[#141210] leading-tight mb-1.5"
         style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 26px)', letterSpacing: '-0.02em' }}
       >
         What the search reads
       </h2>
-      <p className="text-[11px] lg:text-[12px] font-mono text-[#5a5246] leading-relaxed mb-4">
-        One question reaches all five, in whatever tongue each entry was written in.
+      <p className="text-[11px] lg:text-[12px] font-mono text-[#5a5246] leading-relaxed mb-3">
+        One question reaches all of it, in whatever tongue each entry was written in.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      <div className="border-t border-[#141210]/20">
         {KINDS.map((k) => (
-          <div key={k.label} className="bg-[#f7f1e5] border border-[#141210] border-t-4 p-3" style={{ borderTopColor: k.tone }}>
-            <h3 className="text-[11px] font-black font-mono uppercase tracking-wide" style={{ color: k.tone }}>
-              {k.label}
-            </h3>
-            <p className="text-[11px] font-mono text-[#141210] leading-relaxed mt-1.5">{k.body}</p>
+          <div key={k.label} className="flex items-start gap-3 border-b border-[#141210]/20 py-2.5">
+            <span className="mt-[7px] h-2 w-2 flex-shrink-0" style={{ backgroundColor: k.tone }} />
+            <p
+              className="text-[13px] lg:text-[13.5px] leading-relaxed text-[#141210]"
+              style={{ fontFamily: 'var(--font-reading)' }}
+            >
+              <span
+                className="mr-2 inline-block text-[10px] font-black font-mono uppercase tracking-wide"
+                style={{ color: k.tone }}
+              >
+                {k.label}
+              </span>
+              {k.body}
+            </p>
           </div>
         ))}
       </div>
