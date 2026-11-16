@@ -62,16 +62,39 @@ export const RAIL_SECOND_NAV = [
 // Those three are the record's whole claim to being believed, and they are exactly what a
 // reader like Janine looks for the moment she lands. So on a desk they stand in the row.
 //
-// Nine marks, not ten: five ways in, those three, and the one that opens everything else.
-// Nine across a thousand pixels is a hundred each — the widest this row gets before a
-// caption starts to crowd, which is the honest limit. Nothing is added that a reader does
-// not arrive with: the roll, the founder, the music room, the cartoons, the seals and the
-// host page are all things a reader goes looking for, and they live in the sheet, which is
-// what the sheet is for.
+// Ten marks, and the ten is deliberate: five ways in, those three, her name, and the one that
+// opens everything else. Ten across a thousand pixels is a hundred each — the widest this row
+// gets before a caption starts to crowd, which is the honest limit. Nothing else is added that
+// a reader does not arrive with: the roll, the music room, the cartoons, the seals and the host
+// page are all things a reader goes looking for, and they live in the sheet, which is what the
+// sheet is for.
 //
 // Built from the same two lists the rail and the sheet already read, so a desk can never
 // show a door the record has stopped offering, or name one differently to a phone.
-export const DESK_NAV = [...PRIMARY_NAV, ...RAIL_SECOND_NAV];
+// ── HER NAME ON THE ROW, AND WHY THAT IS NOT EGO ──────────────────────────────
+// It is the obvious question and it deserves an answer rather than a shrug: a record whose
+// entire claim is that a reader should be able to check it has to say who asked for it. A
+// page of sourced entries with nobody's name on it is not more modest than one that carries
+// its keeper — it is less checkable. Provenance is the whole argument, and provenance starts
+// with a person.
+//
+// What it must not be is the first thing. So she stands at the end of the row, after the
+// three that say how the record is kept and immediately before Doors — because Doors is not a
+// door, it is the index of all of them, and a signature belongs above the index, not after it.
+// First would make the record about her; absent would make it unaccountable; last before the
+// index is the one position that is both honest and quiet.
+//
+// It is a desk's mark only. Nine doors plus this one is a hundred a cell across a thousand
+// pixels, and a caption still reads. A phone has five fingers of room, and there she would be
+// taking a cell from "what is on the record" — which is the question a thumb actually arrives
+// with. The sheet keeps her too, under her fuller name, one tap further in.
+const DESK_FOUNDER = {
+  label: 'Founder',
+  to: '/ClimateFounder',
+  what: 'Janine M. H. Selendy, and the record she asked for.',
+};
+
+export const DESK_NAV = [...PRIMARY_NAV, ...RAIL_SECOND_NAV, DESK_FOUNDER];
 
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.

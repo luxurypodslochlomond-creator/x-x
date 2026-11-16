@@ -11,14 +11,16 @@ import '@/components/climate/record-navigator.css';
 // corrected — hidden inside a sheet that dimmed the page to open.
 //
 // So the row is now two rows that never meet: below 1024px it is the six the phone has
-// always had, unchanged, and at 1024px and wider it is nine plus the mark that opens
-// everything else. Same drawings, same ink, same red only on the door you are standing in,
-// equal cells so nothing shifts as a tongue changes or a caption grows.
+// always had, unchanged, and at 1024px and wider it is ten, with the mark that opens
+// everything else standing last. Same drawings, same ink, same red only on the door you are
+// standing in, equal cells so nothing shifts as a tongue changes or a caption grows.
 //
-// Nine is the limit, not a taste: across a thousand pixels it is a hundred each, and a
-// hundred is where this row stops being generous and starts being crowded. Everything past
-// it is a door a reader goes looking for rather than one they arrive with, and it is in the
-// sheet — which is the one job the sheet has.
+// Ten is the limit, not a taste: across a thousand pixels it is a hundred each, and a
+// hundred is where this row stops being generous and starts being crowded. The tenth is her
+// name — the record says who asked for it, at the end of the row and above the index, because
+// provenance is the first thing a sceptical reader checks and the last thing the record should
+// shout. Everything past it is a door a reader goes looking for rather than one they arrive
+// with, and it is in the sheet — which is the one job the sheet has.
 const CELL = 'flex-1 basis-0 min-w-0 !min-h-0 !py-1';
 
 export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
