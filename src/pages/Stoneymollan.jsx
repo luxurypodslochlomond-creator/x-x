@@ -75,6 +75,22 @@ const PLACES = [
 ];
 
 export default function Stoneymollan() {
+  /* ── LANDING ON THE RIGHT PART OF THE HILL ──────────────────────────────────────
+     A link can now arrive pointing at a part of this page — overlochlomond.com sends
+     people to #year, and a share sends them to #stay. The browser looks for that id
+     the instant it opens the address, before this sheet has been drawn, so it finds
+     nothing, stays at the top, and the reader is left to hunt for the thing they were
+     sent to. So we look again once the page is on screen and walk them to it. */
+  React.useEffect(() => {
+    const id = decodeURIComponent((window.location.hash || '').replace(/^#/, ''));
+    if (!id) return;
+    const frame = requestAnimationFrame(() => {
+      const target = document.getElementById(id);
+      if (target) target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <div className="stoneymollan-page relative min-h-screen bg-record-paper pb-20 text-record-ink twcc-scanlines md:pb-0">
       <MastheadDoors mobile />
