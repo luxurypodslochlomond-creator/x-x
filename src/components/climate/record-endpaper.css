@@ -1,0 +1,32 @@
+/* An engraved endpaper: live lettering and vector lines, never a blurred image. */
+.record-endpaper { isolation: isolate; }
+.record-endpaper-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  color: rgb(var(--record-bone));
+  opacity: .15;
+}
+.record-endpaper-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: -.065em;
+}
+.record-endpaper-signatures,
+.record-endpaper-title {
+  font-family: var(--font-record-ui);
+  font-weight: 400;
+  font-synthesis: none;
+}
+.record-endpaper-signatures {
+  font-size: clamp(15px, 1.7vw, 18px);
+  line-height: 1.6;
+  letter-spacing: .015em;
+}
+.record-endpaper-title {
+  font-size: clamp(16px, 2vw, 21px);
+  line-height: 1.4;
+  letter-spacing: -.015em;
+}

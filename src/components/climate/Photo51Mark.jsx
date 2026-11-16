@@ -29,7 +29,7 @@ export default function Photo51Mark({ className = '', size = 340 }) {
       className={className}
       aria-hidden="true"
       fill="none"
-      stroke="#efe7d6"
+      stroke="currentColor"
       strokeLinecap="round"
     >
       {/* The arms of the X — the helix, as the fibre gave it up. */}
@@ -50,11 +50,11 @@ export default function Photo51Mark({ className = '', size = 340 }) {
       </g>
 
       {/* Where the beam was stopped, so the centre stayed dark. */}
-      <circle cx="200" cy="200" r="34" fill="#141210" stroke="#efe7d6" strokeOpacity="0.18" strokeWidth="1" />
+      <circle cx="200" cy="200" r="34" className="fill-record-ink" stroke="currentColor" strokeOpacity="0.18" strokeWidth="1" />
       <circle cx="200" cy="200" r="62" strokeOpacity="0.1" strokeWidth="1" />
 
       {/* The spots, set on the arcs. */}
-      <g fill="#efe7d6" stroke="none">
+      <g fill="currentColor" stroke="none">
         {SPOTS.map(([cx, cy, r], i) => (
           <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} fillOpacity={0.24 + (i % 3) * 0.16} />
         ))}

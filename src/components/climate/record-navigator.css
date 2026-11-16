@@ -263,7 +263,7 @@
    animates — one long, unhurried ease, nothing promoted and nothing held back, because
    the compositor already does the whole of a transform and an opacity. */
 .rec-doors[data-state="in"] .rec-doors-plate {
-  animation: rec-doors-in .3s cubic-bezier(.22, .68, .24, 1) both;
+  animation: rec-doors-in .3s cubic-bezier(.22, .68, .24, 1) backwards;
 }
 .rec-doors[data-state="out"] .rec-doors-plate {
   animation: rec-doors-out .19s cubic-bezier(.4, 0, .8, .4) both;
@@ -367,9 +367,15 @@
      opacity only: a page carrying a very large painting has nothing re-rendered for this. */
   /* Position only. A scale, however slight, re-draws every letter on the plate for the
      whole of the animation — which is a shimmer on a sheet of type, not a motion. */
+  .rec-mast-doors .rec-art-caption {
+    font-family: var(--font-record-ui);
+    font-size: 12px;
+    line-height: 1.25;
+  }
+  .rec-mast-doors .rec-art-drawing svg { shape-rendering: geometricPrecision; }
   @keyframes rec-doors-in {
     from { opacity: 0; transform: translateY(-14px); }
-    to { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: none; }
   }
   @keyframes rec-doors-out {
     from { opacity: 1; transform: translateY(0); }

@@ -320,7 +320,19 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
    colour, with the sea and the weather on it and the dark of space around it. No reader
    loses a point of contrast — the sheet above it is solid paper — and the ground is the
    same at every width, because a phone was always owed the room as much as a desk was. */
-.record-ground { --cover-strength: 0.9; }
+.record-environment {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  isolation: isolate;
+  contain: paint;
+}
+.record-environment .record-ground {
+  --cover-strength: 1;
+  transition: none;
+}
 
 /* ── THE SKY, DRAWN ONCE ─────────────────────────────────────────────────────────
    What the painting cannot say by itself is that the sky is a place rather than a

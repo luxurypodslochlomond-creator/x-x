@@ -13,7 +13,6 @@ import RecordRule from '@/components/climate/RecordRule';
 import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordSky from '@/components/climate/RecordSky';
-import RecordGrain from '@/components/climate/RecordGrain';
 import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
@@ -163,32 +162,11 @@ export default function ClimateLayout({ children, currentPage }) {
         ground underneath it was covered twice over. The paper belongs to the book; the
         root is the room the book stands in. */}
     <div className="climate-record record-field min-h-screen" style={{ fontFamily: 'var(--font-body)', '--record-cover': `url("${IMAGES.cover}")` }}>
-      {/* THE FIELD ─────────────────────────────────────────────────────────────────────
-          The cover, laid under the whole record and pinned there — the same canvas, at the
-          same scale, on every page, in every tongue. Not a decorative splash behind one
-          headline: the ground the book is printed on. Held back by a warm veil so not one
-          sentence ever has to fight for its life, and fixed rather than scrolling, so the
-          painting stays put while the record moves over it — the way a wall stays still
-          while you walk along it.
-
-          Every sheet of the record is a hair translucent on top of this (see the field rule
-          in index.css), so the colour comes up through the page instead of being pasted
-          behind a paragraph. That is the difference between a record that has a picture in
-          it and a record that is a picture. Cheap to run, too: one composited layer, no
-          repaint per scroll, nothing downloaded that a phone was not already sent. */}
-      <div aria-hidden="true" className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-        {/* Held further back than it was. The cover is the room, not the wallpaper: at
-            twenty-three per cent it was still reading as texture behind the page and
-            nothing looked clean. */}
-        <RecordCover position="center 42%" strength={0.9} priority className="record-ground" />
-        {/* ── AND THE SKY ABOVE IT ──────────────────────────────────────────────────
-            The painting is the planet. What it cannot hold on its own is the fact that the
-            sky is a place: stars held still, and now and then something crossing in front
-            of them. See RecordSky — it costs one layer and asks to be watched by nobody. */}
+      {/* The painting and the rare shooting stars stay in their own viewport-sized
+          surface. No noise filter or blended grain lies over the master artwork. */}
+      <div aria-hidden="true" className="record-environment">
+        <RecordCover position="center 42%" strength={1} priority className="record-ground" />
         <RecordSky />
-        {/* The sheet has a surface, not just a colour: tooth and foxing over the painting,
-            under every word. See RecordGrain — it is drawn, not downloaded. */}
-        <RecordGrain />
       </div>
 
       {/* ── ONE WAY THROUGH, AND IT IS AT THE TOP ──────────────────────────────────

@@ -34,7 +34,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
           to={to}
           label={label}
           what={what}
-          size={34}
+          size={40}
           active={pathname === to}
           className={CELL}
         />
@@ -47,7 +47,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
         to="/ClimateGuide"
         label="Doors"
         what="Every way through the record, on one screen."
-        size={34}
+        size={40}
         asButton
         onClick={onOpenContents}
         expanded={contentsOpen}

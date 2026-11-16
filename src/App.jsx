@@ -184,7 +184,15 @@ const AuthenticatedApp = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
-    // Use View Transitions API for instant, native browser transitions (iOS/Android/Samsung feel)
+    // Do not rasterise the record's long pages, fine navigation and fixed artwork
+    // into a whole-page transition bitmap. Render the actual text and image instead.
+    const isRecordPage = /^\/(?:Climate[^/]*|AdminClimate[^/]*|TogetherChangeClimate|XEqualsX(?:Notes)?|ExtractionProofCovenant|OpenSourceDeclaration|Studio)(?:\/|$)/.test(location.pathname);
+    if (isRecordPage) {
+      document.documentElement.style.viewTransitionName = '';
+      setIsTransitioning(false);
+      return;
+    }
+    // Other products retain their existing transitions.
     if (document.startViewTransition && document.visibilityState !== 'hidden') {
       try {
         document.startViewTransition(() => {

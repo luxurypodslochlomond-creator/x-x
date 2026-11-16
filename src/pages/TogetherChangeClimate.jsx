@@ -461,7 +461,7 @@ export default function TogetherChangeClimate() {
              that flatness — not the typeface — is what read cold and linear. The warm paper
              still holds the page open; the material now sits under her words, where it
              belongs. Her words are the record's first transmission, so they get its plate. ── */}
-      <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" >
         <div className="relative mx-auto max-w-[760px] bg-[#241d16] border-2 border-[#241d16] px-5 pt-6 pb-6 overflow-hidden">
           {/* THE COVER BEHIND HER WORDS ─────────────────────────────────────────────────
               Her line used to sit on a flat dark plate: the right idea (a deep ground, so the
@@ -567,14 +567,14 @@ export default function TogetherChangeClimate() {
             shown as a picture rather than hidden as a texture. The scrim does one job
             only: hold the words up where they sit. Everything below the limb is quiet in
             the painting itself, so the title keeps its ground without a black slab. */}
-        <RecordCover position="center 34%" priority className="!pointer-events-none" style={{ filter: 'saturate(1.06) contrast(1.02)' }} />
+        <RecordCover position="center 34%" priority className="!pointer-events-none" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18,14,10,.34) 0%, rgba(18,14,10,.06) 30%, rgba(26,21,16,.52) 62%, rgba(36,29,22,.92) 86%, #241d16 100%)' }} />
         {/* The rules are gone from here too — see the note on her plate above. What is
             left over the painting is only the scrim that holds the title up. */}
 
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
         <div className="relative z-10 bg-[#efe7d6] px-4 lg:px-10 py-3 flex items-center justify-between gap-3"
-          style={{ animation: 'twcc-enter .25s ease-out both' }}>
+          >
           <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
           <button
             onClick={handleShare}
@@ -587,7 +587,7 @@ export default function TogetherChangeClimate() {
         </div>
 
         {/* Ink band */}
-        <div className="relative z-10 px-4 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" style={{ animation: 'twcc-enter .25s ease-out .04s both' }}>
+        <div className="relative z-10 px-4 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" >
           {/* The record's own name — the one heading on the record allowed to lead.
               It was built so the phone's width beat the floor: 11vw gave 43px on a
               393px screen and 47px at 430px, which made this the largest opening
@@ -613,7 +613,7 @@ export default function TogetherChangeClimate() {
              nothing left for the blue to point at. The record opens deep and stays deep. */}
         {/* The flicker is gone. A sentence that blinks is a trick, and a trick is the
             cheapest way to look alive; the line reads better held steady. */}
-        <div className="relative z-10 bg-[#241d16] px-4 lg:px-10 py-5 lg:py-7 mt-auto" style={{ animation: 'twcc-enter .25s ease-out .08s both' }}>
+        <div className="relative z-10 bg-[#241d16] px-4 lg:px-10 py-5 lg:py-7 mt-auto" >
           {/* The record's own sentence, in its own voice — sentence case, on the deep
               band. Everything else in this band stays as it was. */}
           <p className="text-[16px] leading-[1.7] max-w-[360px] lg:max-w-[620px] text-[#efe7d6]" style={{ fontFamily: 'var(--font-reading)' }}>{t.sub}</p>
