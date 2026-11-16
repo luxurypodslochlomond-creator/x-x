@@ -21,7 +21,12 @@ const COPY = {
     past: 'is on the record',
     log: 'Given a place on the list',
     headline: 'You are on the record',
-    body: 'Two things are open to you. You can send an initiative in: open the record, tap "Submit a solution, crisis, or action", and paste the page it came from. It goes to a keeper before it appears. And you can open whatever is waiting to be checked, follow it to its source, and put your name to what you find. You cannot publish, edit or delete anything, and you never see the address of the person who submitted.',
+    // Corrected 16 November. This said "It goes to a keeper before it appears", which the
+    // record does not do: an entry that carries its source and reads clean goes on as it
+    // arrives, and only a sourceless or unclear one waits. The same untrue promise was taken
+    // out of the keeper's invite sheet on the 15th and this letter was missed — and a letter
+    // that overpromises is the one thing a record built to be trusted cannot afford.
+    body: 'Two things are open to you. You can open whatever is waiting to be checked, follow it to its source, and put your name to what you find — the checking room is where that work sits, and the record\u2019s checking door opens it. And you can send an initiative in: open the record, tap "Submit a solution, crisis, or action", and paste the page it came from. What carries its source and reads clean goes on the record as it arrives; anything with no source, or anything the screening is unsure of, waits for a keeper. You cannot publish, edit or delete anything yourself, and you never see the address of the person who submitted.',
     keeper: 'They have a way in now. Every change to that list is written on the record from here on, yours included.',
   },
   paused: {
