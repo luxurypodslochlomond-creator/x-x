@@ -6,8 +6,6 @@ import RecordSearchLine from '@/components/climate/RecordSearchLine';
 import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
-import RecordSearchHeading from '@/components/climate/RecordSearchHeading';
-import '@/components/climate/record-search.css';
 
 // ── SEARCH THE RECORD ────────────────────────────────────────────────────────────
 // Type it or say it. One query reads everything the record holds — solutions, climate
@@ -102,16 +100,14 @@ export default function ClimateSearch() {
 
   return (
     <ClimateRecordShell
-      className="record-search-page"
       eyebrow="Search the record"
       marker="Every entry carries its origin"
       title="Ask the record"
-      statement="Type it or say it. One question reads the whole record — every solution, crisis, action, gathering, wire entry, piece of music, drawing, credited picture and reader's comment, and every person on its roll, in whatever language it was written in."
+      statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from."
       returnTo="/TogetherChangeClimate"
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      <RecordSearchHeading />
       <RecordSearchLine
         value={query}
         onChange={setQuery}
