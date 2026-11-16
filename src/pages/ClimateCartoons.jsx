@@ -1,5 +1,6 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import ComicReader from '@/components/climate/cartoons/ComicReader';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonWall from '@/components/climate/cartoons/CartoonWall';
@@ -17,6 +18,7 @@ export default function ClimateCartoons() {
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
     >
+      <CartoonSessionBand />
       <ComicReader />
       <CartoonWhy />
       <CartoonRoomActions />
