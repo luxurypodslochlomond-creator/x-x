@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
+import useBodyScrollLock from '@/hooks/useBodyScrollLock';
 import { markFor } from '@/components/climate/pageMarks';
 
 // The guide's own mark, fetched once from the same map the doors read, so the foot can
@@ -58,21 +59,25 @@ export default function RecordPagesPanel({ open, onClose }) {
     return () => clearTimeout(timer);
   }, [open, mounted]);
 
-  // One place owns the dialog and the page's scroll: opened here, released only when the
-  // sheet has actually gone, so the page behind it can never be left frozen.
+  // ── THE PAGE BEHIND IS HELD STILL BY THE RECORD'S OWN LOCK ────────────────────
+  // It used to set overflow:hidden on the body, and on a phone that is not a lock at all:
+  // the page underneath keeps taking the drag, so a thumb scrolling the list dragged the
+  // rule and the masthead behind it as well. That is the "looks broken, bit flaky" in the
+  // report — two things moving under one finger, and closing the sheet then left the reader
+  // somewhere they had not chosen. The same position:fixed lock the tongue sheet and the
+  // photograph viewer already use holds it properly, and it hands the reader back their
+  // line when the sheet closes.
+  useBodyScrollLock(mounted);
+
+  // One place owns the dialog itself: opened here, closed only when the sheet has gone.
   useEffect(() => {
     if (!mounted) return undefined;
     const dialog = dialogRef.current;
     if (!dialog) return undefined;
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
     if (!dialog.open) {
       try { dialog.showModal(); } catch { /* already open — nothing to do */ }
     }
-    return () => {
-      document.body.style.overflow = previous;
-      if (dialog.open) dialog.close();
-    };
+    return () => { if (dialog.open) dialog.close(); };
   }, [mounted]);
 
   // The sheet closes when the paper is tapped outside the plate — the gesture a phone has

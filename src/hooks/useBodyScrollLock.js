@@ -12,6 +12,11 @@ export function useBodyScrollLock(active) {
 
     const body = document.body;
     const scrollY = window.scrollY;
+    // Where the reader was standing when the sheet opened. If they are still there when it
+    // closes, they go back to the same line. If they used the sheet to walk through a door,
+    // they are on a page they have never read and the page itself has already been sent to
+    // its top — putting them back at the old offset would drop them into the middle of it.
+    const lockedPath = window.location.pathname;
     const prev = {
       position: body.style.position,
       top: body.style.top,
@@ -29,7 +34,7 @@ export function useBodyScrollLock(active) {
       body.style.top = prev.top;
       body.style.width = prev.width;
       body.style.overflow = prev.overflow;
-      window.scrollTo(0, scrollY);
+      if (window.location.pathname === lockedPath) window.scrollTo(0, scrollY);
     };
   }, [active]);
 }

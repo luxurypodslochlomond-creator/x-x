@@ -278,31 +278,27 @@
   }
 }
 
-/* ── THE DOORS THEMSELVES, ARRIVING IN ORDER ─────────────────────────────────────
-   Sixteen drawn marks landing as one grey block is what made this sheet read as a
-   document about the record rather than as the record's own hand. Each door comes up
-   behind the one before it, by forty milliseconds, and stops: a stagger long enough to be
-   felt, short enough that the last door is in place before a thumb can reach it. Nothing
-   moves after it lands, and the whole thing is opacity and transform.
+/* ── THE DOORS LAND WITH THE SHEET, NOT AFTER IT ─────────────────────────────────
+   Each door used to arrive on its own, forty milliseconds behind the one before, and the
+   tail of the grid waited a third of a second to appear. It was meant to make the sheet
+   feel made by hand, and on a desk it did. On a phone it did the opposite: a thumb that
+   opened the list and began scrolling at once — which is exactly what a thumb does — met
+   cells still fading up under it, so the grid seemed to be assembling itself while being
+   read. That is the "looks broken" in the report, and no stagger is worth it.
 
-   Hover gives the cell a bone wash on a machine with a pointer, so the sheet answers the
-   cursor; a phone keeps its press-fill from the rule above, which is drawn on the instant
-   because an acknowledgement that fades in is not an acknowledgement. */
-@keyframes rec-door-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.rec-index-grid > * { animation: rec-door-in .26s cubic-bezier(.2, .8, .2, 1) both; }
-.rec-index-grid > *:nth-child(1) { animation-delay: .03s; }
-.rec-index-grid > *:nth-child(2) { animation-delay: .07s; }
-.rec-index-grid > *:nth-child(3) { animation-delay: .11s; }
-.rec-index-grid > *:nth-child(4) { animation-delay: .15s; }
-.rec-index-grid > *:nth-child(5) { animation-delay: .19s; }
-.rec-index-grid > *:nth-child(6) { animation-delay: .23s; }
-.rec-index-grid > *:nth-child(7) { animation-delay: .27s; }
-.rec-index-grid > *:nth-child(8) { animation-delay: .30s; }
-.rec-index-grid > *:nth-child(n+9) { animation-delay: .33s; }
+   The sheet rises once, as one object, and every door is in it from the first frame. What
+   the reader sees is a page arriving, which is what it is. */
 .rec-index-grid .rec-art-door { border-radius: 2px; }
+/* Nothing in the sheet may move except the list itself. */
+.rec-doors { overscroll-behavior: none; }
+.rec-doors-body {
+  /* The list is the one surface that scrolls while the sheet is open: vertical panning
+     only, no handing the drag on to the page behind when it reaches its end, and the
+     phone's own momentum rather than a stutter of repaints. */
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
 @media (hover: hover) {
   .rec-index-grid .rec-art-door:hover { background-color: rgb(var(--record-bone)); }
 }
