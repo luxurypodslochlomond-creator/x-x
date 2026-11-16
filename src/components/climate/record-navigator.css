@@ -308,6 +308,26 @@
   touch-action: pan-y;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  /* ── THE SCROLLBAR IS PAID FOR BEFORE IT ARRIVES ────────────────────────────────
+     "Broken as scroll appear, and there's a wee judder." That is exactly what it was: the
+     list was taller than the plate by a hair, so the scrollbar turned up after the sheet
+     had already been drawn — and a scrollbar that appears late takes ten pixels off the
+     width of every cell underneath, so the whole grid shifted sideways in front of the
+     reader. Nothing was animating; the page was being laid out a second time.
+
+     Reserving the lane from the first frame is the whole fix: the cells are drawn at their
+     final width, and whether the list scrolls or not, nothing moves. The thumb is set in
+     the record's own ink rather than the browser's grey, and it is thin, so a list that
+     scrolls reads as a page of the record rather than as a browser widget sitting on one. */
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--record-ink) / 0.25) transparent;
+}
+.rec-doors-body::-webkit-scrollbar { width: 9px; }
+.rec-doors-body::-webkit-scrollbar-track { background: transparent; }
+.rec-doors-body::-webkit-scrollbar-thumb {
+  background: rgb(var(--record-ink) / 0.22);
+  border-radius: 99px;
 }
 @media (hover: hover) {
   .rec-index-grid .rec-art-door:hover { background-color: rgb(var(--record-bone)); }

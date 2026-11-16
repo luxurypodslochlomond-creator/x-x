@@ -211,10 +211,59 @@ export const PAGE_INDEX = [
 // what Elsewhere already means, so they go there: 5, 6, 6, and one short row in the whole
 // sheet instead of three. Nothing is dropped, renamed or reordered — the same seventeen
 // doors, in one fewer part.
+// ── THE SEQUENCE, ASKED ABOUT AND ANSWERED ─────────────────────────────────────
+// Brian, 16 November: "you sure sequence of every door is right? Founder should be up at
+// the record and the rest — you sure right sequence too bro?" He was right on both counts,
+// and the reason was that the parts were never drawn as a sequence at all: they were three
+// piles of whatever list a door already lived in. "The record" was five ways in and nothing
+// about the record itself, while the record's own provenance — why it exists, and whose
+// name is on it — sat at number three under "Elsewhere", beside a room of cartoons.
+//
+// A contents page is a sentence, so it is now written as one, in the order a reader asks:
+//
+//   01 THE RECORD      what this is, why it exists, and who asked for it.
+//   02 WAYS IN         the four ways of moving through what is on it.
+//   03 HOW IT IS KEPT  the rulebook: how an entry is checked, what was corrected, the
+//                      covenant it is shared under, and the terms it is offered on.
+//   04 ELSEWHERE       the rooms you go looking for rather than arrive at.
+//
+// "The founder" is the change he asked for by name, and it belongs at 01 for the reason the
+// masthead already gives: provenance is the first thing a sceptical reader checks, and a
+// page of sourced entries with nobody's name on it is not more modest than one that carries
+// its keeper — it is less checkable. Third in that part, never first: the record, then why
+// it exists, then whose it is. First would make the record about her.
+//
+// Nothing was dropped, renamed or invented. The same nineteen doors, in an order that can be
+// said out loud.
+const FOUNDER_DOOR = ELSEWHERE_NAV.find(({ to }) => to === '/ClimateFounder');
+const COVENANT_DOOR = PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovenant');
+
 export const CONTENT_GROUPS = [
-  { title: 'The record', doors: PRIMARY_NAV },
-  { title: 'How it is kept', doors: [...FOOTER_NAV.filter(({ to }) => to !== '/ClimateGuide'), ...TRUST_NAV, PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovenant')] },
-  { title: 'Elsewhere', doors: [...ELSEWHERE_NAV, ...SUPPORTING_PAGES] },
+  {
+    title: 'The record',
+    doors: [
+      PRIMARY_NAV.find(({ to }) => to === '/TogetherChangeClimate'),
+      FOOTER_NAV.find(({ to }) => to === '/XEqualsX'),
+      FOUNDER_DOOR,
+    ],
+  },
+  {
+    title: 'Ways in',
+    doors: PRIMARY_NAV.filter(({ to }) => to !== '/TogetherChangeClimate'),
+  },
+  {
+    title: 'How it is kept',
+    doors: [
+      FOOTER_NAV.find(({ to }) => to === '/ClimateMethod'),
+      FOOTER_NAV.find(({ to }) => to === '/ClimateCorrections'),
+      COVENANT_DOOR,
+      ...TRUST_NAV,
+    ],
+  },
+  {
+    title: 'Elsewhere',
+    doors: [...ELSEWHERE_NAV.filter(({ to }) => to !== '/ClimateFounder'), ...SUPPORTING_PAGES],
+  },
 ];
 
 export default SUPPORTING_PAGES;

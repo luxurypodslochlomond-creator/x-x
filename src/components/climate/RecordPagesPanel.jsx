@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
-import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
 import { markFor } from '@/components/climate/pageMarks';
 
@@ -112,7 +111,10 @@ export default function RecordPagesPanel({ open, onClose }) {
       data-state={leaving ? 'out' : 'in'}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
       onClick={onDialogClick}
-      className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
+      /* No fixed 100dvh here. inset-0 already gives the sheet the height of the glass, and a
+         dvh height is recomputed as a phone's own bars slide in and out — which on the frame
+         the sheet opens is one more thing moving under the thumb. */
+      className="rec-doors climate-record fixed inset-0 m-0 flex max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
     >
       <div className="rec-doors-plate flex h-full w-full flex-col bg-record-paper">
         <div aria-hidden="true" className="h-[3px] w-full shrink-0 bg-record-mark" />
@@ -149,28 +151,25 @@ export default function RecordPagesPanel({ open, onClose }) {
             <RecordIndexPlate onNavigate={onClose} />
           </div>
 
-          <div className="mt-3 shrink-0 border-t border-record-ink pt-2.5">
-            {/* ── THE TONGUE, WHERE THE WAY THROUGH IS ───────────────────────────────
-                It stands on the masthead, opposite the record's own name, and that is
-                still where it belongs: the record signing on the left, the reader
-                answering on the right. But a reader who has opened this sheet has said
-                by opening it that they are looking for a way to change something, and
-                sending them back out to the masthead for the one control that changes
-                the voice of the page is a dead end this record should not have. Same
-                list, same component, same promise — the tongue names itself, and there
-                is no second copy of it to drift. */}
-            <div className="flex items-center justify-between gap-3 px-1">
-              <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
-                Read it in your own tongue
-              </span>
-              <RecordTongueDoor size={22} inline />
-            </div>
+          {/* ── THE TONGUE CAME OFF THIS SHEET, AND THAT IS THE FIX ────────────────────
+              Brian, 16 November, with two photographs: "tap language and it overlays weird
+              and doesn't work." He was right, and the fault was structural rather than
+              cosmetic: the tongue opens its own sheet, and it was being opened from inside
+              this one — a dialog inside a dialog, drawn over a plate that is itself pinned
+              over the page, so its panel landed wherever the browser could fit it and half
+              of it sat outside the thing that had opened it.
 
+              It was also the one line on this sheet written in English for a reader who has
+              come here because they cannot read English. The masthead's tongue names itself
+              in its own tongue — "English", "ไทย", "Português" — and it stands on the name
+              line at every width, above this sheet, before a reader has to open anything.
+              So the way to change the record's voice is the tongue that names itself, and
+              the index goes back to being only an index.
+
+              That removes the nested overlay entirely, which was the real "weird". */}
+          <div className="mt-2.5 shrink-0 border-t border-record-ink pt-2">
             {/* ── ONE FOOT, AND IT IS DRAWN LIKE EVERYTHING ABOVE IT ─────────────────
-                The tongue was the leftover in this pair — it was parked here when it had
-                no home anywhere, and then took its own place on the masthead's name line,
-                so this foot had quietly become a second front door to one setting. The
-                guide keeps the foot, and it carries its own mark now, fetched from the
+                The guide keeps the foot, and it carries its own mark, fetched from the
                 same map the doors read. */}
             <Link
               to="/ClimateGuide"
