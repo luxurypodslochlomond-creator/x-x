@@ -8,6 +8,8 @@
 // lifted — that is the credit a record should give.
 //
 // Drawn in the sender's own browser, on their device, so nothing of theirs leaves it.
+import { RECORD_HOME } from './recordAddress';
+
 const W = 1080;
 const H = 1350;
 const PAD = 60;
@@ -23,7 +25,9 @@ const MUTED = '#6b6258';
 const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
 const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
 
-const ORIGIN = 'https://green-stride-d47e043c.base44.app';
+// The record's own home, never the platform's app address: an address printed on a card is
+// a citation, and a citation that resolves to a temporary host is a broken promise.
+const ORIGIN = RECORD_HOME;
 
 function wrap(ctx, text, maxWidth, maxLines) {
   const words = String(text || '').split(/\s+/).filter(Boolean);
