@@ -198,49 +198,32 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
               })}
         />}
 
-        {/* Type toggle */}
-        {/* Four doors, in the order the record names them: solution, crisis, action, group.
-            Two by two on a phone — four across 393px turned every one of these labels into a
-            sliver, and a door you cannot read is not a door. Same cut, same ink, same rules:
-            only the group borrows the record's ocean blue, because it is the one that is an
-            introduction rather than a claim. */}
-        <div className="grid grid-cols-2 gap-2 mb-5 sm:grid-cols-4">
-          <button
-            type="button"
-            onClick={() => setEntryType('solution')}
-            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
-              entryType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
-            }`}
-          >
-            <Leaf className="w-4 h-4" /> Solution
-          </button>
-          <button
-            type="button"
-            onClick={() => setEntryType('climate_crisis')}
-            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
-              entryType === 'climate_crisis' ? 'bg-[#b3261e] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
-            }`}
-          >
-            <AlertTriangle className="w-4 h-4" /> Crisis
-          </button>
-          <button
-            type="button"
-            onClick={() => setEntryType('action')}
-            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
-              entryType === 'action' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
-            }`}
-          >
-            <Sprout className="w-4 h-4" /> Action
-          </button>
-          <button
-            type="button"
-            onClick={() => setEntryType('group')}
-            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
-              entryType === 'group' ? 'bg-[#0f5f7a] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
-            }`}
-          >
-            <Users className="w-4 h-4" /> Group
-          </button>
+        {/* Type toggle — the whole thing said on one line.
+            It was a two-by-two block on a phone, and the fourth door sitting on a row of its
+            own made the bar twice as deep as the words inside it: a bar that looked heavy
+            without being any clearer. Now the four doors are one sentence, split by hairlines,
+            with the open one inked in its own colour and ruled underneath. The colours are
+            unchanged — green for the two positive doors, the record's red for crisis, the
+            record's ocean blue for group, which is an introduction rather than a claim. */}
+        <div className="mb-4 flex items-stretch border-y border-[#141210]/25">
+          {[
+            { type: 'solution', label: 'Solution', Icon: Leaf, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
+            { type: 'climate_crisis', label: 'Crisis', Icon: AlertTriangle, on: 'text-[#b3261e] border-b-[#b3261e]' },
+            { type: 'action', label: 'Action', Icon: Sprout, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
+            { type: 'group', label: 'Group', Icon: Users, on: 'text-[#0f5f7a] border-b-[#0f5f7a]' },
+          ].map(({ type, label, Icon, on }, i) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setEntryType(type)}
+              className={`flex-1 flex items-center justify-center gap-1.5 px-1 py-3 min-h-[44px] border-b-2 text-[10px] font-black font-mono uppercase tracking-tight transition-colors ${
+                i > 0 ? 'border-l border-l-[#141210]/20' : ''
+              } ${entryType === type ? on : 'text-[#5a5246] border-b-transparent'}`}
+            >
+              <Icon className="hidden sm:block w-3.5 h-3.5" />
+              {label}
+            </button>
+          ))}
         </div>
 
         <p className="text-[10px] font-mono text-[#5a5246] mb-4 leading-relaxed">
