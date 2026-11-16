@@ -5,7 +5,9 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import RecordSearchLine from '@/components/climate/RecordSearchLine';
 import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
-import RecordSearchGuide from '@/components/climate/RecordSearchGuide';
+import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
+import RecordSearchHeading from '@/components/climate/RecordSearchHeading';
+import '@/components/climate/record-search.css';
 
 // ── SEARCH THE RECORD ────────────────────────────────────────────────────────────
 // Type it or say it. One query reads everything the record holds — solutions, climate
@@ -100,6 +102,7 @@ export default function ClimateSearch() {
 
   return (
     <ClimateRecordShell
+      className="record-search-page"
       eyebrow="Search the record"
       marker="Every entry carries its origin"
       title="Ask the record"
@@ -108,6 +111,7 @@ export default function ClimateSearch() {
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
+      <RecordSearchHeading />
       <RecordSearchLine
         value={query}
         onChange={setQuery}
@@ -117,7 +121,9 @@ export default function ClimateSearch() {
         canSearch={query.trim().length >= 2}
       />
 
-      <RecordSearchPrompts onPick={pick} disabled={loading} />
+      <div className={data || loading ? 'hidden lg:block' : ''}>
+        <RecordSearchPrompts onPick={pick} disabled={loading} />
+      </div>
 
       {loading && (
         <p className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
@@ -131,8 +137,8 @@ export default function ClimateSearch() {
       )}
 
       {!loading && !error && data && (
-        <div className="mt-5">
-          <div className="bg-[#efe7d6] border-2 border-[#141210] p-3">
+        <div className="record-search-results mt-5">
+          <div className="record-search-summary bg-[#efe7d6] border-2 border-[#141210] p-3">
             <p className="text-[11px] font-mono text-[#141210]">
               {data.total > 0
                 ? `${data.total} ${data.total === 1 ? 'result' : 'results'} on the record match “${data.query}”`
@@ -175,7 +181,7 @@ export default function ClimateSearch() {
                   On the wire
                 </Link>
               </div>
-              <RecordSearchGuide />
+              <RecordSearchHelp />
             </div>
           ) : (
             <div className="mt-6 space-y-6">
@@ -191,14 +197,14 @@ export default function ClimateSearch() {
                       About the record
                     </h2>
                     <div className="flex-1 h-px bg-[#141210]/20" />
-                    <span className="text-[10px] font-black font-mono text-[#e2602a]">{about.length}</span>
+                    <span className="record-search-section-count text-[10px] font-black font-mono text-[#e2602a]">{about.length}</span>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     {about.map((a) => (
                       <Link
                         key={`${a.path}-${a.label}`}
                         to={a.path}
-                        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
+                        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
                       >
                         <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest px-1.5 py-0.5 border border-[#e2602a] text-[#e2602a]">
                           {a.label}
@@ -221,7 +227,7 @@ export default function ClimateSearch() {
                       {s.label}
                     </h2>
                     <div className="flex-1 h-px bg-[#141210]/20" />
-                    <span className="text-[10px] font-black font-mono" style={{ color: s.tone }}>
+                    <span className="record-search-section-count text-[10px] font-black font-mono" style={{ color: s.tone }}>
                       {s.items.length}
                     </span>
                   </div>
@@ -239,11 +245,11 @@ export default function ClimateSearch() {
 
       {!loading && !error && !data && (
         <div className="mt-8">
-          <p className="text-[11px] lg:text-[12px] font-mono text-[#5a5246] leading-relaxed mb-6">
+          <p className="hidden lg:block text-[11px] lg:text-[12px] font-mono text-[#5a5246] leading-relaxed mb-6">
             Search what the record actually holds. Nothing is guessed and nothing is ranked for you — the record
             shows what matches, and where it came from.
           </p>
-          <RecordSearchGuide />
+          <RecordSearchHelp />
         </div>
       )}
     </ClimateRecordShell>

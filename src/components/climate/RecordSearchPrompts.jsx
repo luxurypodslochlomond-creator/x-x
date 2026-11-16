@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
+import { ArrowUpRight } from 'lucide-react';
 
 // ── SOMETHING TO TOUCH ──────────────────────────────────────────────────────────
 // The front of the search used to be a page about the search: five bordered cards
@@ -44,21 +45,23 @@ export default function RecordSearchPrompts({ onPick, disabled }) {
   if (subjects.length === 0) return null;
 
   return (
-    <div className="mt-5">
-      <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-record-muted">
-        Try a subject the record keeps
+    <div className="record-search-prompts mt-5">
+      <p className="record-search-prompts-label text-[10px] font-black font-mono uppercase tracking-[0.16em] text-record-muted">
+        <span className="lg:hidden">In the record</span>
+        <span className="hidden lg:inline">Try a subject the record keeps</span>
       </p>
-      <div className="mt-2 flex flex-wrap gap-1.5">
+      <div className="record-search-subjects mt-2 flex flex-wrap gap-1.5">
         {subjects.map((name) => (
           <button
             key={name}
             type="button"
             onClick={() => onPick(name)}
             disabled={disabled}
-            className="border border-record-ink/30 px-3 py-1.5 text-[12.5px] leading-none text-record-ink transition-colors active:border-record-red active:text-record-red"
+            className="record-search-prompt border border-record-ink/30 px-3 py-1.5 text-[12.5px] leading-none text-record-ink transition-colors active:border-record-red active:text-record-red"
             style={{ fontFamily: 'var(--font-reading)' }}
           >
-            {name}
+            <span>{name}</span>
+            <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 lg:hidden" />
           </button>
         ))}
       </div>

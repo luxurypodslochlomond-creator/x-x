@@ -2,34 +2,20 @@ import React, { useCallback, useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import RecordVoiceSearch from '@/components/climate/RecordVoiceSearch';
 
-// ── THE BOX, IN THE RECORD'S OWN COLOURS ────────────────────────────────────────
-// The borderless line was the wrong answer for this record, and it was right to say so:
-// a hairline on warm paper reads as a note in the margin, not as the one place a reader
-// is asked to do something. So the field is a box again — but a box that belongs here
-// rather than a grey web form.
-//
-// It is a bone plate (#efe7d6) laid on the paper (#f4efe4), both of which are already in
-// the record's palette, with two pixels of the record's own ink around it and the corners
-// barely turned. The writing inside is the record's reading face at reading size, not a
-// form's 14px sans. The end of the box is a solid signal-red plate with the arrow on it:
-// the record's action colour, always lit, so the thing to press is never a grey slab
-// pretending to be broken. The border turns red while you are writing in it — the only
-// movement in the whole element, and it means "I have you".
-//
-// Whatever the mic has to report is printed UNDER the box, in the flow, pushing the page
-// down. Words never sit on top of other words on this record.
+// One search control. Mobile composition lives in the page-scoped stylesheet;
+// speech feedback stays in the document flow, never over the suggestions.
 export default function RecordSearchLine({ value, onChange, onSubmit, onVoice, loading, canSearch }) {
   const [voice, setVoice] = useState({ text: '', loud: false });
   const noteVoice = useCallback((text, loud) => setVoice({ text, loud }), []);
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-bone transition-colors focus-within:border-record-red">
+      <div className="record-search-field flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-bone transition-colors focus-within:border-record-red">
         <input
           type="search"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="A place, a creature, a source…"
+          placeholder="A place, a name, a word…"
           aria-label="Search the record"
           enterKeyHint="search"
           autoComplete="off"
@@ -41,7 +27,7 @@ export default function RecordSearchLine({ value, onChange, onSubmit, onVoice, l
           type="submit"
           aria-label="Search the record"
           disabled={loading}
-          className="grid h-[52px] w-[56px] flex-shrink-0 place-items-center bg-record-red text-record-paper transition-colors active:bg-record-ink"
+          className="record-search-submit grid h-[52px] w-[56px] flex-shrink-0 place-items-center bg-record-red text-record-paper transition-colors active:bg-record-ink"
         >
           {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <ArrowRight className="h-6 w-6" />}
         </button>
@@ -49,7 +35,7 @@ export default function RecordSearchLine({ value, onChange, onSubmit, onVoice, l
 
       {voice.text ? (
         <p
-          className={`mt-2 text-[10px] font-mono leading-relaxed ${
+          className={`record-search-feedback mt-2 text-[10px] font-mono leading-relaxed ${
             voice.loud ? 'text-[#b3261e]' : 'text-[#5a5246]'
           }`}
         >
@@ -58,8 +44,9 @@ export default function RecordSearchLine({ value, onChange, onSubmit, onVoice, l
       ) : (
         !canSearch &&
         !loading && (
-          <p className="mt-2 text-[10px] font-mono uppercase tracking-[0.14em] text-record-muted">
-            Two letters, and the record answers
+          <p className={`record-search-feedback mt-2 text-[10px] font-mono uppercase tracking-[0.14em] text-record-muted ${value.trim() ? '' : 'hidden lg:block'}`}>
+            <span className="lg:hidden">Use at least two letters.</span>
+            <span className="hidden lg:inline">Two letters, and the record answers</span>
           </p>
         )
       )}

@@ -1,0 +1,114 @@
+/* Search is a working surface on a phone, not an introductory article.
+   These overrides are deliberately page- and viewport-scoped: the shared reading
+   rules otherwise repaint paper as bone and reset every heading to a light serif. */
+@media (max-width: 1023px) {
+  #root .record-pages .record-search-page {
+    --font-reading: var(--font-body);
+    --font-display: var(--font-body);
+    background-color: rgb(var(--record-paper));
+    min-height: auto;
+  }
+  .record-search-page .record-shell-opening { display: none; }
+  .record-search-page .record-shell-content { padding: 1.75rem 1.25rem 2rem; }
+  .record-search-page .record-back-bar {
+    position: absolute;
+    inset-inline-end: .75rem;
+    top: 1.5rem;
+    border: 0;
+  }
+  .record-search-page .record-back-bar > div { padding: 0; }
+  .record-search-page .record-back-bar span { display: none; }
+  #root .record-pages .record-search-page .record-search-heading {
+    font-family: var(--font-body);
+    font-weight: 700 !important;
+    letter-spacing: -.045em !important;
+    line-height: 1.02 !important;
+  }
+  .record-search-page .font-mono { font-family: var(--font-body); }
+  #root .record-pages .record-search-page .record-search-field {
+    border: 1px solid rgb(var(--record-ink) / .35);
+    border-radius: .75rem;
+    background-color: rgb(var(--record-paper));
+    padding: .25rem;
+  }
+  .record-search-page .record-search-field:focus-within { border-color: rgb(var(--record-ink)); }
+  .record-search-page .record-search-field input {
+    font-family: var(--font-body) !important;
+    padding: .75rem .375rem .75rem .625rem;
+    line-height: 1.5;
+  }
+  .record-search-page .record-search-submit {
+    width: 44px;
+    height: 44px;
+    border-radius: .5rem;
+    background-color: rgb(var(--record-ink));
+  }
+  .record-search-page .record-search-submit:active { opacity: .75; }
+  #root .record-pages .record-search-page .record-search-feedback {
+    font-family: var(--font-body) !important;
+    font-size: .8125rem !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0 !important;
+    text-transform: none;
+  }
+  .record-search-page .record-search-prompts { margin-top: 1.75rem; }
+  #root .record-pages .record-search-page .record-search-prompts-label {
+    font-family: var(--font-body) !important;
+    font-size: .8125rem !important;
+    font-weight: 400;
+    letter-spacing: 0 !important;
+    text-transform: none;
+    color: rgb(var(--record-muted));
+  }
+  .record-search-page .record-search-subjects { display: block; margin-top: .375rem; }
+  .record-search-page .record-search-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 44px;
+    padding: .75rem 0;
+    border: 0;
+    border-bottom: 1px solid rgb(var(--record-ink) / .12);
+    font-family: var(--font-body) !important;
+    font-size: .9375rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-align: start;
+  }
+  .record-search-page .record-search-prompt:nth-child(n+4) { display: none; }
+  .record-search-page .record-search-prompt:active { color: rgb(var(--record-ink)); opacity: .65; }
+  .record-search-page .record-search-help { border-top: 1px solid rgb(var(--record-ink) / .2); font-family: var(--font-body); font-size: .875rem; }
+  .record-search-help summary::-webkit-details-marker { display: none; }
+  #root .record-pages .record-search-page .record-search-guide :is(h2, span, p, a) {
+    font-family: var(--font-body) !important;
+    color: rgb(var(--record-ink)) !important;
+    letter-spacing: 0 !important;
+    text-transform: none;
+  }
+  #root .record-pages .record-search-page .record-search-guide h2 { font-size: 1.125rem !important; font-weight: 600 !important; line-height: 1.3 !important; }
+  #root .record-pages .record-search-page .record-search-guide p { font-size: .875rem !important; line-height: 1.6 !important; }
+  .record-search-page .record-search-guide span[style] { background-color: transparent !important; }
+  .record-search-page .record-search-guide span.h-2 { background-color: rgb(var(--record-ink)) !important; }
+  .record-search-page .record-search-guide span.font-black { font-size: .8125rem !important; font-weight: 600; }
+  .record-search-page .record-search-origin { background: transparent; padding: 0; border: 0; }
+  .record-search-page .record-search-origin a { min-height: 44px; padding: .5rem 0; border: 0; background: transparent; text-decoration: underline; }
+  .record-search-page .record-search-results { margin-top: 2rem; }
+  #root .record-pages .record-search-page .record-search-summary { background: transparent; padding: 0 0 1rem; border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+  #root .record-pages .record-search-page .record-search-summary p { font-size: .875rem !important; line-height: 1.5 !important; }
+  #root .record-pages .record-search-page .record-search-results h2 { font-family: var(--font-body) !important; font-size: 1.125rem !important; font-weight: 600 !important; line-height: 1.3 !important; letter-spacing: -.015em !important; color: rgb(var(--record-ink)) !important; text-transform: none; }
+  .record-search-page .record-search-section-count { color: rgb(var(--record-ink)) !important; }
+  #root .record-pages .record-search-page .record-search-result {
+    border: 0;
+    border-top: 1px solid rgb(var(--record-ink) / .2) !important;
+    background: transparent;
+    padding: 1rem 0;
+  }
+  .record-search-page .record-search-result :is(p, span, div) { color: rgb(var(--record-ink) / .8) !important; font-family: var(--font-body) !important; text-transform: none; letter-spacing: 0 !important; }
+  .record-search-page .record-search-result span.border { border: 0; padding: 0; }
+  #root .record-pages .record-search-page .record-search-result h3 { font-family: var(--font-body); font-size: 1.1875rem; line-height: 1.3; font-weight: 600 !important; letter-spacing: -.015em !important; text-transform: none; }
+  #root .record-pages .record-search-page .record-search-result p { font-size: .875rem !important; line-height: 1.55 !important; }
+  #root .record-pages .record-search-page .record-search-result p.font-black { font-size: .8125rem !important; font-weight: 400; }
+  .record-search-page .record-search-result:active { background-color: rgb(var(--record-ink) / .035); }
+}

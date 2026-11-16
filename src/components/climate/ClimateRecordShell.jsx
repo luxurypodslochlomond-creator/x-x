@@ -21,7 +21,7 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       <RecordBackBar eyebrow={eyebrow} fallback={returnTo} />
 
       {!compact && (
-        <div className="border-b border-record-ink/15">
+        <div className="record-shell-opening border-b border-record-ink/15">
           <div className="mx-auto max-w-[1100px] px-4 py-9 lg:px-10 lg:py-12">
             {marker && (
               <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">{marker}</p>

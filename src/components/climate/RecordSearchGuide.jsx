@@ -67,7 +67,7 @@ const KINDS = [
 
 export default function RecordSearchGuide() {
   return (
-    <div>
+    <div className="record-search-guide">
       <h2
         className="font-black uppercase text-[#141210] leading-tight mb-1.5"
         style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 26px)', letterSpacing: '-0.02em' }}
@@ -100,7 +100,7 @@ export default function RecordSearchGuide() {
 
       {/* The origins. This is the line a research panel is really looking for: nothing on
           the record stands on our word alone, and the method is one tap away. */}
-      <div className="mt-5 bg-[#141210] border-2 border-[#141210] p-4">
+      <div className="record-search-origin mt-5 bg-[#141210] border-2 border-[#141210] p-4">
         <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#e2602a] mb-2">
           Search by origin, too
         </p>
