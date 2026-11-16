@@ -54,7 +54,10 @@ export default function ClimateFellows() {
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
       {/* ── THE ONE RULE ── */}
-      <section className="border-2 border-[#141210] bg-[#1e3a2b] px-4 py-5 lg:px-6 lg:py-6 mb-9">
+      {/* Ink, not a green box. Green was the one hue on this record that nothing else
+          uses — it made the page read as a different product wearing the record's paper.
+          The record has one ink for its own voice and one red for what it refuses. */}
+      <section className="border-2 border-[#141210] bg-[#141210] px-4 py-5 lg:px-6 lg:py-6 mb-9">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.22em] text-[#f4efe4]/60 mb-2">The one rule</p>
         <p className="text-[#f4efe4] leading-tight" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 6vw, 34px)', letterSpacing: '-0.01em' }}>
           No source, no entry.
@@ -100,7 +103,7 @@ export default function ClimateFellows() {
           <ul className="space-y-2.5">
             {KEEP.map(line => (
               <li key={line} className="relative pl-5 text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-                <span className="absolute left-0 top-0 text-[#1e3a2b] font-black">✓</span>{line}
+                <span className="absolute left-0 top-0 text-[#141210] font-black">✓</span>{line}
               </li>
             ))}
           </ul>
