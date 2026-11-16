@@ -7,7 +7,7 @@ import { Mic, Square } from 'lucide-react';
 const getRecognition = () =>
   typeof window === 'undefined' ? null : window.SpeechRecognition || window.webkitSpeechRecognition || null;
 
-export default function RecordVoiceSearch({ onTranscript, disabled, variant }) {
+export default function RecordVoiceSearch({ onTranscript, disabled, variant, onMessage }) {
   const [listening, setListening] = useState(false);
   const [supported, setSupported] = useState(true);
   const [error, setError] = useState(null);
@@ -18,6 +18,16 @@ export default function RecordVoiceSearch({ onTranscript, disabled, variant }) {
   // say plainly whether nothing was heard, or whether the browser refused to listen.
   const caught = useRef(false);
   const refused = useRef(false);
+
+  // Whatever the mic has to say is handed to the line that owns it, so it can be said in
+  // the flow of the page. It was briefly placed as a balloon under the line, and that
+  // dropped a paragraph straight on top of the subjects beneath it — a page of collided
+  // text, from one line of positioning. Words push what is under them; they never sit on
+  // it.
+  useEffect(() => {
+    if (!onMessage) return;
+    onMessage(error || (listening ? 'Say a place, a topic, a creature, a word' : ''), Boolean(error));
+  }, [error, listening, onMessage]);
 
   // Inside another page's frame (a preview, a panel's embed) browsers usually refuse the
   // mic outright. Knowing that lets us answer honestly instead of just "try again".
@@ -108,32 +118,21 @@ export default function RecordVoiceSearch({ onTranscript, disabled, variant }) {
   if (!supported) return null;
 
   // The mark: a mic sitting at the end of the search line instead of a second bordered
-  // button beside it. Same engine, same honesty when nothing was heard — the message just
-  // falls under the line rather than inside a box, so the page has one shape, not three.
+  // button beside it. Same engine, same honesty when nothing was heard — the words are
+  // passed up to the line and printed under it, in the flow, so nothing is ever covered.
   if (variant === 'mark') {
     return (
-      <>
-        <button
-          type="button"
-          onClick={toggle}
-          disabled={disabled}
-          aria-label={listening ? 'Stop listening' : 'Say your search'}
-          className={`grid h-11 w-11 flex-shrink-0 place-items-center transition-colors ${
-            listening ? 'text-[#b3261e]' : 'text-[#5a5246] active:text-[#b3261e]'
-          }`}
-        >
-          {listening ? <Square className="h-4 w-4" fill="currentColor" /> : <Mic className="h-5 w-5" />}
-        </button>
-        {(listening || error) && (
-          <p
-            className={`absolute left-0 right-0 top-full mt-2 text-[10px] font-mono leading-relaxed ${
-              error ? 'text-[#b3261e]' : 'text-[#5a5246]'
-            }`}
-          >
-            {error || 'Say a place, a topic, a creature, a word'}
-          </p>
-        )}
-      </>
+      <button
+        type="button"
+        onClick={toggle}
+        disabled={disabled}
+        aria-label={listening ? 'Stop listening' : 'Say your search'}
+        className={`grid h-11 w-11 flex-shrink-0 place-items-center transition-colors ${
+          listening ? 'text-[#b3261e]' : 'text-[#5a5246] active:text-[#b3261e]'
+        }`}
+      >
+        {listening ? <Square className="h-4 w-4" fill="currentColor" /> : <Mic className="h-5 w-5" />}
+      </button>
     );
   }
 
