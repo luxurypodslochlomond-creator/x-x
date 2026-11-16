@@ -14,7 +14,7 @@ import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SignalCode from '@/components/climate/SignalCode';
-import SubjectDoor from '@/components/climate/SubjectDoor';
+import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import PeaceBell from '@/components/climate/PeaceBell';
@@ -643,21 +643,23 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
-      {/* ── THE CONTENTS TAB — where on the record you are reading ─────────────────
-          This stood under the submit button, on warm paper, in the same small machine
-          label as every button around it, so the one control that names the place came
-          last and spoke quietest: a footnote to a form. It leads now, and it is printed
-          rather than set — a divider spine of ink on the page edge, the subject in the
-          record's reading voice above the size of any button near it, the count where a
-          page number goes, and the contents sheet unfolding flush beneath it. ── */}
+      {/* ── THE SUBJECT RAIL — the scroll that was here before, back as it looked ────
+          The subjects run along the edge in the record's reading voice, counts where page
+          numbers go, hairline between them: no boxes and nothing that reads as a filter
+          bar. What made this awkward to use the first time is answered underneath the
+          look rather than by replacing it — full-height taps, snapping, and "All subjects"
+          standing first in the rail so the complete list is one tap away. ── */}
       <div className="bg-[#efe7d6]">
-        <SubjectDoor
-          active={activeSubject}
+        <SubjectRail
+          subjects={filledSubjects}
           totalEntries={items.length + actions.length}
           allLabel={t.all}
-          open={showIndex}
-          onOpen={() => setShowIndex(true)}
-          onClose={() => setShowIndex(false)}
+          selected={selectedCategory}
+          onSelect={(id) => {
+            setSelectedCategory(id);
+            requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+          }}
+          onOpenIndex={() => setShowIndex(true)}
         />
         <SubjectIndexSheet
           open={showIndex}
