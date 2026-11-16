@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { DEFINITIONS } from './climateDefinitions';
+import RecordSectionHeading from './RecordSectionHeading';
 
 // ── DEFINITIONS ──
 // Every term stands on its own card, and every card ends with the body that defined it —
@@ -8,16 +9,8 @@ import { DEFINITIONS } from './climateDefinitions';
 
 export default function DefinitionsBand({ heading }) {
   return (
-    <section className="px-4 lg:px-10 py-7 lg:py-11">
-      <div className="flex items-baseline gap-2.5 mb-2">
-        <h2
-          className="text-[#141210]"
-          style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(27px, 7.2vw, 44px)', lineHeight: 1.0, letterSpacing: '-0.02em', fontWeight: 400 }}
-        >
-          {heading}
-        </h2>
-        <span className="font-mono text-[11px] text-[#1e3a2b]">{DEFINITIONS.length}</span>
-      </div>
+    <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+      <RecordSectionHeading title={heading} count={DEFINITIONS.length} tone="text-[#1e3a2b]" />
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
         In the words of the body that defined them. Follow the source and read it there.
       </p>

@@ -20,6 +20,7 @@ import SignalBeacon from '@/components/climate/SignalBeacon';
 import PeaceBell from '@/components/climate/PeaceBell';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 import DefinitionsBand from '@/components/climate/DefinitionsBand';
+import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -222,13 +223,6 @@ import useRecordViewState from '@/components/climate/useRecordViewState';
 // to be the only thing on its line. The count stays — it is a fact and this record does
 // not hide facts — but it sits beside the word like a page number instead of closing a
 // rule. Same seven headings, same words, with the filing cabinet taken off them.
-const SECTION = {
-  fontFamily: 'var(--font-reading)',
-  fontSize: 'clamp(27px, 7.2vw, 44px)',
-  lineHeight: 1.0,
-  letterSpacing: '-0.02em',
-  fontWeight: 400,
-};
 
 export default function TogetherChangeClimate() {
   const [items, setItems] = useState([]);
@@ -628,11 +622,8 @@ export default function TogetherChangeClimate() {
       {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
              The space is held while the record loads, so nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
-        <div className="px-4 lg:px-10 py-7 lg:py-10 bg-[#efe7d6]">
-          <div className="flex items-baseline gap-2.5 mb-4">
-            <h2 className="text-[#141210]" style={SECTION}>{t.featured}</h2>
-            <span className="font-mono text-[11px] text-[#e2602a]">{featured.length}</span>
-          </div>
+        <div className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
+          <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-[#e2602a]" />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
             {loading
               ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
@@ -751,11 +742,8 @@ export default function TogetherChangeClimate() {
         ) : (
           <>
             {showEntries && solutions.length > 0 && (
-              <section className="px-4 lg:px-10 py-7 lg:py-11">
-                <div className="flex items-baseline gap-2.5 mb-4">
-                  <h2 className="text-[#141210]" style={SECTION}>{t.solutions}</h2>
-                  <span className="font-mono text-[11px] text-[#1e3a2b]">{solutions.length}</span>
-                </div>
+              <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-[#1e3a2b]" />
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {solutions.map((item, i) => (
                     <div key={item.id}>
@@ -766,11 +754,8 @@ export default function TogetherChangeClimate() {
               </section>
             )}
             {showEntries && crises.length > 0 && (
-              <section className="px-4 lg:px-10 py-7 lg:py-11">
-                <div className="flex items-baseline gap-2.5 mb-4">
-                  <h2 className="text-[#141210]" style={SECTION}>{t.crises}</h2>
-                  <span className="font-mono text-[11px] text-[#b3261e]">{crises.length}</span>
-                </div>
+              <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+                <RecordSectionHeading title={t.crises} count={crises.length} tone="text-[#b3261e]" />
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
                   {crises.map((item, i) => (
                     <div key={item.id}>
@@ -819,11 +804,8 @@ export default function TogetherChangeClimate() {
                gathering, and the record carries ONLY the one contact line they chose to publish.
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {(selectedType === 'all' || selectedType === 'groups') && (
-          <section className="px-4 lg:px-10 py-7 lg:py-11">
-            <div className="flex items-baseline gap-2.5 mb-2">
-              <h2 className="text-[#141210]" style={SECTION}>{t.groups}</h2>
-              <span className="font-mono text-[11px] text-[#1e3a2b]">{filteredGroups.length}</span>
-            </div>
+          <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="text-[#1e3a2b]" />
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3">{t.groups_sub}</p>
             <button
               onClick={() => setShowGathering(true)}
@@ -865,11 +847,8 @@ export default function TogetherChangeClimate() {
 
         {/* ── ACTIONS — Janine's spec: cleanups, plantings, meetings, policy submissions. x = x — equal alongside Solutions and Crises ── */}
         {(selectedType === 'all' || selectedType === 'actions') && (
-          <section className="px-4 lg:px-10 py-7 lg:py-11">
-            <div className="flex items-baseline gap-2.5 mb-2">
-              <h2 className="text-[#141210]" style={SECTION}>{t.actions}</h2>
-              <span className="font-mono text-[11px] text-[#e2602a]">{filteredActions.length}</span>
-            </div>
+          <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+            <RecordSectionHeading title={t.actions} count={filteredActions.length} tone="text-[#e2602a]" />
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3">{t.actions_sub}</p>
             {filteredActions.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5">
