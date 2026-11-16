@@ -18,6 +18,13 @@ export const FIELDS: Record<string, string[]> = {
   // its title, and a set by its tracklist, because those are the words the giver gave.
   ClimateTrack: ['title', 'artist_name', 'statement', 'lyric', 'tracklist', 'kind', 'spec'],
   ClimateCartoon: ['title', 'artist_name', 'origin', 'for_line', 'credit'],
+  // The credited pictures, searched by what they show and by whose hand made them — a
+  // photographer's name is part of what a picture says, and a panel looking for a body's
+  // credited work should land on it.
+  ClimatePhoto: ['caption', 'credit'],
+  // What readers said under an entry. Only published comments are readable at all, and the
+  // address a commenter typed is never in here: the words stand, the address stays theirs.
+  ClimateComment: ['content', 'author_name'],
 };
 
 // Words that carry no meaning on their own. Dropped before the cap, so a question asked in

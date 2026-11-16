@@ -149,6 +149,53 @@ export default function RecordResultCard({ kind, item }) {
     );
   }
 
+  // A credited picture from the record's crawl — the credit travels with it, here as
+  // everywhere, and is searchable because a photographer's name is part of what it says.
+  if (kind === 'photo') {
+    return (
+      <Link
+        to="/TogetherChangeClimate"
+        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5 active:bg-[#efe7d6] transition-colors"
+      >
+        <Tag tone="#1e3a2b">Credited picture</Tag>
+        <div className="flex items-start gap-3 mt-2">
+          {item.image_url && (
+            <img
+              src={item.image_url}
+              alt={item.caption || item.credit || 'A credited picture on the record'}
+              loading="lazy"
+              className="h-16 w-16 flex-shrink-0 object-cover border border-[#141210]"
+            />
+          )}
+          {item.caption && (
+            <p className="text-[12px] font-mono text-[#141210] leading-relaxed min-w-0">{item.caption}</p>
+          )}
+        </div>
+        {item.credit && <Origin name={item.credit} />}
+      </Link>
+    );
+  }
+
+  // Something a reader said under an entry. Their words, the name they signed, and the
+  // entry they stand under — never the address they typed.
+  if (kind === 'comment') {
+    const said = String(item.content || '');
+    return (
+      <Link
+        to={`/ClimateDetail/${item.entry_type}/${item.entry_id}`}
+        className="block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#b3261e] p-3.5 active:bg-[#efe7d6] transition-colors"
+      >
+        <Tag tone="#b3261e">Said on the record</Tag>
+        <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">
+          “{said.length > 220 ? `${said.slice(0, 220)}…` : said}”
+        </p>
+        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246] leading-relaxed">
+          {item.author_name} · under the entry →
+        </p>
+      </Link>
+    );
+  }
+
   // On the wire — headline, what changed, when and where, and who says so.
   return (
     <Link

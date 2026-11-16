@@ -17,7 +17,25 @@ import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 const searchAll = (base44: any, words: string[]) => searchRecord(base44, words, 12);
 
 const countEntries = (f: any) => f.solutions.length + f.actions.length + f.gatherings.length + f.news.length;
-const countRooms = (r: any) => r.tracks.length + r.cartoons.length + r.people.length;
+const countRooms = (r: any) =>
+  r.tracks.length + r.cartoons.length + r.people.length + r.photos.length + r.comments.length;
+
+const shapePhoto = (i: any) => ({
+  id: i.id,
+  image_url: i.image_url,
+  caption: i.caption || '',
+  credit: i.credit || '',
+});
+
+// A comment is offered with the words its writer used and the name they signed, and with
+// the entry it sits under so a reader can walk to it. Never the address they typed.
+const shapeComment = (i: any) => ({
+  id: i.id,
+  content: i.content,
+  author_name: i.author_name || 'A reader',
+  entry_id: i.entry_id,
+  entry_type: i.entry_type,
+});
 
 const shapeTrack = (i: any) => ({
   id: i.id,
@@ -59,18 +77,22 @@ const readRoll = async (base44: any, words: string[], anyOfWords: boolean) => {
     }));
 };
 
-// Three rooms the shared reader does not cover: the music, the drawings, and the roll.
-// Read under the same rule as every entry — every word must be held, or any of them when
-// nothing held every word, and the reader is told which of the two happened.
+// Five rooms the shared reader does not cover: the music, the drawings, the credited
+// pictures, what readers said under entries, and the roll. Read under the same rule as
+// every entry — every word must be held, or any of them when nothing held every word, and the reader is told which of the two happened.
 const readRooms = async (base44: any, words: string[], anyOfWords: boolean, limit: number) => {
   const q = (entity: string) => (anyOfWords ? anyOf(entity, words) : andAll(entity, words));
-  const [tracks, cartoons] = await Promise.all([
+  const [tracks, cartoons, photos, comments] = await Promise.all([
     base44.entities.ClimateTrack.filter(q('ClimateTrack'), { limit, sort: '-created_date' }),
     base44.entities.ClimateCartoon.filter(q('ClimateCartoon'), { limit, sort: '-created_date' }),
+    base44.entities.ClimatePhoto.filter(q('ClimatePhoto'), { limit }),
+    base44.entities.ClimateComment.filter(q('ClimateComment'), { limit, sort: '-created_date' }),
   ]);
   return {
     tracks: tracks.items || [],
     cartoons: cartoons.items || [],
+    photos: photos.items || [],
+    comments: comments.items || [],
     people: await readRoll(base44, words, anyOfWords),
   };
 };
@@ -213,6 +235,8 @@ export default async function (req) {
         people: rooms.people,
         tracks: rooms.tracks.map(shapeTrack),
         cartoons: rooms.cartoons.map(shapeCartoon),
+        photos: rooms.photos.map(shapePhoto),
+        comments: rooms.comments.map(shapeComment),
       },
     });
   } catch (error) {

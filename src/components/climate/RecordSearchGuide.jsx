@@ -49,6 +49,16 @@ const KINDS = [
     body: 'Pictures on the wall of the cartoons room, each with the hand that drew it and where it came from.',
   },
   {
+    label: 'The pictures',
+    tone: '#1e3a2b',
+    body: 'Credited photographs on the record — searchable by what they show and by the hand that made them.',
+  },
+  {
+    label: 'What readers said',
+    tone: '#b3261e',
+    body: 'Published comments under entries, with the name each writer signed. Never their address.',
+  },
+  {
     label: 'The roll',
     tone: '#b3261e',
     body: 'The people who check this record — findable only by the line each of them wrote for themselves.',

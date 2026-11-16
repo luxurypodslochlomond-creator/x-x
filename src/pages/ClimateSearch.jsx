@@ -24,6 +24,8 @@ const SECTIONS = [
   { key: 'actions', kind: 'action', label: 'Actions', tone: '#e2602a' },
   { key: 'gatherings', kind: 'gathering', label: 'Gatherings', tone: '#1e3a2b' },
   { key: 'wire', kind: 'wire', label: 'On the wire', tone: '#141210' },
+  { key: 'photos', kind: 'photo', label: 'Credited pictures', tone: '#1e3a2b' },
+  { key: 'comments', kind: 'comment', label: 'What readers said', tone: '#b3261e' },
   { key: 'people', kind: 'person', label: 'On the roll', tone: '#b3261e' },
   { key: 'tracks', kind: 'track', label: 'Music given to the record', tone: '#1e3a2b' },
   { key: 'cartoons', kind: 'cartoon', label: 'Drawings', tone: '#e2602a' },
@@ -101,7 +103,7 @@ export default function ClimateSearch() {
       eyebrow="Search the record"
       marker="Every entry carries its origin"
       title="Ask the record"
-      statement="Type it or say it. One question reads the whole record — every solution, crisis, action, gathering, wire entry, piece of music, drawing and person on its roll, in whatever language it was written in."
+      statement="Type it or say it. One question reads the whole record — every solution, crisis, action, gathering, wire entry, piece of music, drawing, credited picture and reader's comment, and every person on its roll, in whatever language it was written in."
       returnTo="/TogetherChangeClimate"
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
