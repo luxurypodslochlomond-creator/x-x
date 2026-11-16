@@ -47,6 +47,21 @@ export default function RecordPagesPanel({ open, onClose }) {
   const [mounted, setMounted] = useState(false);
   const [leaving, setLeaving] = useState(false);
 
+  // ── A DESK IS NOT A PHONE, AND THE LOCK IS THE DIFFERENCE ─────────────────────
+  // On a handset the sheet covers the glass, so the page behind is held still. On a desk it
+  // drops from the top edge with the page still visible under it (see the wide-screen block
+  // in record-navigator.css), and a page you can see but cannot scroll is the "sticks" in
+  // every report this sheet has ever had. So the lock is the phone's alone: a wide screen
+  // scrolls behind the open sheet, exactly as it would behind any open menu.
+  const [isDesk, setIsDesk] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const sync = () => setIsDesk(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+
   useEffect(() => {
     if (open) {
       setMounted(true);
@@ -67,7 +82,7 @@ export default function RecordPagesPanel({ open, onClose }) {
   // somewhere they had not chosen. The same position:fixed lock the tongue sheet and the
   // photograph viewer already use holds it properly, and it hands the reader back their
   // line when the sheet closes.
-  useBodyScrollLock(mounted);
+  useBodyScrollLock(mounted && !isDesk);
 
   // One place owns the dialog itself: opened here, closed only when the sheet has gone.
   useEffect(() => {
@@ -96,7 +111,7 @@ export default function RecordPagesPanel({ open, onClose }) {
       data-state={leaving ? 'out' : 'in'}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
       onClick={onDialogClick}
-      className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30"
+      className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
     >
       <div className="rec-doors-plate flex h-full w-full flex-col bg-record-paper">
         <div aria-hidden="true" className="h-[3px] w-full shrink-0 bg-record-mark" />

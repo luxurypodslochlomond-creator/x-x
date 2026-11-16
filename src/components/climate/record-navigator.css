@@ -313,3 +313,49 @@
 @media (min-width: 1024px) {
   .rec-index-grid { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
 }
+
+/* ── ON A DESK THE SHEET COMES OUT OF THE HEADER, NOT AT YOU ─────────────────────
+   Brian, 16 November: "when click doors at top it's not coolasfuck smooth." He was right,
+   and the reason was not the animation: it was the only moment on the whole record where
+   the page goes dim and something floats in the middle of the glass. Nothing else in the
+   book does that, so the eye reads it as another product interrupting rather than as the
+   record opening.
+
+   So on a wide screen there is no dim and there is no floating. The sheet drops from the
+   top edge, the full width of the book, on the record's own paper, with the same three-pixel
+   red rule across the top as the masthead it replaces — it reads as the header opening, which
+   is what it is. The page underneath stays exactly as bright as it was, so the reader never
+   loses the line they were standing on, and the sheet closes with the same short motion
+   reversed instead of vanishing.
+
+   A phone keeps the sheet it has: the whole glass, rising from the foot, dimmed behind,
+   because on a phone an index that does not fill the screen is a dialog to be dismissed
+   rather than a page to be read. Nothing here touches a width under 1024. */
+@media (min-width: 1024px) {
+  .rec-doors {
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+  .rec-doors::backdrop { background: transparent; animation: none; }
+  .rec-doors-plate {
+    width: 100%;
+    max-width: 1100px !important;
+    max-height: 88dvh !important;
+    border: 0;
+    border-radius: 0 0 4px 4px;
+    border-bottom: 1px solid rgb(var(--record-ink) / 0.22);
+    box-shadow: 0 26px 44px -34px rgb(var(--record-ink) / 0.5);
+  }
+  /* Down from the top edge by a hair, so it is seen to arrive rather than to appear — and
+     up and out the same way, so a door tapped by mistake never flashes. Transform and
+     opacity only: a page carrying a very large painting has nothing re-rendered for this. */
+  @keyframes rec-doors-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes rec-doors-out {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-8px); }
+  }
+}

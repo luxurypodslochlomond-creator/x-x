@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
 import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
+import RecordDeskDoors from '@/components/climate/RecordDeskDoors';
 import '@/components/climate/record-navigator.css';
 
 // ── SIX MARKS, ONE ROW, AND NOTHING PAST THE EDGE ───────────────────────────────
@@ -39,11 +40,17 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
 
   return (
     <div className="flex flex-col pb-2">
+      {/* ── THE DESK ROW, WHICH THE PHONE NEVER SEES ─────────────────────────────
+          Nine marks and the door that opens the rest, at 1024px and wider. The six below
+          are untouched and take over the moment the glass is narrower than that — this is
+          an addition to a row, not a rebuild of one. See RecordDeskDoors. */}
+      <RecordDeskDoors onOpenContents={onOpenContents} contentsOpen={contentsOpen} />
+
       {/* Capped, so equal share does not become equal sprawl: on a wide screen six cells
           stretched across the whole book would put a hand's width of air between one mark
           and the next and turn the rail into six lonely doors. Below the cap they divide
           whatever there is; above it they keep a cell's own size. */}
-      <nav aria-label="The record's doors" className="rec-mast-doors flex w-full max-w-[520px] items-stretch gap-x-1">
+      <nav aria-label="The record's doors" className="rec-mast-doors flex w-full max-w-[520px] items-stretch gap-x-1 lg:hidden">
         {WAY_IN.map(({ label, to, what }) => (
           <RecordNavDoor
             key={to}

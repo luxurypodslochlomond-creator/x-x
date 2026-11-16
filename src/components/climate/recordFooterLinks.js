@@ -52,6 +52,27 @@ export const RAIL_SECOND_NAV = [
   { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
 ];
 
+// ── THE DESK ROW, AND WHY IT IS LONGER THAN THE PHONE'S ────────────────────────
+// A handset fits five ways in and one mark that opens the rest. A desk does not have that
+// problem and should not pretend to: the masthead is a thousand pixels wide and was
+// showing six marks squeezed into half of it, with the half that mattered — why the record
+// exists, how an entry is checked, what has been corrected — three clicks deep inside a
+// sheet that dimmed the page to open.
+//
+// Those three are the record's whole claim to being believed, and they are exactly what a
+// reader like Janine looks for the moment she lands. So on a desk they stand in the row.
+//
+// Nine marks, not ten: five ways in, those three, and the one that opens everything else.
+// Nine across a thousand pixels is a hundred each — the widest this row gets before a
+// caption starts to crowd, which is the honest limit. Nothing is added that a reader does
+// not arrive with: the roll, the founder, the music room, the cartoons, the seals and the
+// host page are all things a reader goes looking for, and they live in the sheet, which is
+// what the sheet is for.
+//
+// Built from the same two lists the rail and the sheet already read, so a desk can never
+// show a door the record has stopped offering, or name one differently to a phone.
+export const DESK_NAV = [...PRIMARY_NAV, ...RAIL_SECOND_NAV];
+
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.
 export const FOOTER_NAV = [
