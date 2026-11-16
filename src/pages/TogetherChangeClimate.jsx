@@ -12,7 +12,7 @@ import { shareRecord } from '@/components/climate/shareRecordCard';
 import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
-import SignalCode from '@/components/climate/SignalCode';
+import SubjectIndexItem from '@/components/climate/SubjectIndexItem';
 import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
@@ -747,28 +747,37 @@ export default function TogetherChangeClimate() {
         </div>
       </div>
 
-      {/* ── THE SUBJECTS ──────────────────────────────────────────────────────────
-          A phone gets the contents tab above, which opens the sheet; a desk keeps the
-          full set laid flat, because there it fits and no thumb is doing the aiming. ── */}
-      <div className="px-4 lg:px-10 pb-0 lg:pb-5 bg-[#efe7d6]">
-        <div className="hidden lg:flex gap-1.5 flex-wrap" aria-label="Filter by subject">
+      {/* ── THE SUBJECTS, DRAWN ─────────────────────────────────────────────────────
+          A phone opens the contents sheet and meets the subjects as drawings. A desk met
+          them as typed pills with two-letter codes in boxes — the marks stopped dead at
+          the phone's edge, which is why the index looked like two different records
+          depending on the glass it was on. It is the same index everywhere now: the
+          drawings, their counts, laid flat because a desk has the room and no thumb is
+          doing the aiming. Nothing about the filter has changed. ── */}
+      <div className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6]">
+        <div className="border-y border-[#141210]/20">
           <button
+            type="button"
             onClick={() => setSelectedCategory('all')}
-            className={`flex-shrink-0 snap-start px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-              selectedCategory === 'all' ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
+            aria-pressed={selectedCategory === 'all'}
+            className={`flex min-h-11 w-full items-center gap-2 text-left ${
+              selectedCategory === 'all' ? 'text-[#0f5f7a]' : 'text-[#141210]'
             }`}
-          >{t.all}</button>
-          {categories.map(c => (
-            <button
-              key={c.id}
-              onClick={() => setSelectedCategory(c.id)}
-              className={`flex-shrink-0 snap-start flex items-center gap-1 px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
-                selectedCategory === c.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210] active:bg-[#141210] active:text-[#efe7d6]'
-              }`}
-            >
-              <SignalCode code={c.code} />{c.label}
-            </button>
-          ))}
+          >
+            <SubjectMark subject="all" size={30} active={selectedCategory === 'all'} />
+            <span className="text-[13px]">All subjects</span>
+            <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">{items.length + actions.length}</span>
+          </button>
+          <div className="grid grid-cols-6 gap-x-2 gap-y-1 py-2 xl:grid-cols-8" aria-label="Filter by subject">
+            {subjectIndex.map(s => (
+              <SubjectIndexItem
+                key={s.id}
+                subject={s}
+                selected={selectedCategory === s.id}
+                onClick={() => setSelectedCategory(s.id)}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -826,8 +835,10 @@ export default function TogetherChangeClimate() {
             )}
             {showEntries && (solutions.length + crises.length) === 0 && (
               <div className="py-16 text-center px-4">
-                <SubjectMark subject={activeSubject?.id || 'all'} size={40} className="mx-auto text-record-ink lg:hidden" />
-                <Globe className="mx-auto hidden h-10 w-10 text-record-muted lg:block" />
+                {/* The drawing, on every screen. A desk used to be handed a generic globe
+                    here while the phone got the subject's own mark — the same fault as the
+                    index above, in the one place where the mark is all the reader has. */}
+                <SubjectMark subject={activeSubject?.id || 'all'} size={40} className="mx-auto text-record-ink" />
                 {subjectGap ? (
                   <>
                     <p className="text-[#141210] text-[12px] font-mono uppercase mt-3 leading-relaxed">
