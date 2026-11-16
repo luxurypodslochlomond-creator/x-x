@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { X, Send, Check, Leaf, AlertTriangle, Sprout } from 'lucide-react';
+import { X, Send, Check, Leaf, AlertTriangle, Sprout, Users } from 'lucide-react';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import { createPageUrl } from '@/utils';
 import SmartPaste from '@/components/climate/SmartPaste';
@@ -9,7 +9,8 @@ function SuccessScreen({ entryType, onClose, published }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
-  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : 'action';
+  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : entryType === 'group' ? 'group' : 'action';
+  const isGroup = entryType === 'group';
   return (
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto">
       <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
@@ -24,6 +25,8 @@ function SuccessScreen({ entryType, onClose, published }) {
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
         {published
           ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A keeper can take it down, and we would email you first.'
+          : isGroup
+          ? 'A person checks every group that gives a contact line, so the address printed is the organiser\'s own and not somebody else\'s. We will email you the moment it is up.'
           : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}
       </p>
       <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
@@ -35,9 +38,12 @@ function SuccessScreen({ entryType, onClose, published }) {
 
 // initialCategory comes from the index: a reader who taps an empty subject arrives on this
 // form with the subject already chosen, so they never have to find it again in a dropdown.
-export default function ClimateSubmitForm({ onClose, initialCategory }) {
+export default function ClimateSubmitForm({ onClose, initialCategory, initialType }) {
   const { categories } = useClimateCategories();
-  const [entryType, setEntryType] = useState('solution');
+  // initialType lets the "Start a group" button open this same form with the group door
+  // already open, so there is one door onto the record and no second form to drift out of step.
+  const [entryType, setEntryType] = useState(initialType || 'solution');
+  const isGroup = entryType === 'group';
   const [form, setForm] = useState({
     title: '', summary: '', details: '', category: initialCategory || 'agriculture',
     country: '', region_rough: '', image_url: '', source_name: '', source_url: '',
@@ -45,6 +51,8 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
     submitter_name: '', submitter_email: '',
     // Action-specific fields
     action_type: 'cleanup', date: '', contact_link: '',
+    // Group fields — a gathering is an introduction, not a claim about the world.
+    name: '', topic: '', region: '', contact_email: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -83,7 +91,16 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
     }
 
     const isAction = entryType === 'action';
-    if (isAction) {
+    if (isGroup) {
+      if (!form.name.trim() || !form.topic.trim() || !form.region.trim() || !form.description?.trim() || !form.submitter_name.trim() || !form.submitter_email.trim()) {
+        setError('A group name, a topic, a rough region, a few words on what you are doing together, your name, and your email are all needed.');
+        return;
+      }
+      if (form.contact_email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contact_email.trim())) {
+        setError('The contact line must be an email address, or left empty.');
+        return;
+      }
+    } else if (isAction) {
       if (!form.title.trim() || !form.description?.trim() || !form.contact_link.trim() || !form.submitter_name.trim() || !form.submitter_email.trim()) {
         setError("Title, what's happening, a contact link, your name, and your email are all needed.");
         return;
@@ -105,9 +122,18 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
 
     setSubmitting(true);
     try {
+      // A group carries its own fields and no entry_type at all: a gathering is not a
+      // solution, a crisis or an action, and filing it as one would be the small lie that
+      // makes the rest of the record harder to believe.
       const res = await base44.functions.invoke('climateSubmitReview', {
         type: entryType,
-        data: { ...form, entry_type: entryType }
+        data: isGroup
+          ? {
+              name: form.name, topic: form.topic, region: form.region,
+              description: form.description, contact_email: form.contact_email,
+              submitter_name: form.submitter_name, submitter_email: form.submitter_email,
+            }
+          : { ...form, entry_type: entryType }
       });
       setPublished(res?.data?.status === 'published');
       setSubmitted(true);
@@ -147,8 +173,10 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
             name="website"
           />
         </div>
-        {/* Sent an email? The machine reads it and fills the form in. */}
-        <SmartPaste
+        {/* Sent an email? The machine reads it and fills the form in. Not on the group door:
+            a gathering has no article to paste, and a box that does nothing is a box that
+            teaches people the form is broken. */}
+        {!isGroup && <SmartPaste
           kind={entryType === 'action' ? 'action' : entryType}
           categories={categories.map(c => ({ id: c.id, label: c.label }))}
           accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'category', 'country', 'region_rough']}
@@ -168,14 +196,19 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
                 country: f.country || prev.country,
                 region_rough: f.region_rough || prev.region_rough,
               })}
-        />
+        />}
 
         {/* Type toggle */}
-        <div className="flex gap-2 mb-5">
+        {/* Four doors, in the order the record names them: solution, crisis, action, group.
+            Two by two on a phone — four across 393px turned every one of these labels into a
+            sliver, and a door you cannot read is not a door. Same cut, same ink, same rules:
+            only the group borrows the record's ocean blue, because it is the one that is an
+            introduction rather than a claim. */}
+        <div className="grid grid-cols-2 gap-2 mb-5 sm:grid-cols-4">
           <button
             type="button"
             onClick={() => setEntryType('solution')}
-            className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
+            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
               entryType === 'solution' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
             }`}
           >
@@ -184,7 +217,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
           <button
             type="button"
             onClick={() => setEntryType('climate_crisis')}
-            className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
+            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
               entryType === 'climate_crisis' ? 'bg-[#b3261e] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
             }`}
           >
@@ -193,11 +226,20 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
           <button
             type="button"
             onClick={() => setEntryType('action')}
-            className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
+            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
               entryType === 'action' ? 'bg-[#1e3a2b] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
             }`}
           >
             <Sprout className="w-4 h-4" /> Action
+          </button>
+          <button
+            type="button"
+            onClick={() => setEntryType('group')}
+            className={`flex items-center justify-center gap-1.5 px-2 py-3.5 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
+              entryType === 'group' ? 'bg-[#0f5f7a] text-[#efe7d6] border-[#141210]' : 'bg-[#efe7d6] text-[#141210] border-[#141210]'
+            }`}
+          >
+            <Users className="w-4 h-4" /> Group
           </button>
         </div>
 
@@ -206,11 +248,47 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
             ? 'A positive action that others can replicate — at any scale, from individuals to whole countries.'
             : entryType === 'climate_crisis'
             ? 'A climate emergency that the world needs to be alerted to.'
+            : entryType === 'group'
+            ? 'People working on the same thing in the same area. The record carries the introduction, never the conversation: one contact line you choose to publish, and what you say to each other afterwards is yours.'
             : 'Something happening on the ground — a cleanup, planting, meeting, or policy push. One contact link. The platform never sees the messages.'}
         </p>
 
         {/* Fields */}
         <div className="space-y-3">
+          {isGroup ? (
+            <>
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Group name *</label>
+                <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Seagrass Restorers — West Coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Topic *</label>
+                <input value={form.topic} onChange={e => set('topic', e.target.value)} placeholder="e.g. Saving seagrasses" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">What you and others are working on, in a few words. This is how someone finds you.</p>
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Region (rough) *</label>
+                <input value={form.region} onChange={e => set('region', e.target.value)} placeholder="e.g. West coast, Scotland" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">Rough only — a coastline, a country, a city. Never a street or an exact place.</p>
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What you are doing together *</label>
+                <textarea value={form.description || ''} onChange={e => set('description', e.target.value)} placeholder="Plain language — what you are working on, and what someone joining in would do" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
+              </div>
+
+              <div>
+                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">The one contact line you want shown</label>
+                <input value={form.contact_email} onChange={e => set('contact_email', e.target.value)} placeholder="you@example.org — or leave empty" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
+                <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
+                  A person reads every contact line before it goes up, so the address printed is the organiser's own and never somebody else's. Leave it empty and your group prints as an open one — "contact line being arranged" — never a made-up address. Your own email below is kept apart from it and is never published.
+                </p>
+              </div>
+            </>
+          ) : (
+          <>
           <div>
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Title *</label>
             <input value={form.title} onChange={e => set('title', e.target.value)} placeholder={entryType === 'action' ? "e.g. Mangrove planting day, Cardigan Bay" : "e.g. Mangrove restoration, Cardigan Bay"} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
@@ -300,6 +378,9 @@ export default function ClimateSubmitForm({ onClose, initialCategory }) {
               <input value={form.source_date} onChange={e => set('source_date', e.target.value)} placeholder="e.g. 21 April 2025" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             </div>
           </div>
+
+          </>
+          )}
 
           <div className="border-t-2 border-[#141210]/20 pt-3 mt-2">
             <p className="text-[10px] font-mono text-[#5a5246] mb-3 leading-relaxed">

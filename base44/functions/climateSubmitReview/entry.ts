@@ -108,6 +108,54 @@ Content: ${fullContent.slice(0, 2000)}`,
       aiAssessment = `${aiAssessment} · Gathering with no name or topic — held for a human.`;
     }
 
+    // ── A PUBLIC ADDRESS THAT NOBODY HAS CHECKED ────────────────────────────────
+    // A gathering may print a contact line to the whole world, under a mailto link that
+    // invites every reader to write to it. That is the one field on this whole form that can
+    // hurt somebody who never touched it: type a stranger's address into the box and the
+    // record would publish it as though they had offered it themselves. No spell-check
+    // catches that, and no rate limit does either.
+    //
+    // So a group that gives a contact line waits for a keeper, who writes to it and hears a
+    // person answer before an address goes up in public. A group with no contact line goes
+    // up at once, exactly as before — there is nothing there to abuse, and it prints
+    // "contact line being arranged" rather than an address. Nothing honest is slowed down;
+    // only the one field that can do real harm is held.
+    if (type === 'group' && data.contact_email) {
+      flagged = true;
+      aiAssessment = `${aiAssessment} · A contact line was given — held so a keeper can check the address belongs to the organiser.`;
+    }
+
+    // ── A CEILING, NOT A LOCK ───────────────────────────────────────────────────
+    // Nothing here counts how often one address submits, so a script and an enthusiastic
+    // organiser looked identical. The answer is not a refusal: a refusal would be the one
+    // outcome that punishes an honest person for being quick. Past the ceiling the entry is
+    // still taken and still kept — it simply waits for a person, like anything else the
+    // machine is unsure about. A script gets nothing published, and a school running an
+    // afternoon of workshops loses nothing but a few minutes.
+    const entityForCount = (t: string) =>
+      t === 'action' ? base44.asServiceRole.entities.ClimateAction
+      : t === 'news' ? base44.asServiceRole.entities.ClimateNews
+      : t === 'group' ? base44.asServiceRole.entities.ClimateGroup
+      : t === 'comment' ? base44.asServiceRole.entities.ClimateComment
+      : base44.asServiceRole.entities.ClimateSolution;
+
+    try {
+      if (data.submitter_email) {
+        const since = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+        const sameHour = await entityForCount(type).count({
+          submitter_email: data.submitter_email,
+          created_date: { $gte: since },
+        });
+        if (sameHour >= 6) {
+          flagged = true;
+          aiAssessment = `${aiAssessment} · ${sameHour} arrived from this address in the last hour — held for a person. Nothing is lost, and nothing is refused.`;
+        }
+      }
+    } catch (countError) {
+      // A counter that fails must never be the reason an entry does not arrive.
+      console.error('submit hour count failed', countError);
+    }
+
     const status = flagged ? 'draft' : 'published';
 
     // ── WHAT A SUBMITTER MAY NOT SAY ABOUT THEMSELVES ──

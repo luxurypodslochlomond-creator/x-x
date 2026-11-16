@@ -5,7 +5,6 @@ import { base44 } from '@/api/base44Client';
 import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
-import GatheringForm from '@/components/climate/GatheringForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
@@ -240,7 +239,10 @@ export default function TogetherChangeClimate() {
   const [showSubmit, setShowSubmit] = useState(
     () => new URLSearchParams(window.location.search).get('submit') === '1'
   );
-  const [showGathering, setShowGathering] = useState(false);
+  // Which door the one form opens on. A reader who taps "Start a group" should land with the
+  // group door already open, rather than being handed a second form that drifts out of step
+  // with the first — which is exactly what had happened.
+  const [submitType, setSubmitType] = useState(null);
   const [showIndex, setShowIndex] = useState(false);
   const [submitCategory, setSubmitCategory] = useState(null);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
@@ -728,7 +730,7 @@ export default function TogetherChangeClimate() {
               onClick={() => setShowSubmit(true)}
               className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
             >
-              <Plus className="w-4 h-4" /> Submit a solution, crisis, or action
+              <Plus className="w-4 h-4" /> Submit a solution, crisis, action, or group
             </button>
             <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-2">
               Been sent an email? Paste it in — we read it and fill the form in for you. No account needed, nothing to install.
@@ -838,9 +840,14 @@ export default function TogetherChangeClimate() {
         {(selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
             <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="text-[#1e3a2b]" />
-            <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-3">{t.groups_sub}</p>
+            <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-2">{t.groups_sub}</p>
+            {/* Said out loud, on the section itself, so nobody has to guess how far the record
+                has gone for them. A group is an introduction the organiser wrote; it carries no
+                source, so the record says carried, not checked — the same honesty every entry
+                here is held to, in the one line a reader actually needs. */}
+            <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">Carried, not checked: this is the organiser's own line. Write to them and decide for yourself.</p>
             <button
-              onClick={() => setShowGathering(true)}
+              onClick={() => { setSubmitType('group'); setShowSubmit(true); }}
               className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#1e3a2b] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
             >
               <Users className="w-4 h-4" /> Start a group
@@ -935,14 +942,16 @@ export default function TogetherChangeClimate() {
       {showSubmit && (
         <ClimateSubmitForm
           initialCategory={submitCategory}
-          onClose={() => { setShowSubmit(false); setSubmitCategory(null); }}
-        />
-      )}
-      {showGathering && (
-        <GatheringForm
+          initialType={submitType || undefined}
           onClose={() => {
-            setShowGathering(false);
-            base44.entities.ClimateGroup.list().then(v => setGroups(Array.isArray(v) ? v : (v?.items || []))).catch(() => {});
+            const wasGroup = submitType === 'group';
+            setShowSubmit(false);
+            setSubmitCategory(null);
+            setSubmitType(null);
+            // A group that just went up should be on the wall it was sent from.
+            if (wasGroup) {
+              base44.entities.ClimateGroup.list().then(v => setGroups(Array.isArray(v) ? v : (v?.items || []))).catch(() => {});
+            }
           }}
         />
       )}
