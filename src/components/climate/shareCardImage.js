@@ -715,3 +715,126 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
 
   return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
 }
+
+// ── THE WAY IN, ON ONE CARD ───────────────────────────────────────────────────
+// Janine asked, by email, to be walked through what a new person does — and a walkthrough
+// sent as prose is a walkthrough nobody rereads. So the same few steps travel as a card:
+// five lines, no explaining, in the order a person actually does them. It is handed to a
+// keeper, not published as a page, because it is addressed to one correspondent.
+// The words are deliberately short. A card that needs reading twice is a page.
+export async function buildWayInShareCard(card = {}, options = {}) {
+  const origin = String(options.origin || recordOrigin() || '').replace(/^https?:\/\//, '');
+  const steps = Array.isArray(card.steps) ? card.steps.slice(0, 5) : [];
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  try {
+    await Promise.all([
+      document.fonts.load('900 66px Oswald'),
+      document.fonts.load('900 22px ui-monospace'),
+    ]);
+  } catch { /* the system faces still read fine */ }
+
+  ctx.fillStyle = PAPER;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(20,18,16,0.035)';
+  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
+
+  // Epigraph band, the same one every page of the record carries.
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, 0, W, 74);
+  ctx.fillStyle = BONE;
+  ctx.globalAlpha = 0.7;
+  ctx.font = `900 15px ${MONO}`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
+  ctx.globalAlpha = 1;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+
+  // The badge: who this card is for, said first.
+  let y = 118;
+  ctx.font = `900 20px ${MONO}`;
+  const badgeText = card.badge || 'FOR A KEEPER';
+  const badgeW = ctx.measureText(badgeText).width + 32;
+  ctx.fillStyle = INK;
+  ctx.fillRect(PAD, y - 24, badgeW, 36);
+  ctx.fillStyle = BONE;
+  ctx.fillText(badgeText, PAD + 16, y + 1);
+
+  const chipText = 'ON A PHONE';
+  const chipW = ctx.measureText(chipText).width + 28;
+  ctx.strokeStyle = 'rgba(20,18,16,0.45)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(PAD + badgeW + 12, y - 24, chipW, 36);
+  ctx.fillStyle = MUTED;
+  ctx.fillText(chipText, PAD + badgeW + 26, y + 1);
+
+  // Title.
+  y += 44;
+  ctx.fillStyle = INK;
+  const size = 66;
+  ctx.font = `900 ${size}px ${DISPLAY}`;
+  const head = wrapLines(ctx, String(card.title || 'The way in').toUpperCase(), MAXW, 2);
+  const headLine = Math.round(size * 1.08);
+  const headBase = y + size;
+  drawLines(ctx, head, PAD, headBase, headLine);
+  y = headBase + headLine * (head.length - 1) + 26;
+
+  if (card.body) {
+    ctx.fillStyle = 'rgba(20,18,16,0.88)';
+    ctx.font = `500 25px ${MONO}`;
+    const body = wrapLines(ctx, card.body, MAXW, 2);
+    drawLines(ctx, body, PAD, y + 24, 37);
+    y = y + 24 + 37 * Math.max(0, body.length - 1);
+  }
+
+  // The steps: a number, the act, then one line of what happens.
+  let stepY = y + 78;
+  steps.forEach((step, i) => {
+    ctx.fillStyle = SIGNAL;
+    ctx.font = `900 26px ${MONO}`;
+    ctx.fillText(String(i + 1), PAD, stepY);
+
+    ctx.fillStyle = INK;
+    ctx.font = `900 27px ${MONO}`;
+    ctx.fillText(fitText(ctx, String(step.do || ''), MAXW - 54), PAD + 54, stepY);
+
+    ctx.fillStyle = 'rgba(20,18,16,0.8)';
+    ctx.font = `500 24px ${MONO}`;
+    const what = wrapLines(ctx, String(step.what || ''), MAXW - 54, 2);
+    drawLines(ctx, what, PAD + 54, stepY + 37, 32);
+
+    stepY += 37 + 32 * Math.max(1, what.length) + 42;
+  });
+
+  if (card.closing) {
+    ctx.fillStyle = MUTED;
+    ctx.font = `500 22px ${MONO}`;
+    const close = wrapLines(ctx, card.closing, MAXW, 3);
+    drawLines(ctx, close, PAD, FOOTER_TOP - 150 - 34 * (close.length - 1), 34);
+  }
+
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, FOOTER_TOP, W, 150);
+  ctx.fillStyle = SIGNAL_BRIGHT;
+  ctx.font = `900 24px ${MONO}`;
+  ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
+  ctx.textAlign = 'right';
+  ctx.fillStyle = MARK;
+  ctx.font = `900 22px ${MONO}`;
+  ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = BONE;
+  ctx.font = `700 18px ${MONO}`;
+  ctx.fillText(fitText(ctx, `${origin}${card.url_path || '/ClimateGuide'}`, MAXW), PAD, FOOTER_TOP + 100);
+
+  ctx.fillStyle = SIGNAL;
+  ctx.fillRect(0, 74, 8, H - 74);
+
+  return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
+}

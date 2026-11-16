@@ -6,7 +6,7 @@ import { PRIMARY_NAV, FOOTER_NAV } from '@/components/climate/recordFooterLinks'
 import RecordPageIndex from '@/components/climate/RecordPageIndex';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import AskTheRecord from '@/components/climate/AskTheRecord';
-import { buildGuideShareCard } from '@/components/climate/shareCardImage';
+import { buildGuideShareCard, buildWayInShareCard } from '@/components/climate/shareCardImage';
 
 // The record's own mark for music, at the size of the words it stands beside. The note
 // glyph is gone from this page: the fork is the record's, and the guide of the record's
@@ -178,6 +178,24 @@ const FOOT = [
   { label: 'The keeper’s room', to: '/ClimateKeeperRoom', what: 'Where invited keepers decide and checkers write their notes — one door, two kinds of key.' },
 ];
 
+// The way in, as a card Janine can forward. Five lines, in the order a keeper does them,
+// and one promise at the foot: no entry goes up without a person's name on it.
+const WAY_IN_CARD = {
+  id: 'way-in',
+  badge: 'FOR A KEEPER',
+  title: 'The way in',
+  body: 'Five lines, on a phone. Nothing here waits on a second person except the keys.',
+  steps: [
+    { do: 'Sign in with the address this record knows', what: 'Google, or a password. That address is the one it recognises.' },
+    { do: 'Open the keeper\u2019s room', what: 'The drawn door at the top of any page. It opens to a keeper only.' },
+    { do: 'People \u2192 add by email', what: 'A checker goes on with one word. A keeper needs a second keeper to agree.' },
+    { do: 'Decide: yes, or not yet', what: 'Yes writes your name on the entry. Not yet keeps it waiting, with your reason beside it.' },
+    { do: 'Seal what went up', what: 'One tap. Anyone can check the seal in their own browser, without trusting us.' },
+  ],
+  closing: 'Nothing goes on this record without a person\u2019s name on it.',
+  url_path: '/ClimateGuide',
+};
+
 export default function ClimateGuide() {
   return (
     <ClimateRecordShell
@@ -188,12 +206,19 @@ export default function ClimateGuide() {
       returnLabel="Back to the record"
       footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
     >
-      {/* The manual's own card, before the writing: the whole guide can leave in one piece. */}
-      <div className="mb-6">
+      {/* The manual's own card, before the writing: the whole guide can leave in one piece.
+          Below it, the same thing said short — the way in, for a keeper who is starting
+          today and has not got time to read a manual before she does her first entry. */}
+      <div className="mb-6 space-y-2">
         <ShareCardButton
           entry={BUTTONS_CARD}
           build={buildGuideShareCard}
           label="Share the manual as a card"
+        />
+        <ShareCardButton
+          entry={WAY_IN_CARD}
+          build={buildWayInShareCard}
+          label="Send the way in as a card"
         />
       </div>
 
