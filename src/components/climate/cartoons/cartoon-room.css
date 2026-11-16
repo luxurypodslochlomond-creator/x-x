@@ -28,6 +28,7 @@
 .record-pages .cartoon-room .comic-session-who h3 { margin: 0 0 .3rem; font-size: .6rem; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; }
 .record-pages .cartoon-room .comic-session-who p { margin: 0; font-size: .8rem; line-height: 1.55; }
 .record-pages .cartoon-room .comic-session-attrib { margin-top: .5rem; font-size: .7rem; color: rgb(var(--record-muted)); }
+.comic-session-link { display: inline-flex; align-items: center; gap: .35rem; margin-top: .85rem; font-size: .8rem; font-weight: 800; text-decoration: underline; text-underline-offset: .22em; }
 .comic-reader { max-width: 40rem; margin: auto; }
 .comic-masthead { position: relative; padding: 1.2rem .4rem 1rem; }
 .comic-eyebrow { font-size: .78rem; font-weight: 700; color: rgb(var(--record-muted)); }

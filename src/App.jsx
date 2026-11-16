@@ -151,6 +151,7 @@ const ClimateWireEntryPage = React.lazy(() => import('./pages/ClimateWireEntry')
 const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
+const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
 const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrections'));
@@ -359,6 +360,11 @@ const AuthenticatedApp = () => {
           during it. Public to read, like every other room on the record: a wall nobody
           may look at is a noticeboard, not a record. Drawings sent in wait for a keeper. */}
       <Route path="/ClimateCartoons" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsPage /></ClimateLayout>} />
+      {/* The 29th, written down: one address Janine can send to CEEW, to the festival's
+          curator or to a classroom. It carries the hour, what happens to the drawings and
+          the one ask — and no addresses, no phone numbers and no joining link, because a
+          workshop's link is hers to hand out. */}
+      <Route path="/ClimateWorkshop" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopPage /></ClimateLayout>} />
       <Route path="/ClimateHost" element={<ClimateLayout currentPage="ClimateHost"><ClimateHostPage /></ClimateLayout>} />
       {/* ── SAVED, NOT STANDING OPEN ─────────────────────────────────────────────────
           "Please save this… for when we are discussing with a potential host" — the founder,

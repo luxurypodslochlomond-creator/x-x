@@ -44,6 +44,9 @@ export default function CartoonSessionBand() {
         <p>{ALINA}</p>
         <p className="comic-session-attrib">In CEEW’s own words, written to introduce her at the workshop.</p>
       </div>
+      <Link to="/ClimateWorkshop" className="comic-session-link">
+        The hour itself, written down <span aria-hidden="true">→</span>
+      </Link>
     </section>
   );
 }
