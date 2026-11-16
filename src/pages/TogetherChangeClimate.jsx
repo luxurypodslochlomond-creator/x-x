@@ -16,6 +16,7 @@ import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SignalCode from '@/components/climate/SignalCode';
 import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
+import SubjectMark from '@/components/climate/SubjectMark';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import PeaceBell from '@/components/climate/PeaceBell';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
@@ -643,45 +644,6 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
-      {/* ── THE SUBJECT RAIL — the scroll that was here before, back as it looked ────
-          The subjects run along the edge in the record's reading voice, counts where page
-          numbers go, hairline between them: no boxes and nothing that reads as a filter
-          bar. What made this awkward to use the first time is answered underneath the
-          look rather than by replacing it — full-height taps, snapping, and "All subjects"
-          standing first in the rail so the complete list is one tap away. ── */}
-      <div className="bg-[#efe7d6]">
-        <SubjectRail
-          subjects={filledSubjects}
-          totalEntries={items.length + actions.length}
-          allLabel={t.all}
-          selected={selectedCategory}
-          onSelect={(id) => {
-            setSelectedCategory(id);
-            requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-          }}
-          onOpenIndex={() => setShowIndex(true)}
-        />
-        <SubjectIndexSheet
-          open={showIndex}
-          onClose={() => setShowIndex(false)}
-          filled={filledSubjects}
-          empty={emptySubjects}
-          totalEntries={items.length + actions.length}
-          selected={selectedCategory}
-          allLabel={t.all}
-          onSelect={(id) => {
-            setSelectedCategory(id);
-            setShowIndex(false);
-            requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-          }}
-          onAdd={(subject) => {
-            setShowIndex(false);
-            setSubmitCategory(subject.id);
-            setShowSubmit(true);
-          }}
-        />
-      </div>
-
       {/* ── TOOLBAR — the record's filters on one side, its own doors on the other.
              The search that reaches everything is the one pill in the header: one
              search, not two. On a desktop that reads as a working toolbar; on a phone
@@ -717,6 +679,38 @@ export default function TogetherChangeClimate() {
                   selectedType === 'actions' ? 'bg-[#e2602a] text-[#141210] border-[#141210]' : 'bg-[#141210] text-[#efe7d6] border-[#141210] hover:bg-[#e2602a] hover:text-[#141210]'
                 }`}
               >{t.actions}</button>
+            </div>
+            <div className="my-5 lg:hidden">
+              <SubjectRail
+                subjects={subjectIndex}
+                totalEntries={items.length + actions.length}
+                allLabel="All subjects"
+                selected={selectedCategory}
+                expanded={showIndex}
+                onOpenIndex={() => setShowIndex(open => !open)}
+              />
+              <SubjectIndexSheet
+                open={showIndex}
+                onClose={() => setShowIndex(false)}
+                filled={filledSubjects}
+                empty={emptySubjects}
+                totalEntries={items.length + actions.length}
+                selected={selectedCategory}
+                allLabel="All subjects"
+                onSelect={(id) => {
+                  setSelectedCategory(id);
+                  setShowIndex(false);
+                  requestAnimationFrame(() => {
+                    document.getElementById('record-subject-toggle')?.focus({ preventScroll: true });
+                    contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  });
+                }}
+                onAdd={(subject) => {
+                  setShowIndex(false);
+                  setSubmitCategory(subject.id);
+                  setShowSubmit(true);
+                }}
+              />
             </div>
             {/* "Support welcome" is off this line at Janine's request, 9 November: donations
                 are for a host to handle, and are being saved for those conversations. */}
@@ -798,7 +792,8 @@ export default function TogetherChangeClimate() {
             )}
             {showEntries && (solutions.length + crises.length) === 0 && (
               <div className="py-16 text-center px-4">
-                <Globe className="w-10 h-10 text-[#5a5246] mx-auto" />
+                <SubjectMark subject={activeSubject?.id || 'all'} size={44} className="mx-auto text-record-ink lg:hidden" />
+                <Globe className="mx-auto hidden h-10 w-10 text-record-muted lg:block" />
                 {subjectGap ? (
                   <>
                     <p className="text-[#141210] text-[12px] font-mono uppercase mt-3 leading-relaxed">
