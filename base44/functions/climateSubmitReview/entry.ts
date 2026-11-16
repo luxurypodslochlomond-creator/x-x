@@ -90,6 +90,16 @@ Content: ${fullContent.slice(0, 2000)}`,
       aiAssessment = `${aiAssessment} · No link to the source body — held for a person to find it.`;
     }
 
+    // An action is the same claim, one step further out: it asks a reader to turn up, dig,
+    // or give an hour of their life to it. An hour is not something to ask for on a machine's
+    // say-so, so an action with no origin to open waits for a person like every other claim
+    // about the world. The machine's verdict is never the reason anything is believed here:
+    // it is a spam filter, and a spam filter does not vouch for anything.
+    if (type === 'action' && !data.source_url && !data.contact_link) {
+      flagged = true;
+      aiAssessment = `${aiAssessment} · No link to the origin or the organiser — held for a person.`;
+    }
+
     // A gathering is an introduction, not a conversation: the record carries a name, a topic,
     // a rough region, and the ONE contact line the organiser chose to publish. Without a name
     // and a topic there is nothing for anyone to find, so it waits for a person.
