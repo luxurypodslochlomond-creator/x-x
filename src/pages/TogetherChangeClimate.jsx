@@ -682,12 +682,18 @@ export default function TogetherChangeClimate() {
             </div>
             <div className="my-5 lg:hidden">
               <SubjectRail
-                subjects={subjectIndex}
+                strip={filledSubjects}
+                current={activeSubject}
                 totalEntries={items.length + actions.length}
                 allLabel="All subjects"
                 selected={selectedCategory}
                 expanded={showIndex}
                 onOpenIndex={() => setShowIndex(open => !open)}
+                onSelect={(id) => {
+                  setSelectedCategory(id);
+                  setShowIndex(false);
+                  requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                }}
               />
               <SubjectIndexSheet
                 open={showIndex}
