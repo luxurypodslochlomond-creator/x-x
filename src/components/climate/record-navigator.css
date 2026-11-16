@@ -368,9 +368,10 @@
   /* Position only. A scale, however slight, re-draws every letter on the plate for the
      whole of the animation — which is a shimmer on a sheet of type, not a motion. */
   .rec-mast-doors .rec-art-caption {
-    font-family: var(--font-record-ui);
-    font-size: 12px;
-    line-height: 1.25;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
   }
   .rec-mast-doors .rec-art-drawing svg { shape-rendering: geometricPrecision; }
   @keyframes rec-doors-in {

@@ -12,7 +12,7 @@ export default function ClimatePhotoControls({ index, total, onPrevious, onNext,
 
   if (variant === 'overlay') {
     return (
-      <nav aria-label="Photograph navigation" className="absolute right-3 top-3 z-20 flex items-center gap-1 border border-record-paper/25 bg-record-ink/75 p-1 backdrop-blur-sm">
+      <nav aria-label="Photograph navigation" className="absolute right-3 top-3 z-20 flex items-center gap-1 border border-record-paper/25 bg-record-ink p-1">
         <button type="button" onClick={onPrevious} aria-label="Previous photograph" className={OVERLAY_CONTROL}>
           <ChevronLeft className="h-5 w-5" />
         </button>

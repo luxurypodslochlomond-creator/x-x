@@ -48,7 +48,7 @@ const CATEGORIES = [
 ];
 
 import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
-import RecordCover from '@/components/climate/RecordCover';
+import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 
 // ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [
@@ -155,10 +155,7 @@ seedTranslations(T);
              loading="lazy"
              decoding="async"
              className="absolute inset-0 w-full h-full object-cover"
-             /* Colour, not grey. Every photograph on this page was drained to black and white,
-                which is half of why the whole record read as a machine's print-out. A news
-                page shows the place itself. The scrim below still guarantees the words. */
-             style={{ filter: 'saturate(1.06) contrast(1.04)' }}
+             /* Render the original photograph directly, without a separate filtered surface. */
              /* A picture that will not open leaves the plate, never a substitute image: what
                 stands in for a photograph is the entry's own words, not a different picture. */
              onError={(e) => { e.currentTarget.style.display = 'none'; }}
@@ -462,29 +459,7 @@ export default function TogetherChangeClimate() {
              still holds the page open; the material now sits under her words, where it
              belongs. Her words are the record's first transmission, so they get its plate. ── */}
       <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" >
-        <div className="relative mx-auto max-w-[760px] bg-[#241d16] border-2 border-[#241d16] px-5 pt-6 pb-6 overflow-hidden">
-          {/* THE COVER BEHIND HER WORDS ─────────────────────────────────────────────────
-              Her line used to sit on a flat dark plate: the right idea (a deep ground, so the
-              words carry) with nothing behind it, which is why it read as a card rather than
-              as a voice in a room. The record's own painting now stands in the ground behind
-              her — the living earth, in the dark, lit from one side. It is the same work that
-              opens the page, so the page has one hand under it from the first line to the
-              last. Held back far enough that her sentence never has to fight it, and cool
-              where the words are warm, because the words have to win. */}
-          {/* A different part of the same canvas: the earth's own ground, not the sky. Two
-              crops of one work read as a book printed from one painting; the same crop twice
-              in one fold reads as a duplicated image. */}
-          <RecordCover position="center 84%" strength={0.45} />
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.58) 0%, rgba(36,29,22,.68) 45%, rgba(36,29,22,.88) 100%)' }}
-          />
-          {/* No ruled texture inside her plate. The scanline was the record's attempt to
-              look like a transmission, and it did the opposite of what it was for: a warm
-              paper ground, a painted sky and a moving set of rules over the top of them is
-              three textures arguing, and the winning feeling is noise. The painting, the
-              grain and the words are enough. Air is the thing that reads as alive. */}
-
+        <RecordPaintedBand className="mx-auto max-w-[760px] border-2 border-record-earth px-5 py-6">
           <div className="relative z-10 flex flex-col items-center gap-4 text-center">
             <div className="flex items-center justify-center gap-2">
               <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
@@ -533,7 +508,7 @@ export default function TogetherChangeClimate() {
               </p>
             </div>
           </div>
-        </div>
+        </RecordPaintedBand>
 
         {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why.
             A hairline detaches it: it is the record's own mark, and inside her credit row it read
@@ -554,24 +529,8 @@ export default function TogetherChangeClimate() {
           single word had been read. It is deep earth now — still deep enough to carry the light
           type, and warm enough to belong to the paper below it. The photograph keeps its own
           colour for the same reason the cards do: this is a record of real places. */}
-      <div className="relative bg-[#241d16] overflow-hidden" style={{ minHeight: 'clamp(460px, 62vh, 620px)' }}>
-        {/* THE COVER, AT FULL STRENGTH ────────────────────────────────────────────────
-            This picture used to be a stock photograph of the planet, blended into the
-            band at forty-two per cent so it read as texture rather than as a picture.
-            The effect was a dark room with a faint smudge in it: the record's own front
-            door had less colour than any entry behind it, and a page about the living
-            world opened in grey.
-
-            Artists put a cover on the thing they made. So the record has one, painted for
-            it rather than borrowed — the living earth, in space, in colour — and it is
-            shown as a picture rather than hidden as a texture. The scrim does one job
-            only: hold the words up where they sit. Everything below the limb is quiet in
-            the painting itself, so the title keeps its ground without a black slab. */}
-        <RecordCover position="center 34%" priority className="!pointer-events-none" />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(18,14,10,.34) 0%, rgba(18,14,10,.06) 30%, rgba(26,21,16,.52) 62%, rgba(36,29,22,.92) 86%, #241d16 100%)' }} />
-        {/* The rules are gone from here too — see the note on her plate above. What is
-            left over the painting is only the scrim that holds the title up. */}
-
+      {/* Use the Map's actual painted surface, not another full-strength crop behind type. */}
+      <RecordPaintedBand className="min-h-[clamp(460px,62vh,620px)]">
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
         <div className="relative z-10 bg-[#efe7d6] px-4 lg:px-10 py-3 flex items-center justify-between gap-3"
           >
@@ -628,7 +587,7 @@ export default function TogetherChangeClimate() {
             Cover · painted for the record
           </p>
         </div>
-      </div>
+      </RecordPaintedBand>
 
       {/* ── THE TOP CRAWL — Janine's credited photographs, directly under the masthead.
              Her ask was for the pictures to sit high on the page, and they still do: they
