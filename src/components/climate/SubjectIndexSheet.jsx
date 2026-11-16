@@ -13,12 +13,12 @@ export default function SubjectIndexSheet({ open, onClose, filled, empty, totalE
   return (
     <section id="record-subject-index" aria-label={`${filled.length + empty.length} subjects`} className="pb-1 font-body text-record-ink" onKeyDown={event => { if (event.key === 'Escape') close(); }}>
       <button type="button" onClick={() => onSelect('all')} aria-pressed={selected === 'all'} className={`flex min-h-11 w-full items-center gap-2 border-b border-record-ink/20 text-left ${selected === 'all' ? 'text-record-ocean' : 'text-record-ink'}`}>
-        <SubjectMark subject="all" size={20} />
+        <SubjectMark subject="all" size={30} />
         <span className="flex-1 text-[13px]">{allLabel}</span>
         <span className="font-mono text-[11px] tabular-nums">{totalEntries}</span>
         {selected === 'all' && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
       </button>
-      <div className="grid grid-cols-4 gap-x-1 py-1">
+      <div className="grid grid-cols-3 gap-x-2 gap-y-1 py-2 sm:grid-cols-4 lg:grid-cols-6">
         {filled.map(subject => <SubjectIndexItem key={subject.id} subject={subject} selected={selected === subject.id} onClick={() => onSelect(subject.id)} />)}
         {empty.map(subject => <SubjectIndexItem key={subject.id} subject={subject} empty onClick={() => onAdd(subject)} />)}
       </div>

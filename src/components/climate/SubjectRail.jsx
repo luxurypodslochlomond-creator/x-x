@@ -22,7 +22,7 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
         aria-controls="record-subject-index"
         className="flex min-h-11 w-full items-center gap-2 border-y border-record-ink/35 py-1 text-left active:bg-record-paper focus-visible:outline-record-ocean"
       >
-        <SubjectMark subject={current?.id || selected} size={20} active={!!current} className="shrink-0" />
+        <SubjectMark subject={current?.id || selected} size={26} active={!!current} className="shrink-0" />
         <span className="min-w-0 flex-1 text-[14px] leading-snug">{expanded ? 'Subjects' : (current?.label || allLabel)}</span>
         <span className="shrink-0 text-[11px] text-record-muted"><span className="font-mono tabular-nums">{current?.count ?? totalEntries}</span> entries</span>
         <ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 text-record-ocean ${expanded ? 'rotate-180' : ''}`} />
@@ -30,7 +30,7 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
 
       {!expanded && strip.length > 0 && (
         <div
-          className="climate-nav-rail grid auto-cols-[20%] grid-flow-col border-b border-record-ink/20 overflow-x-auto"
+          className="climate-nav-rail grid auto-cols-[26%] grid-flow-col border-b border-record-ink/20 overflow-x-auto"
           style={{ scrollSnapType: 'x proximity' }}
           aria-label="Subjects on the record"
         >
@@ -40,9 +40,9 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
               type="button"
               onClick={() => onSelect(subject.id)}
               aria-pressed={selected === subject.id}
-              className={`snap-start flex min-h-14 min-w-0 flex-col items-center gap-0.5 px-1 py-1.5 text-center active:bg-record-paper ${selected === subject.id ? 'text-record-ocean' : 'text-record-ink'}`}
+              className={`snap-start flex min-h-20 min-w-0 flex-col items-center gap-1 px-1 py-2 text-center active:bg-record-paper ${selected === subject.id ? 'text-record-ocean' : 'text-record-ink'}`}
             >
-              <SubjectMark subject={subject.id} size={20} active={selected === subject.id} />
+              <SubjectMark subject={subject.id} size={32} active={selected === subject.id} />
               <span className="line-clamp-2 text-[11px] leading-[1.25]">{subject.label}</span>
             </button>
           ))}
