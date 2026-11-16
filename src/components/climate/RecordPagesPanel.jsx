@@ -111,10 +111,21 @@ export default function RecordPagesPanel({ open, onClose }) {
       data-state={leaving ? 'out' : 'in'}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
       onClick={onDialogClick}
-      /* No fixed 100dvh here. inset-0 already gives the sheet the height of the glass, and a
-         dvh height is recomputed as a phone's own bars slide in and out — which on the frame
-         the sheet opens is one more thing moving under the thumb. */
-      className="rec-doors climate-record fixed inset-0 m-0 flex max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
+      /* ── THE HEIGHT ON THIS LINE IS NOT DECORATION — IT IS WHAT OPENS THE DOORS ─────
+         Brian, minutes after I took it away: "Doors don't open on mobile now, bro."
+
+         A <dialog> is a form of the browser's own, and it arrives with its own height
+         already set: fit-content. That beats an inset of zero, because a declared height
+         always beats a stretch, so the sheet stopped being the size of the glass and became
+         the size of its contents — and its contents are a plate with a scrolling body and a
+         foot, which measured itself and came out at nothing. So the tap worked, the modal
+         opened, and there was a sliver of paper on the glass instead of a page. On a desk it
+         still looked nearly right, which is why it only showed up on a phone.
+
+         So the height is stated outright, and it must stay stated. If it is ever changed,
+         change it to another real height — never remove it on the reasoning that the sheet
+         is pinned to all four edges and should therefore fill them. It should. It does not. */
+      className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
     >
       <div className="rec-doors-plate flex h-full w-full flex-col bg-record-paper">
         <div aria-hidden="true" className="h-[3px] w-full shrink-0 bg-record-mark" />
