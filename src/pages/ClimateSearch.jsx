@@ -21,14 +21,14 @@ import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
 const SECTIONS = [
   { key: 'solutions', kind: 'solution', label: 'Solutions', tone: '#1e3a2b' },
   { key: 'crises', kind: 'crisis', label: 'Climate crises', tone: '#b3261e' },
-  { key: 'actions', kind: 'action', label: 'Actions', tone: '#e2602a' },
+  { key: 'actions', kind: 'action', label: 'Actions', tone: '#0f5f7a' },
   { key: 'gatherings', kind: 'gathering', label: 'Gatherings', tone: '#1e3a2b' },
   { key: 'wire', kind: 'wire', label: 'On the wire', tone: '#141210' },
   { key: 'photos', kind: 'photo', label: 'Credited pictures', tone: '#1e3a2b' },
   { key: 'comments', kind: 'comment', label: 'What readers said', tone: '#b3261e' },
   { key: 'people', kind: 'person', label: 'On the roll', tone: '#b3261e' },
   { key: 'tracks', kind: 'track', label: 'Music given to the record', tone: '#1e3a2b' },
-  { key: 'cartoons', kind: 'cartoon', label: 'Drawings', tone: '#e2602a' },
+  { key: 'cartoons', kind: 'cartoon', label: 'Drawings', tone: '#0f5f7a' },
 ];
 
 export default function ClimateSearch() {
@@ -129,7 +129,7 @@ export default function ClimateSearch() {
                   <div className="flex items-center gap-2 mb-3">
                     <h2
                       className="font-black uppercase"
-                      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 27px)', letterSpacing: '-0.022em', color: '#e2602a' }}
+                      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 27px)', letterSpacing: '-0.022em', color: '#0f5f7a' }}
                     >
                       About the record
                     </h2>

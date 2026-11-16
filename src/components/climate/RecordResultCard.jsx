@@ -56,9 +56,9 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to={`/ClimateDetail/action/${item.id}`}
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#0f5f7a] p-3.5 active:bg-[#efe7d6] transition-colors"
       >
-        <Tag tone="#e2602a">{String(item.action_type || 'action').replace(/_/g, ' ')}</Tag>
+        <Tag tone="#0f5f7a">{String(item.action_type || 'action').replace(/_/g, ' ')}</Tag>
         <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
         {item.description && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.description}</p>}
         <Place region={item.region} country={item.country} />
@@ -135,9 +135,9 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to="/ClimateCartoons"
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#0f5f7a] p-3.5 active:bg-[#efe7d6] transition-colors"
       >
-        <Tag tone="#e2602a">Drawing</Tag>
+        <Tag tone="#0f5f7a">Drawing</Tag>
         <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">
           {item.title || item.artist_name}
         </h3>
