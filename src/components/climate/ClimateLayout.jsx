@@ -74,6 +74,11 @@ export default function ClimateLayout({ children, currentPage }) {
 
   // Her identity, not UF51's. Runs once per climate page.
   useEffect(() => {
+    // Earlier product visits left this unscoped graphics sheet in the document.
+    // Remove the legacy copy in already-open tabs as well as fixing future visits.
+    document.head.querySelectorAll('style').forEach((sheet) => {
+      if (sheet.textContent.includes('/* HARDWARE ACCELERATION EVERYTHING */')) sheet.remove();
+    });
     document.title = TITLE;
 
     const setMeta = (attr, key, value) => {

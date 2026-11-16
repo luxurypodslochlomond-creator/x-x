@@ -39,55 +39,60 @@ export default function PerformanceOptimizer() {
         const observer = new MutationObserver(optimizeImages);
         observer.observe(document.body, { childList: true, subtree: true });
 
-        // ENABLE GPU ACCELERATION FOR ANIMATIONS
+        // Keep the legacy product treatment out of the record and its ancestors.
+        // Universal perspective makes a fixed background relative to a long page,
+        // enlarging its artwork; forced backfaces also rasterise navigation text.
         const style = document.createElement('style');
+        style.dataset.uf51Performance = 'true';
         style.textContent = `
-            * {
+            html:not(:has(.climate-record)),
+            html:not(:has(.climate-record)) * {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
             }
-            
-            /* GPU ACCELERATION FOR TRANSFORMS */
-            [class*="motion-"],
-            [class*="animate-"],
-            .transform,
-            .transition {
+
+            html:not(:has(.climate-record)) [class*="motion-"],
+            html:not(:has(.climate-record)) [class*="animate-"],
+            html:not(:has(.climate-record)) .transform,
+            html:not(:has(.climate-record)) .transition {
                 will-change: transform, opacity;
                 transform: translateZ(0);
                 backface-visibility: hidden;
             }
 
-            /* QUANTUM SCROLLING */
-            * {
+            html:not(:has(.climate-record)),
+            html:not(:has(.climate-record)) * {
                 scroll-behavior: smooth;
                 -webkit-overflow-scrolling: touch;
             }
 
-            /* ZERO PAINT DELAY */
-            img, video, canvas {
+            html:not(:has(.climate-record)) img,
+            html:not(:has(.climate-record)) video,
+            html:not(:has(.climate-record)) canvas {
                 image-rendering: -webkit-optimize-contrast;
                 image-rendering: crisp-edges;
                 content-visibility: auto;
             }
 
-            /* INSTANT RESPONSE - ZERO LAG */
-            button, a, [role="button"] {
+            html:not(:has(.climate-record)) button,
+            html:not(:has(.climate-record)) a,
+            html:not(:has(.climate-record)) [role="button"] {
                 touch-action: manipulation;
                 -webkit-tap-highlight-color: transparent;
                 cursor: pointer;
                 user-select: none;
             }
 
-            /* HARDWARE ACCELERATION EVERYTHING */
-            * {
+            html:not(:has(.climate-record)),
+            html:not(:has(.climate-record)) * {
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
                 perspective: 1000px;
             }
 
-            /* 60FPS LOCKED */
             @media (prefers-reduced-motion: no-preference) {
-                * {
+                html:not(:has(.climate-record)),
+                html:not(:has(.climate-record)) * {
                     transition-duration: 0.3s;
                     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
                 }
@@ -98,6 +103,7 @@ export default function PerformanceOptimizer() {
         // CLEANUP
         return () => {
             observer.disconnect();
+            style.remove();
         };
     }, []);
 
