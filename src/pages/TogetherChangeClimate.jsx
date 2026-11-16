@@ -14,6 +14,8 @@ import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SignalCode from '@/components/climate/SignalCode';
+import SubjectDoor from '@/components/climate/SubjectDoor';
+import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import PeaceBell from '@/components/climate/PeaceBell';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
@@ -112,7 +114,7 @@ const LANGS = [
 
 // Universal reframe: "it's not mine, it's for the world, the planet, all of us."
 const T = {
-  en: { title_a: 'Together we can change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No sponsorship', donate: 'Support welcome', search: 'Search solutions, crises and actions…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and kept in the open', govern_body: 'Spam is screened automatically; clear entries go on the record at once, and anything unclear waits for a human check. A solution or a crisis goes on only with a link to the original source; if that link cannot be opened, it waits for a person. Images must be copyright-free, and location is kept to a rough region to protect privacy. Money never buys a place on the record, and support is declared in the open. The interface is translated on the platform; entries are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — what is recorded here feeds our work on the ground.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic, and write to the organiser.', groups_note: 'The record shows only the one contact line an organiser chooses. Your own email is never published.', live: 'Live record', entries_now: 'entries on the record right now', actions: 'Actions', actions_sub: 'Cleanups, plantings, meetings, policy submissions — real things happening on the ground. Contact the organiser directly. The platform never sees your messages.', actions_empty: 'No actions listed yet — be the first to add one.', groups_empty: 'No gatherings yet — start the first one. Name it, give your rough region, and say what you are working on.' },
+  en: { title_a: 'Together we can change the', title_b: 'course', title_c: 'of climate change', sub: 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — so anyone on Earth can replicate what good looks like.', service: 'A public service · for the world', noads: 'No advertising', nofund: 'No sponsorship', donate: 'Support welcome', search: 'Search solutions, crises and actions…', solutions: 'Solutions', crises: 'Climate Crises', defs: 'Definitions', rev: 'Reviewed', connect: 'Connecting the planet…', empty: 'No entries match yet.', govern: 'Built for the planet — and kept in the open', govern_body: 'Spam is screened automatically; clear entries go on the record at once, and anything unclear waits for a human check. A solution or a crisis goes on only with a link to the original source; if that link cannot be opened, it waits for a person. Images must be copyright-free, and location is kept to a rough region to protect privacy. Money never buys a place on the record, and support is declared in the open. The interface is translated on the platform; entries are translated by our community over time.', covenant: 'Read our open-source covenant', family: 'This platform is one part of UF51\'s Planetary Healing family — what is recorded here feeds our work on the ground.', action: 'Take action', honour: 'Built in honour of Janine M. H. Selendy & Horizon International — and released to the world, the planet, all of us.', all: 'All', featured: 'Signals', groups: 'Groups', groups_sub: 'People working on the same thing in an area can share ideas directly — find your region or topic, and write to the organiser.', groups_note: 'The record shows only the one contact line an organiser chooses. Your own email is never published.', live: 'Live record', entries_now: 'entries on the record right now', actions: 'Actions', actions_sub: 'Cleanups, plantings, meetings, policy submissions — real things happening on the ground. Contact the organiser directly. The platform never sees your messages.', actions_empty: 'No actions listed yet — be the first to add one.', groups_empty: 'No groups yet — start the first one. Name it, give your rough region, and say what you are working on.', subject_empty: 'Nothing under {subject} yet — the record is waiting for the first.', subject_add: 'Add one for review' },
   es: { title_a: 'Juntos cambiamos el', title_b: 'curso', title_c: 'del cambio climático', sub: 'Un registro público de emergencias climáticas y las acciones positivas que funcionan — compartido abiertamente, internacionalmente — para que cualquiera en la Tierra pueda replicar lo que funciona.', service: 'Un servicio público · para el mundo', noads: 'Sin publicidad', nofund: 'Sin patrocinio', donate: 'Apoyo bienvenido', search: 'Buscar soluciones y crisis…', solutions: 'Soluciones', crises: 'Crisis Climáticas', defs: 'Definiciones', rev: 'Revisado', connect: 'Conectando el planeta…', empty: 'Sin resultados aún.', govern: 'Construido para el planeta — y para ser confiable', govern_body: 'El spam se filtra automáticamente; las entradas claras pasan al registro de inmediato, y lo que no está claro espera una revisión humana. Solo se usan imágenes sin derechos de autor. La ubicación se mantiene en una región aproximada para proteger la privacidad, siendo honesta y verificable. La plataforma funciona como servicio público — sin publicidad, sin patrocinio, y el dinero nunca compra un lugar en el registro. El apoyo es bienvenido y se declara en abierto. Las traducciones de la interfaz se ofrecen en la plataforma; las entradas son traducidas por nuestra comunidad con el tiempo.', covenant: 'Lee nuestro pacto de código abierto', family: 'Esta plataforma es parte de la familia de Curación Planetaria de UF51 — las soluciones verificadas aquí son el motor de conocimiento detrás de nuestra acción sobre el terreno.', action: 'Actúa', honour: 'Construido en honor de Janine M. H. Selendy y Horizon International — y entregado al mundo, al planeta, a todos nosotros.', all: 'Todo', featured: 'Señales' },
   fr: { title_a: 'Ensemble, nous changeons le', title_b: 'cours', title_c: 'du changement climatique', sub: 'Un registre public des urgences climatiques et des actions positives qui fonctionnent — partagé ouvertement, à l\'international — pour que chacun sur Terre puisse répliquer ce qui fonctionne.', service: 'Un service public · pour le monde', noads: 'Aucune publicité', nofund: 'Aucun parrainage', donate: 'Soutien bienvenu', search: 'Rechercher solutions et crises…', solutions: 'Solutions', crises: 'Crises Climatiques', defs: 'Définitions', rev: 'Vérifié', connect: 'Connexion de la planète…', empty: 'Aucun résultat pour l\'instant.', govern: 'Conçu pour la planète — et pour être digne de confiance', govern_body: 'Le spam est filtré automatiquement ; les entrées claires sont publiées immédiatement, et tout ce qui n\'est pas clair attend une vérification humaine. Seules des images libres de droits sont utilisées. La localisation est limitée à une région approximative pour protéger la vie privée, tout en restant honnête et vérifiable. La plateforme fonctionne en service public — sans publicité, sans parrainage, et l\'argent n\'achète jamais une place dans le registre. Le soutien est bienvenu et déclaré au grand jour. Les traductions de l\'interface sont fournies sur la plateforme; les entrées sont traduites par notre communauté au fil du temps.', covenant: 'Lire notre pacte open source', family: 'Cette plateforme fait partie de la famille de Guérison Planétaire UF51 — les solutions vérifiées ici sont le moteur de connaissance derrière notre action de terrain.', action: 'Agir', honour: 'Construit en l\'honneur de Janine M. H. Selendy et Horizon International — et remis au monde, à la planète, à nous tous.', all: 'Tout', featured: 'Signaux' },
   de: { title_a: 'Gemeinsam ändern wir den', title_b: 'Lauf', title_c: 'des Klimawandels', sub: 'Ein öffentliches Register von Klimanotlagen und positiven Maßnahmen, die funktionieren — offen geteilt, international — damit jeder auf der Erde nachahmen kann, was gut ist.', service: 'Ein öffentlicher Dienst · für die Welt', noads: 'Keine Werbung', nofund: 'Kein Sponsoring', donate: 'Unterstützung willkommen', search: 'Lösungen und Krisen suchen…', solutions: 'Lösungen', crises: 'Klimakrisen', defs: 'Definitionen', rev: 'Geprüft', connect: 'Planet verbinden…', empty: 'Noch keine Treffer.', govern: 'Für den Planeten gebaut — und gebaut, um vertraut zu werden', govern_body: 'Spam wird automatisch gefiltert; klare Einträge gehen sofort ins Register, und alles Unklare wartet auf eine menschliche Prüfung. Es werden nur urheberrechtsfreie Bilder verwendet. Der Standort bleibt grob, um die Privatsphäre zu schützen, bleibt aber ehrlich und überprüfbar. Die Plattform ist Open Source, extraktionssicher und ein öffentlicher Dienst — ohne Werbung, ohne Sponsoring, und Geld kauft nie einen Platz im Register. Unterstützung ist willkommen und wird offen ausgewiesen. Oberflächenübersetzungen werden auf der Plattform angeboten; Einträge werden mit der Zeit von unserer Gemeinschaft übersetzt.', covenant: 'Unser Open-Source-Pakt', family: 'Diese Plattform ist Teil der UF51 Planetary-Healing-Familie — die verifizierten Lösungen hier sind die Wissens-Engine hinter unserer Arbeit vor Ort.', action: 'Handeln', honour: 'Zu Ehren von Janine M. H. Selendy & Horizon International gebaut — und der Welt, dem Planeten, uns allen übergeben.', all: 'Alle', featured: 'Signale' },
@@ -244,6 +246,8 @@ export default function TogetherChangeClimate() {
     () => new URLSearchParams(window.location.search).get('submit') === '1'
   );
   const [showGathering, setShowGathering] = useState(false);
+  const [showIndex, setShowIndex] = useState(false);
+  const [submitCategory, setSubmitCategory] = useState(null);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const contentRef = useRef(null);
   const firstRender = useRef(true);
@@ -367,6 +371,30 @@ export default function TogetherChangeClimate() {
       return matchesWords(q) && matchesCat;
     });
   }, [actions, query, selectedCategory]);
+
+  // ── THE SUBJECT INDEX ───────────────────────────────────────────────────────────
+  // One count per subject, taken from the entries the page is actually holding — solutions,
+  // crises and actions together, because a reader asking about water wants all of it.
+  // The count is what turns a list of names into a statement about the record: sixteen of
+  // thirty-two subjects carry something, and the rest say so out loud instead of opening
+  // a blank page.
+  const subjectIndex = useMemo(() => {
+    const counts = {};
+    [...items, ...actions].forEach(e => {
+      if (e.category) counts[e.category] = (counts[e.category] || 0) + 1;
+    });
+    return categories.map(c => ({ ...c, count: counts[c.id] || 0 }));
+  }, [items, actions, categories]);
+
+  const filledSubjects = useMemo(
+    () => subjectIndex.filter(s => s.count > 0).sort((a, b) => b.count - a.count),
+    [subjectIndex]
+  );
+  const emptySubjects = useMemo(() => subjectIndex.filter(s => s.count === 0), [subjectIndex]);
+  const activeSubject = subjectIndex.find(s => s.id === selectedCategory) || null;
+  // A subject with nothing under it is a door, not a dead end — but only when the reader has
+  // not typed something of their own, because then the honest answer is "no match".
+  const subjectGap = !!(activeSubject && activeSubject.count === 0 && !query.trim());
 
   // Every gathering on the record shows now, whether or not an organiser has given
   // an address. One with an address carries its contact line; one without carries
@@ -680,9 +708,19 @@ export default function TogetherChangeClimate() {
         </div>
       </div>
 
-      {/* ── CATEGORY CHIPS — native horizontal scroll, compact ── */}
+      {/* ── THE SUBJECTS ──────────────────────────────────────────────────────────
+          A phone gets one line that opens the index; a desk keeps the full set laid flat,
+          because there it fits and no thumb is doing the aiming. ── */}
       <div className="px-4 lg:px-10 pb-4 lg:pb-5 bg-[#efe7d6]">
-        <div className="flex gap-1.5 overflow-x-auto overscroll-x-contain pb-1 -mx-4 px-4 snap-x lg:flex-wrap lg:overflow-x-visible lg:mx-0 lg:px-0" style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }} aria-label="Filter by category">
+        <SubjectDoor
+          active={activeSubject}
+          totalEntries={items.length + actions.length}
+          filled={filledSubjects.length}
+          totalSubjects={subjectIndex.length}
+          allLabel={t.all}
+          onOpen={() => setShowIndex(true)}
+        />
+        <div className="hidden lg:flex gap-1.5 flex-wrap" aria-label="Filter by subject">
           <button
             onClick={() => setSelectedCategory('all')}
             className={`flex-shrink-0 snap-start px-3 py-2.5 min-h-[40px] text-[10px] font-black font-mono uppercase border transition-colors duration-150 active:scale-95 ${
@@ -743,15 +781,34 @@ export default function TogetherChangeClimate() {
               </section>
             )}
             {showEntries && (solutions.length + crises.length) === 0 && (
-              <div className="py-20 text-center px-4">
+              <div className="py-16 text-center px-4">
                 <Globe className="w-10 h-10 text-[#5a5246] mx-auto" />
-                <p className="text-[#5a5246] text-[11px] font-mono uppercase mt-3">{t.empty}</p>
-                <Link
-                  to="/ClimateSearch"
-                  className="inline-flex items-center gap-1.5 mt-4 text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e] active:text-[#e2602a]"
-                >
-                  Search the whole record →
-                </Link>
+                {subjectGap ? (
+                  <>
+                    <p className="text-[#141210] text-[12px] font-mono uppercase mt-3 leading-relaxed">
+                      {t.subject_empty.replace('{subject}', activeSubject.label)}
+                    </p>
+                    <p className="text-[#5a5246] text-[11px] font-mono mt-2 leading-relaxed max-w-[300px] mx-auto">
+                      It goes in through the same door as everything else — with a link to where it came from, and a person to look at it.
+                    </p>
+                    <button
+                      onClick={() => { setSubmitCategory(activeSubject.id); setShowSubmit(true); }}
+                      className="inline-flex items-center justify-center gap-2 mt-4 px-5 py-3 min-h-[48px] bg-[#e2602a] text-[#141210] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+                    >
+                      <Plus className="w-4 h-4" /> {t.subject_add}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-[#5a5246] text-[11px] font-mono uppercase mt-3">{t.empty}</p>
+                    <Link
+                      to="/ClimateSearch"
+                      className="inline-flex items-center gap-1.5 mt-4 text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e] active:text-[#e2602a]"
+                    >
+                      Search the whole record →
+                    </Link>
+                  </>
+                )}
               </div>
             )}
           </>
@@ -772,7 +829,7 @@ export default function TogetherChangeClimate() {
               onClick={() => setShowGathering(true)}
               className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#1e3a2b] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors"
             >
-              <Users className="w-4 h-4" /> Start a gathering
+              <Users className="w-4 h-4" /> Start a group
             </button>
             <p className="text-[12px] text-[#5a5246] leading-[1.65] mt-2 mb-3">{t.groups_note}</p>
             {filteredGroups.length > 0 ? (
@@ -794,7 +851,7 @@ export default function TogetherChangeClimate() {
                       </a>
                     ) : (
                       <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-mono uppercase tracking-wide text-[#5a5246] leading-relaxed">
-                        Open gathering · contact line being arranged
+                        Open group · contact line being arranged
                       </p>
                     )}
                   </div>
@@ -864,7 +921,32 @@ export default function TogetherChangeClimate() {
 
       </div>
 
-      {showSubmit && <ClimateSubmitForm onClose={() => setShowSubmit(false)} />}
+      <SubjectIndexSheet
+        open={showIndex}
+        onClose={() => setShowIndex(false)}
+        filled={filledSubjects}
+        empty={emptySubjects}
+        totalEntries={items.length + actions.length}
+        selected={selectedCategory}
+        allLabel={t.all}
+        onSelect={(id) => {
+          setSelectedCategory(id);
+          setShowIndex(false);
+          requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        }}
+        onAdd={(subject) => {
+          setShowIndex(false);
+          setSubmitCategory(subject.id);
+          setShowSubmit(true);
+        }}
+      />
+
+      {showSubmit && (
+        <ClimateSubmitForm
+          initialCategory={submitCategory}
+          onClose={() => { setShowSubmit(false); setSubmitCategory(null); }}
+        />
+      )}
       {showGathering && (
         <GatheringForm
           onClose={() => {

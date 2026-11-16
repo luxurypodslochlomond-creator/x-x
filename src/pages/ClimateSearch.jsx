@@ -22,7 +22,7 @@ const SECTIONS = [
   { key: 'solutions', kind: 'solution', label: 'Solutions', tone: '#1e3a2b' },
   { key: 'crises', kind: 'crisis', label: 'Climate crises', tone: '#b3261e' },
   { key: 'actions', kind: 'action', label: 'Actions', tone: '#0f5f7a' },
-  { key: 'gatherings', kind: 'gathering', label: 'Gatherings', tone: '#1e3a2b' },
+  { key: 'gatherings', kind: 'gathering', label: 'Groups', tone: '#1e3a2b' },
   { key: 'wire', kind: 'wire', label: 'On the wire', tone: '#141210' },
   { key: 'photos', kind: 'photo', label: 'Credited pictures', tone: '#1e3a2b' },
   { key: 'comments', kind: 'comment', label: 'What readers said', tone: '#b3261e' },

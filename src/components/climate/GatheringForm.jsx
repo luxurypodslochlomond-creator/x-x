@@ -19,7 +19,7 @@ function Done({ onClose, published }) {
         Thank you
       </h2>
       <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
-        {published ? 'Your gathering is on the record now.' : 'Your gathering is with us for a quick check.'}
+        {published ? 'Your group is on the record now.' : 'Your group is with us for a quick check.'}
       </p>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
         {published
@@ -74,7 +74,7 @@ export default function GatheringForm({ onClose }) {
       return;
     }
     if (!form.submitter_name.trim() || !isEmail(form.submitter_email)) {
-      setError('Your name and a valid email are needed — we use them only to reach you about this gathering.');
+      setError('Your name and a valid email are needed — we use them only to reach you about this group.');
       return;
     }
     if (form.contact_email.trim() && !isEmail(form.contact_email)) {
@@ -104,7 +104,7 @@ export default function GatheringForm({ onClose }) {
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
       <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
         <h2 className="font-black uppercase text-[#efe7d6] flex items-center gap-2" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-          <Users className="w-5 h-5" /> Start a gathering
+          <Users className="w-5 h-5" /> Start a group
         </h2>
         <button onClick={onClose} aria-label="Close" className="w-10 h-10 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors">
           <X className="w-5 h-5" />
@@ -123,7 +123,7 @@ export default function GatheringForm({ onClose }) {
 
         <div className="space-y-3">
           <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Gathering name *</label>
+            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Group name *</label>
             <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="e.g. Seagrass Restorers — West Coast" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
           </div>
 
@@ -148,13 +148,13 @@ export default function GatheringForm({ onClose }) {
             <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">The one contact line you want shown</label>
             <input value={form.contact_email} onChange={e => set('contact_email', e.target.value)} placeholder="you@example.org — or leave empty" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
             <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
-              This is the only line the record ever shows. Leave it empty and your gathering prints as an open one — "contact line being arranged" — never a made-up address. Your own email below is kept apart from it and is never published.
+              This is the only line the record ever shows. Leave it empty and your group prints as an open one — "contact line being arranged" — never a made-up address. Your own email below is kept apart from it and is never published.
             </p>
           </div>
 
           <div className="border-t-2 border-[#141210]/20 pt-3 mt-2">
             <p className="text-[10px] font-mono text-[#5a5246] mb-3 leading-relaxed">
-              Your email is required (marked *). We use it only to reach you about this gathering — to ask a question, or to tell you when it goes on the record. It is never published, never shared, never sold, and never shown as the contact line. Everything we hold, and everything we don't, is set out on the{' '}
+              Your email is required (marked *). We use it only to reach you about this group — to ask a question, or to tell you when it goes on the record. It is never published, never shared, never sold, and never shown as the contact line. Everything we hold, and everything we don't, is set out on the{' '}
               <a href={createPageUrl('ClimatePrivacy')} target="_blank" rel="noopener noreferrer" className="underline text-[#141210]">Privacy page</a>.
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -185,7 +185,7 @@ export default function GatheringForm({ onClose }) {
           className="mt-5 w-full flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#141210] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors disabled:opacity-50"
         >
           <Send className="w-4 h-4" />
-          {submitting ? 'Sending…' : 'Start the gathering'}
+          {submitting ? 'Sending…' : 'Start the group'}
         </button>
       </form>
     </div>

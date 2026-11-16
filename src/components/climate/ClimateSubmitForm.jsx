@@ -33,11 +33,13 @@ function SuccessScreen({ entryType, onClose, published }) {
   );
 }
 
-export default function ClimateSubmitForm({ onClose }) {
+// initialCategory comes from the index: a reader who taps an empty subject arrives on this
+// form with the subject already chosen, so they never have to find it again in a dropdown.
+export default function ClimateSubmitForm({ onClose, initialCategory }) {
   const { categories } = useClimateCategories();
   const [entryType, setEntryType] = useState('solution');
   const [form, setForm] = useState({
-    title: '', summary: '', details: '', category: 'agriculture',
+    title: '', summary: '', details: '', category: initialCategory || 'agriculture',
     country: '', region_rough: '', image_url: '', source_name: '', source_url: '',
     source_author: '', source_date: '',
     submitter_name: '', submitter_email: '',

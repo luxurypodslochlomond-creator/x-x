@@ -29,7 +29,7 @@ const KINDS = [
     body: 'Cleanups, plantings, meetings, policy submissions — what is happening, and when.',
   },
   {
-    label: 'Gatherings',
+    label: 'Groups',
     tone: '#1e3a2b',
     body: 'People on the same work in one region. The record carries one contact line, never a conversation.',
   },

@@ -231,7 +231,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
                   </summary>
                 ) : <>
                   <p className="text-[10.5px] font-mono uppercase tracking-[0.16em] text-record-muted mb-1.5">
-                    {entry.type === 'group' ? 'gathering' : entry.type}{entry.source_name ? ` · ${entry.source_name}` : ''}
+                    {entry.type === 'group' ? 'group' : entry.type}{entry.source_name ? ` · ${entry.source_name}` : ''}
                   </p>
                   {/* The date, and which job this is. The queue runs oldest first, so the date
                       is the explanation for the order — and "waiting to go on" and "on the

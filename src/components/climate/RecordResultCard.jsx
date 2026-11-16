@@ -86,7 +86,7 @@ export default function RecordResultCard({ kind, item }) {
           </a>
         ) : (
           <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-mono uppercase tracking-wide text-[#5a5246] leading-relaxed">
-            Open gathering · contact line being arranged
+            Open group · contact line being arranged
           </p>
         )}
       </div>

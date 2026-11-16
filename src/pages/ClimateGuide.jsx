@@ -57,7 +57,7 @@ const SEND = [
     what: 'Read the record, then fill the form. An entry that carries its source goes on as it arrives; one without a source, or one the screening is unsure of, waits for a person.',
   },
   {
-    label: 'Start a gathering',
+    label: 'Start a group',
     to: createPageUrl('TogetherChangeClimate'),
     what: 'People working on the same thing in one area. A name, a topic, a region, and one contact line.',
   },

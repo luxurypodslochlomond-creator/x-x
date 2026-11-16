@@ -45,7 +45,7 @@ export default function ClimateTerms() {
               Music is given, never bought. If you made a track you may hand it to the record: your master is stored exactly as you gave it, your name stays on the work, your rights stay yours, and you decide once whether anyone may take the copy or only hear it here. Nothing on this record is sold, licensed or counted for money. A listener may leave a line under a track in their own words; a listener is never asked for an email, and their line is never edited.
             </p>
             <p className="text-[12px] font-mono leading-relaxed text-[#5a5246]">
-              Your email is required to submit an entry, an action or a gathering, so we can reach you about it. A track is different: the work speaks for itself, and an address is asked for but never demanded. We do not publish your email, sell it, or spam you.
+              Your email is required to submit an entry, an action or a group, so we can reach you about it. A track is different: the work speaks for itself, and an address is asked for but never demanded. We do not publish your email, sell it, or spam you.
             </p>
           </div>
         </section>

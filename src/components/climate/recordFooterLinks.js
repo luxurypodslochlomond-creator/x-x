@@ -23,7 +23,7 @@
 // masthead's own name line — the record's name on one side, the reader's tongue answering
 // on the other — instead of taking a cell from a place to stand.
 export const PRIMARY_NAV = [
-  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and gatherings.' },
+  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and groups.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
   // ── REACH, AND WHY IT IS ON THE RAIL ────────────────────────────────────────

@@ -22,7 +22,7 @@ const INTRO_PARAGRAPH =
   'Together We Can Change the Course of Climate Change is a public record, not a feed. People share the solutions working where they are, and the crises that need saying out loud. Every entry names where it came from and says how well it is known: one source, two independent sources, or an official record. Anyone can send an entry in, in any language, without an account. Nothing is ranked, nothing is advertised, and nothing can be paid into a better position. It is free to read, it is built to be checked and copied, and it is looking for a host to carry it.';
 
 const DOORS = [
-  { label: 'The record', page: 'TogetherChangeClimate', what: 'Front page: solutions, crises, actions, gatherings.' },
+  { label: 'The record', page: 'TogetherChangeClimate', what: 'Front page: solutions, crises, actions, groups.' },
   { label: 'How it is made', page: 'ClimateMethod', what: 'Sources, verification, who decides, corrections.' },
   { label: 'The impact', page: 'ClimateImpact', what: 'Where it has been read.' },
   { label: 'The music room', page: 'ClimateMusic', what: 'The record’s theme, pressed to play.' },
