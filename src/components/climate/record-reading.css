@@ -273,8 +273,17 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
    than a full-screen wall with a picture hidden behind it. Twelve pixels is the whole of
    the decision and it is one number: wide enough for the ground to be seen as ground,
    narrow enough that no line of any page loses a word to it. */
+/* ── AND THE SHEET NEVER TOUCHES THE GLASS ───────────────────────────────────────
+   Twelve pixels was a margin on a phone and no margin at all on a laptop: the sheet was
+   eleven hundred wide and a window is often barely wider than that, so on a desk the
+   painting was still nowhere to be seen — it only looked like itself on the two pages
+   that carry it inside a band. So the margin is a share of the glass rather than a
+   number of pixels, on every width: the page always stands on the painting with the
+   painting visible around it, whether the window is a phone or a cinema. It is the same
+   decision as before, said in a way that cannot run out. */
+.record-book { margin-inline: clamp(10px, 3.4vw, 26px); }
 @media (max-width: 1023px) {
-  .record-book { margin-inline: 12px; }
+  .record-book { margin-inline: clamp(10px, 3.4vw, 18px); }
 }
 
 @media (min-width: 1024px) {
@@ -289,7 +298,10 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
      there is nothing to read. Same one work, same place; it is simply no longer under
      the words. */
   .record-book {
-    max-width: 1100px;
+    /* A share of the glass as a ceiling as well as a width: a wide window keeps the
+       measure it had, and a window that is only just wider than the book still leaves
+       the painting standing either side of the page instead of being swallowed by it. */
+    max-width: min(1080px, 90vw);
     margin-inline: auto;
     box-shadow:
       0 0 0 1px rgb(var(--record-ink) / 0.12),
@@ -331,7 +343,13 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  mix-blend-mode: screen;
+  /* ── NO BLEND MODE ON A LAYER THE SIZE OF THE GLASS ────────────────────────────
+     `screen` was here for one reason: to make pale dots sit on the painting rather
+     than over it. It also forces the browser to re-blend a full-viewport layer against
+     everything above it, which on a phone shows up as the record flickering as it
+     scrolls — the marks and the rail stuttering under a layer that is being mixed on
+     every frame. The dots are pale on a dark plate; they read as stars without being
+     mixed into it. So the blend is gone and the sky is drawn plainly. */
   background-image:
     radial-gradient(circle at 7% 11%, rgba(255,248,233,.92) 0 .8px, rgba(255,248,233,0) 1.3px),
     radial-gradient(circle at 14% 27%, rgba(255,247,226,.6) 0 .6px, rgba(255,247,226,0) 1.1px),

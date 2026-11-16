@@ -256,21 +256,17 @@
 
 .rec-doors[open] { display: flex; }
 .rec-doors::backdrop { animation: rec-scrim-in .2s ease-out both; }
-/* Nothing is painted until the sheet has been still for a frame, so the motion below is
-   always seen from its first pixel rather than joined part-way through. See the note in
-   RecordPagesPanel — the missing frame is what "clunky" was. */
-.rec-doors[data-state="pre"] .rec-doors-plate { opacity: 0; }
-/* One long, unhurried ease — the shape a sheet of paper has when it is laid down, not the
-   snap of a menu. Three hundred milliseconds is slow enough to be seen and short enough
-   that a tap still feels answered; nothing overshoots, because a bounce on a record of
-   climate emergencies is a wink at the wrong moment. */
+/* ── AND NO TRICKS IN THE PAINTING OF IT ─────────────────────────────────────────
+   A held frame and a promoted layer were tried here for a smoother opening, and both
+   made it worse: a layer created for the sheet flashes as it is put on the glass, which
+   is the flicker Brian saw on the doors. A sheet either animates or it does not. So it
+   animates — one long, unhurried ease, nothing promoted and nothing held back, because
+   the compositor already does the whole of a transform and an opacity. */
 .rec-doors[data-state="in"] .rec-doors-plate {
   animation: rec-doors-in .3s cubic-bezier(.22, .68, .24, 1) both;
-  will-change: transform, opacity;
 }
 .rec-doors[data-state="out"] .rec-doors-plate {
   animation: rec-doors-out .19s cubic-bezier(.4, 0, .8, .4) both;
-  will-change: transform, opacity;
 }
 
 /* The plate itself: the whole glass on a phone, a sheet with an edge and a margin on a
@@ -369,12 +365,14 @@
   /* Down from the top edge by a hair, so it is seen to arrive rather than to appear — and
      up and out the same way, so a door tapped by mistake never flashes. Transform and
      opacity only: a page carrying a very large painting has nothing re-rendered for this. */
+  /* Position only. A scale, however slight, re-draws every letter on the plate for the
+     whole of the animation — which is a shimmer on a sheet of type, not a motion. */
   @keyframes rec-doors-in {
-    from { opacity: 0; transform: translateY(-14px) scale(.996); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    from { opacity: 0; transform: translateY(-14px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   @keyframes rec-doors-out {
-    from { opacity: 1; transform: translateY(0) scale(1); }
-    to { opacity: 0; transform: translateY(-10px) scale(.997); }
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
   }
 }

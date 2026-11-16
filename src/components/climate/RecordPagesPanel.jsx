@@ -48,19 +48,6 @@ export default function RecordPagesPanel({ open, onClose }) {
   const [mounted, setMounted] = useState(false);
   const [leaving, setLeaving] = useState(false);
 
-  // ── AND IT IS SEEN TO COME DOWN, NOT TO BLINK IN ────────────────────────────────
-  // Mounted and animated in the same frame is what "clunky" actually was. A sheet that
-  // is put into the document and started in the same frame is painted by some browsers
-  // already part-way through its own animation, or on the frame after it has finished —
-  // so the one motion the sheet has is the one motion the reader does not get. One frame
-  // of stillness before the motion costs nothing and guarantees the whole of it is seen.
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    if (!mounted) { setShown(false); return undefined; }
-    const frame = requestAnimationFrame(() => setShown(true));
-    return () => cancelAnimationFrame(frame);
-  }, [mounted]);
-
   // ── A DESK IS NOT A PHONE, AND THE LOCK IS THE DIFFERENCE ─────────────────────
   // On a handset the sheet covers the glass, so the page behind is held still. On a desk it
   // drops from the top edge with the page still visible under it (see the wide-screen block
@@ -122,7 +109,7 @@ export default function RecordPagesPanel({ open, onClose }) {
       ref={dialogRef}
       id="record-contents"
       aria-labelledby="record-contents-title"
-      data-state={leaving ? 'out' : shown ? 'in' : 'pre'}
+      data-state={leaving ? 'out' : 'in'}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
       onClick={onDialogClick}
       className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
