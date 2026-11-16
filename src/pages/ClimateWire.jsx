@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { ArrowRight, Plus, Search, X } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
+import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import NewsEntryCard from '@/components/climate/NewsEntryCard';
 import NewsSubmitForm from '@/components/climate/NewsSubmitForm';
 import useRecordViewState from '@/components/climate/useRecordViewState';
@@ -66,7 +67,7 @@ export default function ClimateWire() {
       </div>
 
       {/* Hero — cold ink, the beacon, the page says exactly what it is */}
-      <div className="relative bg-[#241d16] overflow-hidden">
+      <RecordPaintedBand>
         <div className="absolute inset-0 pointer-events-none opacity-[0.06]" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-4 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
           <SignalBeacon size={44} color="#7fc9e4" />
@@ -80,7 +81,7 @@ export default function ClimateWire() {
             What changed, where, and who says so — every entry carrying its source, and what others can copy from it. No likes. No ranking. No volume.
           </p>
         </div>
-      </div>
+      </RecordPaintedBand>
 
       <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-12">
 

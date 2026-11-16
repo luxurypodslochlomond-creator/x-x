@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
+import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
@@ -70,7 +71,7 @@ export default function ClimateReachPlace() {
       />
 
       {/* Big number */}
-      <div className="px-4 lg:px-10 py-8 lg:py-12 bg-[#141210]">
+      <RecordPaintedBand className="px-4 lg:px-10 py-8 lg:py-12">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
           Together we can change the course of climate change
         </p>
@@ -91,7 +92,7 @@ export default function ClimateReachPlace() {
             </div>
           </div>
         </motion.div>
-      </div>
+      </RecordPaintedBand>
 
       {/* Honest framing */}
       <div className="px-4 lg:px-10 py-4 lg:py-6 bg-[#f7f1e5] border-b border-[#141210]/10">

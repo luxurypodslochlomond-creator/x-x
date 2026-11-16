@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import RecordCredit from '@/components/climate/RecordCredit';
+import RecordFootPlate from '@/components/climate/RecordFootPlate';
 
 // ── THE FOOT IS A COLOPHON AGAIN, NOT A SECOND MENU ─────────────────────────────
 // The doors that stood here — entry fingerprints, readership, the founder, becoming a
@@ -63,7 +63,8 @@ export default function RecordFooter({ showKeeper = true }) {
 
         {/* Who built it, set as the last thing on the sheet: an eyebrow, the three names,
             and the company. One copy, printed here, so no page carries the credit twice. */}
-        <RecordCredit className="mt-10" />
+        {/* The three names used to be set here on bare paper. They are now printed on the
+            endpaper at the foot of the sheet, with Photo 51 under them — see RecordFootPlate. */}
 
         {/* ── THE FOOT IS NAKED NOW ─────────────────────────────────────────────
             A row of small doors used to be printed here on a phone: Terms, Privacy and the
@@ -79,6 +80,10 @@ export default function RecordFooter({ showKeeper = true }) {
           Terms, privacy and the keeper's door are on the record's contents sheet, in the masthead.
         </span>
       </div>
+
+      {/* The endpaper. Full width of the sheet, so the record ends on the plate rather
+          than on trimmed paper. */}
+      <RecordFootPlate />
     </footer>
   );
 }

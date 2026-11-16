@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
-import RecordCover from '@/components/climate/RecordCover';
+import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
 import { ArrowRight } from 'lucide-react';
@@ -37,10 +37,11 @@ export default function ClimateMapPage() {
         </Link>
       </div>
 
-      {/* Hero — the cover painting, the page's name, and the one thing the map promises. */}
-      <div className="relative bg-[#241d16] overflow-hidden">
-        <RecordCover position="center 32%" strength={0.5} blend="screen" />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(36,29,22,.5), rgba(36,29,22,.72) 55%, #241d16 100%)' }} />
+      {/* Hero — the cover painting, the page's name, and the one thing the map promises.
+          The painting is not mixed here by hand any more: every dark band on the record now
+          comes from RecordPaintedBand, so the map, the wire and the reach pages are the same
+          room at the same strength rather than three rooms that happen to be dark. */}
+      <RecordPaintedBand>
         <div className="relative z-10 px-4 lg:px-10 py-9 lg:py-12 flex flex-col items-center justify-center gap-3 text-center">
           <SignalBeacon size={40} color="#7fc9e4" />
           <h1
@@ -55,7 +56,7 @@ export default function ClimateMapPage() {
             and never a person.
           </p>
         </div>
-      </div>
+      </RecordPaintedBand>
 
       {/* ── THE PLANET, WHOLE ──────────────────────────────────────────────────────
           Not a slippy map with tiles, edges and a grey panel on a wide screen. A plate:
