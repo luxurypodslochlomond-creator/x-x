@@ -190,7 +190,10 @@ export default function ClimateLayout({ children, currentPage }) {
           that is not there. The masthead still pins, so the way through is one thumb away
           from the top of any page. */}
       <div className="relative record-book" style={{ zIndex: 1 }}>
-      <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
+      {/* On a phone the masthead pins, so the way through is one thumb from the top of any
+          page. On a desk it does not: there is no thumb, the marks are already in the reader's
+          eye, and a strip that follows the page down only covers the thing being read. */}
+      <header className="sticky top-0 z-50 bg-record-paper text-record-ink lg:static lg:z-auto">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">

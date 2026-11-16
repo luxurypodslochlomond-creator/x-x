@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
+import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users, ChevronDown } from 'lucide-react';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
@@ -756,28 +756,49 @@ export default function TogetherChangeClimate() {
           doing the aiming. Nothing about the filter has changed. ── */}
       <div className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6]">
         <div className="border-y border-[#141210]/20">
+          {/* One line, the way the phone has one line: the subject you are standing in,
+              its folio, and a tab that opens the index. Everything the desk used to lay
+              flat — thirty drawings in six columns — is still here, one tap in. */}
           <button
             type="button"
-            onClick={() => setSelectedCategory('all')}
-            aria-pressed={selectedCategory === 'all'}
-            className={`flex min-h-11 w-full items-center gap-2 text-left ${
-              selectedCategory === 'all' ? 'text-[#0f5f7a]' : 'text-[#141210]'
-            }`}
+            onClick={() => setShowIndex(open => !open)}
+            aria-expanded={showIndex}
+            aria-controls="record-subject-index"
+            className="flex min-h-11 w-full items-center gap-2 text-left text-[#141210]"
           >
-            <SubjectMark subject="all" size={30} active={selectedCategory === 'all'} />
-            <span className="text-[13px]">All subjects</span>
-            <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">{items.length + actions.length}</span>
+            <span className="text-[10px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246]">Subject</span>
+            <span className="min-w-0 truncate text-[15px] leading-tight" style={{ fontFamily: 'var(--font-reading)' }}>
+              {activeSubject ? activeSubject.label : 'All subjects'}
+            </span>
+            <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">
+              {activeSubject ? activeSubject.count : items.length + actions.length}
+            </span>
+            <ChevronDown className={`h-4 w-4 shrink-0 text-[#5a5246] transition-transform ${showIndex ? 'rotate-180' : ''}`} />
           </button>
-          <div className="grid grid-cols-6 gap-x-2 gap-y-1 py-2 xl:grid-cols-8" aria-label="Filter by subject">
-            {subjectIndex.map(s => (
-              <SubjectIndexItem
-                key={s.id}
-                subject={s}
-                selected={selectedCategory === s.id}
-                onClick={() => setSelectedCategory(s.id)}
-              />
-            ))}
-          </div>
+          {showIndex && (
+            <div id="record-subject-index" className="pb-2">
+              <button
+                type="button"
+                onClick={() => { setSelectedCategory('all'); setShowIndex(false); }}
+                aria-pressed={selectedCategory === 'all'}
+                className={`flex min-h-11 w-full items-center gap-2 text-left ${selectedCategory === 'all' ? 'text-record-mark' : 'text-[#141210]'}`}
+              >
+                <SubjectMark subject="all" size={30} active={selectedCategory === 'all'} />
+                <span className="text-[13px]">All subjects</span>
+                <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">{items.length + actions.length}</span>
+              </button>
+              <div className="grid grid-cols-6 gap-x-2 gap-y-1 pb-2 xl:grid-cols-8" aria-label="Filter by subject">
+                {subjectIndex.map(s => (
+                  <SubjectIndexItem
+                    key={s.id}
+                    subject={s}
+                    selected={selectedCategory === s.id}
+                    onClick={() => { setSelectedCategory(s.id); setShowIndex(false); }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

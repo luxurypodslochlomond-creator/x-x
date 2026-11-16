@@ -251,24 +251,37 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
 }
 
 @media (min-width: 1024px) {
+  /* ── THE BOOK HOLDS ITS OWN SHEET ON A DESK ───────────────────────────────────
+     The painting was coming up through the reading column — a hair of it through every
+     plate, a little more where a surface is translucent — and a sentence laid over a
+     painting, however faint, reads as a sentence that is out of focus. That was the
+     "blurry": no filter, just paper with a picture under it.
+     The map page never had the fault because it lays its own solid sheet down, which is
+     exactly why it was the one page that looked sharp. So the book now does what the map
+     did: the column is solid paper, and the painting is let out either side of it, where
+     there is nothing to read. Same one work, same place; it is simply no longer under
+     the words. */
   .record-book {
     max-width: 1100px;
     margin-inline: auto;
+    background-color: rgb(var(--record-paper));
     box-shadow:
       0 0 0 1px rgb(var(--record-ink) / 0.12),
       0 34px 90px -34px rgb(var(--record-ink) / 0.5);
   }
   /* ── THE PAINTING IS A ROOM, NOT A COAT OF PAINT ───────────────────────────────
-     At fifty-two per cent the plate was doing two jobs at once and neither well: it was
-     too faint to be looked at and too strong to be behind anything. Measured against a
-     wide screen, half a plate of a sky that carries noise at the level of the pixel is a
-     field of static — the "blurry stars" — sitting either side of the words and a few
-     per cent of it coming up through the sheet under them, which is what made a sentence
-     look out of focus that was perfectly sharp.
-     At thirty-six it is what it was always meant to be: the light in the room the record
-     is printed in. The painting loses nothing — it is still the same plate, still at its
-     own resolution, still the ground of every page. */
-  /* Held through the strength, not an important opacity, so the fade still runs and the
+     This value has been argued over three times, and the argument is worth keeping.
+     At fifty-two per cent the plate was doing two jobs at once and neither well: too
+     faint to be looked at, too strong to be behind anything, and half a plate of a sky
+     that carries noise at the level of the pixel is a field of static — the "blurry
+     stars". At thirty-six it stopped being decoration and became light in the room, but
+     the column above it was still a hair translucent, so a few per cent of the painting
+     came up under the words and a sentence that was perfectly sharp looked out of focus.
+     The fault was never the strength. It was the painting being under text at all.
+     Now the column holds its own sheet, so the plate can be shown at full strength
+     either side of it — where there is nothing to read and nothing to spend. Nobody
+     loses contrast, and the reader finally sees the painting that was always there.
+     Held through the strength, not an important opacity, so the fade still runs and the
      painting still comes up to exactly the value it was tuned to. */
-  .record-ground { --cover-strength: 0.36 !important; }
+  .record-ground { --cover-strength: 0.9 !important; }
 }
