@@ -680,7 +680,7 @@ export default function TogetherChangeClimate() {
                 }`}
               >{t.actions}</button>
             </div>
-            <div className="my-5 lg:hidden">
+            <div className="my-3 lg:hidden">
               <SubjectRail
                 strip={filledSubjects}
                 current={activeSubject}
@@ -798,7 +798,7 @@ export default function TogetherChangeClimate() {
             )}
             {showEntries && (solutions.length + crises.length) === 0 && (
               <div className="py-16 text-center px-4">
-                <SubjectMark subject={activeSubject?.id || 'all'} size={44} className="mx-auto text-record-ink lg:hidden" />
+                <SubjectMark subject={activeSubject?.id || 'all'} size={24} className="mx-auto text-record-ink lg:hidden" />
                 <Globe className="mx-auto hidden h-10 w-10 text-record-muted lg:block" />
                 {subjectGap ? (
                   <>

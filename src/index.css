@@ -257,6 +257,9 @@ button:focus-visible {
     --cartoon-mint: 197 231 205;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
+    --record-botanical: 63 104 73;
+    --record-ochre: 155 111 40;
+    --record-clay: 166 90 68;
     --record-light-signal: 127 201 228;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -331,6 +334,9 @@ button:focus-visible {
     --cartoon-mint: 197 231 205;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
+    --record-botanical: 63 104 73;
+    --record-ochre: 155 111 40;
+    --record-clay: 166 90 68;
     --record-light-signal: 127 201 228;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

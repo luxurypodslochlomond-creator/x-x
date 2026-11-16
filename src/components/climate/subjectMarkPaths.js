@@ -1,5 +1,5 @@
 // Drawn for the record's subjects, on the same forty-unit sheet as its navigation.
-// Each has its own silhouette and one small cut of the record's red. No globe fallback.
+// Each has its own silhouette; contextual pigment is kept separately. No globe fallback.
 const subjectMarkPaths = {
   all: ['M8 33c5-3 8-3 12-1 4-2 8-2 12 1M20 31V12M20 22 9 16M20 18l11-9M9 16V8M31 9l4 1', 'M6 8c0-4 6-4 6 0s-6 4-6 0M28 8c0-4 6-4 6 0s-6 4-6 0M17 9c0-4 6-4 6 0s-6 4-6 0'],
   agriculture: ['M5 31c8-5 20-5 30-1M7 36c8-4 19-4 27-1M20 28V12M20 21C9 21 8 14 8 12c8-1 12 4 12 9M20 16c9 0 11-6 11-10-8 0-11 4-11 10', 'M20 11c-4-4-4-7 0-9 4 3 4 6 0 9'],

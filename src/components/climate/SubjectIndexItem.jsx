@@ -9,14 +9,14 @@ export default function SubjectIndexItem({ subject, selected, onClick, empty = f
       onClick={onClick}
       aria-pressed={empty ? undefined : selected}
       aria-label={empty ? `${subject.label}, no entries yet. Send one in.` : `${subject.label}, ${subject.count} entries`}
-      className={`relative flex min-h-[102px] min-w-0 flex-col items-center justify-start gap-1 px-1 py-2.5 text-center font-body active:bg-record-paper ${selected ? 'bg-record-paper text-record-ocean' : 'text-record-ink'}`}
+      className={`relative flex min-h-[56px] min-w-0 flex-col items-center justify-start gap-0.5 px-0.5 py-1 text-center font-body active:bg-record-paper ${selected ? 'bg-record-paper text-record-ocean' : 'text-record-ink'}`}
     >
-      {selected && <Check aria-hidden="true" className="absolute right-1 top-1.5 h-3.5 w-3.5 text-record-ocean" />}
-      <SubjectMark subject={subject.id} size={34} active={selected} className="shrink-0" />
-      <span className="w-full break-words text-[12.5px] leading-[1.28]">{subject.label}</span>
-      <span className={`text-[11px] leading-snug ${empty ? 'text-record-ocean' : 'font-mono tabular-nums text-record-muted'}`}>
-        {empty ? '0 · Send one in' : subject.count}
+      {selected && <Check aria-hidden="true" className="absolute right-0.5 top-1 h-3 w-3 text-record-ocean" />}
+      <span className="flex items-center justify-center gap-1">
+        <SubjectMark subject={subject.id} size={20} active={selected} className="shrink-0" />
+        <span className="font-mono text-[11px] leading-none tabular-nums text-record-muted">{subject.count}</span>
       </span>
+      <span className="w-full break-words text-[11px] leading-[1.15]">{subject.label}</span>
     </button>
   );
 }
