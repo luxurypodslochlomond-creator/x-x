@@ -131,7 +131,7 @@ export default function RecordPagesPanel({ open, onClose }) {
                   "Every open door" is true and is the same promise said honestly: everything
                   drawn here opens to anybody who taps it, nothing is behind a guess, and
                   nothing is past the edge of the glass. What is not open is not claimed. */}
-              <h1 id="record-contents-title" className="mt-1 font-display text-[34px] leading-[0.85] tracking-[-0.015em] sm:text-[46px]">
+              <h1 id="record-contents-title" className="mt-1 font-display text-[30px] leading-[0.9] tracking-[-0.015em] sm:text-[34px]">
                 Every open door
               </h1>
             </div>

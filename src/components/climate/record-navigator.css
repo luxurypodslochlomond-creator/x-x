@@ -341,21 +341,37 @@
    A phone keeps the sheet it has: the whole glass, rising from the foot, dimmed behind,
    because on a phone an index that does not fill the screen is a dialog to be dismissed
    rather than a page to be read. Nothing here touches a width under 1024. */
+/* ── AND ON A DESK IT IS A SHEET, NOT A WALL ─────────────────────────────────────
+   Brian, 16 November, after the drop-from-the-header version landed: "coolasfuck, apart
+   from when I click doors it feels clunky and too big, as it goes beyond the record."
+
+   Both halves of that were true of the numbers rather than of the idea. The plate was
+   eleven hundred wide — the full measure of the book's masthead — so the index arrived as
+   a wall the width of the page with an edge somewhere off in the margin, and its type
+   column inside was only eight hundred and eighty, which left an acre of empty paper on
+   each side of every door. It was also taller than it needed to be, and it took three
+   hundred milliseconds to come down.
+
+   So the plate is now the width of its own type column and nothing more: eight hundred and
+   eighty, one sheet with a hairline edge, sitting under the line of the book rather than
+   across it. It is capped short enough that the page a reader was standing on is still
+   visible under it, and it arrives in a hundred and eighty milliseconds. Same paper, same
+   red rule, same doors — the difference is that it is now the size of a list and not the
+   size of a page. */
 @media (min-width: 1024px) {
   .rec-doors {
     align-items: flex-start !important;
     justify-content: center !important;
-    padding: 0 !important;
+    padding: 12px 1.25rem 0 !important;
   }
   .rec-doors::backdrop { background: transparent; animation: none; }
   .rec-doors-plate {
     width: 100%;
-    max-width: 1100px !important;
-    max-height: 88dvh !important;
-    border: 0;
-    border-radius: 0 0 4px 4px;
-    border-bottom: 1px solid rgb(var(--record-ink) / 0.22);
-    box-shadow: 0 26px 44px -34px rgb(var(--record-ink) / 0.5);
+    max-width: 880px !important;
+    max-height: min(80dvh, 700px) !important;
+    border: 1px solid rgb(var(--record-ink) / 0.22);
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 22px 40px -30px rgb(var(--record-ink) / 0.45);
     /* It comes down from the rule at the top of the book, so it is hinged there rather
        than at its own middle: a plate that scales about its centre reads as a dialog
        floating in, and one that unfolds from the header reads as the header opening,
@@ -374,12 +390,18 @@
     line-height: 20px;
   }
   .rec-mast-doors .rec-art-drawing svg { shape-rendering: geometricPrecision; }
+  /* Short, and short-travelled. Three hundred milliseconds of a large paper panel moving
+     over a page that is still being scrolled is what read as the judder; a hundred and
+     eighty over six pixels reads as the sheet being put down. Nothing scales — a scale
+     redraws every letter on the plate for the whole of the motion. */
+  .rec-doors[data-state="in"] .rec-doors-plate { animation-duration: .18s; }
+  .rec-doors[data-state="out"] .rec-doors-plate { animation-duration: .14s; }
   @keyframes rec-doors-in {
-    from { opacity: 0; transform: translateY(-14px); }
+    from { opacity: 0; transform: translateY(-6px); }
     to { opacity: 1; transform: none; }
   }
   @keyframes rec-doors-out {
     from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 0; transform: translateY(-5px); }
   }
 }
