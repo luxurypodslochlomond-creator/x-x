@@ -643,11 +643,48 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
+      {/* ── THE CONTENTS TAB — where on the record you are reading ─────────────────
+          This stood under the submit button, on warm paper, in the same small machine
+          label as every button around it, so the one control that names the place came
+          last and spoke quietest: a footnote to a form. It leads now, and it is printed
+          rather than set — a divider spine of ink on the page edge, the subject in the
+          record's reading voice above the size of any button near it, the count where a
+          page number goes, and the contents sheet unfolding flush beneath it. ── */}
+      <div className="bg-[#efe7d6]">
+        <SubjectDoor
+          active={activeSubject}
+          totalEntries={items.length + actions.length}
+          allLabel={t.all}
+          open={showIndex}
+          onOpen={() => setShowIndex(true)}
+          onClose={() => setShowIndex(false)}
+        />
+        <SubjectIndexSheet
+          open={showIndex}
+          onClose={() => setShowIndex(false)}
+          filled={filledSubjects}
+          empty={emptySubjects}
+          totalEntries={items.length + actions.length}
+          selected={selectedCategory}
+          allLabel={t.all}
+          onSelect={(id) => {
+            setSelectedCategory(id);
+            setShowIndex(false);
+            requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+          }}
+          onAdd={(subject) => {
+            setShowIndex(false);
+            setSubmitCategory(subject.id);
+            setShowSubmit(true);
+          }}
+        />
+      </div>
+
       {/* ── TOOLBAR — the record's filters on one side, its own doors on the other.
              The search that reaches everything is the one pill in the header: one
              search, not two. On a desktop that reads as a working toolbar; on a phone
              it stacks. ── */}
-      <div className="px-4 lg:px-10 pb-5 pt-2 lg:pb-6 bg-[#efe7d6]">
+      <div className="px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         <div className="lg:flex lg:items-start lg:gap-8">
           <div className="lg:flex-1 lg:min-w-0">
             <div className="flex gap-2 mb-3 lg:max-w-[540px]">
@@ -700,37 +737,9 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── THE SUBJECTS ──────────────────────────────────────────────────────────
-          A phone gets one line that opens the index; a desk keeps the full set laid flat,
-          because there it fits and no thumb is doing the aiming. ── */}
-      <div className="px-4 lg:px-10 pb-4 lg:pb-5 bg-[#efe7d6]">
-        <SubjectDoor
-          active={activeSubject}
-          totalEntries={items.length + actions.length}
-          allLabel={t.all}
-          open={showIndex}
-          onOpen={() => setShowIndex(true)}
-          onClose={() => setShowIndex(false)}
-        />
-        {/* The index opens under the line that asked for it, in the page — not over it. */}
-        <SubjectIndexSheet
-          open={showIndex}
-          onClose={() => setShowIndex(false)}
-          filled={filledSubjects}
-          empty={emptySubjects}
-          totalEntries={items.length + actions.length}
-          selected={selectedCategory}
-          allLabel={t.all}
-          onSelect={(id) => {
-            setSelectedCategory(id);
-            setShowIndex(false);
-            requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-          }}
-          onAdd={(subject) => {
-            setShowIndex(false);
-            setSubmitCategory(subject.id);
-            setShowSubmit(true);
-          }}
-        />
+          A phone gets the contents tab above, which opens the sheet; a desk keeps the
+          full set laid flat, because there it fits and no thumb is doing the aiming. ── */}
+      <div className="px-4 lg:px-10 pb-0 lg:pb-5 bg-[#efe7d6]">
         <div className="hidden lg:flex gap-1.5 flex-wrap" aria-label="Filter by subject">
           <button
             onClick={() => setSelectedCategory('all')}
