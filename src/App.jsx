@@ -152,6 +152,7 @@ const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
+const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
 const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrections'));
@@ -365,6 +366,9 @@ const AuthenticatedApp = () => {
           the one ask — and no addresses, no phone numbers and no joining link, because a
           workshop's link is hers to hand out. */}
       <Route path="/ClimateWorkshop" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopPage /></ClimateLayout>} />
+      {/* The eight minutes themselves, written out rather than summarised: the one page in
+          this whole business that has to be in sentences, because somebody has to say them. */}
+      <Route path="/ClimateWorkshopWords" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopWordsPage /></ClimateLayout>} />
       <Route path="/ClimateHost" element={<ClimateLayout currentPage="ClimateHost"><ClimateHostPage /></ClimateLayout>} />
       {/* ── SAVED, NOT STANDING OPEN ─────────────────────────────────────────────────
           "Please save this… for when we are discussing with a potential host" — the founder,

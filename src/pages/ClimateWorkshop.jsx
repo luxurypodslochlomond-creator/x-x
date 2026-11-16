@@ -121,6 +121,9 @@ export default function ClimateWorkshop() {
         <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-muted">
           The card is our own drawing: an empty frame, the date and the place. No addresses, no joining link, nothing about anybody.
         </p>
+        <Link to="/ClimateWorkshopWords" className="mt-3 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide underline decoration-dotted underline-offset-4">
+          The eight minutes, written out <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </div>
     </ClimateRecordShell>
   );
