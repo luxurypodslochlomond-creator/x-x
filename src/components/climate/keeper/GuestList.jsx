@@ -192,7 +192,10 @@ export default function GuestList() {
           {row.email}
           {row.note ? ` · ${row.note}` : ''}
         </p>
-        <p className="truncate font-mono text-[10px] tracking-[0.04em] text-[#8a7f70]">{standing(row)}</p>
+        <p className="truncate font-mono text-[10px] tracking-[0.04em] text-[#8a7f70]">
+          {standing(row)}
+          {row.added_by ? ` · put here by ${row.added_by}` : ''}
+        </p>
       </div>
       <button
         onClick={() => ask({ change: row.active ? 'pause' : 'restore', row_id: row.id })}

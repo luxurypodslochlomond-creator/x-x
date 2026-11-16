@@ -42,13 +42,19 @@ async function rosterOf(base44) {
 // only evidence: how many notes they have signed and when the last one was, and whether
 // they have written their own line on the roll. Nothing here is a guess about an email
 // being opened — a letter cannot be read back, and the record will not pretend it can.
-function shapeLine(row, evidence) {
+function shapeLine(row, evidence, names) {
   const e = (evidence && evidence.get(lower(row.email))) || { notes: 0, last: '' };
   return {
     id: row.id,
     email: row.email || '',
     name: row.name || '',
     note: row.note || '',
+    // ── WHOSE WORD PUT THIS LINE HERE ────────────────────────────────────────────
+    // With three keepers on the record, "on the list" is not the answer a keeper needs —
+    // "put here by Brian" is. A guest list where any line could have come from anyone is
+    // not a record of vouching, it is just a queue of addresses. The address was always
+    // stored; the name is looked up from the list itself so nobody has to read an email.
+    added_by: names?.get(lower(row.added_by)) || (String(row.added_by || '').includes('@') ? '' : row.added_by || ''),
     is_keeper: Boolean(row.is_keeper),
     active: Boolean(row.active),
     asked: row.created_date || '',
@@ -123,11 +129,18 @@ async function applyChange(base44, change, who, basis) {
       invited = false;
     }
 
+    // ── THE LETTER THAT NAMES THE PERSON WHO VOUCHED ────────────────────────────
+    // This used to send the record's own letter to the person only when the platform's
+    // sign-in invitation had FAILED — so the one letter that says "you have a place here,
+    // put there by Janine" was the fallback, and the letter that actually arrived was the
+    // platform's, which cannot carry a name at all. That is backwards. A person joining a
+    // record should hear from a person, not from a form: so they get the record's letter
+    // every time, alongside the sign-in key, and the first line of it is whose word it was.
     await tell(base44, {
       email,
       name: change.target_name || email,
       state: 'invited',
-      person_letter: !invited,
+      person_letter: true,
       row_id: created?.id || '',
     });
 
@@ -243,13 +256,17 @@ export default async function (req) {
         console.error('climateAccessChange: could not read the checking notes', e?.message);
       }
 
+      // The list read back as addresses-to-names, so a line can say whose word put it there
+      // without ever printing one keeper's address to another.
+      const names = new Map(rows.map((r) => [lower(r.email), r.name || r.email]));
+
       return Response.json({
         me,
         name: who.name,
         solo: activeKeepers <= 1,
         owner: who.user?.role === 'admin',
-        keepers: rows.filter((r) => r.is_keeper).map((r) => shapeLine(r, evidence)),
-        checkers: rows.filter((r) => !r.is_keeper).map((r) => shapeLine(r, evidence)),
+        keepers: rows.filter((r) => r.is_keeper).map((r) => shapeLine(r, evidence, names)),
+        checkers: rows.filter((r) => !r.is_keeper).map((r) => shapeLine(r, evidence, names)),
         waiting,
       });
     }
