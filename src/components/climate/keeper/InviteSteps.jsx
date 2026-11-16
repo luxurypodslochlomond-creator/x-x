@@ -28,21 +28,29 @@ const RECORD = 'https://uf51.love';
 // waits for a person. So the steps now say that, and they put the link first — because
 // the link is the one thing that decides. A promise the code does not keep is worse
 // than a smaller promise it does.
+// ── CORRECTED AGAIN, 16 NOVEMBER ─────────────────────────────────────────────
+// These steps led with the open submit door and put signing in third, which reads as a
+// walkthrough for a stranger dropping one entry in and leaving. The person a keeper
+// actually sends this to is a checker — someone who comes in by name, reads what is
+// waiting, and adds their own work as part of the same job. So the order is the order they
+// will do it in: sign in, find the work, then add something of their own. And it says
+// plainly that a checker has no publishing button, because it does not — the submit door
+// is open to everybody, and that is the door an initiative goes through.
 const STEPS = [
   {
     n: '1',
-    title: 'Add it straight away, with no account at all',
-    line: 'Open the record and tap "Submit a solution, crisis, or action". Paste the link to where it came from into the box at the top and the form fills itself in. Name and address go on the form so the record can reach them about it; the address is never shown to a reader, and nobody signs in to do this.',
+    title: 'Sign in with the address you were added under',
+    line: 'The invitation sets your password. Use the same address a keeper typed in for you — that address is the only key there is, and there is no second login to remember.',
   },
   {
     n: '2',
-    title: 'The honest bit: the link is what decides',
-    line: `An entry that carries its source link, and that the screening reads as clean, goes on the record as it arrives. One with no source — or one the screening is unsure of — waits for you, and you either find the link or leave it out. That is not a delay to apologise for: it is the reason a reader can trust the page. What is waiting sits at ${RECORD}/ClimateChecking.`,
+    title: 'The checking room is where the work is',
+    line: `Go to ${RECORD}/ClimateChecking. Open the source link each entry carries, then say whether it says what the entry claims: it holds up, it does not, or you could not tell. All three are useful. Nothing there publishes, edits or deletes anything, and every note is signed with your own name.`,
   },
   {
     n: '3',
-    title: 'Sign in only for the two things that need a name',
-    line: 'Their own line on the roll, and checking what other people have sent. The invitation email sets the password, and the address you type here is the only key there is — nothing else to remember.',
+    title: 'Adding something of your own goes through the open door',
+    line: `Checking gives you no publishing button, on purpose: a checker's note is worth reading because it holds no power. So an initiative goes in the way everybody's does — go to ${RECORD} and tap "Submit a solution, crisis, or action". Paste the link to where it came from into the box at the top and the form fills itself in; put your name and address on it so the record can reach you, and that address is never shown to a reader. What carries its source and reads clean goes on as it arrives; anything unclear waits for a keeper to look.`,
   },
 ];
 
@@ -83,8 +91,9 @@ export default function InviteSteps() {
     <details open className="room-details border-t border-[#141210]/20 pt-3 mb-6">
       <summary>What to send them afterwards</summary>
       <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-3" style={reading}>
-        The invitation email sets their password. These three steps go beside it, so they are
-        not left to work the record out alone. Type their first name once and take either or both.
+        The invitation email sets their password. These three steps go beside it, in the order
+        a checker works: sign in, find the queue, then add something of their own. Type their
+        first name once and take either or both.
       </p>
 
       <ol className="space-y-2 mb-3">

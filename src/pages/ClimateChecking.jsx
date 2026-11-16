@@ -344,6 +344,17 @@ export default function ClimateChecking({ plain = false, onChange }) {
           <RefreshCw className="w-3.5 h-3.5" /> Look again
         </button>
 
+        {/* A checker's other job is her own work — an initiative of her own to put in. There
+            is no publishing button here by design, so this is the way to the open door, one
+            line, said once, rather than leaving her to hunt the record for it. */}
+        <p className="mt-3 text-[12.5px] text-record-ink/75 leading-[1.7]" style={{ fontFamily: 'var(--font-reading)' }}>
+          Adding something of your own? Checking gives you no publishing button — an initiative
+          goes in through the open door, with no key needed:{' '}
+          <Link to="/TogetherChangeClimate?submit=1" className="text-record-red underline">
+            add a solution, crisis or action
+          </Link>.
+        </p>
+
         <RecordNote {...(compact ? { className: 'room-details' } : {})}>
           {compact && <summary>About checking</summary>}
           <p className="text-[12.5px] text-record-muted leading-[1.7] mt-8 border-t border-record-ink/15 pt-4" style={{ fontFamily: 'var(--font-reading)' }}>

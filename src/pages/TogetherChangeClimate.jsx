@@ -238,7 +238,11 @@ export default function TogetherChangeClimate() {
   const [selectedType, setSelectedType] = useRecordViewState('kind', 'all');
   const { isRTL } = useSiteLanguage();
   const [copied, setCopied] = useState(false);
-  const [showSubmit, setShowSubmit] = useState(false);
+  // A link can name the door: ?submit=1 opens the form straight away, so a walkthrough sent
+  // to a new checker can point at the exact place an initiative is added.
+  const [showSubmit, setShowSubmit] = useState(
+    () => new URLSearchParams(window.location.search).get('submit') === '1'
+  );
   const [showGathering, setShowGathering] = useState(false);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const contentRef = useRef(null);
