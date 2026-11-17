@@ -1,10 +1,17 @@
 /* Founder parity: centred opening and bands, left-aligned card content.
    Reading text is upright; italics are reserved for the founder's direct quotation.
    This page opts out of the shared prose enlargement so each role keeps its own size. */
+/* ── THE PAGE SITS ON THE PAINTING, NOT IN FRONT OF IT ───────────────────────────
+   The ground was solid bone, so the record's own painting — running fixed underneath every
+   page of the book — stopped dead at this one and the page read as a sheet of card laid
+   over the record rather than a page of it. It is bone at 84 per cent now: the painting
+   comes up through the gutters and the margins exactly the way it does on every other page
+   of the record, and every word still sits on a solid band or a solid card. Contrast is
+   spent on the bands, never on the ground. */
 #x-equals-x.covenant-page {
   position: relative;
   min-height: 100vh;
-  background-color: rgb(var(--record-bone));
+  background-color: rgb(var(--record-bone) / .84);
   color: rgb(var(--record-ink));
   font-family: var(--font-record-ui);
   font-size: 0.8125rem;
@@ -66,8 +73,15 @@
   color: rgb(var(--record-mark)) !important;
 }
 
-/* ── THE PLATE ──────────────────────────────────────────────────────────────────
-   Ink, with the painting held far back and cooled, exactly as her hero is built. */
+/* ── THE PLATE, AND THE PAINTING LET THROUGH ────────────────────────────────────
+   Ink with the record's painting behind it was the right idea at four tenths of the veil's
+   weight — except the veil was mixed at 0.6 to 0.93, which is a black plate with a rumour of
+   a painting under it. The whole point of this page is that nothing on it is hidden, and a
+   cover veiled to nine tenths is a cover hidden.
+   It is lit now: the painting reads as the night sky it is, the drawn stars and the meteors
+   sit in it, and the veil is only as heavy as the words need — deepest at the foot, where
+   the detail runs into the band below. The type carried it at four tenths; it carries it at
+   three, because bone on a veiled night is still the highest contrast thing in the room. */
 #x-equals-x .covenant-hero {
   position: relative;
   overflow: hidden;
@@ -76,8 +90,9 @@
 #x-equals-x .covenant-hero-veil {
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(20, 18, 16, 0.6) 0%, rgba(20, 18, 16, 0.76) 55%, rgba(20, 18, 16, 0.93) 100%);
+  background: linear-gradient(180deg, rgba(20, 18, 16, 0.34) 0%, rgba(20, 18, 16, 0.5) 52%, rgba(20, 18, 16, 0.84) 100%);
 }
 #x-equals-x .covenant-hero-scan {
   position: absolute;
@@ -279,6 +294,61 @@
   color: #5a5246;
   text-decoration: underline;
   text-decoration-color: rgb(var(--record-red));
+}
+/* ── WHAT THE RECORD OWES ───────────────────────────────────────────────────────
+   Five debts in the centre band, set as a numbered account rather than a list of virtues:
+   the promise in ink caps, the thing that makes it true underneath, one hairline between
+   each. The numeral is set in the record's display face and coloured with the mark's own
+   red, so the sequence reads as a count of something owed rather than as five paragraphs
+   somebody hoped would look tidy. */
+#x-equals-x .covenant-owed-open { max-inline-size: 46ch !important; }
+#x-equals-x .covenant-owes {
+  width: 100%;
+  max-inline-size: 44rem;
+  margin: 0.5rem auto 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+#x-equals-x .covenant-owes li {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  column-gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(20, 18, 16, 0.16);
+  text-align: left;
+}
+#x-equals-x .covenant-owes li:first-child { border-top: 0; }
+#x-equals-x .covenant-owes li::before {
+  content: attr(data-n);
+  grid-column: 1;
+  grid-row: 1;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: rgb(var(--record-mark));
+}
+#x-equals-x .covenant-owes strong {
+  display: block;
+  font-family: var(--font-record-ui);
+  font-size: 0.8125rem;
+  font-weight: 900;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: rgb(var(--record-ink));
+}
+#x-equals-x .covenant-owes span {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: #5a5246;
+}
+@media (min-width: 1024px) {
+  #x-equals-x .covenant-owes strong,
+  #x-equals-x .covenant-owes span { font-size: 0.875rem; }
 }
 #x-equals-x .covenant-source-name { display: block; margin-top: 0.25rem; }
 #x-equals-x cite { font-style: normal; }

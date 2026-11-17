@@ -1,0 +1,101 @@
+/* ── THE SKY OVER THE PLATE, DRAWN ONCE ─────────────────────────────────────────
+   Hand-placed stars and four drawn meteors. No tiling, because three overlapping
+   lattices of dots read as a grid the moment somebody looks for longer than a second,
+   and this is a page people look at.
+
+   The stars only occupy the top two thirds: the plate's lower half is where the
+   painting turns to earth and weather, and a star down there would be a lie.
+
+   Everything is transform and opacity on four small elements. No blend mode over a
+   full-viewport layer — that is what makes a sky stutter on a phone while scrolling —
+   and nothing here repaints the artwork underneath it. */
+.xc-sky {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.xc-sky-stars {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  opacity: 0.95;
+  background-image:
+    radial-gradient(circle at 6% 9%, rgba(255, 249, 235, .95) 0 .9px, rgba(255, 249, 235, 0) 1.5px),
+    radial-gradient(circle at 13% 22%, rgba(255, 247, 226, .65) 0 .7px, rgba(255, 247, 226, 0) 1.2px),
+    radial-gradient(circle at 18% 6%, rgba(198, 226, 240, .8) 0 .8px, rgba(198, 226, 240, 0) 1.3px),
+    radial-gradient(circle at 24% 17%, rgba(255, 249, 235, .9) 0 1px, rgba(255, 249, 235, 0) 1.6px),
+    radial-gradient(circle at 31% 3%, rgba(255, 247, 226, .55) 0 .7px, rgba(255, 247, 226, 0) 1.1px),
+    radial-gradient(circle at 37% 27%, rgba(255, 249, 235, .8) 0 .8px, rgba(255, 249, 235, 0) 1.3px),
+    radial-gradient(circle at 43% 12%, rgba(214, 232, 244, .7) 0 .7px, rgba(214, 232, 244, 0) 1.2px),
+    radial-gradient(circle at 49% 31%, rgba(255, 249, 235, .85) 0 .9px, rgba(255, 249, 235, 0) 1.4px),
+    radial-gradient(circle at 55% 5%, rgba(255, 247, 226, .6) 0 .7px, rgba(255, 247, 226, 0) 1.1px),
+    radial-gradient(circle at 61% 20%, rgba(255, 249, 235, .9) 0 .8px, rgba(255, 249, 235, 0) 1.3px),
+    radial-gradient(circle at 68% 10%, rgba(198, 226, 240, .75) 0 .7px, rgba(198, 226, 240, 0) 1.2px),
+    radial-gradient(circle at 74% 29%, rgba(255, 249, 235, .7) 0 .8px, rgba(255, 249, 235, 0) 1.3px),
+    radial-gradient(circle at 81% 7%, rgba(255, 247, 226, .9) 0 .9px, rgba(255, 247, 226, 0) 1.4px),
+    radial-gradient(circle at 88% 19%, rgba(255, 249, 235, .65) 0 .7px, rgba(255, 249, 235, 0) 1.2px),
+    radial-gradient(circle at 94% 13%, rgba(255, 249, 235, .85) 0 .8px, rgba(255, 249, 235, 0) 1.3px),
+    radial-gradient(circle at 9% 34%, rgba(255, 249, 235, .5) 0 .7px, rgba(255, 249, 235, 0) 1.1px),
+    radial-gradient(circle at 57% 39%, rgba(255, 249, 235, .45) 0 .7px, rgba(255, 249, 235, 0) 1.1px);
+}
+
+/* ── ONE METEOR, DRAWN THE WAY A METEOR ACTUALLY READS ──────────────────────────
+   A meteor is not a line with an arrow on it: it is a small bright head with dust
+   thinning behind it, and the whole thing spends less than a second on the glass. So the
+   streak is a gradient that ends in a bright point, the head is a lit dot at that end,
+   and the crossing takes about a second and a half out of every twenty-odd.
+
+   The tilt is the direction of travel: the streak points up-right, the head is at the
+   right end, and the movement carries it down-left — dust left behind it, which is the
+   direction every photograph of a shower agrees on. */
+.xc-meteor {
+  position: absolute;
+  width: 190px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, rgba(255, 244, 214, 0) 0%, rgba(255, 244, 214, .18) 42%, rgba(255, 250, 238, .96) 100%);
+  opacity: 0;
+  transform-origin: right center;
+  will-change: transform, opacity;
+  animation: xc-meteor-fall 19s linear infinite;
+}
+
+/* The lit head, and the faint bloom around it. */
+.xc-meteor::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  margin-top: -1.5px;
+  border-radius: 999px;
+  background: #fffdf4;
+  box-shadow: 0 0 6px 2px rgba(255, 246, 214, .75);
+}
+
+/* ── THE WINDOW EACH ONE CROSSES IN ──────────────────────────────────────────────
+   Nineteen, twenty-three, thirty-one and forty-seven seconds, with staggered starts, so
+   the sky is mostly still and occasionally carries two at once. A shower that fired every
+   three seconds would be a loading screen. */
+@keyframes xc-meteor-fall {
+  0%   { opacity: 0; transform: translate3d(0, 0, 0) rotate(-34deg); }
+  2%   { opacity: 1; }
+  6%   { opacity: .95; }
+  11%  { opacity: 0; transform: translate3d(-58vw, 62vh, 0) rotate(-34deg); }
+  100% { opacity: 0; transform: translate3d(-58vw, 62vh, 0) rotate(-34deg); }
+}
+
+.xc-meteor-1 { top: 4%;  right: -6%;  animation-duration: 19s; animation-delay: 1s; }
+.xc-meteor-2 { top: 16%; right: 18%;  animation-duration: 23s; animation-delay: 7.5s; width: 150px; }
+.xc-meteor-3 { top: 1%;  right: 34%;  animation-duration: 31s; animation-delay: 15s; width: 230px; }
+.xc-meteor-4 { top: 24%; right: -18%; animation-duration: 47s; animation-delay: 27s; width: 130px; }
+
+/* ── STILL, FOR ANYONE WHO ASKED FOR STILL ──────────────────────────────────────
+   Same sky, same stars, nothing crossing it. Never a barrier, for anyone. */
+@media (prefers-reduced-motion: reduce) {
+  .xc-meteor { animation: none; opacity: 0; }
+}

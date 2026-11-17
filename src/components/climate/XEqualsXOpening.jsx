@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import RecordCover from '@/components/climate/RecordCover';
+import XEqualsXMeteorSky from '@/components/climate/XEqualsXMeteorSky';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
@@ -18,7 +19,10 @@ import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 export default function XEqualsXOpening() {
   return (
     <div className="covenant-hero">
-      <RecordCover position="center 30%" strength={0.4} />
+      <RecordCover position="center 30%" strength={0.55} />
+      {/* The plate is a night sky, so the sky is finished rather than left as a still —
+          drawn stars and four drawn meteors crossing it, under the words and over the paint. */}
+      <XEqualsXMeteorSky />
       <div className="covenant-hero-veil" aria-hidden="true" />
       <div className="covenant-hero-scan" aria-hidden="true" />
 
