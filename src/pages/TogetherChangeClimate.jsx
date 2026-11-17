@@ -589,10 +589,24 @@ export default function TogetherChangeClimate() {
               heavy in the hand. It now opens at 36px on a phone (40px at 430px) — one
               clear step above every other page's title (30-35px), still the largest.
               From 782px up it is the same 72px it always was. */}
-          <h1 className="font-black uppercase leading-[0.94] max-w-[360px] lg:max-w-[640px] relative z-10 text-[#efe7d6]"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 9.2vw, 72px)', letterSpacing: '0.004em', textAlign: 'justify', textAlignLast: 'justify' }}>
-            {t.title_a}<br />
-            <span className="text-[#e2602a]">{t.title_b}</span> {t.title_c}
+          {/* ── THE SENTENCE IS SET IN THE FOOT'S OWN HAND ─────────────────────────
+              Brian, 17 November: "you sure not change font of together we can change
+              sentence bro?" He was right and I was wrong to hold the display cut. This
+              line is the record's title and the foot's yellow plate already states what the
+              record is — set in two different voices they argued, and the arguing is what
+              made the opening look like a poster stapled to a printed page.
+              So it is the machine's mono caps, tracked, the same voice as the yellow plate
+              under it and the same voice as the foot: one record, one hand, top to bottom.
+              It comes down from 72px to 44px because mono caps carry twice the width of
+              condensed display, and a 72px mono headline on a 1945px desk is a wall.
+              Justified — and the last line is left ragged on purpose. Justifying a final
+              short line is what made it look wrong on the desk: the words were pulled apart
+              to reach an edge the sentence had already finished at. Straight edges down the
+              block, natural last line, which is how a printed plate actually sets. */}
+          <h1 className="font-black font-mono uppercase leading-[1.2] max-w-[340px] lg:max-w-[720px] relative z-10 text-[#efe7d6]"
+            style={{ fontSize: 'clamp(20px, 6.2vw, 44px)', letterSpacing: '0.03em', textAlign: 'justify' }}>
+            {t.title_a}{' '}
+            <span className="text-[#ffd447]">{t.title_b}</span> {t.title_c}
           </h1>
           {/* The tilted rubber stamp is gone. It was three of the smallest words on the
               page, rotated, pulsing, and set in a ring that pulled the eye before the
@@ -624,7 +638,7 @@ export default function TogetherChangeClimate() {
           <div className="bg-[#ffd447] px-3.5 py-3.5 lg:px-4 lg:py-4 max-w-full lg:max-w-[620px]">
             <p
               className="font-mono uppercase text-[10.5px] lg:text-[11.5px] leading-[1.85] tracking-[0.08em] text-[#141210]"
-              style={{ textAlign: 'justify', textAlignLast: 'justify' }}
+              style={{ textAlign: 'justify' }}
             >{t.sub}</p>
             {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
             <p className="text-[9px] lg:text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-record-mark tracking-[0.14em]">
