@@ -1,0 +1,78 @@
+/* The opening keeps the phone composition. Desktop type is measured against
+   the book, not the viewport, and never justified into widely separated words. */
+.record-home-title {
+  margin: 0;
+  font-size: clamp(20px, 5.4vw, 82px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: .004em;
+  text-align: justify;
+}
+.record-pages .record-home-hero .record-home-summary-copy {
+  font-size: .75rem;
+  line-height: 1.5;
+  letter-spacing: .08em;
+  text-align: justify;
+}
+.record-pages .record-home-hero .record-home-summary-motto {
+  font-size: .75rem;
+  line-height: 1.5;
+  letter-spacing: .08em;
+}
+
+@media (min-width: 1024px) {
+  /* The existing full-strength environment is the only desktop painting.
+     Hide the quotation's local image and veil, not the shared artwork. */
+  .record-pages .record-home-opening {
+    padding-block: 1.75rem;
+  }
+  .record-pages .record-home-voice {
+    border: 0;
+    padding: 0;
+    background: transparent;
+  }
+  .record-home-voice > .record-cover,
+  .record-home-voice > [aria-hidden="true"] {
+    display: none;
+  }
+  .record-home-voice blockquote {
+    color: rgb(var(--record-ink));
+  }
+  .record-home-voice :is(p, a) {
+    color: rgb(var(--record-mark));
+  }
+  .record-home-voice .record-home-voice-label {
+    color: rgb(var(--record-muted));
+  }
+  .record-home-title-band {
+    padding-block: 2rem;
+  }
+  .record-home-title {
+    font-family: var(--font-record-ui);
+    font-size: clamp(42px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -.025em;
+    text-align: start;
+    word-spacing: normal;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+  .record-home-title-line {
+    display: block;
+  }
+  .record-pages .record-home-hero .record-home-summary-copy {
+    font-size: .8125rem;
+    line-height: 1.75;
+    letter-spacing: .035em;
+    text-align: start;
+  }
+  .record-pages .record-home-hero .record-home-summary-motto {
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: .045em;
+  }
+  .record-home-cover-credit {
+    margin-top: .75rem;
+  }
+}

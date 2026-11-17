@@ -49,6 +49,7 @@ const CATEGORIES = [
 
 import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
+import RecordHomeHero from '@/components/climate/RecordHomeHero';
 
 // ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [
@@ -493,12 +494,12 @@ export default function TogetherChangeClimate() {
              that flatness — not the typeface — is what read cold and linear. The warm paper
              still holds the page open; the material now sits under her words, where it
              belongs. Her words are the record's first transmission, so they get its plate. ── */}
-      <div className="bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" >
-        <RecordPaintedBand className="mx-auto max-w-[760px] border-2 border-record-earth px-5 py-6">
+      <div className="record-home-opening bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" >
+        <RecordPaintedBand className="record-home-voice mx-auto max-w-[760px] border-2 border-record-earth px-5 py-6">
           <div className="relative z-10 flex flex-col items-center gap-4 text-center">
             <div className="flex items-center justify-center gap-2">
               <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
-              <span className="text-[8px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/50 leading-tight">
+              <span className="record-home-voice-label text-[8px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/50 leading-tight">
                 A voice on the record
               </span>
               <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
@@ -559,100 +560,7 @@ export default function TogetherChangeClimate() {
         </div>
       </div>
 
-      {/* ── HERO — two bands, bone and ink. The only colour in this block is one word. ── */}
-      {/* The masthead's field was near-black, which put the whole record in a dark room before a
-          single word had been read. It is deep earth now — still deep enough to carry the light
-          type, and warm enough to belong to the paper below it. The photograph keeps its own
-          colour for the same reason the cards do: this is a record of real places. */}
-      {/* Use the Map's actual painted surface, not another full-strength crop behind type. */}
-      <RecordPaintedBand strength={0.95} soft className="min-h-[clamp(320px,44vh,460px)]">
-        {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
-        <div className="relative z-10 bg-[#efe7d6] px-4 lg:px-10 py-3 flex items-center justify-between gap-3"
-          >
-          <span className="text-[11px] font-black uppercase tracking-[0.14em] text-[#141210]">{t.service}</span>
-          <button
-            onClick={handleShare}
-            aria-label="Share this platform"
-            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 min-h-[40px] bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase tracking-wider whitespace-nowrap active:bg-[#e2602a] active:text-[#141210] transition-colors"
-          >
-            {copied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
-            {copied ? 'Copied' : 'Share'}
-          </button>
-        </div>
-
-        {/* Ink band */}
-        <div className="relative z-10 px-4 lg:px-10 pt-8 lg:pt-11 pb-6">
-          {/* The record's own name — the one heading on the record allowed to lead.
-              It was built so the phone's width beat the floor: 11vw gave 43px on a
-              393px screen and 47px at 430px, which made this the largest opening
-              anywhere on the record by a wide margin, and is what made the page feel
-              heavy in the hand. It now opens at 36px on a phone (40px at 430px) — one
-              clear step above every other page's title (30-35px), still the largest.
-              From 782px up it is the same 72px it always was. */}
-          {/* ── THE SENTENCE IS SET IN THE FOOT'S OWN HAND ─────────────────────────
-              Brian, 17 November: "you sure not change font of together we can change
-              sentence bro?" He was right and I was wrong to hold the display cut. This
-              line is the record's title and the foot's yellow plate already states what the
-              record is — set in two different voices they argued, and the arguing is what
-              made the opening look like a poster stapled to a printed page.
-              So it is the machine's mono caps, tracked, the same voice as the yellow plate
-              under it and the same voice as the foot: one record, one hand, top to bottom.
-              It comes down from 72px to 44px because mono caps carry twice the width of
-              condensed display, and a 72px mono headline on a 1945px desk is a wall.
-              Justified — and the last line is left ragged on purpose. Justifying a final
-              short line is what made it look wrong on the desk: the words were pulled apart
-              to reach an edge the sentence had already finished at. Straight edges down the
-              block, natural last line, which is how a printed plate actually sets. */}
-          <h1 className="font-black font-mono uppercase leading-[1.06] w-full relative z-10 text-[#efe7d6]"
-            style={{ fontSize: 'clamp(20px, 5.4vw, 82px)', letterSpacing: '0.02em', textAlign: 'justify' }}>
-            {t.title_a}{' '}
-            <span className="text-[#ffd447]">{t.title_b}</span> {t.title_c}
-          </h1>
-          {/* The tilted rubber stamp is gone. It was three of the smallest words on the
-              page, rotated, pulsing, and set in a ring that pulled the eye before the
-              title did — the one element on the opening that was pure costume. The name
-              of the record is already said in the masthead above and in the voice at the
-              top of this page; saying it a third time in a badge made the page busier and
-              no clearer. */}
-        </div>
-
-        {/* Closing band — ink, not a second colour. It was the brightest slab on the record,
-             and that slab spent the blue before a single entry had been read, so there was
-             nothing left for the blue to point at. The record opens deep and stays deep. */}
-        {/* The flicker is gone. A sentence that blinks is a trick, and a trick is the
-            cheapest way to look alive; the line reads better held steady. */}
-        <div className="relative z-10 bg-[#241d16]/80 px-4 lg:px-10 py-4 lg:py-5 backdrop-blur-[2px]" >
-          {/* The record's own sentence, in its own voice — sentence case, on the deep
-              band. Everything else in this band stays as it was. */}
-          {/* ── THE SENTENCE IS PRINTED, NOT EXPLAINED ─────────────────────────────
-              Brian, 17 November: "the paragraph a public record of climate emergencies etc can
-              be like our coolasfuck footer red yellow please and justified too … same font as
-              footer." So the sentence comes off the dark band and onto a yellow plate in the
-              foot's own hand: the machine's mono caps, tracked, both edges flush, ink on
-              yellow, with the proverb under it in the mark's red. Yellow and red are the two
-              colours the foot already uses for the thing itself, so the page now closes the
-              way it opens — and the one sentence that says what this whole record is for gets
-              printed like a plate instead of set like a paragraph nobody reads.
-              Justified, because a printed plate has two straight edges and a ragged right on
-              a block of caps looks like a form that was never finished. */}
-          <div className="bg-[#ffd447] px-3.5 py-3 lg:px-4 lg:py-3.5 w-full">
-            <p
-              className="font-mono uppercase text-[10.5px] lg:text-[11.5px] leading-[1.85] tracking-[0.08em] text-[#141210]"
-              style={{ textAlign: 'justify' }}
-            >{t.sub}</p>
-            {/* Raw prophetic tagline — Cash/Dylan/Young. A proverb, not copy. Same in every tongue. */}
-            <p className="text-[9px] lg:text-[10px] font-black font-mono uppercase leading-relaxed mt-3 text-record-mark tracking-[0.14em]">
-              Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
-            </p>
-          </div>
-          {/* A picture earns its credit, and a credit says where a picture came from. This
-              one came from nowhere else: it was painted for the record, so nobody's work
-              is being used and nobody's name is being borrowed to make a page look better. */}
-          <p className="text-[10px] font-mono uppercase tracking-[0.14em] mt-2.5 text-[#efe7d6]/55">
-            Cover · painted for the record
-          </p>
-        </div>
-      </RecordPaintedBand>
+      <RecordHomeHero copy={t} copied={copied} onShare={handleShare} />
 
       {/* ── THE TOP CRAWL — Janine's credited photographs, directly under the masthead.
              Her ask was for the pictures to sit high on the page, and they still do: they

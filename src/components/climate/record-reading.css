@@ -194,11 +194,11 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
 
    Sizes are corrected from below only. Nothing is made smaller, so no layout tightens
    around a word that used to fit. */
-.record-pages :is(h1, h2, h3, h4) {
+.record-pages :is(h1, h2, h3, h4):not(.record-home-title) {
   font-weight: 400 !important;
   letter-spacing: 0.004em !important;
 }
-.record-pages :is(h1, h2) { line-height: 1.04 !important; }
+.record-pages :is(h1, h2):not(.record-home-title) { line-height: 1.04 !important; }
 
 /* The floor, and it is one floor. Seven, eight, eight-and-a-half, nine and ten pixels all
    arrived as separate decisions and together they made the page shimmer. Every label on
