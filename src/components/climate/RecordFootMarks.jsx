@@ -165,6 +165,28 @@ export function MarkLens({ size = 26, className = '' }) {
   );
 }
 
+// ── BASE 1'S OWN MARK, NOT SOMEBODY ELSE'S LENS ───────────────────────────────
+// Brian, 17 November: "base 1 needs new icon coolasfuck … not search icon in nav". He was
+// right, and for a reason that is not decoration: the magnifying glass is the universal
+// sign for "look through a box of other people's things", which is exactly what BASE 1 is
+// not. It is the record answering in its own words, and a borrowed lens in the rail said
+// the opposite of that every time a reader glanced at it.
+//
+// So the mark is what the name actually says: a printed numeral ONE, standing on a solid
+// base. The figure is drawn in the record's ink — flag, stem, foot, the three strokes a
+// printed 1 has carried for four hundred years — and the base it stands on is the mark's
+// borrowed red. One object, one weight, one solid mass, nothing thinner than the stroke,
+// so at thirty-four pixels in the rail it still reads as a one on a plate and cannot be
+// mistaken for a letter, a folder, a list or a lens.
+export function MarkBaseOne({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} strokeWidth="2.1" className={className} aria-hidden="true">
+      <path d="M22.4 8.8 15.2 14.4M22.4 8.8v21.6M15.6 30.4h13.6" />
+      <rect x="6.4" y="33.6" width="27.2" height="3.1" className="text-record-mark" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // ── THE MARKS BEYOND THE MASTHEAD ─────────────────────────────────────────────
 // Only five doors ever had a mark. Every other page on the record — why it exists,
 // how an entry is checked, the corrections, the seals, the music, the keeper's own

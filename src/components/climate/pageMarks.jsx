@@ -4,7 +4,7 @@ import {
   MarkSignal,
   MarkHorizon,
   MarkPortrait,
-  MarkLens,
+  MarkBaseOne,
   MarkMethod,
   MarkCorrection,
   MarkCheckers,
@@ -35,7 +35,9 @@ const MARKS = {
   '/ClimateWire': MarkSignal,
   '/ClimateMap': MarkHorizon,
   '/ClimateFounder': MarkPortrait,
-  '/ClimateSearch': MarkLens,
+  // BASE 1 wears its own mark — a printed one on its base — not a search glass borrowed
+  // from every other product on earth.
+  '/ClimateSearch': MarkBaseOne,
 
   // How the record is kept.
   '/XEqualsX': MarkEqual,
