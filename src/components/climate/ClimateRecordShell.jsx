@@ -15,7 +15,7 @@ import { MarkEqual } from '@/components/climate/RecordFootMarks';
 // once. Nothing was removed — the eyebrow, the statement, the foot and the credit are all
 // still said. `compact` still drops the opening block for the rooms where somebody has come
 // to work rather than to read.
-export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, mobileCompact = false, onBack, backLabel, className = '', children }) {
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, mobileCompact = false, wide = false, onBack, backLabel, className = '', children }) {
   return (
     <div dir={dir} className={`climate-record relative min-h-screen bg-record-paper text-record-ink ${className}`} style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow={eyebrow} fallback={returnTo} onBack={onBack} label={backLabel} />
@@ -49,7 +49,9 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
         </div>
       )}
 
-      <div className={`record-shell-content mx-auto max-w-2xl px-4 lg:max-w-3xl ${compact ? 'py-4 lg:py-8' : mobileCompact ? 'py-4 lg:py-14' : 'py-8 lg:py-14'}`}>{children}</div>
+      {/* `wide` is for the pages read from across a room — a stage sheet, not a page of prose.
+          The reading measure stays where it is on a phone; only a large screen opens out. */}
+      <div className={`record-shell-content mx-auto px-4 ${wide ? 'max-w-2xl lg:max-w-[1080px] lg:px-8' : 'max-w-2xl lg:max-w-3xl'} ${compact ? 'py-4 lg:py-8' : mobileCompact ? 'py-4 lg:py-14' : 'py-8 lg:py-14'}`}>{children}</div>
 
       {/* The way back to the record, stated once, in the record's own hand. */}
       <div className="record-shell-return border-t border-record-ink/15">

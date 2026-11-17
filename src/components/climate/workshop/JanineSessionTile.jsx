@@ -13,6 +13,9 @@ import { ArrowUpRight } from 'lucide-react';
 // Sethi, and the record's whole argument is that other people's work is not ours to spend
 // on our own page. It is linked to the address CEEW published it at. If they ever give it
 // to the record, it goes on the wall properly, with the same credit it has here.
+//
+// Read across a room, this tile opens into two columns, because a maroon band a thousand
+// pixels wide with one column of text in it is a slide, and this page is not a slide.
 
 const FESTIVAL_TITLE = 'Climate change & the power of collective actions / creative interventions';
 const ENERGY_RELAY = 'https://www.ceew.in/what-on-earth/energy-relay';
@@ -22,34 +25,41 @@ const SUN = '#ffd447';
 const Row = ({ term, children }) => (
   <div className="border-t border-[#f4efe4]/25 pt-2.5">
     <dt className="font-mono text-[9.5px] uppercase tracking-[0.2em]" style={{ color: PAPER, opacity: 0.7 }}>{term}</dt>
-    <dd className="mt-1 text-[12.5px] leading-relaxed" style={{ color: PAPER }}>{children}</dd>
+    <dd className="mt-1 text-[12.5px] leading-relaxed lg:text-[13.5px]" style={{ color: PAPER }}>{children}</dd>
   </div>
 );
 
 export default function JanineSessionTile() {
   return (
     <section className="mt-5" style={{ background: '#922b21', color: PAPER }}>
-      <div className="px-4 py-5">
-        <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: SUN }}>
-          03 · Her session · the festival’s third feature
-        </p>
+      <div className="px-4 py-5 lg:grid lg:grid-cols-2 lg:gap-10 lg:px-8 lg:py-7">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: SUN }}>
+            03 · Her session · the festival’s third feature
+          </p>
 
-        <h2 className="mt-2 text-[25px] leading-[1.14]" style={{ fontFamily: 'var(--font-reading)' }}>
-          One drawing is an opinion.<br />A room of them is a record.
-        </h2>
+          <h2 className="mt-2 text-[25px] leading-[1.14] lg:text-[36px]" style={{ fontFamily: 'var(--font-reading)' }}>
+            Draw the panel that isn’t there yet.
+          </h2>
 
-        <p className="mt-3 font-mono text-[12px] font-black uppercase tracking-wide">Janine M. H. Selendy</p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: PAPER, opacity: 0.75 }}>
-          Founder, Horizon International at Yale University
-        </p>
+          <p className="mt-3 font-mono text-[12px] font-black uppercase tracking-wide">Janine M. H. Selendy</p>
+          <p className="font-mono text-[10px] uppercase tracking-[0.14em]" style={{ color: PAPER, opacity: 0.75 }}>
+            Founder, Horizon International at Yale University
+          </p>
 
-        <dl className="mt-4 space-y-2.5">
+          <p className="mt-4 border-t-2 pt-3 text-[13.5px] leading-relaxed lg:text-[15px]" style={{ borderColor: SUN }}>
+            One frame, no words. Then a record that keeps it, with the name of the hand that drew it and nothing else
+            about them.
+          </p>
+        </div>
+
+        <dl className="mt-4 space-y-2.5 lg:mt-0">
           <Row term="The festival calls it">
             “{FESTIVAL_TITLE}” — a virtual workshop, led by her, on their programme in her own name.
           </Row>
           <Row term="When">
             Sunday 29 November 2026, hybrid. Her hour’s own slot is hers to confirm and goes here the moment she says
-            it — the festival’s own times, worked out in your clock, are just above this tile.
+            it — the festival’s own times, worked out in your clock, are above this tile.
           </Row>
           <Row term="Already going round, with her invitation">
             <em>The Energy Relay</em> — a runner with a smokestack for a head passing the baton to a solar panel,
@@ -68,11 +78,6 @@ export default function JanineSessionTile() {
             </span>
           </Row>
         </dl>
-
-        <p className="mt-4 border-t-2 pt-3 text-[13.5px] leading-relaxed" style={{ borderColor: SUN }}>
-          What she asks the room for: <strong>the panel that is not there yet</strong> — one frame, no words —
-          and then a record that keeps it, with the name of the hand that drew it.
-        </p>
       </div>
     </section>
   );
