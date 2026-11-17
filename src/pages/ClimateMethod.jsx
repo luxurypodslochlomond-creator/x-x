@@ -91,6 +91,15 @@ export default function ClimateMethod() {
           keeper who published it or prints plainly that it is unsigned. Nothing on this record pretends that a person
           signed what nobody signed.
         </p>
+        <p>
+          And one more, because a page about honesty should say where its own sentences came from. This record was
+          made by a person with a machine's help. The machine drafted, checked links, wrote the code and drew the
+          example strips in the cartoon room, and those strips are labelled there as fiction rather than as anybody's
+          drawing. A person decided what stayed. Every sentence left standing is his, the mistakes on this record are
+          his mistakes, and no claim on it rests on a machine's opinion of the world. Where the machine's own reading
+          does appear, it is labelled as a machine's reading, kept apart from a person's words, and it never signs,
+          seals, ranks or publishes anything.
+        </p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
 
