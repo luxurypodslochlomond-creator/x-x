@@ -113,7 +113,9 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
 
   ctx.fillStyle = INK;
   ctx.font = `700 21px ${MONO}`;
-  ctx.fillText('JANINE SELENDY · 3PM WEST AFRICA · 2PM SCOTLAND', PAD, 878);
+  // No hour printed: the festival's flyer and Janine's own note do not agree on one, and
+  // a card is the worst place to invent a time. The day is certain, so the day goes on.
+  ctx.fillText('JANINE SELENDY · SUNDAY 29 NOVEMBER · ONLINE', PAD, 878);
 
   ctx.fillStyle = INK;
   ctx.font = `500 25px ${MONO}`;

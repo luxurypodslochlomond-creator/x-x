@@ -4,6 +4,7 @@ import { ArrowRight, Printer } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import WorkshopStrip from '@/components/climate/workshop/WorkshopStrip';
+import JanineSessionTile from '@/components/climate/workshop/JanineSessionTile';
 import CopyLine from '@/components/climate/CopyLine';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { buildWorkshopShareCard, WORKSHOP_CARD } from '@/components/climate/workshopCard';
@@ -60,8 +61,8 @@ export default function ClimateWorkshop() {
     <ClimateRecordShell
       eyebrow="The record · 29 November 2026"
       marker="8th CartoonAFRICA International Biennial · Benin City"
-      title="The 29th, written down"
-      statement="One hour, five frames and a blank one. The session Janine Selendy is giving, set out so the room knows what it is getting before it arrives."
+      title="Everybody draws. Somebody keeps it."
+      statement="Janine Selendy’s hour at CartoonAFRICA — one room, five frames and a blank panel — and a public record that keeps what the room makes, with the drawer’s own name on it."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."
@@ -81,8 +82,11 @@ export default function ClimateWorkshop() {
 
       <p className="mt-4 font-mono text-[11px] leading-relaxed text-record-muted">
         8th CartoonAFRICA International Biennial · 28–30 November 2026 · National Museum, Benin City, Edo State, Nigeria ·
-        hybrid. Workshop: Sunday 29 November, 3pm West Africa (2pm in Scotland).
+        hybrid. The festival’s notice: in-person opening 9:00am prompt, online sessions from 10:00am. Her hour is on
+        Sunday 29 November; its exact slot is hers to confirm, and nothing here guesses at it.
       </p>
+
+      <JanineSessionTile />
 
       <div className="mt-5 border border-record-ink/20 bg-record-bone/50 px-4 py-4">
         <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-red">If this was forwarded to you</p>
