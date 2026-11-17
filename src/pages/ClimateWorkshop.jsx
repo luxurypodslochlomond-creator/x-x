@@ -45,15 +45,21 @@ const TOPIC = 'Climate change & the power of collective actions / creative inter
 // Each line now says who is in the chair, because that was the one thing missing and it was
 // the thing she asked about: read without it, an agenda looks like a script handed to the host,
 // and the host quite reasonably wrote back asking what on earth she was being asked to do.
+// THE RECORD'S EIGHT MINUTES ARE OUT OF THIS HOUR. There used to be a slot at 00:18 in which
+// somebody from the record explained why collective action needs a record. It is the one line
+// that put another voice inside the hour she is hosting, and it is gone: the panel present
+// their own cartoons, the room draws, and nobody from the record takes the microphone at all.
+// What that leaves is eight spare minutes, and they are hers — to keep empty, to give to the
+// panel, or to use herself. The page does not fill them on her behalf.
 const HOUR = [
   ['00:00', 'Four minutes · Why this hour exists', 'A cartoon can hold a hard idea without frightening the person holding it. That is why this is a workshop about drawings rather than a talk with slides.', 'Janine · host'],
   ['00:04', 'Eight minutes · Three drawings, shown whole', 'Three cartoons from What On Earth!, with their credit kept on them. One question asked of the room and not answered for it: what did that make you feel, before it told you anything?', 'the panel · their own cartoons'],
   ['00:12', 'Six minutes · How a fortnightly cartoon gets made', 'The idea, the artist, the science check, the publish — from the team who make them, if they join the discussion.', 'the panel'],
-  ['00:18', 'Eight minutes · Why collective action needs a record', 'One entry, its source, its seal, its keeper. No product, no sign-up, no price.', 'the record · not Janine'],
-  ['00:26', 'Nineteen minutes · The draw', 'The strip goes up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil.', 'the room · everyone draws'],
-  ['00:45', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.', 'four volunteers'],
-  ['00:52', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown.', 'the record · three lines'],
-  ['00:58', 'Two minutes · Handed back, then one ask', 'She closes on the blank panel and gives the room its own hour back. Then the one ask: draw one more next week, somewhere that is not a workshop — and send it.', 'Janine · host'],
+  ['00:18', 'Nineteen minutes · The draw', 'The strip goes up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil.', 'the room · everyone draws'],
+  ['00:37', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.', 'four volunteers'],
+  ['00:44', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown. Nobody narrates it.', 'one line on the screen'],
+  ['00:50', 'Two minutes · Handed back', 'She closes on the blank panel and gives the room its own hour back.', 'Janine · host'],
+  ['00:52', 'Eight minutes · Left over, and hers', 'Taking the record’s slot out gave the hour back eight minutes. Keep them empty, give them to the panel, or use them yourself — this page does not fill them.', 'yours to use or leave empty'],
 ];
 
 const Section = ({ n, title, children }) => (
@@ -70,7 +76,7 @@ export default function ClimateWorkshop() {
       eyebrow="The record · 29 November 2026"
       marker="03 · Janine M. H. Selendy’s session · CartoonAFRICA 8th Biennial · Benin City"
       title={`“${TOPIC}”`}
-      statement="Janine Selendy’s topic, in the festival’s own words — and what we propose happens inside the hour she is hosting: three drawings shown whole, nineteen minutes of the room drawing, one blank panel the room fills, and a public record that keeps it with the drawer’s own name on it."
+      statement="Janine Selendy’s topic, in the festival’s own words — and one way the hour she is hosting could run: three drawings shown whole, nineteen minutes of the room drawing, the last panel left blank for the room to fill, and the drawings kept on the record with their makers’ names. Nobody from this record speaks in it."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."
@@ -149,6 +155,7 @@ export default function ClimateWorkshop() {
             'No ranking of anybody’s drawing, and no address published.',
             'No picture of anybody: a room that was not photographed stays undrawn.',
             'Nobody explaining the drawings to the people who drew them.',
+            'Nobody from this record speaking at all: no slot, no slides, no eight minutes.',
           ].map((line) => (
             <li key={line} className="text-[13px] leading-relaxed text-record-ink/85 lg:text-[14.5px]">— {line}</li>
           ))}
@@ -203,9 +210,6 @@ export default function ClimateWorkshop() {
           <code className="min-w-0 flex-1 truncate font-mono text-[11px] text-record-ink">{recordAddress('/ClimateWorkshop')}</code>
           <CopyLine text={recordAddress('/ClimateWorkshop')} label="Copy link" />
         </div>
-        <Link to="/ClimateWorkshopWords" className="mt-3 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide underline decoration-dotted underline-offset-4">
-          The eight minutes, written out <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
       </div>
     </ClimateRecordShell>
   );

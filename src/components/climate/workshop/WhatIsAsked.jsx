@@ -1,28 +1,26 @@
 import React from 'react';
 
-// ── WHAT IS ACTUALLY BEING ASKED OF HER ────────────────────────────────────────
-// Janine read the page and wrote back: "I do not understand what you are seeking to achieve
-// here… I am hosting, but certainly not speaking for the hour." She was right to ask, and the
-// fault was ours: the page listed an hour to the minute, which reads as a script handed to the
-// host, and it never once said in a plain place what was hers to do and what was never ours to
-// give. So this sits above the agenda, in three short lines, and it is deliberately small:
-// hosting (already hers), one eight-minute block that somebody else speaks, and the guest
-// list, which was always hers anyway. A page that needs a reply to explain itself has failed.
-const ASKS = [
+// ── WHAT THIS PAGE IS ──────────────────────────────────────────────────────────
+// Janine read the page and wrote back asking what was being sought. The honest answer was:
+// nothing that needed a decision. The page had listed an hour to the minute and carried an
+// eight-minute slot for the record itself, which put somebody else's voice inside her hour.
+// That slot is gone. What is left is a note she can read, cut or put down: she hosts, the
+// panel present their own cartoons, the room draws, the record keeps the drawings.
+const POINTS = [
   {
     n: '1',
-    head: 'Host it, as you already are',
-    body: 'Open the hour in your own words and close it. You are not speaking for the sixty minutes, and nothing on this page asks you to: Francis and the panelists present their own cartoons, and that is the festival’s programme, not something we are filling in.',
+    head: 'You are hosting, and that is all that is asked',
+    body: 'Open the hour and close it, in your own words. Nothing here asks you to speak for the sixty minutes, and nobody from this record takes the microphone at any point — the panel present their own cartoons and that is the whole of the talking.',
   },
   {
     n: '2',
-    head: 'Say yes or no to eight minutes',
-    body: 'One block inside the hour you are hosting: what a record is for — one entry, its source, its seal. Somebody else speaks it, so the only thing being asked of you is eight minutes of the hour. Cut it, move it, or take it out entirely and the rest of this page still stands.',
+    head: 'Nothing to decide today',
+    body: 'If you already have the hour planned, keep it and put this down. The page describes one way it could run; it is not a plan waiting on your yes.',
   },
   {
     n: '3',
-    head: 'Nothing else, and nothing today',
-    body: 'Who sits on the panel, who draws, who is invited — yours. Gillian’s part is hers to agree to; we have not put words in her mouth here, and we will not.',
+    head: 'Who sits on the panel, and who is invited, is yours',
+    body: 'Gillian’s part is hers to agree to. We have not put words in her mouth here, and we will not.',
   },
 ];
 
@@ -31,18 +29,18 @@ export default function WhatIsAsked() {
     <section className="mt-5 border-2 border-record-ink/25 bg-record-bone/40">
       <div className="border-b border-record-ink/20 px-4 py-3 lg:px-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-record-red lg:text-[11px]">
-          What we are seeking · three things, and nothing else
+          What this page is · a note, not a script
         </p>
         <h2
           className="mt-1 text-[19px] leading-tight lg:text-[26px]"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          You are hosting. Nobody is asking you to speak for the hour.
+          You are hosting. Nobody is speaking for your hour.
         </h2>
       </div>
 
       <ol className="divide-y divide-record-ink/15">
-        {ASKS.map(({ n, head, body }) => (
+        {POINTS.map(({ n, head, body }) => (
           <li key={n} className="grid grid-cols-[1.6rem_1fr] gap-3 px-4 py-3 lg:px-6">
             <span className="font-mono text-[13px] font-black leading-none text-record-red">{n}</span>
             <div>
