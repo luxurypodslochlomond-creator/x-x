@@ -30,9 +30,18 @@ export default function RecordFooter() {
           x = x
         </Link>
 
-        <p className="mt-7">
+        {/* ── TWO DATES, SIDE BY SIDE ────────────────────────────────────────────────
+            Brian, 17 November: "add 2026 like Laurie Anderson sentence." The borrowed
+            sentence above is dated 1982 because that is when she said it; this record is
+            dated 2026 because that is when it is being kept. Both chips, same voice, same
+            band — so the year a reader is reading in is stated as plainly as the year the
+            sentence came from, and neither can be mistaken for the other. */}
+        <p className="mt-7 flex flex-wrap items-center justify-center gap-2">
           <span className="inline-block bg-cartoon-sun px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
             Laurie Anderson · “From the Air” · Big Science, 1982
+          </span>
+          <span className="inline-block border border-record-ink/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink/85">
+            This record of the time · 2026
           </span>
         </p>
       </div>
@@ -49,7 +58,7 @@ export default function RecordFooter() {
           above me you and gill … and make me you and gill red." So the line about where it
           was made comes off the paper and into the box, above the three names, in the
           machine's mono caps — the same voice the borrowed sentence is set in at the top of
-          every page. One band, three lines, and the names carrying the red. */}
+          every page. One band, three lines, and the names in ink. */}
       <div className="mt-10 bg-cartoon-sun px-4 py-7 lg:px-10">
         <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-record-ink/65 lg:text-[10px]">
           Platform / Record
@@ -58,7 +67,13 @@ export default function RecordFooter() {
           Made in Scotland from photons
         </p>
         <span aria-hidden="true" className="mx-auto mt-4 block h-px w-10 bg-record-ink/30" />
-        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[12px] uppercase leading-tight tracking-[0.18em] text-record-red sm:flex-row sm:justify-center sm:gap-5 lg:text-[13px]">
+        {/* ── THE THREE NAMES, IN INK ────────────────────────────────────────────────
+            Brian, 17 November: "can you make our names black too please bro?" They were
+            the record's red, and red on a yellow band is a warning colour doing a credit's
+            job. They are ink now — the same ink as MADE IN SCOTLAND and the company under
+            them, so the whole box reads as one printed plate rather than three colours
+            arguing. The red stays on the mark at the top, where it belongs. */}
+        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[12px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:justify-center sm:gap-5 lg:text-[13px]">
           <li>Base 1</li>
           <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
           <li>Gillian Brown</li>
