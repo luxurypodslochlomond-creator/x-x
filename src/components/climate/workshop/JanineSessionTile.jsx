@@ -48,9 +48,8 @@ export default function JanineSessionTile() {
             “{FESTIVAL_TITLE}” — a virtual workshop, led by her, on their programme in her own name.
           </Row>
           <Row term="When">
-            Sunday 29 November 2026, hybrid. The festival’s notice says the in-person opening is 9:00am prompt
-            at the National Museum, with online sessions from 10:00am. Her hour’s own slot is hers to confirm, and
-            goes here the moment she says it.
+            Sunday 29 November 2026, hybrid. Her hour’s own slot is hers to confirm and goes here the moment she says
+            it — the festival’s own times, worked out in your clock, are just above this tile.
           </Row>
           <Row term="Already going round, with her invitation">
             <em>The Energy Relay</em> — a runner with a smokestack for a head passing the baton to a solar panel,

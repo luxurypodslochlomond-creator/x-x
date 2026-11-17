@@ -5,6 +5,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import WorkshopStrip from '@/components/climate/workshop/WorkshopStrip';
 import JanineSessionTile from '@/components/climate/workshop/JanineSessionTile';
+import WorkshopClocks from '@/components/climate/workshop/WorkshopClocks';
 import CopyLine from '@/components/climate/CopyLine';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { buildWorkshopShareCard, WORKSHOP_CARD } from '@/components/climate/workshopCard';
@@ -82,9 +83,10 @@ export default function ClimateWorkshop() {
 
       <p className="mt-4 font-mono text-[11px] leading-relaxed text-record-muted">
         8th CartoonAFRICA International Biennial · 28–30 November 2026 · National Museum, Benin City, Edo State, Nigeria ·
-        hybrid. The festival’s notice: in-person opening 9:00am prompt, online sessions from 10:00am. Her hour is on
-        Sunday 29 November; its exact slot is hers to confirm, and nothing here guesses at it.
+        hybrid. Her hour is on Sunday 29 November; its exact slot is hers to confirm, and nothing here guesses at it.
       </p>
+
+      <WorkshopClocks />
 
       <JanineSessionTile />
 
