@@ -2,6 +2,8 @@
 .climate-record .record-book { background-color: transparent; }
 .record-pages > .record-page-shell { background-color: transparent; }
 .record-pages .record-continuous-band { background-color: rgb(var(--record-ink) / .6); }
+.record-continuous-band [class~="text-[#e2602a]"] { color: rgb(var(--record-signal)); }
+.record-reading-panel,
 .record-back-bar,
 .record-shell-body,
 .record-shell-return,
@@ -13,9 +15,11 @@
   line-height: 1.7 !important;
 }
 .record-shell-content h2 { text-wrap: pretty; line-height: 1.2 !important; }
-.record-shell-content :is(p, li).font-mono:not(.uppercase):not(.record-meta):not(.break-all):not([data-record-technical] *):not(form *):not(dialog *):not([role="dialog"] *) {
-  font-size: 1rem !important;
-  line-height: 1.75 !important;
+@media (max-width: 639px) {
+  .record-shell-content :is(p, li).font-mono:not(.uppercase):not(.record-meta):not(.break-all):not([data-record-technical] *):not(form *):not(dialog *):not([role="dialog"] *) {
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
 }
 .record-pages .record-section-heading {
   border-top: 3px solid rgb(var(--record-ink));
@@ -43,14 +47,15 @@
   .record-page-shell[data-compact="true"] .record-shell-content { padding-block: 1rem; }
   .record-page-shell[data-mobile-compact="true"] .record-shell-opening > div { padding-block: 1.25rem; }
   .record-page-shell[data-mobile-compact="true"] .record-shell-content { padding-block: 1rem; }
-  .record-shell-content section + section { margin-top: 2.5rem; }
+  .record-shell-content > section + section { margin-top: 2.5rem; }
+  .record-reading-panel > .record-reading-column { padding-inline: 1.25rem; }
   .record-pages .record-card-grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .record-card-grid .record-entry-plate { min-height: 15rem; }
   .record-card-grid .record-entry-copy { padding: 1.25rem; }
   .record-card-grid .record-entry-copy h3 { font-size: 1.125rem; line-height: 1.45; }
   .record-home-hero > div { padding-inline: 1.25rem; }
   .record-home-hero .record-home-title-band { padding-top: 2.5rem; padding-bottom: 1.75rem; }
-  .record-home-title { font-size: clamp(1.75rem, 7.5vw, 2.5rem); line-height: 1.14; text-wrap: pretty; }
+  .record-home-hero .record-home-title { font-size: clamp(1.75rem, 7.5vw, 2.5rem); line-height: 1.14; text-wrap: pretty; }
   .record-home-hero .record-home-summary { padding: 1.25rem; }
   .record-home-voice { padding: 2.5rem 1.25rem; }
   .record-home-voice > div { gap: 1.5rem; }
@@ -63,6 +68,6 @@
 @media print {
   .climate-record .record-book,
   .record-pages > .record-page-shell { background-color: rgb(var(--record-paper)); }
-  .record-shell-opening { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+  .record-pages .record-shell-opening { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
   .record-shell-opening :is(h1, p, a) { color: rgb(var(--record-ink)); }
 }

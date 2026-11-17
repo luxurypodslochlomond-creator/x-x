@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { ArrowRight, Globe, BookOpen, Film, Award } from 'lucide-react';
 import SignalBeacon from '@/components/climate/SignalBeacon';
-import RecordCover from '@/components/climate/RecordCover';
+import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 
 // ── Janine's life work — factual, dignified, no contact details (per her wish).
 // This page exists so her legacy has a home on the platform she inspired.
@@ -34,12 +34,12 @@ const ACHIEVEMENTS = [
 
 export default function ClimateFounder() {
   return (
-    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="relative min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Header — paper, the way back, the page's name: the record's one bar. */}
       <RecordBackBar eyebrow="The Founder" />
 
       {/* Cold epigraph — the covenant mark, same as the record */}
-      <div className="bg-[#141210] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="record-continuous-band px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-record-paper/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
@@ -59,16 +59,13 @@ export default function ClimateFounder() {
           back and cooled, and her words sit lit in front of it. The same work, at another
           depth, so the founder's page and the record's front page are printed from one book
           rather than looking like two products by the same hand. */}
-      <div className="relative bg-[#141210] overflow-hidden">
-        <RecordCover position="center 18%" strength={0.4} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.6) 0%, rgba(20,18,16,.74) 55%, rgba(20,18,16,.92) 100%)' }} />
+      <RecordPaintedBand continuous>
         {/* O Superman — the pilot's voice, cold in the corner */}
         <div className="absolute top-3 left-5 z-20 flex items-center gap-1.5 pointer-events-none" style={{ animation: 'twcc-flicker 7s linear 2s infinite' }}>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse" />
           <span className="text-[7px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/30">Beirut · 1956</span>
         </div>
-        {/* Scanline texture */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06] lg:hidden" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+
 
         <div className="relative z-10 px-6 lg:px-10 py-12 lg:py-20 flex flex-col items-center justify-center gap-5 text-center min-h-[300px] lg:min-h-[400px]">
           <SignalBeacon size={48} color="rgb(var(--cartoon-sun))" />
@@ -89,10 +86,10 @@ export default function ClimateFounder() {
             One moment of clarity became forty years of work
           </p>
         </div>
-      </div>
+      </RecordPaintedBand>
 
       {/* Name & role — bone band */}
-      <div className="px-5 lg:px-10 py-8 lg:py-14 text-center border-b-2 border-[#141210] bg-[#f7f1e5]">
+      <div className="record-reading-panel px-5 lg:px-10 py-8 lg:py-14 text-center border-b-2 border-[#141210] bg-[#f7f1e5]">
         <h1 className="uppercase text-[#141210] leading-none" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(30px, 3.4vw, 54px)', letterSpacing: '0.004em' }}>
           Janine M. H. Selendy
         </h1>
@@ -135,8 +132,9 @@ export default function ClimateFounder() {
         </div>
       </div>
 
+      <div className="record-reading-panel">
       {/* Achievements — the record of the work */}
-      <div className="mx-auto w-full max-w-[820px] lg:max-w-[900px] px-5 lg:px-0 py-8 lg:py-14 space-y-4 lg:space-y-5">
+      <div className="record-reading-column mx-auto w-full max-w-[820px] lg:max-w-[900px] px-5 lg:px-0 py-8 lg:py-14 space-y-4 lg:space-y-5">
         <h2 className="text-center font-black uppercase text-[#141210] mb-2" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(22px, 2.2vw, 32px)', letterSpacing: '-0.025em' }}>
           The Record of the Work
         </h2>
@@ -216,13 +214,12 @@ export default function ClimateFounder() {
         </div>
       </div>
 
+      </div>
+
       {/* Her vision — the mantra, in the light of the same painting. The last dark block of
           her page carries the work at its warmest crop: a book should not close on a slab of
           ink after opening on a world. */}
-      <div className="relative bg-[#141210] px-5 lg:px-10 py-10 lg:py-20 text-center overflow-hidden">
-        <RecordCover position="center 62%" strength={0.42} />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,.72) 0%, rgba(20,18,16,.8) 50%, rgba(20,18,16,.9) 100%)' }} />
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06] lg:hidden" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+      <RecordPaintedBand continuous className="px-5 lg:px-10 py-10 lg:py-20 text-center">
         <div className="relative z-10">
           {/* The same living beacon she is met with at the top of the page, so the page
               opens and closes on one signal rather than on a heart that only sits there. */}
@@ -233,7 +230,7 @@ export default function ClimateFounder() {
             “Together we can change the course of climate change.”
           </p>
         </div>
-      </div>
+      </RecordPaintedBand>
 
       {/* Signal band — return */}
       <div className="bg-[#e2602a] px-5 lg:px-10 py-5 lg:py-8 text-center">
@@ -243,7 +240,7 @@ export default function ClimateFounder() {
       </div>
 
       {/* Footer — no contact details, per her wish */}
-      <p className="px-5 py-6 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed">
+      <p className="record-reading-panel px-5 py-6 text-center text-[9px] font-mono text-[#5a5246]/60 leading-relaxed">
         In honour of her life's work.<br />
         Horizon International · Yale University
       </p>

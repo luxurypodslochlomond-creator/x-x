@@ -54,10 +54,10 @@ export default function ClimateWire() {
     : entries;
 
   return (
-    <div className="twcc-scanlines min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="relative min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
 
       {/* Cold epigraph band — same mark the rest of the record wears */}
-      <div className="bg-[#241d16] px-4 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
+      <div className="record-continuous-band px-4 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-record-paper/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
           <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">The wire · a public record, not a feed</span>
@@ -67,8 +67,7 @@ export default function ClimateWire() {
       </div>
 
       {/* Hero — cold ink, the beacon, the page says exactly what it is */}
-      <RecordPaintedBand>
-        <div className="absolute inset-0 pointer-events-none opacity-[0.06] lg:hidden" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
+      <RecordPaintedBand continuous>
         <div className="relative z-10 px-4 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
           <SignalBeacon size={44} color="rgb(var(--cartoon-sun))" />
           <h1
@@ -83,7 +82,8 @@ export default function ClimateWire() {
         </div>
       </RecordPaintedBand>
 
-      <div className="max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-12">
+      <div className="record-reading-panel">
+      <div className="record-reading-column max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-12">
 
         {/* Send an entry, and how well a claim is known. On a desktop these are one
             toolbar; on a phone they stack exactly as they did before. */}
@@ -192,6 +192,8 @@ export default function ClimateWire() {
         </div>
       </div>
 
+      </div>
+
       {/* Signal band — the way back to the record */}
       <div className="bg-[#e2602a] px-4 lg:px-10 py-5 lg:py-8 text-center">
         <Link to="/TogetherChangeClimate" className="inline-flex items-center gap-2 px-5 py-4 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#efe7d6] active:text-[#141210] transition-colors">
@@ -199,9 +201,11 @@ export default function ClimateWire() {
         </Link>
       </div>
 
-      <p className="px-4 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">
-        The wire is part of Together We Can Change Climate — a public service record built in honour of Janine M. H. Selendy and Horizon International. No advertising, no sponsorship, and money never buys a place on it.
-      </p>
+      <div className="record-reading-panel">
+        <p className="px-4 py-6 lg:py-8 text-center text-[9px] lg:text-[10px] font-mono text-[#5a5246]/60 leading-relaxed max-w-md lg:max-w-2xl mx-auto">
+          The wire is part of Together We Can Change Climate — a public service record built in honour of Janine M. H. Selendy and Horizon International. No advertising, no sponsorship, and money never buys a place on it.
+        </p>
+      </div>
 
 
       {formOpen && <NewsSubmitForm onClose={() => setFormOpen(false)} onSent={() => setReload(r => r + 1)} />}

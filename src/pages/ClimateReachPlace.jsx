@@ -62,7 +62,7 @@ export default function ClimateReachPlace() {
   };
 
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       {/* The same paper bar and the same way back as every page of the record; the dark
           poster below it is the page's own voice, not a second navigation. */}
       <RecordBackBar
@@ -71,7 +71,7 @@ export default function ClimateReachPlace() {
       />
 
       {/* Big number */}
-      <RecordPaintedBand className="px-4 lg:px-10 py-8 lg:py-12">
+      <RecordPaintedBand continuous className="px-4 lg:px-10 py-8 lg:py-12">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#e2602a] text-center mb-5">
           Together we can change the course of climate change
         </p>
@@ -94,6 +94,7 @@ export default function ClimateReachPlace() {
         </motion.div>
       </RecordPaintedBand>
 
+      <div className="record-reading-panel">
       {/* Honest framing */}
       <div className="px-4 lg:px-10 py-4 lg:py-6 bg-[#f7f1e5] border-b border-[#141210]/10">
         <div className="flex items-start gap-2.5">
@@ -163,6 +164,7 @@ export default function ClimateReachPlace() {
         <p className="mt-3 text-center font-mono text-[13px] font-black tracking-[0.3em] text-record-mark">
           x = x
         </p>
+      </div>
       </div>
     </div>
   );

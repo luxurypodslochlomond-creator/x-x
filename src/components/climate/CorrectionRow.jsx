@@ -26,9 +26,9 @@ export default function CorrectionRow({ correction }) {
         )}
       </div>
 
-      <p className="record-correction-title mb-4 font-display text-[17px] font-bold leading-snug text-record-ink lg:text-lg">
+      <h3 className="record-correction-title mb-4 font-display text-[17px] font-bold leading-snug text-record-ink lg:text-lg">
         {correction.title}
-      </p>
+      </h3>
 
       <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2 text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] whitespace-pre-line">
         {correction.note}

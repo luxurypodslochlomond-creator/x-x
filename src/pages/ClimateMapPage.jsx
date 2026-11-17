@@ -21,11 +21,11 @@ import { ArrowRight } from 'lucide-react';
    ragged against the left edge of a column it does not fill. */
 export default function ClimateMapPage() {
   return (
-    <div className="climate-record min-h-screen bg-[#efe7d6] text-[#141210] relative" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="climate-record relative min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow="The record · Map" />
 
       {/* Covenant band — the mark every page of the record carries, and the way to it. */}
-      <div className="bg-[#241d16] px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-[#e2602a]/20">
+      <div className="record-continuous-band px-5 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-record-paper/20">
         <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">
           Every entry the record holds, set where it happened
         </span>
@@ -41,7 +41,7 @@ export default function ClimateMapPage() {
           The painting is not mixed here by hand any more: every dark band on the record now
           comes from RecordPaintedBand, so the map, the wire and the reach pages are the same
           room at the same strength rather than three rooms that happen to be dark. */}
-      <RecordPaintedBand>
+      <RecordPaintedBand continuous>
         <div className="relative z-10 px-4 lg:px-10 py-9 lg:py-12 flex flex-col items-center justify-center gap-3 text-center">
           <SignalBeacon size={40} color="rgb(var(--cartoon-sun))" />
           <h1
@@ -71,11 +71,11 @@ export default function ClimateMapPage() {
 
       {/* The plate says where the record stands. This says what is happening there soon —
           the only question that turns reading a map into turning up somewhere. */}
-      <NextActionNear />
+      <div className="record-reading-panel"><NextActionNear /></div>
 
       {/* What a mark means, and what the plate will not do. One statement, so it sits in
           the middle of its own measure instead of hanging off the left of a wide column. */}
-      <div className="max-w-[1100px] mx-auto px-4 lg:px-10 py-7 lg:py-9 text-center">
+      <div className="record-reading-panel max-w-[1100px] mx-auto px-4 lg:px-10 py-7 lg:py-9 text-center">
         <p className="mx-auto max-w-[46ch] text-[13px] lg:text-[15px] leading-[1.75] text-[#141210]/80" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
           A mark is only ever set where an entry says it is, to the region and no finer. An entry with no
           place it can honestly be put is not guessed at and not dropped — it is simply not on the plate,
