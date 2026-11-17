@@ -1,9 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// ── THE FOOT ────────────────────────────────────────────────────────────────────
+// This was a colophon: the credit line set in the machine's small-caps monospace,
+// which is the voice for a registry number, not for people. It read as a form
+// stamped at the bottom of the page, and it made the platform a co-author with a
+// plus sign, which it is not.
+//
+// So the order is turned round and the voices are put where they belong. The people
+// who keep the record come first, said plainly in the record's own reading voice,
+// because they are the ones accountable for what stands here. The machine that
+// drafted and coded it is named in the same sentence, in its own name, without
+// being given a hand in the deciding. The registration facts — the CIC, the address
+// you can write to — keep the mono, because a registry number is a fact and facts
+// are what that voice is for.
+//
+// Nothing here is decoration. A reader who wants to know who to hold to a sentence
+// should be able to find out at the bottom of any page, and should not have to
+// squint at it.
+
 export default function RecordFooter() {
   return (
-    <footer className="mt-6 border-t border-record-ink/20 bg-record-paper px-4 py-12 text-center font-body text-record-ink lg:px-10">
+    <footer className="mt-6 border-t border-record-ink/20 bg-record-paper px-4 py-14 text-center font-body text-record-ink lg:px-10">
       <Link
         to="/XEqualsX"
         aria-label="x = x — what the mark means, and what it does not"
@@ -12,11 +30,33 @@ export default function RecordFooter() {
       >
         x = x
       </Link>
-      <p className="mt-6 text-base leading-relaxed">A public service for the world</p>
 
-      <span aria-hidden="true" className="mx-auto mt-7 block h-px w-16 bg-record-ink/25" />
+      <p
+        className="mt-7 mx-auto max-w-[34ch] text-record-ink"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: 20, lineHeight: 1.5 }}
+      >
+        A public service for the world. Free to read, no account, nothing to sign.
+      </p>
 
-      <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.18em] text-record-ink">
+      <span aria-hidden="true" className="mx-auto mt-9 block h-px w-16 bg-record-ink/25" />
+
+      <p
+        className="mt-9 mx-auto max-w-[46ch] text-record-ink"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: 17, lineHeight: 1.65 }}
+      >
+        Kept by Brian Hughes and Gillian Brown.
+      </p>
+      <p
+        className="mt-3 mx-auto max-w-[52ch] text-record-muted"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: 15, lineHeight: 1.7 }}
+      >
+        Drafted and coded with Base 1, an AI built by Base44. It writes; a person decides, and
+        nothing here goes up on an AI's word — not even this sentence.
+      </p>
+
+      <span aria-hidden="true" className="mx-auto mt-10 block h-px w-16 bg-record-ink/25" />
+
+      <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-record-ink">
         Universal Frequency 51 CIC
       </p>
       <p className="mt-2 text-sm leading-relaxed">
@@ -26,17 +66,6 @@ export default function RecordFooter() {
         >
           family@uf51.love
         </a>
-      </p>
-
-      {/* A plus sign made the platform a co-author, which it is not. The people who decided
-          are the authors; the machine's part is said in words, in its own name, so a reader
-          can see exactly which of the two did what. */}
-      <p className="mt-6 text-sm leading-relaxed text-record-muted">
-        Kept by Brian Hughes and Gillian Brown
-      </p>
-      <p className="mt-2 text-sm leading-relaxed text-record-muted">
-        Drafted and coded by Base 1, a machine built by Base44. It wrote; a person decided, and
-        nothing here is published on a machine's word.
       </p>
     </footer>
   );
