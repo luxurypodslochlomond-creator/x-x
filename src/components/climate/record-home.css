@@ -35,6 +35,12 @@
 }
 
 .record-home-page { background-color: rgb(var(--record-bone)); }
+/* The already-loaded cover holds the frame while its own photograph downloads. */
+.record-entry-plate {
+  background-image: var(--record-cover);
+  background-size: cover;
+  background-position: center;
+}
 
 /* Keep the homepage's print hierarchy on the actual elements, not font overrides. */
 .record-home-page .record-section-heading {
@@ -65,12 +71,8 @@
     background-color: rgb(var(--record-ink) / .58);
   }
   .record-home-page .record-home-voice blockquote {
-    font-family: var(--font-display);
     font-size: 2rem !important;
-    font-weight: 700;
-    line-height: 1.18 !important;
-    letter-spacing: -.02em;
-    text-transform: uppercase;
+    line-height: 1.5 !important;
   }
   .record-home-page .climate-photo-slide-frame {
     aspect-ratio: 16 / 9;

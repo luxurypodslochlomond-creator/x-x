@@ -22,6 +22,7 @@ import VerificationBadge from '@/components/climate/VerificationBadge';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { verificationNoteOf } from '@/components/climate/verification';
 import VerificationControl from '@/components/admin/VerificationControl';
+import useRecordImage from '@/components/climate/useRecordImage';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -55,8 +56,6 @@ const ACTION_TYPES = {
   monitoring: { label: 'Monitoring', icon: Eye, color: '#1e3a2b' },
   other: { label: 'Action', icon: Hand, color: '#5a5246' },
 };
-
-import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
 
 function fmtDate(d) {
   if (!d) return '';
@@ -136,6 +135,7 @@ export default function ClimateDetail() {
   const { chosen: lang } = useSiteLanguage();
   const tr = useEntryTranslation(record, lang);
   const { categories } = useClimateCategories();
+  const image = useRecordImage(record);
 
   if (loading) {
     return (
@@ -285,10 +285,8 @@ export default function ClimateDetail() {
 
   // Solution / Crisis detail
   const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
-  // The picture the card showed is the picture you land on. An entry without its own
-  // photograph keeps its category's, so the door never opens onto a blank where a
-  // picture was standing.
-  const heroImage = record.image_url || CATEGORY_IMAGE(record.category);
+  // The card and the full entry use the same image and labelled fallback.
+  const heroImage = image.src;
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Hero — photo when available, paper-and-beacon when not. The picture you tapped keeps
@@ -297,7 +295,7 @@ export default function ClimateDetail() {
           page the reader had just decided to care about. */}
       {heroImage ? (
         <div className="relative h-64 lg:h-[420px] bg-[#241d16]">
-          <img src={heroImage} alt={record.title} fetchpriority="high" decoding="async" className="w-full h-full object-cover" style={{ filter: 'saturate(1.06) contrast(1.04)' }} />
+          <img src={heroImage} alt={image.illustrative ? image.label : record.title} fetchpriority="high" decoding="async" onError={image.onError} className="w-full h-full object-cover" style={{ filter: 'saturate(1.06) contrast(1.04)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
           <button onClick={back} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" />
@@ -367,9 +365,9 @@ export default function ClimateDetail() {
         )}
 
         {/* Attribution — Janine's spec: credit the image source and the contributor */}
-        {(record.image_credit || record.submitter_name) && (
+        {(image.credit || record.submitter_name) && (
           <div className="mt-5 pt-4 border-t border-[#141210]/15 text-[10px] font-mono text-[#5a5246] leading-relaxed">
-            {record.image_credit && <p>Image: {record.image_credit}</p>}
+            {image.credit && <p>Image: {image.credit}</p>}
             {record.submitter_name && <p>Submitted by {record.submitter_name}</p>}
           </div>
         )}

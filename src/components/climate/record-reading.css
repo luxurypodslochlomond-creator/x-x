@@ -41,6 +41,22 @@
   max-inline-size: 43ch;
 }
 .record-pages p.uppercase { font-size: .75rem; line-height: 1.5; }
+/* The masthead, quoted voice and picture lettering share the same regular face
+   and open tracking. Size remains local; headline/prose rules cannot re-bold it. */
+.climate-record .record-header-type,
+.climate-record .record-pages .record-header-type {
+  font-family: var(--font-record-ui) !important;
+  font-weight: 400 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase;
+}
+@media (min-width: 1024px) {
+  .climate-record .record-header-type,
+  .climate-record .record-pages .record-header-type { letter-spacing: .18em !important; }
+}
+html[data-tongue="chr"] .climate-record .record-header-type {
+  font-family: var(--font-script) !important;
+}
 /* A monospaced note is still read by a person. It stays the machine's lettering — that is
    the point of it — but it is set at a size a phone can hold without leaning in. */
 .record-pages :is(p, li, blockquote).font-mono:not(.uppercase) {

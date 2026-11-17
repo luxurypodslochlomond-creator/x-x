@@ -24,7 +24,7 @@ export default function RecordTimeBar({ className = '' }) {
             and one short one beside a tongue. Centred, because a sentence that is a title
             for the whole record sits in the middle of its own band. */}
         <p
-          className="min-w-0 flex-1 text-center font-mono text-[9px] uppercase leading-[1.5] tracking-[0.14em] lg:text-[10px] lg:tracking-[0.18em]"
+          className="record-header-type min-w-0 flex-1 text-center text-[9px] uppercase leading-[1.5] lg:text-[10px]"
           style={{ textWrap: 'balance' }}
         >
           This is the time. And this is the record of the time.
