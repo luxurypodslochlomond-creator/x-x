@@ -52,7 +52,7 @@ export default function RecordSearchPrompts({ onPick, disabled }) {
 
   return (
     <div className="record-search-prompts mt-4">
-      <p className="record-search-prompts-label font-mono text-[9px] font-black uppercase tracking-[0.22em] text-record-muted">
+      <p className="record-search-prompts-label base-one-label font-mono uppercase text-record-muted">
         <span className="lg:hidden">In the record</span>
         <span className="hidden lg:inline">Try a subject the record keeps</span>
       </p>
@@ -63,9 +63,8 @@ export default function RecordSearchPrompts({ onPick, disabled }) {
             type="button"
             onClick={() => onPick(name)}
             disabled={disabled}
-            className="record-search-prompt flex items-center gap-2 border-2 border-record-ink bg-record-paper px-2.5 py-2 text-left font-mono text-[9.5px] font-black uppercase leading-tight tracking-[0.1em] text-record-ink transition-colors active:bg-cartoon-sun active:text-record-ink disabled:opacity-60"
+            className="record-search-prompt base-one-label font-mono uppercase flex min-h-11 items-center gap-2 border-b border-record-ink/25 py-2 text-left text-record-ink transition-colors hover:border-record-mark hover:text-record-mark active:bg-cartoon-sun disabled:opacity-60"
           >
-            <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-record-red" />
             <span className="min-w-0 flex-1">{name}</span>
             <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0 opacity-60 lg:hidden" />
           </button>

@@ -24,16 +24,16 @@ import SearchSectionHead from '@/components/climate/search/SearchSectionHead';
 // bolted onto it, and every result it returns carries the origin it came from.
 
 const SECTIONS = [
-  { key: 'solutions', kind: 'solution', label: 'Solutions', tone: '#1e3a2b' },
-  { key: 'crises', kind: 'crisis', label: 'Climate crises', tone: '#b3261e' },
-  { key: 'actions', kind: 'action', label: 'Actions', tone: '#0f5f7a' },
-  { key: 'gatherings', kind: 'gathering', label: 'Groups', tone: '#1e3a2b' },
-  { key: 'wire', kind: 'wire', label: 'On the wire', tone: '#141210' },
-  { key: 'photos', kind: 'photo', label: 'Credited pictures', tone: '#1e3a2b' },
-  { key: 'comments', kind: 'comment', label: 'What readers said', tone: '#b3261e' },
-  { key: 'people', kind: 'person', label: 'On the roll', tone: '#b3261e' },
-  { key: 'tracks', kind: 'track', label: 'Music given to the record', tone: '#1e3a2b' },
-  { key: 'cartoons', kind: 'cartoon', label: 'Drawings', tone: '#0f5f7a' },
+  { key: 'solutions', kind: 'solution', label: 'Solutions' },
+  { key: 'crises', kind: 'crisis', label: 'Climate crises' },
+  { key: 'actions', kind: 'action', label: 'Actions' },
+  { key: 'gatherings', kind: 'gathering', label: 'Groups' },
+  { key: 'wire', kind: 'wire', label: 'On the wire' },
+  { key: 'photos', kind: 'photo', label: 'Credited pictures' },
+  { key: 'comments', kind: 'comment', label: 'What readers said' },
+  { key: 'people', kind: 'person', label: 'On the roll' },
+  { key: 'tracks', kind: 'track', label: 'Music given to the record' },
+  { key: 'cartoons', kind: 'cartoon', label: 'Drawings' },
 ];
 
 export default function ClimateSearch() {
@@ -53,16 +53,10 @@ export default function ClimateSearch() {
       backLabel="Back"
       eyebrow="BASE 1 · the record’s own index"
       returnTo="/TogetherChangeClimate"
-      returnLabel="Read the record"
-      footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
+      showReturn={false}
+      className="record-search-page"
     >
-      {/* ── ONE SHEET, TWO BANDS ───────────────────────────────────────────────────
-          The plate and the asking band are stacked flush and squared off against each
-          other, so the yellow foot of the sheet and the yellow band the field sits in meet
-          on one ink rule and read as a single printed thing — a title block with the work
-          underneath it, which is what a page of this record is. No overlap, no torn edge,
-          no negative margin: those were somebody else's drawing. */}
-      <BaseOnePlate statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead." />
+      <BaseOnePlate statement="Type it or say it. Search everything the record holds, with the origin beside every answer." />
 
       <div className="relative z-10">
         <RecordSearchLine
@@ -77,14 +71,14 @@ export default function ClimateSearch() {
       </div>
 
       {loading && (
-        <p role="status" className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#b3261e]" />
+        <p role="status" className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-record-muted">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-record-mark" />
           Reading the whole record…
         </p>
       )}
 
       {!loading && error && (
-        <p role="alert" className="mt-10 text-center text-[11px] font-mono uppercase tracking-widest text-[#b3261e]">{error}</p>
+        <p role="alert" className="mt-10 text-center text-[11px] font-mono uppercase tracking-widest text-record-red">{error}</p>
       )}
 
       {!loading && !error && data && (
@@ -96,23 +90,23 @@ export default function ClimateSearch() {
 
           {sections.length === 0 && about.length === 0 ? (
             <div className="mt-6">
-              <p className="text-[11px] font-mono uppercase tracking-widest text-[#5a5246] mb-2">
+              <p className="text-[11px] font-mono uppercase tracking-widest text-record-muted mb-2">
                 Nothing here for those words
               </p>
-              <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-5">
+              <p className="text-[11px] font-mono text-record-muted leading-relaxed mb-5">
                 Every entry on the record carries its origin and is written by people, so a thin search is honest
                 rather than broken. Try one word — or send something in, and it will wait for a human check.
               </p>
               <div className="flex flex-wrap gap-2 mb-7">
                 <Link
                   to="/TogetherChangeClimate"
-                  className="px-4 py-2.5 bg-[#141210] text-[#efe7d6] border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wider active:bg-[#e2602a] active:text-[#141210] transition-colors"
+                  className="base-one-label font-mono uppercase inline-flex min-h-11 items-center bg-cartoon-sun px-4 py-2.5 text-record-ink transition-colors hover:text-record-mark"
                 >
                   Read the record
                 </Link>
                 <Link
                   to="/ClimateWire"
-                  className="px-4 py-2.5 bg-[#efe7d6] text-[#141210] border-2 border-[#141210] text-[10px] font-black font-mono uppercase tracking-wider active:bg-[#e2602a] transition-colors"
+                  className="base-one-label font-mono uppercase inline-flex min-h-11 items-center px-4 py-2.5 text-record-ink underline underline-offset-4 transition-colors hover:text-record-mark"
                 >
                   On the wire
                 </Link>
@@ -125,19 +119,19 @@ export default function ClimateSearch() {
                   the signal colour so it is never mistaken for an entry with an origin. */}
               {about.length > 0 && (
                 <section>
-                  <SearchSectionHead index={0} label="About the record" count={about.length} tone="#0f5f7a" />
+                  <SearchSectionHead index={0} label="About the record" count={about.length} />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     {about.map((a, i) => (
                       <div key={`${a.path}-${a.label}`} className="bo-rise" style={{ animationDelay: `${Math.min(i, 6) * 45}ms` }}>
                       <Link
                         to={a.path}
-                        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
+                        className="record-search-result block border-b border-record-ink/20 py-5 text-record-ink transition-colors hover:border-record-mark"
                       >
-                        <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest px-1.5 py-0.5 border border-[#e2602a] text-[#e2602a]">
+                        <span className="base-one-label font-mono uppercase inline-block bg-cartoon-sun px-2 py-1 text-record-ink">
                           {a.label}
                         </span>
-                        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{a.title}</h3>
-                        <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{a.line}</p>
+                        <h3 className="mt-3 font-heading text-base font-bold leading-snug text-record-ink">{a.title}</h3>
+                        <p className="mt-2 font-mono text-sm leading-relaxed text-record-ink">{a.line}</p>
                       </Link>
                       </div>
                     ))}
@@ -151,7 +145,6 @@ export default function ClimateSearch() {
                     index={about.length > 0 ? i + 1 : i}
                     label={s.label}
                     count={s.items.length}
-                    tone={s.tone}
                   />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     {s.items.map((item, idx) => (
@@ -169,7 +162,7 @@ export default function ClimateSearch() {
 
       {!loading && !error && !data && (
         <div className="mt-8">
-          <p className="hidden lg:block text-[11px] lg:text-[12px] font-mono text-[#5a5246] leading-relaxed mb-6">
+          <p className="hidden lg:block text-[11px] lg:text-[12px] font-mono text-record-muted leading-relaxed mb-6">
             Search what the record actually holds. Nothing is guessed and nothing is ranked for you — the record
             shows what matches, and where it came from.
           </p>

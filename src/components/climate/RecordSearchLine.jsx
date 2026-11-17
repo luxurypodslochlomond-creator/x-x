@@ -68,13 +68,13 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
     <form
       role="search"
       onSubmit={submit}
-      className="border-y-2 border-record-ink bg-cartoon-sun px-2.5 pb-2 pt-2.5"
+      className="border-b border-record-ink/20 bg-cartoon-sun px-4 pb-4 pt-2 sm:px-6"
     >
       {/* The plate above the band already says whose index this is, so the band itself goes
           straight to the work: one field, the mark's red on the one control that answers. */}
       <div
         ref={box}
-        className="base-one-line flex items-center overflow-hidden border-2 border-record-ink bg-record-paper focus-within:border-record-red"
+        className="base-one-line flex items-center overflow-hidden border border-record-ink/40 bg-record-paper focus-within:border-record-mark"
         style={{ scrollMarginBlock: '96px' }}
       >
         <input
@@ -109,7 +109,7 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
           type="submit"
           aria-label="Ask BASE 1"
           disabled={loading || draft.trim().length < 2}
-          className="base-one-send m-1 grid h-11 w-11 shrink-0 place-items-center bg-record-red text-record-paper transition-colors active:bg-record-ink disabled:opacity-60"
+          className="base-one-send m-1 grid h-11 w-11 shrink-0 place-items-center bg-record-mark text-record-paper transition-colors active:bg-record-ink disabled:bg-record-ink/15 disabled:text-record-ink/50"
         >
           {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <ArrowRight className="h-6 w-6" />}
         </button>
@@ -120,7 +120,7 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
           the same control a reader can reach without leaving the search — and the search
           sends that tongue with the question, not the phone's. */}
       <div className="mt-1.5 flex items-center justify-between gap-3 pl-0.5">
-        <span className="font-mono text-[9px] uppercase leading-tight tracking-[0.14em] text-record-ink/75">
+        <span className="base-one-label font-mono uppercase text-record-ink">
           Every tongue · type it or say it
         </span>
         <RecordTongueDoor size={15} inline />

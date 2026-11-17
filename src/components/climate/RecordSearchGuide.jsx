@@ -15,52 +15,42 @@ import { ArrowRight } from 'lucide-react';
 const KINDS = [
   {
     label: 'Solutions',
-    tone: '#1e3a2b',
     body: 'What works — something done in a place, that another community can copy.',
   },
   {
     label: 'Climate crises',
-    tone: '#b3261e',
     body: 'Emergencies the world needs to know about, each labelled with how well it is known.',
   },
   {
     label: 'Actions',
-    tone: '#e2602a',
     body: 'Cleanups, plantings, meetings, policy submissions — what is happening, and when.',
   },
   {
     label: 'Groups',
-    tone: '#1e3a2b',
     body: 'People on the same work in one region. The record carries one contact line, never a conversation.',
   },
   {
     label: 'On the wire',
-    tone: '#141210',
     body: 'Dated entries: what changed, where, who says so, and what can be copied from it.',
   },
   {
     label: 'The music',
-    tone: '#1e3a2b',
     body: 'Pieces given to the record by the artists who made them — searchable by their words as well as their names.',
   },
   {
     label: 'The drawings',
-    tone: '#e2602a',
     body: 'Pictures on the wall of the cartoons room, each with the hand that drew it and where it came from.',
   },
   {
     label: 'The pictures',
-    tone: '#1e3a2b',
     body: 'Credited photographs on the record — searchable by what they show and by the hand that made them.',
   },
   {
     label: 'What readers said',
-    tone: '#b3261e',
     body: 'Published comments under entries, with the name each writer signed. Never their address.',
   },
   {
     label: 'The roll',
-    tone: '#b3261e',
     body: 'The people who check this record — findable only by the line each of them wrote for themselves.',
   },
 ];
@@ -68,27 +58,22 @@ const KINDS = [
 export default function RecordSearchGuide() {
   return (
     <div className="record-search-guide">
-      <h2
-        className="font-black uppercase text-[#141210] leading-tight mb-1.5"
-        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 26px)', letterSpacing: '-0.02em' }}
-      >
+      <h2 className="base-one-label font-mono uppercase mb-3 text-record-mark">
         What the search reads
       </h2>
-      <p className="text-[11px] lg:text-[12px] font-mono text-[#5a5246] leading-relaxed mb-3">
+      <p className="text-[11px] lg:text-[12px] font-mono text-record-muted leading-relaxed mb-3">
         One question reaches all of it, in whatever tongue each entry was written in.
       </p>
 
-      <div className="border-t border-[#141210]/20">
+      <div className="border-t border-record-ink/20">
         {KINDS.map((k) => (
-          <div key={k.label} className="flex items-start gap-3 border-b border-[#141210]/20 py-2.5">
-            <span className="mt-[7px] h-2 w-2 flex-shrink-0" style={{ backgroundColor: k.tone }} />
+          <div key={k.label} className="flex items-start gap-3 border-b border-record-ink/20 py-2.5">
+            <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 bg-record-mark" />
             <p
-              className="text-[13px] lg:text-[13.5px] leading-relaxed text-[#141210]"
-              style={{ fontFamily: 'var(--font-reading)' }}
+              className="font-mono text-sm leading-relaxed text-record-ink"
             >
               <span
-                className="mr-2 inline-block text-[10px] font-black font-mono uppercase tracking-wide"
-                style={{ color: k.tone }}
+                className="base-one-label font-mono uppercase mr-3 inline-block text-record-ink"
               >
                 {k.label}
               </span>
@@ -100,16 +85,16 @@ export default function RecordSearchGuide() {
 
       {/* The origins. This is the line a research panel is really looking for: nothing on
           the record stands on our word alone, and the method is one tap away. */}
-      <div className="record-search-origin mt-5 bg-[#141210] border-2 border-[#141210] p-4">
-        <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#e2602a] mb-2">
+      <div className="record-search-origin mt-5 bg-cartoon-sun p-5">
+        <p className="base-one-label font-mono uppercase mb-3 text-record-mark">
           Search by origin, too
         </p>
-        <p className="text-[11px] lg:text-[12px] font-mono text-[#efe7d6]/80 leading-relaxed">
+        <p className="text-[11px] lg:text-[12px] font-mono text-record-ink leading-relaxed">
           Every entry carries the body, journal, organisation or person it came from, and that origin is
           searchable. Name one — Horizon International, a journal, an official body — and everything resting
           on it comes back.
         </p>
-        <p className="text-[11px] lg:text-[12px] font-mono text-[#efe7d6]/80 leading-relaxed mt-2.5">
+        <p className="text-[11px] lg:text-[12px] font-mono text-record-ink leading-relaxed mt-2.5">
           The record answers for itself as well: the founder, who built it, how it is made, who decides, who
           holds the keys, what it costs to keep alive, and what is still open. None of that is behind an
           address you have to be given.
@@ -117,13 +102,13 @@ export default function RecordSearchGuide() {
         <div className="flex flex-wrap gap-2 mt-3.5">
           <Link
             to="/ClimateMethod"
-            className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#efe7d6] text-[#141210] border-2 border-[#efe7d6] text-[10px] font-black font-mono uppercase tracking-wider active:bg-[#e2602a] transition-colors"
+            className="base-one-label font-mono uppercase inline-flex min-h-11 items-center gap-1.5 border-b border-record-ink/40 py-2 text-record-ink transition-colors hover:text-record-mark"
           >
             How this record is made <ArrowRight className="w-3.5 h-3.5" />
           </Link>
           <Link
             to="/ClimateFounder"
-            className="inline-flex items-center gap-1.5 px-3 py-2 border-2 border-[#efe7d6]/40 text-[#efe7d6] text-[10px] font-black font-mono uppercase tracking-wider hover:border-[#e2602a] hover:text-[#e2602a] transition-colors"
+            className="base-one-label font-mono uppercase inline-flex min-h-11 items-center gap-1.5 border-b border-record-ink/40 py-2 text-record-ink transition-colors hover:text-record-mark"
           >
             The founder <ArrowRight className="w-3.5 h-3.5" />
           </Link>

@@ -7,18 +7,15 @@ import { MapPin } from 'lucide-react';
 // and links only where the record really has a page for the thing. The origin is printed
 // on every card, because on this record a claim without an origin does not exist.
 
-const Tag = ({ children, tone = '#1e3a2b' }) => (
-  <span
-    className="inline-block text-[9px] font-black font-mono uppercase tracking-widest px-1.5 py-0.5 border"
-    style={{ color: tone, borderColor: tone }}
-  >
+const Tag = ({ children }) => (
+  <span className="base-one-label font-mono uppercase inline-block bg-cartoon-sun px-2 py-1 text-record-ink">
     {children}
   </span>
 );
 
 const Place = ({ region, country }) =>
   region || country ? (
-    <div className="flex items-center gap-1.5 text-[#1e3a2b] mt-2">
+    <div className="flex items-center gap-1.5 text-record-muted mt-2">
       <MapPin className="w-3 h-3" />
       <span className="text-[10px] font-black font-mono uppercase tracking-widest">
         {[region, country].filter(Boolean).join(' · ')}
@@ -29,7 +26,7 @@ const Place = ({ region, country }) =>
 // Who says so. Always labelled, never dropped — the whole method in one line.
 const Origin = ({ name }) =>
   name ? (
-    <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#b3261e] leading-relaxed">
+    <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-black font-mono uppercase tracking-wide text-record-mark leading-relaxed">
       Source · {name}
     </p>
   ) : null;
@@ -40,12 +37,11 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 p-3.5 active:bg-[#efe7d6] transition-colors"
-        style={{ borderTopColor: isCrisis ? '#b3261e' : '#1e3a2b' }}
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone={isCrisis ? '#b3261e' : '#1e3a2b'}>{isCrisis ? 'Climate crisis' : 'Solution'}</Tag>
-        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
-        {item.summary && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.summary}</p>}
+        <Tag>{isCrisis ? 'Climate crisis' : 'Solution'}</Tag>
+        <h3 className="font-heading text-base font-bold text-record-ink leading-tight mt-2">{item.title}</h3>
+        {item.summary && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-1.5">{item.summary}</p>}
         <Place region={item.region} country={item.country} />
         <Origin name={item.source_name} />
       </Link>
@@ -56,11 +52,11 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to={`/ClimateDetail/action/${item.id}`}
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#0f5f7a] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone="#0f5f7a">{String(item.action_type || 'action').replace(/_/g, ' ')}</Tag>
-        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
-        {item.description && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.description}</p>}
+        <Tag>{String(item.action_type || 'action').replace(/_/g, ' ')}</Tag>
+        <h3 className="font-heading text-base font-bold text-record-ink leading-tight mt-2">{item.title}</h3>
+        {item.description && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-1.5">{item.description}</p>}
         <Place region={item.region} country={item.country} />
       </Link>
     );
@@ -68,24 +64,24 @@ export default function RecordResultCard({ kind, item }) {
 
   if (kind === 'gathering') {
     return (
-      <div className="record-search-result bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5">
-        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight">{item.name}</h3>
+      <div className="record-search-result border-b border-record-ink/20 bg-transparent py-5">
+        <h3 className="font-heading text-base font-bold text-record-ink leading-tight">{item.name}</h3>
         {item.topic && (
-          <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] border border-[#1e3a2b] px-1.5 py-0.5 mt-1.5">
+          <span className="base-one-label font-mono uppercase mt-2 inline-block bg-cartoon-sun px-2 py-1 text-record-ink">
             {item.topic}
           </span>
         )}
         <Place region={item.region} />
-        {item.description && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">{item.description}</p>}
+        {item.description && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-2">{item.description}</p>}
         {item.contact_email ? (
           <a
             href={`mailto:${item.contact_email}`}
-            className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]"
+            className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-record-mark active:text-record-ink"
           >
             Contact organizer →
           </a>
         ) : (
-          <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-mono uppercase tracking-wide text-[#5a5246] leading-relaxed">
+          <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-mono uppercase tracking-wide text-record-muted leading-relaxed">
             Open group · contact line being arranged
           </p>
         )}
@@ -98,12 +94,12 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to="/ClimateRoll"
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#b3261e] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone="#b3261e">{item.role === 'keeper' ? 'Custodian' : 'Witness'}</Tag>
-        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.name}</h3>
-        {item.line && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.line}</p>}
-        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">
+        <Tag>{item.role === 'keeper' ? 'Custodian' : 'Witness'}</Tag>
+        <h3 className="font-heading text-base font-bold text-record-ink leading-tight mt-2">{item.name}</h3>
+        {item.line && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-1.5">{item.line}</p>}
+        <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-black font-mono uppercase tracking-wide text-record-muted">
           In their own words · the roll →
         </p>
       </Link>
@@ -115,15 +111,15 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to="/ClimateMusic"
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone="#1e3a2b">{String(item.kind || 'music').replace(/_/g, ' ')}</Tag>
-        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.title}</h3>
-        {item.artist_name && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.artist_name}</p>}
+        <Tag>{String(item.kind || 'music').replace(/_/g, ' ')}</Tag>
+        <h3 className="font-heading text-base font-bold text-record-ink leading-tight mt-2">{item.title}</h3>
+        {item.artist_name && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-1.5">{item.artist_name}</p>}
         {item.spec && (
-          <p className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide mt-2">{item.spec}</p>
+          <p className="text-[10px] font-mono text-record-muted uppercase tracking-wide mt-2">{item.spec}</p>
         )}
-        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">
+        <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-black font-mono uppercase tracking-wide text-record-muted">
           Given to the record · listen →
         </p>
       </Link>
@@ -135,14 +131,14 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to="/ClimateCartoons"
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#0f5f7a] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone="#0f5f7a">Drawing</Tag>
-        <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">
+        <Tag>Drawing</Tag>
+        <h3 className="font-heading text-base font-bold text-record-ink leading-tight mt-2">
           {item.title || item.artist_name}
         </h3>
-        {item.for_line && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.for_line}</p>}
-        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">
+        {item.for_line && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-1.5">{item.for_line}</p>}
+        <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-black font-mono uppercase tracking-wide text-record-muted">
           {[item.artist_name, item.origin].filter(Boolean).join(' · ')}
         </p>
       </Link>
@@ -155,20 +151,20 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to="/TogetherChangeClimate"
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#1e3a2b] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone="#1e3a2b">Credited picture</Tag>
+        <Tag>Credited picture</Tag>
         <div className="flex items-start gap-3 mt-2">
           {item.image_url && (
             <img
               src={item.image_url}
               alt={item.caption || item.credit || 'A credited picture on the record'}
               loading="lazy"
-              className="h-16 w-16 flex-shrink-0 object-cover border border-[#141210]"
+              className="h-16 w-16 flex-shrink-0 object-cover border border-record-ink"
             />
           )}
           {item.caption && (
-            <p className="text-[12px] font-mono text-[#141210] leading-relaxed min-w-0">{item.caption}</p>
+            <p className="text-[12px] font-mono text-record-ink leading-relaxed min-w-0">{item.caption}</p>
           )}
         </div>
         {item.credit && <Origin name={item.credit} />}
@@ -183,13 +179,13 @@ export default function RecordResultCard({ kind, item }) {
     return (
       <Link
         to={`/ClimateDetail/${item.entry_type}/${item.entry_id}`}
-        className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#b3261e] p-3.5 active:bg-[#efe7d6] transition-colors"
+        className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
-        <Tag tone="#b3261e">Said on the record</Tag>
-        <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-2">
+        <Tag>Said on the record</Tag>
+        <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-2">
           “{said.length > 220 ? `${said.slice(0, 220)}…` : said}”
         </p>
-        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246] leading-relaxed">
+        <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-black font-mono uppercase tracking-wide text-record-muted leading-relaxed">
           {item.author_name} · under the entry →
         </p>
       </Link>
@@ -200,25 +196,25 @@ export default function RecordResultCard({ kind, item }) {
   return (
     <Link
       to={`/ClimateWireEntry/${item.id}`}
-      className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#141210] p-3.5 active:bg-[#efe7d6] transition-colors"
+      className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
     >
       <div className="flex items-center gap-2 flex-wrap">
-        <Tag tone="#141210">Wire</Tag>
+        <Tag>Wire</Tag>
         {item.verification && (
-          <span className="text-[9px] font-mono uppercase tracking-widest text-[#5a5246]">
+          <span className="text-[9px] font-mono uppercase tracking-widest text-record-muted">
             {String(item.verification).replace(/_/g, ' ')}
           </span>
         )}
       </div>
-      <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.headline}</h3>
-      {item.what_changed && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.what_changed}</p>}
+      <h3 className="font-heading text-base font-bold text-record-ink leading-tight mt-2">{item.headline}</h3>
+      {item.what_changed && <p className="text-[12px] font-mono text-record-ink leading-relaxed mt-1.5">{item.what_changed}</p>}
       {(item.when_label || item.where_label) && (
-        <p className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide mt-2">
+        <p className="text-[10px] font-mono text-record-muted uppercase tracking-wide mt-2">
           {[item.when_label, item.where_label].filter(Boolean).join(' · ')}
         </p>
       )}
       {item.source_name && (
-        <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#b3261e] leading-relaxed">
+        <p className="mt-2.5 pt-2.5 border-t border-record-ink/15 text-[10px] font-black font-mono uppercase tracking-wide text-record-mark leading-relaxed">
           Source · {item.source_name}
         </p>
       )}

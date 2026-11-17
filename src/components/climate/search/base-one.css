@@ -1,73 +1,63 @@
-/* ── BASE 1, PRINTED IN THE RECORD'S OWN INK ─────────────────────────────────────
-   Brian, 17 November, twice. First: "base 1 … this could be proper coolasfuck art …
-   Joan Miró style." I did that, and he came back with the correction that matters:
-   "need to look more like us haha and Beadie etc."
-
-   He is right, and the reason is worth keeping. Miró was a borrowed vocabulary — a good
-   one, but somebody else's. This record already has a hand of its own and it is not a
-   gallery's: warm paper, ink, the mark's red, one signal yellow, everything set in mono
-   caps and printed to the edge of the sheet. A page of this record should look like it
-   came off the same press as the masthead and the foot, not like a poster that wandered
-   in from a museum.
-
-   So the drawing is gone: no cut corners, no floating disc, no ladder, no constellation,
-   nothing that turns. What is left is what the record actually uses to speak — a hard
-   rectangle, a 2px ink rule, a yellow band above and below, the red on the one thing that
-   does the work, and mono caps with air between the letters. The only motion is a result
-   arriving, once. */
-
-.base-one {
-  position: relative;
-  overflow: hidden;
+/* Search uses the footer's paper, mark red, yellow bands and regular tracked labels.
+   Scoped here so the record's other rooms keep their existing layouts. */
+.record-pages > .record-search-page { min-height: 0; }
+.record-pages .record-search-page .record-shell-body {
+  background-color: rgb(var(--record-paper));
+  padding-block: 0;
 }
-
-/* The ink ground, with the record's own grain: the same horizontal scanline the masthead
-   carries, four per cent, holding still. It is texture, not pattern. */
-.base-one__ground {
-  position: relative;
-  background-color: rgb(var(--record-ink));
-  color: rgb(var(--record-paper));
+.record-search-page .record-shell-body > .record-shell-content {
+  max-width: 64rem;
+  padding: 1.5rem 1.25rem;
+  background-color: transparent;
 }
-
-.base-one__ground::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: repeating-linear-gradient(
-    0deg,
-    rgba(239, 231, 214, 0.05) 0 1px,
-    transparent 1px 3px
-  );
+.record-pages .record-search-page .base-one-label {
+  font-family: var(--font-record-ui);
+  font-size: .6875rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: .18em;
+  text-transform: uppercase;
 }
-
-/* ── THE ASKING LINE ────────────────────────────────────────────────────────────
-   A field on this record is a rectangle with an ink rule round it and no rounding at any
-   corner. The only thing that happens to it is that the rule goes red when a reader is
-   writing in it — no glow, no shadow pretending to be light, no radius. */
-.base-one-line {
-  border-radius: 0;
-  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
+.record-pages .record-search-page :is(h1, h2).base-one-label {
+  font-weight: 400 !important;
+  letter-spacing: .18em !important;
+  line-height: 1.65 !important;
 }
-
-.base-one-line:focus-within {
-  box-shadow: inset 0 0 0 1px rgb(var(--record-red));
+.record-pages .record-search-page .base-one-title {
+  font-family: var(--font-record-ui) !important;
+  font-size: clamp(2.875rem, 7vw, 4.375rem);
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: -.035em !important;
 }
-
-/* The one control that answers: the mark's red, square, edge to edge with the rule.
-   It was a circle for a day. A circle on this record is the x = x mark and nothing else. */
-.base-one-send {
-  border-radius: 0;
+.record-pages .record-search-page .record-shell-content .base-one-copy {
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  max-inline-size: 58ch;
 }
-
-/* ── RESULTS ARRIVE, THEY DO NOT APPEAR ─────────────────────────────────────────
-   Each card comes up once, on a short stagger, and then never moves again. No hover
-   lift, no parallax, nothing that makes reading cost a repaint. */
-.bo-rise {
-  animation: bo-rise 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+.record-pages .record-search-page .base-one-holds > li {
+  font-size: .6875rem !important;
+  line-height: 1.65 !important;
+  letter-spacing: .18em !important;
 }
-
-@keyframes bo-rise {
-  from { opacity: 0; transform: translate3d(0, 8px, 0); }
-  to { opacity: 1; transform: translate3d(0, 0, 0); }
+.base-one-line { border-radius: 0; }
+.base-one-line:focus-within { box-shadow: inset 0 0 0 1px rgb(var(--record-mark)); }
+.base-one-send { border-radius: 0; }
+.record-search-page .record-search-subjects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.25rem;
+}
+.record-search-page .record-search-guide :is(p, li) { max-inline-size: none; }
+.record-search-page .record-search-guide > div > div > p { flex: 1; }
+.record-search-page .record-search-help > summary::-webkit-details-marker { display: none; }
+.record-search-page .record-search-result:focus-visible {
+  outline: 2px solid rgb(var(--record-mark));
+  outline-offset: 4px;
+}
+@media (min-width: 1024px) {
+  .record-search-page .record-shell-body > .record-shell-content { padding: 2rem 2.5rem; }
+}
+@media print {
+  .record-search-page .record-shell-body { background-color: rgb(var(--record-paper)); }
 }

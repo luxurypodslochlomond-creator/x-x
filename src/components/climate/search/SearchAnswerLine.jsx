@@ -12,27 +12,27 @@ export default function SearchAnswerLine({ data, local, aboutCount }) {
         : `Nothing on the record matches “${data.query}” yet`;
 
   return (
-    <div className="border-2 border-record-ink bg-record-ink px-3 py-2.5 text-record-paper">
+    <div className="border-y border-record-ink/20 py-4 text-record-ink">
       <div className="flex items-start justify-between gap-3">
         <p className="font-mono text-[11px] leading-relaxed">{line}</p>
-        <span className="shrink-0 pt-0.5 font-mono text-[8.5px] uppercase tracking-[0.2em] text-cartoon-sun">
+        <span className="base-one-label font-mono uppercase shrink-0 pt-0.5 text-record-mark">
           Answer
         </span>
       </div>
 
       {data.loose && (
-        <p className="mt-1.5 border-t border-record-paper/20 pt-1.5 font-mono text-[10px] leading-relaxed text-record-paper/70">
+        <p className="mt-2 font-mono text-sm leading-relaxed text-record-muted">
           No entry matched all of your words — the entries below match part of the question.
         </p>
       )}
       {local && (
-        <p className="mt-1.5 border-t border-record-paper/20 pt-1.5 font-mono text-[10px] leading-relaxed text-record-paper/70">
+        <p className="mt-2 font-mono text-sm leading-relaxed text-record-muted">
           Your own device read the record for this one — the index could not be reached, so
           nothing was asked of anybody else.
         </p>
       )}
       {data.translatedFrom && (
-        <p className="mt-1.5 border-t border-record-paper/20 pt-1.5 font-mono text-[10px] leading-relaxed text-record-paper/70">
+        <p className="mt-2 font-mono text-sm leading-relaxed text-record-muted">
           Nothing in those exact words — searched in English for “{data.translatedFrom}” and
           found {data.total}.
         </p>

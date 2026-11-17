@@ -15,7 +15,7 @@ import { MarkEqual } from '@/components/climate/RecordFootMarks';
 // once. Nothing was removed — the eyebrow, the statement, the foot and the credit are all
 // still said. `compact` still drops the opening block for the rooms where somebody has come
 // to work rather than to read.
-export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, compact = false, mobileCompact = false, wide = false, onBack, backLabel, className = '', children }) {
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, showReturn = true, compact = false, mobileCompact = false, wide = false, onBack, backLabel, className = '', children }) {
   return (
     <div dir={dir} data-compact={compact} data-mobile-compact={mobileCompact} className={`climate-record record-page-shell relative min-h-screen text-record-ink ${className}`} style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow={eyebrow} fallback={returnTo} onBack={onBack} label={backLabel} />
@@ -56,16 +56,15 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       </div>
 
       {/* The way back to the record, stated once, in the record's own hand. */}
-      <div className="record-shell-return border-t border-record-ink/15">
-        <div className="mx-auto max-w-[1100px] px-4 py-6 lg:px-10 lg:py-8">
-          <Link
-            to={returnTo}
-            className="inline-flex items-center gap-2 text-[13.5px] text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red"
-          >
-            {returnLabel} <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
-          </Link>
+      {showReturn && (
+        <div className="record-shell-return border-t border-record-ink/15">
+          <div className="mx-auto max-w-[1100px] px-4 py-6 lg:px-10 lg:py-8">
+            <Link to={returnTo} className="inline-flex items-center gap-2 text-[13.5px] text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red">
+              {returnLabel} <ArrowRight className="h-4 w-4" strokeWidth={1.6} />
+            </Link>
+          </div>
         </div>
-      </div>
+      )}
 
       {footer && (
         <div className="record-shell-footnote"><p className="mx-auto max-w-md px-4 py-6 text-center font-mono text-[11px] leading-relaxed text-record-muted lg:max-w-2xl lg:py-8 lg:text-[12px]">{footer}</p></div>
