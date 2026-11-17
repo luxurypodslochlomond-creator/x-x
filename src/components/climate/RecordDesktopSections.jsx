@@ -35,10 +35,10 @@ export default function RecordDesktopSections({ onNavigate }) {
       {groups.map(({ title, doors }, shelf) => {
         const paint = SHELVES[shelf % SHELVES.length];
         return (
-          <section key={title} aria-label={title} className={`record-explore-group border-t-4 bg-record-paper/85 px-3 pb-2 pt-2 ${paint.rule}`}>
+          <section key={title} aria-label={title} className={`record-explore-group border-t-4 bg-record-paper/70 px-3 pb-2 pt-2 ${paint.rule}`}>
             <h2 className={`mb-2 flex items-baseline justify-between gap-2 border-b border-record-ink/15 pb-2 font-display text-[13px] font-bold uppercase tracking-tight ${paint.ink}`}>
               <span>{title}</span>
-              <span aria-hidden="true" className="font-mono text-[10px] font-normal text-record-muted">{doors.length}</span>
+              <span aria-hidden="true" className="font-mono text-[10px] font-normal text-record-red">{doors.length}</span>
             </h2>
             <ul>
               {doors.map(({ label, to, what }) => {

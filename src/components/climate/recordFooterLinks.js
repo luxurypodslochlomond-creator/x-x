@@ -248,11 +248,16 @@ export const CONTENT_GROUPS = [
     ],
   },
   {
-    title: 'Ways in',
+    // "Ways in" was a lie on the contents: nobody was entering anything from that shelf, they
+    // were going on to the wire, the map, the readership and the search. It says what it is now.
+    title: 'More to read',
     doors: PRIMARY_NAV.filter(({ to }) => to !== '/TogetherChangeClimate'),
   },
   {
-    title: 'How it is kept',
+    // The same shelf, said in the record's own voice rather than a filing cabinet's: method,
+    // corrections, the covenant, the terms and the privacy are all one claim, and the claim is
+    // that nothing here is decided in the dark.
+    title: 'Kept honest',
     doors: [
       FOOTER_NAV.find(({ to }) => to === '/ClimateMethod'),
       FOOTER_NAV.find(({ to }) => to === '/ClimateCorrections'),

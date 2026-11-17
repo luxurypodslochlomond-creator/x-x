@@ -116,6 +116,21 @@ export function MarkCheckers({ size = 26, className = '' }) {
   );
 }
 
+// Who is on the list — the roll itself, not the pair of eyes that does the checking. A page
+// of names with a seal set against it, because the roll was the one door in the drawer still
+// wearing the record's own folio: two different doors, one picture, and a reader who saw the
+// same sheet twice stopped believing the drawer meant anything.
+export function MarkRoll({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
+      <path d="M8.6 5.4h18.8v29.2H8.6z" />
+      <path d="M12.6 12.4h6.2M12.6 18.8h9M12.6 25.2h5.4" />
+      <path d="M24.4 10.8h2.9v2.9h-2.9z" className="text-record-mark" strokeWidth="1.9" />
+      <path d="M12.6 31.6h10.6" opacity=".45" />
+    </svg>
+  );
+}
+
 // What changes hands. One set of hands to another, and the direction said out loud.
 export function MarkHandover({ size = 26, className = '' }) {
   return (

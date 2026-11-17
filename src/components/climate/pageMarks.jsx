@@ -8,6 +8,7 @@ import {
   MarkMethod,
   MarkCorrection,
   MarkCheckers,
+  MarkRoll,
   MarkHandover,
   MarkMusic,
   MarkStudio,
@@ -53,6 +54,10 @@ const MARKS = {
   // What can be checked, and what is given.
   '/ClimateSeals': MarkSeal,
   '/ClimateFellows': MarkCheckers,
+  // The roll is the list of names, which is a different thing from the pair of eyes doing
+  // the work: the fellows page asks what checking involves, the roll says who is already on
+  // it. It was falling back to the record's own folio, so the drawer showed one sheet twice.
+  '/ClimateRoll': MarkRoll,
   '/ClimateHandover': MarkHandover,
   '/ClimateMusic': MarkMusic,
   '/Studio': MarkStudio,
