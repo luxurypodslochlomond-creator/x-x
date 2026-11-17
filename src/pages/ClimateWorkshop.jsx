@@ -5,6 +5,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import WorkshopStrip from '@/components/climate/workshop/WorkshopStrip';
 import JanineTopicTop from '@/components/climate/workshop/JanineTopicTop';
+import WhatIsAsked from '@/components/climate/workshop/WhatIsAsked';
 import HandBack from '@/components/climate/workshop/HandBack';
 import JanineSessionTile from '@/components/climate/workshop/JanineSessionTile';
 import WorkshopClocks from '@/components/climate/workshop/WorkshopClocks';
@@ -19,7 +20,7 @@ import { buildWorkshopShareCard, WORKSHOP_CARD } from '@/components/climate/work
 const CONTEXT = [
   ['The record', 'A public record of climate solutions and crises. Every entry names who says so and links to where it started, and every entry is fingerprinted by the record’s own server so that a quiet edit shows up in public. No advertising, no sponsorship, no ranking — nobody can buy a place on it.'],
   ['CartoonAFRICA', 'The eighth international cartoon biennial, at the National Museum in Benin City, 28–30 November 2026. Its theme, in the festival’s own words: “SDG, African youths and democracy through humour lenses”.'],
-  ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on this for four decades. She is giving the hour. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
+  ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on this for four decades. She is hosting the hour — not speaking for it, and not filling it. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
   ['This page', 'A proposal for that hour, set down before it happened. Read after 29 November, it is what was proposed — the drawings it produced live in the cartoon room.'],
 ];
 
@@ -41,15 +42,18 @@ const CONTEXT = [
 
 const TOPIC = 'Climate change & the power of collective actions / creative interventions';
 
+// Each line now says who is in the chair, because that was the one thing missing and it was
+// the thing she asked about: read without it, an agenda looks like a script handed to the host,
+// and the host quite reasonably wrote back asking what on earth she was being asked to do.
 const HOUR = [
-  ['00:00', 'Four minutes · Why this hour exists', 'A cartoon can hold a hard idea without frightening the person holding it. That is why this is a workshop about drawings rather than a talk with slides.'],
-  ['00:04', 'Eight minutes · Three drawings, shown whole', 'Three cartoons from What On Earth!, with their credit kept on them. One question asked of the room and not answered for it: what did that make you feel, before it told you anything?'],
-  ['00:12', 'Six minutes · How a fortnightly cartoon gets made', 'The idea, the artist, the science check, the publish — from the team who make them, if they join the discussion.'],
-  ['00:18', 'Eight minutes · Why collective action needs a record', 'One entry, its source, its seal, its keeper. No product, no sign-up, no price.'],
-  ['00:26', 'Nineteen minutes · The draw', 'The strip goes up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil.'],
-  ['00:45', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.'],
-  ['00:52', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown.'],
-  ['00:58', 'Two minutes · Handed back, then one ask', 'She closes on the blank panel and gives the room its own hour back. Then the one ask: draw one more next week, somewhere that is not a workshop — and send it.'],
+  ['00:00', 'Four minutes · Why this hour exists', 'A cartoon can hold a hard idea without frightening the person holding it. That is why this is a workshop about drawings rather than a talk with slides.', 'Janine · host'],
+  ['00:04', 'Eight minutes · Three drawings, shown whole', 'Three cartoons from What On Earth!, with their credit kept on them. One question asked of the room and not answered for it: what did that make you feel, before it told you anything?', 'the panel · their own cartoons'],
+  ['00:12', 'Six minutes · How a fortnightly cartoon gets made', 'The idea, the artist, the science check, the publish — from the team who make them, if they join the discussion.', 'the panel'],
+  ['00:18', 'Eight minutes · Why collective action needs a record', 'One entry, its source, its seal, its keeper. No product, no sign-up, no price.', 'the record · not Janine'],
+  ['00:26', 'Nineteen minutes · The draw', 'The strip goes up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil.', 'the room · everyone draws'],
+  ['00:45', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.', 'four volunteers'],
+  ['00:52', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown.', 'the record · three lines'],
+  ['00:58', 'Two minutes · Handed back, then one ask', 'She closes on the blank panel and gives the room its own hour back. Then the one ask: draw one more next week, somewhere that is not a workshop — and send it.', 'Janine · host'],
 ];
 
 const Section = ({ n, title, children }) => (
@@ -66,7 +70,7 @@ export default function ClimateWorkshop() {
       eyebrow="The record · 29 November 2026"
       marker="03 · Janine M. H. Selendy’s session · CartoonAFRICA 8th Biennial · Benin City"
       title={`“${TOPIC}”`}
-      statement="Janine Selendy’s topic, in the festival’s own words — and what we propose she does with the hour: five frames, nineteen minutes of drawing, one blank panel the room fills, and a public record that keeps it with the drawer’s own name on it."
+      statement="Janine Selendy’s topic, in the festival’s own words — and what we propose happens inside the hour she is hosting: three drawings shown whole, nineteen minutes of the room drawing, one blank panel the room fills, and a public record that keeps it with the drawer’s own name on it."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."
@@ -76,6 +80,9 @@ export default function ClimateWorkshop() {
       <style>{`@media print { .no-print { display: none !important; } }`}</style>
 
       <JanineTopicTop />
+
+      {/* Before the agenda, because the agenda is what made her ask the question it answers. */}
+      <WhatIsAsked />
 
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-record-ink/15 pb-3">
         <p className="max-w-[42ch] text-[13px] leading-relaxed lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
@@ -95,9 +102,9 @@ export default function ClimateWorkshop() {
 
       <WorkshopClocks />
 
-      <Section n="01 · The hour" title="Sixty minutes, to the minute">
+      <Section n="01 · The hour" title="Sixty minutes, and who is in the chair">
         <ol className="divide-y divide-record-ink/15 border-y border-record-ink/15">
-          {HOUR.map(([time, head, body], i) => {
+          {HOUR.map(([time, head, body, who], i) => {
             const last = i === HOUR.length - 1;
             return (
               <li
@@ -107,6 +114,7 @@ export default function ClimateWorkshop() {
                 <span className="font-mono text-[11px] font-bold tabular-nums text-record-red lg:text-[13px]">{time}</span>
                 <div>
                   <h3 className="font-mono text-[11.5px] font-black uppercase leading-tight lg:text-[13px]">{head}</h3>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-record-muted lg:text-[10.5px]">{who}</p>
                   <p className="mt-1 text-[12.5px] leading-relaxed text-record-ink/85 lg:text-[14px]">{body}</p>
                 </div>
               </li>
