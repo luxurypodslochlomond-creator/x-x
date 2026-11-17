@@ -184,10 +184,12 @@ export default function ClimateLayout({ children, currentPage }) {
           that is not there. The masthead still pins, so the way through is one thumb away
           from the top of any page. */}
       <div className="relative record-book" style={{ zIndex: 1 }}>
-      {/* On a phone the masthead pins, so the way through is one thumb from the top of any
-          page. On a desk it does not: there is no thumb, the marks are already in the reader's
-          eye, and a strip that follows the page down only covers the thing being read. */}
-      <header className="sticky top-0 z-50 bg-record-paper text-record-ink lg:static lg:z-auto">
+      {/* The masthead pins on every glass. It used to let go at desk width, on the argument
+          that the marks were already in the reader's eye — but a way through that scrolls
+          off the top is a way through you have to go looking for, and deep in a long page
+          there is nothing at all above you saying which record you are standing in. It pins
+          the same everywhere, and every jump down to the record allows for its height. */}
+      <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">

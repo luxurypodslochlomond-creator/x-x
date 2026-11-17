@@ -6,10 +6,17 @@
 // on warm paper, which is the very thing thirty marks in a row must not do. Yellow at
 // this weight would disappear instead, so SubjectMark draws an ink edge under this
 // one accent: the mark keeps the yellow, and the yellow keeps its edge.
-const blue = 'text-record-ocean';
-const green = 'text-record-botanical';
+// One accent, and it is the record's yellow — the foot's yellow, the gathering door's
+// yellow, the topic stamps' yellow. There used to be four (ocean, botanical, ochre, clay)
+// and they were the wrong four: on warm paper they read as blue-grey and dusty brown, so
+// thirty marks in a row looked like a faded chart, and a fifth and sixth colour is a legend
+// nobody asked for. The line of each drawing is the record's red, the light inside it is
+// the record's yellow. That is the whole palette, the same two colours the foot is made of.
+// The names below are kept so the map beneath them still reads as it was written.
 const sun = 'text-[#ffd447]';
-const clay = 'text-record-clay';
+const blue = sun;
+const green = sun;
+const clay = sun;
 const subjectMarkPigments = {
   all: [green, 'M7 8a3 3 0 1 0 6 0 3 3 0 0 0-6 0M17 8a3 3 0 1 0 6 0 3 3 0 0 0-6 0M28 8a3 3 0 1 0 6 0 3 3 0 0 0-6 0'],
   agriculture: [green, 'M20 21C9 21 8 14 8 12c8-1 12 4 12 9ZM20 16c9 0 11-6 11-10-8 0-11 4-11 10Z'],

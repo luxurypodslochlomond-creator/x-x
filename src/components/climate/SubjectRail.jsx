@@ -20,12 +20,12 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
         onClick={onOpenIndex}
         aria-expanded={expanded}
         aria-controls="record-subject-index"
-        className="flex min-h-11 w-full items-center gap-2 border-y border-record-ink/35 py-1 text-left active:bg-record-paper focus-visible:outline-record-ocean"
+        className="flex min-h-11 w-full items-center gap-2 border-y border-record-ink/35 py-1 text-left active:bg-record-paper focus-visible:outline-record-mark"
       >
         <SubjectMark subject={current?.id || selected} size={26} active={!!current} className="shrink-0" />
         <span className="min-w-0 flex-1 text-[14px] leading-snug">{expanded ? 'Subjects' : (current?.label || allLabel)}</span>
         <span className="shrink-0 text-[11px] text-record-muted"><span className="font-mono tabular-nums">{current?.count ?? totalEntries}</span> entries</span>
-        <ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 text-record-ocean ${expanded ? 'rotate-180' : ''}`} />
+        <ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 text-record-mark ${expanded ? 'rotate-180' : ''}`} />
       </button>
 
       {!expanded && strip.length > 0 && (
@@ -40,7 +40,7 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
               type="button"
               onClick={() => onSelect(subject.id)}
               aria-pressed={selected === subject.id}
-              className={`snap-start flex min-h-20 min-w-0 flex-col items-center gap-1 px-1 py-2 text-center active:bg-record-paper ${selected === subject.id ? 'text-record-ocean' : 'text-record-ink'}`}
+              className={`snap-start flex min-h-20 min-w-0 flex-col items-center gap-1 px-1 py-2 text-center active:bg-record-paper ${selected === subject.id ? 'bg-cartoon-sun text-record-ink' : 'text-record-ink'}`}
             >
               <SubjectMark subject={subject.id} size={32} active={selected === subject.id} />
               <span className="line-clamp-2 text-[11px] leading-[1.25]">{subject.label}</span>

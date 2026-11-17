@@ -249,6 +249,18 @@ export default function TogetherChangeClimate() {
   // you had to go and find. One line at the top of the glass, chosen subject above it and
   // the room it opens directly beneath: nothing to scroll for, either way.
   const subjectDeskRef = useRef(null);
+  // ── GOING DOWN THE PAGE, WITH THE MASTHEAD IN THE WAY ──────────────────────────
+  // The record's masthead pins now, on a desk as well as a phone. So every jump down to
+  // the record has to allow for its height: without the offset, the thing you asked for
+  // arrives with its own heading tucked underneath the header, which reads as a click
+  // that did nothing at all.
+  const bringIntoView = (element) => {
+    if (!element) return;
+    const masthead = element.closest('.climate-record')?.querySelector('header');
+    const offset = (masthead?.getBoundingClientRect().bottom || 0) + 6;
+    window.scrollBy({ top: element.getBoundingClientRect().top - offset, behavior: 'smooth' });
+  };
+  const firstSubject = useRef(true);
   const firstRender = useRef(true);
   // Set when the box moved the kind, rather than a filter button. The page must not jump.
   const typedKind = useRef(false);
@@ -316,8 +328,23 @@ export default function TogetherChangeClimate() {
     // filter still moves the kind, but the page stays where your thumb is, so the box
     // never leaves the screen mid-word and the keyboard never shuts under your hand.
     if (typedKind.current) { typedKind.current = false; return; }
-    contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    bringIntoView(contentRef.current);
   }, [selectedType]);
+
+  // ── A SUBJECT CHOSEN ON A DESK ─────────────────────────────────────────────────
+  // Choosing a subject closes the index that was offering it, and that index is tall. So
+  // the book gets shorter under the reader's hands, the browser's own scroll anchoring
+  // holds whatever it happened to be holding — and the reader is left looking at the
+  // crises and the groups with the room they actually asked for somewhere above them.
+  // That is the scroll-up this fixes. The move happens after the index has gone: late
+  // enough that nothing is still closing, early enough that it is still the answer to a
+  // click. On a phone the rail is the same line it was, and it keeps its own behaviour.
+  useEffect(() => {
+    if (firstSubject.current) { firstSubject.current = false; return; }
+    if (!window.matchMedia('(min-width: 1024px)').matches) return;
+    const settle = setTimeout(() => bringIntoView(subjectDeskRef.current), 80);
+    return () => clearTimeout(settle);
+  }, [selectedCategory]);
 
   // React always renders the source copy; the shared translator alone displays another language.
   // Existing hand-written translations are seeded above, keyed by that exact source.
@@ -668,7 +695,7 @@ export default function TogetherChangeClimate() {
                 onSelect={(id) => {
                   setSelectedCategory(id);
                   setShowIndex(false);
-                  requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                  requestAnimationFrame(() => bringIntoView(contentRef.current));
                 }}
               />
               <SubjectIndexSheet
@@ -684,7 +711,7 @@ export default function TogetherChangeClimate() {
                   setShowIndex(false);
                   requestAnimationFrame(() => {
                     document.getElementById('record-subject-toggle')?.focus({ preventScroll: true });
-                    contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    bringIntoView(contentRef.current);
                   });
                 }}
                 onAdd={(subject) => {
@@ -721,7 +748,7 @@ export default function TogetherChangeClimate() {
           depending on the glass it was on. It is the same index everywhere now: the
           drawings, their counts, laid flat because a desk has the room and no thumb is
           doing the aiming. Nothing about the filter has changed. ── */}
-      <div ref={subjectDeskRef} className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6] scroll-mt-2">
+      <div ref={subjectDeskRef} className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6]">
         <div className="border-y border-[#141210]/20">
           {/* One line, the way the phone has one line: the subject you are standing in,
               its folio, and a tab that opens the index. Everything the desk used to lay
@@ -746,11 +773,7 @@ export default function TogetherChangeClimate() {
             <div id="record-subject-index" className="pb-2">
               <button
                 type="button"
-                onClick={() => {
-                  setSelectedCategory('all');
-                  setShowIndex(false);
-                  requestAnimationFrame(() => subjectDeskRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-                }}
+                onClick={() => { setSelectedCategory('all'); setShowIndex(false); }}
                 aria-pressed={selectedCategory === 'all'}
                 className={`flex min-h-11 w-full items-center gap-2 text-left ${selectedCategory === 'all' ? 'text-record-mark' : 'text-[#141210]'}`}
               >
@@ -764,11 +787,7 @@ export default function TogetherChangeClimate() {
                     key={s.id}
                     subject={s}
                     selected={selectedCategory === s.id}
-                    onClick={() => {
-                      setSelectedCategory(s.id);
-                      setShowIndex(false);
-                      requestAnimationFrame(() => subjectDeskRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-                    }}
+                    onClick={() => { setSelectedCategory(s.id); setShowIndex(false); }}
                   />
                 ))}
               </div>
