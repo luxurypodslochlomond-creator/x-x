@@ -35,29 +35,34 @@ export default function RecordFooter() {
             Laurie Anderson · “From the Air” · Big Science, 1982
           </span>
         </p>
-
-        <p
-          className="mt-9 text-record-mark uppercase"
-          style={{ fontFamily: 'var(--font-reading)', fontSize: 13, lineHeight: 1.4, letterSpacing: '0.22em' }}
-        >
-          Made in Scotland from photons
-        </p>
       </div>
 
       {/* ── ONE YELLOW BAR, THE SAME YELLOW AS THE LINE AT THE TOP ────────────────
           The foot used to end on two small grey lines that a reader had to squint at to
           find out who made the thing they had just read. The band is the masthead's own
           yellow, edge to edge, so the page closes the way it opens: same colour, same
-          mono caps, and the names printed at full size instead of whispered. */}
+          mono caps, same tracked sentence — and the names printed at full size instead of
+          whispered, in the record's red.
+
+          Brian, 17 November: "use same font as Laurie Anderson sentence in yellow bar for
+          me you and gill … and put MADE IN SCOTLAND with this same font in the yellow box
+          above me you and gill … and make me you and gill red." So the line about where it
+          was made comes off the paper and into the box, above the three names, in the
+          machine's mono caps — the same voice the borrowed sentence is set in at the top of
+          every page. One band, three lines, and the names carrying the red. */}
       <div className="mt-10 bg-cartoon-sun px-4 py-7 lg:px-10">
         <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-record-ink/65 lg:text-[10px]">
           Platform / Record
         </p>
-        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[12px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:justify-center sm:gap-6 lg:text-[13px]">
+        <p className="mt-3 font-mono text-[10px] uppercase leading-tight tracking-[0.22em] text-record-ink lg:text-[11px]">
+          Made in Scotland from photons
+        </p>
+        <span aria-hidden="true" className="mx-auto mt-4 block h-px w-10 bg-record-ink/30" />
+        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[12px] uppercase leading-tight tracking-[0.18em] text-record-red sm:flex-row sm:justify-center sm:gap-5 lg:text-[13px]">
           <li>Base 1</li>
-          <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-mark sm:block" />
+          <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
           <li>Gillian Brown</li>
-          <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-mark sm:block" />
+          <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
           <li>Brian Hughes</li>
         </ul>
       </div>
