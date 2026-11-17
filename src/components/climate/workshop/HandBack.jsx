@@ -45,7 +45,7 @@ export default function HandBack() {
 
       <div className="px-4 py-5 lg:px-6 lg:py-6">
         <p className="max-w-[58ch] text-[13.5px] leading-relaxed lg:text-[15.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
-          Her hour does not end on a summary. It ends on an empty frame — and then the room gets the hour back,
+          Janine’s hour does not end on a summary. It ends on an empty frame — and then the room gets the hour back,
           and so does the person who has been keeping this record. He answers one question, and only if the room
           wants it answered.
         </p>
@@ -98,7 +98,7 @@ export default function HandBack() {
         </div>
 
         <p className="mt-3 font-mono text-[10.5px] leading-relaxed text-record-muted">
-          If she would rather use those two minutes herself, she takes them from anywhere in the hour. It is her hour.
+          If she would rather use those two minutes herself, she takes them from anywhere in the hour. It is hers to use.
         </p>
       </div>
     </section>

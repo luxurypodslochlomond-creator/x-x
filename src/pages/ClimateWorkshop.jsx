@@ -64,9 +64,9 @@ export default function ClimateWorkshop() {
   return (
     <ClimateRecordShell
       eyebrow="The record · 29 November 2026"
-      marker="03 · Her session · CartoonAFRICA 8th Biennial · Benin City"
+      marker="03 · Janine M. H. Selendy’s session · CartoonAFRICA 8th Biennial · Benin City"
       title={`“${TOPIC}”`}
-      statement="Her topic, in the festival’s own words — and what we propose she does with the hour: five frames, nineteen minutes of drawing, one blank panel the room fills, and a public record that keeps it with the drawer’s own name on it."
+      statement="Janine Selendy’s topic, in the festival’s own words — and what we propose she does with the hour: five frames, nineteen minutes of drawing, one blank panel the room fills, and a public record that keeps it with the drawer’s own name on it."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."
@@ -90,7 +90,7 @@ export default function ClimateWorkshop() {
 
       <p className="mt-4 font-mono text-[11px] leading-relaxed text-record-muted">
         8th CartoonAFRICA International Biennial · 28–30 November 2026 · National Museum, Benin City, Edo State, Nigeria ·
-        hybrid. Her hour is on Sunday 29 November; its exact slot is hers to confirm, and nothing here guesses at it.
+        hybrid. Janine’s hour is on Sunday 29 November; its exact slot is hers to confirm, and nothing here guesses at it.
       </p>
 
       <WorkshopClocks />

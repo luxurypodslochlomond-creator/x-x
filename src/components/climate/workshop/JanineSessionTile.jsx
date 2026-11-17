@@ -35,7 +35,7 @@ export default function JanineSessionTile() {
       <div className="px-4 py-5 lg:grid lg:grid-cols-2 lg:gap-10 lg:px-8 lg:py-7">
         <div>
           <p className="font-mono text-[10px] uppercase tracking-[0.24em]" style={{ color: SUN }}>
-            03 · Her session · the festival’s third feature
+            03 · Janine Selendy’s session · the festival’s third feature
           </p>
 
           <h2 className="mt-2 text-[25px] leading-[1.14] lg:text-[36px]" style={{ fontFamily: 'var(--font-reading)' }}>
@@ -58,7 +58,7 @@ export default function JanineSessionTile() {
             “{FESTIVAL_TITLE}” — a virtual workshop, led by her, on their programme in her own name.
           </Row>
           <Row term="When">
-            Sunday 29 November 2026, hybrid. Her hour’s own slot is hers to confirm and goes here the moment she says
+            Sunday 29 November 2026, hybrid. Her own slot is hers to confirm and goes here the moment she says
             it — the festival’s own times, worked out in your clock, are above this tile.
           </Row>
           <Row term="Already going round, with her invitation">

@@ -21,7 +21,7 @@ export default function JanineTopicTop() {
     <section className="mt-4 bg-record-red text-record-paper">
       <div className="px-4 py-6 lg:px-8 lg:py-10">
         <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-cartoon-sun lg:text-[11px]">
-          Her topic · her hour
+          Janine M. H. Selendy’s topic · her hour
         </p>
 
         <h2
@@ -49,7 +49,7 @@ export default function JanineTopicTop() {
         </ul>
 
         <p className="mt-5 border-t border-record-paper/25 pt-3 font-mono text-[10.5px] leading-relaxed uppercase tracking-[0.14em] text-record-paper/75">
-          Janine M. H. Selendy · Horizon International at Yale · Sunday 29 November · online
+          Horizon International at Yale · Sunday 29 November · the 8th CartoonAFRICA Biennial, Benin City · online
         </p>
       </div>
     </section>

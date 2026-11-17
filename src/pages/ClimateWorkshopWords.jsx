@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Printer } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import SessionBand from '@/components/climate/workshop/SessionBand';
 import { TONGUES } from '@/components/climate/recordFigures';
 
 // ── WHAT GETS SAID, WRITTEN OUT SO NOBODY HAS TO IMPROVISE ─────────────────────
@@ -112,7 +113,9 @@ export default function ClimateWorkshopWords() {
     >
       <style>{`@media print { .no-print { display: none !important; } }`}</style>
 
-      <p className="text-[14px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+      <SessionBand />
+
+      <p className="mt-4 text-[14px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
         Eight minutes is shorter than people think and longer than most speakers can fill honestly. This runs to about six
         at a slow reading pace. The two minutes spare are for looking at the room and letting the last question sit there
         unanswered.
