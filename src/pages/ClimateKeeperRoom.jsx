@@ -1,16 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
-import DecideQueue from '@/components/climate/DecideQueue';
-import ClimateChecking from '@/pages/ClimateChecking';
-import GuestList from '@/components/climate/keeper/GuestList';
+const DecideQueue = lazy(() => import('@/components/climate/DecideQueue'));
+const ClimateChecking = lazy(() => import('@/pages/ClimateChecking'));
+const GuestList = lazy(() => import('@/components/climate/keeper/GuestList'));
 import WorkDock from '@/components/climate/keeper/WorkDock';
 import RoomOverview from '@/components/climate/keeper/RoomOverview';
 import RecordLife from '@/components/climate/keeper/RecordLife';
-import AdminClimateDesk from '@/pages/AdminClimateDesk';
-import DueDiligencePanel from '@/components/climate/DueDiligencePanel';
+const AdminClimateDesk = lazy(() => import('@/pages/AdminClimateDesk'));
+const DueDiligencePanel = lazy(() => import('@/components/climate/DueDiligencePanel'));
 // One set of measures for everything standing inside the room, so tapping between Decide,
 // Check, People and Record no longer swaps the type scale, the width or the padding
 // underneath the same header. See the file for why that was the real fault.
@@ -28,6 +28,7 @@ const FROM_TAB = {
   people: 'people',
   access: 'people',
   counts: 'record',
+  record: 'record',
   sourcing: 'record',
 };
 
@@ -35,12 +36,11 @@ export default function ClimateKeeperRoom() {
   const [state, setState] = useState('checking'); // checking | ready | signed_out | paused | not_on_list | error
   const [who, setWho] = useState({ isKeeper: false, isChecker: false, name: '' });
   const [counts, setCounts] = useState(null);
-  const [params] = useSearchParams();
-  const [view, setView] = useState(FROM_TAB[params.get('tab')] || null);
+  const [params, setParams] = useSearchParams();
+  const view = FROM_TAB[params.get('tab')] || 'decide';
+  const setView = (tab) => setParams({ tab }, { replace: true });
   const [failed, setFailed] = useState(false);
-  // Who actually holds the record's keys, kept from the same roster call that produces the
-  // counts — so the room can name them without a second request.
-  const [keys, setKeys] = useState({ keepers: [], checkers: [] });
+  const [refreshIndex, setRefreshIndex] = useState(0);
 
   const load = useCallback(async () => {
     setState('checking');
@@ -65,29 +65,16 @@ export default function ClimateKeeperRoom() {
   // What is waiting, asked once when the page opens and again after anything is answered —
   // so the line at the top is a fact about now, never a number carried over from before.
   const count = useCallback(async () => {
-    const [q, r, c] = await Promise.allSettled([
-      who.isKeeper
-        ? base44.functions.invoke('climateKeeperRoom', { action: 'queue' })
-        : Promise.resolve(null),
-      who.isKeeper
-        ? base44.functions.invoke('climateAccessChange', { action: 'roster' })
-        : Promise.resolve(null),
-      base44.functions.invoke('checkerQueue', {}),
-    ]);
-    const roster = r.status === 'fulfilled' ? r.value?.data : null;
-    // A count that failed and a count that came back empty are not the same answer. Before
-    // this, a dropped request was stored as a zero — so a keeper was told she was finished by
-    // a page that had not managed to ask the question.
-    setFailed(
-      (who.isKeeper && (q.status === 'rejected' || r.status === 'rejected')) || c.status === 'rejected'
-    );
-    setCounts({
-      decide: q.status === 'fulfilled' ? (q.value?.data?.waiting || []).length : 0,
-      check: c.status === 'fulfilled' ? (c.value?.data?.entries || []).length : 0,
-      people: roster?.waiting?.length || 0,
-    });
-    setKeys({ keepers: roster?.keepers || [], checkers: roster?.checkers || [] });
-  }, [who]);
+    if (!who.isKeeper) return;
+    try {
+      const { data } = await base44.functions.invoke('climateKeeperRoom', { action: 'summary' });
+      if (!data || data.error) throw new Error(data?.error || 'Count unavailable');
+      setCounts(data);
+      setFailed(false);
+    } catch {
+      setFailed(true);
+    }
+  }, [who.isKeeper]);
 
   useEffect(() => {
     if (state === 'ready') count();
@@ -96,11 +83,8 @@ export default function ClimateKeeperRoom() {
   const n = counts || {};
   // The names, in the order the record holds them. A keeper should be able to see who she is
   // keeping the record with before she decides anything.
-  const keeperNames = keys.keepers
-    .filter((k) => k.active)
-    .map((k) => k.name || k.email)
-    .join(' · ');
-  const checkingNow = keys.checkers.filter((c) => c.active).length;
+  const keeperNames = (n.keeper_names || []).join(' · ');
+  const checkingNow = n.checkers || 0;
   const yes = n.decide || 0;
   const read = n.check || 0;
   const asks = n.people || 0;
@@ -110,21 +94,23 @@ export default function ClimateKeeperRoom() {
   // than its own place in the total.
   const total = who.isKeeper ? yes + asks : read;
 
-  const headline = failed
+  const headline = !who.isKeeper
+    ? 'Open a source and leave your note.'
+    : failed
     ? 'The record could not be counted.'
     : !counts
     ? 'Looking at the record…'
     : total === 0
-    ? 'Nothing waiting.'
+    ? 'No decisions or invitations waiting.'
     : total === 1
     ? 'One thing waiting.'
     : `${total} things waiting.`;
 
   // Where the room opens: the work actually in front of her, never a guess. A checker's room
   // has the one door, so she is never shown a mark she cannot open.
-  const activeView = !who.isKeeper
-    ? 'check'
-    : view || (yes > 0 ? 'decide' : asks > 0 ? 'people' : 'check');
+  // Never switch jobs underneath someone when a background count arrives.
+  const activeView = who.isKeeper ? view : 'check';
+  const refresh = () => { setRefreshIndex((value) => value + 1); count(); };
 
   return (
     <ClimateRecordShell
@@ -187,17 +173,18 @@ export default function ClimateKeeperRoom() {
             who={who}
             headline={headline}
             total={total}
-            counted={Boolean(counts)}
+            counted={!who.isKeeper || Boolean(counts)}
+            summary={counts}
             failed={failed}
             keeperNames={keeperNames}
             checkingNow={checkingNow}
-            onRefresh={count}
+            onRefresh={refresh}
             onInvite={activeView !== 'people' ? () => setView('people') : undefined}
           />
 
           {/* The work's own index, directly above the work on every screen. */}
           <WorkDock
-            counts={{ decide: yes, check: read, people: asks }}
+            counts={counts ? { decide: yes, check: null, people: asks } : null}
             keeper={who.isKeeper}
             view={activeView}
             onView={setView}
@@ -215,7 +202,8 @@ export default function ClimateKeeperRoom() {
 
           {/* One job at a time. Each room owns its own empty state, so nothing is ever shown
               as finished by the page that chose not to draw it. */}
-          <div className="room-work-panel mt-3">
+          <div className="room-work-panel mt-3" key={refreshIndex}>
+            <Suspense fallback={<p role="status" className="py-6 text-sm text-record-muted">Opening this part of the console…</p>}>
             {activeView === 'decide' && who.isKeeper && <DecideQueue plain onChange={count} />}
             {activeView === 'check' && <ClimateChecking plain onChange={count} />}
             {activeView === 'people' && who.isKeeper && <GuestList onChange={count} />}
@@ -228,6 +216,7 @@ export default function ClimateKeeperRoom() {
                 <DueDiligencePanel />
               </div>
             )}
+            </Suspense>
           </div>
 
           {/* The other half of the room: not what is left to do, but what the record has

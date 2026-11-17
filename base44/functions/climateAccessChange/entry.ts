@@ -1,6 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { requireKeeper } from '../../shared/checkerAccess.ts';
 import { sendCheckerInvitation } from '../../shared/checkerInvitation.ts';
+import { waitUntil } from 'base44:runtime';
 
 // ── WHO MAY COME IN, AND NEVER BY ONE HAND ────────────────────────────────────
 // The guest list is the most dangerous thing on this record: it decides who can open a
@@ -161,7 +162,11 @@ async function applyChange(base44, change, who, basis) {
       added_by: change.requested_by || by,
     });
 
-    const delivery = await sendCheckerInvitation(base44, created, { notifyKeepers: true });
+    const delivery = await sendCheckerInvitation(base44, created);
+    waitUntil(base44.functions.invoke('climateCheckerNotice', {
+      email, name: created.name, row_id: created.id, state: 'invited',
+      person_letter: false, notify_keepers: true,
+    }).catch((error) => console.error('Keeper copy failed:', error?.message)));
     await logIt(base44, {
       rowId: created.id,
       title: `${change.target_name || email} · ${change.target_is_keeper ? 'keeper' : 'checker'}`,
@@ -235,11 +240,16 @@ export default async function (req) {
 
     // ── WHAT IS ON THE LIST, AND WHAT IS WAITING ON A SECOND KEY ────────────────
     if (action === 'roster') {
-      const rows = await rosterOf(base44);
-      const pending = await base44.asServiceRole.entities[CHANGES].filter(
-        { status: 'waiting' },
-        { sort: 'created_date', limit: 50 }
-      );
+      // The list and access requests are essential. Checking statistics are not:
+      // their failure must not disable the invitation form.
+      const [rows, pending, checks, done] = await Promise.all([
+        rosterOf(base44),
+        base44.asServiceRole.entities[CHANGES].filter({ status: 'waiting' }, { sort: 'created_date', limit: 50 }),
+        base44.asServiceRole.entities.ClimateCheck.aggregate({ groupBy: 'checker_email', max: ['created_date'] })
+          .catch((error) => { console.error('Checking statistics unavailable:', error.message); return null; }),
+        base44.asServiceRole.entities[CHANGES].filter({ status: 'applied', change: 'add' }, { sort: '-created_date', limit: 100 })
+          .catch((error) => { console.error('Approval history unavailable:', error.message); return null; }),
+      ]);
       const waiting = (pending?.items || pending || []).map((w) => ({
         id: w.id,
         change: w.change,
@@ -256,10 +266,7 @@ export default async function (req) {
       const activeKeepers = rows.filter((r) => r.active && r.is_keeper).length;
 
       const evidence = new Map();
-      const checks = await base44.asServiceRole.entities.ClimateCheck.aggregate({
-        groupBy: 'checker_email', max: ['created_date'],
-      });
-      for (const c of checks.rows) evidence.set(lower(c.checker_email), { notes: c.count, last: c.max_created_date || '' });
+      for (const c of checks?.rows || []) evidence.set(lower(c.checker_email), { notes: c.count, last: c.max_created_date || '' });
 
       // The list read back as addresses-to-names, so a line can say whose word put it there
       // without ever printing one keeper's address to another.
@@ -270,19 +277,11 @@ export default async function (req) {
       // access changes: who asked, and who agreed. Read back here as names, never addresses,
       // so a keeper sees "asked by Brian, agreed by Janine" and not a line of email.
       const agreed = new Map();
-      try {
-        const done = await base44.asServiceRole.entities[CHANGES].filter(
-          { status: 'applied', change: 'add' },
-          { sort: '-created_date', limit: 100 }
-        );
-        (done?.items || done || []).forEach((c) => {
-          const key = lower(c.target_email);
-          const hand = c.confirmed_by || c.requested_by || '';
-          if (key && hand && !agreed.has(key)) agreed.set(key, names.get(lower(hand)) || '');
-        });
-      } catch (e) {
-        console.error('climateAccessChange: could not read who agreed', e?.message);
-      }
+      (done?.items || []).forEach((change) => {
+        const key = lower(change.target_email);
+        const hand = change.confirmed_by || change.requested_by || '';
+        if (key && hand && !agreed.has(key)) agreed.set(key, names.get(lower(hand)) || '');
+      });
 
       return Response.json({
         me,
@@ -508,8 +507,7 @@ export default async function (req) {
       if (!row) return Response.json({ error: 'That person is no longer on the list.' }, { status: 404 });
 
       if (!row.active) return Response.json({ error: 'Restore access before sending an invitation.' }, { status: 409 });
-      const retryOnly = Boolean(row.sign_in_error || row.notice_error || (!row.joined_at && !row.sign_in_sent_at) || !row.notice_sent_at);
-      const delivery = await sendCheckerInvitation(base44, row, { retryOnly });
+      const delivery = await sendCheckerInvitation(base44, row);
       return Response.json({ ...delivery, sent: delivery.complete, row_id: row.id });
     }
 

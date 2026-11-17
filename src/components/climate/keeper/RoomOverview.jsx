@@ -1,8 +1,9 @@
 import React from 'react';
-import { KeyRound, RefreshCw } from 'lucide-react';
+import { MarkKey, MarkGate } from '@/components/climate/keeper/KeeperMarks';
+import { MarkAgain } from '@/components/climate/keeper/TrailMarks';
 
-export default function RoomOverview({ who, headline, total, counted, failed, keeperNames, checkingNow, onRefresh, onInvite }) {
-  const status = failed ? 'Count unavailable' : !counted ? 'Counting…' : total === 0 ? 'All clear' : `${total} waiting`;
+export default function RoomOverview({ who, headline, total, counted, failed, summary, keeperNames, checkingNow, onRefresh, onInvite }) {
+  const status = !who.isKeeper ? 'Checking desk' : failed ? 'Count unavailable' : !counted ? 'Counting…' : total === 0 ? 'Decisions clear' : `${total} need attention`;
   // What the number means, said in the markup so the colour can follow it: waiting carries the
   // record's signal red, a clear room stays quiet, and a count that failed is neither.
   const state = failed ? 'failed' : !counted ? 'counting' : total === 0 ? 'clear' : 'waiting';
@@ -18,7 +19,7 @@ export default function RoomOverview({ who, headline, total, counted, failed, ke
         aria-label="Refresh waiting work"
         className="room-refresh col-start-2 row-start-1 flex min-h-[32px] items-center gap-1.5 text-[12px] text-record-muted transition-colors active:text-record-red"
       >
-        <RefreshCw className="h-3 w-3" /><span className="hidden lg:inline">Refresh</span>
+        <MarkAgain size={18} /><span className="hidden lg:inline">Refresh</span>
       </button>
       <h1 data-state={state} className="room-title col-span-2 col-start-1 row-start-2 mt-1 text-[22px] text-record-ink">
         <span className="hidden lg:inline">{headline}</span>
@@ -26,11 +27,12 @@ export default function RoomOverview({ who, headline, total, counted, failed, ke
       </h1>
       {who.isKeeper && (
         <p className="room-keepers col-span-2 col-start-1 row-start-3 mt-1 flex items-start gap-1.5 text-[12px] leading-snug text-record-muted" aria-label="Keepers holding the keys">
-          <KeyRound className="mt-[3px] h-3.5 w-3.5 shrink-0 text-record-red" strokeWidth={2.2} />
-          <span><span className="hidden lg:inline">Keys held by </span>{keeperNames || who.name || 'you'}{checkingNow > 0 && <span> · {checkingNow} checking</span>}</span>
+          <MarkKey size={18} className="shrink-0 text-record-red" />
+          <span><span className="hidden lg:inline">Keys held by </span>{keeperNames || who.name || 'you'}{checkingNow > 0 && <span> · {checkingNow} active checkers</span>}</span>
         </p>
       )}
-      {who.isKeeper && onInvite && <button type="button" onClick={onInvite} className="col-span-2 row-start-4 mt-3 inline-flex min-h-11 w-fit items-center rounded bg-record-red px-4 py-2 text-sm font-semibold text-record-paper hover:bg-record-red/90">Invite a checker</button>}
+      {who.isKeeper && summary && !failed && <div role="status" className="room-score col-span-full mt-2 text-sm leading-relaxed text-record-muted">{summary.decide} awaiting decisions · {summary.approvals} access approvals · {summary.invitations} invitations to check<span className="block text-xs">Updated {new Date(summary.counted_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}. Checking sources is a separate job, not a second count of these decisions.</span></div>}
+      {who.isKeeper && onInvite && <button type="button" onClick={onInvite} className="col-span-full mt-3 inline-flex min-h-11 w-fit items-center gap-2 rounded bg-record-red px-4 py-2 text-sm font-semibold text-record-paper hover:bg-record-red/90"><MarkGate size={21} />Invite a checker</button>}
     </div>
   );
 }

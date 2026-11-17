@@ -163,7 +163,8 @@
   #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-mark { color: rgb(var(--record-mark)); }
   #root .keeper-room .room-work-nav .room-nav-word { font-family: var(--font-body); font-size: 12px; line-height: 1.25; font-weight: 500; color: rgb(var(--record-muted)) !important; }
   #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-word { font-weight: 700; color: rgb(var(--record-ink)) !important; }
-  #root .keeper-room .room-work-nav .room-nav-detail { display: none; }
+  #root .keeper-room .room-work-nav .room-nav-detail { display: block; min-height: 12px; font: 500 10px/1.2 var(--font-body); text-transform: none; }
+  #root .keeper-room .room-score { grid-row: 3; }
   #root .keeper-room .room-work-nav .room-nav-dot { display: block; position: absolute; top: 7px; right: calc(50% - 18px); width: 4px; height: 4px; border-radius: 50%; background: rgb(var(--record-mark)); }
   #root .keeper-room .room-work-nav .room-nav-indicator { top: auto; bottom: -1px; }
   #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-indicator { background: rgb(var(--record-mark)); }
@@ -207,6 +208,6 @@
   #root .keeper-room .room-check-answers { gap: 8px; margin-top: 4px; }
   #root .keeper-room .room-check-answers button { flex-direction: row; min-height: 44px; border-radius: 3px; font: 500 13px/1.3 var(--font-body); color: rgb(var(--record-ink)) !important; border-color: rgb(var(--record-ink) / .28) !important; background: transparent !important; }
   #root .keeper-room .room-check-answers button[aria-pressed="true"] { color: rgb(var(--record-paper)) !important; background: rgb(var(--record-ink)) !important; border-color: rgb(var(--record-ink)) !important; }
-  #root .keeper-room .room-check-answers svg { display: none; }
+  #root .keeper-room .room-check-answers svg { display: block; width: 17px; height: 17px; }
   #root .keeper-room .room-check-save { width: auto; display: block; margin-left: auto; padding-inline: 20px; border-radius: 3px; }
 }

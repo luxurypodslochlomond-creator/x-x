@@ -5,7 +5,7 @@ import GuestInvitationStatus from '@/components/climate/keeper/GuestInvitationSt
 import CopyJoiningLink from '@/components/climate/keeper/CopyJoiningLink';
 
 export default function GuestPerson({ row, busy, pending, onInvite, onChange, message, failed }) {
-  const retry = Boolean(row.sign_in_error || row.notice_error || (!row.joined_at && !row.sign_in_sent_at) || !row.notice_sent_at);
+  const retry = !row.joined_at && Boolean(row.sign_in_error || !row.sign_in_sent_at);
   return (
     <article className="room-person mb-3 border border-record-ink/15 border-l-4 border-l-record-red bg-record-paper p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -18,7 +18,7 @@ export default function GuestPerson({ row, busy, pending, onInvite, onChange, me
       {row.notes > 0 && <div className="mt-1 text-xs text-record-muted">{row.notes} signed {row.notes === 1 ? 'note' : 'notes'}</div>}
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-record-ink/10 pt-2">
         {row.active && <button type="button" disabled={busy} onClick={() => onInvite(row)} className="inline-flex min-h-11 items-center gap-1.5 rounded bg-record-red px-3 py-2 text-sm font-semibold text-record-paper disabled:opacity-50">
-          {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <MarkAgain size={16} />}{pending ? 'Working…' : retry ? 'Send invite' : 'Resend invite'}
+          {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <MarkAgain size={16} />}{pending ? 'Requesting email…' : row.joined_at ? 'Email reminder' : retry ? 'Send invite' : 'Resend invite'}
         </button>}
         <button type="button" disabled={busy} onClick={() => onChange({ change: row.active ? 'pause' : 'restore', row_id: row.id })} className="inline-flex min-h-11 items-center gap-1.5 text-sm text-record-ink disabled:opacity-50">
           {row.active ? <MarkHold size={16} /> : <MarkStep size={16} />}{row.active ? 'Pause access' : 'Restore access'}

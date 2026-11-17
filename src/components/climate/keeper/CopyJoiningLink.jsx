@@ -6,7 +6,7 @@ export default function CopyJoiningLink({ keeper }) {
   const [state, setState] = useState('');
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(recordAddress(keeper ? '/ClimateKeeperRoom' : '/ClimateChecking'));
+      await navigator.clipboard.writeText(recordAddress('/ClimateKeeperRoom'));
       setState('copied');
     } catch {
       setState('failed');
@@ -18,7 +18,7 @@ export default function CopyJoiningLink({ keeper }) {
         {state === 'copied' ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}{state === 'copied' ? 'Joining link copied' : 'Copy joining link'}
       </button>
       {state === 'copied' && <div role="status" className="text-xs text-record-muted">They sign in with the email on this list. The link alone gives nobody access.</div>}
-      {state === 'failed' && <div role="alert" className="text-xs text-record-red">Copying was blocked. The joining address is <span className="break-all select-all">{recordAddress(keeper ? '/ClimateKeeperRoom' : '/ClimateChecking')}</span></div>}
+      {state === 'failed' && <div role="alert" className="text-xs text-record-red">Copying was blocked. The joining address is <span className="break-all select-all">{recordAddress('/ClimateKeeperRoom')}</span></div>}
     </div>
   );
 }

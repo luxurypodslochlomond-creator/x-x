@@ -210,7 +210,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
           <p className="text-[12.5px] text-record-red border-l-4 border-l-record-red pl-3 mb-5 leading-snug" style={{ fontFamily: 'var(--font-reading)' }}>{error}</p>
         )}
 
-        {!entries.length && (
+        {!error && !entries.length && (
           <div className="border-2 border-record-ink/15 bg-record-bone p-6">
             <p className="text-sm text-record-ink/80 leading-relaxed">
               Nothing is waiting. Everything that has come in has been looked at. The next entry to arrive will appear here.

@@ -45,7 +45,7 @@ const STEPS = [
   {
     n: '2',
     title: 'Check a source',
-    line: `Open ${RECORD}/ClimateChecking. Follow an entry to its source and leave a signed note: it holds up, it does not, or you cannot tell. All three help.`, 
+    line: `Open ${RECORD}/ClimateKeeperRoom. Follow an entry to its source and leave a signed note: it holds up, it does not, or you cannot tell. All three help.`, 
   },
   {
     n: '3',
@@ -91,7 +91,7 @@ export default function InviteSteps() {
     <details className="room-details border-t border-[#141210]/20 pt-3 mb-6">
       <summary>Optional personal note & invitation cards</summary>
       <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-3" style={reading}>
-        The invite button above sends the emails. This is an optional note to copy into your own message.
+        The invite button above requests one invitation email and records the outcome. This is only an optional personal note.
       </p>
 
       <ol className="space-y-2 mb-3">

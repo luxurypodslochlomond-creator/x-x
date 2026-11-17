@@ -442,11 +442,11 @@ const AuthenticatedApp = () => {
           with someone else's words on it. A pair of eyes was being handed the keys'
           furniture to stand in. So the queue has its own address again: the record's
           masthead, the record's foot, and nothing on it but the work they agreed to do. */}
-      <Route path="/ClimateChecking" element={<ClimateLayout currentPage="ClimateChecking"><ClimateCheckingPage /></ClimateLayout>} />
+      <Route path="/ClimateChecking" element={<Navigate to="/ClimateKeeperRoom?tab=check" replace />} />
       {/* The guest list is the record's own, so it opens to the record's own keys. Behind the
           app's admin door, the second keeper who has to agree to every access change could
           never reach the page that asks them — and a two-key rule nobody can turn is a lock. */}
-      <Route path="/AdminClimateCheckers" element={<ClimateLayout currentPage="AdminClimateCheckers"><KeeperKey><AdminClimateCheckersPage /></KeeperKey></ClimateLayout>} />
+      <Route path="/AdminClimateCheckers" element={<Navigate to="/ClimateKeeperRoom?tab=people" replace />} />
       {/* The desk is the record's own desk, so it opens to the record's own keys. Behind the
           building's admin door, a keeper invited to hold them was stopped on the one page built
           for her and told "Admins only". KeeperKey asks the record instead. */}

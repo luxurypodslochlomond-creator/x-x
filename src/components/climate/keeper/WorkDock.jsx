@@ -6,7 +6,7 @@ import { MarkStamp, MarkEye, MarkGate, MarkLedger } from './KeeperMarks';
 const TABS = [
   { id: 'decide', Mark: MarkStamp, word: 'Decide', unit: 'to decide', keeperOnly: true },
   { id: 'check', Mark: MarkEye, word: 'Check', unit: 'to read' },
-  { id: 'people', Mark: MarkGate, word: 'People', unit: 'asking in', keeperOnly: true },
+  { id: 'people', Mark: MarkGate, word: 'People', unit: 'need attention', keeperOnly: true },
   { id: 'record', Mark: MarkLedger, word: 'Record', unit: '', keeperOnly: true },
 ];
 

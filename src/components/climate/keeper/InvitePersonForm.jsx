@@ -9,7 +9,7 @@ export default function InvitePersonForm({ kind, setKind, email, setEmail, name,
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }} className="room-invite-form mb-6 border-t-4 border-record-red bg-record-bone p-4 sm:p-5" aria-labelledby="invite-person-title" aria-busy={busy}>
       <h2 id="invite-person-title" className="room-invite-heading text-xl font-bold text-record-ink">Invite someone</h2>
-      <p className="mt-1 text-sm text-record-muted">Their place, their sign-in email and a welcome. One step.</p>
+      <p className="mt-1 text-sm text-record-muted">Save their place and request one invitation email, including sign-in. Its outcome stays beside their name.</p>
       <fieldset disabled={busy || !ready} className="mt-4 space-y-4 disabled:opacity-60">
         <legend className="sr-only">Invitation details</legend>
         <div className="grid grid-cols-2 gap-2" role="group" aria-label="Their role on the record">
@@ -30,7 +30,7 @@ export default function InvitePersonForm({ kind, setKind, email, setEmail, name,
           <input id="invite-note" maxLength={300} value={note} onChange={(e) => setNote(e.target.value)} className={field} />
         </label>}
         <button type="submit" className="flex min-h-12 w-full items-center justify-center gap-2 rounded bg-record-red px-4 py-3 font-bold text-record-paper hover:bg-record-red/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red">
-          {busy && <Loader2 className="h-4 w-4 animate-spin" />}{busy ? 'Working…' : needsApproval ? 'Ask another keeper to approve' : keeper ? 'Send keeper invite' : 'Send checker invite'}
+          {busy && <Loader2 className="h-4 w-4 animate-spin" />}{busy ? 'Saving access and requesting email…' : needsApproval ? 'Ask another keeper to approve' : keeper ? 'Send keeper invite' : 'Send checker invite'}
         </button>
       </fieldset>
       {message && <div role={failed ? 'alert' : 'status'} aria-live="polite" className={`mt-4 border-l-2 pl-3 text-sm leading-relaxed ${failed ? 'border-record-red text-record-red' : 'border-record-botanical text-record-ink'}`}>{message}</div>}

@@ -118,9 +118,34 @@ export default async function (req) {
     const who = await requireKeeper(base44);
     if (who.error) return Response.json({ error: who.error }, { status: who.status });
 
+    if (action === 'summary') {
+      // Count on the server. Never download two full queues just to draw badges.
+      const numbers = await Promise.all([
+        ...QUEUE.map((type) => base44.asServiceRole.entities[KIND[type].entity].count({ status: 'draft' })),
+        base44.asServiceRole.entities.ClimateAccessChange.count({ status: 'waiting' }),
+      ]);
+      const empty = [{ $exists: false }, '', null];
+      const missingInvites = empty.flatMap((joined_at) => [
+        ...empty.map((sign_in_sent_at) => ({ joined_at, sign_in_sent_at })),
+        { joined_at, sign_in_error: { $regex: '.+' } },
+      ]);
+      const [keeperPage, checkers, invitations] = await Promise.all([
+        base44.asServiceRole.entities.ClimateChecker.filter({ active: true, is_keeper: true }, { sort: 'created_date', limit: 100 }),
+        base44.asServiceRole.entities.ClimateChecker.count({ active: true, is_keeper: false }),
+        base44.asServiceRole.entities.ClimateChecker.count({ active: true, $or: missingInvites }),
+      ]);
+      const approvals = numbers[QUEUE.length];
+      return Response.json({
+        decide: numbers.slice(0, QUEUE.length).reduce((sum, value) => sum + value, 0),
+        people: approvals + invitations, approvals, invitations, checkers,
+        keeper_names: keeperPage.items.map((row) => row.name || row.email),
+        counted_at: new Date().toISOString(),
+      });
+    }
+
     if (action === 'queue') {
       const keys = QUEUE;
-      const results = await Promise.allSettled(
+      const results = await Promise.all(
         keys.map((k) =>
           base44.asServiceRole.entities[KIND[k].entity].filter(
             { status: 'draft' },
@@ -130,9 +155,7 @@ export default async function (req) {
       );
       const waiting = [];
       keys.forEach((k, i) => {
-        const settled = results[i];
-        if (settled.status !== 'fulfilled') return;
-        const rows = settled.value?.items || settled.value || [];
+        const rows = results[i]?.items || [];
         rows.forEach((r) => waiting.push(shape(k, r)));
       });
       waiting.sort((a, b) => String(a.when).localeCompare(String(b.when)));

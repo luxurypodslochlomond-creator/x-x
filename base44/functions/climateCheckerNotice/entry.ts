@@ -115,7 +115,7 @@ export default async function (req) {
     // is the moment a person works out which door is theirs, and an empty queue teaches them
     // nothing about the door they came to add an initiative through. Once they are in, the
     // letters about their access point at the queue, which by then is their own work.
-    const recordUrl = `${RECORD_HOME}/${isKeeper ? 'ClimateKeeperRoom' : 'ClimateChecking'}`;
+    const recordUrl = `${RECORD_HOME}/ClimateKeeperRoom`;
     // ── A PERSON VOUCHED, AND THE LETTER SAYS WHICH ONE ────────────────────────────
     // This letter used to arrive saying only that "you have a place on the record", as though
     // the record had decided it by itself. It had not. Somebody looked at a person's work,
@@ -169,6 +169,8 @@ export default async function (req) {
     return Response.json({ sent, state, keeper_notification_queued: Boolean(notify_keepers) });
   } catch (error) {
     console.error('climateCheckerNotice failed', error?.message);
-    return Response.json({ error: error?.message || 'That did not send' }, { status: 500 });
+    const message = error?.response?.data?.error || error?.response?.data?.detail || error?.message || 'That did not send';
+    const limited = /limit|too many|rate.?limit/i.test(String(message));
+    return Response.json({ sent: false, error: String(message), ...(limited ? { reason: 'email_limit', retry_advice: 'Wait until the email service allows another send. Do not retry repeatedly.' } : {}) }, { status: limited ? 429 : 500 });
   }
 }

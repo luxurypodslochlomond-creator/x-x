@@ -34,6 +34,7 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 //   the two maps — a mapping library and a hundred tiles are the most expensive thing on
 //   the record, and prefetching page chunks underneath them is what made them stutter.
 const WORKING_PAGES = [
+  'ClimateKeeperRoom',
   'AdminClimateDesk',
   'AdminClimateCheckers',
   'AdminClimateReview',

@@ -1,3 +1,5 @@
+import { waitUntil } from 'base44:runtime';
+
 // Who may come into the record, and what they may do. One answer, used by every function
 // that asks, because two copies of a rule like this drift apart and the looser one always
 // wins in the end.
@@ -27,7 +29,7 @@ export async function resolveChecker(base44) {
   // polite about a decision it made — which reads, to the person, as if their work was
   // nothing. So the two answers are different, and the paused one says so.
   const rows = await base44.asServiceRole.entities.ClimateChecker.filter({
-    email: user.email,
+    email: String(user.email || '').trim().toLowerCase(),
   });
   const list = rows?.items || rows || [];
   const line = list[0] || null;
@@ -39,10 +41,10 @@ export async function resolveChecker(base44) {
   // time the person's OWN sign-in is recognised against it — never because a letter was
   // sent, and never because a letter may have been opened, since a letter cannot be read
   // back. Once, only, and it is allowed to fail without keeping anybody out of the room.
-  if (line && !line.joined_at) {
-    base44.asServiceRole.entities.ClimateChecker
+  if (line && (line.active || isAdmin) && !line.joined_at) {
+    waitUntil(base44.asServiceRole.entities.ClimateChecker
       .update(line.id, { joined_at: new Date().toISOString() })
-      .catch(() => {});
+      .catch((error) => console.error('Could not record first sign-in:', error.message)));
   }
 
   if (line && !line.active && !isAdmin) {

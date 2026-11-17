@@ -74,7 +74,7 @@ export default async function (req) {
         base44.asServiceRole.entities[k.entity].filter({ status: 'published' }, { sort: 'created_date', limit: 40 })
       );
     });
-    const results = await Promise.allSettled(reads);
+    const results = await Promise.all(reads);
 
     const waiting = [];
     const onRecord = [];
@@ -83,8 +83,7 @@ export default async function (req) {
     // something already standing there. It was invisible before: two very different jobs
     // printed the same on the card.
     const collect = (settled, type, into, state) => {
-      if (settled.status !== 'fulfilled') return;
-      const rows = settled.value?.items || settled.value || [];
+      const rows = settled?.items || [];
       rows.forEach((r) => {
         into.push({ type, id: r.id, created_date: r.created_date, state, ...shape(type, r) });
       });
