@@ -7,12 +7,13 @@ import { Link } from 'react-router-dom';
 // stamped at the bottom of the page, and it made the platform a co-author with a
 // plus sign, which it is not.
 //
-// So the order is turned round and the voices are put where they belong. The people
-// who keep the record come first, said plainly in the record's own reading voice,
-// because they are the ones accountable for what stands here. The line under them is
-// the record's own way of saying where its pages were made — kept short and kept true:
-// the how is said in full on the method page, so a reader who wants to know what
-// drafted these lines can find it, and the foot does not have to repeat it. The registration facts — the CIC, the address
+// So the foot opens with the line the whole record is built on, borrowed and said out
+// loud: Laurie Anderson, "From the Air", Big Science, 1982 — this is the time, and this
+// is the record of the time. Her name, the song and the year are on it, because a
+// borrowed sentence with nobody's name on it is a borrowed sentence no reader can check.
+// Under that, where its pages were made — short, and true: the how is said in full on
+// the method page, so a reader who wants to know what drafted these lines can find it,
+// and the foot does not have to repeat it. The registration facts — the CIC, the address
 // you can write to — keep the mono, because a registry number is a fact and facts
 // are what that voice is for.
 //
@@ -22,7 +23,7 @@ import { Link } from 'react-router-dom';
 
 export default function RecordFooter() {
   return (
-    <footer className="mt-6 border-t border-record-ink/20 bg-record-paper px-4 py-14 text-center font-body text-record-ink lg:px-10">
+    <footer className="mt-6 border-t-4 border-cartoon-sun bg-record-paper px-4 py-14 text-center font-body text-record-ink lg:px-10">
       <Link
         to="/XEqualsX"
         aria-label="x = x — what the mark means, and what it does not"
@@ -32,23 +33,23 @@ export default function RecordFooter() {
         x = x
       </Link>
 
-      <p
-        className="mt-7 mx-auto max-w-[34ch] text-record-ink"
-        style={{ fontFamily: 'var(--font-reading)', fontSize: 20, lineHeight: 1.5 }}
+      <blockquote
+        cite="Laurie Anderson, “From the Air”, Big Science, 1982"
+        className="mt-9 mx-auto max-w-[30ch] text-record-ink"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: 21, lineHeight: 1.5, fontStyle: 'italic' }}
       >
-        A public service for the world. Free to read, no account, nothing to sign.
+        “This is the time. And this is the record of the time.”
+      </blockquote>
+      <p className="mt-5">
+        <span className="inline-block bg-cartoon-sun px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
+          Laurie Anderson · “From the Air” · Big Science, 1982
+        </span>
       </p>
 
-      <span aria-hidden="true" className="mx-auto mt-9 block h-px w-16 bg-record-ink/25" />
+      <span aria-hidden="true" className="mx-auto mt-10 block h-px w-16 bg-record-ink/25" />
 
       <p
-        className="mt-9 mx-auto max-w-[46ch] text-record-ink"
-        style={{ fontFamily: 'var(--font-reading)', fontSize: 17, lineHeight: 1.65 }}
-      >
-        Kept by Brian Hughes and Gillian Brown.
-      </p>
-      <p
-        className="mt-5 text-record-mark uppercase"
+        className="mt-9 text-record-mark uppercase"
         style={{ fontFamily: 'var(--font-reading)', fontSize: 13, lineHeight: 1.4, letterSpacing: '0.22em' }}
       >
         Made in Scotland from photons
