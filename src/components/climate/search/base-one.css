@@ -1,35 +1,28 @@
-/* ── BASE 1, DRAWN RATHER THAN SET ───────────────────────────────────────────────
-   The index began as a printed plate: ink ground, a yellow band, the mark's red. That
-   was right and it is kept. But Brian, 17 November, standing on his phone in front of
-   it: "base 1 … still feels linear to me bro and not alive … need coolasfuck new
-   contemporary art Joan Miró style".
+/* ── BASE 1, PRINTED IN THE RECORD'S OWN INK ─────────────────────────────────────
+   Brian, 17 November, twice. First: "base 1 … this could be proper coolasfuck art …
+   Joan Miró style." I did that, and he came back with the correction that matters:
+   "need to look more like us haha and Beadie etc."
 
-   He is right about the fault, and it is a compositional one rather than a colour one.
-   Everything on the room was the same width, left-aligned, stacked: plate, band, chips,
-   cards. A column. Miró never made a column in his life — his constellations are things
-   of different sizes floating at different heights, joined by a hairline that does not
-   go anywhere, with a ladder in the corner in case the eye wants out.
+   He is right, and the reason is worth keeping. Miró was a borrowed vocabulary — a good
+   one, but somebody else's. This record already has a hand of its own and it is not a
+   gallery's: warm paper, ink, the mark's red, one signal yellow, everything set in mono
+   caps and printed to the edge of the sheet. A page of this record should look like it
+   came off the same press as the masthead and the foot, not like a poster that wandered
+   in from a museum.
 
-   So the rules here are his: flat colour only (no gradients, no glass, no shadow that
-   pretends to be light), one hairline linking things that are not equal, forms cut by
-   hand rather than set square, and asymmetry held still by a single strong vertical.
-   Nothing animates for longer than a breath, everything that moves moves by transform
-   or opacity only, and the whole lot goes still for anyone who has asked the world to.
-
-   The colours are the record's own and not a new palette: ink, paper, the mark's red,
-   the signal yellow, the ocean blue that the masthead already uses. */
+   So the drawing is gone: no cut corners, no floating disc, no ladder, no constellation,
+   nothing that turns. What is left is what the record actually uses to speak — a hard
+   rectangle, a 2px ink rule, a yellow band above and below, the red on the one thing that
+   does the work, and mono caps with air between the letters. The only motion is a result
+   arriving, once. */
 
 .base-one {
   position: relative;
   overflow: hidden;
 }
 
-/* The hand-cut edge. Two corners round, two nearly square — the way a shape looks when
-   it is torn from a sheet rather than guillotined. */
-.base-one__cut {
-  border-radius: 2px 30px 3px 22px;
-}
-
+/* The ink ground, with the record's own grain: the same horizontal scanline the masthead
+   carries, four per cent, holding still. It is texture, not pattern. */
 .base-one__ground {
   position: relative;
   background-color: rgb(var(--record-ink));
@@ -42,107 +35,39 @@
   inset: 0;
   pointer-events: none;
   background-image: repeating-linear-gradient(
-    -45deg,
-    rgba(239, 231, 214, 0.06) 0 1px,
-    transparent 1px 7px
+    0deg,
+    rgba(239, 231, 214, 0.05) 0 1px,
+    transparent 1px 3px
   );
 }
 
-.base-one__reg {
-  position: absolute;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 13px;
-  line-height: 1;
-  color: rgb(var(--record-mark));
-  pointer-events: none;
-  z-index: 1;
-}
-
 /* ── THE ASKING LINE ────────────────────────────────────────────────────────────
-   The field a reader types into has been a rounded rectangle for the whole life of the
-   record, which is the shape of every form on the internet and therefore the shape of
-   nothing. Cut by hand it reads as an object: one corner pulled long, the opposite one
-   barely there. Nothing about it is decorative — it is the same height, the same touch
-   target, the same 52px — it simply stops looking like a text box.
-
-   The offset shadow is flat and hard on purpose: a printed plate stands on the sheet at
-   an angle, it does not glow. */
+   A field on this record is a rectangle with an ink rule round it and no rounding at any
+   corner. The only thing that happens to it is that the rule goes red when a reader is
+   writing in it — no glow, no shadow pretending to be light, no radius. */
 .base-one-line {
-  border-radius: 26px 8px 22px 10px / 22px 10px 26px 8px;
-  box-shadow: 4px 4px 0 0 rgb(var(--record-ink));
-  transition: box-shadow 140ms ease-out, border-color 140ms ease-out;
+  border-radius: 0;
+  transition: border-color 120ms ease-out, box-shadow 120ms ease-out;
 }
 
 .base-one-line:focus-within {
-  box-shadow: 2px 2px 0 0 rgb(var(--record-mark));
+  box-shadow: inset 0 0 0 1px rgb(var(--record-red));
 }
 
-/* The disc that sends it. A circle, because every other control in this room is a
-   square and the one that does the work should not be. */
+/* The one control that answers: the mark's red, square, edge to edge with the rule.
+   It was a circle for a day. A circle on this record is the x = x mark and nothing else. */
 .base-one-send {
-  border-radius: 999px;
-  box-shadow: 0 0 0 2px rgb(var(--record-ink));
-}
-
-/* ── THE SKY BETWEEN ASKING AND ANSWERING ───────────────────────────────────────
-   A hairline that joins four things of four different sizes and goes nowhere, the way
-   a constellation does. It is the only thing on the page that is not a rule, a box or
-   a line of type, so it does the work that white space was failing to do: it says the
-   page is a drawing. */
-.bo-sky {
-  position: relative;
-  height: 42px;
-}
-
-.bo-sky__hair {
-  position: absolute;
-  height: 1px;
-  background-color: rgba(20, 18, 16, 0.42);
-  transform-origin: left center;
-}
-
-.bo-dot {
-  position: absolute;
-  border-radius: 999px;
-  animation: bo-twinkle 11s ease-in-out infinite;
-}
-
-@keyframes bo-twinkle {
-  0%, 100% { opacity: 0.35; transform: scale(0.86); }
-  50% { opacity: 1; transform: scale(1); }
-}
-
-/* ── THE MARKS ON THE PLATE ─────────────────────────────────────────────────────
-   Printed on the ink, bleeding off the edge, held at low weight anywhere type has to
-   survive on top of them. The disc turns once every seventy seconds: slow enough that
-   a reader only ever catches it mid-movement, which is how you know a drawing is alive
-   without being asked to watch it. */
-.bo-sun {
-  animation: bo-turn 70s linear infinite;
-  transform-origin: center;
-}
-
-@keyframes bo-turn {
-  to { transform: rotate(360deg); }
-}
-
-.bo-drift {
-  animation: bo-drift 26s ease-in-out infinite;
-}
-
-@keyframes bo-drift {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(2px, -6px, 0); }
+  border-radius: 0;
 }
 
 /* ── RESULTS ARRIVE, THEY DO NOT APPEAR ─────────────────────────────────────────
    Each card comes up once, on a short stagger, and then never moves again. No hover
    lift, no parallax, nothing that makes reading cost a repaint. */
 .bo-rise {
-  animation: bo-rise 460ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: bo-rise 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 @keyframes bo-rise {
-  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }

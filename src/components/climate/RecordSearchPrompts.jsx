@@ -12,13 +12,11 @@ import { ArrowUpRight } from 'lucide-react';
 // page look busy: a subject offered here is a subject that actually holds something, which
 // is the only kind of suggestion worth making. Nothing is hardcoded and nothing is ranked.
 //
-// 17 November: they were a wrapped row of identical chips under a label, which is a tag
-// cloud and a tag cloud is the most linear thing ever drawn. Now each one is a point in
-// the field with its own colour and its own height, cut by hand, so the eye travels
-// across them instead of reading down a list. Still buttons, still one tap, still exactly
-// the same six subjects drawn from exactly the same query.
-const PIGMENTS = ['#b3261e', 'rgb(20 18 16)', '#0f5f7a', '#9b6f28', '#b3261e', 'rgb(20 18 16)'];
-
+// 17 November: they spent an hour as hand-cut points of different colours floating at
+// different heights. Brian's correction — "look more like us" — applies here too, so they
+// are what this record actually prints: squared chips, ink rule, the mark's red on the
+// bullet, the subject in mono caps. Still buttons, still one tap, still the same six
+// subjects drawn from the same query.
 const pretty = (slug) =>
   String(slug || '')
     .replace(/[_-]+/g, ' ')
@@ -58,27 +56,18 @@ export default function RecordSearchPrompts({ onPick, disabled }) {
         <span className="lg:hidden">In the record</span>
         <span className="hidden lg:inline">Try a subject the record keeps</span>
       </p>
-      <div className="record-search-subjects mt-2 grid grid-cols-2 gap-x-2 gap-y-1.5 sm:grid-cols-3">
-        {subjects.map((name, i) => (
+      <div className="record-search-subjects mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+        {subjects.map((name) => (
           <button
             key={name}
             type="button"
             onClick={() => onPick(name)}
             disabled={disabled}
-            style={{
-              fontFamily: 'var(--font-reading)',
-              borderRadius: '14px 4px 12px 5px',
-              marginTop: i % 2 === 1 ? 7 : 0,
-            }}
-            className="record-search-prompt flex items-center gap-2 border border-record-ink/30 px-2.5 py-2 text-left text-[12.5px] leading-tight text-record-ink transition-colors active:border-record-red active:text-record-red disabled:opacity-60"
+            className="record-search-prompt flex items-center gap-2 border-2 border-record-ink bg-record-paper px-2.5 py-2 text-left font-mono text-[9.5px] font-black uppercase leading-tight tracking-[0.1em] text-record-ink transition-colors active:bg-cartoon-sun active:text-record-ink disabled:opacity-60"
           >
-            <span
-              aria-hidden="true"
-              className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full"
-              style={{ backgroundColor: PIGMENTS[i % PIGMENTS.length] }}
-            />
+            <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-record-red" />
             <span className="min-w-0 flex-1">{name}</span>
-            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0 opacity-70 lg:hidden" />
+            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0 opacity-60 lg:hidden" />
           </button>
         ))}
       </div>

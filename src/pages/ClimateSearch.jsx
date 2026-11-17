@@ -7,7 +7,6 @@ import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
 import BaseOnePlate from '@/components/climate/search/BaseOnePlate';
-import BaseOneSky from '@/components/climate/search/BaseOneSky';
 import BaseOneAnswer from '@/components/climate/search/BaseOneAnswer';
 import useBaseOneAnswer from '@/components/climate/search/useBaseOneAnswer';
 import SearchAnswerLine from '@/components/climate/search/SearchAnswerLine';
@@ -57,31 +56,25 @@ export default function ClimateSearch() {
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      {/* ── ONE COMPOSITION, NOT A STACK ───────────────────────────────────────────
-          The plate and the asking line were two blocks sitting one under the other at the
-          same width with the same left edge, which is the shape of a form and the reason
-          the room read as a column. Now the asking band is laid over the foot of the plate
-          and the plate is cut by hand, so two planes cross and the eye has to travel rather
-          than slide. The elements, the order and the behaviour are untouched. */}
-      <div className="relative">
-        <BaseOnePlate statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead." />
+      {/* ── ONE SHEET, TWO BANDS ───────────────────────────────────────────────────
+          The plate and the asking band are stacked flush and squared off against each
+          other, so the yellow foot of the sheet and the yellow band the field sits in meet
+          on one ink rule and read as a single printed thing — a title block with the work
+          underneath it, which is what a page of this record is. No overlap, no torn edge,
+          no negative margin: those were somebody else's drawing. */}
+      <BaseOnePlate statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead." />
 
-        <div className="relative z-10 -mt-3 px-0.5 sm:-mt-4">
-          <RecordSearchLine
-            value={query}
-            onSearch={start}
-            loading={loading}
-          />
+      <div className="relative z-10">
+        <RecordSearchLine
+          value={query}
+          onSearch={start}
+          loading={loading}
+        />
 
-          <div className={data || loading ? 'hidden lg:block' : ''}>
-            <RecordSearchPrompts onPick={start} disabled={loading} />
-          </div>
+        <div className={data || loading ? 'hidden lg:block' : ''}>
+          <RecordSearchPrompts onPick={start} disabled={loading} />
         </div>
       </div>
-
-      {/* The hairline that joins four points and goes nowhere: the only thing in the room
-          that is not a rule, a box or a line of type. */}
-      <BaseOneSky />
 
       {loading && (
         <p role="status" className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
