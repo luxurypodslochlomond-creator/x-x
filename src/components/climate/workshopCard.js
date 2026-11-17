@@ -16,12 +16,6 @@ const PAD = 60;
 const MAXW = W - PAD * 2;
 const FOOTER_TOP = 1200;
 
-const PAPER = '#f4efe4';
-const SUN = '#ffd447';
-const INK = '#1a1612';
-const RED = '#b3261e';
-const MARK = '#cc2d2a';
-const MUTED = '#6b6258';
 import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 // The record's own home, never the platform's app address: an address printed on a card is
@@ -66,7 +60,7 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, SUN, INK, RED, MARK, MUTED } } = await loadRecordCardFonts();
 
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, W, H);

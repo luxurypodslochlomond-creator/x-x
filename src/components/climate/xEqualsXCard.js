@@ -32,16 +32,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   canvas.width = W;
   canvas.height = H;
   const g = canvas.getContext('2d');
-  const theme = getComputedStyle(document.documentElement);
-  const color = (name) => `rgb(${theme.getPropertyValue(`--record-${name}`).trim()})`;
-  const paper = color('paper');
-  const ink = color('ink');
-  // Signal orange, not the deeper mark red: on the card's ink block the mark red measured
-  // under three to one and dried into the ground, so the two x's — the whole point of the
-  // picture — were the least legible marks on it.
-  const signal = color('signal');
-  const muted = color('muted');
-  const { DISPLAY: sans, MONO } = await loadRecordCardFonts();
+  const { DISPLAY: sans, MONO, colors: { PAPER: paper, INK: ink, SUN: signal, MUTED: muted } } = await loadRecordCardFonts();
 
   g.fillStyle = paper;
   g.fillRect(0, 0, W, H);

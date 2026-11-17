@@ -187,10 +187,10 @@ button:focus-visible {
 
 @layer base {
   :root {
-    /* Beadie display voice — condensed signal poster. Oswald ships everywhere,
-       so headings look the same on Android, iOS and desktop. */
-    --font-display: 'Oswald', Impact, 'Haettenschweiler', 'Arial Narrow', system-ui, sans-serif;
-    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* One shared face: the record's real regular and bold Helvetica files. */
+    --font-display: var(--font-record-ui);
+    --font-heading: var(--font-record-ui);
+    --font-body: var(--font-record-ui);
     --font-script: 'Record Cherokee', ui-monospace, SFMono-Regular, Menlo, monospace;
     --font-record-ui: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     /* THE READING VOICE IS NOW A READING FACE.
@@ -205,11 +205,11 @@ button:focus-visible {
        tongue we have not met: the serif falls back to Georgia and then to
        whatever that device reads best in, which is what every newspaper on
        earth does. Warm paper, signal red and the covenant all stay. */
-    --font-reading: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --font-reading: var(--font-record-ui), var(--font-record-reading);
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;
-    --record-signal: 226 96 42;
+    --record-signal: 255 212 71;
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
     /* ── THE MARK'S RED IS BORROWED, AND IT SAYS SO ───────────────────────────────
@@ -260,21 +260,21 @@ button:focus-visible {
     --record-botanical: 63 104 73;
     --record-ochre: 155 111 40;
     --record-clay: 166 90 68;
-    --record-light-signal: 127 201 228;
+    --record-light-signal: 255 212 71;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 3 71% 41%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 46 100% 64%;
+    --accent-foreground: 30 11% 7%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
@@ -296,12 +296,16 @@ button:focus-visible {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
+    --font-display: var(--font-record-ui);
+    --font-heading: var(--font-record-ui);
+    --font-body: var(--font-record-ui);
+    --font-reading: var(--font-record-ui), var(--font-record-reading);
     --font-script: 'Record Cherokee', ui-monospace, SFMono-Regular, Menlo, monospace;
     --font-record-ui: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;
-    --record-signal: 226 96 42;
+    --record-signal: 255 212 71;
     --record-red: 179 38 30;
     --record-muted: 107 98 88;
     /* The same borrowed red in the dark block: the mark does not change colour when the
@@ -337,21 +341,21 @@ button:focus-visible {
     --record-botanical: 63 104 73;
     --record-ochre: 155 111 40;
     --record-clay: 166 90 68;
-    --record-light-signal: 127 201 228;
+    --record-light-signal: 255 212 71;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 3 71% 41%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 46 100% 64%;
+    --accent-foreground: 30 11% 7%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
@@ -380,7 +384,7 @@ button:focus-visible {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body;
   }
 }
 
@@ -421,7 +425,7 @@ button:focus-visible {
    travelling with the site, so this is the one change here that makes the record both
    cooler and faster: an antique face the browser was downloading is now simply not
    asked for. */
-:root { --record-display: 'Source Serif 4', 'Literata', Georgia, serif; }
+:root { --record-display: var(--font-record-ui); }
 /* ── THE HEADINGS WEAR THE MARK'S OWN SANS ───────────────────────────────────────
    The record's display voice has been a serif and, before that, a condensed poster face.
    Both argued with the plates: the red/yellow bands are a signal poster's furniture, and
@@ -437,12 +441,22 @@ button:focus-visible {
   --font-body: var(--font-record-ui);
   --font-reading: var(--font-record-ui), var(--font-record-reading);
 }
-/* The signal voice also reaches labels, captions and controls, not just h-tags.
-   Hashes and deliberately technical text retain fixed-width lettering. */
-.climate-record .font-mono:not(code):not(pre):not(.break-all):not([data-record-technical]):not([data-record-technical] *) {
+/* The shared voice reaches every product, including dialogs and SVG labels.
+   Real code, hashes, and explicitly technical material retain fixed-width type. */
+:where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading) !important;
+  font-weight: 700;
+}
+:where(button, input, textarea, select, label, summary, svg text),
+:is(.font-sans, .font-serif, .font-display, .font-body),
+.font-mono:not(code):not(pre):not(code *):not(pre *):not(.break-all):not(.break-all *):not([data-record-technical]):not([data-record-technical] *) {
   font-family: var(--font-record-ui) !important;
 }
-.climate-record :is(.font-black, .font-extrabold) { font-weight: 700; }
+/* Older product wrappers set a family inline instead of using the shared tokens. */
+body [style*="font-family"]:not(.climate-record):not(.climate-record *):not(code):not(pre):not(code *):not(pre *):not(.break-all):not([data-record-technical]):not([data-record-technical] *) {
+  font-family: var(--font-record-ui) !important;
+}
+:is(.font-black, .font-extrabold) { font-weight: 700; }
 
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
 .beadie-paper { background-color: #f4efe4; }

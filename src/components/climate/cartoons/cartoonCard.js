@@ -13,11 +13,6 @@ const PAD = 60;
 const MAXW = W - PAD * 2;
 const FOOTER_TOP = H - 150;
 
-const PAPER = '#fff8e9';
-const SUN = '#ffd447';
-const INK = '#201e27';
-const LEAF = '#20785f';
-const MUTED = '#5c5648';
 import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const ORIGIN = 'https://green-stride-d47e043c.base44.app';
@@ -54,7 +49,7 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, SUN, INK, SIGNAL: LEAF, MARK, MUTED } } = await loadRecordCardFonts();
 
   const img = await loadImage(card.image);
 
@@ -119,7 +114,7 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
-  ctx.fillStyle = '#cc2d2a';
+  ctx.fillStyle = MARK;
   ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';

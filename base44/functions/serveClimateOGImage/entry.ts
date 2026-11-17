@@ -1,19 +1,29 @@
-Deno.serve(async (req) => {
+export default async function(req) {
   try {
-    // Beadie Signal palette, in the ocean key — cooler paper, blue signal, so a
-    // shared link looks like the record it stands for. Emergency red stays red.
-    const PAPER = '#edf2f0';
+    // Embed the exact bold face: an SVG image cannot fetch the page's webfont.
+    const fontResponse = await fetch('https://media.base44.com/files/public/builder-assets/wix-fonts/helvetica-700-normal.woff2', { signal: AbortSignal.timeout(10000) });
+    if (!fontResponse.ok) throw new Error('The record font could not be loaded');
+    const fontBytes = new Uint8Array(await fontResponse.arrayBuffer());
+    let binary = '';
+    for (const byte of fontBytes) binary += String.fromCharCode(byte);
+    const fontData = btoa(binary);
+    // Same warm paper, red and yellow as the page and browser-made cards.
+    const PAPER = '#f4efe4';
     const INK = '#1a1612';
     const SIGNAL = '#b3261e';
-    const SIGNAL_BRIGHT = '#7fc9e4';
+    const SIGNAL_BRIGHT = '#ffd447';
     // The mark's own red, measured off Laurie Anderson's O Superman sleeve (#CC2D2A).
     // Same value as --record-mark in the app; an SVG cannot read a CSS token.
     const MARK = '#cc2d2a';
-    const MUTED = '#5e706e';
-    const BONE = '#e9eeec';
+    const MUTED = '#6b6258';
+    const BONE = '#efe7d6';
 
     const svg = `
       <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+        <defs><style>
+          @font-face { font-family: 'Record UI'; font-style: normal; font-weight: 700; src: url('data:font/woff2;base64,${fontData}') format('woff2'); }
+          text { font-family: 'Record UI', Helvetica, Arial, sans-serif; font-weight: 700; font-style: normal; }
+        </style></defs>
         <rect width="1200" height="630" fill="${PAPER}"/>
 
         <!-- Scanline texture — cold transmission -->
@@ -89,4 +99,4 @@ Deno.serve(async (req) => {
     console.error('serveClimateOGImage error:', error);
     return new Response('Error generating image', { status: 500 });
   }
-});
+}

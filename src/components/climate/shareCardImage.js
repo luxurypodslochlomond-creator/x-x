@@ -9,37 +9,24 @@ import { recordOrigin } from './recordAddress';
 const W = 1080;
 const H = 1350;
 
-// The record's palette, in the ocean key — kept in step with src/climate-palette.css
-// so a card that travels looks like the page it came from. Emergency red stays red.
-const PAPER = '#f4efe4';
-const BONE = '#efe7d6';
-const INK = '#141210';
-const SIGNAL = '#b3261e';
-// The mark's red, measured off Laurie Anderson's sleeve for O Superman — the single at the
-// heart of Big Science (#CC2D2A, the mean of the reds carrying that sleeve). A canvas cannot
-// read a CSS token, so the same number is copied here; change one you change all four.
-const MARK = '#cc2d2a';
-const SIGNAL_BRIGHT = '#7fc9e4';
-const MUTED = '#5a5246';
-import { loadRecordCardFonts } from '@/components/climate/recordTypography';
+import { loadRecordCardFonts, recordCardPalette } from '@/components/climate/recordTypography';
 
 const PAD = 60;
 const MAXW = W - PAD * 2;
 const FOOTER_TOP = H - 150;
 
-const VERIFICATION = {
-  official_record: { label: 'Official record', bg: '#1e3a2b', fg: BONE },
-  corroborated: { label: 'Corroborated', bg: SIGNAL_BRIGHT, fg: INK },
-  single_source: { label: 'Single source', bg: INK, fg: BONE },
-};
-
-// 'Corroborated' travels on a card only where a second origin is actually named on the
-// entry — the same rule the page keeps, so a picture sent elsewhere cannot overstate it.
-const badgeFor = (entry) => (
-  entry?.verification === 'corroborated' && !String(entry?.corroborating_source || '').trim()
-    ? VERIFICATION.single_source
-    : VERIFICATION[entry?.verification] || VERIFICATION.single_source
-);
+function badgeFor(entry) {
+  const { BONE, INK, SIGNAL_BRIGHT } = recordCardPalette();
+  const badges = {
+    official_record: { label: 'Official record', bg: '#1e3a2b', fg: BONE },
+    corroborated: { label: 'Corroborated', bg: SIGNAL_BRIGHT, fg: INK },
+    single_source: { label: 'Single source', bg: INK, fg: BONE },
+  };
+  // Corroboration still requires a named second origin, regardless of the design.
+  return entry?.verification === 'corroborated' && !String(entry?.corroborating_source || '').trim()
+    ? badges.single_source
+    : badges[entry?.verification] || badges.single_source;
+}
 
 const KIND = { emergency: 'Emergency', milestone: 'Milestone', initiative: 'Initiative' };
 
@@ -116,7 +103,7 @@ export async function buildWireShareCard(entry, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   const img = await loadImage(entry.image_url);
 
@@ -257,7 +244,7 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   const img = await loadImage(track.image_url);
 
@@ -428,7 +415,7 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   const img = await loadImage(entry.image_url);
 
@@ -580,7 +567,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   // Paper, cold scanline grain.
   ctx.fillStyle = PAPER;
@@ -710,7 +697,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, W, H);
@@ -833,7 +820,7 @@ export async function buildRecordShareCard(options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   // Paper, cold scanline grain.
   ctx.fillStyle = PAPER;

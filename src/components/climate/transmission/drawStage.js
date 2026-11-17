@@ -6,12 +6,12 @@ import { BPM } from './signal';
 // flanked by hardware VU meters. Beadie Signal palette: ink · bone · signal · green.
 const TAU = Math.PI * 2;
 const BONE = '239,231,214';
-const SIG = '226,96,42';
+const SIG = '255,212,71';
 const GRN = '79,154,115';
 const RED = '179,38,30';
 const BARS = 96;
 const ORBIT = 0.9;
-const FONT = '9px ui-monospace, SFMono-Regular, Menlo, monospace';
+const FONT = '700 9px "Record UI", Helvetica, Arial, sans-serif';
 
 const SATS = [
   { sp: 0.00055, rx: 0.98, ry: 0.34, tilt: 0.5, col: SIG, label: 'SAT-51' },
@@ -68,7 +68,7 @@ export function buildGrid(w, h, dpr) {
     g.strokeStyle = long ? `rgba(${SIG},0.85)` : `rgba(${BONE},0.28)`;
     g.beginPath(); g.moveTo(cx + Math.cos(a) * (maxR + 2), cy + Math.sin(a) * (maxR + 2)); g.lineTo(cx + Math.cos(a) * r2, cy + Math.sin(a) * r2); g.stroke();
   }
-  g.fillStyle = `rgba(${BONE},0.42)`; g.font = '8px ui-monospace, Menlo, monospace'; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = `rgba(${BONE},0.42)`; g.font = '700 8px "Record UI", Helvetica, Arial, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
   [['000', 0], ['090', 90], ['180', 180], ['270', 270]].forEach(([t, d]) => {
     const a = (d * Math.PI) / 180 - Math.PI / 2;
     g.fillText(t, cx + Math.cos(a) * (maxR + 19), cy + Math.sin(a) * (maxR + 19));
@@ -180,7 +180,7 @@ function drawSats(ctx, c, S) {
     }
     const [x, y] = satPos(c, s, S.satA[i]);
     ctx.fillStyle = `rgba(${s.col},1)`; ctx.fillRect(x - 2, y - 2, 4, 4);
-    if (s.label) { ctx.fillStyle = `rgba(${BONE},0.5)`; ctx.font = '7px ui-monospace, Menlo, monospace'; ctx.textAlign = 'left'; ctx.fillText(s.label, x + 6, y + 2); }
+    if (s.label) { ctx.fillStyle = `rgba(${BONE},0.5)`; ctx.font = '700 7px "Record UI", Helvetica, Arial, sans-serif'; ctx.textAlign = 'left'; ctx.fillText(s.label, x + 6, y + 2); }
   });
 }
 
@@ -209,7 +209,7 @@ function drawVU(ctx, c, S, freq) {
     const ps = Math.min(segs - 1, Math.floor(pk * segs));
     ctx.fillStyle = `rgba(${BONE},0.85)`; ctx.fillRect(x, bot - (ps + 1) * segH + 1, wv, 2);
   });
-  ctx.font = '7px ui-monospace, Menlo, monospace'; ctx.fillStyle = `rgba(${BONE},0.4)`; ctx.textAlign = 'left';
+  ctx.font = '700 7px "Record UI", Helvetica, Arial, sans-serif'; ctx.fillStyle = `rgba(${BONE},0.4)`; ctx.textAlign = 'left';
   ctx.fillText('L', 7, top - 6); ctx.fillText('R', c.w - 13, top - 6);
 }
 

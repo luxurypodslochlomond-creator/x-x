@@ -6,6 +6,7 @@ module.exports = {
   	extend: {
       fontFamily: {
         display: ['var(--font-display)'],
+        heading: ['var(--font-heading)'],
         body: ['var(--font-body)'],
         'record-ui': ['var(--font-record-ui)'],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Record Cherokee', 'monospace'],

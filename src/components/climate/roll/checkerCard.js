@@ -29,13 +29,6 @@ const PAD = 60;
 const MAXW = W - PAD * 2;
 const FOOTER_TOP = H - 150;
 
-const PAPER = '#f4efe4';
-const BONE = '#efe7d6';
-const INK = '#141210';
-const SIGNAL = '#b3261e';
-const MARK = '#cc2d2a';
-const SIGNAL_BRIGHT = '#7fc9e4';
-const MUTED = '#5a5246';
 import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const MONTH_YEAR = { month: 'long', year: 'numeric' };
@@ -95,7 +88,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
 
   // Paper, cold scanline grain — the same sheet every other card leaves on.
   ctx.fillStyle = PAPER;

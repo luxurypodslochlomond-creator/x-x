@@ -160,7 +160,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
 
         let color;
         if (i < 12) color = '#1e3a2b';
-        else if (i < 36) color = '#7fc9e4';
+        else if (i < 36) color = 'rgb(var(--cartoon-sun))';
         else color = '#efe7d6';
 
         ctx.strokeStyle = color;
@@ -198,7 +198,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       }
 
       // 5. Waveform ring (circular oscilloscope)
-      ctx.strokeStyle = '#7fc9e4';
+      ctx.strokeStyle = 'rgb(var(--cartoon-sun))';
       ctx.lineWidth = 1.5;
       ctx.globalAlpha = 0.7;
       ctx.beginPath();
@@ -249,7 +249,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
 
       // 9. Frequency labels
       ctx.fillStyle = 'rgba(233,238,236,0.25)';
-      ctx.font = '8px ui-monospace, SFMono-Regular, monospace';
+      ctx.font = '700 8px "Record UI", Helvetica, Arial, sans-serif';
       ctx.textAlign = 'center';
       const labels = ['20Hz', '100Hz', '500Hz', '2kHz', '8kHz', '20kHz'];
       for (let i = 0; i < labels.length; i++) {
@@ -281,7 +281,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       // 11. Beat indicator
       const beatNum = Math.floor((t / BEAT_MS) % 4) + 1;
       ctx.fillStyle = 'rgba(233,238,236,0.3)';
-      ctx.font = 'bold 9px ui-monospace, monospace';
+      ctx.font = '700 9px "Record UI", Helvetica, Arial, sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(`\u25C6 ${beatNum}/4 \u00B7 ${BPM} BPM`, 16, 24);
 
