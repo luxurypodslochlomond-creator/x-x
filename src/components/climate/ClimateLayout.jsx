@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import useRecordScroll from '@/components/climate/useRecordScroll';
-import { IMAGES } from '@/components/climate/categoryImages';
+import { IMAGES, RECORD_COVER_MOBILE } from '@/components/climate/categoryImages';
 import '@/components/climate/record-reading.css';
 import '@/components/climate/record-layout.css';
+import '@/components/climate/record-mobile.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
@@ -171,7 +172,7 @@ export default function ClimateLayout({ children, currentPage }) {
         painting had nowhere to be seen on a phone — the sheet filled the glass and the
         ground underneath it was covered twice over. The paper belongs to the book; the
         root is the room the book stands in. */}
-    <div className={`climate-record record-field min-h-screen${currentPage === 'TogetherChangeClimate' ? ' record-home-field' : ''}`} style={{ fontFamily: 'var(--font-body)', '--record-cover': `url("${IMAGES.cover}")` }}>
+    <div className={`climate-record record-field min-h-screen${currentPage === 'TogetherChangeClimate' ? ' record-home-field' : ''}`} style={{ fontFamily: 'var(--font-body)', '--record-cover-desktop': `url("${IMAGES.cover}")`, '--record-cover-mobile': `url("${RECORD_COVER_MOBILE}")` }}>
       {/* The painting and the rare shooting stars stay in their own viewport-sized
           surface. No noise filter or blended grain lies over the master artwork. */}
       <div aria-hidden="true" className="record-environment">

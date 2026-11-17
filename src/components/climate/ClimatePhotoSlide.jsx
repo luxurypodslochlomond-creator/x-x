@@ -7,7 +7,7 @@ import ClimatePhotoCredit from '@/components/climate/ClimatePhotoCredit';
 
 export default function ClimatePhotoSlide({ photo, onOpen }) {
   return (
-    <figure className="relative w-full min-w-0 shrink-0 snap-start snap-always">
+    <figure className="climate-photo-slide relative w-full min-w-0 shrink-0 snap-start snap-always">
       <button
         type="button"
         onClick={onOpen}

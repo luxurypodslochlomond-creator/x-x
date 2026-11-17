@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { IMAGES } from '@/components/climate/categoryImages';
+import { IMAGES, RECORD_COVER_MOBILE, RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
 
 // ── THE COVER, IN ONE PLACE ───────────────────────────────────────────────────────────────
 // The record has one painting. It appears at the door at full strength, behind the first voice
@@ -35,10 +35,12 @@ export default function RecordCover({ position = 'center 34%', strength = 1, ble
   // whether it is already complete. Without this the ground would stay invisible for the
   // reader who comes back — the one visitor a cache is meant to reward.
   const markReady = useCallback((node) => {
-    if (node?.complete) setReady(true);
+    if (node?.complete && node.naturalWidth > 0) setReady(true);
   }, []);
 
   return (
+    <picture>
+    <source media="(max-width: 639px)" srcSet={className.includes('record-ground') ? RECORD_COVER_MOBILE : RECORD_COVER_SCREEN} />
     <img
       ref={markReady}
       src={IMAGES.cover}
@@ -61,5 +63,6 @@ export default function RecordCover({ position = 'center 34%', strength = 1, ble
         ...style,
       }}
     />
+    </picture>
   );
 }

@@ -443,11 +443,11 @@ export default function TogetherChangeClimate() {
       {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
              The space is held while the record loads, so nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
-        <div className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
+        <div className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-record-red" />
           <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:gap-4">
             {loading
-              ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
+              ? [0, 1, 2, 3].map(i => <div key={i} className="record-entry-placeholder min-h-[124px] bg-record-ink/10 border border-record-paper/25 animate-pulse" />)
               : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
           </div>
         </div>
@@ -606,7 +606,7 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── CONTENT ── */}
-      <div id="record-entries" ref={contentRef} className="bg-[#efe7d6]">
+      <div id="record-entries" ref={contentRef} className="record-entry-sections bg-[#efe7d6]">
         {loading ? (
           <div className="flex flex-col items-center py-20">
             <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />
@@ -634,7 +634,7 @@ export default function TogetherChangeClimate() {
               </button>
             )}
             {showEntries && solutions.length > 0 && (
-              <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+              <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-red" />
                 <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
                   {solutions.map(item => <SolutionCard key={item.id} item={item} />)}
@@ -642,7 +642,7 @@ export default function TogetherChangeClimate() {
               </section>
             )}
             {showEntries && crises.length > 0 && (
-              <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+              <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" />
                 <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
                   {crises.map(item => <SolutionCard key={item.id} item={item} />)}
@@ -686,6 +686,7 @@ export default function TogetherChangeClimate() {
           </>
         )}
 
+        <div className="bg-record-bone">
         {/* ── GROUPS — Janine's spec, item 10: people working on the same thing in an area can share
                directly. The door is on the page, not in an email: an organiser starts their own
                gathering, and the record carries ONLY the one contact line they chose to publish.
@@ -788,7 +789,7 @@ export default function TogetherChangeClimate() {
         </section>
 
         {/* Terms and Privacy now sit in the shared footer, on every page of the record. */}
-
+        </div>
 
       </div>
 

@@ -1,0 +1,77 @@
+/* Mobile-only corrections: steady artwork, visible image gutters, complete photos. */
+.record-field { --record-cover: var(--record-cover-desktop); }
+@media (max-width: 639px) {
+  .climate-record.record-field { --record-cover: var(--record-cover-mobile); }
+  .climate-record.record-field > .record-environment {
+    inset: 0 0 auto;
+    height: 100vh;
+    height: 100lvh;
+    background-color: rgb(var(--record-ink));
+  }
+  /* Large viewport height stays still as the browser toolbar opens and closes. */
+  .record-environment .record-sky { display: none; }
+  .climate-record .record-pages .record-home-page > .record-image-section,
+  .climate-record .record-pages .record-home-page > .record-entry-sections {
+    background-color: transparent;
+  }
+  .record-entry-sections > :is(button, .flex, .text-center) {
+    background-color: rgb(var(--record-paper) / .97);
+  }
+  .record-home-page .record-image-section .record-section-heading {
+    border-color: rgb(var(--record-paper) / .65);
+  }
+  .record-home-page .record-image-section .record-section-heading h2 {
+    color: rgb(var(--record-signal));
+  }
+  .record-home-page .record-image-section .record-section-count {
+    background-color: rgb(var(--record-signal));
+    color: rgb(var(--record-ink));
+  }
+  .climate-record .record-pages .record-photo-crawl {
+    margin: 1.25rem;
+    width: auto;
+    background-color: transparent;
+    border: 1px solid rgb(var(--record-paper) / .35);
+  }
+  .record-photo-crawl .climate-photo-slide {
+    display: flex;
+    flex-direction: column;
+  }
+  .record-photo-crawl .climate-photo-slide > button { flex-shrink: 0; }
+  .record-photo-crawl .climate-photo-slide-frame {
+    aspect-ratio: 3 / 2;
+    max-height: none;
+  }
+  .record-photo-crawl figcaption {
+    flex: 1;
+    background-color: rgb(var(--record-ink) / .94);
+  }
+  /* A credit belongs with the image, but must not cover most of a phone's photo. */
+  .record-photo-crawl .climate-photo-credit {
+    position: static;
+    padding: 1rem;
+    background: none;
+  }
+  .record-photo-crawl .climate-photo-credit > [aria-hidden] { margin-bottom: .75rem; }
+  .record-photo-crawl .climate-photo-credit > .record-header-type:not(:last-child) {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .record-photo-crawl .climate-photo-credit > .record-header-type:last-of-type {
+    font-size: .6875rem;
+    line-height: 1.6;
+    letter-spacing: .08em !important;
+  }
+  .record-home-page .record-photo-loading {
+    margin: 1.25rem;
+    width: auto;
+    aspect-ratio: auto;
+    max-height: none;
+    min-height: calc((100vw - 3.25rem) * .6667 + 9rem);
+    background-color: rgb(var(--record-ink) / .75);
+  }
+  .record-home-page .record-entry-placeholder {
+    min-height: 15rem;
+    background-color: rgb(var(--record-ink) / .75);
+  }
+}

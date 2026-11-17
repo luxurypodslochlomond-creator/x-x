@@ -3,6 +3,10 @@
 // Both TogetherChangeClimate.jsx and ClimateDetail.jsx import from here
 // so a broken URL only needs fixing in one place.
 
+// Responsive display copies; the original artwork stays unchanged.
+export const RECORD_COVER_SCREEN = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/cc94d332d_record-cover-mobile.png';
+export const RECORD_COVER_MOBILE = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/57d131c0b_record-cover-portrait.png';
+
 const IMAGES = {
   // THE COVER — painted for the record, so it is credited to nobody and borrowed from
   // nobody. A photograph of the planet would have needed a photographer's name under it

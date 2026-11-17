@@ -8,7 +8,7 @@ import React from 'react';
 export default function ClimatePhotoCredit({ photo, hint, variant = 'bar' }) {
   if (variant === 'overlay') {
     return (
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-record-ink via-record-ink/75 to-transparent px-4 pb-3.5 pt-16 font-body text-record-paper">
+      <div className="climate-photo-credit pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-record-ink via-record-ink/75 to-transparent px-4 pb-3.5 pt-16 font-body text-record-paper">
         <span aria-hidden="true" className="mb-3 block h-1 w-12 bg-record-signal" />
         {photo.caption && <span className="record-header-type block max-w-[26ch] text-xl uppercase leading-[1.4] text-record-paper lg:text-[34px]">{photo.caption}</span>}
         <span className="mt-2 block record-header-type text-xs uppercase leading-relaxed tracking-wide text-record-paper/80">{photo.credit}</span>
