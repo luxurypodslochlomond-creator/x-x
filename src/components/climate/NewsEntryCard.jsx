@@ -21,13 +21,13 @@ export default function NewsEntryCard({ entry, linked = true }) {
   return (
     <article className="border-2 border-[#141210] bg-record-bone">
       <div className="flex flex-wrap items-center gap-2 px-4 pt-4">
-        <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{entry.when_label}</span>
+        <span className="record-header-type text-[11px] text-[#5a5246]">{entry.when_label}</span>
         {entry.kind && (
-          <span className="px-2 py-0.5 text-[9px] font-black font-mono uppercase tracking-wide border border-[#141210]/40 text-[#5a5246]">
+          <span className="px-2 py-0.5 record-header-type text-[10px] border border-[#141210]/40 text-[#5a5246]">
             {KIND[entry.kind] || entry.kind}
           </span>
         )}
-        {entry.where_label && <span className="text-[10px] font-mono text-[#5a5246] uppercase tracking-wide">· {entry.where_label}</span>}
+        {entry.where_label && <span className="record-header-type text-[11px] text-[#5a5246]">· {entry.where_label}</span>}
       </div>
 
       {linked ? (
@@ -64,14 +64,14 @@ export default function NewsEntryCard({ entry, linked = true }) {
 
       {entry.replicable && (
         <div className="mt-4 mx-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] px-3 py-2.5">
-          <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] mb-1">What can be copied from this</p>
+          <p className="record-header-type text-[11px] text-[#1e3a2b] mb-1">What can be copied from this</p>
           <p className="text-[#141210]">{entry.replicable}</p>
         </div>
       )}
 
       {entry.correction_note && (
         <div className="mt-3 mx-4 bg-[#b3261e]/5 border-l-4 border-l-[#b3261e] px-3 py-2.5">
-          <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
+          <p className="record-header-type text-[11px] text-[#b3261e] mb-1">Correction</p>
           <p className="text-[#141210]">{entry.correction_note}</p>
           <Link to="/ClimateCorrections" className="mt-1.5 inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] underline">
             Every correction, in daylight
@@ -80,7 +80,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
       )}
 
       <div className="mt-4 px-4 py-3 border-t-2 border-[#141210]/15 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#5a5246]">Who says so</span>
+        <span className="record-header-type text-[11px] text-[#5a5246]">Who says so</span>
         <span className="text-[11px] font-mono text-[#141210]">{entry.source_name}</span>
         {entry.corroborating_source && (
           <span className="text-[10px] font-mono text-[#5a5246]">+ {entry.corroborating_source}</span>
@@ -90,7 +90,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
             href={entry.source_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[10px] font-black font-mono uppercase tracking-wide text-[#e2602a] underline"
+            className="inline-flex items-center gap-1 record-header-type text-[11px] text-[#e2602a] underline"
           >
             Read the source <ArrowUpRight className="w-3.5 h-3.5" />
           </a>

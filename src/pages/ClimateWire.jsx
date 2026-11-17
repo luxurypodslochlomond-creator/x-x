@@ -60,10 +60,10 @@ export default function ClimateWire() {
       <div className="record-continuous-band px-4 py-3 flex flex-col items-center justify-center gap-1.5 border-b border-record-paper/20" style={{ animation: 'twcc-epigraph 1.2s ease-out both' }}>
         <div className="flex items-center justify-center gap-2 w-full">
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
-          <span className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#efe7d6]/60 text-center leading-tight">The wire · a public record, not a feed</span>
+          <span className="record-header-type text-[11px] text-[#efe7d6]/75 text-center leading-tight">The wire · a public record, not a feed</span>
           <span className="w-1 h-1 rounded-full bg-[#e2602a] animate-pulse flex-shrink-0" />
         </div>
-        <Link to="/XEqualsX" className="text-[10px] font-black font-mono text-record-mark tracking-[0.2em] leading-none hover:text-[#efe7d6] transition-colors">x = x</Link>
+        <Link to="/XEqualsX" className="record-header-type text-[11px] text-record-mark leading-none hover:text-[#efe7d6] transition-colors">x = x</Link>
       </div>
 
       {/* Hero — cold ink, the beacon, the page says exactly what it is */}
@@ -92,7 +92,7 @@ export default function ClimateWire() {
           <div className="lg:flex-shrink-0">
             <button
               onClick={() => setFormOpen(true)}
-              className="w-full lg:w-auto flex items-center justify-center gap-2 px-4 lg:px-6 py-4 min-h-[52px] bg-[#e2602a] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+              className="w-full lg:w-auto flex items-center justify-center gap-2 px-4 lg:px-6 py-4 min-h-[52px] bg-[#e2602a] text-[#141210] record-header-type text-[12px] border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
             >
               <Plus className="w-4 h-4" /> Send an entry to the wire
             </button>
@@ -107,7 +107,7 @@ export default function ClimateWire() {
               <button
                 key={f.id}
                 onClick={() => setFilter(f.id)}
-                className={`px-3 py-2 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
+                className={`px-3 py-2 record-header-type text-[11px] border-2 transition-colors ${
                   filter === f.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-record-bone text-[#141210] border-[#141210]/40'
                 }`}
               >
@@ -155,12 +155,12 @@ export default function ClimateWire() {
         )}
 
         <div className="mt-4 flex items-baseline justify-between gap-3">
-          <p className="text-[10px] font-mono uppercase tracking-widest text-[#5a5246]">
+          <p className="record-header-type text-[11px] text-[#5a5246]">
             {loading ? 'Reading the wire…' : words.length > 0
               ? `${shown.length} of ${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`
               : `${entries.length} ${entries.length === 1 ? 'entry' : 'entries'}`}
           </p>
-          <Link to="/ClimateMethod" className="text-[10px] font-black font-mono uppercase tracking-wide text-[#e2602a] underline">How this record is made</Link>
+          <Link to="/ClimateMethod" className="record-header-type text-[11px] text-[#e2602a] underline">How this record is made</Link>
         </div>
 
       </div>
@@ -187,7 +187,7 @@ export default function ClimateWire() {
 
         {/* Why it looks like this */}
         <div className="record-wire-note mt-8 lg:mt-12 bg-record-bone border-l-4 border-l-[#141210] p-4 lg:p-6">
-          <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Why there is nothing to click</p>
+          <p className="record-header-type text-[11px] text-[#141210] mb-2">Why there is nothing to click</p>
           <p className="text-[#141210]">
             No likes, no counters, no most-read. Attention is the thing that turns a news page into noise, so the wire does not measure it. Passing an entry on is not a counter — it is what the wire is for. Entries sit in date order and are read or not read. What a reader gets instead is the source, how well the claim is known, and one plain line on what can be copied.
           </p>
