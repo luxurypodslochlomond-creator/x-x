@@ -32,6 +32,19 @@ export async function resolveChecker(base44) {
   const list = rows?.items || rows || [];
   const line = list[0] || null;
 
+  // ── THE MOMENT THEY ACTUALLY TURNED UP ────────────────────────────────────────
+  // The founder asked whether the record knows when somebody agrees to be a checker, and
+  // the honest answer was no: it knew who had been written down, never who had arrived.
+  // This is that answer changed, and it is changed honestly. A line is stamped the first
+  // time the person's OWN sign-in is recognised against it — never because a letter was
+  // sent, and never because a letter may have been opened, since a letter cannot be read
+  // back. Once, only, and it is allowed to fail without keeping anybody out of the room.
+  if (line && !line.joined_at) {
+    base44.asServiceRole.entities.ClimateChecker
+      .update(line.id, { joined_at: new Date().toISOString() })
+      .catch(() => {});
+  }
+
   if (line && !line.active && !isAdmin) {
     return { error: 'Your place on this record is paused', status: 403, paused: true };
   }

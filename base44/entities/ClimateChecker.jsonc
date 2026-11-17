@@ -1,7 +1,7 @@
 {
   "name": "ClimateChecker",
   "type": "object",
-  "description": "Who may come into the record, and what they may do once inside. One list, two kinds of line: a checker is a pair of eyes \u2014 they read what is waiting and write a note in their own name, and that is all; a keeper is the person the record answers to \u2014 the founder \u2014 and they alone may put an entry on the record or hold it back. The flag on the line decides which, so the record has one guest list rather than two that drift apart. Neither kind can see a submitter's email, and neither holds the app's admin keys: being the keeper of this record gives the record's own power and nothing else in the building. A keeper adds and removes these lines; nobody can add themselves. A person's own line for the public roll is written by that person and by nobody else: it is empty until they write it, and emptying it takes them off the roll without touching their place on the list.",
+  "description": "Who may come into the record, and what they may do once inside. One list, two kinds of line: a checker is a pair of eyes \u2014 they read what is waiting and write a note in their own name, and that is all; a keeper is the person the record answers to \u2014 the founder \u2014 and they alone may put an entry on the record or hold it back. The flag on the line decides which, so the record has one guest list rather than two that drift apart. Neither kind can see a submitter's email, and neither holds the app's admin keys: being the keeper of this record gives the record's own power and nothing else in the building. A keeper adds and removes these lines; nobody can add themselves. A person's own line for the public roll is written by that person and by nobody else: it is empty until they write it, and emptying it takes them off the roll without touching their place on the list. Each line also keeps what actually happened to the person, and only what happened: when the sign-in invitation was made, when the record's own letter last went out (or why it did not), the first time their own sign-in was recognised against this line, and whose word put them here. It never says a letter was opened, because a letter cannot be read back.",
   "properties": {
     "email": {
       "type": "string",
@@ -37,6 +37,25 @@
     "added_by": {
       "type": "string",
       "description": "The keeper who put them on the list."
+    },
+    "invited_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the sign-in invitation was made for this address. The moment the person was actually given a way in, as opposed to being written down on a list."
+    },
+    "notice_sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the record's own letter to this person last went out. A letter that went is different from a letter that was attempted, and a keeper looking at the list is entitled to know which one happened."
+    },
+    "notice_error": {
+      "type": "string",
+      "description": "Why the record's letter did not go out, in plain words, when it did not. Kept rather than swallowed so the list can say 'no letter' instead of pretending, and so a keeper can send it again with one tap."
+    },
+    "joined_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The first time this person's own sign-in was recognised against this line \u2014 the record's evidence that they turned up. Never inferred from a letter being opened, because a letter cannot be read back. Empty means: invited, not seen yet."
     }
   },
   "required": [

@@ -42,13 +42,22 @@ async function rosterOf(base44) {
 // only evidence: how many notes they have signed and when the last one was, and whether
 // they have written their own line on the roll. Nothing here is a guess about an email
 // being opened — a letter cannot be read back, and the record will not pretend it can.
-function shapeLine(row, evidence, names) {
+function shapeLine(row, evidence, names, agreed) {
   const e = (evidence && evidence.get(lower(row.email))) || { notes: 0, last: '' };
   return {
     id: row.id,
     email: row.email || '',
     name: row.name || '',
     note: row.note || '',
+    // ── THE TRAIL, AS THE RECORD ACTUALLY KNOWS IT ─────────────────────────────
+    // Four facts a keeper asks about a name: when they were written down, whether the
+    // letter went (and why not, when it did not), whether they have ever turned up, and
+    // whose word put them here. Nothing here is a guess about an inbox.
+    invited_at: row.invited_at || row.created_date || '',
+    notice_sent_at: row.notice_sent_at || '',
+    notice_error: row.notice_error || '',
+    joined_at: row.joined_at || '',
+    agreed_by: (agreed && agreed.get(lower(row.email))) || '',
     // ── WHOSE WORD PUT THIS LINE HERE ────────────────────────────────────────────
     // With three keepers on the record, "on the list" is not the answer a keeper needs —
     // "put here by Brian" is. A guest list where any line could have come from anyone is
@@ -79,15 +88,36 @@ async function logIt(base44, { rowId, title, action, reviewer, note }) {
   }
 }
 
+// ── A LETTER THAT WENT AND A LETTER THAT DID NOT ARE TWO DIFFERENT THINGS ───────
+// This used to swallow the outcome, so the list could only ever say "told" and a keeper had
+// no way of knowing whether the person had heard anything at all. It now answers, and the
+// answer is written onto the person's line — the day it went, or the reason it did not.
 async function tell(base44, payload) {
   try {
     // Sent as the keeper who made the change, never as the building. The letter's own guard
     // asks for a keeper of this record, and a service-role call carries no keeper at all —
     // which is how a letter that was meant to go out quietly stayed inside the building and
     // nobody was told. Same change, same words, just the hand that actually made it.
-    await base44.functions.invoke('climateCheckerNotice', payload);
+    const res = await base44.functions.invoke('climateCheckerNotice', payload);
+    const d = res?.data || {};
+    if (d?.error) return { sent: false, why: String(d.error).slice(0, 200) };
+    return { sent: true, why: '' };
   } catch (e) {
     console.error('climateAccessChange: notice failed:', e.message);
+    return { sent: false, why: String(e?.message || 'The letter could not be sent.').slice(0, 200) };
+  }
+}
+
+// The record of what happened to the letter, written where the keeper can read it back.
+async function markNotice(base44, rowId, told) {
+  if (!rowId) return;
+  try {
+    await base44.asServiceRole.entities[ROSTER].update(rowId, {
+      notice_sent_at: told.sent ? new Date().toISOString() : '',
+      notice_error: told.sent ? '' : told.why || 'The letter could not be sent.',
+    });
+  } catch (e) {
+    console.error('climateAccessChange: could not record the letter:', e?.message);
   }
 }
 
@@ -119,14 +149,14 @@ async function applyChange(base44, change, who, basis) {
       active: true,
       note: change.note || '',
       added_by: change.requested_by || by,
+      invited_at: new Date().toISOString(),
     });
 
-    let invited = false;
     try {
       await base44.users.inviteUser(email, 'user');
-      invited = true;
     } catch (e) {
-      invited = false;
+      // Already a user of the building, most often. The record's own letter still goes.
+      console.error('climateAccessChange: sign-in invite skipped:', e?.message);
     }
 
     // ── THE LETTER THAT NAMES THE PERSON WHO VOUCHED ────────────────────────────
@@ -136,27 +166,31 @@ async function applyChange(base44, change, who, basis) {
     // platform's, which cannot carry a name at all. That is backwards. A person joining a
     // record should hear from a person, not from a form: so they get the record's letter
     // every time, alongside the sign-in key, and the first line of it is whose word it was.
-    await tell(base44, {
+    const told = await tell(base44, {
       email,
       name: change.target_name || email,
       state: 'invited',
       person_letter: true,
       row_id: created?.id || '',
     });
+    await markNotice(base44, created?.id, told);
 
     await logIt(base44, {
       rowId: created?.id || '',
       title: `${change.target_name || email}${change.target_is_keeper ? ' · keeper' : ' · checker'}`,
       action: 'access_granted',
       reviewer: by,
-      note: basisNote,
+      note: `${basisNote}${told.sent ? ' The record\'s letter went out.' : ' The record\'s letter did NOT go out.'}`,
     });
 
+    const who2 = change.target_name || email;
+    const place = change.target_is_keeper ? 'holds the keys now' : 'is on the list';
     return {
       ok: true,
-      message: change.target_is_keeper
-        ? `${change.target_name || email} holds the keys now and has been told.`
-        : `${change.target_name || email} is on the list and has been told.`,
+      notice_sent: told.sent,
+      message: told.sent
+        ? `${who2} ${place}, and the letter has gone.`
+        : `${who2} ${place} — but the letter did NOT go. Their line says so; send it again from there.`,
     };
   }
 
@@ -260,13 +294,32 @@ export default async function (req) {
       // without ever printing one keeper's address to another.
       const names = new Map(rows.map((r) => [lower(r.email), r.name || r.email]));
 
+      // ── WHOSE WORD PUT THEM THERE ─────────────────────────────────────────────
+      // For somebody who was actually added, the record already holds the answer in its own
+      // access changes: who asked, and who agreed. Read back here as names, never addresses,
+      // so a keeper sees "asked by Brian, agreed by Janine" and not a line of email.
+      const agreed = new Map();
+      try {
+        const done = await base44.asServiceRole.entities[CHANGES].filter(
+          { status: 'applied', change: 'add' },
+          { sort: '-created_date', limit: 100 }
+        );
+        (done?.items || done || []).forEach((c) => {
+          const key = lower(c.target_email);
+          const hand = c.confirmed_by || c.requested_by || '';
+          if (key && hand && !agreed.has(key)) agreed.set(key, names.get(lower(hand)) || '');
+        });
+      } catch (e) {
+        console.error('climateAccessChange: could not read who agreed', e?.message);
+      }
+
       return Response.json({
         me,
         name: who.name,
         solo: activeKeepers <= 1,
         owner: who.user?.role === 'admin',
-        keepers: rows.filter((r) => r.is_keeper).map((r) => shapeLine(r, evidence, names)),
-        checkers: rows.filter((r) => !r.is_keeper).map((r) => shapeLine(r, evidence, names)),
+        keepers: rows.filter((r) => r.is_keeper).map((r) => shapeLine(r, evidence, names, agreed)),
+        checkers: rows.filter((r) => !r.is_keeper).map((r) => shapeLine(r, evidence, names, agreed)),
         waiting,
       });
     }
@@ -468,6 +521,35 @@ export default async function (req) {
       await base44.asServiceRole.entities[CHANGES]
         .update(changeId, { status: 'cancelled', confirmed_by: who.user?.email || '' });
       return Response.json({ cancelled: true, message: 'Withdrawn. Nothing was changed, and the line stays on the record as withdrawn.' });
+    }
+
+    // ── SENDING THE LETTER AGAIN ────────────────────────────────────────────────
+    // A letter that failed had no way back: the line said "told" whether or not it had been,
+    // and the only cure was to take the person off and add them again — which would have
+    // thrown away their notes. So the line can be re-sent from the list, and nothing else
+    // about the person changes when it is.
+    if (action === 'notice') {
+      const id = String(body?.row_id || '');
+      if (!id) return Response.json({ error: 'Missing row_id' }, { status: 400 });
+      const row = await base44.asServiceRole.entities[ROSTER]
+        .get(id)
+        .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
+      if (!row) return Response.json({ error: 'That person is no longer on the list.' }, { status: 404 });
+
+      const told = await tell(base44, {
+        email: row.email,
+        name: row.name || row.email,
+        state: row.active ? 'invited' : 'paused',
+        person_letter: true,
+        row_id: row.id,
+      });
+      await markNotice(base44, row.id, told);
+      return Response.json({
+        sent: told.sent,
+        message: told.sent
+          ? `The letter has gone out again to ${row.email}.`
+          : `The letter could not be sent. Nothing else was changed.`,
+      });
     }
 
     return Response.json({ error: 'Unknown action' }, { status: 400 });

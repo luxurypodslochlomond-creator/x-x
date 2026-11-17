@@ -1,5 +1,6 @@
 import React from 'react';
-import { Check, Handshake, X } from 'lucide-react';
+import { MarkAgreed, MarkStrike } from './keeper/TrailMarks';
+import { MarkStamp } from './keeper/KeeperMarks';
 
 // ── WAITING FOR A SECOND KEY ───────────────────────────────────────────────────
 // The half of an access change that has been asked and not yet agreed. It sits above the
@@ -15,10 +16,10 @@ export default function AccessSecondKey({ items, onConfirm, onCancel, busy }) {
   return (
     <div className="border border-record-ink/25 bg-record-bone p-3 mb-6">
       <p className="flex items-center gap-1.5 text-[9px] font-mono uppercase tracking-[0.18em] text-record-red mb-1.5">
-        <Handshake className="w-3 h-3" /> waiting for a second key · {items.length}
+        <MarkAgreed size={12} /> waiting for a second key · {items.length}
       </p>
       <p className="text-[12.5px] text-record-muted leading-[1.6] mb-1" style={{ fontFamily: 'var(--font-reading)' }}>
-        Nothing has changed yet. One keeper asks, a different keeper agrees. Nobody moves access alone.
+        Nothing has changed yet. One keeper asks, a different keeper agrees.
       </p>
 
       {items.map((w) => (
@@ -32,14 +33,14 @@ export default function AccessSecondKey({ items, onConfirm, onCancel, busy }) {
           {w.mine ? (
             <div className="flex items-center gap-4 mt-1.5">
               <span className="text-[12px] text-record-muted flex-1 leading-[1.5]" style={{ fontFamily: 'var(--font-reading)' }}>
-                You asked this one. Someone else has to agree to it.
+                Yours. Someone else has to agree.
               </span>
               <button
                 onClick={() => onCancel(w.id)}
                 disabled={busy}
                 className="min-h-[36px] inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.1em] text-record-muted disabled:opacity-40"
               >
-                <X className="w-3.5 h-3.5" /> withdraw
+                <MarkStrike size={14} /> withdraw
               </button>
             </div>
           ) : (
@@ -49,14 +50,14 @@ export default function AccessSecondKey({ items, onConfirm, onCancel, busy }) {
                 disabled={busy}
                 className="min-h-[36px] inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.1em] font-black text-[#1e3a2b] disabled:opacity-40"
               >
-                <Check className="w-3.5 h-3.5" /> agree
+                <MarkStamp size={14} /> agree
               </button>
               <button
                 onClick={() => onCancel(w.id)}
                 disabled={busy}
                 className="min-h-[36px] inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-[0.1em] text-record-muted disabled:opacity-40"
               >
-                <X className="w-3.5 h-3.5" /> cancel
+                <MarkStrike size={14} /> cancel
               </button>
             </div>
           )}

@@ -148,7 +148,7 @@ export default function ClimateKeeperRoom() {
       {state === 'signed_out' && (
         <Door
           heading="This room is by invitation"
-          body="Sign in with the address a keeper added to the record. Reading the public record needs no account; working here needs an invitation."
+          body="Sign in with the address a keeper put on the list. Reading the record needs no account; working here does."
           actionLabel="Sign in"
           onAction={() => base44.auth.redirectToLogin(window.location.href)}
         />
@@ -157,7 +157,7 @@ export default function ClimateKeeperRoom() {
       {state === 'paused' && (
         <Door
           heading="Your place is paused"
-          body="Your key is closed for now, and this is not a judgement on the work you did: the notes you wrote are still on the record, still in your name, and nothing has been taken off. A keeper can open it again — it is one line."
+          body="Your key is closed for now. The notes you wrote are still on the record, still in your name. A keeper can open it again."
           actionLabel="Look again"
           onAction={load}
         />
@@ -166,7 +166,7 @@ export default function ClimateKeeperRoom() {
       {state === 'not_on_list' && (
         <Door
           heading="This room is by invitation"
-          body="It is for the people the record answers to and the people who agreed to look. Ask for your address to be put on the list, and it opens on your next sign-in."
+          body="Ask a keeper to put your address on the list, and it opens on your next sign-in."
           actionLabel="What checking involves"
           onAction={() => { window.location.href = '/ClimateFellows'; }}
         />

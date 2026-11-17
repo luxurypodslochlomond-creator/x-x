@@ -88,7 +88,7 @@ export default function InviteSteps() {
   const reading = { fontFamily: 'var(--font-reading)' };
 
   return (
-    <details open className="room-details border-t border-[#141210]/20 pt-3 mb-6">
+    <details className="room-details border-t border-[#141210]/20 pt-3 mb-6">
       <summary>What to send them afterwards</summary>
       <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-3" style={reading}>
         The sign-in invitation sets their password. This is the note you send beside it.

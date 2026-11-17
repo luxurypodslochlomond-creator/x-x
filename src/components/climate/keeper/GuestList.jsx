@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
-import { UserPlus, Pause, Play, Trash2, RefreshCw, KeyRound, Eye, History } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
+import { MarkKey, MarkEye, MarkLedger } from '@/components/climate/keeper/KeeperMarks';
+import {
+  MarkLetter, MarkStep, MarkAgreed, MarkHold, MarkStrike, MarkAgain, MarkNote,
+} from '@/components/climate/keeper/TrailMarks';
 
 const VERBS = {
   access_granted: 'was added',
@@ -142,6 +146,23 @@ export default function GuestList() {
     }
   };
 
+  // ── SEND THE LETTER AGAIN ────────────────────────────────────────────────────
+  // Only ever for a line whose letter did not go. It changes nothing about the person, so
+  // nobody has to be taken off and put back on to make up for a failed letter.
+  const resend = async (row) => {
+    setBusy(true);
+    setMessage('');
+    try {
+      const res = await call({ action: 'notice', row_id: row.id });
+      setMessage(res?.data?.message || 'The record could not send its letter.');
+    } catch (e) {
+      setMessage(e?.response?.data?.error || e?.message || 'The record could not send its letter.');
+    } finally {
+      setBusy(false);
+      load();
+    }
+  };
+
   // One form, two hands. The payload is exactly what the two separate forms sent before —
   // nothing about the rule changed when the corridor became one door.
   const add = () => {
@@ -180,15 +201,8 @@ export default function GuestList() {
     return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
   };
 
-  const standing = (row) => {
-    if (!row.active) return 'paused · what they wrote stays';
-    if (row.notes > 0) {
-      return `${row.notes} ${row.notes === 1 ? 'note' : 'notes'}${row.last_note ? ` · last ${shortDay(row.last_note)}` : ''}`;
-    }
-    if (row.line_written) return 'wrote their line · no notes yet';
-    if (row.is_keeper) return `holding the keys since ${shortDay(row.asked) || 'today'}`;
-    return `asked ${shortDay(row.asked) || 'today'} · not in yet`;
-  };
+  // The day as it is printed on the line: 5 Nov, never a timestamp.
+  const dayOr = (iso, fallback) => (iso ? shortDay(iso) : fallback);
 
   // One person as a line in a printed register: the name set properly, the standing of their
   // line stamped beside it, the facts in the machine's small hand underneath, the two things
@@ -215,10 +229,48 @@ export default function GuestList() {
             {row.email}
             {row.note ? ` · ${row.note}` : ''}
           </p>
-          <p className="truncate font-mono text-[10px] tracking-[0.02em] text-[#6b5f4f]">
-            {standing(row)}
-            {row.added_by ? ` · by ${row.added_by}` : ''}
-          </p>
+          {/* ── THE TRAIL ────────────────────────────────────────────────────────
+              Asked, letter, turned up, whose word, notes signed — five marks and five
+              facts on one line, so a keeper never has to ask "did they ever get it, and
+              did they ever come in?" The record cannot read an inbox, so a letter is
+              only ever counted as gone; turning up is the person's own sign-in, stamped
+              the first time it was recognised. */}
+          <div className="mt-1 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[9.5px] uppercase tracking-[0.06em] text-[#6b5f4f]">
+            <span
+              className="inline-flex items-center gap-1"
+              title={row.notice_error || (row.notice_sent_at ? 'the record’s letter went out' : 'no letter sent yet')}
+            >
+              <MarkLetter
+                size={13}
+                state={row.notice_sent_at ? 'sent' : row.notice_error ? 'failed' : 'none'}
+                className={row.notice_error ? 'text-[#b3261e]' : 'text-[#1e3a2b]'}
+              />
+              {dayOr(row.notice_sent_at, row.notice_error ? 'no letter' : '—')}
+            </span>
+            <span className="inline-flex items-center gap-1" title={row.joined_at ? 'their own sign-in was recognised' : 'not seen yet'}>
+              <MarkStep size={13} className={row.joined_at ? 'text-[#1e3a2b]' : 'text-[#b3a794]'} />
+              {dayOr(row.joined_at, 'not in yet')}
+            </span>
+            <span className="inline-flex min-w-0 items-center gap-1">
+              <MarkAgreed size={13} className="text-[#8a7f70]" />
+              <span className="truncate text-[10px] normal-case tracking-normal">
+                {row.agreed_by || row.added_by || '—'}
+              </span>
+            </span>
+            <span className="inline-flex items-center gap-1" title="notes they signed">
+              <MarkNote size={13} className="text-[#8a7f70]" />
+              {row.notes || 0}
+            </span>
+            {row.notice_error && (
+              <button
+                onClick={() => resend(row)}
+                disabled={busy}
+                className="inline-flex min-h-[28px] items-center gap-1 text-[#b3261e] underline decoration-1 underline-offset-2 disabled:opacity-40"
+              >
+                <MarkAgain size={12} /> send it again
+              </button>
+            )}
+          </div>
         </div>
         <div className="flex flex-shrink-0 items-center">
           <button
@@ -227,7 +279,7 @@ export default function GuestList() {
             aria-label={row.active ? `Pause ${row.name || row.email}` : `Let ${row.name || row.email} back in`}
             className="inline-flex min-h-[40px] items-center gap-1 px-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-[#141210] active:text-[#b3261e] disabled:opacity-40"
           >
-            {row.active ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+            {row.active ? <MarkHold size={15} /> : <MarkStep size={15} />}
             {row.active ? 'pause' : 'back'}
           </button>
           <button
@@ -236,7 +288,7 @@ export default function GuestList() {
             aria-label={`Take ${row.name || row.email} off the list`}
             className="inline-flex min-h-[40px] items-center px-1.5 text-[#b3261e] active:opacity-60 disabled:opacity-40"
           >
-            <Trash2 className="h-3.5 w-3.5" />
+            <MarkStrike size={15} />
           </button>
         </div>
       </div>
@@ -274,7 +326,7 @@ export default function GuestList() {
           between them — so "who is on this record" was a question you answered by scrolling.
           Both lists are here now, and nothing sits between them. */}
       <div className="border-t border-[#141210]/20 pt-3 mb-5">
-        <p className={label} style={reading}><KeyRound className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />The keys</p>
+        <p className={label} style={reading}><MarkKey size={14} className="inline mr-1.5 -mt-0.5" />The keys</p>
         {!loading && !keepers.length && (
           <p className="text-[14px] text-[#3a342c] py-1" style={reading}>
             No keeper line on the record yet. Whoever built the app still opens this page.
@@ -283,7 +335,7 @@ export default function GuestList() {
         {keepers.map((row) => <Row key={row.id} row={row} />)}
 
         <p className={`${label} mt-4`} style={reading}>
-          <Eye className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+          <MarkEye size={14} className="inline mr-1.5 -mt-0.5" />
           Checking
           {checkers.length > 0 && (
             <span className="text-[#8a7f70]"> · {checkers.filter((r) => r.active).length} now, {checkers.filter((r) => !r.active).length} paused</span>
@@ -298,7 +350,7 @@ export default function GuestList() {
         {checkers.map((row) => <Row key={row.id} row={row} />)}
 
         <button onClick={load} className="mt-2 text-[12.5px] text-[#6b5f4f] inline-flex items-center gap-1 min-h-[36px]" style={reading}>
-          <RefreshCw className="w-3 h-3" /> again
+          <MarkAgain size={13} /> again
         </button>
       </div>
 
@@ -338,7 +390,7 @@ export default function GuestList() {
           className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#1a1612] text-[#f4efe4] text-[14px] font-semibold disabled:opacity-40"
           style={reading}
         >
-          {kind === 'check' ? <UserPlus className="w-4 h-4" /> : <KeyRound className="w-4 h-4" />}
+          {kind === 'check' ? <MarkEye size={17} /> : <MarkKey size={17} />}
           {busy ? 'asking' : kind === 'check' ? 'Add them to the checking list' : 'Ask for the keys'}
         </button>
       </div>
@@ -354,12 +406,11 @@ export default function GuestList() {
         <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-6" style={reading}>
           <span className="font-semibold">Two keys.</span>{' '}
           {solo
-            ? 'You are the only keeper holding the keys today, so your word is enough — and the record says so. Once a second keeper exists, nothing moves without both.'
+            ? 'You hold the only key today, so your word stands — and the line says so.'
             : owner
-            ? 'You hold the building’s keys, so your own asks land straight away and the audit line says they stood alone. Every other keeper needs a second name.'
-            : 'A checker is one keeper’s decision: added, paused or taken off on your word. The keys are the ones that need two — one keeper asks and a different keeper agrees before anybody gains or loses them. The last keeper can never be taken off.'}{' '}
-          Pausing ends their access at once and tells them; notes they already wrote stay on the record in their name.
-          Every change is written down with the name of the keeper whose word it was — both names when the keys change hands.
+            ? 'You hold the building’s keys, so your asks land at once and the line says they stood alone.'
+            : 'A checker moves on one keeper’s word. The keys take two: one asks, another agrees. The last keeper can never be taken off.'}{' '}
+          Pausing ends access at once and tells them. What they wrote stays in their name.
         </p>
       </AccessGuide>
 
@@ -373,7 +424,7 @@ export default function GuestList() {
           className="w-full flex items-center justify-between gap-2 min-h-[44px] text-left"
         >
           <span className="text-[12.5px] text-[#6b5f4f]" style={reading}>
-            <History className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
+            <MarkLedger size={14} className="inline mr-1.5 -mt-0.5" />
             What has changed here
             {history.length > 0 && <span> · {history.length}</span>}
           </span>
