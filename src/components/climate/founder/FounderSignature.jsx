@@ -6,7 +6,7 @@ export default function FounderSignature() {
     <section aria-labelledby="founder-signature" className="record-founder-plate mx-auto my-6 max-w-4xl border-t-4 border-record-red bg-record-paper p-5 lg:my-8 lg:p-8">
       <div className="mb-5 flex items-start gap-3">
         <Globe aria-hidden="true" className="h-5 w-5 shrink-0 text-record-red" />
-        <h2 id="founder-signature" className="record-header-type text-sm text-record-ink lg:text-base">The Signature</h2>
+        <h2 id="founder-signature" className="font-display text-xl font-bold leading-[1.1] text-record-ink lg:text-2xl" style={{ letterSpacing: '-0.01em' }}>The Signature</h2>
       </div>
       <p className="font-bold text-record-ink">Janine M. H. Selendy</p>
       <p className="mt-1 text-record-muted">Founder</p>

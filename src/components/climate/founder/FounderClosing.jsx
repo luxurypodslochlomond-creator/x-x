@@ -10,7 +10,7 @@ export default function FounderClosing() {
       <RecordPaintedBand continuous className="px-5 py-10 text-center lg:px-10 lg:py-14">
         <div className="relative">
           <div className="mb-5 flex justify-center"><SignalBeacon size={34} color="rgb(var(--record-signal))" /></div>
-          <p className="record-header-type record-founder-quote mx-auto max-w-2xl text-xl leading-relaxed text-record-paper lg:text-2xl">“Together we can change the course of climate change.”</p>
+          <blockquote className="record-founder-quote mx-auto max-w-2xl text-record-paper">“Together we can change the course of climate change.”</blockquote>
         </div>
       </RecordPaintedBand>
       <div className="bg-record-signal px-5 py-6 text-center lg:px-10">

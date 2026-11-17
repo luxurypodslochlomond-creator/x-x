@@ -195,9 +195,19 @@ export default function ClimateLayout({ children, currentPage }) {
           off the top is a way through you have to go looking for, and deep in a long page
           there is nothing at all above you saying which record you are standing in. It pins
           the same everywhere, and every jump down to the record allows for its height. */}
-      <header className="sticky top-0 z-50 text-record-ink">
+      <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
+        {/* ── THE YELLOW SITS ON THE RED, EDGE TO EDGE ─────────────────────────────
+            The band was drawn inside the book's column, eight pixels below the red hairline,
+            so at desk width there was a strip of paper above it and the painting showing
+            either side of it — a floating yellow ribbon with a gap over its head. The paper
+            was also only as wide as the column, which is why the ground came up between the
+            masthead and the page.
+            The band is now the full width of the glass and flush against the red: one
+            uninterrupted signal from the top edge down, on every screen, and the header
+            itself holds paper so nothing shows through behind it. */}
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
-        <div className={`mx-auto max-w-[1100px] bg-record-paper px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
+        {!isRoom && <RecordTimeBar />}
+        <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           {/* ── THE NAME OPENS A WORKED ROOM, AND ONLY A WORKED ROOM ────────────────
               On a page that is read, the record's name at the top said what the yellow
               line beneath it already said, in a second voice, and took forty pixels of a
@@ -229,8 +239,6 @@ export default function ClimateLayout({ children, currentPage }) {
               The sentence, and the tongue. Worked rooms still go without it, for the same
               reason they go without the rule and the imprint: in a room the work is the only
               thing on the glass. */}
-          {!isRoom && <RecordTimeBar className="-mx-4 mt-2 lg:-mx-10" />}
-
           {!isRoom && <RecordRule />}
 
           {!isRoom && <RecordImprint onOpenContents={openContents} contentsOpen={contentsOpen} />}

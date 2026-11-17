@@ -3,7 +3,10 @@ import React from 'react';
 export default function FounderName() {
   return (
     <section aria-labelledby="founder-name" className="record-founder-plate mx-auto my-6 w-full max-w-4xl border-t-4 border-record-red bg-record-paper px-5 py-8 text-center lg:my-8 lg:px-10 lg:py-10">
-      <h1 id="founder-name" className="font-display text-3xl font-bold uppercase text-record-ink lg:text-5xl">Janine M. H. Selendy</h1>
+      {/* Her name is set, not stamped. Upper-cased and wide-tracked it read like a form
+          field; in the record's display face at size, with the tracking pulled in, it reads
+          like the name over the door of the whole thing. */}
+      <h1 id="founder-name" className="font-display text-4xl font-bold leading-[1.02] text-record-ink lg:text-6xl" style={{ letterSpacing: '-0.02em' }}>Janine M. H. Selendy</h1>
       <p className="record-header-type mx-auto mt-5 text-sm text-record-ink">Founder</p>
       <p className="mx-auto mt-4 max-w-2xl text-record-muted">Four decades of finding and advancing solutions to the interrelated concerns of global health, environment, and poverty.</p>
       <div className="mx-auto mt-6 max-w-md border-t border-record-ink/20 pt-5">
