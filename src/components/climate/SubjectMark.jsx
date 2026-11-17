@@ -22,6 +22,10 @@ export default function SubjectMark({ subject = 'all', size = 34, active = false
           tells you what the mark is about without pretending to be a legend. */}
       <path d={wash} fill="currentColor" stroke="none" className="text-record-mark" opacity={active ? 0.24 : 0.14} />
       <path d={drawing} className="text-record-mark" />
+      {/* The sun accent is yellow, and yellow alone on warm paper at this weight is not a
+          line, it is a gap. So this one pigment is drawn twice: an ink edge first, the
+          yellow on top of it. Blue, green and clay need nothing — they already read. */}
+      {pigment === 'text-[#ffd447]' && <path d={detail} strokeWidth="4.2" stroke="#141210" />}
       <path d={detail} strokeWidth="2.4" className={pigment} />
     </svg>
   );

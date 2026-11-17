@@ -244,6 +244,11 @@ export default function TogetherChangeClimate() {
   const [submitCategory, setSubmitCategory] = useState(null);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const contentRef = useRef(null);
+  // The desk's subject line. Choosing a subject used to change the record underneath you
+  // while the page stayed exactly where it was, so the answer to your click was somewhere
+  // you had to go and find. One line at the top of the glass, chosen subject above it and
+  // the room it opens directly beneath: nothing to scroll for, either way.
+  const subjectDeskRef = useRef(null);
   const firstRender = useRef(true);
   // Set when the box moved the kind, rather than a filter button. The page must not jump.
   const typedKind = useRef(false);
@@ -716,7 +721,7 @@ export default function TogetherChangeClimate() {
           depending on the glass it was on. It is the same index everywhere now: the
           drawings, their counts, laid flat because a desk has the room and no thumb is
           doing the aiming. Nothing about the filter has changed. ── */}
-      <div className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6]">
+      <div ref={subjectDeskRef} className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6] scroll-mt-2">
         <div className="border-y border-[#141210]/20">
           {/* One line, the way the phone has one line: the subject you are standing in,
               its folio, and a tab that opens the index. Everything the desk used to lay
@@ -741,7 +746,11 @@ export default function TogetherChangeClimate() {
             <div id="record-subject-index" className="pb-2">
               <button
                 type="button"
-                onClick={() => { setSelectedCategory('all'); setShowIndex(false); }}
+                onClick={() => {
+                  setSelectedCategory('all');
+                  setShowIndex(false);
+                  requestAnimationFrame(() => subjectDeskRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                }}
                 aria-pressed={selectedCategory === 'all'}
                 className={`flex min-h-11 w-full items-center gap-2 text-left ${selectedCategory === 'all' ? 'text-record-mark' : 'text-[#141210]'}`}
               >
@@ -755,7 +764,11 @@ export default function TogetherChangeClimate() {
                     key={s.id}
                     subject={s}
                     selected={selectedCategory === s.id}
-                    onClick={() => { setSelectedCategory(s.id); setShowIndex(false); }}
+                    onClick={() => {
+                      setSelectedCategory(s.id);
+                      setShowIndex(false);
+                      requestAnimationFrame(() => subjectDeskRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                    }}
                   />
                 ))}
               </div>
