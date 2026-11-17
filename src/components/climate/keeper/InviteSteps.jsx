@@ -91,9 +91,7 @@ export default function InviteSteps() {
     <details open className="room-details border-t border-[#141210]/20 pt-3 mb-6">
       <summary>What to send them afterwards</summary>
       <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-3" style={reading}>
-        The invitation email sets their password. These three steps go beside it, in the order
-        a checker works: sign in, find the queue, then add something of their own. Type their
-        first name once and take either or both.
+        The sign-in invitation sets their password. This is the note you send beside it.
       </p>
 
       <ol className="space-y-2 mb-3">
@@ -120,8 +118,18 @@ export default function InviteSteps() {
         style={reading}
       >
         {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-        {copied ? 'Copied. Paste it into your email.' : 'Copy these steps as an email'}
+        {copied ? 'Copied — paste it into your email' : 'Copy the note'}
       </button>
+
+      {/* ── IT SAID "SEND" AND IT ONLY COPIED ─────────────────────────────────────
+          Brian, 17 November: "tried sending an email to a keeper, nothing saved." He was
+          right that nothing saved: this button puts text on the clipboard and the record
+          never sends it, because a letter from a person should come from that person's own
+          mailbox. The label now says what it does, and the line under it says what it
+          does not, so nobody waits for an email this page was never going to send. */}
+      <p className="text-[11.5px] leading-[1.6] text-[#6b5f4f] mt-1.5" style={reading}>
+        Copies to your clipboard — nothing is sent from here. Paste it into your own email to them.
+      </p>
 
       <div className="mt-2">
         <InviteCard name={name} />

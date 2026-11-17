@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { base44 } from '@/api/base44Client';
 import { UserPlus, Pause, Play, Trash2, RefreshCw, KeyRound, Eye, History } from 'lucide-react';
 
@@ -62,6 +62,7 @@ export default function GuestList() {
   const [note, setNote] = useState('');
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
+  const noteRef = useRef(null);
 
   const call = (payload) => base44.functions.invoke('climateAccessChange', payload);
 
@@ -80,6 +81,19 @@ export default function GuestList() {
   }, []);
 
   useEffect(() => { load(); }, [load]);
+
+  // ── THE ANSWER WAS BEING SHOWN TWO SCREENS FROM THE TAP ──────────────────────
+  // Brian, 17 November: "tried sending an email to a keeper, nothing saved." Nothing
+  // appeared to happen, because the only line that says what happened was printed at the
+  // very top of this door while the button he pressed is at the bottom of it — and an ask
+  // for the keys does not change the list, it only opens a slip above. So the note now
+  // sits beside the work and comes to the eye when it changes. No rule was relaxed: it is
+  // the same server, the same two keys, and the same refusal to let one hand move access.
+  useEffect(() => {
+    if (!message) return;
+    const t = setTimeout(() => noteRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' }), 60);
+    return () => clearTimeout(t);
+  }, [message]);
 
   // Everything that changes access goes through the same door, so there is one rule rather
   // than a careful rule and a quick one.
@@ -176,47 +190,58 @@ export default function GuestList() {
     return `asked ${shortDay(row.asked) || 'today'} · not in yet`;
   };
 
-  const Row = ({ row }) => (
-    <div className="flex items-center gap-2 border-b border-[#141210]/12 py-1.5">
-      <div className="min-w-0 flex-1">
-        <p className="flex items-baseline gap-1.5 text-[14px] leading-tight" style={reading}>
-          <span className="truncate font-semibold text-[#141210]">{row.name || row.email}</span>
-          <span
-            className="flex-shrink-0 font-mono text-[9.5px] uppercase tracking-[0.06em]"
-            style={{ color: row.active ? '#1e3a2b' : '#b3261e' }}
+  // One person as a line in a printed register: the name set properly, the standing of their
+  // line stamped beside it, the facts in the machine's small hand underneath, the two things
+  // you can do to them at the end of the same line. Nothing centred, nothing carded, nothing
+  // rounded — a register, not a dashboard.
+  const Row = ({ row }) => {
+    const stamp = row.is_keeper
+      ? row.active ? 'keys' : 'paused'
+      : !row.active ? 'paused' : row.notes > 0 ? 'checking' : 'asked';
+    const stampColour = !row.active ? '#b3261e' : row.is_keeper ? '#b3261e' : '#1e3a2b';
+    return (
+      <div className="grid grid-cols-[1fr_auto] items-center gap-1 border-b border-[#141210]/12 py-2">
+        <div className="min-w-0">
+          <p className="flex items-baseline gap-2 leading-tight" style={reading}>
+            <span className="truncate text-[15.5px] font-semibold text-[#141210]">{row.name || row.email}</span>
+            <span
+              className="flex-shrink-0 border px-1 py-[1px] font-mono text-[8.5px] uppercase tracking-[0.16em]"
+              style={{ color: stampColour, borderColor: stampColour, opacity: row.active ? 1 : 0.6 }}
+            >
+              {stamp}
+            </span>
+          </p>
+          <p className="truncate font-mono text-[10.5px] text-[#8a7f70]">
+            {row.email}
+            {row.note ? ` · ${row.note}` : ''}
+          </p>
+          <p className="truncate font-mono text-[10px] tracking-[0.02em] text-[#6b5f4f]">
+            {standing(row)}
+            {row.added_by ? ` · by ${row.added_by}` : ''}
+          </p>
+        </div>
+        <div className="flex flex-shrink-0 items-center">
+          <button
+            onClick={() => ask({ change: row.active ? 'pause' : 'restore', row_id: row.id })}
+            disabled={busy}
+            aria-label={row.active ? `Pause ${row.name || row.email}` : `Let ${row.name || row.email} back in`}
+            className="inline-flex min-h-[40px] items-center gap-1 px-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-[#141210] active:text-[#b3261e] disabled:opacity-40"
           >
-            {row.is_keeper ? (row.active ? 'keys' : 'paused') : !row.active ? 'paused' : row.notes > 0 ? 'checking' : 'asked'}
-          </span>
-        </p>
-        <p className="truncate text-[11.5px] text-[#6b5f4f]" style={reading}>
-          {row.email}
-          {row.note ? ` · ${row.note}` : ''}
-        </p>
-        <p className="truncate font-mono text-[10px] tracking-[0.04em] text-[#8a7f70]">
-          {standing(row)}
-          {row.added_by ? ` · put here by ${row.added_by}` : ''}
-        </p>
+            {row.active ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+            {row.active ? 'pause' : 'back'}
+          </button>
+          <button
+            onClick={() => ask({ change: 'remove', row_id: row.id })}
+            disabled={busy}
+            aria-label={`Take ${row.name || row.email} off the list`}
+            className="inline-flex min-h-[40px] items-center px-1.5 text-[#b3261e] active:opacity-60 disabled:opacity-40"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
-      <button
-        onClick={() => ask({ change: row.active ? 'pause' : 'restore', row_id: row.id })}
-        disabled={busy}
-        aria-label={row.active ? `Pause ${row.name || row.email}` : `Let ${row.name || row.email} back in`}
-        className="inline-flex min-h-[40px] flex-shrink-0 items-center gap-1 px-1.5 text-[11.5px] text-[#141210] active:text-[#b3261e] disabled:opacity-40"
-        style={reading}
-      >
-        {row.active ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-        {row.active ? 'pause' : 'back in'}
-      </button>
-      <button
-        onClick={() => ask({ change: 'remove', row_id: row.id })}
-        disabled={busy}
-        aria-label={`Take ${row.name || row.email} off the list`}
-        className="inline-flex min-h-[40px] flex-shrink-0 items-center px-1.5 text-[#b3261e] active:opacity-60 disabled:opacity-40"
-      >
-        <Trash2 className="h-3.5 w-3.5" />
-      </button>
-    </div>
-  );
+    );
+  };
 
   const Choice = ({ value, word, line }) => (
     <button
@@ -239,12 +264,6 @@ export default function GuestList() {
   return (
     <div className="pb-10">
       <AccessSecondKey items={waiting} onConfirm={confirm} onCancel={cancel} busy={busy} />
-
-      {message && (
-        <p className="text-[14px] leading-[1.6] text-[#141210] mb-5 border-l-2 border-[#b3261e]/50 pl-3" style={reading}>
-          {message}
-        </p>
-      )}
 
       {/* Being told is part of access: this is the door you are on when you add somebody, so
           it is where you make sure you will hear that they arrived. */}
@@ -283,6 +302,15 @@ export default function GuestList() {
         </button>
       </div>
 
+      {/* What just happened, printed where the hand that did it can see it. An ask for the
+          keys changes nothing on the list above — it opens a slip at the top — so the line
+          has to say that out loud rather than leave a keeper thinking the tap failed. */}
+      {message && (
+        <div ref={noteRef} className="mb-5 border-l-2 border-[#b3261e] bg-[#efe7d6] px-3 py-2.5">
+          <p className="text-[13.5px] leading-[1.55] text-[#141210]" style={reading}>{message}</p>
+        </div>
+      )}
+
       {/* ── ONE FORM, TWO HANDS ───────────────────────────────────────────────── */}
       <div className="border-t border-[#141210]/20 pt-3 mb-6">
         <p className={label} style={reading}><UserPlus className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />Put somebody on the list</p>
@@ -294,8 +322,8 @@ export default function GuestList() {
 
         <p className="text-[13px] leading-[1.55] text-[#6b5f4f] mb-2" style={reading}>
           {kind === 'check'
-            ? 'They read what is waiting and say whether each source holds up. They cannot publish, edit or delete anything, and they never see who sent it in.'
-            : 'The keys publish, correct, sign, and invite anybody else — and see every submitter’s address. So you ask, and another keeper agrees. Nobody has to do anything until both have said yes.'}
+            ? 'Reads what is waiting and says whether the source holds up. Cannot publish, edit or delete — and never sees who sent it in.'
+            : 'Publishes, signs, invites, and sees every submitter’s address. Your ask, and one other keeper’s word.'}
         </p>
 
         <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="their email address" inputMode="email" className={field} />
