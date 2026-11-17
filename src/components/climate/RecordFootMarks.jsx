@@ -42,13 +42,25 @@ export function MarkPlan({ size = 26, className = '' }) {
   );
 }
 
-// A continuous-line human profile, not a generic account badge.
+// ── THE PERSON WHO ASKED FOR IT, DRAWN ONCE AND PROPERLY ────────────────────────
+// Brian, 17 November: "icons for founder you sure right bro looks like haven't thought
+// about it properly". He was right, and the fault was a drawing trying to be a likeness.
+// The old mark was a continuous profile of a face, cut with five wandering strokes — at
+// thirty-four pixels in a rail it became a knot of ink that read as scribble, and at
+// twenty-two in a two-row rail it would read as dirt on the glass.
+//
+// A door's mark is not a portrait; a portrait is on the page behind it. What this door
+// actually says is that a named person stood here first, so the drawing is that and only
+// that: one head, one pair of shoulders, standing on a line. Nothing is filled, there is
+// no face to be flattered or not, and it cannot be mistaken for the two eyes of the
+// checkers or for a generic account badge, because a badge is a filled circle and this is
+// a person on the record's own red ground.
 export function MarkPortrait({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M7.2 34.8c1.9-3.2 5.6-5.4 9.9-6.5l.6-4.5c-3.1-2.6-4.3-6.3-3.6-10.1C14.8 8.2 18.8 4.1 23.7 5c4.3.8 6.2 3.7 5.1 8.2l3.2 4.1-3.4 1.3c.5 2.3-.2 4.4-2.4 5l-3.3-.2-.1 5.2c4.3 1.6 7.8 3.6 10 6.4" />
-      <path d="M14.3 10.5C10.6 16.9 9.8 22 12 26M19.2 7.4c-6 .6-9.9 4.4-10.6 10.6M24.9 14.3l1.2-.1M26 20.6l2 .2" />
-      <path d="M9.1 30.8c-4.5-6.3-4.2-13 .1-18.8" className="text-record-mark" strokeWidth="1.8" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.9" className={className} aria-hidden="true">
+      <circle cx="20.2" cy="12.6" r="4.8" />
+      <path d="M11.4 30.6c.4-5.5 4.1-9.2 8.8-9.2s8.4 3.7 8.8 9.2" />
+      <path d="M7.4 34.6h25.2" className="text-record-mark" strokeWidth="2.2" />
     </svg>
   );
 }
@@ -180,9 +192,9 @@ export function MarkLens({ size = 26, className = '' }) {
 // mistaken for a letter, a folder, a list or a lens.
 export function MarkBaseOne({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="2.1" className={className} aria-hidden="true">
-      <path d="M22.4 8.8 15.2 14.4M22.4 8.8v21.6M15.6 30.4h13.6" />
-      <rect x="6.4" y="33.6" width="27.2" height="3.1" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} strokeWidth="2.2" className={className} aria-hidden="true">
+      <path d="M22.4 8.4 15.4 13.6M22.4 8.4v21.4M15.8 29.8h13" />
+      <rect x="8.2" y="33.2" width="23.6" height="3.1" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }

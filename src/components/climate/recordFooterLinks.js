@@ -88,7 +88,7 @@ export const RAIL_SECOND_NAV = [
 // pixels, and a caption still reads. A phone has five fingers of room, and there she would be
 // taking a cell from "what is on the record" — which is the question a thumb actually arrives
 // with. The sheet keeps her too, under her fuller name, one tap further in.
-const DESK_FOUNDER = {
+export const DESK_FOUNDER = {
   label: 'Founder',
   to: '/ClimateFounder',
   what: 'Janine M. H. Selendy, and the record she asked for.',

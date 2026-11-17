@@ -62,6 +62,30 @@
    clipped instead. So the caption keeps its weight and the place is said twice, neither
    of which costs a pixel — the ink goes to the mark's red, and a short rule is drawn over
    the drawing itself, the way a bookmark sits on a line of print rather than in it. */
+/* ── TWO ROWS ON A PHONE, AND THE HEIGHT PAID FOR RATHER THAN ADDED ─────────────
+   Brian, 17 November: "reduce size if nav icons so can have two rows … same height as is".
+   So the cell gives up what the row needs: a twenty-two pixel drawing instead of
+   thirty-four, a ten pixel caption instead of eleven, and no padding above or below the
+   drawing worth the name. The hairline between the rows is the one print uses to say two
+   kinds of thing are on the sheet: it separates, it does not rank. Every cell stays far
+   wider than it is tall — eighty-odd pixels of glass across on a 393 — so a thumb still
+   lands inside one, and every door keeps its own word underneath it. */
+.rec-mast-row .rec-art-door {
+  min-height: 0;
+  gap: 0;
+  padding: .1rem 0 .05rem;
+}
+.rec-mast-row .rec-art-caption {
+  font-size: 10px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+.rec-mast-row + .rec-mast-row {
+  margin-top: .08rem;
+  padding-top: .18rem;
+  border-top: 1px solid rgb(var(--record-ink) / .13);
+}
+
 .rec-mast-doors .rec-art-caption {
   white-space: nowrap;
   overflow: hidden;
