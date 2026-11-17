@@ -65,20 +65,21 @@ export default function RecordFooter() {
           <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
           <li>Brian Hughes</li>
         </ul>
-      </div>
 
-      <div className="px-4 lg:px-10">
-        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-record-ink">
+        {/* ── THE COMPANY, IN THE SAME BOX AND THE SAME HAND ───────────────────────
+            Brian, 17 November: "put UNIVERSAL FREQUENCY 51 CIC in yellow box under me you
+            and Gillian please, and remove our email address, and make the link go email or
+            WhatsApp." So the name of the company sits under the three names it belongs to,
+            in the same mono caps, and it is the thing you press rather than an address
+            printed in the open: a reader taps the company and their own mail app opens,
+            already addressed. Nothing on this page now spells the address out for a
+            scraper to collect. */}
+        <a
+          href="mailto:family@uf51.love"
+          className="mt-5 inline-block border-b border-record-ink/45 pb-0.5 font-mono text-[10px] uppercase leading-tight tracking-[0.2em] text-record-ink transition-colors hover:border-record-red hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red lg:text-[11px]"
+        >
           Universal Frequency 51 CIC
-        </p>
-        <p className="mt-2 text-sm leading-relaxed">
-          <a
-            href="mailto:family@uf51.love"
-            className="text-record-mark underline decoration-dotted underline-offset-4 transition-colors hover:text-record-red"
-          >
-            family@uf51.love
-          </a>
-        </p>
+        </a>
       </div>
     </footer>
   );

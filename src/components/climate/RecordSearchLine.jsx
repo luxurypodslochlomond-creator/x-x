@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowRight, Loader2, X } from 'lucide-react';
 import RecordVoiceSearch from '@/components/climate/RecordVoiceSearch';
+import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 
 // ── THE LINE, AND THE KEYBOARD ──────────────────────────────────────────────
 // The field owns the words while they are being written; the address only changes
@@ -57,11 +58,21 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
 
   const clear = () => { setDraft(''); input.current?.focus(); };
 
+  // ── THE SIGNAL BAND ───────────────────────────────────────────────────────────────
+  // Brian, 17 November: "our search needs to be coolasfuck … in every tongue and properly
+  // connected … maybe need the red and yellow." So the box is no longer a bone field lying
+  // on the paper: it sits in the record's own yellow band, on white, with the mark's red on
+  // the one control that does the work — the same three colours the masthead and the foot
+  // are built from, used the way the record uses them.
   return (
-    <form role="search" onSubmit={submit}>
+    <form
+      role="search"
+      onSubmit={submit}
+      className="border-y-2 border-record-ink bg-cartoon-sun px-2.5 pb-2 pt-2.5"
+    >
       <div
         ref={box}
-        className="flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-bone focus-within:border-record-red"
+        className="flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-paper shadow-[0_2px_0_0_rgba(20,18,16,0.16)] focus-within:border-record-red"
         style={{ scrollMarginBlock: '96px' }}
       >
         <input
@@ -102,12 +113,23 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
         </button>
       </div>
 
+      {/* ── EVERY TONGUE, A HAND'S WIDTH FROM THE BOX ─────────────────────────────
+          The tongue sits in the band itself, so the list that changes the record's voice is
+          the same control a reader can reach without leaving the search — and the search
+          sends that tongue with the question, not the phone's. */}
+      <div className="mt-1.5 flex items-center justify-between gap-3 pl-0.5">
+        <span className="font-mono text-[9px] uppercase leading-tight tracking-[0.14em] text-record-ink/75">
+          Every tongue · type it or say it
+        </span>
+        <RecordTongueDoor size={15} inline />
+      </div>
+
       {voice.text ? (
-        <p role="status" className={`mt-2 font-mono text-xs leading-relaxed ${voice.loud ? 'text-record-red' : 'text-record-muted'}`}>
+        <p role="status" className={`mt-2 font-mono text-xs leading-relaxed ${voice.loud ? 'text-record-red' : 'text-record-ink/80'}`}>
           {voice.text}
         </p>
       ) : (
-        draft.trim().length === 1 && <p className="mt-2 font-mono text-xs text-record-muted">Use at least two letters.</p>
+        draft.trim().length === 1 && <p className="mt-2 font-mono text-xs text-record-ink/80">Use at least two letters.</p>
       )}
     </form>
   );

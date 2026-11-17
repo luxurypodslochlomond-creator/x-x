@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
+import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 
 // The address owns the submitted search. Draft typing stays inside the input.
 // Back/forward therefore restores both the words and their matching results.
@@ -9,7 +10,14 @@ export default function useRecordSearch() {
   const location = useLocation();
   const navigate = useNavigate();
   const query = new URLSearchParams(location.search).get('q') || '';
-  const lang = navigator.language || 'en';
+  // ── THE SEARCH ASKS IN THE TONGUE THE RECORD IS BEING READ IN ────────────────────
+  // It used to send whatever language the phone happened to be set to, so a reader who
+  // had chosen Thai — or Yorùbá, or Cherokee — on the record could still have the record's
+  // one translation attempt made in the phone's language instead of theirs. The picker's
+  // choice now travels with the question: one tongue for the page and for the search, so
+  // the two controls are one setting and not two that disagree.
+  const { chosen } = useSiteLanguage();
+  const lang = chosen || 'en';
   const search = useQuery({
     queryKey: ['climate-record-search', query.trim(), lang],
     enabled: query.trim().length >= 2,
