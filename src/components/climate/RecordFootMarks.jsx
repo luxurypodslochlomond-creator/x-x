@@ -276,25 +276,37 @@ export function MarkContents({ size = 26, className = '' }) {
 
 // Who is reading. A tally, not an eye: four strokes and one across them, which is
 // how people counted things long before anything was counted for them.
-// ── A TALLY, NOT AN EYE — THE DRAWING NOW DOES WHAT ITS OWN NOTE SAID ─────────
-// The note under this mark has said "a tally, not an eye" since the week the rail was
-// drawn, and the drawing under it was an eye: a lens-shaped rim, an iris, four lashes and
-// a pupil. At twenty-two pixels it was a squint, and worse, it was the wrong sense
-// entirely — this record refuses to track a reader, so the one mark that counts readers
-// must not be the universal sign for being watched. An eye is what surveillance looks
-// like; a tally is what counting looks like, and counting is all this page does.
+// ── HOW FAR IT GOT: A TRAIL THAT LEAVES THE PLATE ────────────────────────────
+// The tally came out the same afternoon it went in. It was a better drawing than the eye it
+// replaced, and it was the wrong mark for a reason no amount of line-work could fix: four
+// uprights and a stroke across them is the prison-cell count. Brian saw it in one glance —
+// "you sure icons for jail time" — and a reader glancing is exactly the test a mark has to
+// pass, so it failed.
 //
-// Four uprights and one stroke across them: how people counted things for thousands of
-// years before anything counted them for us, and the fifth stroke is the record's red
-// because it is the stroke that makes the other four a number.
+// Reach is not a count kept on a wall. It is how far the thing travelled, so the mark is the
+// trail itself: strokes stepping away from the reader's eye and off the top corner of the
+// plate, the nearest one the record's red because that is where it starts, each one thinner
+// than the last because it is getting further away. The mark does not close — it runs out of
+// the frame — which is the honest picture of a record read in places we have not been.
+//
+// It is deliberately lines and not dots, and deliberately diagonal: at twenty-two pixels a
+// dot under a pixel and a half is nothing at all, and the two doors either side of this one
+// in the rail — the world, the marks of the mast — are already round. A rising line is the
+// only shape left in the row that cannot be confused with either.
 export function MarkReadership({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.6" className={className} aria-hidden="true">
-      <path d="M9.4 11.6v17.2M15.8 10.8v17.6M22.2 11.4v17.2M28.6 10.6v17.6" />
-      <path d="M5.8 25.2 32.1 14.4" className="text-record-mark" strokeWidth="2.1" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.7" className={className} aria-hidden="true">
+      <path d="M6.2 33.2 15.6 27.8" className="text-record-mark" strokeWidth="2.6" strokeLinecap="round" />
+      <path d="M20.6 24.6 26.4 21.2" strokeWidth="1.9" strokeLinecap="round" />
+      <path d="M30.2 18.6 34.6 16.1" strokeWidth="1.7" strokeLinecap="round" />
+      <path d="M37.4 14.4 39 13.5" strokeWidth="1.6" strokeLinecap="round" opacity=".55" />
     </svg>
   );
 }
+
+// (The tally that stood here for half an hour — and the eye before it — are gone, and the
+// reason is written on the mark that replaced them. A door's drawing has to survive one
+// glance from somebody who is not admiring it.)
 
 // An entry's fingerprint. A seal, with its ribbon still on it.
 export function MarkSeal({ size = 26, className = '' }) {
