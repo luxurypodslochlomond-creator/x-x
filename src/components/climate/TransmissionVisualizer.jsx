@@ -4,8 +4,7 @@ import { X, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 // ── THE QUANTUM EQUALISER ──
 // Deep house beyond quantum graphic equaliser.
 // Real FFT when audio exists · generative 122 BPM deep house when it doesn't.
-// Beadie Signal palette, in the ocean key: ink #141210 · paper #efe7d6 · signal #7fc9e4 · green #1e3a2b
-// (the record's own colours, retinted once in src/climate-palette.css at Janine's asking)
+// The live record palette: ink, paper and yellow signal; green retains its meter meaning.
 
 const BPM = 122;
 const BEAT_MS = 60000 / BPM;
@@ -90,6 +89,8 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    const sun = window.getComputedStyle(document.documentElement).getPropertyValue('--cartoon-sun').trim();
+    const signal = `rgb(${sun})`;
     let raf;
 
     const resize = () => {
@@ -160,7 +161,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
 
         let color;
         if (i < 12) color = '#1e3a2b';
-        else if (i < 36) color = 'rgb(var(--cartoon-sun))';
+        else if (i < 36) color = signal;
         else color = '#efe7d6';
 
         ctx.strokeStyle = color;
@@ -184,7 +185,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       ctx.globalAlpha = 1;
 
       // 4b. Quantum threads — connect tips of high-energy adjacent bars
-      ctx.strokeStyle = 'rgba(127,201,228,0.12)';
+      ctx.strokeStyle = `rgb(${sun} / .12)`;
       ctx.lineWidth = 0.5;
       for (let i = 0; i < tips.length; i++) {
         const a = tips[i];
@@ -198,7 +199,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       }
 
       // 5. Waveform ring (circular oscilloscope)
-      ctx.strokeStyle = 'rgb(var(--cartoon-sun))';
+      ctx.strokeStyle = signal;
       ctx.lineWidth = 1.5;
       ctx.globalAlpha = 0.7;
       ctx.beginPath();
@@ -219,9 +220,9 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
       const bass = (freq[0] + freq[1] + freq[2] + freq[3]) / 4 / 255;
       const heartR = Math.max(8, 18 + bass * 35);
       const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, heartR);
-      grad.addColorStop(0, 'rgba(127,201,228,0.85)');
-      grad.addColorStop(0.4, 'rgba(127,201,228,0.25)');
-      grad.addColorStop(1, 'rgba(127,201,228,0)');
+      grad.addColorStop(0, `rgb(${sun} / .85)`);
+      grad.addColorStop(0.4, `rgb(${sun} / .25)`);
+      grad.addColorStop(1, `rgb(${sun} / 0)`);
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(cx, cy, heartR, 0, Math.PI * 2);
@@ -271,7 +272,7 @@ export default function TransmissionVisualizer({ audioUrl, artistName, trackTitl
           const v = frame[f * 2] / 255;
           if (v < 0.05) continue;
           const y = wfY + wfH - (f / 64) * wfH;
-          if (v > 0.6) ctx.fillStyle = `rgba(127,201,228,${v})`;
+          if (v > 0.6) ctx.fillStyle = `rgb(${sun} / ${v})`;
           else if (v > 0.3) ctx.fillStyle = `rgba(30,58,43,${v})`;
           else ctx.fillStyle = `rgba(233,238,236,${v * 0.4})`;
           ctx.fillRect(xPos, y, colW + 1, 2);
