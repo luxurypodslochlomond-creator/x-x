@@ -21,6 +21,7 @@ const whenLine = (iso) => {
 
 import AccessSecondKey from '@/components/climate/AccessSecondKey';
 import InviteSteps from '@/components/climate/keeper/InviteSteps';
+import { CUSTODIAN, CUSTODIANS, CUSTODIANS_TITLE, SECOND_READER, SECOND_READERS, SECOND_READERS_TITLE } from '@/components/climate/recordWords';
 import KeeperPhone from '@/components/climate/keeper/KeeperPhone';
 
 
@@ -138,7 +139,7 @@ export default function GuestList({ onChange }) {
     if (existing) {
       if (!existing.active || existing.is_keeper !== (kind === 'keys')) {
         setFeedbackRow(''); setResultFailed(true);
-        setMessage(!existing.active ? 'They are already on the list with access paused. Use Restore access beside their name.' : `They are already on the list as a ${existing.is_keeper ? 'keeper' : 'checker'}. Use Send invite beside their name. Their role has not changed.`);
+        setMessage(!existing.active ? 'They are already on the list with access paused. Use Restore access beside their name.' : `They are already on the list as a ${existing.is_keeper ? CUSTODIAN : SECOND_READER}. Use Send invite beside their name. Their role has not changed.`);
         return;
       }
       resend(existing, true);
@@ -162,23 +163,23 @@ export default function GuestList({ onChange }) {
       <div className="border-t border-[#141210]/20 pt-3 mb-5">
         <div className="mb-2 flex items-center gap-2 border-b border-[#b3261e]/40 pb-1">
           <MarkKey size={20} className="text-[#b3261e]" />
-          <span className="text-base font-bold text-record-ink">Keepers</span>
+          <span className="text-base font-bold text-record-ink">{CUSTODIANS_TITLE}</span>
         </div>
         {!loading && !loadError && !keepers.length && (
           <p className="text-[14px] text-[#3a342c] py-1" style={reading}>
-            No keeper line on the record yet. Whoever built the app still opens this page.
+            No {CUSTODIAN} line on the record yet. Whoever built the app still opens this page.
           </p>
         )}
         {keepers.map(person)}
 
         <div className="mb-3 mt-6 flex items-center gap-2 border-b border-record-red/40 pb-2">
           <MarkEye size={20} className="text-record-red" />
-          <span className="text-base font-bold text-record-ink">Checkers</span>
+          <span className="text-base font-bold text-record-ink">{SECOND_READERS_TITLE}</span>
         </div>
         {loading && <p className="text-[13px] text-[#6b5f4f]" style={reading}>Looking at the list…</p>}
         {!loading && !loadError && !checkers.length && (
           <p className="text-[14px] text-[#3a342c] leading-[1.6] py-1" style={reading}>
-            Invite your first checker above. Their email status will appear here.
+            Invite a {SECOND_READER} above. Their email status will appear here.
           </p>
         )}
         {checkers.map(person)}
@@ -198,7 +199,7 @@ export default function GuestList({ onChange }) {
       <details className="room-details mb-6 border-t border-record-ink/15 pt-3">
         <summary className="cursor-pointer text-sm text-record-muted">Who can do what?</summary>
         <p className="mt-2 text-sm leading-relaxed text-record-muted" style={reading}>
-          A keeper can invite a checker directly. Checkers read sources and leave signed notes; they cannot publish or see private submission details. Keeper access normally needs two different keepers. {solo ? 'With only one keeper, that keeper can act alone.' : owner ? 'As an app admin, you can act directly; that exception is logged.' : 'The person requesting a keeper change cannot approve it.'} The last keeper cannot be removed. Pausing access never erases signed work.
+          A {CUSTODIAN} can invite a {SECOND_READER} directly. {SECOND_READERS.charAt(0).toUpperCase() + SECOND_READERS.slice(1)} read sources and leave signed notes; they cannot publish or see private submission details. Custodian access normally needs two different custodians. {solo ? 'With only one custodian, that custodian can act alone.' : owner ? 'As an app admin, you can act directly; that exception is logged.' : 'The person requesting a custodian change cannot approve it.'} The last {CUSTODIAN} cannot be removed. Pausing access never erases signed work.
         </p>
       </details>
 

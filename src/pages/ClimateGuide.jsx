@@ -175,20 +175,20 @@ const FOOT = [
   ...FOOTER_NAV,
   { label: 'Terms', to: '/ClimateTerms', what: 'The terms under which the record is used.' },
   { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, and what it never does.' },
-  { label: 'The keeper’s room', to: '/ClimateKeeperRoom', what: 'Where invited keepers decide and checkers write their notes — one door, two kinds of key.' },
+  { label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Where invited custodians decide and second readers write their notes — one door, two kinds of key.' },
 ];
 
 // The way in, as a card Janine can forward. Five lines, in the order a keeper does them,
 // and one promise at the foot: no entry goes up without a person's name on it.
 const WAY_IN_CARD = {
   id: 'way-in',
-  badge: 'FOR A KEEPER',
+  badge: 'FOR A CUSTODIAN',
   title: 'The way in',
   body: 'Five lines, on a phone. Nothing here waits on a second person except the keys.',
   steps: [
     { do: 'Sign in with the address this record knows', what: 'Google, or a password. That address is the one it recognises.' },
-    { do: 'Open the keeper\u2019s room', what: 'The drawn door at the top of any page. It opens to a keeper only.' },
-    { do: 'People \u2192 add by email', what: 'A checker goes on with one word. A keeper needs a second keeper to agree.' },
+    { do: 'Open the custodians\u2019 room', what: 'The drawn door at the top of any page. It opens to a custodian only.' },
+    { do: 'People \u2192 add by email', what: 'A second reader goes on with one word. A custodian needs a second custodian to agree.' },
     { do: 'Decide: yes, or not yet', what: 'Yes writes your name on the entry. Not yet keeps it waiting, with your reason beside it.' },
     { do: 'Seal what went up', what: 'One tap. Anyone can check the seal in their own browser, without trusting us.' },
   ],

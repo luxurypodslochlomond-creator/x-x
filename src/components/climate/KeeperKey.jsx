@@ -56,8 +56,8 @@ export default function KeeperKey({ children }) {
         </p>
         <p className="text-[15px] leading-[1.7] text-[#2b2622] mb-5" style={reading}>
           {state === 'denied'
-            ? 'What is waiting, who is checking, and how much is on the record — this room names people, so it opens to a keeper of this record. Your address is not on that list yet, and asking is one line: a keeper can add you in a moment.'
-            : 'The keeper’s work belongs to the record, not to the building. Sign in with the address a keeper invited and this page opens where you left it.'}
+            ? 'What is waiting, who is reading, and how much is on the record — this room names people, so it opens to a custodian of this record. Your address is not on that list yet, and asking is one line: a custodian can add you in a moment.'
+            : 'A custodian’s work belongs to the record, not to the building. Sign in with the address a custodian added and this page opens where you left it.'}
         </p>
         {state === 'anon' && (
           <button

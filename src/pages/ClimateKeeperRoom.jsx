@@ -9,6 +9,7 @@ const GuestList = lazy(() => import('@/components/climate/keeper/GuestList'));
 import WorkDock from '@/components/climate/keeper/WorkDock';
 import RoomOverview from '@/components/climate/keeper/RoomOverview';
 import RecordLife from '@/components/climate/keeper/RecordLife';
+import { CUSTODIAN, CUSTODIANS_ROOM } from '@/components/climate/recordWords';
 const AdminClimateDesk = lazy(() => import('@/pages/AdminClimateDesk'));
 const DueDiligencePanel = lazy(() => import('@/components/climate/DueDiligencePanel'));
 // One set of measures for everything standing inside the room, so tapping between Decide,
@@ -116,7 +117,7 @@ export default function ClimateKeeperRoom() {
     <ClimateRecordShell
       compact
       className={state === 'ready' ? 'keeper-workspace-shell keeper-workspace-ready' : 'keeper-workspace-shell'}
-      eyebrow={state === 'ready' && !who.isKeeper ? 'Checking the record' : "Keeper's room"}
+      eyebrow={state === 'ready' && !who.isKeeper ? 'Reading the record' : CUSTODIANS_ROOM}
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change."
@@ -134,7 +135,7 @@ export default function ClimateKeeperRoom() {
       {state === 'signed_out' && (
         <Door
           heading="This room is by invitation"
-          body="Sign in with the address a keeper put on the list. Reading the record needs no account; working here does."
+          body={`Sign in with the address a ${CUSTODIAN} put on the list. Reading the record needs no account; working here does.`}
           actionLabel="Sign in"
           onAction={() => base44.auth.redirectToLogin(window.location.href)}
         />
@@ -143,7 +144,7 @@ export default function ClimateKeeperRoom() {
       {state === 'paused' && (
         <Door
           heading="Your place is paused"
-          body="Your key is closed for now. The notes you wrote are still on the record, still in your name. A keeper can open it again."
+          body={`Your key is closed for now. The notes you wrote are still on the record, still in your name. A ${CUSTODIAN} can open it again.`}
           actionLabel="Look again"
           onAction={load}
         />
@@ -152,7 +153,7 @@ export default function ClimateKeeperRoom() {
       {state === 'not_on_list' && (
         <Door
           heading="This room is by invitation"
-          body="Ask a keeper to put your address on the list, and it opens on your next sign-in."
+          body={`Ask a ${CUSTODIAN} to put your address on the list, and it opens on your next sign-in.`}
           actionLabel="What checking involves"
           onAction={() => { window.location.href = '/ClimateFellows'; }}
         />

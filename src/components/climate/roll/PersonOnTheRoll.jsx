@@ -18,7 +18,7 @@ export default function PersonOnTheRoll({ person }) {
     <article className="border-t border-record-ink/15 py-6 first:border-t-0 first:pt-0">
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
         <h2 className="text-[19px] leading-tight text-record-ink" style={{ fontFamily: 'var(--font-display)' }}>
-          {person.name || 'A checker'}
+          {person.name || 'A second reader'}
         </h2>
         <span
           className="font-mono text-[9.5px] uppercase tracking-[0.14em]"

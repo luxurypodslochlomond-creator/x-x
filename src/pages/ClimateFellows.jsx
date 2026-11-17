@@ -73,7 +73,7 @@ export default function ClimateFellows() {
           and refuses to guess — which is the same promise the checking itself makes. */}
       <AskTheRecord
         suggestions={[
-          'What does a checker actually do?',
+          'What does a second reader actually do?',
           'How much time does this really take?',
           'Will my name be on what I write?',
         ]}
@@ -125,10 +125,10 @@ export default function ClimateFellows() {
         <Label>The way in — no form, no interview</Label>
         <ol className="space-y-2.5 mb-5">
           <li className="text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-            <strong>One line to a keeper:</strong> your name exactly as you want it signed, and the address you will sign in with.
+            <strong>One line to a custodian:</strong> your name exactly as you want it signed, and the address you will sign in with.
           </li>
           <li className="text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-            <strong>A keeper types both onto the list</strong> and the record writes to you at that address with your way in. One keeper’s word is enough — a pair of eyes is not a set of keys.
+            <strong>A custodian types both onto the list</strong> and the record writes to you at that address with your way in. One custodian’s word is enough — a pair of eyes is not a set of keys.
           </li>
           <li className="text-[13px] text-[#141210] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
             <strong>Then read the <Link to={createPageUrl('ClimateMethod')} className="border-b-2 border-[#141210] font-bold">method</Link></strong> — it is the standard your notes will be held to. Put a line of your own on <Link to="/ClimateRoll" className="border-b-2 border-[#141210] font-bold">the roll</Link> whenever you like.
@@ -148,7 +148,7 @@ export default function ClimateFellows() {
           Most of it is boring. Most entries are broadly right and nobody will read your note on them. The interesting ones are rare — which is exactly why finding one is worth the afternoon. Stop after three sessions and you owe this record nothing.
         </p>
         <p className="text-[12.5px] text-[#141210]/70 leading-relaxed mt-2" style={{ fontFamily: 'var(--font-reading)' }}>
-          Two words inside this record: a <strong>keeper</strong> holds the keys — anything the screen flags waits for one, and any of them can take an entry off — and a <strong>checker</strong> reads a source and signs what they found. That is what you are. Volunteer, fellow, checker: the same person, and Trebuchet’s word “fellow” is a good one.
+          Two words inside this record: a <strong>custodian</strong> holds the keys — anything the screen flags waits for one, and any of them can take an entry off — and a <strong>second reader</strong> reads a source and signs what they found, after the person who wrote it. That is what you are. Volunteer, fellow, second reader: the same person, and Trebuchet’s word “fellow” is a good one.
         </p>
       </section>
 

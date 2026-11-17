@@ -150,7 +150,7 @@ export const ELSEWHERE_NAV = [
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },
-  { label: 'Become a checker', to: '/ClimateFellows', what: 'What checking involves, and how to ask to take part.' },
+  { label: 'Become a second reader', to: '/ClimateFellows', what: 'What reading for the record involves, and how to ask to take part.' },
   // ── THE ROLL, AND WHY IT IS A DOOR HERE AND NOT ON THE RAIL ────────────────
   // The founder, 13 November: something coolasfuck for the checkers and volunteers that
   // is not a social network — their names, their own words, and the work that is actually
