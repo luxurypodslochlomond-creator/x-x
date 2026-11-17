@@ -50,8 +50,8 @@ export default function RecordFooter() {
         className="mt-3 mx-auto max-w-[52ch] text-record-muted"
         style={{ fontFamily: 'var(--font-reading)', fontSize: 15, lineHeight: 1.7 }}
       >
-        Drafted and coded with Base 1, an AI built by Base44. It writes; a person decides, and
-        nothing here goes up on an AI's word — not even this sentence.
+        Drafted and coded with Base 1, built by Base44. It is software, and it wrote these lines;
+        a person decided what stays. Nothing here goes up on its word — not even this sentence.
       </p>
 
       <span aria-hidden="true" className="mx-auto mt-10 block h-px w-16 bg-record-ink/25" />
