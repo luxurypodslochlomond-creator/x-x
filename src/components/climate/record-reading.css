@@ -24,7 +24,7 @@
    a caption, a count — and blow them up to seventeen-pixel serif, which is what made the
    record's sizes look wrong page after page: half of each page at reading size and half
    of it at eight pixels. Monospaced passages are excluded now. */
-.record-pages :is(p, blockquote, li):not(.uppercase):not(.font-black):not(.font-mono):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *) {
+.record-pages :is(p, blockquote, li):not(.uppercase):not(.font-black):not(.font-mono):not(.record-header-type):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *) {
   font-family: var(--font-reading) !important;
   font-size: clamp(1.0625rem, 1.015rem + .2vw, 1.1875rem) !important;
   line-height: 1.68 !important;
@@ -35,7 +35,7 @@
   overflow-wrap: break-word;
   max-inline-size: 65ch;
 }
-.record-pages blockquote:not([data-record-technical] *) {
+.record-pages blockquote:not(.record-header-type):not([data-record-technical] *) {
   font-size: clamp(1.35rem, 1.1rem + .8vw, 1.9rem) !important;
   line-height: 1.48 !important;
   max-inline-size: 43ch;

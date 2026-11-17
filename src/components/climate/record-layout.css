@@ -1,4 +1,5 @@
-/* One continuous painting, with readable paper laid over it only where needed. */
+/* One continuous painting; paper belongs to content, not the space around it. */
+.climate-record.record-field { background-color: rgb(var(--record-ink)); }
 .climate-record .record-book { background-color: transparent; }
 .record-pages > .record-page-shell { background-color: transparent; }
 .record-pages .record-continuous-band { background-color: rgb(var(--record-ink) / .6); }
@@ -64,6 +65,49 @@
   .record-home-page .record-section-heading { margin-bottom: 1.5rem; }
   .record-pages .record-correction-title { font-size: 1.125rem !important; line-height: 1.45 !important; }
 }
+
+/* Desktop reading plates leave the same artwork visible beside and between them.
+   Previously full-width 97% paper wrappers hid the painting for the whole page. */
+@media (min-width: 1024px) {
+  .record-pages .record-shell-body { background-color: transparent; padding-block: 2rem; }
+  .record-shell-body > .record-shell-content {
+    background-color: rgb(var(--record-paper));
+    padding: 2rem;
+  }
+  .record-reading-panel:has(> .record-reading-column) {
+    background-color: transparent;
+    padding: 2rem;
+  }
+  .record-reading-panel > .record-reading-column {
+    background-color: rgb(var(--record-paper));
+    padding: 2rem;
+  }
+  .record-sectioned-page .record-shell-body > .record-shell-content {
+    display: flow-root;
+    background-color: transparent;
+    padding: 0;
+  }
+  .record-sectioned-page .record-shell-content > .record-reading-plate,
+  .record-sectioned-page .record-shell-content > section {
+    margin: 0 0 1.5rem;
+    border-top: 3px solid rgb(var(--record-red));
+    background-color: rgb(var(--record-paper));
+    padding: 2rem;
+  }
+  .record-sectioned-page .record-shell-content > :last-child { margin-bottom: 0; }
+  .record-pages .record-prose p.font-mono {
+    max-inline-size: none;
+    font-size: 1.0625rem !important;
+    line-height: 1.75 !important;
+  }
+}
+.record-founder-page .record-founder-plate p { max-inline-size: 65ch; }
+.record-founder-page .record-founder-quote {
+  font-size: clamp(1.125rem, 1rem + .6vw, 1.625rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+.record-founder-page .record-founder-quote.record-header-type { letter-spacing: .08em !important; }
 
 @media print {
   .climate-record .record-book,

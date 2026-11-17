@@ -21,6 +21,7 @@ export default function ClimateCorrections() {
 
   return (
     <ClimateRecordShell
+      className="record-sectioned-page"
       eyebrow="Corrections, in daylight"
       marker="Every correction · newest first · nothing removed"
       title="Corrections, in daylight"
@@ -29,6 +30,7 @@ export default function ClimateCorrections() {
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
+      <div className="record-reading-plate record-prose">
       <p className="mb-5 font-mono text-[12px] leading-relaxed text-record-ink lg:text-[13px]">
         A correction is a change to something already on the record. The entry carries the note itself —
         what changed, and the date — and it appears here, printed exactly as the person who signed it
@@ -45,18 +47,21 @@ export default function ClimateCorrections() {
         would be an edit.
       </p>
 
+      </div>
+
       {/* ── THE DOOR THE OTHER PAGES WERE PROMISING ──────────────────────────────
           The privacy page told readers to write to six asterisks; the terms page sent
           takedown requests to the same place; and "How this record is made" sent anyone
           who wanted a copied source taken down to this page — which had no way to ask.
           Three promises, no door. This is the door, and it stands here because a
           correction is what most of those messages turn out to be. */}
-      <div className="mb-7">
+      <div className="record-reading-plate mb-7">
         <RecordSaySomething />
       </div>
 
       {/* The count, before the list. It is the number this page is for, and it is stated in
           the same size whether it is nought or ninety. */}
+      <section className="record-reading-plate">
       <div className="record-section-heading flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
         <h2 className="font-bold uppercase text-record-red" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px, 1.7vw, 24px)', letterSpacing: '-0.01em' }}>
           On the record
@@ -86,6 +91,8 @@ export default function ClimateCorrections() {
           ))}
         </ul>
       )}
+
+      </section>
 
       {/* The machine's part, said plainly. Anyone asking this record to be trustworthy has to
           be able to see where a machine helped and where a person decided — and this is the

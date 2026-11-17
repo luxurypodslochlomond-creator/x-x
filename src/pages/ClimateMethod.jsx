@@ -25,13 +25,14 @@ function Block({ n, title, children }) {
 
 function Rule({ children }) {
   return (
-    <p className="border-l-4 border-record-red bg-record-signal/20 p-4 font-mono text-record-ink lg:px-5 lg:py-4">{children}</p>
+    <p className="border-l-4 border-record-red bg-record-signal/20 p-4 text-record-ink lg:px-5 lg:py-4">{children}</p>
   );
 }
 
 export default function ClimateMethod() {
   return (
     <ClimateRecordShell
+      className="record-sectioned-page"
       eyebrow="How this record is made"
       marker="Method · sources · who decides · corrections"
       title="How this record is made"
