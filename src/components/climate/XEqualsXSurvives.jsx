@@ -88,7 +88,7 @@ const READERS = [
           the drawing: not a measurement, a decision.
         </p>
         <p>
-          What a record can do is refuse to act against the decision: the same rule for a keeper
+          What a record can do is refuse to act against the decision: the same rule for a custodian
           and for a stranger, the same source standard for an entry nobody likes, no name printed
           above another, and no funder's name on the door.
         </p>

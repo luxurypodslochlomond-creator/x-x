@@ -341,7 +341,7 @@ export default function CartoonMaker() {
           <Check className="h-5 w-5 text-record-red" strokeWidth={3} /> It is with a person.
         </p>
         <p className="mt-2 text-[14px] leading-[1.6] text-record-muted" style={reading}>
-          A keeper looks at every cartoon before it goes up. When they put yours up it appears on the wall below, with
+          A custodian looks at every cartoon before it goes up. When they put yours up it appears on the wall below, with
           your name on it.
         </p>
         <button

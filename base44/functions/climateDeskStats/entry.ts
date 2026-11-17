@@ -40,7 +40,7 @@ export default async function (req) {
     const who = await resolveChecker(base44);
     if (who.error) return Response.json({ error: who.error, paused: Boolean(who.paused) }, { status: who.status });
     if (!who.isKeeper) {
-      return Response.json({ error: 'Only a keeper may read the desk' }, { status: 403 });
+      return Response.json({ error: 'Only a custodian may read the desk' }, { status: 403 });
     }
     const isAdmin = who.user?.role === 'admin';
 

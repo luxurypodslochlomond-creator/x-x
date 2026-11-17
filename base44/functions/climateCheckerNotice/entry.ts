@@ -35,7 +35,7 @@ const COPY = {
     past: 'is paused',
     log: 'Access paused',
     headline: 'Your place on the record is paused',
-    body: 'Your access to check entries has been paused for now. This is not a judgement on the work you did. It is only that the key you were given is not open at the moment. If this is a surprise, reply to this email and a keeper will tell you why.',
+    body: 'Your access to check entries has been paused for now. This is not a judgement on the work you did. It is only that the key you were given is not open at the moment. If this is a surprise, reply to this email and a custodian will tell you why.',
     keeper: 'Their key is closed until one of you opens it again. Their notes stay on the record, in their name.',
   },
   restored: {
@@ -61,9 +61,9 @@ const COPY = {
 // of what it did, in the same breath — and it happened, to the first keeper it invited.
 const KEEPER_BODY = {
   invited:
-    'Sign in with the email address this invitation reached. Your keeper room is where you review entries, publish or hold them, and invite people to help. You can invite a checker yourself. Keeper access needs another keeper to agree, except for the recorded single-keeper or app-admin exceptions. This is access to the record, not administrator access to the whole app.',
+    'Sign in with the email address this invitation reached. Your custodians’ room is where you review entries, publish or hold them, and invite people to help. You can invite a signatory yourself. Custodian access needs another custodian to agree, except for the recorded single-custodian or app-admin exceptions. This is access to the record, not administrator access to the whole app.',
   paused:
-    'Your key to the record is closed for now. Nothing you put on it has been taken off, and nothing you signed has been unsigned. If this is a surprise, reply to this email and the other keeper will tell you why.',
+    'Your key to the record is closed for now. Nothing you put on it has been taken off, and nothing you signed has been unsigned. If this is a surprise, reply to this email and the other custodian will tell you why.',
   restored: 'Your key is open again, and the record answers to you as it did before.',
   removed:
     'Your place on the record has ended. Everything you put on it stays, signed with your name, because ending access is not erasing work.',
@@ -160,7 +160,7 @@ export default async function (req) {
           const result = await base44.asServiceRole.integrations.Core.SendEmail({
             to: keeper, category: 'transactional',
             subject: `${who} ${copy.past}`,
-            text: `${who} ${copy.past}. ${copy.keeper}\n\nChanged by ${keyholder.name || user.full_name || 'a keeper'}.\n${RECORD_HOME}/ClimateKeeperRoom?tab=people`,
+            text: `${who} ${copy.past}. ${copy.keeper}\n\nChanged by ${keyholder.name || user.full_name || 'a custodian'}.\n${RECORD_HOME}/ClimateKeeperRoom?tab=people`,
           });
           if (result?.success === false) console.error('climateCheckerNotice: keeper email refused', result.reason);
         }));

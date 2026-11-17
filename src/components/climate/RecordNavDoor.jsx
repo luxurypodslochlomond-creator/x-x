@@ -19,7 +19,7 @@ import { markFor } from '@/components/climate/pageMarks';
 // the back button never has to be pressed twice to leave it. A finger that DRAGS (more
 // than a thumb's width) is scrolling the sheet, not choosing a door, and is left alone.
 // A mouse is untouched: hovering and clicking behave exactly as they did.
-export default function RecordNavDoor({ to, label, what, active = false, size = 44, className = '', onClick, asButton = false, expanded, controls }) {
+export default function RecordNavDoor({ to, label, what, active = false, size = 44, className = '', onClick, asButton = false, expanded, controls, popup = 'dialog' }) {
   const Mark = markFor(to);
   const navigate = useNavigate();
   const downAt = useRef(null);
@@ -50,7 +50,7 @@ export default function RecordNavDoor({ to, label, what, active = false, size = 
   const Door = asButton ? 'button' : Link;
   return (
     <Door
-      {...(asButton ? { type: 'button', 'aria-expanded': expanded, 'aria-controls': controls, 'aria-haspopup': 'dialog' } : { to })}
+      {...(asButton ? { type: 'button', 'aria-expanded': expanded, 'aria-controls': controls, 'aria-haspopup': popup || undefined } : { to })}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
       onClick={onClickDoor}

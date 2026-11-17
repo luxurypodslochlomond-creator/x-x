@@ -97,7 +97,7 @@ export default function VerificationControl({ entry, entityName, onSaved }) {
         className="w-full flex items-center justify-between gap-2 px-3.5 py-3 min-h-[48px] text-left"
       >
         <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e]">
-          Keeper's panel · admins only
+          Custodian's panel · admins only
         </span>
         <span className="text-[9px] font-black font-mono uppercase tracking-wide text-[#5a5246] flex-shrink-0">
           {open ? 'Close' : `${VERIFICATION[level].label} · open`}

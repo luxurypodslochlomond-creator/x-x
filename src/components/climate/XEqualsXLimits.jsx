@@ -23,7 +23,7 @@ const LIMITS = [
     to: '/ClimateMethod',
     Mark: MarkMethod,
     where: 'How the record is kept',
-    says: 'Two keepers must agree before anyone joins the guest list or leaves it. Whoever runs the app can still reach the record.',
+    says: 'Two custodians must agree before anyone joins the guest list or leaves it. Whoever runs the app can still reach the record.',
   },
   {
     to: '/ClimateCorrections',

@@ -28,7 +28,7 @@ import { useVoiceIn, useVoiceOut } from '@/components/climate/useRecordVoice';
 const SUGGESTIONS = [
   'What does a checker actually do?',
   'What happens after I send something in?',
-  'Does a keeper publish on their own?',
+  'Does a custodian publish on their own?',
 ];
 
 export default function AskTheRecord({ suggestions = SUGGESTIONS }) {

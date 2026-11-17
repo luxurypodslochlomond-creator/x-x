@@ -24,12 +24,12 @@ import { MarkHost } from '@/components/climate/RecordFootMarks';
 export default function KeeperDoor() {
   const { isKeeper, isChecker } = useRecordCapacity();
   const hasKey = isKeeper || isChecker;
-  const label = isKeeper ? 'The keeper’s room' : isChecker ? 'The checker’s room' : 'Keeper’s room — sign in';
+  const label = isKeeper ? 'The custodians’ room' : isChecker ? 'The signatories’ room' : 'Custodians’ room — sign in';
   const spoken = isKeeper
-    ? 'Open the keeper’s room — where the record is decided'
+    ? 'Open the custodians’ room — where the record is decided'
     : isChecker
     ? 'Open the checker’s room — where a checker writes their notes'
-    : 'Sign in to the keeper’s room';
+    : 'Sign in to the custodians’ room';
   return (
     <Link
       to="/ClimateKeeperRoom"

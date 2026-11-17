@@ -24,7 +24,7 @@ That introduction is the only route worth using for an institute, and it is your
 - you send the method page before the front page, because that is where this either stands or falls;
 - you leave out the three things that are checked in a minute: that it is launched, that entries are verified, that it is funded or partnered.
 
-If they ask who carries it, the answer is the company and two named keepers. If they ask what happens in ten years, the answer is not a term. It is kept for as long as anyone is still reading it, and everything in it can be taken out and carried on somewhere else. That is the part that makes it an institution rather than a website.
+If they ask who carries it, the answer is the company and two named custodians. If they ask what happens in ten years, the answer is not a term. It is kept for as long as anyone is still reading it, and everything in it can be taken out and carried on somewhere else. That is the part that makes it an institution rather than a website.
 
 That is the whole of it. Everything else is on the record and can be checked tonight.
 

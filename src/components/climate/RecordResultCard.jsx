@@ -100,7 +100,7 @@ export default function RecordResultCard({ kind, item }) {
         to="/ClimateRoll"
         className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#b3261e] p-3.5 active:bg-[#efe7d6] transition-colors"
       >
-        <Tag tone="#b3261e">{item.role === 'keeper' ? 'Keeper' : 'Checker'}</Tag>
+        <Tag tone="#b3261e">{item.role === 'keeper' ? 'Custodian' : 'Signatory'}</Tag>
         <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{item.name}</h3>
         {item.line && <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{item.line}</p>}
         <p className="mt-2.5 pt-2.5 border-t border-[#141210]/15 text-[10px] font-black font-mono uppercase tracking-wide text-[#5a5246]">

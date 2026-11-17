@@ -14,11 +14,11 @@ import { buildGuideShareCard, buildWayInShareCard } from '@/components/climate/s
 
 // ── THE BUTTONS ──────────────────────────────────────────────────────────────────
 // What Janine asked for, kept in the record's own hand: the list of buttons, in the
-// order a host or keeper meets them, each one saying what it does in a single line.
+// order a host or custodian meets them, each one saying what it does in a single line.
 // It is a page of the record rather than a document beside it, so it wears the same
 // paper, the same ink and the same lettering — and so the buttons it names can be
 // tapped straight from the list. Nothing is described that is not there, and nothing
-// behind the keeper's door is handed to a reader.
+// behind the custodian's door is handed to a reader.
 
 // The page's own card. It is built from the page's own lines — the marker, the statement,
 // the six headings and the close — so the manual that leaves the record says exactly what
@@ -36,7 +36,7 @@ const BUTTONS_CARD = {
     '04 · Every tongue a reader can name',
     '05 · The first five minutes',
     '06 · The foot of every page',
-    '07 · When you are the keeper',
+    '07 · When you are the custodian',
     'Every open door, printed',
   ],
   closing: 'The same drawn marks lead to the same places on every page, with a short name beneath each one.',
@@ -137,9 +137,9 @@ const FIRST = [
 
 // ── THE FOUR ROOMS, WHICH IS WHAT IS ACTUALLY THERE ──────────────────────────────
 // This list used to name seven buttons "in the order you will use them" — and the room
-// has four. The extra three were pages a keeper reaches from inside the Record room, so
+// has four. The extra three were pages a custodian reaches from inside the Record room, so
 // a host reading this guide was being told there were seven doors and would have gone
-// looking. What a keeper meets, in order, is here: Decide, Check, People, Record.
+// looking. What a custodian meets, in order, is here: Decide, Check, People, Record.
 const KEEPER_DOORS = [
   {
     label: 'Decide',
@@ -157,11 +157,11 @@ const KEEPER_DOORS = [
     // Janine, by email, 13 November: "we have two excellent sounding volunteers to do
     // research and checks. How do I get them started on the platform?" — answered here, on
     // the page she was handed, because this is the only page she has. The line also had to
-    // stop claiming two keys for everything: a checker is a pair of eyes and one keeper's
+    // stop claiming two keys for everything: a checker is a pair of eyes and one custodian's
     // word puts them on the list. Only the keys themselves need two. Saying otherwise made
-    // a keeper expect a delay that never comes, and made the record sound harder to join
+    // a custodian expect a delay that never comes, and made the record sound harder to join
     // than it is.
-    what: 'Who holds a key and who is asking for one — and the door a volunteer comes in by: type their name and address, and the record writes to them with their way in. One keeper\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The keys themselves move on two: one keeper proposes, a second agrees.',
+    what: 'Who holds a key and who is asking for one — and the door a volunteer comes in by: type their name and address, and the record writes to them with their way in. One custodian\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The keys themselves move on two: one custodian proposes, a second agrees.',
   },
   {
     label: 'Record',
@@ -178,7 +178,7 @@ const FOOT = [
   { label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Where invited custodians decide and signatories write their notes — one door, two kinds of key.' },
 ];
 
-// The way in, as a card Janine can forward. Five lines, in the order a keeper does them,
+// The way in, as a card Janine can forward. Five lines, in the order a custodian does them,
 // and one promise at the foot: no entry goes up without a person's name on it.
 const WAY_IN_CARD = {
   id: 'way-in',
@@ -204,10 +204,10 @@ export default function ClimateGuide() {
       title="The guide"
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="Handed to a host or keeper, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
+      footer="Handed to a host or custodian, this page is the whole of the manual. The same drawn marks lead to the same places on every page, with a short name beneath each one."
     >
       {/* The manual's own card, before the writing: the whole guide can leave in one piece.
-          Below it, the same thing said short — the way in, for a keeper who is starting
+          Below it, the same thing said short — the way in, for a custodian who is starting
           today and has not got time to read a manual before she does her first entry. */}
       <div className="mb-6 space-y-2">
         <ShareCardButton
@@ -223,7 +223,7 @@ export default function ClimateGuide() {
       </div>
 
       {/* ── ASK IT RATHER THAN WRITE TO SOMEBODY ────────────────────────────────────
-          The page a host or keeper is handed should be able to answer back. This sits above
+          The page a host or custodian is handed should be able to answer back. This sits above
           the printed manual: a question typed here is answered from the same manual, in one
           sentence, with the door to walk through — so nobody waits on an inbox to find out
           what a button does, and nobody is given an answer the record cannot stand behind. */}
@@ -234,7 +234,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Wire, Map, Reach and Search. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited keeper also sees the keeper’s door there."
+        note="The same drawings at the top and foot of the screen open Record, Wire, Map, Reach and Search. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited custodian also sees the custodian’s door there."
         items={BAR}
       />
 
@@ -269,14 +269,14 @@ export default function ClimateGuide() {
       <GuideBand
         number="06"
         heading="The foot of every page"
-        note="How we check entries, Corrections and this guide. Terms, Privacy and keeper access sit below. The Doors mark in the masthead opens every open door on one screen, without leaving the page."
+        note="How we check entries, Corrections and this guide. Terms, Privacy and custodian access sit below. The Doors mark in the masthead opens every open door on one screen, without leaving the page."
         items={FOOT}
       />
 
       <GuideBand
         number="07"
-        heading="When you are the keeper"
-        note="Four rooms sit behind the keeper’s door, in the order a keeper meets them. A checker is given the second one only. A reader never sees any of them, and nothing goes on the record or comes off it without one of them being used."
+        heading="When you are the custodian"
+        note="Four rooms sit behind the custodian’s door, in the order a custodian meets them. A checker is given the second one only. A reader never sees any of them, and nothing goes on the record or comes off it without one of them being used."
         items={KEEPER_DOORS}
       />
 
@@ -287,7 +287,7 @@ export default function ClimateGuide() {
           the order they do it, in words that assume nothing.
 
           Two rules held to throughout. Nothing is promised that the record does not do —
-          a checker still cannot publish, and a keeper still cannot put an entry up without
+          a checker still cannot publish, and a custodian still cannot put an entry up without
           their own name on it. And "not yet" is named as what it is, because the fastest
           way to lose a volunteer is to let them believe a hold means they were wrong. */}
       <GuideBand
@@ -296,18 +296,18 @@ export default function ClimateGuide() {
         note="A checker is a pair of eyes. You read what is waiting, you say what you found, and you sign it with your own name. You cannot publish, change or delete anything — that is not a limit on your standing, it is what makes your note worth reading."
         items={[
           {
-            label: '1 · A keeper puts you on the list',
-            what: 'One keeper\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The record writes to you the same day with your way in, and names the keeper who put you there.',
+            label: '1 · A custodian puts you on the list',
+            what: 'One custodian\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The record writes to you the same day with your way in, and names the custodian who put you there.',
           },
           {
             label: '2 · Sign in with that address',
             to: '/ClimateChecking',
-            what: 'The invitation opens the checking room. Use the address the keeper typed — that is the one the record knows you by. If you have not set a password yet, the sign-in screen sends you one.',
+            what: 'The invitation opens the checking room. Use the address the custodian typed — that is the one the record knows you by. If you have not set a password yet, the sign-in screen sends you one.',
           },
           {
             label: '3 · Open the first entry waiting',
             to: '/ClimateChecking',
-            what: 'The queue is the work: entries a keeper wants a second opinion on. One at a time, newest first. Nothing is timed and nothing is counted against you.',
+            what: 'The queue is the work: entries a custodian wants a second opinion on. One at a time, newest first. Nothing is timed and nothing is counted against you.',
           },
           {
             label: '4 · Open the origin, not just the entry',
@@ -320,7 +320,7 @@ export default function ClimateGuide() {
           },
           {
             label: '6 · What happens next is not yours to carry',
-            what: 'A keeper reads your note and decides: on the record, or not yet. A hold is never counted as you being wrong. Your note stays on the entry either way.',
+            what: 'A custodian reads your note and decides: on the record, or not yet. A hold is never counted as you being wrong. Your note stays on the entry either way.',
           },
           {
             label: '7 · Your line on the roll, if you want one',
@@ -332,13 +332,13 @@ export default function ClimateGuide() {
 
       <GuideBand
         number="09"
-        heading="If you are the keeper, end to end"
-        note="The keeper is the person the record answers to. Everything below is one sitting\u2019s work, in the order it is done; none of it needs anybody else\u2019s permission except the second key, which is the point of the second key."
+        heading="If you are the custodian, end to end"
+        note="The custodian is the person the record answers to. Everything below is one sitting\u2019s work, in the order it is done; none of it needs anybody else\u2019s permission except the second key, which is the point of the second key."
         items={[
           {
             label: '1 · Put a volunteer on the list',
             to: '/ClimateKeeperRoom?tab=people',
-            what: 'People, then their name and address. A checker is on with one keeper\u2019s word. A second keeper needs a second keeper: you propose, they agree, and only then do the keys move.',
+            what: 'People, then their name and address. A checker is on with one custodian\u2019s word. A second custodian needs a second custodian: you propose, they agree, and only then do the keys move.',
           },
           {
             label: '2 · Tell the record to tap your screen',
@@ -362,7 +362,7 @@ export default function ClimateGuide() {
           },
           {
             label: '6 · If you are ever unsure, do nothing',
-            what: 'An entry that waits is not a failure; an entry that goes up unread is. Nothing on this record punishes a keeper for taking another day.',
+            what: 'An entry that waits is not a failure; an entry that goes up unread is. Nothing on this record punishes a custodian for taking another day.',
           },
         ]}
       />

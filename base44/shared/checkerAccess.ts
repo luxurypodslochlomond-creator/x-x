@@ -70,7 +70,7 @@ export async function requireKeeper(base44) {
   const who = await resolveChecker(base44);
   if (who.error) return { error: who.error, status: who.status };
   if (!who.isKeeper) {
-    return { error: 'Only the keeper may do that on this record', status: 403 };
+    return { error: 'Only the custodian may do that on this record', status: 403 };
   }
   return who;
 }

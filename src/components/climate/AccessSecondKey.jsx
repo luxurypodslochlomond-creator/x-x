@@ -19,14 +19,14 @@ export default function AccessSecondKey({ items, onConfirm, onCancel, busy }) {
         <MarkAgreed size={12} /> waiting for a second key · {items.length}
       </p>
       <p className="text-[12.5px] text-record-muted leading-[1.6] mb-1" style={{ fontFamily: 'var(--font-reading)' }}>
-        Nothing has changed yet. One keeper asks, a different keeper agrees.
+        Nothing has changed yet. One custodian asks, a different custodian agrees.
       </p>
 
       {items.map((w) => (
         <div key={w.id} className="border-t border-record-ink/12 pt-2.5 pb-1 mt-2">
           <p className="text-[14px] text-record-ink" style={{ fontFamily: 'var(--font-reading)', fontWeight: 600 }}>
             {w.verb} {w.target_name}
-            {w.target_is_keeper ? <span className="text-record-muted font-normal"> · keeper</span> : null}
+            {w.target_is_keeper ? <span className="text-record-muted font-normal"> · custodian</span> : null}
           </p>
           <p className="text-[11px] font-mono text-record-muted mt-0.5">asked by {w.requested_by_name}</p>
 

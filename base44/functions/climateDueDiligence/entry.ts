@@ -104,11 +104,11 @@ export default async function (req) {
         pass: keeperLines.length >= 2,
         detail:
           keeperLines.length >= 2
-            ? `${keeperLines.length} named keepers: ${keeperLines.map((k) => k.name || 'unnamed').join(', ')}.`
+            ? `${keeperLines.length} named custodians: ${keeperLines.map((k) => k.name || 'unnamed').join(', ')}.`
             : keeperLines.length === 1
               ? 'One name only. A record that answers to a single person stops being answerable the moment they are ill, away, or gone.'
-              : 'No keeper is named on the record. Nothing here can be decided, and no panel will accept it.',
-        fix: keeperLines.length >= 2 ? null : { to: '/AdminClimateCheckers', label: 'put a keeper on the list' },
+              : 'No custodian is named on the record. Nothing here can be decided, and no panel will accept it.',
+        fix: keeperLines.length >= 2 ? null : { to: '/AdminClimateCheckers', label: 'put a custodian on the list' },
       },
       {
         key: 'trace',
@@ -150,7 +150,7 @@ export default async function (req) {
       },
       {
         key: 'others',
-        test: 'Someone other than the keeper is on the roster',
+        test: 'Someone other than the custodian is on the roster',
         pass: otherEyes.length > 0,
         detail:
           otherEyes.length > 0

@@ -83,7 +83,7 @@ export default function AdminClimateLog() {
       <div className="max-w-3xl mx-auto">
         <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-record-muted">Together We Can Change Climate</p>
         <h1 className="font-display text-3xl sm:text-4xl font-bold uppercase tracking-tight text-record-ink mt-2">
-          The keeper's log
+          The custodian's log
         </h1>
         <p className="mt-3 text-sm text-record-ink/80 leading-relaxed max-w-xl">
           What was said, what was decided, and what is still missing — written on the day it happened.

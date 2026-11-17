@@ -53,7 +53,7 @@ export default function RecordPagesPanel({ open, onClose }) {
   // in record-navigator.css), and a page you can see but cannot scroll is the "sticks" in
   // every report this sheet has ever had. So the lock is the phone's alone: a wide screen
   // scrolls behind the open sheet, exactly as it would behind any open menu.
-  const [isDesk, setIsDesk] = useState(false);
+  const [isDesk, setIsDesk] = useState(() => window.matchMedia('(min-width: 1024px)').matches);
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 1024px)');
     const sync = () => setIsDesk(mq.matches);
@@ -86,14 +86,14 @@ export default function RecordPagesPanel({ open, onClose }) {
 
   // One place owns the dialog itself: opened here, closed only when the sheet has gone.
   useEffect(() => {
-    if (!mounted) return undefined;
+    if (!mounted || isDesk) return undefined;
     const dialog = dialogRef.current;
     if (!dialog) return undefined;
     if (!dialog.open) {
       try { dialog.showModal(); } catch { /* already open — nothing to do */ }
     }
     return () => { if (dialog.open) dialog.close(); };
-  }, [mounted]);
+  }, [mounted, isDesk]);
 
   // The sheet closes when the paper is tapped outside the plate — the gesture a phone has
   // used for every sheet it has ever shown. Only on a wide screen, where there is paper
@@ -102,7 +102,7 @@ export default function RecordPagesPanel({ open, onClose }) {
     if (event.target === dialogRef.current) onClose();
   };
 
-  if (!mounted) return null;
+  if (!mounted || isDesk) return null;
   return createPortal(
     <dialog
       ref={dialogRef}

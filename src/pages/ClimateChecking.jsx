@@ -102,7 +102,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
   // An invited checker who is not carrying a session lands here. They are not told they are
   // not on the list — they are told the truth: the room is by invitation, and the way in is
   // their own address. No Google account is needed: the record uses the app's own sign-in,
-  // which sends a code to the address a keeper added.
+  // which sends a code to the address a custodian added.
   if (error === 'signed_out') {
     return (
       <div className="min-h-[60vh] bg-record-paper px-5 py-16">
@@ -138,7 +138,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
             are still on the record, still in your name, and nothing has been taken off.
           </p>
           <p className="text-sm text-record-ink/80 leading-relaxed mt-3">
-            If this is a surprise, ask a keeper to open it again — it is one line, and it reopens at your next sign-in.
+            If this is a surprise, ask a custodian to open it again — it is one line, and it reopens at your next sign-in.
           </p>
         </div>
       </div>
@@ -152,7 +152,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
           <p className="text-[10px] font-mono font-black uppercase tracking-[0.25em] text-record-red mb-3">not on the list</p>
           <h1 className="font-black text-record-ink text-xl mb-3">Checking is by invitation.</h1>
           <p className="text-sm text-record-ink/80 leading-relaxed">
-            This room opens for people a keeper has added by name. Ask for your email address to be put on the list,
+            This room opens for people a custodian has added by name. Ask for your email address to be put on the list,
             and it will open on your next sign-in.
           </p>
           <p className="text-sm text-record-ink/80 leading-relaxed mt-3">
@@ -183,7 +183,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
         <p className={plain ? 'text-[13.5px] text-record-ink/75 leading-relaxed mb-1' : 'text-sm text-record-ink/75 leading-relaxed mb-1'} style={{ fontFamily: 'var(--font-reading)' }}>
           {compact ? 'Does the source support this entry?' : plain
             ? 'Open the link, then say what you find. Nothing here publishes or edits anything.'
-            : 'Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the entry claims, and a keeper decides with your words in front of them.'}
+            : 'Nothing here publishes, edits or deletes an entry. You say whether the link opens and whether it says what the entry claims, and a custodian decides with your words in front of them.'}
         </p>
         {/* Whose word this is. The row has carried the keeper's address since the place was
             given and it was never shown to the person it is about, so a volunteer arrived on

@@ -93,13 +93,13 @@ export default function MusicSubmitForm({ onSubmitted }) {
         <div className="flex items-center gap-2 mb-2">
           {live ? <Check className="w-4 h-4 text-[#1e3a2b]" /> : <AlertTriangle className="w-4 h-4 text-[#b8860b]" />}
           <p className={`text-[11px] font-black font-mono uppercase tracking-widest ${live ? 'text-[#1e3a2b]' : 'text-[#b8860b]'}`}>
-            {live ? 'On the record now' : 'Waiting for a keeper'}
+            {live ? 'On the record now' : 'Waiting for a custodian'}
           </p>
         </div>
         <p className="text-[12px] font-mono text-[#141210] leading-relaxed">
           {live
             ? `Your ${isSet ? 'set' : 'track'} is on the record and anyone can hear it — your name on it, the master exactly as you gave it${isSet ? ', whole and uncut' : ''}. Read as: ${String(result.kind || 'other').replace(/_/g, ' ')}.`
-            : `Nothing is lost and nothing is thrown away: your ${isSet ? 'set' : 'track'} is held, with its file and your words, until a keeper has read it. Your name stays on it, and it goes up as it is.`}
+            : `Nothing is lost and nothing is thrown away: your ${isSet ? 'set' : 'track'} is held, with its file and your words, until a custodian has read it. Your name stays on it, and it goes up as it is.`}
         </p>
         <p className="text-[10px] font-mono text-[#5a5246] mt-2 leading-relaxed">
           It is never edited, re-encoded, sold or counted, and no one can take your name off it.

@@ -32,7 +32,7 @@ export default function DeskOrientation() {
 
         <p className="text-[9px] font-mono font-black uppercase tracking-[0.15em] text-record-ink mt-4 mb-1.5">who does what</p>
         <p className="text-[11px] font-mono text-record-ink/80 leading-snug">
-          A <span className="font-black text-record-ink">keeper</span> reads a decision, publishes or holds it, and signs their own name to it. Keepers are admins.
+          A <span className="font-black text-record-ink">custodian</span> reads a decision, publishes or holds it, and signs their own name to it. This desk is restricted to app administrators.
         </p>
         <p className="text-[11px] font-mono text-record-ink/80 leading-snug mt-1.5">
           A <span className="font-black text-record-ink">checker</span> opens a source and writes down what they found. They cannot publish, change or delete anything, and they never see who sent an entry.

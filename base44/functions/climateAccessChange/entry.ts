@@ -133,16 +133,16 @@ async function markNotice(base44, rowId, told) {
 }
 
 // The one place access actually moves. Called for a solo keeper (no second key exists) and for
-// a second keeper agreeing to somebody else's ask, so there is a single path and no quieter one.
+// a second custodian agreeing to somebody else's ask, so there is a single path and no quieter one.
 async function applyChange(base44, change, who, basis) {
   const by = who.user?.email || '';
   const basisNote =
     basis === 'solo'
-      ? `Only one keeper held the keys, so there was no second key to ask. Asked and done by ${who.name || by}.`
+      ? `Only one custodian held the keys, so there was no second key to ask. Asked and done by ${who.name || by}.`
       : basis === 'owner'
-      ? `The owner's word stood alone: ${who.name || by} holds the building's keys, so no second keeper was asked, and the record says so here.`
+      ? `The owner's word stood alone: ${who.name || by} holds the building's keys, so no second custodian was asked, and the record says so here.`
       : basis === 'single'
-      ? `One keeper's word: ${who.name || by}. A checker is a pair of eyes and not a set of keys, so adding a checker, pausing one or ending one is a single decision — and it is written here so it was never quiet.`
+      ? `One custodian's word: ${who.name || by}. A checker is a pair of eyes and not a set of keys, so adding a checker, pausing one or ending one is a single decision — and it is written here so it was never quiet.`
       : `Asked by ${change.requested_by_name || change.requested_by}; agreed by ${who.name || by}.`;
 
   if (change.change === 'add') {
@@ -169,13 +169,13 @@ async function applyChange(base44, change, who, basis) {
     }).catch((error) => console.error('Keeper copy failed:', error?.message)));
     await logIt(base44, {
       rowId: created.id,
-      title: `${change.target_name || email} · ${change.target_is_keeper ? 'keeper' : 'checker'}`,
+      title: `${change.target_name || email} · ${change.target_is_keeper ? 'custodian' : 'signatory'}`,
       action: 'access_granted', reviewer: by,
       note: `${basisNote} ${delivery.message}`,
     });
     return {
       ok: true, ...delivery, row_id: created.id,
-      message: `${change.target_name || email} added as ${change.target_is_keeper ? 'keeper' : 'checker'}. ${delivery.message}`,
+      message: `${change.target_name || email} added as ${change.target_is_keeper ? 'custodian' : 'signatory'}. ${delivery.message}`,
     };
   }
 
@@ -186,7 +186,7 @@ async function applyChange(base44, change, who, basis) {
     .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
   if (!row) return { ok: false, status: 404, message: 'That person is no longer on the list.' };
 
-  const title = `${row.name || row.email}${row.is_keeper ? ' · keeper' : ' · checker'}`;
+  const title = `${row.name || row.email}${row.is_keeper ? ' · custodian' : ' · signatory'}`;
 
   // The floor: the record is never left with nobody holding the keys.
   if ((change.change === 'pause' || change.change === 'remove') && row.is_keeper) {
@@ -196,7 +196,7 @@ async function applyChange(base44, change, who, basis) {
       return {
         ok: false,
         status: 409,
-        message: 'The record must always have one keeper holding the keys. Add another keeper first, then this can happen.',
+        message: 'The record must always have one custodian holding the keys. Add another custodian first, then this can happen.',
       };
     }
   }
@@ -368,7 +368,7 @@ export default async function (req) {
         const others = rows.filter((r) => r.active && r.is_keeper && r.id !== draft.target_row_id).length;
         if (others === 0) {
           return Response.json(
-            { error: 'The record must always have one keeper holding the keys. Add another keeper first.' },
+            { error: 'The record must always have one custodian holding the keys. Add another custodian first.' },
             { status: 409 }
           );
         }
@@ -377,7 +377,7 @@ export default async function (req) {
       // ── A CHECKER IS A PAIR OF EYES, NOT A SET OF KEYS ────────────────────────
       // The two-key rule exists because access to this record is power: who may read a
       // person's entry, and who may put one on the record. A checker holds neither. Making
-      // the keeper of the record wait for a second keeper to agree before she can add a
+      // the keeper of the record wait for a second custodian to agree before she can add a
       // volunteer is how a record earns a reputation for being difficult — and with two
       // serious researchers waiting to start, difficult is the one thing it cannot afford.
       // So one keeper's word adds, pauses, restores or takes off a checker, and the audit
@@ -419,7 +419,7 @@ export default async function (req) {
         return Response.json({
           applied: false,
           waiting: true,
-          message: `Already asked. ${existing.requested_by_name || existing.requested_by} is waiting for a second keeper to agree.`,
+          message: `Already asked. ${existing.requested_by_name || existing.requested_by} is waiting for a second custodian to agree.`,
         });
       }
 
@@ -429,7 +429,7 @@ export default async function (req) {
         waiting: true,
         id: created?.id || '',
         message:
-          'Asked. Nothing has changed yet — a second keeper has to agree before anybody gains or loses access.',
+          'Asked. Nothing has changed yet — a second custodian has to agree before anybody gains or loses access.',
       });
     }
 
@@ -449,7 +449,7 @@ export default async function (req) {
       // The heart of it: the hand that asked may never be the hand that agrees.
       if (lower(rec.requested_by) === me) {
         return Response.json(
-          { error: 'A second keeper has to agree to this. You cannot confirm your own request.' },
+          { error: 'A second custodian has to agree to this. You cannot confirm your own request.' },
           { status: 403 }
         );
       }

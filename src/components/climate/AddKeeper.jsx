@@ -20,9 +20,9 @@ import useKeeperMobile from '@/components/climate/keeper/useKeeperMobile';
 // card with a hard border, a shouting mono label in red capitals and a filled red slab
 // at the bottom, sitting directly under the checker form — so the People door showed two
 // forms that looked like two different products, and the loudest thing on the page was a
-// big red button inviting a keeper. Nothing about the job changed here. It is the same
+// big red button inviting a custodian. Nothing about the job changed here. It is the same
 // three fields and the same server call; it simply stands in the same type, the same
-// quiet fields and the same one action as the form above it, because a keeper reading
+// quiet fields and the same one action as the form above it, because a custodian reading
 // this door should see one desk and not two.
 export default function AddKeeper({ onAdded }) {
   const mobile = useKeeperMobile();
@@ -47,7 +47,7 @@ export default function AddKeeper({ onAdded }) {
         email: clean,
         name: name.trim() || clean,
         is_keeper: true,
-        note: 'Keeper — holds the record’s keys',
+        note: 'Custodian — holds the record’s keys',
       });
       const data = res?.data || {};
       if (data.error) throw new Error(data.error);
@@ -70,13 +70,13 @@ export default function AddKeeper({ onAdded }) {
       {!mobile && (
         <p className="text-[12.5px] text-[#6b5f4f] mb-2" style={reading}>
           <KeyRound className="w-3.5 h-3.5 inline mr-1.5 -mt-0.5" />
-          Ask for a keeper
+          Ask for a custodian
         </p>
       )}
       <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mb-2" style={reading}>
-        A keeper holds every key: publishing, correcting, setting how well something is known, signing the record,
+        A custodian holds every key: publishing, correcting, setting how well something is known, signing the record,
         and inviting anyone else. They also see the address of everyone who submitted. Fewer people, more keys —
-        so this is asked here and agreed by another keeper before the keys change hands.
+        so this is asked here and agreed by another custodian before the keys change hands.
       </p>
       <input
         value={email}
@@ -97,7 +97,7 @@ export default function AddKeeper({ onAdded }) {
         className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#1a1612] text-[#f4efe4] text-[14px] font-semibold disabled:opacity-40"
         style={reading}
       >
-        <KeyRound className="w-4 h-4" /> {busy ? 'asking' : mobile ? 'Ask for a keeper' : 'Add them and ask for the keys'}
+        <KeyRound className="w-4 h-4" /> {busy ? 'asking' : mobile ? 'Ask for a custodian' : 'Add them and ask for the keys'}
       </button>
       {message && (
         <p className="text-[14px] leading-[1.6] text-[#141210] mt-3 border-l-2 border-[#b3261e]/50 pl-3" style={reading}>

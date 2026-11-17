@@ -29,7 +29,7 @@ export default function ListenerWords({ track }) {
       </p>
       <p className="mt-2 text-[10px] font-mono text-[#5a5246] leading-relaxed">
         Disagreeing with the work is not abuse, and it stays. A line is taken down only for what is unlawful, only by a
-        keeper — and it is never quietly.
+        custodian — and it is never quietly.
       </p>
       {/* A line that came down does not vanish without trace: the record leaves its own note
           where the line stood — that one was taken down, when, and on what grounds. The line

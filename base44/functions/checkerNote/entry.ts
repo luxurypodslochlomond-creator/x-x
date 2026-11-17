@@ -56,7 +56,7 @@ export default async function (req) {
           : 'they could not tell';
       await tellKeepers(base44, {
         headline: `${who.name} has signed their first check`,
-        line: `They read \u201C${entry_title || 'an entry on the record'}\u201D and put their name to it: ${said}. Their note is on the record now, and what happens next is a keeper's call.`,
+        line: `They read \u201C${entry_title || 'an entry on the record'}\u201D and put their name to it: ${said}. Their note is on the record now, and what happens next is a custodian's call.`,
       });
     }
 

@@ -166,7 +166,7 @@ export default function ClimateSeals() {
           {isKeeper && (
             <div className="border-2 border-[#141210] bg-[#f7f1e5] px-3 py-3 mb-6 flex flex-wrap items-center justify-between gap-3">
               <p className="text-[10.5px] lg:text-[11.5px] font-mono leading-relaxed text-[#141210] max-w-md">
-                A keeper may take the seal. Every unpublished entry gets its first fingerprint, and any entry changed
+                A custodian may take the seal. Every unpublished entry gets its first fingerprint, and any entry changed
                 since its last seal gets a new link pointing at the one it replaced.
               </p>
               <button

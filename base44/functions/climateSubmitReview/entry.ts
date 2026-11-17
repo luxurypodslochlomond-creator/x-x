@@ -122,7 +122,7 @@ Content: ${fullContent.slice(0, 2000)}`,
     // only the one field that can do real harm is held.
     if (type === 'group' && data.contact_email) {
       flagged = true;
-      aiAssessment = `${aiAssessment} · A contact line was given — held so a keeper can check the address belongs to the organiser.`;
+      aiAssessment = `${aiAssessment} · A contact line was given — held so a custodian can check the address belongs to the organiser.`;
     }
 
     // ── A CEILING, NOT A LOCK ───────────────────────────────────────────────────

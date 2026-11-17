@@ -142,5 +142,5 @@ export const CARTOON_CARD = {
   title: 'The Big Picture',
   image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a46d7bec3_generated_image.png',
   body: 'Three cartoons, a pen, and room for yours. A climate record that children can draw on as well as read.',
-  honest: 'The three cartoons are AI-generated illustrations, marked as such. The wall is human drawings, each with its maker. A keeper looks before anything goes up.',
+  honest: 'The three cartoons are AI-generated illustrations, marked as such. The wall is human drawings, each with its maker. A custodian looks before anything goes up.',
 };

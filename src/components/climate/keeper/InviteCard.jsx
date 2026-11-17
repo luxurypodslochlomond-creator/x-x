@@ -64,7 +64,7 @@ export default function InviteCard({ name = '', variant = 'person' }) {
           ? 'Drawing the card…'
           : state === 'shared'
             ? 'Sent'
-            : keeper ? 'Draw the keeper’s card' : 'Draw their card'}
+            : keeper ? 'Draw the custodian’s card' : 'Draw their card'}
       </button>
       <ShareCardPreview
         open={!!card}

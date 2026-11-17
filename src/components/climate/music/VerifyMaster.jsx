@@ -75,7 +75,7 @@ export default function VerifyMaster({ url, print }) {
           <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e]">It does not match</p>
           <p className="mt-1 text-[10px] font-mono text-[#141210] leading-relaxed">
             This copy is not the file whose print is printed above. Something changed it after it was given, or it did
-            not arrive whole. Do not take this copy as the master, and tell a keeper — a removal or a correction on this
+            not arrive whole. Do not take this copy as the master, and tell a custodian — a removal or a correction on this
             record is made in the open, never quietly.
           </p>
           <p className="mt-2 text-[9px] font-mono text-[#5a5246] break-all">

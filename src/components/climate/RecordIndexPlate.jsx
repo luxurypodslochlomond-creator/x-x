@@ -36,7 +36,7 @@ export default function RecordIndexPlate({ onNavigate }) {
   // same confusion back in a quieter place. The room is named after what it is, and after the
   // page it opens, which is already called the keeper's room on its own door.
   const groups = isKeeper || isChecker
-    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: "The keeper's room", to: '/ClimateKeeperRoom', what: 'Your own room: decide, check, people, counts.' }] }]
+    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Your own room: decide, check, people, counts.' }] }]
     : CONTENT_GROUPS;
 
   return (

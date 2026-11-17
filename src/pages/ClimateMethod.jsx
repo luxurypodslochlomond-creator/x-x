@@ -82,13 +82,13 @@ export default function ClimateMethod() {
 
       <Block n="05" title="Who decides">
         <p>The screen is a machine, and it is allowed to say only one thing: clean enough to go up, or wait for a person. It never says that a claim is true, it never sets how well a claim is known, and it never signs an entry with anybody's name. Anything it is unsure of waits for a person, and that person's decision is the one that counts.</p>
-        <p>Three people hold the record's keys: Janine M. H. Selendy, after whose work and Horizon International this record is made; Gillian Barbara Brown; and Brian Hughes, who built it. No keeper can add or remove another alone — it takes two of them — so that rule lives in the record rather than in a promise on a page.</p>
+        <p>Three people hold the record's keys: Janine M. H. Selendy, after whose work and Horizon International this record is made; Gillian Barbara Brown; and Brian Hughes, who built it. No custodian can add or remove another alone — it takes two of them — so that rule lives in the record rather than in a promise on a page.</p>
         <p>Keeping the record running is a second, separate job from deciding what goes on it, and the person holding it is not the founder. Anyone may write to <a href="mailto:family@uf51.love" className="font-black underline decoration-2 underline-offset-2 hover:text-[#b3261e]">family@uf51.love</a> and a person answers.</p>
         <p>
           One thing is not yet as it should be, and this page says it rather than letting the paragraph above stand
           unqualified: the entries placed on this record in its first weeks went up on the screen's word, before a
-          person was signing, and they carry no keeper's name. Every entry placed from here is either signed by the
-          keeper who published it or prints plainly that it is unsigned. Nothing on this record pretends that a person
+          person was signing, and they carry no custodian's name. Every entry placed from here is either signed by the
+          custodian who published it or prints plainly that it is unsigned. Nothing on this record pretends that a person
           signed what nobody signed.
         </p>
         <p>

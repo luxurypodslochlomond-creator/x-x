@@ -68,7 +68,7 @@ export default function DueDiligencePanel() {
             What the record holds, today
           </p>
           <p className="text-[10px] font-mono leading-snug text-[#5a5246] mt-1">
-            {counts.published} published · {counts.seals} sealed · {counts.checks} checks · {counts.keepers} keepers ·{' '}
+            {counts.published} published · {counts.seals} sealed · {counts.checks} checks · {counts.keepers} custodians ·{' '}
             {counts.checkers} checkers
           </p>
           <p className="text-[9px] font-mono text-[#8a8375] mt-1">

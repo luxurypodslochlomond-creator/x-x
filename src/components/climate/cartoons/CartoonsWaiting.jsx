@@ -38,10 +38,10 @@ export default function CartoonsWaiting() {
   return (
     <section className="mt-10 border-t border-record-ink/20 pt-4">
       <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-red">
-        Waiting for a keeper · {items.length}
+        Waiting for a custodian · {items.length}
       </p>
       <p className="mt-1 text-[12.5px] leading-[1.6] text-record-muted" style={reading}>
-        Only a keeper sees this strip. A drawing goes on the wall because a person said yes, never because a machine did.
+        Only a custodian sees this strip. A drawing goes on the wall because a person said yes, never because a machine did.
       </p>
 
       <div className="mt-3 space-y-4">

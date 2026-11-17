@@ -759,7 +759,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   // The badge: who this card is for, said first.
   let y = 118;
   ctx.font = `900 20px ${MONO}`;
-  const badgeText = card.badge || 'FOR A KEEPER';
+  const badgeText = card.badge || 'FOR A CUSTODIAN';
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = INK;
   ctx.fillRect(PAD, y - 24, badgeW, 36);

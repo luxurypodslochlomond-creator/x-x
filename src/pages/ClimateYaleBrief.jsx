@@ -29,8 +29,8 @@ import { useRecordFigures, show, TONGUES, HAND_WRITTEN_TONGUES } from '@/compone
 //
 // So they are functions of the live counts now. And where a true figure cannot be counted by
 // whoever is reading this page — the roster is closed to the record's own keys, the verdicts
-// live in a keeper's office — the line is phrased without a number rather than with a stale
-// one, and the three keepers are named instead of counted, because names can be checked and a
+// live in a custodian's office — the line is phrased without a number rather than with a stale
+// one, and the three custodians are named instead of counted, because names can be checked and a
 // numeral cannot.
 const existsItems = (f) => [
   { t: `${show(f?.entries)} published entries — ${show(f?.solutions)} solutions, ${show(f?.crises)} crises`, to: 'TogetherChangeClimate' },
@@ -39,7 +39,7 @@ const existsItems = (f) => [
   { t: `${show(f?.wire)} wire entries, dated and sourced`, to: 'ClimateWire' },
   { t: `${show(f?.actions)} actions, each with an organiser’s own contact line`, to: 'TogetherChangeClimate' },
   { t: `${TONGUES} tongues, ${HAND_WRITTEN_TONGUES} written by hand and ${TONGUES - HAND_WRITTEN_TONGUES} made by machine, every one labelled as what it is`, to: 'TogetherChangeClimate' },
-  { t: 'Keepers on the roster, named rather than counted: Gillian Barbara Brown, Brian Hughes, Janine Selendy', to: 'ClimateHandover' },
+  { t: 'Custodians on the roster, named rather than counted: Gillian Barbara Brown, Brian Hughes, Janine Selendy', to: 'ClimateHandover' },
   { t: 'No account needed to read any of it. No tracking, no advertising, no paid placement.', to: 'ClimatePrivacy' },
 ];
 
@@ -71,7 +71,7 @@ const NEEDS = [
 ];
 
 const missingItems = (f) => [
-  ['Put a real name on every entry', 'Keepers sign their own when they are ready. Until then the record says each entry is unsigned rather than borrowing a name.'],
+  ['Put a real name on every entry', 'Custodians sign their own when they are ready. Until then the record says each entry is unsigned rather than borrowing a name.'],
   ['Invite the first checkers', 'Two or three named volunteers, and the checking office stops being empty.'],
   [`State the standing on all ${show(f?.entries)}`, `${show(f?.entries == null || f?.noVerification == null ? null : f.entries - f.noVerification)} do. ${show(f?.noVerification)} do not. An afternoon.`],
   ['Publish the code', 'Days rather than months. Until then nothing here can honestly be called auditable.'],
@@ -91,7 +91,7 @@ WHAT EXISTS TONIGHT
 ${show(f?.entries)} published entries (${show(f?.solutions)} solutions, ${show(f?.crises)} crises), every one with a working link to its origin.
 ${show(f?.seals)} cryptographic seals, each recomputable by a reader without trusting us.
 ${show(f?.wire)} wire entries, dated and sourced. ${show(f?.actions)} actions with organiser contact lines. ${TONGUES} tongues, each labelled by how it was made.
-Keepers on the roster, named rather than counted: Gillian Barbara Brown, Brian Hughes, Janine Selendy.
+Custodians on the roster, named rather than counted: Gillian Barbara Brown, Brian Hughes, Janine Selendy.
 
 WHAT DOES NOT EXIST YET
 No independent verdicts — the checking office is built and empty.
@@ -107,7 +107,7 @@ WHAT IT NEEDS
 3. Somebody to carry it — the technology, its upkeep, and a fair living for the two people who build it. Hosting is £1,000 a year at this size, £10,000 for ten years.
 
 WHAT STILL HAS TO HAPPEN BEFORE IT COULD BE CALLED FINISHED
-Put a real name on every entry, as keepers are ready to sign their own. Invite the first checkers. State the standing on all ${show(f?.entries)}. Publish the code.
+Put a real name on every entry, as custodians are ready to sign their own. Invite the first checkers. State the standing on all ${show(f?.entries)}. Publish the code.
 
 ONE CORRECTION, MADE IN THE OPEN
 39 entries previously carried the founder's name. She did not write them. All 39 were set back to unsigned on 6 November 2026, and this line is the record of it.

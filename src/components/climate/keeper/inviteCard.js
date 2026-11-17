@@ -36,7 +36,7 @@ const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
 const ROWS = [
   { label: 'ONE ADDRESS', line: 'A record of what people are doing about the climate, with a source on every entry. No account needed to add one.' },
   { label: 'ONE DOOR', line: 'Open it and tap Submit a solution, crisis, or action. Paste the page it came from and the form fills itself in.' },
-  { label: 'ONE YES', line: 'Nothing goes up until a keeper reads it. That is the whole of why a reader can trust the page.' },
+  { label: 'ONE YES', line: 'Nothing goes up until a custodian reads it. That is the whole of why a reader can trust the page.' },
 ];
 
 // ── THE OTHER SIDE OF THE SAME CARD ──────────────────────────────────────────
@@ -47,9 +47,9 @@ const ROWS = [
 // picture she can keep on her phone, because that is where she will be standing when she
 // does it.
 const KEEPER_ROWS = [
-  { label: 'YOUR ROOM', line: 'Sign in at the address your invitation came to, and open the keeper\u2019s room. Whatever is waiting sits there, one tap each: yes, or not yet.' },
+  { label: 'YOUR ROOM', line: 'Sign in at the address your invitation came to, and open the custodians\u2019 room. Whatever is waiting sits there, one tap each: yes, or not yet.' },
   { label: 'THE PEOPLE DOOR', line: 'Tap People. Under the keys, type their name, their address and one word on why. A checker is your word alone, and it lands the moment you say it.' },
-  { label: 'THE KEYS TAKE TWO', line: 'Handing over the keys is the only thing that waits: one keeper asks, a different keeper agrees. The last keeper can never be taken off.' },
+  { label: 'THE KEYS TAKE TWO', line: 'Handing over the keys is the only thing that waits: one custodian asks, a different custodian agrees. The last custodian can never be taken off.' },
 ];
 
 function wrap(ctx, text, maxWidth, maxLines) {
@@ -116,7 +116,7 @@ export async function buildInviteCard(person = {}, options = {}) {
 
   let y = 118;
   ctx.font = `900 20px ${MONO}`;
-  const badge = keeper ? 'FOR THE KEEPER' : 'YOU ARE INVITED';
+  const badge = keeper ? 'FOR THE CUSTODIAN' : 'YOU ARE INVITED';
   const badgeW = ctx.measureText(badge).width + 32;
   ctx.fillStyle = INK;
   ctx.fillRect(PAD, y - 24, badgeW, 36);
@@ -160,7 +160,7 @@ export async function buildInviteCard(person = {}, options = {}) {
   ctx.fillStyle = MUTED;
   ctx.font = `500 22px ${MONO}`;
   ctx.fillText(
-    keeper ? 'A keeper puts the name on it. The record keeps the note.' : 'Together we can change climate.',
+    keeper ? 'A custodian puts the name on it. The record keeps the note.' : 'Together we can change climate.',
     PAD,
     Math.min(y + 16, FOOTER_TOP - 44)
   );

@@ -109,10 +109,10 @@ export default function CartoonSendIn() {
     return (
       <div className="border border-record-ink/20 bg-record-bone/60 p-4 lg:p-5">
         <p className="inline-flex items-center gap-2 text-[15px] font-semibold text-record-ink" style={reading}>
-          <Check className="h-4 w-4 text-record-red" strokeWidth={2.4} /> It is with a keeper.
+          <Check className="h-4 w-4 text-record-red" strokeWidth={2.4} /> It is with a custodian.
         </p>
         <p className="mt-2 text-[14px] leading-[1.65] text-record-muted" style={reading}>
-          The drawing is not on the wall yet, and will not be until a keeper has looked at it. When they put it up it
+          The drawing is not on the wall yet, and will not be until a custodian has looked at it. When they put it up it
           appears above, with the name you gave and your line.
         </p>
       </div>
@@ -174,7 +174,7 @@ export default function CartoonSendIn() {
               onChange={set('for_line')}
             />
             <input className={field} placeholder="Who holds the copyright, if that is not the artist (optional)" value={form.credit} onChange={set('credit')} />
-            <input className={field} placeholder="Your email, so a keeper can reach you (optional)" inputMode="email" value={form.submitter_email} onChange={set('submitter_email')} />
+            <input className={field} placeholder="Your email, so a custodian can reach you (optional)" inputMode="email" value={form.submitter_email} onChange={set('submitter_email')} />
           </div>
 
           <p className="mt-2 font-mono text-[10px] leading-relaxed text-record-muted">
@@ -187,7 +187,7 @@ export default function CartoonSendIn() {
             className="mt-3 inline-flex min-h-[48px] w-full items-center justify-center gap-2 bg-record-ink px-4 text-[14px] font-semibold text-record-paper disabled:opacity-40"
             style={reading}
           >
-            {busy ? 'Sending it to a keeper…' : 'Offer it to the wall'}
+            {busy ? 'Sending it to a custodian…' : 'Offer it to the wall'}
           </button>
         </div>
       )}

@@ -18,7 +18,7 @@ export default function CartoonWall() {
   return (
     <section className="comic-wall" aria-labelledby="cartoon-wall-title">
       <h2 id="cartoon-wall-title" className="comic-section-title">The people’s pages.</h2>
-      <p className="record-meta comic-workshop-note">The artist’s name stays. A keeper looks before it goes up.</p>
+      <p className="record-meta comic-workshop-note">The artist’s name stays. A custodian looks before it goes up.</p>
       {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the wall…</p>}
       {wall.isError && <div className="comic-wall-empty"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}
       {!wall.isPending && !wall.isError && !cartoons.length && <div className="comic-wall-empty"><span aria-hidden="true">…</span><p className="record-meta">A space for the first human drawing.<br />No pretend contributors. This bit is yours.</p></div>}

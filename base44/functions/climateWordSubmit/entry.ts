@@ -16,7 +16,7 @@ import { keeperInbox } from '../../shared/keeperInbox.ts';
 //
 // Nothing is asked of the listener in return: no email, no account, and no name unless
 // they want one. Nothing here is counted, scored, ranked or replied to — and the artist
-// is never graded by it. A line is kept as a person wrote it, and only a keeper can take
+// is never graded by it. A line is kept as a person wrote it, and only a custodian can take
 // one down, and only for something unlawful.
 
 export default async function(req: Request): Promise<Response> {
@@ -60,7 +60,7 @@ export default async function(req: Request): Promise<Response> {
     }
 
     // 1. The advisory note. It reads the line given — nothing else, and nobody behind it.
-    let aiAssessment = 'Screener unavailable — a keeper will read this line.';
+    let aiAssessment = 'Screener unavailable — a custodian will read this line.';
     let flagged = true;
 
     try {
@@ -78,7 +78,7 @@ Assess ONLY these three things, from the line below:
 2. ARE THE WORDS UNLAWFUL OR ABUSIVE? (incitement to real harm, sexual content involving minors, an explicit threat to a person, hate against a group of people)
 3. DOES IT CARRY PRIVATE DETAILS ABOUT SOMEBODY WHO DID NOT PUT THEM HERE? (a home address, a phone number, or the full name and contact of a third party)
 
-If you are unsure, answer "clean" in your reasons and choose "clean". Holding a listener's line wrongly silences a person; a line a keeper takes down later costs nothing.
+If you are unsure, answer "clean" in your reasons and choose "clean". Holding a listener's line wrongly silences a person; a line a custodian takes down later costs nothing.
 
 The track: ${String(track.title || '')} by ${String(track.artist_name || '')}
 The listener's line: ${word.slice(0, 600)}`,
@@ -95,7 +95,7 @@ The listener's line: ${word.slice(0, 600)}`,
       flagged = aiResult.verdict !== 'clean';
       aiAssessment = `[${String(aiResult.verdict).toUpperCase()}] Confidence: ${aiResult.confidence || 'unknown'} — ${aiResult.reasons}`;
     } catch (aiError) {
-      // The screener failing never loses a line — it holds it, in the open, and tells a keeper.
+      // The screener failing never loses a line — it holds it, in the open, and tells a custodian.
       console.error('climateWordSubmit: screener failed:', aiError.message);
     }
 

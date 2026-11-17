@@ -24,7 +24,7 @@ function SuccessScreen({ entryType, onClose, published }) {
       </p>
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
         {published
-          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A keeper can take it down, and we would email you first.'
+          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A custodian can take it down, and we would email you first.'
           : isGroup
           ? 'A person checks every group that gives a contact line, so the address printed is the organiser\'s own and not somebody else\'s. We will email you the moment it is up.'
           : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}

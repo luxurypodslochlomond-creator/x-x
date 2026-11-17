@@ -35,7 +35,7 @@ const PROOF = [
   },
   {
     title: 'The keys',
-    body: 'A keeper cannot add, pause, restore or remove anybody alone: a change to the guest list needs a second, different keeper, and both names are written into the audit trail with the date. The one exception is an administrator, who can already reach that table directly — and when they act alone, the audit line records that the decision stood alone.',
+    body: 'A custodian cannot add, pause, restore or remove anybody alone: a change to the guest list needs a second, different custodian, and both names are written into the audit trail with the date. The one exception is an administrator, who can already reach that table directly — and when they act alone, the audit line records that the decision stood alone.',
     to: '/ClimateMethod',
     cta: 'Where the rule is written',
   },

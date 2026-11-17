@@ -19,7 +19,7 @@ export default function HandlerBrief() {
   return (
     <div className="border-2 border-[#141210] mt-4">
       <div className="bg-[#141210] px-3 py-2">
-        <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#efe7d6]">Who the keeper is</p>
+        <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#efe7d6]">Who the custodian is</p>
       </div>
 
       <div className="bg-[#f7f1e5] px-3 py-3">

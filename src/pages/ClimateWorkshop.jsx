@@ -59,7 +59,7 @@ const HOUR = [
   ['00:12', 'Six minutes · How a fortnightly cartoon gets made', 'The idea, the artist, the science check, the publish — from the team who make them, if they join the discussion.', 'the panel'],
   ['00:18', 'Nineteen minutes · The draw', 'The strip goes up with its last panel missing. Everyone draws that panel, on paper, in pen or pencil.', 'the room · everyone draws'],
   ['00:37', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.', 'four volunteers'],
-  ['00:44', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown. Nobody narrates it.', 'one line on the screen'],
+  ['00:44', 'Six minutes · Where the drawings go', 'Sent in, looked at by a custodian, and put on the wall with the drawer’s name and their own line about it. Their email is never shown. Nobody narrates it.', 'one line on the screen'],
   ['00:50', 'Two minutes · Handed back', 'She closes on the blank panel and gives the room its own hour back.', 'Janine · host'],
   ['00:52', 'Eight minutes · Spare, with no plan of ours', 'Taking the record’s eight-minute slot out gave the hour back eight minutes. Keep them empty, give them to the panel, or use them yourself — there is nothing of ours waiting to fill them.', 'nobody’s · hers to leave empty'],
 ];

@@ -6,7 +6,7 @@ import { keeperInbox } from '../../shared/keeperInbox.ts';
 // Music is given to this record by the artist who made it, and it is read at once —
 // not queued. A track the screener clears goes up the moment it is given, because an
 // artist who has just handed over a master should not be left waiting on a person to
-// be able to hear it. Only a flagged track waits, and then a keeper is told.
+// be able to hear it. Only a flagged track waits, and then a custodian is told.
 //
 // The screener is deliberately narrow. It cannot hear the work, so it is told in plain
 // terms never to judge it: no score, no taste, no genre, no style, no dialect, no
@@ -60,7 +60,7 @@ export default async function(req: Request): Promise<Response> {
     }
 
     // 1. The advisory note. It reads the words given — nothing else.
-    let aiAssessment = 'Screener unavailable — a keeper will read this track.';
+    let aiAssessment = 'Screener unavailable — a custodian will read this track.';
     let flagged = true;
     // A set is named by whoever made it: the arc of a set is theirs to name, and no machine
     // here hears a mix. Everything else the screener reads and names.
@@ -83,7 +83,7 @@ Assess ONLY these two things, from the words given below:
 
 Then choose the kind that fits best from: song, instrumental, field_recording, spoken_word, score, other.
 
-If you are unsure, say so in your reasons and choose "clean". Holding a track wrongly costs an artist more than a track a keeper removes later. Be strict about nothing else.
+If you are unsure, say so in your reasons and choose "clean". Holding a track wrongly costs an artist more than a track a custodian removes later. Be strict about nothing else.
 
 Title: ${title}
 Artist: ${artistName}
@@ -105,7 +105,7 @@ The works inside it, as the selector listed them (a set only): ${String(data.tra
       if (!declaredSet && KINDS.includes(aiResult.kind)) kind = aiResult.kind;
       aiAssessment = `[${String(aiResult.verdict).toUpperCase()}] Read as: ${kind.replace(/_/g, ' ')} · Confidence: ${aiResult.confidence || 'unknown'} — ${aiResult.reasons}`;
     } catch (aiError) {
-      // The screener failing never blocks a track — it holds it, in the open, and tells a keeper.
+      // The screener failing never blocks a track — it holds it, in the open, and tells a custodian.
       console.error('climateMusicSubmit: screener failed:', aiError.message);
     }
 

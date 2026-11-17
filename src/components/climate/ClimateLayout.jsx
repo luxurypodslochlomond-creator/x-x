@@ -15,6 +15,7 @@ import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordSky from '@/components/climate/RecordSky';
 import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
+import RecordDesktopMenu from '@/components/climate/RecordDesktopMenu';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 
@@ -68,8 +69,9 @@ export default function ClimateLayout({ children, currentPage }) {
   const location = useLocation();
   const readingRef = useRef(null);
   const [contentsOpen, setContentsOpen] = useState(false);
-  const openContents = useCallback(() => setContentsOpen(true), []);
+  const openContents = useCallback(() => setContentsOpen((wasOpen) => !wasOpen), []);
   const closeContents = useCallback(() => setContentsOpen(false), []);
+  useEffect(closeContents, [location.pathname, closeContents]);
   // Worked, not read. See ROOM_PAGES.
   const isRoom = ROOM_PAGES.includes(currentPage);
   useRecordScroll(readingRef);
@@ -230,6 +232,7 @@ export default function ClimateLayout({ children, currentPage }) {
 
           {!isRoom && <RecordImprint onOpenContents={openContents} contentsOpen={contentsOpen} />}
         </div>
+        <RecordDesktopMenu open={contentsOpen} onClose={closeContents} />
       </header>
 
       <main ref={readingRef} className="record-pages">{children}</main>

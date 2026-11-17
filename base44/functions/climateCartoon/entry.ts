@@ -112,7 +112,7 @@ export default async function (req: Request): Promise<Response> {
 <p style="font-family:'Courier New',Courier,monospace;font-size:11px;font-weight:bold;letter-spacing:0.16em;color:#b3261e;margin:0 0 16px;">THE RECORD &nbsp;/&nbsp; x = x</p>
 <h1 style="font-family:'Oswald',Impact,'Arial Narrow',Arial,sans-serif;font-size:28px;line-height:1.12;margin:0 0 12px;">A drawing is waiting</h1>
 <p style="font-size:15px;line-height:1.6;margin:0 0 10px;"><strong>${escape(artist_name)}</strong> sent a drawing for the wall${body?.title ? `: <em>${escape(clean(body.title, 120))}</em>` : ''}.</p>
-<p style="font-size:15px;line-height:1.6;margin:0 0 14px;">It is not on the wall. A drawing goes up when a keeper has seen it, and that is you.</p>
+<p style="font-size:15px;line-height:1.6;margin:0 0 14px;">It is not on the wall. A drawing goes up when a custodian has seen it, and that is you.</p>
 <p style="font-family:'Courier New',Courier,monospace;font-size:11px;line-height:1.7;color:#6b6258;margin:0;"><a href="${RECORD}/ClimateCartoons" style="color:#b3261e;">${RECORD}/ClimateCartoons</a><br>Nothing was published by this letter. It was written by the record when somebody offered a drawing to it.</p>
 </div>`,
             });

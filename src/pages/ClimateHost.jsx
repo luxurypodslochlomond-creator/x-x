@@ -121,7 +121,7 @@ export default function ClimateHost() {
         <p className="font-black text-[#141210] mt-4">Still open — each one is a step, not a principle:</p>
         <ul className="space-y-1.5 mt-1">
           <Check done={false}><strong>The source is not published.</strong> Until it is, a host cannot build it, audit it, or leave with it. This is the largest gap on the record.</Check>
-          <Check done={true}><strong>The keepers are named.</strong> Gillian Barbara Brown, Brian Hughes and Janine M. H. Selendy hold the record's keys between them. Anything the screen flags waits for one of them, any of them can take an entry off, and no keeper can add or remove another keeper alone. One honest corner: an entry that is clean and carries its source goes up without being asked, and the record prints that it is unsigned rather than pretending a person signed it. Your own line stays yours to keep or hand on.</Check>
+          <Check done={true}><strong>The custodians are named.</strong> Gillian Barbara Brown, Brian Hughes and Janine M. H. Selendy hold the record's keys between them. Anything the screen flags waits for one of them, any of them can take an entry off, and no custodian can add or remove another custodian alone. One honest corner: an entry that is clean and carries its source goes up without being asked, and the record prints that it is unsigned rather than pretending a person signed it. Your own line stays yours to keep or hand on.</Check>
           <Check done={false}><strong>No domain in a host's name.</strong> A record whose address belongs to somebody else is lent, not handed over.</Check>
         </ul>
 
@@ -159,13 +159,13 @@ export default function ClimateHost() {
         verdict="Six, and none of them exotic"
         tone="yes"
       >
-        <p>The whole list a keeper needs, in the order they would do it — costable without a meeting:</p>
+        <p>The whole list a custodian needs, in the order they would do it — costable without a meeting:</p>
         <ol className="space-y-2 mt-1">
           <li><strong>1. The record itself.</strong> Transfer the whole workspace — entries, pictures, tracks, settings — into the host's own account. Not a copy and not a rebuild: the same thing moved, with everything still in it.</li>
           <li><strong>2. One domain in the host's name,</strong> with its certificate. Every citation points at it, so it has to be theirs to keep.</li>
           <li><strong>3. One sending domain,</strong> also theirs. Sign-in and password emails come from it, and a record that cannot send its own email cannot keep its own readers.</li>
           <li><strong>4. A plan sized to storage, not visits.</strong> Reading is cheap; pictures and music are the weight.</li>
-          <li><strong>5. Two named keepers with admin:</strong> one who signs what goes on the record, one who keeps it running. One person doing both is a single point of failure. The keeper's job is written out in full below.</li>
+          <li><strong>5. Two named custodians with admin:</strong> one who signs what goes on the record, one who keeps it running. One person doing both is a single point of failure. The custodian's job is written out in full below.</li>
           <li><strong>6. A way out.</strong> The data exports, so no host can hold the record hostage and no host is trapped by it. That protects them as much as the record.</li>
         </ol>
         <HandlerOrEditor />

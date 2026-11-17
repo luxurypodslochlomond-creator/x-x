@@ -30,12 +30,12 @@ const STEPS = [
   // "Janine Selendy names both" is gone. She asked, on 9 November, that this block be kept
   // "but without my name added" — it is written to be read by a host she is talking to, and
   // a list that drops her name into it hands the host a person to go around. The founder
-  // still names both keepers; the page simply says founder.
-  ['Two named keepers with admin, chosen by the founder.', 'One signs what goes on the record, one keeps it running. The founder names both — and names the keeper who follows — so the role is never left to whoever answers first. One person doing both is a single point of failure, and the separation is written on the record itself.'],
+  // still names both custodians; the page simply says founder.
+  ['Two named custodians with admin, chosen by the founder.', 'One signs what goes on the record, one keeps it running. The founder names both — and names the custodian who follows — so the role is never left to whoever answers first. One person doing both is a single point of failure, and the separation is written on the record itself.'],
   ['The way out, tested once.', 'The record exports in full, without contact details, so no host can hold it hostage and no host is trapped by it. Export it before launch, not after a falling out.'],
 ];
 
-// Each refusal carries how it is actually held: by the build, or by a keeper's word.
+// Each refusal carries how it is actually held: by the build, or by a custodian's word.
 // Saying which is the difference between a rule and a hope, and a host is owed the
 // difference before they say yes.
 const REFUSALS = [
@@ -43,14 +43,14 @@ const REFUSALS = [
   ['Sell a placement, a colour, a position, or a "verified" mark.', 'built in'],
   ['Track a reader. No advertising, no third-party analytics, no session recording, and no address kept. A view is counted once per entry, by country only, with no identifier — that count is all the impact page shows.', 'built in'],
   ['Let a machine sign. A signature is a person\'s name, and a machine has none to give.', 'built in'],
-  ['Edit an entry quietly. A correction is written on the entry, with its date, and stays there.', 'a keeper\'s word'],
-  ['Take an entry down without saying so. A removal leaves a dated note in its place.', 'a keeper\'s word'],
+  ['Edit an entry quietly. A correction is written on the entry, with its date, and stays there.', 'a custodian\'s word'],
+  ['Take an entry down without saying so. A removal leaves a dated note in its place.', 'a custodian\'s word'],
 ];
 
 const OPEN = [
   ['The platform\'s source is not published yet.', 'Until it is, a host cannot build it, audit it or leave with it. This is the largest gap, and it is a step, not a principle.'],
   ['Thirty-nine sources cited, twenty-nine kept — counted 2 November 2026.', 'Each cited page that would answer was read on the day it went on the record and copied, with a fingerprint, so a quote cannot drift. Ten origins would not be read: a journal, a UN agency site, a news site, a PDF host, and YouTube, which answered too often in one go. Those ten entries still link to the origin, and each says plainly that no copy is held rather than letting the link stand in for the proof. Both figures are counted from the record on the day they are written, never estimated, and dated so they cannot quietly go stale.'],
-  ['No keeper named on the masthead yet.', 'Thirty-nine of the forty published entries carry the name of the person who signed them on — counted 2 November 2026: ten solutions, nine crises, eighteen on the wire, three actions. The one that does not carry a name says so in the same size as everything else, and the four gatherings carry an organiser rather than a signer, and say that. What is missing is one accountable keeper for the whole record, with a contact line a reader can use, and the record will not invent one in the meantime.'],
+  ['No custodian named on the masthead yet.', 'Thirty-nine of the forty published entries carry the name of the person who signed them on — counted 2 November 2026: ten solutions, nine crises, eighteen on the wire, three actions. The one that does not carry a name says so in the same size as everything else, and the four gatherings carry an organiser rather than a signer, and say that. What is missing is one accountable custodian for the whole record, with a contact line a reader can use, and the record will not invent one in the meantime.'],
 ];
 
 export default function ClimateHandover() {
@@ -96,8 +96,8 @@ export default function ClimateHandover() {
       <Block n="03" title="What the record will not let you do">
         <p>
           Four of these the build enforces: there is nothing to buy, nothing counting, and no field a machine can sign.
-          Two rest on a keeper&rsquo;s word, and the tag says which. The code cannot stop a person with admin from
-          deleting an entry; it is said here rather than dressed up as a lock, and it is the whole reason the two keepers
+          Two rest on a custodian&rsquo;s word, and the tag says which. The code cannot stop a person with admin from
+          deleting an entry; it is said here rather than dressed up as a lock, and it is the whole reason the two custodians
           are two people.
         </p>
         <ul className="space-y-1.5">
@@ -122,7 +122,7 @@ export default function ClimateHandover() {
         <p>
           What the builder keeps once it changes hands is <strong className="text-[#141210]">nothing of the
           record</strong>: no account, no key, no veto, and no seat. Building is not keeping. Neither role is the
-          builder&rsquo;s by default — the founder names both keepers, and the keeper who follows, and
+          builder&rsquo;s by default — the founder names both custodians, and the custodian who follows, and
           she may name the builder to either one if she chooses. That choice is hers each time, and it is never assumed.
         </p>
         <p>
@@ -152,7 +152,7 @@ export default function ClimateHandover() {
           <li><strong className="text-[#141210]">Day one.</strong> Export the record and keep the file somewhere that is not the record. That is the host's own insurance, and it takes a minute.</li>
           <li><strong className="text-[#141210]">Day two.</strong> Move the workspace. Point the domain at it and check a citation on an entry opens the new address.</li>
           <li><strong className="text-[#141210]">Day three.</strong> Set the sending domain and send yourself a password reset. If that email does not arrive, nothing else about the record matters yet.</li>
-          <li><strong className="text-[#141210]">Day four.</strong> Put both keepers where the record can show them, named by the founder — or leave both saying "unsigned" until they are real names. A host does not fill these in for the record.</li>
+          <li><strong className="text-[#141210]">Day four.</strong> Put both custodians where the record can show them, named by the founder — or leave both saying "unsigned" until they are real names. A host does not fill these in for the record.</li>
           <li><strong className="text-[#141210]">Day five.</strong> Read the review queue for the first time. Nothing publishes itself without a person, and that is the job.</li>
         </ol>
       </Block>

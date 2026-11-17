@@ -5,7 +5,7 @@ import InviteCard from './InviteCard';
 // ── WHAT TO SEND THEM ─────────────────────────────────────────────────────────
 // Janine, 15 November: "Please walk me through the steps I should have her follow to sign
 // in and find her way about to add initiatives." Fair question, and there was nowhere in
-// the record that answered it, so a keeper had to be told it by hand or invent it.
+// the record that answered it, so a custodian had to be told it by hand or invent it.
 //
 // It began as five steps and that was one too many. A person meeting this record does
 // three things, not five: they sign in, they add something, and they discover that a
@@ -22,7 +22,7 @@ const RECORD = 'https://uf51.love';
 
 // ── CORRECTED 15 NOVEMBER, 23:20 ─────────────────────────────────────────────
 // These three steps said "Nothing they send is live until you say yes." That was
-// untrue, and it was the sentence a keeper copied into her own email. An entry that
+// untrue, and it was the sentence a custodian copied into her own email. An entry that
 // arrives with the link to its source, and that the screening reads as clean, goes on
 // the record as it arrives; only one without a source, or one the screen is unsure of,
 // waits for a person. So the steps now say that, and they put the link first — because
@@ -30,7 +30,7 @@ const RECORD = 'https://uf51.love';
 // than a smaller promise it does.
 // ── CORRECTED AGAIN, 16 NOVEMBER ─────────────────────────────────────────────
 // These steps led with the open submit door and put signing in third, which reads as a
-// walkthrough for a stranger dropping one entry in and leaving. The person a keeper
+// walkthrough for a stranger dropping one entry in and leaving. The person a custodian
 // actually sends this to is a checker — someone who comes in by name, reads what is
 // waiting, and adds their own work as part of the same job. So the order is the order they
 // will do it in: sign in, find the work, then add something of their own. And it says
@@ -50,7 +50,7 @@ const STEPS = [
   {
     n: '3',
     title: 'Add an initiative',
-    line: `On ${RECORD}/TogetherChangeClimate, tap "Submit a solution, crisis, or action" and paste the source link. Sourced entries cleared by screening can appear straight away; anything unclear waits for a keeper.`, 
+    line: `On ${RECORD}/TogetherChangeClimate, tap "Submit a solution, crisis, or action" and paste the source link. Sourced entries cleared by screening can appear straight away; anything unclear waits for a custodian.`, 
   },
 ];
 
@@ -65,7 +65,7 @@ export default function InviteSteps() {
     '',
     ...STEPS.map((s) => `${s.n}. ${s.title}. ${s.line}`),
     '',
-    'Anything you are unsure of, reply to this and a keeper will answer.',
+    'Anything you are unsure of, reply to this and a custodian will answer.',
     '',
     `Together We Can Change Climate. ${RECORD}`,
   ].join('\n');
@@ -122,7 +122,7 @@ export default function InviteSteps() {
       </button>
 
       {/* ── IT SAID "SEND" AND IT ONLY COPIED ─────────────────────────────────────
-          Brian, 17 November: "tried sending an email to a keeper, nothing saved." He was
+          Brian, 17 November: "tried sending an email to a custodian, nothing saved." He was
           right that nothing saved: this button puts text on the clipboard and the record
           never sends it, because a letter from a person should come from that person's own
           mailbox. The label now says what it does, and the line under it says what it
@@ -141,7 +141,7 @@ export default function InviteSteps() {
       </p>
 
       {/* ── AND THE OTHER CARD, FOR THE OTHER JOB ───────────────────────────────
-          Two cards, one place to find them — because a keeper looking for "what do I send
+          Two cards, one place to find them — because a custodian looking for "what do I send
           this person" should not have to know which of two doors the answer is behind. The
           name typed above fills both, so nothing is typed twice. */}
       <div className="border-t border-[#141210]/15 mt-4 pt-3">
@@ -151,8 +151,8 @@ export default function InviteSteps() {
         </p>
         <InviteCard name={name} variant="keeper" />
         <p className="text-[11.5px] leading-[1.6] text-[#6b5f4f] mt-2" style={reading}>
-          The same card drawn for a keeper: her room, the people door, and the one thing that
-          waits for a second keeper.
+          The same card drawn for a custodian: her room, the people door, and the one thing that
+          waits for a second custodian.
         </p>
       </div>
     </details>

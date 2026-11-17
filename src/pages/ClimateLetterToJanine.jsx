@@ -16,7 +16,7 @@ export default function ClimateLetterToJanine() {
     <KeeperKey>
       <ClimateRecordShell
         eyebrow="Private · for Janine"
-        marker="Not on the record · opened with a keeper's key"
+        marker="Not on the record · opened with a custodian's key"
         title="A letter, not a brief."
         statement="The one page that is not for a host, a panel or a stranger. It says what is unfinished, what is being asked, and what happens when the people who built this are gone."
         returnTo="/ClimateKeeperRoom"

@@ -7,7 +7,7 @@ import { Check, AlertTriangle } from 'lucide-react';
 // to guess at it. So the only thing kept is what a person actually said, as they said it:
 // no name unless they want one, no email asked for, nothing counted, nothing replied to,
 // nothing corrected. A clean line goes up the moment it is left; a flagged one waits for
-// a keeper, and the person is told which of the two happened.
+// a custodian, and the person is told which of the two happened.
 
 const FIELD = 'w-full px-3 py-3 min-h-[44px] bg-[#f7f1e5] border-2 border-[#141210]/25 focus:border-[#141210] text-[16px] sm:text-[13px] font-mono text-[#141210] outline-none transition-colors';
 const LABEL = 'block text-[9px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246] mb-1.5';
@@ -54,7 +54,7 @@ export default function WordForm({ trackId, onLeft }) {
       {left === 'held' && (
         <p className="flex items-start gap-2 text-[11px] font-mono text-[#b8860b] leading-relaxed mb-3">
           <AlertTriangle className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-          Held for a keeper to read. Nothing is lost, and nothing is changed.
+          Held for a custodian to read. Nothing is lost, and nothing is changed.
         </p>
       )}
 
@@ -99,7 +99,7 @@ export default function WordForm({ trackId, onLeft }) {
       <p className="mt-2 text-[9px] font-mono text-[#5a5246] leading-relaxed">
         Kept as you write it. Nobody edits it: not the artist, not the record. No email is asked for,
         nothing is counted, and there is nothing to reply to. Disagreeing with the work is welcome —
-        criticism is not abuse and does not come down. Only a keeper can take down a line for
+        criticism is not abuse and does not come down. Only a custodian can take down a line for
         something unlawful.
       </p>
     </div>

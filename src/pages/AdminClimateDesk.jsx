@@ -59,7 +59,7 @@ export default function AdminClimateDesk({ plain = false }) {
     return (
       <div className="pb-16">
         <div className="max-w-2xl mx-auto px-4 pt-8">
-          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-1">the keeper’s room</p>
+          <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red mb-1">the custodians’ room</p>
           <h1 className="font-black text-record-ink text-2xl leading-tight mb-1">The record, at a glance.</h1>
           <p className="text-[10px] font-mono tracking-[0.2em] uppercase text-record-muted mb-6 animate-pulse">counting</p>
           <div className="grid grid-cols-3 gap-2 mb-6">
@@ -106,7 +106,7 @@ export default function AdminClimateDesk({ plain = false }) {
               What the record holds, counted just now.
             </p>
           ) : (
-            <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the keeper’s room</p>
+            <p className="text-[9px] font-mono font-black uppercase tracking-[0.3em] text-record-red">the custodians’ room</p>
           )}
           <button onClick={() => load(true)} className="inline-flex items-center gap-1 min-h-[32px] text-[12px] text-[#6b5f4f] active:text-[#b3261e]" style={{ fontFamily: 'var(--font-reading)' }}>
             <RefreshCw className={`w-3 h-3 ${loading ? 'animate-spin' : ''}`} /> count again
@@ -186,7 +186,7 @@ export default function AdminClimateDesk({ plain = false }) {
               </span>
               <span className="flex items-center gap-2 flex-shrink-0">
                 <span className="text-[9px] font-mono uppercase" style={{ color: c.active ? '#1e3a2b' : '#b3261e' }}>
-                  {c.active ? (c.is_keeper ? 'keeper' : 'checking') : 'paused'}
+                  {c.active ? (c.is_keeper ? 'custodian' : 'checking') : 'paused'}
                 </span>
                 <span className="text-[11px] font-mono text-record-muted">{c.notes} notes</span>
               </span>
@@ -229,7 +229,7 @@ export default function AdminClimateDesk({ plain = false }) {
               ? [
                   { to: '/AdminClimateReview', label: 'review queue' },
                   { to: '/AdminClimateCheckers', label: 'the guest list' },
-                  { to: '/AdminClimateLog', label: "keeper's log" },
+                  { to: '/AdminClimateLog', label: "custodian's log" },
                   { to: '/AdminClimateCategories', label: 'categories' },
                   { to: '/AdminClimatePhotos', label: 'top crawl' },
                 ]

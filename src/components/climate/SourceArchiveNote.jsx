@@ -56,7 +56,7 @@ export default function SourceArchiveNote({ entryId, sourceUrl }) {
             {copy.excerpt}
           </p>
           <p className="mt-2 text-[9px] font-mono leading-relaxed text-[#6b6258]">
-            An excerpt, in the source's own words, {copy.http_status ? `read straight from the origin (status ${copy.http_status})` : 'read straight from the origin'}. The whole copy is held by the record's keeper and read on request — the words and the rights stay with the source.
+            An excerpt, in the source's own words, {copy.http_status ? `read straight from the origin (status ${copy.http_status})` : 'read straight from the origin'}. The whole copy is held by the record's custodian and read on request — the words and the rights stay with the source.
           </p>
           <p className="mt-1 text-[9px] font-mono text-[#6b6258] break-all">
             {sourceUrl} · fingerprint {copy.content_sha256?.slice(0, 16)}…
@@ -65,7 +65,7 @@ export default function SourceArchiveNote({ entryId, sourceUrl }) {
           <p className="mt-2 text-[9px] font-mono leading-relaxed text-[#6b6258]">
             If you publish this source and would rather a copy were not kept here, say so and it comes off. The
             link to your page stays; the copy goes.{' '}
-            <Link to="/ClimateCorrections" className="underline text-[#0f5f7a]">Ask the keeper</Link>
+            <Link to="/ClimateCorrections" className="underline text-[#0f5f7a]">Ask the custodian</Link>
           </p>
         </div>
       )}

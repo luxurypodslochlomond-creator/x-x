@@ -14,12 +14,12 @@ import React from 'react';
 // turns a small record into a big one.
 
 const RUNGS = [
-  { reads: '10,000', cost: '£1,000', what: 'Today. One keeper, one plan, the pictures and tracks already here.' },
+  { reads: '10,000', cost: '£1,000', what: 'Today. One custodian, one plan, the pictures and tracks already here.' },
   { reads: '100,000', cost: '£3,000', what: 'Every kept copy grows. A tongue is translated once and then served, so readers cost almost nothing.' },
   { reads: '1 million', cost: '£12,000', what: 'Pictures and music are the weight now, and a second person is needed on the record.' },
   { reads: '10 million', cost: '£60,000', what: 'Serving the record stays cheap. Serving every copy and every tongue quickly does not.' },
   { reads: '100 million', cost: '£150k–£400k', what: 'Real hosting contracts, real staff, and a reserve kept for moving the record if it has to move. A range, because past here it is a model, not a bill.' },
-  { reads: '1 billion', cost: '£1m–£3m', what: 'No longer one keeper’s work, and the record would be rebuilt rather than simply paid for at a higher rate. This is the rung it belongs to an institution or a library.' },
+  { reads: '1 billion', cost: '£1m–£3m', what: 'No longer one custodian’s work, and the record would be rebuilt rather than simply paid for at a higher rate. This is the rung it belongs to an institution or a library.' },
 ];
 
 export default function CostLadder() {
@@ -33,7 +33,7 @@ export default function CostLadder() {
 
       <div className="bg-[#f7f1e5] px-3 lg:px-4 py-4 lg:py-5">
         <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210]">
-          A year, at today&rsquo;s size: <strong>£1,000</strong>. That is the keeper&rsquo;s own figure, not a
+          A year, at today&rsquo;s size: <strong>£1,000</strong>. That is the custodian&rsquo;s own figure, not a
           vendor&rsquo;s quote, and it is the number to put in a letter.
         </p>
         <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mt-2">

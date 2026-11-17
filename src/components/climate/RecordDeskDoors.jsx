@@ -45,13 +45,14 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
           the record has called its way through doors since it was built. */}
       <RecordNavDoor
         to="/ClimateGuide"
-        label="Doors"
-        what="Every way through the record, on one screen."
+        label="Explore"
+        what="Explore the record’s sections without leaving this page."
         size={40}
         asButton
         onClick={onOpenContents}
         expanded={contentsOpen}
-        controls="record-contents"
+        controls="record-desktop-menu"
+        popup={false}
         active={contentsOpen}
         className={CELL}
       />

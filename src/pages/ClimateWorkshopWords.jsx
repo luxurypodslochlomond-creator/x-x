@@ -62,7 +62,7 @@ const BLOCKS = [
     head: 'Why there is a wall, and not just a database',
     say: [
       'The drawings sit on the same record as the entries, because a record is something people read, and a wall is how people read.',
-      'There is a room of cartoons on it now. A drawing sent in waits for a keeper — a person, with a name — before it goes up, and the keeper’s reason is written down. Not a filter. A person who can be asked why.',
+      'There is a room of cartoons on it now. A drawing sent in waits for a custodian — a person, with a name — before it goes up, and the custodian’s reason is written down. Not a filter. A person who can be asked why.',
     ],
   },
   {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // ── TWO JOBS, ONE WORD ────────────────────────────────────────────────────────
-// "Is the keeper the same as the editor?" is the question everyone asks, and it is
+// "Is the custodian the same as the editor?" is the question everyone asks, and it is
 // difference the whole record rests on: one decides what is true, the other keeps
 // it standing. They can sit inside the same organisation. They must not be the same
 // single person with nobody checking — that is the only arrangement in which a
@@ -9,7 +9,7 @@ import React from 'react';
 
 const ROLES = [
   {
-    title: 'The keeper who signs',
+    title: 'The custodian who signs',
     line: 'Decides what goes on the record.',
     accent: '#b3261e',
     items: [
@@ -20,7 +20,7 @@ const ROLES = [
     ],
   },
   {
-    title: 'The keeper who runs it',
+    title: 'The custodian who runs it',
     line: 'Keeps the record running.',
     accent: '#1e3a2b',
     items: [
@@ -37,15 +37,15 @@ export default function HandlerOrEditor() {
     <div className="border-2 border-[#141210] mt-4">
       <div className="bg-[#141210] px-3 py-2">
         <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#efe7d6]">
-          Two keepers — not the same job
+          Two custodians — not the same job
         </p>
       </div>
 
       <div className="bg-[#f7f1e5] px-3 py-3">
         <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210]">
-          <strong>No. They are two keepers, and one does not decide what is true.</strong> Both jobs are safe
-          because neither can do the other&rsquo;s work alone: the keeper who signs cannot take the record
-          offline, and the keeper who runs it cannot put a claim on it.
+          <strong>No. They are two custodians, and one does not decide what is true.</strong> Both jobs are safe
+          because neither can do the other&rsquo;s work alone: the custodian who signs cannot take the record
+          offline, and the custodian who runs it cannot put a claim on it.
         </p>
 
         <div className="grid gap-2 mt-3 sm:grid-cols-2">

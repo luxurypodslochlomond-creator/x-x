@@ -644,7 +644,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "🌳 National Parklife Logos", url: createPageUrl("AdminNationalParklife"), icon: Image, description: "Hammock brand · logo lab" },
       { title: "Climate Review Queue", url: createPageUrl("AdminClimateReview"), icon: CheckCircle, description: "Review draft submissions · AI advisory note" },
       { title: "Climate Categories", url: createPageUrl("AdminClimateCategories"), icon: Tag, description: "Add, edit, and reorder categories" },
-      { title: "📓 Keeper's Log", url: "/AdminClimateLog", icon: FileText, description: "Feedback · decisions · what's next" },
+      { title: "📓 Custodian's Log", url: "/AdminClimateLog", icon: FileText, description: "Feedback · decisions · what's next" },
       { title: "Top Crawl Photos", url: createPageUrl("AdminClimatePhotos"), icon: Image, description: "Credited pictures · shrunk for phones" },
       { title: "🔐 Secure Vault", url: createPageUrl("AdminSecureVault"), icon: Lock, description: "Private records · admins only" },
       { title: "🎟️ Sponsor Route", url: createPageUrl("AdminSponsorRoute"), icon: Shield, description: "CIC sponsorship ladder · costs · dates" },
