@@ -49,18 +49,34 @@ export function MarkPlan({ size = 26, className = '' }) {
 // thirty-four pixels in a rail it became a knot of ink that read as scribble, and at
 // twenty-two in a two-row rail it would read as dirt on the glass.
 //
-// A door's mark is not a portrait; a portrait is on the page behind it. What this door
-// actually says is that a named person stood here first, so the drawing is that and only
-// that: one head, one pair of shoulders, standing on a line. Nothing is filled, there is
-// no face to be flattered or not, and it cannot be mistaken for the two eyes of the
-// checkers or for a generic account badge, because a badge is a filled circle and this is
-// a person on the record's own red ground.
-export function MarkPortrait({ size = 26, className = '' }) {
+// A head and two shoulders then took its place, and that was worse: at twenty-two pixels
+// it is the sign on a toilet door. It is not a likeness of anybody, it is a pictogram of
+// "person", and a pictogram of "person" beside the words *Record* and *Wire* says nothing
+// this record can defend. The complaint that killed it was made twice and both times
+// right: it was not subtle, and it was not powerful, because a symbol that means "a human
+// being was here" means it about eight billion people at once.
+//
+// So the mark is not the person. It is the act that put her name on the record: a nib,
+// laid to the line, caught the instant before it writes. One object, at an angle, with a
+// vent and a slit — the only pen on the record that is not a tool of measurement (the
+// dividers) or a tool of the hand (the pencil), and the one a signature is actually made
+// with. It reads at twenty-two pixels as a nib because a nib is a shape nobody mistakes
+// for anything else once it is not standing up: the tilt is what keeps it from being a
+// map pin, and the red rule under it is the record's own ground, the same one every mark
+// on this sheet stands on.
+//
+// Subtle and powerful are not opposites here: subtlety is the object being small and
+// exact, power is that it means something a reader can say out loud — *somebody signed
+// this into being* — rather than merely illustrating the word above it.
+export function MarkSignature({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.9" className={className} aria-hidden="true">
-      <circle cx="20.2" cy="12.6" r="4.8" />
-      <path d="M11.4 30.6c.4-5.5 4.1-9.2 8.8-9.2s8.4 3.7 8.8 9.2" />
-      <path d="M7.4 34.6h25.2" className="text-record-mark" strokeWidth="2.2" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.5" className={className} aria-hidden="true">
+      <g transform="rotate(-30 20 20)">
+        <path d="M20 34.2c-4.9-5.5-6.3-13.2-5.2-22.1 3.3-2 7.1-2 10.4 0 1.1 8.9-.3 16.6-5.2 22.1Z" />
+        <circle cx="20" cy="17.4" r="2" />
+        <path d="M20 34.2V21.6" />
+      </g>
+      <path d="M7.2 32.9h25.6" className="text-record-mark" strokeWidth="2.2" />
     </svg>
   );
 }
@@ -192,9 +208,19 @@ export function MarkLens({ size = 26, className = '' }) {
 // mistaken for a letter, a folder, a list or a lens.
 export function MarkBaseOne({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="2.2" className={className} aria-hidden="true">
-      <path d="M22.4 8.4 15.4 13.6M22.4 8.4v21.4M15.8 29.8h13" />
-      <rect x="8.2" y="33.2" width="23.6" height="3.1" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.9" className={className} aria-hidden="true">
+      {/* The figure itself, set the way type sets a one: a flag off the apex, a stem that
+          stands a hair off upright, and a foot to sit on. Without the foot it was a stick
+          with a tick on it; with it, the numeral is a printed character rather than a
+          glyph someone drew with a ruler. */}
+      <path d="M23.9 7.4c-3 1.9-5.9 3.9-8.8 5.9M23.7 7.5c-.5 7.3-.3 14.7-.1 21.7" />
+      <path d="M15.5 29.5c4.7-.4 9.2-.4 13.9 0" />
+      {/* And underneath it, the base: solid, red, the width of the character. BASE 1 is the
+          one place on this record where a mark is the name as well as the door, so the plinth
+          is allowed to be a mass — a one standing on a red base says *base* and *one* in the
+          same two gestures, and says it without a magnifying glass, which would have said
+          "search other people's things" instead. */}
+      <path d="M9 34.4h22.2" className="text-record-mark" strokeWidth="3.2" />
     </svg>
   );
 }

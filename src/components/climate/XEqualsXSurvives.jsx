@@ -1,5 +1,5 @@
 import React from 'react';
-import { MarkSeal, MarkPortrait, MarkMusic, MarkSignal, MarkHorizon, MarkEqual } from './RecordFootMarks';
+import { MarkSeal, MarkSignature, MarkMusic, MarkSignal, MarkHorizon, MarkEqual } from './RecordFootMarks';
 
 // ── WHAT THIS HAS TO SURVIVE ───────────────────────────────────────────────────
 // A page saying "nobody above anybody" is easy to write and worth nothing unless it
@@ -40,7 +40,7 @@ const READERS = [
     ),
   },
   {
-    Mark: MarkPortrait,
+    Mark: MarkSignature,
     who: 'An art critic',
     ask: 'This is borrowed. Whose is it, and what did you pay for it?',
     answer: (

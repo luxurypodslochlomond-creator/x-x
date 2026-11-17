@@ -3,7 +3,7 @@ import {
   MarkPlan,
   MarkSignal,
   MarkHorizon,
-  MarkPortrait,
+  MarkSignature,
   MarkBaseOne,
   MarkMethod,
   MarkCorrection,
@@ -34,7 +34,10 @@ const MARKS = {
   '/TogetherChangeClimate': MarkBrief,
   '/ClimateWire': MarkSignal,
   '/ClimateMap': MarkHorizon,
-  '/ClimateFounder': MarkPortrait,
+  // The founder's door wears a nib laid to the line, not a portrait of a person: what this
+  // door says is that somebody signed the record into being, and a pictogram of "person"
+  // says the same thing about everybody and therefore nothing about her.
+  '/ClimateFounder': MarkSignature,
   // BASE 1 wears its own mark — a printed one on its base — not a search glass borrowed
   // from every other product on earth.
   '/ClimateSearch': MarkBaseOne,

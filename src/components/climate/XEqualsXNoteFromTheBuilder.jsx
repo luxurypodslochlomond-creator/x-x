@@ -1,5 +1,5 @@
 import React from 'react';
-import { MarkPortrait } from './RecordFootMarks';
+import { MarkSignature } from './RecordFootMarks';
 
 // ── AND ME ─────────────────────────────────────────────────────────────────────
 // The page has a section saying whose record this is — Janine's — and none saying who
@@ -23,7 +23,7 @@ export default function XEqualsXNoteFromTheBuilder() {
   return (
     <section aria-labelledby="why-i-built-this" className="my-10 border-l-2 border-record-mark pl-5 sm:pl-7">
       <div className="flex items-center gap-3">
-        <MarkPortrait size={22} className="shrink-0 text-record-ink" />
+        <MarkSignature size={22} className="shrink-0 text-record-ink" />
         <h2
           id="why-i-built-this"
           className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-record-muted"
