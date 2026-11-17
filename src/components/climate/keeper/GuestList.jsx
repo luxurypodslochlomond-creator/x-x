@@ -213,14 +213,37 @@ export default function GuestList() {
       ? row.active ? 'keys' : 'paused'
       : !row.active ? 'paused' : row.notes > 0 ? 'checking' : 'asked';
     const stampColour = !row.active ? '#b3261e' : row.is_keeper ? '#b3261e' : '#1e3a2b';
+    // ── A PERSON PRINTED, NOT A DATABASE ROW ───────────────────────────────────
+    // This went grey and it went dead. The warm line that said how long someone had been
+    // holding the keys was replaced by a row of dashes, because a letter's outcome was never
+    // recorded and a dash is an ugly way of admitting it. So: a card with a coloured spine —
+    // signal red for the keys, botanical for a pair of eyes — the name set properly, a stamp
+    // that looks pressed rather than typed, and only the facts that actually exist.
+    const facts = [];
+    if (row.invited_at || row.asked) facts.push(`asked ${shortDay(row.invited_at || row.asked)}`);
+    if (row.added_by) facts.push(`by ${row.added_by}`);
+    if (row.notes > 0) {
+      facts.push(`${row.notes} ${row.notes === 1 ? 'note' : 'notes'}${row.last_note ? ` · last ${shortDay(row.last_note)}` : ''}`);
+    } else if (row.is_keeper && row.active) {
+      facts.push('holding the keys');
+    } else if (row.line_written) {
+      facts.push('wrote their line');
+    }
     return (
-      <div className="grid grid-cols-[1fr_auto] items-center gap-1 border-b border-[#141210]/12 py-2">
+      <div
+        className="mb-2 grid grid-cols-[1fr_auto] items-start gap-1 bg-[#efe7d6]/60 py-2.5 pl-3 pr-1"
+        style={{ borderLeft: `3px solid ${stampColour}` }}
+      >
         <div className="min-w-0">
           <p className="flex items-baseline gap-2 leading-tight" style={reading}>
-            <span className="truncate text-[15.5px] font-semibold text-[#141210]">{row.name || row.email}</span>
+            <span className="truncate text-[17px] font-semibold text-[#141210]">{row.name || row.email}</span>
             <span
-              className="flex-shrink-0 border px-1 py-[1px] font-mono text-[8.5px] uppercase tracking-[0.16em]"
-              style={{ color: stampColour, borderColor: stampColour, opacity: row.active ? 1 : 0.6 }}
+              className="flex-shrink-0 px-1.5 py-[2px] font-mono text-[8.5px] uppercase tracking-[0.16em]"
+              style={
+                row.active
+                  ? { background: stampColour, color: '#f4efe4' }
+                  : { border: `1px solid ${stampColour}`, color: stampColour }
+              }
             >
               {stamp}
             </span>
@@ -229,13 +252,19 @@ export default function GuestList() {
             {row.email}
             {row.note ? ` · ${row.note}` : ''}
           </p>
-          {/* ── THE TRAIL ────────────────────────────────────────────────────────
-              Asked, letter, turned up, whose word, notes signed — five marks and five
-              facts on one line, so a keeper never has to ask "did they ever get it, and
-              did they ever come in?" The record cannot read an inbox, so a letter is
-              only ever counted as gone; turning up is the person's own sign-in, stamped
-              the first time it was recognised. */}
-          <div className="mt-1 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[9.5px] uppercase tracking-[0.06em] text-[#6b5f4f]">
+          {facts.length > 0 && (
+            <p className="mt-0.5 text-[12.5px] leading-snug text-[#3a342c]" style={reading}>
+              {facts.join(' · ')}
+            </p>
+          )}
+          {/* ── THE TRAIL, AND ONLY WHAT THE RECORD ACTUALLY KNOWS ──────────────
+              Every line printed five slots whether or not anything had happened, so three
+              people who had done nothing wrong showed a row of dashes and the page looked
+              dead. A fact appears now only when it exists: the letter that went, the letter
+              that failed (with one tap to send it again), the day their own sign-in was
+              recognised, and whose word put them here. */}
+          {(row.notice_sent_at || row.notice_error || row.joined_at || row.agreed_by || row.added_by) && (
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[9.5px] uppercase tracking-[0.06em] text-[#6b5f4f]">
             <span
               className="inline-flex items-center gap-1"
               title={row.notice_error || (row.notice_sent_at ? 'the record’s letter went out' : 'no letter sent yet')}
@@ -245,21 +274,19 @@ export default function GuestList() {
                 state={row.notice_sent_at ? 'sent' : row.notice_error ? 'failed' : 'none'}
                 className={row.notice_error ? 'text-[#b3261e]' : 'text-[#1e3a2b]'}
               />
-              {dayOr(row.notice_sent_at, row.notice_error ? 'no letter' : '—')}
+              {row.notice_sent_at ? shortDay(row.notice_sent_at) : 'no letter'}
             </span>
-            <span className="inline-flex items-center gap-1" title={row.joined_at ? 'their own sign-in was recognised' : 'not seen yet'}>
-              <MarkStep size={13} className={row.joined_at ? 'text-[#1e3a2b]' : 'text-[#b3a794]'} />
-              {dayOr(row.joined_at, 'not in yet')}
-            </span>
+            {row.joined_at && (
+              <span className="inline-flex items-center gap-1 text-[#1e3a2b]" title="their own sign-in was recognised">
+                <MarkStep size={13} />
+                in {shortDay(row.joined_at)}
+              </span>
+            )}
             <span className="inline-flex min-w-0 items-center gap-1">
               <MarkAgreed size={13} className="text-[#8a7f70]" />
               <span className="truncate text-[10px] normal-case tracking-normal">
-                {row.agreed_by || row.added_by || '—'}
+                {row.agreed_by || row.added_by}
               </span>
-            </span>
-            <span className="inline-flex items-center gap-1" title="notes they signed">
-              <MarkNote size={13} className="text-[#8a7f70]" />
-              {row.notes || 0}
             </span>
             {row.notice_error && (
               <button
@@ -271,6 +298,7 @@ export default function GuestList() {
               </button>
             )}
           </div>
+          )}
         </div>
         <div className="flex flex-shrink-0 items-center">
           <button
@@ -326,7 +354,13 @@ export default function GuestList() {
           between them — so "who is on this record" was a question you answered by scrolling.
           Both lists are here now, and nothing sits between them. */}
       <div className="border-t border-[#141210]/20 pt-3 mb-5">
-        <p className={label} style={reading}><MarkKey size={14} className="inline mr-1.5 -mt-0.5" />The keys</p>
+        <div className="mb-2 flex items-center gap-2 border-b border-[#b3261e]/40 pb-1">
+          <MarkKey size={20} className="text-[#b3261e]" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#141210]">The keys</span>
+          <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.08em] text-[#8a7f70]">
+            {keepers.filter((r) => r.active).length} holding
+          </span>
+        </div>
         {!loading && !keepers.length && (
           <p className="text-[14px] text-[#3a342c] py-1" style={reading}>
             No keeper line on the record yet. Whoever built the app still opens this page.
@@ -334,13 +368,13 @@ export default function GuestList() {
         )}
         {keepers.map((row) => <Row key={row.id} row={row} />)}
 
-        <p className={`${label} mt-4`} style={reading}>
-          <MarkEye size={14} className="inline mr-1.5 -mt-0.5" />
-          Checking
-          {checkers.length > 0 && (
-            <span className="text-[#8a7f70]"> · {checkers.filter((r) => r.active).length} now, {checkers.filter((r) => !r.active).length} paused</span>
-          )}
-        </p>
+        <div className="mb-2 mt-5 flex items-center gap-2 border-b border-[#1e3a2b]/40 pb-1">
+          <MarkEye size={20} className="text-[#1e3a2b]" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#141210]">Checking</span>
+          <span className="ml-auto font-mono text-[10px] uppercase tracking-[0.08em] text-[#8a7f70]">
+            {checkers.filter((r) => r.active).length} now · {checkers.filter((r) => !r.active).length} paused
+          </span>
+        </div>
         {loading && <p className="text-[13px] text-[#6b5f4f]" style={reading}>Looking at the list…</p>}
         {!loading && !checkers.length && (
           <p className="text-[14px] text-[#3a342c] leading-[1.6] py-1" style={reading}>
@@ -387,7 +421,7 @@ export default function GuestList() {
         <button
           onClick={add}
           disabled={busy}
-          className="w-full min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#1a1612] text-[#f4efe4] text-[14px] font-semibold disabled:opacity-40"
+          className="w-full min-h-[50px] inline-flex items-center justify-center gap-2 bg-[#b3261e] text-[#f4efe4] text-[14px] font-semibold active:bg-[#8f1e18] disabled:opacity-40"
           style={reading}
         >
           {kind === 'check' ? <MarkEye size={17} /> : <MarkKey size={17} />}

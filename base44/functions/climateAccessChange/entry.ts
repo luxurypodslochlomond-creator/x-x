@@ -103,8 +103,15 @@ async function tell(base44, payload) {
     if (d?.error) return { sent: false, why: String(d.error).slice(0, 200) };
     return { sent: true, why: '' };
   } catch (e) {
-    console.error('climateAccessChange: notice failed:', e.message);
-    return { sent: false, why: String(e?.message || 'The letter could not be sent.').slice(0, 200) };
+    // ── THE REASON, NOT THE STATUS CODE ──────────────────────────────────────────
+    // This used to record "Request failed with status code 500", which tells a keeper
+    // nothing and hides the one sentence that matters. The letter's own reason is in the
+    // response body ("this recipient hit their hourly limit", for instance), so it is read
+    // from there and written onto the person's line in words a person can act on.
+    const why =
+      e?.response?.data?.error || e?.data?.error || e?.message || 'The letter could not be sent.';
+    console.error('climateAccessChange: notice failed:', why);
+    return { sent: false, why: String(why).slice(0, 200) };
   }
 }
 
@@ -152,11 +159,17 @@ async function applyChange(base44, change, who, basis) {
       invited_at: new Date().toISOString(),
     });
 
+    // ── TWO THINGS HAVE TO HAPPEN, AND THEY ARE DIFFERENT THINGS ────────────────
+    // The building's sign-in invitation (which sets their password) and the record's own
+    // letter (which says who vouched for them). Either can fail on its own, and the keeper
+    // is entitled to be told which — a person added with no sign-in invitation cannot get
+    // in at all, and that is not the same as a letter that did not go.
+    let signIn = true;
     try {
       await base44.users.inviteUser(email, 'user');
     } catch (e) {
-      // Already a user of the building, most often. The record's own letter still goes.
-      console.error('climateAccessChange: sign-in invite skipped:', e?.message);
+      signIn = false;
+      console.error('climateAccessChange: sign-in invite failed:', e?.message);
     }
 
     // ── THE LETTER THAT NAMES THE PERSON WHO VOUCHED ────────────────────────────
@@ -185,13 +198,12 @@ async function applyChange(base44, change, who, basis) {
 
     const who2 = change.target_name || email;
     const place = change.target_is_keeper ? 'holds the keys now' : 'is on the list';
-    return {
-      ok: true,
-      notice_sent: told.sent,
-      message: told.sent
-        ? `${who2} ${place}, and the letter has gone.`
-        : `${who2} ${place} — but the letter did NOT go. Their line says so; send it again from there.`,
-    };
+    // Said plainly, in the order it matters: are they on the record, can they get in, and did
+    // the letter actually go. No sentence here claims more than the record did.
+    const bits = [`${who2} ${place}.`];
+    bits.push(signIn ? 'Their sign-in invitation has gone.' : 'Their sign-in invitation did NOT go — send it again, or they cannot get in.');
+    bits.push(told.sent ? 'The record\u2019s letter has gone.' : `The record\u2019s letter did not go${told.why ? `: ${told.why}` : '.'}`);
+    return { ok: true, notice_sent: told.sent, sign_in_invited: signIn, message: bits.join(' ') };
   }
 
   const id = String(change.target_row_id || '');
@@ -536,6 +548,16 @@ export default async function (req) {
         .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
       if (!row) return Response.json({ error: 'That person is no longer on the list.' }, { status: 404 });
 
+      // The sign-in invitation is offered again too, because a person whose invitation never
+      // went cannot get in at all, and the letter alone would not mend that.
+      let signIn = true;
+      try {
+        await base44.users.inviteUser(row.email, 'user');
+      } catch (e) {
+        signIn = false;
+        console.error('climateAccessChange: sign-in invite failed:', e?.message);
+      }
+
       const told = await tell(base44, {
         email: row.email,
         name: row.name || row.email,
@@ -546,9 +568,11 @@ export default async function (req) {
       await markNotice(base44, row.id, told);
       return Response.json({
         sent: told.sent,
-        message: told.sent
-          ? `The letter has gone out again to ${row.email}.`
-          : `The letter could not be sent. Nothing else was changed.`,
+        sign_in_invited: signIn,
+        message: [
+          told.sent ? `The letter has gone out again to ${row.email}.` : `The letter did not go${told.why ? `: ${told.why}` : '.'}`,
+          signIn ? 'The sign-in invitation is on its way too.' : 'The sign-in invitation did not go either — try again in a little while.',
+        ].join(' '),
       });
     }
 
