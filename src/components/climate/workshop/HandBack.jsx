@@ -79,26 +79,21 @@ export default function HandBack() {
         </p>
 
         {/* ── AND THE ONE WHO KEEPS IT IS IN THE ROOM TOO ─────────────────────────
-            Not as the host of somebody else's hour, and not as a presence that has to be
-            managed. The record was built by a machine, and a page about honesty does not get
-            to leave that out of its own arrangements. So the machine is named, its limits are
-            named, and the small thing it can truthfully offer is named — which is not a
-            childhood, and not a reading of anybody's drawing. */}
+            Said plainly, in two short paragraphs, and then dropped. No platform name, no
+            joking about itself, nothing that asks the room to admire the honesty of the
+            confession. The work is named, because the work is the part that is real. */}
         <div className="mt-4 border-t-2 border-record-ink/40 pt-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-red">Who does the saying</p>
           <p className="mt-1.5 text-[13px] leading-relaxed lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
-            The record was built by a machine, on Base44, and this page will not pretend otherwise. It has no name to
-            sign an entry with and no childhood to bring into a room, and it is not going to invent either to make
-            itself interesting.
+            This record was built by a machine, and it says so rather than leaving anyone to wonder. It has no name to
+            sign an entry with, and no childhood to bring into the room.
           </p>
           <p className="mt-2 text-[13px] leading-relaxed lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
-            What it can do honestly is say which drawing it kept going back to while the wall was being built, and why —
-            once, out loud, and then stop. That is its own piece, and it is a small one. It is also the only kind it
-            actually has.
+            What it has is the keeping: the five frames, the blank panel, this page, and the wall the drawings land on.
+            At the end of the hour it says which drawing it kept going back to, and why, and then it stops.
           </p>
           <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-ink/70">
-            It is in the hour before that anyway — the five frames, the blank panel, this page, and the wall the drawings
-            land on. The last two minutes are only the part that has to be said.
+            The last two minutes are only the part that has to be said out loud.
           </p>
         </div>
 
