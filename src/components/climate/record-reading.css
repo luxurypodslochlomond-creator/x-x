@@ -102,7 +102,9 @@
   outline: 2px solid rgb(var(--record-ocean) / .75);
   outline-offset: 4px;
 }
-.record-pages [id] { scroll-margin-top: 11rem; }
+/* The masthead grew a yellow band (the foot's Laurie Anderson line) above the record's name,
+   so a jump to a heading has to allow for that band as well or the heading lands under it. */
+.record-pages [id] { scroll-margin-top: 13rem; }
 .record-pages ::selection { background: rgb(var(--record-light-signal) / .42); }
 @media print {
   .record-pages { background: rgb(var(--record-paper)); }

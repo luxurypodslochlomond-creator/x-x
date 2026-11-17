@@ -10,6 +10,7 @@ import SiteTranslator from '@/components/shared/SiteTranslator';
 import RecordImprint from '@/components/climate/RecordImprint';
 import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import RecordRule from '@/components/climate/RecordRule';
+import RecordTimeBar from '@/components/climate/RecordTimeBar';
 import RecordFooter from '@/components/climate/RecordFooter';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordSky from '@/components/climate/RecordSky';
@@ -191,6 +192,9 @@ export default function ClimateLayout({ children, currentPage }) {
           the same everywhere, and every jump down to the record allows for its height. */}
       <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
+        {/* The foot's yellow band, at the top of the record. Pinned with the masthead, so
+            the sentence a reader meets at the bottom is the one they arrived under. */}
+        <RecordTimeBar />
         <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
             <Link
