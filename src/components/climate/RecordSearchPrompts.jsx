@@ -11,6 +11,14 @@ import { ArrowUpRight } from 'lucide-react';
 // So these are read from the published entries themselves, not invented to make a front
 // page look busy: a subject offered here is a subject that actually holds something, which
 // is the only kind of suggestion worth making. Nothing is hardcoded and nothing is ranked.
+//
+// 17 November: they were a wrapped row of identical chips under a label, which is a tag
+// cloud and a tag cloud is the most linear thing ever drawn. Now each one is a point in
+// the field with its own colour and its own height, cut by hand, so the eye travels
+// across them instead of reading down a list. Still buttons, still one tap, still exactly
+// the same six subjects drawn from exactly the same query.
+const PIGMENTS = ['#b3261e', 'rgb(20 18 16)', '#0f5f7a', '#9b6f28', '#b3261e', 'rgb(20 18 16)'];
+
 const pretty = (slug) =>
   String(slug || '')
     .replace(/[_-]+/g, ' ')
@@ -45,23 +53,32 @@ export default function RecordSearchPrompts({ onPick, disabled }) {
   if (subjects.length === 0) return null;
 
   return (
-    <div className="record-search-prompts mt-5">
-      <p className="record-search-prompts-label text-[10px] font-black font-mono uppercase tracking-[0.16em] text-record-muted">
+    <div className="record-search-prompts mt-4">
+      <p className="record-search-prompts-label font-mono text-[9px] font-black uppercase tracking-[0.22em] text-record-muted">
         <span className="lg:hidden">In the record</span>
         <span className="hidden lg:inline">Try a subject the record keeps</span>
       </p>
-      <div className="record-search-subjects mt-2 flex flex-wrap gap-1.5">
-        {subjects.map((name) => (
+      <div className="record-search-subjects mt-2 grid grid-cols-2 gap-x-2 gap-y-1.5 sm:grid-cols-3">
+        {subjects.map((name, i) => (
           <button
             key={name}
             type="button"
             onClick={() => onPick(name)}
             disabled={disabled}
-            className="record-search-prompt border border-record-ink/30 px-3 py-1.5 text-[12.5px] leading-none text-record-ink transition-colors active:border-record-red active:text-record-red"
-            style={{ fontFamily: 'var(--font-reading)' }}
+            style={{
+              fontFamily: 'var(--font-reading)',
+              borderRadius: '14px 4px 12px 5px',
+              marginTop: i % 2 === 1 ? 7 : 0,
+            }}
+            className="record-search-prompt flex items-center gap-2 border border-record-ink/30 px-2.5 py-2 text-left text-[12.5px] leading-tight text-record-ink transition-colors active:border-record-red active:text-record-red disabled:opacity-60"
           >
-            <span>{name}</span>
-            <ArrowUpRight aria-hidden="true" className="h-4 w-4 shrink-0 lg:hidden" />
+            <span
+              aria-hidden="true"
+              className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full"
+              style={{ backgroundColor: PIGMENTS[i % PIGMENTS.length] }}
+            />
+            <span className="min-w-0 flex-1">{name}</span>
+            <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5 shrink-0 opacity-70 lg:hidden" />
           </button>
         ))}
       </div>

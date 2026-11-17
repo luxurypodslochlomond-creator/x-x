@@ -99,7 +99,7 @@ const READING = [
 const TONGUE = [
   {
     label: 'The language bar',
-    what: 'Under the masthead, on every page of the record. A tongue is translated once, kept, and handed to every reader after that — so the second reader never waits.',
+    what: 'Under the masthead, on every page of the record. A tongue is translated once, kept, and handed to every reader after that — so the signatory never waits.',
   },
 ];
 
@@ -175,7 +175,7 @@ const FOOT = [
   ...FOOTER_NAV,
   { label: 'Terms', to: '/ClimateTerms', what: 'The terms under which the record is used.' },
   { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, and what it never does.' },
-  { label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Where invited custodians decide and second readers write their notes — one door, two kinds of key.' },
+  { label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Where invited custodians decide and signatories write their notes — one door, two kinds of key.' },
 ];
 
 // The way in, as a card Janine can forward. Five lines, in the order a keeper does them,
@@ -188,7 +188,7 @@ const WAY_IN_CARD = {
   steps: [
     { do: 'Sign in with the address this record knows', what: 'Google, or a password. That address is the one it recognises.' },
     { do: 'Open the custodians\u2019 room', what: 'The drawn door at the top of any page. It opens to a custodian only.' },
-    { do: 'People \u2192 add by email', what: 'A second reader goes on with one word. A custodian needs a second custodian to agree.' },
+    { do: 'People \u2192 add by email', what: 'A signatory goes on with one word. A custodian needs a second custodian to agree.' },
     { do: 'Decide: yes, or not yet', what: 'Yes writes your name on the entry. Not yet keeps it waiting, with your reason beside it.' },
     { do: 'Seal what went up', what: 'One tap. Anyone can check the seal in their own browser, without trusting us.' },
   ],

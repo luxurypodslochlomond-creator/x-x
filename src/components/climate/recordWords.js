@@ -18,10 +18,16 @@
 // like a job at a barrier, and it invites the one misreading this record must never allow,
 // that these are the people who decide what is true. They do not decide anything. They read
 // what somebody else has already written, after the person who wrote it, and put their name
-// to what they found. In publishing that role has had a name for two hundred years: the
-// SECOND READER. It is modest, it is a real job rather than a title the record invented, it
-// says exactly what happens and in what order, and it gives a volunteer something to be
-// proud of that is honest — the second pair of eyes, not the final word.
+// to what they found.
+//
+// SECOND READER — and then SIGNATORY. The first replacement was honest and boring, and
+// Brian said so on the same day: "sounds boring as fuck." He is right again. A record that
+// prints x = x at the foot of every page does not get to call its most human act "the
+// second reader". What these people actually do is put their name to somebody else's
+// words, which is one of the oldest things a person can do with a record, and the name for
+// it is as old as Roman law: a SIGNATORY is one who signs. So the role is the signatory,
+// the line on an entry is "Signed by", and the list of them is the signatories. Nothing
+// about what they may or may not do has changed — not one permission, not one button.
 //
 // WHAT THESE CONSTANTS ARE NOT. They are not the data. The code still says keeper and
 // checker in its field names, routes and function names (ClimateChecker.is_keeper,
@@ -32,9 +38,12 @@ export const CUSTODIAN = 'custodian';
 export const CUSTODIANS = 'custodians';
 export const CUSTODIANS_ROOM = 'Custodians’ room';
 
-export const SECOND_READER = 'second reader';
-export const SECOND_READERS = 'second readers';
+// "Signed by" is what an entry carries; "signatory" is what the person is called in a
+// sentence; "Signatories" heads the list on the guest list.
+export const SIGNED_BY = 'Signed by';
+export const SIGNATORY = 'signatory';
+export const SIGNATORIES = 'signatories';
 
 // Capitalised where a list heading or a label needs it.
 export const CUSTODIANS_TITLE = 'Custodians';
-export const SECOND_READERS_TITLE = 'Second readers';
+export const SIGNATORIES_TITLE = 'Signatories';

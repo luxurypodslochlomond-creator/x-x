@@ -73,7 +73,7 @@ export default function ClimateFellows() {
           and refuses to guess — which is the same promise the checking itself makes. */}
       <AskTheRecord
         suggestions={[
-          'What does a second reader actually do?',
+          'What does a signatory actually do?',
           'How much time does this really take?',
           'Will my name be on what I write?',
         ]}
@@ -148,7 +148,7 @@ export default function ClimateFellows() {
           Most of it is boring. Most entries are broadly right and nobody will read your note on them. The interesting ones are rare — which is exactly why finding one is worth the afternoon. Stop after three sessions and you owe this record nothing.
         </p>
         <p className="text-[12.5px] text-[#141210]/70 leading-relaxed mt-2" style={{ fontFamily: 'var(--font-reading)' }}>
-          Two words inside this record: a <strong>custodian</strong> holds the keys — anything the screen flags waits for one, and any of them can take an entry off — and a <strong>second reader</strong> reads a source and signs what they found, after the person who wrote it. That is what you are. Volunteer, fellow, second reader: the same person, and Trebuchet’s word “fellow” is a good one.
+          Two words inside this record: a <strong>custodian</strong> holds the keys — anything the screen flags waits for one, and any of them can take an entry off — and a <strong>signatory</strong> reads a source and signs what they found, after the person who wrote it. That is what you are. Volunteer, fellow, signatory: the same person, and Trebuchet’s word “fellow” is a good one.
         </p>
       </section>
 

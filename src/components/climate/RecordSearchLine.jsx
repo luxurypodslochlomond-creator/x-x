@@ -74,7 +74,7 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
           straight to the work: one field, the mark's red on the one control that answers. */}
       <div
         ref={box}
-        className="flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-paper shadow-[0_2px_0_0_rgba(20,18,16,0.16)] focus-within:border-record-red"
+        className="base-one-line flex items-center overflow-hidden border-2 border-record-ink bg-record-paper focus-within:border-record-red"
         style={{ scrollMarginBlock: '96px' }}
       >
         <input
@@ -109,7 +109,7 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
           type="submit"
           aria-label="Ask BASE 1"
           disabled={loading || draft.trim().length < 2}
-          className="grid h-[52px] w-[56px] shrink-0 place-items-center bg-record-red text-record-paper transition-colors active:bg-record-ink disabled:opacity-60"
+          className="base-one-send m-1 grid h-11 w-11 shrink-0 place-items-center bg-record-red text-record-paper transition-colors active:bg-record-ink disabled:opacity-60"
         >
           {loading ? <Loader2 className="h-5 w-5 animate-spin" /> : <ArrowRight className="h-6 w-6" />}
         </button>

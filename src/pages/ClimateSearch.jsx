@@ -7,6 +7,7 @@ import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
 import BaseOnePlate from '@/components/climate/search/BaseOnePlate';
+import BaseOneSky from '@/components/climate/search/BaseOneSky';
 import BaseOneAnswer from '@/components/climate/search/BaseOneAnswer';
 import useBaseOneAnswer from '@/components/climate/search/useBaseOneAnswer';
 import SearchAnswerLine from '@/components/climate/search/SearchAnswerLine';
@@ -56,19 +57,31 @@ export default function ClimateSearch() {
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      <BaseOnePlate statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead." />
+      {/* ── ONE COMPOSITION, NOT A STACK ───────────────────────────────────────────
+          The plate and the asking line were two blocks sitting one under the other at the
+          same width with the same left edge, which is the shape of a form and the reason
+          the room read as a column. Now the asking band is laid over the foot of the plate
+          and the plate is cut by hand, so two planes cross and the eye has to travel rather
+          than slide. The elements, the order and the behaviour are untouched. */}
+      <div className="relative">
+        <BaseOnePlate statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead." />
 
-      <div className="mt-3">
-        <RecordSearchLine
-          value={query}
-          onSearch={start}
-          loading={loading}
-        />
+        <div className="relative z-10 -mt-3 px-0.5 sm:-mt-4">
+          <RecordSearchLine
+            value={query}
+            onSearch={start}
+            loading={loading}
+          />
 
-        <div className={data || loading ? 'hidden lg:block' : ''}>
-          <RecordSearchPrompts onPick={start} disabled={loading} />
+          <div className={data || loading ? 'hidden lg:block' : ''}>
+            <RecordSearchPrompts onPick={start} disabled={loading} />
+          </div>
         </div>
       </div>
+
+      {/* The hairline that joins four points and goes nowhere: the only thing in the room
+          that is not a rule, a box or a line of type. */}
+      <BaseOneSky />
 
       {loading && (
         <p role="status" className="mt-8 flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#5a5246]">
@@ -121,9 +134,9 @@ export default function ClimateSearch() {
                 <section>
                   <SearchSectionHead index={0} label="About the record" count={about.length} tone="#0f5f7a" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                    {about.map((a) => (
+                    {about.map((a, i) => (
+                      <div key={`${a.path}-${a.label}`} className="bo-rise" style={{ animationDelay: `${Math.min(i, 6) * 45}ms` }}>
                       <Link
-                        key={`${a.path}-${a.label}`}
                         to={a.path}
                         className="record-search-result block bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#e2602a] p-3.5 active:bg-[#efe7d6] transition-colors"
                       >
@@ -133,6 +146,7 @@ export default function ClimateSearch() {
                         <h3 className="text-[13px] font-black font-mono uppercase text-[#141210] leading-tight mt-2">{a.title}</h3>
                         <p className="text-[12px] font-mono text-[#141210] leading-relaxed mt-1.5">{a.line}</p>
                       </Link>
+                      </div>
                     ))}
                   </div>
                 </section>
@@ -147,8 +161,10 @@ export default function ClimateSearch() {
                     tone={s.tone}
                   />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
-                    {s.items.map((item) => (
-                      <RecordResultCard key={`${s.key}-${item.id}`} kind={s.kind} item={item} />
+                    {s.items.map((item, idx) => (
+                      <div key={`${s.key}-${item.id}`} className="bo-rise" style={{ animationDelay: `${Math.min(idx, 6) * 45}ms` }}>
+                        <RecordResultCard kind={s.kind} item={item} />
+                      </div>
                     ))}
                   </div>
                 </section>
