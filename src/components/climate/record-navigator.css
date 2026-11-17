@@ -100,7 +100,10 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgb(var(--record-muted));
+  /* Ink rather than muted now: the tongue sits in the yellow line at the top of the
+     record, and a brown-grey on sunlight was the quietest thing in the masthead. The
+     open state still takes the mark's red, so "this one is open" is still unmissable. */
+  color: rgb(var(--record-ink));
   cursor: pointer;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;

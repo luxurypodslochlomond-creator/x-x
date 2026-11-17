@@ -17,10 +17,17 @@ export default function RecordTimeBar({ className = '' }) {
   return (
     <div className={`bg-cartoon-sun text-record-ink ${className}`}>
       <div className="flex items-center gap-3 px-4 py-[3px] lg:gap-6 lg:px-10 lg:py-1">
-        <p className="min-w-0 flex-1 font-mono text-[9px] uppercase leading-[1.5] tracking-[0.14em] lg:text-[10px] lg:tracking-[0.18em]">
-          This is the time.
-          <br className="sm:hidden" />{' '}
-          And this is the record of the time.
+        {/* ── THE SENTENCE IS SET, NOT JUST WRAPPED ────────────────────────────────
+            Brian, 17 November: "centre the or justify whatever balance the sentence in the
+            yellow bar." The forced break came out and the wrapping is balanced now, so the
+            two lines a phone gets are of a length with each other instead of one long line
+            and one short one beside a tongue. Centred, because a sentence that is a title
+            for the whole record sits in the middle of its own band. */}
+        <p
+          className="min-w-0 flex-1 text-center font-mono text-[9px] uppercase leading-[1.5] tracking-[0.14em] lg:text-[10px] lg:tracking-[0.18em]"
+          style={{ textWrap: 'balance' }}
+        >
+          This is the time. And this is the record of the time.
         </p>
 
         <RecordTongueDoor size={17} inline />

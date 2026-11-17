@@ -57,9 +57,17 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'paper',
   // opposite, that nobody is in a hurry here and nobody is turned away. Same ink as the
   // line at the foot of every page, so the door and the promise look like one thing.
   const accent = ink ? '#cc2d2a' : '#b3261e';
+  // ── THE PICKER IN THE RECORD'S OWN SIGNAL ───────────────────────────────────────
+  // Brian, 17 November: "when choose tongue can it be visually red yellow white
+  // coolasfuck, maybe black if needed." So the panel is the record's ink, edged in the
+  // mark's red, every tongue in bone, and the one you are standing in printed black on
+  // the yellow of the masthead's band — the same three colours used the same way they are
+  // used everywhere else on this record, where yellow means you are here and red means the
+  // mark. Nothing about the list, the search or the manual entry has changed: only what
+  // they are painted in.
   const field = ink
     ? 'border-[#efe7d6]/25 bg-transparent text-[#efe7d6]'
-    : 'border-[#141210] bg-[#f7f1e5] text-[#141210]';
+    : 'border-[#efe7d6]/30 bg-[#141210] text-[#efe7d6] placeholder:text-[#efe7d6]/45';
 
   const chosen = lang === 'auto' ? detected : lang;
 
@@ -148,11 +156,13 @@ export default function TonguePicker({ lang, detected, onChange, tone = 'paper',
     close();
   };
 
-  const panel = ink ? 'bg-[#141210] border-[#cc2d2a] text-[#efe7d6]' : 'bg-[#f7f1e5] border-[#141210] text-[#141210]';
-  const divide = ink ? 'border-[#efe7d6]/15' : 'border-[#141210]/15';
-  const rowIdle = ink ? 'text-[#efe7d6] hover:bg-[#efe7d6]/10' : 'text-[#141210] hover:bg-[#141210]/5';
-  const rowOn = ink ? 'text-[#efe7d6] bg-[#cc2d2a]/25' : 'text-[#141210] bg-[#b3261e]/10';
-  const dim = ink ? 'text-[#efe7d6]/55' : 'text-[#5a5246]';
+  const panel = ink ? 'bg-[#141210] border-[#cc2d2a] text-[#efe7d6]' : 'bg-[#141210] border-[#b3261e] text-[#efe7d6]';
+  const divide = 'border-[#efe7d6]/15';
+  const rowIdle = 'text-[#efe7d6] hover:bg-[#efe7d6]/10';
+  // The tongue you are standing in: black on the masthead's yellow, so the choice is
+  // visible from across a room rather than tinted at ten per cent.
+  const rowOn = ink ? 'text-[#efe7d6] bg-[#cc2d2a]/25' : 'text-[#141210] bg-[#ffd447]';
+  const dim = ink ? 'text-[#efe7d6]/55' : 'text-[#efe7d6]/60';
   const content = open && (
     <TonguePickerPanel theme={{ ink, accent, field, panel, divide, rowIdle, rowOn, dim }}
       above={above}

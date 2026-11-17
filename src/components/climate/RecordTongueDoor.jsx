@@ -13,5 +13,8 @@ import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 // honesty line, the same promise that nobody is turned away.
 export default function RecordTongueDoor({ size = 44, inline = false }) {
   const { lang, autoLang, setLanguage } = useSiteLanguage();
+  // The picker itself is now cut in the record's own signal — ink panel, red edge, the
+  // tongue you are standing in printed black on the masthead's yellow — so the one control
+  // that changes the record's voice looks like the record and not like a settings sheet.
   return <TonguePicker lang={lang} detected={autoLang} onChange={setLanguage} tone="paper" size={size} inline={inline} />;
 }
