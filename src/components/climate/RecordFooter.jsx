@@ -69,7 +69,7 @@ export default function RecordFooter() {
             job. They are ink now — the same ink as MADE IN SCOTLAND and the company under
             them, so the whole box reads as one printed plate rather than three colours
             arguing. The red stays on the mark at the top, where it belongs. */}
-        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[13px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:justify-center sm:gap-5 lg:text-[14px]">
+        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:justify-center sm:gap-5">
           <li>Base 1</li>
           <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
           <li>Gillian Brown</li>
