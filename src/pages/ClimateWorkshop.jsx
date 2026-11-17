@@ -5,7 +5,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import WorkshopStrip from '@/components/climate/workshop/WorkshopStrip';
 import JanineTopicTop from '@/components/climate/workshop/JanineTopicTop';
-import WhatIsAsked from '@/components/climate/workshop/WhatIsAsked';
+import TheShortAnswer from '@/components/climate/workshop/TheShortAnswer';
 import HandBack from '@/components/climate/workshop/HandBack';
 import JanineSessionTile from '@/components/climate/workshop/JanineSessionTile';
 import WorkshopClocks from '@/components/climate/workshop/WorkshopClocks';
@@ -37,8 +37,10 @@ const CONTEXT = [
 // Three rules hold it together. Nothing personal is on it: no addresses, no phone numbers,
 // no joining link, because a workshop's link is hers to hand out and her guests' details
 // are theirs. Everything about the festival is in the festival's own words. And the offer
-// stays small — one eight-minute block about the record inside an hour about African youth
-// and democracy, because a longer one would be a different workshop.
+// stays small — one blank panel at the end of the strip, inside an hour about African youth
+// and democracy. There is no slot for the record in it: she wrote back plainly that she hosts
+// and is not speaking for the hour, and that the panel is already presenting their own
+// cartoons, so the eight minutes that used to sit at 00:18 came out.
 
 const TOPIC = 'Climate change & the power of collective actions / creative interventions';
 
@@ -59,7 +61,7 @@ const HOUR = [
   ['00:37', 'Seven minutes · Four panels, held up', 'Four people hold their panel to the camera and say what they drew. Not judged. Not ranked. Not scored.', 'four volunteers'],
   ['00:44', 'Six minutes · Where the drawings go', 'Sent in, looked at by a keeper, and put on the wall with the drawer’s name and their own line about it. Their email is never shown. Nobody narrates it.', 'one line on the screen'],
   ['00:50', 'Two minutes · Handed back', 'She closes on the blank panel and gives the room its own hour back.', 'Janine · host'],
-  ['00:52', 'Eight minutes · Left over, and hers', 'Taking the record’s slot out gave the hour back eight minutes. Keep them empty, give them to the panel, or use them yourself — this page does not fill them.', 'yours to use or leave empty'],
+  ['00:52', 'Eight minutes · Spare, with no plan of ours', 'Taking the record’s eight-minute slot out gave the hour back eight minutes. Keep them empty, give them to the panel, or use them yourself — there is nothing of ours waiting to fill them.', 'nobody’s · hers to leave empty'],
 ];
 
 const Section = ({ n, title, children }) => (
@@ -87,8 +89,9 @@ export default function ClimateWorkshop() {
 
       <JanineTopicTop />
 
-      {/* Before the agenda, because the agenda is what made her ask the question it answers. */}
-      <WhatIsAsked />
+      {/* Before the agenda, in the record's own red, because the agenda is what made her ask
+          the question it answers: "I do not understand what you are seeking to achieve here." */}
+      <TheShortAnswer />
 
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-record-ink/15 pb-3">
         <p className="max-w-[42ch] text-[13px] leading-relaxed lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
