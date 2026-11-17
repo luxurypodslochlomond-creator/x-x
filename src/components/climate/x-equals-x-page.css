@@ -31,7 +31,7 @@
   gap: 0.375rem;
   padding: 0.875rem 1.25rem;
   background-color: #141210;
-  border-bottom: 1px solid rgba(127, 184, 209, 0.4);
+  border-bottom: 1px solid rgb(var(--cartoon-sun) / .4);
   animation: twcc-epigraph 1.2s ease-out both;
 }
 #x-equals-x .covenant-epigraph-line {
@@ -54,7 +54,7 @@
   height: 4px;
   flex-shrink: 0;
   border-radius: 9999px;
-  background-color: #7fb8d1;
+  background-color: rgb(var(--cartoon-sun));
 }
 #x-equals-x .covenant-epigraph-mark {
   margin: 0 !important;
@@ -169,8 +169,8 @@
   transition: background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
 }
 #x-equals-x .covenant-btn:active {
-  background-color: #7fb8d1;
-  border-color: #7fb8d1;
+  background-color: rgb(var(--cartoon-sun));
+  border-color: rgb(var(--cartoon-sun));
   color: #141210;
 }
 
@@ -193,8 +193,8 @@
   transition: background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
 }
 #x-equals-x .covenant-hero .covenant-share button:active {
-  background-color: #7fb8d1;
-  border-color: #7fb8d1;
+  background-color: rgb(var(--cartoon-sun));
+  border-color: rgb(var(--cartoon-sun));
   color: #141210;
 }
 
@@ -278,7 +278,7 @@
 #x-equals-x .covenant-band--centre .covenant-founder-source a {
   color: #5a5246;
   text-decoration: underline;
-  text-decoration-color: #0f5f7a;
+  text-decoration-color: rgb(var(--record-red));
 }
 #x-equals-x .covenant-source-name { display: block; margin-top: 0.25rem; }
 #x-equals-x cite { font-style: normal; }
@@ -310,7 +310,7 @@
      ground and the whole stack looked like one grey passage. Same value hers use. */
   background-color: #f7f1e5;
   border: 1px solid rgb(var(--record-ink));
-  border-top: 4px solid #1e3a2b;
+  border-top: 4px solid rgb(var(--record-red));
 }
 /* Her cards carry their body at 12px on a phone, 13.5px on a desk — one step under the
    13px headings above them. Inheriting the page's 13px made heading and body the same
@@ -318,7 +318,7 @@
 #x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) {
   font-size: 0.75rem;
 }
-#x-equals-x .covenant-card--ocean { border-top-color: rgb(var(--record-ocean)); }
+#x-equals-x .covenant-card--ocean { border-top-color: rgb(var(--cartoon-sun)); }
 #x-equals-x .covenant-card h2 {
   margin: 0 0 .75rem !important;
   max-inline-size: none;
@@ -420,7 +420,7 @@
   letter-spacing: 0.12em !important;
   color: #5a5246 !important;
 }
-#x-equals-x .covenant-trace a { color: #141210; text-decoration: underline; text-decoration-color: #0f5f7a; }
+#x-equals-x .covenant-trace a { color: #141210; text-decoration: underline; text-decoration-color: rgb(var(--record-red)); }
 #x-equals-x .covenant-entry-open {
   display: flex;
   align-items: center;
@@ -437,7 +437,7 @@
   letter-spacing: 0.1em;
   text-decoration: none;
 }
-#x-equals-x .covenant-entry-open > :last-child { color: #0f5f7a; }
+#x-equals-x .covenant-entry-open > :last-child { color: rgb(var(--record-red)); }
 
 /* ── WHAT IT CANNOT DO ──────────────────────────────────────────────────────────
    Three doors, each drawn as her page draws a link: a bone block inside an ink hairline,
@@ -462,7 +462,7 @@
   text-decoration: none;
   transition: background-color 140ms ease-out;
 }
-#x-equals-x .covenant-limit a:active { background-color: #7fb8d1; }
+#x-equals-x .covenant-limit a:active { background-color: rgb(var(--cartoon-sun)); }
 #x-equals-x .covenant-limit-mark svg { width: 1.5rem; height: 1.5rem; }
 #x-equals-x .covenant-limit-says { display: block; }
 #x-equals-x .covenant-limit-where {
@@ -472,7 +472,7 @@
   letter-spacing: 0.12em !important;
   color: #5a5246 !important;
 }
-#x-equals-x .covenant-limit-arrow { color: #0f5f7a; }
+#x-equals-x .covenant-limit-arrow { color: rgb(var(--record-red)); }
 
 /* ── WHAT THE RECORD PROMISES ───────────────────────────────────────────────────
    The marks on these are sentences — "equal worth ≠ equal size", "no ranking" — so they
@@ -503,7 +503,7 @@
 #x-equals-x .covenant-signature-note a {
   color: #141210;
   text-decoration: underline;
-  text-decoration-color: #0f5f7a;
+  text-decoration-color: rgb(var(--record-red));
 }
 
 /* ── FURTHER READING, AND THE WAY FURTHER ───────────────────────────────────────
@@ -543,7 +543,7 @@
   letter-spacing: 0.05em;
 }
 #x-equals-x .covenant-book-author { display: block; margin-top: 0.2rem; font-size: 0.75rem; color: #5a5246; }
-#x-equals-x .covenant-book-arrow { flex-shrink: 0; color: #0f5f7a; font-size: 1rem; }
+#x-equals-x .covenant-book-arrow { flex-shrink: 0; color: rgb(var(--record-red)); font-size: 1rem; }
 #x-equals-x .covenant-reading-note { margin-top: 0.25rem !important; }
 
 #x-equals-x .covenant-actions {
@@ -560,8 +560,8 @@
   color: #efe7d6;
 }
 #x-equals-x .covenant-actions .covenant-btn:active {
-  background-color: #7fb8d1;
-  border-color: #7fb8d1;
+  background-color: rgb(var(--cartoon-sun));
+  border-color: rgb(var(--cartoon-sun));
   color: #141210;
 }
 #x-equals-x .covenant-actions .covenant-share button {
@@ -582,8 +582,8 @@
   transition: background-color 140ms ease-out, color 140ms ease-out;
 }
 #x-equals-x .covenant-actions .covenant-share button:active {
-  background-color: #7fb8d1;
-  border-color: #7fb8d1;
+  background-color: rgb(var(--cartoon-sun));
+  border-color: rgb(var(--cartoon-sun));
   color: #141210;
 }
 #x-equals-x .covenant-dedication {
@@ -594,7 +594,7 @@
   text-align: center;
   color: #5a5246 !important;
 }
-#x-equals-x .covenant-dedication a { color: inherit; text-decoration: underline; text-decoration-color: #0f5f7a; }
+#x-equals-x .covenant-dedication a { color: inherit; text-decoration: underline; text-decoration-color: rgb(var(--record-red)); }
 
 /* ── THE RETURN, AS HER PAGE ENDS ───────────────────────────────────────────────
    The page closes dark rather than on a second band of colour: one blue band above the
@@ -611,8 +611,8 @@
   color: #141210;
 }
 #x-equals-x .covenant-return .covenant-btn--ink:active {
-  background-color: #7fb8d1;
-  border-color: #7fb8d1;
+  background-color: rgb(var(--cartoon-sun));
+  border-color: rgb(var(--cartoon-sun));
   color: #141210;
 }
 #x-equals-x .covenant-foot {
@@ -628,7 +628,7 @@
 
 #x-equals-x :is(a, button):focus-visible { outline: 2px solid #141210; outline-offset: 3px; }
 #x-equals-x .covenant-hero :is(a, button):focus-visible { outline-color: #efe7d6; }
-#x-equals-x ::selection { background: rgba(127, 184, 209, 0.45); }
+#x-equals-x ::selection { background: rgb(var(--cartoon-sun) / .45); }
 
 @media (min-width: 1024px) {
   #x-equals-x .covenant-hero-scan { display: none; }

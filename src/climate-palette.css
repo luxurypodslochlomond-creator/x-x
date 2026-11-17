@@ -3,6 +3,15 @@
    These selectors bridge legacy orange classes to the current red/yellow identity. */
 .climate-record { overflow-x: clip; }
 
+/* Legacy source links, archives and result rules use the same brand accents.
+   Geography and category colours drawn inside maps are not changed. */
+.climate-record [class~="text-[#0f5f7a]"] { color: rgb(var(--record-red)); }
+.climate-record [class~="border-t-[#0f5f7a]"] { border-top-color: rgb(var(--record-red)); }
+.climate-record [class~="border-b-[#0f5f7a]"] { border-bottom-color: rgb(var(--record-red)); }
+.climate-record [class~="border-l-[#0f5f7a]"] { border-left-color: rgb(var(--record-red)); }
+.climate-record [class~="bg-[#0f5f7a]/5"] { background-color: rgb(var(--cartoon-sun) / .15); }
+.climate-record [class~="bg-[#0f5f7a]"] { background-color: rgb(var(--record-ink)); }
+
 .climate-record [class~="bg-[#e2602a]"],
 .climate-record [class~="hover:bg-[#e2602a]"]:hover,
 .climate-record [class~="active:bg-[#e2602a]"]:active {

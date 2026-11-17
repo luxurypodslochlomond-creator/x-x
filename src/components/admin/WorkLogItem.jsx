@@ -4,7 +4,7 @@ import { Pin, PinOff, Check, RotateCcw, Trash2 } from 'lucide-react';
 const KINDS = {
   feedback: { label: 'Feedback', tone: 'text-record-red border-record-red/40' },
   decision: { label: 'Decision', tone: 'text-record-ink border-record-ink/40' },
-  gap: { label: 'Gap', tone: 'text-record-signal border-record-signal/50' },
+  gap: { label: 'Gap', tone: 'bg-cartoon-sun text-record-ink border-record-ink/50' },
   next: { label: 'Next', tone: 'text-record-ink border-record-ink/40' },
   note: { label: 'Note', tone: 'text-record-muted border-record-ink/20' },
   sweep: { label: 'Source check', tone: 'text-record-muted border-record-ink/20' },

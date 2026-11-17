@@ -5,7 +5,7 @@ export default function SupportThanks({ result, t }) {
 
   return (
     <section className="border border-[#141210] bg-[#f7f1e5] p-5">
-      <p className="text-[10px] font-black uppercase tracking-wider text-record-signal">
+      <p className="text-[10px] font-black uppercase tracking-wider text-record-red">
         {result.recorded ? t.thanks_tag : t.thanks_open}
       </p>
       <h2 className="mt-1 font-display text-[22px] font-black uppercase leading-tight text-[#141210]">{t.thanks_heading}</h2>

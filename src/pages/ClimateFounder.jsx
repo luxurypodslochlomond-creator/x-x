@@ -71,7 +71,7 @@ export default function ClimateFounder() {
         <div className="absolute inset-0 pointer-events-none opacity-[0.06] lg:hidden" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
 
         <div className="relative z-10 px-6 lg:px-10 py-12 lg:py-20 flex flex-col items-center justify-center gap-5 text-center min-h-[300px] lg:min-h-[400px]">
-          <SignalBeacon size={48} color="#7fc9e4" />
+          <SignalBeacon size={48} color="rgb(var(--cartoon-sun))" />
           {/* Her own sentence, in the record's reading voice — it was set in monospace,
               italic, which is the lettering of a listing pretending to be a quotation.
               These are the most human words on the page and they now look like it. */}

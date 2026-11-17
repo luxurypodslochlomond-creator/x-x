@@ -70,7 +70,7 @@ export default function ClimateWire() {
       <RecordPaintedBand>
         <div className="absolute inset-0 pointer-events-none opacity-[0.06] lg:hidden" style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px)', animation: 'twcc-scan 3s linear infinite' }} />
         <div className="relative z-10 px-4 lg:px-10 py-10 lg:py-16 flex flex-col items-center justify-center gap-4 text-center min-h-[220px] lg:min-h-[320px]">
-          <SignalBeacon size={44} color="#7fc9e4" />
+          <SignalBeacon size={44} color="rgb(var(--cartoon-sun))" />
           <h1
             className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 4vw, 58px)', letterSpacing: '-0.02em', animation: 'twcc-epigraph 1.4s ease-out .2s both' }}

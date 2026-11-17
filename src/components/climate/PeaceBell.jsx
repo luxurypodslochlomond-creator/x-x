@@ -19,7 +19,7 @@ import React from 'react';
    It sits in her plate and nowhere else. The beacon stays the record's own
    signature — every card, the map, the founder page — or it would stop meaning
    anything at all. */
-export default function PeaceBell({ size = 40, color = '#7fc9e4', href }) {
+export default function PeaceBell({ size = 40, color = 'rgb(var(--cartoon-sun))', href }) {
   const mark = (
     <svg width={size} height={size} viewBox="0 0 28 28" fill="none" style={{ overflow: 'visible', display: 'block' }}>
       <g transform="translate(0 2.5)">

@@ -43,7 +43,7 @@ export default function ClimateMapPage() {
           room at the same strength rather than three rooms that happen to be dark. */}
       <RecordPaintedBand>
         <div className="relative z-10 px-4 lg:px-10 py-9 lg:py-12 flex flex-col items-center justify-center gap-3 text-center">
-          <SignalBeacon size={40} color="#7fc9e4" />
+          <SignalBeacon size={40} color="rgb(var(--cartoon-sun))" />
           <h1
             className="font-black uppercase text-[#efe7d6] leading-[1.05] max-w-md lg:max-w-3xl"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(28px, 3.2vw, 46px)', letterSpacing: '-0.02em' }}
