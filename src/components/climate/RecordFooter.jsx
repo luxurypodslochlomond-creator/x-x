@@ -9,9 +9,10 @@ import { Link } from 'react-router-dom';
 //
 // So the order is turned round and the voices are put where they belong. The people
 // who keep the record come first, said plainly in the record's own reading voice,
-// because they are the ones accountable for what stands here. The machine that
-// drafted and coded it is named in the same sentence, in its own name, without
-// being given a hand in the deciding. The registration facts — the CIC, the address
+// because they are the ones accountable for what stands here. The line under them is
+// the record's own way of saying where its pages were made — kept short and kept true:
+// the how is said in full on the method page, so a reader who wants to know what
+// drafted these lines can find it, and the foot does not have to repeat it. The registration facts — the CIC, the address
 // you can write to — keep the mono, because a registry number is a fact and facts
 // are what that voice is for.
 //
@@ -47,11 +48,10 @@ export default function RecordFooter() {
         Kept by Brian Hughes and Gillian Brown.
       </p>
       <p
-        className="mt-3 mx-auto max-w-[52ch] text-record-muted"
-        style={{ fontFamily: 'var(--font-reading)', fontSize: 15, lineHeight: 1.7 }}
+        className="mt-5 text-record-mark uppercase"
+        style={{ fontFamily: 'var(--font-reading)', fontSize: 13, lineHeight: 1.4, letterSpacing: '0.22em' }}
       >
-        Drafted and coded with Base 1, built by Base44. It is software, and it wrote these lines;
-        a person decided what stays. Nothing here goes up on its word — not even this sentence.
+        Made in Scotland from photons
       </p>
 
       <span aria-hidden="true" className="mx-auto mt-10 block h-px w-16 bg-record-ink/25" />
