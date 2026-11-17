@@ -142,7 +142,7 @@ async function applyChange(base44, change, who, basis) {
       : basis === 'owner'
       ? `The owner's word stood alone: ${who.name || by} holds the building's keys, so no second custodian was asked, and the record says so here.`
       : basis === 'single'
-      ? `One custodian's word: ${who.name || by}. A checker is a pair of eyes and not a set of keys, so adding a checker, pausing one or ending one is a single decision — and it is written here so it was never quiet.`
+      ? `One custodian's word: ${who.name || by}. A witness is a pair of eyes and not a set of keys, so adding a witness, pausing one or ending one is a single decision — and it is written here so it was never quiet.`
       : `Asked by ${change.requested_by_name || change.requested_by}; agreed by ${who.name || by}.`;
 
   if (change.change === 'add') {
@@ -169,13 +169,13 @@ async function applyChange(base44, change, who, basis) {
     }).catch((error) => console.error('Keeper copy failed:', error?.message)));
     await logIt(base44, {
       rowId: created.id,
-      title: `${change.target_name || email} · ${change.target_is_keeper ? 'custodian' : 'signatory'}`,
+      title: `${change.target_name || email} · ${change.target_is_keeper ? 'custodian' : 'witness'}`,
       action: 'access_granted', reviewer: by,
       note: `${basisNote} ${delivery.message}`,
     });
     return {
       ok: true, ...delivery, row_id: created.id,
-      message: `${change.target_name || email} added as ${change.target_is_keeper ? 'custodian' : 'signatory'}. ${delivery.message}`,
+      message: `${change.target_name || email} added as ${change.target_is_keeper ? 'custodian' : 'witness'}. ${delivery.message}`,
     };
   }
 
@@ -186,7 +186,7 @@ async function applyChange(base44, change, who, basis) {
     .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
   if (!row) return { ok: false, status: 404, message: 'That person is no longer on the list.' };
 
-  const title = `${row.name || row.email}${row.is_keeper ? ' · custodian' : ' · signatory'}`;
+  const title = `${row.name || row.email}${row.is_keeper ? ' · custodian' : ' · witness'}`;
 
   // The floor: the record is never left with nobody holding the keys.
   if ((change.change === 'pause' || change.change === 'remove') && row.is_keeper) {

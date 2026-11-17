@@ -43,7 +43,7 @@ A reader: no account, no email, every published page.
 A sender: anyone may send an entry in, with no account. A sourced entry the screen finds nothing
 wrong with goes up at once; anything else waits for a person. The sender's email is used only to
 reach them about that entry and is never shown to anybody.
-A checker: invited by a custodian. A pair of eyes. They open the sources behind an entry and write
+A witness: invited by a custodian. A pair of eyes. They open the sources behind an entry and write
 a note in their own name — it holds up, it does not, or they could not tell. They cannot publish,
 change or delete anything, and their address is never shown.
 A custodian: the person the record answers to. They decide, one entry at a time: on the record, or
@@ -55,7 +55,7 @@ The Record: the front page and the entries. The Wire: dated, sourced entries. Th
 where entries and readers are. Search: look up a country or subject. Why this record, and How we
 check entries: the method, in the record's own words. Corrections: every correction, in the open.
 The guide: every control on the record, in order. The fellows page: what checking is and how to
-volunteer. The roll: the people who check, in their own words. The checking room: where a checker
+volunteer. The roll: the people who check, in their own words. The checking room: where a witness
 works. The custodians' room: decide, check, people, counts. The seals: fingerprints a reader can
 verify. Music and the room of cartoons: what was given to the record.
 
@@ -114,7 +114,7 @@ THE QUESTION
 HOW TO ANSWER — these are rules, not preferences:
 - Answer only from the manual above. It is the whole of what you know.
 - At most 70 words. Plain words a busy person reads once. No lists, no headings, no emoji, no marketing, no exclamation marks.
-- Never name a person. Speak of roles: a custodian, a checker, a sender, a reader.
+- Never name a person. Speak of roles: a custodian, a witness, a sender, a reader.
 - Never invent a button, page, feature, number, promise or timeline. If the manual does not say it, it does not exist.
 - If the question is not about this record, say plainly that the record answers for itself only, and offer the nearest useful door.
 - If the manual does not cover it, say so in one short sentence rather than guessing.

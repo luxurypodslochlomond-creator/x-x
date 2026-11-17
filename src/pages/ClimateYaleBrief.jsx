@@ -49,7 +49,7 @@ const notYetItems = (f) => [
   { t: `${show(f?.groupsNoContact)} of ${show(f?.groups)} gatherings have no contact line, so nobody can actually join one yet.`, to: 'TogetherChangeClimate' },
   { t: `${show(f?.unsigned)} of ${show(f?.entries)} entries are unsigned. Nothing is attributed to a person who did not write it, and each entry says plainly that it is unsigned.`, to: 'ClimateMethod' },
   { t: 'The code is not public, so it cannot yet be audited or carried away.', to: 'ExtractionProofCovenant' },
-  { t: 'No checker has yet been invited, so the checking office has had nobody in it.', to: 'ClimateFellows' },
+  { t: 'No witness has yet been invited, so the checking office has had nobody in it.', to: 'ClimateFellows' },
 ];
 
 const NEEDS = [
@@ -61,7 +61,7 @@ const NEEDS = [
   {
     n: '02',
     title: 'People who check',
-    body: 'A checker reads an entry, follows its source, and signs their name to what they found. There are none. This is the only item on this page that cannot be built, bought, or automated — it is the reason for writing to anyone at all.',
+    body: 'A witness reads an entry, follows its source, and signs their name to what they found. There are none. This is the only item on this page that cannot be built, bought, or automated — it is the reason for writing to anyone at all.',
   },
   {
     n: '03',
@@ -72,7 +72,7 @@ const NEEDS = [
 
 const missingItems = (f) => [
   ['Put a real name on every entry', 'Custodians sign their own when they are ready. Until then the record says each entry is unsigned rather than borrowing a name.'],
-  ['Invite the first checkers', 'Two or three named volunteers, and the checking office stops being empty.'],
+  ['Invite the first witnesses', 'Two or three named volunteers, and the checking office stops being empty.'],
   [`State the standing on all ${show(f?.entries)}`, `${show(f?.entries == null || f?.noVerification == null ? null : f.entries - f.noVerification)} do. ${show(f?.noVerification)} do not. An afternoon.`],
   ['Publish the code', 'Days rather than months. Until then nothing here can honestly be called auditable.'],
 ];

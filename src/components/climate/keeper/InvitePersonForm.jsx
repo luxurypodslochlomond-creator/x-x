@@ -13,7 +13,7 @@ export default function InvitePersonForm({ kind, setKind, email, setEmail, name,
       <fieldset disabled={busy || !ready} className="mt-4 space-y-4 disabled:opacity-60">
         <legend className="sr-only">Invitation details</legend>
         <div className="grid grid-cols-2 gap-2" role="group" aria-label="Their role on the record">
-          {[['check', 'Signatory', MarkEye], ['keys', 'Custodian', MarkKey]].map(([value, label, Mark]) => (
+          {[['check', 'Witness', MarkEye], ['keys', 'Custodian', MarkKey]].map(([value, label, Mark]) => (
             <button key={value} type="button" onClick={() => setKind(value)} aria-pressed={kind === value} className={`flex min-h-12 items-center justify-center gap-2 rounded border px-3 py-2 font-semibold ${kind === value ? 'border-record-red bg-record-red text-record-paper' : 'border-record-ink/25 text-record-ink'}`}>
               <Mark size={19} />{label}
             </button>
@@ -30,7 +30,7 @@ export default function InvitePersonForm({ kind, setKind, email, setEmail, name,
           <input id="invite-note" maxLength={300} value={note} onChange={(e) => setNote(e.target.value)} className={field} />
         </label>}
         <button type="submit" className="flex min-h-12 w-full items-center justify-center gap-2 rounded bg-record-red px-4 py-3 font-bold text-record-paper hover:bg-record-red/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red">
-          {busy && <Loader2 className="h-4 w-4 animate-spin" />}{busy ? 'Saving access and requesting email…' : needsApproval ? 'Ask another custodian to approve' : keeper ? 'Send custodian invite' : 'Send signatory invite'}
+          {busy && <Loader2 className="h-4 w-4 animate-spin" />}{busy ? 'Saving access and requesting email…' : needsApproval ? 'Ask another custodian to approve' : keeper ? 'Send custodian invite' : 'Send witness invite'}
         </button>
       </fieldset>
       {message && <div role={failed ? 'alert' : 'status'} aria-live="polite" className={`mt-4 border-l-2 pl-3 text-sm leading-relaxed ${failed ? 'border-record-red text-record-red' : 'border-record-botanical text-record-ink'}`}>{message}</div>}

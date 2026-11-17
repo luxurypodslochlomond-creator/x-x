@@ -10,7 +10,7 @@ export default function GuestPerson({ row, busy, pending, onInvite, onChange, me
     <article className="room-person mb-3 border border-record-ink/15 border-l-4 border-l-record-red bg-record-paper p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="room-person-name min-w-0 break-words text-lg font-bold text-record-ink">{row.name || row.email}</h3>
-        <span className={`rounded px-2 py-1 text-xs font-semibold ${row.active ? 'bg-record-red/10 text-record-red' : 'bg-record-ink/10 text-record-muted'}`}>{!row.active ? 'Paused' : row.is_keeper ? 'Custodian' : row.joined_at ? 'Signatory · joined' : 'Signatory'}</span>
+        <span className={`rounded px-2 py-1 text-xs font-semibold ${row.active ? 'bg-record-red/10 text-record-red' : 'bg-record-ink/10 text-record-muted'}`}>{!row.active ? 'Paused' : row.is_keeper ? 'Custodian' : row.joined_at ? 'Witness · joined' : 'Witness'}</span>
       </div>
       <div className="mt-1 break-all text-sm text-record-muted">{row.email}</div>
       {row.note && <div className="mt-1 text-sm text-record-muted">{row.note}</div>}

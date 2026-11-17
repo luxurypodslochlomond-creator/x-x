@@ -8,8 +8,8 @@ import React from 'react';
 // that quietly stops being used the first time somebody else is handed the keys.
 const ROWS = [
   ['waiting', 'Entries held for a person. Nothing goes on the record until someone has read it and decided. When this is not zero, this is where you start.'],
-  ['unopened', 'On the record, but nobody has opened its source yet. When this grows, add a checker — they read the source, you read their note, and you decide.'],
-  ['checks / 7d', 'Notes written by checkers in the last seven days. Zero means the pair of eyes has stopped, not that the record is clean.'],
+  ['unopened', 'On the record, but nobody has opened its source yet. When this grows, add a witness — they read the source, you read their note, and you decide.'],
+  ['checks / 7d', 'Notes written by witnesses in the last seven days. Zero means the pair of eyes has stopped, not that the record is clean.'],
 ];
 
 export default function DeskOrientation() {
@@ -35,7 +35,7 @@ export default function DeskOrientation() {
           A <span className="font-black text-record-ink">custodian</span> reads a decision, publishes or holds it, and signs their own name to it. This desk is restricted to app administrators.
         </p>
         <p className="text-[11px] font-mono text-record-ink/80 leading-snug mt-1.5">
-          A <span className="font-black text-record-ink">checker</span> opens a source and writes down what they found. They cannot publish, change or delete anything, and they never see who sent an entry.
+          A <span className="font-black text-record-ink">witness</span> opens a source and writes down what they found. They cannot publish, change or delete anything, and they never see who sent an entry.
         </p>
         <p className="text-[11px] font-mono text-record-ink/80 leading-snug mt-1.5">
           To bring someone in: add them on the guest list and they get an invitation and a way in. Anyone who will handle entries themselves, not only check them, is made an admin in App Users.

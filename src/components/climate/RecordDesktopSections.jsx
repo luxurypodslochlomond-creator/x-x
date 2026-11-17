@@ -8,7 +8,7 @@ export default function RecordDesktopSections({ onNavigate }) {
   const { pathname } = useLocation();
   const { isKeeper, isChecker } = useRecordCapacity();
   const groups = isKeeper || isChecker
-    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: isKeeper ? 'Custodians’ room' : 'Signatories’ room', to: '/ClimateKeeperRoom' }] }]
+    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: isKeeper ? 'Custodians’ room' : 'Witnesses’ room', to: '/ClimateKeeperRoom' }] }]
     : CONTENT_GROUPS;
   return (
     <div className="grid grid-cols-4 gap-x-6 gap-y-5">

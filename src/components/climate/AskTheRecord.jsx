@@ -26,7 +26,7 @@ import { useVoiceIn, useVoiceOut } from '@/components/climate/useRecordVoice';
 // keep. The voice is the device's, and only as wide as the device: a phone can speak Gaelic,
 // none can speak Rongorongo, and the line under the answer says which one you are hearing.
 const SUGGESTIONS = [
-  'What does a checker actually do?',
+  'What does a witness actually do?',
   'What happens after I send something in?',
   'Does a custodian publish on their own?',
 ];

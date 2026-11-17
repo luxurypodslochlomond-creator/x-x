@@ -50,7 +50,7 @@ export async function resolveChecker(base44) {
   if (line && !line.active && !isAdmin) {
     return { error: 'Your place on this record is paused', status: 403, paused: true };
   }
-  if (!line && !isAdmin) return { error: 'Not a checker on this record', status: 403 };
+  if (!line && !isAdmin) return { error: 'Not a witness on this record', status: 403 };
 
   return {
     user,

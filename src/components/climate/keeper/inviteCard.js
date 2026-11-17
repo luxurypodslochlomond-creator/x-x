@@ -48,7 +48,7 @@ const ROWS = [
 // does it.
 const KEEPER_ROWS = [
   { label: 'YOUR ROOM', line: 'Sign in at the address your invitation came to, and open the custodians\u2019 room. Whatever is waiting sits there, one tap each: yes, or not yet.' },
-  { label: 'THE PEOPLE DOOR', line: 'Tap People. Under the keys, type their name, their address and one word on why. A checker is your word alone, and it lands the moment you say it.' },
+  { label: 'THE PEOPLE DOOR', line: 'Tap People. Under the keys, type their name, their address and one word on why. A witness is your word alone, and it lands the moment you say it.' },
   { label: 'THE KEYS TAKE TWO', line: 'Handing over the keys is the only thing that waits: one custodian asks, a different custodian agrees. The last custodian can never be taken off.' },
 ];
 

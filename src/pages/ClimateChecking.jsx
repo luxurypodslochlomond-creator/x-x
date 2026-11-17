@@ -203,7 +203,7 @@ export default function ClimateChecking({ plain = false, onChange }) {
             for anybody's inbox. It sits above the work, answered from the record's own manual
             in whatever tongue they are reading in, typed or spoken. */}
         <div className="mt-4">
-          <AskTheRecord suggestions={['What does a signatory actually do?', 'Who decides after my note?', 'Can I publish anything myself?']} />
+          <AskTheRecord suggestions={['What does a witness actually do?', 'Who decides after my note?', 'Can I publish anything myself?']} />
         </div>
 
         {error && error !== 'not_a_checker' && (

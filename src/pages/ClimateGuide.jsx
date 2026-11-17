@@ -99,7 +99,7 @@ const READING = [
 const TONGUE = [
   {
     label: 'The language bar',
-    what: 'Under the masthead, on every page of the record. A tongue is translated once, kept, and handed to every reader after that — so the signatory never waits.',
+    what: 'Under the masthead, on every page of the record. A tongue is translated once, kept, and handed to every reader after that — so the witness never waits.',
   },
 ];
 
@@ -149,7 +149,7 @@ const KEEPER_DOORS = [
   {
     label: 'Check',
     door: true,
-    what: 'Read the sources behind an entry and say what you found. This room decides nothing — it is a second pair of eyes, and a checker is given this one only.',
+    what: 'Read the sources behind an entry and say what you found. This room decides nothing — it is a second pair of eyes, and a witness is given this one only.',
   },
   {
     label: 'People',
@@ -161,7 +161,7 @@ const KEEPER_DOORS = [
     // word puts them on the list. Only the keys themselves need two. Saying otherwise made
     // a custodian expect a delay that never comes, and made the record sound harder to join
     // than it is.
-    what: 'Who holds a key and who is asking for one — and the door a volunteer comes in by: type their name and address, and the record writes to them with their way in. One custodian\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The keys themselves move on two: one custodian proposes, a second agrees.',
+    what: 'Who holds a key and who is asking for one — and the door a volunteer comes in by: type their name and address, and the record writes to them with their way in. One custodian\u2019s word is enough for a witness, because a pair of eyes is not a set of keys. The keys themselves move on two: one custodian proposes, a second agrees.',
   },
   {
     label: 'Record',
@@ -175,7 +175,7 @@ const FOOT = [
   ...FOOTER_NAV,
   { label: 'Terms', to: '/ClimateTerms', what: 'The terms under which the record is used.' },
   { label: 'Privacy', to: '/ClimatePrivacy', what: 'What the record keeps, and what it never does.' },
-  { label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Where invited custodians decide and signatories write their notes — one door, two kinds of key.' },
+  { label: 'The custodians’ room', to: '/ClimateKeeperRoom', what: 'Where invited custodians decide and witnesses write their notes — one door, two kinds of key.' },
 ];
 
 // The way in, as a card Janine can forward. Five lines, in the order a custodian does them,
@@ -188,7 +188,7 @@ const WAY_IN_CARD = {
   steps: [
     { do: 'Sign in with the address this record knows', what: 'Google, or a password. That address is the one it recognises.' },
     { do: 'Open the custodians\u2019 room', what: 'The drawn door at the top of any page. It opens to a custodian only.' },
-    { do: 'People \u2192 add by email', what: 'A signatory goes on with one word. A custodian needs a second custodian to agree.' },
+    { do: 'People \u2192 add by email', what: 'A witness goes on with one word. A custodian needs a second custodian to agree.' },
     { do: 'Decide: yes, or not yet', what: 'Yes writes your name on the entry. Not yet keeps it waiting, with your reason beside it.' },
     { do: 'Seal what went up', what: 'One tap. Anyone can check the seal in their own browser, without trusting us.' },
   ],
@@ -276,7 +276,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="07"
         heading="When you are the custodian"
-        note="Four rooms sit behind the custodian’s door, in the order a custodian meets them. A checker is given the second one only. A reader never sees any of them, and nothing goes on the record or comes off it without one of them being used."
+        note="Four rooms sit behind the custodian’s door, in the order a custodian meets them. A witness is given the second one only. A reader never sees any of them, and nothing goes on the record or comes off it without one of them being used."
         items={KEEPER_DOORS}
       />
 
@@ -292,12 +292,12 @@ export default function ClimateGuide() {
           way to lose a volunteer is to let them believe a hold means they were wrong. */}
       <GuideBand
         number="08"
-        heading="If you are a checker, end to end"
-        note="A checker is a pair of eyes. You read what is waiting, you say what you found, and you sign it with your own name. You cannot publish, change or delete anything — that is not a limit on your standing, it is what makes your note worth reading."
+        heading="If you are a witness, end to end"
+        note="A witness is a pair of eyes. You read what is waiting, you say what you found, and you sign it with your own name. You cannot publish, change or delete anything — that is not a limit on your standing, it is what makes your note worth reading."
         items={[
           {
             label: '1 · A custodian puts you on the list',
-            what: 'One custodian\u2019s word is enough for a checker, because a pair of eyes is not a set of keys. The record writes to you the same day with your way in, and names the custodian who put you there.',
+            what: 'One custodian\u2019s word is enough for a witness, because a pair of eyes is not a set of keys. The record writes to you the same day with your way in, and names the custodian who put you there.',
           },
           {
             label: '2 · Sign in with that address',
@@ -338,7 +338,7 @@ export default function ClimateGuide() {
           {
             label: '1 · Put a volunteer on the list',
             to: '/ClimateKeeperRoom?tab=people',
-            what: 'People, then their name and address. A checker is on with one custodian\u2019s word. A second custodian needs a second custodian: you propose, they agree, and only then do the keys move.',
+            what: 'People, then their name and address. A witness is on with one custodian\u2019s word. A second custodian needs a second custodian: you propose, they agree, and only then do the keys move.',
           },
           {
             label: '2 · Tell the record to tap your screen',

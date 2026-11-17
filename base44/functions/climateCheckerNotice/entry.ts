@@ -61,7 +61,7 @@ const COPY = {
 // of what it did, in the same breath — and it happened, to the first keeper it invited.
 const KEEPER_BODY = {
   invited:
-    'Sign in with the email address this invitation reached. Your custodians’ room is where you review entries, publish or hold them, and invite people to help. You can invite a signatory yourself. Custodian access needs another custodian to agree, except for the recorded single-custodian or app-admin exceptions. This is access to the record, not administrator access to the whole app.',
+    'Sign in with the email address this invitation reached. Your custodians’ room is where you review entries, publish or hold them, and invite people to help. You can invite a witness yourself. Custodian access needs another custodian to agree, except for the recorded single-custodian or app-admin exceptions. This is access to the record, not administrator access to the whole app.',
   paused:
     'Your key to the record is closed for now. Nothing you put on it has been taken off, and nothing you signed has been unsigned. If this is a surprise, reply to this email and the other custodian will tell you why.',
   restored: 'Your key is open again, and the record answers to you as it did before.',

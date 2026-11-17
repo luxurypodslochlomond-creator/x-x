@@ -56,7 +56,7 @@ export default function ClimateRoll() {
       {data?.me && <RollOwnLine me={data.me} onSaved={load} />}
 
       {/* ── THE CARD, NOT A PAGE ────────────────────────────────────────────────
-          What a checker can actually hand to somebody — a body, a journal, a grant
+          What a witness can actually hand to somebody — a body, a journal, a grant
           panel. It appears once their line is on the roll, because a card with no
           words of their own on it is a certificate, and this record does not issue
           certificates. Every number on it is counted when it is drawn. */}
