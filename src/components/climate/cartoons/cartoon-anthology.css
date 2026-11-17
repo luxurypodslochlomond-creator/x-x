@@ -1,0 +1,121 @@
+/* ── THE ANTHOLOGY PLATE ───────────────────────────────────────────────────────
+   Set like the record's other cards (comic-session, comic-sources): same ink rule at
+   the top, same paper, same red eyebrow. The one difference is the title, which gets a
+   sun block behind it — this is somebody else's book and the room should look like it
+   knows that. Colour comes only from tokens, so it stays in the record's palette. */
+
+.comic-anthology {
+  position: relative;
+  max-width: 40rem;
+  margin: 1.2rem auto 0;
+  padding: 1rem .4rem 1.1rem;
+  border-top: 3px solid rgb(var(--record-ink));
+  border-bottom: 1px solid rgb(var(--record-ink) / .22);
+}
+
+.comic-anthology-eyebrow {
+  margin: 0;
+  font-size: .66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: rgb(var(--record-red));
+}
+
+.comic-anthology-title {
+  position: relative;
+  z-index: 0;
+  margin: .45rem 0 .5rem;
+  font-size: clamp(1.05rem, 4.4vw, 1.4rem);
+  line-height: 1.15;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+/* The sun block sits behind the words like a strip of colour on a printed cover, kept
+   behind by z-index so nothing tints the letters. */
+.comic-anthology-title::before {
+  content: '';
+  position: absolute;
+  inset: 8% -2% 2%;
+  z-index: -1;
+  background: rgb(var(--cartoon-sun) / .55);
+  transform: rotate(-.8deg);
+}
+
+.comic-anthology-sub {
+  margin: 0 0 .9rem;
+  font-size: .8rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: rgb(var(--record-ink) / .8);
+  max-inline-size: none;
+}
+
+.comic-anthology-facts {
+  display: grid;
+  gap: .45rem;
+  margin: 0 0 .9rem;
+  padding: 0;
+}
+
+.comic-anthology-facts > div {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  gap: .55rem;
+  align-items: baseline;
+}
+
+.comic-anthology-facts dt {
+  font-size: .58rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: rgb(var(--record-muted));
+}
+
+.comic-anthology-facts dd {
+  margin: 0;
+  font-size: .82rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.comic-anthology-note {
+  margin: 0;
+  font-size: .82rem;
+  line-height: 1.55;
+  max-inline-size: none;
+}
+
+.comic-anthology-free {
+  display: inline-block;
+  margin: .8rem 0 0;
+  padding: .3rem .55rem;
+  border: 2px solid rgb(var(--record-ink));
+  border-radius: 3px;
+  background: rgb(var(--cartoon-mint));
+  font-size: .6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  transform: rotate(-1deg);
+}
+
+.comic-anthology-status {
+  margin: .9rem 0 0;
+  padding-left: .8rem;
+  border-left: 3px solid rgb(var(--record-red));
+  font-size: .76rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink) / .78);
+  max-inline-size: none;
+}
+
+.comic-anthology-credit {
+  margin: .8rem 0 0;
+  font-size: .68rem;
+  line-height: 1.45;
+  color: rgb(var(--record-muted));
+  max-inline-size: none;
+}
