@@ -28,7 +28,16 @@ export default function RecordFooter() {
         </a>
       </p>
 
-      <p className="mt-6 text-sm leading-relaxed text-record-muted">Brian Hughes + Gillian Brown + Base44</p>
+      {/* A plus sign made the platform a co-author, which it is not. The people who decided
+          are the authors; the machine's part is said in words, in its own name, so a reader
+          can see exactly which of the two did what. */}
+      <p className="mt-6 text-sm leading-relaxed text-record-muted">
+        Kept by Brian Hughes and Gillian Brown
+      </p>
+      <p className="mt-2 text-sm leading-relaxed text-record-muted">
+        Drafted and coded by Base 1, a machine built by Base44. It wrote; a person decided, and
+        nothing here is published on a machine's word.
+      </p>
     </footer>
   );
 }
