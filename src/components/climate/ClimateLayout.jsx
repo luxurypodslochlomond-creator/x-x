@@ -192,9 +192,6 @@ export default function ClimateLayout({ children, currentPage }) {
           the same everywhere, and every jump down to the record allows for its height. */}
       <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
-        {/* The foot's yellow band, at the top of the record. Pinned with the masthead, so
-            the sentence a reader meets at the bottom is the one they arrived under. */}
-        <RecordTimeBar />
         <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
             <Link
@@ -220,6 +217,12 @@ export default function ClimateLayout({ children, currentPage }) {
                 cannot push one aside whatever a tongue is called. */}
             <RecordTongueDoor size={18} inline />
           </div>
+
+          {/* The foot's yellow line, sat under the record's name rather than over it: the
+              name opens the page, the yellow line is its dateline, and the rule below
+              closes the masthead. Worked rooms still go without it, for the same reason
+              they go without the rule and the imprint. */}
+          {!isRoom && <RecordTimeBar className="-mx-4 mt-2.5 lg:-mx-10" />}
 
           {!isRoom && <RecordRule />}
 
