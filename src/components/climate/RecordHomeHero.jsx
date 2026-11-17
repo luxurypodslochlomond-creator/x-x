@@ -5,8 +5,10 @@ import '@/components/climate/record-home.css';
 
 export default function RecordHomeHero({ copy, copied, onShare }) {
   return (
-    <section aria-labelledby="record-home-title" className="record-home-hero relative min-h-[clamp(320px,44vh,460px)] bg-record-earth text-record-bone lg:min-h-0 lg:bg-record-ink">
-      <div aria-hidden="true" className="absolute inset-0 lg:hidden">
+    <section aria-labelledby="record-home-title" className="record-home-hero relative min-h-[clamp(320px,44vh,460px)] bg-record-earth text-record-bone">
+      {/* One crop of the painting, the same component the wire and the map use, so the
+          record opens in the same room as the rest of the book on every screen. */}
+      <div aria-hidden="true" className="absolute inset-0">
         <RecordPaintedBand strength={0.95} soft className="h-full" />
       </div>
       <div className="relative z-10 flex items-center justify-between gap-3 bg-record-bone px-4 py-3 lg:px-10">

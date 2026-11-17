@@ -45,10 +45,10 @@ export default function RecordSectionHeading({ title, count, tone = 'text-[#6b62
       <h2
         className="text-[#141210] uppercase"
         style={{
-          fontFamily: 'var(--font-reading)',
+          fontFamily: 'var(--font-display)',
           fontSize: 'clamp(21px, 5.6vw, 27px)',
-          lineHeight: 1.06,
-          letterSpacing: '0.015em',
+          lineHeight: 1.08,
+          letterSpacing: '-0.02em',
           fontWeight: 700,
         }}
       >

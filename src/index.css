@@ -422,7 +422,18 @@ button:focus-visible {
    cooler and faster: an antique face the browser was downloading is now simply not
    asked for. */
 :root { --record-display: 'Source Serif 4', 'Literata', Georgia, serif; }
-.climate-record { --font-display: var(--record-display); }
+/* ── THE HEADINGS WEAR THE MARK'S OWN SANS ───────────────────────────────────────
+   The record's display voice has been a serif and, before that, a condensed poster face.
+   Both argued with the plates: the red/yellow bands are a signal poster's furniture, and
+   a chapter title in a book serif sitting above one read as two publications stapled
+   together. The opening page now sets its title in the bold sans the foot is printed in,
+   and every heading on the record follows it, so a page title, a section name and the
+   masthead are finally the same hand. Body prose keeps Source Serif: it is still a record,
+   and sentences are still read. Labels, dates, counts and buttons keep the machine's mono. */
+.climate-record {
+  --record-display: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-display: var(--record-display);
+}
 
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
 .beadie-paper { background-color: #f4efe4; }
