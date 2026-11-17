@@ -86,7 +86,9 @@ export default function ClimateWorkshop() {
 
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-record-ink/15 pb-3">
         <p className="max-w-[42ch] text-[13px] leading-relaxed lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
-          Written for Janine M. H. Selendy — to send, to cut, or to put down — and for anybody it reaches after her.
+          Written for Janine M. H. Selendy, at her word that the hour was a struggle to shape — by the person who built
+          the record, not by the host. A help-sheet, not a running order: hers to send, to cut, or to put down, and for
+          anybody it reaches after her.
         </p>
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">Set down 16 November 2026</p>
       </div>
