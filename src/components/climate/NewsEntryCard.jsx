@@ -19,7 +19,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
   const headlineStyle = { fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.01em' };
 
   return (
-    <article className="bg-[#f7f1e5] border-2 border-[#141210]">
+    <article className="border-2 border-[#141210] bg-record-bone">
       <div className="flex flex-wrap items-center gap-2 px-4 pt-4">
         <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#5a5246]">{entry.when_label}</span>
         {entry.kind && (
@@ -40,7 +40,9 @@ export default function NewsEntryCard({ entry, linked = true }) {
         </div>
       )}
 
-      <p className="px-4 pt-2 text-[12.5px] font-mono leading-relaxed text-[#141210]">{entry.what_changed}</p>
+      {/* A sentence a person wrote is set in the record's reading voice, not the
+          machine's small monospace. The labels around it keep the machine's hand. */}
+      <p className="px-4 pb-1 pt-2 text-[#141210]">{entry.what_changed}</p>
 
       {entry.image_url && (
         <figure className="mt-4">
@@ -63,14 +65,14 @@ export default function NewsEntryCard({ entry, linked = true }) {
       {entry.replicable && (
         <div className="mt-4 mx-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] px-3 py-2.5">
           <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] mb-1">What can be copied from this</p>
-          <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{entry.replicable}</p>
+          <p className="text-[#141210]">{entry.replicable}</p>
         </div>
       )}
 
       {entry.correction_note && (
         <div className="mt-3 mx-4 bg-[#b3261e]/5 border-l-4 border-l-[#b3261e] px-3 py-2.5">
           <p className="text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] mb-1">Correction</p>
-          <p className="text-[11.5px] font-mono leading-relaxed text-[#141210]">{entry.correction_note}</p>
+          <p className="text-[#141210]">{entry.correction_note}</p>
           <Link to="/ClimateCorrections" className="mt-1.5 inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] underline">
             Every correction, in daylight
           </Link>

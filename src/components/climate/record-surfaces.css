@@ -21,11 +21,12 @@
   .record-home-page .record-home-governance { background-color: rgb(var(--record-ink) / .92); }
   .record-pages .record-shell-opening h1 { font-size: clamp(2rem, 3vw, 3.5rem); }
 
-  /* The wire's controls, entries and note are separate sheets, not one tall slab. */
+  /* The wire's controls, entries and note are separate sheets, not one tall slab.
+     Bone rather than near-white: a page of #f7f1e5 cards read as a wall of white. */
   .record-pages .record-reading-panel > .record-wire-column { padding: 0; background-color: transparent; }
   .record-wire-controls,
-  .record-wire-note { padding: 2rem; background-color: rgb(var(--record-paper)); }
-  .record-wire-list > article { background-color: rgb(var(--record-paper)); }
+  .record-wire-note { padding: 1.5rem; background-color: rgb(var(--record-bone)); }
+  .record-wire-list > article { background-color: rgb(var(--record-bone)); }
 
   /* Legacy standalone pages use the same ground without changing their content. */
   .record-pages .record-reach-page,

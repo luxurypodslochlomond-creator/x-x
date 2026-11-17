@@ -108,7 +108,7 @@ export default function ClimateWire() {
                 key={f.id}
                 onClick={() => setFilter(f.id)}
                 className={`px-3 py-2 text-[10px] font-black font-mono uppercase border-2 transition-colors ${
-                  filter === f.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-[#f7f1e5] text-[#141210] border-[#141210]/40'
+                  filter === f.id ? 'bg-[#141210] text-[#efe7d6] border-[#141210]' : 'bg-record-bone text-[#141210] border-[#141210]/40'
                 }`}
               >
                 {f.label}
@@ -127,7 +127,7 @@ export default function ClimateWire() {
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search the wire — a place, a subject, a source…"
             aria-label="Search the wire"
-            className="w-full min-h-[48px] pl-9 pr-10 py-3 bg-[#f7f1e5] border-2 border-[#141210] text-[#141210] text-[12px] font-mono placeholder:text-[#5a5246] focus:outline-none focus:border-[#e2602a]"
+            className="w-full min-h-[48px] pl-9 pr-10 py-3 bg-record-bone border-2 border-[#141210] text-[#141210] placeholder:text-[#5a5246] focus:outline-none focus:border-[#e2602a]"
           />
           {q && (
             <button
@@ -173,8 +173,8 @@ export default function ClimateWire() {
           )}
 
           {!loading && shown.length === 0 && (
-            <div className="bg-[#f7f1e5] border-2 border-[#141210]/30 p-6 text-center">
-              <p className="text-[12px] font-mono text-[#141210] leading-relaxed">
+            <div className="bg-record-bone border-2 border-[#141210]/30 p-6 text-center">
+              <p className="text-[#141210]">
                 {words.length > 0
                   ? 'Nothing on the wire holds those words. Try one of them, or search the whole record above.'
                   : "Nothing on the wire under this heading yet. The record opens with the founder's own words — send the first entry and it goes up with its source."}
@@ -186,9 +186,9 @@ export default function ClimateWire() {
         </div>
 
         {/* Why it looks like this */}
-        <div className="record-wire-note mt-8 lg:mt-12 bg-[#141210]/5 border-l-4 border-l-[#141210] p-4 lg:p-6">
+        <div className="record-wire-note mt-8 lg:mt-12 bg-record-bone border-l-4 border-l-[#141210] p-4 lg:p-6">
           <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Why there is nothing to click</p>
-          <p className="text-[11px] font-mono leading-relaxed text-[#141210]">
+          <p className="text-[#141210]">
             No likes, no counters, no most-read. Attention is the thing that turns a news page into noise, so the wire does not measure it. Passing an entry on is not a counter — it is what the wire is for. Entries sit in date order and are read or not read. What a reader gets instead is the source, how well the claim is known, and one plain line on what can be copied.
           </p>
         </div>
