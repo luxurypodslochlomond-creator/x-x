@@ -17,7 +17,7 @@ import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
 import SignalBeacon from '@/components/climate/SignalBeacon';
-import PeaceBell from '@/components/climate/PeaceBell';
+import RecordHomeVoice from '@/components/climate/RecordHomeVoice';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 import DefinitionsBand from '@/components/climate/DefinitionsBand';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
@@ -487,80 +487,11 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── OPENING BAND — her words, carried the way this record carries every voice.
-             The founder page and the wire both open with a plate of ink: grain, a beacon,
-             the words in the reading voice, the name in signal blue. Her line was the only
-             quoted voice on this record sitting on flat paper with nothing around it, and
-             that flatness — not the typeface — is what read cold and linear. The warm paper
-             still holds the page open; the material now sits under her words, where it
-             belongs. Her words are the record's first transmission, so they get its plate. ── */}
-      <div className="record-home-opening bg-[#efe7d6] px-4 lg:px-8 py-7 lg:py-10 border-b-2 border-[#141210]/15" >
-        <RecordPaintedBand className="record-home-voice mx-auto max-w-[760px] border-2 border-record-earth px-5 py-6">
-          <div className="relative z-10 flex flex-col items-center gap-4 text-center">
-            <div className="flex items-center justify-center gap-2">
-              <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
-              <span className="record-home-voice-label text-[8px] font-black font-mono uppercase tracking-[0.25em] text-[#efe7d6]/50 leading-tight">
-                A voice on the record
-              </span>
-              <span className="w-1 h-1 rounded-full bg-[#7fc9e4] animate-pulse flex-shrink-0" />
-            </div>
-
-            {/* Her own mark, here and nowhere else: the bell she rings to name a
-                commitment, and her ask that everyone with her make one too. It does
-                the job the beacon does — one wordless mark, ringing outward — but in
-                her voice rather than the record's. The beacon keeps the record. */}
-            <PeaceBell size={40} color="#7fc9e4" href="https://webtv.un.org/en/asset/k13/k13z7vjtvs" />
-
-            {/* The first human voice on the record — the reading voice, which is the
-                record's own lettering given air: larger, looser, one step slower than
-                the frame around it. The label above and the credit below keep the
-                machine voice, because the frame must never sound like the person. */}
-            <blockquote
-              className="text-[#efe7d6] max-w-[42ch] leading-[1.62]"
-              style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(18px, 2.8vw, 25px)' }}
-            >
-              “Every single day, we hold the power to shape the world around us.”
-            </blockquote>
-
-            <div className="flex flex-col items-center gap-1.5">
-              <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#7fc9e4]">
-                Dr. Jane Goodall
-              </p>
-              {/* One house, named once — and the name ON the line is the house the
-                  link OPENS. Dr. Jane's own institute published this line, and it is
-                  the body that answers for it, so both the words and the tap point at
-                  it: a reader who taps through lands on the name they just read, never
-                  beside it. A credit that named one body and opened another would be
-                  the one kind of wrong this record does not allow itself. */}
-              <p className="text-[9px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/55">
-                <a
-                  href="https://janegoodall.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-black text-[#7fc9e4] underline decoration-dotted decoration-1 underline-offset-[5px] active:decoration-solid active:opacity-80"
-                >
-                  the Jane Goodall Institute
-                </a>
-              </p>
-            </div>
-          </div>
-        </RecordPaintedBand>
-
-        {/* The covenant sits underneath her words, not beside them. Bare, ours, and it opens the why.
-            A hairline detaches it: it is the record's own mark, and inside her credit row it read
-            as though it belonged to her. It stands centred on the page by itself. */}
-        <span aria-hidden="true" className="block w-16 h-px bg-[#141210]/20 mt-5 mx-auto" />
-        <div className="flex items-center justify-center gap-2 flex-wrap mt-3">
-          <Link
-            to="/XEqualsX"
-            className="text-[12px] font-black font-mono text-record-mark tracking-[0.2em] leading-none underline decoration-dotted underline-offset-4"
-          >
-            x = x
-          </Link>
-        </div>
-      </div>
-
-      <RecordHomeHero copy={t} copied={copied} onShare={handleShare} />
+      {/* The record opens first; Jane's voice follows on the same continuous painting. */}
+      <RecordPaintedBand strength={0.65} soft className="record-home-opening">
+        <RecordHomeHero copy={t} copied={copied} onShare={handleShare} />
+        <RecordHomeVoice />
+      </RecordPaintedBand>
 
       {/* ── THE TOP CRAWL — Janine's credited photographs, directly under the masthead.
              Her ask was for the pictures to sit high on the page, and they still do: they

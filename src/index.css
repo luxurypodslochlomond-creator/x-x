@@ -431,9 +431,18 @@ button:focus-visible {
    masthead are finally the same hand. Body prose keeps Source Serif: it is still a record,
    and sentences are still read. Labels, dates, counts and buttons keep the machine's mono. */
 .climate-record {
-  --record-display: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --record-display: var(--font-record-ui);
   --font-display: var(--record-display);
+  --font-heading: var(--record-display);
+  --font-body: var(--font-record-ui);
+  --font-reading: var(--font-record-ui), var(--font-record-reading);
 }
+/* The signal voice also reaches labels, captions and controls, not just h-tags.
+   Hashes and deliberately technical text retain fixed-width lettering. */
+.climate-record .font-mono:not(code):not(pre):not(.break-all):not([data-record-technical]):not([data-record-technical] *) {
+  font-family: var(--font-record-ui) !important;
+}
+.climate-record :is(.font-black, .font-extrabold) { font-weight: 700; }
 
 /* ── BEADIE SIGNAL — paper, ink, signal red. The whole platform. ── */
 .beadie-paper { background-color: #f4efe4; }

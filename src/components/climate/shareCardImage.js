@@ -21,8 +21,7 @@ const SIGNAL = '#b3261e';
 const MARK = '#cc2d2a';
 const SIGNAL_BRIGHT = '#7fc9e4';
 const MUTED = '#5a5246';
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
-const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const PAD = 60;
 const MAXW = W - PAD * 2;
@@ -117,12 +116,7 @@ export async function buildWireShareCard(entry, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   const img = await loadImage(entry.image_url);
 
@@ -137,7 +131,7 @@ export async function buildWireShareCard(entry, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -161,7 +155,7 @@ export async function buildWireShareCard(entry, options = {}) {
 
   // How well it is known, what kind of entry it is.
   const badge = badgeFor(entry);
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badgeText = badge.label.toUpperCase();
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = badge.bg;
@@ -192,11 +186,11 @@ export async function buildWireShareCard(entry, options = {}) {
   // The headline — the record's display voice, shrunk until it fits.
   ctx.fillStyle = INK;
   let size = 66;
-  ctx.font = `900 ${size}px ${DISPLAY}`;
+  ctx.font = `700 ${size}px ${DISPLAY}`;
   let head = wrapLines(ctx, (entry.headline || '').toUpperCase(), MAXW, 4);
   while (head.length > 3 && size > 46) {
     size -= 4;
-    ctx.font = `900 ${size}px ${DISPLAY}`;
+    ctx.font = `700 ${size}px ${DISPLAY}`;
     head = wrapLines(ctx, (entry.headline || '').toUpperCase(), MAXW, 4);
   }
   const headLine = Math.round(size * 1.08);
@@ -209,22 +203,22 @@ export async function buildWireShareCard(entry, options = {}) {
   const bodyLine = 40;
   const maxBody = Math.max(2, Math.min(7, Math.floor(bodyRoom / bodyLine)));
   ctx.fillStyle = 'rgba(20,18,16,0.88)';
-  ctx.font = `500 26px ${MONO}`;
+  ctx.font = `400 26px ${MONO}`;
   const body = wrapLines(ctx, entry.what_changed, MAXW, maxBody);
   drawLines(ctx, body, PAD, y + 26, bodyLine);
 
   // Who says so — never separated from the entry.
   const sourceY = FOOTER_TOP - 175;
   ctx.fillStyle = MUTED;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   ctx.fillText('WHO SAYS SO', PAD, sourceY);
   ctx.fillStyle = INK;
-  ctx.font = `900 26px ${MONO}`;
+  ctx.font = `700 26px ${MONO}`;
   const source = wrapLines(ctx, entry.source_name || '', MAXW, 2);
   drawLines(ctx, source, PAD, sourceY + 36, 34);
   if (entry.corroborating_source) {
     ctx.fillStyle = MUTED;
-    ctx.font = `500 22px ${MONO}`;
+    ctx.font = `400 22px ${MONO}`;
     ctx.fillText(fitText(ctx, `+ ${entry.corroborating_source}`, MAXW), PAD, sourceY + 42 + 34 * source.length);
   }
 
@@ -232,11 +226,11 @@ export async function buildWireShareCard(entry, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
@@ -263,12 +257,7 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   const img = await loadImage(track.image_url);
 
@@ -283,7 +272,7 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -313,7 +302,7 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   }
 
   // Given, not sold — the badge says what the page says, so nobody has to wonder.
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badgeText = 'GIVEN, NOT SOLD';
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = '#1e3a2b';
@@ -324,7 +313,7 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   // What arrives — the master's real spec, not a claim.
   if (track.spec) {
     const specText = String(track.spec).toUpperCase();
-    ctx.font = `900 20px ${MONO}`;
+    ctx.font = `700 20px ${MONO}`;
     const specW = ctx.measureText(specText).width + 28;
     ctx.strokeStyle = 'rgba(20,18,16,0.45)';
     ctx.lineWidth = 2;
@@ -346,11 +335,11 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   // The title — the record's display voice.
   ctx.fillStyle = INK;
   let size = 66;
-  ctx.font = `900 ${size}px ${DISPLAY}`;
+  ctx.font = `700 ${size}px ${DISPLAY}`;
   let head = wrapLines(ctx, String(track.title || '').toUpperCase(), MAXW, 3);
   while (head.length > 2 && size > 46) {
     size -= 4;
-    ctx.font = `900 ${size}px ${DISPLAY}`;
+    ctx.font = `700 ${size}px ${DISPLAY}`;
     head = wrapLines(ctx, String(track.title || '').toUpperCase(), MAXW, 3);
   }
   const headLine = Math.round(size * 1.08);
@@ -363,31 +352,31 @@ export async function buildTransmissionShareCard(track = {}, options = {}) {
   const bodyLine = 40;
   const maxBody = Math.max(2, Math.min(5, Math.floor(bodyRoom / bodyLine)));
   ctx.fillStyle = 'rgba(20,18,16,0.88)';
-  ctx.font = `500 26px ${MONO}`;
+  ctx.font = `400 26px ${MONO}`;
   const body = wrapLines(ctx, track.body, MAXW, maxBody);
   drawLines(ctx, body, PAD, y + 26, bodyLine);
 
   // Who gave it — never separated from the work.
   const sourceY = FOOTER_TOP - 175;
   ctx.fillStyle = MUTED;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   ctx.fillText('GIVEN BY', PAD, sourceY);
   ctx.fillStyle = INK;
-  ctx.font = `900 26px ${MONO}`;
+  ctx.font = `700 26px ${MONO}`;
   drawLines(ctx, wrapLines(ctx, track.artist || '', MAXW, 1), PAD, sourceY + 36, 34);
   ctx.fillStyle = MUTED;
-  ctx.font = `500 22px ${MONO}`;
+  ctx.font = `400 22px ${MONO}`;
   ctx.fillText(fitText(ctx, 'Free to listen · no paywall · no ad', MAXW), PAD, sourceY + 76);
 
   // Footer — the mark, the covenant, and where the track lives.
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
@@ -439,12 +428,7 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   const img = await loadImage(entry.image_url);
 
@@ -459,7 +443,7 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -490,7 +474,7 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
 
   // How well it is known, and what kind of entry it is.
   const badge = badgeFor(entry);
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badgeText = badge.label.toUpperCase();
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = badge.bg;
@@ -521,11 +505,11 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   // The title — the record's display voice, shrunk until it fits.
   ctx.fillStyle = INK;
   let size = 66;
-  ctx.font = `900 ${size}px ${DISPLAY}`;
+  ctx.font = `700 ${size}px ${DISPLAY}`;
   let head = wrapLines(ctx, String(entry.title || '').toUpperCase(), MAXW, 4);
   while (head.length > 3 && size > 46) {
     size -= 4;
-    ctx.font = `900 ${size}px ${DISPLAY}`;
+    ctx.font = `700 ${size}px ${DISPLAY}`;
     head = wrapLines(ctx, String(entry.title || '').toUpperCase(), MAXW, 4);
   }
   const headLine = Math.round(size * 1.08);
@@ -538,7 +522,7 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   const bodyLine = 40;
   const maxBody = Math.max(2, Math.min(7, Math.floor(bodyRoom / bodyLine)));
   ctx.fillStyle = 'rgba(20,18,16,0.88)';
-  ctx.font = `500 26px ${MONO}`;
+  ctx.font = `400 26px ${MONO}`;
   const body = wrapLines(ctx, entry.summary || entry.description || entry.details, MAXW, maxBody);
   drawLines(ctx, body, PAD, y + 26, bodyLine);
 
@@ -546,15 +530,15 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   // says so rather than leaving a blank for a reader to fill in themselves.
   const sourceY = FOOTER_TOP - 175;
   ctx.fillStyle = MUTED;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   ctx.fillText('WHO SAYS SO', PAD, sourceY);
   ctx.fillStyle = INK;
-  ctx.font = `900 26px ${MONO}`;
+  ctx.font = `700 26px ${MONO}`;
   const source = wrapLines(ctx, entry.source_name || 'Names no source on the record', MAXW, 2);
   drawLines(ctx, source, PAD, sourceY + 36, 34);
   if (entry.corroborating_source) {
     ctx.fillStyle = MUTED;
-    ctx.font = `500 22px ${MONO}`;
+    ctx.font = `400 22px ${MONO}`;
     ctx.fillText(fitText(ctx, `+ ${entry.corroborating_source}`, MAXW), PAD, sourceY + 42 + 34 * source.length);
   }
 
@@ -562,11 +546,11 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
@@ -596,12 +580,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   // Paper, cold scanline grain.
   ctx.fillStyle = PAPER;
@@ -614,7 +593,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -629,7 +608,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   // What it is — the record's own name for the page, and the one thing a stranger needs
   // to know before they open it.
   let y = 118;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badgeText = guide.badge || 'THE MANUAL';
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = INK;
@@ -657,7 +636,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   // The title — the record's display voice.
   ctx.fillStyle = INK;
   const size = 66;
-  ctx.font = `900 ${size}px ${DISPLAY}`;
+  ctx.font = `700 ${size}px ${DISPLAY}`;
   const head = wrapLines(ctx, String(guide.title || 'The Buttons').toUpperCase(), MAXW, 2);
   const headLine = Math.round(size * 1.08);
   const headBase = y + size;
@@ -666,7 +645,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
 
   // What the page is for, in the page's own words — never a paraphrase of them.
   ctx.fillStyle = 'rgba(20,18,16,0.88)';
-  ctx.font = `500 26px ${MONO}`;
+  ctx.font = `400 26px ${MONO}`;
   const body = wrapLines(ctx, guide.body, MAXW, 4);
   drawLines(ctx, body, PAD, y + 26, 40);
   y = y + 26 + 40 * Math.max(0, body.length - 1);
@@ -676,10 +655,10 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   if (inside.length) {
     y += 74;
     ctx.fillStyle = MUTED;
-    ctx.font = `900 20px ${MONO}`;
+    ctx.font = `700 20px ${MONO}`;
     ctx.fillText('WHAT IS INSIDE', PAD, y);
     ctx.fillStyle = INK;
-    ctx.font = `900 24px ${MONO}`;
+    ctx.font = `700 24px ${MONO}`;
     inside.forEach((item, i) => {
       ctx.fillText(fitText(ctx, item, MAXW), PAD, y + 44 + i * 40);
     });
@@ -689,7 +668,7 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   // same place however long the list above it runs.
   if (guide.closing) {
     ctx.fillStyle = MUTED;
-    ctx.font = `500 22px ${MONO}`;
+    ctx.font = `400 22px ${MONO}`;
     const close = wrapLines(ctx, guide.closing, MAXW, 3);
     drawLines(ctx, close, PAD, FOOTER_TOP - 160 - 34 * (close.length - 1), 34);
   }
@@ -698,11 +677,11 @@ export async function buildGuideShareCard(guide = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
@@ -731,12 +710,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, W, H);
@@ -748,7 +722,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -758,7 +732,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
 
   // The badge: who this card is for, said first.
   let y = 118;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badgeText = card.badge || 'FOR A CUSTODIAN';
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = INK;
@@ -778,7 +752,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   y += 44;
   ctx.fillStyle = INK;
   const size = 66;
-  ctx.font = `900 ${size}px ${DISPLAY}`;
+  ctx.font = `700 ${size}px ${DISPLAY}`;
   const head = wrapLines(ctx, String(card.title || 'The way in').toUpperCase(), MAXW, 2);
   const headLine = Math.round(size * 1.08);
   const headBase = y + size;
@@ -787,7 +761,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
 
   if (card.body) {
     ctx.fillStyle = 'rgba(20,18,16,0.88)';
-    ctx.font = `500 25px ${MONO}`;
+    ctx.font = `400 25px ${MONO}`;
     const body = wrapLines(ctx, card.body, MAXW, 2);
     drawLines(ctx, body, PAD, y + 24, 37);
     y = y + 24 + 37 * Math.max(0, body.length - 1);
@@ -797,15 +771,15 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   let stepY = y + 78;
   steps.forEach((step, i) => {
     ctx.fillStyle = SIGNAL;
-    ctx.font = `900 26px ${MONO}`;
+    ctx.font = `700 26px ${MONO}`;
     ctx.fillText(String(i + 1), PAD, stepY);
 
     ctx.fillStyle = INK;
-    ctx.font = `900 27px ${MONO}`;
+    ctx.font = `700 27px ${MONO}`;
     ctx.fillText(fitText(ctx, String(step.do || ''), MAXW - 54), PAD + 54, stepY);
 
     ctx.fillStyle = 'rgba(20,18,16,0.8)';
-    ctx.font = `500 24px ${MONO}`;
+    ctx.font = `400 24px ${MONO}`;
     const what = wrapLines(ctx, String(step.what || ''), MAXW - 54, 2);
     drawLines(ctx, what, PAD + 54, stepY + 37, 32);
 
@@ -814,7 +788,7 @@ export async function buildWayInShareCard(card = {}, options = {}) {
 
   if (card.closing) {
     ctx.fillStyle = MUTED;
-    ctx.font = `500 22px ${MONO}`;
+    ctx.font = `400 22px ${MONO}`;
     const close = wrapLines(ctx, card.closing, MAXW, 3);
     drawLines(ctx, close, PAD, FOOTER_TOP - 150 - 34 * (close.length - 1), 34);
   }
@@ -822,11 +796,11 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
@@ -859,12 +833,7 @@ export async function buildRecordShareCard(options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   // Paper, cold scanline grain.
   ctx.fillStyle = PAPER;
@@ -877,7 +846,7 @@ export async function buildRecordShareCard(options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -891,7 +860,7 @@ export async function buildRecordShareCard(options = {}) {
 
   // What it is, and the one promise that costs the record nothing to keep.
   let y = 132;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badge = 'THE RECORD';
   const badgeW = ctx.measureText(badge).width + 32;
   ctx.fillStyle = INK;
@@ -910,8 +879,14 @@ export async function buildRecordShareCard(options = {}) {
   // The record's own name, in the record's display voice — the loudest thing on the
   // card, and the only thing a stranger has to read.
   ctx.fillStyle = INK;
-  ctx.font = `900 104px ${DISPLAY}`;
-  drawLines(ctx, ['TOGETHER WE CAN', 'CHANGE CLIMATE'], PAD, y + 190, 112);
+  const titleLines = ['TOGETHER WE CAN', 'CHANGE CLIMATE'];
+  let titleSize = 104;
+  ctx.font = `700 ${titleSize}px ${DISPLAY}`;
+  while (titleLines.some(line => ctx.measureText(line).width > MAXW) && titleSize > 48) {
+    titleSize -= 2;
+    ctx.font = `700 ${titleSize}px ${DISPLAY}`;
+  }
+  drawLines(ctx, titleLines, PAD, y + 190, 112);
   y = y + 190 + 112;
 
   // The line it already prints under that name.
@@ -929,7 +904,7 @@ export async function buildRecordShareCard(options = {}) {
 
   // The covenant, said once, big, in the borrowed red. Nothing under it.
   ctx.fillStyle = MARK;
-  ctx.font = `900 150px ${MONO}`;
+  ctx.font = `700 150px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.fillText('x = x', W / 2, y + 520);
   ctx.textAlign = 'left';
@@ -938,7 +913,7 @@ export async function buildRecordShareCard(options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;

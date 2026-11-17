@@ -30,8 +30,7 @@ const SIGNAL = '#b3261e';
 const MARK = '#cc2d2a';
 const SIGNAL_BRIGHT = '#7fc9e4';
 const MUTED = '#5a5246';
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
-const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const ROWS = [
   { label: 'ONE ADDRESS', line: 'A record of what people are doing about the climate, with a source on every entry. No account needed to add one.' },
@@ -85,12 +84,7 @@ export async function buildInviteCard(person = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 72px Oswald'),
-      document.fonts.load('900 20px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, W, H);
@@ -102,7 +96,7 @@ export async function buildInviteCard(person = {}, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -115,7 +109,7 @@ export async function buildInviteCard(person = {}, options = {}) {
   ctx.textBaseline = 'alphabetic';
 
   let y = 118;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badge = keeper ? 'FOR THE CUSTODIAN' : 'YOU ARE INVITED';
   const badgeW = ctx.measureText(badge).width + 32;
   ctx.fillStyle = INK;
@@ -125,14 +119,14 @@ export async function buildInviteCard(person = {}, options = {}) {
 
   y += 64;
   ctx.fillStyle = INK;
-  ctx.font = `900 72px ${DISPLAY}`;
+  ctx.font = `700 72px ${DISPLAY}`;
   const head = wrap(ctx, name ? name.toUpperCase() : keeper ? 'THE KEYS' : 'A PLACE ON THE RECORD', MAXW, 2);
   const headBase = y + 72;
   head.forEach((line, i) => ctx.fillText(line, PAD, headBase + i * 78));
   y = headBase + 78 * (head.length - 1) + 40;
 
   ctx.fillStyle = MUTED;
-  ctx.font = `500 24px ${MONO}`;
+  ctx.font = `400 24px ${MONO}`;
   const intro = wrap(
     ctx,
     keeper
@@ -147,18 +141,18 @@ export async function buildInviteCard(person = {}, options = {}) {
   // The three things, said once each. No numbers, because the card is not a manual.
   rows.forEach((row) => {
     ctx.fillStyle = SIGNAL;
-    ctx.font = `900 18px ${MONO}`;
+    ctx.font = `700 18px ${MONO}`;
     ctx.fillText(row.label, PAD, y);
     y += 34;
     ctx.fillStyle = INK;
-    ctx.font = `500 23px ${MONO}`;
+    ctx.font = `400 23px ${MONO}`;
     const lines = wrap(ctx, row.line, MAXW, 3);
     lines.forEach((line, i) => ctx.fillText(line, PAD, y + i * 33));
     y += 33 * lines.length + 34;
   });
 
   ctx.fillStyle = MUTED;
-  ctx.font = `500 22px ${MONO}`;
+  ctx.font = `400 22px ${MONO}`;
   ctx.fillText(
     keeper ? 'A custodian puts the name on it. The record keeps the note.' : 'Together we can change climate.',
     PAD,
@@ -168,11 +162,11 @@ export async function buildInviteCard(person = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;

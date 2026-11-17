@@ -18,8 +18,7 @@ const SUN = '#ffd447';
 const INK = '#201e27';
 const LEAF = '#20785f';
 const MUTED = '#5c5648';
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
-const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const ORIGIN = 'https://green-stride-d47e043c.base44.app';
 
@@ -55,9 +54,7 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([document.fonts.load('900 66px Oswald'), document.fonts.load('900 20px ui-monospace')]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   const img = await loadImage(card.image);
 
@@ -68,7 +65,7 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, 0, W, 78);
   ctx.fillStyle = SUN;
-  ctx.font = `900 17px ${MONO}`;
+  ctx.font = `700 17px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('A LITTLE MISCHIEF. A BIGGER PICTURE.', W / 2, 40);
@@ -94,36 +91,36 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
 
   // The name, in the same shout as the page.
   ctx.fillStyle = INK;
-  ctx.font = `900 82px ${DISPLAY}`;
+  ctx.font = `700 82px ${DISPLAY}`;
   ctx.fillText('THE BIG PICTURE', PAD, y + 60);
   y += 108;
 
   // The tight description. No adjectives that do not earn their place.
   ctx.fillStyle = LEAF;
-  ctx.font = `900 19px ${MONO}`;
+  ctx.font = `700 19px ${MONO}`;
   ctx.fillText('CARTOONS FOR A CHANGING WORLD', PAD, y);
   y += 42;
 
   ctx.fillStyle = INK;
-  ctx.font = `500 31px ${MONO}`;
+  ctx.font = `400 31px ${MONO}`;
   const body = wrap(ctx, card.body, MAXW, 5);
   body.forEach((line, i) => ctx.fillText(line, PAD, y + i * 46));
   y += body.length * 46 + 30;
 
   // What the room is not. Said plainly, because a wall of drawings needs one honest line.
   ctx.fillStyle = MUTED;
-  ctx.font = `500 24px ${MONO}`;
+  ctx.font = `400 24px ${MONO}`;
   wrap(ctx, card.honest, MAXW, 3).forEach((line, i) => ctx.fillText(line, PAD, y + i * 36));
 
   // Footer: where it lives, and the mark.
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SUN;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = '#cc2d2a';
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = PAPER;

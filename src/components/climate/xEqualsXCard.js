@@ -4,7 +4,7 @@ const W = 1080;
 const H = 1350;
 const PAD = 84;
 const MAXW = W - PAD * 2;
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const letterSpacing = (g, value) => {
   if ('letterSpacing' in g) g.letterSpacing = value;
@@ -41,7 +41,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   // picture — were the least legible marks on it.
   const signal = color('signal');
   const muted = color('muted');
-  const sans = theme.getPropertyValue('--font-body').trim() || 'system-ui, sans-serif';
+  const { DISPLAY: sans, MONO } = await loadRecordCardFonts();
 
   g.fillStyle = paper;
   g.fillRect(0, 0, W, H);
@@ -50,7 +50,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.fillStyle = signal;
   g.fillRect(0, 772, W, 8);
   g.textBaseline = 'alphabetic';
-  g.font = `600 25px ${MONO}`;
+  g.font = `700 25px ${MONO}`;
   g.fillStyle = signal;
   letterSpacing(g, '4px');
   g.fillText('THE PRINCIPLE', PAD, 92);
@@ -59,7 +59,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.fillText('RECORD OF THE TIME', W - PAD, 92);
   letterSpacing(g, '0px');
 
-  g.font = `800 250px ${MONO}`;
+  g.font = `700 250px ${MONO}`;
   g.textAlign = 'center';
   const step = 180;
   ['x', '=', 'x'].forEach((mark, index) => {
@@ -81,7 +81,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
     g.font = `500 27px ${MONO}`;
     g.fillStyle = muted;
     g.fillText(number, PAD, y);
-    g.font = `600 43px ${sans}`;
+    g.font = `700 43px ${sans}`;
     g.fillStyle = ink;
     g.fillText(title, PAD + 83, y);
   });

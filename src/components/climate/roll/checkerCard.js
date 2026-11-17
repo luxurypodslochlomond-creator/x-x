@@ -36,8 +36,7 @@ const SIGNAL = '#b3261e';
 const MARK = '#cc2d2a';
 const SIGNAL_BRIGHT = '#7fc9e4';
 const MUTED = '#5a5246';
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
-const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 const MONTH_YEAR = { month: 'long', year: 'numeric' };
 const SHORT_DATE = { day: 'numeric', month: 'short', year: 'numeric' };
@@ -96,12 +95,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([
-      document.fonts.load('900 66px Oswald'),
-      document.fonts.load('900 22px ui-monospace'),
-    ]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   // Paper, cold scanline grain — the same sheet every other card leaves on.
   ctx.fillStyle = PAPER;
@@ -114,7 +108,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
   ctx.fillRect(0, 0, W, 74);
   ctx.fillStyle = BONE;
   ctx.globalAlpha = 0.7;
-  ctx.font = `900 15px ${MONO}`;
+  ctx.font = `700 15px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.', W / 2, 38);
@@ -128,7 +122,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
 
   // What this person is on the record — the fact, not a rank.
   let y = 118;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   const badgeText = person.is_keeper ? 'HOLDS THE RECORD’S KEYS' : 'CHECKS THIS RECORD';
   const badgeW = ctx.measureText(badgeText).width + 32;
   ctx.fillStyle = INK;
@@ -148,7 +142,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
   // Their name, in the record's display voice.
   ctx.fillStyle = INK;
   const size = 66;
-  ctx.font = `900 ${size}px ${DISPLAY}`;
+  ctx.font = `700 ${size}px ${DISPLAY}`;
   const nameLines = wrapLines(ctx, String(person.name || '').toUpperCase(), MAXW, 2);
   const headLine = Math.round(size * 1.08);
   const headBase = y + size;
@@ -158,7 +152,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
   // Their own words, quoted as they wrote them and never filled in for them.
   if (person.line) {
     ctx.fillStyle = 'rgba(20,18,16,0.88)';
-    ctx.font = `500 26px ${MONO}`;
+    ctx.font = `400 26px ${MONO}`;
     const body = wrapLines(ctx, person.line, MAXW, 4);
     drawLines(ctx, body, PAD, y + 26, 40);
     y = y + 26 + 40 * Math.max(0, body.length - 1) + 74;
@@ -168,11 +162,11 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
 
   // What they have actually signed — counted from the checks table, never typed in.
   ctx.fillStyle = MUTED;
-  ctx.font = `900 20px ${MONO}`;
+  ctx.font = `700 20px ${MONO}`;
   ctx.fillText('WHAT THEY HAVE SIGNED', PAD, y);
   y += 40;
   ctx.fillStyle = INK;
-  ctx.font = `900 28px ${MONO}`;
+  ctx.font = `700 28px ${MONO}`;
   const count = Number(person.signed_count || signed.length || 0);
   ctx.fillText(count ? `${count} ${count === 1 ? 'ENTRY' : 'ENTRIES'}` : 'NOTHING YET', PAD, y);
   y += 44;
@@ -186,7 +180,7 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
     ctx.fillText(fitText(ctx, item.title, MAXW - 190), PAD, y);
     ctx.textAlign = 'right';
     ctx.fillStyle = MUTED;
-    ctx.font = `500 18px ${MONO}`;
+    ctx.font = `400 18px ${MONO}`;
     ctx.fillText(when(item.when, SHORT_DATE).toUpperCase(), W - PAD, y);
     y += 38;
   });
@@ -194,14 +188,14 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
 
   if (count > signed.length && signed.length) {
     ctx.fillStyle = MUTED;
-    ctx.font = `500 20px ${MONO}`;
+    ctx.font = `400 20px ${MONO}`;
     ctx.fillText(`+ ${count - signed.length} more on the record`, PAD, y + 6);
   }
 
   // The sentence that does the real work: no rating of a person, and the record standing
   // behind what it can actually be held to — the entries, and their sources.
   ctx.fillStyle = MUTED;
-  ctx.font = `500 22px ${MONO}`;
+  ctx.font = `400 22px ${MONO}`;
   const close = wrapLines(
     ctx,
     'Being named here is not a rating. What the record stands behind is every entry: each one says who says so, and anyone can open it and check.',
@@ -214,11 +208,11 @@ export async function buildCheckerShareCard(person = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, 150);
   ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;

@@ -60,7 +60,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
 
   if (sent) {
     return (
-      <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+      <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
         <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
           <Check className="w-8 h-8 text-[#efe7d6]" />
         </div>
@@ -81,7 +81,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace' }}>
+    <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
       <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
         <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>Send an entry</h2>
         <button onClick={onClose} aria-label="Close" className="w-10 h-10 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors">

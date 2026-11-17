@@ -22,8 +22,7 @@ const INK = '#1a1612';
 const RED = '#b3261e';
 const MARK = '#cc2d2a';
 const MUTED = '#6b6258';
-const MONO = 'ui-monospace, SFMono-Regular, Menlo, monospace';
-const DISPLAY = "'Oswald', Impact, 'Arial Narrow', system-ui, sans-serif";
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 
 // The record's own home, never the platform's app address: an address printed on a card is
 // a citation, and a citation that resolves to a temporary host is a broken promise.
@@ -67,9 +66,7 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  try {
-    await Promise.all([document.fonts.load('900 88px Oswald'), document.fonts.load('900 19px ui-monospace')]);
-  } catch { /* the system faces still read fine */ }
+  const { DISPLAY, MONO } = await loadRecordCardFonts();
 
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, W, H);
@@ -78,7 +75,7 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   ctx.fillStyle = INK;
   ctx.fillRect(0, 0, W, 78);
   ctx.fillStyle = SUN;
-  ctx.font = `900 17px ${MONO}`;
+  ctx.font = `700 17px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillText('8TH CARTOONAFRICA BIENNIAL · BENIN CITY · 28–30 NOV 2026', W / 2, 40);
@@ -86,12 +83,12 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   ctx.textBaseline = 'alphabetic';
 
   ctx.fillStyle = RED;
-  ctx.font = `900 19px ${MONO}`;
+  ctx.font = `700 19px ${MONO}`;
   ctx.fillText('THE RECORD OF THE TIME · SUNDAY 29 NOVEMBER', PAD, 138);
 
   // The poster line, three beats, no sentence.
   ctx.fillStyle = INK;
-  ctx.font = `900 88px ${DISPLAY}`;
+  ctx.font = `700 88px ${DISPLAY}`;
   ['THE LAST', 'PANEL IS', 'YOURS.'].forEach((line, i) => ctx.fillText(line, PAD, 240 + i * 92));
 
   // The empty frame — the whole card.
@@ -103,11 +100,11 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   ctx.fillRect(fx, fy, fw, fh);
   corners(ctx, fx, fy, fw, fh, 34, INK, 6);
   ctx.fillStyle = RED;
-  ctx.font = `900 40px ${MONO}`;
+  ctx.font = `700 40px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.fillText('DRAW IT', W / 2, fy + 150);
   ctx.fillStyle = MUTED;
-  ctx.font = `500 20px ${MONO}`;
+  ctx.font = `400 20px ${MONO}`;
   ctx.fillText('on paper · pen or pencil · nothing to install', W / 2, fy + 196);
   ctx.textAlign = 'left';
 
@@ -118,21 +115,21 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   ctx.fillText('JANINE SELENDY · SUNDAY 29 NOVEMBER · ONLINE', PAD, 878);
 
   ctx.fillStyle = INK;
-  ctx.font = `500 25px ${MONO}`;
+  ctx.font = `400 25px ${MONO}`;
   wrap(ctx, card.body, MAXW, 3).forEach((line, i) => ctx.fillText(line, PAD, 926 + i * 36));
 
   ctx.fillStyle = MUTED;
-  ctx.font = `500 20px ${MONO}`;
+  ctx.font = `400 20px ${MONO}`;
   wrap(ctx, card.honest, MAXW, 3).forEach((line, i) => ctx.fillText(line, PAD, 1046 + i * 30));
 
   ctx.fillStyle = INK;
   ctx.fillRect(0, FOOTER_TOP, W, H - FOOTER_TOP);
   ctx.fillStyle = SUN;
-  ctx.font = `900 24px ${MONO}`;
+  ctx.font = `700 24px ${MONO}`;
   ctx.fillText('RECORD OF THE TIME', PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'right';
   ctx.fillStyle = MARK;
-  ctx.font = `900 22px ${MONO}`;
+  ctx.font = `700 22px ${MONO}`;
   ctx.fillText('x = x', W - PAD, FOOTER_TOP + 52);
   ctx.textAlign = 'left';
   ctx.fillStyle = PAPER;

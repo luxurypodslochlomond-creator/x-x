@@ -8,7 +8,7 @@
    The reading column is now a real sheet — warm paper at ninety-five per cent — so a
    sentence sits on paper and the cover does its work at the edges, where a cover goes. */
 .record-pages {
-  --font-reading: var(--font-record-reading);
+  --font-reading: var(--font-record-ui), var(--font-record-reading);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
   /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
@@ -137,10 +137,10 @@ html[data-tongue="chr"] .record-pages { --font-reading: var(--font-script); }
    Nothing here touches any other tongue: every rule is behind html[data-tongue="th"], which
    is only ever set when a reader has chosen Thai. */
 html[data-tongue="th"] .climate-record {
-  --record-display: 'Source Serif 4', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, serif;
+  --record-display: 'Record UI', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, sans-serif;
 }
 html[data-tongue="th"] .record-pages {
-  --font-reading: 'Source Serif 4', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, system-ui, serif;
+  --font-reading: 'Record UI', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, system-ui, sans-serif;
 }
 /* An ID beats the !important rhythm rules above without having to repeat them, and it keeps
    the whole override in one place instead of sprinkling !important through the file. */
@@ -194,7 +194,7 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
 
    Sizes are corrected from below only. Nothing is made smaller, so no layout tightens
    around a word that used to fit. */
-.record-pages :is(h1, h2, h3, h4):not(.record-home-title) {
+.record-pages :is(h1, h2, h3, h4, h5, h6):not(.record-home-title) {
   font-family: var(--font-display) !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em !important;

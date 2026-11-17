@@ -9,7 +9,7 @@
   opacity: .15;
 }
 .record-endpaper-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-family: var(--font-record-ui);
   font-size: 29px;
   font-weight: 700;
   letter-spacing: -.065em;

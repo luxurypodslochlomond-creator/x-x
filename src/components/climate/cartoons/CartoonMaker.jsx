@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { base44 } from '@/api/base44Client';
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 import { Undo2, Eraser, Sparkles, Loader2, Check, ArrowRight } from 'lucide-react';
 
 // ── THE CARTOON MACHINE ───────────────────────────────────────────────────────
@@ -197,7 +198,8 @@ export default function CartoonMaker() {
   // The panels and the words are drawn into one picture on the device: the thing a child
   // gets to keep, share, or print for the fridge. Only the panels that were actually used
   // go in, so a one-panel cartoon is a one-panel cartoon rather than two blank frames.
-  const compose = (name, origin) => {
+  const compose = async (name, origin) => {
+    const { DISPLAY, MONO } = await loadRecordCardFonts();
     const n = used.length;
     const W = M * 2 + PW * n + GAP * (n - 1);
     const H = M + PW + CAP + FOOT + M;
@@ -242,7 +244,7 @@ export default function CartoonMaker() {
 
       if (panel.caption.trim()) {
         ctx.fillStyle = '#1a1612';
-        ctx.font = '21px Georgia, "Times New Roman", serif';
+        ctx.font = `400 21px ${MONO}`;
         wrapText(ctx, panel.caption.trim(), PW - 14)
           .slice(0, 4)
           .forEach((line, k) => ctx.fillText(line, x, y + PW + 34 + k * 27));
@@ -257,15 +259,15 @@ export default function CartoonMaker() {
     ctx.lineTo(W - M, fy - 14);
     ctx.stroke();
     ctx.fillStyle = '#1a1612';
-    ctx.font = 'bold 20px Georgia, "Times New Roman", serif';
+    ctx.font = `700 20px ${DISPLAY}`;
     ctx.fillText(name ? `Drawn by ${name}` : 'A cartoon for the climate', M, fy + 12);
     if (origin) {
       ctx.fillStyle = '#6b6258';
-      ctx.font = '15px Georgia, "Times New Roman", serif';
+      ctx.font = `400 15px ${MONO}`;
       ctx.fillText(origin.slice(0, 58), M, fy + 36);
     }
     ctx.fillStyle = '#b3261e';
-    ctx.font = 'bold 13px "Courier New", Courier, monospace';
+    ctx.font = `700 13px ${DISPLAY}`;
     ctx.textAlign = 'right';
     ctx.fillText('THE BIG PICTURE · x = x', W - M, fy + 12);
     ctx.textAlign = 'left';
