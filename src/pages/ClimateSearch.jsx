@@ -7,6 +7,8 @@ import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
 import BaseOnePlate from '@/components/climate/search/BaseOnePlate';
+import BaseOneAnswer from '@/components/climate/search/BaseOneAnswer';
+import useBaseOneAnswer from '@/components/climate/search/useBaseOneAnswer';
 import SearchAnswerLine from '@/components/climate/search/SearchAnswerLine';
 import SearchSectionHead from '@/components/climate/search/SearchSectionHead';
 
@@ -36,6 +38,8 @@ const SECTIONS = [
 
 export default function ClimateSearch() {
   const { query, start, back, data, loading, error, local } = useRecordSearch();
+  // The record answers in words first, then shows what it answered from.
+  const { answer } = useBaseOneAnswer(query);
 
   const results = data?.results;
   const sections = results ? SECTIONS.map((s) => ({ ...s, items: results[s.key] || [] })).filter((s) => s.items.length > 0) : [];
@@ -79,6 +83,9 @@ export default function ClimateSearch() {
 
       {!loading && !error && data && (
         <div className="record-search-results mt-5">
+          {/* The answer comes first: one thing said, its origin cited, and what it does not
+              cover named in the open. The entries below are the evidence, not the answer. */}
+          {answer && <div className="mb-4"><BaseOneAnswer answer={answer} /></div>}
           <SearchAnswerLine data={data} local={local} aboutCount={about.length} />
 
           {sections.length === 0 && about.length === 0 ? (

@@ -59,14 +59,14 @@ export default function BaseOnePlate({ statement }) {
 
         {statement && (
           <p
-            className="relative mt-2.5 max-w-[44ch] text-[13px] leading-relaxed text-record-paper/75"
+            className="relative mt-2.5 hidden max-w-[44ch] text-[13px] leading-relaxed text-record-paper/75 sm:block"
             style={{ fontFamily: 'var(--font-reading)' }}
           >
             {statement}
           </p>
         )}
 
-        <ul className="relative mt-4 grid grid-cols-2 gap-x-3 gap-y-1.5 sm:grid-cols-3">
+        <ul className="relative mt-4 hidden grid-cols-2 gap-x-3 gap-y-1.5 sm:grid sm:grid-cols-3">
           {HOLDS.map((hold) => (
             <li
               key={hold.label}
