@@ -70,6 +70,16 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
       onSubmit={submit}
       className="border-y-2 border-record-ink bg-cartoon-sun px-2.5 pb-2 pt-2.5"
     >
+      {/* ── WHO IS ANSWERING ─────────────────────────────────────────────────────
+          Brian, 17 November: "you sure search shouldn't be BASE 1? … why search, that's
+          old." So the box says who is reading: BASE 1, the record's own index, in the
+          same mono caps the foot is set in — with its name in the mark's red, the way the
+          foot names the two things that are not people. */}
+      <div className="mb-1.5 flex flex-wrap items-baseline gap-x-2 px-0.5">
+        <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-record-red">BASE 1</span>
+        <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-record-ink/70">The record’s own index</span>
+      </div>
+
       <div
         ref={box}
         className="flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-paper shadow-[0_2px_0_0_rgba(20,18,16,0.16)] focus-within:border-record-red"
@@ -88,8 +98,8 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
           onBlur={() => setWriting(false)}
           onCompositionStart={() => { composing.current = true; }}
           onCompositionEnd={() => { composing.current = false; }}
-          placeholder="A place, a name, a word…"
-          aria-label="Search the record"
+          placeholder="Ask BASE 1 — a place, a name, a word…"
+          aria-label="Ask BASE 1"
           enterKeyHint="search"
           autoComplete="off"
           autoCapitalize="none"
@@ -105,7 +115,7 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
         <RecordVoiceSearch variant="mark" onTranscript={onVoice} onMessage={noteVoice} disabled={loading} />
         <button
           type="submit"
-          aria-label="Search the record"
+          aria-label="Ask BASE 1"
           disabled={loading || draft.trim().length < 2}
           className="grid h-[52px] w-[56px] shrink-0 place-items-center bg-record-red text-record-paper transition-colors active:bg-record-ink disabled:opacity-60"
         >

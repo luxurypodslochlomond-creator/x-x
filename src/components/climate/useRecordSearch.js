@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
+import searchOnDevice from '@/components/climate/recordLocalSearch';
 
 // The address owns the submitted search. Draft typing stays inside the input.
 // Back/forward therefore restores both the words and their matching results.
@@ -21,9 +22,19 @@ export default function useRecordSearch() {
   const search = useQuery({
     queryKey: ['climate-record-search', query.trim(), lang],
     enabled: query.trim().length >= 2,
+    // ── AND IF THE INDEX CANNOT BE REACHED, THE DEVICE READS THE RECORD ITSELF ──────
+    // Brian, 17 November: "unable to be broken by any developer, any device denial or any
+    // intelligence attached." A refused call, a dead network or an outside service having
+    // a bad afternoon now falls back to reading the published record straight from the
+    // reader's own browser — same entries, same origins, nothing asked of anybody else.
     queryFn: async () => {
-      const response = await base44.functions.invoke('climateSearch', { q: query.trim(), lang });
-      return response.data;
+      try {
+        const response = await base44.functions.invoke('climateSearch', { q: query.trim(), lang });
+        if (response?.data?.error) throw new Error(response.data.error);
+        return response.data;
+      } catch (failure) {
+        return await searchOnDevice(query.trim());
+      }
     },
     staleTime: 60000,
     retry: false,
@@ -44,6 +55,7 @@ export default function useRecordSearch() {
     query, start, back,
     data: active ? search.data : null,
     loading: active && search.isFetching,
+    local: Boolean(active && search.data?.local),
     error: active && search.isError ? 'The record could not be searched just now. Please try again.' : null,
   };
 }

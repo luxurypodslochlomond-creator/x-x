@@ -37,7 +37,7 @@ export const PRIMARY_NAV = [
   // not distract by inviting music… it will take viewers away from the entries of
   // solutions and crises." The page still exists, and still holds only the record's own
   // theme, but nothing on the record invites anybody to it any more.
-  { label: 'Search', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Find a place, subject or source.' },
+  { label: 'BASE 1', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Ask the record’s own index — a place, a subject, a source.' },
 ];
 
 // ── THE RAIL'S SECOND ROW ─────────────────────────────────────────────────────

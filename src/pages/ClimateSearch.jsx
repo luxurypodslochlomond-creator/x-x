@@ -32,7 +32,7 @@ const SECTIONS = [
 ];
 
 export default function ClimateSearch() {
-  const { query, start, back, data, loading, error } = useRecordSearch();
+  const { query, start, back, data, loading, error, local } = useRecordSearch();
 
   const results = data?.results;
   const sections = results ? SECTIONS.map((s) => ({ ...s, items: results[s.key] || [] })).filter((s) => s.items.length > 0) : [];
@@ -44,10 +44,10 @@ export default function ClimateSearch() {
       mobileCompact
       onBack={back}
       backLabel="Back"
-      eyebrow="Search the record"
+      eyebrow="BASE 1 · the record’s own index"
       marker="Every entry carries its origin"
-      title="Ask the record"
-      statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from."
+      title="Ask BASE 1"
+      statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead."
       returnTo="/TogetherChangeClimate"
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
@@ -86,6 +86,12 @@ export default function ClimateSearch() {
             {data.loose && (
               <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
                 No entry matched all of your words — the entries below match part of the question.
+              </p>
+            )}
+            {local && (
+              <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
+                Your own device read the record for this one — the index could not be reached,
+                so nothing was asked of anybody else.
               </p>
             )}
             {data.translatedFrom && (

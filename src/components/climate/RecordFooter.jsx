@@ -56,7 +56,11 @@ export default function RecordFooter() {
           machine's mono caps — the same voice the borrowed sentence is set in at the top of
           every page. One band, three lines, and the names in ink. */}
       <div className="mt-10 bg-cartoon-sun px-4 py-7 lg:px-10">
-        <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-record-ink/65 lg:text-[10px]">
+        {/* Brian, 17 November: "platform record 2026 and universal frequency should be red
+            like x = x." So the two lines on this plate that name the thing itself — the
+            platform and the company — are printed in the mark's own red, and the three
+            names and the place stay ink. The red belongs to the record, not to a person. */}
+        <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-record-mark lg:text-[10px]">
           Platform / Record · 2026
         </p>
         <p className="mt-3 font-mono text-[10px] uppercase leading-tight tracking-[0.22em] text-record-ink lg:text-[11px]">
@@ -87,7 +91,7 @@ export default function RecordFooter() {
             scraper to collect. */}
         <a
           href="mailto:family@uf51.love"
-          className="mt-5 inline-block border-b border-record-ink/45 pb-0.5 font-mono text-[10px] uppercase leading-tight tracking-[0.2em] text-record-ink transition-colors hover:border-record-red hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red lg:text-[11px]"
+          className="mt-5 inline-block border-b border-record-mark/60 pb-0.5 font-mono text-[10px] uppercase leading-tight tracking-[0.2em] text-record-mark transition-colors hover:border-record-red hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red lg:text-[11px]"
         >
           Universal Frequency 51 CIC
         </a>
