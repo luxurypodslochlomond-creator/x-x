@@ -1,0 +1,59 @@
+/* Desktop surfaces: the fixed painting is the ground; only content owns paper.
+   Structural wrappers and unfinished grid rows must never paint over it. */
+@media screen and (min-width: 1024px) {
+  .record-pages .record-continuous-band { background-color: rgb(var(--record-ink) / .58); }
+  .record-pages .record-home-page > .record-image-section,
+  .record-pages .record-home-page > .record-entry-sections,
+  .record-pages .record-home-sections { background-color: transparent; }
+  .record-home-page .record-image-section { margin-block: 1.5rem; padding-block: 0; }
+  .record-home-page .record-image-section .record-section-heading {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-color: rgb(var(--record-signal));
+    background-color: rgb(var(--record-ink) / .9);
+  }
+  .record-home-page .record-image-section .record-section-heading h2 { color: rgb(var(--record-signal)); }
+  .record-home-sections > section:not(.record-home-governance) {
+    margin: 1.5rem 2.5rem;
+    padding: 2rem;
+    background-color: rgb(var(--record-paper));
+  }
+  .record-home-page .record-home-governance { background-color: rgb(var(--record-ink) / .92); }
+  .record-pages .record-shell-opening h1 { font-size: clamp(2rem, 3vw, 3.5rem); }
+
+  /* The wire's controls, entries and note are separate sheets, not one tall slab. */
+  .record-pages .record-reading-panel > .record-wire-column { padding: 0; background-color: transparent; }
+  .record-wire-controls,
+  .record-wire-note { padding: 2rem; background-color: rgb(var(--record-paper)); }
+  .record-wire-list > article { background-color: rgb(var(--record-paper)); }
+
+  /* Legacy standalone pages use the same ground without changing their content. */
+  .record-pages .record-reach-page,
+  .record-pages .record-brief-page { background-color: transparent; }
+  .record-pages .record-page-plate { background-color: rgb(var(--record-paper)); }
+  .record-reach-page > .record-page-plate {
+    margin: 1.5rem 2.5rem;
+    padding: 2rem;
+  }
+  .record-brief-page > .brief-page { margin-block: 2rem; padding: 2rem; }
+  .record-map-page > :is(.record-map-plate, .record-map-near, .record-map-note) { margin: 1.5rem 2.5rem; width: auto; }
+  .record-pages .record-map-near { background-color: rgb(var(--record-paper)); }
+  .climate-record #x-equals-x.covenant-page { background-color: transparent; }
+  .climate-record #x-equals-x .covenant-epigraph,
+  .climate-record #x-equals-x .covenant-hero { background-color: rgb(var(--record-ink) / .58); }
+  .climate-record #x-equals-x .covenant-hero :is(.record-cover, .covenant-hero-veil, .covenant-hero-scan) { display: none; }
+  .climate-record #x-equals-x .covenant-band--centre { margin: 1.5rem 2.5rem 0; }
+  .climate-record #x-equals-x .covenant-close { margin-bottom: 2rem; padding: 2rem; background-color: rgb(var(--record-paper)); }
+
+  /* Explore remains in the masthead, but its unused columns reveal the same painting. */
+  .record-explore-panel { background-color: rgb(var(--record-ink) / .58); }
+  .record-explore-heading { padding: .25rem 1rem; background-color: rgb(var(--record-signal)); }
+  .record-explore-group { align-self: start; padding: 1rem; border-top: 3px solid rgb(var(--record-red)); background-color: rgb(var(--record-paper)); }
+  .record-explore-guide { padding: .75rem 1rem; background-color: rgb(var(--record-paper)); }
+}
+
+/* These are the existing phone surfaces; desktop alone opens their surrounding space. */
+@media (max-width: 1023px) {
+  .record-home-sections,
+  .record-home-page > .record-entry-sections { background-color: rgb(var(--record-bone)); }
+}

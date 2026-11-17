@@ -83,7 +83,8 @@ export default function ClimateWire() {
       </RecordPaintedBand>
 
       <div className="record-reading-panel">
-      <div className="record-reading-column max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-12">
+      <div className="record-reading-column record-wire-column max-w-2xl lg:max-w-3xl mx-auto px-4 py-8 lg:py-12">
+      <div className="record-wire-controls">
 
         {/* Send an entry, and how well a claim is known. On a desktop these are one
             toolbar; on a phone they stack exactly as they did before. */}
@@ -162,8 +163,9 @@ export default function ClimateWire() {
           <Link to="/ClimateMethod" className="text-[10px] font-black font-mono uppercase tracking-wide text-[#e2602a] underline">How this record is made</Link>
         </div>
 
+      </div>
         {/* The wire itself */}
-        <div className="mt-4 lg:mt-6 space-y-5 lg:space-y-6">
+        <div className="record-wire-list mt-4 lg:mt-6 space-y-5 lg:space-y-6">
           {loading && (
             <div className="py-14 flex items-center justify-center">
               <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#0f5f7a' }} />
@@ -184,7 +186,7 @@ export default function ClimateWire() {
         </div>
 
         {/* Why it looks like this */}
-        <div className="mt-8 lg:mt-12 bg-[#141210]/5 border-l-4 border-l-[#141210] p-4 lg:p-6">
+        <div className="record-wire-note mt-8 lg:mt-12 bg-[#141210]/5 border-l-4 border-l-[#141210] p-4 lg:p-6">
           <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-2">Why there is nothing to click</p>
           <p className="text-[11px] font-mono leading-relaxed text-[#141210]">
             No likes, no counters, no most-read. Attention is the thing that turns a news page into noise, so the wire does not measure it. Passing an entry on is not a counter — it is what the wire is for. Entries sit in date order and are read or not read. What a reader gets instead is the source, how well the claim is known, and one plain line on what can be copied.

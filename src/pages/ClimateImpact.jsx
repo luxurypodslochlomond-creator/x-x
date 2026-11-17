@@ -158,7 +158,7 @@ export default function ClimateImpact() {
   const regions = Array.isArray(stats?.regions) ? stats.regions : [];
 
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="record-reach-page min-h-screen bg-record-bone text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       {/* The same bar, the same way back, as every other page of the record. */}
       <RecordBackBar eyebrow="The record · Reach" />
 
@@ -167,7 +167,7 @@ export default function ClimateImpact() {
 
       {/* ── THE RECEIPTS — two columns on a desktop, one calm column on a phone ── */}
       {regions.length > 0 && (
-        <div id="nations" className="px-4 lg:px-8 py-6 bg-[#efe7d6]">
+        <div id="nations" className="record-page-plate px-4 lg:px-8 py-6 bg-record-paper">
           <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <MapPin className="w-4 h-4 text-[#b3261e]" />
@@ -198,7 +198,7 @@ export default function ClimateImpact() {
       )}
 
       {countries.length > 0 && (
-        <div id="countries" className={`px-4 lg:px-8 py-6 bg-[#efe7d6] ${regions.length ? 'border-t border-[#141210]/10' : ''}`}>
+        <div id="countries" className={`record-page-plate px-4 lg:px-8 py-6 bg-record-paper ${regions.length ? 'border-t border-[#141210]/10' : ''}`}>
           <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <Users className="w-4 h-4 text-[#1e3a2b]" />
@@ -226,13 +226,13 @@ export default function ClimateImpact() {
       )}
 
       {/* Reading and acting, side by side on a desktop: the two halves of the same signal. */}
-      <div className="mx-auto max-w-[1100px] lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+      <div className="record-page-plate mx-auto max-w-[1100px] lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
         <WorldReadingFeed stories={stats?.top_stories || []} />
         <WorldActionFeed actions={stats?.upcoming_actions || []} />
       </div>
 
       {/* Self-identification — "Where are you reading from?" */}
-      <div className="bg-[#f7f1e5] border-y border-[#141210]/10">
+      <div className="record-page-plate bg-record-paper border-y border-record-ink/10">
         <div className="mx-auto max-w-2xl px-4 py-6">
           <div className="flex items-start gap-2.5 mb-3">
             <Heart className="w-4 h-4 text-[#b3261e] flex-shrink-0 mt-0.5" />
@@ -278,7 +278,7 @@ export default function ClimateImpact() {
       </div>
 
       {!counted && (
-        <div className="px-4 py-16 text-center">
+        <div className="record-page-plate px-4 py-16 text-center">
           <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mx-auto">
             The counts could not be reached from here just now. Nothing is being hidden and nothing
@@ -288,7 +288,7 @@ export default function ClimateImpact() {
       )}
 
       {counted && total === 0 && (
-        <div className="px-4 py-16 text-center">
+        <div className="record-page-plate px-4 py-16 text-center">
           <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
             The record is live. As it is read, this page fills: every read counted, every nation a reader names, and a place only when a reader's own device says where it is.
@@ -307,7 +307,7 @@ export default function ClimateImpact() {
           foot inside a book. What was worth keeping is one sentence, and it is the promise
           rather than the decoration: nothing about a reader is stored. The colophon closes
           the sheet, as it does on every other page. */}
-      <div className="mx-auto max-w-2xl px-4 pb-1 pt-4">
+      <div className="record-page-plate mx-auto max-w-2xl px-4 pb-1 pt-4">
         <p className="text-center text-[10.5px] leading-relaxed text-[#5a5246]" style={{ fontFamily: 'var(--font-reading)' }}>
           No address is stored and nobody is named. One entry opened is one read, counted once
           from each place in half an hour — so every figure here is reads, never people. A place

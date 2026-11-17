@@ -4,6 +4,7 @@ import { IMAGES, RECORD_COVER_MOBILE } from '@/components/climate/categoryImages
 import '@/components/climate/record-reading.css';
 import '@/components/climate/record-layout.css';
 import '@/components/climate/record-mobile.css';
+import '@/components/climate/record-surfaces.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';
@@ -194,9 +195,9 @@ export default function ClimateLayout({ children, currentPage }) {
           off the top is a way through you have to go looking for, and deep in a long page
           there is nothing at all above you saying which record you are standing in. It pins
           the same everywhere, and every jump down to the record allows for its height. */}
-      <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
+      <header className="sticky top-0 z-50 text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
-        <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
+        <div className={`mx-auto max-w-[1100px] bg-record-paper px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           {/* ── THE NAME OPENS A WORKED ROOM, AND ONLY A WORKED ROOM ────────────────
               On a page that is read, the record's name at the top said what the yellow
               line beneath it already said, in a second voice, and took forty pixels of a

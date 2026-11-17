@@ -75,17 +75,14 @@ html[data-tongue="chr"] .climate-record .record-header-type {
 .record-pages .twcc-scanlines::before { content: none; }
 .record-pages :is(input, textarea, select):not(dialog *):not([role="dialog"] *) { font-size: 1rem; }
 
-/* Panels are surfaces, not holes. A plate, a callout, a note kept on the record is a
-   piece of paper laid on the page, so it holds a colour instead of dissolving into the
-   picture behind it. */
-.record-pages :is(div, section, article, p)[class~="bg-[#efe7d6]"]:not(dialog *):not([role="dialog"] *),
-.record-pages :is(div, section, article, p)[class~="bg-[#f4efe4]"]:not(dialog *):not([role="dialog"] *),
-.record-pages :is(div, section, article)[class~="bg-record-paper"]:not(dialog *):not([role="dialog"] *),
-.record-pages :is(div, section, article)[class~="bg-record-bone"]:not(dialog *):not([role="dialog"] *) {
-  background-color: rgb(var(--record-bone));
-}
-.record-pages :is(div, section, article)[class~="bg-[#f7f1e5]"]:not(dialog *):not([role="dialog"] *) {
-  background-color: rgb(var(--record-paper) / .6);
+/* Legacy handset surfaces are unchanged. On desktop the actual content classes own
+   their paper; recolouring every div here also repainted transparent layout gaps. */
+@media (max-width: 1023px) {
+  .record-pages :is(div, section, article, p)[class~="bg-[#efe7d6]"]:not(dialog *):not([role="dialog"] *),
+  .record-pages :is(div, section, article, p)[class~="bg-[#f4efe4]"]:not(dialog *):not([role="dialog"] *),
+  .record-pages :is(div, section, article)[class~="bg-record-paper"]:not(dialog *):not([role="dialog"] *),
+  .record-pages :is(div, section, article)[class~="bg-record-bone"]:not(dialog *):not([role="dialog"] *) { background-color: rgb(var(--record-bone)); }
+  .record-pages :is(div, section, article)[class~="bg-[#f7f1e5]"]:not(dialog *):not([role="dialog"] *) { background-color: rgb(var(--record-paper) / .6); }
 }
 
 /* Older pages with a solid opening now use the same plate as the shared shell.

@@ -21,7 +21,7 @@ import { ArrowRight } from 'lucide-react';
    ragged against the left edge of a column it does not fill. */
 export default function ClimateMapPage() {
   return (
-    <div className="climate-record relative min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="climate-record record-map-page relative min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow="The record · Map" />
 
       {/* Covenant band — the mark every page of the record carries, and the way to it. */}
@@ -63,7 +63,7 @@ export default function ClimateMapPage() {
           every coast on Earth as a stipple of ink, equirectangular, so the Arctic is at the
           top edge and Antarctica along the bottom and the whole world fits whatever frame
           it is given. Phone and desktop see the same planet, drawn the same way. */}
-      <div className="w-full bg-[#efe7d6] border-b-2 border-[#141210]/40">
+      <div className="record-map-plate w-full bg-record-paper border-b-2 border-record-ink/40">
         <div className="max-w-[1100px] mx-auto px-4 lg:px-10 py-6 lg:py-8">
           <RecordWorldMap />
         </div>
@@ -71,11 +71,11 @@ export default function ClimateMapPage() {
 
       {/* The plate says where the record stands. This says what is happening there soon —
           the only question that turns reading a map into turning up somewhere. */}
-      <div className="record-reading-panel"><NextActionNear /></div>
+      <div className="record-reading-panel record-map-near"><NextActionNear /></div>
 
       {/* What a mark means, and what the plate will not do. One statement, so it sits in
           the middle of its own measure instead of hanging off the left of a wide column. */}
-      <div className="record-reading-panel max-w-[1100px] mx-auto px-4 lg:px-10 py-7 lg:py-9 text-center">
+      <div className="record-reading-panel record-map-note max-w-[1100px] mx-auto px-4 lg:px-10 py-7 lg:py-9 text-center">
         <p className="mx-auto max-w-[46ch] text-[13px] lg:text-[15px] leading-[1.75] text-[#141210]/80" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>
           A mark is only ever set where an entry says it is, to the region and no finer. An entry with no
           place it can honestly be put is not guessed at and not dropped — it is simply not on the plate,

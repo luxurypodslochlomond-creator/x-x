@@ -606,7 +606,7 @@ export default function TogetherChangeClimate() {
       </div>
 
       {/* ── CONTENT ── */}
-      <div id="record-entries" ref={contentRef} className="record-entry-sections bg-[#efe7d6]">
+      <div id="record-entries" ref={contentRef} className="record-entry-sections">
         {loading ? (
           <div className="flex flex-col items-center py-20">
             <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />
@@ -686,7 +686,7 @@ export default function TogetherChangeClimate() {
           </>
         )}
 
-        <div className="bg-record-bone">
+        <div className="record-home-sections">
         {/* ── GROUPS — Janine's spec, item 10: people working on the same thing in an area can share
                directly. The door is on the page, not in an email: an organiser starts their own
                gathering, and the record carries ONLY the one contact line they chose to publish.
@@ -765,7 +765,7 @@ export default function TogetherChangeClimate() {
         <DefinitionsBand heading={t.defs} />
 
         {/* ── GOVERNANCE ── */}
-        <section className="border-t-4 border-record-red bg-record-ink px-4 py-8 text-record-paper lg:px-10 lg:py-14">
+        <section className="record-home-governance border-t-4 border-record-red bg-record-ink px-4 py-8 text-record-paper lg:px-10 lg:py-14">
           <h2 className="mb-5 font-display text-[27px] font-bold uppercase leading-tight text-record-signal lg:text-[42px]">{t.govern}</h2>
           <p className="max-w-full font-body text-[15px] leading-[1.75] text-record-paper lg:max-w-[640px]">{t.govern_body}</p>
           {/* The two ways out of this paragraph, side by side and the same size. They were a

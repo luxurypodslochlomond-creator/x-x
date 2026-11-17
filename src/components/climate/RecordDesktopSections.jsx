@@ -11,10 +11,10 @@ export default function RecordDesktopSections({ onNavigate }) {
     ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: isKeeper ? 'Custodians’ room' : 'Witnesses’ room', to: '/ClimateKeeperRoom' }] }]
     : CONTENT_GROUPS;
   return (
-    <div className="grid grid-cols-4 gap-x-6 gap-y-5">
+    <div className="grid grid-cols-4 items-start gap-4 font-body">
       {groups.map(({ title, doors }) => (
-        <section key={title} aria-label={title}>
-          <h2 className="mb-2 border-b border-record-ink/20 pb-2 text-xs font-bold uppercase tracking-wide text-record-muted">{title}</h2>
+        <section key={title} aria-label={title} className="record-explore-group">
+          <h2 className="mb-2 border-b border-record-ink/20 pb-2 font-display text-sm font-bold uppercase tracking-tight text-record-red">{title}</h2>
           <ul className="space-y-1">
             {doors.map(({ label, to, what }) => {
               const Mark = markFor(to);
