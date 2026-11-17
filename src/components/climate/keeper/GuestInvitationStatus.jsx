@@ -3,11 +3,14 @@ import { MarkLetter, MarkStep } from '@/components/climate/keeper/TrailMarks';
 
 const date = (value) => new Date(value).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 export default function GuestInvitationStatus({ row }) {
-  const needsEmail = (!row.joined_at && (!row.sign_in_sent_at || row.sign_in_error)) || !row.notice_sent_at || row.notice_error;
+  const failed = Boolean(row.sign_in_error || row.notice_error);
+  const recorded = Boolean(row.joined_at || row.sign_in_sent_at) && Boolean(row.notice_sent_at);
+  const line = !row.active ? 'Access paused' : failed ? 'Invitation needs attention' : recorded ? 'Emails accepted for sending' : 'No invitation recorded yet';
+  const tone = !row.active ? 'text-record-muted' : failed ? 'text-record-red' : recorded ? 'text-record-botanical' : 'text-record-muted';
   return (
     <div className="mt-2 space-y-1 text-sm">
-      <div className={`flex items-center gap-1.5 ${needsEmail ? 'text-record-red' : 'text-record-botanical'}`}>
-        <MarkLetter size={16} />{!row.active ? 'Access paused' : needsEmail ? 'Invitation needs attention' : 'Emails accepted for sending'}
+      <div className={`flex items-center gap-1.5 ${tone}`}>
+        <MarkLetter size={16} />{line}
       </div>
       {row.joined_at && <div className="flex items-center gap-1.5 text-record-botanical"><MarkStep size={16} />Joined {date(row.joined_at)}</div>}
       {row.sign_in_error && <div className="break-words text-record-red">Sign-in email: {row.sign_in_error}</div>}
