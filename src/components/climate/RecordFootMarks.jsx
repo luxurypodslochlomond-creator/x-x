@@ -158,26 +158,36 @@ export function MarkPencil({ size = 26, className = '' }) {
 
 // What travels. A message going out in dots and dashes — the oldest way anyone found
 // to send a thing further than a voice reaches.
+// ── THE WIRE, REDRAWN FOR TWENTY-TWO PIXELS ───────────────────────────────────
+// The old drawing was a good drawing at thirty-four: a mast, a red tip, and two pairs of
+// concentric arcs. At twenty-two in a two-row rail the inner pair of arcs fused with the
+// outer and the mast disappeared into them, so the busiest mark on the rail was also the
+// one that said least. Nothing about the idea was wrong — a dispatch going out — so the
+// idea stays and the drawing loses a whole generation of waves: one mast, one pair of
+// arcs set wide, and the red tip that marks where the sending starts.
 export function MarkSignal({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M19.6 16.8l-6.7 18M20.3 16.8l7 18M16.3 26.7l8.2-.4M11.2 35l18.5-.3" />
-      <path d="M12.7 11.1c-3 2.9-3.2 6.8-.2 9.9M27.1 10.8c3.3 3.1 3.5 7.4.5 10.2M7.2 5.4c-6.3 6.1-6 14.5-.7 20M32.2 5.2c6.3 6.4 6.1 14.4 1 20.1" />
-      <path d="M19.8 4.1l-.2 8.1" className="text-record-mark" strokeWidth="2" />
-      <circle cx="20" cy="16" r="2.8" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.5" className={className} aria-hidden="true">
+      <path d="M19.9 17.4 12.4 34.4M20.5 17.4l7.6 17M13.6 28.2l12.9-.4M7.6 35.1l24.9-.4" />
+      <path d="M9.4 9.6c-3.9 4.4-4 10.2-.3 14.2M31 9.4c3.9 4.5 4 10.3.2 14.4" />
+      <circle cx="20.2" cy="14.6" r="2.9" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 
 // Where a thing is. A world drawn in three lines: the rim, the equator, one meridian.
+// ── WHERE A THING IS, AND NOTHING ELSE ON THE PLATE ───────────────────────────
+// The old drawing carried a rim, an equator, a wander line and a second open arc trailing
+// off the corner: a map with a journey on it. On the rail it was four strokes wide and the
+// red point — the only part that means anything — was lost among them. So the world is
+// three lines again, which is all a world needs: the rim, the equator, and one red point
+// pressed on it where something happened.
 export function MarkHorizon({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M33.4 15.1C31.8 7.6 23.2 3.1 15.5 6 7.6 8.7 3.6 17.2 6.6 25.1c2.8 7.4 11.5 11.1 18.9 7.7 4.2-1.8 7.1-5.5 8.1-9.7" />
-      <path d="M14.4 7.6l-2.5 7.2 4.8 2.6-1 5.1 4.4 2.2 1.5 7M25.2 7.1l-3.4 5.7 4.3 3.1 5.4-.6M7.1 23c7.4-4.8 17.6-5.1 25.1-1.9" />
-      <path d="M3 30.1c-1.9 6.2 9.2 6.3 19.9 1.2 11.6-5.6 17.9-14.4 14-16.5" opacity=".5" />
-      <path d="M28.3 19.3l2-2" className="text-record-mark" />
-      <circle cx="32.5" cy="14.9" r="3" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.5" className={className} aria-hidden="true">
+      <path d="M33.7 20c0 7.6-6.1 13.7-13.7 13.7S6.3 27.6 6.3 20 12.4 6.3 20 6.3 33.7 12.4 33.7 20Z" />
+      <path d="M6.6 20h26.8" />
+      <circle cx="25.2" cy="13.6" r="3" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -266,14 +276,22 @@ export function MarkContents({ size = 26, className = '' }) {
 
 // Who is reading. A tally, not an eye: four strokes and one across them, which is
 // how people counted things long before anything was counted for them.
+// ── A TALLY, NOT AN EYE — THE DRAWING NOW DOES WHAT ITS OWN NOTE SAID ─────────
+// The note under this mark has said "a tally, not an eye" since the week the rail was
+// drawn, and the drawing under it was an eye: a lens-shaped rim, an iris, four lashes and
+// a pupil. At twenty-two pixels it was a squint, and worse, it was the wrong sense
+// entirely — this record refuses to track a reader, so the one mark that counts readers
+// must not be the universal sign for being watched. An eye is what surveillance looks
+// like; a tally is what counting looks like, and counting is all this page does.
+//
+// Four uprights and one stroke across them: how people counted things for thousands of
+// years before anything counted them for us, and the fifth stroke is the record's red
+// because it is the stroke that makes the other four a number.
 export function MarkReadership({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M3.2 21.1C8 13 14.1 9.4 20.1 10.5c7 .7 11.1 5.7 16.7 10.3-5.4 6.4-11.8 9.6-18.4 8.3C11.4 28 7 25.3 3.2 21.1Z" />
-      <path d="M20.8 11.1c-5.7-.7-9.3 3.6-8.9 8.8.3 5.6 4.5 9 9.8 8.1 4.9-.8 7.4-5.4 6.1-9.9" />
-      <path d="M6 10.2l2.8 3.1M15.1 4.6l1 4.1M26.9 5.5l-1.8 4M34.1 11.4l-2.4 2.5" />
-      <circle cx="20.2" cy="20" r="3.4" className="text-record-mark" fill="currentColor" stroke="none" />
-      <path d="M8.8 33.6l-1.5 1.6M30.8 32.2l1.8 2" opacity=".5" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.6" className={className} aria-hidden="true">
+      <path d="M9.4 11.6v17.2M15.8 10.8v17.6M22.2 11.4v17.2M28.6 10.6v17.6" />
+      <path d="M5.8 25.2 32.1 14.4" className="text-record-mark" strokeWidth="2.1" />
     </svg>
   );
 }

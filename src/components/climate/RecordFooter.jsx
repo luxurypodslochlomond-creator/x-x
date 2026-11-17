@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 // sentence on these pages was signed by a person, and the yellow bar does not blur that.
 export default function RecordFooter() {
   return (
-    <footer className="mt-6 border-t-4 border-cartoon-sun bg-record-paper pb-14 pt-12 text-center font-body text-record-ink lg:pb-16">
+    <footer className="mt-4 border-t-4 border-cartoon-sun bg-record-paper pb-10 pt-8 text-center font-body text-record-ink lg:pb-12">
       <div className="px-4 lg:px-10">
         <Link
           to="/XEqualsX"
@@ -35,7 +35,7 @@ export default function RecordFooter() {
             and put 2026 after platform / record." So there is one chip again, hers alone —
             the year this record is being kept in belongs in the band with the rest of the
             printer's facts, not given a plate of its own. */}
-        <p className="mt-7">
+        <p className="mt-5">
           <span className="inline-block bg-cartoon-sun px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
             Laurie Anderson · “From the Air” · Big Science, 1982
           </span>
@@ -55,7 +55,7 @@ export default function RecordFooter() {
           was made comes off the paper and into the box, above the three names, in the
           machine's mono caps — the same voice the borrowed sentence is set in at the top of
           every page. One band, three lines, and the names in ink. */}
-      <div className="mt-10 bg-cartoon-sun px-4 py-7 lg:px-10">
+      <div className="mt-6 bg-cartoon-sun px-4 py-5 lg:px-10">
         {/* Brian, 17 November: "platform record 2026 and universal frequency should be red
             like x = x." So the two lines on this plate that name the thing itself — the
             platform and the company — are printed in the mark's own red, and the three
