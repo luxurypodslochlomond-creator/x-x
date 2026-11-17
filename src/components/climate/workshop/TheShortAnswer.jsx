@@ -10,8 +10,11 @@ import React from 'react';
 // available, in the same hand as the foot: signal red, bone words, the yellow chip. Someone
 // who reads nothing else on this page has still understood what is being asked of them.
 //
-// The one thing deliberately not said here is who Gillian is. She is named on the email and
-// she can say her own part; this page will not answer "is she the writer?" with a guess.
+// ONE NAME ON THE PAGE, AND IT IS HERS. There were three — Janine, Gillian, Francis — and a
+// reader who cannot place a name stops reading to ask who it is. That is not a small thing on
+// a page whose whole job is to be understood at a glance. Gillian and Francis are both on the
+// email and can say their own parts there; this page says "any of us" and lets the email do
+// the introducing. The host is named because it is her hour.
 const ASKS = [
   [
     'You host. You do not speak for it.',
@@ -23,7 +26,7 @@ const ASKS = [
   ],
   [
     'The practice room: yes, gladly.',
-    'All of us, Gillian included, whenever Francis names the time. Nothing to rehearse and no slides — only the drawing, checked once so it works on the day.',
+    'Any of us, whenever it suits you — half an hour, no slides, nothing to rehearse. Only the drawing, tried once so it works on the day.',
   ],
   [
     'The one thing we add is a blank panel.',
