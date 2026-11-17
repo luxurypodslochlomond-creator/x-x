@@ -33,3 +33,49 @@
   .record-pages .record-home-hero .record-home-summary-motto { line-height: 1.65; }
   .record-home-cover-credit { margin-top: .75rem; }
 }
+
+.record-home-page { background-color: rgb(var(--record-bone)); }
+
+/* Keep the homepage's print hierarchy on the actual elements, not font overrides. */
+.record-home-page .record-section-heading {
+  border-top: 3px solid rgb(var(--record-ink));
+  padding-top: .85rem;
+  margin-bottom: 1.25rem;
+}
+.record-home-page .record-section-heading h2 { color: rgb(var(--record-red)); }
+.record-home-page .record-section-count {
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  padding: .2rem .5rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.record-home-page :is(.record-definition-copy, .record-action-copy) {
+  font-size: .9375rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+@media (min-width: 1024px) {
+  /* A single viewport painting continues through the opening and both margins.
+     Paper resumes at the photographs: reading never competes with the backdrop. */
+  .record-home-field .record-book,
+  .record-home-field .record-home-page { background-color: transparent; }
+  .record-home-field .record-continuous-band {
+    background-color: rgb(var(--record-ink) / .58);
+  }
+  .record-home-page .record-home-voice blockquote {
+    font-family: var(--font-display);
+    font-size: 2rem !important;
+    font-weight: 700;
+    line-height: 1.18 !important;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+  }
+  .record-home-page .climate-photo-slide-frame {
+    aspect-ratio: 16 / 9;
+    max-height: 30rem;
+  }
+  .record-home-page .record-section-heading h2 { font-size: 2rem; }
+  .record-home-page .record-section-count { font-size: 1rem; }
+}

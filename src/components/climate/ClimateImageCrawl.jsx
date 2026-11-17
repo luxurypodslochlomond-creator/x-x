@@ -19,7 +19,7 @@ export default function ClimateImageCrawl() {
     rail.scrollTo({ left: next * rail.clientWidth, behavior: 'instant' });
     setIndex(next);
   };
-  if (loading) return <div role="status" className="aspect-[3/2] max-h-[70vh] w-full bg-record-bone"><span className="sr-only">Loading photographs</span></div>;
+  if (loading) return <div role="status" className="climate-photo-slide-frame aspect-[3/2] max-h-[70vh] w-full bg-record-bone"><span className="sr-only">Loading photographs</span></div>;
   if (!photos.length) return error ? <p className="bg-record-bone p-4 text-sm text-record-muted">Connect to load the photographs.</p> : null;
   return (
     <section dir="ltr" aria-label="Photographs from Ocean Image Bank" className="relative border-b-2 border-record-ink bg-record-bone">

@@ -28,20 +28,19 @@ export default function ActionCard({ action }) {
   return (
     <Link
       to={`/ClimateDetail/action/${action.id}`}
-      className="relative text-left w-full bg-[#f7f1e5] border border-[#141210] border-t-4 min-h-[110px] flex flex-col active:scale-95 transition-transform duration-100"
-      style={{ borderTopColor: meta.color }}
+      className="relative flex min-h-[110px] w-full flex-col border border-record-ink/30 border-t-4 border-t-record-signal bg-record-paper text-left transition-transform duration-100 active:scale-95"
     >
       <div className="p-3 flex-1">
         <div className="flex items-center gap-1.5 mb-1.5">
-          <Icon className="w-3.5 h-3.5" style={{ color: meta.color }} />
-          <span className="text-[8px] font-black font-mono uppercase tracking-widest" style={{ color: meta.color }}>
+          <Icon className="h-3.5 w-3.5 text-record-red" />
+          <span className="font-display text-xs font-bold uppercase tracking-wide text-record-red">
             {meta.label}
           </span>
         </div>
-        <h3 className="text-[11px] font-black font-mono uppercase leading-tight text-[#141210] line-clamp-3">
+        <h3 className="font-display text-base font-bold uppercase leading-tight text-record-ink">
           {action.title}
         </h3>
-        <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-1.5 line-clamp-2">
+        <p className="record-meta record-action-copy mt-2 line-clamp-2 font-body text-record-muted">
           {action.description}
         </p>
       </div>

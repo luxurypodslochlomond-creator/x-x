@@ -22,7 +22,7 @@ const GESTURES = [
 
 export default function SmallGesturesBand() {
   return (
-    <section className="px-4 pt-9 pb-7 lg:pt-12">
+    <section className="px-4 pb-7 pt-9 lg:px-10 lg:pt-12">
       <RecordSectionHeading title="The smallest gestures" />
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
         Small enough to start today, and free.
@@ -32,7 +32,7 @@ export default function SmallGesturesBand() {
           <Link
             key={gesture}
             to={stripHref(gesture)}
-            className="px-3 py-2 bg-[#f7f1e5] border-2 border-[#141210] text-[11px] font-black font-mono uppercase tracking-wide text-[#141210] underline decoration-transparent hover:decoration-[#141210] hover:bg-[#efe7d6] active:translate-y-px active:bg-[#141210] active:text-[#f7f1e5] transition-colors"
+            className="border-2 border-record-ink bg-record-signal px-3 py-2 font-display text-xs font-bold uppercase tracking-wide text-record-ink underline decoration-transparent transition-colors hover:decoration-record-ink active:translate-y-px active:bg-record-ink active:text-record-paper"
           >
             {gesture}
           </Link>

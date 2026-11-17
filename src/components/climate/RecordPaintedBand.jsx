@@ -26,16 +26,16 @@ import RecordCover from '@/components/climate/RecordCover';
 // because it is light on dark and nothing is set over the brightest part of the picture.
 // Pages that lay headings and photographs across the whole band keep the heavier veil and
 // are unchanged — the default is exactly where it was.
-export default function RecordPaintedBand({ position = 'center 32%', strength = 0.5, soft = false, className = '', children }) {
+export default function RecordPaintedBand({ position = 'center 32%', strength = 0.5, soft = false, continuous = false, className = '', children }) {
   const veil = soft
     ? 'linear-gradient(180deg, rgba(36,29,22,.08) 0%, rgba(36,29,22,.24) 45%, rgba(36,29,22,.46) 80%, rgba(36,29,22,.62) 100%)'
     : 'linear-gradient(180deg, rgba(36,29,22,.34) 0%, rgba(36,29,22,.58) 48%, rgba(36,29,22,.86) 82%, #241d16 100%)';
   return (
-    <div className={`relative overflow-hidden bg-[#241d16] ${className}`}>
-      <RecordCover position={position} strength={strength} blend="screen" />
+    <div className={`relative overflow-hidden ${continuous ? 'record-continuous-band bg-record-earth' : 'bg-[#241d16]'} ${className}`}>
+      <RecordCover position={position} strength={strength} blend="screen" className={continuous ? 'lg:hidden' : ''} />
       {/* Light at the top, ink at the bottom: the painting is the room, and the words are
           printed on the page, so the ink gathers exactly where the type sits. */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ background: veil }} />
+      <div aria-hidden="true" className={`pointer-events-none absolute inset-0 ${continuous ? 'lg:hidden' : ''}`} style={{ background: veil }} />
       {children}
     </div>
   );

@@ -14,7 +14,7 @@ export default function ClimatePhotoSlide({ photo, onOpen }) {
         aria-label={`Open larger: ${photo.caption || photo.credit}`}
         className="block w-full focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-record-signal"
       >
-        <span className="relative block aspect-[3/2] max-h-[70vh] w-full overflow-hidden bg-record-ink">
+        <span className="climate-photo-slide-frame relative block aspect-[3/2] max-h-[70vh] w-full overflow-hidden bg-record-ink">
           <img
             src={photo.display_url || photo.image_url}
             alt={photo.caption || 'Photograph on the record'}

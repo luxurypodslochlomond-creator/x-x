@@ -41,7 +41,7 @@ import React from 'react';
 
 export default function RecordSectionHeading({ title, count, tone = 'text-[#6b6258]' }) {
   return (
-    <div className="flex items-baseline justify-between gap-3 border-t border-[#141210]/25 pt-2.5 mb-4">
+    <div className="record-section-heading mb-4 flex items-baseline justify-between gap-3 border-t border-record-ink/25 pt-2.5">
       <h2
         className="text-[#141210] uppercase"
         style={{
@@ -55,7 +55,7 @@ export default function RecordSectionHeading({ title, count, tone = 'text-[#6b62
         {title}
       </h2>
       {count != null && (
-        <span className={`font-mono text-[11px] tracking-widest flex-shrink-0 ${tone}`}>
+        <span className={`record-section-count shrink-0 font-display text-xs font-bold tabular-nums ${tone}`}>
           {String(count).padStart(2, '0')}
         </span>
       )}

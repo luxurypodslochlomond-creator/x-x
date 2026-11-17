@@ -47,7 +47,7 @@ const CATEGORIES = [
   { id: 'other', label: 'Other', icon: Globe },
 ];
 
-import { CATEGORY_IMAGE } from '@/components/climate/categoryImages';
+import SolutionCard from '@/components/climate/SolutionCard';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import RecordHomeHero from '@/components/climate/RecordHomeHero';
 
@@ -127,66 +127,6 @@ const T = {
 };
 
 seedTranslations(T);
-
- function SolutionCard({ item, lead = false }) {
-     // Green says solution, red says emergency. A crisis card wears the record's red — it
-     // had been wearing the same blue as every other link here, so the most urgent entry
-     // on the page read as the calmest thing on it.
-     const isSolution = item.entry_type === 'solution';
-     // A solution may wear its category's picture when it arrived without one of its own.
-     // A crisis may not. The category fallback put a beach of coral sand over a coral
-     // emergency, because a category picture is the picture of the topic, not of the event —
-     // and illustrating somebody's emergency with a pleasant stock photo of the same subject
-     // is the record telling a softer story than the entry does. A crisis shows the photograph
-     // it was given, or it shows the record's own plate and says its line on it. Nothing is
-     // invented to fill the frame.
-     const cardImage = item.image_url || (isSolution ? CATEGORY_IMAGE(item.category) : null);
-
-     return (
-       <Link
-         to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-         className={`relative text-left overflow-hidden bg-[#241d16] border border-[#241d16] active:border-[#e2602a] ${
-           isSolution ? 'border-t-4 border-t-[#1e3a2b]' : 'border-t-4 border-t-[#b3261e]'
-         } ${lead ? 'col-span-2 aspect-[16/11]' : 'aspect-[4/3]'} flex items-end active:scale-95 transition-transform duration-100`}
-       >
-         {cardImage ? (
-           <img
-             src={cardImage}
-             alt=""
-             loading="lazy"
-             decoding="async"
-             className="absolute inset-0 w-full h-full object-cover"
-             /* Render the original photograph directly, without a separate filtered surface. */
-             /* A picture that will not open leaves the plate, never a substitute image: what
-                stands in for a photograph is the entry's own words, not a different picture. */
-             onError={(e) => { e.currentTarget.style.display = 'none'; }}
-           />
-         ) : (
-           /* The plate: the entry's kind, on the record's own deep ground, with the crisis rule
-              held at the top. No photograph, because there was none to show. */
-           <div aria-hidden="true" className="absolute inset-0" style={{ background: 'linear-gradient(160deg, #2a2219 0%, #241d16 55%, #1a140f 100%)' }} />
-         )}
-         {/* Gradient scrim — guarantees title readability on any image. A colour photograph can
-             be bright white at its foot, so the scrim holds a touch harder than it did over grey:
-             the cream words are never asked to fight the picture for the last inch. */}
-         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0) 28%, rgba(20,18,16,0.72) 62%, rgba(20,18,16,0.92) 100%)' }} />
-         <div className={`relative w-full ${lead ? 'p-4' : 'p-2.5'}`}>
-           <div className={`text-[9px] font-black font-mono uppercase tracking-widest ${isSolution ? 'text-[#7fd6a0]' : 'text-[#ef5a4a]'}`}>
-             {isSolution ? 'Solution' : 'Crisis'}
-           </div>
-           {/* A cut serif needs a little more size than a condensed sans did to hold its
-               own over a photograph, so the card title gains a step and tightens its
-               leading. Same words, same place, just not faint. */}
-           <h3
-             className={`text-[#efe7d6] line-clamp-3 mt-1 ${lead ? 'text-[21px] leading-[1.2]' : 'text-[15px] leading-[1.28]'}`}
-             style={lead ? { fontFamily: 'var(--font-reading)', letterSpacing: '-0.01em' } : undefined}
-           >
-             {item.title}
-           </h3>
-         </div>
-         </Link>
-         );
-         }
 
 // Typing a kind of entry — "crises", "groups" — means "show me those", not "find this
 // word". The record answers it: the button above moves to that kind and the list follows,
@@ -359,7 +299,7 @@ export default function TogetherChangeClimate() {
   // ink until it is chosen, then the pigment its own section heading, card edge and
   // button already carry.
   const doors = [
-    { key: 'solution', label: t.solutions, on: 'bg-[#1e3a2b] text-[#efe7d6]' },
+    { key: 'solution', label: t.solutions, on: 'bg-record-signal text-record-ink' },
     { key: 'climate_crisis', label: t.crises_short, on: 'bg-[#b3261e] text-[#efe7d6]' },
     // The gathering door wears the record's own yellow, the same one the foot carries.
     // Set as a ground with ink on it, never as yellow lettering on cream: at 12px that
@@ -468,7 +408,7 @@ export default function TogetherChangeClimate() {
   // Nothing inside changed. Every band was already padded to the edge and had its own
   // measure for prose, so all that has gone is the frame around the frame.
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="relative min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="record-home-page relative min-h-screen font-body text-record-ink">
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
@@ -488,7 +428,7 @@ export default function TogetherChangeClimate() {
       )}
 
       {/* The record opens first; Jane's voice follows on the same continuous painting. */}
-      <RecordPaintedBand strength={0.65} soft className="record-home-opening">
+      <RecordPaintedBand strength={0.65} soft continuous className="record-home-opening">
         <RecordHomeHero copy={t} copied={copied} onShare={handleShare} />
         <RecordHomeVoice />
       </RecordPaintedBand>
@@ -504,8 +444,8 @@ export default function TogetherChangeClimate() {
              The space is held while the record loads, so nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
         <div className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
-          <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-[#e2602a]" />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
+          <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-record-red" />
+          <div className="grid grid-cols-2 gap-2.5 lg:gap-4">
             {loading
               ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
               : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
@@ -695,25 +635,17 @@ export default function TogetherChangeClimate() {
             )}
             {showEntries && solutions.length > 0 && (
               <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-[#1e3a2b]" />
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
-                  {solutions.map((item, i) => (
-                    <div key={item.id}>
-                      <SolutionCard item={item} />
-                    </div>
-                  ))}
+                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-red" />
+                <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
+                  {solutions.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
               </section>
             )}
             {showEntries && crises.length > 0 && (
               <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-                <RecordSectionHeading title={t.crises} count={crises.length} tone="text-[#b3261e]" />
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 lg:gap-4">
-                  {crises.map((item, i) => (
-                    <div key={item.id}>
-                      <SolutionCard item={item} />
-                    </div>
-                  ))}
+                <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" />
+                <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
+                  {crises.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
               </section>
             )}
@@ -777,8 +709,8 @@ export default function TogetherChangeClimate() {
             {filteredGroups.length > 0 ? (
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
                 {filteredGroups.map(g => (
-                  <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#ffd447] p-3.5">
-                    <h4 className="text-[13.5px] font-black text-[#141210] leading-snug">{g.name}</h4>
+                  <div key={g.id} className="border border-record-ink/30 border-t-4 border-t-record-signal bg-record-paper p-4">
+                    <h4 className="font-display text-lg font-bold uppercase leading-tight text-record-ink">{g.name}</h4>
                     {g.topic && (
                       <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest bg-[#ffd447] text-[#141210] border border-[#141210] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
                     )}
@@ -832,17 +764,17 @@ export default function TogetherChangeClimate() {
         <DefinitionsBand heading={t.defs} />
 
         {/* ── GOVERNANCE ── */}
-        <section className="px-4 lg:px-10 py-8 lg:py-14 bg-[#1e3a2b] text-[#efe7d6]">
-          <h2 className="text-[#e2602a] mb-3" style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(27px, 7.2vw, 44px)', lineHeight: 1.0, letterSpacing: '-0.02em', fontWeight: 400 }}>{t.govern}</h2>
-          <p className="text-[15px] leading-[1.75] text-[#efe7d6] max-w-full lg:max-w-[640px]" style={{ fontFamily: 'var(--font-reading)', textWrap: 'pretty' }}>{t.govern_body}</p>
+        <section className="border-t-4 border-record-red bg-record-ink px-4 py-8 text-record-paper lg:px-10 lg:py-14">
+          <h2 className="mb-5 font-display text-[27px] font-bold uppercase leading-tight text-record-signal lg:text-[42px]">{t.govern}</h2>
+          <p className="max-w-full font-body text-[15px] leading-[1.75] text-record-paper lg:max-w-[640px]">{t.govern_body}</p>
           {/* The two ways out of this paragraph, side by side and the same size. They were a
               stack of two differently-cut buttons with a line of small print under them, which
               made the foot of the page read as an afterthought to the argument above it. */}
           <div className="grid gap-2 sm:grid-cols-2 max-w-[640px] mt-6">
-            <Link to={createPageUrl('ExtractionProofCovenant')} className="flex items-center justify-center gap-2 min-h-[48px] px-3 py-3 bg-[#e2602a] text-[#141210] text-[10px] font-black font-mono uppercase border border-[#141210] hover:bg-[#efe7d6] transition-colors text-center">
+            <Link to={createPageUrl('ExtractionProofCovenant')} className="flex min-h-[48px] items-center justify-center gap-2 border border-record-signal bg-record-signal px-3 py-3 text-center font-display text-xs font-bold uppercase text-record-ink transition-colors hover:bg-record-paper">
               {t.covenant} <ArrowRight className="w-3.5 h-3.5 flex-shrink-0" />
             </Link>
-            <a href="https://www.solutions-site.org/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 min-h-[48px] px-3 py-3 bg-[#efe7d6] text-[#1e3a2b] text-[10px] font-black font-mono uppercase border border-[#efe7d6] hover:bg-[#e2602a] hover:text-[#141210] transition-colors text-center">
+            <a href="https://www.solutions-site.org/" target="_blank" rel="noopener noreferrer" className="flex min-h-[48px] items-center justify-center gap-2 border border-record-paper bg-record-paper px-3 py-3 text-center font-display text-xs font-bold uppercase text-record-ink transition-colors hover:bg-record-signal">
               Horizon Solutions Site ↗
             </a>
           </div>
