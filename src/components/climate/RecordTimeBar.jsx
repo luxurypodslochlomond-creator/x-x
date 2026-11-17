@@ -1,34 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 
-// ── THE YELLOW LINE UNDER THE RECORD'S NAME ─────────────────────────────────────
-// First cut of this was set in the reading voice at eleven pixels, in italic, next to a
-// red x = x — three voices in one thin strip, and on a phone it read as a squint rather
-// than as a stamp. It was dire, and it was dire because it was the wrong voice.
+// ── THE YELLOW LINE AT THE TOP OF THE RECORD ────────────────────────────────────
+// First cut was set in the reading voice at eleven pixels, italic, next to a red x = x:
+// three voices in one thin strip. Second cut fixed the voice — mono, uppercase, tracked,
+// the way the foot's yellow chip and every card the record hands out already set this
+// line — and then left x = x in the corner, which pushed the sentence into a ragged two
+// lines to make room for something the foot already says at seventy pixels.
 //
-// The yellow on this record already has one voice, and it is the foot's: the credit chip,
-// mono, uppercase, widely tracked, ink on cartridge yellow. The same line is set the same
-// way on every card the record hands out ("THIS IS THE TIME…"). So the top line is now
-// that exact voice, at that exact weight — not a new treatment, the one the record already
-// uses for a fact it wants read as a stamp. And it sits under the record's name rather
-// than above it, so the name still opens the page and the yellow line sits beneath it like
-// a dateline, which is what it is.
+// So x = x comes out of the box. It is not lost: it is the first thing in the foot, and
+// it has its own page. What is left is one sentence, broken where a reader would break it
+// by hand — "the time" on one line, "the record of the time" on the next — and the tongue,
+// which used to sit opposite the record's name and now sits here, because the name has gone
+// from the top of the page and the tongue is the one control that must never be buried.
 export default function RecordTimeBar({ className = '' }) {
   return (
     <div className={`bg-cartoon-sun text-record-ink ${className}`}>
-      <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-3 px-4 py-[3px] lg:gap-6 lg:px-10 lg:py-1">
-        <p className="min-w-0 font-mono text-[9px] uppercase leading-[1.45] tracking-[0.14em] lg:text-[10px] lg:tracking-[0.18em]">
-          This is the time. And this is the record of the time.
+      <div className="flex items-center gap-3 px-4 py-[3px] lg:gap-6 lg:px-10 lg:py-1">
+        <p className="min-w-0 flex-1 font-mono text-[9px] uppercase leading-[1.5] tracking-[0.14em] lg:text-[10px] lg:tracking-[0.18em]">
+          This is the time.
+          <br className="sm:hidden" />{' '}
+          And this is the record of the time.
         </p>
 
-        <Link
-          to="/XEqualsX"
-          aria-label="x = x — what the mark means, and what it does not"
-          className="shrink-0 text-record-mark transition-colors hover:text-record-ink"
-          style={{ fontFamily: 'var(--font-reading)', fontSize: 15, lineHeight: 1, letterSpacing: '-0.03em' }}
-        >
-          x = x
-        </Link>
+        <RecordTongueDoor size={17} inline />
       </div>
     </div>
   );

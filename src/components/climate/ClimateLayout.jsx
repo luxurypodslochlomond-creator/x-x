@@ -193,36 +193,38 @@ export default function ClimateLayout({ children, currentPage }) {
       <header className="sticky top-0 z-50 bg-record-paper text-record-ink">
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
-          <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
-            <Link
-              to={createPageUrl('TogetherChangeClimate')}
-              className="group flex min-w-0 items-baseline gap-2"
-              aria-label="Record of the Time — the record's front page"
-            >
-              <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 -translate-y-[3px] bg-record-mark" />
-              <span
-                className="text-[21px] leading-[1.05] text-record-ink transition-colors group-hover:text-record-red sm:text-[26px]"
-                style={{ fontFamily: 'var(--font-display)' }}
+          {/* ── THE NAME OPENS A WORKED ROOM, AND ONLY A WORKED ROOM ────────────────
+              On a page that is read, the record's name at the top said what the yellow
+              line beneath it already said, in a second voice, and took forty pixels of a
+              phone's glass to say it. It has come off the reading pages: the red square and
+              "Record" in the row below is the way home, and the tongue has moved into the
+              yellow line where the name used to sit opposite it. The keeper's room and the
+              checker's queue keep the name, because there the name IS the way back. */}
+          {isRoom && (
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
+              <Link
+                to={createPageUrl('TogetherChangeClimate')}
+                className="group flex min-w-0 items-baseline gap-2"
+                aria-label="Record of the Time — the record's front page"
               >
-                Record of the Time
-              </span>
-            </Link>
+                <span aria-hidden="true" className="block h-[7px] w-[7px] shrink-0 -translate-y-[3px] bg-record-mark" />
+                <span
+                  className="text-[21px] leading-[1.05] text-record-ink transition-colors group-hover:text-record-red sm:text-[26px]"
+                  style={{ fontFamily: 'var(--font-display)' }}
+                >
+                  Record of the Time
+                </span>
+              </Link>
 
-            {/* ── THE READER'S OWN TONGUE, ON THE IMPRINT LINE ───────────────────────
-                Not a seventh door in the rail below: it goes nowhere, it changes the voice
-                of the page you are already standing on. It is set opposite the record's own
-                name, the record signing on the left and the reader answering on the right,
-                and it names the tongue in that tongue's own words so it explains itself
-                without a label. Always on the glass, never a cell stolen from a door, and it
-                cannot push one aside whatever a tongue is called. */}
-            <RecordTongueDoor size={18} inline />
-          </div>
+              <RecordTongueDoor size={18} inline />
+            </div>
+          )}
 
-          {/* The foot's yellow line, sat under the record's name rather than over it: the
-              name opens the page, the yellow line is its dateline, and the rule below
-              closes the masthead. Worked rooms still go without it, for the same reason
-              they go without the rule and the imprint. */}
-          {!isRoom && <RecordTimeBar className="-mx-4 mt-2.5 lg:-mx-10" />}
+          {/* ── THE YELLOW LINE IS THE TOP OF THE RECORD NOW ─────────────────────────
+              The sentence, and the tongue. Worked rooms still go without it, for the same
+              reason they go without the rule and the imprint: in a room the work is the only
+              thing on the glass. */}
+          {!isRoom && <RecordTimeBar className="-mx-4 mt-2 lg:-mx-10" />}
 
           {!isRoom && <RecordRule />}
 
