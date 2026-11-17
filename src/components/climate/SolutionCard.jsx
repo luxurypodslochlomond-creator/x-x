@@ -15,7 +15,7 @@ export default function SolutionCard({ item, lead = false }) {
     >
       {image.src && <img src={image.src} alt="" loading={lead ? 'eager' : 'lazy'} decoding="async" className="absolute inset-0 h-full w-full object-cover" onError={image.onError} />}
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-record-ink via-record-ink/60 to-record-ink/5" />
-      <div className="relative z-10 w-full p-3 lg:p-5">
+      <div className="record-entry-copy relative z-10 w-full p-3 lg:p-5">
         <span className={['record-header-type mb-3 inline-block px-2 py-1 text-xs uppercase', badgeTone].join(' ')}>
           {isSolution ? 'Solution' : 'Crisis'}
         </span>

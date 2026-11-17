@@ -445,7 +445,7 @@ export default function TogetherChangeClimate() {
       {(loading || featured.length > 0) && (
         <div className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-record-red" />
-          <div className="grid grid-cols-2 gap-2.5 lg:gap-4">
+          <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:gap-4">
             {loading
               ? [0, 1, 2, 3].map(i => <div key={i} className="min-h-[124px] bg-[#141210]/10 border border-[#141210]/15 animate-pulse" />)
               : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
@@ -636,7 +636,7 @@ export default function TogetherChangeClimate() {
             {showEntries && solutions.length > 0 && (
               <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-red" />
-                <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
+                <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
                   {solutions.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
               </section>
@@ -644,7 +644,7 @@ export default function TogetherChangeClimate() {
             {showEntries && crises.length > 0 && (
               <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" />
-                <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
+                <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
                   {crises.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
               </section>

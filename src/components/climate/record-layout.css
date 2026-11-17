@@ -1,0 +1,68 @@
+/* One continuous painting, with readable paper laid over it only where needed. */
+.climate-record .record-book { background-color: transparent; }
+.record-pages > .record-page-shell { background-color: transparent; }
+.record-pages .record-continuous-band { background-color: rgb(var(--record-ink) / .6); }
+.record-back-bar,
+.record-shell-body,
+.record-shell-return,
+.record-shell-footnote { background-color: rgb(var(--record-paper) / .97); }
+.record-shell-opening { color: rgb(var(--record-paper)); }
+.record-shell-opening h1 { text-wrap: balance; }
+.record-pages .record-shell-opening .record-shell-statement {
+  font-size: clamp(1rem, .96rem + .2vw, 1.125rem) !important;
+  line-height: 1.7 !important;
+}
+.record-shell-content h2 { text-wrap: pretty; line-height: 1.2 !important; }
+.record-shell-content :is(p, li).font-mono:not(.uppercase):not(.record-meta):not(.break-all):not([data-record-technical] *):not(form *):not(dialog *):not([role="dialog"] *) {
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+}
+.record-pages .record-section-heading {
+  border-top: 3px solid rgb(var(--record-ink));
+  padding-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.record-pages .record-section-heading h2 { color: rgb(var(--record-red)); }
+.record-pages .record-section-count {
+  background-color: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  padding: .25rem .5rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+@media (max-width: 639px) {
+  /* Recover width lost to the old outer frame before opening up the content. */
+  .climate-record .record-book { margin-inline: .375rem; }
+  .record-shell-opening > div,
+  .record-shell-content,
+  .record-shell-return > div { padding-inline: 1.25rem; }
+  .record-shell-opening > div { padding-block: 2.5rem; }
+  .record-shell-opening h1 { font-size: 1.875rem; line-height: 1.14 !important; }
+  .record-shell-content { padding-block: 2.5rem; }
+  .record-page-shell[data-compact="true"] .record-shell-content { padding-block: 1rem; }
+  .record-page-shell[data-mobile-compact="true"] .record-shell-opening > div { padding-block: 1.25rem; }
+  .record-page-shell[data-mobile-compact="true"] .record-shell-content { padding-block: 1rem; }
+  .record-shell-content section + section { margin-top: 2.5rem; }
+  .record-pages .record-card-grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .record-card-grid .record-entry-plate { min-height: 15rem; }
+  .record-card-grid .record-entry-copy { padding: 1.25rem; }
+  .record-card-grid .record-entry-copy h3 { font-size: 1.125rem; line-height: 1.45; }
+  .record-home-hero > div { padding-inline: 1.25rem; }
+  .record-home-hero .record-home-title-band { padding-top: 2.5rem; padding-bottom: 1.75rem; }
+  .record-home-title { font-size: clamp(1.75rem, 7.5vw, 2.5rem); line-height: 1.14; text-wrap: pretty; }
+  .record-home-hero .record-home-summary { padding: 1.25rem; }
+  .record-home-voice { padding: 2.5rem 1.25rem; }
+  .record-home-voice > div { gap: 1.5rem; }
+  .record-home-page > :is(div, section)[class~="px-4"],
+  #record-entries > section { padding-inline: 1.25rem; }
+  .record-home-page .record-section-heading { margin-bottom: 1.5rem; }
+  .record-pages .record-correction-title { font-size: 1.125rem !important; line-height: 1.45 !important; }
+}
+
+@media print {
+  .climate-record .record-book,
+  .record-pages > .record-page-shell { background-color: rgb(var(--record-paper)); }
+  .record-shell-opening { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+  .record-shell-opening :is(h1, p, a) { color: rgb(var(--record-ink)); }
+}

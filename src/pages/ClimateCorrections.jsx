@@ -29,17 +29,17 @@ export default function ClimateCorrections() {
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
+      <p className="mb-5 font-mono text-[12px] leading-relaxed text-record-ink lg:text-[13px]">
         A correction is a change to something already on the record. The entry carries the note itself —
         what changed, and the date — and it appears here, printed exactly as the person who signed it
         wrote it. Never shortened, never softened.
       </p>
-      <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-3">
+      <p className="mb-5 font-mono text-[12px] leading-relaxed text-record-ink lg:text-[13px]">
         Nothing is deleted to tidy this page up. An entry that turns out to be wrong keeps its place and
         gains a correction: a record with a mistake it owned is easier to check than one with a gap in it.
       </p>
 
-      <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 lg:px-5 py-2.5 lg:py-3.5 text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] mb-7">
+      <p className="mb-9 border-l-4 border-record-red bg-record-signal/20 p-4 font-mono text-[12px] leading-relaxed text-record-ink lg:px-5 lg:text-[13px]">
         Only a signer can write a correction, and every one of them is written where you are
         reading it now. A correction that could be made quietly would not be a correction — it
         would be an edit.
@@ -57,12 +57,12 @@ export default function ClimateCorrections() {
 
       {/* The count, before the list. It is the number this page is for, and it is stated in
           the same size whether it is nought or ninety. */}
-      <div className="flex items-baseline gap-2 mb-3 border-b-2 border-[#141210] pb-2">
-        <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px, 1.7vw, 24px)', letterSpacing: '-0.01em' }}>
+      <div className="record-section-heading flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
+        <h2 className="font-bold uppercase text-record-red" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(17px, 1.7vw, 24px)', letterSpacing: '-0.01em' }}>
           On the record
         </h2>
         {corrections && (
-          <span className="text-[10px] font-black font-mono uppercase tracking-wider text-[#5a5246]">
+          <span className="record-section-count font-display text-xs font-bold uppercase">
             {corrections.length} {corrections.length === 1 ? 'correction' : 'corrections'}
           </span>
         )}
@@ -80,7 +80,7 @@ export default function ClimateCorrections() {
       )}
 
       {corrections && corrections.length > 0 && (
-        <ul className="space-y-3 lg:space-y-4">
+        <ul className="space-y-5 lg:space-y-4">
           {corrections.map((correction) => (
             <CorrectionRow key={correction.key} correction={correction} />
           ))}
@@ -91,13 +91,13 @@ export default function ClimateCorrections() {
           be able to see where a machine helped and where a person decided — and this is the
           page where that is checked against the record's own mistakes. */}
       <section className="mt-9 lg:mt-12">
-        <div className="flex items-baseline gap-2 mb-2">
-          <span className="text-[10px] font-black font-mono text-[#e2602a]">02</span>
-          <h2 className="font-black uppercase text-[#141210] leading-tight" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>
+        <div className="mb-4 flex items-start gap-3 border-t-2 border-record-ink pt-5">
+          <span className="shrink-0 bg-record-signal px-2 py-1 font-display text-xs font-bold text-record-ink">02</span>
+          <h2 className="font-bold uppercase leading-tight text-record-red" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>
             Where the machine helps, and where it never does
           </h2>
         </div>
-        <div className="space-y-2.5 text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">
+        <div className="space-y-4 font-mono text-[12px] leading-relaxed text-record-ink lg:text-[13px] lg:leading-[1.75]">
           <p>
             The screen that reads each entry is a machine. It produces an advisory note and nothing
             else: it cannot publish an entry, cannot hold one back on its own authority, and its

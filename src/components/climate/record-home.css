@@ -34,7 +34,7 @@
   .record-home-cover-credit { margin-top: .75rem; }
 }
 
-.record-home-page { background-color: rgb(var(--record-bone)); }
+.record-home-page { background-color: transparent; }
 /* The already-loaded cover holds the frame while its own photograph downloads. */
 .record-entry-plate {
   background-image: var(--record-cover);

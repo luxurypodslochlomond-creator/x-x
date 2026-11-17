@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import useRecordScroll from '@/components/climate/useRecordScroll';
 import { IMAGES } from '@/components/climate/categoryImages';
 import '@/components/climate/record-reading.css';
+import '@/components/climate/record-layout.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';

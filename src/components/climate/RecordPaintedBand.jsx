@@ -32,10 +32,9 @@ export default function RecordPaintedBand({ position = 'center 32%', strength = 
     : 'linear-gradient(180deg, rgba(36,29,22,.34) 0%, rgba(36,29,22,.58) 48%, rgba(36,29,22,.86) 82%, #241d16 100%)';
   return (
     <div className={`relative overflow-hidden ${continuous ? 'record-continuous-band bg-record-earth' : 'bg-[#241d16]'} ${className}`}>
-      <RecordCover position={position} strength={strength} blend="screen" className={continuous ? 'lg:hidden' : ''} />
-      {/* Light at the top, ink at the bottom: the painting is the room, and the words are
-          printed on the page, so the ink gathers exactly where the type sits. */}
-      <div aria-hidden="true" className={`pointer-events-none absolute inset-0 ${continuous ? 'lg:hidden' : ''}`} style={{ background: veil }} />
+      {!continuous && <RecordCover position={position} strength={strength} blend="screen" />}
+      {/* Continuous bands reveal the shell's one fixed painting at every width. */}
+      {!continuous && <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ background: veil }} />}
       {children}
     </div>
   );

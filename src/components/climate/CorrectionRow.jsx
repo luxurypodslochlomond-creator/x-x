@@ -14,8 +14,8 @@ export default function CorrectionRow({ correction }) {
     : null;
 
   return (
-    <li className="border-2 border-[#141210] bg-[#f7f1e5] p-3 lg:p-4">
-      <div className="flex items-baseline justify-between gap-2 mb-2">
+    <li className="border border-record-ink/30 border-t-4 border-t-record-red bg-record-paper p-4 lg:p-5">
+      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
         <span className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#b3261e]">
           {correction.kind}
         </span>
@@ -26,7 +26,7 @@ export default function CorrectionRow({ correction }) {
         )}
       </div>
 
-      <p className="text-[12.5px] lg:text-[13px] font-black font-mono leading-snug text-[#141210] mb-2">
+      <p className="record-correction-title mb-4 font-display text-[17px] font-bold leading-snug text-record-ink lg:text-lg">
         {correction.title}
       </p>
 
@@ -36,7 +36,7 @@ export default function CorrectionRow({ correction }) {
 
       <Link
         to={correction.to}
-        className="mt-2.5 inline-flex items-center gap-1.5 text-[10.5px] font-black font-mono uppercase tracking-wider text-[#141210] border-b-2 border-[#141210] hover:text-[#b3261e] hover:border-[#b3261e] transition-colors min-h-[32px]"
+        className="mt-4 inline-flex min-h-11 items-center gap-2 border-b-2 border-record-ink font-display text-xs font-bold uppercase tracking-wide text-record-ink transition-colors hover:border-record-red hover:text-record-red"
       >
         Read the entry as it stands <ArrowRight className="w-3.5 h-3.5" />
       </Link>

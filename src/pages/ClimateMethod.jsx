@@ -13,19 +13,19 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 
 function Block({ n, title, children }) {
   return (
-    <section className="mb-7 lg:mb-10">
-      <div className="flex items-baseline gap-2 mb-2">
-        <span className="text-[10px] font-black font-mono text-[#e2602a]">{n}</span>
-        <h2 className="font-black uppercase text-[#141210] leading-tight" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>{title}</h2>
+    <section className="mb-11 border-t-2 border-record-ink pt-5 lg:mb-10">
+      <div className="mb-4 flex items-start gap-3">
+        <span className="shrink-0 bg-record-signal px-2 py-1 font-display text-xs font-bold text-record-ink">{n}</span>
+        <h2 className="font-bold uppercase leading-tight text-record-red" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(21px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>{title}</h2>
       </div>
-      <div className="space-y-2.5 lg:space-y-3.5 text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">{children}</div>
+      <div className="space-y-4 text-[12px] font-mono leading-relaxed text-record-ink lg:space-y-3.5 lg:text-[13px] lg:leading-[1.75]">{children}</div>
     </section>
   );
 }
 
 function Rule({ children }) {
   return (
-    <p className="border-l-4 border-l-[#1e3a2b] bg-[#1e3a2b]/5 px-3 lg:px-5 py-2.5 lg:py-4 text-[11.5px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">{children}</p>
+    <p className="border-l-4 border-record-red bg-record-signal/20 p-4 font-mono text-record-ink lg:px-5 lg:py-4">{children}</p>
   );
 }
 
