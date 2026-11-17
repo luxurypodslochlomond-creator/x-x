@@ -1,8 +1,14 @@
 import React from 'react';
 
+// ── HER NAME SITS ON THE PAINTING, NOT ON A CARD ────────────────────────────────
+// The plate was solid paper, so the one page about a person who spent forty years on the
+// living world sat on a blank sheet while the whole painting was held back behind it. The
+// sheet is thin now — most of the paper still there, so the name stays plainly readable,
+// and the ground coming up through the rest of it — so the earth reads underneath the
+// letters instead of behind a wall. It also gets the air a name like hers should have.
 export default function FounderName() {
   return (
-    <section aria-labelledby="founder-name" className="record-founder-plate mx-auto my-6 w-full max-w-4xl border-t-4 border-record-red bg-record-paper px-5 py-8 text-center lg:my-8 lg:px-10 lg:py-10">
+    <section aria-labelledby="founder-name" className="record-founder-plate mx-auto my-10 w-full max-w-4xl border-t-4 border-record-red bg-record-paper/75 px-5 py-10 text-center backdrop-blur-[2px] lg:my-16 lg:px-10 lg:py-16">
       {/* Her name is set, not stamped. Upper-cased and wide-tracked it read like a form
           field; in the record's display face at size, with the tracking pulled in, it reads
           like the name over the door of the whole thing. */}

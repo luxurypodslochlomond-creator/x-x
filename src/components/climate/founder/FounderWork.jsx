@@ -10,12 +10,12 @@ const ACHIEVEMENTS = [
 
 export default function FounderWork() {
   return (
-    <section aria-labelledby="founder-work" className="mx-auto my-6 max-w-4xl space-y-5 lg:my-8 lg:space-y-6">
-      <div className="record-continuous-band border-y border-record-paper/30 px-5 py-6 text-center lg:px-10">
+    <section aria-labelledby="founder-work" className="mx-auto my-10 max-w-4xl space-y-6 lg:my-16 lg:space-y-8">
+      <div className="record-continuous-band border-y border-record-paper/30 px-5 py-8 text-center lg:px-10 lg:py-10">
         <h2 id="founder-work" className="font-display text-2xl font-bold leading-[1.05] text-record-signal lg:text-4xl" style={{ letterSpacing: '-0.02em' }}>The Record of the Work</h2>
       </div>
       {ACHIEVEMENTS.map(({ icon: Icon, title, body }) => (
-        <article key={title} className="record-founder-plate border-t-4 border-record-red bg-record-paper p-5 lg:p-8">
+        <article key={title} className="record-founder-plate border-t-4 border-record-red bg-record-paper/85 p-5 lg:p-8">
           <div className="mb-5 flex items-start gap-3">
             <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-record-red" />
             <h3 className="font-display text-lg font-bold leading-[1.15] text-record-ink lg:text-xl" style={{ letterSpacing: '-0.01em' }}>{title}</h3>
