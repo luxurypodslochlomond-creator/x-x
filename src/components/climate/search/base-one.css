@@ -1,0 +1,44 @@
+/* ── BASE 1, PRINTED RATHER THAN TYPED ────────────────────────────────────────────
+   The index is not a utility bolted onto the record: it is the room where the record
+   answers, so it is built the way the foot and the masthead are built — an ink plate, a
+   yellow band, the mark's own red, and the record's paper. Three colours, no gradients,
+   no glass, nothing that has to load before it can be looked at.
+
+   The plate carries two textures, both of them free: a fine hatch at four per cent over
+   the ink (so the black reads as printed rather than as a void), and four register marks
+   at the corners, the way a printer proves a sheet is lined up. Nothing here animates,
+   so nothing costs a reader a repaint while they scroll, and nothing has to be switched
+   off for someone who has asked the world to hold still. */
+
+.base-one {
+  position: relative;
+  overflow: hidden;
+}
+
+.base-one__ground {
+  position: relative;
+  background-color: rgb(var(--record-ink));
+  color: rgb(var(--record-paper));
+}
+
+.base-one__ground::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(239, 231, 214, 0.06) 0 1px,
+    transparent 1px 7px
+  );
+}
+
+.base-one__reg {
+  position: absolute;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1;
+  color: rgb(var(--record-mark));
+  pointer-events: none;
+  z-index: 1;
+}

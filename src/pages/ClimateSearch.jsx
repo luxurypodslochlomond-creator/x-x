@@ -6,6 +6,9 @@ import RecordSearchLine from '@/components/climate/RecordSearchLine';
 import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
+import BaseOnePlate from '@/components/climate/search/BaseOnePlate';
+import SearchAnswerLine from '@/components/climate/search/SearchAnswerLine';
+import SearchSectionHead from '@/components/climate/search/SearchSectionHead';
 
 // ── SEARCH THE RECORD ────────────────────────────────────────────────────────────
 // Type it or say it. One query reads everything the record holds — solutions, climate
@@ -41,25 +44,26 @@ export default function ClimateSearch() {
 
   return (
     <ClimateRecordShell
-      mobileCompact
+      compact
       onBack={back}
       backLabel="Back"
       eyebrow="BASE 1 · the record’s own index"
-      marker="Every entry carries its origin"
-      title="Ask BASE 1"
-      statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead."
       returnTo="/TogetherChangeClimate"
       returnLabel="Read the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      <RecordSearchLine
-        value={query}
-        onSearch={start}
-        loading={loading}
-      />
+      <BaseOnePlate statement="Type it or say it. One question reads everything the record holds, and every result carries the origin it came from — and if the index cannot be reached, your own device reads the record instead." />
 
-      <div className={data || loading ? 'hidden lg:block' : ''}>
-        <RecordSearchPrompts onPick={start} disabled={loading} />
+      <div className="mt-3">
+        <RecordSearchLine
+          value={query}
+          onSearch={start}
+          loading={loading}
+        />
+
+        <div className={data || loading ? 'hidden lg:block' : ''}>
+          <RecordSearchPrompts onPick={start} disabled={loading} />
+        </div>
       </div>
 
       {loading && (
@@ -75,31 +79,7 @@ export default function ClimateSearch() {
 
       {!loading && !error && data && (
         <div className="record-search-results mt-5">
-          <div className="record-search-summary bg-[#efe7d6] border-2 border-[#141210] p-3">
-            <p className="text-[11px] font-mono text-[#141210]">
-              {data.total > 0
-                ? `${data.total} ${data.total === 1 ? 'result' : 'results'} on the record match “${data.query}”`
-                : about.length > 0
-                  ? `No entries match “${data.query}” — but the record's own pages do.`
-                  : `Nothing on the record matches “${data.query}” yet`}
-            </p>
-            {data.loose && (
-              <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
-                No entry matched all of your words — the entries below match part of the question.
-              </p>
-            )}
-            {local && (
-              <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
-                Your own device read the record for this one — the index could not be reached,
-                so nothing was asked of anybody else.
-              </p>
-            )}
-            {data.translatedFrom && (
-              <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">
-                Nothing in those exact words — searched in English for “{data.translatedFrom}” and found {data.total}.
-              </p>
-            )}
-          </div>
+          <SearchAnswerLine data={data} local={local} aboutCount={about.length} />
 
           {sections.length === 0 && about.length === 0 ? (
             <div className="mt-6">
@@ -132,16 +112,7 @@ export default function ClimateSearch() {
                   the signal colour so it is never mistaken for an entry with an origin. */}
               {about.length > 0 && (
                 <section>
-                  <div className="flex items-center gap-2 mb-3">
-                    <h2
-                      className="font-black uppercase"
-                      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 27px)', letterSpacing: '-0.022em', color: '#0f5f7a' }}
-                    >
-                      About the record
-                    </h2>
-                    <div className="flex-1 h-px bg-[#141210]/20" />
-                    <span className="record-search-section-count text-[10px] font-black font-mono text-[#e2602a]">{about.length}</span>
-                  </div>
+                  <SearchSectionHead index={0} label="About the record" count={about.length} tone="#0f5f7a" />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     {about.map((a) => (
                       <Link
@@ -160,20 +131,14 @@ export default function ClimateSearch() {
                 </section>
               )}
 
-              {sections.map((s) => (
+              {sections.map((s, i) => (
                 <section key={s.key}>
-                  <div className="flex items-center gap-2 mb-3">
-                    <h2
-                      className="font-black uppercase"
-                      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 1.8vw, 27px)', letterSpacing: '-0.022em', color: s.tone }}
-                    >
-                      {s.label}
-                    </h2>
-                    <div className="flex-1 h-px bg-[#141210]/20" />
-                    <span className="record-search-section-count text-[10px] font-black font-mono" style={{ color: s.tone }}>
-                      {s.items.length}
-                    </span>
-                  </div>
+                  <SearchSectionHead
+                    index={about.length > 0 ? i + 1 : i}
+                    label={s.label}
+                    count={s.items.length}
+                    tone={s.tone}
+                  />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                     {s.items.map((item) => (
                       <RecordResultCard key={`${s.key}-${item.id}`} kind={s.kind} item={item} />

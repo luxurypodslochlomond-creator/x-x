@@ -70,16 +70,8 @@ export default function RecordSearchLine({ value, onSearch, loading }) {
       onSubmit={submit}
       className="border-y-2 border-record-ink bg-cartoon-sun px-2.5 pb-2 pt-2.5"
     >
-      {/* ── WHO IS ANSWERING ─────────────────────────────────────────────────────
-          Brian, 17 November: "you sure search shouldn't be BASE 1? … why search, that's
-          old." So the box says who is reading: BASE 1, the record's own index, in the
-          same mono caps the foot is set in — with its name in the mark's red, the way the
-          foot names the two things that are not people. */}
-      <div className="mb-1.5 flex flex-wrap items-baseline gap-x-2 px-0.5">
-        <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-record-red">BASE 1</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-record-ink/70">The record’s own index</span>
-      </div>
-
+      {/* The plate above the band already says whose index this is, so the band itself goes
+          straight to the work: one field, the mark's red on the one control that answers. */}
       <div
         ref={box}
         className="flex items-center overflow-hidden rounded-[3px] border-2 border-record-ink bg-record-paper shadow-[0_2px_0_0_rgba(20,18,16,0.16)] focus-within:border-record-red"
