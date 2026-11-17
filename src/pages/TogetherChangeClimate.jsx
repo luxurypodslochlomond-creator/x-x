@@ -319,7 +319,7 @@ export default function TogetherChangeClimate() {
   const t = T.en;
 
   // ── ONE PIGMENT PER ROOM ───────────────────────────────────────────────────────
-  // Green for what works, red for what is burning, ochre for the people gathered,
+  // Green for what works, red for what is burning, yellow for the people gathered,
   // orange for what is being done. Before, Groups wore Solutions' green and every door
   // flashed orange on hover — so three doors borrowed the Actions colour and only the
   // crises door looked like itself. A door now holds its own colour and nothing else:
@@ -328,7 +328,10 @@ export default function TogetherChangeClimate() {
   const doors = [
     { key: 'solution', label: t.solutions, on: 'bg-[#1e3a2b] text-[#efe7d6]' },
     { key: 'climate_crisis', label: t.crises_short, on: 'bg-[#b3261e] text-[#efe7d6]' },
-    { key: 'groups', label: t.groups, on: 'bg-[#9b6f28] text-[#efe7d6]' },
+    // The gathering door wears the record's own yellow, the same one the foot carries.
+    // Set as a ground with ink on it, never as yellow lettering on cream: at 12px that
+    // is not a colour, it is a blank.
+    { key: 'groups', label: t.groups, on: 'bg-[#ffd447] text-[#141210]' },
     { key: 'actions', label: t.actions, on: 'bg-[#e2602a] text-[#141210]' },
   ];
   const openDoor = doors.find(d => d.key === selectedType);
@@ -856,7 +859,7 @@ export default function TogetherChangeClimate() {
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {(selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="text-[#9b6f28]" />
+            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" />
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-2">{t.groups_sub}</p>
             {/* Said out loud, on the section itself, so nobody has to guess how far the record
                 has gone for them. A group is an introduction the organiser wrote; it carries no
@@ -865,7 +868,7 @@ export default function TogetherChangeClimate() {
             <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">Carried, not checked: this is the organiser's own line. Write to them and decide for yourself.</p>
             <button
               onClick={() => { setSubmitType('group'); setShowSubmit(true); }}
-              className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#9b6f28] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#7d581f] active:text-[#efe7d6] transition-colors"
+              className="w-full lg:w-auto lg:px-6 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[48px] bg-[#ffd447] text-[#141210] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e8bd2a] active:text-[#141210] transition-colors"
             >
               <Users className="w-4 h-4" /> Start a group
             </button>
@@ -873,12 +876,12 @@ export default function TogetherChangeClimate() {
             {filteredGroups.length > 0 ? (
               <div className="space-y-2 md:grid md:grid-cols-2 md:gap-2.5 md:space-y-0">
                 {filteredGroups.map(g => (
-                  <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#9b6f28] p-3.5">
+                  <div key={g.id} className="bg-[#f7f1e5] border border-[#141210] border-t-4 border-t-[#ffd447] p-3.5">
                     <h4 className="text-[13.5px] font-black text-[#141210] leading-snug">{g.name}</h4>
                     {g.topic && (
-                      <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#9b6f28] border border-[#9b6f28] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
+                      <span className="inline-block text-[9px] font-black font-mono uppercase tracking-widest bg-[#ffd447] text-[#141210] border border-[#141210] px-1.5 py-0.5 mt-1.5">{g.topic}</span>
                     )}
-                    <div className="flex items-center gap-1.5 text-[#9b6f28] mt-1.5">
+                    <div className="flex items-center gap-1.5 text-[#141210] mt-1.5">
                       <MapPin className="w-3 h-3" />
                       <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
