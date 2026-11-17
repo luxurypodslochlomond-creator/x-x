@@ -192,6 +192,7 @@ export default function ClimateKeeperRoom() {
             keeperNames={keeperNames}
             checkingNow={checkingNow}
             onRefresh={count}
+            onInvite={activeView !== 'people' ? () => setView('people') : undefined}
           />
 
           {/* The work's own index, directly above the work on every screen. */}
@@ -217,7 +218,7 @@ export default function ClimateKeeperRoom() {
           <div className="room-work-panel mt-3">
             {activeView === 'decide' && who.isKeeper && <DecideQueue plain onChange={count} />}
             {activeView === 'check' && <ClimateChecking plain onChange={count} />}
-            {activeView === 'people' && who.isKeeper && <GuestList />}
+            {activeView === 'people' && who.isKeeper && <GuestList onChange={count} />}
 
             {/* What the record holds, and where a claim comes from — two questions a panel
                 asks, kept on one door rather than under a long page of footnotes. */}

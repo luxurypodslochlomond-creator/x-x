@@ -1,61 +1,70 @@
 {
   "name": "ClimateChecker",
   "type": "object",
-  "description": "Who may come into the record, and what they may do once inside. One list, two kinds of line: a checker is a pair of eyes \u2014 they read what is waiting and write a note in their own name, and that is all; a keeper is the person the record answers to \u2014 the founder \u2014 and they alone may put an entry on the record or hold it back. The flag on the line decides which, so the record has one guest list rather than two that drift apart. Neither kind can see a submitter's email, and neither holds the app's admin keys: being the keeper of this record gives the record's own power and nothing else in the building. A keeper adds and removes these lines; nobody can add themselves. A person's own line for the public roll is written by that person and by nobody else: it is empty until they write it, and emptying it takes them off the roll without touching their place on the list. Each line also keeps what actually happened to the person, and only what happened: when the sign-in invitation was made, when the record's own letter last went out (or why it did not), the first time their own sign-in was recognised against this line, and whose word put them here. It never says a letter was opened, because a letter cannot be read back.",
+  "description": "The record's private guest list. Checkers read entries and sign notes; keepers manage publication and record access without becoming app administrators. Access changes are authorised by the server. Public roll text belongs to the person who wrote it. Email timestamps record acceptance for sending, never inbox delivery or opening.",
   "properties": {
     "email": {
       "type": "string",
-      "description": "The exact address the checker signs in with. Required, and what the record matches against, so it is never guessed or partly filled."
+      "description": "The exact address used to sign in, stored in lower case. Never public."
     },
     "name": {
       "type": "string",
-      "description": "The name their notes are signed with, so a line of checking carries a person rather than an address."
+      "description": "The name used to sign this person's work."
     },
     "is_keeper": {
       "type": "boolean",
       "default": false,
-      "description": "This line is the keeper: they may publish an entry onto the record or hold it back, and their name is written into the audit trail when they do. Left false it is a checker \u2014 a pair of eyes, with no power to publish, change or delete anything. A keeper does not need to be an administrator of the app, and should not be: the record's keys are not the building's keys."
+      "description": "Record keeper, not an app administrator. False means checker."
     },
     "active": {
       "type": "boolean",
       "default": true,
-      "description": "Whether they may come in today. Turned off it stops access immediately and keeps the record of what they wrote, because ending access is not the same as erasing work."
+      "description": "Whether this person may work on the record now. Pausing preserves their work."
     },
     "note": {
       "type": "string",
-      "description": "Why this person is on the list, e.g. 'Trebuchet volunteer, coastal restoration'. Kept so a keeper in a year knows who they were and why. This is the record's own note and is never published."
+      "description": "The keeper's private note about why this person was invited."
     },
     "public_line": {
       "type": "string",
-      "description": "A few words about themselves, written by the person it is about and by no one else, to stand beside their name on the record's roll. This is the only thing about a person that is ever shown to a reader, and it is theirs: a keeper cannot write it for them, a machine cannot fill it in, and an empty field means they are not on the roll at all \u2014 the list itself stays private. Their address is never part of it and never shown."
+      "description": "The person's own optional words for the public roll. Only that person may write or clear them through the server. Empty means not on the public roll."
     },
     "public_line_at": {
       "type": "string",
       "format": "date-time",
-      "description": "When they last wrote or cleared their line, so a reader is never shown words as though they were written freshly when they were not."
+      "description": "When the person last changed or cleared their own public line."
     },
     "added_by": {
       "type": "string",
-      "description": "The keeper who put them on the list."
+      "description": "The keeper who added this person."
     },
     "invited_at": {
       "type": "string",
       "format": "date-time",
-      "description": "When the sign-in invitation was made for this address. The moment the person was actually given a way in, as opposed to being written down on a list."
+      "description": "Legacy invitation timestamp. Older values were written before an email was attempted, so this alone is not evidence of sending."
+    },
+    "sign_in_sent_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The latest sign-in invitation accepted by the invitation service. Never proof of inbox delivery."
+    },
+    "sign_in_error": {
+      "type": "string",
+      "description": "The latest sign-in invitation failure. Empty after a successful send request. Separate from the welcome email outcome."
     },
     "notice_sent_at": {
       "type": "string",
       "format": "date-time",
-      "description": "When the record's own letter to this person last went out. A letter that went is different from a letter that was attempted, and a keeper looking at the list is entitled to know which one happened."
+      "description": "The latest record email accepted for sending. Preserved if a later attempt fails. Never proof of inbox delivery."
     },
     "notice_error": {
       "type": "string",
-      "description": "Why the record's letter did not go out, in plain words, when it did not. Kept rather than swallowed so the list can say 'no letter' instead of pretending, and so a keeper can send it again with one tap."
+      "description": "Why the latest attempt to send the record email failed. Empty after an accepted send."
     },
     "joined_at": {
       "type": "string",
       "format": "date-time",
-      "description": "The first time this person's own sign-in was recognised against this line \u2014 the record's evidence that they turned up. Never inferred from a letter being opened, because a letter cannot be read back. Empty means: invited, not seen yet."
+      "description": "When this person's own signed-in account was first recognised on the guest list. Never inferred from an email being opened."
     }
   },
   "required": [

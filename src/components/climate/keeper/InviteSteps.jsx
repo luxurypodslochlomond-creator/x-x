@@ -39,18 +39,18 @@ const RECORD = 'https://uf51.love';
 const STEPS = [
   {
     n: '1',
-    title: 'Sign in with the address you were added under',
-    line: 'The invitation sets your password. Use the same address a keeper typed in for you — that address is the only key there is, and there is no second login to remember.',
+    title: 'Sign in',
+    line: 'Use the email address on your invitation. Already have an account? Use your usual sign-in.',
   },
   {
     n: '2',
-    title: 'The checking room is where the work is',
-    line: `Go to ${RECORD}/ClimateChecking. Open the source link each entry carries, then say whether it says what the entry claims: it holds up, it does not, or you could not tell. All three are useful. Nothing there publishes, edits or deletes anything, and every note is signed with your own name.`,
+    title: 'Check a source',
+    line: `Open ${RECORD}/ClimateChecking. Follow an entry to its source and leave a signed note: it holds up, it does not, or you cannot tell. All three help.`, 
   },
   {
     n: '3',
-    title: 'Adding something of your own goes through the open door',
-    line: `Checking gives you no publishing button, on purpose: a checker's note is worth reading because it holds no power. So an initiative goes in the way everybody's does — go to ${RECORD} and tap "Submit a solution, crisis, or action". Paste the link to where it came from into the box at the top and the form fills itself in; put your name and address on it so the record can reach you, and that address is never shown to a reader. What carries its source and reads clean goes on as it arrives; anything unclear waits for a keeper to look.`,
+    title: 'Add an initiative',
+    line: `On ${RECORD}/TogetherChangeClimate, tap "Submit a solution, crisis, or action" and paste the source link. Sourced entries cleared by screening can appear straight away; anything unclear waits for a keeper.`, 
   },
 ];
 
@@ -89,9 +89,9 @@ export default function InviteSteps() {
 
   return (
     <details className="room-details border-t border-[#141210]/20 pt-3 mb-6">
-      <summary>What to send them afterwards</summary>
+      <summary>Optional personal note & invitation cards</summary>
       <p className="text-[13px] leading-[1.6] text-[#6b5f4f] mt-2 mb-3" style={reading}>
-        The sign-in invitation sets their password. This is the note you send beside it.
+        The invite button above sends the emails. This is an optional note to copy into your own message.
       </p>
 
       <ol className="space-y-2 mb-3">

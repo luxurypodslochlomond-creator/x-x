@@ -21,6 +21,25 @@
 #root .keeper-room {
   /* One left edge, one measure. Nothing inside the room may set its own width. */
   --room-measure: 34rem;
+  --font-reading: var(--font-body);
+  --font-display: var(--font-body);
+  font-family: var(--font-body);
+}
+
+/* Working forms use the same clear sans voice on desktop as on a phone. */
+#root .keeper-room :is(h1, h2, h3, h4, button, input, textarea, select, label, summary) { font-family: var(--font-body) !important; }
+#root .keeper-room .room-invite-form p { font-size: 14px !important; }
+#root .keeper-room .room-invite-form .room-invite-heading { font-size: 22px !important; font-weight: 700 !important; }
+#root .keeper-room .room-person .room-person-name { font-size: 18px !important; font-weight: 700 !important; }
+#root .keeper-room .room-invite-form input { border-radius: 4px; }
+#root .keeper-room .room-invite-form :focus-visible { outline-color: rgb(var(--record-red)); }
+#root .keeper-room .room-invite-form fieldset:disabled button { cursor: wait; }
+@media (min-width: 1024px) {
+  #root .keeper-room .room-work-nav button[aria-pressed="true"] { background: rgb(var(--record-red) / .06); }
+  #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-mark,
+  #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-mark svg,
+  #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-word { color: rgb(var(--record-red)) !important; }
+  #root .keeper-room .room-work-nav button[aria-pressed="true"] .room-nav-indicator { background: rgb(var(--record-red)); }
 }
 
 /* ── PROSE IS SMALL HERE, ON PURPOSE ─────────────────────────────────────────── */

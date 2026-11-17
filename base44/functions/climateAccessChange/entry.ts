@@ -1,5 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { requireKeeper } from '../../shared/checkerAccess.ts';
+import { sendCheckerInvitation } from '../../shared/checkerInvitation.ts';
 
 // ── WHO MAY COME IN, AND NEVER BY ONE HAND ────────────────────────────────────
 // The guest list is the most dangerous thing on this record: it decides who can open a
@@ -53,7 +54,9 @@ function shapeLine(row, evidence, names, agreed) {
     // Four facts a keeper asks about a name: when they were written down, whether the
     // letter went (and why not, when it did not), whether they have ever turned up, and
     // whose word put them here. Nothing here is a guess about an inbox.
-    invited_at: row.invited_at || row.created_date || '',
+    invited_at: row.invited_at || '',
+    sign_in_sent_at: row.sign_in_sent_at || '',
+    sign_in_error: row.sign_in_error || '',
     notice_sent_at: row.notice_sent_at || '',
     notice_error: row.notice_error || '',
     joined_at: row.joined_at || '',
@@ -100,7 +103,7 @@ async function tell(base44, payload) {
     // nobody was told. Same change, same words, just the hand that actually made it.
     const res = await base44.functions.invoke('climateCheckerNotice', payload);
     const d = res?.data || {};
-    if (d?.error) return { sent: false, why: String(d.error).slice(0, 200) };
+    if (d?.error || d?.sent !== true) return { sent: false, why: String(d.error || 'The email was not accepted for sending.').slice(0, 300) };
     return { sent: true, why: '' };
   } catch (e) {
     // ── THE REASON, NOT THE STATUS CODE ──────────────────────────────────────────
@@ -120,7 +123,7 @@ async function markNotice(base44, rowId, told) {
   if (!rowId) return;
   try {
     await base44.asServiceRole.entities[ROSTER].update(rowId, {
-      notice_sent_at: told.sent ? new Date().toISOString() : '',
+      ...(told.sent ? { notice_sent_at: new Date().toISOString() } : {}),
       notice_error: told.sent ? '' : told.why || 'The letter could not be sent.',
     });
   } catch (e) {
@@ -143,7 +146,7 @@ async function applyChange(base44, change, who, basis) {
 
   if (change.change === 'add') {
     const email = lower(change.target_email);
-    if (!email || !email.includes('@')) return { ok: false, status: 400, message: 'That address does not look right.' };
+    if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return { ok: false, status: 400, message: 'That address does not look right.' };
     const rows = await rosterOf(base44);
     if (rows.some((r) => lower(r.email) === email)) {
       return { ok: false, status: 409, message: 'That address is already on the list.' };
@@ -156,54 +159,19 @@ async function applyChange(base44, change, who, basis) {
       active: true,
       note: change.note || '',
       added_by: change.requested_by || by,
-      invited_at: new Date().toISOString(),
     });
 
-    // ── TWO THINGS HAVE TO HAPPEN, AND THEY ARE DIFFERENT THINGS ────────────────
-    // The building's sign-in invitation (which sets their password) and the record's own
-    // letter (which says who vouched for them). Either can fail on its own, and the keeper
-    // is entitled to be told which — a person added with no sign-in invitation cannot get
-    // in at all, and that is not the same as a letter that did not go.
-    let signIn = true;
-    try {
-      await base44.users.inviteUser(email, 'user');
-    } catch (e) {
-      signIn = false;
-      console.error('climateAccessChange: sign-in invite failed:', e?.message);
-    }
-
-    // ── THE LETTER THAT NAMES THE PERSON WHO VOUCHED ────────────────────────────
-    // This used to send the record's own letter to the person only when the platform's
-    // sign-in invitation had FAILED — so the one letter that says "you have a place here,
-    // put there by Janine" was the fallback, and the letter that actually arrived was the
-    // platform's, which cannot carry a name at all. That is backwards. A person joining a
-    // record should hear from a person, not from a form: so they get the record's letter
-    // every time, alongside the sign-in key, and the first line of it is whose word it was.
-    const told = await tell(base44, {
-      email,
-      name: change.target_name || email,
-      state: 'invited',
-      person_letter: true,
-      row_id: created?.id || '',
-    });
-    await markNotice(base44, created?.id, told);
-
+    const delivery = await sendCheckerInvitation(base44, created, { notifyKeepers: true });
     await logIt(base44, {
-      rowId: created?.id || '',
-      title: `${change.target_name || email}${change.target_is_keeper ? ' · keeper' : ' · checker'}`,
-      action: 'access_granted',
-      reviewer: by,
-      note: `${basisNote}${told.sent ? ' The record\'s letter went out.' : ' The record\'s letter did NOT go out.'}`,
+      rowId: created.id,
+      title: `${change.target_name || email} · ${change.target_is_keeper ? 'keeper' : 'checker'}`,
+      action: 'access_granted', reviewer: by,
+      note: `${basisNote} ${delivery.message}`,
     });
-
-    const who2 = change.target_name || email;
-    const place = change.target_is_keeper ? 'holds the keys now' : 'is on the list';
-    // Said plainly, in the order it matters: are they on the record, can they get in, and did
-    // the letter actually go. No sentence here claims more than the record did.
-    const bits = [`${who2} ${place}.`];
-    bits.push(signIn ? 'Their sign-in invitation has gone.' : 'Their sign-in invitation did NOT go — send it again, or they cannot get in.');
-    bits.push(told.sent ? 'The record\u2019s letter has gone.' : `The record\u2019s letter did not go${told.why ? `: ${told.why}` : '.'}`);
-    return { ok: true, notice_sent: told.sent, sign_in_invited: signIn, message: bits.join(' ') };
+    return {
+      ok: true, ...delivery, row_id: created.id,
+      message: `${change.target_name || email} added as ${change.target_is_keeper ? 'keeper' : 'checker'}. ${delivery.message}`,
+    };
   }
 
   const id = String(change.target_row_id || '');
@@ -230,23 +198,25 @@ async function applyChange(base44, change, who, basis) {
 
   if (change.change === 'pause') {
     await base44.asServiceRole.entities[ROSTER].update(row.id, { active: false });
-    await tell(base44, { email: row.email, name: row.name, state: 'paused' });
+    const told = await tell(base44, { email: row.email, name: row.name, state: 'paused', person_letter: true });
+    await markNotice(base44, row.id, told);
     await logIt(base44, { rowId: row.id, title, action: 'access_paused', reviewer: by, note: basisNote });
-    return { ok: true, message: `${row.email} is paused and has been told. Notes they already wrote stay in their name.` };
+    return { ok: true, message: `${row.name || row.email} is paused. Signed work stays. ${told.sent ? 'Access email accepted for sending.' : `Access email was not sent: ${told.why}`}` };
   }
 
   if (change.change === 'restore') {
     await base44.asServiceRole.entities[ROSTER].update(row.id, { active: true });
-    await tell(base44, { email: row.email, name: row.name, state: 'restored' });
+    const told = await tell(base44, { email: row.email, name: row.name, state: 'restored', person_letter: true });
+    await markNotice(base44, row.id, told);
     await logIt(base44, { rowId: row.id, title, action: 'access_restored', reviewer: by, note: basisNote });
-    return { ok: true, message: `${row.email} can come in again and has been told.` };
+    return { ok: true, message: `${row.name || row.email} can work on the record again. ${told.sent ? 'Access email accepted for sending.' : `Access email was not sent: ${told.why}`}` };
   }
 
   if (change.change === 'remove') {
     await base44.asServiceRole.entities[ROSTER].delete(row.id);
-    await tell(base44, { email: row.email, name: row.name, state: 'removed' });
-    await logIt(base44, { rowId: row.id, title, action: 'access_removed', reviewer: by, note: basisNote });
-    return { ok: true, message: `${row.email} is off the list and has been told. What they wrote stays on the record.` };
+    const told = await tell(base44, { email: row.email, name: row.name, state: 'removed', person_letter: true });
+    await logIt(base44, { rowId: row.id, title, action: 'access_removed', reviewer: by, note: `${basisNote} ${told.sent ? 'Access email accepted.' : told.why}` });
+    return { ok: true, message: `${row.name || row.email} removed. Signed work stays. ${told.sent ? 'Access email accepted for sending.' : `Access email was not sent: ${told.why}`}` };
   }
 
   return { ok: false, status: 400, message: 'Unknown change.' };
@@ -285,22 +255,11 @@ export default async function (req) {
 
       const activeKeepers = rows.filter((r) => r.active && r.is_keeper).length;
 
-      // One read of the notes, folded by address: the checking table is the only honest
-      // source for "has this person done any of the work", so it is read rather than asked.
       const evidence = new Map();
-      try {
-        const page = await base44.asServiceRole.entities.ClimateCheck.list({ sort: '-created_date', limit: 500 });
-        (page?.items || page || []).forEach((c) => {
-          const key = lower(c.checker_email);
-          if (!key) return;
-          const e = evidence.get(key) || { notes: 0, last: '' };
-          e.notes += 1;
-          if (!e.last) e.last = c.created_date || '';
-          evidence.set(key, e);
-        });
-      } catch (e) {
-        console.error('climateAccessChange: could not read the checking notes', e?.message);
-      }
+      const checks = await base44.asServiceRole.entities.ClimateCheck.aggregate({
+        groupBy: 'checker_email', max: ['created_date'],
+      });
+      for (const c of checks.rows) evidence.set(lower(c.checker_email), { notes: c.count, last: c.max_created_date || '' });
 
       // The list read back as addresses-to-names, so a line can say whose word put it there
       // without ever printing one keeper's address to another.
@@ -383,7 +342,7 @@ export default async function (req) {
       if (change === 'add') {
         const email = lower(body?.email);
         const name = String(body?.name || '').trim();
-        if (!email || !email.includes('@')) {
+        if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
           return Response.json({ error: 'That address does not look right.' }, { status: 400 });
         }
         if (rows.some((r) => lower(r.email) === email)) {
@@ -427,7 +386,7 @@ export default async function (req) {
       if (!draft.target_is_keeper) {
         const done = await applyChange(base44, draft, who, 'single');
         if (!done.ok) return Response.json({ error: done.message }, { status: done.status || 400 });
-        return Response.json({ applied: true, single: true, message: done.message });
+        return Response.json({ ...done, applied: true, single: true });
       }
 
       // Two keys — unless there is genuinely only one hand to ask, or the hand belongs to the
@@ -442,7 +401,7 @@ export default async function (req) {
       if (activeKeepers <= 1 || owner) {
         const done = await applyChange(base44, draft, who, activeKeepers <= 1 ? 'solo' : 'owner');
         if (!done.ok) return Response.json({ error: done.message }, { status: done.status || 400 });
-        return Response.json({ applied: true, solo: activeKeepers <= 1, owner, message: done.message });
+        return Response.json({ ...done, applied: true, solo: activeKeepers <= 1, owner });
       }
 
       // One ask at a time per person and per change, so a desk cannot fill with duplicates of
@@ -514,7 +473,7 @@ export default async function (req) {
         })
         .catch(() => {});
 
-      return Response.json({ applied: true, message: done.message });
+      return Response.json({ ...done, applied: true });
     }
 
     // ── WITHDRAWING ─────────────────────────────────────────────────────────────
@@ -548,32 +507,10 @@ export default async function (req) {
         .catch((e) => (e.status === 404 ? null : Promise.reject(e)));
       if (!row) return Response.json({ error: 'That person is no longer on the list.' }, { status: 404 });
 
-      // The sign-in invitation is offered again too, because a person whose invitation never
-      // went cannot get in at all, and the letter alone would not mend that.
-      let signIn = true;
-      try {
-        await base44.users.inviteUser(row.email, 'user');
-      } catch (e) {
-        signIn = false;
-        console.error('climateAccessChange: sign-in invite failed:', e?.message);
-      }
-
-      const told = await tell(base44, {
-        email: row.email,
-        name: row.name || row.email,
-        state: row.active ? 'invited' : 'paused',
-        person_letter: true,
-        row_id: row.id,
-      });
-      await markNotice(base44, row.id, told);
-      return Response.json({
-        sent: told.sent,
-        sign_in_invited: signIn,
-        message: [
-          told.sent ? `The letter has gone out again to ${row.email}.` : `The letter did not go${told.why ? `: ${told.why}` : '.'}`,
-          signIn ? 'The sign-in invitation is on its way too.' : 'The sign-in invitation did not go either — try again in a little while.',
-        ].join(' '),
-      });
+      if (!row.active) return Response.json({ error: 'Restore access before sending an invitation.' }, { status: 409 });
+      const retryOnly = Boolean(row.sign_in_error || row.notice_error || (!row.joined_at && !row.sign_in_sent_at) || !row.notice_sent_at);
+      const delivery = await sendCheckerInvitation(base44, row, { retryOnly });
+      return Response.json({ ...delivery, sent: delivery.complete, row_id: row.id });
     }
 
     return Response.json({ error: 'Unknown action' }, { status: 400 });
