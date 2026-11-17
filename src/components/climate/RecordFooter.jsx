@@ -30,18 +30,14 @@ export default function RecordFooter() {
           x = x
         </Link>
 
-        {/* ── TWO DATES, SIDE BY SIDE ────────────────────────────────────────────────
-            Brian, 17 November: "add 2026 like Laurie Anderson sentence." The borrowed
-            sentence above is dated 1982 because that is when she said it; this record is
-            dated 2026 because that is when it is being kept. Both chips, same voice, same
-            band — so the year a reader is reading in is stated as plainly as the year the
-            sentence came from, and neither can be mistaken for the other. */}
-        <p className="mt-7 flex flex-wrap items-center justify-center gap-2">
+        {/* ── THE DATE COMES OFF THE PAPER ───────────────────────────────────────────
+            Brian, 17 November: "this record of time box you out in can you remove please
+            and put 2026 after platform / record." So there is one chip again, hers alone —
+            the year this record is being kept in belongs in the band with the rest of the
+            printer's facts, not given a plate of its own. */}
+        <p className="mt-7">
           <span className="inline-block bg-cartoon-sun px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
             Laurie Anderson · “From the Air” · Big Science, 1982
-          </span>
-          <span className="inline-block border border-record-ink/40 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink/85">
-            This record of the time · 2026
           </span>
         </p>
       </div>
@@ -61,7 +57,7 @@ export default function RecordFooter() {
           every page. One band, three lines, and the names in ink. */}
       <div className="mt-10 bg-cartoon-sun px-4 py-7 lg:px-10">
         <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-record-ink/65 lg:text-[10px]">
-          Platform / Record
+          Platform / Record · 2026
         </p>
         <p className="mt-3 font-mono text-[10px] uppercase leading-tight tracking-[0.22em] text-record-ink lg:text-[11px]">
           Made in Scotland from photons
