@@ -565,7 +565,7 @@ export default function TogetherChangeClimate() {
           type, and warm enough to belong to the paper below it. The photograph keeps its own
           colour for the same reason the cards do: this is a record of real places. */}
       {/* Use the Map's actual painted surface, not another full-strength crop behind type. */}
-      <RecordPaintedBand className="min-h-[clamp(460px,62vh,620px)]">
+      <RecordPaintedBand strength={0.95} soft className="min-h-[clamp(320px,44vh,460px)]">
         {/* Bone band — plain statement, and the way to pass it on. One line, nothing dropped in. */}
         <div className="relative z-10 bg-[#efe7d6] px-4 lg:px-10 py-3 flex items-center justify-between gap-3"
           >
@@ -581,7 +581,7 @@ export default function TogetherChangeClimate() {
         </div>
 
         {/* Ink band */}
-        <div className="relative z-10 px-4 lg:px-10 pt-10 lg:pt-16 pb-8 flex items-start" >
+        <div className="relative z-10 px-4 lg:px-10 pt-8 lg:pt-11 pb-6">
           {/* The record's own name — the one heading on the record allowed to lead.
               It was built so the phone's width beat the floor: 11vw gave 43px on a
               393px screen and 47px at 430px, which made this the largest opening
@@ -603,8 +603,8 @@ export default function TogetherChangeClimate() {
               short line is what made it look wrong on the desk: the words were pulled apart
               to reach an edge the sentence had already finished at. Straight edges down the
               block, natural last line, which is how a printed plate actually sets. */}
-          <h1 className="font-black font-mono uppercase leading-[1.2] max-w-[340px] lg:max-w-[720px] relative z-10 text-[#efe7d6]"
-            style={{ fontSize: 'clamp(20px, 6.2vw, 44px)', letterSpacing: '0.03em', textAlign: 'justify' }}>
+          <h1 className="font-black font-mono uppercase leading-[1.06] w-full relative z-10 text-[#efe7d6]"
+            style={{ fontSize: 'clamp(20px, 5.4vw, 82px)', letterSpacing: '0.02em', textAlign: 'justify' }}>
             {t.title_a}{' '}
             <span className="text-[#ffd447]">{t.title_b}</span> {t.title_c}
           </h1>
@@ -621,7 +621,7 @@ export default function TogetherChangeClimate() {
              nothing left for the blue to point at. The record opens deep and stays deep. */}
         {/* The flicker is gone. A sentence that blinks is a trick, and a trick is the
             cheapest way to look alive; the line reads better held steady. */}
-        <div className="relative z-10 bg-[#241d16] px-4 lg:px-10 py-5 lg:py-7 mt-auto" >
+        <div className="relative z-10 bg-[#241d16]/80 px-4 lg:px-10 py-4 lg:py-5 backdrop-blur-[2px]" >
           {/* The record's own sentence, in its own voice — sentence case, on the deep
               band. Everything else in this band stays as it was. */}
           {/* ── THE SENTENCE IS PRINTED, NOT EXPLAINED ─────────────────────────────
@@ -635,7 +635,7 @@ export default function TogetherChangeClimate() {
               printed like a plate instead of set like a paragraph nobody reads.
               Justified, because a printed plate has two straight edges and a ragged right on
               a block of caps looks like a form that was never finished. */}
-          <div className="bg-[#ffd447] px-3.5 py-3.5 lg:px-4 lg:py-4 max-w-full lg:max-w-[620px]">
+          <div className="bg-[#ffd447] px-3.5 py-3 lg:px-4 lg:py-3.5 w-full">
             <p
               className="font-mono uppercase text-[10.5px] lg:text-[11.5px] leading-[1.85] tracking-[0.08em] text-[#141210]"
               style={{ textAlign: 'justify' }}
