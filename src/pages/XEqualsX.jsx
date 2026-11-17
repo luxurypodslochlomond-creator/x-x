@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
-import XEqualsXOwed from '@/components/climate/XEqualsXOwed';
+import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
@@ -52,11 +52,11 @@ export default function XEqualsX() {
 
       {/* The band that used to carry her name, her decades and her quotation. She has her own
           page for that, and this page is about a principle rather than about a person — so the
-          band answers the question a reader actually arrives with: what does the record owe
-          me, and what makes that more than a sentence on a website. */}
+          band answers the question a reader actually arrives with: what does this record
+          promise me, and what makes that more than a sentence on a website. */}
       <div className="covenant-band covenant-band--centre">
-        <SignalBeacon size={30} color="#7fc9e4" />
-        <XEqualsXOwed />
+        <SignalBeacon size={30} color="rgb(var(--record-mark))" />
+        <XEqualsXPromises />
       </div>
 
       {/* The work, card by card, exactly as her achievements are set. */}

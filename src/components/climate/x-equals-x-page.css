@@ -13,9 +13,16 @@
   min-height: 100vh;
   background-color: rgb(var(--record-bone) / .84);
   color: rgb(var(--record-ink));
-  font-family: var(--font-record-ui);
-  font-size: 0.8125rem;
-  line-height: 1.65;
+  /* ── THE FOOT'S TYPE, ALL THE WAY UP ──────────────────────────────────────────
+     The foot got this right and the page did not. Thirteen-pixel uppercase across every
+     sentence on a page is a memo, and reading two screens of a memo hurts the eye — that
+     was the complaint, and it was a fair one. So the page now keeps the foot's habits:
+     the machine's mono caps for the labels and the facts, real sentences set at a size a
+     person actually reads, and the record's own red and yellow carrying the colour.
+     Hierarchy comes from size and air, not from shouting every line. */
+  font-family: var(--font-reading);
+  font-size: 0.9375rem;
+  line-height: 1.7;
 }
 #x-equals-x :is(p, li, dd, figcaption):not(dialog *):not([role="dialog"] *) {
   font-family: inherit;
@@ -47,9 +54,9 @@
   justify-content: center;
   gap: 0.5rem;
   margin: 0 !important;
-  font-family: var(--font-record-ui) !important;
-  font-size: 0.5rem !important;
-  font-weight: 900;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 0.625rem !important;
+  font-weight: 700;
   line-height: 1.3 !important;
   text-transform: uppercase;
   letter-spacing: 0.15em !important;
@@ -66,8 +73,9 @@
 #x-equals-x .covenant-epigraph-mark {
   margin: 0 !important;
   font-family: var(--font-record-ui) !important;
-  font-size: 0.625rem !important;
-  font-weight: 900;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 0.6875rem !important;
+  font-weight: 700;
   line-height: 1 !important;
   letter-spacing: 0.2em !important;
   color: rgb(var(--record-mark)) !important;
@@ -108,7 +116,7 @@
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  padding: 3rem 1.5rem;
+  padding: 2.25rem 1.5rem;
   text-align: center;
 }
 #x-equals-x .covenant-equation {
@@ -216,18 +224,23 @@
 /* ── THE SIGNAL BAND ────────────────────────────────────────────────────────────
    One line of blue with ink on it, as her page uses its band: not decoration, a summary
    you could read from across a room. It is the only band of colour on the page. */
+/* The band is the foot's yellow, not a paler cousin of it: the masthead opens on that
+   yellow, the foot closes on it, and the one line of the page's own argument sits in it —
+   the same colour at the top, the middle and the bottom, so the page reads as one plate. */
 #x-equals-x .covenant-signal {
-  padding: 1rem 1.25rem;
-  background-color: rgb(var(--record-light-signal));
+  padding: 0.9rem 1.25rem;
+  background-color: rgb(var(--cartoon-sun));
+  border-block: 1px solid rgb(var(--record-ink) / .35);
   text-align: center;
 }
 #x-equals-x .covenant-signal p {
   margin: 0;
-  font-size: .625rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .6875rem;
   font-weight: 700;
   line-height: 1.5;
   text-transform: uppercase;
-  letter-spacing: .025em;
+  letter-spacing: .18em;
   text-align: center;
   color: rgb(var(--record-ink));
 }
@@ -240,9 +253,12 @@
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
-  padding: 2rem 1.25rem;
-  /* Hers is solid too — the band has to be a band, not a haze. */
-  background-color: #f7f1e5;
+  padding: 1.5rem 1.25rem;
+  /* Held at four fifths rather than solid: the painting runs under this page and the band
+     is part of the page, so the ground comes up through it the way it comes up through
+     every other sheet on the record. Every word on it still sits on ink-dark text at a
+     readable size, so nothing here is spending contrast to look atmospheric. */
+  background-color: rgb(247 241 229 / .84);
   border-bottom: 2px solid rgb(var(--record-ink));
   text-align: center;
 }
@@ -259,11 +275,13 @@
   text-align: center;
 }
 #x-equals-x .covenant-band--centre :is(.covenant-kicker, .covenant-label) {
-  font-size: .75rem !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .6875rem !important;
   font-weight: 700;
+  line-height: 1.4 !important;
   text-transform: uppercase;
-  letter-spacing: .08em !important;
-  color: rgb(var(--record-muted));
+  letter-spacing: .2em !important;
+  color: rgb(var(--record-mark));
 }
 #x-equals-x .covenant-band--centre h2 {
   margin: 0 !important;
@@ -301,8 +319,14 @@
    each. The numeral is set in the record's display face and coloured with the mark's own
    red, so the sequence reads as a count of something owed rather than as five paragraphs
    somebody hoped would look tidy. */
-#x-equals-x .covenant-owed-open { max-inline-size: 46ch !important; }
-#x-equals-x .covenant-owes {
+#x-equals-x .covenant-promises-open {
+  margin: 0 auto !important;
+  max-inline-size: 44ch !important;
+  font-size: 1.0625rem !important;
+  line-height: 1.6 !important;
+  color: rgb(var(--record-ink)) !important;
+}
+#x-equals-x .covenant-promises {
   width: 100%;
   max-inline-size: 44rem;
   margin: 0.5rem auto 0;
@@ -310,7 +334,7 @@
   list-style: none;
   text-align: left;
 }
-#x-equals-x .covenant-owes li {
+#x-equals-x .covenant-promises li {
   display: grid;
   grid-template-columns: 1.5rem minmax(0, 1fr);
   column-gap: 0.85rem;
@@ -318,8 +342,8 @@
   border-top: 1px solid rgba(20, 18, 16, 0.16);
   text-align: left;
 }
-#x-equals-x .covenant-owes li:first-child { border-top: 0; }
-#x-equals-x .covenant-owes li::before {
+#x-equals-x .covenant-promises li:first-child { border-top: 0; }
+#x-equals-x .covenant-promises li::before {
   content: attr(data-n);
   grid-column: 1;
   grid-row: 1;
@@ -329,32 +353,32 @@
   line-height: 1.4;
   color: rgb(var(--record-mark));
 }
-#x-equals-x .covenant-owes strong {
+#x-equals-x .covenant-promises strong {
   display: block;
-  font-family: var(--font-record-ui);
-  font-size: 0.8125rem;
-  font-weight: 900;
+  font-family: var(--font-reading);
+  font-size: 1.0625rem;
+  font-weight: 700;
   line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.005em;
   color: rgb(var(--record-ink));
 }
-#x-equals-x .covenant-owes span {
+#x-equals-x .covenant-promises span {
   display: block;
-  margin-top: 0.25rem;
-  font-size: 0.8125rem;
-  line-height: 1.6;
+  margin-top: 0.3rem;
+  max-inline-size: 62ch;
+  font-size: 0.9375rem;
+  line-height: 1.65;
   color: #5a5246;
 }
 @media (min-width: 1024px) {
-  #x-equals-x .covenant-owes strong,
-  #x-equals-x .covenant-owes span { font-size: 0.875rem; }
+  #x-equals-x .covenant-promises strong { font-size: 1.125rem; }
+  #x-equals-x .covenant-promises span { font-size: 1rem; }
 }
 #x-equals-x .covenant-source-name { display: block; margin-top: 0.25rem; }
 #x-equals-x cite { font-style: normal; }
 #x-equals-x .covenant-caption {
   font-family: var(--font-record-ui) !important;
-  font-size: 0.75rem !important;
+  font-size: 0.8125rem !important;
   line-height: 1.6 !important;
   color: #5a5246;
 }
@@ -367,18 +391,18 @@
 #x-equals-x .covenant-stack {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   width: 100%;
   max-width: 820px;
   margin: 0 auto;
-  padding: 2rem 1.25rem;
+  padding: 1.25rem 1rem;
 }
 #x-equals-x .covenant-card {
   padding: 1.25rem;
   /* Solid, not the paper at six tenths. Hers are solid on bone, so a card reads as a
      card the moment the eye lands on it; held at partial opacity they dissolved into the
      ground and the whole stack looked like one grey passage. Same value hers use. */
-  background-color: #f7f1e5;
+  background-color: rgb(247 241 229 / .8);
   border: 1px solid rgb(var(--record-ink));
   border-top: 4px solid rgb(var(--record-red));
 }
@@ -386,29 +410,31 @@
    13px headings above them. Inheriting the page's 13px made heading and body the same
    size, which is the flatness that read as squashed. */
 #x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) {
-  font-size: 0.75rem;
+  font-size: 0.9375rem;
+  max-inline-size: 66ch;
 }
 #x-equals-x .covenant-card--ocean { border-top-color: rgb(var(--cartoon-sun)); }
 #x-equals-x .covenant-card h2 {
   margin: 0 0 .75rem !important;
   max-inline-size: none;
   font-family: inherit !important;
-  font-size: .8125rem !important;
+  font-size: .9375rem !important;
   font-weight: 700 !important;
-  line-height: 1.5 !important;
+  line-height: 1.35 !important;
   text-transform: uppercase;
-  letter-spacing: .025em !important;
+  letter-spacing: .02em !important;
   color: rgb(var(--record-ink));
 }
 #x-equals-x .covenant-card :is(.covenant-kicker, .covenant-label),
 #x-equals-x .covenant-commitments > div:first-child p {
-  margin: 0 0 .5rem;
-  font-size: .75rem !important;
-  font-weight: 400;
-  line-height: 1.5 !important;
+  margin: 0 0 .55rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .6875rem !important;
+  font-weight: 700;
+  line-height: 1.4 !important;
   text-transform: uppercase;
-  letter-spacing: .08em !important;
-  color: rgb(var(--record-muted));
+  letter-spacing: .18em !important;
+  color: rgb(var(--record-mark));
 }
 /* RecordBand supplies spacing for an open page, not for a band already in a card. */
 #x-equals-x .covenant-card > .covenant-commitments {
@@ -442,17 +468,18 @@
 }
 #x-equals-x .covenant-term dt {
   grid-column: 2;
-  font-family: var(--font-record-ui);
-  font-size: 0.8125rem;
-  font-weight: 900;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
   line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.14em;
+  color: rgb(var(--record-mark));
 }
 #x-equals-x .covenant-term dd {
   grid-column: 2;
   margin: 0.3rem 0 0;
-  color: #5a5246;
+  color: #4a4239;
 }
 #x-equals-x .covenant-standard { margin-top: 1rem !important; }
 
@@ -700,16 +727,23 @@
 #x-equals-x .covenant-hero :is(a, button):focus-visible { outline-color: #efe7d6; }
 #x-equals-x ::selection { background: rgb(var(--cartoon-sun) / .45); }
 
+/* ── DESK, TIGHTENED ────────────────────────────────────────────────────────────
+   The wide screen was mostly air: five rem of padding over the plate, three and a half
+   over every band, and a stack that opened with a gap the height of a card. On a 1945px
+   glass that is not calm, it is a page that has come apart — the complaint that keeps
+   coming back. The measure stays (nothing runs past 900px), the air between things is
+   what came down. Text is a size bigger at desk width as well, because a 1945px screen
+   set at thirteen pixels is the other half of the same mistake. */
 @media (min-width: 1024px) {
   #x-equals-x .covenant-hero-scan { display: none; }
-  #x-equals-x.covenant-page { font-size: .84375rem; line-height: 1.75; }
-  #x-equals-x .covenant-hero-inner { padding: 5rem 2.5rem; }
-  #x-equals-x .covenant-band--centre { padding: 3.5rem 2.5rem; }
-  #x-equals-x .covenant-band--centre p { max-inline-size: 42rem; }
-  #x-equals-x .covenant-stack { max-width: 900px; gap: 1.25rem; padding: 3.5rem 0; }
-  #x-equals-x .covenant-card { padding: 1.75rem; }
-  #x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) { font-size: 0.84375rem; }
-  #x-equals-x .covenant-close { max-width: 900px; padding: 0 0 3.5rem; }
+  #x-equals-x.covenant-page { font-size: 1rem; line-height: 1.7; }
+  #x-equals-x .covenant-hero-inner { padding: 3.25rem 2.5rem; }
+  #x-equals-x .covenant-band--centre { padding: 2.25rem 2.5rem; }
+  #x-equals-x .covenant-band--centre p { max-inline-size: 46rem; }
+  #x-equals-x .covenant-stack { max-width: 880px; gap: 0.8rem; padding: 1.75rem 0; }
+  #x-equals-x .covenant-card { padding: 1.4rem; }
+  #x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) { font-size: 1rem; }
+  #x-equals-x .covenant-close { max-width: 880px; padding: 0 0 2rem; }
 }
 
 html[data-tongue="th"] #x-equals-x :is(p, li, dd) { line-height: 1.95 !important; overflow-wrap: normal !important; }
