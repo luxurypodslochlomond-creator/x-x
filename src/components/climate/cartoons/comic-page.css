@@ -412,3 +412,59 @@
   .record-pages .cartoon-room .comic-ending { padding-inline: 1.25rem; }
   .record-pages .cartoon-room .comic-speech { left: 1.1rem; }
 }
+
+/* ── THE ROOM'S OWN HAND, AND THE RECORD'S VOICE UNDER IT ───────────────────────
+   Brian, 18 November: "the font on this page of cartoons is doing my head in, not
+   coolasfuck … doesn't feel part of our record."
+
+   Both halves of that were true and they had one cause. Every heading on this page was the
+   same bold grotesque the whole record uses, and every small note was the same face at
+   small caps — so a room of drawings was set in the voice of a policy document, shouting
+   in exactly one volume from the masthead to the credit.
+
+   So the page is split by what the words are doing. Anything that is a drawing's title or
+   the room's name is set in comic lettering, because that is what those words are: a
+   masthead and a section head, printed. Anything that is a sentence a person reads — what
+   the catalogue is, whose drawing this is, what the strip is for — is set in the record's
+   own reading face, in lower case, at a size a phone can hold. One room, two jobs, no
+   third voice, and the stamps (the panel number, the gesture) stay stamps. */
+.record-pages .cartoon-room {
+  --cartoon-display: 'Bangers', var(--font-record-ui);
+  --cartoon-read: 'Source Serif 4', var(--font-record-reading);
+}
+.record-pages .cartoon-room :is(.comic-title, .comic-section-title) {
+  font-family: var(--cartoon-display) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: .015em !important;
+  line-height: .94 !important;
+}
+.record-pages .cartoon-room .comic-title {
+  font-size: clamp(3.4rem, 16.5vw, 5.6rem) !important;
+}
+.record-pages .cartoon-room .comic-section-title {
+  font-size: clamp(2rem, 8.6vw, 2.9rem) !important;
+}
+.record-pages .cartoon-room :is(p, span, a).record-meta:not(.comic-gesture):not(.comic-number):not(.comic-catalogue-eyebrow) {
+  font-family: var(--cartoon-read) !important;
+  font-size: .95rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ── THE COVER, PRINTED ON THE PAGE RATHER THAN PLACED IN IT ────────────────────
+   The catalogue cover now runs to both edges of the glass on a phone, with an ink rule
+   under it and the three sentences that explain it sitting on paper beneath. The picture
+   is the first thing, and it is the width of the device. */
+@media (max-width: 639px) {
+  .record-pages .cartoon-room .comic-catalogue { margin-inline: -1.25rem; }
+  .record-pages .cartoon-room .comic-catalogue-band { padding-inline: 1.25rem; }
+}
+.record-pages .cartoon-room .comic-catalogue-band {
+  padding: 1rem 1.25rem 1.15rem;
+  background-color: rgb(var(--cartoon-paper));
+  border-top: 3px solid rgb(var(--record-ink));
+  border-bottom: 3px solid rgb(var(--record-ink));
+}
+.record-pages .cartoon-room .comic-catalogue-line + .comic-catalogue-line { margin-top: .6rem; }

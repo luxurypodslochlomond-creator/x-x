@@ -19,11 +19,28 @@ export default function CartoonOpening() {
   return (
     <section className="comic-opening" aria-labelledby="cartoon-opening-title">
       <p id="cartoon-opening-title" className="comic-opening-line record-meta">
-        The climate, seen differently. Human drawings from What On Earth!® at CEEW,
+        The climate, seen differently. The cartoons chosen for the 29 November workshop,
         a little AI-illustrated fiction, and a wall waiting for your own way of seeing.
+      </p>
+      {/* ── WHY THOSE OTHER DRAWINGS ARE HERE, AND WHOSE THEY ARE ─────────────────
+          Brian, 18 November: "why do we have more CEEW or whatever they're called bro,
+          what's purpose of this?" — asked on behalf of a reader who had met thirteen
+          drawings from an Indian research institute on a page about an African biennial
+          with nothing on the page explaining why. A credit is not an explanation.
+
+          So the wall says it plainly: those are the wall's opening drawings, made by
+          What On Earth!®, the cartoon series at CEEW (the Council on Energy, Environment
+          and Water, in India), shown with their permission — and the cartoonists' pages
+          from the workshop take their place on the same wall as they arrive. CEEW is a
+          source on this wall, never the subject of the room. */}
+      <p className="comic-opening-sub record-meta">
+        The wall opens with drawings by What On Earth!®, the cartoon series at CEEW — the
+        Council on Energy, Environment and Water, in India — shown with their permission
+        while the workshop’s own pages arrive.
       </p>
       <p className="comic-opening-sub record-meta">
         Gathered for CartoonAFRICA. Edited by Francis Umendu Odupute and Janine Selendy.
+        Catalogue prepared by African Press Cartoon Services.
       </p>
       <CartoonPageMap />
     </section>

@@ -39,10 +39,33 @@ export default function CartoonCatalogueBand() {
             is a credit nobody reads. */}
         <p className="comic-catalogue-cover-credit record-meta">{CARTOON_EVENT.coverArt}</p>
         <CartoonCoverWords />
-        <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · in preparation</p>
+        <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · being made now</p>
+        {/* ── WHAT THIS BOOK IS, IN THE WORDS OF THE PEOPLE MAKING IT ──────────────
+            Francis Umendu Odupute, to Janine, 18 November: "This is a sample of the
+            catalogue cover page that African Press Cartoon services is preparing for the
+            selected cartoons that will feature in our online workshop discussions on 29th
+            November. All the African cartoonists who participated in the discussion will
+            have their artworks packaged into an anthology or catalogue and published our
+            CAIB website platforms as well as on your new website on Climate Change
+            collective actions, for free downloads globally."
+
+            That paragraph is the whole reason this room exists, and it had never been
+            printed on the page — a reader met a cover, a caption and a share button and was
+            left to guess who was making the book, out of what, and what would happen to it.
+            So it is said here in three plain sentences, in his terms, with no adjectives
+            added. */}
         <p className="comic-catalogue-line record-meta">
-          {CARTOON_EVENT.biennial} — edited by {CARTOON_EVENT.editors}. Free to download
-          from this page the day it is finished.
+          This is a sample of the catalogue cover that African Press Cartoon Services is
+          preparing for the cartoons selected for the online workshop discussions on
+          29 November.
+        </p>
+        <p className="comic-catalogue-line record-meta">
+          Every African cartoonist who took part in those discussions has their work
+          gathered into it, edited by {CARTOON_EVENT.editors}.
+        </p>
+        <p className="comic-catalogue-line record-meta">
+          When it is finished it is published free — on CAIB’s own platforms and on this
+          record — for anyone in the world to download.
         </p>
         <a href="#cartoon-anthology" className="comic-catalogue-link">
           What the book is <ArrowDown size={14} />
