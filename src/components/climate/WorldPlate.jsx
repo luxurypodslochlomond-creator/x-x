@@ -27,6 +27,9 @@ const MARKS = {
   action: { fill: '#1e3a2b', shape: 'rotate-45', size: 8 },
   // A line on the wire. The record's ocean, not its warning: a report is not an emergency.
   wire: { fill: '#0f5f7a', shape: 'rounded-full', size: 7 },
+  // A drawing. The record's ochre, and a square rather than a dot — a plate, hung: the one
+  // mark on this map that is a picture and not a fact about a place.
+  cartoon: { fill: '#9b6f28', shape: 'rounded-sm', size: 9 },
   country: { fill: '#b3261e', shape: 'rounded-full', size: 9 },
   nation: { fill: '#0f5f7a', shape: 'rounded-full', size: 9 },
 };

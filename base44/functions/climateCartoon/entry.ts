@@ -89,6 +89,10 @@ export default async function (req: Request): Promise<Response> {
         title: clean(body?.title, 120),
         artist_name,
         origin: clean(body?.origin, 200),
+        // Where it was drawn, in the sender's own words. Never worked out from anything:
+        // a drawing with no stated country stays off the map rather than being placed
+        // by a guess, which is the one thing a plate about honesty cannot do.
+        country: clean(body?.country, 80),
         for_line: clean(body?.for_line, 240),
         image_url,
         machine_line: clean(body?.machine_line, 240),

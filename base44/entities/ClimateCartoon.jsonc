@@ -15,6 +15,10 @@
       "type": "string",
       "description": "Where it came from \u2014 the workshop, the school, the class, the group, the page it was first printed on. Said in the sender's own words."
     },
+    "country": {
+      "type": "string",
+      "description": "The country the drawing was made in, so the drawing stands on the record's map where it was drawn rather than nowhere. Given by the person sending it in, and never inferred from an address, a language or a guess: a drawing with no stated country simply does not appear on the map, and is not counted as though it had."
+    },
     "for_line": {
       "type": "string",
       "description": "One line, in the drawer's own words, on what the drawing is for. The record never writes this for them and never corrects it."

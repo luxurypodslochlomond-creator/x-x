@@ -106,6 +106,10 @@ export default async function(req) {
     // Count total published entries — shows the size of the record
     const publishedSolutions = await base44.asServiceRole.entities.ClimateSolution.count({ status: 'published' });
     const publishedActions = await base44.asServiceRole.entities.ClimateAction.count({ status: 'published' });
+    // The drawings are entries on this record too, and leaving them out of the figure made
+    // a wall of named work look like nothing at all. Counted, and counted apart, so nobody
+    // has to guess how much of the record is drawn rather than written.
+    const publishedCartoons = await base44.asServiceRole.entities.ClimateCartoon.count({ status: 'published' }).catch(() => 0);
 
     // Top stories by country-reach — which entries the world is reaching for.
     // Two aggregates (solutions + actions), each grouped by entry_id with distinct-country count.
@@ -202,7 +206,8 @@ export default async function(req) {
       unique_countries: countries.length,
       countries,
       regions,
-      published_entries: publishedSolutions + publishedActions,
+      published_entries: publishedSolutions + publishedActions + publishedCartoons,
+      published_cartoons: publishedCartoons,
       top_stories: topStories,
       upcoming_actions: upcoming_actions,
     });

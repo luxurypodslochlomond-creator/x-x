@@ -46,7 +46,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
         // The wire is on the plate too. Its own country field was put there "for the wire's
         // place line and for mapping" — a report about Benin is about Benin, wherever it was
         // written — so the map would have been telling half the record and calling it all of it.
-        const [solutions, actions, news, solutionTotal, actionTotal, newsTotal] = await Promise.all([
+        const [solutions, actions, news, cartoons, solutionTotal, actionTotal, newsTotal, cartoonTotal] = await Promise.all([
           base44.entities.ClimateSolution.filter(
             { status: 'published' },
             {
@@ -71,14 +71,25 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
                 'verification', 'corroborating_source', 'source_name', 'source_url', 'created_date'],
             }
           ).catch(() => ({ items: [] })),
+          // The room of cartoons, on the same plate. A drawing is where it was drawn, not
+          // where it was sent from — and a drawing whose maker gave no country is left off
+          // rather than dropped onto a guess.
+          base44.entities.ClimateCartoon.filter(
+            { status: 'published' },
+            {
+              limit: 200,
+              fields: ['title', 'artist_name', 'for_line', 'country', 'origin', 'credit', 'source_url', 'created_date'],
+            }
+          ).catch(() => ({ items: [] })),
           // The totals are counted separately so the plate can never claim to hold
           // everything: an entry with no place it can honestly be put is not dropped
           // from the count, it is admitted.
           base44.entities.ClimateSolution.count({ status: 'published' }),
           base44.entities.ClimateAction.count({ status: 'published' }),
           base44.entities.ClimateNews.count({ status: 'published' }).catch(() => 0),
+          base44.entities.ClimateCartoon.count({ status: 'published' }).catch(() => 0),
         ]);
-        setPublishedTotal((solutionTotal || 0) + (actionTotal || 0) + (newsTotal || 0));
+        setPublishedTotal((solutionTotal || 0) + (actionTotal || 0) + (newsTotal || 0) + (cartoonTotal || 0));
         setEntries([
           ...(solutions.items || []).map((s) => ({
             id: `solution-${s.id}`, entryId: s.id, type: s.entry_type === 'climate_crisis' ? 'crisis' : 'solution',
@@ -97,6 +108,13 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
             title: n.headline, summary: n.what_changed || '', category: n.category, country: n.country, region: n.where_label,
             verification: n.verification, corroborating_source: n.corroborating_source,
             source_name: n.source_name, source_url: n.source_url, arrived: n.created_date,
+          })),
+          ...((cartoons.items || [])).map((c) => ({
+            id: `cartoon-${c.id}`, entryId: c.id, type: 'cartoon',
+            title: c.title || c.artist_name, summary: c.for_line || '',
+            country: c.country, region: c.origin,
+            source_name: c.artist_name ? `Drawn by ${c.artist_name}` : '', source_url: c.source_url,
+            credit: c.credit, arrived: c.created_date,
           })),
         ]);
       } catch {
@@ -129,13 +147,13 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
         dx,
         dy,
         tone: e.type,
-        aria: `${e.type === 'crisis' ? 'Crisis' : e.type === 'action' ? 'Action' : 'Solution'}: ${e.title}${e.country ? `, ${e.country}` : ''}`,
+        aria: `${e.type === 'crisis' ? 'Crisis' : e.type === 'action' ? 'Action' : e.type === 'cartoon' ? 'Drawing' : 'Solution'}: ${e.title}${e.country ? `, ${e.country}` : ''}`,
       };
     });
   }, [entries, only]);
 
   const counts = useMemo(() => {
-    const c = { crisis: 0, solution: 0, action: 0, wire: 0 };
+    const c = { crisis: 0, solution: 0, action: 0, wire: 0, cartoon: 0 };
     entries.forEach((e) => { if (resolveCoords(e.country, e.region)) c[e.type] += 1; });
     return c;
   }, [entries]);
@@ -167,8 +185,8 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
           {loading
             ? 'Setting the entries…'
             : only
-              ? `Showing ${marks.length} of ${counts.crisis + counts.solution + counts.action + counts.wire} placed`
-              : (counts.crisis + counts.solution + counts.action + counts.wire) < publishedTotal
+              ? `Showing ${marks.length} of ${counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon} placed`
+              : (counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon) < publishedTotal
                 ? `${marks.length} of ${publishedTotal} entries placed`
                 : `${marks.length} ${marks.length === 1 ? 'entry' : 'entries'} placed`}
           {!loading && newestArrival && (
@@ -183,6 +201,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
             ['solution', 'Solutions', '#141210', 'rounded-full'],
             ['action', 'Actions', '#1e3a2b', 'rotate-45'],
             ['wire', 'Wire', '#0f5f7a', 'rounded-full'],
+            ['cartoon', 'Drawings', '#9b6f28', 'rounded-sm'],
           ].map(([key, label, colour, shape]) => (
             <button
               key={key}
@@ -222,11 +241,12 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
                     picked.type === 'crisis' ? '#b3261e'
                     : picked.type === 'action' ? '#1e3a2b'
                     : picked.type === 'wire' ? '#0f5f7a'
+                    : picked.type === 'cartoon' ? '#9b6f28'
                     : '#141210',
                   color: '#efe7d6',
                 }}
               >
-                {picked.type === 'crisis' ? 'Crisis' : picked.type === 'action' ? 'Action' : picked.type === 'wire' ? 'Wire' : 'Solution'}
+                {picked.type === 'crisis' ? 'Crisis' : picked.type === 'action' ? 'Action' : picked.type === 'wire' ? 'Wire' : picked.type === 'cartoon' ? 'Drawing' : 'Solution'}
               </span>
               {picked.country && (
                 <span className="text-[8px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246]">{picked.country}</span>
@@ -276,16 +296,21 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
                 )
               )}
             </div>
+            {picked.credit && (
+              <p className="text-[9px] font-mono uppercase tracking-[0.08em] text-[#5a5246] mt-2">{picked.credit}</p>
+            )}
             <div className="flex items-center gap-3 mt-2">
               <Link
                 to={
                   picked.type === 'wire'
                     ? `/ClimateWireEntry/${picked.entryId}`
-                    : `/ClimateDetail/${picked.type === 'action' ? 'action' : 'solution'}/${picked.entryId}`
+                    : picked.type === 'cartoon'
+                      ? '/ClimateCartoons'
+                      : `/ClimateDetail/${picked.type === 'action' ? 'action' : 'solution'}/${picked.entryId}`
                 }
                 className="inline-flex items-center gap-1.5 text-[10px] font-black font-mono uppercase text-[#efe7d6] bg-[#141210] px-2.5 py-1.5"
               >
-                Open the entry →
+                {picked.type === 'cartoon' ? 'The room of cartoons →' : 'Open the entry →'}
               </Link>
               {picked.category && (
                 <span className="text-[9px] font-mono uppercase tracking-[0.1em] text-[#5a5246]">{catLabel(picked.category)}</span>
@@ -298,7 +323,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : 'Press a mark, or a place named above it, to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire — a line stands where the thing is, never where it was written from. An amber glow is a place reading the record: one entry opened there, and nobody named.'}
+              : 'Press a mark, or a place named above it, to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire, ochre a drawing — a line stands where the thing is, never where it was written from, and a drawing stands where it was drawn. An amber glow is a place reading the record: one entry opened there, and nobody named.'}
           </p>
         )}
       </div>

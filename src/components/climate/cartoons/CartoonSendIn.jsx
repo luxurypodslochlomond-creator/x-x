@@ -166,6 +166,7 @@ export default function CartoonSendIn() {
           <div className="mt-3 space-y-2">
             <input className={field} placeholder="Who drew it — their name as it should appear" value={form.artist_name} onChange={set('artist_name')} />
             <input className={field} placeholder="Where it came from — the workshop, the school, the group" value={form.origin} onChange={set('origin')} />
+            <input className={field} placeholder="Which country it was drawn in (so it can stand on the map)" value={form.country} onChange={set('country')} />
             <input className={field} placeholder="What it is called (if it has a name)" value={form.title} onChange={set('title')} />
             <textarea
               className={`${field} min-h-[74px] py-2`}
