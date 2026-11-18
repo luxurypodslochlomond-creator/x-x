@@ -42,10 +42,16 @@ import '@/components/climate/record-navigator.css';
 // ways in — the record, the wire, the map, reach, and the search. Row two is what a reader
 // asks once they are standing inside: why the record exists, how an entry is checked, what
 // has been corrected, who asked for it, and the mark that opens everything else. Ten named
-// doors, two lines, and the line under them saying which room you are in.
+// doors, two lines, and nothing under them.
+//
+// There was a third line under the rail saying which room you were standing in. It was
+// written when the cells had no names, so it was the only thing that told a thumb where it
+// had landed. Now every cell carries its own name — including the one for the record itself
+// — so that line was printing "Record of the Time" underneath a door already called Record.
+// Brian, 18 November: "extra line under nav, says record etc, looks broken." It did. Two
+// rows of named doors need nothing beneath them.
 const ROW_ONE = PRIMARY_NAV;
 const ROW_TWO = [...RAIL_SECOND_NAV, DESK_FOUNDER];
-const WAY_IN = [...ROW_ONE, ...ROW_TWO];
 
 // Equal share, always. Every cell is one sixth of the row whatever it contains, so no door
 // can push its neighbour aside and nothing shifts when a page turns or a tongue changes.
@@ -53,7 +59,6 @@ const CELL = 'flex-1 basis-0 min-w-0 !min-h-0';
 
 export default function RecordImprint({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
-  const here = WAY_IN.find((item) => item.to === pathname);
 
   return (
     <div className="flex flex-col pb-0 lg:pb-2">
@@ -119,12 +124,6 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
           />
         </div>
 
-        {/* Where you are, said once, in the record's own voice. On the front page it names
-            the record itself; in any other room it names that room and what it holds. */}
-        <p className="rec-mast-here">
-          <span className="rec-mast-here-name">{here?.label || 'Record of the Time'}</span>
-          {here?.what && <span className="rec-mast-here-what">· {here.what}</span>}
-        </p>
       </nav>
 
       {/* Who wrote the words in a tongue, and whether a speaker has checked them. Under
