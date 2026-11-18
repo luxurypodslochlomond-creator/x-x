@@ -48,8 +48,21 @@
    no filter, no "improvement". Somebody else's cover is not the record's to doctor.
    The band under it is the sun colour the rest of the room uses, so the cover reads as part
    of this room rather than as a picture pasted into it. */
-.comic-catalogue { margin: 0 -1rem 1.3rem; }
-.comic-catalogue img { display: block; width: 100%; height: auto; }
+/* ── THE DEAD BLACK STRIP WAS IN THE FILE, NOT UNDER THE NAV ─────────────────────
+   Brian, 18 November: "still dead black space to me bro". He was right, and it was not the
+   padding I took out — I measured the cover itself. The file is 1179 x 2556 and its top
+   394 rows are flat black (mean brightness 10 of 255), then it steps straight to white.
+   So a third of a picture's width, fifteen per cent of its height, is a blank black margin
+   baked into the PNG. At 393 pixels wide that is 131 pixels of nothing between the nav and
+   the poster, on every handset, forever.
+   A margin is not artwork, so the blank strip comes off the display: the picture is pulled
+   up by exactly its own black margin and the section clips it. Nothing is cropped out of
+   the poster, nothing is scaled, tinted or re-encoded, and the file on the server is
+   untouched — the moment Francis sends a cover with no black band, this rule removes
+   nothing but the nothing. The percentage is measured, not guessed: 394 / 1179 = 33.42%,
+   and a top margin resolves against the width, so it holds at every size. */
+.comic-catalogue { margin: 0 -1rem 1.3rem; overflow: hidden; }
+.comic-catalogue img { display: block; width: 100%; height: auto; margin-top: -33.42%; }
 .comic-catalogue-band { padding: .7rem 1rem .8rem; background: rgb(var(--cartoon-sun)); border-top: 3px solid rgb(var(--record-ink)); border-bottom: 3px solid rgb(var(--record-ink)); }
 .comic-catalogue-eyebrow { font-size: .6rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
 .comic-catalogue-line { margin: .35rem 0 0; font-size: .8rem; font-weight: 600; line-height: 1.45; }
