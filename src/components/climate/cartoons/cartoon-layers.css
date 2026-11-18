@@ -1,217 +1,231 @@
-/* ── THE ROOM AS ONE SHEET, LAID IN LAYERS ───────────────────────────────────────
-   Brian, 18 November 2026: "its very flat and linear" · "real as fuck but layered
-   digitally" · "why we not using full width on desktop bro feel like wasted".
+/* A composed comic, not a staggered exhibition. Desktop owns one explicit grid.
+   All artwork remains whole; texture and registration marks belong around it. */
+.cartoon-cover-spread, .cartoon-editorial-foot { display: contents; }
 
-   The fault was structural, not decorative. Every part of this room was a bordered box
-   in one narrow column — masthead box, cover box, wall box, reader box, notes box, why
-   box, workshop box, sources box. Eight boxes stacked is a form, not a page, and a form
-   is exactly what "flat and linear" describes.
+/* Preserve the existing phone composition, including its full-bleed first drawing. */
+@media (max-width: 1023px) {
+  #root .cartoon-room :is(.comic-catalogue-band, .comic-event-context, .cartoon-wall-head,
+    .comic-session, .comic-anthology, .comic-why, .comic-workshop, .comic-sources,
+    .comic-reader, .cartoon-room-notes, .cartoon-fiction-head) {
+    border-left: 0 !important; border-right: 0 !important; border-bottom: 0 !important;
+    box-shadow: none !important; background: transparent !important; padding-inline: 0 !important;
+  }
+  #root .cartoon-room .record-cartoon-plate,
+  #root .cartoon-room .record-cartoon-plate:hover { border: 0 !important; box-shadow: none !important; background: none !important; }
+  #root .cartoon-room .comic-catalogue > img { border: 0 !important; box-shadow: none !important; }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel {
+    border: 0 !important; box-shadow: none !important; background: transparent !important; padding: 0 !important;
+  }
+  #root .cartoon-room .cartoon-reading-spread .record-cartoon-plate { position: relative; }
+  #root .cartoon-room .cartoon-reading-spread .cartoon-artwork-door {
+    position: relative; z-index: 1; background: rgb(var(--cartoon-paper));
+  }
+  #root .cartoon-room .cartoon-reading-spread .record-cartoon-plate::after {
+    content: ''; position: absolute; z-index: 0; pointer-events: none;
+    top: .9rem; right: -.9rem; bottom: -.9rem; left: .9rem;
+    background: rgb(var(--record-ink) / .05); border: 1px solid rgb(var(--record-ink) / .14);
+  }
+  #root .cartoon-room .cartoon-human-wall, #root .cartoon-room .comic-masthead { margin-inline: 0; }
+}
 
-   So this sheet does three things and adds no ornament of its own:
-
-   1. It lets the room use the whole glass on a desk. A wall of drawings shown at a third
-      of a screen is a wall nobody can actually read, and the drawings are the reason the
-      room exists.
-   2. It takes the borders and shadows off the sections, so the page is one sheet ruled
-      by ink — the way a cartoonist's page is one sheet and not a folder of cards.
-   3. It lays the work in layers: plates at different widths and different heights, one
-      sheet set behind another, so the eye moves in depth instead of down a list.
-
-   Nothing here touches a drawing. No image is cropped, tinted, covered or moved. The
-   layers are paper BEHIND the work, never ink over it. */
-
-/* ── 1. THE WHOLE GLASS ────────────────────────────────────────────────────────── */
 @media (min-width: 1024px) {
   #root .record-cartoon-field .record-book { max-width: none; }
   #root .cartoon-room .record-shell-body { padding: 0; }
-  /* Named the whole way down on purpose: an earlier sheet already set this padding with a
-     longer selector, and a room that is only *meant* to be full width is not full width. */
   #root .record-cartoon-field .cartoon-room .record-shell-content {
-    max-width: none;
-    padding: clamp(1.5rem, 2.6vw, 3.5rem) clamp(1.5rem, 3.2vw, 4.5rem) 4rem;
+    max-width: none; padding: 1.25rem clamp(1rem, 2.4vw, 3rem) 3rem;
   }
-}
+  #root .cartoon-room .cartoon-room-plate {
+    max-width: 112rem; margin-inline: auto; padding: .65rem;
+    background: rgb(var(--record-ink) / .96);
+    border: 2px solid rgb(var(--record-ink));
+  }
+  #root .cartoon-room .cartoon-room-plate > * { min-width: 0; }
 
-/* ── 2. ONE SHEET, NOT EIGHT BOXES ─────────────────────────────────────────────── */
-/* The four edges come off, so nothing reads as a card. The top rule stays: a sheet of
-   drawings is divided by rules down the page, and those rules are the only thing telling
-   a reader that a new layer has started. A page with neither boxes nor rules is a mess;
-   a page with boxes is a form. */
-#root .cartoon-room :is(.comic-catalogue-band, .comic-event-context, .cartoon-wall-head,
-  .comic-session, .comic-anthology, .comic-why, .comic-workshop, .comic-sources,
-  .comic-reader, .cartoon-room-notes, .cartoon-fiction-head) {
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-bottom: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  padding-inline: 0 !important;
-}
-#root .cartoon-room .record-cartoon-plate,
-#root .cartoon-room .record-cartoon-plate:hover {
-  border: 0 !important;
-  box-shadow: none !important;
-  background: none !important;
-}
-#root .cartoon-room .comic-catalogue > img { border: 0 !important; box-shadow: none !important; }
-#root .cartoon-room .comic-reader > .cartoon-story-reel {
-  border: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-}
-
-/* ── 3. THE SECOND SHEET BEHIND EACH DRAWING ────────────────────────────────────
-   One translucent plane, set a finger's width down and to the right of the artwork, so
-   the drawing reads as laid ON a page rather than printed in a frame. It is behind the
-   work and it never crosses it: the paper edge is the only thing that shows. */
-#root .cartoon-room .cartoon-reading-spread .record-cartoon-plate { position: relative; }
-#root .cartoon-room .cartoon-reading-spread .cartoon-artwork-door {
-  position: relative;
-  z-index: 1;
-  background: rgb(var(--cartoon-paper));
-}
-#root .cartoon-room .cartoon-reading-spread .record-cartoon-plate::after {
-  content: '';
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  top: .9rem;
-  right: -0.9rem;
-  bottom: -0.9rem;
-  left: .9rem;
-  background: rgb(var(--record-ink) / .05);
-  border: 1px solid rgb(var(--record-ink) / .14);
-}
-
-/* ── 4. THE OPENING, EDGE TO EDGE ──────────────────────────────────────────────── */
-@media (min-width: 1024px) {
+  /* One opening page: drawn masthead and story left, Francis's complete cover right.
+     No duplicate cover cropped into the lettering or repeated as section wallpaper. */
+  #root .cartoon-room .cartoon-cover-spread {
+    display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr);
+    background: rgb(var(--cartoon-paper)); color: rgb(var(--record-ink));
+    border-top: .65rem solid rgb(var(--record-red)); gap: 0;
+  }
+  #root .cartoon-room :is(.comic-event-opening, .comic-catalogue) { display: contents; }
   #root .cartoon-room .comic-masthead {
-    margin-inline: calc(-1 * clamp(1.5rem, 3.2vw, 4.5rem));
-    padding: clamp(2.5rem, 4.5vw, 4.5rem) clamp(1.5rem, 3.2vw, 4.5rem) clamp(2rem, 3vw, 3rem);
-    border-inline: 0;
-    box-shadow: none;
+    grid-column: 1; grid-row: 1; margin: 0; min-height: 24rem;
+    padding: 2rem 2rem 1.75rem; border: 0; border-bottom: 5px solid rgb(var(--record-red));
+    box-shadow: none; background-color: rgb(var(--record-ink));
+    background-image: linear-gradient(90deg, rgb(var(--record-ink) / .35), transparent), var(--comic-opening-art);
+    background-size: cover; background-position: center;
   }
-  #root .record-cartoon-field .cartoon-room .comic-title {
-    font-size: clamp(4.5rem, 9.5vw, 11rem) !important;
-    line-height: .86 !important;
+  #root .cartoon-room .comic-masthead::before,
+  #root .cartoon-room .comic-masthead::after { content: none; }
+  #root .cartoon-room .comic-masthead .comic-title {
+    margin: .85rem 0 1.2rem; font-size: clamp(5.6rem, 8.6vw, 10.4rem) !important;
+    line-height: .81 !important; letter-spacing: -.015em !important;
+    color: rgb(var(--cartoon-paper)) !important; transform: rotate(-2deg);
+    text-shadow: .025em .025em 0 rgb(var(--record-red));
   }
-
-  /* The room's names, at the size a hand letters a title on a sheet rather than the size a
-     page sets a heading in. This is most of what "flat and linear" was: eight sections all
-     announced at the same modest size, so nothing on the page was ever loud. */
-  #root .cartoon-room :is(.comic-section-title, .comic-session-title, .comic-anthology-title) {
-    font-size: clamp(2.6rem, 4.4vw, 5rem) !important;
-    line-height: .92 !important;
-    letter-spacing: -.005em !important;
+  #root .cartoon-room .comic-masthead .comic-title > span { color: rgb(var(--cartoon-sun)); }
+  #root .cartoon-room .comic-masthead .comic-title > .comic-title-stop { color: rgb(var(--record-red)) !important; text-shadow: none; }
+  #root .cartoon-room .comic-masthead .comic-eyebrow { --comic-copy-size: 1rem; color: rgb(var(--cartoon-paper)); }
+  #root .cartoon-room .comic-masthead .comic-tagline {
+    --comic-copy-size: 1rem; margin-top: 1.2rem; padding-top: .8rem;
+    color: rgb(var(--cartoon-paper)); border-top-color: rgb(var(--cartoon-paper) / .5);
   }
-  #root .cartoon-room .cartoon-wall-head { border-top-width: 3px !important; }
-
-  /* The cover and the words about it are one spread, and the words sit ON the cover's
-     own column rather than beside it in a second box. The cover is shown whole, at a
-     height a desk can hold, so the overlap only ever crosses empty paper. */
-  #root .cartoon-room .comic-event-opening { display: block; margin-top: clamp(2rem, 4vw, 4rem); }
-  #root .cartoon-room .comic-catalogue {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 1fr);
-    gap: 0;
-    align-items: center;
+  #root .cartoon-room .cartoon-signal {
+    grid-column: 1; grid-row: 2; margin: 0; padding: .75rem 2rem; width: auto;
+    background: rgb(var(--record-red)); color: rgb(var(--cartoon-paper));
+    border-bottom: 3px solid rgb(var(--record-ink)); --comic-copy-size: .9rem;
   }
+  #root .cartoon-room .cartoon-signal-dot { background: rgb(var(--cartoon-paper)); }
   #root .cartoon-room .comic-catalogue > img {
-    width: auto;
-    max-width: 100%;
-    height: min(78vh, 46rem);
-    object-fit: contain;
-    justify-self: start;
+    grid-column: 2; grid-row: 1 / 4; align-self: stretch; justify-self: stretch;
+    display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; max-height: 58rem;
+    object-fit: contain; padding: clamp(.8rem, 1.6vw, 1.8rem); margin: 0;
+    background: rgb(var(--record-ink)); border: 0; border-left: .65rem solid rgb(var(--record-ink));
+    border-radius: 0; box-shadow: none; filter: none;
   }
   #root .cartoon-room .comic-catalogue-band {
-    position: relative;
-    z-index: 2;
-    margin-left: clamp(-3rem, -4vw, -1.5rem);
-    padding: clamp(1.5rem, 2.4vw, 2.5rem) !important;
-    background: rgb(var(--cartoon-paper) / .97) !important;
-    border-top: 3px solid rgb(var(--record-ink)) !important;
+    grid-column: 1; grid-row: 3; padding: 1.5rem 2rem; margin: 0;
+    background: rgb(var(--cartoon-paper)); color: rgb(var(--record-ink)); border: 0; box-shadow: none;
   }
-  #root .cartoon-room .comic-event-context { margin-top: clamp(2.5rem, 4vw, 4rem); }
-}
+  #root .cartoon-room .comic-catalogue-band .comic-catalogue-cover-credit { --comic-copy-weight: 700; color: rgb(var(--record-red)); }
+  #root .cartoon-room .comic-catalogue-band .comic-catalogue-line { --comic-copy-size: 1.02rem; --comic-copy-leading: 1.55; }
+  #root .cartoon-room .comic-event-share { padding-top: .25rem; }
+  #root .cartoon-room .comic-event-share-note { --comic-copy-size: .85rem; }
+  #root .cartoon-room .comic-event-context {
+    grid-column: 1 / -1; grid-row: 4; padding: 1.5rem 2rem; margin: 0;
+    background: rgb(var(--cartoon-paper)); border: 0; border-top: .65rem solid rgb(var(--record-ink)); box-shadow: none;
+  }
+  #root .cartoon-room .comic-opening {
+    display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: .7rem 2.5rem; margin: 0; padding: 0; border: 0; max-width: none;
+  }
+  #root .cartoon-room .comic-opening > p { grid-column: 1; margin: 0; --comic-copy-size: 1rem; }
+  #root .cartoon-room .comic-opening > .comic-opening-line { font-size: 1.15rem !important; line-height: 1.5 !important; }
+  #root .cartoon-room .comic-opening > .cartoon-reading-index { grid-column: 2; grid-row: 1 / 4; margin: 0; }
+  #root .cartoon-room .cartoon-index-line { color: rgb(var(--record-ink)); }
+  #root .cartoon-room .cartoon-index-reel { gap: .75rem; padding-block: .7rem; margin: 0; }
+  #root .cartoon-room .cartoon-index-entry { flex: 1 1 0; min-width: 0; }
+  #root .cartoon-room .cartoon-index-image { aspect-ratio: 2 / 1; background: rgb(var(--record-ink)); border: 2px solid rgb(var(--record-ink)); }
+  #root .cartoon-room .cartoon-index-name { margin-top: .45rem; font-size: 1.3rem; }
+  #root .cartoon-room .cartoon-index-note { font-size: .8rem; color: rgb(var(--record-muted)); }
+  #root .cartoon-room .cartoon-index-foot { margin-top: .2rem; color: rgb(var(--record-ink)); }
 
-/* ── 5. THE WALL, LAID IN LAYERS ────────────────────────────────────────────────
-   The lead drawing takes the whole width, because it is the first human hand a reader
-   meets. Every drawing after it takes a different width and starts at a different
-   height, so the wall steps across the glass instead of running down it in pairs. */
-@media (min-width: 1024px) {
-  #root .cartoon-room .comic-wall { margin-top: clamp(3rem, 6vw, 7rem); }
+  /* The wall is one proper comic grid. Every item gets an explicit usable span;
+     resetting nth-child(n) is essential: auto-placement in twelve tracks made
+     every third drawing only one track wide in the previous layout. */
+  #root .cartoon-room .comic-wall { margin: .65rem 0 0; }
+  #root .cartoon-room :is(.cartoon-wall-head, .cartoon-fiction-head) {
+    padding: 1.5rem 2rem; background: rgb(var(--cartoon-paper)); color: rgb(var(--record-ink));
+    border: 0; box-shadow: none;
+  }
+  #root .cartoon-room :is(.comic-section-title, .comic-session-title, .comic-anthology-title) {
+    background: none; border: 0; padding: 0; margin: .4rem 0 .7rem;
+    color: rgb(var(--record-ink)) !important; box-shadow: none; transform: none;
+    font-size: clamp(2.6rem, 3.8vw, 4.5rem) !important; line-height: .98 !important;
+  }
+  #root .cartoon-room .cartoon-wall-head { border-left: .6rem solid rgb(var(--record-red)); }
   #root .cartoon-room .cartoon-human-wall {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: clamp(1.25rem, 2.4vw, 3rem);
-    row-gap: clamp(3rem, 5vw, 6rem);
-    align-items: start;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem; margin: .65rem 0 0; align-items: start; background: transparent;
   }
-  #root .cartoon-room .cartoon-reading-spread:nth-child(3n + 2) {
-    grid-column: 1 / span 7;
+  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread:nth-child(n) {
+    grid-column: auto; margin: 0; min-width: 0; background: rgb(var(--cartoon-paper));
   }
-  #root .cartoon-room .cartoon-reading-spread:nth-child(3n + 3) {
-    grid-column: 8 / span 5;
-    margin-top: clamp(2.5rem, 5vw, 6rem);
+  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening:first-child { grid-column: 1 / -1; }
+  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread:nth-child(n) .record-cartoon-plate {
+    display: flex; flex-direction: column; gap: 0; margin: 0; padding: 0;
+    background: rgb(var(--cartoon-paper)); border: 0; box-shadow: none; border-radius: 0; transform: none;
   }
-  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening { margin-inline: 0; }
-  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .record-cartoon-plate {
-    display: block;
-    background: rgb(var(--cartoon-paper)) !important;
+  #root .cartoon-room .cartoon-human-wall .record-cartoon-plate::after { content: none; }
+  #root .cartoon-room .cartoon-spread-line {
+    display: flex; align-items: center; gap: .6rem; min-width: 0; padding: .7rem 1rem;
+    background: rgb(var(--record-ink)); color: rgb(var(--cartoon-paper)); border: 0; border-bottom: 3px solid rgb(var(--record-red));
   }
-  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-artwork-door {
-    background: rgb(var(--cartoon-paper));
-    border: 0;
+  #root .cartoon-room .cartoon-spread-number { color: rgb(var(--cartoon-sun)); }
+  #root .cartoon-room .cartoon-human-wall .cartoon-artwork-door {
+    display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; margin: 0;
+    background: rgb(var(--cartoon-paper)); border: 0; border-bottom: 2px solid rgb(var(--record-ink));
   }
+  #root .cartoon-room .cartoon-human-wall .cartoon-artwork-door .comic-wall-artwork {
+    display: block; width: 100%; height: 100%; max-height: none; min-height: 0; object-fit: contain; filter: none;
+  }
+  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-artwork-door { aspect-ratio: auto; border: 0; }
   #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .comic-wall-artwork {
-    max-height: 82vh;
+    height: auto; max-height: 66vh; width: 100%; object-fit: contain;
   }
-  /* The lead's own words sit in the ink band they already wore — the one place in the
-     room where a caption is printed dark, and it earns it by being the first one read. */
-  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-caption {
-    background: rgb(var(--record-ink));
-    color: rgb(var(--cartoon-paper));
-    padding: 1.25rem clamp(1rem, 3vw, 2.5rem);
+  #root .cartoon-room .comic-wall .cartoon-human-wall .record-cartoon-plate .cartoon-caption {
+    padding: 1.1rem 1.25rem; background: rgb(var(--cartoon-paper)); color: rgb(var(--record-ink)); border: 0;
   }
+  #root .cartoon-room .cartoon-human-wall .cartoon-caption :is(h3, p, a, .cartoon-byline),
+  #root .cartoon-room .cartoon-human-wall .cartoon-caption .cartoon-own-words { color: rgb(var(--record-ink)); }
+  #root .cartoon-room .cartoon-caption .cartoon-own-words { --comic-copy-size: 1rem; --comic-copy-leading: 1.5; }
+  #root .cartoon-room .cartoon-provenance { margin-top: .65rem; }
+  #root .cartoon-room .cartoon-provenance p { --comic-copy-size: .85rem; }
+  #root .cartoon-room .cartoon-wall-colophon { margin: .65rem 0 0; padding: .8rem 1.25rem; border: 0; box-shadow: none; }
 
-  /* The room's own notes, the book and the hour stand as two columns of unequal height,
-     one set lower than the other, so the eye is never handed a matched pair. */
-  #root .cartoon-room .cartoon-room-notes {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(2rem, 4vw, 5rem);
-    margin-top: clamp(3rem, 6vw, 7rem);
-    padding-top: 1.5rem;
-    border-top: 3px solid rgb(var(--record-ink));
+  /* The fiction is a separate, clearly labelled spread, with its whole selector
+     visible and its controls directly under the picture, not a detached rail. */
+  #root .cartoon-room .comic-reader {
+    display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(17rem, 1fr);
+    gap: 0 .65rem; max-width: none; margin: .65rem 0 0; padding: 0; border: 0;
   }
-  #root .cartoon-room .cartoon-room-notes > :last-child {
-    margin-top: clamp(2rem, 4vw, 4.5rem);
+  #root .cartoon-room .comic-reader > .cartoon-fiction-head { grid-column: 1 / -1; margin: 0 0 .65rem; border-left: .6rem solid rgb(var(--record-red)); }
+  #root .cartoon-room .comic-reader > .comic-single-reader {
+    grid-column: 1; grid-row: 2; margin: 0; padding: 1rem; max-width: none;
+    background: rgb(var(--cartoon-paper)); border: 0; box-shadow: none;
   }
+  #root .cartoon-room .comic-stage img { width: 100%; height: clamp(26rem, 33vw, 39rem); aspect-ratio: auto; object-fit: contain; }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel {
+    grid-column: 2; grid-row: 2 / 5; display: flex; flex-direction: column; justify-content: flex-start;
+    align-self: stretch; gap: 0; margin: 0; padding: 1rem;
+    background: rgb(var(--cartoon-paper)); color: rgb(var(--record-ink)); border: 0; box-shadow: none;
+  }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel button {
+    display: flex; gap: 1rem; align-items: center; width: 100%; max-width: none; flex: none;
+    padding: .65rem .4rem; border: 0; border-bottom: 2px solid rgb(var(--record-ink) / .2);
+  }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel button[aria-current="true"] {
+    background: rgb(var(--cartoon-sun)); border-left: .35rem solid rgb(var(--record-red));
+  }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel img { width: 4.5rem; height: 4.5rem; flex: none; object-fit: contain; }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel span { display: block; margin: 0; color: rgb(var(--record-ink)); font-size: 1.12rem; }
+  #root .cartoon-room .comic-reader > .comic-turner { margin: 0; padding: .6rem 1rem; background: rgb(var(--cartoon-paper)); }
+  #root .cartoon-room .comic-reader > .comic-make-door { margin: 0; box-shadow: none; }
+  #root .cartoon-room .comic-reader > .comic-art-credit { margin: .65rem 0 0; padding: .75rem 1.25rem; border: 0; box-shadow: none; }
 
-  /* Why the room exists on the left, the door to add to it pulled up beside it on the
-     right. Two layers of different weights, not two boxes of the same size. */
-  #root .cartoon-room .comic-why { max-width: 33rem; }
-  #root .cartoon-room .comic-sources { max-width: 40rem; margin-left: 12%; }
+  /* The supporting pages share a baseline and readable paper, not arbitrary
+     negative margins. They are smaller voices than the drawings. */
+  #root .cartoon-room :is(.cartoon-room-notes, .cartoon-editorial-foot) {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .65rem; margin: .65rem 0 0; padding: 0; border: 0; align-items: stretch;
+  }
+  #root .cartoon-room :is(.comic-session, .comic-anthology, .comic-why, .comic-workshop, .comic-sources) {
+    min-width: 0; max-width: none; margin: 0; padding: 1.75rem;
+    background: rgb(var(--cartoon-paper)); color: rgb(var(--record-ink));
+    border: 0; border-radius: 0; box-shadow: none;
+  }
+  #root .cartoon-room .cartoon-room-notes > :last-child { margin-top: 0; }
+  #root .cartoon-room :is(.comic-session-title, .comic-anthology-title, .comic-why .comic-section-title, .comic-workshop .comic-section-title) {
+    font-size: clamp(2.2rem, 2.6vw, 3.3rem) !important;
+  }
+  #root .cartoon-room :is(.comic-session-theme, .comic-session-facts dd, .comic-anthology-note,
+    .comic-anthology-sub, .comic-anthology-status, .comic-why-list li) { --comic-copy-size: 1.05rem; }
+  #root .cartoon-room .comic-drawer { border: 2px solid rgb(var(--record-ink)); margin-top: 1rem; }
+  #root .cartoon-room .comic-drawer summary { background: rgb(var(--cartoon-sun)); }
+  #root .cartoon-room .comic-drawer-paper summary { background: rgb(var(--cartoon-sky)); }
+  #root .cartoon-room .comic-drawer-content { border-top: 2px solid rgb(var(--record-ink)); }
+  #root .cartoon-room .comic-sources { margin-top: .65rem; border-top: .35rem solid rgb(var(--record-red)); }
+  #root .cartoon-room .comic-source-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #root .cartoon-room .comic-sources p { --comic-copy-size: .95rem; }
+  #root .cartoon-room a:focus-visible, #root .cartoon-room button:focus-visible,
+  #root .cartoon-room summary:focus-visible { outline: 3px solid rgb(var(--record-red)); outline-offset: 3px; }
 }
-@media (min-width: 1280px) {
-  #root .cartoon-room .comic-workshop {
-    margin-top: clamp(-16rem, -12vw, -6rem);
-    margin-left: 46%;
-  }
-  #root .cartoon-room .comic-sources { margin-top: clamp(3rem, 5vw, 5rem); }
+@media (min-width: 1560px) {
+  #root .cartoon-room .cartoon-human-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-
-/* ── 6. THE SMALL SCREEN KEEPS ITS ONE COLUMN ──────────────────────────────────
-   A phone is read top to bottom and nothing here argues with that: the sheet is the
-   same sheet, the borders are gone the same way, and the drawings are still the page. */
-@media (max-width: 1023px) {
-  #root .cartoon-room .cartoon-human-wall { margin-inline: 0; }
-  #root .cartoon-room .comic-masthead { margin-inline: 0; }
-}
-
-/* ── 7. THE ROOM IS STILL A PAGE WHEN PRINTED ──────────────────────────────────── */
 @media print {
+  .cartoon-cover-spread, .cartoon-editorial-foot { display: block !important; }
   #root .cartoon-room .cartoon-reading-spread .record-cartoon-plate::after { display: none; }
-  #root .cartoon-room .comic-workshop { margin-top: 0; margin-left: 0; }
+  #root .cartoon-room .comic-masthead { background-image: none; }
 }

@@ -18,65 +18,28 @@ import '@/components/climate/cartoons/cartoon-gallery.css';
 import '@/components/climate/cartoons/comic-page.css';
 import '@/components/climate/cartoons/cartoon-ink.css';
 import '@/components/climate/cartoons/cartoon-spread.css';
-// Loaded last on purpose: the layered, full-width sheet is the room's final composition,
-// so it has to be able to answer every rule above it.
+// Final composition: one aligned desktop spread; the phone keeps its reading order.
 import '@/components/climate/cartoons/cartoon-layers.css';
 
 export default function ClimateCartoons() {
   return (
-    <ClimateRecordShell
-      compact
-      className="cartoon-room"
-      eyebrow="The record · the cartoon room"
-      returnTo="/TogetherChangeClimate"
-      returnLabel="Back to real-world climate solutions"
-      footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
-    >
-      {/* ── THE ROOM OPENS ON A COVER ───────────────────────────────────────────
-          Brian, 18 November: "it looks generic, not fun or intriguing or coolasfuck."
-          He was looking at the top of the page, and he was right about what was there:
-          an event cover, a caption, a share button and a table of contents with three
-          thumbnails. That is a landing page, and everything is a landing page. A comic
-          opens on a cover — a black plate, the name of the book enormous — and then on a
-          picture that runs off both edges of the glass. The catalogue of the book this
-          room feeds now waits below the strip, where somebody who has just enjoyed a
-          drawing might actually want it. Nothing was removed; the order changed. */}
-      {/* ── ONE PLATE, THE WHOLE ROOM ─────────────────────────────────────────────
-          Brian, 18 November: "can make rest of cartoon coolasfuck page like that please
-          bro, love black red as well and way you got background."
-
-          So the cover is not the masthead's private trick. It is handed to the whole room
-          once, here, as a single custom property — every black plate below it (the wall's
-          name, the strip's, the biennial's, the book's, the invitation) prints the same
-          artwork behind the same ink, from one place. Change the cover in cartoonEvent.js
-          and every plate in the room changes with it. */}
+    <ClimateRecordShell compact className="cartoon-room" eyebrow="The record · the cartoon room"
+      returnTo="/TogetherChangeClimate" returnLabel="Back to real-world climate solutions"
+      footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up.">
       <div className="cartoon-room-plate" style={{ '--comic-cover-layer': `url('${CARTOON_COVER}')` }}>
-      {/* The continuous painting and digital light live in ClimateLayout, not
-          inside a scrolling section. Francis's cover stays on the title plates. */}
-      <ComicMasthead />
-      {/* One honest line of real facts, where decoration used to be. */}
-      <CartoonSignal />
-      {/* ── THE HUMAN HAND FIRST, ALWAYS ─────────────────────────────────────────
-          This room opened on the record's own AI-illustrated strip and reached
-          Francis's cover and the human wall only after it. On a record whose whole
-          claim is that a person signs what is on it, that order said the opposite of
-          what the room means. Francis's cover, then the wall of drawings by real
-          hands, then the record's own fiction — labelled, and last. */}
-      <div className="comic-event-opening">
-        <CartoonCatalogueBand />
-        <div className="comic-event-context">
-          <CartoonOpening />
+        <div className="cartoon-cover-spread" style={{ '--comic-opening-art': "url('https://media.base44.com/images/public/6889f31e76713b9cd47e043c/1bd9ee555_generated_image.png')" }}>
+          <ComicMasthead />
+          <CartoonSignal />
+          <div className="comic-event-opening">
+            <CartoonCatalogueBand />
+            <div className="comic-event-context"><CartoonOpening /></div>
+          </div>
         </div>
-      </div>
-      <CartoonWall />
-      <ComicReader />
-      <div className="cartoon-room-notes">
-        <CartoonSessionBand />
-        <CartoonAnthology />
-      </div>
-      <CartoonWhy />
-      <CartoonRoomActions />
-      <CartoonSources />
+        <CartoonWall />
+        <ComicReader />
+        <div className="cartoon-room-notes"><CartoonSessionBand /><CartoonAnthology /></div>
+        <div className="cartoon-editorial-foot"><CartoonWhy /><CartoonRoomActions /></div>
+        <CartoonSources />
       </div>
     </ClimateRecordShell>
   );
