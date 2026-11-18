@@ -97,11 +97,10 @@
   .climate-record .record-sectioned-page .record-shell-content > :is(section, .record-reading-plate) { padding: 2rem; }
   .climate-record .record-pages .record-photo-crawl { margin: 1.5rem 2.5rem 2rem; }
 }
-/* ── A PHONE GETS A SHEET, NOT A SWIPE ─────────────────────────────────────────
-   One picture to a screen meant the record's own photographs cost four screens of
-   scrolling before a reader reached a single entry. On a phone they now stand as a
-   sheet of four — two by two — so the pictures are seen at once and the entries
-   begin where they should. A desk keeps the rail it already had. */
+/* ── A PHONE KEEPS THE SWIPE ────────────────────────────────────────────────────
+   The photographs stand one to a screen again, exactly as the desk has them: one
+   picture, its credit beneath it, and a swipe. The sheet of four — two by two — was
+   tried and it read as a contact sheet rather than as a record, so it has gone. */
 .record-photo-sheet-more { display: none; }
 
 @media screen and (max-width: 1023px) {
@@ -109,28 +108,7 @@
     margin: .75rem .75rem 1.25rem;
     border-width: .375rem;
   }
-  .climate-record .record-photo-crawl .climate-photo-rail {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: .375rem;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-  .climate-record .record-photo-crawl .climate-photo-slide { width: auto; }
-  .climate-record .record-photo-crawl .climate-photo-slide:nth-child(n + 5) { display: none; }
-  .climate-record .record-photo-crawl .climate-photo-slide-frame { aspect-ratio: 4 / 3; max-height: none; }
   .climate-record .record-photo-crawl nav { display: none; }
-  .climate-record .record-photo-crawl .record-media-caption > div { padding: .5rem .5rem .625rem; }
-  .climate-record .record-photo-crawl .record-media-caption > div > [aria-hidden] { margin-bottom: .375rem; height: 2px; width: 1.25rem; }
-  /* The credit stays with the picture; the caption is read at full size when the
-     photograph is opened, rather than costing four lines on a thumbnail. */
-  .climate-record .record-photo-crawl .record-media-caption .record-header-type:not(:last-of-type) { display: none; }
-  .climate-record .record-photo-crawl .record-media-caption .record-header-type {
-    font-size: .625rem;
-    line-height: 1.5;
-    letter-spacing: .06em;
-  }
-  .climate-record .record-photo-sheet-more { display: flex; }
 
   /* The sections breathe by the margin, not by a screen of paper between them. */
   .climate-record .record-pages .record-image-section { padding-block: 1.75rem 1.25rem; }

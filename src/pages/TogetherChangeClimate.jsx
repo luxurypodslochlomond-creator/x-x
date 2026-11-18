@@ -445,9 +445,9 @@ export default function TogetherChangeClimate() {
       {(loading || featured.length > 0) && (
         <div className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-record-red" />
-          <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:gap-4">
+          <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
             {loading
-              ? [0, 1, 2, 3].map(i => <div key={i} className="record-entry-placeholder min-h-[124px] bg-record-ink/10 border border-record-paper/25 animate-pulse" />)
+              ? [0, 1, 2].map(i => <div key={i} className="record-entry-placeholder min-h-[124px] bg-record-ink/10 border border-record-paper/25 animate-pulse" />)
               : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
           </div>
         </div>
@@ -636,7 +636,7 @@ export default function TogetherChangeClimate() {
             {showEntries && solutions.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-red" />
-                <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
+                <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
                   {solutions.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
               </section>
@@ -644,7 +644,7 @@ export default function TogetherChangeClimate() {
             {showEntries && crises.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" />
-                <div className="record-card-grid grid grid-cols-2 gap-2.5 lg:grid-cols-3 lg:gap-4">
+                <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
                   {crises.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
               </section>
