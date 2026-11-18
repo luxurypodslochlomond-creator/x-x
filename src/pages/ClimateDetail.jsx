@@ -285,10 +285,8 @@ export default function ClimateDetail() {
 
   // Solution / Crisis detail
   const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
-  // The card and the full entry use the same picture, and neither of them borrows one: if
-  // the record holds no photograph of this place, the page opens on its own paper rather
-  // than on a stock photograph of somewhere else. (Brian, 18 November: "images look fake".)
-  const heroImage = image.borrowed ? null : image.src;
+  // The card and the full entry use the same picture and labelled fallback.
+  const heroImage = image.src;
   return (
     <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Hero — photo when available, paper-and-beacon when not. The picture you tapped keeps

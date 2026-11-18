@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useRecordImage from '@/components/climate/useRecordImage';
-import RecordDrawnPlate from '@/components/climate/RecordDrawnPlate';
 
 export default function SolutionCard({ item, lead = false }) {
   const isSolution = item.entry_type === 'solution';
   const image = useRecordImage(item);
-  const drawn = image.borrowed;
   const borderTone = isSolution ? 'border-t-record-signal' : 'border-t-record-red';
   const badgeTone = isSolution ? 'bg-record-signal text-record-ink' : 'bg-record-red text-record-paper';
   const titleSize = lead ? 'lg:text-[23px]' : 'lg:text-lg';
@@ -16,21 +14,13 @@ export default function SolutionCard({ item, lead = false }) {
       className="record-entry-plate record-media-mount relative flex h-full w-full min-w-0 flex-col bg-record-paper text-left text-record-ink"
     >
       <span className="record-entry-image relative block aspect-[4/3] w-full shrink-0 overflow-hidden bg-record-bone">
-        {drawn ? (
-          /* No photograph of this place exists on the record, so none is borrowed for it.
-             The entry is drawn from its own facts instead. */
-          <RecordDrawnPlate entry={item} />
-        ) : (
-          <>
-            <img src={image.src} alt="" loading={lead ? 'eager' : 'lazy'} decoding="async" className="absolute inset-0 h-full w-full object-cover" onError={image.onError} />
-            {/* The credit travels on the picture it belongs to — never underneath it, never
-                apart from it. */}
-            {image.credit && (
-              <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-record-ink via-record-ink/70 to-transparent px-2 pb-1.5 pt-7 font-mono text-[9px] uppercase leading-[1.4] tracking-[0.12em] text-record-paper/90">
-                {image.credit}
-              </span>
-            )}
-          </>
+        {/* The picture stays, and so does its credit: a picture with its source on it is the
+            honest thing, and taking them away left the record blank (Brian, 18 November). */}
+        <img src={image.src} alt="" loading={lead ? 'eager' : 'lazy'} decoding="async" className="absolute inset-0 h-full w-full object-cover" onError={image.onError} />
+        {image.credit && (
+          <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-record-ink via-record-ink/70 to-transparent px-2 pb-1.5 pt-7 font-mono text-[9px] uppercase leading-[1.4] tracking-[0.12em] text-record-paper/90">
+            {image.credit}
+          </span>
         )}
       </span>
       <div className={['record-entry-copy w-full flex-1 border-t-4 bg-record-paper p-4', borderTone].join(' ')}>
