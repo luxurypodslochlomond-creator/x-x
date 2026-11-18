@@ -22,5 +22,10 @@ export const CARTOON_EVENT = {
   // hand that made it, so his name travels with the picture wherever the picture goes: under
   // it on this page, on the pass-it-on card, and in the anthology's own facts.
   coverArt: 'Cover artwork by Francis Umendu Odupute',
+  // The room in one line, used on the share card and anywhere the room introduces itself
+  // without its own page around it. A card that carries a picture and a date but says
+  // nothing about what it is has no bio: whoever receives it is looking at a poster for
+  // something they cannot name. Africa and Asia are named because the room is neither.
+  roomLine: 'A room of climate cartoons, with drawings from Africa, Asia and beyond.',
   credit: 'CartoonAFRICA, prepared by African Press Cartoon services, 2026',
 };

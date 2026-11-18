@@ -1,0 +1,159 @@
+/* ── THE ROOM IS A GALLERY NOW, NOT A PAGE OF BOXES ────────────────────────────
+   Brian, 18 November: "boxes look old and not our soul… needs to be like museum or art
+   gallery for cartoons but connected like fuck… not museum, old art gallery, coolasfuck
+   like modern institute or GOMA… coolasfuck without trying."
+
+   He is right, and the fault was mine. Every object in this room had been given the same
+   treatment — a three-pixel ink border, a shadow sitting down and to the right, a tilt, a
+   yellow chip. That is a scrapbook, and a scrapbook is charming once and tiring by the
+   sixth block. A modern gallery does the opposite of all of it: the wall is nearly white
+   and completely quiet, the frames are hairlines or absent, nothing is tilted, nothing has
+   a shadow, labels are small and set in one weight, and every gram of attention goes to
+   the work on the wall rather than to the furniture holding it.
+
+   So this sheet is a coat of paint, applied last: it does not redraw one pixel of anybody's
+   drawing, and it does not move anything. It takes the ink, the shadows, the tilts, the
+   chips and the yellow bands off the furniture — and leaves the drawings standing on a
+   white wall with small labels, which is what "cool without trying" actually looks like.
+   The record's warm paper still surrounds the room; the room itself is the lit wall. */
+.record-pages .cartoon-room {
+  --gallery-wall: 250 249 246;
+  --gallery-plate: 255 255 255;
+  --gallery-rule: rgb(var(--record-ink) / .16);
+  --gallery-rule-strong: rgb(var(--record-ink) / .4);
+  background: rgb(var(--gallery-wall)) !important;
+}
+
+/* ── THE COVER'S LABEL, NOT A YELLOW BAND ───────────────────────────────────────
+   A gallery puts a small printed label beside the work: what it is, who made it, and how
+   it got here. That is exactly what was in the band — it was just wearing a poster. */
+.comic-catalogue-band {
+  background: none;
+  border-top: 1px solid var(--gallery-rule);
+  border-bottom: 0;
+  padding: .9rem 0 1rem;
+}
+.record-pages .cartoon-room .comic-catalogue-cover-credit {
+  font-family: var(--font-body);
+  font-size: .625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: rgb(var(--record-muted));
+}
+.comic-catalogue-link { min-height: 2.5rem; font-weight: 600; text-decoration-thickness: 1px; }
+
+/* ── WALL TEXT, NOT A CARD ───────────────────────────────────────────────────────
+   The sentence at the top of a gallery is printed on the wall itself, in the same ink, at
+   the same size, with no box around it. */
+.comic-opening {
+  max-width: none;
+  margin: 1.2rem 0 0;
+  padding: 1.1rem 0 0;
+  border-top: 1px solid var(--gallery-rule);
+}
+.record-pages .cartoon-room .comic-opening-eyebrow { color: rgb(var(--record-muted)); letter-spacing: .18em; }
+.record-pages .cartoon-room .comic-opening-line { font-weight: 600; }
+.record-pages .cartoon-room .comic-opening-sub { margin: .45rem 0 0; font-size: .78rem; line-height: 1.55; color: rgb(var(--record-muted)); }
+
+/* ── THE WALL: HAIRLINES, NO TILT, NO SHADOW ────────────────────────────────────
+   The drawings keep every pixel they arrived with. The frame around them loses the ink and
+   the shadow, because a shadow is the loudest thing on a quiet wall. */
+.comic-wall .record-cartoon-plate {
+  border-color: var(--gallery-rule);
+  border-radius: 0;
+  box-shadow: none;
+  background: rgb(var(--gallery-plate));
+  transform: none;
+}
+.comic-wall .record-cartoon-plate:nth-child(odd),
+.comic-wall .record-cartoon-plate:nth-child(even) { transform: none; }
+.comic-wall .record-cartoon-plate:hover,
+.comic-wall .record-cartoon-plate:focus-within {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--gallery-rule-strong);
+}
+.comic-wall .comic-wall-grid { background: none; }
+.comic-wall .comic-plate-tone-0 figcaption,
+.comic-wall .comic-plate-tone-1 figcaption,
+.comic-wall .comic-plate-tone-2 figcaption { background: none; }
+@media (min-width: 1024px) {
+  .comic-wall .record-cartoon-plate { border-width: 1px; }
+}
+
+/* ── THE SMALL PRINT STOPS SHOUTING ─────────────────────────────────────────────
+   Plate numbers, gesture chips and section numbers were little yellow blocks with a tilt.
+   A gallery sets them as small print: no box, no colour, one weight, wide tracking. */
+.comic-plate-index,
+.comic-number {
+  border: 0;
+  background: none;
+  border-radius: 0;
+  transform: none;
+  min-width: 0;
+  height: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: rgb(var(--record-muted));
+}
+.comic-gesture {
+  border: 0;
+  background: none;
+  border-radius: 0;
+  transform: none;
+  margin: 0 0 .7rem;
+  padding: 0;
+  font-size: .58rem;
+  letter-spacing: .14em;
+  color: rgb(var(--record-muted));
+}
+.comic-gesture::before { content: '· '; }
+
+/* ── THE STRIP'S FRAME, AND THE DATELINE ────────────────────────────────────────
+   The comic strip keeps its own drawn frame — it is a strip, and a strip is printed inside
+   a box. What it loses is the drop shadow, which belongs to a scrapbook and not a page. */
+.comic-frame {
+  border: 1px solid var(--gallery-rule-strong);
+  box-shadow: none;
+  border-radius: 0;
+}
+.comic-session { border-top: 1px solid var(--gallery-rule); border-bottom: 0; max-width: none; padding: 1rem 0; }
+.comic-session-who { border-left: 1px solid var(--gallery-rule-strong); }
+
+/* ── THE WORDS AT THE FOOT, WITHOUT THE BOXES ROUND THEM ───────────────────────
+   "A lot of copy at bottom you sure?" — so the box around the argument comes off, the star
+   bullets come off, and the drawers become drawers: a rule and a word, nothing more. */
+.comic-why {
+  border: 0;
+  border-top: 1px solid var(--gallery-rule);
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  padding: 1.3rem 0 1.4rem;
+}
+.record-pages .cartoon-room .comic-why-list li { padding-left: 1.15rem; }
+.record-pages .cartoon-room .comic-why-list li::before { content: '—'; color: rgb(var(--record-muted)); font-size: .8rem; }
+.comic-drawer {
+  border: 0;
+  border-top: 1px solid var(--gallery-rule);
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  margin-top: 0;
+}
+.comic-drawer summary { padding: .95rem 0; font-size: .95rem; font-weight: 700; }
+.comic-drawer-content {
+  border-top: 1px solid var(--gallery-rule);
+  background: none;
+  padding: .9rem 0 .2rem;
+}
+.comic-turner button, .comic-load-more { border-radius: 0; box-shadow: none; }
+.comic-next { background: none; }
+.comic-wall-empty { border: 1px solid var(--gallery-rule); border-radius: 0; }
+.comic-wall-empty > span { border: 0; background: none; font-size: 1.2rem; color: rgb(var(--record-muted)); }
+.comic-source-list > a { background: none; border-bottom: 1px solid var(--gallery-rule); }
+.comic-sources { border-top: 1px solid var(--gallery-rule); }
+.comic-share { border-top: 1px solid var(--gallery-rule); }

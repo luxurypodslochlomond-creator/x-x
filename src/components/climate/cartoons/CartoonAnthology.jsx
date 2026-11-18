@@ -67,14 +67,10 @@ export default function CartoonAnthology() {
         record, for free download, anywhere in the world.
       </p>
 
-      <p className="comic-anthology-free">
-        Free · no sign-in · one download for everyone, everywhere
-      </p>
-
       <p className="comic-anthology-status">
         The cover above is a sample: the book is still being made, so it may change before it
-        is printed. Nothing is offered for download yet, and the day the anthology is finished
-        it appears on this page — free, with no sign-in, for anyone anywhere.
+        is printed. The day it is finished it appears on this page — free, with no sign-in,
+        for anyone anywhere.
       </p>
 
       <p className="comic-anthology-credit">

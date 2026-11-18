@@ -51,15 +51,20 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   ctx.fillText('Janine Selendy’s workshop · Sunday 29 November', pad, top + 172);
   ctx.font = `400 26px ${DISPLAY}`;
   ctx.fillText('3pm West Africa · 2pm UK · in the room and online', pad, top + 212);
+  // A card with a picture and a date but no line about what it is has no bio: the person
+  // receiving it is looking at a poster for something they cannot name. So the room says
+  // what it is, in one line, before the credit and the address.
   ctx.fillStyle = colors.MUTED;
-  ctx.font = `400 20px ${DISPLAY}`;
-  // The card carries the cover, so the card carries the name of the hand that drew it.
-  // A shared picture that has lost its artist is the one thing this room will not send.
-  ctx.fillText(CARTOON_EVENT.coverArt, pad, top + 260);
-  ctx.font = `700 29px ${DISPLAY}`;
+  ctx.font = `400 22px ${DISPLAY}`;
+  ctx.fillText(CARTOON_EVENT.roomLine, pad, top + 248);
+  // And it carries the name of the hand that drew the cover: a shared picture that has
+  // lost its artist is the one thing this room will not send.
+  ctx.font = `400 19px ${DISPLAY}`;
+  ctx.fillText(CARTOON_EVENT.coverArt, pad, top + 286);
+  ctx.font = `700 28px ${DISPLAY}`;
   ctx.fillStyle = colors.INK;
   const origin = String(options.origin || recordOrigin()).replace(/^https?:\/\//, '').replace(/\/$/, '');
-  ctx.fillText(`${origin}/ClimateCartoons`, pad, top + 310);
+  ctx.fillText(`${origin}/ClimateCartoons`, pad, top + 330);
   return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('The card could not be saved. Please try again.')), 'image/png'));
 }
 

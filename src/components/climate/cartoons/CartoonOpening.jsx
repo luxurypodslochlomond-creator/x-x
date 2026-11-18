@@ -2,23 +2,30 @@ import React from 'react';
 import CartoonPageMap from '@/components/climate/cartoons/CartoonPageMap';
 import '@/components/climate/cartoons/cartoon-pagemap.css';
 
-// ── WHAT THIS ROOM IS, SAID ONCE, AT THE TOP ───────────────────────────────────
-// The room used to list its six parts as six equal tiles, which is a website menu wearing
-// drawings. A comic page does not lay its panels out that way: one splash stops you, then
-// smaller beats carry you down the page. So the contents are drawn as a page — see
-// CartoonPageMap — and this block is only the sentence above it and the invitation below.
+// ── WHAT THIS ROOM IS, SAID ONCE, ON THE WALL ─────────────────────────────────
+// A gallery prints one short paragraph on the wall before the work: what the exhibition is,
+// who put it together, and where the drawings came from. That is all this is — three lines
+// and then the work.
 //
-// The one line that matters here is the honest one: the wall holds human drawings, and the
-// record's own strip is AI-illustrated fiction kept apart and labelled. A reader who does
-// not yet know what this room is can read one sentence and one page of panels and know.
+// Two names belong on that wall and were missing from it. Janine brought this room into
+// being and Francis Umendu Odupute edits the book it feeds; the cover the room opens on is
+// Francis's own drawing. A gallery that does not name its curators has not understood what
+// a gallery is for. And the scope is said plainly, because the room is not only African and
+// not only Western: drawings come from Africa, from Asia and from everywhere else.
+//
+// The one line that has to stay is the honest one: the wall holds human drawings, and the
+// record's own strip is AI-illustrated fiction, kept apart and labelled as such.
 export default function CartoonOpening() {
   return (
     <section className="comic-opening" aria-labelledby="cartoon-opening-title">
       <p id="cartoon-opening-title" className="comic-opening-eyebrow record-meta">What this room is</p>
       <p className="comic-opening-line">
-        A room for climate cartoons, opened for CartoonAFRICA. The wall holds human-authored
-        drawings, with their artists and sources. The record’s own strip is separate, and
-        labelled as AI-illustrated fiction.
+        A room of climate cartoons — drawings from Africa, Asia and beyond, gathered for
+        CartoonAFRICA and edited by Francis Umendu Odupute and Janine Selendy.
+      </p>
+      <p className="comic-opening-sub">
+        Every drawing on the wall is a person’s, with their name and its source. The record’s
+        own strip is separate, and labelled as AI-illustrated fiction.
       </p>
 
       <CartoonPageMap />

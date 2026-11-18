@@ -12,6 +12,9 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import '@/components/climate/cartoons/cartoon-room.css';
 import '@/components/climate/cartoons/cartoon-room-layout.css';
+// The gallery coat, applied last so it is the room's final voice: hairlines instead of ink
+// boxes, a white wall instead of a scrapbook, no shadows and no tilts on the furniture.
+import '@/components/climate/cartoons/cartoon-gallery.css';
 
 export default function ClimateCartoons() {
   return (

@@ -16,9 +16,6 @@ export default function CartoonWhy() {
         <li>Anyone can answer one with a pen. A child, a farmer, a grandmother.</li>
         <li>The record keeps the answers. Not the laughs count, not the followers — the drawings.</li>
       </ul>
-      <p className="record-meta comic-why-note">
-        Drawn in the record’s own voice, and nothing here is sold, ranked or sponsored.
-      </p>
       {/* The pass-it-on card lives at the top of the room now, beside the line that says what
           the room is — that is where a host decides to send the page to somebody. */}
       {/* The drawings are not a room beside the record: they stand on its map, where they

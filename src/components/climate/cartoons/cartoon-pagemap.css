@@ -1,254 +1,133 @@
-/* ── A COMIC PAGE, DRAWN AS A PAGE ───────────────────────────────────────────────
-   Panels, gutters, ink borders, halftone behind the drawings, caption boxes, numbers in
-   the corners, a next-issue line and a credits box. The arrangement is the design: one
-   splash, two tiers of two, and a last panel that breaks the page edge.
+/* ── THE ROOM MAP, HUNG ─────────────────────────────────────────────────────────
+   Six works on a white wall, each with a small printed label underneath: a number, a name,
+   one line. Hairline frames, no shadow, no tilt, no colour blocks. The first work is hung
+   wider than the rest because it is the wall itself, and a gallery always gives the piece
+   it wants you to meet first more room than the others.
 
-   On a phone the same page reflows — splash, two, two, one — so the room is one page in
-   the hand and one page on the desk, rather than two different menus. */
+   Phone: one wide work, then two across. Desk: one wide work, then three across, then two.
+   The same wall, lit the same way, at either size. */
 
 .comic-page {
-  margin-top: 1rem;
-  padding-top: .9rem;
-  border-top: 3px solid rgb(var(--record-ink));
+  margin-top: 1.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
 }
 
 .comic-page-head {
   display: flex;
-  align-items: center;
-  gap: .6rem;
-  margin-bottom: .7rem;
+  align-items: baseline;
+  gap: .7rem;
+  margin-bottom: .95rem;
 }
 
 .comic-page-issue,
 .comic-page-count {
   margin: 0;
-  font-size: .6rem;
+  font-size: .58rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .16em;
+  letter-spacing: .18em;
   color: rgb(var(--record-ink));
 }
 
-.comic-page-count { color: rgb(var(--record-muted)); letter-spacing: .1em; }
+.comic-page-count { color: rgb(var(--record-muted)); letter-spacing: .12em; }
 
 .comic-page-rule {
   flex: 1;
-  height: 2px;
+  height: 1px;
   margin: 0;
-  background: repeating-linear-gradient(90deg, rgb(var(--record-ink)) 0 6px, transparent 6px 11px);
+  background: rgb(var(--record-ink) / .16);
 }
 
 .comic-page-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .5rem;
+  gap: 1.15rem .85rem;
 }
 
-/* ── ONE PANEL ───────────────────────────────────────────────────────────────────
-   Ink border, paper inside, halftone dots in the drawing area only — never behind the
-   caption, because a caption sits on the page and not in the picture. */
+/* ── ONE WORK ───────────────────────────────────────────────────────────────────
+   The plate is white, the frame is a hairline, and the drawing floats inside it with air
+   on every side. Nothing is filled, tilted or shadowed: on a quiet wall the drawing is the
+   only thing with contrast, which is the entire trick. */
 .comic-page-panel {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: .45rem;
-  min-height: 8.5rem;
-  padding: .55rem .55rem .6rem;
-  border: 3px solid rgb(var(--record-ink));
-  background: rgb(var(--cartoon-paper));
+  gap: .5rem;
   color: rgb(var(--record-ink));
   text-decoration: none;
-  overflow: hidden;
-  transition: background-color .14s ease, transform .1s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.comic-page-panel:active { transform: translateY(1px); }
-.comic-page-panel:hover { background: rgb(var(--cartoon-sun) / .22); }
-.comic-page-panel:focus-visible { outline: 3px solid rgb(var(--record-red)); outline-offset: 2px; }
-
-/* The halftone. Ben-Day dots, tiny and flat, sitting behind the drawing. */
 .comic-page-art {
-  position: relative;
   display: grid;
   place-items: center;
-  flex: 1;
-  min-height: 3.6rem;
-  padding: .3rem;
+  aspect-ratio: 4 / 3;
+  padding: .6rem;
+  background: rgb(var(--gallery-plate));
+  border: 1px solid rgb(var(--record-ink) / .16);
+  transition: border-color .16s ease;
 }
 
-.comic-page-art::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgb(var(--record-ink) / .17) 1px, transparent 1.3px);
-  background-size: 5px 5px;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 45%, transparent 78%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 45%, transparent 78%);
-  pointer-events: none;
-}
+.comic-page-art svg { width: 2.6rem; height: 2.6rem; }
 
-.comic-page-art svg {
-  position: relative;
-  width: 3.1rem;
-  height: 3.1rem;
-}
+.comic-page-panel:hover .comic-page-art { border-color: rgb(var(--record-ink) / .55); }
+.comic-page-panel:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
 
-/* The corner number, in the machine's face, as a page numbers its panels. */
+/* The label. Number, name, one line — the whole of a gallery's caption grammar. */
+.comic-page-label-box { display: grid; gap: .16rem; }
+
 .comic-page-number {
-  position: absolute;
-  top: .35rem;
-  right: .4rem;
-  z-index: 1;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: .55rem;
-  font-weight: 800;
-  letter-spacing: .04em;
+  font-weight: 700;
+  letter-spacing: .08em;
   color: rgb(var(--record-muted));
-}
-
-/* The caption box. Yellow, ink-edged, tucked into the bottom corner like a printed one. */
-.comic-page-caption {
-  position: relative;
-  display: block;
-  padding: .35rem .45rem .4rem;
-  border: 2px solid rgb(var(--record-ink));
-  background: rgb(var(--cartoon-sun));
-  box-shadow: 2px 2px 0 rgb(var(--record-ink));
 }
 
 .comic-page-label {
-  display: block;
-  font-size: .78rem;
+  font-size: .72rem;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
-  letter-spacing: .03em;
+  letter-spacing: .06em;
 }
 
 .comic-page-line {
-  display: block;
-  margin-top: .25rem;
   font-size: .62rem;
+  line-height: 1.3;
   font-weight: 600;
-  line-height: 1.25;
-  color: rgb(var(--record-ink) / .72);
-}
-
-/* The sticker on the splash: which panel to open first. */
-.comic-page-tag {
-  position: absolute;
-  top: .5rem;
-  left: .55rem;
-  z-index: 1;
-  padding: .18rem .4rem;
-  border: 2px solid rgb(var(--record-ink));
-  background: rgb(var(--record-clay));
-  color: rgb(var(--record-paper));
-  font-size: .55rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  transform: rotate(-2.5deg);
-}
-
-/* ── THE SPLASH ─────────────────────────────────────────────────────────────────
-   The wall gets the whole width and the most height, because it is what the room is.
-   Its border is heavier, its drawing is bigger, and its caption is the largest on the
-   page — a splash panel is read before anything else. */
-.comic-page-panel--wall {
-  grid-column: span 2;
-  min-height: 13rem;
-  border-width: 4px;
-  gap: .6rem;
-}
-
-.comic-page-panel--wall .comic-page-art { min-height: 6.5rem; }
-.comic-page-panel--wall .comic-page-art svg { width: 6rem; height: 6rem; }
-.comic-page-panel--wall .comic-page-caption { padding: .5rem .6rem .55rem; }
-.comic-page-panel--wall .comic-page-label { font-size: 1.05rem; }
-.comic-page-panel--wall .comic-page-line { font-size: .72rem; }
-
-/* The strip panel is double-ruled: the record's own cartoon is a different cast from the
-   wall, and a second rule is how a page separates one strip from the next. */
-.comic-page-panel--strip { box-shadow: inset 0 0 0 3px rgb(var(--cartoon-paper)), inset 0 0 0 5px rgb(var(--record-ink)); }
-
-/* ── THE PANEL THAT BREAKS THE PAGE ────────────────────────────────────────────
-   The last panel runs off the edge and sits a degree off true, because that is how a page
-   ends: not tidily, but on the thing it wanted to say. It is the only panel that does it,
-   which is the whole reason it works — a page where every panel breaks the grid has no
-   moment of impact at all. */
-.comic-page-panel--why {
-  grid-column: span 2;
-  margin: 0 -.55rem;
-  border-width: 4px;
-  transform: rotate(-.7deg);
-}
-
-/* ── THE FURNITURE AT THE FOOT ───────────────────────────────────────────────────
-   A next-issue line and a credits box. Every comic carries both, and both are useful
-   here: one says what the room does next, the other says who made what. */
-.comic-page-foot {
-  display: grid;
-  gap: .45rem;
-  margin-top: .6rem;
-}
-
-.comic-page-next {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: .45rem;
-  padding: .45rem .55rem;
-  border: 2px solid rgb(var(--record-ink));
-  background: rgb(var(--cartoon-paper));
-  color: rgb(var(--record-ink));
-  text-decoration: none;
-  transition: background-color .14s ease;
-}
-
-.comic-page-next:hover { background: rgb(var(--cartoon-sun) / .3); }
-
-.comic-page-next-word {
-  font-size: .55rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: rgb(var(--record-red));
-}
-
-.comic-page-next-line {
-  font-size: .74rem;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.comic-page-credits {
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: .52rem;
-  line-height: 1.6;
-  letter-spacing: .02em;
   color: rgb(var(--record-muted));
 }
 
+.comic-page-first {
+  margin-top: .1rem;
+  font-size: .55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  color: rgb(var(--record-red));
+}
+
+/* The wall itself, hung wide. */
+.comic-page-panel--wall { grid-column: span 2; }
+.comic-page-panel--wall .comic-page-art { aspect-ratio: 16 / 10; }
+.comic-page-panel--wall .comic-page-art svg { width: 4.2rem; height: 4.2rem; }
+.comic-page-panel--wall .comic-page-label { font-size: .9rem; }
+.comic-page-panel--wall .comic-page-line { font-size: .68rem; }
+
 @media (min-width: 640px) {
-  .comic-page-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .65rem; }
-  .comic-page-panel--wall { grid-column: span 6; min-height: 15rem; }
+  .comic-page-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1.4rem 1rem; }
+  .comic-page-panel--wall { grid-column: span 6; }
+  .comic-page-panel--wall .comic-page-art { aspect-ratio: 21 / 9; }
+  .comic-page-panel--wall .comic-page-art svg { width: 5rem; height: 5rem; }
+  .comic-page-panel--wall .comic-page-label { font-size: 1.1rem; }
   .comic-page-panel--day,
-  .comic-page-panel--strip { grid-column: span 3; min-height: 10rem; }
-  .comic-page-panel--book,
-  .comic-page-panel--yours { grid-column: span 3; min-height: 10rem; }
-  .comic-page-panel--why { grid-column: span 6; min-height: 9rem; margin: 0 -1.5rem; }
-  .comic-page-panel--wall .comic-page-art svg { width: 7.5rem; height: 7.5rem; }
-  .comic-page-panel--wall .comic-page-label { font-size: 1.35rem; }
-  .comic-page-panel--why { flex-direction: row; align-items: center; gap: 1.25rem; }
-  .comic-page-panel--why .comic-page-art { flex: none; width: 9rem; }
-  .comic-page-panel--why .comic-page-caption { flex: 1; }
-  .comic-page-foot { grid-template-columns: 1fr auto; align-items: end; gap: .8rem; }
-  .comic-page-credits { text-align: right; }
+  .comic-page-panel--strip,
+  .comic-page-panel--book { grid-column: span 2; }
+  .comic-page-panel--yours,
+  .comic-page-panel--why { grid-column: span 3; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .comic-page-panel { transition: none; }
+  .comic-page-art { transition: none; }
 }
