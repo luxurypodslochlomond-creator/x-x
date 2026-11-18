@@ -21,8 +21,11 @@ export default function SubjectIndexItem({ subject, selected, onClick, empty = f
       aria-label={empty ? `${subject.label}, no entries yet. Send one in.` : `${subject.label}, ${subject.count} entries`}
       className={`flex min-h-11 min-w-0 items-center gap-2 py-1 text-left font-body outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark active:bg-record-paper ${selected ? 'text-record-mark' : 'text-record-ink'}`}
     >
-      <SubjectMark subject={subject.id} size={20} active={selected} className="shrink-0" />
-      <span className="min-w-0 flex-1 break-words text-[12px] uppercase leading-[1.25] tracking-[0.05em]">{subject.label}</span>
+      <SubjectMark subject={subject.id} size={22} active={selected} className="shrink-0" />
+      {/* Words wrap at their spaces, never mid-word: a broken word put a single letter on
+          a line of its own, which is what "some of words big and letter goes on other
+          line" was seeing on a phone. */}
+      <span className="min-w-0 flex-1 break-normal text-[12px] uppercase leading-[1.3] tracking-[0.03em]">{subject.label}</span>
       <span className="shrink-0 font-mono text-[10px] tabular-nums text-record-muted">{subject.count}</span>
       {selected && <Check aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-record-mark" />}
     </button>

@@ -445,11 +445,22 @@ export default function TogetherChangeClimate() {
       {(loading || featured.length > 0) && (
         <div className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-record-red" />
-          <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
+          {/* A phone swipes the lead pictures instead of scrolling past all of them.
+              Three plates stacked at four-by-three is two full screens of photographs
+              before a reader reaches the subjects, and Brian said so on 18 November:
+              "scrolling down on record through all images didn't feel good… took a while
+              to find subjects." Every picture is still here, in the same order, with its
+              credit — they are simply side by side, one thumb-width each, so the record's
+              working parts arrive in one screen instead of three. A desk keeps the row of
+              three, because a desk has the room and no thumb doing the swiping. */}
+          <div className="record-card-grid climate-nav-rail grid grid-flow-col auto-cols-[82%] snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [&>*]:snap-start lg:grid-flow-row lg:auto-cols-auto lg:grid-cols-3 lg:gap-4 lg:overflow-visible lg:pb-0">
             {loading
               ? [0, 1, 2].map(i => <div key={i} className="record-entry-placeholder min-h-[124px] bg-record-ink/10 border border-record-paper/25 animate-pulse" />)
               : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
           </div>
+          <p className="lg:hidden mt-1.5 text-[10px] font-mono uppercase tracking-[0.14em] text-[#5a5246]">
+            Swipe · {featured.length} {featured.length === 1 ? 'plate' : 'plates'}
+          </p>
         </div>
       )}
 
@@ -484,7 +495,7 @@ export default function TogetherChangeClimate() {
                   key={d.key}
                   onClick={() => setSelectedType(selectedType === d.key ? 'all' : d.key)}
                   aria-pressed={selectedType === d.key}
-                  className={`flex items-center justify-center text-center min-w-0 px-1 py-2.5 min-h-[44px] text-[10px] font-black font-mono uppercase leading-none border border-[#141210] transition-colors duration-150 active:scale-95 ${
+                  className={`flex items-center justify-center text-center min-w-0 px-1 py-2.5 min-h-[44px] text-[10px] font-black font-mono uppercase leading-[1.15] border border-[#141210] transition-colors duration-150 active:scale-95 ${
                     selectedType === d.key
                       ? d.on
                       : 'bg-[#141210] text-[#efe7d6] hover:bg-[#2a231c]'

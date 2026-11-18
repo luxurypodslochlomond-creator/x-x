@@ -30,7 +30,7 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
 
       {!expanded && strip.length > 0 && (
         <div
-          className="climate-nav-rail grid auto-cols-[26%] grid-flow-col border-b border-record-ink/20 overflow-x-auto"
+          className="climate-nav-rail grid auto-cols-[31%] grid-flow-col border-b border-record-ink/20 overflow-x-auto"
           style={{ scrollSnapType: 'x proximity' }}
           aria-label="Subjects on the record"
         >
