@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import RecordCover from '@/components/climate/RecordCover';
-import XEqualsXMeteorSky from '@/components/climate/XEqualsXMeteorSky';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
@@ -19,12 +18,16 @@ import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 export default function XEqualsXOpening() {
   return (
     <div className="covenant-hero">
-      <RecordCover position="center 30%" strength={0.55} />
-      {/* The plate is a night sky, so the sky is finished rather than left as a still —
-          drawn stars and four drawn meteors crossing it, under the words and over the paint. */}
-      <XEqualsXMeteorSky />
+      {/* ── THE REAL PAINTING, AT ITS OWN STRENGTH ────────────────────────────────
+          Brian, 18 November: "x = x page look like fake image bro". It did, and it was our
+          fault rather than the painting's: the plate was held at 55% under a veil, then a
+          second layer of drawn stars and four drawn meteors was laid over it, and a scan
+          texture on top of that. Three illustrations stacked on one photograph is exactly
+          what makes a real image read as a fake one.
+          So the sky is the painting now — whole, unblended, at full strength — and the veil
+          is the only thing between the words and it, which is all the words ever needed. */}
+      <RecordCover position="center 30%" strength={1} />
       <div className="covenant-hero-veil" aria-hidden="true" />
-      <div className="covenant-hero-scan" aria-hidden="true" />
 
       <div className="covenant-hero-inner">
         <SignalBeacon size={48} color="rgb(var(--record-light-signal))" />

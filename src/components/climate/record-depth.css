@@ -8,18 +8,31 @@
   .climate-record .record-shell-opening {
     padding: 1rem 1rem 0;
     border: 0;
-    background-color: transparent;
+    /* The wash is stated here rather than borrowed from the band class, so the opening is
+       the same strength on every page whatever order the sheets load in. */
+    background-color: rgb(var(--record-ink) / .58);
   }
+  /* ── THE OPENING STANDS IN THE PAINTING, NOT ON A CREAM CARD ──────────────────
+     This plate used to be painted flat paper, and it was the single reason every page
+     wearing the shell — Method, Corrections, the wire, the guide, the terms — opened as a
+     cream rectangle with the painting visible only in the margins. Brian, 18 November:
+     "founder page coolasfuck, these other pages not". He was right, and the founder's page
+     was the proof: it does not wear the shell, so nothing painted over its ground.
+     So the opening is the record's photographic plate again — the one painting, held back
+     by ink rather than replaced by paper, with the signal rule across its top edge and the
+     page's name lit in paper. The reading below is untouched: every paragraph still sits
+     on a real sheet, because the painting is a room and reading type is not put on a room. */
   .climate-record .record-shell-opening > div {
     padding: 1.75rem 1.25rem;
     border-top: 4px solid rgb(var(--record-signal));
-    background-color: rgb(var(--record-paper));
-    box-shadow: 0 5px 0 rgb(var(--record-bone));
-    color: rgb(var(--record-ink));
+    /* The band underneath already carries the ink wash, so this plate adds none: one veil
+       over one painting, at the strength the founder's page is set at. */
+    background-color: transparent;
+    color: rgb(var(--record-paper));
   }
-  .climate-record .record-pages .record-shell-opening h1,
-  .climate-record .record-shell-opening :is(a, .font-mono) { color: rgb(var(--record-mark)); }
-  .climate-record .record-pages .record-shell-opening .record-shell-statement { color: rgb(var(--record-ink)); }
+  .climate-record .record-pages .record-shell-opening h1 { color: rgb(var(--record-paper)); }
+  .climate-record .record-shell-opening :is(a, .font-mono) { color: rgb(var(--record-signal)); }
+  .climate-record .record-pages .record-shell-opening .record-shell-statement { color: rgb(var(--record-paper) / .9); }
   .climate-record .record-pages .record-shell-body {
     padding: 1.25rem 1rem 1.5rem;
     background-color: transparent;
