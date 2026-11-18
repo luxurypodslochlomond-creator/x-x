@@ -1,7 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { requireKeeper } from '../../shared/checkerAccess.ts';
 import { keeperAddresses } from '../../shared/keeperInbox.ts';
-import { cartoonArtwork } from '../../shared/cartoonArtwork.ts';
 
 // ── THE ROOM OF CARTOONS ──────────────────────────────────────────────────────
 // Four small actions, and nothing else:
@@ -43,25 +42,6 @@ export default async function (req: Request): Promise<Response> {
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
     const action = body?.action || 'read';
-
-    // Public wall: use the caller's read rules, never a privileged lookup of drafts.
-    // Relay only the named CEEW artwork so cross-site restrictions cannot blank the wall.
-    if (action === 'wall') {
-      if (body.cursor != null && (typeof body.cursor !== 'string' || body.cursor.length > 2000)) {
-        return Response.json({ error: 'Invalid wall bookmark' }, { status: 400 });
-      }
-      const page = await base44.entities.ClimateCartoon.filter({ status: 'published' }, {
-        sort: '-created_date', limit: 4, ...(body.cursor ? { cursor: body.cursor } : {}),
-      });
-      const items = await Promise.all(page.items.map(async (row) => {
-        const { id, title, artist_name, origin, country, for_line, image_url, credit, source_url, crisis_id, crisis_title } = row;
-        let display_image_url = image_url;
-        try { display_image_url = await cartoonArtwork(image_url); }
-        catch (error) { console.warn('Cartoon source unavailable', id, error.message); }
-        return { id, title, artist_name, origin, country, for_line, image_url, display_image_url, credit, source_url, crisis_id, crisis_title };
-      }));
-      return Response.json({ items, next_cursor: page.next_cursor, has_more: page.has_more });
-    }
 
     // ── ONE LINE, ABOUT WHAT IS THERE ─────────────────────────────────────────
     if (action === 'read') {

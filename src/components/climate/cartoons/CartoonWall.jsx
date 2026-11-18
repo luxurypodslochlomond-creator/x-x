@@ -10,10 +10,7 @@ export default function CartoonWall() {
   const wall = useInfiniteQuery({
     queryKey: ['cartoon-wall', 'artwork-v2'],
     initialPageParam: undefined,
-    queryFn: async ({ pageParam }) => {
-      const response = await base44.functions.invoke('climateCartoon', { action: 'wall', ...(pageParam ? { cursor: pageParam } : {}) });
-      return response.data;
-    },
+    queryFn: ({ pageParam }) => base44.entities.ClimateCartoon.filter({ status: 'published' }, { sort: '-created_date', limit: 4, ...(pageParam ? { cursor: pageParam } : {}) }),
     staleTime: 5 * 60 * 1000,
     getNextPageParam: (page) => page.has_more ? page.next_cursor : undefined,
   });

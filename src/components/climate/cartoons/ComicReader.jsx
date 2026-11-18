@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ComicPanel from '@/components/climate/cartoons/ComicPanel';
@@ -10,6 +10,10 @@ export default function ComicReader() {
   const touch = useRef(null);
   const wanted = new URLSearchParams(location.search).get('strip');
   const active = Math.max(0, comicStories.findIndex(story => story.id === wanted));
+  useEffect(() => {
+    if (wanted && !location.hash && comicStories.some(story => story.id === wanted))
+      navigate({ ...location, hash: '#cartoon-strip' }, { replace: true });
+  }, [wanted, location, navigate]);
   const turn = (step) => {
     const next = (active + step + comicStories.length) % comicStories.length;
     const params = new URLSearchParams(location.search);

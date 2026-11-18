@@ -6,7 +6,7 @@
 .cartoon-room .record-shell-content { max-width: 54rem; padding: 0 1rem 2.5rem; }
 .record-pages .cartoon-room :is(h1, h2, h3) {
   font-family: var(--font-body);
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   letter-spacing: -.045em !important;
 }
 .record-pages .cartoon-room p.record-meta { max-inline-size: none; font-family: var(--font-body); }

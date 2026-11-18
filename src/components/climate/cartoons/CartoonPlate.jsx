@@ -21,10 +21,7 @@ export default function CartoonPlate({ cartoon, lead = false, index = 0 }) {
 
   return (
     <figure className={`record-cartoon-plate record-media-mount bg-record-paper comic-plate-tone-${index % 3} ${lead ? 'comic-plate-lead' : ''}`}>
-      {/* One frame for every drawing on the wall, so a wall of pictures reads as a wall and
-          not as a pile of different-shaped things. The drawing itself is never cropped: it
-          sits whole inside the frame, with the paper showing round it. Four-by-three, because
-          editorial cartoons are drawn wide and a portrait box made each one a stamp. */}
+      {/* The plate follows the drawing’s original dimensions; never crop the artist’s work. */}
       <CartoonArtwork cartoon={cartoon} lead={lead} />
       <figcaption className="border-t-4 border-record-signal bg-record-bone px-3 py-2.5 lg:px-4 lg:py-3.5">
         {title && (
