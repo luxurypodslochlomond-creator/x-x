@@ -18,19 +18,94 @@
       bullet list. That is the comic. Not a font that says "comic".
    ─────────────────────────────────────────────────────────────────────────────── */
 
-#root .press-room .record-shell-body { padding: 0; }
+/* The shell's own body carried a 97%-opaque paper wash, which would have put the painting
+   back behind a veil for the whole length of the room — the murk this record already
+   argued its way out of. The body goes transparent here and the paper moves onto the
+   sheets, so the picture is either fully there or not there at all. */
+#root .press-room .record-shell-body { padding: 0; background-color: transparent; }
 #root .press-room .record-shell-content { max-width: none; padding: 0; }
-#root .press-room { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+
+/* ── THE PAINTING IS THE ROOM. THE PAPER IS WHAT WE WRITE ON. ───────────────────
+   Brian, 18 November, at midnight before the Zoom with Francis: "can we get our
+   coolasfuck painting to be transparent but still see the words bro?"
+
+   The honest answer is yes, and it is not a filter. The record already worked this
+   out once, in blood: a sentence laid over a painting, however faint, reads as a
+   sentence out of focus. Nothing is wrong with the picture or the type — a
+   photograph under tracing paper simply is not a photograph, and a paragraph over
+   one is not a paragraph. So the painting is not made into a wash behind the words.
+   It becomes the surface the room is laid ON.
+
+   The room used to paint one opaque sheet of paper from the masthead to the foot,
+   which walled the painting out of its own room: you could see it either side of
+   the book and nowhere inside it. Now the room's ground is transparent and the
+   painting runs the full width underneath, at the strength it was painted for, and
+   each chapter of the argument — the opening, why cartoons, the wall, the fiction,
+   the book, the desk, the sources — is a sheet of paper laid on it. The gaps
+   between those sheets are the painting, whole and unobstructed. No word ever
+   stands on it, and not one point of contrast is spent to get the picture back.
+
+   It is also the room's own argument, made in layout rather than in a sentence:
+   the drawings are objects placed on the world, not pictures inside a frame. */
+#root .press-room { background: transparent; color: rgb(var(--record-ink)); }
+
+/* A wall of drawings is looked at from across a room, so this is the one page of the
+   record the book opens out for. The painting keeps a hand's width either side and the
+   sheets keep a reading measure no wider than a spread.
+
+   The book's own paper comes off with it. Every other page of the record is one solid
+   sheet standing on the painting, and that is right for a page you read straight through.
+   This room is not one sheet: it is a wall, and a wall stands on the ground. The foot of
+   the book keeps its own paper and its own dark band, so nothing below the room is left
+   floating on the picture. */
+#root .record-cartoon-field .record-book {
+  background-color: transparent;
+  box-shadow: none;
+}
+@media (min-width: 1024px) {
+  #root .record-cartoon-field .record-book { max-width: min(1560px, 96vw); }
+}
+
+/* ── THE ROOM'S READING VOICE ───────────────────────────────────────────────────
+   The room inherited the record's body token, which inside the record resolves to the
+   Helvetica the masthead is set in. That is the right face for a name, a number, a date,
+   a credit and a label — it is the record's certainty. It is the wrong face for a
+   paragraph somebody wrote, and on a page arguing that cartoons deserve to be taken
+   seriously it made the argument read like a policy document.
+
+   So the room borrows the record's own reading serif — Source Serif 4, already travelling
+   with the site, drawn for screens — for every sentence a person wrote: the standfirst,
+   the scope, the three beats of the argument, and the drawer's own line, which is the most
+   important sentence on the page and now looks like one. Titles, numbers, credits and
+   labels keep the sans. One room, two voices, and the division is not decorative: sans is
+   what the record knows, serif is what a person said. */
+#root .press-room { --font-reading: var(--font-record-reading); }
 
 .press-room-inner {
   width: 100%;
   max-width: 106rem;
   margin: 0 auto;
-  padding: 0 1.15rem 3.5rem;
+  padding: 0 0 3.5rem;
 }
 @media (min-width: 1024px) {
-  .press-room-inner { padding: 0 clamp(1.75rem, 3.6vw, 5rem) 5.5rem; }
+  /* A frame of painting down both sides as well as between the sheets: the room is a set
+     of sheets lying ON the picture, and a sheet that touches the glass is a page again. */
+  .press-room-inner { padding: 0 clamp(1rem, 2vw, 2.5rem) 5.5rem; }
 }
+
+/* ── EVERY CHAPTER IS A SHEET ON THE PAINTING ───────────────────────────────────
+   Paper, no border, no frame, no plate: a sheet, with the painting breathing in the
+   gap before the next one. The shadow is a whisper — just enough that the eye reads
+   paper lying on something rather than a rectangle drawn on a flat colour. */
+#root .press-room-inner > * {
+  position: relative;
+  background: rgb(var(--record-paper));
+  padding: clamp(1.1rem, 2.1vw, 2.4rem) clamp(1rem, 2.6vw, 3rem);
+  margin-bottom: clamp(.8rem, 1.5vw, 1.5rem);
+  box-shadow: 0 16px 38px -30px rgb(var(--record-ink) / .65);
+}
+#root .press-room-inner > *:first-child { margin-top: clamp(.5rem, 1.1vw, 1.1rem); }
+#root .press-room-inner > *:last-child { margin-bottom: 0; }
 
 /* ── type ─────────────────────────────────────────────────────────────────────── */
 .press-eyebrow {
@@ -214,11 +289,16 @@
   gap: .2rem 1rem;
   padding: 1.15rem 0;
   border-bottom: 1px solid rgb(var(--record-ink) / .16);
-  font-family: var(--font-record-ui);
-  font-size: clamp(1.3rem, 2.1vw, 2rem);
+  /* The three beats are sentences, not headings: they are the room's whole argument and
+     the reason a cartoonist should trust it, so they are set in the reading serif at the
+     size of a headline. A serif carries that size without shouting, which is exactly what
+     a page about other people's drawings needs — the type is not competing with them. */
+  font-family: var(--font-reading);
+  font-size: clamp(1.3rem, 2.1vw, 2.02rem);
   font-weight: 400;
-  line-height: 1.16;
-  letter-spacing: -.028em;
+  line-height: 1.2;
+  letter-spacing: -.008em;
+  text-wrap: pretty;
   color: rgb(var(--record-ink));
 }
 .press-room .comic-why-list li::before {
