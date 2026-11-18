@@ -2,6 +2,16 @@ import React from 'react';
 import { Check } from 'lucide-react';
 import SubjectMark from '@/components/climate/SubjectMark';
 
+// ── A SUBJECT IS A DOOR, NOT A TILE ───────────────────────────────────────────
+// This was a ninety-two-pixel tile: mark on top, name under it, count under that, three
+// across on a phone. It read as a gallery of specimens, and the name — the one thing a
+// reader is actually choosing between — was set at twelve pixels in a hundred-pixel
+// column, so half of them broke mid-word.
+//
+// It is the explorer's door now, down to the shape: the mark, the name beside it at the
+// record's size, the count where the explorer puts a shelf's count, and a fingertip of
+// height to tap. Same at both widths, two across on a phone and three on a desk, because a
+// subject index and the record's index should not look like two different records.
 export default function SubjectIndexItem({ subject, selected, onClick, empty = false }) {
   return (
     <button
@@ -9,12 +19,12 @@ export default function SubjectIndexItem({ subject, selected, onClick, empty = f
       onClick={onClick}
       aria-pressed={empty ? undefined : selected}
       aria-label={empty ? `${subject.label}, no entries yet. Send one in.` : `${subject.label}, ${subject.count} entries`}
-      className={`relative flex min-h-[92px] min-w-0 flex-col items-center justify-start gap-1 px-1 py-2 text-center font-body active:bg-record-paper ${selected ? 'bg-cartoon-sun text-record-ink' : 'text-record-ink'}`}
+      className={`flex min-h-11 min-w-0 items-center gap-2 py-1 text-left font-body outline-offset-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark active:bg-record-paper ${selected ? 'text-record-mark' : 'text-record-ink'}`}
     >
-      {selected && <Check aria-hidden="true" className="absolute right-1 top-1.5 h-3.5 w-3.5 text-record-mark" />}
-      <SubjectMark subject={subject.id} size={38} active={selected} className="shrink-0" />
-      <span className="w-full break-words text-[12px] leading-[1.2]">{subject.label}</span>
-      <span className="font-mono text-[10px] leading-none tabular-nums text-record-muted">{subject.count}</span>
+      <SubjectMark subject={subject.id} size={20} active={selected} className="shrink-0" />
+      <span className="min-w-0 flex-1 break-words text-[12px] uppercase leading-[1.25] tracking-[0.05em]">{subject.label}</span>
+      <span className="shrink-0 font-mono text-[10px] tabular-nums text-record-muted">{subject.count}</span>
+      {selected && <Check aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-record-mark" />}
     </button>
   );
 }

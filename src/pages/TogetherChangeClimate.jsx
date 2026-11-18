@@ -586,11 +586,13 @@ export default function TogetherChangeClimate() {
                 aria-pressed={selectedCategory === 'all'}
                 className={`flex min-h-11 w-full items-center gap-2 text-left ${selectedCategory === 'all' ? 'text-record-mark' : 'text-[#141210]'}`}
               >
-                <SubjectMark subject="all" size={30} active={selectedCategory === 'all'} />
+                <SubjectMark subject="all" size={20} active={selectedCategory === 'all'} />
                 <span className="text-[13px]">All subjects</span>
                 <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">{items.length + actions.length}</span>
               </button>
-              <div className="grid grid-cols-6 gap-x-2 gap-y-1 pb-2 xl:grid-cols-8" aria-label="Filter by subject">
+              {/* Two across on a phone, three on a desk — a subject is a door, and the same
+                  door the explorer shows, so six across was a chart of six-word columns. */}
+              <div className="grid grid-cols-2 gap-x-3 pb-2 sm:grid-cols-3" aria-label="Filter by subject">
                 {subjectIndex.map(s => (
                   <SubjectIndexItem
                     key={s.id}

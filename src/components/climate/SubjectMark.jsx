@@ -1,32 +1,47 @@
 import React from 'react';
 import subjectMarkPaths from '@/components/climate/subjectMarkPaths';
-import subjectMarkPigments from '@/components/climate/subjectMarkPigments';
 
-// A drawing, not a symbol: at 34px the colour plate reads as colour and the ink
-// line stays one confident weight. Under about 26px both turn to mush, which is
-// what made a hand-drawn mark look like a broken icon.
+// ── THE SUBJECTS WEAR THE SAME MARK AS THE DOORS ──────────────────────────────
+// Brian, 18 November: "love desktop new explorer, think we need to use same style for
+// icons in subjects too."
+//
+// He is right, and the difference was a whole argument this file used to make. The subject
+// marks were colour plates: the drawing in the record's red, a wash of the same red inside
+// it, and one stroke of a pigment on top — water blue, living green, sun yellow, heat clay.
+// That was a defensible idea and it was the wrong one, for the reason he spotted by eye
+// before anybody said it out loud: every other mark on this record — the five on the
+// masthead, the ones in the explorer, the ones at the foot — is one ink drawing with a
+// single red accent, and thirty subjects in a second alphabet made the subject index look
+// like a different publication's chart.
+//
+// So there is one alphabet now. The line is the record's ink, the drawing is the drawing,
+// and the accent is the record's red — exactly what a door in the explorer wears. The
+// selected subject goes red all through, which is what the explorer does with the page you
+// are standing on, so "here" reads the same in both places.
+//
+// Sizes: 20 beside a name on a phone, 22 on a desk, 26–30 where it stands alone in a rail.
+// Below about eighteen the accent stroke closes up against the line, which is why nothing
+// here is asked to draw smaller than twenty.
 export default function SubjectMark({ subject = 'all', size = 34, active = false, className = '' }) {
   const [drawing, detail] = subjectMarkPaths[subject] || subjectMarkPaths.other;
-  const [pigment, wash] = subjectMarkPigments[subject] || subjectMarkPigments.other;
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true" focusable="false">
-      {/* ── THE MARK IS THE RECORD'S RED NOW ────────────────────────────────────
-          It was ink with a mute pigment inside — ocean blue, botanical green, ochre,
-          clay — and on a page of warm paper those four read as brown and dusty, so
-          thirty of them together looked like a faded chart instead of a set of marks.
-          They also said the wrong thing: a colour used on a subject is a colour that
-          means something else on this record, where red means the emergency and orange
-          means the action.
-          So the line is the record's red, the body is the same red held back, and each
-          drawing keeps exactly one stroke of its own pigment — the single accent that
-          tells you what the mark is about without pretending to be a legend. */}
-      <path d={wash} fill="currentColor" stroke="none" className="text-record-mark" opacity={active ? 0.24 : 0.14} />
-      <path d={drawing} className="text-record-mark" />
-      {/* The sun accent is yellow, and yellow alone on warm paper at this weight is not a
-          line, it is a gap. So this one pigment is drawn twice: an ink edge first, the
-          yellow on top of it. Blue, green and clay need nothing — they already read. */}
-      {pigment === 'text-[#ffd447]' && <path d={detail} strokeWidth="4.2" stroke="#141210" />}
-      <path d={detail} strokeWidth="2.4" className={pigment} />
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 40 40"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`${active ? 'text-record-mark' : ''} ${className}`}
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={drawing} />
+      {/* The one accent, in the record's red: the same single colour of its own that every
+          door in the explorer carries, and never a second palette. */}
+      <path d={detail} strokeWidth="2.1" className="text-record-mark" />
     </svg>
   );
 }

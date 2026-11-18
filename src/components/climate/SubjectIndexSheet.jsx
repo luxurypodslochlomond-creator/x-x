@@ -18,7 +18,7 @@ export default function SubjectIndexSheet({ open, onClose, filled, empty, totalE
         <span className="font-mono text-[11px] tabular-nums">{totalEntries}</span>
         {selected === 'all' && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
       </button>
-      <div className="grid grid-cols-3 gap-x-2 gap-y-1 py-2 sm:grid-cols-4 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-x-3 pb-1 pt-2 sm:grid-cols-3">
         {filled.map(subject => <SubjectIndexItem key={subject.id} subject={subject} selected={selected === subject.id} onClick={() => onSelect(subject.id)} />)}
         {empty.map(subject => <SubjectIndexItem key={subject.id} subject={subject} empty onClick={() => onAdd(subject)} />)}
       </div>
