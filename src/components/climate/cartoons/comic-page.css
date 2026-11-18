@@ -333,3 +333,82 @@
   .record-pages .cartoon-room .comic-single-reader { box-shadow: none; background-image: none; }
   .record-pages .cartoon-room .comic-turner { display: none; }
 }
+
+/* THE COVER PLATE.
+   Brian, 18 November: "looks generic, not fun or intriguing or coolasfuck tech bro."
+   The top of this room was a yellow sticker of a title on warm paper, under an event
+   cover, above a table of contents - three quiet beige things in a row. Warm paper is the
+   record's ground and it stays; but a room of cartoons cannot open as softly as a page of
+   prose, or it will read as a page of prose. So the name of the room is printed on ink,
+   edge to edge, with the drawing meeting both edges of the glass directly beneath it.
+   Black plate, halftone dots, enormous type, one red stop. That is a comic cover, and it
+   costs the record nothing: the same two colours the whole book is printed in. */
+.record-pages .cartoon-room .comic-masthead {
+  position: relative;
+  overflow: hidden;
+  padding: 1.15rem 1.25rem 1.35rem;
+  background-color: rgb(var(--record-ink));
+  background-image: radial-gradient(rgb(var(--cartoon-paper) / .13) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+  border-top: 4px solid rgb(var(--cartoon-sun));
+}
+.record-pages .cartoon-room .comic-masthead .comic-eyebrow {
+  color: rgb(var(--cartoon-sun));
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.record-pages .cartoon-room .comic-masthead .comic-title {
+  display: block;
+  margin-top: .5rem;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  color: rgb(var(--cartoon-paper));
+  font-size: clamp(2.9rem, 15vw, 4.6rem);
+  line-height: .84 !important;
+  letter-spacing: -.045em !important;
+}
+.record-pages .cartoon-room .comic-masthead .comic-title::before { display: none; }
+.record-pages .cartoon-room .comic-masthead .comic-title > span { color: rgb(var(--cartoon-sun)); }
+.record-pages .cartoon-room .comic-masthead .comic-title > .comic-title-stop {
+  margin-left: .02em;
+  color: rgb(var(--record-red));
+}
+.record-pages .cartoon-room .comic-masthead .comic-tagline {
+  margin-top: .8rem;
+  padding-top: .7rem;
+  border-top: 1px solid rgb(var(--cartoon-paper) / .25);
+  color: rgb(var(--cartoon-paper) / .72);
+}
+@media (max-width: 639px) {
+  .record-pages .cartoon-room .comic-masthead {
+    margin-inline: -1.25rem;
+    padding-inline: 1.25rem;
+  }
+}
+
+/* AND THEN THE PICTURE RUNS OFF THE GLASS.
+   On a phone the panel was a framed card with a shadow, sitting inside the page's own
+   margin. A card is a thing you scroll past; a page is a thing you are inside. So on a
+   narrow glass the frame gives up its side rules, the paper gives up its shadow, and the
+   drawing meets both edges with an ink rule above and below it, the way a comic meets the
+   trim. The balloon, the caption box and the type keep their own inset, so nothing a
+   person has to read is ever at the edge. */
+@media (max-width: 639px) {
+  .record-pages .cartoon-room .comic-single-reader {
+    margin-inline: -1.25rem;
+    padding: .5rem 0 .9rem;
+    border: 0;
+    border-top: 3px solid rgb(var(--record-ink));
+    border-bottom: 3px solid rgb(var(--record-ink));
+    box-shadow: none;
+  }
+  .record-pages .cartoon-room .comic-frame {
+    border-inline: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .record-pages .cartoon-room .comic-ending { padding-inline: 1.25rem; }
+  .record-pages .cartoon-room .comic-speech { left: 1.1rem; }
+}

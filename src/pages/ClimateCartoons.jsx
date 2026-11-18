@@ -25,21 +25,23 @@ export default function ClimateCartoons() {
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
     >
+      {/* ── THE ROOM OPENS ON A COVER ───────────────────────────────────────────
+          Brian, 18 November: "it looks generic, not fun or intriguing or coolasfuck."
+          He was looking at the top of the page, and he was right about what was there:
+          an event cover, a caption, a share button and a table of contents with three
+          thumbnails. That is a landing page, and everything is a landing page. A comic
+          opens on a cover — a black plate, the name of the book enormous — and then on a
+          picture that runs off both edges of the glass. The catalogue of the book this
+          room feeds now waits below the strip, where somebody who has just enjoyed a
+          drawing might actually want it. Nothing was removed; the order changed. */}
+      <ComicMasthead />
+      <ComicReader />
       <div className="comic-event-opening">
         <CartoonCatalogueBand />
         <div className="comic-event-context">
-          <ComicMasthead />
           <CartoonOpening />
         </div>
       </div>
-      {/* ── THE COMIC OPENS THE ROOM NOW ────────────────────────────────────────
-          Brian, 18 November: "tried to show my daughter who's 9 — she wasn't interested."
-          She was never going to be: a nine-year-old arriving here had to get past the
-          event cover, the masthead, an index of six parts and thirteen other people's
-          drawings before she reached the one thing on the page written for her. The
-          drawings on the wall are the room's work; the strip is the room's way in. So the
-          strip comes first and the wall follows it. */}
-      <ComicReader />
       <CartoonWall />
       <div className="cartoon-room-notes">
         <CartoonSessionBand />
