@@ -152,9 +152,21 @@
   font-weight: 700 !important;
   line-height: 1 !important;
   letter-spacing: .08em !important;
-  color: rgb(var(--record-bone));
+  /* ── THE MARK IS ONE COLOUR, AND THIS WAS THE ONLY PLACE IT WASN'T ─────────────
+     Brian, 18 November: "x = x should be red right like footer or is this art coolasfuck
+     bro?" He is right, and the fault was consistency rather than taste. The foot of every
+     page says it in the borrowed red. The epigraph on this page says it in the borrowed
+     red. The band at the top of the map says it in the borrowed red. Only the biggest
+     statement of it — the one on the cover, the one this whole page exists for — was
+     cream with a yellow equals, which made the mark look like decoration that changed
+     costume from page to page. A signature is not a costume.
+     So the whole line is the mark's red, equals and all, exactly as the foot prints it,
+     and the page and the foot finally say the same thing in the same ink. The equals
+     keeps the same red rather than being dimmed: it is not punctuation between two marks,
+     it is the claim. */
+  color: rgb(var(--record-mark));
 }
-#x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-light-signal)); }
+#x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-mark)); }
 #x-equals-x .covenant-purpose {
   margin: 0 !important;
   max-inline-size: 48rem;
