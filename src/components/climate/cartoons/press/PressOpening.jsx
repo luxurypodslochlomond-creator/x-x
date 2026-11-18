@@ -35,7 +35,7 @@ export default function PressOpening() {
           Catalogue prepared by African Press Cartoon Services.
         </p>
         <nav className="press-contents" aria-label="Find your way through the cartoon room">
-          <a href="#press-argument">Why cartoons</a>
+          <a href="#cartoon-why-title">Why cartoons</a>
           <a href="#press-wall">The wall</a>
           <a href="#cartoon-strip">The little things</a>
           <a href="#press-book">The book</a>

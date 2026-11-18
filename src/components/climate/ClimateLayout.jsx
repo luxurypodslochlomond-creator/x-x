@@ -24,7 +24,6 @@ import RecordDesktopMenu from '@/components/climate/RecordDesktopMenu';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
-import ComicField from '@/components/climate/cartoons/ComicField';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
