@@ -26,12 +26,9 @@ export default function ComicReader() {
     rail.current?.scrollTo({ left: next * rail.current.clientWidth, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
   return (
-    <section className="comic-reader" aria-label="The Big Picture cartoons">
-      <header className="comic-masthead">
-        <p className="comic-eyebrow record-meta">A little mischief. A bigger picture.</p>
-        <h1 className="comic-title">The Big<br /><span>Picture</span><span className="comic-title-stop" aria-hidden="true">!</span></h1>
-        <p className="comic-tagline record-meta">Cartoons for a changing world</p>
-      </header>
+    <section className="comic-reader" aria-label="The record's own cartoons">
+      {/* The room's title used to be here. It lives in ComicMasthead now, at the top of the
+          page, so the drawings can come before the strip instead of after it. */}
       <div ref={rail} className="comic-rail" tabIndex={0} role="region" aria-label="Swipe for the next cartoon, or use the arrow buttons" onKeyDown={(e) => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); turn(e.key === 'ArrowRight' ? 1 : -1); }
       }} onScroll={(e) => setActive(Math.max(0, Math.min(comicStories.length - 1, Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))))}>

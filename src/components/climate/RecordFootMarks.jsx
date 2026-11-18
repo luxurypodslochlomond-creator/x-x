@@ -171,6 +171,24 @@ export function MarkPencil({ size = 26, className = '' }) {
   );
 }
 
+// ── THE CARTOON ROOM'S OWN MARK ────────────────────────────────────────────────
+// The pencil was drawn for this door and it was the wrong drawing: a pencil is the mark of
+// writing, of editing, of a thing being made. It says nothing about the room behind it,
+// which is a room full of faces pulled at the world. So the mark is the thing itself — a
+// speech balloon with a face in it, grinning. Two dots and a line is enough at 28px, and
+// it is the only mark on the record that looks back at the reader, which is exactly what
+// a cartoon does. Brian asked for a cartoon icon of its own, 18 November.
+export function MarkCartoon({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} strokeWidth="1.9" className={className} aria-hidden="true">
+      <path d="M9.4 6.4h21.2a4.8 4.8 0 0 1 4.8 4.8v13.2a4.8 4.8 0 0 1-4.8 4.8H19.6l-6.4 5.6v-5.6H9.4a4.8 4.8 0 0 1-4.8-4.8V11.2a4.8 4.8 0 0 1 4.8-4.8Z" />
+      <circle cx="15.6" cy="16.4" r="1.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <circle cx="24.6" cy="16.4" r="1.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <path d="M14.8 20.6c1.5 2.5 3.4 3.8 5.3 3.8s3.8-1.3 5.2-3.8" />
+    </svg>
+  );
+}
+
 // What travels. A message going out in dots and dashes — the oldest way anyone found
 // to send a thing further than a voice reaches.
 // ── THE WIRE, REDRAWN FOR TWENTY-TWO PIXELS ───────────────────────────────────

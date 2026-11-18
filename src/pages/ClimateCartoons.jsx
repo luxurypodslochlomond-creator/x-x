@@ -1,5 +1,6 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import ComicMasthead from '@/components/climate/cartoons/ComicMasthead';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import ComicReader from '@/components/climate/cartoons/ComicReader';
@@ -19,19 +20,24 @@ export default function ClimateCartoons() {
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
     >
-      {/* ── THE HANG ────────────────────────────────────────────────────────────
-          The room used to lead with the anthology, then the record's own strip, and put the
-          wall of drawings at the very bottom — under the explanation of why drawings matter
-          and the form for sending one in. A visitor walked past a book that is not finished,
-          past a strip, past two blocks of argument, and reached the actual drawings last.
-          That is the one thing a room of cartoons cannot do.
-          Now it hangs the way a gallery hangs: the dateline for the 29th, the strip that
-          opens the room, then the wall itself — thirteen drawings by What On Earth!® for
-          CEEW, with their names, their origin and their own words on them. The book those
-          drawings become comes after the drawings, which is the order they will be read in. */}
+      {/* ── A PICTURE PAGE, IN THE ORDER A PICTURE PAGE IS READ ─────────────────
+          This page has been reordered twice and both times for the same complaint: the
+          drawings were not what you met first. The last version opened on a dateline about
+          the 29th, then the record's own AI strip, and put thirteen real drawings by What
+          On Earth!® for CEEW third — behind a notice and behind somebody else's work.
+          Brian, 18 November: "why not picture page… doesn't feel coolasfuck… needs to be
+          better than their sites."
+
+          So: the room's name, then the drawings — the newest one hung large and edge to
+          edge, the rest as the wall — then the dateline that explains what they are for,
+          then the record's own strip, then the book they become, then the argument, then
+          the way to send one in. Nothing was deleted and nothing was reordered for taste:
+          the pictures simply come first, because that is the whole reason anybody opens
+          this room. */}
+      <ComicMasthead />
+      <CartoonWall />
       <CartoonSessionBand />
       <ComicReader />
-      <CartoonWall />
       <CartoonAnthology />
       <CartoonWhy />
       <CartoonRoomActions />

@@ -27,6 +27,16 @@ export const PRIMARY_NAV = [
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
   { label: 'BASE 1', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Ask the record’s own index — a place, a subject, a source.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
+  // ── THE ROOM OF CARTOONS COMES ONTO THE RAIL ────────────────────────────────
+  // It was on the contents sheet only, filed under Elsewhere, on the reasoning that a room
+  // of drawings is something a reader goes looking for rather than arrives at. That was
+  // wrong for one plain reason: a room nobody is offered is a room nobody enters. Brian,
+  // 18 November: "can't hide it — don't you think it should be in nav too, with a custom
+  // cartoon icon?" It is on the rail now, at the end of the row, with its own drawn mark —
+  // a speech balloon with a face in it — so the record offers the drawings it was given
+  // instead of keeping them behind a sheet. It is not repeated on the sheet: one door, one
+  // place. Six cells on a handset, which is the number this row was drawn for.
+  { label: 'Cartoons', to: '/ClimateCartoons', page: 'ClimateCartoons', what: 'Drawings given to the record, with the hand that made them still on them.' },
 ];
 
 // ── THE RAIL'S SECOND ROW ─────────────────────────────────────────────────────
@@ -129,13 +139,11 @@ export const ELSEWHERE_NAV = [
   // request is kept and the room is reachable, which is the only version of this that
   // doesn't put the record in the position of quietly undoing her instruction.
   { label: 'The music room', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
-  // ── THE ROOM OF CARTOONS ────────────────────────────────────────────────────
-  // Janine asked for a space for cartoons for the workshop of 29 November. A door on the
-  // contents sheet rather than on the rail, for the same reason the music room is here:
-  // the rail is the five questions a reader arrives with, and this is a room a reader goes
-  // looking for — and, on the day, a link that can be handed straight to the people on the
-  // call without changing the front page of the record the week before a workshop.
-  { label: 'The big picture', to: '/ClimateCartoons', what: 'Make a three-panel cartoon on the page, sign it, and put it on a wall. Any age, any hand, any language.' },
+  // ── THE ROOM OF CARTOONS LEFT THIS SHEET FOR THE RAIL ───────────────────────
+  // It lived here and it was the wrong place for it — a room of drawings that has to be
+  // found by opening a sheet is a room nobody walks into. It now stands on the rail with
+  // its own mark, and it is not repeated here, because a foot that repeats the head teaches
+  // the reader that neither one matters.
   { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.

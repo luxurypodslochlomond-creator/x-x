@@ -140,6 +140,29 @@
   .comic-wall .record-cartoon-plate:hover,
   .comic-wall .record-cartoon-plate:focus-within { transform: none; }
 }
+/* ── EDGE TO EDGE, THE WAY A PHONE SHOWS A PICTURE ───────────────────────────────
+   On a handset the wall was still a column of framed cards with a margin down each side:
+   the same shape as every blog on earth, and the reason the room read as an old page. A
+   drawing on a phone should be the width of the phone. So the wall — and the one drawing
+   hung large above it — breaks the shell's side margin and runs edge to edge.
+   The frame comes off with it: a three-pixel ink border running to the edge of the glass
+   is not a frame, it is a wall drawn round the wall, and a tilted full-bleed block leaves
+   wedges of paper down the sides. So on a handset the pictures are simply the pictures,
+   stacked with air between them, and the tilt and the ink return on a desk, where a frame
+   has somewhere to sit. */}
+@media (max-width: 1023px) {
+  .comic-wall-lead,
+  .comic-wall-grid { margin-inline: -1rem; }
+  .comic-wall-lead { margin-bottom: 2rem; }
+  .comic-wall-grid { gap: 1.9rem 0; }
+  .comic-wall .comic-wall-lead .record-cartoon-plate,
+  .comic-wall .comic-wall-grid .record-cartoon-plate {
+    border-inline: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+  }
+}
 @media (min-width: 1024px) {
   .cartoon-room .record-shell-content { padding: .7rem 2.5rem 3rem; }
   .comic-masthead { padding-top: 1.4rem; }
