@@ -60,7 +60,17 @@
   .climate-record .record-media-caption .record-header-type { line-height: 1.55; }
   .climate-record .record-media-caption .record-header-type + .record-header-type { font-size: .6875rem; }
   .climate-record .record-pages .record-card-grid { gap: 1.5rem; }
-  .climate-record .record-pages .record-entry-plate { min-height: 0; }
+  /* ── THE PLATES ARE PRINTED ON THE PAGE, NOT STUCK ON IT ──────────────────────
+     Every entry card was wearing the same mount the photographs wore: half a centimetre
+     of paper all round, then two hard offset shadows underneath. On a phone that reads as
+     a sticker pressed onto the page — which is one of the reasons Brian kept saying the
+     pictures looked fake on 18 November. The plate keeps its paper and its colour rule;
+     the frame and the shadows go, and a hairline holds it to the sheet. */
+  .climate-record .record-pages .record-entry-plate {
+    min-height: 0;
+    border: 1px solid rgb(var(--record-ink) / .18);
+    box-shadow: none;
+  }
   .climate-record .record-pages .record-entry-copy { padding: 1rem .75rem; }
   .climate-record .record-pages .record-entry-copy h3 { line-height: 1.5; }
   .climate-record .record-home-page .record-image-section .record-section-heading {
