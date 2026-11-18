@@ -18,9 +18,13 @@ import '@/components/climate/cartoons/cartoon-pagemap.css';
 export default function CartoonOpening() {
   return (
     <section className="comic-opening" aria-labelledby="cartoon-opening-title">
+      {/* Brian, 18 November: "still not middle class bro saying a little mischief weird
+          to me … tiny bit right there." He was reading "a little AI-illustrated fiction"
+          and "a wall waiting for your own way of seeing" — cushion words. A room that
+          exists to say a hard thing plainly should not hedge in its own first sentence. */}
       <p id="cartoon-opening-title" className="comic-opening-line record-meta">
-        The climate, seen differently. The cartoons chosen for the 29 November workshop,
-        a little AI-illustrated fiction, and a wall waiting for your own way of seeing.
+        The climate, drawn. The cartoons chosen for the 29 November workshop, the record’s
+        own strip of AI-illustrated fiction, and a wall with room on it for yours.
       </p>
       {/* ── WHY THOSE OTHER DRAWINGS ARE HERE, AND WHOSE THEY ARE ─────────────────
           Brian, 18 November: "why do we have more CEEW or whatever they're called bro,

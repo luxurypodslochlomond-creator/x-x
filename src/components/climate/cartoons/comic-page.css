@@ -348,8 +348,17 @@
   overflow: hidden;
   padding: 1.15rem 1.25rem 1.35rem;
   background-color: rgb(var(--record-ink));
-  background-image: radial-gradient(rgb(var(--cartoon-paper) / .13) 1px, transparent 1.2px);
-  background-size: 6px 6px;
+  /* Three layers, in the order they print: the dot field on top, the ink that holds the
+     type back, and Francis's cover underneath them both. The scrim is heaviest where the
+     small type sits and lightest through the middle, so the artwork shows as colour and
+     shape rather than as a picture competing with the name. */
+  background-image:
+    radial-gradient(rgb(var(--cartoon-paper) / .13) 1px, transparent 1.2px),
+    linear-gradient(180deg, rgb(var(--record-ink) / .88) 0%, rgb(var(--record-ink) / .74) 42%, rgb(var(--record-ink) / .93) 100%),
+    var(--comic-cover-layer, none);
+  background-size: 6px 6px, auto, cover;
+  background-position: 0 0, center, center 30%;
+  background-repeat: repeat, no-repeat, no-repeat;
   border-top: 4px solid rgb(var(--cartoon-sun));
 }
 .record-pages .cartoon-room .comic-masthead .comic-eyebrow {
