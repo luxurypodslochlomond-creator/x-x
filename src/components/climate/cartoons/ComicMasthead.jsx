@@ -1,4 +1,5 @@
 import React from 'react';
+import { SunFace } from '@/components/climate/cartoons/CartoonInkIcons';
 
 // ── THE ROOM'S NAME, ON ITS OWN ─────────────────────────────────────────────────
 // This block used to live inside ComicReader, which meant the room's title could only ever
@@ -13,7 +14,7 @@ import React from 'react';
 export default function ComicMasthead() {
   return (
     <header className="comic-masthead">
-      <p className="comic-eyebrow record-meta">A little mischief. A bigger picture.</p>
+      <p className="comic-eyebrow record-meta"><SunFace size={26} className="cmark-inline" />A little mischief. A bigger picture.</p>
       <h1 className="comic-title">The Big<br /><span>Picture</span><span className="comic-title-stop" aria-hidden="true">!</span></h1>
       <p className="comic-tagline record-meta">Cartoons for a changing world</p>
     </header>

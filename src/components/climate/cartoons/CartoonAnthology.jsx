@@ -1,5 +1,6 @@
 import React from 'react';
 import '@/components/climate/cartoons/cartoon-anthology.css';
+import { BookRibbon } from '@/components/climate/cartoons/CartoonInkIcons';
 
 // ── THE BOOK THAT COMES OUT OF THE 29TH ────────────────────────────────────────
 // Janine, 17 November 2026: every African cartoonist who takes part in the workshop has
@@ -34,7 +35,7 @@ const TITLE = 'Climate Change and the Power of Collective Actions and Creative I
 export default function CartoonAnthology() {
   return (
     <section className="comic-anthology" id="cartoon-anthology" aria-labelledby="cartoon-anthology-title">
-      <p className="comic-anthology-eyebrow">The anthology · in preparation</p>
+      <p className="comic-anthology-eyebrow"><BookRibbon size={22} className="cmark-inline" />The anthology · in preparation</p>
       <h2 id="cartoon-anthology-title" className="comic-anthology-title">{TITLE}</h2>
       <p className="comic-anthology-sub">
         “…an anthology of editorial cartoons and comics journalism works by selected African

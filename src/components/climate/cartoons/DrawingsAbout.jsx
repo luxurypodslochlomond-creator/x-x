@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
+import { BalloonStar } from '@/components/climate/cartoons/CartoonInkIcons';
 
 // ── THE OTHER END OF THE LINK ─────────────────────────────────────────────────
 // Brian, 18 November: "can be linked to climate crises entries and platform bro". This is
@@ -29,6 +30,7 @@ export default function DrawingsAbout({ entryId }) {
   return (
     <section className="mt-6 border-t-2 border-[#141210] pt-4">
       <p className="font-mono text-[10px] font-black uppercase tracking-[0.14em] text-[#6b6258]">
+        <span style={{ display: 'inline-block', verticalAlign: '-0.28em', marginRight: '.4rem' }}><BalloonStar size={17} /></span>
         Drawn about this · {drawings.length}
       </p>
       <div className="mt-3 grid grid-cols-2 gap-3">

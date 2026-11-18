@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { ImagePlus, Loader2, Check } from 'lucide-react';
+import { Loader2, Check } from 'lucide-react';
+import { InkPot, PaperPhoto, SunFace } from '@/components/climate/cartoons/CartoonInkIcons';
 
 // ── BRING A DRAWING ───────────────────────────────────────────────────────────
 // A photograph of the drawing goes in; the record writes one line about what it can
@@ -136,7 +137,8 @@ export default function CartoonSendIn() {
 
   return (
     <div className="border border-record-ink/20 bg-record-bone/60 p-4 lg:p-5">
-      <p className="text-[15px] font-semibold text-record-ink" style={reading}>
+      <p className="flex items-center gap-2 text-[15px] font-semibold text-record-ink" style={reading}>
+        <SunFace size={24} />
         Bring a drawing to the wall
       </p>
       <p className="mt-1 text-[13px] leading-[1.6] text-record-muted" style={reading}>
@@ -145,7 +147,7 @@ export default function CartoonSendIn() {
 
       {step === 'idle' && (
         <label className="mt-3 flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2 border border-dashed border-record-ink/40 bg-record-paper px-3 text-[14px] text-record-ink active:border-record-red">
-          <ImagePlus className="h-4 w-4" strokeWidth={1.8} />
+          <PaperPhoto size={24} />
           Choose a photograph of the drawing
           <input
             type="file"
@@ -169,6 +171,7 @@ export default function CartoonSendIn() {
           {machineLine && (
             <div className="mt-3 border-l-2 border-record-red/50 pl-3">
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-record-muted">
+                <InkPot size={15} className="cmark-inline" />
                 The record’s machine saw this
               </p>
               <p className="mt-1 text-[13.5px] leading-[1.55] text-record-ink" style={reading}>{machineLine}</p>

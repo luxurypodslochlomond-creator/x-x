@@ -96,6 +96,9 @@
 .record-pages .cartoon-room .comic-part:hover { background: rgb(var(--cartoon-sun) / .35); }
 .record-pages .cartoon-room .comic-part:active { transform: translateY(1px); }
 .comic-part-mark { width: 2.5rem; height: 2.5rem; flex: none; }
+/* The room's drawn marks, set inside a line of text or on their own. */
+.cmark-inline { display: inline-block; vertical-align: -0.32em; margin-right: .4rem; flex: none; }
+.cmark-block { display: block; margin: 0 auto .6rem; }
 .comic-part-label { font-size: .76rem; font-weight: 800; line-height: 1.05; text-transform: uppercase; letter-spacing: .05em; }
 .comic-part-caption { font-size: .66rem; line-height: 1.25; font-weight: 600; color: rgb(var(--record-muted)); }
 

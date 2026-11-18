@@ -4,6 +4,7 @@ import CartoonPlate from '@/components/climate/cartoons/CartoonPlate';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
+import { PinnedNote, TinyCrowd } from '@/components/climate/cartoons/CartoonInkIcons';
 
 export default function CartoonWall() {
   const wall = useCartoonWall(true);
@@ -11,13 +12,13 @@ export default function CartoonWall() {
   return (
     <section className="comic-wall" aria-labelledby="cartoon-wall-title">
       <header className="cartoon-wall-head">
-        <p className="comic-opening-eyebrow record-meta">Human hands. Different perspectives.</p>
+        <p className="comic-opening-eyebrow record-meta"><TinyCrowd size={26} className="cmark-inline" />Human hands. Different perspectives.</p>
         <h2 id="cartoon-wall-title" className="comic-section-title">The people’s pages.</h2>
         <p className="record-meta">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
       </header>
       {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the original drawings…</p>}
       {wall.isError && <div className="comic-wall-empty"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}
-      {!wall.isPending && !wall.isError && !wall.cartoons.length && <div className="comic-wall-empty"><p className="record-meta">The first page is still blank. A space for a real drawing, with its artist’s name.</p><a href="#cartoon-your-turn">Make it yours ↗</a></div>}
+      {!wall.isPending && !wall.isError && !wall.cartoons.length && <div className="comic-wall-empty"><PinnedNote size={62} className="cmark-block" /><p className="record-meta">The first page is still blank. A space for a real drawing, with its artist’s name.</p><a href="#cartoon-your-turn">Make it yours ↗</a></div>}
       <div className="cartoon-human-wall">
         {wall.cartoons.map((cartoon, i) => <CartoonPlate key={cartoon.id} cartoon={cartoon} lead={i === 0} index={i + 1} onOpen={() => setReading(i)} />)}
       </div>
