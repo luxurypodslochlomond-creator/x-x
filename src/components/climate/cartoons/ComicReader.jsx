@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { InkArrow } from '@/components/climate/cartoons/CartoonInkIcons';
+import { InkArrow, HandPencil } from '@/components/climate/cartoons/CartoonInkIcons';
 import ComicPanel from '@/components/climate/cartoons/ComicPanel';
 import ComicStoryOpening from '@/components/climate/cartoons/ComicStoryOpening';
 import { comicStories } from '@/components/climate/cartoons/comicStories';
@@ -25,6 +25,7 @@ export default function ComicReader() {
     <section className="comic-reader" id="cartoon-strip" aria-label="The record's own cartoons">
       <ComicStoryOpening active={active} onSelect={(index) => turn(index - active)} />
       <div className="comic-single-reader" tabIndex={0} role="region" aria-label="Cartoons: swipe or use the arrow buttons"
+        onClick={() => turn(1)}
         onKeyDown={(event) => { if (['ArrowRight', 'ArrowLeft'].includes(event.key)) { event.preventDefault(); turn(event.key === 'ArrowRight' ? 1 : -1); } }}
         onTouchStart={(event) => { const p = event.touches[0]; touch.current = { x: p.clientX, y: p.clientY }; }}
         onTouchEnd={(event) => {
@@ -41,6 +42,12 @@ export default function ComicReader() {
         <span className="comic-position" aria-live="polite" aria-atomic="true">{String(active + 1).padStart(2, '0')} / {String(comicStories.length).padStart(2, '0')}</span>
         <button type="button" onClick={() => turn(1)} className="comic-next">{active === comicStories.length - 1 ? 'From the top' : 'Next cartoon'}<InkArrow size={22} /></button>
       </div>
+      <p className="comic-tap-hint record-meta">Tap the picture for the next one.</p>
+      <a href="#cartoon-your-turn" className="comic-make-door">
+        <HandPencil size={26} />
+        <span>Now draw your own<small>Your joke. Your drawing. Your way of seeing it.</small></span>
+        <InkArrow size={22} />
+      </a>
       <p className="comic-art-credit record-meta">Written to be read by a child as easily as a grown-up. AI-generated illustrations.<br />Fiction, not workshop submissions or checked evidence.</p>
     </section>
   );

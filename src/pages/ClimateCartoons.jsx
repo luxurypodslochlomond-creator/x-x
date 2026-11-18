@@ -32,8 +32,15 @@ export default function ClimateCartoons() {
           <CartoonOpening />
         </div>
       </div>
-      <CartoonWall />
+      {/* ── THE COMIC OPENS THE ROOM NOW ────────────────────────────────────────
+          Brian, 18 November: "tried to show my daughter who's 9 — she wasn't interested."
+          She was never going to be: a nine-year-old arriving here had to get past the
+          event cover, the masthead, an index of six parts and thirteen other people's
+          drawings before she reached the one thing on the page written for her. The
+          drawings on the wall are the room's work; the strip is the room's way in. So the
+          strip comes first and the wall follows it. */}
       <ComicReader />
+      <CartoonWall />
       <div className="cartoon-room-notes">
         <CartoonSessionBand />
         <CartoonAnthology />

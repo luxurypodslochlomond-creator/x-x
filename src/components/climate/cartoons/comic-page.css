@@ -203,6 +203,50 @@
   font-weight: 900;
 }
 
+/* ── TAP THE PICTURE, AND THEN MAKE ONE ────────────────────────────────────────
+   The first reader this room was ever shown to was nine years old and not interested,
+   and the reason was not the drawings — it was that everything on the page asked her to
+   read. So the panel itself is the control now: tap the picture, the next one arrives,
+   the way a picture book works. And the door to making one sits directly under it,
+   because a child who has just enjoyed a drawing is the only person on earth who wants
+   to draw one immediately. */
+.record-pages .cartoon-room .comic-tap-hint {
+  margin: .55rem .05rem 0;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  color: rgb(var(--record-muted));
+}
+.record-pages .cartoon-room .comic-make-door {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin-top: .9rem;
+  padding: .8rem .9rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  background: rgb(var(--cartoon-sun));
+  box-shadow: 5px 5px 0 rgb(var(--record-ink));
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  font-size: .95rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.record-pages .cartoon-room .comic-make-door > span { flex: 1; min-width: 0; }
+.record-pages .cartoon-room .comic-make-door small {
+  display: block;
+  margin-top: .15rem;
+  font-size: .72rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.record-pages .cartoon-room .comic-make-door:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+
 /* ── A DESK READS IT AS A PAGE, NOT AS A PHONE COLUMN ───────────────────────────
    On a wide glass the strip was a forty-six-rem column in the middle of a thousand
    pixels of nothing, which is what made it feel unfinished on a desk rather than what
@@ -271,8 +315,14 @@
     max-width: none;
     margin-inline: 0;
   }
+  .record-pages .cartoon-room .comic-reader > .comic-tap-hint { display: none; }
+  .record-pages .cartoon-room .comic-reader > .comic-make-door {
+    grid-column: 1;
+    grid-row: 4;
+  }
   .record-pages .cartoon-room .comic-reader > .comic-art-credit {
     grid-column: 1 / -1;
+    grid-row: 5;
     max-width: none;
     margin-inline: 0;
   }
