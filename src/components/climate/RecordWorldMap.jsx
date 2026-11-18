@@ -36,6 +36,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
   const [loading, setLoading] = useState(true);
   const [publishedTotal, setPublishedTotal] = useState(0);
   const [picked, setPicked] = useState(null);
+  const [only, setOnly] = useState(null);
   const { categories } = useClimateCategories();
   const catLabel = (id) => categories.find((c) => c.id === id)?.label || (id || '').replaceAll('_', ' ');
 
@@ -109,6 +110,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
 
   const marks = useMemo(() => {
     const placed = entries
+      .filter((e) => !only || e.type === only)
       .map((e) => {
         const base = resolveCoords(e.country, e.region);
         return base ? { ...e, lat: base[0], lng: base[1] } : null;
@@ -130,14 +132,13 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
         aria: `${e.type === 'crisis' ? 'Crisis' : e.type === 'action' ? 'Action' : 'Solution'}: ${e.title}${e.country ? `, ${e.country}` : ''}`,
       };
     });
-  }, [entries]);
+  }, [entries, only]);
 
-  const counts = useMemo(() => ({
-    crisis: marks.filter((m) => m.type === 'crisis').length,
-    solution: marks.filter((m) => m.type === 'solution').length,
-    action: marks.filter((m) => m.type === 'action').length,
-    wire: marks.filter((m) => m.type === 'wire').length,
-  }), [marks]);
+  const counts = useMemo(() => {
+    const c = { crisis: 0, solution: 0, action: 0, wire: 0 };
+    entries.forEach((e) => { if (resolveCoords(e.country, e.region)) c[e.type] += 1; });
+    return c;
+  }, [entries]);
 
   // A plate with no dates on it says the record has finished. One line under the count,
   // saying when the newest entry standing here arrived — so a reader can tell a living
@@ -165,20 +166,34 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">
           {loading
             ? 'Setting the entries…'
-            : marks.length < publishedTotal
-              ? `${marks.length} of ${publishedTotal} entries placed`
-              : `${marks.length} ${marks.length === 1 ? 'entry' : 'entries'} placed`}
+            : only
+              ? `Showing ${marks.length} of ${counts.crisis + counts.solution + counts.action + counts.wire} placed`
+              : (counts.crisis + counts.solution + counts.action + counts.wire) < publishedTotal
+                ? `${marks.length} of ${publishedTotal} entries placed`
+                : `${marks.length} ${marks.length === 1 ? 'entry' : 'entries'} placed`}
           {!loading && newestArrival && (
             <span className="mt-1 block font-normal normal-case tracking-[0.02em] text-[#5a5246]">
               Newest standing here arrived {newestArrival}.
             </span>
           )}
         </p>
-        <div className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#141210]">
-          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#b3261e' }} />{counts.crisis}</span>
-          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#141210' }} />{counts.solution}</span>
-          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rotate-45" style={{ background: '#1e3a2b' }} />{counts.action}</span>
-          <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#0f5f7a' }} />{counts.wire}</span>
+        <div className="flex flex-wrap items-center gap-x-1 text-[10px] font-mono font-bold text-[#141210]" role="group" aria-label="Show only one kind of entry">
+          {[
+            ['crisis', 'Crises', '#b3261e', 'rounded-full'],
+            ['solution', 'Solutions', '#141210', 'rounded-full'],
+            ['action', 'Actions', '#1e3a2b', 'rotate-45'],
+            ['wire', 'Wire', '#0f5f7a', 'rounded-full'],
+          ].map(([key, label, colour, shape]) => (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={only === key}
+              onClick={() => { setOnly(only === key ? null : key); setPicked(null); }}
+              className={`flex min-h-11 items-center gap-1.5 px-1.5 uppercase tracking-[0.06em] ${only && only !== key ? 'opacity-40' : ''} ${only === key ? 'underline underline-offset-4' : ''}`}
+            >
+              <span className={`w-2 h-2 ${shape}`} style={{ background: colour }} />{label} {counts[key]}
+            </button>
+          ))}
         </div>
       </div>
 

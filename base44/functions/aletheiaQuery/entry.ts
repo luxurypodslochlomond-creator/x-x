@@ -75,14 +75,14 @@ export default async function (req: Request): Promise<Response> {
       })),
       ...found.solutions.map((i: any) => ({
         text: `${i.title}: ${i.summary || ''}`.trim(),
-        confidence: (i.source_url ? 'medium' : 'low') as Claim['confidence'],
+        confidence: (i.verification === 'official_record' ? 'high' : i.verification === 'corroborated' ? 'medium' : 'low') as Claim['confidence'],
         source_name: i.source_name || 'On the record — no outside origin given',
         source_url: i.source_url || `/ClimateDetail/${i.entry_type}/${i.id}`,
         source_date: '',
       })),
       ...found.actions.map((i: any) => ({
         text: `${i.title}: ${i.description || ''}`.trim(),
-        confidence: (i.source_url ? 'medium' : 'low') as Claim['confidence'],
+        confidence: (i.verification === 'official_record' ? 'high' : i.verification === 'corroborated' ? 'medium' : 'low') as Claim['confidence'],
         source_name: 'An action on the record',
         source_url: i.source_url || `/ClimateDetail/action/${i.id}`,
         source_date: i.date ? String(i.date).slice(0, 10) : '',
