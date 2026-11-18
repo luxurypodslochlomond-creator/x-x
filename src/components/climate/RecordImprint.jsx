@@ -50,7 +50,21 @@ import '@/components/climate/record-navigator.css';
 // — so that line was printing "Record of the Time" underneath a door already called Record.
 // Brian, 18 November: "extra line under nav, says record etc, looks broken." It did. Two
 // rows of named doors need nothing beneath them.
-const ROW_ONE = PRIMARY_NAV;
+// ── BASE 1 SITS IN THE MIDDLE, AND THAT IS THE RIGHT PLACE FOR IT ───────────────
+// Brian, 18 November: "you think BASE 1 should be middle of nav at top?" Yes — and not
+// because the middle is the flattering spot, but because of what the other four doors are.
+// Record, Wire, Map and Reach are all places: the entries, what changed, where it is, who is
+// reading. BASE 1 is not a place. It is the way of asking all four at once, so it belongs
+// between them rather than after them — two doors either side, and the ask in the hinge.
+// Last in the row it read as an afterthought you got to once you had given up on the
+// record; in the middle it reads as the record's own instrument, which is what it is.
+const ROW_ONE = [
+  PRIMARY_NAV[0], // Record
+  PRIMARY_NAV[1], // Wire
+  PRIMARY_NAV[4], // BASE 1 — the hinge
+  PRIMARY_NAV[2], // Map
+  PRIMARY_NAV[3], // Reach
+];
 const ROW_TWO = [...RAIL_SECOND_NAV, DESK_FOUNDER];
 
 // Equal share, always. Every cell is one sixth of the row whatever it contains, so no door
