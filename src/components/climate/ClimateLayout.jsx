@@ -16,6 +16,7 @@ import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordTimeBar from '@/components/climate/RecordTimeBar';
 import RecordFooter from '@/components/climate/RecordFooter';
+import RecordReachEarth from '@/components/climate/RecordReachEarth';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordSky from '@/components/climate/RecordSky';
 import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
@@ -250,6 +251,15 @@ export default function ClimateLayout({ children, currentPage }) {
       <main ref={readingRef} className="record-pages">{children}</main>
 
       <div className={isRoom ? 'hidden lg:block' : 'contents'}>
+        {/* ── THE WORLD, LIT WHERE IT HAS BEEN READ ─────────────────────────────────
+            The foot of every page of the record, in the same place every time: the plate
+            of the world with a light on every country and self-identified nation the
+            record has actually been read in, from the same counts the Reach page shows.
+            It is at the foot rather than at the door on purpose — a thing that only
+            happens on the front page is a show, and a thing that is in the same place on
+            every page is an instrument. See RecordReachEarth for why the cover painting
+            is not the surface it is drawn on. */}
+        <RecordReachEarth />
         <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />
       </div>
 

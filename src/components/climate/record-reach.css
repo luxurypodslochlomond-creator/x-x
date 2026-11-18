@@ -1,0 +1,13 @@
+/* ── THE LIGHTS HOLD STILL, THEN BREATHE ─────────────────────────────────────────
+   A light on this plate is a place the record was actually read. It is not a pulse and
+   not a notification: it comes up over eleven seconds and goes down again, the way a
+   fire does, and there is never a beat to it. A reader who has asked their device for
+   less movement gets it perfectly still — the record's own rule at the foot of
+   index.css already stops every animation on the page, so nothing extra is needed here.
+   Opacity only, so the compositor does the work and the page never repaints for it. */
+@keyframes record-reach-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.record-reach-light { animation: record-reach-breathe 11s ease-in-out infinite; }
