@@ -111,6 +111,35 @@
 .comic-source-list > a { display: flex; justify-content: space-between; align-items: center; gap: .8rem; padding: .7rem; background: rgb(var(--record-ink) / .04); font-size: .85rem; line-height: 1.35; }
 .comic-source-list > a > span:last-child { display: inline-flex; align-items: center; gap: .4rem; flex-shrink: 0; font-size: .7rem; color: rgb(var(--record-muted)); }
 .comic-copyright { margin-top: 1rem; }
+/* ── THE WALL, HUNG RATHER THAN LISTED ───────────────────────────────────────────
+   The wall arrived as a gallery-website grid: a hairline card, a flat caption, no frame.
+   Every other object in this room is drawn by hand — the strip's panels are three-pixel
+   ink with a shadow that sits down and to the right, the frames are slightly out of true,
+   the title is pasted on at an angle. The wall was the one polite thing in a rude room,
+   which is why thirteen drawings could arrive and it still read as a list.
+   So each drawing is now pinned like a sheet: the same ink, the same offset shadow, and a
+   tilt that alternates by half a degree so a wall of them reads as a wall. They straighten
+   when a finger or a cursor arrives, because a sheet you are looking at should not be
+   crooked — the tilt is how the wall hangs, not how the drawing is. */
+.comic-wall .record-cartoon-plate {
+  border: 3px solid rgb(var(--record-ink));
+  border-radius: 3px 9px 4px 7px;
+  box-shadow: 4px 5px 0 rgb(var(--record-ink));
+  background: rgb(var(--cartoon-paper));
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.comic-wall .record-cartoon-plate:nth-child(odd) { transform: rotate(-.7deg); }
+.comic-wall .record-cartoon-plate:nth-child(even) { transform: rotate(.55deg); }
+.comic-wall .record-cartoon-plate:hover,
+.comic-wall .record-cartoon-plate:focus-within {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 6px 9px 0 rgb(var(--record-ink));
+}
+@media (prefers-reduced-motion: reduce) {
+  .comic-wall .record-cartoon-plate,
+  .comic-wall .record-cartoon-plate:hover,
+  .comic-wall .record-cartoon-plate:focus-within { transform: none; }
+}
 @media (min-width: 1024px) {
   .cartoon-room .record-shell-content { padding: .7rem 2.5rem 3rem; }
   .comic-masthead { padding-top: 1.4rem; }

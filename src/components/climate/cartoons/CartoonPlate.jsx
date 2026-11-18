@@ -15,7 +15,12 @@ export default function CartoonPlate({ cartoon }) {
       {/* One frame for every drawing on the wall, so a wall of pictures reads as a wall and
           not as a pile of different-shaped things. The drawing itself is never cropped: it
           sits whole inside the frame, with the paper showing round it. */}
-      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden bg-record-paper/70">
+      {/* The frame is four-by-three, not four-by-five. Editorial cartoons are drawn wide —
+          thirteen of them arrived landscape and were being hung in a portrait box, so each
+          one sat small in the middle of a tall empty mat and the wall read as a set of
+          stamps. Four-by-three is the shape the work actually is; a square drawing still
+          sits whole inside it, and nothing is ever cropped. */}
+      <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-record-paper/70">
         <img
           src={image_url}
           alt={title || `A drawing by ${artist_name}`}
