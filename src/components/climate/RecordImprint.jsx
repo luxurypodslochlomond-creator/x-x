@@ -117,16 +117,16 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             />
           ))}
 
-          {/* ── DOORS, NOT CONTENTS ────────────────────────────────────────────────
-              "Contents" is the correct word for a printed book and the wrong word for a
-              thumb: it names a list rather than an act. The record calls its way through
-              doors everywhere else — the shed has rooms, the note says one door on every
-              working screen — so the mark that opens them all is called after them. It stays
-              last, under the thumb, and it is the only cell that opens something rather than
-              going somewhere. */}
+          {/* ── THE SAME WORD AS THE DESK, BECAUSE IT IS THE SAME THING ─────────────
+              This cell said "Doors" on a phone and "Explore" on a desk. Both were true, and
+              that was the fault: the same panel, opening the same index, under two names,
+              so a reader who moved from one glass to the other had to learn it twice.
+              Brian, 18 November: "on desktop explore but on mobile says doors?" The desk's
+              word wins, because it is the one that says what happens — nothing is being
+              listed, the record is being opened up. One name, one mark, both widths. */}
           <RecordNavDoor
             to="/ClimateGuide"
-            label="Doors"
+            label="Explore"
             what="Every way through the record, on one screen."
             size={25}
             asButton

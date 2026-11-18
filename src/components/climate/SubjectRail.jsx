@@ -28,9 +28,13 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
         <ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 text-record-mark ${expanded ? 'rotate-180' : ''}`} />
       </button>
 
+      {/* The preview strip is a phone's affordance: a swipe rail of the subjects carrying
+          something, so a thumb can see what is there without opening the index. A desk has
+          the room to open the index itself and no thumb doing the swiping, so it gets the
+          same line and the same sheet without a rail to drag. */}
       {!expanded && strip.length > 0 && (
         <div
-          className="climate-nav-rail grid auto-cols-[31%] grid-flow-col border-b border-record-ink/20 overflow-x-auto"
+          className="climate-nav-rail grid auto-cols-[31%] grid-flow-col border-b border-record-ink/20 overflow-x-auto lg:hidden"
           style={{ scrollSnapType: 'x proximity' }}
           aria-label="Subjects on the record"
         >

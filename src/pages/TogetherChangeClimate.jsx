@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users, ChevronDown } from 'lucide-react';
+import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
@@ -12,7 +12,6 @@ import { shareRecord } from '@/components/climate/shareRecordCard';
 import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
-import SubjectIndexItem from '@/components/climate/SubjectIndexItem';
 import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
@@ -503,7 +502,22 @@ export default function TogetherChangeClimate() {
                 >{d.label}</button>
               ))}
             </div>
-            <div className="my-3 lg:hidden">
+            {/* ── ONE SUBJECT INDEX, AND THE SEQUENCE IS THE HONEST ONE ─────────────
+                The desk and the phone were two indexes. The phone opened the sheet: every
+                subject carrying something, fullest first, then the ones with nothing under
+                them saying so. The desk opened a list in the taxonomy's own order, with the
+                empties mixed in among the full, so a reader on a wide screen met a dozen
+                doors that go nowhere before reaching water and energy — and the two lists
+                did not even look alike. Brian, 18 November: "why doesn't subjects operate
+                and look the same and sequence right?"
+
+                So there is one index now, at both widths: the same line naming the subject
+                you are standing in, the same sheet, the same order — fullest first, empties
+                last — the same marks, the same counts. The rail of preview tiles under the
+                line stays the phone's alone, because a desk has the room to open the index
+                itself. Choosing a subject still closes the index and still carries the
+                reader down to the entries, on either glass. */}
+            <div ref={subjectDeskRef} className="my-3">
               <SubjectRail
                 strip={filledSubjects}
                 current={activeSubject}
@@ -558,63 +572,6 @@ export default function TogetherChangeClimate() {
             </p>
 
           </div>
-        </div>
-      </div>
-
-      {/* ── THE SUBJECTS, DRAWN ─────────────────────────────────────────────────────
-          A phone opens the contents sheet and meets the subjects as drawings. A desk met
-          them as typed pills with two-letter codes in boxes — the marks stopped dead at
-          the phone's edge, which is why the index looked like two different records
-          depending on the glass it was on. It is the same index everywhere now: the
-          drawings, their counts, laid flat because a desk has the room and no thumb is
-          doing the aiming. Nothing about the filter has changed. ── */}
-      <div ref={subjectDeskRef} className="hidden px-4 pb-5 lg:block lg:px-10 bg-[#efe7d6]">
-        <div className="border-y border-[#141210]/20">
-          {/* One line, the way the phone has one line: the subject you are standing in,
-              its folio, and a tab that opens the index. Everything the desk used to lay
-              flat — thirty drawings in six columns — is still here, one tap in. */}
-          <button
-            type="button"
-            onClick={() => setShowIndex(open => !open)}
-            aria-expanded={showIndex}
-            aria-controls="record-subject-index"
-            className="flex min-h-11 w-full items-center gap-2 text-left text-[#141210]"
-          >
-            <span className="text-[10px] font-black font-mono uppercase tracking-[0.18em] text-[#5a5246]">Subject</span>
-            <span className="min-w-0 truncate text-[15px] leading-tight" style={{ fontFamily: 'var(--font-reading)' }}>
-              {activeSubject ? activeSubject.label : 'All subjects'}
-            </span>
-            <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">
-              {activeSubject ? activeSubject.count : items.length + actions.length}
-            </span>
-            <ChevronDown className={`h-4 w-4 shrink-0 text-[#5a5246] transition-transform ${showIndex ? 'rotate-180' : ''}`} />
-          </button>
-          {showIndex && (
-            <div id="record-subject-index" className="pb-2">
-              <button
-                type="button"
-                onClick={() => { setSelectedCategory('all'); setShowIndex(false); }}
-                aria-pressed={selectedCategory === 'all'}
-                className={`flex min-h-11 w-full items-center gap-2 text-left ${selectedCategory === 'all' ? 'text-record-mark' : 'text-[#141210]'}`}
-              >
-                <SubjectMark subject="all" size={20} active={selectedCategory === 'all'} />
-                <span className="text-[13px]">All subjects</span>
-                <span className="ml-auto font-mono text-[11px] tabular-nums text-[#5a5246]">{items.length + actions.length}</span>
-              </button>
-              {/* Two across on a phone, three on a desk — a subject is a door, and the same
-                  door the explorer shows, so six across was a chart of six-word columns. */}
-              <div className="grid grid-cols-2 gap-x-3 pb-2 sm:grid-cols-3" aria-label="Filter by subject">
-                {subjectIndex.map(s => (
-                  <SubjectIndexItem
-                    key={s.id}
-                    subject={s}
-                    selected={selectedCategory === s.id}
-                    onClick={() => { setSelectedCategory(s.id); setShowIndex(false); }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
