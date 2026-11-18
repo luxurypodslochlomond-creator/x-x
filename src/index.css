@@ -1,5 +1,28 @@
 /* Oswald is loaded from index.html, off the critical path — first paint never waits on a font. */
 
+/* The cartoon room's reading hand. These files load only where the face is used. */
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/comicneue/v9/4UaHrEJDsxBrF37olUeD96rp5w.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/comicneue/v9/4UaErEJDsxBrF37olUeD_xHM8pxULg.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Comic Neue';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/comicneue/v9/4UaFrEJDsxBrF37olUeD96_Z5btx.woff2') format('woff2');
+}
+
 /* ── THE RECORD HAS ONE VOICE NOW ────────────────────────────────────────────────
    This file has argued with itself about the reading voice three times, and the reason
    is worth keeping: every argument was about which face to use, when the real fault was
@@ -187,6 +210,8 @@ button:focus-visible {
 
 @layer base {
   :root {
+    --font-cartoon-display: 'Bangers', 'Comic Neue', system-ui, sans-serif;
+    --font-cartoon-reading: 'Comic Neue', 'Record UI', system-ui, sans-serif;
     /* One shared face: the record's real regular and bold Helvetica files. */
     --font-display: var(--font-record-ui);
     --font-heading: var(--font-record-ui);
@@ -296,6 +321,8 @@ button:focus-visible {
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
+    --font-cartoon-display: 'Bangers', 'Comic Neue', system-ui, sans-serif;
+    --font-cartoon-reading: 'Comic Neue', 'Record UI', system-ui, sans-serif;
     --font-display: var(--font-record-ui);
     --font-heading: var(--font-record-ui);
     --font-body: var(--font-record-ui);

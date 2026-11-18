@@ -223,7 +223,7 @@ export default function CartoonSendIn() {
       )}
 
       {error && (
-        <p className="mt-3 border-l-2 border-record-red pl-3 text-[13.5px] leading-[1.6] text-record-ink" style={reading}>
+        <p className="comic-error-note" role="alert" style={reading}>
           {error}
         </p>
       )}

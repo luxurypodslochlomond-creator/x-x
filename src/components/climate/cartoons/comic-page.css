@@ -53,7 +53,7 @@
   font-size: .82rem;
   font-weight: 900;
   font-variant-numeric: tabular-nums;
-  transform: rotate(-5deg);
+  transform: none;
 }
 .record-pages .cartoon-room .comic-panel-heading h2 {
   flex: 1;
@@ -78,7 +78,7 @@
   font-weight: 900;
   text-transform: uppercase !important;
   letter-spacing: .09em;
-  transform: rotate(-1.4deg);
+  transform: none;
 }
 
 /* ── THE PAGE THE PANEL IS PASTED ON ───────────────────────────────────────────
@@ -116,7 +116,7 @@
   font-size: clamp(.98rem, 4.4vw, 1.3rem);
   font-weight: 800;
   line-height: 1.15;
-  transform: rotate(-1.1deg);
+  transform: none;
   box-shadow: 3px 3px 0 rgb(var(--record-ink));
 }
 .record-pages .cartoon-room .comic-speech::after {
@@ -392,8 +392,8 @@
 }
 @media (max-width: 639px) {
   .record-pages .cartoon-room .comic-masthead {
-    margin-inline: -1.25rem;
-    padding-inline: 1.25rem;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
   }
 }
 
@@ -406,7 +406,7 @@
    person has to read is ever at the edge. */
 @media (max-width: 639px) {
   .record-pages .cartoon-room .comic-single-reader {
-    margin-inline: -1.25rem;
+    margin-inline: -1rem;
     padding: .5rem 0 .9rem;
     border: 0;
     border-top: 3px solid rgb(var(--record-ink));
@@ -422,44 +422,102 @@
   .record-pages .cartoon-room .comic-speech { left: 1.1rem; }
 }
 
-/* ── THE ROOM'S OWN HAND, AND THE RECORD'S VOICE UNDER IT ───────────────────────
-   Brian, 18 November: "the font on this page of cartoons is doing my head in, not
-   coolasfuck … doesn't feel part of our record."
-
-   Both halves of that were true and they had one cause. Every heading on this page was the
-   same bold grotesque the whole record uses, and every small note was the same face at
-   small caps — so a room of drawings was set in the voice of a policy document, shouting
-   in exactly one volume from the masthead to the credit.
-
-   So the page is split by what the words are doing. Anything that is a drawing's title or
-   the room's name is set in comic lettering, because that is what those words are: a
-   masthead and a section head, printed. Anything that is a sentence a person reads — what
-   the catalogue is, whose drawing this is, what the strip is for — is set in the record's
-   own reading face, in lower case, at a size a phone can hold. One room, two jobs, no
-   third voice, and the stamps (the panel number, the gesture) stay stamps. */
-.record-pages .cartoon-room {
-  --cartoon-display: 'Bangers', var(--font-record-ui);
-  --cartoon-read: 'Source Serif 4', var(--font-record-reading);
+/* One lettering system, including prose, controls, captions and the portalled reader.
+   The shared record's prose sizing explicitly leaves this room to its own rhythm. */
+.record-pages .cartoon-room,
+.cartoon-close-reading {
+  --cartoon-display: var(--font-cartoon-display);
+  --cartoon-read: var(--font-cartoon-reading);
+  --font-record-ui: var(--cartoon-read);
+  --font-body: var(--cartoon-read);
+  --font-reading: var(--cartoon-read);
+  --font-heading: var(--cartoon-display);
+  --font-display: var(--cartoon-display);
+  --record-display: var(--cartoon-display);
+  font-family: var(--cartoon-read);
 }
-.record-pages .cartoon-room :is(.comic-title, .comic-section-title) {
+.record-pages .cartoon-room :is(h1, h2, h3, h4, h5, h6),
+.cartoon-close-reading :is(h1, h2, h3) {
   font-family: var(--cartoon-display) !important;
   font-weight: 400 !important;
   text-transform: none !important;
-  letter-spacing: .015em !important;
-  line-height: .94 !important;
+  letter-spacing: .02em !important;
+  line-height: 1.08 !important;
 }
 .record-pages .cartoon-room .comic-title {
   font-size: clamp(3.4rem, 16.5vw, 5.6rem) !important;
 }
-.record-pages .cartoon-room .comic-section-title {
-  font-size: clamp(2rem, 8.6vw, 2.9rem) !important;
-}
-.record-pages .cartoon-room :is(p, span, a).record-meta:not(.comic-gesture):not(.comic-number):not(.comic-catalogue-eyebrow) {
+.record-pages .cartoon-room .cartoon-room-plate :is(p, li, blockquote, dd, dt),
+.cartoon-close-reading :is(p, li, blockquote, dd, dt) {
   font-family: var(--cartoon-read) !important;
-  font-size: .95rem;
-  line-height: 1.55;
+  font-size: var(--comic-copy-size, 1.125rem) !important;
+  line-height: var(--comic-copy-leading, 1.5) !important;
+  font-weight: var(--comic-copy-weight, 400);
   letter-spacing: 0;
-  text-transform: none;
+  overflow-wrap: break-word;
+}
+.record-pages .cartoon-room :is(.comic-eyebrow, .comic-opening-eyebrow, .comic-catalogue-eyebrow, .comic-session-eyebrow, .comic-anthology-eyebrow, .comic-cover-words-eyebrow, .comic-gesture, dt) {
+  --comic-copy-size: .9375rem;
+  --comic-copy-leading: 1.35;
+  --comic-copy-weight: 700;
+}
+.record-pages .cartoon-room :is(.comic-catalogue-cover-credit, .comic-art-credit, .comic-tap-hint, .comic-cover-words-credit, .comic-session-attrib, .comic-share-note, .comic-event-share-note, .cartoon-wall-colophon, .cartoon-provenance),
+.cartoon-close-reading .cartoon-provenance {
+  --comic-copy-size: 1rem;
+}
+.record-pages .cartoon-room :is(.comic-session-facts, .comic-anthology-facts) dd { --comic-copy-size: 1.0625rem; }
+.record-pages .cartoon-room .comic-speech {
+  --comic-copy-size: 1.1875rem;
+  --comic-copy-leading: 1.25;
+  --comic-copy-weight: 700;
+}
+.record-pages .cartoon-room .comic-reply {
+  --comic-copy-size: 1.25rem;
+  --comic-copy-leading: 1.3;
+  --comic-copy-weight: 700;
+}
+.record-pages .cartoon-room :is(.comic-theme, .cartoon-byline) { --comic-copy-weight: 700; }
+.record-pages .cartoon-room :is(.cartoon-index-line, .cartoon-index-note, .cartoon-index-name small, .cartoon-spread-line, .cartoon-provenance a) {
+  font-size: .9375rem;
+  line-height: 1.4;
+}
+.record-pages .cartoon-room :is(.cartoon-story-reel span, .cartoon-index-name, .cartoon-index-foot, .cartoon-source, .comic-source-list > a, .comic-source-summary, .comic-why-link, .comic-session-link, summary) {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+.record-pages .cartoon-room :is(.comic-turner button, .comic-make-door, .comic-drawer summary, .comic-load-more, .comic-event-share > button) {
+  font-family: var(--cartoon-display) !important;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: .035em;
+  line-height: 1.2;
+}
+.record-pages .cartoon-room .comic-make-door small {
+  font-family: var(--cartoon-read);
+  font-size: 1rem;
+  font-weight: 400;
+}
+.record-pages .cartoon-room .comic-gesture { max-width: 100%; }
+.record-pages .cartoon-room .comic-position { font-size: 1rem; }
+.record-pages .cartoon-room .comic-error-note,
+.cartoon-close-reading .comic-error-note {
+  --comic-copy-size: 1.0625rem;
+  display: grid;
+  justify-items: start;
+  gap: .75rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 2px solid rgb(var(--record-ink));
+  border-left: 5px solid rgb(var(--record-red));
+  border-radius: 0;
+  background: rgb(var(--cartoon-paper));
+  color: rgb(var(--record-ink));
+  transform: none;
+  box-shadow: none;
+}
+html[data-tongue="chr"] :is(.record-pages .cartoon-room, .cartoon-close-reading) {
+  --cartoon-read: var(--font-script);
+  --cartoon-display: var(--font-script);
 }
 
 /* ── THE COVER, PRINTED ON THE PAGE RATHER THAN PLACED IN IT ────────────────────
@@ -467,8 +525,8 @@
    under it and the three sentences that explain it sitting on paper beneath. The picture
    is the first thing, and it is the width of the device. */
 @media (max-width: 639px) {
-  .record-pages .cartoon-room .comic-catalogue { margin-inline: -1.25rem; }
-  .record-pages .cartoon-room .comic-catalogue-band { padding-inline: 1.25rem; }
+  .record-pages .cartoon-room .comic-catalogue { margin-inline: 0; }
+  .record-pages .cartoon-room .comic-catalogue-band { padding-inline: 1rem; }
 }
 .record-pages .cartoon-room .comic-catalogue-band {
   padding: 1rem 1.25rem 1.15rem;

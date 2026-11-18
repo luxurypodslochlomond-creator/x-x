@@ -4,7 +4,7 @@ export default function CartoonArtwork({ cartoon, lead = false, linkSource = tru
   const source = cartoon.display_image_url || cartoon.image_url;
   const [failedSource, setFailedSource] = useState(null);
   if (failedSource === source) return (
-    <div className="comic-artwork-unavailable">
+    <div className="comic-artwork-unavailable comic-error-note" role="status">
       <p>The drawing could not be opened here.</p>
       {linkSource && cartoon.source_url && <a href={cartoon.source_url} target="_blank" rel="noopener noreferrer">See “{cartoon.title || cartoon.artist_name}” at its source ↗</a>}
     </div>
