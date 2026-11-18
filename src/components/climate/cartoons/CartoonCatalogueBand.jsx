@@ -17,19 +17,22 @@ import { ArrowDown } from 'lucide-react';
 // cartoonists, and the one that was standing here did not. Her cover is the one that goes
 // up — it is her book, and a room that gathers drawings from everywhere must not open on a
 // cover that says it only came from one place. Swapped whole, not cropped to fit.
-const COVER = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/85add9c8b_caib-2026-cover.jpg';
+const COVER = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/04b7522a8_caib-2026-catalogue-cover.jpeg';
 
 export default function CartoonCatalogueBand() {
   return (
     <section className="comic-catalogue" aria-labelledby="comic-catalogue-title">
       <img
         src={COVER}
-        alt="The cover of the 8th CartoonAFRICA International Biennial 2026: a group of African and non-African cartoonists standing between a living landscape of wind turbines and a dead, cracked one, over a hand drawing a sweating globe."
+        alt="Cover of the 8th CartoonAFRICA International Biennial (CAIB) 2026 anthology, Climate Change and the Power of Collective Actions and Creative Interventions, featuring African and non-African cartoonists. Edited by Francis Umendu Odupute and Janine Selendy."
+        width={682}
+        height={1024}
         loading="eager"
+        fetchPriority="high"
       />
       <div className="comic-catalogue-band">
-        <p id="comic-catalogue-title" className="comic-catalogue-eyebrow">The catalogue · in preparation</p>
-        <p className="comic-catalogue-line">
+        <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · in preparation</p>
+        <p className="comic-catalogue-line record-meta">
           The 8th CartoonAFRICA International Biennial 2026 — edited by Francis Umendu Odupute
           and Janine Selendy. Free to download from this page the day it is finished.
         </p>

@@ -38,7 +38,7 @@ export default function CartoonAnthology() {
       <h2 id="cartoon-anthology-title" className="comic-anthology-title">{TITLE}</h2>
       <p className="comic-anthology-sub">
         “…an anthology of editorial cartoons and comics journalism works by selected African
-        cartoonists.”
+        and non-African cartoonists.”
       </p>
 
 
