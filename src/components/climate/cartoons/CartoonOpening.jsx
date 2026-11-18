@@ -1,6 +1,4 @@
 import React from 'react';
-import ShareCardButton from '@/components/climate/ShareCardButton';
-import { buildCartoonShareCard, CARTOON_CARD } from '@/components/climate/cartoons/cartoonCard';
 import CartoonPartMark, { CARTOON_PARTS } from '@/components/climate/cartoons/CartoonPartMarks';
 
 // ── WHAT THIS ROOM IS, SAID ONCE, AT THE TOP ───────────────────────────────────
@@ -21,8 +19,8 @@ export default function CartoonOpening() {
     <section className="comic-opening" aria-labelledby="cartoon-opening-title">
       <p id="cartoon-opening-title" className="comic-opening-eyebrow record-meta">What this room is</p>
       <p className="comic-opening-line">
-        Drawings, not statements. Every picture here was made by a person about the climate —
-        some at the CartoonAFRICA biennial in Benin City, some sent in from a kitchen table.
+        A room for climate cartoons, opened for CartoonAFRICA. The wall holds human-authored drawings,
+        with their artists and sources. The record’s own strip is separate, and labelled as AI-illustrated fiction.
       </p>
 
       <p className="comic-opening-eyebrow record-meta comic-opening-in">In this room</p>

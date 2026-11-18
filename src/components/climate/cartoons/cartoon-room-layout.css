@@ -1,0 +1,55 @@
+/* One continuous sheet. These scoped rules deliberately outrank the shared media mounts. */
+.climate-record .record-pages > .cartoon-room > .record-back-bar { display: none; }
+.climate-record .record-pages > .cartoon-room > .record-shell-body { padding: 0; }
+.climate-record .record-pages > .cartoon-room > .record-shell-body > .record-shell-content {
+  max-width: none; padding: 0 1rem 2.5rem; background: rgb(var(--cartoon-paper)); box-shadow: none;
+}
+.cartoon-room .comic-event-opening { margin-inline: -1rem; }
+.cartoon-room .comic-catalogue { margin: 0; }
+.cartoon-room .comic-catalogue img { border: 0; border-radius: 0; }
+.cartoon-room .comic-catalogue-band { border-width: 0 0 1px; border-color: rgb(var(--record-ink) / .2); background: rgb(var(--cartoon-paper)); }
+.cartoon-room .comic-event-share { padding-top: .6rem; }
+.record-pages .cartoon-room .comic-event-share-note { margin: .6rem 0 0; color: rgb(var(--record-muted)); font-size: .75rem; line-height: 1.5; }
+.cartoon-room .comic-event-context { padding: 1.5rem 1rem; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+.cartoon-room .comic-masthead { padding: 0 0 1.5rem; }
+.record-pages .cartoon-room .comic-title { margin: .6rem 0; font-size: clamp(2.25rem, 7vw, 3.5rem); line-height: .95 !important; transform: none; text-shadow: none; }
+.cartoon-room .comic-title::before { inset: 48% -.1rem 0; transform: none; clip-path: none; }
+.cartoon-room .comic-tagline { margin-top: .75rem; }
+.cartoon-room .comic-session { max-width: none; padding: 1.25rem 0 0; margin: 0; border-bottom: 0; border-top-width: 1px; }
+.record-pages .cartoon-room .comic-session-who p { font-weight: 400; }
+.cartoon-room .comic-opening { max-width: none; padding: 1.5rem 0 0; margin: 0; border-top: 0; }
+.record-pages .cartoon-room .comic-opening-line { font-weight: 400; }
+.cartoon-room :is(.comic-wall, .comic-reader, .comic-anthology, .comic-why, .comic-workshop, .comic-sources) { max-width: none; margin-top: 2.5rem; }
+.cartoon-room .comic-reader { padding-top: 1.25rem; border-top: 2px solid rgb(var(--record-ink)); }
+.cartoon-room .comic-single-reader { margin-top: .8rem; touch-action: pan-y pinch-zoom; }
+.cartoon-room .comic-single-reader .comic-panel { padding-inline: 0; }
+.cartoon-room .comic-turner { padding-inline: 0; }
+.climate-record .record-pages .cartoon-room :is(.record-cartoon-plate, .comic-frame) { border: 0; border-radius: 0; box-shadow: none; transform: none; }
+.cartoon-room .comic-wall-artwork { display: block; width: 100%; height: auto; }
+.cartoon-room .comic-wall .record-cartoon-plate figcaption { background: rgb(var(--cartoon-paper)); border-top: 1px solid rgb(var(--record-ink) / .2); padding: .9rem 1rem 1rem; }
+.cartoon-room .comic-wall-grid { background: transparent; gap: 2rem; align-items: start; }
+.cartoon-room .comic-wall-lead { margin-top: 1rem; }
+.cartoon-room .comic-wall .record-cartoon-plate:hover { transform: none; box-shadow: none; }
+.cartoon-room .comic-artwork-unavailable { padding: 1.5rem 1rem; background: rgb(var(--record-bone)); font-size: .875rem; }
+.cartoon-room .comic-artwork-unavailable a { display: inline-flex; min-height: 2.75rem; align-items: center; text-decoration: underline; }
+.cartoon-room .comic-stage img { aspect-ratio: auto; height: auto; object-fit: contain; }
+.cartoon-room .comic-why { border: 0; border-top: 2px solid rgb(var(--record-ink)); border-radius: 0; box-shadow: none; padding: 1.25rem 0; }
+.cartoon-room .comic-drawer { border-radius: 0; box-shadow: none; }
+.cartoon-room .comic-part:focus-visible { outline: 3px solid rgb(var(--record-red)); outline-offset: 3px; }
+.climate-record .record-pages .cartoon-room [id] { scroll-margin-top: 9rem; }
+@media (min-width: 640px) {
+  .cartoon-room .comic-event-opening { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1fr); align-items: start; }
+  .cartoon-room .comic-event-context { padding: 1.5rem; border-bottom: 0; }
+  .cartoon-room .comic-catalogue { border-right: 1px solid rgb(var(--record-ink) / .2); }
+  .record-pages .cartoon-room .comic-title { font-size: clamp(2rem, 4vw, 3.5rem); }
+  .cartoon-room .comic-wall-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cartoon-room .comic-wall-lead { max-width: 44rem; margin-inline: auto; }
+  .cartoon-room .comic-reader { max-width: 40rem; margin-inline: auto; }
+}
+@media (min-width: 1024px) {
+  .climate-record .record-pages > .cartoon-room > .record-shell-body > .record-shell-content { padding-inline: 2.5rem; }
+  .cartoon-room .comic-event-opening { margin-inline: -2.5rem; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+  .cartoon-room .comic-event-context { padding: 2rem; }
+  .cartoon-room .comic-catalogue-band { padding: 1rem 1.5rem 1.25rem; border-bottom: 0; }
+  .climate-record .record-pages .cartoon-room [id] { scroll-margin-top: 10rem; }
+}

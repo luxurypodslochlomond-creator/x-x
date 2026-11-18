@@ -1,42 +1,39 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import ComicPanel from '@/components/climate/cartoons/ComicPanel';
 import { comicStories } from '@/components/climate/cartoons/comicStories';
 
 export default function ComicReader() {
-  const rail = useRef(null);
-  const [active, setActive] = useState(0);
-
-  // A chip on the record's homepage names its cartoon in the address, so tapping
-  // "Walking" opens the walking strip rather than the top of the room.
-  useEffect(() => {
-    const wanted = new URLSearchParams(window.location.search).get('strip');
-    if (!wanted) return;
-    const index = comicStories.findIndex(story => story.id === wanted);
-    if (index < 0) return;
-    setActive(index);
-    const settle = requestAnimationFrame(() => {
-      const width = rail.current?.clientWidth || 0;
-      rail.current?.scrollTo({ left: index * width, behavior: 'auto' });
-    });
-    return () => cancelAnimationFrame(settle);
-  }, []);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const touch = useRef(null);
+  const wanted = new URLSearchParams(location.search).get('strip');
+  const active = Math.max(0, comicStories.findIndex(story => story.id === wanted));
   const turn = (step) => {
     const next = (active + step + comicStories.length) % comicStories.length;
-    rail.current?.scrollTo({ left: next * rail.current.clientWidth, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    const params = new URLSearchParams(location.search);
+    params.set('strip', comicStories[next].id);
+    navigate({ pathname: location.pathname, search: `?${params}`, hash: '#cartoon-strip' }, { replace: true });
   };
   return (
     <section className="comic-reader" id="cartoon-strip" aria-label="The record's own cartoons">
-      {/* The room's title used to be here. It lives in ComicMasthead now, at the top of the
-          page, so the drawings can come before the strip instead of after it. */}
-      <div ref={rail} className="comic-rail" tabIndex={0} role="region" aria-label="Swipe for the next cartoon, or use the arrow buttons" onKeyDown={(e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); turn(e.key === 'ArrowRight' ? 1 : -1); }
-      }} onScroll={(e) => setActive(Math.max(0, Math.min(comicStories.length - 1, Math.round(e.currentTarget.scrollLeft / e.currentTarget.clientWidth))))}>
-        {comicStories.map((story, index) => <ComicPanel key={story.id} story={story} index={index} />)}
+      <p className="comic-opening-eyebrow record-meta">The record’s own strip · AI-illustrated fiction</p>
+      <div className="comic-single-reader" tabIndex={0} role="region" aria-label="Cartoons: swipe or use the arrow buttons"
+        onKeyDown={(event) => { if (['ArrowRight', 'ArrowLeft'].includes(event.key)) { event.preventDefault(); turn(event.key === 'ArrowRight' ? 1 : -1); } }}
+        onTouchStart={(event) => { const p = event.touches[0]; touch.current = { x: p.clientX, y: p.clientY }; }}
+        onTouchEnd={(event) => {
+          if (!touch.current) return;
+          const dx = event.changedTouches[0].clientX - touch.current.x;
+          const dy = event.changedTouches[0].clientY - touch.current.y;
+          if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) turn(dx < 0 ? 1 : -1);
+          touch.current = null;
+        }}>
+        <ComicPanel key={comicStories[active].id} story={comicStories[active]} index={active} />
       </div>
       <div className="comic-turner">
         <button type="button" onClick={() => turn(-1)} className="comic-previous" aria-label="Previous cartoon"><ArrowLeft size={20} /></button>
-        <span className="comic-position" aria-live="polite" aria-atomic="true">0{active + 1} / 0{comicStories.length}</span>
+        <span className="comic-position" aria-live="polite" aria-atomic="true">{String(active + 1).padStart(2, '0')} / {String(comicStories.length).padStart(2, '0')}</span>
         <button type="button" onClick={() => turn(1)} className="comic-next">{active === comicStories.length - 1 ? 'From the top' : 'Next cartoon'}<ArrowRight size={20} /></button>
       </div>
       <p className="comic-art-credit record-meta">Written to be read by a child as easily as a grown-up. AI-generated illustrations.<br />Fiction, not workshop submissions or checked evidence.</p>
