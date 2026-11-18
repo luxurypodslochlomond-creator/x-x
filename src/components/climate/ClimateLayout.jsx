@@ -200,7 +200,11 @@ export default function ClimateLayout({ children, currentPage }) {
         {/* One real painting, fixed behind the entire room, including its foot.
             The cartoon's digital light is transparent, never a replacement globe. */}
         <RecordCover position="center 42%" strength={1} priority className="record-ground" />
-        {isCartoonRoom ? <ComicField /> : <RecordSky />}
+        {/* The cartoon room carries no overlay of its own. The orbiting traces and nodes
+            that used to sit over the painting here were the last piece of costume on the
+            page — a light show behind a room whose whole argument is that the drawing is
+            the event. The painting stays; the decoration does not. */}
+        {!isCartoonRoom && <RecordSky />}
       </div>
 
       {/* ── ONE WAY THROUGH, AND IT IS AT THE TOP ──────────────────────────────────

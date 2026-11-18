@@ -1,0 +1,895 @@
+/* ── THE CARTOON ROOM, SET LIKE AN ARGUMENT ────────────────────────────────────
+   Every previous pass dressed this room as a comic: black plates, halftone, a tilted
+   yellow title with a red offset shadow, caption bars, alternating tilt, an orbiting
+   light behind it. A cartoonist reads all of that as a page that does not trust the
+   drawings, and it is exactly the costume the room was asked to stop wearing.
+
+   So this sheet has no costume in it. Paper, ink, one red rule, and the record's own two
+   faces: the Helvetica the masthead is set in for names, numbers and labels, and the
+   record's reading serif for sentences. The only colour in the room is the colour the
+   artists put on the page. Hierarchy comes from size and air, never from a frame.
+
+   Two structural ideas carry it, and neither is decorative:
+   1. The wall is a set of sheets, not a grid of cards. Each drawing runs at the width it
+      deserves and its words sit in a margin beside it, the way a broadsheet sets a picture
+      against its standfirst. Nothing is boxed.
+   2. The reason the room exists is told in beats — the three lines the record already
+      wrote, set large and in sequence, so the argument is read as a strip rather than as a
+      bullet list. That is the comic. Not a font that says "comic".
+   ─────────────────────────────────────────────────────────────────────────────── */
+
+#root .press-room .record-shell-body { padding: 0; }
+#root .press-room .record-shell-content { max-width: none; padding: 0; }
+#root .press-room { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+
+.press-room-inner {
+  width: 100%;
+  max-width: 106rem;
+  margin: 0 auto;
+  padding: 0 1.15rem 3.5rem;
+}
+@media (min-width: 1024px) {
+  .press-room-inner { padding: 0 clamp(1.75rem, 3.6vw, 5rem) 5.5rem; }
+}
+
+/* ── type ─────────────────────────────────────────────────────────────────────── */
+.press-eyebrow {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  line-height: 1.4;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-title {
+  margin: .7rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(2.7rem, 7.6vw, 7.4rem);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -.045em;
+}
+.press-standfirst {
+  margin: 1rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.02rem, 1.35vw, 1.32rem);
+  line-height: 1.35;
+  letter-spacing: -.012em;
+}
+.press-scope {
+  margin: .9rem 0 0;
+  max-width: 46ch;
+  font-family: var(--font-reading);
+  font-size: .95rem;
+  line-height: 1.62;
+  color: rgb(var(--record-ink));
+}
+.press-contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem 1.35rem;
+  margin-top: 1.6rem;
+  padding-top: .9rem;
+  border-top: 1px solid rgb(var(--record-ink) / .18);
+}
+.press-contents a {
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  letter-spacing: .01em;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+  padding-bottom: 1px;
+}
+.press-contents a:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+
+/* the count the record actually keeps, said in the machine's voice */
+.press-room .cartoon-signal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .3rem .75rem;
+  margin: 1.35rem 0 0;
+  padding: .55rem 0;
+  border-top: 1px solid rgb(var(--record-ink) / .18);
+  border-bottom: 1px solid rgb(var(--record-ink) / .18);
+  font-family: var(--font-record-ui);
+  font-size: .74rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-room .cartoon-signal-fact { color: rgb(var(--record-ink)); font-weight: 700; }
+.press-room .cartoon-signal-dot {
+  width: 3px; height: 3px; border-radius: 50%;
+  background: rgb(var(--record-red));
+}
+
+/* ── the opening: name, standfirst, cover ─────────────────────────────────────── */
+.press-opening { padding-top: 1.4rem; }
+.press-opening-words { min-width: 0; }
+.press-opening-cover { min-width: 0; margin-top: 2rem; }
+
+.press-room .comic-catalogue { display: grid; gap: 1.1rem; margin: 0; }
+.press-room .comic-catalogue > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: rgb(var(--record-bone));
+  border: 0;
+  box-shadow: none;
+}
+.press-room .comic-catalogue-band { display: grid; gap: .7rem; align-content: start; }
+.press-room .comic-catalogue-cover-credit {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .74rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+.press-room .comic-catalogue-eyebrow {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-catalogue-line {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: .92rem;
+  line-height: 1.6;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-catalogue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+  justify-self: start;
+}
+.press-room .comic-catalogue-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+.press-room .comic-event-share-note {
+  margin: .35rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  line-height: 1.5;
+  color: rgb(var(--record-muted));
+}
+
+@media (min-width: 1024px) {
+  .press-opening {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+    column-gap: clamp(2rem, 4vw, 5.5rem);
+    align-items: start;
+    padding-top: 2rem;
+  }
+  .press-opening-words { grid-column: 1; grid-row: 1; }
+  .press-opening-cover { grid-column: 2; grid-row: 1; margin-top: 0; }
+  .press-room .comic-catalogue {
+    grid-template-columns: minmax(0, auto) minmax(15rem, 1fr);
+    column-gap: clamp(1.5rem, 2.4vw, 3rem);
+    align-items: start;
+  }
+  .press-room .comic-catalogue > img { width: auto; max-height: 84vh; }
+}
+
+/* ── the argument, told in beats ─────────────────────────────────────────────── */
+.press-room .comic-why {
+  margin: 3.5rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+  display: grid;
+  gap: 1.4rem;
+}
+.press-room .comic-why .comic-section-title {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.5rem, 2.1vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-why-list {
+  list-style: none;
+  counter-reset: beat;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.press-room .comic-why-list li {
+  counter-increment: beat;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: .2rem 1rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgb(var(--record-ink) / .16);
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.3rem, 2.1vw, 2rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -.028em;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-why-list li::before {
+  content: "0" counter(beat);
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: rgb(var(--record-red));
+  padding-top: .55rem;
+}
+.press-room .comic-why-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.6rem;
+  padding-top: .2rem;
+}
+.press-room .comic-why-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+}
+.press-room .comic-why-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+
+@media (min-width: 1024px) {
+  .press-room .comic-why-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(1.5rem, 3vw, 3.5rem); }
+  .press-room .comic-why-list li {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    border-bottom: 0;
+    border-top: 1px solid rgb(var(--record-ink));
+    padding: 1rem 0 0;
+    min-height: 100%;
+  }
+  .press-room .comic-why-list li::before { padding: 0 0 .8rem; }
+}
+
+/* ── the wall ────────────────────────────────────────────────────────────────── */
+.press-wall-section { margin-top: 3.5rem; }
+.press-wall-head {
+  display: grid;
+  gap: .55rem;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+.press-wall-title {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: -.038em;
+}
+.press-wall-line {
+  margin: 0;
+  max-width: 48ch;
+  font-family: var(--font-reading);
+  font-size: .95rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+.press-wall { display: grid; }
+
+.press-sheet {
+  display: grid;
+  gap: 1.15rem;
+  padding: 1.9rem 0;
+  border-bottom: 1px solid rgb(var(--record-ink) / .16);
+}
+.press-sheet-art {
+  display: block;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(var(--record-bone));
+  cursor: zoom-in;
+}
+.press-sheet-art .comic-wall-artwork {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 66vh;
+  margin: 0 auto;
+  object-fit: contain;
+}
+.press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: 82vh; }
+.press-sheet-art:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
+.press-sheet-look {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: .5rem .7rem;
+  background: rgb(var(--record-paper));
+  font-family: var(--font-record-ui);
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+.press-sheet-art:hover .press-sheet-look,
+.press-sheet-art:focus-visible .press-sheet-look { opacity: 1; }
+
+.press-sheet-rail { display: grid; gap: .55rem; align-content: start; min-width: 0; }
+.press-sheet-number {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.7rem, 2.4vw, 2.6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--record-red));
+}
+.press-sheet-subject {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-sheet-title {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.25rem, 1.7vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.028em;
+}
+.press-sheet-by {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .86rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.press-sheet-by span { font-weight: 400; color: rgb(var(--record-muted)); }
+.press-sheet-words {
+  margin: .3rem 0 0;
+  padding-left: .9rem;
+  border-left: 2px solid rgb(var(--record-red));
+  font-family: var(--font-reading);
+  font-size: clamp(1rem, 1.15vw, 1.16rem);
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+}
+.press-sheet-link {
+  font-family: var(--font-record-ui);
+  font-size: .78rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+  justify-self: start;
+}
+.press-sheet-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+.press-sheet-provenance {
+  margin-top: .4rem;
+  padding-top: .6rem;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+  font-family: var(--font-record-ui);
+  font-size: .74rem;
+  line-height: 1.5;
+  color: rgb(var(--record-muted));
+  display: grid;
+  gap: .25rem;
+}
+.press-sheet-provenance p { margin: 0; }
+.press-sheet-provenance a { color: rgb(var(--record-ink)); text-decoration: none; border-bottom: 1px solid rgb(var(--record-ink) / .3); justify-self: start; }
+.press-sheet-provenance a:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+
+@media (min-width: 1024px) {
+  .press-sheet {
+    grid-template-columns: minmax(0, 1.62fr) minmax(16rem, .58fr);
+    column-gap: clamp(1.75rem, 3.2vw, 4rem);
+    align-items: start;
+    padding: 2.6rem 0;
+  }
+  .press-sheet:nth-child(even) .press-sheet-art { order: 2; }
+  .press-sheet:nth-child(even) .press-sheet-rail { order: 1; }
+  .press-sheet--lead { grid-template-columns: minmax(0, 1fr); }
+  .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: min(84vh, 60rem); }
+  .press-sheet--lead .press-sheet-rail {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    column-gap: clamp(1.75rem, 3.2vw, 4rem);
+    align-items: start;
+  }
+  .press-sheet--lead .press-sheet-number { grid-column: 1; grid-row: 1; }
+  .press-sheet--lead .press-sheet-subject { grid-column: 1; grid-row: 2; }
+  .press-sheet--lead .press-sheet-title { grid-column: 1; grid-row: 3; }
+  .press-sheet--lead .press-sheet-by { grid-column: 1; grid-row: 4; }
+  .press-sheet--lead .press-sheet-words { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
+  .press-sheet--lead .press-sheet-link { grid-column: 1; grid-row: 5; }
+  .press-sheet--lead .press-sheet-provenance { grid-column: 1 / -1; grid-row: 6; }
+}
+
+.press-wall-colophon {
+  margin: 1.2rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .74rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+.press-more {
+  margin-top: 1.4rem;
+  min-height: 2.9rem;
+  padding: .7rem 1.3rem;
+  background: transparent;
+  border: 1px solid rgb(var(--record-ink) / .35);
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  letter-spacing: .04em;
+  color: rgb(var(--record-ink));
+}
+.press-more:hover:not(:disabled) { border-color: rgb(var(--record-ink)); }
+.press-more:disabled { opacity: .45; }
+.press-state {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 1.4rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  color: rgb(var(--record-muted));
+}
+.press-state--error { color: rgb(var(--record-red)); flex-wrap: wrap; }
+.press-state a, .press-state button {
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+/* ── the fiction: one picture, given the page ────────────────────────────────── */
+.press-room .comic-reader {
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 3.5rem;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+.press-room .cartoon-fiction-head { display: grid; gap: .5rem; }
+.press-room .comic-opening-eyebrow {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-section-title {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: -.038em;
+  color: rgb(var(--record-ink));
+}
+.press-room .cartoon-fiction-head p:last-child {
+  margin: 0;
+  max-width: 52ch;
+  font-family: var(--font-reading);
+  font-size: .95rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+.press-room .cartoon-story-reel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem 1.5rem;
+  padding: .6rem 0;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+  border-bottom: 1px solid rgb(var(--record-ink) / .16);
+}
+.press-room .cartoon-story-reel img { display: none; }
+.press-room .cartoon-story-reel button {
+  min-height: 2.6rem;
+  padding: .35rem 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  font-family: var(--font-record-ui);
+  font-size: .84rem;
+  line-height: 1.3;
+  text-align: left;
+  color: rgb(var(--record-muted));
+}
+.press-room .cartoon-story-reel button:hover { color: rgb(var(--record-ink)); }
+.press-room .cartoon-story-reel button[aria-current="true"] {
+  color: rgb(var(--record-ink));
+  font-weight: 700;
+  border-bottom-color: rgb(var(--record-red));
+}
+.press-room .comic-single-reader { cursor: pointer; min-width: 0; }
+.press-room .comic-single-reader:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
+.press-room .comic-panel { display: grid; gap: .9rem; }
+.press-room .comic-panel-heading { display: flex; align-items: baseline; gap: .9rem; }
+.press-room .comic-number {
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: rgb(var(--record-red));
+}
+.press-room .comic-panel-heading h2 {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-gesture {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-frame { display: grid; gap: .8rem; margin: 0; }
+.press-room .comic-stage { display: grid; gap: .7rem; }
+.press-room .comic-speech {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.1rem, 1.7vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -.025em;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-stage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+  background: rgb(var(--record-bone));
+}
+.press-room .comic-ending { margin: 0; }
+.press-room .comic-reply {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--font-reading);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.35;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-theme {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .76rem;
+  letter-spacing: .04em;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-turner { display: flex; align-items: center; gap: 1rem; }
+.press-room .comic-turner button {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 2.7rem;
+  padding: .4rem 0;
+  background: none;
+  border: 0;
+  font-family: var(--font-record-ui);
+  font-size: .84rem;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-turner button:hover { color: rgb(var(--record-red)); }
+.press-room .comic-next { margin-left: auto; }
+.press-room .comic-position {
+  font-family: var(--font-record-ui);
+  font-size: .76rem;
+  letter-spacing: .1em;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-tap-hint {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-make-door {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+  border-bottom: 1px solid rgb(var(--record-ink) / .16);
+  text-decoration: none;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-make-door span {
+  font-family: var(--font-record-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+.press-room .comic-make-door small {
+  display: block;
+  margin-top: .2rem;
+  font-family: var(--font-reading);
+  font-size: .84rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-make-door:hover span { color: rgb(var(--record-red)); }
+.press-room .comic-art-credit {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+@media (min-width: 1024px) {
+  .press-room .comic-reader {
+    grid-template-columns: minmax(0, 1.7fr) minmax(15rem, .7fr);
+    column-gap: clamp(1.75rem, 3.2vw, 4rem);
+    align-items: start;
+  }
+  .press-room .comic-reader > .cartoon-fiction-head,
+  .press-room .comic-reader > .cartoon-story-reel,
+  .press-room .comic-reader > .comic-art-credit { grid-column: 1 / -1; }
+  .press-room .comic-reader > .comic-single-reader { grid-column: 1; grid-row: 3; }
+  .press-room .comic-reader > .comic-turner { grid-column: 2; grid-row: 3; align-self: start; }
+  .press-room .comic-reader > .comic-tap-hint { grid-column: 1; grid-row: 4; }
+  .press-room .comic-reader > .comic-make-door { grid-column: 2; grid-row: 4; align-self: start; }
+}
+
+/* ── the book and the biennial, on facing leaves ─────────────────────────────── */
+.press-facing {
+  display: grid;
+  gap: 2.4rem;
+  margin-top: 3.5rem;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+.press-room .comic-session,
+.press-room .comic-anthology { display: grid; gap: .85rem; align-content: start; min-width: 0; }
+.press-room .comic-session-eyebrow,
+.press-room .comic-anthology-eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-session-title,
+.press-room .comic-anthology-title {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.03em;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-session-theme,
+.press-room .comic-anthology-sub,
+.press-room .comic-anthology-note,
+.press-room .comic-anthology-status,
+.press-room .comic-anthology-credit,
+.press-room .comic-session-attrib {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: .92rem;
+  line-height: 1.6;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-anthology-status,
+.press-room .comic-anthology-credit,
+.press-room .comic-session-attrib { color: rgb(var(--record-muted)); font-size: .84rem; }
+.press-room .comic-session-facts,
+.press-room .comic-anthology-facts { display: grid; gap: .55rem; margin: .3rem 0 0; }
+.press-room .comic-session-facts div,
+.press-room .comic-anthology-facts div {
+  display: grid;
+  grid-template-columns: minmax(6rem, .4fr) minmax(0, 1fr);
+  gap: .2rem 1rem;
+  padding-top: .55rem;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+}
+.press-room .comic-session-facts dt,
+.press-room .comic-anthology-facts dt {
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-session-facts dd,
+.press-room .comic-anthology-facts dd {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: .9rem;
+  line-height: 1.55;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-session-facts dd a,
+.press-room .comic-anthology a { color: rgb(var(--record-ink)); text-decoration: none; border-bottom: 1px solid rgb(var(--record-ink) / .3); }
+.press-room .comic-session-facts dd a:hover,
+.press-room .comic-anthology a:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+.press-room .comic-session-who summary {
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  cursor: pointer;
+  color: rgb(var(--record-ink));
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+}
+.press-room .comic-session-who p { margin: .5rem 0 0; }
+.press-room .comic-session-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  justify-self: start;
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+}
+.press-room .comic-session-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+@media (min-width: 1024px) {
+  .press-facing { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(2rem, 4vw, 5rem); }
+}
+
+/* ── the drawing desk ────────────────────────────────────────────────────────── */
+.press-room .comic-workshop {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+.press-room .comic-workshop-note {
+  margin: 0;
+  max-width: 46ch;
+  font-family: var(--font-reading);
+  font-size: .95rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-drawer {
+  border-top: 1px solid rgb(var(--record-ink) / .3);
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+  margin-top: .4rem;
+}
+.press-room .comic-drawer summary {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  min-height: 3.4rem;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-drawer summary::-webkit-details-marker { display: none; }
+.press-room .comic-chevron { margin-left: auto; }
+.press-room .comic-drawer-content { padding: .5rem 0 1.4rem; }
+@media (min-width: 1024px) {
+  .press-room .comic-workshop { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  .press-room .comic-workshop > .comic-section-title,
+  .press-room .comic-workshop > .comic-workshop-note { grid-column: 1 / -1; }
+}
+
+/* ── the sources, in the record's small voice ────────────────────────────────── */
+.press-room .comic-sources {
+  display: grid;
+  gap: .7rem;
+  margin-top: 3.5rem;
+  padding-top: 1.1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+  max-width: 62rem;
+}
+.press-room .comic-sources p {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: .86rem;
+  line-height: 1.62;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  justify-self: start;
+  font-family: var(--font-record-ui);
+  font-size: .86rem;
+  font-weight: 700;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .3);
+}
+.press-room .comic-source-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+.press-room .comic-source-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 2.6rem;
+  font-family: var(--font-record-ui);
+  font-size: .82rem;
+  cursor: pointer;
+  color: rgb(var(--record-ink));
+}
+.press-room .comic-source-list { display: grid; gap: 0; }
+.press-room .comic-source-list a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .55rem 0;
+  border-bottom: 1px solid rgb(var(--record-ink) / .14);
+  font-family: var(--font-record-ui);
+  font-size: .84rem;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+}
+.press-room .comic-source-list a:hover { color: rgb(var(--record-red)); }
+.press-room .comic-source-list .record-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-family: var(--font-record-ui);
+  font-size: .74rem;
+  letter-spacing: .08em;
+  color: rgb(var(--record-muted));
+}
+.press-room .comic-copyright { font-size: .74rem !important; letter-spacing: .06em; }
+
+/* ── focus, everywhere ──────────────────────────────────────────────────────── */
+.press-room a:focus-visible,
+.press-room button:focus-visible,
+.press-room summary:focus-visible {
+  outline: 2px solid rgb(var(--record-red));
+  outline-offset: 3px;
+}
+
+@media print {
+  .press-room .comic-turner,
+  .press-room .comic-tap-hint,
+  .press-room .press-sheet-look,
+  .press-room .comic-drawer,
+  .press-more { display: none !important; }
+}

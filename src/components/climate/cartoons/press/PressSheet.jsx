@@ -1,0 +1,45 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import CartoonArtwork from '@/components/climate/cartoons/CartoonArtwork';
+import cartoonSubject from '@/components/climate/cartoons/cartoonSubjects';
+
+// ── ONE DRAWING, GIVEN THE PAGE ────────────────────────────────────────────────
+// A wall of equal cards makes every drawing the same size and every artist equally
+// anonymous. This is a sheet instead: the picture runs at the width it deserves, and the
+// words sit in a margin beside it — the number, what it is looking at, its title, the hand
+// that made it, the drawer's own line set as a quotation, and the credit. Nothing is
+// boxed, tinted, tilted or captioned with a black bar. The picture is the argument; the
+// margin is the citation.
+export default function PressSheet({ cartoon, index, lead = false, onOpen }) {
+  const { title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title } = cartoon;
+  return (
+    <article className={`press-sheet${lead ? ' press-sheet--lead' : ''}`} id={`drawing-${cartoon.id}`}>
+      <button
+        type="button"
+        className="press-sheet-art"
+        onClick={onOpen}
+        aria-label={`Look closer at ${title || 'this drawing'} by ${artist_name}`}
+      >
+        <CartoonArtwork cartoon={cartoon} lead={lead} linkSource={false} />
+        <span className="press-sheet-look">Look closer ↗</span>
+      </button>
+
+      <div className="press-sheet-rail">
+        <p className="press-sheet-number" aria-hidden="true">{String(index).padStart(2, '0')}</p>
+        <p className="press-sheet-subject">{cartoonSubject(cartoon)}</p>
+        {title && <h3 className="press-sheet-title">{title}</h3>}
+        <p className="press-sheet-by">{artist_name}{origin ? <span> · {origin}</span> : null}</p>
+        {for_line && <blockquote className="press-sheet-words" dir="auto">{for_line}</blockquote>}
+        {crisis_id && (
+          <Link className="press-sheet-link" to={`/ClimateDetail/climate_crisis/${crisis_id}`}>
+            Drawn about: {crisis_title || 'an entry on the record'} ↗
+          </Link>
+        )}
+        <div className="press-sheet-provenance">
+          {credit && <p>{credit}</p>}
+          {source_url && <a href={source_url} target="_blank" rel="noopener noreferrer">At its source ↗</a>}
+        </div>
+      </div>
+    </article>
+  );
+}
