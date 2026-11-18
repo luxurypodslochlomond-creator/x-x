@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { base44 } from '@/api/base44Client';
-import { X, Send, Check } from 'lucide-react';
+import { X, Send, Check, ArrowLeft, ArrowRight } from 'lucide-react';
 import { createPageUrl } from '@/utils';
 import SmartPaste from '@/components/climate/SmartPaste';
+import Field, { fieldClass, hintClass } from '@/components/climate/submit/Field';
 
 // Sending an entry to the wire. The source is not an optional extra here — it is the
 // entry's reason for existing. A hidden bot trap sits alongside it, same as the record.
@@ -16,12 +17,21 @@ const PUBLISHER_TYPES = [
   { id: 'document', label: 'A document' },
 ];
 
+/* ── FOUR SCREENS, NOT SIXTEEN BOXES ───────────────────────────────────────────────
+   Same treatment as the record's own form, for the same reason: this one was a single
+   black-headed page carrying sixteen boxes at once, so the first thing a person met was
+   the size of the job. What changed. Where it is and what others can copy. Who says so.
+   Who you are. The bar is paper, the action is the record's red, and the source screen
+   still says the one thing that matters: no link, no entry. */
+const STEPS = ['What changed', 'Where, and what others can copy', 'Who says so', 'Who you are'];
+
 export default function NewsSubmitForm({ onClose, onSent }) {
   const [form, setForm] = useState({
     headline: '', what_changed: '', kind: 'initiative', when_label: '', where_label: '', country: '',
     publisher_type: 'news_media', source_name: '', source_url: '', source_author: '', corroborating_source: '',
     replicable: '', image_url: '', image_credit: '', submitter_name: '', submitter_email: '',
   });
+  const [step, setStep] = useState(0);
   const [honeypot, setHoneypot] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
@@ -30,7 +40,31 @@ export default function NewsSubmitForm({ onClose, onSent }) {
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
 
-  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, []);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }); }, [step]);
+
+  const refuseHere = () => {
+    if (step === 0) {
+      if (!form.headline.trim() || !form.what_changed.trim() || !form.when_label.trim()) {
+        return 'The entry in one line, what changed, and when.';
+      }
+    }
+    if (step === 2 && !form.source_name.trim()) return 'Who says so — the body, journal or person behind it.';
+    if (step === 3) {
+      if (!form.submitter_name.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.submitter_email.trim())) {
+        return 'Your name and a valid email are needed.';
+      }
+    }
+    return '';
+  };
+
+  const next = () => {
+    const refusal = refuseHere();
+    if (refusal) { setError(refusal); return; }
+    setError('');
+    setStep(s => Math.min(s + 1, STEPS.length - 1));
+  };
+
+  const back = () => { setError(''); setStep(s => Math.max(s - 1, 0)); };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +107,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
             ? 'Every entry shows its source and how well it is known. If we get something wrong, we correct it in the open.'
             : 'Either a source needs checking, or the screener was unsure. We will email you either way.'}
         </p>
-        <button onClick={() => { onSent?.(); onClose?.(); }} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
+        <button onClick={() => { onSent?.(); onClose?.(); }} className="px-6 py-3 bg-[#b3261e] text-[#f7f1e5] text-[11px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors">
           Back to the wire
         </button>
       </div>
@@ -82,150 +116,180 @@ export default function NewsSubmitForm({ onClose, onSent }) {
 
   return (
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
-      <div className="sticky top-0 z-10 flex items-center justify-between px-4 py-3 bg-[#141210] border-b-2 border-[#e2602a]">
-        <h2 className="font-black uppercase text-[#efe7d6]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>Send an entry</h2>
-        <button onClick={onClose} aria-label="Close" className="w-10 h-10 flex items-center justify-center bg-[#efe7d6] border-2 border-[#efe7d6] text-[#141210] active:bg-[#e2602a] transition-colors">
-          <X className="w-5 h-5" />
-        </button>
+      <div className="sticky top-0 z-20 bg-[#efe7d6]/97 backdrop-blur border-b border-[#141210]/25">
+        <div className="max-w-[500px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
+          <div className="min-w-0 flex-1">
+            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Send an entry to the wire</p>
+            <p className="text-[12px] font-mono text-[#141210] mt-0.5 truncate">
+              {step + 1} of {STEPS.length} · {STEPS[step]}
+            </p>
+          </div>
+          <button onClick={onClose} aria-label="Close" className="w-9 h-9 flex items-center justify-center border border-[#141210]/40 text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors shrink-0">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="max-w-[500px] mx-auto px-4 pb-2 flex gap-1">
+          {STEPS.map((s, i) => (
+            <span key={s} className={`h-[3px] flex-1 ${i <= step ? 'bg-[#b3261e]' : 'bg-[#141210]/15'}`} />
+          ))}
+        </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-5 max-w-[500px] mx-auto">
+      <form onSubmit={handleSubmit} className="px-4 pt-4 pb-4 max-w-[500px] mx-auto">
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
           <label>Website (leave empty)</label>
           <input type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={e => setHoneypot(e.target.value)} name="website" />
         </div>
 
-        <p className="text-[10px] font-mono text-[#5a5246] mb-4 leading-relaxed">
-          An entry is a fact with a traceable origin. What changed, where, when, and who says so. Point at the origin and quote only a line or two — never paste somebody's article in full.
-        </p>
+        {/* ── 1 · WHAT CHANGED ──────────────────────────────────────────────────── */}
+        {step === 0 && (
+          <div className="space-y-3">
+            <p className={hintClass}>
+              An entry is a fact with a traceable origin. What changed, where, when, and who says so. Point at the origin and quote only a line or two — never paste somebody's article in full.
+            </p>
 
-        <SmartPaste
-          kind="news"
-          accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'country', 'region_rough', 'publisher_type', 'kind']}
-          note="Been sent an email with a link in it? Paste the whole mail. We read it and fill the entry in — the origin link is copied across exactly as it arrived, never guessed."
-          onParsed={(f) => setForm(prev => ({
-            ...prev,
-            headline: f.title || prev.headline,
-            what_changed: f.details || f.summary || prev.what_changed,
-            when_label: f.source_date || prev.when_label,
-            where_label: f.region_rough || prev.where_label,
-            country: f.country || prev.country,
-            source_name: f.source_name || prev.source_name,
-            source_url: f.source_url || prev.source_url,
-            source_author: f.source_author || prev.source_author,
-            publisher_type: f.publisher_type || prev.publisher_type,
-            kind: f.kind || prev.kind,
-          }))}
-        />
+            <SmartPaste
+              kind="news"
+              accept={['title', 'summary', 'details', 'source_name', 'source_url', 'source_author', 'source_date', 'country', 'region_rough', 'publisher_type', 'kind']}
+              note="Been sent an email with a link in it? Paste the whole mail. We read it and fill the entry in — the origin link is copied across exactly as it arrived, never guessed."
+              onParsed={(f) => setForm(prev => ({
+                ...prev,
+                headline: f.title || prev.headline,
+                what_changed: f.details || f.summary || prev.what_changed,
+                when_label: f.source_date || prev.when_label,
+                where_label: f.region_rough || prev.where_label,
+                country: f.country || prev.country,
+                source_name: f.source_name || prev.source_name,
+                source_url: f.source_url || prev.source_url,
+                source_author: f.source_author || prev.source_author,
+                publisher_type: f.publisher_type || prev.publisher_type,
+                kind: f.kind || prev.kind,
+              }))}
+            />
 
-        <div className="space-y-3">
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">The entry in one line *</label>
-            <input value={form.headline} onChange={e => set('headline', e.target.value)} placeholder="e.g. Eight hectares of seagrass restored in England" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-          </div>
+            <Field label="The entry in one line *">
+              <input value={form.headline} onChange={e => set('headline', e.target.value)} placeholder="e.g. Eight hectares of seagrass restored in England" className={fieldClass} />
+            </Field>
 
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What changed *</label>
-            <textarea value={form.what_changed} onChange={e => set('what_changed', e.target.value)} placeholder="Two or three plain sentences — what happened, no spin" rows={4} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
-          </div>
+            <Field label="What changed *" hint="Two or three plain sentences. No spin, no opinion.">
+              <textarea value={form.what_changed} onChange={e => set('what_changed', e.target.value)} placeholder="Two or three plain sentences — what happened, no spin" rows={5} className={`${fieldClass} resize-none leading-relaxed`} />
+            </Field>
 
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">When *</label>
-              <input value={form.when_label} onChange={e => set('when_label', e.target.value)} placeholder="e.g. 10 August 2026" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-            </div>
-            <div>
-              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Where (rough)</label>
-              <input value={form.where_label} onChange={e => set('where_label', e.target.value)} placeholder="e.g. Plymouth Sound, England" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-            </div>
-          </div>
-
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What kind</label>
-            <select value={form.kind} onChange={e => set('kind', e.target.value)} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] outline-none focus:border-[#e2602a]">
-              <option value="initiative">Initiative — something working that others can copy</option>
-              <option value="emergency">Emergency — the world needs to know</option>
-              <option value="milestone">Milestone — a report, warning or decision</option>
-            </select>
-          </div>
-
-          <div className="border-t-2 border-[#141210]/20 pt-3">
-            <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-3">The origin — this is the entry</p>
-            <div className="space-y-3">
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Who says so *</label>
-                <input value={form.source_name} onChange={e => set('source_name', e.target.value)} placeholder="e.g. World Meteorological Organization" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Who wrote it</label>
-                <input value={form.source_author} onChange={e => set('source_author', e.target.value)} placeholder="e.g. Jack Leitzell" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Link to the origin</label>
-                <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-                <p className="text-[10px] font-mono text-[#5a5246] mt-1 leading-relaxed">No link, no entry. Without one it waits for a person to find it or leave it out.</p>
-              </div>
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What kind of origin</label>
-                <select value={form.publisher_type} onChange={e => set('publisher_type', e.target.value)} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[12px] font-mono text-[#141210] outline-none focus:border-[#e2602a]">
-                  {PUBLISHER_TYPES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
-                </select>
-              </div>
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">A second, independent origin (if any)</label>
-                <input value={form.corroborating_source} onChange={e => set('corroborating_source', e.target.value)} placeholder="e.g. Reuters, 12 August 2026" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">What can be copied from this</label>
-            <textarea value={form.replicable} onChange={e => set('replicable', e.target.value)} placeholder="What could another person or community do the same way, and where would they start?" rows={3} className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a] resize-none" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Picture URL</label>
-              <input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://…" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-            </div>
-            <div>
-              <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Picture credit</label>
-              <input value={form.image_credit} onChange={e => set('image_credit', e.target.value)} placeholder="Source · photographer" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-            </div>
-          </div>
-          <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed">Copyright-free pictures only, and the credit stays with the picture — always.</p>
-
-          <div className="border-t-2 border-[#141210]/20 pt-3">
             <div className="grid grid-cols-2 gap-2">
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Your name *</label>
-                <input value={form.submitter_name} onChange={e => set('submitter_name', e.target.value)} placeholder="Your name" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-              </div>
-              <div>
-                <label className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] block mb-1">Your email *</label>
-                <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className="w-full bg-[#f7f1e5] border border-[#141210] px-3 py-2.5 min-h-[44px] text-[16px] sm:text-[12px] font-mono text-[#141210] placeholder-[#5a5246] outline-none focus:border-[#e2602a]" />
-              </div>
+              <Field label="When *">
+                <input value={form.when_label} onChange={e => set('when_label', e.target.value)} placeholder="e.g. 10 August 2026" className={fieldClass} />
+              </Field>
+              <Field label="What kind">
+                <select value={form.kind} onChange={e => set('kind', e.target.value)} className={fieldClass}>
+                  <option value="initiative">Initiative</option>
+                  <option value="emergency">Emergency</option>
+                  <option value="milestone">Milestone</option>
+                </select>
+              </Field>
             </div>
-            <p className="text-[10px] font-mono text-[#5a5246] mt-3 leading-relaxed">
+          </div>
+        )}
+
+        {/* ── 2 · WHERE, AND WHAT OTHERS CAN COPY ───────────────────────────────── */}
+        {step === 1 && (
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              <Field label="Where (rough)">
+                <input value={form.where_label} onChange={e => set('where_label', e.target.value)} placeholder="e.g. Plymouth Sound, England" className={fieldClass} />
+              </Field>
+              <Field label="Country">
+                <input value={form.country} onChange={e => set('country', e.target.value)} placeholder="e.g. England" className={fieldClass} />
+              </Field>
+            </div>
+
+            <Field label="What others can copy" hint="The line that makes the wire useful rather than just news: what another person or community takes from this, and where they would start.">
+              <textarea value={form.replicable} onChange={e => set('replicable', e.target.value)} placeholder="e.g. The seed-bag method and the two permits they needed" rows={4} className={`${fieldClass} resize-none leading-relaxed`} />
+            </Field>
+
+            <Field label="Image URL">
+              <input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://…" className={fieldClass} />
+            </Field>
+
+            <Field label="Picture credit" hint="Copyright-free pictures only, and the credit stays with the picture — always.">
+              <input value={form.image_credit} onChange={e => set('image_credit', e.target.value)} placeholder="Source · photographer" className={fieldClass} />
+            </Field>
+          </div>
+        )}
+
+        {/* ── 3 · WHO SAYS SO ───────────────────────────────────────────────────── */}
+        {step === 2 && (
+          <div className="space-y-3">
+            <Field label="Who says so *" hint="The body, journal, publisher or person. Nothing goes on the wire without this.">
+              <input value={form.source_name} onChange={e => set('source_name', e.target.value)} placeholder="e.g. World Meteorological Organization" className={fieldClass} />
+            </Field>
+
+            <Field label="Link to the origin" hint="No link, no entry. Without one it waits for a person to find it or leave it out.">
+              <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className={fieldClass} />
+            </Field>
+
+            <Field label="Who wrote it">
+              <input value={form.source_author} onChange={e => set('source_author', e.target.value)} placeholder="e.g. Jack Leitzell" className={fieldClass} />
+            </Field>
+
+            <Field label="What kind of origin">
+              <select value={form.publisher_type} onChange={e => set('publisher_type', e.target.value)} className={fieldClass}>
+                {PUBLISHER_TYPES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
+              </select>
+            </Field>
+
+            <Field label="A second, independent origin (if any)">
+              <input value={form.corroborating_source} onChange={e => set('corroborating_source', e.target.value)} placeholder="e.g. Reuters, 12 August 2026" className={fieldClass} />
+            </Field>
+          </div>
+        )}
+
+        {/* ── 4 · WHO YOU ARE ───────────────────────────────────────────────────── */}
+        {step === 3 && (
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              <Field label="Your name *">
+                <input value={form.submitter_name} onChange={e => set('submitter_name', e.target.value)} placeholder="Your name" className={fieldClass} />
+              </Field>
+              <Field label="Your email *">
+                <input type="email" value={form.submitter_email} onChange={e => set('submitter_email', e.target.value)} placeholder="you@example.org" className={fieldClass} />
+              </Field>
+            </div>
+
+            <p className={hintClass}>
               Your email is used only to reach you about this entry, never published, never shared. Details are on the{' '}
               <a href={createPageUrl('ClimatePrivacy')} target="_blank" rel="noopener noreferrer" className="underline text-[#141210]">Privacy page</a>.
             </p>
+
+            <div className="bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] px-3 py-2">
+              <p className="text-[9.5px] font-black font-mono uppercase text-[#1e3a2b] mb-1">✓ Sourced · Screened · Never ranked</p>
+              <p className="text-[10px] font-mono text-[#141210] leading-snug">
+                Sourced entries go on at once; anything unclear, or without a source, waits for a person.
+              </p>
+            </div>
           </div>
+        )}
+
+        {error && <p className="text-[11px] font-mono text-[#b3261e] mt-3 leading-snug">{error}</p>}
+
+        <div className="sticky bottom-0 z-10 -mx-4 mt-4 px-4 py-3 bg-[#efe7d6]/97 backdrop-blur border-t border-[#141210]/20 flex gap-2">
+          {step > 0 && (
+            <button type="button" onClick={back} className="flex items-center justify-center gap-1.5 px-3 py-3.5 min-h-[52px] border border-[#141210]/40 text-[#141210] text-[11px] font-black font-mono uppercase active:bg-[#141210]/5 transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </button>
+          )}
+          {step < STEPS.length - 1 ? (
+            <button type="button" onClick={next} className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors">
+              Next
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          ) : (
+            <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors disabled:opacity-50">
+              <Send className="w-4 h-4" />
+              {submitting ? 'Sending…' : 'Send to the wire'}
+            </button>
+          )}
         </div>
-
-        {error && <p className="text-[11px] font-mono text-[#b3261e] mt-4">{error}</p>}
-
-        <div className="mt-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] p-3">
-          <p className="text-[10px] font-black font-mono uppercase text-[#1e3a2b] mb-1">✓ Sourced · Screened · Never ranked</p>
-          <p className="text-[10px] font-mono text-[#141210] leading-relaxed">
-            Every entry is screened for spam and dangerous advice. Sourced entries go on at once; anything unclear, or without a source, waits for a person.
-          </p>
-        </div>
-
-        <button type="submit" disabled={submitting} className="mt-5 w-full flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#141210] text-[#efe7d6] text-[12px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors disabled:opacity-50">
-          <Send className="w-4 h-4" />
-          {submitting ? 'Sending…' : 'Send to the wire'}
-        </button>
       </form>
     </div>
   );
