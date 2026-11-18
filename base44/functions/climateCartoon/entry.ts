@@ -1,7 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 import { requireKeeper } from '../../shared/checkerAccess.ts';
 import { keeperAddresses } from '../../shared/keeperInbox.ts';
-import cartoonArtwork from './artwork.ts';
 
 // ── THE ROOM OF CARTOONS ──────────────────────────────────────────────────────
 // Four small actions, and nothing else:
@@ -43,28 +42,6 @@ export default async function (req: Request): Promise<Response> {
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
     const action = body?.action || 'read';
-
-    if (action === 'wall') {
-      const limit = Number.isInteger(body.limit) ? Math.max(1, Math.min(16, body.limit)) : 16;
-      const page = await base44.entities.ClimateCartoon.filter({ status: 'published' }, {
-        sort: '-created_date', limit,
-        ...(typeof body.cursor === 'string' && body.cursor ? { cursor: body.cursor } : {}),
-      });
-      const items = [];
-      // Four source requests at a time, with one database page, not a query per drawing.
-      for (let start = 0; start < page.items.length; start += 4) {
-        const batch = await Promise.all(page.items.slice(start, start + 4).map(async (row) => {
-          const { id, title, artist_name, origin, country, for_line, image_url, credit, source_url, crisis_id, crisis_title } = row;
-          let display_image_url = image_url;
-          try { display_image_url = await cartoonArtwork(image_url); }
-          catch (error) { console.warn('Drawing relay failed', id, error.message); }
-          return { id, title, artist_name, origin, country, for_line, image_url, display_image_url, credit, source_url, crisis_id, crisis_title };
-        }));
-        items.push(...batch);
-      }
-      console.info('Cartoon wall opened', { drawings: items.length, relayed: items.filter((item) => item.display_image_url?.startsWith('data:image/')).length });
-      return Response.json({ items, next_cursor: page.next_cursor, has_more: page.has_more });
-    }
 
     // ── ONE LINE, ABOUT WHAT IS THERE ─────────────────────────────────────────
     if (action === 'read') {

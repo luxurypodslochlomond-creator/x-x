@@ -19,7 +19,7 @@ export default function CartoonSources() {
     <aside className="comic-sources">
       <p className="record-meta">A nod to the cartoons Janine shared.</p>
       <a className="comic-source-link" href="https://www.ceew.in/what-on-earth" target="_blank" rel="noopener noreferrer">What On Earth!® · CEEW<ArrowUpRight size={18} /></a>
-      <p className="record-meta">Their characters, drawings and name stay theirs. CEEW has given permission for drawings from this series to be shown in the CartoonAFRICA showcase and in the 29 November workshop, credited to CEEW India; the record points at their series rather than holding its files.</p>
+      <p className="record-meta">Their characters, drawings and name stay theirs. CEEW has given permission for drawings from this series to be shown in the CartoonAFRICA showcase and in the 29 November workshop, credited to CEEW India; display copies of the original drawings are served here so the wall opens reliably, with every source link and credit kept beside the work.</p>
       <details className="mt-3">
         <summary className="comic-source-summary">Explore the series<ChevronDown size={16} /></summary>
         <div className="comic-source-list">{SERIES.map((item) => <a key={item.name} href={item.to} target="_blank" rel="noopener noreferrer"><span>{item.name}</span><span className="record-meta">{item.when}<ArrowUpRight size={14} /></span></a>)}</div>

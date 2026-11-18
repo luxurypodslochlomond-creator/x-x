@@ -6,7 +6,7 @@ import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 
 export default function CartoonWall() {
-  const wall = useCartoonWall();
+  const wall = useCartoonWall(true);
   const [reading, setReading] = useState(null);
   return (
     <section className="comic-wall" aria-labelledby="cartoon-wall-title">
