@@ -63,48 +63,62 @@
    clipped instead. So the caption keeps its weight and the place is said twice, neither
    of which costs a pixel — the ink goes to the mark's red, and a short rule is drawn over
    the drawing itself, the way a bookmark sits on a line of print rather than in it. */
-/* ── TWO ROWS ON A PHONE, AND THE HEIGHT PAID FOR RATHER THAN ADDED ─────────────
-   Brian, 17 November: "reduce size if nav icons so can have two rows … same height as is".
-   So the cell gives up what the row needs: a twenty-two pixel drawing instead of
-   thirty-four, a ten pixel caption instead of eleven, and no padding above or below the
-   drawing worth the name. The hairline between the rows is the one print uses to say two
-   kinds of thing are on the sheet: it separates, it does not rank. Every cell stays far
-   wider than it is tall — eighty-odd pixels of glass across on a 393 — so a thumb still
-   lands inside one, and every door keeps its own word underneath it. */
+/* ── ONE ROW, SIX DOORS, AND THE LINE THAT SAYS WHERE YOU ARE ───────────────────
+   The phone's masthead had grown into two rows of eight small doors with a ten-pixel
+   caption under each: every drawing the size of a full stop, every name too small to read
+   without leaning in, and forty pixels of pinned header spent on a second row that only
+   ever held the covenant and the founder. Brian, 18 November: "old door roll feels not
+   right." The drawings are back up to twenty-eight pixels — the first size at which these
+   marks read as drawings rather than as specks — and nothing is written under them. */
 .rec-mast-row .rec-art-door {
   min-height: 0;
   gap: 0;
-  padding: .1rem 0 .05rem;
+  padding: .18rem 0 .1rem;
 }
-.rec-mast-row .rec-art-caption {
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: .1em;
-}
-.rec-mast-row + .rec-mast-row {
-  margin-top: .08rem;
-  padding-top: .18rem;
-  border-top: 1px solid rgb(var(--record-ink) / .13);
-}
-
-/* ── A DOOR SAYS ITS OWN NAME ────────────────────────────────────────────────────
-   These captions were cut with an ellipsis when they did not fit, so a phone's own menu
-   printed "Found…" where a door's name should be. A menu that cannot finish a word reads
-   as an old website, which is exactly what Brian called it on 18 November. The labels are
-   one word each, so they wrap to a second line and the row grows a hair rather than lying
-   about where it goes. */
-.rec-mast-doors .rec-art-caption {
-  white-space: normal;
-  overflow-wrap: normal;
-  hyphens: none;
-  text-align: center;
-  max-width: 100%;
-}
+.rec-mast-doors .rec-art-caption { display: none; }
 /* The door you are standing in is filled, the way the record's other open doors are
    filled — a yellow cell with ink in it, not a hairline nobody can see. */
 .rec-mast-doors .rec-art-door-active { background-color: rgb(var(--record-signal)); }
-.rec-mast-doors .rec-art-door-active .rec-art-drawing,
 .rec-art-rail .rec-art-door-active .rec-art-drawing { box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark)); }
+
+/* ── WHERE YOU ARE, IN THE RECORD'S OWN VOICE ────────────────────────────────────
+   One line under the row. The red square is the mark this record uses for a place
+   everywhere else, so "you are here" is said in the same alphabet as everything around it;
+   the sentence after the name is the door's own description, quietened, and cut with an
+   ellipsis when a narrow handset cannot hold it. */
+.rec-mast-here {
+  display: flex;
+  align-items: baseline;
+  gap: .45rem;
+  margin-top: .1rem;
+  padding-bottom: .1rem;
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+}
+.rec-mast-here::before {
+  content: '';
+  display: block;
+  align-self: center;
+  height: 6px;
+  width: 6px;
+  flex-shrink: 0;
+  background-color: rgb(var(--record-mark));
+}
+.rec-mast-here-what {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: var(--font-record-ui);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgb(var(--record-muted));
+}
 .rec-art-door:focus-visible {
   outline: 2px solid rgb(var(--record-mark));
   outline-offset: 3px;
