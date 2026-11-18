@@ -1,21 +1,27 @@
-// ── THE BIG PICTURE · THE PASS-IT-ON CARD ──
-// One tap turns this room into a picture somebody can send to another person: the cartoon
-// itself, one tight description of what the room is, and where it lives — so it never
-// travels as a screenshot with the link cut off. Drawn in the reader's own browser, on
-// their device, so nothing of theirs leaves it.
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
+import { recordOrigin } from '@/components/climate/recordAddress';
+import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
+
+// ── THE BIG PICTURE · THE PASS-IT-ON CARD ──────────────────────────────────────
+// One tap turns this room into a picture somebody can send to another person: the real
+// cover, the event's own facts, one tight description of what the room is, and where it
+// lives — so it never travels as a screenshot with the link cut off.
 //
-// Two things are on the card on purpose and can never be dropped from it: the drawings are
-// AI-generated illustrations, and the people's wall is drawings made by people. A card that
-// blurred those two would be the one dishonest thing this room could do.
+// The picture is the actual CAIB cover rather than a mark or a stand-in: this is a real
+// festival with real cartoonists, and the thing a school, a newsroom or another cartoonist
+// recognises is that cover. It is drawn whole, in a mounted frame, never cropped.
+//
+// Two things are on the card on purpose and can never be dropped from it: whose cover it is,
+// and the fact that a person — not a machine — decides what goes on the wall.
+//
+// Drawn in the reader's own browser, on their device, so nothing of theirs leaves it, and
+// the address on the foot is the record's own home rather than whichever host it was made on.
 const W = 1080;
 const H = 1350;
 const PAD = 60;
 const MAXW = W - PAD * 2;
+const BAND = 78;
 const FOOTER_TOP = H - 150;
-
-import { loadRecordCardFonts } from '@/components/climate/recordTypography';
-
-const ORIGIN = 'https://green-stride-d47e043c.base44.app';
 
 function wrap(ctx, text, maxWidth, maxLines) {
   const words = String(text || '').split(/\s+/).filter(Boolean);
@@ -43,69 +49,104 @@ function loadImage(src) {
 }
 
 export async function buildCartoonShareCard(card = {}, options = {}) {
-  const origin = String(options.origin || ORIGIN).replace(/^https?:\/\//, '');
+  const origin = String(options.origin || recordOrigin()).replace(/^https?:\/\//, '');
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  const { DISPLAY, MONO, colors: { PAPER, SUN, INK, SIGNAL: LEAF, MARK, MUTED } } = await loadRecordCardFonts();
+  const { DISPLAY, MONO, colors: { PAPER, SUN, INK, MARK, MUTED, SIGNAL: LEAF } } = await loadRecordCardFonts();
 
-  const img = await loadImage(card.image);
+  const img = await loadImage(card.image || CARTOON_COVER);
 
+  // Paper, with the room's cold scanline grain.
   ctx.fillStyle = PAPER;
   ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(20,18,16,0.035)';
+  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
 
-  // The band across the top: the room's whole argument in six words.
+  // The band across the top: whose festival this is, said first.
   ctx.fillStyle = INK;
-  ctx.fillRect(0, 0, W, 78);
+  ctx.fillRect(0, 0, W, BAND);
   ctx.fillStyle = SUN;
-  ctx.font = `700 17px ${MONO}`;
+  ctx.font = `700 16px ${MONO}`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('A LITTLE MISCHIEF. A BIGGER PICTURE.', W / 2, 40);
+  ctx.fillText('8TH CARTOONAFRICA INTERNATIONAL BIENNIAL · CAIB 2026', W / 2, BAND / 2);
   ctx.textAlign = 'left';
   ctx.textBaseline = 'alphabetic';
 
-  // The cartoon, full width, its own frame.
-  let y = 78;
+  // ── THE COVER, MOUNTED RATHER THAN CROPPED ────────────────────────────────
+  // A portrait poster shown whole, with a hard offset shadow, the way a print is laid on a
+  // page. The cover is somebody else's work: it is not cropped to a convenient shape, and
+  // nothing is drawn over it.
+  const coverH = 690;
+  let coverW = 0;
   if (img) {
-    const h = 470;
-    const scale = Math.max(W / img.width, h / img.height);
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(0, y, W, h);
-    ctx.clip();
-    ctx.drawImage(img, (W - img.width * scale) / 2, y + (h - img.height * scale) / 2, img.width * scale, img.height * scale);
-    ctx.restore();
+    const scale = Math.min(coverH / img.height, 440 / img.width);
+    coverW = img.width * scale;
+    const h = img.height * scale;
+    const x = PAD;
+    const y = BAND + 22;
+    ctx.fillStyle = 'rgba(20,18,16,0.26)';
+    ctx.fillRect(x + 11, y + 13, coverW, h);
+    ctx.drawImage(img, x, y, coverW, h);
     ctx.strokeStyle = INK;
-    ctx.lineWidth = 6;
-    ctx.beginPath(); ctx.moveTo(0, y + h); ctx.lineTo(W, y + h); ctx.stroke();
-    y += h + 58;
+    ctx.lineWidth = 5;
+    ctx.strokeRect(x, y, coverW, h);
   }
 
-  // The name, in the same shout as the page.
-  ctx.fillStyle = INK;
-  ctx.font = `700 82px ${DISPLAY}`;
-  ctx.fillText('THE BIG PICTURE', PAD, y + 60);
-  y += 108;
+  // The words, in the column beside it.
+  const colX = PAD + coverW + 42;
+  const colW = W - colX - PAD;
+  let y = BAND + 60;
 
-  // The tight description. No adjectives that do not earn their place.
   ctx.fillStyle = LEAF;
-  ctx.font = `700 19px ${MONO}`;
-  ctx.fillText('CARTOONS FOR A CHANGING WORLD', PAD, y);
-  y += 42;
+  ctx.font = `700 16px ${MONO}`;
+  ctx.fillText(card.eyebrow || 'THE CARTOON ROOM', colX, y);
+  y += 46;
 
   ctx.fillStyle = INK;
-  ctx.font = `400 31px ${MONO}`;
-  const body = wrap(ctx, card.body, MAXW, 5);
-  body.forEach((line, i) => ctx.fillText(line, PAD, y + i * 46));
-  y += body.length * 46 + 30;
+  const titleSize = 56;
+  ctx.font = `700 ${titleSize}px ${DISPLAY}`;
+  const titleLines = wrap(ctx, (card.title || 'The Big Picture').toUpperCase(), colW, 3);
+  titleLines.forEach((line, i) => ctx.fillText(line, colX, y + i * (titleSize + 4)));
+  y += titleLines.length * (titleSize + 4) + 26;
 
-  // What the room is not. Said plainly, because a wall of drawings needs one honest line.
+  ctx.fillStyle = MARK;
+  ctx.font = `700 17px ${MONO}`;
+  wrap(ctx, 'CARTOONS FOR A CHANGING WORLD', colW, 2).forEach((line, i) => ctx.fillText(line, colX, y + i * 24));
+  y += 62;
+
+  // What the room is, in the room's own words.
+  ctx.fillStyle = 'rgba(20,18,16,0.9)';
+  ctx.font = `400 22px ${MONO}`;
+  wrap(ctx, card.body, colW, 8).forEach((line, i) => ctx.fillText(line, colX, y + i * 31));
+
+  // Whose cover it is, and who decides what goes up. Never dropped from the card.
   ctx.fillStyle = MUTED;
-  ctx.font = `400 24px ${MONO}`;
-  wrap(ctx, card.honest, MAXW, 3).forEach((line, i) => ctx.fillText(line, PAD, y + i * 36));
+  ctx.font = `400 18px ${MONO}`;
+  wrap(ctx, card.honest, colW, 5).forEach((line, i) => ctx.fillText(line, colX, 660 + i * 26));
+
+  // ── THE EVENT, IN A BAND OF ITS OWN ───────────────────────────────────────
+  // Dates, place and the one ask. This is the part a host reads out, so it is the largest
+  // type on the card after the title.
+  const bandTop = 852;
+  ctx.fillStyle = SUN;
+  ctx.fillRect(0, bandTop, W, 296);
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, bandTop, W, 5);
+  ctx.fillRect(0, bandTop + 291, W, 5);
+
+  ctx.fillStyle = INK;
+  ctx.font = `700 50px ${DISPLAY}`;
+  ctx.fillText(CARTOON_EVENT.when.toUpperCase(), PAD, bandTop + 78);
+  ctx.font = `400 23px ${MONO}`;
+  ctx.fillText(CARTOON_EVENT.where, PAD, bandTop + 122);
+  ctx.fillText(CARTOON_EVENT.workshop, PAD, bandTop + 164);
+  ctx.font = `700 21px ${MONO}`;
+  wrap(ctx, 'Send a drawing and it goes on the wall, with your name on it.', MAXW, 2)
+    .forEach((line, i) => ctx.fillText(line, PAD, bandTop + 214 + i * 30));
 
   // Footer: where it lives, and the mark.
   ctx.fillStyle = INK;
@@ -132,7 +173,8 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
 export const CARTOON_CARD = {
   id: 'the-big-picture',
   title: 'The Big Picture',
-  image: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/a46d7bec3_generated_image.png',
-  body: 'Three cartoons, a pen, and room for yours. A climate record that children can draw on as well as read.',
-  honest: 'The three cartoons are AI-generated illustrations, marked as such. The wall is human drawings, each with its maker. A custodian looks before anything goes up.',
+  eyebrow: 'THE CARTOON ROOM',
+  image: CARTOON_COVER,
+  body: 'Drawings gathered for the 8th CartoonAFRICA International Biennial at the National Museum in Benin City, with Janine Selendy’s workshop on Sunday 29 November. The drawings become a free anthology, and the wall is open to yours.',
+  honest: `The cover is ${CARTOON_EVENT.credit}. Every drawing keeps its maker’s name, and a person — never a machine — looks before anything goes up.`,
 };

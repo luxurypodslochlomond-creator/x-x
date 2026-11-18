@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
-import ShareCardButton from '@/components/climate/ShareCardButton';
-import { buildCartoonShareCard, CARTOON_CARD } from '@/components/climate/cartoons/cartoonCard';
 
 // ── WHY A CARTOON ROOM ON A CLIMATE RECORD ───────────────────────────────────
 // The record's own answer, kept to three lines. Not a mission statement: a reader who has
@@ -21,16 +19,8 @@ export default function CartoonWhy() {
       <p className="record-meta comic-why-note">
         Drawn in the record’s own voice, and nothing here is sold, ranked or sponsored.
       </p>
-      <div className="comic-share">
-        <ShareCardButton
-          entry={CARTOON_CARD}
-          build={buildCartoonShareCard}
-          label="Pass the cartoons on"
-        />
-        <p className="record-meta comic-share-note">
-          One card: the cartoon, the reason, and the address. No tracking on it.
-        </p>
-      </div>
+      {/* The pass-it-on card lives at the top of the room now, beside the line that says what
+          the room is — that is where a host decides to send the page to somebody. */}
       {/* The drawings are not a room beside the record: they stand on its map, where they
           were drawn. This is the door between the two, so a visitor from a newsroom or a
           festival can see the record carries the work rather than displaying it. */}

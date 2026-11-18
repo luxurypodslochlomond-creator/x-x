@@ -26,7 +26,7 @@ export default function ComicReader() {
     rail.current?.scrollTo({ left: next * rail.current.clientWidth, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
   return (
-    <section className="comic-reader" aria-label="The record's own cartoons">
+    <section className="comic-reader" id="cartoon-strip" aria-label="The record's own cartoons">
       {/* The room's title used to be here. It lives in ComicMasthead now, at the top of the
           page, so the drawings can come before the strip instead of after it. */}
       <div ref={rail} className="comic-rail" tabIndex={0} role="region" aria-label="Swipe for the next cartoon, or use the arrow buttons" onKeyDown={(e) => {

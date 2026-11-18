@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
+import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 
 // ── THE FIRST IMAGE ON THE PAGE ────────────────────────────────────────────────
 // Brian, 18 November: "you think that image should be first image on page bro… love the
@@ -17,7 +18,7 @@ import { ArrowDown } from 'lucide-react';
 // cartoonists, and the one that was standing here did not. Her cover is the one that goes
 // up — it is her book, and a room that gathers drawings from everywhere must not open on a
 // cover that says it only came from one place. Swapped whole, not cropped to fit.
-const COVER = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/04b7522a8_caib-2026-catalogue-cover.jpeg';
+const COVER = CARTOON_COVER;
 
 export default function CartoonCatalogueBand() {
   return (
@@ -33,8 +34,8 @@ export default function CartoonCatalogueBand() {
       <div className="comic-catalogue-band">
         <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · in preparation</p>
         <p className="comic-catalogue-line record-meta">
-          The 8th CartoonAFRICA International Biennial 2026 — edited by Francis Umendu Odupute
-          and Janine Selendy. Free to download from this page the day it is finished.
+          {CARTOON_EVENT.biennial} — edited by {CARTOON_EVENT.editors}. Free to download
+          from this page the day it is finished.
         </p>
         <a href="#cartoon-anthology" className="comic-catalogue-link">
           What the book is <ArrowDown size={14} />

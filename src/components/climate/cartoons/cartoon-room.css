@@ -56,6 +56,17 @@
 .record-pages .cartoon-room .comic-catalogue-eyebrow { font-size: .625rem; line-height: 1.4; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
 .record-pages .cartoon-room .comic-catalogue-line { margin: .35rem 0 0; font-size: .8125rem; font-weight: 600; line-height: 1.45; }
 .comic-catalogue-link { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.75rem; font-size: .8125rem; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+/* ── WHAT THE ROOM IS, AND WHAT IS IN IT ─────────────────────────────────────────
+   Two sentences, then the room's own parts named in one line. It sits between the title
+   and the wall, so a reader knows the shape of the page before scrolling it — and the
+   pass-it-on card sits here, because this is the point at which somebody decides to send
+   the room to another person. */
+.comic-opening { max-width: 40rem; margin: 1rem auto 0; padding: .9rem .4rem 0; border-top: 3px solid rgb(var(--record-ink)); }
+.record-pages .cartoon-room .comic-opening-eyebrow { margin: 0; font-size: .625rem; line-height: 1.4; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
+.record-pages .cartoon-room .comic-opening-line { margin: .5rem 0 0; font-size: .95rem !important; line-height: 1.5 !important; font-weight: 600; max-inline-size: none; }
+.comic-opening-parts { display: flex; flex-wrap: wrap; gap: .15rem .9rem; margin: .9rem 0 0; padding: .55rem 0 0; border-top: 1px solid rgb(var(--record-ink) / .18); }
+.comic-opening-part { display: inline-flex; align-items: center; min-height: 2.4rem; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; text-decoration: underline; text-underline-offset: .22em; }
+.comic-opening .comic-share { margin-top: .9rem; padding-top: .9rem; }
 /* The plate number, in the room's own furniture: a small sun block of ink. */
 .comic-plate-index { display: inline-grid; place-items: center; flex-shrink: 0; min-width: 1.55rem; height: 1.35rem; border: 2px solid rgb(var(--record-ink)); border-radius: 2px; background: rgb(var(--cartoon-sun)); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .58rem; font-weight: 900; font-variant-numeric: tabular-nums; transform: rotate(-4deg); }
 .comic-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }

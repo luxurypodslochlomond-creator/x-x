@@ -23,6 +23,7 @@ import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
 import RecordDesktopMenu from '@/components/climate/RecordDesktopMenu';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
+import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -31,6 +32,16 @@ import { recordAddress, recordOrigin } from '@/components/climate/recordAddress'
 
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
 const DESCRIPTION = 'A public record of climate emergencies and the positive actions that work — shared openly, internationally — in any language a reader names.';
+
+// ── THE CARTOON ROOM IS AN EVENT, AND IT TRAVELS AS ONE ───────────────────────
+// Every page of the record was sharing the record's own mark, so a link to the cartoon room
+// arrived in a chat as the same abstract card as everything else — which is why Brian kept
+// seeing "old style x = x image" where the cartoons should have been. A link to this room
+// now arrives as this room: the real CAIB cover, the dates, and the one ask. The cover is a
+// stored public picture rather than a drawing made at request time, so it opens the same way
+// in Lagos, London or Los Angeles, on a slow phone, with no waiting on a server.
+const CARTOON_TITLE = 'The Big Picture — the record’s cartoon room';
+const CARTOON_DESCRIPTION = 'Drawings gathered for the 8th CartoonAFRICA International Biennial, and Janine Selendy’s workshop on Sunday 29 November. The wall is open: send a drawing and it goes up with your name on it.';
 
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.
 // The full directory lives on the existing guide page, not in a second menu on every page.
@@ -88,7 +99,10 @@ export default function ClimateLayout({ children, currentPage }) {
     document.head.querySelectorAll('style').forEach((sheet) => {
       if (sheet.textContent.includes('/* HARDWARE ACCELERATION EVERYTHING */')) sheet.remove();
     });
-    document.title = TITLE;
+    const isCartoonRoom = currentPage === 'ClimateCartoons';
+    const pageTitle = isCartoonRoom ? CARTOON_TITLE : TITLE;
+    const pageDescription = isCartoonRoom ? CARTOON_DESCRIPTION : DESCRIPTION;
+    document.title = pageTitle;
 
     const setMeta = (attr, key, value) => {
       let el = document.querySelector(`meta[${attr}="${key}"]`);
@@ -102,18 +116,20 @@ export default function ClimateLayout({ children, currentPage }) {
 
     // A real PNG at the shape a link card wants. The SVG that stood here before was refused
     // by every platform that draws one, so a shared record arrived as a bare link.
-    const card = `${recordOrigin()}/api/functions/serveClimateIcon?w=1200&h=630`;
-    setMeta('name', 'description', DESCRIPTION);
-    setMeta('property', 'og:title', TITLE);
-    setMeta('property', 'og:description', DESCRIPTION);
+    const card = isCartoonRoom
+      ? CARTOON_COVER
+      : `${recordOrigin()}/api/functions/serveClimateIcon?w=1200&h=630`;
+    setMeta('name', 'description', pageDescription);
+    setMeta('property', 'og:title', pageTitle);
+    setMeta('property', 'og:description', pageDescription);
     setMeta('property', 'og:image', card);
-    setMeta('property', 'og:image:width', '1200');
-    setMeta('property', 'og:image:height', '630');
+    setMeta('property', 'og:image:width', isCartoonRoom ? '682' : '1200');
+    setMeta('property', 'og:image:height', isCartoonRoom ? '1024' : '630');
     setMeta('property', 'og:type', 'website');
     setMeta('property', 'og:url', recordAddress());
     setMeta('name', 'twitter:card', 'summary_large_image');
-    setMeta('name', 'twitter:title', TITLE);
-    setMeta('name', 'twitter:description', DESCRIPTION);
+    setMeta('name', 'twitter:title', pageTitle);
+    setMeta('name', 'twitter:description', pageDescription);
     setMeta('name', 'twitter:image', card);
 
     let icon = document.querySelector('link[rel="icon"]');
@@ -142,7 +158,7 @@ export default function ClimateLayout({ children, currentPage }) {
       document.head.appendChild(manifest);
     }
     manifest.href = `/api/functions/serveManifest?brand=climate&v=${Date.now()}`;
-  }, [location.pathname]);
+  }, [location.pathname, currentPage]);
 
   // Warm the nav once the page has settled. On a phone a tap gives a prefetch
   // almost no head start (hover only helps a mouse), so the next pages are

@@ -170,6 +170,20 @@ const PAGE_META = {
     color: '#0f5f7a',
   },
 
+  // ── THE CARTOON ROOM ────────────────────────────────────────────────────
+  // A link to this room arrives as the room: the real CAIB cover rather than the record's
+  // mark, which is what everybody was seeing. A stored public picture, at its own real
+  // dimensions, so every unfurler gets a picture it can actually open — and no function has
+  // to draw anything while a message is being read in Lagos, London or Los Angeles.
+  ClimateCartoons: {
+    title: 'The Big Picture — the record’s cartoon room',
+    description: 'Drawings gathered for the 8th CartoonAFRICA International Biennial, and Janine Selendy’s workshop on Sunday 29 November. The wall is open: send a drawing and it goes up with your name on it.',
+    image: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/04b7522a8_caib-2026-catalogue-cover.jpeg',
+    imageWidth: 682,
+    imageHeight: 1024,
+    color: '#ffd447',
+  },
+
   default: {
     title: 'Universal Frequency 51 • Heal the Planet',
     description: 'Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action.',
@@ -231,8 +245,8 @@ Deno.serve(async (req) => {
   <meta property="og:image" content="${imageUrl}" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:alt" content="${meta.title}" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content="${meta.imageWidth || 1200}" />
+  <meta property="og:image:height" content="${meta.imageHeight || 630}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${meta.title}" />
   <meta name="twitter:description" content="${meta.description}" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ComicMasthead from '@/components/climate/cartoons/ComicMasthead';
+import CartoonOpening from '@/components/climate/cartoons/CartoonOpening';
 import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
@@ -37,6 +38,9 @@ export default function ClimateCartoons() {
           this room. */}
       <CartoonCatalogueBand />
       <ComicMasthead />
+      {/* What the room is, and what is in it, before the wall — so the page reads as one
+          thing rather than as eight blocks in a row. */}
+      <CartoonOpening />
       <CartoonWall />
       <CartoonSessionBand />
       <ComicReader />
