@@ -62,12 +62,22 @@ export default function ClimateMapPage() {
           Not a slippy map with tiles, edges and a grey panel on a wide screen. A plate:
           every coast on Earth as a stipple of ink, equirectangular, so the Arctic is at the
           top edge and Antarctica along the bottom and the whole world fits whatever frame
-          it is given. Phone and desktop see the same planet, drawn the same way. */}
-      <div className="record-map-plate w-full bg-record-paper border-b-2 border-record-ink/40">
-        <div className="max-w-[1100px] mx-auto px-4 lg:px-10 py-6 lg:py-8">
-          <RecordWorldMap />
+          it is given. Phone and desktop see the same planet, drawn the same way.
+
+          Brian, 18 November: "no coolasfuck map bro." It was a pale rectangle of paper in
+          the middle of a painted page — the one sheet on the record with nothing behind it,
+          standing on a wall it was hiding. So the world is a print now, mounted on the
+          painting the way a plate is mounted on a wall: the cover screened into the ink
+          behind it, a bone mount around the frame, and the engraving itself still on solid
+          paper so not one coast or count loses its contrast. The painting is the room; the
+          planet is the thing pinned in it. */}
+      <RecordPaintedBand soft className="record-map-plate w-full border-b-2 border-record-ink/40">
+        <div className="relative z-10 max-w-[1100px] mx-auto px-3 lg:px-10 py-6 lg:py-9">
+          <div className="bg-record-bone p-1.5 lg:p-3 shadow-[0_18px_44px_rgba(0,0,0,.55)]">
+            <RecordWorldMap />
+          </div>
         </div>
-      </div>
+      </RecordPaintedBand>
 
       {/* The plate says where the record stands. This says what is happening there soon —
           the only question that turns reading a map into turning up somewhere. */}
