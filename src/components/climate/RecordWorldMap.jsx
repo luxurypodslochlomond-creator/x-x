@@ -29,7 +29,9 @@ function whenItArrived(iso) {
    over it. A bubble covers the thing it is talking about and, on a phone, is a box you
    have to fight to close; the line under the plate keeps the world in view while you
    read what is on it. */
-export default function RecordWorldMap() {
+// lights are the places the record is being read from — the reach, on the same plate as
+// the entries. One world, two facts about it: where the record stands, and where it is read.
+export default function RecordWorldMap({ lights = [] }) {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [publishedTotal, setPublishedTotal] = useState(0);
@@ -182,9 +184,10 @@ export default function RecordWorldMap() {
 
       <WorldPlate
         marks={marks}
+        lights={lights}
         selectedId={picked?.id}
         onSelect={pick}
-        label={`The world, with ${marks.length} entries of the record set where they happened`}
+        label={`The world, with ${marks.length} entries of the record set where they happened and ${lights.length} places reading it`}
       />
 
       {/* The plate read out: the places it actually holds, so a reader never has to hunt
@@ -279,7 +282,7 @@ export default function RecordWorldMap() {
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : 'Press a mark, or a place named above it, to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire — a line stands where the thing is, never where it was written from.'}
+              : 'Press a mark, or a place named above it, to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire — a line stands where the thing is, never where it was written from. An amber glow is a place reading the record: one entry opened there, and nobody named.'}
           </p>
         )}
       </div>

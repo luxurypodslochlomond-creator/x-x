@@ -1,64 +1,38 @@
 import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { resolveCoords } from './countryCentroids';
-import { nudge } from './worldPlate';
+import { reachPlaces } from './reachPlaces';
 import WorldPlate from './WorldPlate';
 
-// Converts an ISO 2-letter country code to a display name, then to coords.
-function countryName(code) {
-  if (!code) return '';
-  try {
-    return new Intl.DisplayNames(['en'], { type: 'region' }).of(code) || code;
-  } catch {
-    return code;
-  }
-}
-
-// Dot size from the reads counted there — a gentle log curve, so a big country does not
-// swallow a small one. Reads, never people.
-function dotSize(views) {
-  if (!views || views < 1) return 7;
-  return Math.min(17, Math.max(8, 6 + Math.log2(views + 1) * 2.2));
-}
-
 /* ── THE PLANET, LIGHTING UP ───────────────────────────────────────────────────────
-   Every place the record has been read from, on the same plate the Map page uses, so the
-   two pages cannot disagree about the shape of the world. A press opens that place. */
+   Every place the record has been read from, on the same plate the Map page uses and on
+   the same curve the band at the foot of every page uses — the places are worked out once,
+   in reachPlaces, so no two of the three can ever draw the same count at a different size.
+   A press opens that place.
+
+   A read is one entry opened, by nobody the record knows: no account, no cookie, no
+   address. Bigger dot means more reads, never more people. */
 export default function ImpactWorldMap({ stats }) {
   const navigate = useNavigate();
-  const countries = stats?.countries || [];
-  const regions = stats?.regions || [];
 
-  const marks = useMemo(() => {
-    const seen = {};
-    const build = (list, kind) =>
-      list
-        .map((row) => {
-          const name = kind === 'country' ? countryName(row.country) : row.region;
-          const coord = resolveCoords(name, kind === 'country' ? row.country : row.region);
-          if (!coord) return null;
-          const key = `${coord[0]},${coord[1]}`;
-          const i = seen[key] = (seen[key] ?? -1) + 1;
-          const [dx, dy] = nudge(i);
-          const place = kind === 'country' ? row.country : encodeURIComponent(name);
-          return {
-            id: `${kind}-${name}`,
-            lat: coord[0],
-            lng: coord[1],
-            dx,
-            dy,
-            tone: kind,
-            size: dotSize(row.views),
-            label: `${name} · ${row.views.toLocaleString()} ${row.views === 1 ? 'read' : 'reads'}`,
-            aria: `${name}, ${row.views.toLocaleString()} ${row.views === 1 ? 'read' : 'reads'}, open the stories`,
-            to: createPageUrl(`ClimateReachPlace/${kind}/${place}`),
-          };
-        })
-        .filter(Boolean);
-
-    return [...build(countries, 'country'), ...build(regions, 'nation')];
-  }, [countries, regions]);
+  const marks = useMemo(
+    () =>
+      reachPlaces(stats).map((p) => ({
+        id: p.id,
+        lat: p.lat,
+        lng: p.lng,
+        dx: p.dx,
+        dy: p.dy,
+        tone: p.kind,
+        size: p.size,
+        label: `${p.name} · ${p.reads}`,
+        aria: `${p.name}, ${p.reads}, open the stories`,
+        to: createPageUrl(
+          `ClimateReachPlace/${p.kind}/${p.kind === 'country' ? p.place : encodeURIComponent(p.name)}`
+        ),
+      })),
+    [stats]
+  );
 
   if (marks.length === 0) {
     return (

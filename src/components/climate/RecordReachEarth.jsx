@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
-import { landDots, projectPct, PLATE_W, PLATE_H } from './worldPlate';
-import { resolveCoords } from './countryCentroids';
+import WorldPlate from './WorldPlate';
+import { reachPlaces } from './reachPlaces';
 import { createPageUrl } from '@/utils';
-import '@/components/climate/record-reach.css';
 
 // ── THE WORLD, LIT WHERE IT HAS ACTUALLY BEEN READ ──────────────────────────────────────
 // The record's cover painting is Earth from space, and it is one specific view: a cyclone
@@ -31,40 +30,18 @@ import '@/components/climate/record-reach.css';
 // figures said in the record's own voice, the plate big enough to see a coast, and the
 // lights given room to glow.
 const LIGHT = '#e2602a';
-const SIGNAL = '#ffd447';
-
-// A light grows with the reads counted there, on a gentle log curve so a country with a
-// thousand reads does not swallow one with two. Same curve as the Reach page.
-function lightSize(views) {
-  if (!views || views < 1) return 4;
-  return Math.min(11, Math.max(4.5, 3.2 + Math.log2(views + 1) * 1.4));
-}
-
-function placeName(code) {
-  if (!code) return '';
-  try {
-    return new Intl.DisplayNames(['en'], { type: 'region' }).of(code) || code;
-  } catch {
-    return code;
-  }
-}
 
 export default function RecordReachEarth() {
   const { data } = useClimateImpactStats();
-  const land = useMemo(() => landDots(), []);
 
-  const lights = useMemo(() => {
-    const rows = [
-      ...(data?.countries || []).map((r) => ({ label: placeName(r.country), coord: resolveCoords(placeName(r.country), r.country), views: r.views })),
-      ...(data?.regions || []).map((r) => ({ label: r.region, coord: resolveCoords(r.region, r.region), views: r.views })),
-    ];
-    return rows
-      .filter((r) => r.coord && r.views > 0)
-      .map((r, i) => {
-        const { left, top } = projectPct(r.coord[0], r.coord[1]);
-        return { ...r, left, top, size: lightSize(r.views), delay: `${(i % 7) * 1.4}s` };
-      });
-  }, [data]);
+  // The same places, the same curve and the same names the reach page uses — worked out
+  // once, in reachPlaces, so the foot of a page and the page itself cannot disagree about
+  // one count. Each light gets its own delay so seven of them breathe out of step, which
+  // reads as a world turning rather than a strip of lights switching on together.
+  const lights = useMemo(
+    () => reachPlaces(data).map((p, i) => ({ ...p, delay: `${(i % 7) * 1.4}s` })),
+    [data]
+  );
 
   const unavailable = data?.counts_unavailable === true;
   const countries = data?.unique_countries || 0;
@@ -118,61 +95,16 @@ export default function RecordReachEarth() {
           )}
         </h2>
 
-        <div
-          className="relative mt-4 w-full overflow-hidden border border-record-bone/25"
-          style={{ aspectRatio: '2 / 1', background: 'radial-gradient(ellipse at 50% 46%, rgba(226,96,42,0.10) 0%, rgba(20,18,16,0) 68%)' }}
-        >
-          <svg
-            viewBox={`0 0 ${PLATE_W} ${PLATE_H}`}
-            preserveAspectRatio="none"
-            className="absolute inset-0 h-full w-full"
-            aria-hidden="true"
-          >
-            {/* The graticule, so the eye can find a latitude and know the plate is a
-                measurement rather than a drawing of a mood. */}
-            <g stroke={LIGHT} strokeWidth="0.5" opacity="0.12" vectorEffect="non-scaling-stroke">
-              {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110].map((x) => (
-                <line key={`lon-${x}`} x1={x} y1={0} x2={x} y2={PLATE_H} />
-              ))}
-              {[10, 20, 40, 50].map((y) => (
-                <line key={`lat-${y}`} x1={0} y1={y} x2={PLATE_W} y2={y} />
-              ))}
-            </g>
-            <line x1={0} y1={30} x2={PLATE_W} y2={30} stroke={SIGNAL} strokeWidth="0.6" opacity="0.35" vectorEffect="non-scaling-stroke" />
-
-            {/* Every coast on Earth, as the record has always drawn it. Faint enough that
-                the lights are what the eye goes to, strong enough that a reader can find
-                their own country with a finger. */}
-            <path
-              d={land}
-              stroke="#efe7d6"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              fill="none"
-              opacity="0.5"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-
-          {/* The lights. Positioned by real latitude and longitude, so the plate cannot
-              put a country where it is not. */}
-          {lights.map((l) => (
-            <span
-              key={`${l.label}-${l.left}`}
-              aria-hidden="true"
-              className="record-reach-light absolute rounded-full"
-              style={{
-                left: `${l.left}%`,
-                top: `${l.top}%`,
-                width: `${l.size}px`,
-                height: `${l.size}px`,
-                transform: 'translate(-50%, -50%)',
-                background: SIGNAL,
-                boxShadow: `0 0 ${l.size * 2.4}px ${l.size * 0.8}px rgba(226, 96, 42, 0.85), 0 0 ${l.size * 5}px ${l.size * 1.6}px rgba(255, 212, 71, 0.28)`,
-                animationDelay: l.delay,
-              }}
-            />
-          ))}
+        {/* One plate, in ink. It used to draw its own copy of the coastlines here — a
+            second Earth that could drift from the first. It is the same plate the Map page
+            and the Reach page use, on the dark ground: same stipple, same projection, same
+            graticule, so the foot of every page and the page it points at are one picture. */}
+        <div className="mt-4 border border-record-bone/25">
+          <WorldPlate
+            tone="ink"
+            lights={lights}
+            label={`The world, with ${lights.length} ${lights.length === 1 ? 'place' : 'places'} reading the record`}
+          />
         </div>
 
         <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">

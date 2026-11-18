@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
+import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
+import { reachPlaces } from '@/components/climate/reachPlaces';
 import { ArrowRight } from 'lucide-react';
 
 /* ── THE MAP IS A PAGE OF THE RECORD, NOT A POSTER ABOUT IT ────────────────────────
@@ -20,6 +22,12 @@ import { ArrowRight } from 'lucide-react';
    copy is a single statement puts that statement in the middle of the measure, not
    ragged against the left edge of a column it does not fill. */
 export default function ClimateMapPage() {
+  // The reach, on the same plate as the entries: one world showing where the record stands
+  // and where it is being read. The counts come from the same shared call the band at the
+  // foot of every page already makes, so this page asks the server for nothing new.
+  const { data } = useClimateImpactStats();
+  const lights = useMemo(() => reachPlaces(data), [data]);
+
   return (
     <div className="climate-record record-map-page relative min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       <RecordBackBar eyebrow="The record · Map" />
@@ -74,7 +82,7 @@ export default function ClimateMapPage() {
       <RecordPaintedBand soft className="record-map-plate w-full border-b-2 border-record-ink/40">
         <div className="relative z-10 max-w-[1100px] mx-auto px-3 lg:px-10 py-6 lg:py-9">
           <div className="bg-record-bone p-1.5 lg:p-3 shadow-[0_18px_44px_rgba(0,0,0,.55)]">
-            <RecordWorldMap />
+            <RecordWorldMap lights={lights} />
           </div>
         </div>
       </RecordPaintedBand>
