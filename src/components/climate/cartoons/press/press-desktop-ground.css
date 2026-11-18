@@ -1,0 +1,82 @@
+/* Desktop belongs to the continuous painting, not a second reading sheet.
+   Paper protects actual words; the space around drawings stays open. */
+@media screen and (min-width: 1024px) {
+  #root .record-cartoon-field .record-book {
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  /* This shared-shell surface survived the earlier chapter-level changes. */
+  #root .record-cartoon-field .press-room .record-shell-content {
+    background: transparent;
+    box-shadow: none;
+  }
+  #root .record-cartoon-field .press-room-inner {
+    padding: 0 clamp(1.5rem, 3vw, 4rem) 5.5rem;
+  }
+  #root .record-cartoon-field .press-room-inner > * {
+    background: transparent;
+    box-shadow: none;
+    border-top: 0;
+    padding-inline: 0;
+    margin-bottom: clamp(2rem, 3vw, 4rem);
+  }
+
+  #root .press-room .press-opening {
+    grid-template-columns: minmax(20rem, .8fr) minmax(0, 1.2fr);
+    column-gap: clamp(2rem, 3vw, 4rem);
+  }
+  #root .press-room .comic-catalogue {
+    grid-template-columns: minmax(0, 1fr) minmax(13rem, .58fr);
+    column-gap: clamp(1.25rem, 2vw, 2rem);
+  }
+  #root .press-room .comic-catalogue > img {
+    width: 100%;
+    max-height: none;
+  }
+  /* The shared headline tracking was splitting PICTURE in the middle. */
+  #root .press-room .press-title {
+    font-size: clamp(2.75rem, 4.2vw, 5.25rem);
+    font-weight: 700 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.045em !important;
+    text-transform: none;
+    overflow-wrap: normal;
+  }
+
+  #root .press-room :is(
+    .press-opening-words, .comic-catalogue-band,
+    .comic-why > .comic-section-title, .comic-why-list > li, .comic-why-links,
+    .press-wall-head, .press-sheet-rail, .press-wall-colophon,
+    .press-state, .press-more, .press-wall-section > section,
+    .cartoon-fiction-head, .cartoon-story-reel, .comic-panel-heading,
+    .comic-gesture, .comic-speech, .comic-ending, .comic-theme,
+    .comic-turner, .comic-tap-hint, .comic-make-door, .comic-art-credit,
+    .cartoon-world > .press-eyebrow, .cartoon-world-title, .cartoon-world-line,
+    .cartoon-world-name, .cartoon-world-odoi, .cartoon-world-source,
+    .comic-session, .comic-anthology,
+    .comic-workshop > .comic-section-title, .comic-workshop-note, .comic-drawer,
+    .comic-sources > *
+  ) {
+    background: rgb(var(--record-paper));
+    padding: 1.25rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  #root .press-room :is(
+    .comic-why > .comic-section-title, .comic-why-links, .press-wall-head,
+    .press-wall-colophon, .cartoon-fiction-head, .comic-panel-heading,
+    .comic-gesture, .comic-speech, .comic-ending, .comic-theme,
+    .comic-turner, .comic-tap-hint, .comic-make-door, .comic-art-credit,
+    .cartoon-world > .press-eyebrow, .cartoon-world-title, .cartoon-world-line,
+    .cartoon-world-source, .comic-workshop > .comic-section-title,
+    .comic-workshop-note, .comic-sources > *
+  ) { width: fit-content; }
+
+  #root .press-room .comic-why-list { gap: 1.5rem; }
+  #root .press-room .comic-why-list > li { border: 0; }
+  #root .press-room .press-sheet { border: 0; }
+  #root .press-room .cartoon-world-names { gap: 1rem; border: 0; }
+  #root .press-room .cartoon-world-name { border: 0; }
+  #root .press-room .comic-sources > .comic-source-link { display: inline-flex; }
+}

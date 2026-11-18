@@ -12,9 +12,9 @@ export default function CartoonWhy() {
     <section className="comic-why" aria-labelledby="cartoon-why-title">
       <h2 id="cartoon-why-title" className="comic-section-title">Why cartoons?</h2>
       <ul className="comic-why-list">
-        <li>A cartoon can hold a hard idea without frightening the person holding it.</li>
-        <li>Anyone can answer one with a pen. A child, a farmer, a grandmother.</li>
-        <li>The record keeps the answers. Not the laughs count, not the followers — the drawings.</li>
+        <li>A cartoon is a way of seeing the climate: witness, argument, satire.</li>
+        <li>Anyone can answer with a pen. A child, a farmer, a grandmother.</li>
+        <li>The record keeps the work, the artist’s name and their own words. A viewpoint is not scientific proof.</li>
       </ul>
       {/* The pass-it-on card lives at the top of the room now, beside the line that says what
           the room is — that is where a host decides to send the page to somebody. */}

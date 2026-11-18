@@ -25,6 +25,7 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 // still on the page and still works; what has gone is the costume around them.
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';
+import '@/components/climate/cartoons/press/press-desktop-ground.css';
 
 export default function ClimateCartoons() {
   return (
