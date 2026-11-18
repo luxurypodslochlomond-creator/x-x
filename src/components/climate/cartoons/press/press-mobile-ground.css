@@ -1,0 +1,80 @@
+/* On phones, the painting is the continuous ground. Only reading blocks carry
+   paper: never an entire chapter, drawing wall, or opening. Desktop is unchanged. */
+@media screen and (max-width: 639px) {
+  #root .record-cartoon-field .press-room-inner > * {
+    background: transparent;
+    box-shadow: none;
+    border-top: 0;
+    padding-inline: 0;
+  }
+
+  /* Protect words locally, without dimming or blurring the painting itself.
+     The drawing images and the close-reading dialog are deliberately excluded. */
+  #root .press-room :is(
+    .press-opening-words > *,
+    .comic-catalogue-band,
+    .comic-why > .comic-section-title,
+    .comic-why-list > li,
+    .comic-why-links,
+    .press-wall-head,
+    .press-sheet-rail,
+    .press-wall-colophon,
+    .press-state,
+    .press-more,
+    .press-wall-section > section,
+    .cartoon-fiction-head,
+    .cartoon-story-reel,
+    .comic-panel-heading,
+    .comic-gesture,
+    .comic-speech,
+    .comic-ending,
+    .comic-theme,
+    .comic-turner,
+    .comic-tap-hint,
+    .comic-make-door,
+    .comic-art-credit,
+    .cartoon-world > .press-eyebrow,
+    .cartoon-world-title,
+    .cartoon-world-line,
+    .cartoon-world-name,
+    .cartoon-world-odoi,
+    .cartoon-world-source,
+    .comic-session,
+    .comic-anthology,
+    .comic-workshop > .comic-section-title,
+    .comic-workshop-note,
+    .comic-drawer,
+    .comic-sources > *
+  ) {
+    background: rgb(var(--record-paper) / .96);
+    padding: .85rem 1rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Let the painting surround short lines instead of stretching their paper
+     across the glass. Longer paragraphs retain the existing reading width. */
+  #root .press-room :is(
+    .press-opening-words > *,
+    .comic-why > .comic-section-title,
+    .comic-gesture,
+    .comic-speech,
+    .comic-theme,
+    .comic-tap-hint,
+    .cartoon-world > .press-eyebrow,
+    .cartoon-world-title,
+    .comic-workshop > .comic-section-title,
+    .comic-workshop-note,
+    .comic-sources > *
+  ) { width: fit-content; }
+
+  #root .press-room .press-scope { font-size: 1rem; }
+  #root .press-room .press-contents { gap: .65rem 1.35rem; }
+  #root .press-room .comic-why-list { gap: 1rem; }
+  #root .press-room .comic-why-list > li { border: 0; }
+  #root .press-room .press-wall-head { border: 0; }
+  #root .press-room .press-sheet { border: 0; }
+  #root .press-room .cartoon-world-names { border: 0; gap: 1rem; }
+  #root .press-room .cartoon-world-name { border: 0; }
+  #root .press-room .comic-sources > .comic-source-link { display: inline-flex; }
+}

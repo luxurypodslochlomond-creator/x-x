@@ -24,6 +24,7 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 // Nothing was removed. Every drawing, credit, share control, drawer, link and source is
 // still on the page and still works; what has gone is the costume around them.
 import '@/components/climate/cartoons/press/press.css';
+import '@/components/climate/cartoons/press/press-mobile-ground.css';
 
 export default function ClimateCartoons() {
   return (
