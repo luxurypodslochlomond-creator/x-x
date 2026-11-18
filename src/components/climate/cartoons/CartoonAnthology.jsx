@@ -1,5 +1,4 @@
 import React from 'react';
-import '@/components/climate/cartoons/cartoon-anthology.css';
 import { BookRibbon } from '@/components/climate/cartoons/CartoonInkIcons';
 
 // ── THE BOOK THAT COMES OUT OF THE 29TH ────────────────────────────────────────
