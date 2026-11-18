@@ -76,7 +76,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
               to={to}
               label={label}
               what={what}
-              size={28}
+              size={30}
               active={pathname === to}
               className={CELL}
             />

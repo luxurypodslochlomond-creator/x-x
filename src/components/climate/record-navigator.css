@@ -75,7 +75,27 @@
   gap: 0;
   padding: .18rem 0 .1rem;
 }
-.rec-mast-doors .rec-art-caption { display: none; }
+/* ── THE NAMES ARE BACK UNDER THE MARKS ─────────────────────────────────────────
+   Six cells had no room for a word, so the names were dropped and the row became four
+   drawings on their own — and four drawings with nothing written under them is not a
+   menu, it is a puzzle. Brian, 18 November: "where's our coolasfuck nav on mobile?" He
+   was looking at the same marks he had always liked and could not tell what they were.
+   A mark names nothing; a mark with its name under it is a door.
+
+   The row is four cells now, not six: ninety-eight pixels each on a 393-pixel glass, and
+   "Record", "Wire", "Map", "Doors" all sit inside that without touching. Nine pixels of
+   uppercase, tracked wide, the same printer's label as everywhere else in the record, so
+   the row reads as four named ways in and still takes less height than one line of prose. */
+.rec-mast-doors .rec-art-caption {
+  display: block;
+  margin-top: .16rem;
+  font-family: var(--font-record-ui);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: .13em;
+  white-space: nowrap;
+}
 /* The door you are standing in is filled, the way the record's other open doors are
    filled — a yellow cell with ink in it, not a hairline nobody can see. */
 .rec-mast-doors .rec-art-door-active { background-color: rgb(var(--record-signal)); }
