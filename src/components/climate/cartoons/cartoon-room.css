@@ -149,7 +149,7 @@
    is not a frame, it is a wall drawn round the wall, and a tilted full-bleed block leaves
    wedges of paper down the sides. So on a handset the pictures are simply the pictures,
    stacked with air between them, and the tilt and the ink return on a desk, where a frame
-   has somewhere to sit. */}
+   has somewhere to sit. */
 @media (max-width: 1023px) {
   .comic-wall-lead,
   .comic-wall-grid { margin-inline: -1rem; }
