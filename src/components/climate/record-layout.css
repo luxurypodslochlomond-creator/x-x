@@ -3,6 +3,29 @@
 .climate-record .record-book { background-color: transparent; }
 .record-pages > .record-page-shell { background-color: transparent; }
 .record-pages .record-continuous-band { background-color: rgb(var(--record-ink) / .6); }
+
+/* ── THE GREY BAND, AND WHY THERE WAS ONE ────────────────────────────────────────
+   Brian, 18 November: "my map has grey background bri why not coolasfuck bro?" He was
+   looking at a phone. A continuous band is drawn as ink at sixty per cent and expects the
+   fixed painting to be behind it — which it is on a desk, where the book is see-through and
+   the painting runs out either side of the page. On a phone the book is solid paper, so the
+   same band was ink over paper: flat grey, on the map's opening, on the founder's page and
+   on every other band that uses it. Nothing was broken; the band was simply waiting for a
+   room it could not see.
+   So on a handset the band carries the painting itself, at the same place and strength the
+   rest of the record uses. The grey becomes the earth it was always meant to be. Desktop is
+   untouched: there the painting really is behind the band, and a second copy laid inside it
+   would sit a few degrees off the one running through the margins. */
+@media (max-width: 1023px) {
+  .record-pages .record-continuous-band {
+    background-color: rgb(var(--record-earth));
+    background-image:
+      linear-gradient(rgb(var(--record-earth) / .40) 0%, rgb(var(--record-earth) / .62) 50%, rgb(var(--record-earth) / .88) 84%, rgb(var(--record-earth)) 100%),
+      var(--record-cover);
+    background-size: cover;
+    background-position: center 34%;
+  }
+}
 .record-continuous-band [class~="text-[#e2602a]"] { color: rgb(var(--record-signal)); }
 .record-reading-panel,
 .record-back-bar,
