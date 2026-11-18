@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import RecordIndexPlate from '@/components/climate/RecordIndexPlate';
+import RecordDesktopSections from '@/components/climate/RecordDesktopSections';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
 import { markFor } from '@/components/climate/pageMarks';
 
@@ -159,7 +159,17 @@ export default function RecordPagesPanel({ open, onClose }) {
           </div>
 
           <div className="rec-doors-body min-h-0 flex-1 overflow-y-auto overscroll-contain">
-            <RecordIndexPlate onNavigate={onClose} />
+            {/* ── THE SAME EXPLORE THE DESK SHOWS ──────────────────────────────────
+                This body was the record's older index: drawn doors in numbered rows,
+                three across, each name cut to a word under a small drawing. The desk's
+                explore had since been rebuilt — grouped shelves, a red name and a count
+                over each, a hairline between them, a drawn mark beside every door — and
+                the phone kept the older sheet, which is exactly what Brian reported on
+                18 November: coolasfuck on desktop, and mobile did not change.
+                It is the same component now, in its phone shape: two across instead of
+                three, each door a fingertip tall, names allowed to wrap. One index, one
+                hand, whichever glass a reader is holding. */}
+            <RecordDesktopSections layout="phone" onNavigate={onClose} />
           </div>
 
           {/* ── THE TONGUE CAME OFF THIS SHEET, AND THAT IS THE FIX ────────────────────
