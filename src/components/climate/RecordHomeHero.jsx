@@ -20,8 +20,8 @@ export default function RecordHomeHero({ copy, copied, onShare }) {
       </div>
       <div className="relative z-10 px-4 pb-5 lg:px-10 lg:pb-6">
         <div className="record-home-summary w-full bg-cartoon-sun px-3.5 py-3 lg:px-5 lg:py-4">
-          <p className="record-home-summary-copy font-body text-xs font-bold uppercase text-record-ink">{copy.sub}</p>
-          <p className="record-home-summary-motto mt-3 font-mono text-xs font-black uppercase text-record-mark">
+          <p className="record-home-summary-copy record-header-type text-xs text-record-ink">{copy.sub}</p>
+          <p className="record-home-summary-motto record-header-type mt-3 text-xs text-record-mark">
             Every symbol · every number · every tongue · nobody left behind · the noise is loud · the record is louder
           </p>
         </div>

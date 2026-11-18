@@ -11,7 +11,7 @@ export default function CartoonPlate({ cartoon }) {
   const { image_url, title, artist_name, origin, for_line, credit, source_url } = cartoon || {};
 
   return (
-    <figure className="border border-record-ink/20 bg-record-bone/50">
+    <figure className="record-cartoon-plate record-media-mount bg-record-paper">
       {/* One frame for every drawing on the wall, so a wall of pictures reads as a wall and
           not as a pile of different-shaped things. The drawing itself is never cropped: it
           sits whole inside the frame, with the paper showing round it. */}
@@ -23,7 +23,7 @@ export default function CartoonPlate({ cartoon }) {
           className="block h-full w-full object-contain"
         />
       </div>
-      <figcaption className="px-3 py-3 lg:px-4 lg:py-4">
+      <figcaption className="border-t-4 border-record-signal bg-record-bone px-3 py-3 lg:px-4 lg:py-4">
         {title && (
           <p className="text-[15px] font-semibold leading-[1.3] text-record-ink" style={reading}>
             {title}

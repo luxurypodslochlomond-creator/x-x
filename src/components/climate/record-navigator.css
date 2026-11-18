@@ -31,7 +31,8 @@
   font-size: 11px;
   font-weight: 400;
   line-height: 1.2;
-  letter-spacing: 0;
+  letter-spacing: .12em;
+  text-transform: uppercase;
   text-align: center;
 }
 .rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); }
@@ -77,8 +78,8 @@
 }
 .rec-mast-row .rec-art-caption {
   font-size: 10px;
-  line-height: 1.05;
-  letter-spacing: 0;
+  line-height: 1.2;
+  letter-spacing: .1em;
 }
 .rec-mast-row + .rec-mast-row {
   margin-top: .08rem;
@@ -432,9 +433,10 @@
      whole of the animation — which is a shimmer on a sheet of type, not a motion. */
   .rec-mast-doors .rec-art-caption {
     font-family: var(--font-record-ui);
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 400;
     line-height: 20px;
+    letter-spacing: .18em;
   }
   .rec-mast-doors .rec-art-drawing svg { shape-rendering: geometricPrecision; }
   /* Short, and short-travelled. Three hundred milliseconds of a large paper panel moving

@@ -294,7 +294,7 @@ export default function ClimateDetail() {
           a river came up as a black-and-white photograph of a river — the greyest thing on the
           page the reader had just decided to care about. */}
       {heroImage ? (
-        <div className="relative h-64 lg:h-[420px] bg-[#241d16]">
+        <div className="record-detail-image record-media-mount relative h-64 bg-record-ink lg:h-[420px]">
           <img src={heroImage} alt={image.illustrative ? image.label : record.title} fetchpriority="high" decoding="async" onError={image.onError} className="w-full h-full object-cover" style={{ filter: 'saturate(1.06) contrast(1.04)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
           <button onClick={back} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">

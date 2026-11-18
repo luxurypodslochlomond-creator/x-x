@@ -1,0 +1,102 @@
+/* Shared paper construction for every room. The painting separates real sheets;
+   it never sits under reading text. Media keeps one mount and its own credit. */
+@media screen {
+  .climate-record .record-book { box-shadow: none; }
+  .climate-record .record-pages > .record-page-shell { min-height: 0; }
+  .climate-record .record-back-bar { background-color: rgb(var(--record-paper)); }
+
+  .climate-record .record-shell-opening {
+    padding: 1rem 1rem 0;
+    border: 0;
+    background-color: transparent;
+  }
+  .climate-record .record-shell-opening > div {
+    padding: 1.75rem 1.25rem;
+    border-top: 4px solid rgb(var(--record-signal));
+    background-color: rgb(var(--record-paper));
+    box-shadow: 0 5px 0 rgb(var(--record-bone));
+    color: rgb(var(--record-ink));
+  }
+  .climate-record .record-pages .record-shell-opening h1,
+  .climate-record .record-shell-opening :is(a, .font-mono) { color: rgb(var(--record-mark)); }
+  .climate-record .record-pages .record-shell-opening .record-shell-statement { color: rgb(var(--record-ink)); }
+  .climate-record .record-pages .record-shell-body {
+    padding: 1.25rem 1rem 1.5rem;
+    background-color: transparent;
+  }
+  .climate-record .record-shell-body > .record-shell-content {
+    padding: 1.5rem 1.25rem;
+    background-color: rgb(var(--record-paper));
+    box-shadow: 0 5px 0 rgb(var(--record-bone));
+  }
+  .climate-record .record-sectioned-page .record-shell-body > .record-shell-content {
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .climate-record .record-sectioned-page .record-shell-content > :is(section, .record-reading-plate) {
+    margin: 0 0 1.5rem;
+    padding: 1.5rem 1.25rem;
+    border-top: 3px solid rgb(var(--record-mark));
+    background-color: rgb(var(--record-paper));
+    box-shadow: 0 5px 0 rgb(var(--record-bone));
+  }
+  .climate-record .record-sectioned-page .record-shell-content > :last-child { margin-bottom: 0; }
+
+  /* A mount is visibly material, not a hairline joining an image to wallpaper. */
+  .climate-record .record-pages .record-media-mount {
+    border: .5rem solid rgb(var(--record-paper));
+    background-color: rgb(var(--record-paper));
+    box-shadow: 4px 4px 0 rgb(var(--record-signal)), 8px 8px 0 rgb(var(--record-ink) / .45);
+    color: rgb(var(--record-ink));
+  }
+  .climate-record .record-pages .record-photo-crawl {
+    margin: 1.25rem 1.25rem 1.75rem;
+    width: auto;
+  }
+  .climate-record .record-photo-crawl .climate-photo-slide { display: flex; flex-direction: column; }
+  .climate-record .record-photo-crawl figcaption { flex: 1; background-color: rgb(var(--record-bone)); }
+  .climate-record .record-media-caption > div { height: 100%; padding: 1rem; background-color: rgb(var(--record-bone)); }
+  .climate-record .record-media-caption .record-header-type { line-height: 1.55; }
+  .climate-record .record-media-caption .record-header-type + .record-header-type { font-size: .6875rem; }
+  .climate-record .record-pages .record-card-grid { gap: 1.5rem; }
+  .climate-record .record-pages .record-entry-plate { min-height: 0; }
+  .climate-record .record-pages .record-entry-copy { padding: 1rem .75rem; }
+  .climate-record .record-pages .record-entry-copy h3 { line-height: 1.5; }
+  .climate-record .record-home-page .record-image-section .record-section-heading {
+    padding: .875rem 1rem;
+    border-top: 4px solid rgb(var(--record-signal));
+    background-color: rgb(var(--record-paper));
+  }
+  .climate-record .record-home-page .record-image-section .record-section-heading h2 { color: rgb(var(--record-mark)); }
+  .climate-record .record-pages .record-section-count { font-family: var(--font-record-ui); font-weight: 400; }
+  .climate-record .record-wire-picture { margin-bottom: 1.5rem; }
+  .climate-record .record-wire-entry { box-shadow: 0 5px 0 rgb(var(--record-bone)); }
+  .climate-record .record-detail-image { margin: 1.25rem 1.25rem 1.75rem; }
+  .climate-record .record-cartoon-plate { margin-bottom: .75rem; }
+
+  .climate-record .record-search-page .base-one {
+    background-color: rgb(var(--record-paper));
+    box-shadow: 4px 0 0 rgb(var(--record-bone));
+  }
+  .climate-record .record-search-page .record-search-result {
+    margin-bottom: .5rem;
+    padding: 1.25rem;
+    border: 0;
+    border-top: 3px solid rgb(var(--record-mark));
+    background-color: rgb(var(--record-bone));
+    box-shadow: 0 4px 0 rgb(var(--record-signal));
+  }
+  .climate-record .record-search-page .record-search-picture { margin-right: .5rem; }
+}
+@media screen and (min-width: 1024px) {
+  .climate-record .record-shell-opening { padding: 1.5rem 2.5rem 0; }
+  .climate-record .record-shell-opening > div { padding: 2.25rem; }
+  .climate-record .record-pages .record-shell-body { padding: 1.5rem 2.5rem 2rem; }
+  .climate-record .record-shell-body > .record-shell-content,
+  .climate-record .record-sectioned-page .record-shell-content > :is(section, .record-reading-plate) { padding: 2rem; }
+  .climate-record .record-pages .record-photo-crawl { margin: 1.5rem 2.5rem 2rem; }
+}
+@media print {
+  .climate-record .record-media-mount { border: 1px solid rgb(var(--record-ink)); box-shadow: none; }
+}

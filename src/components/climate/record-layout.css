@@ -38,7 +38,7 @@
 
 @media (max-width: 639px) {
   /* Recover width lost to the old outer frame before opening up the content. */
-  .climate-record .record-book { margin-inline: .375rem; }
+  .climate-record .record-book { margin-inline: .75rem; }
   .record-shell-opening > div,
   .record-shell-content,
   .record-shell-return > div { padding-inline: 1.25rem; }

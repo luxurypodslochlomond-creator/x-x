@@ -10,7 +10,7 @@ export default function ComicPanel({ story, index }) {
       {story.gesture && (
         <p className="comic-gesture record-meta" dir="auto">Smallest gesture · {story.gesture}</p>
       )}
-      <figure className="comic-frame">
+      <figure className="comic-frame record-media-mount">
         <div className="comic-stage">
           <p className="comic-speech record-meta" dir="auto">{story.question}</p>
           <img src={story.image} alt={story.alt} width="1024" height="1024" loading={index === 0 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} draggable="false" />

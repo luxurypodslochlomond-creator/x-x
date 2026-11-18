@@ -19,7 +19,7 @@ export default function NewsEntryCard({ entry, linked = true }) {
   const headlineStyle = { fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.01em' };
 
   return (
-    <article className="border-2 border-[#141210] bg-record-bone">
+    <article className="record-wire-entry border border-record-ink/20 border-t-4 border-t-record-signal bg-record-paper">
       <div className="flex flex-wrap items-center gap-2 px-4 pt-4">
         <span className="record-header-type text-[11px] text-[#5a5246]">{entry.when_label}</span>
         {entry.kind && (
@@ -45,10 +45,10 @@ export default function NewsEntryCard({ entry, linked = true }) {
       <p className="px-4 pb-1 pt-2 text-[#141210]">{entry.what_changed}</p>
 
       {entry.image_url && (
-        <figure className="mt-4">
-          <img src={entry.image_url} alt={entry.headline} loading="lazy" className="w-full block border-y-2 border-[#141210] object-cover" style={{ maxHeight: 320 }} />
+        <figure className="record-wire-picture record-media-mount mx-4 mt-4">
+          <img src={entry.image_url} alt={entry.headline} loading="lazy" className="block w-full object-cover" style={{ maxHeight: 320 }} />
           {entry.image_credit && (
-            <figcaption className="px-4 py-1.5 text-[9px] font-mono uppercase tracking-wide text-[#5a5246] border-b-2 border-[#141210]">{entry.image_credit}</figcaption>
+            <figcaption className="record-header-type bg-record-signal px-3 py-3 text-xs leading-relaxed text-record-ink">{entry.image_credit}</figcaption>
           )}
         </figure>
       )}

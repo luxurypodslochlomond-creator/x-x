@@ -5,6 +5,7 @@ import '@/components/climate/record-reading.css';
 import '@/components/climate/record-layout.css';
 import '@/components/climate/record-mobile.css';
 import '@/components/climate/record-surfaces.css';
+import '@/components/climate/record-depth.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { prefetchPath } from '@/lib/routePrefetch';

@@ -1,9 +1,8 @@
 import React from 'react';
 import ClimatePhotoCredit from '@/components/climate/ClimatePhotoCredit';
 
-// A photograph on the record fills its whole frame: no bars top or bottom, and no
-// "view full size" escape hatch beneath it. The credit sits on the picture itself.
-// A tap still opens it full screen, for a closer look at Janine's photographs.
+// The photograph and its credited paper caption are one mounted plate.
+// Swiping and opening the full-screen original work exactly as before.
 
 export default function ClimatePhotoSlide({ photo, onOpen }) {
   return (
@@ -27,8 +26,8 @@ export default function ClimatePhotoSlide({ photo, onOpen }) {
           />
         </span>
       </button>
-      <figcaption>
-        <ClimatePhotoCredit photo={photo} variant="overlay" />
+      <figcaption className="record-media-caption">
+        <ClimatePhotoCredit photo={photo} variant="bar" />
       </figcaption>
     </figure>
   );

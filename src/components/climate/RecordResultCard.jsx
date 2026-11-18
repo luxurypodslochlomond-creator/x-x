@@ -154,17 +154,17 @@ export default function RecordResultCard({ kind, item }) {
         className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
       >
         <Tag>Credited picture</Tag>
-        <div className="flex items-start gap-3 mt-2">
+        <div className="record-search-picture record-media-mount mt-3">
           {item.image_url && (
             <img
               src={item.image_url}
               alt={item.caption || item.credit || 'A credited picture on the record'}
               loading="lazy"
-              className="h-16 w-16 flex-shrink-0 object-cover border border-record-ink"
+              className="block aspect-[3/2] w-full object-cover"
             />
           )}
           {item.caption && (
-            <p className="text-[12px] font-mono text-record-ink leading-relaxed min-w-0">{item.caption}</p>
+            <p className="record-header-type bg-record-bone p-3 text-xs leading-relaxed text-record-ink">{item.caption}</p>
           )}
         </div>
         {item.credit && <Origin name={item.credit} />}

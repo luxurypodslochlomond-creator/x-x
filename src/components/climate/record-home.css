@@ -3,9 +3,9 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(20px, 5.4vw, 82px);
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -.025em;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: .08em;
   text-align: start;
   overflow-wrap: break-word;
 }
@@ -35,8 +35,8 @@
 }
 
 .record-home-page { background-color: transparent; }
-/* The already-loaded cover holds the frame while its own photograph downloads. */
-.record-entry-plate {
+/* The shared cover holds an image frame while its own photograph downloads. */
+.record-entry-image {
   background-image: var(--record-cover);
   background-size: cover;
   background-position: center;

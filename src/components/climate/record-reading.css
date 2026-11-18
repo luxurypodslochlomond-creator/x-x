@@ -207,12 +207,20 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
 
    Sizes are corrected from below only. Nothing is made smaller, so no layout tightens
    around a word that used to fit. */
+/* The footer and masthead set the voice: regular, open lettering at every size.
+   Prose and explicit strong emphasis keep their reading hierarchy. */
 .record-pages :is(h1, h2, h3, h4, h5, h6):not(.record-home-title) {
-  font-family: var(--font-display) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
+  font-family: var(--font-record-ui) !important;
+  font-weight: 400 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
 }
-.record-pages :is(h1, h2):not(.record-home-title) { line-height: 1.08 !important; }
+.record-pages :is(h1, h2):not(.record-home-title) { line-height: 1.35 !important; }
+.record-pages :is(.font-mono, .record-meta):not(code):not(pre):not(.break-all):not([data-record-technical]):not([data-record-technical] *) {
+  font-weight: 400;
+}
+.record-pages .font-mono.uppercase:not([data-record-technical]):not([data-record-technical] *) { letter-spacing: .14em; }
 
 /* The floor, and it is one floor. Seven, eight, eight-and-a-half, nine and ten pixels all
    arrived as separate decisions and together they made the page shimmer. Every label on
