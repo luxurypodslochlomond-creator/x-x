@@ -34,6 +34,17 @@ const MARKS = {
   nation: { fill: '#0f5f7a', shape: 'rounded-full', size: 9 },
 };
 
+/* On the painted plate the record's dark inks would vanish into the ground, so the same
+   five meanings are said in light: a crisis still burns red, a solution is bone, an action
+   is green, a line on the wire is the ocean, a drawing is the record's signal. */
+const MARKS_ON_PAINT = {
+  crisis: '#f2564a',
+  solution: '#efe7d6',
+  action: '#8fd3a8',
+  wire: '#5bb8d6',
+  cartoon: '#ffd447',
+};
+
 const GROUND = {
   paper: {
     bg: 'bg-[#efe7d6]',
@@ -180,6 +191,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
       {marks.map((m) => {
         const { left, top } = projectPct(m.lat, m.lng);
         const t = MARKS[m.tone] || MARKS.solution;
+        const fill = (tone === 'ink' && MARKS_ON_PAINT[m.tone]) || t.fill;
         const on = selectedId != null && m.id === selectedId;
         const size = m.size ?? t.size;
         return (

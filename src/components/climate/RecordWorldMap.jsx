@@ -31,7 +31,7 @@ function whenItArrived(iso) {
    read what is on it. */
 // lights are the places the record is being read from — the reach, on the same plate as
 // the entries. One world, two facts about it: where the record stands, and where it is read.
-export default function RecordWorldMap({ lights = [], alive = false }) {
+export default function RecordWorldMap({ lights = [], alive = false, tone = 'paper' }) {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [publishedTotal, setPublishedTotal] = useState(0);
@@ -174,10 +174,10 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
   const placeAt = here.findIndex((m) => m.id === picked?.id);
 
   return (
-    <div className="border-2 border-[#141210] bg-[#f7f1e5]">
+    <div className={tone === 'ink' ? 'border border-[#efe7d6]/45 bg-transparent' : 'border-2 border-[#141210] bg-[#f7f1e5]'}>
       {/* The count and the key, on the same paper as the plate — a plate is captioned
           above its engraving, not over it. */}
-      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-3 py-2.5 border-b border-[#141210]/20">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[#f7f1e5] px-3 py-2.5 border-b border-[#141210]/20">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">
           {loading
             ? 'Setting the entries…'
@@ -220,6 +220,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
         selectedId={picked?.id}
         onSelect={pick}
         label={`The world, with ${marks.length} entries of the record set where they happened and ${lights.length} places reading it`}
+        tone={tone}
       />
 
       {/* The plate read out: the places it actually holds, so a reader never has to hunt
@@ -227,7 +228,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
       <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
 
       {/* What you pressed, said underneath the planet in the record's own words. */}
-      <div className="border-t border-[#141210]/20 px-3 py-3 min-h-[86px]">
+      <div className="border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
         {picked ? (
           <div>
             <div className="flex items-center gap-2 mb-1.5">

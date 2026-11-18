@@ -1,5 +1,32 @@
-.record-unified-map { background: rgb(var(--record-paper)); }
+/* ── THE MAP PAGE STANDS ON THE PAINTING ───────────────────────────────────────
+   This page used to lay its own sheet of paper from the top of the glass to the foot,
+   so the one page about the whole planet was the one page with the painting painted
+   out — a flat warm grey, and the plate a bone panel inside it. Brian, 18 November:
+   "map page has big grey background where's our coolasfuck painting map bro."
+   The ground is the painting now; paper is kept for the long read underneath it. */
+.record-unified-map { background: transparent; }
 .record-unified-map .record-reach-page { min-height: 0; background: rgb(var(--record-paper)); }
+
+/* The plate is let out to the full glass: a world does not fit in a reading column. */
+@media (min-width: 1024px) {
+  #root .record-map-field .record-book { max-width: min(1720px, 96vw); }
+}
+
+/* The band carries the record's one painting at half ink, so the world can be drawn on it
+   in light ink and still be read. The plate's own frame is a hairline, never a panel. */
+.record-unified-map .record-map-band.record-continuous-band { background-color: transparent; }
+.record-unified-map .record-map-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .16) 0%, rgb(var(--record-ink) / .28) 55%, rgb(var(--record-ink) / .52) 100%);
+}
+.record-map-frame {
+  border: 1px solid rgb(var(--record-bone) / .38);
+  background: transparent;
+  box-shadow: 0 34px 80px -46px rgb(var(--record-ink));
+}
 .record-unified-map .record-page-plate { margin: 0; }
 .record-unified-map :is(#nations, #countries, #reader-place) { scroll-margin-top: 9rem; }
 

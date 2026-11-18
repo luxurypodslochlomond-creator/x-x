@@ -64,10 +64,13 @@ export default function ClimateMapPage() {
 
       <ImpactSignal stats={data} />
 
-      <RecordPaintedBand soft className="record-map-plate w-full border-b-2 border-record-ink/40">
+      {/* The plate is not a grey panel with a world in it. It is the record's own painting,
+          with the world drawn on top in light ink — so the page a reader opens to see the
+          whole planet is standing on the planet it was painted for. */}
+      <RecordPaintedBand soft continuous className="record-map-band w-full">
         <div className="relative z-10 mx-auto max-w-[1640px] px-2 py-4 lg:px-6 lg:py-6">
-          <div className="bg-record-bone p-1 shadow-[0_18px_44px_rgba(0,0,0,.55)] lg:p-2">
-            <RecordWorldMap lights={lights} alive />
+          <div className="record-map-frame p-1 lg:p-2">
+            <RecordWorldMap lights={lights} alive tone="ink" />
           </div>
         </div>
       </RecordPaintedBand>
