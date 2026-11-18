@@ -11,9 +11,10 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // file (an app's own browser). Where the sheet is refused altogether — the editor's
 // own frame — the card is put on screen to keep and pass on, never a silent download.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, previewFirst = false }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
+  const link = givenLink || recordAddress();
 
   const share = async () => {
     if (state === 'building') return;
@@ -24,7 +25,12 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       if (!blob) throw new Error('The card could not be drawn.');
       const file = new File([blob], `record-of-the-time-${entry.id}.png`, { type: 'image/png' });
       const title = entry.headline || entry.title || 'Record of the time';
-      const line = `${title} — ${recordAddress()}`;
+      const line = `${title} — ${link}`;
+      if (previewFirst) {
+        setCard({ blob, fileName: file.name });
+        setState('idle');
+        return;
+      }
 
       const carriesFile = !!(navigator.canShare && navigator.canShare({ files: [file] }));
       const hasSheet = carriesFile || !!navigator.share;
@@ -56,7 +62,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       onClose={() => setCard(null)}
       blob={card?.blob}
       fileName={card?.fileName}
-      link={recordAddress()}
+      link={link}
       headline={entry.headline || entry.title || 'Record of the time'}
     />
   );

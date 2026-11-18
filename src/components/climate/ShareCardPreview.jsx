@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { Check, Copy, Download } from 'lucide-react';
+import { Check, Copy, Download, Share2 } from 'lucide-react';
 
 // ── THE CARD, ON SCREEN ──
 // Reached only when the device refuses the page its share sheet: the editor's own
@@ -42,9 +42,20 @@ export default function ShareCardPreview({ open, onClose, blob, fileName, link, 
     a.click();
   };
 
+  const share = async () => {
+    const file = new File([blob], fileName, { type: 'image/png' });
+    try {
+      await navigator.share(navigator.canShare?.({ files: [file] })
+        ? { files: [file], title: headline, text: link }
+        : { title: headline, text: link });
+    } catch (error) {
+      if (error.name !== 'AbortError') save();
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={(next) => { if (!next) onClose(); }}>
-      <DialogContent className="max-w-sm p-0 gap-0 bg-[#f4efe4] border-2 border-[#141210] rounded-none">
+      <DialogContent className="max-w-sm max-h-[90dvh] overflow-y-auto p-0 gap-0 bg-record-paper border-2 border-record-ink rounded-none">
         <DialogTitle className="px-4 pt-4 pb-2 text-[11px] font-black font-mono uppercase tracking-wider text-[#141210]">
           The card
         </DialogTitle>
@@ -57,10 +68,8 @@ export default function ShareCardPreview({ open, onClose, blob, fileName, link, 
           )}
         </div>
 
-        <p className="px-4 pb-3 text-[11px] font-mono leading-relaxed text-[#6b6258]">
-          This card is yours to keep. The full share sheet — WhatsApp, email and the rest — appears
-          when the record is opened in a phone's browser.
-        </p>
+        <p className="px-4 pb-3 text-xs leading-relaxed text-record-muted">Keep the image, or share it with the event link.</p>
+        {navigator.share && <button type="button" onClick={share} className="mx-4 mb-3 flex min-h-11 items-center justify-center gap-2 border-2 border-record-ink bg-record-signal font-bold text-record-ink"><Share2 size={16} />Share card</button>}
 
         <div className="grid grid-cols-2 gap-2 px-4 pb-4">
           <button

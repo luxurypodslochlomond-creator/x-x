@@ -83,4 +83,4 @@ export const gestureStrips = {
   'Not wasting food': 'food',
 };
 
-export const stripHref = (gesture) => (gestureStrips[gesture] ? `/ClimateCartoons?strip=${gestureStrips[gesture]}` : '/ClimateCartoons');
+export const stripHref = (gesture) => (gestureStrips[gesture] ? `/ClimateCartoons?strip=${gestureStrips[gesture]}#cartoon-strip` : '/ClimateCartoons');
