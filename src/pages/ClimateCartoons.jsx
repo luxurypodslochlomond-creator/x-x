@@ -12,8 +12,6 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import '@/components/climate/cartoons/cartoon-room.css';
 import '@/components/climate/cartoons/cartoon-room-layout.css';
-// The gallery coat, applied last so it is the room's final voice: hairlines instead of ink
-// boxes, a white wall instead of a scrapbook, no shadows and no tilts on the furniture.
 import '@/components/climate/cartoons/cartoon-gallery.css';
 
 export default function ClimateCartoons() {
@@ -26,31 +24,19 @@ export default function ClimateCartoons() {
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
     >
-      {/* ── A PICTURE PAGE, IN THE ORDER A PICTURE PAGE IS READ ─────────────────
-          This page has been reordered twice and both times for the same complaint: the
-          drawings were not what you met first. The last version opened on a dateline about
-          the 29th, then the record's own AI strip, and put thirteen real drawings by What
-          On Earth!® for CEEW third — behind a notice and behind somebody else's work.
-          Brian, 18 November: "why not picture page… doesn't feel coolasfuck… needs to be
-          better than their sites."
-
-          So: the room's name, then the drawings — the newest one hung large and edge to
-          edge, the rest as the wall — then the dateline that explains what they are for,
-          then the record's own strip, then the book they become, then the argument, then
-          the way to send one in. Nothing was deleted and nothing was reordered for taste:
-          the pictures simply come first, because that is the whole reason anybody opens
-          this room. */}
       <div className="comic-event-opening">
         <CartoonCatalogueBand />
         <div className="comic-event-context">
           <ComicMasthead />
-          <CartoonSessionBand />
+          <CartoonOpening />
         </div>
       </div>
-      <CartoonOpening />
       <CartoonWall />
       <ComicReader />
-      <CartoonAnthology />
+      <div className="cartoon-room-notes">
+        <CartoonSessionBand />
+        <CartoonAnthology />
+      </div>
       <CartoonWhy />
       <CartoonRoomActions />
       <CartoonSources />

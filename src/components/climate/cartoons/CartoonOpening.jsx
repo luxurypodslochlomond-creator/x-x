@@ -18,21 +18,14 @@ import '@/components/climate/cartoons/cartoon-pagemap.css';
 export default function CartoonOpening() {
   return (
     <section className="comic-opening" aria-labelledby="cartoon-opening-title">
-      <p id="cartoon-opening-title" className="comic-opening-eyebrow record-meta">What this room is</p>
-      <p className="comic-opening-line">
-        A room of climate cartoons — drawings from Africa, Asia and beyond, gathered for
-        CartoonAFRICA and edited by Francis Umendu Odupute and Janine Selendy.
+      <p id="cartoon-opening-title" className="comic-opening-line record-meta">
+        The climate, seen differently. Human drawings from What On Earth!® at CEEW,
+        a little AI-illustrated fiction, and a wall waiting for your own way of seeing.
       </p>
-      <p className="comic-opening-sub">
-        Every drawing on the wall is a person’s, with their name and its source. The record’s
-        own strip is separate, and labelled as AI-illustrated fiction.
+      <p className="comic-opening-sub record-meta">
+        Gathered for CartoonAFRICA. Edited by Francis Umendu Odupute and Janine Selendy.
       </p>
-
       <CartoonPageMap />
-
-      <p className="comic-opening-line comic-opening-open">
-        The wall is open. Send a drawing and it goes up with your name on it, once a person has looked.
-      </p>
     </section>
   );
 }

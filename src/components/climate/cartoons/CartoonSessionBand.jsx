@@ -39,11 +39,11 @@ export default function CartoonSessionBand() {
           </dd>
         </div>
       </dl>
-      <div className="comic-session-who">
-        <h3>Who you’ll hear</h3>
-        <p>{ALINA}</p>
-        <p className="comic-session-attrib">In CEEW’s own words, written to introduce her at the workshop.</p>
-      </div>
+      <details className="comic-session-who">
+        <summary>Who you’ll hear · Alina Sen, CEEW</summary>
+        <p className="record-meta">{ALINA}</p>
+        <p className="comic-session-attrib record-meta">In CEEW’s own words, written to introduce her at the workshop.</p>
+      </details>
       <Link to="/ClimateWorkshop" className="comic-session-link">
         The hour itself, written down <span aria-hidden="true">→</span>
       </Link>

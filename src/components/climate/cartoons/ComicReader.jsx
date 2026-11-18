@@ -22,7 +22,16 @@ export default function ComicReader() {
   };
   return (
     <section className="comic-reader" id="cartoon-strip" aria-label="The record's own cartoons">
-      <p className="comic-opening-eyebrow record-meta">The record’s own strip · AI-illustrated fiction</p>
+      <header className="cartoon-fiction-head">
+        <p className="comic-opening-eyebrow record-meta">A little fiction. A real-world nudge.</p>
+        <h2 className="comic-section-title">The little things.</h2>
+        <p className="record-meta">A blackbird, a stone, and another way to look at what we already have. AI-illustrated fiction, separate from the human wall.</p>
+      </header>
+      <nav className="cartoon-story-reel" aria-label="Choose one of the seven illustrated stories">
+        {comicStories.map((story, index) => <button key={story.id} type="button" aria-current={active === index ? 'true' : undefined} onClick={() => turn(index - active)}>
+          <img src={story.image} alt="" loading="lazy" decoding="async" /><span>{story.gesture || story.title}</span>
+        </button>)}
+      </nav>
       <div className="comic-single-reader" tabIndex={0} role="region" aria-label="Cartoons: swipe or use the arrow buttons"
         onKeyDown={(event) => { if (['ArrowRight', 'ArrowLeft'].includes(event.key)) { event.preventDefault(); turn(event.key === 'ArrowRight' ? 1 : -1); } }}
         onTouchStart={(event) => { const p = event.touches[0]; touch.current = { x: p.clientX, y: p.clientY }; }}
