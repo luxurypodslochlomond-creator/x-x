@@ -1,0 +1,141 @@
+/* ── THE INTERVENTION PLATE ─────────────────────────────────────────────────────
+   One section of the cartoon room that argues rather than displays. The digital layer
+   here is a printer's proof sheet: crop marks, a dither screen, a registration offset,
+   a slow scan band. Every mark is a real mark a press would print, so the technology
+   reads as machinery rather than as a screensaver.
+
+   The empty panel is the only unfinished thing in the room, and that is deliberate. */
+
+#root .cartoon-room .comic-interventions {
+  margin-top: 2.5rem;
+  padding: 1.25rem 0 0;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+
+#root .cartoon-room .comic-intervention-body {
+  display: grid;
+  gap: 1.25rem;
+  margin-top: .9rem;
+}
+
+#root .cartoon-room .comic-intervention-words p {
+  margin: 0 0 .8rem;
+  max-inline-size: 46ch;
+  color: rgb(var(--record-ink));
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+#root .cartoon-room .comic-intervention-words p:last-child { margin-bottom: 0; }
+
+/* ── THE RESERVED PANEL ───────────────────────────────────────────────────────── */
+#root .cartoon-room .comic-blank-panel {
+  position: relative;
+  margin: 0;
+  padding: 1.6rem;
+  background-color: rgb(var(--cartoon-paper));
+  background-image:
+    radial-gradient(rgb(var(--record-ink) / .16) 1px, transparent 1.15px),
+    linear-gradient(180deg, rgb(var(--cartoon-sky) / .22), transparent 62%);
+  background-size: 7px 7px, auto;
+  border: 2.5px solid rgb(var(--record-ink));
+  box-shadow: 7px 7px 0 rgb(var(--record-ink));
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+/* The overprint: one plate a hair out of register, the way a two-colour job goes wrong
+   on purpose. Drawn as a rule, never over the drawing area's centre, so the space stays
+   genuinely empty and a hand has room. */
+#root .cartoon-room .comic-blank-panel::before {
+  content: '';
+  position: absolute;
+  inset: .7rem;
+  border: 1.5px solid rgb(var(--record-red) / .45);
+  transform: translate(3px, -2px);
+  pointer-events: none;
+}
+
+#root .cartoon-room .comic-blank-panel figcaption {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .5rem .7rem;
+  padding-top: .7rem;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+#root .cartoon-room .comic-blank-number {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: .2rem .45rem;
+  background: rgb(var(--cartoon-sun));
+  color: rgb(var(--record-ink));
+  border: 2px solid rgb(var(--record-ink));
+}
+#root .cartoon-room .comic-blank-line {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / .78);
+}
+
+/* Crop marks, at the four corners, exactly where a press puts them. */
+#root .cartoon-room .comic-blank-crop {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid rgb(var(--record-ink) / .55);
+  pointer-events: none;
+}
+#root .cartoon-room .comic-blank-crop--tl { top: 8px; left: 8px; border-top-width: 1.5px; border-left-width: 1.5px; }
+#root .cartoon-room .comic-blank-crop--tr { top: 8px; right: 8px; border-top-width: 1.5px; border-right-width: 1.5px; }
+#root .cartoon-room .comic-blank-crop--bl { bottom: 8px; left: 8px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+#root .cartoon-room .comic-blank-crop--br { bottom: 8px; right: 8px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+/* One band of light crossing the plate, the way a press passes a sheet. Slow enough
+   that a reader only catches it mid-journey; transform only, so nothing repaints. */
+#root .cartoon-room .comic-blank-scan {
+  position: absolute;
+  inset-inline: 0;
+  top: -40%;
+  height: 40%;
+  background: linear-gradient(180deg, transparent, rgb(var(--record-red) / .07), transparent);
+  animation: comic-blank-pass 14s linear infinite;
+  pointer-events: none;
+}
+@keyframes comic-blank-pass {
+  from { transform: translateY(0); }
+  to { transform: translateY(360%); }
+}
+
+#root .cartoon-room .comic-intervention-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem 1.25rem;
+  margin-top: 1.1rem;
+}
+
+@media (min-width: 768px) {
+  #root .cartoon-room .comic-intervention-body {
+    grid-template-columns: minmax(0, 1.15fr) minmax(16rem, .85fr);
+    gap: 2rem;
+    align-items: start;
+  }
+  #root .cartoon-room .comic-blank-panel { min-height: 15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #root .cartoon-room .comic-blank-scan { animation: none; opacity: 0; }
+}
+
+@media print {
+  #root .cartoon-room .comic-blank-scan { display: none; }
+  #root .cartoon-room .comic-blank-panel { box-shadow: none; }
+}

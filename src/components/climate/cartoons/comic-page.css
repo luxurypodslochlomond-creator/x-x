@@ -20,6 +20,25 @@
    Written against `.record-pages .cartoon-room` on purpose, so it beats the gallery sheet
    whichever order the two files arrive in. */
 
+/* ── THE RECORD'S OWN STRIP IS PRINTED, NOT RENDERED ────────────────────────────
+   Brian, 18 November: "ai generated for little things should it be more raw bro".
+   Yes. The strip is ours — nobody else's hand is in it — so it is allowed to look like
+   something pulled off a press rather than something rendered: colour pulled back a
+   touch so it reads as ink on paper, a second red plate a hair out of register on the
+   frame, and no soft shadow anywhere near it. The drawings stay whole; only the
+   printing around them is roughened. Nothing is imitated from any artist. */
+.record-pages .cartoon-room .comic-reader .comic-stage img {
+  filter: saturate(.94) contrast(1.05);
+}
+.record-pages .cartoon-room .comic-reader .comic-frame {
+  position: relative;
+  box-shadow: 4px 4px 0 rgb(var(--record-red) / .55), 4px 4px 0 2px rgb(var(--record-ink) / .18);
+}
+.record-pages .cartoon-room .comic-reader .comic-ending {
+  background-image: radial-gradient(rgb(var(--record-ink) / .12) 1px, transparent 1.1px);
+  background-size: 6px 6px;
+}
+
 /* ── THE TITLE IS A BLOCK, PRINTED ──────────────────────────────────────────────
    The masthead's name sits on its own slab of sun with a hard shadow under it, the way a
    comic's own logotype does. It was a line of type with a yellow rule behind it, which is
