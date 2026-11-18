@@ -64,8 +64,37 @@
 .comic-opening { max-width: 40rem; margin: 1rem auto 0; padding: .9rem .4rem 0; border-top: 3px solid rgb(var(--record-ink)); }
 .record-pages .cartoon-room .comic-opening-eyebrow { margin: 0; font-size: .625rem; line-height: 1.4; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
 .record-pages .cartoon-room .comic-opening-line { margin: .5rem 0 0; font-size: .95rem !important; line-height: 1.5 !important; font-weight: 600; max-inline-size: none; }
-.comic-opening-parts { display: flex; flex-wrap: wrap; gap: .15rem .9rem; margin: .9rem 0 0; padding: .55rem 0 0; border-top: 1px solid rgb(var(--record-ink) / .18); }
-.comic-opening-part { display: inline-flex; align-items: center; min-height: 2.4rem; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; text-decoration: underline; text-underline-offset: .22em; }
+.record-pages .cartoon-room .comic-opening-in { margin-top: 1.1rem; padding-top: .7rem; border-top: 1px solid rgb(var(--record-ink) / .18); }
+
+/* ── THE SIX DOORS, AS PICTURES ────────────────────────────────────────────────
+   Six small plates rather than six underlined words. Two across on a phone so each one has
+   room for a drawing and a sentence, three across once there is width to spare. The tile is
+   the touch target, and it is never smaller than a fingertip at a workshop. */
+.comic-opening-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; margin: .6rem 0 0; }
+@media (min-width: 34rem) { .comic-opening-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .65rem; } }
+.record-pages .cartoon-room .comic-part {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .3rem;
+  min-height: 6.6rem; padding: .6rem .6rem .65rem;
+  border: 2px solid rgb(var(--record-ink));
+  background: rgb(var(--cartoon-paper));
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  transition: background-color .15s ease, transform .1s ease;
+}
+.record-pages .cartoon-room .comic-part:hover { background: rgb(var(--cartoon-sun) / .35); }
+.record-pages .cartoon-room .comic-part:active { transform: translateY(1px); }
+.comic-part-mark { width: 2.5rem; height: 2.5rem; flex: none; }
+.comic-part-label { font-size: .76rem; font-weight: 800; line-height: 1.05; text-transform: uppercase; letter-spacing: .05em; }
+.comic-part-caption { font-size: .66rem; line-height: 1.25; font-weight: 600; color: rgb(var(--record-muted)); }
+
+/* The cartoon palette, filled flat, exactly as the room's own drawings are coloured. */
+.cmark-sky { fill: rgb(var(--cartoon-sky)); }
+.cmark-sun { fill: rgb(var(--cartoon-sun)); }
+.cmark-mint { fill: rgb(var(--cartoon-mint)); }
+.cmark-paper { fill: rgb(var(--cartoon-paper)); }
+.cmark-clay { fill: rgb(var(--record-clay)); }
+
+.record-pages .cartoon-room .comic-opening-open { margin-top: 1rem; }
 .comic-opening .comic-share { margin-top: .9rem; padding-top: .9rem; }
 /* The plate number, in the room's own furniture: a small sun block of ink. */
 .comic-plate-index { display: inline-grid; place-items: center; flex-shrink: 0; min-width: 1.55rem; height: 1.35rem; border: 2px solid rgb(var(--record-ink)); border-radius: 2px; background: rgb(var(--cartoon-sun)); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .58rem; font-weight: 900; font-variant-numeric: tabular-nums; transform: rotate(-4deg); }
