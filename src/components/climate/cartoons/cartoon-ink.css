@@ -1,0 +1,189 @@
+/* ── THE ROOM IS PRINTED IN INK, NOT PAINTED IN PAPER ───────────────────────────
+   Brian, 18 November: "still some old boring colours not black red / yellow
+   coolasfuck … I want to blow Francis's mind tomorrow."
+
+   He was right about what was on the glass. Only the section names had been
+   printed on black; everything between them was still the record's warm paper, so
+   the room opened like a comic and then turned into a leaflet. A comic is not a
+   white page with black headings on it. It is ink, edge to edge, with the drawings
+   pasted on top.
+
+   So the ground is ink. Every reading block that sat directly on the paper now sits
+   on the ink in cream; every block that is genuinely a piece of paper — a panel, a
+   caption box, a caption strip under a drawing, a drawer you open — stays cream and
+   keeps its own black type. Yellow is the room's voice for names and small stamps;
+   red is its rule. Three colours, the way a comic is printed.
+
+   Nothing here touches a single drawing: the artwork is untouched, and every
+   drawing still stands on its own cream plate. */
+
+/* ── THE GROUND ───────────────────────────────────────────────────────────────── */
+#root .climate-record .record-pages .cartoon-room {
+  background-color: rgb(var(--record-ink)) !important;
+  color: rgb(var(--cartoon-paper));
+}
+
+/* Every wrapper that used to carry a cream sheet is now just air over the ink. */
+#root .climate-record .record-pages .cartoon-room
+  :is(.record-shell-body, .record-shell-content, .comic-event-opening, .comic-event-context,
+      .cartoon-room-notes, .comic-reader, .comic-wall, .comic-why, .comic-workshop,
+      .comic-sources, .comic-opening, .comic-session, .comic-anthology, .comic-wall-head,
+      .cartoon-fiction-head, .comic-page, .comic-turner, .cartoon-human-wall,
+      .cartoon-reading-index, .comic-anthology-facts, .comic-session-facts) {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── THE PAPER THAT IS REAL PAPER ───────────────────────────────────────────────
+   A panel, a balloon, a caption box, the dotted sheet the strip is pasted on, a
+   caption strip under a drawing, a drawer, a form. These stay cream and keep black
+   type, because that is what they are: pieces of paper laid on the ink. */
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-single-reader, .comic-frame, .comic-ending, .comic-speech, .comic-catalogue-band,
+      .record-cartoon-plate figcaption, .cartoon-caption, .comic-part, .comic-drawer,
+      .comic-drawer-content, .comic-wall-empty, .comic-error-note, .comic-artwork-unavailable,
+      .comic-why-list li, .comic-catalogue) {
+  color: rgb(var(--record-ink));
+}
+#root .climate-record .record-pages .cartoon-room :is(.comic-wall-empty, .comic-error-note, .comic-drawer) {
+  background-color: rgb(var(--cartoon-paper));
+}
+
+/* ── ONE HAND, FORCED ───────────────────────────────────────────────────────────
+   Every word in this room is set in the room's own lettering. The record's shared
+   sheets set their own faces with !important, so this is stated with the same
+   weight and a firmer selector: a page about drawings cannot arrive in the voice of
+   a policy document. */
+#root .climate-record .record-pages .cartoon-room
+  :is(p, li, dd, dt, span, a, button, summary, label, input, textarea, select, div, figcaption, blockquote) {
+  font-family: 'Comic Neue', 'Record UI', system-ui, sans-serif !important;
+  letter-spacing: 0;
+}
+#root .climate-record .record-pages .cartoon-room :is(h1, h2, h3, h4, h5, h6) {
+  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: .02em !important;
+  line-height: 1.06 !important;
+  color: rgb(var(--cartoon-sun)) !important;
+}
+/* Names and presses are lettering, not sentences. */
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-title, .comic-section-title, .comic-session-title, .comic-anthology-title,
+      .comic-make-door, .comic-turner button, .comic-drawer summary, .comic-load-more,
+      .comic-wall-empty a, .cartoon-index-name, .comic-part-label) {
+  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: .03em !important;
+  text-transform: none !important;
+}
+/* A name is one piece of lettering even when half of it is inside a span. */
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-title, .comic-section-title, .comic-session-title, .comic-anthology-title,
+      .comic-make-door, .comic-turner button, .comic-drawer summary, .comic-load-more,
+      .comic-wall-empty a, .cartoon-index-name, .comic-part-label) :is(span, em, strong, small) {
+  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
+}
+/* The stamps stay stamps: the machine's own numerals, never lettering. */
+#root .climate-record .record-pages .cartoon-room :is(.comic-number, .comic-plate-index, .cartoon-spread-number) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+}
+
+/* ── YELLOW IS THE VOICE, RED IS THE RULE ─────────────────────────────────────── */
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-eyebrow, .comic-opening-eyebrow, .comic-catalogue-eyebrow, .comic-session-eyebrow,
+      .comic-anthology-eyebrow, .comic-cover-words-eyebrow, .cartoon-index-name small) {
+  color: rgb(var(--cartoon-sun)) !important;
+}
+#root .climate-record .record-pages .cartoon-room .comic-gesture {
+  background: rgb(var(--cartoon-sun)) !important;
+  color: rgb(var(--record-ink)) !important;
+  border-color: rgb(var(--record-ink)) !important;
+}
+/* Names printed on the plate keep their yellow, and the plate keeps its red rule. */
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-section-title, .comic-session-title, .comic-anthology-title) {
+  background-color: rgb(var(--record-ink)) !important;
+  border-bottom: 4px solid rgb(var(--record-red)) !important;
+  color: rgb(var(--cartoon-sun)) !important;
+}
+
+/* ── WHAT IS SAID QUIETLY, SAID ON INK ────────────────────────────────────────── */
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-opening-sub, .comic-tagline, .comic-art-credit, .comic-tap-hint,
+      .cartoon-wall-colophon, .cartoon-index-note, .cartoon-index-line,
+      .comic-why-note, .comic-share-note, .comic-event-share-note, .comic-session-attrib,
+      .cartoon-spread-line, .comic-sources p, .comic-workshop-note,
+      .comic-session-facts dt, .comic-anthology-facts dt, .comic-anthology-status,
+      .comic-anthology-credit, .comic-session-theme, .comic-cover-words-credit,
+      .comic-source-summary, .comic-artwork-unavailable p) {
+  color: rgb(var(--cartoon-paper) / .74) !important;
+}
+#root .climate-record .record-pages .cartoon-room
+  :is(.comic-opening-line, .comic-catalogue-line, .comic-why-list li, .comic-session-facts dd,
+      .comic-anthology-facts dd, .cartoon-own-words, .cartoon-index-name) {
+  color: rgb(var(--cartoon-paper)) !important;
+}
+/* A drawing's own caption is on paper, so it keeps black type. */
+#root .climate-record .record-pages .cartoon-room .cartoon-caption :is(p, h3, a, span),
+#root .climate-record .record-pages .cartoon-room .comic-catalogue-band :is(p, a, span),
+#root .climate-record .record-pages .cartoon-room .comic-part :is(span, a) {
+  color: rgb(var(--record-ink)) !important;
+}
+#root .climate-record .record-pages .cartoon-room .cartoon-caption .cartoon-byline span,
+#root .climate-record .record-pages .cartoon-room .comic-part-caption {
+  color: rgb(var(--record-ink) / .72) !important;
+}
+
+/* ── THE WALL, HUNG ON INK ────────────────────────────────────────────────────── */
+#root .climate-record .record-pages .cartoon-room .cartoon-spread-line {
+  border-top-color: rgb(var(--cartoon-paper) / .22) !important;
+}
+#root .climate-record .record-pages .cartoon-room :is(.comic-wall-lead, .comic-wall-grid) {
+  background: transparent !important;
+}
+/* Every drawing still stands on its own cream plate — the artwork is not touched. */
+#root .climate-record .record-pages .cartoon-room .record-cartoon-plate figcaption {
+  background: rgb(var(--cartoon-paper)) !important;
+  border-top: 2px solid rgb(var(--record-ink)) !important;
+}
+
+/* ── THE THINGS YOU PRESS ─────────────────────────────────────────────────────── */
+#root .climate-record .record-pages .cartoon-room .comic-load-more {
+  background: rgb(var(--cartoon-sun)) !important;
+  color: rgb(var(--record-ink)) !important;
+  border-color: rgb(var(--record-ink)) !important;
+}
+#root .climate-record .record-pages .cartoon-room .comic-previous {
+  background: rgb(var(--cartoon-paper)) !important;
+  color: rgb(var(--record-ink)) !important;
+}
+#root .climate-record .record-pages .cartoon-room :is(.comic-part, .comic-drawer summary) {
+  background-color: rgb(var(--cartoon-paper));
+  color: rgb(var(--record-ink));
+}
+#root .climate-record .record-pages .cartoon-room .comic-part:hover {
+  background-color: rgb(var(--cartoon-sun)) !important;
+}
+
+/* ── THE READER THAT OPENS OVER EVERYTHING ────────────────────────────────────── */
+.cartoon-close-reading {
+  background: rgb(var(--record-ink));
+  color: rgb(var(--cartoon-paper));
+}
+.cartoon-close-reading :is(p, span, h3, a, button, figcaption) {
+  font-family: 'Comic Neue', 'Record UI', system-ui, sans-serif !important;
+}
+.cartoon-close-reading h3 {
+  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: .02em !important;
+  text-transform: none !important;
+  color: rgb(var(--cartoon-sun)) !important;
+}
+.cartoon-close-reading .cartoon-provenance :is(p, a) {
+  color: rgb(var(--cartoon-paper) / .72) !important;
+}
+.cartoon-close-top, .cartoon-close-bottom {
+  border-color: rgb(var(--cartoon-paper) / .2) !important;
+}
