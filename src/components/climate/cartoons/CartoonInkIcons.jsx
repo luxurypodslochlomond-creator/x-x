@@ -132,6 +132,33 @@ export function TinyCrowd({ size = 26, className = '' }) {
   );
 }
 
+// A starburst, the way a comic shouts a word: what a strip is for, said once and loudly.
+export function BurstMark({ size = 26, className = '' }) {
+  return (
+    <Mark size={size} className={className}>
+      <path
+        d="M20 3l3 10 10-5-7 9 11 3-11 3 7 9-10-5-3 10-3-10-10 5 7-9L3 20l11-3-7-9 10 5Z"
+        className="cmark-sun"
+        strokeWidth="1.6"
+      />
+    </Mark>
+  );
+}
+
+// A drawn arrow, for turning a page. A chevron is a piece of interface; this is a line
+// somebody pressed into the paper.
+export function InkArrow({ size = 22, className = '', dir = 'right' }) {
+  return (
+    <Mark size={size} className={className}>
+      <g transform={dir === 'left' ? 'scale(-1,1) translate(-40,0)' : undefined}>
+        <path d="M4 20h27" strokeWidth="2.6" />
+        <path d="M23 11.5l9.5 8.5-9.5 8.5" strokeWidth="2.6" />
+        <path d="M9 16.2c3 .5 5.4 2 6.6 4.2" strokeWidth="1.1" />
+      </g>
+    </Mark>
+  );
+}
+
 // A pot of ink with a nib in it. The record's own mark, for a page that is being written.
 export function InkPot({ size = 26, className = '' }) {
   return (

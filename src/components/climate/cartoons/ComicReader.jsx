@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { InkArrow } from '@/components/climate/cartoons/CartoonInkIcons';
 import ComicPanel from '@/components/climate/cartoons/ComicPanel';
 import ComicStoryOpening from '@/components/climate/cartoons/ComicStoryOpening';
 import { comicStories } from '@/components/climate/cartoons/comicStories';
@@ -37,9 +37,9 @@ export default function ComicReader() {
         <ComicPanel key={comicStories[active].id} story={comicStories[active]} index={active} />
       </div>
       <div className="comic-turner">
-        <button type="button" onClick={() => turn(-1)} className="comic-previous" aria-label="Previous cartoon"><ArrowLeft size={20} /></button>
+        <button type="button" onClick={() => turn(-1)} className="comic-previous" aria-label="Previous cartoon"><InkArrow size={22} dir="left" /></button>
         <span className="comic-position" aria-live="polite" aria-atomic="true">{String(active + 1).padStart(2, '0')} / {String(comicStories.length).padStart(2, '0')}</span>
-        <button type="button" onClick={() => turn(1)} className="comic-next">{active === comicStories.length - 1 ? 'From the top' : 'Next cartoon'}<ArrowRight size={20} /></button>
+        <button type="button" onClick={() => turn(1)} className="comic-next">{active === comicStories.length - 1 ? 'From the top' : 'Next cartoon'}<InkArrow size={22} /></button>
       </div>
       <p className="comic-art-credit record-meta">Written to be read by a child as easily as a grown-up. AI-generated illustrations.<br />Fiction, not workshop submissions or checked evidence.</p>
     </section>

@@ -13,6 +13,7 @@ import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import '@/components/climate/cartoons/cartoon-room.css';
 import '@/components/climate/cartoons/cartoon-room-layout.css';
 import '@/components/climate/cartoons/cartoon-gallery.css';
+import '@/components/climate/cartoons/comic-page.css';
 
 export default function ClimateCartoons() {
   return (

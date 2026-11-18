@@ -92,10 +92,32 @@ export const DESK_FOUNDER = {
   what: 'Janine M. H. Selendy, and the record she asked for.',
 };
 
-// The desk row: the four ways through, then her name, then Explore. Provenance sits on the
-// top row because it is the first thing a sceptical reader checks and the last thing the
-// record should hide in a sheet.
-export const DESK_NAV = [...PRIMARY_NAV, DESK_FOUNDER];
+// ── TWO ROWS ON A DESK, BECAUSE A SHEET WAS DOING A MASTHEAD'S JOB ────────────
+// Brian, 18 November: "I'm sure two rows on top nav on desktop better bro and maybe more on
+// desktop along top, as when you open explore the record there's lots going on quite complex
+// bro not coolasfuck." He is right, and the fault was arithmetic: one row of a thousand
+// pixels holds ten marks at a hundred each, so five real doors — why the record exists, how
+// an entry is checked, who asked for it, the music, the people who check it — were living
+// inside a panel that dimmed the page to open. A reader should not have to open an index to
+// find out who is accountable for what they are reading.
+//
+// So the desk carries two rows. The first is the five ways in, with Explore last; the second
+// is how the record is kept and what else is in it. Both rows are six cells, so the columns
+// line up down the masthead. The sheet keeps what a reader genuinely goes looking for — the
+// brief, the covenant, the terms — which is the one job a sheet should have.
+export const DESK_SECOND_ROW = [
+  { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
+  { label: 'Founder', to: '/ClimateFounder', what: DESK_FOUNDER.what },
+  { label: 'Music', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
+  { label: 'Roll', to: '/ClimateRoll', what: 'The people who check this record, in their own words.' },
+  { label: 'Seals', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
+];
+
+export const DESK_NAV_ROWS = [PRIMARY_NAV, DESK_SECOND_ROW];
+
+// The flat list, kept so anything that wants every desk door in one place still has it.
+export const DESK_NAV = DESK_NAV_ROWS.flat();
 
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.

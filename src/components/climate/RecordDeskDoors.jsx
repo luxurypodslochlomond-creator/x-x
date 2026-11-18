@@ -1,61 +1,62 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { DESK_NAV } from '@/components/climate/recordFooterLinks';
+import { DESK_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import '@/components/climate/record-navigator.css';
 
-// ── THE DESK GETS THE WHOLE WAY THROUGH, AND THE PHONE KEEPS OURS ───────────────
-// The masthead carried six marks at every width, which on a handset is arithmetic and on a
-// desk is a waste: a thousand-pixel header showing half a row, with the three doors that
-// carry the record's credibility — why it exists, how an entry is checked, what has been
-// corrected — hidden inside a sheet that dimmed the page to open.
+// ── TWO ROWS ON A DESK ──────────────────────────────────────────────────────────
+// Below 1024px this draws nothing: the phone keeps its one row of six, unchanged. At desk
+// width it draws two rows of six equal cells, so the columns line up down the masthead —
+// the five ways in with Explore last, then how the record is kept and what else is in it.
 //
-// So the row is now two rows that never meet: below 1024px it is the six the phone has
-// always had, unchanged, and at 1024px and wider it is ten, with the mark that opens
-// everything else standing last. Same drawings, same ink, same red only on the door you are
-// standing in, equal cells so nothing shifts as a tongue changes or a caption grows.
-//
-// Ten is the limit, not a taste: across a thousand pixels it is a hundred each, and a
-// hundred is where this row stops being generous and starts being crowded. The tenth is her
-// name — the record says who asked for it, at the end of the row and above the index, because
-// provenance is the first thing a sceptical reader checks and the last thing the record should
-// shout. Everything past it is a door a reader goes looking for rather than one they arrive
-// with, and it is in the sheet — which is the one job the sheet has.
+// The marks are smaller than the single row's forty because there are two of them now and
+// a header that eats a desk's glass is the same fault as one that eats a phone's. Row one
+// is the row a reader arrives with, so it is the bigger of the two.
 const CELL = 'flex-1 basis-0 min-w-0 !min-h-0 !py-1';
 
 export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
 
   return (
-    <nav aria-label="The record's doors" className="rec-mast-doors hidden w-full items-stretch gap-x-1 lg:flex">
-      {DESK_NAV.map(({ label, to, what }) => (
-        <RecordNavDoor
-          key={to}
-          to={to}
-          label={label}
-          what={what}
-          size={40}
-          active={pathname === to}
-          className={CELL}
-        />
-      ))}
+    <nav aria-label="The record's doors" className="rec-mast-doors hidden w-full flex-col lg:flex">
+      {DESK_NAV_ROWS.map((row, rowIndex) => {
+        return (
+          <div
+            key={rowIndex}
+            className={`flex w-full items-stretch gap-x-1 ${rowIndex === 0 ? '' : 'rec-mast-row-2 mt-0.5 border-t border-record-ink/15 pt-1'}`}
+          >
+            {row.map(({ label, to, what }) => (
+              <RecordNavDoor
+                key={to}
+                to={to}
+                label={label}
+                what={what}
+                size={rowIndex === 0 ? 34 : 26}
+                active={pathname === to}
+                className={CELL}
+              />
+            ))}
 
-      {/* The same mark, in the same place, meaning the same thing as on the phone: the rest
-          of the record, on one screen. It is drawn as a door and not as a hamburger because
-          the record has called its way through doors since it was built. */}
-      <RecordNavDoor
-        to="/ClimateGuide"
-        label="Explore"
-        what="Explore the record’s sections without leaving this page."
-        size={40}
-        asButton
-        onClick={onOpenContents}
-        expanded={contentsOpen}
-        controls="record-desktop-menu"
-        popup={false}
-        active={contentsOpen}
-        className={CELL}
-      />
+            {/* The index of everything else, at the end of the top row — where a reader
+                looks once the six ways in have not answered them. */}
+            {rowIndex === 0 && (
+              <RecordNavDoor
+                to="/ClimateGuide"
+                label="Explore"
+                what="The rest of the record: the brief, the covenant, the terms and every other door."
+                size={34}
+                asButton
+                onClick={onOpenContents}
+                expanded={contentsOpen}
+                controls="record-desktop-menu"
+                popup={false}
+                active={contentsOpen}
+                className={CELL}
+              />
+            )}
+          </div>
+        );
+      })}
     </nav>
   );
 }

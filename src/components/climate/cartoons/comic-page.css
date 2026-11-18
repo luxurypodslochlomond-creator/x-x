@@ -1,0 +1,285 @@
+/* ── A COMIC, NOT A GALLERY THAT HAPPENS TO HAVE DRAWINGS IN IT ─────────────────
+   Brian, 18 November: "the cartoons page still doesn't feel like proper comic on desktop
+   or mobile … feels a bit cuddle class … do we need more coolasfuck custom so we can have
+   our own id?"
+
+   He was right, and the cause was a stylesheet. The strip had been flattened into an
+   editorial gallery — no frame, no panel number, no chip, no shadow, one hairline round
+   the turner — until the only comic thing left on the page was the balloon. The drawings
+   were never the problem. The page had stopped being a comic.
+
+   So the furniture comes back, and it comes back harder than it was, because the answer to
+   "past or future" is both. The drawing is printed: ink, a dot field, a gutter, a stamped
+   number, a caption box. The page around it is current: big type, flat colour, sharp
+   corners, nothing rounded and nothing soft. That is the whole identity of this room — the
+   hand of a 1970s cartoon sheet, printed on today's paper.
+
+   One rule for every line below: this is all about the paper the drawing is pasted on.
+   Not one pixel of anybody's artwork is cropped, tinted, filtered or reframed.
+
+   Written against `.record-pages .cartoon-room` on purpose, so it beats the gallery sheet
+   whichever order the two files arrive in. */
+
+/* ── THE TITLE IS A BLOCK, PRINTED ──────────────────────────────────────────────
+   The masthead's name sits on its own slab of sun with a hard shadow under it, the way a
+   comic's own logotype does. It was a line of type with a yellow rule behind it, which is
+   a magazine's answer to the same problem. */
+.record-pages .cartoon-room .comic-title {
+  display: inline-block;
+  padding: .03em .14em .09em;
+  background: rgb(var(--cartoon-sun));
+  box-shadow: 7px 7px 0 rgb(var(--record-ink));
+  text-transform: uppercase !important;
+}
+
+/* ── THE PANEL'S HEADING: the number stamped on, the name set heavy ───────────── */
+.record-pages .cartoon-room .comic-panel-heading {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-bottom: .5rem;
+  padding-bottom: .45rem;
+  border-bottom: 3px solid rgb(var(--record-ink));
+}
+.record-pages .cartoon-room .comic-number {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  min-width: 2.05rem;
+  height: 2.05rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  background: rgb(var(--cartoon-sun));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .82rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  transform: rotate(-5deg);
+}
+.record-pages .cartoon-room .comic-panel-heading h2 {
+  flex: 1;
+  min-width: 0;
+  font-size: clamp(1.3rem, 5.6vw, 2rem);
+  line-height: .98 !important;
+  letter-spacing: -.035em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── THE GESTURE, AS A STAMP ───────────────────────────────────────────────────
+   Which of Janine's smallest gestures the strip answers. It was set as a plain line of
+   small caps, which read as a footnote; a comic states that kind of thing in a box. */
+.record-pages .cartoon-room .comic-gesture {
+  display: inline-block;
+  margin: 0 0 .6rem;
+  padding: .32rem .55rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  border-radius: 0;
+  background: rgb(var(--cartoon-mint));
+  font-size: .62rem;
+  font-weight: 900;
+  text-transform: uppercase !important;
+  letter-spacing: .09em;
+  transform: rotate(-1.4deg);
+}
+
+/* ── THE PAGE THE PANEL IS PASTED ON ───────────────────────────────────────────
+   A dot field, printed, and the panel sits on top of it — so the dots are only ever seen
+   in the gutter, which is the whole job of a gutter. This is the one change that does
+   most of the work: a drawing inside a frame on a dotted page is a comic; the same
+   drawing on white is an illustration in an article. */
+.record-pages .cartoon-room .comic-single-reader {
+  margin-top: .9rem;
+  padding: .85rem .85rem 1rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  background-color: rgb(var(--cartoon-paper));
+  background-image: radial-gradient(rgb(var(--record-ink) / .17) 1px, transparent 1.15px);
+  background-size: 8px 8px;
+  box-shadow: 8px 8px 0 rgb(var(--record-ink));
+}
+
+/* ── THE PANEL, AND THE TWO VOICES IN IT ───────────────────────────────────────
+   The bird asks; the stone answers. The question is a balloon over the drawing, the reply
+   is a caption box in the panel's own foot — the oldest two-beat strip there is. Both are
+   set heavier than before: thick ink, hard shadow, and lettering big enough to read at
+   arm's length on a phone at a workshop. */
+.record-pages .cartoon-room .comic-frame {
+  border: 3px solid rgb(var(--record-ink));
+  border-radius: 0;
+  box-shadow: none;
+  overflow: hidden;
+  background: rgb(var(--cartoon-paper));
+}
+.record-pages .cartoon-room .comic-speech {
+  padding: .6rem .85rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  border-radius: 1.05rem 1.3rem 1rem 1.2rem;
+  background: rgb(var(--cartoon-paper));
+  font-size: clamp(.98rem, 4.4vw, 1.3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  transform: rotate(-1.1deg);
+  box-shadow: 3px 3px 0 rgb(var(--record-ink));
+}
+.record-pages .cartoon-room .comic-speech::after {
+  left: 22%;
+  bottom: -.7rem;
+  width: .8rem;
+  height: .85rem;
+  border-right: 2.5px solid rgb(var(--record-ink));
+  border-bottom: 2.5px solid rgb(var(--record-ink));
+}
+.record-pages .cartoon-room .comic-ending {
+  border-top: 3px solid rgb(var(--record-ink));
+  padding: .9rem 1rem 1rem;
+}
+.record-pages .cartoon-room .comic-ending::before {
+  top: -.62rem;
+  width: 1rem;
+  height: 1rem;
+  border-top: 3px solid rgb(var(--record-ink));
+  border-left: 3px solid rgb(var(--record-ink));
+}
+.record-pages .cartoon-room .comic-reply {
+  font-size: clamp(1.05rem, 4.9vw, 1.55rem);
+  line-height: 1.15;
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+
+/* ── WHAT THE STRIP IS FOR, UNDER A STARBURST ─────────────────────────────────── */
+.record-pages .cartoon-room .comic-theme {
+  display: flex;
+  align-items: flex-start;
+  gap: .45rem;
+  margin: .8rem .05rem 0;
+  font-size: .82rem;
+  line-height: 1.35;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: rgb(var(--record-ink));
+}
+.record-pages .cartoon-room .comic-theme > span { flex: 1; min-width: 0; }
+.record-pages .cartoon-room .comic-theme > svg { flex: none; margin-top: .12rem; }
+
+/* ── THE GUTTER COSTS THE DRAWING NOTHING ──────────────────────────────────────
+   A phone's glass is the whole width of the comic, so the paper round the panel is bought
+   back from the column's own margin rather than taken out of the picture. The drawing
+   stays the widest thing on the page; only the dots and the ink are new. */
+@media (max-width: 639px) {
+  .record-pages .cartoon-room .comic-single-reader {
+    padding: .6rem .6rem .75rem;
+    margin-inline: -.2rem;
+    box-shadow: 6px 6px 0 rgb(var(--record-ink));
+  }
+}
+
+/* ── THE TURNER, AS THE COMIC'S OWN CONTROLS ───────────────────────────────────
+   Big ink buttons that sit down when pressed, a stamped position, and a drawn arrow
+   rather than a generic chevron. */
+.record-pages .cartoon-room .comic-turner {
+  gap: .6rem;
+  padding: .9rem .05rem 0;
+}
+.record-pages .cartoon-room .comic-turner button {
+  min-height: 3.15rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  border-radius: 0;
+  box-shadow: 4px 4px 0 rgb(var(--record-ink));
+  font-size: .84rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+.record-pages .cartoon-room .comic-previous { background: rgb(var(--cartoon-paper)); }
+.record-pages .cartoon-room .comic-next { background: rgb(var(--cartoon-sun)); }
+.record-pages .cartoon-room .comic-turner button:active {
+  transform: translate(3px, 3px);
+  box-shadow: none;
+}
+.record-pages .cartoon-room .comic-position {
+  padding: .35rem .45rem;
+  border: 2.5px solid rgb(var(--record-ink));
+  background: rgb(var(--cartoon-paper));
+  font-weight: 900;
+}
+
+/* ── A DESK READS IT AS A PAGE, NOT AS A PHONE COLUMN ───────────────────────────
+   On a wide glass the strip was a forty-six-rem column in the middle of a thousand
+   pixels of nothing, which is what made it feel unfinished on a desk rather than what
+   made it feel like a comic. It is a page now: the panel takes the left of the spread,
+   and the other six strips stand down the right as the room's contents — small framed
+   thumbnails with their names, the way a comic prints what is inside it. */
+@media (min-width: 1024px) {
+  .record-pages .cartoon-room .comic-reader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 16rem;
+    column-gap: 2.75rem;
+    align-items: start;
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-fiction-head { grid-column: 1 / -1; }
+  .record-pages .cartoon-room .comic-reader > .comic-single-reader {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: none;
+    margin-inline: 0;
+    margin-top: 1.1rem;
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-story-reel {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: .2rem;
+    margin-top: 1.1rem;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    border-top: 3px solid rgb(var(--record-ink));
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-story-reel button {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    width: 100%;
+    max-width: none;
+    flex: none;
+    padding: .45rem 0;
+    border-bottom: 2px solid rgb(var(--record-ink) / .16);
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-story-reel button[aria-current] {
+    border-color: rgb(var(--record-red));
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-story-reel img {
+    width: 3.1rem;
+    height: 3.1rem;
+    flex: none;
+    border: 2px solid rgb(var(--record-ink));
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-story-reel button[aria-current] img {
+    border-color: rgb(var(--record-red));
+  }
+  .record-pages .cartoon-room .comic-reader > .cartoon-story-reel span {
+    margin-top: 0;
+    font-size: .72rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .record-pages .cartoon-room .comic-reader > .comic-turner {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: none;
+    margin-inline: 0;
+  }
+  .record-pages .cartoon-room .comic-reader > .comic-art-credit {
+    grid-column: 1 / -1;
+    max-width: none;
+    margin-inline: 0;
+  }
+}
+
+/* A printed comic does not carry its own controls onto paper. */
+@media print {
+  .record-pages .cartoon-room .comic-single-reader { box-shadow: none; background-image: none; }
+  .record-pages .cartoon-room .comic-turner { display: none; }
+}

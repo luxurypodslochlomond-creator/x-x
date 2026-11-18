@@ -485,6 +485,17 @@
     letter-spacing: .18em;
   }
   .rec-mast-doors .rec-art-drawing svg { shape-rendering: geometricPrecision; }
+  /* ── THE SECOND ROW IS THE QUIETER OF THE TWO ────────────────────────────────
+     Two rows of doors is what a desk asked for, but the header must not become the page.
+     The row a reader arrives with keeps its wide tracking; the row that says how the record
+     is kept is set smaller and tighter, so it reads as the record's own account of itself
+     rather than as six more destinations competing with the five above it. */
+  .rec-mast-row-2 .rec-art-caption {
+    font-size: 10px;
+    line-height: 1.15;
+    letter-spacing: .1em;
+  }
+  .rec-mast-row-2 .rec-art-door { padding-block: .1rem; }
   /* Short, and short-travelled. Three hundred milliseconds of a large paper panel moving
      over a page that is still being scrolled is what read as the judder; a hundred and
      eighty over six pixels reads as the sheet being put down. Nothing scales — a scale

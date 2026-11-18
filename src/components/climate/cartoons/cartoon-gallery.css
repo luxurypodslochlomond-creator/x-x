@@ -68,12 +68,10 @@
 .cartoon-story-reel button[aria-current] { border-color: rgb(var(--record-red)); }
 .cartoon-story-reel img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; display: block; }
 .cartoon-story-reel span { display: block; margin-top: .4rem; font-size: .69rem; line-height: 1.4; }
+/* The strip's furniture — frame, panel number, gesture stamp, turner — used to be
+   flattened here into a gallery's hairlines, which is what stopped the page reading as a
+   comic at all. It is drawn again, deliberately, in comic-page.css. */
 .cartoon-room .comic-panel { padding-inline: 0; }
-.cartoon-room .comic-frame { border: 0; border-radius: 0; box-shadow: none; }
-.cartoon-room .comic-number, .cartoon-room .comic-gesture { border: 0; background: none; transform: none; border-radius: 0; }
-.cartoon-room .comic-gesture { padding: .3rem 0; font-weight: 400; text-transform: none; letter-spacing: 0; }
-.cartoon-room .comic-turner button { border: 1px solid rgb(var(--record-ink) / .35); border-radius: 0; box-shadow: none; }
-.cartoon-room .comic-next { background: rgb(var(--cartoon-sun)); }
 .cartoon-room .comic-art-credit { font-size: .72rem; }
 /* Context is still here, after the work, rather than between the reader and it. */
 .cartoon-room-notes { margin-top: 3.5rem; border-top: 2px solid rgb(var(--record-ink)); }
