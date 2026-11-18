@@ -1,6 +1,7 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ComicMasthead from '@/components/climate/cartoons/ComicMasthead';
+import ComicField from '@/components/climate/cartoons/ComicField';
 import CartoonOpening from '@/components/climate/cartoons/CartoonOpening';
 import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
@@ -47,6 +48,8 @@ export default function ClimateCartoons() {
           artwork behind the same ink, from one place. Change the cover in cartoonEvent.js
           and every plate in the room changes with it. */}
       <div className="cartoon-room-plate" style={{ '--comic-cover-layer': `url('${CARTOON_COVER}')` }}>
+      {/* The room stands on a sky that is drawn, not downloaded. See ComicField. */}
+      <ComicField />
       <ComicMasthead />
       <ComicReader />
       <div className="comic-event-opening">

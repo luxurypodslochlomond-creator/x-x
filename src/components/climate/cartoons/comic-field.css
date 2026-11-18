@@ -1,0 +1,175 @@
+/* ── THE LIVING PLATE ──────────────────────────────────────────────────────────
+   Not a photograph of space and not a picture file: a comic cosmos the browser
+   draws on the glass every time the room is opened. Two plates deliberately out
+   of register the way a screen print goes wrong on purpose, ink meridians ruled
+   by hand, a halftone screen over the whole sheet, aurora ribbons, a sunrise on
+   the limb, the lights of the night side, and a press that passes once every
+   half minute. Crop marks and a colour bar sit in the corners, because this is a
+   printed sheet and a printed sheet says so.
+
+   Every animation below touches transform or opacity only, so the compositor does
+   the work and not one word on the page is repainted for it. Nothing is fetched,
+   nothing is stored, and nothing about the reader leaves the device. */
+
+#root .record-cartoon-field .cartoon-room-plate {
+  position: relative;
+  z-index: 0;
+}
+
+.comic-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 96% at 66% 82%, rgba(255, 212, 71, 0.22), transparent 60%),
+    radial-gradient(86% 72% at 14% 6%, rgba(0, 200, 224, 0.18), transparent 62%),
+    linear-gradient(180deg, #0a0912 0%, #0b0a16 46%, #130d1c 100%);
+  --field-x: 0;
+  --field-y: 0;
+}
+
+.comic-field > svg,
+.comic-field > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── THE SCREEN ────────────────────────────────────────────────────────────────
+   A halftone dot field, turned slowly so the sheet never looks printed twice the
+   same. Oversized, so its corners never show. */
+.comic-field__dots {
+  inset: -30% !important;
+  width: 160% !important;
+  height: 160% !important;
+  background-image:
+    radial-gradient(rgba(255, 248, 233, 0.10) 1px, transparent 1.35px),
+    radial-gradient(rgba(0, 229, 255, 0.09) 1px, transparent 1.35px);
+  background-size: 9px 9px, 13px 13px;
+  background-position: 0 0, 4px 5px;
+  animation: cf-turn 240s linear infinite;
+  will-change: transform;
+}
+
+/* ── DEPTH, BY A HAIR ──────────────────────────────────────────────────────────
+   Three planes move at three speeds against the pointer. Enough to feel like a
+   window; never enough to feel like a ride. */
+.comic-field__stars {
+  transform: translate3d(calc(var(--field-x) * -6px), calc(var(--field-y) * -6px), 0);
+}
+.comic-field__aurora {
+  transform: translate3d(calc(var(--field-x) * -14px), calc(var(--field-y) * -10px), 0);
+}
+.comic-field__earth {
+  transform: translate3d(calc(var(--field-x) * -22px), calc(var(--field-y) * -14px), 0);
+}
+
+.comic-field__twinkle { transform-box: view-box; }
+.comic-field__twinkle--slow { animation: cf-twinkle 9s ease-in-out infinite; }
+.comic-field__twinkle--fast { animation: cf-twinkle 5.5s ease-in-out infinite 1.4s; }
+
+.comic-field__ribbon {
+  transform-box: view-box;
+  transform-origin: center;
+}
+.comic-field__ribbon--one { animation: cf-breathe 17s ease-in-out infinite; }
+.comic-field__ribbon--two { animation: cf-breathe 23s ease-in-out infinite 2.5s; }
+.comic-field__ribbon--three { animation: cf-breathe 29s ease-in-out infinite 6s; }
+
+.comic-field__clouds {
+  transform-box: view-box;
+  transform-origin: center;
+  animation: cf-drift 74s ease-in-out infinite alternate;
+}
+
+.comic-field__lights {
+  transform-box: view-box;
+  animation: cf-twinkle 7s ease-in-out infinite 0.6s;
+}
+
+/* ── THE PRESS ─────────────────────────────────────────────────────────────────
+   One soft band of light travelling down the sheet, the way a press passes a
+   plate. Slow enough that a reader only ever catches it mid-journey. */
+.comic-field__press {
+  top: -45% !important;
+  height: 45% !important;
+  inset-inline: 0;
+  width: auto !important;
+  background: linear-gradient(180deg, transparent, rgba(255, 248, 233, 0.055), transparent);
+  animation: cf-press 26s linear infinite;
+}
+
+/* ── A PROOF SHEET KNOWS IT IS A PROOF SHEET ───────────────────────────────────
+   Crop marks at the four corners and a four-colour bar at the foot: the small
+   honest furniture of something made to be printed. Barely there, and there. */
+.comic-field__proof {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.comic-field__crop {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 0 solid rgba(255, 248, 233, 0.22);
+}
+.comic-field__crop--tl { top: 14px; left: 14px; border-top-width: 1px; border-left-width: 1px; }
+.comic-field__crop--tr { top: 14px; right: 14px; border-top-width: 1px; border-right-width: 1px; }
+.comic-field__crop--bl { bottom: 14px; left: 14px; border-bottom-width: 1px; border-left-width: 1px; }
+.comic-field__crop--br { bottom: 14px; right: 14px; border-bottom-width: 1px; border-right-width: 1px; }
+.comic-field__bar {
+  position: absolute;
+  right: 14px;
+  bottom: 38px;
+  display: flex;
+  gap: 2px;
+  opacity: 0.4;
+}
+.comic-field__bar i { display: block; width: 8px; height: 8px; }
+.comic-field__bar i:nth-child(1) { background: #00e5ff; }
+.comic-field__bar i:nth-child(2) { background: #ff2d6f; }
+.comic-field__bar i:nth-child(3) { background: #ffd447; }
+.comic-field__bar i:nth-child(4) { background: #0a0912; box-shadow: inset 0 0 0 1px rgba(255, 248, 233, 0.35); }
+
+@keyframes cf-turn {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes cf-twinkle {
+  0%, 100% { opacity: 0.42; }
+  50% { opacity: 1; }
+}
+@keyframes cf-breathe {
+  0%, 100% { opacity: 0.34; transform: translateY(4px); }
+  50% { opacity: 0.85; transform: translateY(-6px); }
+}
+@keyframes cf-drift {
+  from { transform: translateX(-26px); }
+  to { transform: translateX(26px); }
+}
+@keyframes cf-press {
+  from { transform: translateY(0); }
+  to { transform: translateY(330%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comic-field__dots,
+  .comic-field__twinkle,
+  .comic-field__ribbon,
+  .comic-field__clouds,
+  .comic-field__lights,
+  .comic-field__press {
+    animation: none;
+  }
+  .comic-field__stars,
+  .comic-field__aurora,
+  .comic-field__earth { transform: none; }
+}
+
+@media print {
+  .comic-field { display: none; }
+}

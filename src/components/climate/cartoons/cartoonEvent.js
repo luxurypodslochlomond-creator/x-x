@@ -7,8 +7,6 @@
 // The cover is the file Janine sent, stored publicly so it opens anywhere without a
 // sign-in: it is CartoonAFRICA's picture, printed whole, never cropped, tinted or redrawn.
 export const CARTOON_COVER = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/04b7522a8_caib-2026-catalogue-cover.jpeg';
-// House background only. The artists’ covers and drawings are never altered.
-export const CARTOON_GROUND = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/51905b9d5_generated_image.png';
 
 export const CARTOON_EVENT = {
   biennial: 'The 8th CartoonAFRICA International Biennial (CAIB) 2026',
