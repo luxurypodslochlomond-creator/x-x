@@ -1,15 +1,39 @@
-/* On phones, the painting is the continuous ground. Only reading blocks carry
-   paper: never an entire chapter, drawing wall, or opening. Desktop is unchanged. */
+/* ── A PHONE SEES THE PAINTING ──────────────────────────────────────────────────
+   The last pass papered every small block on the glass, so a phone became a stack of
+   cream cards and the painting disappeared behind them. That is the opposite of the
+   room's idea. On a handset the painting now runs edge to edge, each chapter is ONE
+   sheet lying on it, the gaps between sheets are the painting, and the two pictures
+   that matter — the catalogue cover and the lead drawing — break out of their sheet
+   and run to the edge of the glass. */
 @media screen and (max-width: 639px) {
-  #root .record-cartoon-field .press-room-inner > * {
+  /* Full bleed: no paper margin, no book, just the ground. */
+  #root .record-cartoon-field .record-book {
+    margin-inline: 0;
     background: transparent;
     box-shadow: none;
-    border-top: 0;
-    padding-inline: 0;
   }
+  /* The shared shell laid a solid paper sheet under the whole room. That sheet — not the
+     chapter sheets — is what was hiding the painting on a phone. */
+  #root .record-cartoon-field .press-room .record-shell-body,
+  #root .record-cartoon-field .press-room .record-shell-content {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+  #root .record-cartoon-field .press-room-inner { padding: 0 .8rem 3.25rem; }
 
-  /* Protect words locally, without dimming or blurring the painting itself.
-     The drawing images and the close-reading dialog are deliberately excluded. */
+  /* One chapter, one sheet on the painting. */
+  #root .record-cartoon-field .press-room-inner > * {
+    position: relative;
+    background: rgb(var(--record-paper));
+    padding: 1.15rem 1rem;
+    margin-bottom: 1.6rem;
+    box-shadow: 0 20px 44px -32px rgb(var(--record-ink));
+  }
+  #root .record-cartoon-field .press-room-inner > *:first-child { margin-top: .8rem; }
+  #root .record-cartoon-field .press-room-inner > *:last-child { margin-bottom: 0; }
+
+  /* Inside a sheet the words need no second paper. */
   #root .press-room :is(
     .press-opening-words > *,
     .comic-catalogue-band,
@@ -46,34 +70,42 @@
     .comic-drawer,
     .comic-sources > *
   ) {
-    background: rgb(var(--record-paper) / .96);
-    padding: .85rem 1rem;
+    background: none;
+    padding: 0;
     max-width: 100%;
     box-sizing: border-box;
   }
 
-  /* Let the painting surround short lines instead of stretching their paper
-     across the glass. Longer paragraphs retain the existing reading width. */
-  #root .press-room :is(
-    .press-opening-words > *,
-    .comic-why > .comic-section-title,
-    .comic-gesture,
-    .comic-speech,
-    .comic-theme,
-    .comic-tap-hint,
-    .cartoon-world > .press-eyebrow,
-    .cartoon-world-title,
-    .comic-workshop > .comic-section-title,
-    .comic-workshop-note,
-    .comic-sources > *
-  ) { width: fit-content; }
-
+  /* The room's name is set as a title, not as a tracked-out label. */
+  #root .press-room .press-title,
+  #root .press-room .press-wall-title,
+  #root .press-room .comic-section-title {
+    font-size: clamp(2.6rem, 12vw, 3.5rem);
+    font-weight: 700 !important;
+    line-height: .96 !important;
+    letter-spacing: -.045em !important;
+    text-transform: none;
+    overflow-wrap: normal;
+  }
+  #root .press-room .press-standfirst { font-size: 1.1rem; line-height: 1.3; }
   #root .press-room .press-scope { font-size: 1rem; }
   #root .press-room .press-contents { gap: .65rem 1.35rem; }
+
+  /* TWO BREAKS. The cover and the lead drawing leave their sheet and run to the glass,
+     so the painting, the book and the drawings are what a phone sees first. */
+  #root .press-room .press-opening-cover { margin-inline: -1.8rem; }
+  #root .press-room .press-opening-cover .comic-catalogue { margin: 0; }
+  #root .press-room .comic-catalogue > img { width: 100%; }
+  #root .press-room .comic-catalogue-band { padding: .9rem 1.8rem 0; }
+  #root .press-room .press-sheet--lead .press-sheet-art { margin: .2rem -1.8rem 0; }
+  #root .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: 74vh; }
+
+  /* The wall reads as sheets of its own, not as one long box. */
+  #root .press-room .press-sheet { border-bottom: 0; }
+  #root .press-room .press-sheet + .press-sheet { border-top: 1px solid rgb(var(--record-ink) / .16); }
   #root .press-room .comic-why-list { gap: 1rem; }
   #root .press-room .comic-why-list > li { border: 0; }
   #root .press-room .press-wall-head { border: 0; }
-  #root .press-room .press-sheet { border: 0; }
   #root .press-room .cartoon-world-names { border: 0; gap: 1rem; }
   #root .press-room .cartoon-world-name { border: 0; }
   #root .press-room .comic-sources > .comic-source-link { display: inline-flex; }
