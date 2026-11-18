@@ -11,18 +11,26 @@ import '@/components/climate/cartoons/cartoon-anthology.css';
 // re-title somebody else's book, does not shorten a credit, and does not put a name on it
 // that the editors did not put there.
 //
-// ── WHAT IS DELIBERATELY NOT HERE: THE COVER ──────────────────────────────────
-// A sample of the cover page was sent to the record on 17 November, and it is a sample —
-// the anthology is still being prepared. Printing a draft cover as though it were the
-// finished book would be the one way to do this badly: the record would be showing
-// something that is about to change, and a reader would take the draft for the final
-// article. The cover and the book go up together, on the day they are the real thing.
+// ── THE COVER, PRINTED AS THE SAMPLE IT IS ────────────────────────────────────
+// This plate first held the anthology's words and left the cover out, on the argument that
+// a draft cover shown as the finished book is a false fact. That argument was right about
+// the risk and wrong about the answer: the cover Janine sent IS the thing a visitor to this
+// room wants to see — it is the proof the book exists — and leaving it off made the largest
+// thing the room will ever hold the plainest block on the page.
 //
-// And no link, because there is nothing behind it yet. A dead download button on a page
-// about honesty is worse than no button: this plate says plainly when the book appears
-// here, and then it will.
+// So it is printed, and it is labelled. The line beside it says, in the record's own voice,
+// that this is the cover as its editors have it now and that the book is still being made.
+// A reader is told exactly what they are looking at, which is the whole difference between
+// printing a sample and passing one off.
+//
+// Still no download link, because there is nothing behind it yet: a dead button on a page
+// about honesty is worse than no button. The download appears the day the anthology does.
 
 const TITLE = 'Climate Change and the Power of Collective Actions and Creative Interventions';
+
+// The cover as supplied by CartoonAFRICA / African Press Cartoon services, stored publicly
+// so the room can show it to anyone without a sign-in.
+const COVER = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/762236277_caib-2026-catalogue-cover.png';
 
 export default function CartoonAnthology() {
   return (
@@ -33,6 +41,18 @@ export default function CartoonAnthology() {
         “…an anthology of editorial cartoons and comics journalism works by selected African
         cartoonists.”
       </p>
+
+      <figure className="comic-anthology-cover">
+        <img
+          src={COVER}
+          alt="The cover of the 8th CartoonAFRICA International Biennial 2026 catalogue: five African cartoonists at work between a living landscape and a dead one."
+          loading="lazy"
+        />
+        <figcaption>
+          The cover as its editors have it now · prepared by African Press Cartoon services,
+          2026
+        </figcaption>
+      </figure>
 
       <dl className="comic-anthology-facts">
         <div>
@@ -60,9 +80,9 @@ export default function CartoonAnthology() {
       </p>
 
       <p className="comic-anthology-status">
-        A sample of the cover page reached the record on 17 November 2026. The book is still
-        being made, so the cover is not printed here as though it were finished, and the
-        download appears on this page the day the anthology does.
+        The cover above is a sample: the book is still being made, so it may change before it
+        is printed. Nothing is offered for download yet, and the day the anthology is finished
+        it appears on this page — free, with no sign-in, for anyone anywhere.
       </p>
 
       <p className="comic-anthology-credit">

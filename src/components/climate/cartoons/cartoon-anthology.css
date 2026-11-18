@@ -52,6 +52,26 @@
   max-inline-size: none;
 }
 
+/* ── THE COVER OF SOMEBODY ELSE'S BOOK ──────────────────────────────────────────
+   On a handset the cover runs to both edges of the glass, because that is how a phone shows
+   a cover and because a 4.4rem-wide thumbnail of a catalogue proves nothing. The caption
+   under it is printed on the sun band, in the machine's small face, so the reader is told in
+   one line what they are looking at: the cover as its editors have it now. On a desk there
+   is room to mount it — the same ink and offset shadow every other object in this room wears. */
+.comic-anthology-cover { margin: .2rem -1.4rem .9rem; }
+.comic-anthology-cover img { display: block; width: 100%; height: auto; }
+.comic-anthology-cover figcaption {
+  padding: .5rem 1rem .55rem;
+  background: rgb(var(--cartoon-sun));
+  border-top: 2px solid rgb(var(--record-ink));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .56rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
 .comic-anthology-facts {
   display: grid;
   gap: .45rem;
@@ -118,4 +138,15 @@
   line-height: 1.45;
   color: rgb(var(--record-muted));
   max-inline-size: none;
+}
+
+@media (min-width: 1024px) {
+  .comic-anthology-cover {
+    margin: .4rem 0 1.1rem;
+    border: 3px solid rgb(var(--record-ink));
+    border-radius: 3px 9px 4px 7px;
+    box-shadow: 4px 5px 0 rgb(var(--record-ink));
+    overflow: hidden;
+  }
+  .comic-anthology-cover figcaption { padding: .55rem .85rem; }
 }
