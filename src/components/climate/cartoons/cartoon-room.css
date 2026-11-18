@@ -60,9 +60,19 @@
    the poster, nothing is scaled, tinted or re-encoded, and the file on the server is
    untouched — the moment Francis sends a cover with no black band, this rule removes
    nothing but the nothing. The percentage is measured, not guessed: 394 / 1179 = 33.42%,
-   and a top margin resolves against the width, so it holds at every size. */
+   and a top margin resolves against the width, so it holds at every size.
+
+   AND THERE IS ONE AT THE FOOT TOO — that is why it still did not sit right. Brian, again
+   that evening: "the image still not sitting right". He was looking at the same thing from
+   the other end: the poster had come up flush under the nav, and then sat on a black strip
+   of its own before the yellow band, so the cover looked like it was floating rather than
+   lying on the page. Measured the same way: content runs to row 2133, and rows 2134 to 2555
+   are the same flat black (mean 10 of 255) — 422 rows, 35.79% of the width. Both bands are
+   padding, not artwork, so both come off the display and the poster itself is what the room
+   shows: 1179 x 1740, edge to edge, straight into the band beneath it. The file is still
+   untouched, and a cover sent without padding loses nothing at all. */
 .comic-catalogue { margin: 0 -1rem 1.3rem; overflow: hidden; }
-.comic-catalogue img { display: block; width: 100%; height: auto; margin-top: -33.42%; }
+.comic-catalogue img { display: block; width: 100%; height: auto; margin-top: -33.42%; margin-bottom: -35.79%; }
 .comic-catalogue-band { padding: .7rem 1rem .8rem; background: rgb(var(--cartoon-sun)); border-top: 3px solid rgb(var(--record-ink)); border-bottom: 3px solid rgb(var(--record-ink)); }
 .comic-catalogue-eyebrow { font-size: .6rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
 .comic-catalogue-line { margin: .35rem 0 0; font-size: .8rem; font-weight: 600; line-height: 1.45; }
