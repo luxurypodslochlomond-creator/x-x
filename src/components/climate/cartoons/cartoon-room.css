@@ -41,23 +41,21 @@
 .comic-title::before { content: ''; position: absolute; inset: 28% -4% -8%; background: rgb(var(--cartoon-sun)); z-index: -1; transform: rotate(5deg); clip-path: polygon(0 8%, 98% 0, 100% 88%, 3% 100%); }
 .comic-title-stop { display: inline-block; margin-left: .04em; color: rgb(var(--record-red)); transform: rotate(12deg); }
 .comic-tagline { margin-top: 1rem; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
-/* ── THE COVER ───────────────────────────────────────────────────────────────────
-   The room used to open on its own name printed on blank paper, and then a wall. That is
-   a blog opening. A cartoon site opens on a drawing: the newest one runs to both edges of
-   the glass, in its own shape and never cropped, and the room's name is printed under it
-   on the sun band the way a cover carries its title. The picture is the front page; the
-   name is what is written on the front page. */
-.comic-cover { margin: 0 -1rem .4rem; }
-.comic-cover-art { background: rgb(var(--record-ink)); }
-.comic-cover-art img { display: block; width: 100%; height: auto; }
-.comic-cover-plate { padding: .85rem 1rem 1rem; background: rgb(var(--cartoon-sun)); border-bottom: 3px solid rgb(var(--record-ink)); }
-.comic-cover-plate .comic-eyebrow { font-size: .7rem; color: rgb(var(--record-ink)); opacity: .72; }
-.record-pages .cartoon-room .comic-cover-plate .comic-title { margin: .3rem 0 .45rem; font-size: clamp(2.7rem, 13vw, 4.6rem); }
-/* The band is the slap now, so the title does not need a second sheet of colour behind it. */
-.comic-cover-plate .comic-title::before { display: none; }
-.comic-cover-by { font-size: .84rem; font-weight: 700; line-height: 1.4; }
-.comic-cover-by strong { font-weight: 900; }
-.comic-cover-credit { margin-top: .3rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .07em; opacity: .72; }
+/* ── THE FIRST IMAGE ON THE PAGE ─────────────────────────────────────────────────
+   The catalogue cover opens the room, edge to edge, at the full width of the glass, with
+   one band of copy under it. It is the picture a visitor from CAIB or a newsroom recognises
+   before they have read a word, and it is printed exactly as it was sent: no crop, no tint,
+   no filter, no "improvement". Somebody else's cover is not the record's to doctor.
+   The band under it is the sun colour the rest of the room uses, so the cover reads as part
+   of this room rather than as a picture pasted into it. */
+.comic-catalogue { margin: 0 -1rem 1.3rem; }
+.comic-catalogue img { display: block; width: 100%; height: auto; }
+.comic-catalogue-band { padding: .7rem 1rem .8rem; background: rgb(var(--cartoon-sun)); border-top: 3px solid rgb(var(--record-ink)); border-bottom: 3px solid rgb(var(--record-ink)); }
+.comic-catalogue-eyebrow { font-size: .6rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
+.comic-catalogue-line { margin: .35rem 0 0; font-size: .8rem; font-weight: 600; line-height: 1.45; }
+.comic-catalogue-link { display: inline-flex; align-items: center; gap: .3rem; margin-top: .5rem; font-size: .72rem; font-weight: 800; text-decoration: underline; text-underline-offset: .2em; }
+/* The plate number, in the room's own furniture: a small sun block of ink. */
+.comic-plate-index { display: inline-grid; place-items: center; flex-shrink: 0; min-width: 1.55rem; height: 1.35rem; border: 2px solid rgb(var(--record-ink)); border-radius: 2px; background: rgb(var(--cartoon-sun)); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .58rem; font-weight: 900; font-variant-numeric: tabular-nums; transform: rotate(-4deg); }
 .comic-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
 .comic-rail::-webkit-scrollbar { display: none; }
 .comic-panel { flex: 0 0 100%; min-width: 0; padding: .5rem .4rem .4rem; scroll-snap-align: start; scroll-snap-stop: always; }
@@ -175,7 +173,9 @@
   .comic-wall-lead,
   .comic-wall-grid { margin-inline: -1rem; }
   .comic-wall-lead { margin-bottom: 2rem; }
-  .comic-wall-grid { gap: 1.9rem 0; }
+  /* A tint of the room's own ink behind the wall, so the gaps between the drawings are
+     paper rather than page, and thirteen sheets read as one wall. */
+  .comic-wall-grid { gap: 1.9rem 0; background: rgb(var(--record-ink) / .055); }
   .comic-wall .comic-wall-lead .record-cartoon-plate,
   .comic-wall .comic-wall-grid .record-cartoon-plate {
     border-inline: 0;
@@ -187,10 +187,10 @@
 @media (min-width: 1024px) {
   .cartoon-room .record-shell-content { padding: .7rem 2.5rem 3rem; }
   .comic-masthead { padding-top: 1.4rem; }
-  /* On a desk there is room for the drawing to be a mounted cover rather than a bleed. */
-  .comic-cover { margin: 0; }
-  .comic-cover-art { border: 3px solid rgb(var(--record-ink)); border-bottom: 0; border-radius: 3px 9px 0 0; overflow: hidden; }
-  .comic-cover-plate { padding: 1.1rem 1.4rem 1.2rem; }
+  /* On a desk there is room for the cover to be mounted rather than bled. */
+  .comic-catalogue { margin: 0 0 1.6rem; }
+  .comic-catalogue img { border: 3px solid rgb(var(--record-ink)); border-bottom: 0; border-radius: 3px 9px 0 0; }
+  .comic-catalogue-band { padding: .8rem 1.2rem .9rem; }
   .comic-source-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media print {

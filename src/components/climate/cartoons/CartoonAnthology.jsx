@@ -28,13 +28,12 @@ import '@/components/climate/cartoons/cartoon-anthology.css';
 
 const TITLE = 'Climate Change and the Power of Collective Actions and Creative Interventions';
 
-// The cover as supplied by CartoonAFRICA / African Press Cartoon services, stored publicly
-// so the room can show it to anyone without a sign-in.
-const COVER = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/762236277_caib-2026-catalogue-cover.png';
+// The cover itself is printed at the top of the room, as the first image on the page, so it
+// is not shown twice. This plate carries the book's words, its editors and its status.
 
 export default function CartoonAnthology() {
   return (
-    <section className="comic-anthology" aria-labelledby="cartoon-anthology-title">
+    <section className="comic-anthology" id="cartoon-anthology" aria-labelledby="cartoon-anthology-title">
       <p className="comic-anthology-eyebrow">The anthology · in preparation</p>
       <h2 id="cartoon-anthology-title" className="comic-anthology-title">{TITLE}</h2>
       <p className="comic-anthology-sub">
@@ -42,17 +41,6 @@ export default function CartoonAnthology() {
         cartoonists.”
       </p>
 
-      <figure className="comic-anthology-cover">
-        <img
-          src={COVER}
-          alt="The cover of the 8th CartoonAFRICA International Biennial 2026 catalogue: five African cartoonists at work between a living landscape and a dead one."
-          loading="lazy"
-        />
-        <figcaption>
-          The cover as its editors have it now · prepared by African Press Cartoon services,
-          2026
-        </figcaption>
-      </figure>
 
       <dl className="comic-anthology-facts">
         <div>

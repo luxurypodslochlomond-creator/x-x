@@ -1,5 +1,7 @@
 import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import ComicMasthead from '@/components/climate/cartoons/ComicMasthead';
+import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import ComicReader from '@/components/climate/cartoons/ComicReader';
@@ -33,6 +35,8 @@ export default function ClimateCartoons() {
           the way to send one in. Nothing was deleted and nothing was reordered for taste:
           the pictures simply come first, because that is the whole reason anybody opens
           this room. */}
+      <CartoonCatalogueBand />
+      <ComicMasthead />
       <CartoonWall />
       <CartoonSessionBand />
       <ComicReader />

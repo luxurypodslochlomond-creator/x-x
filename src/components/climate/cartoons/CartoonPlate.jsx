@@ -14,7 +14,7 @@ import { ArrowUpRight } from 'lucide-react';
 // under a rule, so the drawing and the two things that identify it are what you see first.
 const reading = { fontFamily: 'var(--font-reading)' };
 
-export default function CartoonPlate({ cartoon, lead = false }) {
+export default function CartoonPlate({ cartoon, lead = false, index = 0 }) {
   const { image_url, title, artist_name, origin, for_line, credit, source_url } = cartoon || {};
 
   return (
@@ -37,9 +37,19 @@ export default function CartoonPlate({ cartoon, lead = false }) {
             {title}
           </p>
         )}
-        <p className={`text-[12px] leading-[1.4] text-record-muted ${title ? 'mt-1' : ''}`} style={reading}>
-          Drawn by <span className="font-bold text-record-ink">{artist_name}</span>
-          {origin ? ` · ${origin}` : ''}
+        {/* ── THE NUMBER IS WHAT MAKES IT A WALL ──────────────────────────────────
+            Thirteen drawings, each on its own sheet, with air between them, read as thirteen
+            separate pictures — Brian's word for it was "not connected". A plate number, in the
+            same sun block and ink as everything else in this room, is the thread: the eye
+            knows it is on one wall, in one order, and that the wall continues below. It counts
+            the drawing's place on the wall and says nothing about its merit — no ranking, no
+            score, and the drawings are never altered to fit it. */}
+        <p className={`flex items-baseline gap-2 text-[12px] leading-[1.4] text-record-muted ${title ? 'mt-1' : ''}`} style={reading}>
+          {index ? <span className="comic-plate-index">{String(index).padStart(2, '0')}</span> : null}
+          <span>
+            Drawn by <span className="font-bold text-record-ink">{artist_name}</span>
+            {origin ? ` · ${origin}` : ''}
+          </span>
         </p>
         {for_line && (
           <p className={`mt-2 text-record-ink ${lead ? 'text-[14.5px] leading-[1.55]' : 'text-[13.5px] leading-[1.5]'}`} style={reading}>

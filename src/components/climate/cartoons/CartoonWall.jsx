@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
-import CartoonCover from '@/components/climate/cartoons/CartoonCover';
 import CartoonPlate from '@/components/climate/cartoons/CartoonPlate';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 
@@ -30,8 +29,8 @@ export default function CartoonWall() {
           the eye start there. The newest drawing goes full width, edge to edge, with its
           name set larger — so the first thing a thumb meets on a phone is a drawing at the
           width of the phone, not a caption. */}
-      <CartoonCover cartoon={lead} />
-      {!!rest.length && <div className="comic-wall-grid mt-6 grid gap-6 lg:grid-cols-2">{rest.map((cartoon) => <CartoonPlate key={cartoon.id} cartoon={cartoon} />)}</div>}
+      {lead && <div className="comic-wall-lead"><CartoonPlate cartoon={lead} lead index={1} /></div>}
+      {!!rest.length && <div className="comic-wall-grid mt-6 grid gap-6 lg:grid-cols-2">{rest.map((cartoon, i) => <CartoonPlate key={cartoon.id} cartoon={cartoon} index={i + 2} />)}</div>}
       <p className="record-meta comic-workshop-note">The artist’s name stays, and so does their own line. A person looks before a drawing goes up.</p>
       {wall.hasNextPage && <button type="button" className="comic-load-more" disabled={wall.isFetchingNextPage} onClick={() => wall.fetchNextPage()}>{wall.isFetchingNextPage ? 'Opening more…' : 'More from the wall'}</button>}
       <CartoonsWaiting />
