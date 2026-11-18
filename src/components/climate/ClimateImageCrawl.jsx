@@ -5,9 +5,9 @@ import ClimatePhotoControls from '@/components/climate/ClimatePhotoControls';
 import ClimatePhotoViewer from '@/components/climate/ClimatePhotoViewer';
 
 // THE TOP CRAWL — Janine's credited photographs, at the record's own full width.
-// Each picture fills its whole frame, its credit sits on the picture, and the controls
-// rest on the corner. Swipe or scroll sideways for the next one; the arrows do the same
-// job with a mouse. One layout, on every screen.
+// A desk swipes the rail one picture at a time. A phone gets a sheet of four at once
+// (see record-depth.css), because four pictures side by side cost one short row instead
+// of four screens of scrolling. Every picture keeps its credit in both layouts.
 export default function ClimateImageCrawl() {
   const { photos, loading, error } = useClimatePhotos();
   const [index, setIndex] = useState(0);
@@ -27,6 +27,17 @@ export default function ClimateImageCrawl() {
         {photos.map((photo, i) => <ClimatePhotoSlide key={photo.id} photo={photo} onOpen={() => setOpenAt(i)} />)}
       </div>
       <ClimatePhotoControls variant="overlay" index={index} total={photos.length} onPrevious={() => go(-1)} onNext={() => go(1)} />
+      {/* On a phone the pictures stand as a sheet rather than one to a screen: four of
+          them at once, so the record's own photographs no longer cost a page of scrolling
+          before the entries begin. Tapping any of them, or this line, opens them all. */}
+      <button
+        type="button"
+        onClick={() => setOpenAt(0)}
+        className="record-photo-sheet-more w-full items-center justify-between gap-2 border-t-2 border-record-mark bg-record-signal px-3 py-3 text-left"
+      >
+        <span className="record-header-type text-xs text-record-ink">All {photos.length} photographs</span>
+        <span className="record-header-type text-xs text-record-mark">Open →</span>
+      </button>
       {openAt !== null && <ClimatePhotoViewer photos={photos} startIndex={openAt} onClose={() => setOpenAt(null)} />}
     </section>
   );

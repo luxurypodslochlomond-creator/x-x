@@ -50,10 +50,16 @@
   .record-page-shell[data-mobile-compact="true"] .record-shell-content { padding-block: 1rem; }
   .record-shell-content > section + section { margin-top: 2.5rem; }
   .record-reading-panel > .record-reading-column { padding-inline: 1.25rem; }
-  .record-pages .record-card-grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
-  .record-card-grid .record-entry-plate { min-height: 15rem; }
-  .record-card-grid .record-entry-copy { padding: 1.25rem; }
-  .record-card-grid .record-entry-copy h3 { font-size: 1.125rem; line-height: 1.45; }
+  /* ── TWO ACROSS ON A PHONE ───────────────────────────────────────────────────
+     This rule forced the entry grid to a single column on a phone, so every solution
+     and every crisis took a whole screen of its own: six entries meant six screens of
+     scrolling before a reader reached the groups, the actions or the foot. A record is
+     a sheet of entries, not a feed of cards. Two stand side by side again, as they do on
+     a desk, and the card gives up the padding it was holding for one wide column. */
+  .record-pages .record-card-grid { gap: .75rem; }
+  .record-card-grid .record-entry-plate { min-height: 0; }
+  .record-card-grid .record-entry-copy { padding: .75rem; }
+  .record-card-grid .record-entry-copy h3 { font-size: .9375rem; line-height: 1.45; }
   .record-home-hero > div { padding-inline: 1.25rem; }
   .record-home-hero .record-home-title-band { padding-top: 2.5rem; padding-bottom: 1.75rem; }
   .record-home-hero .record-home-title { font-size: clamp(1.75rem, 7.5vw, 2.5rem); line-height: 1.14; text-wrap: pretty; }
