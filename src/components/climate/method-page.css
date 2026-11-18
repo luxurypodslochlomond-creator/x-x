@@ -1,0 +1,26 @@
+/* ── THE METHOD, TILED RATHER THAN RIBBONED ───────────────────────────────────
+   Ten numbered rules stacked one under another made a thin column down the middle
+   of the glass, with the record's own painting sitting idle either side of it: the
+   whitest, airiest page on the whole record. Method is a list of rules, and a list
+   of rules is what a sheet of tiles is for.
+
+   On a wide screen the blocks now tile two-up. Every block is a sheet in its own
+   right, so the plates line up into a wall instead of a ribbon, and the page is
+   about half as tall. The long block still spans the full width, because the one
+   thing a tile wall must not do is squeeze a paragraph that deserves the room.
+
+   The measure inside a block is unchanged — nothing here was made wider to read,
+   only arranged better. On a phone it is exactly as it was. */
+@media (min-width: 1024px) {
+  .climate-record .record-sectioned-page.record-method-page .record-shell-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+  }
+  .climate-record .record-method-page .record-shell-content > section {
+    margin-bottom: 1.5rem;
+  }
+  .climate-record .record-method-page .record-shell-content > .record-method-wide {
+    grid-column: 1 / -1;
+  }
+}

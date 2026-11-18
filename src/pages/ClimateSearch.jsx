@@ -6,7 +6,7 @@ import RecordSearchLine from '@/components/climate/RecordSearchLine';
 import RecordSearchPrompts from '@/components/climate/RecordSearchPrompts';
 import RecordResultCard from '@/components/climate/RecordResultCard';
 import RecordSearchHelp from '@/components/climate/RecordSearchHelp';
-import BaseOnePlate from '@/components/climate/search/BaseOnePlate';
+import RecordSearchDoors from '@/components/climate/search/RecordSearchDoors';import BaseOnePlate from '@/components/climate/search/BaseOnePlate';
 import BaseOneAnswer from '@/components/climate/search/BaseOneAnswer';
 import useBaseOneAnswer from '@/components/climate/search/useBaseOneAnswer';
 import SearchAnswerLine from '@/components/climate/search/SearchAnswerLine';
@@ -161,12 +161,18 @@ export default function ClimateSearch() {
       )}
 
       {!loading && !error && !data && (
-        <div className="mt-8">
-          <p className="hidden lg:block text-[11px] lg:text-[12px] font-mono text-record-muted leading-relaxed mb-6">
-            Search what the record actually holds. Nothing is guessed and nothing is ranked for you — the record
-            shows what matches, and where it came from.
-          </p>
-          <RecordSearchHelp />
+        <div className="mt-8 grid gap-7 lg:grid-cols-2 lg:gap-12">
+          <div>
+            <p className="hidden lg:block text-[11px] lg:text-[12px] font-mono text-record-muted leading-relaxed mb-6">
+              Search what the record actually holds. Nothing is guessed and nothing is ranked for you — the record
+              shows what matches, and where it came from.
+            </p>
+            <RecordSearchHelp />
+          </div>
+          {/* Half the glass stood empty under the search line. The other doors in belong
+              here rather than nowhere: a reader who has not typed yet is shown the record
+              itself, not a blank sheet. */}
+          <RecordSearchDoors />
         </div>
       )}
     </ClimateRecordShell>

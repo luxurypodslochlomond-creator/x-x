@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import '@/components/climate/method-page.css';
 
 // How this record is made — the page that answers a panel, a journalist or a sceptic
 // without anybody having to be in the room. Written to be read cold by somebody who
@@ -11,9 +12,9 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 // the sentences around them are shorter, because a method nobody finishes reading
 // protects nobody. Nothing was cut that a sceptic could have used.
 
-function Block({ n, title, children }) {
+function Block({ n, title, children, full = false }) {
   return (
-    <section className="mb-11 border-t-2 border-record-ink pt-5 lg:mb-10">
+    <section className={`mb-11 border-t-2 border-record-ink pt-5 lg:mb-10 ${full ? 'record-method-wide' : ''}`}>
       <div className="mb-4 flex items-start gap-3">
         <span className="shrink-0 bg-record-signal px-2 py-1 font-display text-xs font-bold text-record-ink">{n}</span>
         <h2 className="font-bold uppercase leading-tight text-record-red" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(21px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>{title}</h2>
@@ -32,7 +33,8 @@ function Rule({ children }) {
 export default function ClimateMethod() {
   return (
     <ClimateRecordShell
-      className="record-sectioned-page"
+      className="record-sectioned-page record-method-page"
+      wide
       eyebrow="How this record is made"
       marker="Method · sources · who decides · corrections"
       title="How this record is made"
@@ -81,7 +83,7 @@ export default function ClimateMethod() {
         <p>Every entry is screened for spam, off-topic promotion and dangerous advice. Sourced entries go up at once; anything the screen is unsure about waits for a person. Holding every contribution for weeks would kill the thing this record exists to encourage.</p>
       </Block>
 
-      <Block n="05" title="Who decides">
+      <Block n="05" title="Who decides" full>
         <p>The screen is a machine, and it is allowed to say only one thing: clean enough to go up, or wait for a person. It never says that a claim is true, it never sets how well a claim is known, and it never signs an entry with anybody's name. Anything it is unsure of waits for a person, and that person's decision is the one that counts.</p>
         <p>Three people hold the record's keys: Janine M. H. Selendy, after whose work and Horizon International this record is made; Gillian Barbara Brown; and Brian Hughes, who built it. No custodian can add or remove another alone — it takes two of them — so that rule lives in the record rather than in a promise on a page.</p>
         <p>Keeping the record running is a second, separate job from deciding what goes on it, and the person holding it is not the founder. Anyone may write to <a href="mailto:family@uf51.love" className="font-black underline decoration-2 underline-offset-2 hover:text-[#b3261e]">family@uf51.love</a> and a person answers.</p>

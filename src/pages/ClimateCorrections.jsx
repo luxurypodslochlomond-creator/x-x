@@ -22,6 +22,7 @@ export default function ClimateCorrections() {
   return (
     <ClimateRecordShell
       className="record-sectioned-page"
+      wide
       eyebrow="Corrections, in daylight"
       marker="Every correction · newest first · nothing removed"
       title="Corrections, in daylight"
@@ -31,6 +32,9 @@ export default function ClimateCorrections() {
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
       <div className="record-reading-plate record-prose">
+      {/* Two sentences side by side rather than a narrow ribbon down the middle of a wide
+          sheet: the page had half its paper standing empty beside one column of type. */}
+      <div className="lg:grid lg:grid-cols-2 lg:gap-x-10">
       <p className="mb-5 font-mono text-[12px] leading-relaxed text-record-ink lg:text-[13px]">
         A correction is a change to something already on the record. The entry carries the note itself —
         what changed, and the date — and it appears here, printed exactly as the person who signed it
@@ -40,6 +44,7 @@ export default function ClimateCorrections() {
         Nothing is deleted to tidy this page up. An entry that turns out to be wrong keeps its place and
         gains a correction: a record with a mistake it owned is easier to check than one with a gap in it.
       </p>
+      </div>
 
       <p className="mb-9 border-l-4 border-record-red bg-record-signal/20 p-4 font-mono text-[12px] leading-relaxed text-record-ink lg:px-5 lg:text-[13px]">
         Only a signer can write a correction, and every one of them is written where you are
@@ -104,7 +109,7 @@ export default function ClimateCorrections() {
             Where the machine helps, and where it never does
           </h2>
         </div>
-        <div className="space-y-4 font-mono text-[12px] leading-relaxed text-record-ink lg:text-[13px] lg:leading-[1.75]">
+        <div className="space-y-4 font-mono text-[12px] leading-relaxed text-record-ink lg:grid lg:grid-cols-2 lg:gap-x-10 lg:gap-y-4 lg:space-y-0 lg:text-[13px] lg:leading-[1.75]">
           <p>
             The screen that reads each entry is a machine. It produces an advisory note and nothing
             else: it cannot publish an entry, cannot hold one back on its own authority, and its
