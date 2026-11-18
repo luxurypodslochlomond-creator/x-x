@@ -1,159 +1,131 @@
-/* ── THE ROOM IS A GALLERY NOW, NOT A PAGE OF BOXES ────────────────────────────
-   Brian, 18 November: "boxes look old and not our soul… needs to be like museum or art
-   gallery for cartoons but connected like fuck… not museum, old art gallery, coolasfuck
-   like modern institute or GOMA… coolasfuck without trying."
-
-   He is right, and the fault was mine. Every object in this room had been given the same
-   treatment — a three-pixel ink border, a shadow sitting down and to the right, a tilt, a
-   yellow chip. That is a scrapbook, and a scrapbook is charming once and tiring by the
-   sixth block. A modern gallery does the opposite of all of it: the wall is nearly white
-   and completely quiet, the frames are hairlines or absent, nothing is tilted, nothing has
-   a shadow, labels are small and set in one weight, and every gram of attention goes to
-   the work on the wall rather than to the furniture holding it.
-
-   So this sheet is a coat of paint, applied last: it does not redraw one pixel of anybody's
-   drawing, and it does not move anything. It takes the ink, the shadows, the tilts, the
-   chips and the yellow bands off the furniture — and leaves the drawings standing on a
-   white wall with small labels, which is what "cool without trying" actually looks like.
-   The record's warm paper still surrounds the room; the room itself is the lit wall. */
-.record-pages .cartoon-room {
-  --gallery-wall: 250 249 246;
-  --gallery-plate: 255 255 255;
-  --gallery-rule: rgb(var(--record-ink) / .16);
-  --gallery-rule-strong: rgb(var(--record-ink) / .4);
-  background: rgb(var(--gallery-wall)) !important;
+/* The drawing is the page, not a thumbnail inside gallery furniture. */
+.record-pages .cartoon-room { background: rgb(var(--record-paper)) !important; }
+.climate-record .record-pages > .cartoon-room > .record-shell-body > .record-shell-content {
+  max-width: 84rem; padding: 0 1rem 3rem; background: rgb(var(--record-paper)); box-shadow: none;
 }
-
-/* ── THE COVER'S LABEL, NOT A YELLOW BAND ───────────────────────────────────────
-   A gallery puts a small printed label beside the work: what it is, who made it, and how
-   it got here. That is exactly what was in the band — it was just wearing a poster. */
-.comic-catalogue-band {
-  background: none;
-  border-top: 1px solid var(--gallery-rule);
-  border-bottom: 0;
-  padding: .9rem 0 1rem;
+.record-pages .cartoon-room :is(h1, h2, h3) { text-transform: none !important; }
+.cartoon-room .comic-event-opening { margin-inline: -1rem; }
+.cartoon-room .comic-catalogue { border: 0; }
+.cartoon-room .comic-catalogue img { width: 100%; height: auto; border: 0; }
+.cartoon-room .comic-catalogue-band { padding: .85rem 1rem 1rem; background: rgb(var(--record-paper)); border: 0; }
+.record-pages .cartoon-room .comic-catalogue-cover-credit { font-size: .69rem; line-height: 1.5; letter-spacing: 0; text-transform: none; color: rgb(var(--record-ink)); }
+.record-pages .cartoon-room .comic-catalogue-line { font-size: .78rem; line-height: 1.5; font-weight: 400; }
+.cartoon-room .comic-catalogue-eyebrow { margin-top: .5rem; }
+.cartoon-room .comic-catalogue-link { font-size: .75rem; font-weight: 700; }
+.cartoon-room .comic-event-context { padding: 1.8rem 1rem 1.2rem; border: 0; }
+.cartoon-room .comic-masthead { padding-bottom: .75rem; }
+.record-pages .cartoon-room .comic-title { margin: .5rem 0; font-size: clamp(3.15rem, 11vw, 6rem); line-height: .9 !important; letter-spacing: -.065em !important; text-shadow: none; transform: none; }
+.cartoon-room .comic-title::before { content: none; }
+.cartoon-room .comic-title-stop { color: rgb(var(--record-mark)); transform: none; }
+.cartoon-room .comic-tagline { font-size: .64rem; letter-spacing: .13em; }
+.cartoon-room .comic-opening { padding: .8rem 0 0; margin: 0; border: 0; }
+.record-pages .cartoon-room .comic-opening-line { font-size: 1.02rem !important; font-weight: 400; line-height: 1.55 !important; max-inline-size: 43ch; }
+.record-pages .cartoon-room .comic-opening-sub { margin-top: .8rem; font-size: .76rem; line-height: 1.55; color: rgb(var(--record-muted)); }
+/* An index made of the work itself, not stock symbols in empty boxes. */
+.cartoon-reading-index { margin-top: 1.65rem; }
+.cartoon-index-line { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: .7rem; border-bottom: 1px solid rgb(var(--record-ink) / .25); font-size: .64rem; }
+.cartoon-index-line > span:last-child { color: rgb(var(--record-muted)); }
+.cartoon-index-reel { display: flex; gap: 1rem; margin-right: -1rem; padding: 1rem 1rem .9rem 0; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; }
+.cartoon-index-entry { flex: 0 0 68%; min-width: 0; scroll-snap-align: start; color: rgb(var(--record-ink)); text-decoration: none; }
+.cartoon-index-image { display: grid; place-items: center; aspect-ratio: 16 / 10; overflow: hidden; }
+.cartoon-index-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.cartoon-index-image > span { font-size: .7rem; color: rgb(var(--record-muted)); }
+.cartoon-index-name { display: flex; gap: .5rem; margin-top: .75rem; font-size: .86rem; font-weight: 700; line-height: 1.3; }
+.cartoon-index-name small { font-size: .62rem; color: rgb(var(--record-red)); font-weight: 400; padding-top: .1rem; }
+.cartoon-index-note { display: block; margin: .3rem 0 0 1.35rem; font-size: .64rem; line-height: 1.4; color: rgb(var(--record-muted)); }
+.cartoon-index-foot { display: flex; flex-wrap: wrap; gap: .3rem 1.25rem; margin-top: .7rem; padding-top: .55rem; border-top: 1px solid rgb(var(--record-ink) / .2); font-size: .74rem; }
+.cartoon-index-foot a { display: inline-flex; align-items: center; min-height: 2.75rem; }
+/* Big idea, full drawing, own words. Repeated in a changing editorial rhythm. */
+.cartoon-room .comic-wall { margin-top: 2rem; }
+.cartoon-wall-head { border-top: 2px solid rgb(var(--record-ink)); padding: 1rem 0 1.6rem; }
+.record-pages .cartoon-room .comic-opening-eyebrow { font-size: .65rem; letter-spacing: .08em; color: rgb(var(--record-red)); text-transform: none; }
+.record-pages .cartoon-room .comic-section-title { margin: .6rem 0 .8rem; font-size: clamp(2rem, 7.6vw, 3.8rem); line-height: 1.02 !important; letter-spacing: -.055em !important; }
+.cartoon-wall-head > p:last-child { color: rgb(var(--record-muted)); max-width: 40ch; font-size: .82rem; }
+.cartoon-human-wall { display: grid; gap: 2.75rem; margin-inline: -1rem; }
+.cartoon-reading-spread { min-width: 0; }
+.cartoon-spread-line { display: flex; gap: .7rem; align-items: baseline; padding: .7rem 1rem; border-top: 1px solid rgb(var(--record-ink) / .24); font-size: .69rem; line-height: 1.4; }
+.cartoon-spread-number { color: rgb(var(--record-red)); font-size: 1.3rem; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.climate-record .record-pages .cartoon-room .record-cartoon-plate,
+.cartoon-room .record-cartoon-plate:nth-child(n),
+.cartoon-room .record-cartoon-plate:hover { border: 0; background: none; border-radius: 0; box-shadow: none; transform: none; margin: 0; }
+.cartoon-artwork-door { display: block; position: relative; width: 100%; padding: 0; border: 0; background: transparent; color: rgb(var(--record-ink)); text-align: left; cursor: zoom-in; }
+.cartoon-artwork-door .comic-wall-artwork { display: block; width: 100%; height: auto; object-fit: contain; }
+.cartoon-look-closer { position: absolute; right: .6rem; bottom: .6rem; display: flex; align-items: center; gap: 1rem; min-height: 2.75rem; padding: .4rem .7rem; background: rgb(var(--record-paper) / .96); border: 1px solid rgb(var(--record-ink) / .2); font-size: .7rem; font-weight: 700; }
+.cartoon-room .comic-wall .record-cartoon-plate .cartoon-caption { padding: 1.05rem 1.25rem .5rem; border: 0; background: none; }
+.record-pages .cartoon-room .cartoon-byline { font-size: .8rem; font-weight: 700; line-height: 1.5; }
+.cartoon-byline span { font-weight: 400; color: rgb(var(--record-muted)); }
+.record-pages .cartoon-room .cartoon-caption h3 { margin: .45rem 0 .7rem; font-size: 1.55rem; letter-spacing: -.035em !important; line-height: 1.13 !important; }
+.record-pages .cartoon-room .cartoon-own-words { font-size: .91rem; line-height: 1.65; font-weight: 400; max-inline-size: 52ch; }
+.cartoon-provenance { margin-top: 1rem; padding-top: .7rem; border-top: 1px solid rgb(var(--record-ink) / .16); }
+.record-pages .cartoon-room .cartoon-provenance p { font-size: .66rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.cartoon-source { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .72rem; font-weight: 700; text-decoration: underline; }
+.record-pages .cartoon-room .cartoon-wall-colophon { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgb(var(--record-ink) / .2); color: rgb(var(--record-muted)); font-size: .75rem; }
+/* All seven little stories are visible as a strip, with the selected one read large. */
+.cartoon-room .comic-reader { margin-top: 3.5rem; padding-top: 1rem; border-top: 2px solid rgb(var(--record-ink)); }
+.cartoon-fiction-head > p:last-child { max-width: 45ch; font-size: .84rem; color: rgb(var(--record-muted)); }
+.cartoon-story-reel { display: flex; gap: .7rem; overflow-x: auto; padding: 1.1rem 0; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; }
+.cartoon-story-reel button { flex: 0 0 7rem; min-width: 0; padding: 0 0 .6rem; border: 0; border-bottom: 3px solid transparent; text-align: left; background: transparent; scroll-snap-align: start; }
+.cartoon-story-reel button[aria-current] { border-color: rgb(var(--record-red)); }
+.cartoon-story-reel img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; display: block; }
+.cartoon-story-reel span { display: block; margin-top: .4rem; font-size: .69rem; line-height: 1.4; }
+.cartoon-room .comic-panel { padding-inline: 0; }
+.cartoon-room .comic-frame { border: 0; border-radius: 0; box-shadow: none; }
+.cartoon-room .comic-number, .cartoon-room .comic-gesture { border: 0; background: none; transform: none; border-radius: 0; }
+.cartoon-room .comic-gesture { padding: .3rem 0; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.cartoon-room .comic-turner button { border: 1px solid rgb(var(--record-ink) / .35); border-radius: 0; box-shadow: none; }
+.cartoon-room .comic-next { background: rgb(var(--cartoon-sun)); }
+.cartoon-room .comic-art-credit { font-size: .72rem; }
+/* Context is still here, after the work, rather than between the reader and it. */
+.cartoon-room-notes { margin-top: 3.5rem; border-top: 2px solid rgb(var(--record-ink)); }
+.cartoon-room .cartoon-room-notes :is(.comic-session, .comic-anthology) { margin-top: 0; padding: 1.3rem 0; border-top: 0; }
+.cartoon-room .comic-session { border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+.cartoon-room .comic-session-who { border: 0; padding: 0; margin-top: 1rem; }
+.comic-session-who summary { cursor: pointer; min-height: 2.75rem; padding-block: .75rem; font-size: .8rem; font-weight: 700; }
+.record-pages .cartoon-room .comic-session-who p { font-size: .86rem; line-height: 1.6; font-weight: 400; }
+.cartoon-room .comic-anthology { border-bottom: 0; }
+.cartoon-room .comic-anthology-title::before { content: none; }
+.cartoon-room .comic-anthology :is(.comic-anthology-note, .comic-anthology-sub, .comic-anthology-status) { font-size: .9rem !important; line-height: 1.65 !important; }
+.cartoon-room .comic-anthology-credit { font-size: .75rem !important; line-height: 1.6 !important; }
+.cartoon-room .comic-why { padding: 1.2rem 0; border: 0; border-top: 2px solid rgb(var(--record-ink)); box-shadow: none; border-radius: 0; background: none; }
+.record-pages .cartoon-room .comic-why-list li { font-size: 1rem !important; padding-left: 0; }
+.cartoon-room .comic-why-list li::before { content: none; }
+.cartoon-room .comic-drawer { border: 0; border-top: 1px solid rgb(var(--record-ink) / .25); border-radius: 0; background: none; box-shadow: none; }
+.cartoon-room .comic-drawer summary { padding-inline: 0; }
+.cartoon-room .comic-drawer-content { border-top: 1px solid rgb(var(--record-ink) / .2); background: none; }
+.cartoon-room .comic-source-list > a { background: none; border-bottom: 1px solid rgb(var(--record-ink) / .16); }
+.cartoon-room .comic-load-more { box-shadow: none; border-radius: 0; }
+@media (min-width: 640px) {
+  .cartoon-room .comic-event-opening { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start; }
+  .cartoon-room .comic-event-context { padding: 2rem 1.5rem; }
+  .cartoon-index-reel { gap: .65rem; margin-right: 0; padding-right: 0; }
+  .cartoon-index-entry { flex-basis: calc((100% - 1.3rem) / 3); }
+  .cartoon-index-line > span:last-child { display: none; }
+  .cartoon-index-name { font-size: .75rem; }
+  .cartoon-index-note { margin-left: 0; }
 }
-.record-pages .cartoon-room .comic-catalogue-cover-credit {
-  font-family: var(--font-body);
-  font-size: .625rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  color: rgb(var(--record-muted));
-}
-.comic-catalogue-link { min-height: 2.5rem; font-weight: 600; text-decoration-thickness: 1px; }
-
-/* ── WALL TEXT, NOT A CARD ───────────────────────────────────────────────────────
-   The sentence at the top of a gallery is printed on the wall itself, in the same ink, at
-   the same size, with no box around it. */
-.comic-opening {
-  max-width: none;
-  margin: 1.2rem 0 0;
-  padding: 1.1rem 0 0;
-  border-top: 1px solid var(--gallery-rule);
-}
-.record-pages .cartoon-room .comic-opening-eyebrow { color: rgb(var(--record-muted)); letter-spacing: .18em; }
-.record-pages .cartoon-room .comic-opening-line { font-weight: 600; }
-.record-pages .cartoon-room .comic-opening-sub { margin: .45rem 0 0; font-size: .78rem; line-height: 1.55; color: rgb(var(--record-muted)); }
-
-/* ── THE WALL: HAIRLINES, NO TILT, NO SHADOW ────────────────────────────────────
-   The drawings keep every pixel they arrived with. The frame around them loses the ink and
-   the shadow, because a shadow is the loudest thing on a quiet wall. */
-.comic-wall .record-cartoon-plate {
-  border-color: var(--gallery-rule);
-  border-radius: 0;
-  box-shadow: none;
-  background: rgb(var(--gallery-plate));
-  transform: none;
-}
-.comic-wall .record-cartoon-plate:nth-child(odd),
-.comic-wall .record-cartoon-plate:nth-child(even) { transform: none; }
-.comic-wall .record-cartoon-plate:hover,
-.comic-wall .record-cartoon-plate:focus-within {
-  transform: none;
-  box-shadow: none;
-  border-color: var(--gallery-rule-strong);
-}
-.comic-wall .comic-wall-grid { background: none; }
-.comic-wall .comic-plate-tone-0 figcaption,
-.comic-wall .comic-plate-tone-1 figcaption,
-.comic-wall .comic-plate-tone-2 figcaption { background: none; }
 @media (min-width: 1024px) {
-  .comic-wall .record-cartoon-plate { border-width: 1px; }
+  .climate-record .record-pages > .cartoon-room > .record-shell-body > .record-shell-content { padding-inline: 2.5rem; }
+  .cartoon-room .comic-event-opening { margin-inline: -2.5rem; }
+  .cartoon-room .comic-event-context { padding: clamp(2rem, 4vw, 4rem) 2.5rem; }
+  .cartoon-room .comic-catalogue-band { padding: 1rem 1.5rem; }
+  .record-pages .cartoon-room .comic-title { font-size: clamp(4.1rem, 6.8vw, 7.1rem); }
+  .cartoon-index-name { font-size: .86rem; }
+  .cartoon-room .comic-wall { margin-top: 3rem; }
+  .cartoon-wall-head { padding-block: 1.3rem 2rem; }
+  .cartoon-human-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; row-gap: 3.5rem; margin-inline: 0; }
+  .cartoon-spread-line { padding-inline: 0; }
+  .cartoon-reading-spread:nth-child(3n + 1) { grid-column: 1 / -1; }
+  .cartoon-reading-spread:nth-child(3n + 1) figure { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, .85fr); gap: 2rem; align-items: center; }
+  .cartoon-room .comic-wall .record-cartoon-plate .cartoon-caption { padding: 1.1rem 0 0; }
+  .cartoon-room .comic-reader { max-width: none; }
+  .cartoon-room .comic-single-reader, .cartoon-room .comic-turner, .cartoon-room .comic-art-credit { max-width: 46rem; margin-inline: auto; }
+  .cartoon-story-reel { justify-content: space-between; }
+  .cartoon-story-reel button { flex-basis: calc((100% - 4.2rem) / 7); max-width: 9.5rem; }
+  .cartoon-room-notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; }
+  .cartoon-room .comic-session { border-bottom: 0; }
 }
-
-/* ── THE SMALL PRINT STOPS SHOUTING ─────────────────────────────────────────────
-   Plate numbers, gesture chips and section numbers were little yellow blocks with a tilt.
-   A gallery sets them as small print: no box, no colour, one weight, wide tracking. */
-.comic-plate-index,
-.comic-number {
-  border: 0;
-  background: none;
-  border-radius: 0;
-  transform: none;
-  min-width: 0;
-  height: auto;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: .58rem;
-  font-weight: 700;
-  letter-spacing: .06em;
-  color: rgb(var(--record-muted));
+@media print {
+  .cartoon-reading-index, .cartoon-look-closer, .cartoon-story-reel { display: none !important; }
+  .cartoon-human-wall { display: block; }
+  .cartoon-reading-spread { break-inside: avoid; margin-block: 2rem; }
 }
-.comic-gesture {
-  border: 0;
-  background: none;
-  border-radius: 0;
-  transform: none;
-  margin: 0 0 .7rem;
-  padding: 0;
-  font-size: .58rem;
-  letter-spacing: .14em;
-  color: rgb(var(--record-muted));
-}
-.comic-gesture::before { content: '· '; }
-
-/* ── THE STRIP'S FRAME, AND THE DATELINE ────────────────────────────────────────
-   The comic strip keeps its own drawn frame — it is a strip, and a strip is printed inside
-   a box. What it loses is the drop shadow, which belongs to a scrapbook and not a page. */
-.comic-frame {
-  border: 1px solid var(--gallery-rule-strong);
-  box-shadow: none;
-  border-radius: 0;
-}
-.comic-session { border-top: 1px solid var(--gallery-rule); border-bottom: 0; max-width: none; padding: 1rem 0; }
-.comic-session-who { border-left: 1px solid var(--gallery-rule-strong); }
-
-/* ── THE WORDS AT THE FOOT, WITHOUT THE BOXES ROUND THEM ───────────────────────
-   "A lot of copy at bottom you sure?" — so the box around the argument comes off, the star
-   bullets come off, and the drawers become drawers: a rule and a word, nothing more. */
-.comic-why {
-  border: 0;
-  border-top: 1px solid var(--gallery-rule);
-  border-radius: 0;
-  box-shadow: none;
-  background: none;
-  padding: 1.3rem 0 1.4rem;
-}
-.record-pages .cartoon-room .comic-why-list li { padding-left: 1.15rem; }
-.record-pages .cartoon-room .comic-why-list li::before { content: '—'; color: rgb(var(--record-muted)); font-size: .8rem; }
-.comic-drawer {
-  border: 0;
-  border-top: 1px solid var(--gallery-rule);
-  border-radius: 0;
-  box-shadow: none;
-  background: none;
-  margin-top: 0;
-}
-.comic-drawer summary { padding: .95rem 0; font-size: .95rem; font-weight: 700; }
-.comic-drawer-content {
-  border-top: 1px solid var(--gallery-rule);
-  background: none;
-  padding: .9rem 0 .2rem;
-}
-.comic-turner button, .comic-load-more { border-radius: 0; box-shadow: none; }
-.comic-next { background: none; }
-.comic-wall-empty { border: 1px solid var(--gallery-rule); border-radius: 0; }
-.comic-wall-empty > span { border: 0; background: none; font-size: 1.2rem; color: rgb(var(--record-muted)); }
-.comic-source-list > a { background: none; border-bottom: 1px solid var(--gallery-rule); }
-.comic-sources { border-top: 1px solid var(--gallery-rule); }
-.comic-share { border-top: 1px solid var(--gallery-rule); }

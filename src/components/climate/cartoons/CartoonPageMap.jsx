@@ -1,56 +1,27 @@
 import React from 'react';
-import CartoonPartMark, { CARTOON_PARTS } from '@/components/climate/cartoons/CartoonPartMarks';
-
-// ── A GALLERY'S ROOM MAP, NOT SIX BOXES ────────────────────────────────────────
-// Brian, 18 November: "boxes look old and not our soul… needs to be like museum or art
-// gallery for cartoons but connected like fuck… coolasfuck like modern institute or GOMA."
-//
-// The last version of this was a comic page: ink borders, halftone, yellow caption boxes.
-// It was the right idea about craft and the wrong object. A page of caption boxes is a
-// scrapbook, and a scrapbook is charming once and tired by the sixth block.
-//
-// A modern gallery does none of that. It hangs work on a white wall with a hairline or no
-// frame at all, and puts a small printed label underneath: a number, a name, one line. That
-// is the whole grammar, and it is cooler precisely because it is not trying. So each of the
-// room's six parts is hung as a work on the wall, with its own label, and the labels are the
-// way through — connected, in the same quiet voice, rather than six buttons competing.
-const SPANS = {
-  wall: 'comic-page-panel--wall',
-  day: 'comic-page-panel--day',
-  strip: 'comic-page-panel--strip',
-  book: 'comic-page-panel--book',
-  yours: 'comic-page-panel--yours',
-  why: 'comic-page-panel--why',
-};
+import { comicStories } from '@/components/climate/cartoons/comicStories';
+import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
+import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 
 export default function CartoonPageMap() {
+  const { cartoons } = useCartoonWall();
+  const first = cartoons[0];
+  const routes = [
+    { href: '#cartoon-wall-title', image: first?.display_image_url || first?.image_url, label: 'The human wall', note: 'What On Earth!® · CEEW' },
+    { href: '#cartoon-strip', image: comicStories[0].image, label: 'The little things', note: 'AI-illustrated fiction' },
+    { href: '#cartoon-session-title', image: CARTOON_COVER, label: 'Together, on the 29th', note: 'Cover · Francis Umendu Odupute' },
+  ];
   return (
-    <nav className="comic-page" aria-label="Rooms in this gallery">
-      <div className="comic-page-head">
-        <p className="comic-page-issue">Rooms</p>
-        <p className="comic-page-rule" aria-hidden="true" />
-        <p className="comic-page-count">Six</p>
+    <nav className="cartoon-reading-index" aria-label="Find your way through the cartoon room">
+      <div className="cartoon-index-line"><span>Three ways in</span><span aria-hidden="true">Scroll to wander ↓</span></div>
+      <div className="cartoon-index-reel">
+        {routes.map((route, index) => <a key={route.href} href={route.href} className="cartoon-index-entry">
+          <div className="cartoon-index-image">{route.image ? <img src={route.image} alt="" decoding="async" /> : <span>Opening the drawings…</span>}</div>
+          <span className="cartoon-index-name"><small>0{index + 1}</small>{route.label}</span>
+          <span className="cartoon-index-note">{route.note}</span>
+        </a>)}
       </div>
-
-      <div className="comic-page-grid">
-        {CARTOON_PARTS.map((part, index) => (
-          <a
-            key={part.key}
-            href={part.href}
-            className={`comic-page-panel ${SPANS[part.key] || ''}`}
-          >
-            <span className="comic-page-art">
-              <CartoonPartMark part={part.key} />
-            </span>
-            <span className="comic-page-label-box">
-              <span className="comic-page-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-              <span className="comic-page-label">{part.label}</span>
-              <span className="comic-page-line">{part.caption}</span>
-              {part.key === 'wall' && <span className="comic-page-first">Start here</span>}
-            </span>
-          </a>
-        ))}
-      </div>
+      <div className="cartoon-index-foot"><a href="#cartoon-your-turn">Add your drawing ↗</a><a href="#cartoon-anthology">The book ↓</a><a href="#cartoon-why-title">Why cartoons? ↓</a></div>
     </nav>
   );
 }

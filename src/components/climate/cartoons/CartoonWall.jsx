@@ -1,40 +1,31 @@
-import React, { useEffect } from 'react';
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import React, { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
 import CartoonPlate from '@/components/climate/cartoons/CartoonPlate';
+import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
+import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 
 export default function CartoonWall() {
-  const client = useQueryClient();
-  const wall = useInfiniteQuery({
-    queryKey: ['cartoon-wall', 'artwork-v2'],
-    initialPageParam: undefined,
-    queryFn: ({ pageParam }) => base44.entities.ClimateCartoon.filter({ status: 'published' }, { sort: '-created_date', limit: 4, ...(pageParam ? { cursor: pageParam } : {}) }),
-    staleTime: 5 * 60 * 1000,
-    getNextPageParam: (page) => page.has_more ? page.next_cursor : undefined,
-  });
-  useEffect(() => base44.entities.ClimateCartoon.subscribe(() => client.invalidateQueries({ queryKey: ['cartoon-wall'] })), [client]);
-  const cartoons = wall.data?.pages.flatMap((page) => page.items || []) || [];
-  const [lead, ...rest] = cartoons;
+  const wall = useCartoonWall();
+  const [reading, setReading] = useState(null);
   return (
     <section className="comic-wall" aria-labelledby="cartoon-wall-title">
-      {/* The heading is small on purpose. On a picture page the pictures are the headline;
-          a section title that competes with them turns a wall back into a list. */}
-      <h2 id="cartoon-wall-title" className="comic-section-title">The people’s pages.</h2>
-      {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the wall…</p>}
+      <header className="cartoon-wall-head">
+        <p className="comic-opening-eyebrow record-meta">Human hands. Different perspectives.</p>
+        <h2 id="cartoon-wall-title" className="comic-section-title">The people’s pages.</h2>
+        <p className="record-meta">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
+      </header>
+      {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the original drawings…</p>}
       {wall.isError && <div className="comic-wall-empty"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}
-      {!wall.isPending && !wall.isError && !cartoons.length && <div className="comic-wall-empty"><span aria-hidden="true">…</span><p className="record-meta">A space for the first human drawing.<br />No pretend contributors. This bit is yours.</p></div>}
-      {/* ── ONE HUNG LARGE, THE REST AS THE WALL ─────────────────────────────────
-          Thirteen drawings at the same size is a catalogue; a gallery hangs one big and lets
-          the eye start there. The newest drawing goes full width, edge to edge, with its
-          name set larger — so the first thing a thumb meets on a phone is a drawing at the
-          width of the phone, not a caption. */}
-      {lead && <div className="comic-wall-lead"><CartoonPlate cartoon={lead} lead index={1} /></div>}
-      {!!rest.length && <div className="comic-wall-grid mt-6 grid gap-6 lg:grid-cols-2">{rest.map((cartoon, i) => <CartoonPlate key={cartoon.id} cartoon={cartoon} index={i + 2} />)}</div>}
-      <p className="record-meta comic-workshop-note">The artist’s name stays, and so does their own line. A person looks before a drawing goes up.</p>
+      {!wall.isPending && !wall.isError && !wall.cartoons.length && <div className="comic-wall-empty"><p className="record-meta">The first page is still blank. A space for a real drawing, with its artist’s name.</p><a href="#cartoon-your-turn">Make it yours ↗</a></div>}
+      <div className="cartoon-human-wall">
+        {wall.cartoons.map((cartoon, i) => <CartoonPlate key={cartoon.id} cartoon={cartoon} lead={i === 0} index={i + 1} onOpen={() => setReading(i)} />)}
+      </div>
+      <p className="record-meta cartoon-wall-colophon">The artists’ own words, kept with their work. Shown with permission. Every new contribution waits for a person’s look.</p>
       {wall.hasNextPage && <button type="button" className="comic-load-more" disabled={wall.isFetchingNextPage} onClick={() => wall.fetchNextPage()}>{wall.isFetchingNextPage ? 'Opening more…' : 'More from the wall'}</button>}
+      {wall.isFetchNextPageError && <p className="record-meta" role="alert">More drawings could not be opened. Use “More from the wall” to try again.</p>}
       <CartoonsWaiting />
+      {reading !== null && wall.cartoons[reading] && <CartoonCloseReading cartoons={wall.cartoons} index={reading} onTurn={setReading} onClose={() => setReading(null)} />}
     </section>
   );
 }

@@ -36,7 +36,7 @@ export default function CartoonCatalogueBand() {
         {/* The hand that drew it, said first and said plainly. Janine told us on the 18th
             whose the cover is, and a credit that arrives after the description of the book
             is a credit nobody reads. */}
-        <p className="comic-catalogue-cover-credit">{CARTOON_EVENT.coverArt}</p>
+        <p className="comic-catalogue-cover-credit record-meta">{CARTOON_EVENT.coverArt}</p>
         <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · in preparation</p>
         <p className="comic-catalogue-line record-meta">
           {CARTOON_EVENT.biennial} — edited by {CARTOON_EVENT.editors}. Free to download
