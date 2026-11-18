@@ -261,7 +261,10 @@ export default function ClimateLayout({ children, currentPage }) {
           the world is what the work is for. It is below the work, never above it, so
           nothing is pushed off the glass.
           See RecordReachEarth for why the cover painting is not the surface it is drawn on. */}
-      <RecordReachEarth />
+      {/* Except on the Map page, where the plate above already carries the reach: a reader
+          standing on the page that IS the world should not be shown the world a second time
+          four screens further down. One map, once, at the size it deserves. */}
+      {currentPage !== 'ClimateMap' && <RecordReachEarth />}
 
       <div className={isRoom ? 'hidden lg:block' : 'contents'}>
         <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />

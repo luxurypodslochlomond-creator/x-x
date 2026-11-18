@@ -80,8 +80,12 @@ export default function ClimateMapPage() {
           paper so not one coast or count loses its contrast. The painting is the room; the
           planet is the thing pinned in it. */}
       <RecordPaintedBand soft className="record-map-plate w-full border-b-2 border-record-ink/40">
-        <div className="relative z-10 max-w-[1100px] mx-auto px-3 lg:px-10 py-6 lg:py-9">
-          <div className="bg-record-bone p-1.5 lg:p-3 shadow-[0_18px_44px_rgba(0,0,0,.55)]">
+        {/* One plate, and the whole page given to it. It was held to eleven hundred pixels
+            in the middle of a nineteen-hundred-pixel screen, with the same world repeated
+            again at the foot — two small maps instead of one that stops you. The mount is
+            the same bone and the same shadow; it simply gets the room now. */}
+        <div className="relative z-10 max-w-[1640px] mx-auto px-2 lg:px-6 py-4 lg:py-6">
+          <div className="bg-record-bone p-1 lg:p-2 shadow-[0_18px_44px_rgba(0,0,0,.55)]">
             <RecordWorldMap lights={lights} />
           </div>
         </div>
