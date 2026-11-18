@@ -178,13 +178,22 @@ export function MarkPencil({ size = 26, className = '' }) {
 // speech balloon with a face in it, grinning. Two dots and a line is enough at 28px, and
 // it is the only mark on the record that looks back at the reader, which is exactly what
 // a cartoon does. Brian asked for a cartoon icon of its own, 18 November.
+// ── THE DOOR TO THE DRAWINGS, DRAWN AGAIN ─────────────────────────────────────
+// Brian, 18 November: "the icon for cartoons isn't coolasfuck". He was right, and the
+// reason is measurable: the old mark was a tidy rounded bubble with two dots and a small
+// closed smile — a chat icon, the same picture every messaging app on earth uses. On a rail
+// of drawn marks it was the one that looked borrowed.
+//
+// So the balloon is now a shouted one: drawn out of true, tipped over, its tail kicked
+// sideways the way a word is drawn in a strip, with the eyes cut at an angle and the mouth
+// wide open in the record's own red. Still one weight, still one solid mass, still readable
+// at twenty-two pixels in the rail — but it looks back at the reader and it is laughing.
 export function MarkCartoon({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.9" className={className} aria-hidden="true">
-      <path d="M9.4 6.4h21.2a4.8 4.8 0 0 1 4.8 4.8v13.2a4.8 4.8 0 0 1-4.8 4.8H19.6l-6.4 5.6v-5.6H9.4a4.8 4.8 0 0 1-4.8-4.8V11.2a4.8 4.8 0 0 1 4.8-4.8Z" />
-      <circle cx="15.6" cy="16.4" r="1.6" className="text-record-mark" fill="currentColor" stroke="none" />
-      <circle cx="24.6" cy="16.4" r="1.6" className="text-record-mark" fill="currentColor" stroke="none" />
-      <path d="M14.8 20.6c1.5 2.5 3.4 3.8 5.3 3.8s3.8-1.3 5.2-3.8" />
+      <path d="M9.9 5.2 33 7.1c2.6.2 4.3 1.9 4.1 4.5l-1 14.4c-.2 2.5-1.9 4.1-4.4 3.9l-8.2-.6-4.9 6.6.2-7-9.7-.7c-2.5-.2-4.1-1.9-3.9-4.4L6 9.1c.2-2.6 1.4-4.1 3.9-3.9Z" />
+      <path d="M14.9 13.7l4.4 2.4M27.8 15.6l4.1-2.6" strokeWidth="2.2" />
+      <path d="M14.6 21.4c1.5 3.6 3.8 5.4 6.6 5.4 2.8 0 5.1-1.8 6.7-5.4Z" fill="currentColor" stroke="none" />
     </svg>
   );
 }

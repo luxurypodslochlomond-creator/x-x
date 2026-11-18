@@ -169,7 +169,25 @@
    wedges of paper down the sides. So on a handset the pictures are simply the pictures,
    stacked with air between them, and the tilt and the ink return on a desk, where a frame
    has somewhere to sit. */
+/* ── THE PICTURE REACHES THE NAV ─────────────────────────────────────────────────
+   Brian, 18 November: "there's a disco box under nav and top of image we don't need, image
+   should reach the nav." On a handset the way-out bar and the shell's opening padding put a
+   strip of furniture between the record's own rail and the first picture, which is the one
+   thing a picture page cannot afford. On a phone the bar comes off this room and the
+   padding goes to nothing, so the cover starts where the nav ends. The way back is still
+   there — the rail above and the return line at the foot of the page both carry it — and on
+   a desk, where there is room, the bar stays exactly as it was. */
 @media (max-width: 1023px) {
+  .record-pages .cartoon-room .record-back-bar { display: none; }
+  .cartoon-room .record-shell-content { padding-top: 0; }
+  /* ── A COLOUR RHYTHM DOWN A LONG SCROLL ────────────────────────────────────────
+     Thirteen drawings on a phone is a long way down, and every caption in the same bone
+     made it a list of identical blocks. The captions now take the room's three paper
+     colours in turn, so the wall reads as a wall with a beat in it. The drawings themselves
+     are untouched: not one pixel of anybody's artwork is recoloured, cropped or filtered. */
+  .comic-wall .comic-plate-tone-0 figcaption { background: rgb(var(--cartoon-sun) / .55); }
+  .comic-wall .comic-plate-tone-1 figcaption { background: rgb(var(--cartoon-sky) / .75); }
+  .comic-wall .comic-plate-tone-2 figcaption { background: rgb(var(--cartoon-mint) / .75); }
   .comic-wall-lead,
   .comic-wall-grid { margin-inline: -1rem; }
   .comic-wall-lead { margin-bottom: 2rem; }

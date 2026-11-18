@@ -18,7 +18,7 @@ export default function CartoonPlate({ cartoon, lead = false, index = 0 }) {
   const { image_url, title, artist_name, origin, for_line, credit, source_url } = cartoon || {};
 
   return (
-    <figure className={`record-cartoon-plate record-media-mount bg-record-paper ${lead ? 'comic-plate-lead' : ''}`}>
+    <figure className={`record-cartoon-plate record-media-mount bg-record-paper comic-plate-tone-${index % 3} ${lead ? 'comic-plate-lead' : ''}`}>
       {/* One frame for every drawing on the wall, so a wall of pictures reads as a wall and
           not as a pile of different-shaped things. The drawing itself is never cropped: it
           sits whole inside the frame, with the paper showing round it. Four-by-three, because
