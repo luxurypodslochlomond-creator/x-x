@@ -250,16 +250,20 @@ export default function ClimateLayout({ children, currentPage }) {
 
       <main ref={readingRef} className="record-pages">{children}</main>
 
+      {/* ── THE WORLD, LIT WHERE IT HAS BEEN READ ─────────────────────────────────
+          The foot of EVERY page of the record, in the same place every time: the plate of
+          the world with a light on every country and self-identified nation the record has
+          actually been read in, from the same counts the Reach page shows.
+          It used to sit inside the foot's wrapper, which is hidden on a phone in the two
+          worked rooms — so the one thing the record says about itself was missing from
+          exactly the screens a keeper and a checker live on. It stands outside that wrapper
+          now: the foot's bookshelf is still spared in a room, but the world is not, because
+          the world is what the work is for. It is below the work, never above it, so
+          nothing is pushed off the glass.
+          See RecordReachEarth for why the cover painting is not the surface it is drawn on. */}
+      <RecordReachEarth />
+
       <div className={isRoom ? 'hidden lg:block' : 'contents'}>
-        {/* ── THE WORLD, LIT WHERE IT HAS BEEN READ ─────────────────────────────────
-            The foot of every page of the record, in the same place every time: the plate
-            of the world with a light on every country and self-identified nation the
-            record has actually been read in, from the same counts the Reach page shows.
-            It is at the foot rather than at the door on purpose — a thing that only
-            happens on the front page is a show, and a thing that is in the same place on
-            every page is an instrument. See RecordReachEarth for why the cover painting
-            is not the surface it is drawn on. */}
-        <RecordReachEarth />
         <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />
       </div>
 

@@ -24,15 +24,20 @@ import '@/components/climate/record-reach.css';
 // reads is dark. It says "reads", never "people": the record does not know who anybody is,
 // and a plate that implied it did would be the gimmick.
 //
-// It sits at the foot of every page of the record, small, on ink — an instrument that is
-// always in the same place, rather than a show that happens once at the door.
+// It stands at the foot of every page of the record, in the same place every time. It was
+// drawn small and quiet on the reasoning that an instrument should not shout — and the
+// result was a dark rectangle at the bottom of a page that read as nothing at all. An
+// instrument you cannot read is not modest, it is absent. So it is a proper band now: the
+// figures said in the record's own voice, the plate big enough to see a coast, and the
+// lights given room to glow.
 const LIGHT = '#e2602a';
+const SIGNAL = '#ffd447';
 
 // A light grows with the reads counted there, on a gentle log curve so a country with a
 // thousand reads does not swallow one with two. Same curve as the Reach page.
 function lightSize(views) {
-  if (!views || views < 1) return 3.2;
-  return Math.min(9, Math.max(3.6, 2.6 + Math.log2(views + 1) * 1.1));
+  if (!views || views < 1) return 4;
+  return Math.min(11, Math.max(4.5, 3.2 + Math.log2(views + 1) * 1.4));
 }
 
 function placeName(code) {
@@ -65,21 +70,58 @@ export default function RecordReachEarth() {
   const countries = data?.unique_countries || 0;
   const reads = data?.total_views || 0;
 
-  // The line under the plate says what the plate is counting. It is written as evidence,
-  // not as a boast, and it never rounds a failed count into a zero.
-  const line = unavailable
+  // The footnote says what the plate is counting, in evidence rather than in boast, and it
+  // never rounds a failed count into a zero.
+  const footnote = unavailable
     ? 'The count could not be reached just now. The plate stays dark rather than guess.'
     : reads === 0
       ? 'The planet is here. The first read lights it.'
-      : `Read in ${countries} ${countries === 1 ? 'country or nation' : 'countries and nations'} · ${reads.toLocaleString()} ${reads === 1 ? 'read' : 'reads'} · not one person named`;
+      : `A read is one entry opened. No account, no cookie, no address, no name.`;
 
   return (
     <section
-      aria-labelledby="record-reach-earth-line"
-      className="relative w-full bg-record-ink px-4 py-6 text-record-bone lg:px-10 lg:py-8"
+      aria-labelledby="record-reach-earth-heading"
+      className="relative w-full overflow-hidden bg-record-ink px-4 pb-7 pt-8 text-record-bone lg:px-10 lg:pb-10 lg:pt-11"
     >
-      <div className="mx-auto w-full max-w-[560px]">
-        <div className="relative w-full overflow-hidden border border-record-bone/20" style={{ aspectRatio: '2 / 1' }}>
+      {/* A faint warm halo under the plate, so the ink band is a lit room rather than a
+          black slab. It is the same red the mark is printed in, at a whisper. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[130%] w-[130%] -translate-x-1/2 -translate-y-1/2 opacity-[0.16]"
+        style={{ background: `radial-gradient(circle at 50% 50%, ${LIGHT} 0%, transparent 62%)` }}
+      />
+
+      <div className="relative mx-auto w-full max-w-[720px]">
+        <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-record-signal">
+          The record&rsquo;s reach
+        </p>
+
+        {/* The figures, in the record's own voice, above the plate. A reader who never
+            looks at a map still learns the one fact that matters: how far this has gone.
+            A failed count is not a zero, so it is not printed as one. */}
+        <h2
+          id="record-reach-earth-heading"
+          className="mt-2 text-[22px] leading-[1.15] text-record-bone sm:text-[28px]"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          {unavailable ? (
+            'The count is not answering.'
+          ) : reads === 0 ? (
+            'The world, waiting for its first light.'
+          ) : (
+            <>
+              <span className="text-record-signal">{reads.toLocaleString()}</span>
+              {reads === 1 ? ' read in ' : ' reads in '}
+              <span className="text-record-signal">{countries.toLocaleString()}</span>
+              {countries === 1 ? ' country or nation' : ' countries and nations'}
+            </>
+          )}
+        </h2>
+
+        <div
+          className="relative mt-4 w-full overflow-hidden border border-record-bone/25"
+          style={{ aspectRatio: '2 / 1', background: 'radial-gradient(ellipse at 50% 46%, rgba(226,96,42,0.10) 0%, rgba(20,18,16,0) 68%)' }}
+        >
           <svg
             viewBox={`0 0 ${PLATE_W} ${PLATE_H}`}
             preserveAspectRatio="none"
@@ -88,7 +130,7 @@ export default function RecordReachEarth() {
           >
             {/* The graticule, so the eye can find a latitude and know the plate is a
                 measurement rather than a drawing of a mood. */}
-            <g stroke={LIGHT} strokeWidth="0.5" opacity="0.1" vectorEffect="non-scaling-stroke">
+            <g stroke={LIGHT} strokeWidth="0.5" opacity="0.12" vectorEffect="non-scaling-stroke">
               {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110].map((x) => (
                 <line key={`lon-${x}`} x1={x} y1={0} x2={x} y2={PLATE_H} />
               ))}
@@ -96,17 +138,18 @@ export default function RecordReachEarth() {
                 <line key={`lat-${y}`} x1={0} y1={y} x2={PLATE_W} y2={y} />
               ))}
             </g>
-            <line x1={0} y1={30} x2={PLATE_W} y2={30} stroke={LIGHT} strokeWidth="0.5" opacity="0.2" vectorEffect="non-scaling-stroke" />
+            <line x1={0} y1={30} x2={PLATE_W} y2={30} stroke={SIGNAL} strokeWidth="0.6" opacity="0.35" vectorEffect="non-scaling-stroke" />
 
             {/* Every coast on Earth, as the record has always drawn it. Faint enough that
-                the lights are what the eye goes to. */}
+                the lights are what the eye goes to, strong enough that a reader can find
+                their own country with a finger. */}
             <path
               d={land}
               stroke="#efe7d6"
-              strokeWidth="1.3"
+              strokeWidth="1.5"
               strokeLinecap="round"
               fill="none"
-              opacity="0.3"
+              opacity="0.5"
               vectorEffect="non-scaling-stroke"
             />
           </svg>
@@ -124,23 +167,23 @@ export default function RecordReachEarth() {
                 width: `${l.size}px`,
                 height: `${l.size}px`,
                 transform: 'translate(-50%, -50%)',
-                background: LIGHT,
-                boxShadow: `0 0 ${l.size * 2.6}px ${l.size * 0.9}px rgba(226, 96, 42, 0.55)`,
+                background: SIGNAL,
+                boxShadow: `0 0 ${l.size * 2.4}px ${l.size * 0.8}px rgba(226, 96, 42, 0.85), 0 0 ${l.size * 5}px ${l.size * 1.6}px rgba(255, 212, 71, 0.28)`,
                 animationDelay: l.delay,
               }}
             />
           ))}
         </div>
 
-        <div className="mt-2.5 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <p id="record-reach-earth-line" className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.1em] text-record-bone/70">
-            {line}
+        <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
+          <p className="max-w-[46ch] font-mono text-[10px] leading-relaxed tracking-[0.06em] text-record-bone/65">
+            {footnote}
           </p>
           <Link
             to={createPageUrl('ClimateImpact')}
-            className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-record-signal underline decoration-dotted underline-offset-4 transition-colors hover:text-record-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-signal"
+            className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-record-signal underline decoration-dotted underline-offset-4 transition-colors hover:text-record-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-signal"
           >
-            Reach
+            See the reach
           </Link>
         </div>
       </div>
