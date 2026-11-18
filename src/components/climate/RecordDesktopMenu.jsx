@@ -35,7 +35,7 @@ export default function RecordDesktopMenu({ open, onClose }) {
           is read; no sentence ever stands on it. */}
       <div className="relative min-h-0 overflow-hidden border-t-2 border-record-mark/70">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-cover" style={{ backgroundImage: `url(${RECORD_COVER_SCREEN})`, backgroundPosition: 'center 20%' }} />
-        <div className="relative mx-auto max-h-[min(65vh,620px)] max-w-[1100px] overflow-y-auto overscroll-contain bg-record-bone px-10 pb-3 pt-2 shadow-[0_0_60px_-10px_rgba(20,18,16,0.55)]">
+        <div className="relative mx-auto max-h-[min(65vh,620px)] w-full max-w-[880px] overflow-y-auto overscroll-contain bg-record-bone px-6 pb-3 pt-2 shadow-[0_0_60px_-10px_rgba(20,18,16,0.55)] lg:px-8">
           <div className="mb-1 flex items-center justify-between gap-4">
             <p className="record-header-type text-lg text-record-mark">Explore the record</p>
             <button type="button" onClick={onClose} className="record-header-type min-h-11 px-2 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Close <span aria-hidden="true">×</span></button>
