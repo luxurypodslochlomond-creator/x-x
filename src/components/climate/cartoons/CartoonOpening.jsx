@@ -38,14 +38,7 @@ export default function CartoonOpening() {
         The wall is open. Send a drawing and it goes up with your name on it, once a person has looked.
       </p>
 
-      {/* The one thing a host, a teacher or another cartoonist wants to do with this page:
-          hand it to somebody. The card carries the real cover, the dates and the address. */}
-      <div className="comic-share">
-        <ShareCardButton entry={CARTOON_CARD} build={buildCartoonShareCard} label="Pass it on" />
-        <p className="record-meta comic-share-note">
-          One card: the cover, what the event is, and the address. No tracking on it.
-        </p>
-      </div>
+
     </section>
   );
 }

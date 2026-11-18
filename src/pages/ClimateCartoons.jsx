@@ -11,6 +11,7 @@ import CartoonWall from '@/components/climate/cartoons/CartoonWall';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import '@/components/climate/cartoons/cartoon-room.css';
+import '@/components/climate/cartoons/cartoon-room-layout.css';
 
 export default function ClimateCartoons() {
   return (
@@ -36,13 +37,15 @@ export default function ClimateCartoons() {
           the way to send one in. Nothing was deleted and nothing was reordered for taste:
           the pictures simply come first, because that is the whole reason anybody opens
           this room. */}
-      <CartoonCatalogueBand />
-      <ComicMasthead />
-      {/* What the room is, and what is in it, before the wall — so the page reads as one
-          thing rather than as eight blocks in a row. */}
+      <div className="comic-event-opening">
+        <CartoonCatalogueBand />
+        <div className="comic-event-context">
+          <ComicMasthead />
+          <CartoonSessionBand />
+        </div>
+      </div>
       <CartoonOpening />
       <CartoonWall />
-      <CartoonSessionBand />
       <ComicReader />
       <CartoonAnthology />
       <CartoonWhy />

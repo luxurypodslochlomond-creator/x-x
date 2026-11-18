@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import CartoonArtwork from '@/components/climate/cartoons/CartoonArtwork';
 
 // One drawing on the wall, and the three things that travel with it: who drew it, where
 // it came from, and the drawer's own line on what it is for. The credit, where there is
@@ -24,14 +25,7 @@ export default function CartoonPlate({ cartoon, lead = false, index = 0 }) {
           not as a pile of different-shaped things. The drawing itself is never cropped: it
           sits whole inside the frame, with the paper showing round it. Four-by-three, because
           editorial cartoons are drawn wide and a portrait box made each one a stamp. */}
-      <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-record-paper/70">
-        <img
-          src={image_url}
-          alt={title || `A drawing by ${artist_name}`}
-          loading={lead ? 'eager' : 'lazy'}
-          className="block h-full w-full object-contain"
-        />
-      </div>
+      <CartoonArtwork cartoon={cartoon} lead={lead} />
       <figcaption className="border-t-4 border-record-signal bg-record-bone px-3 py-2.5 lg:px-4 lg:py-3.5">
         {title && (
           <p className={`font-black leading-[1.18] tracking-[-.015em] text-record-ink ${lead ? 'text-[19px]' : 'text-[15.5px]'}`} style={reading}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
+import CartoonEventShare from '@/components/climate/cartoons/CartoonEventShare';
 
 // ── THE FIRST IMAGE ON THE PAGE ────────────────────────────────────────────────
 // Brian, 18 November: "you think that image should be first image on page bro… love the
@@ -40,6 +41,7 @@ export default function CartoonCatalogueBand() {
         <a href="#cartoon-anthology" className="comic-catalogue-link">
           What the book is <ArrowDown size={14} />
         </a>
+        <CartoonEventShare />
       </div>
     </section>
   );

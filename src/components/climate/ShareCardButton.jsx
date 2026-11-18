@@ -51,8 +51,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       setCard({ blob, fileName: file.name });
       setState('idle');
     } catch (err) {
-      setState('idle');
-      throw err;
+      setState('error');
     }
   };
 
@@ -88,6 +87,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
 
   const label = state === 'building' ? 'Drawing the card…'
     : state === 'shared' ? 'Shared'
+    : state === 'error' ? 'Couldn’t make the card — try again'
     : givenLabel || 'Share this entry as a card';
 
   return (

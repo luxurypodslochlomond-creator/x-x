@@ -8,9 +8,13 @@ import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 export default function CartoonWall() {
   const client = useQueryClient();
   const wall = useInfiniteQuery({
-    queryKey: ['cartoon-wall'],
+    queryKey: ['cartoon-wall', 'artwork-v2'],
     initialPageParam: undefined,
-    queryFn: ({ pageParam }) => base44.entities.ClimateCartoon.filter({ status: 'published' }, { sort: '-created_date', limit: 12, ...(pageParam ? { cursor: pageParam } : {}) }),
+    queryFn: async ({ pageParam }) => {
+      const response = await base44.functions.invoke('climateCartoon', { action: 'wall', ...(pageParam ? { cursor: pageParam } : {}) });
+      return response.data;
+    },
+    staleTime: 5 * 60 * 1000,
     getNextPageParam: (page) => page.has_more ? page.next_cursor : undefined,
   });
   useEffect(() => base44.entities.ClimateCartoon.subscribe(() => client.invalidateQueries({ queryKey: ['cartoon-wall'] })), [client]);
