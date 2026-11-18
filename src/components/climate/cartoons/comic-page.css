@@ -477,3 +477,66 @@
   border-bottom: 3px solid rgb(var(--record-ink));
 }
 .record-pages .cartoon-room .comic-catalogue-line + .comic-catalogue-line { margin-top: .6rem; }
+
+/* ── THE PLATE RUNS THE WHOLE ROOM, NOT JUST ITS NAME ───────────────────────────
+   Brian, 18 November: "can make rest of cartoon coolasfuck page like that please bro,
+   love black red as well and way you got background."
+
+   The masthead was the only thing printed on ink, so the room opened like a comic and then
+   turned back into a page of prose the moment the strip ended. Now every name in the room
+   — the wall, the strip's own book, the biennial, the anthology, the invitation to draw —
+   is printed on the same black plate, with the same cover artwork behind it under the same
+   ink, and the same red rule under the type. `--comic-cover-layer` is set once on the room
+   in ClimateCartoons.jsx, so every one of these plates is the same plate.
+
+   The sentences themselves stay on paper. That is not timidity: a plate is a name shouted
+   across a room, and a paragraph set on a photograph is a paragraph nobody finishes. Black
+   and red carry the structure; the record's warm paper carries the reading. */
+.record-pages .cartoon-room :is(.comic-section-title, .comic-session-title, .comic-anthology-title) {
+  display: block;
+  margin: 0 0 .85rem;
+  padding: .45rem .7rem .55rem;
+  background-color: rgb(var(--record-ink));
+  background-image:
+    radial-gradient(rgb(var(--cartoon-paper) / .14) 1px, transparent 1.2px),
+    linear-gradient(180deg, rgb(var(--record-ink) / .87) 0%, rgb(var(--record-ink) / .72) 45%, rgb(var(--record-ink) / .93) 100%),
+    var(--comic-cover-layer, none);
+  background-size: 6px 6px, auto, cover;
+  background-position: 0 0, center, center 45%;
+  background-repeat: repeat, no-repeat, no-repeat;
+  border-bottom: 4px solid rgb(var(--record-red));
+  color: rgb(var(--cartoon-paper)) !important;
+  font-family: var(--cartoon-display) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: .02em !important;
+  line-height: .95 !important;
+  font-size: clamp(1.85rem, 8.6vw, 2.75rem) !important;
+  max-inline-size: none;
+}
+
+/* ── RED IS THE ROOM'S RULE, NOT ITS TRIMMING ───────────────────────────────────
+   Every section of this room used to be separated by a hairline of ink, which is how a
+   magazine separates articles. A comic separates its pages with a colour. The rules are
+   the record's own red — the same red as the stop in the masthead and the mark at the foot
+   of every page — so the room reads as one printed thing rather than a stack of modules. */
+.record-pages .cartoon-room :is(.cartoon-wall-head, .comic-why, .comic-workshop, .comic-reader, .cartoon-room-notes, .comic-session) {
+  border-top-color: rgb(var(--record-red));
+}
+
+/* The two things a reader can press are now the two colours of the plate: next cartoon in
+   red, "draw your own" in red, and the plain way further down the wall in ink. */
+.record-pages .cartoon-room .comic-next {
+  background: rgb(var(--record-red));
+  color: rgb(var(--cartoon-paper));
+}
+.record-pages .cartoon-room .comic-make-door {
+  background: rgb(var(--record-red));
+  color: rgb(var(--cartoon-paper));
+  border-color: rgb(var(--record-ink));
+  border-bottom-width: 4px;
+}
+.record-pages .cartoon-room .comic-load-more {
+  background: rgb(var(--record-ink));
+  color: rgb(var(--cartoon-paper));
+}

@@ -10,6 +10,7 @@ import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions
 import CartoonWall from '@/components/climate/cartoons/CartoonWall';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
+import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 import '@/components/climate/cartoons/cartoon-room.css';
 import '@/components/climate/cartoons/cartoon-room-layout.css';
 import '@/components/climate/cartoons/cartoon-gallery.css';
@@ -34,6 +35,16 @@ export default function ClimateCartoons() {
           picture that runs off both edges of the glass. The catalogue of the book this
           room feeds now waits below the strip, where somebody who has just enjoyed a
           drawing might actually want it. Nothing was removed; the order changed. */}
+      {/* ── ONE PLATE, THE WHOLE ROOM ─────────────────────────────────────────────
+          Brian, 18 November: "can make rest of cartoon coolasfuck page like that please
+          bro, love black red as well and way you got background."
+
+          So the cover is not the masthead's private trick. It is handed to the whole room
+          once, here, as a single custom property — every black plate below it (the wall's
+          name, the strip's, the biennial's, the book's, the invitation) prints the same
+          artwork behind the same ink, from one place. Change the cover in cartoonEvent.js
+          and every plate in the room changes with it. */}
+      <div className="cartoon-room-plate" style={{ '--comic-cover-layer': `url('${CARTOON_COVER}')` }}>
       <ComicMasthead />
       <ComicReader />
       <div className="comic-event-opening">
@@ -50,6 +61,7 @@ export default function ClimateCartoons() {
       <CartoonWhy />
       <CartoonRoomActions />
       <CartoonSources />
+      </div>
     </ClimateRecordShell>
   );
 }
