@@ -8,10 +8,20 @@
    comes up through the gutters and the margins exactly the way it does on every other page
    of the record, and every word still sits on a solid band or a solid card. Contrast is
    spent on the bands, never on the ground. */
+/* ── AND THEN THE GROUND WAS STILL CREAM ────────────────────────────────────────
+   The note above was right about the idea and timid about the number: at 84 per cent the
+   painting only ever showed as a stain in the gutters, so the page still read as a sheet of
+   card with a photograph somewhere behind it. Brian, 18 November, looking at it on a phone:
+   "x = x page still sane and have that cream bs ground a lot". It does, and a record about
+   nothing being hidden should not hide its own painting.
+   So the ground is bone at three tenths — the painting is the room the page stands in — and
+   every word is moved onto a sheet that is now properly solid rather than 80 per cent solid.
+   Contrast was never in the ground: it is in the cards, and the cards have more of it now
+   than they did when the ground was carrying the work. */
 #x-equals-x.covenant-page {
   position: relative;
   min-height: 100vh;
-  background-color: rgb(var(--record-bone) / .84);
+  background-color: rgb(var(--record-bone) / .3);
   color: rgb(var(--record-ink));
   /* ── THE FOOT'S TYPE, ALL THE WAY UP ──────────────────────────────────────────
      The foot got this right and the page did not. Thirteen-pixel uppercase across every
@@ -266,11 +276,11 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.5rem 1.25rem;
-  /* Held at four fifths rather than solid: the painting runs under this page and the band
-     is part of the page, so the ground comes up through it the way it comes up through
-     every other sheet on the record. Every word on it still sits on ink-dark text at a
-     readable size, so nothing here is spending contrast to look atmospheric. */
-  background-color: rgb(247 241 229 / .84);
+  /* Solid now, for the same reason the cards are: the ground no longer carries any cream,
+     so a band held at four fifths would have been the one washed-out sheet on a page of
+     sharp ones. The painting is in the margins and behind the plate at the top; the words
+     stand on paper. */
+  background-color: rgb(247 241 229 / .97);
   border-bottom: 2px solid rgb(var(--record-ink));
   text-align: center;
 }
@@ -411,10 +421,11 @@
 }
 #x-equals-x .covenant-card {
   padding: 1.25rem;
-  /* Solid, not the paper at six tenths. Hers are solid on bone, so a card reads as a
-     card the moment the eye lands on it; held at partial opacity they dissolved into the
-     ground and the whole stack looked like one grey passage. Same value hers use. */
-  background-color: rgb(247 241 229 / .8);
+  /* Solid, and now properly solid: the ground gave up its cream, so the cards take it back.
+     A card that was 80 per cent paper over a dark painting would have gone grey the moment
+     the painting came through — this one stays paper, so the reading is sharper than it was
+     and the photograph is the thing between the cards rather than a stain under them. */
+  background-color: rgb(247 241 229 / .97);
   border: 1px solid rgb(var(--record-ink));
   border-top: 4px solid rgb(var(--record-red));
 }
