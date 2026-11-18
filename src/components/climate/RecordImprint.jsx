@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { PRIMARY_NAV } from '@/components/climate/recordFooterLinks';
+import { PRIMARY_NAV, RAIL_SECOND_NAV, DESK_FOUNDER } from '@/components/climate/recordFooterLinks';
 import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import RecordDeskDoors from '@/components/climate/RecordDeskDoors';
@@ -32,21 +32,20 @@ import '@/components/climate/record-navigator.css';
 // this row on the masthead's name line, naming itself in its own words. Not in the row (it
 // is not a place to stand) and not only in the sheet (language is not a buried setting on a
 // record that promises nobody is left behind).
-// ── FOUR CELLS, BECAUSE SIX WAS STILL A MENU ───────────────────────────────────
-// Six marks across a 393-pixel glass is sixty-five each, and Brian's verdict on the result
-// was simply "too nav" (18 November). He is right, and the fault is arithmetic rather than
-// taste: six equal cells is not a row of doors, it is a toolbar, and a toolbar on the front
-// page of a record is the noise the record exists to remove.
+// ── TWO ROWS, AND EVERY DOOR NAMED — BACK THE WAY IT WAS ────────────────────────
+// The phone's rail was cut to one row of six, then to four marks with the names taken out,
+// and both were a mistake in the same direction: less was assumed to mean calmer. It did
+// not. Brian, 18 November, looking at four unnamed drawings: "where's our coolasfuck nav
+// on mobile?" — and then, rightly, that the two-row version had been the cool one.
 //
-// So the row is three places and the mark that opens everything else. The three are the
-// three a reader arrives with: what is on the record, what changed, and where it is. Reach
-// and BASE 1 have not gone anywhere — they are the first two doors in the sheet, one tap
-// under the same thumb, and they are still in PRIMARY_NAV so the desk and the foot keep
-// them exactly as they were.
-const ROW = PRIMARY_NAV.slice(0, 3);
-// Where you are is read from the whole list, not from the row: standing in Reach or in the
-// search should still say so, even though neither has a cell of its own on a phone.
-const WAY_IN = PRIMARY_NAV;
+// So it is two rows again, and every cell carries its name underneath. Row one is the five
+// ways in — the record, the wire, the map, reach, and the search. Row two is what a reader
+// asks once they are standing inside: why the record exists, how an entry is checked, what
+// has been corrected, who asked for it, and the mark that opens everything else. Ten named
+// doors, two lines, and the line under them saying which room you are in.
+const ROW_ONE = PRIMARY_NAV;
+const ROW_TWO = [...RAIL_SECOND_NAV, DESK_FOUNDER];
+const WAY_IN = [...ROW_ONE, ...ROW_TWO];
 
 // Equal share, always. Every cell is one sixth of the row whatever it contains, so no door
 // can push its neighbour aside and nothing shifts when a page turns or a tongue changes.
@@ -70,13 +69,30 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
           whatever there is; above it they keep a cell's own size. */}
       <nav aria-label="The record's doors" className="rec-mast-doors w-full max-w-[520px] lg:hidden">
         <div className="rec-mast-row flex items-stretch gap-x-1">
-          {ROW.map(({ label, to, what }) => (
+          {ROW_ONE.map(({ label, to, what }) => (
             <RecordNavDoor
               key={to}
               to={to}
               label={label}
               what={what}
-              size={30}
+              size={28}
+              active={pathname === to}
+              className={CELL}
+            />
+          ))}
+        </div>
+
+        {/* The second line: the record's own claim, her name, and the way to everything
+            else. Same equal share, same drawings, a shade smaller — a second row is read
+            as a second row, not as ten doors of equal weight. */}
+        <div className="rec-mast-row flex items-stretch gap-x-1 mt-0.5">
+          {ROW_TWO.map(({ label, to, what }) => (
+            <RecordNavDoor
+              key={to}
+              to={to}
+              label={label}
+              what={what}
+              size={25}
               active={pathname === to}
               className={CELL}
             />
@@ -93,7 +109,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             to="/ClimateGuide"
             label="Doors"
             what="Every way through the record, on one screen."
-            size={28}
+            size={25}
             asButton
             onClick={onOpenContents}
             expanded={contentsOpen}
