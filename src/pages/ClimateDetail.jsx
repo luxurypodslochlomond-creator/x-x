@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand, Globe } from 'lucide-react';
 import RelatedTriangle from '@/components/climate/RelatedTriangle';
 import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
+import DrawingsAbout from '@/components/climate/cartoons/DrawingsAbout';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import EntryLanguageStatus from '@/components/climate/EntryLanguageStatus';
@@ -408,6 +409,11 @@ export default function ClimateDetail() {
           onOpenItem={(next) => navigate(`/ClimateDetail/${next.entry_type}/${next.id}`)}
           onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
         />
+
+        {/* A crisis that has been drawn about shows the drawings, because the room of
+            cartoons and the record are one thing: the drawing answers this entry, and this
+            entry is where a reader who cares about it already is. */}
+        {!isSolution && <DrawingsAbout entryId={record.id} />}
 
         <ClimateCommentSection entryId={record.id} entryType={record.entry_type} />
       </div>

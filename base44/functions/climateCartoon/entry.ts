@@ -80,6 +80,28 @@ export default async function (req: Request): Promise<Response> {
         return Response.json({ error: 'The drawing did not arrive. Try it once more.' }, { status: 400 });
       }
 
+      // ── THE DRAWING MAY ANSWER A CRISIS ON THE RECORD ───────────────────────────
+      // A drawing can be offered about one entry — the crisis it is looking at — so the
+      // crisis gets a face and the drawing gets a reason. The link is resolved here, against
+      // the record itself, and the headline is copied from that entry rather than taken from
+      // the browser: the wall must never name a crisis in words the sender typed, and an id
+      // that is not a published crisis leaves the drawing unlinked instead of putting a
+      // wrong headline under somebody's work.
+      let crisis_id = '';
+      let crisis_title = '';
+      const askedCrisis = clean(body?.crisis_id, 60);
+      if (askedCrisis) {
+        try {
+          const crisis = await base44.asServiceRole.entities.ClimateSolution.get(askedCrisis);
+          if (crisis && crisis.entry_type === 'climate_crisis' && crisis.status === 'published') {
+            crisis_id = crisis.id;
+            crisis_title = clean(crisis.title, 160);
+          }
+        } catch {
+          // Not an entry on the record: the drawing simply stands on its own.
+        }
+      }
+
       // A workshop is a room full of people pressing send twice. One drawing, one card.
       const already = await base44.asServiceRole.entities.ClimateCartoon.filter({ image_url });
       const existing = (already?.items || already || [])[0];
@@ -95,6 +117,8 @@ export default async function (req: Request): Promise<Response> {
         country: clean(body?.country, 80),
         for_line: clean(body?.for_line, 240),
         image_url,
+        crisis_id,
+        crisis_title,
         machine_line: clean(body?.machine_line, 240),
         credit: clean(body?.credit, 120),
         source_url: String(body?.source_url || '').startsWith('https://') ? String(body.source_url).slice(0, 400) : '',

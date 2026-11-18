@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
 // One drawing on the wall, and the three things that travel with it: who drew it, where
@@ -15,7 +16,7 @@ import { ArrowUpRight } from 'lucide-react';
 const reading = { fontFamily: 'var(--font-reading)' };
 
 export default function CartoonPlate({ cartoon, lead = false, index = 0 }) {
-  const { image_url, title, artist_name, origin, for_line, credit, source_url } = cartoon || {};
+  const { image_url, title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title } = cartoon || {};
 
   return (
     <figure className={`record-cartoon-plate record-media-mount bg-record-paper comic-plate-tone-${index % 3} ${lead ? 'comic-plate-lead' : ''}`}>
@@ -55,6 +56,22 @@ export default function CartoonPlate({ cartoon, lead = false, index = 0 }) {
           <p className={`mt-2 text-record-ink ${lead ? 'text-[14.5px] leading-[1.55]' : 'text-[13.5px] leading-[1.5]'}`} style={reading}>
             {for_line}
           </p>
+        )}
+        {/* ── A DRAWING THAT ANSWERS SOMETHING ────────────────────────────────────
+            Where the person who offered the drawing said which entry it is about, the plate
+            says so and points at that entry — so a drawing is not just a picture on a wall
+            but an answer to something the record has already written down, and a reader can
+            go from the drawing to the crisis and back. The headline is the entry's own,
+            copied by the record's server, never a sentence the sender typed. */}
+        {crisis_id && (
+          <Link
+            to={`/ClimateDetail/climate_crisis/${crisis_id}`}
+            className="mt-2 inline-flex items-start gap-1 text-[12px] font-semibold leading-[1.45] text-record-ink underline decoration-record-red decoration-2 underline-offset-2"
+            style={reading}
+          >
+            <span>Drawn about: {crisis_title || 'an entry on the record'}</span>
+            <ArrowUpRight className="mt-0.5 h-3 w-3 shrink-0" strokeWidth={2} />
+          </Link>
         )}
         {(credit || source_url) && (
           <div className="mt-2.5 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-t border-record-ink/15 pt-2">

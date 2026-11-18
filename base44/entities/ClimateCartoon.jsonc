@@ -1,7 +1,7 @@
 {
   "name": "ClimateCartoon",
   "type": "object",
-  "description": "A drawing given to the record for the room of cartoons, opened for Janine's workshop on 29 November 2026. Every drawing carries the same three things: who drew it, where it came from, and one line in the drawer's own words on what it is for. A drawing sent in from the open page waits for a keeper \u2014 nothing goes on the wall because it was typed into a table with the word 'published' in its hand. The record's machine may add one line about what it can see in a drawing; that line is kept separately from the drawer's words, because a machine's reading is not a person's, and it is labelled as what it is. The sender's own email is kept so the record can reach them about their drawing, and is never shown to a reader.",
+  "description": "A drawing given to the record for the room of cartoons, opened for Janine's workshop on 29 November 2026. Every drawing carries the same three things: who drew it, where it came from, and one line in the drawer's own words on what it is for. A drawing may also answer one entry on the record \u2014 the crisis it is looking at \u2014 and then the crisis and the drawing point at each other. A drawing sent in from the open page waits for a keeper: nothing goes on the wall because it was typed into a table with the word 'published' in its hand. The record's machine may add one line about what it can see in a drawing; that line is kept separately from the drawer's words, because a machine's reading is not a person's, and it is labelled as what it is. The sender's own email is kept so the record can reach them about their drawing, and is never shown to a reader.",
   "properties": {
     "title": {
       "type": "string",
@@ -26,6 +26,14 @@
     "image_url": {
       "type": "string",
       "description": "The drawing itself, stored publicly so the wall can show it to anyone without a sign-in. Shrunk in the browser before it was stored, so it opens fast on a phone at a workshop."
+    },
+    "crisis_id": {
+      "type": "string",
+      "description": "The entry on the record this drawing answers \u2014 a climate crisis, when the person offering it says so. Resolved against the record by its own server, never taken on trust from a browser: an id that is not a published crisis leaves the drawing unlinked rather than putting a wrong headline under somebody's work. Empty means the drawing stands on the wall on its own, which most drawings do."
+    },
+    "crisis_title": {
+      "type": "string",
+      "description": "That entry's own headline, copied from the entry itself at the moment the drawing was offered, so the wall can name the crisis without a lookup and without the sender's words standing in for it."
     },
     "machine_line": {
       "type": "string",

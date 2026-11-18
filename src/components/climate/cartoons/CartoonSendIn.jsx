@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { ImagePlus, Loader2, Check } from 'lucide-react';
 
@@ -56,7 +56,22 @@ export default function CartoonSendIn() {
     for_line: '',
     submitter_email: '',
     credit: '',
+    crisis_id: '',
   });
+
+  // ── A DRAWING CAN BE ABOUT SOMETHING ALREADY ON THE RECORD ──────────────────
+  // The crises this drawing could answer: published entries only, newest first. A drawing
+  // offered about an entry that has since been held back would point at nothing, so the
+  // list is the record's own live list rather than anything the page remembers.
+  const [crises, setCrises] = useState([]);
+  useEffect(() => {
+    let cancelled = false;
+    base44.entities.ClimateSolution
+      .filter({ entry_type: 'climate_crisis', status: 'published' }, { sort: '-created_date', limit: 40 })
+      .then((page) => { if (!cancelled) setCrises(page?.items || []); })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
@@ -174,6 +189,17 @@ export default function CartoonSendIn() {
               value={form.for_line}
               onChange={set('for_line')}
             />
+            {crises.length > 0 && (
+              <label className="block">
+                <span className="sr-only">Is the drawing about one entry on the record?</span>
+                <select className={field} value={form.crisis_id} onChange={set('crisis_id')}>
+                  <option value="">Not about one particular entry</option>
+                  {crises.map((c) => (
+                    <option key={c.id} value={c.id}>{c.title}</option>
+                  ))}
+                </select>
+              </label>
+            )}
             <input className={field} placeholder="Who holds the copyright, if that is not the artist (optional)" value={form.credit} onChange={set('credit')} />
             <input className={field} placeholder="Your email, so a custodian can reach you (optional)" inputMode="email" value={form.submitter_email} onChange={set('submitter_email')} />
           </div>

@@ -70,10 +70,11 @@
    ever held the covenant and the founder. Brian, 18 November: "old door roll feels not
    right." The drawings are back up to twenty-eight pixels — the first size at which these
    marks read as drawings rather than as specks — and nothing is written under them. */
+/* The strip is a way through, not a feature: six doors in one line, close to the ink. */
 .rec-mast-row .rec-art-door {
   min-height: 0;
   gap: 0;
-  padding: .18rem 0 .1rem;
+  padding: .1rem 0 .06rem;
 }
 /* ── THE NAMES ARE BACK UNDER THE MARKS ─────────────────────────────────────────
    Six cells had no room for a word, so the names were dropped and the row became four
@@ -89,9 +90,9 @@
    of them running into its neighbour. */
 .rec-mast-doors .rec-art-caption {
   display: block;
-  margin-top: .14rem;
+  margin-top: .1rem;
   font-family: var(--font-record-ui);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: .04em;
