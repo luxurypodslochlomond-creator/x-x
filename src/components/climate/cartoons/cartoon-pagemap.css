@@ -1,7 +1,10 @@
 /* ── A COMIC PAGE, DRAWN AS A PAGE ───────────────────────────────────────────────
    Panels, gutters, ink borders, halftone behind the drawings, caption boxes, numbers in
-   the corners. The arrangement is the design: one splash, then two, then three on a desk;
-   splash, two, two, one on a phone. Nothing is a sticker on a grid. */
+   the corners, a next-issue line and a credits box. The arrangement is the design: one
+   splash, two tiers of two, and a last panel that breaks the page edge.
+
+   On a phone the same page reflows — splash, two, two, one — so the room is one page in
+   the hand and one page on the desk, rather than two different menus. */
 
 .comic-page {
   margin-top: 1rem;
@@ -170,8 +173,64 @@
    wall, and a second rule is how a page separates one strip from the next. */
 .comic-page-panel--strip { box-shadow: inset 0 0 0 3px rgb(var(--cartoon-paper)), inset 0 0 0 5px rgb(var(--record-ink)); }
 
-/* The closing panel runs the full width, because it is the page's last beat. */
-.comic-page-panel--why { grid-column: span 2; }
+/* ── THE PANEL THAT BREAKS THE PAGE ────────────────────────────────────────────
+   The last panel runs off the edge and sits a degree off true, because that is how a page
+   ends: not tidily, but on the thing it wanted to say. It is the only panel that does it,
+   which is the whole reason it works — a page where every panel breaks the grid has no
+   moment of impact at all. */
+.comic-page-panel--why {
+  grid-column: span 2;
+  margin: 0 -.55rem;
+  border-width: 4px;
+  transform: rotate(-.7deg);
+}
+
+/* ── THE FURNITURE AT THE FOOT ───────────────────────────────────────────────────
+   A next-issue line and a credits box. Every comic carries both, and both are useful
+   here: one says what the room does next, the other says who made what. */
+.comic-page-foot {
+  display: grid;
+  gap: .45rem;
+  margin-top: .6rem;
+}
+
+.comic-page-next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .45rem;
+  padding: .45rem .55rem;
+  border: 2px solid rgb(var(--record-ink));
+  background: rgb(var(--cartoon-paper));
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  transition: background-color .14s ease;
+}
+
+.comic-page-next:hover { background: rgb(var(--cartoon-sun) / .3); }
+
+.comic-page-next-word {
+  font-size: .55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: rgb(var(--record-red));
+}
+
+.comic-page-next-line {
+  font-size: .74rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.comic-page-credits {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .52rem;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  color: rgb(var(--record-muted));
+}
 
 @media (min-width: 640px) {
   .comic-page-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .65rem; }
@@ -179,11 +238,15 @@
   .comic-page-panel--day,
   .comic-page-panel--strip { grid-column: span 3; min-height: 10rem; }
   .comic-page-panel--book,
-  .comic-page-panel--yours,
-  .comic-page-panel--why { grid-column: span 2; min-height: 10rem; }
-  .comic-page-panel--why { grid-column: span 2; }
+  .comic-page-panel--yours { grid-column: span 3; min-height: 10rem; }
+  .comic-page-panel--why { grid-column: span 6; min-height: 9rem; margin: 0 -1.5rem; }
   .comic-page-panel--wall .comic-page-art svg { width: 7.5rem; height: 7.5rem; }
   .comic-page-panel--wall .comic-page-label { font-size: 1.35rem; }
+  .comic-page-panel--why { flex-direction: row; align-items: center; gap: 1.25rem; }
+  .comic-page-panel--why .comic-page-art { flex: none; width: 9rem; }
+  .comic-page-panel--why .comic-page-caption { flex: 1; }
+  .comic-page-foot { grid-template-columns: 1fr auto; align-items: end; gap: .8rem; }
+  .comic-page-credits { text-align: right; }
 }
 
 @media (prefers-reduced-motion: reduce) {

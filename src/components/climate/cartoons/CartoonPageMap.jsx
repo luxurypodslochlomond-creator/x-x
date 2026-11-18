@@ -11,16 +11,14 @@ import CartoonPartMark, { CARTOON_PARTS } from '@/components/climate/cartoons/Ca
 // that tell you where you are. Six equal tiles with an icon in each is a website menu.
 // Six panels on a page is a comic.
 //
-// So the room's contents are laid out the way a page is laid out. One splash panel opens
-// the page — the wall, which is what this room is — and five smaller panels follow it in
-// tiers: two, then three. Each panel carries its own drawn scene, its own number in the
-// corner, and a caption box in the top corner, exactly as a page numbers and captions its
-// panels. The gutters are paper, the borders are ink, the dots behind the drawings are
-// halftone, because that is what printing does.
+// So the room's contents are laid out the way a page is laid out: a splash that opens it,
+// two tiers of two that carry you down, and a last panel that breaks the edge of the page
+// — because the panel that breaks the grid is the one that lands, and the last thing on
+// this page should land. Then the two pieces of furniture every comic since the thirties
+// has carried: a next-issue line, and a credits box that says who did what.
 //
-// Nothing here is a filter or a gimmick laid over a grid: it is the arrangement itself.
-// The panels are the size the page needs them to be, and the same page works on a phone
-// (splash, then two, then two, then one) and on a desk (splash, then two, then three).
+// Nothing here is a filter laid over a grid. The arrangement is the design, and the same
+// page works on a phone (splash, two, two, one) and on a desk (splash, two, two, full).
 const SPANS = {
   wall: 'comic-page-panel--wall',
   day: 'comic-page-panel--day',
@@ -57,6 +55,24 @@ export default function CartoonPageMap() {
             </span>
           </a>
         ))}
+      </div>
+
+      {/* The next-issue line. Every comic has one, and it is the honest one here: the next
+          thing this room does is the 29th, in a room, with people drawing. */}
+      <div className="comic-page-foot">
+        <a href="/ClimateWorkshop" className="comic-page-next">
+          <span className="comic-page-next-word">Next issue</span>
+          <span className="comic-page-next-line">The 29th — a room of drawings, made in one sitting</span>
+        </a>
+
+        {/* The credits box, in the voice a comic uses for its indicia: who did what, small,
+            flat, and not asking for applause. */}
+        <p className="comic-page-credits">
+          Drawings — the artists, named on every plate.<br />
+          Record — the keepers, named on the roll.<br />
+          Strip — illustrated by a machine, labelled as fiction.<br />
+          Anthology — CartoonAFRICA, in preparation.
+        </p>
       </div>
     </nav>
   );
