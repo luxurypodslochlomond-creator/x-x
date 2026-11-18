@@ -24,6 +24,7 @@ import RecordDesktopMenu from '@/components/climate/RecordDesktopMenu';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
 import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
+import ComicField from '@/components/climate/cartoons/ComicField';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -196,10 +197,10 @@ export default function ClimateLayout({ children, currentPage }) {
       {/* The painting and the rare shooting stars stay in their own viewport-sized
           surface. No noise filter or blended grain lies over the master artwork. */}
       <div aria-hidden="true" className="record-environment">
-        {/* The cartoon room carries its own sky, drawn live in the browser (ComicField),
-            so the record's painting is not fetched for a page that will never show it. */}
-        {!isCartoonRoom && <RecordCover position="center 42%" strength={1} priority className="record-ground" />}
-        <RecordSky />
+        {/* One real painting, fixed behind the entire room, including its foot.
+            The cartoon's digital light is transparent, never a replacement globe. */}
+        <RecordCover position="center 42%" strength={1} priority className="record-ground" />
+        {isCartoonRoom ? <ComicField /> : <RecordSky />}
       </div>
 
       {/* ── ONE WAY THROUGH, AND IT IS AT THE TOP ──────────────────────────────────

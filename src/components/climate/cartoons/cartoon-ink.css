@@ -1,10 +1,12 @@
-/* The painting is a single fixed image in ClimateLayout. No repeated black
-   backgrounds or opaque sheets between it and the comic's gutters. */
-#root .record-cartoon-field .record-book {
+/* A single fixed painting belongs to the layout, never a scrolling section.
+   No duplicate background images, dark veil, or alternate globe covers it. */
+#root .record-cartoon-field { isolation: isolate; }
+#root .record-cartoon-field :is(.record-book, .record-pages) {
   background: transparent;
   box-shadow: none;
 }
-#root .record-cartoon-field .record-ground { opacity: 1; }
+#root .record-cartoon-field .record-ground { --cover-strength: 1; }
+#root .record-cartoon-field .cartoon-room-plate { position: relative; }
 #root .record-cartoon-field .cartoon-room {
   --cartoon-read: var(--font-cartoon-reading);
   --cartoon-display: var(--font-cartoon-display);
@@ -78,24 +80,16 @@
   color: rgb(var(--record-ink));
 }
 
-/* ── EVERY NAME IS PRINTED ON THE SAME COSMOS ───────────────────────────────────
-   The plates used to carry a picture behind their ink. A picture is a thing that
-   has to be downloaded and that says the same sentence to everybody, so the plates
-   now carry the room's own sky instead: a gold sunrise low right, a cold
-   atmosphere high left, a halftone screen over both, and the red rule under it.
-   All of it is drawn by the browser from four gradients — no image, no request,
-   nothing measured — so a section name is printed on the same sheet the room is
-   standing on rather than on a copy of somebody else's cover. */
-#root .cartoon-room :is(.comic-masthead, .comic-section-title, .comic-session-title, .comic-anthology-title) {
-  background-color: #0b0a14;
+/* Title plates retain Francis's artwork; the room behind them is the house
+   painting. Transparent ink, not an invented sky or a second opaque canvas. */
+#root .cartoon-room :is(.comic-section-title, .comic-session-title, .comic-anthology-title) {
+  background-color: rgb(var(--record-ink));
   background-image:
-    radial-gradient(120% 150% at 82% 120%, rgb(var(--cartoon-sun) / .58) 0%, transparent 56%),
-    radial-gradient(90% 130% at 8% -20%, rgb(0 200 224 / .30) 0%, transparent 60%),
-    radial-gradient(rgb(var(--cartoon-paper) / .10) 1px, transparent 1.3px),
-    linear-gradient(180deg, #0a0912 0%, #161022 62%, #0a0912 100%);
-  background-size: auto, auto, 7px 7px, auto;
-  background-position: center, center, 0 0, center;
-  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+    linear-gradient(90deg, rgb(var(--record-ink) / .88), rgb(var(--record-ink) / .55)),
+    var(--comic-cover-layer);
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
   border-bottom: 4px solid rgb(var(--record-red));
   color: rgb(var(--cartoon-sun)) !important;
 }
@@ -105,29 +99,30 @@
   overflow: hidden;
   margin: 0;
   padding: 2rem 2rem 2.25rem;
-  background-image:
-    radial-gradient(72% 132% at 88% 108%, rgb(var(--cartoon-sun) / .70) 0%, transparent 58%),
-    radial-gradient(80% 120% at 6% -10%, rgb(0 210 235 / .26) 0%, transparent 62%),
-    radial-gradient(rgb(var(--cartoon-paper) / .12) 1px, transparent 1.3px),
-    linear-gradient(105deg, #07060d 0%, #140f20 58%, #0a0912 100%);
-  background-size: auto, auto, 6px 6px, auto;
-  background-repeat: no-repeat, no-repeat, repeat, no-repeat;
-  border: 3px solid rgb(var(--record-ink));
-  border-bottom: 6px solid rgb(var(--record-red));
-  box-shadow: 0 18px 44px -22px rgb(0 0 0 / .9);
+  background: linear-gradient(90deg, rgb(var(--record-ink) / .87), rgb(var(--record-ink) / .25));
+  border: 2px solid rgb(var(--cartoon-sun) / .45);
+  border-bottom: 5px solid rgb(var(--record-red));
+  box-shadow: 0 18px 44px -22px rgb(var(--record-ink) / .8);
 }
-/* The sun itself, rising behind the name. Clipped by the plate, so it reads as a
-   horizon rather than a circle stuck on a page. */
+#root .cartoon-room .comic-masthead::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 0 38%;
+  z-index: 0;
+  background-image: var(--comic-cover-layer);
+  background-position: center 43%;
+  background-size: cover;
+  opacity: .58;
+  -webkit-mask-image: linear-gradient(90deg, transparent, rgb(0 0 0) 48%);
+  mask-image: linear-gradient(90deg, transparent, rgb(0 0 0) 48%);
+  pointer-events: none;
+}
 #root .cartoon-room .comic-masthead::after {
   content: '';
   position: absolute;
-  right: -5rem;
-  bottom: -9rem;
+  inset: 0;
   z-index: 0;
-  width: 26rem;
-  height: 26rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgb(var(--cartoon-sun) / .85) 0%, rgb(var(--cartoon-sun) / .22) 44%, transparent 70%);
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .1) 55%, rgb(var(--record-ink) / .7));
   pointer-events: none;
 }
 #root .cartoon-room .comic-masthead > * { position: relative; z-index: 1; }
@@ -161,7 +156,10 @@
    word in the room is ever printed in ink on the cosmos. */
 #root .cartoon-room .comic-tap-hint {
   margin-top: .7rem;
-  color: rgb(var(--cartoon-paper) / .82);
+  color: rgb(var(--cartoon-paper));
+  background: rgb(var(--record-ink) / .88);
+  padding: .35rem .65rem;
+  width: fit-content;
 }
 #root .cartoon-room .cartoon-story-reel {
   background: rgb(var(--cartoon-paper));
