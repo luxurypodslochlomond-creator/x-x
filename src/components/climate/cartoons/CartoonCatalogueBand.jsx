@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowDown } from 'lucide-react';
 import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 import CartoonEventShare from '@/components/climate/cartoons/CartoonEventShare';
+import CartoonCoverWords from '@/components/climate/cartoons/CartoonCoverWords';
 
 // ── THE FIRST IMAGE ON THE PAGE ────────────────────────────────────────────────
 // Brian, 18 November: "you think that image should be first image on page bro… love the
@@ -37,6 +38,7 @@ export default function CartoonCatalogueBand() {
             whose the cover is, and a credit that arrives after the description of the book
             is a credit nobody reads. */}
         <p className="comic-catalogue-cover-credit record-meta">{CARTOON_EVENT.coverArt}</p>
+        <CartoonCoverWords />
         <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · in preparation</p>
         <p className="comic-catalogue-line record-meta">
           {CARTOON_EVENT.biennial} — edited by {CARTOON_EVENT.editors}. Free to download
