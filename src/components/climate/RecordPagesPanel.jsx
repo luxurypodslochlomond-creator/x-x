@@ -3,11 +3,6 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordDesktopSections from '@/components/climate/RecordDesktopSections';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
-import { markFor } from '@/components/climate/pageMarks';
-
-// The guide's own mark, fetched once from the same map the doors read, so the foot can
-// never be drawn in a different hand to the sheet above it.
-const GuideMark = markFor('/ClimateGuide');
 
 // ── THE INDEX, ON ONE SCREEN ───────────────────────────────────────────────────
 // This sheet was a page of drawn doors that ran past the top and bottom of a phone: a
@@ -127,35 +122,23 @@ export default function RecordPagesPanel({ open, onClose }) {
          is pinned to all four edges and should therefore fill them. It should. It does not. */
       className="rec-doors climate-record fixed inset-0 m-0 flex h-[100dvh] max-h-none w-full max-w-none items-stretch justify-center overflow-hidden border-0 bg-transparent p-0 font-body text-record-ink backdrop:bg-record-ink/30 lg:backdrop:bg-transparent"
     >
-      <div className="rec-doors-plate flex h-full w-full flex-col bg-record-paper">
-        <div aria-hidden="true" className="h-[3px] w-full shrink-0 bg-record-mark" />
+      <div className="rec-doors-plate flex h-full w-full flex-col border-t-2 border-record-mark/70 bg-record-bone">
 
         <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pb-4 sm:pt-5">
-          {/* ── THE SHEET HAS A MASTHEAD, LIKE EVERY OTHER PAGE OF THE RECORD ────── */}
-          <div className="mb-3 flex shrink-0 items-start justify-between gap-4 border-b border-record-ink pb-2.5 sm:mb-4 sm:pb-3">
-            <div>
-              <p className="font-mono text-[8.5px] uppercase leading-none tracking-[0.3em] text-record-mark">Contents</p>
-              {/* It has been called Contents, then Index, then Every door — and "every door"
-                  was the one word on this sheet that was not true. The music and the support
-                  page came off the record's doors at the founder's request on 9 November, and
-                  the handover sheet is behind a key, so three doors exist that this sheet does
-                  not draw.
+          {/* ── IT SAYS WHAT THE DESK SAYS ────────────────────────────────────────
+              Brian, 18 November: the desk says EXPLORE THE RECORD, and a phone said
+              "open every door" — the same index under two different names, so it did not
+              read as the same thing, and the desk's was the better of the two.
 
-                  "Every open door" is true and is the same promise said honestly: everything
-                  drawn here opens to anybody who taps it, nothing is behind a guess, and
-                  nothing is past the edge of the glass. What is not open is not claimed. */}
-              <h1 id="record-contents-title" className="mt-1 font-display text-[30px] leading-[0.9] tracking-[-0.015em] sm:text-[34px]">
-                Every open door
-              </h1>
-            </div>
-            <button type="button" autoFocus onClick={onClose} aria-label="Close the doors" className="rec-art-door">
-              <span className="rec-art-drawing" aria-hidden="true">
-                <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                  <path d="M7.1 6.4c5.8 5.7 11.7 12.8 18.1 19M25.4 6.9C19.2 13 12.6 20 6.8 25.3" />
-                </svg>
-              </span>
-              <span className="rec-art-caption">Close</span>
-            </button>
+              So this sheet wears the desk's masthead exactly: the same red name in the
+              same header lettering, the same "Close ×" beside it, the same bone paper
+              under it and the same yellow band at the foot. The drawn close door, the
+              small mono "Contents" eyebrow and the big display line are gone with it —
+              a phone is not a different publication, it is the same page on a smaller
+              glass, and now it reads that way. */}
+          <div className="mb-2 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-2">
+            <p id="record-contents-title" className="record-header-type text-base text-record-mark sm:text-lg">Explore the record</p>
+            <button type="button" autoFocus onClick={onClose} className="record-header-type min-h-11 px-2 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Close <span aria-hidden="true">×</span></button>
           </div>
 
           <div className="rec-doors-body min-h-0 flex-1 overflow-y-auto overscroll-contain">
@@ -188,24 +171,17 @@ export default function RecordPagesPanel({ open, onClose }) {
               the index goes back to being only an index.
 
               That removes the nested overlay entirely, which was the real "weird". */}
-          <div className="mt-2.5 shrink-0 border-t border-record-ink pt-2">
-            {/* ── ONE FOOT, AND IT IS DRAWN LIKE EVERYTHING ABOVE IT ─────────────────
-                The guide keeps the foot, and it carries its own mark, fetched from the
-                same map the doors read. */}
+          <div className="shrink-0 pt-2">
+            {/* ── ONE FOOT, AND IT IS THE DESK'S FOOT ─────────────────────────────
+                The guide sits on the same yellow band the desk gives it, so the bottom
+                of this sheet and the bottom of the panel are the same line at both
+                widths. */}
             <Link
               to="/ClimateGuide"
               onClick={onClose}
-              className="group flex items-center justify-between gap-3 px-1 py-1 -mx-1 active:bg-record-ink/5"
+              className="record-header-type flex min-h-11 items-center justify-between bg-record-signal px-3 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
             >
-              <span className="flex items-center gap-2.5">
-                <span aria-hidden="true" className="shrink-0 text-record-ink">
-                  <GuideMark size={26} />
-                </span>
-                <span className="text-[13px] text-record-ink" style={{ fontFamily: 'var(--font-reading)' }}>
-                  Every control, written out
-                </span>
-              </span>
-              <span aria-hidden="true" className="font-mono text-[13px] text-record-mark transition-transform group-hover:translate-x-0.5">→</span>
+              Every control, written out <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
