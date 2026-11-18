@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 import WorldPlate from './WorldPlate';
 import { reachPlaces } from './reachPlaces';
-import { createPageUrl } from '@/utils';
 
 // ── THE WORLD, LIT WHERE IT HAS ACTUALLY BEEN READ ──────────────────────────────────────
 // The record's cover painting is Earth from space, and it is one specific view: a cyclone
@@ -112,10 +111,10 @@ export default function RecordReachEarth() {
             {footnote}
           </p>
           <Link
-            to={createPageUrl('ClimateImpact')}
+            to="/ClimateMap#reach"
             className="font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-record-signal underline decoration-dotted underline-offset-4 transition-colors hover:text-record-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-signal"
           >
-            See the reach
+            Map & reach
           </Link>
         </div>
       </div>

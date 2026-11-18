@@ -91,8 +91,9 @@ const READING = [
     what: 'On every entry\u2019s own page, on the wire, and on every track in the music room. One tap draws the card and offers it to the share sheet already on the device, picture and link together. It is drawn portrait, for a phone, not as a wide desktop banner, so it goes into a post as it is. The origin, the place and how well it is known ride inside the picture, so nothing goes out with its source cut off. Where a device has no share sheet, the card is put on screen to keep and pass on, never a silent download. Nothing is counted, and nothing follows anyone. This page has one of its own, above the bands, so the whole manual can be taken in one piece and handed on.',
   },
   {
-    label: 'Correction',
-    what: 'When the record is corrected, the correction stays in the open with the date it was made.',
+    label: 'Method & corrections',
+    to: '/ClimateMethod',
+    what: 'The checks, the people responsible, the live correction notes and a way to report a problem, together on one page.',
   },
 ];
 
@@ -125,9 +126,9 @@ const FIRST = [
     what: 'Look up a country or a subject you already know about, and see what the record holds.',
   },
   {
-    label: '5. Open Reach',
-    to: createPageUrl('ClimateImpact'),
-    what: 'Who is reading, in countries, and in which tongue — and how a reader can name their own nation.',
+    label: '5. Open the Map',
+    to: '/ClimateMap',
+    what: 'Entries and readership together: one world map, the reach figures, and the places readers have named.',
   },
   {
     label: '6. Change the language',

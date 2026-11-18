@@ -99,7 +99,7 @@ function Ledger({ rows, tone, href, label, lead = true }) {
    read separately — and beneath it, the receipts: who is reading, what they are reading,
    and what is being done about it, in two columns that stay a readable width instead of
    running the length of the monitor. On a phone it is still one calm column. */
-export default function ClimateImpact() {
+export default function ClimateImpact({ embedded = false }) {
   // Shares one read of the numbers with the record's impact strip: tapping through
   // from the record shows them at once, and the page refreshes them behind the scenes.
   const { data: stats, isPending, refetch } = useClimateImpactStats();
@@ -140,7 +140,7 @@ export default function ClimateImpact() {
     } catch {}
   };
 
-  if (isPending) {
+  if (isPending && !embedded) {
     return (
       <div className="min-h-screen bg-[#efe7d6] flex flex-col items-center justify-center">
         <div className="w-10 h-10 rounded-full border-2 border-[#141210]/20 border-t-[#e2602a] animate-spin" />
@@ -160,13 +160,13 @@ export default function ClimateImpact() {
   return (
     <div className="record-reach-page min-h-screen bg-record-bone text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       {/* The same bar, the same way back, as every other page of the record. */}
-      <RecordBackBar eyebrow="The record · Reach" />
+      {!embedded && <RecordBackBar eyebrow="The record · Reach" />}
 
       {/* ── THE SIGNAL: ONE SENTENCE, EVERY FIGURE A DOOR ── */}
-      <ImpactSignal stats={stats} />
+      {!embedded && <ImpactSignal stats={stats} />}
 
       {/* ── THE RECEIPTS — two columns on a desktop, one calm column on a phone ── */}
-      {regions.length > 0 && (
+      {(embedded || regions.length > 0) && (
         <div id="nations" className="record-page-plate px-4 lg:px-8 py-6 bg-record-paper">
           <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
@@ -186,6 +186,7 @@ export default function ClimateImpact() {
               nations have no country code of their own. One reader naming one nation is counted on
               every entry they open, so this figure is usually one person reading, not a crowd.
             </p>
+            {regions.length === 0 && <p role="status" className="text-sm text-record-muted">{isPending ? 'Reading the counts…' : 'No reader-named nations yet.'}</p>}
             <Ledger
               rows={regions}
               tone="red"
@@ -197,13 +198,13 @@ export default function ClimateImpact() {
         </div>
       )}
 
-      {countries.length > 0 && (
+      {(embedded || countries.length > 0) && (
         <div id="countries" className={`record-page-plate px-4 lg:px-8 py-6 bg-record-paper ${regions.length ? 'border-t border-[#141210]/10' : ''}`}>
           <div className="mx-auto max-w-[1100px]">
             <div className="flex items-center gap-2 mb-4">
               <Users className="w-4 h-4 text-[#1e3a2b]" />
               <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '20px', letterSpacing: '-0.02em' }}>
-                Where the connection came from
+                Countries stated by readers’ devices
               </h2>
               <div className="flex-1 h-px bg-[#141210]/20" />
             </div>
@@ -211,10 +212,10 @@ export default function ClimateImpact() {
                 connection is not a country of people, and on this record that distinction is
                 the difference between evidence and a vanity figure. */}
             <p className="text-[10px] text-[#5a5246] leading-relaxed mb-4 max-w-[62ch]" style={{ fontFamily: 'var(--font-reading)' }}>
-              Not where the reader is. An office, a server or a VPN stands anywhere, and one network
-              can serve a whole country — reach, never a headcount.
-              {countries.length === 1 && ' Every read so far has come from one place, so read that as a start rather than as reach.'}
+              A country comes from a reader's device settings, not their IP address or a precise location. It may not be where they are physically reading. Missing places are not guessed.
+              {countries.length === 1 && ' Only one country has been stated so far.'}
             </p>
+            {countries.length === 0 && <p role="status" className="text-sm text-record-muted">{isPending ? 'Reading the counts…' : 'No countries stated yet.'}</p>}
             <Ledger
               rows={countries}
               tone="orange"
@@ -232,7 +233,7 @@ export default function ClimateImpact() {
       </div>
 
       {/* Self-identification — "Where are you reading from?" */}
-      <div className="record-page-plate bg-record-paper border-y border-record-ink/10">
+      <div id="reader-place" className="record-page-plate bg-record-paper border-y border-record-ink/10">
         <div className="mx-auto max-w-2xl px-4 py-6">
           <div className="flex items-start gap-2.5 mb-3">
             <Heart className="w-4 h-4 text-[#b3261e] flex-shrink-0 mt-0.5" />
@@ -250,6 +251,7 @@ export default function ClimateImpact() {
           <div className="flex gap-2">
             <input
               type="text"
+              aria-label="Your nation or region (optional)"
               value={readerRegion}
               onChange={(e) => { setReaderRegion(e.target.value); setCountryNotice(false); }}
               placeholder="e.g. Scotland, Catalonia, Kurdistan…"
@@ -266,18 +268,18 @@ export default function ClimateImpact() {
           </div>
           {savedRegion && (
             <p className="text-[10px] text-[#1e3a2b] font-mono mt-2">
-              Thank you. Your nation will show on the impact page the next time you read an entry.
+              Thank you. Your nation will show here with the entries you read.
             </p>
           )}
           {countryNotice && (
             <p className="text-[10px] text-[#b3261e] font-mono mt-2 leading-relaxed">
-              That's a country we already track by your location — you'll show up automatically when you read an entry. This box is for nations without their own country code (Scotland, Catalonia, Kurdistan…).
+              This box is for nations without their own country code, such as Scotland, Catalonia or Kurdistan. A country is counted only when a reader's device states one.
             </p>
           )}
         </div>
       </div>
 
-      {!counted && (
+      {!counted && !isPending && (
         <div className="record-page-plate px-4 py-16 text-center">
           <Globe className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mx-auto">

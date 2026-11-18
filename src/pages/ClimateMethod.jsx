@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import Block from '@/components/climate/MethodBlock';
+import RecordCorrections from '@/components/climate/RecordCorrections';
+import RecordSaySomething from '@/components/climate/RecordSaySomething';
 import '@/components/climate/method-page.css';
 
 // How this record is made — the page that answers a panel, a journalist or a sceptic
@@ -12,18 +14,6 @@ import '@/components/climate/method-page.css';
 // the sentences around them are shorter, because a method nobody finishes reading
 // protects nobody. Nothing was cut that a sceptic could have used.
 
-function Block({ n, title, children, full = false }) {
-  return (
-    <section className={`mb-11 border-t-2 border-record-ink pt-5 lg:mb-10 ${full ? 'record-method-wide' : ''}`}>
-      <div className="mb-4 flex items-start gap-3">
-        <span className="shrink-0 bg-record-signal px-2 py-1 font-display text-xs font-bold text-record-ink">{n}</span>
-        <h2 className="font-bold uppercase leading-tight text-record-red" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(21px, 1.9vw, 28px)', letterSpacing: '-0.01em' }}>{title}</h2>
-      </div>
-      <div className="space-y-4 text-[12px] font-mono leading-relaxed text-record-ink lg:space-y-3.5 lg:text-[13px] lg:leading-[1.75]">{children}</div>
-    </section>
-  );
-}
-
 function Rule({ children }) {
   return (
     <p className="border-l-4 border-record-red bg-record-signal/20 p-4 text-record-ink lg:px-5 lg:py-4">{children}</p>
@@ -33,20 +23,27 @@ function Rule({ children }) {
 export default function ClimateMethod() {
   return (
     <ClimateRecordShell
-      className="record-sectioned-page record-method-page"
+      className="record-sectioned-page record-method-page record-trust-page"
       wide
-      eyebrow="How this record is made"
-      marker="Method · sources · who decides · corrections"
-      title="How this record is made"
-      statement="Read this before you trust a single entry on it. Every claim here can be checked against the thing it came from."
+      compact
+      eyebrow="Method & corrections"
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
+      <header className="record-method-intro bg-record-paper p-4 lg:p-6">
+        <h1 className="max-w-xl text-[30px] font-bold leading-[1.1] tracking-tight lg:text-[42px]">How we check. What we correct.</h1>
+        <p className="mt-4 max-w-2xl text-[16px] leading-[1.7] text-record-muted">The method explains the checks. The corrections show what changed. Sources, responsibility and mistakes, in one place.</p>
+        <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm font-bold text-record-red">
+          <a href="#corrections" className="inline-flex min-h-11 items-center underline underline-offset-4">Read the corrections ↓</a>
+          <a href="#say" className="inline-flex min-h-11 items-center underline underline-offset-4">Report a problem ↓</a>
+        </div>
+      </header>
+      <div className="record-method-rules" aria-label="The full method">
       <Block n="01" title="What this is, and what it is not">
         <p>A record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
         <p>Entries are ordered by date, never by popularity. Nothing counts likes, shares or followers. Nothing can be pushed up by paying, so there is nothing here to game.</p>
-        <p>One thing is counted, and only one: a read — an entry was opened. Once per place per half hour, never per person, and the place is never an address. Reads are shown on the impact page. They never order this record and never change it.</p>
+        <p>One thing is counted, and only one: a read — an entry was opened. Once per place per half hour, never per person, and the place is never an address. Reads are shown on the map, alongside the entries. They never order this record and never change it.</p>
         <p>It reports what is working; it does not promise that it adds up. A catalogue of solutions is not evidence of improvement, and this record will not blur the two — the reader does that arithmetic, with the sources in front of them.</p>
         <Rule>If a claim about the world cannot be traced to something outside this record, it does not belong here. The record's own rules are a different animal: they are marked as decisions rather than findings, and they are checked the only way a rule can be — by whether it held.</Rule>
       </Block>
@@ -59,7 +56,7 @@ export default function ClimateMethod() {
           they stood, with a fingerprint of that exact copy — and a reader is shown only an excerpt of it. The
           origin keeps its name, its rights and its own address, and every entry sends the reader there first.
           If you publish a source and would rather a copy were not kept,{' '}
-          <Link to="/ClimateCorrections#say" className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
+          <Link to="/ClimateMethod#say" className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
             say so
           </Link>{' '}
           and it comes off. The link to your page stays; the copy goes.
@@ -101,8 +98,8 @@ export default function ClimateMethod() {
           example strips in the cartoon room, and those strips are labelled there as fiction rather than as anybody's
           drawing. A person decided what stayed. Every sentence left standing is his, the mistakes on this record are
           his mistakes, and no claim on it rests on a machine's opinion of the world. Where the machine's own reading
-          does appear, it is labelled as a machine's reading, kept apart from a person's words, and it never signs,
-          seals, ranks or publishes anything.
+          does appear, it is labelled as a machine's reading and kept apart from a person's words. It never signs
+          a person's name; automatically cleared entries and missing human signatures are disclosed above.
         </p>
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
@@ -117,7 +114,7 @@ export default function ClimateMethod() {
         </p>
         <p>
           Every correction, gathered in one place and dated, is on{' '}
-          <Link to={createPageUrl('ClimateCorrections')} className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
+          <Link to="/ClimateMethod#corrections" className="border-b-2 border-[#141210] font-black text-[#141210] hover:text-[#b3261e] hover:border-[#b3261e]">
             corrections, in daylight
           </Link>
           {' '}— including an honest nought when there is nothing to show yet.
@@ -144,6 +141,9 @@ export default function ClimateMethod() {
         <p>No anonymous claims. No volume chasing — no target of entries per day, because that pressure is what fills a page with junk. No trending, no recommendations, and nothing that rewards a reader for returning.</p>
         <p>No republishing another publisher's work to keep a page full. And no pretending that speed is the same as accuracy: an entry can wait an hour for a source, and often should.</p>
       </Block>
+      </div>
+      <RecordCorrections />
+      <div className="record-method-contact bg-record-paper p-4 lg:p-6"><RecordSaySomething /></div>
     </ClimateRecordShell>
   );
 }

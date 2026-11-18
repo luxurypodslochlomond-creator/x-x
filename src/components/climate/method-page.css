@@ -1,26 +1,12 @@
-/* ── THE METHOD, TILED RATHER THAN RIBBONED ───────────────────────────────────
-   Ten numbered rules stacked one under another made a thin column down the middle
-   of the glass, with the record's own painting sitting idle either side of it: the
-   whitest, airiest page on the whole record. Method is a list of rules, and a list
-   of rules is what a sheet of tiles is for.
-
-   On a wide screen the blocks now tile two-up. Every block is a sheet in its own
-   right, so the plates line up into a wall instead of a ribbon, and the page is
-   about half as tall. The long block still spans the full width, because the one
-   thing a tile wall must not do is squeeze a paragraph that deserves the room.
-
-   The measure inside a block is unchanged — nothing here was made wider to read,
-   only arranged better. On a phone it is exactly as it was. */
+/* One short opening, expandable method, then the actual corrections and the existing contact form. */
+.record-trust-page .record-shell-content { display: block; }
+.record-trust-page .record-method-intro { margin-bottom: 1rem; }
+.record-trust-page .record-method-rules { margin-bottom: 1.5rem; }
+.record-method-rule summary::-webkit-details-marker { display: none; }
+.record-method-rule[open] summary { border-bottom: 1px solid rgb(var(--record-ink) / .1); margin-bottom: 1rem; }
+.record-trust-page :is(#corrections, #say) { scroll-margin-top: 9rem; }
+.record-trust-page .record-method-contact { margin-top: 1.5rem; }
 @media (min-width: 1024px) {
-  .climate-record .record-sectioned-page.record-method-page .record-shell-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1.5rem;
-  }
-  .climate-record .record-method-page .record-shell-content > section {
-    margin-bottom: 1.5rem;
-  }
-  .climate-record .record-method-page .record-shell-content > .record-method-wide {
-    grid-column: 1 / -1;
-  }
+  .record-trust-page .record-method-rules { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 1rem; }
+  .record-method-rules .record-method-wide { grid-column: 1 / -1; }
 }

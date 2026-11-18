@@ -91,11 +91,11 @@
   display: block;
   margin-top: .14rem;
   font-family: var(--font-record-ui);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: .08em;
-  white-space: nowrap;
+  line-height: 1.2;
+  letter-spacing: .04em;
+  white-space: normal;
 }
 /* The door you are standing in is filled, the way the record's other open doors are
    filled — a yellow cell with ink in it, not a hairline nobody can see. */

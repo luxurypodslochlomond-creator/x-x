@@ -67,7 +67,7 @@ export default function ClimateReachPlace() {
           poster below it is the page's own voice, not a second navigation. */}
       <RecordBackBar
         eyebrow={`${displayName} · ${placeType === 'country' ? 'country' : 'nation'}`}
-        fallback="/ClimateImpact"
+        fallback="/ClimateMap#reach-details"
       />
 
       {/* Big number */}

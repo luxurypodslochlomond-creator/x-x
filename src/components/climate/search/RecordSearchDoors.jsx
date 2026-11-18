@@ -13,12 +13,11 @@ import { ArrowUpRight } from 'lucide-react';
 const DOORS = [
   { label: 'The record', to: '/TogetherChangeClimate' },
   { label: 'On the wire', to: '/ClimateWire' },
-  { label: 'The map', to: '/ClimateMap' },
-  { label: 'Reach', to: '/ClimateImpact' },
+  { label: 'Map & reach', to: '/ClimateMap' },
   { label: 'Music given', to: '/ClimateMusic' },
   { label: 'Drawings', to: '/ClimateCartoons' },
   { label: 'The roll', to: '/ClimateRoll' },
-  { label: 'The method', to: '/ClimateMethod' },
+  { label: 'Method & corrections', to: '/ClimateMethod' },
 ];
 
 export default function RecordSearchDoors() {

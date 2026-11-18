@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
 import { Globe } from 'lucide-react';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 
@@ -19,7 +18,7 @@ export default function ClimateImpactBar() {
   const countries = typeof stats?.unique_countries === 'number' ? stats.unique_countries : 0;
 
   return (
-    <Link to={createPageUrl('ClimateImpact')} className="flex items-center justify-center gap-2 px-4 py-3 min-h-[42px] bg-[#141210] border-b-2 border-[#e2602a]/20 active:bg-[#e2602a]/10 transition-colors">
+    <Link to="/ClimateMap#reach" className="flex items-center justify-center gap-2 px-4 py-3 min-h-[42px] bg-[#141210] border-b-2 border-[#e2602a]/20 active:bg-[#e2602a]/10 transition-colors">
       <Globe className="w-3.5 h-3.5 text-[#e2602a] flex-shrink-0" />
       <p className="text-[10px] font-mono text-[#efe7d6]/80 leading-tight text-center">
         {isPending ? (

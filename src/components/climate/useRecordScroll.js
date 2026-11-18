@@ -46,7 +46,14 @@ export default function useRecordScroll(rootRef) {
       restore();
       document.fonts?.ready.then(restore);
     } else if (location.hash) {
-      frame = requestAnimationFrame(() => document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: 'start' }));
+      // Keep old bookmarks on their section while the live evidence above it arrives.
+      // The first reader interaction disconnects this observer through stop().
+      const jump = () => {
+        if (active) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      };
+      observer = new ResizeObserver(() => { cancelAnimationFrame(frame); frame = requestAnimationFrame(jump); });
+      observer.observe(root);
+      frame = requestAnimationFrame(jump);
     } else if (!samePage) window.scrollTo({ top: 0, behavior: 'instant' });
     window.addEventListener('scroll', remember, { passive: true });
     root.addEventListener('click', capture, true);

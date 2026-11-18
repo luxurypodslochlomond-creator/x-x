@@ -25,19 +25,8 @@
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and groups.' },
   { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
-  { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Explore entries by place.' },
-  // ── REACH, AND WHY IT IS ON THE RAIL ────────────────────────────────────────
-  // Readership sat only in the foot and in the contents sheet, which for a record whose
-  // whole argument is that it can be seen and checked is the wrong place for the one page
-  // that shows who is reading it and from where. It is called Reach rather than Impact
-  // because Impact sounds like a funder's spreadsheet and this is a fact about a page: how
-  // far it has got, in how many tongues. Reach is also a word the record already uses.
-  { label: 'Reach', to: '/ClimateImpact', page: 'ClimateImpact', what: 'Who is reading the record, from where, in which tongue.' },
-  // Music is off the rail at Janine's request, 9 November 2026: "it would be helpful to
-  // not distract by inviting music… it will take viewers away from the entries of
-  // solutions and crises." The page still exists, and still holds only the record's own
-  // theme, but nothing on the record invites anybody to it any more.
   { label: 'BASE 1', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Ask the record’s own index — a place, a subject, a source.' },
+  { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
 ];
 
 // ── THE RAIL'S SECOND ROW ─────────────────────────────────────────────────────
@@ -48,8 +37,7 @@ export const PRIMARY_NAV = [
 // is written down.
 export const RAIL_SECOND_NAV = [
   { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
-  { label: 'Method', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
-  { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
+  { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
 ];
 
 // ── THE DESK ROW, AND WHY IT IS LONGER THAN THE PHONE'S ────────────────────────
@@ -94,14 +82,14 @@ export const DESK_FOUNDER = {
   what: 'Janine M. H. Selendy, and the record she asked for.',
 };
 
-export const DESK_NAV = [...PRIMARY_NAV, ...RAIL_SECOND_NAV, DESK_FOUNDER];
+// The same four destinations plus Explore at every width. The rulebook and founder stay in Explore.
+export const DESK_NAV = PRIMARY_NAV;
 
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.
 export const FOOTER_NAV = [
   { label: 'Why this record', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
-  { label: 'How we check entries', to: '/ClimateMethod', what: 'How entries are sourced, screened and checked.' },
-  { label: 'Corrections', to: '/ClimateCorrections', what: 'Changes to the record, with dates and reasons.' },
+  { label: 'Method & corrections', to: '/ClimateMethod', what: 'How entries are checked, who decides and what has been corrected.' },
   // "Contents" pointed here, and this is not the contents — the contents is the sheet the
   // masthead's Doors mark opens. This is the written guide: every control on the record, in
   // the order a reader meets it, and where each one leads. A name that promises one thing
@@ -260,7 +248,6 @@ export const CONTENT_GROUPS = [
     title: 'Kept honest',
     doors: [
       FOOTER_NAV.find(({ to }) => to === '/ClimateMethod'),
-      FOOTER_NAV.find(({ to }) => to === '/ClimateCorrections'),
       COVENANT_DOOR,
       ...TRUST_NAV,
     ],

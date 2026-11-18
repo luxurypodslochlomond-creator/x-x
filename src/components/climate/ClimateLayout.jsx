@@ -156,7 +156,7 @@ export default function ClimateLayout({ children, currentPage }) {
     // on those pages later still gets them warm from the pages that do warm them.
     if (WORKING_PAGES.includes(currentPage)) return;
     const timer = setTimeout(() => {
-      ['TogetherChangeClimate', 'ClimateSearch', 'ClimateWire', 'ClimateMethod', 'ClimateImpact', 'ClimateFounder', 'ClimateSupport', 'ClimateHost', 'ClimateTerms', 'ClimatePrivacy']
+      ['TogetherChangeClimate', 'ClimateSearch', 'ClimateWire', 'ClimateMethod', 'ClimateFounder', 'ClimateSupport', 'ClimateHost', 'ClimateTerms', 'ClimatePrivacy']
         .forEach(prefetchPath);
     }, 1200);
     return () => clearTimeout(timer);

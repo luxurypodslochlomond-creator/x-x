@@ -5,6 +5,7 @@ import SortedPageTransition from '@/components/shared/SortedPageTransition';
 import RoutePrefetcher from '@/components/shared/RoutePrefetcher';
 import AdminOnly from '@/components/shared/AdminOnly';
 import KeeperKey from '@/components/climate/KeeperKey';
+import RecordSectionRedirect from '@/components/climate/RecordSectionRedirect';
 import { Toaster } from "@/components/ui/toaster"
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
@@ -138,7 +139,6 @@ const AdminClimateDeskPage = React.lazy(() => import('./pages/AdminClimateDesk')
 const AdminSecureVaultPage = React.lazy(() => import('./pages/AdminSecureVault'));
 const AdminSponsorRoutePage = React.lazy(() => import('./pages/AdminSponsorRoute'));
 const Uf51RoadPage = React.lazy(() => import('./pages/Uf51Road'));
-const ClimateImpactPage = React.lazy(() => import('./pages/ClimateImpact'));
 const ClimateTermsPage = React.lazy(() => import('./pages/ClimateTerms'));
 const ClimatePrivacyPage = React.lazy(() => import('./pages/ClimatePrivacy'));
 const ClimateReachPlacePage = React.lazy(() => import('./pages/ClimateReachPlace'));
@@ -155,7 +155,6 @@ const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
-const ClimateCorrectionsPage = React.lazy(() => import('./pages/ClimateCorrections'));
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 const ClimateRollPage = React.lazy(() => import('./pages/ClimateRoll'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
@@ -379,7 +378,7 @@ const AuthenticatedApp = () => {
           x = x pointed at it — because a door that opens onto a locked page is worse than
           no door at all. */}
       <Route path="/ClimateHandover" element={<ClimateLayout currentPage="ClimateHandover"><KeeperKey><ClimateHandoverPage /></KeeperKey></ClimateLayout>} />
-      <Route path="/ClimateCorrections" element={<ClimateLayout currentPage="ClimateCorrections"><ClimateCorrectionsPage /></ClimateLayout>} />
+      <Route path="/ClimateCorrections" element={<RecordSectionRedirect to="/ClimateMethod" fallbackHash="#corrections" />} />
       {/* The seal: every entry fingerprinted, and the check run in the reader's own
           browser rather than on our server. The one page that lets a sceptic verify
           the record without trusting anybody who built it. */}
@@ -458,7 +457,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/Uf51Road" element={<LayoutWrapper currentPageName="Uf51Road"><AdminOnly><Uf51RoadPage /></AdminOnly></LayoutWrapper>} />
-      <Route path="/ClimateImpact" element={<ClimateLayout currentPage="ClimateImpact"><ClimateImpactPage /></ClimateLayout>} />
+      <Route path="/ClimateImpact" element={<RecordSectionRedirect to="/ClimateMap" fallbackHash="#reach" />} />
       <Route path="/ClimateTerms" element={<ClimateLayout currentPage="ClimateTerms"><ClimateTermsPage /></ClimateLayout>} />
       <Route path="/ClimatePrivacy" element={<ClimateLayout currentPage="ClimatePrivacy"><ClimatePrivacyPage /></ClimateLayout>} />
       <Route path="/ClimateReachPlace/:placeType/:place" element={<ClimateLayout currentPage="ClimateImpact"><ClimateReachPlacePage /></ClimateLayout>} />
