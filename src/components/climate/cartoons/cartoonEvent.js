@@ -27,5 +27,9 @@ export const CARTOON_EVENT = {
   // nothing about what it is has no bio: whoever receives it is looking at a poster for
   // something they cannot name. Africa and Asia are named because the room is neither.
   roomLine: 'A room of climate cartoons, with drawings from Africa, Asia and beyond.',
+  // The line the pass-it-on card carries. A card sent for the event is not the room's
+  // bio: whoever receives it has been handed a poster for one biennial, so it says what
+  // the book is, in the anthology's own words, rather than describing a website.
+  eventLine: 'An anthology of editorial cartoons and comics journalism by selected African and non-African cartoonists.',
   credit: 'CartoonAFRICA, prepared by African Press Cartoon services, 2026',
 };

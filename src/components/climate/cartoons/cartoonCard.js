@@ -51,20 +51,25 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   ctx.fillText('Janine Selendy’s workshop · Sunday 29 November', pad, top + 172);
   ctx.font = `400 26px ${DISPLAY}`;
   ctx.fillText('3pm West Africa · 2pm UK · in the room and online', pad, top + 212);
-  // A card with a picture and a date but no line about what it is has no bio: the person
-  // receiving it is looking at a poster for something they cannot name. So the room says
-  // what it is, in one line, before the credit and the address.
+  // What the book is, in the anthology's own words. This card is sent for the event, so
+  // the line under the date describes the biennial's anthology — not the website it was
+  // made on. A room's bio on an event poster tells the person holding it nothing.
   ctx.fillStyle = colors.MUTED;
   ctx.font = `400 22px ${DISPLAY}`;
-  ctx.fillText(CARTOON_EVENT.roomLine, pad, top + 248);
-  // And it carries the name of the hand that drew the cover: a shared picture that has
-  // lost its artist is the one thing this room will not send.
-  ctx.font = `400 19px ${DISPLAY}`;
-  ctx.fillText(CARTOON_EVENT.coverArt, pad, top + 286);
-  ctx.font = `700 28px ${DISPLAY}`;
-  ctx.fillStyle = colors.INK;
+  lines(ctx, CARTOON_EVENT.eventLine, W - pad * 2).slice(0, 2)
+    .forEach((line, i) => ctx.fillText(line, pad, top + 250 + i * 28));
+  // The address on the left, and the hand that drew the cover on the right. The credit is
+  // a fact about the picture, so it sits in its own corner where it cannot be read as part
+  // of the book's description — and a shared cover never travels without its artist.
   const origin = String(options.origin || recordOrigin()).replace(/^https?:\/\//, '').replace(/\/$/, '');
-  ctx.fillText(`${origin}/ClimateCartoons`, pad, top + 330);
+  ctx.fillStyle = colors.INK;
+  ctx.font = `700 28px ${DISPLAY}`;
+  ctx.fillText(`${origin}/ClimateCartoons`, pad, top + 332);
+  ctx.textAlign = 'right';
+  ctx.fillStyle = colors.MUTED;
+  ctx.font = `400 19px ${DISPLAY}`;
+  ctx.fillText(CARTOON_EVENT.coverArt, W - pad, top + 332);
+  ctx.textAlign = 'left';
   return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('The card could not be saved. Please try again.')), 'image/png'));
 }
 
