@@ -615,45 +615,19 @@
   text-decoration-color: rgb(var(--record-red));
 }
 
-/* ── FURTHER READING, AND THE WAY FURTHER ───────────────────────────────────────
-   The close is centred, like hers, with both actions side by side and the dedication
-   under them. Nothing is left in a bottom corner where a phone will not find it. */
+/* ── THE CLOSE ──────────────────────────────────────────────────────────────────
+   The close is centred, like hers, with both actions side by side. Nothing is left in a
+   bottom corner where a phone will not find it.
+
+   There was a "further reading" line here pointing at a book about the industry. Janine
+   asked for it off the platform, and she was right to: the record quotes one person and
+   argues from her words, and a shelf of recommended reading underneath turns a promise
+   into a reading list with a favourite on it. The close is the two ways onward now. */
 #x-equals-x .covenant-close {
   max-width: 52rem;
   margin: 0 auto;
   padding: 0 1.25rem 2rem;
 }
-#x-equals-x .covenant-reading {
-  padding: 1rem 0 0;
-  border-top: 1px solid rgba(20, 18, 16, 0.2);
-}
-#x-equals-x .covenant-reading-label {
-  margin: 0 0 0.5rem !important;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.15em !important;
-  color: #5a5246 !important;
-}
-#x-equals-x .covenant-book-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 0;
-  color: #141210;
-  text-decoration: none;
-}
-#x-equals-x .covenant-book-link strong {
-  display: block;
-  font-size: 0.8125rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-#x-equals-x .covenant-book-author { display: block; margin-top: 0.2rem; font-size: 0.75rem; color: #5a5246; }
-#x-equals-x .covenant-book-arrow { flex-shrink: 0; color: rgb(var(--record-red)); font-size: 1rem; }
-#x-equals-x .covenant-reading-note { margin-top: 0.25rem !important; }
 
 #x-equals-x .covenant-actions {
   display: flex;

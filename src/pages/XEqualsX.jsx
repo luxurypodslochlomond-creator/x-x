@@ -9,7 +9,6 @@ import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
-import XEqualsXThanks from '@/components/climate/XEqualsXThanks';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import '@/components/climate/x-equals-x-page.css';
@@ -76,8 +75,6 @@ export default function XEqualsX() {
       </div>
 
       <div className="covenant-close">
-        <XEqualsXThanks />
-
         <div className="covenant-actions">
           <Link to="/ExtractionProofCovenant" className="covenant-btn">
             The full covenant <ArrowRight className="w-4 h-4" />
