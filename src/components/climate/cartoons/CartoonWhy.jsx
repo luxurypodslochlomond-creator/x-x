@@ -31,9 +31,17 @@ export default function CartoonWhy() {
           One card: the cartoon, the reason, and the address. No tracking on it.
         </p>
       </div>
-      <Link to="/ClimateMethod" className="comic-why-link">
-        How the record checks things <ArrowUpRight size={15} />
-      </Link>
+      {/* The drawings are not a room beside the record: they stand on its map, where they
+          were drawn. This is the door between the two, so a visitor from a newsroom or a
+          festival can see the record carries the work rather than displaying it. */}
+      <div className="comic-why-links">
+        <Link to="/ClimateMap" className="comic-why-link">
+          Where the drawings stand on the map <ArrowUpRight size={15} />
+        </Link>
+        <Link to="/ClimateMethod" className="comic-why-link">
+          How the record checks things <ArrowUpRight size={15} />
+        </Link>
+      </div>
     </section>
   );
 }

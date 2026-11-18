@@ -41,6 +41,23 @@
 .comic-title::before { content: ''; position: absolute; inset: 28% -4% -8%; background: rgb(var(--cartoon-sun)); z-index: -1; transform: rotate(5deg); clip-path: polygon(0 8%, 98% 0, 100% 88%, 3% 100%); }
 .comic-title-stop { display: inline-block; margin-left: .04em; color: rgb(var(--record-red)); transform: rotate(12deg); }
 .comic-tagline { margin-top: 1rem; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+/* ── THE COVER ───────────────────────────────────────────────────────────────────
+   The room used to open on its own name printed on blank paper, and then a wall. That is
+   a blog opening. A cartoon site opens on a drawing: the newest one runs to both edges of
+   the glass, in its own shape and never cropped, and the room's name is printed under it
+   on the sun band the way a cover carries its title. The picture is the front page; the
+   name is what is written on the front page. */
+.comic-cover { margin: 0 -1rem .4rem; }
+.comic-cover-art { background: rgb(var(--record-ink)); }
+.comic-cover-art img { display: block; width: 100%; height: auto; }
+.comic-cover-plate { padding: .85rem 1rem 1rem; background: rgb(var(--cartoon-sun)); border-bottom: 3px solid rgb(var(--record-ink)); }
+.comic-cover-plate .comic-eyebrow { font-size: .7rem; color: rgb(var(--record-ink)); opacity: .72; }
+.record-pages .cartoon-room .comic-cover-plate .comic-title { margin: .3rem 0 .45rem; font-size: clamp(2.7rem, 13vw, 4.6rem); }
+/* The band is the slap now, so the title does not need a second sheet of colour behind it. */
+.comic-cover-plate .comic-title::before { display: none; }
+.comic-cover-by { font-size: .84rem; font-weight: 700; line-height: 1.4; }
+.comic-cover-by strong { font-weight: 900; }
+.comic-cover-credit { margin-top: .3rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .58rem; text-transform: uppercase; letter-spacing: .07em; opacity: .72; }
 .comic-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
 .comic-rail::-webkit-scrollbar { display: none; }
 .comic-panel { flex: 0 0 100%; min-width: 0; padding: .5rem .4rem .4rem; scroll-snap-align: start; scroll-snap-stop: always; }
@@ -82,6 +99,8 @@
 .comic-position { flex-shrink: 0; font-size: .8rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .record-pages .cartoon-room .comic-art-credit { margin: 1rem .4rem 0; font-size: .72rem; line-height: 1.5; color: rgb(var(--record-muted)); }
 .comic-workshop, .comic-wall, .comic-why { margin-top: 2.7rem; }
+/* The wall follows the cover, so it needs less air above it than a section that follows prose. */
+.comic-wall { margin-top: 1.7rem; }
 .comic-why { padding: 1.4rem 1rem 1.5rem; border: 2px solid rgb(var(--record-ink)); border-radius: 3px 8px 4px 8px; background: rgb(var(--cartoon-paper)); box-shadow: 4px 4px 0 rgb(var(--record-ink) / .12); }
 .record-pages .cartoon-room .comic-why-list { display: grid; gap: .7rem; margin: .9rem 0 0; padding: 0; list-style: none; }
 .record-pages .cartoon-room .comic-why-list li { position: relative; padding-left: 1.9rem; font-size: .95rem; line-height: 1.45; font-weight: 600; max-inline-size: none; }
@@ -90,6 +109,8 @@
 .comic-share { padding-top: 1rem; border-top: 2px dashed rgb(var(--record-ink) / .18); }
 .record-pages .cartoon-room .comic-share-note { margin: .5rem 0 0; font-size: .75rem; line-height: 1.45; color: rgb(var(--record-muted)); text-align: center; }
 .comic-why-link { display: inline-flex; align-items: center; gap: .35rem; margin-top: 1rem; font-size: .82rem; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
+.comic-why-links { display: grid; justify-items: start; gap: .5rem; margin-top: 1rem; }
+.comic-why-links .comic-why-link { margin-top: 0; }
 .record-pages .cartoon-room .comic-section-title { font-size: clamp(1.7rem, 7vw, 2.4rem); line-height: 1.05 !important; }
 .record-pages .cartoon-room .comic-workshop-note { margin: .6rem 0 1rem; font-size: .85rem; line-height: 1.5; color: rgb(var(--record-muted)); }
 .comic-drawer { margin-top: .85rem; border: 2px solid rgb(var(--record-ink)); background: rgb(var(--cartoon-sun)); border-radius: 5px 3px 7px 3px; box-shadow: 3px 3px 0 rgb(var(--record-ink)); }
@@ -166,6 +187,10 @@
 @media (min-width: 1024px) {
   .cartoon-room .record-shell-content { padding: .7rem 2.5rem 3rem; }
   .comic-masthead { padding-top: 1.4rem; }
+  /* On a desk there is room for the drawing to be a mounted cover rather than a bleed. */
+  .comic-cover { margin: 0; }
+  .comic-cover-art { border: 3px solid rgb(var(--record-ink)); border-bottom: 0; border-radius: 3px 9px 0 0; overflow: hidden; }
+  .comic-cover-plate { padding: 1.1rem 1.4rem 1.2rem; }
   .comic-source-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media print {
