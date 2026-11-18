@@ -30,6 +30,16 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
             size={22} asButton onClick={onOpenContents} expanded={contentsOpen} controls="record-contents" active={contentsOpen} className={CELL} />
         </div>
       </nav>
+      {/* ── BASE 1, IN THE MIDDLE ────────────────────────────────────────────────
+          Brian, 18 November: "have BASE 1 in the middle know what I mean bro". It sits
+          centred under the doors, on a desk only, in the machine's own type and the
+          record's own faint ink — the hand that built the room, signed where a printer
+          signs a sheet. No door, no badge, nothing to click: a signature, not a product. */}
+      <div className="hidden items-center justify-center gap-3 pb-1 pt-1.5 lg:flex">
+        <span aria-hidden="true" className="h-px w-16 bg-record-ink/20" />
+        <span className="font-mono text-[9px] uppercase tracking-[0.34em] text-record-ink/45">Base 1</span>
+        <span aria-hidden="true" className="h-px w-16 bg-record-ink/20" />
+      </div>
       <LanguageStatus />
     </div>
   );

@@ -11,7 +11,6 @@ import CartoonWall from '@/components/climate/cartoons/CartoonWall';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
-import CartoonInterventions from '@/components/climate/cartoons/CartoonInterventions';
 import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 import '@/components/climate/cartoons/cartoon-room.css';
 import '@/components/climate/cartoons/cartoon-room-layout.css';
@@ -19,6 +18,9 @@ import '@/components/climate/cartoons/cartoon-gallery.css';
 import '@/components/climate/cartoons/comic-page.css';
 import '@/components/climate/cartoons/cartoon-ink.css';
 import '@/components/climate/cartoons/cartoon-spread.css';
+// Loaded last on purpose: the layered, full-width sheet is the room's final composition,
+// so it has to be able to answer every rule above it.
+import '@/components/climate/cartoons/cartoon-layers.css';
 
 export default function ClimateCartoons() {
   return (
@@ -73,10 +75,6 @@ export default function ClimateCartoons() {
         <CartoonAnthology />
       </div>
       <CartoonWhy />
-      {/* The room's own argument about what a drawing is for, proved by the one panel
-          that is deliberately empty. Placed after "why cartoons" and before the door
-          that asks for a drawing. */}
-      <CartoonInterventions />
       <CartoonRoomActions />
       <CartoonSources />
       </div>

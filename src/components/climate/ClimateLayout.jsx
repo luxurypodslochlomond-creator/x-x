@@ -229,7 +229,13 @@ export default function ClimateLayout({ children, currentPage }) {
             itself holds paper so nothing shows through behind it. */}
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
         {!isRoom && <RecordTimeBar />}
-        <div className={`mx-auto max-w-[1100px] px-4 lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
+        {/* The masthead was held to the reading column's 1100px, so on a desk it floated in
+            the middle of the glass with a hand's width of nothing either side of it while the
+            doors inside it were squeezed. Brian, 18 November: "why we not using full width on
+            desktop bro feel like wasted… top nav could be have more". The nav now takes the
+            desk; the pages under it keep their reading measure, which is the one thing on this
+            record that must not be stretched. */}
+        <div className={`mx-auto w-full max-w-[1100px] px-4 lg:max-w-[1440px] lg:px-10${isRoom ? ' pb-2.5' : ''}`}>
           {/* ── THE NAME OPENS A WORKED ROOM, AND ONLY A WORKED ROOM ────────────────
               On a page that is read, the record's name at the top said what the yellow
               line beneath it already said, in a second voice, and took forty pixels of a
