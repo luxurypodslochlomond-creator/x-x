@@ -81,7 +81,7 @@ export default function RecordReachEarth() {
   return (
     <section
       aria-labelledby="record-reach-earth-heading"
-      className="relative w-full overflow-hidden bg-record-ink px-4 pb-7 pt-8 text-record-bone lg:px-10 lg:pb-10 lg:pt-11"
+      className="relative w-full overflow-hidden border-t-2 border-record-signal bg-record-ink px-4 pb-7 pt-7 text-record-bone lg:px-10 lg:pb-10 lg:pt-10"
     >
       {/* A faint warm halo under the plate, so the ink band is a lit room rather than a
           black slab. It is the same red the mark is printed in, at a whisper. */}
