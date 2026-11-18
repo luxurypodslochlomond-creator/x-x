@@ -32,6 +32,20 @@ import '@/components/climate/record-navigator.css';
 // this row on the masthead's name line, naming itself in its own words. Not in the row (it
 // is not a place to stand) and not only in the sheet (language is not a buried setting on a
 // record that promises nobody is left behind).
+// ── FOUR CELLS, BECAUSE SIX WAS STILL A MENU ───────────────────────────────────
+// Six marks across a 393-pixel glass is sixty-five each, and Brian's verdict on the result
+// was simply "too nav" (18 November). He is right, and the fault is arithmetic rather than
+// taste: six equal cells is not a row of doors, it is a toolbar, and a toolbar on the front
+// page of a record is the noise the record exists to remove.
+//
+// So the row is three places and the mark that opens everything else. The three are the
+// three a reader arrives with: what is on the record, what changed, and where it is. Reach
+// and BASE 1 have not gone anywhere — they are the first two doors in the sheet, one tap
+// under the same thumb, and they are still in PRIMARY_NAV so the desk and the foot keep
+// them exactly as they were.
+const ROW = PRIMARY_NAV.slice(0, 3);
+// Where you are is read from the whole list, not from the row: standing in Reach or in the
+// search should still say so, even though neither has a cell of its own on a phone.
 const WAY_IN = PRIMARY_NAV;
 
 // Equal share, always. Every cell is one sixth of the row whatever it contains, so no door
@@ -56,7 +70,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
           whatever there is; above it they keep a cell's own size. */}
       <nav aria-label="The record's doors" className="rec-mast-doors w-full max-w-[520px] lg:hidden">
         <div className="rec-mast-row flex items-stretch gap-x-1">
-          {WAY_IN.map(({ label, to, what }) => (
+          {ROW.map(({ label, to, what }) => (
             <RecordNavDoor
               key={to}
               to={to}
