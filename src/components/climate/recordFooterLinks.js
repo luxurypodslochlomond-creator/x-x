@@ -82,8 +82,10 @@ export const DESK_FOUNDER = {
   what: 'Janine M. H. Selendy, and the record she asked for.',
 };
 
-// The same four destinations plus Explore at every width. The rulebook and founder stay in Explore.
-export const DESK_NAV = PRIMARY_NAV;
+// The desk row: the four ways through, then her name, then Explore. Provenance sits on the
+// top row because it is the first thing a sceptical reader checks and the last thing the
+// record should hide in a sheet.
+export const DESK_NAV = [...PRIMARY_NAV, DESK_FOUNDER];
 
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.

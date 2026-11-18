@@ -11,3 +11,32 @@
 }
 
 .record-reach-light { animation: record-reach-breathe 11s ease-in-out infinite; }
+
+/* ── THE ATLAS IS ALIVE ──────────────────────────────────────────────────────────
+   Two movements, both on the compositor and both on the plate the reader is actually
+   looking at, so the map page costs nothing extra to hold.
+
+   A thread is a place that read the record joined to the nearest entry standing on the
+   plate. It runs slowly from the reader towards the entry and never stops, because the
+   record never stops being read; the dashes are short and wide apart so it reads as a
+   signal travelling rather than as a dashed border. Each thread starts at a different
+   point in the cycle, so the plate breathes out of step with itself and never pulses as
+   one object.
+
+   The pass is a band of the record's own ember drifting across the plate over three
+   quarters of a minute — the same idea as the sun coming round, at a speed the eye only
+   ever catches mid-movement. */
+@keyframes record-atlas-thread { to { stroke-dashoffset: -220; } }
+@keyframes record-atlas-pass { from { transform: translateX(-40px); } to { transform: translateX(120px); } }
+
+.record-atlas-thread {
+  stroke-dasharray: 2 9;
+  animation: record-atlas-thread 22s linear infinite;
+}
+.record-atlas-pass {
+  animation: record-atlas-pass 44s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .record-atlas-thread { animation: none; stroke-dasharray: none; opacity: .22; }
+  .record-atlas-pass { animation: none; opacity: 0; }
+}

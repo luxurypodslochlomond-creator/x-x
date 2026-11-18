@@ -2,14 +2,16 @@
 .record-unified-map .record-reach-page { min-height: 0; background: rgb(var(--record-paper)); }
 .record-unified-map .record-page-plate { margin: 0; }
 .record-unified-map :is(#nations, #countries, #reader-place) { scroll-margin-top: 9rem; }
-.record-unified-map #reader-place p { font-size: 14px; line-height: 1.65; }
-.record-unified-map #reader-place :is(input, button) { min-height: 44px; font-size: 14px; }
-.record-unified-map #reader-place > div { padding-block: 1.5rem; }
-.record-unified-map .record-reach-page > :is(#nations, #countries) { padding-block: 1.25rem; border-top: 1px solid rgb(var(--record-ink) / .15); }
+
+/* The embedded reach keeps the record's own surfaces; only its scale is brought down so a
+   section of it reads as a section of this page rather than as a page of its own. */
+.record-unified-map .record-reach-page > :is(#nations, #countries) {
+  padding-block: 1.25rem;
+  border-top: 1px solid rgb(var(--record-ink) / .15);
+}
 .record-unified-map .record-reach-page :is(#nations, #countries) h2 { font-size: 18px; text-transform: none; }
 .record-unified-map .record-reach-page :is(#nations, #countries) p { font-size: 14px; line-height: 1.65; }
 .record-unified-map .record-reach-page > .record-page-plate:last-child p { font-size: 13px; line-height: 1.7; }
-@media (min-width: 1024px) {
-  .record-unified-map > :is(header, section, p) { max-width: 1640px; margin-inline: auto; }
-  .record-unified-map .record-reach-page > .record-page-plate { margin: 0; }
-}
+.record-unified-map #reader-place p { font-size: 14px; line-height: 1.65; }
+.record-unified-map #reader-place :is(input, button) { min-height: 44px; font-size: 14px; }
+.record-unified-map #reader-place > div { padding-block: 1.5rem; }

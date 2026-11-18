@@ -31,7 +31,7 @@ function whenItArrived(iso) {
    read what is on it. */
 // lights are the places the record is being read from — the reach, on the same plate as
 // the entries. One world, two facts about it: where the record stands, and where it is read.
-export default function RecordWorldMap({ lights = [] }) {
+export default function RecordWorldMap({ lights = [], alive = false }) {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [publishedTotal, setPublishedTotal] = useState(0);
@@ -185,6 +185,7 @@ export default function RecordWorldMap({ lights = [] }) {
       <WorldPlate
         marks={marks}
         lights={lights}
+        alive={alive}
         selectedId={picked?.id}
         onSelect={pick}
         label={`The world, with ${marks.length} entries of the record set where they happened and ${lights.length} places reading it`}
