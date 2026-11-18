@@ -86,3 +86,47 @@
   #root .cartoon-room .cartoon-room-notes { gap: 2rem; border: 0; align-items: start; }
   #root .cartoon-room .cartoon-room-notes :is(.comic-session, .comic-anthology) { padding: 1.25rem; border: 2px solid rgb(var(--record-ink)); }
 }
+
+/* ── ONE BREAK IN THE GRID ──────────────────────────────────────────────────────
+   Every section of this room is a title above a box, which is what makes a page feel
+   laid out rather than drawn. A comic breaks its own grid once, hard, and lets one
+   picture be the page: no frame, no shadow, no margin, ink behind it. This is that
+   one break, and it is the first drawing on the wall — the human hand, at the width
+   of the book, before anything is explained.
+
+   One break only. A second would be a style; one is an event. */
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening { margin-inline: -1rem; }
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .record-cartoon-plate {
+  display: block;
+  border: 0;
+  box-shadow: none;
+  background: rgb(var(--record-ink));
+}
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-artwork-door {
+  display: block;
+  aspect-ratio: auto;
+  background: rgb(var(--record-ink));
+  border-bottom: 0;
+}
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .comic-wall-artwork {
+  width: 100%;
+  height: auto;
+  max-height: 84vh;
+  object-fit: contain;
+}
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-caption {
+  padding: 1rem;
+  background: rgb(var(--record-ink));
+  border: 0;
+  color: rgb(var(--cartoon-paper));
+}
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-caption :is(h3, p, a, .cartoon-byline) {
+  color: rgb(var(--cartoon-paper));
+}
+#root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-caption .cartoon-own-words {
+  color: rgb(var(--cartoon-sun));
+}
+@media (min-width: 1024px) {
+  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening { margin-inline: -2rem; }
+  #root .cartoon-room .cartoon-human-wall .cartoon-reading-spread--opening .cartoon-caption { padding: 1.25rem 2rem; }
+}

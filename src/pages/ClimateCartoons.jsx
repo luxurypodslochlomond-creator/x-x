@@ -9,6 +9,7 @@ import ComicReader from '@/components/climate/cartoons/ComicReader';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonWall from '@/components/climate/cartoons/CartoonWall';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
+import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 import '@/components/climate/cartoons/cartoon-room.css';
@@ -50,7 +51,14 @@ export default function ClimateCartoons() {
       {/* The continuous painting and digital light live in ClimateLayout, not
           inside a scrolling section. Francis's cover stays on the title plates. */}
       <ComicMasthead />
-      <ComicReader />
+      {/* One honest line of real facts, where decoration used to be. */}
+      <CartoonSignal />
+      {/* ── THE HUMAN HAND FIRST, ALWAYS ─────────────────────────────────────────
+          This room opened on the record's own AI-illustrated strip and reached
+          Francis's cover and the human wall only after it. On a record whose whole
+          claim is that a person signs what is on it, that order said the opposite of
+          what the room means. Francis's cover, then the wall of drawings by real
+          hands, then the record's own fiction — labelled, and last. */}
       <div className="comic-event-opening">
         <CartoonCatalogueBand />
         <div className="comic-event-context">
@@ -58,6 +66,7 @@ export default function ClimateCartoons() {
         </div>
       </div>
       <CartoonWall />
+      <ComicReader />
       <div className="cartoon-room-notes">
         <CartoonSessionBand />
         <CartoonAnthology />

@@ -146,6 +146,31 @@
   border: 2px solid rgb(var(--record-ink));
   padding: .65rem 1rem;
 }
+/* ── THE MACHINE'S ONE LINE ─────────────────────────────────────────────────────
+   Ink under it so it reads over the painting, the machine's type, and nothing that
+   moves. It is a readout, not a flourish. */
+#root .cartoon-room .cartoon-signal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem .6rem;
+  margin: .9rem 0 0;
+  padding: .45rem .7rem;
+  width: fit-content;
+  background: rgb(var(--record-ink) / .88);
+  color: rgb(var(--cartoon-paper));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: .6875rem;
+  line-height: 1.4;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+#root .cartoon-room .cartoon-signal-fact { color: rgb(var(--cartoon-sun)); }
+#root .cartoon-room .cartoon-signal-dot {
+  width: 3px;
+  height: 3px;
+  background: rgb(var(--record-red));
+}
 #root .cartoon-room :is(.record-shell-return, .record-shell-footnote) {
   background: rgb(var(--cartoon-paper)) !important;
   color: rgb(var(--record-ink));
