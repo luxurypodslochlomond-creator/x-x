@@ -138,7 +138,7 @@ export default function ClimateFellows() {
           to={createPageUrl('ClimateChecking')}
           className="inline-flex w-full lg:w-auto items-center justify-center min-h-[52px] px-6 bg-[#141210] text-[#f4efe4] text-[13px] font-black font-mono uppercase tracking-[0.16em] active:translate-y-px"
         >
-          Open the checking page
+          Open the witnesses’ room
         </Link>
       </section>
 
@@ -170,7 +170,7 @@ export default function ClimateFellows() {
 // record keeps, because a page that travels as a screenshot arrives with its link cut
 // off and nothing to open.
 const FELLOWS_CARD = {
-  badge: 'BECOME A CHECKER',
+  badge: 'BECOME A WITNESS',
   marker: 'The job · what you keep · the way in',
   title: 'If you are coming to help',
   body: 'Open the link. Read what the source actually says. Then say whether it holds. That is the whole job.',

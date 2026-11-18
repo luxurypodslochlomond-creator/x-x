@@ -211,7 +211,7 @@ export default function ClimateBrief() {
 
           <div className="border-2 border-[#1a1612] divide-y divide-[#1a1612]/15 mt-4">
             {[
-              ['01', 'People who check', 'A witness reads an entry, follows its source, and signs their name to what they found. There are none yet. This is the only item here that cannot be built, bought or automated — a checker corps with one named lead, students perhaps, in a department that already teaches this.'],
+              ['01', 'People who check', 'A witness reads an entry, follows its source, and signs their name to what they found. There are none yet. This is the only item here that cannot be built, bought or automated — a body of witnesses with one named lead, students perhaps, in a department that already teaches this.'],
               ['02', 'One reader with standing', 'Someone who reads the method and says in public whether it holds. Not an endorsement of the contents: a verdict on the method. If it fails, that verdict gets published too.'],
               ['03', 'Somebody to carry it', 'The hosting, which is modest — one thousand pounds a year at this size, and the same again every year after it with no end date — the technology that will need building and maintaining, and a fair living for the two people in Scotland who keep it, so that tending this is the work rather than something done after it.'],
             ].map(([n, title, body]) => (

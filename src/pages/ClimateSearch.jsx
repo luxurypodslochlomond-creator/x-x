@@ -39,7 +39,7 @@ const SECTIONS = [
 export default function ClimateSearch() {
   const { query, start, back, data, loading, error, local } = useRecordSearch();
   // The record answers in words first, then shows what it answered from.
-  const { answer } = useBaseOneAnswer(query);
+  const { answer, loading: answerLoading, failed: answerFailed } = useBaseOneAnswer(query);
 
   const results = data?.results;
   const sections = results ? SECTIONS.map((s) => ({ ...s, items: results[s.key] || [] })).filter((s) => s.items.length > 0) : [];
@@ -85,6 +85,19 @@ export default function ClimateSearch() {
         <div className="record-search-results mt-5">
           {/* The answer comes first: one thing said, its origin cited, and what it does not
               cover named in the open. The entries below are the evidence, not the answer. */}
+          {/* The answer takes a moment, and a moment of nothing looks like an empty record.
+              Both states are said in the record's own voice, in the place the answer goes. */}
+          {answerLoading && (
+            <p role="status" className="mb-4 flex items-center gap-2 border-l-2 border-record-mark pl-3 font-mono text-[11px] uppercase tracking-widest text-record-muted">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-record-mark" />
+              The record is putting its answer into words…
+            </p>
+          )}
+          {answerFailed && (
+            <p role="alert" className="mb-4 border-l-2 border-record-red pl-3 font-mono text-[11px] leading-relaxed text-record-red">
+              The record could not put its answer into words just now. What it holds is below, every entry with its origin beside it.
+            </p>
+          )}
           {answer && <div className="mb-4"><BaseOneAnswer answer={answer} /></div>}
           <SearchAnswerLine data={data} local={local} aboutCount={about.length} />
 

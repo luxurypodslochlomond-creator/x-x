@@ -26,5 +26,8 @@ export default function useBaseOneAnswer(question) {
   return {
     answer: active ? data?.result || null : null,
     loading: active && isFetching && !isError,
+    // A silent gap in the answer reads as "the record holds nothing", which is a different
+    // and untrue statement. So the failure is handed back to be said out loud.
+    failed: active && isError,
   };
 }

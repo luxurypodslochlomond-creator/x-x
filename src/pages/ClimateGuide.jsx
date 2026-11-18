@@ -303,7 +303,7 @@ export default function ClimateGuide() {
           {
             label: '2 · Sign in with that address',
             to: '/ClimateChecking',
-            what: 'The invitation opens the checking room. Use the address the custodian typed — that is the one the record knows you by. If you have not set a password yet, the sign-in screen sends you one.',
+            what: 'The invitation opens the witnesses\u2019 room. Use the address the custodian typed — that is the one the record knows you by. If you have not set a password yet, the sign-in screen sends you one.',
           },
           {
             label: '3 · Open the first entry waiting',

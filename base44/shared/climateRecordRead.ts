@@ -124,3 +124,40 @@ export const scoreMatches = (items: any[], entity: string, words: string[]): any
     .sort((a, b) => b.hits - a.hits)
     .map((s) => s.item);
 };
+
+// ── THE ROOMS THE ENTRY READER DOES NOT COVER ─────────────────────────────────────
+// The music given to the record, the drawings on its wall, the credited pictures and what
+// readers said under entries. They are held under the same rule as every entry — every word
+// must be present, or any of them when nothing held every word — and they are read here
+// rather than in each function, so the record's search and the record's own answering engine
+// can never disagree about what the record holds.
+//
+// The roll is deliberately NOT in here. Reading it means reading the closed guest list, and
+// only the function allowed to do that may do it.
+export interface RoomMatches {
+  tracks: any[];
+  cartoons: any[];
+  photos: any[];
+  comments: any[];
+}
+
+export const readRooms = async (
+  base44: any,
+  words: string[],
+  anyOfWords: boolean,
+  limit = 8
+): Promise<RoomMatches> => {
+  const q = (entity: string) => (anyOfWords ? anyOf(entity, words) : andAll(entity, words));
+  const [tracks, cartoons, photos, comments] = await Promise.all([
+    base44.entities.ClimateTrack.filter(q('ClimateTrack'), { limit, sort: '-created_date' }),
+    base44.entities.ClimateCartoon.filter(q('ClimateCartoon'), { limit, sort: '-created_date' }),
+    base44.entities.ClimatePhoto.filter(q('ClimatePhoto'), { limit }),
+    base44.entities.ClimateComment.filter(q('ClimateComment'), { limit, sort: '-created_date' }),
+  ]);
+  return {
+    tracks: tracks.items || [],
+    cartoons: cartoons.items || [],
+    photos: photos.items || [],
+    comments: comments.items || [],
+  };
+};

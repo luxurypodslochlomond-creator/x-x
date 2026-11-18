@@ -1,5 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
-import { toWords, searchRecord, searchRecordAny, scoreMatches, andAll, anyOf } from '../../shared/climateRecordRead.ts';
+import { toWords, searchRecord, searchRecordAny, scoreMatches, readRooms } from '../../shared/climateRecordRead.ts';
 import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 
 // CLIMATE RECORD SEARCH — one query, every kind of entry the record holds.
@@ -77,25 +77,14 @@ const readRoll = async (base44: any, words: string[], anyOfWords: boolean) => {
     }));
 };
 
-// Five rooms the shared reader does not cover: the music, the drawings, the credited
-// pictures, what readers said under entries, and the roll. Read under the same rule as
-// every entry — every word must be held, or any of them when nothing held every word, and the reader is told which of the two happened.
-const readRooms = async (base44: any, words: string[], anyOfWords: boolean, limit: number) => {
-  const q = (entity: string) => (anyOfWords ? anyOf(entity, words) : andAll(entity, words));
-  const [tracks, cartoons, photos, comments] = await Promise.all([
-    base44.entities.ClimateTrack.filter(q('ClimateTrack'), { limit, sort: '-created_date' }),
-    base44.entities.ClimateCartoon.filter(q('ClimateCartoon'), { limit, sort: '-created_date' }),
-    base44.entities.ClimatePhoto.filter(q('ClimatePhoto'), { limit }),
-    base44.entities.ClimateComment.filter(q('ClimateComment'), { limit, sort: '-created_date' }),
-  ]);
-  return {
-    tracks: tracks.items || [],
-    cartoons: cartoons.items || [],
-    photos: photos.items || [],
-    comments: comments.items || [],
-    people: await readRoll(base44, words, anyOfWords),
-  };
-};
+// The roll is read here and only here: it needs the service role and the closed guest list,
+// and the record will not hand out who works here. The music, the drawings, the credited
+// pictures and the comments come from the shared reader, so this search and the record's own
+// answering engine read exactly the same rooms.
+const readRoomsWithRoll = async (base44: any, words: string[], anyOfWords: boolean, limit: number) => ({
+  ...(await readRooms(base44, words, anyOfWords, limit)),
+  people: await readRoll(base44, words, anyOfWords),
+});
 
 const shapeSolution = (i) => ({
   id: i.id,
@@ -151,7 +140,7 @@ export default async function (req) {
     }
 
     let found = await searchAll(base44, words);
-    let rooms = await readRooms(base44, words, false, 8);
+    let rooms = await readRoomsWithRoll(base44, words, false, 8);
     let total = countEntries(found) + countRooms(rooms);
 
     // Nothing on the record held every word. A question asked in plain speech ("what is
@@ -168,7 +157,7 @@ export default async function (req) {
         gatherings: scoreMatches(any.gatherings, 'ClimateGroup', words),
         news: scoreMatches(any.news, 'ClimateNews', words),
       };
-      const scoredRooms = await readRooms(base44, words, true, 8);
+      const scoredRooms = await readRoomsWithRoll(base44, words, true, 8);
       const scoredTotal = countEntries(scored) + countRooms(scoredRooms);
       if (scoredTotal > 0) {
         found = scored;
@@ -198,7 +187,7 @@ export default async function (req) {
         const enWords = toWords(english && english.english);
         if (enWords.length > 0) {
           const second = await searchAll(base44, enWords);
-          const secondRooms = await readRooms(base44, enWords, false, 8);
+          const secondRooms = await readRoomsWithRoll(base44, enWords, false, 8);
           const secondTotal = countEntries(second) + countRooms(secondRooms);
           if (secondTotal > 0) {
             found = second;

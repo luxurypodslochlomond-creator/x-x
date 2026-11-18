@@ -149,7 +149,7 @@ export const ELSEWHERE_NAV = [
   // this, and who is already doing it. A reader has to choose the sheet to find it, which
   // is right — a roll is not a room everybody walks into, and a volunteer's few lines
   // should not be dressed up as a feed.
-  { label: 'Who is checking', to: '/ClimateRoll', what: 'The people on the record’s list, in their own words, and what they have signed.' },
+  { label: 'Who witnesses', to: '/ClimateRoll', what: 'The people on the record’s list, in their own words, and what they have signed.' },
   { label: 'Host the record', to: '/ClimateHost', what: 'What carrying the record involves.' },
   // Support is off the record's doors at Janine's request, 9 November: "Donations can be
   // handled by a host. Please save this… for when we are discussing with a potential

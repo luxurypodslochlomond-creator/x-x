@@ -1,5 +1,5 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.52';
-import { toWords, searchRecord, searchRecordAny, scoreMatches } from '../../shared/climateRecordRead.ts';
+import { toWords, searchRecord, searchRecordAny, scoreMatches, readRooms } from '../../shared/climateRecordRead.ts';
 import { matchRecordPages } from '../../shared/climateRecordAbout.ts';
 
 // ALETHEIA — the record answering for itself. Public, no login.
@@ -61,6 +61,25 @@ export default async function (req: Request): Promise<Response> {
     // are answered from the record itself. Kept in their own lane, never among the claims.
     const pages = words.length > 0 ? matchRecordPages(words) : [];
 
+    // ── THE ROOMS TOO ──
+    // The music given to the record and the drawings on its wall are part of what it holds,
+    // so a question about them is answered from them rather than from an empty shelf. They
+    // are read through the same shared reader the record's search uses, so the two can never
+    // disagree about what the record contains.
+    let rooms = words.length > 0
+      ? await readRooms(base44, words, false, 6)
+      : { tracks: [], cartoons: [], photos: [], comments: [] };
+    // The same second reading the entries get, for the same reason: a track whose words hold
+    // half the question is still worth offering rather than saying the record holds no music.
+    if (words.length > 1 && rooms.tracks.length === 0 && rooms.cartoons.length === 0) {
+      const anyRooms = await readRooms(base44, words, true, 24);
+      rooms = {
+        ...rooms,
+        tracks: scoreMatches(anyRooms.tracks, 'ClimateTrack', words).slice(0, 6),
+        cartoons: scoreMatches(anyRooms.cartoons, 'ClimateCartoon', words).slice(0, 6),
+      };
+    }
+
     // ── THE CLAIMS ARE THE ENTRIES ──
     // Each one is an entry, in its own words, with its own origin. The label comes from the
     // record's own ladder: official record → high, corroborated → medium, single source or
@@ -94,9 +113,27 @@ export default async function (req: Request): Promise<Response> {
         source_url: '/TogetherChangeClimate',
         source_date: '',
       })),
+      // A piece of music is the artist's own work, quoted rather than described, and it is
+      // labelled as what it is: music given to the record, never evidence about the world.
+      ...rooms.tracks.map((i: any) => ({
+        text: `${i.title} — ${i.artist_name}${i.statement ? `: ${i.statement}` : ''}`.trim(),
+        confidence: 'low' as Claim['confidence'],
+        source_name: `Music given to the record · ${i.artist_name}`,
+        source_url: '/ClimateMusic',
+        source_date: '',
+      })),
+      // A drawing carries only what its maker wrote on it, in their words.
+      ...rooms.cartoons.map((i: any) => ({
+        text: `${i.title || 'A drawing'} — ${i.artist_name}${i.for_line ? `: ${i.for_line}` : ''}`.trim(),
+        confidence: 'low' as Claim['confidence'],
+        source_name: `A drawing on the wall · ${i.artist_name}`,
+        source_url: '/ClimateCartoons',
+        source_date: '',
+      })),
     ];
 
-    const total = found.news.length + found.solutions.length + found.actions.length + found.gatherings.length;
+    const total = found.news.length + found.solutions.length + found.actions.length
+      + found.gatherings.length + rooms.tracks.length + rooms.cartoons.length;
     const shown = claims.slice(0, 6);
 
     const material = [
@@ -104,6 +141,8 @@ export default async function (req: Request): Promise<Response> {
       ...found.solutions.map((i: any) => `[${i.entry_type === 'climate_crisis' ? 'Climate crisis' : 'Solution'}${i.source_name ? ` · ${i.source_name}` : ' · no outside origin given'}] ${i.title} — ${i.summary || ''}${i.region_rough ? ` (${i.region_rough})` : ''}`),
       ...found.actions.map((i: any) => `[Action · ${i.action_type || 'action'}] ${i.title} — ${i.description || ''}`),
       ...found.gatherings.map((i: any) => `[Gathering · ${i.topic || ''}] ${i.name} — ${i.description || ''}`),
+      ...rooms.tracks.map((i: any) => `[Music given to the record · ${i.artist_name}] ${i.title}${i.statement ? ` — ${i.statement}` : ''}`),
+      ...rooms.cartoons.map((i: any) => `[A drawing on the wall · ${i.artist_name}] ${i.title || 'Untitled'}${i.for_line ? ` — ${i.for_line}` : ''}`),
     ];
 
     const langInstruction = `Detect the language of the question automatically and write the summary and the gaps in THAT language — Yoruba, Quechua, Welsh, Gaelic, Arabic, Hindi, Mandarin, Swahili, Tagalog, Vietnamese, Bengali, Amharic, and every other language a human might ask in. No one left out. If the question is in English, answer in English.`;
