@@ -27,41 +27,8 @@
     background-color: rgb(var(--record-signal));
     color: rgb(var(--record-ink));
   }
-  .climate-record .record-pages .record-photo-crawl {
-    margin: 1.25rem;
-    width: auto;
-    background-color: transparent;
-    border: 1px solid rgb(var(--record-paper) / .35);
-  }
-  .record-photo-crawl .climate-photo-slide {
-    display: flex;
-    flex-direction: column;
-  }
-  .record-photo-crawl .climate-photo-slide > button { flex-shrink: 0; }
-  .record-photo-crawl .climate-photo-slide-frame {
-    aspect-ratio: 3 / 2;
-    max-height: none;
-  }
-  .record-photo-crawl figcaption {
-    flex: 1;
-    background-color: rgb(var(--record-ink) / .94);
-  }
-  /* A credit belongs with the image, but must not cover most of a phone's photo. */
-  .record-photo-crawl .climate-photo-credit {
-    position: static;
-    padding: 1rem;
-    background: none;
-  }
-  .record-photo-crawl .climate-photo-credit > [aria-hidden] { margin-bottom: .75rem; }
-  .record-photo-crawl .climate-photo-credit > .record-header-type:not(:last-child) {
-    font-size: 1rem;
-    line-height: 1.45;
-  }
-  .record-photo-crawl .climate-photo-credit > .record-header-type:last-of-type {
-    font-size: .6875rem;
-    line-height: 1.6;
-    letter-spacing: .08em !important;
-  }
+  /* The photograph's own rules live in record-depth.css now: the plate runs full-bleed
+     with its credit printed on the picture, so nothing here re-frames it. */
   .record-home-page .record-photo-loading {
     margin: 1.25rem;
     width: auto;

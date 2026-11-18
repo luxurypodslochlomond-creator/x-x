@@ -87,12 +87,22 @@
   border-top: 1px solid rgb(var(--record-ink) / .13);
 }
 
+/* ── A DOOR SAYS ITS OWN NAME ────────────────────────────────────────────────────
+   These captions were cut with an ellipsis when they did not fit, so a phone's own menu
+   printed "Found…" where a door's name should be. A menu that cannot finish a word reads
+   as an old website, which is exactly what Brian called it on 18 November. The labels are
+   one word each, so they wrap to a second line and the row grows a hair rather than lying
+   about where it goes. */
 .rec-mast-doors .rec-art-caption {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  text-align: center;
   max-width: 100%;
 }
+/* The door you are standing in is filled, the way the record's other open doors are
+   filled — a yellow cell with ink in it, not a hairline nobody can see. */
+.rec-mast-doors .rec-art-door-active { background-color: rgb(var(--record-signal)); }
 .rec-mast-doors .rec-art-door-active .rec-art-drawing,
 .rec-art-rail .rec-art-door-active .rec-art-drawing { box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark)); }
 .rec-art-door:focus-visible {

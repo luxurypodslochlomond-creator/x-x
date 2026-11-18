@@ -104,11 +104,54 @@
 .record-photo-sheet-more { display: none; }
 
 @media screen and (max-width: 1023px) {
+  /* ── THE PHOTOGRAPH RUNS OFF THE EDGE OF THE GLASS ────────────────────────────
+     Brian, 18 November: "images isn't coolasfuck… doesn't feel like Costco art". He was
+     describing this rule exactly. A phone was mounting every photograph the way a print is
+     mounted: half a centimetre of paper all round it, then two offset shadows underneath,
+     then a bone caption bar below the frame with the credit printed in it. Frame, mat,
+     label. That is a picture of a picture, and it is what a shop does to art so it can be
+     sold rather than looked at.
+
+     A phone has no room for a mount, so the mount has gone: the plate runs the full width of
+     the glass, a signal rule rules its top edge, and the caption and its credit sit on the
+     picture over a scrim — the way the desk already prints them. Nothing is separated from
+     its photograph: the caption and the credit still travel with the image, because a
+     picture on this record without its source is exactly what the record refuses. */
   .climate-record .record-pages .record-photo-crawl {
-    margin: .75rem .75rem 1.25rem;
-    border-width: .375rem;
+    margin: 0 0 1.25rem;
+    width: auto;
+    border: 0;
+    border-top: 3px solid rgb(var(--record-signal));
+    box-shadow: none;
+    background-color: transparent;
+  }
+  .climate-record .record-photo-crawl .climate-photo-slide { display: block; }
+  .climate-record .record-photo-crawl .climate-photo-slide-frame { aspect-ratio: 4 / 3; max-height: none; }
+  .climate-record .record-photo-crawl figcaption { flex: none; background: none; }
+  .climate-record .record-photo-crawl .climate-photo-credit {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: .875rem 1rem 1rem;
+    border-top: 0;
+    background: linear-gradient(to top, rgb(var(--record-ink)) 12%, rgb(var(--record-ink) / .78) 58%, transparent);
+    color: rgb(var(--record-paper));
+  }
+  .climate-record .record-photo-crawl .climate-photo-credit > .record-header-type:not(:last-of-type) {
+    font-size: .9375rem;
+    line-height: 1.35;
+    max-width: 28ch;
+  }
+  .climate-record .record-photo-crawl .climate-photo-credit > .record-header-type:last-of-type {
+    margin-top: .35rem;
+    font-size: .625rem;
+    line-height: 1.5;
+    letter-spacing: .1em !important;
+    color: rgb(var(--record-paper) / .82);
   }
   .climate-record .record-photo-crawl nav { display: none; }
+  /* The folio under the plate: which photograph of how many, and that there are more. */
+  .climate-record .record-photo-folio { display: flex; }
 
   /* The sections breathe by the margin, not by a screen of paper between them. */
   .climate-record .record-pages .record-image-section { padding-block: 1.75rem 1.25rem; }
