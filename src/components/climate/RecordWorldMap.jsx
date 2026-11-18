@@ -76,10 +76,7 @@ export default function RecordWorldMap({ lights = [], alive = false }) {
           // rather than dropped onto a guess.
           base44.entities.ClimateCartoon.filter(
             { status: 'published' },
-            {
-              limit: 200,
-              fields: ['title', 'artist_name', 'for_line', 'country', 'origin', 'credit', 'source_url', 'created_date'],
-            }
+            { limit: 200 }
           ).catch(() => ({ items: [] })),
           // The totals are counted separately so the plate can never claim to hold
           // everything: an entry with no place it can honestly be put is not dropped
