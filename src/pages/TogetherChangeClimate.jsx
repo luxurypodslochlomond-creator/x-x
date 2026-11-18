@@ -2,13 +2,12 @@ import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
-import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Share2, Check, Plus, Users } from 'lucide-react';
+import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Plus, Users } from 'lucide-react';
 import ActionCard from '@/components/climate/ActionCard';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
-import { shareRecord } from '@/components/climate/shareRecordCard';
 import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
@@ -170,7 +169,6 @@ export default function TogetherChangeClimate() {
   const [selectedCategory, setSelectedCategory] = useRecordViewState('category', 'all');
   const [selectedType, setSelectedType] = useRecordViewState('kind', 'all');
   const { isRTL } = useSiteLanguage();
-  const [copied, setCopied] = useState(false);
   // A link can name the door: ?submit=1 opens the form straight away, so a walkthrough sent
   // to a new checker can point at the exact place an initiative is added.
   const [showSubmit, setShowSubmit] = useState(
@@ -221,17 +219,6 @@ export default function TogetherChangeClimate() {
     window.addEventListener('offline', onOffline);
     return () => { window.removeEventListener('online', onOnline); window.removeEventListener('offline', onOffline); };
   }, []);
-
-  const handleShare = async () => {
-    // The picture travels with the message now, drawn on this device, with the record's
-    // own address under it — not a link to the preview service. A chat shows the card at
-    // once, and the address a person reads is the record's rather than a function's.
-    const result = await shareRecord();
-    if (result === 'copied') {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
 
   useEffect(() => {
     const getCache = () => { try { return JSON.parse(localStorage.getItem('twcc_data_cache')); } catch { return null; } };
@@ -428,7 +415,7 @@ export default function TogetherChangeClimate() {
 
       {/* The record opens first; Jane's voice follows on the same continuous painting. */}
       <RecordPaintedBand strength={0.65} soft continuous className="record-home-opening">
-        <RecordHomeHero copy={t} copied={copied} onShare={handleShare} />
+        <RecordHomeHero copy={t} />
         <RecordHomeVoice />
       </RecordPaintedBand>
 
