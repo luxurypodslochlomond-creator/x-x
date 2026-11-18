@@ -1,6 +1,22 @@
 /* Oswald is loaded from index.html, off the critical path — first paint never waits on a font. */
 
-/* The cartoon room's reading hand. These files load only where the face is used. */
+/* Hand-lettered paragraphs for the cartoon room; fetched only in that room. */
+@font-face {
+  font-family: 'Kalam';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/kalam/v18/YA9dr0Wd4kDdMuhW.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Kalam';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/kalam/v18/YA9Qr0Wd4kDdMtDqHQLL.ttf') format('truetype');
+}
+
+/* The previous reading hand stays available to existing artwork tools. */
 @font-face {
   font-family: 'Comic Neue';
   font-style: normal;
@@ -211,7 +227,7 @@ button:focus-visible {
 @layer base {
   :root {
     --font-cartoon-display: 'Bangers', 'Comic Neue', system-ui, sans-serif;
-    --font-cartoon-reading: 'Comic Neue', 'Record UI', system-ui, sans-serif;
+    --font-cartoon-reading: 'Kalam', 'Comic Neue', 'Record UI', system-ui, sans-serif;
     /* One shared face: the record's real regular and bold Helvetica files. */
     --font-display: var(--font-record-ui);
     --font-heading: var(--font-record-ui);
@@ -322,7 +338,7 @@ button:focus-visible {
   }
   .dark {
     --font-cartoon-display: 'Bangers', 'Comic Neue', system-ui, sans-serif;
-    --font-cartoon-reading: 'Comic Neue', 'Record UI', system-ui, sans-serif;
+    --font-cartoon-reading: 'Kalam', 'Comic Neue', 'Record UI', system-ui, sans-serif;
     --font-display: var(--font-record-ui);
     --font-heading: var(--font-record-ui);
     --font-body: var(--font-record-ui);

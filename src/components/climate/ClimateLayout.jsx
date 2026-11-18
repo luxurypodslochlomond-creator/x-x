@@ -23,7 +23,7 @@ import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
 import RecordDesktopMenu from '@/components/climate/RecordDesktopMenu';
 
 import { recordAddress, recordOrigin } from '@/components/climate/recordAddress';
-import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
+import { CARTOON_COVER, CARTOON_GROUND } from '@/components/climate/cartoons/cartoonEvent';
 
 // ── TOGETHER WE CAN CHANGE CLIMATE — her own front door ──
 // Janine's record stands alone: her masthead, her icon, her share card, her install name.
@@ -90,6 +90,7 @@ export default function ClimateLayout({ children, currentPage }) {
   useEffect(closeContents, [location.pathname, closeContents]);
   // Worked, not read. See ROOM_PAGES.
   const isRoom = ROOM_PAGES.includes(currentPage);
+  const isCartoonRoom = currentPage === 'ClimateCartoons';
   useRecordScroll(readingRef);
 
   // Her identity, not UF51's. Runs once per climate page.
@@ -191,11 +192,11 @@ export default function ClimateLayout({ children, currentPage }) {
         painting had nowhere to be seen on a phone — the sheet filled the glass and the
         ground underneath it was covered twice over. The paper belongs to the book; the
         root is the room the book stands in. */}
-    <div className={`climate-record record-field min-h-screen${currentPage === 'TogetherChangeClimate' ? ' record-home-field' : ''}`} style={{ fontFamily: 'var(--font-body)', '--record-cover-desktop': `url("${IMAGES.cover}")`, '--record-cover-mobile': `url("${RECORD_COVER_MOBILE}")` }}>
+    <div className={`climate-record record-field min-h-screen${currentPage === 'TogetherChangeClimate' ? ' record-home-field' : ''}${isCartoonRoom ? ' record-cartoon-field' : ''}`} style={{ fontFamily: 'var(--font-body)', '--record-cover-desktop': `url("${IMAGES.cover}")`, '--record-cover-mobile': `url("${RECORD_COVER_MOBILE}")`, '--comic-ground-layer': isCartoonRoom ? `url("${CARTOON_GROUND}")` : undefined }}>
       {/* The painting and the rare shooting stars stay in their own viewport-sized
           surface. No noise filter or blended grain lies over the master artwork. */}
       <div aria-hidden="true" className="record-environment">
-        <RecordCover position="center 42%" strength={1} priority className="record-ground" />
+        <RecordCover position="center 42%" strength={1} priority className="record-ground" image={isCartoonRoom ? CARTOON_GROUND : undefined} />
         <RecordSky />
       </div>
 

@@ -16,6 +16,7 @@ import '@/components/climate/cartoons/cartoon-room-layout.css';
 import '@/components/climate/cartoons/cartoon-gallery.css';
 import '@/components/climate/cartoons/comic-page.css';
 import '@/components/climate/cartoons/cartoon-ink.css';
+import '@/components/climate/cartoons/cartoon-spread.css';
 
 export default function ClimateCartoons() {
   return (

@@ -1,249 +1,131 @@
-/* ── THE ROOM IS PRINTED IN INK, NOT PAINTED IN PAPER ───────────────────────────
-   Brian, 18 November: "still some old boring colours not black red / yellow
-   coolasfuck … I want to blow Francis's mind tomorrow."
-
-   He was right about what was on the glass. Only the section names had been
-   printed on black; everything between them was still the record's warm paper, so
-   the room opened like a comic and then turned into a leaflet. A comic is not a
-   white page with black headings on it. It is ink, edge to edge, with the drawings
-   pasted on top.
-
-   So the ground is ink. Every reading block that sat directly on the paper now sits
-   on the ink in cream; every block that is genuinely a piece of paper — a panel, a
-   caption box, a caption strip under a drawing, a drawer you open — stays cream and
-   keeps its own black type. Yellow is the room's voice for names and small stamps;
-   red is its rule. Three colours, the way a comic is printed.
-
-   Nothing here touches a single drawing: the artwork is untouched, and every
-   drawing still stands on its own cream plate. */
-
-/* ── THE GROUND IS THE EARTH, PRINTED IN HALFTONE ───────────────────────────────
-   Brian, 18 November: "keep going with the coolasfuck earth background but comic
-   style … all the way … coolasfuck painting behind but in this comic format."
-
-   He is asking for the one thing the record already owns — its own painting of the
-   earth — to run behind this room the way it runs behind the book, but printed the
-   way a comic is printed: a dot field over it, and the ink laid on thick enough that
-   cream type still reads at arm's length.
-
-   It is fixed to the glass, so the earth does not scroll away with the first screen.
-   A reader walking down the wall, the strip, the biennial and the book is walking
-   across one picture the whole way, which is the whole point of a ground. */
-#root .climate-record .record-pages .cartoon-room {
-  background-color: rgb(var(--record-ink)) !important;
-  background-image:
-    radial-gradient(rgb(var(--cartoon-paper) / .17) 1px, transparent 1.2px),
-    linear-gradient(180deg, rgb(var(--record-ink) / .9) 0%, rgb(var(--record-ink) / .84) 38%, rgb(var(--record-ink) / .92) 100%),
-    var(--record-cover-desktop, none);
-  background-size: 7px 7px, auto, cover;
-  background-position: 0 0, center, center 42%;
-  background-repeat: repeat, no-repeat, no-repeat;
-  background-attachment: fixed, fixed, fixed;
-  color: rgb(var(--cartoon-paper));
+/* The painting is a single fixed image in ClimateLayout. No repeated black
+   backgrounds or opaque sheets between it and the comic's gutters. */
+#root .record-cartoon-field .record-book {
+  background: transparent;
+  box-shadow: none;
 }
-@media (max-width: 1023px) {
-  /* A phone cannot hold a fixed painting without stuttering, so there the same
-     picture is simply printed once, at the top, under the same dots and ink. */
-  #root .climate-record .record-pages .cartoon-room {
-    background-image:
-      radial-gradient(rgb(var(--cartoon-paper) / .17) 1px, transparent 1.2px),
-      linear-gradient(180deg, rgb(var(--record-ink) / .9) 0%, rgb(var(--record-ink) / .88) 40%, rgb(var(--record-ink) / .94) 100%),
-      var(--record-cover-mobile, none);
-    background-size: 7px 7px, auto, cover;
-    background-position: 0 0, center, center 30%;
-    background-repeat: repeat, no-repeat, no-repeat;
-    background-attachment: scroll, scroll, scroll;
-  }
-}
-
-/* Every wrapper that used to carry a cream sheet is now just air over the ink. */
-#root .climate-record .record-pages .cartoon-room
-  :is(.record-shell-body, .record-shell-content, .comic-event-opening, .comic-event-context,
-      .cartoon-room-notes, .comic-reader, .comic-wall, .comic-why, .comic-workshop,
-      .comic-sources, .comic-opening, .comic-session, .comic-anthology, .comic-wall-head,
-      .cartoon-fiction-head, .comic-page, .comic-turner, .cartoon-human-wall,
-      .cartoon-reading-index, .comic-anthology-facts, .comic-session-facts) {
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* ── THE PAPER THAT IS REAL PAPER ───────────────────────────────────────────────
-   A panel, a balloon, a caption box, the dotted sheet the strip is pasted on, a
-   caption strip under a drawing, a drawer, a form. These stay cream and keep black
-   type, because that is what they are: pieces of paper laid on the ink. */
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-single-reader, .comic-frame, .comic-ending, .comic-speech, .comic-catalogue-band,
-      .record-cartoon-plate figcaption, .cartoon-caption, .comic-part, .comic-drawer,
-      .comic-drawer-content, .comic-wall-empty, .comic-error-note, .comic-artwork-unavailable,
-      .comic-why-list li, .comic-catalogue) {
+#root .record-cartoon-field .record-ground { opacity: 1; }
+#root .record-cartoon-field .cartoon-room {
+  --cartoon-read: var(--font-cartoon-reading);
+  --cartoon-display: var(--font-cartoon-display);
+  --font-record-ui: var(--cartoon-read);
+  --font-body: var(--cartoon-read);
+  --font-reading: var(--cartoon-read);
   color: rgb(var(--record-ink));
-}
-#root .climate-record .record-pages .cartoon-room :is(.comic-wall-empty, .comic-error-note, .comic-drawer) {
-  background-color: rgb(var(--cartoon-paper));
-}
-
-/* ── ONE HAND, FORCED ───────────────────────────────────────────────────────────
-   Every word in this room is set in the room's own lettering. The record's shared
-   sheets set their own faces with !important, so this is stated with the same
-   weight and a firmer selector: a page about drawings cannot arrive in the voice of
-   a policy document. */
-#root .climate-record .record-pages .cartoon-room
-  :is(p, li, dd, dt, span, a, button, summary, label, input, textarea, select, div, figcaption, blockquote) {
-  font-family: 'Comic Neue', 'Record UI', system-ui, sans-serif !important;
-  letter-spacing: 0;
-}
-#root .climate-record .record-pages .cartoon-room :is(h1, h2, h3, h4, h5, h6) {
-  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
-  font-weight: 400 !important;
-  text-transform: none !important;
-  letter-spacing: .02em !important;
-  line-height: 1.06 !important;
-  color: rgb(var(--cartoon-sun)) !important;
-}
-/* Names and presses are lettering, not sentences. */
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-title, .comic-section-title, .comic-session-title, .comic-anthology-title,
-      .comic-make-door, .comic-turner button, .comic-drawer summary, .comic-load-more,
-      .comic-wall-empty a, .cartoon-index-name, .comic-part-label) {
-  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
-  font-weight: 400 !important;
-  letter-spacing: .03em !important;
-  text-transform: none !important;
-}
-/* A name is one piece of lettering even when half of it is inside a span. */
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-title, .comic-section-title, .comic-session-title, .comic-anthology-title,
-      .comic-make-door, .comic-turner button, .comic-drawer summary, .comic-load-more,
-      .comic-wall-empty a, .cartoon-index-name, .comic-part-label) :is(span, em, strong, small) {
-  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
-}
-/* The stamps stay stamps: the machine's own numerals, never lettering. */
-#root .climate-record .record-pages .cartoon-room :is(.comic-number, .comic-plate-index, .cartoon-spread-number) {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
-}
-
-/* ── YELLOW IS THE VOICE, RED IS THE RULE ─────────────────────────────────────── */
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-eyebrow, .comic-opening-eyebrow, .comic-catalogue-eyebrow, .comic-session-eyebrow,
-      .comic-anthology-eyebrow, .comic-cover-words-eyebrow, .cartoon-index-name small) {
-  color: rgb(var(--cartoon-sun)) !important;
-}
-#root .climate-record .record-pages .cartoon-room .comic-gesture {
-  background: rgb(var(--cartoon-sun)) !important;
-  color: rgb(var(--record-ink)) !important;
-  border-color: rgb(var(--record-ink)) !important;
-}
-/* Names printed on the plate keep their yellow, and the plate keeps its red rule.
-   The plate is now cut from the same picture as the ground, so a section name is a
-   window onto the earth rather than a second, different cover. */
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-section-title, .comic-session-title, .comic-anthology-title) {
-  background-color: rgb(var(--record-ink)) !important;
-  background-image:
-    radial-gradient(rgb(var(--cartoon-paper) / .18) 1px, transparent 1.2px),
-    linear-gradient(180deg, rgb(var(--record-ink) / .82) 0%, rgb(var(--record-ink) / .68) 45%, rgb(var(--record-ink) / .9) 100%),
-    var(--record-cover-desktop, none) !important;
-  background-size: 6px 6px, auto, cover !important;
-  background-position: 0 0, center, center 45% !important;
-  background-repeat: repeat, no-repeat, no-repeat !important;
-  border-bottom: 4px solid rgb(var(--record-red)) !important;
-  color: rgb(var(--cartoon-sun)) !important;
-}
-
-/* ── WHAT IS SAID QUIETLY, SAID ON INK ────────────────────────────────────────── */
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-opening-sub, .comic-tagline, .comic-art-credit, .comic-tap-hint,
-      .cartoon-wall-colophon, .cartoon-index-note, .cartoon-index-line,
-      .comic-why-note, .comic-share-note, .comic-event-share-note, .comic-session-attrib,
-      .cartoon-spread-line, .comic-sources p, .comic-workshop-note,
-      .comic-session-facts dt, .comic-anthology-facts dt, .comic-anthology-status,
-      .comic-anthology-credit, .comic-session-theme, .comic-cover-words-credit,
-      .comic-source-summary, .comic-artwork-unavailable p) {
-  color: rgb(var(--cartoon-paper) / .74) !important;
-}
-#root .climate-record .record-pages .cartoon-room
-  :is(.comic-opening-line, .comic-catalogue-line, .comic-why-list li, .comic-session-facts dd,
-      .comic-anthology-facts dd, .cartoon-own-words, .cartoon-index-name) {
-  color: rgb(var(--cartoon-paper)) !important;
-}
-/* A drawing's own caption is on paper, so it keeps black type. */
-#root .climate-record .record-pages .cartoon-room .cartoon-caption :is(p, h3, a, span),
-#root .climate-record .record-pages .cartoon-room .comic-catalogue-band :is(p, a, span),
-#root .climate-record .record-pages .cartoon-room .comic-part :is(span, a) {
-  color: rgb(var(--record-ink)) !important;
-}
-#root .climate-record .record-pages .cartoon-room .cartoon-caption .cartoon-byline span,
-#root .climate-record .record-pages .cartoon-room .comic-part-caption {
-  color: rgb(var(--record-ink) / .72) !important;
-}
-
-/* ── THE WALL, HUNG ON INK ────────────────────────────────────────────────────── */
-#root .climate-record .record-pages .cartoon-room .cartoon-spread-line {
-  border-top-color: rgb(var(--cartoon-paper) / .22) !important;
-}
-#root .climate-record .record-pages .cartoon-room :is(.comic-wall-lead, .comic-wall-grid) {
+  /* Shorthand is intentional: earlier important background shorthands reset
+     background-image to none and made the supposed painting solid black. */
   background: transparent !important;
 }
-/* Every drawing still stands on its own cream plate — the artwork is not touched. */
-#root .climate-record .record-pages .cartoon-room .record-cartoon-plate figcaption {
-  background: rgb(var(--cartoon-paper)) !important;
-  border-top: 2px solid rgb(var(--record-ink)) !important;
+#root .record-cartoon-field .cartoon-room :is(.record-shell-body, .record-shell-content,
+  .comic-reader, .comic-event-opening, .cartoon-room-notes, .cartoon-human-wall) {
+  background: transparent !important;
 }
 
-/* ── THE THINGS YOU PRESS ─────────────────────────────────────────────────────── */
-#root .climate-record .record-pages .cartoon-room .comic-load-more {
-  background: rgb(var(--cartoon-sun)) !important;
-  color: rgb(var(--record-ink)) !important;
-  border-color: rgb(var(--record-ink)) !important;
+/* A real pen-lettered reading face, not another override pointing at Comic Neue. */
+#root .cartoon-room :is(p, li, dd, dt, span, a, button, summary, label, input,
+  textarea, select, div, figcaption, blockquote, small, strong, em),
+.cartoon-close-reading :is(p, span, a, button, figcaption, small, strong, em) {
+  font-family: var(--font-cartoon-reading) !important;
+  letter-spacing: normal;
 }
-#root .climate-record .record-pages .cartoon-room .comic-previous {
-  background: rgb(var(--cartoon-paper)) !important;
-  color: rgb(var(--record-ink)) !important;
-}
-#root .climate-record .record-pages .cartoon-room :is(.comic-part, .comic-drawer summary) {
-  background-color: rgb(var(--cartoon-paper));
-  color: rgb(var(--record-ink));
-}
-#root .climate-record .record-pages .cartoon-room .comic-part:hover {
-  background-color: rgb(var(--cartoon-sun)) !important;
-}
-
-/* ── THE WAY OUT AND THE FOOT, ON INK ───────────────────────────────────────────
-   These three strips were cream sheets bolted to the top and the foot of the room,
-   which put two pale bands across a black page and broke it in three. They are ink
-   now, with cream type, so the picture runs from the top edge to the bottom. */
-#root .climate-record .record-pages .cartoon-room
-  :is(.record-back-bar, .record-shell-return, .record-shell-footnote) {
-  background-color: transparent !important;
-  border-color: rgb(var(--cartoon-paper) / .22) !important;
-}
-#root .climate-record .record-pages .cartoon-room
-  :is(.record-back-bar, .record-shell-return) :is(button, a, span, svg) {
-  color: rgb(var(--cartoon-paper)) !important;
-}
-#root .climate-record .record-pages .cartoon-room .record-back-bar span,
-#root .climate-record .record-pages .cartoon-room .record-shell-footnote p {
-  color: rgb(var(--cartoon-paper) / .68) !important;
-}
-
-/* ── THE READER THAT OPENS OVER EVERYTHING ────────────────────────────────────── */
-.cartoon-close-reading {
-  background: rgb(var(--record-ink));
-  color: rgb(var(--cartoon-paper));
-}
-.cartoon-close-reading :is(p, span, h3, a, button, figcaption) {
-  font-family: 'Comic Neue', 'Record UI', system-ui, sans-serif !important;
-}
+#root .cartoon-room :is(h1, h2, h3, h4, h5, h6),
+#root .cartoon-room :is(.comic-title, .comic-section-title, .comic-session-title,
+  .comic-anthology-title, .comic-make-door, .comic-turner button, .comic-drawer summary,
+  .comic-load-more, .cartoon-index-name),
+#root .cartoon-room :is(h1, h2, h3, .comic-make-door, .comic-drawer summary) > span,
 .cartoon-close-reading h3 {
-  font-family: 'Bangers', 'Comic Neue', system-ui, sans-serif !important;
+  font-family: var(--font-cartoon-display) !important;
   font-weight: 400 !important;
   letter-spacing: .02em !important;
   text-transform: none !important;
+  line-height: 1.08 !important;
+}
+#root .cartoon-room :is(.comic-number, .comic-plate-index, .comic-position, .cartoon-spread-number) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  color: rgb(var(--record-ink));
+}
+#root .cartoon-room .comic-make-door small { font-family: var(--font-cartoon-reading) !important; }
+
+/* Text has its own paper. Only gutters show the painting at full strength. */
+#root .cartoon-room :is(.cartoon-fiction-head, .cartoon-wall-head, .comic-catalogue-band,
+  .comic-event-context, .comic-session, .comic-anthology, .comic-why, .comic-workshop,
+  .comic-sources, .comic-art-credit, .cartoon-wall-colophon) {
+  background: rgb(var(--cartoon-paper));
+  color: rgb(var(--record-ink));
+  border: 2px solid rgb(var(--record-ink));
+  box-shadow: 5px 5px 0 rgb(var(--record-ink));
+  padding: 1.25rem;
+}
+#root .cartoon-room :is(.comic-opening-line, .comic-opening-sub, .comic-catalogue-line,
+  .comic-anthology-note, .comic-anthology-sub, .comic-session-theme, .comic-speech,
+  .comic-reply, .cartoon-own-words, .comic-why-list li, .comic-session-facts dd,
+  .comic-anthology-facts dd, .comic-position) { color: rgb(var(--record-ink)); }
+#root .cartoon-room :is(.comic-art-credit, .cartoon-wall-colophon, .comic-anthology-credit,
+  .comic-anthology-status, .comic-session-attrib, .comic-workshop-note, .comic-sources p,
+  .cartoon-fiction-head > p:last-child, .cartoon-wall-head > p:last-child) {
+  color: rgb(var(--record-ink) / .8);
+}
+#root .cartoon-room :is(.comic-opening-eyebrow, .comic-catalogue-eyebrow,
+  .comic-session-eyebrow, .comic-anthology-eyebrow) { color: rgb(var(--record-red)); }
+#root .cartoon-room :is(.comic-single-reader, .comic-frame, .comic-drawer, .comic-drawer-content,
+  .comic-wall-empty, .comic-error-note, .comic-artwork-unavailable) {
+  background-color: rgb(var(--cartoon-paper));
+  color: rgb(var(--record-ink));
+}
+#root .cartoon-room :is(.comic-panel-heading h2, .cartoon-caption h3) { color: rgb(var(--record-ink)) !important; }
+#root .cartoon-room :is(.comic-gesture, .comic-position) {
+  background: rgb(var(--cartoon-sun));
+  color: rgb(var(--record-ink));
+}
+
+/* Keep the headings' lettering and signal colours. The image behind the name is
+   the house painting, not somebody else's cover text competing with the title. */
+#root .cartoon-room :is(.comic-masthead, .comic-section-title, .comic-session-title, .comic-anthology-title) {
+  background-color: rgb(var(--record-ink));
+  background-image: linear-gradient(rgb(var(--record-ink) / .56), rgb(var(--record-ink) / .72)), var(--comic-ground-layer);
+  background-size: cover;
+  background-position: center 38%;
+  border-bottom: 4px solid rgb(var(--record-red));
   color: rgb(var(--cartoon-sun)) !important;
 }
-.cartoon-close-reading .cartoon-provenance :is(p, a) {
-  color: rgb(var(--cartoon-paper) / .72) !important;
+#root .cartoon-room .comic-masthead {
+  margin: 0;
+  padding: 1.75rem 2rem;
+  background-image: linear-gradient(90deg, rgb(var(--record-ink) / .72), rgb(var(--record-ink) / .12)), var(--comic-ground-layer);
+  border: 3px solid rgb(var(--record-ink));
+  border-bottom: 5px solid rgb(var(--record-red));
 }
-.cartoon-close-top, .cartoon-close-bottom {
-  border-color: rgb(var(--cartoon-paper) / .2) !important;
+#root .cartoon-room .comic-masthead :is(.comic-eyebrow, .comic-tagline) { color: rgb(var(--cartoon-paper)); }
+#root .cartoon-room .comic-title { color: rgb(var(--cartoon-sun)) !important; }
+#root .cartoon-room .comic-title-stop { color: rgb(var(--record-red)) !important; }
+#root .cartoon-room .comic-catalogue-line + .comic-catalogue-line { margin-top: .8rem; }
+#root .cartoon-room :is(.comic-session-facts, .comic-anthology-facts) > div {
+  grid-template-columns: minmax(6.25rem, .3fr) minmax(0, 1fr);
+  gap: .75rem;
+}
+#root .cartoon-room :is(.comic-session-facts, .comic-anthology-facts) dt { color: rgb(var(--record-red)); }
+#root .cartoon-room .comic-drawer summary { padding-inline: 1rem; }
+#root .cartoon-room :is(.comic-previous, .comic-load-more) {
+  background: rgb(var(--cartoon-sun));
+  color: rgb(var(--record-ink));
+}
+#root .cartoon-room .cartoon-spread-line {
+  background: rgb(var(--cartoon-sun));
+  color: rgb(var(--record-ink));
+  border: 2px solid rgb(var(--record-ink));
+  padding: .65rem 1rem;
+}
+#root .cartoon-room :is(.record-shell-return, .record-shell-footnote) {
+  background: rgb(var(--cartoon-paper)) !important;
+  color: rgb(var(--record-ink));
+}
+#root .cartoon-room .record-shell-footnote p { color: rgb(var(--record-ink) / .8); }
+.cartoon-close-reading { --cartoon-read: var(--font-cartoon-reading); }
+html[data-tongue="chr"] #root .cartoon-room,
+html[data-tongue="chr"] .cartoon-close-reading {
+  --font-cartoon-reading: var(--font-script);
+  --font-cartoon-display: var(--font-script);
+}
+@media print {
+  #root .record-cartoon-field .cartoon-room { background: rgb(var(--cartoon-paper)) !important; }
 }

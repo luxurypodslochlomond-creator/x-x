@@ -1,0 +1,88 @@
+/* Desktop corrections live apart from the room's lettering and surfaces. */
+@media (min-width: 1024px) {
+  #root .record-cartoon-field .record-book { max-width: min(1320px, 92vw); }
+  #root .record-cartoon-field .cartoon-room .record-shell-content { padding: 1.75rem 2rem 3rem; }
+  #root .cartoon-room .comic-reader {
+    grid-template-columns: minmax(0, 2.4fr) minmax(15rem, 1fr);
+    column-gap: 1.75rem;
+    margin-top: 2.5rem;
+    padding-top: 0;
+    border-top: 0;
+  }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel {
+    align-self: stretch;
+    justify-content: space-between;
+    background: rgb(var(--cartoon-paper));
+    color: rgb(var(--record-ink));
+    border: 2px solid rgb(var(--record-ink));
+    padding: .85rem;
+    box-shadow: 5px 5px 0 rgb(var(--record-ink));
+  }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel img { width: 4rem; height: 4rem; }
+  #root .cartoon-room .comic-reader > .cartoon-story-reel span { font-size: 1.05rem; line-height: 1.4; }
+  #root .cartoon-room .comic-reader > .comic-art-credit { margin-top: 1.25rem; }
+
+  /* The cover and its description are one spread, not a tall poster with a
+     second column that runs out halfway down it. The introduction sits below. */
+  #root .cartoon-room .comic-event-opening { display: block; margin: 2.75rem 0 0; border: 0; }
+  #root .cartoon-room .comic-catalogue {
+    display: grid;
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    gap: 1.75rem;
+    align-items: center;
+    margin: 0;
+  }
+  #root .cartoon-room .comic-catalogue > img {
+    width: 100%;
+    max-height: 48rem;
+    object-fit: contain;
+    border: 2px solid rgb(var(--record-ink));
+    box-shadow: 5px 5px 0 rgb(var(--record-ink));
+  }
+  #root .cartoon-room .comic-catalogue-band { padding: 1.5rem; }
+  #root .cartoon-room .comic-event-context { margin-top: 2rem; padding: 1.5rem; }
+  #root .cartoon-room .comic-opening {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: .8rem 2rem;
+    padding: 0;
+  }
+  #root .cartoon-room .comic-opening > p { grid-column: 1; margin: 0; }
+  #root .cartoon-room .comic-opening > .cartoon-reading-index { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
+  #root .cartoon-room .cartoon-index-reel { align-items: start; }
+  #root .cartoon-room .cartoon-index-image { background: rgb(var(--cartoon-sun) / .25); border: 2px solid rgb(var(--record-ink)); }
+  #root .cartoon-room .cartoon-index-name { font-size: 1.1rem; }
+  #root .cartoon-room .cartoon-index-note { font-size: .9rem; }
+
+  /* One opening spread, then equal-width panels. No repeating skinny sidebars. */
+  #root .cartoon-room .cartoon-human-wall { gap: 2rem; align-items: start; }
+  #root .cartoon-room .cartoon-reading-spread:nth-child(n) { grid-column: auto; min-width: 0; }
+  #root .cartoon-room .cartoon-reading-spread:nth-child(n) .record-cartoon-plate {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    background: rgb(var(--cartoon-paper));
+    border: 2px solid rgb(var(--record-ink));
+    box-shadow: 5px 5px 0 rgb(var(--record-ink));
+  }
+  #root .cartoon-room .cartoon-artwork-door {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    background: rgb(var(--cartoon-paper));
+    border-bottom: 2px solid rgb(var(--record-ink));
+  }
+  #root .cartoon-room .cartoon-artwork-door .comic-wall-artwork { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+  #root .cartoon-room .comic-wall .record-cartoon-plate .cartoon-caption { padding: 1.25rem; background: rgb(var(--cartoon-paper)); border: 0; }
+  #root .cartoon-room .cartoon-provenance { margin-top: .85rem; }
+  #root .cartoon-room .cartoon-reading-spread--opening:first-child { grid-column: 1 / -1; }
+  #root .cartoon-room .cartoon-reading-spread--opening:first-child .record-cartoon-plate {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(19rem, 1fr);
+    align-items: center;
+  }
+  #root .cartoon-room .cartoon-reading-spread--opening:first-child .cartoon-artwork-door { border-bottom: 0; border-right: 2px solid rgb(var(--record-ink)); }
+  #root .cartoon-room .cartoon-room-notes { gap: 2rem; border: 0; align-items: start; }
+  #root .cartoon-room .cartoon-room-notes :is(.comic-session, .comic-anthology) { padding: 1.25rem; border: 2px solid rgb(var(--record-ink)); }
+}

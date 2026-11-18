@@ -28,7 +28,7 @@ import { IMAGES, RECORD_COVER_MOBILE, RECORD_COVER_SCREEN } from '@/components/c
 // is the room, not the content: it is now requested at ordinary priority, it fades up only
 // once it has actually arrived, and the reader gets warm paper and their page first, with the
 // room filling in behind them a moment later. Same file, same sharpness, nothing blocking.
-export default function RecordCover({ position = 'center 34%', strength = 1, blend, priority = false, className = '', style }) {
+export default function RecordCover({ position = 'center 34%', strength = 1, blend, priority = false, className = '', style, image }) {
   const [ready, setReady] = useState(false);
 
   // A cached image can finish before React attaches onLoad, so the element is also asked
@@ -40,10 +40,10 @@ export default function RecordCover({ position = 'center 34%', strength = 1, ble
 
   return (
     <picture>
-    <source media="(max-width: 639px)" srcSet={className.includes('record-ground') ? RECORD_COVER_MOBILE : RECORD_COVER_SCREEN} />
+    <source media="(max-width: 639px)" srcSet={image || (className.includes('record-ground') ? RECORD_COVER_MOBILE : RECORD_COVER_SCREEN)} />
     <img
       ref={markReady}
-      src={IMAGES.cover}
+      src={image || IMAGES.cover}
       alt=""
       aria-hidden="true"
       loading={priority ? 'eager' : 'lazy'}
