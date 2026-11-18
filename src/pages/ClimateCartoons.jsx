@@ -6,6 +6,7 @@ import ComicReader from '@/components/climate/cartoons/ComicReader';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
+import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 // ── THE ROOM IS SET, NOT DRESSED ───────────────────────────────────────────────
@@ -43,6 +44,11 @@ export default function ClimateCartoons() {
 
         <PressWall />
         <ComicReader />
+
+        {/* The tradition the wall joins: real cartoonists, named, sourced, pointed at
+            rather than copied. Brian, 18 November — "this is a real thing … all over the
+            world too bro". It is, and the room should say so with names on it. */}
+        <CartoonWorld />
 
         <div className="press-facing" id="press-book">
           <CartoonSessionBand />

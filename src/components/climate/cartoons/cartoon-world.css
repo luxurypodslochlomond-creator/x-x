@@ -1,0 +1,127 @@
+/* ── THE WORLD OUTSIDE THIS ROOM ───────────────────────────────────────────────
+   Editorial furniture only: a heading, a list of names, one life, one source line.
+   No frames, no plates, no halftone. The names are the picture here. */
+.cartoon-world {
+  padding-top: 1.6rem;
+  border-top: 2px solid rgb(var(--record-ink));
+}
+.cartoon-world-title {
+  margin: .5rem 0 0;
+  font-family: var(--font-record-ui);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  color: rgb(var(--record-ink));
+  max-width: 24ch;
+}
+.cartoon-world-line {
+  margin: .8rem 0 0;
+  font-family: var(--font-reading);
+  font-size: clamp(1rem, 1.15vw, 1.16rem);
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+  max-width: 62ch;
+}
+.cartoon-world-names {
+  list-style: none;
+  margin: 1.8rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgb(var(--record-ink) / .18);
+}
+.cartoon-world-name {
+  display: grid;
+  grid-template-columns: minmax(11rem, 15rem) minmax(0, 1fr);
+  gap: .2rem 1.6rem;
+  padding: .95rem 0;
+  border-bottom: 1px solid rgb(var(--record-ink) / .18);
+  align-items: baseline;
+}
+.cartoon-world-who {
+  font-family: var(--font-record-ui);
+  font-weight: 700;
+  font-size: .95rem;
+  line-height: 1.3;
+  color: rgb(var(--record-ink));
+}
+.cartoon-world-where {
+  display: block;
+  margin-top: .15rem;
+  font-family: var(--font-record-ui);
+  font-weight: 400;
+  font-size: .74rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.cartoon-world-say {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: .98rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+  max-width: 60ch;
+}
+.cartoon-world-odoi {
+  margin-top: 2.4rem;
+  padding-top: 1.2rem;
+  border-top: 2px solid rgb(var(--record-ink));
+  max-width: 68ch;
+}
+.cartoon-world-odoi-title {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  line-height: 1.15;
+  color: rgb(var(--record-ink));
+}
+.cartoon-world-odoi-title span {
+  display: block;
+  margin-top: .25rem;
+  font-weight: 400;
+  font-size: .74rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.cartoon-world-odoi p {
+  margin: .7rem 0 0;
+  font-family: var(--font-reading);
+  font-size: clamp(.98rem, 1.05vw, 1.08rem);
+  line-height: 1.55;
+  color: rgb(var(--record-ink));
+}
+.cartoon-world-odoi p:first-of-type { margin-top: .9rem; }
+.cartoon-world-quote {
+  padding-left: .9rem;
+  border-left: 2px solid rgb(var(--record-red));
+  font-style: italic;
+}
+.cartoon-world-source {
+  margin: 2rem 0 0;
+  padding-top: .8rem;
+  border-top: 1px solid rgb(var(--record-ink) / .18);
+  font-family: var(--font-record-ui);
+  font-size: .78rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+  max-width: 66ch;
+}
+.cartoon-world-source a {
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .35);
+}
+.cartoon-world-source a:hover {
+  color: rgb(var(--record-red));
+  border-bottom-color: rgb(var(--record-red));
+}
+@media (max-width: 767px) {
+  .cartoon-world-name {
+    grid-template-columns: 1fr;
+    gap: .35rem;
+  }
+}
