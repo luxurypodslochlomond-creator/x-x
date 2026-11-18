@@ -124,7 +124,7 @@ export default function RecordPagesPanel({ open, onClose }) {
     >
       <div className="rec-doors-plate flex h-full w-full flex-col border-t-2 border-record-mark/70 bg-record-bone">
 
-        <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pb-4 sm:pt-5">
+        <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-10 sm:pb-4 sm:pt-5">
           {/* ── IT SAYS WHAT THE DESK SAYS ────────────────────────────────────────
               Brian, 18 November: the desk says EXPLORE THE RECORD, and a phone said
               "open every door" — the same index under two different names, so it did not
@@ -136,7 +136,7 @@ export default function RecordPagesPanel({ open, onClose }) {
               small mono "Contents" eyebrow and the big display line are gone with it —
               a phone is not a different publication, it is the same page on a smaller
               glass, and now it reads that way. */}
-          <div className="mb-2 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-2">
+          <div className="mb-1.5 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-1.5">
             <p id="record-contents-title" className="record-header-type text-base text-record-mark sm:text-lg">Explore the record</p>
             <button type="button" autoFocus onClick={onClose} className="record-header-type min-h-11 px-2 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Close <span aria-hidden="true">×</span></button>
           </div>
@@ -171,7 +171,7 @@ export default function RecordPagesPanel({ open, onClose }) {
               the index goes back to being only an index.
 
               That removes the nested overlay entirely, which was the real "weird". */}
-          <div className="shrink-0 pt-2">
+          <div className="shrink-0 pt-1.5">
             {/* ── ONE FOOT, AND IT IS THE DESK'S FOOT ─────────────────────────────
                 The guide sits on the same yellow band the desk gives it, so the bottom
                 of this sheet and the bottom of the panel are the same line at both
