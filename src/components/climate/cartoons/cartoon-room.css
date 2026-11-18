@@ -55,6 +55,9 @@
 .comic-catalogue-band { padding: .7rem 1rem .8rem; background: rgb(var(--cartoon-sun)); border-top: 3px solid rgb(var(--record-ink)); border-bottom: 3px solid rgb(var(--record-ink)); }
 .record-pages .cartoon-room .comic-catalogue-eyebrow { font-size: .625rem; line-height: 1.4; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: rgb(var(--record-red)); }
 .record-pages .cartoon-room .comic-catalogue-line { margin: .35rem 0 0; font-size: .8125rem; font-weight: 600; line-height: 1.45; }
+/* The cover's own credit, printed first in the band under it: the hand that drew the picture
+   is the first thing said about the picture, not the last. */
+.record-pages .cartoon-room .comic-catalogue-cover-credit { margin: 0 0 .3rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .625rem; line-height: 1.4; font-weight: 700; letter-spacing: .04em; color: rgb(var(--record-ink) / .8); }
 .comic-catalogue-link { display: inline-flex; align-items: center; gap: .35rem; min-height: 2.75rem; font-size: .8125rem; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
 /* ── WHAT THE ROOM IS, AND WHAT IS IN IT ─────────────────────────────────────────
    Two sentences, then the room's own parts named in one line. It sits between the title

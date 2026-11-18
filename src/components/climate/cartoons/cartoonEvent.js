@@ -15,5 +15,12 @@ export const CARTOON_EVENT = {
   where: 'National Museum, Benin City, Edo State, Nigeria',
   workshop: 'Janine Selendy’s workshop · Sunday 29 November · 3pm West Africa',
   editors: 'Francis Umendu Odupute and Janine Selendy',
+  // Janine, by WhatsApp on the evening of 18 November 2026: "By the way the art work of the
+  // cover is by Francis." So the cover is not a house picture and not an unattributed
+  // illustration — it is a named cartoonist's drawing, by the man who edits the book.
+  // A room that gathers other people's drawings for a living does not print one without the
+  // hand that made it, so his name travels with the picture wherever the picture goes: under
+  // it on this page, on the pass-it-on card, and in the anthology's own facts.
+  coverArt: 'Cover artwork by Francis Umendu Odupute',
   credit: 'CartoonAFRICA, prepared by African Press Cartoon services, 2026',
 };

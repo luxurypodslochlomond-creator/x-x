@@ -53,7 +53,9 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   ctx.fillText('3pm West Africa · 2pm UK · in the room and online', pad, top + 212);
   ctx.fillStyle = colors.MUTED;
   ctx.font = `400 20px ${DISPLAY}`;
-  ctx.fillText('Catalogue cover in preparation. Artwork and credits unchanged.', pad, top + 260);
+  // The card carries the cover, so the card carries the name of the hand that drew it.
+  // A shared picture that has lost its artist is the one thing this room will not send.
+  ctx.fillText(CARTOON_EVENT.coverArt, pad, top + 260);
   ctx.font = `700 29px ${DISPLAY}`;
   ctx.fillStyle = colors.INK;
   const origin = String(options.origin || recordOrigin()).replace(/^https?:\/\//, '').replace(/\/$/, '');

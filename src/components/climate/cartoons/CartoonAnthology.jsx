@@ -52,6 +52,10 @@ export default function CartoonAnthology() {
           <dd>The 8th CartoonAFRICA International Biennial (CAIB) 2026</dd>
         </div>
         <div>
+          <dt>Cover artwork</dt>
+          <dd>Francis Umendu Odupute</dd>
+        </div>
+        <div>
           <dt>Prepared by</dt>
           <dd>African Press Cartoon services</dd>
         </div>
@@ -74,8 +78,8 @@ export default function CartoonAnthology() {
       </p>
 
       <p className="comic-anthology-credit">
-        The cartoons stay the artists’ own. The anthology and its cover are CartoonAFRICA’s,
-        prepared by African Press Cartoon services, 2026.
+        The cartoons stay the artists’ own. The cover is Francis Umendu Odupute’s drawing;
+        the anthology is CartoonAFRICA’s, prepared by African Press Cartoon services, 2026.
       </p>
     </section>
   );

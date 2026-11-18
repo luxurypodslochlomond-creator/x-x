@@ -26,13 +26,17 @@ export default function CartoonCatalogueBand() {
     <section className="comic-catalogue" aria-labelledby="comic-catalogue-title">
       <img
         src={COVER}
-        alt="Cover of the 8th CartoonAFRICA International Biennial (CAIB) 2026 anthology, Climate Change and the Power of Collective Actions and Creative Interventions, featuring African and non-African cartoonists. Edited by Francis Umendu Odupute and Janine Selendy."
+        alt="Cover of the 8th CartoonAFRICA International Biennial (CAIB) 2026 anthology, Climate Change and the Power of Collective Actions and Creative Interventions, featuring African and non-African cartoonists. Cover artwork by Francis Umendu Odupute. Edited by Francis Umendu Odupute and Janine Selendy."
         width={682}
         height={1024}
         loading="eager"
         fetchPriority="high"
       />
       <div className="comic-catalogue-band">
+        {/* The hand that drew it, said first and said plainly. Janine told us on the 18th
+            whose the cover is, and a credit that arrives after the description of the book
+            is a credit nobody reads. */}
+        <p className="comic-catalogue-cover-credit">{CARTOON_EVENT.coverArt}</p>
         <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · in preparation</p>
         <p className="comic-catalogue-line record-meta">
           {CARTOON_EVENT.biennial} — edited by {CARTOON_EVENT.editors}. Free to download
