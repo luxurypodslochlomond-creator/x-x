@@ -10,10 +10,10 @@ import cartoonSubject from '@/components/climate/cartoons/cartoonSubjects';
 // that made it, the drawer's own line set as a quotation, and the credit. Nothing is
 // boxed, tinted, tilted or captioned with a black bar. The picture is the argument; the
 // margin is the citation.
-export default function PressSheet({ cartoon, index, lead = false, onOpen }) {
+export default function PressSheet({ cartoon, index, lead = false, marked = false, onOpen }) {
   const { title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title } = cartoon;
   return (
-    <article className={`press-sheet${lead ? ' press-sheet--lead' : ''}`} id={`drawing-${cartoon.id}`}>
+    <article className={`press-sheet${lead ? ' press-sheet--lead' : ''}${marked ? ' press-sheet--marked' : ''}`} id={`drawing-${cartoon.id}`}>
       <button
         type="button"
         className="press-sheet-art"

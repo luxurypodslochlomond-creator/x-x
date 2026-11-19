@@ -1020,6 +1020,14 @@
   outline-offset: 3px;
 }
 
+/* ── THE DRAWING YOU WERE SENT TO ───────────────────────────────────────────────
+   Arriving from the seventeen goals, a reader is dropped into the middle of the wall with
+   forty sheets around them. This says which one they came for: a red rule drawn a little
+   outside the sheet, so it marks the page without covering a line of the drawing, and it
+   fades after a few seconds rather than becoming a permanent badge. */
+.press-sheet--marked { outline: 2px solid rgb(var(--record-red)); outline-offset: 1rem; animation: press-sheet-mark .5s ease-out; }
+@keyframes press-sheet-mark { from { outline-color: transparent; } to { outline-color: rgb(var(--record-red)); } }
+
 @media print {
   .press-room .comic-turner,
   .press-room .comic-tap-hint,

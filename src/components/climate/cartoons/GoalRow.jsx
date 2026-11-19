@@ -1,5 +1,5 @@
 import React from 'react';
-import { openDrawing } from '@/components/climate/cartoons/openDrawing';
+import { goToDrawing } from '@/components/climate/cartoons/goToDrawing';
 
 // One goal, closed and open. Closed it is a line of a printed index: number, name, and how
 // many drawings stand against it. Open it gives the goal's own words from the UN, then the
@@ -51,18 +51,17 @@ export default function GoalRow({ goal, open, onToggle, art }) {
                   return (
                     <li key={title} className="cartoon-goal-line">
                       {piece?.display_image_url && (
-                        // The drawing is the door: tapping it opens the wall's own full-size
-                        // reading, at this drawing's place in the wall, so a reader can walk the
-                        // whole wall from here without losing the goal they came in on.
+                        // The drawing is the door, and it opens onto the drawing itself: the
+                        // reader is taken to this picture's own place on the wall, where its
+                        // artist, its origin and its line already stand around it.
                         <button
                           type="button"
                           className="cartoon-goal-line-art"
-                          onClick={() => openDrawing(piece.id)}
-                          title={`Open “${title}” full size`}
-                          aria-label={`Open “${title}” by ${piece.artist_name} full size`}
+                          onClick={() => goToDrawing(piece.id)}
+                          title={`Go to “${title}” on the wall`}
+                          aria-label={`Go to “${title}” by ${piece.artist_name} on the wall`}
                         >
                           <img src={piece.display_image_url} alt="" loading="lazy" />
-                          <span className="cartoon-goal-line-cue" aria-hidden="true">Look closer ↗</span>
                         </button>
                       )}
                       <span className="cartoon-goal-line-title">{title}</span>

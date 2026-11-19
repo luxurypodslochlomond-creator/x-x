@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { OPEN_DRAWING } from '@/components/climate/cartoons/openDrawing';
+import { SHOW_DRAWING } from '@/components/climate/cartoons/goToDrawing';
 import PressSheet from '@/components/climate/cartoons/press/PressSheet';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
@@ -13,17 +13,27 @@ export default function PressWall() {
   const wall = useCartoonWall(true);
   const [reading, setReading] = useState(null);
 
-  // A drawing found in the seventeen-goal ledger opens here, in the wall's own viewer, at
-  // the place it actually stands in the wall's order — so Next and Previous walk the wall
-  // from that drawing rather than a second list made of thumbnails.
+  // A drawing met in the seventeen goals is brought to its own place on the wall — its
+  // sheet, its artist, its origin, its line, its credit — rather than opened in a floating
+  // full-screen copy. The sheet is marked for a few seconds so the eye knows which one it
+  // was sent to; the reader can then tap it to look closer, exactly as on the wall itself.
+  const [marked, setMarked] = useState(null);
   useEffect(() => {
-    const open = (event) => {
-      const at = wall.cartoons.findIndex((cartoon) => cartoon.id === event.detail?.id);
-      if (at >= 0) setReading(at);
+    const show = (event) => {
+      const id = event.detail?.id;
+      const node = id ? document.getElementById(`drawing-${id}`) : null;
+      if (!node) return;
+      node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setMarked(id);
     };
-    window.addEventListener(OPEN_DRAWING, open);
-    return () => window.removeEventListener(OPEN_DRAWING, open);
-  }, [wall.cartoons]);
+    window.addEventListener(SHOW_DRAWING, show);
+    return () => window.removeEventListener(SHOW_DRAWING, show);
+  }, []);
+  useEffect(() => {
+    if (!marked) return;
+    const timer = setTimeout(() => setMarked(null), 5000);
+    return () => clearTimeout(timer);
+  }, [marked]);
 
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">
@@ -51,7 +61,14 @@ export default function PressWall() {
 
       <div className="press-wall">
         {wall.cartoons.map((cartoon, i) => (
-          <PressSheet key={cartoon.id} cartoon={cartoon} index={i + 1} lead={i === 0} onOpen={() => setReading(i)} />
+          <PressSheet
+            key={cartoon.id}
+            cartoon={cartoon}
+            index={i + 1}
+            lead={i === 0}
+            marked={marked === cartoon.id}
+            onOpen={() => setReading(i)}
+          />
         ))}
       </div>
 

@@ -206,9 +206,10 @@
   border-top: 1px solid rgb(var(--record-ink) / .18);
 }
 .press-room .cartoon-goal-line:first-child { padding-top: 0; border-top: 0; }
-/* The thumbnail is a door, not a decoration: it carries a zoom cursor and says so on
-   hover, because a picture in a ledger that cannot be opened reads as a picture the
-   record is not really showing you. */
+/* The thumbnail is a door, not a decoration: it is plainly clickable, and it leads to the
+   drawing's own place on the wall rather than to a picture lifted out of the record. No
+   magnifying-glass cursor and no label: the drawing is not something to squint at here,
+   it is the way through to where it properly lives. */
 .press-room .cartoon-goal-line-art {
   grid-area: art;
   position: relative;
@@ -218,29 +219,11 @@
   overflow: hidden;
   border: 1px solid rgb(var(--record-ink) / .22);
   background: rgb(var(--record-bone));
-  cursor: zoom-in;
+  cursor: pointer;
   transition: border-color .18s ease;
 }
 .press-room .cartoon-goal-line-art img { display: block; width: 100%; height: auto; }
 .press-room .cartoon-goal-line-art:hover { border-color: rgb(var(--record-red)); }
-.press-room .cartoon-goal-line-cue {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: .22rem .3rem;
-  font-family: var(--font-record-ui);
-  font-size: .56rem;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  text-align: center;
-  color: rgb(var(--record-paper));
-  background: rgb(var(--record-ink) / .84);
-  opacity: 0;
-  transition: opacity .18s ease;
-}
-.press-room .cartoon-goal-line-art:hover .cartoon-goal-line-cue,
-.press-room .cartoon-goal-line-art:focus-visible .cartoon-goal-line-cue { opacity: 1; }
 .press-room .cartoon-goal-line .cartoon-goal-line-title { grid-area: title; }
 .press-room .cartoon-goal-line .cartoon-goal-line-text { grid-area: text; }
 @media screen and (max-width: 640px) {
