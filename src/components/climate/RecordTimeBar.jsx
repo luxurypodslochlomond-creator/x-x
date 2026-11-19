@@ -38,22 +38,16 @@ export default function RecordTimeBar({ onOpenContents, contentsOpen }) {
   return (
     <div className="rec-time-bar relative bg-cartoon-sun text-record-ink">
       <div className="flex items-center gap-1 px-4 py-[3px] lg:px-10 lg:py-1">
-        {/* ── THE INDEX, ON A PHONE, WHERE THE ROW BELOW CANNOT HOLD IT ─────────────
-            Three rules of ink in the corner the eye already goes to for a menu, at the
-            full forty-four pixel target, and the panel behind it is the same one the
-            Explore door opens on a desk. Nothing new to learn and nothing hidden: the
-            whole contents of the record is one thumb-width from the top of every page. */}
-        <button
-          type="button"
-          onClick={onOpenContents}
-          aria-expanded={contentsOpen}
-          aria-controls="record-contents"
-          aria-label="Everything the record keeps"
-          title="Everything the record keeps"
-          className="rec-band-index shrink-0 lg:hidden"
-        >
-          <span aria-hidden="true" className="rec-band-rules"><i /><i /><i /></span>
-        </button>
+        {/* ── THE INDEX WENT BACK TO THE DOORS ─────────────────────────────────────
+            It stood here for an afternoon as three rules of ink, because six doors in one
+            row of a phone gave each fifty-six pixels. Brian, 19 November: "much better but
+            lost explore." He was right — a door taken off the row and drawn as a glyph is a
+            door the reader has to be told about. Explore is back on the row, so the band
+            keeps a mark at each edge and neither of them is a control: the tongue on the
+            right, and this empty cell of exactly the same width on the left, which is what
+            holds the sentence in the middle of the glass instead of a tongue's width left
+            of it. */}
+        <span aria-hidden="true" className="w-11 shrink-0 lg:hidden" />
 
         {/* ── THE SENTENCE IS SET, NOT JUST WRAPPED ────────────────────────────────
             Brian, 17 November: "centre the or justify whatever balance the sentence in

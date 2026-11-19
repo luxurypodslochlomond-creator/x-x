@@ -195,8 +195,10 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             aria-label={`${l.name}: ${l.reads}`}
             aria-pressed={on}
             title={`${l.name} · ${l.reads}`}
-            className="absolute grid place-items-center border-0 bg-transparent p-0"
-            style={{ ...at, width: 30, height: 30, zIndex: on ? 3 : 2 }}
+            /* Forty-four pixels under a thumb, thirty on a desk: the dot never changes size,
+               only the room around it to be pressed. */
+            className="absolute grid h-11 w-11 place-items-center border-0 bg-transparent p-0 sm:h-[30px] sm:w-[30px]"
+            style={{ ...at, zIndex: on ? 3 : 2 }}
           >
             {on && (
               <span

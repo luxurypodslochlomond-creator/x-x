@@ -273,11 +273,11 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
         ))}
       </dl>
 
-      {/* The plate read out: the places it actually holds, so a reader never has to hunt
-          for a dot to find out where the record is standing. */}
-      <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
-
-      {/* What you pressed, said underneath the planet in the record's own words. */}
+      {/* What you pressed, said underneath the planet in the record's own words — and it
+          stands directly under the plate, before the index of places. It used to sit below
+          that index, which on a phone is a list of every place the record holds: a reader
+          pressed a mark and the answer opened a screen and a half further down, so the press
+          looked like it had done nothing at all. */}
       <div ref={detailRef} className="record-map-detail border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
         {picked ? (
           <div>
@@ -372,6 +372,12 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
           </p>
         )}
       </div>
+
+      {/* The plate read out: the places it actually holds, so a reader never has to hunt
+          for a mark to find out where the record is standing. It comes after the line a
+          press opens, never before it. */}
+      <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
+
       {tone === 'ink' && alive && (
         <p className="record-map-geography-credit bg-record-bone px-3 py-2 font-mono text-xs text-record-muted">
           Geography: <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Natural Earth · public domain</a>.

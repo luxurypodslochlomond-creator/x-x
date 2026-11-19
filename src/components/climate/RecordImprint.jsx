@@ -6,32 +6,28 @@ import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import RecordDeskDoors from '@/components/climate/RecordDeskDoors';
 import '@/components/climate/record-navigator.css';
 
-// ── ONE ROW OF FIVE, AND BASE 1 IN THE MIDDLE OF IT ─────────────────────────────
-// This row has now been argued over three times, so the whole argument is kept here rather
-// than in a commit nobody reads.
+// ── TWO TIERS ON A PHONE, AND EXPLORE LAST ON THE SECOND ───────────────────────
+// Brian, 19 November: "much better but lost explore and think two tiers at top nav in mobile
+// be coolasfuck." Both halves of that are answered here, and the reason the two belong
+// together is arithmetic.
 //
-// Six in one line of a 393-pixel glass gave each door fifty-six pixels — a mark the size of
-// a full stop with a name under it too small to read. So it was drawn as two rows of three
-// for an afternoon, which gave every door a hundred and twenty pixels and made the strip
-// twice as tall: a header that eats a third of a phone's glass before the page has started.
-// Brian, that evening: "think navigation too big on mobile." He was right, and two rows was
-// the wrong trade.
+// The row had been five doors because six in 393 pixels gives each sixty-five — and the
+// sixth, Explore, was moved into the yellow band as three rules of ink. That traded a door
+// for a glyph: the panel it opens was still one thumb away, but nothing on the page said
+// "explore" any more, so a reader who had learned the door had lost it.
 //
-// Then the seventh mark (Explore) was added to the row, which is what broke it properly:
-// two rows of three with a seventh door left stranded on a line of its own, and the header
-// reading as a list rather than as a masthead. Brian, 19 November: "not refined coolasfuck
-// header any more can dif please for mobile." So:
-//
-//   • five doors, one row, which is the number every tab bar a person already knows stops
-//     at, and the number a thumb can hold at a readable size;
-//   • BASE 1 dead centre, because it is the middle of this record and not one of its
-//     edges — the five in PRIMARY_NAV are ordered so that the third is the middle one;
-//   • the index of everything else leaves this row and signs the yellow band above it,
-//     beside the tongue, where a phone already looks for the way to the rest.
-//
-// Nothing has been taken away: every door here opens what it opened, the index opens the
-// same panel, and a desk still draws its own two rows of six with Explore last.
+// Two tiers of three is the same six doors with room to breathe: a hundred and twenty-five
+// pixels a cell, marks at twenty-eight and every name readable at ten, and the row broken
+// where the record itself breaks — the four ways into what is on it first, then the room of
+// drawings and the index of everything else. The order is the order a reader asks, and
+// Explore stays where a desk puts it: last, on the right, under the thumb.
 const CELL = 'flex-1 basis-0 min-w-0 !min-h-11';
+
+// The two tiers. The first is what the record is and how you move through it; the second is
+// the room of drawings, and then the one mark that is not a door at all but the index of all
+// of them. Kept as a split of PRIMARY_NAV rather than a second hand-written list, so a phone
+// can never offer a door the rail has stopped offering.
+const TIERS = [PRIMARY_NAV.slice(0, 3), PRIMARY_NAV.slice(3)];
 
 export default function RecordImprint({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
@@ -39,27 +35,49 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
     <div className="flex flex-col pb-1 lg:pb-2">
       <RecordDeskDoors onOpenContents={onOpenContents} contentsOpen={contentsOpen} />
       <nav aria-label="The record's doors" className="rec-mast-doors w-full lg:hidden">
-        <div className="rec-mast-row grid grid-cols-5 items-stretch gap-x-1">
-          {PRIMARY_NAV.map(({ label, to, what }) => (
-            <RecordNavDoor
-              key={to}
-              to={to}
-              label={label}
-              what={what}
-              size={24}
-              active={pathname === to}
-              className={CELL}
-            />
-          ))}
-        </div>
+        {TIERS.map((tier, index) => (
+          <div
+            key={index}
+            className={`rec-mast-row grid grid-cols-3 items-stretch gap-x-1 ${index === 0 ? '' : 'rec-mast-row-2 mt-0.5 border-t border-record-ink/15 pt-1'}`}
+          >
+            {tier.map(({ label, to, what }) => (
+              <RecordNavDoor
+                key={to}
+                to={to}
+                label={label}
+                what={what}
+                size={28}
+                active={pathname === to}
+                className={CELL}
+              />
+            ))}
+
+            {/* The index of everything else, on the last tier, where a reader looks once
+                the ways in have not answered them. Not a door: it opens the sheet. */}
+            {index === TIERS.length - 1 && (
+              <RecordNavDoor
+                to="/ClimateGuide"
+                label="Explore"
+                what="The rest of the record: the brief, the covenant, the terms and every other door."
+                size={28}
+                asButton
+                onClick={onOpenContents}
+                expanded={contentsOpen}
+                controls="record-contents"
+                popup={false}
+                active={contentsOpen}
+                className={CELL}
+              />
+            )}
+          </div>
+        ))}
       </nav>
       {/* ── BASE 1, IN THE MIDDLE ────────────────────────────────────────────────
           Brian, 18 November: "have BASE 1 in the middle know what I mean bro". On a desk it
           sits centred under the doors, in the machine's own type and the record's own faint
           ink — the hand that built the room, signed where a printer signs a sheet. No door,
-          no badge, nothing to click: a signature, not a product. On a phone the middle of
-          the row itself is BASE 1, so the signature would only say the word twice; the row
-          is the signature there. */}
+          no badge, nothing to click: a signature, not a product. On a phone the second tier
+          ends with Explore, so the signature would only be a word between two rows. */}
       <div className="hidden items-center justify-center gap-3 pb-1 pt-1.5 lg:flex">
         <span aria-hidden="true" className="h-px w-16 bg-record-ink/20" />
         <span className="font-mono text-[9px] uppercase tracking-[0.34em] text-record-ink/45">Base 1</span>
