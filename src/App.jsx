@@ -153,6 +153,8 @@ const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
 const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
+const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
+const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
 const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
@@ -369,6 +371,17 @@ const AuthenticatedApp = () => {
           record, because it is part of the record. */}
       <Route path="/ClimateCartoons/Sheet/:id" element={<ClimateCartoonSheetPage />} />
       <Route path="/ClimateCartoons/Artist/:name" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonArtistPage /></ClimateLayout>} />
+
+      {/* ── THE PRINT ROOM, AND THE SHOW IT MAKES ────────────────────────────────────
+          Two addresses, and only one of them is a room. /ClimateCartoons/Print is a room of
+          the record and wears the record's shell: a contact sheet of the wall, where a person
+          chooses the drawings they want and numbers them by the order they chose them.
+          /ClimateCartoons/Exhibition is paper — it opens outside the shell on purpose, like
+          the single sheet, because a school's printer must get the drawings and the credits
+          and not a masthead and a way out. The show travels in the address, so it can be
+          bookmarked and printed again next term and the record never learns who printed it. */}
+      <Route path="/ClimateCartoons/Print" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonPrintPage /></ClimateLayout>} />
+      <Route path="/ClimateCartoons/Exhibition" element={<ClimateCartoonExhibitionPage />} />
 
       {/* The 29th, written down: one address Janine can send to CEEW, to the festival's
           curator or to a classroom. It carries the hour, what happens to the drawings and

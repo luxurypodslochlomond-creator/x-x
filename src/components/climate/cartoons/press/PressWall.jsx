@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { SHOW_DRAWING } from '@/components/climate/cartoons/goToDrawing';
 import PressSheet from '@/components/climate/cartoons/press/PressSheet';
@@ -86,6 +87,12 @@ export default function PressWall() {
       <p className="press-wall-colophon">
         The artists’ own words, kept with their work. Shown with permission. Every new contribution
         waits for a person’s look.
+      </p>
+
+      {/* The way off the screen that does not take anything off the record: a show printed
+          from the wall, with every artist's name and address already on the paper. */}
+      <p className="press-wall-print">
+        Take the wall with you: <Link to="/ClimateCartoons/Print">print a show of it ↗</Link>
       </p>
 
       {wall.hasNextPage && (

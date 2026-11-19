@@ -1,0 +1,257 @@
+/* ── THE EXHIBITION, ON PAPER ───────────────────────────────────────────────────
+   This file is the printer's, not the browser's. On screen each sheet is a sheet: white,
+   one drop shadow, laid on the record's bone ground, so a teacher sees exactly what will
+   come out of the machine. In print the shadow, the ground and the tool bar go, and what
+   is left is one drawing per page with the artist's name under it.
+
+   A4 portrait, because a school prints A4 and a workshop pins A4. The picture is allowed
+   to be as tall as the paper can take; the credit block never leaves the page. */
+
+.ex-page {
+  min-height: 100vh;
+  padding: 0 0 64px;
+  background: rgb(var(--record-bone));
+  color: rgb(var(--record-ink));
+  font-family: var(--font-record-ui);
+}
+
+/* The one control on the page, and it prints without it. */
+.ex-tools {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .65rem clamp(.8rem, 3vw, 2rem);
+  background: rgb(var(--record-paper));
+  border-bottom: 2px solid rgb(var(--record-ink));
+}
+.ex-tools a {
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.ex-tools a:hover { color: rgb(var(--record-ink)); }
+.ex-tools button {
+  padding: .58rem .9rem;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-paper));
+  background: rgb(var(--record-red));
+}
+.ex-tools button:hover { background: rgb(var(--record-ink)); }
+
+.ex-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: 4rem 1.5rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.ex-state a { color: rgb(var(--record-red)); border-bottom: 1px solid currentColor; }
+
+.ex-stack { padding: clamp(1rem, 3vw, 2.4rem) clamp(.6rem, 3vw, 2rem) 0; }
+
+/* ── ONE SHEET ── */
+.ex-sheet {
+  width: min(820px, 100%);
+  margin: 0 auto clamp(1rem, 2vw, 1.5rem);
+  padding: clamp(1rem, 2.6vw, 2.2rem);
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(var(--record-ink) / .18);
+}
+
+/* ── THE FIRST SHEET ── */
+.ex-title-band {
+  padding: clamp(.9rem, 2vw, 1.4rem);
+  background: rgb(var(--record-signal));
+  border-top: 5px solid rgb(var(--record-red));
+}
+.ex-kicker {
+  margin: 0 0 .5rem;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+.ex-title {
+  margin: 0 0 .45rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: .96;
+  letter-spacing: -.02em;
+  color: rgb(var(--record-ink));
+}
+.ex-title-when {
+  margin: 0;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / .7);
+}
+
+/* The hanging list: plate, hand, work. */
+.ex-contents { margin: 1.2rem 0 0; padding: 0; list-style: none; }
+.ex-contents li {
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, auto) minmax(0, 1fr);
+  gap: .3rem .7rem;
+  align-items: baseline;
+  padding: .34rem 0;
+  border-bottom: 1px solid rgb(var(--record-ink) / .14);
+}
+.ex-c-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: rgb(var(--record-red));
+}
+.ex-c-name { font-weight: 700; font-size: .86rem; }
+.ex-c-title {
+  font-family: var(--font-reading);
+  font-style: italic;
+  font-size: .82rem;
+  color: rgb(var(--record-muted));
+}
+
+.ex-note {
+  margin: 1.1rem 0 .4rem;
+  padding-left: .7rem;
+  border-left: 2px solid rgb(var(--record-red));
+  font-family: var(--font-reading);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink) / .8);
+}
+
+.ex-address {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .74rem;
+  letter-spacing: .04em;
+  color: rgb(var(--record-ink));
+  word-break: break-all;
+}
+
+/* ── ONE DRAWING ── */
+.ex-head {
+  display: flex;
+  align-items: baseline;
+  gap: .7rem;
+  padding-bottom: .45rem;
+  border-bottom: 2px solid rgb(var(--record-ink));
+}
+.ex-plate {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: rgb(var(--record-red));
+}
+.ex-head-line {
+  font-size: .58rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / .75);
+}
+
+.ex-pic {
+  display: grid;
+  place-items: center;
+  padding: .9rem 0 .6rem;
+}
+.ex-pic img {
+  display: block;
+  max-width: 100%;
+  max-height: 58vh;
+  object-fit: contain;
+}
+
+.ex-body { border-top: 1px solid rgb(var(--record-ink) / .18); padding-top: .7rem; }
+.ex-artist {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.6vw, 1.75rem);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+}
+.ex-work {
+  margin: .15rem 0 0;
+  font-family: var(--font-reading);
+  font-style: italic;
+  font-size: .92rem;
+  color: rgb(var(--record-muted));
+}
+.ex-words {
+  margin: .7rem 0 0;
+  padding-left: .7rem;
+  border-left: 2px solid rgb(var(--record-red));
+  font-family: var(--font-reading);
+  font-size: .92rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+}
+.ex-facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: .12rem .8rem;
+  margin: .8rem 0 0;
+  font-size: .66rem;
+  letter-spacing: .04em;
+}
+.ex-facts dt { text-transform: uppercase; letter-spacing: .1em; color: rgb(var(--record-muted)); }
+.ex-facts dd { margin: 0; color: rgb(var(--record-ink)); }
+
+.ex-permission {
+  margin: .8rem 0 .2rem;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / .7);
+}
+
+/* ── THE PRINTER'S RULES ── */
+@media print {
+  @page { size: A4 portrait; margin: 12mm; }
+
+  .ex-tools { display: none !important; }
+  .ex-page { min-height: 0; padding: 0; background: #fff; }
+  .ex-stack { padding: 0; }
+
+  .ex-sheet {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+  .ex-sheet:last-child { break-after: auto; page-break-after: auto; }
+
+  /* The picture takes the page; the credit block keeps its room at the foot. */
+  .ex-pic img { max-height: 172mm; }
+  .ex-pic { padding: .6rem 0 .4rem; }
+
+  .ex-title-band { border-top-width: 6px; }
+  .ex-contents li { padding: .22rem 0; }
+
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

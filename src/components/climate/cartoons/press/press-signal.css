@@ -58,3 +58,23 @@
   border-left: 2px solid rgb(var(--record-red));
   padding-left: .7rem;
 }
+
+/* ── 4. THE DOOR TO THE PRINT ROOM ──────────────────────────────────────────────
+   It stands directly under the permission line, because the two belong together: what a
+   reader may do with these drawings, and the one way to take them that keeps every name
+   attached. Red, ruled, and small — a door in the margin, not a button. */
+#root .record-cartoon-field .press-room .press-wall-print {
+  margin: .9rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / .78);
+}
+#root .record-cartoon-field .press-room .press-wall-print a {
+  color: rgb(var(--record-red));
+  border-bottom: 2px solid rgb(var(--record-red));
+  padding-bottom: 1px;
+}
+#root .record-cartoon-field .press-room .press-wall-print a:hover { color: rgb(var(--record-ink)); border-bottom-color: rgb(var(--record-ink)); }
