@@ -40,24 +40,27 @@ export function RoomMarkCrisis({ size = 32, className = '' }) {
   );
 }
 
-// Actions — the direction you can take, and the point of it in red. A thing you can join
-// or do is a way forward; it does not need a picture of a person doing it.
+// Actions — a lever resting on its red fulcrum. An arrow says "go", which is a sign on a
+// wall; a lever says a hand can move a thing that is far too heavy, which is what joining
+// something actually is. One bar, one wedge, and the wedge is the red.
 export function RoomMarkAction({ size = 32, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M4 17h20v6H4z" />
-      <path {...RED} d="M24 10l12 10-12 10v-7h-5v-6h5z" />
+      <path {...MASS} d="M4 22 33 14l1.6 6L5.6 28Z" />
+      <path {...RED} d="M21 24l7 12H14Z" />
     </svg>
   );
 }
 
-// Groups — several uprights and the one band they are all holding. People working on the
-// same thing: the shared thing is the red, because that is what makes them a group.
+// Groups — two uprights and the one beam they are carrying between them. People working on
+// the same thing hold one thing up; the beam is the red, because the beam is the reason
+// they are a group. (It was three bars with a band across them, which is a bar chart, and
+// a bar chart is the last thing this record should ever draw.)
 export function RoomMarkGroups({ size = 32, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M6 10h6v22H6zM17 6h6v26h-6zM28 12h6v20h-6z" />
-      <path {...RED} d="M3 23h34v5H3z" />
+      <path {...MASS} d="M6 14h7v22H6zM27 14h7v22h-7z" />
+      <path {...RED} d="M3 6h34v7H3z" />
     </svg>
   );
 }

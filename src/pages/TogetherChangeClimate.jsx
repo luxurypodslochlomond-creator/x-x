@@ -437,17 +437,14 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* Jane's words, the record's purpose, compact rooms, then the subject drawings. */}
+      {/* ── THE FOUR ROOMS COME FIRST ────────────────────────────────────────────────
+          Brian, 19 November: "move crises solutions action and groups up bro". The shape
+          of the record now stands directly under the masthead, before Jane's words and
+          the title — so a reader learns what the record is made of in the same glance
+          they arrive with, rather than after a painting and a headline. Same four doors,
+          same colours, same counts; only the order changed. */}
       <div className="record-home-flow">
-      <div className="record-home-voice-band border-t-[3px] border-record-mark">
-        <RecordPaintedBand strength={0.75} soft>
-          <RecordHomeVoice />
-        </RecordPaintedBand>
-      </div>
-
-      <RecordCoverPlate copy={t} />
-
-      <div className="record-home-doors px-4 pt-6 lg:px-10 lg:pt-2">
+      <div className="record-home-doors px-4 pt-3 lg:px-10 lg:pt-1">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -458,6 +455,14 @@ export default function TogetherChangeClimate() {
           }}
         />
       </div>
+
+      <div className="record-home-voice-band border-t-[3px] border-record-mark">
+        <RecordPaintedBand strength={0.75} soft>
+          <RecordHomeVoice />
+        </RecordPaintedBand>
+      </div>
+
+      <RecordCoverPlate copy={t} />
 
       <div className="record-home-subjects px-4 pb-5 pt-4 lg:px-10">
         <SubjectRail
@@ -592,8 +597,8 @@ export default function TogetherChangeClimate() {
           Got a link or an email to share? Add it above and we’ll help fill in the details. No account needed.
         </p>
         {/* "Support welcome" is off this line at Janine's request, 9 November: donations
-            are for a host to handle, and are being saved for those conversations. */}
-        <p className="mt-2 text-[10px] font-mono tracking-wide text-[#5a5246]">{t.noads} · {t.nofund}</p>
+            are for a host to handle, and are being saved for those conversations. The
+            no-advertising line came off on 19 November — the governance band says it. */}
       </div>
 
       {/* ── CONTENT ── */}
