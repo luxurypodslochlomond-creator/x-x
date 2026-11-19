@@ -74,6 +74,22 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
 
   return (
     <div className="flex flex-col font-body">
+      {/* ── THE SHEET OPENS BY SAYING WHAT IT IS, NOT BY LISTING DOORS ─────────────
+          Brian, 19 November: "when going to explore the record why does it feel complex…
+          this is our coolasfuck chance to tell people a story… get them trusting for the
+          right reason and reading and helping the planet." He is not wrong and it is not
+          him: a sheet of nineteen names is a filing cabinet, and a filing cabinet has
+          never made anybody care.
+
+          So the first thing on the sheet is the reason the record can be trusted at all,
+          said plainly and in two sentences — every entry names who said so, and the reader
+          is given the one instruction that matters, which is small enough to follow: read
+          one thing, then do one thing. It is the only paragraph in the index, and it is
+          set in the record's reading voice so it reads as a person talking rather than as
+          furniture. Everything below it is the same doors it always was. */}
+      <p className="mb-3 text-[13px] leading-[1.6] text-record-ink/85" style={{ fontFamily: 'var(--font-reading)' }}>
+        Every entry on this record names who said so, so you never have to take our word for it. Read one thing. Then do one thing.
+      </p>
       <button
         type="button"
         onClick={() => setShowPlate(true)}
@@ -83,7 +99,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
         <span className="flex-1 text-[12px] uppercase leading-tight tracking-[0.08em]">The marks, all at once</span>
         <span aria-hidden="true" className="font-mono text-[10px] text-record-muted">{MARKS_IN_ORDER.length}</span>
       </button>
-      {groups.map(({ title, doors }) => (
+      {groups.map(({ title, line, doors }) => (
           <section key={title} aria-label={title} className={phone ? 'border-t border-record-mark/30' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
             {/* ── ON A PHONE THE SHELF'S NAME STAYS PUT ────────────────────────────────
                 Brian, 19 November: the explore on a phone when it opens is "not coolasfuck".
@@ -96,14 +112,25 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                 desk shows in its left column, said the only way a narrow glass can say it.
                 The count wears the record's red plate rather than a bare number, because a
                 figure with no mark on it is the one thing this index never had on a desk. */}
-            <h2 className={`record-header-type flex gap-2 leading-none text-record-mark ${phone ? 'sticky top-0 z-[1] items-center bg-record-bone pb-2 pt-2.5 text-[11px] tracking-[0.16em]' : 'items-baseline pt-3 text-[11px] leading-relaxed'}`}>
+            <h2 className={`record-header-type flex flex-wrap gap-2 leading-none text-record-mark ${phone ? 'sticky top-0 z-[1] items-center bg-record-bone pb-2 pt-2.5 text-[11px] tracking-[0.16em]' : 'items-baseline pt-3 text-[11px] leading-relaxed'}`}>
               <span>{title}</span>
               <span aria-hidden="true" className={phone ? 'bg-record-mark px-1 py-[2px] font-mono text-[9px] leading-none tracking-normal text-record-bone' : 'text-[10px]'}>{doors.length}</span>
               {/* The rule that finishes the shelf's name. A name and a figure alone on a
                   phone's glass float; a name, a figure and a hairline running out to the
                   edge of the page are a printed shelf label, which is what this is. */}
               {phone && <span aria-hidden="true" className="ml-1 h-px flex-1 self-center bg-record-ink/20" />}
+              {/* On a desk the line sits under the shelf's name, inside its own column,
+                  because that column is the one place on the panel where a shelf is
+                  allowed to explain itself. */}
+              {!phone && line && (
+                <span className="basis-full pt-1 text-record-muted" style={{ fontFamily: 'var(--font-reading)', fontSize: 11.5, lineHeight: 1.45, letterSpacing: 0, textTransform: 'none' }}>{line}</span>
+              )}
             </h2>
+            {/* On a phone the line cannot live in the pinned name, or the name would eat
+                the glass. It sits just under it and scrolls away with its own shelf. */}
+            {phone && line && (
+              <p className="pb-1.5 text-[12.5px] leading-[1.5] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>{line}</p>
+            )}
             {/* ── TWO ACROSS, BECAUSE THE MARK NO LONGER EATS THE NAME ───────────────────
                 Two across failed on this phone once, on 19 November, and the reason was never
                 the count of columns: the mark sat beside the name, so each column had a

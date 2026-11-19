@@ -391,6 +391,14 @@ const COVENANT_DOOR = PAGE_INDEX.find(({ to }) => to === '/ExtractionProofCovena
 export const CONTENT_GROUPS = [
   {
     title: 'The record',
+    // ── EVERY SHELF SAYS WHAT IT IS FOR, IN ONE LINE ────────────────────────────
+    // Brian, 19 November: "when going to explore the record why does it feel complex…
+    // this is our chance to tell people a story." He was reading an index of names and
+    // getting no reason to care about any of them, which is what a filing cabinet does.
+    // A shelf label that answers the reader's question in plain words — what is this,
+    // why would I open it — turns the same doors into a walk through the record. The
+    // line is a sentence, never a label: it is the only prose in the index.
+    line: 'What this is, and whose name is on it.',
     doors: [
       PRIMARY_NAV.find(({ to }) => to === '/TogetherChangeClimate'),
       FOOTER_NAV.find(({ to }) => to === '/XEqualsX'),
@@ -401,6 +409,7 @@ export const CONTENT_GROUPS = [
     // "Ways in" was a lie on the contents: nobody was entering anything from that shelf, they
     // were going on to the wire, the map, the readership and the search. It says what it is now.
     title: 'More to read',
+    line: 'What changed, where, and who says so.',
     doors: PRIMARY_NAV.filter(({ to }) => to !== '/TogetherChangeClimate'),
   },
   {
@@ -408,6 +417,7 @@ export const CONTENT_GROUPS = [
     // corrections, the covenant, the terms and the privacy are all one claim, and the claim is
     // that nothing here is decided in the dark.
     title: 'Kept honest',
+    line: 'How an entry is checked, and what was put right.',
     doors: [
       FOOTER_NAV.find(({ to }) => to === '/ClimateMethod'),
       COVENANT_DOOR,
@@ -429,6 +439,7 @@ export const CONTENT_GROUPS = [
     // not in front of the record's proof. Its place in ELSEWHERE_NAV is untouched, so the
     // written guide's index still runs in the order it always has.
     title: 'Elsewhere',
+    line: 'The rooms you go looking for, rather than arrive at.',
     doors: [
       ...ELSEWHERE_NAV.filter(({ to }) => to !== '/ClimateFounder' && to !== '/ClimateMusic'),
       ...SUPPORTING_PAGES,
