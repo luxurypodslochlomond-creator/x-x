@@ -2,44 +2,45 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-// ── ONE CORRECTION, AS IT WAS MADE ────────────────────────────────────────────
-// The note is printed exactly as the keeper wrote it: never shortened, never tidied,
-// never summarised into something softer. Beside it, the entry it belongs to and the
-// day that entry last changed — so a reader can see the correction and the thing it
-// corrects in one place, rather than being asked to take either on trust.
-export default function CorrectionRow({ correction }) {
+// ── ONE LINE OF THE ERRATA SHEET ────────────────────────────────────────────────
+// Set as a register line, not a card: the number down the left, the date in the date
+// column, then the entry, the correction in the keeper's own words exactly as written,
+// and the way to the entry it belongs to. Never shortened, never tidied, never softened
+// — the note is the record of what was wrong, and a tidied correction is a second one.
+export default function CorrectionRow({ correction, n }) {
   const changed = correction.changed ? new Date(correction.changed) : null;
   const when = changed && !Number.isNaN(changed.getTime())
     ? changed.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
     : null;
 
   return (
-    <li className="border border-record-ink/30 border-t-4 border-t-record-red bg-record-paper p-4 lg:p-5">
-      <div className="mb-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-2">
-        <span className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#b3261e]">
+    <li className="grid grid-cols-[1.9rem_1fr] gap-x-3 border-b border-record-ink/20 py-4 lg:grid-cols-[1.9rem_7rem_1fr] lg:gap-x-5">
+      <span className="pt-0.5 font-mono text-[11px] font-bold tabular-nums text-[#b3261e]">{n}</span>
+      <span className="hidden pt-1 font-mono text-[10px] uppercase tracking-[0.12em] text-[#5a5246] lg:block">
+        {when || 'undated'}
+      </span>
+
+      <div className="min-w-0">
+        <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#5a5246]">
           {correction.kind}
-        </span>
-        {when && (
-          <span className="text-[9px] font-mono uppercase tracking-wider text-[#5a5246] whitespace-nowrap">
-            entry last changed {when}
-          </span>
-        )}
+          {when && <span className="lg:hidden"> · {when}</span>}
+        </p>
+
+        <h3 className="mt-1.5 font-display text-[17px] font-bold leading-snug text-record-ink lg:text-lg">
+          {correction.title}
+        </h3>
+
+        <p className="mt-2 border-l-2 border-l-[#b3261e] pl-3 text-[13.5px] leading-[1.7] text-[#141210] whitespace-pre-line">
+          {correction.note}
+        </p>
+
+        <Link
+          to={correction.to}
+          className="mt-3 inline-flex min-h-11 items-center gap-2 border-b border-record-ink/50 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-record-ink transition-colors hover:border-record-red hover:text-record-red"
+        >
+          Read the entry as it stands <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
       </div>
-
-      <h3 className="record-correction-title mb-4 font-display text-[17px] font-bold leading-snug text-record-ink lg:text-lg">
-        {correction.title}
-      </h3>
-
-      <p className="border-l-4 border-l-[#b3261e] bg-[#b3261e]/5 px-3 py-2 text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#141210] whitespace-pre-line">
-        {correction.note}
-      </p>
-
-      <Link
-        to={correction.to}
-        className="mt-4 inline-flex min-h-11 items-center gap-2 border-b-2 border-record-ink font-display text-xs font-bold uppercase tracking-wide text-record-ink transition-colors hover:border-record-red hover:text-record-red"
-      >
-        Read the entry as it stands <ArrowRight className="w-3.5 h-3.5" />
-      </Link>
     </li>
   );
 }
