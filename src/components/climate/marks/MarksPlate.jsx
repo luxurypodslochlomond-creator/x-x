@@ -19,9 +19,18 @@ import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 // ── THE PRESS IS THE ANSWER, NOT A TOOLTIP ───────────────────────────────────
 // A mark you cannot read is a shape, so every square on this plate is a button. Press one
 // and it is struck in reverse — ink behind it, the drawing in paper, its red still red —
-// and the line under the plate says what it means and offers the door it opens. No overlay,
-// no hover-only state, nothing that a thumb cannot do: the plate stays whole and visible
-// while one mark answers, which is the whole point of laying them together.
+// and the line under the plate says what it means.
+//
+// ── AND NO "OPEN" BUTTON ─────────────────────────────────────────────────────
+// Brian, 19 November: "open is wrong and button too weird — what should go?" He was right,
+// and the fault was that a bordered button with the word OPEN on it is a piece of interface
+// standing where a caption belongs. A plate of drawings does not need a control bolted to
+// it; it needs the door named.
+//
+// So the door is its own name, in the record's red, with the record's go-mark beside it: a
+// small solid triangle, the one shape that means "this way" without a word and without a
+// box. The name is the link, the mark is the arrow, and there is nothing on the plate that
+// looks like software.
 //
 // ── AND THE PLANET, WITHOUT THE SENTENCE NOBODY BELIEVES ──────────────────────
 // The cheesy version is easy and it is a lie: "together we can heal the planet" printed
@@ -33,6 +42,14 @@ import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 // planet.
 const CELL =
   'flex aspect-square items-center justify-center border-b border-r border-record-ink/20 p-[6%] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-record-mark';
+
+// The record's go-mark: a solid triangle, drawn rather than typed, so it is the same shape
+// here as it would be cut into a plate. Nothing else on this sheet is a glyph.
+function GoMark() {
+  return (
+    <svg width="7" height="8" viewBox="0 0 7 8" aria-hidden="true" className="shrink-0"><path d="M0 0l7 4-7 4Z" fill="currentColor" /></svg>
+  );
+}
 
 export default function MarksPlate({ onClose, onNavigate }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -46,17 +63,18 @@ export default function MarksPlate({ onClose, onNavigate }) {
   return (
     <figure className="pb-3 font-body text-record-ink">
       <div className="flex items-baseline justify-between gap-3 border-b-2 border-record-mark pb-1">
-        <p className="record-header-type text-[11px] uppercase tracking-[0.16em] text-record-mark">Every mark, struck once</p>
+        <p className="text-[11px] uppercase tracking-[0.16em] text-record-mark">Every mark, struck once</p>
         <button
           type="button"
           onClick={onClose}
-          className="record-header-type min-h-9 shrink-0 px-1 text-[10px] uppercase tracking-[0.14em] text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+          aria-label="Back to the list of doors"
+          className="min-h-9 shrink-0 px-1 text-[10px] uppercase tracking-[0.14em] text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
         >
-          The index <span aria-hidden="true">↩</span>
+          The list <span aria-hidden="true">↩</span>
         </button>
       </div>
 
-      <p className="mt-1.5 text-[11px] leading-snug text-record-muted">Tap any mark to hear what it means and where it opens.</p>
+      <p className="mt-1.5 text-[11px] leading-snug text-record-muted">Press any mark to read what it is, and to go through it.</p>
 
       <div role="group" aria-label="Every mark of the record" className="mt-1.5 grid grid-cols-6 border-l border-t border-record-ink/20">
         {MARKS_IN_ORDER.map(({ name, Mark, means }, i) => {
@@ -76,23 +94,27 @@ export default function MarksPlate({ onClose, onNavigate }) {
         })}
       </div>
 
-      <figcaption className="mt-2 min-h-[4.5rem]" aria-live="polite">
+      <figcaption className="mt-2 min-h-[5.25rem]" aria-live="polite">
         {chosen ? (
-          <div className="flex items-start gap-2 border-t-2 border-record-mark pt-1.5">
-            <span aria-hidden="true" className="mt-0.5 block h-8 w-8 shrink-0 text-record-ink [&>svg]:h-full [&>svg]:w-full"><chosen.Mark size={40} /></span>
+          <div className="flex items-start gap-3 border-t-2 border-record-mark pt-2">
+            {/* The drawing, at the size it is actually legible: a mark answered in a
+                twenty-pixel thumbnail would be answered by the sentence alone, which is the
+                one thing this plate exists to avoid. */}
+            <span aria-hidden="true" className="mt-0.5 block h-14 w-14 shrink-0 text-record-ink [&>svg]:h-full [&>svg]:w-full"><chosen.Mark size={40} /></span>
             <div className="min-w-0 flex-1">
-              <p className="record-header-type text-[11px] uppercase tracking-[0.14em] text-record-mark">{chosen.name}</p>
-              <p className="text-[12px] leading-relaxed text-record-ink">{chosen.means}</p>
+              <p className="text-[11px] uppercase tracking-[0.14em] text-record-mark">{chosen.name}</p>
+              <p className="mt-0.5 text-[12.5px] leading-snug text-record-ink">{chosen.means}</p>
+              {chosen.to && (
+                <Link
+                  to={chosen.to}
+                  onClick={onNavigate}
+                  className="mt-1.5 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.13em] text-record-mark underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+                >
+                  {chosen.door}
+                  <GoMark />
+                </Link>
+              )}
             </div>
-            {chosen.to && (
-              <Link
-                to={chosen.to}
-                onClick={onNavigate}
-                className="record-header-type mt-0.5 shrink-0 border border-record-ink/30 px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-record-ink hover:border-record-mark hover:text-record-mark"
-              >
-                Open <span aria-hidden="true">→</span>
-              </Link>
-            )}
           </div>
         ) : (
           <>
