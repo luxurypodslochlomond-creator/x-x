@@ -16,7 +16,7 @@ import '@/components/climate/method-page.css';
 
 function Rule({ children }) {
   return (
-    <p className="border-l-4 border-record-red bg-record-signal/20 p-4 text-record-ink lg:px-5 lg:py-4">{children}</p>
+    <p className="border-l-4 border-record-signal bg-record-paper/10 p-4 text-record-paper lg:px-5 lg:py-4">{children}</p>
   );
 }
 
@@ -31,7 +31,7 @@ export default function ClimateMethod() {
       returnLabel="Back to the record"
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
-      <header className="record-method-intro bg-record-paper p-4 lg:p-6">
+      <header className="record-method-intro p-4 lg:p-6">
         <h1 className="max-w-xl text-[30px] font-bold leading-[1.1] tracking-tight lg:text-[42px]">How we check. What we correct.</h1>
         <p className="mt-4 max-w-2xl text-[16px] leading-[1.7] text-record-muted">The method explains the checks. The corrections show what changed. Sources, responsibility and mistakes, in one place.</p>
         <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm font-bold text-record-red">
@@ -39,7 +39,7 @@ export default function ClimateMethod() {
           <a href="#say" className="inline-flex min-h-11 items-center underline underline-offset-4">Report a problem ↓</a>
         </div>
       </header>
-      <div className="record-method-rules" aria-label="The full method">
+      <div className="record-method-rules record-method-sheet" aria-label="The full method">
       <Block n="01" title="What this is, and what it is not">
         <p>A record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
         <p>Entries are ordered by date, never by popularity. Nothing counts likes, shares or followers. Nothing can be pushed up by paying, so there is nothing here to game.</p>
@@ -62,7 +62,7 @@ export default function ClimateMethod() {
           and it comes off. The link to your page stays; the copy goes.
         </p>
         <p>Anyone may send an entry in — a community group, a researcher, a reader who spotted something. It goes through exactly the same check as anything written here.</p>
-        <p>An action is traced differently, and the record says which. An action is the organiser's own word about what they are doing, and their own contact line is printed on it — that line is the origin. Its label stays at one origin says so until a person has a second, independent origin to name.</p>
+        <p>An action is traced differently, and the record says which. An action is the organiser's own word about what they are doing, and their own contact line is printed on it — that line is the origin. Its label stays at single source until a person has a second, independent origin to name.</p>
       </Block>
 
       <Block n="03" title="The ladder — how well a claim is known">
@@ -143,7 +143,7 @@ export default function ClimateMethod() {
       </Block>
       </div>
       <RecordCorrections />
-      <div className="record-method-contact bg-record-paper p-4 lg:p-6"><RecordSaySomething /></div>
+      <div className="record-method-contact p-4 lg:p-6"><RecordSaySomething /></div>
     </ClimateRecordShell>
   );
 }

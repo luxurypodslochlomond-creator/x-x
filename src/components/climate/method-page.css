@@ -1,9 +1,52 @@
+/* ── THE METHOD STANDS ON THE PAINTING ───────────────────────────────────────────
+   Brian, 19 November: "the method page doesn't have the coolasfuck painting background,
+   lots of white boxes." He was right, and it was the same fault the founder page had:
+   ten warm-paper rectangles stacked on warm paper — the book's own sheet painted over
+   itself ten times — so the one picture he commissioned for the door was shut out of
+   the page that explains how the record is made. A document of flat cream boxes is a
+   memo, not this record.
+
+   So the opening and the method itself are photographic plates now, on the same rule
+   the founder page settled: the painting, held back by ink rather than replaced by
+   paper, with the record's signal rule across the top edge. The veil is strongest
+   where the sentences are, so nothing is lost in legibility — the room is visible and
+   the words still win. The corrections and the form below stay paper: a card laid on
+   the painting, not a hole cut in it. */
+.record-trust-page .record-method-intro,
+.record-trust-page .record-method-sheet {
+  background-color: rgb(var(--record-earth));
+  background-image:
+    linear-gradient(
+      rgb(var(--record-earth) / .70) 0%,
+      rgb(var(--record-earth) / .84) 38%,
+      rgb(var(--record-earth) / .94) 72%,
+      rgb(var(--record-earth)) 100%
+    ),
+    var(--record-cover);
+  /* The painting is shown at the size it was painted for, from the top of the plate, and
+     the veil settles into solid earth under the last of the words — the same rule the
+     record's own bands keep, so no sentence is ever asked to fight a photograph. A tall
+     sheet is not one zoomed crop: the painting holds its own scale and the ground beneath
+     the words becomes the earth it was painted on. */
+  background-size: 100% 100%, 100% auto;
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+  border-top: 4px solid rgb(var(--record-signal));
+}
+
+/* Every word on a painted surface is light on the painting. */
+.record-trust-page :is(.record-method-intro, .record-method-sheet) :is(h1, h2, p, strong) {
+  color: rgb(var(--record-paper));
+}
+.record-trust-page :is(.record-method-intro, .record-method-sheet) a { color: rgb(var(--record-signal)); }
+.record-trust-page :is(.record-method-intro, .record-method-sheet) a:hover { color: rgb(var(--record-paper)); }
+
 /* One short opening, expandable method, then the actual corrections and the existing contact form. */
 .record-trust-page .record-shell-content { display: block; }
 .record-trust-page .record-method-intro { margin-bottom: 1rem; }
 .record-trust-page .record-method-rules { margin-bottom: 1.5rem; }
 .record-method-rule summary::-webkit-details-marker { display: none; }
-.record-method-rule[open] summary { border-bottom: 1px solid rgb(var(--record-ink) / .1); margin-bottom: 1rem; }
+.record-method-rule[open] summary { border-bottom: 1px solid rgb(var(--record-paper) / .22); margin-bottom: 1rem; }
 .record-trust-page :is(#corrections, #say) { scroll-margin-top: 9rem; }
 .record-trust-page .record-method-contact { margin-top: 1.5rem; }
 @media (min-width: 1024px) {

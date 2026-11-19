@@ -5,7 +5,7 @@ import useCorrections from '@/components/climate/useCorrections';
 export default function RecordCorrections() {
   const corrections = useCorrections();
   return (
-    <section id="corrections" className="record-method-wide scroll-mt-36 border-t-4 border-record-red bg-record-paper p-4 lg:p-6" aria-labelledby="corrections-title">
+    <section id="corrections" className="record-method-wide scroll-mt-36 border-t-4 border-record-red bg-record-bone p-4 lg:p-6" aria-labelledby="corrections-title">
       <h2 id="corrections-title" className="text-2xl font-bold leading-tight text-record-ink">Corrections, in daylight</h2>
       <p className="mb-5 mt-3 max-w-2xl text-[15px] leading-[1.7] text-record-muted">
         Method is how an entry is checked. This is what changed afterwards: the correction in the signer's own words, alongside the entry it belongs to. The original entry keeps its correction note.
