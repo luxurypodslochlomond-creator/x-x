@@ -1,0 +1,130 @@
+/* ── THE HANDS ──────────────────────────────────────────────────────────────────
+   A roll, not a gallery. The name is the biggest thing on the line, because the name is
+   the point; the count is the smallest, because a count is not a rank. Rules between the
+   lines and nothing else — the page reads like a list of people, which is what it is. */
+.hands-page {
+  max-width: 46rem;
+  margin: 0 auto;
+  color: rgb(var(--record-ink));
+}
+
+.hands-head {
+  border-bottom: 2px solid rgb(var(--record-ink));
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.6rem;
+}
+
+.hands-kicker {
+  font-family: var(--font-record-ui);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+  margin: 0 0 0.55rem;
+}
+
+.hands-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 6vw, 3.3rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.7rem;
+}
+
+.hands-line {
+  font-family: var(--font-reading);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+  margin: 0;
+}
+
+.hands-line a {
+  color: rgb(var(--record-ink));
+  border-bottom: 1px solid rgb(var(--record-red));
+  text-decoration: none;
+}
+
+.hands-roll {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(26, 22, 18, 0.18);
+}
+
+.hand-row {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(26, 22, 18, 0.18);
+  break-inside: avoid;
+}
+
+.hand-no {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: rgb(var(--record-muted));
+}
+
+.hand-name {
+  font-family: var(--font-heading);
+  font-size: 1.22rem;
+  line-height: 1.2;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.hand-name:hover,
+.hand-name:focus-visible {
+  border-bottom-color: rgb(var(--record-red));
+}
+
+.hand-where {
+  font-family: var(--font-record-ui);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  color: rgb(var(--record-muted));
+  margin: 0.22rem 0 0;
+}
+
+.hand-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: rgb(var(--record-muted));
+  white-space: nowrap;
+}
+
+.hands-thin {
+  margin-top: 1.4rem;
+}
+
+.hands-note {
+  font-family: var(--font-reading);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+  margin: 1.8rem 0 0;
+  border-left: 2px solid rgb(var(--record-red));
+  padding-left: 0.9rem;
+}
+
+@media (max-width: 34rem) {
+  .hand-row {
+    grid-template-columns: 1.9rem 1fr;
+  }
+  .hand-count {
+    grid-column: 2;
+  }
+}
+
+/* Pinned up in a workshop, this sheet should be a list of names and nothing else. */
+@media print {
+  .hands-page { max-width: none; }
+  .hand-name { border: 0; }
+  .hands-note { border-color: #000; }
+}

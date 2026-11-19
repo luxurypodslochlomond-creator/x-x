@@ -153,6 +153,7 @@ const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
 const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
+const ClimateCartoonHandsPage = React.lazy(() => import('./pages/ClimateCartoonHands'));
 const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
@@ -369,6 +370,9 @@ const AuthenticatedApp = () => {
           record, because it is part of the record. */}
       <Route path="/ClimateCartoons/Sheet/:id" element={<ClimateCartoonSheetPage />} />
       <Route path="/ClimateCartoons/Artist/:name" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonArtistPage /></ClimateLayout>} />
+      {/* The roll of names: every hand on the wall, alphabetical, with a door to each one's
+          own page. A wall of drawings can be walked past; a list of people cannot. */}
+      <Route path="/ClimateCartoons/Hands" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonHandsPage /></ClimateLayout>} />
       {/* The 29th, written down: one address Janine can send to CEEW, to the festival's
           curator or to a classroom. It carries the hour, what happens to the drawings and
           the one ask — and no addresses, no phone numbers and no joining link, because a
