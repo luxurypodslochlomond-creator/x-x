@@ -1,0 +1,76 @@
+/* ── TWO INKS, ONE PRESS ────────────────────────────────────────────────────────
+   The room already had its argument right: paper, ink, the drawings untouched, the
+   artists' words beside them. What it lacked was the one thing every cartoonist reads
+   before they read a single word — the evidence that a human hand set the page.
+
+   So this sheet adds no costume. It adds the printer's own imperfection: the second
+   colour going down a hair out of register. Every large word in the room is printed
+   twice, in black and then in the record's red, a fraction off. The cover carries the
+   same offset as an edge of red down its right side. Nothing is filtered, tinted,
+   rotated or halftoned — the artwork is still exactly the artwork, and a red ghost
+   behind a headline is the oldest honest mark in print.
+
+   Two inks, deliberately: black and one red. Not four colours, not a gradient, not a
+   texture pretending to be paper. A cartoonist can see at once that the page was made
+   by somebody who knows what a press does, which is the whole of "coolasfuck" here —
+   and it is earned, not borrowed.
+
+   Everything below is type and rules only. No drawing is touched. */
+
+.press-room :is(
+  .press-title,
+  .press-wall-title,
+  .cartoon-lineage-title,
+  .comic-section-title,
+  .comic-anthology-title,
+  .comic-session-title
+) {
+  text-shadow: .042em .038em 0 rgb(var(--record-red) / .38);
+}
+
+/* The standfirst is the room's one sentence, so it is printed in the second ink. */
+.press-room .press-standfirst { color: rgb(var(--record-red)); }
+
+/* A doubled rule under the masthead: a heavy line of black, a hairline of red below it,
+   the way a two-colour job registers its rules against each other. */
+.press-room .press-opening-masthead::after {
+  content: '';
+  display: block;
+  height: .32rem;
+  margin-top: 1.15rem;
+  border-top: 3px solid rgb(var(--record-ink));
+  border-bottom: 1px solid rgb(var(--record-red));
+}
+
+/* The cover is a real object on the page, not a thumbnail: it casts the second ink. */
+.press-room .comic-catalogue > img {
+  box-shadow: 7px 7px 0 rgb(var(--record-red) / .3);
+}
+
+/* The lead drawing is the room's front page, so it sits above the sheet rather than in it. */
+.press-room .press-sheet--lead .press-sheet-art {
+  box-shadow: 0 14px 34px -26px rgb(var(--record-ink) / .9);
+}
+
+/* A red hairline printed just under the black top rule of the lead sheet only — one
+   registered pair in the room, not a red border on every cutting. */
+.press-room .press-sheet--lead { position: relative; }
+.press-room .press-sheet--lead::before {
+  content: '';
+  position: absolute;
+  top: .34rem;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgb(var(--record-red));
+  pointer-events: none;
+}
+
+/* The machine's own voice — the count of drawings, the index numbers — takes the red. */
+.press-room .cartoon-signal-fact { color: rgb(var(--record-red)); }
+
+@media print {
+  .press-room :is(.press-title, .press-wall-title, .cartoon-lineage-title, .comic-section-title, .comic-anthology-title, .comic-session-title) {
+    text-shadow: none;
+  }
+}

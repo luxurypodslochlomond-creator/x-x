@@ -14,6 +14,8 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';
 import '@/components/climate/cartoons/press/press-desktop-ground.css';
+// Loaded last: the second ink goes down on top of the laid-out sheet, never under it.
+import '@/components/climate/cartoons/press/press-ink.css';
 import '@/components/climate/cartoons/cartoon-lineage.css';
 
 export default function ClimateCartoons() {

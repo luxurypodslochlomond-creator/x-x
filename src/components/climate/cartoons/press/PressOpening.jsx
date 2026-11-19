@@ -10,7 +10,11 @@ export default function PressOpening() {
       <div className="press-opening-words">
         <header className="press-opening-masthead">
           <p className="press-eyebrow">The record · the cartoon room</p>
-          <h1 id="press-room-title" className="press-title">The Big Picture</h1>
+          {/* "The Big Picture" was a phrase institutes, books and foundations all use — a
+              borrowed word on a record whose whole argument is that nothing is borrowed.
+              "The Real Picture" is the room's own, and it is the truer thing to say: a
+              drawing is not a summary of the climate, it is what somebody actually saw. */}
+          <h1 id="press-room-title" className="press-title">The Real Picture</h1>
           <p className="press-standfirst">Cartoons for a changing world.</p>
           <CartoonSignal />
         </header>
