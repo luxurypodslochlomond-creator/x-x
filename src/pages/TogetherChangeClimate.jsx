@@ -447,6 +447,24 @@ export default function TogetherChangeClimate() {
           opens the same way, and the four rooms are the second thing a thumb can reach. A
           desk keeps exactly the order it had. */}
       <div className="record-home-flow">
+      {/* ── THE FOUR ROOMS COME FIRST, DIRECTLY UNDER THE TOP NAVIGATION ────────────
+          Brian, 19 November: "they are so important for this and should sit underneath the
+          top navigation… the most important." He is right. The record's backbone was the
+          fifth thing on its own front page, after a painting, a quotation, a crawl and a
+          tally. It is the first thing now, on every glass: the four rooms, each with its
+          own cut drawing, and the reader chooses one before anything asks for attention. */}
+      <div className="record-home-doors px-4 pt-4 lg:px-10">
+        <RecordRoomNavigation
+          counts={doorCounts}
+          selected={selectedType}
+          onSelect={(key) => {
+            setSelectedCategory('all');
+            setQuery('');
+            setSelectedType(selectedType === key ? 'all' : key);
+          }}
+        />
+      </div>
+
       {/* ── THE PAINTING IS THE FRONT PAGE ────────────────────────────────────────
           The record's own drawings are laid on the painting the way a legend is printed on
           a plate, and the words sit at the foot of it. Jane's voice follows on the same
@@ -497,19 +515,6 @@ export default function TogetherChangeClimate() {
         <span className="text-[11px] font-mono tracking-[0.04em] text-[#efe7d6]">
           {items.length + actions.length} {t.entries_now} — {doorCounts.solution} solutions · {doorCounts.climate_crisis} crises · {doorCounts.actions} actions · {doorCounts.groups} groups
         </span>
-      </div>
-
-      {/* Desktop: choose a room beside the entries. Mobile: the same controls stay high. */}
-      <div className="record-home-doors px-4 pb-2 lg:px-10">
-        <RecordRoomNavigation
-          counts={doorCounts}
-          selected={selectedType}
-          onSelect={(key) => {
-            setSelectedCategory('all');
-            setQuery('');
-            setSelectedType(selectedType === key ? 'all' : key);
-          }}
-        />
       </div>
 
       {/* ── THE PICTURES — what people are doing and what is at risk, held up now that the

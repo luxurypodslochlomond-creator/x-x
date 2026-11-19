@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  block-size: 2rem;
+  block-size: 3rem;
 }
 .record-home-page .record-room-drawing svg { display: block; }
 .record-home-page .record-room-label {
@@ -187,8 +187,10 @@
 @media (max-width: 1023px) {
   .record-home-flow { display: flex; flex-direction: column; }
   .record-home-flow > * { order: 3; }
-  .record-home-flow > .record-home-opening { order: 1; }
-  .record-home-flow > .record-home-doors { order: 2; }
+  /* The four rooms come first on a phone too, because they are the record's backbone and
+     not its footer. Everything else follows in the order it is read. */
+  .record-home-flow > .record-home-doors { order: 1; }
+  .record-home-flow > .record-home-opening { order: 2; }
 }
 /* The shared cover holds an image frame while its own photograph downloads. */
 .record-entry-image {
