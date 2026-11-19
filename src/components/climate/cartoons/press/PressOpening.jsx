@@ -9,7 +9,7 @@ export default function PressOpening() {
     <section className="press-opening" aria-labelledby="press-room-title">
       <div className="press-opening-words">
         <header className="press-opening-masthead">
-          <p className="press-eyebrow">The record · the cartoon room</p>
+          <p className="press-eyebrow">The record · the wall</p>
           {/* "The Big Picture" was a phrase institutes, books and foundations all use — a
               borrowed word on a record whose whole argument is that nothing is borrowed.
               "The Real Picture" replaced it, and it was still the wrong way round: a claim
@@ -22,10 +22,17 @@ export default function PressOpening() {
               thing a drawing goes up on — and it is the word this room already uses in
               every other sentence it says: the wall opens, the wall has room on it, tap a
               drawing on the wall. The masthead was the only thing on the page disagreeing
-              with the page. The claim survives as the standfirst, where it belongs: a claim
-              made inside the room rather than a sign hung over it. */}
+              with the page.
+
+              And the retired name came off the standfirst the same afternoon. It had been
+              kept there on the argument that a dead name makes a good slogan — "the real
+              picture, drawn by hand" — but a name is not a slogan. It is a name, and a reader
+              who meets it here cannot know it was retired; they only learn that this room
+              calls itself two different things, in the first sentence they read. Brian,
+              19 November: "still says the old name in the text on the wall." So the line now
+              says what the room is and nothing it used to be called. */}
           <h1 id="press-room-title" className="press-title">The Wall</h1>
-          <p className="press-standfirst">Cartoons for a changing world. The real picture, drawn by hand.</p>
+          <p className="press-standfirst">Cartoons for a changing world. Drawn by hand, hung on the wall.</p>
           <CartoonSignal />
         </header>
         <p className="press-scope">

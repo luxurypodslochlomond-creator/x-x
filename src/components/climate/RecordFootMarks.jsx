@@ -235,13 +235,21 @@ export function MarkPencil({ size = 26, className = '' }) {
 // brick is the one that is still yours to lay. A stoplight would be the wrong reading and it
 // is not the reading here: nothing in this wall is telling anybody to stop.
 //
-// No new colours were invented for this. Deep green, signal yellow and the mark's red are
-// the tokens the record's own plates are printed in, so the door on the rail is made of the
-// same paint as the room it opens.
+// No new colours were invented for this. Signal yellow and the mark's red are the tokens the
+// record's own plates are printed in, so the door on the rail is made of the same paint as
+// the room it opens.
+//
+// ── AND THE GREEN CAME OFF THE SAME AFTERNOON ─────────────────────────────────
+// Brian: "sorry think will be better black yellow red for small box icon for the wall." He
+// is right and the reason is a small one that matters: the green brick was the only green
+// on the rail, so at nineteen pixels it read as a fourth thing rather than as part of the
+// mark — a coloured chip in a row of ink. Black, yellow, red is the record's own signal
+// order (ink, the light, the mark) and it is the paint of the room's own plates, so the
+// bricks now look printed rather than coloured in.
 export function MarkWall({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="3.4" y="10.4" width="15.6" height="9.2" className="text-record-botanical" fill="currentColor" stroke="none" />
+      <rect x="3.4" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
       <rect x="21" y="10.4" width="15.6" height="9.2" className="text-record-signal" fill="currentColor" stroke="none" />
       <rect x="11" y="21.6" width="18" height="9.2" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
