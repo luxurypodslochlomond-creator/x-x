@@ -1,5 +1,6 @@
 import {
   MarkBrief,
+  MarkRecord,
   MarkPlan,
   MarkSignal,
   MarkHorizon,
@@ -31,8 +32,11 @@ import {
 // apart: a door with no mark in this map falls back to the sheet, and every door in the
 // record's own index has one.
 const MARKS = {
-  // The way in, at the top of every page.
-  '/TogetherChangeClimate': MarkBrief,
+  // The way in, at the top of every page. It wore the brief's open folio until 19 November,
+  // which meant the record and a page about the record wore one drawing: the first door on
+  // the rail was the only door with no mark of its own. It is a bound register now, and the
+  // folio is the brief's alone.
+  '/TogetherChangeClimate': MarkRecord,
   '/ClimateWire': MarkSignal,
   '/ClimateMap': MarkHorizon,
   // The founder's door wears a nib laid to the line, not a portrait of a person: what this

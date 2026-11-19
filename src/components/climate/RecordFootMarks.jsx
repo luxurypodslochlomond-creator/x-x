@@ -33,6 +33,29 @@ export function MarkBrief({ size = 26, className = '' }) {
   );
 }
 
+// ── WHAT IS ON THE RECORD, AND WHY IT STOPPED WEARING THE BRIEF'S DRAWING ──────
+// Brian, 19 November: "don't like the record icon with Bri[ef] — think we can be more
+// coolasfuck for right reasons, not boring or old or copy cat."
+//
+// He caught a real fault, not a taste. The first door on the rail was wearing MarkBrief —
+// the open folio drawn for the project brief — because it was the first drawing there was
+// and nothing ever took it back. So the record itself and a page *about* the record wore
+// one picture, and the door a reader arrives at was the one door with no mark of its own.
+//
+// So the record is now what a record physically is: a bound register, closed, seen from the
+// fore-edge. Solid ink for the cover, the record's own red for the spine, the spine standing
+// proud of the cover the way a bound edge does. Two masses, nothing drawn, nothing thin — it
+// survives nineteen pixels on a phone's second row, which is where this door actually lives,
+// and the brief goes back to being the only door with an open folio.
+export function MarkRecord({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <rect x="5.4" y="4.4" width="6.4" height="31.2" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="14.2" y="6.4" width="20.6" height="27.2" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // What is planned, and what is still missing. One page, folded at its corner, its last line
 // stopped short — a brief that says out loud where it runs out.
 export function MarkPlan({ size = 26, className = '' }) {
@@ -410,27 +433,34 @@ export function MarkContents({ size = 26, className = '' }) {
 }
 
 // ── THE DOOR THAT OPENS EVERY OTHER DOOR ───────────────────────────────────────
-// Brian, 19 November: "when you click on explore the icon looks old and not coolasfuck".
+// Brian, 19 November, twice. First: "when you click on explore the icon looks old and not
+// coolasfuck". The drawing then was line art — two sheets, every edge a hairline, the back
+// one at half opacity, a red dash at the foot: five thin gestures read at nineteen pixels,
+// which is the size this door actually stands at on a phone's second row. Line art is how a
+// computer draws a picture of a thing; it is not how a printer prints a mark.
 //
-// He is right, and the fault is the one the wall had: the drawing was line art. Two sheets,
-// one behind the other, every edge a hairline at 1.7, the back sheet at half opacity, a red
-// dash at the foot — five thin gestures read at nineteen pixels, which is the size this door
-// actually stands at on a phone's second row. Line art is how a computer draws a picture of
-// a thing; it is not how a printer prints a mark.
+// Then, having seen the solid sheets that replaced it: "explore icon on top nav not
+// coolasfuck like the wall etc". He is right again, and the reason is worth writing down,
+// because it is the difference between a mark and a logo. Two rectangles are quiet: they
+// have no rhythm, nothing repeats, nothing is built. What makes the wall work beside it is
+// that it is a set of identical units laid down in a course, one of them in the record's
+// red — a thing assembled rather than a thing drawn.
 //
-// So the sheets are no longer drawn, they are printed: one solid sheet of ink, and behind it
-// a second sheet in the record's own red showing only as its edge along the top and the side.
-// Two masses, no outlines at all, and the red one says the thing the door says — there is
-// more of this than the sheet in your hand.
+// So the index is built the same way. Four panes, one course of the record's own shelves,
+// and the fourth is the red one: the part you have not opened yet. It is the whole index at
+// a glance — several ways in, and one of them always still unread — and it holds up at
+// nineteen pixels because four solid squares lose nothing when they shrink, which is exactly
+// what a hairline cannot do.
 //
-// It also ends a real duplication. This drawing was shared with "The guide" in the foot, so
-// two different doors wore one picture; the guide keeps the ruled sheet it was drawn for, and
-// the index has its own mark now.
+// It also ends a real duplication: this door and "The guide" in the foot were wearing the
+// same picture. The guide keeps the ruled sheet it was drawn for.
 export function MarkExplore({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="13.4" y="5" width="20.6" height="25.6" className="text-record-mark" fill="currentColor" stroke="none" />
-      <rect x="6.4" y="11.4" width="20.6" height="25.6" fill="currentColor" stroke="none" />
+      <rect x="2.75" y="2.75" width="15" height="15" fill="currentColor" stroke="none" />
+      <rect x="22.25" y="2.75" width="15" height="15" fill="currentColor" stroke="none" />
+      <rect x="2.75" y="22.25" width="15" height="15" fill="currentColor" stroke="none" />
+      <rect x="22.25" y="22.25" width="15" height="15" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
