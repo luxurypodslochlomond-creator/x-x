@@ -444,6 +444,38 @@ export function MarkEqual({ size = 26, className = '' }) {
   );
 }
 
+// ── AND ON THE DOOR ITSELF, IT IS SPELT OUT ────────────────────────────────────
+// The two bars are the right mark for the foot of a page, where they sit beside the word
+// and the reader already knows what they are standing in. On the door they were the whole
+// of it: a reader met an equals sign and the word PLATFORM, and never the letters either
+// side of it, so the one line the record rests on was the one thing the rail did not say.
+// Brian, 19 November: "can you change two red lines for x=x." So the door says it now.
+//
+// The two red lines stay exactly where they were, between the letters, because they are the
+// point of the object and not decoration. What is new is the two x's, cut as diagonals in
+// the same hand as every other mark here — which is also why this cannot repeat the fault
+// the last drawing had. That one failed at nineteen pixels because two uprights flanking two
+// short bars is the symbol for "hold"; a crossing diagonal is not a pause button at any size.
+//
+// It is a wide mark rather than a square one, and deliberately so. x = x is three glyphs,
+// and a square box would have set them at a third of the height of the marks beside them.
+// The box is cut to the drawing instead, so the letters stand at the same optical height as
+// their neighbours and the door keeps its own shape.
+export function MarkXEqualsX({ size = 26, className = '' }) {
+  return (
+    <svg viewBox="0 0 60 20" width={size * 1.9} height={size * 0.63} fill="none" className={className} aria-hidden="true" style={{ overflow: 'visible' }}>
+      <g stroke="currentColor" strokeWidth="3.2" strokeLinecap="round">
+        <path d="M2 4.4 L12.4 15.6" />
+        <path d="M12.4 4.4 L2 15.6" />
+        <path d="M47.6 4.4 L58 15.6" />
+        <path d="M58 4.4 L47.6 15.6" />
+      </g>
+      <rect x="18.6" y="6.3" width="22.8" height="3.2" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="18.6" y="10.5" width="22.8" height="3.2" className="text-record-mark" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // Every way through the record.
 //
 // ── IT WAS A STARBURST, AND THE DOOR IS NOT A SPARKLE ─────────────────────────

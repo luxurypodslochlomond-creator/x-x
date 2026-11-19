@@ -14,6 +14,7 @@ import {
   MarkMusic,
   MarkStudio,
   MarkEqual,
+  MarkXEqualsX,
   MarkContents,
   MarkReadership,
   MarkSeal,
@@ -47,8 +48,9 @@ const MARKS = {
   // from every other product on earth.
   '/ClimateSearch': MarkBaseOne,
 
-  // How the record is kept.
-  '/XEqualsX': MarkEqual,
+  // How the record is kept. On the door the covenant is spelt out rather than drawn as two
+  // bars: the foot of a page can carry the bare equals, a door has to say what it is a door to.
+  '/XEqualsX': MarkXEqualsX,
   '/ClimateMethod': MarkMethod,
   '/ClimateCorrections': MarkCorrection,
   '/ClimateGuide': MarkContents,
