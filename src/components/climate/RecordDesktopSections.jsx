@@ -114,13 +114,13 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                   because that column is the one place on the panel where a shelf is
                   allowed to explain itself. */}
               {!phone && line && (
-                <span className="basis-full pt-1 text-record-muted" style={{ fontFamily: 'var(--font-reading)', fontSize: 11.5, lineHeight: 1.45, letterSpacing: 0, textTransform: 'none' }}>{line}</span>
+                <span className="record-description record-description--tight basis-full pt-1 normal-case tracking-normal">{line}</span>
               )}
             </h2>
             {/* On a phone the line cannot live in the pinned name, or the name would eat
                 the glass. It sits just under it and scrolls away with its own shelf. */}
             {phone && line && (
-              <p className="pb-1.5 text-[12.5px] leading-[1.5] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>{line}</p>
+              <p className="record-description record-description--tight pb-1.5">{line}</p>
             )}
             {/* ── TWO ACROSS, BECAUSE THE MARK NO LONGER EATS THE NAME ───────────────────
                 Two across failed on this phone once, on 19 November, and the reason was never
@@ -177,10 +177,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                            different jobs in one typeface is how a list starts to look like a
                            form. `text-pretty` stops the short line breaking with one word
                            stranded on the second row, which is the whole of "balance" here. */
-                        <span
-                          className="mt-0.5 block text-pretty text-[11.5px] font-normal normal-case leading-[1.45] tracking-normal text-record-muted"
-                          style={{ fontFamily: 'var(--font-reading)' }}
-                        >
+                        <span className="record-description record-description--tight mt-0.5 block font-normal normal-case tracking-normal">
                           {what}
                         </span>
                       )}

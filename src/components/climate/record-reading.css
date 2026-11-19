@@ -456,3 +456,24 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
   98.7% { opacity: .9; }
   100% { opacity: 0; transform: translate3d(84vw, 26vh, 0) rotate(12deg); }
 }
+
+/* ── THE DESCRIPTION HAS ITS OWN VOICE, AND IT IS THE QUIET ONE ──────────────────
+   Brian, 19 November: the sentences under the marks felt "old and clunky". They were
+   set in the record's reading serif at twelve and a half pixels — a book face at
+   caption size, which is the one size a book face is worst at: the serifs thicken into
+   a texture and the line reads like a schoolbook rather than like a label.
+
+   A description is not prose. It is furniture: one line saying what a door is for. So it
+   is set in the record's own grotesque, the same face as the name above it, at reading
+   size with room to breathe and the record's muted ink. The serif keeps the paragraphs,
+   where somebody is actually reading an argument. Two voices, each doing the job it is
+   good at — never one voice asked to do both. */
+.record-description {
+  font-family: var(--font-record-ui);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.005em;
+  color: rgb(var(--record-muted));
+  text-wrap: pretty;
+}
+.record-description--tight { font-size: 12.5px; line-height: 1.45; }
