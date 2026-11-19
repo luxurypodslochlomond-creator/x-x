@@ -1,6 +1,11 @@
 /* The layout owns one fixed painting. The atlas owns geography, never a second cover. */
 .record-unified-map { background: transparent; }
-.record-map-opening { background-color: rgb(var(--record-ink) / .68); }
+/* The opening is a page of the record, printed on its paper — not a dark box with a
+   centred slogan over a painting, which is the one thing the record decided it is not. */
+.record-map-opening {
+  background-color: rgb(var(--record-bone));
+  border-bottom: 1px solid rgb(var(--record-ink) / .22);
+}
 .record-unified-map .record-reach-page { min-height: 0; background: rgb(var(--record-paper)); }
 .record-map-frame { border: 1px solid rgb(var(--record-bone) / .38); }
 .record-map-coastline { display: none; }
@@ -20,22 +25,32 @@
 .record-map-symbol, .record-map-spot-label { display: none; }
 
 @media screen and (min-width: 1024px) {
-  /* A default on the parent must not outrank the individual signals' colours. */
-  .record-unified-map { --map-signal: rgb(var(--record-map-solution)); }
-  .record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-map-crisis)); }
-  .record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
-  .record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-map-wire)); }
-  .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-map-cartoon)); }
+  /* ── FIVE MARKS, FIVE MEANINGS, EACH WITH ITS OWN FORM ──────────────────────────
+     The marks were five coloured blobs on a green world and you could not tell one from
+     another, or tell whether they were for pressing. Now the land is paper and the inks
+     are the record's, and each meaning has a form you can name at a glance:
+       crisis  — a filled red disc: a warning is solid and loud.
+       solution— an ink ring: an answer is a hole that has been filled in around the edge.
+       action  — a dark green diamond: a deed, a thing done in a field.
+       wire    — a blue dash: a line of text, a report going out.
+       drawing — an ochre square: a picture, hung.
+     Each carries a bone hairline, so an ink mark standing out on the water is still seen. */
+  .record-unified-map { --map-signal: rgb(var(--record-ink)); }
+  .record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-red)); }
+  .record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-botanical)); }
+  .record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-ocean)); }
+  .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-ochre)); }
   .record-unified-map .record-map-symbol {
     display: block; position: relative; flex: none;
-    width: 10px; height: 10px; padding: 0;
+    width: 11px; height: 11px; padding: 0;
     color: var(--map-signal); background: currentColor;
-    border: 1px solid rgb(var(--record-ink) / .6); border-radius: 50%;
-    box-shadow: 0 0 0 3px rgb(var(--record-ink) / .7), 0 0 14px color-mix(in srgb, var(--map-signal) 32%, transparent);
+    border: 0; border-radius: 50%;
+    box-shadow: 0 0 0 2.5px rgb(var(--record-bone) / .92);
   }
-  .record-unified-map .record-map-symbol[data-kind="solution"] { background: rgb(var(--record-ink) / .75); border: 2px solid var(--map-signal); }
+  /* A ring, not a dot: the answer is the space inside the ink. */
+  .record-unified-map .record-map-symbol[data-kind="solution"] { background: transparent; border: 3px solid var(--map-signal); width: 12px; height: 12px; }
   .record-unified-map .record-map-symbol[data-kind="action"] { border-radius: 1px; transform: rotate(45deg); }
-  .record-unified-map .record-map-symbol[data-kind="wire"] { width: 12px; height: 5px; border-radius: 0; }
+  .record-unified-map .record-map-symbol[data-kind="wire"] { width: 14px; height: 5px; border-radius: 0; }
   .record-unified-map .record-map-symbol[data-kind="cartoon"] { border-radius: 1px; }
   .record-unified-map .record-world-atlas .record-map-dot { display: none; }
   .record-unified-map .record-world-atlas .record-entry-marker { width: 44px !important; height: 44px !important; }
@@ -56,13 +71,22 @@
   .record-unified-map .record-map-help { font-size: .85rem; line-height: 1.65; }
   .record-unified-map .record-entry-marker[aria-current="true"] { z-index: 12 !important; }
   .record-unified-map .record-map-spot-label {
-    display: block; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
     width: max-content; max-width: 16rem; padding: .6rem .8rem; margin-bottom: .4rem;
     background: rgb(var(--record-paper)); color: rgb(var(--record-ink));
     border-inline-start: 2px solid var(--map-signal);
     font-family: var(--font-record-ui); font-size: .8rem; font-weight: 400; line-height: 1.4;
     text-align: left; box-shadow: none;
   }
+  /* Named on hover and on focus, and held open while it is the entry being read. */
+  .record-unified-map .record-entry-marker:is(:hover, :focus-visible) .record-map-spot-label,
+  .record-unified-map .record-entry-marker[aria-current="true"] .record-map-spot-label { display: block; }
+  /* The key sits on ink, so the key keeps the light inks the plate used to use. */
+  .record-unified-map .record-map-key { --map-signal: rgb(var(--record-map-solution)); }
+  .record-unified-map .record-map-key [data-kind="crisis"] { --map-signal: rgb(var(--record-map-crisis)); }
+  .record-unified-map .record-map-key [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
+  .record-unified-map .record-map-key [data-kind="wire"] { --map-signal: rgb(var(--record-map-wire)); }
+  .record-unified-map .record-map-key [data-kind="cartoon"] { --map-signal: rgb(var(--record-map-cartoon)); }
   .climate-record[data-record-page="ClimateMap"] .record-book {
     max-width: none;
     margin-inline: 0;
@@ -73,7 +97,7 @@
   .record-unified-map > .record-back-bar { margin-inline: -2rem; }
   .record-unified-map .record-map-opening {
     margin-top: 1rem;
-    border-bottom: 1px solid rgb(var(--record-bone) / .2);
+    border-bottom: 1px solid rgb(var(--record-ink) / .22);
   }
   .record-unified-map .record-map-opening > div { max-width: none; padding: 1.75rem 2rem 1.25rem; }
   .record-unified-map .record-map-opening h1 {

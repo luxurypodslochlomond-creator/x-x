@@ -20,18 +20,18 @@ export default function ClimateMapPage() {
       <RecordBackBar eyebrow="Map · entries & reach" />
 
       <section className="record-map-opening">
-        <div className="relative z-10 mx-auto max-w-[1100px] px-4 py-9 text-center lg:px-10 lg:py-8">
-          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#e2602a]">
+        <div className="relative z-10 mx-auto max-w-[1100px] px-4 py-9 lg:px-10 lg:py-8">
+          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#b3261e]">
             Where it stands · where it is read
           </p>
           <h1
-            className="mx-auto mt-4 max-w-[16ch] leading-[1.03] text-[#efe7d6]"
-            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(34px, 5vw, 60px)', letterSpacing: '-0.02em' }}
+            className="mt-4 max-w-[24ch] leading-[1.03] text-[#141210]"
+            style={{ fontSize: 'clamp(34px, 5vw, 60px)', letterSpacing: '-0.02em' }}
           >
             One world. One record.
           </h1>
           <p
-            className="mx-auto mt-4 max-w-[52ch] text-[14px] leading-[1.7] text-[#efe7d6]/80 lg:text-[16px]"
+            className="mt-4 max-w-[62ch] text-[14px] leading-[1.7] text-[#3a342c] lg:text-[16px]"
             style={{ fontFamily: 'var(--font-reading)' }}
           >
             Entries where their sources place them. Readership where readers’ devices or their own
@@ -39,10 +39,10 @@ export default function ClimateMapPage() {
             read there. Approximate locations only.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em]">
-            <Link to="/ClimateFounder" className="inline-flex min-h-11 items-center border-b border-[#e2602a]/60 text-[#e2602a] transition-colors hover:text-[#efe7d6]">
+            <Link to="/ClimateFounder" className="inline-flex min-h-11 items-center border-b border-[#b3261e]/60 text-[#b3261e] transition-colors hover:text-[#141210]">
               The record Janine asked for →
             </Link>
-            <a href="#reach-details" className="inline-flex min-h-11 items-center border-b border-[#efe7d6]/25 text-[#efe7d6]/70 transition-colors hover:text-[#efe7d6]">
+            <a href="#reach-details" className="inline-flex min-h-11 items-center border-b border-[#141210]/25 text-[#3a342c] transition-colors hover:text-[#141210]">
               Who is reading ↓
             </a>
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { resolveCoords } from './countryCentroids';
@@ -183,6 +183,20 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
   // it came from a mark on the plate or a name in the index under it.
   const pick = (m) => setPicked((prev) => (prev?.id === m.id ? null : m));
 
+  // Pressing a mark opens its line under the planet — but on a wide screen the planet is
+  // taller than the window, so the line could open entirely out of sight and the press
+  // would look like nothing happened. If it is out of view, it is brought into view; if
+  // it is already there, nothing moves.
+  const detailRef = useRef(null);
+  useEffect(() => {
+    const el = detailRef.current;
+    if (!picked || !el) return;
+    const box = el.getBoundingClientRect();
+    if (box.top > window.innerHeight - 48 || box.bottom < 0) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [picked]);
+
   // Everything standing in the same place as what was pressed. A place with three entries
   // would otherwise show only the first and hide the other two behind a dot nobody
   // happens to hit twice, which is the map keeping something back.
@@ -265,7 +279,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
       <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
 
       {/* What you pressed, said underneath the planet in the record's own words. */}
-      <div className="record-map-detail border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
+      <div ref={detailRef} className="record-map-detail border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
         {picked ? (
           <div>
             <div className="flex items-center gap-2 mb-1.5">

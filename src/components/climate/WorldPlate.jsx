@@ -35,15 +35,16 @@ const MARKS = {
   nation: { fill: '#0f5f7a', shape: 'rounded-full', size: 9 },
 };
 
-/* On the painted plate the record's dark inks would vanish into the ground, so the same
-   five meanings are said in light: a crisis still burns red, a solution is bone, an action
-   is green, a line on the wire is the ocean, a drawing is the record's signal. */
+/* The atlas is printed on paper land, so its marks are printed in the record's inks —
+   the same five meanings as the paper plate, not a second palette that means nothing.
+   Each is given a bone hairline instead of a dark halo, so an ink mark still reads when
+   it stands out on the dark water and stays quiet when it stands on the land. */
 const MARKS_ON_PAINT = {
-  crisis: 'rgb(var(--record-map-crisis))',
-  solution: 'rgb(var(--record-map-solution))',
-  action: 'rgb(var(--record-map-action))',
-  wire: 'rgb(var(--record-map-wire))',
-  cartoon: 'rgb(var(--record-map-cartoon))',
+  crisis: '#b3261e',
+  solution: '#141210',
+  action: '#1e3a2b',
+  wire: '#0f5f7a',
+  cartoon: '#9b6f28',
 };
 
 const GROUND = {
@@ -62,7 +63,8 @@ const GROUND = {
     grid: '#e2602a', gridOpacity: 0.12,
     equator: '#ffd447', equatorOpacity: 0.35,
     land: '#efe7d6', landOpacity: 0.6, landWidth: 1.7,
-    ring: '#141210',
+    // Bone, not ink: an ink mark on dark water needs a light hairline to be seen at all.
+    ring: '#efe7d6',
     light: '#ffd447',
   },
 };
@@ -75,7 +77,6 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
   const d = useMemo(() => landDots(), []);
   const g = GROUND[tone] || GROUND.paper;
   const landId = useId().replaceAll(':', '');
-  const atlasId = useId().replaceAll(':', '');
   const atlas = tone === 'ink' && alive;
 
   // Readership totals do not link an individual reading place to an entry.
@@ -99,15 +100,15 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               <mask id={landId} maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE_W} height={PLATE_H}>
                 <image href={WORLD_LAND} width={PLATE_W} height={PLATE_H} preserveAspectRatio="none" />
               </mask>
-              <linearGradient id={atlasId} x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="rgb(var(--record-ocean))" />
-                <stop offset="48%" stopColor="rgb(var(--record-botanical))" />
-                <stop offset="100%" stopColor="rgb(var(--record-ochre))" />
-              </linearGradient>
             </defs>
+            {/* Water: the painting, held back so the plate is a plate and not a second cover. */}
             <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".64" />
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".65" transform="translate(.22 .22)" mask={`url(#${landId})`} />
-            <rect width={PLATE_W} height={PLATE_H} fill={`url(#${atlasId})`} fillOpacity=".62" mask={`url(#${landId})`} />
+            {/* Land: paper. It was a teal-to-green-to-ochre gradient, which made the record's
+                Earth look like a weather app's Earth and put every ink mark on a green field
+                where nothing could be read. Paper on ink is the record's own two colours, and
+                it is what an engraved plate has always been. */}
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".7" transform="translate(.28 .28)" mask={`url(#${landId})`} />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-bone))" fillOpacity=".92" mask={`url(#${landId})`} />
           </g>
         )}
         {/* The atlas holds still. The symbols, not a moving wash, carry the signal. */}
@@ -232,7 +233,10 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               }}
             />
             {atlas && <MapSignalMark kind={m.tone} />}
-            {atlas && on && <span className="record-map-spot-label">{m.title || m.label}</span>}
+            {/* Every mark names itself before it is pressed. It used to name itself only
+                once it was already open, which left a reader poking at shapes to find out
+                what they were — the one thing a map should never make you do. */}
+            {atlas && <span className="record-map-spot-label">{m.title || m.label}</span>}
           </button>
         );
       })}
