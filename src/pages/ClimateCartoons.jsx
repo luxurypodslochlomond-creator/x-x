@@ -6,6 +6,7 @@ import ComicReader from '@/components/climate/cartoons/ComicReader';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
+import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
@@ -32,6 +33,10 @@ export default function ClimateCartoons() {
         <PressOpening />
 
         <PressWall />
+        {/* The wall read against the seventeen goals, with the blank ones left blank. It
+            follows the drawings because it is about them, and it comes before the argument
+            because a cartoonist reads the count before they read the essay. */}
+        <CartoonGoals />
         <CartoonWhy />
         {/* Human work and its sourced lineage stay ahead of AI-illustrated fiction. */}
         <CartoonWorld />

@@ -34,6 +34,7 @@ export default function PressOpening() {
         <nav className="press-contents" aria-label="Find your way through the cartoon room">
           <a href="#cartoon-why-title">Why cartoons</a>
           <a href="#press-wall">The wall</a>
+          <a href="#cartoon-goals">The goals</a>
           <a href="#press-world">Across the world</a>
           <a href="#cartoon-strip">The little things</a>
           <a href="#press-book">The book</a>
