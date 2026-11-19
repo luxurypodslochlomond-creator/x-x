@@ -15,6 +15,11 @@
 // the room's opening either.
 export const WALL_ORDER = [
   'A Tale of Two Cities',
+  // Francis's test drawing, hung beside the room's opening so it can be found on the
+  // 19 November Zoom call instead of sitting at the bottom behind thirteen drawings.
+  // It is a rehearsal, not a finished submission: take this line out (and the drawing
+  // off the wall) once Francis sends the real one with his own line on it.
+  'Urbanisation and Sanitation…',
   "Heat's Got Nowhere to Hide!",
   'Keeping It Cool!',
   'The Cooler Influencer',
