@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import SignedBy from '@/components/climate/SignedBy';
+import '@/components/climate/wire-register.css';
 
-// One entry on the wire. Dated, sourced, and plain about what is known. No likes,
-// no counters, nothing to game. How well it is known waits on the entry itself —
-// never on the card, so the wire stays uncluttered and nothing is claimed by glance.
+// ── ONE LINE OF THE WIRE ────────────────────────────────────────────────────────
+// Brian, 19 November: on a phone these "feel like a web page", not a record of time.
+// They were bordered cards with a coloured bar — the shape of a feed. A record of time
+// needs a date you can follow down the page, so the day, month and year now sit in a
+// rail on the left, shared by every entry, with a hairline between lines and no box.
+//
+// Nothing has been removed: the kind, the place, the picture and its credit, what can be
+// copied, the correction, who says so, the second source, the source link, the signer and
+// the share control are all still here. Only the shape changed, and the date now leads.
+// A date the editor did not give is never invented — the rail prints the words they gave.
 
 const KIND = {
   emergency: 'Emergency',
@@ -14,89 +22,134 @@ const KIND = {
   initiative: 'Initiative',
 };
 
-export default function NewsEntryCard({ entry, linked = true }) {
-  const headlineClass = 'font-black uppercase leading-[1.1] text-[#141210]';
-  const headlineStyle = { fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.01em' };
+function rail(whenDate, whenLabel) {
+  if (whenDate) {
+    const d = new Date(whenDate);
+    if (!Number.isNaN(d.getTime())) {
+      return {
+        day: String(d.getUTCDate()).padStart(2, '0'),
+        month: d.toLocaleDateString('en-GB', { month: 'short', timeZone: 'UTC' }),
+        year: String(d.getUTCFullYear()),
+      };
+    }
+  }
+  return { word: whenLabel };
+}
+
+export default function NewsEntryCard({ entry, linked = true, n }) {
+  const when = rail(entry.when_date, entry.when_label);
+
+  const headline = (
+    <h2
+      className="font-black uppercase text-[#141210] leading-[1.12]"
+      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 5.1vw, 24px)', letterSpacing: '-0.01em' }}
+    >
+      {entry.headline}
+    </h2>
+  );
 
   return (
-    <article className="record-wire-entry border border-record-ink/20 border-t-4 border-t-record-signal bg-record-paper">
-      <div className="flex flex-wrap items-center gap-2 px-4 pt-4">
-        <span className="record-header-type text-[11px] text-[#5a5246]">{entry.when_label}</span>
-        {entry.kind && (
-          <span className="px-2 py-0.5 record-header-type text-[10px] border border-[#141210]/40 text-[#5a5246]">
-            {KIND[entry.kind] || entry.kind}
-          </span>
+    <article className="wire-entry">
+      <div className="wire-rail" aria-label={entry.when_label || undefined}>
+        {when.day ? (
+          <>
+            <span className="wire-rail-day">{when.day}</span>
+            <span className="wire-rail-month">{when.month}</span>
+            <span className="wire-rail-year">{when.year}</span>
+          </>
+        ) : (
+          <span className="wire-rail-word">{when.word || 'undated'}</span>
         )}
-        {entry.where_label && <span className="record-header-type text-[11px] text-[#5a5246]">· {entry.where_label}</span>}
       </div>
 
-      {linked ? (
-        <Link to={`/ClimateWireEntry/${entry.id}`} className="block px-4 pt-3">
-          <h2 className={headlineClass} style={headlineStyle}>{entry.headline}</h2>
-        </Link>
-      ) : (
-        <div className="px-4 pt-3">
-          <h2 className={headlineClass} style={headlineStyle}>{entry.headline}</h2>
-        </div>
-      )}
-
-      {/* A sentence a person wrote is set in the record's reading voice, not the
-          machine's small monospace. The labels around it keep the machine's hand. */}
-      <p className="px-4 pb-1 pt-2 text-[#141210]">{entry.what_changed}</p>
-
-      {entry.image_url && (
-        <figure className="record-wire-picture record-media-mount mx-4 mt-4">
-          <img src={entry.image_url} alt={entry.headline} loading="lazy" className="block w-full object-cover" style={{ maxHeight: 320 }} />
-          {entry.image_credit && (
-            <figcaption className="record-header-type bg-record-signal px-3 py-3 text-xs leading-relaxed text-record-ink">{entry.image_credit}</figcaption>
-          )}
-        </figure>
-      )}
-
-      {/* A picture is never shown without its credit — and a credit is never left standing
-          alone as though something were there. Where the credit is on the entry but no frame
-          is held here, it says exactly that, so nobody reads it as a picture that failed. */}
-      {entry.image_credit && !entry.image_url && (
-        <p className="px-4 pt-2.5 text-[9px] font-mono uppercase tracking-wide text-[#5a5246]">
-          Picture credited, not held here · {entry.image_credit}
+      <div className="wire-entry-body">
+        <p className="font-mono text-[9.5px] uppercase tracking-[0.14em] leading-relaxed text-[#5a5246]">
+          {n && <span className="text-[#141210]">No. {n}</span>}
+          {n && ' · '}
+          {KIND[entry.kind] || entry.kind || 'Entry'}
+          {entry.where_label && ` · ${entry.where_label}`}
         </p>
-      )}
 
-      {entry.replicable && (
-        <div className="mt-4 mx-4 bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] px-3 py-2.5">
-          <p className="record-header-type text-[11px] text-[#1e3a2b] mb-1">What can be copied from this</p>
-          <p className="text-[#141210]">{entry.replicable}</p>
-        </div>
-      )}
-
-      {entry.correction_note && (
-        <div className="mt-3 mx-4 bg-[#b3261e]/5 border-l-4 border-l-[#b3261e] px-3 py-2.5">
-          <p className="record-header-type text-[11px] text-[#b3261e] mb-1">Correction</p>
-          <p className="text-[#141210]">{entry.correction_note}</p>
-          <Link to="/ClimateCorrections" className="mt-1.5 inline-block text-[9px] font-black font-mono uppercase tracking-widest text-[#b3261e] underline">
-            Every correction, in daylight
-          </Link>
-        </div>
-      )}
-
-      <div className="mt-4 px-4 py-3 border-t-2 border-[#141210]/15 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="record-header-type text-[11px] text-[#5a5246]">Who says so</span>
-        <span className="text-[11px] font-mono text-[#141210]">{entry.source_name}</span>
-        {entry.corroborating_source && (
-          <span className="text-[10px] font-mono text-[#5a5246]">+ {entry.corroborating_source}</span>
+        {linked ? (
+          <Link to={`/ClimateWireEntry/${entry.id}`} className="mt-1.5 block">{headline}</Link>
+        ) : (
+          <div className="mt-1.5">{headline}</div>
         )}
-        {entry.source_url && (
-          <a
-            href={entry.source_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 record-header-type text-[11px] text-[#e2602a] underline"
-          >
-            Read the source <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+
+        <p className="mt-2 text-[15px] leading-[1.68] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
+          {entry.what_changed}
+        </p>
+
+        {entry.image_url && (
+          <figure className="record-wire-picture mt-3.5">
+            <img
+              src={entry.image_url}
+              alt={entry.headline}
+              loading="lazy"
+              className="block w-full object-cover"
+              style={{ maxHeight: 320 }}
+            />
+            {entry.image_credit && (
+              <figcaption className="bg-record-signal px-2.5 py-2 font-mono text-[10px] leading-relaxed text-record-ink">
+                {entry.image_credit}
+              </figcaption>
+            )}
+          </figure>
         )}
-        <SignedBy name={entry.editor} compact />
-        {linked && <div className="ml-auto self-center"><ShareCardButton entry={entry} compact /></div>}
+
+        {/* A picture is never shown without its credit — and a credit is never left standing
+            alone as though something were there. */}
+        {entry.image_credit && !entry.image_url && (
+          <p className="mt-2 font-mono text-[9px] uppercase tracking-wide text-[#5a5246]">
+            Picture credited, not held here · {entry.image_credit}
+          </p>
+        )}
+
+        {entry.replicable && (
+          <div className="wire-note">
+            <p className="font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] text-[#1e3a2b]">
+              What can be copied from this
+            </p>
+            <p className="mt-1 text-[14.5px] leading-[1.65] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
+              {entry.replicable}
+            </p>
+          </div>
+        )}
+
+        {entry.correction_note && (
+          <div className="wire-note">
+            <p className="font-mono text-[9.5px] font-bold uppercase tracking-[0.14em] text-[#b3261e]">Correction</p>
+            <p className="mt-1 text-[14.5px] leading-[1.65] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
+              {entry.correction_note}
+            </p>
+            <Link
+              to="/ClimateCorrections"
+              className="mt-1.5 inline-flex min-h-9 items-center font-mono text-[9px] font-bold uppercase tracking-[0.14em] text-[#b3261e] underline"
+            >
+              Every correction, in daylight
+            </Link>
+          </div>
+        )}
+
+        <div className="mt-3 border-t border-[#141210]/20 pt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#5a5246]">Who says so</span>
+          <span className="font-mono text-[11px] text-[#141210]">{entry.source_name}</span>
+          {entry.corroborating_source && (
+            <span className="font-mono text-[10px] text-[#5a5246]">+ {entry.corroborating_source}</span>
+          )}
+          {entry.source_url && (
+            <a
+              href={entry.source_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-[#e2602a] underline"
+            >
+              Read the source <ArrowUpRight className="w-3 h-3" />
+            </a>
+          )}
+          <SignedBy name={entry.editor} compact />
+          {linked && <div className="ml-auto self-center"><ShareCardButton entry={entry} compact /></div>}
+        </div>
       </div>
     </article>
   );

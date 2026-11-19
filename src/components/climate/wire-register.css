@@ -1,0 +1,104 @@
+/* ── THE WIRE AS A REGISTER, NOT A FEED ─────────────────────────────────────────
+   Brian, 19 November: on a phone the entries "feel like a web page", not a record of
+   time, and witnesses will be digging into them. He is right, and the reason is that
+   every entry was a bordered card with a coloured bar on top — the shape a blog uses.
+   A card says "item, scroll past me". A register says "line in a dated series".
+
+   So each entry is now a line hanging off a date spine: the day, the month and the year
+   in a rail down the left that every entry shares, a hairline between lines, and no box
+   anywhere. Scrolling the wire then reads as moving through time rather than through
+   items — which is the whole claim the page makes.
+
+   The rail is 3.4rem on a phone, because at 393px a wider rail would eat the sentences,
+   and the same rule as the errata sheet: alignment is the effect, not decoration. */
+.wire-register {
+  display: flex;
+  flex-direction: column;
+}
+
+.wire-entry {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  column-gap: 0.85rem;
+  padding: 1.1rem 0 1.4rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.22);
+  background: none;
+}
+
+.wire-entry:first-child {
+  border-top: 2px solid rgb(var(--record-ink) / 0.75);
+}
+
+@media (min-width: 1024px) {
+  .wire-entry {
+    grid-template-columns: 5.6rem minmax(0, 1fr);
+    column-gap: 1.5rem;
+    padding: 1.5rem 0 1.9rem;
+  }
+}
+
+/* The spine. Tabular figures so the days stack in a straight column down the page. */
+.wire-rail {
+  padding-top: 0.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.wire-rail-day {
+  display: block;
+  font-family: var(--font-record-ui);
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: rgb(var(--record-ink));
+}
+
+.wire-rail-month {
+  display: block;
+  margin-top: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+
+.wire-rail-year {
+  display: block;
+  margin-top: 1px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  color: rgb(var(--record-muted));
+}
+
+/* When only the words the editor gave are known ("ongoing", "2026"), they are set in the
+   rail as they were written rather than invented into a date. */
+.wire-rail-word {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+}
+
+@media (min-width: 1024px) {
+  .wire-rail-day { font-size: 30px; }
+  .wire-rail-month, .wire-rail-year { font-size: 10px; }
+}
+
+.wire-entry-body {
+  min-width: 0;
+}
+
+/* A labelled block inside the line — a hairline and a name, never a tinted box. */
+.wire-note {
+  margin-top: 0.85rem;
+  border-top: 1px solid rgb(var(--record-ink) / 0.18);
+  padding-top: 0.55rem;
+}

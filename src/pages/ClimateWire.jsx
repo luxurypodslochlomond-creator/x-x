@@ -165,7 +165,9 @@ export default function ClimateWire() {
 
       </div>
         {/* The wire itself */}
-        <div className="record-wire-list mt-4 lg:mt-6 space-y-5 lg:space-y-6">
+        {/* A register, not a feed: each entry is a dated line on one spine, so scrolling
+            the wire reads as moving through time rather than past items. */}
+        <div className="wire-register mt-5 lg:mt-8">
           {loading && (
             <div className="py-14 flex items-center justify-center">
               <div className="w-7 h-7 rounded-full animate-spin" style={{ border: '2px solid rgba(20,18,16,0.2)', borderTopColor: '#0f5f7a' }} />
