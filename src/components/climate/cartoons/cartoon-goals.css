@@ -1,17 +1,24 @@
-/* ── THE LEDGER ─────────────────────────────────────────────────────────────────
-   Seventeen goals, printed in order, so the ones nobody has drawn are visible where they
-   fall rather than hidden at the end of a list. No boxes, no badges, no coloured chips:
-   a rule, a number, a name, and the drawings standing against it.
+/* ── THE INDEX OF PLATES ────────────────────────────────────────────────────────
+   An architecture magazine does not decorate a page, it rules it. A strict column grid,
+   one hairline per entry, the number set as large as the name, small caps for the machine's
+   labels, and air doing the work that colour would otherwise do. That is the discipline this
+   ledger borrows — because a wall of drawings deserves a contents page drawn to the same
+   standard as the drawings, and because a cartoonist can tell at a glance whether the thing
+   holding their work is a real publication or a decorated web page.
 
-   The numbers are the only loud thing here, and they are the record's red, because a
-   number is the machine speaking and the machine has one voice. */
-.press-room .cartoon-goals { display: grid; gap: 1.1rem; }
-.press-room .cartoon-goals-head { display: grid; gap: .5rem; max-width: 62ch; }
-.press-room .cartoon-goals-eyebrow {
+   No boxes, no badges, no coloured chips. A rule, a number, a name, a count. The only colour
+   is the record's red on a number that has drawings behind it, and it is there to be counted
+   down the page. */
+.press-room .cartoon-goals { display: grid; gap: 1.15rem; }
+
+.press-room .cartoon-goals-head { display: grid; gap: .5rem; max-width: 64ch; }
+.press-room .cartoon-goals-eyebrow,
+.press-room .cartoon-goal-label {
   margin: 0;
   font-family: var(--font-record-ui);
-  font-size: .7rem;
-  letter-spacing: .18em;
+  font-size: .66rem;
+  font-weight: 400;
+  letter-spacing: .19em;
   text-transform: uppercase;
   color: rgb(var(--record-muted));
 }
@@ -28,29 +35,36 @@
   margin: 0;
   font-family: var(--font-reading);
   font-size: .98rem;
-  line-height: 1.6;
+  line-height: 1.62;
   color: rgb(var(--record-ink));
 }
 .press-room .cartoon-goals-method {
   margin: 0;
   font-family: var(--font-reading);
-  font-size: .86rem;
+  font-size: .84rem;
   line-height: 1.6;
   color: rgb(var(--record-muted));
 }
 
-/* The count, said once, in the machine's voice. */
+/* The count and the filter, on one line, the way a magazine sets a section standfirst. */
+.press-room .cartoon-goals-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .5rem 1.2rem;
+  padding: .65rem 0;
+  border-top: 2px solid rgb(var(--record-ink));
+  border-bottom: 1px solid rgb(var(--record-ink) / .22);
+}
 .press-room .cartoon-goals-count {
   display: flex;
   flex-wrap: wrap;
-  gap: .35rem 1.1rem;
-  margin: .2rem 0 0;
-  padding: .7rem 0;
-  border-top: 2px solid rgb(var(--record-ink));
-  border-bottom: 1px solid rgb(var(--record-ink) / .2);
+  gap: .3rem 1.15rem;
+  margin: 0;
   font-family: var(--font-record-ui);
-  font-size: .78rem;
-  letter-spacing: .1em;
+  font-size: .72rem;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: rgb(var(--record-muted));
 }
@@ -59,18 +73,42 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
-
-.press-room .cartoon-goals-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
-.press-room .cartoon-goal {
-  display: grid;
-  grid-template-columns: 2.4rem minmax(0, 1fr);
-  gap: .15rem .8rem;
-  padding: .85rem 0;
-  border-bottom: 1px solid rgb(var(--record-ink) / .16);
+.press-room .cartoon-goals-filter {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+  border-bottom: 1px solid rgb(var(--record-ink) / .45);
 }
+.press-room .cartoon-goals-filter:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+.press-room .cartoon-goals-filter:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
+
+.press-room .cartoon-goals-list { list-style: none; margin: 0; padding: 0; }
+.press-room .cartoon-goal { border-bottom: 1px solid rgb(var(--record-ink) / .16); }
+.press-room .cartoon-goal.is-open { border-bottom-color: rgb(var(--record-ink) / .5); }
+
+/* The closed line: number, name, count. The whole line is the control. */
+.press-room .cartoon-goal-head {
+  display: grid;
+  grid-template-columns: 2.3rem minmax(0, 1fr) auto 1rem;
+  align-items: baseline;
+  gap: .2rem .7rem;
+  width: 100%;
+  padding: .82rem 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+.press-room .cartoon-goal-head:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 2px; }
 .press-room .cartoon-goal-number {
   font-family: var(--font-record-ui);
-  font-size: 1.5rem;
+  font-size: 1.42rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: -.03em;
@@ -78,31 +116,78 @@
   color: rgb(var(--record-red));
 }
 .press-room .cartoon-goal-name {
-  margin: 0;
   font-family: var(--font-record-ui);
   font-size: .98rem;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.28;
   letter-spacing: -.015em;
   color: rgb(var(--record-ink));
 }
-.press-room .cartoon-goal-drawings {
-  margin: .3rem 0 0;
+.press-room .cartoon-goal-meta {
+  font-family: var(--font-record-ui);
+  font-size: .68rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgb(var(--record-muted));
+}
+.press-room .cartoon-goal-cue {
+  font-family: var(--font-record-ui);
+  font-size: .95rem;
+  line-height: 1;
+  color: rgb(var(--record-muted));
+  justify-self: end;
+}
+.press-room .cartoon-goal-head:hover .cartoon-goal-name { color: rgb(var(--record-red)); }
+
+/* A blank goal keeps its number, quieter, and says so in the room's own words. The empty
+   line is the point: it is the space a workshop fills. */
+.press-room .cartoon-goal--open .cartoon-goal-number { color: rgb(var(--record-muted) / .8); }
+.press-room .cartoon-goal--open .cartoon-goal-name { font-weight: 400; color: rgb(var(--record-muted)); }
+
+/* The open panel: two columns, the goal on the left, the artists on the right, divided by a
+   hairline — the same device a magazine uses to put a fact beside a photograph. */
+.press-room .cartoon-goal-panel {
+  display: grid;
+  gap: 1rem;
+  padding: 0 0 1.15rem 0;
+}
+.press-room .cartoon-goal-asks,
+.press-room .cartoon-goal-said { display: grid; gap: .35rem; align-content: start; }
+.press-room .cartoon-goal-asks-text {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: .92rem;
+  line-height: 1.6;
+  color: rgb(var(--record-ink));
+}
+.press-room .cartoon-goal-link {
+  justify-self: start;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .35);
+}
+.press-room .cartoon-goal-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+
+.press-room .cartoon-goal-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.press-room .cartoon-goal-line-title {
+  display: block;
+  font-family: var(--font-record-ui);
+  font-size: .84rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: rgb(var(--record-ink));
+}
+.press-room .cartoon-goal-line-text {
+  display: block;
+  margin-top: .12rem;
   font-family: var(--font-reading);
   font-size: .88rem;
   line-height: 1.55;
-  color: rgb(var(--record-ink));
-}
-/* A goal with no drawing keeps its number, and says so in the room's own words. The empty
-   line is the point: it is the space a workshop fills. */
-.press-room .cartoon-goal--open .cartoon-goal-number { color: rgb(var(--record-muted) / .75); }
-.press-room .cartoon-goal--open .cartoon-goal-name { font-weight: 400; color: rgb(var(--record-muted)); }
-.press-room .cartoon-goal-open {
-  margin: .3rem 0 0;
-  font-family: var(--font-record-ui);
-  font-size: .74rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
   color: rgb(var(--record-muted));
 }
 
@@ -117,7 +202,7 @@
   line-height: 1.6;
   color: rgb(var(--record-muted));
 }
-.press-room .cartoon-goals-foot a { color: rgb(var(--record-ink)); text-decoration: none; border-bottom: 1px solid rgb(var(--record-ink) / .3); justify-self: start; }
+.press-room .cartoon-goals-foot a { color: rgb(var(--record-ink)); text-decoration: none; border-bottom: 1px solid rgb(var(--record-ink) / .3); }
 .press-room .cartoon-goals-foot a:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
 .press-room .cartoon-goals-ask {
   margin: 0;
@@ -129,10 +214,19 @@
 }
 
 @media (min-width: 1024px) {
-  /* Three columns of a printed ledger: the eye scans the numbers first and sees at once
-     which ones are red and full and which ones are grey and waiting. */
-  .press-room .cartoon-goals-list { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: clamp(1.5rem, 3vw, 3.5rem); }
-  .press-room .cartoon-goal { grid-template-columns: 2rem minmax(0, 1fr); padding: .8rem 0; }
-  .press-room .cartoon-goal-number { font-size: 1.35rem; }
-  .press-room .cartoon-goals-head { max-width: 74ch; }
+  .press-room .cartoon-goals-head { max-width: 76ch; }
+  .press-room .cartoon-goal-head {
+    grid-template-columns: 3.4rem minmax(0, 1fr) 11rem 1.4rem;
+    gap: .3rem 1.4rem;
+    padding: .92rem 0;
+  }
+  .press-room .cartoon-goal-number { font-size: 1.7rem; }
+  .press-room .cartoon-goal-name { font-size: 1.08rem; }
+  .press-room .cartoon-goal-panel {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: clamp(1.5rem, 3vw, 3.4rem);
+    padding: .2rem 0 1.5rem 4.8rem;
+  }
+  .press-room .cartoon-goal-said { border-left: 1px solid rgb(var(--record-ink) / .18); padding-left: clamp(1.2rem, 2vw, 2.2rem); }
+  .press-room .cartoon-goal--open .cartoon-goal-said { border-left-color: rgb(var(--record-ink) / .3); }
 }

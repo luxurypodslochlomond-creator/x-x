@@ -1,18 +1,30 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { GOALS, UNPLACED, GOALS_SOURCE } from '@/components/climate/cartoons/cartoonGoals';
+import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
+import GoalRow from '@/components/climate/cartoons/GoalRow';
 import '@/components/climate/cartoons/cartoon-goals.css';
 
 // ── SEVENTEEN GOALS, ONE WALL, AND THE GAPS PRINTED ───────────────────────────
-// This is the room's answer to the campaign Francis has been running since 2012. It does
-// not congratulate the wall. It counts it, reads each drawing against the goal its own line
-// is about, and prints the goals nobody has drawn yet as open space — which is the only
-// honest way to show a workshop what is still missing.
+// The room's answer to the campaign Francis has been running since 2012. It does not
+// congratulate the wall. It counts it, opens each goal to the goal's own words and the
+// cartoonists' own words, and leaves the blank ones blank — because a workshop needs to see
+// the empty space, not a tidy index that pretends the wall is finished.
 export default function CartoonGoals() {
-  const { held, open, drawn } = useMemo(() => ({
-    held: GOALS.filter((g) => g.drawings.length).length,
-    open: GOALS.filter((g) => !g.drawings.length).length,
-    drawn: new Set(GOALS.flatMap((g) => g.drawings)).size,
-  }), []);
+  const { cartoons } = useCartoonWall();
+  const [openGoal, setOpenGoal] = useState(null);
+  const [waitingOnly, setWaitingOnly] = useState(false);
+
+  // The wall's real lines, keyed by the drawing's real title, so every quoted sentence in
+  // this ledger is the artist's own and can be checked against the drawing above it.
+  const lines = useMemo(() => {
+    const map = {};
+    cartoons.forEach((c) => { if (c.title && c.for_line) map[c.title] = c.for_line; });
+    return map;
+  }, [cartoons]);
+
+  const held = GOALS.filter((g) => g.drawings.length).length;
+  const open = GOALS.length - held;
+  const shown = waitingOnly ? GOALS.filter((g) => !g.drawings.length) : GOALS;
 
   return (
     <section className="cartoon-goals" id="cartoon-goals" aria-labelledby="cartoon-goals-title">
@@ -22,40 +34,42 @@ export default function CartoonGoals() {
         <p className="cartoon-goals-lede">
           CartoonAFRICA has been carrying an SDG cartoon campaign since 2012, and it travelled
           to the UN SDG Global Festival of Action in Bonn in May 2019. So this room does not
-          explain the goals to the people who have been drawing them for fourteen years. It
-          does the thing paper cannot: it reads the wall as it stands today against all
-          seventeen, and prints the ones still waiting for a pen.
+          explain the goals to the people who have been drawing them for fourteen years. Open
+          any goal: it gives you the goal’s own sentence, the cartoonists’ own sentences, and
+          the page where you can check both.
         </p>
         <p className="cartoon-goals-method">
           This reading is the record’s own, made from each drawing’s published line — not the
-          artist’s claim about their work, and not the United Nations’ reading of anything.
-          The record does not speak for the UN, and the UN has not endorsed this room.
+          artist’s claim about their work, and not the United Nations’ reading of anything. The
+          record does not speak for the UN, and the UN has not endorsed this room.
         </p>
       </header>
 
-      <p className="cartoon-goals-count">
-        <span><strong>{held}</strong> of 17 goals answered</span>
-        <span><strong>{open}</strong> still waiting for a drawing</span>
-        <span><strong>{drawn}</strong> drawings counted</span>
-      </p>
+      <div className="cartoon-goals-bar">
+        <p className="cartoon-goals-count">
+          <span><strong>{held}</strong> of 17 goals answered</span>
+          <span><strong>{open}</strong> still waiting for a drawing</span>
+        </p>
+        <button
+          type="button"
+          className="cartoon-goals-filter"
+          aria-pressed={waitingOnly}
+          onClick={() => setWaitingOnly((v) => !v)}
+        >
+          {waitingOnly ? 'Show all seventeen' : 'Show only the blank ones'}
+        </button>
+      </div>
 
       <ol className="cartoon-goals-list">
-        {GOALS.map((goal) => {
-          const has = goal.drawings.length > 0;
-          return (
-            <li key={goal.n} className={`cartoon-goal${has ? '' : ' cartoon-goal--open'}`}>
-              <span className="cartoon-goal-number" aria-hidden="true">{String(goal.n).padStart(2, '0')}</span>
-              <div>
-                <h3 className="cartoon-goal-name">{goal.name}</h3>
-                {has ? (
-                  <p className="cartoon-goal-drawings">{goal.drawings.join(' · ')}</p>
-                ) : (
-                  <p className="cartoon-goal-open">No drawing yet</p>
-                )}
-              </div>
-            </li>
-          );
-        })}
+        {shown.map((goal) => (
+          <GoalRow
+            key={goal.n}
+            goal={goal}
+            lines={lines}
+            open={openGoal === goal.n}
+            onToggle={() => setOpenGoal((current) => (current === goal.n ? null : goal.n))}
+          />
+        ))}
       </ol>
 
       <div className="cartoon-goals-foot">
