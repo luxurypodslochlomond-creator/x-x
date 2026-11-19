@@ -4,6 +4,7 @@ import RecordBackBar from '@/components/climate/RecordBackBar';
 import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
 import ImpactSignal from '@/components/climate/ImpactSignal';
+import WhyThisPlate from '@/components/climate/map/WhyThisPlate';
 import ClimateImpact from '@/pages/ClimateImpact';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 import { reachPlaces } from '@/components/climate/reachPlaces';
@@ -57,6 +58,12 @@ export default function ClimateMapPage() {
           </div>
         </div>
       </section>
+
+      {/* What the plate is for, said under it, so a reader never has to infer the argument
+          from a legend. */}
+      <div className="mx-auto max-w-[1640px] px-2 lg:px-0">
+        <WhyThisPlate />
+      </div>
 
       <div className="record-map-desk">
       <ImpactSignal stats={data} />

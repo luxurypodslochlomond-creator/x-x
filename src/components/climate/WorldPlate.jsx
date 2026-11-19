@@ -42,9 +42,9 @@ const MARKS = {
 const MARKS_ON_PAINT = {
   crisis: '#b3261e',
   solution: '#141210',
-  action: '#1e3a2b',
-  wire: '#0f5f7a',
-  cartoon: '#9b6f28',
+  action: '#efe7d6',
+  wire: '#141210',
+  cartoon: '#efe7d6',
 };
 
 const GROUND = {
@@ -101,14 +101,18 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
                 <image href={WORLD_LAND} width={PLATE_W} height={PLATE_H} preserveAspectRatio="none" />
               </mask>
             </defs>
-            {/* Water: the painting, held back so the plate is a plate and not a second cover. */}
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".64" />
-            {/* Land: paper. It was a teal-to-green-to-ochre gradient, which made the record's
-                Earth look like a weather app's Earth and put every ink mark on a green field
-                where nothing could be read. Paper on ink is the record's own two colours, and
-                it is what an engraved plate has always been. */}
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".7" transform="translate(.28 .28)" mask={`url(#${landId})`} />
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-bone))" fillOpacity=".92" mask={`url(#${landId})`} />
+            {/* ── THE PLATE IN THE RECORD'S OWN FOUR COLOURS ─────────────────────────
+                It had a teal-to-green-to-ochre gradient for land, which made the record's
+                Earth look like a weather app's Earth and put every mark on a green field
+                where nothing could be read. It then went to plain paper, which was honest
+                but had no identity on it at all.
+                Now it is printed the way this record prints: black water, the signal yellow
+                for land, red for what burns, paper for what answers and what is drawn. Four
+                colours, the same four the whole record uses, so the map is recognisably
+                this record's map and not a chart borrowed from somewhere else. */}
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".74" />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".9" transform="translate(.3 .3)" mask={`url(#${landId})`} />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-signal))" fillOpacity=".96" mask={`url(#${landId})`} />
           </g>
         )}
         {/* The atlas holds still. The symbols, not a moving wash, carry the signal. */}

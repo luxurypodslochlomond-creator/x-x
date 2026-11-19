@@ -26,32 +26,33 @@
 
 @media screen and (min-width: 1024px) {
   /* ── FIVE MARKS, FIVE MEANINGS, EACH WITH ITS OWN FORM ──────────────────────────
-     The marks were five coloured blobs on a green world and you could not tell one from
-     another, or tell whether they were for pressing. Now the land is paper and the inks
-     are the record's, and each meaning has a form you can name at a glance:
+     The land is the signal yellow and the water is ink, so the marks are the other two
+     colours of the record: red for what burns, ink for what answers, paper for what was
+     done and what was drawn. Each meaning has a form you can name at a glance:
        crisis  — a filled red disc: a warning is solid and loud.
-       solution— an ink ring: an answer is a hole that has been filled in around the edge.
-       action  — a dark green diamond: a deed, a thing done in a field.
-       wire    — a blue dash: a line of text, a report going out.
-       drawing — an ochre square: a picture, hung.
-     Each carries a bone hairline, so an ink mark standing out on the water is still seen. */
+       solution— a solid ink disc: an answer, printed in the record's own hand.
+       action  — a paper disc: a deed done in daylight.
+       wire    — an ink dash: a line of text, a report going out.
+       drawing — a paper square: a picture, hung.
+     Each carries a paper ring inside an ink ring, so an ink mark is still seen over black
+     water and a paper mark is still seen on yellow land. */
   .record-unified-map { --map-signal: rgb(var(--record-ink)); }
   .record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-red)); }
-  .record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-botanical)); }
-  .record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-ocean)); }
-  .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-ochre)); }
+  .record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-paper)); }
+  .record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-ink)); }
+  .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-paper)); }
   .record-unified-map .record-map-symbol {
     display: block; position: relative; flex: none;
     width: 11px; height: 11px; padding: 0;
     color: var(--map-signal); background: currentColor;
     border: 0; border-radius: 50%;
-    box-shadow: 0 0 0 2.5px rgb(var(--record-bone) / .92);
+    box-shadow: 0 0 0 1.5px rgb(var(--record-paper)), 0 0 0 3px rgb(var(--record-ink) / .8);
   }
-  /* A ring, not a dot: the answer is the space inside the ink. */
-  .record-unified-map .record-map-symbol[data-kind="solution"] { background: transparent; border: 3px solid var(--map-signal); width: 12px; height: 12px; }
-  .record-unified-map .record-map-symbol[data-kind="action"] { border-radius: 1px; transform: rotate(45deg); }
+  .record-unified-map .record-map-symbol[data-kind="action"] { border-radius: 50%; }
   .record-unified-map .record-map-symbol[data-kind="wire"] { width: 14px; height: 5px; border-radius: 0; }
   .record-unified-map .record-map-symbol[data-kind="cartoon"] { border-radius: 1px; }
+  /* The key runs a red rule under it: the plate is the record's, and says so. */
+  .record-unified-map .record-map-key { border-bottom: 3px solid rgb(var(--record-red)); }
   .record-unified-map .record-world-atlas .record-map-dot { display: none; }
   .record-unified-map .record-world-atlas .record-entry-marker { width: 44px !important; height: 44px !important; }
   .record-unified-map .record-entry-marker:is(:hover, :focus-visible) { z-index: 10 !important; }
@@ -82,11 +83,11 @@
   .record-unified-map .record-entry-marker:is(:hover, :focus-visible) .record-map-spot-label,
   .record-unified-map .record-entry-marker[aria-current="true"] .record-map-spot-label { display: block; }
   /* The key sits on ink, so the key keeps the light inks the plate used to use. */
-  .record-unified-map .record-map-key { --map-signal: rgb(var(--record-map-solution)); }
+  .record-unified-map .record-map-key { --map-signal: rgb(var(--record-paper)); }
   .record-unified-map .record-map-key [data-kind="crisis"] { --map-signal: rgb(var(--record-map-crisis)); }
-  .record-unified-map .record-map-key [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
-  .record-unified-map .record-map-key [data-kind="wire"] { --map-signal: rgb(var(--record-map-wire)); }
-  .record-unified-map .record-map-key [data-kind="cartoon"] { --map-signal: rgb(var(--record-map-cartoon)); }
+  .record-unified-map .record-map-key [data-kind="action"] { --map-signal: rgb(var(--record-signal)); }
+  .record-unified-map .record-map-key [data-kind="wire"] { --map-signal: rgb(var(--record-paper) / .6); }
+  .record-unified-map .record-map-key [data-kind="cartoon"] { --map-signal: rgb(var(--record-paper)); }
   .climate-record[data-record-page="ClimateMap"] .record-book {
     max-width: none;
     margin-inline: 0;
