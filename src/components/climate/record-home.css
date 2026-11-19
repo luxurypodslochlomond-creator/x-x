@@ -39,15 +39,29 @@
 /* Room pigments belong to their interaction, not to the drawing's ink.
    Keep one source for hover, keyboard focus, touch and the opened room. */
 .record-home-page .record-room-link {
-  --room-wash: .16;
+  --room-wash: .14;
   background-color: transparent;
 }
 .record-home-page .record-room-link[data-room="solution"] { --room-pigment: var(--record-botanical); }
 .record-home-page .record-room-link[data-room="climate_crisis"] { --room-pigment: var(--record-red); }
 .record-home-page .record-room-link[data-room="actions"] { --room-pigment: var(--record-clay); }
 .record-home-page .record-room-link[data-room="groups"] {
-  --room-pigment: var(--record-signal);
-  --room-wash: .36;
+  --room-pigment: var(--record-ochre);
+  --room-wash: .18;
+}
+/* ── THE ROOM LINE IS NOT A FORM LABEL ──────────────────────────────────────────
+   At twelve and a half pixels the sentence under a mark read as help text, which is
+   the texture of a settings page. A room line is the record telling you what it keeps,
+   so it is set at reading size, in near-black, with air above it. Nothing else about
+   the description changes — it is still the grotesque, still one line, still pretty-
+   wrapped. */
+.record-home-page .record-room-link .record-description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgb(var(--record-ink) / .78);
+}
+@media (min-width: 1024px) {
+  .record-home-page .record-room-link .record-description { font-size: 14.5px; }
 }
 .record-home-page .record-room-link:is([aria-pressed="true"], :focus-visible, :active) {
   background-color: rgb(var(--room-pigment) / var(--room-wash));
@@ -98,9 +112,13 @@
     height: 6rem;
     background-position: center 58%;
   }
-  /* The four choices and the photographs arrive before the quotation. */
+  /* ── ONE ORDER, ON EVERY GLASS ───────────────────────────────────────────────
+     The desk used to lift Jane's voice above the masthead, so the four rooms sat
+     under her quotation on a wide screen and above it on a phone — the same page
+     telling two readers two different things about what the record is. The order is
+     now the record's own on both: it names itself, it says what it is made of (the
+     four rooms), a voice it keeps speaks, then the world arrives as pictures. */
   .record-home-flow { display: flex; flex-direction: column; }
-  .record-home-flow > .record-home-voice-band { order: 1; }
   .climate-record .record-home-page .record-cover-plate-title {
     max-inline-size: 29ch;
     font-size: clamp(2rem, 2.7vw, 3rem);

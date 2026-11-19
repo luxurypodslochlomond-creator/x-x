@@ -493,13 +493,17 @@ export default function TogetherChangeClimate() {
       {/* ── THE TALLY — how much is on the record, immediately before the four rooms
              that add up to it. A total followed by its breakdown is a shape; a total
              stranded between two picture bands is a caption. ── */}
-      <div className="px-4 lg:px-10 py-2 bg-[#241d16] flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
-          {t.live}
-        </span>
-        <span className="text-[10px] font-mono text-[#efe7d6]/70">
-          {items.length + actions.length} {t.entries_now}
+      {/* ── A LEDGER LINE, NOT A NEWS TICKER ────────────────────────────────────────
+          This strip used to say LIVE with a pulsing dot, which is the furniture of a
+          newsroom and the one thing this record is not: a record does not go live, it
+          fills up. So the words are the record's own — what it holds, and how much of
+          it is in each room — printed flat on the ink, with nothing blinking. It also
+          does the work of the old four-figure bar: the total and its breakdown, on one
+          line, before the reader is asked to choose a room. */}
+      <div className="bg-[#241d16] px-4 py-2.5 lg:px-10 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <span className="text-[11px] font-mono uppercase tracking-[0.18em] text-[#efe7d6]/75">The record holds</span>
+        <span className="text-[11px] font-mono tracking-[0.04em] text-[#efe7d6]">
+          {items.length + actions.length} {t.entries_now} — {doorCounts.solution} solutions · {doorCounts.climate_crisis} crises · {doorCounts.actions} actions · {doorCounts.groups} groups
         </span>
       </div>
 

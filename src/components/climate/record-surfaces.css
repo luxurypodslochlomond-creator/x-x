@@ -13,9 +13,14 @@
     background-color: rgb(var(--record-ink) / .9);
   }
   .record-home-page .record-image-section .record-section-heading h2 { color: rgb(var(--record-signal)); }
+  /* ── THE SHEETS COME IN TO THE PAGE ─────────────────────────────────────────────
+     Wide margins plus two rem of padding left a desk looking at bands of empty paper
+     between each part of the record. The sheets keep their own paper and their rules;
+     they simply sit closer to the page's edge, so the record reads as one continuous
+     document rather than as a stack of slides with air between them. */
   .record-home-sections > section:not(.record-home-governance) {
-    margin: 1.5rem 2.5rem;
-    padding: 2rem;
+    margin: 1rem 1.75rem;
+    padding: 1.5rem 1.75rem;
     background-color: rgb(var(--record-paper));
   }
   .record-home-page .record-home-governance { background-color: rgb(var(--record-ink) / .92); }
