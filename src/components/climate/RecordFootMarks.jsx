@@ -96,13 +96,14 @@ export function MarkPlan({ size = 26, className = '' }) {
 // this into being* — rather than merely illustrating the word above it.
 export function MarkSignature({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.5" className={className} aria-hidden="true">
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      {/* The nib is a mass now rather than an outline with a slit and a breather hole in it:
+          both of those were under a pixel at nineteen and turned the point into a smudge. The
+          red line stays exactly where it was — the hand, laid to the line. */}
       <g transform="rotate(-30 20 20)">
-        <path d="M20 34.2c-4.9-5.5-6.3-13.2-5.2-22.1 3.3-2 7.1-2 10.4 0 1.1 8.9-.3 16.6-5.2 22.1Z" />
-        <circle cx="20" cy="17.4" r="2" />
-        <path d="M20 34.2V21.6" />
+        <path d="M20 34.2c-4.9-5.5-6.3-13.2-5.2-22.1 3.3-2 7.1-2 10.4 0 1.1 8.9-.3 16.6-5.2 22.1Z" fill="currentColor" stroke="none" />
       </g>
-      <path d="M7.2 32.9h25.6" className="text-record-mark" strokeWidth="2.2" />
+      <rect x="6.4" y="31.4" width="27.2" height="3.6" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -110,10 +111,14 @@ export function MarkSignature({ size = 26, className = '' }) {
 // How it is made. A pair of dividers set to the page.
 export function MarkMethod({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M18.7 9.2 8 35M21 9.5l10.3 25.1M13 24c4.2 1.3 9.5 1.1 14.1-.5M6.7 31.8c7.6 4 18.6 4.4 26.4-.4" />
-      <circle cx="20" cy="7.4" r="3" className="text-record-mark" fill="currentColor" stroke="none" />
-      <path d="M20 2v2M5.1 25.4l2.7 1.2M32.4 25.8l2.5-1" opacity=".5" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      {/* A stamp coming down on its mark: the knob, the head, and the red impression it
+          leaves. The method is what a reader is really asking about — how does anything get
+          on this record — and a thing that presses a mark is the plainest answer there is.
+          The tripod it wore before was a diagram of weighing, drawn in hairlines. */}
+      <rect x="16.2" y="4.4" width="7.6" height="5.6" rx="2.8" fill="currentColor" stroke="none" />
+      <path d="M11.4 21 13.6 9.4h12.8L28.6 21Z" fill="currentColor" stroke="none" />
+      <rect x="6.2" y="25" width="27.6" height="6.6" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -148,11 +153,13 @@ export function MarkCheckers({ size = 26, className = '' }) {
 // same sheet twice stopped believing the drawer meant anything.
 export function MarkRoll({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M8.6 5.4h18.8v29.2H8.6z" />
-      <path d="M12.6 12.4h6.2M12.6 18.8h9M12.6 25.2h5.4" />
-      <path d="M24.4 10.8h2.9v2.9h-2.9z" className="text-record-mark" strokeWidth="1.9" />
-      <path d="M12.6 31.6h10.6" opacity=".45" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      {/* Names down a page, and the last one in red because it is the newest name on the
+          roll. A sheet with ruled lines and a tiny tick said "document"; three masses down
+          a page say "a list of people" and survive being nineteen pixels wide. */}
+      <rect x="10.4" y="4.8" width="19.2" height="9.2" fill="currentColor" stroke="none" />
+      <rect x="10.4" y="16.8" width="19.2" height="9.2" fill="currentColor" stroke="none" />
+      <rect x="10.4" y="28.8" width="19.2" height="9.2" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -173,9 +180,14 @@ export function MarkHandover({ size = 26, className = '' }) {
 export function MarkMusic({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M14.4 6.4v12.2a5.6 5.6 0 0 0 11.2 0V6.4" />
-      <path d="M20 24.2v10.4" />
-      <path d="M15.6 34.6h8.8" />
+      {/* The fork, solid: two prongs, the bend that joins them, and the handle in the
+          record's red. A tuning fork drawn in outline is three hairlines at nineteen
+          pixels; the same fork as mass is one object with a red foot, and it is the only
+          mark in the set that stands on a stem. */}
+      <rect x="12.4" y="4.8" width="5.6" height="16" fill="currentColor" stroke="none" />
+      <rect x="22" y="4.8" width="5.6" height="16" fill="currentColor" stroke="none" />
+      <path d="M15.2 17.6v2.2a4.8 4.8 0 0 0 9.6 0v-2.2" fill="none" stroke="currentColor" strokeWidth="5.6" strokeLinecap="butt" />
+      <rect x="17.2" y="24.4" width="5.6" height="10.8" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -297,10 +309,14 @@ export function MarkWall({ size = 26, className = '' }) {
 // arcs set wide, and the red tip that marks where the sending starts.
 export function MarkSignal({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.5" className={className} aria-hidden="true">
-      <path d="M19.9 17.4 12.4 34.4M20.5 17.4l7.6 17M13.6 28.2l12.9-.4M7.6 35.1l24.9-.4" />
-      <path d="M9.4 9.6c-3.9 4.4-4 10.2-.3 14.2M31 9.4c3.9 4.5 4 10.3.2 14.4" />
-      <circle cx="20.2" cy="14.6" r="2.9" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      {/* A dated dispatch: the red block is the date, the bars beside and under it are the
+          entry itself. It was a transmitter with two arcs and a red dot, which said "radio"
+          and said it in hairlines that closed into a smudge at nineteen pixels. */}
+      <rect x="4.6" y="6" width="8.6" height="8.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="16.6" y="7.2" width="18.8" height="5.4" fill="currentColor" stroke="none" />
+      <rect x="4.6" y="19.4" width="30.8" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="4.6" y="28.6" width="22.4" height="5.6" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -314,10 +330,13 @@ export function MarkSignal({ size = 26, className = '' }) {
 // pressed on it where something happened.
 export function MarkHorizon({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.5" className={className} aria-hidden="true">
-      <path d="M33.7 20c0 7.6-6.1 13.7-13.7 13.7S6.3 27.6 6.3 20 12.4 6.3 20 6.3 33.7 12.4 33.7 20Z" />
-      <path d="M6.6 20h26.8" />
-      <circle cx="25.2" cy="13.6" r="3" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      {/* The plate, seen edge on: the world's own curve sitting on the record's red line.
+          A circle with a line across it read as a letter and a dash; a solid dome on a red
+          horizon is one object, and it is the only round mark in the row, which is how a
+          reader tells this door from its neighbours without reading a word. */}
+      <path d="M7.2 23.6a12.8 12.8 0 0 1 25.6 0Z" fill="currentColor" stroke="none" />
+      <rect x="3.6" y="23.6" width="32.8" height="4.6" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -353,14 +372,15 @@ export function MarkBaseOne({ size = 26, className = '' }) {
           stands a hair off upright, and a foot to sit on. Without the foot it was a stick
           with a tick on it; with it, the numeral is a printed character rather than a
           glyph someone drew with a ruler. */}
-      <path d="M23.9 7.4c-3 1.9-5.9 3.9-8.8 5.9M23.7 7.5c-.5 7.3-.3 14.7-.1 21.7" />
-      <path d="M15.5 29.5c4.7-.4 9.2-.4 13.9 0" />
+      <path d="M17.4 8.2 11.2 12.2v5.2l6.2-4Z" fill="currentColor" stroke="none" />
+      <rect x="17.4" y="8.2" width="5.6" height="19.6" fill="currentColor" stroke="none" />
+      <rect x="13.2" y="27.8" width="13.6" height="4.4" fill="currentColor" stroke="none" />
       {/* And underneath it, the base: solid, red, the width of the character. BASE 1 is the
           one place on this record where a mark is the name as well as the door, so the plinth
           is allowed to be a mass — a one standing on a red base says *base* and *one* in the
           same two gestures, and says it without a magnifying glass, which would have said
           "search other people's things" instead. */}
-      <path d="M9 34.4h22.2" className="text-record-mark" strokeWidth="3.2" />
+      <rect x="8.6" y="33.4" width="22.8" height="3.8" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
