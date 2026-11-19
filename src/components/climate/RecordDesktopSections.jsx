@@ -70,7 +70,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   // say when they are laid together. So the first thing on the sheet is the press: it does
   // not open another panel or a second index, it puts the whole drawer on the glass as one
   // plate, and the way back to the list is stated on the plate itself.
-  if (showPlate) return <MarksPlate onClose={() => setShowPlate(false)} />;
+  if (showPlate) return <MarksPlate onClose={() => setShowPlate(false)} onNavigate={onNavigate} />;
 
   return (
     <div className="flex flex-col font-body">

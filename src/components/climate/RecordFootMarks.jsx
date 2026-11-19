@@ -31,15 +31,28 @@ const BASE = {
 // bricks with one red, and four panes with one red — and it is the test to apply to
 // anything added to this file later.
 //
-// An open folio, its leaves and spine drawn as separate ink gestures.
+// ── THE OPEN BOOK HAD TO GO ───────────────────────────────────────────────────
+// Brian, 19 November, looking at the whole drawer laid out as one plate: "those marks
+// don't use like old book and sparkles — can you check bro". He was right, and he was
+// right about the same fault in two drawings: an open folio and a four-point star are the
+// two most borrowed pictures in the world, and neither of them is this record's.
+//
+// The folio was worse than borrowed. It was drawn in six hairline gestures with two
+// different opacities, which at nineteen pixels is not a book, it is a smudge — the exact
+// failure this file's own rule exists to stop. And it said "a book", which is the medium
+// the brief is printed on, not the claim the brief makes.
+//
+// So the brief is what a brief actually is: a sentence, and the place it stops. Two masses
+// of type, the second one running out, and the record's red standing where the full stop
+// would be — flush with the end of the first line, because that is where a printed stop
+// sits. A line that ends is the whole of what a short version promises, and it needs no
+// picture of a book to say it.
 export function MarkBrief({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M19.8 10.7C15.6 6.9 9.2 5.8 3.5 7.2L5.1 29.8c5.2-1.4 10.1-.3 14.6 3.7" />
-      <path d="M20.1 10.7c4.3-4 10.7-5.2 16.3-3.3l-1.7 22.4c-5.1-1.5-10.4-.2-14.6 3.7" />
-      <path d="M7.1 12.4c3.2-.3 6.2.5 8.5 2.2M7.8 17.2c2.7-.1 5.4.5 7.9 2.2M8.2 22c2.9-.1 5.1.5 7.2 1.9M24.1 14.4c2.2-1.6 5.1-2.4 8-2M24 19.4c2.1-1.5 4.6-2.2 7.7-2" />
-      <path d="M20 10.4c-.9 7.1.8 15.8-.1 23.1" className="text-record-mark" strokeWidth="2.1" />
-      <path d="M3.2 32.9c6.8-1.2 11.9.3 16.5 3.2 5-3 10.2-4.4 16.8-3" opacity=".45" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <rect x="6.2" y="12" width="22.4" height="6.2" fill="currentColor" stroke="none" />
+      <rect x="6.2" y="21.6" width="14.2" height="6.2" fill="currentColor" stroke="none" />
+      <rect x="22.4" y="21.6" width="6.2" height="6.2" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -57,7 +70,8 @@ export function MarkBrief({ size = 26, className = '' }) {
 // fore-edge. Solid ink for the cover, the record's own red for the spine, the spine standing
 // proud of the cover the way a bound edge does. Two masses, nothing drawn, nothing thin — it
 // survives nineteen pixels on a phone's second row, which is where this door actually lives,
-// and the brief goes back to being the only door with an open folio.
+// and the brief was later redrawn too, once the open folio turned out to be the one borrowed
+// picture on the sheet — it is now a sentence and the place it stops.
 export function MarkRecord({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
@@ -627,11 +641,21 @@ export function MarkHost({ size = 26, className = '' }) {
 }
 
 // What is offered and shared. A bowl held out — a plate, not a pocket.
+// ── AND THE BOWL HAD NO RED IN IT AT ALL ─────────────────────────────────────
+// Laid beside the rest of the sheet it was the one door with no colour: two hairlines and
+// nothing in the record's red, so the mark that asks for money was the quietest thing on a
+// page of marks that each say their point in red. The rule is not decoration — the red is
+// where the meaning is, and a mark without one is a drawing of a shape.
+//
+// It is the same bowl, as a mass, with the gift standing in its mouth in red: what keeps
+// this record free is money given into an open bowl, and the giving is the part that
+// matters. Nothing is held shut, nothing is counted in secret, and the bowl is open at the
+// top because that is how a thing given is received.
 export function MarkSupport({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M8.6 18.6h22.8" />
-      <path d="M11.4 18.6c0 8.8 3.8 15.2 8.6 15.2s8.6-6.4 8.6-15.2" />
+      <path d="M6.4 17.6h27.2a13.6 13.6 0 0 1-27.2 0Z" fill="currentColor" stroke="none" />
+      <circle cx="20" cy="14" r="3.6" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -708,15 +732,24 @@ export function MarkPrivacy({ size = 26, className = '' }) {
 }
 
 // The room where something is made rather than read.
+//
+// ── A SPARKLE SAYS MAGIC HAPPENED. NOTHING WAS MADE. ─────────────────────────
+// The four-point star was the one drawing on this sheet that broke the file's own rule: no
+// red in it anywhere, and a single hairline tail that vanishes at nineteen pixels. But the
+// real fault was the meaning. A sparkle is the shorthand every product on earth uses for
+// "the machine did something you did not", and the studio is the one room on this record
+// where the opposite is true: a person sits down and makes a thing, and the machine is a
+// tool lying on the bench beside them.
+//
+// So the mark is the act rather than the result. A solid slab of material, and the tool's
+// whole impression driven into its edge — the wedge in the record's red, because the red is
+// the part that will be missing. A cut is the only kind of making that leaves evidence of
+// the hand that made it, which is exactly what this room has to promise a child.
 export function MarkStudio({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path
-        d="M20 3.8c0 9.4 4.4 13.8 13.8 13.8C24.4 17.6 20 22 20 31.4 20 22 15.6 17.6 6.2 17.6 15.6 17.6 20 13.2 20 3.8Z"
-        fill="currentColor"
-        stroke="none"
-      />
-      <path d="M20 35.4v1.2" />
+      <rect x="4.4" y="16.4" width="31.2" height="19.2" fill="currentColor" stroke="none" />
+      <path d="M14.6 4.8h10.8L20 15Z" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
