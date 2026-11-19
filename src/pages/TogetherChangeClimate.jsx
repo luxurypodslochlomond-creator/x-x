@@ -62,6 +62,7 @@ const CATEGORIES = [
 
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import RecordCoverPlate from '@/components/climate/RecordCoverPlate';
+import RecordRoomNavigation from '@/components/climate/RecordRoomNavigation';
 import RecordHolding from '@/components/climate/RecordHolding';
 import RecordEntryList from '@/components/climate/RecordEntryList';
 
@@ -450,16 +451,7 @@ export default function TogetherChangeClimate() {
           The record's own drawings are laid on the painting the way a legend is printed on
           a plate, and the words sit at the foot of it. Jane's voice follows on the same
           continuous painting, so the record opens as one room rather than a stack of bands. */}
-      <RecordCoverPlate
-        copy={t}
-        counts={doorCounts}
-        selected={selectedType}
-        onSelect={(key) => {
-          setSelectedCategory('all');
-          setQuery('');
-          setSelectedType(selectedType === key ? 'all' : key);
-        }}
-      />
+      <RecordCoverPlate copy={t} />
       <div className="record-home-voice-band">
         <RecordPaintedBand strength={0.75} soft>
           <RecordHomeVoice />
@@ -505,6 +497,19 @@ export default function TogetherChangeClimate() {
         <span className="text-[11px] font-mono tracking-[0.04em] text-[#efe7d6]">
           {items.length + actions.length} {t.entries_now} — {doorCounts.solution} solutions · {doorCounts.climate_crisis} crises · {doorCounts.actions} actions · {doorCounts.groups} groups
         </span>
+      </div>
+
+      {/* Desktop: choose a room beside the entries. Mobile: the same controls stay high. */}
+      <div className="record-home-doors px-4 pb-2 lg:px-10">
+        <RecordRoomNavigation
+          counts={doorCounts}
+          selected={selectedType}
+          onSelect={(key) => {
+            setSelectedCategory('all');
+            setQuery('');
+            setSelectedType(selectedType === key ? 'all' : key);
+          }}
+        />
       </div>
 
       {/* ── THE PICTURES — what people are doing and what is at risk, held up now that the
