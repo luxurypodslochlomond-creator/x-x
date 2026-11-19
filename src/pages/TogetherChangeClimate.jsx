@@ -13,6 +13,7 @@ import { seedTranslations } from '@/components/shared/translation/translationCac
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
+import SubjectPickerSheet from '@/components/climate/SubjectPickerSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordHomeVoice from '@/components/climate/RecordHomeVoice';
@@ -511,13 +512,19 @@ export default function TogetherChangeClimate() {
                 picker replaces the expanding sheet; desktop keeps the written index. */}
             <div className="my-3">
               <SubjectRail
-                subjects={[...filledSubjects, ...emptySubjects]}
                 current={activeSubject}
                 totalEntries={items.length + actions.length}
                 allLabel="Explore by theme"
-                selected={selectedCategory}
                 expanded={showIndex}
                 onOpenIndex={() => setShowIndex(open => !open)}
+                onOpenPicker={() => setShowIndex(true)}
+              />
+              <SubjectPickerSheet
+                open={showIndex}
+                onClose={() => setShowIndex(false)}
+                subjects={[...filledSubjects, ...emptySubjects]}
+                totalEntries={items.length + actions.length}
+                selected={selectedCategory}
                 onSelect={selectTheme}
               />
               <SubjectIndexSheet

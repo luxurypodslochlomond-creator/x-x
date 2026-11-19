@@ -1,0 +1,11 @@
+/* The theme sheet rises into place the way every other sheet on the record does —
+   transform and opacity only, so the compositor pays for it and the page behind
+   does not repaint. */
+.subject-picker { animation: subject-picker-rise .18s cubic-bezier(0, 0, .2, 1); }
+@keyframes subject-picker-rise {
+  from { transform: translateY(14px); opacity: .55; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .subject-picker { animation: none; }
+}
