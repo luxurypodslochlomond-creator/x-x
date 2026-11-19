@@ -21,6 +21,10 @@ import '@/components/climate/cartoons/cartoon-lineage.css';
 import '@/components/climate/cartoons/press/press-record-ink.css';
 // Last: the cover takes the left leaf, and the wall gives each drawing its own measure.
 import '@/components/climate/cartoons/press/press-balance.css';
+// And last of all, the record's inks carried the whole length of the room: one paper, a
+// red opening line to every part, red numbers down the goals, a red rule on the line the
+// wall's permission stands on. Nothing in it touches a drawing.
+import '@/components/climate/cartoons/press/press-signal.css';
 
 export default function ClimateCartoons() {
   return (

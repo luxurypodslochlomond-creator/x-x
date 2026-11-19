@@ -1,0 +1,60 @@
+/* ── THE ROOM SPEAKS IN THE RECORD'S OWN INKS, ALL THE WAY DOWN ─────────────────
+   Brian, 19 November: "we are giving these cartoonists a platform and academics like
+   Janine, so we need the platform to have its coolasfuck id even throughout the cartoons
+   page — more us with red black yellow white, subtly in places but not contrived".
+
+   The signal was already at the top of the room: the yellow masthead, a yellow block
+   behind every section heading, red labels above them, the count running down the wall
+   in yellow. What it did not do was carry. Between those yellow labels the page went
+   quiet — bone paper, black hairlines, grey mono — for the whole middle of the room, so
+   a reader walked from the record into a document and back again.
+
+   So four things, and no more than four, because the way this reads as one publication
+   rather than as decoration is that the same device happens every time, in the same way:
+
+     1. One paper. The room was printed on a brighter cream than every other page of the
+        record, which is what made it feel pasted in. It now sits on the record's paper.
+     2. The opening line of every part is set in the record's red. Not the paragraph —
+        the line. That is the record's own grammar: a red line opens a part, then the ink
+        takes over. It reflows with the measure, so it is never a hand-placed colour.
+     3. The goals carry their numbers in red, so the record's ink runs down the longest
+        stretch of the room, and a goal nobody has drawn for stays faint: waiting, not
+        covered.
+     4. The line that states the permission the wall stands on is ruled in red, because
+        on this record every sentence that answers to somebody's name is ruled that way.
+
+   Nothing here touches a drawing. No filter, no tint, no frame, no crop: the artists'
+   pictures are exactly the files they gave. The only colour added is the record's own
+   ink, on the record's own paper, in the places a printed page already puts it. */
+
+#root .record-cartoon-field .press-room {
+  --cartoon-paper: var(--record-paper);
+}
+
+/* ── 1. THE OPENING LINE OF EACH PART, IN THE RECORD'S RED ─────────────────────
+   The first rendered line only, so a two-sentence lede opens in red and finishes in
+   ink. A line, not a block: the eye is told where the part begins, and then it reads. */
+#root .record-cartoon-field .press-room .cartoon-goals-lede::first-line,
+#root .record-cartoon-field .press-room .comic-session-theme::first-line,
+#root .record-cartoon-field .press-room .cartoon-anthology-sub::first-line,
+#root .record-cartoon-field .press-room .comic-workshop-note::first-line,
+#root .record-cartoon-field .press-room .cartoon-lineage-heading > p:not(.cartoon-lineage-kicker)::first-line {
+  color: rgb(var(--record-red));
+}
+
+/* ── 2. THE GOALS, COUNTED IN RED ───────────────────────────────────────────────
+   A goal somebody has drawn for carries the record's red number. A goal still blank
+   stays faint, because it is waiting rather than covered, and the room never dresses a
+   blank as a full one. */
+#root .record-cartoon-field .press-room .cartoon-goal:not(.cartoon-goal--open) .cartoon-goal-number {
+  color: rgb(var(--record-red));
+}
+
+/* ── 3. THE PERMISSION LINE, RULED ─────────────────────────────────────────────
+   "Shown with permission" is the sentence the whole wall rests on, so it is ruled the
+   way this record rules every sentence that answers to somebody's name: a red edge and
+   the record's own quiet. It reads as a note printed in the margin, which is what it is. */
+#root .record-cartoon-field .press-room .press-wall-colophon {
+  border-left: 2px solid rgb(var(--record-red));
+  padding-left: .7rem;
+}
