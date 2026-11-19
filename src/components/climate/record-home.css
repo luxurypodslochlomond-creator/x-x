@@ -290,3 +290,14 @@
    a public service for the world." Every rule below it went with the band. The ask is two
    words on the strip's own line now, wearing the strip's own type, and there is nothing
    left in this file for it — which is the point of a quiet ask. */
+
+/* ── AND ON A PHONE THE DRAWING IS DRAWN AT A SIZE YOU CAN SEE ─────────────────
+   Brian, 19 November, on a handset: "can't see crosses etc on mobile". The four drawings
+   were being set at their own attribute size — forty-four pixels — in a two-column grid
+   on a three-hundred-and-ninety-three-pixel glass, which is a thumbnail of a thumbnail.
+   On a phone they are now cut at three and a half rem, so each mark is a drawing you can
+   read at arm's length rather than a smudge above a name. Nothing moves on a desk. */
+@media (max-width: 639px) {
+  .record-home-page .record-room-drawing { block-size: auto; margin-block-end: .1rem; }
+  .record-home-page .record-room-drawing svg { inline-size: 3.4rem; block-size: 3.4rem; }
+}
