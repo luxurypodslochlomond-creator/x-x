@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { OPEN_DRAWING } from '@/components/climate/cartoons/openDrawing';
 import PressSheet from '@/components/climate/cartoons/press/PressSheet';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
@@ -11,6 +12,19 @@ import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 export default function PressWall() {
   const wall = useCartoonWall(true);
   const [reading, setReading] = useState(null);
+
+  // A drawing found in the seventeen-goal ledger opens here, in the wall's own viewer, at
+  // the place it actually stands in the wall's order — so Next and Previous walk the wall
+  // from that drawing rather than a second list made of thumbnails.
+  useEffect(() => {
+    const open = (event) => {
+      const at = wall.cartoons.findIndex((cartoon) => cartoon.id === event.detail?.id);
+      if (at >= 0) setReading(at);
+    };
+    window.addEventListener(OPEN_DRAWING, open);
+    return () => window.removeEventListener(OPEN_DRAWING, open);
+  }, [wall.cartoons]);
+
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">
       <header className="press-wall-head">
