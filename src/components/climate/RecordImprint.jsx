@@ -19,13 +19,20 @@ import '@/components/climate/record-navigator.css';
 // So the phone's rail is two rows. The top row is the five ways in, unchanged in order and
 // with BASE 1 exactly in the middle of them — the same position it holds on a desk, which
 // is the point: a door that moves between screens is two doors. The second row is the
-// record's own account of itself — Why, Method, Founder — and then Explore, last, under the
-// thumb, where the index of everything else has always been.
+// record's own account of itself — Method, Founder, x = x, Seals — and then Explore, last,
+// under the thumb, where the index of everything else has always been.
 //
-// Nine doors in the height of two rows, because the marks give height back: twenty-four on
+// ── AND x = x IS IN THE MIDDLE OF THAT ROW, WHICH IT WAS NOT ────────────────────
+// Brian, 19 November: "bri x=x isn't in middle in mobile looks coolasfuck on desktop
+// though bro". Four cells — three doors and Explore — have no middle, so the covenant sat a
+// cell left of centre while the same mark stood dead centre on a desk. The fingerprints
+// joined the row, the row became five cells, and x = x stands in the third: the middle on
+// both glasses. See PHONE_NAV_ROWS for the arithmetic in full.
+//
+// Ten doors in the height of two rows, because the marks give height back: twenty-four on
 // the row a reader arrives with, nineteen on the quieter row beneath it, captions at nine
 // and eight. The header ends up shorter than it was with two rows of three, and it carries
-// four more ways in.
+// five more ways in.
 const ROW_1_CELL = 'min-w-0 !min-h-10';
 const ROW_2_CELL = 'min-w-0 !min-h-8';
 const ROW_SIZE = [24, 19];

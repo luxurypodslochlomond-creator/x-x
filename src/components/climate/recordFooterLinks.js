@@ -131,9 +131,30 @@ export const DESK_FOUNDER = {
 //
 // Built from the same lists the desk and the sheet already read, so a phone can never offer
 // a door the record has stopped offering, or name one differently to a desk.
+// ── AND x = x WAS NOT IN THE MIDDLE ON A PHONE, BECAUSE FOUR CELLS HAVE NO MIDDLE ──
+// Brian, 19 November, holding it: "bri x=x isn't in middle in mobile looks coolasfuck on
+// desktop though bro". He is right, and the whole of it is arithmetic. A desk's lower row is
+// Method, Founder, Music, x = x, Roll, Seals — and with Explore at its end that is seven
+// cells, so the covenant stands in the fourth, which is the exact middle of seven. A phone's
+// lower row was Method, x = x, Founder and Explore: four cells, and four cells have no middle
+// at all, so the covenant sat one cell left of centre while the same mark stood dead centre
+// on a desk. The same door in two different places on two screens is the one thing this
+// masthead is built never to do.
+//
+// So the phone's lower row takes a fourth door — the fingerprints, which are the other half
+// of what a reader can actually check and were two taps deep inside the sheet — and the row
+// reads Method, Founder, x = x, Seals, Explore. Five cells, x = x in the third: the middle,
+// on both glasses at last.
+//
+// Nothing is lost by the move. The seals come onto the masthead, so they leave the sheet
+// (one door, one place — the rule the sheet already keeps), and the music room and the roll
+// stay where they were: a desk's row, and a phone's sheet.
+// One wording for the fingerprints' door, because it now stands in two rows.
+const SEALS_DOOR = { label: 'Seals', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' };
+
 export const PHONE_NAV_ROWS = [
   PRIMARY_NAV,
-  [...RAIL_SECOND_NAV, DESK_FOUNDER],
+  [RAIL_SECOND_NAV[0], DESK_FOUNDER, RAIL_SECOND_NAV[1], SEALS_DOOR],
 ];
 
 // ── TWO ROWS ON A DESK, BECAUSE A SHEET WAS DOING A MASTHEAD'S JOB ────────────
@@ -170,7 +191,7 @@ export const DESK_SECOND_ROW = [
   { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   // And what can be checked: the people, the fingerprints, and the index of everything else.
   { label: 'Roll', to: '/ClimateRoll', what: 'The people who check this record, in their own words.' },
-  { label: 'Seals', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
+  SEALS_DOOR,
 ];
 
 export const DESK_NAV_ROWS = [PRIMARY_NAV, DESK_SECOND_ROW];

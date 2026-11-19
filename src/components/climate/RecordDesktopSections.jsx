@@ -45,11 +45,10 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   // were new is what "all over the place" looks like.
   //
   // So a door already standing on the masthead is not printed on the sheet, and the check is
-  // made against the masthead of the glass in the reader's hand — a phone's nine, a desk's
-  // eleven — because those are not the same list. That matters for exactly three doors: the
-  // music room, the roll and the seals stand on a desk's second row and nowhere on a phone,
-  // so dropping them outright would leave them unreachable in a hand and printed twice on a
-  // desk. Nothing is lost at either width: every door of the record is on the masthead or in
+  // made against the masthead of the glass in the reader's hand — a phone's ten, a desk's
+  // eleven — because those are not the same list. That matters for exactly two doors: the
+  // music room and the roll stand on a desk's second row and nowhere on a phone, so dropping
+  // them outright would leave them unreachable in a hand and printed twice on a desk. Nothing is lost at either width: every door of the record is on the masthead or in
   // this sheet, and no door is in both.
   //
   // A shelf left with nothing on it goes with its doors, so the sheet never opens on a

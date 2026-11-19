@@ -561,9 +561,19 @@ export function MarkSeal({ size = 26, className = '' }) {
 export function MarkHost({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="12.6" cy="12.6" r="4.6" />
-      <path d="M16 16l15.8 15.8" />
-      <path d="M26.2 26.2l3.4-3.4M30.8 30.8l3.4-3.4" />
+      {/* ── THE KEEPER'S KEY, DRAWN IN THE SAME HAND ─────────────────────────────
+          Brian, 19 November, once the sheet's other six had been redrawn: "keeper need
+          looked at too bro". It was the last door in the index still drawn in hairlines —
+          a ring, a stem and two ticks, all one weight — sitting beside marks that are now
+          solid masses, so the keeper's room read as the one door the record had not
+          finished drawing.
+          The key is now what a key physically is: a solid bow with the hole pressed out of
+          it, a heavy stem, and the bit in the record's red, because the bit is the part
+          that turns. The hole is a real hole rather than a drawn circle — a filled disc
+          with an unfilled centre — so nothing in it is thinner than a stroke. */}
+      <path fillRule="evenodd" clipRule="evenodd" d="M12.2 4.2a7.1 7.1 0 1 1 0 14.2 7.1 7.1 0 0 1 0-14.2Zm0 3.6a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" fill="currentColor" stroke="none" />
+      <path d="M16.9 17.1 29.4 29.6" fill="none" strokeWidth="5.2" strokeLinecap="butt" />
+      <path d="M24.4 24.6 20.6 28.4M28.4 28.6 24.6 32.4" className="text-record-mark" fill="none" strokeWidth="4.4" strokeLinecap="butt" />
     </svg>
   );
 }
