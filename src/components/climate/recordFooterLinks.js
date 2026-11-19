@@ -60,8 +60,14 @@ export const RAIL_SECOND_NAV = [
   // x = x. "Why" also asked the reader to guess what they would find; the mark tells them.
   // It is set exactly as it is set everywhere else on the record, lower case, so the
   // caption drops the printer's upper-casing for this one door and keeps its tracking.
-  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // ── AND IT STANDS IN THE MIDDLE OF THE ROW ──────────────────────────────────
+  // Brian, 19 November: "can you put x = x in middle centre bro please." On a handset the
+  // quieter row has four cells — these two and the founder's name, with Explore closing it —
+  // and four cells have no middle, so the covenant takes the one place nearest to it, with
+  // the two doors about how the record is kept either side of it. Method first, because how
+  // an entry is checked is the question that makes the covenant worth reading.
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
+  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
 ];
 
 // ── THE DESK ROW, AND WHY IT IS LONGER THAN THE PHONE'S ────────────────────────
@@ -149,12 +155,20 @@ export const PHONE_NAV_ROWS = [
 // the record's own account of itself, not before it. The sheet keeps what a reader genuinely
 // goes looking for — the brief, the covenant, the terms — which is the one job a sheet should
 // have.
+// ── THREE, THE COVENANT, THEN THREE MORE ──────────────────────────────────────
+// Brian, 19 November: "can you put x = x in middle centre bro please." It had been the first
+// cell of the row, at the far left, which made the one line the whole record rests on look
+// like the opening item of a list. Six doors and Explore make seven cells, and seven cells
+// have a true middle — so the covenant sits in it, with three doors either side, and the row
+// reads outward from x = x instead of starting with it.
 export const DESK_SECOND_ROW = [
-  // Same door, same name as the room: see RAIL_SECOND_NAV above.
-  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // How an entry is checked, whose name is on it, and the record's own signal.
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
   { label: 'Founder', to: '/ClimateFounder', what: DESK_FOUNDER.what },
   { label: 'Music', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
+  // The middle cell. Same door, same name as the room: see RAIL_SECOND_NAV above.
+  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // And what can be checked: the people, the fingerprints, and the index of everything else.
   { label: 'Roll', to: '/ClimateRoll', what: 'The people who check this record, in their own words.' },
   { label: 'Seals', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
 ];

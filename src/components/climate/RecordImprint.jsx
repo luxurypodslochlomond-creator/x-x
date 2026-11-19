@@ -81,18 +81,14 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
           );
         })}
       </nav>
-      {/* ── BASE 1, IN THE MIDDLE ────────────────────────────────────────────────
-          Brian, 18 November: "have BASE 1 in the middle know what I mean bro". On a desk it
-          sits centred under the doors, in the machine's own type and the record's own faint
-          ink — the hand that built the room, signed where a printer signs a sheet. No door,
-          no badge, nothing to click: a signature, not a product. On a phone the door itself
-          stands in the middle of the top row, which says the same thing in the only place a
-          phone has room for it. */}
-      <div className="hidden items-center justify-center gap-3 pb-1 pt-1.5 lg:flex">
-        <span aria-hidden="true" className="h-px w-16 bg-record-ink/20" />
-        <span className="font-mono text-[9px] uppercase tracking-[0.34em] text-record-ink/45">Base 1</span>
-        <span aria-hidden="true" className="h-px w-16 bg-record-ink/20" />
-      </div>
+      {/* ── AND NO SIGNATURE UNDER THE DOORS ─────────────────────────────────────
+          A faint grey "Base 1" used to be ruled in under the middle of the second row, where
+          a printer signs a sheet. Brian, 19 November: "there a line says BASE 1 in grey faint
+          underneath music can you remove please bro." It went, and nothing replaced it: the
+          machine is named where naming it means something — the foot, the method page — and a
+          grey line under the music door was a name nobody had asked for sitting in the one
+          place on the masthead that should be quiet. The BASE 1 door itself is untouched: it
+          still stands in the middle of the top row, which is where a reader can use it. */}
       <LanguageStatus />
     </div>
   );
