@@ -7,7 +7,6 @@ export default function CartoonEventShare() {
   return (
     <div className="comic-event-share">
       <ShareCardButton entry={CARTOON_CARD} build={buildCartoonShareCard} label="Share the event" link={`${recordOrigin()}/ClimateCartoons`} previewFirst />
-      <p className="record-meta comic-event-share-note">The full cover, the dates and the event link. Preview, save or share.</p>
     </div>
   );
 }

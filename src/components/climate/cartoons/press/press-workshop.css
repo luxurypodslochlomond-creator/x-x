@@ -60,15 +60,19 @@
      used once in the room, here, so it still means something. */
   #root .record-cartoon-field .press-room-inner > .press-opening {
     background: rgb(var(--record-signal));
-    padding: 1.7rem 1.15rem 1.5rem;
+    padding: 0 1.15rem 1.5rem;
     margin-bottom: .9rem;
   }
+  /* The name comes after the cover, under an ink rule — the second thing a phone meets. */
   #root .press-room .press-opening-masthead {
-    margin: 0;
+    order: 2;
+    margin: 1.35rem 0 0;
     padding: 0;
     border-top: 3px solid rgb(var(--record-ink));
     padding-top: .85rem;
   }
+  #root .press-room .press-scope { order: 3; }
+  #root .press-room .press-contents { order: 4; }
   #root .press-room .press-eyebrow {
     font-size: .62rem;
     letter-spacing: .18em;
@@ -97,24 +101,31 @@
   }
   #root .press-room .cartoon-signal-fact { color: rgb(var(--record-ink)); }
 
-  /* The cover, centred under the name at its own shape. It is still the file Janine sent:
-     uncropped, untinted, unframed — a hairline is all it takes to lift a printed cover off
-     a printed yellow, and a heavy mount would be the shop window this room refuses. */
+  /* ── THE COVER OPENS THE ROOM ────────────────────────────────────────────────
+     Brian, 19 November: "image not first, see right at tip under nav would be better on
+     mobile… should Francis image be full width on mobile bro?" It should, and it is.
+
+     The cover is now the first thing on the glass, running edge to edge, with the sheet's
+     own padding given back above it so nothing sits over it. It is still the file Janine
+     sent: uncropped, untinted, unframed. Its credit stays directly beneath it — a credit
+     that has to be hunted for is not a credit — and the book's own words follow it as the
+     caption they are. Then the ink rule, and the room's name. */
   #root .press-room .press-opening-cover {
-    order: 2;
-    margin: 1.25rem auto 0;
-    width: 100%;
-    max-width: 19rem;
+    order: 1;
+    width: auto;
+    max-width: none;
+    margin: 0 -1.15rem;
   }
-  #root .press-room .press-opening-cover .comic-catalogue { margin: 0; }
+  #root .press-room .press-opening-cover .comic-catalogue { display: block; margin: 0; }
   #root .press-room .comic-catalogue > img {
+    display: block;
     width: 100%;
-    box-shadow: 0 0 0 1px rgb(var(--record-ink) / .3);
+    box-shadow: none;
   }
-  #root .press-room .comic-catalogue-band { padding: .85rem 0 0; gap: .6rem; }
-  #root .press-room .comic-catalogue-cover-credit { font-size: .62rem; letter-spacing: .12em; }
+  #root .press-room .comic-catalogue-band { padding: 1rem 1.15rem 0; gap: .55rem; }
+  #root .press-room .comic-catalogue-cover-credit { font-size: .6rem; letter-spacing: .12em; line-height: 1.6; }
   #root .press-room .comic-catalogue-eyebrow { font-size: .6rem; color: rgb(var(--record-ink) / .62); }
-  #root .press-room .comic-catalogue-line { font-size: .9rem; line-height: 1.5; }
+  #root .press-room .comic-catalogue-line { font-size: .95rem; line-height: 1.55; }
 
   #root .press-room .press-scope {
     order: 3;
@@ -356,12 +367,52 @@
     padding-top: 1.5rem;
     border-top: 1px solid rgb(var(--record-ink) / .3);
   }
-  #root .press-room .comic-session-facts dt,
-  #root .press-room .comic-anthology-facts dt { color: rgb(var(--record-red)); font-size: .62rem; }
+  /* ── WHEN AND WHERE, AS ONE REGISTER ─────────────────────────────────────────
+     The biennial's dates, the museum, the format and the hour were four ragged lines of
+     small caps and small type, which is what made this band read as bitty. They are one
+     ruled register now: a dateline in the record's red, the name under it, and a row per
+     fact with its label in red and its answer set to be read. */
   #root .press-room .comic-session-eyebrow,
-  #root .press-room .comic-anthology-eyebrow { font-size: .62rem; color: rgb(var(--record-red)); }
+  #root .press-room .comic-anthology-eyebrow {
+    font-size: .66rem;
+    line-height: 1.6;
+    letter-spacing: .12em;
+    color: rgb(var(--record-red));
+  }
   #root .press-room .comic-session-title,
-  #root .press-room .comic-anthology-title { font-size: 1.45rem; line-height: 1.04 !important; }
+  #root .press-room .comic-anthology-title {
+    margin-top: .45rem;
+    font-size: clamp(1.6rem, 7vw, 2rem);
+    line-height: 1.08 !important;
+    letter-spacing: -.03em !important;
+  }
+  #root .press-room .comic-session-theme { margin-top: .6rem; font-size: 1rem; line-height: 1.55; }
+  #root .press-room .comic-session-facts {
+    display: grid;
+    gap: 0;
+    margin-top: 1.25rem;
+    border-top: 2px solid rgb(var(--record-ink));
+  }
+  #root .press-room .comic-session-facts > div {
+    grid-template-columns: 5.25rem minmax(0, 1fr);
+    gap: .35rem .9rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid rgb(var(--record-ink) / .25);
+  }
+  #root .press-room .comic-session-facts dt,
+  #root .press-room .comic-anthology-facts dt {
+    padding-top: .15rem;
+    font-size: .58rem;
+    letter-spacing: .12em;
+    color: rgb(var(--record-red));
+  }
+  #root .press-room .comic-session-facts dd { font-size: .98rem; line-height: 1.55; }
+  #root .press-room .comic-session-who {
+    margin-top: 1rem;
+    border-top: 1px solid rgb(var(--record-ink) / .25);
+  }
+  #root .press-room .comic-session-who summary { min-height: 3rem; font-size: .92rem; line-height: 1.4; }
+  #root .press-room .comic-session-link { margin-top: 1rem; min-height: 2.75rem; font-size: .92rem; }
 
   #root .press-room .comic-sources { padding-top: 1.3rem; border-top: 3px solid rgb(var(--record-ink)); }
 }
