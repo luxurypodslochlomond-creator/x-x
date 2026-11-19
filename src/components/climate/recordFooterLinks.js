@@ -22,7 +22,7 @@
 // changes the voice of the page you are already standing on, which is why it sits on the
 // masthead's own name line — the record's name on one side, the reader's tongue answering
 // on the other — instead of taking a cell from a place to stand.
-// ── THE MIDDLE DOOR IS THE COVENANT, AND IT SAYS WHAT THE PLATFORM IS ──────────
+// ── THE MIDDLE DOOR IS THE COVENANT, AND IT SAYS HELLO ────────────────────────
 // Brian, 19 November: "x=x in middle should be red coolasfuck and underneath should say
 // PLATFORM… i think platform is coolasfuck and x=x our hiding coolasfuck principles bro,
 // time right etc as super intelligence new consciousness coming."
@@ -30,16 +30,27 @@
 // It is the strongest thing that has been asked for on this rail, and it costs a word. The
 // pivot of five doors was BASE 1 — the machine's own index — which is a useful door and a
 // quiet claim. The pivot is now the one sentence the whole record rests on, printed in its
-// own red, with the plain word under it saying what it is: this is the platform. Not a
-// feature of the platform, not a page inside it. The platform is x = x.
+// own red.
 //
-// A reader who taps it gets the covenant, which is exactly what the word underneath
-// promised, so nothing is promised that is not delivered. And the machine has not been taken
-// off the rail: BASE 1 drops to the quieter row, where it still stands in the middle of its
-// own row — the index of the record, sitting under the principle the record is kept by. One
-// door, one place, on both glasses.
+// ── AND THEN THE WORD UNDER IT CHANGED, THE SAME EVENING ──────────────────────
+// Brian, once he had seen PLATFORM standing there: "the word platform under x=x could you
+// make hello please." He is right, and it is the better word for a reason worth writing
+// down. PLATFORM was a label out of the building trade: it names the thing you are standing
+// on the way a landlord names a floor. What x = x actually is, on a record that opens to
+// anybody in any tongue, is the first thing said to a stranger — hello, you are worth
+// exactly what I am worth. The covenant is not the platform's policy. It is the platform's
+// greeting, and it was always the greeting; PLATFORM was us describing the door instead of
+// opening it.
+//
+// It also stops the middle door claiming to be the whole thing. PLATFORM over x = x read as
+// "this is the platform and everything else is arranged around it" — a hierarchy, which is
+// the one thing this record cannot print. HELLO claims nothing and greets everybody.
+//
+// The machine has not been taken off the rail either: BASE 1 still sits in the quieter row,
+// the index of the record, under the principle the record is kept by. One door, one place,
+// on both glasses.
 const PLATFORM_DOOR = {
-  label: 'PLATFORM',
+  label: 'HELLO',
   to: '/XEqualsX',
   what: 'x = x — the platform’s own principle: equal human worth, drawn rather than argued.',
 };

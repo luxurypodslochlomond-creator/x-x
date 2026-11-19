@@ -319,23 +319,25 @@ export function MarkWall({ size = 26, className = '' }) {
 
 // What travels. A message going out in dots and dashes — the oldest way anyone found
 // to send a thing further than a voice reaches.
-// ── THE WIRE, REDRAWN FOR TWENTY-TWO PIXELS ───────────────────────────────────
-// The old drawing was a good drawing at thirty-four: a mast, a red tip, and two pairs of
-// concentric arcs. At twenty-two in a two-row rail the inner pair of arcs fused with the
-// outer and the mast disappeared into them, so the busiest mark on the rail was also the
-// one that said least. Nothing about the idea was wrong — a dispatch going out — so the
-// idea stays and the drawing loses a whole generation of waves: one mast, one pair of
-// arcs set wide, and the red tip that marks where the sending starts.
+// ── A FLAG, RAISED — BECAUSE THE LAST DRAWING WAS A PARAGRAPH ─────────────────
+// Brian, 19 November: "signals icon in top nav… isn't right, needs to feel right for right
+// coolasfuck reasons." He is right, and the reason is plain once it is said out loud: the
+// last drawing was a red square with three bars beside it. That is not an object. It is a
+// picture of a paragraph — an entry with a date on it — and it shared that silhouette with
+// the register, the roll and the contents sheet, because all four were stacked bars. Three
+// doors in one rail wearing the same shape is the exact fault the drawer was rebuilt to fix.
+//
+// So the signal is a thing raised rather than a thing written down: a pennant on a mast,
+// with the swallowtail cut so it can never be read as a play button, and the cloth in the
+// record's red because the cloth is the message. Semaphore is the oldest way anyone found
+// to send a thing further than a voice reaches, which is what this door is for. It is also
+// the only silhouette in the row with a vertical in it, so a reader tells this door from its
+// neighbours at a glance instead of reading three words to find out where they are.
 export function MarkSignal({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      {/* A dated dispatch: the red block is the date, the bars beside and under it are the
-          entry itself. It was a transmitter with two arcs and a red dot, which said "radio"
-          and said it in hairlines that closed into a smudge at nineteen pixels. */}
-      <rect x="4.6" y="6" width="8.6" height="8.6" className="text-record-mark" fill="currentColor" stroke="none" />
-      <rect x="16.6" y="7.2" width="18.8" height="5.4" fill="currentColor" stroke="none" />
-      <rect x="4.6" y="19.4" width="30.8" height="5.6" fill="currentColor" stroke="none" />
-      <rect x="4.6" y="28.6" width="22.4" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="8.6" y="3.4" width="4.6" height="33.2" fill="currentColor" stroke="none" />
+      <path d="M13.2 5.2h18.4l-4.8 5.8 4.8 5.8H13.2Z" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -580,15 +582,22 @@ export function MarkReadership({ size = 26, className = '' }) {
 // reason is written on the mark that replaced them. A door's drawing has to survive one
 // glance from somebody who is not admiring it.)
 
-// An entry's fingerprint. A seal, with its ribbon still on it.
+// An entry's fingerprint — drawn as a fingerprint, at last.
+//
+// Brian, 19 November: "and seals icon isn't right." It was a solid disc over two tapering
+// red tails, and a disc over two tails is not a seal: it is a medal. A medal is a prize, and
+// this record awards nothing to anybody. Its seal says the opposite of a prize — that these
+// are the words that were sealed, and that anyone can recompute the fingerprint and catch us
+// if they have moved. So the drawing is now the thing the page actually asks a reader to do:
+// a print, two heavy ridges over a core, the core in the record's red because the core is the
+// part that identifies. It is the only nested curve in the row — every other mark is a mass or
+// a bar — so it holds its own beside the register and the flag at nineteen pixels, and it can
+// never be mistaken for the disc-on-a-ribbon it replaces.
 export function MarkSeal({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      {/* A seal with its ribbon: a solid disc over two red tails. The outline version read
-          as a medal, which is a prize, and a fingerprint is not a prize — it is a mark that
-          can be checked. Solid, it is the same object the record presses, in the same red. */}
-      <circle cx="20" cy="15.4" r="9.6" fill="currentColor" stroke="none" />
-      <path d="M13.6 22.6 11.8 35.8 20 31.4l8.2 4.4-1.8-13.2Z" className="text-record-mark" fill="currentColor" stroke="none" />
+      <path d="M8.6 28.2V17.4a11.4 11.4 0 0 1 22.8 0v10.8" fill="none" stroke="currentColor" strokeWidth="4.2" strokeLinecap="butt" />
+      <path d="M15.8 26.4V18.6a4.2 4.2 0 0 1 8.4 0v7.8" className="text-record-mark" fill="none" stroke="currentColor" strokeWidth="4.2" strokeLinecap="butt" />
     </svg>
   );
 }
