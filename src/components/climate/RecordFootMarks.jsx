@@ -319,25 +319,21 @@ export function MarkWall({ size = 26, className = '' }) {
 
 // What travels. A message going out in dots and dashes — the oldest way anyone found
 // to send a thing further than a voice reaches.
-// ── A FLAG, RAISED — BECAUSE THE LAST DRAWING WAS A PARAGRAPH ─────────────────
-// Brian, 19 November: "signals icon in top nav… isn't right, needs to feel right for right
-// coolasfuck reasons." He is right, and the reason is plain once it is said out loud: the
-// last drawing was a red square with three bars beside it. That is not an object. It is a
-// picture of a paragraph — an entry with a date on it — and it shared that silhouette with
-// the register, the roll and the contents sheet, because all four were stacked bars. Three
-// doors in one rail wearing the same shape is the exact fault the drawer was rebuilt to fix.
+// A dated dispatch: the red block is the date, the bars beside and under it are the entry.
 //
-// So the signal is a thing raised rather than a thing written down: a pennant on a mast,
-// with the swallowtail cut so it can never be read as a play button, and the cloth in the
-// record's red because the cloth is the message. Semaphore is the oldest way anyone found
-// to send a thing further than a voice reaches, which is what this door is for. It is also
-// the only silhouette in the row with a vertical in it, so a reader tells this door from its
-// neighbours at a glance instead of reading three words to find out where they are.
+// The flag came off the same night it went on. It was drawn as a pennant on a mast to stop
+// this door sharing the roll's stacked bars — and Brian's verdict on it was five words:
+// "you have a flag Bri". He is right. At nineteen pixels a pennant reads as a golf hole or
+// a country, and a door's drawing has to survive one glance from somebody who is not
+// admiring it. So the block and its bars are back, which is not a fix either: it is the
+// honest state of a drawer that has not yet found the picture.
 export function MarkSignal({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="8.6" y="3.4" width="4.6" height="33.2" fill="currentColor" stroke="none" />
-      <path d="M13.2 5.2h18.4l-4.8 5.8 4.8 5.8H13.2Z" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="4.6" y="6" width="8.6" height="8.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="16.6" y="7.2" width="18.8" height="5.4" fill="currentColor" stroke="none" />
+      <rect x="4.6" y="19.4" width="30.8" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="4.6" y="28.6" width="22.4" height="5.6" fill="currentColor" stroke="none" />
     </svg>
   );
 }

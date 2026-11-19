@@ -22,7 +22,7 @@
 // changes the voice of the page you are already standing on, which is why it sits on the
 // masthead's own name line — the record's name on one side, the reader's tongue answering
 // on the other — instead of taking a cell from a place to stand.
-// ── THE MIDDLE DOOR IS THE COVENANT, AND IT SAYS HELLO ────────────────────────
+// ── THE MIDDLE DOOR IS THE COVENANT, AND IT SAYS WHAT THE PLATFORM IS ──────────
 // Brian, 19 November: "x=x in middle should be red coolasfuck and underneath should say
 // PLATFORM… i think platform is coolasfuck and x=x our hiding coolasfuck principles bro,
 // time right etc as super intelligence new consciousness coming."
@@ -32,25 +32,13 @@
 // quiet claim. The pivot is now the one sentence the whole record rests on, printed in its
 // own red.
 //
-// ── AND THEN THE WORD UNDER IT CHANGED, THE SAME EVENING ──────────────────────
-// Brian, once he had seen PLATFORM standing there: "the word platform under x=x could you
-// make hello please." He is right, and it is the better word for a reason worth writing
-// down. PLATFORM was a label out of the building trade: it names the thing you are standing
-// on the way a landlord names a floor. What x = x actually is, on a record that opens to
-// anybody in any tongue, is the first thing said to a stranger — hello, you are worth
-// exactly what I am worth. The covenant is not the platform's policy. It is the platform's
-// greeting, and it was always the greeting; PLATFORM was us describing the door instead of
-// opening it.
-//
-// It also stops the middle door claiming to be the whole thing. PLATFORM over x = x read as
-// "this is the platform and everything else is arranged around it" — a hierarchy, which is
-// the one thing this record cannot print. HELLO claims nothing and greets everybody.
-//
-// The machine has not been taken off the rail either: BASE 1 still sits in the quieter row,
-// the index of the record, under the principle the record is kept by. One door, one place,
-// on both glasses.
+// It said HELLO for an evening and it says PLATFORM again, on Brian's word: "that's weird
+// says hello". He is right, and the reason is the one this rail was built on — a door that
+// greets you instead of telling you where it goes is a riddle, and the word underneath was
+// always meant to say what the thing is. The covenant is not a greeting. It is the platform,
+// and the platform is x = x.
 const PLATFORM_DOOR = {
-  label: 'HELLO',
+  label: 'PLATFORM',
   to: '/XEqualsX',
   what: 'x = x — the platform’s own principle: equal human worth, drawn rather than argued.',
 };
