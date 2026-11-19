@@ -32,6 +32,10 @@ import '@/components/climate/cartoons/press/press-field.css';
 // chapters, one loud name and quieter heads, and the contents set as a numbered plate. It is
 // scoped to the phone and touches no rule of the desk's spread.
 import '@/components/climate/cartoons/press/press-phone.css';
+// And the phone's own editorial pass: the yellow working sheet, the ledger, the invitation
+// at the threshold of the wall, the argument as a black interlude, the lineage as a
+// timeline, and the book and the biennial as one register. Phone only.
+import '@/components/climate/cartoons/press/press-workshop.css';
 
 export default function ClimateCartoons() {
   return (
