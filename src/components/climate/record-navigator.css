@@ -560,3 +560,38 @@
     to { opacity: 0; transform: translateY(-5px); }
   }
 }
+
+/* ── x = x IS SAID IN RED, AT THE SIZE IT IS SAID EVERYWHERE ELSE ───────────────
+   Brian, 19 November: "x=x looks small and x=x not red bro you sure same coolasfuck style
+   as rest of nav?"
+
+   Two faults, and the second was a real inconsistency rather than a taste. The covenant is
+   printed in the record's mark red in every other place it appears — the foot of every page,
+   the plaque on the wall, the inscription on the cover — and here, the one place a reader
+   can press, it was ink like every other caption and only turned red once it had been
+   touched. So the record's own mark arrived grey and went red when you hovered it, which is
+   backwards: a thing that is red everywhere else should be red at rest.
+
+   The size is the other half. The other captions are set in the printer's upper-case, where
+   every letter is a capital; x = x is lower case because it is a mark and not a word, and
+   lower case at the same point size has two-thirds the height on the page. So it read as a
+   smaller door in a row of doors. It is set two points up to sit at the same optical weight
+   as its neighbours — and the line-height is pinned to theirs, so the row does not grow a
+   pixel to carry it. */
+.rec-mast-doors .rec-art-caption-plain {
+  color: rgb(var(--record-mark));
+  font-weight: 700;
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  line-height: 1.15;
+}
+@media (min-width: 1024px) {
+  /* No line-height of its own: the caption takes the one its row already sets, so the row
+     keeps its height and only the letters get bigger. */
+  .rec-mast-doors .rec-art-caption-plain {
+    font-size: 13px;
+    letter-spacing: .12em;
+  }
+  /* And one point down in the quieter row, so it stays the quieter row. */
+  .rec-mast-row-2 .rec-art-caption-plain { font-size: 12px; }
+}

@@ -24,14 +24,17 @@ import '@/components/climate/record-navigator.css';
 // five puts BASE 1 at 50% of the masthead — the same door in the same place on both screens,
 // which is the whole rule this nav is built on.
 //
-// THE SIZE. The second row was set at twenty-six against the top row's thirty-four, on the
-// reasoning that the row a reader arrives with should be the loud one. It read instead as a
-// hierarchy that does not exist: x = x, the method, the founder, the music, the roll and the
-// seals are not lesser doors. They are the record's own account of itself, which is the thing
-// a sceptical reader comes looking for. Both rows are thirty-four now, and what separates
-// them is a rule and a hair of space, which was always enough.
+// THE SIZE. I set both rows at thirty-four, arguing that the second row is not a row of lesser
+// doors. Brian, looking at it: "think you were right having bottom line of top nav smaller —
+// same size looks big and not balanced to me bro." He is right, and the argument was wrong for
+// a reason worth writing down: those six are not lesser doors, but they are the *second* ones.
+// A reader arrives with the five and stays for the six, and two rows of one size have no
+// reading order at all — the masthead stops being a rail and becomes a wall of nine equal
+// marks. So the top row keeps thirty-four and the row beneath returns to twenty-six. That is
+// not a hierarchy of worth. It is a hierarchy of when you meet it.
 const CELL = 'flex-1 basis-0 min-w-0 !min-h-0 !py-1';
 const SIZE = 34;
+const QUIETER = 26;
 
 export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
@@ -43,7 +46,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
         return (
           <div
             key={rowIndex}
-            className={`flex w-full items-stretch gap-x-1 ${rowIndex === 0 ? '' : 'mt-0.5 border-t border-record-ink/15 pt-1'}`}
+            className={`flex w-full items-stretch gap-x-1 ${rowIndex === 0 ? '' : 'rec-mast-row-2 mt-0.5 border-t border-record-ink/15 pt-1'}`}
           >
             {row.map(({ label, to, what, plainCase }) => (
               <RecordNavDoor
@@ -52,7 +55,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
                 label={label}
                 plainCase={plainCase}
                 what={what}
-                size={SIZE}
+                size={rowIndex === 0 ? SIZE : QUIETER}
                 active={pathname === to}
                 className={CELL}
               />
@@ -66,7 +69,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
                 label="Explore"
                 what="The rest of the record: the brief, the covenant, the terms and every other door."
                 mark={MarkExplore}
-                size={SIZE}
+                size={QUIETER}
                 asButton
                 onClick={onOpenContents}
                 expanded={contentsOpen}

@@ -67,7 +67,7 @@ export default function RecordNavDoor({ to, label, what, active = false, size = 
       className={`rec-art-door ${active ? 'rec-art-door-active' : ''} ${className}`}
     >
       <span className="rec-art-drawing" aria-hidden="true"><Mark size={size} /></span>
-      <span className="rec-art-caption" style={plainCase ? { textTransform: 'none' } : undefined}>{label}</span>
+      <span className={`rec-art-caption${plainCase ? ' rec-art-caption-plain' : ''}`} style={plainCase ? { textTransform: 'none' } : undefined}>{label}</span>
     </Door>
   );
 }
