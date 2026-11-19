@@ -36,25 +36,36 @@
 
 .record-home-page { background-color: transparent; }
 
-/* ── THE COVER PLATE ─────────────────────────────────────────────────────────────
-   The opening is the painting now, with the record's own drawings laid on it as a plate's
-   legend. On a desk the fixed painting already runs behind the book, so the plate only
-   needs a light ink to hold the words; on a handset the book is solid paper, so the plate
-   carries the portrait painting itself rather than sitting as a grey band over nothing. */
-.record-cover-plate { background-color: rgb(var(--record-ink) / .18); }
-/* The veil only exists so the words at the foot of the plate can be read. The top of the
-   painting is left alone, because that is the part a reader should meet first. */
-.record-cover-plate-veil {
-  background-image: linear-gradient(
-    to top,
-    rgba(20, 18, 16, .95) 0%,
-    rgba(20, 18, 16, .80) 30%,
-    rgba(20, 18, 16, .42) 58%,
-    rgba(20, 18, 16, .10) 82%,
-    rgba(20, 18, 16, 0) 100%
-  );
+/* ── THE FRONT PAGE IS PAPER, AND THE PAINTING IS PRINTED ON IT ──────────────────
+   Brian, 19 November: "cant see the text now… the cover painting taking up first spot…
+   any way to bring back background so can see text." He was right, and it was structural
+   rather than a matter of colour: the home sheet had been made see-through so the painting
+   could run behind it, so every line of the record was ink laid straight onto a painting.
+   A sentence on a painting reads as a sentence out of focus — the exact fault this system
+   already corrected once for the rest of the record, on the one sheet still exempt from it.
+
+   So the sheet holds its own paper again, on every width, and the painting is reproduced
+   on it as a plate: the picture, then the masthead in ink under it, then the contents.
+   A broadsheet has done that for three hundred years because it is the order a person
+   reads in — and it is a bolder identity than a dark photograph with words laid over it,
+   which is what every other page on the internet does. */
+.climate-record .record-home-field .record-book { background-color: rgb(var(--record-paper)); }
+
+.record-cover-plate { background-color: transparent; }
+.record-cover-plate-picture {
+  height: clamp(230px, 40vh, 400px);
+  background-color: rgb(var(--record-earth));
+  background-image: var(--record-cover);
+  background-size: cover;
+  background-position: center 42%;
 }
-.record-cover-plate-title { font-size: clamp(38px, 5vw, 82px); }
+.record-cover-plate-title { font-size: clamp(34px, 4.6vw, 74px); }
+@media (min-width: 1024px) {
+  .record-cover-plate-picture {
+    height: clamp(320px, 54vh, 580px);
+    background-position: center 46%;
+  }
+}
 
 /* ── THE PLATES THE ENTRIES ARE SET ON ────────────────────────────────────────────
    A headline on a record is set at the size a headline is set at, and it is set in the
@@ -76,16 +87,8 @@
 @media (max-width: 639px) {
   .record-cover-plate-title { font-size: clamp(30px, 9vw, 44px); }
 }
-@media (max-width: 1023px) {
-  .record-cover-plate {
-    background-color: rgb(var(--record-earth));
-    background-image:
-      linear-gradient(180deg, rgb(var(--record-earth) / .12) 0%, rgb(var(--record-earth) / .34) 42%, rgb(var(--record-earth) / .78) 80%, rgb(var(--record-earth)) 100%),
-      var(--record-cover-mobile);
-    background-size: cover;
-    background-position: center 28%;
-  }
-}
+/* A phone gets the portrait painting in the same plate — var(--record-cover) already
+   switches to it below a desk's width, so nothing is repeated here. */
 
 /* ── THE ROOMS COME FIRST ON A PHONE ─────────────────────────────────────────────
    Brian, 19 November: "when go in with mobile can't get to all the coolasfuck until scroll
@@ -127,10 +130,8 @@
 }
 
 @media (min-width: 1024px) {
-  /* A single viewport painting continues through the opening and both margins.
-     Paper resumes at the photographs: reading never competes with the backdrop. */
-  .record-home-field .record-book,
-  .record-home-field .record-home-page { background-color: transparent; }
+  /* The painted bands sit on the sheet's own paper now: a dark plate inside the page
+     rather than a window cut through it to the painting behind. */
   .record-home-field .record-continuous-band {
     background-color: rgb(var(--record-ink) / .58);
   }

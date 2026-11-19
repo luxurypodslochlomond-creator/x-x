@@ -94,7 +94,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
           onClick={share}
           disabled={state === 'building'}
           aria-label="Pass this record on — the card and the address, ready to send"
-          className="text-[11px] font-bold uppercase tracking-[0.14em] text-cartoon-sun underline decoration-cartoon-sun/50 decoration-1 underline-offset-[5px] transition-colors hover:text-record-bone hover:decoration-record-bone active:text-record-bone disabled:opacity-70"
+          className="text-[11px] font-bold uppercase tracking-[0.14em] text-record-red underline decoration-record-red/50 decoration-1 underline-offset-[5px] transition-colors hover:text-record-ink hover:decoration-record-ink active:text-record-ink disabled:opacity-70"
         >
           {word}
         </button>

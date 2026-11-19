@@ -6,23 +6,26 @@ import { RECORD_LINK, RECORD_SHARE_TITLE } from './shareRecordCard';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkGroups, RoomMarkAction } from './RoomMarks';
 import { MarkSignal, MarkWall } from './RecordFootMarks';
 
-// ── THE PAINTING IS THE FRONT PAGE ──────────────────────────────────────────────
-// Brian, 19 November: "use images for maximum impact for right reasons… put crises solutions
-// actions signals drawings on the coolasfuck painting in right place."
+// ── PLATE, TITLE, CONTENTS ──────────────────────────────────────────────────────
+// Brian, 19 November: "cant see the text now… the cover painting taking up first spot…
+// any way to bring back background so can see text… the ideas of the entities being
+// plates/records and not boxes but not really happening here."
 //
-// The opening used to be a strip, a title band, a yellow summary box and then — further down —
-// four coloured rectangles with counts on them. That is a website: a header, a subheader, a
-// callout, a filter bar. It is also four boxes of flat colour sitting in front of a painting
-// that was made to be looked at.
+// Both halves of that are one fault. The painting had been made the page — the sheet
+// behind it was set see-through so the painting could run behind everything, which meant
+// the record's own words were ink laid straight onto a painting, and the plates below had
+// no sheet to be printed on. Nothing was wrong with the drawings or the plates; they were
+// standing on the wrong ground.
 //
-// So the painting is the front page now, and the record's own drawings are laid on it the way
-// a legend is printed on a plate: one rule, one row, six marks, each carrying its own name and
-// — for the four rooms — how much the record actually holds behind it. No boxes, no fills, no
-// colour blocks: the drawings are the only ink on the painting, and the painting is the only
-// colour. Pressing a room narrows the record and carries you down to it; pressing Signals or
-// The Wall opens those rooms.
+// So this opening is a printed front page: the painting is reproduced at the top as a
+// plate, and everything that is read sits under it in ink on the record's paper — the
+// masthead, the line about what the record is, then the legend of its own drawings with
+// the counts behind them. Plate, title, contents, in that order, which is the order a
+// broadsheet has used for three centuries because it is the order a person reads in.
 //
-// Nothing here invents a claim. A count is the record's own; a name is the door's own name.
+// The drawings stay the only pictures on the paper, and no box is drawn anywhere: one
+// hairline per door, the mark, the name, the count. A count is the record's own; a name is
+// the door's own name.
 
 const ROOMS = [
   { key: 'solution', label: 'Solutions', Mark: RoomMarkSolution },
@@ -42,30 +45,34 @@ export default function RecordCoverPlate({ copy, counts = {}, selected, onSelect
   return (
     <section
       aria-labelledby="record-home-title"
-      className="record-cover-plate record-home-opening relative isolate w-full overflow-hidden text-record-bone"
+      className="record-cover-plate record-home-opening w-full text-record-ink"
     >
-      {/* The painting is the ground. This veil only exists so the words at the foot of it can
-          be read; the top of the painting is left alone, because that is the part a reader
-          should meet first. */}
-      <div aria-hidden="true" className="record-cover-plate-veil pointer-events-none absolute inset-0" />
+      {/* The painting, printed on the page. Nothing is written over it, so nothing on it
+          has to fight a photograph to be read. */}
+      <div aria-hidden="true" className="record-cover-plate-picture" />
 
-      <div className="relative z-10 mx-auto flex min-h-[72vh] w-full max-w-[1440px] flex-col justify-end px-4 pt-24 lg:min-h-[80vh] lg:px-10 lg:pt-32">
-        <p className="record-header-type text-[10px] uppercase tracking-[0.2em] text-record-bone/65">
+      <div className="mx-auto w-full max-w-[1180px] px-4 pt-6 lg:px-10 lg:pt-8">
+        <p className="record-header-type border-b border-record-ink/25 pb-2 text-[10px] font-black uppercase tracking-[0.2em] text-record-red">
           {copy.service}
         </p>
+
         <h1
           id="record-home-title"
-          className="record-cover-plate-title mt-4 max-w-[18ch] font-display uppercase leading-[0.98] tracking-[-0.015em] text-record-bone"
+          className="record-cover-plate-title mt-4 max-w-[20ch] font-display uppercase leading-[0.96] tracking-[-0.015em] text-record-ink"
         >
-          {copy.title_a} <span className="text-cartoon-sun">{copy.title_b}</span> {copy.title_c}
+          {copy.title_a} <span className="text-record-red">{copy.title_b}</span> {copy.title_c}
         </h1>
-        <p className="mt-5 max-w-[56ch] text-[14.5px] leading-[1.7] text-record-bone/85 lg:text-[16.5px]">
+
+        <p
+          className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-record-ink/80 lg:text-[17px]"
+          style={{ fontFamily: 'var(--font-reading)' }}
+        >
           {copy.sub}
         </p>
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 lg:px-10">
-        <p className="mt-10 border-t border-record-bone/25 pt-2 text-[9.5px] font-black font-mono uppercase tracking-[0.18em] text-record-bone/55">
+      <div className="mx-auto w-full max-w-[1180px] px-4 lg:px-10">
+        <p className="mt-8 border-t border-record-ink/25 pt-2 text-[9.5px] font-black font-mono uppercase tracking-[0.18em] text-record-muted">
           Everything here is in one of these
         </p>
 
@@ -78,15 +85,15 @@ export default function RecordCoverPlate({ copy, counts = {}, selected, onSelect
                 type="button"
                 onClick={() => onSelect(key)}
                 aria-pressed={open}
-                className={`group flex min-h-[86px] flex-col justify-between gap-2 border-l border-record-bone/20 px-3 py-3 text-left transition-colors first:border-l-0 hover:bg-record-bone/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-bone lg:min-h-[104px] ${open ? 'bg-record-bone/15' : ''}`}
+                className={`group flex min-h-[86px] flex-col justify-between gap-2 border-l border-record-ink/20 px-3 py-3 text-left transition-colors first:border-l-0 hover:bg-record-ink/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:min-h-[104px] ${open ? 'bg-record-ink/10' : ''}`}
               >
                 <span className="flex w-full items-start justify-between gap-2">
-                  <Mark size={30} className="text-record-bone transition-transform duration-200 group-hover:-translate-y-0.5" />
-                  <span className="font-mono text-[15px] leading-none tabular-nums text-cartoon-sun">
+                  <Mark size={30} className="text-record-ink transition-transform duration-200 group-hover:-translate-y-0.5" />
+                  <span className="font-mono text-[15px] leading-none tabular-nums text-record-red">
                     {counts[key] ?? 0}
                   </span>
                 </span>
-                <span className="text-[9.5px] font-black uppercase leading-none tracking-[0.16em] text-record-bone">
+                <span className="text-[9.5px] font-black uppercase leading-none tracking-[0.16em] text-record-ink">
                   {label}
                 </span>
               </button>
@@ -96,19 +103,19 @@ export default function RecordCoverPlate({ copy, counts = {}, selected, onSelect
             <Link
               key={to}
               to={to}
-              className="group flex min-h-[86px] flex-col justify-between gap-2 border-l border-record-bone/20 px-3 py-3 text-record-bone/80 transition-colors hover:bg-record-bone/10 hover:text-record-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-bone lg:min-h-[104px]"
+              className="group flex min-h-[86px] flex-col justify-between gap-2 border-l border-record-ink/20 px-3 py-3 text-record-ink/80 transition-colors hover:bg-record-ink/5 hover:text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:min-h-[104px]"
             >
               <span className="flex w-full items-start justify-between gap-2">
                 <Mark size={30} className="transition-transform duration-200 group-hover:-translate-y-0.5" />
-                <span aria-hidden="true" className="font-mono text-[13px] leading-none text-record-bone/40">→</span>
+                <span aria-hidden="true" className="font-mono text-[13px] leading-none text-record-muted">→</span>
               </span>
               <span className="text-[9.5px] font-black uppercase leading-none tracking-[0.16em]">{label}</span>
             </Link>
           ))}
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-record-bone/20 py-2.5">
-          <span className="text-[9.5px] font-bold uppercase tracking-[0.16em] text-record-bone/55">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-record-ink/20 py-2.5">
+          <span className="text-[9.5px] font-bold uppercase tracking-[0.16em] text-record-muted">
             {copy.noads} · {copy.nofund}
           </span>
           <ShareCardButton
