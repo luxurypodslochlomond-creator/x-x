@@ -73,35 +73,35 @@ export default function RecordFooter() {
             job. They are ink now — the same ink as MADE IN SCOTLAND and the company under
             them, so the whole box reads as one printed plate rather than three colours
             arguing. The red stays on the mark at the top, where it belongs. */}
-        {/* ── THE NAMES ON THEIR OWN WHITE PLATE ────────────────────────────────────
+        {/* ── THE NAMES AND THE COMPANY ON ONE RED PLATE ───────────────────────────
             Brian, 19 November: "put Barbara as Gillian's middle name in footer, and put a
             rectangle background white, same style as the Laurie Anderson background above."
-            So the names are cut out of the yellow band on a plain white chip — the same
-            small rectangle the borrowed line sits on higher up the foot, in the same hand —
-            and her full name is printed, because a credit that shortens a person's name is
-            a credit that has decided which part of her counts. */}
-        <ul className="mt-4 inline-flex flex-col items-center gap-1.5 bg-white px-4 py-2 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:gap-5">
-          <li>Base 1</li>
-          <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
-          <li>Gillian Barbara Brown</li>
-          <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
-          <li>Brian Hughes</li>
-        </ul>
+            Then, on seeing it: "make box background red instead of white and put universal
+            frequency 51 cic on line below." So the names and the company that holds them
+            are one red rectangle cut out of the yellow band — the record's own red, with
+            the words set in the paper's cream, because a credit printed in a colour it
+            cannot be read in is not a credit — and her full name is printed, because a
+            credit that shortens a person's name is a credit that has decided which part of
+            her counts.
 
-        {/* ── THE COMPANY, IN THE SAME BOX AND THE SAME HAND ───────────────────────
-            Brian, 17 November: "put UNIVERSAL FREQUENCY 51 CIC in yellow box under me you
-            and Gillian please, and remove our email address, and make the link go email or
-            WhatsApp." So the name of the company sits under the three names it belongs to,
-            in the same mono caps, and it is the thing you press rather than an address
-            printed in the open: a reader taps the company and their own mail app opens,
-            already addressed. Nothing on this page now spells the address out for a
-            scraper to collect. */}
-        <a
-          href="mailto:family@uf51.love"
-          className="mt-5 inline-block border-b border-record-mark/60 pb-0.5 font-mono text-[10px] uppercase leading-tight tracking-[0.2em] text-record-mark transition-colors hover:border-record-red hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-red lg:text-[11px]"
-        >
-          Universal Frequency 51 CIC
-        </a>
+            The company is the thing you press rather than an address printed in the open:
+            a reader taps it and their own mail app opens, already addressed. Nothing on
+            this page spells the address out for a scraper to collect. */}
+        <div className="mt-4 inline-flex flex-col items-center gap-2.5 bg-record-red px-5 py-3">
+          <ul className="flex flex-col items-center gap-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-paper sm:flex-row sm:gap-5">
+            <li>Base 1</li>
+            <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-paper/40 sm:block" />
+            <li>Gillian Barbara Brown</li>
+            <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-paper/40 sm:block" />
+            <li>Brian Hughes</li>
+          </ul>
+          <a
+            href="mailto:family@uf51.love"
+            className="border-b border-record-paper/50 pb-0.5 font-mono text-[10px] uppercase leading-tight tracking-[0.2em] text-record-paper transition-colors hover:border-white hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-paper lg:text-[11px]"
+          >
+            Universal Frequency 51 CIC
+          </a>
+        </div>
       </div>
     </footer>
   );
