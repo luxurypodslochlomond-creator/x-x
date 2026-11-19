@@ -79,7 +79,7 @@ export default function ClimateCartoonSheet() {
       <div className="sheet-page">
         <div className="sheet-state">
           <h1 className="sheet-artist">No sheet at this address.</h1>
-          <p className="sheet-line">A drawing has a sheet here once a keeper has put it on the wall.</p>
+          <p className="sheet-line">A drawing has a sheet here once a custodian has put it on the wall.</p>
           <Link className="sheet-tool" to="/ClimateCartoons">The Wall</Link>
         </div>
       </div>

@@ -164,7 +164,7 @@ export async function buildInviteCard(person = {}, options = {}) {
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
-  ctx.fillText(fit(ctx, `${origin}${keeper ? '/ClimateKeeperRoom' : '/TogetherChangeClimate'}`, MAXW), PAD, FOOTER_TOP + 100);
+  ctx.fillText(fit(ctx, `${origin}${keeper ? '/CustodianRoom' : '/TogetherChangeClimate'}`, MAXW), PAD, FOOTER_TOP + 100);
 
   ctx.fillStyle = SIGNAL;
   ctx.fillRect(0, 74, 8, H - 74);

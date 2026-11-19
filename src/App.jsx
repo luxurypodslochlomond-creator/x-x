@@ -1,6 +1,20 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 const RedirectToSorted = () => <Navigate to="/Sorted" replace />;
+// ── THE ROOM'S OWN ADDRESS ────────────────────────────────────────────────────
+// recordWords.js settled the reader's words on 17 November: custodian and witness, with the
+// reasoning kept there. The one place the retired word still met a person was the address bar
+// — a custodian sitting in her own room with /ClimateKeeperRoom over her head — and the
+// invitation card, which prints the address at the foot of the picture.
+//
+// So the room lives at /CustodianRoom, and the old address keeps working, query and all,
+// because it is printed on cards already handed out and sits in bookmarks made before the
+// word changed. A link that stops working is a worse fault than a link with an old word in it.
+// Everything underneath — the page, the function, the field names — stays as it is: a
+// migration is a day of risk for a word no reader sees.
+const RoomAtItsRightAddress = () => (
+  <Navigate to={`/CustodianRoom${typeof window === 'undefined' ? '' : window.location.search}`} replace />
+);
 import SortedPageTransition from '@/components/shared/SortedPageTransition';
 import RoutePrefetcher from '@/components/shared/RoutePrefetcher';
 import AdminOnly from '@/components/shared/AdminOnly';
@@ -415,7 +429,8 @@ const AuthenticatedApp = () => {
       {/* The keeper's own room: where the founder says yes or not yet. Deliberately NOT
           behind the app's admin door — the record checks her against its own guest list on
           the server, so she holds the record's keys and none of the building's. */}
-      <Route path="/ClimateKeeperRoom" element={<ClimateLayout currentPage="ClimateKeeperRoom"><ClimateKeeperRoomPage /></ClimateLayout>} />
+      <Route path="/CustodianRoom" element={<ClimateLayout currentPage="ClimateKeeperRoom"><ClimateKeeperRoomPage /></ClimateLayout>} />
+      <Route path="/ClimateKeeperRoom" element={<RoomAtItsRightAddress />} />
       <Route path="/ClimateFellows" element={<ClimateLayout currentPage="ClimateFellows"><ClimateFellowsPage /></ClimateLayout>} />
       {/* The roll: the people who check this record, in their own words. Its door sits on
           the contents sheet beside "Become a checker", and at the foot of the fellows page,
@@ -470,11 +485,11 @@ const AuthenticatedApp = () => {
           with someone else's words on it. A pair of eyes was being handed the keys'
           furniture to stand in. So the queue has its own address again: the record's
           masthead, the record's foot, and nothing on it but the work they agreed to do. */}
-      <Route path="/ClimateChecking" element={<Navigate to="/ClimateKeeperRoom?tab=check" replace />} />
+      <Route path="/ClimateChecking" element={<Navigate to="/CustodianRoom?tab=check" replace />} />
       {/* The guest list is the record's own, so it opens to the record's own keys. Behind the
           app's admin door, the second keeper who has to agree to every access change could
           never reach the page that asks them — and a two-key rule nobody can turn is a lock. */}
-      <Route path="/AdminClimateCheckers" element={<Navigate to="/ClimateKeeperRoom?tab=people" replace />} />
+      <Route path="/AdminClimateCheckers" element={<Navigate to="/CustodianRoom?tab=people" replace />} />
       {/* The desk is the record's own desk, so it opens to the record's own keys. Behind the
           building's admin door, a keeper invited to hold them was stopped on the one page built
           for her and told "Admins only". KeeperKey asks the record instead. */}
@@ -482,7 +497,7 @@ const AuthenticatedApp = () => {
           counts and sourcing — so "desk" matched nothing, the room fell back to the first
           door, and the counts page could not be reached from its own address at all. The
           desk is the counts room; it now lands on it. */}
-      <Route path="/AdminClimateDesk" element={<Navigate to="/ClimateKeeperRoom?tab=counts" replace />} />
+      <Route path="/AdminClimateDesk" element={<Navigate to="/CustodianRoom?tab=counts" replace />} />
       <Route path="/AdminSecureVault" element={<LayoutWrapper currentPageName="AdminSecureVault"><AdminOnly><AdminSecureVaultPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminSponsorRoute" element={<LayoutWrapper currentPageName="AdminSponsorRoute"><AdminOnly><AdminSponsorRoutePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/Uf51Road" element={<LayoutWrapper currentPageName="Uf51Road"><AdminOnly><Uf51RoadPage /></AdminOnly></LayoutWrapper>} />

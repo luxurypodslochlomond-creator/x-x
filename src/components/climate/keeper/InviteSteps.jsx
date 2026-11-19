@@ -45,7 +45,7 @@ const STEPS = [
   {
     n: '2',
     title: 'Check a source',
-    line: `Open ${RECORD}/ClimateKeeperRoom. Follow an entry to its source and leave a signed note: it holds up, it does not, or you cannot tell. All three help.`, 
+    line: `Open ${RECORD}/CustodianRoom. Follow an entry to its source and leave a signed note: it holds up, it does not, or you cannot tell. All three help.`, 
   },
   {
     n: '3',
