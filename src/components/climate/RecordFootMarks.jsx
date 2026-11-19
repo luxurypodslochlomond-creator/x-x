@@ -72,9 +72,13 @@ export function MarkRecord({ size = 26, className = '' }) {
 export function MarkPlan({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M9.6 5.4h15.2l6.2 6.2v23H9.6z" />
-      <path d="M24.4 5.6v6.4h6.4" />
-      <path d="M14.6 17.4h9.4M14.6 22.8h9.4M14.6 28.2h5.2" />
+      {/* What is live, what is planned and what is still missing, drawn as what it is: a
+          stair. Two steps are built and stand in ink; the third is the record's red and is
+          the one nobody has laid yet. The hairline page with its corner turned said "a
+          document", which is the medium and not the claim. */}
+      <rect x="4.2" y="27.2" width="11.4" height="8.6" fill="currentColor" stroke="none" />
+      <rect x="15.8" y="18.4" width="11.4" height="8.6" fill="currentColor" stroke="none" />
+      <rect x="27.4" y="9.6" width="11.4" height="8.6" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -150,10 +154,11 @@ export function MarkCorrection({ size = 26, className = '' }) {
 export function MarkCheckers({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="13" cy="22.4" r="6.2" />
-      <circle cx="27" cy="22.4" r="6.2" />
-      <path d="M19.2 22.4h1.6" />
-      <path d="M6.8 22.4H4.4M33.2 22.4h2.4" />
+      {/* A pair of eyes as two solid almonds, the second one in the record's red, because a
+          witness is somebody who is looking. Two outlined circles with four ticks around
+          them was a diagram of a pair of glasses at twenty-four pixels. */}
+      <path d="M3.6 20c2.9-5 5.7-7.5 8.5-7.5s5.6 2.5 8.5 7.5c-2.9 5-5.7 7.5-8.5 7.5S6.5 25 3.6 20Z" fill="currentColor" stroke="none" />
+      <path d="M19.4 20c2.9-5 5.7-7.5 8.5-7.5s5.6 2.5 8.5 7.5c-2.9 5-5.7 7.5-8.5 7.5s-5.6-2.5-8.5-7.5Z" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -179,10 +184,12 @@ export function MarkRoll({ size = 26, className = '' }) {
 export function MarkHandover({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="8.2" cy="30.2" r="3.2" fill="currentColor" stroke="none" />
-      <circle cx="31.8" cy="10.4" r="3.2" fill="currentColor" stroke="none" />
-      <path d="M10.6 27.4C15.4 17 23.6 13.2 28.4 12.6" />
-      <path d="M24.2 8.8l4.6 3.8-3.6 4.4" />
+      {/* What changes hands: the record as one mass, and the record's red going up out of it
+          to somebody else. Two dots and two hairlines was the arrow and nothing to carry;
+          a solid block with a heavy red arrow off it is the whole sentence at a glance. */}
+      <rect x="4.4" y="25" width="18.4" height="11" fill="currentColor" stroke="none" />
+      <path d="M21.8 23.6 30.8 14.6" className="text-record-mark" fill="none" strokeWidth="4.4" strokeLinecap="butt" />
+      <path d="M22.4 14.2h9.6v9.6" className="text-record-mark" fill="none" strokeWidth="4.4" strokeLinecap="butt" strokeLinejoin="miter" />
     </svg>
   );
 }
@@ -575,9 +582,29 @@ export function MarkSupport({ size = 26, className = '' }) {
 export function MarkCovenant({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M11 19.4h18v14.2H11Z" />
-      <path d="M15.2 19.4v-5.2a5 5 0 0 1 9.4-2.4" />
-      <circle cx="20" cy="26.4" r="1.6" fill="currentColor" stroke="none" />
+      {/* ── THE SIX DOORS IN THE EXPLORE SHEET, REDRAWN IN THE PRINTED HAND ─────────
+          Brian, 19 November, standing in the cartoon room: "when go into explore the record
+          why do icons in there not feel like our new coolasfuck bro".
+
+          He was looking at the one place on the record where the old hand still stands. The
+          masthead was redrawn in solid masses over three days — the register, the dispatch,
+          the numeral on its base, the dome, the bricks, the four panes — and the sheet was
+          not, because the sheet's six doors are the ones that never stood on a rail. So a
+          reader who pressed Explore got the record's front page in one hand and a page of
+          hairlines in the other, and the sheet read as a different, older book.
+
+          These six are now drawn the way everything else on the record is drawn: solid
+          masses, one ink, exactly one element in the record's red, nothing thinner than a
+          stroke. Nothing about what any of them means has changed — a covenant is still a
+          lock, a witness is still a pair of eyes — only the hand it is drawn in.
+
+          A lock, and it is open. An outlined padlock was four hairlines at twenty-four
+          pixels and read as a keyhole somebody else had drawn; a solid body with the
+          record's red shackle lifted off it reads at any size, and the openness is the
+          point — the covenant is what this record is shared under, and a closed lock would
+          say "held", which is the opposite of it. */}
+      <rect x="9.4" y="19.4" width="21.2" height="16.2" rx="2" fill="currentColor" stroke="none" />
+      <path d="M14.8 19.4v-6.2a5.6 5.6 0 0 1 10.4-3.2" className="text-record-mark" fill="none" stroke="currentColor" strokeWidth="4.2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -594,10 +621,12 @@ export function MarkCovenant({ size = 26, className = '' }) {
 export function MarkTerms({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M9.6 5.4h14.6L30.4 11.6V34.6H9.6Z" />
-      <path d="M23.9 5.6v6.2h6.3" />
-      <path d="M13.4 15.6h13M13.4 20.2h13M13.4 24.6h8.2" opacity=".55" />
-      <path d="M13 31.6c2.6-2.6 4.6-1.4 5.7-.2 1 1.1 2.4.9 3.9-.7 1.2-1.3 2.4-1.4 3.6-.4" className="text-record-mark" strokeWidth="1.9" />
+      {/* The terms: the sheet itself as a mass, its corner clipped the way a document's is,
+          and the signature under it in the record's red — the record is offered on terms a
+          person agreed to, so the line at the foot is the part that matters. The outlined
+          page with three hairlines of clauses read as a form at twenty-four pixels. */}
+      <path d="M9 4.4h14.4l6.8 6.8v16.6H9Z" fill="currentColor" stroke="none" />
+      <path d="M6.2 33c3-2.6 5-1 6.4.4 1.4 1.4 3 .4 4.6-1.2 1.4-1.4 2.8-1.2 4 .2 1.2 1.4 2.6 1 4-.6 1-1.2 2-1.4 3-.6" className="text-record-mark" fill="none" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -608,8 +637,14 @@ export function MarkTerms({ size = 26, className = '' }) {
 export function MarkPrivacy({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M8.6 11.2h22.8M8.6 16.9h14.2M12.4 30.4h19M8.6 35h10" opacity=".55" />
-      <rect x="8.4" y="21.4" width="23.2" height="4.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      {/* What is not printed: lines of print as masses, with the third one replaced by the
+          record's red — a redaction, which is the whole of what this door says. Same idea as
+          the hairline version, drawn so that it survives being glanced at: four bars, one of
+          them red, one of them short. */}
+      <rect x="6.6" y="6.4" width="26.8" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="6.6" y="15" width="17.8" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="6.6" y="23.6" width="26.8" height="5.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="6.6" y="32.2" width="12.4" height="4.6" fill="currentColor" stroke="none" />
     </svg>
   );
 }
