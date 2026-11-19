@@ -12,10 +12,20 @@ export default function PressOpening() {
           <p className="press-eyebrow">The record · the cartoon room</p>
           {/* "The Big Picture" was a phrase institutes, books and foundations all use — a
               borrowed word on a record whose whole argument is that nothing is borrowed.
-              "The Real Picture" is the room's own, and it is the truer thing to say: a
-              drawing is not a summary of the climate, it is what somebody actually saw. */}
-          <h1 id="press-room-title" className="press-title">The Real Picture</h1>
-          <p className="press-standfirst">Cartoons for a changing world.</p>
+              "The Real Picture" replaced it, and it was still the wrong way round: a claim
+              laid over the drawings by whoever keeps the room, in the one register a
+              political cartoonist is trained to distrust. The sentence above the picture is
+              exactly what the picture is arguing with.
+
+              Brian, 19 November: "should be called the wall." It should. The wall is the
+              trade's own word — the board in every newsroom, the hang in every salon, the
+              thing a drawing goes up on — and it is the word this room already uses in
+              every other sentence it says: the wall opens, the wall has room on it, tap a
+              drawing on the wall. The masthead was the only thing on the page disagreeing
+              with the page. The claim survives as the standfirst, where it belongs: a claim
+              made inside the room rather than a sign hung over it. */}
+          <h1 id="press-room-title" className="press-title">The Wall</h1>
+          <p className="press-standfirst">Cartoons for a changing world. The real picture, drawn by hand.</p>
           <CartoonSignal />
         </header>
         <p className="press-scope">

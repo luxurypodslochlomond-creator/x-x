@@ -204,7 +204,7 @@ export default function CartoonMaker() {
     ctx.fillStyle = '#b3261e';
     ctx.font = `700 13px ${DISPLAY}`;
     ctx.textAlign = 'right';
-    ctx.fillText('THE REAL PICTURE · x = x', W - M, fy + 12);
+    ctx.fillText('THE WALL · x = x', W - M, fy + 12);
     ctx.textAlign = 'left';
 
     return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));

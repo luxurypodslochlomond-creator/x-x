@@ -40,7 +40,7 @@ const DESCRIPTION = 'A public record of climate emergencies and the positive act
 // now arrives as this room: the real CAIB cover, the dates, and the one ask. The cover is a
 // stored public picture rather than a drawing made at request time, so it opens the same way
 // in Lagos, London or Los Angeles, on a slow phone, with no waiting on a server.
-const CARTOON_TITLE = 'The Real Picture — the record’s cartoon room';
+const CARTOON_TITLE = 'The Wall — the record’s cartoon room';
 const CARTOON_DESCRIPTION = 'Drawings gathered for the 8th CartoonAFRICA International Biennial, and Janine Selendy’s workshop on Sunday 29 November. The wall is open: send a drawing and it goes up with your name on it.';
 
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.

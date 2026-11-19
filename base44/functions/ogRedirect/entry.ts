@@ -176,7 +176,7 @@ const PAGE_META = {
   // dimensions, so every unfurler gets a picture it can actually open — and no function has
   // to draw anything while a message is being read in Lagos, London or Los Angeles.
   ClimateCartoons: {
-    title: 'The Real Picture — the record’s cartoon room',
+    title: 'The Wall — the record’s cartoon room',
     description: 'Drawings gathered for the 8th CartoonAFRICA International Biennial, and Janine Selendy’s workshop on Sunday 29 November. The wall is open: send a drawing and it goes up with your name on it.',
     image: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/04b7522a8_caib-2026-catalogue-cover.jpeg',
     imageWidth: 682,
