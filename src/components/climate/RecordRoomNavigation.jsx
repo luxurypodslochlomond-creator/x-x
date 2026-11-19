@@ -1,17 +1,23 @@
 import React from 'react';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
 
-// Four rooms beneath Jane's quote, in the reader's requested order.
+// Four rooms beneath Jane's words, each drawn by one line behaving differently.
+//
+// The lines under each name carry the difference between the rooms, because it is the
+// question Brian asked and it is the one a reader asks too: a solution is a method that
+// works — usually with a source behind it — and an action is a thing you can turn up to or
+// do yourself. One is the idea, the other is the join-in. Saying it here means nobody has
+// to guess which door they want.
 const ROOMS = [
   { key: 'climate_crisis', label: 'Crises', line: 'What is happening, and where.', Mark: RoomMarkCrisis },
-  { key: 'solution', label: 'Solutions', line: 'What works, and how.', Mark: RoomMarkSolution },
-  { key: 'actions', label: 'Actions', line: 'Things to do and join.', Mark: RoomMarkAction },
-  { key: 'groups', label: 'Groups', line: 'People working together.', Mark: RoomMarkGroups },
+  { key: 'solution', label: 'Solutions', line: 'What works — the method, and its source.', Mark: RoomMarkSolution },
+  { key: 'actions', label: 'Actions', line: 'What you can join, or do yourself.', Mark: RoomMarkAction },
+  { key: 'groups', label: 'Groups', line: 'People working on the same thing.', Mark: RoomMarkGroups },
 ];
 
 export default function RecordRoomNavigation({ counts = {}, selected, onSelect }) {
   return (
-    <nav aria-label="Explore the record" className="record-room-nav mx-auto grid w-full max-w-[820px] grid-cols-2 border-b border-record-ink/25 bg-record-paper lg:grid-cols-4">
+    <nav aria-label="Explore the record" className="record-room-nav grid w-full grid-cols-2 lg:grid-cols-4">
       {ROOMS.map(({ key, label, line, Mark }) => (
         <button
           key={key}
@@ -20,9 +26,9 @@ export default function RecordRoomNavigation({ counts = {}, selected, onSelect }
           aria-pressed={selected === key}
           aria-controls="record-entries"
           data-room={key}
-          className="record-room-link min-w-0 px-3 py-5 text-record-ink lg:px-4"
+          className="record-room-link min-w-0"
         >
-          <span className="record-room-drawing" aria-hidden="true"><Mark size={36} /></span>
+          <span className="record-room-drawing" aria-hidden="true"><Mark size={44} /></span>
           <span className="record-room-label">
             {label}
             <span className="record-room-count">{counts[key] ?? 0}</span>

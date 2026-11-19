@@ -437,17 +437,28 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* The name meets the top navigation; Jane's words and the four rooms follow. */}
-      <div className="record-home-flow">
-      <RecordCoverPlate copy={t} />
+      {/* ── THE OPENING, IN THE ORDER BRIAN ASKED FOR ──────────────────────────────
+          Brian, 19 November: "dr Jane quote need to go back up under nav then coolasfuck
+          images like mangrove but have to be full width like top nav bro and then
+          underneath new coolasfuck taps for crises and solutions etc."
 
-      <div className="record-home-voice-band">
+          So: her words directly under the navigation, ruled in the record's red; then the
+          photographs edge to edge of the sheet, at the same full width the masthead takes;
+          then the record names itself and holds up its four rooms as four taps. Nothing
+          was added and nothing was taken away — the same parts, in the order a person
+          actually reads them. ── */}
+      <div className="record-home-flow">
+      <div className="record-home-voice-band border-t-[3px] border-record-mark">
         <RecordPaintedBand strength={0.75} soft>
           <RecordHomeVoice />
         </RecordPaintedBand>
       </div>
 
-      <div className="record-home-doors px-4 lg:px-10">
+      <ClimateImageCrawl />
+
+      <RecordCoverPlate copy={t} />
+
+      <div className="record-home-doors px-4 pt-6 lg:px-10">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -458,11 +469,6 @@ export default function TogetherChangeClimate() {
           }}
         />
       </div>
-
-      {/* ── THE TOP CRAWL — Janine's credited photographs, directly under the masthead.
-             Her ask was for the pictures to sit high on the page, and they still do: they
-             come immediately after the record names itself, so the eye meets them first. ── */}
-      <ClimateImageCrawl />
 
       <ClimateImpactBar />
 

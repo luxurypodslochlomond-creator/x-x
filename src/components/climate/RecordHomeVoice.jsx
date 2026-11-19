@@ -3,7 +3,7 @@ import PeaceBell from '@/components/climate/PeaceBell';
 
 export default function RecordHomeVoice() {
   return (
-    <section aria-label="A voice on the record" className="record-home-voice relative z-10 border-t border-record-bone/25 px-5 py-7 text-center record-header-type text-record-bone lg:px-10 lg:py-8">
+    <section aria-label="A voice on the record" className="record-home-voice relative z-10 px-5 py-7 text-center record-header-type text-record-bone lg:px-10 lg:py-8">
       <div className="mx-auto flex max-w-[760px] flex-col items-center gap-4">
         <p className="record-header-type text-xs uppercase text-record-bone/75">A voice on the record</p>
         <PeaceBell size={40} color="rgb(var(--cartoon-sun))" href="https://webtv.un.org/en/asset/k13/k13z7vjtvs" />
