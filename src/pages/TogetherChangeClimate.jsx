@@ -195,7 +195,7 @@ export default function TogetherChangeClimate() {
   // group door already open, rather than being handed a second form that drifts out of step
   // with the first — which is exactly what had happened.
   const [submitType, setSubmitType] = useState(null);
-  const [showIndex, setShowIndex] = useState(false);
+  const [showIndex, setShowIndex] = useState(() => window.matchMedia('(min-width: 1024px)').matches);
   const [submitCategory, setSubmitCategory] = useState(null);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const contentRef = useRef(null);
@@ -437,16 +437,7 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── THE OPENING, IN THE ORDER BRIAN ASKED FOR ──────────────────────────────
-          Brian, 19 November: "dr Jane quote need to go back up under nav then coolasfuck
-          images like mangrove but have to be full width like top nav bro and then
-          underneath new coolasfuck taps for crises and solutions etc."
-
-          So: her words directly under the navigation, ruled in the record's red; then the
-          photographs edge to edge of the sheet, at the same full width the masthead takes;
-          then the record names itself and holds up its four rooms as four taps. Nothing
-          was added and nothing was taken away — the same parts, in the order a person
-          actually reads them. ── */}
+      {/* Jane's words, the record's purpose, compact rooms, then the subject drawings. */}
       <div className="record-home-flow">
       <div className="record-home-voice-band border-t-[3px] border-record-mark">
         <RecordPaintedBand strength={0.75} soft>
@@ -454,11 +445,9 @@ export default function TogetherChangeClimate() {
         </RecordPaintedBand>
       </div>
 
-      <ClimateImageCrawl />
-
       <RecordCoverPlate copy={t} />
 
-      <div className="record-home-doors px-4 pt-6 lg:px-10">
+      <div className="record-home-doors px-4 pt-6 lg:px-10 lg:pt-2">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -469,6 +458,27 @@ export default function TogetherChangeClimate() {
           }}
         />
       </div>
+
+      <div className="record-home-subjects px-4 pb-5 pt-4 lg:px-10">
+        <SubjectRail
+          current={activeSubject}
+          totalEntries={items.length + actions.length}
+          allLabel="Browse by subject"
+          expanded={showIndex}
+          onOpenIndex={() => setShowIndex(open => !open)}
+          onOpenPicker={() => setShowIndex(true)}
+        />
+        <SubjectPickerSheet
+          open={showIndex}
+          onClose={() => setShowIndex(false)}
+          subjects={[...filledSubjects, ...emptySubjects]}
+          totalEntries={items.length + actions.length}
+          selected={selectedCategory}
+          onSelect={selectTheme}
+        />
+      </div>
+
+      <ClimateImageCrawl />
 
       <ClimateImpactBar />
 
@@ -553,23 +563,6 @@ export default function TogetherChangeClimate() {
             something — solution, crisis, action, group — each wearing its room's drawing and
             each opening the form on that room. The paste line stays under them, because it is
             about the same job: putting something on the record. ── */}
-        <SubjectRail
-          current={activeSubject}
-          totalEntries={items.length + actions.length}
-          allLabel="Browse by subject"
-          expanded={showIndex}
-          onOpenIndex={() => setShowIndex(open => !open)}
-          onOpenPicker={() => setShowIndex(true)}
-        />
-        <SubjectPickerSheet
-          open={showIndex}
-          onClose={() => setShowIndex(false)}
-          subjects={[...filledSubjects, ...emptySubjects]}
-          totalEntries={items.length + actions.length}
-          selected={selectedCategory}
-          onSelect={selectTheme}
-        />
-
         {/* ── ONE QUIET LINE, NOT A SECOND SET OF FOUR BOXES ───────────────────────────
             Brian, 19 November: "why add solution etc and solutions climate crises etc feel
             disjointed bro." He was right, and the fault was that the page carried TWO sets of

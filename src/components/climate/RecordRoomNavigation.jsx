@@ -1,17 +1,11 @@
 import React from 'react';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
 
-// Four rooms beneath Jane's words, each drawn by one line behaving differently.
-//
-// The lines under each name carry the difference between the rooms, because it is the
-// question Brian asked and it is the one a reader asks too: a solution is a method that
-// works — usually with a source behind it — and an action is a thing you can turn up to or
-// do yourself. One is the idea, the other is the join-in. Saying it here means nobody has
-// to guess which door they want.
+// The drawing accompanies a plain label; the words explain what each room holds.
 const ROOMS = [
-  { key: 'climate_crisis', label: 'Crises', line: 'What is happening, and where.', Mark: RoomMarkCrisis },
-  { key: 'solution', label: 'Solutions', line: 'What works — the method, and its source.', Mark: RoomMarkSolution },
-  { key: 'actions', label: 'Actions', line: 'What you can join, or do yourself.', Mark: RoomMarkAction },
+  { key: 'climate_crisis', label: 'Crises', line: 'What is at risk, and where.', Mark: RoomMarkCrisis },
+  { key: 'solution', label: 'Solutions', line: 'Methods and the evidence behind them.', Mark: RoomMarkSolution },
+  { key: 'actions', label: 'Actions', line: 'Something you can join or do.', Mark: RoomMarkAction },
   { key: 'groups', label: 'Groups', line: 'People working on the same thing.', Mark: RoomMarkGroups },
 ];
 
