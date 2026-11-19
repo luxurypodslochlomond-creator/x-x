@@ -5,18 +5,37 @@ import RecordNavDoor from '@/components/climate/RecordNavDoor';
 import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import '@/components/climate/record-navigator.css';
 
-// ── TWO ROWS ON A DESK ──────────────────────────────────────────────────────────
-// Below 1024px this draws nothing: the phone keeps its one row of six, unchanged. At desk
-// width it draws two rows of six equal cells, so the columns line up down the masthead —
-// the five ways in with Explore last, then how the record is kept and what else is in it.
+// ── BASE 1 DEAD IN THE MIDDLE, AND TWO ROWS OF ONE SIZE ────────────────────────
+// Brian, 19 November: "can make BASE 1 in middle of nav both desktop and mobile please bro
+// and bro why second row of navigation smaller on desktop? think can make same size bro for
+// right reasons."
 //
-// The marks are smaller than the single row's forty because there are two of them now and
-// a header that eats a desk's glass is the same fault as one that eats a phone's. Row one
-// is the row a reader arrives with, so it is the bigger of the two.
+// Both halves were the same fault: the desk had drifted from the phone.
+//
+// THE MIDDLE. Five ways in on the top row put BASE 1 at the exact centre of a handset, and
+// it was the one place on the record where the machine stood where a machine should stand —
+// the pivot of the row, with doors either side of it. On a desk the same row carried six
+// cells, because Explore was sitting at the end of it, so BASE 1 fell a hundred pixels left
+// of the middle and read as the third of six rather than as the centre of anything.
+//
+// Six cells cannot have a middle. So Explore moves to the end of the second row, which is
+// where a phone has always kept it and where it belongs: the index of everything else comes
+// after the record's own account of itself, never before it. The top row is five again, and
+// five puts BASE 1 at 50% of the masthead — the same door in the same place on both screens,
+// which is the whole rule this nav is built on.
+//
+// THE SIZE. The second row was set at twenty-six against the top row's thirty-four, on the
+// reasoning that the row a reader arrives with should be the loud one. It read instead as a
+// hierarchy that does not exist: x = x, the method, the founder, the music, the roll and the
+// seals are not lesser doors. They are the record's own account of itself, which is the thing
+// a sceptical reader comes looking for. Both rows are thirty-four now, and what separates
+// them is a rule and a hair of space, which was always enough.
 const CELL = 'flex-1 basis-0 min-w-0 !min-h-0 !py-1';
+const SIZE = 34;
 
 export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
   const { pathname } = useLocation();
+  const lastRow = DESK_NAV_ROWS.length - 1;
 
   return (
     <nav aria-label="The record's doors" className="rec-mast-doors hidden w-full flex-col lg:flex">
@@ -24,7 +43,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
         return (
           <div
             key={rowIndex}
-            className={`flex w-full items-stretch gap-x-1 ${rowIndex === 0 ? '' : 'rec-mast-row-2 mt-0.5 border-t border-record-ink/15 pt-1'}`}
+            className={`flex w-full items-stretch gap-x-1 ${rowIndex === 0 ? '' : 'mt-0.5 border-t border-record-ink/15 pt-1'}`}
           >
             {row.map(({ label, to, what, plainCase }) => (
               <RecordNavDoor
@@ -33,21 +52,21 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
                 label={label}
                 plainCase={plainCase}
                 what={what}
-                size={rowIndex === 0 ? 34 : 26}
+                size={SIZE}
                 active={pathname === to}
                 className={CELL}
               />
             ))}
 
-            {/* The index of everything else, at the end of the top row — where a reader
-                looks once the six ways in have not answered them. */}
-            {rowIndex === 0 && (
+            {/* The index of everything else, at the end of the last row — the same place
+                the phone gives it, and after the signature rather than before it. */}
+            {rowIndex === lastRow && (
               <RecordNavDoor
                 to="/ClimateGuide"
                 label="Explore"
                 what="The rest of the record: the brief, the covenant, the terms and every other door."
                 mark={MarkExplore}
-                size={34}
+                size={SIZE}
                 asButton
                 onClick={onOpenContents}
                 expanded={contentsOpen}

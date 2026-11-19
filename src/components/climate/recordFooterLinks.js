@@ -139,10 +139,16 @@ export const PHONE_NAV_ROWS = [
 // inside a panel that dimmed the page to open. A reader should not have to open an index to
 // find out who is accountable for what they are reading.
 //
-// So the desk carries two rows. The first is the five ways in, with Explore last; the second
-// is how the record is kept and what else is in it. Both rows are six cells, so the columns
-// line up down the masthead. The sheet keeps what a reader genuinely goes looking for — the
-// brief, the covenant, the terms — which is the one job a sheet should have.
+// So the desk carries two rows. The first is the five ways in; the second is how the record
+// is kept and what else is in it, with Explore at its end.
+//
+// Explore used to close the top row, which made it six cells — and six cells have no middle,
+// so BASE 1 sat a hundred pixels left of the centre instead of on it. Brian, 19 November:
+// "can make BASE 1 in middle of nav both desktop and mobile." Five doors and a middle is not
+// a preference, it is arithmetic, and the phone had it right all along: Explore belongs after
+// the record's own account of itself, not before it. The sheet keeps what a reader genuinely
+// goes looking for — the brief, the covenant, the terms — which is the one job a sheet should
+// have.
 export const DESK_SECOND_ROW = [
   // Same door, same name as the room: see RAIL_SECOND_NAV above.
   { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
