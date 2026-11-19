@@ -15,7 +15,7 @@ export default function FounderWork() {
         <h2 id="founder-work" className="font-display text-2xl font-bold leading-[1.05] text-record-signal lg:text-4xl" style={{ letterSpacing: '-0.02em' }}>The Record of the Work</h2>
       </div>
       {ACHIEVEMENTS.map(({ icon: Icon, title, body }) => (
-        <article key={title} className="record-founder-plate border-t-4 border-record-red bg-record-paper/85 p-5 lg:p-8">
+        <article key={title} className="record-founder-plate border-t-4 border-record-red p-5 lg:p-8">
           <div className="mb-5 flex items-start gap-3">
             <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-record-red" />
             <h3 className="font-display text-lg font-bold leading-[1.15] text-record-ink lg:text-xl" style={{ letterSpacing: '-0.01em' }}>{title}</h3>

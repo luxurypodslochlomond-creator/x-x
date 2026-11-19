@@ -1,0 +1,66 @@
+/* ── HER PAGE STANDS IN THE PAINTING ─────────────────────────────────────────────
+   Brian, 19 November: "there's grey background colours ... can't see coolasfuck
+   painting." He was right, and the fault was one class: every plate on this page was
+   warm paper at seventy-five per cent laid over ink, which is neither paper nor
+   painting — a pale grey slab with the one picture he commissioned for the door shut
+   out behind it. This page was the page he called coolasfuck, and the reason was
+   simply that nothing painted over its ground.
+
+   So the plates are the record's photographic plate again: the painting, held back by
+   ink rather than replaced by paper, with the signal rule across the top edge and her
+   name lit in the record's yellow. The veil is at the strength the record's own bands
+   already use — strongest where the words are, so a paragraph never fights a picture —
+   which is why nothing is lost in legibility. The room is visible; the words win. */
+.record-founder-page .record-founder-plate {
+  background-color: rgb(var(--record-earth));
+  background-image:
+    linear-gradient(
+      rgb(var(--record-earth) / .66) 0%,
+      rgb(var(--record-earth) / .8) 44%,
+      rgb(var(--record-earth) / .92) 82%,
+      rgb(var(--record-earth)) 100%
+    ),
+    var(--record-cover);
+  background-size: cover;
+  background-position: center 32%;
+  border-top-color: rgb(var(--record-signal));
+  backdrop-filter: none;
+}
+
+/* Every word on a plate is light on the painting. */
+.record-founder-page .record-founder-plate :is(h1, h2, h3, p, blockquote, span, a, li) {
+  color: rgb(var(--record-paper));
+}
+.record-founder-page .record-founder-plate :is(.text-record-muted) { color: rgb(var(--record-paper) / .84); }
+.record-founder-page .record-founder-plate :is(.text-record-red) { color: rgb(var(--record-signal)); }
+.record-founder-page .record-founder-plate .border-record-ink\/20 { border-color: rgb(var(--record-paper) / .3); }
+
+/* The two paper slips she is signed on stay paper: a card on a painting, not a hole in it. */
+.record-founder-page .record-founder-plate :is(.bg-record-bone, .bg-record-bone *) { color: rgb(var(--record-ink)); }
+.record-founder-page .record-founder-plate :is(.bg-record-bone) { border-color: rgb(var(--record-ink) / .4); }
+
+/* ── HER NAME, IN THE LETTERING HE POINTED AT ────────────────────────────────────
+   The line he stopped on was "— JANINE M. H. SELENDY, 1956": upper case, tracked, in the
+   record's yellow. Her name was set in sentence case and ink, so the biggest name on the
+   page was the quietest thing on it. It is now the same voice as that line, at the size of
+   a name. */
+.record-founder-page #founder-name {
+  color: rgb(var(--record-signal));
+  text-transform: uppercase;
+  letter-spacing: .04em !important;
+  text-wrap: balance;
+}
+@media (max-width: 639px) {
+  .record-founder-page #founder-name {
+    font-size: clamp(1.9rem, 8.4vw, 2.6rem);
+    line-height: 1.04;
+  }
+}
+
+/* The plates' own headings take the same tracked signal voice, so the page reads as one
+   poster rather than a card index of paragraphs. */
+.record-founder-page .record-founder-plate :is(h2, h3) {
+  color: rgb(var(--record-signal));
+  text-transform: uppercase;
+  letter-spacing: .05em !important;
+}

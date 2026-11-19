@@ -3,7 +3,7 @@ import { Globe } from 'lucide-react';
 
 export default function FounderSignature() {
   return (
-    <section aria-labelledby="founder-signature" className="record-founder-plate mx-auto my-10 max-w-4xl border-t-4 border-record-red bg-record-paper/85 p-5 lg:my-16 lg:p-8">
+    <section aria-labelledby="founder-signature" className="record-founder-plate mx-auto my-10 max-w-4xl border-t-4 border-record-red p-5 lg:my-16 lg:p-8">
       <div className="mb-5 flex items-start gap-3">
         <Globe aria-hidden="true" className="h-5 w-5 shrink-0 text-record-red" />
         <h2 id="founder-signature" className="font-display text-xl font-bold leading-[1.1] text-record-ink lg:text-2xl" style={{ letterSpacing: '-0.01em' }}>The Signature</h2>
