@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Share2, Check } from 'lucide-react';
 import { buildWireShareCard } from './shareCardImage';
 import ShareCardPreview from './ShareCardPreview';
+import PassItOnBar from './PassItOnBar';
 import { recordAddress, recordOrigin } from './recordAddress';
 
 // ── PASS IT ON ──
@@ -11,7 +12,7 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // file (an app's own browser). Where the sheet is refused altogether — the editor's
 // own frame — the card is put on screen to keep and pass on, never a silent download.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, previewFirst = false }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, previewFirst = false, bar = false, barLine }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const link = givenLink || recordAddress();
@@ -67,6 +68,15 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   );
 
   const Icon = state === 'shared' ? Check : Share2;
+
+  if (bar) {
+    return (
+      <>
+        <PassItOnBar onPress={share} state={state} line={barLine} />
+        {preview}
+      </>
+    );
+  }
 
   if (compact) {
     const short = state === 'building' ? 'Drawing…' : state === 'shared' ? 'Shared' : 'Share';

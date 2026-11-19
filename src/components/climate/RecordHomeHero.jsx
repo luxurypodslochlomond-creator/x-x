@@ -5,23 +5,27 @@ import { RECORD_LINK, RECORD_SHARE_TITLE } from './shareRecordCard';
 import '@/components/climate/record-home.css';
 
 // ── THE SHARE, IN THE MASTHEAD ────────────────────────────────────────────────
-// One button, and the card behind it. The cartoon room shares the cover itself rather
-// than a sentence about it, and that is the shape that reads right here too: press, see
-// the card, keep it or send it. No wrapper box and nothing explaining the button — the
-// picture is the point.
+// The card is still the thing that leaves — press, see it, keep it or send it — but the
+// door to it is no longer a share glyph in the corner of the strip. A box with an arrow
+// says "somewhere else"; it does not say why anyone would send this. So the strip keeps
+// the record's declaration and the ask is printed underneath it as a band: PASS IT ON,
+// the painting in a frame, one line about what travels with the card. Same three inks as
+// every other band on the record, and the same tracked capitals as the line above it.
 const RECORD_CARD = { id: 'record-of-the-time', title: RECORD_SHARE_TITLE };
 
 export default function RecordHomeHero({ copy }) {
   return (
     <section aria-labelledby="record-home-title" className="record-home-hero relative text-record-bone">
-      <div className="relative z-10 flex items-center justify-between gap-3 border-b border-record-bone/20 bg-record-ink/50 px-4 py-2 lg:px-10">
+      <div className="relative z-10 flex items-center border-b border-record-bone/20 bg-record-ink/50 px-4 py-2 lg:px-10">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-record-bone">{copy.service}</span>
+      </div>
+      <div className="relative z-10">
         <ShareCardButton
           entry={RECORD_CARD}
           build={buildRecordShareCard}
           link={RECORD_LINK}
-          compact
           previewFirst
+          bar
         />
       </div>
       <div className="record-home-title-band relative z-10 px-4 pb-6 pt-8 lg:px-10">
