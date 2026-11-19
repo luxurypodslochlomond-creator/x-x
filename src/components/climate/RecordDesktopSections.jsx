@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CONTENT_GROUPS, DESK_NAV, PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import { markFor } from '@/components/climate/pageMarks';
+import { MarkContents } from '@/components/climate/RecordFootMarks';
+import { MARKS_IN_ORDER } from '@/components/climate/marks/marksOrder';
+import MarksPlate from '@/components/climate/marks/MarksPlate';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
 
 export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
@@ -35,6 +38,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   const phone = layout === 'phone';
   const { pathname } = useLocation();
   const { isKeeper, isChecker } = useRecordCapacity();
+  const [showPlate, setShowPlate] = useState(false);
 
   // ── THE SHEET IS THE REST OF THE BOOK, NOT A SECOND COPY OF THE HEAD ──────────
   // Brian, 19 November: "explore, when you go in, is all over the place — you sure you've
@@ -60,8 +64,25 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   const groups = isKeeper || isChecker
     ? [...rest, { title: 'Yours', doors: [{ label: isKeeper ? 'Custodians’ room' : 'Witnesses’ room', to: '/ClimateKeeperRoom' }] }]
     : rest;
+
+  // ── ONE BUTTON, AND THE LIST BECOMES A PICTURE ────────────────────────────────
+  // The index is a list of doors, and a list of doors can never say the thing the drawings
+  // say when they are laid together. So the first thing on the sheet is the press: it does
+  // not open another panel or a second index, it puts the whole drawer on the glass as one
+  // plate, and the way back to the list is stated on the plate itself.
+  if (showPlate) return <MarksPlate onClose={() => setShowPlate(false)} />;
+
   return (
     <div className="flex flex-col font-body">
+      <button
+        type="button"
+        onClick={() => setShowPlate(true)}
+        className="mb-1 flex min-h-12 w-full items-center gap-2 border-b border-record-mark/30 pb-2 text-left text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+      >
+        <span aria-hidden="true" className="flex w-6 shrink-0 justify-center"><MarkContents size={24} /></span>
+        <span className="flex-1 text-[12px] uppercase leading-tight tracking-[0.08em]">The marks, all at once</span>
+        <span aria-hidden="true" className="font-mono text-[10px] text-record-muted">{MARKS_IN_ORDER.length}</span>
+      </button>
       {groups.map(({ title, doors }) => (
           <section key={title} aria-label={title} className={phone ? 'border-t border-record-mark/30' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
             {/* ── ON A PHONE THE SHELF'S NAME STAYS PUT ────────────────────────────────
