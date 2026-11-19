@@ -25,14 +25,14 @@ import MapSignalMark from '@/components/climate/MapSignalMark';
 const MARKS = {
   crisis: { fill: '#b3261e', shape: 'rounded-full', size: 10 },
   solution: { fill: '#141210', shape: 'rounded-full', size: 8 },
-  action: { fill: '#1e3a2b', shape: 'rotate-45', size: 8 },
-  // A line on the wire. The record's ocean, not its warning: a report is not an emergency.
-  wire: { fill: '#0f5f7a', shape: 'rounded-full', size: 7 },
-  // A drawing. The record's ochre, and a square rather than a dot — a plate, hung: the one
-  // mark on this map that is a picture and not a fact about a place.
-  cartoon: { fill: '#9b6f28', shape: 'rounded-sm', size: 9 },
+  action: { fill: '#efe7d6', shape: 'rotate-45', size: 8 },
+  // A line on the wire. The record's ink, not its warning: a report is not an emergency.
+  wire: { fill: '#141210', shape: 'rounded-full', size: 7 },
+  // A drawing. Paper, and a square rather than a dot — a page, hung: the one mark on this
+  // map that is a picture and not a fact about a place.
+  cartoon: { fill: '#efe7d6', shape: 'rounded-sm', size: 9 },
   country: { fill: '#b3261e', shape: 'rounded-full', size: 9 },
-  nation: { fill: '#0f5f7a', shape: 'rounded-full', size: 9 },
+  nation: { fill: '#efe7d6', shape: 'rounded-full', size: 9 },
 };
 
 /* The atlas is printed on paper land, so its marks are printed in the record's inks —
@@ -78,6 +78,11 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
   const g = GROUND[tone] || GROUND.paper;
   const landId = useId().replaceAll(':', '');
   const atlas = tone === 'ink' && alive;
+  // On the painted planet the coast is engraved in ink; on the paper plate it is the
+  // ground's own land line.
+  const coast = atlas
+    ? { color: '#141210', width: 1.5, opacity: 0.5 }
+    : { color: g.land, width: g.landWidth, opacity: g.landOpacity };
 
   // Readership totals do not link an individual reading place to an entry.
   // Keep the two kinds of mark, but never invent a nearest-entry connection.
@@ -101,18 +106,20 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
                 <image href={WORLD_LAND} width={PLATE_W} height={PLATE_H} preserveAspectRatio="none" />
               </mask>
             </defs>
-            {/* ── THE PLATE IN THE RECORD'S OWN FOUR COLOURS ─────────────────────────
-                It had a teal-to-green-to-ochre gradient for land, which made the record's
-                Earth look like a weather app's Earth and put every mark on a green field
-                where nothing could be read. It then went to plain paper, which was honest
-                but had no identity on it at all.
-                Now it is printed the way this record prints: black water, the signal yellow
-                for land, red for what burns, paper for what answers and what is drawn. Four
-                colours, the same four the whole record uses, so the map is recognisably
-                this record's map and not a chart borrowed from somewhere else. */}
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".74" />
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".9" transform="translate(.3 .3)" mask={`url(#${landId})`} />
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-signal))" fillOpacity=".96" mask={`url(#${landId})`} />
+            {/* ── THE PAINTING IS THE WORLD ──────────────────────────────────────────
+                This used to be printed straight over the painting: black water, yellow
+                land — a flat map of a world, laid on top of the painted one. That is a
+                map covering the thing it is a map of, which is the one thing this record
+                should never do.
+
+                So the painting stays, and only the geography is drawn on it, in the
+                record's inks: a pale paper wash where the land is, thin enough that every
+                brushstroke underneath still shows through, and the coast engraved as a
+                stipple of ink. The water is left exactly as it was painted — open, deep
+                and alive — so a reader is looking at the planet, with the record standing
+                on it, rather than at a chart about the planet. */}
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".1" />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-paper))" fillOpacity=".3" mask={`url(#${landId})`} />
           </g>
         )}
         {/* The atlas holds still. The symbols, not a moving wash, carry the signal. */}
@@ -130,13 +137,12 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
 
         {/* The land. One path, round caps — a stipple engraving of every coast on Earth. */}
         <path
-          className={atlas ? 'record-map-stipple' : undefined}
           d={d}
-          stroke={g.land}
-          strokeWidth={g.landWidth}
+          stroke={coast.color}
+          strokeWidth={coast.width}
           strokeLinecap="round"
           fill="none"
-          opacity={g.landOpacity}
+          opacity={coast.opacity}
           vectorEffect="non-scaling-stroke"
         />
       </svg>

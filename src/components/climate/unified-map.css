@@ -7,8 +7,8 @@
   border-bottom: 1px solid rgb(var(--record-ink) / .22);
 }
 .record-unified-map .record-reach-page { min-height: 0; background: rgb(var(--record-paper)); }
-.record-map-frame { border: 1px solid rgb(var(--record-bone) / .38); }
-.record-map-coastline { display: none; }
+.record-map-frame { border: 1px solid rgb(var(--record-red) / .5); }
+.record-map-coastline { display: inline; }
 .record-unified-map .record-page-plate { margin: 0; }
 .record-unified-map :is(#nations, #countries, #reader-place) { scroll-margin-top: 15rem; }
 .record-unified-map .record-reach-page > :is(#nations, #countries) {
@@ -23,34 +23,24 @@
 .record-unified-map #reader-place > div { padding-block: 1.5rem; }
 
 .record-map-symbol, .record-map-spot-label { display: none; }
+/* The key shows the same five marks as the plate at every width, because a legend nobody
+   can see on a phone is a legend for someone else. */
+.record-map-key .record-map-symbol { display: block; width: 14px; height: 14px; }
 
 @media screen and (min-width: 1024px) {
-  /* ── FIVE MARKS, FIVE MEANINGS, EACH WITH ITS OWN FORM ──────────────────────────
-     The land is the signal yellow and the water is ink, so the marks are the other two
-     colours of the record: red for what burns, ink for what answers, paper for what was
-     done and what was drawn. Each meaning has a form you can name at a glance:
-       crisis  — a filled red disc: a warning is solid and loud.
-       solution— a solid ink disc: an answer, printed in the record's own hand.
-       action  — a paper disc: a deed done in daylight.
-       wire    — an ink dash: a line of text, a report going out.
-       drawing — a paper square: a picture, hung.
-     Each carries a paper ring inside an ink ring, so an ink mark is still seen over black
-     water and a paper mark is still seen on yellow land. */
+  /* ── FIVE SIGNALS, FIVE MARKS, FOUR COLOURS ────────────────────────────────────
+     The marks are drawn as SVG in MapSignalMark, in the record's own inks: signal red for
+     what burns, ink for what answers and what is reported, paper for what was done and what
+     was drawn. Nothing here paints them — this only sizes them, so the same file reads on
+     the painted planet, on paper and on the black key. */
   .record-unified-map { --map-signal: rgb(var(--record-ink)); }
   .record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-red)); }
-  .record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-paper)); }
-  .record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-ink)); }
+  .record-unified-map [data-kind="action"],
   .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-paper)); }
   .record-unified-map .record-map-symbol {
-    display: block; position: relative; flex: none;
-    width: 11px; height: 11px; padding: 0;
-    color: var(--map-signal); background: currentColor;
-    border: 0; border-radius: 50%;
-    box-shadow: 0 0 0 1.5px rgb(var(--record-paper)), 0 0 0 3px rgb(var(--record-ink) / .8);
+    display: block; width: 16px; height: 16px; padding: 0;
+    background: transparent; border: 0; box-shadow: none;
   }
-  .record-unified-map .record-map-symbol[data-kind="action"] { border-radius: 50%; }
-  .record-unified-map .record-map-symbol[data-kind="wire"] { width: 14px; height: 5px; border-radius: 0; }
-  .record-unified-map .record-map-symbol[data-kind="cartoon"] { border-radius: 1px; }
   /* The key runs a red rule under it: the plate is the record's, and says so. */
   .record-unified-map .record-map-key { border-bottom: 3px solid rgb(var(--record-red)); }
   .record-unified-map .record-world-atlas .record-map-dot { display: none; }
@@ -63,8 +53,7 @@
   .record-unified-map .record-map-key > :is(p, div) { color: rgb(var(--record-paper)); font-size: .75rem; font-weight: 400; }
   .record-unified-map .record-map-key p span { color: rgb(var(--record-paper) / .75); }
   .record-unified-map .record-map-key-dot { display: none; }
-  .record-unified-map .record-map-key .record-map-key-symbol { width: 8px; height: 8px; padding: 0; box-shadow: none; }
-  .record-unified-map .record-map-key .record-map-key-symbol[data-kind="wire"] { width: 11px; height: 4px; }
+  .record-unified-map .record-map-key .record-map-key-symbol { width: 15px; height: 15px; padding: 0; box-shadow: none; }
   .record-unified-map .record-map-key button { color: rgb(var(--record-paper)); }
   .record-unified-map .record-map-key button { padding-inline: .6rem; gap: .4rem; background: transparent; border-bottom: 1px solid transparent; font-weight: 400; }
   .record-unified-map .record-map-key button[aria-pressed="true"] { background: transparent; color: var(--map-signal); border-bottom-color: var(--map-signal); text-decoration: none; }
@@ -117,8 +106,8 @@
   }
   .record-unified-map .record-map-opening p + div { margin-top: .5rem; }
   .record-unified-map .record-map-band > div { padding: 0; }
-  .record-unified-map .record-map-frame { padding: 0; border: 0; }
-  .record-unified-map .record-world-atlas .record-map-stipple { display: none; }
+  .record-unified-map .record-map-frame { padding: 0; border: 1px solid rgb(var(--record-red) / .5); }
+  /* The coast is engraved over the painting, so it stays visible at every width. */
   .record-unified-map .record-map-coastline { display: inline; }
 
   .record-unified-map .record-world-atlas .record-transmit {

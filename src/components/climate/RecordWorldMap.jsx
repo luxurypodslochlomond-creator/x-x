@@ -204,7 +204,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
   const placeAt = here.findIndex((m) => m.id === picked?.id);
 
   return (
-    <div className={`record-map-instrument ${tone === 'ink' ? 'border border-[#efe7d6]/45 bg-transparent' : 'border-2 border-[#141210] bg-[#f7f1e5]'}`}>
+    <div className={`record-map-instrument ${tone === 'ink' ? 'border border-[#b3261e]/60 bg-transparent' : 'border-2 border-[#141210] bg-[#f7f1e5]'}`}>
       {/* The count and the key, on the same paper as the plate — a plate is captioned
           above its engraving, not over it. */}
       <div className="record-map-key flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[#f7f1e5] px-3 py-2.5 border-b border-[#141210]/20">
@@ -224,12 +224,12 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
         </p>
         <div className="flex flex-wrap items-center gap-x-1 text-[10px] font-mono font-bold text-[#141210]" role="group" aria-label="Show only one kind of entry">
           {[
-            ['crisis', 'Crises', '#b3261e', 'rounded-full'],
-            ['solution', 'Solutions', '#141210', 'rounded-full'],
-            ['action', 'Actions', '#1e3a2b', 'rotate-45'],
-            ['wire', 'Wire', '#0f5f7a', 'rounded-full'],
-            ['cartoon', 'Drawings', '#9b6f28', 'rounded-sm'],
-          ].map(([key, label, colour, shape]) => (
+            ['crisis', 'Crises'],
+            ['solution', 'Solutions'],
+            ['action', 'Actions'],
+            ['wire', 'Wire'],
+            ['cartoon', 'Drawings'],
+          ].map(([key, label]) => (
             <button
               key={key}
               type="button"
@@ -238,8 +238,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
               onClick={() => { setOnly(only === key ? null : key); setPicked(null); }}
               className={`flex min-h-11 items-center gap-1.5 px-1.5 uppercase tracking-[0.06em] ${only && only !== key ? 'opacity-40' : ''} ${only === key ? 'underline underline-offset-4' : ''}`}
             >
-              <span className={`record-map-key-dot w-2 h-2 ${shape}`} style={{ background: colour }} />
-              {tone === 'ink' && <MapSignalMark kind={key} className="record-map-key-symbol" />}
+              <MapSignalMark kind={key} className="record-map-key-symbol" />
               {label} {counts[key]}
             </button>
           ))}
@@ -288,9 +287,6 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
                 style={{
                   background:
                     picked.type === 'crisis' ? '#b3261e'
-                    : picked.type === 'action' ? '#1e3a2b'
-                    : picked.type === 'wire' ? '#0f5f7a'
-                    : picked.type === 'cartoon' ? '#9b6f28'
                     : '#141210',
                   color: '#efe7d6',
                 }}
@@ -372,7 +368,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : `Press a mark, or a place named above it, to read what stands there. Red marks a crisis, ${tone === 'ink' ? 'cream' : 'black'} a solution, green an action, blue a line on the wire, ${tone === 'ink' ? 'yellow' : 'ochre'} a drawing. Entry places come from the entries; amber lights show readership places stated by devices or readers, not precise reader locations. These are separate observations.`}
+              : `Press a mark, or a place named above it, to read what stands there. Red is a crisis, paper with a tick is a solution, a diamond is an action, a dash is a line on the wire, a page is a drawing. Entry places come from the entries; amber lights show readership places stated by devices or readers, not precise reader locations. These are separate observations.`}
           </p>
         )}
       </div>
