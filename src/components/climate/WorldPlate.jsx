@@ -188,6 +188,35 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
         );
       })}
 
+      {/* ── TRANSMISSIONS ─────────────────────────────────────────────────────────
+          Every mark on this plate is sending, not just sitting: a crisis, a solution, an
+          action, a line on the wire, a drawing — each broadcasts outward from the place it
+          happened, slowly and out of step with its neighbours, so the plate reads as a
+          record talking rather than a pinboard being looked at. Rings on the compositor
+          only: nothing here re-renders, and nothing here is a claim. */}
+      {marks.map((m, i) => {
+        const { left, top } = projectPct(m.lat, m.lng);
+        const t = MARKS[m.tone] || MARKS.solution;
+        const fill = (tone === 'ink' && MARKS_ON_PAINT[m.tone]) || t.fill;
+        return (
+          <span
+            key={`tx-${m.id}`}
+            aria-hidden="true"
+            className="pointer-events-none absolute"
+            style={{
+              left: `${left}%`,
+              top: `${top}%`,
+              transform: `translate(-50%,-50%) translate(${m.dx || 0}px, ${m.dy || 0}px)`,
+            }}
+          >
+            <span
+              className="record-transmit"
+              style={{ borderColor: fill, animationDelay: `${(i % 11) * -1.3}s` }}
+            />
+          </span>
+        );
+      })}
+
       {marks.map((m) => {
         const { left, top } = projectPct(m.lat, m.lng);
         const t = MARKS[m.tone] || MARKS.solution;

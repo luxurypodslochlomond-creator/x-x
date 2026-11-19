@@ -155,6 +155,21 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
     return c;
   }, [entries]);
 
+  // ── THE RIGHT NUMBERS ───────────────────────────────────────────────────────────
+  // Not reads, not reach, not people. The plate's own arithmetic: what it is holding, in
+  // how many countries, how many of those are drawings, and how much of it a second,
+  // independent origin also says. Every one of these can be checked by pressing a mark.
+  const figures = useMemo(() => {
+    const placedRows = entries.filter((e) => resolveCoords(e.country, e.region));
+    const countries = new Set(placedRows.map((e) => (e.country || '').trim()).filter(Boolean));
+    return {
+      placed: placedRows.length,
+      countries: countries.size,
+      drawings: placedRows.filter((e) => e.type === 'cartoon').length,
+      second: placedRows.filter((e) => e.verification === 'corroborated' || e.verification === 'official_record').length,
+    };
+  }, [entries]);
+
   // A plate with no dates on it says the record has finished. One line under the count,
   // saying when the newest entry standing here arrived — so a reader can tell a living
   // record from one that stopped last March, without scrolling to anything.
@@ -222,6 +237,24 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
         label={`The world, with ${marks.length} entries of the record set where they happened and ${lights.length} places reading it`}
         tone={tone}
       />
+
+      {/* What the plate is holding, counted from the plate itself. Not a flattering figure
+          about being looked at — what the record actually has, and how much of it somebody
+          else also says. A dash when a count could not be made; never a zero pretending. */}
+      <dl className="grid grid-cols-2 border-t border-[#141210]/20 bg-[#f7f1e5] sm:grid-cols-4">
+        {[
+          ['Entries standing', figures.placed, 'set where they happened'],
+          ['Countries', figures.countries, 'region only, never a person'],
+          ['Drawings', figures.drawings, 'hung on the same plate'],
+          ['Known twice over', figures.second, 'a second origin named'],
+        ].map(([label, value, note]) => (
+          <div key={label} className="min-w-0 border-b border-[#141210]/15 px-3 py-2.5 sm:border-b-0 sm:border-r sm:last:border-r-0">
+            <dd className="text-[22px] font-black leading-none tabular-nums text-[#141210]">{loading ? '—' : value}</dd>
+            <dt className="mt-1 text-[9px] font-black font-mono uppercase tracking-[0.1em] text-[#141210]">{label}</dt>
+            <p className="text-[9px] leading-snug text-[#5a5246]">{note}</p>
+          </div>
+        ))}
+      </dl>
 
       {/* The plate read out: the places it actually holds, so a reader never has to hunt
           for a dot to find out where the record is standing. */}

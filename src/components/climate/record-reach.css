@@ -36,7 +36,31 @@
 .record-atlas-pass {
   animation: record-atlas-pass 44s linear infinite;
 }
+
+/* ── EVERY MARK IS SENDING ─────────────────────────────────────────────────────
+   The transmission leaving an entry: one thin ring, growing out of the place it happened
+   and gone. Nine seconds a wave, each mark offset from the next, so the plate never pulses
+   as one thing — a record is many people saying something at once, not a heartbeat.
+   Transform and opacity only, so the compositor does the work and nothing repaints. */
+.record-transmit {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  opacity: 0;
+  animation: record-transmit 9s cubic-bezier(.22,.61,.36,1) infinite;
+}
+@keyframes record-transmit {
+  0% { transform: scale(.35); opacity: .55; }
+  55% { opacity: .12; }
+  100% { transform: scale(7.5); opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
   .record-atlas-thread { animation: none; stroke-dasharray: none; opacity: .22; }
+  .record-transmit { animation: none; opacity: 0; }
   .record-atlas-pass { animation: none; opacity: 0; }
 }
