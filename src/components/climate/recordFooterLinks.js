@@ -22,6 +22,35 @@
 // changes the voice of the page you are already standing on, which is why it sits on the
 // masthead's own name line — the record's name on one side, the reader's tongue answering
 // on the other — instead of taking a cell from a place to stand.
+// ── THE MIDDLE DOOR IS THE COVENANT, AND IT SAYS WHAT THE PLATFORM IS ──────────
+// Brian, 19 November: "x=x in middle should be red coolasfuck and underneath should say
+// PLATFORM… i think platform is coolasfuck and x=x our hiding coolasfuck principles bro,
+// time right etc as super intelligence new consciousness coming."
+//
+// It is the strongest thing that has been asked for on this rail, and it costs a word. The
+// pivot of five doors was BASE 1 — the machine's own index — which is a useful door and a
+// quiet claim. The pivot is now the one sentence the whole record rests on, printed in its
+// own red, with the plain word under it saying what it is: this is the platform. Not a
+// feature of the platform, not a page inside it. The platform is x = x.
+//
+// A reader who taps it gets the covenant, which is exactly what the word underneath
+// promised, so nothing is promised that is not delivered. And the machine has not been taken
+// off the rail: BASE 1 drops to the quieter row, where it still stands in the middle of its
+// own row — the index of the record, sitting under the principle the record is kept by. One
+// door, one place, on both glasses.
+const PLATFORM_DOOR = {
+  label: 'PLATFORM',
+  to: '/XEqualsX',
+  what: 'x = x — the platform’s own principle: equal human worth, drawn rather than argued.',
+};
+
+const BASE_ONE_DOOR = {
+  label: 'BASE 1',
+  to: '/ClimateSearch',
+  page: 'ClimateSearch',
+  what: 'Ask the record’s own index — a place, a subject, a source.',
+};
+
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and groups.' },
   // ── THE DOOR IS CALLED SIGNALS, AND THE WORD IS NOT A NEW NAME FOR THE BOOK ───
@@ -41,7 +70,7 @@ export const PRIMARY_NAV = [
   // what stands behind this door is a warning rather than an event — and a record that
   // calls a warning "news" is asking to be read as a paper rather than believed as a source.
   { label: 'Signals', to: '/ClimateWire', page: 'ClimateWire', what: 'What changed, where, and who says so — a warning, a milestone, or something that works.' },
-  { label: 'BASE 1', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Ask the record’s own index — a place, a subject, a source.' },
+  PLATFORM_DOOR,
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
   // ── THE ROOM OF CARTOONS COMES ONTO THE RAIL ────────────────────────────────
   // It was on the contents sheet only, filed under Elsewhere, on the reasoning that a room
@@ -83,7 +112,9 @@ export const RAIL_SECOND_NAV = [
   // the two doors about how the record is kept either side of it. Method first, because how
   // an entry is checked is the question that makes the covenant worth reading.
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
-  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // The covenant has gone up to the middle of the top row, so this row's centre is the
+  // machine's own index instead: the doors of the record, then the thing that answers them.
+  BASE_ONE_DOOR,
 ];
 
 // ── THE DESK ROW, AND WHY IT IS LONGER THAN THE PHONE'S ────────────────────────
@@ -203,8 +234,9 @@ export const DESK_SECOND_ROW = [
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
   { label: 'Founder', to: '/ClimateFounder', what: DESK_FOUNDER.what },
   { label: 'Music', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
-  // The middle cell. Same door, same name as the room: see RAIL_SECOND_NAV above.
-  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // The middle cell. The covenant has gone up to the middle of the top row (PLATFORM_DOOR),
+  // so the quiet row's centre is the machine's own index instead.
+  BASE_ONE_DOOR,
   // And what can be checked: the people, the fingerprints, and the index of everything else.
   { label: 'Roll', to: '/ClimateRoll', what: 'The people who check this record, in their own words.' },
   SEALS_DOOR,

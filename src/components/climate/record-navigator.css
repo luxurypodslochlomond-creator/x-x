@@ -595,3 +595,14 @@
   /* And one point down in the quieter row, so it stays the quieter row. */
   .rec-mast-row-2 .rec-art-caption-plain { font-size: 12px; }
 }
+
+/* ── AND THE MARK ITSELF IS THE RED THING NOW ────────────────────────────────────
+   Brian, 19 November: "x=x in middle should be red coolasfuck and underneath should say
+   PLATFORM." The covenant moved to the pivot of the rail, so the red moved with it: it is
+   the drawing that is printed in the mark's red, and the word beneath it is ink like every
+   other caption. One red element per door, which is the rule this rail has always kept —
+   red is the point of the object, not the label under it.
+
+   Keyed to the address rather than to a flag, so the door is red wherever it stands and
+   cannot drift out of the rule by being passed a different prop somewhere. */
+.rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-drawing { color: rgb(var(--record-mark)); }

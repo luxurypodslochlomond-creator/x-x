@@ -235,7 +235,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Signals, Map, Reach and Search. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited custodian also sees the custodian’s door there."
+        note="The same drawings at the top and foot of the screen open Record, Signals, PLATFORM, Map and The Wall. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited custodian also sees the custodian’s door there."
         items={BAR}
       />
 

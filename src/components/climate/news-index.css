@@ -2,11 +2,20 @@
 .news-page, .news-detail { background: rgb(var(--record-paper)); }
 
 .news-index { max-width: 58rem; margin-inline: auto; padding: .85rem 1.1rem 1.25rem; font-family: var(--font-record-ui); }
-.news-index-heading { display: flex; align-items: center; justify-content: space-between; gap: .75rem; }
-.news-index-name { display: flex; align-items: center; gap: .6rem; min-width: 0; }
+/* ── THE PAGE OPENS LIKE THE MASTHEAD DOES ───────────────────────────────────────
+   The heading was a seventeen-pixel line of tracked upper case — the exact size of a label
+   under a door — sitting on a page of grey. So a reader arriving from the rail, where five
+   solid marks are printed in ink and red, met a sheet that had no weight on it at all.
+   That is the whole of "feels dead": nothing on the page was printed, only typed.
+
+   It is now the record's own voice at the size a masthead is set at, with the mark beside
+   it, and the red rule under it is the same hairline that runs across the top of the book.
+   Nothing new was invented for this page — it is the same three things the rail uses. */
+.news-index-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: .75rem; padding-bottom: .45rem; border-bottom: 2px solid rgb(var(--record-mark)); }
+.news-index-name { display: flex; align-items: center; gap: .5rem; min-width: 0; }
 .news-index-name > svg { flex-shrink: 0; }
-.news-index-name h1 { margin: 0; font-size: 1.0625rem; font-weight: 400; line-height: 1.3; letter-spacing: .07em; text-transform: uppercase; }
-.news-index-intro { margin: .25rem 0 .7rem; font-size: .875rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.news-index-name h1 { margin: 0; font-size: 1.75rem; font-weight: 700; line-height: 1; letter-spacing: .01em; text-transform: uppercase; color: rgb(var(--record-ink)); }
+.news-index-intro { margin: .6rem 0 .7rem; font-size: .9375rem; line-height: 1.5; color: rgb(var(--record-ink) / .8); }
 
 .news-text-action { display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 44px; padding: 0; border: 0; background: transparent; font-size: .75rem; line-height: 1.4; text-decoration: none; color: inherit; cursor: pointer; }
 .news-index-heading > .news-text-action { flex-shrink: 0; color: rgb(var(--record-red)); }
@@ -25,22 +34,29 @@
 
 /* ── THE LEAD ─────────────────────────────────────────────────────────────────── */
 .news-lead { padding-bottom: 1.1rem; border-bottom: 1px solid rgb(var(--record-ink) / .22); }
-.news-lead-kicker { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; margin: 0 0 .55rem; font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--record-muted)); }
+.news-lead-kicker { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin: 0 0 .6rem; font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--record-muted)); }
+/* A date is a fact, and facts are set in ink rather than in grey. */
+.news-lead-when, .news-row-when { color: rgb(var(--record-ink) / .75); font-variant-numeric: tabular-nums; }
 .news-emergency { color: rgb(var(--record-red)); }
 
-/* One small block of the record's own paint says what kind of account this is:
-   red for an emergency, signal for a milestone, ink for work under way. */
-.news-kind { display: inline-block; width: 6px; height: 6px; margin-right: .4rem; background: rgb(var(--record-ink) / .45); vertical-align: middle; }
-.news-kind-emergency { background: rgb(var(--record-red)); }
-.news-kind-milestone { background: rgb(var(--record-signal)); }
-.news-lead-kind, .news-row-kind { display: inline-flex; align-items: center; }
+/* ── THE KIND IS PRINTED, NOT DOTTED ─────────────────────────────────────────────
+   This was a six-pixel square — smaller than a full stop, and on a handset effectively
+   invisible. So every signal read as the same thing, and a page of three different kinds of
+   news looked like one undifferentiated list. The kind is a solid stamp now, with the word
+   on it, in the three inks the record already uses for meaning. Run a thumb down the page
+   and you see, before reading a word, which of these is a warning. */
+/* Eleven pixels, because the record has one floor and this is not allowed to sit under it. */
+.news-stamp { display: inline-block; flex-shrink: 0; padding: .18rem .38rem .14rem; font-family: var(--font-record-ui); font-size: .6875rem; font-weight: 700; line-height: 1.15; letter-spacing: .1em; text-transform: uppercase; }
+.news-stamp-initiative { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); }
+.news-stamp-emergency { background: rgb(var(--record-red)); color: rgb(var(--record-paper)); }
+.news-stamp-milestone { background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); }
 
 .news-lead-plate { display: block; margin-inline: -1.1rem; overflow: hidden; background: rgb(var(--record-bone)); }
 .news-lead-plate img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
-.news-lead-heading { margin: .8rem 0 0; font-size: 1.5rem; font-weight: 500; line-height: 1.22; letter-spacing: -.015em; text-transform: none; }
+.news-lead-heading { margin: .8rem 0 0; font-size: 1.75rem; font-weight: 700; line-height: 1.1; letter-spacing: -.02em; text-transform: none; color: rgb(var(--record-ink)); }
 .news-lead-heading a { display: block; color: inherit; text-decoration: none; text-wrap: balance; }
 .news-lead-heading a:hover { color: rgb(var(--record-red)); }
-.news-lead-standfirst { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: .55rem 0 0; font-size: .9375rem; line-height: 1.55; color: rgb(var(--record-muted)); }
+.news-lead-standfirst { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: .55rem 0 0; font-size: 1rem; line-height: 1.55; color: rgb(var(--record-ink) / .8); }
 .news-lead-meta { display: flex; flex-wrap: wrap; gap: .15rem .7rem; margin: .7rem 0 0; font-size: .71875rem; line-height: 1.5; color: rgb(var(--record-muted)); }
 .news-lead-meta > span + span::before { content: '·'; margin-right: .7rem; color: rgb(var(--record-ink) / .35); }
 .news-credit { margin: .3rem 0 0; font-size: .6875rem; line-height: 1.45; color: rgb(var(--record-muted) / .9); }
@@ -64,7 +80,9 @@
 .news-key-body { font-size: .8125rem; line-height: 1.5; color: rgb(var(--record-muted)); }
 
 /* ── THE ROWS ────────────────────────────────────────────────────────────────── */
-.news-group { display: flex; align-items: center; gap: .6rem; margin: 1.15rem 0 0; font-size: .6875rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--record-muted)); }
+.news-group { display: flex; align-items: center; gap: .55rem; margin: 1.15rem 0 0; font-size: .6875rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--record-muted)); }
+/* One red block before each month, the same block the mark on the rail is built from. */
+.news-group::before { content: ''; flex-shrink: 0; width: 7px; height: 7px; background: rgb(var(--record-mark)); }
 .news-group::after { content: ''; flex: 1; height: 1px; background: rgb(var(--record-ink) / .18); }
 .news-rows { display: grid; grid-template-columns: minmax(0, 1fr); }
 .news-row { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: .8rem; align-items: start; padding: .85rem 0; border-bottom: 1px solid rgb(var(--record-ink) / .16); }
@@ -72,8 +90,8 @@
 .news-row-thumb { display: block; overflow: hidden; background: rgb(var(--record-bone)); }
 .news-row-thumb img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 .news-row-copy { min-width: 0; }
-.news-row-meta { display: flex; flex-wrap: wrap; gap: 0 .6rem; margin: 0 0 .2rem; font-size: .6875rem; line-height: 1.4; letter-spacing: .04em; text-transform: uppercase; color: rgb(var(--record-muted)); }
-.news-row-heading { margin: 0; font-size: .9375rem; font-weight: 500; line-height: 1.35; letter-spacing: -.005em; text-transform: none; }
+.news-row-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .55rem; margin: 0 0 .3rem; font-size: .6875rem; line-height: 1.4; letter-spacing: .04em; text-transform: uppercase; color: rgb(var(--record-muted)); }
+.news-row-heading { margin: 0; font-size: 1.0625rem; font-weight: 700; line-height: 1.28; letter-spacing: -.015em; text-transform: none; color: rgb(var(--record-ink)); }
 .news-row-heading a { display: block; color: inherit; text-decoration: none; }
 .news-row-heading a:hover { color: rgb(var(--record-red)); }
 .news-row-source { margin: .3rem 0 0; font-size: .71875rem; line-height: 1.45; color: rgb(var(--record-muted)); overflow-wrap: anywhere; }
@@ -90,11 +108,11 @@
 
 @media (min-width: 900px) {
   .news-index { padding: 1.5rem 2rem 2rem; }
-  .news-index-name h1 { font-size: 1.25rem; }
+  .news-index-name h1 { font-size: 2.25rem; }
   .news-index-intro { margin-bottom: 1rem; }
   .news-lead-plate { margin-inline: 0; }
   .news-lead-plate img { aspect-ratio: 16 / 9; }
-  .news-lead-heading { font-size: 2.0625rem; }
+  .news-lead-heading { font-size: 2.75rem; }
   .news-lead-standfirst { font-size: 1rem; }
   .news-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2.25rem; }
   .news-row { grid-template-columns: 5.5rem minmax(0, 1fr); }

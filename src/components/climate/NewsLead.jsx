@@ -1,17 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import NewsKindStamp from '@/components/climate/NewsKindStamp';
 import { verificationOf, verificationNoteOf } from '@/components/climate/verification';
-
-const KINDS = { emergency: 'Emergency', milestone: 'Milestone', initiative: 'Initiative' };
 
 export default function NewsLead({ entry }) {
   const to = `/ClimateWireEntry/${entry.id}`;
   return (
     <article className="news-lead" data-record-layout="compact">
       <p className="news-lead-kicker">
-        <span className="news-lead-kind"><i className={`news-kind news-kind-${entry.kind || 'initiative'}`} aria-hidden="true" />{KINDS[entry.kind] || 'News'}</span>
-        <span>{entry.when_label || entry.when_date || 'Date not recorded'}</span>
+        <NewsKindStamp kind={entry.kind} />
+        <span className="news-lead-when">{entry.when_label || entry.when_date || 'Date not recorded'}</span>
       </p>
 
       {entry.image_url && (
