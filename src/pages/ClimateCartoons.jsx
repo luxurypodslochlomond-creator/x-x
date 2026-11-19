@@ -28,6 +28,10 @@ import '@/components/climate/cartoons/press/press-signal.css';
 // Last of all, the ground itself: this room is printed on the signal plate, with its
 // drawings and its words on clean paper laid over it. Scoped to this room only.
 import '@/components/climate/cartoons/press/press-field.css';
+// And the phone's own pass over the same room: paper to the glass, the red only between the
+// chapters, one loud name and quieter heads, and the contents set as a numbered plate. It is
+// scoped to the phone and touches no rule of the desk's spread.
+import '@/components/climate/cartoons/press/press-phone.css';
 
 export default function ClimateCartoons() {
   return (
