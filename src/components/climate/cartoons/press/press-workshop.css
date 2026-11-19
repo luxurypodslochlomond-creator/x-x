@@ -249,6 +249,24 @@
     text-transform: uppercase;
   }
 
+  /* ── 3b. THE DRAWING IN THE LEDGER, AT THE WIDTH OF THE GLASS ─────────────────
+     A goal's drawing was a 7rem thumbnail standing beside its own line — right on a desk,
+     where the column is narrow and the picture fills it, and wrong on a phone. On a phone
+     that drawing is the reason a reader stopped at all, and a hundred and twelve pixels of
+     it is a citation of a picture rather than the picture.
+
+     So the line becomes one column on the glass: the drawing the full width of the sheet,
+     then its title, then the record's reason, then the artist's own words — the same order
+     a sheet on the wall runs, at the same width. Nothing is cropped, tinted or enlarged
+     past its own file; it is simply given the page it was always worth. */
+  #root .press-room .cartoon-goal-line {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "art" "title" "why" "text";
+    row-gap: .3rem;
+    padding-top: .9rem;
+  }
+  #root .press-room .cartoon-goal-line-art { margin-bottom: .4rem; }
+
   /* ── 4. THE INVITATION STANDS AT THE THRESHOLD OF THE WALL ────────────────────
      It comes before the drawings on purpose: the ledger has just said how many goals are
      still blank, so the first thing a reader meets after it is the desk they could answer
