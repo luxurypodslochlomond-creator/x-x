@@ -1,36 +1,11 @@
-/* ── THE MAP PAGE STANDS ON THE PAINTING ───────────────────────────────────────
-   This page used to lay its own sheet of paper from the top of the glass to the foot,
-   so the one page about the whole planet was the one page with the painting painted
-   out — a flat warm grey, and the plate a bone panel inside it. Brian, 18 November:
-   "map page has big grey background where's our coolasfuck painting map bro."
-   The ground is the painting now; paper is kept for the long read underneath it. */
+/* The layout owns one fixed painting. The atlas owns geography, never a second cover. */
 .record-unified-map { background: transparent; }
+.record-map-opening { background-color: rgb(var(--record-ink) / .68); }
 .record-unified-map .record-reach-page { min-height: 0; background: rgb(var(--record-paper)); }
-
-/* ── THE PLATE IS LET OUT TO THE FULL GLASS ────────────────────────────────────
-   A world does not fit in a reading column. The band breaks out of the book's measure and
-   runs edge to edge, while every word underneath keeps the measure it was set in — so the
-   plate is the page's one wide gesture and the white around the text is a page, not a wall.
-   It carries its own painting, so it can never be a panel waiting on a room it cannot see. */
-.record-unified-map .record-map-band {
-  position: relative;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
-}
-
-/* The plate's frame is a hairline over the painting, held back a touch so bone ink reads
-   against the brightest part of the picture. Never a panel, never a solid sheet. */
-.record-map-frame {
-  border: 1px solid rgb(var(--record-bone) / .38);
-  background-color: rgb(var(--record-earth) / .26);
-  box-shadow: 0 34px 80px -46px rgb(var(--record-ink));
-}
+.record-map-frame { border: 1px solid rgb(var(--record-bone) / .38); }
+.record-map-coastline { display: none; }
 .record-unified-map .record-page-plate { margin: 0; }
-.record-unified-map :is(#nations, #countries, #reader-place) { scroll-margin-top: 9rem; }
-
-/* The embedded reach keeps the record's own surfaces; only its scale is brought down so a
-   section of it reads as a section of this page rather than as a page of its own. */
+.record-unified-map :is(#nations, #countries, #reader-place) { scroll-margin-top: 15rem; }
 .record-unified-map .record-reach-page > :is(#nations, #countries) {
   padding-block: 1.25rem;
   border-top: 1px solid rgb(var(--record-ink) / .15);
@@ -41,3 +16,80 @@
 .record-unified-map #reader-place p { font-size: 14px; line-height: 1.65; }
 .record-unified-map #reader-place :is(input, button) { min-height: 44px; font-size: 14px; }
 .record-unified-map #reader-place > div { padding-block: 1.5rem; }
+
+@media screen and (min-width: 1024px) {
+  .climate-record[data-record-page="ClimateMap"] .record-book {
+    max-width: none;
+    margin-inline: 0;
+    background: transparent;
+  }
+  .climate-record[data-record-page="ClimateMap"] .record-sky { display: none; }
+  .record-unified-map { max-width: 1640px; margin-inline: auto; padding-inline: 2rem; }
+  .record-unified-map > .record-back-bar { margin-inline: -2rem; }
+  .record-unified-map .record-map-opening {
+    margin-top: 1rem;
+    border-bottom: 1px solid rgb(var(--record-bone) / .2);
+  }
+  .record-unified-map .record-map-opening > div { max-width: none; padding: 1.75rem 2rem 1.25rem; }
+  .record-unified-map .record-map-opening h1 {
+    max-width: none;
+    margin-top: .5rem;
+    font-size: clamp(2rem, 2.8vw, 3rem) !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.025em !important;
+    text-transform: none;
+  }
+  .record-unified-map .record-map-opening p:not(.uppercase) {
+    max-width: 78ch;
+    margin-top: .75rem;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+  .record-unified-map .record-map-opening p + div { margin-top: .5rem; }
+  .record-unified-map .record-map-band > div { padding: 0; }
+  .record-unified-map .record-map-frame { padding: 0; border: 0; }
+  .record-unified-map .record-world-atlas .record-map-stipple { display: none; }
+  .record-unified-map .record-map-coastline { display: inline; }
+  .record-unified-map .record-world-atlas .record-transmit {
+    width: 10px; height: 10px; margin: -5px 0 0 -5px;
+    animation-name: record-map-transmit;
+  }
+  .record-unified-map > #reach { margin-top: 1rem; background: rgb(var(--record-bone)); }
+  .record-unified-map > #reach > p { max-inline-size: none; }
+  .record-unified-map > .record-map-near { margin: 1rem 0; }
+  .record-unified-map > .record-map-near > section { background: rgb(var(--record-bone)); }
+  .record-unified-map .record-map-near > section > div { max-width: none; padding: 1.5rem 2rem; }
+  .record-unified-map .record-map-near p { max-inline-size: 80ch; }
+  .record-unified-map #reach-details { background: transparent; }
+  .record-unified-map .record-map-reach-heading { padding: 1.5rem 2rem; background: rgb(var(--record-bone)); }
+  .record-unified-map .record-reach-page {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 1rem;
+    background: transparent;
+    padding-block: 1rem;
+  }
+  .record-unified-map .record-reach-page > .record-page-plate {
+    width: 100%; max-width: none; margin: 0; padding: 1.5rem 2rem;
+    background: rgb(var(--record-bone));
+    border: 0;
+  }
+  .record-unified-map .record-reach-page > :not(#nations):not(#countries) { grid-column: 1 / -1; }
+  .record-unified-map .record-impact-feeds > :only-child { grid-column: 1 / -1; }
+  .record-unified-map .record-impact-feeds > #reading { padding: 0; }
+  .record-unified-map .record-impact-feeds > #reading:only-child > div:last-child {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+  .record-unified-map .record-impact-feeds > #reading > p { max-inline-size: 80ch; }
+  .record-unified-map .record-impact-feeds p { letter-spacing: normal !important; }
+  .record-unified-map #reader-place > div { max-width: 60rem; padding: 0; }
+  .record-unified-map > .record-map-note { margin: 0 0 1rem; width: auto; background: rgb(var(--record-bone)); }
+  .record-unified-map .record-map-note { max-inline-size: none; }
+}
+@keyframes record-map-transmit {
+  0% { transform: scale(.6); opacity: .45; }
+  100% { transform: scale(3); opacity: 0; }
+}

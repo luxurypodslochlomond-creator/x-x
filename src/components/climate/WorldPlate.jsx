@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useId, useMemo } from 'react';
 import { landDots, projectPct, PLATE_W, PLATE_H } from './worldPlate';
 import '@/components/climate/record-reach.css';
 
@@ -66,40 +66,22 @@ const GROUND = {
   },
 };
 
+// Public-domain Natural Earth 1:110m land, projected to the same 120 × 60 frame as the marks.
+// Stored locally to this app so no map tiles or external map service are needed.
+const WORLD_LAND = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/161f79bf8_record-world-land.svg';
+
 export default function WorldPlate({ marks = [], lights = [], selectedId, onSelect, label, tone = 'paper', alive = false }) {
   const d = useMemo(() => landDots(), []);
   const g = GROUND[tone] || GROUND.paper;
+  const landId = useId().replaceAll(':', '');
+  const atlas = tone === 'ink' && alive;
 
-  // ── THE PLATE IS ALIVE, AND WHAT MOVES MEANS SOMETHING ────────────────────────
-  // Not a decoration. Each reading place is joined by a drawn thread to the nearest entry
-  // standing on the plate, so the picture says the one thing the numbers cannot: this was
-  // read there, and that entry is here. A thread is a curve, never a straight line, because
-  // a signal travels round the world and a straight line would be a diagram.
-  const arcs = useMemo(() => {
-    if (!alive || !lights.length || !marks.length) return [];
-    const at = (lat, lng) => {
-      const p = projectPct(lat, lng);
-      return { x: (p.left / 100) * PLATE_W, y: (p.top / 100) * PLATE_H };
-    };
-    return lights.slice(0, 12).map((l) => {
-      let best = null;
-      let bestDistance = Infinity;
-      for (const m of marks) {
-        const distance = (m.lat - l.lat) ** 2 + (m.lng - l.lng) ** 2;
-        if (distance < bestDistance) { bestDistance = distance; best = m; }
-      }
-      if (!best) return null;
-      const a = at(l.lat, l.lng);
-      const b = at(best.lat, best.lng);
-      const mx = (a.x + b.x) / 2;
-      const my = (a.y + b.y) / 2 - Math.abs(a.x - b.x) * 0.16;
-      return `${a.x.toFixed(2)} ${a.y.toFixed(2)} Q${mx.toFixed(2)} ${my.toFixed(2)} ${b.x.toFixed(2)} ${b.y.toFixed(2)}`;
-    }).filter(Boolean);
-  }, [alive, lights, marks]);
+  // Readership totals do not link an individual reading place to an entry.
+  // Keep the two kinds of mark, but never invent a nearest-entry connection.
 
   return (
     <div
-      className={`relative w-full aspect-[2/1] overflow-hidden ${g.bg}`}
+      className={`record-world-plate relative w-full aspect-[2/1] overflow-hidden ${g.bg}${atlas ? ' record-world-atlas' : ''}`}
       role="group"
       aria-label={label || 'A map of the world'}
     >
@@ -109,20 +91,32 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
+        {atlas && (
+          <g className="record-map-coastline" aria-hidden="true">
+            <defs>
+              <mask id={landId} maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE_W} height={PLATE_H}>
+                <image href={WORLD_LAND} width={PLATE_W} height={PLATE_H} preserveAspectRatio="none" />
+              </mask>
+            </defs>
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".9" />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-bone))" fillOpacity=".48" mask={`url(#${landId})`} />
+          </g>
+        )}
         {/* The grid a plate carries so the eye can find a latitude — every thirty degrees,
             with the equator given one hair more weight. Hairlines, never a net. */}
         <g stroke={g.grid} strokeWidth="0.6" opacity={g.gridOpacity} vectorEffect="non-scaling-stroke">
           {[10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110].map((x) => (
-            <line key={`lon-${x}`} x1={x} y1={0} x2={x} y2={PLATE_H} />
+            <line key={`lon-${x}`} x1={x} y1={0} x2={x} y2={PLATE_H} vectorEffect="non-scaling-stroke" />
           ))}
           {[10, 20, 40, 50].map((y) => (
-            <line key={`lat-${y}`} x1={0} y1={y} x2={PLATE_W} y2={y} />
+            <line key={`lat-${y}`} x1={0} y1={y} x2={PLATE_W} y2={y} vectorEffect="non-scaling-stroke" />
           ))}
         </g>
         <line x1={0} y1={30} x2={PLATE_W} y2={30} stroke={g.equator} strokeWidth="0.6" opacity={g.equatorOpacity} vectorEffect="non-scaling-stroke" />
 
         {/* The land. One path, round caps — a stipple engraving of every coast on Earth. */}
         <path
+          className={atlas ? 'record-map-stipple' : undefined}
           d={d}
           stroke={g.land}
           strokeWidth={g.landWidth}
@@ -132,37 +126,6 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-
-      {alive && (
-        <g aria-hidden="true">
-          <defs>
-            <linearGradient id="record-atlas-night" x1="0" x2="1">
-              <stop offset="0%" stopColor={g.light} stopOpacity="0" />
-              <stop offset="50%" stopColor={g.light} stopOpacity="0.1" />
-              <stop offset="100%" stopColor={g.light} stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          {/* One slow band of light crossing the plate, like a satellite pass: the world is
-              being read all the time, not only when a reader looks at it. */}
-          <g className="record-atlas-pass">
-            <rect x="0" y="0" width="40" height={PLATE_H} fill="url(#record-atlas-night)" />
-          </g>
-          {arcs.map((d, i) => (
-            <path
-              key={i}
-              d={`M${d}`}
-              fill="none"
-              stroke={g.light}
-              strokeWidth="0.5"
-              strokeLinecap="round"
-              opacity="0.55"
-              className="record-atlas-thread"
-              style={{ animationDelay: `${i * -2.3}s` }}
-              vectorEffect="non-scaling-stroke"
-            />
-          ))}
-        </g>
-      )}
 
       {/* Lights: the reach, drawn where it happened and never pressed. Sized from the same
           curve the reach page uses, so the foot of a page and the page itself cannot tell
@@ -245,7 +208,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               <span
                 aria-hidden="true"
                 className="absolute rounded-full"
-                style={{ width: size + 14, height: size + 14, border: `2px solid ${t.fill}`, opacity: 0.9 }}
+                style={{ width: size + 14, height: size + 14, border: `2px solid ${fill}`, opacity: 0.9 }}
               />
             )}
             <span
@@ -254,7 +217,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               style={{
                 width: size,
                 height: size,
-                background: t.fill,
+                background: fill,
                 boxShadow: `0 0 0 1.5px ${g.ring}`,
               }}
             />

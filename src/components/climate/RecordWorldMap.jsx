@@ -354,10 +354,16 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : 'Press a mark, or a place named above it, to read what stands there. Red is a crisis, black a solution, green an action, blue a line on the wire, ochre a drawing — a line stands where the thing is, never where it was written from, and a drawing stands where it was drawn. An amber glow is a place reading the record: one entry opened there, and nobody named.'}
+              : `Press a mark, or a place named above it, to read what stands there. Red is a crisis, ${tone === 'ink' ? 'bone' : 'black'} a solution, green an action, blue a line on the wire, ${tone === 'ink' ? 'yellow' : 'ochre'} a drawing. Entry places come from the entries; amber lights show readership places stated by devices or readers, not precise reader locations. These are separate observations.`}
           </p>
         )}
       </div>
+      {tone === 'ink' && alive && (
+        <p className="record-map-geography-credit bg-record-bone px-3 py-2 font-mono text-xs text-record-muted">
+          Geography: <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Natural Earth · public domain</a>.
+          {' '}Equal spacing of latitude and longitude; polar areas appear enlarged.
+        </p>
+      )}
     </div>
   );
 }

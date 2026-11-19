@@ -227,7 +227,7 @@ export default function ClimateImpact({ embedded = false }) {
       )}
 
       {/* Reading and acting, side by side on a desktop: the two halves of the same signal. */}
-      <div className="record-page-plate mx-auto max-w-[1100px] lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
+      <div className="record-impact-feeds record-page-plate mx-auto max-w-[1100px] lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
         <WorldReadingFeed stories={stats?.top_stories || []} />
         <WorldActionFeed actions={stats?.upcoming_actions || []} />
       </div>
