@@ -14,8 +14,9 @@ import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 // smallest gestures goes to real cartoonists bro". He is right, and for the room's own
 // reason: a strip a machine illustrated is fiction, and a list of things a person can do
 // today should send a reader to work a human hand made. So every line here opens the wall
-// of real drawings. The record's own strips are still in the room, below the wall, and are
-// still labelled as fiction — they are simply not what a gesture points at any more.
+// of real drawings — and the machine-drawn strips that used to sit below it came off the
+// record on 19 November, so the wall is now all there is: drawings, and the hands that made
+// them.
 const GESTURES = [
   'Repairing a sweater / cardigan',
   'Buying less',
@@ -46,7 +47,7 @@ export default function SmallGesturesBand() {
       </div>
       <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">
         From Janine Selendy's own list for the record. Each one opens the wall, where the real
-        cartoonists' drawings hang. The room's own little strips are fiction, and stand apart from them.
+        cartoonists' drawings hang. Nothing on that wall was drawn by a machine.
       </p>
     </section>
   );

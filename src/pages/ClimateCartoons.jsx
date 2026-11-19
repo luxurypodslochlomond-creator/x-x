@@ -9,7 +9,7 @@ import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
-// Human drawings lead; the record's explanation and AI-illustrated fiction follow.
+// Human drawings lead, and everything after them is about those drawings.
 // Desktop is a newspaper spread. Original artwork, sources and controls stay intact.
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';

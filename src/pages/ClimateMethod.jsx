@@ -94,9 +94,9 @@ export default function ClimateMethod() {
         <p>
           And one more, because a page about honesty should say where its own sentences came from. This record was
           made by a person with a machine's help. The machine has a name — Base 1, built by Base44 — and it drafted,
-          checked links, wrote the code and drew the
-          example strips in the cartoon room, and those strips are labelled there as fiction rather than as anybody's
-          drawing. A person decided what stayed. Every sentence left standing is his, the mistakes on this record are
+          checked links, wrote the code, and drew a few example strips for the cartoon room in the record's first
+          weeks. Those strips have come off the record, because a wall of real hands does not need pictures nobody
+          drew, and the room now carries only work a person made. A person decided what stayed. Every sentence left standing is his, the mistakes on this record are
           his mistakes, and no claim on it rests on a machine's opinion of the world. Where the machine's own reading
           does appear, it is labelled as a machine's reading and kept apart from a person's words. It never signs
           a person's name; automatically cleared entries and missing human signatures are disclosed above.
