@@ -561,7 +561,7 @@ export default function TogetherChangeClimate() {
         <SubjectRail
           current={activeSubject}
           totalEntries={items.length + actions.length}
-          allLabel="What the record is about"
+          allLabel="What we keep this for"
           expanded={showIndex}
           onOpenIndex={() => setShowIndex(open => !open)}
           onOpenPicker={() => setShowIndex(true)}

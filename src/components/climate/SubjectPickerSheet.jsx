@@ -27,7 +27,7 @@ import '@/components/climate/subject-picker.css';
 // So it is one plate at both widths, exactly as the explore index already is. A desk gets
 // the same marks, the same caption, the same one-line reason, laid eight across on the
 // paper instead of four, because a desk has the width and a handset does not. Nothing else
-// differs: press a mark, read why it is drawn that way, follow the red line through.
+// differs: press a mark, read why it is on the record, follow the red line through.
 export default function SubjectPickerSheet({ open, onClose, subjects = [], totalEntries = 0, selected, allLabel = 'Every theme', onSelect }) {
   const dialogRef = useRef(null);
   const [isPhone, setIsPhone] = useState(() => !window.matchMedia('(min-width: 1024px)').matches);
@@ -96,7 +96,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     <figure className="subject-plate" data-inline={inline ? 'true' : undefined}>
       <div
         role="group"
-        aria-label="Everything the record is about, with its mark"
+        aria-label="Everything the record keeps, with its mark"
         className="subject-plate-grid"
         style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
       >
@@ -159,12 +159,12 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     return (
       <section
         id="record-subject-index"
-        aria-label="What the record is about"
+        aria-label="What we keep this for"
         className="mt-1 hidden border-b border-record-ink/20 pb-2 font-body text-record-ink lg:block"
         onKeyDown={(event) => { if (event.key === 'Escape') onClose(); }}
       >
         <div className="mb-2 flex items-center justify-between gap-4 border-b border-record-mark/30 pb-1">
-          <p className="record-header-type text-[15px] leading-none text-record-mark">What the record is about</p>
+          <p className="record-header-type text-[15px] leading-none text-record-mark">What we keep this for</p>
           <button
             type="button"
             onClick={onClose}
@@ -177,7 +177,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
         </div>
         {plate}
         <p className="border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
-          {items.length} subjects on the record · press a mark to read why it is drawn that way
+          {items.length} subjects on the record · press a mark to read why it is on the record
         </p>
       </section>
     );
@@ -199,7 +199,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
         <div className="mx-auto flex min-h-0 w-full max-w-[560px] flex-1 flex-col px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-[max(0.5rem,env(safe-area-inset-top))]">
 
           <div className="mb-2 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-2">
-            <p id="record-theme-sheet-title" className="record-header-type text-[19px] leading-none text-record-mark">What the record is about</p>
+            <p id="record-theme-sheet-title" className="record-header-type text-[19px] leading-none text-record-mark">What we keep this for</p>
             <button
               type="button"
               autoFocus
@@ -215,7 +215,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
           {plate}
 
           <p className="shrink-0 border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
-            {items.length} subjects on the record · press a mark to read why it is drawn that way
+            {items.length} subjects on the record · press a mark to read why it is on the record
           </p>
         </div>
       </div>

@@ -67,7 +67,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
               <RecordNavDoor
                 to="/ClimateGuide"
                 label="Explore"
-                what="The rest of the record: the brief, the covenant, the terms and every other door."
+                what="Every door on the record in one place — easy to find, nothing hidden."
                 mark={MarkExplore}
                 size={QUIETER}
                 asButton

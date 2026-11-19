@@ -1,45 +1,53 @@
-// ── WHY A MARK IS DRAWN THE WAY IT IS ───────────────────────────────────────────
-// A mark that cannot say why it looks like that is decoration, and this record does not
-// decorate. So every theme's mark carries one line saying what the drawing is made of and
-// which part of it is red — the red part is never the pretty bit, it is the part the theme
-// turns on. These lines are read aloud by the theme plate, under the mark a reader pressed.
+// ── WHY A SUBJECT IS ON THIS RECORD ─────────────────────────────────────────────
+// Brian, 19 November: "descriptions should be about record / platform, not what art is —
+// we created this for a reason, and that reason is the coolasfuck context."
 //
-// One rule for writing them: describe the drawing, then say why that drawing is the theme.
-// Never the other way round, and never a slogan.
+// He is right, and the earlier rule here was the wrong rule. These lines used to describe
+// the drawing — "a stalk with its seed head bent over, and the grain in red" — which told a
+// reader what a picture looks like and nothing about why the record keeps it. A reader
+// standing on a public record does not need the picture explained. They need to know why
+// this subject earned a place on it, and who is behind what is said about it.
+//
+// So each line is now one plain sentence on the reason the subject is kept: the thing that
+// makes it matter to a person's life, said without a slogan. The drawings are still drawn
+// for each one and still stand above the words; they simply no longer do the talking.
+//
+// One rule for writing them: never a slogan, never a claim the record cannot keep, and
+// never a sentence that would read the same on a poster for anything else.
 const subjectMarkReasons = {
-  all: 'Three bands, one above another, the lowest cut short: every theme on one page, and the page not finished yet.',
-  agriculture: 'A stalk with its seed head bent over, and the grain in red: the part that feeds people is the point of the field.',
-  water: 'One drop, drawn as a drop rather than a wave, with the sea it falls into in red: water is the falling and the gathering at once.',
-  heat: 'The sun resting on the ground, with its light in red above it: heat is the sun on a surface, not the sun itself.',
-  coastal_erosion_protection: 'A wall at the edge with the dune building against it in red: what holds a coast is the land behind the wall.',
-  seagrasses: 'Three blades out of one bed, the middle blade red: a meadow is many blades, and the blade is what holds the sand.',
-  mangroves: 'A canopy on a cage of roots, the roots in red: what holds a coast stands under the water, not above it.',
-  oceans: 'A swell meeting the horizon, the horizon in red: the sea is a line before it is a volume.',
-  zooplankton: 'A ring with a body inside it, the body red: a drift of small lives, one of them drawn.',
-  phytoplankton: 'A case of two plates with the living part in red: the bloom is the cell inside the case.',
-  forest_preservation: 'Two crowns on one ground, the second in red: what is kept is the stand, not the single tree.',
-  rewilding: 'A shoot and a second growth opening away from it in red: ground left alone grows in two directions.',
-  urban_geodesign: 'Two blocks with the third between them in red: the street is the design, not the buildings.',
-  transportation: 'A body on two wheels with its roof line in red: the route is what a vehicle carries.',
-  electric_vehicles: 'A car body with the charge in red: the shape is any car, the charge is the difference.',
-  renewable_energy: 'A tower and three blades, the hub in red: the turn is the point, and the hub is where it starts.',
-  solar_desalination: 'A trough under the sun, the water in red: the sun does the work and the water is the yield.',
-  drought: 'Cracked ground under a hard sun in red: drought is the ground, and the sun is what did it.',
-  flooding: 'A house on stilts and the water lines under it in red: water is drawn where it arrives, not where it should.',
-  extreme_weather: 'A cloud with the bolt in red: the warning is the part that comes out of it.',
-  sanitation_hygiene: 'A tap with the drop in red: clean hands are a supply before they are a habit.',
-  air_quality: 'Layers of moving air, the lowest one red: the air you breathe is the layer nearest the ground.',
-  biodiversity: 'A stem with two leaves, the second in red: variety is the second life on the same stem.',
-  coral_reefs: 'A branch with one arm in red: a reef is built by animals, and the arm is where it grows.',
-  kelp_forests: 'Two fronds from one holdfast, the second in red: a forest under water is still a forest.',
-  fisheries: 'A fish with its tail in red: the tail is what swims away and what is caught.',
-  wetlands: 'Reeds standing in a red water line: the reeds do the filtering and the water is the reason.',
-  peatlands: 'Two strata with the depth between them in red: peat is time, stored.',
-  soil_health: 'The ground with the shoot in red: soil is judged by what comes out of it.',
-  food_security: 'A bowl with a stalk in red: the bowl is the promise and the stalk is the work.',
-  agroforestry: 'A tree over a field, the trunk in red: the crop and the tree are the same ground.',
-  desertification: 'Dunes under a red sun: sand is what is left when ground stops holding.',
-  other: 'Three bands with the last one short: a theme that does not fit the rest still keeps a mark.',
+  all: 'Everything this record holds, on one page — because a record that keeps only the easy subjects is a brochure.',
+  agriculture: 'Because the field is where weather turns into dinner, and the person who grew it is named on the entry.',
+  water: 'Because it falls, gathers and is taken, and every claim about it here has somebody standing behind it.',
+  heat: 'Because a hot day is a warning before it is a temperature, and a warning belongs where it can be checked.',
+  coastal_erosion_protection: 'Because a coast is held by the land behind the wall, and what people actually built is worth copying.',
+  seagrasses: 'Because a meadow under water holds the sand, and nobody notices it going until the beach has gone.',
+  mangroves: 'Because the part that holds a coast stands under the water, where nobody photographs it.',
+  oceans: 'Because the sea is one body of water, and what happens in one place arrives somewhere else.',
+  zooplankton: 'Because the smallest lives in the sea feed the largest, and nothing that small gets its own news.',
+  phytoplankton: 'Because half the air a reader is breathing was made by something they will never see.',
+  forest_preservation: 'Because a stand of trees holds more than any single tree, and keeping it is a decision somebody made.',
+  rewilding: 'Because ground left alone grows back in its own direction, which is worth recording rather than managing.',
+  urban_geodesign: 'Because the street is designed before anyone walks down it, and the design is where a city can change.',
+  transportation: 'Because how people get to work is a climate decision, made every morning, by them.',
+  electric_vehicles: 'Because the difference is the charge and not the shape, and the difference is the thing worth reporting.',
+  renewable_energy: 'Because the turning is the point, and where the turning starts is worth knowing.',
+  solar_desalination: 'Because the sun does the work and the water is the yield, and a dry coast can copy that.',
+  drought: 'Because drought is the ground rather than the sky, and the ground is where people live.',
+  flooding: 'Because water arrives where it arrives, and the record keeps what people did about it.',
+  extreme_weather: 'Because the warning is the part that comes out of the cloud, and a warning only works if it is believed.',
+  sanitation_hygiene: 'Because clean hands are a supply before they are a habit, and a supply is a thing a town can build.',
+  air_quality: 'Because the air a reader breathes is the layer nearest the ground, and somebody somewhere is measuring it.',
+  biodiversity: 'Because variety is the second life on the same stem, and losing it happens quietly.',
+  coral_reefs: 'Because a reef is built by animals, and it is the only city on earth that nobody planned.',
+  kelp_forests: 'Because a forest under water is still a forest, and it burns and grows back like one.',
+  fisheries: 'Because what swims away is also what gets caught, and it is the same fish.',
+  wetlands: 'Because the reeds do the filtering for nothing, and work done for nothing is the first thing cut.',
+  peatlands: 'Because peat is time, stored, and burning it spends what cannot be earned back.',
+  soil_health: 'Because soil is judged by what comes out of it, and what comes out of it is dinner.',
+  food_security: 'Because the bowl is a promise and the stalk is the work, and the record keeps both.',
+  agroforestry: 'Because the crop and the tree are the same ground, and one field can do two jobs.',
+  desertification: 'Because sand is what is left when ground stops holding, and it can be seen coming.',
+  other: 'Because a subject that does not fit the rest still keeps its place on the record.',
 };
 
 export default subjectMarkReasons;

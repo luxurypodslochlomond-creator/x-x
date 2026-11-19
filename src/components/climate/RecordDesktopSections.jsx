@@ -88,7 +88,8 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
           set in the record's reading voice so it reads as a person talking rather than as
           furniture. Everything below it is the same doors it always was. */}
       <p className="mb-3 text-[13px] leading-[1.6] text-record-ink/85" style={{ fontFamily: 'var(--font-reading)' }}>
-        Every entry names who said so. Read one thing, then do one thing.
+        Every entry names who said so, because a record nobody can check is only an opinion.
+        Read one thing, then do one thing.
       </p>
       {groups.map(({ title, line, doors }) => (
           <section key={title} aria-label={title} className={phone ? 'border-t border-record-mark/30' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
