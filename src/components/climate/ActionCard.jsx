@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand } from 'lucide-react';
+import SubjectMark from '@/components/climate/SubjectMark';
 
 // Action types from Janine's spec — each gets its own glyph so the card reads at a glance
 const ACTION_TYPES = {
@@ -32,7 +33,11 @@ export default function ActionCard({ action }) {
     >
       <div className="p-3 flex-1">
         <div className="flex items-center gap-1.5 mb-1.5">
-          <Icon className="h-3.5 w-3.5 text-record-red" />
+          {/* The record's own drawing of what the action is about, where a borrowed glyph
+              used to sit: an action on water and a solution on water now wear the same mark. */}
+          {action.category
+            ? <SubjectMark subject={action.category} size={15} className="shrink-0" />
+            : <Icon className="h-3.5 w-3.5 text-record-red" />}
           <span className="font-display text-xs font-bold uppercase tracking-wide text-record-red">
             {meta.label}
           </span>

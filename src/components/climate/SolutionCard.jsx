@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useRecordImage from '@/components/climate/useRecordImage';
+import SubjectMark from '@/components/climate/SubjectMark';
 
 export default function SolutionCard({ item, lead = false }) {
   const isSolution = item.entry_type === 'solution';
@@ -24,9 +25,18 @@ export default function SolutionCard({ item, lead = false }) {
         )}
       </span>
       <div className={['record-entry-copy w-full flex-1 border-t-4 bg-record-paper p-4', borderTone].join(' ')}>
-        <span className={['record-header-type mb-3 inline-block px-2 py-1 text-xs uppercase', badgeTone].join(' ')}>
-          {isSolution ? 'Solution' : 'Crisis'}
-        </span>
+        {/* ── THE SUBJECT'S OWN DRAWING, ON THE CARD ────────────────────────────────
+            Brian, 19 November: "love icons coolasfuck coming through to relevant bits of
+            pages." The card already said which room it was in; it now says what the entry
+            is about, in the record's printed hand rather than a borrowed glyph — so a
+            reader scanning the pictures can see two entries on the same subject before
+            reading a word. */}
+        <div className="mb-3 flex items-center gap-2">
+          <span className={['record-header-type inline-block px-2 py-1 text-xs uppercase', badgeTone].join(' ')}>
+            {isSolution ? 'Solution' : 'Crisis'}
+          </span>
+          {item.category && <SubjectMark subject={item.category} size={18} className="shrink-0" />}
+        </div>
         <h3 className={['record-header-type text-[15px] uppercase leading-[1.4] sm:text-lg', titleSize].join(' ')}>
           {item.title}
         </h3>

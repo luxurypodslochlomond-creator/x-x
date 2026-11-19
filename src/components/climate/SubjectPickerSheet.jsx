@@ -96,7 +96,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     <figure className="subject-plate" data-inline={inline ? 'true' : undefined}>
       <div
         role="group"
-        aria-label="Every theme, with its mark"
+        aria-label="Everything the record is about, with its mark"
         className="subject-plate-grid"
         style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
       >
@@ -108,12 +108,24 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
             aria-pressed={item.id === chosenId}
             aria-label={`${item.label}. ${reasonFor(item.id)}`}
             aria-controls="record-theme-caption"
-            className="subject-plate-cell text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+            className="subject-plate-cell relative text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
           >
             <span aria-hidden="true" className="flex min-h-0 w-[76%] max-w-[52px] flex-1 items-center justify-center">
               <SubjectMark subject={item.id} size={40} className="h-full w-full" />
             </span>
-            <span className="block w-full text-center text-[9.5px] leading-[1.1] [overflow-wrap:anywhere] lg:text-[12px] lg:leading-[1.25]">{item.label}</span>
+            {/* ── HOW MUCH IS BEHIND EACH DOOR ────────────────────────────────────────
+                A plate of twenty-four drawings with no numbers is a poster. The count,
+                set small and in the mark's own red, is what makes it the record's index:
+                it says how much of the world is actually behind each drawing, and it
+                says nothing about a subject the record has not got yet, which is why an
+                empty one carries no number at all. */}
+            {item.count > 0 && (
+              <span aria-hidden="true" className="absolute right-1 top-0.5 font-mono text-[9px] tabular-nums leading-none text-record-mark/75">{item.count}</span>
+            )}
+            {/* The name is set in the record's display hand, not in the small body face:
+                twenty-four lowercase captions under twenty-four drawings is a tag cloud.
+                Uppercase, tracked and bold, it is a printer's specimen sheet. */}
+            <span className="record-header-type block w-full text-center text-[10px] uppercase leading-[1.15] tracking-[0.05em] [overflow-wrap:anywhere] lg:text-[11.5px]">{item.label}</span>
           </button>
         ))}
       </div>
@@ -147,12 +159,12 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     return (
       <section
         id="record-subject-index"
-        aria-label="Explore by theme"
+        aria-label="What the record is about"
         className="mt-1 hidden border-b border-record-ink/20 pb-2 font-body text-record-ink lg:block"
         onKeyDown={(event) => { if (event.key === 'Escape') onClose(); }}
       >
         <div className="mb-2 flex items-center justify-between gap-4 border-b border-record-mark/30 pb-1">
-          <p className="record-header-type text-[15px] leading-none text-record-mark">Explore by theme</p>
+          <p className="record-header-type text-[15px] leading-none text-record-mark">What the record is about</p>
           <button
             type="button"
             onClick={onClose}
@@ -165,7 +177,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
         </div>
         {plate}
         <p className="border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
-          {items.length} themes · press a mark to read why it is drawn that way
+          {items.length} subjects on the record · press a mark to read why it is drawn that way
         </p>
       </section>
     );
@@ -187,7 +199,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
         <div className="mx-auto flex min-h-0 w-full max-w-[560px] flex-1 flex-col px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-[max(0.5rem,env(safe-area-inset-top))]">
 
           <div className="mb-2 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-2">
-            <p id="record-theme-sheet-title" className="record-header-type text-[19px] leading-none text-record-mark">Explore by theme</p>
+            <p id="record-theme-sheet-title" className="record-header-type text-[19px] leading-none text-record-mark">What the record is about</p>
             <button
               type="button"
               autoFocus
@@ -203,7 +215,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
           {plate}
 
           <p className="shrink-0 border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
-            {items.length} themes · press a mark to read why it is drawn that way
+            {items.length} subjects on the record · press a mark to read why it is drawn that way
           </p>
         </div>
       </div>

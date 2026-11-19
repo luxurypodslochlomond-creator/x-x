@@ -12,6 +12,7 @@ import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import EntryLanguageStatus from '@/components/climate/EntryLanguageStatus';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import SignalCode from '@/components/climate/SignalCode';
+import SubjectMark from '@/components/climate/SubjectMark';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordCitation from '@/components/climate/RecordCitation';
 import ShareCardButton from '@/components/climate/ShareCardButton';
@@ -325,7 +326,7 @@ export default function ClimateDetail() {
 
       <div className="p-5 lg:px-10 lg:py-10 lg:max-w-[820px] lg:mx-auto">
         <div className={`flex items-center gap-1.5 mb-1 ${isSolution ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}`}>
-          <SignalCode code={catCode} size="md" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
+          <SubjectMark subject={record.category || 'other'} size={20} className="shrink-0" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
         <h1 data-no-translate className="text-2xl lg:text-4xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
           {tr.field('title')}
