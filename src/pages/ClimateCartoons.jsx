@@ -20,6 +20,8 @@ import '@/components/climate/cartoons/press/press-ink.css';
 import '@/components/climate/cartoons/cartoon-lineage.css';
 // The record's own signal — yellow plate, black words, red label — laid over the room.
 import '@/components/climate/cartoons/press/press-record-ink.css';
+// Last: the cover takes the left leaf, and the wall gives each drawing its own measure.
+import '@/components/climate/cartoons/press/press-balance.css';
 
 export default function ClimateCartoons() {
   return (
