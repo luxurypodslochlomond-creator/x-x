@@ -138,7 +138,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="text-[15px] font-bold leading-tight text-record-ink">{chosen.label}</p>
-                  <p className="mt-1 text-[12.5px] leading-[1.4] text-record-muted">{reason}</p>
+                  <p className="mt-1 text-pretty text-[12.5px] leading-[1.45] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>{reason}</p>
                   <button
                     type="button"
                     onClick={() => go(chosen.id)}

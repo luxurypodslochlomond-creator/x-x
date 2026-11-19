@@ -296,7 +296,7 @@ export const ELSEWHERE_NAV = [
   // found by opening a sheet is a room nobody walks into. It now stands on the rail with
   // its own mark, and it is not repeated here, because a foot that repeats the head teaches
   // the reader that neither one matters.
-  { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' },
+  { label: 'Entry fingerprints', to: '/ClimateSeals', what: 'Check an entry’s fingerprint against the words on the page.' },
   // Reach came off this list when it went onto the rail: one door, one place. A foot that
   // repeats the masthead teaches a reader that neither one matters.
   { label: 'The founder', to: '/ClimateFounder', what: 'Janine M. H. Selendy, and the record she asked for.' },

@@ -9,7 +9,7 @@ export default function MarkCaption({ chosen, onNavigate }) {
           <span aria-hidden="true" className="block h-14 w-14 shrink-0 text-record-ink [&>svg]:h-full [&>svg]:w-full"><chosen.Mark size={40} /></span>
           <div className="min-w-0 flex-1">
             <p className="text-[15px] font-bold leading-tight text-record-ink">{chosen.name}</p>
-            <p className="mt-1 text-[12.5px] leading-[1.4] text-record-muted">{chosen.means}</p>
+            <p className="mt-1 text-pretty text-[12.5px] leading-[1.45] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>{chosen.means}</p>
             {chosen.to && (
               <Link to={chosen.to} onClick={onNavigate} className="inline-flex min-h-11 items-center gap-2 text-[12px] font-bold text-record-mark underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">
                 {chosen.door}
@@ -21,7 +21,7 @@ export default function MarkCaption({ chosen, onNavigate }) {
       ) : (
         <div className="py-1">
           <p className="text-[17px] font-bold leading-tight text-record-ink">Press a mark to read it.</p>
-          <p className="mt-2 text-[13px] leading-relaxed text-record-muted">Its meaning appears here. Follow its name to go through.</p>
+          <p className="mt-2 text-pretty text-[13px] leading-relaxed text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>Its meaning appears here. Follow its name to go through.</p>
         </div>
       )}
     </figcaption>

@@ -172,7 +172,17 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                           a mark that makes sense and a door that has to be guessed at are
                           the same failure from opposite ends. */}
                       {phone && what && (
-                        <span className="mt-0.5 block text-[11px] font-normal normal-case leading-[1.35] tracking-normal text-record-muted">{what}</span>
+                        /* The sentence is set in the record's reading face, not the label's
+                           grotesque: a label names a door, a sentence explains it, and two
+                           different jobs in one typeface is how a list starts to look like a
+                           form. `text-pretty` stops the short line breaking with one word
+                           stranded on the second row, which is the whole of "balance" here. */
+                        <span
+                          className="mt-0.5 block text-pretty text-[11.5px] font-normal normal-case leading-[1.45] tracking-normal text-record-muted"
+                          style={{ fontFamily: 'var(--font-reading)' }}
+                        >
+                          {what}
+                        </span>
                       )}
                     </Link>
                   </li>
