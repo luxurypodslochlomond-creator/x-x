@@ -70,7 +70,11 @@ export const PRIMARY_NAV = [
   // what stands behind this door is a warning rather than an event — and a record that
   // calls a warning "news" is asking to be read as a paper rather than believed as a source.
   { label: 'Signals', to: '/ClimateWire', page: 'ClimateWire', what: 'What changed, where, and who says so — a warning, a milestone, or something that works.' },
-  PLATFORM_DOOR,
+  // ── THE MACHINE STANDS IN THE MIDDLE OF THE RAIL, THE COVENANT UNDER IT ───────
+  // Brian, 19 November: "sorry base 1 should be on top and platform below and in red."
+  // So the pivot of the top row is the thing that answers, and x = x sits in the quiet row
+  // beneath it, where it can be red without shouting over the five ways into the record.
+  BASE_ONE_DOOR,
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
   // ── THE ROOM OF CARTOONS COMES ONTO THE RAIL ────────────────────────────────
   // It was on the contents sheet only, filed under Elsewhere, on the reasoning that a room
@@ -112,9 +116,9 @@ export const RAIL_SECOND_NAV = [
   // the two doors about how the record is kept either side of it. Method first, because how
   // an entry is checked is the question that makes the covenant worth reading.
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
-  // The covenant has gone up to the middle of the top row, so this row's centre is the
-  // machine's own index instead: the doors of the record, then the thing that answers them.
-  BASE_ONE_DOOR,
+  // The centre of the quiet row, and the covenant's place: x = x, printed in the mark's red
+  // with PLATFORM under it, between the two doors about how the record is kept.
+  PLATFORM_DOOR,
 ];
 
 // ── THE DESK ROW, AND WHY IT IS LONGER THAN THE PHONE'S ────────────────────────
@@ -234,9 +238,8 @@ export const DESK_SECOND_ROW = [
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
   { label: 'Founder', to: '/ClimateFounder', what: DESK_FOUNDER.what },
   { label: 'Music', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
-  // The middle cell. The covenant has gone up to the middle of the top row (PLATFORM_DOOR),
-  // so the quiet row's centre is the machine's own index instead.
-  BASE_ONE_DOOR,
+  // The middle cell, and the covenant's place on a desk: x = x in red, PLATFORM under it.
+  PLATFORM_DOOR,
   // And what can be checked: the people, the fingerprints, and the index of everything else.
   { label: 'Roll', to: '/ClimateRoll', what: 'The people who check this record, in their own words.' },
   SEALS_DOOR,

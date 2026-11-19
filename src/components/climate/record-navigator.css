@@ -606,3 +606,20 @@
    Keyed to the address rather than to a flag, so the door is red wherever it stands and
    cannot drift out of the rule by being passed a different prop somewhere. */
 .rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-drawing { color: rgb(var(--record-mark)); }
+
+/* ── AND THE WORD UNDER IT IS RED TOO, A NOTCH QUIETER THAN ITS ROW ──────────────
+   Brian, 19 November: "base 1 should be on top and platform below and in red… as slightly
+   smaller mind." The covenant has come down into the quiet row, and it says its own name
+   in the mark's red rather than in ink: a reader should be able to see, without reading
+   anything, that this one door is not a room like the others. It is set a half-point under
+   the row it stands in, which is the "slightly smaller" — enough that the word sits inside
+   its cell without crowding its neighbours, and not so far down that it stops being a
+   caption at all. */
+.rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-caption {
+  color: rgb(var(--record-mark));
+  font-size: 7.5px;
+  letter-spacing: .06em;
+}
+@media (min-width: 1024px) {
+  .rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-caption { font-size: 9.5px; }
+}
