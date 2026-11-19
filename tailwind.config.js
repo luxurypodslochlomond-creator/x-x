@@ -29,6 +29,7 @@ module.exports = {
           ink: 'rgb(var(--record-ink) / <alpha-value>)',
           signal: 'rgb(var(--record-signal) / <alpha-value>)',
           red: 'rgb(var(--record-red) / <alpha-value>)',
+          crisis: 'rgb(var(--record-crisis) / <alpha-value>)',
           muted: 'rgb(var(--record-muted) / <alpha-value>)',
           mark: 'rgb(var(--record-mark) / <alpha-value>)',
           earth: 'rgb(var(--record-earth) / <alpha-value>)',
