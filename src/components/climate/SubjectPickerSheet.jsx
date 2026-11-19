@@ -85,8 +85,11 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
   const press = (id) => { if (id === chosenId) go(id); else setChosenId(id); };
 
   const inline = !isPhone;
+  // A desk gets six across, not eight: eight in a panel this wide put a mark in a cell
+  // barely wider than the mark itself, which is what read as squashed. Six leaves the
+  // drawing air on both sides, and the plate is still four rows deep on one screen.
   const columns = inline
-    ? (items.length > 32 ? 10 : items.length > 18 ? 8 : 6)
+    ? (items.length > 30 ? 8 : 6)
     : (items.length > 24 ? 5 : 4);
 
   const plate = (
@@ -110,7 +113,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
             <span aria-hidden="true" className="flex min-h-0 w-[76%] max-w-[52px] flex-1 items-center justify-center">
               <SubjectMark subject={item.id} size={40} className="h-full w-full" />
             </span>
-            <span className="block w-full text-center text-[9.5px] leading-[1.1] [overflow-wrap:anywhere] lg:text-[11px] lg:leading-[1.2]">{item.label}</span>
+            <span className="block w-full text-center text-[9.5px] leading-[1.1] [overflow-wrap:anywhere] lg:text-[12px] lg:leading-[1.25]">{item.label}</span>
           </button>
         ))}
       </div>

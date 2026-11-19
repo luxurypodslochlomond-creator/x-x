@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CONTENT_GROUPS, DESK_NAV, PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import { markFor } from '@/components/climate/pageMarks';
-import { MarkContents } from '@/components/climate/RecordFootMarks';
+import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import { MARKS_IN_ORDER } from '@/components/climate/marks/marksOrder';
 import MarksPlate from '@/components/climate/marks/MarksPlate';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
@@ -206,7 +206,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
         onClick={() => setShowPlate(true)}
         className="mt-2 flex min-h-12 w-full items-center gap-2 border-t border-record-mark/30 pt-2 text-left text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
       >
-        <span aria-hidden="true" className="flex w-6 shrink-0 justify-center"><MarkContents size={24} /></span>
+        <span aria-hidden="true" className="flex w-7 shrink-0 justify-center"><MarkExplore size={27} /></span>
         <span className="flex-1 text-[12px] uppercase leading-tight tracking-[0.08em]">Every door, drawn</span>
         <span aria-hidden="true" className="font-mono text-[10px] text-record-muted">{MARKS_IN_ORDER.length}</span>
       </button>

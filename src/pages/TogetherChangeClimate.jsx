@@ -14,12 +14,27 @@ import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectPickerSheet from '@/components/climate/SubjectPickerSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
+import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordHomeVoice from '@/components/climate/RecordHomeVoice';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 import DefinitionsBand from '@/components/climate/DefinitionsBand';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 
+
+// ── THE FOUR WAYS TO ADD, EACH WITH ITS ROOM'S OWN DRAWING ─────────────────────
+// Brian, 19 November: "should add solution and crisis etc be underneath the explore by
+// theme so can add one of them". He is right, and it answers a fault nobody had named: the
+// record's one orange button said "Solution, crisis, group or action" and then asked the
+// reader to choose again inside the form. Under the themes, beside the marks, the four are
+// named once — each wearing the drawing of the room it opens — and the form opens on that
+// room already chosen. Nothing else changed: same form, same door, same rules.
+const ADD_DOORS = [
+  { type: 'solution', label: 'Add a solution', Mark: RoomMarkSolution },
+  { type: 'climate_crisis', label: 'Add a crisis', Mark: RoomMarkCrisis },
+  { type: 'action', label: 'Add an action', Mark: RoomMarkAction },
+  { type: 'group', label: 'Start a group', Mark: RoomMarkGroups },
+];
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -505,46 +520,54 @@ export default function TogetherChangeClimate() {
              your own on the other. The search that reaches everything is the one pill in
              the header: one search, not two. ── */}
       <div className="px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
-        <div className="lg:flex lg:items-start lg:gap-8">
-          <div className="lg:flex-1 lg:min-w-0">
-            {/* Full themes first, then those awaiting an entry. On a phone the native
-                picker replaces the expanding sheet; desktop keeps the written index. */}
-            <div className="my-3">
-              <SubjectRail
-                current={activeSubject}
-                totalEntries={items.length + actions.length}
-                allLabel="Explore by theme"
-                expanded={showIndex}
-                onOpenIndex={() => setShowIndex(open => !open)}
-                onOpenPicker={() => setShowIndex(true)}
-              />
-              <SubjectPickerSheet
-                open={showIndex}
-                onClose={() => setShowIndex(false)}
-                subjects={[...filledSubjects, ...emptySubjects]}
-                totalEntries={items.length + actions.length}
-                selected={selectedCategory}
-                onSelect={selectTheme}
-              />
-            </div>
-            {/* "Support welcome" is off this line at Janine's request, 9 November: donations
-                are for a host to handle, and are being saved for those conversations. */}
-            <p className="text-[10px] font-mono mt-2 tracking-wide text-[#5a5246]">{t.noads} · {t.nofund}</p>
-          </div>
+        {/* ── ONE LINE, ONE PLATE, FOUR WAYS TO ADD — IN THAT ORDER ────────────────────
+            Brian, 19 November: "explore by theme squashed on desktop… doesn't feel like in
+            right position for record… should add solution and crisis etc be underneath the
+            explore by theme." He is describing a column that was doing three jobs at once:
+            the theme line sat beside a button in a narrow flex column, so on a desk the plate
+            was squeezed into two-thirds of the width, and the one way to add anything was
+            parked off to the side where it belonged to nothing.
 
-          <div className="lg:w-[320px] lg:flex-shrink-0">
+            So the sheet is read top to bottom, the way a contents page is: the theme line,
+            then the plate under it at the full width of the paper, then the four ways to add
+            something — solution, crisis, action, group — each wearing its room's drawing and
+            each opening the form on that room. The paste line stays under them, because it is
+            about the same job: putting something on the record. ── */}
+        <SubjectRail
+          current={activeSubject}
+          totalEntries={items.length + actions.length}
+          allLabel="Explore by theme"
+          expanded={showIndex}
+          onOpenIndex={() => setShowIndex(open => !open)}
+          onOpenPicker={() => setShowIndex(true)}
+        />
+        <SubjectPickerSheet
+          open={showIndex}
+          onClose={() => setShowIndex(false)}
+          subjects={[...filledSubjects, ...emptySubjects]}
+          totalEntries={items.length + actions.length}
+          selected={selectedCategory}
+          onSelect={selectTheme}
+        />
+
+        <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+          {ADD_DOORS.map(({ type, label, Mark }) => (
             <button
-              onClick={() => setShowSubmit(true)}
-              className="mt-3 lg:mt-0 w-full flex items-center justify-center gap-2 px-3 py-3.5 min-h-[48px] bg-[#e2602a] text-[#141210] text-[11px] font-black font-mono uppercase whitespace-nowrap border-2 border-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors"
+              key={type}
+              onClick={() => { setSubmitType(type); setShowSubmit(true); }}
+              className="flex min-h-[54px] items-center justify-center gap-2 border border-record-ink/40 bg-record-paper px-2 py-2.5 text-[11px] font-black font-mono uppercase tracking-wide text-record-ink transition-colors hover:border-record-ink hover:bg-record-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
             >
-              <Plus className="w-4 h-4 flex-shrink-0" /> Solution, crisis, group or action
+              <span aria-hidden="true" className="flex shrink-0 items-center"><Mark size={22} /></span>
+              <span className="text-left leading-tight">{label}</span>
             </button>
-            <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-2">
-              Been sent an email? Paste it in — we read it and fill the form in for you. No account needed, nothing to install.
-            </p>
-
-          </div>
+          ))}
         </div>
+        <p className="mt-2 text-[10px] font-mono leading-relaxed text-[#5a5246]">
+          Been sent an email? Paste it in — we read it and fill the form in for you. No account needed, nothing to install.
+        </p>
+        {/* "Support welcome" is off this line at Janine's request, 9 November: donations
+            are for a host to handle, and are being saved for those conversations. */}
+        <p className="mt-2 text-[10px] font-mono tracking-wide text-[#5a5246]">{t.noads} · {t.nofund}</p>
       </div>
 
       {/* ── CONTENT ── */}
