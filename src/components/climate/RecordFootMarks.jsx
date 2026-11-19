@@ -435,20 +435,27 @@ export function MarkBaseOne({ size = 26, className = '' }) {
 // full-weight red in the row, which is right — this is the door a sceptical reader should
 // find first — and at nineteen pixels two bars cannot be read as anything but equals. Bold
 // beats clever when a mark is being glanced at rather than admired.
+// ── AND NOW IT IS SPELT OUT HERE TOO, BECAUSE THERE IS ONE COVENANT MARK ───────
+// Brian, 19 November: "think footer should be same x=x now bro? And same everywhere bri
+// where relevant bro." He is right, and the fault was mine: I had made the door say x = x
+// and left the two bars standing everywhere else, so the same covenant was a pair of lines
+// on one page and three glyphs on the next. A mark that changes shape depending on where it
+// is printed is not a mark.
+//
+// So there is one drawing now, and this name points at it. The name is kept rather than
+// chased through the pages that import it — a rename buys nothing a reader can see, and
+// every one of those pages wants exactly the thing below.
 export function MarkEqual({ size = 26, className = '' }) {
-  return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <rect x="8.8" y="13.2" width="22.4" height="5.6" className="text-record-mark" fill="currentColor" stroke="none" />
-      <rect x="8.8" y="22.2" width="22.4" height="5.6" className="text-record-mark" fill="currentColor" stroke="none" />
-    </svg>
-  );
+  return <MarkXEqualsX size={size} className={className} />;
 }
 
 // ── AND ON THE DOOR ITSELF, IT IS SPELT OUT ────────────────────────────────────
-// The two bars are the right mark for the foot of a page, where they sit beside the word
-// and the reader already knows what they are standing in. On the door they were the whole
-// of it: a reader met an equals sign and the word PLATFORM, and never the letters either
-// side of it, so the one line the record rests on was the one thing the rail did not say.
+// The door is where the fault showed first, because a door is the only place the mark stands
+// on its own. It carried two bars and the word PLATFORM under them, so a reader met an equals
+// sign and never the letters either side of it — the one line the record rests on was the one
+// thing the rail did not say. The foot had the same two bars, where they sat beside the words
+// and got away with it; they do not get away with it any more either, because the covenant is
+// not a diagram with a short form.
 // Brian, 19 November: "can you change two red lines for x=x." So the door says it now.
 //
 // The two red lines stay exactly where they were, between the letters, because they are the
@@ -464,7 +471,10 @@ export function MarkEqual({ size = 26, className = '' }) {
 export function MarkXEqualsX({ size = 26, className = '' }) {
   return (
     <svg viewBox="0 0 60 20" width={size * 1.9} height={size * 0.63} fill="none" className={className} aria-hidden="true" style={{ overflow: 'visible' }}>
-      <g stroke="currentColor" strokeWidth="3.2" strokeLinecap="round">
+      {/* Red here rather than inherited, because this mark stands on the record's yellow
+          band as often as it stands on paper, and a yellow x on a yellow ground is nothing.
+          One colour wherever it is printed — which is what "the same everywhere" means. */}
+      <g className="text-record-mark" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round">
         <path d="M2 4.4 L12.4 15.6" />
         <path d="M12.4 4.4 L2 15.6" />
         <path d="M47.6 4.4 L58 15.6" />
