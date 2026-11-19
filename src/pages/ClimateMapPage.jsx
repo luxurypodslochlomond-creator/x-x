@@ -58,6 +58,7 @@ export default function ClimateMapPage() {
         </div>
       </section>
 
+      <div className="record-map-desk">
       <ImpactSignal stats={data} />
       <div className="record-reading-panel record-map-near"><NextActionNear /></div>
 
@@ -79,6 +80,7 @@ export default function ClimateMapPage() {
           Method &amp; corrections →
         </Link>
       </p>
+      </div>
     </div>
   );
 }

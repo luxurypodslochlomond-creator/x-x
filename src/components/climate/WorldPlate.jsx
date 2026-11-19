@@ -106,7 +106,8 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               </linearGradient>
             </defs>
             <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".64" />
-            <rect width={PLATE_W} height={PLATE_H} fill={`url(#${atlasId})`} fillOpacity=".94" mask={`url(#${landId})`} />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".65" transform="translate(.22 .22)" mask={`url(#${landId})`} />
+            <rect width={PLATE_W} height={PLATE_H} fill={`url(#${atlasId})`} fillOpacity=".62" mask={`url(#${landId})`} />
           </g>
         )}
         {/* The atlas holds still. The symbols, not a moving wash, carry the signal. */}

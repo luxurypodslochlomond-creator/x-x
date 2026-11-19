@@ -245,7 +245,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
       {/* What the plate is holding, counted from the plate itself. Not a flattering figure
           about being looked at — what the record actually has, and how much of it somebody
           else also says. A dash when a count could not be made; never a zero pretending. */}
-      <dl className="grid grid-cols-2 border-t border-[#141210]/20 bg-[#f7f1e5] sm:grid-cols-4">
+      <dl className="record-map-figures grid grid-cols-2 border-t border-[#141210]/20 bg-[#f7f1e5] sm:grid-cols-4">
         {[
           ['Entries standing', figures.placed, 'set where they happened'],
           ['Countries', figures.countries, 'region only, never a person'],
@@ -265,7 +265,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
       <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
 
       {/* What you pressed, said underneath the planet in the record's own words. */}
-      <div className="border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
+      <div className="record-map-detail border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
         {picked ? (
           <div>
             <div className="flex items-center gap-2 mb-1.5">

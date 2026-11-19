@@ -20,30 +20,36 @@
 .record-map-symbol, .record-map-spot-label { display: none; }
 
 @media screen and (min-width: 1024px) {
-  /* Small, fine symbols retain their meaning when selected. The hit area stays generous. */
-  .record-unified-map :is(.record-map-symbol, .record-entry-marker, .record-map-key button) { --map-signal: rgb(var(--record-map-solution)); }
+  /* A default on the parent must not outrank the individual signals' colours. */
+  .record-unified-map { --map-signal: rgb(var(--record-map-solution)); }
   .record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-map-crisis)); }
   .record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
   .record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-map-wire)); }
   .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-map-cartoon)); }
   .record-unified-map .record-map-symbol {
-    display: grid; place-items: center; flex: none;
-    width: 24px; height: 24px; padding: 4px;
-    color: var(--map-signal); background: rgb(var(--record-ink) / .94);
-    border: 1px solid var(--map-signal); border-radius: 50%; box-shadow: none;
+    display: block; position: relative; flex: none;
+    width: 10px; height: 10px; padding: 0;
+    color: var(--map-signal); background: currentColor;
+    border: 1px solid rgb(var(--record-ink) / .6); border-radius: 50%;
+    box-shadow: 0 0 0 3px rgb(var(--record-ink) / .7), 0 0 14px color-mix(in srgb, var(--map-signal) 32%, transparent);
   }
-  .record-unified-map .record-map-symbol[data-kind="cartoon"] { border-radius: .15rem; }
+  .record-unified-map .record-map-symbol[data-kind="solution"] { background: rgb(var(--record-ink) / .75); border: 2px solid var(--map-signal); }
+  .record-unified-map .record-map-symbol[data-kind="action"] { border-radius: 1px; transform: rotate(45deg); }
+  .record-unified-map .record-map-symbol[data-kind="wire"] { width: 12px; height: 5px; border-radius: 0; }
+  .record-unified-map .record-map-symbol[data-kind="cartoon"] { border-radius: 1px; }
   .record-unified-map .record-world-atlas .record-map-dot { display: none; }
   .record-unified-map .record-world-atlas .record-entry-marker { width: 44px !important; height: 44px !important; }
   .record-unified-map .record-entry-marker:is(:hover, :focus-visible) { z-index: 10 !important; }
-  .record-unified-map .record-entry-marker:is(:hover, :focus-visible) .record-map-symbol { box-shadow: 0 0 0 3px rgb(var(--record-ink) / .7); }
+  .record-unified-map .record-entry-marker:is(:hover, :focus-visible) .record-map-symbol { outline: 1px solid var(--map-signal); outline-offset: 5px; }
   .record-unified-map .record-entry-marker:focus-visible { outline: 1px solid var(--map-signal); outline-offset: 1px; border-radius: 50%; }
   .record-unified-map .record-map-selection { width: 34px !important; height: 34px !important; border-width: 1px !important; }
   .record-unified-map .record-map-key { padding: .7rem 1rem; background: rgb(var(--record-ink)); border-color: rgb(var(--record-bone) / .25); }
   .record-unified-map .record-map-key > :is(p, div) { color: rgb(var(--record-paper)); font-size: .75rem; font-weight: 400; }
   .record-unified-map .record-map-key p span { color: rgb(var(--record-paper) / .75); }
   .record-unified-map .record-map-key-dot { display: none; }
-  .record-unified-map .record-map-key-symbol { width: 20px; height: 20px; padding: 3px; border: 0; background: transparent; }
+  .record-unified-map .record-map-key .record-map-key-symbol { width: 8px; height: 8px; padding: 0; box-shadow: none; }
+  .record-unified-map .record-map-key .record-map-key-symbol[data-kind="wire"] { width: 11px; height: 4px; }
+  .record-unified-map .record-map-key button { color: rgb(var(--record-paper)); }
   .record-unified-map .record-map-key button { padding-inline: .6rem; gap: .4rem; background: transparent; border-bottom: 1px solid transparent; font-weight: 400; }
   .record-unified-map .record-map-key button[aria-pressed="true"] { background: transparent; color: var(--map-signal); border-bottom-color: var(--map-signal); text-decoration: none; }
   .record-unified-map .record-map-key button:focus-visible { outline: 1px solid var(--map-signal); outline-offset: 2px; }
@@ -94,40 +100,29 @@
     width: 10px; height: 10px; margin: -5px 0 0 -5px;
     animation-name: record-map-transmit;
   }
-  .record-unified-map > #reach { margin-top: 1rem; background: rgb(var(--record-bone)); }
-  .record-unified-map > #reach > p { max-inline-size: none; }
-  .record-unified-map > .record-map-near { margin: 1rem 0; }
-  .record-unified-map > .record-map-near > section { background: rgb(var(--record-bone)); }
-  .record-unified-map .record-map-near > section > div { max-width: none; padding: 1.5rem 2rem; }
+  /* One continuous reading ground, not bright cards separated by black gaps. */
+  .record-unified-map :is(.record-map-figures, .record-map-places, .record-map-detail, .record-map-geography-credit) { background: rgb(var(--record-bone)); }
+  .record-unified-map .record-map-places button:not([aria-pressed="true"]) { background: transparent; }
+  .record-unified-map .record-map-geography-credit { margin: 0; max-inline-size: none; border-top: 1px solid rgb(var(--record-ink) / .15); }
+  .record-unified-map .record-map-desk { margin-bottom: 1.5rem; padding-inline: 2rem; background: rgb(var(--record-bone)); border-top: 3px double rgb(var(--record-ink) / .45); }
+  .record-unified-map .record-map-desk :is(#reach, .record-map-near, .record-map-near > section, .record-map-reach-heading, .record-reach-page, .record-page-plate, .record-map-note) { margin: 0; background: transparent; box-shadow: none; }
+  .record-unified-map .record-map-desk #reach { border-top: 0; }
+  .record-unified-map .record-map-desk #reach > p { max-inline-size: none; }
+  .record-unified-map .record-map-near > section > div { max-width: none; padding: 1.5rem 0; }
   .record-unified-map .record-map-near p { max-inline-size: 80ch; }
-  .record-unified-map #reach-details { background: transparent; }
-  .record-unified-map .record-map-reach-heading { padding: 1.5rem 2rem; background: rgb(var(--record-bone)); }
-  .record-unified-map .record-reach-page {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-    gap: 1rem;
-    background: transparent;
-    padding-block: 1rem;
-  }
-  .record-unified-map .record-reach-page > .record-page-plate {
-    width: 100%; max-width: none; margin: 0; padding: 1.5rem 2rem;
-    background: rgb(var(--record-bone));
-    border: 0;
-  }
+  .record-unified-map .record-map-reach-heading { padding: 1.5rem 0; border-top: 1px solid rgb(var(--record-ink) / .35); }
+  .record-unified-map .record-reach-page { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 0 2.5rem; padding-block: 0; }
+  .record-unified-map .record-map-desk .record-reach-page > .record-page-plate { width: 100%; max-width: none; margin: 0; padding: 1.5rem 0; border: 0; border-top: 1px solid rgb(var(--record-ink) / .2); }
+  .record-unified-map .record-map-desk [class~="bg-[#f7f1e5]"] { background-color: rgb(var(--record-bone)); }
   .record-unified-map .record-reach-page > :not(#nations):not(#countries) { grid-column: 1 / -1; }
   .record-unified-map .record-impact-feeds > :only-child { grid-column: 1 / -1; }
   .record-unified-map .record-impact-feeds > #reading { padding: 0; }
-  .record-unified-map .record-impact-feeds > #reading:only-child > div:last-child {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 2rem;
-  }
+  .record-unified-map .record-impact-feeds > #reading:only-child > div:last-child { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
   .record-unified-map .record-impact-feeds > #reading > p { max-inline-size: 80ch; }
-  .record-unified-map .record-impact-feeds p { letter-spacing: normal !important; }
+  .record-unified-map .record-map-desk p { letter-spacing: normal !important; }
   .record-unified-map #reader-place > div { max-width: 60rem; padding: 0; }
-  .record-unified-map > .record-map-note { margin: 0 0 1rem; width: auto; background: rgb(var(--record-bone)); }
-  .record-unified-map .record-map-note { max-inline-size: none; }
+  .record-unified-map .record-map-desk .record-map-note { width: 100%; max-inline-size: none; padding: 1.25rem 0; border-top: 1px solid rgb(var(--record-ink) / .2); }
+  .record-unified-map .record-map-figures p { font-size: .75rem !important; letter-spacing: normal !important; }
 }
 @keyframes record-map-transmit {
   0% { transform: scale(.6); opacity: .45; }

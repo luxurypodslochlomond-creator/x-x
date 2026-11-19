@@ -28,7 +28,7 @@ export default function PlatePlaceIndex({ marks = [], selectedId, onPick }) {
   const openPlace = marks.find((m) => m.id === selectedId)?.country;
 
   return (
-    <div className="border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-2.5">
+    <div className="record-map-places border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-2.5">
       <p className="text-[8px] font-black font-mono uppercase tracking-[0.15em] text-[#5a5246] mb-1.5">
         Where the marks stand
       </p>

@@ -1,13 +1,5 @@
 import React from 'react';
-import { TriangleAlert, Sprout, Zap, Radio, PencilLine } from 'lucide-react';
-
-const ICONS = { crisis: TriangleAlert, solution: Sprout, action: Zap, wire: Radio, cartoon: PencilLine };
-
+// Plain signals, not pictograms. The legend and accessible button name carry the meaning.
 export default function MapSignalMark({ kind, className = '' }) {
-  const Icon = ICONS[kind] || Sprout;
-  return (
-    <span aria-hidden="true" data-kind={kind} className={`record-map-symbol ${className}`}>
-      <Icon size="100%" strokeWidth={1.55} />
-    </span>
-  );
+  return <span aria-hidden="true" data-kind={kind} className={`record-map-symbol ${className}`} />;
 }
