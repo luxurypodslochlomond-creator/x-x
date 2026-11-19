@@ -91,13 +91,15 @@
   #root .press-room .press-scope { font-size: 1rem; }
   #root .press-room .press-contents { gap: .65rem 1.35rem; }
 
-  /* TWO BREAKS. The cover and the lead drawing leave their sheet and run to the glass,
-     so the painting, the book and the drawings are what a phone sees first. */
-  #root .press-room .press-opening-cover { margin-inline: -1.8rem; }
+  /* TWO BREAKS. The cover and the lead drawing leave their sheet and run to the edge of the
+     book, so the painting, the book and the drawings are what a phone sees first. They stop
+     at the book's own edge: a break of 1.8rem against a .8rem margin was running sixteen
+     pixels off the glass on every phone, which is what made the page scroll sideways. */
+  #root .press-room .press-opening-cover { margin-inline: -.8rem; }
   #root .press-room .press-opening-cover .comic-catalogue { margin: 0; }
   #root .press-room .comic-catalogue > img { width: 100%; }
-  #root .press-room .comic-catalogue-band { padding: .9rem 1.8rem 0; }
-  #root .press-room .press-sheet--lead .press-sheet-art { margin: .2rem -1.8rem 0; }
+  #root .press-room .comic-catalogue-band { padding: .9rem .8rem 0; }
+  #root .press-room .press-sheet--lead .press-sheet-art { margin: .2rem -.8rem 0; }
   #root .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: 74vh; }
 
   /* The wall reads as sheets of its own, not as one long box. */

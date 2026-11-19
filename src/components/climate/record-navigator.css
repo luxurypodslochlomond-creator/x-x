@@ -86,19 +86,19 @@
    was looking at the same marks he had always liked and could not tell what they were.
    A mark names nothing; a mark with its name under it is a door.
 
-   Two rows of five now, seventy-eight pixels a cell on a 393-pixel glass. The longest name
-   on either line is "Corrections", so the label is nine pixels with a narrow track: the
-   word measures about sixty-seven pixels and the cell holds seventy-eight, which is the
-   whole arithmetic that has to work for ten names to sit under ten drawings without one
-   of them running into its neighbour. */
+   Two rows of three now, a hundred and twenty pixels a cell on a 393-pixel glass: every
+   door keeps its own word at ten pixels and its mark at twenty-six, and the longest name
+   on the strip — "Cartoons" — measures about sixty, which leaves the cell half empty
+   rather than half eaten. A name that still cannot fit is allowed to wrap rather than be
+   cut, because a cut name is a door that does not say where it goes. */
 .rec-mast-doors .rec-art-caption {
   display: block;
   margin-top: .1rem;
   font-family: var(--font-record-ui);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.2;
-  letter-spacing: .04em;
+  letter-spacing: .03em;
   white-space: normal;
 }
 /* Selection marks the caption, never floods the drawing or its cell. */

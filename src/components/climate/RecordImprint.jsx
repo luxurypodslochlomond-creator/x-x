@@ -22,12 +22,16 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
     <div className="flex flex-col pb-1 lg:pb-2">
       <RecordDeskDoors onOpenContents={onOpenContents} contentsOpen={contentsOpen} />
       <nav aria-label="The record's doors" className="rec-mast-doors w-full lg:hidden">
-        <div className="rec-mast-row flex items-stretch gap-x-1">
+        {/* Two rows of three. Six doors on one line of a 393-pixel glass gave each one
+            fifty-six pixels — a drawing the size of a full stop with a name under it too
+            small to read. Two rows give every door a hundred and twenty, which is the
+            width at which a mark reads as a drawing and its name reads as a word. */}
+        <div className="rec-mast-row grid grid-cols-3 items-stretch gap-x-1 gap-y-1">
           {PRIMARY_NAV.map(({ label, to, what }) => (
-            <RecordNavDoor key={to} to={to} label={label} what={what} size={22} active={pathname === to} className={CELL} />
+            <RecordNavDoor key={to} to={to} label={label} what={what} size={26} active={pathname === to} className={CELL} />
           ))}
           <RecordNavDoor to="/ClimateGuide" label="Explore" what="Method, corrections, the founder and every other part of the record."
-            size={22} asButton onClick={onOpenContents} expanded={contentsOpen} controls="record-contents" active={contentsOpen} className={CELL} />
+            size={26} asButton onClick={onOpenContents} expanded={contentsOpen} controls="record-contents" active={contentsOpen} className={CELL} />
         </div>
       </nav>
       {/* ── BASE 1, IN THE MIDDLE ────────────────────────────────────────────────

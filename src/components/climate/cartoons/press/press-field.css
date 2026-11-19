@@ -1,22 +1,19 @@
-/* ── THE ROOM IS PRINTED ON THE SIGNAL PLATE, NOT ON PALE PAPER ──────────────────
-   The cartoon room was cream sheets floating on the record's dark painting, and a wall
-   of activist drawings on warm cream reads as a photocopied handout — the colour of a
-   filing cabinet, not of a poster.
+/* ── THE ROOM STANDS ON THE PAINTING, NOT ON A SLAB OF YELLOW ────────────────────
+   This room was printed on a full-screen signal plate: the field was painted yellow and
+   the record's painting was switched off behind it, so the one work the whole record is
+   built around was nowhere to be seen on the page about drawings. Brian, 19 November:
+   "I looked at the record page and it's coolasfuck, it doesn't stretch whole page and I
+   can see our coolasfuck painting cover — make cartoon page like this too."
 
-   So this room is printed the way the record prints a warning: the ground is the signal
-   yellow, the drawings and the words sit on clean paper laid on top, and the ink and the
-   red rules do the shouting. Black on that yellow is a higher contrast than black on the
-   old cream was, and white sheets mean no drawing has to fight its own ground.
-
-   Scoped to the cartoon room and nowhere else: every other page of the record keeps its
-   painting and its paper. The masthead above stays paper on purpose — it is the book's
-   furniture, and the book does not change its clothes from room to room. */
+   So the plate comes off the field and the painting comes back. The field is transparent
+   again, the painting runs the whole width underneath at the strength it was painted for,
+   and every chapter of the room is still one clean sheet lying on it — which is what the
+   room's own layout was drawn for in the first place. The signal yellow has not gone
+   anywhere: it is the ink this room's headings, numbers and rules are printed in.
+   Scoped to the cartoon room; every other page of the record is untouched. */
 .climate-record.record-field.record-cartoon-field {
-  background-color: rgb(var(--record-signal));
+  background-color: transparent;
 }
-/* The plate, not the painting: behind this room's sheets there is yellow, and nothing
-   else. The record's painting still runs under every other room. */
-.climate-record.record-cartoon-field > .record-environment { display: none; }
 
 /* Clean paper, so the drawings are the only colour in the frame. */
 #root .record-cartoon-field .press-room-inner > * {
