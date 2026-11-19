@@ -246,8 +246,22 @@ export default function ClimateLayout({ children, currentPage }) {
               "Record" in the row below is the way home, and the tongue has moved into the
               yellow line where the name used to sit opposite it. The keeper's room and the
               checker's queue keep the name, because there the name IS the way back. */}
-          {(isRoom || isCartoonRoom) && (
-            <div className={`${isRoom ? 'flex' : 'hidden lg:flex'} flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5`}>
+          {/* ── THE CARTOON ROOM KEEPS THE COVENANT AND DROPS THE NAME ───────────────
+              Brian, 19 November: "there's a record of the time top right we don't need,
+              and x = x is top right, could be centred." The name was saying what the
+              yellow line above it already says, in a second voice, on the one page of the
+              record that is a poster and not a title page — so it has come off this room.
+              Nothing is lost: the red square and "Record" in the doors below are the way
+              home. x = x has the row to itself now, centred, in the record's red, where a
+              poster puts the one mark it wants you to carry away. */}
+          {isCartoonRoom ? (
+            <div className="flex items-center justify-center pt-2">
+              <Link to="/XEqualsX" aria-label="x = x — the record’s covenant" className="inline-flex min-h-11 items-center text-xl tracking-[.18em] text-record-mark hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">
+                x = x
+              </Link>
+            </div>
+          ) : isRoom ? (
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
               <Link
                 to={createPageUrl('TogetherChangeClimate')}
                 className="group flex min-w-0 items-baseline gap-2"
@@ -261,14 +275,9 @@ export default function ClimateLayout({ children, currentPage }) {
                   Record of the Time
                 </span>
               </Link>
-
-              {isRoom ? <RecordTongueDoor size={18} inline /> : (
-                <Link to="/XEqualsX" aria-label="x = x — the record’s covenant" className="inline-flex min-h-11 items-center text-xl tracking-[.18em] text-record-mark hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">
-                  x = x
-                </Link>
-              )}
+              <RecordTongueDoor size={18} inline />
             </div>
-          )}
+          ) : null}
 
           {/* ── THE YELLOW LINE IS THE TOP OF THE RECORD NOW ─────────────────────────
               The sentence, and the tongue. Worked rooms still go without it, for the same
