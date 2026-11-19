@@ -51,7 +51,7 @@ const BASE_ONE_DOOR = {
 };
 
 export const PRIMARY_NAV = [
-  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and groups.' },
+  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'What is on the record: solutions, crises, actions and gatherings.' },
   // ── THE DOOR IS CALLED SIGNALS, AND THE WORD IS NOT A NEW NAME FOR THE BOOK ───
   // Brian, 19 November: "you sure signals covers wire and news bro… and is it signals from
   // the record, what is our record platform, what signals out there — like crises is that a
@@ -74,7 +74,7 @@ export const PRIMARY_NAV = [
   // So the pivot of the top row is the thing that answers, and x = x sits in the quiet row
   // beneath it, where it can be red without shouting over the five ways into the record.
   BASE_ONE_DOOR,
-  { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
+  { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Where each entry happened, and how far the record has been read.' },
   // ── THE ROOM OF CARTOONS COMES ONTO THE RAIL ────────────────────────────────
   // It was on the contents sheet only, filed under Elsewhere, on the reasoning that a room
   // of drawings is something a reader goes looking for rather than arrives at. That was
@@ -114,7 +114,7 @@ export const RAIL_SECOND_NAV = [
   // and four cells have no middle, so the covenant takes the one place nearest to it, with
   // the two doors about how the record is kept either side of it. Method first, because how
   // an entry is checked is the question that makes the covenant worth reading.
-  { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
+  { label: 'Method', to: '/ClimateMethod', what: 'Where an entry came from, who checked it, and what has been put right since.' },
   // The centre of the quiet row, and the covenant's place: x = x, printed in the mark's red
   // with PLATFORM under it, between the two doors about how the record is kept.
   PLATFORM_DOOR,
@@ -200,7 +200,7 @@ export const DESK_FOUNDER = {
 // (one door, one place — the rule the sheet already keeps), and the music room and the roll
 // stay where they were: a desk's row, and a phone's sheet.
 // One wording for the fingerprints' door, because it now stands in two rows.
-const SEALS_DOOR = { label: 'Seals', to: '/ClimateSeals', what: 'Check an entry’s fingerprint, and what it proves.' };
+const SEALS_DOOR = { label: 'Seals', to: '/ClimateSeals', what: 'Check an entry’s fingerprint against the words on the page.' };
 
 export const PHONE_NAV_ROWS = [
   PRIMARY_NAV,
@@ -234,7 +234,7 @@ export const PHONE_NAV_ROWS = [
 // reads outward from x = x instead of starting with it.
 export const DESK_SECOND_ROW = [
   // How an entry is checked, whose name is on it, and the record's own signal.
-  { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
+  { label: 'Method', to: '/ClimateMethod', what: 'Where an entry came from, who checked it, and what has been put right since.' },
   { label: 'Founder', to: '/ClimateFounder', what: DESK_FOUNDER.what },
   { label: 'Music', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },
   // The middle cell, and the covenant's place on a desk: x = x in red, PLATFORM under it.

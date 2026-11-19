@@ -28,8 +28,8 @@ import {
 // Captions describe the actual geometry, then its intended reading.
 // They are interpretations, not claims that a drawing proves a policy or guarantees an outcome.
 export const MARKS_IN_ORDER = [
-  { name: 'The record', Mark: MarkRecord, to: '/TogetherChangeClimate', door: 'The register', means: 'An ink cover beside a red spine. A place to keep the record together.' },
-  { name: 'Signals', Mark: MarkSignal, to: '/ClimateWire', door: 'The signals', means: 'A red square beside lines of print. Something to put on the record.' },
+  { name: 'The record', Mark: MarkRecord, to: '/TogetherChangeClimate', door: 'The register', means: 'An ink cover beside a red spine. The book the rest of it is kept in.' },
+  { name: 'Signals', Mark: MarkSignal, to: '/ClimateWire', door: 'The signals', means: 'A red block over two lines of print. One thing worth passing on, set apart.' },
   { name: 'The map', Mark: MarkHorizon, to: '/ClimateMap', door: 'The map', means: 'A curve resting on a red horizon. The record, seen through its places.' },
   { name: 'The founder', Mark: MarkSignature, to: '/ClimateFounder', door: 'Who began it', means: 'A nib meets a red line. Someone put their hand to this.' },
   { name: 'Base 1', Mark: MarkBaseOne, to: '/ClimateSearch', door: 'Ask the record', means: 'One standing on a red base. A starting point for a question.' },
@@ -49,7 +49,7 @@ export const MARKS_IN_ORDER = [
   { name: 'Support', Mark: MarkSupport, to: '/ClimateSupport', door: 'Keep it free', means: 'A red circle above an open bowl. Something given.' },
   { name: 'The covenant', Mark: MarkCovenant, to: '/ExtractionProofCovenant', door: 'The promise', means: 'An open lock. An invitation to share what is here.' },
   { name: 'Terms', Mark: MarkTerms, to: '/ClimateTerms', door: 'The terms', means: 'A page above a red signature line. An agreement written down.' },
-  { name: 'Privacy', Mark: MarkPrivacy, to: '/ClimatePrivacy', door: 'What stays private', means: 'Lines of print, one in red. A reminder that some things stay private.' },
+  { name: 'Privacy', Mark: MarkPrivacy, to: '/ClimatePrivacy', door: 'What stays private', means: 'Four lines of print, the third ruled in red. The part that is never shown.' },
   { name: 'The brief', Mark: MarkBrief, to: null, door: null, means: 'Two short lines and a red full stop. A sentence, brought to a close.' },
   { name: 'Every door', Mark: MarkExplore, to: '/ClimateGuide', door: 'The written guide', means: 'Four panes, one red. Several ways into the same record.' },
 ];

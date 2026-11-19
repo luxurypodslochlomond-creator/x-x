@@ -163,6 +163,17 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                           diagram. Twenty-four is the size the index was drawn for. */}
                       <span className={phone ? 'shrink-0' : 'flex w-6 shrink-0 justify-center'} aria-hidden="true"><Mark size={24} /></span>
                       <span>{label}</span>
+                      {/* ── THE DOOR SAYS WHAT IS BEHIND IT, ON THE GLASS ─────────────────
+                          The one plain sentence about each door was living in the link's
+                          title, which a finger never sees: on a phone the door was a mark
+                          and a word, and a reader had to already know what "Method" or
+                          "Seals" meant to choose it. So the sentence is printed under the
+                          name, in the record's reading voice and at caption size, because
+                          a mark that makes sense and a door that has to be guessed at are
+                          the same failure from opposite ends. */}
+                      {phone && what && (
+                        <span className="mt-0.5 block text-[11px] font-normal normal-case leading-[1.35] tracking-normal text-record-muted">{what}</span>
+                      )}
                     </Link>
                   </li>
                 );
