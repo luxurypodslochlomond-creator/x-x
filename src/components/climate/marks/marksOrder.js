@@ -25,31 +25,40 @@ import {
   MarkExplore,
 } from '@/components/climate/RecordFootMarks';
 
-// Captions describe the actual geometry, then its intended reading.
-// They are interpretations, not claims that a drawing proves a policy or guarantees an outcome.
+// ── A CAPTION SAYS WHAT THE DOOR OPENS ─────────────────────────────────────────
+// Brian, 19 November: "the descriptions for our symbols and marks aren't truth."
+//
+// Every caption here used to read the drawing back to the reader — "an ink cover beside a red
+// spine. The book the rest of it is kept in." That is an interpretation, and an interpretation
+// printed under a mark is a claim: it says the drawing means something, and it says the record
+// knows what. Nobody drew it with that sentence in mind, and the sentence cannot be checked by
+// the reader standing in front of it.
+//
+// So a caption now says the one thing that is true and useful at a door: where it goes. The
+// drawing is left to be looked at. Where a mark is not a door at all, it says so.
 export const MARKS_IN_ORDER = [
-  { name: 'The record', Mark: MarkRecord, to: '/TogetherChangeClimate', door: 'The register', means: 'An ink cover beside a red spine. The book the rest of it is kept in.' },
-  { name: 'Signals', Mark: MarkSignal, to: '/ClimateWire', door: 'The signals', means: 'A red block over two lines of print. One thing worth passing on, set apart.' },
-  { name: 'The map', Mark: MarkHorizon, to: '/ClimateMap', door: 'The map', means: 'A curve resting on a red horizon. The record, seen through its places.' },
-  { name: 'The founder', Mark: MarkSignature, to: '/ClimateFounder', door: 'Who began it', means: 'A nib meets a red line. Someone put their hand to this.' },
-  { name: 'Base 1', Mark: MarkBaseOne, to: '/ClimateSearch', door: 'Ask the record', means: 'One standing on a red base. A starting point for a question.' },
-  { name: 'x = x', Mark: MarkXEqualsX, to: '/XEqualsX', door: 'The principle', means: 'An x on either side of an equals sign. Equal worth, in three characters.' },
-  { name: 'Method', Mark: MarkMethod, to: '/ClimateMethod', door: 'How it is kept', means: 'A stamp above its red impression. How a mark gets onto the page.' },
-  { name: 'Corrections', Mark: MarkCorrection, to: '/ClimateMethod#corrections', door: 'What was put right', means: 'A red insertion rises into a gap in the line. Room to put something right.' },
-  { name: 'Seals', Mark: MarkSeal, to: '/ClimateSeals', door: 'Check the words', means: 'Two nested impressions, one red. A fingerprint for the words.' },
-  { name: 'Witnesses', Mark: MarkCheckers, to: '/ClimateFellows', door: 'Take a look', means: 'Two eyes, one red. Another pair of eyes on the same thing.' },
-  { name: 'The roll', Mark: MarkRoll, to: '/ClimateRoll', door: 'The roll', means: 'Three lines, the last in red. A place for another name.' },
-  { name: 'Handover', Mark: MarkHandover, to: '/ClimateHost', door: 'Hosting the record', means: 'An arrow rises from a solid block. Something ready to change hands.' },
-  { name: 'Music', Mark: MarkMusic, to: '/ClimateMusic', door: 'The music room', means: 'A tuning fork with a red stem. A note carried into the room.' },
-  { name: 'Studio', Mark: MarkStudio, to: '/Studio', door: 'The studio', means: 'A tool meets the edge of a block. A place to make something.' },
-  { name: 'The wall', Mark: MarkWall, to: '/ClimateCartoons', door: 'The cartoons room', means: 'Bricks laid across a joint, one red. A wall made from what we bring.' },
-  { name: 'The plan', Mark: MarkPlan, to: '/ClimateBrief', door: 'The short version', means: 'Three rising steps, the next in red. What comes next.' },
-  { name: 'Readership', Mark: MarkReadership, to: '/ClimateMap#reach', door: 'How far it went', means: 'A trail running beyond the square. The record finding its way elsewhere.' },
-  { name: 'Custodians', Mark: MarkHost, to: '/CustodianRoom', door: 'The working room', means: 'A key with red teeth. The work of looking after the record.' },
-  { name: 'Support', Mark: MarkSupport, to: '/ClimateSupport', door: 'Keep it free', means: 'A red circle above an open bowl. Something given.' },
-  { name: 'The covenant', Mark: MarkCovenant, to: '/ExtractionProofCovenant', door: 'The promise', means: 'An open lock. An invitation to share what is here.' },
-  { name: 'Terms', Mark: MarkTerms, to: '/ClimateTerms', door: 'The terms', means: 'A page above a red signature line. An agreement written down.' },
-  { name: 'Privacy', Mark: MarkPrivacy, to: '/ClimatePrivacy', door: 'What stays private', means: 'Four lines of print, the third ruled in red. The part that is never shown.' },
-  { name: 'The brief', Mark: MarkBrief, to: null, door: null, means: 'Two short lines and a red full stop. A sentence, brought to a close.' },
-  { name: 'Every door', Mark: MarkExplore, to: '/ClimateGuide', door: 'The written guide', means: 'Four panes, one red. Several ways into the same record.' },
+  { name: 'The record', Mark: MarkRecord, to: '/TogetherChangeClimate', door: 'The register', means: 'Opens the front page: every entry, in four rooms.' },
+  { name: 'Signals', Mark: MarkSignal, to: '/ClimateWire', door: 'The signals', means: 'Opens the wire: what changed, where, and who says so.' },
+  { name: 'The map', Mark: MarkHorizon, to: '/ClimateMap', door: 'The map', means: 'Opens the map: where entries happened, and where the record has been read.' },
+  { name: 'The founder', Mark: MarkSignature, to: '/ClimateFounder', door: 'Who began it', means: 'Opens the page on Janine M. H. Selendy, who asked for the record.' },
+  { name: 'Base 1', Mark: MarkBaseOne, to: '/ClimateSearch', door: 'Ask the record', means: 'Opens the search: ask for a place, a subject or a source.' },
+  { name: 'x = x', Mark: MarkXEqualsX, to: '/XEqualsX', door: 'The principle', means: 'Opens the page on the record’s principle: equal worth, drawn rather than argued.' },
+  { name: 'Method', Mark: MarkMethod, to: '/ClimateMethod', door: 'How it is kept', means: 'Opens the method: how an entry is checked, and what has been put right.' },
+  { name: 'Corrections', Mark: MarkCorrection, to: '/ClimateMethod#corrections', door: 'What was put right', means: 'Opens the corrections listed on the method page.' },
+  { name: 'Seals', Mark: MarkSeal, to: '/ClimateSeals', door: 'Check the words', means: 'Opens the seals: the fingerprint taken of each entry, checked in your own browser.' },
+  { name: 'Witnesses', Mark: MarkCheckers, to: '/ClimateFellows', door: 'Take a look', means: 'Opens the page on what reading for the record involves, and how to ask to take part.' },
+  { name: 'The roll', Mark: MarkRoll, to: '/ClimateRoll', door: 'The roll', means: 'Opens the roll: the people who check the record, in their own words.' },
+  { name: 'Handover', Mark: MarkHandover, to: '/ClimateHost', door: 'Hosting the record', means: 'Opens the page on what carrying the record involves.' },
+  { name: 'Music', Mark: MarkMusic, to: '/ClimateMusic', door: 'The music room', means: 'Opens the music room: the record’s theme, pressed to play.' },
+  { name: 'Studio', Mark: MarkStudio, to: '/Studio', door: 'The studio', means: 'Opens the studio.' },
+  { name: 'The wall', Mark: MarkWall, to: '/ClimateCartoons', door: 'The cartoons room', means: 'Opens the wall: drawings given to the record, with the hand that made them.' },
+  { name: 'The plan', Mark: MarkPlan, to: '/ClimateBrief', door: 'The short version', means: 'Opens the project brief: what is live, what is planned, and what is missing.' },
+  { name: 'Readership', Mark: MarkReadership, to: '/ClimateMap#reach', door: 'How far it went', means: 'Opens the reach figures: reads, and the countries they came from.' },
+  { name: 'Custodians', Mark: MarkHost, to: '/CustodianRoom', door: 'The working room', means: 'Opens the working room, for the people who look after the record.' },
+  { name: 'Support', Mark: MarkSupport, to: '/ClimateSupport', door: 'Keep it free', means: 'Opens the page on keeping the record free.' },
+  { name: 'The covenant', Mark: MarkCovenant, to: '/ExtractionProofCovenant', door: 'The promise', means: 'Opens the extraction-proof covenant: the terms the record is shared under.' },
+  { name: 'Terms', Mark: MarkTerms, to: '/ClimateTerms', door: 'The terms', means: 'Opens the terms the record is offered under.' },
+  { name: 'Privacy', Mark: MarkPrivacy, to: '/ClimatePrivacy', door: 'What stays private', means: 'Opens what the record collects, and what it refuses to.' },
+  { name: 'The brief', Mark: MarkBrief, to: null, door: null, means: 'Not a door: the mark for the record’s own summary.' },
+  { name: 'Every door', Mark: MarkExplore, to: '/ClimateGuide', door: 'The written guide', means: 'Opens the written guide: every control on the record, and where each one leads.' },
 ];

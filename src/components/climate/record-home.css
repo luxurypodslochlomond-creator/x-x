@@ -36,6 +36,57 @@
 
 .record-home-page { background-color: transparent; }
 
+/* ── THE COVER PLATE ─────────────────────────────────────────────────────────────
+   The opening is the painting now, with the record's own drawings laid on it as a plate's
+   legend. On a desk the fixed painting already runs behind the book, so the plate only
+   needs a light ink to hold the words; on a handset the book is solid paper, so the plate
+   carries the portrait painting itself rather than sitting as a grey band over nothing. */
+.record-cover-plate { background-color: rgb(var(--record-ink) / .18); }
+/* The veil only exists so the words at the foot of the plate can be read. The top of the
+   painting is left alone, because that is the part a reader should meet first. */
+.record-cover-plate-veil {
+  background-image: linear-gradient(
+    to top,
+    rgba(20, 18, 16, .95) 0%,
+    rgba(20, 18, 16, .80) 30%,
+    rgba(20, 18, 16, .42) 58%,
+    rgba(20, 18, 16, .10) 82%,
+    rgba(20, 18, 16, 0) 100%
+  );
+}
+.record-cover-plate-title { font-size: clamp(38px, 5vw, 82px); }
+
+/* ── THE PLATES THE ENTRIES ARE SET ON ────────────────────────────────────────────
+   A headline on a record is set at the size a headline is set at, and it is set in the
+   record's reading face rather than in a label's capitals. The sizes are here rather than
+   in the markup so the same three settings can be tuned in one place. */
+.record-row-title {
+  font-family: var(--font-heading);
+  font-size: clamp(23px, 2.1vw, 33px);
+}
+.record-holding-title {
+  font-family: var(--font-heading);
+  font-size: clamp(26px, 2.6vw, 42px);
+}
+.record-holding-title--over { font-size: clamp(24px, 2.4vw, 38px); }
+.record-holding-small-title {
+  font-family: var(--font-heading);
+  font-size: 16.5px;
+}
+@media (max-width: 639px) {
+  .record-cover-plate-title { font-size: clamp(30px, 9vw, 44px); }
+}
+@media (max-width: 1023px) {
+  .record-cover-plate {
+    background-color: rgb(var(--record-earth));
+    background-image:
+      linear-gradient(180deg, rgb(var(--record-earth) / .12) 0%, rgb(var(--record-earth) / .34) 42%, rgb(var(--record-earth) / .78) 80%, rgb(var(--record-earth)) 100%),
+      var(--record-cover-mobile);
+    background-size: cover;
+    background-position: center 28%;
+  }
+}
+
 /* ── THE ROOMS COME FIRST ON A PHONE ─────────────────────────────────────────────
    Brian, 19 November: "when go in with mobile can't get to all the coolasfuck until scroll
    down." The order is changed here rather than in the page, so nothing is moved, duplicated

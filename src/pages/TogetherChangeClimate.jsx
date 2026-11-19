@@ -60,10 +60,10 @@ const CATEGORIES = [
   { id: 'other', label: 'Other', icon: Globe },
 ];
 
-import SolutionCard from '@/components/climate/SolutionCard';
-import RecordDoors from '@/components/climate/RecordDoors';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
-import RecordHomeHero from '@/components/climate/RecordHomeHero';
+import RecordCoverPlate from '@/components/climate/RecordCoverPlate';
+import RecordHolding from '@/components/climate/RecordHolding';
+import RecordEntryList from '@/components/climate/RecordEntryList';
 
 // ── Interface language support — Janine's "all languages" spec: broad preset list + free-type any language (AI-translated live) ──
 const LANGS = [
@@ -296,7 +296,7 @@ export default function TogetherChangeClimate() {
   // crises door looked like itself. A door now holds its own colour and nothing else:
   // ink until it is chosen, then the pigment its own section heading, card edge and
   // button already carry.
-  // One label per room. The rooms themselves are drawn by RecordDoors, which carries each
+  // One label per room. The rooms themselves are drawn by RecordCoverPlate, which carries each
   // one's own pigment — green for what works, red for what is burning, yellow for the people
   // gathered, orange for what is being done. This list is kept for the line that tells a
   // reader which room they are standing in.
@@ -446,9 +446,20 @@ export default function TogetherChangeClimate() {
           opens the same way, and the four rooms are the second thing a thumb can reach. A
           desk keeps exactly the order it had. */}
       <div className="record-home-flow">
-      {/* The record opens first; Jane's voice follows on the same continuous painting. */}
-      <RecordPaintedBand strength={0.65} soft continuous className="record-home-opening">
-        <RecordHomeHero copy={t} />
+      {/* ── THE PAINTING IS THE FRONT PAGE ────────────────────────────────────────
+          The record's own drawings are laid on the painting the way a legend is printed on
+          a plate, and the words sit at the foot of it. Jane's voice follows on the same
+          continuous painting, so the record opens as one room rather than a stack of bands. */}
+      <RecordCoverPlate
+        copy={t}
+        counts={doorCounts}
+        selected={selectedType}
+        onSelect={(key) => {
+          setSelectedType(selectedType === key ? 'all' : key);
+          requestAnimationFrame(() => bringIntoView(contentRef.current));
+        }}
+      />
+      <RecordPaintedBand strength={0.65} soft continuous>
         <RecordHomeVoice />
       </RecordPaintedBand>
 
@@ -489,21 +500,6 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
-      {/* ── THE FOUR ROOMS — the backbone, and it arrives before the pictures are shown
-             off rather than after. Each room in its own pigment, each carrying how much the
-             record holds and one plain line saying what it is for; opening one carries the
-             reader down to it. On a phone these keep their own place at the top, by order. ── */}
-      <div className="record-home-doors">
-        <RecordDoors
-          counts={doorCounts}
-          selected={selectedType}
-          onSelect={(key) => {
-            setSelectedType(selectedType === key ? 'all' : key);
-            requestAnimationFrame(() => bringIntoView(contentRef.current));
-          }}
-        />
-      </div>
-
       {/* ── THE PICTURES — what people are doing and what is at risk, held up now that the
              reader knows what the record is made of. The space is held while it loads, so
              nothing jumps on arrival. ── */}
@@ -528,14 +524,7 @@ export default function TogetherChangeClimate() {
               credit — they are simply side by side, one thumb-width each, so the record's
               working parts arrive in one screen instead of three. A desk keeps the row of
               three, because a desk has the room and no thumb doing the swiping. */}
-          <div className="record-card-grid climate-nav-rail grid grid-flow-col auto-cols-[82%] snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [&>*]:snap-start lg:grid-flow-row lg:auto-cols-auto lg:grid-cols-3 lg:gap-4 lg:overflow-visible lg:pb-0">
-            {loading
-              ? [0, 1, 2].map(i => <div key={i} className="record-entry-placeholder min-h-[124px] bg-record-ink/10 border border-record-paper/25 animate-pulse" />)
-              : featured.map((item, i) => <SolutionCard key={item.id} item={item} lead={i === 0} />)}
-          </div>
-          <p className="lg:hidden mt-1.5 text-[10px] font-mono uppercase tracking-[0.14em] text-[#5a5246]">
-            Swipe · {featured.length} {featured.length === 1 ? 'plate' : 'plates'}
-          </p>
+          <RecordHolding items={featured} loading={loading} />
         </div>
       )}
 
@@ -639,17 +628,13 @@ export default function TogetherChangeClimate() {
             {showEntries && solutions.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" />
-                <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
-                  {solutions.map(item => <SolutionCard key={item.id} item={item} />)}
-                </div>
+                <RecordEntryList items={solutions} />
               </section>
             )}
             {showEntries && crises.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" />
-                <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
-                  {crises.map(item => <SolutionCard key={item.id} item={item} />)}
-                </div>
+                <RecordEntryList items={crises} />
               </section>
             )}
             {showEntries && (solutions.length + crises.length) === 0 && (

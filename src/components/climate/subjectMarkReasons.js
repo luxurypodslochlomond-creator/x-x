@@ -1,53 +1,53 @@
-// ── WHY A SUBJECT IS ON THIS RECORD ─────────────────────────────────────────────
-// Brian, 19 November: "descriptions should be about record / platform, not what art is —
-// we created this for a reason, and that reason is the coolasfuck context."
+// ── WHAT A SUBJECT IS, AND NOTHING MORE ─────────────────────────────────────────
+// Brian, 19 November: "the descriptions for our symbols and marks aren't truth."
 //
-// He is right, and the earlier rule here was the wrong rule. These lines used to describe
-// the drawing — "a stalk with its seed head bent over, and the grain in red" — which told a
-// reader what a picture looks like and nothing about why the record keeps it. A reader
-// standing on a public record does not need the picture explained. They need to know why
-// this subject earned a place on it, and who is behind what is said about it.
+// He is right, and the fault is worth naming so it does not come back. These lines were
+// written twice. First as descriptions of the drawings ("a stalk with its seed head bent
+// over"), which told a reader what a picture looks like and nothing else. Then as reasons —
+// "because half the air a reader is breathing was made by something they will never see" —
+// which is a better sentence and a worse thing to put on a record, because it is a claim the
+// record has not checked, attached to a subject the record may hold nothing under.
 //
-// So each line is now one plain sentence on the reason the subject is kept: the thing that
-// makes it matter to a person's life, said without a slogan. The drawings are still drawn
-// for each one and still stand above the words; they simply no longer do the talking.
+// So a line now says what the subject covers and, where it applies, what is filed under it.
+// It does not say why the subject matters, who it matters to, or what it costs. Those are
+// arguments, and a record that argues in its index has stopped being an index.
 //
-// One rule for writing them: never a slogan, never a claim the record cannot keep, and
-// never a sentence that would read the same on a poster for anything else.
+// The count printed beside each mark is the other half of the same honesty: it says how much
+// the record actually holds, and a subject with nothing under it says nothing at all.
 const subjectMarkReasons = {
-  all: 'Everything this record holds, on one page — because a record that keeps only the easy subjects is a brochure.',
-  agriculture: 'Because the field is where weather turns into dinner, and the person who grew it is named on the entry.',
-  water: 'Because it falls, gathers and is taken, and every claim about it here has somebody standing behind it.',
-  heat: 'Because a hot day is a warning before it is a temperature, and a warning belongs where it can be checked.',
-  coastal_erosion_protection: 'Because a coast is held by the land behind the wall, and what people actually built is worth copying.',
-  seagrasses: 'Because a meadow under water holds the sand, and nobody notices it going until the beach has gone.',
-  mangroves: 'Because the part that holds a coast stands under the water, where nobody photographs it.',
-  oceans: 'Because the sea is one body of water, and what happens in one place arrives somewhere else.',
-  zooplankton: 'Because the smallest lives in the sea feed the largest, and nothing that small gets its own news.',
-  phytoplankton: 'Because half the air a reader is breathing was made by something they will never see.',
-  forest_preservation: 'Because a stand of trees holds more than any single tree, and keeping it is a decision somebody made.',
-  rewilding: 'Because ground left alone grows back in its own direction, which is worth recording rather than managing.',
-  urban_geodesign: 'Because the street is designed before anyone walks down it, and the design is where a city can change.',
-  transportation: 'Because how people get to work is a climate decision, made every morning, by them.',
-  electric_vehicles: 'Because the difference is the charge and not the shape, and the difference is the thing worth reporting.',
-  renewable_energy: 'Because the turning is the point, and where the turning starts is worth knowing.',
-  solar_desalination: 'Because the sun does the work and the water is the yield, and a dry coast can copy that.',
-  drought: 'Because drought is the ground rather than the sky, and the ground is where people live.',
-  flooding: 'Because water arrives where it arrives, and the record keeps what people did about it.',
-  extreme_weather: 'Because the warning is the part that comes out of the cloud, and a warning only works if it is believed.',
-  sanitation_hygiene: 'Because clean hands are a supply before they are a habit, and a supply is a thing a town can build.',
-  air_quality: 'Because the air a reader breathes is the layer nearest the ground, and somebody somewhere is measuring it.',
-  biodiversity: 'Because variety is the second life on the same stem, and losing it happens quietly.',
-  coral_reefs: 'Because a reef is built by animals, and it is the only city on earth that nobody planned.',
-  kelp_forests: 'Because a forest under water is still a forest, and it burns and grows back like one.',
-  fisheries: 'Because what swims away is also what gets caught, and it is the same fish.',
-  wetlands: 'Because the reeds do the filtering for nothing, and work done for nothing is the first thing cut.',
-  peatlands: 'Because peat is time, stored, and burning it spends what cannot be earned back.',
-  soil_health: 'Because soil is judged by what comes out of it, and what comes out of it is dinner.',
-  food_security: 'Because the bowl is a promise and the stalk is the work, and the record keeps both.',
-  agroforestry: 'Because the crop and the tree are the same ground, and one field can do two jobs.',
-  desertification: 'Because sand is what is left when ground stops holding, and it can be seen coming.',
-  other: 'Because a subject that does not fit the rest still keeps its place on the record.',
+  all: 'Every entry on the record, whatever subject it was filed under.',
+  agriculture: 'Farming, soil and what a field produces.',
+  water: 'Rain, rivers, groundwater and supply.',
+  heat: 'Air temperature, heatwaves and the effect of heat on people.',
+  coastal_erosion_protection: 'Sea walls, dunes and living shorelines — what holds a coast.',
+  seagrasses: 'Seagrass meadows and the shallow sea they grow in.',
+  mangroves: 'Mangrove forest, and the coast it holds.',
+  oceans: 'The open sea: its chemistry, its currents and its life.',
+  zooplankton: 'The small drifting animals the sea feeds on.',
+  phytoplankton: 'The drifting plants of the sea, and the oxygen they produce.',
+  forest_preservation: 'Standing forest, and the decisions that keep it standing.',
+  rewilding: 'Ground given back to nature, and what returned to it.',
+  urban_geodesign: 'Streets, shade, water and heat in a built-up place.',
+  transportation: 'How people and goods move: buses, rail and roads.',
+  electric_vehicles: 'Vehicles that run on a battery rather than a tank.',
+  renewable_energy: 'Power from wind, sun, water and heat underground.',
+  solar_desalination: 'Fresh water made from salt water using sunlight.',
+  drought: 'Long dry periods, and the ground they leave behind.',
+  flooding: 'Water arriving where people live and work.',
+  extreme_weather: 'Storms, heatwaves and the events that do damage.',
+  sanitation_hygiene: 'Toilets, sewers, clean water and handwashing.',
+  air_quality: 'What is in the air a person breathes.',
+  biodiversity: 'The number and variety of living things in a place.',
+  coral_reefs: 'Coral, and the reef it builds.',
+  kelp_forests: 'Kelp, and the underwater forest it makes.',
+  fisheries: 'Fishing, the stocks it takes from, and how they are managed.',
+  wetlands: 'Marshes, fens and bogs that hold and filter water.',
+  peatlands: 'Peat ground, which stores carbon while wet and releases it when drained or burned.',
+  soil_health: 'Soil structure, fertility and erosion.',
+  food_security: 'Whether people can get enough food, and how they get it.',
+  agroforestry: 'Trees and crops grown on the same ground.',
+  desertification: 'Ground turning to desert, and what holds it.',
+  other: 'Entries that do not fit the rest of the list.',
 };
 
 export default subjectMarkReasons;
