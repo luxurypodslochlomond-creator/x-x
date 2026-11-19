@@ -191,7 +191,7 @@ export default function ClimateWorkshop() {
         </p>
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
           <Link to="/ClimateCartoons" className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide underline decoration-dotted underline-offset-4">
-            The cartoon room <ArrowRight className="h-3.5 w-3.5" />
+            The Wall <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <Link to="/ClimateCorrections" className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide underline decoration-dotted underline-offset-4">
             Corrections, in the open <ArrowRight className="h-3.5 w-3.5" />

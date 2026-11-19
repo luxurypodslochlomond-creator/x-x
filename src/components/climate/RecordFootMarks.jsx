@@ -188,12 +188,29 @@ export function MarkPencil({ size = 26, className = '' }) {
 // sideways the way a word is drawn in a strip, with the eyes cut at an angle and the mouth
 // wide open in the record's own red. Still one weight, still one solid mass, still readable
 // at twenty-two pixels in the rail — but it looks back at the reader and it is laughing.
-export function MarkCartoon({ size = 26, className = '' }) {
+// ── THE WALL, AND DELIBERATELY NOT A BRICK ONE ────────────────────────────────
+// The room wore a speech balloon with a face in it: the mark of a cartoon as a thing that
+// talks, which is true of the trade and not true of this room. What the room is, is a wall
+// — and every wall symbol in the world is drawn as the other meaning, bricks and courses
+// and a barrier, which is why a "wall" icon usually reads as a border or a door being shut
+// on somebody. That is the one thing this room is not.
+//
+// So it is a line across the page with two drawings pegged to it and one place still
+// empty, marked in red where the next one goes. The line holds the work up, the work is
+// somebody's hand, and the gap is the record asking rather than the record missing
+// something. Tested at twenty-two pixels, which is the size a phone's rail gives it: three
+// panels were drawn first and the third dissolved into a hairline, so the wall carries two
+// and the empty place carries the mark that says it is yours.
+export function MarkWall({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.9" className={className} aria-hidden="true">
-      <path d="M9.9 5.2 33 7.1c2.6.2 4.3 1.9 4.1 4.5l-1 14.4c-.2 2.5-1.9 4.1-4.4 3.9l-8.2-.6-4.9 6.6.2-7-9.7-.7c-2.5-.2-4.1-1.9-3.9-4.4L6 9.1c.2-2.6 1.4-4.1 3.9-3.9Z" />
-      <path d="M14.9 13.7l4.4 2.4M27.8 15.6l4.1-2.6" strokeWidth="2.2" />
-      <path d="M14.6 21.4c1.5 3.6 3.8 5.4 6.6 5.4 2.8 0 5.1-1.8 6.7-5.4Z" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.6" className={className} aria-hidden="true">
+      <path d="M2.5 9.2h35" strokeWidth="2.3" />
+      <path d="M11 9.2v3.2M28.6 9.2v3.2" strokeWidth="1.5" />
+      <rect x="4.6" y="12.6" width="12.8" height="20.4" strokeWidth="1.6" />
+      <circle cx="8.6" cy="18.4" r="1.9" strokeWidth="1.4" />
+      <path d="M5.8 29.4l3.6-5.2 2.2 2.2 2.3-2.9 3.1 5.9" strokeWidth="1.4" />
+      <rect x="22.2" y="12.6" width="12.8" height="20.4" strokeWidth="1.3" strokeDasharray="2.4 3" />
+      <path d="M28.6 19v7.6M24.8 22.8h7.6" className="text-record-mark" strokeWidth="1.9" />
     </svg>
   );
 }

@@ -80,7 +80,7 @@ export default function ClimateCartoonSheet() {
         <div className="sheet-state">
           <h1 className="sheet-artist">No sheet at this address.</h1>
           <p className="sheet-line">A drawing has a sheet here once a keeper has put it on the wall.</p>
-          <Link className="sheet-tool" to="/ClimateCartoons">The cartoon room</Link>
+          <Link className="sheet-tool" to="/ClimateCartoons">The Wall</Link>
         </div>
       </div>
     );
@@ -91,7 +91,7 @@ export default function ClimateCartoonSheet() {
   return (
     <div className="sheet-page">
       <div className="sheet-tools">
-        <Link className="sheet-tool" to="/ClimateCartoons">← The cartoon room</Link>
+        <Link className="sheet-tool" to="/ClimateCartoons">← The Wall</Link>
         <div className="sheet-tools-right">
           <button type="button" onClick={copyCredit}>{copied ? 'Credit copied' : 'Copy the credit line'}</button>
           <button type="button" onClick={() => window.print()}>Print or save as PDF</button>

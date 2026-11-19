@@ -36,7 +36,13 @@ export const PRIMARY_NAV = [
   // a speech balloon with a face in it — so the record offers the drawings it was given
   // instead of keeping them behind a sheet. It is not repeated on the sheet: one door, one
   // place. Six cells on a handset, which is the number this row was drawn for.
-  { label: 'Cartoons', to: '/ClimateCartoons', page: 'ClimateCartoons', what: 'Drawings given to the record, with the hand that made them still on them.' },
+  // ── AND IT IS CALLED THE WALL, BECAUSE THAT IS WHAT THE ROOM IS ──────────────
+  // The door said "Cartoons", which names the medium rather than the place, and it was the
+  // last thing on the record still calling the room something its own masthead no longer
+  // says. A wall is the trade's word in every newsroom and every salon on earth: the thing
+  // a drawing goes up on, and the thing people stand in front of and argue. Eight letters,
+  // the same as "Cartoons", so no cell on the rail grew a pixel for it.
+  { label: 'The Wall', to: '/ClimateCartoons', page: 'ClimateCartoons', what: 'Drawings given to the record, with the hand that made them still on them.' },
 ];
 
 // ── THE RAIL'S SECOND ROW ─────────────────────────────────────────────────────
