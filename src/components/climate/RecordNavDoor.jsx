@@ -19,7 +19,11 @@ import { markFor } from '@/components/climate/pageMarks';
 // the back button never has to be pressed twice to leave it. A finger that DRAGS (more
 // than a thumb's width) is scrolling the sheet, not choosing a door, and is left alone.
 // A mouse is untouched: hovering and clicking behave exactly as they did.
-export default function RecordNavDoor({ to, label, what, active = false, size = 44, className = '', onClick, asButton = false, expanded, controls, popup = 'dialog', mark }) {
+// A door may also need to keep its own case. Captions are set in the printer's upper-case
+// like a label under a cut mark, which is right for a word — but x = x is a mark, not a
+// word, and it is lower case wherever else the record prints it. `plainCase` leaves the
+// caption's tracking alone and only stops it shouting the covenant.
+export default function RecordNavDoor({ to, label, what, active = false, size = 44, className = '', onClick, asButton = false, expanded, controls, popup = 'dialog', mark, plainCase = false }) {
   // A door may bring its own drawing. Explore is the one door that is not a destination —
   // it opens the index of all the others — so it carries its own mark rather than the
   // picture of the page it happens to name in its `to`.
@@ -63,7 +67,7 @@ export default function RecordNavDoor({ to, label, what, active = false, size = 
       className={`rec-art-door ${active ? 'rec-art-door-active' : ''} ${className}`}
     >
       <span className="rec-art-drawing" aria-hidden="true"><Mark size={size} /></span>
-      <span className="rec-art-caption">{label}</span>
+      <span className="rec-art-caption" style={plainCase ? { textTransform: 'none' } : undefined}>{label}</span>
     </Door>
   );
 }

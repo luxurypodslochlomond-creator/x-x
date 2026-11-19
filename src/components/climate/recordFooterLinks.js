@@ -52,7 +52,15 @@ export const PRIMARY_NAV = [
 // in the "How it is kept" part of the sheet and stay here as the one place their wording
 // is written down.
 export const RAIL_SECOND_NAV = [
-  { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // ── THE DOOR IS CALLED WHAT THE ROOM IS CALLED ───────────────────────────────
+  // It said "Why", which is the question, and the room behind it answers that question
+  // with a mark rather than a sentence: x = x. Brian, 19 November: "why in nav should be
+  // x = x I think… makes sense to me this way." It does, and for the plainest reason a
+  // door can have — a door carries the name of the room behind it, and the page's name is
+  // x = x. "Why" also asked the reader to guess what they would find; the mark tells them.
+  // It is set exactly as it is set everywhere else on the record, lower case, so the
+  // caption drops the printer's upper-casing for this one door and keeps its tracking.
+  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
 ];
 
@@ -136,7 +144,8 @@ export const PHONE_NAV_ROWS = [
 // line up down the masthead. The sheet keeps what a reader genuinely goes looking for — the
 // brief, the covenant, the terms — which is the one job a sheet should have.
 export const DESK_SECOND_ROW = [
-  { label: 'Why', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  // Same door, same name as the room: see RAIL_SECOND_NAV above.
+  { label: 'x = x', plainCase: true, to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
   { label: 'Method', to: '/ClimateMethod', what: 'Sources, screening, responsibility and the live correction record.' },
   { label: 'Founder', to: '/ClimateFounder', what: DESK_FOUNDER.what },
   { label: 'Music', to: '/ClimateMusic', what: 'The record’s theme, pressed to play. Nothing plays at you.' },

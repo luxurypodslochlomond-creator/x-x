@@ -26,11 +26,12 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
             key={rowIndex}
             className={`flex w-full items-stretch gap-x-1 ${rowIndex === 0 ? '' : 'rec-mast-row-2 mt-0.5 border-t border-record-ink/15 pt-1'}`}
           >
-            {row.map(({ label, to, what }) => (
+            {row.map(({ label, to, what, plainCase }) => (
               <RecordNavDoor
                 key={to}
                 to={to}
                 label={label}
+                plainCase={plainCase}
                 what={what}
                 size={rowIndex === 0 ? 34 : 26}
                 active={pathname === to}

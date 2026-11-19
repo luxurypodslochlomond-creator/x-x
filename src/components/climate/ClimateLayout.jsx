@@ -254,21 +254,21 @@ export default function ClimateLayout({ children, currentPage }) {
               "Record" in the row below is the way home, and the tongue has moved into the
               yellow line where the name used to sit opposite it. The keeper's room and the
               checker's queue keep the name, because there the name IS the way back. */}
-          {/* ── THE CARTOON ROOM KEEPS THE COVENANT AND DROPS THE NAME ───────────────
-              Brian, 19 November: "there's a record of the time top right we don't need,
-              and x = x is top right, could be centred." The name was saying what the
-              yellow line above it already says, in a second voice, on the one page of the
-              record that is a poster and not a title page — so it has come off this room.
-              Nothing is lost: the red square and "Record" in the doors below are the way
-              home. x = x has the row to itself now, centred, in the record's red, where a
-              poster puts the one mark it wants you to carry away. */}
-          {isCartoonRoom ? (
-            <div className="flex items-center justify-center pt-2">
-              <Link to="/XEqualsX" aria-label="x = x — the record’s covenant" className="inline-flex min-h-11 items-center text-xl tracking-[.18em] text-record-mark hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">
-                x = x
-              </Link>
-            </div>
-          ) : isRoom ? (
+          {/* ── THE COVENANT CAME OFF THE ROOM AND WENT INTO THE DOORS ───────────────
+              Brian, 19 November: "on the wall cartoon page we have x = x and at top of nav
+              and wasted space — can we remove this so nav moves up underneath the yellow
+              band… and why in nav should be x = x."
+
+              Both halves of that are one decision. x = x had a row of its own here, above
+              the doors: a 44-pixel tap target and its padding spent on a mark that is not
+              a door, pushing the whole masthead down on the one page of the record that is
+              a poster and should open on the drawing. Meanwhile the door that actually
+              leads to the covenant was called "Why".
+
+              So the row is gone, the doors come up to the ruled line under the yellow band,
+              and x = x is where a reader can act on it: the door's own name, in the row
+              below. Nothing was lost and a whole band of paper came back to the wall. */}
+          {isRoom ? (
             <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-0 pt-3.5">
               <Link
                 to={createPageUrl('TogetherChangeClimate')}

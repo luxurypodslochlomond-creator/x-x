@@ -45,11 +45,12 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
               className={`rec-mast-row grid items-stretch gap-x-1 ${index === 0 ? 'rec-mast-row-1' : 'rec-mast-row-2 mt-0.5 border-t border-record-ink/15 pt-1'}`}
               style={{ gridTemplateColumns: `repeat(${tier.length + (last ? 1 : 0)}, minmax(0, 1fr))` }}
             >
-              {tier.map(({ label, to, what }) => (
+              {tier.map(({ label, to, what, plainCase }) => (
                 <RecordNavDoor
                   key={to}
                   to={to}
                   label={label}
+                  plainCase={plainCase}
                   what={what}
                   size={ROW_SIZE[index] || ROW_SIZE[1]}
                   active={pathname === to}
