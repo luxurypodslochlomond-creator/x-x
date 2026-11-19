@@ -4,28 +4,37 @@ import { buildRecordShareCard } from './shareCardImage';
 import { RECORD_LINK, RECORD_SHARE_TITLE } from './shareRecordCard';
 import '@/components/climate/record-home.css';
 
-// ── THE SHARE, IN THE MASTHEAD ────────────────────────────────────────────────
-// The card is still the thing that leaves — press, see it, keep it or send it — but the
-// door to it is no longer a share glyph in the corner of the strip. A box with an arrow
-// says "somewhere else"; it does not say why anyone would send this. So the strip keeps
-// the record's declaration and the ask is printed underneath it as a band: PASS IT ON,
-// the painting in a frame, one line about what travels with the card. Same three inks as
-// every other band on the record, and the same tracked capitals as the line above it.
+// ── THE SHARE, IN THE MASTHEAD, IN TWO WORDS ──────────────────────────────────
+// The card is still the thing that leaves — press, see it, keep it or send it. What has
+// changed is how the record asks. It used to be a band under the strip: a yellow plate
+// with a framed thumbnail, a sentence and an arrow. Brian, 19 November: "the pass it on
+// bar doesn't feel right bro can you remove and put pass it on in same font after for a
+// public service for the world." Right again — the band was a poster pasted into a
+// printed page, and it repeated in a shout what the strip had already said quietly.
+//
+// So "Pass it on" now stands on the strip itself, immediately after "A public service ·
+// for the world", in exactly the same tracked capitals: the declaration and the ask are
+// one line, which is the truest version of the thing. The words are the record's signal
+// yellow, because that is the one ink on this strip that means press me.
+//
+// What leaves is unchanged and carries everything it should: the card is the painting,
+// the title is the record's own, and the sentence underneath is this page's summary in
+// the reader's own tongue — so a reader who reads the record in their own language
+// passes it on in their own language.
 const RECORD_CARD = { id: 'record-of-the-time', title: RECORD_SHARE_TITLE };
 
 export default function RecordHomeHero({ copy }) {
   return (
     <section aria-labelledby="record-home-title" className="record-home-hero relative text-record-bone">
-      <div className="relative z-10 flex items-center border-b border-record-bone/20 bg-record-ink/50 px-4 py-2 lg:px-10">
+      <div className="relative z-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-record-bone/20 bg-record-ink/50 px-4 py-2 lg:px-10">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-record-bone">{copy.service}</span>
-      </div>
-      <div className="relative z-10">
         <ShareCardButton
           entry={RECORD_CARD}
           build={buildRecordShareCard}
           link={RECORD_LINK}
+          description={copy.sub}
           previewFirst
-          bar
+          inline
         />
       </div>
       <div className="record-home-title-band relative z-10 px-4 pb-6 pt-8 lg:px-10">

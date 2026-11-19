@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Share2, Check } from 'lucide-react';
 import { buildWireShareCard } from './shareCardImage';
 import ShareCardPreview from './ShareCardPreview';
-import PassItOnBar from './PassItOnBar';
 import { recordAddress, recordOrigin } from './recordAddress';
 
 // ── PASS IT ON ──
@@ -12,7 +11,7 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // file (an app's own browser). Where the sheet is refused altogether — the editor's
 // own frame — the card is put on screen to keep and pass on, never a silent download.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, previewFirst = false, bar = false, barLine }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, previewFirst = false, inline = false }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const link = givenLink || recordAddress();
@@ -26,7 +25,14 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       if (!blob) throw new Error('The card could not be drawn.');
       const file = new File([blob], `record-of-the-time-${entry.id}.png`, { type: 'image/png' });
       const title = entry.headline || entry.title || 'Record of the time';
-      const line = `${title} — ${link}`;
+      // ── WHAT TRAVELS WITH THE CARD ────────────────────────────────────────────
+      // A message that arrives as a bare address reads like something has gone wrong. So
+      // the words go with it: the line the caller gave, or the entry's own summary, so a
+      // reader in a chat is told what this is before they open it. Whatever the page is
+      // written in is what leaves — a reader who reads the record in their own tongue
+      // passes it on in their own tongue.
+      const description = givenDescription || entry.summary || entry.description || entry.what_changed || '';
+      const line = description ? `${title} — ${description}\n${link}` : `${title} — ${link}`;
       if (previewFirst) {
         setCard({ blob, fileName: file.name });
         setState('idle');
@@ -69,10 +75,29 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
 
   const Icon = state === 'shared' ? Check : Share2;
 
-  if (bar) {
+  // ── PASS IT ON, AS A WORD RATHER THAN A BAND ──────────────────────────────────
+  // The band went: a yellow strip with a framed thumbnail, a second line and an arrow,
+  // sitting between the masthead and the title. Brian, 19 November: "the pass it on bar
+  // doesn't feel right bro can you remove and put pass it on in same font after for a
+  // public service for the world." He is right — the band was a poster in the middle of a
+  // printed page, and the ask had been answered the moment the strip above said who the
+  // record is for. So it is two words on the same line as that sentence, in the same
+  // tracked capitals, in the record's signal yellow: the quietest way to ask a reader to
+  // do the thing the record exists for. Everything behind it is unchanged — the card, the
+  // sheet, the fallback.
+  if (inline) {
+    const word = state === 'building' ? 'Drawing the card…' : state === 'shared' ? 'Passed on' : givenLabel || 'Pass it on';
     return (
       <>
-        <PassItOnBar onPress={share} state={state} line={barLine} />
+        <button
+          type="button"
+          onClick={share}
+          disabled={state === 'building'}
+          aria-label="Pass this record on — the card and the address, ready to send"
+          className="text-[11px] font-bold uppercase tracking-[0.14em] text-cartoon-sun underline decoration-cartoon-sun/50 decoration-1 underline-offset-[5px] transition-colors hover:text-record-bone hover:decoration-record-bone active:text-record-bone disabled:opacity-70"
+        >
+          {word}
+        </button>
         {preview}
       </>
     );
