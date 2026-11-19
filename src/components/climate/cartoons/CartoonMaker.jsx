@@ -1,12 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { loadRecordCardFonts } from '@/components/climate/recordTypography';
-import { Undo2, Eraser, Sparkles, Loader2, Check, ArrowRight } from 'lucide-react';
+import { Undo2, Eraser, Sparkles, Loader2, Check, ArrowRight, Ruler } from 'lucide-react';
+import InkCanvas from '@/components/climate/cartoons/ink/InkCanvas';
+import { stampStroke } from '@/components/climate/cartoons/ink/inkStroke';
 
-// ── THE CARTOON MACHINE ───────────────────────────────────────────────────────
-// Three panels, a pen the width of a thumb, and the words the drawing says. A child
-// draws, types what each panel says, and the machine puts the three of them together as
-// one strip — a cartoon, not a picture. Then it is signed, and it is offered to the wall.
+// ── THE CARTOON DESK ──────────────────────────────────────────────────────────
+// Three panels, a pen that behaves like a pen, and the words the drawing says. A child draws,
+// types what each panel says, and the desk puts the three of them together as one strip — a
+// cartoon, not a picture. Then it is signed, and it is offered to the wall.
+//
+// What changed, and why. The pen used to lay down a line of one width from end to end, which
+// is what every flat drawing surface does and why it felt like an old toy: nothing about the
+// mark remembered a hand. Now every point of a stroke carries its own width, taken from how
+// fast the hand moved and how hard the pen pressed, and the stroke thins as it lifts off the
+// page. The screen and the printed strip are drawn by the same renderer, so the line on the
+// paper is the line that was drawn — not a preview of it.
 //
 // Everything kept from the record's argument is kept because it is not decoration:
 //
@@ -16,10 +25,6 @@ import { Undo2, Eraser, Sparkles, Loader2, Check, ArrowRight } from 'lucide-reac
 //     the button at the end, so scribbling, undoing and starting again are free and private.
 //   · A person looks at it before it goes on the wall, because a drawing cannot be checked
 //     by a machine and a public wall is not a place to guess.
-//
-// One page of one file on purpose: the pen, the panels, the strip and the signature are
-// one gesture, and splitting them into four components would only make the gesture harder
-// to follow.
 
 const SIZE = 640; // the drawn square, in its own pixels — scaled by the browser to fit
 const PW = 380; // a panel in the finished strip
@@ -28,7 +33,7 @@ const M = 18;
 const CAP = 132;
 const FOOT = 72;
 
-const CRAYONS = [
+const INKS = [
   { name: 'Ink', hex: '#1a1612' },
   { name: 'Red', hex: '#b3261e' },
   { name: 'Orange', hex: '#e2602a' },
@@ -37,10 +42,11 @@ const CRAYONS = [
   { name: 'Sun', hex: '#e3aa2b' },
 ];
 
+// Fine for a face, Pen for the drawing, Marker for a shape that has to read across a room.
 const NIBS = [
-  { label: 'Fine', w: 9 },
-  { label: 'Fat', w: 22 },
-  { label: 'Huge', w: 40 },
+  { label: 'Fine', w: 6 },
+  { label: 'Pen', w: 14 },
+  { label: 'Marker', w: 30 },
 ];
 
 // A brief to start from, for the child who opens the page and says "draw what?". Rotates
@@ -83,16 +89,15 @@ const wrapText = (ctx, text, maxWidth) => {
 };
 
 export default function CartoonMaker() {
-  const canvasRef = useRef(null);
-  const liveRef = useRef(null);
   const [panels, setPanels] = useState([
     { strokes: [], caption: '' },
     { strokes: [], caption: '' },
     { strokes: [], caption: '' },
   ]);
   const [active, setActive] = useState(0);
-  const [hex, setHex] = useState(CRAYONS[0].hex);
+  const [hex, setHex] = useState(INKS[0].hex);
   const [nib, setNib] = useState(NIBS[1].w);
+  const [guide, setGuide] = useState(true);
   const [brief, setBrief] = useState(BRIEFS[0]);
   const [mode, setMode] = useState('make'); // make | sign | sent
   const [preview, setPreview] = useState('');
@@ -101,85 +106,34 @@ export default function CartoonMaker() {
   const [error, setError] = useState('');
   const [form, setForm] = useState({ artist_name: '', origin: '', title: '', for_line: '', submitter_email: '' });
 
+  // Every stroke on the strip is numbered as it is made, whichever panel it lands in. That is
+  // what lets Undo mean "the last thing I did" rather than "the last thing I did in this
+  // panel" — a child who draws panel one, moves to panel two and wants the first mark gone
+  // should not have to work out where it was.
+  const seqRef = useRef(0);
+
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const paint = () => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, SIZE, SIZE);
-    [...(panels[active]?.strokes || []), ...(liveRef.current ? [liveRef.current] : [])].forEach((stroke) => {
-      ctx.strokeStyle = stroke.hex;
-      ctx.fillStyle = stroke.hex;
-      ctx.lineWidth = stroke.w;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      if (stroke.pts.length === 1) {
-        const [p] = stroke.pts;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, stroke.w / 2, 0, Math.PI * 2);
-        ctx.fill();
-        return;
-      }
-      ctx.beginPath();
-      stroke.pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
-      ctx.stroke();
+  const addStroke = (stroke) => {
+    seqRef.current += 1;
+    const numbered = { ...stroke, seq: seqRef.current };
+    setPanels((list) =>
+      list.map((panel, i) => (i === active ? { ...panel, strokes: [...panel.strokes, numbered] } : panel))
+    );
+  };
+
+  const undo = () => {
+    let latest = null;
+    panels.forEach((panel) => {
+      panel.strokes.forEach((stroke) => {
+        if (!latest || (stroke.seq || 0) > (latest.seq || 0)) latest = stroke;
+      });
     });
+    if (!latest) return;
+    setPanels((list) =>
+      list.map((panel) => ({ ...panel, strokes: panel.strokes.filter((stroke) => stroke !== latest) }))
+    );
   };
-
-  useEffect(() => {
-    paint();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [panels, active]);
-
-  const at = (event) => {
-    const rect = canvasRef.current.getBoundingClientRect();
-    return {
-      x: ((event.clientX - rect.left) / rect.width) * SIZE,
-      y: ((event.clientY - rect.top) / rect.height) * SIZE,
-    };
-  };
-
-  const down = (event) => {
-    if (mode !== 'make') return;
-    event.currentTarget.setPointerCapture?.(event.pointerId);
-    liveRef.current = { hex, w: nib, pts: [at(event)] };
-    paint();
-  };
-
-  const move = (event) => {
-    const stroke = liveRef.current;
-    if (!stroke) return;
-    const point = at(event);
-    const previous = stroke.pts[stroke.pts.length - 1];
-    stroke.pts.push(point);
-    const ctx = canvasRef.current.getContext('2d');
-    ctx.strokeStyle = stroke.hex;
-    ctx.fillStyle = stroke.hex;
-    ctx.lineWidth = stroke.w;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    if (stroke.pts.length === 2) {
-      ctx.beginPath();
-      ctx.arc(previous.x, previous.y, stroke.w / 2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.beginPath();
-    ctx.moveTo(previous.x, previous.y);
-    ctx.lineTo(point.x, point.y);
-    ctx.stroke();
-  };
-
-  const up = () => {
-    const stroke = liveRef.current;
-    if (!stroke) return;
-    liveRef.current = null;
-    setPanels((list) => list.map((panel, i) => (i === active ? { ...panel, strokes: [...panel.strokes, stroke] } : panel)));
-  };
-
-  const undo = () =>
-    setPanels((list) => list.map((panel, i) => (i === active ? { ...panel, strokes: panel.strokes.slice(0, -1) } : panel)));
 
   const wipe = () =>
     setPanels((list) => list.map((panel, i) => (i === active ? { ...panel, strokes: [] } : panel)));
@@ -187,12 +141,10 @@ export default function CartoonMaker() {
   const setCaption = (value) =>
     setPanels((list) => list.map((panel, i) => (i === active ? { ...panel, caption: value } : panel)));
 
-  const switchTo = (index) => {
-    liveRef.current = null;
-    setActive(index);
-  };
+  const switchTo = (index) => setActive(index);
 
   const used = panels.filter((panel) => panel.strokes.length || panel.caption.trim());
+  const drawn = panels.some((panel) => panel.strokes.length);
 
   // ── THE STRIP ───────────────────────────────────────────────────────────────
   // The panels and the words are drawn into one picture on the device: the thing a child
@@ -221,26 +173,9 @@ export default function CartoonMaker() {
       ctx.lineWidth = 3;
       ctx.strokeRect(x + 1.5, y + 1.5, PW - 3, PW - 3);
 
+      // The same nib that drew it, stamped at the panel's size.
       const scale = PW / SIZE;
-      panel.strokes.forEach((stroke) => {
-        ctx.strokeStyle = stroke.hex;
-        ctx.fillStyle = stroke.hex;
-        ctx.lineWidth = stroke.w * scale;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        if (stroke.pts.length === 1) {
-          const [p] = stroke.pts;
-          ctx.beginPath();
-          ctx.arc(x + p.x * scale, y + p.y * scale, (stroke.w * scale) / 2, 0, Math.PI * 2);
-          ctx.fill();
-          return;
-        }
-        ctx.beginPath();
-        stroke.pts.forEach((p, k) =>
-          k ? ctx.lineTo(x + p.x * scale, y + p.y * scale) : ctx.moveTo(x + p.x * scale, y + p.y * scale)
-        );
-        ctx.stroke();
-      });
+      panel.strokes.forEach((stroke) => stampStroke(ctx, stroke, { x, y, scale }));
 
       if (panel.caption.trim()) {
         ctx.fillStyle = '#1a1612';
@@ -269,7 +204,7 @@ export default function CartoonMaker() {
     ctx.fillStyle = '#b3261e';
     ctx.font = `700 13px ${DISPLAY}`;
     ctx.textAlign = 'right';
-    ctx.fillText('THE BIG PICTURE · x = x', W - M, fy + 12);
+    ctx.fillText('THE REAL PICTURE · x = x', W - M, fy + 12);
     ctx.textAlign = 'left';
 
     return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
@@ -439,7 +374,7 @@ export default function CartoonMaker() {
       <div className="mt-3 grid grid-cols-3 gap-2">
         {panels.map((panel, index) => {
           const on = index === active;
-          const drawn = panel.strokes.length > 0 || panel.caption.trim();
+          const hasMark = panel.strokes.length > 0 || panel.caption.trim();
           return (
             <button
               key={index}
@@ -452,39 +387,33 @@ export default function CartoonMaker() {
               aria-pressed={on}
             >
               Panel {index + 1}
-              {drawn && <span className={`h-2 w-2 rounded-full ${on ? 'bg-record-paper' : 'bg-record-red'}`} />}
+              {hasMark && <span className={`h-2 w-2 rounded-full ${on ? 'bg-record-paper' : 'bg-record-red'}`} />}
             </button>
           );
         })}
       </div>
 
-      <canvas
-        ref={canvasRef}
-        width={SIZE}
-        height={SIZE}
-        onPointerDown={down}
-        onPointerMove={move}
-        onPointerUp={up}
-        onPointerLeave={up}
-        onPointerCancel={up}
-        className="mt-2 block w-full touch-none border-2 border-record-ink bg-white"
-        style={{ aspectRatio: '1 / 1', cursor: 'crosshair' }}
-        aria-label={`Blank panel ${active + 1} to draw in`}
+      <InkCanvas
+        strokes={panels[active].strokes}
+        onStroke={addStroke}
+        hex={hex}
+        nib={nib}
+        guide={guide}
       />
 
       {/* The pen */}
       <div className="mt-2 flex flex-wrap items-center gap-2">
-        {CRAYONS.map((crayon) => (
+        {INKS.map((ink) => (
           <button
-            key={crayon.name}
+            key={ink.name}
             type="button"
-            onClick={() => setHex(crayon.hex)}
-            aria-label={crayon.name}
-            aria-pressed={hex === crayon.hex}
+            onClick={() => setHex(ink.hex)}
+            aria-label={ink.name}
+            aria-pressed={hex === ink.hex}
             className={`h-9 w-9 rounded-full border-2 transition-transform active:scale-90 ${
-              hex === crayon.hex ? 'scale-110 border-record-ink' : 'border-record-ink/20'
+              hex === ink.hex ? 'scale-110 border-record-ink' : 'border-record-ink/20'
             }`}
-            style={{ backgroundColor: crayon.hex }}
+            style={{ backgroundColor: ink.hex }}
           />
         ))}
         <div className="ml-auto flex items-center gap-1.5">
@@ -501,7 +430,7 @@ export default function CartoonMaker() {
             >
               <span
                 className="rounded-full bg-record-ink"
-                style={{ width: Math.max(5, item.w * 0.42), height: Math.max(5, item.w * 0.42) }}
+                style={{ width: Math.max(4, item.w * 0.5), height: Math.max(4, item.w * 0.5) }}
               />
             </button>
           ))}
@@ -512,7 +441,7 @@ export default function CartoonMaker() {
         <button
           type="button"
           onClick={undo}
-          disabled={!panels[active].strokes.length}
+          disabled={!drawn}
           className="inline-flex min-h-[46px] items-center gap-1.5 border-2 border-record-ink/25 px-3 text-[13px] font-semibold text-record-ink disabled:opacity-30"
           style={reading}
         >
@@ -525,7 +454,18 @@ export default function CartoonMaker() {
           className="inline-flex min-h-[46px] items-center gap-1.5 border-2 border-record-ink/25 px-3 text-[13px] font-semibold text-record-ink disabled:opacity-30"
           style={reading}
         >
-          <Eraser className="h-4 w-4" strokeWidth={2.2} /> Clear
+          <Eraser className="h-4 w-4" strokeWidth={2.2} /> Clear panel
+        </button>
+        <button
+          type="button"
+          onClick={() => setGuide((on) => !on)}
+          aria-pressed={guide}
+          className={`ml-auto inline-flex min-h-[46px] items-center gap-1.5 border-2 px-3 text-[13px] font-semibold ${
+            guide ? 'border-record-ink bg-record-paper text-record-ink' : 'border-record-ink/25 text-record-muted'
+          }`}
+          style={reading}
+        >
+          <Ruler className="h-4 w-4" strokeWidth={2.2} /> Guide
         </button>
       </div>
 

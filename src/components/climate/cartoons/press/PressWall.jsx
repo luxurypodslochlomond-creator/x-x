@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { SHOW_DRAWING } from '@/components/climate/cartoons/goToDrawing';
 import PressSheet from '@/components/climate/cartoons/press/PressSheet';
@@ -86,7 +85,7 @@ export default function PressWall() {
 
       <p className="press-wall-colophon">
         The artists’ own words, kept with their work. Shown with permission. Every new contribution
-        waits for a person’s look. <Link to="/ClimateCartoons/Hands">Every hand on this wall ↗</Link>
+        waits for a person’s look.
       </p>
 
       {wall.hasNextPage && (

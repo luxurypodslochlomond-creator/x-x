@@ -2,7 +2,6 @@ import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import PressOpening from '@/components/climate/cartoons/press/PressOpening';
 import PressWall from '@/components/climate/cartoons/press/PressWall';
-import ComicReader from '@/components/climate/cartoons/ComicReader';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
@@ -42,9 +41,9 @@ export default function ClimateCartoons() {
             because a cartoonist reads the count before they read the essay. */}
         <CartoonGoals />
         <CartoonWhy />
-        {/* Human work and its sourced lineage stay ahead of AI-illustrated fiction. */}
+        {/* Human work, and the sourced lineage it belongs to. No machine-drawn fiction sits
+            in this room: a wall of real hands does not need pictures nobody drew. */}
         <CartoonWorld />
-        <ComicReader />
 
         <div className="press-facing" id="press-book">
           <CartoonSessionBand />
