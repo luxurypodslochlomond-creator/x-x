@@ -20,6 +20,12 @@ import { buildWorkshopShareCard, WORKSHOP_CARD } from '@/components/climate/work
 const CONTEXT = [
   ['The record', 'A public record of climate solutions and crises. Every entry names who says so and links to where it started, and every entry is fingerprinted by the record’s own server so that a quiet edit shows up in public. No advertising, no sponsorship, no ranking — nobody can buy a place on it.'],
   ['CartoonAFRICA', 'The eighth international cartoon biennial, at the National Museum in Benin City, 28–30 November 2026. Its theme, in the festival’s own words: “SDG, African youths and democracy through humour lenses”.'],
+  // The hour sheet named the host and the pictures and not the man whose campaign the whole
+  // room is built on. Francis is in the room on the day, and a page that credits the festival
+  // and forgets the person who has been running its cartoon campaign since 2012 is the kind of
+  // omission that reads as a snub. Named here, plainly, from what the record already states
+  // about the campaign — nothing about him that he has not said himself.
+  ['Francis Umendu Odupute', 'Initiated the CartoonAFRICA International Biennial in November 2012 and has carried its SDG cartoon campaign since; the campaign was exhibited at the UN SDG Global Festival of Action in Bonn, 2–4 May 2019. The cartoon room is that campaign’s wall: every drawing on it is read against the seventeen goals he has been drawing them against for fourteen years.'],
   ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on this for four decades. She is hosting the hour — not speaking for it, and not filling it. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
   ['This page', 'A proposal for that hour, set down before it happened. Read after 29 November, it is what was proposed — the drawings it produced live in the cartoon room.'],
 ];
