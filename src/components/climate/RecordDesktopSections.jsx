@@ -83,30 +83,27 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                   edge of the page are a printed shelf label, which is what this is. */}
               {phone && <span aria-hidden="true" className="ml-1 h-px flex-1 self-center bg-record-ink/20" />}
             </h2>
-            {/* ── TWO ACROSS, BECAUSE THE MARK NO LONGER EATS THE NAME ───────────────────
-                This was two across before, on 19 November, and it failed: the mark sat
-                beside the name, so each column had a picture and about nine characters to
-                set a door in, and "Custodians' room" came out in a stack of broken words.
-                The fix is not the count of columns, it is where the mark stands. The mark
-                now sits above its name inside a ruled cell, so the name owns the whole width
-                of that cell — and two columns of full-width names cannot squash anything.
-                Brian, 19 November: "could you list in two columns bri so have coolasfuck
-                screen" — so the phone fills its glass, four shelves' worth of doors in a few
-                rows, and still reads as a printed index rather than a list somebody typed:
-                every cell ruled, the marks in a true grid, the shelf's name finished with a
-                rule and its count. */}
-            <ul className={`grid ${phone ? 'grid-cols-2' : 'grid-cols-3 gap-x-4'}`}>
+            {/* ── ONE ACROSS, AND IT WAS TRIED THE OTHER WAY ON THE SAME DAY ──────────────
+                Brian asked for two columns on 19 November, and when he saw it: "looked better
+                before". So the two-up grid is written down here rather than argued with — a
+                phone's shelf went two across twice on that day and lost both times. One door
+                per row is what the glass wants: the marks line up in a single column, the
+                names get the whole width of the page, and no door is ever cut in half.
+                The rows are ruled, and each shelf's name is finished with a rule and its
+                count, so a register of three doors and a register of five both read as
+                printed shelves rather than as a list somebody typed. */}
+            <ul className={`grid ${phone ? 'grid-cols-1' : 'grid-cols-3 gap-x-4'}`}>
               {doors.map(({ label, to, what }) => {
                 const Mark = markFor(to);
                 const here = pathname === to;
                 return (
-                  <li key={to} className={phone ? 'border-b border-record-ink/10 odd:border-r odd:border-record-ink/10' : ''}>
+                  <li key={to} className={phone ? 'border-b border-record-ink/10 last:border-b-0' : ''}>
                     <Link
                       to={to}
                       onClick={onNavigate}
                       title={what}
                       aria-current={here ? 'page' : undefined}
-                      className={`flex outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-[76px] w-full flex-col items-start justify-center gap-1.5 px-1 py-3 text-[12px] uppercase leading-[1.15] tracking-[0.05em]' : 'min-h-10 items-center gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
+                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-12 w-full gap-3 py-2 text-[13px] uppercase leading-[1.2] tracking-[0.04em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
                     >
                       {/* ── THE SIZE THE MARKS WERE DRAWN AT ────────────────────────────
                           Every mark on this record is cut for twenty-four or nineteen
@@ -115,7 +112,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                           the sizes it was drawn for loses exactly the thing that makes it
                           a mark — the weight of its stroke — and reads as a small grey
                           diagram. Twenty-four is the size the index was drawn for. */}
-                      <span className={phone ? 'shrink-0' : 'flex w-6 shrink-0 justify-center'} aria-hidden="true"><Mark size={24} /></span>
+                      <span className="flex w-6 shrink-0 justify-center" aria-hidden="true"><Mark size={24} /></span>
                       <span>{label}</span>
                     </Link>
                   </li>
