@@ -65,12 +65,9 @@
   color: rgb(var(--record-ink));
   transition: background-color .3s ease, color .3s ease;
 }
-/* Four rooms, four colours, and none of them the covenant's red: a crisis is the record's
-   dustier brick, what works is green, what you can do is the sea blue, and the people
-   gathered are ochre. */
-.record-home-page .record-room-link[data-room="climate_crisis"] { --room-pigment: var(--record-crisis); }
+.record-home-page .record-room-link[data-room="climate_crisis"] { --room-pigment: var(--record-red); }
 .record-home-page .record-room-link[data-room="solution"] { --room-pigment: var(--record-botanical); }
-.record-home-page .record-room-link[data-room="actions"] { --room-pigment: var(--record-ocean); }
+.record-home-page .record-room-link[data-room="actions"] { --room-pigment: var(--record-clay); }
 .record-home-page .record-room-link[data-room="groups"] { --room-pigment: var(--record-ochre); }
 
 .record-home-page .record-room-drawing {
@@ -275,8 +272,8 @@
     background-color: rgb(var(--record-ink) / .58);
   }
   .record-home-page .record-home-voice blockquote {
-    font-size: 1.5rem !important;
-    line-height: 1.45 !important;
+    font-size: 2rem !important;
+    line-height: 1.5 !important;
   }
   .record-home-page .climate-photo-slide-frame {
     aspect-ratio: 16 / 9;

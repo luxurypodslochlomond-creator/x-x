@@ -270,12 +270,6 @@ button:focus-visible {
     --record-ink: 20 18 16;
     --record-signal: 255 212 71;
     --record-red: 179 38 30;
-    /* ── THE CRISIS RED IS QUIETER THAN THE MARK'S ────────────────────────────────
-       x = x is printed in the bright borrowed red of the O Superman sleeve, and that red
-       belongs to the covenant. A crisis mark wearing the same red competed with it, so the
-       crisis carries its own: a deeper, dustier brick — a warning said once, not shouted.
-       Four rooms, four colours, and none of them borrows the covenant's. */
-    --record-crisis: 139 58 50;
     --record-muted: 107 98 88;
     /* ── THE MARK'S RED IS BORROWED, AND IT SAYS SO ───────────────────────────────
        x = x is not printed in the record's warning red, and not in the cobalt it wore
@@ -404,12 +398,6 @@ button:focus-visible {
     --record-ink: 20 18 16;
     --record-signal: 255 212 71;
     --record-red: 179 38 30;
-    /* ── THE CRISIS RED IS QUIETER THAN THE MARK'S ────────────────────────────────
-       x = x is printed in the bright borrowed red of the O Superman sleeve, and that red
-       belongs to the covenant. A crisis mark wearing the same red competed with it, so the
-       crisis carries its own: a deeper, dustier brick — a warning said once, not shouted.
-       Four rooms, four colours, and none of them borrows the covenant's. */
-    --record-crisis: 139 58 50;
     --record-muted: 107 98 88;
     /* The same borrowed red in the dark block: the mark does not change colour when the
        room does, because it is ink and not a theme. */
