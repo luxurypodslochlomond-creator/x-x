@@ -73,10 +73,17 @@ export default function RecordFooter() {
             job. They are ink now — the same ink as MADE IN SCOTLAND and the company under
             them, so the whole box reads as one printed plate rather than three colours
             arguing. The red stays on the mark at the top, where it belongs. */}
-        <ul className="mt-4 flex flex-col items-center gap-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:justify-center sm:gap-5">
+        {/* ── THE NAMES ON THEIR OWN WHITE PLATE ────────────────────────────────────
+            Brian, 19 November: "put Barbara as Gillian's middle name in footer, and put a
+            rectangle background white, same style as the Laurie Anderson background above."
+            So the names are cut out of the yellow band on a plain white chip — the same
+            small rectangle the borrowed line sits on higher up the foot, in the same hand —
+            and her full name is printed, because a credit that shortens a person's name is
+            a credit that has decided which part of her counts. */}
+        <ul className="mt-4 inline-flex flex-col items-center gap-1.5 bg-white px-4 py-2 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-ink sm:flex-row sm:gap-5">
           <li>Base 1</li>
           <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
-          <li>Gillian Brown</li>
+          <li>Gillian Barbara Brown</li>
           <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-ink/35 sm:block" />
           <li>Brian Hughes</li>
         </ul>
