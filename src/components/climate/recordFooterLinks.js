@@ -24,7 +24,23 @@
 // on the other — instead of taking a cell from a place to stand.
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and groups.' },
-  { label: 'News', to: '/ClimateWire', page: 'ClimateWire', what: 'Climate news: what happened, where, and who says so.' },
+  // ── THE DOOR IS CALLED SIGNALS, AND THE WORD IS NOT A NEW NAME FOR THE BOOK ───
+  // Brian, 19 November: "you sure signals covers wire and news bro… and is it signals from
+  // the record, what is our record platform, what signals out there — like crises is that a
+  // signal, and solutions and actions and groups, and cartoons all signals right, and
+  // music? Are the signals bro?"
+  //
+  // Not all of them, and saying so out loud is what keeps the word worth something. A
+  // signal is something sent to be acted on: a crisis is a warning, an action is something
+  // you can join now, a milestone is a marker, an initiative is a thing already working.
+  // A solution is not a signal — it is the answer a signal points you at. A gathering is a
+  // place, a drawing is a drawing, a track is a gift. So this is one room where changes are
+  // announced, and the record is still the record: the book the signals are kept in.
+  //
+  // "News" was the wrong word for a second reason. It implies a news cycle, and half of
+  // what stands behind this door is a warning rather than an event — and a record that
+  // calls a warning "news" is asking to be read as a paper rather than believed as a source.
+  { label: 'Signals', to: '/ClimateWire', page: 'ClimateWire', what: 'What changed, where, and who says so — a warning, a milestone, or something that works.' },
   { label: 'BASE 1', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Ask the record’s own index — a place, a subject, a source.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
   // ── THE ROOM OF CARTOONS COMES ONTO THE RAIL ────────────────────────────────

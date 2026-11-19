@@ -30,8 +30,8 @@ const KINDS = [
     body: 'People on the same work in one region. The record carries one contact line, never a conversation.',
   },
   {
-    label: 'Climate news',
-    body: 'Dated entries: what changed, where, who says so, and what can be copied from it.',
+    label: 'Signals',
+    body: 'Dated changes: what happened, where, who says so, and what can be copied from it.',
   },
   {
     label: 'The music',

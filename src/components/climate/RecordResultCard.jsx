@@ -199,7 +199,7 @@ export default function RecordResultCard({ kind, item }) {
       className="record-search-result block border-b border-record-ink/20 bg-transparent py-5 transition-colors hover:border-record-mark"
     >
       <div className="flex items-center gap-2 flex-wrap">
-        <Tag>News</Tag>
+        <Tag>Signal</Tag>
         {item.verification && (
           <span className="text-[9px] font-mono uppercase tracking-widest text-record-muted">
             {String(item.verification).replace(/_/g, ' ')}

@@ -12,7 +12,7 @@ import { ArrowUpRight } from 'lucide-react';
 // the same eight doors anybody can walk through, in the record's own hand.
 const DOORS = [
   { label: 'The record', to: '/TogetherChangeClimate' },
-  { label: 'Climate news', to: '/ClimateWire' },
+  { label: 'Signals', to: '/ClimateWire' },
   { label: 'Map & reach', to: '/ClimateMap' },
   { label: 'Music given', to: '/ClimateMusic' },
   { label: 'Drawings', to: '/ClimateCartoons' },

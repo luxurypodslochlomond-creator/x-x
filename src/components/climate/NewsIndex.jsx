@@ -37,19 +37,23 @@ export default function NewsIndex({ entries, loading, query, onQueryChange, veri
       <header className="news-index-heading">
         <div className="news-index-name">
           <MarkSignal size={24} />
-          <h1 id="climate-news-title">Climate news</h1>
+          <h1 id="climate-news-title">Signals</h1>
         </div>
-        <button type="button" className="news-text-action" onClick={onSubmit}><Plus size={15} aria-hidden="true" /> Send news</button>
+        <button type="button" className="news-text-action" onClick={onSubmit}><Plus size={15} aria-hidden="true" /> Send a signal</button>
       </header>
-      <p className="news-index-intro">What happened, where, and who says so — recorded with its source, so anyone can check it and copy what works.</p>
+      {/* One line that answers the question the door asks: a signal is a dated change with a
+          source, of three kinds — a warning, a marker, or something already working. Nothing
+          on this record outside this room is called a signal, because a solution is an answer
+          and a drawing is a drawing. */}
+      <p className="news-index-intro">A dated change, with its source: a warning, a milestone, or something that works and can be copied. Nothing here is ranked.</p>
 
       <NewsIndexTools query={query} onQueryChange={onQueryChange} verification={verification} onVerificationChange={onVerificationChange} />
 
-      {loading && <p className="news-state" role="status">Loading news…</p>}
+      {loading && <p className="news-state" role="status">Loading signals…</p>}
 
       {!loading && !lead && (
         <div className="news-state" role="status">
-          <p>{query.trim() ? 'No news matches those words. Try a place, a subject or a source.' : 'No news under this heading yet.'}</p>
+          <p>{query.trim() ? 'No signal matches those words. Try a place, a subject or a source.' : 'No signal under this heading yet.'}</p>
         </div>
       )}
 

@@ -27,21 +27,21 @@ export default function ClimateWireEntry() {
   }, [id]);
 
   const citation = entry
-    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — climate news, ${entry.when_label}. ${recordAddress()}`
+    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — a signal on the record, ${entry.when_label}. ${recordAddress()}`
     : '';
 
   return (
     <div className="news-detail text-record-ink" data-record-layout="compact">
-      <RecordBackBar eyebrow="Climate news · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact /></div> : null} />
+      <RecordBackBar eyebrow="Signals · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact /></div> : null} />
       <div className="news-detail-column">
         {loading && <p className="news-state" role="status">Loading the account…</p>}
-        {!loading && !entry && <div className="news-state"><p>This account is not available on the public record.</p><Link to="/ClimateWire" className="news-text-action">← Back to climate news</Link></div>}
+        {!loading && !entry && <div className="news-state"><p>This account is not available on the public record.</p><Link to="/ClimateWire" className="news-text-action">← Back to Signals</Link></div>}
         {entry && <>
           <NewsEntryBody entry={entry} />
           <TapToPlayFilm url={entry.source_url} title={entry.headline} credit={entry.image_credit ? `Film · ${entry.image_credit}` : entry.source_name ? `Film · ${entry.source_name}` : null} />
           <NewsEntryReferences entry={entry} citation={citation} />
           <p className="news-detail-note">Something wrong? <Link to="/ClimateMethod#say">Report it</Link>. Corrections stay with the account, dated and visible.</p>
-          <Link to="/ClimateWire" className="news-text-action">← All climate news</Link>
+          <Link to="/ClimateWire" className="news-text-action">← All Signals</Link>
         </>}
       </div>
     </div>
