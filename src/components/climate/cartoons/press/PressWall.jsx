@@ -5,6 +5,7 @@ import { SHOW_DRAWING } from '@/components/climate/cartoons/goToDrawing';
 import PressSheet from '@/components/climate/cartoons/press/PressSheet';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
+import { HungWall } from '@/components/climate/cartoons/CartoonInkIcons';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 
 // The wall, unchanged in what it does: the same published drawings, the same order, the
@@ -50,7 +51,10 @@ export default function PressWall() {
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">
       <header className="press-wall-head">
-        <p className="press-eyebrow">Human hands · different perspectives</p>
+        {/* The wall names itself with the mark drawn for it: a line with two drawings
+            pegged to it and one space still empty. Not a brick wall — a wall is also the
+            thing that keeps people out, and this one is the opposite. */}
+        <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />Human hands · different perspectives</p>
         <h2 id="press-wall-title" className="press-wall-title">The people’s pages.</h2>
         <p className="press-wall-line">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
         <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>

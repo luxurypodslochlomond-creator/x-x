@@ -159,6 +159,41 @@ export function InkArrow({ size = 22, className = '', dir = 'right' }) {
   );
 }
 
+// ── THE WALL ITSELF ────────────────────────────────────────────────────────────
+// Brian, 19 November: "is the wall better for cartoons? need coolasfuck new icon if you
+// think so bro … and not fire people."
+//
+// The second half is the design brief, and it is the right one. A wall is two things at
+// once: a place where work is hung, and a thing that keeps people out. Every wall symbol
+// in the world is drawn as the second one — bricks, courses, a barrier — which is why a
+// "wall" icon usually reads as a border, a shutdown, a door being closed on somebody.
+//
+// So this is not a brick wall. It is a line drawn across the page, with two drawings
+// pegged to it and one space still empty and marked with a cross where the next one goes.
+// The wall is the thing holding the work up, the work is somebody's hand, and the gap is
+// an invitation rather than a gap in the record. Nothing here is being shut.
+export function HungWall({ size = 26, className = '' }) {
+  return (
+    <Mark size={size} className={className}>
+      {/* the line the whole wall hangs from */}
+      <path d="M2 9.5h36" strokeWidth="2.4" />
+      {/* three pegs: two holding work, one holding a place */}
+      <path d="M9 9.5v3M20.3 9.5v3M31.6 9.5v3" strokeWidth="1.6" />
+      {/* the first drawing: a sun over a hill, in a hand */}
+      <rect x="3.5" y="13" width="11" height="18" className="cmark-paper" strokeWidth="1.7" />
+      <circle cx="7.4" cy="18.2" r="2" className="cmark-sun" strokeWidth="1.5" />
+      <path d="M4.6 28.4l3.1-4.6 2.1 2.1 2.1-2.7 2.9 5.2" strokeWidth="1.5" />
+      {/* the second drawing: a face, looking back at the reader */}
+      <rect x="14.8" y="13" width="11" height="18" className="cmark-mint" strokeWidth="1.7" />
+      <path d="M18.1 20.2h.01M22.6 20.2h.01" strokeWidth="2.6" />
+      <path d="M17.9 23.6c1.6 1.7 4.4 1.7 6 0" strokeWidth="1.5" />
+      {/* the space that is still yours — drawn, so it reads as room and not as a hole */}
+      <rect x="26.1" y="13" width="11" height="18" strokeWidth="1.4" strokeDasharray="2.6 3.2" />
+      <path d="M31.6 19.4v6.2M28.5 22.5h6.2" strokeWidth="1.4" />
+    </Mark>
+  );
+}
+
 // A pot of ink with a nib in it. The record's own mark, for a page that is being written.
 export function InkPot({ size = 26, className = '' }) {
   return (
