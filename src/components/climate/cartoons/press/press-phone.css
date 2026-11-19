@@ -129,4 +129,105 @@
   #root .press-room .comic-why-list { gap: .85rem; }
   #root .press-room .press-more,
   #root .press-room .press-state { margin-top: 1rem; }
+
+  /* ── 5. THE PICTURE COMES BEFORE THE EXPLANATION ──────────────────────────────
+     On the desk the cover is the left leaf: the eye meets a drawing and a title at the
+     same moment. On the phone the spread collapses to a column, so the order became
+     title, standfirst, count, three paragraphs, contents — and only then a picture. Six
+     screens of words before the first drawing is what made the room feel like a leaflet
+     about cartoons rather than a room full of them.
+
+     The words block is unwrapped on the phone (`display: contents`), which lets the
+     cover come straight after the masthead and the small print follow it: the name, the
+     picture, then who it is by. No markup changed, no order changed on any other screen. */
+  #root .press-room .press-opening { display: flex; flex-direction: column; padding-top: 0; }
+  #root .press-room .press-opening-words { display: contents; }
+  #root .press-room .press-opening-masthead { order: 1; }
+  #root .press-room .press-opening-cover { order: 2; margin-top: 1.15rem; }
+  #root .press-room .press-scope { order: 3; }
+  #root .press-room .press-contents { order: 4; }
+
+  /* ── 6. THE DRAWINGS AT THEIR OWN SIZE, WITH NOTHING BEHIND THEM ──────────────
+     Every drawing sat on a bone panel and was capped at 66 per cent of the glass. On a
+     desk that panel is invisible — the column is narrow and the picture fills it. On a
+     phone the panel becomes a grey rectangle round every cartoon, and the cap turns a
+     portrait drawing into a picture with bars down the side: the two things that made a
+     hand-drawn page look like a photocopy pasted onto card.
+
+     So the panel is gone, the cap is gone, and the drawing runs from glass to glass at
+     the shape the artist drew it in. It is still the file they gave — uncropped, unfiltered,
+     untinted. It is simply the size of the page now, which is what a poster does. */
+  #root .press-room .press-sheet-art {
+    background: transparent;
+    margin-inline: -1.15rem;
+  }
+  #root .press-room .press-sheet-art .comic-wall-artwork {
+    max-height: none;
+    object-fit: contain;
+  }
+  #root .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: none; }
+
+  /* The one control on the picture is a red tab rather than a cream box, so it reads as
+     the room's ink on the drawing and not as a label stuck over it. */
+  #root .press-room .press-sheet-look {
+    right: auto;
+    left: 1.15rem;
+    bottom: 0;
+    padding: .42rem .6rem;
+    background: rgb(var(--record-red));
+    color: rgb(var(--record-paper));
+    font-size: .6rem;
+    letter-spacing: .14em;
+  }
+
+  /* ── 7. THE CITATION, SET AS A POSTER CAPTION RATHER THAN A CATALOGUE ENTRY ───
+     Five small uppercase labels stacked under every drawing is what a catalogue does,
+     and five of them down a phone reads as small print. The number and the subject now
+     share one line — the number in the record's red, the subject beside it — and the
+     title is allowed to be the second loudest thing on the sheet after the drawing. */
+  #root .press-room .press-sheet-rail {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: .7rem;
+    row-gap: .35rem;
+    margin-top: .95rem;
+  }
+  #root .press-room .press-sheet-number {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: .78;
+    letter-spacing: -.05em;
+  }
+  #root .press-room .press-sheet-subject {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    font-size: .62rem;
+    letter-spacing: .16em;
+    color: rgb(var(--record-red));
+  }
+  #root .press-room .press-sheet-rail > :not(.press-sheet-number):not(.press-sheet-subject) {
+    grid-column: 1 / -1;
+  }
+  #root .press-room .press-sheet-title { font-size: 1.38rem; line-height: 1.04; }
+  #root .press-room .press-sheet-by { font-size: .88rem; }
+  #root .press-room .press-sheet-words { font-size: 1.04rem; line-height: 1.45; margin-top: .2rem; }
+  #root .press-room .press-sheet-provenance { font-size: .78rem; line-height: 1.5; }
+
+  /* ── 8. A LABEL IS A SIGNAL, NOT A KICKER ────────────────────────────────────
+     The room's eyebrows were set in the grey of a newspaper kicker with wide tracking.
+     In the record's red, tighter and smaller, the same line reads as the label it is:
+     the one mark that says which part of the room you are standing in. */
+  #root .press-room .press-eyebrow {
+    font-size: .6rem;
+    letter-spacing: .16em;
+    color: rgb(var(--record-red));
+  }
+  /* The wall opens on a rule, the way a printed section opens. */
+  #root .press-room .press-wall-head {
+    border-top: 3px solid rgb(var(--record-ink));
+    padding-top: 1rem;
+  }
+  #root .press-room .press-wall-line { font-size: .9rem; line-height: 1.45; }
 }
