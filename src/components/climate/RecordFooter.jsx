@@ -87,7 +87,7 @@ export default function RecordFooter() {
             The company is the thing you press rather than an address printed in the open:
             a reader taps it and their own mail app opens, already addressed. Nothing on
             this page spells the address out for a scraper to collect. */}
-        <div className="mt-4 inline-flex flex-col items-center gap-2.5 bg-record-red px-5 py-3">
+        <div className="mx-auto mt-4 flex w-fit flex-col items-center gap-2.5 bg-record-red px-5 py-3">
           <ul className="flex flex-col items-center gap-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-paper sm:flex-row sm:gap-5">
             <li>Base 1</li>
             <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-paper/40 sm:block" />

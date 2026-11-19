@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 import WorldPlate from './WorldPlate';
@@ -32,6 +32,11 @@ const LIGHT = '#e2602a';
 
 export default function RecordReachEarth() {
   const { data } = useClimateImpactStats();
+
+  // Which place on the plate has been pressed, if any. One press opens it, a second press
+  // on the same light puts it down — the same act the Map page uses for its marks.
+  const [picked, setPicked] = useState(null);
+  const pickLight = (l) => setPicked((prev) => (prev?.id === l.id ? null : l));
 
   // The same places, the same curve and the same names the reach page uses — worked out
   // once, in reachPlaces, so the foot of a page and the page itself cannot disagree about
@@ -67,7 +72,13 @@ export default function RecordReachEarth() {
         style={{ background: `radial-gradient(circle at 50% 50%, ${LIGHT} 0%, transparent 62%)` }}
       />
 
-      <div className="relative mx-auto w-full max-w-[720px]">
+      {/* Brian, 19 November: "the map is coolasfuck, think we could make same width to the
+          red." It was a narrow column — 720px of plate inside a band that runs the whole
+          screen — so the world sat in the middle of its own room like a picture on a wall.
+          It is the record's own wide measure now, the same one the reading pages use, and
+          the plate is as wide as the band it stands in. The sentences stay at reading
+          measure, because a line of type is not a map. */}
+      <div className="relative mx-auto w-full max-w-[1440px]">
         <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-record-signal">
           The record&rsquo;s reach
         </p>
@@ -77,7 +88,7 @@ export default function RecordReachEarth() {
             A failed count is not a zero, so it is not printed as one. */}
         <h2
           id="record-reach-earth-heading"
-          className="mt-2 text-[22px] leading-[1.15] text-record-bone sm:text-[28px]"
+          className="mt-2 max-w-[30ch] text-[26px] leading-[1.08] text-record-bone sm:text-[38px]"
           style={{ fontFamily: 'var(--font-display)' }}
         >
           {unavailable ? (
@@ -102,9 +113,44 @@ export default function RecordReachEarth() {
           <WorldPlate
             tone="ink"
             lights={lights}
+            onLight={pickLight}
+            selectedLightId={picked?.id}
             label={`The world, with ${lights.length} ${lights.length === 1 ? 'place' : 'places'} reading the record`}
           />
         </div>
+
+        {/* ── WHAT A LIGHT SAYS WHEN IT IS PRESSED ─────────────────────────────────
+            Brian, 19 November: "show real readership when tap the icon — see info for
+            right reasons." So the count for that place, at full size, with the one thing
+            the record will not let a number pretend: a read is one entry opened by nobody
+            the record knows. It is not a person, not a proof that a particular story was
+            read there, and not evidence the climate improved. */}
+        {picked ? (
+          <div className="mt-3 border border-record-signal/50 bg-record-signal/[0.07] px-3 py-3 sm:px-4">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-bone/70">
+              {picked.kind === 'nation' ? 'Self-identified nation' : 'Country'} · {picked.name}
+            </p>
+            <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
+              <span className="font-mono text-[34px] font-black leading-none tabular-nums text-record-signal sm:text-[44px]">
+                {(picked.views || 0).toLocaleString()}
+              </span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-record-bone/70">
+                {picked.views === 1 ? 'read' : 'reads'}
+              </span>
+            </p>
+            <p className="mt-1 max-w-[62ch] font-mono text-[10px] leading-relaxed text-record-bone/60">
+              A read is one entry opened. No account, no cookie, no address, no name. The
+              place is where a reader’s own device or their own words say they are — never
+              a precise location, and never proof of what a particular reader thought.
+            </p>
+          </div>
+        ) : (
+          !unavailable && reads > 0 && (
+            <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-record-bone/55">
+              Press a light to read that place’s count.
+            </p>
+          )
+        )}
 
         <div className="mt-3 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1.5">
           <p className="max-w-[46ch] font-mono text-[10px] leading-relaxed tracking-[0.06em] text-record-bone/65">

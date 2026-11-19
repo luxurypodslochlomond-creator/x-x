@@ -73,7 +73,7 @@ const GROUND = {
 // Stored locally to this app so no map tiles or external map service are needed.
 const WORLD_LAND = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/161f79bf8_record-world-land.svg';
 
-export default function WorldPlate({ marks = [], lights = [], selectedId, onSelect, label, tone = 'paper', alive = false }) {
+export default function WorldPlate({ marks = [], lights = [], selectedId, onSelect, label, tone = 'paper', alive = false, onLight, selectedLightId }) {
   const d = useMemo(() => landDots(), []);
   const g = GROUND[tone] || GROUND.paper;
   const landId = useId().replaceAll(':', '');
@@ -147,27 +147,66 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
         />
       </svg>
 
-      {/* Lights: the reach, drawn where it happened and never pressed. Sized from the same
-          curve the reach page uses, so the foot of a page and the page itself cannot tell
-          two different stories about the same count. */}
+      {/* ── LIGHTS: THE REACH, DRAWN WHERE IT HAPPENED ────────────────────────────
+          Sized from the same curve the reach page uses, so the foot of a page and the page
+          itself cannot tell two different stories about the same count.
+
+          Brian, 19 November: "show real readership when tap the icon — see info for right
+          reasons." So a light is a button when the plate is handed an onLight: press one
+          and it says that place's own count, in words, underneath the planet. A light with
+          no handler stays exactly what it was — a glow, not a control — because a plate
+          that is only being looked at should not invite a press it cannot answer.
+
+          The button is 30px around a 5–14px dot, so a thumb can find a country without
+          changing how the plate looks. Nothing is claimed by pressing: the line under the
+          plate says reads, never people. */}
       {lights.map((l) => {
         const { left, top } = projectPct(l.lat, l.lng);
+        const dot = {
+          width: `${l.size}px`,
+          height: `${l.size}px`,
+          background: g.light,
+          boxShadow: `0 0 ${l.size * 2.4}px ${l.size * 0.8}px rgba(226, 96, 42, 0.85), 0 0 ${l.size * 5}px ${l.size * 1.6}px rgba(255, 212, 71, 0.28)`,
+          animationDelay: l.delay,
+        };
+        const at = {
+          left: `${left}%`,
+          top: `${top}%`,
+          transform: `translate(-50%,-50%) translate(${l.dx || 0}px, ${l.dy || 0}px)`,
+        };
+
+        if (!onLight) {
+          return (
+            <span
+              key={l.id}
+              aria-hidden="true"
+              className="record-reach-light absolute rounded-full"
+              style={{ ...at, ...dot }}
+            />
+          );
+        }
+
+        const on = selectedLightId === l.id;
         return (
-          <span
+          <button
             key={l.id}
-            aria-hidden="true"
-            className="record-reach-light absolute rounded-full"
-            style={{
-              left: `${left}%`,
-              top: `${top}%`,
-              width: `${l.size}px`,
-              height: `${l.size}px`,
-              transform: `translate(-50%,-50%) translate(${l.dx || 0}px, ${l.dy || 0}px)`,
-              background: g.light,
-              boxShadow: `0 0 ${l.size * 2.4}px ${l.size * 0.8}px rgba(226, 96, 42, 0.85), 0 0 ${l.size * 5}px ${l.size * 1.6}px rgba(255, 212, 71, 0.28)`,
-              animationDelay: l.delay,
-            }}
-          />
+            type="button"
+            onClick={() => onLight(l)}
+            aria-label={`${l.name}: ${l.reads}`}
+            aria-pressed={on}
+            title={`${l.name} · ${l.reads}`}
+            className="absolute grid place-items-center border-0 bg-transparent p-0"
+            style={{ ...at, width: 30, height: 30, zIndex: on ? 3 : 2 }}
+          >
+            {on && (
+              <span
+                aria-hidden="true"
+                className="absolute rounded-full"
+                style={{ width: l.size + 14, height: l.size + 14, border: `2px solid ${g.light}`, opacity: 0.9 }}
+              />
+            )}
+            <span aria-hidden="true" className="record-reach-light rounded-full" style={dot} />
+          </button>
         );
       })}
 
