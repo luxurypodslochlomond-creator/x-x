@@ -18,14 +18,15 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 //
 // So the room now works the way a cartoon works: it makes an argument, in beats, and then
 // it gets out of the way of the pictures. The order is the argument — what this is, why
-// cartoons are here at all, the drawings themselves, the fiction kept honestly apart, the
-// book that comes out of the 29th, the desk where you answer, and the sources last.
+// cartoons are here at all, the drawings themselves, their worldwide lineage, the fiction
+// kept honestly apart, the book that comes out of the 29th, the desk, and the sources last.
 //
 // Nothing was removed. Every drawing, credit, share control, drawer, link and source is
 // still on the page and still works; what has gone is the costume around them.
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';
 import '@/components/climate/cartoons/press/press-desktop-ground.css';
+import '@/components/climate/cartoons/cartoon-lineage.css';
 
 export default function ClimateCartoons() {
   return (
@@ -45,12 +46,9 @@ export default function ClimateCartoons() {
         <CartoonWhy />
 
         <PressWall />
-        <ComicReader />
-
-        {/* The tradition the wall joins: real cartoonists, named, sourced, pointed at
-            rather than copied. Brian, 18 November — "this is a real thing … all over the
-            world too bro". It is, and the room should say so with names on it. */}
+        {/* Human work and its sourced lineage stay ahead of AI-illustrated fiction. */}
         <CartoonWorld />
+        <ComicReader />
 
         <div className="press-facing" id="press-book">
           <CartoonSessionBand />

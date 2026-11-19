@@ -1,72 +1,44 @@
 import React from 'react';
-import {
-  CARTOONISTS, GALLERY_LINE, GALLERY_URL, ODOI_URL,
-} from '@/components/climate/cartoons/cartoonWorld';
+import { Link } from 'react-router-dom';
+import { CARTOONISTS, GALLERY_URL } from '@/components/climate/cartoons/cartoonWorld';
+import { WORLD_LINEAGE } from '@/components/climate/cartoons/cartoonWorldLineage';
+import CartoonWorldGroup from '@/components/climate/cartoons/CartoonWorldGroup';
+import CartoonWorldList from '@/components/climate/cartoons/CartoonWorldList';
+import CartoonOdoiNote from '@/components/climate/cartoons/CartoonOdoiNote';
 import '@/components/climate/cartoons/cartoon-world.css';
 
-// ── THE TRADITION THIS ROOM JOINS ─────────────────────────────────────────────
-// Sits after the wall and before the book: here is what has been drawn, and here is
-// who was already drawing it, named, long before this record asked anyone for anything.
-// Nothing below is a copy of anybody's work. The page points; the drawings stay with
-// the people who made them.
 export default function CartoonWorld() {
+  const archive = CARTOONISTS.map((person) => ({ ...person, source: 'The Guardian · 8 September 2015', source_url: GALLERY_URL }));
   return (
-    <section className="cartoon-world" id="press-world" aria-labelledby="press-world-title">
-      <p className="press-eyebrow">Already a world</p>
-      <h2 className="cartoon-world-title" id="press-world-title">
-        This was not a workshop’s idea.
-      </h2>
-
-      <p className="cartoon-world-line">
-        Before this room asked anybody for a drawing, cartoonists from Khartoum to Nairobi
-        were already doing the hardest part of this work: making people look at a thing they
-        would rather not see. These are nine of them, named, with a line each from the
-        source below. Their drawings are not reproduced here — the record points at them.
-      </p>
-
-      <ul className="cartoon-world-names">
-        {CARTOONISTS.map((person) => (
-          <li className="cartoon-world-name" key={person.name}>
-            <p className="cartoon-world-who">
-              {person.name}
-              <span className="cartoon-world-where">{person.where}</span>
-            </p>
-            <p className="cartoon-world-say">{person.line}</p>
-          </li>
+    <section className="cartoon-world cartoon-lineage" id="press-world" aria-labelledby="press-world-title">
+      <header className="cartoon-lineage-heading">
+        <p className="cartoon-lineage-kicker">A world of dissent · past &amp; present</p>
+        <h2 className="cartoon-lineage-title" id="press-world-title">Draw the line.</h2>
+        <p>Cartoonists have been making power visible for generations. Across borders, in newspapers, on walls and through independent presses. This room starts by knowing whose work came before it, and who is drawing now.</p>
+        <nav className="cartoon-lineage-jumps" aria-label="Explore cartooning traditions">
+          {WORLD_LINEAGE.map((group) => <a key={group.id} href={`#${group.id}`}>{group.kicker} ↓</a>)}
+        </nav>
+      </header>
+      <div className="cartoon-lineage-body">
+        {WORLD_LINEAGE.map((group) => (
+          <CartoonWorldGroup key={group.id} group={group}>
+            {group.id === 'cartoon-present' && (
+              <details className="cartoon-lineage-archive">
+                <summary>From the African press · nine voices documented in 2015</summary>
+                <p className="cartoon-lineage-intro">The Guardian’s 2015 gallery is kept as a dated source, not a current directory of jobs, addresses or political conditions. These voices remain part of this room’s reading list.</p>
+                <CartoonWorldList people={archive} />
+              </details>
+            )}
+            {group.id === 'cartoon-inheritance' && <CartoonOdoiNote />}
+          </CartoonWorldGroup>
         ))}
-      </ul>
-
-      <div className="cartoon-world-odoi">
-        <h3 className="cartoon-world-odoi-title">
-          Frank Odoi
-          <span>Ghana, then Kenya · died 21 April 2012</span>
-        </h3>
-        <p>
-          Born in the mining town of Tarkwa in western Ghana, he read a copy of the Nairobi
-          humour magazine Joe, turned up in Kenya in the late 1970s to join it, and later
-          took over from Terry Hirst as editorial cartoonist at the Daily Nation. He drew
-          <em> Akokhan</em>, an African superhero whose powers come from where they come
-          from, and <em>Golgoti</em>, an explorer story told from the other side. He was
-          Cartoonist of the Year in Kenya in 1985, 1986 and 2004, and in Ghana in 2005, and
-          he chaired Katuni, the East African association of cartoonists. He was killed in a
-          matatu crash in Nairobi.
-        </p>
-        <p className="cartoon-world-quote">
-          “Call it magic, but when you breath life into fantasy, it stops being magic…
-          bringing fantasy and African roots-religion together gave me Akokhan.”
-        </p>
+        <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork from this reading list is reproduced here. Sources checked 19 November 2026. Some external archives contain adult or distressing material.</p>
+        <nav className="cartoon-lineage-doors" aria-label="Take the idea into the record">
+          <a href="#cartoon-your-turn">Add your drawing →</a>
+          <Link to="/ClimateMap">Find the record’s drawings on the map →</Link>
+          <Link to="/ClimateMethod">How this record checks its claims →</Link>
+        </nav>
       </div>
-
-      <p className="cartoon-world-source">
-        Read them at the origin:{' '}
-        <a href={GALLERY_URL} target="_blank" rel="noopener noreferrer">{GALLERY_LINE}</a>
-        {' '}— its pictures are credited to each cartoonist and to Cartoon Movement — and{' '}
-        <a href={ODOI_URL} target="_blank" rel="noopener noreferrer">Frank Odoi on Wikipedia</a>,
-        whose accounts disagree on the year he was born: the Daily Nation says 1947, he said
-        1948. Only Africa is named above, because that is what the source covers; Asia and
-        the rest of the world join this list the same way, one source at a time, and never by
-        invention.
-      </p>
     </section>
   );
 }

@@ -4,6 +4,7 @@ import { base44 } from '@/api/base44Client';
 import { resolveCoords } from './countryCentroids';
 import { nudge } from './worldPlate';
 import WorldPlate from './WorldPlate';
+import MapSignalMark from '@/components/climate/MapSignalMark';
 import PlatePlaceIndex from './PlatePlaceIndex';
 import VerificationBadge from './VerificationBadge';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
@@ -144,7 +145,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
         dx,
         dy,
         tone: e.type,
-        aria: `${e.type === 'crisis' ? 'Crisis' : e.type === 'action' ? 'Action' : e.type === 'cartoon' ? 'Drawing' : 'Solution'}: ${e.title}${e.country ? `, ${e.country}` : ''}`,
+        aria: `${e.type === 'crisis' ? 'Crisis' : e.type === 'action' ? 'Action' : e.type === 'cartoon' ? 'Drawing' : e.type === 'wire' ? 'Wire' : 'Solution'}: ${e.title}${e.country ? `, ${e.country}` : ''}`,
       };
     });
   }, [entries, only]);
@@ -189,10 +190,10 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
   const placeAt = here.findIndex((m) => m.id === picked?.id);
 
   return (
-    <div className={tone === 'ink' ? 'border border-[#efe7d6]/45 bg-transparent' : 'border-2 border-[#141210] bg-[#f7f1e5]'}>
+    <div className={`record-map-instrument ${tone === 'ink' ? 'border border-[#efe7d6]/45 bg-transparent' : 'border-2 border-[#141210] bg-[#f7f1e5]'}`}>
       {/* The count and the key, on the same paper as the plate — a plate is captioned
           above its engraving, not over it. */}
-      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[#f7f1e5] px-3 py-2.5 border-b border-[#141210]/20">
+      <div className="record-map-key flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[#f7f1e5] px-3 py-2.5 border-b border-[#141210]/20">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">
           {loading
             ? 'Setting the entries…'
@@ -222,7 +223,9 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
               onClick={() => { setOnly(only === key ? null : key); setPicked(null); }}
               className={`flex min-h-11 items-center gap-1.5 px-1.5 uppercase tracking-[0.06em] ${only && only !== key ? 'opacity-40' : ''} ${only === key ? 'underline underline-offset-4' : ''}`}
             >
-              <span className={`w-2 h-2 ${shape}`} style={{ background: colour }} />{label} {counts[key]}
+              <span className={`record-map-key-dot w-2 h-2 ${shape}`} style={{ background: colour }} />
+              {tone === 'ink' && <MapSignalMark kind={key} className="record-map-key-symbol" />}
+              {label} {counts[key]}
             </button>
           ))}
         </div>
@@ -336,7 +339,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
                   picked.type === 'wire'
                     ? `/ClimateWireEntry/${picked.entryId}`
                     : picked.type === 'cartoon'
-                      ? '/ClimateCartoons'
+                      ? '/ClimateCartoons#press-wall'
                       : `/ClimateDetail/${picked.type === 'action' ? 'action' : 'solution'}/${picked.entryId}`
                 }
                 className="inline-flex items-center gap-1.5 text-[10px] font-black font-mono uppercase text-[#efe7d6] bg-[#141210] px-2.5 py-1.5"
@@ -349,12 +352,12 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
             </div>
           </div>
         ) : (
-          <p className="text-[11px] font-mono leading-relaxed text-[#5a5246]">
+          <p className="record-map-help text-[11px] font-mono leading-relaxed text-[#5a5246]">
             {loading
               ? 'Setting every entry where it says it is.'
               : marks.length === 0
               ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : `Press a mark, or a place named above it, to read what stands there. Red is a crisis, ${tone === 'ink' ? 'bone' : 'black'} a solution, green an action, blue a line on the wire, ${tone === 'ink' ? 'yellow' : 'ochre'} a drawing. Entry places come from the entries; amber lights show readership places stated by devices or readers, not precise reader locations. These are separate observations.`}
+              : `Press a mark, or a place named above it, to read what stands there. Red marks a crisis, ${tone === 'ink' ? 'cream' : 'black'} a solution, green an action, blue a line on the wire, ${tone === 'ink' ? 'yellow' : 'ochre'} a drawing. Entry places come from the entries; amber lights show readership places stated by devices or readers, not precise reader locations. These are separate observations.`}
           </p>
         )}
       </div>

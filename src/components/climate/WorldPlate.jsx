@@ -1,6 +1,7 @@
 import React, { useId, useMemo } from 'react';
 import { landDots, projectPct, PLATE_W, PLATE_H } from './worldPlate';
 import '@/components/climate/record-reach.css';
+import MapSignalMark from '@/components/climate/MapSignalMark';
 
 /* ── ONE PLATE, EVERY SCREEN ───────────────────────────────────────────────────────
    The world is drawn at exactly two-to-one, so the frame never letterboxes and a mark
@@ -38,11 +39,11 @@ const MARKS = {
    five meanings are said in light: a crisis still burns red, a solution is bone, an action
    is green, a line on the wire is the ocean, a drawing is the record's signal. */
 const MARKS_ON_PAINT = {
-  crisis: '#f2564a',
-  solution: '#efe7d6',
-  action: '#8fd3a8',
-  wire: '#5bb8d6',
-  cartoon: '#ffd447',
+  crisis: 'rgb(var(--record-map-crisis))',
+  solution: 'rgb(var(--record-map-solution))',
+  action: 'rgb(var(--record-map-action))',
+  wire: 'rgb(var(--record-map-wire))',
+  cartoon: 'rgb(var(--record-map-cartoon))',
 };
 
 const GROUND = {
@@ -74,7 +75,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
   const d = useMemo(() => landDots(), []);
   const g = GROUND[tone] || GROUND.paper;
   const landId = useId().replaceAll(':', '');
-  const passId = useId().replaceAll(':', '');
+  const atlasId = useId().replaceAll(':', '');
   const atlas = tone === 'ink' && alive;
 
   // Readership totals do not link an individual reading place to an entry.
@@ -98,28 +99,17 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               <mask id={landId} maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE_W} height={PLATE_H}>
                 <image href={WORLD_LAND} width={PLATE_W} height={PLATE_H} preserveAspectRatio="none" />
               </mask>
+              <linearGradient id={atlasId} x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="rgb(var(--record-ocean))" />
+                <stop offset="48%" stopColor="rgb(var(--record-botanical))" />
+                <stop offset="100%" stopColor="rgb(var(--record-ochre))" />
+              </linearGradient>
             </defs>
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".9" />
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-bone))" fillOpacity=".48" mask={`url(#${landId})`} />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".64" />
+            <rect width={PLATE_W} height={PLATE_H} fill={`url(#${atlasId})`} fillOpacity=".94" mask={`url(#${landId})`} />
           </g>
         )}
-        {atlas && (
-          <defs>
-            <linearGradient id={passId} x1="0" x2="1">
-              <stop offset="0%" stopColor="#ffd447" stopOpacity="0" />
-              <stop offset="50%" stopColor="#ffd447" stopOpacity="0.16" />
-              <stop offset="100%" stopColor="#ffd447" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        )}
-        {/* One slow band of light crossing the plate, like a satellite pass: the world is
-            being read all the time, not only when a reader happens to look at it. Movement
-            only — it makes no claim about who read what. */}
-        {atlas && (
-          <g className="record-atlas-pass" aria-hidden="true">
-            <rect x="-40" y="0" width="40" height={PLATE_H} fill={`url(#${passId})`} />
-          </g>
-        )}
+        {/* The atlas holds still. The symbols, not a moving wash, carry the signal. */}
         {/* The grid a plate carries so the eye can find a latitude — every thirty degrees,
             with the equator given one hair more weight. Hairlines, never a net. */}
         <g stroke={g.grid} strokeWidth="0.6" opacity={g.gridOpacity} vectorEffect="non-scaling-stroke">
@@ -211,8 +201,8 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             onClick={() => onSelect && onSelect(m)}
             aria-label={m.aria || m.label}
             aria-current={on ? 'true' : undefined}
-            title={m.label}
-            className="group absolute grid place-items-center p-0 bg-transparent border-0 cursor-pointer"
+            title={m.label || m.title}
+            className="record-entry-marker group absolute grid place-items-center p-0 bg-transparent border-0 cursor-pointer"
             style={{
               left: `${left}%`,
               top: `${top}%`,
@@ -225,13 +215,13 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             {on && (
               <span
                 aria-hidden="true"
-                className="absolute rounded-full"
+                className="record-map-selection absolute rounded-full"
                 style={{ width: size + 14, height: size + 14, border: `2px solid ${fill}`, opacity: 0.9 }}
               />
             )}
             <span
               aria-hidden="true"
-              className={`${t.shape} transition-transform duration-200 group-hover:scale-150 group-focus-visible:scale-150`}
+              className={`record-map-dot ${t.shape} transition-transform duration-200 group-hover:scale-150 group-focus-visible:scale-150`}
               style={{
                 width: size,
                 height: size,
@@ -239,6 +229,8 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
                 boxShadow: `0 0 0 1.5px ${g.ring}`,
               }}
             />
+            {atlas && <MapSignalMark kind={m.tone} />}
+            {atlas && on && <span className="record-map-spot-label">{m.title || m.label}</span>}
           </button>
         );
       })}

@@ -12,9 +12,8 @@
 // them and this page points at them instead. A record that reprinted somebody's work to
 // prove it respected them would have proved the opposite.
 //
-// Only Africa is named, because only Africa is what the gallery cited below covers. Asia
-// and the rest of the world are not guessed at here: they are added the same way when
-// there is a source to name, one line at a time, and never by invention.
+// This is the dated African source archive, not a current job/location directory.
+// The international, historical and underground reading list is in cartoonWorldLineage.js.
 export const GALLERY_URL =
   'https://www.theguardian.com/commentisfree/gallery/2015/sep/08/africa-political-cartoonists-satire-gallery';
 
@@ -27,28 +26,28 @@ export const ODOI_URL = 'https://en.wikipedia.org/wiki/Frank_Odoi_(cartoonist)';
 export const CARTOONISTS = [
   {
     name: 'Khalid Albaih',
-    where: 'Sudan · working from Doha',
+    where: 'Sudan',
     line: 'During the Arab spring his work was painted on walls from Tahrir Square to Beirut.',
   },
   {
     name: 'Doaa Eladl',
     where: 'Egypt',
-    line: 'Worked at Al Masry Al Youm. In 2009 she was given the award of journalism excellence in caricature, and many call her Egypt’s best-known woman cartoonist.',
+    line: 'The 2015 profile records her work at Al Masry Al Youm and her 2009 award for journalism excellence in caricature.',
   },
   {
     name: 'Nadia Khiari',
     where: 'Tunisia',
-    line: 'Drew “Willis from Tunis” for the first time on 13 January 2011, during the last speech of the deposed president Ben Ali, to share her thoughts with friends on Facebook. More than forty thousand people now visit him.',
+    line: 'Created “Willis from Tunis” on 13 January 2011, during Ben Ali’s final speech, initially sharing the cat’s political humour with friends on Facebook.',
   },
   {
     name: 'Talal Nayer',
     where: 'Sudan',
-    line: 'Cartoonist and graffiti artist. On drawing there he said the situation was “horrible”: “It is forbidden to draw the face of al-Bashir, even if the cartoon is a compliment.”',
+    line: 'A cartoonist and graffiti artist whose 2015 account describes restrictions on depicting Sudan’s then-president Omar al-Bashir. This is historical testimony, not a description of today’s law.',
   },
   {
     name: 'Victor Ndula',
     where: 'Kenya',
-    line: 'Editorial cartoonist at the Nairobi Star. A decade in, he says every morning he is tasked with reminding his readers to pay close attention to the issues that affect them.',
+    line: 'Profiled in 2015 as the Nairobi Star’s editorial cartoonist, reminding readers to pay close attention to the issues affecting their lives.',
   },
   {
     name: 'Siham Zebiri',

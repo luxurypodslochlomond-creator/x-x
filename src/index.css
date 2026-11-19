@@ -301,6 +301,11 @@ button:focus-visible {
     --record-botanical: 63 104 73;
     --record-ochre: 155 111 40;
     --record-clay: 166 90 68;
+    --record-map-crisis: 255 99 83;
+    --record-map-solution: 255 244 211;
+    --record-map-action: 149 227 168;
+    --record-map-wire: 104 215 241;
+    --record-map-cartoon: 255 212 71;
     --record-light-signal: 255 212 71;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -384,6 +389,11 @@ button:focus-visible {
     --record-botanical: 63 104 73;
     --record-ochre: 155 111 40;
     --record-clay: 166 90 68;
+    --record-map-crisis: 255 99 83;
+    --record-map-solution: 255 244 211;
+    --record-map-action: 149 227 168;
+    --record-map-wire: 104 215 241;
+    --record-map-cartoon: 255 212 71;
     --record-light-signal: 255 212 71;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

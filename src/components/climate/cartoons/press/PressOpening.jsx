@@ -12,7 +12,7 @@ import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 // the count the record actually keeps, three paragraphs of plain scope, a contents line,
 // and then Francis's cover — whole, uncropped, at the largest size the glass will take,
 // with his name under it. No plate, no tilt, no shadow, no second background picture.
-// The only colour on the page is the colour the artists put there.
+// Signal colour marks the way through; no tint or decoration is laid over the artwork.
 export default function PressOpening() {
   return (
     <section className="press-opening" aria-labelledby="press-room-title">
@@ -37,6 +37,7 @@ export default function PressOpening() {
         <nav className="press-contents" aria-label="Find your way through the cartoon room">
           <a href="#cartoon-why-title">Why cartoons</a>
           <a href="#press-wall">The wall</a>
+          <a href="#press-world">Across the world</a>
           <a href="#cartoon-strip">The little things</a>
           <a href="#press-book">The book</a>
           <a href="#cartoon-your-turn">Add your drawing</a>
