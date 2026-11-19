@@ -12,6 +12,7 @@ import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 // Human drawings lead, and everything after them is about those drawings.
 // Desktop is a newspaper spread. Original artwork, sources and controls stay intact.
 import '@/components/climate/cartoons/press/press.css';
+import '@/components/climate/cartoons/press/press-mobile-ground.css';
 import '@/components/climate/cartoons/press/press-desktop-ground.css';
 // Loaded last: the second ink goes down on top of the laid-out sheet, never under it.
 import '@/components/climate/cartoons/press/press-ink.css';
@@ -27,7 +28,13 @@ import '@/components/climate/cartoons/press/press-signal.css';
 // Last of all, the ground itself: this room is printed on the signal plate, with its
 // drawings and its words on clean paper laid over it. Scoped to this room only.
 import '@/components/climate/cartoons/press/press-field.css';
-// One smaller-screen layout, not successive mobile overrides. Desktop stays a spread.
+// And the phone's own pass over the same room: paper to the glass, the red only between the
+// chapters, one loud name and quieter heads, and the contents set as a numbered plate. It is
+// scoped to the phone and touches no rule of the desk's spread.
+import '@/components/climate/cartoons/press/press-phone.css';
+// And the phone's own editorial pass: the yellow working sheet, the ledger, the invitation
+// at the threshold of the wall, the argument as a black interlude, the lineage as a
+// timeline, and the book and the biennial as one register. Phone only.
 import '@/components/climate/cartoons/press/press-workshop.css';
 
 export default function ClimateCartoons() {

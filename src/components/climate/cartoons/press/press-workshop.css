@@ -1,232 +1,367 @@
-/* One mobile/tablet composition. The DOM's reading order is the visual order:
-   cover, wall, goals, context, invitation. Desktop's spread is unchanged.
-   No image effects, extra fonts, motion, or requests are needed for this layout. */
-@media screen and (max-width: 1023px) {
-  #root .record-cartoon-field .record-book {
-    margin-inline: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-  #root .record-cartoon-field .press-room {
-    --press-gutter: clamp(1rem, 4vw, 1.5rem);
-  }
-  #root .record-cartoon-field .press-room :is(.record-shell-body, .record-shell-content) {
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
-  }
+/* ── THE PHONE'S ROOM IS SET AS A WORKING SHEET, NOT AS A BROCHURE ───────────────
+   Brian, 19 November, from a cabin: "cartoon page on mobile still doesn't feel underground
+   coolasfuck on mobile bro?" and then, of the four directions offered, "I like the yellow
+   one."
+
+   The phone pass before this one fixed the right faults — it took the frames off, ran the
+   paper to the glass and put the picture before the explanation — and it still read as a
+   leaflet, because a leaflet is what you get when every part arrives in the same order at
+   the same weight, one cream sheet after another. Nothing was wrong with any single
+   chapter. What was missing was an editor: somebody deciding what a phone should meet
+   first, and in what voice.
+
+   So this sheet does two things, and only on the phone. At 640 pixels and above it does
+   nothing at all.
+
+   1. IT RE-SETS THE ROOM'S ORDER. The room now opens on a yellow working sheet — the name
+      across its top, the catalogue cover centred under it, and the six doors as a ruled
+      register rather than a rag of links. The ledger of seventeen goals comes next, because
+      that is what tells a reader the wall is unfinished and therefore open. Then the
+      invitation to draw, then the wall itself, then the argument, the lineage, and the
+      biennial and the book as one production register. The contents list is renumbered to
+      match, because a contents list that disagrees with the page it belongs to is the first
+      place a reader learns not to trust the rest of it.
+
+   2. IT CHANGES THE KEY TWICE. The goal counts are set as an instrument bar in ink, and the
+      three-line argument for cartoons is printed as a black interlude between the wall and
+      the lineage. Those two black bands are what stop thirteen cream sheets reading as a
+      stack: a phone now meets a poster, a register, a wall, and an argument, in that order.
+
+   Nothing is added to the room and nothing is taken out of it. Every drawing, credit,
+   source, permission line, control and form is exactly where it was, and every one of them
+   still works. No drawing is cropped, tinted, filtered or framed. */
+@media screen and (max-width: 639px) {
+  /* ── 1. THE ORDER A PHONE MEETS THE ROOM IN ────────────────────────────────────
+     A flex column so the sequence can be set here rather than by moving the markup,
+     which would have re-ordered the desk's spread as well. */
   #root .record-cartoon-field .press-room-inner {
-    display: block;
-    max-width: 44rem;
-    padding: 0 0 2rem;
-  }
-  #root .record-cartoon-field .press-room-inner > * {
-    margin: 0 0 .5rem;
-    padding: 1.5rem var(--press-gutter);
-    background: rgb(var(--record-paper));
-    box-shadow: none;
-    min-width: 0;
-  }
-  #root .record-cartoon-field .press-room-inner > *:first-child { margin-top: 0; }
-  #root .record-cartoon-field .press-room .press-opening {
     display: flex;
     flex-direction: column;
-    padding-top: 0;
+    padding: 0 0 3.25rem;
   }
-  #root .record-cartoon-field .press-room .press-opening-words { display: contents; }
-  #root .record-cartoon-field .press-room .press-opening-masthead {
-    order: 1;
-    margin: 0 calc(-1 * var(--press-gutter));
-    padding: .85rem var(--press-gutter) .75rem;
-    border-top: 0;
-    border-bottom: 2px solid rgb(var(--record-red));
+  #root .record-cartoon-field .press-room-inner > .press-opening { order: 1; }
+  #root .record-cartoon-field .press-room-inner > .cartoon-goals { order: 2; }
+  #root .record-cartoon-field .press-room-inner > .comic-workshop { order: 3; }
+  #root .record-cartoon-field .press-room-inner > .press-wall-section { order: 4; }
+  #root .record-cartoon-field .press-room-inner > .comic-why { order: 5; }
+  #root .record-cartoon-field .press-room-inner > .cartoon-world { order: 6; }
+  #root .record-cartoon-field .press-room-inner > .press-facing { order: 7; }
+  #root .record-cartoon-field .press-room-inner > .comic-sources { order: 8; }
+
+  /* Each chapter already carried a 3.5rem lift for the desk's spread. On a phone the gap
+     between sheets is the red ground, and it is set by the sheet's own bottom margin. */
+  #root .press-room :is(.press-wall-section, .comic-why, .comic-workshop, .cartoon-goals, .press-facing, .comic-sources) {
+    margin-top: 0;
+  }
+
+  /* ── 2. THE YELLOW WORKING SHEET ───────────────────────────────────────────────
+     The room's name, its picture and its six doors are one instrument now: signal yellow
+     edge to edge, ink on it, red only for the label and the numbers. The record's yellow is
+     used once in the room, here, so it still means something. */
+  #root .record-cartoon-field .press-room-inner > .press-opening {
     background: rgb(var(--record-signal));
+    padding: 1.7rem 1.15rem 1.5rem;
+    margin-bottom: .9rem;
   }
-  #root .record-cartoon-field .press-room .press-title {
-    margin-top: .4rem;
-    font-size: clamp(2rem, 8.6vw, 3.2rem);
-    font-weight: 700;
-    line-height: 1.04 !important;
-    letter-spacing: -.045em !important;
-    text-transform: none;
-    overflow-wrap: normal;
+  #root .press-room .press-opening-masthead {
+    margin: 0;
+    padding: 0;
+    border-top: 3px solid rgb(var(--record-ink));
+    padding-top: .85rem;
   }
-  #root .record-cartoon-field .press-room .press-standfirst {
-    margin-top: .45rem;
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-  #root .record-cartoon-field .press-room .press-eyebrow {
-    font-size: .7rem;
-    line-height: 1.5;
-    letter-spacing: .08em;
+  #root .press-room .press-eyebrow {
+    font-size: .62rem;
+    letter-spacing: .18em;
     color: rgb(var(--record-red));
   }
-  #root .record-cartoon-field .press-room .cartoon-signal {
-    margin-top: .65rem;
-    padding: .45rem 0 0;
-    border-bottom: 0;
-    gap: .2rem .45rem;
-    font-size: .7rem;
-    line-height: 1.5;
-    letter-spacing: .025em;
-    text-transform: none;
-  }
-  #root .record-cartoon-field .press-room .press-opening-cover {
-    order: 2;
-    width: 100%;
-    max-width: none;
-    margin: 1rem 0 0;
-    padding: 0;
-    border: 0;
-  }
-  #root .record-cartoon-field .press-room .comic-catalogue {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: .75rem;
-    margin: 0;
-  }
-  #root .record-cartoon-field .press-room .comic-catalogue > img {
-    width: auto;
-    max-width: 100%;
-    height: auto;
-    max-height: min(43svh, 25rem);
-    justify-self: center;
-    object-fit: contain;
-    box-shadow: none;
-    background: transparent;
-  }
-  #root .record-cartoon-field .press-room .comic-catalogue-band {
-    padding: 0;
-    gap: .5rem;
-    background: transparent;
-  }
-  #root .record-cartoon-field .press-room .comic-catalogue-cover-credit {
-    font-size: .85rem;
-    line-height: 1.5;
-    letter-spacing: 0;
-    text-transform: none;
-    text-align: center;
-  }
-  #root .record-cartoon-field .press-room .comic-event-share { padding: 0; }
-  #root .record-cartoon-field .press-room .comic-event-share-note {
-    margin-top: .4rem;
-    font-size: .8rem;
-    line-height: 1.5;
-  }
-  #root .record-cartoon-field .press-room .press-room-note {
-    min-width: 0;
-    border-top: 1px solid rgb(var(--record-ink) / .25);
-    border-bottom: 1px solid rgb(var(--record-ink) / .25);
-    font-family: var(--font-record-ui);
-  }
-  #root .record-cartoon-field .press-room .press-room-note summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: .75rem;
-    min-height: 2.75rem;
-    padding: .5rem 0;
-    font-size: .9rem;
-    font-weight: 700;
-    line-height: 1.4;
-    cursor: pointer;
-    list-style: none;
-  }
-  #root .record-cartoon-field .press-room .press-room-note summary::-webkit-details-marker { display: none; }
-  #root .record-cartoon-field .press-room .press-room-note[open] > summary svg { transform: rotate(180deg); }
-  #root .record-cartoon-field .press-room .press-room-note-body { display: grid; gap: .75rem; padding: .25rem 0 1rem; }
-  #root .record-cartoon-field .press-room :is(.press-scope, .comic-catalogue-line) {
-    margin: 0;
-    max-width: 60ch;
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-  #root .record-cartoon-field .press-room .press-room-context { order: 4; margin-top: .75rem; }
-  #root .record-cartoon-field .press-room .press-contents {
-    order: 3;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-    margin-top: 1rem;
-    padding-top: 0;
-    border-top: 2px solid rgb(var(--record-ink));
-  }
-  #root .record-cartoon-field .press-room .press-contents a {
-    display: flex;
-    align-items: center;
-    min-height: 2.75rem;
-    padding: .6rem .5rem .6rem 0;
-    border-bottom: 1px solid rgb(var(--record-ink) / .2);
-    font-size: .88rem;
-    line-height: 1.4;
-    letter-spacing: 0;
-    text-decoration: none;
-  }
-  #root .record-cartoon-field .press-room .press-contents a[href="#cartoon-your-turn"] {
-    display: flex;
-    padding: .6rem .5rem;
-    background: rgb(var(--record-signal));
-    border-bottom: 1px solid rgb(var(--record-ink) / .2);
-  }
-  #root .record-cartoon-field .press-room .press-wall-section { margin-top: 0; }
-  #root .record-cartoon-field .press-room .press-wall-head { border-top: 0; padding: 0 0 1rem; gap: .5rem; }
-  #root .record-cartoon-field .press-room :is(.press-wall-title, .comic-section-title, .cartoon-goals-title, .cartoon-lineage-title) {
-    padding: 0;
-    background: none;
-    font-size: clamp(1.75rem, 6.8vw, 2.3rem);
-    font-weight: 700 !important;
-    line-height: 1.1 !important;
-    letter-spacing: -.03em !important;
-    text-transform: none;
+  #root .press-room .press-title {
+    font-size: clamp(3rem, 14vw, 4.2rem);
+    line-height: .86 !important;
+    letter-spacing: -.05em !important;
     color: rgb(var(--record-ink));
   }
-  #root .record-cartoon-field .press-room .press-wall-line { font-size: 1rem; line-height: 1.5; }
-  #root .record-cartoon-field .press-room .press-sheet {
+  #root .press-room .press-standfirst {
+    margin-top: .9rem;
+    font-size: 1.02rem;
+    line-height: 1.3;
+    color: rgb(var(--record-ink));
+  }
+  /* The count is an instrument reading, so it is ruled in ink and set in the machine's
+     voice — on yellow it reads as a gauge rather than as a caption. */
+  #root .press-room .cartoon-signal {
+    margin-top: 1.1rem;
+    padding: .5rem 0;
+    border-top: 1px solid rgb(var(--record-ink) / .45);
+    border-bottom: 1px solid rgb(var(--record-ink) / .45);
+    color: rgb(var(--record-ink) / .72);
+  }
+  #root .press-room .cartoon-signal-fact { color: rgb(var(--record-ink)); }
+
+  /* The cover, centred under the name at its own shape. It is still the file Janine sent:
+     uncropped, untinted, unframed — a hairline is all it takes to lift a printed cover off
+     a printed yellow, and a heavy mount would be the shop window this room refuses. */
+  #root .press-room .press-opening-cover {
+    order: 2;
+    margin: 1.25rem auto 0;
+    width: 100%;
+    max-width: 19rem;
+  }
+  #root .press-room .press-opening-cover .comic-catalogue { margin: 0; }
+  #root .press-room .comic-catalogue > img {
+    width: 100%;
+    box-shadow: 0 0 0 1px rgb(var(--record-ink) / .3);
+  }
+  #root .press-room .comic-catalogue-band { padding: .85rem 0 0; gap: .6rem; }
+  #root .press-room .comic-catalogue-cover-credit { font-size: .62rem; letter-spacing: .12em; }
+  #root .press-room .comic-catalogue-eyebrow { font-size: .6rem; color: rgb(var(--record-ink) / .62); }
+  #root .press-room .comic-catalogue-line { font-size: .9rem; line-height: 1.5; }
+
+  #root .press-room .press-scope {
+    order: 3;
+    margin-top: .9rem;
+    font-size: .98rem;
+    line-height: 1.55;
+    color: rgb(var(--record-ink));
+  }
+
+  /* ── THE SIX DOORS, AS A RULED REGISTER ────────────────────────────────────────
+     A two-column plate was still a contents page. One column of six ruled rows, each a
+     thumb high, numbered in the record's red, is a register — the thing you find at the
+     front of a working document rather than at the front of a brochure.
+
+     The numbers are written here rather than counted, because the rows are re-ordered
+     below to follow the page, and a counter counts in the order the markup was written. */
+  #root .press-room .press-contents {
+    order: 4;
+    position: relative;
     display: grid;
-    gap: 1rem;
-    margin: 0;
-    padding: 1.5rem 0;
-    border: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: 1.5rem;
+    padding-top: 0;
+    border-top: 2px solid rgb(var(--record-ink));
+    counter-reset: none;
   }
-  #root .record-cartoon-field .press-room .press-sheet:first-child { padding-top: 0; }
-  #root .record-cartoon-field .press-room .press-sheet + .press-sheet { border-top: 1px solid rgb(var(--record-ink) / .3); }
-  #root .record-cartoon-field .press-room .press-sheet-art {
-    width: calc(100% + 2 * var(--press-gutter));
-    margin-inline: calc(-1 * var(--press-gutter));
-    margin-block: 0;
-    background: transparent;
-    box-shadow: none;
+  /* The signature mark: a registration target sitting on the rule where the name meets
+     the register, the way a printer's sheet carries its own alignment mark. */
+  #root .press-room .press-contents::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: rgb(var(--record-ink));
+    box-shadow: 0 0 0 3px rgb(var(--record-signal));
   }
-  #root .record-cartoon-field .press-room .press-sheet-art .comic-wall-artwork { max-height: none; height: auto; object-fit: contain; }
-  #root .record-cartoon-field .press-room .press-sheet-look {
-    position: static;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    min-height: 2.75rem;
-    padding: .5rem var(--press-gutter);
-    opacity: 1;
-    background: none;
-    font-size: .8rem;
-    letter-spacing: 0;
+  #root .press-room .press-contents a {
+    counter-increment: none;
+    min-height: 2.9rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid rgb(var(--record-ink) / .28);
+    border-left: 0;
+    font-size: .86rem;
+    font-weight: 700;
+    letter-spacing: -.005em;
+  }
+  #root .press-room .press-contents a:nth-child(odd) { padding-right: 0; }
+  #root .press-room .press-contents a:nth-child(even) { padding-left: 0; border-left: 0; }
+  #root .press-room .press-contents a::before {
+    min-width: 1.5rem;
+    font-size: .64rem;
+    letter-spacing: .1em;
     color: rgb(var(--record-red));
   }
-  #root .record-cartoon-field .press-room .press-sheet-rail { gap: .6rem; padding: 0; }
-  #root .record-cartoon-field .press-room .press-sheet-number { font-size: .85rem; padding: .2rem .4rem; }
-  #root .record-cartoon-field .press-room .press-sheet-subject { font-size: .75rem; letter-spacing: .04em; }
-  #root .record-cartoon-field .press-room .press-sheet-title { font-size: 1.4rem; line-height: 1.15; }
-  #root .record-cartoon-field .press-room .press-sheet-by { font-size: .95rem; line-height: 1.5; }
-  #root .record-cartoon-field .press-room .press-sheet-words { font-size: 1.05rem; line-height: 1.6; }
-  #root .record-cartoon-field .press-room .press-sheet-provenance { font-size: .9rem; line-height: 1.5; gap: .25rem; }
-  #root .record-cartoon-field .press-room .press-sheet-provenance a { display: inline-flex; align-items: center; min-height: 2.75rem; }
-  #root .record-cartoon-field .press-room :is(.press-wall-colophon, .press-wall-print) { font-size: .9rem; line-height: 1.6; }
-  #root .record-cartoon-field .press-room .press-more { min-height: 2.75rem; width: 100%; }
-  #root .record-cartoon-field .press-room :is(.comic-why, .cartoon-goals, .comic-workshop, .press-facing, .comic-sources) { margin-top: 0; }
-  #root .record-cartoon-field .press-room .comic-why-list { gap: .5rem; }
-  #root .record-cartoon-field .press-room .comic-why-list li { font-size: 1.1rem; line-height: 1.5; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .75rem; }
-  #root .record-cartoon-field .press-room .cartoon-goals-filter { min-height: 2.75rem; }
-  #root .record-cartoon-field .press-room .comic-drawer summary { min-height: 3rem; font-size: 1rem; }
-  #root .record-cartoon-field .press-room :is(a, summary, p, h2, h3, dd) { overflow-wrap: anywhere; }
-  #root .record-cartoon-field .press-room :is(#press-wall, #cartoon-goals, #press-book, #cartoon-your-turn, #cartoon-why-title, #press-world, .press-sheet) { scroll-margin-top: 14rem; }
+  /* The rows follow the page: the goals, the invitation, the wall, the argument, the
+     lineage, the book. */
+  #root .press-room .press-contents a:nth-child(1) { order: 3; }
+  #root .press-room .press-contents a:nth-child(2) { order: 1; }
+  #root .press-room .press-contents a:nth-child(3) { order: 4; }
+  #root .press-room .press-contents a:nth-child(4) { order: 5; }
+  #root .press-room .press-contents a:nth-child(5) { order: 6; }
+  #root .press-room .press-contents a:nth-child(6) { order: 2; }
+  #root .press-room .press-contents a:nth-child(1)::before { content: "03"; }
+  #root .press-room .press-contents a:nth-child(2)::before { content: "01"; }
+  #root .press-room .press-contents a:nth-child(3)::before { content: "04"; }
+  #root .press-room .press-contents a:nth-child(4)::before { content: "05"; }
+  #root .press-room .press-contents a:nth-child(5)::before { content: "06"; }
+  #root .press-room .press-contents a:nth-child(6)::before { content: "02"; }
+
+  /* ── 3. THE LEDGER OF SEVENTEEN GOALS ─────────────────────────────────────────
+     The wall's gaps are the reason it is open, so the count is printed as an instrument
+     bar in ink directly under the room's name. It is the loudest line on the page after
+     the title, which is the order this room wants: what is missing, then what is here. */
+  #root .press-room .cartoon-goals-head {
+    border-top: 3px solid rgb(var(--record-ink));
+    padding-top: 1rem;
+  }
+  #root .press-room .cartoon-goals-eyebrow { color: rgb(var(--record-red)); font-size: .6rem; }
+  #root .press-room .cartoon-goals-title {
+    font-size: clamp(1.9rem, 8.4vw, 2.4rem) !important;
+    line-height: 1 !important;
+    letter-spacing: -.035em !important;
+    text-transform: none;
+  }
+  #root .press-room .cartoon-goals-lede { font-size: 1rem; line-height: 1.55; }
+  #root .press-room .cartoon-goals-method { font-size: .82rem; line-height: 1.55; }
+  #root .press-room .cartoon-goals-bar {
+    display: grid;
+    gap: .75rem;
+    margin-top: 1.15rem;
+    padding: .85rem 1rem;
+    background: rgb(var(--record-ink));
+    color: rgb(var(--record-paper));
+  }
+  #root .press-room .cartoon-goals-count {
+    display: grid;
+    gap: .15rem;
+    font-size: .74rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgb(var(--record-paper) / .78);
+  }
+  #root .press-room .cartoon-goals-count strong {
+    font-size: 1.15rem;
+    letter-spacing: -.01em;
+    color: rgb(var(--record-signal));
+  }
+  #root .press-room .cartoon-goals-filter {
+    justify-self: start;
+    min-height: 2.6rem;
+    padding: .45rem .8rem;
+    background: transparent;
+    border: 1px solid rgb(var(--record-signal));
+    color: rgb(var(--record-signal));
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  /* ── 4. THE INVITATION STANDS AT THE THRESHOLD OF THE WALL ────────────────────
+     It comes before the drawings on purpose: the ledger has just said how many goals are
+     still blank, so the first thing a reader meets after it is the desk they could answer
+     it from, and only then the wall their drawing would join. */
+  #root .press-room .comic-workshop {
+    padding-top: 1.4rem;
+    border-top: 3px solid rgb(var(--record-ink));
+  }
+  #root .press-room .comic-workshop > .comic-section-title {
+    font-size: clamp(1.9rem, 8.4vw, 2.4rem) !important;
+    line-height: 1 !important;
+    letter-spacing: -.035em !important;
+    text-transform: none;
+  }
+  #root .press-room .comic-workshop-note { font-size: 1rem; line-height: 1.5; }
+  #root .press-room .comic-drawer { border-top: 2px solid rgb(var(--record-ink)); border-bottom: 0; }
+  #root .press-room .comic-drawer + .comic-drawer { border-top: 1px solid rgb(var(--record-ink) / .3); }
+  #root .press-room .comic-drawer summary {
+    min-height: 3.6rem;
+    font-size: 1.05rem;
+  }
+  #root .press-room .comic-drawer summary span { flex: 1; }
+
+  /* ── 5. THE WALL: WIDE PLATES, ONE AFTER ANOTHER ──────────────────────────────
+     Each drawing keeps the whole width of the glass and nothing behind it, and each sheet
+     opens on a heavy ink rule so the wall reads as a run of prints rather than as a column
+     of articles. The folio number and the subject share one line, and the drawer's own
+     words are set as the caption they are. */
+  #root .press-room .press-wall-section { padding-top: 1.4rem; }
+  #root .press-room .press-wall-head { border-top: 3px solid rgb(var(--record-ink)); padding-top: 1rem; }
+  #root .press-room .press-wall-title {
+    font-size: clamp(1.9rem, 8.4vw, 2.4rem) !important;
+    line-height: 1 !important;
+    letter-spacing: -.035em !important;
+  }
+  #root .press-room .press-sheet { padding: 1.5rem 0 1.7rem; border-bottom: 0; }
+  #root .press-room .press-sheet + .press-sheet {
+    border-top: 3px solid rgb(var(--record-ink));
+    margin-top: 0;
+  }
+  #root .press-room .press-sheet--lead .press-sheet-art { margin: .4rem 0 0; }
+  #root .press-room .press-sheet-art { margin-inline: -1.15rem; }
+  #root .press-room .press-sheet-number { font-size: 2.1rem; }
+
+  /* ── 6. THE ARGUMENT, AS A BLACK INTERLUDE ────────────────────────────────────
+     Three sentences are the whole case for putting drawings on a climate record. On the
+     phone they are printed as a change of key — ink ground, paper type, the numbers in the
+     record's yellow — so the wall ends and the argument begins, audibly. */
+  #root .press-room .comic-why {
+    padding: 1.5rem 1.15rem 1.7rem;
+    background: rgb(var(--record-ink));
+    border-top: 3px solid rgb(var(--record-signal));
+    color: rgb(var(--record-paper));
+  }
+  #root .press-room .comic-why .comic-section-title {
+    color: rgb(var(--record-paper));
+    font-size: clamp(1.7rem, 7.6vw, 2.2rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.03em !important;
+    text-transform: none;
+  }
+  #root .press-room .comic-why-list { gap: .9rem; }
+  #root .press-room .comic-why-list li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    padding: .9rem 0 0;
+    border-top: 1px solid rgb(var(--record-paper) / .22);
+    border-bottom: 0;
+    font-size: 1.16rem;
+    line-height: 1.28;
+    color: rgb(var(--record-paper));
+  }
+  #root .press-room .comic-why-list li::before {
+    padding-top: .3rem;
+    font-size: .62rem;
+    color: rgb(var(--record-signal));
+  }
+  #root .press-room .comic-why-links {
+    display: grid;
+    gap: 0;
+    margin-top: .4rem;
+    padding-top: 0;
+  }
+  #root .press-room .comic-why-link {
+    min-height: 2.9rem;
+    padding: .7rem 0;
+    border-bottom: 1px solid rgb(var(--record-paper) / .22);
+    color: rgb(var(--record-paper));
+    font-size: .84rem;
+  }
+  #root .press-room .comic-why-link svg { color: rgb(var(--record-signal)); }
+
+  /* ── 7. THE LINEAGE, AS A TIMELINE ────────────────────────────────────────────
+     A vertical ink rule down the whole history, with each chapter hanging off it. The
+     numbers the chapters already carry do the rest of the work. */
+  #root .press-room .cartoon-lineage-heading { border-top: 3px solid rgb(var(--record-ink)); padding-top: 1rem; }
+  #root .press-room .cartoon-lineage-body {
+    margin-top: 1.25rem;
+    padding-left: .95rem;
+    border-left: 2px solid rgb(var(--record-ink) / .55);
+  }
+  #root .press-room .cartoon-lineage-body > * { margin-top: 1.35rem; }
+  #root .press-room .cartoon-lineage-body > *:first-child { margin-top: 0; }
+
+  /* ── 8. THE BIENNIAL AND THE BOOK, AS ONE PRODUCTION REGISTER ──────────────────
+     The two are the same fact seen twice — where the drawings are gathered and what they
+     are gathered into — so on the phone they are ruled together as one register, with the
+     labels in the record's red and a hairline between the two halves. */
+  #root .press-room .press-facing {
+    display: grid;
+    gap: 0;
+    padding-top: 1.4rem;
+    border-top: 3px solid rgb(var(--record-ink));
+  }
+  #root .press-room .press-facing > .comic-session { padding-bottom: 1.6rem; }
+  #root .press-room .press-facing > .comic-anthology {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(var(--record-ink) / .3);
+  }
+  #root .press-room .comic-session-facts dt,
+  #root .press-room .comic-anthology-facts dt { color: rgb(var(--record-red)); font-size: .62rem; }
+  #root .press-room .comic-session-eyebrow,
+  #root .press-room .comic-anthology-eyebrow { font-size: .62rem; color: rgb(var(--record-red)); }
+  #root .press-room .comic-session-title,
+  #root .press-room .comic-anthology-title { font-size: 1.45rem; line-height: 1.04 !important; }
+
+  #root .press-room .comic-sources { padding-top: 1.3rem; border-top: 3px solid rgb(var(--record-ink)); }
 }
