@@ -246,11 +246,18 @@ export function MarkPencil({ size = 26, className = '' }) {
 // mark — a coloured chip in a row of ink. Black, yellow, red is the record's own signal
 // order (ink, the light, the mark) and it is the paint of the room's own plates, so the
 // bricks now look printed rather than coloured in.
+//
+// ── AND THE YELLOW CAME OFF TOO ──────────────────────────────────────────────
+// "Two black boxes and one red for the wall icon." He is right again, and the reason is the
+// same one as before, only more so: three colours in a nineteen-pixel object is a flag, and
+// two inks and one red is a mark. Ink, ink, red — the wall as it is actually drawn, and the
+// one brick in the record's signal red doing the pointing. Nothing else on the rail carries
+// a second colour now, which is what makes the red read at all.
 export function MarkWall({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
       <rect x="3.4" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
-      <rect x="21" y="10.4" width="15.6" height="9.2" className="text-record-signal" fill="currentColor" stroke="none" />
+      <rect x="21" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
       <rect x="11" y="21.6" width="18" height="9.2" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
