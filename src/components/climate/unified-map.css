@@ -50,6 +50,44 @@
    can see on a phone is a legend for someone else. */
 .record-map-key .record-map-symbol { display: block; width: 14px; height: 14px; }
 
+/* The phone's opening uses the home page's painting, type scale and signal sheet.
+   Only the introduction changes; geography, markers and desktop remain untouched. */
+@media screen and (max-width: 639px) {
+  #root .record-unified-map .record-map-opening {
+    border-top: 3px solid rgb(var(--record-signal));
+    border-bottom-color: rgb(var(--record-paper) / .25);
+    background-color: rgb(var(--record-ink));
+    background-image: linear-gradient(rgb(var(--record-ink) / .58), rgb(var(--record-ink) / .8)), var(--record-cover);
+    background-size: cover;
+    background-position: center 34%;
+    color: rgb(var(--record-paper));
+  }
+  #root .record-unified-map .record-map-opening > div { padding: 2rem 1.25rem 1.5rem; }
+  #root .record-unified-map .record-map-opening > div > p:first-child { color: rgb(var(--record-signal)); }
+  #root .record-unified-map .record-map-opening h1 {
+    margin-top: 1rem;
+    font-family: var(--font-record-ui) !important;
+    font-size: clamp(1.75rem, 7.5vw, 2.5rem) !important;
+    font-weight: 400 !important;
+    line-height: 1.14 !important;
+    letter-spacing: .08em !important;
+    color: rgb(var(--record-paper));
+    text-wrap: pretty;
+  }
+  #root .record-unified-map .record-map-opening p:not(.uppercase) {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgb(var(--record-signal));
+    color: rgb(var(--record-ink));
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    letter-spacing: .02em;
+  }
+  #root .record-unified-map .record-map-opening p + div { justify-content: flex-start; margin-top: 1rem; }
+  #root .record-unified-map .record-map-opening a { color: rgb(var(--record-signal)); border-color: rgb(var(--record-signal) / .6); }
+  #root .record-unified-map .record-map-opening a[href="#reach-details"] { color: rgb(var(--record-paper)); border-color: rgb(var(--record-paper) / .4); }
+}
+
 @media screen and (min-width: 1024px) {
   /* ── FIVE SIGNALS, FIVE MARKS, FOUR COLOURS ────────────────────────────────────
      The marks are drawn as SVG in MapSignalMark, in the record's own inks: signal red for

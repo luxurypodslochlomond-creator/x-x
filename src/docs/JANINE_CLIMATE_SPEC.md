@@ -38,7 +38,7 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 | 2 | **Sign in: Email required** | "Email required for submission and interaction in groups" | ✅ Done — submit form + comments both require email |
 | 3 | **Privacy** | "Addresses general, no need to infringe on privacy, just enough for rough mapping" | ✅ Done — `region_rough` |
 | 4 | **Connectivity** | "Very fast 2-3 seconds to connect" | ✅ Done |
-| 5 | **Capacity** | "Handle millions of users" | ✅ Done |
+| 5 | **Capacity** | "Handle millions of users" | Not validated — no recorded load-test evidence. Public readership statistics currently repeat shared service-role database work for each fresh request; large concurrent traffic is not a proven capability. |
 | 6 | **Design** | "Captivating alternating photographs across top" | ✅ Done — featured carousel |
 | 7 | **Images** | "Vibrant images top and throughout. Tap on image to go to summary" | ✅ Done |
 | 8 | **Categories** | agriculture (water supply, drought, resilient crops), water, heat, coastal erosion protection, seagrasses, mangroves, oceans, zooplankton, phytoplankton, forest preservation, rewilding, urban geodesign, transportation, EV, renewable energy, solar powered desalination, etc. + climate crises (drought, flooding) | ✅ Done — all in enum. **More coming from Janine.** |
@@ -76,6 +76,10 @@ Dr. Jane Goodall: "Every single day, we hold the power to shape the world around
 > Guardian article 081626: In England: "Unite [a union] has been warning about all this since the phases of intense heat that began back in May; its members, the union says, have experienced 'heat exhaustion, heatstroke and dehydration'."
 
 ---
+
+## Capacity clarification — 19 November 2026
+
+The purpose above quotes Janine's source document. Its “7.4 billion smartphones” describes a potential distribution channel, not this record's audience, a current independently verified device count, or demonstrated simultaneous capacity. Social impressions, visits, entry reads and concurrent users are different measures. No claim of million-user readiness should be made without a documented traffic model, checks on shared request limits, and representative load testing.
 
 ## STATUS — Updated 9 Oct 2026
 
