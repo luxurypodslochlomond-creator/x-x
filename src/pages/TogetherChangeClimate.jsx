@@ -46,6 +46,7 @@ const CATEGORIES = [
 ];
 
 import SolutionCard from '@/components/climate/SolutionCard';
+import RecordDoors from '@/components/climate/RecordDoors';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import RecordHomeHero from '@/components/climate/RecordHomeHero';
 
@@ -284,14 +285,15 @@ export default function TogetherChangeClimate() {
   // crises door looked like itself. A door now holds its own colour and nothing else:
   // ink until it is chosen, then the pigment its own section heading, card edge and
   // button already carry.
+  // One label per room. The rooms themselves are drawn by RecordDoors, which carries each
+  // one's own pigment — green for what works, red for what is burning, yellow for the people
+  // gathered, orange for what is being done. This list is kept for the line that tells a
+  // reader which room they are standing in.
   const doors = [
-    { key: 'solution', label: t.solutions, on: 'bg-record-signal text-record-ink' },
-    { key: 'climate_crisis', label: t.crises_short, on: 'bg-[#b3261e] text-[#efe7d6]' },
-    // The gathering door wears the record's own yellow, the same one the foot carries.
-    // Set as a ground with ink on it, never as yellow lettering on cream: at 12px that
-    // is not a colour, it is a blank.
-    { key: 'groups', label: t.groups, on: 'bg-[#ffd447] text-[#141210]' },
-    { key: 'actions', label: t.actions, on: 'bg-[#e2602a] text-[#141210]' },
+    { key: 'solution', label: t.solutions },
+    { key: 'climate_crisis', label: t.crises_short },
+    { key: 'groups', label: t.groups },
+    { key: 'actions', label: t.actions },
   ];
   const openDoor = doors.find(d => d.key === selectedType);
 
@@ -342,6 +344,16 @@ export default function TogetherChangeClimate() {
       return matchesWords(q) && matchesCat;
     });
   }, [actions, query, selectedCategory]);
+
+  // What each room holds, counted from the record itself rather than from whatever is
+  // currently filtered: a door is a statement about the record, not about the reader's last
+  // tap, so opening one must not empty the others' numbers.
+  const doorCounts = useMemo(() => ({
+    solution: items.filter(i => i.entry_type === 'solution').length,
+    climate_crisis: items.filter(i => i.entry_type === 'climate_crisis').length,
+    groups: groups.length,
+    actions: actions.length,
+  }), [items, groups, actions]);
 
   // ── THE SUBJECT INDEX ───────────────────────────────────────────────────────────
   // One count per subject, taken from the entries the page is actually holding — solutions,
@@ -461,34 +473,31 @@ export default function TogetherChangeClimate() {
         </span>
       </div>
 
-      {/* ── TOOLBAR — the record's filters on one side, its own doors on the other.
-             The search that reaches everything is the one pill in the header: one
-             search, not two. On a desktop that reads as a working toolbar; on a phone
-             it stacks. ── */}
+      {/* ── THE FOUR ROOMS ─────────────────────────────────────────────────────────
+          Brian, 19 November: "actions crises solutions groups… these are the backbone of our
+          record… I cant help but feel they are lost and dont make sense on page and people
+          dont know what I mean." They were four small chips in a toolbar, identical in
+          weight, two of them the same yellow, and tapping one filtered the page without
+          taking the reader anywhere — so it looked as though nothing had happened.
+
+          Four plates now, each in the room's own pigment, each carrying how much the record
+          holds and one plain line saying what it is for, and opening one carries the reader
+          down to it. ── */}
+      <RecordDoors
+        counts={doorCounts}
+        selected={selectedType}
+        onSelect={(key) => {
+          setSelectedType(selectedType === key ? 'all' : key);
+          requestAnimationFrame(() => bringIntoView(contentRef.current));
+        }}
+      />
+
+      {/* ── TOOLBAR — the record's subjects on one side, the one way in with something of
+             your own on the other. The search that reaches everything is the one pill in
+             the header: one search, not two. ── */}
       <div className="px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         <div className="lg:flex lg:items-start lg:gap-8">
           <div className="lg:flex-1 lg:min-w-0">
-            {/* Four doors, one line — on a phone as well as a desk.
-                They were a flex row, and a flex row lets its longest label push the others
-                about: "Climate Crises" took the room it wanted and the fourth door kept
-                dropping onto a row of its own, which made the bar twice as deep as the words
-                in it. A fixed four-column grid gives every door the same width and the row
-                can no longer break, whatever the label or the tongue. Colours unchanged:
-                the open door is filled, the rest stay the record's ink. */}
-            <div className="grid grid-cols-4 gap-1.5 mb-3 lg:max-w-[540px]">
-              {doors.map(d => (
-                <button
-                  key={d.key}
-                  onClick={() => setSelectedType(selectedType === d.key ? 'all' : d.key)}
-                  aria-pressed={selectedType === d.key}
-                  className={`flex items-center justify-center text-center min-w-0 px-1 py-2.5 min-h-[44px] text-[10px] font-black font-mono uppercase leading-[1.15] border border-[#141210] transition-colors duration-150 active:scale-95 ${
-                    selectedType === d.key
-                      ? d.on
-                      : 'bg-[#141210] text-[#efe7d6] hover:bg-[#2a231c]'
-                  }`}
-                >{d.label}</button>
-              ))}
-            </div>
             {/* ── ONE SUBJECT INDEX, AND THE SEQUENCE IS THE HONEST ONE ─────────────
                 The desk and the phone were two indexes. The phone opened the sheet: every
                 subject carrying something, fullest first, then the ones with nothing under
@@ -592,7 +601,7 @@ export default function TogetherChangeClimate() {
             )}
             {showEntries && solutions.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-red" />
+                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" />
                 <div className="record-card-grid grid grid-cols-1 gap-3 lg:grid-cols-3 lg:gap-4">
                   {solutions.map(item => <SolutionCard key={item.id} item={item} />)}
                 </div>
