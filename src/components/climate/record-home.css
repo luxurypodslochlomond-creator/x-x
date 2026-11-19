@@ -35,14 +35,15 @@
 }
 
 .record-home-page { background-color: transparent; }
+.record-home-flow { display: flex; flex-direction: column; }
 
-/* The room index uses the masthead's lettering and two-ink marks, not a second card system. */
+/* Quiet, full-ink impressions beneath the quotation, using the masthead's lettering. */
 .record-home-page .record-room-link {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: .6rem;
+  gap: .45rem;
   background: transparent;
   text-align: center;
   text-decoration: none;
@@ -52,7 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  block-size: 3rem;
+  block-size: 2.25rem;
 }
 .record-home-page .record-room-drawing svg { display: block; }
 .record-home-page .record-room-label {
@@ -134,13 +135,7 @@
     height: 6rem;
     background-position: center 58%;
   }
-  /* ── ONE ORDER, ON EVERY GLASS ───────────────────────────────────────────────
-     The desk used to lift Jane's voice above the masthead, so the four rooms sat
-     under her quotation on a wide screen and above it on a phone — the same page
-     telling two readers two different things about what the record is. The order is
-     now the record's own on both: it names itself, it says what it is made of (the
-     four rooms), a voice it keeps speaks, then the world arrives as pictures. */
-  .record-home-flow { display: flex; flex-direction: column; }
+  /* The source order is the reading order: quotation, rooms, cover. */
   .climate-record .record-home-page .record-cover-plate-title {
     max-inline-size: 29ch;
     font-size: clamp(2rem, 2.7vw, 3rem);
@@ -178,20 +173,6 @@
 /* A phone gets the portrait painting in the same plate — var(--record-cover) already
    switches to it below a desk's width, so nothing is repeated here. */
 
-/* ── THE ROOMS COME FIRST ON A PHONE ─────────────────────────────────────────────
-   Brian, 19 November: "when go in with mobile can't get to all the coolasfuck until scroll
-   down." The order is changed here rather than in the page, so nothing is moved, duplicated
-   or re-rendered: the same bands, read in the order a narrow glass can afford. The record
-   opens, the four rooms follow, then the pictures, the crawl, the counts and the rail. A
-   desk is untouched. */
-@media (max-width: 1023px) {
-  .record-home-flow { display: flex; flex-direction: column; }
-  .record-home-flow > * { order: 3; }
-  /* The four rooms come first on a phone too, because they are the record's backbone and
-     not its footer. Everything else follows in the order it is read. */
-  .record-home-flow > .record-home-doors { order: 1; }
-  .record-home-flow > .record-home-opening { order: 2; }
-}
 /* The shared cover holds an image frame while its own photograph downloads. */
 .record-entry-image {
   background-image: var(--record-cover);

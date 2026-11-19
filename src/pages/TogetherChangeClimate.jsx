@@ -437,23 +437,15 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── ON A PHONE THE ROOMS COME FIRST ─────────────────────────────────────────
-          Brian, 19 November: "when go in with mobile can't get to all the coolasfuck until
-          scroll down." He was right, and it was arithmetic rather than taste: a phone's
-          first screens held the title, the yellow summary, Jane's quote, the picture crawl,
-          the impact bar and a rail of plates — and the four rooms, the backbone of the whole
-          record, arrived after all of it. So the opening band and the four rooms change
-          places on a narrow glass, by order rather than by moving anything: the record still
-          opens the same way, and the four rooms are the second thing a thumb can reach. A
-          desk keeps exactly the order it had. */}
+      {/* Jane's voice follows the masthead's red rule; the four rooms follow her words. */}
       <div className="record-home-flow">
-      {/* ── THE FOUR ROOMS COME FIRST, DIRECTLY UNDER THE TOP NAVIGATION ────────────
-          Brian, 19 November: "they are so important for this and should sit underneath the
-          top navigation… the most important." He is right. The record's backbone was the
-          fifth thing on its own front page, after a painting, a quotation, a crawl and a
-          tally. It is the first thing now, on every glass: the four rooms, each with its
-          own cut drawing, and the reader chooses one before anything asks for attention. */}
-      <div className="record-home-doors px-4 pt-4 lg:px-10">
+      <div className="record-home-voice-band">
+        <RecordPaintedBand strength={0.75} soft>
+          <RecordHomeVoice />
+        </RecordPaintedBand>
+      </div>
+
+      <div className="record-home-doors px-4 lg:px-10">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -465,16 +457,7 @@ export default function TogetherChangeClimate() {
         />
       </div>
 
-      {/* ── THE PAINTING IS THE FRONT PAGE ────────────────────────────────────────
-          The record's own drawings are laid on the painting the way a legend is printed on
-          a plate, and the words sit at the foot of it. Jane's voice follows on the same
-          continuous painting, so the record opens as one room rather than a stack of bands. */}
       <RecordCoverPlate copy={t} />
-      <div className="record-home-voice-band">
-        <RecordPaintedBand strength={0.75} soft>
-          <RecordHomeVoice />
-        </RecordPaintedBand>
-      </div>
 
       {/* ── THE TOP CRAWL — Janine's credited photographs, directly under the masthead.
              Her ask was for the pictures to sit high on the page, and they still do: they
