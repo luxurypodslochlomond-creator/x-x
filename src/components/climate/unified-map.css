@@ -50,6 +50,8 @@
   .record-unified-map .record-map-frame { padding: 0; border: 0; }
   .record-unified-map .record-world-atlas .record-map-stipple { display: none; }
   .record-unified-map .record-map-coastline { display: inline; }
+  /* The pass of light reads at desk size because the plate is wider, not because it is faster. */
+  .record-unified-map .record-atlas-pass { animation-duration: 52s; }
   .record-unified-map .record-world-atlas .record-transmit {
     width: 10px; height: 10px; margin: -5px 0 0 -5px;
     animation-name: record-map-transmit;

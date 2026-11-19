@@ -74,6 +74,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
   const d = useMemo(() => landDots(), []);
   const g = GROUND[tone] || GROUND.paper;
   const landId = useId().replaceAll(':', '');
+  const passId = useId().replaceAll(':', '');
   const atlas = tone === 'ink' && alive;
 
   // Readership totals do not link an individual reading place to an entry.
@@ -100,6 +101,23 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             </defs>
             <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".9" />
             <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-bone))" fillOpacity=".48" mask={`url(#${landId})`} />
+          </g>
+        )}
+        {atlas && (
+          <defs>
+            <linearGradient id={passId} x1="0" x2="1">
+              <stop offset="0%" stopColor="#ffd447" stopOpacity="0" />
+              <stop offset="50%" stopColor="#ffd447" stopOpacity="0.16" />
+              <stop offset="100%" stopColor="#ffd447" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        )}
+        {/* One slow band of light crossing the plate, like a satellite pass: the world is
+            being read all the time, not only when a reader happens to look at it. Movement
+            only — it makes no claim about who read what. */}
+        {atlas && (
+          <g className="record-atlas-pass" aria-hidden="true">
+            <rect x="-40" y="0" width="40" height={PLATE_H} fill={`url(#${passId})`} />
           </g>
         )}
         {/* The grid a plate carries so the eye can find a latitude — every thirty degrees,
@@ -194,7 +212,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             aria-label={m.aria || m.label}
             aria-current={on ? 'true' : undefined}
             title={m.label}
-            className="absolute grid place-items-center p-0 bg-transparent border-0 cursor-pointer"
+            className="group absolute grid place-items-center p-0 bg-transparent border-0 cursor-pointer"
             style={{
               left: `${left}%`,
               top: `${top}%`,
@@ -213,7 +231,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             )}
             <span
               aria-hidden="true"
-              className={t.shape}
+              className={`${t.shape} transition-transform duration-200 group-hover:scale-150 group-focus-visible:scale-150`}
               style={{
                 width: size,
                 height: size,
