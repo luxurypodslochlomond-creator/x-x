@@ -203,26 +203,33 @@ export function MarkPencil({ size = 26, className = '' }) {
 // somebody's hand, and the gap is the record asking rather than the record missing
 // something.
 //
-// ── AND THE SECOND DRAWING CAME OFF, WHICH IS THE WHOLE OF THE FIX ─────────────
-// The first version hung two drawings and drew the empty place as a dashed box with a cross
-// in it. Brian, 19 November: "you sure our nav icons coolasfuck bro? fit right reasons" — and
-// the honest answer was no, for a reason that has nothing to do with taste: a dashed frame
-// with a cross inside is the add-an-image control. It is on every upload form on the
-// internet, and a door on this rail cannot be the same picture as a form field. Eight
-// elements, and the one that carried the meaning — the gap — was dressed as a button.
+// ── BRICKS, BECAUSE HE SAID THE TRUE THING TWICE ──────────────────────────────
+// Brian, 19 November, after two redraws: "icons look like old web icons bro and boring like
+// old ex colors one… the wall isn't doing it for me think icon can relearn so much more
+// simply bro and blow Francis etc mind I loved Pink Floyd the wall bro."
 //
-// So the second drawing goes, and the empty place is nothing but the red cross in open air.
-// Five elements, the eye takes line, drawing, gap in that order, and the gap is a mark the
-// record makes rather than a box it holds open. Read at nineteen pixels in the phone's
-// second row, which is where the old one turned to grey mush.
+// He is right, and the diagnosis is not about this door — it is about the whole sheet. Every
+// mark on the rail is the same thing: a thin outline at one weight, one red accent, a
+// drawing of an object. That is exactly what an icon pack looks like, and an icon pack is
+// what "old web" means. Line art is how a computer draws a picture of a thing. It is not how
+// a printer prints a mark.
+//
+// So this door stops being a drawing of a wall and becomes a wall: solid bricks, laid in
+// running bond, no outlines at all. Two ink bricks and one in the record's red, sitting in
+// the course beneath them, straddling the joint — because the wall on this record is built
+// one brick at a time out of what people give it, and the red one is the brick that is
+// still yours to lay. Three shapes. It reads at nineteen pixels because a solid mass has
+// nothing to lose when it shrinks, which a hairline does.
+//
+// Pink Floyd's wall is a wall of bricks and that is the only part of it worth borrowing:
+// not the barrier, the fact that it is built. This one is built of drawings, and it is
+// never finished, which is why the red brick is there.
 export function MarkWall({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.7" className={className} aria-hidden="true">
-      <path d="M3 9.4h34" strokeWidth="2.7" />
-      <path d="M13.6 9.4v3.6" strokeWidth="1.9" />
-      <rect x="8.2" y="13" width="17.4" height="21.2" strokeWidth="1.7" />
-      <path d="M9.8 30.4l4.4-6.2 2.9 2.9 3.1-3.9 4.3 7.2" strokeWidth="1.5" />
-      <path d="M32 18.2v11.4M26.3 23.9h11.4" className="text-record-mark" strokeWidth="2.7" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <rect x="3.4" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
+      <rect x="21" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
+      <rect x="11" y="21.6" width="18" height="9.2" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
