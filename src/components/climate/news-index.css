@@ -28,6 +28,15 @@
 .news-search input::placeholder { color: rgb(var(--record-muted)); opacity: 1; }
 .news-search input::-webkit-search-cancel-button { display: none; }
 .news-search button { display: grid; place-items: center; flex-shrink: 0; min-width: 44px; min-height: 44px; border: 0; padding: 0; color: inherit; background: transparent; }
+/* ── WHAT THE ENTRIES ARE, ABOVE HOW CERTAIN THEY ARE ─────────────────────────
+   The row of tabs was the record's source ladder only, so a reader arriving to see
+   what had changed was offered "Official record", "Two sources", "One source" and no
+   way to ask for a crisis. The kinds come first and are set heavier, because a kind is
+   what a reader arrives with; how well it is known is the second question, and it keeps
+   the quiet row beneath. */
+.news-kinds { display: flex; flex-wrap: wrap; gap: 0 .9rem; border-bottom: 1px solid rgb(var(--record-ink) / .18); }
+.news-kinds button { min-height: 44px; padding: .5rem 0 .35rem; border: 0; border-bottom: 3px solid transparent; background: transparent; color: rgb(var(--record-ink) / .72); font-size: .8125rem; font-weight: 700; letter-spacing: .02em; line-height: 1.3; cursor: pointer; }
+.news-kinds button[aria-pressed="true"] { border-bottom-color: rgb(var(--record-mark)); color: rgb(var(--record-ink)); }
 .news-filters { display: flex; flex-wrap: wrap; gap: 0 .9rem; padding-block: .15rem .55rem; }
 .news-filters button { min-height: 44px; padding: .45rem 0 .3rem; border: 0; border-bottom: 1px solid transparent; background: transparent; color: rgb(var(--record-muted)); font-size: .75rem; line-height: 1.3; cursor: pointer; }
 .news-filters button[aria-pressed="true"] { border-bottom-color: rgb(var(--record-mark)); color: rgb(var(--record-ink)); }

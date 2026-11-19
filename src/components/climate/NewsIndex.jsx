@@ -28,7 +28,7 @@ function group(entries) {
   return out;
 }
 
-export default function NewsIndex({ entries, loading, query, onQueryChange, verification, onVerificationChange, onSubmit }) {
+export default function NewsIndex({ entries, loading, query, onQueryChange, kind, onKindChange, verification, onVerificationChange, onSubmit }) {
   const [lead, ...rest] = entries;
   const groups = group(rest);
 
@@ -47,7 +47,7 @@ export default function NewsIndex({ entries, loading, query, onQueryChange, veri
           and a drawing is a drawing. */}
       <p className="news-index-intro">A dated change, with its source: a warning, a milestone, or something that works and can be copied. Nothing here is ranked.</p>
 
-      <NewsIndexTools query={query} onQueryChange={onQueryChange} verification={verification} onVerificationChange={onVerificationChange} />
+      <NewsIndexTools query={query} onQueryChange={onQueryChange} kind={kind} onKindChange={onKindChange} verification={verification} onVerificationChange={onVerificationChange} />
 
       {loading && <p className="news-state" role="status">Loading signals…</p>}
 

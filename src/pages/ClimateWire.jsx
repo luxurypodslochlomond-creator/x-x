@@ -12,6 +12,9 @@ export default function ClimateWire() {
   const [entries, setEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useRecordViewState('verification', 'all');
+  // The kinds are what a reader arrives with: a warning, a marker, or something already
+  // working. Asked of the record itself, so a filtered room is never a filtered page.
+  const [kind, setKind] = useRecordViewState('kind', 'all');
   const [formOpen, setFormOpen] = useState(false);
   const [reload, setReload] = useState(0);
   // The wire has its own search, because somebody standing on the wire should not have to
@@ -22,12 +25,16 @@ export default function ClimateWire() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    const query = filter === 'all' ? { status: 'published' } : { status: 'published', verification: filter };
+    const query = {
+      status: 'published',
+      ...(filter === 'all' ? {} : { verification: filter }),
+      ...(kind === 'all' ? {} : { kind }),
+    };
     base44.entities.ClimateNews.filter(query, { sort: '-when_date', limit: 50 })
       .then(page => { if (!cancelled) setEntries(page.items || []); })
       .finally(() => { if (!cancelled) setLoading(false); });
     return () => { cancelled = true; };
-  }, [filter, reload]);
+  }, [filter, kind, reload]);
 
   // Every word an entry carries — headline, what changed, what can be copied, the source,
   // the place, the picture credit, the second source, the person who signed it. Every word
@@ -44,7 +51,7 @@ export default function ClimateWire() {
 
   return (
     <div className="news-page text-record-ink">
-      <NewsIndex entries={shown} loading={loading} query={q} onQueryChange={setQ} verification={filter} onVerificationChange={setFilter} onSubmit={() => setFormOpen(true)} />
+      <NewsIndex entries={shown} loading={loading} query={q} onQueryChange={setQ} kind={kind} onKindChange={setKind} verification={filter} onVerificationChange={setFilter} onSubmit={() => setFormOpen(true)} />
       {formOpen && <NewsSubmitForm onClose={() => setFormOpen(false)} onSent={() => setReload(r => r + 1)} />}
     </div>
   );

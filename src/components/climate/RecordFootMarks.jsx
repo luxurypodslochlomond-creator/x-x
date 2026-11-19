@@ -344,10 +344,10 @@ export function MarkWall({ size = 26, className = '' }) {
 export function MarkSignal({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="4.6" y="6" width="8.6" height="8.6" className="text-record-mark" fill="currentColor" stroke="none" />
-      <rect x="16.6" y="7.2" width="18.8" height="5.4" fill="currentColor" stroke="none" />
-      <rect x="4.6" y="19.4" width="30.8" height="5.6" fill="currentColor" stroke="none" />
-      <rect x="4.6" y="28.6" width="22.4" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="4.6" y="6" width="4.4" height="28" fill="currentColor" stroke="none" />
+      <rect x="12.4" y="6" width="23.2" height="7.4" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="12.4" y="16.9" width="17" height="6.8" fill="currentColor" stroke="none" />
+      <rect x="12.4" y="27.2" width="20.6" height="6.8" fill="currentColor" stroke="none" />
     </svg>
   );
 }
