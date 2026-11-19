@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MARKS_IN_ORDER } from '@/components/climate/marks/marksOrder';
+import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 
 // ── THE MARKS, JOINED, AND EACH ONE ANSWERABLE ────────────────────────────────
@@ -62,15 +63,25 @@ export default function MarksPlate({ onClose, onNavigate }) {
 
   return (
     <figure className="pb-3 font-body text-record-ink">
-      <div className="flex items-baseline justify-between gap-3 border-b-2 border-record-mark pb-1">
+      {/* ── THE WAY BACK IS A SYMBOL, NOT A WORD ────────────────────────────────
+          Brian, 19 November: "still says list and has old icon — replace with symbols."
+          Right twice over. The word LIST was the last piece of software-language left on a
+          sheet of drawings, and ↩ is the one shape on the plate that belongs to no alphabet
+          here: a borrowed browser glyph sitting beside twenty-four marks cut by hand. So the
+          way back is the record's own mark for every door at once, at nineteen pixels, which
+          is the size it was drawn for and the size the masthead wears it at. No word, no
+          arrow, and the only thing on the plate that is not one of the twenty-four is the
+          one mark that stands for all of them. */}
+      <div className="flex items-center justify-between gap-3 border-b-2 border-record-mark pb-1">
         <p className="text-[11px] uppercase tracking-[0.16em] text-record-mark">Every mark, struck once</p>
         <button
           type="button"
           onClick={onClose}
-          aria-label="Back to the list of doors"
-          className="min-h-9 shrink-0 px-1 text-[10px] uppercase tracking-[0.14em] text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+          aria-label="Back to every door"
+          title="Back to every door"
+          className="flex h-10 w-10 shrink-0 items-center justify-center text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
         >
-          The list <span aria-hidden="true">↩</span>
+          <span aria-hidden="true" className="block h-[19px] w-[19px] [&>svg]:h-full [&>svg]:w-full"><MarkExplore size={19} /></span>
         </button>
       </div>
 
