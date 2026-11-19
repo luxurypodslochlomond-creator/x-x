@@ -1,6 +1,73 @@
-/* The theme sheet rises into place the way every other sheet on the record does —
-   transform and opacity only, so the compositor pays for it and the page behind
-   does not repaint. */
+/* ── THE THEME PLATE ─────────────────────────────────────────────────────────────
+   The same plate the record's own index uses: every mark on one screen, the caption
+   underneath saying what the mark is made of. Four across on a handset, five when a
+   record carries more themes than a handset's six rows can hold, and the rows share the
+   height that is left so nothing has to be scrolled to be seen. */
+.subject-plate { display: flex; flex: 1 1 0%; flex-direction: column; min-height: 0; margin: 0; }
+
+.subject-plate-grid {
+  display: grid;
+  flex: 1 1 0%;
+  min-height: 0;
+  grid-auto-rows: minmax(0, 1fr);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid rgb(var(--record-ink) / .15);
+  border-left: 1px solid rgb(var(--record-ink) / .15);
+}
+
+/* The caption is where a mark stops being a picture and starts being an argument. */
+.subject-plate-caption {
+  flex: none;
+  min-height: 8.5rem;
+  margin-top: .6rem;
+  border-top: 2px solid rgb(var(--record-mark));
+  padding-top: .6rem;
+}
+
+/* The pressed mark is marked in the record's own signal, never inverted: the marks are
+   drawn in ink, and an ink mark on an ink ground is no mark at all. */
+.subject-plate-cell[aria-pressed="true"] {
+  background: rgb(var(--record-signal) / .55);
+  box-shadow: inset 0 0 0 2px rgb(var(--record-mark));
+}
+
+.subject-plate-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 5px 2px;
+  border-right: 1px solid rgb(var(--record-ink) / .15);
+  border-bottom: 1px solid rgb(var(--record-ink) / .15);
+  background: transparent;
+  color: rgb(var(--record-ink));
+  cursor: pointer;
+}
+.subject-plate-cell:focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: -3px; }
+/* The theme you are reading now, and the one being pressed, are on the record's own
+   yellow with a red rule — never an inversion, because a mark made of ink and one red
+   part disappears against an ink ground, and a mark you cannot read is not a mark. */
+.subject-plate-cell[aria-pressed='true'] {
+  background: rgb(var(--record-signal) / .5);
+  box-shadow: inset 0 0 0 2px rgb(var(--record-mark));
+}
+
+.subject-plate-art { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; min-height: 0; width: min(74%, 52px); }
+.subject-plate-art > svg { display: block; width: 100%; height: 100%; }
+.subject-plate-name { display: block; flex: none; max-width: 100%; font-size: 9.5px; line-height: 1.1; text-align: center; overflow-wrap: anywhere; }
+
+.subject-plate-caption { flex: none; margin-top: .6rem; border-top: 2px solid rgb(var(--record-mark)); padding-top: .6rem; }
+
+/* A wide, short handset gets the plate in fewer, wider rows. */
+@media (min-height: 640px) {
+  .subject-plate-cell { padding: 7px 4px; }
+}
+
+/* The sheet rises into the frame rather than appearing in it. */
 .subject-picker { animation: subject-picker-rise .18s cubic-bezier(0, 0, .2, 1); }
 @keyframes subject-picker-rise {
   from { transform: translateY(14px); opacity: .55; }
