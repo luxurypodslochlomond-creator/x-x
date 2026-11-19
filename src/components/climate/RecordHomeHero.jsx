@@ -26,7 +26,9 @@ const RECORD_CARD = { id: 'record-of-the-time', title: RECORD_SHARE_TITLE };
 export default function RecordHomeHero({ copy }) {
   return (
     <section aria-labelledby="record-home-title" className="record-home-hero relative text-record-bone">
-      <div className="relative z-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-record-bone/20 bg-record-ink/50 px-4 py-2 lg:px-10">
+      {/* Centred on the strip: the declaration and the ask sit as one line in the middle of
+          the page rather than hanging off its left edge. Brian, 19 November. */}
+      <div className="relative z-10 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 border-b border-record-bone/20 bg-record-ink/50 px-4 py-2 text-center lg:px-10">
         <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-record-bone">{copy.service}</span>
         <ShareCardButton
           entry={RECORD_CARD}
