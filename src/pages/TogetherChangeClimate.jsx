@@ -12,7 +12,6 @@ import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SubjectRail from '@/components/climate/SubjectRail';
-import SubjectIndexSheet from '@/components/climate/SubjectIndexSheet';
 import SubjectPickerSheet from '@/components/climate/SubjectPickerSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
 import SignalBeacon from '@/components/climate/SignalBeacon';
@@ -525,16 +524,6 @@ export default function TogetherChangeClimate() {
                 subjects={[...filledSubjects, ...emptySubjects]}
                 totalEntries={items.length + actions.length}
                 selected={selectedCategory}
-                onSelect={selectTheme}
-              />
-              <SubjectIndexSheet
-                open={showIndex}
-                onClose={() => setShowIndex(false)}
-                filled={filledSubjects}
-                empty={emptySubjects}
-                totalEntries={items.length + actions.length}
-                selected={selectedCategory}
-                allLabel="Every theme"
                 onSelect={selectTheme}
               />
             </div>

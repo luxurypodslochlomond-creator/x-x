@@ -6,21 +6,28 @@ import SubjectMark from '@/components/climate/SubjectMark';
 import subjectMarkReasons from '@/components/climate/subjectMarkReasons';
 import '@/components/climate/subject-picker.css';
 
-// ── THE THEMES, DRAWN AS A PLATE ────────────────────────────────────────────────
+// ── THE THEMES, DRAWN AS A PLATE — ON BOTH GLASSES ──────────────────────────────
 // This was the device's own picker: a plain list of words, and no mark anywhere in it. A
 // reader choosing a theme was the one place on the record where the printed hand was
 // missing, so "Seagrasses", "Mangroves" and "Drought" were three identical grey lines.
 //
-// It is the record's plate now, the same one the index uses: every theme's mark on one
-// screen, four or five across, nothing to scroll to see what is there. Pressing a mark
-// does not choose it — it says what the drawing is made of and which part of it is red,
+// It is the record's plate now: every theme's mark on one screen, nothing to scroll to see
+// what is there. Pressing a mark does not choose it — it says what the drawing is made of,
 // because a mark that cannot say why it looks like that is decoration. The red line under
 // the caption is the way through: it reads that theme's entries.
 //
-// The faults that made the first in-page list clunky are answered rather than avoided: the
-// page behind is held still by the record's own position-fixed lock (the one the contents
-// sheet and the photograph viewer use), the sheet's height is stated outright, and only
-// the plate scrolls — and only when a record carries more themes than one screen holds.
+// ── AND THE DESK WAS STILL BEING HANDED THE OLDER SHEET ────────────────────────
+// Brian, 19 November: "how can get desktop working as good as mobile with the explore and
+// explore by theme — seems not coolasfuck like mobile on screen." He was right, and the
+// fault was the one this record keeps making: a phone got the new thing and a desk kept
+// the old one. A desk was still reading a two-column list of names with counts, and the
+// reasons — the only part of this that makes a reader care — were behind a "About this
+// index" fold.
+//
+// So it is one plate at both widths, exactly as the explore index already is. A desk gets
+// the same marks, the same caption, the same one-line reason, laid eight across on the
+// paper instead of four, because a desk has the width and a handset does not. Nothing else
+// differs: press a mark, read why it is drawn that way, follow the red line through.
 export default function SubjectPickerSheet({ open, onClose, subjects = [], totalEntries = 0, selected, allLabel = 'Every theme', onSelect }) {
   const dialogRef = useRef(null);
   const [isPhone, setIsPhone] = useState(() => !window.matchMedia('(min-width: 1024px)').matches);
@@ -39,7 +46,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     return () => mq.removeEventListener('change', sync);
   }, []);
 
-  // Opening the sheet stands the caption on the theme the reader is already reading.
+  // Opening the plate stands the caption on the theme the reader is already reading.
   useEffect(() => {
     if (open) setChosenId(selected || 'all');
   }, [open, selected]);
@@ -57,7 +64,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     return () => { if (dialog.open) dialog.close(); };
   }, [showing]);
 
-  if (!showing) return null;
+  if (!open) return null;
 
   // A theme added by a keeper may have no drawing of its own yet. It says so, rather than
   // borrowing another theme's reason and quietly meaning something it does not.
@@ -76,6 +83,90 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
   const go = (id) => { onSelect(id); onClose(); };
   // One press reads the mark; a second press on the same mark goes there.
   const press = (id) => { if (id === chosenId) go(id); else setChosenId(id); };
+
+  const inline = !isPhone;
+  const columns = inline
+    ? (items.length > 32 ? 10 : items.length > 18 ? 8 : 6)
+    : (items.length > 24 ? 5 : 4);
+
+  const plate = (
+    <figure className="subject-plate" data-inline={inline ? 'true' : undefined}>
+      <div
+        role="group"
+        aria-label="Every theme, with its mark"
+        className="subject-plate-grid"
+        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+      >
+        {items.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            onClick={() => press(item.id)}
+            aria-pressed={item.id === chosenId}
+            aria-label={`${item.label}. ${reasonFor(item.id)}`}
+            aria-controls="record-theme-caption"
+            className="subject-plate-cell text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+          >
+            <span aria-hidden="true" className="flex min-h-0 w-[76%] max-w-[52px] flex-1 items-center justify-center">
+              <SubjectMark subject={item.id} size={40} className="h-full w-full" />
+            </span>
+            <span className="block w-full text-center text-[9.5px] leading-[1.1] [overflow-wrap:anywhere] lg:text-[11px] lg:leading-[1.2]">{item.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <figcaption id="record-theme-caption" aria-live="polite" aria-atomic="true" className="subject-plate-caption">
+        <div className="flex items-start gap-3">
+          <span aria-hidden="true" className="block h-12 w-12 shrink-0 text-record-ink [&>svg]:h-full [&>svg]:w-full">
+            <SubjectMark subject={chosen.id} size={40} />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="text-[15px] font-bold leading-tight text-record-ink">{chosen.label}</p>
+            <p className="mt-1 text-pretty text-[12.5px] leading-[1.45] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>{reason}</p>
+            <button
+              type="button"
+              onClick={() => go(chosen.id)}
+              className="mt-1 inline-flex min-h-11 items-center gap-2 text-[12px] font-bold text-record-mark underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+            >
+              {action}
+              <svg width="7" height="8" viewBox="0 0 7 8" aria-hidden="true"><path d="M0 0l7 4-7 4Z" fill="currentColor" /></svg>
+            </button>
+          </div>
+        </div>
+      </figcaption>
+    </figure>
+  );
+
+  // ── THE DESK: THE SAME PLATE, ON THE PAGE RATHER THAN OVER IT ─────────────────
+  // A panel that floats over a desk's page would hide the entries a reader is choosing
+  // between. So on a desk the plate opens in the page, under the line that opened it.
+  if (inline) {
+    return (
+      <section
+        id="record-subject-index"
+        aria-label="Explore by theme"
+        className="mt-1 hidden border-b border-record-ink/20 pb-2 font-body text-record-ink lg:block"
+        onKeyDown={(event) => { if (event.key === 'Escape') onClose(); }}
+      >
+        <div className="mb-2 flex items-center justify-between gap-4 border-b border-record-mark/30 pb-1">
+          <p className="record-header-type text-[15px] leading-none text-record-mark">Explore by theme</p>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Put the sheet down"
+            title="Put the sheet down"
+            className="flex h-9 w-9 shrink-0 items-center justify-center text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+          >
+            <span aria-hidden="true" className="block h-[17px] w-[17px] [&>svg]:h-full [&>svg]:w-full"><MarkClose size={17} /></span>
+          </button>
+        </div>
+        {plate}
+        <p className="border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
+          {items.length} themes · press a mark to read why it is drawn that way
+        </p>
+      </section>
+    );
+  }
 
   return createPortal(
     <dialog
@@ -106,51 +197,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
             </button>
           </div>
 
-          <figure className="subject-plate">
-            <div
-              role="group"
-              aria-label="Every theme, with its mark"
-              className="subject-plate-grid"
-              style={{ gridTemplateColumns: `repeat(${items.length > 24 ? 5 : 4}, minmax(0, 1fr))` }}
-            >
-              {items.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => press(item.id)}
-                  aria-pressed={item.id === chosenId}
-                  aria-label={`${item.label}. ${reasonFor(item.id)}`}
-                  aria-controls="record-theme-caption"
-                  className="subject-plate-cell text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
-                >
-                  <span aria-hidden="true" className="flex min-h-0 w-[76%] max-w-[52px] flex-1 items-center justify-center">
-                    <SubjectMark subject={item.id} size={40} className="h-full w-full" />
-                  </span>
-                  <span className="block w-full text-center text-[9.5px] leading-[1.1] [overflow-wrap:anywhere]">{item.label}</span>
-                </button>
-              ))}
-            </div>
-
-            <figcaption id="record-theme-caption" aria-live="polite" aria-atomic="true" className="subject-plate-caption">
-              <div className="flex items-start gap-3">
-                <span aria-hidden="true" className="block h-12 w-12 shrink-0 text-record-ink [&>svg]:h-full [&>svg]:w-full">
-                  <SubjectMark subject={chosen.id} size={40} />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[15px] font-bold leading-tight text-record-ink">{chosen.label}</p>
-                  <p className="mt-1 text-pretty text-[12.5px] leading-[1.45] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>{reason}</p>
-                  <button
-                    type="button"
-                    onClick={() => go(chosen.id)}
-                    className="mt-1 inline-flex min-h-11 items-center gap-2 text-[12px] font-bold text-record-mark underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
-                  >
-                    {action}
-                    <svg width="7" height="8" viewBox="0 0 7 8" aria-hidden="true"><path d="M0 0l7 4-7 4Z" fill="currentColor" /></svg>
-                  </button>
-                </div>
-              </div>
-            </figcaption>
-          </figure>
+          {plate}
 
           <p className="shrink-0 border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
             {items.length} themes · press a mark to read why it is drawn that way

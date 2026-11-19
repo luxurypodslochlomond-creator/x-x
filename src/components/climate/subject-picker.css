@@ -25,6 +25,16 @@
   padding-top: .6rem;
 }
 
+/* ── THE SAME PLATE ON A DESK, LAID FLAT ON THE PAGE ─────────────────────────────
+   A sheet on a handset fills the glass, so its rows share whatever height is left. A plate
+   on a desk opens in the page under the line that opened it and must never stretch to fill
+   a screen it does not own: it takes the height its marks need, and the entries it is
+   choosing between stay visible underneath. */
+.subject-plate[data-inline="true"] { flex: none; }
+.subject-plate[data-inline="true"] .subject-plate-grid { flex: none; grid-auto-rows: auto; overflow: visible; }
+.subject-plate[data-inline="true"] .subject-plate-cell { min-height: 92px; gap: 6px; padding: 10px 6px; }
+.subject-plate[data-inline="true"] .subject-plate-caption { min-height: 0; }
+
 /* The pressed mark is marked in the record's own signal, never inverted: the marks are
    drawn in ink, and an ink mark on an ink ground is no mark at all. */
 .subject-plate-cell[aria-pressed="true"] {
