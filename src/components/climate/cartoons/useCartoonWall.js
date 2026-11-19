@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
+import { orderWall } from '@/components/climate/cartoons/wallOrder';
 
 export default function useCartoonWall(watch = false) {
   const client = useQueryClient();
@@ -22,5 +23,6 @@ export default function useCartoonWall(watch = false) {
     if (!watch) return;
     return base44.entities.ClimateCartoon.subscribe(() => client.invalidateQueries({ queryKey: ['cartoon-wall'] }));
   }, [client, watch]);
-  return { ...wall, cartoons: wall.data?.pages.flatMap((page) => page.items || []) || [] };
+  // Hung in the room's own order, not in the order rows were typed in.
+  return { ...wall, cartoons: orderWall(wall.data?.pages.flatMap((page) => page.items || []) || []) };
 }

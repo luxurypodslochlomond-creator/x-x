@@ -25,6 +25,9 @@ import '@/components/climate/cartoons/press/press-balance.css';
 // red opening line to every part, red numbers down the goals, a red rule on the line the
 // wall's permission stands on. Nothing in it touches a drawing.
 import '@/components/climate/cartoons/press/press-signal.css';
+// Last of all, the ground itself: this room is printed on the signal plate, with its
+// drawings and its words on clean paper laid over it. Scoped to this room only.
+import '@/components/climate/cartoons/press/press-field.css';
 
 export default function ClimateCartoons() {
   return (
