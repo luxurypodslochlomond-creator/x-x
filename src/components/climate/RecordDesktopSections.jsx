@@ -88,17 +88,8 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
           set in the record's reading voice so it reads as a person talking rather than as
           furniture. Everything below it is the same doors it always was. */}
       <p className="mb-3 text-[13px] leading-[1.6] text-record-ink/85" style={{ fontFamily: 'var(--font-reading)' }}>
-        Every entry on this record names who said so, so you never have to take our word for it. Read one thing. Then do one thing.
+        Every entry names who said so. Read one thing, then do one thing.
       </p>
-      <button
-        type="button"
-        onClick={() => setShowPlate(true)}
-        className="mb-1 flex min-h-12 w-full items-center gap-2 border-b border-record-mark/30 pb-2 text-left text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
-      >
-        <span aria-hidden="true" className="flex w-6 shrink-0 justify-center"><MarkContents size={24} /></span>
-        <span className="flex-1 text-[12px] uppercase leading-tight tracking-[0.08em]">The marks, all at once</span>
-        <span aria-hidden="true" className="font-mono text-[10px] text-record-muted">{MARKS_IN_ORDER.length}</span>
-      </button>
       {groups.map(({ title, line, doors }) => (
           <section key={title} aria-label={title} className={phone ? 'border-t border-record-mark/30' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
             {/* ── ON A PHONE THE SHELF'S NAME STAYS PUT ────────────────────────────────
@@ -146,8 +137,16 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
               {doors.map(({ label, to, what }) => {
                 const Mark = markFor(to);
                 const here = pathname === to;
+                // ── NO RULES BETWEEN THE DOORS, AND THAT IS THE FIX ──────────────────
+                // Brian, 19 November: "it looks broken in places." It did, and this is
+                // where: every cell carried a rule under it and the left column carried one
+                // down its side, so a shelf with an odd number of doors ended with a
+                // hairline stopping halfway across the glass and a rule with nothing beside
+                // it. That is not a design, it is a table that ran out of data. The doors
+                // are now held apart by air and by the shelf's own rule, which runs the
+                // full width and is the only line the eye has to follow.
                 return (
-                  <li key={to} className={phone ? 'border-b border-record-ink/10 odd:border-r odd:border-record-ink/10' : ''}>
+                  <li key={to} className={phone ? 'min-w-0' : ''}>
                     <Link
                       to={to}
                       onClick={onNavigate}
@@ -171,6 +170,25 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
             </ul>
           </section>
       ))}
+      {/* ── THE DRAWING GOES AT THE FOOT, NOT IN FRONT OF THE DOORS ────────────────
+          Brian, 19 November, opening this sheet on a phone: "it's clunky on mobile bro
+          quite confusing and not coolasfuck balanced." It was not the doors. It was that
+          the first glass of the sheet held a masthead, three lines of prose and a button
+          for a picture, and not one door of the record — so a reader who opened the index
+          to find their way was shown everything except the way.
+
+          The story stays (it is two sentences now, and it earns the trust the rest of the
+          sheet relies on), and the plate moves to the foot, where a picture belongs: you
+          walk the doors, and at the end of the walk is the whole drawer drawn at once. */}
+      <button
+        type="button"
+        onClick={() => setShowPlate(true)}
+        className="mt-2 flex min-h-12 w-full items-center gap-2 border-t border-record-mark/30 pt-2 text-left text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+      >
+        <span aria-hidden="true" className="flex w-6 shrink-0 justify-center"><MarkContents size={24} /></span>
+        <span className="flex-1 text-[12px] uppercase leading-tight tracking-[0.08em]">Every door, drawn</span>
+        <span aria-hidden="true" className="font-mono text-[10px] text-record-muted">{MARKS_IN_ORDER.length}</span>
+      </button>
     </div>
   );
 }
