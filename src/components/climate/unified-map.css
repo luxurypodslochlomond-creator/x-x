@@ -7,24 +7,23 @@
 .record-unified-map { background: transparent; }
 .record-unified-map .record-reach-page { min-height: 0; background: rgb(var(--record-paper)); }
 
-/* The plate is let out to the full glass: a world does not fit in a reading column. */
-@media (min-width: 1024px) {
-  #root .record-map-field .record-book { max-width: min(1720px, 96vw); }
+/* ── THE PLATE IS LET OUT TO THE FULL GLASS ────────────────────────────────────
+   A world does not fit in a reading column. The band breaks out of the book's measure and
+   runs edge to edge, while every word underneath keeps the measure it was set in — so the
+   plate is the page's one wide gesture and the white around the text is a page, not a wall.
+   It carries its own painting, so it can never be a panel waiting on a room it cannot see. */
+.record-unified-map .record-map-band {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
 }
 
-/* The band carries the record's one painting at half ink, so the world can be drawn on it
-   in light ink and still be read. The plate's own frame is a hairline, never a panel. */
-.record-unified-map .record-map-band.record-continuous-band { background-color: transparent; }
-.record-unified-map .record-map-band::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgb(var(--record-ink) / .16) 0%, rgb(var(--record-ink) / .28) 55%, rgb(var(--record-ink) / .52) 100%);
-}
+/* The plate's frame is a hairline over the painting, held back a touch so bone ink reads
+   against the brightest part of the picture. Never a panel, never a solid sheet. */
 .record-map-frame {
   border: 1px solid rgb(var(--record-bone) / .38);
-  background: transparent;
+  background-color: rgb(var(--record-earth) / .26);
   box-shadow: 0 34px 80px -46px rgb(var(--record-ink));
 }
 .record-unified-map .record-page-plate { margin: 0; }

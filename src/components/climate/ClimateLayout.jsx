@@ -192,7 +192,7 @@ export default function ClimateLayout({ children, currentPage }) {
         painting had nowhere to be seen on a phone — the sheet filled the glass and the
         ground underneath it was covered twice over. The paper belongs to the book; the
         root is the room the book stands in. */}
-    <div className={`climate-record record-field min-h-screen${currentPage === 'TogetherChangeClimate' ? ' record-home-field' : ''}${isCartoonRoom ? ' record-cartoon-field' : ''}${currentPage === 'ClimateMap' ? ' record-map-field' : ''}`} style={{ fontFamily: 'var(--font-body)', '--record-cover-desktop': `url("${IMAGES.cover}")`, '--record-cover-mobile': `url("${RECORD_COVER_MOBILE}")` }}>
+    <div className={`climate-record record-field min-h-screen${currentPage === 'TogetherChangeClimate' ? ' record-home-field' : ''}${isCartoonRoom ? ' record-cartoon-field' : ''}`} style={{ fontFamily: 'var(--font-body)', '--record-cover-desktop': `url("${IMAGES.cover}")`, '--record-cover-mobile': `url("${RECORD_COVER_MOBILE}")` }}>
       {/* The painting and the rare shooting stars stay in their own viewport-sized
           surface. No noise filter or blended grain lies over the master artwork. */}
       <div aria-hidden="true" className="record-environment">

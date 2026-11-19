@@ -60,7 +60,7 @@ const GROUND = {
     bg: 'bg-transparent',
     grid: '#e2602a', gridOpacity: 0.12,
     equator: '#ffd447', equatorOpacity: 0.35,
-    land: '#efe7d6', landOpacity: 0.5, landWidth: 1.5,
+    land: '#efe7d6', landOpacity: 0.6, landWidth: 1.7,
     ring: '#141210',
     light: '#ffd447',
   },
