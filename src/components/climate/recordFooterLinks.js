@@ -92,6 +92,30 @@ export const DESK_FOUNDER = {
   what: 'Janine M. H. Selendy, and the record she asked for.',
 };
 
+// ── THE PHONE'S TWO ROWS: FIVE, THEN FOUR ─────────────────────────────────────
+// Brian, 19 November: "method why and founder should be in nav too bro at top need to
+// reduce size on mobile and add them right sequence bro… and can BASE 1 be in middle."
+//
+// He was right that the record's own account of itself was missing from the one screen
+// most readers hold it on. Why it exists, how an entry is checked and whose name is on it
+// are the three things a sceptical reader checks first, and on a phone all three were
+// behind a sheet you had to know to open. A record that will not say who asked for it until
+// you go looking is not more modest than one that does; it is less checkable.
+//
+// Two rows, and the numbers are the argument. Five ways in on the top row — the four ways of
+// moving through what is on the record, with BASE 1 exactly in the middle of them, where a
+// desk has always put it — and then the record's own account beneath: why, how, whose, and
+// the index of everything else. Nine doors in the height of two rows, because the marks come
+// down from twenty-eight to twenty-four and the second row is set smaller again, the way the
+// desk's second row already is: the row a reader arrives with stays the loud one.
+//
+// Built from the same lists the desk and the sheet already read, so a phone can never offer
+// a door the record has stopped offering, or name one differently to a desk.
+export const PHONE_NAV_ROWS = [
+  PRIMARY_NAV,
+  [...RAIL_SECOND_NAV, DESK_FOUNDER],
+];
+
 // ── TWO ROWS ON A DESK, BECAUSE A SHEET WAS DOING A MASTHEAD'S JOB ────────────
 // Brian, 18 November: "I'm sure two rows on top nav on desktop better bro and maybe more on
 // desktop along top, as when you open explore the record there's lots going on quite complex

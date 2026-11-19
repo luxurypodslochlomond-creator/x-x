@@ -77,7 +77,7 @@
 .rec-mast-row .rec-art-door {
   min-height: 0;
   gap: 0;
-  padding: .1rem 0 .06rem;
+  padding: .1rem .1rem .06rem;
 }
 /* ── THE NAMES ARE BACK UNDER THE MARKS ─────────────────────────────────────────
    Six cells had no room for a word, so the names were dropped and the row became four
@@ -91,15 +91,26 @@
    on the strip — "Cartoons" — measures about sixty, which leaves the cell half empty
    rather than half eaten. A name that still cannot fit is allowed to wrap rather than be
    cut, because a cut name is a door that does not say where it goes. */
+/* ── TWO ROWS OF DOORS, AND THE TYPE THAT LETS THEM FIT ────────────────────────
+   Brian, 19 November: "method why and founder should be in nav too bro at top need to
+   reduce size on mobile." Nine doors where there were six, in the same height of glass:
+   the caption comes down a pixel and loses its air, and the second row — the record's own
+   account of itself — comes down again, exactly as the desk's second row already does. The
+   row a reader arrives with stays the loud one; the row that says how the record is kept
+   is quieter by size alone, never by being faded. */
 .rec-mast-doors .rec-art-caption {
   display: block;
-  margin-top: .1rem;
+  margin-top: 0;
   font-family: var(--font-record-ui);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: .03em;
+  line-height: 1.15;
+  letter-spacing: .02em;
   white-space: normal;
+}
+.rec-mast-row-2 .rec-art-caption {
+  font-size: 8px;
+  letter-spacing: .04em;
 }
 /* ── THE BAND CARRIES THE INDEX AND THE TONGUE ON A PHONE ───────────────────────
    Two marks, one at each edge of the yellow band, and both exactly the same width — which
