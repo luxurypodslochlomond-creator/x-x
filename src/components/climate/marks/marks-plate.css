@@ -1,0 +1,30 @@
+.marks-plate { min-width: 0; margin: 0; font-family: var(--font-record-ui); color: rgb(var(--record-ink)); }
+.marks-plate-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 1px solid rgb(var(--record-ink) / .15); border-left: 1px solid rgb(var(--record-ink) / .15); }
+.marks-plate-cell { display: flex; aspect-ratio: 1; align-items: center; justify-content: center; border-right: 1px solid rgb(var(--record-ink) / .15); border-bottom: 1px solid rgb(var(--record-ink) / .15); padding: 12%; }
+.marks-plate-cell:focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: -3px; }
+.marks-plate-art { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; }
+.marks-plate-art > svg { display: block; width: 100%; height: 100%; }
+.marks-plate-caption { margin-top: .75rem; min-height: 5.25rem; border-top: 2px solid rgb(var(--record-mark)); padding-top: .75rem; }
+
+/* The phone opens on the entire plate. Selection never moves or replaces the grid. */
+.marks-plate--fitted { display: flex; flex-direction: column; flex: 1; height: 100%; min-height: 0; }
+.marks-plate--fitted .marks-plate-grid { flex: 1 1 0%; min-height: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); }
+.marks-plate--fitted .marks-plate-cell { aspect-ratio: auto; flex-direction: column; min-width: 0; min-height: 44px; gap: 4px; padding: 5px 2px; }
+.marks-plate--fitted .marks-plate-art { flex: 1 1 0%; min-height: 0; width: min(72%, 64px); max-height: 60px; }
+.marks-plate-name { display: block; flex: none; max-width: 100%; font-size: 10px; line-height: 1.1; text-align: center; }
+.marks-plate--fitted .marks-plate-caption { flex: none; height: 8.25rem; min-height: 8.25rem; }
+.rec-doors-body--marks { display: flex; overflow: hidden; scrollbar-gutter: auto; }
+
+/* A wide, short handset gets the same 24 marks in four rows instead of six. */
+@media (max-height: 600px) and (min-width: 480px) {
+  .marks-plate--fitted .marks-plate-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); }
+  .marks-plate--fitted .marks-plate-caption { height: 7rem; min-height: 7rem; }
+}
+/* Respect enlarged text and very short windows without hiding a mark or its caption. */
+@media (max-height: 540px) and (max-width: 479px), (max-height: 430px) and (min-width: 480px) {
+  .rec-doors-body--marks { overflow-y: auto; }
+  .marks-plate--fitted { height: auto; min-height: 440px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .rec-doors .rec-doors-plate { height: 92dvh !important; }
+}

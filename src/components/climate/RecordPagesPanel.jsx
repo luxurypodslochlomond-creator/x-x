@@ -3,7 +3,8 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordDesktopSections from '@/components/climate/RecordDesktopSections';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
-import { MarkClose } from '@/components/climate/RecordFootMarks';
+import { MarkClose, MarkContents, MarkExplore } from '@/components/climate/RecordFootMarks';
+import MarksPlate from '@/components/climate/marks/MarksPlate';
 
 // ── THE INDEX, ON ONE SCREEN ───────────────────────────────────────────────────
 // This sheet was a page of drawn doors that ran past the top and bottom of a phone: a
@@ -42,6 +43,7 @@ export default function RecordPagesPanel({ open, onClose }) {
   // rather than torn out of the frame.
   const [mounted, setMounted] = useState(false);
   const [leaving, setLeaving] = useState(false);
+  const [showNames, setShowNames] = useState(false);
 
   // ── A DESK IS NOT A PHONE, AND THE LOCK IS THE DIFFERENCE ─────────────────────
   // On a handset the sheet covers the glass, so the page behind is held still. On a desk it
@@ -62,6 +64,7 @@ export default function RecordPagesPanel({ open, onClose }) {
     if (open) {
       setMounted(true);
       setLeaving(false);
+      setShowNames(false);
       return undefined;
     }
     if (!mounted) return undefined;
@@ -125,7 +128,7 @@ export default function RecordPagesPanel({ open, onClose }) {
     >
       <div className="rec-doors-plate flex h-full w-full flex-col border-t-2 border-record-mark/70 bg-record-bone">
 
-        <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col px-5 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:px-10 sm:pb-4 sm:pt-5">
+        <div className="mx-auto flex min-h-0 w-full max-w-[880px] flex-1 flex-col px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-10 sm:pb-4 sm:pt-5">
           {/* ── IT SAYS WHAT THE DESK SAYS ────────────────────────────────────────
               Brian, 18 November: the desk says EXPLORE THE RECORD, and a phone said
               "open every door" — the same index under two different names, so it did not
@@ -144,34 +147,34 @@ export default function RecordPagesPanel({ open, onClose }) {
                 index. It is a masthead at nineteen now, in the red, and the doors below it
                 have room to be read instead of fitted. */}
             <p id="record-contents-title" className="record-header-type text-[19px] leading-none text-record-mark sm:text-lg">Explore the record</p>
-            {/* The close is a drawing now, not a word and a borrowed ✕: a page with its
-                corner turned down, which is what putting a sheet away actually looks like
-                on paper. The word went with the glyph — a symbol does not need a caption,
-                and this one has a label for anybody using a reader rather than an eye. */}
-            <button
-              type="button"
-              autoFocus
-              onClick={onClose}
-              aria-label="Put the sheet down"
-              title="Put the sheet down"
-              className="flex h-11 w-11 shrink-0 items-center justify-center text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
-            >
-              <span aria-hidden="true" className="block h-[19px] w-[19px] [&>svg]:h-full [&>svg]:w-full"><MarkClose size={19} /></span>
-            </button>
+            <div className="flex shrink-0 items-center">
+              <button
+                type="button"
+                onClick={() => setShowNames((show) => !show)}
+                aria-label={showNames ? 'Show every mark' : 'Read the written index'}
+                title={showNames ? 'Show every mark' : 'Read the written index'}
+                aria-pressed={showNames}
+                className="flex h-11 w-11 items-center justify-center text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+              >
+                {showNames ? <MarkExplore size={24} /> : <MarkContents size={24} />}
+              </button>
+              <button
+                type="button"
+                autoFocus
+                onClick={onClose}
+                aria-label="Put the sheet down"
+                title="Put the sheet down"
+                className="flex h-11 w-11 items-center justify-center text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+              >
+                <MarkClose size={24} />
+              </button>
+            </div>
           </div>
 
-          <div className="rec-doors-body min-h-0 flex-1 overflow-y-auto overscroll-contain">
-            {/* ── THE SAME EXPLORE THE DESK SHOWS ──────────────────────────────────
-                This body was the record's older index: drawn doors in numbered rows,
-                three across, each name cut to a word under a small drawing. The desk's
-                explore had since been rebuilt — grouped shelves, a red name and a count
-                over each, a hairline between them, a drawn mark beside every door — and
-                the phone kept the older sheet, which is exactly what Brian reported on
-                18 November: coolasfuck on desktop, and mobile did not change.
-                It is the same component now, in its phone shape: two across instead of
-                three, each door a fingertip tall, names allowed to wrap. One index, one
-                hand, whichever glass a reader is holding. */}
-            <RecordDesktopSections layout="phone" onNavigate={onClose} />
+          <div className={`rec-doors-body min-h-0 flex-1 overscroll-contain ${showNames ? 'overflow-y-auto' : 'rec-doors-body--marks'}`}>
+            {showNames
+              ? <RecordDesktopSections layout="phone" onNavigate={onClose} />
+              : <MarksPlate fitted onNavigate={onClose} />}
           </div>
 
           {/* ── THE TONGUE CAME OFF THIS SHEET, AND THAT IS THE FIX ────────────────────
