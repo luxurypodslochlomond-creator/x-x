@@ -96,6 +96,22 @@
   min-width: 0;
 }
 
+/* The headline of a documented entry is the record speaking, not a label, so it is set
+   in the record's reading voice — never in the structural grotesque, and never shouted
+   in capitals. Capitals are the machine's furniture (labels, kinds, places); a headline
+   set in caps reads as a poster, which is the "web page" feeling Brian named. The
+   !important is deliberate: the record's global heading rule puts every h2 in the
+   structural face, and an entry's own words are the one exception to it. */
+.wire-headline {
+  font-family: var(--font-reading) !important;
+  font-weight: 600 !important;
+  text-transform: none;
+  letter-spacing: -0.004em;
+  line-height: 1.24;
+  color: rgb(var(--record-ink));
+  text-wrap: balance;
+}
+
 /* A labelled block inside the line — a hairline and a name, never a tinted box. */
 .wire-note {
   margin-top: 0.85rem;

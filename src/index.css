@@ -246,7 +246,25 @@ button:focus-visible {
        tongue we have not met: the serif falls back to Georgia and then to
        whatever that device reads best in, which is what every newspaper on
        earth does. Warm paper, signal red and the covenant all stay. */
-    --font-reading: var(--font-record-ui), var(--font-record-reading);
+    /* ── THE VOICE THAT DOES NOT GROW OLD ─────────────────────────────────────────
+       Brian, 19 November: "font isn't coolasfuck… what's best for records that won't
+       grow old in a million years, documented in devices, classically, over the world."
+       The answer from history is not a costume. Every durable record — a ledger, a
+       court roll, a scientific paper, a museum label — pairs one text face for the
+       words with a plain grotesque for the structure and a fixed-width hand for the
+       numbers. That pairing has never gone out of date, because it is not a style.
+
+       So the record's voice is Literata, and it is now actually first. It was named in
+       the chain and then overridden by Helvetica on every page, which is exactly why a
+       page of dated entries read as a web page: prose set in a screen grotesque is the
+       shape of a product page. Literata was drawn by TypeTogether for Google's own
+       reading app — for long text on a glass screen rather than for print — so it holds
+       a paragraph at fifteen pixels on a phone without going thin, and it is under the
+       Open Font Licence, which means nobody can ever withdraw it.
+
+       The roles are fixed and stay fixed: Literata speaks, Record UI (Helvetica)
+       structures, the monospace counts and dates. Nothing else gets a voice. */
+    --font-reading: 'Literata', var(--font-record-reading);
     --record-paper: 244 239 228;
     --record-bone: 239 231 214;
     --record-ink: 20 18 16;
@@ -354,7 +372,25 @@ button:focus-visible {
     --font-display: var(--font-record-ui);
     --font-heading: var(--font-record-ui);
     --font-body: var(--font-record-ui);
-    --font-reading: var(--font-record-ui), var(--font-record-reading);
+    /* ── THE VOICE THAT DOES NOT GROW OLD ─────────────────────────────────────────
+       Brian, 19 November: "font isn't coolasfuck… what's best for records that won't
+       grow old in a million years, documented in devices, classically, over the world."
+       The answer from history is not a costume. Every durable record — a ledger, a
+       court roll, a scientific paper, a museum label — pairs one text face for the
+       words with a plain grotesque for the structure and a fixed-width hand for the
+       numbers. That pairing has never gone out of date, because it is not a style.
+
+       So the record's voice is Literata, and it is now actually first. It was named in
+       the chain and then overridden by Helvetica on every page, which is exactly why a
+       page of dated entries read as a web page: prose set in a screen grotesque is the
+       shape of a product page. Literata was drawn by TypeTogether for Google's own
+       reading app — for long text on a glass screen rather than for print — so it holds
+       a paragraph at fifteen pixels on a phone without going thin, and it is under the
+       Open Font Licence, which means nobody can ever withdraw it.
+
+       The roles are fixed and stay fixed: Literata speaks, Record UI (Helvetica)
+       structures, the monospace counts and dates. Nothing else gets a voice. */
+    --font-reading: 'Literata', var(--font-record-reading);
     --font-script: 'Record Cherokee', ui-monospace, SFMono-Regular, Menlo, monospace;
     --font-record-ui: 'Record UI', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --record-paper: 244 239 228;
@@ -501,7 +537,10 @@ button:focus-visible {
   --font-display: var(--record-display);
   --font-heading: var(--record-display);
   --font-body: var(--font-record-ui);
-  --font-reading: var(--font-record-ui), var(--font-record-reading);
+  /* Inside the record the reading voice is the same as everywhere else: Literata speaks,
+     Helvetica structures. This block used to override it back to the grotesque, which
+     silently undid the record's voice on the only pages that carry its prose. */
+  --font-reading: 'Literata', var(--font-record-reading);
 }
 /* The shared voice reaches every product, including dialogs and SVG labels.
    Real code, hashes, and explicitly technical material retain fixed-width type. */

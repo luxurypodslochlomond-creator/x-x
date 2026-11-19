@@ -40,10 +40,7 @@ export default function NewsEntryCard({ entry, linked = true, n }) {
   const when = rail(entry.when_date, entry.when_label);
 
   const headline = (
-    <h2
-      className="font-black uppercase text-[#141210] leading-[1.12]"
-      style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 5.1vw, 24px)', letterSpacing: '-0.01em' }}
-    >
+    <h2 className="wire-headline" style={{ fontSize: 'clamp(20px, 5.4vw, 25px)' }}>
       {entry.headline}
     </h2>
   );
@@ -76,7 +73,7 @@ export default function NewsEntryCard({ entry, linked = true, n }) {
           <div className="mt-1.5">{headline}</div>
         )}
 
-        <p className="mt-2 text-[15px] leading-[1.68] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
+        <p className="mt-2 text-[15.5px] leading-[1.66] text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>
           {entry.what_changed}
         </p>
 

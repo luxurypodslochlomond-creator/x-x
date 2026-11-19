@@ -8,7 +8,11 @@
    The reading column is now a real sheet — warm paper at ninety-five per cent — so a
    sentence sits on paper and the cover does its work at the edges, where a cover goes. */
 .record-pages {
-  --font-reading: var(--font-record-ui), var(--font-record-reading);
+  /* The record's prose is the record's voice. This line used to put the structural
+     grotesque first, so every paragraph on every page of the record was set in the face
+     that is meant for labels — which is precisely why a page of dated entries read as a
+     web page. Literata speaks; Record UI structures; the monospace counts. */
+  --font-reading: 'Literata', var(--font-record-reading);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
   /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
