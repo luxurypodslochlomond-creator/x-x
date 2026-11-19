@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import RecordDesktopSections from '@/components/climate/RecordDesktopSections';
+import { MarkClose } from '@/components/climate/RecordFootMarks';
 
 export default function RecordDesktopMenu({ open, onClose }) {
   const region = useRef(null);
@@ -31,7 +32,17 @@ export default function RecordDesktopMenu({ open, onClose }) {
         <div className="mx-auto max-h-[min(65vh,620px)] max-w-[1100px] overflow-y-auto overscroll-contain bg-record-bone px-10 pb-3 pt-2">
           <div className="mb-1 flex items-center justify-between gap-4">
             <p className="record-header-type text-lg text-record-mark">Explore the record</p>
-            <button type="button" onClick={onClose} className="record-header-type min-h-11 px-2 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Close <span aria-hidden="true">×</span></button>
+            {/* The same drawn close as the phone's sheet: a page with its corner turned
+                down, not a word and a borrowed ✕. One gesture, both glasses. */}
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Put the sheet down"
+              title="Put the sheet down"
+              className="flex h-11 w-11 shrink-0 items-center justify-center text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+            >
+              <span aria-hidden="true" className="block h-[19px] w-[19px] [&>svg]:h-full [&>svg]:w-full"><MarkClose size={19} /></span>
+            </button>
           </div>
           <RecordDesktopSections onNavigate={onClose} />
           <Link to="/ClimateGuide" onClick={onClose} className="record-header-type mt-2 flex min-h-11 items-center justify-between bg-record-signal px-3 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Every control, written out <span aria-hidden="true">→</span></Link>

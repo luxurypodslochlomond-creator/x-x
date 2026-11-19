@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import RecordDesktopSections from '@/components/climate/RecordDesktopSections';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
+import { MarkClose } from '@/components/climate/RecordFootMarks';
 
 // ── THE INDEX, ON ONE SCREEN ───────────────────────────────────────────────────
 // This sheet was a page of drawn doors that ran past the top and bottom of a phone: a
@@ -143,7 +144,20 @@ export default function RecordPagesPanel({ open, onClose }) {
                 index. It is a masthead at nineteen now, in the red, and the doors below it
                 have room to be read instead of fitted. */}
             <p id="record-contents-title" className="record-header-type text-[19px] leading-none text-record-mark sm:text-lg">Explore the record</p>
-            <button type="button" autoFocus onClick={onClose} className="record-header-type min-h-11 px-2 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Close <span aria-hidden="true">×</span></button>
+            {/* The close is a drawing now, not a word and a borrowed ✕: a page with its
+                corner turned down, which is what putting a sheet away actually looks like
+                on paper. The word went with the glyph — a symbol does not need a caption,
+                and this one has a label for anybody using a reader rather than an eye. */}
+            <button
+              type="button"
+              autoFocus
+              onClick={onClose}
+              aria-label="Put the sheet down"
+              title="Put the sheet down"
+              className="flex h-11 w-11 shrink-0 items-center justify-center text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+            >
+              <span aria-hidden="true" className="block h-[19px] w-[19px] [&>svg]:h-full [&>svg]:w-full"><MarkClose size={19} /></span>
+            </button>
           </div>
 
           <div className="rec-doors-body min-h-0 flex-1 overflow-y-auto overscroll-contain">

@@ -731,6 +731,27 @@ export function MarkPrivacy({ size = 26, className = '' }) {
   );
 }
 
+// ── CLOSING, IN THE RECORD'S OWN HAND ────────────────────────────────────────
+// Brian, 19 November: "can make close coolasfuck too."
+//
+// He had just been given a way back drawn as a mark, and the close sitting beside it was
+// still the borrowed ✕ — the one glyph in this alphabet that means nothing here, and the
+// only one a reader has already been trained by every other window on earth to read as
+// "dismiss this message" rather than "put the sheet down".
+//
+// A printed sheet is not dismissed. It is put down, with its corner turned so you can find
+// the place again. So the mark is a page with its corner folded back, and the red is the
+// back of the paper showing where the fold is. Nothing is cancelled and nothing is thrown
+// away: the corner is turned, and the sheet opens again at the same place.
+export function MarkClose({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <path d="M8 6H26L32 12V34H8Z" fill="currentColor" stroke="none" />
+      <path d="M26 6H32V12Z" className="text-record-mark" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // The room where something is made rather than read.
 //
 // ── A SPARKLE SAYS MAGIC HAPPENED. NOTHING WAS MADE. ─────────────────────────
