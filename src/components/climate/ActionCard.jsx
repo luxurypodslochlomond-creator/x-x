@@ -29,7 +29,7 @@ export default function ActionCard({ action }) {
   return (
     <Link
       to={`/ClimateDetail/action/${action.id}`}
-      className="relative flex min-h-[110px] w-full flex-col border border-record-ink/30 border-t-4 border-t-record-signal bg-record-paper text-left transition-transform duration-100 active:scale-95"
+      className="relative flex min-h-[110px] w-full flex-col border border-record-ink/30 border-t-4 border-t-[#e2602a] bg-record-paper text-left transition-transform duration-100 active:scale-95"
     >
       <div className="p-3 flex-1">
         <div className="flex items-center gap-1.5 mb-1.5">
@@ -38,7 +38,7 @@ export default function ActionCard({ action }) {
           {action.category
             ? <SubjectMark subject={action.category} size={15} className="shrink-0" />
             : <Icon className="h-3.5 w-3.5 text-record-red" />}
-          <span className="font-display text-xs font-bold uppercase tracking-wide text-record-red">
+          <span className="font-display text-xs font-bold uppercase tracking-wide text-record-clay">
             {meta.label}
           </span>
         </div>

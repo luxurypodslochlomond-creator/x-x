@@ -6,8 +6,15 @@ import SubjectMark from '@/components/climate/SubjectMark';
 export default function SolutionCard({ item, lead = false }) {
   const isSolution = item.entry_type === 'solution';
   const image = useRecordImage(item);
-  const borderTone = isSolution ? 'border-t-record-signal' : 'border-t-record-red';
-  const badgeTone = isSolution ? 'bg-record-signal text-record-ink' : 'bg-record-red text-record-paper';
+  // ── THE CARD WEARS ITS ROOM'S PIGMENT ─────────────────────────────────────────
+  // A solution card used to carry the yellow rule and the yellow badge, which is the
+  // GROUPS' colour — so on one page a solution and a gathering looked like the same
+  // thing, and neither matched the green plate the room is opened by. Four rooms, four
+  // pigments, and now the card, the badge and the section heading all agree: solutions
+  // botanical green, crises signal red. Nothing added, one colour put back where it
+  // belongs.
+  const borderTone = isSolution ? 'border-t-record-botanical' : 'border-t-record-red';
+  const badgeTone = isSolution ? 'bg-record-botanical text-record-paper' : 'bg-record-red text-record-paper';
   const titleSize = lead ? 'lg:text-[23px]' : 'lg:text-lg';
   return (
     <Link

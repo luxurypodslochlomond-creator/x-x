@@ -30,10 +30,10 @@ import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 // named once — each wearing the drawing of the room it opens — and the form opens on that
 // room already chosen. Nothing else changed: same form, same door, same rules.
 const ADD_DOORS = [
-  { type: 'solution', label: 'Add a solution', Mark: RoomMarkSolution },
-  { type: 'climate_crisis', label: 'Add a crisis', Mark: RoomMarkCrisis },
-  { type: 'action', label: 'Add an action', Mark: RoomMarkAction },
-  { type: 'group', label: 'Start a group', Mark: RoomMarkGroups },
+  { type: 'solution', label: 'Solution', Mark: RoomMarkSolution },
+  { type: 'climate_crisis', label: 'Crisis', Mark: RoomMarkCrisis },
+  { type: 'action', label: 'Action', Mark: RoomMarkAction },
+  { type: 'group', label: 'Group', Mark: RoomMarkGroups },
 ];
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
@@ -463,7 +463,14 @@ export default function TogetherChangeClimate() {
              The space is held while the record loads, so nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
         <div className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
-          <RecordSectionHeading title={t.featured} count={loading ? undefined : featured.length} tone="text-record-red" />
+          {/* ── NOT "SIGNALS" ────────────────────────────────────────────────────────────
+              This band used to be headed "Signals", which is also the name of the wire in the
+              top nav — so the page had two different things wearing one word, and Brian asked
+              the fair question: "what are signals on page… we have it in top nav but what is
+              it on page?" Signals is the wire: dated, sourced, what changed and who says so.
+              This band is not that. It is the entries the record is leading with, so it says
+              so, and the word Signals now means one thing on this record. ── */}
+          <RecordSectionHeading title="Leading the record" count={loading ? undefined : featured.length} tone="text-record-red" />
           {/* A phone swipes the lead pictures instead of scrolling past all of them.
               Three plates stacked at four-by-three is two full screens of photographs
               before a reader reaches the subjects, and Brian said so on 18 November:
@@ -550,15 +557,28 @@ export default function TogetherChangeClimate() {
           onSelect={selectTheme}
         />
 
-        <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
+        {/* ── ONE QUIET LINE, NOT A SECOND SET OF FOUR BOXES ───────────────────────────
+            Brian, 19 November: "why add solution etc and solutions climate crises etc feel
+            disjointed bro." He was right, and the fault was that the page carried TWO sets of
+            four: the four room plates above, big and pigmented, and then four pale boxes here
+            with the same four names in them. Same words, two weights, no reason — so the
+            backbone read as a filter bar and the way in read as a toolbar.
+
+            The way in is a footnote to the rooms, not a rival to them: one line, four marked
+            words, each opening the form on that room. The rooms keep the colour; this keeps
+            the job. ── */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-record-ink/20 pt-3">
+          <span className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">
+            Put something on the record
+          </span>
           {ADD_DOORS.map(({ type, label, Mark }) => (
             <button
               key={type}
               onClick={() => { setSubmitType(type); setShowSubmit(true); }}
-              className="flex min-h-[54px] items-center justify-center gap-2 border border-record-ink/40 bg-record-paper px-2 py-2.5 text-[11px] font-black font-mono uppercase tracking-wide text-record-ink transition-colors hover:border-record-ink hover:bg-record-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
+              className="inline-flex min-h-[32px] items-center gap-1.5 text-[11px] font-black font-mono uppercase tracking-wide text-record-ink underline decoration-record-mark decoration-2 underline-offset-4 transition-colors hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
             >
-              <span aria-hidden="true" className="flex shrink-0 items-center"><Mark size={22} /></span>
-              <span className="text-left leading-tight">{label}</span>
+              <span aria-hidden="true" className="flex shrink-0 items-center"><Mark size={16} /></span>
+              {label}
             </button>
           ))}
         </div>
