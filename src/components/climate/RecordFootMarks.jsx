@@ -6,8 +6,11 @@ import React from 'react';
 // is a word beside a mark drawn for that door and nothing else.
 //
 // Same hand as the shed's marks: one weight, currentColor, no second colour, one solid
-// mass in each so the mark is an object rather than a diagram. They are read at 26px on
-// a phone, which is why nothing here has a line thinner than the stroke.
+// mass in each so the mark is an object rather than a diagram. Nothing here has a line
+// thinner than the stroke, and every mark is drawn to be read at the size it is actually
+// shown at: twenty-four pixels on the phone's first row, nineteen on the second. A mark cut
+// for twenty-six and shrunk to nineteen loses its red and its thin strokes, which is how
+// three of these were caught being wrong.
 const BASE = {
   viewBox: '0 0 40 40',
   fill: 'none',
@@ -195,22 +198,31 @@ export function MarkPencil({ size = 26, className = '' }) {
 // and a barrier, which is why a "wall" icon usually reads as a border or a door being shut
 // on somebody. That is the one thing this room is not.
 //
-// So it is a line across the page with two drawings pegged to it and one place still
-// empty, marked in red where the next one goes. The line holds the work up, the work is
+// So it is a line across the page with one drawing pegged to it and one place still empty,
+// marked in red where the next one goes. The line holds the work up, the drawing is
 // somebody's hand, and the gap is the record asking rather than the record missing
-// something. Tested at twenty-two pixels, which is the size a phone's rail gives it: three
-// panels were drawn first and the third dissolved into a hairline, so the wall carries two
-// and the empty place carries the mark that says it is yours.
+// something.
+//
+// ── AND THE SECOND DRAWING CAME OFF, WHICH IS THE WHOLE OF THE FIX ─────────────
+// The first version hung two drawings and drew the empty place as a dashed box with a cross
+// in it. Brian, 19 November: "you sure our nav icons coolasfuck bro? fit right reasons" — and
+// the honest answer was no, for a reason that has nothing to do with taste: a dashed frame
+// with a cross inside is the add-an-image control. It is on every upload form on the
+// internet, and a door on this rail cannot be the same picture as a form field. Eight
+// elements, and the one that carried the meaning — the gap — was dressed as a button.
+//
+// So the second drawing goes, and the empty place is nothing but the red cross in open air.
+// Five elements, the eye takes line, drawing, gap in that order, and the gap is a mark the
+// record makes rather than a box it holds open. Read at nineteen pixels in the phone's
+// second row, which is where the old one turned to grey mush.
 export function MarkWall({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.6" className={className} aria-hidden="true">
-      <path d="M2.5 9.2h35" strokeWidth="2.3" />
-      <path d="M11 9.2v3.2M28.6 9.2v3.2" strokeWidth="1.5" />
-      <rect x="4.6" y="12.6" width="12.8" height="20.4" strokeWidth="1.6" />
-      <circle cx="8.6" cy="18.4" r="1.9" strokeWidth="1.4" />
-      <path d="M5.8 29.4l3.6-5.2 2.2 2.2 2.3-2.9 3.1 5.9" strokeWidth="1.4" />
-      <rect x="22.2" y="12.6" width="12.8" height="20.4" strokeWidth="1.3" strokeDasharray="2.4 3" />
-      <path d="M28.6 19v7.6M24.8 22.8h7.6" className="text-record-mark" strokeWidth="1.9" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.7" className={className} aria-hidden="true">
+      <path d="M3 9.4h34" strokeWidth="2.7" />
+      <path d="M13.6 9.4v3.6" strokeWidth="1.9" />
+      <rect x="8.2" y="13" width="17.4" height="21.2" strokeWidth="1.7" />
+      <path d="M9.8 30.4l4.4-6.2 2.9 2.9 3.1-3.9 4.3 7.2" strokeWidth="1.5" />
+      <path d="M32 18.2v11.4M26.3 23.9h11.4" className="text-record-mark" strokeWidth="2.7" />
     </svg>
   );
 }
@@ -312,23 +324,51 @@ export function MarkBaseOne({ size = 26, className = '' }) {
 // which at twenty-six pixels read as a four-pointed star — and a star is the one thing
 // this mark must never be. Nothing here is a flourish: two uprights, one ground, and
 // the equals between them. It cannot be mistaken for a badge, an award or a logo.
+// ── AND IT FAILED AT NINETEEN PIXELS, WHERE IT ACTUALLY STANDS ────────────────
+// The two uprights with the equals between them were drawn for twenty-six. When the phone's
+// rail became two rows the second row dropped to nineteen, and two verticals flanking two
+// short bars is a pause button: the door to the covenant was wearing the symbol for "hold".
+// Brian asked the right question twice — "you sure our nav icons coolasfuck bro? fit right
+// reasons" — and this was the mark where the answer was no.
+//
+// So the drawing loses everything that made it a diagram and keeps the one thing the door
+// actually says: equals. Two heavy bars in the record's borrowed red, nothing either side of
+// them, on a ground line faint enough to be the page rather than a stroke. It is the only
+// full-weight red in the row, which is right — this is the door a sceptical reader should
+// find first — and at nineteen pixels two bars cannot be read as anything but equals. Bold
+// beats clever when a mark is being glanced at rather than admired.
 export function MarkEqual({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M10.5 8.6c-.5 6.3-.7 13.2-.4 20.1M29.3 8.4c.5 6.2.7 13.1.4 20" />
-      <path d="M6.4 28.7h27.2" opacity=".5" strokeWidth="1" />
-      <path d="M16.4 16.2h7.4M16.3 21.2h7.6" className="text-record-mark" strokeWidth="2.2" />
+      <path d="M9.6 14.8h20.8M9.6 23.6h20.8" className="text-record-mark" strokeWidth="3.6" />
+      <path d="M5.8 31.6h28.4" opacity=".38" strokeWidth="1.2" />
     </svg>
   );
 }
 
-// Every way through the record. A contents page: dots against their lines.
+// Every way through the record.
+//
+// ── IT WAS A STARBURST, AND THE DOOR IS NOT A SPARKLE ─────────────────────────
+// Eight rays with corner brackets and a solid red centre: at twenty-six pixels it read as a
+// diagram of a menu, and at nineteen — the size the phone's second row gives it, where this
+// door actually lives — the centre closed up into a dark blob and the rays into a smudge.
+// Worse, a sparkle is the "featured / new / highlights" icon of every app on earth, and this
+// door is none of those: it is the index of everything else on the record, the one place a
+// reader goes when the five ways in have not answered them.
+//
+// So the drawing is what an index physically is: sheets, one behind another. The back sheet
+// shows only its edge, so the eye reads "more than one". The sheet on top carries its lines,
+// and the short one at the foot is the record's red because that line is the door — the next
+// thing, the thing not on this sheet. Two masses, three strokes, and it survives being
+// glanced at.
 export function MarkContents({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M20 17.3 7.6 6.2M20.4 17.5l12.9-11M20.2 22.1l-12.5 12M20.6 22.1l13 11.7M17.5 20l-14.2.2M23 20l14-.1" />
-      <path d="M5.6 12.4l2-6.5 6.4.5M27 6.6l6.6-.4.4 6.4M6.8 27.6l.5 6.8 6.1-.2M27.5 34.2l6.7-.3-.2-6.3" />
-      <circle cx="20.2" cy="20" r="3.6" className="text-record-mark" fill="currentColor" stroke="none" />
+    <svg {...BASE} width={size} height={size} strokeWidth="1.7" className={className} aria-hidden="true">
+      <path d="M13.8 5.6h15.6l4.6 4.6v20.6" opacity=".5" strokeWidth="1.5" />
+      <path d="M29.4 5.8v4.4h4.4" opacity=".5" strokeWidth="1.5" />
+      <path d="M7.2 11.6h15.4l4.8 4.8v17.8H7.2z" />
+      <path d="M11.4 22.2h11.4M11.4 27.4h8.2" opacity=".7" />
+      <path d="M11.4 32.4h4.6" className="text-record-mark" strokeWidth="2.8" />
     </svg>
   );
 }
