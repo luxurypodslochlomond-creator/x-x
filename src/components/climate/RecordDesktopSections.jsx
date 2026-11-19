@@ -63,7 +63,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   return (
     <div className="flex flex-col font-body">
       {groups.map(({ title, doors }) => (
-          <section key={title} aria-label={title} className={phone ? 'grid grid-cols-1 border-t border-record-mark/30 pb-1' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
+          <section key={title} aria-label={title} className={phone ? 'border-t border-record-mark/30' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
             {/* ── ON A PHONE THE SHELF'S NAME STAYS PUT ────────────────────────────────
                 Brian, 19 November: the explore on a phone when it opens is "not coolasfuck".
                 The desk's panel holds nineteen doors in one glance because its shelf names
@@ -75,9 +75,13 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                 desk shows in its left column, said the only way a narrow glass can say it.
                 The count wears the record's red plate rather than a bare number, because a
                 figure with no mark on it is the one thing this index never had on a desk. */}
-            <h2 className={`record-header-type flex items-baseline gap-2 leading-none text-record-mark ${phone ? 'sticky top-0 z-[1] bg-record-bone pb-1.5 pt-2 text-[11px] tracking-[0.16em]' : 'pt-3 text-[11px] leading-relaxed'}`}>
+            <h2 className={`record-header-type flex gap-2 leading-none text-record-mark ${phone ? 'sticky top-0 z-[1] items-center bg-record-bone pb-2 pt-2.5 text-[11px] tracking-[0.16em]' : 'items-baseline pt-3 text-[11px] leading-relaxed'}`}>
               <span>{title}</span>
               <span aria-hidden="true" className={phone ? 'bg-record-mark px-1 py-[2px] font-mono text-[9px] leading-none tracking-normal text-record-bone' : 'text-[10px]'}>{doors.length}</span>
+              {/* The rule that finishes the shelf's name. A name and a figure alone on a
+                  phone's glass float; a name, a figure and a hairline running out to the
+                  edge of the page are a printed shelf label, which is what this is. */}
+              {phone && <span aria-hidden="true" className="ml-1 h-px flex-1 self-center bg-record-ink/20" />}
             </h2>
             {/* ── ONE ACROSS, SO NOTHING HANGS OFF THE EDGE ─────────────────────────────
                 Brian, 19 November: "go into explore, the icons and balance not coolasfuck
@@ -88,18 +92,27 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                 stagger. A one-door-per-row register cannot go ragged at any count: the
                 marks line up in a single column, the names get the full width of the glass,
                 and the shelf reads down the page the way the desk's reads across it. */}
-            <ul className={`grid ${phone ? 'grid-cols-1 gap-x-3' : 'grid-cols-3 gap-x-4'}`}>
+            {/* ── AND THE ROWS ARE RULED, SO ANY COUNT LOOKS INTENTIONAL ─────────────────
+                Brian, 19 November: "could make the explore record in mobile when go into it
+                more refined coolasfuck balanced". A one-door register cannot go ragged, but
+                it was a column of loose lines — a mark, a word, air, a mark, a word — and
+                with three doors on one shelf and five on the next it read as a list somebody
+                had typed rather than as a printed index. Every door now sits in a ruled row
+                with its mark hanging in one gutter, and each shelf's name is finished with a
+                rule and its count: the register a printed contents page uses, which holds its
+                balance at any number of doors. */}
+            <ul className={`grid ${phone ? 'grid-cols-1' : 'grid-cols-3 gap-x-4'}`}>
               {doors.map(({ label, to, what }) => {
                 const Mark = markFor(to);
                 const here = pathname === to;
                 return (
-                  <li key={to}>
+                  <li key={to} className={phone ? 'border-b border-record-ink/10 last:border-b-0' : ''}>
                     <Link
                       to={to}
                       onClick={onNavigate}
                       title={what}
                       aria-current={here ? 'page' : undefined}
-                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-11 w-full gap-3 py-1.5 text-[13px] uppercase leading-[1.2] tracking-[0.04em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
+                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-12 w-full gap-3 py-2 text-[13px] uppercase leading-[1.2] tracking-[0.04em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
                     >
                       {/* ── THE SIZE THE MARKS WERE DRAWN AT ────────────────────────────
                           Every mark on this record is cut for twenty-four or nineteen
@@ -108,7 +121,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                           the sizes it was drawn for loses exactly the thing that makes it
                           a mark — the weight of its stroke — and reads as a small grey
                           diagram. Twenty-four is the size the index was drawn for. */}
-                      <span className="shrink-0" aria-hidden="true"><Mark size={24} /></span>
+                      <span className="flex w-6 shrink-0 justify-center" aria-hidden="true"><Mark size={24} /></span>
                       <span>{label}</span>
                     </Link>
                   </li>
