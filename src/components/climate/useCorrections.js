@@ -11,7 +11,7 @@ import { base44 } from '@/api/base44Client';
 const SOURCES = [
   { entity: 'ClimateSolution', kind: 'Record entry', to: (e) => `/ClimateDetail/${e.entry_type || 'solution'}/${e.id}` },
   { entity: 'ClimateAction', kind: 'Action', to: (e) => `/ClimateDetail/action/${e.id}` },
-  { entity: 'ClimateNews', kind: 'Wire entry', to: (e) => `/ClimateWireEntry/${e.id}` },
+  { entity: 'ClimateNews', kind: 'News', to: (e) => `/ClimateWireEntry/${e.id}` },
 ];
 
 export default function useCorrections() {

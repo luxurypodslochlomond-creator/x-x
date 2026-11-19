@@ -24,7 +24,7 @@
 // on the other — instead of taking a cell from a place to stand.
 export const PRIMARY_NAV = [
   { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'Solutions, crises, actions and groups.' },
-  { label: 'Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Dated, sourced accounts of what changed.' },
+  { label: 'News', to: '/ClimateWire', page: 'ClimateWire', what: 'Climate news: what happened, where, and who says so.' },
   { label: 'BASE 1', to: '/ClimateSearch', page: 'ClimateSearch', what: 'Ask the record’s own index — a place, a subject, a source.' },
   { label: 'Map', to: '/ClimateMap', page: 'ClimateMap', what: 'Entries, readership and the reach of the record, together.' },
   // ── THE ROOM OF CARTOONS COMES ONTO THE RAIL ────────────────────────────────

@@ -100,7 +100,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
         </div>
         <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.02em' }}>Thank you</h2>
         <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[330px] mb-2">
-          {published ? 'It is on the wire now.' : 'This one waits for a person before it appears.'}
+          {published ? 'It is in climate news now.' : 'This one waits for a person before it appears.'}
         </p>
         <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[330px] mb-6">
           {published
@@ -108,7 +108,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
             : 'Either a source needs checking, or the screener was unsure. We will email you either way.'}
         </p>
         <button onClick={() => { onSent?.(); onClose?.(); }} className="px-6 py-3 bg-[#b3261e] text-[#f7f1e5] text-[11px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors">
-          Back to the wire
+          Back to news
         </button>
       </div>
     );
@@ -119,7 +119,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
       <div className="sticky top-0 z-20 bg-[#efe7d6]/97 backdrop-blur border-b border-[#141210]/25">
         <div className="max-w-[500px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Send an entry to the wire</p>
+            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Send climate news</p>
             <p className="text-[12px] font-mono text-[#141210] mt-0.5 truncate">
               {step + 1} of {STEPS.length} · {STEPS[step]}
             </p>
@@ -145,7 +145,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
         {step === 0 && (
           <div className="space-y-3">
             <p className={hintClass}>
-              An entry is a fact with a traceable origin. What changed, where, when, and who says so. Point at the origin and quote only a line or two — never paste somebody's article in full.
+              Tell us what happened, where and when, and link to the source. Quote only a line or two, never somebody's whole article.
             </p>
 
             <SmartPaste
@@ -167,7 +167,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
               }))}
             />
 
-            <Field label="The entry in one line *">
+            <Field label="Headline *">
               <input value={form.headline} onChange={e => set('headline', e.target.value)} placeholder="e.g. Eight hectares of seagrass restored in England" className={fieldClass} />
             </Field>
 
@@ -202,7 +202,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
               </Field>
             </div>
 
-            <Field label="What others can copy" hint="The line that makes the wire useful rather than just news: what another person or community takes from this, and where they would start.">
+            <Field label="What others can copy" hint="What another person or community can use, and where they could start.">
               <textarea value={form.replicable} onChange={e => set('replicable', e.target.value)} placeholder="e.g. The seed-bag method and the two permits they needed" rows={4} className={`${fieldClass} resize-none leading-relaxed`} />
             </Field>
 
@@ -219,7 +219,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
         {/* ── 3 · WHO SAYS SO ───────────────────────────────────────────────────── */}
         {step === 2 && (
           <div className="space-y-3">
-            <Field label="Who says so *" hint="The body, journal, publisher or person. Nothing goes on the wire without this.">
+            <Field label="Who says so *" hint="The body, journal, publisher or person behind the news. A source is required.">
               <input value={form.source_name} onChange={e => set('source_name', e.target.value)} placeholder="e.g. World Meteorological Organization" className={fieldClass} />
             </Field>
 
@@ -286,7 +286,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
           ) : (
             <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors disabled:opacity-50">
               <Send className="w-4 h-4" />
-              {submitting ? 'Sending…' : 'Send to the wire'}
+              {submitting ? 'Sending…' : 'Send news'}
             </button>
           )}
         </div>

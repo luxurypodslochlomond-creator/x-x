@@ -28,7 +28,7 @@
    a caption, a count — and blow them up to seventeen-pixel serif, which is what made the
    record's sizes look wrong page after page: half of each page at reading size and half
    of it at eight pixels. Monospaced passages are excluded now. */
-.record-pages :is(p, blockquote, li):not(.cartoon-room *):not(.uppercase):not(.font-black):not(.font-mono):not(.record-header-type):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *) {
+.record-pages :is(p, blockquote, li):not(.cartoon-room *):not(.uppercase):not(.font-black):not(.font-mono):not(.record-header-type):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *):not([data-record-layout="compact"] *) {
   font-family: var(--font-reading) !important;
   font-size: clamp(1.0625rem, 1.015rem + .2vw, 1.1875rem) !important;
   line-height: 1.68 !important;
@@ -213,14 +213,16 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
    around a word that used to fit. */
 /* The footer and masthead set the voice: regular, open lettering at every size.
    Prose and explicit strong emphasis keep their reading hierarchy. */
-.record-pages :is(h1, h2, h3, h4, h5, h6):not(.record-home-title) {
+/* Compact news and correction indexes own their hierarchy, like the masthead.
+   The long-form book rules must not enlarge and uppercase every summary. */
+.record-pages :is(h1, h2, h3, h4, h5, h6):not(.record-home-title):not([data-record-layout="compact"] *) {
   font-family: var(--font-record-ui) !important;
   font-weight: 400 !important;
   letter-spacing: .1em !important;
   text-transform: uppercase;
   overflow-wrap: break-word;
 }
-.record-pages :is(h1, h2):not(.record-home-title) { line-height: 1.35 !important; }
+.record-pages :is(h1, h2):not(.record-home-title):not([data-record-layout="compact"] *) { line-height: 1.35 !important; }
 .record-pages :is(.font-mono, .record-meta):not(code):not(pre):not(.break-all):not([data-record-technical]):not([data-record-technical] *) {
   font-weight: 400;
 }

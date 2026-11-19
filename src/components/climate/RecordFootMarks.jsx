@@ -142,10 +142,11 @@ export function MarkMethod({ size = 26, className = '' }) {
 // to its point. Nothing is quietly deleted on this record.
 export function MarkCorrection({ size = 26, className = '' }) {
   return (
-    <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M4.2 12.7c9.4-.6 21.6.7 31.1-.2M5.3 19.9l9.2-.2M25.5 20.1l9.1-.3M5 31.2c6.9-.6 13.1.3 19.8-.1" />
-      <path d="M13.1 25.8l6.8-9.5 7.3 9.1M20 5.2l-.1 6.1" className="text-record-mark" strokeWidth="1.9" />
-      <path d="M29.9 32.5l2 1.7 4.1-5.2" />
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <rect x="4.2" y="7" width="31.6" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="4.2" y="17" width="10.8" height="5.6" fill="currentColor" stroke="none" />
+      <rect x="25" y="17" width="10.8" height="5.6" fill="currentColor" stroke="none" />
+      <path d="m10.8 34 9.2-12 9.2 12h-6.4L20 30.2 17.2 34Z" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }

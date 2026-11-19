@@ -1,33 +1,28 @@
-/* ── THE SHEET'S GRID, DECLARED ONCE ─────────────────────────────────────────────
-   Brian, 19 November: "it's clunky… in history for a record like this should be
-   tutorier like old books, or is that a cliché?" It is a cliché if it means parchment,
-   sepia and distressed edges — that is costume, and a panel reads costume in one look.
-   What makes a page read as a register is discipline: one grid, a date that sits in a
-   date column, lines that are numbered, one type family, and nothing on the sheet that
-   is not a fact. Old ledgers look old because every column lines up down the page, not
-   because they are brown.
-
-   So the grid is declared here, once, and the column labels and every line use it.
-   Number down the left, date in its own column on a desk, and on a phone the date steps
-   up under the number so nothing is squeezed into a strip. Same sheet, same order. */
-.corr-sheet { --corr-num: 2.1rem; --corr-date: 6.4rem; }
-
-.corr-row {
-  display: grid;
-  grid-template-columns: var(--corr-num) minmax(0, 1fr);
-  column-gap: 0.55rem;
-}
-.corr-head { display: none; }
-
+/* A small, readable index. Full notes open in place; their words are never cut. */
+.corr-section { padding: 1rem; border-top: 1px solid rgb(var(--record-ink) / .25); background: rgb(var(--record-paper)); font-family: var(--font-record-ui); }
+.corr-heading { display: flex; align-items: center; gap: .55rem; }
+.corr-heading > svg { flex-shrink: 0; }
+.corr-heading h2 { margin: 0; font-size: 1.1875rem; font-weight: 400; line-height: 1.3; letter-spacing: .07em; text-transform: uppercase; }
+.corr-intro { max-width: 58ch; margin: .65rem 0 .9rem; font-size: .875rem; line-height: 1.55; color: rgb(var(--record-muted)); }
+.corr-sheet { list-style: none; padding: 0; margin: .8rem 0 0; }
+.corr-line { border-top: 1px solid rgb(var(--record-ink) / .18); }
+.corr-line summary { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: .8rem; min-height: 44px; padding-block: .9rem; list-style: none; cursor: pointer; }
+.corr-line summary::-webkit-details-marker { display: none; }
+.corr-summary-copy { min-width: 0; }
+.corr-meta { display: block; font-size: .71875rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.corr-number { color: rgb(var(--record-red)); font-variant-numeric: tabular-nums; }
+.corr-title { display: block; margin-top: .25rem; font-size: 1rem; line-height: 1.45; font-weight: 500; color: rgb(var(--record-ink)); }
+.corr-preview { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: .4rem; font-size: .875rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.corr-toggle { display: grid; place-items: center; min-width: 24px; min-height: 24px; color: rgb(var(--record-red)); }
+.corr-minus, .corr-line details[open] .corr-plus, .corr-line details[open] .corr-preview { display: none; }
+.corr-line details[open] .corr-minus { display: block; }
+.corr-note { padding-bottom: .85rem; }
+.corr-note > p { margin: 0; font-size: .9375rem; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; color: rgb(var(--record-ink)); }
+.corr-note > .corr-updated { margin-top: .7rem; font-size: .75rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.corr-report { display: inline-flex; align-items: center; min-height: 44px; margin-top: .25rem; font-size: .75rem; line-height: 1.5; color: rgb(var(--record-red)); text-decoration: none; }
+.corr-report:hover { text-decoration: underline; }
 @media (min-width: 1024px) {
-  .corr-row {
-    grid-template-columns: var(--corr-num) var(--corr-date) minmax(0, 1fr);
-    column-gap: 1rem;
-  }
-  .corr-head { display: grid; }
+  .record-method-page .record-shell-content > .corr-section { padding: 1.5rem; border-top: 1px solid rgb(var(--record-ink) / .25); }
+  .corr-line summary { gap: 1.5rem; }
 }
-
-.corr-line {
-  border-top: 1px solid rgb(var(--record-ink) / 0.18);
-  padding: 0.85rem 0 0.95rem;
-}
+@media print { .corr-line details:not([open]) > .corr-note { display: block; } .corr-preview, .corr-toggle { display: none; } }

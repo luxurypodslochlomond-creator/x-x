@@ -1,120 +1,37 @@
-/* ── THE WIRE AS A REGISTER, NOT A FEED ─────────────────────────────────────────
-   Brian, 19 November: on a phone the entries "feel like a web page", not a record of
-   time, and witnesses will be digging into them. He is right, and the reason is that
-   every entry was a bordered card with a coloured bar on top — the shape a blog uses.
-   A card says "item, scroll past me". A register says "line in a dated series".
-
-   So each entry is now a line hanging off a date spine: the day, the month and the year
-   in a rail down the left that every entry shares, a hairline between lines, and no box
-   anywhere. Scrolling the wire then reads as moving through time rather than through
-   items — which is the whole claim the page makes.
-
-   The rail is 3.4rem on a phone, because at 393px a wider rail would eat the sentences,
-   and the same rule as the errata sheet: alignment is the effect, not decoration. */
-.wire-register {
-  display: flex;
-  flex-direction: column;
-}
-
-.wire-entry {
-  display: grid;
-  grid-template-columns: 3.4rem minmax(0, 1fr);
-  column-gap: 0.85rem;
-  padding: 1.1rem 0 1.4rem;
-  border-top: 1px solid rgb(var(--record-ink) / 0.22);
-  background: none;
-}
-
-.wire-entry:first-child {
-  border-top: 2px solid rgb(var(--record-ink) / 0.75);
-}
-
-@media (min-width: 1024px) {
-  .wire-entry {
-    grid-template-columns: 5.6rem minmax(0, 1fr);
-    column-gap: 1.5rem;
-    padding: 1.5rem 0 1.9rem;
-  }
-}
-
-/* The spine. Tabular figures so the days stack in a straight column down the page. */
-.wire-rail {
-  padding-top: 0.1rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.wire-rail-day {
-  display: block;
-  font-family: var(--font-record-ui);
-  font-weight: 700;
-  font-size: 21px;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  color: rgb(var(--record-ink));
-}
-
-.wire-rail-month {
-  display: block;
-  margin-top: 3px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 9.5px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgb(var(--record-red));
-}
-
-.wire-rail-year {
-  display: block;
-  margin-top: 1px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 9.5px;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
-  color: rgb(var(--record-muted));
-}
-
-/* When only the words the editor gave are known ("ongoing", "2026"), they are set in the
-   rail as they were written rather than invented into a date. */
-.wire-rail-word {
-  display: block;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 10px;
-  line-height: 1.35;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgb(var(--record-ink));
-}
-
-@media (min-width: 1024px) {
-  .wire-rail-day { font-size: 30px; }
-  .wire-rail-month, .wire-rail-year { font-size: 10px; }
-}
-
-.wire-entry-body {
-  min-width: 0;
-}
-
-/* The headline of a documented entry is the record speaking, not a label, so it is set
-   in the record's reading voice — never in the structural grotesque, and never shouted
-   in capitals. Capitals are the machine's furniture (labels, kinds, places); a headline
-   set in caps reads as a poster, which is the "web page" feeling Brian named. The
-   !important is deliberate: the record's global heading rule puts every h2 in the
-   structural face, and an entry's own words are the one exception to it. */
-.wire-headline {
-  font-family: var(--font-reading) !important;
-  font-weight: 600 !important;
-  text-transform: none;
-  letter-spacing: -0.004em;
-  line-height: 1.24;
-  color: rgb(var(--record-ink));
-  text-wrap: balance;
-}
-
-/* A labelled block inside the line — a hairline and a name, never a tinted box. */
-.wire-note {
-  margin-top: 0.85rem;
-  border-top: 1px solid rgb(var(--record-ink) / 0.18);
-  padding-top: 0.55rem;
-}
+/* Full-width summaries, not a calendar rail squeezing the words into a strip. */
+.news-entry { min-width: 0; padding: .9rem 0 .35rem; border-top: 1px solid rgb(var(--record-ink) / .22); font-family: var(--font-record-ui); }
+.news-entry-meta { display: flex; flex-wrap: wrap; gap: .2rem .75rem; margin: 0; font-size: .71875rem; line-height: 1.5; color: rgb(var(--record-muted)); font-variant-numeric: tabular-nums; }
+.news-entry-heading { margin: .35rem 0; font-size: 1.09375rem; font-weight: 500; line-height: 1.35; letter-spacing: -.01em; text-transform: none; overflow-wrap: anywhere; }
+.news-entry-heading a { display: block; color: inherit; text-decoration: none; }
+.news-entry-heading a:hover { color: rgb(var(--record-red)); }
+.news-entry-excerpt { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin: .35rem 0 .6rem; font-size: .875rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.news-entry-source { margin: .35rem 0; font-size: .75rem; line-height: 1.55; color: rgb(var(--record-muted)); overflow-wrap: anywhere; }
+.news-entry-source a { color: rgb(var(--record-ink)); text-decoration: underline; text-decoration-color: rgb(var(--record-ink) / .3); }
+.news-source-check { display: block; }
+.news-row-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 0 .85rem; min-height: 44px; font-size: .75rem; }
+.news-signer { margin-left: auto; max-width: 60%; line-height: 1.45; color: rgb(var(--record-muted)); }
+.news-signer-unsigned { color: rgb(var(--record-red)); }
+.news-share { margin-left: auto; }
+.news-share > button { border: 0; background: transparent; color: rgb(var(--record-ink)); padding-inline: .25rem; min-height: 44px; font-size: .75rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.news-share > button:hover { color: rgb(var(--record-red)); }
+.news-entry-image { margin: 1rem 0; }
+.news-entry-image img { display: block; width: 100%; max-height: 26rem; object-fit: contain; }
+.news-entry-image figcaption, .news-picture-note { margin-top: .35rem; font-size: .75rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+.news-entry-image-preview img { max-height: 11rem; object-fit: cover; aspect-ratio: 2 / 1; }
+.news-full-account { font-family: var(--font-record-ui); }
+.news-detail-column { max-width: 46rem; margin-inline: auto; padding: 1.25rem 1.1rem; }
+.news-account-heading { margin: .65rem 0 .85rem; font-size: 1.5rem; line-height: 1.3; font-weight: 500; letter-spacing: -.015em; text-transform: none; }
+.news-account-text { margin: 0 0 1rem; font-size: 1rem; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+.news-account-note { padding-top: .85rem; margin-top: 1.1rem; border-top: 1px solid rgb(var(--record-ink) / .18); }
+.news-account-note h2 { margin: 0 0 .45rem; font-size: .75rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+.news-account-note p { margin: 0; font-size: .9375rem; line-height: 1.65; white-space: pre-line; overflow-wrap: anywhere; }
+.news-account-attribution { margin-top: 1.25rem; padding-top: .75rem; border-top: 1px solid rgb(var(--record-ink) / .18); }
+.news-account-attribution > span { display: block; margin-top: .5rem; }
+.news-references { margin-top: 1.25rem; border-block: 1px solid rgb(var(--record-ink) / .2); }
+.news-references-content > div { margin: 1rem 0; border: 0; padding: 0; background: transparent; }
+.news-references textarea { font-size: 1rem; min-height: 8rem; background: rgb(var(--record-bone)); border-color: rgb(var(--record-ink) / .2); }
+.news-references-content > div:last-child > button { width: auto; border: 0; padding-inline: 0; background: transparent; color: rgb(var(--record-ink)); }
+.news-detail-note { margin: 1rem 0 0; font-size: .8125rem; line-height: 1.6; color: rgb(var(--record-muted)); }
+.news-detail-note a { text-decoration: underline; color: rgb(var(--record-ink)); }
+@media (min-width: 1024px) { .news-detail-column { padding: 2rem; } .news-account-heading { font-size: 2rem; } }
+@media print { .news-entry-excerpt { display: block; overflow: visible; } .news-row-actions { display: none; } }
