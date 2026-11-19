@@ -24,7 +24,7 @@ export default function ClimateImageCrawl() {
   return (
     <section dir="ltr" aria-label="Photographs from Ocean Image Bank" className="record-photo-crawl record-media-mount relative bg-record-paper">
       <div ref={railRef} onScroll={event => setIndex(Math.max(0, Math.min(photos.length - 1, Math.round(event.currentTarget.scrollLeft / event.currentTarget.clientWidth))))} className="climate-photo-rail flex w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
-        {photos.map((photo, i) => <ClimatePhotoSlide key={photo.id} photo={photo} onOpen={() => setOpenAt(i)} />)}
+        {photos.map((photo, i) => <ClimatePhotoSlide key={photo.id} photo={photo} priority={i === 0} onOpen={() => setOpenAt(i)} />)}
       </div>
       {/* ── THE FOLIO UNDER THE PLATE ────────────────────────────────────────────────
           A phone shows one photograph at a time and said nothing about the other five, so

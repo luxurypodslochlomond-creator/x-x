@@ -4,7 +4,7 @@ import ClimatePhotoCredit from '@/components/climate/ClimatePhotoCredit';
 // The photograph and its credited paper caption are one mounted plate.
 // Swiping and opening the full-screen original work exactly as before.
 
-export default function ClimatePhotoSlide({ photo, onOpen }) {
+export default function ClimatePhotoSlide({ photo, onOpen, priority = false }) {
   return (
     <figure className="climate-photo-slide relative w-full min-w-0 shrink-0 snap-start snap-always">
       <button
@@ -19,7 +19,8 @@ export default function ClimatePhotoSlide({ photo, onOpen }) {
             alt={photo.caption || 'Photograph on the record'}
             width="1800"
             height="1200"
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority ? 'high' : 'auto'}
             decoding="async"
             draggable="false"
             className="absolute inset-0 h-full w-full object-cover"

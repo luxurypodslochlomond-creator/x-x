@@ -71,8 +71,26 @@
 .record-cover-plate-title { font-size: clamp(34px, 4.6vw, 74px); }
 @media (min-width: 1024px) {
   .record-cover-plate-picture {
-    height: clamp(260px, 36vh, 420px);
-    background-position: center 46%;
+    height: 6rem;
+    background-position: center 58%;
+  }
+  /* The four choices and the photographs arrive before the quotation. */
+  .record-home-flow { display: flex; flex-direction: column; }
+  .record-home-flow > .record-home-voice-band { order: 1; }
+  .climate-record .record-home-page .record-cover-plate-title {
+    max-inline-size: 29ch;
+    font-size: clamp(2rem, 2.7vw, 3rem);
+    line-height: 1.12 !important;
+    letter-spacing: -.015em !important;
+    text-transform: none;
+  }
+  .record-home-page .record-room-link + .record-room-link {
+    border-inline-start: 1px solid rgb(var(--record-ink) / .18);
+  }
+  .climate-record .record-home-page :is(.record-row-title, .record-holding-title, .record-holding-small-title) {
+    text-transform: none;
+    letter-spacing: -.015em !important;
+    line-height: 1.2 !important;
   }
 }
 

@@ -23,18 +23,18 @@ const isBorrowed = (candidate) => {
   return STOCK_HOSTS.test(src) || KNOWN_STOCK.includes(src);
 };
 
-export default function useRecordImage(entry) {
+export default function useRecordImage(entry, { entryOnly = false } = {}) {
   const [failed, setFailed] = useState([]);
   const cover = window.matchMedia('(max-width: 639px)').matches ? RECORD_COVER_SCREEN : IMAGES.cover;
   const category = entry?.entry_type === 'solution' ? CATEGORY_IMAGE(entry.category) : null;
   const candidates = [
     entry?.image_url && { src: entry.image_url, credit: entry.image_credit, illustrative: false },
-    category && {
+    !entryOnly && category && {
       src: category,
       credit: category === IMAGES.mangroves ? 'Illustration · generated for the record' : 'Illustrative photograph · Unsplash',
       illustrative: true,
     },
-    { src: cover, credit: 'Cover artwork · painted for the record', illustrative: true },
+    !entryOnly && { src: cover, credit: 'Cover artwork · painted for the record', illustrative: true },
   ].filter(Boolean);
   const image = candidates.find(candidate => !failed.includes(candidate.src));
   return {
