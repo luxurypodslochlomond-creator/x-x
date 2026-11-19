@@ -6,7 +6,10 @@ import { goToDrawing } from '@/components/climate/cartoons/goToDrawing';
 // cartoonists' own words from the wall — the two side by side, so nobody has to take the
 // record's word for what either of them said.
 export default function GoalRow({ goal, open, onToggle, art }) {
-  const has = goal.drawings.length > 0;
+  // Only the readings whose drawing is standing on the wall today. A goal cannot be
+  // answered by a line in a file: the picture itself has to be there.
+  const onWall = goal.drawings.filter((d) => art[d.title]);
+  const has = onWall.length > 0;
   const panelId = `goal-panel-${goal.n}`;
   const buttonId = `goal-button-${goal.n}`;
 
@@ -24,7 +27,7 @@ export default function GoalRow({ goal, open, onToggle, art }) {
         <span className="cartoon-goal-name">{goal.name}</span>
         <span className="cartoon-goal-meta">
           {has
-            ? `${goal.drawings.length} drawing${goal.drawings.length === 1 ? '' : 's'}`
+            ? `${onWall.length} drawing${onWall.length === 1 ? '' : 's'}`
             : 'No drawing yet'}
         </span>
         <span className="cartoon-goal-cue" aria-hidden="true">{open ? '−' : '+'}</span>
@@ -44,9 +47,17 @@ export default function GoalRow({ goal, open, onToggle, art }) {
             <p className="cartoon-goal-label">
               {has ? 'What the drawings say, in the artists’ own words' : 'What is missing here'}
             </p>
+            {has && (
+              <p className="cartoon-goal-note">
+                The line in red under each title is the record’s own reason for reading that
+                drawing onto this goal. It is not the artist’s claim and not the UN’s reading:
+                the drawing opens onto its own place on the wall, where the artist’s line sits
+                beside it, and you can judge the reading yourself.
+              </p>
+            )}
             {has ? (
               <ul className="cartoon-goal-lines">
-                {goal.drawings.map((title) => {
+                {onWall.map(({ title, why }) => {
                   const piece = art[title];
                   return (
                     <li key={title} className="cartoon-goal-line">
@@ -65,6 +76,9 @@ export default function GoalRow({ goal, open, onToggle, art }) {
                         </button>
                       )}
                       <span className="cartoon-goal-line-title">{title}</span>
+                      {/* The reason, printed before the artist's line on purpose: the claim
+                          first, so the claim can be checked against their words underneath. */}
+                      {why && <span className="cartoon-goal-line-why">{why}</span>}
                       {piece?.for_line && <span className="cartoon-goal-line-text">{piece.for_line}</span>}
                     </li>
                   );

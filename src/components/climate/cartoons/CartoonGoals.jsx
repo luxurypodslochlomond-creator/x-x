@@ -26,9 +26,14 @@ export default function CartoonGoals() {
     return map;
   }, [cartoons]);
 
-  const held = GOALS.filter((g) => g.drawings.length).length;
+  // Counted from the wall itself, not from the table above it. A goal is answered when a
+  // drawing it names is actually standing on the wall today; a reading whose drawing has
+  // been taken down does not get to keep answering the goal by itself.
+  const answered = (g) => g.drawings.some((d) => art[d.title]);
+
+  const held = GOALS.filter(answered).length;
   const open = GOALS.length - held;
-  const shown = waitingOnly ? GOALS.filter((g) => !g.drawings.length) : GOALS;
+  const shown = waitingOnly ? GOALS.filter((g) => !answered(g)) : GOALS;
 
   return (
     <section className="cartoon-goals" id="cartoon-goals" aria-labelledby="cartoon-goals-title">

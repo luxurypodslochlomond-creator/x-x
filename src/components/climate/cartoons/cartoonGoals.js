@@ -18,11 +18,29 @@
 // speak for the UN and the UN has not endorsed this room. A drawing is counted against a
 // goal only where the drawing's own published line is about that subject — never because
 // the record would like the wall to look complete.
+//
+// ── AND EVERY PLACEMENT NOW SAYS WHY IT IS THERE ───────────────────────────────
+// Brian, 19 November: "are you sure they are connected to the right one bro how do you
+// know". That is the only question that matters on a page like this, and a table of titles
+// is not an answer to it. Nobody can audit a claim with no reason attached. So each
+// placement carries the record's reason in one clause, printed under the drawing in the
+// record's own red — short enough to read, specific enough to argue with. A reader who
+// thinks a drawing belongs somewhere else can now see exactly what was claimed and say so,
+// which is the whole difference between a reading and an assertion.
+//
+// The rule this file follows, in one line: the reason must come from what the drawing
+// itself is about, never from the goal's importance. If the only reason for a placement is
+// that a goal looked empty, the drawing does not go there — it goes in UNPLACED.
 export const GOALS_SOURCE = {
   line: 'CartoonAFRICA International Biennial, initiated November 2012 by Francis Umendu Odupute; its SDG cartoon campaign was exhibited at the UN SDG Global Festival of Action, Bonn, 2–4 May 2019.',
   name: 'The Nigerian Observer · 24 April 2026',
   url: 'https://nigerianobservernews.com/2026/04/story-of-the-traveling-cartoonafrica-sdg-cartoon-campaigns-and-workshops/',
 };
+
+// A drawing, and the record's own reason for reading it onto this goal. The reason is
+// written per placement rather than per drawing, because the same drawing can answer two
+// goals for two different reasons — and saying which reason is the whole point.
+const read = (title, why) => ({ title, why });
 
 const goal = (n, name, asks, targets, drawings) => ({
   n,
@@ -39,34 +57,52 @@ export const GOALS = [
   goal(2, 'Zero Hunger',
     'End hunger, achieve food security and improved nutrition and promote sustainable agriculture.', 8, []),
   goal(3, 'Good Health and Well-being',
-    'Ensure healthy lives and promote well-being for all at all ages.', 13,
-    ["Heat's Got Nowhere to Hide!", 'Keeping It Cool!', 'The Way to Live Longer!']),
+    'Ensure healthy lives and promote well-being for all at all ages.', 13, [
+      read("Heat's Got Nowhere to Hide!", 'Because a heatwave is a health emergency before it is anything else.'),
+      read('Keeping It Cool!', 'Because cooling a room is, for some people, the difference between living and not.'),
+      read('The Way to Live Longer!', 'Because the air a child breathes decides how long that child lives.'),
+    ]),
   goal(4, 'Quality Education',
-    'Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.', 10,
-    ["The Game's Gone Green!"]),
+    'Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.', 10, [
+      read("The Game's Gone Green!", 'Because the drawing is about learning the skills the change needs.'),
+    ]),
   goal(5, 'Gender Equality',
     'Achieve gender equality and empower all women and girls.', 9, []),
   goal(6, 'Clean Water and Sanitation',
     'Ensure availability and sustainable management of water and sanitation for all.', 8, []),
   goal(7, 'Affordable and Clean Energy',
-    'Ensure access to affordable, reliable, sustainable and modern energy for all.', 5,
-    ['The Energy Relay', 'Love At First Light', 'Solar Thriller', 'The Cooler Influencer']),
+    'Ensure access to affordable, reliable, sustainable and modern energy for all.', 5, [
+      read('The Energy Relay', 'Because it is a drawing about how power actually reaches a home.'),
+      read('Love At First Light', 'Because it is about sunlight on a roof, and the bill that follows it.'),
+      read('Solar Thriller', 'Because it is about keeping a panel working, not only about buying one.'),
+      read('The Cooler Influencer', 'Because it is about who gets to be cool, and what that costs in power.'),
+    ]),
   goal(8, 'Decent Work and Economic Growth',
-    'Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all.', 12,
-    ["The Game's Gone Green!"]),
+    'Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all.', 12, [
+      read("The Game's Gone Green!", 'Because the work in it is the work a greener economy pays for.'),
+    ]),
   goal(9, 'Industry, Innovation and Infrastructure',
-    'Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation.', 8,
-    ['The Transformation Nobody Saw Coming']),
+    'Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation.', 8, [
+      read('The Transformation Nobody Saw Coming', 'Because it is about what a new machine takes out of the ground and off the grid.'),
+    ]),
   goal(10, 'Reduced Inequalities',
     'Reduce inequality within and among countries.', 10, []),
   goal(11, 'Sustainable Cities and Communities',
-    'Make cities and human settlements inclusive, safe, resilient and sustainable.', 10,
-    ['Revolution EV-olution!', 'Rain Check!', 'A Tale of Two Cities', 'The Way to Live Longer!']),
+    'Make cities and human settlements inclusive, safe, resilient and sustainable.', 10, [
+      read('Revolution EV-olution!', 'Because it is about how a city moves, and who can afford to move that way.'),
+      read('Rain Check!', 'Because it is about a city having to hold water it never planned for.'),
+      read('A Tale of Two Cities', 'Because it puts two ways of building a city side by side and lets you choose.'),
+      read('The Way to Live Longer!', 'Because the journey it draws is a city street, not a country road.'),
+    ]),
   goal(12, 'Responsible Consumption and Production',
     'Ensure sustainable consumption and production patterns.', 11, []),
   goal(13, 'Climate Action',
-    'Take urgent action to combat climate change and its impacts.', 5,
-    ['Rain Check!', "Heat's Got Nowhere to Hide!", 'The Cooler Influencer', 'Keeping It Cool!']),
+    'Take urgent action to combat climate change and its impacts.', 5, [
+      read('Rain Check!', 'Because the rain in it is the weather arriving differently, not just wetter.'),
+      read("Heat's Got Nowhere to Hide!", 'Because it draws the heat itself, and not only the people standing in it.'),
+      read('The Cooler Influencer', 'Because the power it draws is the demand that warms the room.'),
+      read('Keeping It Cool!', 'Because it is a household answering a hotter summer with what it has.'),
+    ]),
   goal(14, 'Life Below Water',
     'Conserve and sustainably use the oceans, seas and marine resources for sustainable development.', 10, []),
   goal(15, 'Life on Land',

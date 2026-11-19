@@ -199,7 +199,7 @@
 .press-room .cartoon-goal-line {
   display: grid;
   grid-template-columns: clamp(7rem, 14vw, 10.5rem) minmax(0, 1fr);
-  grid-template-areas: "art title" "art text";
+  grid-template-areas: "art title" "art why" "art text";
   align-content: start;
   gap: .15rem .85rem;
   padding-top: .7rem;
@@ -225,7 +225,32 @@
 .press-room .cartoon-goal-line-art img { display: block; width: 100%; height: auto; }
 .press-room .cartoon-goal-line-art:hover { border-color: rgb(var(--record-red)); }
 .press-room .cartoon-goal-line .cartoon-goal-line-title { grid-area: title; }
+.press-room .cartoon-goal-line .cartoon-goal-line-why { grid-area: why; }
 .press-room .cartoon-goal-line .cartoon-goal-line-text { grid-area: text; }
+
+/* ── WHY IT IS HERE ──────────────────────────────────────────────────────────────
+   A goal no longer opens onto a drawing with no reason attached. The record's reason runs
+   under the title behind the record's own red rule: short, specific and answerable. It sits
+   above the artist's line on purpose — the claim first, so the claim can be checked against
+   their own words immediately beneath it. */
+.press-room .cartoon-goal-line-why {
+  display: block;
+  margin-top: .18rem;
+  padding-left: .5rem;
+  border-left: 2px solid rgb(var(--record-red));
+  font-family: var(--font-reading);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink) / .86);
+}
+.press-room .cartoon-goal-note {
+  max-width: 48ch;
+  margin: .1rem 0 .6rem;
+  font-family: var(--font-reading);
+  font-size: .8rem;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
 @media screen and (max-width: 640px) {
   .press-room .cartoon-goal-line { grid-template-columns: 6.5rem minmax(0, 1fr); gap: .1rem .7rem; }
 }
