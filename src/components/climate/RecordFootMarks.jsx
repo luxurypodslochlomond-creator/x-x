@@ -224,11 +224,25 @@ export function MarkPencil({ size = 26, className = '' }) {
 // Pink Floyd's wall is a wall of bricks and that is the only part of it worth borrowing:
 // not the barrier, the fact that it is built. This one is built of drawings, and it is
 // never finished, which is why the red brick is there.
+//
+// ── AND THEN HE ASKED FOR THE THREE PIGMENTS, WHICH WAS THE RIGHT QUESTION ─────
+// Brian, same afternoon: "love it bro wee blocks colour good why not make them green yellow
+// and red bro whatever sequence is right?" The sequence is not a taste call, because this
+// record already speaks in these three and has done for months: green is what grows and what
+// works, yellow is the light the record signals with, red is the mark and the warning. So
+// they are laid in the order the wall is built — green first, then the light, then the red —
+// left to right across the course, with the red one in the course beneath, because the red
+// brick is the one that is still yours to lay. A stoplight would be the wrong reading and it
+// is not the reading here: nothing in this wall is telling anybody to stop.
+//
+// No new colours were invented for this. Deep green, signal yellow and the mark's red are
+// the tokens the record's own plates are printed in, so the door on the rail is made of the
+// same paint as the room it opens.
 export function MarkWall({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="3.4" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
-      <rect x="21" y="10.4" width="15.6" height="9.2" fill="currentColor" stroke="none" />
+      <rect x="3.4" y="10.4" width="15.6" height="9.2" className="text-record-botanical" fill="currentColor" stroke="none" />
+      <rect x="21" y="10.4" width="15.6" height="9.2" className="text-record-signal" fill="currentColor" stroke="none" />
       <rect x="11" y="21.6" width="18" height="9.2" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
