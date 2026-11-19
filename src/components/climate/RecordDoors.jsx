@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+  RoomMarkSolution,
+  RoomMarkCrisis,
+  RoomMarkGroups,
+  RoomMarkAction,
+} from './RoomMarks';
 
 // ── THE FOUR ROOMS ─────────────────────────────────────────────────────────────
 // Brian, 19 November: "actions crises solutions groups on climate record page these are the
@@ -21,6 +27,7 @@ const ROOMS = [
     line: 'What works — and can be copied.',
     ground: 'bg-record-botanical text-record-paper',
     rule: 'bg-record-signal',
+    Mark: RoomMarkSolution,
   },
   {
     key: 'climate_crisis',
@@ -28,6 +35,7 @@ const ROOMS = [
     line: 'What is burning, right now.',
     ground: 'bg-[#b3261e] text-[#efe7d6]',
     rule: 'bg-[#efe7d6]',
+    Mark: RoomMarkCrisis,
   },
   {
     key: 'groups',
@@ -35,6 +43,7 @@ const ROOMS = [
     line: 'People working on the same thing, near you.',
     ground: 'bg-[#ffd447] text-[#141210]',
     rule: 'bg-[#b3261e]',
+    Mark: RoomMarkGroups,
   },
   {
     key: 'actions',
@@ -42,6 +51,7 @@ const ROOMS = [
     line: 'Cleanups, plantings, meetings, on the ground.',
     ground: 'bg-[#e2602a] text-[#141210]',
     rule: 'bg-[#141210]',
+    Mark: RoomMarkAction,
   },
 ];
 
@@ -72,29 +82,35 @@ export default function RecordDoors({ counts = {}, selected, onSelect }) {
         {ROOMS.map(room => {
           const open = selected === room.key;
           const count = counts[room.key] ?? 0;
+          const Mark = room.Mark;
           return (
             <button
               key={room.key}
               type="button"
               onClick={() => onSelect(room.key)}
               aria-pressed={open}
-              className={`group flex min-h-[124px] lg:min-h-[148px] flex-col justify-between gap-2 border-2 p-3 text-left transition-transform duration-150 active:scale-[0.98] ${
+              className={`group flex min-h-[132px] lg:min-h-[156px] flex-col gap-2 border-2 p-3 text-left transition-transform duration-150 active:scale-[0.98] ${
                 room.ground
               } ${open ? 'border-[#141210]' : 'border-[#141210]/25 hover:border-[#141210]'}`}
             >
+              {/* The room's own drawing, with the record's count on the same line: a door
+                  with a mark and a figure on it is an object, and four of them in a square
+                  are a plate. Without the drawing these were four coloured rectangles with
+                  words in them, which is why the backbone read as a filter bar. */}
               <span className="flex items-start justify-between gap-2">
-                <span className="text-[10px] font-black font-mono uppercase tracking-[0.13em] leading-[1.3]">
-                  {room.label}
-                </span>
+                <Mark size={26} className="opacity-90" />
                 <span className="text-[24px] lg:text-[30px] font-black font-mono leading-[0.9] tabular-nums">
                   {count}
                 </span>
+              </span>
+              <span className="text-[10px] font-black font-mono uppercase tracking-[0.13em] leading-[1.3]">
+                {room.label}
               </span>
               <span className={`block h-1 w-8 ${room.rule}`} aria-hidden="true" />
               <span className="text-[11.5px] lg:text-[12.5px] leading-[1.35] font-body">
                 {room.line}
               </span>
-              <span className="text-[9px] font-black font-mono uppercase tracking-[0.16em] opacity-75">
+              <span className="mt-auto text-[9px] font-black font-mono uppercase tracking-[0.16em] opacity-75">
                 {open ? 'Open · tap to close' : 'Open →'}
               </span>
             </button>

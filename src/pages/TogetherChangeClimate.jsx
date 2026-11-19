@@ -425,6 +425,16 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
+      {/* ── ON A PHONE THE ROOMS COME FIRST ─────────────────────────────────────────
+          Brian, 19 November: "when go in with mobile can't get to all the coolasfuck until
+          scroll down." He was right, and it was arithmetic rather than taste: a phone's
+          first screens held the title, the yellow summary, Jane's quote, the picture crawl,
+          the impact bar and a rail of plates — and the four rooms, the backbone of the whole
+          record, arrived after all of it. So the opening band and the four rooms change
+          places on a narrow glass, by order rather than by moving anything: the record still
+          opens the same way, and the four rooms are the second thing a thumb can reach. A
+          desk keeps exactly the order it had. */}
+      <div className="record-home-flow">
       {/* The record opens first; Jane's voice follows on the same continuous painting. */}
       <RecordPaintedBand strength={0.65} soft continuous className="record-home-opening">
         <RecordHomeHero copy={t} />
@@ -483,14 +493,17 @@ export default function TogetherChangeClimate() {
           Four plates now, each in the room's own pigment, each carrying how much the record
           holds and one plain line saying what it is for, and opening one carries the reader
           down to it. ── */}
-      <RecordDoors
-        counts={doorCounts}
-        selected={selectedType}
-        onSelect={(key) => {
-          setSelectedType(selectedType === key ? 'all' : key);
-          requestAnimationFrame(() => bringIntoView(contentRef.current));
-        }}
-      />
+      <div className="record-home-doors">
+        <RecordDoors
+          counts={doorCounts}
+          selected={selectedType}
+          onSelect={(key) => {
+            setSelectedType(selectedType === key ? 'all' : key);
+            requestAnimationFrame(() => bringIntoView(contentRef.current));
+          }}
+        />
+      </div>
+      </div>{/* /record-home-flow */}
 
       {/* ── TOOLBAR — the record's subjects on one side, the one way in with something of
              your own on the other. The search that reaches everything is the one pill in

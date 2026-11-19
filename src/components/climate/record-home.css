@@ -35,6 +35,19 @@
 }
 
 .record-home-page { background-color: transparent; }
+
+/* ── THE ROOMS COME FIRST ON A PHONE ─────────────────────────────────────────────
+   Brian, 19 November: "when go in with mobile can't get to all the coolasfuck until scroll
+   down." The order is changed here rather than in the page, so nothing is moved, duplicated
+   or re-rendered: the same bands, read in the order a narrow glass can afford. The record
+   opens, the four rooms follow, then the pictures, the crawl, the counts and the rail. A
+   desk is untouched. */
+@media (max-width: 1023px) {
+  .record-home-flow { display: flex; flex-direction: column; }
+  .record-home-flow > * { order: 3; }
+  .record-home-flow > .record-home-opening { order: 1; }
+  .record-home-flow > .record-home-doors { order: 2; }
+}
 /* The shared cover holds an image frame while its own photograph downloads. */
 .record-entry-image {
   background-image: var(--record-cover);
