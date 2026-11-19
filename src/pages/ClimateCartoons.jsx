@@ -18,6 +18,8 @@ import '@/components/climate/cartoons/press/press-desktop-ground.css';
 // Loaded last: the second ink goes down on top of the laid-out sheet, never under it.
 import '@/components/climate/cartoons/press/press-ink.css';
 import '@/components/climate/cartoons/cartoon-lineage.css';
+// The record's own signal — yellow plate, black words, red label — laid over the room.
+import '@/components/climate/cartoons/press/press-record-ink.css';
 
 export default function ClimateCartoons() {
   return (

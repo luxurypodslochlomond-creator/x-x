@@ -1,0 +1,180 @@
+/* ── THE ROOM IS PRINTED IN THE RECORD'S OWN INKS ───────────────────────────────
+   Brian, 19 November: "can we put coolasfuck yellow and red and black writing on yellow
+   background and red font on yellow background like climate page bro and same coolasfuck
+   font to the cartoons page please bro".
+
+   He is right about the thing that was missing. The rest of the record has a signal of
+   its own — a yellow plate carrying black type, a red label above a heading — and the
+   cartoon room had none of it: it was set in paper and ink only, which reads as a
+   newspaper supplement rather than as this record. A room that does not share the
+   record's inks is a room borrowed from somewhere else.
+
+   So the record's signal is put on the room in the four places a printed page uses it,
+   and nowhere else:
+     1. the masthead, as one yellow plate with black title and red line above it;
+     2. every section heading, as a yellow block behind the words, the way a cut-out
+        label sits on a page;
+     3. the number on each drawing on the wall, so the count runs down the wall in yellow;
+     4. the doors — the ones that ask a reader to do something — because a door that
+        looks like the record's signal is a door somebody walks through.
+
+   Red stays where the record keeps it: the labels above headings, the artist's own line,
+   and every rule that answers to a name. Black stays the words.
+
+   Nothing here touches a drawing. No filter, no tint, no frame: the artists' pictures are
+   exactly the files they gave, and the only colour laid over this room is the record's own
+   ink on its own paper. */
+
+#root .record-cartoon-field .press-room {
+  --press-plate: rgb(var(--record-signal));
+  --press-plate-ink: rgb(var(--record-ink));
+  --press-plate-red: rgb(var(--record-red));
+}
+
+/* ── 1. THE MASTHEAD, AS ONE YELLOW PLATE ───────────────────────────────────────
+   The room's name is printed on the record's signal, ruled black above and red below —
+   the same two-ink job the record uses on its own opening. */
+#root .record-cartoon-field .press-room .press-opening-masthead {
+  background: var(--press-plate);
+  color: var(--press-plate-ink);
+  padding: clamp(.95rem, 1.7vw, 1.6rem) clamp(1rem, 2vw, 1.8rem);
+  border-top: 4px solid var(--press-plate-ink);
+  border-bottom: 4px solid var(--press-plate-red);
+}
+#root .record-cartoon-field .press-room .press-opening-masthead::after { display: none; }
+#root .record-cartoon-field .press-room .press-opening-masthead .press-eyebrow { color: var(--press-plate-red); }
+#root .record-cartoon-field .press-room .press-opening-masthead .press-title { color: var(--press-plate-ink); }
+#root .record-cartoon-field .press-room .press-opening-masthead .press-standfirst { color: var(--press-plate-red); }
+#root .record-cartoon-field .press-room .press-opening-masthead .cartoon-signal {
+  border-color: rgb(var(--record-ink) / .45);
+  color: rgb(var(--record-ink) / .8);
+}
+#root .record-cartoon-field .press-room .press-opening-masthead .cartoon-signal-fact { color: var(--press-plate-ink); }
+
+/* ── 2. EVERY SECTION HEADING ON A YELLOW BLOCK ────────────────────────────────
+   One device, used for every chapter, so the room reads as one printed thing. The block
+   is tight to the words and clones across a line break, so a heading that wraps stays one
+   label rather than a paragraph of yellow. */
+#root .record-cartoon-field .press-room :is(
+  .press-wall-title,
+  .comic-section-title,
+  .comic-session-title,
+  .comic-anthology-title,
+  .cartoon-goals-title,
+  .cartoon-lineage-title,
+  .cartoon-world-title
+) {
+  display: inline-block;
+  width: fit-content;
+  justify-self: start;
+  background: var(--press-plate);
+  color: var(--press-plate-ink);
+  padding: .06em .3em .12em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  font-weight: 700 !important;
+}
+
+/* The labels above those headings are the record's red, everywhere in the room. */
+#root .record-cartoon-field .press-room :is(
+  .press-eyebrow,
+  .comic-opening-eyebrow,
+  .comic-session-eyebrow,
+  .comic-anthology-eyebrow,
+  .cartoon-goals-eyebrow,
+  .cartoon-lineage-kicker
+) {
+  color: var(--press-plate-red);
+}
+
+/* ── 3. THE COUNT, RUNNING DOWN THE WALL IN YELLOW ─────────────────────────────
+   Each drawing's number is a printed tab: black numeral on the record's signal. It is the
+   one thing repeated on every sheet, so the wall is countable at a glance — which is the
+   room's own argument, made in colour rather than in a sentence. */
+#root .record-cartoon-field .press-room .press-sheet-number {
+  justify-self: start;
+  background: var(--press-plate);
+  color: var(--press-plate-ink);
+  padding: .02em .28em .1em;
+  font-weight: 700;
+}
+
+/* ── 4. THE DOORS WEAR THE SIGNAL ──────────────────────────────────────────────
+   Only the controls that ask a reader to do something: bring more of the wall, draw a
+   strip, hand in a paper drawing, open the blank goals. Everything that is only a link
+   stays a link. */
+#root .record-cartoon-field .press-room .press-more {
+  background: var(--press-plate);
+  border: 2px solid var(--press-plate-ink);
+  color: var(--press-plate-ink);
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+#root .record-cartoon-field .press-room .press-more:hover:not(:disabled) {
+  background: var(--press-plate-ink);
+  color: var(--press-plate);
+}
+
+#root .record-cartoon-field .press-room .comic-make-door {
+  background: var(--press-plate);
+  border-top: 2px solid var(--press-plate-ink);
+  border-bottom: 2px solid var(--press-plate-ink);
+  padding-inline: .9rem;
+}
+#root .record-cartoon-field .press-room .comic-make-door small { color: rgb(var(--record-ink) / .78); }
+#root .record-cartoon-field .press-room .comic-make-door:hover span { color: var(--press-plate-red); }
+
+#root .record-cartoon-field .press-room .cartoon-goals-filter {
+  background: transparent;
+  border: 2px solid var(--press-plate-ink);
+  border-bottom-width: 2px;
+  padding: .3rem .6rem;
+  color: var(--press-plate-ink);
+  font-weight: 700;
+}
+#root .record-cartoon-field .press-room .cartoon-goals-filter:hover {
+  background: var(--press-plate-ink);
+  color: var(--press-plate);
+  border-color: var(--press-plate-ink);
+}
+
+/* The count and the filter sit on one yellow band, the way a magazine prints a section
+   standfirst across a page. */
+#root .record-cartoon-field .press-room .cartoon-goals-bar {
+  background: var(--press-plate);
+  border-top: 3px solid var(--press-plate-ink);
+  border-bottom: 1px solid rgb(var(--record-ink) / .35);
+  padding: .6rem .75rem;
+}
+#root .record-cartoon-field .press-room .cartoon-goals-count { color: rgb(var(--record-ink) / .85); }
+#root .record-cartoon-field .press-room .cartoon-goals-count strong { color: var(--press-plate-red); }
+
+/* The two places the room asks a reader to act in words, not in a button. */
+#root .record-cartoon-field .press-room .press-contents a[href="#cartoon-your-turn"],
+#root .record-cartoon-field .press-room .cartoon-goals-ask a {
+  display: inline-block;
+  background: var(--press-plate);
+  color: var(--press-plate-ink);
+  padding: .06em .35em .12em;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 0;
+}
+#root .record-cartoon-field .press-room .press-contents a[href="#cartoon-your-turn"]:hover,
+#root .record-cartoon-field .press-room .cartoon-goals-ask a:hover {
+  background: var(--press-plate-ink);
+  color: var(--press-plate);
+}
+
+/* The "look closer" tab on a drawing reads in the record's ink too. */
+#root .record-cartoon-field .press-room .press-sheet-look {
+  background: var(--press-plate);
+  color: var(--press-plate-ink);
+  font-weight: 700;
+}
+
+@media (min-width: 1024px) {
+  /* The plate keeps a hand's width inside the spread rather than bleeding to its edge. */
+  #root .record-cartoon-field .press-room .press-opening-masthead { padding-inline: clamp(1.2rem, 2vw, 2rem); }
+  #root .record-cartoon-field .press-room .cartoon-goals-bar { padding-inline: 1rem; }
+}
