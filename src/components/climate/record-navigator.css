@@ -101,6 +101,34 @@
   letter-spacing: .03em;
   white-space: normal;
 }
+/* ── THE BAND CARRIES THE INDEX AND THE TONGUE ON A PHONE ───────────────────────
+   Two marks, one at each edge of the yellow band, and both exactly the same width — which
+   is the whole trick: equal flanks are what keep the sentence centred on the glass between
+   them. The index is three rules of ink at a forty-four pixel target, in the corner a thumb
+   already reaches for; the tongue is the record's own drawn mark, and on a phone it drops
+   the name that used to run under the sentence. */
+.rec-band-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgb(var(--record-ink));
+  -webkit-tap-highlight-color: transparent;
+  transition: color .18s ease;
+}
+.rec-band-rules { display: grid; gap: 3px; width: 15px; }
+.rec-band-rules i { display: block; height: 1.5px; background: currentColor; }
+.rec-band-index:is(:hover, :active) { color: rgb(var(--record-mark)); }
+.rec-band-index:focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 2px; }
+@media (max-width: 639px) {
+  /* A tongue named in its own words is the right thing on a desk and a collision on a
+     phone: the word is what was lying across the end of the record's own sentence. */
+  .rec-time-bar .rec-tongue-name { display: none; }
+}
 /* Selection marks the caption, never floods the drawing or its cell. */
 .rec-mast-doors .rec-art-door-active { background-color: transparent; }
 .rec-mast-doors .rec-art-door-active .rec-art-caption {

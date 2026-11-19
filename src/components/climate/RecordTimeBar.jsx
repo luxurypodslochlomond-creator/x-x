@@ -21,35 +21,61 @@ import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 // which put it a tongue's width to the left of the middle of the band, above an x = x that
 // was dead centre. Nothing was the wrong size; the line was measuring the wrong box.
 //
-// The tongue is lifted out of the flow and set against the band's right edge instead. The
-// sentence now takes the whole band and centres on the band, and no size, weight or break
-// has changed: the same nine pixels on a phone, the same ten on a desk, the same words in
-// the same two lines. The tongue sits where it sat before, and the strip is one line
-// centred over another.
-export default function RecordTimeBar({ className = '' }) {
+// ── TWO MARKS FLANKING IT, BECAUSE THE ROW BELOW CANNOT HOLD SIX ───────────────
+// Brian, 19 November, on a phone: "not refined coolasfuck header any more… and the tongue
+// too, right, can't see it now bro." He was looking at a masthead that had grown to two
+// rows of three doors with the tongue lying over the end of the sentence. Two faults, one
+// cause: too many marks in too little glass, and a control drawn on top of a sentence
+// instead of beside it.
+//
+// So the band carries the two controls a phone actually reaches for, one at each edge and
+// both exactly the same width, which is what keeps the sentence centred on the glass
+// between them: the index of everything on the left, the tongue on the right. The five
+// ways in stay in the row below, where five is the number a thumb can hold and BASE 1 sits
+// in the middle. A desk is untouched: it has the room, so it keeps its own index door and
+// the tongue stays pinned to the right edge as it always was.
+export default function RecordTimeBar({ onOpenContents, contentsOpen }) {
   return (
-    <div className={`relative bg-cartoon-sun text-record-ink ${className}`}>
-      <div className="flex items-center px-4 py-[3px] lg:px-10 lg:py-1">
+    <div className="rec-time-bar relative bg-cartoon-sun text-record-ink">
+      <div className="flex items-center gap-1 px-4 py-[3px] lg:px-10 lg:py-1">
+        {/* ── THE INDEX, ON A PHONE, WHERE THE ROW BELOW CANNOT HOLD IT ─────────────
+            Three rules of ink in the corner the eye already goes to for a menu, at the
+            full forty-four pixel target, and the panel behind it is the same one the
+            Explore door opens on a desk. Nothing new to learn and nothing hidden: the
+            whole contents of the record is one thumb-width from the top of every page. */}
+        <button
+          type="button"
+          onClick={onOpenContents}
+          aria-expanded={contentsOpen}
+          aria-controls="record-contents"
+          aria-label="Everything the record keeps"
+          title="Everything the record keeps"
+          className="rec-band-index shrink-0 lg:hidden"
+        >
+          <span aria-hidden="true" className="rec-band-rules"><i /><i /><i /></span>
+        </button>
+
         {/* ── THE SENTENCE IS SET, NOT JUST WRAPPED ────────────────────────────────
-            Brian, 17 November: "centre the or justify whatever balance the sentence in the
-            yellow bar." The forced break came out and the wrapping is balanced now, so the
-            two lines a phone gets are of a length with each other instead of one long line
-            and one short one beside a tongue. Centred, because a sentence that is a title
-            for the whole record sits in the middle of its own band. */}
+            Brian, 17 November: "centre the or justify whatever balance the sentence in
+            the yellow bar." The forced break came out and the wrapping is balanced now, so
+            the two lines a phone gets are of a length with each other instead of one long
+            line and one short one beside a tongue. Centred, because a sentence that is a
+            title for the whole record sits in the middle of its own band. */}
         <p
-          className="record-header-type w-full text-center text-[9px] uppercase leading-[1.5] lg:text-[10px]"
+          className="record-header-type min-w-0 flex-1 text-center text-[9px] uppercase leading-[1.5] lg:text-[10px]"
           style={{ textWrap: 'balance' }}
         >
           This is the time. And this is the record of the time.
         </p>
-      </div>
 
-      {/* The tongue, held against the right edge of the band so it costs the sentence
-          nothing. It is the seventh way through the record and the only control up here,
-          so it stays where a hand goes looking for it — it simply no longer decides where
-          the record's own line sits. */}
-      <div className="absolute right-4 top-1/2 -translate-y-1/2 lg:right-10">
-        <RecordTongueDoor size={17} inline />
+        {/* The tongue, held at the right edge of the band so it costs the sentence
+            nothing. It is the way through the record that changes its voice, and the only
+            reader-facing control up here, so it stays where a hand goes looking for it.
+            On a phone it is the mark alone — the tongue's own name is what used to run
+            under the sentence — and a desk keeps the name beside it, exactly as before. */}
+        <div className="flex w-11 shrink-0 items-center justify-center sm:w-auto lg:absolute lg:right-10 lg:top-1/2 lg:-translate-y-1/2">
+          <RecordTongueDoor size={17} inline />
+        </div>
       </div>
     </div>
   );

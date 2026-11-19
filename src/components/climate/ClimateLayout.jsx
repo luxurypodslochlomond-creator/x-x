@@ -239,7 +239,7 @@ export default function ClimateLayout({ children, currentPage }) {
             uninterrupted signal from the top edge down, on every screen, and the header
             itself holds paper so nothing shows through behind it. */}
         <div aria-hidden="true" className="h-[3px] w-full bg-record-mark" />
-        {!isRoom && <RecordTimeBar />}
+        {!isRoom && <RecordTimeBar onOpenContents={openContents} contentsOpen={contentsOpen} />}
         {/* The masthead was held to the reading column's 1100px, so on a desk it floated in
             the middle of the glass with a hand's width of nothing either side of it while the
             doors inside it were squeezed. Brian, 18 November: "why we not using full width on
