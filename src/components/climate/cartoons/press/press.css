@@ -63,12 +63,11 @@
   box-shadow: none;
 }
 @media (min-width: 1024px) {
-  /* A spread, but a spread of a page — not the whole glass. It used to open out to ninety-six
-     per cent of the window, which left the painting a sliver down each edge and made the
-     room the one page of the record that filled the screen. It now keeps the record's own
-     measure, so the painting stands either side of it and the drawings are objects placed
-     on the world rather than a wall that has swallowed it. */
-  #root .record-cartoon-field .record-book { max-width: min(1180px, 92vw); margin-inline: auto; }
+  /* A wall is looked at from across a room, so this is the one page of the record that
+     opens out: the plate runs nearly the whole glass, and the sheets keep a spread inside
+     it. Narrowing it to the reading measure made the room a page like any other — which is
+     the one thing this room is not. */
+  #root .record-cartoon-field .record-book { max-width: min(1560px, 96vw); margin-inline: auto; }
 }
 
 /* ── THE ROOM'S READING VOICE ───────────────────────────────────────────────────

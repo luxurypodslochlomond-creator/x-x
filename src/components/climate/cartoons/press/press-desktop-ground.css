@@ -1,12 +1,12 @@
 /* Desktop is a connected newspaper spread. The painting stays outside the sheet;
    the cuttings, captions and sources share a baseline instead of floating on it. */
 @media screen and (min-width: 1024px) {
-  #root .record-cartoon-field .record-book { max-width: min(1180px, 92vw); margin-inline: auto; }
+  #root .record-cartoon-field .record-book { max-width: min(1560px, 96vw); margin-inline: auto; }
   #root .record-cartoon-field .press-room .record-shell-body {
-    max-width: none;
+    max-width: 1640px;
     margin: 1.5rem auto 2.5rem;
     padding: 0;
-    background: transparent;
+    background: rgb(var(--record-bone));
   }
   #root .record-cartoon-field .press-room .record-shell-content {
     max-width: none; padding: 0; background: transparent; box-shadow: none;
