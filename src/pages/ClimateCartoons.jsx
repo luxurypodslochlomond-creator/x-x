@@ -9,20 +9,8 @@ import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
-// ── THE ROOM IS SET, NOT DRESSED ───────────────────────────────────────────────
-// Brian, 18 November: "too kew and old batman … imagine when Marty McFly goes into the
-// future and picks up a comic". He is right, and the fault was structural rather than
-// decorative: the room was wearing the *signs* of a comic — black plates, halftone,
-// a tilted yellow title, caption bars, alternating tilt, an orbiting light — instead of
-// behaving like one. A cartoonist reads that as a page that does not trust the drawings.
-//
-// So the room now works the way a cartoon works: it makes an argument, in beats, and then
-// it gets out of the way of the pictures. The order is the argument — what this is, why
-// cartoons are here at all, the drawings themselves, their worldwide lineage, the fiction
-// kept honestly apart, the book that comes out of the 29th, the desk, and the sources last.
-//
-// Nothing was removed. Every drawing, credit, share control, drawer, link and source is
-// still on the page and still works; what has gone is the costume around them.
+// Human drawings lead; the record's explanation and AI-illustrated fiction follow.
+// Desktop is a newspaper spread. Original artwork, sources and controls stay intact.
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';
 import '@/components/climate/cartoons/press/press-desktop-ground.css';
@@ -41,11 +29,8 @@ export default function ClimateCartoons() {
       <div className="press-room-inner">
         <PressOpening />
 
-        {/* Why the drawings are on a climate record at all, told as three beats before the
-            wall — the argument first, the evidence after. */}
-        <CartoonWhy />
-
         <PressWall />
+        <CartoonWhy />
         {/* Human work and its sourced lineage stay ahead of AI-illustrated fiction. */}
         <CartoonWorld />
         <ComicReader />

@@ -201,6 +201,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             onClick={() => onSelect && onSelect(m)}
             aria-label={m.aria || m.label}
             aria-current={on ? 'true' : undefined}
+            data-kind={m.tone}
             title={m.label || m.title}
             className="record-entry-marker group absolute grid place-items-center p-0 bg-transparent border-0 cursor-pointer"
             style={{

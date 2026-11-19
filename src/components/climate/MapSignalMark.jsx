@@ -7,7 +7,7 @@ export default function MapSignalMark({ kind, className = '' }) {
   const Icon = ICONS[kind] || Sprout;
   return (
     <span aria-hidden="true" data-kind={kind} className={`record-map-symbol ${className}`}>
-      <Icon size="100%" strokeWidth={2.4} />
+      <Icon size="100%" strokeWidth={1.55} />
     </span>
   );
 }

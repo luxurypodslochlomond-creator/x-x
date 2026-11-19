@@ -22,7 +22,9 @@
   transition: color .18s ease;
 }
 .rec-art-drawing { display: block; flex-shrink: 0; }
-.rec-art-drawing svg { display: block; overflow: visible; }
+.rec-art-drawing svg { display: block; overflow: visible; stroke-width: 1.45; }
+.rec-art-drawing svg :is([stroke-width="2.1"], [stroke-width="2.2"], [stroke-width="2.6"]) { stroke-width: 1.65; }
+.rec-art-drawing svg [stroke-width="3.2"] { stroke-width: 2; }
 /* The caption is a printer's label under a cut mark: it names the drawing, in words a
    reader already knows. Sentence case at eleven pixels, as it was — small, but said
    plainly rather than whisperingly. */
@@ -35,7 +37,8 @@
   text-transform: uppercase;
   text-align: center;
 }
-.rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-mark)); }
+.rec-art-door:hover, .rec-art-door:active, .rec-art-door-active { color: rgb(var(--record-ink)); }
+.rec-art-door:is(:hover, .rec-art-door-active) .rec-art-caption { color: rgb(var(--record-mark)); }
 /* ── A TAP HAS TO BE ANSWERED AT ONCE ─────────────────────────────────────────────
    Every control in the record sets -webkit-tap-highlight-color: transparent, and that is
    right: a grey box flashing over a drawn mark is the browser putting its hand over the
@@ -52,7 +55,7 @@
    a page is loading. `transition: none` is the point of it: an acknowledgement that fades
    in over 180ms is not an acknowledgement. */
 .rec-art-door:active {
-  background-color: rgb(var(--record-ink) / 0.09);
+  background-color: rgb(var(--record-ink) / .035);
   transition: none;
 }
 .rec-art-door:active .rec-art-caption { color: rgb(var(--record-mark)); }
@@ -98,9 +101,14 @@
   letter-spacing: .04em;
   white-space: normal;
 }
-/* The door you are standing in is filled, the way the record's other open doors are
-   filled — a yellow cell with ink in it, not a hairline nobody can see. */
-.rec-mast-doors .rec-art-door-active { background-color: rgb(var(--record-signal)); }
+/* Selection marks the caption, never floods the drawing or its cell. */
+.rec-mast-doors .rec-art-door-active { background-color: transparent; }
+.rec-mast-doors .rec-art-door-active .rec-art-caption {
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-mark));
+  text-decoration-thickness: 1px;
+  text-underline-offset: .4em;
+}
 .rec-art-rail .rec-art-door-active .rec-art-drawing { box-shadow: 0 -1.5px 0 -0.5px rgb(var(--record-mark)); }
 
 /* ── WHERE YOU ARE, IN THE RECORD'S OWN VOICE ────────────────────────────────────
@@ -278,9 +286,7 @@
 /* The tongue is the one mark that opens something rather than going somewhere, so when it
    is open it carries a small glow in the record's borrowed red — the only glow in the rail,
    because a rail where everything glows says nothing about where you are. */
-.rec-art-door-wrap .rec-art-door-active .rec-art-drawing {
-  filter: drop-shadow(0 0 6px rgb(var(--record-mark) / .45));
-}
+.rec-art-door-wrap .rec-art-door-active .rec-art-drawing { filter: none; }
 /* The marks are the record's hand: drawn, inked, and big enough to be recognised at a
    glance without naming them first. The one you are standing in carries a short rule
    above it, so the dock says where you are once rather than shouting it. */
@@ -406,10 +412,14 @@
 @media (hover: hover) {
   .rec-index-grid .rec-art-door:hover { background-color: rgb(var(--record-bone)); }
 }
-/* Where you are, in this sheet, is a filled cell and the record's red — the same two
-   signals the masthead uses, so a reader learns them once. */
-.rec-index-grid .rec-art-door-active { background-color: rgb(var(--record-bone)); }
-.rec-index-grid .rec-art-door-active .rec-art-caption { color: rgb(var(--record-mark)); }
+/* The directory uses the same fine caption mark as the masthead. */
+.rec-index-grid .rec-art-door-active { background-color: transparent; }
+.rec-index-grid .rec-art-door-active .rec-art-caption {
+  color: rgb(var(--record-mark));
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .4em;
+}
 
 /* A wide sheet has room for five across, so an index of twenty doors is four short rows
    instead of seven tall ones — the difference between a list you scan and a list you

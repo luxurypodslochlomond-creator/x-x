@@ -220,6 +220,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
               key={key}
               type="button"
               aria-pressed={only === key}
+              data-kind={key}
               onClick={() => { setOnly(only === key ? null : key); setPicked(null); }}
               className={`flex min-h-11 items-center gap-1.5 px-1.5 uppercase tracking-[0.06em] ${only && only !== key ? 'opacity-40' : ''} ${only === key ? 'underline underline-offset-4' : ''}`}
             >

@@ -1,82 +1,127 @@
-/* Desktop belongs to the continuous painting, not a second reading sheet.
-   Paper protects actual words; the space around drawings stays open. */
+/* Desktop is a connected newspaper spread. The painting stays outside the sheet;
+   the cuttings, captions and sources share a baseline instead of floating on it. */
 @media screen and (min-width: 1024px) {
-  #root .record-cartoon-field .record-book {
-    max-width: none;
-    margin-inline: 0;
+  #root .record-cartoon-field .record-book { max-width: none; margin-inline: 0; }
+  #root .record-cartoon-field .press-room .record-shell-body {
+    max-width: 1640px;
+    margin: 1.5rem auto 2.5rem;
+    padding: 0;
+    background: rgb(var(--record-bone));
   }
-
-  /* This shared-shell surface survived the earlier chapter-level changes. */
   #root .record-cartoon-field .press-room .record-shell-content {
-    background: transparent;
-    box-shadow: none;
+    max-width: none; padding: 0; background: transparent; box-shadow: none;
   }
-  #root .record-cartoon-field .press-room-inner {
-    padding: 0 clamp(1.5rem, 3vw, 4rem) 5.5rem;
-  }
+  #root .record-cartoon-field .press-room-inner { max-width: none; padding: 2rem clamp(1.5rem, 3vw, 3.5rem) 3rem; }
   #root .record-cartoon-field .press-room-inner > * {
-    background: transparent;
-    box-shadow: none;
-    border-top: 0;
-    padding-inline: 0;
-    margin-bottom: clamp(2rem, 3vw, 4rem);
+    margin: 0; padding: 2rem 0; background: transparent; box-shadow: none;
+    border: 0; border-top: 1px solid rgb(var(--record-ink) / .45);
   }
+  #root .record-cartoon-field .press-room-inner > :first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 
-  #root .press-room .press-opening {
-    grid-template-columns: minmax(20rem, .8fr) minmax(0, 1.2fr);
-    column-gap: clamp(2rem, 3vw, 4rem);
+  /* A masthead across the spread, with the introduction and original cover below. */
+  #root .record-cartoon-field .press-opening {
+    display: grid; grid-template-columns: minmax(18rem, .75fr) minmax(0, 1.25fr);
+    gap: 1.5rem 2.5rem; align-items: start;
   }
-  #root .press-room .comic-catalogue {
-    grid-template-columns: minmax(0, 1fr) minmax(13rem, .58fr);
-    column-gap: clamp(1.25rem, 2vw, 2rem);
+  #root .record-cartoon-field .press-opening-words { display: contents; }
+  #root .record-cartoon-field .press-opening-masthead {
+    grid-column: 1 / -1; grid-row: 1; padding-block: .75rem 0;
+    border-top: 3px double rgb(var(--record-ink));
   }
-  #root .press-room .comic-catalogue > img {
-    width: 100%;
-    max-height: none;
+  #root .record-cartoon-field .press-room .press-title {
+    margin-top: .35rem; font-size: clamp(3.5rem, 5.2vw, 6rem);
+    font-weight: 700 !important; line-height: 1 !important;
+    letter-spacing: -.055em !important; text-transform: none; overflow-wrap: normal;
   }
-  /* The shared headline tracking was splitting PICTURE in the middle. */
-  #root .press-room .press-title {
-    font-size: clamp(2.75rem, 4.2vw, 5.25rem);
-    font-weight: 700 !important;
-    line-height: 1.02 !important;
-    letter-spacing: -.045em !important;
-    text-transform: none;
-    overflow-wrap: normal;
+  #root .record-cartoon-field .press-room .press-standfirst {
+    margin-top: .6rem; font-family: var(--font-reading); font-size: 1.25rem;
+    font-weight: 400; color: rgb(var(--record-ink));
   }
+  #root .record-cartoon-field .press-room .cartoon-signal {
+    margin-top: 1rem; padding-block: .6rem; font-size: .72rem; letter-spacing: .07em;
+    border-color: rgb(var(--record-ink) / .35);
+  }
+  #root .record-cartoon-field .press-opening-words > .press-scope {
+    grid-column: 1; max-width: 43ch; margin: 0; font-size: 1rem; line-height: 1.65;
+  }
+  #root .record-cartoon-field .press-opening-words > .press-scope:nth-of-type(1) { grid-row: 2; }
+  #root .record-cartoon-field .press-opening-words > .press-scope:nth-of-type(2) { grid-row: 3; }
+  #root .record-cartoon-field .press-opening-words > .press-scope:nth-of-type(3) { grid-row: 4; }
+  #root .record-cartoon-field .press-room .press-contents {
+    grid-column: 1; grid-row: 5; align-self: start; margin: 0; padding-top: .8rem;
+    gap: .55rem 1.2rem; border-color: rgb(var(--record-ink) / .3);
+  }
+  #root .record-cartoon-field .press-room .press-contents a[href="#cartoon-your-turn"] {
+    background: transparent; padding: 0 0 1px; color: rgb(var(--record-red));
+    border-bottom: 1px solid currentColor;
+  }
+  #root .record-cartoon-field .press-opening-cover {
+    grid-column: 2; grid-row: 2 / 6; margin: 0; padding-inline-start: 2rem;
+    border-inline-start: 1px solid rgb(var(--record-ink) / .25);
+  }
+  #root .record-cartoon-field .press-room .comic-catalogue {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, .82fr); gap: 1.25rem; align-items: start;
+  }
+  #root .record-cartoon-field .press-room .comic-catalogue > img { width: 100%; max-height: none; }
+  #root .record-cartoon-field .press-room .comic-catalogue-band { padding: 0; background: none; gap: .65rem; }
+  #root .record-cartoon-field .press-room .comic-catalogue-line { font-size: .875rem; line-height: 1.6; }
+  #root .record-cartoon-field .press-room :is(.comic-catalogue-cover-credit, .comic-catalogue-eyebrow) { font-size: .68rem; letter-spacing: .08em; }
 
-  #root .press-room :is(
-    .press-opening-words, .comic-catalogue-band,
-    .comic-why > .comic-section-title, .comic-why-list > li, .comic-why-links,
-    .press-wall-head, .press-sheet-rail, .press-wall-colophon,
-    .press-state, .press-more, .press-wall-section > section,
-    .cartoon-fiction-head, .cartoon-story-reel, .comic-panel-heading,
-    .comic-gesture, .comic-speech, .comic-ending, .comic-theme,
-    .comic-turner, .comic-tap-hint, .comic-make-door, .comic-art-credit,
-    .cartoon-world > .press-eyebrow, .cartoon-world-title, .cartoon-world-line,
-    .cartoon-world-name, .cartoon-world-odoi, .cartoon-world-source,
-    .comic-session, .comic-anthology,
-    .comic-workshop > .comic-section-title, .comic-workshop-note, .comic-drawer,
-    .comic-sources > *
-  ) {
-    background: rgb(var(--record-paper));
-    padding: 1.25rem;
-    max-width: 100%;
-    box-sizing: border-box;
+  /* One lead drawing, then independent newspaper cuttings with natural image heights. */
+  #root .record-cartoon-field .press-room .press-wall-head { width: 100%; padding: 0 0 1.5rem; background: none; border: 0; }
+  #root .record-cartoon-field .press-room .press-wall-title { font-size: 3rem; font-weight: 700 !important; letter-spacing: -.04em !important; text-transform: none; }
+  #root .record-cartoon-field .press-room .press-wall { display: block; columns: 2; column-gap: 2rem; }
+  #root .record-cartoon-field .press-room .press-sheet {
+    display: block; break-inside: avoid; margin: 0 0 2rem; padding: 1rem;
+    background: rgb(var(--record-paper)); border: 0; border-top: 1px solid rgb(var(--record-ink));
+    box-shadow: 0 1px 0 rgb(var(--record-ink) / .18);
   }
-  #root .press-room :is(
-    .comic-why > .comic-section-title, .comic-why-links, .press-wall-head,
-    .press-wall-colophon, .cartoon-fiction-head, .comic-panel-heading,
-    .comic-gesture, .comic-speech, .comic-ending, .comic-theme,
-    .comic-turner, .comic-tap-hint, .comic-make-door, .comic-art-credit,
-    .cartoon-world > .press-eyebrow, .cartoon-world-title, .cartoon-world-line,
-    .cartoon-world-source, .comic-workshop > .comic-section-title,
-    .comic-workshop-note, .comic-sources > *
-  ) { width: fit-content; }
+  #root .record-cartoon-field .press-room .press-sheet-art { background: transparent; }
+  #root .record-cartoon-field .press-room .press-sheet-art .comic-wall-artwork { width: 100%; max-height: none; object-fit: contain; }
+  #root .record-cartoon-field .press-room .press-sheet-rail { padding: 1rem 0 0; background: none; gap: .45rem; }
+  #root .record-cartoon-field .press-room .press-sheet-number { font-size: .75rem; letter-spacing: .08em; }
+  #root .record-cartoon-field .press-room .press-sheet-title { font-weight: 700 !important; font-size: 1.5rem; letter-spacing: -.02em !important; text-transform: none; }
+  #root .record-cartoon-field .press-room .press-sheet-by { font-size: .8rem; font-weight: 400; }
+  #root .record-cartoon-field .press-room .press-sheet-words { font-size: 1.05rem; border-left-width: 1px; }
+  #root .record-cartoon-field .press-room .press-sheet--lead { column-span: all; padding: 0 0 1rem; border-top: 0; }
+  #root .record-cartoon-field .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: 78vh; }
+  #root .record-cartoon-field .press-room .press-sheet--lead .press-sheet-rail {
+    display: grid; padding: 1rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 2rem;
+  }
+  #root .record-cartoon-field .press-room .press-sheet-look { background: rgb(var(--record-paper)); font-size: .65rem; }
+  #root .record-cartoon-field .press-room :is(.press-wall-colophon, .press-state, .press-more) { background: none; }
 
-  #root .press-room .comic-why-list { gap: 1.5rem; }
-  #root .press-room .comic-why-list > li { border: 0; }
-  #root .press-room .press-sheet { border: 0; }
-  #root .press-room .cartoon-world-names { gap: 1rem; border: 0; }
-  #root .press-room .cartoon-world-name { border: 0; }
-  #root .press-room .comic-sources > .comic-source-link { display: inline-flex; }
+  /* The record's explanation follows the human work, at the scale of a margin note. */
+  #root .record-cartoon-field .press-room .comic-why { gap: 1rem; }
+  #root .record-cartoon-field .press-room .comic-why > .comic-section-title { font-size: 1.5rem; font-weight: 700 !important; letter-spacing: -.025em !important; text-transform: none; }
+  #root .record-cartoon-field .press-room .comic-why-list { gap: 2rem; }
+  #root .record-cartoon-field .press-room .comic-why-list > li { font-size: 1.25rem; line-height: 1.4; border-top: 0; padding-top: 0; }
+
+  #root .record-cartoon-field .press-room .cartoon-lineage-heading { padding: 0 0 1rem; background: none; border: 0; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-title { font-size: 3rem; letter-spacing: -.04em !important; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-heading > p:not(.cartoon-lineage-kicker) { max-width: 80ch; font-size: 1rem; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-body { padding: 0; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-group { padding-block: 1.5rem; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-group + .cartoon-lineage-group { border-top-width: 1px; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-number { font-size: 1rem; padding-top: .5rem; font-weight: 400; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-person { padding: 1.2rem; background: rgb(var(--record-paper)); }
+  #root .record-cartoon-field .press-room .cartoon-lineage-list { gap: 1rem; }
+  #root .record-cartoon-field .press-room .cartoon-lineage-doors a:first-child { background: none; padding-inline: 0; text-decoration: underline; color: rgb(var(--record-red)); }
+  #root .record-cartoon-field .press-room .cartoon-lineage-odoi { border-left-width: 1px; background: rgb(var(--record-paper)); }
+
+  #root .record-cartoon-field .press-room :is(.comic-reader, .press-facing, .comic-workshop, .comic-sources) { margin-top: 0; }
+  #root .record-cartoon-field .press-room .comic-sources { max-width: none; }
+  #root .record-cartoon-field .press-room :is(.comic-panel-heading h2, .comic-section-title, .comic-session-title, .comic-anthology-title) { letter-spacing: -.025em !important; text-transform: none; }
+  #root .record-cartoon-field .press-room :is(.comic-session, .comic-anthology) { padding-top: 0; }
+  #root .record-cartoon-field .press-room .comic-workshop > .comic-section-title { font-size: 2rem; font-weight: 700 !important; }
+  #root .record-cartoon-field .press-room .comic-reader > .comic-art-credit { padding-top: .75rem; border-top: 1px solid rgb(var(--record-ink) / .2); }
+  #root .record-cartoon-field .press-room :is(#press-wall, #cartoon-strip, #press-book, #cartoon-your-turn, #cartoon-why-title) { scroll-margin-top: 18rem; }
+}
+@media screen and (min-width: 1024px) and (max-width: 1399px) {
+  #root .record-cartoon-field .press-room .record-shell-body { margin-inline: 1.25rem; }
+  #root .record-cartoon-field .press-room .comic-catalogue { grid-template-columns: minmax(0, 1fr); }
+  #root .record-cartoon-field .press-room .comic-catalogue > img { max-width: 22rem; margin-inline: auto; }
+}
+@media screen and (min-width: 1400px) {
+  #root .record-cartoon-field .press-room .record-shell-body { width: calc(100% - 5rem); }
 }
