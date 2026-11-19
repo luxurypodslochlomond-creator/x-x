@@ -1,5 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// The home page's sheet lives in this file, and it is loaded HERE rather than borrowed from
+// the opening that used to stand in this place: when that component went, its stylesheet
+// went with it, so the paper under the record's words stopped being declared at all and the
+// text was ink on a painting. One import, and the sheet is a sheet again.
+import '@/components/climate/record-home.css';
 import ShareCardButton from './ShareCardButton';
 import { buildRecordShareCard } from './shareCardImage';
 import { RECORD_LINK, RECORD_SHARE_TITLE } from './shareRecordCard';
@@ -85,10 +90,10 @@ export default function RecordCoverPlate({ copy, counts = {}, selected, onSelect
                 type="button"
                 onClick={() => onSelect(key)}
                 aria-pressed={open}
-                className={`group flex min-h-[86px] flex-col justify-between gap-2 border-l border-record-ink/20 px-3 py-3 text-left transition-colors first:border-l-0 hover:bg-record-ink/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:min-h-[104px] ${open ? 'bg-record-ink/10' : ''}`}
+                className={`group flex min-h-[96px] flex-col justify-between gap-2 border-l border-record-ink/20 px-3 py-3 text-left transition-colors first:border-l-0 hover:bg-record-ink/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:min-h-[124px] ${open ? 'bg-record-ink/10' : ''}`}
               >
                 <span className="flex w-full items-start justify-between gap-2">
-                  <Mark size={30} className="text-record-ink transition-transform duration-200 group-hover:-translate-y-0.5" />
+                  <Mark size={40} className="text-record-ink transition-transform duration-200 group-hover:-translate-y-0.5" />
                   <span className="font-mono text-[15px] leading-none tabular-nums text-record-red">
                     {counts[key] ?? 0}
                   </span>
@@ -103,10 +108,10 @@ export default function RecordCoverPlate({ copy, counts = {}, selected, onSelect
             <Link
               key={to}
               to={to}
-              className="group flex min-h-[86px] flex-col justify-between gap-2 border-l border-record-ink/20 px-3 py-3 text-record-ink/80 transition-colors hover:bg-record-ink/5 hover:text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:min-h-[104px]"
+              className="group flex min-h-[96px] flex-col justify-between gap-2 border-l border-record-ink/20 px-3 py-3 text-record-ink/80 transition-colors hover:bg-record-ink/5 hover:text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:min-h-[124px]"
             >
               <span className="flex w-full items-start justify-between gap-2">
-                <Mark size={30} className="transition-transform duration-200 group-hover:-translate-y-0.5" />
+                <Mark size={40} className="transition-transform duration-200 group-hover:-translate-y-0.5" />
                 <span aria-hidden="true" className="font-mono text-[13px] leading-none text-record-muted">→</span>
               </span>
               <span className="text-[9.5px] font-black uppercase leading-none tracking-[0.16em]">{label}</span>

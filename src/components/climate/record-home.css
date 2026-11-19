@@ -49,11 +49,20 @@
    A broadsheet has done that for three hundred years because it is the order a person
    reads in — and it is a bolder identity than a dark photograph with words laid over it,
    which is what every other page on the internet does. */
-.climate-record .record-home-field .record-book { background-color: rgb(var(--record-paper)); }
+/* The two classes are on the SAME element, so this is a compound selector and not a
+   descendant one. Written the other way round it matched nothing at all, the sheet stayed
+   see-through, and the record's own words sat in ink on a painting. */
+.climate-record.record-home-field .record-book { background-color: rgb(var(--record-paper)); }
 
 .record-cover-plate { background-color: transparent; }
+/* A plate, not a hero. At fifty-four per cent of the glass the picture owned the whole
+   first screen, so the masthead and the record's own drawings began below the fold and a
+   reader's first impression was a photograph — Brian: "more about our coolasfuck icons than
+   the coolasfuck images." A plate at about a third leaves the picture its full width and
+   lets the title and the six drawings arrive in the same breath, which is the order the
+   record actually wants to be read in. */
 .record-cover-plate-picture {
-  height: clamp(230px, 40vh, 400px);
+  height: clamp(200px, 30vh, 300px);
   background-color: rgb(var(--record-earth));
   background-image: var(--record-cover);
   background-size: cover;
@@ -62,7 +71,7 @@
 .record-cover-plate-title { font-size: clamp(34px, 4.6vw, 74px); }
 @media (min-width: 1024px) {
   .record-cover-plate-picture {
-    height: clamp(320px, 54vh, 580px);
+    height: clamp(260px, 36vh, 420px);
     background-position: center 46%;
   }
 }
