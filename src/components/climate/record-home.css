@@ -135,7 +135,7 @@
     height: 6rem;
     background-position: center 58%;
   }
-  /* The source order is the reading order: quotation, rooms, cover. */
+  /* The source order is the reading order: title, quotation, rooms. */
   .climate-record .record-home-page .record-cover-plate-title {
     max-inline-size: 29ch;
     font-size: clamp(2rem, 2.7vw, 3rem);

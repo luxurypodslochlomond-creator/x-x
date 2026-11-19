@@ -8,15 +8,14 @@ const RECORD_CARD = { id: 'record-of-the-time', title: RECORD_SHARE_TITLE };
 
 export default function RecordCoverPlate({ copy }) {
   return (
-    <section aria-labelledby="record-home-title" className="record-cover-plate record-home-opening w-full text-record-ink">
-      <div aria-hidden="true" className="record-cover-plate-picture" />
-      <div className="mx-auto w-full max-w-[1180px] px-4 pt-6 lg:px-10">
-        <p className="record-header-type border-b border-record-ink/25 pb-2 text-[10px] font-black uppercase tracking-[0.2em] text-record-red">
-          {copy.service}
-        </p>
-        <h1 id="record-home-title" className="record-cover-plate-title mt-4 max-w-[20ch] font-display uppercase leading-[0.96] tracking-[-0.015em] text-record-ink">
+    <section aria-labelledby="record-home-title" className="record-cover-plate record-home-opening w-full border-t-4 border-record-red text-record-ink">
+      <div className="mx-auto w-full max-w-[1180px] px-4 pt-4 lg:px-10">
+        <h1 id="record-home-title" className="record-cover-plate-title m-0 max-w-[20ch] font-display uppercase leading-[0.96] tracking-[-0.015em] text-record-ink">
           {copy.title_a} <span className="text-record-red">{copy.title_b}</span> {copy.title_c}
         </h1>
+        <p className="record-header-type mt-3 text-[10px] font-black uppercase tracking-[0.2em] text-record-red">
+          {copy.service}
+        </p>
         <p className="record-meta mt-4 max-w-[58ch] text-base leading-relaxed text-record-ink/80">
           {copy.sub}
         </p>

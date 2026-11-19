@@ -437,8 +437,10 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* Jane's voice follows the masthead's red rule; the four rooms follow her words. */}
+      {/* The name meets the top navigation; Jane's words and the four rooms follow. */}
       <div className="record-home-flow">
+      <RecordCoverPlate copy={t} />
+
       <div className="record-home-voice-band">
         <RecordPaintedBand strength={0.75} soft>
           <RecordHomeVoice />
@@ -456,8 +458,6 @@ export default function TogetherChangeClimate() {
           }}
         />
       </div>
-
-      <RecordCoverPlate copy={t} />
 
       {/* ── THE TOP CRAWL — Janine's credited photographs, directly under the masthead.
              Her ask was for the pictures to sit high on the page, and they still do: they
