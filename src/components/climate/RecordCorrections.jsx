@@ -8,7 +8,11 @@ export default function RecordCorrections() {
   const corrections = useCorrections();
   return (
     <section id="corrections" className="record-method-wide corr-section" data-record-layout="compact" aria-labelledby="corrections-title">
-      <header className="corr-heading"><MarkCorrection size={24} /><h2 id="corrections-title">Corrections</h2></header>
+      <header className="corr-heading">
+        <MarkCorrection size={24} />
+        <h2 id="corrections-title">Corrections</h2>
+        {!!corrections?.length && <span className="corr-count">{corrections.length}</span>}
+      </header>
       <p className="corr-intro">What we got wrong, and what changed. Open a note to read it in full.</p>
       {!corrections && <p className="corr-intro" role="status">Loading corrections…</p>}
       {corrections?.length === 0 && <p className="corr-intro">No correction notes are recorded yet.</p>}

@@ -4,7 +4,7 @@ import { base44 } from '@/api/base44Client';
 import NewsEntryReferences from '@/components/climate/NewsEntryReferences';
 import '@/components/climate/news-index.css';
 import RecordBackBar from '@/components/climate/RecordBackBar';
-import NewsEntryCard from '@/components/climate/NewsEntryCard';
+import NewsEntryBody from '@/components/climate/NewsEntryBody';
 import { recordAddress } from '@/components/climate/recordAddress';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
@@ -37,7 +37,7 @@ export default function ClimateWireEntry() {
         {loading && <p className="news-state" role="status">Loading the account…</p>}
         {!loading && !entry && <div className="news-state"><p>This account is not available on the public record.</p><Link to="/ClimateWire" className="news-text-action">← Back to climate news</Link></div>}
         {entry && <>
-          <NewsEntryCard entry={entry} linked={false} />
+          <NewsEntryBody entry={entry} />
           <TapToPlayFilm url={entry.source_url} title={entry.headline} credit={entry.image_credit ? `Film · ${entry.image_credit}` : entry.source_name ? `Film · ${entry.source_name}` : null} />
           <NewsEntryReferences entry={entry} citation={citation} />
           <p className="news-detail-note">Something wrong? <Link to="/ClimateMethod#say">Report it</Link>. Corrections stay with the account, dated and visible.</p>
