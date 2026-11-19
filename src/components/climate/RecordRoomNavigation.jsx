@@ -51,7 +51,7 @@ export default function RecordRoomNavigation({ counts = {}, selected, onSelect }
           aria-pressed={selected === key}
           aria-controls="record-entries"
           data-room={key}
-          className="record-room-link min-w-0 border-b-2 border-transparent px-3 py-4 text-left text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark lg:px-4 lg:py-5"
+          className="record-room-link min-w-0 border-b-2 border-transparent px-3 py-4 text-left text-record-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-record-paper lg:px-4 lg:py-5"
         >
           <span className="flex items-start justify-between gap-2">
             <Mark size={26} className="h-[26px] w-[26px] shrink-0 text-record-ink lg:h-8 lg:w-8" />

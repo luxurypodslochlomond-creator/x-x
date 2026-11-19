@@ -1,39 +1,41 @@
 import React from 'react';
 
-// ── FOUR MARKS, AND THE SAME RULE AS EVERY OTHER DOOR ─────────────────────────
-// Every other door on this record is printed in one hand: solid masses, nothing
-// thinner than a stroke, and exactly one element in the record's red — the part
-// that carries the meaning. The four rooms were the exception. Their marks were
-// pictures of a seedling, a flame, three heads and a spade, drawn in the subject's
-// own colour, so the backbone of the record was the one place its own rule did not
-// hold. A critic would say the obvious thing: they were illustrations of four words,
-// not four objects.
+// ── FOUR CUTS FROM ONE BLOCK ──────────────────────────────────────────────────
+// These are linocut, not icons. A mark cut from a block has an irregular edge and a
+// shape you can only get by taking material away, which is why it reads as something
+// somebody made rather than as something a framework supplied. That is the whole
+// difference between this record and a media platform, and it costs nothing: the same
+// two inks and one red as every other door, drawn with a hand in it.
 //
-// So each room is an object now, and each one says its verb in its shape:
+// The first attempt at these was four equal bars and a wedge, which is a bar chart —
+// the exact corporate texture the record is trying not to have. So no two of these
+// share a grid now, and no two share a direction:
 //
-//   Solutions — the keystone. A red wedge set over two shoulders: the one stone that
-//               holds an arch up, and the stone you can carry to the next valley.
-//               What works somewhere is kept here so it can be built again.
-//   Crises    — the fracture. One mass split down the middle, the seam in red and
-//               widening towards the ground. Not a flame, not a warning sign: the
-//               ground itself giving way.
-//   Actions   — the spade. Red handle, blade, and the short line it breaks. Something
-//               done, not something announced.
-//   Groups    — the row. Three people standing on one red ground line: three masses,
-//               one floor.
+//   Solutions — a spliced beam. Two lengths of timber laid end to end with the joint
+//               bound in red. What worked somewhere, joined onto somewhere else: it
+//               holds, and you can carry the joint to the next valley.
+//   Crises    — the same mass, with a bite taken out of its foot and the bite left in
+//               red. Not a flame and not a warning sign: something that was whole and
+//               is not any more.
+//   Actions   — a spade put into the ground, set at a slight angle because a person
+//               put it there. Red handle, ink blade, the short line it breaks.
+//   Groups    — four heads of different sizes standing on one red line. Not three
+//               equal columns: a crowd, with somebody taller and somebody smaller,
+//               which is what a group actually is.
 //
-// Two inks and one red in every one. No gradient, no outline, no borrowed symbol, no
-// style of any decade. An arch, a split, a tool and a row are as old as building and
-// will read the same in ten thousand years, because they are not a fashion — which is
-// the only test a mark on a record that means to last actually has to pass.
+// Nothing here is a borrowed symbol, nothing is a gradient, nothing is a trend. A
+// joint, a bite, a spade and a crowd are as old as making things together, so they
+// will read the same in ten thousand years — which is the only test a mark on a
+// record that means to last has to pass.
 const BASE = { viewBox: '0 0 40 40', fill: 'currentColor', stroke: 'none' };
 
 export function RoomMarkSolution({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <path d="M13 4h14l6.4 11.4H6.6z" className="text-record-mark" />
-      <rect x="4" y="19.4" width="11.4" height="16.6" />
-      <rect x="24.6" y="19.4" width="11.4" height="16.6" />
+      {/* the two lengths, and the red binding across the joint */}
+      <path d="M4 15.6h13.4v9.4H4z" />
+      <path d="M22.6 15.6H36v9.4H22.6z" />
+      <path d="M16.6 12.4h6.8v15.8h-6.8z" className="text-record-mark" />
     </svg>
   );
 }
@@ -41,9 +43,9 @@ export function RoomMarkSolution({ size = 26, className = '' }) {
 export function RoomMarkCrisis({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="4" y="5" width="11.6" height="30" />
-      <rect x="24.4" y="5" width="11.6" height="30" />
-      <path d="M16.4 5h7.2l-2.6 30h-4.4z" className="text-record-mark" />
+      {/* a mass with its foot given way, the break left in red */}
+      <path d="M4.6 6h30.8v16.4l-8.6 12.2H4.6z" />
+      <path d="M35.4 22.4 26.8 34.6 24 22.4z" className="text-record-mark" />
     </svg>
   );
 }
@@ -51,9 +53,11 @@ export function RoomMarkCrisis({ size = 26, className = '' }) {
 export function RoomMarkAction({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="16.4" y="3.6" width="7.2" height="11.4" className="text-record-mark" />
-      <path d="M12.4 15h15.2l-2.8 13.6H15.2z" />
-      <rect x="13" y="33.4" width="14" height="4" />
+      <g transform="rotate(-7 20 20)">
+        <path d="M16.2 3.4h7.6v11.6h-7.6z" className="text-record-mark" />
+        <path d="M12.2 15h15.6l-2.9 13.8H15.1z" />
+        <path d="M13.4 33h13.2v4.2H13.4z" />
+      </g>
     </svg>
   );
 }
@@ -61,10 +65,12 @@ export function RoomMarkAction({ size = 26, className = '' }) {
 export function RoomMarkGroups({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <rect x="5" y="10.6" width="7.6" height="18.6" />
-      <rect x="16.2" y="5" width="7.6" height="24.2" />
-      <rect x="27.4" y="10.6" width="7.6" height="18.6" />
-      <rect x="4" y="32.4" width="32" height="4.6" className="text-record-mark" />
+      {/* four heads, none of them the same size, on one ground */}
+      <circle cx="7.6" cy="18.4" r="4.6" />
+      <circle cx="16.6" cy="13.6" r="5.6" />
+      <circle cx="25.4" cy="15.4" r="5.2" />
+      <circle cx="33.4" cy="19.2" r="4.2" />
+      <path d="M3.6 28.6h32.8v4.6H3.6z" className="text-record-mark" />
     </svg>
   );
 }
