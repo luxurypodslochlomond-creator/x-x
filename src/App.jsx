@@ -154,6 +154,7 @@ const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
 const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
+const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoonsThread'));
 const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
 const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
@@ -382,6 +383,11 @@ const AuthenticatedApp = () => {
           bookmarked and printed again next term and the record never learns who printed it. */}
       <Route path="/ClimateCartoons/Print" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonPrintPage /></ClimateLayout>} />
       <Route path="/ClimateCartoons/Exhibition" element={<ClimateCartoonExhibitionPage />} />
+      {/* ── READING THE THREAD ──
+          One address that opens the first drawing full size and lets a room arrow
+          through them in the wall's own order — so on a call the drawings can be read
+          one after another without anybody hunting for a plate to tap. */}
+      <Route path="/ClimateCartoons/Thread" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsThreadPage /></ClimateLayout>} />
 
       {/* The 29th, written down: one address Janine can send to CEEW, to the festival's
           curator or to a classroom. It carries the hour, what happens to the drawings and

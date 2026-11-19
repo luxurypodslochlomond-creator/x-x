@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import CartoonPlate from '@/components/climate/cartoons/CartoonPlate';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
@@ -15,6 +16,7 @@ export default function CartoonWall() {
         <p className="comic-opening-eyebrow record-meta"><TinyCrowd size={26} className="cmark-inline" />Human hands. Different perspectives.</p>
         <h2 id="cartoon-wall-title" className="comic-section-title">The people’s pages.</h2>
         <p className="record-meta">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
+        <p className="record-meta"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
       </header>
       {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the original drawings…</p>}
       {wall.isError && <div className="comic-wall-empty comic-error-note" role="alert"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}

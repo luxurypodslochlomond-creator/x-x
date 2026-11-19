@@ -53,6 +53,7 @@ export default function PressWall() {
         <p className="press-eyebrow">Human hands · different perspectives</p>
         <h2 id="press-wall-title" className="press-wall-title">The people’s pages.</h2>
         <p className="press-wall-line">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
+        <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
       </header>
 
       {wall.isPending && (
