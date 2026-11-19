@@ -35,6 +35,17 @@ export default function PressWall() {
     return () => clearTimeout(timer);
   }, [marked]);
 
+  // A link from a cartoonist's own page — or one they sent to a gallery — carries the drawing's
+  // id in the address, so the wall opens at that drawing rather than at the top of the room.
+  const wanted = new URLSearchParams(window.location.search).get('drawing');
+  useEffect(() => {
+    if (!wanted || !wall.cartoons.length) return;
+    const node = document.getElementById(`drawing-${wanted}`);
+    if (!node) return;
+    node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setMarked(wanted);
+  }, [wanted, wall.cartoons.length]);
+
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">
       <header className="press-wall-head">

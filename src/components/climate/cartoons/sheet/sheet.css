@@ -1,0 +1,203 @@
+/* ── A DRAWING ON A SHEET SOMEBODY CAN HANG ────────────────────────────────────
+   Francis has spent thirteen years putting other people's drawings on walls: a biennial in
+   Lagos, a campaign that reached Bonn. What he has never had is a way to take one drawing
+   out of a record and put it on a wall in ten seconds, with the artist's name, where it came
+   from, the drawer's own line and the credit all already on it.
+
+   So this is a sheet, not a lightbox. It prints as an A3 poster with the drawing whole — never
+   cropped to a card shape — and its own address printed at the foot, because a poster in a hall
+   is only worth hanging if the person standing in front of it can find the drawing again. The
+   address is a plain line of type rather than a square code pointing at somebody else's service:
+   a printed address still works in fifty years, and it depends on nobody. */
+
+.sheet-page {
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem) clamp(1rem, 3vw, 2.5rem) 3rem;
+  background: rgb(var(--record-paper));
+  color: rgb(var(--record-ink));
+  font-family: var(--font-record-ui);
+}
+
+.sheet-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 70rem;
+  margin: 0 auto 1.25rem;
+}
+.sheet-tools-right { display: flex; flex-wrap: wrap; gap: .5rem; }
+.sheet-tool,
+.sheet-tools button {
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .55rem .8rem;
+  border: 1px solid rgb(var(--record-ink) / .35);
+  background: transparent;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease;
+}
+.sheet-tool:hover,
+.sheet-tools button:hover { border-color: rgb(var(--record-red)); color: rgb(var(--record-red)); }
+
+.sheet-paper {
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 2.5vw, 2.5rem);
+  background: #fff;
+  border: 1px solid rgb(var(--record-ink) / .25);
+}
+
+.sheet-masthead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1rem;
+  justify-content: space-between;
+  padding-bottom: .6rem;
+  border-bottom: 2px solid rgb(var(--record-ink));
+  font-size: .66rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+
+.sheet-art { display: flex; justify-content: center; padding: clamp(1rem, 2vw, 1.75rem) 0; }
+.sheet-art img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 76vh;
+  object-fit: contain;
+}
+
+.sheet-body { display: grid; gap: .55rem; border-top: 2px solid rgb(var(--record-ink)); padding-top: .9rem; }
+.sheet-kicker {
+  margin: 0;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+.sheet-artist {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  line-height: 1.05;
+}
+.sheet-title { margin: 0; font-size: clamp(1rem, 1.6vw, 1.25rem); font-style: italic; }
+.sheet-words {
+  margin: .35rem 0 0;
+  padding-left: .85rem;
+  border-left: 3px solid rgb(var(--record-red));
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.5;
+}
+.sheet-about { margin: 0; font-size: .82rem; color: rgb(var(--record-muted)); }
+.sheet-about a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+
+.sheet-facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: .3rem .9rem;
+  margin: .5rem 0 0;
+  font-size: .78rem;
+}
+.sheet-facts dt {
+  padding-top: .1rem;
+  font-size: .62rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.sheet-facts dd { margin: 0; overflow-wrap: anywhere; }
+
+.sheet-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.5rem;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: .75rem;
+  padding-top: .6rem;
+  border-top: 1px solid rgb(var(--record-ink) / .25);
+}
+.sheet-address {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.sheet-note { margin: 0; max-width: 34rem; font-size: .7rem; color: rgb(var(--record-muted)); }
+
+.sheet-state { max-width: 40rem; margin: 3rem auto; text-align: center; display: grid; gap: .75rem; justify-items: center; }
+
+/* ── ONE CARTOONIST'S OWN ADDRESS ───────────────────────────────────────────────
+   The wall is the room; this is one hand's page in it. A cartoonist can send this single
+   address to a gallery, a paper or a festival, and everything they have given the record is
+   there together, in their name, with the goals they have answered. */
+.artist-page { display: grid; gap: 1.5rem; }
+.artist-head { display: grid; gap: .35rem; border-bottom: 2px solid rgb(var(--record-ink)); padding-bottom: .8rem; }
+.artist-kicker {
+  margin: 0;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+.artist-name { margin: 0; font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1.05; }
+.artist-line { margin: 0; font-size: .88rem; color: rgb(var(--record-muted)); }
+.artist-list { display: grid; gap: 2rem; }
+.artist-drawing { display: grid; gap: .75rem; padding-bottom: 1.75rem; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+.artist-drawing:last-child { border-bottom: 0; padding-bottom: 0; }
+.artist-art { display: block; }
+.artist-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(var(--record-ink) / .2);
+  background: #fff;
+}
+.artist-rail { display: grid; gap: .4rem; align-content: start; }
+.artist-title { margin: 0; font-size: 1.05rem; font-weight: 700; }
+.artist-words { margin: 0; padding-left: .75rem; border-left: 3px solid rgb(var(--record-red)); font-size: .92rem; line-height: 1.5; }
+.artist-meta { margin: 0; font-size: .76rem; color: rgb(var(--record-muted)); }
+.artist-links { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: .2rem; }
+.artist-links a {
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  border-bottom: 1px solid rgb(var(--record-ink) / .35);
+  padding-bottom: 1px;
+}
+.artist-links a:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
+
+@media (min-width: 900px) {
+  .artist-drawing { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 1.5rem; align-items: start; }
+}
+
+/* ── THE SHEET GOES TO A PRINTER ────────────────────────────────────────────────
+   A3 portrait, so the drawing gets a wall's worth of paper without being stretched. The tools
+   come off, the page's own margins come off, and the colour is asked for exactly: a red rule
+   that printed as grey would be a sheet without the record's signal on it. */
+@media print {
+  @page { size: A3 portrait; margin: 10mm; }
+  .sheet-tools { display: none !important; }
+  .sheet-page { min-height: 0; padding: 0; background: #fff; }
+  .sheet-paper { max-width: none; padding: 0; border: 0; }
+  .sheet-art { padding: 0 0 6mm; }
+  .sheet-art img { max-height: 200mm; }
+  .sheet-address { font-size: 12pt; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

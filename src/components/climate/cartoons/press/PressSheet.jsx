@@ -38,6 +38,10 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
         <div className="press-sheet-provenance">
           {credit && <p>{credit}</p>}
           {source_url && <a href={source_url} target="_blank" rel="noopener noreferrer">At its source ↗</a>}
+          {/* Two addresses a cartoonist can carry away: the drawing as a sheet to print and
+              hang, and every drawing they have given the record, on one page of their own. */}
+          <Link to={`/ClimateCartoons/Sheet/${cartoon.id}`}>Print this drawing ↗</Link>
+          <Link to={`/ClimateCartoons/Artist/${encodeURIComponent(artist_name)}`}>Every drawing by {artist_name} ↗</Link>
         </div>
       </div>
     </article>

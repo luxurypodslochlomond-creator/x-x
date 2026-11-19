@@ -151,6 +151,8 @@ const ClimateWireEntryPage = React.lazy(() => import('./pages/ClimateWireEntry')
 const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
+const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
+const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
 const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
@@ -360,6 +362,13 @@ const AuthenticatedApp = () => {
           during it. Public to read, like every other room on the record: a wall nobody
           may look at is a noticeboard, not a record. Drawings sent in wait for a keeper. */}
       <Route path="/ClimateCartoons" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsPage /></ClimateLayout>} />
+      {/* ── ONE DRAWING ON A SHEET, AND ONE HAND'S OWN PAGE ─────────────────────────
+          Two addresses a cartoonist can carry away from the wall. The sheet is laid out to be
+          printed and hung — it opens outside the record's shell on purpose, so a school's
+          printer gets the drawing and not the navigation. The artist's page stays inside the
+          record, because it is part of the record. */}
+      <Route path="/ClimateCartoons/Sheet/:id" element={<ClimateCartoonSheetPage />} />
+      <Route path="/ClimateCartoons/Artist/:name" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonArtistPage /></ClimateLayout>} />
       {/* The 29th, written down: one address Janine can send to CEEW, to the festival's
           curator or to a classroom. It carries the hour, what happens to the drawings and
           the one ask — and no addresses, no phone numbers and no joining link, because a
