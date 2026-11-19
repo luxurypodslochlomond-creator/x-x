@@ -1,0 +1,33 @@
+/* ── THE SHEET'S GRID, DECLARED ONCE ─────────────────────────────────────────────
+   Brian, 19 November: "it's clunky… in history for a record like this should be
+   tutorier like old books, or is that a cliché?" It is a cliché if it means parchment,
+   sepia and distressed edges — that is costume, and a panel reads costume in one look.
+   What makes a page read as a register is discipline: one grid, a date that sits in a
+   date column, lines that are numbered, one type family, and nothing on the sheet that
+   is not a fact. Old ledgers look old because every column lines up down the page, not
+   because they are brown.
+
+   So the grid is declared here, once, and the column labels and every line use it.
+   Number down the left, date in its own column on a desk, and on a phone the date steps
+   up under the number so nothing is squeezed into a strip. Same sheet, same order. */
+.corr-sheet { --corr-num: 2.1rem; --corr-date: 6.4rem; }
+
+.corr-row {
+  display: grid;
+  grid-template-columns: var(--corr-num) minmax(0, 1fr);
+  column-gap: 0.55rem;
+}
+.corr-head { display: none; }
+
+@media (min-width: 1024px) {
+  .corr-row {
+    grid-template-columns: var(--corr-num) var(--corr-date) minmax(0, 1fr);
+    column-gap: 1rem;
+  }
+  .corr-head { display: grid; }
+}
+
+.corr-line {
+  border-top: 1px solid rgb(var(--record-ink) / 0.18);
+  padding: 0.85rem 0 0.95rem;
+}
