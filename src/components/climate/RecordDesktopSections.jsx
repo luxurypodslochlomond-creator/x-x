@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { CONTENT_GROUPS } from '@/components/climate/recordFooterLinks';
+import { CONTENT_GROUPS, DESK_NAV, PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import { markFor } from '@/components/climate/pageMarks';
 import { useRecordCapacity } from '@/components/climate/useKeeper';
 
@@ -35,9 +35,32 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   const phone = layout === 'phone';
   const { pathname } = useLocation();
   const { isKeeper, isChecker } = useRecordCapacity();
+
+  // ── THE SHEET IS THE REST OF THE BOOK, NOT A SECOND COPY OF THE HEAD ──────────
+  // Brian, 19 November: "explore, when you go in, is all over the place — you sure you've
+  // not got duplicates?" He had, and this was it: the masthead now carries nine doors on a
+  // phone and eleven on a desk, and the sheet went on printing every one of them again
+  // underneath. So a reader opened the index to find something and was handed the row they
+  // had just used, mixed in with the four doors they had not. Eighteen entries where nine
+  // were new is what "all over the place" looks like.
+  //
+  // So a door already standing on the masthead is not printed on the sheet, and the check is
+  // made against the masthead of the glass in the reader's hand — a phone's nine, a desk's
+  // eleven — because those are not the same list. That matters for exactly three doors: the
+  // music room, the roll and the seals stand on a desk's second row and nowhere on a phone,
+  // so dropping them outright would leave them unreachable in a hand and printed twice on a
+  // desk. Nothing is lost at either width: every door of the record is on the masthead or in
+  // this sheet, and no door is in both.
+  //
+  // A shelf left with nothing on it goes with its doors, so the sheet never opens on a
+  // heading with an empty count under it.
+  const onMasthead = new Set((phone ? PHONE_NAV_ROWS.flat() : DESK_NAV).map(({ to }) => to));
+  const rest = CONTENT_GROUPS
+    .map(({ title, doors }) => ({ title, doors: doors.filter((door) => door && !onMasthead.has(door.to)) }))
+    .filter(({ doors }) => doors.length > 0);
   const groups = isKeeper || isChecker
-    ? [...CONTENT_GROUPS, { title: 'Yours', doors: [{ label: isKeeper ? 'Custodians’ room' : 'Witnesses’ room', to: '/ClimateKeeperRoom' }] }]
-    : CONTENT_GROUPS;
+    ? [...rest, { title: 'Yours', doors: [{ label: isKeeper ? 'Custodians’ room' : 'Witnesses’ room', to: '/ClimateKeeperRoom' }] }]
+    : rest;
   return (
     <div className="flex flex-col font-body">
       {groups.map(({ title, doors }) => (
