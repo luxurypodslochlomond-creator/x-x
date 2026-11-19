@@ -38,9 +38,10 @@ export default function ClimateMethod() {
           <a href="#corrections" className="inline-flex min-h-11 items-center underline underline-offset-4">Read the corrections ↓</a>
           <a href="#say" className="inline-flex min-h-11 items-center underline underline-offset-4">Report a problem ↓</a>
         </div>
+        <p className="mt-1 text-[12px] leading-relaxed text-record-paper/70">Ten rules below. Each one says what it means in a line — tap it for the whole thing.</p>
       </header>
       <div className="record-method-rules record-method-sheet" aria-label="The full method">
-      <Block n="01" title="What this is, and what it is not">
+      <Block n="01" title="What this is, and what it is not" gist="Not a feed. Nothing is ranked, boosted or paid for, and the only thing counted is that an entry was opened.">
         <p>A record, not a feed. A feed is built to hold attention and pays for itself with it. This is built to be checked, cited and copied, and it makes no money from anybody's attention.</p>
         <p>Entries are ordered by date, never by popularity. Nothing counts likes, shares or followers. Nothing can be pushed up by paying, so there is nothing here to game.</p>
         <p>One thing is counted, and only one: a read — an entry was opened. Once per place per half hour, never per person, and the place is never an address. Reads are shown on the map, alongside the entries. They never order this record and never change it.</p>
@@ -48,7 +49,7 @@ export default function ClimateMethod() {
         <Rule>If a claim about the world cannot be traced to something outside this record, it does not belong here. The record's own rules are a different animal: they are marked as decisions rather than findings, and they are checked the only way a rule can be — by whether it held.</Rule>
       </Block>
 
-      <Block n="02" title="Where an entry comes from">
+      <Block n="02" title="Where an entry comes from" gist="Every entry names where it came from. No origin, no entry.">
         <p>An entry is a fact with an origin: a body's own statement, a peer-reviewed journal, published media, an organisation working on the ground, a first-hand dispatch, or a document. Which one it is, is printed on the entry.</p>
         <p>We point at the origin and quote a line or two. We never republish somebody else's article, and never pull from closed networks or private accounts.</p>
         <p>
@@ -65,7 +66,7 @@ export default function ClimateMethod() {
         <p>An action is traced differently, and the record says which. An action is the organiser's own word about what they are doing, and their own contact line is printed on it — that line is the origin. Its label stays at single source until a person has a second, independent origin to name.</p>
       </Block>
 
-      <Block n="03" title="The ladder — how well a claim is known">
+      <Block n="03" title="The ladder — how well a claim is known" gist="Every claim says how well it is known: an official record, two sources agreeing, or one.">
         <p>Every entry carries one of three labels, and a reader sees it before the headline:</p>
         <Rule>
           <strong>Official record</strong> — the body responsible has put it on the record itself.<br />
@@ -75,12 +76,12 @@ export default function ClimateMethod() {
         <p>Labelling is the whole method. A record that admits which entries rest on one voice is worth more than one that pretends everything is equally certain.</p>
       </Block>
 
-      <Block n="04" title="No source, no entry">
+      <Block n="04" title="No source, no entry" gist="A screenshot is not a source. Anything without one waits for a person to find it, or it is left out.">
         <p>An entry with no traceable origin waits in a holding pen: a person either finds the source or leaves the entry out. Nothing arrives on the strength of a screenshot, a rumour, or a page with no publisher behind it.</p>
         <p>Every entry is screened for spam, off-topic promotion and dangerous advice. Sourced entries go up at once; anything the screen is unsure about waits for a person. Holding every contribution for weeks would kill the thing this record exists to encourage.</p>
       </Block>
 
-      <Block n="05" title="Who decides" full>
+      <Block n="05" title="Who decides" full gist="A machine may only say clean enough, or wait. A named person decides.">
         <p>The screen is a machine, and it is allowed to say only one thing: clean enough to go up, or wait for a person. It never says that a claim is true, it never sets how well a claim is known, and it never signs an entry with anybody's name. Anything it is unsure of waits for a person, and that person's decision is the one that counts.</p>
         <p>Three people hold the record's keys: Janine M. H. Selendy, after whose work and Horizon International this record is made; Gillian Barbara Brown; and Brian Hughes, who built it. No custodian can add or remove another alone — it takes two of them — so that rule lives in the record rather than in a promise on a page.</p>
         <p>Keeping the record running is a second, separate job from deciding what goes on it, and the person holding it is not the founder. Anyone may write to <a href="mailto:family@uf51.love" className="font-black underline decoration-2 underline-offset-2 hover:text-[#b3261e]">family@uf51.love</a> and a person answers.</p>
@@ -104,7 +105,7 @@ export default function ClimateMethod() {
         <Rule>A named person is accountable for what is on this record. That is the difference between a record and a rumour.</Rule>
       </Block>
 
-      <Block n="06" title="Corrections, in daylight">
+      <Block n="06" title="Corrections, in daylight" gist="Mistakes are corrected on the entry itself, with the date. Nothing is quietly edited.">
         <p>When an entry is wrong it is corrected on the entry itself, with the date and what changed. Nothing is quietly edited. Nothing disappears.</p>
         <p>Every decision a person makes — who looked, when, and what the advisory note said — goes into an audit trail. It holds only decisions that were really taken: the entries that went on before it was wired carry no line in it, and that gap is said here rather than filled in afterwards. An entry the screen cleared asks nothing of a person, so no decision is claimed for it.</p>
         <p>
@@ -121,23 +122,23 @@ export default function ClimateMethod() {
         </p>
       </Block>
 
-      <Block n="07" title="Money, and what it cannot buy">
+      <Block n="07" title="Money, and what it cannot buy" gist="No ads, no sponsorship, no paid placement. Money never buys a place here.">
         <p>No advertising. No sponsorship. No paid placement of any kind. Money never buys a place on the record, a place in an entry, or a change to a claim.</p>
         <p>Support that keeps the record running is welcome and declared in the open: who gave, and whether they chose to be named. Amounts are never published and never influence what appears.</p>
       </Block>
 
-      <Block n="08" title="Citing the record">
+      <Block n="08" title="Citing the record" gist="Every entry has its own permanent address, and its source link goes to the thing itself.">
         <p>Every entry has its own permanent address, so a researcher cites one entry rather than a front page that changes. The date, the origin and how well the claim is known all travel with the link.</p>
         <p>The source link takes you to the thing itself, not to us describing it. Don't take our word — follow the link.</p>
       </Block>
 
-      <Block n="09" title="The record's music">
+      <Block n="09" title="The record's music" gist="Music is given, not licensed. Nothing is counted, ranked, or played at you.">
         <p>Music is given to this record, not licensed to it. The artist keeps their name and keeps their rights; the master is stored exactly as it was given and served whole; no play is counted, nothing is ranked, and nobody pays for a place on the page.</p>
         <p>Nothing here starts by itself. Every piece is heard because a reader pressed play, and the record's own theme is held to the same rule: it is a signal, credited to its composer, taking no rank above the rest.</p>
         <p>A piece held back is paused, not removed: its master stays whole and its place returns when it is released.</p>
       </Block>
 
-      <Block n="10" title="What this record refuses to do">
+      <Block n="10" title="What this record refuses to do" gist="No anonymous claims, no chasing volume, no trending — and no pretending speed is accuracy.">
         <p>No anonymous claims. No volume chasing — no target of entries per day, because that pressure is what fills a page with junk. No trending, no recommendations, and nothing that rewards a reader for returning.</p>
         <p>No republishing another publisher's work to keep a page full. And no pretending that speed is the same as accuracy: an entry can wait an hour for a source, and often should.</p>
       </Block>
