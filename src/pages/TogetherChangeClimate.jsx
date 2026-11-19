@@ -459,8 +459,54 @@ export default function TogetherChangeClimate() {
 
       <ClimateImpactBar />
 
-      {/* ── THE PICTURES — what people are doing and what is at risk, before anything else.
-             The space is held while the record loads, so nothing jumps on arrival. ── */}
+      {/* ── THE SEQUENCE, SAID ONCE ──────────────────────────────────────────────────
+          Brian, 19 November: "how do we make climate page speak for itself… coolasfuck flow
+          visually… sequence bro know what I mean?" The page had the right parts in the wrong
+          order: the masthead, the photographs, the tally, then three more photographs, and
+          only after all of that the four rooms — the shape of the record — arrived. So a
+          reader met the record twice as pictures before ever learning what it is made of.
+
+          The order now is an argument, and it is the record's own:
+            1. it names itself (masthead and Jane's voice on the painting)
+            2. it shows you the world (Janine's photographs)
+            3. it says how much is on it (the tally)
+            4. it says what it is made of (the four rooms)
+            5. it holds three entries up for you to look at
+            6. and only then does it ask anything of you — the subjects, and the way in.
+          Nothing new on the page. The same parts, in the order a person reads. The painting
+          and the pictures are untouched; they simply now arrive in the right place. ── */}
+
+      {/* ── THE TALLY — how much is on the record, immediately before the four rooms
+             that add up to it. A total followed by its breakdown is a shape; a total
+             stranded between two picture bands is a caption. ── */}
+      <div className="px-4 lg:px-10 py-2 bg-[#241d16] flex items-center justify-between gap-3">
+        <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
+          {t.live}
+        </span>
+        <span className="text-[10px] font-mono text-[#efe7d6]/70">
+          {items.length + actions.length} {t.entries_now}
+        </span>
+      </div>
+
+      {/* ── THE FOUR ROOMS — the backbone, and it arrives before the pictures are shown
+             off rather than after. Each room in its own pigment, each carrying how much the
+             record holds and one plain line saying what it is for; opening one carries the
+             reader down to it. On a phone these keep their own place at the top, by order. ── */}
+      <div className="record-home-doors">
+        <RecordDoors
+          counts={doorCounts}
+          selected={selectedType}
+          onSelect={(key) => {
+            setSelectedType(selectedType === key ? 'all' : key);
+            requestAnimationFrame(() => bringIntoView(contentRef.current));
+          }}
+        />
+      </div>
+
+      {/* ── THE PICTURES — what people are doing and what is at risk, held up now that the
+             reader knows what the record is made of. The space is held while it loads, so
+             nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
         <div className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           {/* ── NOT "SIGNALS" ────────────────────────────────────────────────────────────
@@ -468,9 +514,12 @@ export default function TogetherChangeClimate() {
               top nav — so the page had two different things wearing one word, and Brian asked
               the fair question: "what are signals on page… we have it in top nav but what is
               it on page?" Signals is the wire: dated, sourced, what changed and who says so.
-              This band is not that. It is the entries the record is leading with, so it says
-              so, and the word Signals now means one thing on this record. ── */}
-          <RecordSectionHeading title="Leading the record" count={loading ? undefined : featured.length} tone="text-record-red" />
+              This band is not that. It is what the record is holding up for a reader to look
+              at, so it says that, and the word Signals now means one thing on this record.
+              "Leading" was worse than Signals: leading is a word from a newspaper's front
+              page, and it says the record is competing for attention. It is not. It is
+              holding these up. ── */}
+          <RecordSectionHeading title="What the record is holding" count={loading ? undefined : featured.length} tone="text-record-red" />
           {/* A phone swipes the lead pictures instead of scrolling past all of them.
               Three plates stacked at four-by-three is two full screens of photographs
               before a reader reaches the subjects, and Brian said so on 18 November:
@@ -490,37 +539,6 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── LIVE RECORD STRIP — real counts, honest signal ── */}
-      <div className="px-4 lg:px-10 py-2 bg-[#241d16] flex items-center justify-between gap-3">
-        <span className="flex items-center gap-1.5 text-[10px] font-black font-mono uppercase tracking-widest text-[#efe7d6]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#e2602a] animate-pulse" />
-          {t.live}
-        </span>
-        <span className="text-[10px] font-mono text-[#efe7d6]/70">
-          {items.length + actions.length} {t.entries_now}
-        </span>
-      </div>
-
-      {/* ── THE FOUR ROOMS ─────────────────────────────────────────────────────────
-          Brian, 19 November: "actions crises solutions groups… these are the backbone of our
-          record… I cant help but feel they are lost and dont make sense on page and people
-          dont know what I mean." They were four small chips in a toolbar, identical in
-          weight, two of them the same yellow, and tapping one filtered the page without
-          taking the reader anywhere — so it looked as though nothing had happened.
-
-          Four plates now, each in the room's own pigment, each carrying how much the record
-          holds and one plain line saying what it is for, and opening one carries the reader
-          down to it. ── */}
-      <div className="record-home-doors">
-        <RecordDoors
-          counts={doorCounts}
-          selected={selectedType}
-          onSelect={(key) => {
-            setSelectedType(selectedType === key ? 'all' : key);
-            requestAnimationFrame(() => bringIntoView(contentRef.current));
-          }}
-        />
-      </div>
       </div>{/* /record-home-flow */}
 
       {/* ── TOOLBAR — the record's subjects on one side, the one way in with something of

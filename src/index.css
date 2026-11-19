@@ -533,9 +533,24 @@ button:focus-visible {
    masthead are finally the same hand. Body prose keeps Source Serif: it is still a record,
    and sentences are still read. Labels, dates, counts and buttons keep the machine's mono. */
 .climate-record {
+  /* ── THE HEADINGS SPEAK IN THE RECORD'S OWN VOICE ────────────────────────────────
+     Every heading on the record was Helvetica bold in capitals — the face of a label on a
+     filing cabinet, and the most borrowed face on earth. A record that argues for its own
+     hand cannot title its chapters in somebody else's default.
+
+     So a heading on the record is set in the reading face itself: Literata, drawn for
+     reading on a screen, already downloaded for the prose, already under the Open Font
+     Licence so nobody can withdraw it. A title set in the same cut as the sentence beneath
+     it is how a printed record has always worked — one voice, many sizes — and it is why a
+     page of this now reads as a document rather than as a poster with paragraphs under it.
+
+     Only the HEADINGS change. Every label, chip, count, button and date keeps the grotesque,
+     because those are the record's machinery and machinery should not be dressed as prose.
+     Scoped to .climate-record on purpose: this is the record's argument about itself, not a
+     house style imposed on every tool in the building. One line to undo if it reads wrong. */
   --record-display: var(--font-record-ui);
   --font-display: var(--record-display);
-  --font-heading: var(--record-display);
+  --font-heading: 'Literata', var(--font-record-reading);
   --font-body: var(--font-record-ui);
   /* Inside the record the reading voice is the same as everywhere else: Literata speaks,
      Helvetica structures. This block used to override it back to the grotesque, which

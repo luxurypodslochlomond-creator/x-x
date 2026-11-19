@@ -69,7 +69,7 @@ export default function DueDiligencePanel() {
           </p>
           <p className="text-[10px] font-mono leading-snug text-[#5a5246] mt-1">
             {counts.published} published · {counts.seals} sealed · {counts.checks} checks · {counts.keepers} custodians ·{' '}
-            {counts.checkers} checkers
+            {counts.checkers} witnesses
           </p>
           <p className="text-[9px] font-mono text-[#8a8375] mt-1">
             run {new Date(as_of).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}

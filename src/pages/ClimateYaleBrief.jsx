@@ -107,7 +107,7 @@ WHAT IT NEEDS
 3. Somebody to carry it — the technology, its upkeep, and a fair living for the two people who build it. Hosting is £1,000 a year at this size, £10,000 for ten years.
 
 WHAT STILL HAS TO HAPPEN BEFORE IT COULD BE CALLED FINISHED
-Put a real name on every entry, as custodians are ready to sign their own. Invite the first checkers. State the standing on all ${show(f?.entries)}. Publish the code.
+Put a real name on every entry, as custodians are ready to sign their own. Invite the first witnesses. State the standing on all ${show(f?.entries)}. Publish the code.
 
 ONE CORRECTION, MADE IN THE OPEN
 39 entries previously carried the founder's name. She did not write them. All 39 were set back to unsigned on 6 November 2026, and this line is the record of it.
