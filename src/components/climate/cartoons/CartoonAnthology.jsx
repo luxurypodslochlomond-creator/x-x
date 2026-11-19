@@ -76,6 +76,11 @@ export default function CartoonAnthology() {
       <p className="comic-anthology-credit">
         The cartoons stay the artists’ own. The cover is Francis Umendu Odupute’s drawing;
         the anthology is CartoonAFRICA’s, prepared by African Press Cartoon services, 2026.
+        {' '}Odupute, who initiated CartoonAFRICA in 2012, founded the{' '}
+        <a href="https://www.facebook.com/francodusartfoundation/" target="_blank" rel="noopener noreferrer">
+          Francodus Art Foundation
+        </a>{' '}
+        in 2005.
       </p>
     </section>
   );

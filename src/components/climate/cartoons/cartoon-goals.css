@@ -191,6 +191,35 @@
   color: rgb(var(--record-muted));
 }
 
+/* ── THE DRAWING, IN THE LEDGER ──────────────────────────────────────────────────
+   A goal used to open onto the goal's words and the artist's words with the drawing left
+   up the page: a citation of a picture. Now the drawing stands beside its own line, at a
+   width you can actually read a gag in, and the line runs beside it like a caption. The
+   hairline above each one keeps it an index of works rather than a gallery. */
+.press-room .cartoon-goal-line {
+  display: grid;
+  grid-template-columns: clamp(7rem, 14vw, 10.5rem) minmax(0, 1fr);
+  grid-template-areas: "art title" "art text";
+  align-content: start;
+  gap: .15rem .85rem;
+  padding-top: .7rem;
+  border-top: 1px solid rgb(var(--record-ink) / .18);
+}
+.press-room .cartoon-goal-line:first-child { padding-top: 0; border-top: 0; }
+.press-room .cartoon-goal-line-art {
+  grid-area: art;
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid rgb(var(--record-ink) / .22);
+  background: rgb(var(--record-bone));
+}
+.press-room .cartoon-goal-line .cartoon-goal-line-title { grid-area: title; }
+.press-room .cartoon-goal-line .cartoon-goal-line-text { grid-area: text; }
+@media screen and (max-width: 640px) {
+  .press-room .cartoon-goal-line { grid-template-columns: 6.5rem minmax(0, 1fr); gap: .1rem .7rem; }
+}
+
 .press-room .cartoon-goals-foot {
   display: grid;
   gap: .45rem;

@@ -14,11 +14,15 @@ export default function CartoonGoals() {
   const [openGoal, setOpenGoal] = useState(null);
   const [waitingOnly, setWaitingOnly] = useState(false);
 
-  // The wall's real lines, keyed by the drawing's real title, so every quoted sentence in
-  // this ledger is the artist's own and can be checked against the drawing above it.
-  const lines = useMemo(() => {
+  // The wall's real drawings, keyed by their real title, so every goal opens onto the
+  // pictures themselves and every quoted sentence is the artist's own. Brian, 19 November:
+  // "where are the drawings in like good health and well being bro got decryption but no
+  // drawing bro" — right. The ledger was printing the goal's words and the artist's words
+  // with the drawing left up the page, which is a citation of a picture rather than a
+  // picture. A drawing is the thing; its line is the caption.
+  const art = useMemo(() => {
     const map = {};
-    cartoons.forEach((c) => { if (c.title && c.for_line) map[c.title] = c.for_line; });
+    cartoons.forEach((c) => { if (c.title) map[c.title] = c; });
     return map;
   }, [cartoons]);
 
@@ -65,7 +69,7 @@ export default function CartoonGoals() {
           <GoalRow
             key={goal.n}
             goal={goal}
-            lines={lines}
+            art={art}
             open={openGoal === goal.n}
             onToggle={() => setOpenGoal((current) => (current === goal.n ? null : goal.n))}
           />

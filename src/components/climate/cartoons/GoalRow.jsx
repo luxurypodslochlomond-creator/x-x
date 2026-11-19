@@ -4,7 +4,7 @@ import React from 'react';
 // many drawings stand against it. Open it gives the goal's own words from the UN, then the
 // cartoonists' own words from the wall — the two side by side, so nobody has to take the
 // record's word for what either of them said.
-export default function GoalRow({ goal, open, onToggle, lines }) {
+export default function GoalRow({ goal, open, onToggle, art }) {
   const has = goal.drawings.length > 0;
   const panelId = `goal-panel-${goal.n}`;
   const buttonId = `goal-button-${goal.n}`;
@@ -46,11 +46,19 @@ export default function GoalRow({ goal, open, onToggle, lines }) {
             {has ? (
               <ul className="cartoon-goal-lines">
                 {goal.drawings.map((title) => {
-                  const line = lines[title];
+                  const piece = art[title];
                   return (
-                    <li key={title}>
+                    <li key={title} className="cartoon-goal-line">
+                      {piece?.display_image_url && (
+                        <img
+                          className="cartoon-goal-line-art"
+                          src={piece.display_image_url}
+                          alt={`${title} — drawing by ${piece.artist_name}`}
+                          loading="lazy"
+                        />
+                      )}
                       <span className="cartoon-goal-line-title">{title}</span>
-                      {line && <span className="cartoon-goal-line-text">{line}</span>}
+                      {piece?.for_line && <span className="cartoon-goal-line-text">{piece.for_line}</span>}
                     </li>
                   );
                 })}
