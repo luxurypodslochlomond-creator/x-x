@@ -13,7 +13,11 @@
    of billboards. A plate is a plate. It is capped at the width a drawer of drawings would
    be, centred on the sheet, and every mark is the same size it is on a phone. */
 @media (min-width: 1024px) {
-  .marks-plate:not(.marks-plate--fitted) { max-width: 640px; margin-inline: auto; }
+  .marks-plate:not(.marks-plate--fitted) { max-width: 560px; margin-inline: auto; }
+  /* Eight across on a desk rather than six: the same twenty-four drawings in three rows
+     instead of four, and each one at about fifty-five pixels — a drawing you can read,
+     not a billboard. Brian, 19 November: "the symbols too big, could be a bit smaller". */
+  .marks-plate:not(.marks-plate--fitted) .marks-plate-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
 }
 
 /* The phone opens on the entire plate. Selection never moves or replaces the grid. */

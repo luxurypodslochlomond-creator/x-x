@@ -32,9 +32,10 @@
    choosing between stay visible underneath. */
 .subject-plate[data-inline="true"] { flex: none; }
 .subject-plate[data-inline="true"] .subject-plate-grid { flex: none; grid-auto-rows: auto; overflow: visible; }
-.subject-plate[data-inline="true"] .subject-plate-cell { min-height: 108px; gap: 7px; padding: 12px 8px; }
-/* The mark gets the room a desk can afford, so the drawing reads as a drawing. */
-.subject-plate[data-inline="true"] .subject-plate-cell > span:first-child { max-width: 66px; }
+.subject-plate[data-inline="true"] .subject-plate-cell { min-height: 96px; gap: 6px; padding: 10px 8px; }
+/* A drawing on a desk, not a poster: the mark takes a little less of the cell than it did
+   when it was first opened here, so the name below it is never the smaller of the two. */
+.subject-plate[data-inline="true"] .subject-plate-cell > span:first-child { max-width: 56px; }
 .subject-plate[data-inline="true"] .subject-plate-caption { min-height: 0; }
 
 /* The pressed mark is marked in the record's own signal, never inverted: the marks are

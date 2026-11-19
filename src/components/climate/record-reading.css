@@ -470,10 +470,13 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
    good at — never one voice asked to do both. */
 .record-description {
   font-family: var(--font-record-ui);
-  font-size: 13px;
-  line-height: 1.5;
-  letter-spacing: 0.005em;
-  color: rgb(var(--record-muted));
+  font-size: 13.5px;
+  line-height: 1.55;
+  letter-spacing: -0.002em;
+  /* Ink at four-fifths, not the muted grey. A description set in the grey kept for
+     footnotes reads as help text; the same sentence at near-black reads as the record
+     saying what the door is for, which is what it is doing. */
+  color: rgb(var(--record-ink) / .82);
   text-wrap: pretty;
 }
-.record-description--tight { font-size: 12.5px; line-height: 1.45; }
+.record-description--tight { font-size: 13px; line-height: 1.5; }
