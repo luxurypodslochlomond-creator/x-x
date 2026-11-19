@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
+import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import RecordDeskDoors from '@/components/climate/RecordDeskDoors';
 import '@/components/climate/record-navigator.css';
 
@@ -64,6 +65,7 @@ export default function RecordImprint({ onOpenContents, contentsOpen }) {
                   to="/ClimateGuide"
                   label="Explore"
                   what="The rest of the record: the brief, the covenant, the terms and every other door."
+                  mark={MarkExplore}
                   size={ROW_SIZE[1]}
                   asButton
                   onClick={onOpenContents}

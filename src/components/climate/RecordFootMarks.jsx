@@ -409,6 +409,32 @@ export function MarkContents({ size = 26, className = '' }) {
   );
 }
 
+// ── THE DOOR THAT OPENS EVERY OTHER DOOR ───────────────────────────────────────
+// Brian, 19 November: "when you click on explore the icon looks old and not coolasfuck".
+//
+// He is right, and the fault is the one the wall had: the drawing was line art. Two sheets,
+// one behind the other, every edge a hairline at 1.7, the back sheet at half opacity, a red
+// dash at the foot — five thin gestures read at nineteen pixels, which is the size this door
+// actually stands at on a phone's second row. Line art is how a computer draws a picture of
+// a thing; it is not how a printer prints a mark.
+//
+// So the sheets are no longer drawn, they are printed: one solid sheet of ink, and behind it
+// a second sheet in the record's own red showing only as its edge along the top and the side.
+// Two masses, no outlines at all, and the red one says the thing the door says — there is
+// more of this than the sheet in your hand.
+//
+// It also ends a real duplication. This drawing was shared with "The guide" in the foot, so
+// two different doors wore one picture; the guide keeps the ruled sheet it was drawn for, and
+// the index has its own mark now.
+export function MarkExplore({ size = 26, className = '' }) {
+  return (
+    <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
+      <rect x="13.4" y="5" width="20.6" height="25.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="6.4" y="11.4" width="20.6" height="25.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 // Who is reading. A tally, not an eye: four strokes and one across them, which is
 // how people counted things long before anything was counted for them.
 // ── HOW FAR IT GOT: A TRAIL THAT LEAVES THE PLATE ────────────────────────────

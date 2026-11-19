@@ -80,7 +80,16 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
               <span>{title}</span>
               <span aria-hidden="true" className={phone ? 'bg-record-mark px-1 py-[2px] font-mono text-[9px] leading-none tracking-normal text-record-bone' : 'text-[10px]'}>{doors.length}</span>
             </h2>
-            <ul className={`grid ${phone ? 'grid-cols-2 gap-x-3' : 'grid-cols-3 gap-x-4'}`}>
+            {/* ── ONE ACROSS, SO NOTHING HANGS OFF THE EDGE ─────────────────────────────
+                Brian, 19 November: "go into explore, the icons and balance not coolasfuck
+                … make sure not missed or duplicated … easy and logical." The balance was
+                arithmetic, not taste: a phone's shelf was two across, and the shelves that
+                survive the masthead's filter hold three and six doors — so the first one
+                fell as two and a lonely third, and every shelf after it inherited the
+                stagger. A one-door-per-row register cannot go ragged at any count: the
+                marks line up in a single column, the names get the full width of the glass,
+                and the shelf reads down the page the way the desk's reads across it. */}
+            <ul className={`grid ${phone ? 'grid-cols-1 gap-x-3' : 'grid-cols-3 gap-x-4'}`}>
               {doors.map(({ label, to, what }) => {
                 const Mark = markFor(to);
                 const here = pathname === to;
@@ -91,9 +100,16 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                       onClick={onNavigate}
                       title={what}
                       aria-current={here ? 'page' : undefined}
-                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-12 gap-2 py-1.5 text-[13px] uppercase leading-[1.2] tracking-[0.04em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
+                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-11 w-full gap-3 py-1.5 text-[13px] uppercase leading-[1.2] tracking-[0.04em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
                     >
-                      <span className="shrink-0" aria-hidden="true"><Mark size={22} /></span>
+                      {/* ── THE SIZE THE MARKS WERE DRAWN AT ────────────────────────────
+                          Every mark on this record is cut for twenty-four or nineteen
+                          pixels and the comment on the drawings says so. The sheet was
+                          showing them at twenty-two, which is neither: a mark set between
+                          the sizes it was drawn for loses exactly the thing that makes it
+                          a mark — the weight of its stroke — and reads as a small grey
+                          diagram. Twenty-four is the size the index was drawn for. */}
+                      <span className="shrink-0" aria-hidden="true"><Mark size={24} /></span>
                       <span>{label}</span>
                     </Link>
                   </li>

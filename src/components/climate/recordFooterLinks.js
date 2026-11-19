@@ -315,8 +315,25 @@ export const CONTENT_GROUPS = [
     ],
   },
   {
+    // ── AND THE ORDER INSIDE THE SHELF IS A SENTENCE TOO ─────────────────────────
+    // Brian, 19 November: "make sure not missed or duplicated … easy and logical … and
+    // sequence bro." The doors here were in the order they happened to get written: the
+    // music room first because it was argued about first, then the fingerprints, then the
+    // two doors about the people who do the checking. Nothing was missing and nothing was
+    // printed twice — the shelf simply had no order a reader could follow.
+    //
+    // So it reads in the order a reader asks: can I check this myself (the fingerprints),
+    // can I take part (become a witness), who already does (who witnesses), what does
+    // carrying it involve (host the record), what is still missing (the brief) — and the
+    // music room last, because a room you go looking for belongs at the end of a list and
+    // not in front of the record's proof. Its place in ELSEWHERE_NAV is untouched, so the
+    // written guide's index still runs in the order it always has.
     title: 'Elsewhere',
-    doors: [...ELSEWHERE_NAV.filter(({ to }) => to !== '/ClimateFounder'), ...SUPPORTING_PAGES],
+    doors: [
+      ...ELSEWHERE_NAV.filter(({ to }) => to !== '/ClimateFounder' && to !== '/ClimateMusic'),
+      ...SUPPORTING_PAGES,
+      ...ELSEWHERE_NAV.filter(({ to }) => to === '/ClimateMusic'),
+    ],
   },
 ];
 

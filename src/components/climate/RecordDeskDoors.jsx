@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { DESK_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
+import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import '@/components/climate/record-navigator.css';
 
 // ── TWO ROWS ON A DESK ──────────────────────────────────────────────────────────
@@ -44,6 +45,7 @@ export default function RecordDeskDoors({ onOpenContents, contentsOpen }) {
                 to="/ClimateGuide"
                 label="Explore"
                 what="The rest of the record: the brief, the covenant, the terms and every other door."
+                mark={MarkExplore}
                 size={34}
                 asButton
                 onClick={onOpenContents}
