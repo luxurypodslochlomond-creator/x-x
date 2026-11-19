@@ -443,8 +443,15 @@ export default function TogetherChangeClimate() {
           the title — so a reader learns what the record is made of in the same glance
           they arrive with, rather than after a painting and a headline. Same four doors,
           same colours, same counts; only the order changed. */}
+      {/* ── AND ON A PHONE THE PICTURES LEAD ────────────────────────────────────────
+          Brian, 19 November, on a handset: "images gone on mobile". He was right, and it
+          was this reorder that did it: four room boxes at two hundred pixels each sat
+          above the painting, Jane's words and the title, so the first screen a phone got
+          was a grid of boxes and the photographs were a full scroll away. On a phone the
+          order goes back to voice, title, rooms; on a desk the rooms still lead. Same
+          markup, ordered by width, so neither screen is a copy of the other. */}
       <div className="record-home-flow">
-      <div className="record-home-doors px-4 pt-3 lg:px-10 lg:pt-1">
+      <div className="record-home-doors order-3 px-4 pt-3 lg:order-1 lg:px-10 lg:pt-1">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -456,13 +463,15 @@ export default function TogetherChangeClimate() {
         />
       </div>
 
-      <div className="record-home-voice-band border-t-[3px] border-record-mark">
+      <div className="record-home-voice-band order-1 border-t-[3px] border-record-mark lg:order-2">
         <RecordPaintedBand strength={0.75} soft>
           <RecordHomeVoice />
         </RecordPaintedBand>
       </div>
 
-      <RecordCoverPlate copy={t} />
+      <div className="order-2 lg:order-3">
+        <RecordCoverPlate copy={t} />
+      </div>
 
       <div className="record-home-subjects px-4 pb-5 pt-4 lg:px-10">
         <SubjectRail

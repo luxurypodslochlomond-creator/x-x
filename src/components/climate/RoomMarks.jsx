@@ -1,48 +1,48 @@
 import React from 'react';
 
-// ── THE FOUR ROOMS, IN THE MASTHEAD'S OWN HAND ──────────────────────────────────
-// These four were drawn in thin strokes: a limb meeting a limb, a line broken by a
-// diagonal, a step climbing, four strands crossed by a rule. Beside the record's own
-// navigation they looked like a different publication's icon set, because they were drawn
-// by a different rule — lines at six and a half units against marks built out of masses.
+// ── FOUR ROOMS, FOUR DIFFERENT SHAPES ──────────────────────────────────────────
+// These four were drawn once in thin strokes and once as four compositions of bars — and
+// a bar, a beam, a lever and two uprights all read as the same drawing at forty pixels.
+// Brian, 19 November: "get coolasfuck please". The fault was variety, not weight: a set
+// only reads as a set when the four are clearly four different things.
 //
-// Brian, 19 November: "don't like crises and solution icons, not coolasfuck art… nothing
-// like top coolasfuck nav." So the four rooms are drawn the way every mark on the masthead
-// is drawn, which is the only rule this record has ever needed:
-//   solid masses only, nothing thinner than the mass,
-//   two or three shapes and no more,
-//   and exactly one part in the record's red — the part that is the point.
-// Same forty-unit square as the doors, so a room's drawing and a door's drawing sit at the
-// same weight wherever they meet.
+// So the shapes are different on purpose, and the idea behind them is one idea:
+//   Solutions — a closed ring. The method that works, going round and round.
+//   Crises    — the same ring, broken open, the piece in red coming away.
+//   Actions   — a lever on its red fulcrum. A hand can move a heavy thing.
+//   Groups    — two uprights carrying one red beam. Together they hold it up.
+// Solutions and Crises are one drawing in two states, which is what they are on the
+// record: the same world, working or failing.
+//
+// The rule stays as it has always been: solid masses, nothing thinner than the mass, and
+// exactly one part in the record's red — the part that is the point.
 const FRAME = { viewBox: '0 0 40 40', fill: 'none', 'aria-hidden': 'true' };
 const MASS = { fill: 'currentColor', stroke: 'none' };
 const RED = { fill: 'rgb(var(--record-mark))', stroke: 'none' };
 
-// Solutions — two parts that hold each other. A keyed joint: the tab is the red, because
-// the tab is the whole of why the thing stands up. The method that works, as one object.
+// Solutions — a closed ring with one red segment. A loop is a method that repeats and
+// holds; the red is the part that closes it.
 export function RoomMarkSolution({ size = 32, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M4 12h12v16H4zM23 8h13v6H23zM23 26h13v6H23zM30 8h6v24h-6z" />
-      <path {...RED} d="M16 16l7-2v12l-7-2z" />
+      <circle cx="20" cy="20" r="13" fill="none" stroke="currentColor" strokeWidth="7" />
+      <path d="M25.5 8.2A13 13 0 0 1 31.8 14.5" fill="none" stroke="rgb(var(--record-mark))" strokeWidth="7" strokeLinecap="butt" />
     </svg>
   );
 }
 
-// Crises — a wall, and one side of it slipped. The red is the fault between them: the
-// break is the news, and nothing else on the mark is coloured.
+// Crises — the same ring, open, with the piece that came away in red above the gap.
 export function RoomMarkCrisis({ size = 32, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M4 14h13v20H4zM23 6h13v20H23z" />
-      <path {...RED} d="M20 4l3 16-3 16-3-16z" />
+      <path d="M25.5 8.2A13 13 0 1 1 14.5 8.2" fill="none" stroke="currentColor" strokeWidth="7" />
+      <path d="M15.6 4.4 25.2 1.2" fill="none" stroke="rgb(var(--record-mark))" strokeWidth="7" strokeLinecap="round" />
     </svg>
   );
 }
 
 // Actions — a lever resting on its red fulcrum. An arrow says "go", which is a sign on a
-// wall; a lever says a hand can move a thing that is far too heavy, which is what joining
-// something actually is. One bar, one wedge, and the wedge is the red.
+// wall; a lever says a hand can move a thing that is far too heavy.
 export function RoomMarkAction({ size = 32, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
@@ -52,10 +52,8 @@ export function RoomMarkAction({ size = 32, className = '' }) {
   );
 }
 
-// Groups — two uprights and the one beam they are carrying between them. People working on
-// the same thing hold one thing up; the beam is the red, because the beam is the reason
-// they are a group. (It was three bars with a band across them, which is a bar chart, and
-// a bar chart is the last thing this record should ever draw.)
+// Groups — two uprights and the one beam they are carrying between them. The beam is the
+// red, because the beam is the reason they are a group.
 export function RoomMarkGroups({ size = 32, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
