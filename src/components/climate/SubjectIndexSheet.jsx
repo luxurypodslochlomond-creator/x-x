@@ -4,14 +4,14 @@ import SubjectMark from '@/components/climate/SubjectMark';
 import SubjectIndexItem from '@/components/climate/SubjectIndexItem';
 
 // One specimen plate, not two tall galleries. Counts stay with their drawings.
-export default function SubjectIndexSheet({ open, onClose, filled, empty, totalEntries, selected, allLabel, onSelect, onAdd }) {
+export default function SubjectIndexSheet({ open, onClose, filled, empty, totalEntries, selected, allLabel, onSelect }) {
   if (!open) return null;
   const close = () => {
     onClose();
     document.getElementById('record-subject-toggle')?.focus({ preventScroll: true });
   };
   return (
-    <section id="record-subject-index" aria-label={`${filled.length + empty.length} subjects`} className="pb-1 font-body text-record-ink" onKeyDown={event => { if (event.key === 'Escape') close(); }}>
+    <section id="record-subject-index" aria-label="Explore by theme" className="hidden pb-1 font-body text-record-ink lg:block" onKeyDown={event => { if (event.key === 'Escape') close(); }}>
       <button type="button" onClick={() => onSelect('all')} aria-pressed={selected === 'all'} className={`flex min-h-12 w-full items-center gap-2 border-b border-record-ink/20 px-1 text-left ${selected === 'all' ? 'bg-cartoon-sun text-record-ink' : 'text-record-ink'}`}>
         <SubjectMark subject="all" size={32} />
         <span className="flex-1 text-[14px]">{allLabel}</span>
@@ -20,13 +20,13 @@ export default function SubjectIndexSheet({ open, onClose, filled, empty, totalE
       </button>
       <div className="grid grid-cols-2 gap-x-3 pb-1 pt-2 sm:grid-cols-3">
         {filled.map(subject => <SubjectIndexItem key={subject.id} subject={subject} selected={selected === subject.id} onClick={() => onSelect(subject.id)} />)}
-        {empty.map(subject => <SubjectIndexItem key={subject.id} subject={subject} empty onClick={() => onAdd(subject)} />)}
+        {empty.map(subject => <SubjectIndexItem key={subject.id} subject={subject} selected={selected === subject.id} empty onClick={() => onSelect(subject.id)} />)}
       </div>
       <div className="flex flex-wrap items-baseline justify-between gap-x-2 border-t border-record-ink/20 pt-2 text-[11px] leading-snug text-record-muted">
-        <span>{filled.length + empty.length} subjects · 0 opens the entry form</span>
+        <span>{filled.length + empty.length} themes · choose one to read the entries</span>
         <details>
           <summary className="cursor-pointer text-record-mark">About this index</summary>
-          <div className="max-w-[32ch] py-2 leading-relaxed">A subject is on this list whether or not the record holds anything under it — the taxonomy was given, not built from what we happened to have. Every entry still needs its source and a person to sign it.</div>
+          <div className="max-w-[32ch] py-2 leading-relaxed">Every theme has a place here, including those waiting for their first entry. Choose one to read what is there, or offer an entry when the page is empty.</div>
         </details>
       </div>
     </section>

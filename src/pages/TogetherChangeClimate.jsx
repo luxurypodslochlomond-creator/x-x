@@ -183,11 +183,7 @@ export default function TogetherChangeClimate() {
   const [submitCategory, setSubmitCategory] = useState(null);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
   const contentRef = useRef(null);
-  // The desk's subject line. Choosing a subject used to change the record underneath you
-  // while the page stayed exactly where it was, so the answer to your click was somewhere
-  // you had to go and find. One line at the top of the glass, chosen subject above it and
-  // the room it opens directly beneath: nothing to scroll for, either way.
-  const subjectDeskRef = useRef(null);
+
   // ── GOING DOWN THE PAGE, WITH THE MASTHEAD IN THE WAY ──────────────────────────
   // The record's masthead pins now, on a desk as well as a phone. So every jump down to
   // the record has to allow for its height: without the offset, the thing you asked for
@@ -199,7 +195,6 @@ export default function TogetherChangeClimate() {
     const offset = (masthead?.getBoundingClientRect().bottom || 0) + 6;
     window.scrollBy({ top: element.getBoundingClientRect().top - offset, behavior: 'smooth' });
   };
-  const firstSubject = useRef(true);
   const firstRender = useRef(true);
   // Set when the box moved the kind, rather than a filter button. The page must not jump.
   const typedKind = useRef(false);
@@ -259,20 +254,21 @@ export default function TogetherChangeClimate() {
     bringIntoView(contentRef.current);
   }, [selectedType]);
 
-  // ── A SUBJECT CHOSEN ON A DESK ─────────────────────────────────────────────────
-  // Choosing a subject closes the index that was offering it, and that index is tall. So
-  // the book gets shorter under the reader's hands, the browser's own scroll anchoring
-  // holds whatever it happened to be holding — and the reader is left looking at the
-  // crises and the groups with the room they actually asked for somewhere above them.
-  // That is the scroll-up this fixes. The move happens after the index has gone: late
-  // enough that nothing is still closing, early enough that it is still the answer to a
-  // click. On a phone the rail is the same line it was, and it keeps its own behaviour.
-  useEffect(() => {
-    if (firstSubject.current) { firstSubject.current = false; return; }
-    if (!window.matchMedia('(min-width: 1024px)').matches) return;
-    const settle = setTimeout(() => bringIntoView(subjectDeskRef.current), 80);
-    return () => clearTimeout(settle);
-  }, [selectedCategory]);
+  // A theme opens all matching kinds, not whichever room happened to be chosen last.
+  // One scroll runs after React has committed the selection, on either screen size.
+  const selectTheme = (id) => {
+    if (selectedType !== 'all') typedKind.current = true;
+    setSelectedType('all');
+    setSelectedCategory(id);
+    setQuery('');
+    setShowIndex(false);
+    requestAnimationFrame(() => {
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        document.getElementById('record-subject-toggle')?.focus({ preventScroll: true });
+      }
+      bringIntoView(contentRef.current);
+    });
+  };
 
   // React always renders the source copy; the shared translator alone displays another language.
   // Existing hand-written translations are seeded above, keyed by that exact source.
@@ -511,35 +507,18 @@ export default function TogetherChangeClimate() {
       <div className="px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         <div className="lg:flex lg:items-start lg:gap-8">
           <div className="lg:flex-1 lg:min-w-0">
-            {/* ── ONE SUBJECT INDEX, AND THE SEQUENCE IS THE HONEST ONE ─────────────
-                The desk and the phone were two indexes. The phone opened the sheet: every
-                subject carrying something, fullest first, then the ones with nothing under
-                them saying so. The desk opened a list in the taxonomy's own order, with the
-                empties mixed in among the full, so a reader on a wide screen met a dozen
-                doors that go nowhere before reaching water and energy — and the two lists
-                did not even look alike. Brian, 18 November: "why doesn't subjects operate
-                and look the same and sequence right?"
-
-                So there is one index now, at both widths: the same line naming the subject
-                you are standing in, the same sheet, the same order — fullest first, empties
-                last — the same marks, the same counts. The rail of preview tiles under the
-                line stays the phone's alone, because a desk has the room to open the index
-                itself. Choosing a subject still closes the index and still carries the
-                reader down to the entries, on either glass. */}
-            <div ref={subjectDeskRef} className="my-3">
+            {/* Full themes first, then those awaiting an entry. On a phone the native
+                picker replaces the expanding sheet; desktop keeps the written index. */}
+            <div className="my-3">
               <SubjectRail
-                strip={filledSubjects}
+                subjects={[...filledSubjects, ...emptySubjects]}
                 current={activeSubject}
                 totalEntries={items.length + actions.length}
-                allLabel="All subjects"
+                allLabel="Explore by theme"
                 selected={selectedCategory}
                 expanded={showIndex}
                 onOpenIndex={() => setShowIndex(open => !open)}
-                onSelect={(id) => {
-                  setSelectedCategory(id);
-                  setShowIndex(false);
-                  requestAnimationFrame(() => bringIntoView(contentRef.current));
-                }}
+                onSelect={selectTheme}
               />
               <SubjectIndexSheet
                 open={showIndex}
@@ -548,20 +527,8 @@ export default function TogetherChangeClimate() {
                 empty={emptySubjects}
                 totalEntries={items.length + actions.length}
                 selected={selectedCategory}
-                allLabel="All subjects"
-                onSelect={(id) => {
-                  setSelectedCategory(id);
-                  setShowIndex(false);
-                  requestAnimationFrame(() => {
-                    document.getElementById('record-subject-toggle')?.focus({ preventScroll: true });
-                    bringIntoView(contentRef.current);
-                  });
-                }}
-                onAdd={(subject) => {
-                  setShowIndex(false);
-                  setSubmitCategory(subject.id);
-                  setShowSubmit(true);
-                }}
+                allLabel="Every theme"
+                onSelect={selectTheme}
               />
             </div>
             {/* "Support welcome" is off this line at Janine's request, 9 November: donations
@@ -599,16 +566,16 @@ export default function TogetherChangeClimate() {
                 were in — the only way back was to remember to tap the same door again. This
                 line says it, in the record's voice, and takes you back to all four. A line,
                 not a bar of controls. */}
-            {openDoor && (
+            {(openDoor || activeSubject) && (
               <button
-                onClick={() => setSelectedType('all')}
+                onClick={() => selectTheme('all')}
                 className="w-full flex items-center justify-between gap-3 px-4 lg:px-10 pt-5 pb-3 text-left"
               >
                 <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#3a342c]">
-                  Showing {openDoor.label} only
+                  {activeSubject ? activeSubject.label : `Showing ${openDoor.label} only`}
                 </span>
                 <span className="text-[10px] font-black font-mono uppercase tracking-widest text-[#b3261e]">
-                  All four →
+                  {activeSubject ? 'Every theme →' : 'All four →'}
                 </span>
               </button>
             )}
@@ -670,7 +637,7 @@ export default function TogetherChangeClimate() {
                directly. The door is on the page, not in an email: an organiser starts their own
                gathering, and the record carries ONLY the one contact line they chose to publish.
                Their account email is never shown, and nothing is invented on their behalf. ── */}
-        {(selectedType === 'all' || selectedType === 'groups') && (
+        {selectedCategory === 'all' && (selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
             <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" />
             <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-2">{t.groups_sub}</p>
