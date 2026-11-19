@@ -8,10 +8,12 @@
 
    1. CREAM SHEETS WITH RED STRIPS DOWN BOTH SIDES. On a 1560-pixel spread the .8rem
       margins are a hairline and the sheets read as paper on a plate. At 393 pixels the
-      same .8rem is a visible red border round every chapter, so the page became thirteen
-      framed cards. On a phone the paper now runs edge to edge and the red is seen only
+      same .8rem is a visible field border round every chapter, so the page became thirteen
+      framed cards. On a phone the paper now runs edge to edge and the field is seen only
       BETWEEN the chapters, as the band that divides them — which is how a printed poster
-      separates its sections, and it costs nothing.
+      separates its sections, and it costs nothing. The band is a little deeper now that the
+      field is the room's own green rather than its red: a colour that carries the room's
+      identity has to be seen, and fourteen pixels of it was a hairline.
 
    2. A SHADOW UNDER EVERY SHEET. A drop shadow says "this is floating". A chapter of a
       printed room is not floating; it is the next thing down the page. The shadows are
@@ -35,7 +37,7 @@
   #root .record-cartoon-field .press-room-inner { padding: 0 0 3.25rem; }
   #root .record-cartoon-field .press-room-inner > * {
     margin-inline: 0;
-    margin-bottom: .9rem;
+    margin-bottom: 1.3rem;
     padding: 1.5rem 1.15rem 1.65rem;
     box-shadow: none;
   }

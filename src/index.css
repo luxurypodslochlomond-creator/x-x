@@ -271,6 +271,13 @@ button:focus-visible {
        the platform reads this token, or the measured constant copied from it where a
        canvas, a PDF or a served image cannot read CSS. */
     --record-mark: 204 45 42;
+    /* ── THE ROOM'S OWN GREEN ─────────────────────────────────────────────────────
+       Brian, 19 November: "our own ID bro". The cartoon room is the one room of the
+       record that is a poster rather than a page, and it stands on the green of the flag
+       it belongs to rather than on the record's warning red. It is the flag's own value,
+       #008751, not a taste of green: one room, one ground, declared in one place so no
+       other page of the record picks it up by accident. */
+    --record-nigeria: 0 135 81;
     --font-record-reading:
       'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
@@ -359,6 +366,8 @@ button:focus-visible {
     /* The same borrowed red in the dark block: the mark does not change colour when the
        room does, because it is ink and not a theme. */
     --record-mark: 204 45 42;
+    /* The same green in the dark block: a room's ground is not a theme. */
+    --record-nigeria: 0 135 81;
     --font-record-reading:
       'Source Serif 4', 'Literata', 'Noto Serif', 'Iowan Old Style', 'Charter',
       'Noto Naskh Arabic', 'Geeza Pro', 'Al Bayan',
