@@ -20,6 +20,17 @@ const BASE = {
   strokeLinejoin: 'round',
 };
 
+// ── ONE HAND, AND IT IS A PRINTED HAND ────────────────────────────────────────
+// The top of the record is twelve doors, and a set only reads as a set if it has a rule
+// rather than a style. The rule here is three lines long: solid masses, nothing thinner
+// than a stroke, and exactly one element in the record's red — the part of the object that
+// is the point. Hairlines cannot do this job. At nineteen pixels, which is the size the
+// phone's second row actually gives a mark, a drawn line closes into a smudge and the red
+// in it disappears; a mass does not. That is why the row now reads as a register with a red
+// spine, a dated dispatch, a numeral on a red base, a dome on a red horizon, a course of
+// bricks with one red, and four panes with one red — and it is the test to apply to
+// anything added to this file later.
+//
 // An open folio, its leaves and spine drawn as separate ink gestures.
 export function MarkBrief({ size = 26, className = '' }) {
   return (
@@ -419,8 +430,8 @@ export function MarkBaseOne({ size = 26, className = '' }) {
 export function MarkEqual({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} strokeWidth="1.45" className={className} aria-hidden="true">
-      <path d="M9.6 14.8h20.8M9.6 23.6h20.8" className="text-record-mark" strokeWidth="3.6" />
-      <path d="M5.8 31.6h28.4" opacity=".38" strokeWidth="1.2" />
+      <rect x="8.8" y="13.2" width="22.4" height="5.6" className="text-record-mark" fill="currentColor" stroke="none" />
+      <rect x="8.8" y="22.2" width="22.4" height="5.6" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -523,8 +534,11 @@ export function MarkReadership({ size = 26, className = '' }) {
 export function MarkSeal({ size = 26, className = '' }) {
   return (
     <svg {...BASE} width={size} height={size} className={className} aria-hidden="true">
-      <circle cx="20" cy="17.6" r="9.6" />
-      <path d="M15.4 26.2 13.6 35.4l6.4-3.4 6.4 3.4-1.8-9.2" />
+      {/* A seal with its ribbon: a solid disc over two red tails. The outline version read
+          as a medal, which is a prize, and a fingerprint is not a prize — it is a mark that
+          can be checked. Solid, it is the same object the record presses, in the same red. */}
+      <circle cx="20" cy="15.4" r="9.6" fill="currentColor" stroke="none" />
+      <path d="M13.6 22.6 11.8 35.8 20 31.4l8.2 4.4-1.8-13.2Z" className="text-record-mark" fill="currentColor" stroke="none" />
     </svg>
   );
 }
