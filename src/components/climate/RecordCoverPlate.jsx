@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '@/components/climate/record-home.css';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import RecordRoomNavigation from '@/components/climate/RecordRoomNavigation';
@@ -26,8 +25,6 @@ export default function RecordCoverPlate({ copy, counts = {}, selected, onSelect
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-record-ink/20 py-3">
           <span className="text-xs text-record-muted">{copy.noads} · {copy.nofund}</span>
           <div className="flex flex-wrap items-center gap-4 text-xs text-record-muted">
-            <Link to="/ClimateWire" className="underline hover:text-record-mark">Signals →</Link>
-            <Link to="/ClimateCartoons" className="underline hover:text-record-mark">The Wall →</Link>
             <ShareCardButton entry={RECORD_CARD} build={buildRecordShareCard} link={RECORD_LINK} description={copy.sub} previewFirst inline />
           </div>
         </div>

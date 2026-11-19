@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PeaceBell from '@/components/climate/PeaceBell';
+import { MarkSignal, MarkWall } from '@/components/climate/RecordFootMarks';
 
 export default function RecordHomeVoice() {
   return (
@@ -17,7 +18,15 @@ export default function RecordHomeVoice() {
             the Jane Goodall Institute
           </a>
         </div>
-        <div className="mt-1 border-t border-record-bone/25 px-4 pt-3">
+        <nav aria-label="Continue through the record" className="mt-1 flex flex-wrap items-center justify-center gap-3 border-t border-record-bone/25 px-4 pt-4">
+          <Link to="/ClimateWire" className="inline-flex min-h-11 items-center gap-2 bg-record-paper px-4 py-2 text-sm text-record-ink hover:bg-record-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-signal">
+            <MarkSignal size={26} /> Signals →
+          </Link>
+          <Link to="/ClimateCartoons" className="inline-flex min-h-11 items-center gap-2 bg-record-paper px-4 py-2 text-sm text-record-ink hover:bg-record-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-signal">
+            <MarkWall size={26} /> The Wall →
+          </Link>
+        </nav>
+        <div className="px-4 pt-1">
           <Link to="/XEqualsX" className="bg-cartoon-sun px-2 py-1 record-header-type text-xs font-bold tracking-[0.2em] text-record-red underline decoration-dotted underline-offset-4">x = x</Link>
         </div>
       </div>

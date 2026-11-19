@@ -36,6 +36,30 @@
 
 .record-home-page { background-color: transparent; }
 
+/* Room pigments belong to their interaction, not to the drawing's ink.
+   Keep one source for hover, keyboard focus, touch and the opened room. */
+.record-home-page .record-room-link {
+  --room-wash: .16;
+  background-color: transparent;
+}
+.record-home-page .record-room-link[data-room="solution"] { --room-pigment: var(--record-botanical); }
+.record-home-page .record-room-link[data-room="climate_crisis"] { --room-pigment: var(--record-red); }
+.record-home-page .record-room-link[data-room="actions"] { --room-pigment: var(--record-clay); }
+.record-home-page .record-room-link[data-room="groups"] {
+  --room-pigment: var(--record-signal);
+  --room-wash: .36;
+}
+.record-home-page .record-room-link:is([aria-pressed="true"], :focus-visible, :active) {
+  background-color: rgb(var(--room-pigment) / var(--room-wash));
+  border-bottom-color: rgb(var(--room-pigment));
+}
+@media (min-width: 1024px) and (hover: hover) {
+  .record-home-page .record-room-link:hover {
+    background-color: rgb(var(--room-pigment) / var(--room-wash));
+    border-bottom-color: rgb(var(--room-pigment));
+  }
+}
+
 /* ── THE FRONT PAGE IS PAPER, AND THE PAINTING IS PRINTED ON IT ──────────────────
    Brian, 19 November: "cant see the text now… the cover painting taking up first spot…
    any way to bring back background so can see text." He was right, and it was structural

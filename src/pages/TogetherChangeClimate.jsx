@@ -461,7 +461,7 @@ export default function TogetherChangeClimate() {
         }}
       />
       <div className="record-home-voice-band">
-        <RecordPaintedBand strength={0.65} soft continuous>
+        <RecordPaintedBand strength={0.75} soft>
           <RecordHomeVoice />
         </RecordPaintedBand>
       </div>
