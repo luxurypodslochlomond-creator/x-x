@@ -71,7 +71,29 @@
 
 .subject-plate-art { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; min-height: 0; width: min(74%, 52px); }
 .subject-plate-art > svg { display: block; width: 100%; height: 100%; }
-.subject-plate-name { display: block; flex: none; max-width: 100%; font-size: 9.5px; line-height: 1.1; text-align: center; overflow-wrap: anywhere; }
+/* ── THE NAME UNDER THE MARK ──────────────────────────────────────────────────────
+   Set here rather than borrowed from the masthead, because the masthead's lettering is
+   open-tracked for a heading and a caption cannot afford that: at eleven and a half
+   pixels with eighteen hundredths of tracking, a single long subject — desertification —
+   ran out of its cell on a desk and broke in two. Small, tight, and one line where a
+   line will hold it. */
+.subject-plate-name {
+  display: block;
+  flex: none;
+  width: 100%;
+  max-width: 100%;
+  font-family: var(--font-record-ui);
+  font-weight: 400;
+  font-size: 9.5px;
+  line-height: 1.15;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 1024px) {
+  .subject-plate-name { font-size: 10px; letter-spacing: .02em; overflow-wrap: normal; hyphens: none; }
+}
 
 .subject-plate-caption { flex: none; margin-top: .6rem; border-top: 2px solid rgb(var(--record-mark)); padding-top: .6rem; }
 

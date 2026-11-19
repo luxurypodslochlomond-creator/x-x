@@ -122,10 +122,13 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
             {item.count > 0 && (
               <span aria-hidden="true" className="absolute right-1 top-0.5 font-mono text-[9px] tabular-nums leading-none text-record-mark/75">{item.count}</span>
             )}
-            {/* The name is set in the record's display hand, not in the small body face:
-                twenty-four lowercase captions under twenty-four drawings is a tag cloud.
-                Uppercase, tracked and bold, it is a printer's specimen sheet. */}
-            <span className="record-header-type block w-full text-center text-[10px] uppercase leading-[1.15] tracking-[0.05em] [overflow-wrap:anywhere] lg:text-[11.5px]">{item.label}</span>
+            {/* ── THE CAPTION NAMES THE DRAWING, IT DOES NOT COMPETE WITH IT ──────────
+                It wore the masthead's lettering, which is open-tracked at eighteen
+                hundredths of an em — so on a desk a long word ran out of its cell and
+                broke in two, "desertification" splitting mid-word under its own drawing.
+                A label is a label: small, tight, on one line wherever a line will hold
+                it. The drawing is what the reader is choosing between. */}
+            <span className="subject-plate-name">{item.label}</span>
           </button>
         ))}
       </div>
