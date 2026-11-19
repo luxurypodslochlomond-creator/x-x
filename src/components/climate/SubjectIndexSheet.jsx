@@ -12,9 +12,9 @@ export default function SubjectIndexSheet({ open, onClose, filled, empty, totalE
   };
   return (
     <section id="record-subject-index" aria-label={`${filled.length + empty.length} subjects`} className="pb-1 font-body text-record-ink" onKeyDown={event => { if (event.key === 'Escape') close(); }}>
-      <button type="button" onClick={() => onSelect('all')} aria-pressed={selected === 'all'} className={`flex min-h-11 w-full items-center gap-2 border-b border-record-ink/20 text-left ${selected === 'all' ? 'bg-cartoon-sun text-record-ink' : 'text-record-ink'}`}>
-        <SubjectMark subject="all" size={30} />
-        <span className="flex-1 text-[13px]">{allLabel}</span>
+      <button type="button" onClick={() => onSelect('all')} aria-pressed={selected === 'all'} className={`flex min-h-12 w-full items-center gap-2 border-b border-record-ink/20 px-1 text-left ${selected === 'all' ? 'bg-cartoon-sun text-record-ink' : 'text-record-ink'}`}>
+        <SubjectMark subject="all" size={32} />
+        <span className="flex-1 text-[14px]">{allLabel}</span>
         <span className="font-mono text-[11px] tabular-nums">{totalEntries}</span>
         {selected === 'all' && <Check aria-hidden="true" className="h-3.5 w-3.5" />}
       </button>

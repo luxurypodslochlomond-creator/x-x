@@ -34,7 +34,7 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
           same line and the same sheet without a rail to drag. */}
       {!expanded && strip.length > 0 && (
         <div
-          className="climate-nav-rail grid auto-cols-[31%] grid-flow-col border-b border-record-ink/20 overflow-x-auto lg:hidden"
+          className="climate-nav-rail grid auto-cols-[33%] grid-flow-col border-b border-record-ink/20 overflow-x-auto lg:hidden"
           style={{ scrollSnapType: 'x proximity' }}
           aria-label="Subjects on the record"
         >
@@ -44,10 +44,14 @@ export default function SubjectRail({ strip = [], current = null, totalEntries, 
               type="button"
               onClick={() => onSelect(subject.id)}
               aria-pressed={selected === subject.id}
-              className={`snap-start flex min-h-20 min-w-0 flex-col items-center gap-1 px-1 py-2 text-center active:bg-record-paper ${selected === subject.id ? 'bg-cartoon-sun text-record-ink' : 'text-record-ink'}`}
+              className={`snap-start flex min-h-[92px] min-w-0 flex-col items-center gap-1.5 border-b-2 px-1 pb-2 pt-2.5 text-center active:bg-record-paper ${selected === subject.id ? 'border-record-mark bg-cartoon-sun text-record-ink' : 'border-transparent text-record-ink'}`}
             >
-              <SubjectMark subject={subject.id} size={32} active={selected === subject.id} />
-              <span className="line-clamp-2 text-[11px] leading-[1.25]">{subject.label}</span>
+              {/* A chosen subject wears the record's red rule under it as well as the sun
+                  fill, so "here" is said the same way the masthead says it on the door you
+                  are standing in — and the label is set at twelve rather than eleven, which
+                  is the size at which a thumb-scrolled name stops being a caption. */}
+              <SubjectMark subject={subject.id} size={34} active={selected === subject.id} />
+              <span className="line-clamp-2 text-[12px] leading-[1.25]">{subject.label}</span>
             </button>
           ))}
         </div>

@@ -136,8 +136,13 @@ export default function RecordPagesPanel({ open, onClose }) {
               small mono "Contents" eyebrow and the big display line are gone with it —
               a phone is not a different publication, it is the same page on a smaller
               glass, and now it reads that way. */}
-          <div className="mb-1.5 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-1.5">
-            <p id="record-contents-title" className="record-header-type text-base text-record-mark sm:text-lg">Explore the record</p>
+          <div className="mb-2 flex shrink-0 items-center justify-between gap-4 border-b border-record-mark/30 pb-2">
+            {/* The name of the sheet is the one line on a phone that has to carry the whole
+                thing: it was set at sixteen pixels, which is the size of a caption, so the
+                sheet opened looking like a list of links rather than like the record's own
+                index. It is a masthead at nineteen now, in the red, and the doors below it
+                have room to be read instead of fitted. */}
+            <p id="record-contents-title" className="record-header-type text-[19px] leading-none text-record-mark sm:text-lg">Explore the record</p>
             <button type="button" autoFocus onClick={onClose} className="record-header-type min-h-11 px-2 text-xs text-record-ink hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark">Close <span aria-hidden="true">×</span></button>
           </div>
 

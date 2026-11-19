@@ -41,10 +41,21 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   return (
     <div className="flex flex-col font-body">
       {groups.map(({ title, doors }) => (
-          <section key={title} aria-label={title} className={phone ? 'grid grid-cols-1 border-t border-record-mark/30 pb-0.5 pt-1.5' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
-            <h2 className={`record-header-type flex items-baseline gap-2 leading-none text-record-mark ${phone ? 'pb-1 text-[10px]' : 'pt-3 text-[11px] leading-relaxed'}`}>
+          <section key={title} aria-label={title} className={phone ? 'grid grid-cols-1 border-t border-record-mark/30 pb-1' : 'grid grid-cols-[9rem_minmax(0,1fr)] items-start gap-x-5 border-t border-record-mark/30 py-2'}>
+            {/* ── ON A PHONE THE SHELF'S NAME STAYS PUT ────────────────────────────────
+                Brian, 19 November: the explore on a phone when it opens is "not coolasfuck".
+                The desk's panel holds nineteen doors in one glance because its shelf names
+                stand in a column of their own; a phone cannot do that, so it scrolled — and
+                a scroll of doors with nothing fixed above it is a list of words that has
+                stopped saying which part of the record you are standing in.
+                The shelf's own name now pins under the sheet's masthead while its doors pass
+                beneath it, and the next shelf's name takes its place: the same grouping the
+                desk shows in its left column, said the only way a narrow glass can say it.
+                The count wears the record's red plate rather than a bare number, because a
+                figure with no mark on it is the one thing this index never had on a desk. */}
+            <h2 className={`record-header-type flex items-baseline gap-2 leading-none text-record-mark ${phone ? 'sticky top-0 z-[1] bg-record-bone pb-1.5 pt-2 text-[11px] tracking-[0.16em]' : 'pt-3 text-[11px] leading-relaxed'}`}>
               <span>{title}</span>
-              <span aria-hidden="true" className="text-[10px]">{doors.length}</span>
+              <span aria-hidden="true" className={phone ? 'bg-record-mark px-1 py-[2px] font-mono text-[9px] leading-none tracking-normal text-record-bone' : 'text-[10px]'}>{doors.length}</span>
             </h2>
             <ul className={`grid ${phone ? 'grid-cols-2 gap-x-3' : 'grid-cols-3 gap-x-4'}`}>
               {doors.map(({ label, to, what }) => {
@@ -57,9 +68,9 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
                       onClick={onNavigate}
                       title={what}
                       aria-current={here ? 'page' : undefined}
-                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-11 gap-2 py-1 text-[12px] uppercase leading-[1.25] tracking-[0.05em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
+                      className={`flex items-center outline-offset-2 hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${phone ? 'min-h-12 gap-2 py-1.5 text-[13px] uppercase leading-[1.2] tracking-[0.04em]' : 'min-h-10 gap-2 py-1 text-[13px] uppercase leading-relaxed tracking-[0.08em]'} ${here ? 'text-record-mark underline underline-offset-4' : 'text-record-ink'}`}
                     >
-                      <span className="shrink-0" aria-hidden="true"><Mark size={phone ? 20 : 22} /></span>
+                      <span className="shrink-0" aria-hidden="true"><Mark size={22} /></span>
                       <span>{label}</span>
                     </Link>
                   </li>

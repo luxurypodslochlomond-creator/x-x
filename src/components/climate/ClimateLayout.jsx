@@ -121,6 +121,14 @@ export default function ClimateLayout({ children, currentPage }) {
       ? CARTOON_COVER
       : `${recordOrigin()}/api/functions/serveClimateIcon?w=1200&h=630`;
     setMeta('name', 'description', pageDescription);
+    // ── THE PHONE'S OWN STATUS BAR IS PART OF THE RECORD ────────────────────────
+    // The manifest already says the record is printed in its red, but a manifest's
+    // theme_color only colours the app once it has been added to a Home Screen. Every
+    // browser that is not yet an installed app takes the colour of the bar above the page
+    // from this tag — and it was left at whatever the last product on the platform had set,
+    // so a reader on a phone met a green or a cyan strip sitting directly on the record's
+    // red hairline. It is the record's own red now, on every page of it.
+    setMeta('name', 'theme-color', '#b3261e');
     setMeta('property', 'og:title', pageTitle);
     setMeta('property', 'og:description', pageDescription);
     setMeta('property', 'og:image', card);
