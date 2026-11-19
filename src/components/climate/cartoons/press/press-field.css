@@ -14,8 +14,17 @@
    Scoped to the cartoon room and nowhere else: every other page of the record keeps its
    painting and its paper. The masthead above stays paper on purpose — it is the book's
    furniture, and the book does not change its clothes from room to room. */
+/* ── THE FIELD IS THE RECORD'S RED, NOT ITS YELLOW ───────────────────────────────
+   Brian and Gill, 19 November: "instead of yellow on the outside of the cartoons page
+   we have our red instead." They are right, and the reason is worth keeping: yellow
+   everywhere made the yellow mean nothing. A plate is only a signal if it is used for
+   one thing, and the one thing on this page that must shout is the room's own name.
+   So the red — the record's warning colour, the colour of every rule and every label in
+   this room — takes the ground, and the yellow is spent on one band: the masthead that
+   says The Real Picture, printed edge to edge on the cream so it runs into the red.
+   Nothing else in the room changed colour, weight or size. */
 .climate-record.record-field.record-cartoon-field {
-  background-color: rgb(var(--record-signal));
+  background-color: rgb(var(--record-red));
 }
 /* The plate, not the painting: behind this room's sheets there is yellow, and nothing
    else. The record's painting still runs under every other room. */
@@ -24,4 +33,38 @@
 /* Clean paper, so the drawings are the only colour in the frame. */
 #root .record-cartoon-field .press-room-inner > * {
   background: rgb(255 253 248);
+}
+
+/* ── THE BAND THAT SAYS THE ROOM'S NAME NOW REACHES THE RED ─────────────────────
+   The masthead plate already existed — yellow, ruled black above and red below — but it
+   was set a hand's width inside the spread, so it floated in the middle of the cream and
+   the yellow never touched anything. Brian, 19 November: "have the yellow band where it
+   says the real picture, full width of the cream background, but meeting the new red."
+
+   So the plate steps out over the page's own margins and runs the whole width of the
+   cream, ending on the red at both sides. Its inks, rules, type and sizes are untouched:
+   only the box it is printed in is now the width of the page. The words inside it keep
+   their alignment with the words below — the plate's own side padding is set to exactly
+   the margin it just stepped over, so the title still stands on the same left edge as the
+   paragraphs under it. */
+#root .record-cartoon-field .press-room {
+  --press-bleed: clamp(1.5rem, 3vw, 3.5rem);
+}
+
+/* The desk's spread: 2rem of top padding and the clamp of side padding are what the plate
+   steps over, so it meets the red on the top edge and down both sides. */
+@media screen and (min-width: 1024px) {
+  #root .record-cartoon-field .press-room .press-opening-masthead {
+    margin: -2rem calc(-1 * var(--press-bleed)) 0;
+    padding-inline: var(--press-bleed);
+  }
+}
+
+/* The phone's first sheet: the same band, run to the paper's own edge — the sheet's
+   1.15rem 1rem of padding, borrowed and given back. */
+@media screen and (max-width: 639px) {
+  #root .record-cartoon-field .press-room .press-opening-masthead {
+    margin: -1.15rem -1rem 0;
+    padding-inline: 1rem;
+  }
 }
