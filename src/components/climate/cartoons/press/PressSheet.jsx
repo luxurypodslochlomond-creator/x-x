@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CartoonArtwork from '@/components/climate/cartoons/CartoonArtwork';
 import cartoonSubject from '@/components/climate/cartoons/cartoonSubjects';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildDrawingShareCard, drawingShareLine } from '@/components/climate/cartoons/drawingCard';
+import { recordOrigin } from '@/components/climate/recordAddress';
 
 // ── ONE DRAWING, GIVEN THE PAGE ────────────────────────────────────────────────
 // A wall of equal cards makes every drawing the same size and every artist equally
@@ -30,6 +33,21 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
         {title && <h3 className="press-sheet-title">{title}</h3>}
         <p className="press-sheet-by">{artist_name}{origin ? <span> · {origin}</span> : null}</p>
         {for_line && <blockquote className="press-sheet-words" dir="auto">{for_line}</blockquote>}
+        {/* ── PASS THE DRAWING ON ──
+            The wall had no way off it: a drawing could be looked at and printed, but never
+            sent to anybody as itself. This is the card — the picture whole, the artist's
+            name, where it came from, the drawer's own line quoted exactly — drawn on the
+            reader's own device, in the tongue they have picked. */}
+        <div className="press-sheet-share">
+          <ShareCardButton
+            inline
+            entry={cartoon}
+            build={buildDrawingShareCard}
+            label="Pass this drawing on"
+            description={drawingShareLine(cartoon)}
+            link={`${recordOrigin()}/ClimateCartoons?drawing=${cartoon.id}`}
+          />
+        </div>
         {crisis_id && (
           <Link className="press-sheet-link" to={`/ClimateDetail/climate_crisis/${crisis_id}`}>
             Drawn about: {crisis_title || 'an entry on the record'} ↗

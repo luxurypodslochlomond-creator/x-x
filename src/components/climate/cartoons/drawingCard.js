@@ -1,0 +1,203 @@
+import { loadRecordCardFonts } from '@/components/climate/recordTypography';
+import { recordOrigin } from '@/components/climate/recordAddress';
+import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTongue';
+
+// ── ONE DRAWING, AS A CARD ────────────────────────────────────────────────────
+// A drawing travels out of this room as a screenshot with its artist cut off, and that is
+// the one thing this room cannot allow: the hand that made it is the whole point. So the
+// card carries the picture whole — never cropped, never tinted, never re-lettered — with
+// the artist's name, where it came from, and the drawer's own line quoted exactly as they
+// wrote it. The record's own furniture (the epigraph, the line under the picture, the foot)
+// is read in the tongue the reader has already picked; the artist's words are not touched,
+// because a person's sentence is not the record's to translate.
+//
+// Drawn in the browser, on the reader's own device: making a card sends nothing anywhere.
+const W = 1080;
+const H = 1350;
+const PAD = 60;
+const MAXW = W - PAD * 2;
+const FOOTER_TOP = H - 150;
+const ART_TOP = 110;
+const ART_ROOM = 620;
+
+const CARD_LINES = [
+  'THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.',
+  'DRAWN BY HAND · GIVEN TO THE RECORD',
+  'RECORD OF THE TIME',
+];
+
+// A script that writes right to left is shaped and ordered by the canvas itself.
+const RTL_SCRIPT = /[\u0590-\u05FF\u0600-\u06FF\u0700-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]/;
+
+function loadImage(src) {
+  return new Promise((resolve) => {
+    if (!src) { resolve(null); return; }
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+function wrapLines(ctx, text, maxWidth, maxLines) {
+  const words = String(text || '').split(/\s+/).filter(Boolean);
+  const lines = [];
+  let line = '';
+  let used = 0;
+
+  for (const word of words) {
+    const test = line ? `${line} ${word}` : word;
+    if (ctx.measureText(test).width <= maxWidth || !line) { line = test; used += 1; continue; }
+    lines.push(line);
+    if (lines.length === maxLines) { line = ''; break; }
+    line = word;
+    used += 1;
+  }
+  if (line && lines.length < maxLines) lines.push(line);
+
+  if (used < words.length && lines.length) {
+    let last = lines[lines.length - 1];
+    while (ctx.measureText(`${last} …`).width > maxWidth && last.length > 6) {
+      last = last.slice(0, -2).replace(/[\s,.;:·-]+$/, '');
+    }
+    lines[lines.length - 1] = `${last} …`;
+  }
+  return lines;
+}
+
+function fit(ctx, text, maxWidth) {
+  let out = String(text || '');
+  if (ctx.measureText(out).width <= maxWidth) return out;
+  while (out.length > 6 && ctx.measureText(`${out}…`).width > maxWidth) out = out.slice(0, -1);
+  return `${out}…`;
+}
+
+// The line that travels beside the picture in a chat: who made it, where it came from,
+// and their own sentence — so the drawing is never introduced by nobody.
+export function drawingShareLine(cartoon = {}) {
+  const who = [cartoon.artist_name, cartoon.origin].filter(Boolean).join(', ');
+  const own = String(cartoon.for_line || '').trim();
+  return own ? `${who} — “${own}”` : who;
+}
+
+export async function buildDrawingShareCard(cartoon = {}, options = {}) {
+  const origin = String(options.origin || recordOrigin() || '').replace(/^https?:\/\//, '');
+  const words = await cardWords(CARD_LINES);
+  const t = (line) => words[line] || line;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
+  const img = await loadImage(cartoon.display_image_url || cartoon.image_url);
+
+  const rtl = cardTongueIsRightToLeft();
+  const edge = rtl ? W - PAD : PAD;
+
+  // Paper, cold scanline grain.
+  ctx.fillStyle = PAPER;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(20,18,16,0.035)';
+  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
+
+  // Epigraph band, the same one every page of the record carries.
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, 0, W, 74);
+  ctx.fillStyle = BONE;
+  ctx.globalAlpha = 0.7;
+  ctx.font = `700 15px ${MONO}`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(t(CARD_LINES[0]), W / 2, 38);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = SIGNAL_BRIGHT;
+  ctx.beginPath(); ctx.arc(W / 2 - 330, 38, 4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.arc(W / 2 + 330, 38, 4, 0, Math.PI * 2); ctx.fill();
+
+  ctx.direction = rtl ? 'rtl' : 'ltr';
+  ctx.textAlign = rtl ? 'right' : 'left';
+  ctx.textBaseline = 'alphabetic';
+
+  // The drawing, whole. Somebody else's artwork is not the record's to crop.
+  let artBottom = ART_TOP;
+  if (img) {
+    const scale = Math.min(MAXW / img.width, ART_ROOM / img.height);
+    const dw = Math.max(1, Math.round(img.width * scale));
+    const dh = Math.max(1, Math.round(img.height * scale));
+    ctx.drawImage(img, Math.round((W - dw) / 2), ART_TOP + Math.round((ART_ROOM - dh) / 2), dw, dh);
+    artBottom = ART_TOP + ART_ROOM;
+  }
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, artBottom + 24, W, 3);
+
+  // What this is, said once, in the borrowed red.
+  let y = artBottom + 78;
+  ctx.fillStyle = MARK;
+  ctx.font = `700 19px ${MONO}`;
+  ctx.fillText(fit(ctx, t(CARD_LINES[1]), MAXW), edge, y);
+
+  // The hand that made it — never separated from the drawing.
+  y += 62;
+  ctx.fillStyle = INK;
+  const name = String(cartoon.artist_name || '');
+  let nameSize = 46;
+  ctx.font = `700 ${nameSize}px ${DISPLAY}`;
+  while (nameSize > 28 && ctx.measureText(name).width > MAXW) {
+    nameSize -= 2;
+    ctx.font = `700 ${nameSize}px ${DISPLAY}`;
+  }
+  ctx.fillText(name, edge, y);
+
+  if (cartoon.origin) {
+    y += 34;
+    ctx.fillStyle = MUTED;
+    ctx.font = `400 22px ${MONO}`;
+    ctx.fillText(fit(ctx, cartoon.origin, MAXW), edge, y);
+  }
+
+  // The drawer's own words, quoted exactly, in whatever tongue they wrote them.
+  const own = String(cartoon.for_line || '').trim();
+  if (own) {
+    const ownRtl = RTL_SCRIPT.test(own);
+    const ownEdge = ownRtl ? W - PAD : PAD;
+    ctx.save();
+    ctx.direction = ownRtl ? 'rtl' : 'ltr';
+    ctx.textAlign = ownRtl ? 'right' : 'left';
+    ctx.font = `400 27px ${MONO}`;
+    const lines = wrapLines(ctx, own, MAXW - 34, 4);
+    const top = y + 62;
+    ctx.fillStyle = MARK;
+    ctx.fillRect(ownRtl ? W - PAD + 12 : PAD - 28, top - 26, 5, lines.length * 40 + 6);
+    ctx.fillStyle = 'rgba(20,18,16,0.9)';
+    lines.forEach((line, i) => ctx.fillText(line, ownEdge, top + i * 40));
+    ctx.restore();
+  }
+
+  // Footer — the mark, the covenant, and where the wall is.
+  ctx.fillStyle = INK;
+  ctx.fillRect(0, FOOTER_TOP, W, 150);
+  ctx.textAlign = rtl ? 'right' : 'left';
+  ctx.fillStyle = SIGNAL_BRIGHT;
+  ctx.font = `700 24px ${MONO}`;
+  ctx.fillText(t(CARD_LINES[2]), edge, FOOTER_TOP + 52);
+  ctx.textAlign = rtl ? 'left' : 'right';
+  ctx.fillStyle = MARK;
+  ctx.font = `700 22px ${MONO}`;
+  ctx.fillText('x = x', rtl ? PAD : W - PAD, FOOTER_TOP + 52);
+  ctx.textAlign = rtl ? 'right' : 'left';
+  ctx.fillStyle = BONE;
+  ctx.font = `700 18px ${MONO}`;
+  ctx.fillText(fit(ctx, `${origin}/ClimateCartoons`, MAXW), edge, FOOTER_TOP + 100);
+
+  // Signal edge, drawn last so it stays on top of the picture.
+  ctx.fillStyle = SIGNAL;
+  ctx.fillRect(0, 74, 8, H - 74);
+
+  return new Promise((resolve, reject) => canvas.toBlob(
+    (blob) => (blob ? resolve(blob) : reject(new Error('The card could not be saved. Please try again.'))),
+    'image/png',
+  ));
+}
