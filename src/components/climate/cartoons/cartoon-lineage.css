@@ -38,8 +38,7 @@
 .cartoon-lineage-body { padding: 0 clamp(1.2rem, 3vw, 3rem) 2rem; }
 .cartoon-lineage-group { padding-block: 2rem; scroll-margin-top: 16rem; }
 .cartoon-lineage-group + .cartoon-lineage-group { border-top: 2px solid rgb(var(--record-ink)); }
-.cartoon-lineage-group-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
-.cartoon-lineage-number { font-size: 2.6rem; font-weight: 700; line-height: 1; color: rgb(var(--record-red)); }
+.cartoon-lineage-group-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; align-items: start; }
 #root .press-room .cartoon-lineage-group h3, #root .press-room .cartoon-lineage-odoi h3 {
   margin: .3rem 0 .6rem; font-size: clamp(1.5rem, 2.5vw, 2.4rem);
   letter-spacing: -.025em !important; line-height: 1.05 !important; text-transform: none;

@@ -103,7 +103,6 @@
   #root .record-cartoon-field .press-room .cartoon-lineage-body { padding: 0; }
   #root .record-cartoon-field .press-room .cartoon-lineage-group { padding-block: 1.5rem; }
   #root .record-cartoon-field .press-room .cartoon-lineage-group + .cartoon-lineage-group { border-top-width: 1px; }
-  #root .record-cartoon-field .press-room .cartoon-lineage-number { font-size: 1rem; padding-top: .5rem; font-weight: 400; }
   #root .record-cartoon-field .press-room .cartoon-lineage-person { padding: 1.2rem; background: rgb(var(--record-paper)); }
   #root .record-cartoon-field .press-room .cartoon-lineage-list { gap: 1rem; }
   #root .record-cartoon-field .press-room .cartoon-lineage-doors a:first-child { background: none; padding-inline: 0; text-decoration: underline; color: rgb(var(--record-red)); }

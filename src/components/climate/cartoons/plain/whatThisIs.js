@@ -1,23 +1,40 @@
 // ── WHAT THIS IS, IN THE WORDS THAT CAN BE CHECKED LATER ───────────────────────
 // A cartoonist asked, before the workshop, whether this room is part of somebody else's
-// campaign or a platform of its own. A question asked in a private message is answered in a
-// private message — but the answer has to outlive the chat, because the next cartoonist will
-// ask the same thing and nobody will have the message. So the answer is written here, on the
-// record, where anyone can read it and hold the record to it.
+// campaign or a platform of its own. The answer has to outlive the chat, because the next
+// cartoonist will ask the same thing and nobody will have the message.
+//
+// ── WHAT BRIAN SAID ON 20 NOVEMBER, AND WHAT WAS WRONG ────────────────────────
+// "the wall has lots of copy not needed in places sentences don't make sense or give wrong
+// context bro and hard to find what this is for page and when get there it's opposite of
+// cartoons bro for am and bring text how can we get better bro"
+//
+// He was right on every count, and the worst fault was the first line of the old page:
+//
+//     "No to the first. No to the second."
+//
+// The question has two halves. Answering "no" to both of them and then saying "it is one
+// record with rooms in it" is a contradiction in the third sentence of a page written for
+// somebody reading English as a second language. A reader who hits that stops trusting the
+// rest, and should. The answer is not two noes: it is a no to the first, and a different
+// kind of no to the second — it is not a website, but it is not nothing either.
+//
+// The second fault was length. Eleven sections of paragraphs is the opposite of a room full
+// of drawings, and this page is the first thing a cartoonist sees. So the page now opens
+// with the answer, then one plate that shows the difference between a website and this room
+// side by side, and only then — folded away, for whoever wants it — the long version.
+//
+// The third fault was the biography. The old page told a cartoonist what he had studied, and
+// what happened in Bonn in 2019, from one newspaper piece he had written himself. That is a
+// single source being worn as settled fact, on a record whose whole argument is that a claim
+// says how well it is known. It is cut to what the record can stand behind.
 //
 // Two rules for the copy, and both are for the reader rather than for style:
 //
 //   • Short sentences, no idiom, no slang. This page will be read by people who work in
 //     English as a second or third language. A sentence that needs the reader to know what
 //     "no skin off my nose" means is a sentence that excludes the person it was written for.
-//   • Every claim here is one the record can be held to, and every fact about the biennial is
-//     sourced at the foot of the page. Nothing is described as planned, hoped for or coming
-//     soon. What is not there is said to be not there.
-//
-// The facts about the biennial are not decoration. A cartoonist deciding whether to hand his
-// work to a stranger is owed the courtesy of being told that the stranger knows what he has
-// already built. They come from the report listed in SOURCES, and from the biennial's own
-// record of its editions — never from a guess.
+//   • Every claim here is one the record can be held to. What is not there is said to be
+//     not there.
 export const ASKED = [
   'Is this part of somebody else’s campaign, or is it a platform of its own?',
 ];
@@ -29,63 +46,60 @@ export const SOURCES = [
   },
 ];
 
-export const SECTIONS = [
-  {
-    head: 'The short answer',
-    paras: [
-      'No to the first. No to the second.',
-      'It is not a page inside a campaign, and it is not a website of its own for the biennial. It is one record with rooms in it, and one of those rooms is for cartoons.',
+// Three lines, and they have to be read in order or the answer is wrong.
+export const SHORT = [
+  'It is not part of somebody else’s campaign.',
+  'It is not a website for the biennial either.',
+  'It is one room in a record, and the room holds cartoons.',
+];
+
+// ── THE TWO PLATES ─────────────────────────────────────────────────────────────
+// This is the whole page in one picture, and it is the part to send to a cartoonist: what a
+// website has to do, and what this room does instead. Two things, not one. Nobody is being
+// asked to move a festival into a record, and nobody is being told a record replaces a site.
+export const COMPARE = {
+  left: {
+    label: 'A website for the biennial',
+    lines: [
+      'A programme, and a call for entries.',
+      'Rules, a jury, a way to receive work.',
+      'A way to sell the book.',
+      'Eight editions of history in one place.',
+      'It carries a yearly bill. When the bill is not paid, the site goes dark.',
     ],
+    verdict: 'You still need this. It is a different job, and it is not this.',
   },
-  {
-    head: 'What he has already built',
-    paras: [
-      'The question came from Francis Umendu Odupute, in Benin City. What he has built is worth saying before the answer, because the answer only makes sense against it.',
-      'He started the CartoonAFRICA International Biennial in November 2012, and has held it every other year since. The eighth opens on 28 November 2026 at the National Museum in Benin City, and its subject is climate change: what collective action and creative work can actually do about it.',
-      'He studied painting at the University of Benin to master’s level, and journalism after that. He works as a journalist, which is why the biennial has been reported as well as exhibited.',
-      'In 2019 the United Nations SDG Action Campaign invited the biennial’s cartoon campaign to the SDG Global Festival of Action in Bonn. The drawings were shown there, and then they travelled: a group in Bonn took them into community events, and they were used for Africa Liberation Day under the name “The Future of Africa”.',
-      'That is fourteen years of gathering other people’s drawings to say something about development. A room that collects cartoons for a living does not get to be careless about a man who has done that.',
+  right: {
+    label: 'This room',
+    lines: [
+      'The drawings, and nothing else.',
+      'Who drew it, where it came from, and one line in the drawer’s own words.',
+      'No bill, no renewal date, no invoice in anybody’s name.',
+      'Prints as a single sheet, or as a whole exhibition for a classroom.',
     ],
+    verdict: 'This is the wall that outlives the festival.',
   },
+};
+
+export const AFTER = {
+  head: 'After the 29th, nothing comes down.',
+  list: [
+    'The credit line never comes off the picture. The name of the hand that made a drawing stays with that drawing.',
+    'Every drawing keeps where it came from and when it arrived, so a reader can go and check it.',
+    'Entries are fingerprinted. If the words are changed later, the fingerprint stops matching, and the record says so in public.',
+    'Corrections are made in daylight, with the date written on them.',
+    'The whole record can be taken out as one file, drawings included, at any time. If this place ever stopped, the drawings would still leave with the people who want them.',
+  ],
+};
+
+// The long version, folded away. Same words as before, cut of the paragraphs that were
+// saying the same thing twice, and kept for the reader who is deciding properly.
+export const MORE = [
   {
-    head: 'One record, several rooms',
+    head: 'Who asked',
     paras: [
-      'One room holds what is happening to the climate: the emergencies, the things that are working, the actions people can join. Another room holds cartoons. That second room is the one being asked about.',
-      'It is not an illustration of an argument. Nobody writes a caption for a cartoonist. Nobody uses a drawing to make a point it does not make. The workshop on Sunday 29 November is in Francis’s book, and the cartoon room sits in the same record as every other page here.',
-      'Two rooms, one record. Neither room reports to the other.',
-    ],
-  },
-  {
-    head: 'What it is not',
-    paras: [
-      'It is not a website for CartoonAFRICA, and it will not become one.',
-      'It does not hold entries, a jury, rules, book sales or administration. It will not host a festival programme, and it will not replace the site that went down. If that is what is needed, this is not it, and it is better said now than after the work has been moved here.',
-    ],
-    after:
-      'It does one thing. It keeps drawings: who drew it, where it came from, and one line in the drawer’s own words. And it keeps them after the biennial closes.',
-  },
-  {
-    head: 'So is a website still needed?',
-    paras: [
-      'Yes. This is not one, and it should not be stretched into one.',
-      'A biennial needs a programme, a call for entries, rules, a jury, a way to receive work, a way to sell the book, and eight editions of history kept in one place. That is a website, and it is a different job from this one.',
-      'The difference is worth saying plainly, because it is the difference he already knows: a website carries a yearly bill, and when the bill is not paid the site goes dark. This record carries no bill in his name. That is the whole reason the drawings can be promised to still be here in ten years.',
-      'So: two things, not one. A website for the biennial, built for that. And a room here, where the drawings stay after the festival closes, and do not depend on anybody remembering to pay for a domain.',
-    ],
-  },
-  {
-    head: 'What happens after the 29th',
-    paras: [
-      'Nothing comes down.',
-      'There is no renewal date on a drawing. No invoice arrives, no domain lapses, no subscription has to be paid to keep the wall standing. Nothing is charged now and nothing later, and nobody will be asked to bring a sponsor to keep the work where it is.',
-      'That is not a promise about good intentions. It is how the thing is built:',
-    ],
-    list: [
-      'The credit line never comes off the picture. The name of the hand that made a drawing stays with that drawing wherever it goes.',
-      'Every entry carries where it came from and when it arrived, so a reader can go and check it.',
-      'Entries are fingerprinted. If the words are changed later, the fingerprint stops matching, and the record says so in public rather than quietly correcting itself.',
-      'Corrections are made in daylight, with the date written on them.',
-      'The whole record can be taken out as one file, drawings included, at any time. So the work does not depend on this website staying alive, or on the people who built it still being here. If this place ever stopped, the drawings would still leave with the people who want them.',
+      'Francis Umendu Odupute, in Benin City. He started the CartoonAFRICA International Biennial in 2012 and has held it every other year since. The eighth opens on 28 November 2026 at the National Museum in Benin City, and its subject is the climate.',
+      'That is fourteen years of gathering other people’s drawings. This room does not get to be careless with it.',
     ],
   },
   {
@@ -96,24 +110,10 @@ export const SECTIONS = [
     ],
   },
   {
-    head: 'What is not here',
-    paras: [
-      'No money for the biennial. No likes, no followers, no ranking, no view counts set beside another cartoonist’s to make one compete with the other. No advertising. No addresses sold. No rights taken: the drawing stays the artist’s.',
-      'And no funder behind any of this yet. That should be known before any work is put here.',
-    ],
-  },
-  {
-    head: 'What anyone may do with a drawing',
-    paras: [
-      'Print it. Any drawing on this wall can be printed as a single sheet, or as a whole exhibition for a classroom, with the artist’s name and credit printed under it. Nothing is sold and nothing is counted.',
-      'That is deliberate. A cartoon that cannot be printed cannot travel, and these drawings have already travelled further than most — to Bonn, into community halls, onto a wall for Africa Liberation Day. A record that locked them behind a page would be working against the thing the biennial does.',
-    ],
-  },
-  {
     head: 'What the artist decides',
     paras: [
       'Which drawings go up. What the line under them says, in the artist’s own words, uncorrected. What the credit says. Whether an address is shown.',
-      'And a drawing can be taken down. Ask, and it comes down. The record keeps a note that it was taken down, and why, in the open — not to hold it against anybody, but so that nothing on this record disappears without trace, including a drawing that left at its artist’s request.',
+      'And a drawing can be taken down. Ask, and it comes down. The record keeps a note that it was taken down, and why, in the open. Not to hold it against anybody, but so that nothing on this record disappears without trace, including a drawing that left at its artist’s request.',
     ],
   },
   {
@@ -121,6 +121,13 @@ export const SECTIONS = [
     paras: [
       'One drawing. One line in the artist’s own words about what it is for. The credit as it should be printed, if the drawing is held by anyone other than the artist.',
       'That is the whole ask. Everything else on the wall follows from it.',
+    ],
+  },
+  {
+    head: 'What is not here',
+    paras: [
+      'No money for the biennial. No likes, no followers, no ranking, no view counts set beside another cartoonist’s to make one compete with the other. No advertising. No addresses sold. No rights taken: the drawing stays the artist’s.',
+      'And no funder behind any of this yet. That should be known before any work is put here.',
     ],
   },
 ];

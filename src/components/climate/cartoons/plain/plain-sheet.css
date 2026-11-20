@@ -140,6 +140,141 @@
   text-decoration: underline;
 }
 
+/* ── THE THREE LINES ────────────────────────────────────────────────────────────
+   The answer, and the third line carries it. The first two are the noes, set plain because
+   a no needs no decoration; the third is the answer, so it is printed on the record's own
+   signal plate. Read in order, they cannot be misunderstood — which the old page managed to
+   do in its third sentence. */
+.plain-short {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+
+.plain-short li {
+  font-family: var(--font-reading);
+  font-size: 1.06rem;
+  line-height: 1.45;
+  color: rgb(var(--record-ink));
+}
+
+.plain-short li:last-child {
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  padding: .65rem .8rem;
+  font-weight: 700;
+}
+
+/* ── TWO THINGS, NOT ONE ────────────────────────────────────────────────────────
+   The whole page in one look. The left plate is a bill: dashed edge, no fill, muted ink,
+   because that is what a website with a yearly renewal actually looks like. The right plate
+   is the wall: solid ink edge on bone. Side by side on a desk, stacked on a phone, and never
+   styled as though one were the lesser of the two. */
+.plain-compare {
+  display: grid;
+  gap: .7rem;
+}
+
+.plain-compare-card {
+  padding: .9rem;
+  min-width: 0;
+}
+
+.plain-compare-website {
+  border: 1px dashed rgb(var(--record-ink) / .35);
+}
+
+.plain-compare-room {
+  background: rgb(var(--record-bone));
+  border: 2px solid rgb(var(--record-ink));
+}
+
+.plain-compare-label {
+  margin: 0 0 .65rem;
+  font-family: var(--font-record-ui);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.plain-compare-website .plain-compare-label { color: rgb(var(--record-muted)); }
+.plain-compare-room .plain-compare-label { color: rgb(var(--record-red)); }
+
+.plain-compare-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  font-family: var(--font-reading);
+  font-size: .93rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+}
+
+.plain-compare-verdict {
+  margin: .8rem 0 0;
+  padding-top: .6rem;
+  border-top: 1px solid rgb(var(--record-ink) / .2);
+  font-family: var(--font-record-ui);
+  font-size: .78rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.plain-compare-website .plain-compare-verdict { color: rgb(var(--record-muted)); }
+
+/* ── THE LONG ANSWER, FOLDED ────────────────────────────────────────────────────
+   Kept whole, and kept out of the way. A page that answers in three lines and then offers
+   eleven paragraphs to whoever wants them is a page a cartoonist can use; the same page with
+   the eleven paragraphs open is the one Brian called the opposite of cartoons. */
+.plain-more {
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+  padding-top: .9rem;
+}
+
+.plain-more summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: rgb(var(--record-ink));
+}
+
+.plain-more summary::-webkit-details-marker { display: none; }
+
+.plain-more summary::after {
+  content: '+';
+  color: rgb(var(--record-red));
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.plain-more[open] summary::after { content: '−'; }
+
+.plain-more-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding-top: .5rem;
+}
+
+@media (min-width: 768px) {
+  .plain-compare { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .plain-short li { font-size: 1.15rem; }
+}
+
 @media (min-width: 1024px) {
   .plain-p { font-size: 1.02rem; }
   .plain-list li { font-size: 1rem; }
