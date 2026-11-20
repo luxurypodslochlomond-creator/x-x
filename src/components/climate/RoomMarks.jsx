@@ -41,16 +41,19 @@ export function RoomMarkCrisis({ size = 40, className = '' }) {
   );
 }
 
-// Solutions — the same ground, whole, with something standing up out of it. The seed in
-// the soil is the red part, because the seed is the thing another place can copy.
+// Solutions — the same ground as the crisis, whole, with something standing up out of it.
+// The growth is the red part and the ground is ink, which is the pairing the crisis makes
+// the other way round: there the ground is what is broken, here the ground is fine and the
+// living thing is what the record is pointing at. It is also the honest size — a red seed
+// chip in the soil was five pixels on a tablet, and a mark whose one red part cannot be
+// seen at the size it is drawn is a mark with no point in it.
 export function RoomMarkSolution({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
       <rect x="3" y="29" width="34" height="7" {...MASS} />
-      <rect x="18.4" y="13.4" width="3.6" height="15.6" {...MASS} />
-      <path d="M19 15.4C19 9.4 14.2 5.6 8.8 6.6 8.6 11.6 13.2 15.8 19 15.4Z" {...MASS} />
-      <path d="M21.2 12.6C21.6 7.4 26.4 4.2 31.6 5 31.8 9.8 27.2 13.4 21.2 12.6Z" {...MASS} />
-      <rect x="17.4" y="31.2" width="5.2" height="3.4" {...RED} />
+      <rect x="18.4" y="13.4" width="3.6" height="15.6" {...RED} />
+      <path d="M19 15.4C19 9.4 14.2 5.6 8.8 6.6 8.6 11.6 13.2 15.8 19 15.4Z" {...RED} />
+      <path d="M21.2 12.6C21.6 7.4 26.4 4.2 31.6 5 31.8 9.8 27.2 13.4 21.2 12.6Z" {...RED} />
     </svg>
   );
 }
