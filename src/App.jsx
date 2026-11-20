@@ -170,6 +170,10 @@ const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoon
 // One hand's own address — Francis Umendu Odupute, who started the biennial, drew its cover
 // and edits its book, and whose new work needs somewhere on the record to show the world.
 const ClimateCartoonFrancisPage = React.lazy(() => import('./pages/ClimateCartoonFrancis'));
+// The answer to "what is this?", written for a cartoonist deciding whether to trust the
+// place with his work. Its own address, because a question asked in a chat deserves an
+// answer that is still there when the chat is gone.
+const ClimateCartoonsWhatThisIsPage = React.lazy(() => import('./pages/ClimateCartoonsWhatThisIs'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
 const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoonsThread'));
 const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
@@ -394,6 +398,7 @@ const AuthenticatedApp = () => {
           words, the cover he drew, and then everything he gives the record, read live from
           the same table the wall reads so his next drawing appears without anybody editing it. */}
       <Route path="/ClimateCartoons/Francis" element={<ClimateCartoonFrancisPage />} />
+      <Route path="/ClimateCartoons/WhatThisIs" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsWhatThisIsPage /></ClimateLayout>} />
 
       {/* ── THE PRINT ROOM, AND THE SHOW IT MAKES ────────────────────────────────────
           Two addresses, and only one of them is a room. /ClimateCartoons/Print is a room of

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import CartoonMaker from '@/components/climate/cartoons/CartoonMaker';
 import CartoonSendIn from '@/components/climate/cartoons/CartoonSendIn';
@@ -17,6 +18,16 @@ export default function CartoonRoomActions() {
         <summary><PaperPhoto size={25} /><span>Bring a paper drawing</span><ChevronDown size={20} className="comic-chevron" /></summary>
         <div className="comic-drawer-content"><CartoonSendIn /></div>
       </details>
+      {/* ── THE DOOR FOR SOMEBODY DECIDING ─────────────────────────────────────
+          A cartoonist who has been offered a platform before does not want a drawer to draw
+          in, he wants to know what happens to his work afterwards. That question has its own
+          page, and it belongs here rather than buried in a footer. */}
+      <p className="record-meta comic-workshop-note" style={{ marginTop: '1rem' }}>
+        Not sure what this room is?{' '}
+        <Link to="/ClimateCartoons/WhatThisIs" style={{ color: 'rgb(var(--record-red))', textDecoration: 'underline' }}>
+          What this is, in plain words
+        </Link>
+      </p>
     </section>
   );
 }

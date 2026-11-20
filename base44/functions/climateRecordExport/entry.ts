@@ -18,6 +18,13 @@ const ENTITIES = [
   'ClimateCategory',
   'ClimateTrack',
   'ClimateWord',
+  // And the drawings. Brian, 20 November: "I'm worried we don't build something that can last
+  // for generations beyond the event on the 29th." A wall that only exists as rows in a table
+  // on somebody else's platform is not a record, it is a rental — so the cartoon room travels
+  // in the same file as everything else, with each drawing's artist, origin, credit, source
+  // and line kept exactly as it sits on the wall. The sender's address is dropped by the
+  // rule below, like every other address in this file.
+  'ClimateCartoon',
   // The kept copies of what each source actually said, on the day it was cited. Without
   // these the file leaving here carries the claims and not the proof — the record would
   // be exporting its conclusions and keeping its evidence, which is the one thing it

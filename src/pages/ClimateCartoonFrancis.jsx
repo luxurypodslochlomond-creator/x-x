@@ -157,6 +157,19 @@ export default function ClimateCartoonFrancis() {
           </p>
         </section>
 
+        {/* ── THE QUESTION HE ASKED, ANSWERED ON THE RECORD ────────────────────
+            He asked, in a private message, whether this is a page on Janine's site or a
+            platform of its own. The answer is neither, and it is longer than a message, so
+            it has its own address — one he can read once, send on to another cartoonist,
+            and hold the record to later. */}
+        <p className="hand-where">
+          What this room is, and what happens to a drawing after the biennial:{' '}
+          <Link to="/ClimateCartoons/WhatThisIs" style={{ color: 'rgb(var(--record-red))', textDecoration: 'underline' }}>
+            in plain words
+          </Link>
+          .
+        </p>
+
         {/* ── HIS OWN WORDS, NOW THAT SOMETHING OF HIS HAS BEEN SEEN ───────────
             Quoted rather than summarised: a page about a person that paraphrases them is a
             page about the person who wrote it. His titles live here, at the foot, because a
