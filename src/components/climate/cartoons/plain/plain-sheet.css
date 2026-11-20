@@ -99,6 +99,47 @@
   margin-top: .9rem;
 }
 
+/* The cover of the book he edits, at the top of the page that asks him to trust the place.
+   One plate, modestly sized, with the hand that made it named underneath — the same rule the
+   record applies to every other picture it carries. */
+.plain-plate {
+  margin: 0 0 .4rem;
+  max-width: 250px;
+}
+
+.plain-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(var(--record-ink) / .25);
+}
+
+.plain-plate figcaption {
+  margin-top: .45rem;
+  font-family: var(--font-record-ui);
+  font-size: 10.5px;
+  line-height: 1.45;
+  letter-spacing: .04em;
+  color: rgb(var(--record-muted));
+}
+
+/* Where the facts came from. Small, at the foot, and always present: a page that says what a
+   man has built and does not say how it knows is asking to be believed rather than checked. */
+.plain-source {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+  font-family: var(--font-record-ui);
+  font-size: 10.5px;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+
+.plain-source a {
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+}
+
 @media (min-width: 1024px) {
   .plain-p { font-size: 1.02rem; }
   .plain-list li { font-size: 1rem; }

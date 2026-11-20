@@ -84,6 +84,13 @@ export default function NewsIndex({ entries, loading, query, onQueryChange, kind
 
       <footer className="news-index-foot">
         <Link to="/TogetherChangeClimate" className="news-text-action">← The record</Link>
+        {/* ── THE WAY ACROSS TO THE DRAWINGS ──────────────────────────────────────
+            Brian, 20 November: "easy to get to from the wire?" It was not: the cartoon room
+            sat on the record and could only be reached by going back to the contents sheet,
+            which meant a reader standing on the wire had no idea there were drawings on the
+            same record. It goes in the wire's own foot, beside the other two doors, because
+            the foot is where the wire already offers to take you somewhere else. */}
+        <Link to="/ClimateCartoons" className="news-text-action">The cartoon room →</Link>
         <Link to="/ClimateMethod" className="news-text-action">Checks & corrections →</Link>
       </footer>
     </section>
