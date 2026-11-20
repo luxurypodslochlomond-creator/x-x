@@ -164,6 +164,45 @@ async function askModel(base44, words, lang) {
     rongorongo: 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
     'easter island': 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
     'easter island script': 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
+    // ── THE CODES A MACHINE WILL GUESS WRONG IF LEFT ALONE ─────────────────────────
+    // A bare code is not always enough. "sco" is Scots — the Germanic tongue of Lowland
+    // Scotland — and a model handed those three letters will answer in Scottish Gaelic, which
+    // is a different language written by different people, and the page would then be wrong in
+    // a way that looks like care. So the ones with a lookalike neighbour are spelled out.
+    sco: 'Scots, the Germanic tongue of Lowland Scotland, written in Scots. This is not Scottish Gaelic (gd) and must never be answered in Gaelic',
+    gv: 'Manx Gaelic (Gaelg), the Celtic tongue of the Isle of Man',
+    ku: 'Kurdish (Kurmanji), written in the Latin alphabet',
+    zgh: 'Tamazight, the Berber tongue of North Africa (Tifinagh, Latin or Arabic script as the wording requires)',
+    hmn: 'Hmong (White Hmong), written in the Latin alphabet',
+    ak: 'Akan, including Twi and Fante',
+    ee: 'Ewe (Eʋegbe)',
+    st: 'Sesotho, the Sotho tongue of Lesotho and South Africa. Not Sesotho sa Leboa (Northern Sotho)',
+    tn: 'Setswana, the Tswana tongue of Botswana and South Africa',
+    ny: 'Chichewa (Nyanja)',
+    om: 'Oromo (Afaan Oromoo)',
+    ti: 'Tigrinya, written in the Geʽez script',
+    rw: 'Kinyarwanda',
+    ln: 'Lingala',
+    bm: 'Bambara (Bamanankan)',
+    mg: 'Malagasy, the tongue of Madagascar',
+    se: 'Northern Sami (Davvisámegiella)',
+    kl: 'Greenlandic (Kalaallisut)',
+    fo: 'Faroese',
+    fy: 'West Frisian (Frysk), the tongue of Friesland. Not Dutch and not German',
+    nds: 'Low German (Plattdüütsch). Not High German',
+    hsb: 'Upper Sorbian, a Slavic tongue of Saxony. Not German',
+    dsb: 'Lower Sorbian, a Slavic tongue of Brandenburg. Not German',
+    rue: 'Rusyn. Not Russian and not Ukrainian',
+    csb: 'Kashubian, a West Slavic tongue of Pomerania. Not Polish',
+    szl: 'Silesian (Ślōnskŏ), the Slavic tongue of Upper Silesia. Not Polish',
+    ug: 'Uyghur, written in the Uyghur Arabic script',
+    ht: 'Haitian Creole (Kreyòl ayisyen). Not French',
+    ceb: 'Cebuano (Bisaya), the tongue of Cebu and the Visayas. Not Tagalog',
+    su: 'Sundanese (Basa Sunda). Not Indonesian',
+    bo: 'Tibetan, written in the Tibetan script',
+    lo: 'Lao, written in the Lao script. Not Thai',
+    ks: 'Kashmiri, written in the Perso-Arabic script',
+    dv: 'Dhivehi, the tongue of the Maldives, written in Thaana',
   };
   // ── A GUESS IS NOT A TRANSLATION ───────────────────────────────────────────────
   // Brian, 20 November: "make sure we have all native tongues for all people, especially the
@@ -188,6 +227,15 @@ async function askModel(base44, words, lang) {
     'tt', 'ce', 'ba', 'cv', 'sah', 'os', 'av', 'kk', 'uz', 'az', 'ky', 'tg', 'tk',
     // Yiddish drifts into German, Cantonese and Hokkien into Mandarin, if nobody says stop
     'yi', 'yue', 'nan',
+    // The tongues added on 20 November, when the list reached 189: Europe's nations inside
+    // nations, the seventh of the languages this island group recognises, and the smaller
+    // tongues of Asia and Africa that a model will otherwise answer in the language of the
+    // state next door. Every one of these is a tongue whose words are better left in English
+    // than guessed at, so the rule is the same as everywhere above: no answer is an answer.
+    'gv', 'fy', 'nds', 'hsb', 'dsb', 'rm', 'se', 'fo', 'kl', 'oc', 'sc', 'scn', 'co',
+    'ast', 'an', 'csb', 'szl', 'rue', 'eo',
+    'ug', 'ks', 'bho', 'mai', 'dv', 'hmn', 'lo', 'ceb', 'su',
+    'om', 'ti', 'rw', 'ln', 'mg', 'bm', 'ak', 'ee', 'st', 'tn', 'ny', 'zgh', 'ht',
   ]);
   const thin = THIN.has(String(lang).trim().toLowerCase());
   const thinNote = thin

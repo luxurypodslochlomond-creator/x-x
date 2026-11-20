@@ -154,6 +154,88 @@ export const LANGS = [
   // 中文 is not one tongue either, and the list had only Mandarin twice over.
   { code: 'yue', label: '粵語 (Cantonese)' },
   { code: 'nan', label: '閩南語 (Hokkien)' },
+  // ── THE SEVEN THIS ISLAND GROUP RECOGNISES, AND EVERY NATION INSIDE A NATION ────
+  // Brian, 20 November: "we have welsh and scots and any other regional tongues too right
+  // bro". Welsh, Scots, Gaelic, Irish, Cornish and Breton were here. Manx was not — and Manx
+  // is one of the seven languages the state this record is written in has formally recognised
+  // under the European Charter. Six of the seven were on the list and the seventh was missing,
+  // which is exactly the kind of gap a list like this hides from itself: nothing looks wrong,
+  // and a whole people's tongue is simply not there.
+  //
+  // Beside it, the rest of Europe's nations-inside-nations, because the fault the record keeps
+  // finding is the same one everywhere: a country listed as though it were a single tongue.
+  // France is not French, Spain is not Spanish, Italy is not Italian, and Germany has been
+  // printing Sorbian for longer than it has been a country.
+  { code: 'gv', label: 'Gaelg' },
+  { code: 'fy', label: 'Frysk' },
+  { code: 'nds', label: 'Plattdüütsch' },
+  { code: 'lb', label: 'Lëtzebuergesch' },
+  { code: 'hsb', label: 'Hornjoserbšćina' },
+  { code: 'dsb', label: 'Dolnoserbšćina' },
+  { code: 'rm', label: 'Rumantsch' },
+  { code: 'se', label: 'Davvisámegiella' },
+  { code: 'fo', label: 'Føroyskt' },
+  { code: 'kl', label: 'Kalaallisut' },
+  { code: 'oc', label: 'Occitan' },
+  { code: 'sc', label: 'Sardu' },
+  { code: 'scn', label: 'Sicilianu' },
+  { code: 'co', label: 'Corsu' },
+  { code: 'ast', label: 'Asturianu' },
+  { code: 'an', label: 'Aragonés' },
+  { code: 'csb', label: 'Kaszëbsczi' },
+  { code: 'szl', label: 'Ślōnskŏ' },
+  { code: 'rue', label: 'Русиньскый' },
+  { code: 'sq', label: 'Shqip' },
+  { code: 'sr', label: 'Српски' },
+  { code: 'hr', label: 'Hrvatski' },
+  { code: 'bs', label: 'Bosanski' },
+  { code: 'sl', label: 'Slovenščina' },
+  { code: 'mk', label: 'Македонски' },
+  { code: 'be', label: 'Беларуская' },
+  { code: 'lt', label: 'Lietuvių' },
+  { code: 'lv', label: 'Latviešu' },
+  { code: 'et', label: 'Eesti' },
+  { code: 'mt', label: 'Malti' },
+  { code: 'eo', label: 'Esperanto' },
+  // ── SOUTH AND EAST ASIA, WHERE THE LIST HAD THE CAPITALS AND NOT THE COUNTRIES ──
+  { code: 'ug', label: 'ئۇيغۇرچە' },
+  { code: 'sd', label: 'سنڌي' },
+  { code: 'ks', label: 'کٲشُر' },
+  { code: 'as', label: 'অসমীয়া' },
+  { code: 'or', label: 'ଓଡ଼ିଆ' },
+  { code: 'bho', label: 'भोजपुरी' },
+  { code: 'mai', label: 'मैथिली' },
+  { code: 'dv', label: 'ދިވެހި' },
+  { code: 'my', label: 'မြန်မာ' },
+  { code: 'km', label: 'ខ្មែរ' },
+  { code: 'lo', label: 'ລາວ' },
+  { code: 'mn', label: 'Монгол' },
+  { code: 'bo', label: 'བོད་སྐད་' },
+  { code: 'jv', label: 'Basa Jawa' },
+  { code: 'su', label: 'Basa Sunda' },
+  { code: 'ceb', label: 'Cebuano' },
+  { code: 'hmn', label: 'Hmoob' },
+  // ── AFRICA, WHERE SOME OF THE BIGGEST TONGUES ON EARTH WERE SIMPLY NOT THERE ────
+  // Oromo is the largest first language in Ethiopia and it was missing. Malagasy is the
+  // tongue of a whole island of twenty-eight million and it was missing. Afrikaans, Tigrinya,
+  // Kinyarwanda, Lingala, Bambara, Akan, Ewe, Sesotho, Setswana, Chichewa, Tamazight — none of
+  // them were here. A record that lists the three African languages Europeans learned and not
+  // the rest has not been looking at Africa; it has been looking at a map of it.
+  { code: 'af', label: 'Afrikaans' },
+  { code: 'om', label: 'Afaan Oromoo' },
+  { code: 'ti', label: 'ትግርኛ' },
+  { code: 'rw', label: 'Ikinyarwanda' },
+  { code: 'ln', label: 'Lingála' },
+  { code: 'mg', label: 'Malagasy' },
+  { code: 'bm', label: 'Bamanankan' },
+  { code: 'ak', label: 'Akan' },
+  { code: 'ee', label: 'Eʋegbe' },
+  { code: 'st', label: 'Sesotho' },
+  { code: 'tn', label: 'Setswana' },
+  { code: 'ny', label: 'Chichewa' },
+  { code: 'zgh', label: 'Tamaziɣt' },
+  // ── AND ONE THE CARIBBEAN WRITES IN ────────────────────────────────────────────
+  { code: 'ht', label: 'Kreyòl ayisyen' },
   // ── THE ANCIENT ONES ARE NAMED, NOT DRAWN IN SOMEBODY ELSE'S PICTURES ──────────
   // These five used to wear a character in front of the name: a hieroglyph, a cuneiform
   // sign twice over, and a cartoon Easter Island head. The signs are real Unicode and
