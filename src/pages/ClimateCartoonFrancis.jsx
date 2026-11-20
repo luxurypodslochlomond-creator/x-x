@@ -9,6 +9,7 @@ import { buildFrancisShareCard, FRANCIS_CARD } from '@/components/climate/cartoo
 import ArtistSequence from '@/components/climate/cartoons/artist/ArtistSequence';
 import HandAddress from '@/components/climate/cartoons/artist/HandAddress';
 import { recordOrigin } from '@/components/climate/recordAddress';
+import { cardWords } from '@/components/climate/cardTongue';
 import '@/components/climate/cartoons/artist/hand-page.css';
 
 // ── ONE HAND'S OWN ADDRESS ON THE RECORD ───────────────────────────────────────
@@ -46,9 +47,38 @@ const HIS_WORDS = [
   'I am the President of the Beautiful Feet International (BFI) Ministry, a faith-based organization; I am the Editor-in-chief of the African Press Cartoon services, and I initiated and curator the CartoonAFRICA International Biennial (CAIB), a platform that I have been deploying to collaborate with like-minds globally to advocate for sustainable development and Africa’s productivity through the prism of graphic humour.',
 ];
 
+// ── THE CARD TRAVELS BEFORE IT IS READ ─────────────────────────────────────────
+// Brian, 20 November: "coolasfuck share for him… and the share coolasfuck all languages
+// too, as people do that before share or pass it on." He is right about the order: most
+// people meet this card in a chat, in a language nobody chose for them, before they ever
+// see the page. So the two lines the record says on his behalf are read in the reader's
+// tongue — the same dictionary the card itself draws with, so the button and the picture
+// agree. His name is kept out of both, because a name is not a phrase and does not get
+// translated.
+const SHARE_LINES = {
+  label: 'Share his page',
+  event: 'The 8th CartoonAFRICA International Biennial, Benin City, 28–30 November 2026.',
+  where: 'His drawings, and his own address on the record:',
+};
+
 export default function ClimateCartoonFrancis() {
   const [drawings, setDrawings] = useState(null);
+  const [tongue, setTongue] = useState({});
   const address = `${recordOrigin()}/ClimateCartoons/Francis`;
+
+  useEffect(() => {
+    let cancelled = false;
+    const read = () => cardWords(Object.values(SHARE_LINES))
+      .then((words) => { if (!cancelled) setTongue(words || {}); })
+      .catch(() => { /* the record's own words stand */ });
+    read();
+    // A tongue picked anywhere on the record holds site-wide, so the share follows it too
+    // rather than keeping the language the page happened to open in.
+    window.addEventListener('uf51:lang', read);
+    return () => { cancelled = true; window.removeEventListener('uf51:lang', read); };
+  }, []);
+
+  const w = (key) => tongue[SHARE_LINES[key]] || SHARE_LINES[key];
 
   useEffect(() => {
     let cancelled = false;
@@ -104,7 +134,8 @@ export default function ClimateCartoonFrancis() {
             entry={FRANCIS_CARD}
             build={buildFrancisShareCard}
             link={address}
-            description={`The 8th CartoonAFRICA International Biennial, Benin City, 28–30 November 2026. Cover by Francis Umendu Odupute, who edits the book. His drawings and his own address: ${address}`}
+            label={w('label')}
+            description={`${w('event')} ${w('where')} ${address}`}
           />
         </div>
 

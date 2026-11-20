@@ -104,7 +104,10 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   }
 
   if (compact) {
-    const short = state === 'building' ? 'Drawing…' : state === 'shared' ? 'Shared' : 'Share';
+    // The caller may give the word, so a page can say it in the reader's own tongue. A
+    // compact button that could only ever say "Share" in English was the one part of a
+    // translated page that still arrived in somebody else's language.
+    const short = state === 'building' ? 'Drawing…' : state === 'shared' ? 'Shared' : givenLabel || 'Share';
     return (
       <>
         <button
