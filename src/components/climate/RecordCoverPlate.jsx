@@ -27,10 +27,14 @@ function CoverPainting() {
           {/* The portrait cut on a phone: a landscape plate on a handset is a letterbox
               with the middle of the painting thrown away. */}
           <source media="(max-width: 639px)" srcSet={RECORD_COVER_MOBILE} />
+          {/* On a phone the plate is the painting itself, whole and at its own proportion —
+              a fixed band of height cropped a portrait painting into a close-up of its own
+              middle, which read as oversized and wrong. Brian, 20 November: "why on mobile
+              does it look over sized mental". The band of height is a desk rule only. */}
           <img
             src={IMAGES.cover}
             alt="The record's cover painting — the world, painted for the record"
-            className="block h-[clamp(190px,40vh,470px)] w-full object-cover"
+            className="block h-auto w-full object-contain sm:h-[clamp(190px,40vh,470px)] sm:object-cover"
           />
         </picture>
       </div>
