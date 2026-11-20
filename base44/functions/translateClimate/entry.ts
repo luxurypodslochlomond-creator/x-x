@@ -165,11 +165,36 @@ async function askModel(base44, words, lang) {
     'easter island': 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
     'easter island script': 'Rongorongo, the glyph script of Rapa Nui (Easter Island)',
   };
+  // ── A GUESS IS NOT A TRANSLATION ───────────────────────────────────────────────
+  // Brian, 20 November: "make sure we have all native tongues for all people, especially the
+  // native tongues in nigeria bro". The list grew by fourteen tongues that day, and growing it
+  // made an old silence louder. For a living tongue with little written material to check
+  // against, a model will happily print a fluent sentence that no speaker of that tongue has
+  // ever said — and this record would then be putting invented words into somebody's mother
+  // tongue, on a page whose whole argument is that it does not make things up.
+  //
+  // Cherokee already carried the rule. These carry it too, and the rule is the plain one:
+  // where the answer is not known, nothing comes back. The English word stands, the page shows
+  // English, and a reader is never handed a confident guess dressed as their own language.
+  // A tongue that is well documented is not on this list and is not slowed down by it.
+  const THIN = new Set([
+    // Nigeria, beyond the three the world usually lists
+    'bin', 'urh', 'ish', 'efi', 'ibb', 'anw', 'tiv', 'ijc', 'kau', 'fuv',
+    'nup', 'igl', 'idu', 'bom',
+    // and the other tongues on the record with little written material behind them
+    'nv', 'lkt', 'ojb', 'hop', 'apw', 'moh', 'yua', 'nah', 'ay', 'qu', 'gn',
+    'haw', 'sm', 'fj', 'to', 'tpi',
+  ]);
+  const thin = THIN.has(String(lang).trim().toLowerCase());
+  const thinNote = thin
+    ? '\n\nThis tongue has little written material to check against, so never invent a word and never substitute a lookalike from a related tongue. Return an empty string for any value you cannot translate with real confidence. An English word left standing is honest; a fluent guess in somebody\'s mother tongue is not.'
+    : '';
+
   const named = NAMED[String(lang).trim().toLowerCase()];
   const target = /^(chr|cherokee|tsalagi|ᏣᎳᎩ)$/i.test(String(lang).trim())
     ? 'Cherokee (ᏣᎳᎩ, ISO 639-3 chr), written in the Cherokee syllabary, not Latin transliteration. Cherokee is a living language. Do not invent words: return an empty value for any wording you cannot translate reliably'
     : (named || lang);
-  const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${target} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain.${frameNote} Return ONLY the JSON object.
+  const prompt = `You are a precise, professional translator for a public climate-action record — "Together We Can Change Climate", built in honour of Horizon International. Translate every VALUE in this JSON object into ${target} (this may be an ISO code like "fr" or a language name like "Yoruba" — work out the language from it). Keep the keys exactly the same. Keep punctuation, emoji, quotes, capitalisation style and brand names (Horizon International, UF51, SORTED, Roots & Shoots, Dr. Jane Goodall) unchanged. Tone: warm, clear, hopeful, plain.${frameNote}${thinNote} Return ONLY the JSON object.
 
 JSON:
 ${JSON.stringify(payload)}`;

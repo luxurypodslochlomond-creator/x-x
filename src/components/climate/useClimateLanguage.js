@@ -57,6 +57,30 @@ export const LANGS = [
   { code: 'zu', label: 'isiZulu' },
   { code: 'am', label: 'አማርኛ' },
   { code: 'ha', label: 'Hausa' },
+  // ── NIGERIA, IN MORE THAN THREE TONGUES ────────────────────────────────────────
+  // Brian, 20 November: "make sure we have all native tongues for all people... especially the
+  // native tongues in nigeria bro, all the other popular tribes". The list had Yorùbá, Igbo and
+  // Hausa, which is the three Nigeria is usually reduced to — and this record is carrying
+  // Francis Umendu Odupute's work out of Benin City, where the tongue spoken is Ẹdo, and Ẹdo
+  // was not on it. A record that names a man's city and not his language has not finished.
+  //
+  // Each is named in its own spelling, and each one is marked as thinly documented in
+  // translateClimate: where the machine does not know a word, it now returns nothing and the
+  // English stands, rather than printing a fluent guess in somebody's mother tongue.
+  { code: 'bin', label: 'Ẹdo (Bini)' },
+  { code: 'urh', label: 'Urhobo' },
+  { code: 'ish', label: 'Ẹsan (Esan)' },
+  { code: 'efi', label: 'Efik' },
+  { code: 'ibb', label: 'Ibibio' },
+  { code: 'anw', label: 'Anaang' },
+  { code: 'tiv', label: 'Tiv' },
+  { code: 'ijc', label: 'Izon (Ijaw)' },
+  { code: 'kau', label: 'Kanuri' },
+  { code: 'fuv', label: 'Fulfulde' },
+  { code: 'nup', label: 'Nupe' },
+  { code: 'igl', label: 'Igala' },
+  { code: 'idu', label: 'Idoma' },
+  { code: 'bom', label: 'Berom' },
   { code: 'qu', label: 'Runasimi (Quechua)' },
   { code: 'gn', label: 'Avañeʼẽ (Guaraní)' },
   { code: 'haw', label: 'ʻŌlelo Hawaiʻi' },
@@ -102,11 +126,17 @@ export const LANGS = [
   { code: 'tpi', label: 'Tok Pisin' },
   { code: 'la', label: 'Latina (Latin)' },
   { code: 'grc', label: 'Ἀρχαία ἑλληνική (Ancient Greek)' },
-  { code: 'egy', label: '𓂀 Ancient Egyptian (hieroglyphs)' },
-  { code: 'sux', label: '𒀭 Sumerian (cuneiform)' },
+  // ── THE ANCIENT ONES ARE NAMED, NOT DRAWN IN SOMEBODY ELSE'S PICTURES ──────────
+  // These five used to wear a character in front of the name: a hieroglyph, a cuneiform
+  // sign twice over, and a cartoon Easter Island head. The signs are real Unicode and
+  // almost no device carries a font for them, so most readers met an empty box; the head
+  // was an emoji borrowed from a chat app. A tongue is named in its own words here, and
+  // the drawing that goes with it is cut by this record's own hand — TongueMarks.jsx.
+  { code: 'egy', label: 'Ancient Egyptian (hieroglyphs)' },
+  { code: 'sux', label: 'Sumerian (cuneiform)' },
   { code: 'akk', label: 'Akkadian (cuneiform)' },
-  { code: 'annunaki', label: '𒀭 Annunaki (Sumerian)' },
-  { code: 'rongorongo', label: '🗿 Rongorongo (Easter Island)' },
+  { code: 'annunaki', label: 'Annunaki (Sumerian)' },
+  { code: 'rongorongo', label: 'Rongorongo (Easter Island)' },
 ];
 
 export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
@@ -155,7 +185,10 @@ export function useClimateLanguage(baseStrings) {
     };
 
     const english = [...new Set(Object.values(baseStrings || {}).filter((value) => typeof value === 'string' && value.trim()))];
-    const need = english.filter((word) => !dict[word]);
+    // `in dict` rather than "is truthy": a tongue may honestly have no word for something, and
+    // an empty answer is kept as an answer. Without that, a thinly documented tongue re-asked
+    // the machine for the same dozen words on every page load, for ever, and paid for it.
+    const need = english.filter((word) => !(word in dict));
     if (!need.length) { settle(); return; }
 
     let cancelled = false;
@@ -166,7 +199,9 @@ export function useClimateLanguage(baseStrings) {
         const out = res?.data?.translations || res?.translations || {};
         need.forEach((word, index) => {
           const value = out['s' + index];
-          if (typeof value === 'string' && value.trim()) dict[word] = value.trim();
+          // Kept either way. A word the tongue could not answer for is recorded as empty, so
+          // the English stands on the page and the same question is never asked twice.
+          dict[word] = typeof value === 'string' && value.trim() ? value.trim() : '';
         });
         try { localStorage.setItem(cacheKey, JSON.stringify(dict)); } catch { /* storage full */ }
       })

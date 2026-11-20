@@ -58,6 +58,22 @@ export const TONGUE_EN = {
   sw: 'Swahili',
   yo: 'Yoruba',
   ig: 'Igbo',
+  // Nigeria beyond the three everybody lists — the English names are here for the search only,
+  // so a reader who types "Bini" or "Ijaw" finds the tongue it means.
+  bin: 'Edo Bini Benin',
+  urh: 'Urhobo',
+  ish: 'Esan Ishan',
+  efi: 'Efik',
+  ibb: 'Ibibio',
+  anw: 'Anaang Annang',
+  tiv: 'Tiv',
+  ijc: 'Ijaw Izon',
+  kau: 'Kanuri',
+  fuv: 'Fulfulde Fula',
+  nup: 'Nupe',
+  igl: 'Igala',
+  idu: 'Idoma',
+  bom: 'Berom Birom',
   zu: 'Zulu',
   am: 'Amharic',
   ha: 'Hausa',
@@ -93,7 +109,9 @@ export function tongueMatches(language, typed) {
   return (
     foldTongue(language.label).includes(q) ||
     foldTongue(language.code).includes(q) ||
-    foldTongue(TONGUE_EN[language.code]).includes(q)
+    // `|| ''` matters: a tongue with no English name beside it would otherwise be compared
+    // against the string "undefined", so typing a single "u" found half the forgotten list.
+    foldTongue(TONGUE_EN[language.code] || '').includes(q)
   );
 }
 
@@ -103,7 +121,7 @@ export function languageFromTyped(text, languages) {
   const q = foldTongue(text);
   if (!q) return null;
   const exact = languages.find(
-    (l) => foldTongue(l.label) === q || foldTongue(l.code) === q || foldTongue(TONGUE_EN[l.code]) === q
+    (l) => foldTongue(l.label) === q || foldTongue(l.code) === q || foldTongue(TONGUE_EN[l.code] || '') === q
   );
   if (exact) return exact.code;
   const loose = languages.find((l) => tongueMatches(l, q));
