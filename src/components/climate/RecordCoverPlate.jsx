@@ -4,6 +4,7 @@ import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildRecordShareCard } from '@/components/climate/shareCardImage';
 import { RECORD_LINK, RECORD_SHARE_TITLE } from '@/components/climate/shareRecordCard';
 import { IMAGES, RECORD_COVER_MOBILE } from '@/components/climate/categoryImages';
+import CoverPhotoPlates from '@/components/climate/CoverPhotoPlates';
 
 const RECORD_CARD = { id: 'record-of-the-time', title: RECORD_SHARE_TITLE };
 
@@ -58,6 +59,10 @@ export default function RecordCoverPlate({ copy }) {
         <p className="record-header-type mt-3 w-full text-center text-[10px] font-black uppercase tracking-[0.2em] text-record-red">
           {copy.service}
         </p>
+        {/* The record's credited photographs, directly under the painting: a plate row
+            rather than a slider a screen and a half further down. See the component for
+            why, and for what it replaces. */}
+        <CoverPhotoPlates />
         {/* ── THE SHEET IS THE NAME AND THE PICTURE, AND NOTHING ELSE ────────────────
             "What's happening to our world, what's working, and who's doing something about
             it" stood here as the plate's summary, and Brian asked for it off: "with the

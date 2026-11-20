@@ -7,7 +7,6 @@ import RecordActionsSection from '@/components/climate/RecordActionsSection';
 import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
-import ClimateImageCrawl from '@/components/climate/ClimateImageCrawl';
 import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
@@ -503,8 +502,9 @@ export default function TogetherChangeClimate() {
         />
       </div>
 
-      <ClimateImageCrawl />
-
+      {/* The full-width crawl stood here and cost a screen for three pictures. The
+          photographs are plates under the cover now (CoverPhotoPlates), where a reader
+          meets the world before being asked to choose a room. */}
       <ClimateImpactBar />
 
       {/* ── THE SEQUENCE, SAID ONCE ──────────────────────────────────────────────────

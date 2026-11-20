@@ -1,71 +1,81 @@
 import React from 'react';
 
-// ── FOUR ROOMS, CUT FROM THE WORLD ─────────────────────────────────────────────
-// Drawn four times now. Thin lines, then bars, then a broken rock, a stack of steps, a
-// lever and three people. Brian, 20 November: "im sure we can do better with crises
-// solutions actions and groups icons bro they dont feel quite like us feel a bit like I
-// dont know bro."
+// ── FOUR ROOMS, CUT BY THE SAME HAND AS EVERY OTHER MARK ───────────────────────
+// Brian, 20 November: "can you look at our complete set of marks symbols please... the ones
+// for crises solutions actions and groups dont feel like us bro. have we properly thought
+// about why we have them and need them bro."
 //
-// He put his finger on it. The last set were DIAGRAMS of ideas: a bar chart for solutions,
-// a lever for action, three generic figures for groups. A diagram is what a machine draws
-// to explain a word. It is why they felt like a slide deck's icon row and not like us.
+// He was looking at two sets drawn by two different hands. The record's twenty-four door
+// marks are PRINTED MASSES: rectangles and blocks, one part in the record's red, drawn to
+// survive nineteen pixels on a phone's second row. These four were organic cut shapes —
+// a broken rock, a shoot, a waving flag — drawn at fifty-two pixels for the front page.
+// Neither set was wrong. They simply were not the same hand, which is exactly the feeling
+// of something not being us, and no amount of re-drawing one of them would have fixed it.
 //
-// So these are four THINGS, not four ideas. A cut in the ground. A shoot in the ground. A
-// flag in the ground. A ring of people standing round. And the first two share their ground
-// on purpose, because crises and solutions are the same ground with two different outcomes,
-// and a record should show that rather than hide it behind two unrelated pictures.
+// WHY THESE FOUR EXIST AT ALL, since he asked. The twenty-four are doors: tap one and you
+// go somewhere. These four are not doors — they filter the entries on the page you are
+// already standing on. So they are right to look different from a door; a reader who takes
+// a filter for a door is disappointed. But different job does not mean different hand.
 //
-// The rule of the record holds in every one: solid masses, nothing thinner than the mass,
-// no right angles and no equal spacing, and exactly one part in the record's red — the part
-// that is the point. No second colour anywhere. The rooms are told apart by what they show,
-// which is how a printed contents sheet has always done it.
+// So they are now built the way the doors are built, and the rule is the doors' rule:
+// solid masses, nothing thinner than the mass, no second colour, and exactly one part in
+// the record's red — the part that is the point. Nothing here is drawn in a line.
+//
+// One thing was also taken away. Actions used to be a pole with a flag on it, and MarkSignal
+// — the wire — is a pole with bars beside it. Two doors away, two marks read as the same
+// object. An action is now a spade stood in the ground with its edge in red: a tool laid out
+// ready, which is what an action on this record actually is — something already happening
+// that you can pick up and join.
 const FRAME = { viewBox: '0 0 40 40', fill: 'none', 'aria-hidden': 'true' };
 const MASS = { fill: 'currentColor', stroke: 'none' };
-const RED = { fill: 'rgb(var(--record-mark))', stroke: 'none' };
+const RED = { className: 'text-record-mark', fill: 'currentColor', stroke: 'none' };
 
-// Crises — the ground itself, broken, the red showing in the gash. What is at risk.
+// Crises — the ground, broken, the record's red standing in the gap. What is at risk.
 export function RoomMarkCrisis({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M2 21.6 16.2 20 15.2 27.4 16.4 37 2.2 37.2Z" />
-      <path {...MASS} d="M23.8 19.6 37.8 21.4 37.6 37.2 23.6 37Z" />
-      <path {...RED} d="M16.6 19.8 23.4 19.4 24.8 37.2 15.2 37.4 15.4 27.4Z" />
+      <rect x="3" y="17" width="13" height="19" {...MASS} />
+      <rect x="24" y="19" width="13" height="17" {...MASS} />
+      <path d="M16 17 H24 L26 36 H14 Z" {...RED} />
     </svg>
   );
 }
 
-// Solutions — the same ground, whole, with something growing out of it. The way that works.
+// Solutions — the same ground, whole, with something standing up out of it. The seed in
+// the soil is the red part, because the seed is the thing another place can copy.
 export function RoomMarkSolution({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M2 30.6 37.8 29.8 37.6 37.2 2.2 37.4Z" />
-      <path {...RED} d="M18.8 13.6 21.4 13.2 22 31.6 18.2 31.8Z" />
-      <path {...RED} d="M18.4 17.8 11.4 14.6 10.2 18 17.8 21.2Z" />
-      <path {...RED} d="M21.8 11.6 29.4 8.6 30.4 12 22.2 15Z" />
+      <rect x="3" y="29" width="34" height="7" {...MASS} />
+      <rect x="18.4" y="13.4" width="3.6" height="15.6" {...MASS} />
+      <path d="M19 15.4C19 9.4 14.2 5.6 8.8 6.6 8.6 11.6 13.2 15.8 19 15.4Z" {...MASS} />
+      <path d="M21.2 12.6C21.6 7.4 26.4 4.2 31.6 5 31.8 9.8 27.2 13.4 21.2 12.6Z" {...MASS} />
+      <rect x="17.4" y="31.2" width="5.2" height="3.4" {...RED} />
     </svg>
   );
 }
 
-// Actions — a flag planted. A thing happening, in a place, that others can see and join.
+// Actions — a spade stood in the ground, its edge in red. A tool laid out ready to be
+// picked up, which is what an action on this record is: something already happening.
 export function RoomMarkAction({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...MASS} d="M6.4 4 9.6 3.6 10.2 36.6 6.8 36.8Z" />
-      <path {...RED} d="M9.8 5.2 31.4 8.8 28.6 15.4 10 12.2Z" />
+      <rect x="13.6" y="2.8" width="12.8" height="3.6" {...MASS} />
+      <rect x="17.8" y="6.4" width="4.4" height="11.4" {...MASS} />
+      <path d="M13.2 17.8 H26.8 L25.4 27.6 20 34.6 14.6 27.6 Z" {...RED} />
     </svg>
   );
 }
 
-// Groups — people standing in a ring, seen from above. One of them is the one who joins.
+// Groups — four of them stood round a space, seen from above. The one in red is the one
+// who has not joined yet.
 export function RoomMarkGroups({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <path {...RED} d="M16.8 5.4 22.6 4.8 23.4 10.6 17.4 11.2Z" />
-      <path {...MASS} d="M28.4 9.2 34 12.2 31.2 17.2 26.2 14.2Z" />
-      <path {...MASS} d="M30.4 25 35 29.2 31.2 33.6 26.8 29.6Z" />
-      <path {...MASS} d="M16.6 29.4 22.4 28.8 23 34.6 17.2 35.2Z" />
-      <path {...MASS} d="M5 29.4 9.4 25.2 13.6 29.4 9.2 33.8Z" />
-      <path {...MASS} d="M5.6 12.6 10.8 9.4 14.4 14 9.6 17.4Z" />
+      <rect x="15.4" y="3.6" width="9.2" height="6.4" {...MASS} />
+      <rect x="15.4" y="30" width="9.2" height="6.4" {...MASS} />
+      <rect x="3.6" y="15.4" width="6.4" height="9.2" {...MASS} />
+      <rect x="30" y="15.4" width="6.4" height="9.2" {...RED} />
     </svg>
   );
 }
