@@ -1,0 +1,121 @@
+/* ── THE PROGRAMME, SET LIKE A PRINTED ONE ──────────────────────────────────────
+   The festival's own order, on the room's own paper. Three day headings, five items,
+   the times in the machine's hand and everything else in the reading hand — because a
+   programme is read at a glance and checked twice, and a reader standing in a museum
+   courtyard needs the next thing and its time, not a paragraph. */
+
+.cartoon-programme {
+  margin: 2.6rem 0 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgb(var(--record-ink) / .18);
+}
+
+.cartoon-programme-eyebrow {
+  margin: 0 0 .5rem;
+  font-family: var(--font-record-ui);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+
+.cartoon-programme-title {
+  margin: 0 0 .3rem;
+  font-family: var(--font-heading);
+  font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+  line-height: 1.15;
+  color: rgb(var(--record-ink));
+}
+
+.cartoon-programme-theme {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-reading);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-programme-day + .cartoon-programme-day {
+  margin-top: 1.5rem;
+}
+
+.cartoon-programme-day-label {
+  margin: 0 0 .7rem;
+  font-family: var(--font-record-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+  padding-bottom: .35rem;
+  border-bottom: 1px solid rgb(var(--record-ink) / .12);
+}
+
+.cartoon-programme-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cartoon-programme-item {
+  display: grid;
+  grid-template-columns: 2.1rem 1fr;
+  gap: .1rem .7rem;
+  padding: .55rem 0;
+}
+
+.cartoon-programme-num {
+  font-family: var(--font-record-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: rgb(var(--record-red));
+  padding-top: .22rem;
+}
+
+.cartoon-programme-name {
+  margin: 0;
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.35;
+  color: rgb(var(--record-ink));
+}
+
+.cartoon-programme-time {
+  display: block;
+  margin-top: .2rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-programme-detail {
+  margin: .3rem 0 0;
+  font-family: var(--font-reading);
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-programme-detail a {
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cartoon-programme-foot {
+  margin: 1.6rem 0 0;
+  padding-top: .9rem;
+  border-top: 1px solid rgb(var(--record-ink) / .12);
+  font-family: var(--font-record-ui);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-programme-foot a {
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+}

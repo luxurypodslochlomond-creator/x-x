@@ -33,3 +33,55 @@ export const CARTOON_EVENT = {
   eventLine: 'An anthology of editorial cartoons and comics journalism by selected African and non-African cartoonists.',
   credit: 'CartoonAFRICA, prepared by African Press Cartoon services, 2026',
 };
+
+// ── THE THREE DAYS, IN THE FESTIVAL'S OWN ORDER ────────────────────────────────
+// Francis sent the printed flyer on 20 November 2026. It is the only source for this, so it
+// is copied rather than summarised: his five items, his numbering, his spelling of his own
+// programme. Two times are printed on it — the 9am opening in the room, and the 10am online
+// session — and a third comes from the session's own page (10:00–11:30 Amsterdam time on
+// Saturday 28 November). Nothing else has a time yet, so nothing else is given one: a
+// programme that invents an hour is worse than one that says the hour is not fixed.
+//
+// The phone number on the flyer is deliberately not printed here. A mobile number on a public
+// page is a number that gets scraped and called for years; the email address is enough for
+// anybody who wants to ask about the biennial, and the number stays on the flyer he hands out.
+export const CARTOON_PROGRAMME = {
+  theme: 'SDG, African Youths and Democracy through Humour Lenses',
+  items: [
+    {
+      n: '01',
+      name: 'How can humour inspire action?',
+      time: 'Saturday 28 November · 10:00–11:30 Amsterdam time (9:00–10:30 UK)',
+      detail: 'A webinar led by the Dutch cartoonist Tjeerd Royaards, on how humour works and how it can be used to make people act, based on research by the European project Democratic Literacy and Humour (DELIAH). Online, open to all, on Google Meet.',
+      link: { label: 'The session’s own page, with the joining link', href: 'https://deliaheu.substack.com/p/how-can-humour-inspire-action' },
+      link2: { label: 'Register', href: 'https://howcanhumourinspireaction.rsvpify.com/' },
+    },
+    {
+      n: '02',
+      name: 'The travelling CartoonAFRICA SDG cartoon campaigns and artivism youth challenge and training series',
+      time: 'Led by Francis Umendu Odupute, CAIB curator',
+      detail: 'The campaign that has been moving since 2019, when the United Nations SDG Action Campaign took the biennial’s cartoons to the SDG Global Festival of Action in Bonn, and from there into community halls and Africa Liberation Day events.',
+    },
+    {
+      n: '03',
+      name: 'Climate change and the power of collective actions and creative interventions',
+      time: 'Sunday 29 November · 3pm West Africa (2pm UK)',
+      detail: 'A virtual workshop led by Janine Selendy, founder of Horizon International at Yale University.',
+      link: { label: 'The hour itself, written down', href: '/ClimateWorkshop', internal: true },
+    },
+    {
+      n: '04',
+      name: 'CartoonAFRICA Children’s Comics and Animation Funfair (CACCAFUN)',
+      time: 'Time to be given by the organisers',
+      detail: 'The children’s part of the biennial: comics and animation, made by children rather than for them.',
+    },
+    {
+      n: '05',
+      name: 'ACLAPS Awards',
+      time: 'Time to be given by the organisers',
+      detail: 'Recognising and celebrating those who have contributed to repositioning Africa’s cartoon industry.',
+    },
+  ],
+  opening: 'The formal opening is in the room at the National Museum, Benin City, at 9:00am West Africa time (8:00 UK) on Saturday 28 November. The sessions themselves are hybrid: in the museum and online.',
+  contact: 'africanpresscartoon@gmail.com',
+};

@@ -3,6 +3,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import PressOpening from '@/components/climate/cartoons/press/PressOpening';
 import PressWall from '@/components/climate/cartoons/press/PressWall';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
+import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
@@ -62,6 +63,10 @@ export default function ClimateCartoons() {
 
         <div className="press-facing" id="press-book">
           <CartoonSessionBand />
+          {/* The five sessions, in the festival's own order — sent as a printed flyer on
+              20 November and copied here rather than summarised, so a reader planning the
+              three days sees what the organisers printed, times included and times absent. */}
+          <CartoonProgramme />
           <CartoonAnthology />
         </div>
 
