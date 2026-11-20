@@ -470,7 +470,9 @@ export default function TogetherChangeClimate() {
           sit under it everywhere, which is where Brian asked for them and where they
           belong: a reader who has just been told what the record is can be shown what it
           is made of. The counts, the colours and the doors are untouched. */}
-      <div className="record-home-doors px-4 pt-3 lg:px-10 lg:pt-1">
+      {/* No padding on the wrapper: the band carries its own tint and rules edge to edge of
+          the sheet, and insets its contents by the record's own margin instead. */}
+      <div className="record-home-doors">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}

@@ -37,27 +37,38 @@
 .record-home-page { background-color: transparent; }
 .record-home-flow { display: flex; flex-direction: column; }
 
-/* ── FOUR TAPS, ONE LINE'S FOUR BEHAVIOURS ──────────────────────────────────────
-   Brian, 19 November: "hover colour needs to be coolasfuck subtle bro but our colours bro
-   and feels like us please."
+/* ── FOUR ROOMS, ONE INK, ONE RED ───────────────────────────────────────────────
+   Brian, 20 November: "groups colour weird bro not feel like our id for right reasons…
+   they dont feel quite like us… lot of whit background around that area too."
 
-   So a tap does not flash orange like a button, and it does not lift, glow or slide. It
-   takes its own room's pigment — the same green, red, clay and ochre the rest of the record
-   already uses for those four things — and it takes it faintly: a wash at seven per cent
-   behind the words, and the drawn line turning that colour. The record's red stays red in
-   every mark, because that red belongs to the record and not to the room. Nothing moves. */
+   Three complaints, one cause, and the cause was a decision I made the day before: four
+   rooms, four pigments. A colour per section is how a magazine organises itself, and it is
+   the exact opposite of this record's identity — ink on paper with one signal in it.
+   Ochre for Groups was the tell: a fourth colour invented to finish a set nobody asked
+   for, sitting on a paper that is already the colour of ochre, so it read as a stain.
+
+   So there is no room colour any more. Every door is ink. The record's red is the only
+   colour in the band, and it is already inside each drawing, in the part that is the point.
+   A tap washes the door in that same red at six per cent and takes the name with it. The
+   rooms are told apart by what their drawings show, which is how a contents sheet has
+   always worked.
+
+   And the band is a band now, not four pale cells floating on pale paper: tinted with the
+   record's own bone, ruled top and bottom, running edge to edge of the sheet with the
+   drawings half again as large. That was the white space he could see — a thumbnail in the
+   corner of a half-metre box. Give the space to the drawing and the space stops being
+   empty. */
 .record-home-page .record-room-nav {
-  border-block: 1px solid rgb(var(--record-ink) / .2);
-  background: transparent;
+  border-block: 1px solid rgb(var(--record-ink) / .22);
+  background: rgb(var(--record-bone));
 }
 .record-home-page .record-room-link {
-  --room-pigment: var(--record-ink);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: .7rem;
-  padding: 1.5rem 1rem 1.6rem;
+  gap: .55rem;
+  padding: 1rem .9rem 1.1rem;
   background: transparent;
   text-align: start;
   text-decoration: none;
@@ -65,19 +76,15 @@
   color: rgb(var(--record-ink));
   transition: background-color .3s ease, color .3s ease;
 }
-.record-home-page .record-room-link[data-room="climate_crisis"] { --room-pigment: var(--record-red); }
-.record-home-page .record-room-link[data-room="solution"] { --room-pigment: var(--record-botanical); }
-.record-home-page .record-room-link[data-room="actions"] { --room-pigment: var(--record-clay); }
-.record-home-page .record-room-link[data-room="groups"] { --room-pigment: var(--record-ochre); }
-
+/* No per-room pigment any more: the four rooms are ink, and the only colour is the
+   record's red, which is inside the drawings where it belongs. */
 .record-home-page .record-room-drawing {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  block-size: 2.9rem;
-  transition: color .3s ease;
+  block-size: 2.7rem;
 }
-.record-home-page .record-room-drawing svg { display: block; }
+.record-home-page .record-room-drawing svg { display: block; inline-size: 2.6rem; block-size: 2.6rem; }
 .record-home-page .record-room-label {
   display: flex;
   align-items: baseline;
@@ -98,30 +105,35 @@
   color: rgb(var(--record-muted));
 }
 .record-home-page .record-room-link .record-description {
-  max-inline-size: 24ch;
+  max-inline-size: 22ch;
   font-family: var(--font-reading);
-  font-size: 13.5px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.45;
   letter-spacing: 0;
-  color: rgb(var(--record-ink) / .78);
+  color: rgb(var(--record-ink) / .72);
 }
 /* One hairline between the taps, so four drawings read as a set on a sheet rather than as
    four floating buttons. */
 @media (min-width: 1024px) {
-  /* Small reading tabs: the drawing sits beside the name, not above a tall box. */
+  /* The drawing sits beside the name at the size it deserves. It was two rem — the size of
+     a bullet — in a cell nearly five hundred pixels wide, and that is the white space Brian
+     could see: a thumbnail lost in a box. The band is inset by the record's own margin so
+     the first drawing lines up with the title above it, while the tint still runs edge to
+     edge of the sheet. */
+  .record-home-page .record-room-nav { padding-inline: 1.4rem; }
   .record-home-page .record-room-link {
     display: grid;
-    grid-template-columns: 2rem minmax(0, 1fr);
+    grid-template-columns: 3.4rem minmax(0, 1fr);
     align-content: center;
-    column-gap: .65rem;
-    row-gap: .25rem;
-    padding: .85rem .9rem;
+    column-gap: .8rem;
+    row-gap: .1rem;
+    padding: .9rem 1.1rem .95rem;
   }
-  .record-home-page .record-room-link + .record-room-link { border-inline-start: 1px solid rgb(var(--record-ink) / .14); }
+  .record-home-page .record-room-link + .record-room-link { border-inline-start: 1px solid rgb(var(--record-ink) / .16); }
   .record-home-page .record-room-drawing { grid-row: 1 / 3; align-self: center; block-size: auto; }
-  .record-home-page .record-room-drawing svg { inline-size: 2rem; block-size: 2rem; }
-  .record-home-page .record-room-label { font-size: 15px; letter-spacing: 0; text-transform: none; }
-  .record-home-page .record-room-link .record-description { max-inline-size: none; font-family: var(--font-record-ui); font-size: 13px; }
+  .record-home-page .record-room-drawing svg { inline-size: 3.25rem; block-size: 3.25rem; }
+  .record-home-page .record-room-label { font-size: 15px; letter-spacing: .02em; text-transform: none; }
+  .record-home-page .record-room-link .record-description { max-inline-size: none; font-family: var(--font-record-ui); font-size: 12.5px; }
   /* The existing subject artwork is an open index, not a second bank of boxes. */
   .record-home-subjects .subject-plate-grid { border: 0; gap: .35rem .75rem; }
   .record-home-subjects .subject-plate[data-inline="true"] .subject-plate-cell { min-height: 76px; padding: .5rem .25rem; border: 0; }
@@ -132,15 +144,13 @@
   .record-home-page .record-room-link:nth-child(n+3) { border-block-start: 1px solid rgb(var(--record-ink) / .14); }
 }
 @media (hover: hover) {
-  .record-home-page .record-room-link:hover { background-color: rgb(var(--room-pigment) / .07); }
-  .record-home-page .record-room-link:hover .record-room-drawing,
-  .record-home-page .record-room-link:hover .record-room-label { color: rgb(var(--room-pigment)); }
+  .record-home-page .record-room-link:hover { background-color: rgb(var(--record-red) / .06); }
+  .record-home-page .record-room-link:hover .record-room-label { color: rgb(var(--record-red)); }
 }
-.record-home-page .record-room-link[aria-pressed="true"] { background-color: rgb(var(--room-pigment) / .1); }
-.record-home-page .record-room-link[aria-pressed="true"] .record-room-drawing,
-.record-home-page .record-room-link[aria-pressed="true"] .record-room-label { color: rgb(var(--room-pigment)); }
+.record-home-page .record-room-link[aria-pressed="true"] { background-color: rgb(var(--record-red) / .09); }
+.record-home-page .record-room-link[aria-pressed="true"] .record-room-label { color: rgb(var(--record-red)); }
 .record-home-page .record-room-link:focus-visible {
-  outline: 2px solid rgb(var(--room-pigment));
+  outline: 2px solid rgb(var(--record-red));
   outline-offset: -3px;
 }
 /* ── AND THE PICTURES RUN THE FULL WIDTH OF THE SHEET ──────────────────────────
