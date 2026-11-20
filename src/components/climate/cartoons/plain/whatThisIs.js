@@ -1,30 +1,25 @@
 // ── WHAT THIS IS, IN THE WORDS THAT CAN BE CHECKED LATER ───────────────────────
-// Francis asked, on 20 November 2026, in a private message: is this a segment on the site being
-// built for Janine Selendy, or is it a platform of its own?
+// A cartoonist asked, before the workshop, whether this room is part of somebody else's
+// campaign or a platform of its own. A question asked in a private message is answered in a
+// private message — but the answer has to outlive the chat, because the next cartoonist will
+// ask the same thing and nobody will have the message. So the answer is written here, on the
+// record, where anyone can read it and hold the record to it.
 //
-// A question asked in a private chat is answered in a private chat. But the answer has to
-// outlive the chat, because the next cartoonist will ask the same question and nobody will
-// have the message. So the answer is written here, on the record, where anyone can read it and
-// hold the record to it.
+// Two rules for the copy, and both are for the reader rather than for style:
 //
-// Two rules for the copy, and both are for him rather than for style:
-//
-//   • Short sentences, no idiom, no British slang. Francis writes and speaks English as a
-//     second language, after Igbo. A sentence that needs the reader to know what "no skin off
-//     my nose" means is a sentence that excludes the person it was written for.
-//   • Every claim here is one the record can be held to, and every fact about him is sourced.
-//     Nothing is described as planned, hoped for or coming soon. What is not there is said to
-//     be not there — including the fact that there is no funder behind any of this, because a
-//     man whose website went dark for want of a renewal fee has already been let down once by
-//     a sentence like this one.
+//   • Short sentences, no idiom, no slang. This page will be read by people who work in
+//     English as a second or third language. A sentence that needs the reader to know what
+//     "no skin off my nose" means is a sentence that excludes the person it was written for.
+//   • Every claim here is one the record can be held to, and every fact about the biennial is
+//     sourced at the foot of the page. Nothing is described as planned, hoped for or coming
+//     soon. What is not there is said to be not there.
 //
 // The facts about the biennial are not decoration. A cartoonist deciding whether to hand his
 // work to a stranger is owed the courtesy of being told that the stranger knows what he has
-// already built. They come from the report listed in SOURCES at the foot of the page, and from
-// the biennial's own record of its editions — never from a guess.
+// already built. They come from the report listed in SOURCES, and from the biennial's own
+// record of its editions — never from a guess.
 export const ASKED = [
-  'Is it a segment on the website you are building for Janine Selendy, to promote climate change actions?',
-  'Or is it another platform of its own?',
+  'Is this part of somebody else’s campaign, or is it a platform of its own?',
 ];
 
 export const SOURCES = [
@@ -39,11 +34,11 @@ export const SECTIONS = [
     head: 'The short answer',
     paras: [
       'No to the first. No to the second.',
-      'It is not a page inside her campaign, and it is not a website of its own for the biennial. It is one record with rooms in it, and one of those rooms is for cartoons.',
+      'It is not a page inside a campaign, and it is not a website of its own for the biennial. It is one record with rooms in it, and one of those rooms is for cartoons.',
     ],
   },
   {
-    head: 'Who is asking, and what he has already built',
+    head: 'What he has already built',
     paras: [
       'The question came from Francis Umendu Odupute, in Benin City. What he has built is worth saying before the answer, because the answer only makes sense against it.',
       'He started the CartoonAFRICA International Biennial in November 2012, and has held it every other year since. The eighth opens on 28 November 2026 at the National Museum in Benin City, and its subject is climate change: what collective action and creative work can actually do about it.',
@@ -55,8 +50,8 @@ export const SECTIONS = [
   {
     head: 'One record, several rooms',
     paras: [
-      'One room holds what is happening to the climate: the emergencies, the things that are working, the actions people can join. Another room holds cartoons. That second room is the one he is being asked about.',
-      'It is not an illustration of her argument. Nobody writes a caption for a cartoonist. Nobody uses a drawing to make a point it does not make. Janine Selendy’s hour on Sunday 29 November is in Francis’s book, and the cartoon room sits in the same record as her pages.',
+      'One room holds what is happening to the climate: the emergencies, the things that are working, the actions people can join. Another room holds cartoons. That second room is the one being asked about.',
+      'It is not an illustration of an argument. Nobody writes a caption for a cartoonist. Nobody uses a drawing to make a point it does not make. The workshop on Sunday 29 November is in Francis’s book, and the cartoon room sits in the same record as every other page here.',
       'Two rooms, one record. Neither room reports to the other.',
     ],
   },
@@ -90,7 +85,7 @@ export const SECTIONS = [
       'Every entry carries where it came from and when it arrived, so a reader can go and check it.',
       'Entries are fingerprinted. If the words are changed later, the fingerprint stops matching, and the record says so in public rather than quietly correcting itself.',
       'Corrections are made in daylight, with the date written on them.',
-      'The whole record can be taken out as one file, drawings included, by a keeper, at any time. So the work does not depend on this website staying alive, or on the people who built it still being here. If this place ever stopped, the drawings would still leave with the people who want them.',
+      'The whole record can be taken out as one file, drawings included, at any time. So the work does not depend on this website staying alive, or on the people who built it still being here. If this place ever stopped, the drawings would still leave with the people who want them.',
     ],
   },
   {
@@ -104,7 +99,7 @@ export const SECTIONS = [
     head: 'What is not here',
     paras: [
       'No money for the biennial. No likes, no followers, no ranking, no view counts set beside another cartoonist’s to make one compete with the other. No advertising. No addresses sold. No rights taken: the drawing stays the artist’s.',
-      'And no funder behind any of this yet. The record has been built by one person and paid for by him, and it says so on its own pages. That should be known before any work is put here.',
+      'And no funder behind any of this yet. That should be known before any work is put here.',
     ],
   },
   {

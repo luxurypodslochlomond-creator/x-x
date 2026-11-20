@@ -7,15 +7,13 @@ import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cart
 import '@/components/climate/cartoons/plain/plain-sheet.css';
 
 // ── THE ANSWER, ON THE RECORD, SO IT OUTLIVES THE CHAT ─────────────────────────
-// Brian, 20 November: "I'm worried Francis not getting it bro… what would you do and say…
-// mind zero bullshit and for right reasons." Then: "why would he need a site as well as this
-// bro", and "easy to get to from the wire?"
-//
 // The temptation is a pitch. A pitch is what a cartoonist whose website has been dark for two
-// years has already been given by everybody, so this page does the opposite: it answers his two
+// years has already been given by everybody, so this page does the opposite: it answers the two
 // questions with "no" twice, says what he has already built so he is not being talked down to,
 // says plainly what the record is not, and then answers the question underneath them all — what
 // happens to the drawings after the 29th — in terms he can check rather than believe.
+//
+// Nothing on this page is about the person who built it, and nothing quotes a private message.
 //
 // The plate is his, not decoration: the cover of the book he edits, credited, at the top of the
 // page that asks him to trust the place. The record's rule is that a picture never travels
@@ -44,9 +42,9 @@ export default function ClimateCartoonsWhatThisIs() {
         </figure>
 
         <div className="plain-asked">
-          <span className="plain-asked-label">The two questions</span>
+          <span className="plain-asked-label">The question</span>
           {ASKED.map((question) => (
-            <p key={question} dir="auto">“{question}”</p>
+            <p key={question} dir="auto">{question}</p>
           ))}
         </div>
 
