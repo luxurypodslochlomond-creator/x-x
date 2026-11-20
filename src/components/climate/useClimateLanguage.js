@@ -126,6 +126,34 @@ export const LANGS = [
   { code: 'tpi', label: 'Tok Pisin' },
   { code: 'la', label: 'Latina (Latin)' },
   { code: 'grc', label: 'Ἀρχαία ἑλληνική (Ancient Greek)' },
+  // ── THE COUNTRIES THAT GET REDUCED TO ONE TONGUE ───────────────────────────────
+  // Brian, 20 November: "Russian or Israeli or Chinese them all bro… for right reasons."
+  // He was not asking for flags on a list. He was pointing at the same fault as Nigeria's:
+  // the list carried Russian for Russia, Ukrainian for Ukraine, Hebrew for Israel and
+  // Mandarin for China, and every one of those is a country that is not one language.
+  // Russia alone holds more than a hundred, and most of them are not written in Cyrillic
+  // by accident of empire. So the rest of each are named here, in their own spelling,
+  // because a record that says "every tongue" and then lists the language of the state is
+  // doing the thing it criticises. All of these are marked thin in translateClimate: where
+  // the machine does not know a word it returns nothing and the English stands, rather than
+  // printing a fluent guess in somebody's mother tongue.
+  { code: 'tt', label: 'Татарча (Tatar)' },
+  { code: 'ce', label: 'Нохчийн (Chechen)' },
+  { code: 'ba', label: 'Башҡортса (Bashkir)' },
+  { code: 'cv', label: 'Чӑвашла (Chuvash)' },
+  { code: 'sah', label: 'Саха тыла (Sakha)' },
+  { code: 'os', label: 'Ирон (Ossetian)' },
+  { code: 'av', label: 'Авар мацӀ (Avar)' },
+  { code: 'kk', label: 'Қазақша (Kazakh)' },
+  { code: 'uz', label: 'Oʻzbekcha (Uzbek)' },
+  { code: 'az', label: 'Azərbaycanca (Azerbaijani)' },
+  { code: 'ky', label: 'Кыргызча (Kyrgyz)' },
+  { code: 'tg', label: 'Тоҷикӣ (Tajik)' },
+  { code: 'tk', label: 'Türkmençe (Turkmen)' },
+  { code: 'yi', label: 'ייִדיש (Yiddish)' },
+  // 中文 is not one tongue either, and the list had only Mandarin twice over.
+  { code: 'yue', label: '粵語 (Cantonese)' },
+  { code: 'nan', label: '閩南語 (Hokkien)' },
   // ── THE ANCIENT ONES ARE NAMED, NOT DRAWN IN SOMEBODY ELSE'S PICTURES ──────────
   // These five used to wear a character in front of the name: a hieroglyph, a cuneiform
   // sign twice over, and a cartoon Easter Island head. The signs are real Unicode and
@@ -139,7 +167,9 @@ export const LANGS = [
   { code: 'rongorongo', label: 'Rongorongo (Easter Island)' },
 ];
 
-export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur']);
+// Right-to-left tongues. Pashto was on the list and missing from this set, so a Pashto
+// reader got Arabic script laid out left to right on a page that never turned round.
+export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur', 'ps', 'yi']);
 
 // One chosen tongue across the whole record — the same key the record page reads,
 // so a language picked in one place is the language everywhere on the platform.

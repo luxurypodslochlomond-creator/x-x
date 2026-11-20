@@ -184,6 +184,10 @@ async function askModel(base44, words, lang) {
     // and the other tongues on the record with little written material behind them
     'nv', 'lkt', 'ojb', 'hop', 'apw', 'moh', 'yua', 'nah', 'ay', 'qu', 'gn',
     'haw', 'sm', 'fj', 'to', 'tpi',
+    // Russia's other nations, and the neighbours usually folded into one empire's language
+    'tt', 'ce', 'ba', 'cv', 'sah', 'os', 'av', 'kk', 'uz', 'az', 'ky', 'tg', 'tk',
+    // Yiddish drifts into German, Cantonese and Hokkien into Mandarin, if nobody says stop
+    'yi', 'yue', 'nan',
   ]);
   const thin = THIN.has(String(lang).trim().toLowerCase());
   const thinNote = thin
