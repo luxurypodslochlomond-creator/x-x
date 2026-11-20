@@ -67,20 +67,20 @@ export default function CartoonAnthology() {
         record, for free download, anywhere in the world.
       </p>
 
+      {/* The cover sits at the top of the room, so this says "at the top", not "above".
+          The credit paragraph used to end by telling a reader that Odupute founded a
+          foundation in 2005, with a link off to Facebook — a fact about a man, in the middle
+          of a credit for a book, taking the eye out of the room. It is not this book's
+          business, so it is not on this book's plate. */}
       <p className="comic-anthology-status">
-        The cover above is a sample: the book is still being made, so it may change before it
-        is printed. The day it is finished it appears on this page — free, with no sign-in,
-        for anyone anywhere.
+        The cover at the top of this room is a sample: the book is still being made, so it may
+        change before it is printed. The day it is finished it appears here — free, with no
+        sign-in, for anyone anywhere.
       </p>
 
       <p className="comic-anthology-credit">
-        The cartoons stay the artists’ own. The cover is Francis Umendu Odupute’s drawing;
-        the anthology is CartoonAFRICA’s, prepared by African Press Cartoon services, 2026.
-        {' '}Odupute, who initiated CartoonAFRICA in 2012, founded the{' '}
-        <a href="https://www.facebook.com/francodusartfoundation/" target="_blank" rel="noopener noreferrer">
-          Francodus Art Foundation
-        </a>{' '}
-        in 2005.
+        The cartoons stay the artists’ own. The cover is Francis Umendu Odupute’s drawing; the
+        anthology is CartoonAFRICA’s, prepared by African Press Cartoon services, 2026.
       </p>
     </section>
   );

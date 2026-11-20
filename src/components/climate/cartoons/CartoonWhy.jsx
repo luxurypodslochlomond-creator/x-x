@@ -1,12 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
 
 // ── WHY A CARTOON ROOM ON A CLIMATE RECORD ───────────────────────────────────
 // The record's own answer, kept to three lines. Not a mission statement: a reader who has
 // just laughed at a bird with a bicycle wheel is owed the reason it is here, and nothing
-// more. The share card is set beside it, because this is the one page of the record that a
-// teacher, a parent or a workshop host will want to send to somebody in one tap.
+// more.
+//
+// ── AND NO DOORS OUT OF THE ROOM ─────────────────────────────────────────────
+// Two links used to stand under these three lines — one to the map, one to the method page —
+// each wearing the record's out-arrow. Brian, 20 November: "links are old can't have
+// coolasfuck icons to other pages Bri unless we can condense again." Right twice over.
+//
+// A wall that sends a reader off to another page in the middle of its own argument is not a
+// wall, it is a corridor. And the arrow was the only borrowed piece of furniture in a room
+// built out of hand-cut marks: every other mark in this room is drawn for it, and this one
+// came off a shelf.
+//
+// The doors this room does keep are its own, and they are all inside it: the drawing desk
+// below, the thread, the print, and the page that says what the room is. Nothing here needs
+// a door to another product to be understood.
 export default function CartoonWhy() {
   return (
     <section className="comic-why" aria-labelledby="cartoon-why-title">
@@ -16,19 +27,6 @@ export default function CartoonWhy() {
         <li>Anyone can answer with a pen. A child, a farmer, a grandmother.</li>
         <li>The record keeps the work, the artist’s name and their own words. A viewpoint is not scientific proof.</li>
       </ul>
-      {/* The pass-it-on card lives at the top of the room now, beside the line that says what
-          the room is — that is where a host decides to send the page to somebody. */}
-      {/* The drawings are not a room beside the record: they stand on its map, where they
-          were drawn. This is the door between the two, so a visitor from a newsroom or a
-          festival can see the record carries the work rather than displaying it. */}
-      <div className="comic-why-links">
-        <Link to="/ClimateMap" className="comic-why-link">
-          Where the drawings stand on the map <ArrowUpRight size={15} />
-        </Link>
-        <Link to="/ClimateMethod" className="comic-why-link">
-          How the record checks things <ArrowUpRight size={15} />
-        </Link>
-      </div>
     </section>
   );
 }

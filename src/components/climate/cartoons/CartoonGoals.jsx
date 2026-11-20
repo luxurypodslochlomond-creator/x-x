@@ -40,17 +40,21 @@ export default function CartoonGoals() {
       <header className="cartoon-goals-head">
         <p className="cartoon-goals-eyebrow">The wall, read against the goals</p>
         <h2 id="cartoon-goals-title" className="cartoon-goals-title">Seventeen goals. One wall.</h2>
+        {/* ── THE LEDE, CUT TO THE TWO SENTENCES THAT ARE DOING WORK ────────────
+            It used to open by explaining the campaign to the people who have been drawing it
+            for fourteen years, and then explain the room's method in four clauses. Both are
+            true and both belong in the record — but a reader standing at a wall of drawings
+            does not need either to open a goal. What is kept is the promise the section
+            actually makes: the goal's sentence, the cartoonists' sentences, and the page to
+            check them on. */}
         <p className="cartoon-goals-lede">
-          CartoonAFRICA has been carrying an SDG cartoon campaign since 2012, and it travelled
-          to the UN SDG Global Festival of Action in Bonn in May 2019. So this room does not
-          explain the goals to the people who have been drawing them for fourteen years. Open
-          any goal: it gives you the goal’s own sentence, the cartoonists’ own sentences, and
-          the page where you can check both.
+          CartoonAFRICA has carried an SDG cartoon campaign since 2012, so this room does not
+          explain the goals to the people who have been drawing them. Open any goal: the goal’s
+          own sentence, the cartoonists’ own sentences, and the page where you can check both.
         </p>
         <p className="cartoon-goals-method">
-          This reading is the record’s own, made from each drawing’s published line — not the
-          artist’s claim about their work, and not the United Nations’ reading of anything. The
-          record does not speak for the UN, and the UN has not endorsed this room.
+          This reading is the record’s own, made from each drawing’s published line. It is not
+          the United Nations’ reading, and the UN has not endorsed this room.
         </p>
       </header>
 
@@ -84,9 +88,8 @@ export default function CartoonGoals() {
       <div className="cartoon-goals-foot">
         {UNPLACED.length > 0 && (
           <p>
-            One drawing in the room, {UNPLACED.join(' and ')}, is read onto no goal at all. It
-            is left where it is rather than forced onto one: a room that puts every drawing
-            somewhere has stopped looking at them.
+            One drawing, {UNPLACED.join(' and ')}, is read onto no goal at all, and is left
+            where it is. A room that puts every drawing somewhere has stopped looking at them.
           </p>
         )}
         <p>

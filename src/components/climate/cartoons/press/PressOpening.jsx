@@ -36,18 +36,20 @@ export default function PressOpening() {
           <p className="press-standfirst">Cartoons for a changing world. Drawn by hand, hung on the wall.</p>
           <CartoonSignal />
         </header>
+        {/* ── THREE PARAGRAPHS BECAME TWO ───────────────────────────────────────
+            The opening carried three blocks of prose under the title before a reader met a
+            single drawing, and one of them was a sentence split over two paragraphs for no
+            reason except that it had been added on a different day. Same facts, same credits,
+            one breath. Brian, 20 November: "too much for coolasfuck wall." */}
         <p className="press-scope">
           The climate, drawn. The cartoons chosen for the 29 November workshop, the people who
           made them, and a wall with room on it for yours.
         </p>
         <p className="press-scope">
           The wall opens with drawings by What On Earth!®, the cartoon series at CEEW — the
-          Council on Energy, Environment and Water, in India — shown with their permission while
-          the workshop’s own pages arrive.
-        </p>
-        <p className="press-scope">
-          Gathered for CartoonAFRICA. Edited by Francis Umendu Odupute and Janine Selendy.
-          Catalogue prepared by African Press Cartoon Services.
+          Council on Energy, Environment and Water, in India — shown with their permission.
+          Gathered for CartoonAFRICA, edited by Francis Umendu Odupute and Janine Selendy,
+          catalogue prepared by African Press Cartoon Services.
         </p>
         {/* The contents are in the order the room is actually set: the wall, the goals it is
             read against, the argument for cartoons, the lineage, the book, and the desk. A

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { CARTOONISTS, GALLERY_URL } from '@/components/climate/cartoons/cartoonWorld';
 import { WORLD_LINEAGE } from '@/components/climate/cartoons/cartoonWorldLineage';
 import CartoonWorldGroup from '@/components/climate/cartoons/CartoonWorldGroup';
@@ -33,10 +32,14 @@ export default function CartoonWorld() {
           </CartoonWorldGroup>
         ))}
         <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork from this reading list is reproduced here. Sources checked 20 November 2026. Some external archives contain adult or distressing material.</p>
-        <nav className="cartoon-lineage-doors" aria-label="Take the idea into the record">
+        {/* ── ONE DOOR, AND IT IS INSIDE THE ROOM ─────────────────────────────
+            This nav had three doors: the drawing desk, the map, and the method page. The two
+            that left the room came off — Brian, 20 November: "can't have coolasfuck icons to
+            other pages." A lineage that ends by pointing at the map has stopped being about
+            the lineage. The one door left is the only one a reader of this section actually
+            wants, and it was already the first. */}
+        <nav className="cartoon-lineage-doors" aria-label="Take the idea into the room">
           <a href="#cartoon-your-turn">Add your drawing →</a>
-          <Link to="/ClimateMap">Find the record’s drawings on the map →</Link>
-          <Link to="/ClimateMethod">How this record checks its claims →</Link>
         </nav>
       </div>
     </section>
