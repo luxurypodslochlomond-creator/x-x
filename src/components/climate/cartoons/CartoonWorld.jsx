@@ -32,7 +32,7 @@ export default function CartoonWorld() {
             {group.id === 'cartoon-inheritance' && <CartoonOdoiNote />}
           </CartoonWorldGroup>
         ))}
-        <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork from this reading list is reproduced here. Sources checked 19 November 2026. Some external archives contain adult or distressing material.</p>
+        <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork from this reading list is reproduced here. Sources checked 20 November 2026. Some external archives contain adult or distressing material.</p>
         <nav className="cartoon-lineage-doors" aria-label="Take the idea into the record">
           <a href="#cartoon-your-turn">Add your drawing →</a>
           <Link to="/ClimateMap">Find the record’s drawings on the map →</Link>
