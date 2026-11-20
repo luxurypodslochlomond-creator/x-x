@@ -437,21 +437,40 @@ export default function TogetherChangeClimate() {
         </div>
       )}
 
-      {/* ── THE FOUR ROOMS COME FIRST ────────────────────────────────────────────────
-          Brian, 19 November: "move crises solutions action and groups up bro". The shape
-          of the record now stands directly under the masthead, before Jane's words and
-          the title — so a reader learns what the record is made of in the same glance
-          they arrive with, rather than after a painting and a headline. Same four doors,
-          same colours, same counts; only the order changed. */}
-      {/* ── AND ON A PHONE THE PICTURES LEAD ────────────────────────────────────────
-          Brian, 19 November, on a handset: "images gone on mobile". He was right, and it
-          was this reorder that did it: four room boxes at two hundred pixels each sat
-          above the painting, Jane's words and the title, so the first screen a phone got
-          was a grid of boxes and the photographs were a full scroll away. On a phone the
-          order goes back to voice, title, rooms; on a desk the rooms still lead. Same
-          markup, ordered by width, so neither screen is a copy of the other. */}
+      {/* ── A VOICE, THEN THE WORLD, THEN THE SHAPE OF THE RECORD ─────────────────────
+          Brian, 20 November: "move dr Jane section up so sits on red line just under the top
+          level nav… make sure solutions crisis action and group sit underneath." He is
+          right, and he is also undoing a mistake of mine: on 19 November I sent the four
+          rooms up to lead the page, which pushed Jane's words and the painting below a grid
+          of boxes and made the first thing a reader met a set of doors with nothing behind
+          them. The desk had been rearranged to argue with the phone, and the phone had the
+          better order all along.
+
+          So there is one order now, at every width, and it is the order a person reads in:
+            1. a voice on the record — Jane's sentence, printed on the red line under the
+               masthead, because a record about the world should open with somebody who has
+               spent a life in it rather than with a menu
+            2. the painting and the record's own name — what this is, and what it is for
+            3. the four rooms — what it is made of, now that the reader wants to know
+          The markup is in that order too, so nothing depends on a breakpoint to say
+          something true. Same parts, same doors, same colours, same counts. */}
       <div className="record-home-flow">
-      <div className="record-home-doors order-3 px-4 pt-3 lg:order-1 lg:px-10 lg:pt-1">
+      <div className="record-home-voice-band border-t-[3px] border-record-mark">
+        <RecordPaintedBand strength={0.75} soft>
+          <RecordHomeVoice />
+        </RecordPaintedBand>
+      </div>
+
+      <div>
+        <RecordCoverPlate copy={t} />
+      </div>
+
+      {/* ── THE FOUR ROOMS, UNDER THE PAINTING AND THE NAME ────────────────────────
+          They sat above it on a desk until 20 November and below it on a phone. Now they
+          sit under it everywhere, which is where Brian asked for them and where they
+          belong: a reader who has just been told what the record is can be shown what it
+          is made of. The counts, the colours and the doors are untouched. */}
+      <div className="record-home-doors px-4 pt-3 lg:px-10 lg:pt-1">
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -461,16 +480,6 @@ export default function TogetherChangeClimate() {
             setSelectedType(selectedType === key ? 'all' : key);
           }}
         />
-      </div>
-
-      <div className="record-home-voice-band order-1 border-t-[3px] border-record-mark lg:order-2">
-        <RecordPaintedBand strength={0.75} soft>
-          <RecordHomeVoice />
-        </RecordPaintedBand>
-      </div>
-
-      <div className="order-2 lg:order-3">
-        <RecordCoverPlate copy={t} />
       </div>
 
       <div className="record-home-subjects px-4 pb-5 pt-4 lg:px-10">
