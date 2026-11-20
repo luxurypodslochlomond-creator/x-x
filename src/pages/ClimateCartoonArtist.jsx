@@ -122,6 +122,25 @@ export default function ClimateCartoonArtist() {
             </p>
           </section>
         )}
+
+        {/* ── WHAT THIS PAGE IS NOT ──────────────────────────────────────────
+            Brian, 20 November: "I'm scared we build profile pages and it turns into
+            Facebook." The fear is right, and the answer is not a promise made in a chat
+            that will be lost — it is printed here, under the work, where the next person
+            to touch this room will read it before adding anything.
+
+            The mechanism is the sentence. A hand-page exists only while a drawing does:
+            it is built from published drawings under that name, not from an account, so
+            there is nobody to follow, nothing to count and nothing to join. Add a follow
+            button and this line becomes a lie in public, which is the strongest lock a
+            record can put on its own future. */}
+        <p className="hand-not-account">
+          A page of work, not an account. No follows, no counts, nothing to join.
+          <span>
+            It exists because these drawings do — nothing here is kept about the person who drew them
+            except the name they sign.
+          </span>
+        </p>
       </div>
     </ClimateRecordShell>
   );

@@ -186,6 +186,33 @@
   color: rgb(var(--record-ink) / .9);
 }
 .hand-quote:last-of-type { margin-bottom: 0; }
+/* The page's own limit, printed under the work. Small, quiet, and permanent: a hand-page
+   is made of drawings, not of an account, and this is the line that says so where anyone
+   can read it. */
+.hand-not-account {
+  margin: 2rem 0 0;
+  padding-top: .9rem;
+  border-top: 1px solid rgb(var(--record-ink) / .16);
+  font-family: var(--font-record-ui);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / .75);
+}
+
+.hand-not-account span {
+  display: block;
+  margin-top: .4rem;
+  font-family: var(--font-reading);
+  font-size: 13.5px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.6;
+  color: rgb(var(--record-muted));
+}
+
 .hand-where {
   margin: .7rem 0 0;
   font-family: var(--font-record-ui);

@@ -155,6 +155,14 @@ export default function ClimateCartoonFrancis() {
             Edited by {CARTOON_EVENT.editors}. The hour on Sunday 29 November belongs to Janine M. H.
             Selendy, in his book — <Link to="/ClimateWorkshop">what that hour is</Link>.
           </p>
+          {/* The flyers he is sending out are the programme, so the page he sends out carries
+              the first session too — otherwise a reader arrives at a page for a festival and
+              cannot see when it starts. */}
+          <p>
+            It opens in the room at 9:00am West Africa time on Saturday 28 November, and online at
+            10:00 with the Dutch cartoonist Tjeerd Royaards on how humour inspires action.{' '}
+            <Link to="/ClimateCartoons">The three days are printed in the room</Link>.
+          </p>
         </section>
 
         {/* ── THE QUESTION HE ASKED, ANSWERED ON THE RECORD ────────────────────
