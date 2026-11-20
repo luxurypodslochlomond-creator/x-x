@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowDown } from 'lucide-react';
 import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 import CartoonEventShare from '@/components/climate/cartoons/CartoonEventShare';
@@ -67,6 +68,11 @@ export default function CartoonCatalogueBand() {
           When it is finished it is published free — on CAIB’s own platforms and on this
           record — for anyone in the world to download.
         </p>
+        {/* The man himself, given somewhere to be rather than a name in a credit line: his
+            own address on the record, with his drawings and the words he wrote about them. */}
+        <Link to="/ClimateCartoons/Francis" className="comic-catalogue-link">
+          Francis Umendu Odupute · his own page
+        </Link>
         <a href="#cartoon-anthology" className="comic-catalogue-link">
           What the book is <ArrowDown size={14} />
         </a>

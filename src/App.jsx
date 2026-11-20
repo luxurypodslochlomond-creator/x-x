@@ -167,6 +167,9 @@ const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
 const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
+// One hand's own address — Francis Umendu Odupute, who started the biennial, drew its cover
+// and edits its book, and whose new work needs somewhere on the record to show the world.
+const ClimateCartoonFrancisPage = React.lazy(() => import('./pages/ClimateCartoonFrancis'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
 const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoonsThread'));
 const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
@@ -386,6 +389,11 @@ const AuthenticatedApp = () => {
           record, because it is part of the record. */}
       <Route path="/ClimateCartoons/Sheet/:id" element={<ClimateCartoonSheetPage />} />
       <Route path="/ClimateCartoons/Artist/:name" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonArtistPage /></ClimateLayout>} />
+      {/* Francis's own page. Written by hand rather than generated from the wall, because a
+          man who has been carrying this campaign since 2012 is not a row in a table: his own
+          words, the cover he drew, and then everything he gives the record, read live from
+          the same table the wall reads so his next drawing appears without anybody editing it. */}
+      <Route path="/ClimateCartoons/Francis" element={<ClimateCartoonFrancisPage />} />
 
       {/* ── THE PRINT ROOM, AND THE SHOW IT MAKES ────────────────────────────────────
           Two addresses, and only one of them is a room. /ClimateCartoons/Print is a room of

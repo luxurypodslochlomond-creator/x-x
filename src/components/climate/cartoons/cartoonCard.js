@@ -11,6 +11,13 @@ const CARD_LINES = [
   '3pm West Africa · 2pm UK · in the room and online',
 ];
 
+// ── WHOSE BOOK IT IS ───────────────────────────────────────────────────────────
+// The card credited the hand that drew the cover and never named the two people who made
+// the book. A person handed this poster should know whose biennial it is before they are
+// told where to find it — and for Francis, whose campaign this has been since 2012, a card
+// carrying his drawing without his name is the credit arriving one line too late.
+const EDITED_LINE = `Edited by ${CARTOON_EVENT.editors}`;
+
 function lines(ctx, text, width) {
   const result = [];
   let line = '';
@@ -37,7 +44,7 @@ function artwork(src) {
 export async function buildCartoonShareCard(card = {}, options = {}) {
   const [image, { DISPLAY, colors }, words] = await Promise.all([
     artwork(card.image || CARTOON_COVER), loadRecordCardFonts(),
-    cardWords([CARTOON_EVENT.when, CARTOON_EVENT.where, CARTOON_EVENT.eventLine, CARTOON_EVENT.coverArt, ...CARD_LINES]),
+    cardWords([CARTOON_EVENT.when, CARTOON_EVENT.where, CARTOON_EVENT.eventLine, CARTOON_EVENT.coverArt, EDITED_LINE, ...CARD_LINES]),
   ]);
   const t = (line) => words[line] || line;
   const W = 1080, H = 1920, pad = 48;
@@ -83,17 +90,21 @@ export async function buildCartoonShareCard(card = {}, options = {}) {
   ctx.font = `400 22px ${DISPLAY}`;
   lines(ctx, t(CARTOON_EVENT.eventLine), W - pad * 2).slice(0, 2)
     .forEach((line, i) => ctx.fillText(line, pad, top + 250 + i * 28));
+  // Whose book it is, in the record's own ink rather than the grey of a caption.
+  ctx.fillStyle = colors.INK;
+  ctx.font = `700 20px ${DISPLAY}`;
+  ctx.fillText(t(EDITED_LINE), pad, top + 306);
   // The address on the left, and the hand that drew the cover on the right. The credit is
   // a fact about the picture, so it sits in its own corner where it cannot be read as part
   // of the book's description — and a shared cover never travels without its artist.
   const origin = String(options.origin || recordOrigin()).replace(/^https?:\/\//, '').replace(/\/$/, '');
   ctx.fillStyle = colors.INK;
   ctx.font = `700 28px ${DISPLAY}`;
-  ctx.fillText(`${origin}/ClimateCartoons`, pad, top + 332);
+  ctx.fillText(`${origin}/ClimateCartoons`, pad, top + 344);
   ctx.textAlign = 'right';
   ctx.fillStyle = colors.MUTED;
   ctx.font = `400 19px ${DISPLAY}`;
-  ctx.fillText(t(CARTOON_EVENT.coverArt), W - pad, top + 332);
+  ctx.fillText(t(CARTOON_EVENT.coverArt), W - pad, top + 344);
   ctx.textAlign = 'left';
   return new Promise((resolve, reject) => canvas.toBlob(blob => blob ? resolve(blob) : reject(new Error('The card could not be saved. Please try again.')), 'image/png'));
 }
