@@ -144,7 +144,9 @@ export const TONGUE_EN = {
   vi: 'Vietnamese',
   id: 'Indonesian',
   ms: 'Malay',
-  tl: 'Filipino (Tagalog)',
+  // The label already says Tagalog, so the English name matches it rather than sending a reader
+  // who is looking for Tagalog down to the F's. The alphabet has to agree with the row.
+  tl: 'Tagalog (Filipino)',
   mn: 'Mongolian',
   bo: 'Tibetan',
   jv: 'Javanese',
@@ -203,7 +205,7 @@ export const TONGUE_EN = {
   gn: 'Guarani',
   ay: 'Aymara',
   nah: 'Nahuatl',
-  yua: 'Yucatec Maya',
+  yua: 'Maya (Yucatec)',
   ht: 'Haitian Creole',
   nv: 'Navajo',
   lkt: 'Lakota',

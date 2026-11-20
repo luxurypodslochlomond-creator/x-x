@@ -9,6 +9,12 @@
 // place, and every tongue in it stands at the same height as every other. Wales is not below
 // France in this list and Oromo is not below Arabic.
 //
+// The codes below are MEMBERSHIP, not order. Where a tongue stands inside its place is decided
+// once, by the alphabet, in TonguePickerList — so nobody has to keep these lists sorted by hand
+// and no tongue moves when one is added. The order of the groups themselves is home first, then
+// outwards: the islands this record is written on, then the rest of the world. That is a
+// courtesy of place, never a rank — no group is above another because of size, wealth or power.
+//
 // Two rules, and both are kept deliberately:
 //   1. Every tongue in LANGS appears exactly once. tongueGroups.test.mjs checks it, so a tongue
 //      added later without a home is caught rather than silently dropped from the panel.

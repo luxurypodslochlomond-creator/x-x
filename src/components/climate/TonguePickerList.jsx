@@ -1,7 +1,7 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 import { TongueMark, MarkGlobe } from './tongueMarks';
-import { englishBeside } from './tongueNames';
+import { englishBeside, TONGUE_EN } from './tongueNames';
 import { TONGUE_GROUPS } from './tongueGroups';
 
 // ── THE LIST OF THE WORLD'S TONGUES, AND WHAT IT HAS TO DO ──────────────────────
@@ -28,6 +28,38 @@ import { TONGUE_GROUPS } from './tongueGroups';
 // would have been wrong: a tongue is not a country, and half of them do not have one.
 const GROUP_FALLBACK = 'Every other tongue';
 
+// ── THE ORDER IS A PROMISE ABOUT WHERE A TONGUE WILL BE ─────────────────────────
+// Brian, 20 November: "are languages in alphabetical order bro? how best to decide on
+// position? first tight reasons zero bullshit."
+//
+// They were not. Inside each place they stood in the order they happened to be typed, which is
+// not a reason, it is archaeology — so a tongue sat somewhere different every time the list
+// grew, and a reader who had found Cymraeg once could not find it again by looking. A list of
+// 189 that cannot be scanned is a list you have to search, and a reader who has to search for
+// their own tongue has been told something about their place in the room.
+//
+// The rule now, and the reason for each part of it:
+//
+//   • A tongue stands where it is spoken. A place is a fact about a tongue, not a rank of it,
+//     so the groups are geography, and the group order is home first and then outwards —
+//     the tongue of the islands this record is written on, then the rest of the world. That is
+//     a courtesy of place, not a claim that Wales outranks India, and the heading says so.
+//
+//   • Inside a place, the tongues are alphabetical by their ENGLISH name, because that is the
+//     one string all 189 of them share in one script. Sorting by the native names instead would
+//     put العربية beside 中文 beside Cymraeg in an order no reader can predict, because those
+//     scripts do not share an alphabet and there is no neutral way to interleave them. The
+//     English name is printed on every row, so the order is visible rather than assumed — and it
+//     is printed second, under the tongue's own name, so nobody mistakes the order for
+//     precedence. The tongue's own name is still the name; the alphabet is only how you find it.
+//
+//   • Nothing is ordered by how many people speak it. A list that puts the biggest tongues at
+//     the top is a league table, and this record does not rank people. Oromo is not below Arabic
+//     here, and Manx is not below English.
+const byEnglish = new Intl.Collator('en', { sensitivity: 'base', numeric: true });
+const inOrder = (items) => [...items].sort((a, b) =>
+  byEnglish.compare(TONGUE_EN[a.code] || a.label, TONGUE_EN[b.code] || b.label));
+
 export default function TonguePickerList({ theme, query, found, lang, detected, chosen, nameFor, onChoose }) {
   const { divide, dim, rowIdle, rowOn, accent } = theme;
   const searching = Boolean(query.trim());
@@ -42,12 +74,15 @@ export default function TonguePickerList({ theme, query, found, lang, detected, 
       const items = group.codes.map((code) => byCode.get(code)).filter(Boolean);
       if (!items.length) return;
       items.forEach((item) => placed.add(item.code));
-      sections.push({ key: group.key, title: group.title, items });
+      sections.push({ key: group.key, title: group.title, items: inOrder(items) });
     });
     const rest = found.filter((language) => !placed.has(language.code));
-    if (rest.length) sections.push({ key: 'rest', title: GROUP_FALLBACK, items: rest });
+    if (rest.length) sections.push({ key: 'rest', title: GROUP_FALLBACK, items: inOrder(rest) });
   } else {
-    sections.push({ key: 'found', title: '', items: found });
+    // A search answers in one alphabet, whatever places the hits come from: the reader has
+    // already said what they are looking for, and the headings would only stand between them
+    // and it.
+    sections.push({ key: 'found', title: '', items: inOrder(found) });
   }
 
   const row = (language) => {
