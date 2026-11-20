@@ -7,29 +7,36 @@ import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSource
 import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 import { buildFrancisShareCard, FRANCIS_CARD } from '@/components/climate/cartoons/francisCard';
 import ArtistSequence from '@/components/climate/cartoons/artist/ArtistSequence';
+import HandAddress from '@/components/climate/cartoons/artist/HandAddress';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import '@/components/climate/cartoons/artist/hand-page.css';
 
 // ── ONE HAND'S OWN ADDRESS ON THE RECORD ───────────────────────────────────────
 // Brian, 20 November: "Francis… new artwork coming bro and needs a platform for it to show
-// the world… he knows his stuff." Then, later the same morning: "it looks like you've
-// planted it on — needs to leave image alone… this bio of him is old and stuck on at the
-// top… make the walk coolasfuck for him and artists and readers."
+// the world." Then, later the same morning: "it looks like you've planted it on." Then, an
+// hour after that: "why is it looking like linkedin or old tech site… profiles are fucked by
+// social media bro, they are hollow and about all wrong stuff."
 //
-// He was right on every count, so the page was rebuilt around one rule: the drawing comes
-// before the words. A stranger meets his name, his signature and the cover he made, and only
-// then reads a paragraph of titles. Nothing is printed over his picture. His own introduction
-// sits below his work rather than standing in front of it.
+// The last one was the real note, and it was structural. The page had a kicker reading "One
+// hand · Benin City" — a job title and a location, which is the line under a name on a
+// professional network. It had a large name above the work, a one-line quote under the name
+// saying what he does for a living, and three numbered sections: his work, his words, what
+// this page is. That is a curriculum vitae with a terms page stapled to it. Every platform a
+// cartoonist is offered is that page, so this was one more of them.
 //
-// Two other rules hold it. Everything quoted is his, kept exactly as he wrote it, typos and
-// all: the record never tidies a person's own sentence. And nothing of his family is on this
-// page, or anywhere on it in a note explaining that they are not — what he told a person
-// about his wife and children was told to a person, and a page that explains its own
-// discretion is still a page about them.
+// So it is turned over. No kicker, no headline, no summary sentence, no numerals. The page
+// opens with a drawing running edge to edge of the glass, and his name is set under it the
+// way a print is signed in its margin. The work introduces the hand; the titles are fine
+// print at the foot, which is what titles are.
 //
-// The wall itself is where his work lands: this page asks the same table the wall asks, so
-// the moment a keeper puts a new drawing up under his name it appears here without anybody
-// editing this file — which is the whole point of giving a man a page rather than a caption.
+// Two rules survive unchanged, because they were right. Everything quoted is his, kept
+// exactly as he wrote it, typos and all: the record never tidies a person's own sentence.
+// And nothing of his family is on this page, or in a note on this page explaining that they
+// are not — what he told a person about his wife and children was told to a person.
+//
+// The wall is where his work lands: this page asks the same table the wall asks, so the
+// moment a keeper puts a new drawing up under his name it appears here without anybody
+// editing this file.
 const NAME = 'Francis Umendu Odupute';
 
 // His own introduction, 20 November 2026 — the professional half of it, verbatim. The rest of
@@ -38,25 +45,6 @@ const HIS_WORDS = [
   'I am a visual artist and a journalist.',
   'I am the President of the Beautiful Feet International (BFI) Ministry, a faith-based organization; I am the Editor-in-chief of the African Press Cartoon services, and I initiated and curator the CartoonAFRICA International Biennial (CAIB), a platform that I have been deploying to collaborate with like-minds globally to advocate for sustainable development and Africa’s productivity through the prism of graphic humour.',
 ];
-
-// What this page is, said plainly, once. Every other place a cartoonist is offered explains
-// itself in the opposite direction, so the record says what it does not do as well as what
-// it does.
-const THE_DEAL = [
-  'His name stays on the drawing, wherever the drawing goes.',
-  'Nothing here is sold, ranked, sponsored or boosted. No likes, no follower count, no algorithm deciding who sees his work.',
-  'The address does not move, and nothing comes down from the wall without a note in the open saying that it did.',
-];
-
-const Section = ({ n, title, children }) => (
-  <section className="hand-section">
-    <div className="hand-section-head">
-      <p className="hand-n">{n}</p>
-      <h2 className="hand-title">{title}</h2>
-    </div>
-    {children}
-  </section>
-);
 
 export default function ClimateCartoonFrancis() {
   const [drawings, setDrawings] = useState(null);
@@ -87,122 +75,113 @@ export default function ClimateCartoonFrancis() {
       footer="His work, his name, his address. Nothing here is sold, ranked, sponsored or signed up to."
     >
       <div className="hand-page">
-        {/* ── THE HEAD ────────────────────────────────────────────────────────
-            A name, the signature he draws under, and one sentence of his own. The share
-            icon is here rather than at the foot, because the moment a reader decides this
-            is worth sending is the moment they have just met him — not after four screens
-            of scrolling. */}
-        <header className="hand-head">
-          <p className="hand-kicker">One hand · Benin City</p>
-          <h1 className="hand-name">Francis Umendu Odupute</h1>
-          <p className="hand-sign">Francodus</p>
-          <p className="hand-say" dir="auto">“I am a visual artist and a journalist.”</p>
-          <div className="hand-doors">
-            <ShareCardButton
-              compact
-              entry={FRANCIS_CARD}
-              build={buildFrancisShareCard}
-              link={address}
-              description={`The 8th CartoonAFRICA International Biennial, Benin City, 28–30 November 2026. Cover by Francis Umendu Odupute, who edits the book. His drawings and his own address: ${address}`}
-            />
-          </div>
-          <p className="hand-plate-meta">Sends his card, with the cover he drew and this address on it.</p>
-        </header>
-
-        {/* ── THE COVER, LEFT ALONE ───────────────────────────────────────────
-            His picture, whole and uncropped, with nothing of ours printed on it. One line
-            under it naming the hand that made it, which is the same rule every drawing on
-            the wall keeps. */}
-        <figure className="hand-cover">
+        {/* ── THE DRAWING FIRST, AND THE HAND UNDER IT ────────────────────────
+            No name above the work and no line about what he does for a living. A stranger
+            meets the cover he drew, at the width of the glass, and then finds out whose
+            hand it is — which is the order you meet a cartoonist in real life. */}
+        <figure className="hand-open">
           <img
             src={CARTOON_COVER}
             alt="Cover of the 8th CartoonAFRICA International Biennial 2026 anthology. Cover artwork by Francis Umendu Odupute."
             loading="eager"
             decoding="async"
           />
-          <figcaption>{CARTOON_EVENT.coverArt}</figcaption>
+          <figcaption className="hand-signed">
+            <span className="hand-rule" aria-hidden="true" />
+            <span className="hand-signed-name">Francis Umendu Odupute</span>
+            <span className="hand-signed-mark">Francodus</span>
+          </figcaption>
+          <p className="hand-open-what">
+            The cover of the 8th CartoonAFRICA International Biennial, 2026 — drawn by the man who edits
+            the book.
+          </p>
         </figure>
 
-        {/* What it is, when and where — under the picture, where a reader who has just
-            stopped to look will actually want it. */}
-        <section className="hand-event">
-          <p className="hand-event-title">{CARTOON_EVENT.biennial}</p>
-          <p>
-            {CARTOON_EVENT.when} · {CARTOON_EVENT.where}
-          </p>
-          <p>
-            Edited by {CARTOON_EVENT.editors}. The hour on Sunday 29 November belongs to Janine M. H. Selendy, in
-            his book —{' '}
-            <Link to="/ClimateWorkshop" className="text-record-red underline decoration-record-red/40 underline-offset-2">
-              what that hour is
-            </Link>
-            .
-          </p>
-        </section>
+        {/* The one door, now that there is something worth sending. */}
+        <div className="hand-doors">
+          <ShareCardButton
+            compact
+            entry={FRANCIS_CARD}
+            build={buildFrancisShareCard}
+            link={address}
+            description={`The 8th CartoonAFRICA International Biennial, Benin City, 28–30 November 2026. Cover by Francis Umendu Odupute, who edits the book. His drawings and his own address: ${address}`}
+          />
+        </div>
 
         {/* ── HIS WORK, AS IT ARRIVES ──────────────────────────────────────────
             This is the platform: not a caption, a place. The strip is read from the same
             table the wall reads, so his next drawing appears here the moment a keeper puts
-            it up. */}
-        <Section
-          n="01 · His work on the record"
-          title={
-            drawings === null
+            it up. Nothing is numbered and nothing is ranked — the order is the order it
+            arrived in, which is a cartoonist's own order. */}
+        <section className="hand-section">
+          <h2 className="hand-head">
+            {drawings === null
               ? 'Opening his drawings…'
-              : drawings.length
-                ? drawings.length === 1
-                  ? 'One drawing on the wall'
-                  : `${drawings.length} drawings on the wall`
-                : 'Room for the work that is coming'
-          }
-        >
+              : drawings.length === 1
+                ? 'His drawing on the wall'
+                : drawings.length
+                  ? 'His drawings on the wall'
+                  : 'Room for what is coming'}
+          </h2>
+
           {drawings !== null && drawings.length === 0 && (
-            <p className="hand-say" style={{ marginTop: 0 }}>
+            <p className="hand-open-what" style={{ textTransform: 'none', letterSpacing: 0, fontSize: '.9rem' }}>
               Nothing of his is on the wall yet.{' '}
-              <Link to="/ClimateCartoons#cartoon-drawing-desk" className="text-record-red underline decoration-record-red/40 underline-offset-2">
-                The drawing desk
+              <Link to="/ClimateCartoons#cartoon-drawing-desk" style={{ color: 'rgb(var(--record-red))', textDecoration: 'underline' }}>
+                Draw one
               </Link>{' '}
-              is where a drawing is given.
+              and it goes up here under his name.
             </p>
           )}
 
           <ArtistSequence drawings={drawings} />
 
           {drawings !== null && drawings.length > 0 && (
-            <p className="hand-where" style={{ marginTop: '.9rem' }}>
+            <p className="hand-where">
               In the order it arrived. Push the strip sideways, or open any sheet to print it.
             </p>
           )}
-        </Section>
+        </section>
+
+        {/* ── THE BOOK AND THE THREE DAYS ─────────────────────────────────────
+            What it is, when, where — under the picture, where a reader who has just stopped
+            to look will actually want it. */}
+        <section className="hand-book">
+          <p className="hand-book-title">{CARTOON_EVENT.biennial}</p>
+          <p>
+            {CARTOON_EVENT.when} · {CARTOON_EVENT.where}
+          </p>
+          <p>
+            Edited by {CARTOON_EVENT.editors}. The hour on Sunday 29 November belongs to Janine M. H.
+            Selendy, in his book — <Link to="/ClimateWorkshop">what that hour is</Link>.
+          </p>
+        </section>
 
         {/* ── HIS OWN WORDS, NOW THAT SOMETHING OF HIS HAS BEEN SEEN ───────────
             Quoted rather than summarised: a page about a person that paraphrases them is a
-            page about the person who wrote it. */}
-        <Section n="02 · In his own words" title="What he does, as he puts it">
+            page about the person who wrote it. His titles live here, at the foot, because a
+            list of posts is not an introduction — the drawings were. */}
+        <section className="hand-section">
+          <h2 className="hand-head">In his words</h2>
           {HIS_WORDS.map((line) => (
             <blockquote key={line} className="hand-quote" dir="auto">
               “{line}”
             </blockquote>
           ))}
-          <p className="hand-where">Francis Umendu Odupute, introducing himself · 20 November 2026 · kept exactly as he wrote it</p>
-        </Section>
+          <p className="hand-where">Introducing himself · 20 November 2026 · kept exactly as he wrote it</p>
+        </section>
 
-        {/* ── THE DEAL ────────────────────────────────────────────────────────
-            No salesmanship and no jokes of ours: he is funny in his drawings, and a page
-            that adds its own humour on top of a cartoonist's is a page that does not trust
-            the cartoons. */}
-        <Section n="03 · What this page is" title="A page on a record, not a profile on a platform">
-          <div className="hand-deal">
-            {THE_DEAL.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
-            <p className="hand-address">{address.replace(/^https?:\/\//, '')}</p>
-            <p className="hand-where" style={{ marginTop: 0 }}>
-              Send it to a paper, a festival, a ministry or a school. The card is drawn on the device it is sent
-              from, and nothing about the sender leaves it.
-            </p>
-          </div>
-        </Section>
+        {/* ── THE ADDRESS, PLAINLY ────────────────────────────────────────────
+            What the page is for, said once at the foot rather than in a section about itself:
+            a link to send to a paper, a festival, a ministry or a school. */}
+        <section className="hand-section">
+          <h2 className="hand-head">Send this address</h2>
+          <HandAddress address={address} />
+          <p className="hand-where">
+            Benin City, Nigeria. Send it to a paper, a festival, a ministry or a school — the address does
+            not move, and his name stays on the drawing wherever the drawing goes.
+          </p>
+        </section>
       </div>
     </ClimateRecordShell>
   );
