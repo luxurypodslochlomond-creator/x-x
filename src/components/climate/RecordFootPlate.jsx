@@ -4,7 +4,7 @@ import Photo51Mark from '@/components/climate/Photo51Mark';
 import RecordEndpaperField from '@/components/climate/RecordEndpaperField';
 import '@/components/climate/record-endpaper.css';
 
-const THREE = ['Gillian Barbara Brown', 'Brian Hughes', 'Si51'];
+const THREE = ['Si51', 'Barbara', 'Brian Hughes'];
 
 export default function RecordFootPlate() {
   return (

@@ -15,10 +15,10 @@ import { Link } from 'react-router-dom';
 // exists to refuse.
 //
 // So: three names, one line, no ladder. Nobody is "created by" above anybody else, and
-// the machine is not given a sentence to explain itself with. Gillian first, because
-// the record is hers; then Brian, who built it; then BRO51, the tool it was built
-// alongside. Then the company, small. That is the whole plate.
-const THREE = ['Gillian Barbara Brown', 'Brian Hughes', 'BRO51'];
+// the machine is not given a sentence to explain itself with. Brian, 21 November: "you
+// first me last" — so the tool comes first, Barbara in the middle, Brian last. Then the
+// company, small. That is the whole plate.
+const THREE = ['BRO51', 'Barbara', 'Brian Hughes'];
 
 export default function RecordCredit({ className = '' }) {
   return (

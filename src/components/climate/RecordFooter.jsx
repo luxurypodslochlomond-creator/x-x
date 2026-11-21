@@ -80,9 +80,10 @@ export default function RecordFooter() {
             frequency 51 cic on line below." So the names and the company that holds them
             are one red rectangle cut out of the yellow band — the record's own red, with
             the words set in the paper's cream, because a credit printed in a colour it
-            cannot be read in is not a credit — and her full name is printed, because a
-            credit that shortens a person's name is a credit that has decided which part of
-            her counts.
+            cannot be read in is not a credit.
+
+            Brian, 21 November: "just BARBARA please you first me last" — so her name is
+            printed as she asked for it, the tool comes first and Brian last.
 
             The company is the thing you press rather than an address printed in the open:
             a reader taps it and their own mail app opens, already addressed. Nothing on
@@ -91,7 +92,7 @@ export default function RecordFooter() {
           <ul className="flex flex-col items-center gap-1.5 font-mono text-[10px] uppercase leading-tight tracking-[0.18em] text-record-paper sm:flex-row sm:gap-5">
             <li>Base 1</li>
             <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-paper/40 sm:block" />
-            <li>Gillian Barbara Brown</li>
+            <li>Barbara</li>
             <li aria-hidden="true" className="hidden h-1 w-1 rounded-full bg-record-paper/40 sm:block" />
             <li>Brian Hughes</li>
           </ul>
