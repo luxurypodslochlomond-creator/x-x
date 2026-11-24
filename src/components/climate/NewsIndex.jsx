@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, ChevronDown } from 'lucide-react';
+import { Plus, ChevronDown, ArrowLeft, PenLine, ShieldCheck } from 'lucide-react';
+import SignalsWhoAnswers from '@/components/climate/SignalsWhoAnswers';
 import { MarkSignal } from '@/components/climate/RecordFootMarks';
 import NewsIndexTools from '@/components/climate/NewsIndexTools';
 import NewsLead from '@/components/climate/NewsLead';
@@ -61,6 +62,10 @@ export default function NewsIndex({ entries, loading, query, onQueryChange, kind
         <>
           <NewsLead entry={lead} />
           <NewsTruthKey />
+          {/* Who answers for what, said before the list rather than in a footer nobody
+              reaches. This is the page that could most easily put words in someone's mouth,
+              so the line is drawn at the top of it. */}
+          <SignalsWhoAnswers />
           {groups.map(({ label, items }) => (
             <div key={label} className="news-group-block">
               <h2 className="news-group">{label}</h2>
@@ -83,14 +88,14 @@ export default function NewsIndex({ entries, loading, query, onQueryChange, kind
       </details>
 
       <footer className="news-index-foot">
-        <Link to="/TogetherChangeClimate" className="news-text-action">← The record</Link>
+        <Link to="/TogetherChangeClimate" className="news-text-action"><ArrowLeft size={15} aria-hidden="true" /> The record</Link>
         {/* ── THE WAY ACROSS TO THE DRAWINGS ──────────────────────────────────────
             The cartoon room could only be reached by going back to the contents sheet, so a
             reader standing on the wire had no idea there were drawings on the same record.
             It goes in the wire's own foot, beside the other two doors, because the foot is
             where the wire already offers to take you somewhere else. */}
-        <Link to="/ClimateCartoons" className="news-text-action">The cartoon room →</Link>
-        <Link to="/ClimateMethod" className="news-text-action">Checks & corrections →</Link>
+        <Link to="/ClimateCartoons" className="news-text-action"><PenLine size={15} aria-hidden="true" /> The cartoon room</Link>
+        <Link to="/ClimateMethod" className="news-text-action"><ShieldCheck size={15} aria-hidden="true" /> Checks &amp; corrections</Link>
       </footer>
     </section>
   );
