@@ -21,20 +21,30 @@ import React from 'react';
 // solid masses, nothing thinner than the mass, no second colour, and exactly one part in
 // the record's red — the part that is the point. Nothing here is drawn in a line.
 //
-// One thing was also taken away. Actions used to be a pole with a flag on it, and MarkSignal
-// — the wire — is a pole with bars beside it. Two doors away, two marks read as the same
-// object. An action is now a spade stood in the ground with its edge in red: a tool laid out
-// ready, which is what an action on this record actually is — something already happening
-// that you can pick up and join.
+// ── SECOND PASS, 24 NOVEMBER: NO PICTURES OF TOOLS ─────────────────────────────
+// Brian: "crises and solutions and actions and groups are weird now bro… icons bit cheesy…
+// shovel for action is weird." He was right, and the reason is the rule this record already
+// set for its twenty-four subject marks: draw the idea, never the object. A spade says
+// gardening. A shoot says gardening. Four blocks round a table says a meeting. All three
+// are pictures of things, which is exactly what looks like clip art in fifty years.
+//
+// So the four are one mass, cut four ways, and the cut IS the meaning:
+//   crisis   — the mass broken, the break standing open in red.
+//   solution — the same mass, the same cut, closed: the break repaired in red. Kintsugi,
+//              which is what a solution on this record actually is — not a new object, a
+//              mended one, with the repair left visible.
+//   action   — the mass stepped up. The ground has moved, and the riser is the red.
+//   group    — the same mass in four, stood round a space, the fourth in red.
+// Nothing here is a picture of an object. All four are the same ink and the same red.
 const FRAME = { viewBox: '0 0 40 40', fill: 'none', 'aria-hidden': 'true' };
 const MASS = { fill: 'currentColor', stroke: 'none' };
-// ── THE ONE PART THAT IS THE POINT WEARS THE ROOM'S OWN PIGMENT ────────────────
-// These four were drawn with the record's red in that part and nothing else, so all
-// four rooms read as one colour. Each room now hands its mark the pigment its map
-// signal, its cards and its entry pages already wear — red for what is at risk, green
-// for what answers, ochre for what was done, ocean for who is doing it together — and
-// falls back to ink wherever no pigment is handed down (a section heading, say).
-const ACCENT = { fill: 'var(--room-accent, currentColor)', stroke: 'none' };
+// ── ONE RED, AS THERE HAS ALWAYS BEEN ──────────────────────────────────────────
+// One part of each mark is the record's red: the part that is the point. Four rooms in
+// four hues was the fault — "colour weird now bro" — because a row of four colours is a
+// legend for a chart, and this record has one red. A room may still hand a pigment down
+// where a dark ground needs one (the night plate does, at fourteen pixels), and that is
+// the only place the accent is ever anything but red.
+const ACCENT = { fill: 'var(--room-accent, rgb(var(--record-red)))', stroke: 'none' };
 
 // Crises — the ground, broken, the record's red standing in the gap. What is at risk.
 export function RoomMarkCrisis({ size = 40, className = '' }) {
@@ -47,44 +57,44 @@ export function RoomMarkCrisis({ size = 40, className = '' }) {
   );
 }
 
-// Solutions — the same ground as the crisis, whole, with something standing up out of it.
-// The growth is the red part and the ground is ink, which is the pairing the crisis makes
-// the other way round: there the ground is what is broken, here the ground is fine and the
-// living thing is what the record is pointing at. It is also the honest size — a red seed
-// chip in the soil was five pixels on a tablet, and a mark whose one red part cannot be
-// seen at the size it is drawn is a mark with no point in it.
+// Solutions — the same mass as the crisis, the same cut, closed. The break is repaired in
+// the record's red and the repair is left showing, because a solution here is never a clean
+// new thing: it is the same ground, mended, and the mending is what the record is pointing
+// at. Read the two together and the argument is the pair: one open, one closed.
 export function RoomMarkSolution({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <rect x="3" y="29" width="34" height="7" {...MASS} />
-      <rect x="18.4" y="13.4" width="3.6" height="15.6" {...ACCENT} />
-      <path d="M19 15.4C19 9.4 14.2 5.6 8.8 6.6 8.6 11.6 13.2 15.8 19 15.4Z" {...ACCENT} />
-      <path d="M21.2 12.6C21.6 7.4 26.4 4.2 31.6 5 31.8 9.8 27.2 13.4 21.2 12.6Z" {...ACCENT} />
+      <rect x="3" y="17" width="34" height="19" {...MASS} />
+      <path d="M18.4 17 H21.6 L22.4 36 H17.6 Z" {...ACCENT} />
     </svg>
   );
 }
 
-// Actions — a spade stood in the ground, its edge in red. A tool laid out ready to be
-// picked up, which is what an action on this record is: something already happening.
+// Actions — the mass stepped up. Not a spade, not a flag, not a hand: the ground has moved,
+// and the riser between the two levels is the red. A deed is a change of level — something
+// that was not true before and is true now — which is what this record means by an action,
+// and it is the one idea here that needs no object at all.
 export function RoomMarkAction({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <rect x="13.6" y="2.8" width="12.8" height="3.6" {...MASS} />
-      <rect x="17.8" y="6.4" width="4.4" height="11.4" {...MASS} />
-      <path d="M13.2 17.8 H26.8 L25.4 27.6 20 34.6 14.6 27.6 Z" {...ACCENT} />
+      <rect x="3" y="24" width="16" height="12" {...MASS} />
+      <rect x="22" y="10" width="15" height="14" {...MASS} />
+      <rect x="19" y="10" width="3" height="26" {...ACCENT} />
     </svg>
   );
 }
 
-// Groups — four of them stood round a space, seen from above. The one in red is the one
-// who has not joined yet.
+// Groups — the same mass, cut in four. It used to be four blocks stood round a space, seen
+// from above, which is a picture of a meeting table: legible, and clip art in fifty years.
+// Quartered, it is the mass itself divided — the one room on this record whose subject is
+// other people rather than an idea, so one part of it is red.
 export function RoomMarkGroups({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <rect x="15.4" y="3.6" width="9.2" height="6.4" {...MASS} />
-      <rect x="15.4" y="30" width="9.2" height="6.4" {...MASS} />
-      <rect x="3.6" y="15.4" width="6.4" height="9.2" {...MASS} />
-      <rect x="30" y="15.4" width="6.4" height="9.2" {...ACCENT} />
+      <rect x="3" y="3" width="15" height="15" {...MASS} />
+      <rect x="22" y="3" width="15" height="15" {...MASS} />
+      <rect x="3" y="22" width="15" height="15" {...MASS} />
+      <rect x="22" y="22" width="15" height="15" {...ACCENT} />
     </svg>
   );
 }
