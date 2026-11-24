@@ -13,6 +13,8 @@ export default function RecordCoverPlate() {
     <section aria-label="Photographs on the record" className="record-cover-plate record-home-opening w-full border-t-4 border-record-red text-record-ink">
       <div className="mx-auto w-full max-w-[1180px] px-4 pt-5 lg:px-10">
         <CoverPhotoPlates />
+        {/* The plate is a door, and a door nobody knows is a door is a picture. */}
+        <p className="record-header-type mt-2 text-[11px] uppercase tracking-[0.1em] text-record-muted">Tap any photograph to open it</p>
 
       </div>
     </section>

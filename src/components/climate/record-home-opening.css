@@ -28,15 +28,20 @@ html .climate-record.record-home-field .record-book {
   justify-content: center;
   gap: .15rem 1rem;
 }
+/* The ask wears the record's own signal plate, so it reads as a door rather than small print. */
 .record-home-page .record-home-pass .record-share-inline {
   min-height: 44px;
-  border-radius: 0;
-  color: rgb(var(--record-signal));
-  font-weight: 400;
+  padding: .55rem 1rem;
+  border: 0;
+  border-radius: 2px;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  font-weight: 700;
   font-size: .75rem;
-  letter-spacing: .08em;
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
+.record-home-page .record-home-pass .record-share-inline:active { background: rgb(var(--cartoon-sun)); }
 /* Photographs, the room doors and subjects form one connected, legible sheet. */
 .record-pages .record-home-page :is(.record-cover-plate, .record-home-doors, .record-home-subjects, .record-home-entry-toolbar, .record-room-nav) {
   background-color: rgb(var(--record-paper));
@@ -47,9 +52,13 @@ html .climate-record.record-home-field .record-book {
 /* Consistent breaks reveal the full-colour ground. No painting is mixed into reading text. */
 .record-pages .record-home-page .record-image-section,
 .record-pages .record-home-page .record-home-sections > section {
-  margin-block: 1rem;
-  background-color: rgb(var(--record-paper));
+  margin-block: 0;
+  padding-block: 2rem;
+  background-color: rgb(var(--record-paper) / .88);
+  border-top: 3px solid rgb(var(--record-mark));
 }
+/* One rule per section, not a new white card: the page reads as one sheet laid on the painting. */
+.record-pages .record-home-page .record-home-sections > section + section { border-top-width: 1px; border-top-color: rgb(var(--record-ink) / .14); }
 .record-pages .record-home-page .record-entry-sections > :is(button, .flex, .text-center),
 .record-pages .record-home-page :is(.record-entry-plate, .record-media-mount) {
   background-color: rgb(var(--record-paper));
@@ -81,14 +90,30 @@ html .climate-record.record-home-field .record-book {
   .record-home-page .record-home-photographs { margin-top: 1rem; }
   .record-pages .record-home-page .record-image-section,
   .record-pages .record-home-page .record-home-sections > section {
-    margin-inline: .75rem;
-    padding: 1.5rem 1rem;
+    margin-inline: 0;
+    padding: 1.25rem 1rem;
+    background-color: rgb(var(--record-paper) / .9);
   }
   .record-pages .record-home-page .record-image-section .record-section-heading {
     padding-inline: 0;
     background-color: transparent;
   }
 }
+/* ── THE ROOM BREATHES, ON THE COMPOSITOR ──────────────────────────────────────
+   The painting drifts and swells by a few per cent over three minutes: the planet
+   turning in the window rather than a slideshow. Transform and opacity only, on the one
+   image already loaded, so this costs no bytes and no repaint. A reader who asked their
+   device for less movement gets it perfectly still. */
+@keyframes record-ground-drift {
+  0%   { transform: scale(1.06) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.11) translate3d(-1.6%, -1%, 0); }
+  100% { transform: scale(1.06) translate3d(0, 0, 0); }
+}
+.record-environment .record-ground { animation: record-ground-drift 190s ease-in-out infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .record-environment .record-ground { animation: none; }
+}
+
 @media print {
   html .climate-record.record-home-field .record-book { background-color: rgb(var(--record-paper)); }
   .record-home-page .record-home-pass .record-share-inline { display: none; }
