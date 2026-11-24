@@ -60,6 +60,23 @@ export const HIS_PAPERS = [
     href: 'https://www.walkhighlands.co.uk/lochlomond/helensburgh-balloch.shtml',
   },
   {
+    label: 'The Park Authority has already described the road',
+    text: 'On its own page for the Three Lochs Way, the National Park Authority calls Stoneymollan Road "a delightful ancient route linking Balloch and Cardross". The body that will be a consultee has published what the road is, in its own words. Quoting it back is safe, and it is the opposite of an argument.',
+    src: 'Loch Lomond & The Trossachs NPA',
+    href: 'https://www.lochlomond-trossachs.org/things-to-do/walking/long-distance-routes/three-lochs-way/',
+  },
+  {
+    label: 'Access rights cannot be waved away by an applicant',
+    text: 'Under section 11 of the Land Reform (Scotland) Act 2003 an access authority — here West Dunbartonshire Council — may make an order exempting a particular area from access rights for a particular purpose. That is the only route. So the answer to "why are they allowed to disrupt a national trail" is that they are not, unless the Council makes that order. The letter asks for any order sought or made.',
+    src: 'Land Reform (Scotland) Act 2003, s.11',
+    href: 'https://www.legislation.gov.uk/asp/2003/2/section/11',
+  },
+  {
+    label: 'The letter now answers all eleven sections of 1 September',
+    text: '1 water servitude, 2 riparian rights and SEPA, 3 access servitude, 4 other rights and support, 5 EIA, 6 UKFS, 7 protected species, 8 peat and hydrology, 9 public access, 10 archaeology, 11 the four requirements. Sections 2, 6 and 11 were the thin ones and are now covered: the CAR 2011 question, the UKFS guidelines by name, and the four requirements restated in full at section 7.',
+    src: 'Coverage check',
+  },
+  {
     label: 'The date that is gone, and why',
     text: 'The letter used to say "I put this to you in writing on 4 June 2025". Brian could not place that date and I could not verify it, so it now reads "I raised this with you in writing before". A wrong date is the first thing a lawyer tests, and one wrong date taints every right one around it. If Brian finds the email, put the date back, because a dated complaint is stronger than an undated one.',
     src: 'Builder note',

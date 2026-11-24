@@ -1,24 +1,24 @@
-// The reply to Barry Harper, v9, 24 November 2026.
+// The reply to Barry Harper, v10, 24 November 2026.
 //
-// Verified since v8, from public sources:
-//  - the John Muir Way's first stage runs Helensburgh to Balloch and comes DOWN THE STONEYMOLLAN
-//    ROAD to the foot of Loch Lomond. So the trail uses this road, not merely the moor above it.
-//  - the Three Lochs Way, also one of Scotland's Great Trails, runs Balloch to Helensburgh over the
-//    same ground. Two Great Trails, one road.
+// Verified since v9:
+//  - the National Park Authority's own website describes Stoneymollan Road as "a delightful ancient
+//    route linking Balloch and Cardross", on its page for the Three Lochs Way. The consultee has
+//    already published what the road is.
+//  - access rights cannot be set aside by an applicant. They can only be exempted by an order made
+//    by the access authority, West Dunbartonshire Council, under section 11 of the Land Reform
+//    (Scotland) Act 2003, for a particular area and a particular purpose. That is the answer to
+//    "why are they allowed to disrupt it": they are not, unless the Council makes that order.
 //
-// Changes:
-//  - the 4 June 2025 date is GONE. Brian could not place it, and I could not verify it. It now
-//    says "in writing before", which is true without a date. A wrong date is a gift to them.
-//  - John Gilbert's account is used, his name is not. The weir 200 m up needing an annual dig-out,
-//    the tank 50 m south-east last emptied in 2019, and the pipe's route, are stated as facts about
-//    Brian's own supply, with an invitation to correct him if the route differs.
-//  - the deer fence is raised: a fence across open ground obstructs more people than a lorry does.
-//  - the livelihood is named as the only one.
-//  - buzzards are named, but the legal claim is kept to what is certain: all wild birds, their
-//    nests while in use and their eggs are protected under the Wildlife and Countryside Act 1981.
-//    No Schedule 1 claim is made for buzzard, because it would be wrong.
-//  - ancient woodland is asked about, because the Ancient Woodland Inventory is a public dataset
-//    and either the site is on it or it is not.
+// Also changed:
+//  - the Park assertion now carries a fallback, so the argument does not depend on the boundary
+//    line at all: a scheduled monument is a sensitive area too, and his own map marks SM6341, and
+//    deep peat is a sensitive area, and his response admits peat over 50 cm. Three independent
+//    triggers, any one of which removes the threshold.
+//  - accessibility is now stated: walkers with sticks, people with mobility difficulties, buggies,
+//    and visitors from abroad. A diversion over rough ground is not a diversion for them.
+//  - the reply now checks itself against all eleven sections of the 1 September objection: CAR 2011
+//    for SEPA, the UKFS guidelines by name, and the four requirements restated in full.
+//  - core path status asked about, because West Dunbartonshire has an adopted Core Paths Plan.
 
 export const TO = 'Barry.Harper@scottishwoodlands.co.uk';
 export const SUBJECT = 'RE: Auchendennan Woodland Creation';
@@ -29,11 +29,13 @@ Thank you for your email of 19 November, your response to my objection, and the 
 
 1. THE LAND IS IN THE NATIONAL PARK, SO THE THRESHOLD DOES NOT APPLY
 
-The land lies within Loch Lomond and The Trossachs National Park, as the Park Authority's boundary map shows. A National Park is a sensitive area under the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2017, and Scottish Forestry publishes the thresholds that follow from it.
+The land lies within Loch Lomond and The Trossachs National Park. A National Park is a sensitive area under the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2017, and Scottish Forestry publishes the thresholds that follow from it.
 
 Where no part of the land is a sensitive area, afforestation has a threshold of 20 hectares. In a National Scenic Area it is 2 hectares. In any other sensitive area, including a National Park, there is no threshold at all. Forest roads have no threshold in a sensitive area, and neither does deforestation.
 
-So for afforestation, for any forest road, and for any felling within the Park, there is no area to stay under. A screening opinion is required whatever the size of the scheme. Scottish Forestry also requires that any work carried out in the past five years on land adjacent to the project be included in the area threshold, and felling was carried out in this area in 2024.
+Nothing here turns on the boundary line, because the same conclusion follows on two further grounds. A scheduled monument is a sensitive area, and your own map marks SM6341. Deep peat is a sensitive area, meaning organic soil containing more than 60 per cent organic matter and exceeding 50 centimetres in thickness, and your response says that areas of peat over 50 cm were excluded "where required".
+
+So for afforestation, for any forest road, and for any felling, there is no area to stay under. A screening opinion is required whatever the size of the scheme. Scottish Forestry also requires that any work carried out in the past five years on land adjacent to the project be included in the area threshold, and felling was carried out in this area in 2024.
 
 Your response says only that proposals are screened "where required". Please confirm:
 
@@ -49,7 +51,11 @@ If no screening opinion has been sought, please confirm that, and that no work w
 
 2. THE ACCESS: TWO NATIONAL TRAILS RUN DOWN THIS ROAD
 
-The first stage of the John Muir Way runs from Helensburgh to Balloch and comes down the Stoneymollan road to the foot of Loch Lomond. The Three Lochs Way, also one of Scotland's Great Trails, runs between Balloch and Helensburgh over the same ground. So this road is not a lane serving a few houses: it is the western end of one national trail and part of another, and the way onto both. People walk them from either end, locals use them daily for their health, and my guests come here specifically to walk them. Statutory access rights under the Land Reform (Scotland) Act 2003 apply across this ground.
+The first stage of the John Muir Way runs from Helensburgh to Balloch and comes down the Stoneymollan road to the foot of Loch Lomond. The Three Lochs Way, also one of Scotland's Great Trails, runs between Balloch and Helensburgh over the same ground. The Park Authority's own website describes this road as "a delightful ancient route linking Balloch and Cardross". So this is not a lane serving a few houses: it is the western end of one national trail and part of another, and the way onto both.
+
+Both are used by people who could not simply step aside or take a diversion over rough ground: walkers with sticks, people with mobility difficulties, families with buggies, and visitors from other countries who have come here for the route. Locals use them daily for their health. My guests come here specifically to walk them.
+
+Statutory access rights under the Land Reform (Scotland) Act 2003 apply across this ground, and they cannot be set aside by an applicant. They can only be exempted by an order made by the access authority, West Dunbartonshire Council, under section 11 of that Act, for a particular area and a particular purpose. Please confirm whether any such order is being sought or has been made, and if so provide it. Please also confirm whether the route is identified as a core path in West Dunbartonshire's adopted Core Paths Plan.
 
 Your response says the proposed access is Upper Stoneymollan Road. It does not say why. Your own map is titled Cameron Home Farm. Please confirm what access routes are available from that holding, and which of them could serve this proposal.
 
@@ -63,13 +69,14 @@ So the question is not whether access can be maintained "insofar as reasonably p
 
 A deer fence across this ground would obstruct more people than the lorries would. Please confirm where the fence is proposed relative to both trails, to the Cross Stone and to the monuments, and what gates or stiles are provided.
 
-Your response discloses four Council conditions: pre-notification of site commencement and abnormal loads, a road brush if requested, pre- and post-works inspections, and temporary signage. None of them deals with vehicle weight, width, passing places, horses, children, the trails, or the pipe under the road.
+Your response discloses four Council conditions: pre-notification of site commencement and abnormal loads, a road brush if requested, pre- and post-works inspections, and temporary signage. None of them deals with vehicle weight, width, passing places, horses, children, the trails, the accessibility of the route, or the pipe under the road.
 
 Please send:
 
 - the Council's conditions in writing, with the date of its response, and what it was told about the matters above;
 - vehicle types and maximum weights, the number of movements, working hours and duration;
 - the traffic management proposed for horses, the school run, emergency vehicles and public access, and confirmation that neither trail will be closed, diverted or obstructed;
+- any section 11 order sought or made, and if a diversion is proposed, what accessible alternative is provided and whether the Council has considered its duties under the Equality Act 2010 as access authority and roads authority;
 - the date and scope of the pre-works inspection, who carries it out, whether it will record the buried pipe, and who repairs and pays for damage;
 - at least 14 days' notice to me of the start of works and of every abnormal load.
 
@@ -99,7 +106,7 @@ Please show the 50 metre buffer plotted, with the pipeline, the weir, the settli
 
 The setback. You propose 10 metres from the watercourse for conifer and 5 metres for native broadleaf. The guidance sets 10 metres along both sides of all permanent watercourses under 2 metres wide. If you consider a narrower width appropriate, please state the basis, the channel width relied on, and where on the burn it was measured.
 
-Ground preparation and crossings. Your response rules out only "significant" engineering, excavation or drainage. Please list what you do not consider significant: mounding, drains, fence posts, tracks and crossings. Your map marks a ford on the track through Cameron Wood; please confirm whether any crossing of the burn will be used, and where.
+Ground preparation and crossings. Your response rules out only "significant" engineering, excavation or drainage. Please list what you do not consider significant: mounding, drains, fence posts, tracks and crossings. Your map marks a ford on the track through Cameron Wood; please confirm whether any crossing of the burn will be used, and where. Please also confirm whether any of the works requires authorisation or registration under the Water Environment (Controlled Activities) (Scotland) Regulations 2011, and what has been obtained.
 
 Water yield. The guidance says poor forest management can in certain circumstances reduce the volume of a water supply, and that direct surface water abstractions are highly vulnerable to land use change. Please send the water yield assessment for this catchment, or say there is not one. Please also confirm what baseline water quality sampling will be taken at the abstraction point, and send the method statement and contingency plan, with an emergency contact and what replaces the supply if it is interrupted.
 
@@ -116,6 +123,7 @@ Please send:
 - the peat depth survey and results map, with the deep peat identified and its extent;
 - the cultural heritage assessment, the GWDTE assessment, the pine marten camera trap findings, and the raptor and black grouse surveys. Raptors, including buzzards, use this ground and the woodland edge; all wild birds, their nests while in use and their eggs are protected under the Wildlife and Countryside Act 1981, so operations have to be planned around the nesting season. Please say what the raptor survey recorded and where;
 - any survey for red squirrel (your response says they are known in the wider area but lists none) and for badger (your map marks badger gates, and none of the surveys you list is for badger);
+- confirmation of compliance with the UK Forestry Standard and with each of the supporting guidelines engaged here: Forests and Water, Forests and Soil, Forests and Biodiversity, and Forests and Landscape;
 - confirmation of whether any part of the proposal affects ancient woodland or long-established woodland of plantation origin, and if so which;
 - the response of each statutory consultee, including West Dunbartonshire Council, Historic Environment Scotland, SEPA, Scottish Water and the National Park Authority;
 - the record of the discussion with John Muir Way representatives: who, when, and anything in writing;
@@ -124,6 +132,8 @@ Please send:
 Please also provide the proposal map in a form that can be compared against public mapping: at a stated scale, with a grid reference, and with the underlying geographic data if it is held.
 
 7. WHAT I NEED, AND BY WHEN
+
+The four things I asked for on 1 September are unchanged: that the planting boundary be amended to exclude the water source, its access route and the servitude areas in full; that all surveys be completed and made available for consultation; that compliance with the UK Forestry Standard and all relevant Scottish legislation be confirmed; and that my registered rights be acknowledged in writing and protected in full.
 
 Please send a numbered reply within 14 days of this email, answering the points above in order, with the plan requested at section 4 and the documents at section 6. If something is not available, please say what is outstanding and the date it will be provided.
 
