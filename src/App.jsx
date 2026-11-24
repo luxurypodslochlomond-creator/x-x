@@ -98,7 +98,11 @@ const AdminStoneymollanLegalPage = React.lazy(() => import('./pages/AdminStoneym
 // The reply to Barry Harper, written out of the saved file rather than from memory: the
 // road already carrying works that did not use it, and the mains pipe his response never
 // mentions. Its own address so it can be read on a phone and copied in one tap.
-const AdminStoneymollanBarryReplyPage = React.lazy(() => import('./pages/AdminStoneymollanBarryReply'));
+// The reply to Barry Harper. Named without "Admin" on purpose: the file name decides whether
+// the pages loop wraps a screen in the admin door, and this one must open for the person
+// sending it without a sign-in. It also wears no layout, so on a phone it is the letter and
+// the copy button and nothing else.
+const StoneymollanReplyPage = React.lazy(() => import('./pages/StoneymollanReply'));
 const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
 const AdminPWAPushGuidePage = React.lazy(() => import('./pages/AdminPWAPushGuide'));
 const Literacy51Page = React.lazy(() => import('./pages/Literacy51'));
@@ -572,8 +576,9 @@ const AuthenticatedApp = () => {
           engines to leave it alone, so it can be opened on a phone at the kitchen table
           without becoming the first thing a neighbour finds. The admin address still
           works, because it is in the case file's own links. */}
-      <Route path="/StoneymollanReply" element={<LayoutWrapper currentPageName="AdminStoneymollanBarryReply"><AdminStoneymollanBarryReplyPage /></LayoutWrapper>} />
-      <Route path="/AdminStoneymollanBarryReply" element={<LayoutWrapper currentPageName="AdminStoneymollanBarryReply"><AdminStoneymollanBarryReplyPage /></LayoutWrapper>} />
+      <Route path="/StoneymollanReply" element={<StoneymollanReplyPage />} />
+      <Route path="/AdminStoneymollanBarryReply" element={<Navigate to="/StoneymollanReply" replace />} />
+      <Route path="/AdminStoneymollanBarryReplyPage" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
