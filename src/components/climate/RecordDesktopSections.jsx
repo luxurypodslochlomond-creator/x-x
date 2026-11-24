@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CONTENT_GROUPS, DESK_NAV, PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
-import markFor from '@/components/climate/navigationIcons';
+import { markFor } from '@/components/climate/pageMarks';
 import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import { MARKS_IN_ORDER } from '@/components/climate/marks/marksOrder';
 import MarksPlate from '@/components/climate/marks/MarksPlate';

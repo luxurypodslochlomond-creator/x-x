@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { DESK_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
-import { LayoutGrid as MarkExplore } from 'lucide-react';
+import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import '@/components/climate/record-navigator.css';
 
 // ── BASE 1 DEAD IN THE MIDDLE, AND TWO ROWS OF ONE SIZE ────────────────────────

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import markFor from '@/components/climate/navigationIcons';
+import { markFor } from '@/components/climate/pageMarks';
 
 // ── THE DOOR OPENS WHEN THE FINGER LIFTS ────────────────────────────────────────
 // A door that goes somewhere has always opened on the browser's click — the event a phone

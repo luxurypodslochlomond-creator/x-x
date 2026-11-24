@@ -69,7 +69,13 @@
 .fergus-steps { display: grid; gap: .5rem; padding: 0; list-style: none; }
 .fergus-steps li { display: flex; align-items: flex-start; gap: .8rem; padding: .9rem 1rem; border-radius: 14px; border: 1px solid rgb(var(--record-paper)/.12); }
 .fergus-step-n { flex-shrink: 0; font-size: 13px; font-weight: 700; color: rgb(var(--record-signal)); }
-.fergus-steps strong { font-size: 13.5px; font-weight: 400; line-height: 1.5; color: rgb(var(--record-paper)/.85); }
+.fergus-steps strong { font-size: 16px; font-weight: 700; line-height: 1.5; color: rgb(var(--record-paper)); }
+.fergus-more summary { display: flex; align-items: center; min-height: 44px; cursor: pointer; font-size: 15px; font-weight: 700; list-style-position: inside; }
+.fergus-more summary::after { content: '+'; margin-left: auto; padding-left: 1rem; color: rgb(var(--record-signal)); }
+.fergus-more[open] > summary::after { content: '−'; }
+.fergus-more p { margin-top: .65rem; font-size: 16px; line-height: 1.65; color: rgb(var(--record-paper)/.85); overflow-wrap: anywhere; }
+.fergus-more > .fergus-sheet-body { white-space: pre-line; user-select: text; }
+.fergus-shot-picture { margin-top: .7rem; font-size: 16px; font-weight: 700; line-height: 1.4; color: rgb(var(--record-signal)); }
 
 .fergus-shots { display: grid; gap: .55rem; padding: 0; list-style: none; }
 .fergus-shots li { padding: .95rem 1.05rem; border-radius: 16px; border: 1px solid rgb(var(--record-paper)/.12); background: rgb(var(--record-paper)/.045); }

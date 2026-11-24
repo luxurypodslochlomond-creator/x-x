@@ -37,13 +37,13 @@ const PEOPLE = [
 
 export default function SignalsWhoAnswers() {
   return (
-    <section className="news-authorship" aria-label="Who signs what on the record">
-      <h2><PenLine size={17} aria-hidden="true" /> Whose words these are</h2>
+    <details className="news-authorship" aria-label="Who signs what on the record">
+      <summary><h2><PenLine size={17} aria-hidden="true" /> Whose words these are</h2><ChevronDown size={17} aria-hidden="true" /></summary>
       <div className="news-authorship-people">{PEOPLE.map(person => <details key={person.who}>
         <summary><span><strong>{person.who}</strong><small>{person.role}</small></span><ChevronDown size={17} aria-hidden="true" /></summary>
         <p>{person.line}</p>
         {person.to && <Link to={person.to}>Read more <ArrowUpRight size={15} aria-hidden="true" /></Link>}
       </details>)}</div>
-    </section>
+    </details>
   );
 }

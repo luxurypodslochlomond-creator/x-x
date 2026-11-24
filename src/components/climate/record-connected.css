@@ -9,7 +9,6 @@
 .climate-record .rec-mast-doors .rec-art-door-active { background: rgb(var(--record-mark)/.08); color: rgb(var(--record-mark)); }
 .climate-record .rec-mast-doors .rec-art-door-active .rec-art-caption { text-decoration: none; }
 .climate-record .rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-caption { font-size: 9px; letter-spacing: 0; }
-.climate-record .rec-mast-doors .rec-art-drawing svg { stroke-width: 1.8; }
 .climate-record .rec-mast-row-2 { border-color: rgb(var(--record-ink)/.09); }
 .climate-record .record-explore-panel { border-radius: 0 0 20px 20px; box-shadow: 0 16px 30px -22px rgb(var(--record-ink)/.3); }
 .climate-record .record-directory a { border: 1px solid rgb(var(--record-ink)/.1); border-radius: 12px; padding: .8rem; text-transform: none; letter-spacing: 0; font-weight: 700; background: rgb(var(--record-paper)); }

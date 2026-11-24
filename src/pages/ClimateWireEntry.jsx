@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import NewsEntryReferences from '@/components/climate/NewsEntryReferences';
 import '@/components/climate/news-index.css';
+import '@/components/climate/wire-mobile.css';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import NewsEntryBody from '@/components/climate/NewsEntryBody';
 import { recordAddress } from '@/components/climate/recordAddress';
@@ -32,16 +33,16 @@ export default function ClimateWireEntry() {
 
   return (
     <div className="news-detail text-record-ink" data-record-layout="compact">
-      <RecordBackBar eyebrow="Signals · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact previewFirst /></div> : null} />
+      <RecordBackBar eyebrow="The Wire · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact previewFirst /></div> : null} />
       <div className="news-detail-column">
         {loading && <p className="news-state" role="status">Loading the account…</p>}
-        {!loading && !entry && <div className="news-state"><p>This account is not available on the public record.</p><Link to="/ClimateWire" className="news-text-action">← Back to Signals</Link></div>}
+        {!loading && !entry && <div className="news-state"><p>This account is not available on the public record.</p><Link to="/ClimateWire" className="news-text-action">← Back to the Wire</Link></div>}
         {entry && <>
           <NewsEntryBody entry={entry} />
           <TapToPlayFilm url={entry.source_url} title={entry.headline} credit={entry.image_credit ? `Film · ${entry.image_credit}` : entry.source_name ? `Film · ${entry.source_name}` : null} />
           <NewsEntryReferences entry={entry} citation={citation} />
           <p className="news-detail-note">Something wrong? <Link to="/ClimateMethod#say">Report it</Link>. Corrections stay with the account, dated and visible.</p>
-          <Link to="/ClimateWire" className="news-text-action">← All Signals</Link>
+          <Link to="/ClimateWire" className="news-text-action">← The Wire</Link>
         </>}
       </div>
     </div>
