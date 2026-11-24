@@ -660,10 +660,10 @@ const LayoutInner = ({ children, currentPageName }) => {
     // room's own server checks it. A link is not a key.
     const familyNav = [
       { title: "Fergus's room", url: "/FergusRoom", icon: Lock, highlight: true, description: "The code he was given · private" },
-      { title: "His card", url: "/FergusCard", icon: User, description: "Screenshot it · send it with anything" },
-      { title: "The Higgsfield note", url: "/FergusHiggsfield", icon: FileText, description: "The letter, the steps, the tone check" },
-      { title: "The 60-second film", url: "/FergusHiggsfieldVideo", icon: Play, description: "Shot by shot · and what they actually want" },
-      { title: "The football page", url: "/FergusHughesProfile", icon: User, description: "Shotts Bon Accord · record signing" },
+      { title: "His card", url: "/FergusRoom?view=card", icon: User, description: "Screenshot it · send it with anything" },
+      { title: "The Higgsfield note", url: "/FergusRoom?view=note", icon: FileText, description: "The letter, the steps, the tone check" },
+      { title: "The 60-second film", url: "/FergusRoom?view=film", icon: Play, description: "Shot by shot · and what they actually want" },
+      { title: "The football page", url: "/FergusRoom?view=football", icon: User, description: "Shotts Bon Accord · record signing" },
     ];
 
     return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav, familyNav };

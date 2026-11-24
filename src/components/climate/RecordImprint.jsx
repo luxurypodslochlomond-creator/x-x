@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
 import LanguageStatus from '@/components/climate/LanguageStatus';
 import RecordNavDoor from '@/components/climate/RecordNavDoor';
-import { MarkExplore } from '@/components/climate/RecordFootMarks';
+import { LayoutGrid as MarkExplore } from 'lucide-react';
 import RecordDeskDoors from '@/components/climate/RecordDeskDoors';
 import '@/components/climate/record-navigator.css';
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FergusPageFrame from '@/components/fergus/FergusPageFrame';
 import { Link } from 'react-router-dom';
 import { Copy, Check, ExternalLink, ArrowLeft } from 'lucide-react';
 import { copyText } from '@/components/stoneymollan/barryReply/copyText';
@@ -8,7 +9,7 @@ import { SUBJECT, PITCH, HIRE_VERDICT, TONE_CHECK, WHAT_THEY_WANT, ROBIN_LINES, 
 const FULL = `Subject: ${SUBJECT}\n\n${PITCH}`;
 const WORDS = PITCH.trim().split(/\s+/).length;
 
-export default function FergusHiggsfield() {
+export default function FergusHiggsfield({ embedded = false }) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -20,10 +21,12 @@ export default function FergusHiggsfield() {
   };
 
   return (
+    <FergusPageFrame embedded={embedded} section="Application">
     <div className="min-h-screen bg-record-paper text-record-ink">
       <div className="mx-auto max-w-2xl px-4 py-6 pb-24">
         <Link
-          to="/FergusHughesProfile"
+          to="/FergusRoom"
+          data-fergus-back
           className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-record-muted underline decoration-dotted underline-offset-4"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> Fergus
@@ -60,7 +63,7 @@ export default function FergusHiggsfield() {
         </a>
 
         <Link
-          to="/FergusHiggsfieldVideo"
+          to={embedded ? '/FergusRoom?view=film' : '/FergusHiggsfieldVideo'}
           className="mt-3 flex min-h-[46px] items-center justify-center gap-2 border-2 border-record-red bg-record-red/5 px-3 py-2 font-mono text-[10.5px] font-black uppercase tracking-wide text-record-red"
         >
           The 60-second video they asked for →
@@ -183,5 +186,6 @@ export default function FergusHiggsfield() {
         </section>
       </div>
     </div>
+    </FergusPageFrame>
   );
 }

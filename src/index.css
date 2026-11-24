@@ -550,12 +550,12 @@ button:focus-visible {
      house style imposed on every tool in the building. One line to undo if it reads wrong. */
   --record-display: var(--font-record-ui);
   --font-display: var(--record-display);
-  --font-heading: 'Literata', var(--font-record-reading);
+  --font-heading: var(--font-record-ui);
   --font-body: var(--font-record-ui);
   /* Inside the record the reading voice is the same as everywhere else: Literata speaks,
      Helvetica structures. This block used to override it back to the grotesque, which
      silently undid the record's voice on the only pages that carry its prose. */
-  --font-reading: 'Literata', var(--font-record-reading);
+  --font-reading: var(--font-record-ui);
 }
 /* The shared voice reaches every product, including dialogs and SVG labels.
    Real code, hashes, and explicitly technical material retain fixed-width type. */

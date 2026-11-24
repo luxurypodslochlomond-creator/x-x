@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import FergusPageFrame from '@/components/fergus/FergusPageFrame';
 import { Copy, Check } from 'lucide-react';
 import { copyText } from '@/components/stoneymollan/barryReply/copyText';
 
@@ -10,7 +11,7 @@ const BIO =
 
 const FACTS = ['Barber', 'Artist', 'Footballer', 'Shotts Bon Accord · record signing'];
 
-export default function FergusCard() {
+export default function FergusCard({ embedded = false }) {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ export default function FergusCard() {
   };
 
   return (
+    <FergusPageFrame embedded={embedded} section="My card">
     <div className="flex min-h-screen items-center justify-center bg-record-paper px-4 py-8">
       <div className="w-full max-w-[420px]">
         {/* THE CARD — screenshot this */}
@@ -70,5 +72,6 @@ export default function FergusCard() {
         </p>
       </div>
     </div>
+    </FergusPageFrame>
   );
 }

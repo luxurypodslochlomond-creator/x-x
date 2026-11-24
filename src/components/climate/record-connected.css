@@ -1,0 +1,36 @@
+/* Shared interaction surfaces. Existing artwork, credits and factual content stay intact. */
+.climate-record { --font-heading: var(--font-record-ui); }
+.climate-record .record-pages { --font-reading: var(--font-record-ui); }
+.climate-record .record-book { background-color: rgb(var(--record-paper)); }
+.climate-record .rec-mast-doors { padding-block: .35rem; }
+.climate-record .rec-mast-doors .rec-art-door { border-radius: 10px; padding-block: .35rem; gap: .22rem; }
+.climate-record .rec-mast-doors .rec-art-caption { font-size: 10px; line-height: 1.2; font-weight: 700; letter-spacing: 0; text-transform: none; }
+.climate-record .rec-mast-row-2 .rec-art-caption { font-size: 10px; }
+.climate-record .rec-mast-doors .rec-art-door-active { background: rgb(var(--record-mark)/.08); color: rgb(var(--record-mark)); }
+.climate-record .rec-mast-doors .rec-art-door-active .rec-art-caption { text-decoration: none; }
+.climate-record .rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-caption { font-size: 9px; letter-spacing: 0; }
+.climate-record .rec-mast-doors .rec-art-drawing svg { stroke-width: 1.8; }
+.climate-record .rec-mast-row-2 { border-color: rgb(var(--record-ink)/.09); }
+.climate-record .record-explore-panel { border-radius: 0 0 20px 20px; box-shadow: 0 16px 30px -22px rgb(var(--record-ink)/.3); }
+.climate-record .record-directory a { border: 1px solid rgb(var(--record-ink)/.1); border-radius: 12px; padding: .8rem; text-transform: none; letter-spacing: 0; font-weight: 700; background: rgb(var(--record-paper)); }
+.climate-record .record-directory ul { gap: .55rem; padding-block: .55rem; }
+.climate-record .record-directory a[aria-current="page"] { border-color: rgb(var(--record-mark)); }
+.climate-record .record-directory .record-description { font-weight: 400; }
+.climate-record .record-directory .record-header-type { letter-spacing: .03em !important; text-transform: none; }
+.record-connected-shell .record-room-intro { max-width: 1100px; margin: auto; padding: 1.75rem 1.25rem 1.5rem; background: rgb(var(--record-paper)); }
+.record-room-intro > svg { box-sizing: content-box; padding: .8rem; border-radius: 16px; background: rgb(var(--record-mark)/.08); color: rgb(var(--record-mark)); margin-bottom: 1.25rem; }
+.climate-record .record-pages .record-room-intro h1 { max-width: 24ch; margin: 0; font-size: clamp(2rem,5vw,3.5rem); line-height: 1.07 !important; letter-spacing: -.04em !important; text-transform: none; font-weight: 700 !important; color: rgb(var(--record-ink)); text-wrap: balance; }
+.record-room-intro p { margin-top: 1rem; max-width: 55ch; color: rgb(var(--record-muted)); }.record-room-intro small { display: block; margin-bottom: .5rem; font-size: 12px; color: rgb(var(--record-muted)); }
+.record-room-intro > a { display: inline-flex; gap: .5rem; align-items: center; min-height: 44px; margin-top: 1rem; color: rgb(var(--record-red)); font-size: 13px; }
+.record-connected-shell .record-room-body { padding: 0 1rem 1.5rem; }.record-connected-shell .record-room-content { border: 1px solid rgb(var(--record-ink)/.1); border-radius: 20px; background: rgb(var(--record-bone)/.4); padding: 1.25rem; box-shadow: none; }
+.record-connected-shell .plain-compare-card { border: 1px solid rgb(var(--record-ink)/.15); border-radius: 15px; background: rgb(var(--record-paper)); }
+.record-connected-shell .plain-compare-room { border-color: rgb(var(--record-mark)/.35); background: rgb(var(--record-mark)/.035); }
+.record-connected-shell .record-room-return { max-width: 1000px; margin: auto; padding: .5rem 1.25rem 1.5rem; }.record-room-return a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; font-size: 14px; font-weight: 700; }
+.record-room-footnote { margin: 0 auto; padding: 0 1.25rem 1.75rem; max-width: 65ch; color: rgb(var(--record-muted)); font-size: 12px; text-align: center; }
+.record-link-cards { display: grid; gap: .65rem; }.record-link-cards > a { display: flex; align-items: center; gap: .8rem; padding: 1rem; border: 1px solid rgb(var(--record-ink)/.12); border-radius: 14px; background: rgb(var(--record-paper)); text-decoration: none; }.record-link-cards > a > svg:first-child { flex-shrink: 0; color: rgb(var(--record-red)); }.record-link-cards > a > svg:last-child { flex-shrink: 0; }.record-link-cards span { flex: 1; }.record-link-cards strong { display: block; font-size: 15px; }.record-link-cards small { display: block; margin-top: .3rem; font-size: 13px; line-height: 1.5; color: rgb(var(--record-muted)); }
+.record-share-compact,.record-share-button,.record-share-inline { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; padding: .6rem .85rem; border: 1px solid rgb(var(--record-ink)/.15); border-radius: 12px; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); font: 700 13px var(--font-record-ui); cursor: pointer; }
+.record-share-button { width: 100%; background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); }.record-share-inline { padding-inline: .25rem; border: 0; background: transparent; color: rgb(var(--record-red)); }.record-share-error { display: block; font-size: 12px; line-height: 1.5; color: rgb(var(--record-red)); }.record-share-compact:disabled,.record-share-button:disabled,.record-share-inline:disabled { opacity: .6; }
+.climate-record .record-back-bar button { border-radius: 50%; background: rgb(var(--record-bone)/.6); }.climate-record .record-back-bar span { letter-spacing: 0; text-transform: none; font-size: 12px; }
+@media (min-width: 1024px) { .climate-record .rec-mast-doors .rec-art-caption { font-size: 12px; }.climate-record .rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-caption { font-size: 11px; }.record-connected-shell .record-room-intro { padding: 2.5rem 2.5rem 1.8rem; }.record-connected-shell .record-room-body { padding: 0 2.5rem 2rem; }.record-connected-shell .record-room-content { padding: 2rem; }.record-connected-shell .record-room-return { padding-inline: 2.5rem; } }
+@media (max-width: 639px) { .rec-doors .rec-doors-plate { margin-top: auto; height: 92dvh; border-radius: 24px 24px 0 0; }.climate-record .rec-doors-body { scrollbar-gutter: auto; } }
+@media (hover: hover) { .record-link-cards > a:hover,.climate-record .record-directory a:hover { border-color: rgb(var(--record-mark)/.5); }.climate-record .rec-mast-doors .rec-art-door:hover { background: rgb(var(--record-mark)/.06); } }

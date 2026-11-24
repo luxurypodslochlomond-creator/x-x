@@ -43,7 +43,7 @@ export default function RecordPagesPanel({ open, onClose }) {
   // rather than torn out of the frame.
   const [mounted, setMounted] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const [showNames, setShowNames] = useState(false);
+  const [showNames, setShowNames] = useState(true);
 
   // ── A DESK IS NOT A PHONE, AND THE LOCK IS THE DIFFERENCE ─────────────────────
   // On a handset the sheet covers the glass, so the page behind is held still. On a desk it
@@ -64,7 +64,7 @@ export default function RecordPagesPanel({ open, onClose }) {
     if (open) {
       setMounted(true);
       setLeaving(false);
-      setShowNames(false);
+      setShowNames(true);
       return undefined;
     }
     if (!mounted) return undefined;

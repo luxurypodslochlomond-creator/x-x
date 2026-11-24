@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
+import RecordLinkCards from '@/components/climate/RecordLinkCards';
 import { TWO_THINGS, HERE, NOT_HERE, ANTHOLOGY, CORRECTION, DOORS } from '@/components/climate/cartoons/plain/caibLines';
 import '@/components/climate/cartoons/plain/plain-sheet.css';
 
@@ -12,7 +12,6 @@ import '@/components/climate/cartoons/plain/plain-sheet.css';
 //
 // It is one page on purpose. The worry was not that people would read a long document and
 // misunderstand it; it was that nobody had ever said the short thing out loud.
-const ink = { color: 'rgb(var(--record-red))', textDecoration: 'underline' };
 
 export default function ClimateCartoonsCAIB() {
   return (
@@ -75,13 +74,7 @@ export default function ClimateCartoonsCAIB() {
 
         <section className="plain-section">
           <h2 className="plain-head">The doors</h2>
-          <ul className="plain-list">
-            {DOORS.map((d) => (
-              <li key={d.to}>
-                <Link to={d.to} style={ink}>{d.label}</Link> — {d.note}
-              </li>
-            ))}
-          </ul>
+          <RecordLinkCards links={DOORS} label="The cartoon room’s connected pages" />
         </section>
       </div>
     </ClimateRecordShell>

@@ -134,11 +134,20 @@ export async function buildWireShareCard(entry, options = {}) {
   // The picture, when the entry has one.
   let y = 118;
   if (img) {
-    drawCover(ctx, img, 0, 74, W, 380);
+    const scale = Math.min(W / img.width, 380 / img.height);
+    ctx.fillStyle = BONE;
+    ctx.fillRect(0, 74, W, 380);
+    ctx.drawImage(img, (W - img.width * scale) / 2, 74 + (380 - img.height * scale) / 2, img.width * scale, img.height * scale);
     ctx.strokeStyle = INK;
     ctx.lineWidth = 4;
     ctx.beginPath(); ctx.moveTo(0, 454); ctx.lineTo(W, 454); ctx.stroke();
-    y = 74 + 380 + 56;
+    y = 510;
+    if (entry.image_credit) {
+      ctx.fillStyle = MUTED;
+      ctx.font = `400 18px ${MONO}`;
+      ctx.fillText(fitText(ctx, entry.image_credit, MAXW), PAD, 484);
+      y = 544;
+    }
   }
 
   // How well it is known, what kind of entry it is.

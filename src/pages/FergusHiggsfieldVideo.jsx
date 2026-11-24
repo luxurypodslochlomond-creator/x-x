@@ -1,4 +1,5 @@
 import React from 'react';
+import FergusPageFrame from '@/components/fergus/FergusPageFrame';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Film, ExternalLink } from 'lucide-react';
 import { WHY_THIS_SHAPE, THE_FACE_THING, SHOTS, COOL_NOT_DICK, FILMING, FREE_KIT, LINKING } from '@/components/fergus/videoScript';
@@ -7,12 +8,14 @@ const Label = ({ children }) => (
   <p className="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-record-muted">{children}</p>
 );
 
-export default function FergusHiggsfieldVideo() {
+export default function FergusHiggsfieldVideo({ embedded = false }) {
   return (
+    <FergusPageFrame embedded={embedded} section="The film">
     <div className="min-h-screen bg-record-paper text-record-ink">
       <div className="mx-auto max-w-2xl px-4 py-6 pb-24">
         <Link
-          to="/FergusHiggsfield"
+          to="/FergusRoom?view=note"
+          data-fergus-back
           className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-record-muted underline decoration-dotted underline-offset-4"
         >
           <ArrowLeft className="h-3.5 w-3.5" /> The note to Higgsfield
@@ -113,5 +116,6 @@ export default function FergusHiggsfieldVideo() {
         </a>
       </div>
     </div>
+    </FergusPageFrame>
   );
 }

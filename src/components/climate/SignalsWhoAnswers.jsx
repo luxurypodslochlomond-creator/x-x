@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronDown, ArrowUpRight, PenLine } from 'lucide-react';
 
 // ── WHOSE WORDS ARE THESE ──────────────────────────────────────────────────────
 // Brian, 24 November: "we need to make sure The Wire doesn't mess with Francis or Janine
@@ -36,28 +37,13 @@ const PEOPLE = [
 
 export default function SignalsWhoAnswers() {
   return (
-    <section className="mt-5 border-y-2 border-record-ink py-3" aria-label="Who signs what on the record">
-      <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
-        Whose words these are
-      </h2>
-      <dl className="mt-2 space-y-2">
-        {PEOPLE.map((p) => (
-          <div key={p.who} className="grid grid-cols-[6.5rem_minmax(0,1fr)] gap-2 border-l-2 border-record-ink/25 pl-2.5">
-            <div>
-              <dt className="text-[12.5px] font-bold leading-tight text-record-ink">{p.who}</dt>
-              <dd className="mt-0.5 font-mono text-[9.5px] uppercase tracking-[0.12em] text-record-muted">{p.role}</dd>
-            </div>
-            <dd className="text-[12.5px] leading-snug text-record-ink/75">
-              {p.line}
-              {p.to && (
-                <Link to={p.to} className="ml-1 whitespace-nowrap font-mono text-[10px] font-black uppercase tracking-wide text-record-red underline decoration-record-red/40 underline-offset-2">
-                  see →
-                </Link>
-              )}
-            </dd>
-          </div>
-        ))}
-      </dl>
+    <section className="news-authorship" aria-label="Who signs what on the record">
+      <h2><PenLine size={17} aria-hidden="true" /> Whose words these are</h2>
+      <div className="news-authorship-people">{PEOPLE.map(person => <details key={person.who}>
+        <summary><span><strong>{person.who}</strong><small>{person.role}</small></span><ChevronDown size={17} aria-hidden="true" /></summary>
+        <p>{person.line}</p>
+        {person.to && <Link to={person.to}>Read more <ArrowUpRight size={15} aria-hidden="true" /></Link>}
+      </details>)}</div>
     </section>
   );
 }

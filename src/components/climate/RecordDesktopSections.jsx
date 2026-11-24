@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { CONTENT_GROUPS, DESK_NAV, PHONE_NAV_ROWS } from '@/components/climate/recordFooterLinks';
-import { markFor } from '@/components/climate/pageMarks';
+import markFor from '@/components/climate/navigationIcons';
 import { MarkExplore } from '@/components/climate/RecordFootMarks';
 import { MARKS_IN_ORDER } from '@/components/climate/marks/marksOrder';
 import MarksPlate from '@/components/climate/marks/MarksPlate';
@@ -73,7 +73,7 @@ export default function RecordDesktopSections({ onNavigate, layout = 'desk' }) {
   if (showPlate) return <MarksPlate onClose={() => setShowPlate(false)} onNavigate={onNavigate} />;
 
   return (
-    <div className="flex flex-col font-body">
+    <div className="record-directory flex flex-col font-body">
       {/* ── THE SHEET OPENS BY SAYING WHAT IT IS, NOT BY LISTING DOORS ─────────────
           Brian, 19 November: "when going to explore the record why does it feel complex…
           this is our coolasfuck chance to tell people a story… get them trusting for the

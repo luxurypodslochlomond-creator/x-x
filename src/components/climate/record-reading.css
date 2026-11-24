@@ -12,7 +12,7 @@
      grotesque first, so every paragraph on every page of the record was set in the face
      that is meant for labels — which is precisely why a page of dated entries read as a
      web page. Literata speaks; Record UI structures; the monospace counts. */
-  --font-reading: 'Literata', var(--font-record-reading);
+  --font-reading: var(--font-record-ui);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
   /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
@@ -217,9 +217,9 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
    The long-form book rules must not enlarge and uppercase every summary. */
 .record-pages :is(h1, h2, h3, h4, h5, h6):not(.record-home-title):not([data-record-layout="compact"] *) {
   font-family: var(--font-record-ui) !important;
-  font-weight: 400 !important;
-  letter-spacing: .1em !important;
-  text-transform: uppercase;
+  font-weight: 700 !important;
+  letter-spacing: -.025em !important;
+  text-transform: none;
   overflow-wrap: break-word;
 }
 .record-pages :is(h1, h2):not(.record-home-title):not([data-record-layout="compact"] *) { line-height: 1.35 !important; }

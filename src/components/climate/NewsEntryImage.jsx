@@ -1,4 +1,6 @@
 import React from 'react';
+import ArtworkShareButton from '@/components/climate/ArtworkShareButton';
+import { recordAddress } from '@/components/climate/recordAddress';
 
 export default function NewsEntryImage({ entry, preview = false }) {
   if (!entry.image_url) return entry.image_credit ? <p className="news-picture-note">Picture credited, not held here · {entry.image_credit}</p> : null;
@@ -6,6 +8,7 @@ export default function NewsEntryImage({ entry, preview = false }) {
     <figure className={`news-entry-image${preview ? ' news-entry-image-preview' : ''}`}>
       <img src={entry.image_url} alt={entry.headline} loading="lazy" decoding="async" />
       {entry.image_credit && <figcaption>{entry.image_credit}</figcaption>}
+      <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} link={recordAddress(`/ClimateWireEntry/${entry.id}`)} />
     </figure>
   );
 }

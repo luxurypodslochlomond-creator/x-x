@@ -1,11 +1,12 @@
 import React from 'react';
+import FergusPageFrame from '@/components/fergus/FergusPageFrame';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 const SERIF = { fontFamily: 'Georgia, "Times New Roman", serif' };
 const SANS = { fontFamily: "'Segoe UI', Arial, sans-serif" };
 
-export default function FergusHughesProfile() {
+export default function FergusHughesProfile({ embedded = false }) {
   const downloadPDF = async () => {
     const element = document.getElementById('profile-content');
     const canvas = await html2canvas(element, {
@@ -55,6 +56,7 @@ export default function FergusHughesProfile() {
   );
 
   return (
+    <FergusPageFrame embedded={embedded} section="Player profile">
     <div className="min-h-screen bg-stone-200/40 flex items-start justify-center px-4 py-10 sm:py-14">
       <div className="w-full max-w-[620px]">
 
@@ -230,5 +232,6 @@ export default function FergusHughesProfile() {
 
       </div>
     </div>
+    </FergusPageFrame>
   );
 }

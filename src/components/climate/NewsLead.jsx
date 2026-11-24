@@ -1,40 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import ArtworkShareButton from '@/components/climate/ArtworkShareButton';
 import NewsKindStamp from '@/components/climate/NewsKindStamp';
+import NewsKindIcon from '@/components/climate/NewsKindIcon';
 import { verificationOf, verificationNoteOf } from '@/components/climate/verification';
-
+import { recordAddress } from '@/components/climate/recordAddress';
 export default function NewsLead({ entry }) {
   const to = `/ClimateWireEntry/${entry.id}`;
-  return (
-    <article className="news-lead" data-record-layout="compact">
-      <p className="news-lead-kicker">
-        <NewsKindStamp kind={entry.kind} />
-        <span className="news-lead-when">{entry.when_label || entry.when_date || 'Date not recorded'}</span>
-      </p>
-
-      {entry.image_url && (
-        <Link to={to} className="news-lead-plate" tabIndex={-1} aria-hidden="true">
-          <img src={entry.image_url} alt="" loading="eager" decoding="async" />
-        </Link>
-      )}
-
-      <h2 className="news-lead-heading"><Link to={to}>{entry.headline}</Link></h2>
-      <p className="news-lead-standfirst">{entry.what_changed}</p>
-
-      <p className="news-lead-meta">
-        {entry.where_label && <span>{entry.where_label}</span>}
-        <span>Source · {entry.source_name}</span>
-        <span title={verificationNoteOf(entry)}>{verificationOf(entry).label}</span>
-        {entry.correction_note && <span className="news-emergency">Corrected</span>}
-      </p>
-
-      {entry.image_credit && <p className="news-credit">{entry.image_credit}</p>}
-
-      <div className="news-lead-actions">
-        <Link to={to} className="news-read">Read the full account →</Link>
-        <div className="news-share"><ShareCardButton entry={entry} compact /></div>
-      </div>
-    </article>
-  );
+  return <article className="news-lead" data-kind={entry.kind} data-record-layout="compact">
+    <div className="news-lead-kicker"><span className="news-kind-emblem"><NewsKindIcon kind={entry.kind} size={28} /></span><NewsKindStamp kind={entry.kind} /><span className="news-lead-when">{entry.when_label || entry.when_date || 'Date not recorded'}</span></div>
+    {entry.image_url && <Link to={to} className="news-lead-plate" aria-label={`Read ${entry.headline}`}><img src={entry.image_url} alt={entry.headline} loading="eager" decoding="async" /></Link>}
+    <h2 className="news-lead-heading"><Link to={to}>{entry.headline}</Link></h2>
+    <p className="news-lead-standfirst">{entry.what_changed}</p>
+    <p className="news-lead-meta">{entry.where_label && <span>{entry.where_label}</span>}<span>Source · {entry.source_name}</span><span title={verificationNoteOf(entry)}>{verificationOf(entry).label}</span>{entry.correction_note && <span className="news-emergency">Corrected</span>}</p>
+    {entry.image_credit && <p className="news-credit">{entry.image_credit}</p>}
+    <div className="news-lead-actions"><Link to={to} className="news-read">Full account <ArrowUpRight size={17} /></Link><ShareCardButton entry={entry} compact previewFirst />{entry.image_url && <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} link={recordAddress(to)} />}</div>
+  </article>;
 }
