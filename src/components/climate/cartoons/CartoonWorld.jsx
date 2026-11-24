@@ -32,14 +32,9 @@ export default function CartoonWorld() {
             {group.id === 'cartoon-inheritance' && <CartoonOdoiNote />}
           </CartoonWorldGroup>
         ))}
-        {/* ── THE DEAD MAY BE PRINTED, THE LIVING MUST BE ASKED ────────────────
-            Brian, 24 November: "are we allowed visually to have something coolasfuck
-            beside each of them?" The answer splits cleanly, and the split is the
-            point rather than a legal technicality: five makers above are out of
-            copyright and are printed here with their credit and a link to the file
-            page; every living hand on the shelf is named and not reproduced. */}
+        {/* Reproductions keep their own rights statements, separate from the reading list. */}
         <CartoonFirstHands />
-        <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork by anyone on this reading list is reproduced here: the only pictures printed in this room are out of copyright, and each one says so. Sources checked 20 November 2026. Some external archives contain adult or distressing material.</p>
+        <p className="cartoon-lineage-note">A reading list, not a ranking, membership list or endorsement. No short list can stand for every tradition or every person. These are different political positions, not a claim that every artist is a climate campaigner. The historical and open-licensed works below the list carry their own credits and reproduction terms; the contributed drawings above keep their separate permissions. Some external archives contain adult or distressing material.</p>
         {/* ── ONE DOOR, AND IT IS INSIDE THE ROOM ─────────────────────────────
             This nav had three doors: the drawing desk, the map, and the method page. The two
             that left the room came off — Brian, 20 November: "can't have coolasfuck icons to

@@ -1,0 +1,66 @@
+/* One work per row: different proportions no longer imply a ranking. */
+#root .record-cartoon-field .cartoon-first-hands {
+  padding: 2.5rem 0 1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+  scroll-margin-top: 15rem;
+}
+.cartoon-first-hands .first-hands-kicker { margin: 0; color: rgb(var(--record-red)); font-size: .8rem; font-weight: 700; }
+.cartoon-first-hands .first-hands-title { margin: .6rem 0 1rem; font-size: clamp(2rem, 3.5vw, 3.25rem); line-height: 1.05 !important; letter-spacing: -.035em !important; }
+.cartoon-first-hands .first-hands-standfirst { max-width: 62ch; font-size: 1rem; line-height: 1.65; }
+.first-hands-start { display: flex; flex-wrap: wrap; gap: .5rem 1.7rem; margin-top: 1rem; }
+.first-hands-start a { display: inline-flex; align-items: center; min-height: 44px; font-size: .88rem; font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
+.historical-prints { margin-top: 1.5rem; }
+#root .record-cartoon-field .historical-print {
+  display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(15rem, 1fr); align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem); margin: 0; padding: 2.5rem 0;
+  border-top: 1px solid rgb(var(--record-ink) / .2); scroll-margin-top: 15rem;
+}
+.historical-print-art { display: flex; flex-direction: column; align-items: center; gap: .8rem; min-width: 0; padding: 0; border: 0; background: transparent; cursor: zoom-in; color: rgb(var(--record-muted)); }
+.historical-print-art img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(66vh, 42rem); object-fit: contain; }
+.historical-print-art > span { align-self: flex-start; font-family: var(--font-record-ui); font-size: .75rem; }
+.historical-print-caption { min-width: 0; font-family: var(--font-record-ui); color: rgb(var(--record-ink)); }
+.historical-print-caption .historical-print-move { margin: 0 0 .6rem; color: rgb(var(--record-red)); font-size: .78rem; font-weight: 700; }
+.historical-print-caption h3 { margin: 0 0 .8rem; font-size: clamp(1.4rem, 1.65vw, 1.85rem); line-height: 1.12 !important; letter-spacing: -.025em !important; text-transform: none; }
+.historical-print-caption .historical-print-maker { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.4; }
+.historical-print-caption .historical-print-date { margin: .4rem 0 0; font-size: .8rem; line-height: 1.6; color: rgb(var(--record-muted)); }
+.historical-print-caption .historical-print-context { margin: 1rem 0; font-size: .94rem; line-height: 1.7; max-width: 42ch; }
+.historical-print-caption .historical-print-credit { margin: 1.1rem 0 .25rem; font-size: .75rem; line-height: 1.65; color: rgb(var(--record-muted)); }
+.historical-print-links { display: flex; flex-wrap: wrap; gap: 0 1rem; }
+.historical-print-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: .78rem; text-decoration: underline; text-underline-offset: .25em; }
+.historical-print-credit a { text-decoration: underline; text-underline-offset: .2em; }
+.historical-print-caption .historical-print-note { margin-top: .5rem; font-size: .75rem; color: rgb(var(--record-muted)); line-height: 1.5; }
+.cartoon-first-hands .first-hands-note { max-width: 68ch; margin: 1.5rem 0 0; font-size: .85rem; line-height: 1.6; color: rgb(var(--record-muted)); }
+.historical-print-viewer {
+  position: fixed; inset: 0; margin: auto; display: none; flex-direction: column; gap: 0; width: min(94vw, 90rem); max-width: none;
+  height: 90dvh; max-height: 90dvh; padding: 0; overflow: hidden;
+  background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); border-color: rgb(var(--record-ink) / .2); border-radius: 0;
+}
+.historical-print-viewer[open] { display: flex; }
+.historical-print-viewer::backdrop { background: rgb(var(--record-ink) / .8); }
+.historical-print-viewer > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-shrink: 0; padding: 1rem 1.5rem; border-bottom: 1px solid rgb(var(--record-ink) / .18); }
+.historical-print-close { display: grid; place-items: center; min-width: 44px; min-height: 44px; flex-shrink: 0; }
+.historical-print-viewer h2 { margin: 0; font-size: 1.25rem; line-height: 1.25; letter-spacing: -.02em; }
+.historical-print-viewer-description { margin: .35rem 0 0; color: rgb(var(--record-muted)); font-family: var(--font-record-ui); font-size: .8rem; }
+.historical-print-viewer-body { display: grid; grid-template-columns: minmax(0, 2fr) minmax(16rem, .9fr); flex: 1; min-height: 0; overflow: auto; }
+.historical-print-viewer-art { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; padding: 1.5rem; }
+.historical-image-state { padding: 1rem; font-family: var(--font-record-ui); font-size: .85rem; line-height: 1.6; color: rgb(var(--record-muted)); }
+.historical-print-viewer-art[aria-busy="true"] img { position: absolute; visibility: hidden; }
+.historical-print-viewer-art img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(90dvh - 12rem); object-fit: contain; }
+.historical-print-viewer-body > aside { padding: 1.5rem; overflow-y: auto; border-inline-start: 1px solid rgb(var(--record-ink) / .14); }
+.historical-print-viewer-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .5rem 1rem; border-top: 1px solid rgb(var(--record-ink) / .18); flex-shrink: 0; }
+.historical-print-viewer-footer button { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; font-size: .82rem; }
+.historical-print-viewer-footer span { font-size: .8rem; color: rgb(var(--record-muted)); }
+.historical-print-viewer :is(a,button):focus-visible, .cartoon-first-hands :is(a,button):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 4px; }
+@media (max-width: 899px) {
+  #root .record-cartoon-field .historical-print { display: block; padding-block: 2rem; }
+  .historical-print-art { width: 100%; }
+  .historical-print-art img { max-height: 70vh; }
+  .historical-print-caption { margin-top: 1.25rem; }
+  .historical-print-caption .historical-print-context { max-width: 60ch; }
+  .historical-print-viewer { width: 96vw; height: 94dvh; max-height: 94dvh; }
+  .historical-print-viewer-body { display: block; }
+  .historical-print-viewer-art { padding: 1rem; }
+  .historical-print-viewer-art img { max-height: 62dvh; }
+  .historical-print-viewer-body > aside { border-inline-start: 0; border-top: 1px solid rgb(var(--record-ink) / .14); overflow: visible; }
+}
+@media print { .historical-print { break-inside: avoid; } .historical-print-art > span { display: none; } }

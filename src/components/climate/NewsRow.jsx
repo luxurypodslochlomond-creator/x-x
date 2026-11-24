@@ -6,7 +6,7 @@ import ShareCardButton from '@/components/climate/ShareCardButton';
 import { verificationOf } from '@/components/climate/verification';
 export default function NewsRow({ entry }) {
   const to = `/ClimateWireEntry/${entry.id}`;
-  return <article className="news-row" data-kind={entry.kind} data-record-layout="compact">
+  return <article className="news-row" data-kind={entry.kind} data-has-image={!!entry.image_url} data-record-layout="compact">
     {entry.image_url && <figure><Link to={to} className="news-row-thumb" aria-label={`Read ${entry.headline}`}><img src={entry.image_url} alt={entry.headline} loading="lazy" decoding="async" /></Link>{entry.image_credit && <figcaption className="news-credit">{entry.image_credit}</figcaption>}</figure>}
     <div className="news-row-copy">
       <div className="news-row-meta"><NewsKindStamp kind={entry.kind} /><span className="news-row-when">{entry.when_label || entry.when_date || 'Undated'}</span></div>

@@ -1,27 +1,5 @@
-/* ── THE SPREAD, BALANCED ───────────────────────────────────────────────────────
-   Brian, 19 November: "can make balance of page on desktop better please brother
-   collective change Francis artwork situated weirdly to my right on screen what is best
-   position for all right coolers fuck reasons bro and all other images same size is that
-   not weird bro why images are coolasfuck lets make them know what I mean bro".
-
-   Two faults, and both are the same fault: the drawings were serving the layout instead
-   of the layout serving the drawings.
-
-   1. The cover sat in the right-hand column of the opening, which on a wide desk put
-      Francis's artwork at the far edge of the screen, past the words, as though it were an
-      illustration to the introduction. It is not. It is the frontispiece: the first thing a
-      reader should meet, on the side the eye lands on. So the cover takes the left leaf and
-      runs down beside the room's own introduction, with the credit still under it.
-
-   2. Every drawing on the wall was set to the same width. Thirteen drawings of different
-      weight and different jokes, all the same size, is a spreadsheet — it tells a reader
-      nothing about which one to look at first, and it makes the pictures look like
-      thumbnails of a page rather than the page itself. So the wall is a twelve-column
-      sheet: after the lead drawing, the sheets alternate a wide and a narrower measure in
-      pairs, so each row is one drawing given the room and one answering it. Nothing is
-      cropped, nothing is stretched: only the width each drawing is given changes.
-
-   The lead drawing keeps the full measure, because the room opens on it. */
+/* Desktop presentation: the cover opens the room; each contributed drawing then
+   gets an uninterrupted row with its own caption. No positional size ranking. */
 
 @media screen and (min-width: 1024px) {
   /* ── the opening: the cover on the left leaf, the words on the right ── */
@@ -50,35 +28,23 @@
   #root .record-cartoon-field .press-room .press-opening-words > .press-scope { grid-column: 2; }
   #root .record-cartoon-field .press-room .press-contents { grid-column: 2; grid-row: 5; }
 
-  /* ── the wall: a twelve-column sheet, wide and narrow in pairs ──
-     Row by row: one drawing at seven columns, one at five, then the other way round, so
-     the wall never repeats the same rhythm twice down the page and the eye is always
-     being handed a big picture and a smaller one to compare it with. */
-  #root .record-cartoon-field .press-room .press-wall {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: clamp(1.5rem, 2.4vw, 2.8rem);
-    row-gap: clamp(1.6rem, 2.4vw, 2.6rem);
-    align-items: start;
-    columns: auto;
-  }
+  /* Each drawing has a full row. Its proportions, not its position in a pattern,
+     determine its size; the artist's words sit alongside, never below another work. */
+  #root .record-cartoon-field .press-room .press-wall { display: block; columns: auto; }
   #root .record-cartoon-field .press-room .press-wall .press-sheet {
-    grid-column: span 5;
-    margin: 0;
-    padding: 1rem;
-    break-inside: auto;
+    display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(15rem, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem); align-items: center; margin: 0; padding: 2.5rem 0;
+    border: 0; border-top: 1px solid rgb(var(--record-ink) / .2); background: transparent;
   }
-  #root .record-cartoon-field .press-room .press-wall .press-sheet:nth-child(4n + 2) { grid-column: span 5; }
-  #root .record-cartoon-field .press-room .press-wall .press-sheet:nth-child(4n + 3) { grid-column: span 7; }
-  #root .record-cartoon-field .press-room .press-wall .press-sheet:nth-child(4n + 4) { grid-column: span 7; }
-  #root .record-cartoon-field .press-room .press-wall .press-sheet:nth-child(4n + 1) { grid-column: span 5; }
-  #root .record-cartoon-field .press-room .press-wall .press-sheet.press-sheet--lead {
-    grid-column: 1 / -1;
-    column-span: none;
-    padding: 0 0 1rem;
+  #root .record-cartoon-field .press-room .press-wall .press-sheet.press-sheet--lead { padding-top: 0; border-top: 0; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet .press-sheet-art {
+    display: block; order: 0; width: 100%; min-width: 0; padding: 0; background: transparent; box-shadow: none;
   }
-  /* A drawing at five columns is looked at close; it should not be held back to the same
-     height as the wide one beside it. */
-  #root .record-cartoon-field .press-room .press-wall .press-sheet .comic-wall-artwork { max-height: none; }
-  #root .record-cartoon-field .press-room .press-wall .press-sheet--lead .comic-wall-artwork { max-height: min(84vh, 60rem); }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet .comic-wall-artwork {
+    display: block; width: auto; height: auto; max-width: 100%; max-height: min(70vh, 44rem); margin-inline: auto; object-fit: contain;
+  }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet .press-sheet-rail { display: block; order: 1; padding: 0; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet-title { margin-block: .6rem; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet-words { margin-top: 1rem; font-size: 1rem; line-height: 1.65; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet-provenance { margin-top: 1rem; font-size: .78rem; }
 }

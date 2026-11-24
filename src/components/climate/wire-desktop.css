@@ -1,0 +1,48 @@
+/* Desktop Wire: dated accounts, not a dashboard of rounded cards. Mobile keeps its own rules. */
+@media (min-width: 1024px) {
+  .climate-record .news-page .news-index { max-width: 1240px; padding: 2.5rem clamp(1.5rem, 3vw, 3rem) 3rem; }
+  .climate-record .news-index-heading { align-items: flex-end; padding-bottom: 1.25rem; border-bottom: 3px solid rgb(var(--record-mark)); }
+  .climate-record .news-index-heading h1 { font-size: clamp(4rem, 5.3vw, 6rem); line-height: .92; letter-spacing: -.065em; }
+  .climate-record .news-eyebrow { font-size: .75rem; color: rgb(var(--record-muted)); }
+  .climate-record .news-send { padding: .85rem 1rem; border-radius: 0; background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); font-size: .85rem; }
+  .climate-record .news-index-intro { margin: 1rem 0 1.75rem; font-size: 1.05rem; max-width: none; color: rgb(var(--record-ink)); }
+  .climate-record .news-tools { display: grid; grid-template-columns: minmax(16rem, 1fr) auto; align-items: start; gap: .75rem 2rem; margin-bottom: 2.25rem; }
+  .climate-record .news-search, .climate-record .news-source-menu summary { border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .3); border-radius: 0; background: transparent; }
+  .climate-record .news-search { padding-inline: 0; }
+  .climate-record .news-kinds { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; }
+  .climate-record .news-kinds button { min-height: 49px; padding: .65rem 0; border: 0; border-bottom: 3px solid transparent; border-radius: 0; background: transparent; font-size: .8rem; }
+  .climate-record .news-kinds button > svg { display: none; }
+  .climate-record .news-kinds button[aria-pressed="true"] { border-bottom-color: rgb(var(--record-mark)); color: rgb(var(--record-ink)); background: transparent; }
+  .climate-record .news-filter-current { grid-column: 1 / -1; margin: 0; }
+  .climate-record .news-lead { padding: 0 0 2.25rem; border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .3); border-radius: 0; background: transparent; }
+  .climate-record .news-lead[data-has-image="true"] { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 0 2.25rem; align-items: start; }
+  .climate-record .news-lead[data-has-image="true"] > .news-lead-kicker { grid-column: 1; grid-row: 1; }
+  .climate-record .news-lead[data-has-image="true"] > figure { grid-column: 2; grid-row: 1 / span 2; margin: 0; min-width: 0; }
+  .climate-record .news-lead[data-has-image="true"] > .news-lead-copy { display: block; grid-column: 1; grid-row: 2; }
+  .climate-record .news-lead-plate { margin: 0; border-radius: 0; background: transparent; }
+  .climate-record .news-lead-plate img { width: 100%; height: auto; max-height: 36rem; object-fit: contain; }
+  .climate-record .news-lead-heading { margin-top: 1rem; font-size: clamp(2rem, 2.6vw, 3.1rem); line-height: 1.08; letter-spacing: -.04em; max-width: 30ch; }
+  .climate-record .news-lead-standfirst { font-size: 1rem; line-height: 1.7; }
+  .climate-record .news-lead-meta { font-size: .78rem; }
+  .climate-record .news-stamp, .climate-record .news-read { border-radius: 0; }
+  .climate-record .news-stamp { font-size: .7rem; padding: .35rem .5rem; }
+  .climate-record .news-lead-when, .climate-record .news-row-when { font-size: .78rem; }
+  .climate-record .news-rows { display: block; }
+  .climate-record .news-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding: 1.75rem 0; border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .22); border-radius: 0; background: transparent; }
+  .climate-record .news-row[data-has-image="true"] { grid-template-columns: 13rem minmax(0, 1fr) auto; }
+  .climate-record .news-row > figure { min-width: 0; margin: 0; }
+  .climate-record .news-row-thumb { margin: 0; border-radius: 0; }
+  .climate-record .news-row-thumb img { display: block; width: 100%; height: auto; max-height: 14rem; object-fit: contain; }
+  .climate-record .news-row-heading { margin-top: .65rem; max-width: 40ch; font-size: 1.55rem; line-height: 1.18; }
+  .climate-record .news-row-excerpt { font-size: .92rem; -webkit-line-clamp: 3; }
+  .climate-record .news-row-source { font-size: .76rem; }
+  .climate-record .news-row-actions { align-self: end; align-items: flex-end; flex-direction: column; margin: 0; padding: 0; }
+  .climate-record .news-row-actions .news-read { margin: 0; }
+  .climate-record .news-context { margin: 2rem 0; padding-block: .5rem 1rem; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+  .climate-record .news-authorship-people details, .climate-record .news-load-more, .climate-record .news-room-door { border-radius: 0; }
+  .climate-record .news-index :is(a,button,input,summary):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 4px; }
+}
+.news-lead-copy { display: contents; }
+.news-lead-use { margin-top: 1.15rem; padding-inline-start: .85rem; border-inline-start: 2px solid rgb(var(--record-mark)); }
+.news-lead-use h3 { margin: 0 0 .3rem; font-size: .78rem; line-height: 1.4; }
+.news-lead-use p { margin: 0; font-size: .92rem; line-height: 1.65; }
