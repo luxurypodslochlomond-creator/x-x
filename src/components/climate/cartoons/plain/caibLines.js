@@ -56,7 +56,7 @@ export const ANTHOLOGY = {
   head: 'The book',
   body: [
     'The anthology — Climate Change and the Power of Collective Actions and Creative Interventions — is being prepared by African Press Cartoon Services. It is edited by Francis Umendu Odupute and Janine Selendy, and Francis drew the cover.',
-    'Its plan, in Francis’s own words to Janine on 18 November, is that it is published free: on CAIB’s own platforms and on this record, for anyone in the world to download. That is his plan for his book. This record is where it will sit if he puts it here — not where it is decided.',
+    'Its plan, in Francis’s own words to Janine on 18 November, is that it is published free: on CAIB’s own platforms, for anyone in the world to download. That is his plan for his book. This record is where it will sit if he puts it here — not where it is decided.',
     'If that changes, the record changes with it. A book belongs to the people making it.',
   ],
 };

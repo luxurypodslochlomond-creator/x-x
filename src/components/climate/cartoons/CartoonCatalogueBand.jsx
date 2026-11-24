@@ -71,9 +71,14 @@ export default function CartoonCatalogueBand() {
             than an undertaking this room has taken on. Francis, 24 November, was worried that
             the room had quietly become CAIB's outlet. So the sentence now says whose plan it
             is, and the next line says plainly that the room is not CAIB. */}
+        {/* ── JANINE'S CORRECTION, 24 NOVEMBER ────────────────────────────────────
+            She sent the sentence back with four words marked: "and on this record". The
+            book is CAIB's to publish, and where it is published is not this room's promise
+            to make — so the claim is now exactly the one that can be kept. Nothing else in
+            the sentence moved: still his plan, still free, still for anyone to download. */}
         <p className="comic-catalogue-line record-meta">
           Francis’s plan for it, in his own words, is that it is published free — on CAIB’s
-          own platforms and on this record — for anyone in the world to download.
+          own platforms — for anyone in the world to download.
         </p>
         <p className="comic-catalogue-line record-meta">
           This room is not CAIB and does not speak for it.{' '}

@@ -63,8 +63,8 @@ export default function CartoonAnthology() {
 
       <p className="comic-anthology-note">
         Every African cartoonist who takes part in the 29 November discussion has their work
-        gathered into this book. It is published on CartoonAFRICA’s own platforms and on this
-        record, for free download, anywhere in the world.
+        gathered into this book. It is published on CartoonAFRICA’s own platforms, for free
+        download, anywhere in the world.
       </p>
 
       {/* The cover sits at the top of the room, so this says "at the top", not "above".
@@ -74,7 +74,7 @@ export default function CartoonAnthology() {
           business, so it is not on this book's plate. */}
       <p className="comic-anthology-status">
         The cover at the top of this room is a sample: the book is still being made, so it may
-        change before it is printed. The day it is finished it appears here — free, with no
+        change before it is printed. The day it is finished CAIB publishes it — free, with no
         sign-in, for anyone anywhere.
       </p>
 
