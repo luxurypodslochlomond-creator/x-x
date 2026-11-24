@@ -71,10 +71,26 @@
   #root .record-cartoon-field .press-room .press-wall-head { width: 100%; padding: 0 0 1.5rem; background: none; border: 0; }
   #root .record-cartoon-field .press-room .press-wall-title { font-size: 3rem; font-weight: 700 !important; letter-spacing: -.04em !important; text-transform: none; }
   #root .record-cartoon-field .press-room .press-wall { display: block; columns: 2; column-gap: 2rem; }
+  /* ── THE DRAWING SITS ON THE PAGE, NOT IN A TILE ON TOP OF IT ───────────────
+     Brian, 24 November, third look at this wall: "you sure sorted the wall page bro,
+     it's weird to me still, why bro?"
+
+     Because it was boxed, and the sheet above this rule says in its own words that
+     nothing is boxed. Every drawing was given a paper card — its own background, its
+     own inner padding, a hairline across the top and a shadow under the bottom — and
+     then those cards were dropped two-up into columns on top of the room's painting.
+     Twenty opaque rectangles standing on a picture is a feed of tiles, whatever the
+     typography inside them is doing. That is the "weird": the drawings looked like
+     things pasted onto the room rather than plates printed in it.
+
+     So the card goes. The drawing sits directly on the room's own paper, and one
+     hairline above each sheet separates it from the last, the way a plate section of
+     a printed book separates its plates. The picture is the thing; the margin is the
+     citation; the page is the record's. Nothing is left to box. */
   #root .record-cartoon-field .press-room .press-sheet {
-    display: block; break-inside: avoid; margin: 0 0 2rem; padding: 1rem;
-    background: rgb(var(--record-paper)); border: 0; border-top: 1px solid rgb(var(--record-ink));
-    box-shadow: 0 1px 0 rgb(var(--record-ink) / .18);
+    display: block; break-inside: avoid; margin: 0 0 2.4rem; padding: 1.5rem 0 0;
+    background: none; border: 0; border-top: 1px solid rgb(var(--record-ink) / .22);
+    box-shadow: none;
   }
   #root .record-cartoon-field .press-room .press-sheet-art { background: transparent; }
   #root .record-cartoon-field .press-room .press-sheet-art .comic-wall-artwork { width: 100%; max-height: none; object-fit: contain; }
