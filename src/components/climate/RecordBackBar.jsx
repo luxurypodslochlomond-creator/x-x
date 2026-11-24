@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import useRecordBack from './useRecordBack';
 import { ArrowLeft } from 'lucide-react';
 
@@ -15,6 +16,8 @@ import { ArrowLeft } from 'lucide-react';
    own ink: the same hand as the doors, so the way out belongs to the same book. */
 export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClimate', right, onBack, label }) {
   const back = useRecordBack(fallback);
+  const { state } = useLocation();
+  const backLabel = label || (state?.recordReturn === 'map' ? 'Back to the map' : null);
 
   return (
     <div className="record-back-bar border-b border-record-ink/15">
@@ -22,11 +25,11 @@ export default function RecordBackBar({ eyebrow, fallback = '/TogetherChangeClim
         <button
           type="button"
           onClick={onBack || back}
-          aria-label={label || 'Back'}
+          aria-label={backLabel || 'Back'}
           className="flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center gap-2 text-record-ink transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
         >
           <ArrowLeft className="h-5 w-5" strokeWidth={1.6} />
-          {label && <span className="font-body text-sm">{label}</span>}
+          {backLabel && <span className="font-body text-sm">{backLabel}</span>}
         </button>
         <span className="min-w-0 truncate font-mono text-[11px] uppercase tracking-[0.16em] text-record-muted">
           {eyebrow}

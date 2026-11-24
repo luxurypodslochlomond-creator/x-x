@@ -1,13 +1,16 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { base44 } from '@/api/base44Client';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { resolveCoords } from './countryCentroids';
-import { nudge } from './worldPlate';
+import useRecordViewState from '@/components/climate/useRecordViewState';
+import useMapEntries from '@/components/climate/map/useMapEntries';
+import MapEntryDetail from '@/components/climate/map/MapEntryDetail';
+import MapReadingDetail from '@/components/climate/map/MapReadingDetail';
 import WorldPlate from './WorldPlate';
 import MapSignalMark from '@/components/climate/MapSignalMark';
 import PlatePlaceIndex from './PlatePlaceIndex';
-import VerificationBadge from './VerificationBadge';
+
 import { useClimateCategories } from '@/hooks/useClimateCategories';
+
+const EMPTY_ENTRIES = [];
 
 // How long ago the newest thing on the plate arrived, in words rather than a timestamp.
 // The plate has no clock on it; this is the one place it admits that time passes.
@@ -33,96 +36,17 @@ function whenItArrived(iso) {
 // lights are the places the record is being read from — the reach, on the same plate as
 // the entries. One world, two facts about it: where the record stands, and where it is read.
 export default function RecordWorldMap({ lights = [], alive = false, tone = 'paper' }) {
-  const [entries, setEntries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [publishedTotal, setPublishedTotal] = useState(0);
-  const [picked, setPicked] = useState(null);
-  const [only, setOnly] = useState(null);
+  const { data, isPending: loading, isError, refetch } = useMapEntries();
+  const entries = data?.entries || EMPTY_ENTRIES;
+  const publishedTotal = data?.publishedTotal || 0;
+  const [picked, setPicked] = useRecordViewState('map-picked', null);
+  const [only, setOnly] = useRecordViewState('map-kind', null);
+  const [readingMode, setReadingMode] = useRecordViewState('map-readership', false);
+  const [readingPlace, setReadingPlace] = useRecordViewState('map-reading-place', null);
   const { categories } = useClimateCategories();
   const catLabel = (id) => categories.find((c) => c.id === id)?.label || (id || '').replaceAll('_', ' ');
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        // The wire is on the plate too. Its own country field was put there "for the wire's
-        // place line and for mapping" — a report about Benin is about Benin, wherever it was
-        // written — so the map would have been telling half the record and calling it all of it.
-        const [solutions, actions, news, cartoons, solutionTotal, actionTotal, newsTotal, cartoonTotal] = await Promise.all([
-          base44.entities.ClimateSolution.filter(
-            { status: 'published' },
-            {
-              limit: 200,
-              fields: ['title', 'summary', 'category', 'entry_type', 'country', 'region_rough',
-                'verification', 'corroborating_source', 'source_name', 'source_url', 'created_date'],
-            }
-          ),
-          base44.entities.ClimateAction.filter(
-            { status: 'published' },
-            {
-              limit: 200,
-              fields: ['title', 'description', 'category', 'action_type', 'country', 'region_rough',
-                'verification', 'corroborating_source', 'source_url', 'created_date'],
-            }
-          ),
-          base44.entities.ClimateNews.filter(
-            { status: 'published' },
-            {
-              limit: 200,
-              fields: ['headline', 'what_changed', 'category', 'country', 'where_label',
-                'verification', 'corroborating_source', 'source_name', 'source_url', 'created_date'],
-            }
-          ).catch(() => ({ items: [] })),
-          // The room of cartoons, on the same plate. A drawing is where it was drawn, not
-          // where it was sent from — and a drawing whose maker gave no country is left off
-          // rather than dropped onto a guess.
-          base44.entities.ClimateCartoon.filter(
-            { status: 'published' },
-            { limit: 200 }
-          ).catch(() => ({ items: [] })),
-          // The totals are counted separately so the plate can never claim to hold
-          // everything: an entry with no place it can honestly be put is not dropped
-          // from the count, it is admitted.
-          base44.entities.ClimateSolution.count({ status: 'published' }),
-          base44.entities.ClimateAction.count({ status: 'published' }),
-          base44.entities.ClimateNews.count({ status: 'published' }).catch(() => 0),
-          base44.entities.ClimateCartoon.count({ status: 'published' }).catch(() => 0),
-        ]);
-        setPublishedTotal((solutionTotal || 0) + (actionTotal || 0) + (newsTotal || 0) + (cartoonTotal || 0));
-        setEntries([
-          ...(solutions.items || []).map((s) => ({
-            id: `solution-${s.id}`, entryId: s.id, type: s.entry_type === 'climate_crisis' ? 'crisis' : 'solution',
-            title: s.title, summary: s.summary || '', category: s.category, country: s.country, region: s.region_rough,
-            verification: s.verification, corroborating_source: s.corroborating_source,
-            source_name: s.source_name, source_url: s.source_url, arrived: s.created_date,
-          })),
-          ...(actions.items || []).map((a) => ({
-            id: `action-${a.id}`, entryId: a.id, type: 'action',
-            title: a.title, summary: a.description || '', category: a.category, country: a.country, region: a.region_rough,
-            verification: a.verification, corroborating_source: a.corroborating_source,
-            source_name: a.source_name, source_url: a.source_url, arrived: a.created_date,
-          })),
-          ...((news.items || [])).map((n) => ({
-            id: `wire-${n.id}`, entryId: n.id, type: 'wire',
-            title: n.headline, summary: n.what_changed || '', category: n.category, country: n.country, region: n.where_label,
-            verification: n.verification, corroborating_source: n.corroborating_source,
-            source_name: n.source_name, source_url: n.source_url, arrived: n.created_date,
-          })),
-          ...((cartoons.items || [])).map((c) => ({
-            id: `cartoon-${c.id}`, entryId: c.id, type: 'cartoon',
-            title: c.title || c.artist_name, summary: c.for_line || '',
-            country: c.country, region: c.origin,
-            source_name: c.artist_name ? `Drawn by ${c.artist_name}` : '', source_url: c.source_url,
-            credit: c.credit, arrived: c.created_date,
-          })),
-        ]);
-      } catch {
-        // The plate still renders — the world does not depend on the record loading.
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, []);
+
 
   const marks = useMemo(() => {
     const placed = entries
@@ -133,22 +57,25 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
       })
       .filter(Boolean);
 
-    // Two entries in one country would sit exactly on top of each other, so each takes a
-    // small fixed step around its own place. A nudge, never a scatter.
-    const seen = {};
-    return placed.map((e) => {
-      const key = `${e.lat},${e.lng}`;
-      const i = seen[key] = (seen[key] ?? -1) + 1;
-      const [dx, dy] = nudge(i);
-      return {
-        ...e,
-        dx,
-        dy,
-        tone: e.type,
-        aria: `${e.type === 'crisis' ? 'Crisis' : e.type === 'action' ? 'Action' : e.type === 'cartoon' ? 'Drawing' : e.type === 'wire' ? 'Wire' : 'Solution'}: ${e.title}${e.country ? `, ${e.country}` : ''}`,
-      };
-    });
+    return placed.map((entry) => ({
+      ...entry, tone: entry.type,
+      aria: `${entry.country || entry.region}: ${entry.title}`,
+    }));
   }, [entries, only]);
+
+  // One target per approximate coordinate; every entry is named in its place's list.
+  const clusters = useMemo(() => {
+    const groups = new Map();
+    marks.forEach((mark) => {
+      const key = `${mark.lat},${mark.lng}`;
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(mark);
+    });
+    return [...groups.values()].map((group) => {
+      const mark = group.find((entry) => entry.id === picked?.id) || group[0];
+      return { ...mark, count: group.length, aria: `${mark.country || mark.region}: ${group.length} ${group.length === 1 ? 'entry' : 'entries'}`, title: group.length > 1 ? `${mark.country || mark.region} · ${group.length} entries` : mark.title };
+    });
+  }, [marks, picked?.id]);
 
   const counts = useMemo(() => {
     const c = { crisis: 0, solution: 0, action: 0, wire: 0, cartoon: 0 };
@@ -181,21 +108,27 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
 
   // One press opens, a second press on the same thing puts it down — the same act whether
   // it came from a mark on the plate or a name in the index under it.
-  const pick = (m) => setPicked((prev) => (prev?.id === m.id ? null : m));
+  const pick = (mark) => { setPicked(marks.find((entry) => entry.id === mark.id) || mark); setReadingPlace(null); };
+  const closeDetail = () => { setPicked(null); setReadingPlace(null); };
 
   // Pressing a mark opens its line under the planet — but on a wide screen the planet is
   // taller than the window, so the line could open entirely out of sight and the press
   // would look like nothing happened. If it is out of view, it is brought into view; if
   // it is already there, nothing moves.
   const detailRef = useRef(null);
+  const selectionReady = useRef(false);
   useEffect(() => {
+    if (!selectionReady.current) { selectionReady.current = true; return; }
     const el = detailRef.current;
-    if (!picked || !el) return;
+    if ((!picked && !readingPlace) || !el) return;
+    el.scrollTop = 0;
+    if (window.matchMedia('(min-width: 1024px)').matches) return;
     const box = el.getBoundingClientRect();
-    if (box.top > window.innerHeight - 48 || box.bottom < 0) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const headerBottom = el.closest('.climate-record')?.querySelector('.record-book > header')?.getBoundingClientRect().bottom || 0;
+    if (box.top > window.innerHeight - 100 || box.top < headerBottom) {
+      window.scrollBy({ top: box.top - headerBottom - 8, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
     }
-  }, [picked]);
+  }, [picked, readingPlace]);
 
   // Everything standing in the same place as what was pressed. A place with three entries
   // would otherwise show only the first and hide the other two behind a dot nobody
@@ -209,7 +142,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
           above its engraving, not over it. */}
       <div className="record-map-key flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[#f7f1e5] px-3 py-2.5 border-b border-[#141210]/20">
         <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">
-          {loading
+          {readingMode ? `${lights.length} readership places` : isError ? 'Entries could not be loaded' : loading
             ? 'Setting the entries…'
             : only
               ? `Showing ${marks.length} of ${counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon} placed`
@@ -223,6 +156,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
           )}
         </p>
         <div className="flex flex-wrap items-center gap-x-1 text-[10px] font-mono font-bold text-[#141210]" role="group" aria-label="Show only one kind of entry">
+          <button type="button" aria-pressed={!only && !readingMode} onClick={() => { setOnly(null); setReadingMode(false); closeDetail(); }} className="min-h-11 px-2">All entries</button>
           {[
             ['crisis', 'Crises'],
             ['solution', 'Solutions'],
@@ -233,27 +167,40 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
             <button
               key={key}
               type="button"
-              aria-pressed={only === key}
+              aria-pressed={!readingMode && only === key}
               data-kind={key}
-              onClick={() => { setOnly(only === key ? null : key); setPicked(null); }}
+              onClick={() => { setOnly(only === key ? null : key); setReadingMode(false); closeDetail(); }}
               className={`flex min-h-11 items-center gap-1.5 px-1.5 uppercase tracking-[0.06em] ${only && only !== key ? 'opacity-40' : ''} ${only === key ? 'underline underline-offset-4' : ''}`}
             >
               <MapSignalMark kind={key} className="record-map-key-symbol" />
-              {label} {counts[key]}
+              {label} {loading || isError ? '—' : counts[key]}
             </button>
           ))}
+          <button type="button" aria-pressed={readingMode} onClick={() => { setReadingMode(!readingMode); setOnly(null); closeDetail(); }} className="min-h-11 px-2">Readership</button>
         </div>
       </div>
 
+      <div className="record-map-stage">
       <WorldPlate
-        marks={marks}
-        lights={lights}
+        marks={readingMode ? [] : clusters}
+        lights={readingMode ? lights : []}
         alive={alive}
         selectedId={picked?.id}
         onSelect={pick}
-        label={`The world, with ${marks.length} entries of the record set where they happened and ${lights.length} places reading it`}
+        onLight={(place) => { setReadingPlace(place); setPicked(null); }}
+        selectedLightId={readingPlace?.id}
+        label={readingMode ? `Readership in ${lights.length} approximate places` : `${marks.length} entries, grouped by approximate place`}
         tone={tone}
       />
+      <aside ref={detailRef} className="record-map-reading" aria-label="Selected place" data-record-layout="compact">
+        <div className="record-map-detail" aria-live="polite">
+          {isError && !readingMode ? <div className="record-map-picked" role="alert"><p>The entries could not be loaded. The map is not empty.</p><button type="button" onClick={() => refetch()} className="record-map-open">Try again</button></div>
+            : readingPlace ? <MapReadingDetail place={readingPlace} onClose={closeDetail} />
+              : picked ? <MapEntryDetail entry={picked} here={here} onPick={pick} onClose={closeDetail} category={catLabel} />
+                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{loading ? 'Setting the entries in their places…' : readingMode ? 'Select an amber light to read that place’s readership count. These are entry openings, not people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. Numbers on marks mean several entries share an approximate place.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
+        </div>
+      </aside>
+      </div>
 
       {/* What the plate is holding, counted from the plate itself. Not a flattering figure
           about being looked at — what the record actually has, and how much of it somebody
@@ -266,117 +213,17 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
           ['Known twice over', figures.second, 'a second origin named'],
         ].map(([label, value, note]) => (
           <div key={label} className="min-w-0 border-b border-[#141210]/15 px-3 py-2.5 sm:border-b-0 sm:border-r sm:last:border-r-0">
-            <dd className="text-[22px] font-black leading-none tabular-nums text-[#141210]">{loading ? '—' : value}</dd>
+            <dd className="text-[22px] font-black leading-none tabular-nums text-[#141210]">{loading || isError ? '—' : value}</dd>
             <dt className="mt-1 text-[9px] font-black font-mono uppercase tracking-[0.1em] text-[#141210]">{label}</dt>
             <p className="text-[9px] leading-snug text-[#5a5246]">{note}</p>
           </div>
         ))}
       </dl>
 
-      {/* What you pressed, said underneath the planet in the record's own words — and it
-          stands directly under the plate, before the index of places. It used to sit below
-          that index, which on a phone is a list of every place the record holds: a reader
-          pressed a mark and the answer opened a screen and a half further down, so the press
-          looked like it had done nothing at all. */}
-      <div ref={detailRef} className="record-map-detail border-t border-[#141210]/20 bg-[#f7f1e5] px-3 py-3 min-h-[86px]">
-        {picked ? (
-          <div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span
-                className="text-[8px] font-black font-mono uppercase tracking-[0.14em] px-1.5 py-0.5"
-                style={{
-                  background:
-                    picked.type === 'crisis' ? '#b3261e'
-                    : '#141210',
-                  color: '#efe7d6',
-                }}
-              >
-                {picked.type === 'crisis' ? 'Crisis' : picked.type === 'action' ? 'Action' : picked.type === 'wire' ? 'Wire' : picked.type === 'cartoon' ? 'Drawing' : 'Solution'}
-              </span>
-              {picked.country && (
-                <span className="text-[8px] font-black font-mono uppercase tracking-[0.12em] text-[#5a5246]">{picked.country}</span>
-              )}
-              {here.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => pick(here[(placeAt + 1) % here.length])}
-                  className="ml-auto text-[9px] font-black font-mono uppercase tracking-[0.1em] text-[#5a5246] underline decoration-dotted underline-offset-2"
-                >
-                  {placeAt + 1}/{here.length} here · next →
-                </button>
-              )}
-            </div>
-            <p className="text-[14px] font-black leading-snug text-[#141210]">{picked.title}</p>
-            {picked.summary && (
-              <p
-                className="text-[12px] leading-relaxed text-[#3a342c] mt-1"
-                style={{
-                  fontFamily: 'var(--font-reading)',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}
-              >
-                {picked.summary}
-              </p>
-            )}
-            {/* A dot that cannot say who says so is a rumour with a coordinate. How well
-                the entry is known, and the origin behind it, are read here before the
-                entry is opened — the same words the entry's own page uses. */}
-            <div className="flex flex-wrap items-center gap-2 mt-2">
-              <VerificationBadge entry={picked} />
-              {picked.source_name && (
-                picked.source_url ? (
-                  <a
-                    href={picked.source_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[9px] font-mono uppercase tracking-[0.08em] text-[#3a342c] underline decoration-dotted underline-offset-2"
-                  >
-                    {picked.source_name} ↗
-                  </a>
-                ) : (
-                  <span className="text-[9px] font-mono uppercase tracking-[0.08em] text-[#5a5246]">{picked.source_name}</span>
-                )
-              )}
-            </div>
-            {picked.credit && (
-              <p className="text-[9px] font-mono uppercase tracking-[0.08em] text-[#5a5246] mt-2">{picked.credit}</p>
-            )}
-            <div className="flex items-center gap-3 mt-2">
-              <Link
-                to={
-                  picked.type === 'wire'
-                    ? `/ClimateWireEntry/${picked.entryId}`
-                    : picked.type === 'cartoon'
-                      ? '/ClimateCartoons#press-wall'
-                      : `/ClimateDetail/${picked.type === 'action' ? 'action' : 'solution'}/${picked.entryId}`
-                }
-                className="inline-flex items-center gap-1.5 text-[10px] font-black font-mono uppercase text-[#efe7d6] bg-[#141210] px-2.5 py-1.5"
-              >
-                {picked.type === 'cartoon' ? 'The room of cartoons →' : 'Open the entry →'}
-              </Link>
-              {picked.category && (
-                <span className="text-[9px] font-mono uppercase tracking-[0.1em] text-[#5a5246]">{catLabel(picked.category)}</span>
-              )}
-            </div>
-          </div>
-        ) : (
-          <p className="record-map-help text-[11px] font-mono leading-relaxed text-[#5a5246]">
-            {loading
-              ? 'Setting every entry where it says it is.'
-              : marks.length === 0
-              ? 'No entry has a place it can honestly be put yet. Nothing is guessed at to fill the map.'
-              : `Press a mark, or a place named above it, to read what stands there. Red is a crisis, paper with a tick is a solution, a diamond is an action, a dash is a line on the wire, a page is a drawing. Entry places come from the entries; amber lights show readership places stated by devices or readers, not precise reader locations. These are separate observations.`}
-          </p>
-        )}
-      </div>
-
       {/* The plate read out: the places it actually holds, so a reader never has to hunt
           for a mark to find out where the record is standing. It comes after the line a
           press opens, never before it. */}
-      <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />
+      {!readingMode && <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />}
 
       {tone === 'ink' && alive && (
         <p className="record-map-geography-credit bg-record-bone px-3 py-2 font-mono text-xs text-record-muted">

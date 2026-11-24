@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import useRecordBack from '@/components/climate/useRecordBack';
 import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
@@ -71,6 +71,8 @@ function fmtDate(d) {
 export default function ClimateDetail() {
   const { type, id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const backLabel = location.state?.recordReturn === 'map' ? 'Back to the map' : 'Back';
   const back = useRecordBack();
   const [record, setRecord] = useState(null);
   const [allItems, setAllItems] = useState([]);
@@ -172,8 +174,8 @@ export default function ClimateDetail() {
       <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
         {/* Sticky header — native back, action-type colour band */}
         <div className="flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
-          <button onClick={back} aria-label="Back" className="w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
-            <ArrowLeft className="w-5 h-5" />
+          <button onClick={back} aria-label={backLabel} title={backLabel} className="min-w-11 h-11 px-3 gap-2 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
+            <ArrowLeft className="w-5 h-5" /><span className="text-sm">{backLabel}</span>
           </button>
           <div className="flex items-center gap-2 min-w-0">
             <Icon className="w-5 h-5 text-[#efe7d6] flex-shrink-0" />
@@ -299,8 +301,8 @@ export default function ClimateDetail() {
         <div className="record-detail-image record-media-mount relative h-64 bg-record-ink lg:h-[420px]">
           <img src={heroImage} alt={image.illustrative ? image.label : record.title} fetchpriority="high" decoding="async" onError={image.onError} className="w-full h-full object-cover" style={{ filter: 'saturate(1.06) contrast(1.04)' }} />
           <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(20,18,16,0.3), rgba(20,18,16,0.5) 50%, #efe7d6 100%)' }} />
-          <button onClick={back} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
-            <ArrowLeft className="w-5 h-5" />
+          <button onClick={back} aria-label={backLabel} title={backLabel} className="absolute top-4 left-4 min-w-11 h-11 px-3 gap-2 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+            <ArrowLeft className="w-5 h-5" /><span className="text-sm">{backLabel}</span>
           </button>
           <div className="absolute bottom-4 lg:bottom-6 left-5 lg:left-10 right-5 lg:right-10">
             <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#b3261e] text-[#efe7d6]'}`}>
@@ -310,8 +312,8 @@ export default function ClimateDetail() {
         </div>
       ) : (
         <div className="relative min-h-[180px] lg:min-h-[300px] bg-[#f7f1e5] border-b-2 border-[#141210] flex flex-col items-center justify-center gap-3 px-5 lg:px-10 py-8">
-          <button onClick={back} aria-label="Back" className="absolute top-4 left-4 w-11 h-11 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
-            <ArrowLeft className="w-5 h-5" />
+          <button onClick={back} aria-label={backLabel} title={backLabel} className="absolute top-4 left-4 min-w-11 h-11 px-3 gap-2 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
+            <ArrowLeft className="w-5 h-5" /><span className="text-sm">{backLabel}</span>
           </button>
           <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#b3261e'} />
           <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#b3261e] text-[#efe7d6]'}`}>

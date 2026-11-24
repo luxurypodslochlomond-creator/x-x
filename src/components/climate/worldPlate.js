@@ -57,8 +57,8 @@ export function projectPct(lat, lng) {
 // not hidden under the first. Small, fixed, in pixels — a nudge, not a scatter.
 export function nudge(index) {
   if (!index) return [0, 0];
-  const i = index > 11 ? 11 : index;
+  const i = index;
   const angle = (i * 137.5 * Math.PI) / 180;
-  const radius = 9 + i * 4;
+  const radius = 9 + Math.sqrt(i) * 12;
   return [Math.cos(angle) * radius, Math.sin(angle) * radius];
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { SHOW_DRAWING } from '@/components/climate/cartoons/goToDrawing';
@@ -40,13 +40,18 @@ export default function PressWall() {
   // A link from a cartoonist's own page — or one they sent to a gallery — carries the drawing's
   // id in the address, so the wall opens at that drawing rather than at the top of the room.
   const wanted = new URLSearchParams(window.location.search).get('drawing');
+  const located = useRef(null);
   useEffect(() => {
-    if (!wanted || !wall.cartoons.length) return;
+    if (!wanted || located.current === wanted || wall.isPending) return;
     const node = document.getElementById(`drawing-${wanted}`);
-    if (!node) return;
-    node.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!node) {
+      if (wall.hasNextPage && !wall.isFetchingNextPage && !wall.isFetchNextPageError) wall.fetchNextPage();
+      return;
+    }
+    located.current = wanted;
+    node.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
     setMarked(wanted);
-  }, [wanted, wall.cartoons.length]);
+  }, [wanted, wall.cartoons.length, wall.isPending, wall.hasNextPage, wall.isFetchingNextPage, wall.isFetchNextPageError, wall.fetchNextPage]);
 
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">

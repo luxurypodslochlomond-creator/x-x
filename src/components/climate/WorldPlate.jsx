@@ -40,11 +40,11 @@ const MARKS = {
    Each is given a bone hairline instead of a dark halo, so an ink mark still reads when
    it stands out on the dark water and stays quiet when it stands on the land. */
 const MARKS_ON_PAINT = {
-  crisis: '#b3261e',
-  solution: '#141210',
-  action: '#efe7d6',
-  wire: '#141210',
-  cartoon: '#efe7d6',
+  crisis: 'rgb(var(--record-map-crisis))',
+  solution: 'rgb(var(--record-map-solution))',
+  action: 'rgb(var(--record-map-action))',
+  wire: 'rgb(var(--record-map-wire))',
+  cartoon: 'rgb(var(--record-paper))',
 };
 
 const GROUND = {
@@ -81,7 +81,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
   // On the painted planet the coast is engraved in ink; on the paper plate it is the
   // ground's own land line.
   const coast = atlas
-    ? { color: '#141210', width: 1.5, opacity: 0.5 }
+    ? { color: 'rgb(var(--record-paper))', width: 1.5, opacity: 0.65 }
     : { color: g.land, width: g.landWidth, opacity: g.landOpacity };
 
   // Readership totals do not link an individual reading place to an entry.
@@ -254,6 +254,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
             onClick={() => onSelect && onSelect(m)}
             aria-label={m.aria || m.label}
             aria-current={on ? 'true' : undefined}
+            aria-pressed={on}
             data-kind={m.tone}
             title={m.label || m.title}
             className="record-entry-marker group absolute grid place-items-center p-0 bg-transparent border-0 cursor-pointer"
@@ -284,6 +285,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               }}
             />
             {atlas && <MapSignalMark kind={m.tone} />}
+            {m.count > 1 && <span aria-hidden="true" className="record-map-cluster-count">{m.count}</span>}
             {/* Every mark names itself before it is pressed. It used to name itself only
                 once it was already open, which left a reader poking at shapes to find out
                 what they were — the one thing a map should never make you do. */}

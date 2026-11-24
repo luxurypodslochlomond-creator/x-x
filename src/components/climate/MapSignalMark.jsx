@@ -17,13 +17,13 @@ import React from 'react';
 const GLYPH = {
   crisis: (
     <>
-      <circle cx="10" cy="10" r="4.9" fill="#b3261e" />
+      <circle cx="10" cy="10" r="4.9" fill="var(--map-signal, rgb(var(--record-map-crisis)))" />
       <circle cx="10" cy="10" r="1.7" fill="#f4efe4" />
     </>
   ),
   solution: (
     <>
-      <circle cx="10" cy="10" r="5" fill="#f4efe4" />
+      <circle cx="10" cy="10" r="5" fill="var(--map-signal, rgb(var(--record-map-solution)))" />
       <path
         d="M7.2 10.3l2 2 3.6-4.1"
         fill="none"
@@ -36,13 +36,13 @@ const GLYPH = {
   ),
   action: (
     <>
-      <rect x="6.3" y="6.3" width="7.4" height="7.4" transform="rotate(45 10 10)" fill="#f4efe4" stroke="#141210" strokeWidth="1.2" />
+      <rect x="6.3" y="6.3" width="7.4" height="7.4" transform="rotate(45 10 10)" fill="var(--map-signal, rgb(var(--record-map-action)))" stroke="#141210" strokeWidth="1.2" />
       <rect x="8.5" y="8.5" width="3" height="3" transform="rotate(45 10 10)" fill="#141210" />
     </>
   ),
   wire: (
     <>
-      <rect x="4.2" y="8.2" width="11.6" height="3.6" fill="#141210" />
+      <rect x="4.2" y="8.2" width="11.6" height="3.6" fill="var(--map-signal, rgb(var(--record-map-wire)))" />
       <rect x="4.2" y="8.2" width="11.6" height="3.6" fill="none" stroke="#f4efe4" strokeWidth="0.9" />
     </>
   ),

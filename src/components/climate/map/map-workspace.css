@@ -1,0 +1,55 @@
+/* The painting is artwork, not a geographic projection. Keep the atlas distinct. */
+.record-unified-map .record-world-atlas { background: rgb(var(--record-ink) / .96); }
+.record-unified-map .record-map-reading { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+.record-unified-map .record-map-picked { padding: 1rem; }
+.record-unified-map .record-map-picked h2 { font-size: 1.3rem; }
+.record-unified-map .record-map-picked p { max-inline-size: none; }
+.record-unified-map .record-map-open {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 44px; gap: .75rem; margin-top: 1rem; padding: .7rem .85rem;
+  background: rgb(var(--record-signal)); color: rgb(var(--record-ink));
+  font-size: .875rem; font-weight: 700; text-decoration: none;
+}
+.record-unified-map .record-map-place-entries { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgb(var(--record-ink) / .2); }
+.record-unified-map .record-map-place-entries button[aria-pressed="true"] { border-color: rgb(var(--record-red)); background: rgb(var(--record-red) / .06); }
+.record-unified-map .record-map-cluster-count {
+  position: absolute; top: 0; right: 0; min-width: 18px; height: 18px;
+  display: grid; place-items: center; padding-inline: 3px; border-radius: 50%;
+  background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); font-size: 11px; font-weight: 700;
+}
+.record-unified-map .record-map-symbol { width: 23px; height: 23px; }
+.record-unified-map .record-map-key .record-map-symbol { width: 18px; height: 18px; }
+.record-unified-map .record-map-key button { min-height: 44px; opacity: 1; }
+.record-unified-map .record-map-key button[aria-pressed="true"] { box-shadow: inset 0 -2px var(--map-signal, currentColor); }
+.record-unified-map .record-map-spot-label { pointer-events: none; }
+.record-map-artwork-door { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .8rem; }
+.record-map-artwork {
+  position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none;
+  padding: 0; margin: 0; border: 0; background: rgb(var(--record-ink)); color: rgb(var(--record-paper));
+}
+.record-map-artwork[open] { display: flex; flex-direction: column; }
+.record-map-artwork::backdrop { background: rgb(var(--record-ink)); }
+.record-map-artwork button:focus-visible { outline: 2px solid rgb(var(--record-signal)); outline-offset: 3px; }
+@media screen and (min-width: 1024px) {
+  /* Expose a real area of the one painting, rather than bleaching it under another slab. */
+  .record-unified-map .record-map-opening { background: transparent; border: 0; margin-top: 0; }
+  .record-unified-map .record-map-opening > div { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 0 1.25rem; padding: 1.25rem 0; }
+  .record-unified-map .record-map-opening > div > :is(p, h1) { grid-column: 1; width: fit-content; max-width: 100%; margin: 0; padding: .6rem 1rem; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+  .record-unified-map .record-map-opening > div > p:first-child { color: rgb(var(--record-red)); padding-bottom: 0; }
+  .record-unified-map .record-map-opening h1 { font-size: clamp(1.8rem, 2.3vw, 2.7rem) !important; }
+  .record-unified-map .record-map-opening p:not(.uppercase) { margin-top: 0; font-size: .95rem !important; line-height: 1.5 !important; }
+  .record-unified-map .record-map-opening > div > div { grid-column: 2; grid-row: 1 / span 3; align-self: end; justify-content: flex-end; gap: 0 .9rem; margin: 0; }
+  .record-unified-map .record-map-opening :is(a, .record-map-artwork-door) { padding-inline: .65rem; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); border: 0; font-size: .75rem; }
+  .record-unified-map .record-map-stage { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; align-items: stretch; }
+  .record-unified-map .record-map-stage > .record-world-plate { align-self: start; }
+  .record-unified-map .record-map-reading { min-height: 0; max-height: 33rem; contain: size; overflow-y: auto; border-inline-start: 1px solid rgb(var(--record-ink) / .2); scrollbar-width: thin; }
+  .record-unified-map .record-map-detail { min-height: 100%; border-top: 0; background: transparent; }
+  .record-unified-map .record-map-help { padding: 1rem; }
+  .record-unified-map .record-entry-marker[aria-current="true"] .record-map-spot-label { display: none; }
+  .record-unified-map .record-map-places button { min-height: 44px; padding-inline: .65rem; }
+}
+@media screen and (max-width: 1023px) {
+  .record-unified-map .record-map-reading { border-top: 2px solid rgb(var(--record-signal)); }
+  .record-unified-map .record-map-help { padding: 1rem; }
+}
+@media print { .record-map-artwork-door, .record-map-artwork { display: none !important; } }

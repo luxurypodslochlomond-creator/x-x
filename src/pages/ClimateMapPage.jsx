@@ -5,10 +5,12 @@ import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
 import ImpactSignal from '@/components/climate/ImpactSignal';
 import WhyThisPlate from '@/components/climate/map/WhyThisPlate';
+import MapArtworkView from '@/components/climate/map/MapArtworkView';
 import ClimateImpact from '@/pages/ClimateImpact';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
 import { reachPlaces } from '@/components/climate/reachPlaces';
 import '@/components/climate/unified-map.css';
+import '@/components/climate/map/map-workspace.css';
 
 // Entry locations and readership places are independent observations.
 // No connecting line is drawn without evidence that those two observations are linked.
@@ -46,6 +48,7 @@ export default function ClimateMapPage() {
             <a href="#reach-details" className="inline-flex min-h-11 items-center border-b border-[#141210]/25 text-[#3a342c] transition-colors hover:text-[#141210]">
               Who is reading ↓
             </a>
+            <MapArtworkView />
           </div>
         </div>
       </section>
