@@ -172,7 +172,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
           {isError && !readingMode ? <div className="record-map-picked" role="alert"><p>The entries could not be loaded. The map is not empty.</p><button type="button" onClick={() => refetch()} className="record-map-open">Try again</button></div>
             : readingPlace ? <MapReadingDetail place={readingPlace} onClose={closeDetail} />
               : picked ? <MapEntryDetail entry={picked} here={here} onPick={pick} onClose={closeDetail} category={catLabel} />
-                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{loading ? 'Setting the entries in their places…' : readingMode ? 'Select a lit place to read its count. A light is entry openings, never people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. Numbers on marks mean several entries share an approximate place. A cartoon is a page hung on the plate. A lamp with an amber halo is a place reading the record.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
+                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{loading ? 'Setting the entries in their places…' : readingMode ? 'Select a lit place to read its count. A light is entry openings, never people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. A ring around a mark means several entries share an approximate place. A cartoon is a page hung on the plate. A lamp with an amber halo is a place reading the record.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
         </div>
       </aside>
       </div>

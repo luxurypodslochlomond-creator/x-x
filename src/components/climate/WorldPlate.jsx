@@ -289,7 +289,19 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
               }}
             />
             {atlas && <MapSignalMark kind={m.tone} />}
-            {m.count > 1 && <span aria-hidden="true" className="record-map-cluster-count">{m.count}</span>}
+            {/* ── SEVERAL HERE IS A RING, NOT A NUMBER ────────────────────────────────
+                This used to print the count on the mark in a little paper bubble, which
+                put a digit in the middle of a world and made the plate read as a chart.
+                A place holding more than one entry now wears one extra ring — a stack,
+                the way a plate says there is more than one thing under a point — and the
+                number itself is said in words underneath when the mark is pressed. */}
+            {m.count > 1 && (
+              <span
+                aria-hidden="true"
+                className="record-map-stack"
+                style={{ width: size + 16, height: size + 16, borderColor: fill }}
+              />
+            )}
             {/* Every mark names itself before it is pressed. It used to name itself only
                 once it was already open, which left a reader poking at shapes to find out
                 what they were — the one thing a map should never make you do. */}

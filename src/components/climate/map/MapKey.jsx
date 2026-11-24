@@ -22,6 +22,12 @@ function LampMark() {
   );
 }
 
+/* ── THE KEY IS A LEGEND, NOT A TOOLBAR ─────────────────────────────────────────
+   Each mark used to carry a tally beside its name — Crises 3, Solutions 4 — which turned
+   one line of legend into a row of counters, and made the plate underneath look like a
+   dashboard with a map in it. The counts are still here: the sentence says how much of
+   the record has a place, and pressing a mark opens that place's own line. A legend only
+   has to say what the marks mean. */
 export default function MapKey({ mode, onMode, only, onOnly, counts, placed, total, lights, loading, isError, newestArrival }) {
   const showing = counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon;
   const sentence = isError
@@ -64,7 +70,7 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
             className="record-map-key-kind"
           >
             <MapSignalMark kind={key} className="record-map-key-symbol" />
-            {label} <span className="record-map-key-tally">{loading || isError ? '—' : counts[key]}</span>
+            {label}
           </button>
         ))}
         <button
@@ -75,7 +81,7 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
           className="record-map-key-kind record-map-key-reader"
         >
           <LampMark />
-          Readership <span className="record-map-key-tally">{loading || isError ? '—' : lights.length}</span>
+          Readership
         </button>
       </div>
     </div>

@@ -49,6 +49,15 @@
   display: block; width: 14px; height: 14px; padding: 0;
   background: transparent; border: 0; box-shadow: none;
 }
+/* ── LIGHT BEHIND THE INK ────────────────────────────────────────────────────────
+   A pin on a chart is a fact. A lit point on a night plate is a place. Each mark now
+   carries its own pigment as a soft glow — red behind a crisis, green behind an answer,
+   amber behind a deed — so the plate reads as a world with things burning on it rather
+   than a diagram with dots on it. One static filter per mark, drawn once by the
+   compositor: nothing here animates and nothing here repaints. */
+.record-unified-map .record-world-atlas .record-map-symbol {
+  filter: drop-shadow(0 0 5px var(--map-signal));
+}
 /* The dot is the signal's shadow, not the signal. Once the drawing is there, the dot
    underneath it is only a smudge behind a mark. */
 .record-unified-map .record-world-atlas .record-map-dot { display: none; }
