@@ -138,6 +138,8 @@ const FergusHughesProfilePage = React.lazy(() => import('./pages/FergusHughesPro
 // Fergus's note to the Higgsfield creator programme. Its own address, no layout, so on a
 // phone it is the note and the copy button — the same shape as the reply to Barry.
 const FergusHiggsfieldPage = React.lazy(() => import('./pages/FergusHiggsfield'));
+// The 60-second film Higgsfield asked for: shot by shot, and how to send the link.
+const FergusHiggsfieldVideoPage = React.lazy(() => import('./pages/FergusHiggsfieldVideo'));
 const RealityCheckPage = React.lazy(() => import('./pages/RealityCheck'));
 const GraemeOnePagerPage = React.lazy(() => import('./pages/GraemeOnePager'));
 const PartnerEvidencePage = React.lazy(() => import('./pages/PartnerEvidence'));
@@ -373,6 +375,7 @@ const AuthenticatedApp = () => {
       <Route path="/ZappPrivacy" element={<ZappPrivacyPage />} />
       <Route path="/FergusHughesProfile" element={<FergusHughesProfilePage />} />
       <Route path="/FergusHiggsfield" element={<FergusHiggsfieldPage />} />
+      <Route path="/FergusHiggsfieldVideo" element={<FergusHiggsfieldVideoPage />} />
       <Route path="/RealityCheck" element={<RealityCheckPage />} />
       <Route path="/GraemeOnePager" element={<GraemeOnePagerPage />} />
       <Route path="/PartnerEvidence" element={<PartnerEvidencePage />} />

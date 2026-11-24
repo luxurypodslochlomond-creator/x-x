@@ -53,7 +53,7 @@ export const ROBIN_LINES = [
 
 export const BEFORE_SENDING = [
   'Replace the two bracketed lines at the foot with his real Instagram or TikTok handle and his number. Nothing else in the letter needs editing.',
-  'Attach three clips, not thirty: one full cut from first clip to finish, one match-day edit, one he is proud of. A link beats an attachment if they are on his phone.',
+  'The video is the one thing they actually asked for: film the 60 seconds on the next page, upload it to YouTube as Unlisted, and put that link in the form and in the note.',
   'Apply through the Creator Partnership Program form on higgsfield.ai — that is the door. Their affiliate@ address is for established creators, so do not rely on an email getting read. If they reply from an address, answer it that day.',
   'Do not send the football profile page instead of this. That one is for a coach; this one is for a video company.',
   'If they ask for numbers and he does not have them yet, say so plainly and give the date he will. Never invent a figure.',

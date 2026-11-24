@@ -59,6 +59,13 @@ export default function FergusHiggsfield() {
           Open the application form <ExternalLink className="h-3.5 w-3.5" />
         </a>
 
+        <Link
+          to="/FergusHiggsfieldVideo"
+          className="mt-3 flex min-h-[46px] items-center justify-center gap-2 border-2 border-record-red bg-record-red/5 px-3 py-2 font-mono text-[10.5px] font-black uppercase tracking-wide text-record-red"
+        >
+          The 60-second video they asked for →
+        </Link>
+
         <article className="mt-6 border-t-2 border-record-ink pt-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">
             Subject: {SUBJECT}
