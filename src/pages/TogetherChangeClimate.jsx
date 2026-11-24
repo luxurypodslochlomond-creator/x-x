@@ -729,7 +729,7 @@ export default function TogetherChangeClimate() {
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {selectedCategory === 'all' && (selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" mark={RoomMarkGroups} />
+            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="text-record-ocean" mark={RoomMarkGroups} />
             <RecordStandfirst>{t.groups_sub}</RecordStandfirst>
             {/* Said out loud, on the section itself, so nobody has to guess how far the record
                 has gone for them. A group is an introduction the organiser wrote; it carries no

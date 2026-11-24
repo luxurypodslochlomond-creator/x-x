@@ -5,7 +5,7 @@ import MapSignalMark from '@/components/climate/MapSignalMark';
 import MapEntrySources from '@/components/climate/map/MapEntrySources';
 import MapPlaceEntries from '@/components/climate/map/MapPlaceEntries';
 
-const labels = { crisis: 'Climate crisis', solution: 'Solution', action: 'Action', wire: 'The Wire', cartoon: 'Drawing' };
+const labels = { crisis: 'Climate crisis', solution: 'Solution', action: 'Action', wire: 'The Wire', cartoon: 'Cartoon' };
 export default function MapEntryDetail({ entry, here, onPick, onClose, category }) {
   const href = entry.type === 'wire' ? `/ClimateWireEntry/${entry.entryId}`
     : entry.type === 'cartoon' ? `/ClimateCartoons?drawing=${encodeURIComponent(entry.entryId)}`
@@ -21,7 +21,7 @@ export default function MapEntryDetail({ entry, here, onPick, onClose, category 
       <h2 className="mt-2 text-xl leading-snug text-record-ink">{entry.title}</h2>
       {entry.summary && <p className="mt-3 text-sm leading-relaxed text-record-ink">{entry.summary}</p>}
       <div className="mt-4"><MapEntrySources entry={entry} /></div>
-      <Link to={href} state={{ recordReturn: 'map' }} className="record-map-open">{entry.type === 'cartoon' ? 'See this drawing on the Wall →' : 'Open the full entry →'}</Link>
+      <Link to={href} state={{ recordReturn: 'map' }} className="record-map-open">{entry.type === 'cartoon' ? 'See this cartoon on the Wall →' : 'Open the full entry →'}</Link>
       {entry.category && <p className="record-meta mt-3 text-record-muted">{category(entry.category)}</p>}
       <MapPlaceEntries entries={here} picked={entry} onPick={onPick} />
     </div>

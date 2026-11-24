@@ -6,7 +6,7 @@ export default function MapFigures({ figures, loading, isError }) {
   const cells = [
     ['Entries standing', figures.placed, 'set where they happened'],
     ['Countries', figures.countries, 'region only, never a person'],
-    ['Drawings', figures.drawings, 'hung on the same plate'],
+    ['Cartoons', figures.drawings, 'hung on the same plate'],
     ['Known twice over', figures.second, 'a second origin named'],
   ];
   return (

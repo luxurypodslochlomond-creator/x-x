@@ -76,8 +76,20 @@
   color: rgb(var(--record-ink));
   transition: background-color .3s ease, color .3s ease;
 }
-/* No per-room pigment any more: the four rooms are ink, and the only colour is the
-   record's red, which is inside the drawings where it belongs. */
+/* ── ONE PIGMENT A ROOM, ON EVERY GROUND ─────────────────────────────────────────
+   All four doors used to wear the same red in the same place, so the four rooms looked
+   like one room with four names. Each now carries the pigment its own marks wear on the
+   map and on its cards: red for a crisis, green for a solution, ochre for an action,
+   ocean for a group. The mass of each drawing stays ink, so the band still reads as one
+   set drawn by one hand; only the part that is the point is coloured.
+   The accent is the pigment at full strength; the tint is the same pigment at a few per
+   cent, used for the pressed ground. Both come from the room, so no state can fall back
+   to a colour that belongs to another room. */
+.record-home-page .record-room-link { --room-accent: rgb(var(--record-ink)); --room-tint: var(--record-ink); }
+.record-home-page .record-room-link[data-room="climate_crisis"] { --room-accent: rgb(var(--record-red)); --room-tint: var(--record-red); }
+.record-home-page .record-room-link[data-room="solution"] { --room-accent: rgb(var(--record-botanical)); --room-tint: var(--record-botanical); }
+.record-home-page .record-room-link[data-room="actions"] { --room-accent: rgb(var(--record-ochre)); --room-tint: var(--record-ochre); }
+.record-home-page .record-room-link[data-room="groups"] { --room-accent: rgb(var(--record-ocean)); --room-tint: var(--record-ocean); }
 .record-home-page .record-room-drawing {
   display: flex;
   align-items: center;
@@ -161,13 +173,15 @@
   .record-home-page .record-room-link { width: 100%; height: 100%; }
 }
 @media (hover: hover) {
-  .record-home-page .record-room-link:hover { background-color: rgb(var(--record-red) / .06); }
-  .record-home-page .record-room-link:hover .record-room-label { color: rgb(var(--record-red)); }
+  .record-home-page .record-room-link:hover { background-color: rgb(var(--room-tint) / .08); }
+  .record-home-page .record-room-link:hover .record-room-count { color: rgb(var(--room-tint)); }
 }
-.record-home-page .record-room-link[aria-pressed="true"] { background-color: rgb(var(--record-red) / .09); }
-.record-home-page .record-room-link[aria-pressed="true"] .record-room-label { color: rgb(var(--record-red)); }
+/* The label stays ink on purpose: ochre type on the yellow band is a contrast gamble,
+   and the colour is already saying which room this is inside the drawing and the tint. */
+.record-home-page .record-room-link[aria-pressed="true"] { background-color: rgb(var(--room-tint) / .12); box-shadow: inset 0 -3px 0 rgb(var(--room-tint)); }
+.record-home-page .record-room-link[aria-pressed="true"] .record-room-count { color: rgb(var(--room-tint)); }
 .record-home-page .record-room-link:focus-visible {
-  outline: 2px solid rgb(var(--record-red));
+  outline: 2px solid rgb(var(--room-accent));
   outline-offset: -3px;
 }
 /* ── AND THE PICTURES RUN THE FULL WIDTH OF THE SHEET ──────────────────────────

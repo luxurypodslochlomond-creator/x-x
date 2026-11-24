@@ -6,7 +6,7 @@ const KINDS = [
   ['solution', 'Solutions'],
   ['action', 'Actions'],
   ['wire', 'Wire'],
-  ['cartoon', 'Drawings'],
+  ['cartoon', 'Cartoons'],
 ];
 
 /* A lit place is not a sixth kind of entry, so it does not take a sixth categorical

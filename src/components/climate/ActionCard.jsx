@@ -29,7 +29,7 @@ export default function ActionCard({ action }) {
   return (
     <Link
       to={`/ClimateDetail/action/${action.id}`}
-      className="relative flex min-h-[110px] w-full flex-col border border-record-ink/30 border-t-4 border-t-[#e2602a] bg-record-paper text-left transition-transform duration-100 active:scale-95"
+      className="relative flex min-h-[110px] w-full flex-col border border-record-ink/30 border-t-4 border-t-record-ochre bg-record-paper text-left transition-transform duration-100 active:scale-95"
     >
       <div className="p-3 flex-1">
         <div className="flex items-center gap-1.5 mb-1.5">

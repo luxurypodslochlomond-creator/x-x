@@ -28,7 +28,13 @@ import React from 'react';
 // that you can pick up and join.
 const FRAME = { viewBox: '0 0 40 40', fill: 'none', 'aria-hidden': 'true' };
 const MASS = { fill: 'currentColor', stroke: 'none' };
-const RED = { className: 'text-record-mark', fill: 'currentColor', stroke: 'none' };
+// ── THE ONE PART THAT IS THE POINT WEARS THE ROOM'S OWN PIGMENT ────────────────
+// These four were drawn with the record's red in that part and nothing else, so all
+// four rooms read as one colour. Each room now hands its mark the pigment its map
+// signal, its cards and its entry pages already wear — red for what is at risk, green
+// for what answers, ochre for what was done, ocean for who is doing it together — and
+// falls back to ink wherever no pigment is handed down (a section heading, say).
+const ACCENT = { fill: 'var(--room-accent, currentColor)', stroke: 'none' };
 
 // Crises — the ground, broken, the record's red standing in the gap. What is at risk.
 export function RoomMarkCrisis({ size = 40, className = '' }) {
@@ -36,7 +42,7 @@ export function RoomMarkCrisis({ size = 40, className = '' }) {
     <svg {...FRAME} width={size} height={size} className={className}>
       <rect x="3" y="17" width="13" height="19" {...MASS} />
       <rect x="24" y="19" width="13" height="17" {...MASS} />
-      <path d="M16 17 H24 L26 36 H14 Z" {...RED} />
+      <path d="M16 17 H24 L26 36 H14 Z" {...ACCENT} />
     </svg>
   );
 }
@@ -51,9 +57,9 @@ export function RoomMarkSolution({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
       <rect x="3" y="29" width="34" height="7" {...MASS} />
-      <rect x="18.4" y="13.4" width="3.6" height="15.6" {...RED} />
-      <path d="M19 15.4C19 9.4 14.2 5.6 8.8 6.6 8.6 11.6 13.2 15.8 19 15.4Z" {...RED} />
-      <path d="M21.2 12.6C21.6 7.4 26.4 4.2 31.6 5 31.8 9.8 27.2 13.4 21.2 12.6Z" {...RED} />
+      <rect x="18.4" y="13.4" width="3.6" height="15.6" {...ACCENT} />
+      <path d="M19 15.4C19 9.4 14.2 5.6 8.8 6.6 8.6 11.6 13.2 15.8 19 15.4Z" {...ACCENT} />
+      <path d="M21.2 12.6C21.6 7.4 26.4 4.2 31.6 5 31.8 9.8 27.2 13.4 21.2 12.6Z" {...ACCENT} />
     </svg>
   );
 }
@@ -65,7 +71,7 @@ export function RoomMarkAction({ size = 40, className = '' }) {
     <svg {...FRAME} width={size} height={size} className={className}>
       <rect x="13.6" y="2.8" width="12.8" height="3.6" {...MASS} />
       <rect x="17.8" y="6.4" width="4.4" height="11.4" {...MASS} />
-      <path d="M13.2 17.8 H26.8 L25.4 27.6 20 34.6 14.6 27.6 Z" {...RED} />
+      <path d="M13.2 17.8 H26.8 L25.4 27.6 20 34.6 14.6 27.6 Z" {...ACCENT} />
     </svg>
   );
 }
@@ -78,7 +84,7 @@ export function RoomMarkGroups({ size = 40, className = '' }) {
       <rect x="15.4" y="3.6" width="9.2" height="6.4" {...MASS} />
       <rect x="15.4" y="30" width="9.2" height="6.4" {...MASS} />
       <rect x="3.6" y="15.4" width="6.4" height="9.2" {...MASS} />
-      <rect x="30" y="15.4" width="6.4" height="9.2" {...RED} />
+      <rect x="30" y="15.4" width="6.4" height="9.2" {...ACCENT} />
     </svg>
   );
 }
