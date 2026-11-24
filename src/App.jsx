@@ -564,7 +564,16 @@ const AuthenticatedApp = () => {
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminOnly><AdminLogoUploadPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminOnly><AdminPWAPushGuidePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminOnly><AdminStoneymollanLegalPage /></AdminOnly></LayoutWrapper>} />
-      <Route path="/AdminStoneymollanBarryReply" element={<LayoutWrapper currentPageName="AdminStoneymollanBarryReply"><AdminOnly><AdminStoneymollanBarryReplyPage /></AdminOnly></LayoutWrapper>} />
+      {/* ── THE REPLY, ON AN OPEN ADDRESS ─────────────────────────────────────────
+          It sat behind the admin door, which meant the one person who needs to read it
+          before sending it had to sign in first. Brian asked to read and copy it in the
+          preview without that, and it is his own letter about his own rights — there is
+          nothing in it that is not already in the correspondence. The page asks search
+          engines to leave it alone, so it can be opened on a phone at the kitchen table
+          without becoming the first thing a neighbour finds. The admin address still
+          works, because it is in the case file's own links. */}
+      <Route path="/StoneymollanReply" element={<LayoutWrapper currentPageName="AdminStoneymollanBarryReply"><AdminStoneymollanBarryReplyPage /></LayoutWrapper>} />
+      <Route path="/AdminStoneymollanBarryReply" element={<LayoutWrapper currentPageName="AdminStoneymollanBarryReply"><AdminStoneymollanBarryReplyPage /></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

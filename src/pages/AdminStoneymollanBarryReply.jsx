@@ -1,132 +1,191 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Printer, ArrowLeft, AlertTriangle, Mail } from 'lucide-react';
+import { Copy, Check, Printer, ArrowLeft, AlertTriangle, Mail, Scale } from 'lucide-react';
 
-// ── THE REPLY TO BARRY HARPER, READY TO SEND ───────────────────────────────────
-// Everything here comes from the saved file, not from memory:
-//   · the objection of 1 September 2026 and Barry's response received 19 November;
-//   · the previous owner's written account of 8 July 2025, which is where the mains pipe
-//     comes from — its route, its ownership, and the vacuum breaker that exists because
-//     pressure loss is "a regular occurrence";
-//   · the Neolithic chambered cairn at Cameron Farm, and the fact that HES has been
-//     clearing trees at it, which means it is a live heritage asset and not a footnote;
-//   · Brian's email of 4 June 2025, which put the horses and the eroded passing place to
-//     Barry and was never answered on the substance.
+// ── THE REPLY TO BARRY HARPER'S 19 NOVEMBER EMAIL ─────────────────────────────
+// What he actually wrote, and it matters that it is read exactly:
 //
-// Two things in this letter Brian alone can fill: the dates of the works that were carried
-// out without using the road, and the measured distance. They are marked plainly rather than
-// guessed at, because a letter to an estate manager is the last place to put a number
-// nobody checked.
+//   "I can confirm that we intend to proceed with the proposal."
+//   "...responses to the matters raised are set out in the attached document. The response
+//    includes guidance ... 'Managing forestry operations to protect private water supplies',
+//    issued by Scottish Forestry."
+//   "...has not yet been approved ... remains subject to consultation ... will continue to
+//    inform the development and refinement of the woodland design, where appropriate."
 //
-// The tone is deliberately firm and deliberately not personal. No family, no motive, no
-// wealth, no neighbour. Facts, requests, and a date.
+// So: he has confirmed he is going ahead, he has answered eleven specific questions with a
+// published industry guidance note that was not written about this place, and he has left
+// himself the words "where appropriate" as the way out of every point.
+//
+// That is the whole of the response, and the letter answers it on exactly that ground: the
+// guidance is the standard, not the answer; "where appropriate" is not a commitment; and
+// because the application is not yet determined, the design is still open — which is the
+// leverage, and it expires the day Scottish Forestry signs.
+//
+// THE RIGHTS SECTION IS THE PART BRIAN ASKED FOR BY NAME. Eight of them, each stated with
+// the instrument it comes from, because "we have rights" is worth nothing in a letter and
+// "servitude, in the missives in title DMB27637, remedies interdict and damages" is worth
+// everything. Nothing in it is a threat. It is a description of the ground.
 
 const TO = 'Barry.Harper@scottishwoodlands.co.uk';
 const FROM = 'tullifarm@btinternet.com';
+const SUBJECT = 'RE: Auchendennan Woodland Creation — your email of 19 November: the guidance is the standard, not the answer';
 
-const SUBJECT = 'Auchendennan Muir — works already carried out without the road, the water supplies, and the cairn';
+// ── WHAT WE ACTUALLY HAVE ─────────────────────────────────────────────────────
+// Kept as data so the letter and the page can never drift apart.
+const RIGHTS = [
+  {
+    n: 1,
+    title: 'The burn supply is a servitude — a real right in the land',
+    body: 'Contained in the property missives in our title deeds, DMB27637. A servitude binds you and every successor and cannot be planted over, fenced off or engineered away. A right to take water carries with it the access reasonably necessary to maintain the works that take it — the weir and the settling tank. Making that maintenance impossible is interference with a servitude.',
+    remedy: 'Remedies in Scots law: interdict and damages.',
+  },
+  {
+    n: 2,
+    title: 'The mains pipe is our property, not a right',
+    body: 'The 50 mm blue MDPE from the fork on Upper Stoneymollan Road to the house is owned by the cottage and was paid for by its occupants. It is corporeal property. Damaging it is a delict, and it is your operations that would create the risk.',
+    remedy: 'Duty of care; damages for loss and repair.',
+  },
+  {
+    n: 3,
+    title: 'Access to our home is not a favour',
+    body: 'Upper Stoneymollan Road is how we, our guests, the carers, the ponies and the emergency services reach the property. Whatever its status, we have a right of access to it, and works that make it unsafe or impassable interfere with that right.',
+    remedy: 'Interdict against interference; damages.',
+  },
+  {
+    n: 4,
+    title: 'The cairn is protected by statute, and the protection is criminal',
+    body: 'If the Neolithic chambered cairn at Cameron Farm is scheduled, works affecting it require scheduled monument consent, and it is an offence to execute such works without it. If it is not scheduled it is still a recorded historic environment asset, and the UK Forestry Standard requires it — and its setting — to be assessed and excluded. Historic Environment Scotland is a statutory consultee.',
+    remedy: 'Ancient Monuments and Archaeological Areas Act 1979; UKFS.',
+  },
+  {
+    n: 5,
+    title: 'We have a statutory right to the file itself',
+    body: 'Under the Environmental Information (Scotland) Regulations 2004, Scottish Forestry and HES must make environmental information available on request within 20 working days. If they refuse, we have a right of review, then a right of appeal to the Scottish Information Commissioner.',
+    remedy: 'We do not need your permission to see the file. We ask the regulators.',
+  },
+  {
+    n: 6,
+    title: 'We have a right to be consulted on the EIA determination, and to reasons',
+    body: 'Afforestation above the thresholds in the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2018 requires an EIA determination. As an affected neighbour we are entitled to make representations and to be told the outcome and the reasons — including any screening opinion and the recorded reasons for it.',
+    remedy: 'Representation, then reasons in writing.',
+  },
+  {
+    n: 7,
+    title: 'Where public money is involved, the conditions are public',
+    body: 'If a Forestry Grant Scheme award supports this, the UK Forestry Standard and its water and historic environment requirements are conditions of that grant. They are not a private arrangement between you and the landowner. Compliance is answerable to the body that pays.',
+    remedy: 'Grant conditions, publicly enforceable.',
+  },
+  {
+    n: 8,
+    title: 'Nothing is settled yet — and that is the most useful right of all',
+    body: 'Your own email says the proposal has not been approved and remains subject to consultation. The design is still open. The boundary can move, the fence can move, the access can change, the cairn can be excluded. What happens next is decided on the evidence — and the evidence is what we are asking for.',
+    remedy: 'Leverage that expires the day Scottish Forestry signs.',
+  },
+];
 
 const BODY = `Dear Barry,
 
-Thank you for your email and accompanying response received on 19 November 2026, following my objection of 1 September 2026.
+Thank you for your email of 19 November 2026 and for the attached guidance. I am replying to it directly, because it does not answer the objection.
 
-Your response addresses the eleven headings I raised, and I acknowledge that. Several matters remain unresolved, and one material fact has since come to light which your response does not account for. I am asking for evidence and specific commitments, not a further general assurance.
+1. WHAT YOUR EMAIL ACTUALLY SAYS
 
-1. WORKS HAVE ALREADY BEEN CARRIED OUT WITHOUT USING UPPER STONEYMOLLAN ROAD
+You have confirmed three things and I want to be accurate about each of them.
 
-On [FILL: date(s), and what was seen], works connected with your operations in this area were carried out, and the vehicles involved did not use Upper Stoneymollan Road. Please confirm:
+First, that Scottish Woodlands intends to proceed. Second, that the matters I raised have been reviewed and considered as part of the woodland creation design process. Third, that the proposal has not been approved, remains subject to consultation, and that my points will continue to inform the development and refinement of the woodland design, where appropriate.
 
-- which route those vehicles used;
-- whether that route remains available and suitable;
-- why it is not the proposed route for the works described in your response; and
-- which route any further works will be served by.
+I note the last three words. "Where appropriate" is not a commitment to anything. It leaves every point I raised open to being found inappropriate, by you, without reasons given. That is the gap I am asking you to close.
 
-If an alternative access exists and has already been used, then the proposition that Upper Stoneymollan Road must carry these operations is not established. That is the central question in this correspondence.
+Please tell me, for each of the eleven headings in my objection of 1 September 2026, whether it has changed the design, been accepted without change, or been rejected — and where rejected, on what basis. That is a short answer per heading and it is the answer the word "considered" implies.
 
-2. THE SITE IS CLOSER THAN YOUR RESPONSE INDICATES
+2. THE ATTACHMENT IS GUIDANCE TO THE INDUSTRY. IT IS NOT A RESPONSE TO US.
 
-As previously noted, the proposal lies closer to Upper Stoneymollan Cottage, to the road and to the water supplies than the distances given in your response suggest. Please provide the boundary, planting and access plans you are working to, at a scale that allows the following to be measured directly:
+The document you sent, "Managing forestry operations to protect private water supplies", is Scottish Forestry's published guidance on how operations of this kind should be conducted. It was not written about Auchendennan. It was not written about Upper Stoneymollan Road, about the 50 mm MDPE main buried under that road and down the centre of our driveway, or about the weir 200 m up the burn that has to be dug out roughly once a year.
 
-- the nearest proposed planting boundary to the cottage and to the road;
-- the distance from the proposed extraction route to the water main described at paragraph 4; and
-- the position of any proposed fence line relative to the road, to that main and to the burn supply described at paragraph 3.
+Sending me the guidance does not tell me what you are going to do. It tells me the standard you are expected to meet.
 
-I am not asking for an assurance on this point. I am asking for the plan, so that the distance can be checked.
+I will hold you to that standard, because it is your own. Your email asserts that private water supplies must be protected. If that is so, then the guidance is an acknowledgement that our supply is a material constraint on this design — not an irrelevance to be answered with a catchment map and a distance. What is missing is the part only you can supply: the plan, the route, the depth, the protection measures, the inspection regime, and the name of the party who pays when the pipe is broken.
 
-3. THE BURN STILL SERVES THE PROPERTY, AND ITS SERVITUDE NEEDS ACCESS ON FOOT EVERY YEAR
+So please answer the questions about our water, in this place, on these drawings. The guidance is the frame. The answers are the letter.
 
-Your response, the catchment map, the 135 m figure and the planting percentage all concern the burn. It is worth being precise about what the burn does and does not do.
+3. OUR RIGHTS, SET OUT PLAINLY
 
-It no longer supplies the house. The previous owner's written account of 8 July 2025 records that the original private burn supply "is now disconnected from the house, and feeds the fishpond". The burn therefore still serves the property, and the water right is contained in the property missives in the title deeds.
+I am setting these out not as a threat but so that we are both clear about the ground we are standing on.
 
-More to the point, that right carries a recurring physical obligation on the ground you propose to plant. The supply is taken by a small weir approximately 200 m up the burn, which fills with silt and gravel and "requires digging out usually about once a year", and passes to a concrete settling tank approximately 50 m south-east of the weir, in the field adjacent to the property, which the previous owner emptied and dug out completely in 2019.
+First: the burn supply is a servitude, and it is a real right in the land. It is contained in the property missives in our title deeds, DMB27637. A servitude binds you and every successor, and it cannot be planted over, fenced off or engineered away. A right to take water carries with it the access reasonably necessary to maintain the works that take it — the weir approximately 200 m up the burn and the settling tank approximately 50 m south-east of it, in the field adjacent to the property. If planting or a deer fence makes that maintenance impossible, that is interference with a servitude, and the remedies in Scots law are interdict and damages.
 
-Both are reached on foot, with tools, through that ground. That is the servitude in use — not a right sitting on a deed, but an annual piece of work in a specific place. Please confirm how that access is to be maintained through the planting and through a deer fence, and where the gates will be.
+Second: the mains pipe is our property, not a right. The 50 mm blue MDPE pipe from the fork on Upper Stoneymollan Road to the house is owned by the cottage and was paid for by its occupants. It is corporeal property. Damage to it is a delict, and it is your operations that would be creating the risk.
 
-4. THE MAINS WATER SUPPLY HAS NOT BEEN ADDRESSED AT ALL
+Third: access to our home is not a favour. Upper Stoneymollan Road is how we, our guests, the carers, the ponies and the emergency services reach the property. Whatever its status, we have a right of access, and works that make it unsafe or impassable interfere with that right.
 
-The domestic supply is treated mains water from Loch Finlas, approximately 6 km to the north, owned by Scottish Water. It runs up Lower Stoneymollan Road, under the A82, to the fork on Upper Stoneymollan Road, where it branches. The branch serving Upper Stoneymollan Cottage is a 50 mm blue MDPE pipe. That pipe is the sole property of the cottage and was paid for by its occupants. It is corporeal property, not merely a right.
+Fourth: the cairn is protected by statute, and the protection is criminal rather than civil. If the Neolithic chambered cairn at Cameron Farm is scheduled, works affecting it require scheduled monument consent under the Ancient Monuments and Archaeological Areas Act 1979, and it is an offence to execute such works without it. If it is not scheduled, it remains a recorded historic environment asset, and the UK Forestry Standard requires it — and its setting — to be assessed and excluded. Historic Environment Scotland is a statutory consultee for this application.
 
-Its route is documented:
+Fifth: we have a statutory right to the file itself. Under the Environmental Information (Scotland) Regulations 2004, Scottish Forestry and Historic Environment Scotland must make environmental information available on request within 20 working days, and where access is refused there is a right of review and then a right of appeal to the Scottish Information Commissioner. I am exercising that right in parallel with this letter. I am not asking your permission to see the application. I am asking the regulators, on a clock that is already running.
 
-- buried on the right-hand side of Upper Stoneymollan Road, from the fork all the way to the entrance to the cottage driveway;
-- a vacuum breaker at the right-hand side of the driveway entrance, fitted "to prevent pipeline collapse during loss of water supply pressure (a regular occurrence)";
-- buried down the centre of the driveway;
-- around the west gable to an isolation valve approximately 0.5 m west of the north-west corner of the building.
+Sixth: we have a right to be consulted on the EIA determination, and to reasons. Afforestation above the thresholds in the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2018 requires an environmental impact assessment determination. As an affected neighbour we are entitled to make representations and to be told the outcome and the reasons for it, including any screening opinion and the recorded reasons behind it.
 
-The pipe therefore runs under the road your vehicles would use, and down the centre of the only private access to the house. Pressure loss is already a regular occurrence, and pipeline collapse is its documented consequence.
+Seventh: where public money is involved, the conditions are public. If this proposal is supported by a Forestry Grant Scheme award, the UK Forestry Standard and its water and historic environment requirements are conditions of that grant. They are not a private arrangement between you and the landowner, and compliance is answerable to the body that pays.
 
-Please provide:
+Eighth, and most importantly: nothing is settled yet. Your own email says the proposal has not been approved and remains subject to consultation. That means the design is still open. The boundary can still move, the fence can still move, the access can still change and the cairn can still be excluded. It also means the decision will be taken on the evidence — and the evidence is precisely what I am asking you for.
 
-- the plan identifying this main, its route and its depth, together with the protection and incident-response arrangements proposed for it;
-- the assessment of risk to it from vehicle loading on the road, and from works on the driveway and the verge;
-- confirmation of which party accepts liability for damage to it, and the procedure for inspection, repair and dispute; and
-- confirmation of whether Scottish Water has been consulted, and what they said. Scottish Water owns the main, the branch under the A82 and the hydrant at the fork. Your response does not mention Scottish Water at all.
+4. THE QUESTIONS YOUR EMAIL LEAVES OPEN
 
-A catchment planting map does not identify this infrastructure, and cannot answer these questions.
+Access
+1. Which route did the vehicles use for the works already carried out in this area without using Upper Stoneymollan Road, on [FILL: date(s) and what was seen]?
+2. Does that route remain available, and why is it not the proposed route for the works described in your response?
 
-5. THE NEOLITHIC CHAMBERED CAIRN, AND WHETHER PUBLIC MONEY IS INVOLVED
+Water — the burn
+3. How is the annual dig-out of the weir approximately 200 m up the burn, and access to the settling tank approximately 50 m south-east of it in the adjacent field, to be maintained through the planting and through a deer fence? Where will the gates be?
 
-I understand there is a known Neolithic chambered cairn at Cameron Farm, recorded at approximately 20 m by 10 m, around 200 m from Stoneymollan Muir, which appears as a place name on the plan you supplied. I also understand that Historic Environment Scotland has recently been clearing trees at the monument, which indicates it is actively managed as a heritage asset rather than a forgotten one.
+Water — the mains
+4. Please provide the plan identifying the 50 mm MDPE main, its route and its depth, with the protection and incident-response arrangements proposed for it.
+5. What is the assessed risk to that main from vehicle loading on the road, and from works on the driveway and the verge?
+6. Which party accepts liability for damage to it, and what is the procedure for inspection, repair and dispute?
+7. Has Scottish Water been consulted, and what did they say? Scottish Water owns the main, the branch under the A82 and the hydrant at the fork, and your email does not mention Scottish Water at all.
 
-Please confirm:
+Heritage
+8. Was the Neolithic chambered cairn at Cameron Farm identified in the archaeological assessment referred to in your email? If so, what does that assessment say about the monument and its setting?
+9. Is it a scheduled monument, and if not, what is its record in the Historic Environment Record?
+10. Do the proposed boundary, the deer fence and the extraction route exclude the monument and its setting? Has Historic Environment Scotland been consulted, and what did they say?
 
-- whether this monument has been identified in the archaeological assessment referred to in your email, and if so, what that assessment says about it and about its setting;
-- whether it is a scheduled monument, and if not, its record in the Historic Environment Record;
-- whether the proposed boundary, the deer fence and the extraction route exclude the monument and its setting; and
-- whether Historic Environment Scotland has been consulted, and what they said.
+Money
+11. Has an application been made, or an award given, under the Forestry Grant Scheme or any other public source for this proposal? Please provide the application reference.
 
-If the monument was not identified in the survey, then the survey is deficient on a point that a check of the public record would have found, and I would ask that it be re-done before any approval is considered.
+Design and distances
+12. Please provide the boundary, planting and access plans at a scale that allows the nearest proposed planting boundary, the extraction route and any fence line to be measured against the cottage, the road, the main and the burn supply. I am asking for the plan rather than an assurance, so that the distance can be checked rather than accepted.
 
-On funding: I understand that woodland creation of this kind is normally supported by public grant, and that approved awards are published. Please confirm whether an application has been made, or an award given, under the Forestry Grant Scheme or any other public source, and provide the application reference. If public money is involved, the conditions attached to that grant — including compliance with the UK Forestry Standard and with the historic environment requirements — are not a private matter between you and the landowner. They are conditions of public funding, and they are answerable in public.
+Road, traffic and safety
+13. Which party accepts responsibility for damage attributable to the operations, and what are the pre- and post-works inspection, repair and dispute arrangements? Please supply the written roads-authority conditions relied upon.
+14. Please provide vehicle types and maximum weights, expected movements, working hours, duration, and the arrangements for residents, guests, emergency access and people using the John Muir Way.
+15. The road carries, in an ordinary week, group pony treks of up to seven horses twice daily Monday to Saturday, horse boxes to the cross-country course at weekends, children travelling to and from school, carers, and guests of the shooting school, the Airbnbs and the pods, as well as members of the public walking, cycling, riding and walking dogs all year round. There is no safe way for a lorry and a group of horses to pass one another between the passing places, one of which has eroded and is nearly unusable. These points were put to you in writing on 4 June 2025 and have still not been answered on the substance. Please answer them now.
 
-Please provide the boundary plan, the archaeological assessment and the grant reference together. Each of the three is checkable against the public record, and I would rather check them than argue about them.
+Case file
+16. Please provide the application reference, the submitted boundary and access plans, any EIA screening opinion with its recorded reasons, the survey reports and the statutory consultation responses relied upon, including the cultural heritage assessment and the treatment of scheduled monument SM6341 and its setting.
 
-6. ROAD DAMAGE, TRAFFIC AND SAFETY
+5. WHAT MUST HAPPEN BEFORE DETERMINATION
 
-Please identify the party accepting responsibility for damage attributable to the operations; the pre- and post-works inspection arrangements; and the repair and dispute-resolution procedure. Please supply the written roads-authority conditions relied upon.
+I am not asking you to abandon the proposal. I am asking that the following be settled before Scottish Forestry determines it, because after that point none of it can be settled at all:
 
-Please also provide the proposed route, the assessed alternatives and the reasons for the chosen route; vehicle types and maximum weights; expected movements and working hours; duration; and the arrangements for residents, guests, emergency access and people using the John Muir Way.
+- the access route, resolved on evidence rather than asserted;
+- the protection of the mains main, in writing, with a named party liable;
+- the maintenance of the burn servitude, secured in a way that survives the fence;
+- the cairn and its setting, excluded from the boundary and confirmed with Historic Environment Scotland;
+- the archaeology survey, re-done if the cairn was not in it;
+- the road, its condition, its capacity and its safety, with the roads authority's conditions disclosed; and
+- the grant position, disclosed, because if public money is involved then the standard is public too.
 
-The road carries, in an ordinary week: group pony treks of up to seven horses twice daily Monday to Saturday; horse boxes to the cross-country course at weekends; children travelling to and from school; carers; guests of the shooting school, the Airbnbs and the pods; and members of the public walking, cycling, riding and walking dogs all year round. There is no safe way for a lorry and a group of horses to pass one another between the passing places, one of which has eroded and is nearly unusable. These points were set out to you in writing on 4 June 2025 and have not been answered on the substance.
+6. WHAT I AM ASKING FOR, AND BY WHEN
 
-7. CASE STATUS AND THE EVIDENCE RELIED UPON
+Please provide a numbered response within 14 days of this email, answering each question at paragraph 4 in turn. Where an item cannot yet be supplied, please identify what is outstanding and give a specific date by which it will be provided.
 
-Please provide the application reference, the submitted boundary and access plans, any EIA screening opinion together with the recorded reasons for it, and the survey reports and statutory consultation responses relied upon — including the cultural-heritage assessment and the treatment of scheduled monument SM6341 and its setting.
+Please also place this correspondence before your line manager, or the senior manager responsible for this proposal, and provide that person's name and contact details. I am asking for senior oversight because these matters have been put to you in writing since June 2025 and remain unanswered on the evidence. If no senior contact is identified within that period, I will write to Scottish Woodlands' head office.
 
-SENIOR OVERSIGHT
+7. RESERVATION
 
-Please place this correspondence before your line manager, or the senior manager responsible for this proposal, and provide that person's name and contact details. I am asking for senior oversight because these matters have been put to you in writing since June 2025 and remain unanswered on the evidence. If no senior contact is identified within the response period, I will write to Scottish Woodlands' head office.
+I am pursuing the regulatory questions directly with Scottish Forestry and Historic Environment Scotland, including requests under the Environmental Information (Scotland) Regulations 2004, and I will not wait on this correspondence to do so.
 
-RESPONSE REQUIRED
+My objection of 1 September 2026 remains in full. Nothing in this letter, and nothing in your email of 19 November, signifies agreement to the proposed access arrangements, and nothing here waives any right under title DMB27637 or otherwise. All rights are reserved.
 
-Please provide a substantive, numbered response within 14 days of this email, answering each paragraph in turn. Where an item cannot yet be supplied, please identify what is outstanding and give a specific date for providing it.
-
-These matters affect access to my home, my accommodation business, the water supply to the house, and infrastructure and heritage that are not mine to give away. I am asking for the evidence and the safeguards that allow affected people to understand what is proposed and how they will be protected.
-
-For context, the place and the business are shown at https://uf51.love/Stoneymollan. The legal rights and the technical questions stand on their own documents, not on that webpage.
-
-I am pursuing the regulatory questions directly with Scottish Forestry. My objection of 1 September 2026 remains. This correspondence does not signify agreement to the proposed access arrangements, and does not waive any right under title DMB27637 or otherwise.
+For context only, the place and the business are described at https://uf51.love/Stoneymollan. The rights and the technical questions above stand on their own documents, not on that webpage.
 
 Yours sincerely,
 
@@ -136,9 +195,7 @@ Upper Stoneymollan Cottage`;
 const FULL = `To: ${TO}\nSubject: ${SUBJECT}\n\n${BODY}`;
 const MAILTO = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}`;
 
-// ── HOW THE LETTER IS SET ON THE PAGE ──
-// One source of truth: what is copied is exactly what is shown. A letter that reads one
-// way on screen and another way in the sent email is worse than no letter at all.
+// One source of truth: what is copied is exactly what is on the screen.
 function blocks(text) {
   return text.split('\n\n').map((raw) => {
     const t = raw.trim();
@@ -148,7 +205,7 @@ function blocks(text) {
   });
 }
 
-function CopyButton({ text, label, done, className }) {
+function CopyButton({ text, label, done }) {
   const [copied, setCopied] = useState(false);
   const copy = async () => {
     await navigator.clipboard.writeText(text);
@@ -159,7 +216,7 @@ function CopyButton({ text, label, done, className }) {
     <button
       type="button"
       onClick={copy}
-      className={className || 'flex min-h-[44px] items-center justify-center gap-2 border border-record-ink/30 px-3 py-2 font-mono text-[10.5px] font-black uppercase tracking-wide'}
+      className="flex min-h-[44px] items-center justify-center gap-2 border border-record-ink/30 px-3 py-2 font-mono text-[10.5px] font-black uppercase tracking-wide"
     >
       {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
       {copied ? done : label}
@@ -169,6 +226,16 @@ function CopyButton({ text, label, done, className }) {
 
 export default function AdminStoneymollanBarryReply() {
   const [copied, setCopied] = useState(false);
+
+  // Read on a phone by the person sending it, without becoming the first thing a neighbour
+  // finds when they search the road's name.
+  useEffect(() => {
+    const m = document.createElement('meta');
+    m.name = 'robots';
+    m.content = 'noindex, nofollow';
+    document.head.appendChild(m);
+    return () => { document.head.removeChild(m); };
+  }, []);
 
   const copy = async () => {
     await navigator.clipboard.writeText(FULL);
@@ -182,22 +249,21 @@ export default function AdminStoneymollanBarryReply() {
 
         <div className="no-print">
           <Link
-            to="/AdminStoneymollanLegal"
+            to="/Stoneymollan"
             className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wide text-record-muted underline decoration-dotted underline-offset-4"
           >
-            <ArrowLeft className="h-3.5 w-3.5" /> The case file
+            <ArrowLeft className="h-3.5 w-3.5" /> Stoneymollan
           </Link>
 
-          <h1 className="mt-4 text-[26px] leading-tight lg:text-[36px]" style={{ fontFamily: 'var(--font-display)' }}>
+          <h1 className="mt-4 text-[26px] leading-tight lg:text-[34px]" style={{ fontFamily: 'var(--font-display)' }}>
             The reply to Barry Harper
           </h1>
-          <p className="mt-2 max-w-[52ch] text-[14px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-            Answers his 19 November response point by point: the road already carrying works that
-            did not use it, the burn and its annual dig-out, the mains pipe he has never mentioned,
-            the cairn, and whether public grant money is behind any of it.
+          <p className="mt-2 text-[14px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+            He has confirmed he intends to proceed, answered eleven specific questions with a
+            published industry guidance note, and left himself the words “where appropriate”.
+            This answers that, and sets out the rights plainly.
           </p>
 
-          {/* The address, right here, copyable — so it never has to be retyped. */}
           <div className="mt-5 border-2 border-record-ink bg-record-bone/60 p-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">To</p>
             <p className="mt-1 break-all font-mono text-[13px] font-black">{TO}</p>
@@ -218,14 +284,11 @@ export default function AdminStoneymollanBarryReply() {
 
           <div className="mt-4 border-2 border-record-red bg-record-red/5 p-4">
             <p className="flex items-center gap-2 font-mono text-[10.5px] font-black uppercase tracking-[0.16em] text-record-red">
-              <AlertTriangle className="h-4 w-4" /> One blank to fill before sending
+              <AlertTriangle className="h-4 w-4" /> One blank to fill
             </p>
-            <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-record-ink/85">
-              <li>Paragraph 1 — the date(s), and what was actually seen, when works were carried out without using the road.</li>
-              <li>Check paragraph 2 reads true as written; add the measured distance if you have it.</li>
-            </ul>
-            <p className="mt-2 font-mono text-[10.5px] uppercase tracking-wide text-record-muted">
-              Everything else is ready.
+            <p className="mt-2 text-[13px] leading-snug text-record-ink/85">
+              Question 1 — the date(s), and what you actually saw, when works were carried out
+              without using the road. Everything else is ready to send.
             </p>
           </div>
 
@@ -246,19 +309,42 @@ export default function AdminStoneymollanBarryReply() {
               <Printer className="h-4 w-4" /> Print
             </button>
           </div>
-
-          <p className="mt-3 break-words border border-record-ink/20 bg-record-bone/50 p-3 font-mono text-[11px]">
-            <span className="text-record-muted">SUBJECT</span> {SUBJECT}
-          </p>
         </div>
 
-        <article className="mt-6 border-t-2 border-record-ink pt-6">
+        {/* ── WHAT WE ACTUALLY HAVE ── */}
+        <section className="mt-8 border-2 border-record-ink bg-record-bone/40 p-4">
+          <h2 className="flex items-center gap-2 font-mono text-[11px] font-black uppercase tracking-[0.18em] text-record-red">
+            <Scale className="h-4 w-4" /> What we have, exactly
+          </h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-record-ink/80" style={{ fontFamily: 'var(--font-reading)' }}>
+            Eight rights. Each one named with the instrument it comes from, because “we have
+            rights” is worth nothing in a letter and a servitude in title DMB27637 is worth
+            everything.
+          </p>
+          <ol className="mt-4 space-y-3">
+            {RIGHTS.map((r) => (
+              <li key={r.n} className="border-l-2 border-record-red/60 pl-3">
+                <p className="font-mono text-[11px] font-black uppercase tracking-wide">
+                  {r.n}. {r.title}
+                </p>
+                <p className="mt-1 text-[13px] leading-relaxed text-record-ink/80" style={{ fontFamily: 'var(--font-reading)' }}>
+                  {r.body}
+                </p>
+                <p className="mt-1 font-mono text-[10.5px] uppercase tracking-wide text-record-muted">
+                  {r.remedy}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <article className="mt-8 border-t-2 border-record-ink pt-6">
           {blocks(BODY).map((b, i) => {
             if (b.kind === 'head') {
               return (
-                <h2 key={i} className="mt-7 font-mono text-[12px] font-black uppercase tracking-[0.12em] text-record-red">
+                <h3 key={i} className="mt-7 font-mono text-[12px] font-black uppercase tracking-[0.12em] text-record-red">
                   {b.text}
-                </h2>
+                </h3>
               );
             }
             if (b.kind === 'list') {
@@ -284,11 +370,11 @@ export default function AdminStoneymollanBarryReply() {
         <div className="no-print mt-8 border-t border-record-ink/15 pt-4">
           <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-record-muted">Before you press send</p>
           <ul className="mt-2 space-y-2 text-[13px] leading-relaxed text-record-ink/80" style={{ fontFamily: 'var(--font-reading)' }}>
-            <li>The 14 days is a period you are asking for. It is not a statutory deadline, and it is not a guarantee he answers.</li>
-            <li>Send this as a reply on the existing thread, so the 1 September objection and his 19 November response sit underneath it.</li>
-            <li>Keep it separate from the Scottish Forestry representation, and send that the same day rather than waiting on him.</li>
-            <li>Do not attach the Glasgow title plan. It belongs to another matter and handing it over weakens both.</li>
-            <li>Keep the sent copy. The record of what was asked, and when, is the whole point of writing it down.</li>
+            <li>Send it as a reply on the existing thread, so the 1 September objection and his 19 November email sit underneath it.</li>
+            <li>The 14 days is a period you are asking for. It is not a statutory deadline, and it does not compel an answer.</li>
+            <li>The EIR requests are the part with a real clock on it — 20 working days, and an appeal to the Commissioner if they refuse. Send those the same day, not after he replies.</li>
+            <li>Do not attach the Glasgow title plan. It belongs to another matter.</li>
+            <li>Keep the sent copy. What was asked, and when, is the whole point of writing it down.</li>
           </ul>
         </div>
 
