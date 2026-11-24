@@ -36,18 +36,29 @@ export function Mark({ size = 26, className = '', stroke = 2, children }) {
   );
 }
 
-// A pencil in a fist, and the line it has just drawn. "Draw a strip."
+// ── THE THREE DOORS, REDRAWN AS IDEAS RATHER THAN AS THINGS ───────────────────
+// Brian, 24 November: "icons for drawings take part the book bro it's a bit weird."
+//
+// He was pointing at the same fault he had already caught in the four room marks: a
+// pencil in a fist, a photograph of a sheet, a book with a ribbon in it. Each one was a
+// picture of an OBJECT standing in for an ACTION, and an object drawn at thirty-two
+// pixels has to be drawn in detail to be recognised — which is exactly how a mark starts
+// looking stuck on top of a page instead of printed on it.
+//
+// So each door now says the idea and nothing else, in one ink and one red:
+//   the wall      work hanging on a line, with one place still open (and it is red)
+//   take part     the stroke itself — the mark you are about to make, red where it starts
+//   the book      three sheets gathered into one, the top one red
+//
+// No pencil, no photograph, no ribbon. And the colours went with the detail: sun, sky,
+// mint and clay were four pigments in a room that had just been told it had one voice.
+
+// The stroke you are about to make. Red where it begins, ink where it carries on.
 export function HandPencil({ size = 26, className = '' }) {
   return (
     <Mark size={size} className={className}>
-      <g transform="rotate(45 20 20)">
-        <rect x="16" y="3" width="8" height="25" className="cmark-sun" />
-        <path d="M16 28h8l-4 9Z" className="cmark-paper" />
-        <path d="M18.6 33.2l1.4 3.4 1.4-3.4" strokeWidth="1.3" />
-        <path d="M16 8h8" strokeWidth="1.3" />
-      </g>
-      <path d="M4 35c4-3 7 1 11-1" strokeWidth="1.8" />
-      <path d="M33 3l2-1.6M36 8l2-.6" strokeWidth="1.3" />
+      <path d="M6 33c7-1.5 10.5-8 14-14S27 8 35 6" strokeWidth="7.5" strokeLinecap="round" />
+      <path d="M6 33c2.9-.6 5.1-2 6.8-4" strokeWidth="7.5" strokeLinecap="round" style={{ stroke: 'rgb(var(--record-red))' }} />
     </Mark>
   );
 }
@@ -66,14 +77,14 @@ export function PaperPhoto({ size = 26, className = '' }) {
   );
 }
 
-// A closed book with a ribbon in it. The anthology.
+// The anthology: sheets gathered, not a book with a ribbon in it. The gathered sheet on
+// top is the record's red because the book is the thing being made, not a thing bought.
 export function BookRibbon({ size = 26, className = '' }) {
   return (
     <Mark size={size} className={className}>
-      <rect x="7" y="6" width="26" height="24" className="cmark-mint" />
-      <path d="M12 6v24" />
-      <path d="M17 12h12M17 16h12M17 20h8" strokeWidth="1.4" />
-      <path d="M22 30v6l-3-2.4-3 2.4v-6" className="cmark-clay" />
+      <g transform="rotate(-11 20 22)"><rect x="6" y="6" width="20" height="28" className="cmark-paper" strokeWidth="1.7" /></g>
+      <g transform="rotate(-4 20 22)"><rect x="9" y="6" width="20" height="28" className="cmark-paper" strokeWidth="1.7" /></g>
+      <g transform="rotate(3.5 20 22)"><rect x="12" y="6" width="20" height="28" strokeWidth="1.7" style={{ fill: 'rgb(var(--record-red))' }} /></g>
     </Mark>
   );
 }
@@ -176,20 +187,14 @@ export function HungWall({ size = 26, className = '' }) {
   return (
     <Mark size={size} className={className}>
       {/* the line the whole wall hangs from */}
-      <path d="M2 9.5h36" strokeWidth="2.4" />
+      <path d="M2 9.5h36" strokeWidth="2.6" />
       {/* three pegs: two holding work, one holding a place */}
-      <path d="M9 9.5v3M20.3 9.5v3M31.6 9.5v3" strokeWidth="1.6" />
-      {/* the first drawing: a sun over a hill, in a hand */}
-      <rect x="3.5" y="13" width="11" height="18" className="cmark-paper" strokeWidth="1.7" />
-      <circle cx="7.4" cy="18.2" r="2" className="cmark-sun" strokeWidth="1.5" />
-      <path d="M4.6 28.4l3.1-4.6 2.1 2.1 2.1-2.7 2.9 5.2" strokeWidth="1.5" />
-      {/* the second drawing: a face, looking back at the reader */}
-      <rect x="14.8" y="13" width="11" height="18" className="cmark-mint" strokeWidth="1.7" />
-      <path d="M18.1 20.2h.01M22.6 20.2h.01" strokeWidth="2.6" />
-      <path d="M17.9 23.6c1.6 1.7 4.4 1.7 6 0" strokeWidth="1.5" />
-      {/* the space that is still yours — drawn, so it reads as room and not as a hole */}
-      <rect x="26.1" y="13" width="11" height="18" strokeWidth="1.4" strokeDasharray="2.6 3.2" />
-      <path d="M31.6 19.4v6.2M28.5 22.5h6.2" strokeWidth="1.4" />
+      <path d="M9 9.5v3.5M20.3 9.5v3.5M31.6 9.5v3.5" strokeWidth="1.6" />
+      {/* two sheets hung, and blank — the work is not the mark's business to draw */}
+      <rect x="3.5" y="13" width="11" height="20" className="cmark-paper" strokeWidth="1.8" />
+      <rect x="14.8" y="13" width="11" height="20" className="cmark-paper" strokeWidth="1.8" />
+      {/* the place that is still yours, and the only red in the drawing */}
+      <rect x="26.1" y="13" width="11" height="20" strokeWidth="2.2" style={{ stroke: 'rgb(var(--record-red))' }} />
     </Mark>
   );
 }

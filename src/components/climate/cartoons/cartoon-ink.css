@@ -8,8 +8,10 @@
 #root .record-cartoon-field .record-ground { --cover-strength: 1; }
 #root .record-cartoon-field .cartoon-room-plate { position: relative; }
 #root .record-cartoon-field .cartoon-room {
-  --cartoon-read: var(--font-cartoon-reading);
-  --cartoon-display: var(--font-cartoon-display);
+  /* The room's lettering is the record's, not a costume. See comic-page.css. */
+  --cartoon-read: var(--font-record-ui);
+  --cartoon-display: var(--font-record-ui);
+  --cartoon-hand: var(--font-cartoon-reading);
   --font-record-ui: var(--cartoon-read);
   --font-body: var(--cartoon-read);
   --font-reading: var(--cartoon-read);
@@ -23,11 +25,15 @@
   background: transparent !important;
 }
 
-/* A real pen-lettered reading face, not another override pointing at Comic Neue. */
+/* One voice for the room, the record's own. This rule used to point every span, div,
+   label and button in the room at the hand-lettered face — which is how a page of
+   writing about your own rights ended up dressed as handwriting. It points at the
+   room's voice token now, and the token is the record's. The hand is applied to one
+   class of thing only: somebody's own sentence about their own drawing. */
 #root .cartoon-room :is(p, li, dd, dt, span, a, button, summary, label, input,
   textarea, select, div, figcaption, blockquote, small, strong, em),
 .cartoon-close-reading :is(p, span, a, button, figcaption, small, strong, em) {
-  font-family: var(--font-cartoon-reading) !important;
+  font-family: var(--cartoon-read) !important;
   letter-spacing: normal;
 }
 #root .cartoon-room :is(h1, h2, h3, h4, h5, h6),
@@ -36,17 +42,24 @@
   .comic-load-more, .cartoon-index-name),
 #root .cartoon-room :is(h1, h2, h3, .comic-make-door, .comic-drawer summary) > span,
 .cartoon-close-reading h3 {
-  font-family: var(--font-cartoon-display) !important;
-  font-weight: 400 !important;
+  font-family: var(--cartoon-display) !important;
+  font-weight: 700 !important;
   letter-spacing: .02em !important;
   text-transform: none !important;
   line-height: 1.08 !important;
+}
+/* The drawer's own words, and nothing else. */
+#root .cartoon-room :is(.cartoon-own-words, .cartoon-goal-line-text),
+.cartoon-close-reading .cartoon-own-words,
+.press-sheet-words,
+.ex-words {
+  font-family: var(--cartoon-hand, var(--font-cartoon-reading)) !important;
 }
 #root .cartoon-room :is(.comic-number, .comic-plate-index, .comic-position, .cartoon-spread-number) {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
   color: rgb(var(--record-ink));
 }
-#root .cartoon-room .comic-make-door small { font-family: var(--font-cartoon-reading) !important; }
+#root .cartoon-room .comic-make-door small { font-family: var(--cartoon-read) !important; }
 
 /* Text has its own paper. Only gutters show the painting at full strength. */
 #root .cartoon-room :is(.cartoon-fiction-head, .cartoon-wall-head, .comic-catalogue-band,

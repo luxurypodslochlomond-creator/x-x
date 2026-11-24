@@ -443,10 +443,32 @@
 
 /* One lettering system, including prose, controls, captions and the portalled reader.
    The shared record's prose sizing explicitly leaves this room to its own rhythm. */
+/* ── THE ROOM IS A ROOM OF THE RECORD, SO IT SPEAKS IN THE RECORD'S VOICE ──────
+   Brian, 24 November: "font in the wall looks weird to me bro."
+
+   He was reading the truth. This room was set in Bangers and Kalam: a comic-book
+   pastiche for every heading and a handwriting font for every sentence, label, count
+   and button. Two costumes, and neither of them the record's. Bangers is not a hand,
+   it is the SOUND a comic makes — the lettering of the word POW — so a page of it is
+   dressed as a comic rather than being one. And handwriting set on every paragraph,
+   including the ones explaining your rights, is a costume worn by text that means
+   something.
+
+   The record already settled this argument twice in index.css, and the answer holds
+   here: one voice for the words, sizes and air for the hierarchy, and the hand kept
+   for the one thing it is actually for — a person's own words, quoted. A drawer's
+   line on their own drawing is still written by hand, because a hand wrote it. Nothing
+   else in the room is.
+
+   What is NOT lost: the paper, the black plates, the red rules, the drawings, the
+   ink outlines, the sun. Those were always the room's own, and they stay exactly as
+   they are. Only the lettering comes home. */
 .record-pages .cartoon-room,
 .cartoon-close-reading {
-  --cartoon-display: var(--font-cartoon-display);
-  --cartoon-read: var(--font-cartoon-reading);
+  --cartoon-display: var(--font-record-ui);
+  --cartoon-read: var(--font-record-ui);
+  /* The one place the hand still lives: somebody's own sentence about their own work. */
+  --cartoon-hand: var(--font-cartoon-reading);
   --font-record-ui: var(--cartoon-read);
   --font-body: var(--cartoon-read);
   --font-reading: var(--cartoon-read);
@@ -458,7 +480,7 @@
 .record-pages .cartoon-room :is(h1, h2, h3, h4, h5, h6),
 .cartoon-close-reading :is(h1, h2, h3) {
   font-family: var(--cartoon-display) !important;
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   text-transform: none !important;
   letter-spacing: .02em !important;
   line-height: 1.08 !important;
@@ -507,7 +529,7 @@
 .record-pages .cartoon-room :is(.comic-turner button, .comic-make-door, .comic-drawer summary, .comic-load-more, .comic-event-share > button) {
   font-family: var(--cartoon-display) !important;
   font-size: 1.35rem;
-  font-weight: 400;
+  font-weight: 700;
   letter-spacing: .035em;
   line-height: 1.2;
 }
@@ -515,6 +537,19 @@
   font-family: var(--cartoon-read);
   font-size: 1rem;
   font-weight: 400;
+}
+
+/* ── AND THE HAND KEEPS ITS OWN PLACE ──────────────────────────────────────────
+   The one sentence in this room the record did not write. A drawer says what their
+   drawing is for in their own words, so it is set in a hand — on the wall, on the
+   goal rows, on the sheet and on the exhibition print. Everywhere else in the room,
+   including every label near it, is the record's voice, which is what makes the hand
+   read as somebody speaking rather than as the room's wallpaper. */
+.record-pages .cartoon-room :is(.cartoon-own-words, .cartoon-goal-line-text),
+.cartoon-close-reading .cartoon-own-words,
+.press-sheet-words,
+.ex-words {
+  font-family: var(--cartoon-hand, var(--font-cartoon-reading)) !important;
 }
 .record-pages .cartoon-room .comic-gesture { max-width: 100%; }
 .record-pages .cartoon-room .comic-position { font-size: 1rem; }
@@ -584,7 +619,7 @@ html[data-tongue="chr"] :is(.record-pages .cartoon-room, .cartoon-close-reading)
   border-bottom: 4px solid rgb(var(--record-red));
   color: rgb(var(--cartoon-paper)) !important;
   font-family: var(--cartoon-display) !important;
-  font-weight: 400 !important;
+  font-weight: 700 !important;
   text-transform: none !important;
   letter-spacing: .02em !important;
   line-height: .95 !important;
