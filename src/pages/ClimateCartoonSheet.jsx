@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
+import ArtworkShareButton from '@/components/climate/ArtworkShareButton';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import '@/components/climate/cartoons/sheet/sheet.css';
 
@@ -93,6 +94,12 @@ export default function ClimateCartoonSheet() {
       <div className="sheet-tools">
         <Link className="sheet-tool" to="/ClimateCartoons">← The Wall</Link>
         <div className="sheet-tools-right">
+          {/* ── THE DRAWING LEAVES AS ITSELF ────────────────────────────────────────
+              New here, and the thing a cartoonist actually wants: one tap takes the picture
+              whole — never cropped, never re-drawn — with their name, the origin and the
+              record's address travelling beside it. No upload, no account, nothing sent
+              anywhere until they choose where it goes. */}
+          <ArtworkShareButton id={cartoon.id} imageUrl={cartoon.display_image_url} title={cartoon.title || `A drawing by ${cartoon.artist_name}`} credit={creditLine(cartoon, address)} link={address} />
           <button type="button" onClick={copyCredit}>{copied ? 'Credit copied' : 'Copy the credit line'}</button>
           <button type="button" onClick={() => window.print()}>Print or save as PDF</button>
         </div>

@@ -9,6 +9,7 @@ import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
+import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
 // Human drawings lead, and everything after them is about those drawings.
 // Desktop is a newspaper spread. Original artwork, sources and controls stay intact.
@@ -51,6 +52,7 @@ export default function ClimateCartoons() {
       <div className="press-room-inner">
         <PressOpening />
 
+        <CartoonRoomNew />
         <PressWall />
         {/* The wall read against the seventeen goals, with the blank ones left blank. It
             follows the drawings because it is about them, and it comes before the argument

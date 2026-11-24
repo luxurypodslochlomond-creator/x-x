@@ -6,10 +6,7 @@ import { copyText } from '@/components/stoneymollan/barryReply/copyText';
 // A card he can screenshot and send, or hold up on his phone. Restraint is the whole design:
 // one name, four facts, one line, nothing else. That is what reads as cool — a card that has
 // to explain itself is a leaflet.
-const BIO =
-  'Fergus Hughes, 17, Glasgow. Barber, artist, footballer — Shotts Bon Accord record signing. I make things. Give me a product and a week and I\'ll send you the videos and the numbers.';
-
-const FACTS = ['Barber', 'Artist', 'Footballer', 'Shotts Bon Accord · record signing'];
+import { FERGUS_CARD_BIO as BIO, FERGUS_CARD_FACTS as FACTS } from '@/components/fergus/fergusFacts';
 
 export default function FergusCard({ embedded = false }) {
   const [copied, setCopied] = useState(false);

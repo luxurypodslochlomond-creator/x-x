@@ -1,0 +1,11 @@
+/* A short statement to the cartoonists. Ink on the room's own paper, no new colour. */
+.room-new { margin: 0 0 1.4rem; padding: 1rem 1.1rem; border-left: 4px solid rgb(var(--record-mark)); background: rgb(var(--record-bone)); }
+.room-new-head { margin: 0 0 .7rem; font-family: var(--font-record-ui); font-size: 12px; font-weight: 700; letter-spacing: .02em; color: rgb(var(--record-mark)); }
+.room-new-points { display: grid; gap: .55rem; margin: 0; padding: 0; list-style: none; }
+.room-new-points li { display: flex; align-items: flex-start; gap: .7rem; }
+.room-new-mark { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border-radius: 9px; border: 1.5px solid rgb(var(--record-ink)); color: rgb(var(--record-ink)); }
+.room-new-points strong { display: block; font-family: var(--font-record-ui); font-size: 13.5px; color: rgb(var(--record-ink)); }
+.room-new-points small { display: block; margin-top: .15rem; font-family: var(--font-record-ui); font-size: 12.5px; line-height: 1.5; color: rgb(var(--record-muted)); }
+@media (min-width: 760px) {
+  .room-new-points { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+}
