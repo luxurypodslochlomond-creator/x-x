@@ -279,7 +279,14 @@ export default function TogetherChangeClimate() {
     // filter still moves the kind, but the page stays where your thumb is, so the box
     // never leaves the screen mid-word and the keyboard never shuts under your hand.
     if (typedKind.current) { typedKind.current = false; return; }
-    bringIntoView(contentRef.current);
+    // ── LAND ON THE ROOM YOU PRESSED ────────────────────────────────────────────────
+    // This used to carry a reader to the top of the box that holds all the entries. The
+    // top of that box is the solutions section, so pressing Crises landed on the wrong
+    // room's heading and left the crises further down the page — the press looked like it
+    // had not worked. Brian, 24 November: "when click crises they are further down."
+    // Each room's section now carries its own id, and the press goes to that.
+    const room = selectedType !== 'all' ? document.getElementById(`record-room-${selectedType}`) : null;
+    bringIntoView(room || contentRef.current);
   }, [selectedType]);
 
   // A theme opens all matching kinds, not whichever room happened to be chosen last.
@@ -671,13 +678,13 @@ export default function TogetherChangeClimate() {
               </button>
             )}
             {showEntries && solutions.length > 0 && (
-              <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+              <section id="record-room-solution" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" mark={RoomMarkSolution} />
                 <RecordEntryList items={solutions} />
               </section>
             )}
             {showEntries && crises.length > 0 && (
-              <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+              <section id="record-room-climate_crisis" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" mark={RoomMarkCrisis} />
                 <RecordEntryList items={crises} />
               </section>
@@ -721,14 +728,16 @@ export default function TogetherChangeClimate() {
 
         <div className="record-home-sections">
         {(selectedType === 'all' || selectedType === 'actions') && (
-          <RecordActionsSection actions={filteredActions} totalCount={actions.length} copy={t} />
+          <div id="record-room-actions">
+            <RecordActionsSection actions={filteredActions} totalCount={actions.length} copy={t} />
+          </div>
         )}
         {/* ── GROUPS — Janine's spec, item 10: people working on the same thing in an area can share
                directly. The door is on the page, not in an email: an organiser starts their own
                gathering, and the record carries ONLY the one contact line they chose to publish.
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {selectedCategory === 'all' && (selectedType === 'all' || selectedType === 'groups') && (
-          <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+          <section id="record-room-groups" className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
             <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" mark={RoomMarkGroups} />
             <RecordStandfirst>{t.groups_sub}</RecordStandfirst>
             {/* Said out loud, on the section itself, so nobody has to guess how far the record

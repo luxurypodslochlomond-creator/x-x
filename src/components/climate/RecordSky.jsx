@@ -1,7 +1,7 @@
 import React from 'react';
 
 // An illustrated sky, not astronomical observations. The dots are hand-placed;
-// the two decorative streaks repeat on fixed 71- and 113-second CSS cycles.
+// the two decorative streaks repeat on fixed 31- and 47-second CSS cycles.
 // No random generator, meteor-shower calendar, location or live sky data is used.
 // Transform/opacity only; reduced-motion readers get a still background.
 export default function RecordSky() {

@@ -448,13 +448,16 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
   background: linear-gradient(90deg, rgba(255,246,226,0) 0%, rgba(255,246,226,.7) 58%, rgba(255,255,255,.95) 100%);
   opacity: 0;
   transform: translate3d(-22vw, 0, 0) rotate(12deg);
-  animation: record-sky-streak 71s cubic-bezier(.33, 0, .67, 1) infinite;
+  animation: record-sky-streak 31s cubic-bezier(.33, 0, .67, 1) infinite;
+  /* A negative first delay starts the loop part-way through, so the first streak crosses
+     about two seconds after a reader arrives rather than a minute into their visit. */
+  animation-delay: -27.6s;
 }
 .record-sky-streak-late {
   top: 33%;
   width: 104px;
-  animation-duration: 113s;
-  animation-delay: 37s;
+  animation-duration: 47s;
+  animation-delay: -30s;
 }
 @keyframes record-sky-streak {
   0%, 96.4% { opacity: 0; transform: translate3d(-22vw, 0, 0) rotate(12deg); }
