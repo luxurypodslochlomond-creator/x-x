@@ -1,21 +1,22 @@
 /* ── THE HANDS THIS ROOM STANDS ON ────────────────────────────────────────────────
-   Brian, 24 November: "why does look old visually and squashed bro, why not coolasfuck."
+   Brian, 24 November: "why is font old and feels like magazine bro, not coolasfuck —
+   what am I saying wrong bro."
 
-   Because it was built like a museum information panel: every plate forced to one column
-   width, so a landscape engraving sitting beside a tall one read as pressed flat, all
-   six given identical authority, each under a row of tiny capital letters. Correct, and
-   dead. That is the difference between a record and a caption sheet, and it is not a
-   matter of taste — it was the wrong shape for the subject.
+   Nothing. He was reading the page correctly and the page was wrong. The face was never
+   the problem: the problem was the italics on every title and the letterspaced capitals
+   on every credit, which is the exact typographic grammar of a printed magazine feature.
+   Two conventions, doing more to date the band than the engravings ever were.
 
-   This is a wall instead. The plates share a HEIGHT and never a width, which is how
-   prints have been hung for three hundred years: a wide plate runs wide, a tall plate
-   stands tall, and no picture is ever stretched into a column to satisfy a grid. One
-   hairline runs above the whole band — the level — and the plates hang from it. The
-   tint behind each plate is a mount, not a card: it holds a picture of any shape at any
-   proportion without cropping a single line of it.
+   Both are gone. Titles are upright in the record's own grotesque, credits are sentence
+   case, and the only letterspaced capitals left in the band are the one kicker the
+   lineage heading above already uses — a label, not a decoration. The plates are now the
+   only old thing in the room, which is the point: age should come from the pictures, not
+   from the type pretending to be old.
 
-   The one red in the band is the kicker, because the lineage heading above already
-   spends the record's red on the same word: a label, never a decoration. */
+   The plates share a HEIGHT and never a width, which is how prints have been hung for
+   three hundred years: a wide plate runs wide, a tall plate stands tall, nothing is
+   stretched into a column. One hairline runs above the band — the level — and they hang
+   from it. The tint behind each is a mount, not a card. */
 #root .record-cartoon-field .cartoon-first-hands {
   padding: 2.2rem 0 1rem;
   border-top: 2px solid rgb(var(--record-ink));
@@ -50,6 +51,21 @@
   line-height: 1.6;
 }
 
+/* The key to the whole band: the eight moves, named once, in the record's own voice. */
+.first-hands-key {
+  max-width: 65ch;
+  margin: .8rem 0 0;
+  font-family: var(--font-reading);
+  font-size: .95rem;
+  line-height: 1.6;
+  color: rgb(var(--record-ink));
+}
+.first-hands-key b {
+  font-family: var(--font-record-ui);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
 /* The level, and the plates hanging from it. */
 .first-hands-frieze {
   display: flex;
@@ -67,14 +83,35 @@
   margin: 0;
 }
 
-/* THE FIX FOR "SQUASHED": a shared height, never a shared width. `contain` keeps the
-   engraving's own proportions — the mount gives way, the drawing does not. */
+/* The plate is a button, because it opens — and it should look like a print on a wall,
+   not like a control. No border, no background, no shadow: only the cursor and a
+   slightly deeper mount on hover say it can be touched. */
+.first-hand-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  text-align: left;
+}
+.first-hand-open:focus-visible {
+  outline: 2px solid rgb(var(--record-red));
+  outline-offset: 3px;
+}
+
+/* A shared height, never a shared width. `contain` keeps each engraving's own
+   proportions — the mount gives way, the drawing does not. */
 .first-hand-frame {
   display: flex;
   align-items: center;
   justify-content: center;
   height: clamp(13rem, 22vw, 19rem);
   background: rgb(var(--record-ink) / .05);
+  transition: background-color .18s ease;
+}
+.first-hand-open:hover .first-hand-frame {
+  background: rgb(var(--record-ink) / .09);
 }
 
 .first-hand img {
@@ -84,12 +121,24 @@
   object-fit: contain;
 }
 
-.first-hand-name {
-  margin: .8rem 0 0;
-  font-family: var(--font-heading);
-  font-size: 1.08rem;
+/* The move, stamped in the machine's own hand. Lowercase on purpose: a bold lowercase
+   monospace word reads as a stamp pressed onto the sheet, where capital letters would
+   read as a label printed by a magazine. */
+.first-hand-move {
+  margin: .75rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .74rem;
   font-weight: 700;
-  letter-spacing: -.01em;
+  letter-spacing: .02em;
+  color: rgb(var(--record-ink));
+}
+
+.first-hand-name {
+  margin: .25rem 0 0;
+  font-family: var(--font-heading);
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
   line-height: 1.2;
 }
 
@@ -97,16 +146,17 @@
   margin: .15rem 0 0;
   font-family: var(--font-record-ui);
   font-size: .72rem;
-  letter-spacing: .08em;
+  letter-spacing: 0;
   color: rgb(var(--record-muted));
 }
 
+/* Upright, in the grotesque — the italic serif title was the magazine tell. */
 .first-hand-work {
-  margin: .3rem 0 0;
-  font-family: var(--font-reading);
-  font-style: italic;
-  font-size: .9rem;
-  line-height: 1.4;
+  margin: .35rem 0 0;
+  font-family: var(--font-record-ui);
+  font-style: normal;
+  font-size: .82rem;
+  line-height: 1.45;
 }
 
 .first-hand-line {
@@ -119,9 +169,9 @@
 .first-hand-credit {
   margin: .7rem 0 0;
   font-family: var(--font-record-ui);
-  font-size: .68rem;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+  font-size: .7rem;
+  letter-spacing: 0;
+  text-transform: none;
   color: rgb(var(--record-muted));
 }
 
@@ -140,7 +190,34 @@
   color: rgb(var(--record-muted));
 }
 
-/* A phone cannot hang six prints in a row without shrinking them to stamps, so on a
+/* ── THE LARGER VIEW, WHICH STOPS WHERE THE FILE STOPS ───────────────────────────
+   Two of these files are small. Opening them wider than they are would invent detail
+   nobody drew, so the width is capped in the markup at the size of the copy actually
+   held, and the caption says so in plain words. The image is never cropped either:
+   `contain` and `auto` keep the plate's own shape. */
+.first-hands-viewer-img {
+  display: block;
+  margin: 1rem auto 0;
+  width: auto;
+  height: auto;
+  max-height: 74vh;
+  object-fit: contain;
+}
+
+.first-hands-honest {
+  margin: .9rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .76rem;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
+.first-hands-honest a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+/* A phone cannot hang eight prints in a row without shrinking them to stamps, so on a
    narrow glass the wall becomes one line under the thumb — the same rail the record's
    own navigation already uses, with the same rule: nothing hidden, nothing cropped. */
 @media (max-width: 899px) {
