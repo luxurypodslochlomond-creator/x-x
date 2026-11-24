@@ -26,6 +26,7 @@
     background: transparent;
     box-shadow: none;
   }
+  #root .record-home-page .record-entry-plate[data-has-image="false"] { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'copy'; }
   #root .record-home-page .record-entry-image { display: contents; }
   #root .record-home-page .record-entry-image > img { grid-area: art; position: static; inline-size: 5rem; block-size: 5rem; object-fit: cover; }
   #root .record-home-page .record-entry-image > span { grid-area: credit; position: static; padding: 0; background: none; color: rgb(var(--record-muted)); font-size: .75rem !important; line-height: 1.4 !important; letter-spacing: 0 !important; text-transform: none; }

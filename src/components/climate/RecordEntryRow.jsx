@@ -10,10 +10,11 @@ export default function RecordEntryRow({ item, index = 0, flip = false }) {
   return (
     <Link
       to={`/ClimateDetail/${item.entry_type}/${item.id}`}
-      className={`group grid items-start gap-7 border-t border-record-ink/25 py-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${hasImage ? 'grid-cols-[minmax(0,6fr)_minmax(0,5fr)]' : 'grid-cols-1'}`}
+      data-has-image={hasImage}
+      className={`record-entry-row group grid items-start gap-7 border-t border-record-ink/25 py-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${hasImage ? 'grid-cols-[minmax(0,6fr)_minmax(0,5fr)]' : 'grid-cols-1'}`}
     >
       {hasImage && <RecordEntryPicture image={image} className={flip ? 'order-2' : 'order-1'} />}
-      <div className={`min-w-0 self-center ${hasImage && flip ? 'order-1' : 'order-2'}`}>
+      <div className={`record-row-copy min-w-0 self-center ${hasImage && flip ? 'order-1' : 'order-2'}`}>
         <div className="flex items-center gap-2.5">
           <span className="text-[11px] tabular-nums text-record-muted">{String(index + 1).padStart(2, '0')}</span>
           <RecordEntryKind item={item} />
@@ -25,6 +26,7 @@ export default function RecordEntryRow({ item, index = 0, flip = false }) {
             {[item.source_name, item.country].filter(Boolean).join(' · ')}
           </p>
         )}
+        {!hasImage && <span className="mt-3 block text-xs text-record-muted">{image.missingLabel}</span>}
       </div>
     </Link>
   );

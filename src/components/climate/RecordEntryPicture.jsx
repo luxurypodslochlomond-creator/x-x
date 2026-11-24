@@ -17,7 +17,7 @@ export default function RecordEntryPicture({ image, className = '', priority = f
           className="absolute inset-0 h-full w-full object-cover"
         />
       </div>
-      <figcaption className="mt-1.5 text-[11px] leading-relaxed text-record-muted">
+      <figcaption className="record-picture-credit mt-1.5 text-[11px] leading-relaxed text-record-muted">
         {image.borrowed && <span>{image.label} · </span>}
         {image.credit || 'Image credit not supplied'}
       </figcaption>

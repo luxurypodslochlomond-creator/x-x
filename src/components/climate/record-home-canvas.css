@@ -1,0 +1,98 @@
+/* Desktop front page: the painting stays whole. Only text and controls own paper.
+   Explicit home scoping keeps the other rooms, the footer and handset layout intact. */
+@media screen and (min-width: 1024px) {
+  .climate-record.record-home-field .record-home-page .record-home-voice {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-block: 3rem;
+  }
+  .climate-record.record-home-field .record-home-title-block { order: -1; margin-top: 0; }
+  .climate-record.record-home-field .record-home-quotation { margin-block: 0; }
+  .climate-record.record-home-field .record-home-flow > .record-home-voice-band { order: -3; }
+  .climate-record.record-home-field .record-home-flow > .record-home-doors { order: -2; }
+  .climate-record.record-home-field .record-home-flow > .record-home-photographs { order: -1; }
+
+  .climate-record.record-home-field .record-home-page :is(.record-cover-plate, .record-home-doors, .record-entry-sections, .record-home-sections, .record-image-section) {
+    background: transparent;
+  }
+  .climate-record.record-home-field .record-home-page .record-room-nav {
+    background: rgb(var(--record-signal));
+    border-block: 1px solid rgb(var(--record-ink) / .3);
+  }
+  .climate-record.record-home-field .record-home-page .record-room-count { color: rgb(var(--record-ink) / .7); }
+  .climate-record.record-home-field .record-home-page .record-room-link[aria-pressed="true"] {
+    background: rgb(var(--record-mark) / .1);
+    box-shadow: inset 0 -3px 0 rgb(var(--record-mark));
+  }
+
+  .climate-record.record-home-field .record-home-page .record-cover-plate { border-top: 0; padding-block: 1rem; }
+  .climate-record.record-home-field .record-home-photographs figcaption {
+    padding: .5rem .65rem;
+    background: rgb(var(--record-paper));
+  }
+  .climate-record.record-home-field .record-cover-plate > div > p {
+    width: fit-content;
+    padding: .35rem .65rem;
+    background: rgb(var(--record-paper));
+  }
+  .climate-record.record-home-field .record-home-photographs .climate-photo-rail + p {
+    width: fit-content;
+    padding: .35rem .65rem;
+    background: rgb(var(--record-paper));
+  }
+  .climate-record.record-home-field .record-home-subjects { margin: 1.5rem 2.5rem; padding: 1rem; background: rgb(var(--record-paper)); }
+  .climate-record.record-home-field .record-home-entry-toolbar { margin: 2rem 2.5rem; padding: 1.25rem; background: rgb(var(--record-paper)); }
+
+  /* No tall pale section slabs, including the old 88% wash over every crisis. */
+  .climate-record.record-home-field .record-home-page .record-image-section,
+  .climate-record.record-home-field .record-home-page .record-home-sections > section {
+    margin: 2.5rem 0;
+    padding: 0 2.5rem;
+    border: 0;
+    background: transparent;
+  }
+  .climate-record.record-home-field .record-home-page .record-section-heading {
+    width: fit-content;
+    max-width: 100%;
+    gap: 1.75rem;
+    padding: .75rem 1rem;
+    margin-bottom: 1.75rem;
+    border: 0;
+    background: rgb(var(--record-signal));
+    color: rgb(var(--record-ink));
+  }
+  .climate-record.record-home-field .record-home-page .record-section-heading h2 { color: rgb(var(--record-ink)); }
+  .climate-record.record-home-field .record-home-page .record-entry-row {
+    padding-block: 0;
+    margin-block: 0 2.5rem;
+    border: 0;
+    background: transparent;
+  }
+  .climate-record.record-home-field .record-row-copy,
+  .climate-record.record-home-field .record-holding-copy {
+    padding: 1.25rem;
+    margin-top: 0;
+    border-top: 3px solid rgb(var(--record-signal));
+    background: rgb(var(--record-paper));
+  }
+  .climate-record.record-home-field .record-entry-row[data-has-image="false"] .record-row-copy { width: min(100%, 44rem); }
+  .climate-record.record-home-field .record-picture-credit {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 0;
+    padding: .35rem .6rem;
+    background: rgb(var(--record-paper));
+  }
+  .climate-record.record-home-field .record-home-sections > section > p {
+    width: fit-content;
+    max-width: 65ch;
+    padding: .6rem .8rem;
+    background: rgb(var(--record-paper));
+  }
+  .climate-record.record-home-field .record-home-page .record-home-sections > .record-home-governance {
+    padding: 2.5rem;
+    background: rgb(var(--record-ink));
+  }
+  .climate-record.record-home-field .record-home-sections > .record-home-governance > p { padding: 0; background: transparent; }
+}

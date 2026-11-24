@@ -40,6 +40,7 @@ export default function useRecordImage(entry, { entryOnly = false } = {}) {
   return {
     ...image,
     borrowed: isBorrowed(image),
+    missingLabel: entry?.image_url ? 'Photograph unavailable' : 'No photograph supplied',
     label: image?.src === cover || image?.src === IMAGES.mangroves ? 'Record artwork' : 'Illustrative photograph',
     onError: () => {
       if (image) setFailed(previous => previous.includes(image.src) ? previous : [...previous, image.src]);

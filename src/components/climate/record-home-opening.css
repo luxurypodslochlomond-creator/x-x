@@ -42,30 +42,18 @@ html .climate-record.record-home-field .record-book {
   text-transform: uppercase;
 }
 .record-home-page .record-home-pass .record-share-inline:active { background: rgb(var(--cartoon-sun)); }
-/* Photographs, the room doors and subjects form one connected, legible sheet. */
-.record-pages .record-home-page :is(.record-cover-plate, .record-home-doors, .record-home-subjects, .record-home-entry-toolbar, .record-room-nav) {
-  background-color: rgb(var(--record-paper));
+/* Handset reading surfaces stay unchanged. Desktop surfaces have one owner in
+   record-home-canvas.css: transparent layout, solid paper only beneath actual text. */
+@media (max-width: 1023px) {
+  .record-pages .record-home-page :is(.record-cover-plate, .record-home-doors, .record-home-subjects, .record-home-entry-toolbar, .record-room-nav) { background-color: rgb(var(--record-paper)); }
+  .record-pages .record-home-page :is(.record-entry-sections, .record-home-sections) { background-color: transparent; }
+  .record-pages .record-home-page .record-image-section,
+  .record-pages .record-home-page .record-home-sections > section { margin-block: 0; padding-block: 2rem; background-color: rgb(var(--record-paper) / .88); border-top: 3px solid rgb(var(--record-mark)); }
+  .record-pages .record-home-page .record-home-sections > section + section { border-top-width: 1px; border-top-color: rgb(var(--record-ink) / .14); }
+  .record-pages .record-home-page .record-entry-sections > :is(button, .flex, .text-center),
+  .record-pages .record-home-page :is(.record-entry-plate, .record-media-mount) { background-color: rgb(var(--record-paper)); }
 }
-.record-pages .record-home-page :is(.record-entry-sections, .record-home-sections) {
-  background-color: transparent;
-}
-/* Consistent breaks reveal the full-colour ground. No painting is mixed into reading text. */
-.record-pages .record-home-page .record-image-section,
-.record-pages .record-home-page .record-home-sections > section {
-  margin-block: 0;
-  padding-block: 2rem;
-  background-color: rgb(var(--record-paper) / .88);
-  border-top: 3px solid rgb(var(--record-mark));
-}
-/* One rule per section, not a new white card: the page reads as one sheet laid on the painting. */
-.record-pages .record-home-page .record-home-sections > section + section { border-top-width: 1px; border-top-color: rgb(var(--record-ink) / .14); }
-.record-pages .record-home-page .record-entry-sections > :is(button, .flex, .text-center),
-.record-pages .record-home-page :is(.record-entry-plate, .record-media-mount) {
-  background-color: rgb(var(--record-paper));
-}
-.record-pages .record-home-page .record-home-governance {
-  background-color: rgb(var(--record-ink));
-}
+.record-pages .record-home-page .record-home-sections > .record-home-governance { background-color: rgb(var(--record-ink)); }
 @media (min-width: 1024px) {
   .record-pages .record-home-page .record-opening-title {
     font-size: clamp(42px, 4vw, 56px);

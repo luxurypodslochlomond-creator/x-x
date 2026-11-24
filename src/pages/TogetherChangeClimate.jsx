@@ -22,6 +22,7 @@ import RecordStandfirst from '@/components/climate/RecordStandfirst';
 import RecordAddPlate from '@/components/climate/RecordAddPlate';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkGroups } from '@/components/climate/RoomMarks';
 import '@/components/climate/record-mobile-index.css';
+import '@/components/climate/record-home-canvas.css';
 
 
 // The four ways to add something now live in RecordAddPlate: one plate, the record's own

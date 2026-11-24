@@ -9,7 +9,7 @@ export default function RecordHoldingLead({ item }) {
   return (
     <Link to={`/ClimateDetail/${item.entry_type}/${item.id}`} className="group block min-w-0">
       <RecordEntryPicture image={image} priority />
-      <div className="mt-3">
+      <div className="record-holding-copy mt-3">
         <RecordEntryKind item={item} />
         <h3 className="record-holding-title mt-2 leading-tight text-record-ink group-hover:text-record-red">{item.title}</h3>
         {item.summary && <p className="mt-3 max-w-[54ch] text-base leading-relaxed text-record-ink/80">{item.summary}</p>}

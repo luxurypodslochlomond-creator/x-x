@@ -12,7 +12,7 @@ export default function RecordHomeVoice({ copy }) {
       aria-labelledby="record-home-title"
       className="record-home-voice relative z-10 px-5 py-6 text-center record-header-type text-record-bone lg:px-10 lg:py-10"
     >
-      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-3">
+      <div className="record-home-quotation mx-auto flex max-w-[760px] flex-col items-center gap-3">
         <p className="record-header-type text-xs uppercase text-record-bone/75">A voice on the record</p>
         <PeaceBell size={36} color="rgb(var(--cartoon-sun))" href="https://webtv.un.org/en/asset/k13/k13z7vjtvs" />
         <blockquote className="record-header-type uppercase not-italic text-cartoon-sun">
@@ -26,7 +26,7 @@ export default function RecordHomeVoice({ copy }) {
         </div>
       </div>
 
-      <div className="mx-auto mt-6 max-w-[900px] lg:mt-8">
+      <div className="record-home-title-block mx-auto mt-6 max-w-[900px] lg:mt-8">
         <h1 id="record-home-title" className="record-home-title record-opening-title">
           {copy.title_a}{' '}
           <span className="text-cartoon-sun">{copy.title_b}</span>{' '}
