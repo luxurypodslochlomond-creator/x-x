@@ -10,7 +10,7 @@
 // what a raw "api/functions/ogRedirect?page=..." looks like arriving in a chat. So the record
 // draws its own card as real PNG bytes, at the 1.91:1 shape a link preview actually wants:
 // paper, one signal pulse, no lettering that could be misspelled.
-const RECORD_CARD = '/api/functions/serveClimateIcon?w=1200&h=630';
+const RECORD_CARD = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/cc94d332d_record-cover-mobile.png';
 
 const PAGE_META = {
 
@@ -147,14 +147,18 @@ const PAGE_META = {
   // ── TOGETHER WE CAN CHANGE CLIMATE — Janine Selendy's record ────────────
   TogetherChangeClimate: {
     title: 'Together We Can Change Climate — Record of the Time',
-    description: 'A public record of climate emergencies and the positive actions that work. Verified solutions, real actions, every language on Earth, nobody left behind.',
+    description: 'Climate emergencies. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.',
     image: RECORD_CARD,
+    imageWidth: 1600,
+    imageHeight: 901,
     color: '#0f5f7a',
   },
   ClimatePlatform: {
     title: 'Together We Can Change Climate — Record of the Time',
-    description: 'A public record of climate emergencies and the positive actions that work. Verified solutions, real actions, every language on Earth, nobody left behind.',
+    description: 'Climate emergencies. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.',
     image: RECORD_CARD,
+    imageWidth: 1600,
+    imageHeight: 901,
     color: '#0f5f7a',
   },
   ClimateMap: {
@@ -192,7 +196,7 @@ const PAGE_META = {
   }
 };
 
-Deno.serve(async (req) => {
+export default async function(req) {
   const url = new URL(req.url);
   const page = url.searchParams.get('page') || 'default';
   const host = req.headers.get('host') || 'uf51.love';
@@ -270,4 +274,4 @@ Deno.serve(async (req) => {
       'Cache-Control': 'public, max-age=300',
     }
   });
-});
+}

@@ -5,20 +5,7 @@ import { buildRecordShareCard } from '@/components/climate/shareCardImage';
 import { RECORD_LINK, RECORD_SHARE_TITLE, RECORD_SHARE_LINE } from '@/components/climate/shareRecordCard';
 import '@/components/climate/record-home-opening.css';
 
-// ── A VOICE, AND THEN THE SENTENCE, ON THE PAINTING ITSELF ─────────────────────
-// The front page used to print the painting twice: once as a framed plate under the
-// masthead, and once again, screened, behind Jane's voice — and the record's own sentence
-// sat under the second copy, so a reader met the same picture twice before meeting the
-// record. Brian, 24 November: "sentence together we can change is just below dr Jane and
-// not another image of our coolasfuck recited image."
-//
-// So there is one painting now, and it is the ground of the whole page (see
-// record-home-opening.css). Jane speaks on it, and the sentence that names the record
-// comes directly under her, in the same room, with nothing printed between them.
-//
-// There was a second share chip here for one turn, for the painting itself. It sat on the
-// dark band as a pale rectangle of its own and Brian called it: the record already has one
-// way to pass it on, under the photographs, and two buttons in one screenful is a queue.
+// One painting, Jane's words, the record's own sentence, and one way to pass it on.
 export default function RecordHomeVoice({ copy }) {
   return (
     <section
