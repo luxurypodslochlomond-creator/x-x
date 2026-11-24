@@ -11,6 +11,17 @@
    its own: the painting breathes through the page and no word is ever read on a
    photograph. */
 .climate-record .record-book { background-color: rgb(var(--record-paper) / .9); }
+
+/* ── THE SHEET USES THE SCREEN IT IS STANDING ON ─────────────────────────────────
+   At a desk the book was capped at 1080 pixels, which on a wide window left a third of
+   the glass empty and made a record of the world look like a slide with margins. The
+   sheet is wider now, so pictures and sections have room to sit together instead of
+   stacking as separate panels. The prose is not stretched with it: every paragraph keeps
+   its own 65-character measure (record-reading.css), because a line longer than that is
+   the one thing a wide screen genuinely cannot do well. */
+@media screen and (min-width: 1024px) {
+  .climate-record .record-book { max-width: min(1360px, 94vw); }
+}
 .climate-record .rec-mast-doors { padding-block: .35rem; }
 .climate-record .rec-mast-doors .rec-art-door { border-radius: 10px; padding-block: .35rem; gap: .22rem; }
 .climate-record .rec-mast-doors .rec-art-caption { font-size: 10px; line-height: 1.2; font-weight: 700; letter-spacing: 0; text-transform: none; }

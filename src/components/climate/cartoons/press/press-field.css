@@ -62,7 +62,7 @@
   #root .record-cartoon-field .press-room-inner > :first-child { margin-top: 0; }
   /* One measure for the whole record: the Wall was a wider sheet than every other room,
      so walking into it moved the page under the reader's eyes. */
-  #root .record-cartoon-field .record-book { max-width: min(1080px, 90vw); }
+  #root .record-cartoon-field .record-book { max-width: min(1360px, 94vw); }
 }
 
 /* ── THE BAND THAT SAYS THE ROOM'S NAME NOW REACHES THE RED ─────────────────────
