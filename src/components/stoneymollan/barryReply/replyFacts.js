@@ -13,9 +13,19 @@ export const HIS_PAPERS = [
     src: 'Response, section 1 and map',
   },
   {
-    label: 'His own guidance sets 10 m, not 5 m',
-    text: 'He gives native broadleaf a 5 m setback. Table 4 of the guidance he enclosed sets a 10 m minimum along permanent watercourses under 2 m wide, and its footnote says narrower is "highly unlikely to be appropriate" inside a private supply catchment. Only hinge or inverted mounding and direct planting of native trees are allowed in the buffer. The letter asks what ground preparation he proposes inside 10 m.',
-    src: 'Guidance p.23, Table 4',
+    label: 'There are two buffers, and the big one is 50 m',
+    text: 'For a surface water supply the guidance sets a 50 m semi-circular buffer centred on the abstraction point, covering only the land upstream of it, which then transitions to the standard 10 or 20 m along the watercourse according to channel width. His 135 m figure would satisfy the 50 m if it is plotted — so the letter does not dispute it, it asks for the plan. The 10 or 20 m along the burn is the live question.',
+    src: 'Guidance, Protection buffers',
+  },
+  {
+    label: '10 m is the rule; 5 m needs a stated basis',
+    text: 'The table sets 10 m on both sides of all permanent watercourses with a channel less than 2 m wide. The UKFS footnote does allow narrower, but only along minor watercourses with a channel less than 1 m wide, especially on steep ground. So 5 m is not automatically wrong. The letter therefore quotes the 10 m rule and asks him for the basis, the channel width and where it was measured. It does not accuse him of breaching anything, and it does not hand him the footnote.',
+    src: 'Guidance table; UKFS practice guide',
+  },
+  {
+    label: 'What is allowed inside a buffer',
+    text: 'Only hinge mounding, inverted mounding, and direct planting of native trees and shrubs and other ecologically appropriate broadleaved trees to create riparian woodland. Machine mounding must stop within 2 m of a watercourse and within 5 m of the abstraction point. That is why the letter asks what ground preparation he proposes, and what he means by works that are not "significant".',
+    src: 'Guidance, Protective buffer areas',
   },
   {
     label: 'He narrowed his own promise',

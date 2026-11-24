@@ -33,23 +33,23 @@ Three questions in my objection of 1 September have not been answered:
 
 For each of the eleven headings in my objection, please also tell me whether it has changed the design, been accepted without change, or been rejected, and on what basis.
 
-2. THE BURN: WHAT YOUR OWN MAP SHOWS
+2. THE BURN: WHAT YOUR MAP AND YOUR OWN GUIDANCE SHOW
 
 Your map of 19 November is headed "PWS Catchment Area" and gives the catchment as 15.15 hectares. Your table puts 10.95 hectares of it, about 72 per cent, as conifer (0.71 ha) or native mixed broadleaf (10.24 ha), with 26 per cent open ground. The map does not say which of that is existing woodland and which is proposed. Please say.
 
 Your response says the proposal "does not involve complete afforestation of the catchment". It is not 100 per cent. On your own figures it is nearly three-quarters.
 
-The guidance you enclosed says that woodland creation can reduce the water yield available to a private supply (p.7), that small surface supplies are among the most vulnerable (p.12), and that the location of the abstraction point is crucial (p.13). Your response says that broadleaf woodland "in some situations" may have a water balance "broadly comparable" to existing vegetation. Please send the water yield assessment for this catchment. If there is not one, please say so.
+The buffers. The guidance you enclosed sets two for a surface water supply: a 50 metre semi-circular buffer centred on the abstraction point and covering only the land upstream of it, which then transitions to the standard 10 or 20 metre buffer along the watercourse according to channel width; and, along the watercourse itself, 10 metres on both sides of all permanent watercourses with a channel less than 2 metres wide. Inside a buffer the only forestry activities it allows are hinge mounding, inverted mounding, and direct planting of native trees and shrubs and other ecologically appropriate broadleaved trees to create riparian woodland, and machine mounding must stop within 2 metres of a watercourse and within 5 metres of the abstraction point.
 
-Your map shows the supply as a single symbol. It does not show the pipeline, the weir, the settling tank, or the access route along the broken blue line on my Title Plan. The guidance asks for all of these to be mapped (p.20, Table 2; p.21, mapping checklist) and sets a 5 metre strip either side of the pipes in which there is to be no forestry activity or tree planting (p.23, Table 4). Please send the plan with those features plotted and the strips shown, and the record of how the intake on your map was located.
+Please show the 50 metre buffer plotted on a plan, together with the pipeline, the weir, the settling tank and the access route along the broken blue line on my Title Plan. The guidance records that supply infrastructure is often not visible and lists blue supply pipes, associated pipework, collection tanks and storage tanks among the things that are vulnerable to physical damage. Your map shows the supply as a single symbol and none of these.
 
-The weir needs digging out about once a year and the settling tank was last emptied in 2019, so the access route has to stay usable through the planting and through a deer fence. Please say where the gates will be.
+The setback. You propose 10 metres from the watercourse for conifer and 5 metres for native broadleaf. The guidance's table sets 10 metres along both sides of all permanent watercourses under 2 metres wide. If you consider a narrower width appropriate here, please state the basis for that, the channel width you have relied on, and the point on the burn at which it was measured.
 
-Your response sets conifer back 10 metres from the watercourse and native broadleaf 5 metres. Table 4 of your guidance sets a 10 metre minimum along permanent watercourses under 2 metres wide, and says narrower widths are "highly unlikely to be appropriate" within a private supply catchment. It allows only hinge or inverted mounding and direct planting of native trees inside that buffer, and requires mounding to stop within 2 metres of the watercourse and 5 metres of the abstraction point. Please say what ground preparation is proposed inside 10 metres of the burn.
+Ground preparation. Your response rules out only "significant" engineering, excavation or drainage. Please list the works you do not consider significant: mounding, drains, fence posts, tracks and crossings. Your map marks a ford on the track through Cameron Wood, and the guidance deals with watercourse crossings during operations. Please confirm whether any crossing of the burn will be used, and where.
 
-Your response rules out only "significant" engineering, excavation or drainage. Please list the works that are not significant: mounding, drains, fence posting, tracks and crossings. Your map marks a ford on the track through Cameron Wood. The guidance says not to ford streams within a private supply catchment (p.29). Please confirm whether any crossing of the burn will be used.
+Water yield. The guidance says that poor forest management can in certain circumstances reduce the volume of a water supply, and that direct surface water abstractions are highly vulnerable to land use change. Please send the water yield assessment for this catchment. If there is not one, please say so.
 
-Please confirm that baseline raw-water turbidity samples will be taken at the abstraction point before any works start (p.22, Table 3; p.24), that I will be given notice, and send the contingency plan and RAMS, with an emergency contact and what replaces the supply if it is interrupted (p.26).
+Monitoring. Please confirm what baseline water quality sampling will be taken at the abstraction point before any works begin, that I will be given notice of the works, and send the method statement and contingency plan, with an emergency contact and what replaces the supply if it is interrupted.
 
 3. THE COTTAGE'S WATER: THE MAINS
 
@@ -77,18 +77,11 @@ Please send:
 - the date and scope of the pre-works inspection, who carries it out, whether it will record the buried pipe, and who repairs and pays for damage;
 - at least 14 days' notice to me of the start of works and of every abnormal load.
 
-5. SM6341: YOUR MAP MARKS IT
+5. THE SCHEDULED MONUMENTS
 
-Your map marks scheduled monuments. A S.A.M. symbol sits at Long Cairn, at roughly NS 371 821 by your grid. That matches Historic Environment Scotland's grid reference for SM6341 (NS 37132 82135), the Neolithic chambered cairn scheduled on 12 April 1996. Your map also marks a second S.A.M. at Round Hill and a U.A.M. near Stoneymollan Muir. These monuments are known to you.
+Your map marks them: a S.A.M. at Long Cairn, which corresponds to SM6341, a second S.A.M. at Round Hill, and a U.A.M. near Stoneymollan Muir. Two scheduled monument consents have been granted on SM6341, both without conditions, in January and December 2024, and trees have already blown onto the cairn.
 
-What the map does not show is the scheduled area itself, which HES describes as up to 110 metres by 45 metres around the cairn. Two scheduled monument consents have been granted on SM6341, both without conditions: on 18 January 2024 to remove windblow on the cairn and trees at risk of blowing onto it, and on 19 December 2024 to fell trees within the scheduled area, with a restock map. Trees have already blown onto this monument.
-
-Please tell me:
-
-- whether the planting boundary, the deer fence, the extraction route or any planting enters the scheduled area of SM6341, or of the other monuments, shown on a plan;
-- whether scheduled monument consent has been applied for or granted for any part of the proposal, and what Historic Environment Scotland said as a consultee;
-- what the cultural heritage assessment says about windthrow risk to the monument from the proposed planting;
-- who carried out the 2024 felling in the scheduled area and under what felling permission, and if it was not Scottish Woodlands, please say so; and the felling permission reference for any felling already carried out in this area by or for Scottish Woodlands.
+Please confirm, on a plan, whether any planting, fence, extraction route or access enters the scheduled area of any of these monuments, and whether scheduled monument consent has been sought for any part of the proposal. Please also send the cultural heritage assessment and say what it concludes about windthrow risk to the monument, and give the felling permission reference for any felling already carried out in this area.
 
 6. THE SURVEYS, THE CONSULTATIONS AND THE REGISTER
 
