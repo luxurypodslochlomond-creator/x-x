@@ -84,17 +84,25 @@ export function RoomMarkAction({ size = 40, className = '' }) {
   );
 }
 
-// Groups — the same mass, cut in four. It used to be four blocks stood round a space, seen
-// from above, which is a picture of a meeting table: legible, and clip art in fifty years.
-// Quartered, it is the mass itself divided — the one room on this record whose subject is
-// other people rather than an idea, so one part of it is red.
+// Groups — the same mass with a room cut in it: a place held open, and one person in it.
+//
+// This is the second drawing of the day. The first quartered the mass into four panes with
+// the fourth in red — and Brian saw it in one glance: "groups icon same as explore." He was
+// right, and the fault was worse than a lookalike. The record's own Explore door is four
+// panes with the fourth in red, drawn in the same hand, so the front page was showing a
+// reader the same picture twice and meaning two different things by it.
+//
+// A mark has to survive one glance beside its neighbours, so this one is the only mark of
+// the four with a hole in it. The hole is the room; the red in it is a person. Nothing else
+// on the record is a frame, which is why it cannot be mistaken for one.
 export function RoomMarkGroups({ size = 40, className = '' }) {
   return (
     <svg {...FRAME} width={size} height={size} className={className}>
-      <rect x="3" y="3" width="15" height="15" {...MASS} />
-      <rect x="22" y="3" width="15" height="15" {...MASS} />
-      <rect x="3" y="22" width="15" height="15" {...MASS} />
-      <rect x="22" y="22" width="15" height="15" {...ACCENT} />
+      <rect x="3" y="3" width="34" height="12" {...MASS} />
+      <rect x="3" y="25" width="34" height="12" {...MASS} />
+      <rect x="3" y="15" width="12" height="10" {...MASS} />
+      <rect x="25" y="15" width="12" height="10" {...MASS} />
+      <rect x="15" y="15" width="10" height="10" {...ACCENT} />
     </svg>
   );
 }
