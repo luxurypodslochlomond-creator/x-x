@@ -48,9 +48,31 @@ export const HIS_PAPERS = [
     src: 'Map, S.A.M. and U.A.M. symbols',
   },
   {
+    label: 'The threshold that may not exist',
+    text: 'Afforestation: 20 hectares where no part of the land is a sensitive area. In a National Scenic Area, 2 hectares. In any OTHER sensitive area, no threshold at all. Sensitive areas include a scheduled monument, a National Park, an SSSI, a European site, and deep peat over 60 per cent organic matter and over 50 cm. Work in the past five years on adjacent land counts towards the area. His map marks scheduled monuments, his response admits peat over 50 cm was excluded "where required", and felling happened in 2024. Any one of those can remove the threshold entirely, which turns a design argument into a statutory one.',
+    src: 'Scottish Forestry, Forestry EIA',
+    href: 'https://www.forestry.gov.scot/forestry-environmental-impact-assessment',
+  },
+  {
+    label: 'The Land Information Search',
+    text: 'Scottish Forestry runs a free public search that reports every sensitivity on a given area, with the body responsible for each. Asking whether one has been done is a question he cannot answer badly: if it has, it shows what he knew before he drew the design; if it has not, the design was drawn before the constraints were checked.',
+    src: 'Land Information Search',
+    href: 'http://map.environment.gov.scot/lis/LIS/Agri',
+  },
+  {
+    label: 'Eleven weeks',
+    text: 'Your objection went at 15:59 on 1 September 2026. His reply came at 14:35 on 19 November 2026. That is 79 days, or eleven weeks, and both times come from his own emails.',
+    src: 'Both emails',
+  },
+  {
     label: 'What he never mentions',
-    text: 'Scottish Water, the mains, the buried branch, the Scottish Forestry guidance on public supplies that his own enclosure points to, any red squirrel or badger survey, any water yield figure, and the access used for the works already carried out in this area.',
+    text: 'Scottish Water, the mains, the buried branch, the Scottish Forestry guidance on public supplies that his own enclosure points to, any red squirrel or badger survey, any water yield figure, any screening opinion, and the access used for the works already carried out in this area.',
     src: 'Whole response',
+  },
+  {
+    label: 'No name is used, and none is needed',
+    text: 'The alternative route is asked about through his own map title, Cameron Home Farm, and through the felling that has already happened. The question therefore arises from his documents. Nobody is named, nothing is attributed, and there is nothing for him to trace back.',
+    src: 'Builder note',
   },
   {
     label: 'The question he cannot answer comfortably',
