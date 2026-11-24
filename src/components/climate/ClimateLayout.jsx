@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import useRecordScroll from '@/components/climate/useRecordScroll';
-import { IMAGES, RECORD_COVER_MOBILE } from '@/components/climate/categoryImages';
+import { IMAGES, RECORD_COVER_MOBILE, RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
 import '@/components/climate/record-reading.css';
 import '@/components/climate/record-layout.css';
 import '@/components/climate/record-mobile.css';
@@ -120,7 +120,7 @@ export default function ClimateLayout({ children, currentPage }) {
     // by every platform that draws one, so a shared record arrived as a bare link.
     const card = isCartoonRoom
       ? CARTOON_COVER
-      : `${recordOrigin()}/api/functions/serveClimateIcon?w=1200&h=630`;
+      : RECORD_COVER_SCREEN;
     setMeta('name', 'description', pageDescription);
     // ── THE PHONE'S OWN STATUS BAR IS PART OF THE RECORD ────────────────────────
     // The manifest already says the record is printed in its red, but a manifest's
@@ -133,8 +133,8 @@ export default function ClimateLayout({ children, currentPage }) {
     setMeta('property', 'og:title', pageTitle);
     setMeta('property', 'og:description', pageDescription);
     setMeta('property', 'og:image', card);
-    setMeta('property', 'og:image:width', isCartoonRoom ? '682' : '1200');
-    setMeta('property', 'og:image:height', isCartoonRoom ? '1024' : '630');
+    setMeta('property', 'og:image:width', isCartoonRoom ? '682' : '1600');
+    setMeta('property', 'og:image:height', isCartoonRoom ? '1024' : '901');
     setMeta('property', 'og:type', 'website');
     setMeta('property', 'og:url', recordAddress());
     setMeta('name', 'twitter:card', 'summary_large_image');

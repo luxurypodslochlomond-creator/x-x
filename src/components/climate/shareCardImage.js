@@ -1,5 +1,6 @@
 import { recordOrigin } from './recordAddress';
-import { cardWords, cardTongueIsRightToLeft, RECORD_CARD_WORDS } from './cardTongue';
+import { RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
+import buildArtworkShare from '@/components/climate/buildArtworkShare';
 
 // ── RECORD OF THE TIME · THE WIRE CARD ──
 // One entry, drawn as a picture that can be sent anywhere. It carries the headline,
@@ -810,121 +811,8 @@ export async function buildWayInShareCard(card = {}, options = {}) {
   return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
 }
 
-// ── THE WHOLE RECORD, AS ONE CARD ─────────────────────────────────────────────
-// The entry cards each carry a single thing. This one carries the front door, because
-// the door is what a person actually sends: "look at this".
-//
-// Drawn in the same paper and the same band as every card the record already passes on,
-// so a picture arriving in a chat looks like it came out of the record rather than off
-// an advertiser's press. Nothing on it is a claim: no counts, no promises, no borrowed
-// quotation. Only what the record already says about itself, and the mark — said once,
-// large, in the red borrowed from the O Superman sleeve. The air around that mark is
-// part of it; a slogan underneath would be the record explaining its own covenant.
-//
-// Drawn on the reader's own device, so making it sends nothing anywhere.
-export async function buildRecordShareCard(options = {}) {
-  const origin = String(options.origin || recordOrigin() || '').replace(/^https?:\/\//, '');
-
-  // Drawn in the tongue the reader has chosen, not the one the record was written in.
-  const words = await cardWords(RECORD_CARD_WORDS);
-  const t = (line) => words[line] || line;
-
-  const canvas = document.createElement('canvas');
-  canvas.width = W;
-  canvas.height = H;
-  const ctx = canvas.getContext('2d');
-
-  const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
-
-  // Paper, cold scanline grain.
-  ctx.fillStyle = PAPER;
-  ctx.fillRect(0, 0, W, H);
-  ctx.fillStyle = 'rgba(20,18,16,0.035)';
-  for (let y = 0; y < H; y += 3) ctx.fillRect(0, y, W, 1);
-
-  // Epigraph band.
-  ctx.fillStyle = INK;
-  ctx.fillRect(0, 0, W, 74);
-  ctx.fillStyle = BONE;
-  ctx.globalAlpha = 0.7;
-  ctx.font = `700 15px ${MONO}`;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText(t('THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.'), W / 2, 38);
-  ctx.globalAlpha = 1;
-  ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.beginPath(); ctx.arc(W / 2 - 330, 38, 4, 0, Math.PI * 2); ctx.fill();
-  ctx.beginPath(); ctx.arc(W / 2 + 330, 38, 4, 0, Math.PI * 2); ctx.fill();
-
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'alphabetic';
-  // A tongue written right to left is shaped by the canvas, not guessed at by us.
-  if (cardTongueIsRightToLeft()) ctx.direction = 'rtl';
-
-  // What it is, and the one promise that costs the record nothing to keep.
-  let y = 132;
-  ctx.font = `700 20px ${MONO}`;
-  const badge = t('THE RECORD');
-  const badgeW = ctx.measureText(badge).width + 32;
-  ctx.fillStyle = INK;
-  ctx.fillRect(PAD, y - 24, badgeW, 36);
-  ctx.fillStyle = BONE;
-  ctx.fillText(badge, PAD + 16, y + 1);
-
-  const chip = t('EVERY LANGUAGE');
-  const chipW = ctx.measureText(chip).width + 28;
-  ctx.strokeStyle = 'rgba(20,18,16,0.45)';
-  ctx.lineWidth = 2;
-  ctx.strokeRect(PAD + badgeW + 12, y - 24, chipW, 36);
-  ctx.fillStyle = MUTED;
-  ctx.fillText(chip, PAD + badgeW + 26, y + 1);
-
-  // The record's own name, in the record's display voice — the loudest thing on the
-  // card, and the only thing a stranger has to read.
-  ctx.fillStyle = INK;
-  const titleLines = [t('TOGETHER WE CAN'), t('CHANGE CLIMATE')];
-  let titleSize = 104;
-  ctx.font = `700 ${titleSize}px ${DISPLAY}`;
-  while (titleLines.some(line => ctx.measureText(line).width > MAXW) && titleSize > 48) {
-    titleSize -= 2;
-    ctx.font = `700 ${titleSize}px ${DISPLAY}`;
-  }
-  drawLines(ctx, titleLines, PAD, y + 190, 112);
-  y = y + 190 + 112;
-
-  // The line it already prints under that name.
-  ctx.fillStyle = SIGNAL;
-  ctx.font = `700 30px ${DISPLAY}`;
-  ctx.fillText(t('VERIFIED SOLUTIONS · NO NOISE · NOBODY LEFT BEHIND'), PAD, y + 42);
-
-  // A rule, then the two lines the record says about itself.
-  ctx.fillStyle = 'rgba(20,18,16,0.2)';
-  ctx.fillRect(PAD, y + 84, MAXW, 2);
-  ctx.fillStyle = MUTED;
-  ctx.font = `700 21px ${MONO}`;
-  ctx.fillText(t('EVERY SYMBOL · EVERY NUMBER · EVERY TONGUE'), PAD, y + 134);
-  ctx.fillText(t('THE NOISE IS LOUD · THE RECORD IS LOUDER'), PAD, y + 174);
-
-  // The covenant, said once, big, in the borrowed red. Nothing under it.
-  ctx.fillStyle = MARK;
-  ctx.font = `700 150px ${MONO}`;
-  ctx.textAlign = 'center';
-  ctx.fillText('x = x', W / 2, y + 520);
-  ctx.textAlign = 'left';
-
-  // Footer — where it lives, so the address can be typed back in from a screenshot.
-  ctx.fillStyle = INK;
-  ctx.fillRect(0, FOOTER_TOP, W, 150);
-  ctx.fillStyle = SIGNAL_BRIGHT;
-  ctx.font = `700 24px ${MONO}`;
-  ctx.fillText(t('RECORD OF THE TIME'), PAD, FOOTER_TOP + 52);
-  ctx.fillStyle = BONE;
-  ctx.font = `700 18px ${MONO}`;
-  ctx.fillText(fitText(ctx, `${origin}/TogetherChangeClimate`, MAXW), PAD, FOOTER_TOP + 100);
-
-  // Signal edge, drawn last so it stays on top.
-  ctx.fillStyle = SIGNAL;
-  ctx.fillRect(0, 74, 8, H - 74);
-
-  return new Promise((resolve) => canvas.toBlob((blob) => resolve(blob), 'image/png'));
+// Share the existing phone-sized painting, not a second, text-heavy canvas design.
+// Its bytes are passed through unchanged; the description and link travel as the message.
+export async function buildRecordShareCard() {
+  return buildArtworkShare({ image_url: RECORD_COVER_SCREEN });
 }

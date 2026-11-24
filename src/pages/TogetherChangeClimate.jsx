@@ -460,8 +460,8 @@ export default function TogetherChangeClimate() {
         <RecordHomeVoice copy={t} />
       </div>
 
-      <div>
-        <RecordCoverPlate copy={t} />
+      <div className="record-home-photographs">
+        <RecordCoverPlate />
       </div>
 
       {/* ── THE FOUR ROOMS, UNDER THE PAINTING AND THE NAME ────────────────────────
@@ -575,7 +575,7 @@ export default function TogetherChangeClimate() {
       {/* ── TOOLBAR — the record's subjects on one side, the one way in with something of
              your own on the other. The search that reaches everything is the one pill in
              the header: one search, not two. ── */}
-      <div className="hidden sm:block px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
+      <div className="record-home-entry-toolbar hidden sm:block px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         {/* ── ONE LINE, ONE PLATE, FOUR WAYS TO ADD — IN THAT ORDER ────────────────────
             Brian, 19 November: "explore by theme squashed on desktop… doesn't feel like in
             right position for record… should add solution and crisis etc be underneath the

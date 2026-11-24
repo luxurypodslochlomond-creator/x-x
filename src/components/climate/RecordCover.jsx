@@ -43,7 +43,7 @@ export default function RecordCover({ position = 'center 34%', strength = 1, ble
     <source media="(max-width: 639px)" srcSet={image || (className.includes('record-ground') ? RECORD_COVER_MOBILE : RECORD_COVER_SCREEN)} />
     <img
       ref={markReady}
-      src={image || IMAGES.cover}
+      src={image || (className.includes('record-ground') ? RECORD_COVER_SCREEN : IMAGES.cover)}
       alt=""
       aria-hidden="true"
       loading={priority ? 'eager' : 'lazy'}

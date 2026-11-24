@@ -1,5 +1,8 @@
 import React from 'react';
 import PeaceBell from '@/components/climate/PeaceBell';
+import ShareCardButton from '@/components/climate/ShareCardButton';
+import { buildRecordShareCard } from '@/components/climate/shareCardImage';
+import { RECORD_LINK, RECORD_SHARE_TITLE, RECORD_SHARE_LINE } from '@/components/climate/shareRecordCard';
 import '@/components/climate/record-home-opening.css';
 
 // ── A VOICE, AND THEN THE SENTENCE, ON THE PAINTING ITSELF ─────────────────────
@@ -42,9 +45,10 @@ export default function RecordHomeVoice({ copy }) {
           <span className="text-cartoon-sun">{copy.title_b}</span>{' '}
           {copy.title_c}
         </h1>
-        <p className="record-header-type mt-3 text-xs uppercase tracking-[0.12em] text-record-bone/80">
-          {copy.service}
-        </p>
+        <div className="record-home-pass mt-3">
+          <span className="record-header-type text-xs uppercase tracking-[0.12em] text-record-bone">{copy.service}</span>
+          <ShareCardButton entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }} build={buildRecordShareCard} link={RECORD_LINK} description={RECORD_SHARE_LINE} label="Pass the record on" previewFirst includeMessage inline />
+        </div>
       </div>
     </section>
   );

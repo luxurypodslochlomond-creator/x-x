@@ -11,7 +11,7 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // file (an app's own browser). Where the sheet is refused altogether — the editor's
 // own frame — the card is put on screen to keep and pass on, never a silent download.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, previewFirst = false, inline = false }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, previewFirst = false, inline = false, includeMessage = false }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const link = givenLink || (build === buildWireShareCard && entry.id ? recordAddress(`/ClimateWireEntry/${entry.id}`) : recordAddress());
@@ -25,15 +25,16 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       const blob = await build(entry, { origin: recordOrigin() });
       if (!blob) throw new Error('The picture could not be prepared.');
       const extension = blob.type === 'image/jpeg' ? 'jpg' : blob.type === 'image/svg+xml' ? 'svg' : blob.type.split('/')[1] || 'png';
-      const file = new File([blob], `record-of-the-time-${entry.id || 'image'}.${extension}`, { type: blob.type || 'image/png' });
-      if (!previewFirst && navigator.canShare?.({ files: [file] })) {
+      const fileName = `record-of-the-time-${entry.id || 'image'}.${extension}`;
+      const file = typeof File === 'function' ? new File([blob], fileName, { type: blob.type || 'image/png' }) : null;
+      if (!previewFirst && file && navigator.share && navigator.canShare?.({ files: [file] })) {
         try {
           await navigator.share({ files: [file], title, text });
           setState('shared');
           return;
         } catch (error) { if (error?.name === 'AbortError') { setState('idle'); return; } }
       }
-      setCard({ blob, fileName: file.name });
+      setCard({ blob, fileName });
       setState('idle');
     } catch { setState('error'); }
   };
@@ -44,6 +45,6 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       <Icon size={17} aria-hidden="true" />{label}
     </button>
     {state === 'error' && <span className="record-share-error" role="alert">The image could not be prepared. Please try again.</span>}
-    <ShareCardPreview open={!!card} onClose={() => setCard(null)} blob={card?.blob} fileName={card?.fileName} link={link} headline={title} text={text} credit={entry.image_credit} />
+    <ShareCardPreview open={!!card} onClose={() => setCard(null)} blob={card?.blob} fileName={card?.fileName} link={link} headline={title} text={text} credit={entry.image_credit} includeMessage={includeMessage} />
   </>;
 }
