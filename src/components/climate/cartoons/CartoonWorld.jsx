@@ -4,6 +4,7 @@ import { WORLD_LINEAGE } from '@/components/climate/cartoons/cartoonWorldLineage
 import CartoonWorldGroup from '@/components/climate/cartoons/CartoonWorldGroup';
 import CartoonWorldList from '@/components/climate/cartoons/CartoonWorldList';
 import CartoonOdoiNote from '@/components/climate/cartoons/CartoonOdoiNote';
+import CartoonFirstHands from '@/components/climate/cartoons/CartoonFirstHands';
 import '@/components/climate/cartoons/cartoon-world.css';
 
 export default function CartoonWorld() {
@@ -31,7 +32,14 @@ export default function CartoonWorld() {
             {group.id === 'cartoon-inheritance' && <CartoonOdoiNote />}
           </CartoonWorldGroup>
         ))}
-        <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork from this reading list is reproduced here. Sources checked 20 November 2026. Some external archives contain adult or distressing material.</p>
+        {/* ── THE DEAD MAY BE PRINTED, THE LIVING MUST BE ASKED ────────────────
+            Brian, 24 November: "are we allowed visually to have something coolasfuck
+            beside each of them?" The answer splits cleanly, and the split is the
+            point rather than a legal technicality: five makers above are out of
+            copyright and are printed here with their credit and a link to the file
+            page; every living hand on the shelf is named and not reproduced. */}
+        <CartoonFirstHands />
+        <p className="cartoon-lineage-note">An editorial reading list, not a ranking, membership list or endorsement. These are different political traditions, not a claim that every artist is a climate campaigner. Summaries are this record’s; the linked sources let you check them. No artwork by anyone on this reading list is reproduced here: the only pictures printed in this room are out of copyright, and each one says so. Sources checked 20 November 2026. Some external archives contain adult or distressing material.</p>
         {/* ── ONE DOOR, AND IT IS INSIDE THE ROOM ─────────────────────────────
             This nav had three doors: the drawing desk, the map, and the method page. The two
             that left the room came off — Brian, 20 November: "can't have coolasfuck icons to

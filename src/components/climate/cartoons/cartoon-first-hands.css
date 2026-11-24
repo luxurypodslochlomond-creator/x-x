@@ -1,0 +1,126 @@
+/* ── THE HANDS THIS ROOM STANDS ON ────────────────────────────────────────────────
+   A plate section, not a gallery. Five engravings printed straight onto the room's own
+   paper with one hairline above each — the same grammar as the wall above them, so the
+   room does not change voice halfway down the page. No cards, no shadows, no frames:
+   the picture is the loud thing, and everything around it stays quiet enough to let it
+   be loud. That is the whole design decision, and it is the same one the wall makes. */
+#root .record-cartoon-field .cartoon-first-hands {
+  padding: 2.2rem 0 1rem;
+  border-top: 2px solid rgb(var(--record-ink));
+  scroll-margin-top: 16rem;
+}
+
+.first-hands-kicker {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+
+.first-hands-title {
+  margin: .45rem 0 0;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  line-height: .98 !important;
+  font-weight: 700 !important;
+  letter-spacing: -.035em !important;
+  text-transform: none;
+  color: rgb(var(--record-ink));
+}
+
+.first-hands-standfirst {
+  max-width: 65ch;
+  margin: .7rem 0 0;
+  font-family: var(--font-reading);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+/* Five plates. They are not equal in importance and not equal in shape, so the grid
+   gives them equal width and lets each keep its own height — the alternative is
+   cropping an engraving to a box, which is how a feed treats a picture. */
+.first-hands-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem 1.6rem;
+  margin: 1.6rem 0 0;
+  align-items: start;
+}
+@media (min-width: 700px) {
+  .first-hands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .first-hands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.first-hand {
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--record-ink) / .22);
+}
+
+.first-hand img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: rgb(var(--record-bone));
+}
+
+.first-hand-name {
+  margin: .85rem 0 0;
+  font-family: var(--font-heading);
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.2;
+}
+
+.first-hand-dates {
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  font-weight: 400;
+  letter-spacing: .08em;
+  color: rgb(var(--record-muted));
+  white-space: nowrap;
+}
+
+.first-hand-work {
+  margin: .2rem 0 0;
+  font-family: var(--font-reading);
+  font-style: italic;
+  font-size: .9rem;
+  line-height: 1.4;
+}
+
+.first-hand-line {
+  margin: .55rem 0 0;
+  font-family: var(--font-reading);
+  font-size: .93rem;
+  line-height: 1.6;
+}
+
+.first-hand-credit {
+  margin: .7rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+
+.first-hand-credit a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+.first-hands-note {
+  max-width: 70ch;
+  margin: 1.8rem 0 0;
+  font-family: var(--font-reading);
+  font-size: .82rem;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
