@@ -64,7 +64,13 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
   // already open, so there is one door onto the record and no second form to drift out of step.
   const [entryType, setEntryType] = useState(initialType || 'solution');
   const isGroup = entryType === 'group';
-  const [step, setStep] = useState(0);
+  // ── IF THE DOOR ALREADY KNOWS, DO NOT ASK AGAIN ────────────────────────────────
+  // The four doors on the record each open this form on their own room, so a person who
+  // tapped "A crisis" has already answered the first question. Making them answer it a
+  // second time, on a screen of its own, is one more tap between somebody standing in a
+  // field and the thing they came to give. The screen is not gone — Back still reaches it,
+  // so anyone who tapped the wrong door can change their mind in one press.
+  const [step, setStep] = useState(initialType ? 1 : 0);
   const [form, setForm] = useState({
     title: '', summary: '', details: '', category: initialCategory || 'agriculture',
     country: '', region_rough: '', image_url: '', source_name: '', source_url: '',

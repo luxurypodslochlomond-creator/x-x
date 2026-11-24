@@ -39,9 +39,15 @@ import React from 'react';
 // risk, signal for everything else — so the rule stays ink and the meaning stays in
 // the only place it has ever lived.
 
+// ── THE SECTION OPENS ON THE FOOTER'S OWN YELLOW ────────────────────────────────
+// The foot of every page closes on a yellow band edge to edge, and that band is the one
+// piece of colour a reader remembers. Every section now opens on the same yellow, three
+// pixels of it, where a grey hairline used to be: one colour used the same way at the top
+// of a section as at the bottom of the page. No new colour and no new rule — the record
+// simply says the same thing twice instead of once.
 export default function RecordSectionHeading({ title, count, tone = 'text-[#6b6258]' }) {
   return (
-    <div className="record-section-heading mb-4 flex items-baseline justify-between gap-3 border-t border-record-ink/25 pt-2.5">
+    <div className="record-section-heading mb-4 flex items-baseline justify-between gap-3 border-t-[3px] border-cartoon-sun pt-2.5">
       <h2
         className="text-[#141210] uppercase"
         style={{

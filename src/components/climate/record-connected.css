@@ -1,6 +1,7 @@
 /* Shared interaction surfaces. Existing artwork, credits and factual content stay intact. */
 .climate-record { --font-heading: var(--font-record-ui); }
-.climate-record .record-pages { --font-reading: var(--font-record-ui); }
+/* The reading face is declared once, in index.css, and inherited here — this line used to
+   override it back to the grotesque on every page of the record. */
 .climate-record .record-book { background-color: rgb(var(--record-paper)); }
 .climate-record .rec-mast-doors { padding-block: .35rem; }
 .climate-record .rec-mast-doors .rec-art-door { border-radius: 10px; padding-block: .35rem; gap: .22rem; }

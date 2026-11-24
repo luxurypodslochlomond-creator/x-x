@@ -13,27 +13,18 @@ import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SubjectRail from '@/components/climate/SubjectRail';
 import SubjectPickerSheet from '@/components/climate/SubjectPickerSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
-import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import RecordHomeVoice from '@/components/climate/RecordHomeVoice';
 import SmallGesturesBand from '@/components/climate/SmallGesturesBand';
 import DefinitionsBand from '@/components/climate/DefinitionsBand';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
+import RecordStandfirst from '@/components/climate/RecordStandfirst';
+import RecordAddPlate from '@/components/climate/RecordAddPlate';
 
 
-// ── THE FOUR WAYS TO ADD, EACH WITH ITS ROOM'S OWN DRAWING ─────────────────────
-// Brian, 19 November: "should add solution and crisis etc be underneath the explore by
-// theme so can add one of them". He is right, and it answers a fault nobody had named: the
-// record's one orange button said "Solution, crisis, group or action" and then asked the
-// reader to choose again inside the form. Under the themes, beside the marks, the four are
-// named once — each wearing the drawing of the room it opens — and the form opens on that
-// room already chosen. Nothing else changed: same form, same door, same rules.
-const ADD_DOORS = [
-  { type: 'solution', label: 'Solution', Mark: RoomMarkSolution },
-  { type: 'climate_crisis', label: 'Crisis', Mark: RoomMarkCrisis },
-  { type: 'action', label: 'Action', Mark: RoomMarkAction },
-  { type: 'group', label: 'Group', Mark: RoomMarkGroups },
-];
+// The four ways to add something now live in RecordAddPlate: one plate, the record's own
+// yellow, each door wearing the drawing of the room it opens. The page keeps only the job
+// of opening the form on the room that was tapped.
 
 // ── Janine's spec: categories (exact taxonomy from her brief) ──
 const CATEGORIES = [
@@ -598,23 +589,15 @@ export default function TogetherChangeClimate() {
             The way in is a footnote to the rooms, not a rival to them: one line, four marked
             words, each opening the form on that room. The rooms keep the colour; this keeps
             the job. ── */}
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-record-ink/20 pt-3">
-          <span className="text-[10px] font-black font-mono uppercase tracking-[0.16em] text-[#5a5246]">
-            Put something on the record
-          </span>
-          {ADD_DOORS.map(({ type, label, Mark }) => (
-            <button
-              key={type}
-              onClick={() => { setSubmitType(type); setShowSubmit(true); }}
-              className="inline-flex min-h-[32px] items-center gap-1.5 text-[11px] font-black font-mono uppercase tracking-wide text-record-ink underline decoration-record-mark decoration-2 underline-offset-4 transition-colors hover:text-record-mark focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark"
-            >
-              <span aria-hidden="true" className="flex shrink-0 items-center"><Mark size={16} /></span>
-              {label}
-            </button>
-          ))}
-        </div>
-        <p className="mt-2 text-[10px] font-mono leading-relaxed text-[#5a5246]">
-          Got a link or an email to share? Add it above and we’ll help fill in the details. No account needed.
+        {/* ── THE DOOR IS A PLATE NOW, NOT SMALL PRINT ────────────────────────────────
+            Brian, 24 November: adding a crisis, a solution, an action or a group "must be
+            easy as fuck to get to", because on the day of an event the people with
+            something to give are standing in a field with a phone and no patience. It was
+            four underlined words at ten pixels in the footnote grey — four ways to give the
+            world something, printed smaller than the small print. See RecordAddPlate. */}
+        <RecordAddPlate onPick={(type) => { setSubmitType(type); setShowSubmit(true); }} />
+        <p className="mt-2 text-[11.5px] font-mono leading-relaxed text-[#5a5246]">
+          Got a link or an email to share? Add it above and we’ll help fill in the details.
         </p>
         {/* "Support welcome" is off this line at Janine's request, 9 November: donations
             are for a host to handle, and are being saved for those conversations. The
@@ -709,7 +692,7 @@ export default function TogetherChangeClimate() {
         {selectedCategory === 'all' && (selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
             <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" />
-            <p className="text-[13px] text-[#5a5246] leading-[1.65] mb-2">{t.groups_sub}</p>
+            <RecordStandfirst>{t.groups_sub}</RecordStandfirst>
             {/* Said out loud, on the section itself, so nobody has to guess how far the record
                 has gone for them. A group is an introduction the organiser wrote; it carries no
                 source, so the record says carried, not checked — the same honesty every entry

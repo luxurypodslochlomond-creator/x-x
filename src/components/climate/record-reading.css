@@ -12,7 +12,7 @@
      grotesque first, so every paragraph on every page of the record was set in the face
      that is meant for labels — which is precisely why a page of dated entries read as a
      web page. Literata speaks; Record UI structures; the monospace counts. */
-  --font-reading: var(--font-record-ui);
+  --font-reading: 'Literata', var(--font-record-reading);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
   /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
@@ -157,7 +157,7 @@ html[data-tongue="th"] .climate-record {
   --record-display: 'Record UI', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, sans-serif;
 }
 html[data-tongue="th"] .record-pages {
-  --font-reading: 'Record UI', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, system-ui, sans-serif;
+  --font-reading: 'Literata', 'Noto Serif Thai', 'Noto Sans Thai', Thonburi, system-ui, sans-serif;
 }
 /* An ID beats the !important rhythm rules above without having to repeat them, and it keeps
    the whole override in one place instead of sprinkling !important through the file. */

@@ -552,10 +552,13 @@ button:focus-visible {
   --font-display: var(--record-display);
   --font-heading: var(--font-record-ui);
   --font-body: var(--font-record-ui);
-  /* Inside the record the reading voice is the same as everywhere else: Literata speaks,
-     Helvetica structures. This block used to override it back to the grotesque, which
-     silently undid the record's voice on the only pages that carry its prose. */
-  --font-reading: var(--font-record-ui);
+  /* ── AND THE RECORD ACTUALLY SPEAKS IN IT ───────────────────────────────────────
+     This line used to put the grotesque back, which quietly undid the record's voice on
+     the only pages that carry its prose: every paragraph on Actions, Solutions, Method,
+     Founder and the Wire was set in the face meant for labels. That is the whole of why
+     the sentences felt flat under a footer that looked designed. Literata speaks; Helvetica
+     structures; the monospace counts. Nothing else changes. */
+  --font-reading: 'Literata', var(--font-record-reading);
 }
 /* The shared voice reaches every product, including dialogs and SVG labels.
    Real code, hashes, and explicitly technical material retain fixed-width type. */

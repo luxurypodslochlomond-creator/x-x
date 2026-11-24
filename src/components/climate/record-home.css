@@ -106,7 +106,10 @@
 }
 .record-home-page .record-room-link .record-description {
   max-inline-size: 22ch;
-  font-family: var(--font-reading);
+  /* A description is furniture, not prose — it stays in the structural face. This line
+     named the reading face, and the record's reading face is a serif again, so without
+     this the line under each room would be a book face at caption size. */
+  font-family: var(--font-record-ui);
   font-size: 13px;
   line-height: 1.45;
   letter-spacing: 0;

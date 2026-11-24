@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { MarkEqual } from '@/components/climate/RecordFootMarks';
-import navigationIconFor from '@/components/climate/navigationIcons';
+import { markFor } from '@/components/climate/pageMarks';
 
 export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, showReturn = true, compact = false, mobileCompact = false, wide = false, onBack, backLabel, className = '', children }) {
   const { pathname } = useLocation();
-  const Icon = navigationIconFor(pathname);
+  const Icon = markFor(pathname);
   return <div dir={dir} data-compact={compact} data-mobile-compact={mobileCompact} className={`climate-record record-page-shell record-connected-shell relative text-record-ink ${className}`}>
     <RecordBackBar eyebrow={eyebrow} fallback={returnTo} onBack={onBack} label={backLabel} />
     {!compact && <header className="record-room-intro">
