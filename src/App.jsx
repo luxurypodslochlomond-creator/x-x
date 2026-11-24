@@ -192,6 +192,8 @@ const ClimateCartoonFrancisPage = React.lazy(() => import('./pages/ClimateCartoo
 // place with his work. Its own address, because a question asked in a chat deserves an
 // answer that is still there when the chat is gone.
 const ClimateCartoonsWhatThisIsPage = React.lazy(() => import('./pages/ClimateCartoonsWhatThisIs'));
+// The line between CAIB and this record, drawn in public after Francis asked where it was.
+const ClimateCartoonsCAIBPage = React.lazy(() => import('./pages/ClimateCartoonsCAIB'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
 const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoonsThread'));
 const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
@@ -421,6 +423,7 @@ const AuthenticatedApp = () => {
           the same table the wall reads so his next drawing appears without anybody editing it. */}
       <Route path="/ClimateCartoons/Francis" element={<ClimateCartoonFrancisPage />} />
       <Route path="/ClimateCartoons/WhatThisIs" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsWhatThisIsPage /></ClimateLayout>} />
+      <Route path="/ClimateCartoons/CAIB" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsCAIBPage /></ClimateLayout>} />
 
       {/* ── THE PRINT ROOM, AND THE SHOW IT MAKES ────────────────────────────────────
           Two addresses, and only one of them is a room. /ClimateCartoons/Print is a room of

@@ -64,9 +64,22 @@ export default function CartoonCatalogueBand() {
           Every African cartoonist who took part in those discussions has their work
           gathered into it, edited by {CARTOON_EVENT.editors}.
         </p>
+        {/* ── HIS PLAN, ATTRIBUTED TO HIM ─────────────────────────────────────────
+            This line used to read as though the record were promising to publish the book.
+            It is not the record's book to promise: it is Francis's and Janine's, prepared by
+            African Press Cartoon Services, and publishing it here is his stated plan rather
+            than an undertaking this room has taken on. Francis, 24 November, was worried that
+            the room had quietly become CAIB's outlet. So the sentence now says whose plan it
+            is, and the next line says plainly that the room is not CAIB. */}
         <p className="comic-catalogue-line record-meta">
-          When it is finished it is published free — on CAIB’s own platforms and on this
-          record — for anyone in the world to download.
+          Francis’s plan for it, in his own words, is that it is published free — on CAIB’s
+          own platforms and on this record — for anyone in the world to download.
+        </p>
+        <p className="comic-catalogue-line record-meta">
+          This room is not CAIB and does not speak for it.{' '}
+          <Link to="/ClimateCartoons/CAIB" style={{ textDecoration: 'underline' }}>
+            Where the line is
+          </Link>
         </p>
         {/* The man himself, given somewhere to be rather than a name in a credit line: his
             own address on the record, with his drawings and the words he wrote about them. */}
