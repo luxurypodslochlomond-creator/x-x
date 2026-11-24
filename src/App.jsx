@@ -95,6 +95,10 @@ const ST51Page = React.lazy(() => import('./pages/ST51'));
 const AdminHMRCTrackerPage = React.lazy(() => import('./pages/AdminHMRCTracker'));
 const AdminLogoUploadPage = React.lazy(() => import('./pages/AdminLogoUpload'));
 const AdminStoneymollanLegalPage = React.lazy(() => import('./pages/AdminStoneymollanLegal'));
+// The reply to Barry Harper, written out of the saved file rather than from memory: the
+// road already carrying works that did not use it, and the mains pipe his response never
+// mentions. Its own address so it can be read on a phone and copied in one tap.
+const AdminStoneymollanBarryReplyPage = React.lazy(() => import('./pages/AdminStoneymollanBarryReply'));
 const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
 const AdminPWAPushGuidePage = React.lazy(() => import('./pages/AdminPWAPushGuide'));
 const Literacy51Page = React.lazy(() => import('./pages/Literacy51'));
@@ -560,6 +564,7 @@ const AuthenticatedApp = () => {
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminOnly><AdminLogoUploadPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminOnly><AdminPWAPushGuidePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminOnly><AdminStoneymollanLegalPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminStoneymollanBarryReply" element={<LayoutWrapper currentPageName="AdminStoneymollanBarryReply"><AdminOnly><AdminStoneymollanBarryReplyPage /></AdminOnly></LayoutWrapper>} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>

@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { FileText, AlertCircle, CheckCircle, Clock, Users, Link2, MapPin, Briefcase } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { useQuery } from '@tanstack/react-query';
 
@@ -201,6 +202,12 @@ export default function AdminStoneymollanLegal() {
         >
           <h1 className="text-3xl font-black font-mono text-cyan-400 mb-2">STONEYMOLLAN LEGAL</h1>
           <p className="text-white/60 font-mono text-sm">Barn at Upper Stoneymollan — Prescriptive Possession Case</p>
+          <Link
+            to="/AdminStoneymollanBarryReply"
+            className="mt-4 inline-flex items-center gap-2 border-2 border-amber-400 bg-amber-400/10 px-4 py-3 font-mono text-xs font-black uppercase tracking-wide text-amber-300"
+          >
+            ✉️ The reply to Barry Harper — ready to send
+          </Link>
         </motion.div>
 
         {/* WHAT'S SAVED BANNER */}
