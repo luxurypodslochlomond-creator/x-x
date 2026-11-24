@@ -635,6 +635,7 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Stoneymollan Flyers", url: createPageUrl("StoneymollanMarketing"), icon: Image, description: "Instagram flyers" },
       { title: "🚨 HMRC Tracker", url: createPageUrl("AdminHMRCTracker"), icon: Shield, description: "Gill's HMRC case · appeal deadline 27 Apr" },
       { title: "📋 Stoneymollan Legal", url: createPageUrl("AdminStoneymollanLegal"), icon: FileText, description: "Prescriptive possession case" },
+      { title: "✉️ Reply to Barry Harper", url: createPageUrl("AdminStoneymollanBarryReply"), icon: Mail, description: "Ready to send · road · water · cairn" },
       { title: "🔔 PWA Push Guide", url: createPageUrl("AdminPWAPushGuide"), icon: Bell, description: "How we cracked iOS push notifications" },
       { title: "📄 Brian Hughes CV", url: createPageUrl("BrianHughesCV"), icon: User, description: "One-pager CV · download PDF" },
       { title: "⚽ Fergus Hughes Profile", url: createPageUrl("FergusHughesProfile"), icon: User, description: "Player profile for Greg / Tony Begg" },
