@@ -13,7 +13,8 @@ const MAILTO = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}`;
 
 const CHECKS = [
   'Send it as a reply on his 19 November email, so the thread, the subject line and your 1 September objection sit underneath it.',
-  'Section 3 corrects what the 1 September objection said about the burn. His own map treats the burn as the supply, so he will notice the difference if you leave it unsaid. Your call whether it stays.',
+  'The letter asks what access was used for the works already carried out, and says nothing about what we know. Let him answer first. If he names a route, that is an alternative on his own letterhead.',
+  'Check the date of your 4 June 2025 email before sending. It is the one date in here taken from your own file rather than from his papers.',
   'The EIR requests carry the real clock: 20 working days, then review, then the Commissioner. Send those the same day, not after he replies.',
   'The two HES case files are downloadable now. The report on handling in each says who applied and why it was granted.',
   'Do not attach the Glasgow title plan. It belongs to another matter.',

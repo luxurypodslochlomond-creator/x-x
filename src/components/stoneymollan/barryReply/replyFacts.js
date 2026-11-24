@@ -49,8 +49,18 @@ export const HIS_PAPERS = [
   },
   {
     label: 'What he never mentions',
-    text: 'Scottish Water, the mains, the buried 50 mm branch, the Scottish Forestry guidance on public supplies that his own enclosure points to on p.4, any red squirrel or badger survey, and any water yield figure.',
+    text: 'Scottish Water, the mains, the buried branch, the Scottish Forestry guidance on public supplies that his own enclosure points to, any red squirrel or badger survey, any water yield figure, and the access used for the works already carried out in this area.',
     src: 'Whole response',
+  },
+  {
+    label: 'The question he cannot answer comfortably',
+    text: 'Works have already been carried out here, including felling inside the scheduled area, and they did not need this road. Asking what access those works used, and why it cannot serve this proposal, puts the burden on him without us producing a single document. If he names another route, it is on his own letterhead that an alternative exists. If he does not answer, that silence is the point.',
+    src: 'Builder note',
+  },
+  {
+    label: 'What this letter does not give away',
+    text: 'It does not say the burn serves only the pond. It does not say the burn is not drinking water. It does not repeat the correction of 1 September. It does not cite the HES reports as proof of an alternative route. It does not name any neighbour or landowner. It does not offer a site walkover, and it does not name the Glasgow title plan. The alternative route is asked for as a question, so he answers it rather than reading our evidence.',
+    src: 'Builder note',
   },
   {
     label: 'The title number is settled',
