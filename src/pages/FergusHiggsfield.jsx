@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Copy, Check, ExternalLink, ArrowLeft } from 'lucide-react';
 import { copyText } from '@/components/stoneymollan/barryReply/copyText';
-import { SUBJECT, PITCH, WHAT_THEY_WANT, ROBIN_LINES, BEFORE_SENDING } from '@/components/fergus/higgsfieldPitch';
+import { SUBJECT, PITCH, HIRE_VERDICT, TONE_CHECK, WHAT_THEY_WANT, ROBIN_LINES, STEPS, UGC_TIPS, BEFORE_SENDING } from '@/components/fergus/higgsfieldPitch';
 
 // Fergus's way into the Higgsfield creator programme. Mobile first: one note, one button.
 const FULL = `Subject: ${SUBJECT}\n\n${PITCH}`;
@@ -66,6 +66,20 @@ export default function FergusHiggsfield() {
           The 60-second video they asked for →
         </Link>
 
+        {/* The question Brian asked straight out, answered straight out and put near the top,
+            because it is the thing a father actually wants to know before reading a letter. */}
+        <section className="mt-6 border-2 border-record-ink bg-record-bone/50 p-4">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            Would I hire him? {HIRE_VERDICT.answer}
+          </h2>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/85">{HIRE_VERDICT.hire}</p>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/85">
+            <span className="font-black uppercase tracking-wide text-[10.5px] font-mono">The gap · </span>
+            {HIRE_VERDICT.gap}
+          </p>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/85">{HIRE_VERDICT.why}</p>
+        </section>
+
         <article className="mt-6 border-t-2 border-record-ink pt-5">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">
             Subject: {SUBJECT}
@@ -76,6 +90,26 @@ export default function FergusHiggsfield() {
             </p>
           ))}
         </article>
+
+        <section className="mt-8 border-t border-record-ink/20 pt-5">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            Does it read as a confident dobber?
+          </h2>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/75">
+            Checked line by line. One was cut for exactly that reason.
+          </p>
+          <ul className="mt-3 space-y-3">
+            {TONE_CHECK.map((t) => (
+              <li key={t.line} className="border-l-2 border-record-ink/30 pl-3">
+                <p className={`font-mono text-[11.5px] font-black ${t.done ? 'line-through text-record-muted' : ''}`}>
+                  {t.line}
+                </p>
+                <p className="mt-1 text-[13.5px] leading-relaxed text-record-ink/85">{t.verdict}</p>
+                <p className="mt-1 text-[12.5px] leading-relaxed text-record-muted">{t.why}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <section className="mt-8 border-t border-record-ink/20 pt-5">
           <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
@@ -113,6 +147,30 @@ export default function FergusHiggsfield() {
               </div>
             ))}
           </dl>
+        </section>
+
+        <section className="mt-8 border-t border-record-ink/20 pt-5">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            Step by step, in order
+          </h2>
+          <ol className="mt-3 space-y-3">
+            {STEPS.map((s) => (
+              <li key={s.n} className="border-l-2 border-record-ink/30 pl-3">
+                <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-record-muted">{s.n}</p>
+                <p className="mt-0.5 text-[13.5px] font-semibold leading-relaxed text-record-ink">{s.what}</p>
+                <p className="mt-1 text-[12.5px] leading-relaxed text-record-ink/70">{s.why}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="mt-8 border-t border-record-ink/20 pt-5">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            Things that work, whoever he ends up working for
+          </h2>
+          <ul className="mt-3 space-y-2 text-[13.5px] leading-relaxed text-record-ink/85">
+            {UGC_TIPS.map((t) => <li key={t}>{t}</li>)}
+          </ul>
         </section>
 
         <section className="mt-6 border-2 border-record-red bg-record-red/5 p-4">

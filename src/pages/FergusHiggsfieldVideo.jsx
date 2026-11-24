@@ -83,8 +83,12 @@ export default function FergusHiggsfieldVideo() {
 
         <section className="mt-6 border-t border-record-ink/20 pt-5">
           <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
-            Free kit, nothing to buy
+            Free tools — nothing to buy
           </h2>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/75">
+            "Free kit" just meant free software. Everything below costs nothing — he can make the whole film
+            on the phone he already has, and he should not spend a penny until something is earning.
+          </p>
           <ul className="mt-3 space-y-2 text-[13.5px] leading-relaxed text-record-ink/85">
             {FREE_KIT.map((f) => <li key={f}>{f}</li>)}
           </ul>
