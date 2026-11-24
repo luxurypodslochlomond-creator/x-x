@@ -18,6 +18,17 @@
 // a sensitive area for the purposes of the thresholds: over 60 per cent organic matter and over
 // 50 cm thick. Their exceptional-circumstances line is in too, so a below-threshold argument fails.
 //
+// Added 24 November, on Brian's instruction:
+//  - the servitude point, put where it belongs — on the access. A servitude is a burden on the land,
+//    so the owner of the burdened land cannot materially impair it, and no forestry consent can
+//    authorise what a servitude forbids. Asked as a question ("does Scottish Woodlands accept...")
+//    rather than asserted, because the express terms of any access servitude are in the title and
+//    not in front of us. Costs nothing if the answer is no: the road is still the only way in.
+//  - the escalation is to a LEVEL, not a complaint about a person. "Needs a decision from someone
+//    with authority to change the design" is a fact about the file, not an attack, and it is far
+//    harder to refuse than "I am not satisfied with you".
+//  - the EIR clock is now stated (20 working days), so the deadline is theirs and not ours.
+//
 // Also changed:
 //  - the Park assertion now carries a fallback, so the argument does not depend on the boundary
 //    line at all: a scheduled monument is a sensitive area too, and his own map marks SM6341, and
@@ -73,6 +84,8 @@ Both are used by people who could not simply step aside or take a diversion over
 Statutory access rights under the Land Reform (Scotland) Act 2003 apply across this ground, and they cannot be set aside by an applicant. They can only be exempted by an order made by the access authority, West Dunbartonshire Council, under section 11 of that Act, for a particular area and a particular purpose. Please confirm whether any such order is being sought or has been made, and if so provide it. Please also confirm whether the route is identified as a core path in West Dunbartonshire's adopted Core Paths Plan.
 
 Your response says the proposed access is Upper Stoneymollan Road, which my title calls Cross Stone Road or Stoneymollan Road. It does not say why. Your own map is titled Cameron Home Farm. Please confirm what access routes are available from that holding, and which of them could serve this proposal.
+
+The cottage is the old shepherd's cottage of the Cameron estate, and this road is the way to it. A servitude is a burden on the land, not a courtesy from whoever happens to own it. A servient owner may not do anything that materially impairs a servitude right, and no forestry consent can authorise that. Please confirm whether Scottish Woodlands accepts that the cottage holds a servitude right of access over this road, and if it does not, on what basis it says so.
 
 Works have already been carried out in this area in recent years, including felling within the scheduled area of SM6341. Please state the access route used for those works.
 
@@ -152,9 +165,9 @@ The four things I asked for on 1 September are unchanged: that the planting boun
 
 Please send a numbered reply within 14 days of this email, answering the points above in order, with the plan requested at section 4 and the documents at section 6. If something is not available, please say what is outstanding and the date it will be provided.
 
-This is now a matter of registered rights, a statutory threshold and a National Park, and it needs to be handled by someone with authority to change the design rather than to explain it. I ask that it be escalated to a senior manager or director, and that I be given that person's name and contact details.
+This is now a matter of registered rights, a statutory threshold and a National Park, and it needs a decision from someone with authority to change the design. Please escalate it to a senior manager or director and give me that person's name and contact details. That is not a complaint about you personally: it is that the decision required sits above the level at which a reply can be given.
 
-I am raising the regulatory questions directly with Scottish Forestry, Historic Environment Scotland and the National Park Authority, including requests under the Environmental Information (Scotland) Regulations 2004, and I will not wait for your reply to do so. My objection of 1 September stands in full. Nothing in your response or in this letter is agreement to the proposed access, and all my rights under my title (DMB27637) are reserved.
+I am raising the regulatory questions directly with Scottish Forestry, Historic Environment Scotland and the National Park Authority, including requests under the Environmental Information (Scotland) Regulations 2004, to which a response is due within 20 working days. I will not wait for your reply to do so. My objection of 1 September stands in full. Nothing in your response or in this letter is agreement to the proposed access, and all my rights under my title (DMB27637) are reserved.
 
 Yours sincerely,
 
