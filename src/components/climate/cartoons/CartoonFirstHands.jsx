@@ -3,35 +3,35 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/compone
 import '@/components/climate/cartoons/cartoon-first-hands.css';
 
 // ── THE HANDS THIS ROOM STANDS ON ────────────────────────────────────────────────
-// Brian, 24 November: "bet coolasfuck Japanese ones too bro … how we categorise the
-// old ones but coolasfuck style bro … why is font old and feels like magazine bro."
+// Brian, 24 November, four things in one breath: "are you sure they look squashed to
+// me … are drawings the same as cartoons … will the cartoonist presenting this on the
+// 29th in Nigeria get this … and no living cartoonist lets us show their work, that
+// surprises me, can you check the whole internet."
 //
-// Three answers, and they are the same answer.
+// 1. SQUASHED — he was right, and it was the mount. Every plate was given a fixed-height
+//    grey box to sit in, so a wide engraving was letterboxed into a tall frame with bands
+//    of grey above and below it. Nothing was actually distorted, but it looked pressed
+//    flat, and looking pressed flat is the same as being pressed flat to a reader. The
+//    box is gone. Each picture now runs at its own true proportion, one hairline round it
+//    as a plate mark, all of them pinned to the same width. Ragged and honest beats tidy
+//    and wrong.
 //
-// 1. CATEGORISE BY THE MOVE, NOT THE PASSPORT. The word on each plate is not a country
-//    and not a century — it is what the hand did: jeer, price, self, witness, prison,
-//    reverse, mirror, shape. The move is the only thing that repeats across eighteen
-//    hundred years; the flag is the thing that changes. So the line still runs oldest
-//    to newest, but each plate says out loud which move it made.
+// 2. DRAWINGS AND CARTOONS ARE NOT THE SAME WORD. A drawing is what is on the paper; a
+//    cartoon is a drawing with an argument in it. The room is called the wall of drawings
+//    because anyone's hand is welcome there; this band is the cartooning tradition,
+//    because every plate in it is making an argument about power. Same room, two words,
+//    and each one doing a different job.
 //
-// 2. THE JAPANESE AND INDIAN ONES WERE MISSING, AND NOW THEY ARE NOT. The catfish print
-//    (Japan, 1855) and the Kalighat babu (Calcutta, 19th century) are both here, and
-//    both are anonymous — which is the point of them: mockery with no author is the
-//    hardest kind to arrest.
+// 3. THE NINTH PLATE IS THE ANSWER TO THE NIGERIA QUESTION. He asked whether a living
+//    cartoonist ever lets a record show their work. They do — the check found cartoonists
+//    publishing on Commons under CC BY 4.0, which is a licence that says take it, credit
+//    me, keep it open. Kartick Dutta's 2025 cartoon is here as the proof, credited and
+//    linked, and it is the only plate on this wall that nobody had to die for.
 //
-// 3. WHY IT READ AS A MAGAZINE. Not the face — the italics on every title and the
-//    letterspaced capitals on every credit. That pairing is the typographic grammar of
-//    a printed magazine feature, and it was doing more to date the band than the
-//    engravings were. Both are gone: titles are set upright in the record's own
-//    grotesque, credits are sentence case, and the only letterspaced thing left is the
-//    one kicker that the lineage heading above already uses.
-//
-// AND THE ENLARGEMENT, WHICH IS THE PART THAT COULD HAVE BEEN A LIE. Two of these files
-// are small — the graffito is 394 pixels across, the catfish 450. Opening those "larger"
-// would invent detail that is not in the file, which is the exact thing this record
-// spends its whole life refusing to do. So the viewer is capped at the width of the copy
-// actually held, the real pixel size is printed on every plate, and the caption says so.
-// A record that will not overstate a fact will not overstate a photograph either.
+// 4. AND THE BAND STILL DOES NOT PRETEND. Eight out of copyright, one published open, and
+//    the note at the foot says plainly that this is still mostly Europe and Japan — which
+//    is exactly what a Nigerian cartoonist will see first, and exactly why the living
+//    hands above this band are the argument and this band is the footnote.
 const FIRST_HANDS = [
   {
     move: 'jeer',
@@ -42,6 +42,7 @@ const FIRST_HANDS = [
     thumb: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Alexorig.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Alexorig.jpg',
     w: 394, h: 450, cap: 394,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:Alexorig.jpg',
   },
   {
@@ -53,6 +54,7 @@ const FIRST_HANDS = [
     thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/William_Hogarth_-_Gin_Lane.jpg/960px-William_Hogarth_-_Gin_Lane.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/d/d0/William_Hogarth_-_Gin_Lane.jpg',
     w: 4000, h: 4638, cap: 1600,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:William_Hogarth_-_Gin_Lane.jpg',
   },
   {
@@ -64,6 +66,7 @@ const FIRST_HANDS = [
     thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Goya-Capricho-43.jpg/960px-Goya-Capricho-43.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Goya-Capricho-43.jpg',
     w: 2391, h: 3510, cap: 1600,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:Goya-Capricho-43.jpg',
   },
   {
@@ -75,6 +78,7 @@ const FIRST_HANDS = [
     thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/The_Massacre_of_Peterloo.jpg/960px-The_Massacre_of_Peterloo.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/5/5b/The_Massacre_of_Peterloo.jpg',
     w: 2594, h: 1722, cap: 1600,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:The_Massacre_of_Peterloo.jpg',
   },
   {
@@ -86,6 +90,7 @@ const FIRST_HANDS = [
     thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/Honor%C3%A9_Daumier_-_Gargantua.jpg/960px-Honor%C3%A9_Daumier_-_Gargantua.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/1/15/Honor%C3%A9_Daumier_-_Gargantua.jpg',
     w: 3643, h: 2726, cap: 1600,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:Honor%C3%A9_Daumier_-_Gargantua.jpg',
   },
   {
@@ -97,6 +102,7 @@ const FIRST_HANDS = [
     thumb: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Namazu-e_-_Namazu_the_saviour.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/b/b4/Namazu-e_-_Namazu_the_saviour.jpg',
     w: 450, h: 641, cap: 450,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:Namazu-e_-_Namazu_the_saviour.jpg',
   },
   {
@@ -108,6 +114,7 @@ const FIRST_HANDS = [
     thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/India%2C_Calcutta%2C_Kalighat_painting%2C_19th_century_-_English_Babu_%28Native_Indian_Clerk%29_Holding_a_Hookah_-_2003.145_-_Cleveland_Museum_of_Art.tif/lossy-page1-960px-India%2C_Calcutta%2C_Kalighat_painting%2C_19th_century_-_English_Babu_%28Native_Indian_Clerk%29_Holding_a_Hookah_-_2003.145_-_Cleveland_Museum_of_Art.tif.jpg',
     full: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/India%2C_Calcutta%2C_Kalighat_painting%2C_19th_century_-_English_Babu_%28Native_Indian_Clerk%29_Holding_a_Hookah_-_2003.145_-_Cleveland_Museum_of_Art.tif/lossy-page1-960px-India%2C_Calcutta%2C_Kalighat_painting%2C_19th_century_-_English_Babu_%28Native_Indian_Clerk%29_Holding_a_Hookah_-_2003.145_-_Cleveland_Museum_of_Art.tif.jpg',
     w: 3908, h: 6688, cap: 960,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:India,_Calcutta,_Kalighat_painting,_19th_century_-_English_Babu_(Native_Indian_Clerk)_Holding_a_Hookah_-_2003.145_-_Cleveland_Museum_of_Art.tif',
   },
   {
@@ -119,7 +126,22 @@ const FIRST_HANDS = [
     thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Dropping_the_Pilot.jpg/960px-Dropping_the_Pilot.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Dropping_the_Pilot.jpg',
     w: 2429, h: 3805, cap: 1600,
+    licence: 'Public domain',
     source: 'https://commons.wikimedia.org/wiki/File:Dropping_the_Pilot.jpg',
+  },
+  {
+    // The one living hand. Not out of copyright, not asked in private: published open,
+    // on purpose, under a licence that already says yes.
+    move: 'open',
+    name: 'Kartick Dutta',
+    dates: 'India · drawing now',
+    work: 'BRICS currency breaking American tariffs · 2025',
+    line: 'A living hand, and the only plate here that nobody had to die for. Dutta put this on Commons under a licence that says: take it, keep my name on it, keep it open. That is a decision about the future of the work rather than about the drawing — and it is the move this whole record is trying to make.',
+    thumb: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Ruskov_Cartoon_%E2%80%93_BRICS_Currency_Breaking_American_Tariffs_%28by_Kartick_Dutta%29.jpg/960px-Ruskov_Cartoon_%E2%80%93_BRICS_Currency_Breaking_American_Tariffs_%28by_Kartick_Dutta%29.jpg',
+    full: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Ruskov_Cartoon_%E2%80%93_BRICS_Currency_Breaking_American_Tariffs_%28by_Kartick_Dutta%29.jpg/960px-Ruskov_Cartoon_%E2%80%93_BRICS_Currency_Breaking_American_Tariffs_%28by_Kartick_Dutta%29.jpg',
+    w: 4267, h: 6400, cap: 960,
+    licence: 'CC BY 4.0 · published open by the artist',
+    source: 'https://commons.wikimedia.org/wiki/File:Ruskov_Cartoon_%E2%80%93_BRICS_Currency_Breaking_American_Tariffs_%28by_Kartick_Dutta%29.jpg',
   },
 ];
 
@@ -129,21 +151,22 @@ export default function CartoonFirstHands() {
   return (
     <section className="cartoon-first-hands" id="cartoon-first-hands" aria-labelledby="first-hands-title">
       <header>
-        <p className="first-hands-kicker">Public domain · oldest first</p>
+        <p className="first-hands-kicker">Oldest first · every credit kept</p>
         <h2 className="first-hands-title" id="first-hands-title">The hands this room stands on.</h2>
         <p className="first-hands-standfirst">
-          Eight plates, printed here because nobody owns them: the drawings are older than
-          copyright and every file is public domain. Their makers have been dead long enough that
-          the work belongs to everybody, and that is the only condition on which this record will
-          print a picture it was not given. The cartoonists drawing now are above this band, named
-          and not reproduced — their work is theirs, several of them are drawing under threat, and
-          a room that prints a living hand without asking has become the thing it argues against.
+          Nine plates. Eight are out of copyright — their makers have been dead long enough that
+          the work belongs to everybody, which is the only condition on which this record will
+          print a picture it was not given. The ninth is a living cartoonist who published his own
+          work under a licence that already says yes. Everyone else drawing now is named above this
+          band and not reproduced: their work is theirs, several of them are drawing under threat,
+          and a room that prints a living hand without asking has become the thing it argues
+          against.
         </p>
         <p className="first-hands-key">
           The word on each plate is not a country and not a century. It is the move the hand made
-          — <b>jeer, price, self, witness, prison, reverse, mirror, shape</b> — because the move is
-          the only thing that repeats across eighteen hundred years, and the passport is the thing
-          that keeps changing.
+          — <b>jeer, price, self, witness, prison, reverse, mirror, shape, open</b> — because the
+          move is the only thing that repeats across eighteen hundred years, and the passport is
+          the thing that keeps changing.
         </p>
       </header>
 
@@ -156,9 +179,7 @@ export default function CartoonFirstHands() {
               onClick={() => setOpen(hand)}
               aria-label={`Open ${hand.work} larger`}
             >
-              <span className="first-hand-frame">
-                <img src={hand.thumb} alt={`${hand.work} — ${hand.name}`} loading="lazy" decoding="async" />
-              </span>
+              <img src={hand.thumb} alt={`${hand.work} — ${hand.name}`} loading="lazy" decoding="async" />
             </button>
             <figcaption>
               <p className="first-hand-move">{hand.move}</p>
@@ -167,7 +188,7 @@ export default function CartoonFirstHands() {
               <p className="first-hand-work">{hand.work}</p>
               <p className="first-hand-line">{hand.line}</p>
               <p className="first-hand-credit">
-                Public domain · <a href={hand.source} target="_blank" rel="noopener noreferrer">the file itself</a> · {hand.w} × {hand.h} px
+                {hand.licence} · <a href={hand.source} target="_blank" rel="noopener noreferrer">the file itself</a> · {hand.w} × {hand.h} px
               </p>
             </figcaption>
           </figure>
@@ -175,14 +196,15 @@ export default function CartoonFirstHands() {
       </div>
 
       <p className="first-hands-note">
-        The line runs by the age of the thing drawn, not by fame: about AD 200 at the left, 1890 at
-        the right, and two of the eight have no author at all — the catfish print and the Kalighat
-        sheet were passed round by hands nobody recorded, which is why nobody could be charged for
-        them. Every credit opens the file page it came from, so the licence can be checked rather
-        than believed. None of these eight is claimed as a climate campaigner: they are the hands,
-        not the argument. And the band is still mostly European and Japanese, which is a gap it
-        narrows without closing — the shelf above is the rest of that answer, and it is being
-        filled by asking people who know their own rooms.
+        A drawing is what is on the paper; a cartoon is a drawing with an argument in it. Everything
+        here is making an argument about power, which is why the room says drawings on the wall and
+        cartoons on the shelf. The line runs by the age of the thing drawn, not by fame: about AD 200
+        at the left, last year at the right. Two of the nine have no author at all — the catfish
+        print and the Kalighat sheet went round in hands nobody recorded, which is why nobody could
+        be charged for them. Every credit opens the file page it came from, so the licence can be
+        checked rather than believed. And the band is still mostly Europe and Japan: that is the gap
+        a cartoonist in Lagos will see first, it is not closed here, and the hands above are the
+        argument while this band is only the footnote.
       </p>
 
       <Dialog open={!!open} onOpenChange={(isOpen) => { if (!isOpen) setOpen(null); }}>
