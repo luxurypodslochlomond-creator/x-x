@@ -28,7 +28,7 @@ const SECTIONS = [
   { key: 'crises', kind: 'crisis', label: 'Climate crises' },
   { key: 'actions', kind: 'action', label: 'Actions' },
   { key: 'gatherings', kind: 'gathering', label: 'Groups' },
-  { key: 'wire', kind: 'wire', label: 'Signals' },
+  { key: 'wire', kind: 'wire', label: 'The Wire' },
   { key: 'photos', kind: 'photo', label: 'Credited pictures' },
   { key: 'comments', kind: 'comment', label: 'What readers said' },
   { key: 'people', kind: 'person', label: 'On the roll' },

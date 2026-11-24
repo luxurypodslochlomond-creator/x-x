@@ -1,0 +1,22 @@
+/* Three ways through the existing room, using its own drawn marks. */
+#root .press-room .wall-wayfinding { grid-column: 2; grid-row: 5; min-width: 0; margin-top: 1rem; }
+#root .press-room .wall-room-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid rgb(var(--record-ink) / .25); }
+#root .press-room .wall-room-nav a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; min-height: 5.5rem; padding: .65rem .25rem; color: rgb(var(--record-ink)); text-decoration: none; }
+#root .press-room .wall-room-nav a + a { border-inline-start: 1px solid rgb(var(--record-ink) / .15); }
+#root .press-room .wall-room-nav svg { flex-shrink: 0; color: rgb(var(--record-mark)); }
+#root .press-room .wall-room-nav span { font: 700 .8rem/1.3 var(--font-record-ui); letter-spacing: .02em; }
+#root .press-room .wall-reading { border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+#root .press-room :is(.wall-reading, .comic-catalogue-details) > summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px; list-style: none; cursor: pointer; font: 700 .85rem/1.4 var(--font-record-ui); }
+#root .press-room :is(.wall-reading, .comic-catalogue-details) > summary::-webkit-details-marker { display: none; }
+#root .press-room :is(.wall-reading, .comic-catalogue-details) > summary::after { content: '+'; color: rgb(var(--record-mark)); font-size: 1.35rem; }
+#root .press-room :is(.wall-reading, .comic-catalogue-details)[open] > summary::after { content: '−'; }
+#root .press-room .wall-reading nav { display: grid; padding-bottom: .5rem; }
+#root .press-room .wall-reading a { display: flex; align-items: center; min-height: 44px; font-size: .875rem; color: rgb(var(--record-ink)); text-decoration: underline; }
+#root .press-room .comic-catalogue-details { border-block: 1px solid rgb(var(--record-ink) / .2); }
+#root .press-room .comic-catalogue-details p { margin: .65rem 0; }
+#root .press-room :is(.wall-room-nav a, .wall-reading a):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: -3px; }
+#root .press-room .wall-room-nav a:active { background: rgb(var(--record-mark) / .08); }
+@media screen and (max-width: 639px) {
+  #root .press-room .wall-wayfinding { order: 3; margin-top: 1rem; }
+  #root .press-room .press-opening-words > .press-scope { order: 4; }
+}

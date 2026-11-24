@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
 import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
+import CartoonRoomNavigation from '@/components/climate/cartoons/CartoonRoomNavigation';
 
 // The masthead, introduction and catalogue form one spread on desktop.
 // The original cover and its credit remain together, uncropped and unaltered.
@@ -56,26 +56,7 @@ export default function PressOpening() {
             contents list that disagrees with the page it belongs to is the first place a
             reader learns not to trust the rest of it — and the door to the fiction that used
             to sit here was still being offered long after the fiction came off the record. */}
-        <nav className="press-contents" aria-label="Find your way through the cartoon room">
-          <a href="#press-wall">The wall</a>
-          <a href="#cartoon-goals">The goals</a>
-          <a href="#cartoon-why-title">Why cartoons</a>
-          <a href="#press-world">Across the world</a>
-          <a href="#press-book">The book</a>
-          <a href="#cartoon-your-turn">Add your drawing</a>
-          {/* ── THE QUESTION A CARTOONIST ACTUALLY ARRIVES WITH ──────────────────
-              "Hard to find what this is for page" — Brian, 20 November. The answer had a
-              page and the page had one quiet line at the very bottom of the room. A person
-              deciding whether to hand over his work asks this before he scrolls a wall, so
-              it now stands in the room's own contents, at the top, where he is looking. */}
-          <Link
-            to="/ClimateCartoons/WhatThisIs"
-            className="press-contents-what"
-            style={{ color: 'rgb(var(--record-red))' }}
-          >
-            What this is
-          </Link>
-        </nav>
+        <CartoonRoomNavigation />
       </div>
       <div className="press-opening-cover">
         <CartoonCatalogueBand />

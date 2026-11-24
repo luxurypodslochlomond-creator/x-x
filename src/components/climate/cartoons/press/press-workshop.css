@@ -1,35 +1,5 @@
-/* ── THE PHONE'S ROOM IS SET AS A WORKING SHEET, NOT AS A BROCHURE ───────────────
-   Brian, 19 November, from a cabin: "cartoon page on mobile still doesn't feel underground
-   coolasfuck on mobile bro?" and then, of the four directions offered, "I like the yellow
-   one."
-
-   The phone pass before this one fixed the right faults — it took the frames off, ran the
-   paper to the glass and put the picture before the explanation — and it still read as a
-   leaflet, because a leaflet is what you get when every part arrives in the same order at
-   the same weight, one cream sheet after another. Nothing was wrong with any single
-   chapter. What was missing was an editor: somebody deciding what a phone should meet
-   first, and in what voice.
-
-   So this sheet does two things, and only on the phone. At 640 pixels and above it does
-   nothing at all.
-
-   1. IT RE-SETS THE ROOM'S ORDER. The room now opens on a yellow working sheet — the name
-      across its top, the catalogue cover centred under it, and the six doors as a ruled
-      register rather than a rag of links. The ledger of seventeen goals comes next, because
-      that is what tells a reader the wall is unfinished and therefore open. Then the
-      invitation to draw, then the wall itself, then the argument, the lineage, and the
-      biennial and the book as one production register. The contents list is renumbered to
-      match, because a contents list that disagrees with the page it belongs to is the first
-      place a reader learns not to trust the rest of it.
-
-   2. IT CHANGES THE KEY TWICE. The goal counts are set as an instrument bar in ink, and the
-      three-line argument for cartoons is printed as a black interlude between the wall and
-      the lineage. Those two black bands are what stop thirteen cream sheets reading as a
-      stack: a phone now meets a poster, a register, a wall, and an argument, in that order.
-
-   Nothing is added to the room and nothing is taken out of it. Every drawing, credit,
-   source, permission line, control and form is exactly where it was, and every one of them
-   still works. No drawing is cropped, tinted, filtered or framed. */
+/* Mobile order: cover and three doors, drawings, invitation, then supporting reading.
+   Keep the originals, credits, controls and desktop composition intact. */
 @media screen and (max-width: 639px) {
   /* ── 1. THE ORDER A PHONE MEETS THE ROOM IN ────────────────────────────────────
      A flex column so the sequence can be set here rather than by moving the markup,
@@ -40,13 +10,14 @@
     padding: 0 0 3.25rem;
   }
   #root .record-cartoon-field .press-room-inner > .press-opening { order: 1; }
-  #root .record-cartoon-field .press-room-inner > .cartoon-goals { order: 2; }
+  #root .record-cartoon-field .press-room-inner > .press-wall-section { order: 2; }
   #root .record-cartoon-field .press-room-inner > .comic-workshop { order: 3; }
-  #root .record-cartoon-field .press-room-inner > .press-wall-section { order: 4; }
-  #root .record-cartoon-field .press-room-inner > .comic-why { order: 5; }
-  #root .record-cartoon-field .press-room-inner > .cartoon-world { order: 6; }
-  #root .record-cartoon-field .press-room-inner > .press-facing { order: 7; }
-  #root .record-cartoon-field .press-room-inner > .comic-sources { order: 8; }
+  #root .record-cartoon-field .press-room-inner > .room-new { order: 4; }
+  #root .record-cartoon-field .press-room-inner > .cartoon-goals { order: 5; }
+  #root .record-cartoon-field .press-room-inner > .comic-why { order: 6; }
+  #root .record-cartoon-field .press-room-inner > .cartoon-world { order: 7; }
+  #root .record-cartoon-field .press-room-inner > .press-facing { order: 8; }
+  #root .record-cartoon-field .press-room-inner > .comic-sources { order: 9; }
 
   /* Each chapter already carried a 3.5rem lift for the desk's spread. On a phone the gap
      between sheets is the red ground, and it is set by the sheet's own bottom margin. */

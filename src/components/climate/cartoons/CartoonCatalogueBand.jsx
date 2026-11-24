@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDown } from 'lucide-react';
+import CartoonCatalogueDetails from '@/components/climate/cartoons/CartoonCatalogueDetails';
 import { CARTOON_COVER, CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 import CartoonEventShare from '@/components/climate/cartoons/CartoonEventShare';
 import CartoonCoverWords from '@/components/climate/cartoons/CartoonCoverWords';
@@ -41,59 +41,14 @@ export default function CartoonCatalogueBand() {
         <p className="comic-catalogue-cover-credit record-meta">{CARTOON_EVENT.coverArt}</p>
         <CartoonCoverWords />
         <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · being made now</p>
-        {/* ── WHAT THIS BOOK IS, IN THE WORDS OF THE PEOPLE MAKING IT ──────────────
-            Francis Umendu Odupute, to Janine, 18 November: "This is a sample of the
-            catalogue cover page that African Press Cartoon services is preparing for the
-            selected cartoons that will feature in our online workshop discussions on 29th
-            November. All the African cartoonists who participated in the discussion will
-            have their artworks packaged into an anthology or catalogue and published our
-            CAIB website platforms as well as on your new website on Climate Change
-            collective actions, for free downloads globally."
-
-            That paragraph is the whole reason this room exists, and it had never been
-            printed on the page — a reader met a cover, a caption and a share button and was
-            left to guess who was making the book, out of what, and what would happen to it.
-            So it is said here in three plain sentences, in his terms, with no adjectives
-            added. */}
-        <p className="comic-catalogue-line record-meta">
-          This is a sample of the catalogue cover that African Press Cartoon Services is
-          preparing for the cartoons selected for the online workshop discussions on
-          29 November.
-        </p>
-        <p className="comic-catalogue-line record-meta">
-          Every African cartoonist who took part in those discussions has their work
-          gathered into it, edited by {CARTOON_EVENT.editors}.
-        </p>
-        {/* ── HIS PLAN, ATTRIBUTED TO HIM ─────────────────────────────────────────
-            This line used to read as though the record were promising to publish the book.
-            It is not the record's book to promise: it is Francis's and Janine's, prepared by
-            African Press Cartoon Services, and publishing it here is his stated plan rather
-            than an undertaking this room has taken on. Francis, 24 November, was worried that
-            the room had quietly become CAIB's outlet. So the sentence now says whose plan it
-            is, and the next line says plainly that the room is not CAIB. */}
-        {/* ── JANINE'S CORRECTION, 24 NOVEMBER ────────────────────────────────────
-            She sent the sentence back with four words marked: "and on this record". The
-            book is CAIB's to publish, and where it is published is not this room's promise
-            to make — so the claim is now exactly the one that can be kept. Nothing else in
-            the sentence moved: still his plan, still free, still for anyone to download. */}
-        <p className="comic-catalogue-line record-meta">
-          Francis’s plan for it, in his own words, is that it is published free — on CAIB’s
-          own platforms — for anyone in the world to download.
-        </p>
         <p className="comic-catalogue-line record-meta">
           This room is not CAIB and does not speak for it.{' '}
-          <Link to="/ClimateCartoons/CAIB" style={{ textDecoration: 'underline' }}>
-            Where the line is
-          </Link>
+          <Link to="/ClimateCartoons/CAIB" className="underline">Where the line is</Link>
         </p>
-        {/* The man himself, given somewhere to be rather than a name in a credit line: his
-            own address on the record, with his drawings and the words he wrote about them. */}
+        <CartoonCatalogueDetails />
         <Link to="/ClimateCartoons/Francis" className="comic-catalogue-link">
           Francis Umendu Odupute · his own page
         </Link>
-        <a href="#cartoon-anthology" className="comic-catalogue-link">
-          What the book is <ArrowDown size={14} />
-        </a>
         <CartoonEventShare />
       </div>
     </section>

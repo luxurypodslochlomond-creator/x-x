@@ -6,7 +6,7 @@ import { markFor } from '@/components/climate/pageMarks';
 // meets it — on the rail, in the index, and here at the foot of the wire.
 const DOORS = [
   { to: '/TogetherChangeClimate', label: 'The record', line: 'Solutions, crises and action' },
-  { to: '/ClimateCartoons', label: 'The cartoon room', line: 'See the drawings and their artists' },
+  { to: '/ClimateCartoons', label: 'The Wall', line: 'Cartoons and the people who draw them' },
   { to: '/ClimateMethod', label: 'Checks & corrections', line: 'Trace a claim to its source' },
 ];
 export default function NewsIndexFoot({ query }) {

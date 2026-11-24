@@ -19,7 +19,7 @@ const PEOPLE = [
   {
     who: 'Janine Selendy',
     role: 'The brief',
-    line: 'This record is built to her brief. The words on each signal are the record’s own, signed by whoever checked it — she is not asked to answer for them, and nothing here is put in her mouth.',
+    line: 'This record is built to her brief. The words on each Wire entry are the record’s own, signed by whoever checked it — she is not asked to answer for them, and nothing here is put in her mouth.',
   },
   {
     who: 'Francis Umendu Odupute',
@@ -29,8 +29,8 @@ const PEOPLE = [
   },
   {
     who: 'The keeper who signed it',
-    role: 'The signal',
-    line: 'Every published signal carries the name of the person who signed it onto the record, beside its source. Where there is no name, the entry says it is unsigned.',
+    role: 'The entry',
+    line: 'Every published Wire entry carries the name of the person who signed it onto the record, beside its source. Where there is no name, the entry says it is unsigned.',
     to: '/ClimateMethod',
   },
 ];

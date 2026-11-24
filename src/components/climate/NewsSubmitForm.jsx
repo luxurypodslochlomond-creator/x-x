@@ -100,7 +100,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
         </div>
         <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.02em' }}>Thank you</h2>
         <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[330px] mb-2">
-          {published ? 'It is on Signals now.' : 'This one waits for a person before it appears.'}
+          {published ? 'It is on the Wire now.' : 'This one waits for a person before it appears.'}
         </p>
         <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[330px] mb-6">
           {published
@@ -108,7 +108,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
             : 'Either a source needs checking, or the screener was unsure. We will email you either way.'}
         </p>
         <button onClick={() => { onSent?.(); onClose?.(); }} className="px-6 py-3 bg-[#b3261e] text-[#f7f1e5] text-[11px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors">
-          Back to news
+          Back to the Wire
         </button>
       </div>
     );
@@ -119,7 +119,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
       <div className="sticky top-0 z-20 bg-[#efe7d6]/97 backdrop-blur border-b border-[#141210]/25">
         <div className="max-w-[500px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Send a signal</p>
+            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Send an update</p>
             <p className="text-[12px] font-mono text-[#141210] mt-0.5 truncate">
               {step + 1} of {STEPS.length} · {STEPS[step]}
             </p>
@@ -286,7 +286,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
           ) : (
             <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors disabled:opacity-50">
               <Send className="w-4 h-4" />
-              {submitting ? 'Sending…' : 'Send a signal'}
+              {submitting ? 'Sending…' : 'Send an update'}
             </button>
           )}
         </div>

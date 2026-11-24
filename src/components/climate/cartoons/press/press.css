@@ -70,20 +70,8 @@
   #root .record-cartoon-field .record-book { max-width: min(1560px, 96vw); margin-inline: auto; }
 }
 
-/* ── THE ROOM'S READING VOICE ───────────────────────────────────────────────────
-   The room inherited the record's body token, which inside the record resolves to the
-   Helvetica the masthead is set in. That is the right face for a name, a number, a date,
-   a credit and a label — it is the record's certainty. It is the wrong face for a
-   paragraph somebody wrote, and on a page arguing that cartoons deserve to be taken
-   seriously it made the argument read like a policy document.
-
-   So the room borrows the record's own reading serif — Source Serif 4, already travelling
-   with the site, drawn for screens — for every sentence a person wrote: the standfirst,
-   the scope, the three beats of the argument, and the drawer's own line, which is the most
-   important sentence on the page and now looks like one. Titles, numbers, credits and
-   labels keep the sans. One room, two voices, and the division is not decorative: sans is
-   what the record knows, serif is what a person said. */
-#root .press-room { --font-reading: var(--font-record-reading); }
+/* This local serif override was defeating the Record's shared reading voice. */
+#root .press-room { --font-reading: var(--font-record-ui); }
 
 .press-room-inner {
   width: 100%;

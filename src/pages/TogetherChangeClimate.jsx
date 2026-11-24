@@ -20,6 +20,8 @@ import DefinitionsBand from '@/components/climate/DefinitionsBand';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 import RecordStandfirst from '@/components/climate/RecordStandfirst';
 import RecordAddPlate from '@/components/climate/RecordAddPlate';
+import { RoomMarkSolution, RoomMarkCrisis, RoomMarkGroups } from '@/components/climate/RoomMarks';
+import '@/components/climate/record-mobile-index.css';
 
 
 // The four ways to add something now live in RecordAddPlate: one plate, the record's own
@@ -466,6 +468,7 @@ export default function TogetherChangeClimate() {
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
+          onAdd={(type) => { setSubmitType(type); setShowSubmit(true); }}
           onSelect={(key) => {
             setSelectedCategory('all');
             setQuery('');
@@ -536,7 +539,7 @@ export default function TogetherChangeClimate() {
              reader knows what the record is made of. The space is held while it loads, so
              nothing jumps on arrival. ── */}
       {(loading || featured.length > 0) && (
-        <div className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
+        <div className="record-featured-section record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           {/* ── NOT "SIGNALS" ────────────────────────────────────────────────────────────
               This band used to be headed "Signals", which is also the name of the wire in the
               top nav — so the page had two different things wearing one word, and Brian asked
@@ -565,7 +568,7 @@ export default function TogetherChangeClimate() {
       {/* ── TOOLBAR — the record's subjects on one side, the one way in with something of
              your own on the other. The search that reaches everything is the one pill in
              the header: one search, not two. ── */}
-      <div className="px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
+      <div className="hidden sm:block px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         {/* ── ONE LINE, ONE PLATE, FOUR WAYS TO ADD — IN THAT ORDER ────────────────────
             Brian, 19 November: "explore by theme squashed on desktop… doesn't feel like in
             right position for record… should add solution and crisis etc be underneath the
@@ -634,13 +637,13 @@ export default function TogetherChangeClimate() {
             )}
             {showEntries && solutions.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" />
+                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" mark={RoomMarkSolution} />
                 <RecordEntryList items={solutions} />
               </section>
             )}
             {showEntries && crises.length > 0 && (
               <section className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-                <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" />
+                <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" mark={RoomMarkCrisis} />
                 <RecordEntryList items={crises} />
               </section>
             )}
@@ -691,7 +694,7 @@ export default function TogetherChangeClimate() {
                Their account email is never shown, and nothing is invented on their behalf. ── */}
         {selectedCategory === 'all' && (selectedType === 'all' || selectedType === 'groups') && (
           <section className="px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" />
+            <RecordSectionHeading title={t.groups} count={filteredGroups.length} tone="bg-[#ffd447] text-[#141210] px-1.5 py-0.5" mark={RoomMarkGroups} />
             <RecordStandfirst>{t.groups_sub}</RecordStandfirst>
             {/* Said out loud, on the section itself, so nobody has to guess how far the record
                 has gone for them. A group is an introduction the organiser wrote; it carries no

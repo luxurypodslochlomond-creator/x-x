@@ -1,0 +1,39 @@
+/* Mobile browsing is one compact index, not a second gallery of the same entries. */
+@media screen and (max-width: 639px) {
+  #root .record-home-page .record-room-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  #root .record-home-page .record-room-cell { min-width: 0; border: 0; }
+  #root .record-home-page .record-room-cell + .record-room-cell { border-inline-start: 1px solid rgb(var(--record-ink) / .16); }
+  #root .record-home-page .record-room-link { width: 100%; height: auto; align-items: center; justify-content: center; gap: .35rem; padding: .9rem .15rem .1rem; border: 0; }
+  #root .record-home-page .record-room-drawing { margin: 0; block-size: 2.25rem; }
+  #root .record-home-page .record-room-drawing svg { inline-size: 2.25rem; block-size: 2.25rem; }
+  #root .record-home-page .record-room-label { justify-content: center; flex-wrap: wrap; gap: .25rem; font-size: .75rem; letter-spacing: 0; text-transform: none; }
+  #root .record-home-page .record-room-count { font-size: .75rem; letter-spacing: 0; }
+  #root .record-home-page .record-room-link .record-description { display: none; }
+  #root .record-home-page .record-room-add { display: flex; align-items: center; justify-content: center; min-height: 44px; width: 100%; font: 700 .75rem/1.3 var(--font-record-ui); color: rgb(var(--record-mark)); background: transparent; }
+  #root .record-home-page .record-room-add:active { background: rgb(var(--record-mark) / .08); }
+  #root .record-home-page .record-featured-section { display: none; }
+  #root .record-home-page .record-card-grid { gap: 0; }
+  #root .record-home-page .record-entry-plate {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    grid-template-areas: 'art copy' 'credit credit';
+    align-items: start;
+    gap: .45rem .85rem;
+    height: auto;
+    padding: 1rem 0;
+    border: 0;
+    border-bottom: 1px solid rgb(var(--record-ink) / .2);
+    background: transparent;
+    box-shadow: none;
+  }
+  #root .record-home-page .record-entry-image { display: contents; }
+  #root .record-home-page .record-entry-image > img { grid-area: art; position: static; inline-size: 5rem; block-size: 5rem; object-fit: cover; }
+  #root .record-home-page .record-entry-image > span { grid-area: credit; position: static; padding: 0; background: none; color: rgb(var(--record-muted)); font-size: .75rem !important; line-height: 1.4 !important; letter-spacing: 0 !important; text-transform: none; }
+  #root .record-home-page .record-entry-copy { grid-area: copy; min-width: 0; padding: 0; border: 0; background: transparent; }
+  #root .record-home-page .record-entry-copy > div { margin-bottom: .35rem; gap: .4rem; }
+  #root .record-home-page .record-entry-copy .record-header-type { letter-spacing: 0 !important; text-transform: none; }
+  #root .record-home-page .record-entry-copy h3 { font-size: 1rem; line-height: 1.3 !important; font-weight: 700 !important; }
+  #root .record-home-page .record-entry-copy span.record-header-type { padding: 0; background: transparent; color: rgb(var(--record-muted)); font-size: .75rem !important; }
+  #root .record-home-page .record-section-heading h2 { font-size: 1.5rem !important; line-height: 1.2 !important; }
+  #root .record-home-page .record-section-heading { margin-bottom: .6rem; }
+}

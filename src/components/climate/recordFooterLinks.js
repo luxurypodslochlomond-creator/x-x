@@ -68,7 +68,7 @@ export const PRIMARY_NAV = [
   // "News" was the wrong word for a second reason. It implies a news cycle, and half of
   // what stands behind this door is a warning rather than an event — and a record that
   // calls a warning "news" is asking to be read as a paper rather than believed as a source.
-  { label: 'Signals', to: '/ClimateWire', page: 'ClimateWire', what: 'What changed, where, and who says so — a warning, a milestone, or something that works.' },
+  { label: 'The Wire', to: '/ClimateWire', page: 'ClimateWire', what: 'Sourced updates: what changed, where, and who says so.' },
   // ── THE MACHINE STANDS IN THE MIDDLE OF THE RAIL, THE COVENANT UNDER IT ───────
   // Brian, 19 November: "sorry base 1 should be on top and platform below and in red."
   // So the pivot of the top row is the thing that answers, and x = x sits in the quiet row

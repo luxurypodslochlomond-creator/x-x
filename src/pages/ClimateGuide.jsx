@@ -47,9 +47,9 @@ const BAR = PRIMARY_NAV;
 
 const SEND = [
   {
-    label: 'Send a signal',
+    label: 'Send an update',
     to: createPageUrl('ClimateWire'),
-    what: 'A dated account with a source. Press Send a signal at the top of Signals.',
+    what: 'A dated account with a source. Press Send an update at the top of The Wire.',
   },
   {
     label: 'Submit a solution, crisis, or action',
@@ -116,9 +116,9 @@ const FIRST = [
     what: 'Read it, then read where it came from. Nothing on the record stands without an origin.',
   },
   {
-    label: '3. Open Signals',
+    label: '3. Open The Wire',
     to: createPageUrl('ClimateWire'),
-    what: 'Dated, sourced entries. Press Send a signal to see the submission form.',
+    what: 'Dated, sourced entries. Press Send an update to see the submission form.',
   },
   {
     label: '4. Press Search',
@@ -235,7 +235,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="01"
         heading="The drawn navigation on every page"
-        note="The same drawings at the top and foot of the screen open Record, Signals, PLATFORM, Map and The Wall. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited custodian also sees the custodian’s door there."
+        note="The same drawings at the top and foot of the screen open Record, The Wire, PLATFORM, Map and The Wall. The foot also opens Why this record, How we check entries, Corrections and this guide. An invited custodian also sees the custodian’s door there."
         items={BAR}
       />
 

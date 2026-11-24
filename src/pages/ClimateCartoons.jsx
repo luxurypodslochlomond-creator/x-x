@@ -52,8 +52,8 @@ export default function ClimateCartoons() {
       <div className="press-room-inner">
         <PressOpening />
 
-        <CartoonRoomNew />
         <PressWall />
+        <CartoonRoomNew />
         {/* The wall read against the seventeen goals, with the blank ones left blank. It
             follows the drawings because it is about them, and it comes before the argument
             because a cartoonist reads the count before they read the essay. */}

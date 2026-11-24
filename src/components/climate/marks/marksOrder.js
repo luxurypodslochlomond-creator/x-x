@@ -38,7 +38,7 @@ import {
 // drawing is left to be looked at. Where a mark is not a door at all, it says so.
 export const MARKS_IN_ORDER = [
   { name: 'The record', Mark: MarkRecord, to: '/TogetherChangeClimate', door: 'The register', means: 'Opens the front page: every entry, in four rooms.' },
-  { name: 'Signals', Mark: MarkSignal, to: '/ClimateWire', door: 'The signals', means: 'Opens the wire: what changed, where, and who says so.' },
+  { name: 'The Wire', Mark: MarkSignal, to: '/ClimateWire', door: 'The Wire', means: 'Opens sourced updates: what changed, where, and who says so.' },
   { name: 'The map', Mark: MarkHorizon, to: '/ClimateMap', door: 'The map', means: 'Opens the map: where entries happened, and where the record has been read.' },
   { name: 'The founder', Mark: MarkSignature, to: '/ClimateFounder', door: 'Who began it', means: 'Opens the page on Janine M. H. Selendy, who asked for the record.' },
   { name: 'Base 1', Mark: MarkBaseOne, to: '/ClimateSearch', door: 'Ask the record', means: 'Opens the search: ask for a place, a subject or a source.' },
