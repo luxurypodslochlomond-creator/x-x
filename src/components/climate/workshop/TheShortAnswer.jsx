@@ -20,9 +20,13 @@ const ASKS = [
     'You host. You do not speak for it.',
     'Open the hour, close it, in your own words. That is the whole of the ask, and it is your sentence, not ours.',
   ],
+  // This said "nobody from this record takes the microphone", and it was wrong from the
+  // moment her draft agenda arrived: she had already written Brian into the hour, for two
+  // minutes, by name. Denying a slot the host has given you is the one error that gets found
+  // out live, in front of the room. So it now says what her agenda says.
   [
-    'Nobody from this record takes the microphone.',
-    'The panel present their own cartoons and say what inspired them — that is already the programme. The eight-minute slot for the record is gone from this page, and nothing of ours waits to fill it.',
+    'Two minutes, then back to Francis.',
+    'Your draft gives Brian two minutes on what the platform does and where anyone can add a crisis or a solution. That is the whole of the record’s speaking time in your hour — and it is your gift, not our assumption.',
   ],
   [
     'The practice room: yes, gladly.',
