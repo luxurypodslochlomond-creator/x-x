@@ -6,9 +6,14 @@ import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTon
 // The band under the cover is the only part of this card the record writes, so it is the
 // part that can be read in the tongue the reader chose. The cover itself is a printed
 // picture: its lettering is ink in the file, and no card can re-letter it.
+// "in the room and online" was wrong for this hour. The festival is hybrid; her session is
+// listed on the printed programme as a virtual workshop. A card that sends somebody to the
+// National Museum for an hour that is on a screen is the worst kind of error a share card can
+// make, because it is only discovered by the person standing in the wrong place. So the card
+// now says what the programme says, and says that it is the programme saying it.
 const CARD_LINES = [
   'Janine Selendy’s workshop · Sunday 29 November',
-  '3pm West Africa · 2pm UK · in the room and online',
+  '3pm West Africa · 2pm UK · the festival lists this hour as online',
 ];
 
 // ── WHOSE BOOK IT IS ───────────────────────────────────────────────────────────

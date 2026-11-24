@@ -112,9 +112,23 @@ export default function ClimateWorkshop() {
         <WorkshopStrip />
       </div>
 
+      {/* This line used to say the slot was unconfirmed and that nothing here guessed at it —
+          written on 16 November, before the festival's printed flyer reached us on the 20th.
+          The flyer gives the hour, so the page was contradicting itself: one line said the time
+          was unknown while the card, the programme and the cartoon room all printed 3pm. A page
+          that disagrees with itself is the one fault a reader never forgives.
+
+          And the flyer calls her hour a VIRTUAL workshop, while the pass-it-on card said "in the
+          room and online". Both cannot be true, and the wrong one walks somebody to a museum in
+          Benin City for an hour that is happening on a screen. So the format is attributed to the
+          programme rather than asserted by us: if the programme is wrong, the programme is wrong,
+          and this page is not the thing that made it up. */}
       <p className="mt-4 font-mono text-[11px] leading-relaxed text-record-muted">
         8th CartoonAFRICA International Biennial · 28–30 November 2026 · National Museum, Benin City, Edo State, Nigeria ·
-        hybrid. Janine’s hour is on Sunday 29 November; its exact slot is hers to confirm, and nothing here guesses at it.
+        the biennial itself is hybrid, in the museum and online. Janine’s hour is Sunday 29 November, 3pm West Africa
+        (2pm UK), as the festival’s printed programme has it — and that programme lists her hour as a virtual workshop,
+        so this page does not promise a room in Benin City for it. If she moves it or changes its shape, the programme
+        is right and this line is corrected in the open.
       </p>
 
       <WorkshopClocks />
