@@ -33,16 +33,21 @@
    Scoped to the cartoon room and nowhere else: every other page of the record keeps its
    painting and its paper. The masthead above stays paper on purpose — it is the book's
    furniture, and the book does not change its clothes from room to room. */
-.climate-record.record-field.record-cartoon-field {
-  background-color: rgb(var(--record-nigeria));
-}
-/* The plate, not the painting: behind this room's sheets there is yellow, and nothing
-   else. The record's painting still runs under every other room. */
-.climate-record.record-cartoon-field > .record-environment { display: none; }
+.climate-record.record-field.record-cartoon-field { background-color: rgb(var(--record-ink)); }
+/* ── THE WALL IS PRINTED ON THE RECORD'S OWN PAINTING ────────────────────────────
+   The room spent a day on the flag's green, and it was the wrong ground: a wall of
+   drawings on one flat colour reads as a poster for one nation, and this room belongs to
+   the record, not to a flag. Brian, 24 November: "lose the green… get our full
+   coolasfuck record painting in there all the way down." So the ground is the record's
+   own painting again, at full strength, for the whole length of the room — the same earth
+   every other room of the record stands on. Drawings and words keep their own clean paper
+   laid over it, so nothing is ever read on a photograph. */
 
-/* Clean paper, so the drawings are the only colour in the frame. */
-#root .record-cartoon-field .press-room-inner > * {
-  background: rgb(255 253 248);
+/* Clean paper, so the drawings are the only colour in the frame — on a handset, where a
+   sheet is the whole glass. On a desk the chapters stay transparent
+   (press-desktop-ground.css), so the painting runs the length of the spread. */
+@media screen and (max-width: 639px) {
+  #root .record-cartoon-field .press-room-inner > * { background: rgb(255 253 248); }
 }
 
 /* ── THE BAND THAT SAYS THE ROOM'S NAME NOW REACHES THE RED ─────────────────────

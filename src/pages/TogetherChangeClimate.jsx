@@ -200,10 +200,30 @@ export default function TogetherChangeClimate() {
   const bringIntoView = (element) => {
     if (!element) return;
     const masthead = element.closest('.climate-record')?.querySelector('header');
-    const offset = (masthead?.getBoundingClientRect().bottom || 0) + 6;
+    // The four rooms pin under the masthead on a desk, so the jump has to clear both:
+    // whichever of the two reaches further down the glass is the line to land under.
+    const doors = element.closest('.record-home-page')?.querySelector('.record-home-doors');
+    const offset = Math.max(masthead?.getBoundingClientRect().bottom || 0, doors?.getBoundingClientRect().bottom || 0) + 6;
     window.scrollBy({ top: element.getBoundingClientRect().top - offset, behavior: 'smooth' });
   };
   const firstRender = useRef(true);
+  // ── THE FOUR ROOMS STAY UNDER THE READER'S THUMB ─────────────────────────────
+  // Brian, 24 November: "do you think crises solutions groups should be visible like top
+  // nav always when scrolling so we can get to the important stuff easy?" Yes. The four
+  // rooms are the shape of the record, and a reader three entries down should not have to
+  // scroll back to the top to change room. The band pins under the masthead on a desk, and
+  // the offset is measured from that masthead so a wrapped title never hides it.
+  const doorsRef = useRef(null);
+  useEffect(() => {
+    const doors = doorsRef.current;
+    const header = doors?.closest('.climate-record')?.querySelector('header');
+    if (!doors || !header) return;
+    const sync = () => doors.style.setProperty('--record-masthead', `${header.getBoundingClientRect().height}px`);
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
   // Set when the box moved the kind, rather than a filter button. The page must not jump.
   const typedKind = useRef(false);
   const { categories } = useClimateCategories();
@@ -472,7 +492,7 @@ export default function TogetherChangeClimate() {
           is made of. The counts, the colours and the doors are untouched. */}
       {/* No padding on the wrapper: the band carries its own tint and rules edge to edge of
           the sheet, and insets its contents by the record's own margin instead. */}
-      <div className="record-home-doors">
+      <div className="record-home-doors" ref={doorsRef}>
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
@@ -482,25 +502,6 @@ export default function TogetherChangeClimate() {
             setQuery('');
             setSelectedType(selectedType === key ? 'all' : key);
           }}
-        />
-      </div>
-
-      <div className="record-home-subjects px-4 pb-5 pt-4 lg:px-10">
-        <SubjectRail
-          current={activeSubject}
-          totalEntries={items.length + actions.length}
-          allLabel="Every subject"
-          expanded={showIndex}
-          onOpenIndex={() => setShowIndex(open => !open)}
-          onOpenPicker={() => setShowIndex(true)}
-        />
-        <SubjectPickerSheet
-          open={showIndex}
-          onClose={() => setShowIndex(false)}
-          subjects={[...filledSubjects, ...emptySubjects]}
-          totalEntries={items.length + actions.length}
-          selected={selectedCategory}
-          onSelect={selectTheme}
         />
       </div>
 
@@ -613,6 +614,32 @@ export default function TogetherChangeClimate() {
         {/* "Support welcome" is off this line at Janine's request, 9 November: donations
             are for a host to handle, and are being saved for those conversations. The
             no-advertising line came off on 19 November — the governance band says it. */}
+      </div>
+
+      {/* ── THE THEMES STAND NEXT TO WHAT THEY CHOOSE BETWEEN ─────────────────────
+          Brian, 24 November: "every subject feels removed from crisis etc… maybe should be
+          closer?" He is right. The theme line sat up beside the rooms, and choosing a theme
+          then sent a reader past the tally and the pictures before any entry appeared, so
+          the choice and its result were two different screens. It now stands directly above
+          the entries it filters: press a theme, read that theme. Nothing about the sheet
+          itself has changed — same marks, same counts, same picker. ── */}
+      <div className="record-home-subjects px-4 pb-2 pt-4 lg:px-10">
+        <SubjectRail
+          current={activeSubject}
+          totalEntries={items.length + actions.length}
+          allLabel="Every subject"
+          expanded={showIndex}
+          onOpenIndex={() => setShowIndex(open => !open)}
+          onOpenPicker={() => setShowIndex(true)}
+        />
+        <SubjectPickerSheet
+          open={showIndex}
+          onClose={() => setShowIndex(false)}
+          subjects={[...filledSubjects, ...emptySubjects]}
+          totalEntries={items.length + actions.length}
+          selected={selectedCategory}
+          onSelect={selectTheme}
+        />
       </div>
 
       {/* ── CONTENT ── */}

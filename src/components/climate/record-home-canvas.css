@@ -95,4 +95,38 @@
     background: rgb(var(--record-ink));
   }
   .climate-record.record-home-field .record-home-sections > .record-home-governance > p { padding: 0; background: transparent; }
+
+  /* ── THE FOUR ROOMS PIN UNDER THE MASTHEAD ────────────────────────────────────
+     A reader three entries down should not have to scroll back to the top to change
+     room. The band sticks beneath the masthead, at the height that masthead actually
+     is — measured in the page, so a wrapped title can never leave it hidden. It is the
+     one control that travels with the reader, and it stays out of the way of the text:
+     the offset is the header's own height and nothing more.
+     For it to travel the whole page, the flow wrapper stops being a box of its own: the
+     voice, the photographs and the doors become children of the page, in the order the
+     page reads them. */
+  .climate-record.record-home-field .record-home-page { display: flex; flex-direction: column; }
+  .climate-record.record-home-field .record-home-page .record-home-flow { display: contents; }
+  .climate-record.record-home-field .record-home-page .record-home-voice-band { order: -3; }
+  .climate-record.record-home-field .record-home-page .record-home-photographs { order: -1; }
+  .climate-record.record-home-field .record-home-page .record-home-doors {
+    position: sticky;
+    top: var(--record-masthead, 7rem);
+    z-index: 30;
+    order: -2;
+    box-shadow: 0 14px 22px -20px rgb(var(--record-ink) / .9);
+  }
+
+  /* ── NO PAPER LEFT UNDER A PLATE ──────────────────────────────────────────────
+     Each entry's photograph was drawn at a fixed 16:10 and the words beside it were
+     sometimes taller, so a reader saw a band of empty paper under the picture — the one
+     thing a plate on this record should never do. The picture now takes the height of
+     its own row, cropped to fill it, so the two halves of an entry end level. */
+  .climate-record.record-home-field .record-entry-row > figure { align-self: stretch; }
+  .climate-record.record-home-field .record-entry-row > figure > div {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 17rem;
+  }
+  .climate-record.record-home-field .record-home-subjects { margin: 1.5rem 2.5rem 0; }
 }
