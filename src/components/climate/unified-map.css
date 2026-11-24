@@ -33,8 +33,17 @@
    size changes: fourteen pixels on a phone, sixteen on a desk. */
 .record-map-spot-label { display: none; }
 .record-unified-map { --map-signal: rgb(var(--record-ink)); }
-.record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-red)); }
-.record-unified-map [data-kind="action"],
+/* ── ONE THING, ONE COLOUR, WHEREVER IT STANDS ───────────────────────────────────
+   A crisis was red and everything else was white, so on the plate a solution, an action
+   and a drawing were the same dot. Brian, 24 November: "you sure colours of crises
+   solutions actions wire and cartoons right bro and are they connected?" They were not.
+   Each now wears the pigment of the room it belongs to, lightened for a dark plate, and
+   the key below wears exactly the same one — so a reader can follow a colour from the
+   record's own doors onto the world and back. */
+.record-unified-map [data-kind="crisis"] { --map-signal: rgb(var(--record-map-crisis)); }
+.record-unified-map [data-kind="solution"] { --map-signal: rgb(var(--record-map-solution)); }
+.record-unified-map [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
+.record-unified-map [data-kind="wire"] { --map-signal: rgb(var(--record-map-wire)); }
 .record-unified-map [data-kind="cartoon"] { --map-signal: rgb(var(--record-paper)); }
 .record-map-symbol {
   display: block; width: 14px; height: 14px; padding: 0;
@@ -129,12 +138,16 @@
   /* The key sits on ink, so the key keeps the light inks the plate used to use. */
   .record-unified-map .record-map-key { --map-signal: rgb(var(--record-paper)); }
   .record-unified-map .record-map-key [data-kind="crisis"] { --map-signal: rgb(var(--record-map-crisis)); }
-  .record-unified-map .record-map-key [data-kind="action"] { --map-signal: rgb(var(--record-signal)); }
-  .record-unified-map .record-map-key [data-kind="wire"] { --map-signal: rgb(var(--record-paper) / .6); }
+  .record-unified-map .record-map-key [data-kind="solution"] { --map-signal: rgb(var(--record-map-solution)); }
+  .record-unified-map .record-map-key [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
+  .record-unified-map .record-map-key [data-kind="wire"] { --map-signal: rgb(var(--record-map-wire)); }
   .record-unified-map .record-map-key [data-kind="cartoon"] { --map-signal: rgb(var(--record-paper)); }
+  /* The map was the one room that ran the whole glass, so walking into it moved the page
+     under the reader. It keeps the record's measure now, and the painting stands either
+     side of it like every other room. */
   .climate-record[data-record-page="ClimateMap"] .record-book {
-    max-width: none;
-    margin-inline: 0;
+    max-width: min(1360px, 94vw);
+    margin-inline: auto;
     background: transparent;
   }
   .climate-record[data-record-page="ClimateMap"] .record-sky { display: none; }

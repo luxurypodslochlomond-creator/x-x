@@ -327,8 +327,10 @@ button:focus-visible {
     --record-ochre: 155 111 40;
     --record-clay: 166 90 68;
     --record-map-crisis: 255 99 83;
-    --record-map-solution: 255 244 211;
-    --record-map-action: 149 227 168;
+    /* The map's signals are the record's own pigments, lifted for a dark plate: solutions
+       are the green their room is printed in, actions the yellow their plates wear. */
+    --record-map-solution: 149 227 168;
+    --record-map-action: 255 212 71;
     --record-map-wire: 104 215 241;
     --record-map-cartoon: 255 212 71;
     --record-light-signal: 255 212 71;
@@ -435,8 +437,10 @@ button:focus-visible {
     --record-ochre: 155 111 40;
     --record-clay: 166 90 68;
     --record-map-crisis: 255 99 83;
-    --record-map-solution: 255 244 211;
-    --record-map-action: 149 227 168;
+    /* The map's signals are the record's own pigments, lifted for a dark plate: solutions
+       are the green their room is printed in, actions the yellow their plates wear. */
+    --record-map-solution: 149 227 168;
+    --record-map-action: 255 212 71;
     --record-map-wire: 104 215 241;
     --record-map-cartoon: 255 212 71;
     --record-light-signal: 255 212 71;
