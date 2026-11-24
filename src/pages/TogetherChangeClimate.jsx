@@ -454,7 +454,9 @@ export default function TogetherChangeClimate() {
           No band of its own and no second copy of the painting: the record's own work is
           the ground of this page (record-home-opening.css), so Jane speaks on the room
           itself and the sentence that names the record comes straight under her. */}
-      <div className="record-home-voice-band border-t-[3px] border-record-mark">
+      {/* No rule of its own at the head: the masthead's red hairline is already there, and a
+          second red line three pixels under it read as a double bar rather than a page. */}
+      <div className="record-home-voice-band">
         <RecordHomeVoice copy={t} />
       </div>
 

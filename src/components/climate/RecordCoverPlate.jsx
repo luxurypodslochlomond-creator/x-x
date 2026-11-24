@@ -18,7 +18,9 @@ export default function RecordCoverPlate({ copy }) {
     <section aria-label="Photographs on the record" className="record-cover-plate record-home-opening w-full border-t-4 border-record-red text-record-ink">
       <div className="mx-auto w-full max-w-[1180px] px-4 pt-5 lg:px-10">
         <CoverPhotoPlates />
-        <div className="mt-4 flex justify-end border-t border-record-ink/15 py-3">
+        {/* One way to pass the record on, and it sits centred under the photographs on a
+            phone instead of hanging off the right end of a hairline by itself. */}
+        <div className="mt-4 flex justify-center border-t border-record-ink/15 py-3 lg:justify-end">
           <ShareCardButton entry={RECORD_CARD} build={buildRecordShareCard} link={RECORD_LINK} description={copy.sub} previewFirst inline />
         </div>
       </div>
