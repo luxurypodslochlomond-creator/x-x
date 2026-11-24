@@ -19,7 +19,7 @@ export const TWO_THINGS = {
     label: 'CartoonAFRICA International Biennial',
     lines: [
       'The 8th edition, 2026.',
-      'Founded and curated by Francis Umendu Odupute.',
+      'Initiated and curated by Francis Umendu Odupute — his own words for his own role.',
       'Its programme, its theme, its editions and its partners are his to set.',
       'It has its own platforms, and it keeps them.',
     ],
@@ -38,7 +38,7 @@ export const TWO_THINGS = {
 };
 
 export const HERE = [
-  'The CAIB cover and the CAIB drawings are shown here because they were given to be shown — with the artist named, the source named, and the picture printed exactly as it was sent.',
+  'The CAIB cover and the CAIB drawings are here temporarily, to be shown during the online workshop on 29 November — with the artist named, the source named, and the picture printed exactly as it was sent. Janine’s word for it was temporary, and temporary is what the page says.',
   'Nothing is cropped, tinted, redrawn or “improved”. Somebody else’s work is not improved by the room holding it.',
   'A drawing can come off this record on the word of the person who made it, or of Francis, without an argument and without a form.',
   'The cover is credited to Francis on the image itself, and his own page on this record carries his drawings and his words.',

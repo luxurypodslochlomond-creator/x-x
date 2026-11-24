@@ -652,10 +652,24 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "🔥 UF51 ROAD", url: createPageUrl("Uf51Road"), icon: FileText, description: "Merrick · first employee · download the PDF" },
     ] : [];
 
-    return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav };
+    // ── FAMILY ───────────────────────────────────────────────────────────────────
+    // Fergus's room could not be found unless you already knew the address, which defeats
+    // the point of a room built for one person. It goes in the nav with his card, his
+    // football page and the Higgsfield note — one drawer, so his dad can open it on a phone
+    // in one tap. The code is not written anywhere in here: the room asks for it, and the
+    // room's own server checks it. A link is not a key.
+    const familyNav = [
+      { title: "Fergus's room", url: "/FergusRoom", icon: Lock, highlight: true, description: "The code he was given · private" },
+      { title: "His card", url: "/FergusCard", icon: User, description: "Screenshot it · send it with anything" },
+      { title: "The Higgsfield note", url: "/FergusHiggsfield", icon: FileText, description: "The letter, the steps, the tone check" },
+      { title: "The 60-second film", url: "/FergusHiggsfieldVideo", icon: Play, description: "Shot by shot · and what they actually want" },
+      { title: "The football page", url: "/FergusHughesProfile", icon: User, description: "Shotts Bon Accord · record signing" },
+    ];
+
+    return { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav, familyNav };
   }, [user, archiveSearch]);
 
-  const { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav } = navs;
+  const { productsNav, healNav, litterNav, musicNav, kidsNav, learnNav, archiveNav, filteredArchiveNav, trustNav, ps51Nav, cb51Nav, sortedNav, tracktNav, tracktNavShort, adminNav, familyNav } = navs;
 
   const isActivePage = React.useCallback((url) => {
     try {
@@ -816,6 +830,7 @@ const LayoutInner = ({ children, currentPageName }) => {
                           ) : (
                             <>
                               <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
+                              <NavSection title="FAMILY" color="green" items={familyNav} isActivePage={isActivePage} isMobile defaultOpen={true} />
                               <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="PHOTO51" color="green" items={litterNav} isActivePage={isActivePage} isMobile />
                               <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} isMobile />
@@ -933,6 +948,7 @@ const LayoutInner = ({ children, currentPageName }) => {
             ) : (
               <>
                 <NavSection title="PRODUCTS" color="cyan" items={productsNav} isActivePage={isActivePage} defaultOpen={true} />
+                <NavSection title="FAMILY" color="green" items={familyNav} isActivePage={isActivePage} defaultOpen={true} />
                 <NavSection title="FREE HEALING" color="pink" items={healNav} isActivePage={isActivePage} />
                 <NavSection title="PHOTO51" color="green" items={litterNav} isActivePage={isActivePage} />
                 <NavSection title="MUSIC & RESEARCH" color="amber" items={musicNav} isActivePage={isActivePage} />
