@@ -43,11 +43,26 @@
    every other room of the record stands on. Drawings and words keep their own clean paper
    laid over it, so nothing is ever read on a photograph. */
 
-/* Clean paper, so the drawings are the only colour in the frame — on a handset, where a
-   sheet is the whole glass. On a desk the chapters stay transparent
-   (press-desktop-ground.css), so the painting runs the length of the spread. */
+/* ── EVERY CHAPTER IS A SHEET ON THE PAINTING, AND THE PAINTING RUNS BETWEEN THEM ──
+   Transparent chapters were the wrong half of the right idea: with no paper at all, the
+   wall's own words were printed straight onto the painting and a reader could not read
+   them — Brian, 24 November: "some text cant read". So each chapter is a real sheet of
+   clean paper again, inset from the spread's edge, and the painting is what lies in the
+   gutters between one sheet and the next, all the way down the room. Text keeps its
+   contrast; the earth still runs the whole length of the wall. */
 @media screen and (max-width: 639px) {
   #root .record-cartoon-field .press-room-inner > * { background: rgb(255 253 248); }
+}
+@media screen and (min-width: 1024px) {
+  #root .record-cartoon-field .press-room-inner > * {
+    margin-block: 1.25rem;
+    padding: 1.75rem 2rem;
+    background: rgb(var(--record-paper));
+  }
+  #root .record-cartoon-field .press-room-inner > :first-child { margin-top: 0; }
+  /* One measure for the whole record: the Wall was a wider sheet than every other room,
+     so walking into it moved the page under the reader's eyes. */
+  #root .record-cartoon-field .record-book { max-width: min(1080px, 90vw); }
 }
 
 /* ── THE BAND THAT SAYS THE ROOM'S NAME NOW REACHES THE RED ─────────────────────

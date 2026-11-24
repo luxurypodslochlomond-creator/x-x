@@ -2,7 +2,15 @@
 .climate-record { --font-heading: var(--font-record-ui); }
 /* The reading face is declared once, in index.css, and inherited here — this line used to
    override it back to the grotesque on every page of the record. */
-.climate-record .record-book { background-color: rgb(var(--record-paper)); }
+/* ── THE PAINTING IS THE ROOM, ON EVERY PAGE OF THE RECORD ───────────────────────
+   The front page learned this first, and every other room was still a solid sheet with
+   the painting visible only in the margins — so a reader walking from the record's front
+   page into the Wall, the wire or the map left the painting behind. Brian, 24 November:
+   "can we get the coolasfuck record pairing coming through on every page please."
+   The book's own paper is a veil now, and every sentence still sits on a solid sheet of
+   its own: the painting breathes through the page and no word is ever read on a
+   photograph. */
+.climate-record .record-book { background-color: rgb(var(--record-paper) / .9); }
 .climate-record .rec-mast-doors { padding-block: .35rem; }
 .climate-record .rec-mast-doors .rec-art-door { border-radius: 10px; padding-block: .35rem; gap: .22rem; }
 .climate-record .rec-mast-doors .rec-art-caption { font-size: 10px; line-height: 1.2; font-weight: 700; letter-spacing: 0; text-transform: none; }
