@@ -1,6 +1,86 @@
-/* The painting is artwork, not a geographic projection. Keep the atlas distinct. */
+/* ── THE MAP'S OWN INSTRUMENT ─────────────────────────────────────────────────────
+   The plate is geography; the painting is artwork. This file keeps them apart, gives
+   the key one voice at every width, and holds the reading panel beside the plate on a
+   desk so a press never opens an answer out of sight. */
+
+/* The painting is not a projection. The atlas gets its own ground, so the coastlines
+   and the marks are read rather than squinted at through a photograph. */
 .record-unified-map .record-world-atlas { background: rgb(var(--record-ink) / .96); }
+
+/* ── ONE LAMP, NOT A SIXTH COLOUR ────────────────────────────────────────────────
+   Readership was wearing the same amber as an action. A light is not a category of
+   entry: it is a place that read the record, so it keeps the record's amber halo and
+   takes the ember core on paper and a warm bone core on the dark plate. */
+.record-unified-map [data-kind="reader"] { --map-signal: rgb(var(--record-map-reader)); }
+.record-map-symbol--lamp { display: block; width: 14px; height: 14px; }
+
+/* ── THE KEY: ONE LINE OF TYPE, ONE SET OF MARKS ─────────────────────────────────
+   Every label is set the same way — uppercase, one size, tabular numbers — so the key
+   reads as a legend rather than as a row of buttons that happened to land together.
+   Each mark carries its own pigment, and the pressed one is the only one at full
+   strength: the plate behind it dims the rest. */
+/* The key stands on the plate's own ink at every width, because the plate above it is
+   the same dark ground at every width — a key printed on paper over a night plate was
+   the one piece of the instrument that did not belong to the instrument. */
+.record-unified-map .record-map-key {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: .35rem 1rem; padding: .6rem .8rem;
+  background: rgb(var(--record-ink)); border-bottom: 3px solid rgb(var(--record-red));
+}
+.record-unified-map .record-map-key .record-map-key-count {
+  margin: 0; font-family: var(--font-record-ui); font-size: .75rem; font-weight: 700;
+  line-height: 1.35; letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--record-paper));
+}
+.record-unified-map .record-map-key .record-map-key-newest {
+  display: block; margin-top: .2rem; font-weight: 400; letter-spacing: .02em;
+  text-transform: none; color: rgb(var(--record-paper) / .72);
+}
+.record-unified-map .record-map-key .record-map-key-keys { display: flex; flex-wrap: wrap; align-items: center; gap: 0 .1rem; }
+.record-unified-map .record-map-key :is(.record-map-key-mode, .record-map-key-kind) {
+  display: inline-flex; align-items: center; gap: .35rem;
+  min-height: 44px; padding-inline: .45rem; border: 0; background: transparent;
+  font-family: var(--font-record-ui); font-size: .75rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--record-paper));
+  cursor: pointer;
+}
+.record-unified-map .record-map-key .record-map-key-kind { opacity: .6; }
+.record-unified-map .record-map-key .record-map-key-kind[aria-pressed="true"] { opacity: 1; color: var(--map-signal); box-shadow: inset 0 -2px var(--map-signal); }
+.record-unified-map .record-map-key .record-map-key-mode[aria-pressed="true"] { box-shadow: inset 0 -2px rgb(var(--record-paper)); }
+.record-unified-map .record-map-key [data-kind="reader"] { --map-signal: rgb(var(--record-map-reader-lit)); }
+.record-unified-map .record-map-key .record-map-key-tally { font-variant-numeric: tabular-nums; opacity: .8; }
+.record-unified-map .record-map-key .record-map-key-reader { border-left: 1px solid rgb(var(--record-paper) / .25); margin-left: .35rem; padding-left: .7rem; }
+.record-unified-map .record-map-key :is(.record-map-key-symbol, .record-map-symbol--lamp) { width: 18px; height: 18px; flex: none; }
+
+/* ── THE FIGURES: A PRINTED TALLY, NOT A DASHBOARD ───────────────────────────────
+   Four counts, hairline separated, numbers in tabular figures so they line up as a
+   column of facts rather than as decoration. */
+.record-map-figures {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0; background: rgb(var(--record-bone)); border-top: 1px solid rgb(var(--record-ink) / .2);
+}
+.record-map-figure { min-width: 0; padding: .6rem .75rem; border-bottom: 1px solid rgb(var(--record-ink) / .12); }
+.record-map-figure dd {
+  margin: 0; font-family: var(--font-record-ui); font-size: 1.4rem; font-weight: 700;
+  line-height: 1; font-variant-numeric: tabular-nums; color: rgb(var(--record-ink));
+}
+.record-map-figure dt {
+  margin-top: .3rem; font-family: var(--font-record-ui); font-size: .7rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--record-ink));
+}
+.record-map-figure p { margin: .15rem 0 0; font-size: .7rem; line-height: 1.35; color: rgb(var(--record-muted)); }
+
+/* ── THE READING PANEL ────────────────────────────────────────────────────────── */
 .record-unified-map .record-map-reading { background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+
+/* ── THE SAME PIGMENTS, ON THE GROUND THEY WERE MIXED FOR ────────────────────────
+   The plate's marks are lifted for a night plate; a sheet of paper needs the record's
+   own inks, or a solution arrives as a pale green smudge. So inside the reading panel
+   a kind wears exactly the pigment its room, its card and its door already wear:
+   green for a solution, red for a crisis, ocean for a line on the wire. Actions keep
+   their yellow, which is outlined in ink and therefore holds on paper too. */
+.record-unified-map .record-map-reading [data-kind="crisis"] { --map-signal: rgb(var(--record-red)); }
+.record-unified-map .record-map-reading [data-kind="solution"] { --map-signal: rgb(var(--record-botanical)); }
+.record-unified-map .record-map-reading [data-kind="wire"] { --map-signal: rgb(var(--record-ocean)); }
 .record-unified-map .record-map-picked { padding: 1rem; }
 .record-unified-map .record-map-picked h2 { font-size: 1.3rem; }
 .record-unified-map .record-map-picked p { max-inline-size: none; }
@@ -12,17 +92,26 @@
 }
 .record-unified-map .record-map-place-entries { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid rgb(var(--record-ink) / .2); }
 .record-unified-map .record-map-place-entries button[aria-pressed="true"] { border-color: rgb(var(--record-red)); background: rgb(var(--record-red) / .06); }
+
+/* A mark holding several entries says so, on the mark itself. */
 .record-unified-map .record-map-cluster-count {
   position: absolute; top: 0; right: 0; min-width: 18px; height: 18px;
   display: grid; place-items: center; padding-inline: 3px; border-radius: 50%;
-  background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); font-size: 11px; font-weight: 700;
+  background: rgb(var(--record-paper)); color: rgb(var(--record-ink));
+  font-family: var(--font-record-ui); font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums;
 }
 .record-unified-map .record-map-symbol { width: 23px; height: 23px; }
 .record-unified-map .record-map-key .record-map-symbol { width: 18px; height: 18px; }
-.record-unified-map .record-map-key button { min-height: 44px; opacity: 1; }
-.record-unified-map .record-map-key button[aria-pressed="true"] { box-shadow: inset 0 -2px var(--map-signal, currentColor); }
 .record-unified-map .record-map-spot-label { pointer-events: none; }
-.record-map-artwork-door { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-size: .8rem; }
+
+/* ── THE PAINTING, OPENED WHOLE ──────────────────────────────────────────────────
+   The plate is geography and cannot be the artwork at the same time. This is the one
+   door to the work itself, and it opens outside the page rather than over it. */
+.record-map-artwork-door {
+  display: inline-flex; align-items: center; gap: .5rem; min-height: 44px;
+  padding-inline: .25rem; border: 0; background: transparent;
+  font-family: var(--font-record-ui); font-size: .8rem; color: rgb(var(--record-ink)); cursor: pointer;
+}
 .record-map-artwork {
   position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none;
   padding: 0; margin: 0; border: 0; background: rgb(var(--record-ink)); color: rgb(var(--record-paper));
@@ -30,26 +119,55 @@
 .record-map-artwork[open] { display: flex; flex-direction: column; }
 .record-map-artwork::backdrop { background: rgb(var(--record-ink)); }
 .record-map-artwork button:focus-visible { outline: 2px solid rgb(var(--record-signal)); outline-offset: 3px; }
+
+@media screen and (min-width: 640px) {
+  .record-map-figures { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .record-map-figure { border-bottom: 0; border-right: 1px solid rgb(var(--record-ink) / .12); }
+  .record-map-figure:last-child { border-right: 0; }
+}
+
 @media screen and (min-width: 1024px) {
-  /* Expose a real area of the one painting, rather than bleaching it under another slab. */
+  /* The opening sits on the painting rather than under another slab of paper. */
   .record-unified-map .record-map-opening { background: transparent; border: 0; margin-top: 0; }
-  .record-unified-map .record-map-opening > div { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 0 1.25rem; padding: 1.25rem 0; }
-  .record-unified-map .record-map-opening > div > :is(p, h1) { grid-column: 1; width: fit-content; max-width: 100%; margin: 0; padding: .6rem 1rem; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+  .record-unified-map .record-map-opening > div {
+    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 0 1.25rem; padding: 1.25rem 0;
+  }
+  .record-unified-map .record-map-opening > div > :is(p, h1) {
+    grid-column: 1; width: fit-content; max-width: 100%; margin: 0; padding: .6rem 1rem;
+    background: rgb(var(--record-paper)); color: rgb(var(--record-ink));
+  }
   .record-unified-map .record-map-opening > div > p:first-child { color: rgb(var(--record-red)); padding-bottom: 0; }
   .record-unified-map .record-map-opening h1 { font-size: clamp(1.8rem, 2.3vw, 2.7rem) !important; }
   .record-unified-map .record-map-opening p:not(.uppercase) { margin-top: 0; font-size: .95rem !important; line-height: 1.5 !important; }
-  .record-unified-map .record-map-opening > div > div { grid-column: 2; grid-row: 1 / span 3; align-self: end; justify-content: flex-end; gap: 0 .9rem; margin: 0; }
-  .record-unified-map .record-map-opening :is(a, .record-map-artwork-door) { padding-inline: .65rem; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); border: 0; font-size: .75rem; }
+  .record-unified-map .record-map-opening > div > div {
+    grid-column: 2; grid-row: 1 / span 3; align-self: end; justify-content: flex-end;
+    gap: 0 .9rem; margin: 0;
+  }
+  .record-unified-map .record-map-opening :is(a, .record-map-artwork-door) {
+    padding-inline: .65rem; background: rgb(var(--record-paper)); color: rgb(var(--record-ink));
+    border: 0; font-size: .75rem;
+  }
+
+  /* The plate and its reading stand side by side: a press never opens an answer off-screen. */
   .record-unified-map .record-map-stage { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; align-items: stretch; }
   .record-unified-map .record-map-stage > .record-world-plate { align-self: start; }
-  .record-unified-map .record-map-reading { min-height: 0; max-height: 33rem; contain: size; overflow-y: auto; border-inline-start: 1px solid rgb(var(--record-ink) / .2); scrollbar-width: thin; }
+  .record-unified-map .record-map-reading {
+    min-height: 0; max-height: 33rem; contain: size; overflow-y: auto;
+    border-inline-start: 1px solid rgb(var(--record-ink) / .2); scrollbar-width: thin;
+  }
   .record-unified-map .record-map-detail { min-height: 100%; border-top: 0; background: transparent; }
   .record-unified-map .record-map-help { padding: 1rem; }
   .record-unified-map .record-entry-marker[aria-current="true"] .record-map-spot-label { display: none; }
   .record-unified-map .record-map-places button { min-height: 44px; padding-inline: .65rem; }
+
+  .record-unified-map .record-map-key { padding: .6rem 1rem; }
+  .record-unified-map .record-map-figures { background: rgb(var(--record-bone)); }
 }
+
 @media screen and (max-width: 1023px) {
   .record-unified-map .record-map-reading { border-top: 2px solid rgb(var(--record-signal)); }
   .record-unified-map .record-map-help { padding: 1rem; }
 }
+
 @media print { .record-map-artwork-door, .record-map-artwork { display: none !important; } }

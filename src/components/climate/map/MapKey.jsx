@@ -1,0 +1,83 @@
+import React from 'react';
+import MapSignalMark from '@/components/climate/MapSignalMark';
+
+const KINDS = [
+  ['crisis', 'Crises'],
+  ['solution', 'Solutions'],
+  ['action', 'Actions'],
+  ['wire', 'Wire'],
+  ['cartoon', 'Drawings'],
+];
+
+/* A lit place is not a sixth kind of entry, so it does not take a sixth categorical
+   colour: it takes the lamp — a warm core inside the record's amber halo — the same
+   light the plate already draws on every place the record has been read. */
+function LampMark() {
+  return (
+    <svg aria-hidden="true" data-kind="reader" viewBox="0 0 20 20" className="record-map-symbol record-map-symbol--lamp" focusable="false">
+      <circle cx="10" cy="10" r="8.6" fill="none" stroke="rgb(var(--record-signal) / .6)" strokeWidth="1.4" />
+      <circle cx="10" cy="10" r="4.6" fill="var(--map-signal, rgb(var(--record-map-reader)))" />
+      <circle cx="10" cy="10" r="9.4" fill="none" stroke="rgb(var(--record-ink) / .4)" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
+export default function MapKey({ mode, onMode, only, onOnly, counts, placed, total, lights, loading, isError, newestArrival }) {
+  const showing = counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon;
+  const sentence = isError
+    ? 'Entries could not be loaded'
+    : loading
+      ? 'Setting the entries…'
+      : mode === 'readership'
+        ? `${lights.length} ${lights.length === 1 ? 'place' : 'places'} reading`
+        : only
+          ? `${placed} of ${showing} placed · ${only === 'cartoon' ? 'drawings' : only}`
+          : showing < total
+            ? `${placed} of ${total} entries placed`
+            : `${placed} ${placed === 1 ? 'entry' : 'entries'} placed`;
+
+  return (
+    <div className="record-map-key">
+      <p className="record-map-key-count">
+        {sentence}
+        {!loading && !isError && newestArrival && mode !== 'readership' && (
+          <span className="record-map-key-newest">Newest standing here arrived {newestArrival}.</span>
+        )}
+      </p>
+
+      <div className="record-map-key-keys" role="group" aria-label="Choose what the plate shows">
+        <button
+          type="button"
+          aria-pressed={mode === 'entries' && !only}
+          onClick={() => { onMode('entries'); onOnly(null); }}
+          className="record-map-key-mode"
+        >
+          Entries
+        </button>
+        {KINDS.map(([key, label]) => (
+          <button
+            key={key}
+            type="button"
+            data-kind={key}
+            aria-pressed={mode === 'entries' && only === key}
+            onClick={() => { onMode('entries'); onOnly(only === key ? null : key); }}
+            className="record-map-key-kind"
+          >
+            <MapSignalMark kind={key} className="record-map-key-symbol" />
+            {label} <span className="record-map-key-tally">{loading || isError ? '—' : counts[key]}</span>
+          </button>
+        ))}
+        <button
+          type="button"
+          data-kind="reader"
+          aria-pressed={mode === 'readership'}
+          onClick={() => { onMode(mode === 'readership' ? 'entries' : 'readership'); onOnly(null); }}
+          className="record-map-key-kind record-map-key-reader"
+        >
+          <LampMark />
+          Readership <span className="record-map-key-tally">{loading || isError ? '—' : lights.length}</span>
+        </button>
+      </div>
+    </div>
+  );
+}

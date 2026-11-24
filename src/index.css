@@ -333,6 +333,13 @@ button:focus-visible {
     --record-map-action: 255 212 71;
     --record-map-wire: 104 215 241;
     --record-map-cartoon: 255 212 71;
+    /* ── A LIT PLACE IS NOT A SIXTH KIND OF ENTRY ────────────────────────────────
+       Readership was drawn in the same amber as an action's diamond, which made two
+       different facts wear one colour on one plate. A light is a lamp, not a category:
+       it keeps the record's amber halo, and its core is the ember on paper and a warm
+       bone on the dark plate — the same lamp on two grounds, never a sixth pigment. */
+    --record-map-reader: 226 96 42;
+    --record-map-reader-lit: 255 236 194;
     --record-light-signal: 255 212 71;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -443,6 +450,9 @@ button:focus-visible {
     --record-map-action: 255 212 71;
     --record-map-wire: 104 215 241;
     --record-map-cartoon: 255 212 71;
+    /* The same lamp in the dark block: a light is not a theme. */
+    --record-map-reader: 226 96 42;
+    --record-map-reader-lit: 255 236 194;
     --record-light-signal: 255 212 71;
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;

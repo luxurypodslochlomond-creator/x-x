@@ -4,8 +4,9 @@ import useRecordViewState from '@/components/climate/useRecordViewState';
 import useMapEntries from '@/components/climate/map/useMapEntries';
 import MapEntryDetail from '@/components/climate/map/MapEntryDetail';
 import MapReadingDetail from '@/components/climate/map/MapReadingDetail';
+import MapKey from '@/components/climate/map/MapKey';
+import MapFigures from '@/components/climate/map/MapFigures';
 import WorldPlate from './WorldPlate';
-import MapSignalMark from '@/components/climate/MapSignalMark';
 import PlatePlaceIndex from './PlatePlaceIndex';
 
 import { useClimateCategories } from '@/hooks/useClimateCategories';
@@ -134,56 +135,30 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
   // would otherwise show only the first and hide the other two behind a dot nobody
   // happens to hit twice, which is the map keeping something back.
   const here = picked ? marks.filter((m) => (m.country || '') === (picked.country || '')) : [];
-  const placeAt = here.findIndex((m) => m.id === picked?.id);
+
 
   return (
     <div className={`record-map-instrument ${tone === 'ink' ? 'border border-[#b3261e]/60 bg-transparent' : 'border-2 border-[#141210] bg-[#f7f1e5]'}`}>
       {/* The count and the key, on the same paper as the plate — a plate is captioned
           above its engraving, not over it. */}
-      <div className="record-map-key flex flex-wrap items-center justify-between gap-x-4 gap-y-2 bg-[#f7f1e5] px-3 py-2.5 border-b border-[#141210]/20">
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#141210]">
-          {readingMode ? `${lights.length} readership places` : isError ? 'Entries could not be loaded' : loading
-            ? 'Setting the entries…'
-            : only
-              ? `Showing ${marks.length} of ${counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon} placed`
-              : (counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon) < publishedTotal
-                ? `${marks.length} of ${publishedTotal} entries placed`
-                : `${marks.length} ${marks.length === 1 ? 'entry' : 'entries'} placed`}
-          {!loading && newestArrival && (
-            <span className="mt-1 block font-normal normal-case tracking-[0.02em] text-[#5a5246]">
-              Newest standing here arrived {newestArrival}.
-            </span>
-          )}
-        </p>
-        <div className="flex flex-wrap items-center gap-x-1 text-[10px] font-mono font-bold text-[#141210]" role="group" aria-label="Show only one kind of entry">
-          <button type="button" aria-pressed={!only && !readingMode} onClick={() => { setOnly(null); setReadingMode(false); closeDetail(); }} className="min-h-11 px-2">All entries</button>
-          {[
-            ['crisis', 'Crises'],
-            ['solution', 'Solutions'],
-            ['action', 'Actions'],
-            ['wire', 'Wire'],
-            ['cartoon', 'Drawings'],
-          ].map(([key, label]) => (
-            <button
-              key={key}
-              type="button"
-              aria-pressed={!readingMode && only === key}
-              data-kind={key}
-              onClick={() => { setOnly(only === key ? null : key); setReadingMode(false); closeDetail(); }}
-              className={`flex min-h-11 items-center gap-1.5 px-1.5 uppercase tracking-[0.06em] ${only && only !== key ? 'opacity-40' : ''} ${only === key ? 'underline underline-offset-4' : ''}`}
-            >
-              <MapSignalMark kind={key} className="record-map-key-symbol" />
-              {label} {loading || isError ? '—' : counts[key]}
-            </button>
-          ))}
-          <button type="button" aria-pressed={readingMode} onClick={() => { setReadingMode(!readingMode); setOnly(null); closeDetail(); }} className="min-h-11 px-2">Readership</button>
-        </div>
-      </div>
+      <MapKey
+        mode={readingMode ? 'readership' : 'entries'}
+        onMode={(next) => { setReadingMode(next === 'readership'); closeDetail(); }}
+        only={only}
+        onOnly={setOnly}
+        counts={counts}
+        placed={marks.length}
+        total={publishedTotal}
+        lights={lights}
+        loading={loading}
+        isError={isError}
+        newestArrival={newestArrival}
+      />
 
       <div className="record-map-stage">
       <WorldPlate
         marks={readingMode ? [] : clusters}
-        lights={readingMode ? lights : []}
+        lights={lights}
         alive={alive}
         selectedId={picked?.id}
         onSelect={pick}
@@ -197,28 +172,12 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
           {isError && !readingMode ? <div className="record-map-picked" role="alert"><p>The entries could not be loaded. The map is not empty.</p><button type="button" onClick={() => refetch()} className="record-map-open">Try again</button></div>
             : readingPlace ? <MapReadingDetail place={readingPlace} onClose={closeDetail} />
               : picked ? <MapEntryDetail entry={picked} here={here} onPick={pick} onClose={closeDetail} category={catLabel} />
-                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{loading ? 'Setting the entries in their places…' : readingMode ? 'Select an amber light to read that place’s readership count. These are entry openings, not people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. Numbers on marks mean several entries share an approximate place.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
+                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{loading ? 'Setting the entries in their places…' : readingMode ? 'Select a lit place to read its count. A light is entry openings, never people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. Numbers on marks mean several entries share an approximate place. A lamp with an amber halo is a place reading the record.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
         </div>
       </aside>
       </div>
 
-      {/* What the plate is holding, counted from the plate itself. Not a flattering figure
-          about being looked at — what the record actually has, and how much of it somebody
-          else also says. A dash when a count could not be made; never a zero pretending. */}
-      <dl className="record-map-figures grid grid-cols-2 border-t border-[#141210]/20 bg-[#f7f1e5] sm:grid-cols-4">
-        {[
-          ['Entries standing', figures.placed, 'set where they happened'],
-          ['Countries', figures.countries, 'region only, never a person'],
-          ['Drawings', figures.drawings, 'hung on the same plate'],
-          ['Known twice over', figures.second, 'a second origin named'],
-        ].map(([label, value, note]) => (
-          <div key={label} className="min-w-0 border-b border-[#141210]/15 px-3 py-2.5 sm:border-b-0 sm:border-r sm:last:border-r-0">
-            <dd className="text-[22px] font-black leading-none tabular-nums text-[#141210]">{loading || isError ? '—' : value}</dd>
-            <dt className="mt-1 text-[9px] font-black font-mono uppercase tracking-[0.1em] text-[#141210]">{label}</dt>
-            <p className="text-[9px] leading-snug text-[#5a5246]">{note}</p>
-          </div>
-        ))}
-      </dl>
+      <MapFigures figures={figures} loading={loading} isError={isError} />
 
       {/* The plate read out: the places it actually holds, so a reader never has to hunt
           for a mark to find out where the record is standing. It comes after the line a

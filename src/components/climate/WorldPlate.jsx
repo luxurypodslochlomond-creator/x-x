@@ -56,7 +56,8 @@ const GROUND = {
     ring: '#efe7d6',
     // On paper the reach is the record's ember, not its signal yellow: yellow on warm
     // paper is a smudge, and the reach is a fact worth seeing, not a highlighter.
-    light: '#e2602a',
+    light: 'rgb(var(--record-map-reader))',
+    halo: 'rgb(var(--record-signal))',
   },
   ink: {
     bg: 'bg-transparent',
@@ -65,7 +66,10 @@ const GROUND = {
     land: '#efe7d6', landOpacity: 0.6, landWidth: 1.7,
     // Bone, not ink: an ink mark on dark water needs a light hairline to be seen at all.
     ring: '#efe7d6',
-    light: '#ffd447',
+    // The lamp on the dark plate: warm bone core, the same amber halo as on paper. It is
+    // the same light on both grounds, never a sixth colour competing with an action.
+    light: 'rgb(var(--record-map-reader-lit))',
+    halo: 'rgb(var(--record-signal))',
   },
 };
 
@@ -166,7 +170,7 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
           width: `${l.size}px`,
           height: `${l.size}px`,
           background: g.light,
-          boxShadow: `0 0 ${l.size * 2.4}px ${l.size * 0.8}px rgba(226, 96, 42, 0.85), 0 0 ${l.size * 5}px ${l.size * 1.6}px rgba(255, 212, 71, 0.28)`,
+          boxShadow: `0 0 ${l.size * 2.2}px ${l.size * 0.7}px rgb(var(--record-signal) / .55), 0 0 ${l.size * 5}px ${l.size * 1.6}px rgb(var(--record-signal) / .22)`,
           animationDelay: l.delay,
         };
         const at = {
