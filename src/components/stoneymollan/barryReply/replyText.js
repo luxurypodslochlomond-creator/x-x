@@ -31,6 +31,8 @@ Thank you for your email of 19 November, your response to my objection, and the 
 
 The land lies within Loch Lomond and The Trossachs National Park. A National Park is a sensitive area under the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2017, and Scottish Forestry publishes the thresholds that follow from it.
 
+If Scottish Woodlands contends that any part of the proposal lies outside the Park, please identify the boundary relied on and the map it is taken from.
+
 Where no part of the land is a sensitive area, afforestation has a threshold of 20 hectares. In a National Scenic Area it is 2 hectares. In any other sensitive area, including a National Park, there is no threshold at all. Forest roads have no threshold in a sensitive area, and neither does deforestation.
 
 Nothing here turns on the boundary line, because the same conclusion follows on two further grounds. A scheduled monument is a sensitive area, and your own map marks SM6341. Deep peat is a sensitive area, meaning organic soil containing more than 60 per cent organic matter and exceeding 50 centimetres in thickness, and your response says that areas of peat over 50 cm were excluded "where required".
@@ -51,13 +53,15 @@ If no screening opinion has been sought, please confirm that, and that no work w
 
 2. THE ACCESS: TWO NATIONAL TRAILS RUN DOWN THIS ROAD
 
-The first stage of the John Muir Way runs from Helensburgh to Balloch and comes down the Stoneymollan road to the foot of Loch Lomond. The Three Lochs Way, also one of Scotland's Great Trails, runs between Balloch and Helensburgh over the same ground. The Park Authority's own website describes this road as "a delightful ancient route linking Balloch and Cardross". So this is not a lane serving a few houses: it is the western end of one national trail and part of another, and the way onto both.
+The first stage of the John Muir Way runs from Helensburgh to Balloch and comes down the Stoneymollan road to the foot of Loch Lomond. The Three Lochs Way, also one of Scotland's Great Trails, runs between Balloch and Helensburgh over the same ground. The Park Authority's own website describes this road as "a delightful ancient route linking Balloch and Cardross", and lists it first among the top ten highlights of the Three Lochs Way. The ScotWays record for the path places it within Loch Lomond and The Trossachs National Park and records it as a coffin road, 6.75 km from the A82 at Upper Stoneymollan to Kirkton at Cardross.
+
+So this is not a lane serving a few houses. It is the western end of one national trail and part of another, the way onto both, and a recorded historic route in its own right.
 
 Both are used by people who could not simply step aside or take a diversion over rough ground: walkers with sticks, people with mobility difficulties, families with buggies, and visitors from other countries who have come here for the route. Locals use them daily for their health. My guests come here specifically to walk them.
 
 Statutory access rights under the Land Reform (Scotland) Act 2003 apply across this ground, and they cannot be set aside by an applicant. They can only be exempted by an order made by the access authority, West Dunbartonshire Council, under section 11 of that Act, for a particular area and a particular purpose. Please confirm whether any such order is being sought or has been made, and if so provide it. Please also confirm whether the route is identified as a core path in West Dunbartonshire's adopted Core Paths Plan.
 
-Your response says the proposed access is Upper Stoneymollan Road. It does not say why. Your own map is titled Cameron Home Farm. Please confirm what access routes are available from that holding, and which of them could serve this proposal.
+Your response says the proposed access is Upper Stoneymollan Road, which my title calls Cross Stone Road or Stoneymollan Road. It does not say why. Your own map is titled Cameron Home Farm. Please confirm what access routes are available from that holding, and which of them could serve this proposal.
 
 Works have already been carried out in this area in recent years, including felling within the scheduled area of SM6341. Please state the access route used for those works.
 
