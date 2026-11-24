@@ -1,0 +1,50 @@
+{
+  "name": "FergusRoom",
+  "type": "object",
+  "description": "One small private room for Fergus: a single key row holding the PIN, and the notes his dad leaves him. The PIN is never compared in the browser \u2014 the room's own server reads the key row with the service role and returns only the note rows, so a visitor who opens the page without the code gets nothing back. The key row is never returned to anyone, and nothing here is public: every row is admin-only, so it cannot be read straight from the table either. This is a latch, not a vault: it keeps a page private from strangers, and nothing sensitive belongs in it.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": [
+        "pin",
+        "note"
+      ],
+      "default": "note",
+      "description": "pin \u2014 the single row holding the code that opens the room. note \u2014 something left for Fergus to read. The pin row is never returned by the room's server, only compared against."
+    },
+    "body": {
+      "type": "string",
+      "description": "For a note: the words, as written. For the pin row: the code itself. Kept in one field because both are simply the text that matters, and the kind says which is which."
+    },
+    "from": {
+      "type": "string",
+      "description": "Who left the note, so Fergus knows whose voice he is reading. Empty means Dad."
+    }
+  },
+  "required": [
+    "kind",
+    "body"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
