@@ -1,9 +1,21 @@
 /* ── THE HANDS THIS ROOM STANDS ON ────────────────────────────────────────────────
-   A plate section, not a gallery. Five engravings printed straight onto the room's own
-   paper with one hairline above each — the same grammar as the wall above them, so the
-   room does not change voice halfway down the page. No cards, no shadows, no frames:
-   the picture is the loud thing, and everything around it stays quiet enough to let it
-   be loud. That is the whole design decision, and it is the same one the wall makes. */
+   Brian, 24 November: "why does look old visually and squashed bro, why not coolasfuck."
+
+   Because it was built like a museum information panel: every plate forced to one column
+   width, so a landscape engraving sitting beside a tall one read as pressed flat, all
+   six given identical authority, each under a row of tiny capital letters. Correct, and
+   dead. That is the difference between a record and a caption sheet, and it is not a
+   matter of taste — it was the wrong shape for the subject.
+
+   This is a wall instead. The plates share a HEIGHT and never a width, which is how
+   prints have been hung for three hundred years: a wide plate runs wide, a tall plate
+   stands tall, and no picture is ever stretched into a column to satisfy a grid. One
+   hairline runs above the whole band — the level — and the plates hang from it. The
+   tint behind each plate is a mount, not a card: it holds a picture of any shape at any
+   proportion without cropping a single line of it.
+
+   The one red in the band is the kicker, because the lineage heading above already
+   spends the record's red on the same word: a label, never a decoration. */
 #root .record-cartoon-field .cartoon-first-hands {
   padding: 2.2rem 0 1rem;
   border-top: 2px solid rgb(var(--record-ink));
@@ -38,56 +50,59 @@
   line-height: 1.6;
 }
 
-/* Five plates. They are not equal in importance and not equal in shape, so the grid
-   gives them equal width and lets each keep its own height — the alternative is
-   cropping an engraving to a box, which is how a feed treats a picture. */
-.first-hands-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2rem 1.6rem;
+/* The level, and the plates hanging from it. */
+.first-hands-frieze {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(1.2rem, 2vw, 2rem) clamp(.9rem, 1.6vw, 1.6rem);
   margin: 1.6rem 0 0;
-  align-items: start;
-}
-@media (min-width: 700px) {
-  .first-hands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (min-width: 1100px) {
-  .first-hands-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  padding-top: 1rem;
+  border-top: 1px solid rgb(var(--record-ink) / .22);
 }
 
 .first-hand {
+  flex: 0 0 auto;
+  width: clamp(13rem, 17vw, 17.5rem);
   margin: 0;
-  padding-top: 1rem;
-  border-top: 1px solid rgb(var(--record-ink) / .22);
+}
+
+/* THE FIX FOR "SQUASHED": a shared height, never a shared width. `contain` keeps the
+   engraving's own proportions — the mount gives way, the drawing does not. */
+.first-hand-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(13rem, 22vw, 19rem);
+  background: rgb(var(--record-ink) / .05);
 }
 
 .first-hand img {
   display: block;
   width: 100%;
-  height: auto;
-  background: rgb(var(--record-bone));
+  height: 100%;
+  object-fit: contain;
 }
 
 .first-hand-name {
-  margin: .85rem 0 0;
+  margin: .8rem 0 0;
   font-family: var(--font-heading);
-  font-size: 1.12rem;
+  font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: -.01em;
   line-height: 1.2;
 }
 
-.first-hand-dates {
+.first-hand-when {
+  margin: .15rem 0 0;
   font-family: var(--font-record-ui);
-  font-size: .7rem;
-  font-weight: 400;
+  font-size: .72rem;
   letter-spacing: .08em;
   color: rgb(var(--record-muted));
-  white-space: nowrap;
 }
 
 .first-hand-work {
-  margin: .2rem 0 0;
+  margin: .3rem 0 0;
   font-family: var(--font-reading);
   font-style: italic;
   font-size: .9rem;
@@ -123,4 +138,23 @@
   font-size: .82rem;
   line-height: 1.55;
   color: rgb(var(--record-muted));
+}
+
+/* A phone cannot hang six prints in a row without shrinking them to stamps, so on a
+   narrow glass the wall becomes one line under the thumb — the same rail the record's
+   own navigation already uses, with the same rule: nothing hidden, nothing cropped. */
+@media (max-width: 899px) {
+  .first-hands-frieze {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .first-hands-frieze::-webkit-scrollbar { display: none; }
+  .first-hand {
+    width: min(78vw, 20rem);
+    scroll-snap-align: start;
+  }
+  .first-hand-frame { height: min(58vw, 17rem); }
 }
