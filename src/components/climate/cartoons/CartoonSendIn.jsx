@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
-import { Loader2, Check } from 'lucide-react';
+import { Loader2, Check, ShieldCheck } from 'lucide-react';
 import { InkPot, PaperPhoto, SunFace } from '@/components/climate/cartoons/CartoonInkIcons';
 
 // ── BRING A DRAWING ───────────────────────────────────────────────────────────
@@ -144,6 +144,31 @@ export default function CartoonSendIn() {
       <p className="mt-1 text-[13px] leading-[1.6] text-record-muted" style={reading}>
         A photograph of it is enough. The record will say what it can see, in one line — then you say it properly.
       </p>
+
+      {/* ── BEFORE ANYBODY HANDS ANYTHING OVER ────────────────────────────────────
+          Brian, 24 November: "can cartoonists actually load their work and get credited
+          easy peasy and never fuck with their stuff… and no fucking with artists rights no
+          matter where they are in the world." Every one of those is already how the room
+          works — the name is required, the picture is stored exactly as sent, a keeper has
+          to say yes, and a drawing can be taken down. None of it was ever said here, at the
+          one moment a person is deciding whether to trust the room with their work. So it is
+          said here, in four lines, before the file picker rather than in a policy nobody
+          opens. Nothing in the code changed; this is the promise the code already keeps. */}
+      <div className="mt-3 border-y border-record-ink/25 py-2">
+        <p className="flex items-center gap-1.5 font-mono text-[10px] font-black uppercase tracking-[0.14em] text-record-ink">
+          <ShieldCheck size={14} /> Yours, and it stays yours
+        </p>
+        <ul className="mt-1.5 space-y-1">
+          {[
+            'Your name stays on it — every time it is shown, wherever it is shown.',
+            'Nothing here is sold, licensed or sponsored. A drawing is not a product on this record.',
+            'It is never cropped, tinted or redrawn. What you sent is what stands.',
+            'Ask and it comes off, no reason needed — and the room keeps a note that it was here and came off at your word, because a removal here is never quiet.',
+          ].map((line) => (
+            <li key={line} className="text-[12.5px] leading-[1.5] text-record-ink/80" style={reading}>· {line}</li>
+          ))}
+        </ul>
+      </div>
 
       {step === 'idle' && (
         <label className="mt-3 flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2 border border-dashed border-record-ink/40 bg-record-paper px-3 text-[14px] text-record-ink active:border-record-red">
