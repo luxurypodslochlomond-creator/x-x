@@ -421,9 +421,18 @@ const AuthenticatedApp = () => {
           the one ask — and no addresses, no phone numbers and no joining link, because a
           workshop's link is hers to hand out. */}
       <Route path="/ClimateWorkshop" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopPage /></ClimateLayout>} />
-      {/* The eight minutes themselves, written out rather than summarised: the one page in
-          this whole business that has to be in sentences, because somebody has to say them. */}
-      <Route path="/ClimateWorkshopWords" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopWordsPage /></ClimateLayout>} />
+      {/* ── THE SCRIPT THAT IS NOT NEEDED ────────────────────────────────────────────
+          This address held eight minutes of speech and a nineteen-minute drawing exercise,
+          written on 16 November before anybody had seen Janine's agenda. Her agenda, sent on
+          the 24th, gives Brian two minutes and has no drawing in it at all — so the script
+          was instructions for an hour nobody had scheduled, sitting on a live address that
+          could still be forwarded to the host or the festival.
+
+          It is not deleted, because the words are somebody's work and a keeper can still read
+          the file. It is simply off the record: the address now opens the hour as it actually
+          is, so a link already in somebody's inbox cannot tell them to do something the host
+          never asked for. */}
+      <Route path="/ClimateWorkshopWords" element={<Navigate to="/ClimateWorkshop" replace />} />
       <Route path="/ClimateHost" element={<ClimateLayout currentPage="ClimateHost"><ClimateHostPage /></ClimateLayout>} />
       {/* ── SAVED, NOT STANDING OPEN ─────────────────────────────────────────────────
           "Please save this… for when we are discussing with a potential host" — the founder,

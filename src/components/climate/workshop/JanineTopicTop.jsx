@@ -6,14 +6,20 @@ import React from 'react';
 // give the hour — so the band below is the first thing on the page, in the record's red and
 // the festival's yellow, and it says in one breath what the hour does.
 //
-// Nothing here is a claim about her work. The three beats are the shape of the hour, and
-// the plain line under the headline is the whole argument in nine words. If she cuts the
-// whole page, this band is still true.
+// IT USED TO SAY THE WRONG HOUR. Until 24 November the three beats were ours: three drawings,
+// nineteen minutes of drawing, one blank panel. Nobody had seen her agenda when they were
+// written, and her agenda has no drawing exercise in it at all. So the band was the first
+// thing a stranger read and the first thing that was untrue — on the one page whose whole
+// argument is that the record does not say things that are untrue.
+//
+// The beats are hers now. Her topic, the artists speaking about their own work, and the
+// record keeping each drawing with its maker's name on it. Nothing in this band asks the
+// room to do anything, because the host did not ask it to.
 
 const BEATS = [
-  ['Three drawings', 'shown whole, credit kept on them'],
-  ['Nineteen minutes', 'everyone draws — paper, pen, no screens'],
-  ['One blank panel', 'the ending the room decides'],
+  ['Her topic', '“Together we can change the course of climate change”'],
+  ['The hands', 'African cartoonists on their own drawings, in their own words'],
+  ['The record', 'each drawing kept with the name of the hand that made it'],
 ];
 
 export default function JanineTopicTop() {
@@ -35,8 +41,9 @@ export default function JanineTopicTop() {
           className="mt-3 max-w-[46ch] text-[13.5px] leading-relaxed lg:text-[16.5px]"
           style={{ fontFamily: 'var(--font-reading)' }}
         >
-          Nobody is going to explain climate change to this room. They know it. They draw it. Five frames go up
-          whole, the room draws for nineteen minutes, and the last panel stays blank on purpose.
+          Nobody is going to explain climate change to this room. They know it. They draw it. Cartoonists from
+          across Africa take the floor on the drawing they made — what inspired it, and where it hangs — and
+          every one of them goes onto a public record with its maker’s name on it.
         </p>
 
         <ul className="mt-5 grid gap-3 sm:grid-cols-3">

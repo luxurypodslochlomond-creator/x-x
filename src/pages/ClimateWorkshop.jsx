@@ -209,7 +209,7 @@ export default function ClimateWorkshop() {
           </button>
         </div>
         <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-muted">
-          The card is our own drawing: an empty frame, the date and the place. No addresses, no joining link, nothing about anybody.
+          The card is drawn here, on your own device: the festival’s own header, the three things every drawing on the record carries, and the day. No addresses, no joining link, nothing about anybody — and nothing asked of the room.
         </p>
         {/* The address, so it can be pasted into a message rather than retyped from a card. */}
         <div className="mt-3 flex items-center gap-2 border border-record-ink/20 bg-record-bone/50 px-2 py-1.5">

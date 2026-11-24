@@ -1,11 +1,19 @@
 // ── THE 29TH · THE PASS-IT-ON CARD ──
-// The card is the strip: a comic page with the last panel left empty, so the one thing a
-// person sees before reading anything is that there is a frame with their name on it.
+// This card used to be a comic page with the last panel left empty: "THE LAST PANEL IS
+// YOURS", "DRAW IT", "nineteen minutes of drawing". It was drawn on 16 November, when
+// nobody had seen Janine's agenda. Her agenda, sent on the 24th, has no drawing exercise
+// in it at all — so the card people were passing round advertised an hour that was not
+// going to happen, to a room that would turn up expecting paper and pens.
+//
+// A card is the worst place to be wrong, because it travels without the page it came from.
+// So the card now carries only what her agenda says and what the record actually promises:
+// cartoonists speaking about their own drawings, and every drawing kept with its maker's
+// name on it. Nothing on it asks anybody to do anything.
 //
 // It is drawn here, on purpose, and it carries no borrowed picture. Using one of CEEW's
-// drawings to advertise an hour that is ours would spend another organisation's work on our
-// ask, and their goodwill does not extend to being our artwork. Their room is linked, not
-// lifted — that is the credit a record should give.
+// drawings to advertise an hour that is not ours would spend another organisation's work on
+// our ask, and their goodwill does not extend to being our artwork. Their room is linked,
+// not lifted — that is the credit a record should give.
 //
 // Drawn in the sender's own browser, on their device, so nothing of theirs leaves it.
 import { RECORD_HOME } from './recordAddress';
@@ -80,12 +88,15 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   ctx.font = `700 19px ${MONO}`;
   ctx.fillText('THE RECORD OF THE TIME · SUNDAY 29 NOVEMBER', PAD, 138);
 
-  // The poster line, three beats, no sentence.
+  // The poster line, three beats, no sentence. Sized down from 88px because these lines are
+  // longer than the ones they replaced, and a line that runs off a card is a line nobody reads.
   ctx.fillStyle = INK;
-  ctx.font = `700 88px ${DISPLAY}`;
-  ['THE LAST', 'PANEL IS', 'YOURS.'].forEach((line, i) => ctx.fillText(line, PAD, 240 + i * 92));
+  ctx.font = `700 74px ${DISPLAY}`;
+  ['DRAWN IN AFRICA.', 'NAMED ON THE', 'RECORD.'].forEach((line, i) => ctx.fillText(line, PAD, 238 + i * 84));
 
-  // The empty frame — the whole card.
+  // The plate: the three things every drawing on the record carries. It is the record's own
+  // rule stated plainly, not an instruction to the room — nothing here asks anybody to do
+  // anything, because the host did not ask it to.
   const fx = PAD;
   const fy = 500;
   const fw = MAXW;
@@ -93,14 +104,18 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
   ctx.fillStyle = '#fffdf7';
   ctx.fillRect(fx, fy, fw, fh);
   corners(ctx, fx, fy, fw, fh, 34, INK, 6);
+
   ctx.fillStyle = RED;
-  ctx.font = `700 40px ${MONO}`;
+  ctx.font = `700 19px ${MONO}`;
   ctx.textAlign = 'center';
-  ctx.fillText('DRAW IT', W / 2, fy + 150);
-  ctx.fillStyle = MUTED;
-  ctx.font = `400 20px ${MONO}`;
-  ctx.fillText('on paper · pen or pencil · nothing to install', W / 2, fy + 196);
+  ctx.fillText('EVERY DRAWING ON THE RECORD CARRIES', W / 2, fy + 68);
   ctx.textAlign = 'left';
+
+  ctx.fillStyle = INK;
+  ctx.font = `700 26px ${MONO}`;
+  ctx.fillText('The name of the hand that made it', PAD + 44, fy + 142);
+  ctx.fillText('Where it came from', PAD + 44, fy + 198);
+  ctx.fillText('One line on what it is for', PAD + 44, fy + 254);
 
   ctx.fillStyle = INK;
   ctx.font = `700 21px ${MONO}`;
@@ -138,8 +153,8 @@ export async function buildWorkshopShareCard(card = {}, options = {}) {
 
 // The card's own copy, kept in one place so the page and the picture cannot drift apart.
 export const WORKSHOP_CARD = {
-  id: 'the-last-panel',
-  title: 'The last panel is yours · 29 November',
-  body: 'One hour with Janine Selendy: three drawings shown whole, nineteen minutes of drawing, and a public record that keeps what the room makes — each panel with its maker’s own name on it.',
-  honest: 'Nothing sold, ranked, sponsored or signed up to. No address published, and no picture of anybody. The frame is drawn here, not borrowed.',
+  id: 'drawn-in-africa-named-on-the-record',
+  title: 'Drawn in Africa, named on the record · 29 November',
+  body: 'One hour with Janine Selendy: cartoonists from across Africa on the drawings they made — what inspired them and where they hang — and a public record that keeps each one with its maker’s name on it.',
+  honest: 'Nothing sold, ranked, sponsored or signed up to. No address published, and no picture of anybody. Nothing is asked of the room.',
 };
