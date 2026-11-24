@@ -16,10 +16,12 @@ export default function RecordStandfirst({ children, className = '' }) {
     <p
       className={`mb-3 border-l-[3px] border-record-mark pl-3 text-record-ink/85 ${className}`}
       style={{
-        fontFamily: 'var(--font-reading)',
-        fontSize: 'clamp(1rem, 0.96rem + 0.18vw, 1.0625rem)',
-        lineHeight: 1.6,
-        maxInlineSize: '58ch',
+        fontFamily: 'var(--font-record-ui)',
+        fontSize: 'clamp(1.0625rem, 1rem + 0.25vw, 1.125rem)',
+        lineHeight: 1.5,
+        fontWeight: 600,
+        letterSpacing: '-0.011em',
+        maxInlineSize: '52ch',
         textWrap: 'pretty',
       }}
     >

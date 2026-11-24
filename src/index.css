@@ -552,13 +552,17 @@ button:focus-visible {
   --font-display: var(--record-display);
   --font-heading: var(--font-record-ui);
   --font-body: var(--font-record-ui);
-  /* ── AND THE RECORD ACTUALLY SPEAKS IN IT ───────────────────────────────────────
-     This line used to put the grotesque back, which quietly undid the record's voice on
-     the only pages that carry its prose: every paragraph on Actions, Solutions, Method,
-     Founder and the Wire was set in the face meant for labels. That is the whole of why
-     the sentences felt flat under a footer that looked designed. Literata speaks; Helvetica
-     structures; the monospace counts. Nothing else changes. */
-  --font-reading: 'Literata', var(--font-record-reading);
+  /* ── THE RECORD HAS ONE VOICE, AND IT IS NOT A REPORT ───────────────────────────
+     Two turns of this argument are recorded in this file and both were half right. A book
+     serif for the sentences read as a newspaper of the last century beside Helvetica
+     headings — that is the "old" Brian kept seeing, and he was looking at the truth. A
+     grotesque for everything read flat, because nothing had contrast.
+     So: one voice, and the contrast comes from scale and weight instead of from a second
+     face. Helvetica speaks and structures; the serif is kept for the one thing that is
+     somebody else's words, which is a quotation — see the blockquote rule in
+     record-reading.css. That is the difference between a record with an identity and a
+     record with two typefaces. */
+  --font-reading: var(--font-record-ui);
 }
 /* The shared voice reaches every product, including dialogs and SVG labels.
    Real code, hashes, and explicitly technical material retain fixed-width type. */

@@ -12,7 +12,7 @@
      grotesque first, so every paragraph on every page of the record was set in the face
      that is meant for labels — which is precisely why a page of dated entries read as a
      web page. Literata speaks; Record UI structures; the monospace counts. */
-  --font-reading: 'Literata', var(--font-record-reading);
+  --font-reading: var(--font-record-ui);
   font-family: var(--font-reading);
   text-rendering: optimizeLegibility;
   /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
@@ -31,8 +31,8 @@
 .record-pages :is(p, blockquote, li):not(.cartoon-room *):not(.uppercase):not(.font-black):not(.font-mono):not(.record-header-type):not(.record-meta):not(.break-all):not(.record-meta *):not(button *):not(dialog *):not([role="dialog"] *):not([data-record-technical] *):not([data-record-layout="compact"] *) {
   font-family: var(--font-reading) !important;
   font-size: clamp(1.0625rem, 1.015rem + .2vw, 1.1875rem) !important;
-  line-height: 1.68 !important;
-  letter-spacing: 0;
+  line-height: 1.62 !important;
+  letter-spacing: -0.004em;
   font-kerning: normal;
   font-variant-ligatures: common-ligatures;
   text-wrap: pretty;
@@ -40,6 +40,12 @@
   max-inline-size: 65ch;
 }
 .record-pages blockquote:not(.cartoon-room *):not(.record-header-type):not([data-record-technical] *) {
+  /* ── THE ONE PLACE THE SERIF SPEAKS ────────────────────────────────────────────
+     A quotation is somebody else's words, and the record says so by setting them in a
+     different hand. That is the whole of the second voice now: not the body, not the
+     headings, only what a person said. It is also the shape an activist poster has always
+     used — a bold sans that argues, and one quoted line in a cut serif that lands. */
+  font-family: 'Literata', var(--font-record-reading) !important;
   font-size: clamp(1.35rem, 1.1rem + .8vw, 1.9rem) !important;
   line-height: 1.48 !important;
   max-inline-size: 43ch;

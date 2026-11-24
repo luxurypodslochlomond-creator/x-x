@@ -52,9 +52,9 @@ export default function RecordSectionHeading({ title, count, tone = 'text-[#6b62
         className="text-[#141210] uppercase"
         style={{
           fontFamily: 'var(--font-heading)',
-          fontSize: 'clamp(21px, 5.6vw, 27px)',
-          lineHeight: 1.08,
-          letterSpacing: '-0.02em',
+          fontSize: 'clamp(26px, 7.2vw, 38px)',
+          lineHeight: 0.98,
+          letterSpacing: '-0.045em',
           fontWeight: 700,
         }}
       >

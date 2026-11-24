@@ -1,57 +1,55 @@
 import React from 'react';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
 
-// ── THE WAY IN, IN THE RECORD'S OWN HAND ──────────────────────────────────────────
-// Brian, 24 November: adding a crisis, a solution, an action or a group "must be easy as
-// fuck to get to", because on the day of an event the people with something to give are
-// standing in a field with a phone and no patience.
+// ── THE WAY IN, AT THE SIZE OF THE TOP NAV ────────────────────────────────────────
+// Brian, 24 November, on the plate that stood here: "boxes too big and weird… feels not
+// easy to add crisis etc… not coolasfuck like top nav". He is right, and it was my doing —
+// I answered "too hard to find" with four fat tiles on a yellow slab, which is a billboard
+// where a door was needed. The record already has the right door: the masthead's rail of
+// drawn marks with a small tracked word under each. Four doors in that same hand are
+// unmistakably part of the record, are the easiest thing on a phone to hit, and take one
+// line instead of a third of a screen.
 //
-// It was a line of four underlined words at ten pixels, in the grey kept for footnotes,
-// under a heading that said "Put something on the record" in the same size. Four ways to
-// give the world something, printed smaller than the small print. Nothing about the form
-// was hard; finding the door was.
-//
-// So the four are a plate now: the record's own yellow, edge to edge, with each door
-// wearing the drawing of the room it opens and its room's colour under the thumb. One tap
-// and the form is already on that room — it does not ask again which of the four you meant.
-// The yellow is the footer's yellow and the drawings are the record's own; no new colour,
-// no new icon, nothing invented.
+// Nothing about the form changed. Tap a door and it opens already on that room.
 const DOORS = [
-  { type: 'solution', label: 'A solution', line: 'What works, and can be copied.', Mark: RoomMarkSolution, ink: 'text-record-botanical', rule: 'bg-record-botanical' },
-  { type: 'climate_crisis', label: 'A crisis', line: 'Something the world must know.', Mark: RoomMarkCrisis, ink: 'text-record-red', rule: 'bg-record-red' },
-  { type: 'action', label: 'An action', line: 'A cleanup, a planting, a meeting.', Mark: RoomMarkAction, ink: 'text-record-clay', rule: 'bg-record-clay' },
-  { type: 'group', label: 'A group', line: 'People working on the same thing.', Mark: RoomMarkGroups, ink: 'text-record-ink', rule: 'bg-record-ink' },
+  { type: 'solution', label: 'Solution', Mark: RoomMarkSolution, ink: 'text-record-botanical' },
+  { type: 'climate_crisis', label: 'Crisis', Mark: RoomMarkCrisis, ink: 'text-record-red' },
+  { type: 'action', label: 'Action', Mark: RoomMarkAction, ink: 'text-record-clay' },
+  { type: 'group', label: 'Group', Mark: RoomMarkGroups, ink: 'text-record-ink' },
 ];
 
 export default function RecordAddPlate({ onPick }) {
   return (
-    <section aria-labelledby="record-add-title" className="mt-4 -mx-4 border-t-[3px] border-record-mark bg-cartoon-sun px-4 py-5 lg:-mx-10 lg:px-10 lg:py-6">
-      <h2 id="record-add-title" className="font-display text-[19px] font-bold uppercase leading-tight text-record-ink lg:text-[24px]">
-        Put something on the record
-      </h2>
-      <p className="mt-1 max-w-[46ch] text-[13px] leading-[1.5] text-record-ink/80 lg:text-[14px]">
-        No account needed. Pick one and answer four short questions.
-      </p>
+    <section aria-labelledby="record-add-title" className="mt-4 border-t-[3px] border-cartoon-sun pt-2.5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+        <h2 id="record-add-title" className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-ink">
+          Put something on the record
+        </h2>
+        <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5a5246]">
+          No account needed
+        </span>
+      </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
-        {DOORS.map(({ type, label, line, Mark, ink, rule }) => (
+      <div className="mt-2 grid grid-cols-4 divide-x divide-record-ink/15 border-y border-record-ink/15">
+        {DOORS.map(({ type, label, Mark, ink }) => (
           <button
             key={type}
             type="button"
             onClick={() => onPick(type)}
-            className="group flex min-h-[92px] flex-col gap-1 border-2 border-record-ink bg-record-paper px-3 py-2.5 text-left transition-transform duration-150 active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-ink"
+            aria-label={`Add a ${label.toLowerCase()}`}
+            className="group flex min-h-[66px] flex-col items-center justify-center gap-1 px-1 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-mark"
           >
-            <span className={`flex items-center gap-2 ${ink}`} aria-hidden="true">
-              <Mark size={24} />
-              <span className={`block h-1 w-5 ${rule}`} />
+            <span className={`${ink} transition-transform duration-150 group-active:scale-95`} aria-hidden="true">
+              <Mark size={26} />
             </span>
-            <span className="mt-0.5 text-[13px] font-bold uppercase tracking-[0.04em] text-record-ink">{label}</span>
-            <span className="text-[11.5px] leading-[1.35] text-record-ink/70">{line}</span>
+            <span className="text-[10px] font-black uppercase leading-[1.1] tracking-[0.07em] text-record-ink">
+              {label}
+            </span>
           </button>
         ))}
       </div>
 
-      <p className="mt-3 text-[11.5px] leading-[1.5] text-record-ink/75">
+      <p className="mt-1.5 text-[11px] font-mono leading-relaxed text-[#5a5246]">
         Clear entries go on at once. Anything unclear waits for a person, and we email you either way.
       </p>
     </section>
