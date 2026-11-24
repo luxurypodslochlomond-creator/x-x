@@ -52,7 +52,6 @@ const CATEGORIES = [
   { id: 'other', label: 'Other', icon: Globe },
 ];
 
-import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import RecordCoverPlate from '@/components/climate/RecordCoverPlate';
 import RecordRoomNavigation from '@/components/climate/RecordRoomNavigation';
 import RecordHolding from '@/components/climate/RecordHolding';
@@ -442,15 +441,21 @@ export default function TogetherChangeClimate() {
             1. a voice on the record — Jane's sentence, printed on the red line under the
                masthead, because a record about the world should open with somebody who has
                spent a life in it rather than with a menu
-            2. the painting and the record's own name — what this is, and what it is for
+            2. the record's own name, straight under her, on the same painting — what this
+               is, and what it is for
             3. the four rooms — what it is made of, now that the reader wants to know
           The markup is in that order too, so nothing depends on a breakpoint to say
-          something true. Same parts, same doors, same colours, same counts. */}
+          something true. Same parts, same doors, same colours, same counts.
+
+          And since 24 November there is one painting rather than three windows onto it:
+          it is the ground of this page all the way down, and the paper is a veil over it. */}
       <div className="record-home-flow">
+      {/* ── THE VOICE AND THE SENTENCE, ON THE ONE PAINTING ────────────────────────
+          No band of its own and no second copy of the painting: the record's own work is
+          the ground of this page (record-home-opening.css), so Jane speaks on the room
+          itself and the sentence that names the record comes straight under her. */}
       <div className="record-home-voice-band border-t-[3px] border-record-mark">
-        <RecordPaintedBand strength={0.75} soft>
-          <RecordHomeVoice />
-        </RecordPaintedBand>
+        <RecordHomeVoice copy={t} />
       </div>
 
       <div>

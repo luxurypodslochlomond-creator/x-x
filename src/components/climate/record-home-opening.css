@@ -1,0 +1,86 @@
+/* ── ONE PAINTING, AND THE WHOLE FRONT PAGE STANDING ON IT ──────────────────────
+   The record's painting is the room the record is kept in, not an illustration to its
+   opening. It was printed twice at the top — a framed plate, and again screened behind
+   Jane's voice — and then the page went back to flat paper for everything below, so the
+   one work a reader had been shown was gone by the time they began reading.
+
+   Brian, 24 November: "see our own coolasfuck background all the way when we scroll…
+   would need to be colours bro transparent somehow so can see our coolasfuck record
+   artwork."
+
+   So the sheet is a veil now. The painting is fixed behind the book (ClimateLayout), and
+   every band on the front page is a sheet of the record's own paper laid over it at less
+   than full strength: ink on warm paper, and the room still visible under the page the
+   whole way down. Nothing is printed twice and no second picture is introduced.
+
+   The numbers are the argument, as they are everywhere in this system. At .82 the paper
+   is a warm near-white over a dark painting, so ink keeps its contrast and a paragraph is
+   as easy to read as it was on solid paper; the painting reads as light and colour under
+   it rather than as a photograph competing with the words. Widen these later and you are
+   spending contrast, which is the one thing a public record cannot borrow back. */
+
+html .climate-record.record-home-field .record-book {
+  background-color: rgb(var(--record-paper) / .82);
+}
+
+/* ── THE OPENING IS THE PAINTING, VEILED JUST ENOUGH FOR THE WORDS ───────────────
+   Not a second image and not a black band: a veil of the record's earth, thin at the top
+   and settling at the foot, so Jane's words and the record's own name stand on the work
+   while the room is plainly behind them. */
+.record-pages .record-home-page .record-home-voice-band {
+  background: linear-gradient(
+    180deg,
+    rgb(var(--record-earth) / .5) 0%,
+    rgb(var(--record-earth) / .4) 55%,
+    rgb(var(--record-earth) / .56) 100%
+  );
+}
+
+/* ── THE SENTENCE THE RECORD IS MADE OF ────────────────────────────────────────
+   Directly under the voice, in the painting, at the size a sentence is set at when it is
+   the point of the page. Light on the veil, with the one word in the record's yellow. */
+.record-pages .record-home-page .record-opening-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 8.6vw, 66px);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.03em;
+  text-transform: none;
+  color: rgb(var(--record-paper));
+  text-wrap: balance;
+}
+@media (min-width: 1024px) {
+  .record-pages .record-home-page .record-opening-title {
+    font-size: clamp(44px, 3.6vw, 62px);
+    line-height: 1.06;
+  }
+}
+
+/* ── THE PAPER THE BANDS ARE SET ON, HELD BACK TO A VEIL ────────────────────────
+   Each selector is written one step heavier than the rule it replaces, so the veil holds
+   whatever order the record's sheets happen to arrive in. */
+html .climate-record.record-home-field .record-book {
+  background-color: rgb(var(--record-paper) / .82);
+}
+.record-pages .record-home-page .record-home-voice-band {
+  background-color: rgb(var(--record-earth) / .34);
+}
+.record-pages .record-home-page .record-room-nav {
+  background: rgb(var(--record-bone) / .82);
+}
+.record-pages .record-home-page :is(div, section, article, p)[class~="bg-[#efe7d6]"] {
+  background-color: rgb(var(--record-bone) / .8);
+}
+.record-pages .record-home-page :is(div, section, article, p)[class~="bg-[#f4efe4]"] {
+  background-color: rgb(var(--record-paper) / .74);
+}
+.record-pages .record-home-page :is(div, section, article)[class~="bg-[#241d16]"] {
+  background-color: rgb(var(--record-earth) / .9);
+}
+/* A picture plate keeps its own paper: a photograph under a veil is a photograph behind
+   tracing paper, which is the one thing this record already decided against. */
+.record-pages .record-home-page .record-entry-plate,
+.record-pages .record-home-page .record-media-mount {
+  background-color: rgb(var(--record-paper));
+}
