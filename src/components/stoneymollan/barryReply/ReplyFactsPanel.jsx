@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
-import { HIS_PAPERS, RECORD_FACTS } from '@/components/stoneymollan/barryReply/replyFacts';
+import { REMEDIES, AUTHORITIES } from '@/components/stoneymollan/barryReply/replyFacts';
 
 function FactList({ items }) {
   return (
@@ -34,12 +34,13 @@ export default function ReplyFactsPanel() {
   return (
     <>
       <details className="mt-8 border-2 border-record-ink bg-record-bone/40 p-4">
-        <summary className={summary}>What Barry's own papers say</summary>
-        <FactList items={HIS_PAPERS} />
+        <summary className={summary}>Scottish court wins and legal routes · not part of the email</summary>
+        <p className="mt-3 text-[13px] leading-relaxed text-record-muted">Checked 24 November 2026. General legal information, not a solicitor’s advice or a prediction of success.</p>
+        <FactList items={REMEDIES} />
       </details>
       <details className="mt-3 border-2 border-record-ink bg-record-bone/40 p-4">
-        <summary className={summary}>The public record, and where each line came from</summary>
-        <FactList items={RECORD_FACTS} />
+        <summary className={summary}>Which body does what · official sources</summary>
+        <FactList items={AUTHORITIES} />
       </details>
     </>
   );

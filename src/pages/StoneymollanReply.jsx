@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Copy, Check, Printer, ArrowLeft, ExternalLink, AlertTriangle } from 'lucide-react';
+import { Copy, Check, Printer, ArrowLeft, ExternalLink } from 'lucide-react';
 import { TO, SUBJECT, BODY } from '@/components/stoneymollan/barryReply/replyText';
 import { copyText } from '@/components/stoneymollan/barryReply/copyText';
 import ReplyLetter from '@/components/stoneymollan/barryReply/ReplyLetter';
@@ -11,15 +11,12 @@ import ReplyFactsPanel from '@/components/stoneymollan/barryReply/ReplyFactsPane
 const FULL = `To: ${TO}\nSubject: ${SUBJECT}\n\n${BODY}`;
 const MAILTO = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}`;
 
+const WORD_COUNT = BODY.trim().split(/\s+/).length;
 const CHECKS = [
-  'Send it as a reply on his 19 November email, so the thread, the subject line and your 1 September objection sit underneath it.',
-  'The Park claim no longer stands alone: the letter says the same conclusion follows from the scheduled monument and from deep peat, so the argument survives even if someone disputes the boundary line. Confirm the boundary on the Park Authority map anyway and keep a copy.',
-  'Section 2 now asks for any section 11 order. That is the legal route to closing access, and only West Dunbartonshire Council can make one. If they claim they can divert a Great Trail without it, that is the answer.',
-  'Both trails are confirmed from public sources, and the Park Authority itself calls Stoneymollan Road "a delightful ancient route linking Balloch and Cardross".',
-  'The 4 June 2025 date is gone because you could not place it. If you find that email, tell me and I will put the date back.',
-  'The letter names nobody: not the previous owner, not the neighbour, not the manager you have in mind. Keep it that way in the covering email too.',
-  'The EIR requests carry the real clock: 20 working days, then review, then the Commissioner. Send those the same day, not after he replies.',
-  'Do not attach the Glasgow title plan, and do not send the HES reports. They belong to another matter and to a later stage.',
+  'Reply in the existing email thread. Copy only the letter; do not forward this page or attach the private case file.',
+  'Keep original correspondence, plans and photographs. The saved research is AI-assisted, not a solicitor’s opinion; no letter guarantees an outcome.',
+  'The 14 days is a requested response time, not an automatic pause on works or an admission if unanswered. Regulatory and court deadlines run separately.',
+  'For threatened interference, obtain prompt advice from a Scottish property solicitor; ERCS offers free environmental-law advice, subject to assessment.',
 ];
 
 export default function StoneymollanReply() {
@@ -66,8 +63,8 @@ export default function StoneymollanReply() {
           The reply to Barry Harper
         </h1>
         <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/80" style={{ fontFamily: 'var(--font-reading)' }}>
-          Version 5. Written against his email, his nine-page response, his catchment map and the
-          Scottish Forestry guidance he enclosed. No blanks.
+          Version 12 · {WORD_COUNT} words in the letter. Six grouped requests, with the earlier
+          objection kept in the thread rather than repeated.
         </p>
 
         <div className="mt-4 border-2 border-record-ink bg-record-ink p-4 text-record-paper">
@@ -115,7 +112,7 @@ export default function StoneymollanReply() {
           </button>
         </div>
         <p className="mt-2 break-all font-mono text-[10px] uppercase tracking-wide text-record-muted">
-          {TO} · m: 07717 216883 · t: 01738 625 128
+          This page opens without sign-in. Private evidence and case-specific advice are not included.
         </p>
 
         <div className="mt-4 border-2 border-record-ink bg-record-signal/40 p-3">
@@ -123,13 +120,13 @@ export default function StoneymollanReply() {
             The deadline that is not his to set
           </p>
           <p className="mt-1.5 text-[13px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
-            Comments on a woodland creation application must reach Scottish Forestry within
-            <strong> 28 days of the day it first appears on the public register</strong>, not
-            within 14 days of Barry's reply. Filter the register by West Dunbartonshire Council and
-            search the property name. If the case is there, that clock is already running.
+            Check the case’s actual consultation closing date now. Scottish Forestry normally
+            allows <strong>28 days for relevant woodland-creation applications</strong>; do not
+            wait for Barry’s reply. New consultations moved to a new register on 3 November 2026;
+            the official page links to both registers.
           </p>
           <a
-            href="https://casebook.forestry.scot/w/webpage/prhome"
+            href="https://www.forestry.gov.scot/scottish-forestry-public-register"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-2 flex min-h-[44px] items-center justify-center gap-2 bg-record-ink px-4 py-2 font-mono text-[10.5px] font-black uppercase tracking-wide text-record-paper"
@@ -141,14 +138,14 @@ export default function StoneymollanReply() {
         <ReplyLetter text={BODY} />
         <ReplyFactsPanel />
 
-        <div className="mt-4 border-2 border-record-red bg-record-red/5 p-4">
-          <p className="flex items-center gap-2 font-mono text-[10.5px] font-black uppercase tracking-[0.16em] text-record-red">
-            <AlertTriangle className="h-4 w-4" /> Before you press send
-          </p>
-          <ul className="mt-2 space-y-2 text-[13px] leading-relaxed text-record-ink/85" style={{ fontFamily: 'var(--font-reading)' }}>
+        <details className="mt-4 border-2 border-record-red bg-record-red/5 p-4">
+          <summary className="cursor-pointer font-mono text-[10.5px] font-black uppercase tracking-[0.16em] text-record-red">
+            Before you press send
+          </summary>
+          <ul className="mt-2 space-y-2 text-[13px] leading-relaxed text-record-ink/85 font-body">
             {CHECKS.map((c) => <li key={c}>{c}</li>)}
           </ul>
-        </div>
+        </details>
       </div>
     </div>
   );
