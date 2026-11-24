@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Film, ExternalLink } from 'lucide-react';
-import { WHY_THIS_SHAPE, SHOTS, COOL_NOT_DICK, FILMING, LINKING } from '@/components/fergus/videoScript';
+import { WHY_THIS_SHAPE, THE_FACE_THING, SHOTS, COOL_NOT_DICK, FILMING, FREE_KIT, LINKING } from '@/components/fergus/videoScript';
 
 const Label = ({ children }) => (
   <p className="font-mono text-[10px] font-black uppercase tracking-[0.18em] text-record-muted">{children}</p>
@@ -26,6 +26,15 @@ export default function FergusHiggsfieldVideo() {
         <p className="mt-4 border-l-2 border-record-ink/30 pl-3 text-[13.5px] leading-relaxed text-record-ink/80">
           {WHY_THIS_SHAPE}
         </p>
+
+        <section className="mt-6 border-2 border-record-ink bg-record-bone/50 p-4">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            About his face on camera
+          </h2>
+          <ul className="mt-2 space-y-2 text-[13.5px] leading-relaxed text-record-ink/85">
+            {THE_FACE_THING.map((f) => <li key={f}>{f}</li>)}
+          </ul>
+        </section>
 
         <section className="mt-7 border-t-2 border-record-ink pt-5">
           <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
@@ -69,6 +78,15 @@ export default function FergusHiggsfieldVideo() {
           </h2>
           <ul className="mt-3 space-y-2 text-[13.5px] leading-relaxed text-record-ink/85">
             {FILMING.map((f) => <li key={f}>{f}</li>)}
+          </ul>
+        </section>
+
+        <section className="mt-6 border-t border-record-ink/20 pt-5">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            Free kit, nothing to buy
+          </h2>
+          <ul className="mt-3 space-y-2 text-[13.5px] leading-relaxed text-record-ink/85">
+            {FREE_KIT.map((f) => <li key={f}>{f}</li>)}
           </ul>
         </section>
 

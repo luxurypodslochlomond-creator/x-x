@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Copy, Check, ExternalLink, ArrowLeft } from 'lucide-react';
 import { copyText } from '@/components/stoneymollan/barryReply/copyText';
-import { SUBJECT, PITCH, ROBIN_LINES, BEFORE_SENDING } from '@/components/fergus/higgsfieldPitch';
+import { SUBJECT, PITCH, WHAT_THEY_WANT, ROBIN_LINES, BEFORE_SENDING } from '@/components/fergus/higgsfieldPitch';
 
 // Fergus's way into the Higgsfield creator programme. Mobile first: one note, one button.
 const FULL = `Subject: ${SUBJECT}\n\n${PITCH}`;
@@ -76,6 +76,30 @@ export default function FergusHiggsfield() {
             </p>
           ))}
         </article>
+
+        <section className="mt-8 border-t border-record-ink/20 pt-5">
+          <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">
+            What Higgsfield actually says they want
+          </h2>
+          <dl className="mt-3 space-y-3">
+            {WHAT_THEY_WANT.map((w) => (
+              <div key={w.label} className="border-l-2 border-record-ink/30 pl-3">
+                <dt className="font-mono text-[10.5px] font-black uppercase tracking-wide">{w.label}</dt>
+                <dd className="mt-1 text-[13.5px] leading-relaxed text-record-ink/80">{w.text}</dd>
+                <dd className="mt-1">
+                  <a
+                    href={w.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wide text-record-muted underline decoration-dotted underline-offset-2"
+                  >
+                    Their page <ExternalLink className="h-3 w-3" />
+                  </a>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
 
         <section className="mt-8 border-t border-record-ink/20 pt-5">
           <h2 className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-red">

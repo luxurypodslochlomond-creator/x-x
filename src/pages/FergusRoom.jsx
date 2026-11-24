@@ -12,6 +12,7 @@ const DOORS = [
   { to: '/FergusHiggsfield', title: 'The note to send', desc: 'What to write. What not to write.' },
   { to: '/FergusHiggsfieldVideo', title: 'The 60 seconds', desc: 'Shot by shot, with the lines.' },
   { to: '/FergusHughesProfile', title: 'The football page', desc: 'That one is for a coach, not a video company.' },
+  { to: '/FergusCard', title: 'Your card', desc: 'Screenshot it. Send it with anything.' },
 ];
 
 const errText = (err) =>

@@ -143,6 +143,8 @@ const FergusHiggsfieldVideoPage = React.lazy(() => import('./pages/FergusHiggsfi
 // Fergus's own room, behind a code checked on the server. Not linked from the site:
 // he is given the address and the code, and the notes stay behind it.
 const FergusRoomPage = React.lazy(() => import('./pages/FergusRoom'));
+// The card he can screenshot and send: one name, four facts, one line.
+const FergusCardPage = React.lazy(() => import('./pages/FergusCard'));
 const RealityCheckPage = React.lazy(() => import('./pages/RealityCheck'));
 const GraemeOnePagerPage = React.lazy(() => import('./pages/GraemeOnePager'));
 const PartnerEvidencePage = React.lazy(() => import('./pages/PartnerEvidence'));
@@ -380,6 +382,7 @@ const AuthenticatedApp = () => {
       <Route path="/FergusHiggsfield" element={<FergusHiggsfieldPage />} />
       <Route path="/FergusHiggsfieldVideo" element={<FergusHiggsfieldVideoPage />} />
       <Route path="/FergusRoom" element={<FergusRoomPage />} />
+      <Route path="/FergusCard" element={<FergusCardPage />} />
       <Route path="/RealityCheck" element={<RealityCheckPage />} />
       <Route path="/GraemeOnePager" element={<GraemeOnePagerPage />} />
       <Route path="/PartnerEvidence" element={<PartnerEvidencePage />} />

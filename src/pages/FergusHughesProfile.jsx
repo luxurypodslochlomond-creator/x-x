@@ -75,7 +75,7 @@ export default function FergusHughesProfile() {
 
             {/* inline stat row — hairlines, not boxes */}
             <div className="flex flex-wrap items-center mt-7 text-[13px]" style={SANS}>
-              <span className="text-stone-800 font-semibold">Irvine Meadow FC</span>
+              <span className="text-stone-800 font-semibold">Shotts Bon Accord</span>
               <span className="mx-3 text-stone-300">/</span>
               <span className="text-stone-600">b. 15 May 2009</span>
               <span className="mx-3 text-stone-300">/</span>
@@ -90,7 +90,7 @@ export default function FergusHughesProfile() {
             <div className="relative pl-7">
               <span className="absolute -left-1 -top-3 text-5xl leading-none text-[#9a3412]/40" style={SERIF}>"</span>
               <blockquote className="text-[19px] leading-[1.6] text-stone-800" style={SERIF}>
-                I want to move up from where I am now because I feel like I'm at an important stage with my football. I have confidence and belief that I am at the level to take it a step up now.
+                Shotts Bon Accord made me their record signing at seventeen. I'm not there to make up the numbers — I want to play, and I want to keep moving up.
               </blockquote>
               <p className="text-[10px] tracking-[0.25em] uppercase text-stone-400 mt-4" style={SANS}>Why I'm Moving On</p>
             </div>
@@ -103,10 +103,17 @@ export default function FergusHughesProfile() {
               <ul className="space-y-3.5">
                 <li className="flex justify-between items-baseline gap-4">
                   <div>
-                    <p className="text-stone-900 font-semibold text-[15px]" style={SANS}>Irvine Meadow FC</p>
-                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>senior debut · 27 Jun 2026</p>
+                    <p className="text-stone-900 font-semibold text-[15px]" style={SANS}>Shotts Bon Accord</p>
+                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>record signing</p>
                   </div>
                   <p className="text-xs text-stone-400 whitespace-nowrap" style={SANS}>2026 —</p>
+                </li>
+                <li className="flex justify-between items-baseline gap-4">
+                  <div>
+                    <p className="text-stone-700 text-[15px]" style={SANS}>Irvine Meadow FC</p>
+                    <p className="text-xs text-stone-400 mt-0.5" style={SANS}>senior debut · 27 Jun 2026</p>
+                  </div>
+                  <p className="text-xs text-stone-400 whitespace-nowrap" style={SANS}>2026</p>
                 </li>
                 <li className="flex justify-between items-baseline gap-4">
                   <div>
@@ -163,6 +170,18 @@ export default function FergusHughesProfile() {
             <Section n="07" title="Ambition">
               <p className="text-[21px] font-semibold text-stone-900 leading-snug" style={SERIF}>
                 To reach the highest level possible and represent Scotland.
+              </p>
+            </Section>
+
+            {/* The part no other applicant has: he makes things with his hands, and he plays.
+                Kept last on purpose — it is not the pitch, it is the reason to remember him. */}
+            <Section n="08" title="The Other Hand">
+              <p className="text-[15px] text-stone-800 leading-relaxed" style={SANS}>
+                He draws and paints, plays piano, and dances. School never measured it. A chair, a
+                pencil and a keyboard did.
+              </p>
+              <p className="text-[13px] text-stone-500 mt-3 leading-relaxed" style={SANS}>
+                Asked for a camera, he will make something rather than describe something.
               </p>
             </Section>
           </div>

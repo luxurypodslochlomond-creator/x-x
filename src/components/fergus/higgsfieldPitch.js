@@ -51,6 +51,36 @@ export const ROBIN_LINES = [
   },
 ];
 
+// What Higgsfield's own pages actually say, checked 24 November 2026. This is the part that
+// should settle Fergus's nerves: there is no follower floor, so he is not under-qualified.
+export const WHAT_THEY_WANT = [
+  {
+    label: 'No follower floor, no portfolio requirement',
+    text: 'Higgsfield states plainly that there is no follower minimum and no portfolio requirement, and that anyone creating with AI can apply — from a first audience to industry veterans. Every application gets an individual response. He is not too small to apply.',
+    href: 'https://higgsfield.ai/blog/creator-partnership-program',
+  },
+  {
+    label: 'The form asks for four things',
+    text: 'Platforms, total audience, country, and a link to recent work. That is the whole ask. His answer is Glasgow, Scotland, a phone, and the 60-second video — which is why the video matters more than anything else he sends.',
+    href: 'https://higgsfield.ai/creator-hub/help-center/business/how-do-i-join-a-partnership-or-creator-program',
+  },
+  {
+    label: 'There are three programmes, and they pay differently',
+    text: 'The Creator Partnership Programme is the partnership: monthly credits, early access to models, a private partner community and a direct line to the team. Higgsfield Earn runs paid campaigns and is open to creators of any size — that is the one that actually pays him. The affiliate route pays a share on referrals. Apply to the partnership, and ask about Earn in the same breath.',
+    href: 'https://higgsfield.ai/creator-hub/help-center/business/how-do-i-join-a-partnership-or-creator-program',
+  },
+  {
+    label: 'They publicly say they need different people',
+    text: 'Higgsfield states it needs creators with different faces, voices, niches and editing styles, because campaigns need dozens of hooks. That is the argument: a 17-year-old barber from Glasgow who draws and plays piano is not a weaker applicant than a polished studio — he is a niche they do not have.',
+    href: 'https://higgsfield.ai/creator-partnership-program',
+  },
+  {
+    label: 'Who to write to',
+    text: 'The form on the CPP page is the door. For partnership and brand enquiries the published address is marketing@higgsfield.ai. Their blog promises a direct contact once accepted, so the form is the honest route in — not a cold email to a stranger.',
+    href: 'https://higgsfield.ai/creator-hub/help-center/business/how-do-i-join-a-partnership-or-creator-program',
+  },
+];
+
 export const BEFORE_SENDING = [
   'Replace the two bracketed lines at the foot with his real Instagram or TikTok handle and his number. Nothing else in the letter needs editing.',
   'The video is the one thing they actually asked for: film the 60 seconds on the next page, upload it to YouTube as Unlisted, and put that link in the form and in the note.',
