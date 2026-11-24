@@ -4,8 +4,9 @@ import { BookRibbon } from '@/components/climate/cartoons/CartoonInkIcons';
 // ── THE BOOK THAT COMES OUT OF THE 29TH ────────────────────────────────────────
 // Janine, 17 November 2026: every African cartoonist who takes part in the workshop has
 // their work gathered into an anthology, published on CartoonAFRICA's own platforms and on
-// this record, free to download anywhere in the world. That is the largest thing this room
-// will ever hold, so it is printed here in the anthology's own words rather than described.
+// this record, free to download anywhere in the world. She marked those four words again on
+// 24 November — "and on this record" — so the promise is printed in her own sentence, on
+// every line of the room that makes it. The download appears the day the book does.
 //
 // The title, the two editors and the subtitle are quoted exactly. The record does not
 // re-title somebody else's book, does not shorten a credit, and does not put a name on it
@@ -63,8 +64,8 @@ export default function CartoonAnthology() {
 
       <p className="comic-anthology-note">
         Every African cartoonist who takes part in the 29 November discussion has their work
-        gathered into this book. It is published on CartoonAFRICA’s own platforms, for free
-        download, anywhere in the world.
+        gathered into this book. When it is finished it is published free — on CartoonAFRICA’s
+        own platforms and on this record — for anyone in the world to download.
       </p>
 
       {/* The cover sits at the top of the room, so this says "at the top", not "above".
@@ -74,8 +75,8 @@ export default function CartoonAnthology() {
           business, so it is not on this book's plate. */}
       <p className="comic-anthology-status">
         The cover at the top of this room is a sample: the book is still being made, so it may
-        change before it is printed. The day it is finished CAIB publishes it — free, with no
-        sign-in, for anyone anywhere.
+        change before it is printed. The day it is finished it is published — free, with no
+        sign-in, for anyone anywhere: on CAIB’s own platforms, and here on this record.
       </p>
 
       <p className="comic-anthology-credit">

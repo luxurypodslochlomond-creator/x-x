@@ -41,6 +41,14 @@ export default function CartoonCatalogueBand() {
         <p className="comic-catalogue-cover-credit record-meta">{CARTOON_EVENT.coverArt}</p>
         <CartoonCoverWords />
         <p id="comic-catalogue-title" className="comic-catalogue-eyebrow record-meta">The catalogue · being made now</p>
+        {/* ── HER SENTENCE, IN THE OPEN, BECAUSE SHE MARKED IT TWICE ────────────────
+            Janine sent this back on 24 November with four words highlighted in yellow:
+            "and on this record". A promise a reader has to open a drawer to find is not a
+            promise being made. So it stands here, in her words, under the cover it is about. */}
+        <p className="comic-catalogue-line record-meta">
+          When it is finished it is published free — on CAIB’s own platforms and on this
+          record — for anyone in the world to download.
+        </p>
         <p className="comic-catalogue-line record-meta">
           This room is not CAIB and does not speak for it.{' '}
           <Link to="/ClimateCartoons/CAIB" className="underline">Where the line is</Link>
