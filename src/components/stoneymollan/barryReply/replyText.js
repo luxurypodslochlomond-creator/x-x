@@ -9,6 +9,15 @@
 //    (Scotland) Act 2003, for a particular area and a particular purpose. That is the answer to
 //    "why are they allowed to disrupt it": they are not, unless the Council makes that order.
 //
+// Checked against Scottish Forestry's own published page on 24 November, so the terms are the
+// Scottish ones and the numbers are theirs rather than remembered: the Forestry (Environmental
+// Impact Assessment) (Scotland) Regulations 2017, Scottish Forestry as the regulator, "sensitive
+// area" as the statutory term, and their threshold table quoted exactly — afforestation 20 ha,
+// 2 ha in a National Scenic Area, no threshold in other sensitive areas; deforestation and forest
+// roads 1 ha outside a sensitive area and no threshold inside one; quarries the same. Deep peat is
+// a sensitive area for the purposes of the thresholds: over 60 per cent organic matter and over
+// 50 cm thick. Their exceptional-circumstances line is in too, so a below-threshold argument fails.
+//
 // Also changed:
 //  - the Park assertion now carries a fallback, so the argument does not depend on the boundary
 //    line at all: a scheduled monument is a sensitive area too, and his own map marks SM6341, and
@@ -27,13 +36,15 @@ export const BODY = `Dear Barry,
 
 Thank you for your email of 19 November, your response to my objection, and the catchment map. Your reply came eleven weeks after my objection of 1 September. It confirms that Scottish Woodlands intends to proceed, that the proposal has not been approved, and that my points will inform the design "where appropriate". That is not a commitment to change anything, and I would like it to become one. This is my reply.
 
-1. THE LAND IS IN THE NATIONAL PARK, SO THE THRESHOLD DOES NOT APPLY
+1. THERE IS NO AREA THRESHOLD TO STAY UNDER
 
-The land lies within Loch Lomond and The Trossachs National Park. A National Park is a sensitive area under the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2017, and Scottish Forestry publishes the thresholds that follow from it.
+The land lies within Loch Lomond and The Trossachs National Park. A National Park is a sensitive area under the Forestry (Environmental Impact Assessment) (Scotland) Regulations 2017, and Scottish Forestry is the regulator that applies them.
 
 If Scottish Woodlands contends that any part of the proposal lies outside the Park, please identify the boundary relied on and the map it is taken from.
 
-Where no part of the land is a sensitive area, afforestation has a threshold of 20 hectares. In a National Scenic Area it is 2 hectares. In any other sensitive area, including a National Park, there is no threshold at all. Forest roads have no threshold in a sensitive area, and neither does deforestation.
+Scottish Forestry publishes the thresholds in a table, and they are these. Afforestation: 20 hectares where no part of the land is a sensitive area, 2 hectares in a National Scenic Area, and no threshold at all in any other sensitive area. Deforestation: 1 hectare outside a sensitive area, and no threshold in a National Park or on a scheduled monument. Forest roads: 1 hectare outside a sensitive area, and no threshold in a sensitive area at all. Forestry quarries: the same.
+
+Scottish Forestry also publishes that a screening opinion should be sought where there are exceptional circumstances which make it seem likely that a project below the threshold will have a significant effect. So even on the most favourable reading for the proposal, the answer is a screening opinion.
 
 Nothing here turns on the boundary line, because the same conclusion follows on two further grounds. A scheduled monument is a sensitive area, and your own map marks SM6341. Deep peat is a sensitive area, meaning organic soil containing more than 60 per cent organic matter and exceeding 50 centimetres in thickness, and your response says that areas of peat over 50 cm were excluded "where required".
 
@@ -53,7 +64,7 @@ If no screening opinion has been sought, please confirm that, and that no work w
 
 2. THE ACCESS: TWO NATIONAL TRAILS RUN DOWN THIS ROAD
 
-The first stage of the John Muir Way runs from Helensburgh to Balloch and comes down the Stoneymollan road to the foot of Loch Lomond. The Three Lochs Way, also one of Scotland's Great Trails, runs between Balloch and Helensburgh over the same ground. The Park Authority's own website describes this road as "a delightful ancient route linking Balloch and Cardross", and lists it first among the top ten highlights of the Three Lochs Way. The ScotWays record for the path places it within Loch Lomond and The Trossachs National Park and records it as a coffin road, 6.75 km from the A82 at Upper Stoneymollan to Kirkton at Cardross.
+The first stage of the John Muir Way runs from Helensburgh to Balloch and comes down the Stoneymollan road to the foot of Loch Lomond. The Three Lochs Way, also one of Scotland's Great Trails, runs between Balloch and Helensburgh over the same ground. The Park Authority's own website describes this road as "a delightful ancient route linking Balloch and Cardross", and lists it first among the top ten highlights of the Three Lochs Way. The ScotWays record for the path places it within Loch Lomond and The Trossachs National Park and records it as an old coffin road, 6.75 km from the A82 at Upper Stoneymollan to Kirkton at Cardross: the way the dead of Balloch were carried to be buried in the consecrated ground of the church at Cardross. Its recorded start is the A82 at the access to Upper Stoneymollan Farm, which is the road this proposal would use. The coffin road and the haul road are the same way in.
 
 So this is not a lane serving a few houses. It is the western end of one national trail and part of another, the way onto both, and a recorded historic route in its own right.
 
