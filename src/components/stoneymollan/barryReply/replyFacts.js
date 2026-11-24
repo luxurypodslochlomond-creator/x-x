@@ -48,10 +48,20 @@ export const HIS_PAPERS = [
     src: 'Map, S.A.M. and U.A.M. symbols',
   },
   {
-    label: 'The threshold that may not exist',
-    text: 'Afforestation: 20 hectares where no part of the land is a sensitive area. In a National Scenic Area, 2 hectares. In any OTHER sensitive area, no threshold at all. Sensitive areas include a scheduled monument, a National Park, an SSSI, a European site, and deep peat over 60 per cent organic matter and over 50 cm. Work in the past five years on adjacent land counts towards the area. His map marks scheduled monuments, his response admits peat over 50 cm was excluded "where required", and felling happened in 2024. Any one of those can remove the threshold entirely, which turns a design argument into a statutory one.',
+    label: 'The Park removes the threshold entirely',
+    text: 'A National Park is a sensitive area under the 2017 Regulations. Scottish Forestry publishes the thresholds: afforestation is 20 hectares where no part of the land is sensitive, 2 hectares in a National Scenic Area, and NO THRESHOLD in any other sensitive area. Forest roads have no threshold in a sensitive area either. Deforestation has none. So inside the Park there is no area to stay under for planting, for a road, or for felling, and a screening opinion is compulsory. This is no longer an argument to be won, it is a requirement he either met or did not.',
     src: 'Scottish Forestry, Forestry EIA',
     href: 'https://www.forestry.gov.scot/forestry-environmental-impact-assessment',
+  },
+  {
+    label: 'The felling question, asked without accusing',
+    text: 'A felling permission normally carries a restocking condition. If their felling application is on hold, a planting scheme can be the same job delivered through the other door. So the letter asks three factual things: is any of this planting restocking under a felling permission, does any felling form part of the proposal, and what is the status of the felling application. No motive is alleged. If the answer is yes to any of them, the scheme is not woodland creation at all and the EIA question changes shape.',
+    src: 'Builder note',
+  },
+  {
+    label: 'The John Muir Way is the route, not local colour',
+    text: 'Its first stage runs Helensburgh to Balloch across this ground. So the road is the way onto a national long-distance trail, not a private lane with a few houses on it. That is why the access section leads with the trail and the statutory access rights rather than with the inconvenience to us.',
+    src: 'Builder note',
   },
   {
     label: 'The Land Information Search',

@@ -13,8 +13,9 @@ const MAILTO = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}`;
 
 const CHECKS = [
   'Send it as a reply on his 19 November email, so the thread, the subject line and your 1 September objection sit underneath it.',
-  'Section 1 is now the strongest point in the letter. If the land holds a scheduled monument, sits in the National Park, or has deep peat over 50 cm, there is no area threshold at all for afforestation and a screening opinion is compulsory. Check the National Park boundary on the public map before sending.',
-  'The letter asks what access was used for the works already carried out, and about routes from Cameron Home Farm, which is the title of his own map. It names nobody. Let him answer first.',
+  'The whole letter now rests on the land being inside the National Park. Confirm that on the Park Authority boundary map and keep a copy, because inside the Park there is no area threshold for planting, forest roads or felling, and a screening opinion is compulsory.',
+  'Section 1 asks whether any of the planting is restocking under a felling permission. It alleges nothing. Read his answer to that one first.',
+  'The letter names nobody: not the keeper, not the neighbour, not the manager you have in mind. Keep it that way in the covering email too.',
   'Check the date of your 4 June 2025 email before sending. It is the one date in here taken from your own file rather than from his papers.',
   'The EIR requests carry the real clock: 20 working days, then review, then the Commissioner. Send those the same day, not after he replies.',
   'Do not attach the Glasgow title plan, and do not send the HES reports. They belong to another matter and to a later stage.',
