@@ -13,10 +13,11 @@ const MAILTO = `mailto:${TO}?subject=${encodeURIComponent(SUBJECT)}`;
 
 const CHECKS = [
   'Send it as a reply on his 19 November email, so the thread, the subject line and your 1 September objection sit underneath it.',
-  'The whole letter now rests on the land being inside the National Park. Confirm that on the Park Authority boundary map and keep a copy, because inside the Park there is no area threshold for planting, forest roads or felling, and a screening opinion is compulsory.',
+  'The whole letter rests on the land being inside the National Park. Confirm it on the Park Authority boundary map and keep a copy: inside the Park there is no area threshold for planting, forest roads or felling, and a screening opinion is compulsory.',
+  'The two trails are confirmed from public sources: the John Muir Way comes down the Stoneymollan road to Balloch, and the Three Lochs Way runs Balloch to Helensburgh. If you have a photo of a trail waymarker on the road, keep it.',
+  'The 4 June 2025 date is gone because you could not place it. If you find that email, tell me and I will put the date back.',
   'Section 1 asks whether any of the planting is restocking under a felling permission. It alleges nothing. Read his answer to that one first.',
-  'The letter names nobody: not the keeper, not the neighbour, not the manager you have in mind. Keep it that way in the covering email too.',
-  'Check the date of your 4 June 2025 email before sending. It is the one date in here taken from your own file rather than from his papers.',
+  'The letter names nobody: not the previous owner, not the neighbour, not the manager you have in mind. Keep it that way in the covering email too.',
   'The EIR requests carry the real clock: 20 working days, then review, then the Commissioner. Send those the same day, not after he replies.',
   'Do not attach the Glasgow title plan, and do not send the HES reports. They belong to another matter and to a later stage.',
 ];

@@ -54,6 +54,27 @@ export const HIS_PAPERS = [
     href: 'https://www.forestry.gov.scot/forestry-environmental-impact-assessment',
   },
   {
+    label: 'Two Great Trails come down this road',
+    text: 'The John Muir Way, first stage Helensburgh to Balloch, "comes down the Stoneymollan road to Balloch at the foot of Loch Lomond" (Walkhighlands; Destination Helensburgh; Geograph). The Three Lochs Way, also one of Scotland’s Great Trails, runs Balloch to Helensburgh over the same ground. So the road is the western end of one national trail and part of another. That is a public, checkable fact, and it is the strongest thing in the access section.',
+    src: 'Walkhighlands, Destination Helensburgh, Three Lochs Way',
+    href: 'https://www.walkhighlands.co.uk/lochlomond/helensburgh-balloch.shtml',
+  },
+  {
+    label: 'The date that is gone, and why',
+    text: 'The letter used to say "I put this to you in writing on 4 June 2025". Brian could not place that date and I could not verify it, so it now reads "I raised this with you in writing before". A wrong date is the first thing a lawyer tests, and one wrong date taints every right one around it. If Brian finds the email, put the date back, because a dated complaint is stronger than an undated one.',
+    src: 'Builder note',
+  },
+  {
+    label: 'Gilbert’s account is used; his name is not',
+    text: 'The weir about 200 m up needing an annual dig-out, the tank about 50 m south-east last emptied in 2019, and the pipe running from the intake to the property, are stated as facts about Brian’s own supply, with an invitation to correct him if the route differs. Nothing is quoted, nobody is named, and there is nothing for anyone to trace.',
+    src: 'Builder note',
+  },
+  {
+    label: 'Buzzards, stated safely',
+    text: 'Buzzard is not Schedule 1, so no extra-protection claim is made for it. The letter says only what is certain: all wild birds, their nests while in use and their eggs are protected under the Wildlife and Countryside Act 1981, so operations must be planned around the nesting season. It names buzzard because Brian sees them there, and asks what the raptor survey recorded and where.',
+    src: 'Wildlife and Countryside Act 1981',
+  },
+  {
     label: 'The felling question, asked without accusing',
     text: 'A felling permission normally carries a restocking condition. If their felling application is on hold, a planting scheme can be the same job delivered through the other door. So the letter asks three factual things: is any of this planting restocking under a felling permission, does any felling form part of the proposal, and what is the status of the felling application. No motive is alleged. If the answer is yes to any of them, the scheme is not woodland creation at all and the EIA question changes shape.',
     src: 'Builder note',
