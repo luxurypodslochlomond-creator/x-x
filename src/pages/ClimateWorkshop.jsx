@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Printer } from 'lucide-react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
-import WorkshopStrip from '@/components/climate/workshop/WorkshopStrip';
 import JanineTopicTop from '@/components/climate/workshop/JanineTopicTop';
 import TheShortAnswer from '@/components/climate/workshop/TheShortAnswer';
-import HandBack from '@/components/climate/workshop/HandBack';
 import JanineSessionTile from '@/components/climate/workshop/JanineSessionTile';
 import WorkshopClocks from '@/components/climate/workshop/WorkshopClocks';
 import JanineAgenda from '@/components/climate/workshop/JanineAgenda';
@@ -38,17 +36,19 @@ const CONTEXT = [
 // the hour is hers to cut, and a page that pretended otherwise would be us taking her
 // session off her in the name of helping.
 //
-// The page now opens with HER topic, then the strip, and the strip ends in an empty frame.
-// A reader who never reads a word of it still knows what the hour is: five frames, then the
-// room's own. The last two minutes are a hand-back rather than a conclusion — see HandBack.
+// Her draft agenda arrived on 24 November, and it is the spine of this page now. It gives
+// Brian two minutes on the platform and a place in the closing remarks — the exact opposite
+// of what this page used to insist. Her order is printed in JanineAgenda, the two minutes are
+// written out in BrianTwoMinutes, and the invented running order, the five-frame strip and the
+// blank-panel hand-back are off the page: they described an hour nobody had scheduled, and a
+// page that hands a room paper and pen for an exercise the host never asked for is a page
+// setting people up to be confused on the day.
 //
 // Three rules hold it together. Nothing personal is on it: no addresses, no phone numbers,
 // no joining link, because a workshop's link is hers to hand out and her guests' details
-// are theirs. Everything about the festival is in the festival's own words. And the offer
-// stays small — one blank panel at the end of the strip, inside an hour about African youth
-// and democracy. There is no slot for the record in it: she wrote back plainly that she hosts
-// and is not speaking for the hour, and that the panel is already presenting their own
-// cartoons, so the eight minutes that used to sit at 00:18 came out.
+// are theirs. Everything about the festival is in the festival's own words. And the record's
+// own speaking time in the hour is exactly the two minutes she granted — no more, and none
+// taken.
 
 const TOPIC = 'Climate change & the power of collective actions / creative interventions';
 
@@ -104,9 +104,11 @@ export default function ClimateWorkshop() {
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">Set down 16 November 2026</p>
       </div>
 
-      <div className="mt-4">
-        <WorkshopStrip />
-      </div>
+      {/* The five-frame strip and its blank sixth panel are not on this page any more. They
+          illustrated an hour we invented — a drawing exercise nobody scheduled — and a strip
+          that promises the room paper and pen for something the host never asked for is a
+          page setting people up to be confused on the day. The files stay; if she ever wants
+          the exercise, it comes back, and it comes back as hers. */}
 
       {/* This line used to say the slot was unconfirmed and that nothing here guessed at it —
           written on 16 November, before the festival's printed flyer reached us on the 20th.
@@ -133,8 +135,10 @@ export default function ClimateWorkshop() {
 
       <BrianTwoMinutes />
 
-      <HandBack />
-
+      {/* HandBack described a closing on a blank panel that her agenda does not have. She
+          closes with remarks and invites Francis and Brian to add a few words — that is item
+          07 of her own draft, and it is in JanineAgenda. A page that rewrites the host's
+          ending is worse than a page with one section fewer. */}
       <JanineSessionTile />
 
       <div className="mt-5 border border-record-ink/20 bg-record-bone/50 px-4 py-4">
@@ -149,7 +153,7 @@ export default function ClimateWorkshop() {
         </dl>
       </div>
 
-      <Section n="03 · Boundaries" title="What is not in this hour">
+      <Section n="02 · Boundaries" title="What is not in this hour">
         <ul className="space-y-1.5">
           {[
             'No pitch and no logo slide.',
@@ -164,14 +168,14 @@ export default function ClimateWorkshop() {
         </ul>
       </Section>
 
-      <Section n="04 · The ask" title="One thing, asked of the room">
+      <Section n="03 · The ask" title="One thing, asked of the room">
         <p className="border-l-2 border-record-red pl-3 text-[14px] leading-relaxed lg:text-[17px]" style={{ fontFamily: 'var(--font-reading)' }}>
           Draw one more next week, somewhere that is not a workshop — a bus, a kitchen table, a classroom — and send it in.
           The record is only worth what outlives the hour.
         </p>
       </Section>
 
-      <Section n="05 · Later" title="For whoever finds this in years to come">
+      <Section n="04 · Later" title="For whoever finds this in years to come">
         <p className="text-[13.5px] leading-relaxed lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
           This was set down on 16 November 2026, thirteen days before the session it describes. It is not a report of what
           happened — it is what was proposed, printed before the fact and left that way.

@@ -32,9 +32,13 @@ const ASKS = [
     'The practice room: yes, gladly.',
     'Any of us, whenever it suits you — half an hour, no slides, nothing to rehearse. Only the drawing, tried once so it works on the day.',
   ],
+  // The blank panel was ours — a nineteen-minute drawing exercise inside an hour that her
+  // agenda does not contain. Offering somebody's hour back to them with an activity added is
+  // not a small liberty. What survives is the promise about afterwards, which is the part the
+  // record can actually keep.
   [
-    'The one thing we add is a blank panel.',
-    'The last panel of the strip is left missing, and the room draws it. Everything else in the hour is already yours.',
+    'Anything drawn in the hour has somewhere to go.',
+    'If a cartoonist sends a drawing, it goes on the wall with their name and their own line about it, and their email is never shown. That is after the hour, and it takes nothing from it.',
   ],
 ];
 
