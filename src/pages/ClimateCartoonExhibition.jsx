@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
@@ -15,30 +15,46 @@ import '@/components/climate/cartoons/print/exhibition.css';
 //
 // Only drawings a keeper has put on the wall can appear here. An id that is not published
 // simply does not print, so a show can never be a back door onto somebody's draft.
-const params = new URLSearchParams(window.location.search);
-const IDS = (params.get('ids') || '').split(',').map((id) => id.trim()).filter(Boolean);
-const SHOW_NAME = (params.get('t') || '').trim().slice(0, 90);
 const PRINTED_ON = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
 export default function ClimateCartoonExhibition() {
+  // ── THE SHOW IS READ FROM THE ADDRESS AS IT STANDS, NOT WHEN THE FILE ARRIVED ──
+  // This page used to take `?ids=` at the top of the file, the moment the file was read.
+  // But the record warms this address in the background while the reader is still in the
+  // print room (routePrefetch.js), so the file was read on a page whose address had no
+  // ids in it: the list came out empty, and every exhibition said "there is nothing in
+  // this exhibition yet". It also meant a second show would have kept the first show's
+  // drawings, because the file is only read once. Read inside the component instead, so
+  // the show is always whatever the address says now.
+  const [params] = useSearchParams();
+  const idsKey = (params.get('ids') || '')
+    .split(',').map((id) => id.trim()).filter(Boolean).join(',');
+  const showName = (params.get('t') || '').trim().slice(0, 90);
   const [cartoons, setCartoons] = useState(null);
 
   useEffect(() => {
+    if (!idsKey) { setCartoons([]); return; }
     let cancelled = false;
-    Promise.all(IDS.map((id) => base44.entities.ClimateCartoon.get(id).catch(() => null))).then((records) => {
-      if (cancelled) return;
-      setCartoons(
-        records
-          .filter((record) => record && record.status === 'published')
-          .map((record) => ({ ...record, display_image_url: cartoonImageSource(record) })),
-      );
-    });
+    // One read, through the same door the wall uses: only a drawing a keeper has published
+    // can be in a show, and the order is the order the reader chose them in.
+    base44.entities.ClimateCartoon
+      .filter({ id: { $in: idsKey.split(',') }, status: 'published' }, { limit: 200 })
+      .then((page) => {
+        if (cancelled) return;
+        const byId = new Map((page.items || []).map((record) => [record.id, record]));
+        setCartoons(
+          idsKey.split(',')
+            .map((id) => byId.get(id))
+            .filter(Boolean)
+            .map((record) => ({ ...record, display_image_url: cartoonImageSource(record) })),
+        );
+      });
     return () => { cancelled = true; };
-  }, []);
+  }, [idsKey]);
 
   useEffect(() => {
-    document.title = `${SHOW_NAME || 'An exhibition'} · the cartoon room`;
-  }, []);
+    document.title = `${showName || 'An exhibition'} · the cartoon room`;
+  }, [showName]);
 
   return (
     <div className="ex-page">
@@ -60,7 +76,7 @@ export default function ClimateCartoonExhibition() {
 
       {cartoons && cartoons.length > 0 && (
         <div className="ex-stack">
-          <ExhibitionTitleSheet showName={SHOW_NAME} printedOn={PRINTED_ON} cartoons={cartoons} />
+          <ExhibitionTitleSheet showName={showName} printedOn={PRINTED_ON} cartoons={cartoons} />
           {cartoons.map((cartoon, i) => (
             <ExhibitionSheet key={cartoon.id} cartoon={cartoon} plate={i + 1} />
           ))}
