@@ -36,8 +36,22 @@
 #root .press-room .wall-setlist a:focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: -3px; }
 #root .press-room .wall-setlist a:active { background: rgb(var(--record-mark) / .08); }
 
+/* ── ON A PHONE, THE PLATE GOES TWO-UP ─────────────────────────────────────────
+   Twelve lines down a phone is a scroll before a reader has met a drawing, and this list
+   sits above the wall. So it is set as a printed contents: two columns, the number in the
+   red margin, the label beside it. The marks come off on a phone — at eighteen pixels a
+   drawn mark is a smudge beside a word that already says what it is — and the rows keep a
+   full thumb's height, because a list you cannot hit is not a list. */
 @media screen and (max-width: 639px) {
   #root .press-room .wall-wayfinding { order: 3; margin-top: 1.1rem; }
   #root .press-room .press-opening-words > .press-scope { order: 4; }
-  #root .press-room .wall-setlist-label { font-size: .82rem; }
+  #root .press-room .wall-setlist ol {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 1rem;
+  }
+  #root .press-room .wall-setlist li + li { border-top: 1px solid rgb(var(--record-ink) / .14); }
+  #root .press-room .wall-setlist li:nth-child(-n+2) { border-top: 0; }
+  #root .press-room .wall-setlist a { grid-template-columns: 1.6rem minmax(0, 1fr); gap: .45rem; padding: .5rem 0; }
+  #root .press-room .wall-setlist svg { display: none; }
+  #root .press-room .wall-setlist-label { font-size: .8rem; line-height: 1.25; }
+  #root .press-room .wall-setlist-n { font-size: .58rem; }
 }
