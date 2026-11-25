@@ -62,13 +62,6 @@
   background-color: transparent;
   box-shadow: none;
 }
-@media (min-width: 1024px) {
-  /* A wall is looked at from across a room, so this is the one page of the record that
-     opens out: the plate runs nearly the whole glass, and the sheets keep a spread inside
-     it. Narrowing it to the reading measure made the room a page like any other — which is
-     the one thing this room is not. */
-  #root .record-cartoon-field .record-book { max-width: min(1560px, 96vw); margin-inline: auto; }
-}
 
 /* This local serif override was defeating the Record's shared reading voice. */
 #root .press-room { --font-reading: var(--font-record-ui); }
@@ -78,11 +71,6 @@
   max-width: 106rem;
   margin: 0 auto;
   padding: 0 0 3.5rem;
-}
-@media (min-width: 1024px) {
-  /* A frame of painting down both sides as well as between the sheets: the room is a set
-     of sheets lying ON the picture, and a sheet that touches the glass is a page again. */
-  .press-room-inner { padding: 0 clamp(1rem, 2vw, 2.5rem) 5.5rem; }
 }
 
 /* ── EVERY CHAPTER IS A SHEET ON THE PAINTING ───────────────────────────────────
@@ -232,23 +220,6 @@
   color: rgb(var(--record-muted));
 }
 
-@media (min-width: 1024px) {
-  .press-opening {
-    display: grid;
-    grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-    column-gap: clamp(2rem, 4vw, 5.5rem);
-    align-items: start;
-    padding-top: 2rem;
-  }
-  .press-opening-words { grid-column: 1; grid-row: 1; }
-  .press-opening-cover { grid-column: 2; grid-row: 1; margin-top: 0; }
-  .press-room .comic-catalogue {
-    grid-template-columns: minmax(0, auto) minmax(15rem, 1fr);
-    column-gap: clamp(1.5rem, 2.4vw, 3rem);
-    align-items: start;
-  }
-  .press-room .comic-catalogue > img { width: auto; max-height: 84vh; }
-}
 
 /* ── the argument, told in beats ─────────────────────────────────────────────── */
 .press-room .comic-why {
@@ -487,31 +458,6 @@
 .press-sheet-provenance a { color: rgb(var(--record-ink)); text-decoration: none; border-bottom: 1px solid rgb(var(--record-ink) / .3); justify-self: start; }
 .press-sheet-provenance a:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
 
-@media (min-width: 1024px) {
-  .press-sheet {
-    grid-template-columns: minmax(0, 1.62fr) minmax(16rem, .58fr);
-    column-gap: clamp(1.75rem, 3.2vw, 4rem);
-    align-items: start;
-    padding: 2.6rem 0;
-  }
-  .press-sheet:nth-child(even) .press-sheet-art { order: 2; }
-  .press-sheet:nth-child(even) .press-sheet-rail { order: 1; }
-  .press-sheet--lead { grid-template-columns: minmax(0, 1fr); }
-  .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: min(84vh, 60rem); }
-  .press-sheet--lead .press-sheet-rail {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-    column-gap: clamp(1.75rem, 3.2vw, 4rem);
-    align-items: start;
-  }
-  .press-sheet--lead .press-sheet-number { grid-column: 1; grid-row: 1; }
-  .press-sheet--lead .press-sheet-subject { grid-column: 1; grid-row: 2; }
-  .press-sheet--lead .press-sheet-by { grid-column: 1; grid-row: 3; }
-  .press-sheet--lead .press-sheet-origin { grid-column: 1; grid-row: 4; }
-  .press-sheet--lead .press-sheet-title { grid-column: 1; grid-row: 5; }
-  .press-sheet--lead .press-sheet-words { grid-column: 2; grid-row: 1 / span 4; margin-top: 0; }
-  .press-sheet--lead .press-sheet-link { grid-column: 1; grid-row: 6; }
-  .press-sheet--lead .press-sheet-provenance { grid-column: 1 / -1; grid-row: 7; }
-}
 
 .press-wall-colophon {
   margin: 1.2rem 0 0;
@@ -858,9 +804,6 @@
   border-bottom: 1px solid rgb(var(--record-ink) / .3);
 }
 .press-room .comic-session-link:hover { color: rgb(var(--record-red)); border-bottom-color: rgb(var(--record-red)); }
-@media (min-width: 1024px) {
-  .press-facing { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(2rem, 4vw, 5rem); }
-}
 
 /* ── the drawing desk ────────────────────────────────────────────────────────── */
 .press-room .comic-workshop {

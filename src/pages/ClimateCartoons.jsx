@@ -12,35 +12,18 @@ import BaseOneStrip from '@/components/climate/cartoons/baseone/BaseOneStrip';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
-// Human drawings lead, and everything after them is about those drawings.
-// Desktop is a newspaper spread. Original artwork, sources and controls stay intact.
+// Shared ink and phone treatments; the desktop layout is declared once, last.
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';
-import '@/components/climate/cartoons/press/press-desktop-ground.css';
-// Loaded last: the second ink goes down on top of the laid-out sheet, never under it.
 import '@/components/climate/cartoons/press/press-ink.css';
 import '@/components/climate/cartoons/cartoon-lineage.css';
-// The record's own signal — yellow plate, black words, red label — laid over the room.
 import '@/components/climate/cartoons/press/press-record-ink.css';
-// Last: the cover takes the left leaf, and the wall gives each drawing its own measure.
-import '@/components/climate/cartoons/press/press-balance.css';
-// And last of all, the record's inks carried the whole length of the room: one paper, a
-// red opening line to every part, red numbers down the goals, a red rule on the line the
-// wall's permission stands on. Nothing in it touches a drawing.
 import '@/components/climate/cartoons/press/press-signal.css';
-// Last of all, the ground itself: this room is printed on the signal plate, with its
-// drawings and its words on clean paper laid over it. Scoped to this room only.
 import '@/components/climate/cartoons/press/press-field.css';
-// And the phone's own pass over the same room: paper to the glass, the red only between the
-// chapters, one loud name and quieter heads, and the contents set as a numbered plate. It is
-// scoped to the phone and touches no rule of the desk's spread.
 import '@/components/climate/cartoons/press/press-phone.css';
-// And the phone's own editorial pass: the yellow working sheet, the ledger, the invitation
-// at the threshold of the wall, the argument as a black interlude, the lineage as a
-// timeline, and the book and the biennial as one register. Phone only.
 import '@/components/climate/cartoons/press/press-workshop.css';
-// The machine's four marks, in the room: the strip's band and the print room's sheets.
 import '@/components/climate/cartoons/baseone/base-one.css';
+import '@/components/climate/cartoons/press/press-desktop-ground.css';
 
 export default function ClimateCartoons() {
   return (
