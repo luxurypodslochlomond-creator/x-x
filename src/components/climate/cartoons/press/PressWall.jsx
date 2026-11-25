@@ -65,7 +65,10 @@ export default function PressWall() {
         {/* On a phone the wall is walked along, so it says so out loud: the record never
             asks a reader to guess that something slides. Hidden on the desk, where the
             drawings already run down the page. */}
-        <p className="press-wall-line press-wall-swipe">Swipe along the wall — every drawing at the width it was drawn.</p>
+        {/* The old line promised "every drawing at the width it was drawn", which was true and
+            was the fault: a tall strip became two screens and a wide one a band. Every plate is
+            one size now, so the line says what a reader will actually meet. */}
+        <p className="press-wall-line press-wall-swipe">Swipe along the wall — every drawing the same size, the hand named under it.</p>
         <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
         {/* ── THE WALL IS STILL BEING HUNG, AND IT SAYS SO ────────────────────────
             The artists Francis introduces are still sending, so this wall is not finished and

@@ -40,12 +40,11 @@ const SET = [
   { n: '04', href: '#cartoon-why-title', label: 'Why cartoons', Mark: MarkArgument },
   { n: '05', href: '#press-world', label: 'Cartoonists around the world', Mark: MarkRing },
   { n: '06', href: '#cartoon-goals', label: 'The seventeen goals', Mark: MarkCounted },
-  { n: '07', href: '/ClimateCartoons/BaseOne', label: `Signed · ${MARKS_WORD} wordless marks`, Mark: MarkUnsigned, page: true },
-  { n: '08', href: '/ClimateCartoons/Print', label: 'Print a show', Mark: MarkContactSheet, page: true },
-  { n: '09', href: '/ClimateCartoons/Thread', label: 'Read them in order', Mark: MarkInOrder, page: true },
-  { n: '10', href: '/ClimateCartoons/Francis', label: 'One hand’s own page', Mark: MarkOneHand, page: true },
-  { n: '11', href: '/ClimateCartoons/CAIB', label: 'Where this stands', Mark: MarkTwoEdges, page: true },
-  { n: '12', href: '/ClimateCartoons/WhatThisIs', label: 'What this is · your work and rights', Mark: MarkRoom, page: true },
+  { n: '07', href: '/ClimateCartoons/Print', label: 'Print a show', Mark: MarkContactSheet, page: true },
+  { n: '08', href: '/ClimateCartoons/Thread', label: 'Read them in order', Mark: MarkInOrder, page: true },
+  { n: '09', href: '/ClimateCartoons/Francis', label: 'One hand’s own page', Mark: MarkOneHand, page: true },
+  { n: '10', href: '/ClimateCartoons/CAIB', label: 'Where this stands', Mark: MarkTwoEdges, page: true },
+  { n: '11', href: '/ClimateCartoons/WhatThisIs', label: 'What this is · your work and rights', Mark: MarkRoom, page: true },
 ];
 
 export default function CartoonRoomNavigation() {

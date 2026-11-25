@@ -8,7 +8,6 @@ import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
-import BaseOneStrip from '@/components/climate/cartoons/baseone/BaseOneStrip';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
@@ -57,9 +56,18 @@ export default function ClimateCartoons() {
 
         {/* 1 · THE DRAWINGS. Everything after them is about them. */}
         <PressWall />
-        {/* 2 · THE MACHINE'S HAND, beside the wall and never above it: eight wordless marks,
-            unsigned on purpose, so nobody mistakes them for a person's. */}
-        <BaseOneStrip />
+        {/* ── 2 · THE MACHINE'S HAND IS NOT IN THIS ROOM ──────────────────────────
+            Brian, 25 November, twice: "you sure the cartoonists and Janine want to see base 1
+            cartoons bro?" and then "can take out base 1 drawings okesse". He was right and I
+            was wrong to leave it in. Nothing in Janine's hour asks for a machine drawing: every
+            item is a person and their work. The mark was honest — unsigned, separate, labelled
+            as a hand with no hand and no weather — but it was there for the record's argument,
+            not for the cartoonists, in the one room that belongs to them.
+
+            Honest is not the same as needed. The marks keep their own address at
+            /ClimateCartoons/BaseOne, where the argument about machines can be made properly
+            and nobody has to meet it while looking at a person's drawing. The route, the page
+            and the series are untouched; only the door from this room has come off. */}
         {/* 3 · THE INVITATION, placed where a reader actually is — looking at a wall. */}
         <CartoonRoomActions />
         {/* 3b · And what is new for the hand that made a drawing: take it whole, your name
