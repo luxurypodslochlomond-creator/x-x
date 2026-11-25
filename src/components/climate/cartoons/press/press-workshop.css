@@ -472,11 +472,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: clamp(15rem, 70vw, 24rem);
+    height: clamp(16rem, 76vw, 25rem);
     margin: 0;
     padding: 0;
     border: 0;
-    background: rgb(var(--record-bone));
+    /* ── THE BONE RECTANGLE WAS THE WHOLE PROBLEM ────────────────────────────────
+       Brian, 25 November: "carousel old as fuck… all balanced… then when we click can see
+       full image." Equal height was right and the ground was wrong. Every slide was a bone
+       panel with the drawing sitting inside it, and a coloured rectangle around a picture
+       on a phone is a card — the shape every list has had since about 2014, whatever the
+       picture is. The band is the page's own paper now, so nothing is drawn around the
+       drawing at all: it is a print on the wall, not a tile in a feed. Same height, same
+       start, no box. */
+    background: none;
   }
   #root .press-room .press-sheet-art .comic-wall-artwork,
   #root .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork {
@@ -501,39 +509,59 @@
   #root .press-room .press-sheet-link,
   #root .press-room .press-sheet-provenance { display: none; }
 
+  /* ── ONE NAME, ONE SENTENCE, AND NOTHING ELSE ─────────────────────────────────
+     Under each drawing there used to be four pieces of small type: the name, the origin in
+     wide-tracked capitals at six tenths of a rem, the title in grey bold, and the drawer's
+     line in a red-bordered quote block. Four small things stacked is the shape of a card's
+     metadata, and metadata is what a listing shows — not what a wall shows.
+
+     So the wall now prints what a print is hung with: the hand that made it, at a size you
+     can read from standing, and one sentence in the drawer's own words. The origin, the
+     credit, the title's full form and the print links are all still there, one tap away in
+     the close reading, where the drawing is whole and the words have room. */
   #root .press-room .press-sheet-by,
   #root .press-room .press-sheet--lead .press-sheet-by {
     margin: 0;
-    font-size: 1.12rem;
-    line-height: 1.15;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.1;
     font-weight: 700;
-    letter-spacing: -.02em;
+    letter-spacing: -.025em;
   }
-  #root .press-room .press-sheet-origin {
-    display: block;
-    margin: .2rem 0 0;
-    font-size: .6rem;
-    letter-spacing: .12em;
-  }
-  /* The title of the work sits under the name, quieter than it: the hand leads. */
+  #root .press-room .press-sheet-origin { display: none; }
+  /* The title of the work, said once, in the same voice as the name rather than as a grey
+     label under it: the work's name is part of the work. */
   #root .press-room .press-sheet-title,
   #root .press-room .press-sheet--lead .press-sheet-title {
-    display: block;
-    margin: .45rem 0 0;
-    font-size: .92rem;
-    line-height: 1.2;
-    font-weight: 700;
-    letter-spacing: -.015em;
-    color: rgb(var(--record-muted));
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: .15rem 0 0;
+    font-family: var(--font-reading);
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 0;
+    color: rgb(var(--record-ink) / .72);
   }
   #root .press-room .press-sheet-words,
   #root .press-room .press-sheet--lead .press-sheet-words {
     display: block;
-    margin: .55rem 0 0;
-    padding-left: .7rem;
-    border-left: 2px solid rgb(var(--record-red));
-    font-size: .95rem;
-    line-height: 1.45;
+    /* ── AND THE RED BAR COMES OFF ───────────────────────────────────────────────
+       A coloured rule down the left of a sentence is the quote block, and the quote block is
+       the single most dated shape on the web: it is what a blog post from 2013 looks like
+       when it wants to seem serious. The record does not need a bracket around somebody's
+       words to tell you they are somebody's words — the name above already says whose they
+       are, and the line is set in the reading face at the size a sentence is read at. */
+    margin: .7rem 0 0;
+    padding-left: 0;
+    border-left: 0;
+    font-family: var(--font-reading);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: rgb(var(--record-ink));
     /* Three lines, then it stops. A drawer's line that runs to eight lines makes its own
        slide twice the height of the next one's; the rest of it is a tap away in the close
        reading, where it is set in full and nothing is hidden. */
@@ -542,21 +570,24 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  /* A title is one line on the wall: two drawings on this wall have no title at all, and a
-     three-line one would otherwise decide the height of the whole wall. */
-  #root .press-room .press-sheet-title,
-  #root .press-room .press-sheet--lead .press-sheet-title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  #root .press-room .press-sheet-share { margin-top: auto; padding-top: .6rem; }
+  #root .press-room .press-sheet-share { margin-top: auto; padding-top: .85rem; }
+  /* ── THE ONE ACTION, SET AS A LINE OF TYPE ────────────────────────────────────
+     A bordered button under every drawing in a sideways run is half of what made the wall
+     read as a card list: a picture, some metadata, then a call to action, repeated thirteen
+     times. It is still a real control and still 44 pixels tall — it just says itself in the
+     record's small print instead of shouting over the drawing it belongs to. */
   #root .press-room .press-sheet-share button {
-    min-height: 2.4rem;
+    min-height: 2.75rem;
     padding: 0;
-    font-size: .68rem;
-    letter-spacing: .1em;
+    background: none;
+    border: 0;
+    font-size: .66rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgb(var(--record-muted));
+    text-decoration: underline;
+    text-underline-offset: .3em;
+    text-decoration-color: rgb(var(--record-ink) / .22);
   }
 
   /* A wall you can walk along has to say so — the record never assumes a gesture. */
