@@ -33,6 +33,36 @@ const STATE_COPY = {
   unknown: { word: 'Unchecked', tone: 'text-[#8a8375]', rule: 'border-[#141210]/25' },
 };
 
+// ── WHAT AN ENTRY IS, AND WHERE IT OPENS ────────────────────────────────────────
+// Brian, 25 November: "the solutions / seal wire gathering on seals they should have own
+// colours right bro so separates them… shouldn't they be all clickable too."
+//
+// Five kinds stand in one list, and a list where every row looks the same makes a reader
+// read every line to find the one they came for. So the kind carries its own colour, and
+// it is not a new palette: these are the record's own pigments for the same five things,
+// the ones the map and the entries already use — a solution is green, an action ochre, the
+// wire blue, a track clay, a gathering the quiet brown. One record, one language of colour.
+//
+// The colour says WHAT a row is. The word on the right still says WHETHER it holds. They
+// never argue, because they are answering different questions.
+//
+// And every row opens the thing it names. A fingerprint is only worth something if the
+// reader can walk to the words and check them without asking us for permission.
+const KIND_TONE = {
+  solution: 'text-record-botanical',
+  action: 'text-record-ochre',
+  news: 'text-record-ocean',
+  track: 'text-record-clay',
+  group: 'text-record-muted',
+};
+
+const entryHref = (type, rec) => {
+  if (type === 'news') return `/ClimateWireEntry/${rec.id}`;
+  if (type === 'track') return '/ClimateMusic';
+  if (type === 'group') return '/TogetherChangeClimate';
+  return `/ClimateDetail/${rec.entry_type || 'solution'}/${rec.id}`;
+};
+
 function Counter({ n, label, tone }) {
   return (
     <div className="px-3 py-3">
@@ -186,14 +216,18 @@ export default function ClimateSeals() {
             {rows.map((row) => {
               const state = STATE_COPY[row.state];
               return (
-                <div key={`${row.src.type}-${row.rec.id}`} className={`px-3 py-2.5 border-l-4 ${state.rule}`}>
+                <Link
+                  key={`${row.src.type}-${row.rec.id}`}
+                  to={entryHref(row.src.type, row.rec)}
+                  className={`group block px-3 py-2.5 border-l-4 ${state.rule} hover:bg-[#141210]/[0.045] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#b3261e]`}
+                >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em] text-[#8a8375]">
-                        {row.src.label}
-                        {row.seal ? ` · seal ${row.seal.version}` : ''}
+                      <p className="text-[9px] font-black font-mono uppercase tracking-[0.16em]">
+                        <span className={KIND_TONE[row.src.type] || 'text-[#8a8375]'}>{row.src.label}</span>
+                        <span className="text-[#8a8375]">{row.seal ? ` · seal ${row.seal.version}` : ''}</span>
                       </p>
-                      <p className="text-[11.5px] lg:text-[12.5px] font-mono font-bold text-[#141210] leading-snug mt-0.5">
+                      <p className="text-[11.5px] lg:text-[12.5px] font-mono font-bold text-[#141210] leading-snug mt-0.5 group-hover:text-[#b3261e]">
                         {row.title}
                       </p>
                     </div>
@@ -206,7 +240,7 @@ export default function ClimateSeals() {
                       {row.seal.hash.slice(0, 32)}…
                     </p>
                   )}
-                </div>
+                </Link>
               );
             })}
           </div>
