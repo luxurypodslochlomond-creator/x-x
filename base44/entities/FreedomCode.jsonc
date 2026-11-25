@@ -1,6 +1,7 @@
 {
   "name": "FreedomCode",
   "type": "object",
+  "description": "A one-time code worth Love Currency. It is a bearer token in everything but name: whoever reads the string can claim the amount, so the table is closed to everyone except an administrator. It used to be readable by anyone with the link, which meant every unclaimed code on the record was published along with it. Codes are issued and claimed through a server function with the service role, which is not subject to these rules.",
   "properties": {
     "code": {
       "type": "string",
@@ -30,8 +31,22 @@
     "amount"
   ],
   "rls": {
-    "read": {},
-    "write": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
       "user_condition": {
         "role": "admin"
       }

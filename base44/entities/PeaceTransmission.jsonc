@@ -1,6 +1,7 @@
 {
   "name": "PeaceTransmission",
   "type": "object",
+  "description": "A peace message left on the wall by a person, an animal, the earth or a machine \u2014 public to read and public to add to, because a wall nobody may write on is a noticeboard. Anyone may also bear witness to a message and have it translated, which is why a message may be changed by someone other than its author. Nobody may delete one from a browser: taking a message off the wall is a custodian's act, not a visitor's.",
   "properties": {
     "message": {
       "type": "string",
@@ -77,6 +78,12 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {},
+    "update": {},
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "InformationLibrary",
-  "description": "The decentralized information network. Real news, verified education, cited sources. Works offline. Spreads P2P. Zero ads, zero propaganda, zero bullshit.",
+  "description": "The decentralized information network. Real news, verified education, cited sources. Works offline. Spreads P2P. Zero ads, zero propaganda, zero bullshit. Public to read, on purpose \u2014 a library nobody may open is a locked cupboard \u2014 and written only by the record itself, never from a browser.",
   "type": "object",
   "properties": {
     "content_type": {
@@ -173,7 +173,17 @@
   ],
   "rls": {
     "read": {},
-    "write": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
       "user_condition": {
         "role": "admin"
       }

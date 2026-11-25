@@ -1,6 +1,7 @@
 {
   "name": "AI51Outcome",
   "type": "object",
+  "description": "What came of a conversation, reported by the person it happened to \u2014 including a guest, who has no account and still deserves to be able to say it did not help. Anyone may report one; only the person who reported it, or an administrator, may read it back or change it. Nothing here is public. Its old rule named the field without the data. prefix, which the engine cannot resolve \u2014 so the rule matched nobody and the table was being held open rather than held shut.",
   "properties": {
     "user_email": {
       "type": "string",
@@ -70,7 +71,10 @@
     "read": {
       "$or": [
         {
-          "user_email": "{{user.email}}"
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
         },
         {
           "user_condition": {
@@ -79,10 +83,29 @@
         }
       ]
     },
-    "write": {
+    "create": {},
+    "update": {
       "$or": [
         {
-          "user_email": "{{user.email}}"
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "data.user_email": "{{user.email}}"
         },
         {
           "user_condition": {
