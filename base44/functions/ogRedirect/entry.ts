@@ -1,3 +1,5 @@
+import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
+
 /**
  * OG Redirect — serves correct OG meta tags for social sharing crawlers
  * Detects page from ?page= param or Referer, returns HTML with correct OG tags
@@ -188,6 +190,20 @@ const PAGE_META = {
     color: '#ffd447',
   },
 
+  // ── THE EVENT, WHICH IS NOT THE WALL AND NOT A SHOW ─────────────────────
+  // Sunday's session has its own card so a link to the hour does not arrive looking like a
+  // link to the room or to somebody's exhibition. What it says is what the page says: whose
+  // workshop it is, which day, and what the hour is for. No attendance claim, no numbers,
+  // no promise about what will be said on the day.
+  ClimateWorkshop: {
+    title: 'The cartoon room at CartoonAFRICA · Sunday 29 November 2026',
+    description: 'Janine Selendy’s workshop: the record, the wall of drawings, and what a cartoon can say that a report cannot. The hour, as she set it.',
+    image: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/04b7522a8_caib-2026-catalogue-cover.jpeg',
+    imageWidth: 682,
+    imageHeight: 1024,
+    color: '#ffd447',
+  },
+
   default: {
     title: 'Universal Frequency 51 • Heal the Planet',
     description: 'Heal yourself, heal the planet. Free healing frequencies, lossless music, and environmental action.',
@@ -202,11 +218,76 @@ export default async function(req) {
   const host = req.headers.get('host') || 'uf51.love';
   const origin = `https://${host}`;
   
-  const meta = PAGE_META[page] || PAGE_META.default;
+  const esc = (value) => String(value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  // ── A HUNG SHOW IS NOT THE ROOM, AND NOT THE EVENT ────────────────────────
+  // A show passed on into a chat has to arrive as that show: its own name, its own
+  // drawings, its own count of hands. So the card is read from the same records the show
+  // prints from, and every number on it is counted from drawings a keeper has actually
+  // published. A card that says eight drawings when two were taken down is a lie in a
+  // chat window, and lies in chat windows are the ones that get forwarded. If nothing the
+  // show named is published, the card says that plainly instead of dressing up an empty
+  // show, and the room's own cover is used rather than somebody's drawing.
+  const showIds = (url.searchParams.get('ids') || '')
+    .split(',').map((id) => id.trim()).filter(Boolean).slice(0, 200);
+  const showName = (url.searchParams.get('t') || '').trim().slice(0, 90);
+  const isShow = page === 'ClimateCartoons/Exhibition' || url.searchParams.has('ids');
+
+  type Card = { title: string; description: string; image: string; color: string; imageWidth?: number; imageHeight?: number };
+  let meta: Card;
+  let pageUrl: string;
+
+  if (isShow) {
+    const query = showIds.length
+      ? `?ids=${encodeURIComponent(showIds.join(','))}${showName ? `&t=${encodeURIComponent(showName)}` : ''}`
+      : '';
+    pageUrl = `${origin}/ClimateCartoons/Exhibition${query}`;
+
+    let drawings = [];
+    if (showIds.length) {
+      const base44 = createClientFromRequest(req);
+      const found = await base44.asServiceRole.entities.ClimateCartoon.filter(
+        { id: { $in: showIds }, status: 'published' },
+        { limit: 200 },
+      );
+      const byId = new Map((found.items || found).map((record) => [record.id, record]));
+      drawings = showIds.map((id) => byId.get(id)).filter(Boolean);
+    }
+
+    const hands = [...new Set(drawings.map((drawing) => drawing.artist_name).filter(Boolean))];
+    const count = drawings.length;
+    // A picture the record itself holds opens anywhere; one it only points at may not load
+    // for a crawler in another country, so a stored copy is used when the show has one.
+    const stored = drawings.find((drawing) => /^https:\/\/base44\.app\//.test(drawing.image_url || ''));
+
+    meta = {
+      title: showName || (count
+        ? `An exhibition of ${count} drawing${count === 1 ? '' : 's'}`
+        : 'An exhibition from the cartoon room'),
+      description: count
+        ? `${count} drawing${count === 1 ? '' : 's'} from ${hands.length} hand${hands.length === 1 ? '' : 's'}${hands.length && hands.length <= 2 ? `, ${hands.join(' and ')}` : ''}, shown with permission. Together We Can Change Climate, the cartoon room.`
+        : 'A show hung from the cartoon room. The drawings it named are not published, so there is nothing on this paper.',
+      image: (stored || drawings[0])?.image_url || PAGE_META.ClimateCartoons.image,
+      color: '#ffd447',
+    };
+    meta.title = esc(meta.title);
+    meta.description = esc(meta.description);
+  } else {
+    meta = PAGE_META[page] || PAGE_META.default;
+    pageUrl = `${origin}/${page}`;
+  }
+
   // A card held on storage carries its own whole address; one drawn by a function is
   // relative to wherever the record is standing.
   const imageUrl = /^https?:\/\//.test(meta.image) ? meta.image : origin + meta.image;
-  const pageUrl = `${origin}/${page}`;
+  // The type is read from the address rather than assumed: the room's card is a JPEG and
+  // was being declared a PNG, which is the sort of small untruth an unfurler drops a
+  // picture over.
+  const imageType = /\.webp(\?|$)/i.test(imageUrl) ? 'image/webp'
+    : /\.jpe?g(\?|$)/i.test(imageUrl) ? 'image/jpeg'
+      : /\.gif(\?|$)/i.test(imageUrl) ? 'image/gif'
+        : 'image/png';
 
   // Check if this is a social media crawler (not a real browser)
   const userAgent = req.headers.get('user-agent') || '';
@@ -247,10 +328,11 @@ export default async function(req) {
   <meta property="og:title" content="${meta.title}" />
   <meta property="og:description" content="${meta.description}" />
   <meta property="og:image" content="${imageUrl}" />
-  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:type" content="${imageType}" />
   <meta property="og:image:alt" content="${meta.title}" />
-  <meta property="og:image:width" content="${meta.imageWidth || 1200}" />
-  <meta property="og:image:height" content="${meta.imageHeight || 630}" />
+${meta.imageWidth && meta.imageHeight ? `  <meta property="og:image:width" content="${meta.imageWidth}" />
+  <meta property="og:image:height" content="${meta.imageHeight}" />
+` : ''}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${meta.title}" />
   <meta name="twitter:description" content="${meta.description}" />

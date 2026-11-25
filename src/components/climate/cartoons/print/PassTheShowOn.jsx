@@ -25,7 +25,17 @@ export default function PassTheShowOn({ showName, count }) {
     // The record's own address, never the one in this window's bar: passing a show on from
     // inside the builder's preview frame would hand a mate a link that opens nowhere. The
     // show travels on the record's home, exactly as a citation does.
-    const url = recordAddress(`${window.location.pathname}${window.location.search}`);
+    //
+    // It travels as the card address rather than the bare one, because a chat window shows
+    // whatever the link's own page says about itself: the card knows which show this is,
+    // how many drawings and whose hands, all counted from what a keeper has published. A
+    // person who taps it is sent straight on to the show itself.
+    const params = new URLSearchParams(window.location.search);
+    const ids = params.get('ids') || '';
+    const name = params.get('t') || '';
+    const url = ids
+      ? recordAddress(`/functions/ogRedirect?page=ClimateCartoons%2FExhibition&ids=${encodeURIComponent(ids)}${name ? `&t=${encodeURIComponent(name)}` : ''}`)
+      : recordAddress(`${window.location.pathname}${window.location.search}`);
     setSaid('');
     if (navigator.share) {
       try {
