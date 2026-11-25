@@ -16,7 +16,18 @@
   border-top: 1px solid rgb(var(--record-ink) / .2); scroll-margin-top: 15rem;
 }
 .historical-print-art { display: flex; flex-direction: column; align-items: center; gap: .8rem; min-width: 0; padding: 0; border: 0; background: transparent; cursor: zoom-in; color: rgb(var(--record-muted)); }
-.historical-print-art img { display: block; width: auto; height: auto; max-width: 100%; max-height: min(66vh, 42rem); object-fit: contain; }
+/* ── ONE BAND FOR THE OLDER PLATES, THE SAME AS THE WALL ──────────────────────
+   These were pinned to their own natural size, capped only by height, on the argument
+   that a print should be shown at the size it was made. Down a phone that produced the
+   same fault the wall had: a small scan sitting tiny above a big one, then a tall plate
+   two screens high — so the sequence read as a ragged pile rather than a hung row, and
+   the biggest drawing, not the most important one, took the eye.
+
+   Every plate is one band now and the drawing is contained inside it: never cropped,
+   never stretched, never recoloured. The width is the column, the height is shared, and
+   a panoramic cartoon simply sits shorter within its band. The size of the page is no
+   longer decided by whichever file happened to be scanned largest. */
+.historical-print-art img { display: block; width: 100%; height: min(58vh, 30rem); max-height: none; object-fit: contain; }
 .historical-print-art > span { align-self: flex-start; font-family: var(--font-record-ui); font-size: .75rem; }
 .historical-print-caption { min-width: 0; font-family: var(--font-record-ui); color: rgb(var(--record-ink)); }
 .historical-print-caption .historical-print-move { margin: 0 0 .6rem; color: rgb(var(--record-red)); font-size: .78rem; font-weight: 700; }
