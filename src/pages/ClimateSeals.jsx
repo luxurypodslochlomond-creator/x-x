@@ -21,7 +21,7 @@ const SOURCES = [
   { type: 'action', label: 'Action', load: () => base44.entities.ClimateAction.filter({ status: 'published' }, { limit: 300 }), titleOf: (r) => r.title },
   { type: 'news', label: 'Wire', load: () => base44.entities.ClimateNews.filter({ status: 'published' }, { limit: 300 }), titleOf: (r) => r.headline },
   { type: 'track', label: 'Music', load: () => base44.entities.ClimateTrack.filter({ status: 'published' }, { limit: 300 }), titleOf: (r) => r.title },
-  { type: 'group', label: 'Gathering', load: () => base44.entities.ClimateGroup.filter({ status: 'published' }, { limit: 300 }), titleOf: (r) => r.name },
+  { type: 'group', label: 'Groups', load: () => base44.entities.ClimateGroup.filter({ status: 'published' }, { limit: 300 }), titleOf: (r) => r.name },
 ];
 
 const asList = (res) => (Array.isArray(res) ? res : res.items || []);
@@ -56,10 +56,20 @@ const KIND_TONE = {
   group: 'text-record-muted',
 };
 
+// Each one lands where the thing actually is, not at the top of the room it lives in: a wire
+// entry opens its own page, a track opens the deck it plays from, and a group opens the
+// groups themselves rather than the record's front page. A row that says it opens something
+// and then drops the reader at the top of a page has broken a small promise, and small
+// promises are the whole of what this page is about.
+//
+// And it is "Groups", not "Gatherings". Brian, 25 November: "I was getting confused with
+// groups and gatherings myself." The record already says Groups on the door, on the section
+// and in the count; the seal was the only place that used the other word, so it was the one
+// that changed. One thing, one name.
 const entryHref = (type, rec) => {
   if (type === 'news') return `/ClimateWireEntry/${rec.id}`;
-  if (type === 'track') return '/ClimateMusic';
-  if (type === 'group') return '/TogetherChangeClimate';
+  if (type === 'track') return '/ClimateMusic#music-deck';
+  if (type === 'group') return '/TogetherChangeClimate#record-room-groups';
   return `/ClimateDetail/${rec.entry_type || 'solution'}/${rec.id}`;
 };
 
