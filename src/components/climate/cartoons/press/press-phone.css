@@ -149,25 +149,34 @@
   #root .press-room .press-scope { order: 3; }
   #root .press-room .press-contents { order: 4; }
 
-  /* ── 6. THE DRAWINGS AT THEIR OWN SIZE, WITH NOTHING BEHIND THEM ──────────────
-     Every drawing sat on a bone panel and was capped at 66 per cent of the glass. On a
-     desk that panel is invisible — the column is narrow and the picture fills it. On a
-     phone the panel becomes a grey rectangle round every cartoon, and the cap turns a
-     portrait drawing into a picture with bars down the side: the two things that made a
-     hand-drawn page look like a photocopy pasted onto card.
+  /* ── 6. EVERY DRAWING IN THE SAME BAND, WHOLE ────────────────────────────────
+     Brian, 25 November: "the wall scroll images on mobile looks broken and clunky… hard
+     to see cartoons and some bigger than others". He is describing a real fault and it was
+     mine. This block used to let each drawing run glass to glass at its own shape, on the
+     reasoning that a picture should be the size of the page. What that produced was a tall
+     strip two screens high followed by a wide one the height of a line, so the wall read as
+     a ragged stack of photocopies rather than a hung wall — and a reader had to re-measure
+     every drawing before they could look at it.
 
-     So the panel is gone, the cap is gone, and the drawing runs from glass to glass at
-     the shape the artist drew it in. It is still the file they gave — uncropped, unfiltered,
-     untinted. It is simply the size of the page now, which is what a poster does. */
+     So every plate is one height now, edge to edge, on the record's own bone. The drawing
+     is contained inside it: never cropped, never stretched, never tinted. A portrait drawing
+     simply sits narrower with paper at its sides, which is how a mixed wall is hung in a real
+     room. Equal heights mean the eye walks down the wall instead of jumping. */
   #root .press-room .press-sheet-art {
-    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: clamp(17rem, 76vw, 25rem);
     margin-inline: -1.15rem;
+    background: rgb(var(--record-bone));
   }
-  #root .press-room .press-sheet-art .comic-wall-artwork {
+  #root .press-room .press-sheet-art .comic-wall-artwork,
+  #root .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork {
+    width: 100%;
+    height: 100%;
     max-height: none;
     object-fit: contain;
   }
-  #root .press-room .press-sheet--lead .press-sheet-art .comic-wall-artwork { max-height: none; }
 
   /* The one control on the picture is a red tab rather than a cream box, so it reads as
      the room's ink on the drawing and not as a label stuck over it. */

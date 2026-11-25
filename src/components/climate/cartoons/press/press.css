@@ -338,6 +338,44 @@
   border-left: 2px solid rgb(var(--record-red));
   font-size: .85rem;
 }
+/* ── PASS IT ON ────────────────────────────────────────────────────────────────
+   Brian, 25 November: the share at the foot of the cover "looks shot… should be pass it on
+   with cool stick font bro date etc". He is right about both halves. The button said "Share
+   the event", which is a social network's word, and it wore the same pale box as every other
+   control — so the one action this room actually wants a reader to take was dressed as the
+   least interesting thing on the sheet.
+
+   It is a plate now rather than a button: the hand-lettered face the room already loads for
+   its drawn paragraphs, the words the record uses everywhere else, and the dates and place
+   underneath in the record's small voice — so whoever passes this on knows what they are
+   passing on, and the foot of the sheet reads like the rest of a printed record. */
+#root .press-room .comic-event-share > button {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  min-height: 3rem;
+  padding: .7rem 1.35rem;
+  background: rgb(var(--record-ink));
+  color: rgb(var(--record-paper));
+  border: 2px solid rgb(var(--record-ink));
+  font-family: var(--font-cartoon-reading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+#root .press-room .comic-event-share > button:hover {
+  background: rgb(var(--record-red));
+  border-color: rgb(var(--record-red));
+  color: rgb(var(--record-paper));
+}
+#root .press-room .comic-event-share-when {
+  margin: .55rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
 /* The walk-along hint belongs to the phone only; the desk runs the drawings down the page. */
 .press-wall-swipe { display: none; }
 .press-wall { display: grid; }

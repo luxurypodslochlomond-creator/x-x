@@ -21,12 +21,15 @@ export default function CartoonEventShare() {
       <ShareCardButton
         entry={CARTOON_CARD}
         build={buildCartoonShareCard}
-        label="Share the event"
+        label="Pass it on"
         link={`${recordOrigin()}/ClimateCartoons`}
         description={CARTOON_EVENT.shareLine}
         icon={InkArrow}
         previewFirst
       />
+      {/* The dates and the place, under the plate, in the record's small voice: whoever
+          passes this on should know what they are passing on before they pass it. */}
+      <p className="comic-event-share-when">{CARTOON_EVENT.when} · {CARTOON_EVENT.where}</p>
     </div>
   );
 }
