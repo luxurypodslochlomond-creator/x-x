@@ -17,7 +17,9 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const link = givenLink || (build === buildWireShareCard && entry.id ? recordAddress(`/ClimateWireEntry/${entry.id}`) : recordAddress());
-  const title = entry.headline || entry.title || 'Record of the time';
+  // A drawing is known by the hand that made it, so a card carrying one is introduced by the
+  // artist's name rather than by the record's own title.
+  const title = entry.headline || entry.title || entry.artist_name || 'Record of the time';
   const description = givenDescription || entry.summary || entry.description || entry.what_changed || '';
   const text = [title, description, entry.image_credit, link].filter(Boolean).join('\n');
   const share = async () => {

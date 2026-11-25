@@ -273,6 +273,45 @@ export default async function(req) {
     };
     meta.title = esc(meta.title);
     meta.description = esc(meta.description);
+  } else if (page === 'ClimateCartoons' && url.searchParams.get('drawing')) {
+    // ── ONE DRAWING, ARRIVING AS ITSELF ──────────────────────────────────────
+    // A cartoonist sends their own drawing to a gallery and the link unfurls as the room's
+    // catalogue cover, with the room's sentence under it and their name nowhere — the exact
+    // thing this room exists to stop. So a link that names one drawing is answered with that
+    // drawing: its picture, the hand that made it, where it came from, and their own line
+    // quoted as they wrote it. Nothing is drawn while a message is being read: the picture is
+    // the file the record already holds.
+    const drawingId = String(url.searchParams.get('drawing')).trim();
+    pageUrl = `${origin}/ClimateCartoons?drawing=${encodeURIComponent(drawingId)}`;
+    const base44 = createClientFromRequest(req);
+    const found = await base44.asServiceRole.entities.ClimateCartoon.filter(
+      { id: drawingId, status: 'published' },
+      { limit: 1 },
+    );
+    const drawing = (found.items || found)[0];
+    if (drawing) {
+      const who = [drawing.artist_name, drawing.origin].filter(Boolean).join(', ');
+      const own = String(drawing.for_line || '').trim();
+      meta = {
+        title: drawing.title && drawing.artist_name
+          ? `${drawing.title} — ${drawing.artist_name}`
+          : `${drawing.artist_name || 'A drawing'} — a drawing for the record`,
+        description: own
+          ? `${who ? `${who}. ` : ''}“${own}” Given to the cartoon room, Together We Can Change Climate.`
+          : `${who || 'A drawing'} given to the cartoon room, Together We Can Change Climate.`,
+        image: drawing.image_url || PAGE_META.ClimateCartoons.image,
+        color: '#ffd447',
+      };
+    } else {
+      // Not on the wall: the room is, and the card says so rather than showing a picture the
+      // link does not actually open.
+      meta = {
+        ...PAGE_META.ClimateCartoons,
+        description: 'This drawing is not on the wall. The room it was given to is open, and the wall is open to the next hand.',
+      };
+    }
+    meta.title = esc(meta.title);
+    meta.description = esc(meta.description);
   } else {
     meta = PAGE_META[page] || PAGE_META.default;
     pageUrl = `${origin}/${page}`;
