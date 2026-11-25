@@ -121,17 +121,25 @@
     padding: 0;
     border: 0;
   }
-  /* The cover and its own words side by side, the way a frontispiece carries its caption. */
+  /* ── THE COVER AS A FRONTISPIECE ────────────────────────────────────────────────
+     Two columns left the picture narrow and a band of empty paper standing beside it —
+     the imbalance Brian saw on the desk on 25 November. A book's cover is not a column
+     item: it is centred, at the height it was drawn for, with its own credit and the
+     book's words under it at a reading measure. */
   #root .record-cartoon-field .press-room .comic-catalogue {
-    grid-template-columns: minmax(0, 1fr) minmax(12rem, .78fr);
-    gap: clamp(1.25rem, 2.4vw, 2.5rem);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: clamp(1.1rem, 2vw, 1.8rem);
   }
   #root .record-cartoon-field .press-room .comic-catalogue > img {
     width: auto;
     max-width: 100%;
-    max-height: 68vh;
+    max-height: 62vh;
     margin: 0;
+  }
+  #root .record-cartoon-field .press-room .comic-catalogue-band {
+    width: 100%;
+    max-width: 54rem;
   }
 
   /* ── the hand leads the margin ── */

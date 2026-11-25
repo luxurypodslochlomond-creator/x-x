@@ -534,20 +534,6 @@
 .press-more:hover:not(:disabled) { border-color: rgb(var(--record-ink)); }
 .press-more:disabled { opacity: .45; }
 
-/* ── THE LEDGER UNDER THE WALL ───────────────────────────────────────────────────
-   The provenance and the contents used to stand in the doorway, in front of the drawings.
-   They are here now: the same sentences, the same twelve live doors, read after the wall
-   rather than instead of it. */
-.press-ledger { display: grid; gap: .3rem; }
-.press-ledger-title {
-  margin: 0 0 .35rem;
-  font-family: var(--font-record-ui);
-  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -.022em;
-}
-.press-ledger .press-scope { max-width: 62ch; }
 .press-state {
   display: flex;
   align-items: center;

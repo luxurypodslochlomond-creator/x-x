@@ -2,7 +2,6 @@ import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import PressOpening from '@/components/climate/cartoons/press/PressOpening';
 import PressWall from '@/components/climate/cartoons/press/PressWall';
-import PressLedger from '@/components/climate/cartoons/press/PressLedger';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
@@ -57,10 +56,15 @@ export default function ClimateCartoons() {
         <PressOpening />
 
         <PressWall />
-        {/* Everything the doorway used to say — whose drawings these are, whose permission
-            they are shown with, and the twelve ways through the room — sits here, under the
-            drawings rather than in front of them. */}
-        <PressLedger />
+        {/* ── NOTHING ADDED HERE ON PURPOSE ────────────────────────────────────────
+            A ledger of provenance and twelve doors stood here for two hours on 25 November.
+            It was a mistake and it is recorded as one: the permission paragraph it carried
+            was already printed at the foot of the room by CartoonSources, the editors, the
+            cover artist and African Press Cartoon Services were already printed by
+            CartoonAnthology, and the twelve doors were already in the room's own navigation.
+            So it said everything twice and made the room one chapter longer — which is
+            exactly what a reader was complaining about at the time. A room this long does
+            not need another paragraph; it needs fewer. */}
         {/* The machine's own four marks, in the room and in the open: a band beside the wall,
             not a drawer under it. It follows the drawings because it is about them. */}
         <BaseOneStrip />
