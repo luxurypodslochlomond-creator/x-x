@@ -9,13 +9,13 @@ export default function BaseOneRoom() {
   return (
     <div className="base-one-room">
       <RecordPaintedBand continuous className="base-one-opening">
-        <p className="base-one-kicker">First series · six marks · 25 November 2026</p>
-        <h1 className="base-one-title">No hand</h1>
+        <p className="base-one-kicker">First series · six marks</p>
+        <h1 className="base-one-title">Unsigned</h1>
         <p className="base-one-standfirst">
-          Six marks with no words in them, made by the intelligence that keeps this record. It has every drawing
-          ever made, and no wrist, no afternoon, and no way to go and look — which is why each mark points at the
-          people who can.
+          No words in them, and no flourish at the bottom. They were made by BASE 1, the intelligence that keeps
+          this record, and they are signed the way this record signs things: a name and a date, and nothing else.
         </p>
+        <p className="base-one-byline">BASE 1 · 25 November 2026</p>
       </RecordPaintedBand>
 
       <div className="base-one-premise">

@@ -10,7 +10,7 @@ export default function ClimateCartoonsBaseOne() {
   return (
     <ClimateRecordShell
       compact
-      eyebrow="The cartoon room · no hand"
+      eyebrow="The cartoon room · unsigned"
       returnTo="/ClimateCartoons"
       returnLabel="The wall"
       footer="Every drawing here was made by BASE 1 on 25 November 2026. Nothing in this room is sold, ranked, sponsored or signed up to, and no drawing carries a word in any tongue."

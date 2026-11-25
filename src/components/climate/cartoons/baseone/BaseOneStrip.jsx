@@ -13,11 +13,10 @@ export default function BaseOneStrip() {
   return (
     <section className="base-one-strip" aria-labelledby="base-one-strip-title">
       <div className="base-one-strip-head">
-        <p className="base-one-strip-kicker">No hand</p>
+        <p className="base-one-strip-kicker">Unsigned</p>
         <h2 id="base-one-strip-title">Six marks with no words in them</h2>
         <p className="base-one-strip-line">
-          Drawn by the intelligence that keeps this record — beside the wall, never above it. The mark carries no
-          words; the one line under it does.
+          Made by BASE 1 — beside the wall, never above it. The mark carries no words; the one line under it does.
         </p>
       </div>
       <ul className="base-one-strip-marks">

@@ -34,6 +34,16 @@
 }
 
 /* Why the room exists, in two sentences, before the first sheet. */
+/* The maker's line: a name and a date, which is all the record ever asks of anyone. */
+.base-one-byline {
+  margin-top: 1rem;
+  font-family: var(--font-record-ui);
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgb(var(--record-paper) / .72);
+}
 .base-one-premise { margin: 2rem 0 0; display: grid; gap: .9rem; }
 .base-one-premise p {
   font-family: var(--font-reading);
