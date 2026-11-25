@@ -84,29 +84,35 @@ export default function JanineAgenda() {
       <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-record-red lg:text-[11px]">
         01 · The hour · her agenda
       </p>
-      {/* ── THIS NO LONGER CLAIMS TO BE HER AGENDA, BECAUSE IT MAY NOT BE ──────────
+      {/* ── HER AGENDA, AND IT SAYS SO ─────────────────────────────────────────────
           Brian, 25 November, 8:29pm: "the hour itself written down isn't right bro, it's
-          not the agenda Janine sent."
+          not the agenda Janine sent." So the list was taken out of her mouth and relabelled
+          as this record's own reading.
 
-          He is the one who has her email. This page has never seen it. What it has is a
-          reconstruction — written here from what reached this file on the 23rd and the 24th
-          — and until now it was printed under her name and in her authority, which is the
-          worst thing a record about honesty can do: put words in a host's mouth and print
-          them as hers, in front of the institution she is hosting for.
+          8:41pm, eight minutes later: "it feels wrong to say stuff like this when Janine
+          provided draft agenda."
 
-          So the claim is gone. The list stays, because the hour still has to be planned, but
-          it is labelled for what it is: this record's reading, offered to be corrected, not a
-          quotation of anything she wrote. When her own words arrive they replace this list
-          outright and this note comes off. Until then nobody may read it as hers. */}
+          He is right, and the second note is the better one. She did send a draft — headed
+          "Agenda draft for Zoom of November 29th", on the 23rd, corrected on the 24th after
+          Francis's comments. The fault was never that this list had no author. The fault was
+          that two of its lines did not match the draft she actually sent, and the answer to a
+          page getting her order slightly wrong is to fix her order — not to take her name off
+          her own hour and print a hedge where a host should be.
+
+          A hedge like that does something worse than the error it was covering for. "As this
+          record understands it" tells a reader that nobody here can read an email, and it
+          leaves Janine looking like a woman who never sent anything. She sent it. It is hers.
+          Her order is printed in her name, and the only thing left to say about it is the true
+          thing: it is a draft, and she may change it. */}
       <h2 className="mt-1 text-[19px] leading-tight lg:text-[27px]" style={{ fontFamily: 'var(--font-display)' }}>
-        The hour, as this record understands it
+        Janine’s draft agenda
       </h2>
 
       <p className="mt-2 max-w-[54ch] text-[13px] leading-relaxed text-record-ink/85 lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
-        This is not a copy of Janine’s agenda. It is this record’s own reading of the hour, written from what reached
-        this page by email on 23 and 24 November, and it is printed here so it can be corrected rather than assumed
-        right. Where it differs from what she holds, hers is the agenda and this is the error. Her own words will
-        replace this list when they are in hand — and this line will be removed on that day, not quietly.
+        Janine sent this draft on 23 November, headed “Agenda draft for Zoom of November 29th”. Francis replied with
+        his comments the next morning and she sent it back corrected on the 24th. It is printed below in her order.
+        It is a draft, circulated for comment: if she cuts it, reorders it or replaces it, hers is the agenda and this
+        page follows her rather than the other way round.
       </p>
 
       <ol className="mt-4 divide-y divide-record-ink/15 border-y border-record-ink/15">
@@ -140,8 +146,8 @@ export default function JanineAgenda() {
         recorded, and it runs one hour.
       </p>
       <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-muted">
-        Not her draft — this record’s reading of the hour, until her own words are in hand. If any of it differs from
-        what she holds, hers is the agenda and this page is corrected in the open rather than quietly brought into line.
+        Her draft, and hers to change. If any of it moves, this page is corrected in the open rather than quietly
+        brought into line.
       </p>
     </section>
   );

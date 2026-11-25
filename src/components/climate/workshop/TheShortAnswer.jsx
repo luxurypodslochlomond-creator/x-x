@@ -18,9 +18,15 @@ import React from 'react';
 // email and can say their own parts there; this page says "any of us" and lets the email do
 // the introducing. The host is named because it is her hour.
 const ASKS = [
+  // ── THIS BAND USED TO TALK TO HER IN THE SECOND PERSON ──────────────────────
+  // "You host, and the hour is yours to run" is a fair thing to say to Janine in a letter
+  // and a strange thing to print on a page she may forward to CEEW, where "you" is suddenly
+  // whoever opened the link. Brian, 25 November: "says 'your draft' when talking about Janine
+  // in many places." It now speaks about her, in her name, so the page reads the same to her
+  // and to the person she sends it to. The ask is unchanged; only the voice is.
   [
-    'You host, and the hour is yours to run.',
-    'You open it, you close it, and you take the room for questions at the end. That is the whole of the ask, and it is your sentence, not ours.',
+    'She hosts, and the hour is hers to run.',
+    'She opens it, she closes it, and she takes the room for questions at the end. That is the whole of the ask, and it is her sentence, not ours.',
   ],
   // This said "nobody from this record takes the microphone", and it was wrong from the
   // moment her draft agenda arrived: she had already written Brian into the hour, for two
@@ -28,7 +34,7 @@ const ASKS = [
   // out live, in front of the room. So it now says what her agenda says.
   [
     'Two minutes, then back to Francis.',
-    'Your draft gives Brian two minutes on what the platform does and where anyone can add a crisis or a solution. That is the whole of the record’s speaking time in your hour — and it is your gift, not our assumption.',
+    'Her draft gives Brian two minutes on what the platform does and where anyone can add a crisis or a solution. That is the whole of the record’s speaking time in her hour — and it is her gift, not our assumption.',
   ],
   // The practice-room item came off on 25 November. It offered the host half an hour to try
   // "the drawing" once so it worked on the day — a rehearsal for an exercise her hour does not
@@ -50,14 +56,14 @@ export default function TheShortAnswer() {
     <section className="mt-5 border-y-4 border-cartoon-sun bg-record-red text-record-paper">
       <div className="px-4 py-5 lg:px-6 lg:py-6">
         <span className="inline-block bg-cartoon-sun px-2.5 py-1 font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-record-ink lg:text-[10.5px]">
-          The short answer · what this asks of you
+          The short answer · what this asks of the host
         </span>
 
         <h2
           className="mt-3 text-[26px] leading-[1.02] text-cartoon-sun lg:text-[40px]"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          The hour stays yours.
+          The hour stays hers.
         </h2>
 
         <ol className="mt-4 space-y-3">
