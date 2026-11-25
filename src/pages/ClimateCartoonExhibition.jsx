@@ -71,7 +71,11 @@ export default function ClimateCartoonExhibition() {
           {cartoons && cartoons.length > 0 && (
             <PassTheShowOn showName={showName} count={cartoons.length} />
           )}
-          <button type="button" onClick={() => window.print()}>Print the exhibition</button>
+          {/* "Print the show", not "print the exhibition": a cartoonist says he has a show.
+              Exhibition is the catalogue's word — it stays on the printed title sheet,
+              where it belongs, and comes off the button, where it only ever sounded like
+              an institution talking about itself. */}
+          <button type="button" onClick={() => window.print()}>Print the show</button>
         </span>
       </div>
 
@@ -81,7 +85,7 @@ export default function ClimateCartoonExhibition() {
 
       {cartoons && !cartoons.length && (
         <div className="ex-state">
-          <p>There is nothing in this exhibition yet.</p>
+          <p>There is nothing in this show yet.</p>
           <Link to="/ClimateCartoons/Print">Choose drawings from the wall</Link>
         </div>
       )}

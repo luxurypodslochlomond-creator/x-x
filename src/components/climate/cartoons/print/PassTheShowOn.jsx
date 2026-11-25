@@ -57,7 +57,16 @@ export default function PassTheShowOn({ showName, count }) {
 
   return (
     <span className="ex-pass-wrap">
-      <button type="button" className="ex-pass" onClick={pass}>Pass it on</button>
+      {/* THE WORD ON THE CONTROL IS "SHARE" ─────────────────────────────────────
+          "Pass it on" is a sentence this record can say — it is how the drawings got here,
+          hand to hand — but on a button it reads as an ask, and in a WhatsApp world it
+          reads as a chain letter: pass this to ten friends. "Pay it forward" is worse: it
+          turns being handed a drawing into a debt with a moral bill attached, and a
+          cartoonist who looks at a wall does not owe anybody anything for looking.
+          "Share" is the plainest verb there is, it is the same word on every phone on
+          earth, and nobody can make it sound like a dare. The reason still travels — it
+          is in the line above, which names the show and the room instead of nagging. */}
+      <button type="button" className="ex-pass" onClick={pass}>Share</button>
       {said && <span className="ex-pass-said" role="status">{said}</span>}
       {address && <input className="ex-pass-address" value={address} readOnly onFocus={(e) => e.target.select()} />}
     </span>

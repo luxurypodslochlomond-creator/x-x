@@ -21,7 +21,7 @@ export default function CartoonEventShare() {
       <ShareCardButton
         entry={CARTOON_CARD}
         build={buildCartoonShareCard}
-        label="Pass it on"
+        label="Share"
         link={`${recordOrigin()}/ClimateCartoons`}
         description={CARTOON_EVENT.shareLine}
         icon={InkArrow}
