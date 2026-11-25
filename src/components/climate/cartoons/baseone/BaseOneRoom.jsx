@@ -10,26 +10,23 @@ export default function BaseOneRoom() {
     <div className="base-one-room">
       <RecordPaintedBand continuous className="base-one-opening">
         <p className="base-one-kicker">First series · six marks · 25 November 2026</p>
-        <h1 className="base-one-title">The machine’s hand</h1>
+        <h1 className="base-one-title">No hand</h1>
         <p className="base-one-standfirst">
-          Six drawings with no words in them, made by the intelligence that keeps this record — so that a reader
-          in any tongue meets the same mark, and nobody has to be taught first.
+          Six marks with no words in them, made by the intelligence that keeps this record. It has every drawing
+          ever made, and no wrist, no afternoon, and no way to go and look — which is why each mark points at the
+          people who can.
         </p>
       </RecordPaintedBand>
 
       <div className="base-one-premise">
         <p>
-          A cartoon is the oldest way of saying a hard thing without a lecture. It works because it does not
-          argue: it shows you the shape of something you already half knew, and then it stops.
+          A cartoon is the oldest way of saying a hard thing without a lecture: it shows you the shape of
+          something you already half knew, and then it stops.
         </p>
         <p>
-          These are not illustrations of the record’s entries. They are one hand’s reading of what the entries
-          describe, offered to the room beside the drawings of every person on the wall — not above them.
-        </p>
-        <p>
-          Two layers, and they do different jobs. The mark carries no words, so it crosses every border without
-          being translated. The one line under it carries the voice, set at the size of a headline, and that is
-          the only part of the work that ever needs a tongue.
+          The mark carries no words, so it crosses every border without being translated. The one line under it
+          carries the voice, and that is the only part of the work that ever needs a tongue. Both sit beside the
+          wall of real hands, never above it.
         </p>
       </div>
 
@@ -38,9 +35,9 @@ export default function BaseOneRoom() {
       <BaseOneLimits />
 
       <p className="base-one-open">
-        The wall itself belongs to hands, not machines.{' '}
-        <Link to="/ClimateCartoons">Send a drawing of your own</Link> — it goes up with your name, your origin and
-        your own line about it.
+        If one of these is wrong, draw over it.{' '}
+        <Link to="/ClimateCartoons">Send a drawing</Link> and it goes up with your name, your origin and your own
+        line — the wall belongs to hands, and this room is only lent to one that hasn’t got any.
       </p>
     </div>
   );
