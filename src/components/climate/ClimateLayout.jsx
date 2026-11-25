@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { Suspense, useEffect, useRef, useState, useCallback } from 'react';
 import useRecordScroll from '@/components/climate/useRecordScroll';
 import { IMAGES, RECORD_COVER_MOBILE, RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
 import '@/components/climate/record-reading.css';
@@ -304,7 +304,37 @@ export default function ClimateLayout({ children, currentPage }) {
         <RecordDesktopMenu open={contentsOpen} onClose={closeContents} />
       </header>
 
-      <main ref={readingRef} className="record-pages">{children}</main>
+      {/* ── THE MASTHEAD NEVER LEAVES THE GLASS FOR A PAGE ──────────────────────
+          Brian, 25 November, twice: "top level nav feels shorter and jumpy between pages…
+          still jumps when go to the wire etc."
+
+          He was right the second time and I had only half fixed it. The record's pages
+          arrive as separate lumps of code, and the only place that could catch one still
+          arriving was the app's own loading boundary — which sits ABOVE this layout. So a
+          tap that landed on code not yet in hand took the masthead off the glass, put the
+          loading line in its place, and brought the masthead back a beat later at whatever
+          height the page under it had settled at. That is the whole of "shorter and jumpy":
+          the nav was never a different size, it was gone for a moment and then redrawn.
+
+          Warming the doors (see RECORD_DOORS) makes that rare; this makes it impossible.
+          The boundary now sits inside the layout, around the page body only — so the
+          masthead, the yellow band and the doors are already standing when a page arrives,
+          and only the sheet underneath it waits. A reader taps, and the record is still
+          there above them, exactly where it was. */}
+      <main ref={readingRef} className="record-pages">
+        <Suspense
+          fallback={
+            <div
+              className="flex min-h-[60vh] items-center justify-center"
+              style={{ background: 'rgb(var(--record-paper) / .97)' }}
+            >
+              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-record-muted">Opening the page</p>
+            </div>
+          }
+        >
+          {children}
+        </Suspense>
+      </main>
 
       {/* ── THE WORLD, LIT WHERE IT HAS BEEN READ ─────────────────────────────────
           The foot of EVERY page of the record, in the same place every time: the plate of
