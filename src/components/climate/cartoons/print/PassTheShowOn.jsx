@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { recordAddress } from '@/components/climate/recordAddress';
 
 // ── PASS IT ON ─────────────────────────────────────────────────────────────────
 // The show has to leave the room the way the drawings did: hand to hand. There is no
@@ -21,7 +22,10 @@ export default function PassTheShowOn({ showName, count }) {
     : `An exhibition of ${count} ${count === 1 ? 'drawing' : 'drawings'} · Together We Can Change Climate · the cartoon room`;
 
   const pass = async () => {
-    const url = window.location.href;
+    // The record's own address, never the one in this window's bar: passing a show on from
+    // inside the builder's preview frame would hand a mate a link that opens nowhere. The
+    // show travels on the record's home, exactly as a citation does.
+    const url = recordAddress(`${window.location.pathname}${window.location.search}`);
     setSaid('');
     if (navigator.share) {
       try {

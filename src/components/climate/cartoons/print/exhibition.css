@@ -261,6 +261,7 @@
    Set as paper and ink rather than as the red button, because printing and passing on
    are not the same act and the paper one is the rarer. Both go with the tools bar when
    the machine prints, so the sheet never carries a button. */
+.ex-tools-left,
 .ex-tools-right { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
 .ex-pass-wrap { display: inline-flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .ex-tools .ex-pass {

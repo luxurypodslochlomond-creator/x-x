@@ -60,7 +60,13 @@ export default function ClimateCartoonExhibition() {
   return (
     <div className="ex-page">
       <div className="ex-tools">
-        <Link to="/ClimateCartoons/Print">← Choose again</Link>
+        <span className="ex-tools-left">
+          <Link to="/ClimateCartoons/Print">← Choose again</Link>
+          {/* Someone who was handed this show has never seen the wall it came from, so the
+              show carries one quiet door into the room. Screen only: the paper has its
+              address printed on it instead. */}
+          <Link to="/ClimateCartoons">The cartoon room</Link>
+        </span>
         <span className="ex-tools-right">
           {cartoons && cartoons.length > 0 && (
             <PassTheShowOn showName={showName} count={cartoons.length} />
