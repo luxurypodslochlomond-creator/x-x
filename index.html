@@ -30,29 +30,20 @@
     <link rel="dns-prefetch" href="https://uf51.love" />
     <link rel="dns-prefetch" href="https://api.base44.com" />
 
-    <!-- FONTS OFF THE CRITICAL PATH, BUT IN THE SAME BREATH: Oswald is now fetched alongside the
-         app bundle instead of after the page has finished loading. It still never blocks first
-         paint, and it lands before the reader is looking at a heading — so the big type no longer
-         swaps in a second later and shifts everything under it. That late swap, on every page of
-         the record, was one of the two things that made the top of the page jump. -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" /></noscript>
+    <!-- ── TWO FONTS WERE BEING FETCHED ON EVERY PAGE AND NEVER DRAWN ────────────────
+         Oswald and Bangers were preloaded here for months. Neither is set anywhere any
+         more: the record's headings moved to its own reading face, and the cartoon room's
+         lettering moved to the record's voice (see cartoon-ink.css). Every visitor was
+         still paying two CSS requests and up to three font files for them, on every page,
+         before any text could settle. Both are gone. The comment stays so nobody adds them
+         back believing they are load-bearing. -->
     <!-- THE READING VOICE. The record's sentences were set in the same monospace as its dates
          and field names, which is what made a news page read like a code editor. Source Serif 4
          is a newspaper face: it holds a long paragraph on a phone and it is not a costume.
          Fetched the same way as Oswald, off the critical path, so first paint never waits. -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" /></noscript>
-    <!-- THE CARTOON ROOM'S OWN HAND.
-         Brian, 18 November: "the font on this page of cartoons is doing my head in."
-         Every heading on the record is the same bold grotesque, which is right for a record
-         of the time and wrong for a room of drawings: a page of cartoons set in the record's
-         corporate face reads as a page about cartoons rather than as a comic. Bangers is
-         comic lettering — drawn for balloons and mastheads — and it is used in exactly one
-         room, on the cover plate and the section titles. Everything that has to be read as
-         a sentence stays in the record's own voice. -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" /></noscript>
+
     <!-- THE RECORD'S OWN READING VOICE. Literata was drawn for reading long text on a screen
          rather than for a brochure, so it holds a paragraph at seventeen pixels without going
          thin or spidery — and it is the record's own face rather than the one every device

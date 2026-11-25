@@ -14,9 +14,12 @@ import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 // A wall does not brief you at the door.
 //
 // So the doorway is now the name of the room, one line, the count, and the cover — Francis's
-// cover, at size, with his name on it. Nothing has been taken off the record and nothing
-// softened: the provenance and the twelve doors sit in the ledger directly under the wall,
-// where a reader who has already met the drawings goes looking for them.
+// cover, at size, with his name on it. Nothing was softened. The provenance sits at the foot
+// of the room in CartoonSources and the book's editors and credits in CartoonAnthology, which
+// is where they always were; the twelve doors are the room's own navigation. (A ledger holding
+// all of it was tried here on 25 November and removed within the hour: it repeated both
+// sections, and a room a reader is already complaining is too long does not need another
+// paragraph. It needed fewer.)
 export default function PressOpening() {
   return (
     <section className="press-opening" aria-labelledby="press-room-title">

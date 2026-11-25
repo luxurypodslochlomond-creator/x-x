@@ -52,32 +52,39 @@ export default function ClimateCartoons() {
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
     >
+      {/* ── THE ORDER, SET ONCE, IN THE MARKUP ──────────────────────────────────────
+          Until 25 November the phone had its own chapter order written in CSS — `order: 1`
+          to `9` in press-workshop.css — while the desk read the markup. Two orders for one
+          room is exactly how a room goes out of balance on both: the desk buried "Now it's
+          your turn" second from the bottom, after three essays and the book, and the
+          machine's strip, which was in neither list, fell to `order: 0` and rose to the top
+          of a phone, standing above the cover.
+
+          So there is one order now, and it is this one. It reads the same on a phone and on
+          a desk:
+
+            the room's name and the cover   →   the drawings   →   the machine's hand
+            →   your turn   →   the book it feeds   →   the count, the argument, the
+            lineage   →   whose work this is
+
+          The invitation sits third, immediately after the drawings, because a wall asks you
+          to look and then asks you to add. It does not ask you to read three essays first. */}
       <div className="press-room-inner">
         <PressOpening />
 
+        {/* 1 · THE DRAWINGS. Everything after them is about them. */}
         <PressWall />
-        {/* ── NOTHING ADDED HERE ON PURPOSE ────────────────────────────────────────
-            A ledger of provenance and twelve doors stood here for two hours on 25 November.
-            It was a mistake and it is recorded as one: the permission paragraph it carried
-            was already printed at the foot of the room by CartoonSources, the editors, the
-            cover artist and African Press Cartoon Services were already printed by
-            CartoonAnthology, and the twelve doors were already in the room's own navigation.
-            So it said everything twice and made the room one chapter longer — which is
-            exactly what a reader was complaining about at the time. A room this long does
-            not need another paragraph; it needs fewer. */}
-        {/* The machine's own four marks, in the room and in the open: a band beside the wall,
-            not a drawer under it. It follows the drawings because it is about them. */}
+        {/* 2 · THE MACHINE'S HAND, beside the wall and never above it: six wordless marks,
+            unsigned on purpose, so nobody mistakes them for a person's. */}
         <BaseOneStrip />
+        {/* 3 · THE INVITATION, placed where a reader actually is — looking at a wall. */}
+        <CartoonRoomActions />
+        {/* 3b · And what is new for the hand that made a drawing: take it whole, your name
+            travels with it, off on your word. It belongs beside the invitation, not with
+            the reading. */}
         <CartoonRoomNew />
-        {/* The wall read against the seventeen goals, with the blank ones left blank. It
-            follows the drawings because it is about them, and it comes before the argument
-            because a cartoonist reads the count before they read the essay. */}
-        <CartoonGoals />
-        <CartoonWhy />
-        {/* Human work, and the sourced lineage it belongs to. No machine-drawn fiction sits
-            in this room: a wall of real hands does not need pictures nobody drew. */}
-        <CartoonWorld />
 
+        {/* 4 · THE BOOK the drawings feed. */}
         <div className="press-facing" id="press-book">
           <CartoonSessionBand />
           {/* The five sessions, in the festival's own order — sent as a printed flyer on
@@ -87,7 +94,16 @@ export default function ClimateCartoons() {
           <CartoonAnthology />
         </div>
 
-        <CartoonRoomActions />
+        {/* 5 · THE READING. The count first, because a cartoonist reads the count before the
+            essay; the argument next; the lineage last, because it is the longest look away
+            from the wall and the wall is why anyone came. Human work throughout — no
+            machine-drawn fiction in this room, because a wall of real hands does not need
+            pictures nobody drew. */}
+        <CartoonGoals />
+        <CartoonWhy />
+        <CartoonWorld />
+
+        {/* 6 · WHOSE WORK THIS IS. */}
         <CartoonSources />
       </div>
     </ClimateRecordShell>

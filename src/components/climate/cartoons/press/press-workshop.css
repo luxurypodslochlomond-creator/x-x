@@ -1,23 +1,19 @@
-/* Mobile order: cover and three doors, drawings, invitation, then supporting reading.
-   Keep the originals, credits, controls and desktop composition intact. */
+/* Keep the originals, credits, controls and desktop composition intact. */
 @media screen and (max-width: 639px) {
-  /* ── 1. THE ORDER A PHONE MEETS THE ROOM IN ────────────────────────────────────
-     A flex column so the sequence can be set here rather than by moving the markup,
-     which would have re-ordered the desk's spread as well. */
+  /* ── 1. THE ORDER IS NOT SET HERE ANY MORE ─────────────────────────────────────
+     This file used to carry `order: 1` to `order: 9` for the room's chapters, so a phone
+     met them in one sequence and the desk in another. Two orders for one room is how the
+     desk buried the invitation under three essays, and how the machine's strip — in
+     neither list — fell to `order: 0` and stood above the cover on a phone.
+
+     The sequence now lives in the markup, once, where both viewports read it. This stays a
+     flex column only so the sheets stack with the red ground between them; nothing here
+     decides what comes first. If a chapter ever needs moving, move it in ClimateCartoons. */
   #root .record-cartoon-field .press-room-inner {
     display: flex;
     flex-direction: column;
     padding: 0 0 3.25rem;
   }
-  #root .record-cartoon-field .press-room-inner > .press-opening { order: 1; }
-  #root .record-cartoon-field .press-room-inner > .press-wall-section { order: 2; }
-  #root .record-cartoon-field .press-room-inner > .comic-workshop { order: 3; }
-  #root .record-cartoon-field .press-room-inner > .room-new { order: 4; }
-  #root .record-cartoon-field .press-room-inner > .cartoon-goals { order: 5; }
-  #root .record-cartoon-field .press-room-inner > .comic-why { order: 6; }
-  #root .record-cartoon-field .press-room-inner > .cartoon-world { order: 7; }
-  #root .record-cartoon-field .press-room-inner > .press-facing { order: 8; }
-  #root .record-cartoon-field .press-room-inner > .comic-sources { order: 9; }
 
   /* Each chapter already carried a 3.5rem lift for the desk's spread. On a phone the gap
      between sheets is the red ground, and it is set by the sheet's own bottom margin. */
@@ -34,9 +30,17 @@
     padding: 0 1.15rem 1.5rem;
     margin-bottom: .9rem;
   }
-  /* The name comes after the cover, under an ink rule — the second thing a phone meets. */
+  /* ── THE PICTURE IS THE FIRST THING A PHONE MEETS ─────────────────────────────
+     This comment always said "the name comes after the cover" and the CSS never did it:
+     `order` only sorts siblings, and it was set on the masthead, which is nested inside
+     the words block. So the words block (no order = 0) beat the cover (order 2) and a
+     phone opened on the name with the picture beneath it — the opposite of the sentence
+     above it and of Brian's instruction on 18 November that the cover is the first image
+     on the page. The order now sits on the two elements that are actually siblings, so
+     the sentence and the screen agree. */
+  #root .press-room .press-opening-cover { order: 1; }
+  #root .press-room .press-opening-words { order: 2; }
   #root .press-room .press-opening-masthead {
-    order: 2;
     margin: 1.35rem 0 0;
     padding: 0;
     border-top: 3px solid rgb(var(--record-ink));
