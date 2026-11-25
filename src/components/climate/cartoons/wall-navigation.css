@@ -4,6 +4,8 @@
    is always the machine's and always in the margin; the mark at the far edge is the room's
    own ink, so a reader who cannot read the words still sees eight things to press. */
 #root .press-room .wall-wayfinding { grid-column: 2; grid-row: 5; min-width: 0; margin-top: 1.4rem; }
+/* In the ledger under the wall the plate is a column of its own, not a leaf of the spread. */
+#root .press-room .press-ledger .wall-wayfinding { grid-column: auto; grid-row: auto; margin-top: 1.6rem; }
 
 #root .press-room .wall-setlist { border-top: 3px solid rgb(var(--record-ink)); }
 #root .press-room .wall-setlist-head {

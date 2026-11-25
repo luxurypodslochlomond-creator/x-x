@@ -98,3 +98,67 @@
     padding-inline: 1rem;
   }
 }
+
+/* ── THE DOORWAY IS THE COVER, AND THE HAND IS THE LOUDEST NAME ──────────────────
+   Brian, 25 November: "it feels corporate now… what would make Francis etc all go this is
+   truly coolasfuck?"
+
+   Two things in this room were doing it, and neither was the honesty. The first was the
+   doorway: a masthead, a standfirst, a count, two paragraphs of provenance and a numbered
+   set list, all standing between a visitor and the first drawing. The words have moved to
+   the ledger under the wall. What is left is the room's name and the cover — a drawing by
+   Francis, at size, with his name on it — and then the drawings themselves.
+
+   The second was the margin of every sheet: the record's own number was set at 2.6rem and
+   the artist's name at .8rem, so the machinery credited itself and mentioned the person.
+   The name now leads at headline size and the number is a small red mark in the margin. */
+@media screen and (min-width: 1024px) {
+  #root .record-cartoon-field .press-room .press-opening { grid-template-columns: minmax(0, 1fr); }
+  #root .record-cartoon-field .press-room .press-opening-cover {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 1.6rem 0 0;
+    padding: 0;
+    border: 0;
+  }
+  /* The cover and its own words side by side, the way a frontispiece carries its caption. */
+  #root .record-cartoon-field .press-room .comic-catalogue {
+    grid-template-columns: minmax(0, 1fr) minmax(12rem, .78fr);
+    gap: clamp(1.25rem, 2.4vw, 2.5rem);
+    align-items: start;
+  }
+  #root .record-cartoon-field .press-room .comic-catalogue > img {
+    width: auto;
+    max-width: 100%;
+    max-height: 68vh;
+    margin: 0;
+  }
+
+  /* ── the hand leads the margin ── */
+  #root .record-cartoon-field .press-room .press-sheet-by {
+    font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.022em;
+  }
+  #root .record-cartoon-field .press-room .press-sheet-title { font-size: 1.28rem; }
+
+  /* ── the lead drawing gets the whole width, and its name gets room beneath it ── */
+  #root .record-cartoon-field .press-room .press-wall .press-sheet.press-sheet--lead {
+    display: block;
+    padding-top: 0;
+    border-top: 0;
+  }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet.press-sheet--lead .press-sheet-rail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    column-gap: clamp(1.75rem, 3.2vw, 4rem);
+    align-items: start;
+    padding: 1rem 0 0;
+  }
+  #root .record-cartoon-field .press-room .press-sheet--lead .press-sheet-by {
+    font-size: clamp(1.8rem, 3.2vw, 2.9rem);
+    line-height: .96;
+    letter-spacing: -.038em;
+  }
+}

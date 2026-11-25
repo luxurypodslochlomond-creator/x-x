@@ -9,10 +9,16 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 // ── ONE DRAWING, GIVEN THE PAGE ────────────────────────────────────────────────
 // A wall of equal cards makes every drawing the same size and every artist equally
 // anonymous. This is a sheet instead: the picture runs at the width it deserves, and the
-// words sit in a margin beside it — the number, what it is looking at, its title, the hand
-// that made it, the drawer's own line set as a quotation, and the credit. Nothing is
-// boxed, tinted, tilted or captioned with a black bar. The picture is the argument; the
-// margin is the citation.
+// words sit in a margin beside it — the hand that made it, where it came from, the title of
+// the work, the drawer's own line set as a quotation, and the credit. Nothing is boxed,
+// tinted, tilted or captioned with a black bar. The picture is the argument; the margin is
+// the citation.
+//
+// Brian, 25 November: the room felt corporate. One reason was here, in the margin: the
+// artist's name was set at .8rem and the record's own number at 2.6rem, so the machine's
+// count shouted and the person's name whispered. The name now leads the margin and the
+// number is the small red mark it always should have been — a count on this record belongs
+// in the margin, never above the hand.
 export default function PressSheet({ cartoon, index, lead = false, marked = false, onOpen }) {
   const { title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title } = cartoon;
   return (
@@ -30,8 +36,10 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
       <div className="press-sheet-rail">
         <p className="press-sheet-number" aria-hidden="true">{String(index).padStart(2, '0')}</p>
         <p className="press-sheet-subject">{cartoonSubject(cartoon)}</p>
+        {/* The hand comes before the title, and before every label this room prints. */}
+        <p className="press-sheet-by">{artist_name}</p>
+        {origin && <p className="press-sheet-origin">{origin}</p>}
         {title && <h3 className="press-sheet-title">{title}</h3>}
-        <p className="press-sheet-by">{artist_name}{origin ? <span> · {origin}</span> : null}</p>
         {for_line && <blockquote className="press-sheet-words" dir="auto">{for_line}</blockquote>}
         {/* ── PASS THE DRAWING ON ──
             The wall had no way off it: a drawing could be looked at and printed, but never

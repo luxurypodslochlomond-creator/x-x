@@ -403,13 +403,15 @@
 .press-sheet-art:focus-visible .press-sheet-look { opacity: 1; }
 
 .press-sheet-rail { display: grid; gap: .55rem; align-content: start; min-width: 0; }
+/* The record's count, kept small and in the margin. It was the loudest thing on the sheet,
+   which meant the machine's number stood above the hand's name. */
 .press-sheet-number {
   margin: 0;
   font-family: var(--font-record-ui);
-  font-size: clamp(1.7rem, 2.4vw, 2.6rem);
-  font-weight: 400;
+  font-size: .72rem;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -.03em;
+  letter-spacing: .18em;
   font-variant-numeric: tabular-nums;
   color: rgb(var(--record-red));
 }
@@ -429,14 +431,27 @@
   line-height: 1.06;
   letter-spacing: -.028em;
 }
+/* ── THE HAND IS THE LOUDEST NAME ON THE SHEET ──────────────────────────────────
+   Brian, 25 November: the room felt corporate. This was a real part of it — the artist's
+   name was set smaller than the record's own number and smaller than the label above it,
+   so the sheet credited the machinery and mentioned the person. The name now leads, and
+   where it came from sits under it as the small line it is. */
 .press-sheet-by {
   margin: 0;
   font-family: var(--font-record-ui);
-  font-size: .86rem;
+  font-size: clamp(1.1rem, 1.45vw, 1.4rem);
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.1;
+  letter-spacing: -.022em;
 }
-.press-sheet-by span { font-weight: 400; color: rgb(var(--record-muted)); }
+.press-sheet-origin {
+  margin: 0;
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
 .press-sheet-words {
   margin: .3rem 0 0;
   padding-left: .9rem;
@@ -488,11 +503,12 @@
   }
   .press-sheet--lead .press-sheet-number { grid-column: 1; grid-row: 1; }
   .press-sheet--lead .press-sheet-subject { grid-column: 1; grid-row: 2; }
-  .press-sheet--lead .press-sheet-title { grid-column: 1; grid-row: 3; }
-  .press-sheet--lead .press-sheet-by { grid-column: 1; grid-row: 4; }
-  .press-sheet--lead .press-sheet-words { grid-column: 2; grid-row: 1 / span 3; margin-top: 0; }
-  .press-sheet--lead .press-sheet-link { grid-column: 1; grid-row: 5; }
-  .press-sheet--lead .press-sheet-provenance { grid-column: 1 / -1; grid-row: 6; }
+  .press-sheet--lead .press-sheet-by { grid-column: 1; grid-row: 3; }
+  .press-sheet--lead .press-sheet-origin { grid-column: 1; grid-row: 4; }
+  .press-sheet--lead .press-sheet-title { grid-column: 1; grid-row: 5; }
+  .press-sheet--lead .press-sheet-words { grid-column: 2; grid-row: 1 / span 4; margin-top: 0; }
+  .press-sheet--lead .press-sheet-link { grid-column: 1; grid-row: 6; }
+  .press-sheet--lead .press-sheet-provenance { grid-column: 1 / -1; grid-row: 7; }
 }
 
 .press-wall-colophon {
@@ -515,6 +531,21 @@
 }
 .press-more:hover:not(:disabled) { border-color: rgb(var(--record-ink)); }
 .press-more:disabled { opacity: .45; }
+
+/* ── THE LEDGER UNDER THE WALL ───────────────────────────────────────────────────
+   The provenance and the contents used to stand in the doorway, in front of the drawings.
+   They are here now: the same sentences, the same twelve live doors, read after the wall
+   rather than instead of it. */
+.press-ledger { display: grid; gap: .3rem; }
+.press-ledger-title {
+  margin: 0 0 .35rem;
+  font-family: var(--font-record-ui);
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.022em;
+}
+.press-ledger .press-scope { max-width: 62ch; }
 .press-state {
   display: flex;
   align-items: center;

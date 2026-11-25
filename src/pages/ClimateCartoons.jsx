@@ -2,6 +2,7 @@ import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import PressOpening from '@/components/climate/cartoons/press/PressOpening';
 import PressWall from '@/components/climate/cartoons/press/PressWall';
+import PressLedger from '@/components/climate/cartoons/press/PressLedger';
 import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand';
 import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
@@ -56,6 +57,10 @@ export default function ClimateCartoons() {
         <PressOpening />
 
         <PressWall />
+        {/* Everything the doorway used to say — whose drawings these are, whose permission
+            they are shown with, and the twelve ways through the room — sits here, under the
+            drawings rather than in front of them. */}
+        <PressLedger />
         {/* The machine's own four marks, in the room and in the open: a band beside the wall,
             not a drawer under it. It follows the drawings because it is about them. */}
         <BaseOneStrip />

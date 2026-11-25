@@ -193,13 +193,15 @@
     row-gap: .35rem;
     margin-top: .95rem;
   }
+  /* The count stays small on a phone too: the hand's name is the loudest thing on the sheet. */
   #root .press-room .press-sheet-number {
     grid-column: 1;
     grid-row: 1;
-    font-size: 1.9rem;
+    align-self: center;
+    font-size: .72rem;
     font-weight: 700;
-    line-height: .78;
-    letter-spacing: -.05em;
+    line-height: 1;
+    letter-spacing: .14em;
   }
   #root .press-room .press-sheet-subject {
     grid-column: 2;
@@ -213,7 +215,7 @@
     grid-column: 1 / -1;
   }
   #root .press-room .press-sheet-title { font-size: 1.38rem; line-height: 1.04; }
-  #root .press-room .press-sheet-by { font-size: .88rem; }
+  #root .press-room .press-sheet-by { font-size: 1.12rem; font-weight: 700; line-height: 1.1; letter-spacing: -.02em; }
   #root .press-room .press-sheet-words { font-size: 1.04rem; line-height: 1.45; margin-top: .2rem; }
   #root .press-room .press-sheet-provenance { font-size: .78rem; line-height: 1.5; }
 
