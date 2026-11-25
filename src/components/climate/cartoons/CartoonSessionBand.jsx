@@ -49,51 +49,67 @@ export default function CartoonSessionBand() {
           and he was right. What the search found is below, each line with the place it came
           from: the 2012 theme in Lagos, "Africa of the Future" in 2014, the fourth in 2018,
           the seventh at this same museum, and the 2019 Bonn campaign that was not an edition
-          at all. What it did not find is the 3rd, 5th and 6th themes, so those three rows say
-          so. A gap that names itself is worth more than a guess Francis would spot across a
-          room, and three named gaps are a shorter list than four invented ones. */}
+          at all — all of it read back from the festival's own site in the Internet Archive,
+          in its own words. And it found the answer to the third edition: there was no theme,
+          because the contest was suspended for want of funding, which is a fact and not a
+          gap. Two rows still say "missing" — 2020 and 2022 — and they say why: the festival's
+          own site stops publishing after 2018. A gap that names itself is worth more than a
+          guess Francis would spot across a room. */}
       <details className="comic-session-who">
-        <summary>Eight editions, 2012 to 2026 · and the three themes the record will not guess</summary>
+        <summary>Eight editions, 2012 to 2026 · and the two themes still missing</summary>
         <dl className="comic-session-facts">
           <div>
             <dt>1st · 2012 · Lagos</dt>
             <dd>
-              Theme: “United States of Africa: Matters Arising.” Started by Francis Umendu
-              Odupute, and the programme’s own reason, in its own words: to bring cartoonists,
-              comic artists, illustrators, animators and photographers together “to lend their
-              voices and draw attention to vital development issues and concerns not given the
-              attention they deserved, in favour of Africa’s productivity and sustainable
-              development.”
+              Theme: “United States of Africa: Matters Arising,” opened by the African Press
+              Cartoon Syndication Company with NEPAD, the Millennium Development Goals and a
+              UNESCO call for ideas in the frame. Six sub-themes, and they tell you what the
+              room was for: African governments, citizens and fiscal development; violence
+              against women; African heroes and heroines in caricature; “My View of Africa,”
+              kept for non-African cartoonists; African creativity; and free style. The festival
+              itself carried the exhibition, a public vote, a cartoon camp and training
+              workshops for schoolchildren and young journalists.
             </dd>
           </div>
           <div>
             <dt>2nd · 2014</dt>
             <dd>
-              Hosted by the Edo State Ministry of Arts, Culture and Tourism, on the theme
-              “Africa of the Future” — argued, in the reporting of the day, as a way to
-              fast-track public awareness of the post-2015 development agenda.
+              Hosted by the Edo State Ministry of Arts, Culture and Tourism. Theme: “Africa of
+              the Future,” with a sub-theme, “Our Children: Our Future,” won by Stane Jagodic
+              of Slovenia, Maria Angelica Tejada of the Philippines and Homayoun Abdolrahim of
+              Iran. The festival also ran a sub-theme called “My View of Africa,” kept for
+              cartoonists from outside the continent.
             </dd>
           </div>
           <div>
-            <dt>3rd · 2016 · theme missing</dt>
+            <dt>3rd · November 2016 · and why there is no theme</dt>
             <dd>
-              Held — every other year from 2012, and the fourth lands in 2018. The record has
-              not found this year’s theme, so it prints the year and not a guess.
+              Hosted by the Nigeria Union of Journalists, Edo State Council, in Benin City, with
+              a travelling “Open Cartoon Campaign” on sustaining the environment and a three-day
+              international visual journalism training. And no contest theme, because the
+              contest was on hold: Francis Odupute said plainly that year that it would stay
+              suspended until the funding and logistics to run it were met. So the missing theme
+              is not a theme we lost. It is a competition that did not run, and it is on the
+              record as that.
             </dd>
           </div>
           <div>
             <dt>4th · 2018</dt>
             <dd>
-              The CAIB 2018 festival. The exhibition that opened with it drew artists from
-              around the world on the UN development goals — environmental preservation and
-              gender among them.
+              “Africa of the Future: Sustainable Development through Youth Empowerment,” the
+              fourth edition, at the Crowne Art Gallery inside Hexagon on Golf Course Road,
+              Benin City, 23–30 November 2018 — an exhibition opening, a roundtable on
+              cartooning and animation, and a stated plan to carry the training into eLearning
+              for African girls.
             </dd>
           </div>
           <div>
             <dt>5th and 6th · 2020 and 2022 · themes missing</dt>
             <dd>
               On the same rhythm, through the two years the world shut its doors. Their themes
-              are the rest of the gap.
+              are the last of the gap, and the reason it is still a gap is mundane: the
+              festival’s own website stops publishing news after 2018, so there is no page left
+              to read them from.
             </dd>
           </div>
           <div>
@@ -122,11 +138,13 @@ export default function CartoonSessionBand() {
           </div>
         </dl>
         <p className="comic-session-attrib record-meta">
-          Sources: AllAfrica’s report of the 2012 festival; the Nigerian Observer on the 2014
-          edition and on the programme’s own history; the festival’s 2014 entry in an
-          international cartoon-contest register; CAIB’s own pages for the fourth and the
-          seventh. Three themes are still missing and stay missing until Francis Odupute sends
-          them — a filled row would look better and would be a lie.
+          Sources: the festival’s own site, cartoonafricabiennial.org, read from the Internet
+          Archive’s copies of 2016, 2019 and 2021 — the 2012 sub-themes, the 2014 results, the
+          third edition’s press release and the fourth edition’s theme all come from there, in
+          its own words. Also the Nigerian Observer on the programme’s history, and CAIB’s own
+          posts for the seventh. Two themes are still missing, for 2020 and 2022, and they stay
+          missing until Francis Odupute sends them — a filled row would look better and would
+          be a lie.
         </p>
       </details>
       <details className="comic-session-who">
