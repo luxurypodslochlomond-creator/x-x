@@ -5,6 +5,8 @@ import RecordCover from '@/components/climate/RecordCover';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
+import { recordAddress } from '@/components/climate/recordAddress';
+import { COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
 
 // ── THE PLATE ───────────────────────────────────────────────────────────────────
 // The principle is set the way her page sets her sentence: the record's painting held
@@ -49,10 +51,15 @@ export default function XEqualsXOpening() {
             Read the record <ArrowRight className="w-4 h-4" />
           </Link>
           <div className="covenant-share">
+            {/* The card travels with a sentence and lands on this page, not on the front
+                door of the record: somebody who is passed a principle should be able to
+                read the whole of it without hunting for it. */}
             <ShareCardButton
               entry={{ id: 'x-equals-x', title: 'x = x' }}
               build={buildCovenantCard}
               label="Pass it on"
+              link={recordAddress('/XEqualsX')}
+              description={COVENANT_SHARE}
             />
           </div>
         </div>

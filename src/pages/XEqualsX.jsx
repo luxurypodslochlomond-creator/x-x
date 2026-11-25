@@ -11,6 +11,8 @@ import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
+import { recordAddress } from '@/components/climate/recordAddress';
+import { COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
 import '@/components/climate/x-equals-x-page.css';
 
 // ── x = x — PRINTED FROM THE SAME BOOK AS JANINE'S PAGE ─────────────────────────
@@ -84,6 +86,8 @@ export default function XEqualsX() {
               entry={{ id: 'x-equals-x', title: 'x = x' }}
               build={buildCovenantCard}
               label="Pass it on"
+              link={recordAddress('/XEqualsX')}
+              description={COVENANT_SHARE}
             />
           </div>
         </div>

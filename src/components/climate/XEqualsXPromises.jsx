@@ -36,7 +36,11 @@ const PROMISES = [
   {
     n: '5',
     promise: 'You can check us without trusting us.',
-    kept: 'Each entry is fingerprinted when it goes up, and a reader can recompute that fingerprint in their own browser — so a silent edit shows.',
+    // "Each entry is fingerprinted" was one word too wide: the music is not sealed yet, and
+    // the seals page says so out loud. A promise with a word of overclaim in it is the one
+    // thing this page cannot afford, so the line names what is sealed and says the rest is
+    // named there. Checked against the record itself on 25 November.
+    kept: 'Every entry that carries a seal can be recomputed in your own browser, so a silent edit shows. What is sealed — and what is not yet, the music among it — is named on the seals page.',
   },
 ];
 
