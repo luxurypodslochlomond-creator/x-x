@@ -82,6 +82,7 @@ const HUBS = {
   'climatecartoons/print': () => import('@/pages/ClimateCartoonPrint'),
   'climatecartoons/exhibition': () => import('@/pages/ClimateCartoonExhibition'),
   'climatecartoons/thread': () => import('@/pages/ClimateCartoonsThread'),
+  'climatecartoons/present': () => import('@/pages/ClimateCartoonPresent'),
   climateroll: () => import('@/pages/ClimateRoll'),
   climatecorrections: () => import('@/pages/ClimateCorrections'),
   climatefellows: () => import('@/pages/ClimateFellows'),
