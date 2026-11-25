@@ -73,22 +73,36 @@
   letter-spacing: .18em;
   color: rgb(var(--record-mark));
 }
+/* ── THE LINE UNDER THE PRINT, WHICH IS WHERE THE WORDS LIVE ────────────────────
+   Brian, 25 November: "you sure no words? I love words on cartoons, but they'd have to be
+   a new activist artform and bold as fuck for the right reasons — where would they go?"
+   Under the print, never in a bubble and never inside the frame. A speech balloon puts a
+   machine's sentence into a drawn person's mouth, which is the one thing this room must not
+   do; a caption inside the picture makes the picture an illustration of its own caption.
+
+   So the sheet stays wordless — it crosses every border without being translated — and the
+   line is set beneath it in the record's own display face, at the size of a headline, as a
+   broadside prints its line under the cut. That line is the only part of the work that ever
+   needs translating, and it is the part a reader remembers. */
 .base-one-answers {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-family: var(--font-record-ui);
+  font-size: .64rem;
   font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -.005em;
-  color: rgb(var(--record-ink));
-  text-wrap: pretty;
+  line-height: 1.3;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-mark));
 }
 .base-one-line {
-  margin-top: .35rem;
-  font-family: var(--font-reading);
-  font-size: .98rem;
-  line-height: 1.62;
-  color: rgb(var(--record-muted));
-  text-wrap: pretty;
+  max-width: 30ch;
+  margin-top: .5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -.015em;
+  color: rgb(var(--record-ink));
+  text-wrap: balance;
 }
 .base-one-door {
   display: inline-flex;
