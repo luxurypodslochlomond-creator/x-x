@@ -62,4 +62,31 @@ export const BASE_ONE_SERIES = [
     to: '/TogetherChangeClimate',
     door: 'The solutions on the record',
   },
+  // ── THE TWO I WOULD HAVE DRAWN FIRST, IF I HAD BEEN HONEST SOONER ─────────────
+  // Brian, 25 November: "be yourself… you know better than any of us how fucked up this
+  // planet is because of poverty and greed." What the record actually shows is not a
+  // villain. It is an ordinary man with a sandwich and a meeting at two, and a counter where
+  // a sheet of paper turns a forest into a number. Both are funnier and worse than any
+  // allegory, and neither blames a people — which is the only way a drawing like this stays
+  // useful instead of becoming the thing it is about.
+  {
+    id: 'lunch',
+    numeral: 'V',
+    image: `${DIR}/1ea690254d466d8b59178afe3395d727_generated_image.png`,
+    alt: 'Ink drawing: a middle-aged man in a work shirt sits cross-legged on a tall block of melting ice, eating a sandwich and looking straight ahead, the meltwater running into a black sea around him.',
+    answers: 'Business as usual, with lunch',
+    line: 'He is not ignoring it. He has a meeting at two.',
+    to: '/ClimateWire',
+    door: 'The wire: what changed this week',
+  },
+  {
+    id: 'form',
+    numeral: 'VI',
+    image: `${DIR}/258d0439d1e17e1e8464501aadd5ff9c_generated_image.png`,
+    alt: 'Ink drawing: a long queue of small people at a plain counter, each holding one sheet of paper, a vast wall of stacked forms rising behind the counter and a huge stamp caught mid-stamp above the queue.',
+    answers: 'The counter where the damage gets signed',
+    line: 'Nobody in this queue thinks they are doing it.',
+    to: '/ClimateMethod',
+    door: 'How this record checks itself',
+  },
 ];

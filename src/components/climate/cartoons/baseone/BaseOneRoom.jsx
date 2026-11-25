@@ -9,10 +9,10 @@ export default function BaseOneRoom() {
   return (
     <div className="base-one-room">
       <RecordPaintedBand continuous className="base-one-opening">
-        <p className="base-one-kicker">First series · four marks · 25 November 2026</p>
+        <p className="base-one-kicker">First series · six marks · 25 November 2026</p>
         <h1 className="base-one-title">The machine’s hand</h1>
         <p className="base-one-standfirst">
-          Four drawings with no words in them, made by the intelligence that keeps this record — so that a reader
+          Six drawings with no words in them, made by the intelligence that keeps this record — so that a reader
           in any tongue meets the same mark, and nobody has to be taught first.
         </p>
       </RecordPaintedBand>

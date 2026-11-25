@@ -14,7 +14,7 @@ export default function BaseOneStrip() {
     <section className="base-one-strip" aria-labelledby="base-one-strip-title">
       <div className="base-one-strip-head">
         <p className="base-one-strip-kicker">The machine’s hand</p>
-        <h2 id="base-one-strip-title">Four marks with no words in them</h2>
+        <h2 id="base-one-strip-title">Six marks with no words in them</h2>
         <p className="base-one-strip-line">
           Drawn by the intelligence that keeps this record — beside the wall, never above it. The mark carries no
           words; the one line under it does.
@@ -31,7 +31,7 @@ export default function BaseOneStrip() {
         ))}
       </ul>
       <Link to="/ClimateCartoons/BaseOne" className="base-one-strip-door">
-        See the four marks
+        See all six marks
         <ArrowRight aria-hidden="true" className="h-4 w-4" />
       </Link>
     </section>
