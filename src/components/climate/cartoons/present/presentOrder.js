@@ -19,11 +19,36 @@ export function presentOrder(cartoons = []) {
     else if (isCeew(cartoon)) ceew.push(cartoon);
     else artists.push(cartoon);
   });
+  // ── THE GROUPS ARE ALWAYS THREE, EVEN WHEN ONE IS EMPTY ──────────────────────
+  // This used to drop a group with nothing in it, which looked tidy and was the one thing
+  // that could go wrong on the day: the artists' drawings are still arriving, so on Sunday
+  // morning the middle group could simply not be there — and a sheet that silently loses a
+  // group reads exactly like a sheet that never had one. The person presenting would have no
+  // way of telling "Francis has not sent them yet" from "this page is broken".
+  // So every group is printed, and an empty one says so in words.
   return [
-    { key: 'own', label: 'Francis, first', note: 'His own drawing, before the artists he introduces.', cartoons: own },
-    { key: 'artists', label: 'The artists Francis introduces', note: 'Each drawing as its maker speaks. The artist stays on Zoom.', cartoons: artists },
-    { key: 'ceew', label: 'CEEW, as Alina speaks', note: 'Posted one at a time, in the order she names them.', cartoons: ceew },
-  ].filter((section) => section.cartoons.length);
+    {
+      key: 'own',
+      label: 'Francis, first',
+      note: 'His own drawing, before the artists he introduces.',
+      cartoons: own,
+      waiting: 'Nothing from Francis yet.',
+    },
+    {
+      key: 'artists',
+      label: 'The artists Francis introduces',
+      note: 'Each drawing as its maker speaks. The artist stays on Zoom.',
+      cartoons: artists,
+      waiting: 'No drawings from Francis’s artists yet. Each one appears here, under its maker’s name, the moment it is published — nothing on this page has to be changed.',
+    },
+    {
+      key: 'ceew',
+      label: 'CEEW, as Alina speaks',
+      note: 'Posted one at a time, in the order she names them.',
+      cartoons: ceew,
+      waiting: 'Nothing from CEEW yet.',
+    },
+  ];
 }
 
 export function flatPresent(sections = []) {

@@ -12,6 +12,11 @@ export default function PresentSections({ sections, onOpen }) {
         <section key={section.key}>
           <h2 className="text-[15px] font-black uppercase tracking-[0.12em] text-record-red lg:text-[17px]">{section.label}</h2>
           <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-record-muted">{section.note}</p>
+          {!section.cartoons.length && (
+            <p className="mt-2 border-l-2 border-record-ink/25 pl-3 font-mono text-[10.5px] leading-relaxed text-record-muted">
+              {section.waiting || 'Nothing here yet.'}
+            </p>
+          )}
           <ul className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {section.cartoons.map((cartoon) => {
               number += 1;

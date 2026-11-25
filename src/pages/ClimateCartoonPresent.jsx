@@ -24,6 +24,8 @@ export default function ClimateCartoonPresent() {
   const wall = useCartoonWall(false);
   const sections = useMemo(() => presentOrder(wall.cartoons || []), [wall.cartoons]);
   const running = useMemo(() => flatPresent(sections), [sections]);
+  const filled = sections.filter((section) => section.cartoons.length).length;
+  const waiting = sections.length - filled;
   const [openId, setOpenId] = useState(null);
   const [index, setIndex] = useState(0);
 
@@ -62,7 +64,8 @@ export default function ClimateCartoonPresent() {
         <>
           <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b border-record-ink/15 pb-3">
             <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-record-muted">
-              {running.length} {running.length === 1 ? 'drawing' : 'drawings'} · {sections.length} {sections.length === 1 ? 'group' : 'groups'}
+              {running.length} {running.length === 1 ? 'drawing' : 'drawings'} · {filled} {filled === 1 ? 'group' : 'groups'}
+              {waiting ? ` · ${waiting} still to come` : ''}
             </p>
             <button
               type="button"
