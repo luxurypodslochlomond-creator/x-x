@@ -60,6 +60,28 @@ export default function ClimateCartoonPresent() {
         </p>
       )}
 
+      {/* ── HER ITEM 03, WHICH IS NOT A DRAWING ──────────────────────────────────
+          Every other group on this sheet is a drawing to post. Item 03 is the two minutes
+          before them, and it is the only part of the hour that belongs to the record — so
+          it sat on another page while the person presenting had only this one open beside
+          Zoom. The script is written and the door people add a crisis or a solution at is a
+          live link; both are one tap from here now, because hunting for a page in front of a
+          room that includes a research institute is the one thing two minutes cannot afford. */}
+      <div className="mb-5 border-2 border-record-ink bg-record-bone/70 px-3 py-2.5">
+        <p className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-record-red">03 · your two minutes, before the drawings</p>
+        <p className="mt-1 text-[12.5px] leading-snug">
+          Her draft gives you two minutes first: what the record is, and where people add a crisis or a solution.
+        </p>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <Link to="/ClimateWorkshop" className="flex min-h-[44px] items-center border-2 border-record-ink px-3 font-mono text-[10.5px] font-black uppercase tracking-[0.1em]">
+            The two minutes ↗
+          </Link>
+          <Link to="/TogetherChangeClimate?submit=1" className="flex min-h-[44px] items-center border-2 border-record-ink px-3 font-mono text-[10.5px] font-black uppercase tracking-[0.1em]">
+            The add door ↗
+          </Link>
+        </div>
+      </div>
+
       {!!running.length && (
         <>
           <div className="mb-5 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2 border-b border-record-ink/15 pb-3">
