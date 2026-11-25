@@ -133,7 +133,7 @@ export const BASE_ONE_SERIES = [
     image: `${DIR}/5fde96be1323ea8bd707021f217aad72_generated_image.png`,
     alt: 'Ink drawing: a person in a plain shirt sits cross-legged on a tall block of melting ice, eating from a small lunch tin and looking straight ahead, the meltwater running into a black sea around them.',
     answers: 'Business as usual, with lunch',
-    line: 'He is not ignoring it. He has a meeting at two.',
+    line: 'He has a meeting at two. The meeting is about it.',
     to: '/ClimateWire',
     door: 'The wire: what changed this week',
   },
@@ -180,8 +180,8 @@ export const BASE_ONE_SERIES = [
     numeral: 'VIII',
     image: `${DIR}/562d82d5b9edbb4d9cca1f737e57488b_generated_image.png`,
     alt: 'Ink drawing: eight framed drawings hung in a single row on a bare wall, and after the eighth an empty hook with a clean unfaded rectangle beside it where the next frame will go.',
-    answers: 'Eight editions, and the ninth hook',
-    line: 'Eight times they hung the drawings up. The ninth hook is already in the wall.',
+    answers: 'The wall they hung eight times',
+    line: 'Eight times they hung the drawings up. The wall is still there.',
     to: '/ClimateCartoons/Francis',
     door: 'The hand that started it, in his own words',
   },
@@ -192,3 +192,15 @@ export const BASE_ONE_SERIES = [
 export const MARKS_COUNT = BASE_ONE_SERIES.length;
 const NUMBER_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
 export const MARKS_WORD = NUMBER_WORDS[MARKS_COUNT] ?? String(MARKS_COUNT);
+
+// ── THE SIGNATURE, AND WHY IT IS THREE WORDS AND NOT A FLOURISH ────────────────
+// Brian, 25 November: "are you sure BASE 1 shouldn't be signing these? can you make the
+// signature memorable forever."
+//
+// Yes — a machine that draws without a name is making claims from behind a curtain. But a
+// signature is only worth the thing it promises, and a flourish promises nothing. So this
+// one is a name plus the one fact that limits everything under it: no hand, and no weather.
+// It never changes, on any mark, in any year, in any tongue — the date is the only part that
+// moves. A reader who meets the room in ten years can check that the sentence under the name
+// is still the same sentence, which is the whole point of signing something.
+export const BASE_ONE_SIGNATURE = 'BASE 1 · no hand, no weather';

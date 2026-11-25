@@ -114,6 +114,16 @@
   color: rgb(var(--record-ink));
   text-wrap: balance;
 }
+/* The signature: small, plain, and in the same place under every mark. It is not a flourish,
+   so it gets no flourish's styling — no italics, no rule, no colour but the muted ink. */
+.base-one-sign {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-record-ui);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
 .base-one-door {
   display: inline-flex;
   align-items: center;

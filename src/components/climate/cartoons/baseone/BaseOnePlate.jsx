@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { BASE_ONE_SIGNATURE } from '@/components/climate/cartoons/baseone/baseOneSeries';
 
 // One drawing, on the sheet, at its own proportions. Nothing is written on it and nothing
 // is laid over it: the words sit underneath, in the record's voice, and they only say what
@@ -20,6 +21,9 @@ export default function BaseOnePlate({ drawing }) {
             {drawing.door}
             <ArrowRight aria-hidden="true" className="h-4 w-4" />
           </Link>
+          {/* The same three words under every mark, for good: the name, and the one thing
+              the name cannot do. It never varies, so a reader can check it in ten years. */}
+          <p className="base-one-sign">{BASE_ONE_SIGNATURE}</p>
         </div>
       </figcaption>
     </figure>
