@@ -17,7 +17,7 @@ const LIMITS = [
   // the festival's life: the record holds 2012, 2014, 2019 and 2026, and it does not hold the
   // years in between. So the room says that out loud, in the room, before a reader decides for
   // itself that a numeral is a date. Francis would spot the other version in a second.
-  'These are not one mark per edition. Eight drawings and eight festivals are not the same eight, and this room does not draw a year it cannot read: the record holds the first, the second, the seventh and the eighth, and says plainly that it has not got the rest.',
+  'These are not one mark per edition. Eight drawings and eight festivals are not the same eight: the festival’s own eight years are listed on the wall, with three themes still missing, and this room will not draw a year it cannot read.',
   'These marks are not a portrait of the planet and not a census of its people. They draw a way of working — mostly the way the comfortable work, and once the way this machine works. The people carrying the cost are on the wall, drawn by hands that have been somewhere; a machine that has never stood in it should not draw them.',
 ];
 
