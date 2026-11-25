@@ -1,0 +1,96 @@
+/* ── THE WIRE IN THE HAND ────────────────────────────────────────────────────────
+   Brian, 25 November: "why on mobile does feel a bit clunky still and not a pleasure to
+   use in place bro."
+
+   Four reasons, and none of them is decoration:
+
+   1. THE PICTURE CAME BEFORE THE WORDS. A lead photograph ran full-bleed at its own
+      proportions, so on a phone a tall one filled a screen and a half before a reader
+      learned what they were looking at. The headline is the thing being read; it now
+      comes first, and the picture follows at a height the hand can take in without
+      losing its place.
+   2. THE TEASER WAS CUT OFF. The lead's opening paragraph was clamped at three lines
+      with no sign that words were missing. A record that corrects itself in daylight
+      cannot truncate its own opening sentence. It is shown whole.
+   3. EVERY ROW WAS A FULL-WIDTH PICTURE. Twelve entries of full-bleed images is a lot of
+      thumb to earn a headline. The index is now a list to scan: a square plate on the
+      left, the words on the right, the picture itself one tap away.
+   4. TYPING MADE THE PAGE VANISH. Every keystroke emptied the list and replaced it with
+      "Loading the Wire…". The list now stays while a search settles, with one quiet line
+      saying it is looking.
+
+   Nothing here changes what the Wire holds, what it counts, or who signs it. Only the
+   order a thumb meets it in. Desktop keeps its own rules in wire-desktop.css. */
+@media (max-width: 639px) {
+  #root .climate-record .news-page .news-index { padding: 1.15rem 1rem calc(2.75rem + env(safe-area-inset-bottom)); }
+
+  /* ── 1 & 2. THE WORDS FIRST, THE PICTURE AFTER, AND NOTHING CUT OFF ────────── */
+  #root .climate-record .news-lead { display: flex; flex-direction: column; }
+  #root .climate-record .news-lead > .news-lead-kicker { order: 0; }
+  #root .climate-record .news-lead > .news-lead-heading { order: 1; margin-top: .85rem; font-size: 1.85rem; line-height: 1.14; }
+  #root .climate-record .news-lead > .news-lead-standfirst { order: 2; display: block; overflow: visible; -webkit-line-clamp: unset; margin-top: .7rem; font-size: .98rem; line-height: 1.62; }
+  #root .climate-record .news-lead > figure { order: 3; margin: 1.15rem 0 0; }
+  #root .climate-record .news-lead > .news-lead-use { order: 4; margin-top: 1rem; }
+  #root .climate-record .news-lead > .news-lead-meta { order: 5; }
+  #root .climate-record .news-lead > .news-credit { order: 6; }
+  #root .climate-record .news-lead > .news-lead-actions { order: 7; }
+  #root .climate-record .news-lead-plate { background: rgb(var(--record-bone)); }
+  #root .climate-record .news-lead-plate img { display: block; width: 100%; height: auto; max-height: 52vh; object-fit: contain; }
+  #root .climate-record .news-lead-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  #root .climate-record .news-lead-actions > .news-read { width: 100%; justify-content: space-between; min-height: 46px; }
+  #root .climate-record .news-lead-actions :is(.record-share-compact, .record-share-inline, .record-share-button) { min-height: 44px; padding-inline: .7rem; font-size: .8rem; }
+
+  /* ── 3. THE INDEX IS A LIST TO SCAN ──────────────────────────────────────── */
+  #root .climate-record .news-rows { display: block; margin-top: .2rem; }
+  #root .climate-record .news-row {
+    display: grid; grid-template-columns: 4.75rem minmax(0, 1fr);
+    grid-template-areas: 'thumb copy' 'credit credit' 'actions actions';
+    gap: .5rem .9rem; margin: 0; padding: .95rem 0 1rem;
+    border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .18);
+    border-radius: 0; background: transparent;
+  }
+  #root .climate-record .news-row[data-has-image="false"] { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'copy' 'actions'; }
+  #root .climate-record .news-row > figure { display: contents; }
+  #root .climate-record .news-row-thumb { grid-area: thumb; width: 4.75rem; margin: 0; border-radius: 0; background: rgb(var(--record-bone)); overflow: hidden; }
+  #root .climate-record .news-row-thumb img { display: block; width: 4.75rem; height: 4.75rem; max-height: none; object-fit: cover; }
+  #root .climate-record .news-row > figure .news-credit { grid-area: credit; margin: 0; font-size: .68rem; line-height: 1.45; }
+  #root .climate-record .news-row-copy { grid-area: copy; min-width: 0; }
+  #root .climate-record .news-row-heading { margin-top: .5rem; font-size: 1.2rem; line-height: 1.24; letter-spacing: -.025em; overflow-wrap: anywhere; }
+  #root .climate-record .news-row-excerpt { margin-top: .4rem; font-size: .89rem; line-height: 1.55; -webkit-line-clamp: 2; }
+  #root .climate-record .news-row-source { margin-top: .5rem; font-size: .7rem; line-height: 1.5; }
+  #root .climate-record .news-row-actions { grid-area: actions; display: flex; align-items: center; gap: .5rem; margin: 0; padding: 0; }
+  #root .climate-record .news-row-actions .news-read {
+    display: inline-flex; align-items: center; justify-content: center; gap: .35rem;
+    min-height: 42px; padding: .4rem .75rem; border: 1px solid rgb(var(--record-ink) / .3);
+    border-radius: 0; background: transparent; color: rgb(var(--record-ink)); font-size: .8rem;
+  }
+  #root .climate-record .news-row-actions :is(.record-share-compact, .record-share-inline) { min-height: 42px; font-size: .78rem; }
+  /* A tap answers, the way a switch on the wall answers. */
+  #root .climate-record .news-row:active { background: rgb(var(--record-bone) / .5); }
+  #root .climate-record .news-row-actions .news-read:active { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); border-color: rgb(var(--record-ink)); }
+
+  /* ── THE FILTERS, SO A THUMB CAN SEE THERE IS MORE OF THEM ───────────────── */
+  #root .climate-record .news-tools { margin-bottom: 1.15rem; }
+  #root .climate-record .news-kinds {
+    margin: 0 -1rem; padding: 0 1rem; scroll-snap-type: x proximity; scroll-padding-inline: 1rem;
+    -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+  }
+  #root .climate-record .news-kinds button { scroll-snap-align: start; }
+  #root .climate-record .news-filter-current { margin-top: .35rem; font-size: .74rem; }
+  #root .climate-record .news-searching { margin: -.4rem 0 1rem; font-size: .78rem; color: rgb(var(--record-muted)); }
+
+  /* ── A NARROW GLASS IS STILL A READER'S GLASS ────────────────────────────── */
+  #root .climate-record .news-index-heading { min-width: 0; }
+  #root .climate-record .news-index-heading h1 { overflow-wrap: anywhere; }
+  #root .climate-record .news-load-more { border-radius: 0; }
+  #root .climate-record .news-index-foot { margin-top: 1.4rem; }
+}
+
+@media (max-width: 359px) {
+  #root .climate-record .news-row { grid-template-columns: 4rem minmax(0, 1fr); }
+  #root .climate-record .news-row-thumb { width: 4rem; }
+  #root .climate-record .news-row-thumb img { width: 4rem; height: 4rem; }
+  #root .climate-record .news-row-heading { font-size: 1.1rem; }
+  #root .climate-record .news-lead > .news-lead-heading { font-size: 1.65rem; }
+}
