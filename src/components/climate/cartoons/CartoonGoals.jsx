@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { GOALS, UNPLACED, GOALS_SOURCE } from '@/components/climate/cartoons/cartoonGoals';
+import { GOALS, GOALS_SOURCE } from '@/components/climate/cartoons/cartoonGoals';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 import GoalRow from '@/components/climate/cartoons/GoalRow';
 import '@/components/climate/cartoons/cartoon-goals.css';
@@ -33,6 +33,26 @@ export default function CartoonGoals() {
 
   const held = GOALS.filter(answered).length;
   const open = GOALS.length - held;
+
+  // ── THE DRAWINGS READ ONTO NO GOAL, COUNTED RATHER THAN REMEMBERED ────────────
+  // This line used to name one drawing from a hand-written list, and on 25 November the
+  // wall held four that no goal names: Francis's "Urbanisation and Sanitation…", "Heat's Got
+  // Nowhere to Hide!", "The Game's Gone Green!" and "Hidden in Plain Sight". So the page was
+  // telling a cartoonist his drawing had been read when it had not — and worse, it would go
+  // stale again the moment a new drawing arrived, which is exactly what Sunday is for.
+  //
+  // Which drawings are unread is arithmetic, not an editorial judgement: it is the wall minus
+  // the titles the goals name. So it is counted here from the wall itself, and it cannot drift.
+  // What a drawing MEANS is still hand-written in cartoonGoals.js, and still has to earn its
+  // place — that rule is untouched.
+  const placedTitles = useMemo(
+    () => new Set(GOALS.flatMap((g) => g.drawings.map((d) => d.title))),
+    []
+  );
+  const unplaced = useMemo(
+    () => cartoons.filter((c) => c.title && !placedTitles.has(c.title)).map((c) => c.title),
+    [cartoons, placedTitles]
+  );
   const shown = waitingOnly ? GOALS.filter((g) => !answered(g)) : GOALS;
 
   return (
@@ -86,10 +106,15 @@ export default function CartoonGoals() {
       </ol>
 
       <div className="cartoon-goals-foot">
-        {UNPLACED.length > 0 && (
+        {unplaced.length > 0 && (
           <p>
-            One drawing, {UNPLACED.join(' and ')}, is read onto no goal at all, and is left
-            where it is. A room that puts every drawing somewhere has stopped looking at them.
+            {unplaced.length === 1 ? 'One drawing' : `${unplaced.length} drawings`} (
+            {unplaced.length === 1
+              ? unplaced[0]
+              : `${unplaced.slice(0, -1).join(', ')} and ${unplaced[unplaced.length - 1]}`}
+            ) {unplaced.length === 1 ? 'is' : 'are'} read onto no goal at all, and{' '}
+            {unplaced.length === 1 ? 'is' : 'are'} left where they are. A room that puts every
+            drawing somewhere has stopped looking at them.
           </p>
         )}
         <p>
