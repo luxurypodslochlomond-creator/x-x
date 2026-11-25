@@ -61,7 +61,12 @@ export default function ClimateSeals() {
         .catch(() => { if (alive) setIsKeeper(false); });
 
       try {
-        const sealRes = await base44.entities.ClimateSeal.list('-version', 2000);
+        // These six reads are independent. Waiting for each section in turn made
+        // a cold check pay six network round trips before any result could appear.
+        const [sealRes, ...sections] = await Promise.all([
+          base44.entities.ClimateSeal.list('-version', 2000),
+          ...SOURCES.map((src) => src.load()),
+        ]);
         const seals = asList(sealRes);
         const latest = new Map();
         for (const s of seals) {
@@ -69,13 +74,9 @@ export default function ClimateSeals() {
           if (!current || (s.version || 0) > (current.version || 0)) latest.set(s.entry_id, s);
         }
 
-        const collected = [];
-        for (const src of SOURCES) {
-          const records = asList(await src.load());
-          for (const rec of records) {
-            collected.push({ src, rec, seal: latest.get(rec.id) });
-          }
-        }
+        const collected = sections.flatMap((section, index) =>
+          asList(section).map((rec) => ({ src: SOURCES[index], rec, seal: latest.get(rec.id) }))
+        );
 
         const checked = await Promise.all(
           collected.map(async (row) => {

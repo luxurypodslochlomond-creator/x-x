@@ -1,6 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from '@/App.jsx'
+import preloadEntry from '@/lib/preloadEntry'
 import '@/index.css'
 // The climate record's palette, retinted in the ocean key. Loaded after the
 // utilities so it wins, and scoped to .climate-record so nothing else moves.
@@ -61,19 +60,33 @@ const MODULE_LOAD_MESSAGES = [
 const isModuleLoadError = (error) =>
   MODULE_LOAD_MESSAGES.some((m) => `${error?.name || ''} ${error?.message || ''}`.includes(m));
 
-console.log('🚀 UF51 mounting...');
+// Start this address's page and frame while the larger router is downloading.
+// Previously no route import could start until ReactDOM and the entire router ran.
+preloadEntry(window.location.pathname);
 
-try {
+Promise.all([import('react-dom/client'), import('@/App.jsx')]).then(([ReactDOM, { default: App }]) => {
   ReactDOM.createRoot(document.getElementById('root')).render(
     <RootErrorBoundary>
       <App />
     </RootErrorBoundary>
   );
-  console.log('✅ UF51 mounted OK');
-} catch (e) {
-  console.error('💥 Mount failed:', e);
-  document.getElementById('root').innerHTML = `<div style="background:#000;color:#06b6d4;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:monospace;padding:24px;text-align:center"><div style="font-size:48px">⚡</div><h1 style="font-size:24px;font-weight:900">Load failed</h1><p style="color:#94a3b8;max-width:400px;font-size:14px">${e.message}</p><button onclick="location.reload()" style="background:#06b6d4;color:#000;border:none;padding:12px 24px;font-weight:900;cursor:pointer;font-size:16px;margin-top:8px">RELOAD</button></div>`;
-}
+}).catch((e) => {
+  if (isModuleLoadError(e) && reloadForNewBuild()) return;
+  console.error('Mount failed:', e);
+  const root = document.getElementById('root');
+  root.innerHTML = '';
+  const message = document.createElement('div');
+  message.style.cssText = 'min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:24px;text-align:center;background:rgb(var(--record-paper));color:rgb(var(--record-ink));font-family:var(--font-body)';
+  const heading = document.createElement('h1');
+  heading.textContent = 'The page could not open.';
+  const detail = document.createElement('p');
+  detail.textContent = e.message;
+  const retry = document.createElement('button');
+  retry.textContent = 'Try again';
+  retry.onclick = () => window.__uf51RecoverBuild?.(true) || window.location.reload();
+  message.append(heading, detail, retry);
+  root.appendChild(message);
+});
 
 if (import.meta.hot) {
   import.meta.hot.on('vite:beforeUpdate', () => {
