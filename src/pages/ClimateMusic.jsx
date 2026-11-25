@@ -32,7 +32,15 @@ const MUSIC_HOLD = true;
 export default function ClimateMusic() {
   const [tracks, setTracks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeId, setActiveId] = useState(null);
+  // ── A LINK CAN NAME ONE PIECE ────────────────────────────────────────────────
+  // The seal page fingerprints one track's words, so its row should open that track and
+  // not a room of twenty-one with the reader left to find it. ?track=<id> does exactly
+  // that, and does nothing else: if the piece named is not standing (the record's music
+  // is still held for a person to hear, so most are not), the room opens on whatever is
+  // standing rather than on an empty plate. No play is counted, nothing is ranked.
+  const [activeId, setActiveId] = useState(
+    () => new URLSearchParams(window.location.search).get('track') || null
+  );
   const [word, setWord] = useState('');
   const [kind, setKind] = useState('');
   const [kinds, setKinds] = useState([]);

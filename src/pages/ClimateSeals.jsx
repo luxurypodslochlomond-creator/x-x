@@ -68,7 +68,7 @@ const KIND_TONE = {
 // that changed. One thing, one name.
 const entryHref = (type, rec) => {
   if (type === 'news') return `/ClimateWireEntry/${rec.id}`;
-  if (type === 'track') return '/ClimateMusic#music-deck';
+  if (type === 'track') return `/ClimateMusic?track=${rec.id}#music-deck`;
   if (type === 'group') return '/TogetherChangeClimate#record-room-groups';
   return `/ClimateDetail/${rec.entry_type || 'solution'}/${rec.id}`;
 };
