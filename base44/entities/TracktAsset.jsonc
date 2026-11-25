@@ -1,6 +1,7 @@
 {
   "name": "TracktAsset",
   "type": "object",
+  "description": "A tagged thing being tracked \u2014 a wheelchair, a pallet, a pump. The live board reads it, and the board also sets a status by hand, so reads and updates stay open as they were. What changes here is the two doors nothing was standing behind: nothing may add an asset from a browser, and nothing may delete one. Assets arrive through the reader's own ingest, which writes with the service role.",
   "properties": {
     "tag_id": {
       "type": "string",
@@ -57,6 +58,16 @@
   ],
   "rls": {
     "read": {},
-    "write": {}
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {},
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
   }
 }
