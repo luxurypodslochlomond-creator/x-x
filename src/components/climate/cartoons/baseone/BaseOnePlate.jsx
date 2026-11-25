@@ -9,8 +9,13 @@ import { BASE_ONE_SIGNATURE } from '@/components/climate/cartoons/baseone/baseOn
 export default function BaseOnePlate({ drawing }) {
   return (
     <figure className="base-one-plate" id={`base-one-${drawing.id}`}>
+      {/* The square is declared, not discovered. Without a width and height the browser only
+          learns how tall a mark is once the file has arrived, so on a slow connection the
+          sheet sat there as a blank white band and then shoved the rest of the room down the
+          page. Declaring 1024×1024 means the paper is the right shape from the first frame —
+          an empty print waiting, never a hole. */}
       <div className="base-one-sheet">
-        <img src={drawing.image} alt={drawing.alt} loading="lazy" decoding="async" />
+        <img src={drawing.image} alt={drawing.alt} width={1024} height={1024} loading="lazy" decoding="async" />
       </div>
       <figcaption className="base-one-caption">
         <p className="base-one-numeral" aria-hidden="true">{drawing.numeral}</p>
