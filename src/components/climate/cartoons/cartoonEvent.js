@@ -32,6 +32,14 @@ export const CARTOON_EVENT = {
   // the book is, in the anthology's own words, rather than describing a website.
   eventLine: 'An anthology of editorial cartoons and comics journalism by selected African and non-African cartoonists.',
   credit: 'CartoonAFRICA, prepared by African Press Cartoon services, 2026',
+  // ── WHAT TRAVELS IN THE MESSAGE, NOT ONLY IN THE PICTURE ──────────────────────
+  // A card shared into a chat arrives with a line of text under it, and that line was the
+  // biennial's name and a web address and nothing else. So a cartoonist opening a forwarded
+  // card saw a poster for something they could not name, in a place they were not told, for
+  // an hour they did not know was online. The picture already says all of this; the message
+  // has to say it too, because most people read the words before they open the picture.
+  // Every fact here is one already held in this file — nothing new is claimed.
+  shareLine: 'A room of climate cartoons from Africa, Asia and beyond, gathered for the 8th CartoonAFRICA Biennial · 28–30 November 2026, National Museum, Benin City. Janine Selendy’s workshop is Sunday 29 November, 3pm West Africa · 2pm UK, online. Every drawing keeps the name of the hand that made it.',
 };
 
 // ── THE THREE DAYS, IN THE FESTIVAL'S OWN ORDER ────────────────────────────────

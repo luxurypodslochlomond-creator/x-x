@@ -13,7 +13,7 @@ const ShareCardPreview = lazy(() => import('@/components/climate/ShareCardPrevie
 // file (an app's own browser). Where the sheet is refused altogether — the editor's
 // own frame — the card is put on screen to keep and pass on, never a silent download.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, previewFirst = false, inline = false, includeMessage = false }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, icon: GivenIcon, previewFirst = false, inline = false, includeMessage = false }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const link = givenLink || (build === buildWireShareCard && entry.id ? recordAddress(`/ClimateWireEntry/${entry.id}`) : recordAddress());
@@ -40,7 +40,10 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       setState('idle');
     } catch { setState('error'); }
   };
-  const Icon = state === 'shared' ? Check : Share2;
+  // A room may hand in its own mark for this button: the cartoon room draws its own arrow,
+  // because the network glyph is the sign for broadcasting and this record passes things on
+  // by hand. Everything else keeps the standard one.
+  const Icon = state === 'shared' ? Check : (GivenIcon || Share2);
   const label = state === 'building' ? 'Preparing image…' : state === 'shared' ? 'Shared' : state === 'error' ? 'Try sharing again' : givenLabel || (compact ? 'Share' : 'Share this entry as a card');
   return <>
     <button type="button" onClick={share} disabled={state === 'building'} aria-busy={state === 'building'} className={inline ? 'record-share-inline' : compact ? 'record-share-compact' : 'record-share-button'}>

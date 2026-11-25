@@ -67,6 +67,17 @@ export default function PressWall() {
             drawings already run down the page. */}
         <p className="press-wall-line press-wall-swipe">Swipe along the wall — every drawing at the width it was drawn.</p>
         <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
+        {/* ── THE WALL IS STILL BEING HUNG, AND IT SAYS SO ────────────────────────
+            The artists Francis introduces are still sending, so this wall is not finished and
+            a reader can see that it is not: fourteen drawings where a biennial's anthology
+            would hold hundreds. Saying it out loud is the honest move and the better one —
+            a wall that admits it is filling is a room being worked in, while a wall that
+            pretends to be complete invites the question "is this all there is?". Each
+            drawing goes up under the name of the hand that made it, and that is the only
+            promise the line needs to make. */}
+        <p className="press-wall-line press-wall-filling">
+          Still being hung: artists are sending their drawings now, and each one goes up under the name of the hand that made it.
+        </p>
       </header>
 
       {wall.isPending && (

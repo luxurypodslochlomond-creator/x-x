@@ -328,6 +328,16 @@
   line-height: 1.6;
   color: rgb(var(--record-muted));
 }
+/* ── THE WALL IS STILL BEING HUNG ────────────────────────────────────────────────
+   Not a status bar and not a badge: one line in the record's small voice, marked with the
+   record's own red rule so it reads as a note in the margin rather than a third description
+   of the room. It sits under the two lines that tell a reader how to look, because a reader
+   should be told how to look before being told what is not here yet. */
+.press-wall-filling {
+  padding-left: .75rem;
+  border-left: 2px solid rgb(var(--record-red));
+  font-size: .85rem;
+}
 /* The walk-along hint belongs to the phone only; the desk runs the drawings down the page. */
 .press-wall-swipe { display: none; }
 .press-wall { display: grid; }
