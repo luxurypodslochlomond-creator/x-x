@@ -17,7 +17,7 @@ import RecordTongueDoor from '@/components/climate/RecordTongueDoor';
 import RecordRule from '@/components/climate/RecordRule';
 import RecordTimeBar from '@/components/climate/RecordTimeBar';
 import RecordFooter from '@/components/climate/RecordFooter';
-import RecordReachEarth from '@/components/climate/RecordReachEarth';
+import RecordReachDeferred from '@/components/climate/RecordReachDeferred';
 import RecordCover from '@/components/climate/RecordCover';
 import RecordSky from '@/components/climate/RecordSky';
 import RecordPagesPanel from '@/components/climate/RecordPagesPanel';
@@ -320,7 +320,7 @@ export default function ClimateLayout({ children, currentPage }) {
       {/* Except on the Map page, where the plate above already carries the reach: a reader
           standing on the page that IS the world should not be shown the world a second time
           four screens further down. One map, once, at the size it deserves. */}
-      {currentPage !== 'ClimateMap' && <RecordReachEarth />}
+      {currentPage !== 'ClimateMap' && <RecordReachDeferred />}
 
       <div className={isRoom ? 'hidden lg:block' : 'contents'}>
         <RecordFooter key={location.pathname} showKeeper={!WORKING_PAGES.includes(currentPage)} onOpenContents={openContents} contentsOpen={contentsOpen} />

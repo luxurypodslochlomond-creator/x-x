@@ -49,22 +49,26 @@
          thing that has gone. -->
 
 
-    <!-- THE RECORD'S OWN READING VOICE. Literata was drawn for reading long text on a screen
-         rather than for a brochure, so it holds a paragraph at seventeen pixels without going
-         thin or spidery — and it is the record's own face rather than the one every device
-         happens to ship. Noto Serif travels beside it: one family covering hundreds of scripts,
-         so a reader in Arabic, Devanagari or Chinese gets real lettering, never empty boxes.
-         Both are under the Open Font Licence, which means no one can ever withdraw them: the
-         files can be copied, self-hosted and handed on by anybody, for as long as the record
-         exists. The browser fetches only the script it is actually displaying. -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif:wght@400;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400&family=Noto+Serif:wght@400;600&display=swap" /></noscript>
-    <!-- STONEYMOLLAN'S OWN VOICE. The name on the stay's page is set in the face their own
-         website uses, so a guest arriving from overlochlomond.com meets the same lettering
-         rather than a stranger's. Only the @font-face rules are fetched here; the files
-         themselves only arrive on a page that actually sets the name. -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&display=swap" /></noscript>
+    <!-- ── THE READING VOICE, AND ONLY THE WEIGHT IT ACTUALLY DRAWS ────────────────
+         Literata is drawn in exactly one place on the record: a quotation — somebody else's
+         words, set in a different hand so a reader knows the voice changed. Every other word
+         on the record speaks in Record UI. So this request now asks for regular and its
+         italic and nothing more. It was asking for 600 and 700 as well, on every page, for a
+         face that is never set bold, and for Noto Serif, which sits behind Literata in the
+         chain and was therefore never drawn at all.
+         That is the same argument this file already makes twice above: a face the page never
+         paints is not a style, it is a tax. Nothing is lost — the chain in index.css still
+         names Noto Serif for the day a device arrives without Literata.
+         Literata is under the Open Font Licence, so nobody can ever withdraw it. -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,7..72,400;1,7..72,400&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,7..72,400;1,7..72,400&display=swap" /></noscript>
+    <!-- ── STONEYMOLLAN'S VOICE NOW TRAVELS WITH THE STAY ──────────────────────────
+         The stay's name is set in the face overlochlomond.com uses, so a guest arriving from
+         their own site meets the same lettering. It was being requested here, in the head of
+         every page on the platform — SORTED, the record, the admin screens — for a face that
+         only appears on one page of one product. The request now travels inside the stay's own
+         stylesheet, which is only fetched when somebody opens that page. Nothing changes for a
+         guest; every other reader stops paying for it. -->
     
     <!-- INSTANT PAINT: Critical CSS inlined -->
     <style>
