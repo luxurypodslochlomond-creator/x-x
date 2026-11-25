@@ -17,20 +17,20 @@ function SuccessScreen({ entryType, onClose, published }) {
       <div className="w-16 h-16 rounded-full bg-[#1e3a2b] flex items-center justify-center mb-5">
         <Check className="w-8 h-8 text-[#efe7d6]" />
       </div>
-      <h2 className="font-black uppercase text-[#141210] mb-3" style={{ fontFamily: 'var(--font-display)', fontSize: '28px', letterSpacing: '-0.02em' }}>
+      <h2 className="text-[#141210] mb-3" style={{ fontSize: '32px', fontWeight: 700, letterSpacing: '-0.035em', lineHeight: 1.02 }}>
         Thank you
       </h2>
-      <p className="text-[13px] font-mono text-[#141210] leading-relaxed max-w-[320px] mb-2">
+      <p className="text-[15px] text-[#141210] leading-relaxed max-w-[340px] mb-2">
         {published ? `Your ${what} is on the record now.` : `Your ${what} is with us for a quick check.`}
       </p>
-      <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed max-w-[320px] mb-6">
+      <p className="text-[13px] text-[#5a5246] leading-relaxed max-w-[340px] mb-6">
         {published
           ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A custodian can take it down, and we would email you first.'
           : isGroup
           ? 'A person checks every group that gives a contact line, so the address printed is the organiser\'s own and not somebody else\'s. We will email you the moment it is up.'
           : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}
       </p>
-      <button onClick={onClose} className="px-6 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
+      <button onClick={onClose} className="px-7 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[13px] font-bold uppercase tracking-[0.06em] active:bg-[#8f1e18] transition-colors">
         Back to the record
       </button>
     </div>
@@ -218,30 +218,35 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
       {/* The bar is paper, not a black band across the top of a warm page. What it carries
           is the one thing worth knowing at a glance: which of four questions this is. */}
+      {/* The step announces itself in the record's own voice instead of a nine-pixel mono
+          line: you are not on "screen 2 of 4", you are on the screen called What happened. */}
       <div className="sticky top-0 z-20 bg-[#efe7d6]/97 backdrop-blur border-b border-[#141210]/25">
-        <div className="max-w-[500px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
+        <div className="max-w-[500px] md:max-w-[720px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Submit to the record</p>
-            <p className="text-[12px] font-mono text-[#141210] mt-0.5 truncate">
-              {step + 1} of {STEPS.length} · {STEPS[step]}
-            </p>
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#b3261e]">Submit to the record</p>
+              <p className="text-[11px] text-[#6b6258] tabular-nums shrink-0">{step + 1} / {STEPS.length}</p>
+            </div>
+            <h2 className="text-[26px] sm:text-[30px] font-bold text-[#141210] mt-1 leading-[1.02] tracking-[-0.035em] truncate">
+              {STEPS[step]}
+            </h2>
           </div>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="w-9 h-9 flex items-center justify-center border border-[#141210]/40 text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors shrink-0"
+            className="w-10 h-10 flex items-center justify-center border border-[#141210]/30 text-[#141210] active:bg-[#141210] active:text-[#efe7d6] transition-colors shrink-0"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
-        <div className="max-w-[500px] mx-auto px-4 pb-2 flex gap-1">
+        <div className="max-w-[500px] md:max-w-[720px] mx-auto px-4 pb-2 flex gap-1">
           {STEPS.map((s, i) => (
-            <span key={s} className={`h-[3px] flex-1 ${i <= step ? 'bg-[#b3261e]' : 'bg-[#141210]/15'}`} />
+            <span key={s} className={`h-[2px] flex-1 ${i <= step ? 'bg-[#b3261e]' : 'bg-[#141210]/15'}`} />
           ))}
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="px-4 pt-4 pb-4 max-w-[500px] mx-auto">
+      <form onSubmit={handleSubmit} className="px-4 pt-6 pb-4 max-w-[500px] md:max-w-[720px] mx-auto">
         {/* Honeypot — hidden from humans, bots auto-fill it */}
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}>
           <label>Website (leave empty)</label>
@@ -266,7 +271,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
                   key={type}
                   type="button"
                   onClick={() => setEntryType(type)}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-1 py-3.5 min-h-[48px] border-b-2 text-[10px] font-black font-mono uppercase tracking-tight transition-colors ${
+                  className={`flex-1 flex items-center justify-center gap-1.5 px-1 py-3.5 min-h-[48px] border-b-2 text-[11px] font-bold uppercase tracking-[0.08em] transition-colors ${
                     i > 0 ? 'border-l border-l-[#141210]/20' : ''
                   } ${entryType === type ? on : 'text-[#6b6258] border-b-transparent'}`}
                 >
@@ -276,7 +281,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
               ))}
             </div>
 
-            <p className="text-[12px] font-mono text-[#141210] mt-3 leading-relaxed">
+            <p className="text-[15px] text-[#141210] mt-4 leading-relaxed">
               {entryType === 'solution'
                 ? 'A positive action that others can replicate — at any scale, from individuals to whole countries.'
                 : entryType === 'climate_crisis'
@@ -464,9 +469,9 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
               <a href={createPageUrl('ClimatePrivacy')} target="_blank" rel="noopener noreferrer" className="underline text-[#141210]">Privacy page</a>.
             </p>
 
-            <div className="bg-[#1e3a2b]/5 border-l-4 border-l-[#1e3a2b] px-3 py-2">
-              <p className="text-[9.5px] font-black font-mono uppercase text-[#1e3a2b] mb-1">✓ Spam screened · Information flows</p>
-              <p className="text-[10px] font-mono text-[#141210] leading-snug">
+            <div className="border-l-2 border-l-[#1e3a2b] pl-4 py-1">
+              <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#1e3a2b] mb-1">✓ Spam screened · Information flows</p>
+              <p className="text-[13px] text-[#141210] leading-relaxed">
                 Clear entries go on the record at once; anything unclear waits for a person. No advertising, no sponsorship — money never buys a place on this record.
               </p>
             </div>
@@ -477,7 +482,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
           </div>
         )}
 
-        {error && <p className="text-[11px] font-mono text-[#b3261e] mt-3 leading-snug">{error}</p>}
+        {error && <p className="text-[13px] font-bold text-[#b3261e] mt-4 leading-snug">{error}</p>}
 
         {/* The one thing to press, under the thumb — not at the foot of a scroll. */}
         <div className="sticky bottom-0 z-10 -mx-4 mt-4 px-4 py-3 bg-[#efe7d6]/97 backdrop-blur border-t border-[#141210]/20 flex gap-2">
@@ -485,7 +490,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
             <button
               type="button"
               onClick={back}
-              className="flex items-center justify-center gap-1.5 px-3 py-3.5 min-h-[52px] border border-[#141210]/40 text-[#141210] text-[11px] font-black font-mono uppercase active:bg-[#141210]/5 transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3 py-3.5 min-h-[52px] text-[#6b6258] text-[12px] font-bold uppercase tracking-[0.1em] active:text-[#141210] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Back
@@ -495,7 +500,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
             <button
               type="button"
               onClick={next}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[13px] font-bold uppercase tracking-[0.06em] active:bg-[#8f1e18] transition-colors"
             >
               Next
               <ArrowRight className="w-4 h-4" />
@@ -504,7 +509,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
             <button
               type="submit"
               disabled={submitting}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors disabled:opacity-50"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[13px] font-bold uppercase tracking-[0.06em] active:bg-[#8f1e18] transition-colors disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
               {submitting ? 'Sending…' : 'Submit to the record'}
