@@ -10,8 +10,9 @@ export default function CartoonFirstHands() {
     <header>
       <p className="first-hands-kicker">Different times. Familiar questions.</p>
       <h2 className="first-hands-title" id="first-hands-title">Power, put on paper.</h2>
-      <p className="first-hands-standfirst">Who pays? Who profits? Who gets heard? Historical satire and one contemporary work, shown whole, with the maker and the source beside each image. These are not all climate drawings, and they do not all take the same side.</p>
-      <nav className="first-hands-start" aria-label="Three ways into the drawings">
+      <p className="first-hands-standfirst">Who pays? Who profits? Who gets heard? The oldest work here was scratched into a wall nearly two thousand years ago and the newest was made this year — each shown whole, with the maker and the source beside it. A record of drawing against power invented neither the idea nor the cheek of it. These are not all climate drawings, and they do not all take the same side.</p>
+      <nav className="first-hands-start" aria-label="Four ways into the drawings">
+        <a href="#historical-alexamenos">The oldest · Alexamenos ↓</a>
         <a href="#historical-goya">Reason · Goya ↓</a>
         <a href="#historical-daumier">Power · Daumier ↓</a>
         <a href="#historical-peterloo">Witness · Peterloo ↓</a>

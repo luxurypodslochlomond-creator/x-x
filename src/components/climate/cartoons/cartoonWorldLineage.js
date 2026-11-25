@@ -2,20 +2,21 @@
 // References are not contributions, endorsements, or claims of climate activism.
 const AWARD_2026 = 'https://freedomcartoonists.com/international-cartoonists-award/2026-award/';
 
+// ── ONE MENTION OF EACH HAND, WITH THE WORK ITSELF ────────────────────────────
+// Brian, 25 November: "the draw the line cartoonists stuff bro, we mention cartoonists
+// twice — can we just do it once but include their coolasfuck art?"
+//
+// He was right, and the fault was the Alexamenos graffito. It stood here as a chapter of
+// its own — a paragraph of type about a drawing the record does not print — and the same
+// work then opened the print room below with its picture, its credit and its licence.
+// So a reader met it twice and only saw it once. It is a picture; it belongs where the
+// pictures are. Its chapter has gone, and the sentence that framed it (that this record
+// invented neither the idea nor the cheek of drawing against power) now stands at the
+// head of the print room, on the wall with the thing itself.
+//
+// Nothing was dropped and nobody was taken off the shelf: every hand named here is named
+// once, and the drawings that can be shown are shown.
 export const WORLD_LINEAGE = [
-  {
-    // Brian, 20 November: "ancient theologian … you sure not missed anything here bro?"
-    // He was right, and the gap was not a country — it was time. This shelf began in the
-    // twentieth century, as though making power visible were a modern invention. It is not.
-    id: 'cartoon-first', number: '00', title: 'The first one we still have.',
-    kicker: 'Before the printing press',
-    introduction: 'A record of drawing against power should begin by admitting it invented neither the idea nor the cheek of it. The oldest surviving drawing made to make somebody’s belief look ridiculous is nearly two thousand years old, and it was scratched into a wall by hand.',
-    people: [
-      { name: 'The Alexamenos graffito', where: 'Rome · around AD 200', work: 'Palatine Hill, scratched in plaster',
-        line: 'A man with a donkey’s head on a cross, captioned in Greek: “Alexamenos worships his god.” It is widely described as the earliest surviving picture of the crucifixion, and it was drawn to jeer. It survives because it was cut into a wall rather than printed on paper — which is also why it is the plainest warning on this shelf: mockery is very old, it points in every direction, and the hand holding the chalk is not always the good one.',
-        source: 'Wikipedia · Alexamenos graffito', source_url: 'https://en.wikipedia.org/wiki/Alexamenos_graffito' },
-    ],
-  },
   {
     id: 'cartoon-present', number: '01', title: 'Drawing against power.',
     kicker: 'Contemporary voices',

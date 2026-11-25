@@ -20,6 +20,16 @@ export default function CartoonWorld() {
         </nav>
       </header>
       <div className="cartoon-lineage-body">
+        {/* ── THE ART COMES BEFORE THE REGISTER ────────────────────────────────────
+            Brian, 25 November: "can we just do it once but include their coolasfuck art
+            bro… and look coolasfuck on mobile please?"
+
+            The wall of pictures used to sit under three chapters of names, so a reader met
+            twenty-one cartoonists in type and only then found the drawings — the work last,
+            at the bottom of the longest part of the room. The pictures are the argument;
+            the names are the citation. So the pictures come first, on the desk and on the
+            glass, and the shelf of hands follows underneath them. */}
+        <CartoonFirstHands />
         {WORLD_LINEAGE.map((group) => (
           <CartoonWorldGroup key={group.id} group={group}>
             {group.id === 'cartoon-present' && (
@@ -32,9 +42,7 @@ export default function CartoonWorld() {
             {group.id === 'cartoon-inheritance' && <CartoonOdoiNote />}
           </CartoonWorldGroup>
         ))}
-        {/* Reproductions keep their own rights statements, separate from the reading list. */}
-        <CartoonFirstHands />
-        <p className="cartoon-lineage-note">A reading list, not a ranking, membership list or endorsement. No short list can stand for every tradition or every person. These are different political positions, not a claim that every artist is a climate campaigner. The historical and open-licensed works below the list carry their own credits and reproduction terms; the contributed drawings above keep their separate permissions. Some external archives contain adult or distressing material.</p>
+        <p className="cartoon-lineage-note">A reading list, not a ranking, membership list or endorsement. No short list can stand for every tradition or every person. These are different political positions, not a claim that every artist is a climate campaigner. The historical and open-licensed works at the head of this part carry their own credits and reproduction terms; the contributed drawings above keep their separate permissions. Some external archives contain adult or distressing material.</p>
         {/* ── ONE DOOR, AND IT IS INSIDE THE ROOM ─────────────────────────────
             This nav had three doors: the drawing desk, the map, and the method page. The two
             that left the room came off — Brian, 20 November: "can't have coolasfuck icons to

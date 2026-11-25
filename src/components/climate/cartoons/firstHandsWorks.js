@@ -4,7 +4,7 @@ const firstHandsWorks = [
     id: 'alexamenos', move: 'jeer', name: 'Maker unknown',
     work: 'The Alexamenos graffito', dates: 'Rome · usually dated around AD 200',
     medium: 'Graffito on plaster',
-    line: 'A crucified figure with a donkey’s head and a Greek inscription naming Alexamenos. Usually understood as mockery of a Christian and his worship: an early example of ridicule aimed at belief, rather than at a ruler.',
+    line: 'A crucified figure with a donkey’s head and a Greek inscription naming Alexamenos. Usually understood as mockery of a Christian and his worship: an early example of ridicule aimed at belief, rather than at a ruler. It is the plainest warning on this wall — mockery is very old, it points in every direction, and the hand holding the chalk is not always the good one.',
     thumb: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Alexorig.jpg',
     full: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Alexorig.jpg',
     credit: 'Wikimedia Commons · reproduction associated with Rodolfo Lanciani’s account',
