@@ -39,7 +39,7 @@ export default function ClimateTerms() {
           </h2>
           <div className="bg-[#f7f1e5] border border-[#141210] p-4 space-y-2">
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
-              Solutions (a positive action to replicate), crises (an emergency to alert the world to), actions (cleanups, plantings, meetings), entries for the wire (what changed, where, who says so), gatherings of people working on the same thing, and comments on entries.
+              Solutions (a positive action to replicate), crises (an emergency to alert the world to), actions (cleanups, plantings, meetings), entries for the wire (what changed, where, who says so), groups of people working on the same thing, and comments on entries.
             </p>
             <p className="text-[12px] font-mono leading-relaxed text-[#141210]">
               Music is given, never bought. If you made a track you may hand it to the record: your master is stored exactly as you gave it, your name stays on the work, your rights stay yours, and you decide once whether anyone may take the copy or only hear it here. Nothing on this record is sold, licensed or counted for money. A listener may leave a line under a track in their own words; a listener is never asked for an email, and their line is never edited.

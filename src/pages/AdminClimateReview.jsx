@@ -171,7 +171,7 @@ export default function AdminClimateReview() {
     { id: 'actions', label: 'Actions', count: actions.length, icon: Calendar },
     { id: 'comments', label: 'Comments', count: comments.length, icon: MessageSquare },
     { id: 'news', label: 'Wire', count: news.length, icon: FileText },
-    { id: 'groups', label: 'Gatherings', count: groups.length, icon: Globe },
+    { id: 'groups', label: 'Groups', count: groups.length, icon: Globe },
     { id: 'tracks', label: 'Music', count: tracks.length, icon: Music },
   ];
 
@@ -200,7 +200,7 @@ export default function AdminClimateReview() {
           {item.topic && (
             <span className="text-[9px] font-mono uppercase text-[#6b6258] block truncate">
               {item.topic}{item.region ? ` · ${item.region}` : ''}
-              {item.contact_email ? ` · shows: ${item.contact_email}` : ' · no contact line — prints as an open gathering'}
+              {item.contact_email ? ` · shows: ${item.contact_email}` : ' · no contact line — prints as an open group'}
             </span>
           )}
           {/* A track: who made it, what the file actually is, and the way to hear it

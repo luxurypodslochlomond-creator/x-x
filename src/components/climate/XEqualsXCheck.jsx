@@ -29,7 +29,7 @@ const PROOF = [
   //     audit trail either way.
   {
     title: 'The seals',
-    body: 'Published solutions, actions, entries on the wire and gatherings are fingerprinted with SHA-256, each chained to the one before it. The record gives you the hash and your own browser recomputes it from the entry itself: change a word without resealing it and the check fails in public. The music is not sealed yet, and the seals page says so plainly.',
+    body: 'Published solutions, actions, entries on the wire and groups are fingerprinted with SHA-256, each chained to the one before it. The record gives you the hash and your own browser recomputes it from the entry itself: change a word without resealing it and the check fails in public. The music is not sealed yet, and the seals page says so plainly.',
     to: '/ClimateSeals',
     cta: 'Check a seal',
   },

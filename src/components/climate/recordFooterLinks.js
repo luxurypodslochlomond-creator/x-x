@@ -51,7 +51,7 @@ const BASE_ONE_DOOR = {
 };
 
 export const PRIMARY_NAV = [
-  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'What is on the record: solutions, crises, actions and gatherings.' },
+  { label: 'Record', to: '/TogetherChangeClimate', page: 'TogetherChangeClimate', what: 'What is on the record: solutions, crises, actions and groups.' },
   // ── THE DOOR IS CALLED SIGNALS, AND THE WORD IS NOT A NEW NAME FOR THE BOOK ───
   // Brian, 19 November: "you sure signals covers wire and news bro… and is it signals from
   // the record, what is our record platform, what signals out there — like crises is that a

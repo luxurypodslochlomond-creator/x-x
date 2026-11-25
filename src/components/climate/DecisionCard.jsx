@@ -9,7 +9,7 @@ const TONE = {
   Crisis: 'bg-[#b3261e] text-[#f4efe4]',
   Action: 'bg-[#e2602a] text-[#141210]',
   Wire: 'bg-[#141210] text-[#f4efe4]',
-  Gathering: 'bg-[#1e3a2b] text-[#f4efe4]',
+  Groups: 'bg-[#1e3a2b] text-[#f4efe4]',
   Music: 'bg-[#6b6258] text-[#f4efe4]',
   Comment: 'bg-[#efe7d6] text-[#141210] border border-[#141210]',
 };

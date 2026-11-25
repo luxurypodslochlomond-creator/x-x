@@ -75,7 +75,7 @@ function shape(type, r) {
   } else if (type === 'news') {
     base.label = 'Wire';
   } else if (type === 'group') {
-    base.label = 'Gathering';
+    base.label = 'Groups';
     base.contact = r.contact_email || '';
     base.source_url = '';
     base.source_name = r.topic || '';

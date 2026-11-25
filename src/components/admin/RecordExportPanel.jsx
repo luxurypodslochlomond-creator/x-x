@@ -38,7 +38,7 @@ export default function RecordExportPanel() {
     <div className="mt-6 border-2 border-[#141210] bg-[#f7f1e5] p-4">
       <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-1">Take the record out</p>
       <p className="text-[11px] font-mono leading-relaxed text-[#5a5246] mb-3">
-        Downloads every entry with its source, signer, verification and corrections — plus gatherings, pictures, music and listener lines — as one file. No contact addresses are included, so the file can be handed to anyone.
+        Downloads every entry with its source, signer, verification and corrections — plus groups, pictures, music and listener lines — as one file. No contact addresses are included, so the file can be handed to anyone.
       </p>
       <button
         onClick={take}

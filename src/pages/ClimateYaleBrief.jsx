@@ -46,7 +46,7 @@ const existsItems = (f) => [
 const notYetItems = (f) => [
   { t: 'No independent verdicts. The checking office is built and nobody has signed into it.', to: 'ClimateFellows' },
   { t: `${show(f?.noVerification)} of ${show(f?.entries)} entries carry no statement of how well they are known.`, to: 'ClimateMethod' },
-  { t: `${show(f?.groupsNoContact)} of ${show(f?.groups)} gatherings have no contact line, so nobody can actually join one yet.`, to: 'TogetherChangeClimate' },
+  { t: `${show(f?.groupsNoContact)} of ${show(f?.groups)} groups have no contact line, so nobody can actually join one yet.`, to: 'TogetherChangeClimate' },
   { t: `${show(f?.unsigned)} of ${show(f?.entries)} entries are unsigned. Nothing is attributed to a person who did not write it, and each entry says plainly that it is unsigned.`, to: 'ClimateMethod' },
   { t: 'The code is not public, so it cannot yet be audited or carried away.', to: 'ExtractionProofCovenant' },
   { t: 'No witness has yet been invited, so the checking office has had nobody in it.', to: 'ClimateFellows' },
@@ -96,7 +96,7 @@ Custodians on the roster, named rather than counted: Gillian Barbara Brown, Bria
 WHAT DOES NOT EXIST YET
 No independent verdicts — the checking office is built and empty.
 ${show(f?.noVerification)} of ${show(f?.entries)} entries carry no statement of how well they are known.
-${show(f?.groupsNoContact)} of ${show(f?.groups)} gatherings have no contact line yet.
+${show(f?.groupsNoContact)} of ${show(f?.groups)} groups have no contact line yet.
 ${show(f?.unsigned)} of ${show(f?.entries)} entries are unsigned, and each one says so rather than borrowing a name.
 The code is not public, so it cannot yet be audited or carried away.
 No checker has yet been invited, so nobody has been in the checking office.
