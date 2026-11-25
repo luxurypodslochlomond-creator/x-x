@@ -23,7 +23,14 @@ const LIMITS = [
     to: '/ClimateMethod',
     Mark: MarkMethod,
     where: 'How the record is kept',
-    says: 'Two custodians must agree before anyone joins the guest list or leaves it. Whoever runs the app can still reach the record.',
+    // ── THIS LINE WAS OVERCLAIMING, AND BRIAN CAUGHT IT ─────────────────────────
+    // It said "Two custodians must agree before anyone joins the guest list or leaves it."
+    // Read against the function that actually moves access, that is wrong twice over: a
+    // witness is a pair of eyes and not a set of keys, so one custodian's word puts them on
+    // the list or takes them off — only the KEYS need two. The guide, the invitation card
+    // and the room itself already said so; this page was the one place that disagreed with
+    // them. A covenant cannot afford a sentence a keeper can disprove in one tap.
+    says: 'The keys take two custodians: one asks, a different one agrees. A witness joins, or leaves, on one custodian\u2019s word. Whoever runs the app can still reach the record.',
   },
   {
     to: '/ClimateCorrections',

@@ -17,16 +17,16 @@ const PROOF = [
   // seals page or the guest list after reading this one. The covenant cannot survive
   // being caught in a sentence like that, so the sentences now say what the code does:
   //
-  //   • "Every published entry is fingerprinted." It is not. Of the 65 published
-  //     entries on the record, 83 seals cover the solutions, the actions, the wire and
-  //     the gatherings — and the 21 tracks have no seal at all. So the line names what
-  //     is sealed, and says the music is not sealed yet.
+  //   • "Every published entry is fingerprinted." It is not. Of the 44 published
+  //     entries on the record (counted 25 November), 93 seals cover the solutions, the
+  //     actions, the wire and the groups — and the music has no seal at all. So the line
+  //     names what is sealed, and says the music is not sealed yet.
   //
-  //   • "Every change to the guest list needs two different keepers." It does not. The
-  //     function carries one stated exception — an administrator, who can already reach
-  //     that table directly — and it writes that the decision stood alone. Saying so is
-  //     stronger than pretending otherwise, because the exception is visible in the
-  //     audit trail either way.
+  //   • "Every change to the guest list needs two different keepers." It does not, and
+  //     there are two honest exceptions rather than one: a WITNESS (a pair of eyes, not a
+  //     set of keys) moves on a single custodian's word, and only the keys themselves need
+  //     two — plus an administrator, who can already reach that table directly. All three
+  //     are written into the audit line. Saying so is stronger than pretending otherwise.
   {
     title: 'The seals',
     body: 'Published solutions, actions, entries on the wire and groups are fingerprinted with SHA-256, each chained to the one before it. The record gives you the hash and your own browser recomputes it from the entry itself: change a word without resealing it and the check fails in public. The music is not sealed yet, and the seals page says so plainly.',
@@ -35,7 +35,7 @@ const PROOF = [
   },
   {
     title: 'The keys',
-    body: 'A custodian cannot add, pause, restore or remove anybody alone: a change to the guest list needs a second, different custodian, and both names are written into the audit trail with the date. The one exception is an administrator, who can already reach that table directly — and when they act alone, the audit line records that the decision stood alone.',
+    body: 'Handing over the keys takes two: one custodian asks, a different custodian agrees, and both names go into the audit trail with the date. A witness — a pair of eyes, not a set of keys — joins or leaves on one custodian\u2019s word, and the line records whose word it was. An administrator can already reach that table directly; when they act alone, the record says so.',
     to: '/ClimateMethod',
     cta: 'Where the rule is written',
   },

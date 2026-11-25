@@ -7,6 +7,7 @@ import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
+import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
 import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
 import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import ShareCardButton from '@/components/climate/ShareCardButton';
@@ -67,6 +68,13 @@ export default function XEqualsX() {
         </div>
         <div className="covenant-card covenant-card--ocean">
           <RecordInPractice />
+        </div>
+        {/* ── WHAT CAN BE CHECKED, BEFORE WHAT CANNOT ──────────────────────────
+            This band was written, corrected against the code, and then never mounted — so
+            the page promised a reader could check it and named none of the three ways. It
+            sits before the limits on purpose: what can be checked, then the edge of it. */}
+        <div className="covenant-card">
+          <XEqualsXCheck />
         </div>
         <div className="covenant-card">
           <XEqualsXLimits />
