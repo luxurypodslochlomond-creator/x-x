@@ -75,7 +75,16 @@ export const GOALS = [
       read('The Energy Relay', 'Because it is a drawing about how power actually reaches a home.'),
       read('Love At First Light', 'Because it is about sunlight on a roof, and the bill that follows it.'),
       read('Solar Thriller', 'Because it is about keeping a panel working, not only about buying one.'),
-      read('The Cooler Influencer', 'Because it is about who gets to be cool, and what that costs in power.'),
+      // ── THE REASON IS THE DRAWING'S OWN SENTENCE, NOT A READING OF ITS TITLE ──
+      // Brian, 25 November: "cooler influencer needs to be coolasfuck for right reasons."
+      // He was right, and the fault was mine in this file. The drawing's own line reads
+      // "El Niño may be today's hottest headline, but clean energy is the real climate
+      // influencer — keepin' it cool by turning down emissions." That is a drawing about
+      // clean energy, saying so in its own words, and it belongs on this goal without
+      // anybody reaching. What was written here instead — who gets to be cool, and what
+      // that costs in power — was a reading of the title, not of the drawing, and a
+      // placement argued from a title is exactly the kind of claim a reader should refuse.
+      read('The Cooler Influencer', 'Because its own line names clean energy as the real influencer, not the heatwave.'),
     ]),
   goal(8, 'Decent Work and Economic Growth',
     'Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all.', 12, [
@@ -100,7 +109,7 @@ export const GOALS = [
     'Take urgent action to combat climate change and its impacts.', 5, [
       read('Rain Check!', 'Because the rain in it is the weather arriving differently, not just wetter.'),
       read("Heat's Got Nowhere to Hide!", 'Because it draws the heat itself, and not only the people standing in it.'),
-      read('The Cooler Influencer', 'Because the power it draws is the demand that warms the room.'),
+      read('The Cooler Influencer', 'Because it says the cooling comes from turning emissions down, not from the weather.'),
       read('Keeping It Cool!', 'Because it is a household answering a hotter summer with what it has.'),
     ]),
   goal(14, 'Life Below Water',
