@@ -24,7 +24,7 @@ import '@/components/climate/cartoons/wall-navigation.css';
 // Brian, 25 November: "could be what's contents coolasfuck or better name than contents and
 // all clickable." So there is no drawer and nothing to open: every line is live, in the
 // order the room is actually set — the wall, the desk, the book, the argument, the hands,
-// the goals, the machine's six marks, the print room, the thread, one hand's own page, the
+// the goals, the machine's own marks, the print room, the thread, one hand's own page, the
 // line with CAIB, and what a contributor's rights are. A contents list that disagrees with
 // the page it belongs to is the first place a reader learns not to trust the rest of it.
 //

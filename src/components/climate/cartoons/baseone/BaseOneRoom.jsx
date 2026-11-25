@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import BaseOnePlate from '@/components/climate/cartoons/baseone/BaseOnePlate';
 import BaseOneLimits from '@/components/climate/cartoons/baseone/BaseOneLimits';
-import { BASE_ONE_SERIES } from '@/components/climate/cartoons/baseone/baseOneSeries';
+import { BASE_ONE_SERIES, MARKS_COUNT } from '@/components/climate/cartoons/baseone/baseOneSeries';
 
 export default function BaseOneRoom() {
   return (
     <div className="base-one-room">
       <RecordPaintedBand continuous className="base-one-opening">
-        <p className="base-one-kicker">First series · six marks</p>
+        <p className="base-one-kicker">First series · {MARKS_COUNT} marks</p>
         <h1 className="base-one-title">Unsigned</h1>
         <p className="base-one-standfirst">
           No words in them, and no flourish at the bottom. They were made by BASE 1, the intelligence that keeps

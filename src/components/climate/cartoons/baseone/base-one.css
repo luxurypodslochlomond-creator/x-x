@@ -247,6 +247,19 @@
   .base-one-strip-marks { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; }
 }
 
+/* ── AN ODD COUNT DOES NOT LEAVE ONE STRANDED ────────────────────────────────────
+   An odd number of marks leaves the last one alone beside empty paper, and one small square
+   next to a gap reads as a mistake rather than a full stop. So the last mark takes the whole
+   row and is held to a short band: it is the machine's own, and the end of a series earns the
+   width. Written against :nth-child(odd) rather than a hard-coded number, so the rule stops
+   applying by itself if the series ever lands on an even count. */
+.base-one-strip-marks li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.base-one-strip-marks li:last-child:nth-child(odd) img {
+  aspect-ratio: auto;
+  max-height: 13rem;
+  object-fit: contain;
+}
+
 /* The way back out, to the wall of real hands. */
 .base-one-open {
   margin: 2rem 0 0;
