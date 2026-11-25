@@ -222,7 +222,7 @@ export default function ClimateWorkshop() {
       </Section>
 
       <div className="no-print mt-8 border-t border-record-ink/15 pt-4">
-        <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-record-muted">Pass it on</p>
+        <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-record-muted">Share</p>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
           <ShareCardButton entry={WORKSHOP_CARD} build={buildWorkshopShareCard} label="Send the card" />
           <button

@@ -93,7 +93,7 @@ export default function XEqualsX() {
             <ShareCardButton
               entry={{ id: 'x-equals-x', title: 'x = x' }}
               build={buildCovenantCard}
-              label="Pass it on"
+              label="Share"
               link={recordAddress('/XEqualsX')}
               description={COVENANT_SHARE}
             />

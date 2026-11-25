@@ -48,7 +48,7 @@ export default function StayBar({ shareImage, shareCredit }) {
           <button
             type="button"
             onClick={share}
-            aria-label="Pass this page on to somebody"
+            aria-label="Share this page with somebody"
             className="flex h-11 w-11 items-center justify-center border-2 border-record-ink/30 text-record-ink active:bg-record-ink/10"
           >
             <ShareMark className="h-5 w-5" />

@@ -51,7 +51,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
             inline
             entry={cartoon}
             build={buildDrawingShareCard}
-            label="Pass this drawing on"
+            label="Share this drawing"
             description={drawingShareLine(cartoon)}
             link={`${recordOrigin()}/ClimateCartoons?drawing=${cartoon.id}`}
           />

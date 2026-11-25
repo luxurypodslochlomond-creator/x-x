@@ -154,7 +154,7 @@ export default function ClimateFellows() {
 
       {/* ── PASS IT ON ── */}
       <section className="border-t-2 border-[#141210] pt-5">
-        <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#6b6258] mb-1.5">Pass it on</p>
+        <p className="text-[10px] font-black font-mono uppercase tracking-[0.2em] text-[#6b6258] mb-1.5">Share</p>
         <p className="text-[13px] text-[#141210] leading-relaxed mb-3" style={{ fontFamily: 'var(--font-reading)' }}>
           Know somebody with an hour — a researcher, a student? Send them this page as a card. It carries its own address, so they land here rather than on a screenshot.
         </p>
