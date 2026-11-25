@@ -21,7 +21,7 @@ export default function CartoonCaption({ cartoon }) {
           inline
           entry={cartoon}
           build={buildDrawingShareCard}
-          label="Pass this drawing on"
+          label="Share this drawing"
           description={drawingShareLine(cartoon)}
           link={`${recordOrigin()}/ClimateCartoons?drawing=${cartoon.id}`}
         />
