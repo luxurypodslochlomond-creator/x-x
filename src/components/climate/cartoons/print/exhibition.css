@@ -255,3 +255,38 @@
 
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
+
+/* ── PASS IT ON ────────────────────────────────────────────────────────────────
+   The one way the show leaves the room: into the group chat the room is already in.
+   Set as paper and ink rather than as the red button, because printing and passing on
+   are not the same act and the paper one is the rarer. Both go with the tools bar when
+   the machine prints, so the sheet never carries a button. */
+.ex-tools-right { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
+.ex-pass-wrap { display: inline-flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.ex-tools .ex-pass {
+  padding: .58rem .9rem;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink));
+  background: rgb(var(--record-paper));
+  border: 2px solid rgb(var(--record-ink));
+}
+.ex-tools .ex-pass:hover { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); }
+.ex-pass-said {
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.ex-pass-address {
+  max-width: 100%;
+  padding: .3rem .4rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .62rem;
+  color: rgb(var(--record-ink));
+  background: #fff;
+  border: 1px solid rgb(var(--record-ink) / .35);
+}

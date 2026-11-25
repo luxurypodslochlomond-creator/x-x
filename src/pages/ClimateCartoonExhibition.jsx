@@ -5,6 +5,7 @@ import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
 import ExhibitionTitleSheet from '@/components/climate/cartoons/print/ExhibitionTitleSheet';
 import ExhibitionSheet from '@/components/climate/cartoons/print/ExhibitionSheet';
+import PassTheShowOn from '@/components/climate/cartoons/print/PassTheShowOn';
 import '@/components/climate/cartoons/print/exhibition.css';
 
 // ── THE EXHIBITION ─────────────────────────────────────────────────────────────
@@ -60,7 +61,12 @@ export default function ClimateCartoonExhibition() {
     <div className="ex-page">
       <div className="ex-tools">
         <Link to="/ClimateCartoons/Print">← Choose again</Link>
-        <button type="button" onClick={() => window.print()}>Print the exhibition</button>
+        <span className="ex-tools-right">
+          {cartoons && cartoons.length > 0 && (
+            <PassTheShowOn showName={showName} count={cartoons.length} />
+          )}
+          <button type="button" onClick={() => window.print()}>Print the exhibition</button>
+        </span>
       </div>
 
       {cartoons === null && (
