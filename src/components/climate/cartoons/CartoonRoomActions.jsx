@@ -8,8 +8,22 @@ import { HandPencil, PaperPhoto } from '@/components/climate/cartoons/CartoonInk
 export default function CartoonRoomActions() {
   return (
     <section className="comic-workshop" aria-labelledby="cartoon-your-turn">
-      <h2 id="cartoon-your-turn" className="comic-section-title">Now it’s your turn.</h2>
-      <p className="record-meta comic-workshop-note">Your joke. Your drawing. Your way of seeing it.</p>
+      {/* ── THIS IS A DOOR FOR A CARTOONIST, NOT AN EXERCISE FOR THE ROOM ──────────
+          Brian, 25 November: "I don't think we are inviting the audience to make drawings,
+          are we bro? what is this all about, I'm lost."
+
+          He had read it correctly and the page was wrong. "Now it's your turn" said to
+          everybody in a room, under a wall of working cartoonists' drawings, reads as an
+          invitation to the audience to draw — and there is no drawing exercise in Janine's
+          agenda for the 29th. The hour is: cartoonists present their own work, CEEW presents
+          its cartoons, then questions. Nobody is asked to make anything.
+
+          This section is not that. It is the door a cartoonist uses to put their own drawing
+          on the wall — the same door Francis's artists and CEEW's artists came through — and
+          it now says whose door it is. The id is kept because links and the room's own set
+          list point at it. */}
+      <h2 id="cartoon-your-turn" className="comic-section-title">If you draw, there is a place for it here.</h2>
+      <p className="record-meta comic-workshop-note">For a cartoonist with work to hang. A drawing made by hand, with your name on it.</p>
       {/* ── THE PHOTOGRAPH COMES FIRST, AND THE DRAWING DESK COMES SECOND ──────────
           Brian, 25 November: "on the wall it says now your turn… it's not about a draw
           strip to bring a paper drawing, right? should be easy and coolasfuck to get
