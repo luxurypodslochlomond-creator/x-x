@@ -29,7 +29,7 @@ const SCRIPT = [
 
 const JOBS = [
   ['Two minutes, on the platform', 'The script above. Where to add a crisis and where to add a solution — then stop and hand back to Francis.'],
-  ['Posting CEEW’s cartoons as Alina speaks', 'Have the drawings open and ready before she starts, and post each one as she names it, not after.'],
+  ['Showing CEEW’s cartoons as Alina speaks', 'Have the drawings open and ready before she starts, and show each one as she names it, not after.'],
   ['Screen shared for the questions', 'Francis, Janine and Brian share the screen while Janine takes the room.'],
   ['Closing remarks, if called on', 'Janine invites Francis and Brian to add a few words at the end. Short.'],
 ];

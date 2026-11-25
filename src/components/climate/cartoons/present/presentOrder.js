@@ -44,7 +44,7 @@ export function presentOrder(cartoons = []) {
     {
       key: 'ceew',
       label: 'CEEW, as Alina speaks',
-      note: 'Posted one at a time, in the order she names them.',
+      note: 'Shown one at a time, in the order she names them.',
       cartoons: ceew,
       waiting: 'Nothing from CEEW yet.',
     },

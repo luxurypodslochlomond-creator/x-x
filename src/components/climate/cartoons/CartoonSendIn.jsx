@@ -128,8 +128,8 @@ export default function CartoonSendIn() {
           <Check className="h-4 w-4 text-record-red" strokeWidth={2.4} /> It is with a custodian.
         </p>
         <p className="mt-2 text-[14px] leading-[1.65] text-record-muted" style={reading}>
-          The drawing is not on the wall yet, and will not be until a custodian has looked at it. When they put it up it
-          appears above, with the name you gave and your line.
+          It is not on the wall yet. A custodian looks at every drawing first. When it goes up, it appears above with the
+          name you gave and your line.
         </p>
       </div>
     );
@@ -160,10 +160,10 @@ export default function CartoonSendIn() {
         </p>
         <ul className="mt-1.5 space-y-1">
           {[
-            'Your name stays on it — every time it is shown, wherever it is shown.',
-            'Nothing here is sold, licensed or sponsored. A drawing is not a product on this record.',
-            'It is never cropped, tinted or redrawn. What you sent is what stands.',
-            'Ask and it comes off, no reason needed — and the room keeps a note that it was here and came off at your word, because a removal here is never quiet.',
+            'Your name stays on it, wherever it is shown.',
+            'Never sold or licensed. A drawing is not a product here.',
+            'Never cropped, tinted or redrawn. What you sent is what stands.',
+            'Ask and it comes off, no reason needed. The room keeps a note that it was here.',
           ].map((line) => (
             <li key={line} className="text-[12.5px] leading-[1.5] text-record-ink/80" style={reading}>· {line}</li>
           ))}
@@ -201,7 +201,7 @@ export default function CartoonSendIn() {
               </p>
               <p className="mt-1 text-[13.5px] leading-[1.55] text-record-ink" style={reading}>{machineLine}</p>
               <p className="mt-1 text-[11.5px] leading-[1.5] text-record-muted" style={reading}>
-                It is a machine’s sentence and it may be wrong. The box below is yours — put it in the drawer’s words.
+                A machine wrote that, and it may be wrong. The box below is yours — say it in your own words.
               </p>
             </div>
           )}

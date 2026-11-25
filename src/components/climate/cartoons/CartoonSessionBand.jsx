@@ -147,7 +147,16 @@ export default function CartoonSessionBand() {
           be a lie.
         </p>
       </details>
-      <details className="comic-session-who">
+      {/* ── SHE WAS BEHIND A FOLDED FLAP ───────────────────────────────────────────
+          Brian, 25 November: "I can't see alien [Alina] on that page either bro."
+
+          She was there, and that was the problem: her introduction was inside a <details>
+          that opens only if somebody taps a line saying "Who you'll hear". A reader scanning
+          the room for the name of the person speaking for CEEW found nothing, because the
+          name was one tap away. A name that has to be opened is a name that is hidden. It is
+          open on arrival now, so Alina Sen and CEEW are on the page without anybody having to
+          go looking. */}
+      <details className="comic-session-who" open>
         <summary>Who you’ll hear · Alina Sen, CEEW</summary>
         <p className="record-meta">{ALINA}</p>
         <p className="comic-session-attrib record-meta">In CEEW’s own words, written to introduce her at the workshop.</p>

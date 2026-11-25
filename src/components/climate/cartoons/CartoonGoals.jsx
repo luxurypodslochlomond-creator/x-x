@@ -97,8 +97,12 @@ export default function CartoonGoals() {
           <a href={GOALS_SOURCE.url} target="_blank" rel="noopener noreferrer">{GOALS_SOURCE.name} ↗</a>
         </p>
         <p className="cartoon-goals-ask">
-          {open} goals are still blank. On 29 November that is not a gap in the record — it is
-          the workshop’s brief. <a href="#cartoon-your-turn">Draw one →</a>
+          {/* This said "it is the workshop's brief", which put a drawing exercise into an hour
+              that has none — the same fault as the nineteen-minute slot, one paragraph down.
+              A blank goal is not a task set for the room on Sunday. It is simply a place where
+              a cartoonist could put something. */}
+          {open} goals are still blank. Not a gap to be hidden — a place a cartoonist could put
+          something. <a href="#cartoon-your-turn">Send one in →</a>
         </p>
       </div>
     </section>
