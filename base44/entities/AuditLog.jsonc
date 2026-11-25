@@ -1,6 +1,7 @@
 {
   "name": "AuditLog",
   "type": "object",
+  "description": "The trail of who did what on the gig workflow. Read by the person whose action it records and by an administrator, never by anyone else; written by the app's own server functions with the service role. Nobody edits or removes a line from a browser, because a trail anyone can rewrite is not a trail.",
   "properties": {
     "action": {
       "type": "string",
@@ -56,9 +57,28 @@
   ],
   "rls": {
     "read": {
-      "created_by": "{{user.email}}"
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
     },
-    "write": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
       "user_condition": {
         "role": "admin"
       }
