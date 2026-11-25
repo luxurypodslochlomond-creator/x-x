@@ -1,10 +1,12 @@
 import React from 'react';
 
 // ── THE SHORT ANSWER, IN THE RECORD'S OWN RED ──────────────────────────────────
-// Janine read the whole page and wrote back: "please excuse me for I do not understand what
-// you are seeking to achieve here." That is not a reader's failure — it is the page's. An
-// hour proposed to the person hosting it, in eight timed rows, reads as a script handed to
-// her, and the ask was buried under it.
+// Janine read the whole page and wrote back that she could not tell what was being asked of
+// her. Her sentence is not repeated here: it was written to one person and it belongs to her,
+// and a record that keeps somebody's private email in its source is doing the thing this page
+// had to be corrected for. What matters is that it was not a reader's failure — it was the
+// page's. An hour proposed to the person hosting it, in eight timed rows, reads as a script
+// handed to her, and the ask was buried under it.
 //
 // So the ask now sits in one red band at the top, before the agenda, in the plainest words
 // available, in the same hand as the foot: signal red, bone words, the yellow chip. Someone
@@ -17,8 +19,8 @@ import React from 'react';
 // the introducing. The host is named because it is her hour.
 const ASKS = [
   [
-    'You host. You do not speak for it.',
-    'Open the hour, close it, in your own words. That is the whole of the ask, and it is your sentence, not ours.',
+    'You host, and the hour is yours to run.',
+    'You open it, you close it, and you take the room for questions at the end. That is the whole of the ask, and it is your sentence, not ours.',
   ],
   // This said "nobody from this record takes the microphone", and it was wrong from the
   // moment her draft agenda arrived: she had already written Brian into the hour, for two
@@ -28,17 +30,18 @@ const ASKS = [
     'Two minutes, then back to Francis.',
     'Your draft gives Brian two minutes on what the platform does and where anyone can add a crisis or a solution. That is the whole of the record’s speaking time in your hour — and it is your gift, not our assumption.',
   ],
-  [
-    'The practice room: yes, gladly.',
-    'Any of us, whenever it suits you — half an hour, no slides, nothing to rehearse. Only the drawing, tried once so it works on the day.',
-  ],
+  // The practice-room item came off on 25 November. It offered the host half an hour to try
+  // "the drawing" once so it worked on the day — a rehearsal for an exercise her hour does not
+  // contain, offered to the person running it. There is nothing to rehearse, so there was
+  // nothing to offer, and a page that offers help nobody asked for is a page calling somebody
+  // less capable than they are.
   // The blank panel was ours — a nineteen-minute drawing exercise inside an hour that her
   // agenda does not contain. Offering somebody's hour back to them with an activity added is
   // not a small liberty. What survives is the promise about afterwards, which is the part the
   // record can actually keep.
   [
-    'Anything drawn in the hour has somewhere to go.',
-    'If a cartoonist sends a drawing, it goes on the wall with their name and their own line about it, and their email is never shown. That is after the hour, and it takes nothing from it.',
+    'A cartoonist’s drawing has somewhere to go.',
+    'If one is sent in, it goes on the wall with the maker’s name and their own line about it, and their email is never shown. That is after the hour, and it takes nothing from it.',
   ],
 ];
 
@@ -54,7 +57,7 @@ export default function TheShortAnswer() {
           className="mt-3 text-[26px] leading-[1.02] text-cartoon-sun lg:text-[40px]"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          Nothing but hosting.
+          The hour stays yours.
         </h2>
 
         <ol className="mt-4 space-y-3">

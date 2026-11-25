@@ -27,7 +27,10 @@ const CONTEXT = [
   // omission that reads as a snub. Named here, plainly, from what the record already states
   // about the campaign — nothing about him that he has not said himself.
   ['Francis Umendu Odupute', 'Initiated the CartoonAFRICA International Biennial in November 2012 and has carried its SDG cartoon campaign since; the campaign was exhibited at the UN SDG Global Festival of Action in Bonn, 2–4 May 2019. The cartoon room is that campaign’s wall: every drawing on it is read against the seventeen goals he has been drawing them against for fourteen years.'],
-  ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on this for four decades. She is hosting the hour — not speaking for it, and not filling it. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
+  // "not speaking for it, and not filling it" was both diminishing and untrue: the hour she
+  // is hosting has her opening it and closing it in her own words. A line that shrinks the
+  // host on the page she sends to her own institution is the opposite of a courtesy.
+  ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on this for four decades. She hosts the hour: she opens it, she closes it, and she takes the room for questions at the end. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
   ['This page', 'A proposal for that hour, set down before it happened. Read after 29 November, it is what was proposed — the drawings it produced live in the cartoon room.'],
 ];
 
@@ -93,16 +96,27 @@ export default function ClimateWorkshop() {
       <JanineTopicTop />
 
       {/* Before the agenda, in the record's own red, because the agenda is what made her ask
-          the question it answers: "I do not understand what you are seeking to achieve here." */}
+          the question it answers — she could not tell, from the page as it stood, what was
+          being asked of her. Her own sentence is not printed: it was written to one person,
+          and it is hers. */}
       <TheShortAnswer />
 
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-record-ink/15 pb-3">
+        {/* ── HER PRIVATE WORDS WERE STANDING ON A PUBLIC PAGE ────────────────────
+            Brian, 25 November: "you're saying Janine finding it a struggle etc, that was
+            personal to me, don't want to make Janine look stupid."
+
+            He is right, and this line was the fault. A remark she made to him privately — that
+            the hour was hard to shape — was printed here, in public, on a page she may send to
+            CEEW. A woman who founded Horizon International and has run this for four decades is
+            not somebody who needs a help-sheet, and saying so in public is not honesty; it is
+            unkindness wearing honesty's coat. Her words are hers to give. This page describes an
+            hour; it does not describe her difficulties with it. */}
         <p className="max-w-[42ch] text-[13px] leading-relaxed lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
-          Written for Janine M. H. Selendy, at her word that the hour was a struggle to shape — by the person who built
-          the record, not by the host. A help-sheet, not a running order: hers to send, to cut, or to put down, and for
-          anybody it reaches after her.
+          Set down by the person who built the record, for the hour Janine M. H. Selendy is hosting. It is hers to send,
+          to cut, or to put down — and for anybody it reaches after her.
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">Set down 16 November 2026 · her agenda added 24 November</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">Set down 16 November 2026 · the hour’s order corrected 25 November</p>
       </div>
 
       {/* The five-frame strip and its blank sixth panel are not on this page any more. They
@@ -171,10 +185,18 @@ export default function ClimateWorkshop() {
         </ul>
       </Section>
 
-      <Section n="03 · The ask" title="One thing, asked of the room">
+      {/* ── THIS TOLD THE ROOM TO GO AND DRAW, AND THE HOUR ASKS THE ROOM NOTHING ───
+          Brian, 25 November: "I don't think we are inviting the audience to make drawings,
+          are we?" No. The hour is cartoonists presenting their own work, CEEW presenting its
+          cartoons, and questions at the end — nobody in that room is asked to make anything.
+          A page sending the audience off to draw was inventing an exercise for a session that
+          has none, which is the same fault the nineteen-minute drawing slot had, one layer
+          down. What is left is the door that is genuinely open, said to the only people it is
+          open to. */}
+      <Section n="03 · The door" title="One thing, for a cartoonist reading this">
         <p className="border-l-2 border-record-red pl-3 text-[14px] leading-relaxed lg:text-[17px]" style={{ fontFamily: 'var(--font-reading)' }}>
-          Draw one more next week, somewhere that is not a workshop — a bus, a kitchen table, a classroom — and send it in.
-          The record is only worth what outlives the hour.
+          A drawing made by hand, a photograph of it, your name and one line in your own words. The wall does not close
+          when the hour does — that is the only part of this that outlives the day.
         </p>
       </Section>
 
