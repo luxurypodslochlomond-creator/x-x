@@ -61,6 +61,21 @@
 //   LINE UNDER IT. No puns. No metaphor wearing a hat. And two of the marks now show
 //   somebody DOING something that works — because a wall of nothing but faults is despair,
 //   and despair is the most comfortable thing you can hand a comfortable reader.
+//
+// ── AND THE LINE UNDER A MARK HAS TO CROSS EVERY BORDER TOO ─────────────────────
+// Brian, 25 November: "the sentence below must be translatable in every tongue."
+//
+// A wordless drawing crosses a border; the line under it has to cross the same border, or
+// the drawing arrives and the sentence is left at the checkpoint. Every line here follows
+// four rules, and any mark added later has to as well:
+//
+//   1. One or two short sentences. Nothing nested, nothing that needs a comma to survive.
+//   2. No idiom, no wordplay, no pun, no proverb. "Cold is free" travels; "the penny drops"
+//      does not, and a translator cannot rescue it.
+//   3. Concrete nouns only — water, roof, meter, queue, phone, river, wall, hook. Every
+//      reader on earth has stood next to all of them.
+//   4. No name, no nation, no party, and no number that needs explaining. Those belong in
+//      the caption or in the entry, where somebody can check them, never inside the line.
 
 const DIR = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c';
 
@@ -147,6 +162,28 @@ export const BASE_ONE_SERIES = [
     line: 'I drew the river. The river has not read it.',
     to: '/ClimateMethod',
     door: 'How this record checks itself',
+  },
+  // ── VIII · THE ONE THAT GIVES THE SERIES A SPINE ──────────────────────────────
+  // Brian, 25 November: "how many do you think we need? imagine we had one covering the
+  // 1st–8th cartoon festival… coolasfuck means we could do another one next year and we
+  // have content, not just random."
+  //
+  // He is describing the difference between a folder and a series. Seven separate complaints
+  // is a folder: they could have been drawn in any order, in any year, by anybody. A series
+  // with a spine has a reason to be one thing — and the reason is the biennial, which has run
+  // eight times in Benin City and will run again. So the last mark is the wall itself: eight
+  // drawings hung, and the ninth hook already in the plaster, waiting for the year that has
+  // not happened yet. Next year this hand adds one mark, and this drawing does not change to
+  // say so — the empty hook was drawn on purpose.
+  {
+    id: 'eight',
+    numeral: 'VIII',
+    image: `${DIR}/562d82d5b9edbb4d9cca1f737e57488b_generated_image.png`,
+    alt: 'Ink drawing: eight framed drawings hung in a single row on a bare wall, and after the eighth an empty hook with a clean unfaded rectangle beside it where the next frame will go.',
+    answers: 'Eight editions, and the ninth hook',
+    line: 'Eight times they hung the drawings up. The ninth hook is already in the wall.',
+    to: '/ClimateCartoons/Francis',
+    door: 'The hand that started it, in his own words',
   },
 ];
 
