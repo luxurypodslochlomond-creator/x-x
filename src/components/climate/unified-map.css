@@ -104,6 +104,15 @@
   #root .record-unified-map .record-map-opening p + div { justify-content: flex-start; margin-top: 1rem; }
   #root .record-unified-map .record-map-opening a { color: rgb(var(--record-signal)); border-color: rgb(var(--record-signal) / .6); }
   #root .record-unified-map .record-map-opening a[href="#reach-details"] { color: rgb(var(--record-paper)); border-color: rgb(var(--record-paper) / .4); }
+
+  /* ── THE WAVES ARE DRAWN FOR A DESK, NOT FOR A PALM ──────────────────────────
+     Every mark on the plate sends a ring that grows to seven times its size. On a
+     wide plate that is a signal leaving a place; on a phone the whole world is four
+     hundred pixels across, so the rings overlap each other and the map, and each one
+     is a layer the phone keeps alive for as long as the page is open. The lamps keep
+     their slow breath — that is the plate being alive — and the waves stand still,
+     which is what made the map feel slow to scroll. */
+  #root .record-unified-map .record-transmit { animation: none; opacity: 0; }
 }
 
 @media screen and (min-width: 1024px) {

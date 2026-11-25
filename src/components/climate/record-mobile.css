@@ -10,6 +10,14 @@
   }
   /* Large viewport height stays still as the browser toolbar opens and closes. */
   .record-environment .record-sky { display: none; }
+  /* ── THE PAINTING HOLDS STILL IN THE HAND ────────────────────────────────────
+     The cover drifts and swells by a few per cent over three minutes — a movement
+     nobody can actually see, but one the compositor had to keep a full-screen layer
+     alive for on every page of the record. On a phone that is the judder Brian felt
+     while scrolling: a fixed, permanently animated picture under every word. The
+     drift stays on a desk, where there is power to spend on it; in the hand the
+     painting is perfectly still, which is exactly how it already looked. */
+  .climate-record .record-environment .record-ground { animation: none; will-change: auto; }
   .climate-record .record-pages .record-home-page > .record-image-section,
   .climate-record .record-pages .record-home-page > .record-entry-sections {
     background-color: transparent;

@@ -14,7 +14,12 @@
      web page. Literata speaks; Record UI structures; the monospace counts. */
   --font-reading: var(--font-record-ui);
   font-family: var(--font-reading);
-  text-rendering: optimizeLegibility;
+  /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
+     `text-rendering: optimizeLegibility` sat here and made the browser resolve
+     ligatures and kerning for every glyph of every page before it could paint — which
+     on a long page is the difference between a scroll that follows the thumb and one
+     that stutters behind it. The record sets its words; it does not decide how the
+     glass draws them. */
   /* ── THE LETTERS ARE THE DEVICE'S BUSINESS ────────────────────────────────────
      This forced greyscale smoothing on every word of the record, which is what you do
      to a screen you do not trust and which, on most screens, is what makes a serif at
