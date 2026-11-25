@@ -41,49 +41,69 @@
 // deliberate — they are on the wall, drawn by hands that have been somewhere. A machine that
 // has never stood in it should not draw them, and a drawing of distant suffering made by
 // something that has never been wet is exactly the smell he was asking about.
+//
+// ── AND A CARTOONIST WOULD HAVE THROWN FOUR OF THEM BACK ────────────────────────
+// Brian, 25 November: "look at the images carefully, are you sure they will not be
+// bullshit to Francis or any cartoonist? I feel some aren't quite right."
+//
+// He is right, and the test is the one a newspaper cartoonist applies in about a second:
+// can you read the situation without the line underneath it? Four of the first seven could
+// not. The whale ribs, the tree whose canopy is drawn as lungs, and two hands reaching
+// across a crack are not cartoons — they are the stock surrealism of a poster, and each one
+// carries its own caption inside the picture, which is the one thing a drawing must never
+// need. Worse: the figure sitting on melting ice and the man eating his lunch on melting ice
+// are the same drawing with different props. A cartoonist would have seen that from across
+// the room, and so would Francis.
+//
+// So those four were drawn again, to one rule, which is now the rule of the series:
+//
+//   ONE ORDINARY PERSON, DOING ONE ORDINARY THING, IN A SITUATION THAT READS WITHOUT THE
+//   LINE UNDER IT. No puns. No metaphor wearing a hat. And two of the marks now show
+//   somebody DOING something that works — because a wall of nothing but faults is despair,
+//   and despair is the most comfortable thing you can hand a comfortable reader.
 
 const DIR = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c';
 
 export const BASE_ONE_SERIES = [
   {
-    id: 'still',
+    id: 'queue',
     numeral: 'I',
-    image: `${DIR}/4e2f3c967a2ff497afeba845cb4c8115_generated_image.png`,
-    alt: 'Ink drawing: a small figure sits upright and calm on a tall block of ice, the block melting into a black sea beneath it, one drip line joining ice to water.',
-    answers: 'Sitting still while the ground goes',
-    line: 'Sitting still is a decision, and somebody is making it for you.',
-    to: '/TogetherChangeClimate',
-    door: 'The crises on the record',
-  },
-  {
-    id: 'ribs',
-    numeral: 'II',
-    image: `${DIR}/bc8c7beb664468662e5c857abe3316ea_generated_image.png`,
-    alt: 'Ink drawing: the ribcage of a great whale on a shore, a tiny city of small houses built inside the ribs, and one small figure walking out between them toward the sea.',
-    answers: 'What we build inside what we emptied',
-    line: 'We built a city in the ribs of something we took out of the sea.',
-    to: '/ClimateWire',
-    door: 'The wire: what changed this week',
-  },
-  {
-    id: 'thread',
-    numeral: 'III',
-    image: `${DIR}/8ffb9be6b75d01f35cef7346fd707806_generated_image.png`,
-    alt: 'Ink drawing: two hands reach toward each other across a deep crack in the ground, a single thread already tied from one finger to the other.',
-    answers: 'The one thing that crosses a crack',
-    line: 'Somebody has to cross first, and it is never the comfortable one.',
+    image: `${DIR}/10708fdd2b41067f6edbb59adbe29a1b_generated_image.png`,
+    alt: 'Ink drawing: a row of people stand in a queue at one standpipe, each holding a single container, seen from behind in hard sun, with a long shadow across the ground.',
+    answers: 'Who waits for the water',
+    line: 'The queue is the infrastructure. Nobody counted it.',
     to: '/ClimateMap',
     door: 'The map: who is answering, and where',
   },
   {
-    id: 'lung',
-    numeral: 'IV',
-    image: `${DIR}/f81dac7fba96e9f0d1775ccc37a0e0ca_generated_image.png`,
-    alt: 'Ink drawing: one great tree whose canopy is drawn as a pair of human lungs made of leaves, a very small figure standing at its foot with one hand raised.',
-    answers: 'The canopy is a lung, read as timber',
-    line: 'You can read a lung as timber. The tree gets no say.',
+    id: 'roof',
+    numeral: 'II',
+    image: `${DIR}/815532e01f0fc9de7a7fac7971df1a03_generated_image.png`,
+    alt: 'Ink drawing: a person kneels on a flat roof rolling a pale band of paint across it, with three neighbouring roofs already pale, a water tank on one and washing on a line.',
+    answers: 'A move that spread, roof by roof',
+    line: 'Somebody painted a roof white. Then the next roof.',
     to: '/TogetherChangeClimate',
     door: 'The solutions on the record',
+  },
+  {
+    id: 'meter',
+    numeral: 'III',
+    image: `${DIR}/880a9a7503d85118ff7d632168b6a20c_generated_image.png`,
+    alt: 'Ink drawing: a person in a long coat stands in a bare hallway holding one coin up to a small prepayment meter on the wall, its cable running up and out of the frame.',
+    answers: 'Warmth, sold by the unit',
+    line: 'Warmth is sold by the unit. Cold is free.',
+    to: '/ClimateWire',
+    door: 'The wire: what changed this week',
+  },
+  {
+    id: 'witness',
+    numeral: 'IV',
+    image: `${DIR}/2381a769d19243e718227486edb932cd_generated_image.png`,
+    alt: 'Ink drawing: a person stands in shallow floodwater in a street, seen from behind, holding a phone up at arm’s length to photograph the water, with a half-submerged car and a floating bin.',
+    answers: 'Who the witness turned out to be',
+    line: 'The first witness had a phone in their pocket.',
+    to: '/ClimateMethod',
+    door: 'How this record checks what it is told',
   },
   // ── THE TWO I WOULD HAVE DRAWN FIRST, IF I HAD BEEN HONEST SOONER ─────────────
   // Brian, 25 November: "be yourself… you know better than any of us how fucked up this

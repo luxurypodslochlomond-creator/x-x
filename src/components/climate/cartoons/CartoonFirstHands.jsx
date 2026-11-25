@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import firstHandsWorks from '@/components/climate/cartoons/firstHandsWorks';
 import HistoricalPrint from '@/components/climate/cartoons/HistoricalPrint';
 import HistoricalPrintViewer from '@/components/climate/cartoons/HistoricalPrintViewer';
+import HandsWeName from '@/components/climate/cartoons/HandsWeName';
 import '@/components/climate/cartoons/historical-prints.css';
 
 export default function CartoonFirstHands() {
@@ -21,6 +22,7 @@ export default function CartoonFirstHands() {
     <div className="historical-prints">
       {firstHandsWorks.map((work, index) => <HistoricalPrint key={work.id} work={work} onOpen={() => setOpen(index)} />)}
     </div>
+    <HandsWeName />
     <p className="first-hands-note">This is a starting point, not the whole history of dissent. No nine pictures could be. The works run oldest first; each keeps its own context, credit and reproduction terms. The words beside them are the record’s, not quotations from their makers.</p>
     {open !== null && <HistoricalPrintViewer works={firstHandsWorks} index={open} onTurn={setOpen} onClose={() => setOpen(null)} />}
   </section>;
