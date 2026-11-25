@@ -206,30 +206,46 @@ export default function CartoonSendIn() {
             </div>
           )}
 
+          {/* ── TWO THINGS, THEN EVERYTHING ELSE IF THEY WANT TO ────────────────────
+              Seven boxes in a column is a form, and a form is what a records office sends
+              you. What a cartoonist is actually being asked for is two things: the name on
+              the drawing, and one line on what it is for. So those two stand open, and the
+              rest — where it came from, the country, the title, the copyright line, the
+              email — is folded away underneath, there for anyone who wants the drawing
+              placed properly and out of the way for anyone at a workshop with a phone in one
+              hand. Not one field is removed, and nothing is required that was not required
+              before: the button still asks only for the hand. */}
           <div className="mt-3 space-y-2">
             <input className={field} placeholder="Who drew it — their name as it should appear" value={form.artist_name} onChange={set('artist_name')} />
-            <input className={field} placeholder="Where it came from — the workshop, the school, the group" value={form.origin} onChange={set('origin')} />
-            <input className={field} placeholder="Which country it was drawn in (so it can stand on the map)" value={form.country} onChange={set('country')} />
-            <input className={field} placeholder="What it is called (if it has a name)" value={form.title} onChange={set('title')} />
             <textarea
               className={`${field} min-h-[74px] py-2`}
               placeholder="One line on what it is for, in your own words"
               value={form.for_line}
               onChange={set('for_line')}
             />
-            {crises.length > 0 && (
-              <label className="block">
-                <span className="sr-only">Is the drawing about one entry on the record?</span>
-                <select className={field} value={form.crisis_id} onChange={set('crisis_id')}>
-                  <option value="">Not about one particular entry</option>
-                  {crises.map((c) => (
-                    <option key={c.id} value={c.id}>{c.title}</option>
-                  ))}
-                </select>
-              </label>
-            )}
-            <input className={field} placeholder="Who holds the copyright, if that is not the artist (optional)" value={form.credit} onChange={set('credit')} />
-            <input className={field} placeholder="Your email, so a custodian can reach you (optional)" inputMode="email" value={form.submitter_email} onChange={set('submitter_email')} />
+            <details className="border-t border-record-ink/15 pt-2">
+              <summary className="cursor-pointer font-mono text-[10px] uppercase tracking-[0.12em] text-record-muted">
+                Where it came from, and who to reach — optional
+              </summary>
+              <div className="mt-2 space-y-2">
+                <input className={field} placeholder="Where it came from — the workshop, the school, the group" value={form.origin} onChange={set('origin')} />
+                <input className={field} placeholder="Which country it was drawn in (so it can stand on the map)" value={form.country} onChange={set('country')} />
+                <input className={field} placeholder="What it is called (if it has a name)" value={form.title} onChange={set('title')} />
+                {crises.length > 0 && (
+                  <label className="block">
+                    <span className="sr-only">Is the drawing about one entry on the record?</span>
+                    <select className={field} value={form.crisis_id} onChange={set('crisis_id')}>
+                      <option value="">Not about one particular entry</option>
+                      {crises.map((c) => (
+                        <option key={c.id} value={c.id}>{c.title}</option>
+                      ))}
+                    </select>
+                  </label>
+                )}
+                <input className={field} placeholder="Who holds the copyright, if that is not the artist (optional)" value={form.credit} onChange={set('credit')} />
+                <input className={field} placeholder="Your email, so a custodian can reach you (optional)" inputMode="email" value={form.submitter_email} onChange={set('submitter_email')} />
+              </div>
+            </details>
           </div>
 
           <p className="mt-2 font-mono text-[10px] leading-relaxed text-record-muted">
