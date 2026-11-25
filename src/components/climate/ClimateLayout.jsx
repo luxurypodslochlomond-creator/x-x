@@ -9,7 +9,7 @@ import '@/components/climate/record-depth.css';
 import '@/components/climate/record-connected.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { prefetchPath } from '@/lib/routePrefetch';
+import { prefetchPath, warmRecordDoors } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import RecordImprint from '@/components/climate/RecordImprint';
@@ -93,6 +93,11 @@ export default function ClimateLayout({ children, currentPage }) {
   const isRoom = ROOM_PAGES.includes(currentPage);
   const isCartoonRoom = currentPage === 'ClimateCartoons';
   useRecordScroll(readingRef);
+  // Every door on the record's own rail, fetched in the idle beat after this page settles,
+  // so a tap never lands on code that has not arrived — which is what took the masthead off
+  // the glass for a moment on the way to the wire, the map, method, the founder, x = x and
+  // the seals. See RECORD_DOORS in routePrefetch.js.
+  useEffect(() => { warmRecordDoors(); }, []);
 
   // Her identity, not UF51's. Runs once per climate page.
   useEffect(() => {

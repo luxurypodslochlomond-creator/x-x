@@ -69,6 +69,11 @@ const HUBS = {
   // who opens it while a queue is waiting on her. A door that has to think before it opens
   // is the same door twice, so they are warmed like every other: on the touch, not before.
   climateseals: () => import('@/pages/ClimateSeals'),
+  // The room of drawings and the roll of people who check the record were the two doors on
+  // the record's own rail with nothing behind them in this list, so both were cold on every
+  // tap — including BASE 1, which lives under /ClimateCartoons and shares this key.
+  climatecartoons: () => import('@/pages/ClimateCartoons'),
+  climateroll: () => import('@/pages/ClimateRoll'),
   climatecorrections: () => import('@/pages/ClimateCorrections'),
   climatefellows: () => import('@/pages/ClimateFellows'),
   climatekeeperroom: () => import('@/pages/ClimateKeeperRoom'),
@@ -97,4 +102,47 @@ export function prefetchPath(pathname) {
     // A failed prefetch is invisible — navigation will simply load it normally.
     started.delete(name);
   });
+}
+
+// ── THE RECORD'S OWN DOORS, WARMED BEFORE A THUMB REACHES THEM ─────────────────
+// Brian, 25 November, on a phone: "click to go to the wire, base 1, map, method, founder,
+// x = x and seals — top level nav feels shorter and jumpy between pages, but no jump
+// between record and wire."
+//
+// He was describing something real, and it was not the nav. Every one of those pages
+// arrives as its own lump of code, and while that lump was downloading the loading line
+// replaced the WHOLE frame — masthead included. So a tap took the nav off the glass and
+// put it back a beat later at a slightly different height: the nav was not shorter, it had
+// been missing for a moment. Record → Wire felt fine only because both were already in
+// memory, which is exactly why the fault looked like a fault in some pages and not others.
+//
+// Waiting for the touch was the wrong moment to start: touchstart and the tap happen in
+// the same instant, so the download began at the same moment the reader arrived. The doors
+// are known before anybody touches them, so they are fetched in the idle time after the
+// page a reader is already reading has settled — the connection is busy doing nothing, and
+// every door on the rail is in hand by the time a thumb lands on it. Nothing is downloaded
+// that a reader did not ask to see; these are the record's own doors, on its own rail.
+export const RECORD_DOORS = [
+  '/TogetherChangeClimate',
+  '/ClimateWire',
+  '/ClimateSearch',
+  '/ClimateMap',
+  '/ClimateCartoons',
+  '/ClimateMethod',
+  '/ClimateFounder',
+  '/XEqualsX',
+  '/ClimateSeals',
+  '/ClimateMusic',
+  '/ClimateGuide',
+  '/ClimateRoll',
+];
+
+export function warmRecordDoors() {
+  const run = () => RECORD_DOORS.forEach(prefetchPath);
+  if (typeof window === 'undefined') return;
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(run, { timeout: 2500 });
+  } else {
+    setTimeout(run, 1200);
+  }
 }
