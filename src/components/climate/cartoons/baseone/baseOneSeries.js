@@ -178,10 +178,15 @@ export const BASE_ONE_SERIES = [
   {
     id: 'eight',
     numeral: 'VIII',
-    image: `${DIR}/562d82d5b9edbb4d9cca1f737e57488b_generated_image.png`,
-    alt: 'Ink drawing: eight framed drawings hung in a single row on a bare wall, and after the eighth an empty hook with a clean unfaded rectangle beside it where the next frame will go.',
-    answers: 'The wall they hung eight times',
-    line: 'Eight times they hung the drawings up. The wall is still there.',
+    image: `${DIR}/38833960cd620502631266ea39f29197_generated_image.png`,
+    // The drawing shows a wall of hung drawings, one bare hook, and an empty frame outlined
+    // where the next one goes. It does NOT show eight of them, and the first version of this
+    // line said "eight times they hung the drawings up" over a picture of seven — a count a
+    // reader can check against the frame in front of them. A mark that miscounts itself is
+    // the exact fault this room is meant to catch, so the line says what the wall can show.
+    alt: 'Ink drawing: a row of framed drawings hung on a bare wall, then a bare hook and the outlined shape of an empty frame where the next drawing will go.',
+    answers: 'A wall of drawings, and one place left on it',
+    line: 'Eight times they hung the drawings up. There is still room on the wall.',
     to: '/ClimateCartoons/Francis',
     door: 'The hand that started it, in his own words',
   },

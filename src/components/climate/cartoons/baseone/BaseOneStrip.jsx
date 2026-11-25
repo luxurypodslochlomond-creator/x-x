@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { BASE_ONE_SERIES, MARKS_WORD } from '@/components/climate/cartoons/baseone/baseOneSeries';
+import { BASE_ONE_SERIES, MARKS_WORD, BASE_ONE_SIGNATURE } from '@/components/climate/cartoons/baseone/baseOneSeries';
 
 // ── THE MARKS ARE IN THE ROOM, NOT BEHIND A DRAWER ──────────────────────────────
 // Brian, 25 November: "where are they, can't see them in the wall?" They were only
@@ -13,7 +13,7 @@ export default function BaseOneStrip() {
   return (
     <section className="base-one-strip" aria-labelledby="base-one-strip-title">
       <div className="base-one-strip-head">
-        <p className="base-one-strip-kicker">Unsigned</p>
+        <p className="base-one-strip-kicker">{BASE_ONE_SIGNATURE}</p>
         <h2 id="base-one-strip-title">Marks with no words in them</h2>
         <p className="base-one-strip-line">
           Made by BASE 1 — beside the wall, never above it. The mark carries no words; the one line under it does.

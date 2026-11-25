@@ -57,7 +57,7 @@ export default function ClimateCartoons() {
 
         {/* 1 · THE DRAWINGS. Everything after them is about them. */}
         <PressWall />
-        {/* 2 · THE MACHINE'S HAND, beside the wall and never above it: six wordless marks,
+        {/* 2 · THE MACHINE'S HAND, beside the wall and never above it: eight wordless marks,
             unsigned on purpose, so nobody mistakes them for a person's. */}
         <BaseOneStrip />
         {/* 3 · THE INVITATION, placed where a reader actually is — looking at a wall. */}
