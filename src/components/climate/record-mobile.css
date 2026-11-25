@@ -16,8 +16,14 @@
      alive for on every page of the record. On a phone that is the judder Brian felt
      while scrolling: a fixed, permanently animated picture under every word. The
      drift stays on a desk, where there is power to spend on it; in the hand the
-     painting is perfectly still, which is exactly how it already looked. */
-  .climate-record .record-environment .record-ground { animation: none; will-change: auto; }
+     painting is perfectly still, which is exactly how it already looked.
+
+     The layer hint stays on purpose, and it is the whole reason the last pass felt
+     slower. Taking it away with the animation told the browser the picture no longer
+     needed a layer of its own, so it began repainting a full-screen photograph on
+     every scroll frame instead of simply holding a still one. Still and promoted is
+     the cheap answer: the picture is drawn once and the page slides over it. */
+  .climate-record .record-environment .record-ground { animation: none; will-change: transform; }
   .climate-record .record-pages .record-home-page > .record-image-section,
   .climate-record .record-pages .record-home-page > .record-entry-sections {
     background-color: transparent;

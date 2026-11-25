@@ -60,16 +60,20 @@
 }
 
 @media (max-width: 639px) {
-  /* ── THE BOOK RUNS TO THE GLASS ────────────────────────────────────────────────
-     The cartoon room already does this and Brian, 25 November: "on mobile the record
-     feels like full width works beautiful… the wall works, but other pages aren't."
-     He is right, and the fault was a .75rem margin left over from an older outer
-     frame: every other page of the record was held twelve pixels off each edge, so
-     the plate, the bands and the photographs stopped short of the glass while the
-     wall's paper ran edge to edge. The gutter is now the page's own padding, which
-     every sheet already carries, so the text keeps its measure and the artwork keeps
-     the whole screen. */
-  .climate-record .record-book { margin-inline: 0; }
+  /* ── THE SHEET STANDS ON THE PAINTING, ON A PHONE TOO ──────────────────────────
+     Brian, 25 November: "our beautiful record cover painting should be on every page."
+     He is right, and this rule had just taken it away. The sheet was run flush to the
+     glass, which did make the page feel full width — and in the same move hid the
+     painting completely, because the sheet is solid paper at every width and the
+     painting can only be seen where the paper is not. A hairline of it is not enough
+     either: at twelve pixels a reader sees a dark edge, not a cover.
+
+     So the page keeps a standing frame of the painting on both sides, all the way down
+     every page of the record, wide enough to read as the picture it is — and the sheet
+     still fills the rest of the glass, with its bands, plates and photographs running
+     to its own edge. That is the trade a printed page makes: the page is full width,
+     and it is standing on something. */
+  .climate-record .record-book { margin-inline: clamp(12px, 4vw, 22px); }
   .record-shell-opening > div,
   .record-shell-content,
   .record-shell-return > div { padding-inline: 1.25rem; }
