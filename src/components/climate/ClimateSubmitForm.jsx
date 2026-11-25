@@ -10,7 +10,7 @@ function SuccessScreen({ entryType, onClose, published }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
-  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : entryType === 'group' ? 'group' : 'action';
+  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate emergency report' : entryType === 'group' ? 'group' : 'action';
   const isGroup = entryType === 'group';
   return (
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto">
@@ -209,7 +209,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
 
   const doors = [
     { type: 'solution', label: 'Solution', Icon: Leaf, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
-    { type: 'climate_crisis', label: 'Crisis', Icon: AlertTriangle, on: 'text-[#b3261e] border-b-[#b3261e]' },
+    { type: 'climate_crisis', label: 'Emergency', Icon: AlertTriangle, on: 'text-[#b3261e] border-b-[#b3261e]' },
     { type: 'action', label: 'Action', Icon: Sprout, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
     { type: 'group', label: 'Group', Icon: Users, on: 'text-[#0f5f7a] border-b-[#0f5f7a]' },
   ];

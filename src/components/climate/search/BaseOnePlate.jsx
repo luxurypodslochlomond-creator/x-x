@@ -1,7 +1,7 @@
 import React from 'react';
 import '@/components/climate/search/base-one.css';
 
-const HOLDS = ['Solutions', 'Crises', 'Actions', 'Groups', 'The wire', 'Pictures', 'Readers’ words', 'The roll', 'Music', 'Drawings'];
+const HOLDS = ['Solutions', 'Emergencies', 'Actions', 'Groups', 'The wire', 'Pictures', 'Readers’ words', 'The roll', 'Music', 'Drawings'];
 
 // The footer is the reference: red lettering on paper, one yellow band, quiet labels.
 export default function BaseOnePlate({ statement }) {

@@ -2,7 +2,7 @@ import React from 'react';
 import MapSignalMark from '@/components/climate/MapSignalMark';
 
 const KINDS = [
-  ['crisis', 'Crises'],
+  ['crisis', 'Emergencies'],
   ['solution', 'Solutions'],
   ['action', 'Actions'],
   ['wire', 'Wire'],

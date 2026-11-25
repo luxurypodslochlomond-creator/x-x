@@ -4,11 +4,14 @@ import useRecordImage from '@/components/climate/useRecordImage';
 import RecordEntryPicture from '@/components/climate/RecordEntryPicture';
 import RecordEntryKind from '@/components/climate/RecordEntryKind';
 
-export default function RecordHoldingItem({ item }) {
+export default function RecordHoldingItem({ item, ratio = '16/10', plain = false }) {
   const image = useRecordImage(item, { entryOnly: true });
   return (
-    <Link to={`/ClimateDetail/${item.entry_type}/${item.id}`} className="group block border-t border-record-ink/25 py-4 first:border-t-0 first:pt-0">
-      <RecordEntryPicture image={image} />
+    <Link
+      to={`/ClimateDetail/${item.entry_type}/${item.id}`}
+      className={plain ? 'group block min-w-0' : 'group block border-t border-record-ink/25 py-4 first:border-t-0 first:pt-0'}
+    >
+      <RecordEntryPicture image={image} ratio={ratio} />
       <div className="record-holding-copy mt-2">
         <RecordEntryKind item={item} />
         <h3 className="record-holding-small-title mt-1.5 leading-snug text-record-ink group-hover:text-record-red">{item.title}</h3>
