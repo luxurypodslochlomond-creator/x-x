@@ -18,8 +18,15 @@ export default function FounderClosing() {
           Return to the record <ArrowRight aria-hidden="true" className="h-4 w-4" />
         </Link>
       </div>
-      <div className="record-continuous-band px-5 py-6 text-center">
-        <p className="record-header-type mx-auto text-xs leading-relaxed text-record-paper">In honour of her life's work.<br />Horizon International · Yale University</p>
+      {/* ── THE PAGE ENDS ON WHO HOLDS IT ────────────────────────────────────────
+          The honour line used to be the last thing printed, so the page closed on two
+          institutions and never said who keeps it — the same fault as the missing contact
+          under her name. The imprint goes underneath, in the foot's own words, so a reader
+          who has just finished her record knows exactly whose it is and where it is made. */}
+      <div className="record-founder-imprint px-5 py-9 text-center lg:px-10">
+        <p className="record-founder-imprint-honour">In honour of her life's work.<br />Horizon International · Yale University</p>
+        <span aria-hidden="true" className="record-founder-imprint-rule" />
+        <p className="record-founder-imprint-role">Held and published by Universal Frequency 51 CIC · Made in Scotland from photons</p>
       </div>
     </>
   );

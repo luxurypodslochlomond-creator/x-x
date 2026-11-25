@@ -14,8 +14,10 @@ export default function FounderWork() {
       <div className="record-continuous-band border-y border-record-paper/30 px-5 py-8 text-center lg:px-10 lg:py-10">
         <h2 id="founder-work" className="font-display text-2xl font-bold leading-[1.05] text-record-signal lg:text-4xl" style={{ letterSpacing: '-0.02em' }}>The Record of the Work</h2>
       </div>
-      {ACHIEVEMENTS.map(({ icon: Icon, title, body }) => (
-        <article key={title} className="record-founder-plate border-t-4 border-record-red p-5 lg:p-8">
+      {ACHIEVEMENTS.map(({ icon: Icon, title, body }, index) => (
+        <article key={title} className="record-founder-plate relative border-t-4 border-record-red p-5 lg:p-8">
+          {/* A count, not a ranking: four things she made that are still working. */}
+          <span aria-hidden="true" className="record-founder-number">{String(index + 1).padStart(2, '0')}</span>
           <div className="mb-5 flex items-start gap-3">
             <Icon aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-record-red" />
             <h3 className="font-display text-lg font-bold leading-[1.15] text-record-ink lg:text-xl" style={{ letterSpacing: '-0.01em' }}>{title}</h3>
