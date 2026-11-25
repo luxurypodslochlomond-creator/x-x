@@ -4,8 +4,21 @@
 // so a broken URL only needs fixing in one place.
 
 // Responsive display copies; the original artwork stays unchanged.
-export const RECORD_COVER_SCREEN = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/cc94d332d_record-cover-mobile.png';
-export const RECORD_COVER_MOBILE = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/57d131c0b_record-cover-portrait.png';
+// ── THE SAME PAINTING, CUT TO THE GLASS IT LANDS ON ────────────────────────────
+// Brian, 25 November: "will it make us quick as fuck? … wanted to keep painting coolasfuck
+// as well." Both, and neither costs the other anything.
+//
+// The record was shipping one 29.6MB 4K PNG to every reader on earth, and a 3.3MB portrait
+// to every phone — 35.7MB of painting for a picture that is held back by a veil, sat behind
+// a sheet of paper and read on a screen smaller than a paperback. That is not detail a
+// reader can see; it is weight a thumb feels on every scroll.
+//
+// So the painting is cut three ways, to the size of the glass it actually lands on, and the
+// three together now weigh 1.6MB. Nothing was thrown away: the 4K canvas is still in the
+// media library exactly as it was painted, and these are cuts of it, not replacements for
+// it. If the record is ever printed, the original is the file to reach for.
+export const RECORD_COVER_SCREEN = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/4fae11ec5a22cbaea1a70b11bc487563_record-cover-screen.jpg';
+export const RECORD_COVER_MOBILE = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/a7d2ce8a69fd76dece275e4e018f7f09_record-cover-mobile.jpg';
 
 const IMAGES = {
   // THE COVER — painted for the record, so it is credited to nobody and borrowed from
@@ -18,7 +31,9 @@ const IMAGES = {
   // happens to be stretched. Detail is the whole argument: a reader should be able to lean
   // into the atmosphere and find the air still glowing, and lean into the cloud and find
   // knife ridges catching light. Anything less and it is wallpaper pretending to be a painting.
-  cover: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/b1ec3a31c_generated_3a4f3f99.png', // painted for the record, 4K
+  // 2880px cut of the same 4K canvas — 912KB instead of 29.6MB. See the note above: the
+  // 4K original is untouched in the media library and is the file to print from.
+  cover: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/c1b581fed21c6d3688347da58fb14138_record-cover-2880.jpg',
   mangroves: 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c/0a7d2c9d2_generated_image.png', // AI-generated permanent
   renewable: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=900&q=70&auto=format',
   seagrass: 'https://images.unsplash.com/photo-1559825481-12a05cc00344?w=900&q=70&auto=format',
