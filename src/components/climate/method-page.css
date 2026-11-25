@@ -23,6 +23,29 @@
   background-color: rgb(var(--record-ink) / .62);
   border-top: 4px solid rgb(var(--record-signal));
 }
+/* ── THE PLATES CARRY THE PAINTING IN THE HAND, AS THE BAND DOES ─────────────────
+   Everything above is true on a desk, where the book is see-through and the painting runs
+   in the margins and between the rules. On a phone the book is solid paper, so the same
+   two plates were ink at sixty-two per cent over paper: flat brown, the painting shut out
+   of the page that explains how the record is made. Brian, 25 November, looking at it on a
+   phone at half past four in the morning: "our beautiful record cover painting should be
+   in every page bro".
+
+   This is the same answer the continuous band already uses on a handset, at the same
+   strength and the same crop — the earth behind the words, never a second picture at a
+   different angle. The ink stays exactly where it was, so the type keeps every point of
+   contrast it had; what changes is only what is behind it. A desk is untouched. */
+@media (max-width: 1023px) {
+  .record-trust-page .record-method-intro,
+  .record-trust-page .record-method-sheet {
+    background-image:
+      linear-gradient(rgb(var(--record-ink) / .58) 0%, rgb(var(--record-ink) / .68) 60%, rgb(var(--record-ink) / .78) 100%),
+      var(--record-cover);
+    background-size: cover;
+    background-position: center 30%;
+    background-attachment: scroll;
+  }
+}
 .record-trust-page .record-method-contact { background-color: rgb(var(--record-paper)); }
 
 /* Every word on a plate is light on the room. */
