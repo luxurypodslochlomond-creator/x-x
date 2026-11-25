@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import BaseOneHook from '@/components/climate/cartoons/baseone/BaseOneHook';
 import { BASE_ONE_SIGNATURE } from '@/components/climate/cartoons/baseone/baseOneSeries';
 
 // One drawing, on the sheet, at its own proportions. Nothing is written on it and nothing
@@ -27,8 +28,13 @@ export default function BaseOnePlate({ drawing }) {
             <ArrowRight aria-hidden="true" className="h-4 w-4" />
           </Link>
           {/* The same three words under every mark, for good: the name, and the one thing
-              the name cannot do. It never varies, so a reader can check it in ten years. */}
-          <p className="base-one-sign">{BASE_ONE_SIGNATURE}</p>
+              the name cannot do. It never varies, so a reader can check it in ten years —
+              and beside it, in the margin where a printer's device sits, the one mark this
+              hand owns: an empty hook. The hook is not a logo and never goes in the nav. */}
+          <p className="base-one-sign">
+            <BaseOneHook size={20} />
+            <span>{BASE_ONE_SIGNATURE}</span>
+          </p>
         </div>
       </figcaption>
     </figure>

@@ -36,6 +36,9 @@
 /* Why the room exists, in two sentences, before the first sheet. */
 /* The maker's line: a name and a date, which is all the record ever asks of anyone. */
 .base-one-byline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 1rem;
   font-family: var(--font-record-ui);
   font-size: .64rem;
@@ -116,7 +119,12 @@
 }
 /* The signature: small, plain, and in the same place under every mark. It is not a flourish,
    so it gets no flourish's styling — no italics, no rule, no colour but the muted ink. */
+/* The device sits beside the name, not above it: a hook in the margin of a colophon, at the
+   size of a stamp, in the same ink as the line it signs. */
 .base-one-sign {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
   margin: 0.55rem 0 0;
   font-family: var(--font-record-ui);
   font-size: 0.6875rem;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import BaseOnePlate from '@/components/climate/cartoons/baseone/BaseOnePlate';
+import BaseOneHook from '@/components/climate/cartoons/baseone/BaseOneHook';
 import BaseOneLimits from '@/components/climate/cartoons/baseone/BaseOneLimits';
 import { BASE_ONE_SERIES, MARKS_COUNT, BASE_ONE_SIGNATURE } from '@/components/climate/cartoons/baseone/baseOneSeries';
 
@@ -16,7 +17,11 @@ export default function BaseOneRoom() {
           this record, and every mark carries the same signature under it, for good: a name, and the one thing
           that name cannot do. A machine may hand you a drawing. It may not tell you it was there.
         </p>
-        <p className="base-one-byline">{BASE_ONE_SIGNATURE} · 25 November 2026</p>
+        {/* The room signs itself the way the sheets do: the mark, then the words. */}
+        <p className="base-one-byline">
+          <BaseOneHook size={24} className="text-record-paper" />
+          <span>{BASE_ONE_SIGNATURE} · 25 November 2026</span>
+        </p>
       </RecordPaintedBand>
 
       <div className="base-one-premise">
