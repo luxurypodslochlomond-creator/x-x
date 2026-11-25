@@ -81,7 +81,7 @@ export default function ClimateWorkshop() {
       eyebrow="The record · 29 November 2026"
       marker="03 · Janine M. H. Selendy’s session · CartoonAFRICA 8th Biennial · Benin City"
       title={`“${TOPIC}”`}
-      statement="Janine Selendy’s topic, in the festival’s own words — and her own draft agenda for the hour, in her order: Francis introduces her, she opens, Brian takes two minutes on where anyone can add a crisis or a solution, the cartoonists present their work, CEEW’s drawings go up as Alina speaks, and she closes. The record’s part in the hour is two minutes, and she gave them."
+      statement="Janine Selendy’s topic, in the festival’s own words — and the hour as this record understands it, set out so it can be corrected. The order below is this record’s reading of a draft that came by email, not a copy of her agenda: where it differs from what she holds, hers is right and this is the error."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."
