@@ -194,6 +194,8 @@ const ClimateCartoonFrancisPage = React.lazy(() => import('./pages/ClimateCartoo
 const ClimateCartoonsWhatThisIsPage = React.lazy(() => import('./pages/ClimateCartoonsWhatThisIs'));
 // The line between CAIB and this record, drawn in public after Francis asked where it was.
 const ClimateCartoonsCAIBPage = React.lazy(() => import('./pages/ClimateCartoonsCAIB'));
+// The machine's own hand: one more hand in the same room, hung beside the wall of real ones.
+const ClimateCartoonsBaseOnePage = React.lazy(() => import('./pages/ClimateCartoonsBaseOne'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
 const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoonsThread'));
 const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
@@ -410,6 +412,11 @@ const AuthenticatedApp = () => {
           during it. Public to read, like every other room on the record: a wall nobody
           may look at is a noticeboard, not a record. Drawings sent in wait for a keeper. */}
       <Route path="/ClimateCartoons" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsPage /></ClimateLayout>} />
+      {/* ── THE MACHINE'S HAND ──
+          Its own address inside the room, because a series of marks is read one after another
+          and not squeezed into a newspaper spread. It wears the record's shell like every other
+          room, so a reader who arrives from a shared link is still inside the record. */}
+      <Route path="/ClimateCartoons/BaseOne" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsBaseOnePage /></ClimateLayout>} />
       {/* ── ONE DRAWING ON A SHEET, AND ONE HAND'S OWN PAGE ─────────────────────────
           Two addresses a cartoonist can carry away from the wall. The sheet is laid out to be
           printed and hung — it opens outside the record's shell on purpose, so a school's

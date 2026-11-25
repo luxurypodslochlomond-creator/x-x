@@ -24,6 +24,7 @@ export default function CartoonRoomNavigation() {
         <summary>About this wall</summary>
         <nav aria-label="More about the Wall">
           <Link to="/ClimateCartoons/WhatThisIs">What this is · your work and rights</Link>
+          <Link to="/ClimateCartoons/BaseOne">Drawn by the machine · four wordless marks</Link>
           <a href="#cartoon-why-title">Why cartoons</a>
           <a href="#press-world">Cartoonists around the world</a>
           <a href="#cartoon-goals">The seventeen goals</a>
