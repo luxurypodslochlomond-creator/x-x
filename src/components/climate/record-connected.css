@@ -53,3 +53,20 @@
 @media (min-width: 1024px) { .climate-record .rec-mast-doors .rec-art-caption { font-size: 12px; }.climate-record .rec-mast-doors .rec-art-door[href="/XEqualsX"] .rec-art-caption { font-size: 11px; }.record-connected-shell .record-room-intro { padding: 2.5rem 2.5rem 1.8rem; }.record-connected-shell .record-room-body { padding: 0 2.5rem 2rem; }.record-connected-shell .record-room-content { padding: 2rem; }.record-connected-shell .record-room-return { padding-inline: 2.5rem; } }
 @media (max-width: 639px) { .rec-doors .rec-doors-plate { margin-top: auto; height: 92dvh; border-radius: 24px 24px 0 0; }.climate-record .rec-doors-body { scrollbar-gutter: auto; } }
 @media (hover: hover) { .record-link-cards > a:hover,.climate-record .record-directory a:hover { border-color: rgb(var(--record-mark)/.5); }.climate-record .rec-mast-doors .rec-art-door:hover { background: rgb(var(--record-mark)/.06); } }
+
+/* ── THE PAINTING COMES THROUGH THESE TWO ROOMS ─────────────────────────────────
+   Brian, 25 November, reading the roll and the seal: "we also lose our coolasfuck
+   record paint in background, can't see when scroll." He was right, and the fault was
+   two extra sheets laid on top of the one the record already lays. The book's own paper
+   is a veil at ninety per cent, so the painting breathes through every other room. On a
+   room wearing this shell, a solid paper intro and a bone panel sat on top of that veil
+   — and 0.9 over 0.9 is ninety-nine per cent opaque, which is a wall. A long page of it
+   is a cream wall, and the painting is only visible at the edges.
+   So these two rooms keep the record's own rule: one veil, and the painting behind it.
+   The intro goes transparent and the panel keeps only a whisper of paper, enough to hold
+   the sheet's edge without becoming a second page. Every sentence still sits on paper
+   over a photograph, never on the photograph itself.
+   Scoped to .record-room-veiled on purpose: it is these two rooms tonight, and one class
+   added to any other shell the day it wants the same room. */
+.record-connected-shell.record-room-veiled .record-room-intro { background: transparent; }
+.record-connected-shell.record-room-veiled .record-room-content { background: rgb(var(--record-paper) / .25); }

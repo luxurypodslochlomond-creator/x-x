@@ -45,6 +45,7 @@ export default function ClimateRoll() {
 
   return (
     <ClimateRecordShell
+      className="record-room-veiled"
       eyebrow="THE RECORD"
       marker="The roll · who keeps this record honest"
       title="The people who check this record"
@@ -108,6 +109,13 @@ export default function ClimateRoll() {
             anybody else, and carries the keys besides. It is never automatic: a name appears only where its owner
             wrote a line, so a custodian who would rather the roll carried only the volunteers leaves their own line
             empty and stays off it. Nothing else about them changes.
+          </p>
+
+          <p className="mt-3 max-w-[52ch] text-[13.5px] leading-[1.65] text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>
+            The other half of the answer is the{' '}
+            <Link to="/ClimateSeals" className="font-bold text-record-red underline decoration-2 underline-offset-2">seal</Link>
+            : a fingerprint on every entry, recomputed in your own browser, so nobody has to take our word for whether
+            the words moved.
           </p>
 
           {people.length > 0 ? (

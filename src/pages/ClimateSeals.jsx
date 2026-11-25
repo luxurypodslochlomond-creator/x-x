@@ -125,6 +125,7 @@ export default function ClimateSeals() {
 
   return (
     <ClimateRecordShell
+      className="record-room-veiled"
       eyebrow="The seal"
       marker="Checked in your browser, not on our server"
       title="A fingerprint on every entry"
@@ -217,6 +218,7 @@ export default function ClimateSeals() {
         <p><strong>What a seal does not prove.</strong> That anything on the record is true. Only a source can do that, and only a person can be held to it. The seal is not a badge and not a score: it is a lock on a page, not an argument for what the page says.</p>
         <p><strong>Why it can be checked by anyone.</strong> The seals are public, the entries are public, and the fingerprint is taken in your browser from what you can see. You never have to trust this page, this platform, or us to know whether the words moved.</p>
         <p><strong>Where it starts.</strong> Sealing begins from the day this page first ran. Entries published before it are sealed exactly as they stand, and the record does not claim to know what they said before that. Later changes are a chain: every new seal names the one it replaced, so a correction is visible as a new link rather than an overwrite, and taking a link out leaves a hole where anyone can see it.</p>
+        <p><strong>Who does the checking.</strong> A seal shows the words have not moved. It does not show that a person read them. The <Link to="/ClimateRoll" className="font-bold text-[#b3261e] underline decoration-2 underline-offset-2">roll</Link> names the people who did, and what they signed.</p>
       </div>
 
       <div className="flex flex-wrap gap-2 pt-5">
