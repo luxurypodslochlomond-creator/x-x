@@ -148,6 +148,95 @@
   text-wrap: pretty;
 }
 
+/* ── THE STRIP IN THE ROOM ──────────────────────────────────────────────────────
+   A band on the record's own earth, so it belongs to the room it stands in, with the four
+   marks small enough to read as a series and never as a rival to the wall. Each thumb holds
+   the whole drawing (`contain`, on paper) because the record does not crop anybody's work,
+   and a cropped mark would say something the mark did not. */
+.base-one-strip {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 1.25rem 1.6rem;
+  background: rgb(var(--record-earth));
+  color: rgb(var(--record-paper));
+}
+.base-one-strip-kicker {
+  font-family: var(--font-record-ui);
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+}
+.base-one-strip-head h2 {
+  margin-top: .45rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.01em;
+  color: rgb(var(--record-paper));
+  text-wrap: balance;
+}
+.base-one-strip-line {
+  max-width: 56ch;
+  margin-top: .55rem;
+  font-family: var(--font-reading);
+  font-size: .95rem;
+  line-height: 1.66;
+  color: rgb(var(--record-paper) / .86);
+  text-wrap: pretty;
+}
+.base-one-strip-marks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .6rem;
+  margin-top: 1.2rem;
+  list-style: none;
+}
+.base-one-strip-marks a {
+  position: relative;
+  display: block;
+  background: rgb(var(--record-paper));
+  box-shadow: inset 0 0 0 1px rgb(var(--record-paper) / .25);
+  padding: .3rem;
+}
+.base-one-strip-marks img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+}
+.base-one-strip-marks span {
+  position: absolute;
+  bottom: .45rem;
+  right: .55rem;
+  font-family: var(--font-record-ui);
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: rgb(var(--record-ink) / .55);
+}
+.base-one-strip-marks a:hover { box-shadow: inset 0 0 0 2px rgb(var(--record-signal)); }
+.base-one-strip-marks a:focus-visible { outline: 2px solid rgb(var(--record-signal)); outline-offset: 3px; }
+.base-one-strip-door {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 44px;
+  margin-top: 1rem;
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+  border-bottom: 1px solid rgb(var(--record-signal) / .6);
+}
+.base-one-strip-door:hover { color: rgb(var(--record-paper)); border-bottom-color: rgb(var(--record-paper)); }
+
+@media (min-width: 640px) {
+  .base-one-strip-marks { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; }
+}
+
 /* The way back out, to the wall of real hands. */
 .base-one-open {
   margin: 2rem 0 0;

@@ -8,6 +8,7 @@ import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
+import BaseOneStrip from '@/components/climate/cartoons/baseone/BaseOneStrip';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
@@ -38,6 +39,8 @@ import '@/components/climate/cartoons/press/press-phone.css';
 // at the threshold of the wall, the argument as a black interlude, the lineage as a
 // timeline, and the book and the biennial as one register. Phone only.
 import '@/components/climate/cartoons/press/press-workshop.css';
+// The machine's four marks, in the room: the strip's band and the print room's sheets.
+import '@/components/climate/cartoons/baseone/base-one.css';
 
 export default function ClimateCartoons() {
   return (
@@ -53,6 +56,9 @@ export default function ClimateCartoons() {
         <PressOpening />
 
         <PressWall />
+        {/* The machine's own four marks, in the room and in the open: a band beside the wall,
+            not a drawer under it. It follows the drawings because it is about them. */}
+        <BaseOneStrip />
         <CartoonRoomNew />
         {/* The wall read against the seventeen goals, with the blank ones left blank. It
             follows the drawings because it is about them, and it comes before the argument
