@@ -8,6 +8,7 @@ import TheShortAnswer from '@/components/climate/workshop/TheShortAnswer';
 import JanineSessionTile from '@/components/climate/workshop/JanineSessionTile';
 import WorkshopClocks from '@/components/climate/workshop/WorkshopClocks';
 import JanineAgenda from '@/components/climate/workshop/JanineAgenda';
+import WhoIsAlina from '@/components/climate/workshop/WhoIsAlina';
 import BrianTwoMinutes from '@/components/climate/workshop/BrianTwoMinutes';
 import CopyLine from '@/components/climate/CopyLine';
 import { recordAddress } from '@/components/climate/recordAddress';
@@ -101,7 +102,7 @@ export default function ClimateWorkshop() {
           the record, not by the host. A help-sheet, not a running order: hers to send, to cut, or to put down, and for
           anybody it reaches after her.
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">Set down 16 November 2026</p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">Set down 16 November 2026 · her agenda added 24 November</p>
       </div>
 
       {/* The five-frame strip and its blank sixth panel are not on this page any more. They
@@ -132,6 +133,8 @@ export default function ClimateWorkshop() {
       <WorkshopClocks />
 
       <JanineAgenda />
+
+      <WhoIsAlina />
 
       <BrianTwoMinutes />
 
