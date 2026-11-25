@@ -65,6 +65,17 @@ export function visitWord(node, dict, english = false) {
   return translation ? null : source;
 }
 
+// English only needs to undo translated nodes, not scan and retain every word
+// on every page before the browser is allowed to paint it.
+export function restoreEnglish() {
+  for (const [node, entry] of tracked) {
+    if (node.isConnected && entry.written !== null && read(node) === entry.written) {
+      write(node, entry.source, entry);
+    }
+  }
+  tracked.clear();
+}
+
 export function scanWords(dict, english = false, root = document.body) {
   pruneWords();
   const missing = new Set();

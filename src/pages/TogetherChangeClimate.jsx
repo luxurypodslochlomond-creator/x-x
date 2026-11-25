@@ -4,7 +4,7 @@ import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Plus, Users } from 'lucide-react';
 import RecordActionsSection from '@/components/climate/RecordActionsSection';
-import ClimateSubmitForm from '@/components/climate/ClimateSubmitForm';
+import ClimateSubmitForm from '@/components/climate/ClimateSubmitDoor';
 import { useClimateCategories } from '@/hooks/useClimateCategories';
 import ClimateImpactBar from '@/components/climate/ClimateImpactBar';
 import { isPreviewSandbox } from '@/lib/previewWorkers';

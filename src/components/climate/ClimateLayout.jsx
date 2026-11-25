@@ -170,7 +170,10 @@ export default function ClimateLayout({ children, currentPage }) {
       manifest.rel = 'manifest';
       document.head.appendChild(manifest);
     }
-    manifest.href = `/api/functions/serveManifest?brand=climate&v=${Date.now()}`;
+    // A new timestamp forced a fresh manifest request on every page turn.
+    // Keep the address stable; the browser still checks the manifest for updates.
+    const manifestPath = '/api/functions/serveManifest?brand=climate';
+    if (manifest.getAttribute('href') !== manifestPath) manifest.href = manifestPath;
   }, [location.pathname, currentPage]);
 
 
@@ -295,7 +298,7 @@ export default function ClimateLayout({ children, currentPage }) {
               className="flex min-h-[60vh] items-center justify-center"
               style={{ background: 'rgb(var(--record-paper) / .97)' }}
             >
-              <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-record-muted">Opening the page</p>
+              <p role="status" className="font-mono text-[11px] uppercase tracking-[0.3em] text-record-muted">LOADING · x = x</p>
             </div>
           }
         >

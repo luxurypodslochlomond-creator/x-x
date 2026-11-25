@@ -1,10 +1,18 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { prefetchPath } from '@/lib/routePrefetch';
 
 // One passive listener on the whole document: the instant a finger lands on
 // (or a cursor rests on) an internal link, that page's code starts downloading.
 // The tap then lands on code that is already there — the app-native feel.
 export default function RoutePrefetcher() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    // Fetch only the chosen page while its lazy layout is downloading, rather
+    // than waiting for the layout to arrive before discovering the page import.
+    prefetchPath(pathname);
+  }, [pathname]);
+
   useEffect(() => {
     let last = '';
 

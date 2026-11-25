@@ -73,6 +73,15 @@ const HUBS = {
   // the record's own rail with nothing behind them in this list, so both were cold on every
   // tap — including BASE 1, which lives under /ClimateCartoons and shares this key.
   climatecartoons: () => import('@/pages/ClimateCartoons'),
+  'climatecartoons/baseone': () => import('@/pages/ClimateCartoonsBaseOne'),
+  'climatecartoons/sheet': () => import('@/pages/ClimateCartoonSheet'),
+  'climatecartoons/artist': () => import('@/pages/ClimateCartoonArtist'),
+  'climatecartoons/francis': () => import('@/pages/ClimateCartoonFrancis'),
+  'climatecartoons/whatthisis': () => import('@/pages/ClimateCartoonsWhatThisIs'),
+  'climatecartoons/caib': () => import('@/pages/ClimateCartoonsCAIB'),
+  'climatecartoons/print': () => import('@/pages/ClimateCartoonPrint'),
+  'climatecartoons/exhibition': () => import('@/pages/ClimateCartoonExhibition'),
+  'climatecartoons/thread': () => import('@/pages/ClimateCartoonsThread'),
   climateroll: () => import('@/pages/ClimateRoll'),
   climatecorrections: () => import('@/pages/ClimateCorrections'),
   climatefellows: () => import('@/pages/ClimateFellows'),
@@ -93,7 +102,9 @@ const HUBS = {
 const started = new Set();
 
 export function prefetchPath(pathname) {
-  const name = pathname.split('/').find(Boolean)?.toLowerCase();
+  const parts = pathname.toLowerCase().split('/').filter(Boolean);
+  // A BASE 1 visit must fetch BASE 1, not the entire unrelated Wall page.
+  const name = parts[0] === 'climatecartoons' && parts[1] ? parts.slice(0, 2).join('/') : parts[0];
   if (!name || started.has(name)) return;
   const load = HUBS[name];
   if (!load) return;

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { Share2, Check } from 'lucide-react';
 import { buildWireShareCard } from './shareCardImage';
-import ShareCardPreview from './ShareCardPreview';
 import { recordAddress, recordOrigin } from './recordAddress';
+
+// The preview and its dialog tools are only needed after a card has been made.
+const ShareCardPreview = lazy(() => import('@/components/climate/ShareCardPreview'));
 
 // ── PASS IT ON ──
 // One tap: the entry leaves as a card that already carries its source, its date and
@@ -45,6 +47,8 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
       <Icon size={17} aria-hidden="true" />{label}
     </button>
     {state === 'error' && <span className="record-share-error" role="alert">The image could not be prepared. Please try again.</span>}
-    <ShareCardPreview open={!!card} onClose={() => setCard(null)} blob={card?.blob} fileName={card?.fileName} link={link} headline={title} text={text} credit={entry.image_credit} includeMessage={includeMessage} />
+    {card && <Suspense fallback={<span role="status" className="text-sm text-record-muted">Preparing image…</span>}>
+      <ShareCardPreview open onClose={() => setCard(null)} blob={card.blob} fileName={card.fileName} link={link} headline={title} text={text} credit={entry.image_credit} includeMessage={includeMessage} />
+    </Suspense>}
   </>;
 }
