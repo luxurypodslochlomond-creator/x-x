@@ -16,9 +16,22 @@ const W = 1080;
 const H = 1350;
 const PAD = 60;
 const MAXW = W - PAD * 2;
-const FOOTER_TOP = H - 150;
-const ART_TOP = 110;
-const ART_ROOM = 620;
+const FOOTER_TOP = H - 144;
+// ── THE DRAWING GETS THE CARD, NOT THE FURNITURE ────────────────────────────────
+// Brian, 25 November: "the share card... the share icon isn't right" and then the real
+// question — whether the card was actually any good. It was not. The artwork had 620 of
+// 1350 pixels, so a cartoonist sharing their own drawing sent out a card where their work
+// was under half the height and the record's own epigraph, label, name, origin, quotation
+// and footer took the rest. On a record whose whole argument is that the drawing matters
+// more than the machinery around it, that is the wrong way round.
+//
+// So the art area is 800 now — nearly three-fifths of the card — and everything under it
+// is tightened rather than removed. Nothing has been cut: the epigraph, the borrowed red
+// label, the artist's name, the origin, the drawer's own words and the footer are all still
+// there, because each of them is a promise this room makes. The picture simply leads, which
+// is what a card carrying somebody else's drawing should do.
+const ART_TOP = 96;
+const ART_ROOM = 800;
 
 const CARD_LINES = [
   'THIS IS THE TIME. AND THIS IS THE RECORD OF THE TIME.',
@@ -134,13 +147,13 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
   ctx.fillRect(0, artBottom + 24, W, 3);
 
   // What this is, said once, in the borrowed red.
-  let y = artBottom + 78;
+  let y = artBottom + 66;
   ctx.fillStyle = MARK;
   ctx.font = `700 19px ${MONO}`;
   ctx.fillText(fit(ctx, t(CARD_LINES[1]), MAXW), edge, y);
 
   // The hand that made it — never separated from the drawing.
-  y += 62;
+  y += 56;
   ctx.fillStyle = INK;
   const name = String(cartoon.artist_name || '');
   let nameSize = 46;
@@ -152,7 +165,7 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
   ctx.fillText(name, edge, y);
 
   if (cartoon.origin) {
-    y += 34;
+    y += 30;
     ctx.fillStyle = MUTED;
     ctx.font = `400 22px ${MONO}`;
     ctx.fillText(fit(ctx, cartoon.origin, MAXW), edge, y);
@@ -167,12 +180,15 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
     ctx.direction = ownRtl ? 'rtl' : 'ltr';
     ctx.textAlign = ownRtl ? 'right' : 'left';
     ctx.font = `400 27px ${MONO}`;
-    const lines = wrapLines(ctx, own, MAXW - 34, 4);
-    const top = y + 62;
+    // Three lines, not four: the taller art area took the room the fourth line needed, and
+    // the drawer's sentence is more use to a reader as three lines and an ellipsis than as
+    // four lines printed over the footer.
+    const lines = wrapLines(ctx, own, MAXW - 34, 3);
+    const top = y + 54;
     ctx.fillStyle = MARK;
-    ctx.fillRect(ownRtl ? W - PAD + 12 : PAD - 28, top - 26, 5, lines.length * 40 + 6);
+    ctx.fillRect(ownRtl ? W - PAD + 12 : PAD - 28, top - 24, 5, lines.length * 38 + 6);
     ctx.fillStyle = 'rgba(20,18,16,0.9)';
-    lines.forEach((line, i) => ctx.fillText(line, ownEdge, top + i * 40));
+    lines.forEach((line, i) => ctx.fillText(line, ownEdge, top + i * 38));
     ctx.restore();
   }
 
