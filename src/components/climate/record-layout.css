@@ -60,20 +60,8 @@
 }
 
 @media (max-width: 639px) {
-  /* ── THE SHEET STANDS ON THE PAINTING, ON A PHONE TOO ──────────────────────────
-     Brian, 25 November: "our beautiful record cover painting should be on every page."
-     He is right, and this rule had just taken it away. The sheet was run flush to the
-     glass, which did make the page feel full width — and in the same move hid the
-     painting completely, because the sheet is solid paper at every width and the
-     painting can only be seen where the paper is not. A hairline of it is not enough
-     either: at twelve pixels a reader sees a dark edge, not a cover.
-
-     So the page keeps a standing frame of the painting on both sides, all the way down
-     every page of the record, wide enough to read as the picture it is — and the sheet
-     still fills the rest of the glass, with its bands, plates and photographs running
-     to its own edge. That is the trade a printed page makes: the page is full width,
-     and it is standing on something. */
-  .climate-record .record-book { margin-inline: clamp(12px, 4vw, 22px); }
+  /* The shared mobile frame is edge-to-edge in record-reading.css.
+     Only the content below receives reading padding, never the navigation. */
   .record-shell-opening > div,
   .record-shell-content,
   .record-shell-return > div { padding-inline: 1.25rem; }

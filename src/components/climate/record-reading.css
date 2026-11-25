@@ -309,22 +309,12 @@ html[data-tongue="th"] #root .record-pages :is(p, blockquote, li) {
     0 16px 44px -26px rgb(var(--record-ink) / 0.5);
 }
 
-/* ── AND A PHONE GIVES THE SHEET A MARGIN ────────────────────────────────────────
-   A hair of the room either side, so the page is a page standing on something rather
-   than a full-screen wall with a picture hidden behind it. Twelve pixels is the whole of
-   the decision and it is one number: wide enough for the ground to be seen as ground,
-   narrow enough that no line of any page loses a word to it. */
-/* ── AND THE SHEET NEVER TOUCHES THE GLASS ───────────────────────────────────────
-   Twelve pixels was a margin on a phone and no margin at all on a laptop: the sheet was
-   eleven hundred wide and a window is often barely wider than that, so on a desk the
-   painting was still nowhere to be seen — it only looked like itself on the two pages
-   that carry it inside a band. So the margin is a share of the glass rather than a
-   number of pixels, on every width: the page always stands on the painting with the
-   painting visible around it, whether the window is a phone or a cinema. It is the same
-   decision as before, said in a way that cannot run out. */
+/* A desk leaves the painting beside the book. On mobile, the whole frame uses
+   the glass, just like the Record and Wall. Content keeps its own reading padding;
+   the masthead must never inherit a page margin. */
 .record-book { margin-inline: clamp(10px, 3.4vw, 26px); }
 @media (max-width: 1023px) {
-  .record-book { margin-inline: clamp(10px, 3.4vw, 18px); }
+  .record-book { margin-inline: 0; }
 }
 
 @media (min-width: 1024px) {

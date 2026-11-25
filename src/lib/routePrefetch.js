@@ -104,24 +104,9 @@ export function prefetchPath(pathname) {
   });
 }
 
-// ── THE RECORD'S OWN DOORS, WARMED BEFORE A THUMB REACHES THEM ─────────────────
-// Brian, 25 November, on a phone: "click to go to the wire, base 1, map, method, founder,
-// x = x and seals — top level nav feels shorter and jumpy between pages, but no jump
-// between record and wire."
-//
-// He was describing something real, and it was not the nav. Every one of those pages
-// arrives as its own lump of code, and while that lump was downloading the loading line
-// replaced the WHOLE frame — masthead included. So a tap took the nav off the glass and
-// put it back a beat later at a slightly different height: the nav was not shorter, it had
-// been missing for a moment. Record → Wire felt fine only because both were already in
-// memory, which is exactly why the fault looked like a fault in some pages and not others.
-//
-// Waiting for the touch was the wrong moment to start: touchstart and the tap happen in
-// the same instant, so the download began at the same moment the reader arrived. The doors
-// are known before anybody touches them, so they are fetched in the idle time after the
-// page a reader is already reading has settled — the connection is busy doing nothing, and
-// every door on the rail is in hand by the time a thumb lands on it. Nothing is downloaded
-// that a reader did not ask to see; these are the record's own doors, on its own rail.
+// Desktop warming only. Importing a page also evaluates its dependencies and loads
+// its styles, even in an idle callback. Phones should spend that work on the door
+// actually touched, through RoutePrefetcher, not a dozen speculative destinations.
 export const RECORD_DOORS = [
   '/TogetherChangeClimate',
   '/ClimateWire',
@@ -138,11 +123,12 @@ export const RECORD_DOORS = [
 ];
 
 export function warmRecordDoors() {
+  if (typeof window === 'undefined' || window.matchMedia('(max-width: 1023px)').matches || navigator.connection?.saveData) return;
   const run = () => RECORD_DOORS.forEach(prefetchPath);
-  if (typeof window === 'undefined') return;
   if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(run, { timeout: 2500 });
-  } else {
-    setTimeout(run, 1200);
+    const idle = window.requestIdleCallback(run, { timeout: 2500 });
+    return () => window.cancelIdleCallback(idle);
   }
+  const timer = window.setTimeout(run, 1200);
+  return () => window.clearTimeout(timer);
 }

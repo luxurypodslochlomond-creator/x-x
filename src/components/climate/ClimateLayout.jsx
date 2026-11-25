@@ -9,7 +9,7 @@ import '@/components/climate/record-depth.css';
 import '@/components/climate/record-connected.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
-import { prefetchPath, warmRecordDoors } from '@/lib/routePrefetch';
+import { warmRecordDoors } from '@/lib/routePrefetch';
 import { SiteLanguageProvider } from '@/components/shared/SiteLanguage';
 import SiteTranslator from '@/components/shared/SiteTranslator';
 import RecordImprint from '@/components/climate/RecordImprint';
@@ -93,11 +93,9 @@ export default function ClimateLayout({ children, currentPage }) {
   const isRoom = ROOM_PAGES.includes(currentPage);
   const isCartoonRoom = currentPage === 'ClimateCartoons';
   useRecordScroll(readingRef);
-  // Every door on the record's own rail, fetched in the idle beat after this page settles,
-  // so a tap never lands on code that has not arrived — which is what took the masthead off
-  // the glass for a moment on the way to the wire, the map, method, the founder, x = x and
-  // the seals. See RECORD_DOORS in routePrefetch.js.
-  useEffect(() => { warmRecordDoors(); }, []);
+  // Desktop-only warming; phones load the chosen door on touch instead of downloading
+  // the whole record, including the map, while the current page is still opening.
+  useEffect(() => warmRecordDoors(), []);
 
   // Her identity, not UF51's. Runs once per climate page.
   useEffect(() => {
@@ -175,23 +173,7 @@ export default function ClimateLayout({ children, currentPage }) {
     manifest.href = `/api/functions/serveManifest?brand=climate&v=${Date.now()}`;
   }, [location.pathname, currentPage]);
 
-  // Warm the nav once the page has settled. On a phone a tap gives a prefetch
-  // almost no head start (hover only helps a mouse), so the next pages are
-  // fetched before the finger arrives. The map is left out: it pulls a mapping
-  // library, and should only load when a reader actually asks for it.
-  useEffect(() => {
-    if (navigator.connection?.saveData) return;
-    // The record's working screens are the one place a keeper is waiting on an answer rather
-    // than reading. Warming ten page chunks behind them spends the phone's connection on pages
-    // nobody asked for, while the desk is still counting. Nothing is lost: the reader arriving
-    // on those pages later still gets them warm from the pages that do warm them.
-    if (WORKING_PAGES.includes(currentPage)) return;
-    const timer = setTimeout(() => {
-      ['TogetherChangeClimate', 'ClimateSearch', 'ClimateWire', 'ClimateMethod', 'ClimateFounder', 'ClimateSupport', 'ClimateHost', 'ClimateTerms', 'ClimatePrivacy']
-        .forEach(prefetchPath);
-    }, 1200);
-    return () => clearTimeout(timer);
-  }, []);
+
 
   return (
     <SiteLanguageProvider>
@@ -304,23 +286,8 @@ export default function ClimateLayout({ children, currentPage }) {
         <RecordDesktopMenu open={contentsOpen} onClose={closeContents} />
       </header>
 
-      {/* ── THE MASTHEAD NEVER LEAVES THE GLASS FOR A PAGE ──────────────────────
-          Brian, 25 November, twice: "top level nav feels shorter and jumpy between pages…
-          still jumps when go to the wire etc."
-
-          He was right the second time and I had only half fixed it. The record's pages
-          arrive as separate lumps of code, and the only place that could catch one still
-          arriving was the app's own loading boundary — which sits ABOVE this layout. So a
-          tap that landed on code not yet in hand took the masthead off the glass, put the
-          loading line in its place, and brought the masthead back a beat later at whatever
-          height the page under it had settled at. That is the whole of "shorter and jumpy":
-          the nav was never a different size, it was gone for a moment and then redrawn.
-
-          Warming the doors (see RECORD_DOORS) makes that rare; this makes it impossible.
-          The boundary now sits inside the layout, around the page body only — so the
-          masthead, the yellow band and the doors are already standing when a page arrives,
-          and only the sheet underneath it waits. A reader taps, and the record is still
-          there above them, exactly where it was. */}
+      {/* Only the page waits for its content. The shared masthead remains mounted;
+          its mobile width is owned by the shared frame, not by individual pages. */}
       <main ref={readingRef} className="record-pages">
         <Suspense
           fallback={
