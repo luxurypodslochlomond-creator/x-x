@@ -357,6 +357,8 @@
   line-height: 1.6;
   color: rgb(var(--record-muted));
 }
+/* The walk-along hint belongs to the phone only; the desk runs the drawings down the page. */
+.press-wall-swipe { display: none; }
 .press-wall { display: grid; }
 
 .press-sheet {

@@ -405,86 +405,112 @@
 
   #root .press-room .comic-sources { padding-top: 1.3rem; border-top: 3px solid rgb(var(--record-ink)); }
 
-  /* ── THE WALL, HUNG AS A WALL ──────────────────────────────────────────────────
-     Brian, 20 November: "the wall there looks like lots and lots of scrolling on mobile
-     bro… feels again like old scrolling site."
+  /* ── THE WALL, WALKED ALONG ───────────────────────────────────────────────────
+     Brian, 20 November: thirteen full-width drawings was "lots and lots of scrolling…
+     feels again like old scrolling site". So it became two abreast — and that was the
+     other wrong answer. Two drawings to a screen, each with its artist's name at eleven
+     pixels and nothing else under it, is a contact sheet; and a contact sheet is what an
+     archive shows you to prove it holds the pictures.
 
-     He is right, and the fault is arithmetic. Thirteen drawings, each the full width of
-     the glass with its whole citation under it, is thirteen screens before the argument
-     has even started — which is a feed, however good the pictures are. A wall of prints
-     does not work that way: it is pictures, hung close, and you walk along it.
+     Brian, 25 November: "the wall on mobile still not right… mobile still not
+     coolasfuck". He is right, and the reason is the same one as before, only smaller:
+     the pictures were the size of thumbnails and the hands that made them were the size
+     of captions.
 
-     So on a phone the wall is a wall — two drawings abreast, a hairline rule between
-     them, the artist's name under each, and the way to pass that drawing on. Nothing is
-     cropped, tinted, re-ordered or shrunk to a thumbnail inside furniture: each picture
-     keeps its own shape and its own edges. The title, the drawer's own line, the credit,
-     the print sheet and the artist's page are all still there, one tap away, in the close
-     reading — which is exactly where a reader who wants the words is going anyway.
-
-     The opening drawing keeps the whole width and keeps its words, because it is the
-     invitation: the first thing met in this room is still a drawing, at the size it was
-     drawn, with the hand that made it named under it. */
+     A wall of prints is walked along, not scrolled down. So on a phone the wall is one
+     run you move sideways through: each drawing at almost the whole width of the glass,
+     snapping into place, the hand named under it in type a person can read, and the
+     drawer's own line beneath that. The next drawing stays visible at the edge, so the
+     wall announces itself as something to walk along rather than as a stack to grind
+     through. Nothing is cropped, tinted, shrunk or boxed: every picture keeps its own
+     shape and its own edges. */
   #root .press-room .press-wall {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: .7rem;
-    row-gap: 0;
-    margin-top: .3rem;
-    border-top: 2px solid rgb(var(--record-ink));
+    display: flex;
+    align-items: flex-start;
+    gap: .85rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.15rem;
+    margin: .9rem -1.15rem 0;
+    padding: 0 1.15rem .5rem;
+    border-top: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  #root .press-room .press-wall::-webkit-scrollbar { display: none; }
+
   #root .press-room .press-sheet,
-  #root .press-room .press-sheet + .press-sheet {
-    display: block;
-    margin-top: 0;
-    padding: .8rem 0 1rem;
-    border-top: 1px solid rgb(var(--record-ink) / .18);
-    border-bottom: 0;
-  }
+  #root .press-room .press-sheet + .press-sheet,
   #root .press-room .press-sheet--lead {
-    grid-column: 1 / -1;
-    padding: .35rem 0 1.25rem;
+    flex: 0 0 84%;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    scroll-snap-align: start;
   }
+
   #root .press-room .press-sheet-art,
   #root .press-room .press-sheet--lead .press-sheet-art {
     margin: 0;
     background: transparent;
   }
   #root .press-room .press-sheet-art .comic-wall-artwork { max-height: none; }
-  /* The tab comes off the picture: at a fifth of the glass it would sit over the drawing
-     it is inviting you to look at. The picture itself is the door. */
+  /* The tab comes off the picture: it would sit over the drawing it is inviting you to
+     look at. The picture itself is the door. */
   #root .press-room .press-sheet-look { display: none; }
-  #root .press-room .press-sheet-rail { display: block; margin-top: .5rem; }
+
+  /* The hand, then its words. The folio number, the subject label, the credit block and
+     the print links are all still there, one tap away, in the close reading. */
+  #root .press-room .press-sheet-rail { display: block; margin-top: .6rem; }
   #root .press-room .press-sheet-number,
   #root .press-room .press-sheet-subject,
-  #root .press-room .press-sheet-title,
-  #root .press-room .press-sheet-words,
   #root .press-room .press-sheet-link,
   #root .press-room .press-sheet-provenance { display: none; }
-  #root .press-room .press-sheet-by {
+
+  #root .press-room .press-sheet-by,
+  #root .press-room .press-sheet--lead .press-sheet-by {
     margin: 0;
-    font-size: .68rem;
-    line-height: 1.3;
+    font-size: 1.12rem;
+    line-height: 1.15;
     font-weight: 700;
+    letter-spacing: -.02em;
   }
-  #root .press-room .press-sheet-by span { display: block; font-size: .62rem; }
-  #root .press-room .press-sheet-share { margin-top: .3rem; }
-  #root .press-room .press-sheet-share button {
-    min-height: 0;
-    padding: 0;
-    font-size: .56rem;
-    letter-spacing: .11em;
+  #root .press-room .press-sheet-origin {
+    display: block;
+    margin: .2rem 0 0;
+    font-size: .6rem;
+    letter-spacing: .12em;
   }
-  #root .press-room .press-sheet--lead .press-sheet-by { font-size: .84rem; }
-  #root .press-room .press-sheet--lead .press-sheet-by span { display: inline; font-size: .74rem; }
-  #root .press-room .press-sheet--lead .press-sheet-title,
-  #root .press-room .press-sheet--lead .press-sheet-words { display: block; }
+  /* The title of the work sits under the name, quieter than it: the hand leads. */
+  #root .press-room .press-sheet-title,
   #root .press-room .press-sheet--lead .press-sheet-title {
-    margin: .55rem 0 .25rem;
-    font-size: 1.32rem;
-    line-height: 1.06;
+    display: block;
+    margin: .45rem 0 0;
+    font-size: .92rem;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -.015em;
+    color: rgb(var(--record-muted));
   }
+  #root .press-room .press-sheet-words,
   #root .press-room .press-sheet--lead .press-sheet-words {
-    margin: .3rem 0 0;
+    display: block;
+    margin: .55rem 0 0;
+    padding-left: .7rem;
+    border-left: 2px solid rgb(var(--record-red));
     font-size: .95rem;
     line-height: 1.45;
   }
+  #root .press-room .press-sheet-share { margin-top: .6rem; }
+  #root .press-room .press-sheet-share button {
+    min-height: 2.4rem;
+    padding: 0;
+    font-size: .68rem;
+    letter-spacing: .1em;
+  }
+
+  /* A wall you can walk along has to say so — the record never assumes a gesture. */
+  #root .press-room .press-wall-swipe { display: block; }
 }
