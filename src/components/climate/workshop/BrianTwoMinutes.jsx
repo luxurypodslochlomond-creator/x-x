@@ -31,7 +31,7 @@ const JOBS = [
   ['Two minutes, on the platform', 'The script above. Where to add a crisis and where to add a solution — then stop and hand back to Francis.'],
   ['Posting CEEW’s cartoons as Alina speaks', 'Have the drawings open and ready before she starts, and post each one as she names it, not after.'],
   ['Screen shared for the questions', 'Francis, Janine and Brian share the screen while Janine takes the room.'],
-  ['Closing remarks, if called on', 'She invites Francis and Brian to add a few words at the end. Short.'],
+  ['Closing remarks, if called on', 'Janine invites Francis and Brian to add a few words at the end. Short.'],
 ];
 
 const DOOR = '/TogetherChangeClimate?submit=1';
@@ -41,7 +41,7 @@ export default function BrianTwoMinutes() {
     <section className="mt-8 border-2 border-record-ink">
       <div className="bg-record-ink px-4 py-3">
         <p className="font-mono text-[9.5px] font-black uppercase tracking-[0.2em] text-cartoon-sun">
-          03 · Brian’s two minutes · as she set it
+          03 · Brian’s two minutes · as Janine set it
         </p>
         <h2 className="mt-1 text-[20px] leading-tight text-record-paper lg:text-[26px]" style={{ fontFamily: 'var(--font-display)' }}>
           Two minutes, and the address

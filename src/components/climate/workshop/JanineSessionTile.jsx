@@ -55,10 +55,10 @@ export default function JanineSessionTile() {
 
         <dl className="mt-4 space-y-2.5 lg:mt-0">
           <Row term="The festival calls it">
-            “{FESTIVAL_TITLE}” — a virtual workshop, led by her, on their programme in her own name.
+            “{FESTIVAL_TITLE}” — a virtual workshop, led by Janine, on their programme in her own name.
           </Row>
           <Row term="When">
-            Sunday 29 November 2026, hybrid. Her own slot is hers to confirm and goes here the moment she says
+            Sunday 29 November 2026, hybrid. Janine’s own slot is hers to confirm and goes here the moment she says
             it — the festival’s own times, worked out in your clock, are above this tile.
           </Row>
           <Row term="Already going round, with her invitation">

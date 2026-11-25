@@ -24,9 +24,19 @@ const ASKS = [
   // whoever opened the link. Brian, 25 November: "says 'your draft' when talking about Janine
   // in many places." It now speaks about her, in her name, so the page reads the same to her
   // and to the person she sends it to. The ask is unchanged; only the voice is.
+  // ── NAME HER, DO NOT SAY "SHE" ─────────────────────────────────────────────
+  // Brian, 25 November: "referring to Janine as 'her'… feel not right to me. And 'she opens
+  // it' etc. Janine Selendy is her name… what they expecting to see here?"
+  //
+  // He is reading the room correctly. CEEW and Yale are reading this page about a session
+  // hosted by a named person, and a line that says "she opens it, she closes it" reads like
+  // an internal note passed between colleagues — as though the host were a fact everybody
+  // already knows rather than the woman the page is about. An institution expects the name.
+  // Her name is the first thing on the line, and it is repeated wherever the alternative was
+  // a pronoun doing the work a name should do.
   [
-    'She hosts, and the hour is hers to run.',
-    'She opens it, she closes it, and she takes the room for questions at the end. That is the whole of the ask, and it is her sentence, not ours.',
+    'Janine hosts, and the hour is hers to run.',
+    'Janine M. H. Selendy opens the hour, closes it, and takes the room for questions at the end. That is the whole of the ask, and it is her sentence, not ours.',
   ],
   // This said "nobody from this record takes the microphone", and it was wrong from the
   // moment her draft agenda arrived: she had already written Brian into the hour, for two
@@ -34,7 +44,7 @@ const ASKS = [
   // out live, in front of the room. So it now says what her agenda says.
   [
     'Two minutes, then back to Francis.',
-    'Her draft gives Brian two minutes on what the platform does and where anyone can add a crisis or a solution. That is the whole of the record’s speaking time in her hour — and it is her gift, not our assumption.',
+    'Janine’s draft gives Brian two minutes on what the platform does and where anyone can add a crisis or a solution. That is the whole of the record’s speaking time in her hour — and it is her gift, not our assumption.',
   ],
   // The practice-room item came off on 25 November. It offered the host half an hour to try
   // "the drawing" once so it worked on the day — a rehearsal for an exercise her hour does not
@@ -56,14 +66,14 @@ export default function TheShortAnswer() {
     <section className="mt-5 border-y-4 border-cartoon-sun bg-record-red text-record-paper">
       <div className="px-4 py-5 lg:px-6 lg:py-6">
         <span className="inline-block bg-cartoon-sun px-2.5 py-1 font-mono text-[9.5px] font-black uppercase tracking-[0.18em] text-record-ink lg:text-[10.5px]">
-          The short answer · what this asks of the host
+          The short answer · what this asks of Janine
         </span>
 
         <h2
           className="mt-3 text-[26px] leading-[1.02] text-cartoon-sun lg:text-[40px]"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          The hour stays hers.
+          The hour is Janine’s.
         </h2>
 
         <ol className="mt-4 space-y-3">

@@ -30,7 +30,7 @@ const CONTEXT = [
   // "not speaking for it, and not filling it" was both diminishing and untrue: the hour she
   // is hosting has her opening it and closing it in her own words. A line that shrinks the
   // host on the page she sends to her own institution is the opposite of a courtesy.
-  ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on this for four decades. She hosts the hour: she opens it, she closes it, and she takes the room for questions at the end. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
+  ['Janine M. H. Selendy', 'Founded Horizon International at Yale and has worked on climate communication for four decades. Janine hosts the hour: she opens it, closes it, and takes the room for questions at the end. This page is hers to cut, and the record is built in honour of her work rather than on top of it.'],
   ['This page', 'A proposal for that hour, set down before it happened. Read after 29 November, it is what was proposed — the drawings it produced live in the cartoon room.'],
 ];
 
@@ -84,7 +84,7 @@ export default function ClimateWorkshop() {
       eyebrow="The record · 29 November 2026"
       marker="03 · Janine M. H. Selendy’s session · CartoonAFRICA 8th Biennial · Benin City"
       title={`“${TOPIC}”`}
-      statement="Janine Selendy’s topic, in the festival’s own words — and the hour in her order, from the draft agenda she sent on 23 November and corrected on the 24th. It is her draft, circulated for comment: where she changes it, hers is the agenda and this page follows."
+      statement="Janine Selendy’s topic, in the festival’s own words — and the hour in her order, from the draft agenda Janine sent on 23 November and corrected on the 24th. It is her draft, circulated for comment: where she changes it, hers is the agenda and this page follows."
       returnTo="/ClimateCartoons"
       returnLabel="The cartoon room"
       footer="A proposal, not an announcement. The hour belongs to Janine; anything here can be cut."

@@ -72,7 +72,7 @@ const AGENDA = [
   {
     n: '07',
     head: 'Janine closes.',
-    body: 'Remarks encouraging climate action and use of the platform — and she invites Francis and Brian to add any closing remarks.',
+    body: 'Remarks encouraging climate action and use of the platform — and Janine invites Francis and Brian to add any closing remarks.',
     who: 'Janine → Francis & Brian',
     mine: true,
   },
@@ -110,9 +110,9 @@ export default function JanineAgenda() {
 
       <p className="mt-2 max-w-[54ch] text-[13px] leading-relaxed text-record-ink/85 lg:text-[14.5px]" style={{ fontFamily: 'var(--font-reading)' }}>
         Janine sent this draft on 23 November, headed “Agenda draft for Zoom of November 29th”. Francis replied with
-        his comments the next morning and she sent it back corrected on the 24th. It is printed below in her order.
-        It is a draft, circulated for comment: if she cuts it, reorders it or replaces it, hers is the agenda and this
-        page follows her rather than the other way round.
+        his comments the next morning and Janine sent it back corrected on the 24th. It is printed below in her order.
+        It is a draft, circulated for comment: if Janine cuts it, reorders it or replaces it, the agenda is Janine’s
+        and this page follows it rather than the other way round.
       </p>
 
       <ol className="mt-4 divide-y divide-record-ink/15 border-y border-record-ink/15">
@@ -146,7 +146,7 @@ export default function JanineAgenda() {
         recorded, and it runs one hour.
       </p>
       <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-muted">
-        Her draft, and hers to change. If any of it moves, this page is corrected in the open rather than quietly
+        Janine’s draft, and hers to change. If any of it moves, this page is corrected in the open rather than quietly
         brought into line.
       </p>
     </section>
