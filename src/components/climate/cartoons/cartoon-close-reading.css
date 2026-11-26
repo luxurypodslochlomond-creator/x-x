@@ -12,8 +12,12 @@
 .cartoon-close-reading button { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 2.75rem; min-width: 2.75rem; background: transparent; border: 0; color: inherit; font-size: .8rem; }
 .cartoon-close-reading button:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 1px; }
 .cartoon-close-scroll { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; }
-.cartoon-close-art { min-height: 100%; display: grid; align-content: center; padding-block: 1rem; }
-.cartoon-close-art .comic-wall-artwork { display: block; height: auto; width: 100%; max-width: 100%; }
+.cartoon-close-art { min-height: 100%; display: grid; align-content: center; padding-block: 1rem; touch-action: pan-y; transition: transform 190ms cubic-bezier(.22,.61,.36,1); }
+/* The drawing is being dragged: it must sit exactly under the finger, with no easing
+   fighting the thumb. The transition comes back the moment the finger lifts. */
+.cartoon-close-art[data-dragging="true"] { transition: none; }
+.cartoon-close-art .comic-wall-artwork { display: block; height: auto; width: 100%; max-width: 100%; user-select: none; -webkit-user-drag: none; }
+@media (prefers-reduced-motion: reduce) { .cartoon-close-art { transition: none; } }
 .cartoon-close-art[data-zoom="true"] { width: 200%; }
 .cartoon-close-caption { max-width: 48rem; margin: auto; padding: 1rem 1.25rem 2rem; }
 .cartoon-close-caption .cartoon-byline { font-size: .85rem; font-weight: 700; }
