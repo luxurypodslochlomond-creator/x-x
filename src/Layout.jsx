@@ -119,8 +119,14 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
   };
   const c = colorMap[color] || colorMap.cyan;
 
+  // ── ONE SECTION, NEVER SQUEEZED ────────────────────────────────────────────────
+  // The mobile menu is a column with a fixed height, and a column shrinks its children to
+  // fit. So every open section was being compressed, and the last one — BUILD, with thirty
+  // entries — was clipped partway down: the list stopped at Tech Scout and Tech Stack and
+  // nothing below could be reached by scrolling, because the rest of it was never laid out.
+  // shrink-0 says: this section is as tall as its contents, and the panel scrolls instead.
   return (
-    <>
+    <div className="shrink-0">
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="w-full mb-2"
@@ -174,7 +180,7 @@ const NavSection = ({ title, color, emoji, items, isActivePage, isMobile = false
         </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
