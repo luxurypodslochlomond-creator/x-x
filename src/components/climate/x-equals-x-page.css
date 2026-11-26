@@ -915,6 +915,24 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
 /* ── THE SCORE, IN PLAIN WORDS, WITHOUT LEAVING THE PAGE ──────────────────────────
    Set in the reading face at a size a person can actually read, because this is the one
    paragraph on the page that decides what a stranger is allowed to do with the work. */
+/* ── THE LINE ABOUT WHO PAYS FOR THE LICENCES ────────────────────────────────────
+   Brian, 26 November: "all need to help each other bro". Set as a sentence rather than a
+   button, at the size a note is set in, because it is a fact about two organisations who
+   gave this record its licence — not a request from the record itself. */
+#x-equals-x .covenant-licence-give {
+  max-width: 56ch;
+  margin: 1.1rem auto 0;
+  font-family: var(--font-reading);
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-licence-give a {
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-red));
+  text-underline-offset: 0.18em;
+}
 #x-equals-x .covenant-licence-means {
   max-width: 27ch;
   margin: 0.4rem auto 0;

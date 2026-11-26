@@ -33,6 +33,18 @@ import { Link } from 'react-router-dom';
 // licence name to check their rights met a begging bowl instead of the terms. Both publish
 // the same terms as plain text with nothing else on the page, so that is where these point
 // now — the law, and only the law.
+//
+// ── AND THEN HE WAS RIGHT ABOUT THE OTHER HALF ────────────────────────────────
+// Brian, minutes later: "but bro do cc by and gnu genuinely need support too if so dont do
+// that… all need to help each other bro." They do, and he is right. Both are non-profits:
+// Creative Commons is paid by donations to maintain the licences and defend their use, and
+// the Free Software Foundation is paid by donations to write and defend the GNU licences
+// this record is built on. Their own pages say so in their own words.
+//
+// So the plain text stays as the link to the terms — a reader checking their rights should
+// get the rights — and the ask is not hidden. It is named here, on the record's own page,
+// in the record's own words, and it points at them rather than at us. Quietly routing
+// around somebody else's need is not the same as refusing to beg for ourselves.
 const TERMS = [
   {
     label: 'The words',
@@ -76,6 +88,23 @@ export default function CovenantLicence() {
       <p className="covenant-licence-says">
         Both are irrevocable: once given, they cannot be taken back. Why they were given is
         argued in <Link to="/ExtractionProofCovenant">the covenant</Link>.
+      </p>
+
+      {/* ── SOMEBODY ELSE'S NEED, SAID OUT LOUD ───────────────────────────────────
+          Not a button and not a nag: one sentence naming who pays for the licences above,
+          with the two doors left open for anyone who wants to walk through them. */}
+      <p className="covenant-licence-give">
+        Neither organisation is paid for these licences. Creative Commons and the Free
+        Software Foundation are non-profits, and the terms above exist because people give
+        them money to keep writing and defending them. If you want to help them do that:{' '}
+        <a href="https://creativecommons.org/donate" target="_blank" rel="noreferrer noopener">
+          Creative Commons
+        </a>{' '}
+        and{' '}
+        <a href="https://my.fsf.org/donate" target="_blank" rel="noreferrer noopener">
+          the Free Software Foundation
+        </a>
+        .
       </p>
     </div>
   );
