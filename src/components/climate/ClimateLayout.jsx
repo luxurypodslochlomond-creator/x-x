@@ -153,7 +153,9 @@ export default function ClimateLayout({ children, currentPage }) {
       icon.type = 'image/svg+xml';
       document.head.appendChild(icon);
     }
-    icon.href = '/api/functions/serveFavicon?type=climate';
+    // The tab carries the claim rather than the letters: at sixteen pixels "x = x" is a
+    // smudge, and two bars are the whole argument — equal standard, no ranking.
+    icon.href = '/api/functions/serveFavicon?type=xeqx';
 
     // iPhone ignores the manifest's icons and takes this one, so "Add to Home Screen" puts the
     // record's own mark on the phone instead of a screenshot of whatever page was open.
@@ -163,7 +165,7 @@ export default function ClimateLayout({ children, currentPage }) {
       appleIcon.rel = 'apple-touch-icon';
       document.head.appendChild(appleIcon);
     }
-    appleIcon.href = '/api/functions/serveClimateIcon?size=180';
+    appleIcon.href = '/api/functions/serveClimateIcon?size=180&mark=full';
 
     let manifest = document.querySelector('link[rel="manifest"]');
     if (!manifest) {

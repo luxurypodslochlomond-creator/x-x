@@ -15,6 +15,8 @@
  *   /api/functions/serveClimateIcon?size=192        192 x 192   manifest
  *   /api/functions/serveClimateIcon?size=180        180 x 180   apple-touch-icon
  *   /api/functions/serveClimateIcon?w=1200&h=630    link card
+ *   /api/functions/serveClimateIcon?size=512&mark=full      the name, x = x, as strokes
+ *   /api/functions/serveClimateIcon?size=32&mark=equals     the tab, where three glyphs cannot go
  */
 
 const PAPER: [number, number, number] = [244, 239, 228]; // the record's warm paper
@@ -167,6 +169,64 @@ function drawMark(w: number, h: number): Uint8Array {
   return pixels;
 }
 
+// ── THE NAME, DRAWN THE SAME WAY ────────────────────────────────────────────
+// The pulse above is the record's signal; this is its name. x = x, as three glyphs made
+// of straight lines — never set in a font, because a home screen icon cannot ask a phone
+// which fonts it has, and a mark that changes shape on every device is not a mark.
+//
+// Sized to 0.69 of the square so it survives Android's mask, which crops an icon to a
+// circle and keeps only the middle eighty per cent: a mark that loses its outer strokes
+// to the mask is not on the home screen, it is a fragment on the home screen.
+function drawName(w: number, h: number, equalsOnly: boolean): Uint8Array {
+  const pixels = new Uint8Array(w * h * 3);
+  for (let i = 0; i < pixels.length; i += 3) {
+    pixels[i] = PAPER[0];
+    pixels[i + 1] = PAPER[1];
+    pixels[i + 2] = PAPER[2];
+  }
+
+  const unit = Math.min(w, h);
+  const bar = Math.max(2, Math.round(unit * 0.062));
+  const r = bar / 2;
+  const mid = h / 2;
+
+  if (equalsOnly) {
+    // At tab size three glyphs become a smudge, so the mark reduces to its claim.
+    const eqW = unit * 0.52;
+    const gapY = unit * 0.15;
+    const x0 = (w - eqW) / 2;
+    stroke(pixels, w, h, x0, mid - gapY, x0 + eqW, mid - gapY, r);
+    stroke(pixels, w, h, x0, mid + gapY, x0 + eqW, mid + gapY, r);
+    return pixels;
+  }
+
+  const H = unit * 0.24;
+  const xW = H * 0.8;
+  const eqW = H * 0.6;
+  const gap = H * 0.34;
+  const total = xW * 2 + eqW + gap * 2;
+  const left = (w - total) / 2;
+  const top = mid - H / 2;
+  const bottom = mid + H / 2;
+
+  // x
+  stroke(pixels, w, h, left, top, left + xW, bottom, r);
+  stroke(pixels, w, h, left + xW, top, left, bottom, r);
+
+  // =
+  const eqX = left + xW + gap;
+  const spread = H * 0.22;
+  stroke(pixels, w, h, eqX, mid - spread, eqX + eqW, mid - spread, r);
+  stroke(pixels, w, h, eqX, mid + spread, eqX + eqW, mid + spread, r);
+
+  // x
+  const lastX = eqX + eqW + gap;
+  stroke(pixels, w, h, lastX, top, lastX + xW, bottom, r);
+  stroke(pixels, w, h, lastX + xW, top, lastX, bottom, r);
+
+  return pixels;
+}
+
 Deno.serve(async (req) => {
   try {
     const url = new URL(req.url);
@@ -178,7 +238,8 @@ Deno.serve(async (req) => {
     const w = Math.max(16, Math.min(2400, Math.round(requestedW)));
     const h = Math.max(16, Math.min(2400, Math.round(requestedH)));
 
-    const png = await encodePng(drawMark(w, h), w, h);
+    const mark = url.searchParams.get('mark');
+    const png = await encodePng(mark ? drawName(w, h, mark === 'equals') : drawMark(w, h), w, h);
 
     return new Response(png, {
       headers: {

@@ -92,8 +92,11 @@ Deno.serve(async (req) => {
         }
       }
     } : isClimate ? {
-      name: "Together We Can Change Climate — Record of the Time",
-      short_name: "Climate Record",
+      // The name on the home screen is the mark itself. A phone that saves this page gets
+      // "x = x" under the icon, which is the one place a reader carries the record around
+      // with them — so it should say what the record says, not describe it.
+      name: "x = x — Record of the Time",
+      short_name: "x = x",
       description: "A public record of climate emergencies and the positive actions that work — shared openly, internationally.",
       start_url: "/TogetherChangeClimate",
       scope: "/",
@@ -105,9 +108,9 @@ Deno.serve(async (req) => {
       // card while telling the phone it was a 192 and a 512 PNG — a phone that checks, and
       // Android does, then has no icon to put on the Home Screen.
       icons: [
-        { src: "/api/functions/serveClimateIcon?size=192", sizes: "192x192", type: "image/png", purpose: "any" },
-        { src: "/api/functions/serveClimateIcon?size=512", sizes: "512x512", type: "image/png", purpose: "any" },
-        { src: "/api/functions/serveClimateIcon?size=512", sizes: "512x512", type: "image/png", purpose: "maskable" }
+        { src: "/api/functions/serveClimateIcon?size=192&mark=full", sizes: "192x192", type: "image/png", purpose: "any" },
+        { src: "/api/functions/serveClimateIcon?size=512&mark=full", sizes: "512x512", type: "image/png", purpose: "any" },
+        { src: "/api/functions/serveClimateIcon?size=512&mark=full", sizes: "512x512", type: "image/png", purpose: "maskable" }
       ],
       categories: ["education", "news"],
       shortcuts: [
@@ -116,14 +119,14 @@ Deno.serve(async (req) => {
           short_name: "Map",
           description: "Where the record is being read",
           url: "/ClimateMap",
-          icons: [{ src: "/api/functions/serveClimateIcon?size=192", sizes: "192x192", type: "image/png" }]
+          icons: [{ src: "/api/functions/serveClimateIcon?size=192&mark=full", sizes: "192x192", type: "image/png" }]
         },
         {
           name: "Global Impact",
           short_name: "Impact",
           description: "Reach by country and nation",
           url: "/ClimateImpact",
-          icons: [{ src: "/api/functions/serveClimateIcon?size=192", sizes: "192x192", type: "image/png" }]
+          icons: [{ src: "/api/functions/serveClimateIcon?size=192&mark=full", sizes: "192x192", type: "image/png" }]
         }
       ]
     } : {
