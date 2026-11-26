@@ -135,6 +135,21 @@ export default function JanineAgenda() {
         ))}
       </ol>
 
+      {/* ── ONE NUMBER, TWO FIGURES ───────────────────────────────────────────────
+          Swept on 26 November, three days before the hour. Her own description of the
+          initiative — the one quoted in her words on the cartoon room's share lines and in
+          the small gestures band — gives 5.86 billion smartphones. The draft agenda gives
+          5.8. Both are printed as they came, and neither is quietly corrected here, because
+          the alternative is a record that edits a host's figure for her and then cannot say
+          which number she actually said. It is hers to settle; when she does, this line goes
+          and the agenda follows. */}
+      <p className="mt-3 max-w-[54ch] text-[12px] leading-relaxed text-record-muted lg:text-[13px]">
+        One number, two figures. Her own description of the initiative gives 5.86 billion
+        smartphones; the draft agenda gives 5.8. Both are printed as they came and neither is
+        corrected here: the figure is hers to settle, and when she settles it this line goes
+        and the agenda follows.
+      </p>
+
       {/* ── THE TWO LINES AT THE TOP OF HER EMAIL THAT NOBODY READS ─────────────
           "Duration of the recorded Zoom meeting: 1 hour." Both halves matter. The hour is
           the budget every speaker is working to. And a recorded session is a fact about
