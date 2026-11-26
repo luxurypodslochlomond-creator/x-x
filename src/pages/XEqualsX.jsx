@@ -51,10 +51,14 @@ export default function XEqualsX() {
 
       <XEqualsXOpening />
 
-      {/* The whole principle in one line of signal — the three things the record will not do. */}
-      <div className="covenant-signal">
-        <p>Equal standard · no ranking · no paid priority</p>
-      </div>
+      {/* ── THE YELLOW BAND THAT SAID THE HERO AGAIN ─────────────────────────────────
+          It read "Equal standard · no ranking · no paid priority", four hundred pixels
+          under a hero that already says, in bold, "No algorithm ranks them. No money
+          amplifies them … every entry held to the same standard". That is the same three
+          facts twice in the first screen — the page saying it again because it did not
+          trust the first time. It is gone; the three rules still appear where they do
+          work, in the promise list and in the record's own commitments. Brian, 26
+          November: "chunky ... think got duplications". */}
 
       {/* The band that used to carry her name, her decades and her quotation. She has her own
           page for that, and this page is about a principle rather than about a person — so the

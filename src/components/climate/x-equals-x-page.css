@@ -493,11 +493,27 @@
   letter-spacing: .18em !important;
   color: rgb(var(--record-mark));
 }
-/* RecordBand supplies spacing for an open page, not for a band already in a card. */
-#x-equals-x .covenant-card > .covenant-commitments {
+/* ── A CARD IS ONE OBJECT, WHATEVER IS PUT IN IT ────────────────────────────────
+   Brian, 26 November: "why x=x page not feel still quite right ... chunky ... think got
+   duplications". One of the faults was structural and it was this: two of the five cards
+   are built out of the record's own bands (the checkable one and the commitments one), and
+   a band carries a forty-pixel margin and a hairline rule at its head — which is right on
+   an open page and wrong inside a card that is already ruled and already has a head. The
+   commitments card had been patched by hand and the checkable one had not, so one card in
+   five sat lower and looser than its neighbours for no reason a reader could name.
+   The rule applies to every band put inside a card now, so the five cards read as one
+   object repeated rather than two objects and three. */
+#x-equals-x .covenant-card > section {
   margin: 0;
   padding-top: 0;
   border-top: 0;
+}
+/* And the band's own label wears the card's kicker, because a card cannot have two
+   different small-caps labels in two different inks on one plate. */
+#x-equals-x .covenant-card > section > div:first-child > p {
+  font-size: .6875rem;
+  letter-spacing: .18em;
+  color: rgb(var(--record-mark));
 }
 
 /* ── THE THREE TERMS ────────────────────────────────────────────────────────────
