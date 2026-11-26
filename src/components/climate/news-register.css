@@ -16,7 +16,7 @@
 }
 .news-register--crisis { border-left-color: rgb(var(--record-red)); }
 .news-register--solution { border-left-color: rgb(var(--record-botanical)); }
-.news-register--action { border-left-color: rgb(var(--record-ochre)); }
+.news-register--action { border-left-color: rgb(var(--record-action)); }
 
 .news-register-head {
   display: flex;
@@ -35,7 +35,7 @@
 }
 .news-register--crisis .news-register-kind { color: rgb(var(--record-red)); }
 .news-register--solution .news-register-kind { color: rgb(var(--record-botanical)); }
-.news-register--action .news-register-kind { color: rgb(var(--record-ochre)); }
+.news-register--action .news-register-kind { color: rgb(var(--record-action)); }
 
 .news-register-id {
   font-size: 10px;

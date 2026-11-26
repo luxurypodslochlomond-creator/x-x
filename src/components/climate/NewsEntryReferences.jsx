@@ -19,7 +19,7 @@ import RecordCitation from '@/components/climate/RecordCitation';
 // three things are on the page, and they are on it without being asked for.
 export default function NewsEntryReferences({ entry, citation }) {
   return (
-    <section className="news-references" aria-label="Where this comes from, and how to cite it">
+    <section id="sources" className="news-references" aria-label="Where this comes from, and how to cite it">
       <p className="news-references-head">
         Where this comes from <span aria-hidden="true">·</span> and how to cite it
       </p>

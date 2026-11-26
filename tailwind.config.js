@@ -35,6 +35,7 @@ module.exports = {
           ocean: 'rgb(var(--record-ocean) / <alpha-value>)',
           botanical: 'rgb(var(--record-botanical) / <alpha-value>)',
           ochre: 'rgb(var(--record-ochre) / <alpha-value>)',
+          action: 'rgb(var(--record-action) / <alpha-value>)',
           clay: 'rgb(var(--record-clay) / <alpha-value>)',
           'light-signal': 'rgb(var(--record-light-signal) / <alpha-value>)',
           'map-crisis': 'rgb(var(--record-map-crisis) / <alpha-value>)',

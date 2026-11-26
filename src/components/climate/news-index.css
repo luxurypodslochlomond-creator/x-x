@@ -51,20 +51,33 @@
 .news-stamp {
   display: inline-flex;
   align-items: center;
-  padding: .34rem .62rem;
+  padding: 0 0 .18rem;
   border-radius: 0;
+  border-bottom: 2px solid currentColor;
+  background: none;
   font-family: var(--font-heading);
-  font-size: .7rem;
+  font-size: .68rem;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: .16em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
 }
-.news-stamp-emergency { background: rgb(var(--record-red)); color: rgb(var(--record-paper)); }
-.news-stamp-milestone { background: rgb(var(--record-botanical)); color: rgb(var(--record-paper)); }
-.news-stamp-initiative { background: rgb(var(--record-ochre)); color: rgb(var(--record-paper)); }
+.news-stamp-emergency { color: rgb(var(--record-red)); }
+.news-stamp-milestone { color: rgb(var(--record-botanical)); }
+.news-stamp-initiative { color: rgb(var(--record-action)); }
 .news-emergency { color: rgb(var(--record-red)); }
+
+/* ── ONE WORD, ONE DOOR ────────────────────────────────────────────────────────
+   Brian, 26 November: "cant click corrected … or single source or new york times is this
+   wrong bro? … needs to be connected to relevant place". He is right: a label that cannot be
+   followed is decoration, and decoration on this record is a lie about having proof. Each
+   word in the line under an entry is now a link to the one place it names, and the anchor
+   opens on that place rather than at the top of the page. */
+.news-standing { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .7rem; }
+.news-standing a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.news-standing a:hover { color: rgb(var(--record-red)); }
+.news-standing-corrected { color: rgb(var(--record-red)); font-weight: 700; }
 
 /* ── SO A READER CAN SEE WHERE ONE ENTRY ENDS ─────────────────────────────────
    Brian, 26 November: "should be subtly background colour so can see separation from
@@ -77,7 +90,7 @@
    Wire is a register, and a register has edges, not soft cards. */
 .news-row[data-kind="emergency"] { background: rgb(var(--record-red) / .1); box-shadow: inset 6px 0 0 rgb(var(--record-red)); border-radius: 0; }
 .news-row[data-kind="milestone"] { background: rgb(var(--record-botanical) / .11); box-shadow: inset 6px 0 0 rgb(var(--record-botanical)); border-radius: 0; }
-.news-row[data-kind="initiative"] { background: rgb(var(--record-ochre) / .12); box-shadow: inset 6px 0 0 rgb(var(--record-ochre)); border-radius: 0; }
+.news-row[data-kind="initiative"] { background: rgb(var(--record-action) / .1); box-shadow: inset 6px 0 0 rgb(var(--record-action)); border-radius: 0; }
 .news-lead-plate { display: block; margin-top: 1rem; overflow: hidden; border-radius: 15px; background: rgb(var(--record-paper)); }.news-lead-plate img { display: block; width: 100%; max-height: 32rem; object-fit: contain; }
 .news-lead-heading { margin: 1.1rem 0 0; max-width: 29ch; font-size: clamp(1.85rem,4vw,3.2rem); font-weight: 700; line-height: 1.08; letter-spacing: -.035em; text-transform: none; }.news-lead-heading a,.news-row-heading a { display: block; color: inherit; text-decoration: none; text-wrap: pretty; }
 .news-lead-standfirst { margin: 1rem 0 0; font-size: 15px; line-height: 1.65; color: rgb(var(--record-ink)/.8); }.news-lead-meta { display: flex; flex-wrap: wrap; gap: .35rem .8rem; margin-top: 1rem; font-size: 12px; line-height: 1.5; color: rgb(var(--record-muted)); }.news-credit { margin: .5rem 0 0; font-size: 11px; line-height: 1.5; color: rgb(var(--record-muted)); }

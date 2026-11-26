@@ -27,6 +27,18 @@ export default function ClimateWireEntry() {
     return () => { cancelled = true; };
   }, [id]);
 
+  // ── THE DOOR OPENS ON THE THING IT NAMES ──────────────────────────────────────
+  // "Corrected" and "Single source" on a Wire entry now point at the correction and at the
+  // source block on this page. React Router does not scroll to a hash, and the shell sends
+  // every route change to the top — so without this the link would land a reader at the top
+  // of the account and leave them hunting for the sentence they clicked, which is exactly
+  // the fault Brian named. Once the entry is on the page, its anchor is scrolled to.
+  useEffect(() => {
+    const id = window.location.hash.replace('#', '');
+    if (!entry || !id) return;
+    document.getElementById(id)?.scrollIntoView({ block: 'start' });
+  }, [entry]);
+
   const citation = entry
     ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — an entry on the record, ${entry.when_label}. ${recordAddress()}`
     : '';

@@ -323,8 +323,18 @@ button:focus-visible {
     --cartoon-mint: 197 231 205;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
-    --record-botanical: 63 104 73;
+    /* Solutions wear goal 13's own green. The UN publishes a colour for each of the goals
+       and for nothing else, so the one place this palette can borrow honestly is here: a
+       Solution IS climate action, and the green a reader has met on goal 13's page is the
+       green of something that works on this one. */
+    --record-botanical: 63 126 68;
     --record-ochre: 155 111 40;
+    /* Actions wore the ochre, and Brian said on 26 November it was "wrong colour not us".
+       There is no UN colour for a crisis, a solution or an action — the UN colours the
+       seventeen goals — so inventing UN provenance for a fourth ink would be exactly the
+       bullshit this record refuses. Actions wear the record's own ocean instead: a third
+       ink already in this palette, unmistakable for a warning or for a result. */
+    --record-action: 15 95 122;
     --record-clay: 166 90 68;
     --record-map-crisis: 255 99 83;
     /* The map's signals are the record's own pigments, lifted for a dark plate: solutions
@@ -440,8 +450,18 @@ button:focus-visible {
     --cartoon-mint: 197 231 205;
     --record-earth: 36 29 22;
     --record-ocean: 15 95 122;
-    --record-botanical: 63 104 73;
+    /* Solutions wear goal 13's own green. The UN publishes a colour for each of the goals
+       and for nothing else, so the one place this palette can borrow honestly is here: a
+       Solution IS climate action, and the green a reader has met on goal 13's page is the
+       green of something that works on this one. */
+    --record-botanical: 63 126 68;
     --record-ochre: 155 111 40;
+    /* Actions wore the ochre, and Brian said on 26 November it was "wrong colour not us".
+       There is no UN colour for a crisis, a solution or an action — the UN colours the
+       seventeen goals — so inventing UN provenance for a fourth ink would be exactly the
+       bullshit this record refuses. Actions wear the record's own ocean instead: a third
+       ink already in this palette, unmistakable for a warning or for a result. */
+    --record-action: 15 95 122;
     --record-clay: 166 90 68;
     --record-map-crisis: 255 99 83;
     /* The map's signals are the record's own pigments, lifted for a dark plate: solutions

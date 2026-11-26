@@ -4,7 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import ArtworkShareButton from '@/components/climate/ArtworkShareButton';
 import NewsKindStamp from '@/components/climate/NewsKindStamp';
-import { verificationOf, verificationNoteOf } from '@/components/climate/verification';
+import NewsEntryStanding from '@/components/climate/NewsEntryStanding';
 import { recordAddress } from '@/components/climate/recordAddress';
 export default function NewsLead({ entry }) {
   const to = `/ClimateWireEntry/${entry.id}`;
@@ -15,7 +15,7 @@ export default function NewsLead({ entry }) {
       <h2 className="news-lead-heading"><Link to={to}>{entry.headline}</Link></h2>
       <p className="news-lead-standfirst">{entry.what_changed}</p>
       {entry.replicable && <div className="news-lead-use"><h3>What others can use</h3><p>{entry.replicable}</p></div>}
-      <p className="news-lead-meta">{entry.where_label && <span>{entry.where_label}</span>}<span>Source · {entry.source_name}</span><span title={verificationNoteOf(entry)}>{verificationOf(entry).label}</span>{entry.correction_note && <span className="news-emergency">Corrected</span>}</p>
+      <NewsEntryStanding entry={entry} className="news-lead-meta" />
       {!entry.image_url && entry.image_credit && <p className="news-credit">Picture credited, not held here · {entry.image_credit}</p>}
       <div className="news-lead-actions"><Link to={to} className="news-read">Full account <ArrowUpRight size={17} /></Link><ShareCardButton entry={entry} compact previewFirst />{entry.image_url && <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} link={recordAddress(to)} />}</div>
     </div>
