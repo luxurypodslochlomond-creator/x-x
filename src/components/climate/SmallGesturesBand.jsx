@@ -70,6 +70,39 @@ export default function SmallGesturesBand() {
           </Link>
         ))}
       </div>
+      {/* ── WHERE THE ARGUMENT HAS ALREADY BEEN PROVED, IN THE SAME CITY ────────────
+          A claim that small repeated gestures build something vast needs a proof, or it is
+          just a nice sentence. The proof is Benin's, and the biennial is held in the city that
+          built it: the Walls of Benin — Iya — which Guinness records as the longest earthworks
+          of the pre-mechanical era. Archaeologist Patrick Darling estimated their total length
+          at around 16,000 km in 1977, in a mosaic of hundreds of interconnected boundaries,
+          with ramparts reaching some twenty metres; the Metropolitan Museum dates their
+          construction from roughly the seventh to the fourteenth century.
+
+          Every figure here is attributed rather than asserted, and the 16,000 km is named as
+          Darling's estimate rather than as a measurement, because on this record a number
+          without its source is a rumour with a typeface. Nothing is added about who built it
+          beyond the plain fact that no single act built it. */}
+      <p
+        className="mb-3 max-w-[62ch] text-[12px] leading-relaxed text-record-ink/85 lg:text-[13.5px]"
+        style={{ fontFamily: 'var(--font-reading)' }}
+      >
+        And it has already been proved once, in the city this biennial is held in. The Walls of
+        Benin — Iya — are recorded by Guinness as the longest earthworks of the pre-mechanical
+        era: archaeologist Patrick Darling estimated their total length at around 16,000 km in
+        1977, in a mosaic of hundreds of interconnected boundaries, with ramparts reaching some
+        twenty metres, built between roughly the seventh and fourteenth centuries. Nobody built
+        that in one act. It is one basket of earth, repeated until it became the longest
+        structure of the pre-mechanical world — which is exactly Janine’s argument, made in Edo
+        soil several centuries before anyone wrote it down.
+      </p>
+      <p className="mb-3 text-[10px] font-mono leading-relaxed text-[#5a5246]">
+        Sources: <a className="underline" href="https://www.guinnessworldrecords.com/world-records/97959-longest-earthworks-of-the-pre-mechanical-era" target="_blank" rel="noopener noreferrer">Guinness World Records</a>
+        {' · '}
+        <a className="underline" href="https://www.metmuseum.org/perspectives/benin-city-earthworks" target="_blank" rel="noopener noreferrer">The Metropolitan Museum of Art</a>
+        {' · '}
+        <a className="underline" href="https://www.theguardian.com/cities/2016/mar/18/story-of-cities-5-benin-city-edo-nigeria-mighty-medieval-capital-lost-without-trace" target="_blank" rel="noopener noreferrer">The Guardian, on Benin City</a>
+      </p>
       <p className="text-[10px] font-mono text-[#5a5246] leading-relaxed mt-3">
         From Janine Selendy's own list for the record. Each one opens the wall, where the real
         cartoonists' drawings hang. Nothing on that wall was drawn by a machine.
