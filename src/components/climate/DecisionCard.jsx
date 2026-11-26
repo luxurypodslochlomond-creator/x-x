@@ -4,14 +4,18 @@ import KeeperEntryText from '@/components/climate/keeper/KeeperEntryText';
 
 // One entry, as a keeper meets it: what is claimed, where it came from, and the two answers
 // that exist. Nothing else on the card, because her whole job in this room is yes or not yet.
+// A custodian's queue names the same three kinds a reader meets, in the same three inks:
+// a Solution is the record's botanical green, a Crisis its red, an Action its ocean. The
+// old map gave Action the retired orange and Groups the Solution green, so the room where
+// entries are judged was the one room that disagreed with the record about colour.
 const TONE = {
-  Solution: 'bg-[#1e3a2b] text-[#f4efe4]',
-  Crisis: 'bg-[#b3261e] text-[#f4efe4]',
-  Action: 'bg-[#e2602a] text-[#141210]',
-  Wire: 'bg-[#141210] text-[#f4efe4]',
-  Groups: 'bg-[#1e3a2b] text-[#f4efe4]',
-  Music: 'bg-[#6b6258] text-[#f4efe4]',
-  Comment: 'bg-[#efe7d6] text-[#141210] border border-[#141210]',
+  Solution: 'bg-record-botanical text-record-paper',
+  Crisis: 'bg-record-red text-record-paper',
+  Action: 'bg-record-action text-record-paper',
+  Wire: 'bg-record-ink text-record-paper',
+  Groups: 'bg-record-ink text-record-paper',
+  Music: 'bg-record-muted text-record-paper',
+  Comment: 'bg-record-bone text-record-ink border border-record-ink',
 };
 
 // The three answers a checker can give, in the keeper's words — the same three that were

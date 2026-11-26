@@ -33,11 +33,11 @@ export default function RelatedTriangle({ category, items = [], actions = [], cu
           <button
             key={s.id}
             onClick={() => onOpenItem?.(s)}
-            className="w-full flex items-center gap-2.5 p-2.5 bg-[#f7f1e5] border border-[#1e3a2b]/40 hover:border-[#1e3a2b] active:scale-[0.98] transition-all text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 bg-record-paper border border-record-botanical/40 hover:border-record-botanical active:scale-[0.98] transition-all text-left"
           >
-            <Sprout className="w-4 h-4 text-[#1e3a2b] flex-shrink-0" />
+            <Sprout className="w-4 h-4 text-record-botanical flex-shrink-0" />
             <div className="flex-1 min-w-0">
-              <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#1e3a2b] block">Solution</span>
+              <span className="text-[9px] font-black font-mono uppercase tracking-widest text-record-botanical block">Solution</span>
               <span className="text-[11px] font-mono font-bold text-[#141210] block truncate">{s.title}</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-[#5a5246] flex-shrink-0" />
@@ -61,11 +61,11 @@ export default function RelatedTriangle({ category, items = [], actions = [], cu
           <button
             key={a.id}
             onClick={() => onOpenAction?.(a)}
-            className="w-full flex items-center gap-2.5 p-2.5 bg-[#f7f1e5] border border-[#141210]/40 hover:border-[#141210] active:scale-[0.98] transition-all text-left"
+            className="w-full flex items-center gap-2.5 p-2.5 bg-record-paper border border-record-action/40 hover:border-record-action active:scale-[0.98] transition-all text-left"
           >
-            <Hand className="w-4 h-4 text-[#141210] flex-shrink-0" />
+            <Hand className="w-4 h-4 text-record-action flex-shrink-0" />
             <div className="flex-1 min-w-0">
-              <span className="text-[9px] font-black font-mono uppercase tracking-widest text-[#141210] block">Action</span>
+              <span className="text-[9px] font-black font-mono uppercase tracking-widest text-record-action block">Action</span>
               <span className="text-[11px] font-mono font-bold text-[#141210] block truncate">{a.title}</span>
             </div>
             <ArrowRight className="w-3.5 h-3.5 text-[#5a5246] flex-shrink-0" />
