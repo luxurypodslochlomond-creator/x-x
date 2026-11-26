@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import useKeeper from '@/components/climate/useKeeper';
+import { goalByNumber } from '@/components/climate/cartoons/cartoonGoals';
 
 // The keeper's strip on the wall's own page. Nobody else ever sees it: the server refuses
 // the list and the decision to anyone without the record's keys, and the component simply
@@ -57,6 +58,16 @@ export default function CartoonsWaiting() {
                   {item.artist_name}
                   {item.origin ? ` · ${item.origin}` : ''}
                 </p>
+                {/* ── WHICH GOAL IT WAS OFFERED FOR ──────────────────────────────
+                    A drawing sent in from a goal's own panel is filed against that goal, and
+                    the custodian deciding on it has to be able to see that: it is the one claim
+                    the sender made about their own work, and it is the reason the drawing will
+                    come back to that goal once it stands. */}
+                {item.goal && goalByNumber(item.goal) && (
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-record-red">
+                    Offered for goal {item.goal} · {goalByNumber(item.goal).name}
+                  </p>
+                )}
                 {item.for_line && (
                   <p className="mt-1 text-[13px] leading-[1.5] text-record-ink" style={reading}>{item.for_line}</p>
                 )}
