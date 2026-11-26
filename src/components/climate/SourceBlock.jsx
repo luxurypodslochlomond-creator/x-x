@@ -29,7 +29,7 @@ function fmtAccessed(d) {
 
 const Row = ({ label, children }) => (
   <div className="grid grid-cols-[74px_1fr] gap-2 items-baseline">
-    <span className="text-[11px] font-black font-mono uppercase tracking-widest text-record-ocean">{label}</span>
+    <span className="source-row-label text-[11px] font-black font-mono uppercase tracking-widest text-record-ocean">{label}</span>
     <span className="text-[13px] lg:text-[14px] font-body text-record-ink leading-relaxed min-w-0">{children}</span>
   </div>
 );
@@ -39,7 +39,7 @@ export default function SourceBlock({ sourceName, sourceUrl, sourceAuthor, sourc
 
   return (
     <div className="mt-5 bg-[#f7f1e5] border-2 border-[#141210] p-4">
-      <p className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-3">Where this comes from</p>
+      <p className="source-block-head text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] mb-3">Where this comes from</p>
       <div className="space-y-1.5">
         {sourceName && (
           <Row label="Source">
