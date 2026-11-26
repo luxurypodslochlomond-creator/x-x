@@ -2,11 +2,25 @@
 .record-field { --record-cover: var(--record-cover-desktop); }
 @media (max-width: 639px) {
   .climate-record.record-field { --record-cover: var(--record-cover-mobile); }
+  /* ── THE PAINTING HAS TO LAST AS LONG AS THE OPENING DOES ─────────────────────
+     Brian, 26 November: "our cool as fuck painting for record gone from mobile". It was
+     not gone and no rule removed it — the file is intact and the book is transparent. What
+     went wrong is height: the painting was pinned to exactly one viewport (100lvh), so on a
+     phone it stopped partway down the opening and the rest of the voice arrived on flat
+     black. A reader scrolling that sees a picture that "ends" and reads it as a picture that
+     was never there.
+
+     So the ground is given room past the opening — 130lvh — and dissolved into the record's
+     own ink at its foot instead of being cut with a straight edge. The colour behind the
+     fade is the same ink the record already stands on, so the dissolve has nothing to show
+     through. It is still one still image, promoted once, costing no scroll repaint. */
   .climate-record.record-field > .record-environment {
     inset: 0 0 auto;
-    height: 100vh;
-    height: 100lvh;
+    height: 130vh;
+    height: 130lvh;
     background-color: rgb(var(--record-ink));
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
   }
   /* Large viewport height stays still as the browser toolbar opens and closes. */
   .record-environment .record-sky { display: none; }
