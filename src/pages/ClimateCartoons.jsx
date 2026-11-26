@@ -6,8 +6,7 @@ import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand
 import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
-import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
-import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
+import CartoonLongRead from '@/components/climate/cartoons/CartoonLongRead';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
@@ -57,6 +56,14 @@ export default function ClimateCartoons() {
 
         {/* 1 · THE DRAWINGS. Everything after them is about them. */}
         <PressWall />
+
+        {/* ── 2 · WHY THEY ARE HERE, IN THREE LINES ───────────────────────────────────
+            This sat four screens down, after the event band, the programme, the book and
+            the whole goals ledger — so the reason the room exists was buried under the
+            record's apparatus. It is thirty words and it is the answer to the only question
+            a visitor has at the end of a wall: why am I looking at drawings on a climate
+            record? Straight after the drawings is where that question is actually asked. */}
+        <CartoonWhy />
         {/* ── 2 · THE MACHINE'S HAND IS NOT IN THIS ROOM ──────────────────────────
             Brian, 25 November, twice: "you sure the cartoonists and Janine want to see base 1
             cartoons bro?" and then "can take out base 1 drawings okesse". He was right and I
@@ -86,17 +93,13 @@ export default function ClimateCartoons() {
           <CartoonAnthology />
         </div>
 
-        {/* 5 · THE READING. The count first, because a cartoonist reads the count before the
-            essay; the argument next; the lineage last, because it is the longest look away
-            from the wall and the wall is why anyone came. Human work throughout — no
-            machine-drawn fiction in this room, because a wall of real hands does not need
-            pictures nobody drew. */}
-        <CartoonGoals />
-        <CartoonWhy />
-        <CartoonWorld />
-
-        {/* 6 · WHOSE WORK THIS IS. */}
+        {/* 5 · WHOSE WORK THIS IS. */}
         <CartoonSources />
+
+        {/* 6 · THE ARGUMENT, one tap away — the goals counted against the wall, and the
+            cartoonists who drew power before it. Kept whole; see CartoonLongRead for why
+            it is folded rather than deleted, and for the one line that puts it back. */}
+        <CartoonLongRead />
 
         {/* ── 7 · THE SET LIST, WHICH WAS BUILT AND NEVER MOUNTED ─────────────────────
             Brian, 26 November: "at least make coolasfuck easy to get to."
