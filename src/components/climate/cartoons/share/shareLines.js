@@ -99,6 +99,12 @@ export function shareLines(count) {
       text: `${wall(count)} on one wall, from Africa, Asia and beyond, gathered for the 8th CartoonAFRICA International Biennial. Every drawing keeps the name of the hand that made it, and nothing is ranked or for sale. Free, no account: ${room}`,
     },
     {
+      id: 'status',
+      where: 'WhatsApp status or Stories · the shortest line there is',
+      note: 'For the strip of text that disappears in a day: no hashtags, no ask, one address.',
+      text: `${wall(count)}, every one signed by the hand that made it. Free, no account: ${room}`,
+    },
+    {
       id: 'caption',
       where: 'Instagram or Facebook',
       note: 'Written as a caption: the first line carries the whole thing for whoever does not read on.',
@@ -120,7 +126,20 @@ export function shareLines(count) {
       id: 'email',
       where: 'One email to one person',
       note: 'For a colleague, a funder or a host: short, and the only ask is that they look.',
+      subject: 'A wall of climate cartoons, every one credited',
       text: `Hello,\n\nA wall of climate cartoons is open, and it will stay open after the festival it was gathered for.\n\nIt holds ${count ? count : 'a body of'} drawings — from CEEW's What On Earth! series in India, from cartoonists in Nigeria and the UK, and from the 8th CartoonAFRICA International Biennial at the National Museum in Benin City. Each drawing carries the name of the hand that made it, the credit that holds it, and a link to where it was first published. Nothing is ranked and nothing is for sale.\n\nJanine Selendy's workshop on climate and collective action is Sunday 29 November, 3pm West Africa · 2pm UK, online.\n\nThe room: ${room}\nThe hour, as it is set down: ${HOUR_ADDRESS}\n\nIf you draw, the door on the room's own page takes a drawing and hangs it with your name on it.\n\nWith thanks,\n`,
+    },
+    {
+      id: 'sms',
+      where: 'A text message',
+      note: 'Short enough to arrive whole, and it still says whose hands made the drawings.',
+      text: `${wall(count)}, each signed by the hand that made it. Free, no account: ${room}`,
+    },
+    {
+      id: 'notice',
+      where: 'A printed notice · a studio wall, a classroom, a shop window',
+      note: 'No link to tap, so it gives the address to say out loud and the way to walk to it. Print it as it stands.',
+      text: `CLIMATE CARTOONS — A WALL, FREE TO READ\n\nDrawings from the 8th CartoonAFRICA International Biennial at the National Museum, Benin City, 28–30 November 2026, and from CEEW's What On Earth! series.\n\nEvery drawing carries the name of the hand that made it. Nothing is ranked. Nothing is sold.\n\nRead it at ${room.replace(/^https?:\/\//, '')} — or type that address and tap the room of cartoons.\n\nJanine Selendy's workshop on climate change and the power of collective actions and creative interventions: Sunday 29 November, 3pm West Africa · 2pm UK, online.`,
     },
   ];
 }

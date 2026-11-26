@@ -62,8 +62,10 @@ export default function ClimateCartoonsShare() {
       </div>
 
       <p className="mt-3 text-[13.5px] leading-relaxed text-record-ink/90 lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
-        Copy whichever one fits, and change the words to your own if you would rather. They are written
-        plainly on purpose: what the wall is, whose hands are on it, and where to look.
+        Copy whichever one fits, or tap the app it is going to and send it — the words open already in
+        it, with the address on the end. Change them to your own if you would rather: they are written
+        plainly on purpose, so what the wall is, whose hands are on it and where to look all survive
+        being forwarded by somebody who never read this page.
       </p>
 
       <GroupHead title="What this is · Janine Selendy’s description" note="Her words, unchanged, with her name on them." />
@@ -74,23 +76,16 @@ export default function ClimateCartoonsShare() {
         note="For CEEW and anyone carrying the three days, and the hour on Sunday that is open online."
       />
       {event.map((line) => (
-        <ShareWord key={line.id} where={line.where} note={line.note} text={line.text} />
+        <ShareWord key={line.id} where={line.where} note={line.note} text={line.text} subject={line.subject} />
       ))}
 
       <GroupHead title="The room · the wall itself" note="For anyone you would rather send straight to the drawings." />
       {room.map((line) => (
-        <ShareWord key={line.id} where={line.where} note={line.note} text={line.text} />
+        <ShareWord key={line.id} where={line.where} note={line.note} text={line.text} subject={line.subject} />
       ))}
 
-      <section className="mt-7 border-t-2 border-record-ink/25 pt-4">
-        <div className="flex items-start justify-between gap-3">
-          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-record-red">If you only have one line</p>
-          <CopyLine text={ONE_LINE} label="Copy" />
-        </div>
-        <p className="mt-2 text-[13.5px] leading-relaxed text-record-ink/90 lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
-          {ONE_LINE}
-        </p>
-      </section>
+      <GroupHead title="If you only have one line" note="One sentence, for a bio, a sign-off, or a reply to somebody asking what this is." />
+      <ShareWord where="One line · anywhere" text={ONE_LINE} />
     </ClimateRecordShell>
   );
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import CopyLine from '@/components/climate/CopyLine';
+import ShareTargets from '@/components/climate/cartoons/share/ShareTargets';
 
 // One place's words: where they are going, the words themselves, and one button that takes
 // them. The note under the heading is the reason the words are shaped that way, kept short
 // so the page does not read as a manual.
-export default function ShareWord({ where, note, text }) {
+export default function ShareWord({ where, note, text, subject }) {
   return (
     <section className="mt-6 border-t border-record-ink/15 pt-4">
       <div className="flex items-start justify-between gap-3">
@@ -18,6 +19,7 @@ export default function ShareWord({ where, note, text }) {
       >
         {text}
       </p>
+      <ShareTargets text={text} subject={subject} />
     </section>
   );
 }
