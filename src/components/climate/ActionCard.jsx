@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand } from 'lucide-react';
 import SubjectMark from '@/components/climate/SubjectMark';
+import RecordKindStamp from '@/components/climate/RecordKindStamp';
 
 // Action types from Janine's spec — each gets its own glyph so the card reads at a glance
 const ACTION_TYPES = {
@@ -32,13 +33,16 @@ export default function ActionCard({ action }) {
       className="relative flex min-h-[110px] w-full flex-col border border-record-ink/30 border-t-4 border-t-record-action bg-record-paper text-left transition-transform duration-100 active:scale-95"
     >
       <div className="p-3 flex-1">
-        <div className="flex items-center gap-1.5 mb-1.5">
+        <div className="flex items-center gap-2 mb-1.5">
+          {/* The same stamp a solution and a crisis wear, so the three kinds are one
+              vocabulary rather than three labels in three different hands. */}
+          <RecordKindStamp kind="action" />
           {/* The record's own drawing of what the action is about, where a borrowed glyph
               used to sit: an action on water and a solution on water now wear the same mark. */}
           {action.category
             ? <SubjectMark subject={action.category} size={15} className="shrink-0" />
-            : <Icon className="h-3.5 w-3.5 text-record-red" />}
-          <span className="font-display text-xs font-bold uppercase tracking-wide text-record-clay">
+            : <Icon className="h-3.5 w-3.5 text-record-action" />}
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-record-muted">
             {meta.label}
           </span>
         </div>

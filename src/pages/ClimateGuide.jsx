@@ -47,9 +47,9 @@ const BAR = PRIMARY_NAV;
 
 const SEND = [
   {
-    label: 'Send an update',
+    label: 'Add to the record',
     to: createPageUrl('ClimateWire'),
-    what: 'A dated account with a source. Press Send an update at the top of The Wire.',
+    what: 'A dated account with a source. Press Add to the record at the top of The Wire.',
   },
   {
     label: 'Submit a solution, crisis, or action',
@@ -118,7 +118,7 @@ const FIRST = [
   {
     label: '3. Open The Wire',
     to: createPageUrl('ClimateWire'),
-    what: 'Dated, sourced entries. Press Send an update to see the submission form.',
+    what: 'Dated, sourced entries. Press Add to the record to see the submission form.',
   },
   {
     label: '4. Press Search',

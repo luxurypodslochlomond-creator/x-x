@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useRecordImage from '@/components/climate/useRecordImage';
 import SubjectMark from '@/components/climate/SubjectMark';
+import RecordKindStamp from '@/components/climate/RecordKindStamp';
 
 export default function SolutionCard({ item, lead = false }) {
   const isSolution = item.entry_type === 'solution';
@@ -14,7 +15,6 @@ export default function SolutionCard({ item, lead = false }) {
   // botanical green, crises signal red. Nothing added, one colour put back where it
   // belongs.
   const borderTone = isSolution ? 'border-t-record-botanical' : 'border-t-record-red';
-  const badgeTone = isSolution ? 'bg-record-botanical text-record-paper' : 'bg-record-red text-record-paper';
   const titleSize = lead ? 'lg:text-[23px]' : 'lg:text-lg';
   return (
     <Link
@@ -40,9 +40,7 @@ export default function SolutionCard({ item, lead = false }) {
             reader scanning the pictures can see two entries on the same subject before
             reading a word. */}
         <div className="mb-3 flex items-center gap-2">
-          <span className={['record-header-type inline-block px-2 py-1 text-xs uppercase', badgeTone].join(' ')}>
-            {isSolution ? 'Solution' : 'Crisis'}
-          </span>
+          <RecordKindStamp kind={isSolution ? 'solution' : 'crisis'} />
           {item.category && <SubjectMark subject={item.category} size={18} className="shrink-0" />}
         </div>
         <h3 className={['record-header-type text-[15px] uppercase leading-[1.4] sm:text-lg', titleSize].join(' ')}>

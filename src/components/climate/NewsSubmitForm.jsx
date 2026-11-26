@@ -118,9 +118,22 @@ export default function NewsSubmitForm({ onClose, onSent }) {
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
       <div className="sticky top-0 z-20 bg-[#efe7d6]/97 backdrop-blur border-b border-[#141210]/25">
         <div className="max-w-[500px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
+          {/* ── THE SHEET HAS A NAME, NOT AN EYEBROW ─────────────────────────────
+              Brian, 26 November: "send an update feels wrong what should say and when click
+              it its old and clunky". Two things were wrong. "Send an update" describes
+              editing a database, not adding something to a record somebody will read in
+              fifty years — it is "Add to the record", which is what it does. And the sheet
+              opened on a nine-pixel caption over a step counter, so a person who had just
+              decided to hand something over met a label instead of a title. It opens on the
+              title now, in the record's own face, with the step kept quiet underneath. */}
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] font-black font-mono uppercase tracking-[0.22em] text-[#b3261e]">Send an update</p>
-            <p className="text-[12px] font-mono text-[#141210] mt-0.5 truncate">
+            <h1
+              className="text-[19px] font-bold leading-tight text-[#141210]"
+              style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}
+            >
+              Add to the record
+            </h1>
+            <p className="mt-1 truncate font-mono text-[11px] uppercase tracking-[0.12em] text-[#5a5246]">
               {step + 1} of {STEPS.length} · {STEPS[step]}
             </p>
           </div>
@@ -286,7 +299,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
           ) : (
             <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors disabled:opacity-50">
               <Send className="w-4 h-4" />
-              {submitting ? 'Sending…' : 'Send an update'}
+              {submitting ? 'Filing…' : 'File it'}
             </button>
           )}
         </div>

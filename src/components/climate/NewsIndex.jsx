@@ -17,7 +17,7 @@ export default function NewsIndex({ entries, keptDay, loading, query, onQueryCha
   const firstLoad = loading && !entries.length;
   const searching = loading && entries.length > 0;
   return <section className="news-index" data-record-layout="compact" aria-labelledby="climate-news-title">
-    <header className="news-index-heading"><div><span className="news-eyebrow">The record · sourced updates</span><h1 id="climate-news-title">The Wire</h1></div><button type="button" className="news-send" onClick={onSubmit} aria-label="Send an update" title="Send an update"><Plus size={22} aria-hidden="true" /><span>Send an update</span></button></header>
+    <header className="news-index-heading"><div><span className="news-eyebrow">The record · sourced updates</span><h1 id="climate-news-title">The Wire</h1></div><button type="button" className="news-send" onClick={onSubmit} aria-label="Add to the record" title="Add an entry to the record"><Plus size={22} aria-hidden="true" /><span>Add to the record</span></button></header>
     <p className="news-index-intro">What is happening. Who is doing something about it. Where the evidence leads.</p>
     <NewsIndexTools query={query} onQueryChange={onQueryChange} kind={kind} onKindChange={onKindChange} verification={verification} onVerificationChange={onVerificationChange} />
     {searching && <p className="news-searching" role="status">Searching the Wire…</p>}
