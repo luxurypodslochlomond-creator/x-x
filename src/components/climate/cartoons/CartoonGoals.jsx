@@ -29,7 +29,12 @@ export default function CartoonGoals() {
   // Counted from the wall itself, not from the table above it. A goal is answered when a
   // drawing it names is actually standing on the wall today; a reading whose drawing has
   // been taken down does not get to keep answering the goal by itself.
-  const answered = (g) => g.drawings.some((d) => art[d.title]);
+  // A goal is answered by a drawing the record has read onto it, or by one the person who drew
+  // it offered for it from the goal's own panel. Both are drawings standing against the goal;
+  // the row keeps the two claims apart, and this count does not have to pretend one is the other.
+  const answered = (g) =>
+    g.drawings.some((d) => art[d.title]) ||
+    cartoons.some((c) => Number(c.goal) === g.n && c.title && !art[c.title]);
 
   const held = GOALS.filter(answered).length;
   const open = GOALS.length - held;
@@ -99,6 +104,7 @@ export default function CartoonGoals() {
             key={goal.n}
             goal={goal}
             art={art}
+            cartoons={cartoons}
             open={openGoal === goal.n}
             onToggle={() => setOpenGoal((current) => (current === goal.n ? null : goal.n))}
           />

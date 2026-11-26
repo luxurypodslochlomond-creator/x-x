@@ -193,6 +193,14 @@ export default async function (req: Request): Promise<Response> {
         }
       }
 
+      // ── THE GOAL IT WAS SENT FROM ───────────────────────────────────────────────
+      // A drawing offered from a goal's own panel carries that goal, so it comes back to
+      // that goal when a keeper has seen it. The number is only ever one of the seventeen:
+      // anything else is dropped rather than corrected into a goal the sender never named,
+      // because a wrong goal under somebody's drawing is a false fact about their work.
+      const askedGoal = Number(body?.goal);
+      const goal = Number.isInteger(askedGoal) && askedGoal >= 1 && askedGoal <= 17 ? askedGoal : undefined;
+
       // A workshop is a room full of people pressing send twice. One drawing, one card.
       const already = await base44.asServiceRole.entities.ClimateCartoon.filter({ image_url });
       const existing = (already?.items || already || [])[0];
@@ -210,6 +218,9 @@ export default async function (req: Request): Promise<Response> {
         image_url,
         crisis_id,
         crisis_title,
+        // Only present when it was sent from a goal: an empty field would otherwise claim
+        // the drawing was filed against nothing on purpose.
+        ...(goal ? { goal } : {}),
         machine_line: clean(body?.machine_line, 240),
         credit: clean(body?.credit, 120),
         source_url: String(body?.source_url || '').startsWith('https://') ? String(body.source_url).slice(0, 400) : '',

@@ -125,4 +125,9 @@ export const GOALS = [
 // A drawing the record has read onto no goal at all. Printed rather than forced: an honest
 // ledger admits what it could not place, and a room that puts every drawing somewhere is a
 // room that has stopped reading them.
+// One goal, by its number, for the places that hold only a number: a drawing sent in from a
+// goal's own panel carries that number and nothing else, so the name and the goal's page are
+// looked up from this table rather than copied into the record.
+export const goalByNumber = (n) => GOALS.find((g) => g.n === Number(n)) || null;
+
 export const UNPLACED = ['Hidden in Plain Sight'];

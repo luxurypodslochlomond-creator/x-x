@@ -1,7 +1,7 @@
 {
   "name": "ClimateCartoon",
   "type": "object",
-  "description": "A drawing given to the record for the room of cartoons, opened for Janine's workshop on 29 November 2026. Every drawing carries the same three things: who drew it, where it came from, and one line in the drawer's own words on what it is for. A drawing may also answer one entry on the record \u2014 the crisis it is looking at \u2014 and then the crisis and the drawing point at each other. A drawing sent in from the open page waits for a keeper: nothing goes on the wall because it was typed into a table with the word 'published' in its hand. The record's machine may add one line about what it can see in a drawing; that line is kept separately from the drawer's words, because a machine's reading is not a person's, and it is labelled as what it is. The sender's own email is kept so the record can reach them about their drawing, and is never shown to a reader.",
+  "description": "A drawing given to the record for the room of cartoons, opened for Janine's workshop on 29 November 2026. Every drawing carries the same three things: who drew it, where it came from, and one line in the drawer's own words on what it is for. A drawing may also answer one entry on the record \u2014 the crisis it is looking at \u2014 and then the crisis and the drawing point at each other. A drawing may also be offered for one of the seventeen goals, from that goal's own panel, and then it is filed against that goal in the sender's own word. A drawing sent in from the open page waits for a keeper: nothing goes on the wall because it was typed into a table with the word 'published' in its hand. The record's machine may add one line about what it can see in a drawing; that line is kept separately from the drawer's words, because a machine's reading is not a person's, and it is labelled as what it is. The sender's own email is kept so the record can reach them about their drawing, and is never shown to a reader.",
   "properties": {
     "title": {
       "type": "string",
@@ -34,6 +34,10 @@
     "crisis_title": {
       "type": "string",
       "description": "That entry's own headline, copied from the entry itself at the moment the drawing was offered, so the wall can name the crisis without a lookup and without the sender's words standing in for it."
+    },
+    "goal": {
+      "type": "number",
+      "description": "The one of the seventeen goals the person who sent the drawing says it is about \u2014 1 to 17, or empty. Their word, and it is never substituted for the record's own reading: the record's reading of a drawing onto a goal is written by hand elsewhere and printed in red as the record's claim. This number is how a drawing sent in from a goal's own panel comes back to that goal, and how the drawing says on the wall which goal it was offered for. A number outside 1 to 17 is not stored at all rather than being corrected into a goal the sender never named."
     },
     "machine_line": {
       "type": "string",

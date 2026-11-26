@@ -3,6 +3,8 @@ import { base44 } from '@/api/base44Client';
 import { Loader2, Check, ShieldCheck } from 'lucide-react';
 import { InkPot, PaperPhoto, SunFace } from '@/components/climate/cartoons/CartoonInkIcons';
 import { factsFromFile } from '@/components/climate/cartoons/fileFacts';
+import { goalByNumber } from '@/components/climate/cartoons/cartoonGoals';
+import { goalColour, goalNumberInk } from '@/components/climate/cartoons/goalColours';
 
 // ── BRING A DRAWING ───────────────────────────────────────────────────────────
 // A photograph of the drawing goes in; the record writes one line about what it can
@@ -45,7 +47,12 @@ async function shrink(file) {
 const field =
   'w-full min-h-[44px] px-3 text-[14px] bg-record-paper border border-record-ink/25 text-record-ink placeholder:text-record-muted';
 
-export default function CartoonSendIn() {
+// `goal` is passed only when the form was opened from a goal's own panel. Then the drawing is
+// filed against that goal in the sender's own word, and it comes back to that goal when a
+// keeper has seen it. Without it the form is the wall's own door and files nothing.
+export default function CartoonSendIn({ goal = null }) {
+  const goalEntry = goal ? goalByNumber(goal) : null;
+  const goalInk = goal ? goalColour(goal) : null;
   const [step, setStep] = useState('idle'); // idle | working | ready | sent
   const [imageUrl, setImageUrl] = useState('');
   const [machineLine, setMachineLine] = useState('');
@@ -168,6 +175,7 @@ export default function CartoonSendIn() {
         image_url: imageUrl,
         machine_line: machineLine,
         ...form,
+        ...(goal ? { goal } : {}),
       });
       setStep('sent');
     } catch (e) {
@@ -187,12 +195,34 @@ export default function CartoonSendIn() {
           It is not on the wall yet. A custodian looks at every drawing first. When it goes up, it appears above with the
           name you gave and your line.
         </p>
+        {goalEntry && (
+          <p className="mt-2 text-[13px] leading-[1.6] text-record-muted" style={reading}>
+            It is filed against Goal {goal} · {goalEntry.name}, in your word — the record puts it
+            back under that goal when it stands.
+          </p>
+        )}
       </div>
     );
   }
 
   return (
     <div className="border border-record-ink/20 bg-record-bone/60 p-4 lg:p-5">
+      {/* ── WHICH GOAL IT IS BEING OFFERED FOR ───────────────────────────────────
+          Said at the top, in the goal's own colour, because this is the one thing the sender
+          is claiming about their drawing and it should be visible while they write the rest. */}
+      {goalEntry && (
+        <div className="mb-3 flex items-center gap-2 border-b border-record-ink/20 pb-3">
+          <span
+            className="inline-flex min-w-[2.15rem] items-center justify-center px-1.5 py-0.5 font-mono text-[15px] font-bold tabular-nums"
+            style={{ background: goalInk, color: goalNumberInk(goal) }}
+          >
+            {String(goal).padStart(2, '0')}
+          </span>
+          <span className="text-[13px] leading-[1.4] text-record-ink" style={reading}>
+            Being offered for <strong>Goal {goal} · {goalEntry.name}</strong>
+          </span>
+        </div>
+      )}
       <p className="flex items-center gap-2 text-[15px] font-semibold text-record-ink" style={reading}>
         <SunFace size={24} />
         Bring a drawing to the wall
