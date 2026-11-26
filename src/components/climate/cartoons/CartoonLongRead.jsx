@@ -54,6 +54,18 @@ export default function CartoonLongRead() {
         cartoonists who made power visible before this room existed. Neither is needed to look
         at a drawing.
       </p>
+      {/* ── THE HISTORY, MOVED DOWN FROM THE DOOR ────────────────────────────────
+          This paragraph opened the room and it was the reason the room did not read as a
+          wall: eighty-five words of Benin earthworks before a single drawing. It belongs
+          here, with the record's argument, where a reader who wants it will find it and a
+          visitor who came to look at drawings will not have to walk through it. */}
+      <p className="cartoon-longread-line">
+        <strong>Iya</strong> — the Walls of Benin — was the longest thing ever built before
+        machines: ramparts and moats running some sixteen thousand kilometres, some of them
+        twenty metres high, raised between roughly the seventh and fourteenth centuries.
+        Nobody wrote down the names of the people who built it. They built it anyway, one
+        basket of earth at a time, and it stood for six hundred years.
+      </p>
       <CartoonGoals />
       <CartoonWorld />
     </details>

@@ -58,6 +58,19 @@ export default function PressOpening() {
               the climate hour, Sunday 3pm
             </Link>
           </p>
+          {/* ── THE RULE THIS FILE STATES, AND THEN BROKE ───────────────────────────
+              Brian, 26 November: "still doesn't flow coolasfuck for me bro."
+
+              He was right, and looking at the room it was obvious: the first screen was a
+              solid block of type. The comment below states this room's own rule — "name, one
+              line, count, cover" — and then the paragraph under it ran to eighty-five words
+              about Benin earthworks. A wall that opens on an essay is not a wall, however
+              good the essay is.
+
+              The history is not cut. It is moved into the long read at the foot, where the
+              record's argument lives, and what stays at the door is the two sentences that
+              are doing the work: the name is older than the room, and a wall is what a small
+              gesture becomes when enough people make it. */}
           {/* ── THE NAME IS OLDER THAN THE ROOM ─────────────────────────────────────
               Brian, 26 November: "we called it the wall bro". We did, and so did Benin, eight
               centuries earlier. Iya — the Walls of Benin — is recorded by Guinness as the
@@ -81,13 +94,9 @@ export default function PressOpening() {
               color: '#2b251e',
             }}
           >
-            The name is older than this room. <strong>Iya</strong> — the Walls of Benin — was the
-            longest thing ever built before machines: ramparts and moats running some sixteen
-            thousand kilometres, some of them twenty metres high, raised between roughly the
-            seventh and fourteenth centuries. Nobody wrote down the names of the people who
-            built it. They built it anyway, one basket of earth at a time, and it stood for six
-            hundred years. A wall is what a small gesture becomes when enough people make it and
-            nobody is in a hurry.
+            The name is older than this room: <strong>Iya</strong>, the Walls of Benin, raised one
+            basket of earth at a time by hands nobody wrote down. A wall is what a small gesture
+            becomes when enough people make it and nobody is in a hurry.
           </p>
           <CartoonSignal />
         </header>
