@@ -58,6 +58,19 @@ export default function CartoonRoomActions() {
           What this is, in plain words
         </Link>
       </p>
+      {/* ── THE DOOR FOR A CORRESPONDENT ──────────────────────────────────────────
+          CEEW asked six questions in writing before Sunday's hour — how it runs, who is in
+          it, how many drawings are on the wall, how many more are coming, what it is for and
+          whether it can be shared. Those answers are in writing on their own page, and a
+          person who has come in at the wall should reach them in one tap instead of hunting
+          the hour's page first. Same block as the other door, because both are the same kind
+          of question: what is this, and what happens next. */}
+      <p className="record-meta comic-workshop-note" style={{ marginTop: '0.4rem' }}>
+        Coming to Sunday’s hour?{' '}
+        <Link to="/ClimateWorkshopAnswers" style={{ color: 'rgb(var(--record-red))', textDecoration: 'underline' }}>
+          The six questions, answered in writing
+        </Link>
+      </p>
     </section>
   );
 }
