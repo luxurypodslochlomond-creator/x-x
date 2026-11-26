@@ -53,7 +53,10 @@ export default function CartoonRoomNavigation() {
       <nav className="wall-setlist" aria-label="The Wall, in the order it is set">
         <div className="wall-setlist-head">
           <p className="wall-setlist-title">Set list</p>
-          <span>Twelve ways in</span>
+          {/* Counted from the list itself. It said "Twelve ways in" over eleven doors, which
+              is the one kind of fault this record cannot carry: a count that disagrees with
+              the thing it counts. */}
+          <span>{SET.length} ways in</span>
         </div>
         <ol>
           {SET.map(({ n, href, label, Mark: MarkIcon, page }) => (

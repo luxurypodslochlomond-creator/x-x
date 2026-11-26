@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
 import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 
@@ -27,6 +28,36 @@ export default function PressOpening() {
         <header className="press-opening-masthead">
           <h1 id="press-room-title" className="press-title">The Wall</h1>
           <p className="press-standfirst">Drawn by hand. Hung on the wall.</p>
+          {/* ── WHEN AND WHERE, IN ONE LINE, AT THE TOP ─────────────────────────────
+              Brian, 26 November: "should the event details etc be more at top… not sure
+              layout and sequence right."
+
+              He was right, and the fault was one of audience. The full band — the dates,
+              the museum, the format, the theme, the hour — sat below the wall, the
+              invitation and the book, so a cartoonist Francis had told about this room, or
+              somebody from CEEW, arrived at a wall and a paragraph about Benin earthworks
+              and had to scroll past all of it to learn when the hour is.
+
+              But the whole band does not belong at the top: on 25 November this doorway was
+              stripped back precisely because a briefing before a single drawing read as a
+              funding report. So one line goes here — the facts a visitor needs to place the
+              room, and the door to the hour — and the band stays where it is, for the reader
+              who has seen the wall and wants the three days. */}
+          <p
+            style={{
+              marginTop: '10px',
+              fontSize: '11px',
+              lineHeight: 1.6,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#6b6258',
+            }}
+          >
+            8th CartoonAFRICA Biennial · National Museum, Benin City · 28–30 November 2026 ·{' '}
+            <Link to="/ClimateWorkshop" style={{ textDecoration: 'underline', color: '#b3261e' }}>
+              the climate hour, Sunday 3pm
+            </Link>
+          </p>
           {/* ── THE NAME IS OLDER THAN THE ROOM ─────────────────────────────────────
               Brian, 26 November: "we called it the wall bro". We did, and so did Benin, eight
               centuries earlier. Iya — the Walls of Benin — is recorded by Guinness as the

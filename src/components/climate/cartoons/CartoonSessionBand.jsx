@@ -35,7 +35,11 @@ export default function CartoonSessionBand() {
           <dt>Workshop</dt>
           <dd>
             “Climate Change and the power of collective actions and creative interventions” —{' '}
-            <Link to="/ClimateFounder">Janine Selendy</Link>, Sunday 29 November, 3pm West Africa (2pm here).
+            {/* "2pm here" was wrong for most of the room: this hour is watched from Benin,
+                Delhi, New York and Glasgow at once, so "here" was whichever page happened to
+                be open. The zone is named instead — the one fact a reader in another country
+                actually needs. */}
+            <Link to="/ClimateFounder">Janine Selendy</Link>, Sunday 29 November, 3pm West Africa (2pm UK).
           </dd>
         </div>
       </dl>

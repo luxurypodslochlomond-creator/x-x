@@ -11,7 +11,9 @@ const POINTS = [
 
 export default function CartoonRoomNew() {
   return <section className="room-new" aria-labelledby="room-new-title">
-    <h2 id="room-new-title" className="room-new-head">New in this room</h2>
+    {/* "New in this room" was the heading of a software release, in the one room on this
+        record that is a wall. It now asks the question the cartoonist actually has. */}
+    <h2 id="room-new-title" className="room-new-head">What happens to your drawing</h2>
     <ul className="room-new-points">
       {POINTS.map(({ Icon, head, line }) => <li key={head}>
         <span className="room-new-mark" aria-hidden="true"><Icon size={22} /></span>

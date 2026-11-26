@@ -11,6 +11,7 @@ import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
 import CartoonSources from '@/components/climate/cartoons/CartoonSources';
+import CartoonRoomNavigation from '@/components/climate/cartoons/CartoonRoomNavigation';
 // Shared ink and phone treatments; the desktop layout is declared once, last.
 import '@/components/climate/cartoons/press/press.css';
 import '@/components/climate/cartoons/press/press-mobile-ground.css';
@@ -96,6 +97,24 @@ export default function ClimateCartoons() {
 
         {/* 6 · WHOSE WORK THIS IS. */}
         <CartoonSources />
+
+        {/* ── 7 · THE SET LIST, WHICH WAS BUILT AND NEVER MOUNTED ─────────────────────
+            Brian, 26 November: "at least make coolasfuck easy to get to."
+
+            He was right, and the fault was a strange one: the room's set list was written
+            months of work ago — eleven doors, every one of them live, its own CSS, its own
+            drawn marks — and nothing rendered it. Not this page, not any page. The comment
+            at the top of PressOpening even claims "the twelve doors are the room's own
+            navigation", which was true of the file and false of the room.
+
+            So the room had no wayfinding at all: a reader who had walked fourteen drawings
+            and wanted the hour, the book, the goals or one hand's own page had to scroll and
+            hope. It goes at the foot rather than the head for the reason this room was
+            stripped back on the 25th: a numbered contents list above the first drawing is
+            what made the doorway read as a funding report. At the foot it is what a set list
+            actually is — the order of the evening, read on the way out, with every door live
+            for anybody who wants to go back in. */}
+        <CartoonRoomNavigation />
       </div>
     </ClimateRecordShell>
   );

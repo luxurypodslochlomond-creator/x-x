@@ -61,7 +61,11 @@ export default function PressWall() {
             thing that keeps people out, and this one is the opposite. */}
         <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />Human hands · different perspectives</p>
         <h2 id="press-wall-title" className="press-wall-title">The people’s pages.</h2>
-        <p className="press-wall-line">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
+        {/* "Read the picture. Stay with the idea. Tap any drawing to look closer." stood here,
+            and it was the last instruction in a stack of them: tap this, swipe that, read
+            those in order. A reader knows how to look at a picture, and a wall that explains
+            itself three times reads as a user guide with drawings in it. The swipe line
+            stays, because on a phone it says something a reader genuinely cannot guess. */}
         {/* On a phone the wall is walked along, so it says so out loud: the record never
             asks a reader to guess that something slides. Hidden on the desk, where the
             drawings already run down the page. */}
@@ -69,7 +73,11 @@ export default function PressWall() {
             was the fault: a tall strip became two screens and a wide one a band. Every plate is
             one size now, so the line says what a reader will actually meet. */}
         <p className="press-wall-line press-wall-swipe">Swipe along the wall — every drawing the same size, the hand named under it.</p>
-        <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
+        {/* The ↗ has come off this one: that arrow means "this leaves the site", and this
+            link stays inside the room. Every other borrowed arrow was taken out of this room
+            for the same reason, and one left behind is the sort of detail a reader notices
+            without being able to say why. */}
+        <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another →</Link></p>
         {/* ── THE WALL IS STILL BEING HUNG, AND IT SAYS SO ────────────────────────
             The artists Francis introduces are still sending, so this wall is not finished and
             a reader can see that it is not: fourteen drawings where a biennial's anthology
