@@ -14,6 +14,29 @@
 .news-lead { padding: 1.15rem; border: 1px solid rgb(var(--record-ink)/.13); border-radius: 22px; background: rgb(var(--record-bone)/.5); }
 .news-lead-kicker { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem; font-size: 11px; }.news-kind-emblem { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); }.news-lead[data-kind="emergency"] .news-kind-emblem { color: rgb(var(--record-red)); background: rgb(var(--record-red)/.08); }.news-lead[data-kind="initiative"] .news-kind-emblem { background: rgb(var(--record-paper)); color: rgb(var(--record-botanical)); }
 .news-lead-when { margin-left: auto; max-width: 22ch; font-size: 11px; line-height: 1.4; color: rgb(var(--record-muted)); font-variant-numeric: tabular-nums; }
+/* ── A DATE SET LIKE A STAMP, NOT LIKE PROSE ────────────────────────────────────
+   Brian, 26 November: the dates in the Wire should feel like a document — typeset,
+   official, timeless — "not code, just looks like it", and never too big.
+   So a date is set the way a printer sets a date on a record: the record's own UI face,
+   small, tracked out, uppercase, with figures that sit in a column (tabular). That is
+   typesetting, not code — no colour, no brackets, no monospace costume — and it is the same
+   treatment in the row, the lead and the full account, so a date reads as a stamp wherever a
+   reader meets one. A label with no date behind it ("Date not stated on the source") is set
+   the same way and stays a sentence: the record says what it does not know in the same hand
+   it says everything else. */
+.news-row-when,
+.news-lead-when,
+.news-entry-meta > span:first-child {
+  font-family: var(--font-record-ui);
+  font-size: .62rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--record-muted));
+  text-wrap: pretty;
+}
 .news-stamp { display: inline-flex; align-items: center; min-height: 23px; padding: .25rem .5rem; border-radius: 7px; font-size: 10px; font-weight: 700; letter-spacing: .015em; line-height: 1.2; }.news-stamp-initiative { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); }.news-stamp-emergency { background: rgb(var(--record-red)); color: rgb(var(--record-paper)); }.news-stamp-milestone { background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); }.news-emergency { color: rgb(var(--record-red)); }
 .news-lead-plate { display: block; margin-top: 1rem; overflow: hidden; border-radius: 15px; background: rgb(var(--record-paper)); }.news-lead-plate img { display: block; width: 100%; max-height: 32rem; object-fit: contain; }
 .news-lead-heading { margin: 1.1rem 0 0; max-width: 29ch; font-size: clamp(1.85rem,4vw,3.2rem); font-weight: 700; line-height: 1.08; letter-spacing: -.035em; text-transform: none; }.news-lead-heading a,.news-row-heading a { display: block; color: inherit; text-decoration: none; text-wrap: pretty; }

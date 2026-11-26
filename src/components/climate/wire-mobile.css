@@ -18,7 +18,7 @@
   .climate-record .news-lead, .climate-record .news-row { position: relative; padding: 0 0 1.4rem; border: 0; border-bottom: 1px solid rgb(var(--record-ink)/.22); border-radius: 0; background: transparent; }
   .climate-record .news-lead-kicker { gap: .6rem; }
   .climate-record .news-stamp { min-height: 24px; padding: .35rem .5rem; border-radius: 0; font-size: 10px; letter-spacing: .025em; }
-  .climate-record .news-lead-when { max-width: none; font-size: 12px; }
+  .climate-record .news-lead-when { max-width: none; font-size: .62rem; }
   .climate-record .news-lead-plate, .climate-record .news-row-thumb { width: calc(100% + 2rem); margin: 1rem -1rem 0; border-radius: 0; background: rgb(var(--record-bone)); }
   .climate-record .news-lead-plate img, .climate-record .news-row-thumb img { display: block; width: 100%; height: auto; max-height: none; object-fit: contain; }
   .climate-record .news-lead-heading { margin-top: 1rem; max-width: none; font-size: 31px; line-height: 1.12; letter-spacing: -.045em; }
