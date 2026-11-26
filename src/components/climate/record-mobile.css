@@ -19,6 +19,14 @@
     height: 130vh;
     height: 130lvh;
     background-color: rgb(var(--record-ink));
+  }
+  /* The dissolve belongs to the OPENING ONLY. It was written for the home page, where the
+     voice runs long and the painting has to hand over to paper without a straight edge —
+     and then it was applied to every room, which faded the ground on the wall and the wire
+     too, where the painting is not handing over to anything. Brian, 26 November: "our
+     coolasfuck pairing for record not on mobile anymore bri shame". It was this line. A
+     room keeps its ground at full strength; only the opening dissolves. */
+  .climate-record.record-home-field > .record-environment {
     -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 0%, #000 72%, transparent 100%);
   }

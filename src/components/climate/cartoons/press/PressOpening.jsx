@@ -44,17 +44,19 @@ export default function PressOpening() {
             style={{
               marginTop: '12px',
               maxWidth: '46ch',
-              fontSize: '11.5px',
-              lineHeight: 1.65,
-              letterSpacing: '0.015em',
-              color: '#5a5246',
+              fontSize: '13.5px',
+              lineHeight: 1.7,
+              letterSpacing: '0.01em',
+              color: '#2b251e',
             }}
           >
-            The name is older than this room. <strong>Iya</strong> — the Walls of Benin — is the
-            longest earthwork of the pre-mechanical era, built between roughly the seventh and
-            fourteenth centuries: one basket of earth, repeated across some sixteen thousand
-            kilometres of ramparts and moats. A wall is what a small gesture becomes when
-            enough people make it.
+            The name is older than this room. <strong>Iya</strong> — the Walls of Benin — was the
+            longest thing ever built before machines: ramparts and moats running some sixteen
+            thousand kilometres, some of them twenty metres high, raised between roughly the
+            seventh and fourteenth centuries. Nobody wrote down the names of the people who
+            built it. They built it anyway, one basket of earth at a time, and it stood for six
+            hundred years. A wall is what a small gesture becomes when enough people make it and
+            nobody is in a hurry.
           </p>
           <CartoonSignal />
         </header>
