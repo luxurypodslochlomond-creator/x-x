@@ -61,7 +61,7 @@ export default function BrianTwoMinutes() {
     <section className="mt-8 border-2 border-record-ink">
       <div className="bg-record-ink px-4 py-3">
         <p className="font-mono text-[9.5px] font-black uppercase tracking-[0.2em] text-cartoon-sun">
-          03 · Brian’s two minutes · as Janine set it
+          03 · Brian’s two minutes · a draft answer to her draft
         </p>
         <h2 className="mt-1 text-[20px] leading-tight text-record-paper lg:text-[26px]" style={{ fontFamily: 'var(--font-display)' }}>
           Two minutes, and the address
@@ -70,9 +70,20 @@ export default function BrianTwoMinutes() {
 
       <div className="px-4 py-4">
         <p className="text-[12.5px] leading-relaxed text-record-ink/85 lg:text-[13.5px]">
-          Her agenda asks for two minutes on what the platform does — <em>specifically where people can add examples
-          of crises and solutions</em> — and then on to the cartoons. Written out below, so it is two minutes and not
-          four, and so the one line that matters cannot be lost on the day.
+          Her <strong>draft</strong> agenda asks for two minutes on the platform — <em>specifically where people can add
+          examples of crises and solutions</em> — and then on to the cartoons. Written out below so it is two minutes
+          and not four, and so it can be cut the moment she changes her draft.
+        </p>
+
+        {/* ── THE ONE JUDGEMENT, SAID RATHER THAN HIDDEN ──────────────────────────
+            Her draft asks specifically WHERE people can add. This keeps the address and
+            drops the walkthrough of the form, which is a judgement made in her hour and
+            therefore hers to overturn. Saying so here is the difference between a draft
+            answer and a decision taken on somebody else's behalf. */}
+        <p className="mt-2 text-[12.5px] leading-relaxed text-record-ink/85 lg:text-[13.5px]">
+          One judgement is flagged rather than hidden: her draft asks <em>where</em> people can add, and this keeps the
+          address but drops the walkthrough of the form — on the argument that a room of cartoonists needs the reason
+          more than the buttons. If she wants the walkthrough, it is two sentences and it goes straight back in.
         </p>
 
         <div className="mt-4 border-l-2 border-record-red pl-3">
