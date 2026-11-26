@@ -97,6 +97,29 @@ export default function StoneymollanEscalation() {
           that is a thing to say to a solicitor, not to the estate.
         </p>
 
+        <div className="mt-6 border border-record-ink/25 bg-record-bone/40 p-3 lg:p-4">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
+            When to send each one
+          </p>
+          <ol className="mt-2 space-y-2 text-[13px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+            <li>
+              <strong className="font-semibold">The council and Scottish Water — today.</strong> Both
+              are plain factual questions to public bodies, and their clocks only start when the
+              letter lands. Nothing is gained by waiting on those two.
+            </li>
+            <li>
+              <strong className="font-semibold">Head office — on 8 December,</strong> when the 14
+              days you gave Barry Harper expire without an answer. Then the letter opens with the
+              deadline having passed, which is stronger than sending it early.
+            </li>
+            <li>
+              <strong className="font-semibold">If a lorry or a load of tarmac appears before then —
+              don’t send anything.</strong> That is the moment to instruct a solicitor. A letter
+              does not stop a machine; an interdict does.
+            </li>
+          </ol>
+        </div>
+
         {LETTERS.map((letter, i) => (
           <section key={letter.id} className="mt-9 border-t-2 border-record-ink pt-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-red">
