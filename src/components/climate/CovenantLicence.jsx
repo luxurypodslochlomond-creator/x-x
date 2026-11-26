@@ -15,7 +15,10 @@ import { Link } from 'react-router-dom';
 //
 // The sentence underneath stays in reading type at a size a person can actually read,
 // and it still says the honest thing: the code is under the AGPL, and the covenant is
-// where that is argued. No repository is claimed here, because there still isn't one.
+// where that is argued. It used to say no repository was claimed, because there wasn't
+// one. On 26 November 2026 there was, public and checked from outside a signed-in account
+// before the link went on — so the sentence hands the reader the code instead of a promise
+// about it.
 // ── WHAT EACH ONE MEANS, IN THE OPEN, WITHOUT A TRIP ─────────────────────────────
 // Brian, 26 November: "you think we should link the CC BY SA etc and GNU etc on x=x so
 // people know the score bro or say coolasfuck briefly what means underneath too so dont
@@ -91,7 +94,12 @@ export default function CovenantLicence() {
 
       <p className="covenant-licence-says">
         Both are irrevocable: once given, they cannot be taken back. Why they were given is
-        argued in <Link to="/ExtractionProofCovenant">the covenant</Link>.
+        argued in <Link to="/ExtractionProofCovenant">the covenant</Link>, and the code
+        itself is public, line for line, in{' '}
+        <a href="https://github.com/luxurypodslochlomond-creator/x-x" target="_blank" rel="noreferrer noopener">
+          the repository
+        </a>
+        .
       </p>
 
       {/* ── SOMEBODY ELSE'S NEED, SAID OUT LOUD ───────────────────────────────────

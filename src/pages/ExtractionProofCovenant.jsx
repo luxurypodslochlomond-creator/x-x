@@ -36,10 +36,21 @@ const PILLARS = [
     // covenant that named only the code would leave the words — the entries themselves — with
     // no stated terms at all. Irrevocable is the load-bearing word: a licence of this kind,
     // once given, cannot be taken back, by this record or by anyone who takes it over.
-    body: 'Both are already given, and both are irrevocable: once given, a licence of this kind cannot be taken back. The words: everything published on this record is under Creative Commons BY-SA 4.0 — take it, change it, print it, sell it, keep the name on it, and let whatever you make be this free too. The code: the GNU AGPL-3.0, open in its licence and in every line of it, with one condition — anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — stops being a clever move and becomes a licence violation anyone can point at, in public. There is no public repository today: the code is held in a private workspace, and what is open is the record itself — every published entry, its source, and its corrections. The day a repository exists, its link goes here and this line changes. Until then the page says so plainly, rather than letting a reader find out the hard way.',
+    // ── THE DAY THE REPOSITORY EXISTED ────────────────────────────────────────────
+    // This line used to say there was no public repository, and that the day one existed its
+    // link would go here and the line would change. That day was 26 November 2026: the code
+    // was pushed to GitHub and the repository was made public, and the page was checked from
+    // outside a signed-in account before the link went on it — a private repository answers
+    // 404 to every reader, and a link that fails is worse than the honest sentence it replaced.
+    //
+    // The words after it are deliberately modest. The repository holds two licence files: one
+    // for the code and one for the words, each naming the full text it stands on rather than
+    // reprinting it. So the page says exactly that, and no more than that.
+    body: 'Both are already given, and both are irrevocable: once given, a licence of this kind cannot be taken back. The words: everything published on this record is under Creative Commons BY-SA 4.0 — take it, change it, print it, sell it, keep the name on it, and let whatever you make be this free too. The code: the GNU AGPL-3.0, open in its licence and in every line of it, with one condition — anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — stops being a clever move and becomes a licence violation anyone can point at, in public. The repository is public as of 26 November 2026, so none of this has to be taken on trust: every line can be read, copied and checked at github.com/luxurypodslochlomond-creator/x-x. Two licence files sit in it, one for the code and one for the words, and each names the full text it stands on.',
     // The names are the law, and the law is one tap away. A page asking a reader to take its
     // word on a licence should hand them the licence: same addresses as the plate on x = x.
     links: [
+      { label: 'Read the code on GitHub', href: 'https://github.com/luxurypodslochlomond-creator/x-x' },
       { label: 'Read CC BY-SA 4.0', href: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode' },
       { label: 'Read the GNU AGPL-3.0', href: 'https://www.gnu.org/licenses/agpl-3.0.html' },
     ],
