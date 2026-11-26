@@ -24,7 +24,7 @@ export default function SubjectHand({ subjects = [], selected = 'all', onSelect 
   return (
     <div className="mt-3">
       <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">
-        The hand · {subjects.length} {subjects.length === 1 ? 'subject carries' : 'subjects carry'} something
+        {subjects.length} {subjects.length === 1 ? 'subject' : 'subjects'} on the record · tap a drawing to read it
       </p>
       <ul className="mt-2 flex flex-wrap gap-x-1.5 gap-y-1">
         {subjects.map((subject) => {
