@@ -635,6 +635,21 @@ const AuthenticatedApp = () => {
           and it should be, because the mark is the record's own name and a reader who has
           heard it should be able to type it and arrive. uf51.love/x=x opens the record. */}
       <Route path="/x=x" element={<Navigate to="/TogetherChangeClimate" replace />} />
+      {/* ── THE SHORT DOORS ──
+          One address carries the identity (uf51.love/x=x); the rooms carry the content, and
+          they should be sayable out loud. "uf51.love/wire" is a sentence; "uf51.love/ClimateWire"
+          is a filename. These are redirects only — every existing address keeps working, so
+          nothing already printed, bookmarked or linked breaks. There is no /map: the app
+          already has a Map page and React Router matches without caring about case. */}
+      <Route path="/wire" element={<Navigate to="/ClimateWire" replace />} />
+      <Route path="/cartoons" element={<Navigate to="/ClimateCartoons" replace />} />
+      <Route path="/music" element={<Navigate to="/ClimateMusic" replace />} />
+      <Route path="/method" element={<Navigate to="/ClimateMethod" replace />} />
+      <Route path="/search" element={<Navigate to="/ClimateSearch" replace />} />
+      <Route path="/guide" element={<Navigate to="/ClimateGuide" replace />} />
+      <Route path="/seals" element={<Navigate to="/ClimateSeals" replace />} />
+      <Route path="/roll" element={<Navigate to="/ClimateRoll" replace />} />
+      <Route path="/founder" element={<Navigate to="/ClimateFounder" replace />} />
       <Route path="/BrandMark" element={<BrandMarkPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
