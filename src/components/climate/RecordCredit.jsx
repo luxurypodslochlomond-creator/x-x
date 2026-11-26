@@ -47,7 +47,7 @@ export default function RecordCredit({ className = '' }) {
           means something. */}
       <p className="mt-2.5 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-record-muted">
         <Link
-          to="/Welcome"
+          to="/"
           className="underline decoration-dotted underline-offset-2 transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-record-red"
         >
           UF51 CIC

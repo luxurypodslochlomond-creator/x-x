@@ -31,7 +31,7 @@ export default function RecordFootPlate() {
           Super Intelligence 51
         </p>
         <p className="mt-3 text-center font-record-ui text-[11px] tracking-[0.12em] text-record-bone/65">
-          <Link to="/Welcome" className="underline decoration-dotted underline-offset-4 transition-colors hover:text-record-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-mark">
+          <Link to="/" className="underline decoration-dotted underline-offset-4 transition-colors hover:text-record-bone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-record-mark">
             UF51 CIC
           </Link>
         </p>
