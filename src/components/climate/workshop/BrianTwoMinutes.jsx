@@ -17,18 +17,38 @@ import { recordAddress } from '@/components/climate/recordAddress';
 // opens the form straight away — the same deep link that was built so a walkthrough could
 // point at the exact place an initiative is added.
 
+// ── IT WAS A TOUR OF A FORM, IN A ROOM OF CARTOONISTS ─────────────────────────
+// Brian, 26 November, three days out: "you sure this isn't wrong would be better to have
+// cartoons etc up and talk about artist etc and also talk about why world needs x=x? why we
+// need product demo and live putting cartoons up isn't waste of time and wee tech fanny boy?"
+//
+// He is right, and the old script is the evidence. It spent its middle on the mechanics of a
+// form — press Add, two doors, paste the link, here is what happens next — which is a
+// walkthrough, and a walkthrough in front of a biennial of cartoonists says the software is
+// the subject. It is not. The drawings are the subject, and the only thing the record has to
+// offer them is that they outlive the wall they are hung on.
+//
+// So the two minutes are about them and the reason; the address is one line near the end
+// rather than the middle; and the form is not described at all. Nobody in that room needs to
+// know what the form looks like. They need to know their drawing will still be reachable when
+// the exhibition comes down, with their name on it, and that nobody can sell it.
+//
+// One thing kept honest: a drawing sent in during the hour arrives as a draft and waits for a
+// person. So nothing here promises a drawing will appear on screen the second it is sent. If
+// somebody is at the desk it clears in a minute; if nobody is, it clears afterwards and the
+// room hears how many came in. Never a promise the desk cannot keep.
 const SCRIPT = [
-  'Thank you, Janine — and thank you, Francis.',
-  'This is a public record of climate solutions and climate crises. Two kinds of entry, and nothing else: something that is working and can be copied, or something happening now that the world needs to see.',
-  'Every entry names who says so and links to where it started. Nothing goes on without a source. There is no advertising and no sponsorship, so nobody can buy a place on it. And every entry is fingerprinted, so a quiet edit shows up in public.',
-  'But the thing I actually want you to leave with is where the button is.',
-  'Go to the record — the address is on the screen now. Press “Add” and you get one form with two doors: a solution, or a crisis. No account, no password. Paste the link you got it from, say what happened in your own words, and send it. If the source opens, it goes on the record straight away. If it does not, it waits for a person to look at it — which is the only reason anything is ever held back.',
-  'That is the whole ask. If you know something that is working, or something that is happening, put it on. One link and a paragraph is enough.',
-  'And now — the cartoons, which is what we are really here for.',
+  'Thank you, Janine. And thank you, Francis — fourteen years of these drawings, and this room is the proof of it.',
+  'I have two minutes, so I will spend them on one thing. A drawing in this room is a true thing said sideways. It goes up on a wall, it is seen by the people who came, and then the exhibition comes down.',
+  'That is the whole reason this record exists. x = x is a public record of the climate — solutions, crises and actions, each one dated, sourced and signed by whoever put it there. Nothing sold, nothing ranked. No line of it can be bought, and none of it comes down when the walls do.',
+  'And the drawings have their own room in it. Each one carries the hand that drew it, where it came from, and the drawer’s own line on what it is for. Free to see, free to copy, and it stays theirs — the record never sells it and never ranks it.',
+  'If you want to put something on — a drawing, or something you know is working where you live — the address is on the screen now. No account, no password. One link and a paragraph is enough, and a person reads it before it goes up.',
+  'That is all I have. Francis — the drawings.',
 ];
 
 const JOBS = [
-  ['Two minutes, on the platform', 'The script above. Where to add a crisis and where to add a solution — then stop and hand back to Francis.'],
+  ['Two minutes, on the platform', 'The script above. What the record is, what the drawings get from it, and the address — then stop and hand back to Francis. No walkthrough of the form.'],
+  ['Drawings sent in during the hour', 'They arrive as drafts and wait for a person. Whoever is at the desk clears them, and the room is told at the end how many came in. Never promise a drawing will appear the moment it is sent.'],
   ['Showing CEEW’s cartoons as Alina speaks', 'Have the drawings open and ready before she starts, and show each one as she names it, not after.'],
   ['Screen shared for the questions', 'Francis, Janine and Brian share the screen while Janine takes the room.'],
   ['Closing remarks, if called on', 'Janine invites Francis and Brian to add a few words at the end. Short.'],
@@ -68,7 +88,7 @@ export default function BrianTwoMinutes() {
         </div>
 
         <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em] text-record-muted">
-          About 260 words · roughly two minutes at a calm pace
+          About 200 words · two minutes at a calm pace, with room to breathe
         </p>
 
         <div className="mt-4 border border-record-ink/25 bg-record-bone/60 p-3">
