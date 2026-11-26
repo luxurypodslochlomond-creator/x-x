@@ -32,15 +32,66 @@ As people have early warning of emergencies, they will be better able to cope an
 
 const wall = (count) => (count ? `${count} climate cartoons` : 'A wall of climate cartoons');
 
+// Her description on its own, kept apart from the room's words because it describes the
+// whole initiative rather than this wall, and it travels with her name on it.
+export function descriptionLine() {
+  return {
+    id: 'janine',
+    where: 'Janine Selendy · the description, in her own words',
+    note: 'Her words exactly, with her name kept on them and the room’s address after her sign-off. This is the shortest true description of the whole initiative this room belongs to.',
+    text: `${JANINE_WORDS}\n\n— Janine Selendy, who hosts Sunday’s workshop\n\nThe cartoon room: ${ROOM_ADDRESS}`,
+  };
+}
+
+// ── THE EVENT, NOT ONLY THE WALL ───────────────────────────────────────────────
+// Alina Sen, after the call on 26 November: CEEW wants to share the event as well. So these
+// are the words for the three days and for the hour, written for the same places, with the
+// room's address on the end — because the wall is the thing a stranger can actually look at,
+// and a poster for a museum in another country needs somewhere to lead.
+//
+// Every fact is read from cartoonEvent.js, the one place the biennial's name, dates and place
+// are written. Nothing new is claimed, and the hour's length is deliberately not stated: the
+// programme and the invitation still disagree about it, and it is the host's to settle.
+export function eventLines() {
+  const room = ROOM_ADDRESS;
+  const hour = HOUR_ADDRESS;
+  return [
+    {
+      id: 'event-chat',
+      where: 'The event · WhatsApp, Signal, Telegram',
+      note: 'The three days, the place, and the hour that is online — in one message that fits a chat.',
+      text: `${CARTOON_EVENT.biennial}: ${CARTOON_EVENT.when}, ${CARTOON_EVENT.where}. A wall of climate cartoons is part of it, and ${CARTOON_EVENT.workshop} is open online. Every drawing keeps the name of the hand that made it. The room: ${room}`,
+    },
+    {
+      id: 'event-caption',
+      where: 'The event · Instagram or Facebook',
+      note: 'A caption for the three days: what it is, where, and the one part anyone in the world can join.',
+      text: `${CARTOON_EVENT.biennial}\n\n${CARTOON_EVENT.when} · ${CARTOON_EVENT.where}\n\n${CARTOON_EVENT.title} — a room of climate cartoons from Africa, Asia and beyond, every drawing carrying the name of the hand that made it.\n\n${CARTOON_EVENT.workshop}, online.\n\nFree to read, no account: ${room}\n\n#CartoonAFRICA #ClimateCartoons #BeninCity #ClimateAction`,
+    },
+    {
+      id: 'event-linkedin',
+      where: 'The event · LinkedIn',
+      note: 'For institutions and partners: the biennial’s own name and dates first, then the part that is open to anyone.',
+      text: `The 8th CartoonAFRICA International Biennial opens on ${CARTOON_EVENT.when} at the ${CARTOON_EVENT.where}.\n\nIts subject this year is “${CARTOON_EVENT.title}”, edited by ${CARTOON_EVENT.editors}. Alongside the exhibition there is a public wall of climate cartoons, drawn from the biennial and from CEEW's What On Earth! series, where every drawing carries the name of the hand that made it and the credit that holds it. Nothing is ranked and nothing is sold.\n\n${CARTOON_EVENT.workshop} is open online, and anyone can join it.\n\nThe wall: ${room}`,
+    },
+    {
+      id: 'event-short',
+      where: 'The event · X or Bluesky',
+      note: 'One line for the three days, with the address last so it stays tappable.',
+      text: `${CARTOON_EVENT.biennial} · ${CARTOON_EVENT.when} · ${CARTOON_EVENT.where}. Climate cartoons from Africa, Asia and beyond, every one signed by the hand that made it: ${room}`,
+    },
+    {
+      id: 'event-hour',
+      where: 'The hour only · any channel',
+      note: 'For anyone who only needs Sunday: the workshop, online, and where to read about it.',
+      text: `${CARTOON_EVENT.workshop} · online · climate change and the power of collective actions and creative interventions. The hour as it is set down: ${hour}`,
+    },
+  ];
+}
+
 export function shareLines(count) {
   const room = ROOM_ADDRESS;
   return [
-    {
-      id: 'janine',
-      where: 'Janine Selendy · the description, in her own words',
-      note: 'Her words exactly, with her name kept on them and the room’s address after her sign-off. This is the shortest true description of the whole initiative this room belongs to.',
-      text: `${JANINE_WORDS}\n\n— Janine Selendy, who hosts Sunday’s workshop\n\nThe cartoon room: ${room}`,
-    },
     {
       id: 'chat',
       where: 'WhatsApp, Signal, Telegram',

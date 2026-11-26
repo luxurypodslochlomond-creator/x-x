@@ -3,7 +3,15 @@ import { base44 } from '@/api/base44Client';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import CopyLine from '@/components/climate/CopyLine';
 import ShareWord from '@/components/climate/cartoons/share/ShareWord';
-import { shareLines, ROOM_ADDRESS, ONE_LINE } from '@/components/climate/cartoons/share/shareLines';
+import { shareLines, eventLines, descriptionLine, ROOM_ADDRESS, ONE_LINE } from '@/components/climate/cartoons/share/shareLines';
+
+// A heading between the three groups on this page: the description, the event, the room.
+const GroupHead = ({ title, note }) => (
+  <div className="mt-9 border-t-2 border-record-ink/25 pt-3">
+    <h2 className="text-[15px] leading-snug lg:text-[17px]" style={{ fontFamily: 'var(--font-heading)' }}>{title}</h2>
+    {note && <p className="mt-1 text-[11.5px] leading-snug text-record-muted">{note}</p>}
+  </div>
+);
 
 // ── CARRYING THE ROOM OUT OF THE CHAT ──────────────────────────────────────────
 // The drawings travel hand to hand, and the hand-over is already one tap on the room's own
@@ -32,7 +40,9 @@ export default function ClimateCartoonsShare() {
     };
   }, []);
 
-  const lines = shareLines(count);
+  const description = descriptionLine();
+  const event = eventLines();
+  const room = shareLines(count);
 
   return (
     <ClimateRecordShell
@@ -56,7 +66,19 @@ export default function ClimateCartoonsShare() {
         plainly on purpose: what the wall is, whose hands are on it, and where to look.
       </p>
 
-      {lines.map((line) => (
+      <GroupHead title="What this is · Janine Selendy’s description" note="Her words, unchanged, with her name on them." />
+      <ShareWord where={description.where} note={description.note} text={description.text} />
+
+      <GroupHead
+        title="The event · 28–30 November, Benin City"
+        note="For CEEW and anyone carrying the three days, and the hour on Sunday that is open online."
+      />
+      {event.map((line) => (
+        <ShareWord key={line.id} where={line.where} note={line.note} text={line.text} />
+      ))}
+
+      <GroupHead title="The room · the wall itself" note="For anyone you would rather send straight to the drawings." />
+      {room.map((line) => (
         <ShareWord key={line.id} where={line.where} note={line.note} text={line.text} />
       ))}
 
