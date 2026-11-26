@@ -81,7 +81,7 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
           className="record-map-key-kind record-map-key-reader"
         >
           <LampMark />
-          Readership
+          Readings
         </button>
       </div>
     </div>
