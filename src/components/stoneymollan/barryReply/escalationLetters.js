@@ -36,9 +36,10 @@ I would be grateful for the following in writing:
 
 1. The name and role of the person with authority to amend or withdraw the proposal, and confirmation that this letter has been passed to them.
 2. Whether any permission, consent or approval has been granted by any body for the use of that road or for laying tarmac on it, and by whom. If a permission exists, a copy of it.
-3. Whether works are intended to begin before the six matters in my letter of 24 November are answered, and the intended start date.
-4. A numbered response to each of those six matters.
-5. The company's complaints procedure.
+3. Whether the works include forming, widening or surfacing a vehicular access beyond the road as it exists today, and if so, to what that access leads and for whose use.
+4. Whether works are intended to begin before the six matters in my letter of 24 November are answered, and the intended start date.
+5. A numbered response to each of those six matters.
+6. The company's complaints procedure.
 
 I am content to receive material by email. If any item cannot be supplied, please say which one and when it will be.
 
@@ -51,7 +52,7 @@ ${SIGN}`,
     title: 'The council · roads and access',
     sendTo:
       'The council’s roads authority, and the access officer if the route is a core path. Copy the National Park Authority’s access team if the path falls inside the Park. Confirm which council covers the road before sending — do not guess it.',
-    why: 'Because "the council has given the go ahead" is the claim everything else rests on, and it either exists in writing or it does not.',
+    why: 'Because "the council has given the go ahead" is the claim everything else rests on, and it either exists in writing or it does not. The first numbered point is the one that settles it: public access and a public road are not the same thing.',
     subject: 'Road and access — Auchendennan, John Muir Way and Three Lochs Way: request for any permission granted',
     body: `Dear Sir or Madam,
 
@@ -61,10 +62,14 @@ I have been told by Scottish Woodlands, acting for the adjoining landowner, that
 
 I am not asking you to take a view on that proposal. I am asking what exists in writing:
 
-1. Whether any permission, consent, licence or notice has been granted for the use of the road, or for laying tarmac on it, and under which power.
-2. The conditions attached to it, including vehicle weights and numbers, working hours, passing arrangements, condition surveys, and who is responsible for damage.
-3. Whether the line of the John Muir Way or the Three Lochs Way is affected, and whether any restriction or diversion has been authorised, and by whom.
-4. The officer and department holding that record.
+1. Whether that road is a public road — that is, whether it appears on the council's list of roads maintained at public expense. If it does not, on what basis vehicles are said to be entitled to use it.
+2. Whether any permission, consent, licence or notice has been granted for the use of the road, or for laying tarmac on it, and under which power.
+3. The conditions attached to any such consent, including vehicle weights and numbers, working hours, passing arrangements, condition surveys, and who is responsible for damage.
+4. Whether any consent extends to forming, widening or surfacing a vehicular access beyond the road as it exists today, and if so, to what that access leads.
+5. Whether the line of the John Muir Way or the Three Lochs Way is affected, and whether any restriction or diversion has been authorised, and by whom.
+6. The officer and department holding that record.
+
+One point, because it has been put to me as the reason the works are lawful: walkers, cyclists and horse riders using the route under the access rights in Part 1 of the Land Reform (Scotland) Act 2003 do not make a road public, those rights do not extend to motor vehicles, and they do not authorise any work on the surface.
 
 If no such permission exists, I would be grateful for confirmation of that in writing, because that is itself the answer I need.
 

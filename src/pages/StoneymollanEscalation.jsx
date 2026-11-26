@@ -55,6 +55,41 @@ export default function StoneymollanEscalation() {
           from your own address, keep the replies, and note the date you sent it.
         </p>
 
+        <div className="mt-5 border-l-2 border-record-red pl-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-red">
+            Two checks before you send
+          </p>
+          <ul className="mt-2 space-y-2 text-[13px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+            <li>
+              <strong className="font-semibold">Your own title deed.</strong> Read the access clause
+              itself, not a summary of it. What it settles is whether the road is yours, or a right
+              of access over someone else’s ground — and what that right permits. A servitude right
+              of access is not ownership of the road, and it does not by itself stop the owner
+              maintaining the surface.
+            </li>
+            <li>
+              <strong className="font-semibold">The council’s list of public roads.</strong> “Public
+              access” and “a public road” are two different things. Walkers, cyclists and riders
+              using a route under the access rights in Part 1 of the Land Reform (Scotland) Act 2003
+              do not make it a road for vehicles, and those rights authorise no work on it. One
+              question — is this road maintained at public expense? — answers what he told you.
+            </li>
+          </ul>
+          <p className="mt-3 text-[12.5px] leading-relaxed text-record-muted">
+            And today, before anything is laid: photograph the road as it is — surface, width,
+            verges, gateposts, drainage — with the date showing. A condition record made before the
+            works is worth more later than any argument about what it used to look like.
+          </p>
+        </div>
+
+        <p className="mt-4 max-w-[62ch] text-[13px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
+          One thing kept out of all three letters on purpose: the barn. The record treats the barn
+          and the woodland as two separate matters, and a question about “vehicular access beyond
+          the road as it exists today” gets the answer without telling anyone what is being
+          protected. If the tarmac is how a vehicle reaches the barn, then they are one matter — and
+          that is a thing to say to a solicitor, not to the estate.
+        </p>
+
         {LETTERS.map((letter, i) => (
           <section key={letter.id} className="mt-9 border-t-2 border-record-ink pt-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-record-red">
