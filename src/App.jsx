@@ -620,7 +620,11 @@ const AuthenticatedApp = () => {
           without becoming the first thing a neighbour finds. The admin address still
           works, because it is in the case file's own links. */}
       <Route path="/StoneymollanReply" element={<StoneymollanReplyPage />} />
-      <Route path="/StoneymollanEscalation" element={<StoneymollanEscalationPage />} />
+      {/* Behind the admin door, not merely unlisted. The letters themselves are harmless to
+          show — the page around them is not: it explains which question is being asked blind
+          and why the barn stays out of the correspondence. That is the one thing on this record
+          that must never be readable by the other side. */}
+      <Route path="/StoneymollanEscalation" element={<AdminOnly><StoneymollanEscalationPage /></AdminOnly>} />
       <Route path="/AdminStoneymollanBarryReply" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="/AdminStoneymollanBarryReplyPage" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="*" element={<PageNotFound />} />

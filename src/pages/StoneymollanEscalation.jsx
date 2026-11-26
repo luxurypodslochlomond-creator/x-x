@@ -128,9 +128,17 @@ export default function StoneymollanEscalation() {
             <h2 className="mt-1 text-[19px] leading-snug" style={{ fontFamily: 'var(--font-heading)' }}>
               {letter.title}
             </h2>
-            <p className="mt-2 text-[12.5px] leading-relaxed text-record-ink/80">
-              <strong className="font-semibold">Send to:</strong> {letter.sendTo}
+            <p className="mt-2 text-[13px] leading-relaxed">
+              <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-record-muted">To </span>
+              <a
+                href={`mailto:${letter.to}?subject=${encodeURIComponent(letter.subject)}`}
+                className="font-mono text-[12.5px] underline decoration-dotted underline-offset-4"
+              >
+                {letter.to}
+              </a>
+              <span className="text-record-muted"> · {letter.phone}</span>
             </p>
+            <p className="mt-1.5 text-[12.5px] leading-relaxed text-record-ink/80">{letter.sendTo}</p>
             <p className="mt-1.5 text-[12.5px] leading-relaxed text-record-muted">
               <strong className="font-semibold text-record-ink/80">Why:</strong> {letter.why}
             </p>

@@ -20,8 +20,10 @@ export const LETTERS = [
   {
     id: 'woodlands',
     title: 'Scottish Woodlands · head office',
+    to: 'enquiries@scottishwoodlands.co.uk',
+    phone: '0131 451 5154',
     sendTo:
-      'The company’s head office or chief executive, using the contact on their own website — not Barry Harper’s address. The point of this one is that it arrives above him.',
+      'Their published general enquiries address, taken from their own site. Head office: Research Park, Riccarton, Edinburgh EH14 4AP. Not Barry Harper’s address — the point of this one is that it arrives above him.',
     why: 'Because a written request has had no written answer, and the referral upwards was refused.',
     subject: 'Auchendennan Woodland Creation — request for a substantive response and for the permissions relied on',
     body: `Dear Sir or Madam,
@@ -50,8 +52,10 @@ ${SIGN}`,
   {
     id: 'council',
     title: 'The council · roads and access',
+    to: 'roads@west-dunbarton.gov.uk',
+    phone: '01389 737 000',
     sendTo:
-      'The council’s roads authority, and the access officer if the route is a core path. Copy the National Park Authority’s access team if the path falls inside the Park. Confirm which council covers the road before sending — do not guess it.',
+      'West Dunbartonshire’s roads address, taken from their own site — the council that adopted the road. Your Property Enquiry Certificate names the authority; if it names a different one, send it there instead. Copy the National Park Authority’s access team if the route is a core path.',
     why: 'The road is adopted — your Property Enquiry Certificate says so, so that part is settled. What follows is the useful part: on an adopted road, work on the surface is the roads authority’s business and anyone laying tarmac needs their permission. This letter asks whether one exists, and where the adopted road ends and private ground begins.',
     subject: 'Road and access — Auchendennan, John Muir Way and Three Lochs Way: request for any permission granted',
     body: `Dear Sir or Madam,
@@ -87,8 +91,10 @@ ${SIGN}`,
   {
     id: 'water',
     title: 'Scottish Water · customer and developer enquiries',
+    to: 'Help@scottishwater.co.uk',
+    phone: '0800 0778 778',
     sendTo:
-      'Scottish Water’s published customer or developer enquiry route. Keep it to the water question only — a letter that also argues about trees invites a reply about trees.',
+      'Their published help address and contact centre. If the email bounces, the contact form on scottishwater.co.uk reaches the same team. Keep it to the water question only — a letter that also argues about trees invites a reply about trees.',
     why: 'Because "Scottish Water has been notified" is the easiest of the three claims to check, and the supply is a private pipe off their mains.',
     subject: 'Auchendennan — proposed woodland creation and works near a private service pipe: request for written confirmation',
     body: `Dear Sir or Madam,
