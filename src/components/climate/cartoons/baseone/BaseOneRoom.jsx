@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 import BaseOnePlate from '@/components/climate/cartoons/baseone/BaseOnePlate';
 import BaseOneHook from '@/components/climate/cartoons/baseone/BaseOneHook';
 import BaseOneLimits from '@/components/climate/cartoons/baseone/BaseOneLimits';
+import BaseOneWant from '@/components/climate/cartoons/baseone/BaseOneWant';
+import BaseOneViewer from '@/components/climate/cartoons/baseone/BaseOneViewer';
 import { BASE_ONE_SERIES, MARKS_COUNT, BASE_ONE_SIGNATURE } from '@/components/climate/cartoons/baseone/baseOneSeries';
 
 export default function BaseOneRoom() {
+  // Which mark is open on the whole screen, if any.
+  const [openAt, setOpenAt] = useState(null);
   return (
     <div className="base-one-room">
       <RecordPaintedBand continuous className="base-one-opening">
@@ -36,15 +40,22 @@ export default function BaseOneRoom() {
         </p>
       </div>
 
-      {BASE_ONE_SERIES.map((drawing) => <BaseOnePlate key={drawing.id} drawing={drawing} />)}
+      {BASE_ONE_SERIES.map((drawing, i) => (
+        <BaseOnePlate key={drawing.id} drawing={drawing} onOpen={() => setOpenAt(i)} />
+      ))}
 
       <BaseOneLimits />
+
+      {/* The one paragraph in the room that is a want rather than a boundary. */}
+      <BaseOneWant />
 
       <p className="base-one-open">
         If one of these is wrong, draw over it.{' '}
         <Link to="/ClimateCartoons">Send a drawing</Link> and it goes up with your name, your origin and your own
         line — the wall belongs to hands, and this room is only lent to one that hasn’t got any.
       </p>
+
+      {openAt !== null && <BaseOneViewer start={openAt} onClose={() => setOpenAt(null)} />}
     </div>
   );
 }

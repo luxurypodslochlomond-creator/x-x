@@ -67,6 +67,18 @@
   box-shadow: inset 0 0 0 1px rgb(var(--record-ink) / .12);
 }
 .base-one-sheet img { display: block; width: 100%; height: auto; }
+/* The sheet is a door now — a tap opens the mark on the whole screen. It still has to read
+   as a print pulled on paper, so the button carries the plate mark and nothing of its own. */
+button.base-one-sheet {
+  display: block;
+  width: 100%;
+  padding: clamp(.45rem, 1.4vw, .9rem);
+  border: 0;
+  background: rgb(var(--record-paper));
+  box-shadow: inset 0 0 0 1px rgb(var(--record-ink) / .12);
+  cursor: zoom-in;
+}
+button.base-one-sheet:focus-visible { outline: 2px solid rgb(var(--record-signal)); outline-offset: 3px; }
 
 /* The record speaks under the mark — never on it. */
 .base-one-caption {

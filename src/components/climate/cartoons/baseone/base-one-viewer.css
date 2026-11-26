@@ -1,0 +1,145 @@
+/* ── ONE MARK, ON THE WHOLE SCREEN ───────────────────────────────────────────────
+   Paper, ink and the record's red, the same ground the room stands on. The sheet keeps its
+   own proportions and its plate mark; the words stay under it. Nothing is written on the
+   drawing, in any state, at any size. */
+
+.bov {
+  position: fixed;
+  inset: 0;
+  z-index: 240;
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0.8rem calc(0.8rem + env(safe-area-inset-bottom));
+  background: rgb(var(--record-paper));
+  color: rgb(var(--record-ink));
+  overscroll-behavior: contain;
+}
+
+.bov-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: none;
+}
+
+.bov-count {
+  font-family: var(--font-record-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-mark));
+}
+
+.bov-x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: rgb(var(--record-ink));
+  cursor: pointer;
+}
+
+.bov-x:focus-visible,
+.bov-nav button:focus-visible,
+.bov-sheet:focus-visible {
+  outline: 2px solid rgb(var(--record-signal));
+  outline-offset: 3px;
+}
+
+.bov-stage {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.bov-sheet {
+  display: block;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
+.bov-sheet img {
+  display: block;
+  width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+}
+
+.bov-zoomed { cursor: zoom-out; }
+
+.bov-zoomed img {
+  width: 190%;
+  max-width: none;
+  max-height: none;
+}
+
+.bov-words {
+  flex: none;
+  margin-top: 0.7rem;
+  padding-top: 0.6rem;
+  border-top: 2px solid rgb(var(--record-mark));
+}
+
+.bov-answers {
+  font-family: var(--font-record-ui);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+
+.bov-line {
+  margin-top: 0.35rem;
+  font-family: var(--font-heading);
+  font-size: 1.02rem;
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.bov-sign {
+  margin-top: 0.5rem;
+  font-family: var(--font-record-ui);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-ink) / 0.55);
+}
+
+.bov-nav {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  flex: none;
+}
+
+.bov-nav button {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid rgb(var(--record-ink) / 0.18);
+  background: rgb(var(--record-bone) / 0.6);
+  color: rgb(var(--record-ink));
+  cursor: pointer;
+}
+
+.bov-nav button:hover { border-color: rgb(var(--record-ink) / 0.45); }
+
+@media (min-width: 900px) {
+  .bov { padding: 1.4rem 2rem 1.6rem; }
+  .bov-sheet img { max-height: 70vh; }
+  .bov-words { max-width: 62ch; margin-left: auto; margin-right: auto; width: 100%; }
+  .bov-nav { max-width: 62ch; margin-left: auto; margin-right: auto; width: 100%; }
+}
