@@ -1098,6 +1098,13 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   #x-equals-x .covenant-close { padding: 0 1.15rem 1.75rem; }
   #x-equals-x .covenant-morse { padding: 1.75rem 1.15rem 1.4rem; }
   #x-equals-x .covenant-morse-code { font-size: 15px; gap: 1rem; }
+  /* A thumb is not a cursor. The press was ten-pixel type on a thirty-pixel block, which
+     is under the size a finger can be sure of — so on a phone it is a real target. */
+  #x-equals-x .covenant-morse-play {
+    min-height: 2.75rem;
+    padding: 0 1.15rem;
+    font-size: 11px;
+  }
   #x-equals-x .covenant-licence { padding: 2rem 1.15rem 2.25rem; }
 
   /* The bar floats over the foot of the record, so the foot is given the room back and
@@ -1120,6 +1127,15 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   padding: 0.55rem 0.9rem calc(0.55rem + env(safe-area-inset-bottom));
   background-color: rgb(var(--record-bone) / 0.97);
   border-top: 2px solid rgb(var(--record-ink));
+  /* It waits below the glass until the plate at the head of the page has gone past, so it
+     can never stand on the two doors that plate already carries. */
+  transform: translateY(115%);
+  pointer-events: none;
+  transition: transform 240ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+.x-eq-phonebar[data-shown] { transform: none; pointer-events: auto; }
+@media (prefers-reduced-motion: reduce) {
+  .x-eq-phonebar { transition: none; }
 }
 .x-eq-phonebar-main {
   flex: 1 1 auto;

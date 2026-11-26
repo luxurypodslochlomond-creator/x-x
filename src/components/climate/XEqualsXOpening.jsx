@@ -43,9 +43,18 @@ export default function XEqualsXOpening() {
             smaller size while it sounds — sixteen characters at headline size would run
             off a phone — and comes back to the mark when it is done. */}
         <h1 id="the-principle" className="covenant-equation" aria-label="x equals x" translate="no">
+          {/* ── THE CODE KEEPS THE MARK'S OWN SCALE ───────────────────────────────
+              Brian, 26 November, on a phone: "the x=x signal not working now on mobile".
+              It was working and it looked broken, which is worse. The mark grew to fill the
+              glass and the code stayed pinned at sixteen pixels, so pressing the biggest
+              thing on the page made it vanish and left a thin grey line where the name had
+              been. A signal has to answer at the size it was asked.
+              So the code is sized in the mark's own em: a fixed share of whatever the
+              heading is, on any screen, which is what the two layers were always meant to
+              be — one object in two alphabets, not a headline and a footnote. */}
           <XEqualsXMarkSignal
             className="covenant-equation-btn"
-            codeStyle={{ fontSize: 'clamp(0.95rem, 1.6vw, 1.6rem)', letterSpacing: '0.14em' }}
+            codeStyle={{ fontSize: '0.36em', letterSpacing: '0.1em' }}
           >
             <span aria-hidden="true">x</span><span aria-hidden="true">=</span><span aria-hidden="true">x</span>
           </XEqualsXMarkSignal>
