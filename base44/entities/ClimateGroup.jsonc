@@ -9,7 +9,11 @@
     },
     "topic": {
       "type": "string",
-      "description": "Shared interest (plastic shelters, plastic clothes, saving seagrasses, etc). Required."
+      "description": "Shared interest (plastic shelters, plastic clothes, saving seagrasses, etc), in the organiser's own words. Required."
+    },
+    "category": {
+      "type": "string",
+      "description": "The subject of the record this gathering works on \u2014 one of the record's own subjects, chosen by the organiser from the same list every entry is filed under. It is the one join between a group and the entries about the same thing: the group is shown beside the solutions and emergencies in that subject, and they are shown beside it. Chosen and never guessed \u2014 the free-text topic above is a person's own words and cannot be matched to a subject by a machine without risking putting somebody's work under the wrong heading. Empty means the gathering stands on its own, which most do."
     },
     "region": {
       "type": "string",

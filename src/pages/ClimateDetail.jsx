@@ -5,6 +5,7 @@ import { base44 } from '@/api/base44Client';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowLeft, ArrowRight, X, Calendar, Users, Sprout, Recycle, FileText, Hammer, Eye, Hand, Globe } from 'lucide-react';
 import RelatedTriangle from '@/components/climate/RelatedTriangle';
+import WorkingGroupLine from '@/components/climate/WorkingGroupLine';
 import ClimateCommentSection from '@/components/climate/ClimateCommentSection';
 import DrawingsAbout from '@/components/climate/cartoons/DrawingsAbout';
 import { useEntryTranslation } from '@/hooks/useEntryTranslation';
@@ -281,6 +282,8 @@ export default function ClimateDetail() {
             onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
           />
 
+          <WorkingGroupLine category={record.category} />
+
           <ClimateCommentSection entryId={record.id} entryType="action" />
         </div>
       </div>
@@ -412,6 +415,8 @@ export default function ClimateDetail() {
           onOpenItem={(next) => navigate(`/ClimateDetail/${next.entry_type}/${next.id}`)}
           onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
         />
+
+        <WorkingGroupLine category={record.category} />
 
         {/* A crisis that has been drawn about shows the drawings, because the room of
             cartoons and the record are one thing: the drawing answers this entry, and this

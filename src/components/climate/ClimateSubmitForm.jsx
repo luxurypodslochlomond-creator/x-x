@@ -73,6 +73,10 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
   const [step, setStep] = useState(initialType ? 1 : 0);
   const [form, setForm] = useState({
     title: '', summary: '', details: '', category: initialCategory || 'agriculture',
+    // A group's subject is its own field and starts empty: the entry category above
+    // defaults to agriculture, and a group quietly filed under a default would be a
+    // connection nobody chose.
+    group_category: initialCategory || '',
     country: '', region_rough: '', image_url: '', source_name: '', source_url: '',
     source_author: '', source_date: '',
     submitter_name: '', submitter_email: '',
@@ -190,6 +194,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
           ? {
               name: form.name, topic: form.topic, region: form.region,
               description: form.description, contact_email: form.contact_email,
+              category: form.group_category || null,
               submitter_name: form.submitter_name, submitter_email: form.submitter_email,
             }
           : { ...form, entry_type: entryType }
@@ -334,6 +339,13 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
 
                 <Field label="Topic *" hint="What you and others are working on, in a few words. This is how someone finds you.">
                   <input value={form.topic} onChange={e => set('topic', e.target.value)} placeholder="e.g. Saving seagrasses" className={fieldClass} />
+                </Field>
+
+                <Field label="Which subject on the record?" hint="Optional. Choose one and the record puts your group beside the solutions and emergencies in that subject, and them beside you. Leave it empty and the group stands on its own.">
+                  <select value={form.group_category || ''} onChange={e => set('group_category', e.target.value)} className={fieldClass}>
+                    <option value="">Not linked to a subject</option>
+                    {categories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
+                  </select>
                 </Field>
 
                 <Field label="Region (rough) *" hint="Rough only — a coastline, a country, a city. Never a street or an exact place.">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import GroupSubjectLinks from '@/components/climate/GroupSubjectLinks';
 import { createPageUrl } from '@/utils';
 import { base44 } from '@/api/base44Client';
 import { Globe, Droplets, Leaf, Sun, Waves, TreePine, Recycle, Zap, MapPin, Bird, Fish, Sprout, CloudRain, Wind, ArrowRight, X, Plus, Users } from 'lucide-react';
@@ -772,6 +773,9 @@ export default function TogetherChangeClimate() {
                       <span className="text-[10px] font-black font-mono uppercase tracking-widest">{g.region || 'Global'}</span>
                     </div>
                     <p className="text-[12.5px] text-[#3a342c] leading-relaxed mt-2">{g.description}</p>
+                    {/* The subject the organiser chose is the join between this group and
+                        the entries about the same thing. Nothing chosen, nothing shown. */}
+                    <GroupSubjectLinks category={g.category} items={items} actions={actions} groupId={g.id} />
                     {g.contact_email ? (
                       <a href={`mailto:${g.contact_email}`} className="inline-flex items-center gap-1 mt-2.5 text-[11px] font-black font-mono uppercase text-[#b3261e] active:text-[#e2602a]">
                         Contact organizer →
