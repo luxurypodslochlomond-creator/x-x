@@ -10,6 +10,12 @@ import { PinnedNote, TinyCrowd } from '@/components/climate/cartoons/CartoonInkI
 export default function CartoonWall() {
   const wall = useCartoonWall(true);
   const [reading, setReading] = useState(null);
+  // ── THE RECORD NAMES ITS OWN GAPS ────────────────────────────────────────────
+  // Five drawings were credited to a studio's brand rather than to a hand. Printing the
+  // studio as though it were the artist was the wrong fix; inventing a name would be worse.
+  // So the wall says the number out loud, and says whose job it is. A gap a reader can see
+  // is a gap somebody will close; a gap hidden behind a logo is one nobody ever will.
+  const unnamed = wall.cartoons.filter((cartoon) => cartoon.artist_name === 'Hand not yet named').length;
   return (
     <section className="comic-wall" aria-labelledby="cartoon-wall-title">
       <header className="cartoon-wall-head">
@@ -30,6 +36,11 @@ export default function CartoonWall() {
       <div className="cartoon-human-wall">
         {wall.cartoons.map((cartoon, i) => <CartoonPlate key={cartoon.id} cartoon={cartoon} lead={i === 0} index={i + 1} onOpen={() => setReading(i)} />)}
       </div>
+      {unnamed > 0 && (
+        <p className="record-meta cartoon-wall-gap" role="note">
+          {unnamed === 1 ? 'One drawing here does not yet name' : `${unnamed} drawings here do not yet name`} the hand that drew {unnamed === 1 ? 'it' : 'them'}. That is the record’s to put right, not theirs — so it is said here rather than covered with a studio’s name.
+        </p>
+      )}
       <p className="record-meta cartoon-wall-colophon">The artists’ own words, kept with their work. Shown with permission. Every new contribution waits for a person’s look.</p>
       {wall.hasNextPage && <button type="button" className="comic-load-more" disabled={wall.isFetchingNextPage} onClick={() => wall.fetchNextPage()}>{wall.isFetchingNextPage ? 'Opening more…' : 'More from the wall'}</button>}
       {wall.isFetchNextPageError && <p className="record-meta comic-error-note" role="alert">More drawings could not be opened. Use “More from the wall” to try again.</p>}
