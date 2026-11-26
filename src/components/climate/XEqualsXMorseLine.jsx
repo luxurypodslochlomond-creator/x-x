@@ -1,4 +1,5 @@
 import React from 'react';
+import useMorseSignal, { MORSE_GROUPS } from '@/hooks/useMorseSignal';
 
 // ── THE MARK, IN MORSE ────────────────────────────────────────────────────────────
 // Brian, 26 November: "Morse code should we include that in tongue bro or is that too
@@ -25,18 +26,27 @@ import React from 'react';
 // case of that, printed at the foot of its most abstract claim. It is not a joke about
 // code. It is the smallest possible signal that still means something, which is the whole
 // argument, sent in three characters.
-const MORSE = ['-..-', '-...-', '-..-'];
-
+//
+// And it can be heard, once, because a rhythm is what Morse actually is. Pressed, never
+// automatic; once, never on a loop. The group being sounded goes to ink so a deaf reader
+// and a hearing one are reading the same event.
 export default function XEqualsXMorseLine() {
+  const { playing, lit, play } = useMorseSignal();
+
   return (
     <div className="covenant-morse">
       <p className="covenant-morse-code" translate="no" aria-label="x = x, in Morse code">
-        {MORSE.map((group, i) => (
-          <span key={i}>{group}</span>
+        {MORSE_GROUPS.map((group, i) => (
+          <span key={i} data-lit={lit === i ? '' : undefined}>{group}</span>
         ))}
       </p>
+
+      <button type="button" className="covenant-morse-play" onClick={play} disabled={playing} aria-busy={playing}>
+        {playing ? 'Sounding' : 'Hear it once'}
+      </button>
+
       <p className="covenant-morse-note">
-        No tongue, no font, no power beyond a switch
+        No tongue, no font, no power beyond a switch. Pressed once, never on a loop.
       </p>
     </div>
   );

@@ -798,6 +798,57 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   letter-spacing: 0.16em;
   color: rgb(var(--record-mark));
 }
+/* ── SAID OUT LOUD, ONCE ───────────────────────────────────────────────────────────
+   The same rule the music room keeps: a thing is pressed to play, never played at
+   anyone, and never on a loop. A loop would turn a fact a reader can count into a
+   ringtone, and a page that beeps when it opens is a page shouting. */
+#x-equals-x .covenant-morse-play {
+  appearance: none;
+  margin: 0.2rem 0 0;
+  padding: 0.55rem 0.95rem;
+  background: transparent;
+  border: 1px solid rgb(var(--record-ink) / 0.45);
+  color: rgb(var(--record-ink));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition: background-color 0.14s ease-out, color 0.14s ease-out;
+}
+#x-equals-x .covenant-morse-play:hover,
+#x-equals-x .covenant-morse-play:focus-visible {
+  background: rgb(var(--record-ink));
+  color: rgb(var(--record-bone));
+}
+#x-equals-x .covenant-morse-play[disabled] { cursor: default; opacity: 0.55; }
+/* The group being sounded goes to ink, so the ear and the eye are reading one event. */
+#x-equals-x .covenant-morse-code span[data-lit] { color: rgb(var(--record-ink)); }
+
+/* ── THE LICENCE, AS A FOOTNOTE RATHER THAN A BADGE ────────────────────────────────
+   Terms are read by the one reader in a thousand who is looking for them, and they
+   should be findable without being a banner. Mono, small, in the muted ink, at the very
+   foot of the page — the place a printed record has always put its imprint. */
+#x-equals-x .covenant-licence {
+  max-width: 52ch;
+  margin: 0 auto;
+  padding: 0 1.25rem 2.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  line-height: 1.85;
+  letter-spacing: 0.05em;
+  text-align: center;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-licence strong { font-weight: 700; color: rgb(var(--record-ink)); }
+#x-equals-x .covenant-licence a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-red));
+}
+
 #x-equals-x .covenant-morse-note {
   max-width: 40ch;
   margin: 0;

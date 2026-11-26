@@ -118,6 +118,27 @@ export default function XEqualsX() {
         </Link>
       </div>
 
+      {/* ── THE WORDS ARE GIVEN, NOT SOLD ────────────────────────────────────────
+          Brian, 26 November: "should make x=x page open source so people can keep and pass
+          on… don't want anyone stealing our x=x… it's for all of us".
+
+          A licence does not stop copying — that is the thing worth being clear about. What
+          it does is stop the one move that would actually take the principle away: copying
+          it, closing it, and selling it back. CC BY-SA means anyone may take these words,
+          change them, print them and pass them on, so long as the name stays on them and
+          whoever takes them next is under the same terms. Attribution, and share-alike: the
+          anti-extraction licence, in the only place it can be enforced — in public.
+
+          The software underneath is the covenant's own business, and that page states the
+          GNU AGPL-3.0 and says plainly that no public repository exists yet. This line is
+          about the words on this page, which need no repository to be taken. */}
+      <p className="covenant-licence">
+        The words on this page are <strong>CC BY-SA 4.0</strong> — take them, change them, print
+        them, put them on a wall. Keep the name on them, and let whoever takes them next do the
+        same. The code that serves this record is under the GNU AGPL-3.0, as{' '}
+        <Link to="/ExtractionProofCovenant">the covenant</Link> says.
+      </p>
+
 
     </div>
   );
