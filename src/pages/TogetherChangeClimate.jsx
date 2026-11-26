@@ -12,6 +12,7 @@ import { isPreviewSandbox } from '@/lib/previewWorkers';
 import { seedTranslations } from '@/components/shared/translation/translationCache';
 import { useSiteLanguage } from '@/components/shared/SiteLanguage';
 import SubjectRail from '@/components/climate/SubjectRail';
+import SubjectHand from '@/components/climate/SubjectHand';
 import SubjectPickerSheet from '@/components/climate/SubjectPickerSheet';
 import SubjectMark from '@/components/climate/SubjectMark';
 import SignalBeacon from '@/components/climate/SignalBeacon';
@@ -640,6 +641,9 @@ export default function TogetherChangeClimate() {
           onOpenIndex={() => setShowIndex(open => !open)}
           onOpenPicker={() => setShowIndex(true)}
         />
+        {/* The marks that carry something, standing together under the theme line — so the
+            record's hand is visible where the choice is made, not only inside the picker. */}
+        <SubjectHand subjects={filledSubjects} selected={selectedCategory} onSelect={selectTheme} />
         <SubjectPickerSheet
           open={showIndex}
           onClose={() => setShowIndex(false)}
