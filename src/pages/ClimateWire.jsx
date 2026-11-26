@@ -10,7 +10,7 @@ export default function ClimateWire() {
   const [q, setQ] = useState(() => new URLSearchParams(window.location.search).get('q') || '');
   const signals = useSignalPage({ query: q, kind, verification: filter });
   return <div className="news-page text-record-ink">
-    <NewsIndex entries={signals.entries} loading={signals.isPending || signals.searching} query={q} onQueryChange={setQ} kind={kind} onKindChange={setKind} verification={filter} onVerificationChange={setFilter} onSubmit={() => setFormOpen(true)} hasMore={signals.hasNextPage} loadingMore={signals.isFetchingNextPage} onMore={() => signals.fetchNextPage()} />
+    <NewsIndex entries={signals.entries} keptDay={signals.keptDay} loading={signals.isPending || signals.searching} query={q} onQueryChange={setQ} kind={kind} onKindChange={setKind} verification={filter} onVerificationChange={setFilter} onSubmit={() => setFormOpen(true)} hasMore={signals.hasNextPage} loadingMore={signals.isFetchingNextPage} onMore={() => signals.fetchNextPage()} />
     {formOpen && <NewsSubmitForm onClose={() => setFormOpen(false)} onSent={() => signals.refetch()} />}
   </div>;
 }

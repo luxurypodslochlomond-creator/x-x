@@ -10,7 +10,7 @@ import '@/components/climate/news-index.css';
 import '@/components/climate/wire-mobile.css';
 import '@/components/climate/wire-desktop.css';
 import '@/components/climate/wire-phone.css';
-export default function NewsIndex({ entries, loading, query, onQueryChange, kind, onKindChange, verification, onVerificationChange, onSubmit, hasMore, loadingMore, onMore }) {
+export default function NewsIndex({ entries, keptDay, loading, query, onQueryChange, kind, onKindChange, verification, onVerificationChange, onSubmit, hasMore, loadingMore, onMore }) {
   const [lead, ...rest] = entries;
   // A search settling must not empty the page under the reader's thumb: the list stays
   // and one quiet line says it is looking. Only a first load has nothing to keep.
@@ -21,6 +21,8 @@ export default function NewsIndex({ entries, loading, query, onQueryChange, kind
     <p className="news-index-intro">What is happening. Who is doing something about it. Where the evidence leads.</p>
     <NewsIndexTools query={query} onQueryChange={onQueryChange} kind={kind} onKindChange={onKindChange} verification={verification} onVerificationChange={onVerificationChange} />
     {searching && <p className="news-searching" role="status">Searching the Wire…</p>}
+    {/* No signal: the copy this phone kept, and the day it kept it. Never presented as live. */}
+    {keptDay && <p className="news-searching" role="status">You are reading the copy this phone kept on {new Date(keptDay).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}. The Wire itself could not be reached.</p>}
     {firstLoad ? <p className="news-state" role="status"><LoaderCircle size={21} className="animate-spin" /> Loading the Wire…</p> : !lead ? <p className="news-state" role="status">{query.trim() ? 'No update matches those words. Try a place, a subject or a source.' : 'No update under this heading yet.'}</p> : <>
       <NewsLead entry={lead} />
       <div className="news-rows">{rest.map(entry => <NewsRow key={entry.id} entry={entry} />)}</div>
