@@ -774,3 +774,35 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   #x-equals-x :is(.covenant-equation, .covenant-purpose, .covenant-hero-detail, .covenant-front-note) { color: #141210 !important; }
   #x-equals-x .covenant-equation span:nth-child(2) { color: #141210; }
 }
+
+/* ── THE MARK, IN MORSE ────────────────────────────────────────────────────────────
+   A code belongs on a signal, not in the list of tongues — so it is printed on the mark
+   itself, once, in the record's red. Nothing moves: a signal that animated would be a
+   gimmick, and this one is a fact a reader can count. */
+#x-equals-x .covenant-morse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 1.25rem 1.35rem;
+  text-align: center;
+}
+#x-equals-x .covenant-morse-code {
+  display: flex;
+  gap: 1.15rem;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  color: rgb(var(--record-mark));
+}
+#x-equals-x .covenant-morse-note {
+  max-width: 40ch;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px;
+  line-height: 1.7;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}

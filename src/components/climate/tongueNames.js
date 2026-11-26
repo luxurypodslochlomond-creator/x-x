@@ -180,6 +180,7 @@ export const TONGUE_EN = {
   // Nigeria beyond the three everybody lists — so a reader who types "Bini" or "Ijaw"
   // finds the tongue it means.
   bin: 'Edo (Bini)',
+  fon: 'Fon',
   urh: 'Urhobo',
   ish: 'Esan (Ishan)',
   efi: 'Efik',

@@ -123,13 +123,21 @@ export default function ClimateMusic() {
 
   const active = tracks.find((t) => t.id === activeId) || null;
 
+  // ── THE ROOM IS CALLED WHAT IT DOES ───────────────────────────────────────────
+  // Brian, 26 November: "why music not right word now bro is FORK a better name".
+  // Because the room already forks: when an artist hands over a master they choose take it
+  // whole or hear it here only, and that choice is the whole of it. A name that says what a
+  // room does is worth more than one that says what it holds.
+  //
+  // The way in still says Music, because a cold reader has to be able to find it — the fork
+  // is what you meet once you are through the door, not a word to decode in the navigation.
   return (
     <>
     <ClimateRecordShell
       eyebrow="The record's music"
       marker="Given to the record · never sold · no plays counted, no cut taken"
-      title="Music"
-      statement="Music given to the record. Free to hear, the master whole, the artist's name kept on it."
+      title="FORK"
+      statement="Music, given away to be copied. Free to hear, the master whole, the artist's name kept on it."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
     >

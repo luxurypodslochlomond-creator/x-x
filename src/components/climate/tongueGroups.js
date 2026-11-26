@@ -76,7 +76,7 @@ export const TONGUE_GROUPS = [
     title: 'Africa',
     codes: [
       'sw', 'yo', 'ig', 'ha', 'zu', 'xh', 'sn', 'so', 'am', 'wo',
-      'bin', 'urh', 'ish', 'efi', 'ibb', 'anw', 'tiv', 'ijc', 'kau', 'fuv',
+      'bin', 'fon', 'urh', 'ish', 'efi', 'ibb', 'anw', 'tiv', 'ijc', 'kau', 'fuv',
       'nup', 'igl', 'idu', 'bom',
       'af', 'om', 'ti', 'rw', 'ln', 'mg', 'bm', 'ak', 'ee', 'st', 'tn', 'ny', 'zgh',
     ],

@@ -218,7 +218,7 @@ async function askModel(base44, words, lang) {
   // A tongue that is well documented is not on this list and is not slowed down by it.
   const THIN = new Set([
     // Nigeria, beyond the three the world usually lists
-    'bin', 'urh', 'ish', 'efi', 'ibb', 'anw', 'tiv', 'ijc', 'kau', 'fuv',
+    'bin', 'fon', 'urh', 'ish', 'efi', 'ibb', 'anw', 'tiv', 'ijc', 'kau', 'fuv',
     'nup', 'igl', 'idu', 'bom',
     // and the other tongues on the record with little written material behind them
     'nv', 'lkt', 'ojb', 'hop', 'apw', 'moh', 'yua', 'nah', 'ay', 'qu', 'gn',

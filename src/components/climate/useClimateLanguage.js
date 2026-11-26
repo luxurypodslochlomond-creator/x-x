@@ -68,6 +68,10 @@ export const LANGS = [
   // translateClimate: where the machine does not know a word, it now returns nothing and the
   // English stands, rather than printing a fluent guess in somebody's mother tongue.
   { code: 'bin', label: 'Ẹdo (Bini)' },
+  // Benin City's tongue was here; Benin the country's was not. Fɔngbè is the tongue most
+  // people in Benin actually speak, and it is the tongue of the returned bronzes' own
+  // country — a record that can carry the museum and not the language has not finished.
+  { code: 'fon', label: 'Fɔngbè (Fon)' },
   { code: 'urh', label: 'Urhobo' },
   { code: 'ish', label: 'Ẹsan (Esan)' },
   { code: 'efi', label: 'Efik' },

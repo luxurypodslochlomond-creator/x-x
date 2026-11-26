@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
+import XEqualsXMorseLine from '@/components/climate/XEqualsXMorseLine';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
@@ -44,6 +45,10 @@ export default function XEqualsX() {
         </p>
         <p className="covenant-epigraph-mark" translate="no">x = x</p>
       </div>
+
+      {/* The same mark, spelled in dots and dashes: a code belongs on a signal, not in
+          the list of tongues. */}
+      <XEqualsXMorseLine />
 
       <XEqualsXOpening />
 
