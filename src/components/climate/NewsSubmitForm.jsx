@@ -5,6 +5,7 @@ import { createPageUrl } from '@/utils';
 import SmartPaste from '@/components/climate/SmartPaste';
 import recordKindOf from '@/components/climate/recordKinds';
 import Field, { fieldClass, hintClass } from '@/components/climate/submit/Field';
+import SendInPlainWords from '@/components/climate/SendInPlainWords';
 
 // Sending an entry to the wire. The source is not an optional extra here — it is the
 // entry's reason for existing. A hidden bot trap sits alongside it, same as the record.
@@ -181,6 +182,8 @@ export default function NewsSubmitForm({ onClose, onSent, initialKind }) {
               }))}
             />
 
+            <SendInPlainWords />
+
             <Field label="Headline *">
               <input value={form.headline} onChange={e => set('headline', e.target.value)} placeholder="e.g. Eight hectares of seagrass restored in England" className={fieldClass} />
             </Field>
@@ -237,7 +240,7 @@ export default function NewsSubmitForm({ onClose, onSent, initialKind }) {
               <input value={form.source_name} onChange={e => set('source_name', e.target.value)} placeholder="e.g. World Meteorological Organization" className={fieldClass} />
             </Field>
 
-            <Field label="Link to the origin" hint="A working original link is needed for automatic publication. Without one, the submission waits for a custodian.">
+            <Field label="Link to the origin" hint="A working original link is needed for automatic publication. Without one, a person reads it first.">
               <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className={fieldClass} />
             </Field>
 

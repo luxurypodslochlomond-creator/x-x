@@ -49,7 +49,7 @@ export default function RecordSaySomething() {
       <section id="say" className="border-2 border-[#1e3a2b] bg-[#1e3a2b]/5 p-4 lg:p-5">
         <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#1e3a2b]">Sent · kept</p>
         <p className="mt-2 text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210]">
-          Your message is with the record's custodians, and an answer comes back to the address you gave. Nothing
+          Your message is with the people who keep the record, and an answer comes back to the address you gave. Nothing
           was published, and nothing on the record changed by sending this — a person reads it first, which
           is the whole point of writing.
         </p>
@@ -65,7 +65,7 @@ export default function RecordSaySomething() {
         className="font-black uppercase text-[#141210] mb-1"
         style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 26px)', letterSpacing: '-0.01em' }}
       >
-        Contact the custodians
+        Contact the record
       </h2>
       <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mb-3">
         A private message about an entry, a correction or your rights. This does not publish an entry. No account needed; your email is for a reply.

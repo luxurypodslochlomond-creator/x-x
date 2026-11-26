@@ -5,6 +5,7 @@ import { useClimateCategories } from '@/hooks/useClimateCategories';
 import { createPageUrl } from '@/utils';
 import SmartPaste from '@/components/climate/SmartPaste';
 import Field, { fieldClass, hintClass } from '@/components/climate/submit/Field';
+import SendInPlainWords from '@/components/climate/SendInPlainWords';
 
 function SuccessScreen({ entryType, onClose, published }) {
   useEffect(() => {
@@ -25,7 +26,7 @@ function SuccessScreen({ entryType, onClose, published }) {
       </p>
       <p className="text-[13px] text-[#5a5246] leading-relaxed max-w-[340px] mb-6">
         {published
-          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A custodian can take it down, and we would email you first.'
+          ? 'It went up straight away — sharing something small counts, that is the whole point of this record. A person here can take it down, and we would email you first.'
           : isGroup
           ? 'A person checks every group that gives a contact line, so the address printed is the organiser\'s own and not somebody else\'s. We will email you the moment it is up.'
           : 'The spam screen was unsure about this one, so a person will look before it appears. We will email you either way.'}
@@ -297,8 +298,9 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
             </p>
 
             <p className={hintClass}>
-              Three more screens after this one: what happened, where it is, and your email.
+              Three more screens after this one: what happened, where it is, and how to reach you.
             </p>
+            <SendInPlainWords />
           </div>
         )}
 

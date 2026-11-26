@@ -53,7 +53,7 @@ export default function RecordAddPlate({ onPick }) {
       <p className="mt-1.5 text-[11px] font-mono leading-relaxed text-[#5a5246]">
         A method, an ongoing crisis, something to join, or a group. Sharing dated news?{' '}
         <Link to="/ClimateWire?submit=1" className="font-bold text-record-ink underline underline-offset-4">Add to the Wire</Link>.
-        {' '}Screening is not independent verification; unclear entries wait for a custodian.
+        {' '}Screening is not independent verification; unclear entries wait for a person to read them.
       </p>
     </section>
   );
