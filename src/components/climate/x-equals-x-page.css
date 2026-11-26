@@ -1054,3 +1054,115 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   text-transform: uppercase;
   color: rgb(var(--record-muted));
 }
+
+/* ── THE PHONE IS NOT A NARROW DESK ──────────────────────────────────────────────
+   Brian, 26 November, holding it: "why does it feel like old website on device and not
+   coolasfuck". The answer was in the shape rather than in the words. On a desk this page
+   is a sheet with margins; on a phone it was a column of small inset boxes with gaps
+   between them, which is the shape of a blog post and not the shape of a record. The
+   record's own foot never has that problem, because it runs edge to edge and says one
+   thing at the full width of the glass.
+
+   So on a phone the page becomes one continuous printed sheet: every section runs to both
+   edges, the rules between them are the only division, and the mark opens at the width of
+   the phone instead of sitting in it like a logo. Nothing about the order or the argument
+   changes — a phone gets the same document, printed for the size of paper it is on. */
+@media (max-width: 1023px) {
+  #x-equals-x.covenant-page {
+    font-size: 1rem;
+    line-height: 1.7;
+    padding-bottom: 3rem;
+  }
+  #x-equals-x .covenant-epigraph { padding: 0.8rem 1rem; }
+
+  /* The name, at the width of the phone. */
+  #x-equals-x .covenant-equation { font-size: clamp(3.25rem, 21vw, 5rem) !important; }
+  #x-equals-x .covenant-hero-inner { padding: 2.75rem 1.15rem 3rem; gap: 1.1rem; }
+  #x-equals-x .covenant-hero-actions { width: 100%; }
+  #x-equals-x .covenant-hero-actions .covenant-btn,
+  #x-equals-x .covenant-hero .covenant-share button { flex: 1 1 auto; }
+
+  #x-equals-x .covenant-band--centre { padding: 1.75rem 1.15rem; }
+
+  /* Edge to edge, ruled rows: one sheet rather than four cards. */
+  #x-equals-x .covenant-stack { padding: 0; gap: 0; }
+  #x-equals-x .covenant-card {
+    border: 0;
+    border-bottom: 1px solid rgb(var(--record-ink));
+    padding: 1.45rem 1.15rem;
+    background-color: rgb(247 241 229 / 0.98);
+  }
+  #x-equals-x .covenant-card:first-child { border-top: 4px solid rgb(var(--record-red)); }
+
+  #x-equals-x .covenant-promises strong { font-size: 1.125rem; }
+  #x-equals-x .covenant-close { padding: 0 1.15rem 1.75rem; }
+  #x-equals-x .covenant-morse { padding: 1.75rem 1.15rem 1.4rem; }
+  #x-equals-x .covenant-morse-code { font-size: 15px; gap: 1rem; }
+  #x-equals-x .covenant-licence { padding: 2rem 1.15rem 2.25rem; }
+
+  /* The bar floats over the foot of the record, so the foot is given the room back and
+     the names printed on it are never hidden behind a button. */
+  body:has(.x-eq-phonebar) footer { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
+}
+
+/* ── THE BAR AT THE FOOT OF THE GLASS ───────────────────────────────────────────
+   Only on a phone, in the record's own clothes: the machine's mono caps, one ink rule, the
+   paper underneath, and the safe-area padding so it clears the home indicator. */
+.x-eq-phonebar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem calc(0.55rem + env(safe-area-inset-bottom));
+  background-color: rgb(var(--record-bone) / 0.97);
+  border-top: 2px solid rgb(var(--record-ink));
+}
+.x-eq-phonebar-main {
+  flex: 1 1 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0 0.9rem;
+  background-color: rgb(var(--record-ink));
+  color: rgb(var(--record-bone));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+}
+.x-eq-phonebar-main:active { background-color: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
+.x-eq-phonebar .x-eq-phonebar-share { flex: 0 0 auto; display: flex; }
+.x-eq-phonebar .covenant-share button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 3rem;
+  padding: 0 0.95rem;
+  background-color: transparent;
+  border: 2px solid rgb(var(--record-ink));
+  color: rgb(var(--record-ink));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+}
+.x-eq-phonebar .covenant-share button:active {
+  background-color: rgb(var(--cartoon-sun));
+  border-color: rgb(var(--cartoon-sun));
+}
+@media (min-width: 1024px) {
+  .x-eq-phonebar { display: none; }
+}

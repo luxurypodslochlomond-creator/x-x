@@ -6,6 +6,7 @@ import SignalBeacon from '@/components/climate/SignalBeacon';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXMorseLine from '@/components/climate/XEqualsXMorseLine';
 import CovenantLicence from '@/components/climate/CovenantLicence';
+import XEqualsXPhoneBar from '@/components/climate/XEqualsXPhoneBar';
 import XEqualsXMarkSignal from '@/components/climate/XEqualsXMarkSignal';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
@@ -142,7 +143,10 @@ export default function XEqualsX() {
           about the words on this page, which need no repository to be taken. */}
       <CovenantLicence />
 
-
+      {/* ── AND, ON A PHONE, THE TWO DOORS WHERE THE HAND IS ─────────────────────
+          Brian, 26 November: "why can't be next level bro of PWA layout on mobile".
+          The bar exists only under 1024 pixels and adds no claim to the page. */}
+      <XEqualsXPhoneBar />
     </div>
   );
 }
