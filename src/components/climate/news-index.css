@@ -37,37 +37,47 @@
   color: rgb(var(--record-muted));
   text-wrap: pretty;
 }
-/* ── THE KIND, SET LIKE THE DATE ────────────────────────────────────────────────
-   Brian, 26 November: "should be that coolasfuck faint for record stamp bro and caps … like
-   the date". It was a rounded coloured pill: a label off a web page rather than a stamp on a
-   register. It is now the date's own hand — mono, upper case, tracked out, tabular, no box,
-   no rounding — so the two read as one line of a document, "SOLUTION · 26 MAY 2026", rather
-   than as a badge sitting next to a headline. The colour stays, at the strength of printed
-   ink rather than a block, because the colour is the one part doing the work. */
+/* ── THE KIND IS A STAMP, AND IT IS PRINTED ─────────────────────────────────────
+   Brian, 26 November, twice in one evening. First: "faint for record stamp bro and caps …
+   like the date" — so the pill came off and it was set in the date's own hand. Then:
+   "maybe subtle isn't right bro and bro maybe need bold here bro and most coolasfuck record
+   font … mind record of our time for future generations … for cartoonists and Yale and Penn
+   and Columbia and Tufts, and the most clinical technology critic and super intelligence".
+   He is right, and the reason is the reader: a whisper is for a page nobody will audit. This
+   record will be read by people whose job is to find the overstatement in it, so the one word
+   that says what kind of thing an entry is gets the record's own heading face, at bold, in a
+   solid block of the kind's ink with the word cut out of it in paper — a rubber stamp on a
+   register, square and flat, not a rounded label off a web page. It is set to be quoted. */
 .news-stamp {
   display: inline-flex;
   align-items: center;
-  padding: 0;
+  padding: .34rem .62rem;
   border-radius: 0;
-  background: none;
-  font-family: var(--font-record-ui);
-  font-size: .62rem;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: .18em;
+  font-family: var(--font-heading);
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: .16em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
 }
-.news-stamp-initiative { color: rgb(var(--record-ochre)); }.news-stamp-emergency { color: rgb(var(--record-red)); }.news-stamp-milestone { color: rgb(var(--record-botanical)); }.news-emergency { color: rgb(var(--record-red)); }
+.news-stamp-emergency { background: rgb(var(--record-red)); color: rgb(var(--record-paper)); }
+.news-stamp-milestone { background: rgb(var(--record-botanical)); color: rgb(var(--record-paper)); }
+.news-stamp-initiative { background: rgb(var(--record-ochre)); color: rgb(var(--record-paper)); }
+.news-emergency { color: rgb(var(--record-red)); }
 
 /* ── SO A READER CAN SEE WHERE ONE ENTRY ENDS ─────────────────────────────────
    Brian, 26 November: "should be subtly background colour so can see separation from
-   entries". Three kinds, three washes at the strength of a watermark — the same three inks
-   as the stamps and the rooms, at a weight that never competes with the words on top of it.
-   The hairline stays: a wash says which entry you are in, the rule says where it stops. */
-.news-row[data-kind="emergency"] { background: rgb(var(--record-red) / .05); }
-.news-row[data-kind="milestone"] { background: rgb(var(--record-botanical) / .06); }
-.news-row[data-kind="initiative"] { background: rgb(var(--record-ochre) / .07); }
+   entries" — then, seeing it: "maybe subtle isn't right bro". A watermark does not divide a
+   page; a rule does. Each entry now carries a solid bar of its kind's ink down the left edge,
+   the same bar the register uses at the top of an account, over a wash strong enough to hold
+   the entry apart from the one above it. Set as an inset shadow rather than a border, so the
+   bar survives the desktop rules that strip the card's border and follows its corners. */
+/* A straight bar cannot run down a rounded corner, so the entry is squared off here: the
+   Wire is a register, and a register has edges, not soft cards. */
+.news-row[data-kind="emergency"] { background: rgb(var(--record-red) / .1); box-shadow: inset 6px 0 0 rgb(var(--record-red)); border-radius: 0; }
+.news-row[data-kind="milestone"] { background: rgb(var(--record-botanical) / .11); box-shadow: inset 6px 0 0 rgb(var(--record-botanical)); border-radius: 0; }
+.news-row[data-kind="initiative"] { background: rgb(var(--record-ochre) / .12); box-shadow: inset 6px 0 0 rgb(var(--record-ochre)); border-radius: 0; }
 .news-lead-plate { display: block; margin-top: 1rem; overflow: hidden; border-radius: 15px; background: rgb(var(--record-paper)); }.news-lead-plate img { display: block; width: 100%; max-height: 32rem; object-fit: contain; }
 .news-lead-heading { margin: 1.1rem 0 0; max-width: 29ch; font-size: clamp(1.85rem,4vw,3.2rem); font-weight: 700; line-height: 1.08; letter-spacing: -.035em; text-transform: none; }.news-lead-heading a,.news-row-heading a { display: block; color: inherit; text-decoration: none; text-wrap: pretty; }
 .news-lead-standfirst { margin: 1rem 0 0; font-size: 15px; line-height: 1.65; color: rgb(var(--record-ink)/.8); }.news-lead-meta { display: flex; flex-wrap: wrap; gap: .35rem .8rem; margin-top: 1rem; font-size: 12px; line-height: 1.5; color: rgb(var(--record-muted)); }.news-credit { margin: .5rem 0 0; font-size: 11px; line-height: 1.5; color: rgb(var(--record-muted)); }
