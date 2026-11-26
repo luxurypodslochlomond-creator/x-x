@@ -34,7 +34,7 @@ export default function RecordFooter() {
           <XEqualsXMarkSignal
             className="text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-record-red"
             style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(46px, 9.5vw, 70px)', lineHeight: 1, letterSpacing: '-0.035em' }}
-            playingStyle={{ fontSize: 'clamp(14px, 3.2vw, 24px)', letterSpacing: '0.12em' }}
+            codeStyle={{ fontSize: 'clamp(14px, 3.2vw, 24px)', letterSpacing: '0.12em' }}
           />
         ) : (
           <Link

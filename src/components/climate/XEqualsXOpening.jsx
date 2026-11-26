@@ -45,7 +45,7 @@ export default function XEqualsXOpening() {
         <h1 id="the-principle" className="covenant-equation" aria-label="x equals x" translate="no">
           <XEqualsXMarkSignal
             className="covenant-equation-btn"
-            playingStyle={{ fontSize: 'clamp(1.05rem, 1.6vw, 1.75rem)', letterSpacing: '0.14em' }}
+            codeStyle={{ fontSize: 'clamp(0.95rem, 1.6vw, 1.6rem)', letterSpacing: '0.14em' }}
           >
             <span aria-hidden="true">x</span><span aria-hidden="true">=</span><span aria-hidden="true">x</span>
           </XEqualsXMarkSignal>

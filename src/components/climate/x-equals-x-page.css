@@ -167,14 +167,27 @@
   color: rgb(var(--record-mark));
 }
 #x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-mark)); }
-/* The hero mark is a button now, so it carries the row the headline used to lay out. */
+/* ── THE FLIP IS A CROSSFADE, NOT A SWAP ───────────────────────────────────────────
+   Brian, 26 November: "why is it a wee bit jumpy bro". Because it was. The glyph and the
+   code replaced one another in a single frame, and the code is set smaller than the glyph,
+   so the mark's line box shrank and everything under it moved up and back down.
+   Two layers stacked in one grid cell fix both faults at once: the box is always as tall
+   and as wide as the larger layer, so nothing on the page can move, and the two states
+   dissolve through each other instead of cutting. The colour does not change and that is
+   deliberate — the ink stays the mark's red and only its strength rises, because a signal
+   is a lamp going on, not a costume change. */
+.x-eq-stack { display: grid; }
+.x-eq-layer { grid-area: 1 / 1; transition: opacity 220ms ease; }
 #x-equals-x .covenant-equation-btn {
+  display: block;
+  color: inherit;
+  letter-spacing: inherit;
+}
+#x-equals-x .covenant-equation-btn .x-eq-layer {
   display: flex;
   align-items: baseline;
   justify-content: center;
   gap: 0.12em;
-  color: inherit;
-  letter-spacing: inherit;
 }
 #x-equals-x .covenant-purpose {
   margin: 0 !important;
