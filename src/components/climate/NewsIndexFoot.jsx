@@ -15,7 +15,7 @@ export default function NewsIndexFoot({ query }) {
     <details className="news-about">
       <summary>Why there are no likes or rankings <ChevronDown size={18} aria-hidden="true" /></summary>
       <p>No likes, counters or most-read. These are dated accounts, most recent first, each carrying its source and how well it is known. Sharing adds to no counter.</p>
-      <p>Every account has a permanent address of its own, so a citation never rots. Corrections stay on the account, dated, in the open.</p>
+      <p>Every account has its own address so it can be cited directly. Corrections stay on the account, dated, in the open.</p>
     </details>
     <nav className="news-index-foot" aria-label="Continue through the record">
       {DOORS.map(({ to, label, line }) => {

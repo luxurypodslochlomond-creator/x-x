@@ -47,18 +47,18 @@ const BAR = PRIMARY_NAV;
 
 const SEND = [
   {
-    label: 'Add to the record',
-    to: createPageUrl('ClimateWire'),
-    what: 'A dated account with a source. Press Add to the record at the top of The Wire.',
+    label: 'Add to the Wire',
+    to: '/ClimateWire?submit=1',
+    what: 'A dated update, filed as a crisis, solution or action, with its original source. This adds to the Wire, not a second copy on the Record page.',
   },
   {
-    label: 'Submit a solution, crisis, or action',
-    to: createPageUrl('TogetherChangeClimate'),
-    what: 'Read the record, then fill the form. An entry that carries its source goes on as it arrives; one without a source, or one the screening is unsure of, waits for a person.',
+    label: 'Add an entry to the Record',
+    to: '/TogetherChangeClimate?submit=1',
+    what: 'A method, an ongoing crisis or something people can join, organised by subject. Choose Solution, Crisis or Action. Screening is not independent verification; unclear or unsourced entries wait for a custodian.',
   },
   {
     label: 'Start a group',
-    to: createPageUrl('TogetherChangeClimate'),
+    to: '/TogetherChangeClimate?submit=1&type=group',
     what: 'People working on the same thing in one area. A name, a topic, a region, and one contact line.',
   },
   {
@@ -93,7 +93,7 @@ const READING = [
   {
     label: 'Method & corrections',
     to: '/ClimateMethod',
-    what: 'The checks, the people responsible, the live correction notes and a way to report a problem, together on one page.',
+    what: 'The checks, the people responsible and visible corrections. Contact the custodians for a private correction or rights message; that message is not a public submission.',
   },
 ];
 
@@ -113,12 +113,12 @@ const FIRST = [
   {
     label: '2. Open one entry',
     to: createPageUrl('TogetherChangeClimate'),
-    what: 'Read it, then read where it came from. Nothing on the record stands without an origin.',
+    what: 'Read it, then follow its source. If no source is recorded, treat that gap as unresolved, not as proof.',
   },
   {
     label: '3. Open The Wire',
     to: createPageUrl('ClimateWire'),
-    what: 'Dated, sourced entries. Press Add to the record to see the submission form.',
+    what: 'Dated, sourced updates. Press Add to the Wire, then choose Crisis, Solution or Action. For a correction or a rights concern, contact the custodians instead.',
   },
   {
     label: '4. Press Search',
@@ -193,7 +193,7 @@ const WAY_IN_CARD = {
     { do: 'Decide: yes, or not yet', what: 'Yes writes your name on the entry. Not yet keeps it waiting, with your reason beside it.' },
     { do: 'Seal what went up', what: 'One tap. Anyone can check the seal in their own browser, without trusting us.' },
   ],
-  closing: 'Nothing goes on this record without a person\u2019s name on it.',
+  closing: 'Contributors are named. Custodian decisions are signed and recorded.',
   url_path: '/ClimateGuide',
 };
 
@@ -277,7 +277,7 @@ export default function ClimateGuide() {
       <GuideBand
         number="07"
         heading="When you are the custodian"
-        note="Four rooms sit behind the custodian’s door, in the order a custodian meets them. A witness is given the second one only. A reader never sees any of them, and nothing goes on the record or comes off it without one of them being used."
+        note="Four rooms sit behind the custodian’s door, in the order a custodian meets them. A witness is given the second one only. Custodians review held entries, record decisions and manage access. Automatically screened entries are not described as human-reviewed."
         items={KEEPER_DOORS}
       />
 

@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { X, Send, Check, ArrowLeft, ArrowRight } from 'lucide-react';
 import { createPageUrl } from '@/utils';
 import SmartPaste from '@/components/climate/SmartPaste';
+import recordKindOf from '@/components/climate/recordKinds';
 import Field, { fieldClass, hintClass } from '@/components/climate/submit/Field';
 
 // Sending an entry to the wire. The source is not an optional extra here — it is the
@@ -25,9 +26,9 @@ const PUBLISHER_TYPES = [
    still says the one thing that matters: no link, no entry. */
 const STEPS = ['What changed', 'Where, and what others can copy', 'Who says so', 'Who you are'];
 
-export default function NewsSubmitForm({ onClose, onSent }) {
+export default function NewsSubmitForm({ onClose, onSent, initialKind }) {
   const [form, setForm] = useState({
-    headline: '', what_changed: '', kind: 'initiative', when_label: '', where_label: '', country: '',
+    headline: '', what_changed: '', kind: ['emergency', 'milestone', 'initiative'].includes(initialKind) ? initialKind : 'initiative', when_label: '', where_label: '', country: '',
     publisher_type: 'news_media', source_name: '', source_url: '', source_author: '', corroborating_source: '',
     replicable: '', image_url: '', image_credit: '', submitter_name: '', submitter_email: '',
   });
@@ -115,7 +116,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] bg-[#efe7d6] overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
+    <div data-record-kind={recordKindOf(form.kind)} className="fixed inset-0 z-[100] bg-record-bone overflow-y-auto" style={{ fontFamily: 'var(--font-body)' }}>
       <div className="sticky top-0 z-20 bg-[#efe7d6]/97 backdrop-blur border-b border-[#141210]/25">
         <div className="max-w-[500px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
           {/* ── THE SHEET HAS A NAME, NOT AN EYEBROW ─────────────────────────────
@@ -128,10 +129,10 @@ export default function NewsSubmitForm({ onClose, onSent }) {
               title now, in the record's own face, with the step kept quiet underneath. */}
           <div className="min-w-0 flex-1">
             <h1
-              className="text-[19px] font-bold leading-tight text-[#141210]"
+              className="record-kind-form-title text-[19px] font-bold leading-tight"
               style={{ fontFamily: 'var(--font-heading)', letterSpacing: '-0.01em' }}
             >
-              Add to the record
+              Add to the Wire
             </h1>
             <p className="mt-1 truncate font-mono text-[11px] uppercase tracking-[0.12em] text-[#5a5246]">
               {step + 1} of {STEPS.length} · {STEPS[step]}
@@ -158,7 +159,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
         {step === 0 && (
           <div className="space-y-3">
             <p className={hintClass}>
-              Tell us what happened, where and when, and link to the source. Quote only a line or two, never somebody's whole article.
+              A dated update for the Wire: choose Crisis, Solution or Action below. This does not also create a separate entry on the Record page. Link to the original source and quote only a line or two, never a whole article.
             </p>
 
             <SmartPaste
@@ -236,7 +237,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
               <input value={form.source_name} onChange={e => set('source_name', e.target.value)} placeholder="e.g. World Meteorological Organization" className={fieldClass} />
             </Field>
 
-            <Field label="Link to the origin" hint="No link, no entry. Without one it waits for a person to find it or leave it out.">
+            <Field label="Link to the origin" hint="A working original link is needed for automatic publication. Without one, the submission waits for a custodian.">
               <input value={form.source_url} onChange={e => set('source_url', e.target.value)} placeholder="https://…" className={fieldClass} />
             </Field>
 
@@ -299,7 +300,7 @@ export default function NewsSubmitForm({ onClose, onSent }) {
           ) : (
             <button type="submit" disabled={submitting} className="flex-1 flex items-center justify-center gap-2 px-4 py-3.5 min-h-[52px] bg-[#b3261e] text-[#f7f1e5] text-[12px] font-black font-mono uppercase border-2 border-[#b3261e] active:bg-[#8f1e18] transition-colors disabled:opacity-50">
               <Send className="w-4 h-4" />
-              {submitting ? 'Filing…' : 'File it'}
+              {submitting ? 'Submitting…' : 'Submit to the Wire'}
             </button>
           )}
         </div>

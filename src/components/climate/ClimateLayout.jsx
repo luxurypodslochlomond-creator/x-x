@@ -7,6 +7,7 @@ import '@/components/climate/record-mobile.css';
 import '@/components/climate/record-surfaces.css';
 import '@/components/climate/record-depth.css';
 import '@/components/climate/record-connected.css';
+import '@/components/climate/record-kind.css';
 import { Link, useLocation } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 import { warmRecordDoors } from '@/lib/routePrefetch';

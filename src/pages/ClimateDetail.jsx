@@ -26,6 +26,7 @@ import { recordAddress } from '@/components/climate/recordAddress';
 import { verificationNoteOf } from '@/components/climate/verification';
 import VerificationControl from '@/components/admin/VerificationControl';
 import useRecordImage from '@/components/climate/useRecordImage';
+import recordKindOf from '@/components/climate/recordKinds';
 
 const CATEGORIES = [
   { id: 'agriculture', icon: Sprout, label: 'Agriculture' },
@@ -172,9 +173,9 @@ export default function ClimateDetail() {
     const Icon = meta.icon;
     const catCode = categories.find(c => c.id === record.category)?.code || 'OT';
     return (
-      <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
+      <div data-record-kind={recordKindOf(isAction ? 'action' : record.entry_type)} className="record-kind-detail min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
         {/* Sticky header — native back, action-type colour band */}
-        <div className="flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-[#141210]" style={{ background: meta.color }}>
+        <div className="record-kind-band flex items-center gap-3 px-4 lg:px-10 py-3 border-b-2 border-record-ink">
           <button onClick={back} aria-label={backLabel} title={backLabel} className="min-w-11 h-11 px-3 gap-2 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors flex-shrink-0">
             <ArrowLeft className="w-5 h-5" /><span className="text-sm">{backLabel}</span>
           </button>
@@ -184,17 +185,17 @@ export default function ClimateDetail() {
           </div>
         </div>
 
-        <div className="p-5 lg:px-10 lg:py-8 lg:max-w-[820px] lg:mx-auto">
+        <div className="record-kind-reading p-5 lg:px-10 lg:py-8 lg:max-w-[820px] lg:mx-auto">
           <h1 data-no-translate className="text-2xl lg:text-4xl font-black uppercase text-[#efe7d6] leading-none px-1 -mx-1" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em', color: '#141210' }}>
             {tr.field('title')}
           </h1>
 
           <div className="flex items-center gap-1.5 mt-3">
             <SignalCode code={catCode} size="md" />
-            <span className="text-[11px] font-black font-mono uppercase tracking-widest text-[#1e3a2b]">{record.category?.replaceAll('_', ' ')}</span>
+            <span className="record-kind-text text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
           </div>
 
-          <p className="text-[10px] font-black font-mono uppercase tracking-[0.14em] text-[#e2602a] mt-3">
+          <p className="record-kind-text text-[10px] font-black font-mono uppercase tracking-[0.14em] mt-3">
             Together we can change the course of climate change
           </p>
 
@@ -213,13 +214,13 @@ export default function ClimateDetail() {
           <p data-no-translate className="text-[15.5px] lg:text-[17px] text-[#141210] leading-[1.7] lg:leading-[1.75] mt-5" style={{ fontFamily: 'var(--font-reading)' }}>{tr.field('description')}</p>
 
           {record.source_url && (
-            <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
+            <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="record-kind-text mt-5 inline-flex items-center gap-2 text-[12px] font-black font-mono uppercase underline-offset-4 hover:underline transition-colors">
               More info <ArrowRight className="w-4 h-4" />
             </a>
           )}
 
           {record.contact_link && (
-            <a href={record.contact_link} target="_blank" rel="noopener noreferrer" className="mt-6 w-full lg:max-w-[420px] flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-[#e2602a] text-[#141210] text-[13px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#1e3a2b] active:text-[#efe7d6] transition-colors">
+            <a href={record.contact_link} target="_blank" rel="noopener noreferrer" className="mt-6 w-full lg:max-w-[420px] flex items-center justify-center gap-2 px-4 py-4 min-h-[52px] bg-record-action text-record-paper text-[13px] font-black font-mono uppercase border-2 border-record-action active:opacity-90 transition-opacity">
               Join in — contact organiser <ArrowRight className="w-4 h-4" />
             </a>
           )}
@@ -278,7 +279,7 @@ export default function ClimateDetail() {
             items={allItems}
             actions={allActions}
             currentId={record.id}
-            onOpenItem={(next) => navigate(`/ClimateDetail/solution/${next.id}`)}
+            onOpenItem={(next) => navigate(`/ClimateDetail/${next.entry_type}/${next.id}`)}
             onOpenAction={(next) => navigate(`/ClimateDetail/action/${next.id}`)}
           />
 
@@ -295,7 +296,7 @@ export default function ClimateDetail() {
   // The card and the full entry use the same picture and labelled fallback.
   const heroImage = image.src;
   return (
-    <div className="min-h-screen bg-[#efe7d6] text-[#141210]" style={{ fontFamily: 'var(--font-body)' }}>
+    <div data-record-kind={recordKindOf(isAction ? 'action' : record.entry_type)} className="record-kind-detail min-h-screen text-record-ink" style={{ fontFamily: 'var(--font-body)' }}>
       {/* Hero — photo when available, paper-and-beacon when not. The picture you tapped keeps
           its own colour through the door: it used to be drained to grey here, so an entry about
           a river came up as a black-and-white photograph of a river — the greyest thing on the
@@ -308,8 +309,8 @@ export default function ClimateDetail() {
             <ArrowLeft className="w-5 h-5" /><span className="text-sm">{backLabel}</span>
           </button>
           <div className="absolute bottom-4 lg:bottom-6 left-5 lg:left-10 right-5 lg:right-10">
-            <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#b3261e] text-[#efe7d6]'}`}>
-              {isSolution ? 'Solution' : 'Climate Crisis'}
+            <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-record-botanical text-record-paper' : 'bg-record-red text-record-paper'}`}>
+              {isSolution ? 'Solution' : 'Crisis'}
             </span>
           </div>
         </div>
@@ -318,19 +319,19 @@ export default function ClimateDetail() {
           <button onClick={back} aria-label={backLabel} title={backLabel} className="absolute top-4 left-4 min-w-11 h-11 px-3 gap-2 flex items-center justify-center bg-[#efe7d6] border-2 border-[#141210] text-[#141210] active:bg-[#e2602a] transition-colors z-10">
             <ArrowLeft className="w-5 h-5" /><span className="text-sm">{backLabel}</span>
           </button>
-          <SignalBeacon size={36} color={isSolution ? '#1e3a2b' : '#b3261e'} />
-          <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-[#1e3a2b] text-[#efe7d6]' : 'bg-[#b3261e] text-[#efe7d6]'}`}>
-            {isSolution ? 'Solution' : 'Climate Crisis'}
+          <SignalBeacon size={36} color="rgb(var(--record-kind-ink))" />
+          <span className={`text-[10px] font-black font-mono uppercase tracking-widest px-2 py-1 border border-[#141210] ${isSolution ? 'bg-record-botanical text-record-paper' : 'bg-record-red text-record-paper'}`}>
+            {isSolution ? 'Solution' : 'Crisis'}
           </span>
         </div>
       )}
 
       {/* The entry keeps its colour through the door — green for a solution, red for a
           crisis: the same mark its card wore, so tapping through never changes it. */}
-      <div className="h-1.5" style={{ background: isSolution ? '#1e3a2b' : '#b3261e' }} />
+      <div className="record-kind-band h-1.5" />
 
-      <div className="p-5 lg:px-10 lg:py-10 lg:max-w-[820px] lg:mx-auto">
-        <div className={`flex items-center gap-1.5 mb-1 ${isSolution ? 'text-[#1e3a2b]' : 'text-[#b3261e]'}`}>
+      <div className="record-kind-reading p-5 lg:px-10 lg:py-10 lg:max-w-[820px] lg:mx-auto">
+        <div className="record-kind-text flex items-center gap-1.5 mb-1">
           <SubjectMark subject={record.category || 'other'} size={20} className="shrink-0" /><span className="text-[11px] font-black font-mono uppercase tracking-widest">{record.category?.replaceAll('_', ' ')}</span>
         </div>
         <h1 data-no-translate className="text-2xl lg:text-4xl font-black uppercase text-[#141210] mt-1 leading-none" style={{ fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' }}>
@@ -344,8 +345,7 @@ export default function ClimateDetail() {
         <p data-no-translate className="text-[15.5px] lg:text-[17px] text-[#141210] leading-[1.7] lg:leading-[1.75] mt-5" style={{ fontFamily: 'var(--font-reading)' }}>{tr.field('details') || tr.field('summary')}</p>
         <div className="mt-5 flex flex-wrap items-center gap-2 text-[10px] font-mono font-bold uppercase">
           <span className="px-2 py-1 border border-[#141210] text-[#141210]">Scale: {record.scale || '—'}</span>
-          <span className="px-2 py-1 border border-[#141210] text-[#141210]">Reviewed: ✓</span>
-          <VerificationBadge entry={record} />
+                    <VerificationBadge entry={record} />
         </div>
         <p className="mt-2.5 text-[11px] font-mono text-[#5a5246] leading-relaxed">
           {verificationNoteOf(record)}
@@ -366,7 +366,7 @@ export default function ClimateDetail() {
         <VerificationControl entry={record} entityName="ClimateSolution" onSaved={setRecord} />
 
         {record.source_url && (
-          <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 text-[#1e3a2b] hover:text-[#e2602a] text-[12px] font-black font-mono uppercase transition-colors">
+          <a href={record.source_url} target="_blank" rel="noopener noreferrer" className="record-kind-text mt-5 inline-flex items-center gap-2 text-[12px] font-black font-mono uppercase underline-offset-4 hover:underline transition-colors">
             View source <ArrowRight className="w-4 h-4" />
           </a>
         )}

@@ -9,6 +9,7 @@ import NewsEntryBody from '@/components/climate/NewsEntryBody';
 import { recordAddress } from '@/components/climate/recordAddress';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
+import recordKindOf from '@/components/climate/recordKinds';
 
 // One entry on its own permanent address. A researcher cites this page, not the front
 // page, so the entry, its source and how well it is known all travel together in the link.
@@ -44,7 +45,7 @@ export default function ClimateWireEntry() {
     : '';
 
   return (
-    <div className="news-detail text-record-ink" data-record-layout="compact">
+    <div className="news-detail text-record-ink" data-record-kind={recordKindOf(entry?.kind)} data-record-layout="compact">
       <RecordBackBar eyebrow="The Wire · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact previewFirst /></div> : null} />
       <div className="news-detail-column">
         {loading && <p className="news-state" role="status">Loading the account…</p>}

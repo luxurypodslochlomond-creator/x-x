@@ -57,6 +57,7 @@ const CATEGORIES = [
 
 import RecordCoverPlate from '@/components/climate/RecordCoverPlate';
 import RecordRoomNavigation from '@/components/climate/RecordRoomNavigation';
+import recordKindOf from '@/components/climate/recordKinds';
 import RecordHolding from '@/components/climate/RecordHolding';
 import RecordEntryList from '@/components/climate/RecordEntryList';
 
@@ -188,7 +189,10 @@ export default function TogetherChangeClimate() {
   // Which door the one form opens on. A reader who taps "Start a group" should land with the
   // group door already open, rather than being handed a second form that drifts out of step
   // with the first — which is exactly what had happened.
-  const [submitType, setSubmitType] = useState(null);
+  const [submitType, setSubmitType] = useState(() => {
+    const type = new URLSearchParams(window.location.search).get('type');
+    return ['solution', 'climate_crisis', 'action', 'group'].includes(type) ? type : null;
+  });
   const [showIndex, setShowIndex] = useState(() => window.matchMedia('(min-width: 1024px)').matches);
   const [submitCategory, setSubmitCategory] = useState(null);
   const [isOffline, setIsOffline] = useState(typeof navigator !== 'undefined' && !navigator.onLine);
@@ -439,7 +443,7 @@ export default function TogetherChangeClimate() {
   // Nothing inside changed. Every band was already padded to the edge and had its own
   // measure for prose, so all that has gone is the frame around the frame.
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="record-home-page relative min-h-screen font-body text-record-ink">
+    <div dir={isRTL ? 'rtl' : 'ltr'} data-record-kind={recordKindOf(selectedType)} className="record-home-page relative min-h-screen font-body text-record-ink">
       <style>{`
         @keyframes twcc-enter { from { opacity: 0; } to { opacity: 1; } }
         @keyframes twcc-flicker { 0%, 92%, 96%, 100% { opacity: 1; } 93%, 95% { opacity: .72; } }
@@ -683,13 +687,13 @@ export default function TogetherChangeClimate() {
               </button>
             )}
             {showEntries && solutions.length > 0 && (
-              <section id="record-room-solution" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+              <section id="record-room-solution" data-record-kind="solution" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" mark={RoomMarkSolution} />
                 <RecordEntryList items={solutions} />
               </section>
             )}
             {showEntries && crises.length > 0 && (
-              <section id="record-room-climate_crisis" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+              <section id="record-room-climate_crisis" data-record-kind="crisis" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" mark={RoomMarkCrisis} />
                 <RecordEntryList items={crises} />
               </section>

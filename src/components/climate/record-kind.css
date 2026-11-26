@@ -1,0 +1,48 @@
+/* One semantic ink, inherited by a room or an entry, never by the artwork or the whole brand. */
+[data-record-kind="solution"] { --record-kind-ink: var(--record-botanical); }
+[data-record-kind="crisis"] { --record-kind-ink: var(--record-red); }
+[data-record-kind="action"] { --record-kind-ink: var(--record-action); }
+[data-record-kind="group"] { --record-kind-ink: var(--record-ink); }
+
+/* Opaque paper beneath a restrained tint: no reading text depends on the painting behind it. */
+#root .record-home-page[data-record-kind] .record-home-title-block {
+  padding: 1.25rem;
+  border-top: 4px solid rgb(var(--record-kind-ink));
+  background: linear-gradient(rgb(var(--record-kind-ink) / .08), rgb(var(--record-kind-ink) / .08)), rgb(var(--record-paper));
+}
+#root .record-home-page[data-record-kind] .record-opening-title,
+#root .record-home-page[data-record-kind] .record-opening-title span {
+  color: rgb(var(--record-kind-ink));
+  text-shadow: none;
+}
+#root .record-home-page[data-record-kind] .record-home-title-block .record-home-pass > span { color: rgb(var(--record-ink)); }
+#root .record-home-page .record-room-cell[data-record-kind] :is(.record-room-label, .record-room-add) { color: rgb(var(--record-kind-ink)); }
+#root .record-home-page [data-record-kind] .record-room-link[aria-pressed="true"] {
+  background: linear-gradient(rgb(var(--record-kind-ink) / .1), rgb(var(--record-kind-ink) / .1)), rgb(var(--record-paper));
+  box-shadow: inset 0 -3px 0 rgb(var(--record-kind-ink));
+}
+#root .record-home-page [data-record-kind] .record-section-heading {
+  border-color: rgb(var(--record-kind-ink));
+  background: linear-gradient(rgb(var(--record-kind-ink) / .08), rgb(var(--record-kind-ink) / .08)), rgb(var(--record-paper));
+  color: rgb(var(--record-kind-ink));
+}
+#root .record-home-page [data-record-kind] .record-section-heading :is(h2, .record-section-count) { color: rgb(var(--record-kind-ink)); background: transparent; }
+#root .record-home-page [data-record-kind] .record-row-copy { border-top-color: rgb(var(--record-kind-ink)); }
+#root .record-home-page [data-record-kind] .record-entry-row:hover .record-row-title { color: rgb(var(--record-kind-ink)); }
+
+.record-kind-detail[data-record-kind],
+.news-detail[data-record-kind] {
+  background: linear-gradient(rgb(var(--record-kind-ink) / .06), rgb(var(--record-kind-ink) / .06)), rgb(var(--record-paper));
+}
+.record-kind-detail .record-kind-band { background: rgb(var(--record-kind-ink)); }
+.record-kind-detail .record-kind-text { color: rgb(var(--record-kind-ink)); }
+.record-kind-detail .record-kind-label { background: rgb(var(--record-kind-ink)); color: rgb(var(--record-paper)); }
+.record-kind-detail .record-kind-reading { background: rgb(var(--record-paper)); }
+#root .climate-record .news-kinds button[data-record-kind][aria-pressed="true"] { color: rgb(var(--record-kind-ink)); border-color: rgb(var(--record-kind-ink)); background: rgb(var(--record-paper)); }
+#root .news-page[data-record-kind] .news-index-heading h1 { color: rgb(var(--record-kind-ink)); }
+#root .news-detail[data-record-kind] .news-account-heading { color: rgb(var(--record-kind-ink)); }
+.record-kind-form-title { color: rgb(var(--record-kind-ink, var(--record-ink))); }
+@media (hover: hover) {
+  #root .record-home-page [data-record-kind] .record-room-link:hover { background: rgb(var(--record-kind-ink) / .08); }
+  #root .record-home-page [data-record-kind] .record-room-link:hover .record-room-label { color: rgb(var(--record-kind-ink)); }
+}

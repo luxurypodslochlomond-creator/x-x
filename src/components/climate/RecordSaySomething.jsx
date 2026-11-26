@@ -14,7 +14,7 @@ const KINDS = [
   { value: 'wrong', label: 'Something here is wrong', hint: 'A date, a name, a claim, a link that no longer opens.' },
   { value: 'mine', label: 'This is mine, and I want it taken down', hint: 'Your work, your words, your picture. Say which entry.' },
   { value: 'source', label: 'I have the source for an entry that has none', hint: 'An entry with no origin waits for a person. This is how you give it one.' },
-  { value: 'other', label: 'Something else', hint: 'Anything the four other kinds do not cover.' },
+  { value: 'other', label: 'Something else', hint: 'Anything the other three kinds do not cover.' },
 ];
 
 export default function RecordSaySomething() {
@@ -65,10 +65,10 @@ export default function RecordSaySomething() {
         className="font-black uppercase text-[#141210] mb-1"
         style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(19px, 1.9vw, 26px)', letterSpacing: '-0.01em' }}
       >
-        Say something to the record
+        Contact the custodians
       </h2>
       <p className="text-[11.5px] lg:text-[12.5px] font-mono leading-relaxed text-[#5a5246] mb-3">
-        No account, no charge. A person reads every message and answers it at the address you give.
+        A private message about an entry, a correction or your rights. This does not publish an entry. No account needed; your email is for a reply.
       </p>
 
       <form onSubmit={send} className="space-y-3">
@@ -138,7 +138,7 @@ export default function RecordSaySomething() {
           disabled={state === 'sending'}
           className="w-full bg-[#b3261e] px-4 py-2.5 font-mono text-[10.5px] font-black uppercase tracking-[0.2em] text-[#f4efe4] disabled:opacity-60"
         >
-          {state === 'sending' ? 'Sending…' : 'Send it'}
+          {state === 'sending' ? 'Sending…' : 'Send private message'}
         </button>
 
         <p className="text-[10px] font-mono leading-relaxed text-[#5a5246]">

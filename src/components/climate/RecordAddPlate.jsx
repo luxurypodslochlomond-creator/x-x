@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
 
 // ── THE WAY IN, AT THE SIZE OF THE TOP NAV ────────────────────────────────────────
@@ -14,7 +15,7 @@ import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from
 const DOORS = [
   { type: 'solution', label: 'Solution', Mark: RoomMarkSolution, ink: 'text-record-botanical' },
   { type: 'climate_crisis', label: 'Crisis', Mark: RoomMarkCrisis, ink: 'text-record-red' },
-  { type: 'action', label: 'Action', Mark: RoomMarkAction, ink: 'text-record-clay' },
+  { type: 'action', label: 'Action', Mark: RoomMarkAction, ink: 'text-record-action' },
   { type: 'group', label: 'Group', Mark: RoomMarkGroups, ink: 'text-record-ink' },
 ];
 
@@ -23,7 +24,7 @@ export default function RecordAddPlate({ onPick }) {
     <section aria-labelledby="record-add-title" className="mt-4 border-t-[3px] border-cartoon-sun pt-2.5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
         <h2 id="record-add-title" className="font-mono text-[10.5px] font-black uppercase tracking-[0.18em] text-record-ink">
-          Put something on the record
+          Add an entry to the Record
         </h2>
         <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5a5246]">
           No account needed
@@ -50,7 +51,9 @@ export default function RecordAddPlate({ onPick }) {
       </div>
 
       <p className="mt-1.5 text-[11px] font-mono leading-relaxed text-[#5a5246]">
-        Clear entries go on at once. Anything unclear waits for a person, and we email you either way.
+        A method, an ongoing crisis, something to join, or a group. Sharing dated news?{' '}
+        <Link to="/ClimateWire?submit=1" className="font-bold text-record-ink underline underline-offset-4">Add to the Wire</Link>.
+        {' '}Screening is not independent verification; unclear entries wait for a custodian.
       </p>
     </section>
   );

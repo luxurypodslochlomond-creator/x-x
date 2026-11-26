@@ -22,8 +22,8 @@
   }
   .climate-record.record-home-field .record-home-page .record-room-count { color: rgb(var(--record-ink) / .7); }
   .climate-record.record-home-field .record-home-page .record-room-link[aria-pressed="true"] {
-    background: rgb(var(--record-mark) / .1);
-    box-shadow: inset 0 -3px 0 rgb(var(--record-mark));
+    background: rgb(var(--record-kind-ink, var(--record-mark)) / .1);
+    box-shadow: inset 0 -3px 0 rgb(var(--record-kind-ink, var(--record-mark)));
   }
 
   /* ── THE PHOTOGRAPHS TAKE THE SHEET, NOT A COLUMN INSIDE IT ─────────────────────

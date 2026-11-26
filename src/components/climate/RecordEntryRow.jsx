@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useRecordImage from '@/components/climate/useRecordImage';
 import RecordEntryPicture from '@/components/climate/RecordEntryPicture';
 import RecordEntryKind from '@/components/climate/RecordEntryKind';
+import recordKindOf from '@/components/climate/recordKinds';
 
 export default function RecordEntryRow({ item, index = 0, flip = false }) {
   const image = useRecordImage(item, { entryOnly: true });
@@ -11,6 +12,7 @@ export default function RecordEntryRow({ item, index = 0, flip = false }) {
     <Link
       to={`/ClimateDetail/${item.entry_type}/${item.id}`}
       data-has-image={hasImage}
+      data-record-kind={recordKindOf(item.entry_type)}
       className={`record-entry-row group grid items-start gap-7 border-t border-record-ink/25 py-7 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-mark ${hasImage ? 'grid-cols-[minmax(0,6fr)_minmax(0,5fr)]' : 'grid-cols-1'}`}
     >
       {hasImage && <RecordEntryPicture image={image} className={flip ? 'order-2' : 'order-1'} />}

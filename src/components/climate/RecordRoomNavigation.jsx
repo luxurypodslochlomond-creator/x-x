@@ -1,5 +1,6 @@
 import React from 'react';
 import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from '@/components/climate/RoomMarks';
+import recordKindOf from '@/components/climate/recordKinds';
 
 // One set of room marks: browse above, add directly below on a phone.
 const ROOMS = [
@@ -15,7 +16,7 @@ export default function RecordRoomNavigation({ counts = {}, selected, onSelect, 
   return (
     <nav aria-label="Explore or add to the record" className="record-room-nav grid w-full grid-cols-2 lg:grid-cols-4">
       {ROOMS.map(({ key, type, label, line, Mark }) => (
-        <div key={key} className="record-room-cell min-w-0">
+        <div key={key} data-record-kind={recordKindOf(type)} className="record-room-cell min-w-0">
           <button
             type="button"
             onClick={() => onSelect(key)}

@@ -213,9 +213,9 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
   }
 
   const doors = [
-    { type: 'solution', label: 'Solution', Icon: Leaf, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
+    { type: 'solution', label: 'Solution', Icon: Leaf, on: 'text-record-botanical border-b-record-botanical' },
     { type: 'climate_crisis', label: 'Crisis', Icon: AlertTriangle, on: 'text-[#b3261e] border-b-[#b3261e]' },
-    { type: 'action', label: 'Action', Icon: Sprout, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
+    { type: 'action', label: 'Action', Icon: Sprout, on: 'text-record-action border-b-record-action' },
     { type: 'group', label: 'Group', Icon: Users, on: 'text-[#0f5f7a] border-b-[#0f5f7a]' },
   ];
 
@@ -229,7 +229,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
         <div className="max-w-[500px] md:max-w-[720px] mx-auto px-4 pt-3 pb-2 flex items-start gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-3">
-              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#b3261e]">Submit to the record</p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-record-ink">Add {entryType === 'group' ? 'a group' : entryType === 'action' ? 'an action' : entryType === 'climate_crisis' ? 'a crisis' : 'a solution'} to the Record</p>
               <p className="text-[11px] text-[#6b6258] tabular-nums shrink-0">{step + 1} / {STEPS.length}</p>
             </div>
             <h2 className="text-[26px] sm:text-[30px] font-bold text-[#141210] mt-1 leading-[1.02] tracking-[-0.035em] truncate">
