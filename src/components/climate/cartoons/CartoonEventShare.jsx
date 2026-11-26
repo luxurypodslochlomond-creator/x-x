@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import { buildCartoonShareCard, CARTOON_CARD } from '@/components/climate/cartoons/cartoonCard';
@@ -30,6 +31,10 @@ export default function CartoonEventShare() {
       {/* The dates and the place, under the plate, in the record's small voice: whoever
           passes this on should know what they are passing on before they pass it. */}
       <p className="comic-event-share-when">{CARTOON_EVENT.when} · {CARTOON_EVENT.where}</p>
+      {/* The words to post it with, one tap away: a link on its own arrives with no bio. */}
+      <p className="comic-event-share-when">
+        <Link to="/ClimateCartoons/Share">Words for wherever you post it →</Link>
+      </p>
     </div>
   );
 }

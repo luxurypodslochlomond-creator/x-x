@@ -197,6 +197,8 @@ const ClimateCartoonsCAIBPage = React.lazy(() => import('./pages/ClimateCartoons
 // The machine's own hand: one more hand in the same room, hung beside the wall of real ones.
 const ClimateCartoonsBaseOnePage = React.lazy(() => import('./pages/ClimateCartoonsBaseOne'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
+// The words to carry the room out of the chat, written for the five places a person posts.
+const ClimateCartoonsSharePage = React.lazy(() => import('./pages/ClimateCartoonsShare'));
 const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoonsThread'));
 // The presenter's sheet for the 29th: the same drawings, in the order the hour runs them.
 const ClimateCartoonPresentPage = React.lazy(() => import('./pages/ClimateCartoonPresent'));
@@ -452,6 +454,9 @@ const AuthenticatedApp = () => {
           through them in the wall's own order — so on a call the drawings can be read
           one after another without anybody hunting for a plate to tap. */}
       <Route path="/ClimateCartoons/Thread" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsThreadPage /></ClimateLayout>} />
+      {/* The words that travel with the room: five sets, one address, so a link posted
+          anywhere arrives with a description of what it is. */}
+      <Route path="/ClimateCartoons/Share" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsSharePage /></ClimateLayout>} />
       {/* The order the hour runs in, for whoever is sharing a window on the day. */}
       <Route path="/ClimateCartoons/Present" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonPresentPage /></ClimateLayout>} />
 
