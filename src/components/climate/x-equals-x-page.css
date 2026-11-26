@@ -900,6 +900,29 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   color: rgb(var(--record-ink));
   white-space: nowrap;
 }
+/* The name is the door to the deed itself, so it wears a line rather than a button: the
+   plain sentence underneath is the courtesy, and this is where the law actually lives. */
+#x-equals-x a.covenant-licence-name {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgb(var(--record-red));
+  text-underline-offset: 0.16em;
+}
+#x-equals-x a.covenant-licence-name:hover,
+#x-equals-x a.covenant-licence-name:focus-visible {
+  text-decoration-color: rgb(var(--record-ink));
+}
+/* ── THE SCORE, IN PLAIN WORDS, WITHOUT LEAVING THE PAGE ──────────────────────────
+   Set in the reading face at a size a person can actually read, because this is the one
+   paragraph on the page that decides what a stranger is allowed to do with the work. */
+#x-equals-x .covenant-licence-means {
+  max-width: 27ch;
+  margin: 0.4rem auto 0;
+  font-family: var(--font-reading);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgb(var(--record-muted));
+}
 #x-equals-x .covenant-licence-says {
   max-width: 48ch;
   margin: 1.9rem auto 0;
