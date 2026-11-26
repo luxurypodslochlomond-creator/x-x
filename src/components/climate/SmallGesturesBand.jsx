@@ -34,6 +34,31 @@ export default function SmallGesturesBand() {
       <p className="text-[11px] font-mono text-[#5a5246] leading-relaxed mb-3">
         Small enough to start today, and free.
       </p>
+      {/* ── WHY THE SMALLEST ONE IS THE ONE THAT GROWS ─────────────────────────────
+          The list above says what a person can do and never says why the size matters, which
+          is the part Janine keeps returning to. Her mechanism is in her own description: 5.86
+          billion smartphones, and people learning about positive actions and being
+          "encouraged to do what they themselves can do". Encouraged, not instructed — that
+          distinction is the whole design of this record.
+
+          The economics are the same argument from the other side. A copy of an example costs
+          nothing to make: the second one and the billionth one are free, so it can grow
+          without charging anybody. A thing that must be sold has to stay scarce to be worth
+          paying for. Which is why nothing on this record is ranked, run as a competition or
+          sold — ranking is what turns a thing people copy into a thing people buy, and it is
+          also what makes the person at the bottom of the list quietly stop doing it. */}
+      <p
+        className="mb-3 max-w-[62ch] text-[12px] leading-relaxed text-record-ink/85 lg:text-[13.5px]"
+        style={{ fontFamily: 'var(--font-reading)' }}
+      >
+        The smallest gesture is the only size most people can start today, and the only one that
+        survives a bad week. It is also the only thing that can grow without anybody being charged
+        for it: a copy of an example costs nothing to make, so the second one and the billionth one
+        are free — while anything that has to be sold must stay scarce to be worth paying for. That
+        is why nothing here is ranked, counted as a competition or sold. Janine’s other half is the
+        mechanism: people see what somebody else did, and are “encouraged to do what they themselves
+        can do”.
+      </p>
       <div className="flex flex-wrap gap-2">
         {GESTURES.map(gesture => (
           <Link
