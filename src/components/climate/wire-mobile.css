@@ -4,8 +4,23 @@
   .climate-record .news-index-heading { align-items: flex-end; gap: 1rem; padding-bottom: .9rem; border-bottom: 3px solid rgb(var(--record-mark)); }
   .climate-record .news-eyebrow { font-size: 10px; letter-spacing: .07em; text-transform: uppercase; }
   .climate-record .news-index-heading h1 { margin-top: .6rem; font-size: clamp(3.4rem, 15vw, 4.3rem); line-height: .92; letter-spacing: -.075em; }
-  .climate-record .news-send { min-width: 48px; min-height: 48px; padding: .6rem; border-radius: 50%; background: rgb(var(--record-mark)); }
-  .climate-record .news-send span { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .climate-record .news-send { min-width: 48px; min-height: 48px; padding: .55rem .7rem; border-radius: 0; background: rgb(var(--record-mark)); }
+  /* ── THE ROUND RED DISC WAS THE NEWS APP, NOT THE RECORD ───────────────────────
+     Brian, 26 November: "why the wire feel like news channel to me". A circle holding a
+     plus, with its words hidden from sight, is the shape every feed uses for "new post" —
+     and it was the only round thing on a record made of ruled edges. It is a squared plate
+     with its words on it now, in the same hand as every other door here. */
+  .climate-record .news-send span { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip-path: none; white-space: nowrap; font-size: 11px; font-weight: 700; }
+  /* The cards were soft on a phone and square on a desk: the same room, two grammars. A
+     register has edges, so the entries are ruled plates on both. */
+  .climate-record .news-lead,
+  .climate-record .news-row,
+  .climate-record .news-lead-plate,
+  .climate-record .news-row-thumb,
+  .climate-record .news-room-door,
+  .climate-record .news-load-more,
+  .climate-record .news-account-note,
+  .climate-record .news-entry-image img { border-radius: 0; }
   .climate-record .news-index-intro { margin: .85rem 0 1rem; max-width: 32ch; color: rgb(var(--record-ink)/.72); font-size: 14px; line-height: 1.5; }
   .climate-record .news-tools { margin-bottom: 1.5rem; }
   .climate-record .news-search { border-radius: 0; border: 0; border-bottom: 1px solid rgb(var(--record-ink)/.3); padding-inline: 0; background: transparent; }
