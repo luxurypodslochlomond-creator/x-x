@@ -20,9 +20,9 @@ export default function CartoonProgramme() {
     <section className="cartoon-programme" aria-labelledby="cartoon-programme-title">
       <p className="cartoon-programme-eyebrow">The programme · 28–30 November 2026</p>
       <h2 id="cartoon-programme-title" className="cartoon-programme-title">The three days</h2>
-      <p className="cartoon-programme-theme">
-        Theme, in the festival’s own words: “{CARTOON_PROGRAMME.theme}.”
-      </p>
+      {/* The theme was printed here and again in the band directly above this one, which
+          had already given it "in the festival's own words". Twice in two scrolls is not
+          emphasis, it is a page that has not read itself. The band above owns it. */}
       <p className="cartoon-programme-detail">{CARTOON_PROGRAMME.opening}</p>
 
       <ol className="cartoon-programme-list" start={1}>

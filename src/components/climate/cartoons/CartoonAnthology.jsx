@@ -62,10 +62,20 @@ export default function CartoonAnthology() {
         </div>
       </dl>
 
+      {/* ── THE SAME PROMISE, PRINTED FOUR TIMES ON ONE PAGE ─────────────────────
+          Brian, 26 November: "Janine said rework needed or rethink… lots of copy and
+          bullshit on there." He was relaying a real complaint, and this was the clearest
+          case of it: the sentence about the book being published free appeared under the
+          cover, in this note, in the status line below, and again in the credit — four
+          printings of one promise in a single scroll. That is not thoroughness, it is a
+          page repeating itself because each plate was written on its own day and nobody
+          read them in a row.
+          The promise is made once, under the cover, where the book actually is. This plate
+          says only what a reader cannot get from the cover: who is in it, that the cover is
+          a sample, and whose the work stays. */}
       <p className="comic-anthology-note">
         Every African cartoonist who takes part in the 29 November discussion has their work
-        gathered into this book. When it is finished it is published free — on CartoonAFRICA’s
-        own platforms and on this record — for anyone in the world to download.
+        gathered into this book.
       </p>
 
       {/* The cover sits at the top of the room, so this says "at the top", not "above".
@@ -75,8 +85,7 @@ export default function CartoonAnthology() {
           business, so it is not on this book's plate. */}
       <p className="comic-anthology-status">
         The cover at the top of this room is a sample: the book is still being made, so it may
-        change before it is printed. The day it is finished it is published — free, with no
-        sign-in, for anyone anywhere: on CAIB’s own platforms, and here on this record.
+        change before it is printed.
       </p>
 
       <p className="comic-anthology-credit">
