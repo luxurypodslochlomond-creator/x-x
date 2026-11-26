@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import CopyLine from '@/components/climate/CopyLine';
 import ShareWord from '@/components/climate/cartoons/share/ShareWord';
+import RoomCode from '@/components/climate/cartoons/RoomCode';
 import SendToAlina from '@/components/climate/cartoons/share/SendToAlina';
 import KeeperKey from '@/components/climate/KeeperKey';
 import ShareCardButton from '@/components/climate/ShareCardButton';
@@ -77,6 +78,14 @@ export default function ClimateCartoonsShare() {
         <p className="font-mono text-[11px] break-all text-record-ink/80">{ROOM_ADDRESS}</p>
         <CopyLine text={ROOM_ADDRESS} label="Copy address" />
       </div>
+
+      {/* The address again, as a picture — for the sheet somebody prints, the card handed
+          over at the biennial, or the screen held up in a room. It opens the wall itself,
+          never a redirect, and it is drawn on this page rather than by anybody else. */}
+      <RoomCode
+        text={ROOM_ADDRESS}
+        caption="The wall, as a code — for a printed sheet, a card handed over, or a screen held up in a room. The address in words is printed above it, always."
+      />
 
       <p className="mt-3 text-[13.5px] leading-relaxed text-record-ink/90 lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
         Copy whichever one fits, or tap the app it is going to and send it — the words open already in
