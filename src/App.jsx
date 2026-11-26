@@ -630,6 +630,11 @@ const AuthenticatedApp = () => {
       <Route path="/StoneymollanEscalation" element={<AdminOnly><StoneymollanEscalationPage /></AdminOnly>} />
       <Route path="/AdminStoneymollanBarryReply" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="/AdminStoneymollanBarryReplyPage" element={<Navigate to="/StoneymollanReply" replace />} />
+      {/* ── THE MARK, AS AN ADDRESS ──
+          x = x cannot be a domain: an equals sign is not allowed in one. It can be a path,
+          and it should be, because the mark is the record's own name and a reader who has
+          heard it should be able to type it and arrive. uf51.love/x=x opens the record. */}
+      <Route path="/x=x" element={<Navigate to="/TogetherChangeClimate" replace />} />
       <Route path="/BrandMark" element={<BrandMarkPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
