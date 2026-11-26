@@ -27,6 +27,35 @@ export default function PressOpening() {
         <header className="press-opening-masthead">
           <h1 id="press-room-title" className="press-title">The Wall</h1>
           <p className="press-standfirst">Drawn by hand. Hung on the wall.</p>
+          {/* ── THE NAME IS OLDER THAN THE ROOM ─────────────────────────────────────
+              Brian, 26 November: "we called it the wall bro". We did, and so did Benin, eight
+              centuries earlier. Iya — the Walls of Benin — is recorded by Guinness as the
+              longest earthworks of the pre-mechanical era: around 16,000 km on Patrick
+              Darling's 1977 estimate, ramparts to some twenty metres, built between roughly
+              the seventh and fourteenth centuries. Nobody built that in one act.
+
+              This is the one line in the doorway that earns its place, and it is here rather
+              than further down because a reader meets the word "wall" in the title and should
+              learn at that instant that it is not a metaphor the record invented. One
+              sentence, no sourcing apparatus, no new section — the figures and their sources
+              sit together on the record's home page under the smallest gestures, and the
+              room's rule stands: name, one line, count, cover. */}
+          <p
+            style={{
+              marginTop: '12px',
+              maxWidth: '46ch',
+              fontSize: '11.5px',
+              lineHeight: 1.65,
+              letterSpacing: '0.015em',
+              color: '#5a5246',
+            }}
+          >
+            The name is older than this room. <strong>Iya</strong> — the Walls of Benin — is the
+            longest earthwork of the pre-mechanical era, built between roughly the seventh and
+            fourteenth centuries: one basket of earth, repeated across some sixteen thousand
+            kilometres of ramparts and moats. A wall is what a small gesture becomes when
+            enough people make it.
+          </p>
           <CartoonSignal />
         </header>
       </div>
