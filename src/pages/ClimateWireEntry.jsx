@@ -28,7 +28,7 @@ export default function ClimateWireEntry() {
   }, [id]);
 
   const citation = entry
-    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — a signal on the record, ${entry.when_label}. ${recordAddress()}`
+    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — an entry on the record, ${entry.when_label}. ${recordAddress()}`
     : '';
 
   return (

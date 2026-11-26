@@ -1,0 +1,73 @@
+/* ── THE REGISTER LINE ────────────────────────────────────────────────────────
+   Set like a document, not like a caption: one face, upper case, figures on a fixed
+   width so the columns line up, a double rule at the top and a solid bar in the
+   entry's own colour down the left. Nothing rounded, nothing soft — the look of a
+   machine that keeps a register. The colour is the only thing that changes between
+   a crisis, a solution and an action, so a reader learns it once. */
+.news-register {
+  margin: 0 0 1.1rem;
+  border-top: 3px double rgb(var(--record-ink));
+  border-left: 6px solid rgb(var(--record-ink));
+  padding: .55rem .7rem .6rem .75rem;
+  background: rgb(var(--record-bone) / .5);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: rgb(var(--record-ink));
+  font-variant-numeric: tabular-nums;
+}
+.news-register--crisis { border-left-color: rgb(var(--record-red)); }
+.news-register--solution { border-left-color: rgb(var(--record-botanical)); }
+.news-register--action { border-left-color: rgb(var(--record-ochre)); }
+
+.news-register-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .3rem .8rem;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid rgb(var(--record-ink) / .25);
+}
+.news-register-kind {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.news-register--crisis .news-register-kind { color: rgb(var(--record-red)); }
+.news-register--solution .news-register-kind { color: rgb(var(--record-botanical)); }
+.news-register--action .news-register-kind { color: rgb(var(--record-ochre)); }
+
+.news-register-id {
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: rgb(var(--record-muted));
+  white-space: nowrap;
+}
+
+.news-register-lines { display: grid; gap: 1px; margin-top: .45rem; }
+.news-register-lines > div {
+  display: grid;
+  grid-template-columns: 5.4rem minmax(0, 1fr);
+  gap: .5rem;
+  padding-block: .12rem;
+}
+.news-register-lines dt {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+.news-register-lines dd {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+.news-register-corrected { color: rgb(var(--record-red)); }
+
+@media (min-width: 1024px) {
+  .news-register { padding: .65rem .9rem .7rem .95rem; }
+  .news-register-lines { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .1rem 1.6rem; }
+  .news-register-lines dt { font-size: 10.5px; }
+  .news-register-lines dd { font-size: 12px; }
+}

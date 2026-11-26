@@ -2,14 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NewsEntryImage from '@/components/climate/NewsEntryImage';
 import SignedBy from '@/components/climate/SignedBy';
+import NewsRegister from '@/components/climate/NewsRegister';
 import { verificationOf, verificationNoteOf } from '@/components/climate/verification';
-
-const KINDS = { emergency: 'Crisis', milestone: 'Solution', initiative: 'Action' };
 
 export default function NewsEntryBody({ entry }) {
   return (
     <article className="news-full-account" data-record-layout="compact">
-      <p className="news-entry-meta"><span>{entry.when_label || entry.when_date || 'Date not recorded'}</span><span>{KINDS[entry.kind] || 'News'}{(entry.where_label || entry.country) && ` · ${entry.where_label || entry.country}`}</span></p>
+      {/* The entry opens with its own register line: kind, record id, when it was filed,
+          who says so, how it stands, and whether it has ever been corrected. */}
+      <NewsRegister entry={entry} />
       <h1 className="news-account-heading">{entry.headline}</h1>
       <p className="news-account-text">{entry.what_changed}</p>
       <NewsEntryImage entry={entry} />
