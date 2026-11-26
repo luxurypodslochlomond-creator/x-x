@@ -26,18 +26,25 @@ import { Link } from 'react-router-dom';
 // the plain sentence here is a courtesy and the deed is the law — and a page that argues
 // for saying what you actually mean should not paraphrase a legal text without pointing
 // at the text. One line each, in the record's reading type at a size a person can read.
+//
+// Brian, 26 November, after following one of them: "I meant donate on the Creative Commons
+// and gnu page ya dick haha." He was right, and it is the sort of fault only a reader finds:
+// both organisations put a fundraising ask on the landing pages, so a person who tapped a
+// licence name to check their rights met a begging bowl instead of the terms. Both publish
+// the same terms as plain text with nothing else on the page, so that is where these point
+// now — the law, and only the law.
 const TERMS = [
   {
     label: 'The words',
     name: 'CC BY-SA 4.0',
-    href: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    href: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt',
     means:
       'Take the words. Change them, print them, sell them, put them on a wall. Keep the name on them, and let whatever you make be this free too.',
   },
   {
     label: 'The code',
     name: 'GNU AGPL-3.0',
-    href: 'https://www.gnu.org/licenses/agpl-3.0.html',
+    href: 'https://www.gnu.org/licenses/agpl-3.0.txt',
     means:
       'Same, for the code — and if you run it as a service for other people, the changes you made go back out under this same licence.',
   },
