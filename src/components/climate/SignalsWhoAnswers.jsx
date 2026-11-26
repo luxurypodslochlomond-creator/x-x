@@ -28,7 +28,7 @@ const PEOPLE = [
     to: '/ClimateCartoons/Francis',
   },
   {
-    who: 'The keeper who signed it',
+    who: 'The witness who signed it',
     role: 'The entry',
     line: 'Every published Wire entry carries the name of the person who signed it onto the record, beside its source. Where there is no name, the entry says it is unsigned.',
     to: '/ClimateMethod',

@@ -16,6 +16,27 @@
 // would be telling a lie. So the role is WITNESS, the room is the witnesses’ room, and the
 // line on an entry still says who put it there and when it was checked.
 //
+// ── RE-CHECKED, 26 NOVEMBER, AGAINST THE WORRY THAT THEY SOUND LIKE POWER ────────
+// Brian: "is keepers making us feel greedy or power bro … is it custodians and witnesses or
+// witnesses too strong." The worry is the right one and the answer is that these two words
+// are the two that carry no power at all.
+//
+// A KEEPER holds something: a gatekeeper, a shopkeeper, a zoo's keeper. That is possession,
+// and it was the word to lose. A CUSTODIAN holds a thing that is not theirs, for people they
+// will never meet — in law they have duties and no title, and in Britain the custodian is
+// also the person who cleans the building. Neither reading is powerful. Greed has no route
+// in through it, because a custodian cannot own what they look after.
+//
+// WITNESS is not too strong, provided the record keeps its own rule: a witness says what was
+// witnessed — the source, never the event. On that rule the word is the humblest on the page,
+// because a witness decides nothing. They have no vote, no veto and no say in what is true;
+// they say what they saw and put their name under it. "Verifier" or "attestor" would claim
+// authority. Witness claims only eyes.
+//
+// The check found the vocabulary consistent in every label a reader sees, and two leaks of
+// the retired word, both now fixed: the Wire's authorship panel ("The keeper who signed it")
+// and the letter offered to a host ("a checker corps", "who keep it").
+//
 // WHAT THESE CONSTANTS ARE NOT. They are not the data. The code still says keeper and
 // checker in field names, routes and function names (ClimateChecker.is_keeper,
 // /ClimateKeeperRoom, checkerQueue …), because renaming stored fields is a migration and a
