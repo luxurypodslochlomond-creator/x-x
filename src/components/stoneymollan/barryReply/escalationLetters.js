@@ -52,7 +52,7 @@ ${SIGN}`,
     title: 'The council · roads and access',
     sendTo:
       'The council’s roads authority, and the access officer if the route is a core path. Copy the National Park Authority’s access team if the path falls inside the Park. Confirm which council covers the road before sending — do not guess it.',
-    why: 'Because "the council has given the go ahead" is the claim everything else rests on, and it either exists in writing or it does not. The first numbered point is the one that settles it: public access and a public road are not the same thing.',
+    why: 'The road is adopted — your Property Enquiry Certificate says so, so that part is settled. What follows is the useful part: on an adopted road, work on the surface is the roads authority’s business and anyone laying tarmac needs their permission. This letter asks whether one exists, and where the adopted road ends and private ground begins.',
     subject: 'Road and access — Auchendennan, John Muir Way and Three Lochs Way: request for any permission granted',
     body: `Dear Sir or Madam,
 
@@ -60,16 +60,21 @@ I own Upper Stoneymollan Cottage. The access to it is the road at the start of t
 
 I have been told by Scottish Woodlands, acting for the adjoining landowner, that the council has given approval for the use of that road and for laying tarmac on it behind my gate, in connection with a proposed woodland creation at Auchendennan.
 
-I am not asking you to take a view on that proposal. I am asking what exists in writing:
+I am told, and my own Property Enquiry Certificate records, that this road is adopted by the council and maintained at public expense. I do not dispute that, and I am not asking you to take a view on the woodland proposal. What I am asking about is work on the road.
 
-1. Whether that road is a public road — that is, whether it appears on the council's list of roads maintained at public expense. If it does not, on what basis vehicles are said to be entitled to use it.
-2. Whether any permission, consent, licence or notice has been granted for the use of the road, or for laying tarmac on it, and under which power.
-3. The conditions attached to any such consent, including vehicle weights and numbers, working hours, passing arrangements, condition surveys, and who is responsible for damage.
+The road is single-track, roughly half a mile, steep, with no passing places, and it serves one house: mine. Every vehicle connected with this proposal must come up it, because there is no other route.
+
+I would be grateful for the following in writing:
+
+1. Whether any permission under the Roads (Scotland) Act 1984 has been granted to any party to open, break up, widen or surface the road, and to whom.
+2. The conditions attached to any such permission, including vehicle weights and numbers, working hours, passing arrangements, condition surveys, and who is responsible for repairing damage to the road.
+3. Where the adopted road ends and private ground begins on this route, and whether the surfacing proposed falls within the adopted length or beyond it.
 4. Whether any consent extends to forming, widening or surfacing a vehicular access beyond the road as it exists today, and if so, to what that access leads.
-5. Whether the line of the John Muir Way or the Three Lochs Way is affected, and whether any restriction or diversion has been authorised, and by whom.
-6. The officer and department holding that record.
+5. Whether the roads authority has assessed the effect of construction traffic on a single-track road with no passing places serving one property, and whether any restriction has been placed on its use.
+6. Whether the line of the John Muir Way or the Three Lochs Way is affected, and whether any restriction or diversion has been authorised, and by whom.
+7. The officer and department holding that record.
 
-One point, because it has been put to me as the reason the works are lawful: walkers, cyclists and horse riders using the route under the access rights in Part 1 of the Land Reform (Scotland) Act 2003 do not make a road public, those rights do not extend to motor vehicles, and they do not authorise any work on the surface.
+Adoption does not remove the right of access to my property registered in my title (Burdens Section D1), and nothing in this letter disputes the public's use of the road.
 
 If no such permission exists, I would be grateful for confirmation of that in writing, because that is itself the answer I need.
 

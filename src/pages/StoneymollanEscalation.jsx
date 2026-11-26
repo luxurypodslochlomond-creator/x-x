@@ -57,22 +57,29 @@ export default function StoneymollanEscalation() {
 
         <div className="mt-5 border-l-2 border-record-red pl-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-record-red">
-            Two checks before you send
+            What your own papers already say
           </p>
           <ul className="mt-2 space-y-2 text-[13px] leading-relaxed" style={{ fontFamily: 'var(--font-reading)' }}>
             <li>
-              <strong className="font-semibold">Your own title deed.</strong> Read the access clause
-              itself, not a summary of it. What it settles is whether the road is yours, or a right
-              of access over someone else’s ground — and what that right permits. A servitude right
-              of access is not ownership of the road, and it does not by itself stop the owner
-              maintaining the surface.
+              <strong className="font-semibold">The road is adopted.</strong> Your Property Enquiry
+              Certificate records Upper Stoneymollan Road as adopted by the council and maintained
+              at public expense. So it is a public road, and he is right about that. Being the only
+              house on it does not change its status — it changes who must carry the traffic, which
+              is a different argument and a better one.
             </li>
             <li>
-              <strong className="font-semibold">The council’s list of public roads.</strong> “Public
-              access” and “a public road” are two different things. Walkers, cyclists and riders
-              using a route under the access rights in Part 1 of the Land Reform (Scotland) Act 2003
-              do not make it a road for vehicles, and those rights authorise no work on it. One
-              question — is this road maintained at public expense? — answers what he told you.
+              <strong className="font-semibold">Your deed registers the access, not the road.</strong>{' '}
+              Burdens Section D1 records the road access rights, D2 the water servitude. Read those
+              entries themselves rather than a summary. They give the property a registered right of
+              access — adoption does not extinguish it, and it cannot be obstructed or made unsafe —
+              but they do not make the road yours, and the public may still pass along it.
+            </li>
+            <li>
+              <strong className="font-semibold">And that is where the tarmac question lives.</strong>{' '}
+              On an adopted road, work on the surface is the roads authority’s business: nobody lays
+              tarmac on it without their permission. So the letter asks whether a permission exists,
+              and — the part that matters most — where the adopted road ends and private ground
+              begins.
             </li>
           </ul>
           <p className="mt-3 text-[12.5px] leading-relaxed text-record-muted">
