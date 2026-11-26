@@ -6,6 +6,7 @@ import SignalBeacon from '@/components/climate/SignalBeacon';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXMorseLine from '@/components/climate/XEqualsXMorseLine';
 import CovenantLicence from '@/components/climate/CovenantLicence';
+import XEqualsXMarkSignal from '@/components/climate/XEqualsXMarkSignal';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
@@ -44,7 +45,8 @@ export default function XEqualsX() {
           A principle, not a slogan
           <span className="covenant-epigraph-dot" aria-hidden="true" />
         </p>
-        <p className="covenant-epigraph-mark" translate="no">x = x</p>
+        {/* The mark is the door now: press it and it answers in Morse, then comes back. */}
+        <XEqualsXMarkSignal className="covenant-epigraph-mark" />
       </div>
 
       <XEqualsXOpening />

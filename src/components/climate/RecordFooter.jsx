@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import XEqualsXMarkSignal from '@/components/climate/XEqualsXMarkSignal';
 
 // ── THE FOOT ────────────────────────────────────────────────────────────────────
 // Brian, 17 November: "can you make footer sane please and remove record of time quote
@@ -18,17 +19,33 @@ import { Link } from 'react-router-dom';
 // platform is named as the maker of the thing, not as a co-author of the record: every
 // sentence on these pages was signed by a person, and the yellow bar does not blur that.
 export default function RecordFooter() {
+  // ── THE MARK IS A DOOR, EXCEPT ON THE PAGE IT OPENS ─────────────────────────────
+  // Everywhere on the record, tapping x = x walks the reader to the principle. On the
+  // principle's own page that same tap would reload the page they are already standing
+  // on — a dead tap on the one mark a reader is most likely to press. So there it plays
+  // instead, in the same code the foot of that page already prints. Brian, 26 November.
+  const { pathname } = useLocation();
+  const markPlays = pathname === '/XEqualsX';
+
   return (
     <footer className="mt-4 border-t-4 border-cartoon-sun bg-record-paper pb-10 pt-8 text-center font-body text-record-ink lg:pb-12">
       <div className="px-4 lg:px-10">
-        <Link
-          to="/XEqualsX"
-          aria-label="x = x — what the mark means, and what it does not"
-          className="inline-block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-record-red"
-          style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(46px, 9.5vw, 70px)', lineHeight: 1, letterSpacing: '-0.035em' }}
-        >
-          x = x
-        </Link>
+        {markPlays ? (
+          <XEqualsXMarkSignal
+            className="text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-record-red"
+            style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(46px, 9.5vw, 70px)', lineHeight: 1, letterSpacing: '-0.035em' }}
+            playingStyle={{ fontSize: 'clamp(14px, 3.2vw, 24px)', letterSpacing: '0.12em' }}
+          />
+        ) : (
+          <Link
+            to="/XEqualsX"
+            aria-label="x = x — what the mark means, and what it does not"
+            className="inline-block text-record-mark transition-colors hover:text-record-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-record-red"
+            style={{ fontFamily: 'var(--font-reading)', fontSize: 'clamp(46px, 9.5vw, 70px)', lineHeight: 1, letterSpacing: '-0.035em' }}
+          >
+            x = x
+          </Link>
+        )}
 
         {/* ── THE DATE COMES OFF THE PAPER ───────────────────────────────────────────
             Brian, 17 November: "this record of time box you out in can you remove please
