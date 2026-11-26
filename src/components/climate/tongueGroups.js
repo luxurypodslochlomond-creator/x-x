@@ -1,4 +1,4 @@
-// ── A HUNDRED AND EIGHTY-NINE TONGUES NEED SOMEWHERE TO STAND ───────────────────
+// ── TWO HUNDRED AND TWENTY-FIVE TONGUES NEED SOMEWHERE TO STAND ─────────────────
 // The list grew past a hundred and twenty on 20 November and was still one flat scroll in the
 // order the tongues happened to be added — Celtic, then Europe, then Asia, then a block for
 // Nigeria, then the Pacific, then the ancient world. Nobody could find anything in it by eye,
@@ -43,7 +43,7 @@ export const TONGUE_GROUPS = [
       'fy', 'nds', 'lb', 'hsb', 'dsb', 'rm', 'se', 'fo', 'kl',
       'oc', 'sc', 'scn', 'co', 'ast', 'an', 'csb', 'szl', 'rue',
       'sq', 'sr', 'hr', 'bs', 'sl', 'mk', 'be', 'lt', 'lv', 'et', 'mt', 'eo',
-      'uk',
+      'uk', 'nap', 'vec', 'lmo', 'rom',
     ],
   },
   {
@@ -54,7 +54,7 @@ export const TONGUE_GROUPS = [
   {
     key: 'west-asia',
     title: 'West Asia and the Caucasus',
-    codes: ['ar', 'he', 'yi', 'fa', 'hy', 'ka', 'az', 'ku', 'ps', 'ug'],
+    codes: ['ar', 'he', 'yi', 'fa', 'hy', 'ka', 'az', 'ku', 'ps', 'ug', 'bal', 'lad'],
   },
   {
     key: 'central-asia',
@@ -64,12 +64,14 @@ export const TONGUE_GROUPS = [
   {
     key: 'south-asia',
     title: 'South Asia',
-    codes: ['hi', 'bn', 'ta', 'te', 'mr', 'pa', 'ur', 'ne', 'si', 'ml', 'kn', 'gu', 'sd', 'ks', 'as', 'or', 'bho', 'mai', 'dv'],
+    codes: ['hi', 'bn', 'ta', 'te', 'mr', 'pa', 'ur', 'ne', 'si', 'ml', 'kn', 'gu', 'sd', 'ks', 'as', 'or', 'bho', 'mai', 'dv',
+      'pnb', 'syl', 'hne', 'awa', 'rhg'],
   },
   {
     key: 'east-asia',
     title: 'East and South-East Asia',
-    codes: ['zh', 'zh-TW', 'yue', 'nan', 'ja', 'ko', 'my', 'km', 'lo', 'th', 'vi', 'id', 'ms', 'tl', 'mn', 'bo', 'jv', 'su', 'ceb', 'hmn'],
+    codes: ['zh', 'zh-TW', 'yue', 'nan', 'ja', 'ko', 'my', 'km', 'lo', 'th', 'vi', 'id', 'ms', 'tl', 'mn', 'bo', 'jv', 'su', 'ceb', 'hmn',
+      'wuu', 'hak', 'cjy', 'hsn', 'gan', 'mad', 'min', 'ilo', 'hil'],
   },
   {
     key: 'africa',
@@ -79,6 +81,7 @@ export const TONGUE_GROUPS = [
       'bin', 'fon', 'urh', 'ish', 'efi', 'ibb', 'anw', 'tiv', 'ijc', 'kau', 'fuv',
       'nup', 'igl', 'idu', 'bom',
       'af', 'om', 'ti', 'rw', 'ln', 'mg', 'bm', 'ak', 'ee', 'st', 'tn', 'ny', 'zgh',
+      'pcm', 'arz', 'mos', 'lg', 'mnk', 'din', 'kri', 'gaa', 'dag',
     ],
   },
   {
@@ -89,11 +92,12 @@ export const TONGUE_GROUPS = [
   {
     key: 'americas',
     title: 'The Americas',
-    codes: ['qu', 'gn', 'ay', 'nah', 'yua', 'ht', 'nv', 'lkt', 'ojb', 'iu', 'cr', 'moh', 'hop', 'apw', 'chr'],
+    codes: ['qu', 'gn', 'ay', 'nah', 'yua', 'ht', 'nv', 'lkt', 'ojb', 'iu', 'cr', 'moh', 'hop', 'apw', 'chr',
+      'jam', 'quc', 'arn'],
   },
   {
     key: 'ancient',
     title: 'The ancient world',
-    codes: ['la', 'grc', 'egy', 'sux', 'akk', 'annunaki', 'rongorongo'],
+    codes: ['la', 'grc', 'egy', 'sux', 'akk', 'annunaki', 'rongorongo', 'cop', 'pi', 'non'],
   },
 ];

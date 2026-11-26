@@ -251,11 +251,62 @@ export const LANGS = [
   { code: 'akk', label: 'Akkadian (cuneiform)' },
   { code: 'annunaki', label: 'Annunaki (Sumerian)' },
   { code: 'rongorongo', label: 'Rongorongo (Easter Island)' },
+
+  // ── THE TONGUES THAT HAVE NO COUNTRY TO GET THEM ON A LIST ──────────────────────
+  // Brian, 26 November: "you sure you researched and searched the internet for edo etc bro
+  // we might be missing something?" He was right, and the reason was structural rather than
+  // careless. This list grew out of ISO 639-1 — the two-letter codes — so it carries the
+  // tongues that have a nation to sponsor them and quietly omits the ones that do not. Edo
+  // and Fon had to be added by hand for that reason. Every tongue below is spoken by
+  // millions of people and was missing: Wu, with more speakers than French; Nigerian
+  // Pidgin, the tongue of the street in the country this record's own cartoon room comes
+  // from; Hakka, Xiang, Jin, Gan; the Rohingya, who have no state at all; Romani, whose
+  // speakers have been in Europe for seven centuries and are on no country's list.
+  //
+  // That is the extraction pattern this record exists to name, and it was sitting in its own
+  // language menu. A record that speaks forty languages and calls itself for everyone is the
+  // thing it criticises. These are not here to make the number bigger: they are the people
+  // the two-letter alphabet left out.
+  { code: 'pcm', label: 'Naijá (Nigerian Pidgin)' },
+  { code: 'arz', label: 'مصرى (Egyptian Arabic)' },
+  { code: 'pnb', label: 'پنجابی (Western Punjabi)' },
+  { code: 'wuu', label: '吴语 (Wu)' },
+  { code: 'hak', label: '客家话 (Hakka)' },
+  { code: 'cjy', label: '晋语 (Jin)' },
+  { code: 'hsn', label: '湘语 (Xiang)' },
+  { code: 'gan', label: '赣语 (Gan)' },
+  { code: 'hne', label: 'छत्तीसगढ़ी (Chhattisgarhi)' },
+  { code: 'awa', label: 'अवधी (Awadhi)' },
+  { code: 'syl', label: 'Silôṭi (Sylheti)' },
+  { code: 'mad', label: 'Bhâsa Madhurâ (Madurese)' },
+  { code: 'min', label: 'Minangkabau' },
+  { code: 'ilo', label: 'Ilokano' },
+  { code: 'hil', label: 'Hiligaynon' },
+  { code: 'nap', label: 'Napulitano (Neapolitan)' },
+  { code: 'vec', label: 'Vèneto (Venetian)' },
+  { code: 'lmo', label: 'Lombard' },
+  { code: 'bal', label: 'بلوچی (Balochi)' },
+  { code: 'lad', label: 'Ladino (Judeo-Espanyol)' },
+  { code: 'mos', label: 'Mòoré (Mossi)' },
+  { code: 'lg', label: 'Luganda' },
+  { code: 'rom', label: 'Romani ćhib' },
+  { code: 'mnk', label: 'Mandinka' },
+  { code: 'din', label: 'Thuɔŋjäŋ (Dinka)' },
+  { code: 'jam', label: 'Patwa (Jamaican Patois)' },
+  { code: 'gaa', label: 'Gã (Ga)' },
+  { code: 'dag', label: 'Dagbani' },
+  { code: 'rhg', label: 'Ruáingga (Rohingya)' },
+  { code: 'kri', label: 'Krio' },
+  { code: 'quc', label: 'Kʼicheʼ (Maya)' },
+  { code: 'arn', label: 'Mapudungun' },
+  { code: 'cop', label: 'Coptic (Egypt)' },
+  { code: 'pi', label: 'Pāli' },
+  { code: 'non', label: 'Norrœnt mál (Old Norse)' },
 ];
 
 // Right-to-left tongues. Pashto was on the list and missing from this set, so a Pashto
 // reader got Arabic script laid out left to right on a page that never turned round.
-export const RTL_LANGS = new Set(['ar', 'he', 'fa', 'ur', 'ps', 'yi']);
+export const RTL_LANGS = new Set(['ar', 'arz', 'he', 'fa', 'ur', 'ps', 'yi', 'pnb', 'bal']);
 
 // One chosen tongue across the whole record — the same key the record page reads,
 // so a language picked in one place is the language everywhere on the platform.

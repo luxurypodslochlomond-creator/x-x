@@ -236,6 +236,11 @@ async function askModel(base44, words, lang) {
     'ast', 'an', 'csb', 'szl', 'rue', 'eo',
     'ug', 'ks', 'bho', 'mai', 'dv', 'hmn', 'lo', 'ceb', 'su',
     'om', 'ti', 'rw', 'ln', 'mg', 'bm', 'ak', 'ee', 'st', 'tn', 'ny', 'zgh', 'ht',
+    // The tongues added on 26 November, when the list reached 225 and the two-letter
+    // alphabet's omissions were put back. Same rule as everywhere above: where a machine
+    // cannot vouch for a word, the English stands and nothing is invented in a mother tongue.
+    'syl', 'hne', 'awa', 'mnk', 'din', 'gaa', 'dag', 'kri', 'mos', 'rhg', 'mad', 'quc',
+    'arn', 'rom', 'bal',
   ]);
   const thin = THIN.has(String(lang).trim().toLowerCase());
   const thinNote = thin
