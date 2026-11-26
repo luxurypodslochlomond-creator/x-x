@@ -19,7 +19,13 @@ export default function CartoonWall() {
         <p className="record-meta"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
       </header>
       {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the original drawings…</p>}
-      {wall.isError && <div className="comic-wall-empty comic-error-note" role="alert"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}
+      {wall.isError && !wall.keptDay && <div className="comic-wall-empty comic-error-note" role="alert"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}
+      {/* No signal, and this device kept the wall: it opens anyway, and says which day it is. */}
+      {wall.keptDay && (
+        <p className="record-meta border-y border-record-ink/20 py-2" role="status">
+          You are reading the copy this phone kept on {new Date(wall.keptDay).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' })}. The wall itself could not be reached — the drawings and their words are here, and nothing new can be added until the signal returns.
+        </p>
+      )}
       {!wall.isPending && !wall.isError && !wall.cartoons.length && <div className="comic-wall-empty"><PinnedNote size={62} className="cmark-block" /><p className="record-meta">The first page is still blank. A space for a real drawing, with its artist’s name.</p><a href="#cartoon-your-turn">Make it yours ↗</a></div>}
       <div className="cartoon-human-wall">
         {wall.cartoons.map((cartoon, i) => <CartoonPlate key={cartoon.id} cartoon={cartoon} lead={i === 0} index={i + 1} onOpen={() => setReading(i)} />)}
