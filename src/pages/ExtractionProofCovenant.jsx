@@ -23,7 +23,10 @@ const PILLARS = [
     n: '01',
     status: 'BUILT · LIVE',
     title: 'The smallest set of data a record needs',
-    body: 'What you submit, a contact email so we can reach you about it, and the country a reader reads from. No IP address is stored. No tracking cookies. No ad profiles. No accounts. Anyone who copies this code inherits a reviewed, minimal database — not a surveillance engine. There is nothing here worth harvesting.',
+    // "No accounts" was too big a claim: keepers and checkers do sign in to work on the
+    // record. What is true is narrower and better — a reader never has to, and neither does
+    // anyone sending something in.
+    body: 'What you submit, a contact email so we can reach you about it, and the country a reader reads from. No IP address is stored. No tracking cookies. No ad profiles. No reader accounts: nothing to sign up to before you read, or before you send something in. Anyone who copies this code inherits a reviewed, minimal database — not a surveillance engine. There is nothing here worth harvesting.',
   },
   {
     n: '02',
@@ -33,7 +36,13 @@ const PILLARS = [
     // covenant that named only the code would leave the words — the entries themselves — with
     // no stated terms at all. Irrevocable is the load-bearing word: a licence of this kind,
     // once given, cannot be taken back, by this record or by anyone who takes it over.
-    body: 'Both are already given, and both are irrevocable: once given, a licence of this kind cannot be taken back. The words: everything published on this record is under Creative Commons BY-SA 4.0 — take it, change it, print it, sell it, keep the name on it, and let whatever you make be this free too. The code: the GNU AGPL-3.0, open in its licence and in every line of it, with one condition — anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible, and the words are covered against the same play. There is no public repository today: the code is held in a private workspace, and what is open is the record itself — every published entry, its source, and its corrections. The day a repository exists, its link goes here and this line changes. Until then the page says so plainly, rather than letting a reader find out the hard way.',
+    body: 'Both are already given, and both are irrevocable: once given, a licence of this kind cannot be taken back. The words: everything published on this record is under Creative Commons BY-SA 4.0 — take it, change it, print it, sell it, keep the name on it, and let whatever you make be this free too. The code: the GNU AGPL-3.0, open in its licence and in every line of it, with one condition — anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — stops being a clever move and becomes a licence violation anyone can point at, in public. There is no public repository today: the code is held in a private workspace, and what is open is the record itself — every published entry, its source, and its corrections. The day a repository exists, its link goes here and this line changes. Until then the page says so plainly, rather than letting a reader find out the hard way.',
+    // The names are the law, and the law is one tap away. A page asking a reader to take its
+    // word on a licence should hand them the licence: same addresses as the plate on x = x.
+    links: [
+      { label: 'Read CC BY-SA 4.0', href: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode' },
+      { label: 'Read the GNU AGPL-3.0', href: 'https://www.gnu.org/licenses/agpl-3.0.html' },
+    ],
   },
   {
     n: '03',
@@ -53,11 +62,20 @@ const COMMITMENTS = [
   'The good use is the default path — extraction is not in the codebase to exploit.',
   'AI does the understanding; the human always keeps the deciding.',
   'Free to read, always. Money never buys a place on the record.',
-  'Every privacy claim is verifiable in the architecture, and in the record’s own privacy note — not only in the marketing.',
+  // The page twice tells a reader to check it against the privacy note, so it hands them the
+  // note rather than sending them looking. A claim you can check is worth more than a claim
+  // you are asked to trust, and only if the checking is one tap away.
+  <>
+    Every privacy claim is verifiable in the architecture, and in the record’s own{' '}
+    <Link to="/ClimatePrivacy" className="underline decoration-dotted underline-offset-2 hover:text-[#b3261e]">
+      privacy note
+    </Link>{' '}
+    — not only in the marketing.
+  </>,
   'Anyone may copy this to help people. No one may quietly close it to harvest them.',
 ];
 
-function Pillar({ n, status, title, body }) {
+function Pillar({ n, status, title, body, links }) {
   return (
     <section className="border-2 border-[#141210] bg-[#f7f1e5]">
       <div className="flex items-center justify-between gap-3 px-4 py-2.5 border-b-2 border-[#141210] bg-[#efe7d6]">
@@ -74,6 +92,21 @@ function Pillar({ n, status, title, body }) {
           {title}
         </h2>
         <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210]">{body}</p>
+        {links?.length ? (
+          <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-[10px] font-black font-mono uppercase tracking-widest text-[#141210] underline decoration-dotted underline-offset-2 hover:text-[#b3261e]"
+              >
+                {l.label}
+              </a>
+            ))}
+          </p>
+        ) : null}
       </div>
     </section>
   );
