@@ -202,6 +202,9 @@ const ClimateCartoonsThreadPage = React.lazy(() => import('./pages/ClimateCartoo
 const ClimateCartoonPresentPage = React.lazy(() => import('./pages/ClimateCartoonPresent'));
 const ClimateCartoonExhibitionPage = React.lazy(() => import('./pages/ClimateCartoonExhibition'));
 const ClimateWorkshopPage = React.lazy(() => import('./pages/ClimateWorkshop'));
+// Six questions CEEW asked in writing, answered in writing, in her order — so the
+// five-minute call is for the things a page cannot settle.
+const ClimateWorkshopAnswersPage = React.lazy(() => import('./pages/ClimateWorkshopAnswers'));
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
@@ -457,6 +460,10 @@ const AuthenticatedApp = () => {
           the one ask — and no addresses, no phone numbers and no joining link, because a
           workshop's link is hers to hand out. */}
       <Route path="/ClimateWorkshop" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopPage /></ClimateLayout>} />
+      {/* CEEW's six questions, answered in writing and in her order, so the call that follows
+          is about the things a page cannot settle. */}
+      <Route path="/ClimateWorkshopAnswers" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopAnswersPage /></ClimateLayout>} />
+      <Route path="/ClimateWorkshopAnswers" element={<ClimateLayout currentPage="ClimateWorkshop"><ClimateWorkshopAnswersPage /></ClimateLayout>} />
       {/* ── THE SCRIPT THAT IS NOT NEEDED ────────────────────────────────────────────
           This address held eight minutes of speech and a nineteen-minute drawing exercise,
           written on 16 November before anybody had seen Janine's agenda. Her agenda, sent on

@@ -101,6 +101,18 @@ export default function ClimateWorkshop() {
           and it is hers. */}
       <TheShortAnswer />
 
+      {/* The six questions CEEW asked in writing, answered in writing and in her order, so a
+          five-minute call is not spent reading facts out loud. One link, one page. */}
+      <Link
+        to="/ClimateWorkshopAnswers"
+        className="mt-3 flex items-center justify-between gap-3 border border-record-ink/20 bg-record-bone/50 px-3 py-2.5"
+      >
+        <span className="text-[12.5px] leading-snug" style={{ fontFamily: 'var(--font-reading)' }}>
+          Asked six questions in writing? They are answered in writing, in her order.
+        </span>
+        <ArrowRight className="h-4 w-4 shrink-0" />
+      </Link>
+
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 border-b border-record-ink/15 pb-3">
         {/* ── HER PRIVATE WORDS WERE STANDING ON A PUBLIC PAGE ────────────────────
             Brian, 25 November: "you're saying Janine finding it a struggle etc, that was
