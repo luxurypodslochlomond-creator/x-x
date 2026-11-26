@@ -39,7 +39,7 @@ export default function ClimateCartoonsShare() {
       eyebrow="The cartoon room · words to carry it"
       marker="Five places, five sets of words, one address"
       title="Words for wherever you post it"
-      statement="The drawings travel hand to hand, and a link on its own says nothing. So here is the room described for the place it is going — a group chat, a caption, a professional feed, a short post, one email — each with the address on the end."
+      statement="The drawings travel hand to hand, and a link on its own says nothing. So here is the room described for the place it is going — a group chat, a caption, a professional feed, a short post, one email — each with the address on the end. It opens with the initiative in Janine Selendy’s own words, because that is the shortest true description of what this room is part of."
       returnTo="/ClimateCartoons"
       returnLabel="The room"
       footer="Every figure on this page is read from the wall itself when the page opens. Nothing here is a claim the room cannot show."

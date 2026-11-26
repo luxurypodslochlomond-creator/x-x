@@ -19,11 +19,28 @@ import { CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 export const ROOM_ADDRESS = `${recordOrigin()}/ClimateCartoons`;
 export const HOUR_ADDRESS = `${recordOrigin()}/ClimateWorkshop`;
 
+// ── THE DESCRIPTION, IN HER OWN WORDS ─────────────────────────────────────────
+// Janine Selendy wrote this to Alina Sen at CEEW on 26 November 2026, after the call, when
+// asked for a brief description of the initiative. It is quoted exactly — her spelling of
+// "mobilization", her figure of 5.86 billion smartphones, her two paragraphs — because a
+// description of somebody's work that has been tidied up is no longer their description.
+// The salutation and her line about joining on Zoom are left out: they were to Alina, not
+// about the work. Nothing is added to it, and her name stays on it wherever it travels.
+export const JANINE_WORDS = `the initiative is international mobilization against climate change by means of the 5.86 billion smartphones, social media, and a web platform to alert to climate emergencies and to spread knowledge of efforts to mitigate climate change.
+
+As people have early warning of emergencies, they will be better able to cope and as people learn about positive actions, they can benefit from those examples and be encouraged to do what they themselves can do.`;
+
 const wall = (count) => (count ? `${count} climate cartoons` : 'A wall of climate cartoons');
 
 export function shareLines(count) {
   const room = ROOM_ADDRESS;
   return [
+    {
+      id: 'janine',
+      where: 'Janine Selendy · the description, in her own words',
+      note: 'Her words exactly, with her name kept on them and the room’s address after her sign-off. This is the shortest true description of the whole initiative this room belongs to.',
+      text: `${JANINE_WORDS}\n\n— Janine Selendy, who hosts Sunday’s workshop\n\nThe cartoon room: ${room}`,
+    },
     {
       id: 'chat',
       where: 'WhatsApp, Signal, Telegram',
