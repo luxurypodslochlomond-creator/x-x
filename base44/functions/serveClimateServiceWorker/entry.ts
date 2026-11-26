@@ -23,18 +23,28 @@ self.addEventListener('activate', (e) => {
 });
 
 ${serviceWorkerFetch}
+// ── THE RECORD'S OWN FILES, KEPT AS THEY ARRIVE ────────────────────────────────
+// Pictures were kept and sound was not, which meant a track played once in the music room
+// played once: with no signal, pressing it again asked a network that was not there. A
+// drawing, a photograph and a master are all the record's own files on the same public
+// address, so they are kept by the same rule — when a reader has actually asked for one.
+// Nothing is fetched ahead of time and nothing is counted, and a file that was never opened
+// is not on the phone. The full file is asked for rather than a slice of it, because half a
+// master in a cache is worse than no master at all.
 self.addEventListener('fetch', (e) => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
-  const publicPhoto = ['media.base44.com', 'base44.app'].includes(url.hostname)
+  const ownFile = ['media.base44.com', 'base44.app'].includes(url.hostname)
     && url.pathname.includes('/public/6889f31e76713b9cd47e043c/');
-  if (e.request.destination === 'image' && publicPhoto) {
+  const kept = ['image', 'audio', 'video'].includes(e.request.destination);
+  if (kept && ownFile) {
     e.respondWith((async () => {
       const cache = await caches.open(PHOTO_CACHE);
       const cached = await cache.match(e.request.url);
       if (cached) return cached;
+      // Asked for by address, so a media player's request for a slice comes back whole.
       const response = await fetch(e.request.url, { mode: 'cors', credentials: 'omit' });
-      if (response.ok) {
+      if (response.ok && response.status !== 206) {
         e.waitUntil(cache.put(e.request.url, response.clone()).catch(() => {}));
       }
       return response;

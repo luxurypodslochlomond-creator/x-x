@@ -21,6 +21,20 @@ const offlinePage = () => new Response(
   { status: 503, headers: { 'Content-Type': 'text/html' } }
 );
 
+// ── THE ONE THING A PAGE NEEDS THAT IS NOT A FILE ───────────────────────────────
+// The paragraph above is right about a STALE shell and wrong about no shell at all: with
+// none kept, a phone that has lost its signal could not open the app at all — every address
+// answered "Reconnect to load this page", including the rooms the reader had already sat in.
+// That is the worst possible answer at a workshop, where the whole point is that the record
+// works where the wifi does not.
+//
+// So the shell is kept, under a name of its own, and only ever handed back when there is no
+// signal. It is replaced on every visit that reaches the network, and the files it names are
+// cached on that same visit — so what comes back offline is the app as it last was, with its
+// own files beside it, and never a shell pointing at files that are gone. A phone that has
+// never opened the app still gets the honest page below, because there is nothing to give it.
+const SHELL_KEY = '/__app-shell';
+
 function appFetch(event, cacheName) {
   const request = event.request;
   const url = new URL(request.url);
@@ -37,19 +51,27 @@ function appFetch(event, cacheName) {
   event.respondWith((async () => {
     const cache = await caches.open(cacheName).catch(() => null);
     const cachedResponse = async () => cache ? cache.match(request).catch(() => null) : null;
+    const keptShell = async () => {
+      if (!cache) return null;
+      const held = await cache.match(SHELL_KEY).catch(() => null);
+      return usable(held) ? held : null;
+    };
     try {
       const response = await fetch(request, navigation ? { cache: 'no-cache' } : undefined);
       if (usable(response)) {
-        if (cache && !navigation) event.waitUntil(cache.put(request, response.clone()).catch(() => {}));
+        if (cache) {
+          const hold = navigation ? cache.put(SHELL_KEY, response.clone()) : cache.put(request, response.clone());
+          event.waitUntil(hold.catch(() => {}));
+        }
         return response;
       }
-      if (navigation) return offlinePage();
+      if (navigation) return (await keptShell()) || offlinePage();
       const cached = await cachedResponse();
       if (usable(cached)) return cached;
       // A missing script must never receive the HTML app shell.
       return script || style ? Response.error() : response;
     } catch (_) {
-      if (navigation) return offlinePage();
+      if (navigation) return (await keptShell()) || offlinePage();
       const cached = await cachedResponse();
       if (usable(cached)) return cached;
       return Response.error();
