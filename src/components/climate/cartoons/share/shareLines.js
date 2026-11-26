@@ -72,6 +72,29 @@ export function workshopLines({ join } = {}) {
     : 'The joining link and passcode come from the host — ask whoever sent you this, and it will be with you before Sunday.';
 
   return [
+    // ── THE ONE SHE ASKED FOR, IN THE ORDER SHE ASKED FOR IT ────────────────────
+    // Alina Sen, 26 November: "It would be good to have a message with some humour and
+    // some interesting cartoons from different people." Two things were missing from the
+    // invite above, and both are hers: the joke sat third, where a thumb in a group chat
+    // never reaches it, and one cartoonist was named first as if the wall were his.
+    // So the joke is the opening line, three hands from three different rooms are named
+    // in the middle, and the last thing it does is send the reader to look rather than to
+    // promise they will come. It is still one message a person can forward without
+    // editing anything out of it, which is the only test a chat message has to pass.
+    {
+      id: 'invite-funny',
+      where: 'In a group chat · the funny one Alina asked for',
+      note: 'Her two words were "some humour". The joke is in the first line, where a thumb will actually see it, and the drawings are named by three different hands so nobody reads this as one artist’s wall. Paste the joining link in the field above and it lands in here.',
+      text: `Sunday, 2pm UK, one hour, online, free: a workshop on the climate where the cartoons do the arguing and the humans try to keep up.
+
+Janine Selendy hosts. Francis Umendu Odupute brings the cartoonists — Anoop Radhakrishnan, Shaunak Samvatsar and Devki Deshmukh among them — each getting about two minutes on one drawing and why it had to exist. Alina Sen shows what CEEW India's What On Earth! has been drawing. Then the platform holding the whole wall gets two minutes as well, which is more than most of us get and less than it thinks it needs.
+
+Bring a question for the end. Bring the friend who says cartoons aren't serious — forty seconds on the wall settles that one.
+
+${joinLine}
+
+Have a look first, free, no account: ${room}`,
+    },
     {
       id: 'invite',
       where: 'In a group chat · the invite, with a bit of cheek',
