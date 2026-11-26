@@ -208,6 +208,12 @@ export default function AdminStoneymollanLegal() {
           >
             ✉️ The reply to Barry Harper — ready to send
           </Link>
+          <Link
+            to="/StoneymollanEscalation"
+            className="mt-2 inline-flex items-center gap-2 border-2 border-cyan-400 bg-cyan-400/10 px-4 py-3 font-mono text-xs font-black uppercase tracking-wide text-cyan-300"
+          >
+            ⬆️ Three letters — head office, council, Scottish Water
+          </Link>
         </motion.div>
 
         {/* WHAT'S SAVED BANNER */}

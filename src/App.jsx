@@ -103,6 +103,9 @@ const AdminStoneymollanLegalPage = React.lazy(() => import('./pages/AdminStoneym
 // sending it without a sign-in. It also wears no layout, so on a phone it is the letter and
 // the copy button and nothing else.
 const StoneymollanReplyPage = React.lazy(() => import('./pages/StoneymollanReply'));
+// The three escalation letters — head office, council, Scottish Water — on their own open
+// address, because they get sent from a phone at a kitchen table and not from a desk.
+const StoneymollanEscalationPage = React.lazy(() => import('./pages/StoneymollanEscalation'));
 const AI51SoulPage = React.lazy(() => import('./pages/AI51Soul'));
 const AdminPWAPushGuidePage = React.lazy(() => import('./pages/AdminPWAPushGuide'));
 const Literacy51Page = React.lazy(() => import('./pages/Literacy51'));
@@ -617,6 +620,7 @@ const AuthenticatedApp = () => {
           without becoming the first thing a neighbour finds. The admin address still
           works, because it is in the case file's own links. */}
       <Route path="/StoneymollanReply" element={<StoneymollanReplyPage />} />
+      <Route path="/StoneymollanEscalation" element={<StoneymollanEscalationPage />} />
       <Route path="/AdminStoneymollanBarryReply" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="/AdminStoneymollanBarryReplyPage" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="*" element={<PageNotFound />} />
