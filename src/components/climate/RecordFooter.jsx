@@ -27,6 +27,17 @@ export default function RecordFooter() {
   const { pathname } = useLocation();
   const markPlays = pathname === '/XEqualsX';
 
+  // ── AND THE CHIP STEPS ASIDE WHERE THE DEBT IS ALREADY PRINTED IN FULL ──────────
+  // Brian, 26 November, on the covenant: "you sure Laurie Anderson bit art bottom right
+  // bro doesn't feel right to me bro is it trying too hard on this page?" It was, and the
+  // fault was duplication rather than the credit. The covenant quotes her two lines, signs
+  // them with her name, the song and the year, and says out loud that she has not read the
+  // page — so a yellow badge at the foot repeating the same three facts is not a citation,
+  // it is a sticker, and a sticker is the one thing a page about not showing off cannot
+  // wear. Her words and her name are already on the page, so the debt is checkable without
+  // it. Every other page keeps the chip, because there it is the only credit there is.
+  const creditPrintedInFull = pathname === '/ExtractionProofCovenant' || pathname === '/OpenSourceDeclaration';
+
   return (
     <footer className="mt-4 border-t-4 border-cartoon-sun bg-record-paper pb-10 pt-8 text-center font-body text-record-ink lg:pb-12">
       <div className="px-4 lg:px-10">
@@ -52,11 +63,13 @@ export default function RecordFooter() {
             and put 2026 after platform / record." So there is one chip again, hers alone —
             the year this record is being kept in belongs in the band with the rest of the
             printer's facts, not given a plate of its own. */}
-        <p className="mt-5">
-          <span className="inline-block bg-cartoon-sun px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
-            Laurie Anderson · “From the Air” · Big Science, 1982
-          </span>
-        </p>
+        {!creditPrintedInFull && (
+          <p className="mt-5">
+            <span className="inline-block bg-cartoon-sun px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-record-ink">
+              Laurie Anderson · “From the Air” · Big Science, 1982
+            </span>
+          </p>
+        )}
       </div>
 
       {/* ── ONE YELLOW BAR, THE SAME YELLOW AS THE LINE AT THE TOP ────────────────
