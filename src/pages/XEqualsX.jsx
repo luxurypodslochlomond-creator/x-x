@@ -5,6 +5,7 @@ import RecordBackBar from '@/components/climate/RecordBackBar';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXMorseLine from '@/components/climate/XEqualsXMorseLine';
+import CovenantLicence from '@/components/climate/CovenantLicence';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
@@ -132,12 +133,7 @@ export default function XEqualsX() {
           The software underneath is the covenant's own business, and that page states the
           GNU AGPL-3.0 and says plainly that no public repository exists yet. This line is
           about the words on this page, which need no repository to be taken. */}
-      <p className="covenant-licence">
-        The words on this page are <strong>CC BY-SA 4.0</strong> — take them, change them, print
-        them, put them on a wall. Keep the name on them, and let whoever takes them next do the
-        same. The code that serves this record is under the GNU AGPL-3.0, as{' '}
-        <Link to="/ExtractionProofCovenant">the covenant</Link> says.
-      </p>
+      <CovenantLicence />
 
 
     </div>
