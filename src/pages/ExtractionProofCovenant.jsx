@@ -27,9 +27,13 @@ const PILLARS = [
   },
   {
     n: '02',
-    status: 'LICENCE IN PLACE',
-    title: 'AGPL-3.0',
-    body: 'The GNU AGPL-3.0 licence is already written into this project. Open in its licence and in every line of it, with one condition: anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible. There is no public repository today: the code is held in a private workspace, and what is open is the record itself — every published entry, its source, and its corrections. The day a repository exists, its link goes here and this line changes. Until then the page says so plainly, rather than letting a reader find out the hard way.',
+    status: 'LICENCES IN PLACE',
+    title: 'CC BY-SA 4.0 and AGPL-3.0',
+    // Both halves, named together, because this record gives away two different things and a
+    // covenant that named only the code would leave the words — the entries themselves — with
+    // no stated terms at all. Irrevocable is the load-bearing word: a licence of this kind,
+    // once given, cannot be taken back, by this record or by anyone who takes it over.
+    body: 'Both are already given, and both are irrevocable: once given, a licence of this kind cannot be taken back. The words: everything published on this record is under Creative Commons BY-SA 4.0 — take it, change it, print it, sell it, keep the name on it, and let whatever you make be this free too. The code: the GNU AGPL-3.0, open in its licence and in every line of it, with one condition — anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — becomes legally impossible, and the words are covered against the same play. There is no public repository today: the code is held in a private workspace, and what is open is the record itself — every published entry, its source, and its corrections. The day a repository exists, its link goes here and this line changes. Until then the page says so plainly, rather than letting a reader find out the hard way.',
   },
   {
     n: '03',
