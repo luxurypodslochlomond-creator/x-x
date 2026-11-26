@@ -783,16 +783,18 @@ html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !impor
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0 1.25rem 1.35rem;
+  gap: 0.55rem;
+  /* It sits at the foot now, under the argument and above the two ways out, so the space
+     it needs is above it rather than below. */
+  padding: 2.1rem 1.25rem 1.6rem;
   text-align: center;
 }
 #x-equals-x .covenant-morse-code {
   display: flex;
-  gap: 1.15rem;
+  gap: 1.4rem;
   margin: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: 0.16em;
   color: rgb(var(--record-mark));
 }

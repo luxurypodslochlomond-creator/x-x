@@ -46,10 +46,6 @@ export default function XEqualsX() {
         <p className="covenant-epigraph-mark" translate="no">x = x</p>
       </div>
 
-      {/* The same mark, spelled in dots and dashes: a code belongs on a signal, not in
-          the list of tongues. */}
-      <XEqualsXMorseLine />
-
       <XEqualsXOpening />
 
       {/* The whole principle in one line of signal — the three things the record will not do. */}
@@ -88,6 +84,15 @@ export default function XEqualsX() {
           <XEqualsXResearchPanel />
         </div>
       </div>
+
+      {/* ── THE CODE, WHERE IT WAS ALWAYS MEANT TO BE ──────────────────────────
+          It was mounted at the head of the page: a pale sliver of dots and dashes wedged
+          between two dark blocks, arriving before the reader had met the mark it encodes.
+          Its own note says it is "printed at the foot of its most abstract claim" — and it
+          was at the top. A code at the door of a page is a puzzle; the same code after the
+          argument is a proof. Nothing about it changed except its place: the last thing the
+          page says is the smallest signal that still means something, and then two ways out. */}
+      <XEqualsXMorseLine />
 
       <div className="covenant-close">
         <div className="covenant-actions">
