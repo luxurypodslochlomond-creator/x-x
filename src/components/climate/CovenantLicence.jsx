@@ -27,36 +27,40 @@ import { Link } from 'react-router-dom';
 // for saying what you actually mean should not paraphrase a legal text without pointing
 // at the text. One line each, in the record's reading type at a size a person can read.
 //
-// Brian, 26 November, after following one of them: "I meant donate on the Creative Commons
-// and gnu page ya dick haha." He was right, and it is the sort of fault only a reader finds:
-// both organisations put a fundraising ask on the landing pages, so a person who tapped a
-// licence name to check their rights met a begging bowl instead of the terms. Both publish
-// the same terms as plain text with nothing else on the page, so that is where these point
-// now — the law, and only the law.
+// ── THE ASK, AND THEN THE PAGE — THE WHOLE ARGUMENT IN THREE MOVES ───────────────
+// Brian followed one of the names and said, rightly, that he had meant the ask on their
+// pages rather than a wall of it. So the names were pointed at the plain-text files: the
+// law, and nothing else.
 //
-// ── AND THEN HE WAS RIGHT ABOUT THE OTHER HALF ────────────────────────────────
-// Brian, minutes later: "but bro do cc by and gnu genuinely need support too if so dont do
-// that… all need to help each other bro." They do, and he is right. Both are non-profits:
-// Creative Commons is paid by donations to maintain the licences and defend their use, and
-// the Free Software Foundation is paid by donations to write and defend the GNU licences
-// this record is built on. Their own pages say so in their own words.
+// Then he followed one of those: "still not opening at right page for me bro getting still
+// just text." Right again, and this is the sort of fault only a reader finds. A .txt file
+// in a browser tab is not the page — it reads as a broken link, not as a licence, and a
+// person checking their rights got what looked like a fault.
 //
-// So the plain text stays as the link to the terms — a reader checking their rights should
-// get the rights — and the ask is not hidden. It is named here, on the record's own page,
-// in the record's own words, and it points at them rather than at us. Quietly routing
-// around somebody else's need is not the same as refusing to beg for ourselves.
+// Then the other half: "but bro do cc by and gnu genuinely need support too if so dont do
+// that… all need to help each other bro." They do. Both are non-profits — Creative Commons
+// is paid by donations to maintain the licences and defend their use, and the Free Software
+// Foundation is paid by donations to write and defend the GNU licences this record stands
+// on — and both say so in their own words.
+//
+// So the names now point at the licence's own page, set as a page, with the whole text on
+// it. Both carry a fundraising banner, and both are entitled to: they are the reason these
+// terms exist. Rather than dodge the banner by breaking the page, the ask is named here, in
+// the record's own words, in the sentence below — pointing at them rather than at us. All of
+// us helping each other means neither routing around somebody else's need quietly, nor
+// hiding the law behind a text file to do it.
 const TERMS = [
   {
     label: 'The words',
     name: 'CC BY-SA 4.0',
-    href: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode.txt',
+    href: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode',
     means:
       'Take the words. Change them, print them, sell them, put them on a wall. Keep the name on them, and let whatever you make be this free too.',
   },
   {
     label: 'The code',
     name: 'GNU AGPL-3.0',
-    href: 'https://www.gnu.org/licenses/agpl-3.0.txt',
+    href: 'https://www.gnu.org/licenses/agpl-3.0.html',
     means:
       'Same, for the code — and if you run it as a service for other people, the changes you made go back out under this same licence.',
   },
