@@ -167,6 +167,15 @@
   color: rgb(var(--record-mark));
 }
 #x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-mark)); }
+/* The hero mark is a button now, so it carries the row the headline used to lay out. */
+#x-equals-x .covenant-equation-btn {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.12em;
+  color: inherit;
+  letter-spacing: inherit;
+}
 #x-equals-x .covenant-purpose {
   margin: 0 !important;
   max-inline-size: 48rem;

@@ -23,6 +23,7 @@ export default function XEqualsXMarkSignal({
   style,
   playingStyle,
   label = 'x = x',
+  children,
   ariaLabel = 'x = x — play the mark in Morse code',
 }) {
   const { playing, lit, play } = useMorseSignal();
@@ -64,7 +65,7 @@ export default function XEqualsXMarkSignal({
               {i < MORSE_GROUPS.length - 1 ? ' ' : null}
             </React.Fragment>
           ))
-        : label}
+        : (children ?? label)}
     </button>
   );
 }

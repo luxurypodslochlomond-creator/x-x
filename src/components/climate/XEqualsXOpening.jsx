@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import RecordCover from '@/components/climate/RecordCover';
 import SignalBeacon from '@/components/climate/SignalBeacon';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import XEqualsXMarkSignal from '@/components/climate/XEqualsXMarkSignal';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
@@ -34,8 +35,20 @@ export default function XEqualsXOpening() {
       <div className="covenant-hero-inner">
         <SignalBeacon size={48} color="rgb(var(--record-light-signal))" />
 
+        {/* ── THE BIGGEST STATEMENT OF THE MARK IS ALSO THE ONE TO PRESS ─────────────
+            Brian, 26 November: "theres x=x in middle of page doesn't do that bro above a
+            solution is a solution". It was the page's own headline and the only mark on
+            the record that did nothing when pressed, which is the wrong way round: the
+            largest one is the one a reader reaches for. It answers in Morse now, at a
+            smaller size while it sounds — sixteen characters at headline size would run
+            off a phone — and comes back to the mark when it is done. */}
         <h1 id="the-principle" className="covenant-equation" aria-label="x equals x" translate="no">
-          <span aria-hidden="true">x</span><span aria-hidden="true">=</span><span aria-hidden="true">x</span>
+          <XEqualsXMarkSignal
+            className="covenant-equation-btn"
+            playingStyle={{ fontSize: 'clamp(1.05rem, 1.6vw, 1.75rem)', letterSpacing: '0.14em' }}
+          >
+            <span aria-hidden="true">x</span><span aria-hidden="true">=</span><span aria-hidden="true">x</span>
+          </XEqualsXMarkSignal>
         </h1>
 
         <p className="covenant-purpose">
