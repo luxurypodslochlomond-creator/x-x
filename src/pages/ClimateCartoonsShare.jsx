@@ -110,6 +110,12 @@ export default function ClimateCartoonsShare() {
             size={112}
             caption="The wall, as a code — for a printed sheet, a card handed over, or a screen held up in a room. The address in words is printed above it, always."
           />
+          {/* Said here, once, so nobody promises a room more than a browser can do: with no
+              signal at all, a phone cannot hand a file to another phone. What works is this
+              code, a printed sheet, or a phone that has already kept its own copy. */}
+          <p className="mt-2 font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.14em] text-record-muted">
+            With no signal at all, the way across is this code, a printed sheet, or a phone that has already kept its own copy — a browser is not allowed to hand a file straight to another phone.
+          </p>
         </aside>
 
         <div className="lg:order-1">

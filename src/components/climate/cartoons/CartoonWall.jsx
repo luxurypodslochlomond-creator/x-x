@@ -5,10 +5,13 @@ import CartoonPlate from '@/components/climate/cartoons/CartoonPlate';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
+import useOfflineKept from '@/components/climate/cartoons/useOfflineKept';
+import OfflineKept from '@/components/climate/cartoons/OfflineKept';
 import { PinnedNote, TinyCrowd } from '@/components/climate/cartoons/CartoonInkIcons';
 
 export default function CartoonWall() {
   const wall = useCartoonWall(true);
+  const offline = useOfflineKept(wall.cartoons);
   const [reading, setReading] = useState(null);
   // ── THE RECORD NAMES ITS OWN GAPS ────────────────────────────────────────────
   // Five drawings were credited to a studio's brand rather than to a hand. Printing the
@@ -24,6 +27,8 @@ export default function CartoonWall() {
         <p className="record-meta">Read the picture. Stay with the idea. Tap any drawing to look closer.</p>
         <p className="record-meta"><Link to="/ClimateCartoons/Thread">Read the drawings one after another ↗</Link></p>
       </header>
+      {/* What this phone has actually got, counted rather than claimed. */}
+      <OfflineKept offline={offline} />
       {wall.isPending && <p className="record-meta flex items-center gap-2 py-6" role="status"><Loader2 size={18} className="animate-spin" />Opening the original drawings…</p>}
       {wall.isError && !wall.keptDay && <div className="comic-wall-empty comic-error-note" role="alert"><p className="record-meta">The wall could not be opened.</p><button type="button" onClick={() => wall.refetch()} className="underline">Try again</button></div>}
       {/* No signal, and this device kept the wall: it opens anyway, and says which day it is. */}
