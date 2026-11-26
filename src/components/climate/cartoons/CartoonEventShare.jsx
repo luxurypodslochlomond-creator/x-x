@@ -33,7 +33,7 @@ export default function CartoonEventShare() {
       <p className="comic-event-share-when">{CARTOON_EVENT.when} · {CARTOON_EVENT.where}</p>
       {/* The words to post it with, one tap away: a link on its own arrives with no bio. */}
       <p className="comic-event-share-when">
-        <Link to="/ClimateCartoons/Share">Words for wherever you post it →</Link>
+        <Link to="/ClimateCartoons/Share">Words for wherever you send it →</Link>
       </p>
     </div>
   );

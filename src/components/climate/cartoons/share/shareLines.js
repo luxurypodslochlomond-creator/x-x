@@ -7,14 +7,21 @@ import { CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 //
 // A link on its own travels badly. In a chat it is a blue line nobody opens, and on a
 // feed it is a post with no bio. So the room now carries its own words, written for the
-// place they are going — a group chat, a caption, a professional feed, a short post, one
-// email — and each one is a plain description of what the wall is, with the address on
-// the end where a thumb can reach it.
+// occasion they are going to — a group chat, a story, a caption, an institution's feed,
+// one line, one email, a printed sheet — and each one is a plain description of what the
+// wall is, with the address on the end where a thumb can reach it.
+//
+// The labels name occasions rather than companies on purpose. Brian, 26 November: "I hate
+// clunky tech mention of LinkedIn and Facebook, it hurts me." A page that rolls out a list of
+// platform names reads like a marketing plan. What a person needs to know is where they are
+// standing when they send it; the app they use is their business, and the tap targets under
+// each block already know which apps take words and which only take a link.
 //
 // Every fact here is one the record already holds: the biennial's own name and dates from
-// cartoonEvent.js, the hands that signed the drawings, and a count read live from the wall
-// when the page opens. Nothing is claimed that the room cannot show. Nothing asks anybody
-// to pass anything on ten times: a record that begs is a chain letter.
+// cartoonEvent.js, the speakers from the host's draft agenda, the hands that signed the
+// drawings, and a count read live from the wall when the page opens. Nothing is claimed that
+// the room cannot show. Nothing asks anybody to pass anything on ten times: a record that
+// begs is a chain letter.
 
 export const ROOM_ADDRESS = `${recordOrigin()}/ClimateCartoons`;
 export const HOUR_ADDRESS = `${recordOrigin()}/ClimateWorkshop`;
@@ -43,6 +50,69 @@ export function descriptionLine() {
   };
 }
 
+// ── THE WORKSHOP, AND THE INVITE ALINA ASKED FOR ───────────────────────────────
+// Alina Sen, 26 November, in her own three points: "Make a nice visual first creative talking
+// about the workshop, the cartoons and the speakers and the organisations… Please share this
+// invite with me on WhatsApp… It would be good to have a message with some humour and some
+// interesting cartoons from different people. In the text you could add the zoom link and
+// pass code etc so people can click on it and join… Please post about this on the CAIB social
+// media and tag CEEW India on it, as well mentioning CEEW's What On Earth! cartoons."
+//
+// The picture is on this page above these words. The invite is here, with a field for the
+// joining link because the link is Janine's to hand out and this record will not invent one.
+// The names and roles are the host's own draft agenda — Janine hosts, Francis introduces the
+// cartoonists, Alina speaks for CEEW, Brian has two minutes — and the cartoonists named are
+// the hands actually on the wall, read from it rather than remembered.
+const cartoonists = 'Francis Umendu Odupute, Anoop Radhakrishnan, Shaunak Samvatsar, Devki Deshmukh and Ashok Adepal';
+
+export function workshopLines({ join } = {}) {
+  const room = ROOM_ADDRESS;
+  const joinLine = join
+    ? `Join here: ${join}`
+    : 'The joining link and passcode come from the host — ask whoever sent you this, and it will be with you before Sunday.';
+
+  return [
+    {
+      id: 'invite',
+      where: 'In a group chat · the invite, with a bit of cheek',
+      note: 'Alina asked for humour and for drawings from different hands, so it names the cartoonists and gives the platform exactly two minutes to explain itself. Paste Janine’s joining link in the field above and it lands in here.',
+      text: `Right — Sunday, one hour, online, free, no account.
+
+A workshop on climate change and the power of collective actions and creative interventions. Janine Selendy (Horizon International, Yale) hosts. Francis Umendu Odupute, who has been carrying CartoonAFRICA since 2012, brings the cartoonists — ${cartoonists} — and each of them gets a couple of minutes on the drawing they made and why. Alina Sen shows what CEEW India's What On Earth! has been drawing. The platform built to hold all of it gets two minutes to explain itself, which is either brave or reckless.
+
+The drawings do most of the talking. Bring a question for the end.
+
+${joinLine}
+
+Look before you come, free, no account: ${room}`,
+    },
+    {
+      id: 'invite-short',
+      where: 'In a group chat · the one to forward',
+      note: 'Short enough that somebody can pass it on without editing anything out of it.',
+      text: `Sunday, one hour, online, free: climate cartoons and the people who draw them. Janine Selendy hosts, Francis Umendu Odupute brings the cartoonists, Alina Sen shows CEEW's What On Earth!. Bring a question for the end.
+
+${joinLine}
+
+The room, free to read: ${room}`,
+    },
+    {
+      id: 'invite-accounts',
+      where: 'For the accounts that carry the workshop',
+      note: 'Written to be posted as it stands by whoever holds the biennial’s own logins, with CEEW tagged. @CEEWIndia is the handle at the foot of Alina’s email. Nothing here posts anywhere on its own: tagging is a person’s job, and it should be.',
+      text: `Sunday, 3pm West Africa · 2pm UK: a climate workshop where the cartoons do the talking.
+
+Janine Selendy (Horizon International, Yale) hosts. Francis Umendu Odupute, curator of the CartoonAFRICA International Biennial, introduces the cartoonists. Alina Sen of CEEW India presents What On Earth! — the drawings on this wall.
+
+One hour. Online. Free. No account.
+
+${room}
+
+@CEEWIndia #WhatOnEarth #ClimateCartoons #CartoonAFRICA`,
+    },
+  ];
+}
+
 // ── THE EVENT, NOT ONLY THE WALL ───────────────────────────────────────────────
 // Alina Sen, after the call on 26 November: CEEW wants to share the event as well. So these
 // are the words for the three days and for the hour, written for the same places, with the
@@ -58,32 +128,32 @@ export function eventLines() {
   return [
     {
       id: 'event-chat',
-      where: 'The event · WhatsApp, Signal, Telegram',
+      where: 'The three days · in a group chat',
       note: 'The three days, the place, and the hour that is online — in one message that fits a chat.',
       text: `${CARTOON_EVENT.biennial}: ${CARTOON_EVENT.when}, ${CARTOON_EVENT.where}. A wall of climate cartoons is part of it, and ${CARTOON_EVENT.workshop} is open online. Every drawing keeps the name of the hand that made it. The room: ${room}`,
     },
     {
       id: 'event-caption',
-      where: 'The event · Instagram or Facebook',
-      note: 'A caption for the three days: what it is, where, and the one part anyone in the world can join.',
+      where: 'The three days · a caption under the picture',
+      note: 'Written as a caption: the first line carries the whole thing for whoever does not read on.',
       text: `${CARTOON_EVENT.biennial}\n\n${CARTOON_EVENT.when} · ${CARTOON_EVENT.where}\n\n${CARTOON_EVENT.title} — a room of climate cartoons from Africa, Asia and beyond, every drawing carrying the name of the hand that made it.\n\n${CARTOON_EVENT.workshop}, online.\n\nFree to read, no account: ${room}\n\n#CartoonAFRICA #ClimateCartoons #BeninCity #ClimateAction`,
     },
     {
       id: 'event-linkedin',
-      where: 'The event · LinkedIn',
-      note: 'For institutions and partners: the biennial’s own name and dates first, then the part that is open to anyone.',
+      where: 'The three days · for an institution’s feed',
+      note: 'For partners and funders: the biennial’s own name and dates first, then the part that is open to anyone. Their feed takes the address; paste the words in with it.',
       text: `The 8th CartoonAFRICA International Biennial opens on ${CARTOON_EVENT.when} at the ${CARTOON_EVENT.where}.\n\nIts subject this year is “${CARTOON_EVENT.title}”, edited by ${CARTOON_EVENT.editors}. Alongside the exhibition there is a public wall of climate cartoons, drawn from the biennial and from CEEW's What On Earth! series, where every drawing carries the name of the hand that made it and the credit that holds it. Nothing is ranked and nothing is sold.\n\n${CARTOON_EVENT.workshop} is open online, and anyone can join it.\n\nThe wall: ${room}`,
     },
     {
       id: 'event-short',
-      where: 'The event · X or Bluesky',
-      note: 'One line for the three days, with the address last so it stays tappable.',
+      where: 'The three days · one line, quoted and re-quoted',
+      note: 'One line and the address, so it stays readable when somebody quotes it and somebody else quotes that.',
       text: `${CARTOON_EVENT.biennial} · ${CARTOON_EVENT.when} · ${CARTOON_EVENT.where}. Climate cartoons from Africa, Asia and beyond, every one signed by the hand that made it: ${room}`,
     },
     {
       id: 'event-hour',
-      where: 'The hour only · any channel',
-      note: 'For anyone who only needs Sunday: the workshop, online, and where to read about it.',
+      where: 'Sunday only · wherever you are',
+      note: 'For anyone who only needs the hour: the workshop, online, and where to read about it.',
       text: `${CARTOON_EVENT.workshop} · online · climate change and the power of collective actions and creative interventions. The hour as it is set down: ${hour}`,
     },
   ];
@@ -94,31 +164,31 @@ export function shareLines(count) {
   return [
     {
       id: 'chat',
-      where: 'WhatsApp, Signal, Telegram',
+      where: 'In a group chat',
       note: 'Short enough for a group chat, with the address on the end so one thumb opens it.',
       text: `${wall(count)} on one wall, from Africa, Asia and beyond, gathered for the 8th CartoonAFRICA International Biennial. Every drawing keeps the name of the hand that made it, and nothing is ranked or for sale. Free, no account: ${room}`,
     },
     {
       id: 'status',
-      where: 'WhatsApp status or Stories · the shortest line there is',
+      where: 'A story that vanishes by tomorrow',
       note: 'For the strip of text that disappears in a day: no hashtags, no ask, one address.',
       text: `${wall(count)}, every one signed by the hand that made it. Free, no account: ${room}`,
     },
     {
       id: 'caption',
-      where: 'Instagram or Facebook',
+      where: 'A caption under the drawing',
       note: 'Written as a caption: the first line carries the whole thing for whoever does not read on.',
       text: `${wall(count)}, one wall.\n\nDrawings by cartoonists in Nigeria, India, the UK and beyond, gathered for the 8th CartoonAFRICA International Biennial — and each one carries the name of the hand that made it.\n\nJanine Selendy's workshop on climate and collective action is Sunday 29 November, 3pm West Africa · 2pm UK, online.\n\nThe room is free and open, no account: ${room}\n\n#ClimateCartoons #CartoonAFRICA #ClimateAction #EditorialCartoons`,
     },
     {
       id: 'linkedin',
-      where: 'LinkedIn',
-      note: 'For the institutions. It leads with the credit, because the credit is the part they check.',
+      where: 'For an institution’s feed',
+      note: 'For the institutions. It leads with the credit, because the credit is the part they check. Their feed takes the address; paste the words in with it.',
       text: `A wall of ${count ? count : 'the'} climate cartoons has gone up, and it will still be standing when the festival closes.\n\nThe drawings come from the 8th CartoonAFRICA International Biennial and from CEEW's What On Earth! series — hands including Anoop Radhakrishnan, Shaunak Samvatsar, Devki Deshmukh and Francis Umendu Odupute, who started the biennial in 2012.\n\nTwo things make it more than a gallery post: every drawing carries the name of the hand that made it and the credit that holds it, and nothing is ranked, counted or sold.\n\nJanine Selendy's workshop is Sunday 29 November, 3pm West Africa · 2pm UK, online. The room: ${room}`,
     },
     {
       id: 'short',
-      where: 'X or Bluesky',
+      where: 'One line, quoted and re-quoted',
       note: 'One line and the address, so it stays readable when it is quoted and re-quoted.',
       text: `${wall(count)} on one wall, each signed by the hand that made it. Workshop Sunday 29 November, 2pm UK, online. Free, no account: ${room}`,
     },
