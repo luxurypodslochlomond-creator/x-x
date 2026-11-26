@@ -226,6 +226,9 @@ const StudioPage = React.lazy(() => import('./pages/Studio'));
 const StudioShell = React.lazy(() => import('./components/studio/StudioShell'));
 const GenerateLogoPage = React.lazy(() => import('./pages/GenerateLogo'));
 const Learn51AIPage = React.lazy(() => import('./pages/Learn51AI'));
+// The record's mark, drawn in the browser at full size so it can be saved and uploaded
+// as the app's logo and as the picture a shared link shows.
+const BrandMarkPage = React.lazy(() => import('./pages/BrandMark'));
 
 
 
@@ -627,6 +630,7 @@ const AuthenticatedApp = () => {
       <Route path="/StoneymollanEscalation" element={<AdminOnly><StoneymollanEscalationPage /></AdminOnly>} />
       <Route path="/AdminStoneymollanBarryReply" element={<Navigate to="/StoneymollanReply" replace />} />
       <Route path="/AdminStoneymollanBarryReplyPage" element={<Navigate to="/StoneymollanReply" replace />} />
+      <Route path="/BrandMark" element={<BrandMarkPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     </Suspense>
