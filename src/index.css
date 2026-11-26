@@ -327,7 +327,13 @@ button:focus-visible {
        and for nothing else, so the one place this palette can borrow honestly is here: a
        Solution IS climate action, and the green a reader has met on goal 13's page is the
        green of something that works on this one. */
-    --record-botanical: 63 126 68;
+    /* Solutions wear goal 13's green, taken down until it can be read. The published SDG
+       hex (#3F7E44) measures 3.99:1 on the record's bone paper — under the 4.5 a stamp set
+       at 11px needs, and this record does not get to keep a colour that fails its own
+       readers. #336B38 is the same green, same family, at 5.17:1. Where the goal's exact
+       value is used — the seventeen chips on the wall — it stays exact, because that is a
+       block of colour beside a number and not a word anyone has to read. */
+    --record-botanical: 51 107 56;
     --record-ochre: 155 111 40;
     /* Actions wore the ochre, and Brian said on 26 November it was "wrong colour not us".
        There is no UN colour for a crisis, a solution or an action — the UN colours the
@@ -340,7 +346,10 @@ button:focus-visible {
     /* The map's signals are the record's own pigments, lifted for a dark plate: solutions
        are the green their room is printed in, actions the yellow their plates wear. */
     --record-map-solution: 149 227 168;
-    --record-map-action: 255 212 71;
+    /* The map's ground is ink, so its inks are lit versions of the record's: an action is
+       the same ocean, lifted until it carries at 7.68:1 on ink. Same family, different
+       ground — which is the only honest way to keep one colour meaning one thing. */
+    --record-map-action: 111 179 201;
     --record-map-wire: 104 215 241;
     --record-map-cartoon: 255 212 71;
     /* ── A LIT PLACE IS NOT A SIXTH KIND OF ENTRY ────────────────────────────────
@@ -454,7 +463,13 @@ button:focus-visible {
        and for nothing else, so the one place this palette can borrow honestly is here: a
        Solution IS climate action, and the green a reader has met on goal 13's page is the
        green of something that works on this one. */
-    --record-botanical: 63 126 68;
+    /* Solutions wear goal 13's green, taken down until it can be read. The published SDG
+       hex (#3F7E44) measures 3.99:1 on the record's bone paper — under the 4.5 a stamp set
+       at 11px needs, and this record does not get to keep a colour that fails its own
+       readers. #336B38 is the same green, same family, at 5.17:1. Where the goal's exact
+       value is used — the seventeen chips on the wall — it stays exact, because that is a
+       block of colour beside a number and not a word anyone has to read. */
+    --record-botanical: 51 107 56;
     --record-ochre: 155 111 40;
     /* Actions wore the ochre, and Brian said on 26 November it was "wrong colour not us".
        There is no UN colour for a crisis, a solution or an action — the UN colours the
@@ -467,7 +482,10 @@ button:focus-visible {
     /* The map's signals are the record's own pigments, lifted for a dark plate: solutions
        are the green their room is printed in, actions the yellow their plates wear. */
     --record-map-solution: 149 227 168;
-    --record-map-action: 255 212 71;
+    /* The map's ground is ink, so its inks are lit versions of the record's: an action is
+       the same ocean, lifted until it carries at 7.68:1 on ink. Same family, different
+       ground — which is the only honest way to keep one colour meaning one thing. */
+    --record-map-action: 111 179 201;
     --record-map-wire: 104 215 241;
     --record-map-cartoon: 255 212 71;
     /* The same lamp in the dark block: a light is not a theme. */

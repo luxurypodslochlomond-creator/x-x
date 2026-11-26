@@ -50,7 +50,7 @@ const STATE_COPY = {
 // reader can walk to the words and check them without asking us for permission.
 const KIND_TONE = {
   solution: 'text-record-botanical',
-  action: 'text-record-ochre',
+  action: 'text-record-action',
   news: 'text-record-ocean',
   track: 'text-record-clay',
   group: 'text-record-muted',

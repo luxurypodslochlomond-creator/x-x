@@ -80,7 +80,7 @@
 .record-unified-map .record-map-reading [data-kind="crisis"] { --map-signal: rgb(var(--record-red)); }
 .record-unified-map .record-map-reading [data-kind="solution"] { --map-signal: rgb(var(--record-botanical)); }
 .record-unified-map .record-map-reading [data-kind="wire"] { --map-signal: rgb(var(--record-ocean)); }
-.record-unified-map .record-map-reading [data-kind="action"] { --map-signal: rgb(var(--record-ochre)); }
+.record-unified-map .record-map-reading [data-kind="action"] { --map-signal: rgb(var(--record-map-action)); }
 .record-unified-map .record-map-picked { padding: 1rem; }
 .record-unified-map .record-map-picked h2 { font-size: 1.3rem; }
 .record-unified-map .record-map-picked p { max-inline-size: none; }
