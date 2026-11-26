@@ -140,9 +140,21 @@
 }
 .press-room .cartoon-goal-head:hover .cartoon-goal-name { color: rgb(var(--record-red)); }
 
-/* A blank goal keeps its number, quieter, and says so in the room's own words. The empty
-   line is the point: it is the space a workshop fills. */
-.press-room .cartoon-goal--open .cartoon-goal-number { color: rgb(var(--record-muted) / .8); }
+/* ── THE GOAL'S OWN COLOUR ─────────────────────────────────────────────────────
+   The number sits in a solid block of the goal's published colour — the same colour the goal
+   wears on its own page, so the wall is visibly tied to the goal rather than merely mentioning
+   it. Square and unrounded: a chip, not a badge. Seventeen of them down one printed index is
+   a spectrum; seventeen coloured rows would be a carnival. */
+.press-room .cartoon-goal-number {
+  display: inline-block;
+  min-width: 2.15rem;
+  padding: .12rem .34rem .2rem;
+  text-align: center;
+}
+
+/* A blank goal keeps its number and its colour, quieter, and says so in the room's own
+   words. The empty line is the point: it is the space a workshop fills. */
+.press-room .cartoon-goal--open .cartoon-goal-number { opacity: .55; }
 .press-room .cartoon-goal--open .cartoon-goal-name { font-weight: 400; color: rgb(var(--record-muted)); }
 
 /* The open panel: two columns, the goal on the left, the artists on the right, divided by a

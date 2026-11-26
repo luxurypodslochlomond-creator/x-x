@@ -1,5 +1,6 @@
 import React from 'react';
 import { goToDrawing } from '@/components/climate/cartoons/goToDrawing';
+import { goalColour, goalNumberInk } from '@/components/climate/cartoons/goalColours';
 
 // One goal, closed and open. Closed it is a line of a printed index: number, name, and how
 // many drawings stand against it. Open it gives the goal's own words from the UN, then the
@@ -10,6 +11,7 @@ export default function GoalRow({ goal, open, onToggle, art }) {
   // answered by a line in a file: the picture itself has to be there.
   const onWall = goal.drawings.filter((d) => art[d.title]);
   const has = onWall.length > 0;
+  const colour = goalColour(goal.n);
   const panelId = `goal-panel-${goal.n}`;
   const buttonId = `goal-button-${goal.n}`;
 
@@ -23,7 +25,12 @@ export default function GoalRow({ goal, open, onToggle, art }) {
         aria-controls={panelId}
         onClick={onToggle}
       >
-        <span className="cartoon-goal-number">{String(goal.n).padStart(2, '0')}</span>
+        <span
+          className="cartoon-goal-number"
+          style={colour ? { background: colour, color: goalNumberInk(goal.n) } : undefined}
+        >
+          {String(goal.n).padStart(2, '0')}
+        </span>
         <span className="cartoon-goal-name">{goal.name}</span>
         <span className="cartoon-goal-meta">
           {has
