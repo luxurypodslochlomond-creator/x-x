@@ -106,7 +106,7 @@ export const MORE = [
     head: 'What a machine may do here, and what it may not',
     paras: [
       'A machine may add one line about what it can see in a drawing. That line is kept apart from the artist’s, labelled as the machine’s, and it never stands in for the artist’s words.',
-      'A machine cannot source a picture, so a machine cannot put a drawing on the wall. A person does that. A drawing that arrives waits for a keeper, and it is a keeper who says yes.',
+      'A machine cannot source a picture, so a machine cannot put a drawing on the wall. A person does that. A drawing that arrives waits for a custodian, and it is a custodian who says yes.',
     ],
   },
   {

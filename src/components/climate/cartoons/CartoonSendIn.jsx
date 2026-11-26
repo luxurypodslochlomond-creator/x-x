@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { base44 } from '@/api/base44Client';
 import { Loader2, Check, ShieldCheck } from 'lucide-react';
 import { InkPot, PaperPhoto, SunFace } from '@/components/climate/cartoons/CartoonInkIcons';
+import { factsFromFile } from '@/components/climate/cartoons/fileFacts';
 
 // ── BRING A DRAWING ───────────────────────────────────────────────────────────
 // A photograph of the drawing goes in; the record writes one line about what it can
@@ -58,7 +59,18 @@ export default function CartoonSendIn() {
     submitter_email: '',
     credit: '',
     crisis_id: '',
+    source_url: '',
   });
+
+  // ── WHAT ARRIVED WITH THE FILE, AND WHAT THE WALL ALREADY HOLDS ──────────────
+  // facts: what the file said about itself — a title from its name, the author and the
+  // copyright from its own metadata. looksLike: drawings the record already holds that
+  // read like this one. Neither is a fact about the drawing; both are shown so that a
+  // person decides, and both are only ever a suggestion.
+  const [facts, setFacts] = useState(null);
+  const [looksLike, setLooksLike] = useState([]);
+  const [linkBusy, setLinkBusy] = useState(false);
+  const [linkNote, setLinkNote] = useState('');
 
   // ── A DRAWING CAN BE ABOUT SOMETHING ALREADY ON THE RECORD ──────────────────
   // The crises this drawing could answer: published entries only, newest first. A drawing
@@ -76,21 +88,65 @@ export default function CartoonSendIn() {
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
+  // ── A LINK IS CHEAPER THAN A FORM ──────────────────────────────────────────
+  // If the drawing is already published somewhere, that page carries its title and its
+  // copyright line. The record reads the page and fills those boxes; anything it cannot
+  // find stays blank, and anything it fills can still be rewritten.
+  const readLink = async () => {
+    const url = form.source_url.trim();
+    if (!/^https:\/\//i.test(url)) {
+      setLinkNote(url ? 'A web address starting https://, please.' : '');
+      return;
+    }
+    setLinkBusy(true);
+    setLinkNote('');
+    try {
+      const res = await base44.functions.invoke('climateCartoon', { action: 'fromlink', url });
+      const data = res?.data || {};
+      setForm((f) => ({
+        ...f,
+        title: f.title || data.title || '',
+        credit: f.credit || data.credit || '',
+      }));
+      setLinkNote(
+        data.title || data.credit ? 'Read from the page.' : 'The page gave no title or credit — no matter.'
+      );
+    } catch {
+      setLinkNote('That page could not be read — the drawing still goes.');
+    } finally {
+      setLinkBusy(false);
+    }
+  };
+
   const onFile = async (file) => {
     if (!file) return;
     setError('');
     setStep('working');
     try {
+      // Read the file's own paperwork before it is shrunk: shrinking re-encodes the
+      // picture, and metadata does not survive that. Read from the original, offered to
+      // the boxes, never written to the record until a person sends it.
+      const said = await factsFromFile(file);
+      setFacts(said);
+
       const smaller = await shrink(file);
       const uploaded = await base44.integrations.Core.UploadPublicFile({ file: smaller });
       const url = uploaded?.file_url;
       if (!url) throw new Error('no url');
       setImageUrl(url);
 
+      setForm((f) => ({
+        ...f,
+        artist_name: f.artist_name || said.artist,
+        title: f.title || said.title,
+        credit: f.credit || said.credit,
+      }));
+
       const res = await base44.functions.invoke('climateCartoon', { action: 'read', image_url: url });
       const data = res?.data || {};
       const line = data.line || '';
       setMachineLine(line);
+      setLooksLike(data.looks_like || []);
       setForm((f) => ({ ...f, for_line: f.for_line || line }));
       setStep('ready');
     } catch (e) {
@@ -193,6 +249,32 @@ export default function CartoonSendIn() {
         <div className="mt-3">
           <img src={imageUrl} alt="The drawing you chose" className="block max-h-56 w-auto border border-record-ink/15" />
 
+          {/* ── THE WALL MAY ALREADY HAVE IT ────────────────────────────────────
+              One drawing once hung twice under two names, because the two copies were
+              different files of the same picture — so a check on the file would have waved
+              it through. The record says what this one reads like instead. A question for
+              the person sending it, never a refusal. */}
+          {looksLike.length > 0 && (
+            <div className="mt-2 border border-record-red/40 bg-record-red/5 px-3 py-2">
+              <p className="font-mono text-[10px] font-black uppercase tracking-[0.12em] text-record-red">
+                This reads like something already on the wall
+              </p>
+              {looksLike.map((c) => (
+                <p key={c.id} className="mt-1 text-[12.5px] leading-[1.5] text-record-ink" style={reading}>
+                  “{c.title || 'Untitled'}” — {c.artist_name}. If it is the same drawing, there is nothing to send: it is already here.
+                </p>
+              ))}
+            </div>
+          )}
+
+          {facts && (facts.artist || facts.credit) && (
+            <p className="mt-2 text-[12px] leading-[1.5] text-record-muted" style={reading}>
+              The file said this about itself:{' '}
+              {[facts.artist && `drawn by ${facts.artist}`, facts.credit].filter(Boolean).join(' · ')}. It is in the
+              boxes below — change anything it got wrong.
+            </p>
+          )}
+
           {machineLine && (
             <div className="mt-3 border-l-2 border-record-red/50 pl-3">
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-record-muted">
@@ -228,6 +310,19 @@ export default function CartoonSendIn() {
                 Where it came from, and who to reach — optional
               </summary>
               <div className="mt-2 space-y-2">
+                <input
+                  className={field}
+                  placeholder="A link to where it was published — the record reads its title and credit"
+                  inputMode="url"
+                  value={form.source_url}
+                  onChange={set('source_url')}
+                  onBlur={readLink}
+                />
+                {(linkBusy || linkNote) && (
+                  <p className="text-[11.5px] leading-[1.5] text-record-muted" style={reading}>
+                    {linkBusy ? 'Reading the page…' : linkNote}
+                  </p>
+                )}
                 <input className={field} placeholder="Where it came from — the workshop, the school, the group" value={form.origin} onChange={set('origin')} />
                 <input className={field} placeholder="Which country it was drawn in (so it can stand on the map)" value={form.country} onChange={set('country')} />
                 <input className={field} placeholder="What it is called (if it has a name)" value={form.title} onChange={set('title')} />

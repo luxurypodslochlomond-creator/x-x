@@ -63,10 +63,101 @@ export default async function (req: Request): Promise<Response> {
         },
       });
 
+      // A machine that could not open the file answers with a complaint, and a complaint
+      // is not a line about the drawing. Offered as one, it would be pasted into the box
+      // where the artist's own words go. So a complaint is treated as nothing said.
+      const said = clean(seen?.line, 200);
+      const line = /could not be opened|unable to (open|view|see)|please re-upload|i cannot (see|open)|no image/i.test(said)
+        ? ''
+        : said;
+
+      // ── HAS THE WALL ALREADY GOT THIS DRAWING? ──────────────────────────────
+      // Not by the file. One drawing came to hang twice under two names because the two
+      // copies were different files of the same picture — a slide and the published web
+      // image — so a check on bytes would have waved it through. This checks the words
+      // instead: what the machine has just said about this drawing, against what the record
+      // already says about the ones it holds. A question put to the sender and the
+      // custodian, never a refusal.
+      let looks_like: any[] = [];
+      try {
+        const held = await base44.asServiceRole.entities.ClimateCartoon.list('-created_date', 300);
+        const rows = Array.isArray(held) ? held : (held?.items || []);
+        const words = (value: any) => new Set(String(value || '').toLowerCase().match(/[a-z]{4,}/g) || []);
+        const mine = words(line);
+        if (mine.size >= 4) {
+          looks_like = rows
+            .map((c: any) => {
+              const theirs = words(`${c.title} ${c.for_line} ${c.machine_line}`);
+              if (!theirs.size) return null;
+              let shared = 0;
+              mine.forEach((w: string) => { if (theirs.has(w)) shared += 1; });
+              const score = shared / Math.min(mine.size, theirs.size);
+              return score >= 0.5 ? { id: c.id, title: c.title, artist_name: c.artist_name, score } : null;
+            })
+            .filter(Boolean)
+            .sort((a: any, b: any) => b.score - a.score)
+            .slice(0, 2);
+        }
+      } catch (e) {
+        console.error('climateCartoon: the duplicate check was skipped', e?.message);
+      }
+
       return Response.json({
-        line: clean(seen?.line, 200),
+        line,
         safe: seen?.safe !== false,
+        looks_like,
       });
+    }
+
+    // ── A LINK THE PERSON ALREADY HAS ─────────────────────────────────────────
+    // A drawing that has been published somewhere comes with a page, and that page already
+    // carries its title and its copyright line. Reading them means nobody retypes a credit,
+    // which is where credits get mangled. The page is read as a page — no model, no guess:
+    // its own metadata and its own © line, or nothing at all.
+    if (action === 'fromlink') {
+      const url = String(body?.url || '').trim();
+      let host = '';
+      try {
+        const parsed = new URL(url);
+        host = parsed.hostname.toLowerCase();
+        if (parsed.protocol !== 'https:') throw new Error('https only');
+      } catch {
+        return Response.json({ error: 'A web address, starting https://' }, { status: 400 });
+      }
+      if (
+        /^(localhost|127\.|10\.|192\.168\.|169\.254\.|0\.)/.test(host) ||
+        /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
+        /\.(local|internal)$/.test(host)
+      ) {
+        return Response.json({ error: 'That address cannot be read.' }, { status: 400 });
+      }
+
+      try {
+        const page = await fetch(url, { headers: { 'user-agent': 'uf51-record/1.0 (+https://uf51.love)' } });
+        const html = (await page.text()).slice(0, 300000);
+        const meta = (name: string) => {
+          const a = html.match(new RegExp(`<meta[^>]+(?:property|name)=["']${name}["'][^>]*content=["']([^"']{1,300})["']`, 'i'));
+          const b = html.match(new RegExp(`<meta[^>]+content=["']([^"']{1,300})["'][^>]*(?:property|name)=["']${name}["']`, 'i'));
+          return clean((a || b)?.[1], 200);
+        };
+        const title = meta('og:title') || clean((html.match(/<title[^>]*>([^<]{1,300})<\/title>/i) || [])[1], 200);
+        const credit = clean((html.match(/(©[^<\n]{0,120}?(?:19|20)\d\d[^<\n]{0,80})/) || [])[1], 160);
+
+        // ── A PAGE THAT WILL NOT LET THE RECORD READ IT MUST SAY NOTHING ─────────
+        // CEEW's own pages sit behind a bot check, and the check answers with a page
+        // titled "Just a moment…". Filling a title box with that would be the record
+        // inventing a title — worse than an empty box. So a refusal is reported as a
+        // refusal: no title, no credit, and the sender keeps the link as the source.
+        const refused = /just a moment|attention required|access denied|are you a robot|enable javascript|verifying you are human|checking your browser/i;
+        if (refused.test(title) || refused.test(html.slice(0, 4000))) {
+          return Response.json({ title: '', credit: '', url, blocked: true });
+        }
+
+        return Response.json({ title, credit, url });
+      } catch (e) {
+        console.error('climateCartoon: the link could not be read', e?.message);
+        return Response.json({ error: 'That page could not be read.' }, { status: 502 });
+      }
     }
 
     // ── A DRAWING OFFERED TO THE WALL ─────────────────────────────────────────
