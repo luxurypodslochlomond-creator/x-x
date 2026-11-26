@@ -69,8 +69,8 @@ export default function ClimateWorkshopAnswers() {
       wide
     >
       <p className="text-[13.5px] leading-relaxed text-record-ink/90 lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
-        Thank you for the deck. It is the first time the names of the hands behind these drawings have reached us,
-        and the cartoonist and producer details you wrote are now on every drawing of yours that is on the wall,
+        Thank you for the deck. It is the first time the names of the hands behind these drawings have reached us.
+        All thirteen drawings in it are now on the wall, with the cartoonist and producer details you wrote,
         credited exactly as you wrote them.
       </p>
 
@@ -116,9 +116,10 @@ export default function ClimateWorkshopAnswers() {
           </p>
         )}
         <p>
-          Seven drawings in the deck are not on the wall yet. Four came with a link, which we have; three came only
-          as a picture inside the deck, and go up the moment there is a file or a link. Each goes up with the creator
-          and producer details exactly as you wrote them.
+          All thirteen drawings in the deck are hung. Four of them carry your link as well, so a reader can go
+          straight to CEEW’s own page for the drawing; the other three went up from the pictures inside the deck
+          itself. One of them, the urban-floods drawing, carries the series credit rather than a cartoonist’s name,
+          because the deck says “XXX” in that line — send the name and it goes up the same day.
         </p>
       </Answer>
 
