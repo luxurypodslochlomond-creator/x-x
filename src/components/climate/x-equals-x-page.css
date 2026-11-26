@@ -148,10 +148,15 @@
   gap: 0.12em;
   margin: 0 !important;
   font-family: var(--font-display) !important;
-  font-size: clamp(2rem, 3.4vw, 2.875rem) !important;
+  /* ── THE NAME, AT THE SIZE OF A NAME ──────────────────────────────────────────
+     It was capped at 46 pixels, which on a 1945-pixel screen made the record's own
+     name smaller than a heading inside one of the cards further down. A page whose
+     subject is two letters and a sign should open with those two letters filling the
+     plate. Brian, 26 November: "flat and not coolasfuck". */
+  font-size: clamp(2.5rem, 5.2vw, 4.75rem) !important;
   font-weight: 700 !important;
   line-height: 1 !important;
-  letter-spacing: .08em !important;
+  letter-spacing: .06em !important;
   /* ── THE MARK IS ONE COLOUR, AND THIS WAS THE ONLY PLACE IT WASN'T ─────────────
      Brian, 18 November: "x = x should be red right like footer or is this art coolasfuck
      bro?" He is right, and the fault was consistency rather than taste. The foot of every
@@ -427,8 +432,11 @@
   color: #5a5246;
 }
 @media (min-width: 1024px) {
-  #x-equals-x .covenant-promises strong { font-size: 1.125rem; }
+  /* The promises are the page's spine, so at a desk they are set at the size of the
+     page's argument rather than a size below it. */
+  #x-equals-x .covenant-promises strong { font-size: 1.3125rem; }
   #x-equals-x .covenant-promises span { font-size: 1rem; }
+  #x-equals-x .covenant-promises li::before { font-size: 1.25rem; }
 }
 /* ── THE RECORD'S OWN LINE, UNDER THE PROMISE IT KEEPS ─────────────────────────
    Brian, 26 November: "needs truth and simplicity". The promise is the page's sentence;
@@ -516,15 +524,22 @@
   max-inline-size: 66ch;
 }
 #x-equals-x .covenant-card--ocean { border-top-color: rgb(var(--cartoon-sun)); }
+/* ── A SECTION HEADING HAS TO BE BIGGER THAN THE SENTENCES UNDER IT ─────────────
+   It was thirteen pixels of tracked caps over sixteen-pixel prose, so every section on
+   the page announced itself more quietly than its own first sentence. That is the whole
+   of the flatness: a page where nothing is bigger than anything else has no shape to
+   read down. The heading is a heading now — the display face, a size that carries at a
+   desk, and the tracking pulled in from .16em, because .16em is how a label is set and
+   this is no longer a label. */
 #x-equals-x .covenant-card h2 {
-  margin: 0 0 .75rem !important;
+  margin: 0 0 .9rem !important;
   max-inline-size: none;
-  font-family: var(--font-record-ui) !important;
-  font-size: .8125rem !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.1875rem, 1.9vw, 1.5rem) !important;
   font-weight: 700 !important;
-  line-height: 1.45 !important;
+  line-height: 1.18 !important;
   text-transform: uppercase;
-  letter-spacing: .16em !important;
+  letter-spacing: .045em !important;
   color: rgb(var(--record-ink));
 }
 #x-equals-x .covenant-card :is(.covenant-kicker, .covenant-label),
@@ -829,13 +844,25 @@
 @media (min-width: 1024px) {
   #x-equals-x .covenant-hero-scan { display: none; }
   #x-equals-x.covenant-page { font-size: 1rem; line-height: 1.7; }
-  #x-equals-x .covenant-hero-inner { padding: 3.25rem 2.5rem; }
+  #x-equals-x .covenant-hero-inner { padding: 4rem 2.5rem; }
   #x-equals-x .covenant-band--centre { padding: 2.25rem 2.5rem; }
   #x-equals-x .covenant-band--centre p { max-inline-size: 46rem; }
-  #x-equals-x .covenant-stack { max-width: 880px; gap: 0.8rem; padding: 1.75rem 0; }
-  #x-equals-x .covenant-card { padding: 1.4rem; }
+  /* ── THE FOUR SECTIONS ARE ONE SHEET, NOT FOUR PLATES ────────────────────────
+     They were four separate cards with a gap between them, floating in a column 880
+     pixels wide on a screen nearly twice that: four rectangles that had nothing to do
+     with each other, which is exactly the "doesn't feel connected" Brian named on 26
+     November. So on a desk they share their rules and sit flush, the way ruled sections
+     of one printed sheet do, and the sheet is wide enough to hold the room it is in. The
+     red top edge belongs to the sheet, not to each card, so the eye is told once that
+     this is one object. */
+  #x-equals-x .covenant-stack { max-width: 1040px; gap: 0; padding: 2rem 0; }
+  #x-equals-x .covenant-card { padding: 1.9rem 2.1rem; border-top: 0; }
+  #x-equals-x .covenant-card:first-child { border-top: 4px solid rgb(var(--record-red)); }
   #x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) { font-size: 1rem; }
-  #x-equals-x .covenant-close { max-width: 880px; padding: 0 0 2rem; }
+  /* The close is held to the sheet's width too, so the column does not step in a hundred
+     and sixty pixels at the foot. The buttons stay centred inside it; what changes is that
+     the page keeps one measure from the first card to the last way out. */
+  #x-equals-x .covenant-close { max-width: 1040px; padding: 0 0 2rem; }
 }
 
 html[data-tongue="th"] #x-equals-x :is(p, li, dd) { line-height: 1.95 !important; overflow-wrap: normal !important; }
