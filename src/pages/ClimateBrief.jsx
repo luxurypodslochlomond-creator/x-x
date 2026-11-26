@@ -140,7 +140,7 @@ export default function ClimateBrief() {
           <h3 className="mt-7 mb-3 text-[11px] font-black font-mono uppercase tracking-[0.16em] text-[#1e3a2b]">Live now</h3>
           <div className="space-y-2.5">
             {[
-              ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (emergencies to alert the world to) — exactly as you specified.', '/TogetherChangeClimate', 'See both on the record'],
+              ['Two entry types', 'Solutions (positive actions to replicate) and Climate Crises (what to alert the world to) — exactly as you specified.', '/TogetherChangeClimate', 'See both on the record'],
               ['Your category taxonomy', `Your 20-category taxonomy is implemented and has since grown to ${show(f?.categoriesTotal)}, all filterable on the page. ${show(f?.categoriesUsed)} of them carry entries today; the rest are supported and ready.`, '/TogetherChangeClimate', 'Filter by category'],
               ['Rough location, no coordinates', 'Every entry stores a country and a rough region only. No GPS, no precise coordinates — your privacy stance, kept.', '/ClimateMethod', 'How place is held'],
               ['A map of where it is happening', 'Both entry types on a rough-region map, reachable from the record itself — no precise pins, and a read is counted by country alone, never by person.', '/ClimateMap', 'Open the map'],

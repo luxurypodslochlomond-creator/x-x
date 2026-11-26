@@ -41,7 +41,7 @@ export default function SolutionCard({ item, lead = false }) {
             reading a word. */}
         <div className="mb-3 flex items-center gap-2">
           <span className={['record-header-type inline-block px-2 py-1 text-xs uppercase', badgeTone].join(' ')}>
-            {isSolution ? 'Solution' : 'Emergency'}
+            {isSolution ? 'Solution' : 'Crisis'}
           </span>
           {item.category && <SubjectMark subject={item.category} size={18} className="shrink-0" />}
         </div>

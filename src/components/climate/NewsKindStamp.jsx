@@ -12,10 +12,20 @@ import React from 'react';
 // for work already under way. Same hand as the marks on the rail — solid mass, one colour,
 // nothing drawn thin — so a reader can run a thumb down the page and see, before reading a
 // word, which of these is a warning and which is something that works.
+// ── THE SAME THREE WORDS AS THE RECORD ─────────────────────────────────────────
+// Brian, 26 November: "record page and wire mention different words … not making sense to me."
+// He was right: the record said Solutions, Crises and Actions, and the Wire stamped the same
+// three kinds of thing Emergency, Milestone and Initiative. A reader moving between the two
+// rooms had to learn a second vocabulary for one set of facts.
+//
+// The stored ids stay exactly as they are (emergency, milestone, initiative) because they are
+// in the records, the filters and the submitted entries — renaming them is a migration for a
+// word nobody sees. Only the word on the stamp changes, and it changes to the record's own:
+// a warning is a CRISIS, something that works is a SOLUTION, and work under way is an ACTION.
 const KINDS = {
-  emergency: { word: 'Emergency', tone: 'emergency' },
-  milestone: { word: 'Milestone', tone: 'milestone' },
-  initiative: { word: 'Initiative', tone: 'initiative' },
+  emergency: { word: 'Crisis', tone: 'emergency' },
+  milestone: { word: 'Solution', tone: 'milestone' },
+  initiative: { word: 'Action', tone: 'initiative' },
 };
 
 export default function NewsKindStamp({ kind }) {

@@ -102,7 +102,7 @@ const READERS = [
     answer: (
       <>
         <p>
-          The record is hers: the emergencies, and the actions that work, each traceable to the
+          The record is hers: the crises, and the actions that work, each traceable to the
           body or person who said it, readable in any tongue a reader names. x = x is why a reader
           in Kerala and a reader in Glasgow are handed the same page to the same standard.
         </p>

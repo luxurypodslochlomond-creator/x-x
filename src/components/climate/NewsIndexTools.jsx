@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search, X, SlidersHorizontal, ChevronDown, LayoutGrid, Check } from 'lucide-react';
 import NewsKindIcon from '@/components/climate/NewsKindIcon';
-const KINDS = [{ id: 'all', label: 'All entries' }, { id: 'emergency', label: 'Emergencies' }, { id: 'milestone', label: 'Milestones' }, { id: 'initiative', label: 'Initiatives' }];
+const KINDS = [{ id: 'all', label: 'All entries' }, { id: 'emergency', label: 'Crises' }, { id: 'milestone', label: 'Solutions' }, { id: 'initiative', label: 'Actions' }];
 const FILTERS = [{ id: 'all', label: 'Any source' }, { id: 'official_record', label: 'Official record' }, { id: 'corroborated', label: 'Two sources' }, { id: 'single_source', label: 'One source' }];
 export default function NewsIndexTools({ query, onQueryChange, kind, onKindChange, verification, onVerificationChange }) {
   return <div className="news-tools">

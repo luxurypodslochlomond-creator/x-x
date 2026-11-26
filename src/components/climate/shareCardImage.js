@@ -30,7 +30,7 @@ function badgeFor(entry) {
     : badges[entry?.verification] || badges.single_source;
 }
 
-const KIND = { emergency: 'Emergency', milestone: 'Milestone', initiative: 'Initiative' };
+const KIND = { emergency: 'Crisis', milestone: 'Solution', initiative: 'Action' };
 
 // Break words into lines that fit the width, with a hard cap and an honest ellipsis.
 function wrapLines(ctx, text, maxWidth, maxLines) {

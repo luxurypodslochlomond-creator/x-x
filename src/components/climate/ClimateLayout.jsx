@@ -32,7 +32,7 @@ import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 // x = x.
 
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
-const DESCRIPTION = 'Climate emergencies. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.';
+const DESCRIPTION = 'Climate crises. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.';
 
 // ── THE CARTOON ROOM IS AN EVENT, AND IT TRAVELS AS ONE ───────────────────────
 // Every page of the record was sharing the record's own mark, so a link to the cartoon room

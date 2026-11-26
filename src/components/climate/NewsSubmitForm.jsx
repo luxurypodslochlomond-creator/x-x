@@ -181,9 +181,9 @@ export default function NewsSubmitForm({ onClose, onSent }) {
               </Field>
               <Field label="What kind">
                 <select value={form.kind} onChange={e => set('kind', e.target.value)} className={fieldClass}>
-                  <option value="initiative">Initiative</option>
-                  <option value="emergency">Emergency</option>
-                  <option value="milestone">Milestone</option>
+                  <option value="initiative">Action</option>
+                  <option value="emergency">Crisis</option>
+                  <option value="milestone">Solution</option>
                 </select>
               </Field>
             </div>

@@ -13,7 +13,7 @@ import { RoomMarkSolution, RoomMarkCrisis, RoomMarkAction, RoomMarkGroups } from
 // Nothing about the form changed. Tap a door and it opens already on that room.
 const DOORS = [
   { type: 'solution', label: 'Solution', Mark: RoomMarkSolution, ink: 'text-record-botanical' },
-  { type: 'climate_crisis', label: 'Emergency', Mark: RoomMarkCrisis, ink: 'text-record-red' },
+  { type: 'climate_crisis', label: 'Crisis', Mark: RoomMarkCrisis, ink: 'text-record-red' },
   { type: 'action', label: 'Action', Mark: RoomMarkAction, ink: 'text-record-clay' },
   { type: 'group', label: 'Group', Mark: RoomMarkGroups, ink: 'text-record-ink' },
 ];

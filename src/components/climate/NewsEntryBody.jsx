@@ -4,7 +4,7 @@ import NewsEntryImage from '@/components/climate/NewsEntryImage';
 import SignedBy from '@/components/climate/SignedBy';
 import { verificationOf, verificationNoteOf } from '@/components/climate/verification';
 
-const KINDS = { emergency: 'Emergency', milestone: 'Milestone', initiative: 'Initiative' };
+const KINDS = { emergency: 'Crisis', milestone: 'Solution', initiative: 'Action' };
 
 export default function NewsEntryBody({ entry }) {
   return (

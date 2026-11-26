@@ -13,7 +13,7 @@ import { recordAddress, recordOrigin } from './recordAddress';
 
 export const RECORD_SHARE_TITLE = 'Together We Can Change Climate';
 export const RECORD_SHARE_LINE =
-  'Climate emergencies. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names. Read it. Take what works. Use it.';
+  'Climate crises. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names. Read it. Take what works. Use it.';
 
 export const RECORD_LINK = recordAddress('/TogetherChangeClimate');
 

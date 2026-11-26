@@ -10,7 +10,7 @@ function SuccessScreen({ entryType, onClose, published }) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
-  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate emergency report' : entryType === 'group' ? 'group' : 'action';
+  const what = entryType === 'solution' ? 'solution' : entryType === 'climate_crisis' ? 'climate crisis report' : entryType === 'group' ? 'group' : 'action';
   const isGroup = entryType === 'group';
   return (
     <div className="fixed inset-0 z-[100] bg-[#efe7d6] flex flex-col items-center justify-start p-6 pt-[16vh] text-center overflow-y-auto">
@@ -214,7 +214,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
 
   const doors = [
     { type: 'solution', label: 'Solution', Icon: Leaf, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
-    { type: 'climate_crisis', label: 'Emergency', Icon: AlertTriangle, on: 'text-[#b3261e] border-b-[#b3261e]' },
+    { type: 'climate_crisis', label: 'Crisis', Icon: AlertTriangle, on: 'text-[#b3261e] border-b-[#b3261e]' },
     { type: 'action', label: 'Action', Icon: Sprout, on: 'text-[#1e3a2b] border-b-[#1e3a2b]' },
     { type: 'group', label: 'Group', Icon: Users, on: 'text-[#0f5f7a] border-b-[#0f5f7a]' },
   ];
@@ -290,7 +290,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
               {entryType === 'solution'
                 ? 'A positive action that others can replicate — at any scale, from individuals to whole countries.'
                 : entryType === 'climate_crisis'
-                ? 'A climate emergency that the world needs to be alerted to.'
+                ? 'A climate crisis that the world needs to be alerted to.'
                 : entryType === 'group'
                 ? 'People working on the same thing in the same area. The record carries the introduction, never the conversation: one contact line you choose to publish, and what you say to each other afterwards is yours.'
                 : 'Something happening on the ground — a cleanup, planting, meeting, or policy push. One contact link. The platform never sees the messages.'}
@@ -341,7 +341,7 @@ export default function ClimateSubmitForm({ onClose, initialCategory, initialTyp
                   <input value={form.topic} onChange={e => set('topic', e.target.value)} placeholder="e.g. Saving seagrasses" className={fieldClass} />
                 </Field>
 
-                <Field label="Which subject on the record?" hint="Optional. Choose one and the record puts your group beside the solutions and emergencies in that subject, and them beside you. Leave it empty and the group stands on its own.">
+                <Field label="Which subject on the record?" hint="Optional. Choose one and the record puts your group beside the solutions and crises in that subject, and them beside you. Leave it empty and the group stands on its own.">
                   <select value={form.group_category || ''} onChange={e => set('group_category', e.target.value)} className={fieldClass}>
                     <option value="">Not linked to a subject</option>
                     {categories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}

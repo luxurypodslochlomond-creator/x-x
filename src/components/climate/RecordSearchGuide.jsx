@@ -18,8 +18,8 @@ const KINDS = [
     body: 'What works — something done in a place, that another community can copy.',
   },
   {
-    label: 'Climate emergencies',
-    body: 'Emergencies the world needs to know about, each labelled with how well it is known.',
+    label: 'Climate crises',
+    body: 'Crises the world needs to know about, each labelled with how well it is known.',
   },
   {
     label: 'Actions',

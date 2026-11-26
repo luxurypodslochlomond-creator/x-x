@@ -48,7 +48,7 @@ export default function GroupSubjectLinks({ category, items = [], actions = [], 
               className="flex items-baseline gap-1.5 text-[12px] leading-snug text-[#b3261e] font-bold underline decoration-[#b3261e]/30 underline-offset-2 active:text-[#8f1e18]"
             >
               <span className="text-[8.5px] font-black font-mono uppercase tracking-widest text-[#5a5246] shrink-0">Emg</span>
-              {emergencies.length === 1 ? emergencies[0].title : `${emergencies.length} emergencies in this subject`}
+              {emergencies.length === 1 ? emergencies[0].title : `${emergencies.length} crises in this subject`}
             </Link>
           </li>
         )}

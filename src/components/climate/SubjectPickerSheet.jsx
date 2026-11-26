@@ -28,7 +28,7 @@ import '@/components/climate/subject-picker.css';
 // the same marks, the same caption, the same one-line reason, laid eight across on the
 // paper instead of four, because a desk has the width and a handset does not. Nothing else
 // differs: press a mark, read why it is on the record, follow the red line through.
-export default function SubjectPickerSheet({ open, onClose, subjects = [], totalEntries = 0, selected, allLabel = 'Every theme', onSelect }) {
+export default function SubjectPickerSheet({ open, onClose, subjects = [], totalEntries = 0, selected, allLabel = 'Every subject', onSelect }) {
   const dialogRef = useRef(null);
   const [isPhone, setIsPhone] = useState(() => !window.matchMedia('(min-width: 1024px)').matches);
   const [chosenId, setChosenId] = useState(selected || 'all');
@@ -69,7 +69,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
   // A theme added by a keeper may have no drawing of its own yet. It says so, rather than
   // borrowing another theme's reason and quietly meaning something it does not.
   const reasonFor = (id) => subjectMarkReasons[id]
-    || 'No drawing of its own yet: this theme wears the record’s general mark until it has one.';
+    || 'No drawing of its own yet: this subject wears the record’s general mark until it has one.';
 
   const chosen = items.find((item) => item.id === chosenId) || items[0];
   const reason = reasonFor(chosen.id);
@@ -78,7 +78,7 @@ export default function SubjectPickerSheet({ open, onClose, subjects = [], total
     ? 'Read every entry'
     : count
       ? `Read ${count} ${count === 1 ? 'entry' : 'entries'}`
-      : 'Open this theme';
+      : 'Open this subject';
 
   const go = (id) => { onSelect(id); onClose(); };
   // One press reads the mark; a second press on the same mark goes there.
