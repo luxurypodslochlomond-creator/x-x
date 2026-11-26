@@ -155,17 +155,27 @@ export default function ExtractionProofCovenant() {
         </ul>
       </section>
 
-      {/* ── THE CLOSE — the record's own note, at the end of the argument ── */}
-      <section className="mt-6 bg-[#141210] px-5 py-6">
-        <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#efe7d6] mb-4">
+      {/* ── THE CLOSE — the record's own note, at the end of the argument ──
+          Brian, 26 November: "no bro haha loved the footer but not the black box with Laurie
+          Anderson sentence black and white this doesn't feel right bro". He is right, and the
+          reason is the page rather than the sentence: every other plate on this page is the
+          record's paper inside an ink rule, and the close was the one black rectangle on it —
+          so her line arrived as a different publication stapled to the back of this one, in a
+          voice the page does not use anywhere else. It is the page's own paper now, with her
+          line set the way the page sets everything: ink for the sentence, the measured red for
+          the half of it the record took its name from. Nothing about the debt changes — the
+          quotation marks, her name, the song, the year and the limit are all still here, and
+          they are easier to read on paper than they were in cream on black. */}
+      <section className="mt-6 border-2 border-[#141210] bg-[#f7f1e5] px-5 py-6">
+        <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-4">
           You cannot stop bad actors from using AI. You can make the good version the easiest one to build, use
           and fund — by leaving the honest path as the shortest one through the code.
         </p>
         {/* The close of the argument is her line, marked as hers — quoted, signed, and with the
             limit on it stated underneath, because the whole page is about saying plainly what
             something is and what it is not. */}
-        <RecordEpigraph dark compact label="The line this record is named after" />
-        <p className="mt-3 text-[10px] font-mono text-[#efe7d6]/50 leading-relaxed">
+        <RecordEpigraph compact label="The line this record is named after" />
+        <p className="mt-3 text-[10px] font-mono text-[#5a5246] leading-relaxed">
           <Link to="/XEqualsX" className="underline decoration-dotted underline-offset-2 hover:text-[#e2602a]">
             What is borrowed, and what is owed
           </Link>
