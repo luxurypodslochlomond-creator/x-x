@@ -12,7 +12,6 @@ import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
 import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
-import XEqualsXResearchPanel from '@/components/climate/XEqualsXResearchPanel';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import { recordAddress } from '@/components/climate/recordAddress';
@@ -87,9 +86,11 @@ export default function XEqualsX() {
         <div className="covenant-card">
           <XEqualsXLimits />
         </div>
-        <div className="covenant-card covenant-card--ocean">
-          <XEqualsXResearchPanel />
-        </div>
+        {/* ── THE SECOND LIST IS GONE ──────────────────────────────────────────────
+            "Recorded commitments" read six promises out of the record here, directly under
+            a band that had just promised five of its own. Brian, 26 November: "needs truth
+            and simplicity". The record's own lines are now printed under the promise each
+            one keeps, in the promise band itself, so this card has nothing left to say. */}
       </div>
 
       {/* ── THE CODE, WHERE IT WAS ALWAYS MEANT TO BE ──────────────────────────

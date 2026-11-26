@@ -430,6 +430,51 @@
   #x-equals-x .covenant-promises strong { font-size: 1.125rem; }
   #x-equals-x .covenant-promises span { font-size: 1rem; }
 }
+/* ── THE RECORD'S OWN LINE, UNDER THE PROMISE IT KEEPS ─────────────────────────
+   Brian, 26 November: "needs truth and simplicity". The promise is the page's sentence;
+   the line beneath it is the record's, quoted back in its own words with the thing it does
+   not establish — so a reader sees the claim, the limit and the voice it is written in,
+   without a second list to reconcile it against. It is marked off by a hairline rather
+   than a box, because a box would have made it a second card inside a promise. */
+#x-equals-x .covenant-promise-kept {
+  margin-top: 0.75rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid rgba(20, 18, 16, 0.18);
+}
+#x-equals-x .covenant-promise-mark {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgb(var(--record-mark));
+}
+#x-equals-x .covenant-promise-plain {
+  margin-top: 0.3rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #4a4239;
+}
+#x-equals-x .covenant-promise-limit {
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-promise-foot {
+  max-width: 62ch;
+  margin: 1.4rem auto 0;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-promise-foot a {
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-mark));
+  text-underline-offset: 0.18em;
+}
 #x-equals-x .covenant-source-name { display: block; margin-top: 0.25rem; }
 #x-equals-x cite { font-style: normal; }
 #x-equals-x .covenant-caption {
