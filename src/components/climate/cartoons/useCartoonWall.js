@@ -50,13 +50,39 @@ export default function useCartoonWall(watch = false) {
   const kept = useMemo(readKeptWall, []);
   useEffect(() => {
     if (!wall.data?.pages?.length) return;
-    try {
-      const cartoons = orderWall(wall.data.pages.flatMap((page) => page.items || []));
-      if (cartoons.length) localStorage.setItem(KEPT_WALL, JSON.stringify({ day: new Date().toISOString(), cartoons }));
-    } catch {
-      // A full disk or a private window: the wall simply does not keep a copy, and nothing breaks.
-    }
-  }, [wall.data]);
+    // Keep the whole wall, not just the sheet that happened to be on screen. A phone carried
+    // into a room with no signal should hold every drawing the record has published, not the
+    // first sixteen — so once a day it asks for all of them, and then warms each picture so
+    // the wall is not a set of titles with holes where the drawings were.
+    const keptAt = kept?.day ? new Date(kept.day).getTime() : 0;
+    if (Date.now() - keptAt < 6 * 60 * 60 * 1000) return;
+    let alive = true;
+    (async () => {
+      try {
+        const all = [];
+        let cursor = null;
+        do {
+          const page = await base44.entities.ClimateCartoon.filter(
+            { status: 'published' },
+            { sort: '-created_date', limit: 100, ...(cursor ? { cursor } : {}) },
+          );
+          all.push(...(page.items || []).map((cartoon) => ({ ...cartoon, display_image_url: cartoonImageSource(cartoon) })));
+          cursor = page.has_more ? page.next_cursor : null;
+        } while (cursor && alive);
+        if (!alive || !all.length) return;
+        const cartoons = orderWall(all);
+        localStorage.setItem(KEPT_WALL, JSON.stringify({ day: new Date().toISOString(), cartoons }));
+        cartoons.forEach((cartoon) => {
+          if (!cartoon.display_image_url) return;
+          const picture = new Image();
+          picture.src = cartoon.display_image_url;
+        });
+      } catch {
+        // A full disk, a private window, or a picture that will not load: the wall keeps what it had.
+      }
+    })();
+    return () => { alive = false; };
+  }, [wall.data, kept]);
   // Hung in the room's own order, not in the order rows were typed in.
   const keptDay = wall.isError && kept ? kept.day : null;
   return {
