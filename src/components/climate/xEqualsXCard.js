@@ -57,6 +57,18 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
     g.fillStyle = index === 1 ? paper : signal;
     g.fillText(mark, W / 2 + (index - 1) * step, 350);
   });
+  // ── THE CARD CARRIES THE CODE ─────────────────────────────────────────────────
+  // The mark above is x = x. Underneath it is the same mark in its other alphabet, so a
+  // picture that leaves this page still carries the transmission it came from — pressed,
+  // it would sound like the mark itself. Small and quiet, in the mark's own yellow: it is
+  // a caption to the mark and not a second headline, and the reader who knows the code
+  // will read it, while the reader who does not is not asked to.
+  g.font = `700 30px ${MONO}`;
+  g.fillStyle = signal;
+  letterSpacing(g, '6px');
+  g.fillText('-..-  -...-  -..-', W / 2, 408);
+  letterSpacing(g, '0px');
+
   g.fillStyle = paper;
   g.font = `700 76px ${sans}`;
   g.fillText(COVENANT.title, W / 2, 478);
