@@ -19,7 +19,10 @@ import { recordAddress } from '@/components/climate/recordAddress';
 // are on the wall, and how many of them are CEEW's — because a number on a page is either
 // the record's own count or it is a claim.
 
-const CEEW_ARTIST = 'What On Earth!®';
+// CEEW's body on the wall is counted by the credit that holds the drawings, not by the
+// series name. Her deck, read on 26 November, named the individual cartoonists, so the
+// artist line is now the hand that drew each drawing and the credit is what marks it CEEW's.
+const isCeew = (c) => /council on energy/i.test(`${c.credit || ''} ${c.artist_name || ''}`);
 
 const Answer = ({ n, ask, children }) => (
   <section className="mt-7 border-t border-record-ink/15 pt-4">
@@ -45,7 +48,7 @@ export default function ClimateWorkshopAnswers() {
         const items = Array.isArray(page) ? page : page.items;
         setWall({
           all: items.length,
-          ceew: items.filter((c) => (c.artist_name || '').trim() === CEEW_ARTIST).length,
+          ceew: items.filter(isCeew).length,
         });
       });
     return () => {
@@ -66,8 +69,9 @@ export default function ClimateWorkshopAnswers() {
       wide
     >
       <p className="text-[13.5px] leading-relaxed text-record-ink/90 lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
-        Thank you for the deck. Every drawing in it we have a file for is already hung, with the creator and
-        producer details you wrote, credited exactly as you wrote them.
+        Thank you for the deck. It is the first time the names of the hands behind these drawings have reached us,
+        and the cartoonist and producer details you wrote are now on every drawing of yours that is on the wall,
+        credited exactly as you wrote them.
       </p>
 
       <Answer n="01" ask="How will the two hours be conducted?">
@@ -102,8 +106,8 @@ export default function ClimateWorkshopAnswers() {
           <p>
             <strong>{wall.all} drawings</strong> are on the wall as this page was opened, <strong>{wall.ceew} of them
             CEEW’s</strong>. Each one carries the name of the hand that made it, the credit that holds it, and a link
-            to where it was first published. Nothing is ranked and nothing is for sale; the wall stands in the order
-            the drawings arrived.
+            to where it was first published. Nothing is ranked and nothing is for sale; the wall is hung by hand, and
+            the order it hangs in is the room's own.
           </p>
         ) : (
           <p>
@@ -112,8 +116,9 @@ export default function ClimateWorkshopAnswers() {
           </p>
         )}
         <p>
-          If a drawing in your deck is not among them, it is one we have not been given a file for. Send the link and
-          it goes up the same day, with the creator and producer details exactly as you wrote them.
+          Seven drawings in the deck are not on the wall yet. Four came with a link, which we have; three came only
+          as a picture inside the deck, and go up the moment there is a file or a link. Each goes up with the creator
+          and producer details exactly as you wrote them.
         </p>
       </Answer>
 
