@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import entryHref from '@/components/climate/cartoons/entryHref';
 
 // ── ONE HAND'S DRAWINGS, IN THE ORDER THEY CAME ────────────────────────────────
 // A cartoonist thinks in sequence: this one, then this one, and here is what the second
@@ -41,7 +42,7 @@ export default function ArtistSequence({ drawings }) {
           <div className="hand-plate-links">
             <Link to={`/ClimateCartoons/Sheet/${drawing.id}`}>Its own sheet ↗</Link>
             <Link to={`/ClimateCartoons?drawing=${drawing.id}`}>On the wall ↗</Link>
-            {drawing.crisis_id && <Link to={`/ClimateDetail/climate_crisis/${drawing.crisis_id}`}>What it answers ↗</Link>}
+            {entryHref(drawing) && <Link to={entryHref(drawing)}>What it answers ↗</Link>}
           </div>
         </article>
       ))}

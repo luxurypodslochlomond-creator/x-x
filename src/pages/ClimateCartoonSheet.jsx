@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
 import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
+import entryHref from '@/components/climate/cartoons/entryHref';
 import ArtworkShareButton from '@/components/climate/ArtworkShareButton';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import '@/components/climate/cartoons/sheet/sheet.css';
@@ -132,7 +133,7 @@ export default function ClimateCartoonSheet({ id: idProp }) {
           {cartoon.crisis_id && (
             <p className="sheet-about">
               Drawn about:{' '}
-              <Link to={`/ClimateDetail/climate_crisis/${cartoon.crisis_id}`}>
+              <Link to={entryHref(cartoon)}>
                 {cartoon.crisis_title || 'an entry on the record'}
               </Link>
             </p>

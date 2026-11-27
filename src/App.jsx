@@ -230,6 +230,8 @@ const ClimateWorkshopAnswersPage = React.lazy(() => import('./pages/ClimateWorks
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
+// The keeper's desk for the join between the wall and the record's three doors.
+const ClimateWallLinksPage = React.lazy(() => import('./pages/ClimateWallLinks'));
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 const ClimateRollPage = React.lazy(() => import('./pages/ClimateRoll'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
@@ -544,6 +546,12 @@ const AuthenticatedApp = () => {
           x = x pointed at it — because a door that opens onto a locked page is worse than
           no door at all. */}
       <Route path="/ClimateHandover" element={<ClimateLayout currentPage="ClimateHandover"><KeeperKey><ClimateHandoverPage /></KeeperKey></ClimateLayout>} />
+      {/* ── THE WALL AND THE DOORS, JOINED ───────────────────────────────────────
+          Thirty-two drawings, and not one of them pointing at the entry it was about: the
+          wall and the record's three doors stood in separate rooms. This is the keeper's
+          desk for the join, one drawing at a time. Behind the record's key, because it is
+          the record's work and a keeper holds the record's keys, not the building's. */}
+      <Route path="/WallLinks" element={<ClimateLayout currentPage="ClimateCartoons"><KeeperKey><ClimateWallLinksPage /></KeeperKey></ClimateLayout>} />
       <Route path="/ClimateCorrections" element={<RecordSectionRedirect to="/ClimateMethod" fallbackHash="#corrections" />} />
       {/* The seal: every entry fingerprinted, and the check run in the reader's own
           browser rather than on our server. The one page that lets a sceptic verify

@@ -5,6 +5,7 @@ import cartoonSubject from '@/components/climate/cartoons/cartoonSubjects';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildDrawingShareCard, drawingShareLine } from '@/components/climate/cartoons/drawingCard';
 import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
+import entryHref from '@/components/climate/cartoons/entryHref';
 import { recordOrigin } from '@/components/climate/recordAddress';
 
 // ── ONE DRAWING, GIVEN THE PAGE ────────────────────────────────────────────────
@@ -62,7 +63,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
           />
         </div>
         {crisis_id && (
-          <Link className="press-sheet-link" to={`/ClimateDetail/climate_crisis/${crisis_id}`}>
+          <Link className="press-sheet-link" to={entryHref(cartoon)}>
             Drawn about: {crisis_title || 'an entry on the record'} ↗
           </Link>
         )}

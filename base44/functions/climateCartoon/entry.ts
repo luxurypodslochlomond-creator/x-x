@@ -261,6 +261,55 @@ export default async function (req: Request): Promise<Response> {
     const who = await requireKeeper(base44);
     if (who.error) return Response.json({ error: who.error }, { status: who.status });
 
+    // ── TYING A DRAWING TO THE ENTRY IT ANSWERS ───────────────────────────────
+    // Brian, 27 November, on the record at ten past six: "crisis action solutions not
+    // working for me… something's missing." What was missing was the join. Thirty-two
+    // drawings hung on the wall and not one of them pointed at the entry it was about, so
+    // the wall and the three doors stood in separate rooms: no way from a drawing to the
+    // crisis it is looking at, and no way from a crisis to the drawings that answer it.
+    //
+    // The record never guesses this link — a machine cannot know what a drawing is looking
+    // at — so a keeper says it, one drawing at a time, and the entry is resolved HERE,
+    // against the record itself. An id that is not a published entry leaves the drawing
+    // standing on its own rather than putting a wrong headline under somebody's work.
+    if (action === 'link') {
+      const id = clean(body?.id, 60);
+      const entryId = clean(body?.entry_id, 60);
+      if (!id) return Response.json({ error: 'Which drawing?' }, { status: 400 });
+
+      if (!entryId) {
+        await base44.asServiceRole.entities.ClimateCartoon.update(id, {
+          crisis_id: '',
+          crisis_title: '',
+          crisis_type: '',
+        });
+        return Response.json({ ok: true, linked: false });
+      }
+
+      let entry: any = null;
+      let kind = '';
+      const solution = await base44.asServiceRole.entities.ClimateSolution.get(entryId).catch(() => null);
+      if (solution) {
+        entry = solution;
+        kind = solution.entry_type === 'climate_crisis' ? 'climate_crisis' : 'solution';
+      } else {
+        const action_ = await base44.asServiceRole.entities.ClimateAction.get(entryId).catch(() => null);
+        if (action_) {
+          entry = action_;
+          kind = 'action';
+        }
+      }
+      if (!entry) return Response.json({ error: 'That entry is not on the record.' }, { status: 404 });
+
+      const crisis_title = clean(entry.title, 200);
+      await base44.asServiceRole.entities.ClimateCartoon.update(id, {
+        crisis_id: entryId,
+        crisis_title,
+        crisis_type: kind,
+      });
+      return Response.json({ ok: true, linked: true, crisis_id: entryId, crisis_title, crisis_type: kind });
+    }
+
     if (action === 'waiting') {
       const list = await base44.asServiceRole.entities.ClimateCartoon.filter(
         { status: 'draft' },

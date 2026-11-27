@@ -4,6 +4,7 @@ import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildDrawingShareCard, drawingShareLine } from '@/components/climate/cartoons/drawingCard';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
+import entryHref from '@/components/climate/cartoons/entryHref';
 import { goalByNumber } from '@/components/climate/cartoons/cartoonGoals';
 
 export default function CartoonCaption({ cartoon, instant = false }) {
@@ -20,7 +21,7 @@ export default function CartoonCaption({ cartoon, instant = false }) {
           says nothing rather than writing a biography nobody gave it. */}
       {who_line && <p className="cartoon-who-line record-meta" dir="auto">{who_line}</p>}
       {for_line && <p className="cartoon-own-words record-meta" dir="auto">{for_line}</p>}
-      {crisis_id && <Link className="cartoon-source" to={`/ClimateDetail/climate_crisis/${crisis_id}`}>Drawn about: {crisis_title || 'an entry on the record'} ↗</Link>}
+      {entryHref(cartoon) && <Link className="cartoon-source" to={entryHref(cartoon)}>Drawn about: {crisis_title || 'an entry on the record'} ↗</Link>}
       {goalEntry && (
         <a className="cartoon-source" href={goalEntry.url} target="_blank" rel="noopener noreferrer">
           Offered for Goal {goalEntry.n} · {goalEntry.name} ↗

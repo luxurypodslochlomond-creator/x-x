@@ -33,11 +33,25 @@
     },
     "crisis_id": {
       "type": "string",
-      "description": "The entry on the record this drawing answers \u2014 a climate crisis, when the person offering it says so. Resolved against the record by its own server, never taken on trust from a browser: an id that is not a published crisis leaves the drawing unlinked rather than putting a wrong headline under somebody's work. Empty means the drawing stands on the wall on its own, which most drawings do."
+      "description": "The entry on the record this drawing answers \u2014 a climate crisis, a solution or an action, when a keeper says so. Resolved against the record by its own server, never taken on trust from a browser: an id that is not a published entry leaves the drawing unlinked rather than putting a wrong headline under somebody's work. Empty means the drawing stands on the wall on its own, which most drawings do."
     },
     "crisis_title": {
       "type": "string",
-      "description": "That entry's own headline, copied from the entry itself at the moment the drawing was offered, so the wall can name the crisis without a lookup and without the sender's words standing in for it."
+      "description": "That entry's own headline, copied from the entry itself at the moment the drawing was tied to it, so the wall can name it without a lookup and without the sender's words standing in for it."
+    },
+    "crisis_type": {
+      "type": "string",
+      "enum": [
+        "climate_crisis",
+        "solution",
+        "action"
+      ],
+      "enumColors": [
+        "red",
+        "green",
+        "blue"
+      ],
+      "description": "Which of the record's three doors the tied entry lives behind \u2014 a crisis, a solution or an action \u2014 so the drawing opens the right one. Read off the entry itself by the record's server when the link was made, never chosen by a browser. Empty on a drawing that is not tied to anything, and on the older links made before this was kept, which were all crises."
     },
     "goal": {
       "type": "number",
