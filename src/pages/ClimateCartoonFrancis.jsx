@@ -131,6 +131,7 @@ export default function ClimateCartoonFrancis() {
         <div className="hand-doors">
           <ShareCardButton
             compact
+            instant
             entry={FRANCIS_CARD}
             build={buildFrancisShareCard}
             link={address}

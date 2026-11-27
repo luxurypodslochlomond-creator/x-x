@@ -212,11 +212,13 @@ export default function ClimateGuide() {
           today and has not got time to read a manual before she does her first entry. */}
       <div className="mb-6 space-y-2">
         <ShareCardButton
+          instant
           entry={BUTTONS_CARD}
           build={buildGuideShareCard}
           label="Share the manual as a card"
         />
         <ShareCardButton
+          instant
           entry={WAY_IN_CARD}
           build={buildWayInShareCard}
           label="Send the way in as a card"

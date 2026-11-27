@@ -49,6 +49,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
         <div className="press-sheet-share">
           <ShareCardButton
             inline
+            instant
             entry={cartoon}
             build={buildDrawingShareCard}
             label="Share this drawing"

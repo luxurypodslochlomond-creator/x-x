@@ -77,6 +77,7 @@ export default function XEqualsXOpening() {
                 door of the record: somebody who is passed a principle should be able to
                 read the whole of it without hunting for it. */}
             <ShareCardButton
+              instant
               entry={{ id: 'x-equals-x', title: 'x = x' }}
               build={buildCovenantCard}
               label="Share"

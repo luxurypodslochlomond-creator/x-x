@@ -70,6 +70,7 @@ export default function ClimateRoll() {
             one carrying who says so, open for anyone to check.
           </p>
           <ShareCardButton
+            instant
             entry={{ ...data.me, title: data.me.name }}
             build={buildCheckerShareCard}
             label="Send this as a card"

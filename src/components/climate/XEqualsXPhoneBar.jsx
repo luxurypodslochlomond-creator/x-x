@@ -41,6 +41,7 @@ export default function XEqualsXPhoneBar() {
       </Link>
       <div className="covenant-share x-eq-phonebar-share">
         <ShareCardButton
+          instant
           entry={{ id: 'x-equals-x', title: 'x = x' }}
           build={buildCovenantCard}
           label="Share"
