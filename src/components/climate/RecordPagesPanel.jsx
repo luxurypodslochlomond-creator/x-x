@@ -69,7 +69,7 @@ export default function RecordPagesPanel({ open, onClose }) {
     if (open) {
       setMounted(true);
       setLeaving(false);
-      setShowNames(true);
+      setShowNames(false);
       return undefined;
     }
     if (!mounted) return undefined;
