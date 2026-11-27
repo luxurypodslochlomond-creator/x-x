@@ -9,7 +9,7 @@ import { RoomMarkCrisis, RoomMarkSolution, RoomMarkAction } from '@/components/c
 // hand-drawn cuts and the same hairlines, so a reader who has been on the record recognises
 // this as the same book rather than a page about it.
 const ROOMS = [
-  { name: 'Crisis', detail: 'The harm. The place. The source.', to: '/TogetherChangeClimate#record-room-climate_crisis', Mark: RoomMarkCrisis },
+  { name: 'Crises', detail: 'The harm. The place. The source.', to: '/TogetherChangeClimate#record-room-climate_crisis', Mark: RoomMarkCrisis },
   { name: 'Solutions', detail: 'The response. The evidence. The limits.', to: '/TogetherChangeClimate#record-room-solution', Mark: RoomMarkSolution },
   { name: 'Actions', detail: 'The work. The organiser. A way in.', to: '/TogetherChangeClimate#record-room-actions', Mark: RoomMarkAction },
 ];

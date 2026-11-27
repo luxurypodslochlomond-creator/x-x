@@ -4,23 +4,29 @@ import { X_EQUALS_X_EVIDENCE } from '@/components/climate/xEqualsXEvidence';
 export default function XEqualsXStand() {
   return (
     <section className="covenant-world" aria-labelledby="the-world">
-      <p className="covenant-kicker">Sources</p>
-      <h2 id="the-world">What the evidence says.</h2>
-      <p>Two things are documented at once. The planet is being damaged. And the machinery that could tell everybody is paid to keep them scrolling. One set of numbers comes from climate scientists, the other from the platforms’ own researchers — nobody had to invent either. This is not a conspiracy and it is not a reason to give up. It is a reason to build something that cannot be bought.</p>
+      <div className="covenant-evidence-head">
+        <p className="covenant-kicker">The case · sources checked 27 November 2026</p>
+        <h2 id="the-world">Power is built<br />into the system.</h2>
+        <p>A ranking system decides what becomes visible. That is power, not plumbing. These findings are why we choose a record over a feed, and collective use over captive attention.</p>
+      </div>
       <aside className="covenant-case" aria-label="Evidence behind the argument">
-        <p className="covenant-case-label">Read the original sources</p>
+        <p className="covenant-case-label">Our headings make the argument. The sources show what is known.</p>
         <dl className="covenant-facts">
-          {X_EQUALS_X_EVIDENCE.map(({ title, body, source, href }) => (
-            <div key={title}>
-              <dt>{title}</dt>
-              <dd>{body}</dd>
-              <dd className="covenant-facts-source">
-                <a href={href} target="_blank" rel="noopener noreferrer">{source} ↗<span className="sr-only"> (opens a new tab)</span></a>
+          {X_EQUALS_X_EVIDENCE.map(({ title, field, published, body, scope, source, href }) => (
+            <div key={title} className="covenant-evidence-entry">
+              <dt>
+                <span className="covenant-evidence-index">{field} · {published}</span>
+                <span className="covenant-evidence-title">{title}</span>
+              </dt>
+              <dd>
+                <p>{body}</p>
+                <a className="covenant-evidence-source" href={href} target="_blank" rel="noopener noreferrer">{source} ↗<span className="sr-only"> (opens a new tab)</span></a>
+                <p className="covenant-evidence-scope"><strong>What this does and does not show.</strong> {scope}</p>
               </dd>
             </div>
           ))}
         </dl>
-        <p className="covenant-case-small">These sources support the statements above. They are not endorsements of this platform or evidence of its impact.</p>
+        <p className="covenant-case-small">These are sources, not sponsors. None is presented as an endorsement by the UN, a university or any individual. A public record is a tool for action, not proof that action has happened.</p>
       </aside>
     </section>
   );

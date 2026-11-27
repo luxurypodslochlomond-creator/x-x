@@ -1,12 +1,11 @@
 export const COVENANT = {
   kicker: 'A public climate record',
-  title: 'A record of the time.',
-  // Split so the last word can be printed in the record's yellow, the way the record's own
-  // name carries one word in it. `title` stays whole for the card and the share.
-  titleLead: 'A record of the',
-  titleMark: 'time.',
+  title: 'A RECORD OF THE TIME.',
+  // The title stays whole for sharing; the opening gives its last word the signal colour.
+  titleLead: 'A RECORD OF THE',
+  titleMark: 'TIME.',
   distinction: 'Not a feed. A record.',
-  meaning: 'The evidence, the source and the work, in one place. Nothing for sale, nothing ranked to hold you, nothing hidden.',
+  meaning: 'Name the harm. Share the evidence. Organise the response.',
   limit: 'No ads. No paid placement. No ranking for money. Sources stay named.',
   dedication: 'For the planet. For the people who come after us.',
 };

@@ -17,6 +17,12 @@
   color: rgb(var(--record-ink)); border-top: 3px solid rgb(var(--record-mark));
 }
 #x-equals-x .covenant-collective p { color: rgb(var(--record-ink) / .9); }
+#x-equals-x .covenant-collective .covenant-collective-inner { max-width: 64rem; }
+#x-equals-x .covenant-collective h2 {
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem) !important; line-height: 1.03 !important;
+  font-weight: 800 !important; text-transform: uppercase; letter-spacing: -.035em !important;
+}
+#x-equals-x .covenant-collective-call { padding-top: 1rem; border-top: 2px solid rgb(var(--record-red)); }
 #x-equals-x .covenant-collective :is(a, button):focus-visible { outline-color: rgb(var(--record-mark)); }
 
 /* Three doors, said plainly, and whose job the platform is. */
@@ -69,6 +75,9 @@
 #x-equals-x :is(.covenant-origin, .covenant-collective, .covenant-signal) { scroll-margin-top: 6rem; }
 @media (min-width: 1024px) {
   #x-equals-x .covenant-collective { margin: 1.1rem 2.5rem; padding: 2.4rem 2.4rem; }
+  #x-equals-x .covenant-collective-inner { display: grid; grid-template-columns: .85fr 1.4fr; gap: 3rem; align-items: start; }
+  #x-equals-x .covenant-collective-position { position: sticky; top: 13rem; }
+  #x-equals-x .covenant-collective-argument { min-width: 0; }
   #x-equals-x .covenant-signal-drawing { padding: 1.1rem 1.3rem; }
 }
 @media print {
