@@ -1,55 +1,63 @@
-/* The people and the connections, on the same paper as the record. */
-#x-equals-x .covenant-opening-intent {
-  max-width: 34ch; margin: .75rem auto 0; color: rgb(var(--record-ink) / .8); font-size: .86rem !important;
-}
-#x-equals-x .covenant-origin { padding: 2.4rem 1.25rem; background: rgb(var(--record-bone)); }
+/* The people and the connections, on the same paper and the same ink as the record. */
 #x-equals-x .covenant-origin-inner, #x-equals-x .covenant-collective-inner { max-width: 46rem; margin: auto; }
 #x-equals-x :is(.covenant-origin, .covenant-collective) h2 { margin-bottom: 1.15rem; }
 #x-equals-x .covenant-origin blockquote {
   margin: 1.4rem 0; padding: .15rem 0 .15rem 1rem; border-left: 4px solid rgb(var(--record-mark));
-  color: rgb(var(--record-red)); font-size: clamp(1.4rem, 5.6vw, 2.1rem); font-weight: 800; line-height: 1.15; letter-spacing: -.035em;
+  color: rgb(var(--record-red)); font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4.6vw, 1.9rem); font-weight: 400; line-height: 1.25; letter-spacing: .03em;
 }
 #x-equals-x .covenant-origin cite { display: block; margin-top: .75rem; font-size: .75rem; font-weight: 600; font-style: normal; letter-spacing: 0; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-collective { padding: 2.4rem 1.25rem; background: rgb(var(--record-red)); color: rgb(var(--record-paper)); }
-#x-equals-x .covenant-collective .covenant-kicker { color: rgb(var(--cartoon-sun)); }
-#x-equals-x .covenant-collective .covenant-kicker::before { background: rgb(var(--cartoon-sun)); }
+
+/* ── WHAT THE RECORD HOLDS: THE DARK PLATE, THE YELLOW NAME ────────────────────
+   The record's own section heading is a name in its signal yellow on its ink, so the
+   three rooms are named the same way here rather than in a second colour of their own. */
+#x-equals-x .covenant-collective {
+  padding: 2.6rem 1.25rem; background: rgb(var(--record-ink) / .94);
+  color: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-signal));
+}
+#x-equals-x .covenant-collective h2 { color: rgb(var(--record-signal)); }
+#x-equals-x .covenant-collective .covenant-kicker { color: rgb(var(--record-signal)); }
+#x-equals-x .covenant-collective p { color: rgb(var(--record-paper) / .88); }
 #x-equals-x .covenant-connections {
   position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: .5rem; margin: 1.65rem 0; padding-bottom: 1.2rem; border-bottom: 1px solid rgb(var(--record-paper) / .3);
+  column-gap: .5rem; margin: 1.65rem 0; padding-bottom: 1.2rem; border-bottom: 1px solid rgb(var(--record-paper) / .28);
 }
 #x-equals-x .covenant-connections::before {
-  content: ''; position: absolute; z-index: -1; left: 16%; right: 16%; top: 1.75rem; height: 2px; background: rgb(var(--cartoon-sun));
+  content: ''; position: absolute; z-index: -1; left: 16%; right: 16%; top: 1.9rem; height: 1px; background: rgb(var(--record-signal) / .55);
 }
 #x-equals-x .covenant-connection { display: flex; flex-direction: column; align-items: center; text-align: center; text-decoration: none; }
+/* The mark's mass is paper on the ink; the one cut part stays the signal yellow. */
 #x-equals-x .covenant-connection-node {
-  display: grid; place-items: center; width: 3.5rem; height: 3.5rem; margin-bottom: .6rem;
-  border: 2px solid rgb(var(--cartoon-sun)); border-radius: 50%; background: rgb(var(--record-red)); color: rgb(var(--cartoon-sun));
+  display: grid; place-items: center; width: 3.8rem; height: 3.8rem; margin-bottom: .6rem;
+  border: 1px solid rgb(var(--record-signal) / .7); border-radius: 50%;
+  background: rgb(var(--record-ink) / .5);
+  color: rgb(var(--record-paper));
+  --room-accent: rgb(var(--record-signal));
 }
 #x-equals-x .covenant-connection-node svg { width: 1.7rem; height: 1.7rem; }
-/* The mass is paper on the record's red; the one cut part stays the signal yellow. */
-#x-equals-x .covenant-connection-node { --room-accent: rgb(var(--cartoon-sun)); color: rgb(var(--record-paper)); }
-#x-equals-x .covenant-connection strong { font-size: 1.15rem; font-weight: 800; line-height: 1.25; }
+#x-equals-x .covenant-connection strong {
+  color: rgb(var(--record-paper)); font-family: var(--font-record-ui);
+  font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; line-height: 1.3;
+}
+#x-equals-x .covenant-connection > span:last-child { max-width: 15ch; margin-top: .35rem; font-size: .72rem; line-height: 1.45; color: rgb(var(--record-paper) / .78); }
+#x-equals-x .covenant-connection:hover strong { text-decoration: underline; text-underline-offset: .3em; text-decoration-color: rgb(var(--record-signal)); }
 #x-equals-x .covenant-platform-jump { margin-top: .85rem; }
 #x-equals-x a.covenant-three-name { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.75rem; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); text-underline-offset: .25em; }
 #x-equals-x a.covenant-three-name > span { color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-connection > span:last-child { max-width: 13ch; margin-top: .3rem; font-size: .7rem; line-height: 1.45; }
-#x-equals-x .covenant-connection:hover strong { text-decoration: underline; text-underline-offset: .25em; }
-#x-equals-x .covenant-love-line { margin-top: 1.3rem; color: rgb(var(--cartoon-sun)); font-size: clamp(1.4rem, 5.2vw, 2rem) !important; line-height: 1.15 !important; letter-spacing: -.035em; font-weight: 800; }
-#x-equals-x .covenant-collective .covenant-text-link { margin-top: .6rem; text-decoration-color: rgb(var(--cartoon-sun)); }
-#x-equals-x .covenant-collective :is(a, button):focus-visible { outline-color: rgb(var(--cartoon-sun)); }
+#x-equals-x .covenant-collective .covenant-text-link { margin-top: .6rem; text-decoration-color: rgb(var(--record-signal)); }
+#x-equals-x .covenant-collective :is(a, button):focus-visible { outline-color: rgb(var(--record-signal)); }
 
 /* Three doors, said plainly, and whose job the platform is. */
-#x-equals-x .covenant-arrangement { padding: 2.4rem 1.25rem; background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-ink)); }
 #x-equals-x .covenant-arrangement-inner { max-width: 46rem; margin: auto; }
 #x-equals-x .covenant-arrangement h2 { margin-bottom: 1rem; }
 #x-equals-x .covenant-three { list-style: none; margin: 1.4rem 0 0; padding: 0; }
 #x-equals-x .covenant-three li { padding: 1.05rem 0 1.05rem .95rem; border-left: 3px solid rgb(var(--record-mark)); border-bottom: 1px solid rgb(var(--record-ink) / .14); }
 #x-equals-x .covenant-three li:first-child { border-top: 1px solid rgb(var(--record-ink) / .14); }
-#x-equals-x .covenant-three-name { display: block; font-size: 1.15rem; font-weight: 800; letter-spacing: -.025em; }
+#x-equals-x .covenant-three-name { display: block; font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; letter-spacing: .04em; }
 #x-equals-x .covenant-three-question { display: block; margin-top: .18rem; color: rgb(var(--record-red)); font-size: .82rem; font-weight: 700; }
 #x-equals-x .covenant-three p { margin-top: .45rem; font-size: .92rem !important; }
 #x-equals-x .covenant-three-plain { display: block; margin-top: .4rem; color: rgb(var(--record-muted)); font-family: ui-monospace, monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; }
-#x-equals-x .covenant-arrangement-line { margin-top: 1.5rem; font-family: var(--font-display); font-size: clamp(1.2rem, 4.4vw, 1.7rem) !important; line-height: 1.25 !important; letter-spacing: -.03em; font-weight: 800; }
+#x-equals-x .covenant-arrangement-line { margin-top: 1.5rem; font-family: var(--font-display); font-size: clamp(1.15rem, 4vw, 1.6rem) !important; line-height: 1.3 !important; letter-spacing: .04em; font-weight: 400; }
 #x-equals-x .covenant-arrangement-drawings { margin-top: 1.1rem; }
 #x-equals-x .covenant-platform-part { margin-top: 1.5rem; padding: 1.2rem 1.15rem; background: rgb(var(--record-bone)); border-top: 3px solid rgb(var(--record-mark)); }
 #x-equals-x .covenant-platform-part p { font-size: .9rem !important; }
@@ -65,7 +73,10 @@
 #x-equals-x .covenant-provenance summary:focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 3px; }
 
 /* One shared timeline: code, tone and a real press-to-play control. */
-#x-equals-x .covenant-signal-drawing { margin: 1.3rem 0; padding: .85rem .65rem 1rem; border: 2px solid rgb(var(--record-ink)); background: rgb(var(--record-paper)); box-shadow: .3rem .3rem 0 rgb(var(--cartoon-sun)); }
+#x-equals-x .covenant-signal-inner { max-width: 46rem; margin: auto; }
+#x-equals-x .covenant-signal h2 { margin-bottom: 1.1rem; }
+#x-equals-x .covenant-signal-meaning { font-size: .9rem !important; }
+#x-equals-x .covenant-signal-drawing { margin: 1.3rem 0; padding: .85rem .65rem 1rem; border: 2px solid rgb(var(--record-ink)); background: rgb(var(--record-paper)); box-shadow: .3rem .3rem 0 rgb(var(--record-signal)); }
 #x-equals-x .covenant-signal-scale { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .35rem; padding: .1rem .25rem .6rem; border-bottom: 1px solid rgb(var(--record-ink) / .18); color: rgb(var(--record-muted)); font-family: ui-monospace, monospace; font-size: .6rem; text-transform: uppercase; letter-spacing: .04em; }
 #x-equals-x .covenant-signal-key { display: block; width: 100%; padding: .4rem 0 .6rem; border: 0; background: transparent; color: rgb(var(--record-ink)); cursor: pointer; }
 #x-equals-x .covenant-signal-key:disabled { opacity: 1; cursor: default; }
@@ -76,7 +87,7 @@
 #x-equals-x .covenant-tone-pulse { fill: none; stroke: rgb(var(--record-muted)); stroke-width: 1.8; stroke-linejoin: round; }
 #x-equals-x [data-sounding] .covenant-code-pulse { fill: rgb(var(--record-red)); }
 #x-equals-x [data-sounding] .covenant-tone-pulse { stroke: rgb(var(--record-red)); stroke-width: 3; }
-#x-equals-x .covenant-signal-control { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-width: 11rem; padding: .7rem 1.2rem; background: rgb(var(--cartoon-sun)); border: 1px solid rgb(var(--record-ink)); font-size: .85rem; font-weight: 800; text-align: left; }
+#x-equals-x .covenant-signal-control { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-width: 11rem; padding: .7rem 1.2rem; background: rgb(var(--record-signal)); border: 1px solid rgb(var(--record-ink)); font-size: .85rem; font-weight: 800; text-align: left; }
 #x-equals-x .covenant-signal-control > svg { width: 1.15rem; height: 1.15rem; }
 #x-equals-x .covenant-signal-control small { display: block; margin-top: .12rem; font-family: ui-monospace, monospace; font-size: .62rem; font-weight: 500; }
 #x-equals-x .covenant-signal-drawing figcaption { margin: .45rem .25rem 0; color: rgb(var(--record-muted)); font-size: .69rem; line-height: 1.6; }
@@ -85,14 +96,13 @@
 #x-equals-x .covenant-small-print .covenant-makers-heading { color: rgb(var(--record-ink)); font-weight: 800; font-size: 1rem !important; }
 #x-equals-x :is(.covenant-origin, .covenant-collective, .covenant-signal) { scroll-margin-top: 6rem; }
 @media (min-width: 1024px) {
-  #x-equals-x :is(.covenant-origin, .covenant-collective) { padding: 3.4rem 2.5rem; }
   #x-equals-x .covenant-connections { margin-block: 2rem; }
-  #x-equals-x .covenant-connection strong { font-size: 1.65rem; }
+  #x-equals-x .covenant-connection strong { font-size: .95rem; letter-spacing: .16em; }
   #x-equals-x .covenant-connection > span:last-child { max-width: none; font-size: .8rem; }
   #x-equals-x .covenant-signal-drawing { padding: 1.1rem 1.3rem; }
 }
 @media print {
   #x-equals-x .covenant-collective { background: none; color: rgb(var(--record-ink)); }
-  #x-equals-x .covenant-collective :is(.covenant-kicker, .covenant-love-line) { color: rgb(var(--record-ink)); }
+  #x-equals-x .covenant-collective :is(h2, .covenant-kicker, p) { color: rgb(var(--record-ink)); }
   #x-equals-x .covenant-connections { display: none; }
 }

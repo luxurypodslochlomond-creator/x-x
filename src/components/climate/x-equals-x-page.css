@@ -1,81 +1,114 @@
-/* ── x = x ────────────────────────────────────────────────────────────────────
-   A public stand, not a policy document. Yellow and red, the record's own ink, the
-   actual painting, and one signal that moves. Every section is a band that changes
-   ground so the page breathes as you scroll; nothing on it congratulates itself. */
+/* ── x = x, PRINTED IN THE SAME ROOM AS THE RECORD ────────────────────────────
+   Brian, 27 November: "can we make the x=x page more like the record page — same font as
+   'together we can change the course of climate change', our colours, the yellow writing in
+   caps, and the painting behind x=x. We lost our painting behind x=x."
+
+   He was right, and the fault was structural rather than a matter of taste. The x=x page
+   was mounted inside the record's own shell — the painting was already fixed behind it —
+   and then painted itself an opaque paper on every band, which covered the painting from
+   the first pixel down. So the one page that argues for the record was the only page of it
+   that had no record behind it.
+
+   What the record page does, and this page now does:
+     · the painting is the ground, and the book is see-through, so it is never covered;
+     · the name is set in the record's display face, wide and light, not in a shout;
+     · the small lines above each band are the record's yellow, in caps and letterspaced;
+     · reading sits on paper sheets laid on the painting, so the painting breathes between
+       them instead of being hidden by them;
+     · the record's red is a rule, a number or an underline — never a field of colour.
+   Nothing about what the page says has changed. Only the hand it is printed in. */
+html .climate-record[data-record-page="XEqualsX"] .record-book {
+  background-color: transparent;
+  box-shadow: none;
+}
+
 #x-equals-x.covenant-page {
   color: rgb(var(--record-ink));
-  background: rgb(var(--record-paper));
-  font-family: var(--font-record-ui);
+  background: transparent;
+  font-family: var(--font-body);
   line-height: 1.6;
   overflow-x: hidden;
 }
 #x-equals-x p { margin: 0; font-size: 1rem !important; line-height: 1.62 !important; }
 #x-equals-x p + p { margin-top: .8rem; }
 #x-equals-x :is(h1, h2, h3) {
-  margin: 0; font-family: var(--font-record-ui) !important;
-  text-transform: none; font-weight: 800 !important;
-  letter-spacing: -.045em !important; text-wrap: balance;
+  margin: 0; font-family: var(--font-display) !important;
+  text-transform: none; font-weight: 400 !important;
+  letter-spacing: .06em !important; line-height: 1.14 !important;
+  text-wrap: pretty;
 }
-#x-equals-x h2 { font-size: clamp(1.85rem, 5.4vw, 3rem) !important; line-height: 1.06 !important; }
-#x-equals-x h3 { font-size: 1.2rem !important; line-height: 1.25 !important; }
+#x-equals-x h2 { font-size: clamp(1.75rem, 4.8vw, 2.9rem) !important; }
+#x-equals-x h3 { font-size: 1.15rem !important; letter-spacing: .04em !important; }
 #x-equals-x strong { font-weight: 700; }
 #x-equals-x a { color: inherit; text-underline-offset: .2em; }
 
-/* Every band opens on the same small signal line, so the page has a rhythm. */
+/* ── THE SMALL LINE ABOVE EVERY BAND ────────────────────────────────────────────
+   The record's own signal yellow, in caps, letterspaced — on the dark bands. On a paper
+   sheet the same line is the record's red, because yellow on paper is a highlighter and
+   this record has never used one. The short bar takes the line's colour either way. */
 #x-equals-x .covenant-kicker {
-  position: relative; margin: 0 0 1.15rem; padding-top: .7rem;
+  position: relative; margin: 0 0 1.05rem; padding-top: .7rem;
+  font-family: var(--font-record-ui);
   font-size: .68rem !important; line-height: 1.4 !important;
-  font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .16em;
+  color: rgb(var(--record-red));
 }
 #x-equals-x .covenant-kicker::before {
   content: ''; position: absolute; top: 0; left: 0;
-  width: 2.6rem; height: 3px; background: rgb(var(--record-mark));
+  width: 2.6rem; height: 3px; background: currentColor;
 }
 
-/* ── THE HEAD: the mark, centred, at the size of a mark ─────────────────────── */
-#x-equals-x .covenant-hero { background: rgb(var(--cartoon-sun)); }
+/* ── THE HEAD: x = x ON THE PAINTING ────────────────────────────────────────── */
+#x-equals-x .covenant-hero {
+  color: rgb(var(--record-paper));
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .66), rgb(var(--record-ink) / .44) 46%, rgb(var(--record-ink) / .76));
+}
 #x-equals-x .covenant-hero-inner {
-  max-width: 46rem; margin: auto; padding: 1.9rem 1.25rem 1.5rem; text-align: center;
+  max-width: 46rem; margin: auto; padding: 2.4rem 1.25rem 2rem; text-align: center;
 }
 #x-equals-x .covenant-hero-inner .covenant-kicker {
-  display: inline-block; margin-bottom: .35rem; padding-top: 0; color: rgb(var(--record-ink) / .7);
+  display: inline-block; margin-bottom: .6rem; padding-top: 0;
+  color: rgb(var(--record-signal));
 }
 #x-equals-x .covenant-hero-inner .covenant-kicker::before { display: none; }
 #x-equals-x .covenant-title {
-  color: rgb(var(--record-mark)); font-size: clamp(3.6rem, 15vw, 5.6rem) !important;
-  font-weight: 900 !important; line-height: .92 !important;
-  letter-spacing: -.065em !important; white-space: nowrap;
-  margin: 0 0 .5rem;
+  color: rgb(var(--record-paper));
+  font-size: clamp(3.4rem, 13vw, 6.4rem) !important;
+  font-weight: 400 !important; line-height: 1 !important;
+  letter-spacing: .02em !important; white-space: nowrap;
+  margin: 0 0 .7rem; text-shadow: 0 3px 22px rgb(var(--record-ink) / .8);
 }
 #x-equals-x .covenant-front-line {
-  font-size: clamp(1.65rem, 7vw, 2.9rem) !important;
-  font-weight: 800; line-height: 1.06 !important; letter-spacing: -.045em;
+  font-size: clamp(1.5rem, 5.6vw, 2.6rem) !important;
+  color: rgb(var(--record-paper)); line-height: 1.15 !important;
+  text-shadow: 0 2px 14px rgb(var(--record-ink) / .7);
 }
 #x-equals-x .covenant-purpose-line {
-  margin-top: .45rem; font-size: clamp(1.15rem, 4.4vw, 1.7rem) !important;
-  font-weight: 700; line-height: 1.15 !important; letter-spacing: -.03em;
+  margin-top: .8rem;
+  font-family: var(--font-record-ui);
+  font-size: clamp(.78rem, 2.7vw, 1.05rem) !important;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .18em;
+  color: rgb(var(--record-signal));
 }
 #x-equals-x .covenant-purpose {
-  max-width: 34ch; margin: .9rem auto 0;
-  font-size: .95rem !important; color: rgb(var(--record-ink) / .82);
+  max-width: 34ch; margin: .95rem auto 0;
+  font-size: .95rem !important; color: rgb(var(--record-paper) / .86);
 }
 #x-equals-x .covenant-primary-links {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem;
-  max-width: 32rem; margin: 1.4rem auto 0; padding-top: 1.1rem;
-  border-top: 1px solid rgb(var(--record-ink) / .2);
+  max-width: 34rem; margin: 1.5rem auto 0; padding-top: 1.1rem;
+  border-top: 1px solid rgb(var(--record-paper) / .35);
 }
 #x-equals-x .covenant-primary-links a {
-  display: flex; align-items: center; justify-content: center; min-height: 2.75rem;
-  font-size: clamp(.78rem, 2.7vw, 1.05rem); font-weight: 800; letter-spacing: .04em;
-  text-decoration: underline; text-decoration-color: rgb(var(--record-mark));
-  text-decoration-thickness: 2px; text-underline-offset: .35em;
+  display: flex; align-items: center; justify-content: center; min-height: 2.9rem;
+  font-family: var(--font-record-ui);
+  font-size: clamp(.72rem, 2.5vw, 1rem); font-weight: 700;
+  text-transform: uppercase; letter-spacing: .16em;
+  color: rgb(var(--record-signal)); text-decoration: underline;
+  text-decoration-thickness: 2px; text-underline-offset: .4em;
 }
-#x-equals-x .covenant-painting { margin: 0; background: rgb(var(--record-paper)); }
-#x-equals-x .covenant-painting img { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 901; }
-#x-equals-x .covenant-painting figcaption {
-  padding: .5rem 1.25rem; border-bottom: 1px solid rgb(var(--record-ink) / .18);
-  color: rgb(var(--record-muted)); font-size: .67rem; line-height: 1.45;
-}
+
+/* The strip under the head, and the one at the foot, are paper: a place for a finger. */
 #x-equals-x .covenant-hero-actions, #x-equals-x .covenant-close {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .65rem .75rem;
   padding: 1rem 1.25rem; background: rgb(var(--record-paper));
@@ -90,43 +123,45 @@
 #x-equals-x .covenant-share > button { min-width: 6.25rem; color: rgb(var(--record-ink)); background: transparent; border-color: rgb(var(--record-ink)); }
 #x-equals-x .covenant-share > button:disabled { cursor: wait; }
 #x-equals-x .covenant-access { grid-column: 1 / -1; font-size: .75rem !important; text-align: center; }
+#x-equals-x .covenant-cover-credit { grid-column: 1 / -1; font-size: .7rem !important; text-align: center; color: rgb(var(--record-muted)); }
 
 /* ── THE ONE DATE THE PAGE HAS TO CARRY ─────────────────────────────────────── */
-#x-equals-x .covenant-ninth { background: rgb(var(--record-bone)); border-top: 3px solid rgb(var(--record-ink)); }
+#x-equals-x .covenant-ninth {
+  background: rgb(var(--record-signal)); color: rgb(var(--record-ink));
+  border-top: 3px solid rgb(var(--record-ink));
+}
 #x-equals-x .covenant-ninth-inner { max-width: 46rem; margin: auto; padding: 1.9rem 1.25rem; }
+#x-equals-x .covenant-ninth .covenant-kicker { color: rgb(var(--record-ink)); }
 #x-equals-x .covenant-ninth h2 { margin-bottom: .8rem; }
 #x-equals-x .covenant-ninth-ask { margin-top: .85rem !important; }
 #x-equals-x .covenant-ninth-links { display: flex; flex-wrap: wrap; gap: 0 1.4rem; margin-top: .7rem; }
 #x-equals-x .covenant-ninth-links a {
   display: inline-flex; align-items: center; min-height: 2.75rem;
   font-size: .84rem; font-weight: 700; text-decoration: underline;
-  text-decoration-color: rgb(var(--record-mark)); text-decoration-thickness: 2px; text-underline-offset: .25em;
+  text-decoration-color: rgb(var(--record-ink)); text-decoration-thickness: 2px; text-underline-offset: .25em;
 }
 
-/* ── THE SIGNAL: held on paper, beside the reason for sending it ────────────── */
-#x-equals-x .covenant-signal { background: rgb(var(--record-bone)); border-top: 3px solid rgb(var(--record-mark)); }
-#x-equals-x .covenant-signal-inner { max-width: 46rem; margin: auto; padding: 2.2rem 1.25rem; }
-#x-equals-x .covenant-signal h2 { margin-bottom: 1.1rem; }
-#x-equals-x .covenant-signal-meaning { font-size: .9rem !important; }
-
-/* ── WHY THESE THREE CHARACTERS ─────────────────────────────────────────────── */
-#x-equals-x .covenant-identity { background: rgb(var(--cartoon-sun)); padding: 2.2rem 1.25rem; }
-#x-equals-x .covenant-identity > * { max-width: 46rem; margin-inline: auto; }
-#x-equals-x .covenant-identity h2 { margin-bottom: 1.1rem; }
+/* ── PAPER SHEETS ON THE PAINTING ───────────────────────────────────────────────
+   One rule for every reading band, so the page is a book rather than a stack of panels:
+   paper, a red rule at the head, and the record's own margin. The painting shows in the
+   gutters between them, which is the whole reason for it. */
+#x-equals-x :is(.covenant-identity, .covenant-origin, .covenant-world, .covenant-arrangement, .covenant-rules, .covenant-signal, .covenant-use, .covenant-future) {
+  background: rgb(var(--record-paper) / .97);
+  border-top: 3px solid rgb(var(--record-mark));
+  padding: 2.2rem 1.25rem;
+}
+#x-equals-x :is(.covenant-origin, .covenant-rules, .covenant-signal) {
+  background: rgb(var(--record-bone) / .97);
+}
+#x-equals-x :is(.covenant-identity > *, .covenant-world > *, .covenant-rules > *, .covenant-use > *) {
+  max-width: 46rem; margin-inline: auto;
+}
+#x-equals-x .covenant-identity h2, #x-equals-x .covenant-world h2,
+#x-equals-x .covenant-rules h2, #x-equals-x .covenant-use h2 { margin-bottom: 1.1rem; }
 #x-equals-x .covenant-identity-strong { padding-top: .9rem; border-top: 2px solid rgb(var(--record-ink)); }
 
 /* ── THE WORLD WE ARE IN ────────────────────────────────────────────────────── */
-#x-equals-x .covenant-world { padding: 2.4rem 1.25rem 2.2rem; background: rgb(var(--record-paper)); }
-#x-equals-x .covenant-world > * { max-width: 46rem; margin-inline: auto; }
 #x-equals-x .covenant-world h2 { margin-bottom: 1.4rem; }
-#x-equals-x .covenant-world-lines { list-style: none; margin: 0; padding: 0; }
-#x-equals-x .covenant-world-lines li {
-  padding: 1.1rem 0 1.1rem .95rem; border-left: 3px solid rgb(var(--record-mark));
-  border-bottom: 1px solid rgb(var(--record-ink) / .14);
-}
-#x-equals-x .covenant-world-lines li:last-child { border-bottom: 0; }
-#x-equals-x .covenant-world-lines strong { display: block; font-size: 1.1rem; line-height: 1.28; letter-spacing: -.02em; margin-bottom: .4rem; }
-#x-equals-x .covenant-world-lines p, #x-equals-x .covenant-world-lines li { font-size: .95rem !important; }
 #x-equals-x .covenant-case {
   margin-top: 1.5rem; padding: 1.3rem 1.25rem; background: rgb(var(--record-bone));
   border-top: 3px solid rgb(var(--record-mark)); color: rgb(var(--record-ink));
@@ -134,12 +169,8 @@
 #x-equals-x .covenant-case p { font-size: .92rem !important; color: rgb(var(--record-ink)); }
 #x-equals-x .covenant-case-label {
   margin-bottom: .7rem !important; color: rgb(var(--record-red)) !important;
-  font-size: .66rem !important; text-transform: uppercase; letter-spacing: .1em; font-weight: 700;
-}
-#x-equals-x .covenant-case a {
-  display: inline-flex; align-items: center; min-height: 2.75rem; margin: .5rem 0 .2rem;
-  color: rgb(var(--cartoon-sun)); font-size: .8rem; font-weight: 700;
-  text-decoration: underline; text-underline-offset: .22em;
+  font-size: .66rem !important; font-family: var(--font-record-ui);
+  text-transform: uppercase; letter-spacing: .14em; font-weight: 700;
 }
 #x-equals-x .covenant-facts { margin: 0; }
 #x-equals-x .covenant-facts > div { padding: 1.05rem 0; border-top: 1px solid rgb(var(--record-ink) / .2); }
@@ -153,25 +184,29 @@
 }
 #x-equals-x .covenant-case-small { color: rgb(var(--record-muted)) !important; font-size: .76rem !important; line-height: 1.55 !important; }
 
-/* ── NOT A PROMISE. WHAT IS ON IT. ──────────────────────────────────────────── */
-#x-equals-x .covenant-onrecord { padding: 2.2rem 1.25rem; background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-mark)); }
+/* ── WHAT IS ON IT, COUNTED ON THE DARK ────────────────────────────────────────
+   The figures were red on paper; on the record's ink plate the numbers take the signal
+   yellow, which is the one place on this page a number is allowed to be loud. */
+#x-equals-x .covenant-onrecord {
+  background: rgb(var(--record-ink) / .93); color: rgb(var(--record-paper));
+  border-top: 3px solid rgb(var(--record-signal)); padding: 2.2rem 1.25rem;
+}
 #x-equals-x .covenant-onrecord-inner { max-width: 46rem; margin: auto; }
-#x-equals-x .covenant-onrecord-figures { display: grid; gap: 1px; margin: 0; background: rgb(var(--record-ink) / .2); }
-#x-equals-x .covenant-onrecord-figures > div { background: rgb(var(--record-paper)); padding: .9rem .2rem; }
+#x-equals-x .covenant-onrecord .covenant-kicker { color: rgb(var(--record-signal)); }
+#x-equals-x .covenant-onrecord-figures { display: grid; gap: 1px; margin: 0; background: rgb(var(--record-paper) / .22); }
+#x-equals-x .covenant-onrecord-figures > div { background: rgb(var(--record-ink) / .93); padding: .9rem .2rem; }
 #x-equals-x .covenant-onrecord-figures dt {
   font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .13em;
-  color: rgb(var(--record-muted));
+  color: rgb(var(--record-paper) / .7);
 }
 #x-equals-x .covenant-onrecord-figures dd {
-  margin: .1rem 0 0; color: rgb(var(--record-mark));
+  margin: .1rem 0 0; color: rgb(var(--record-signal));
   font-size: clamp(2.2rem, 11vw, 3.2rem); font-weight: 800; line-height: 1;
   letter-spacing: -.07em; font-variant-numeric: tabular-nums;
 }
-#x-equals-x .covenant-onrecord-line { margin-top: 1rem; max-width: 44ch; font-size: .86rem !important; color: rgb(var(--record-ink) / .82); }
+#x-equals-x .covenant-onrecord-line { margin-top: 1rem; max-width: 44ch; font-size: .86rem !important; color: rgb(var(--record-paper) / .82); }
 
 /* ── WHAT WE DO ABOUT IT ────────────────────────────────────────────────────── */
-#x-equals-x .covenant-rules { padding: 2.4rem 1.25rem; background: rgb(var(--record-bone)); }
-#x-equals-x .covenant-rules > * { max-width: 46rem; margin-inline: auto; }
 #x-equals-x .covenant-rules h2 { margin-bottom: .9rem; }
 #x-equals-x .covenant-rules-lead { color: rgb(var(--record-ink) / .8); }
 #x-equals-x .covenant-rule-list { list-style: none; padding: 0; margin: 1.5rem auto 0; }
@@ -189,36 +224,32 @@
 }
 
 /* ── PUT IT TO WORK ─────────────────────────────────────────────────────────── */
-#x-equals-x .covenant-use { padding: 2.4rem 1.25rem; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); border-top: 3px solid rgb(var(--record-mark)); }
-#x-equals-x .covenant-use > * { max-width: 46rem; margin-inline: auto; }
 #x-equals-x .covenant-doors { display: grid; list-style: none; padding: 0; margin: 1.3rem auto 0; }
 #x-equals-x .covenant-doors li { border-top: 1px solid rgb(var(--record-ink) / .25); }
 #x-equals-x .covenant-doors li:last-child { border-bottom: 1px solid rgb(var(--record-ink) / .25); }
 #x-equals-x .covenant-door { display: flex; justify-content: space-between; align-items: center; gap: 1rem; height: 100%; padding: 1.1rem .2rem; color: inherit; text-decoration: none; transition: background 140ms ease; }
-#x-equals-x .covenant-door-title { display: block; font-size: 1.3rem; font-weight: 800; letter-spacing: -.03em; }
+#x-equals-x .covenant-door-title { display: block; font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; letter-spacing: .05em; }
 #x-equals-x .covenant-door-detail { display: block; margin-top: .22rem; font-size: .85rem; color: rgb(var(--record-muted)); }
 #x-equals-x .covenant-door > svg { width: 1.6rem; height: 1.6rem; flex-shrink: 0; color: rgb(var(--record-mark)); }
 #x-equals-x .covenant-door:hover { background: rgb(var(--record-bone)); }
 
 /* ── FOR THE PEOPLE WHO COME AFTER US ───────────────────────────────────────── */
-#x-equals-x .covenant-future { background: rgb(var(--cartoon-sun)); }
-#x-equals-x .covenant-future-inner { max-width: 46rem; margin: auto; padding: 2.3rem 1.25rem; }
-#x-equals-x .covenant-future-inner h2 { margin-bottom: 1.1rem; }
 #x-equals-x .covenant-future-strong { padding-top: .9rem; border-top: 2px solid rgb(var(--record-ink)); }
 #x-equals-x .covenant-future-origin { color: rgb(var(--record-ink) / .8); font-size: .9rem !important; }
 #x-equals-x .covenant-future-origin a { font-weight: 700; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); text-decoration-thickness: 2px; }
 #x-equals-x .covenant-inline-links { display: flex; flex-wrap: wrap; gap: 0 1.3rem; margin-top: .7rem; }
 #x-equals-x .covenant-inline-links a { display: inline-flex; align-items: center; min-height: 2.7rem; font-size: .84rem; font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
-#x-equals-x .covenant-small-print { padding: 1.3rem 1.25rem; background: rgb(var(--record-paper)); border-top: 1px solid rgb(var(--record-ink) / .18); }
+#x-equals-x .covenant-small-print { padding: 1.3rem 1.25rem; background: rgb(var(--record-paper) / .97); border-top: 1px solid rgb(var(--record-ink) / .18); }
 #x-equals-x .covenant-small-print > * { max-width: 46rem; margin-inline: auto; }
 #x-equals-x .covenant-small-print p { color: rgb(var(--record-muted)); font-size: .76rem !important; line-height: 1.6 !important; }
 #x-equals-x .covenant-small-print p:last-child { margin-top: .7rem; }
 
 #x-equals-x .covenant-close { max-width: 46rem; margin: auto; padding-bottom: 1.6rem; }
 #x-equals-x :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 4px; }
-#x-equals-x .covenant-use :is(a, button):focus-visible { outline-color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-hero :is(a, button):focus-visible,
+#x-equals-x .covenant-collective :is(a, button):focus-visible { outline-color: rgb(var(--record-signal)); }
 #x-equals-x :is(.covenant-btn, .covenant-share > button):active { background: rgb(var(--record-ink)); border-color: rgb(var(--record-ink)); color: rgb(var(--record-paper)); }
-#x-equals-x ::selection { background: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
+#x-equals-x ::selection { background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); }
 
 /* The mark's two layers, kept for the small inline mark wherever it is used. */
 .x-eq-stack { display: grid; }
@@ -248,11 +279,10 @@
   #x-equals-x .covenant-hero-inner > :nth-child(2) { animation-delay: 60ms; }
   #x-equals-x .covenant-hero-inner > :nth-child(3) { animation-delay: 120ms; }
   #x-equals-x .covenant-hero-inner > :nth-child(4) { animation-delay: 180ms; }
-  #x-equals-x .covenant-painting { animation: covenant-reveal 760ms ease-out both; }
+  #x-equals-x .covenant-hero-inner > :nth-child(5) { animation-delay: 240ms; }
   #x-equals-x .covenant-kicker::before { animation: covenant-rule 700ms cubic-bezier(.2, .7, .3, 1) both; }
 }
 @keyframes covenant-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-@keyframes covenant-reveal { from { opacity: 0; } to { opacity: 1; } }
 @keyframes covenant-rule { from { transform: scaleX(0); transform-origin: left; } to { transform: scaleX(1); transform-origin: left; } }
 
 @media (min-width: 640px) {
@@ -262,10 +292,18 @@
   #x-equals-x .covenant-access { grid-column: auto; text-align: right; align-self: center; }
 }
 @media (min-width: 1024px) {
-  #x-equals-x .covenant-hero-inner { padding: 2.6rem 2.5rem 2rem; }
-  #x-equals-x .covenant-title { font-size: 5.6rem !important; }
-  #x-equals-x .covenant-signal-inner { padding: 2rem 2.5rem; }
-  #x-equals-x :is(.covenant-identity, .covenant-world, .covenant-rules, .covenant-use, .covenant-future-inner, .covenant-onrecord-inner) { padding: 3.4rem 2.5rem; }
+  #x-equals-x .covenant-hero-inner { padding: 3.2rem 2.5rem 2.6rem; }
+  #x-equals-x .covenant-title { font-size: 6.4rem !important; }
+  /* The sheets come in from the edge, so the painting is visible down both gutters and
+     between one band and the next. The dark and yellow bands stay edge to edge, because a
+     band on this record is the room the planet hangs in. */
+  #x-equals-x :is(.covenant-identity, .covenant-origin, .covenant-world, .covenant-arrangement, .covenant-rules, .covenant-signal, .covenant-use, .covenant-future) {
+    margin: 1.1rem 2.5rem; padding: 2.4rem 2.4rem;
+  }
+  #x-equals-x .covenant-onrecord-inner,
+  #x-equals-x .covenant-collective-inner,
+  #x-equals-x .covenant-ninth-inner { padding-inline: 2.5rem; }
+  #x-equals-x .covenant-onrecord { padding-block: 2.8rem; }
   #x-equals-x .covenant-onrecord-figures { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   #x-equals-x .covenant-onrecord-figures dd { font-size: 4rem; }
   #x-equals-x .covenant-hero-actions, #x-equals-x .covenant-close { padding-inline: max(2.5rem, calc((100% - 42rem) / 2)); }
@@ -275,15 +313,23 @@
   .x-eq-phonebar { display: none; }
 }
 @media (max-width: 1023px) {
+  /* The painting fills the opening on a handset and then hands over to the record's ink,
+     exactly as it does on the record's own front page — so the sheets below it are paper
+     laid in a dark room rather than paper on nothing. */
+  html .climate-record[data-record-page="XEqualsX"] { background-color: rgb(var(--record-ink)); }
   body:has(.x-eq-phonebar) footer { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .x-eq-phonebar, .x-eq-layer,
-  #x-equals-x :is(.covenant-signal-dot, .covenant-signal-dash, .covenant-door, .covenant-door > svg) { transition: none; }
+  #x-equals-x :is(.covenant-door, .covenant-door > svg) { transition: none; }
 }
 html[data-tongue="th"] #x-equals-x :is(p, li) { line-height: 1.95 !important; overflow-wrap: normal; }
 @media print {
+  html .climate-record[data-record-page="XEqualsX"] .record-book { background-color: rgb(var(--record-paper)); }
+  #x-equals-x .covenant-hero { color: rgb(var(--record-ink)); background: none; }
+  #x-equals-x .covenant-title, #x-equals-x .covenant-front-line { color: rgb(var(--record-ink)); text-shadow: none; }
+  #x-equals-x .covenant-purpose-line, #x-equals-x .covenant-primary-links a { color: rgb(var(--record-ink)); }
   #x-equals-x :is(.covenant-hero-actions, .covenant-close, .covenant-signal), .x-eq-phonebar { display: none; }
-  #x-equals-x :is(.covenant-use, .covenant-case) { background: none; color: rgb(var(--record-ink)); }
+  #x-equals-x :is(.covenant-use, .covenant-case, .covenant-onrecord, .covenant-collective) { background: none; color: rgb(var(--record-ink)); }
   #x-equals-x .covenant-use :is(.covenant-door, .covenant-door-detail) { color: rgb(var(--record-ink)); }
 }
