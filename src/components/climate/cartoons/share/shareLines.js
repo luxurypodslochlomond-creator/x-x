@@ -125,7 +125,7 @@ The room, free to read: ${room}`,
       note: 'Written to be posted as it stands by whoever holds the biennial’s own logins, with CEEW tagged. @CEEWIndia is the handle at the foot of Alina’s email. Nothing here posts anywhere on its own: tagging is a person’s job, and it should be.',
       text: `Sunday, 3pm West Africa · 2pm UK: a climate workshop where the cartoons do the talking.
 
-Janine Selendy (Horizon International, Yale) hosts. Francis Umendu Odupute, curator of the CartoonAFRICA International Biennial, introduces the cartoonists. Alina Sen of CEEW India presents What On Earth! — the drawings on this wall.
+Janine Selendy (Horizon International, Yale) hosts. Francis Umendu Odupute, CAIB Curator, introduces the cartoonists. Alina Sen of CEEW India presents What On Earth! — the drawings on this wall.
 
 One hour. Online. Free. No account.
 

@@ -67,7 +67,9 @@ export const CARTOON_PROGRAMME = {
     {
       n: '02',
       name: 'The travelling CartoonAFRICA SDG cartoon campaigns and artivism youth challenge and training series',
-      time: 'Led by Francis Umendu Odupute, CAIB curator',
+      // His own capital letters, from his own signature: "CAIB Curator". A man who has
+      // carried this since 2012 is not described in lower case by anybody else's house style.
+      time: 'Led by Francis Umendu Odupute, CAIB Curator',
       detail: 'The campaign that has been moving since 2019, when the United Nations SDG Action Campaign took the biennial’s cartoons to the SDG Global Festival of Action in Bonn, and from there into community halls and Africa Liberation Day events.',
     },
     {

@@ -54,8 +54,11 @@ export default function CartoonCatalogueBand() {
           <Link to="/ClimateCartoons/CAIB" className="underline">Where the line is</Link>
         </p>
         <CartoonCatalogueDetails />
+        {/* His title as he signs it. The biennial is his, the drawings are the cartoonists',
+            and this room is neither — which the line above already says. This one only makes
+            sure the hand that carries it is named the way he names himself. */}
         <Link to="/ClimateCartoons/Francis" className="comic-catalogue-link">
-          Francis Umendu Odupute · his own page
+          Francis Umendu Odupute · CAIB Curator · his own page
         </Link>
         <CartoonEventShare />
       </div>
