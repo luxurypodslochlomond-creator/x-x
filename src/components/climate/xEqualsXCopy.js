@@ -1,6 +1,6 @@
 export const COVENANT = {
   title: 'A record of the time.',
-  distinction: 'A tool to change it.',
+  distinction: 'A platform to change it.',
   meaning: 'Climate crises. Working solutions. Actions to take.',
   limit: 'No ads. No paid boosts. Sources stay named.',
   dedication: 'For the planet. For the people who come after us.',

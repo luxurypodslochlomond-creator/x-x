@@ -10,10 +10,9 @@ const PROMISES = [
 export default function XEqualsXPromises() {
   return (
     <section id="what-is-promised" className="covenant-rules" aria-labelledby="promised-heading">
-      <div className="covenant-section-heading">
-        <p className="covenant-kicker">A record, not an attention business</p>
-        <h2 id="promised-heading">Different rules. In practice.</h2>
-      </div>
+      <p className="covenant-kicker">What we do about it</p>
+      <h2 id="promised-heading">A platform is not a protest.<br />It is what people use between them.</h2>
+      <p className="covenant-rules-lead">We cannot rebuild the internet. We can make one corner of it work differently, in the open, where anyone can check us.</p>
       <ol className="covenant-rule-list">
         {PROMISES.map(({ title, body, to, link }, index) => (
           <li key={title}>

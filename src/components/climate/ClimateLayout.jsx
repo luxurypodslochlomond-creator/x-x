@@ -67,7 +67,7 @@ const ROOM_DESCRIPTIONS = {
   ClimateRoll: 'The people who check this record, in their own words.',
   ClimateFounder: 'Why this record exists, in the founder’s own words — and in whose honour it is kept.',
   ClimateSupport: 'How the record is paid for, said in the open. Money never buys a place on it.',
-  XEqualsX: 'x=x. A record of the time. A tool to change it. A public climate record for people doing the work: sources, drawings and actions, not an engagement-ranked feed.',
+  XEqualsX: 'x=x. A record of the time. A platform to change it: crises, solutions, actions and drawings, kept in the open with sources named. Not an engagement-ranked feed.',
 };
 
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.

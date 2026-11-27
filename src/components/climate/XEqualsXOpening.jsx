@@ -7,16 +7,20 @@ import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { COVENANT, COVENANT_ENTRY, COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
 
+// ── THE MARK, CENTRED, AT THE SIZE OF A MARK ───────────────────────────────────
+// Brian, 27 November: "x = x too big at top … why x = x big not centred". It was set at
+// the size of a headline, which made a sign into a shout, and it sat left in a two-column
+// layout so it looked like a logo dropped in the margin. A mark belongs at the head of
+// the page, centred, at a size a thumb can take in whole — and then the painting, which is
+// the thing the record actually made, at the full width of the glass.
 export default function XEqualsXOpening() {
   return (
     <section className="covenant-hero" aria-labelledby="why-this-record">
-      <div className="covenant-hero-heading">
+      <div className="covenant-hero-inner">
+        <p className="covenant-kicker">A public climate record</p>
         <h1 id="why-this-record" className="covenant-title" translate="no" aria-label="x equals x">x=x</h1>
-        <div className="covenant-hero-voice">
-          <p className="covenant-kicker">A public climate record</p>
-          <p className="covenant-front-line">{COVENANT.title}<br />{COVENANT.distinction}</p>
-          <p className="covenant-purpose">{COVENANT.meaning}</p>
-        </div>
+        <p className="covenant-front-line">{COVENANT.title}<br />{COVENANT.distinction}</p>
+        <p className="covenant-purpose">{COVENANT.meaning}</p>
       </div>
       <figure className="covenant-painting">
         <img src={RECORD_COVER_SCREEN} width="1600" height="901" alt="The record’s cover painting: the living Earth beneath a luminous sky." loading="eager" decoding="async" />
