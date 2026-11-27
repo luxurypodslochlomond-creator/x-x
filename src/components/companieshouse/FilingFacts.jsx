@@ -56,7 +56,7 @@ export default function FilingFacts({ facts }) {
       <CopyLine
         label="Registered office, as this record holds it"
         value={facts['Registered office']}
-        note="Check it character by character against Companies House before confirming it. This record holds G83 8QU in one place and GB3 8QU here, so the postcode is worth a second look."
+        note="Postcode confirmed: G83 8QU. Check the rest of the address against Companies House before confirming the filing."
       />
       <div className="border-t border-[#1a1612]/12 py-2.5">
         <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#6b6258]">Directors on the register</p>

@@ -3,14 +3,14 @@ import XEqualsXMarkSignal from '@/components/climate/XEqualsXMarkSignal';
 
 export default function XEqualsXWhyTheName() {
   return (
-    <section id="why-the-name" aria-labelledby="why-name-heading">
-      <p className="covenant-kicker">The small sign behind it</p>
-      <h2 id="why-name-heading">And x = x?</h2>
-      <p>A reminder that a person’s worth is not measured by money, a title or a following. Not a claim that every story is equally true.</p>
-      <p>The sign is a principle to work by. It cannot do the work for us, or make a website trustworthy on its own.</p>
+    <section id="why-the-name" className="covenant-identity" aria-labelledby="why-name-heading">
+      <p className="covenant-kicker">Why these three characters</p>
+      <h2 id="why-name-heading">Equal worth.<br />Evidence still matters.</h2>
+      <p>In maths, <span translate="no">x=x</span> is an identity: any defined x equals itself. It needs no approval.</p>
+      <p>Here, it stands for equal dignity. A person’s worth is not their wealth, passport or following. <strong>That is our principle, not a mathematical proof. People deserve equal respect; claims still need evidence.</strong></p>
       <div className="covenant-mark-row">
         <XEqualsXMarkSignal className="covenant-mark" codeStyle={{ fontSize: '0.36em', letterSpacing: '0.08em' }} ariaLabel="Hear x equals x in Morse code" />
-        <span className="covenant-caption">Tap the mark to hear x = x in Morse.</span>
+        <span className="covenant-caption">Same mark. Another language.<br />Press to hear it in Morse.</span>
       </div>
     </section>
   );

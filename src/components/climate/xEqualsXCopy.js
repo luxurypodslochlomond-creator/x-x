@@ -1,13 +1,15 @@
 export const COVENANT = {
-  title: 'For the planet.',
-  distinction: 'For all of us.',
-  meaning: 'What is happening to our climate. What people are doing to help. What others can do next.',
-  limit: 'A public climate record, growing from Janine Selendy’s work.',
-  dedication: 'For Janine · for the planet · for all of us',
+  title: 'A record of the time.',
+  distinction: 'A tool to change it.',
+  meaning: 'Climate crises. Working solutions. Actions to take.',
+  limit: 'No ads. No paid boosts. Sources stay named.',
+  dedication: 'For the planet. For the people who come after us.',
 };
 
+export const COVENANT_ENTRY = { id: 'x-equals-x', title: 'x=x — A record of the time.' };
+
 export const COVENANT_SHARE =
-  'A public climate record growing from Janine Selendy’s work: what is happening, what people are doing to help, and actions others can take. Sources and artists stay named. Free to read, with no account needed. Find something useful, check where it came from, and pass it on.';
+  'A public climate record for people doing the work: crises, solutions, actions and drawings. No advertising or engagement-ranked feed. Sources and artists stay named. Free to read, no account needed. Read it. Question it. Put it to work.';
 
 export const COVENANT_TERMS = [
   { number: '01', title: 'Keep the source.', plain: 'Name the work and link to where it came from.' },

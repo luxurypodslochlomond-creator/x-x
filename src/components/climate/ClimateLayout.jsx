@@ -67,7 +67,7 @@ const ROOM_DESCRIPTIONS = {
   ClimateRoll: 'The people who check this record, in their own words.',
   ClimateFounder: 'Why this record exists, in the founder’s own words — and in whose honour it is kept.',
   ClimateSupport: 'How the record is paid for, said in the open. Money never buys a place on it.',
-  XEqualsX: 'For the planet. For all of us. A public climate record growing from Janine Selendy’s work, with sources, drawings and ways to act.',
+  XEqualsX: 'x=x. A record of the time. A tool to change it. A public climate record for people doing the work: sources, drawings and actions, not an engagement-ranked feed.',
 };
 
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.
@@ -131,7 +131,7 @@ export default function ClimateLayout({ children, currentPage }) {
       if (sheet.textContent.includes('/* HARDWARE ACCELERATION EVERYTHING */')) sheet.remove();
     });
     const isCartoonRoom = currentPage === 'ClimateCartoons';
-    const pageTitle = isCartoonRoom ? CARTOON_TITLE : TITLE;
+    const pageTitle = isCartoonRoom ? CARTOON_TITLE : currentPage === 'XEqualsX' ? 'x=x — A record of the time. A tool to change it.' : TITLE;
     const pageDescription = isCartoonRoom ? CARTOON_DESCRIPTION : (ROOM_DESCRIPTIONS[currentPage] || DESCRIPTION);
     document.title = pageTitle;
 

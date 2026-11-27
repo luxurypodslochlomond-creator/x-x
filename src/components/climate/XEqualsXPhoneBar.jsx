@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import { recordAddress } from '@/components/climate/recordAddress';
-import { COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
+import { COVENANT_ENTRY, COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
 
 // ── THE TWO WAYS ONWARD, UNDER THE THUMB ────────────────────────────────────────
 // Brian, 26 November, on a phone: "why does it feel like old website on device and not
@@ -40,18 +40,18 @@ export default function XEqualsXPhoneBar() {
   return (
     <div className="x-eq-phonebar" data-shown={shown ? '' : undefined} aria-hidden={shown ? undefined : 'true'} inert={shown ? undefined : ''}>
       <Link to="/TogetherChangeClimate" className="x-eq-phonebar-main" tabIndex={shown ? undefined : -1}>
-        Explore the record <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        Open the record <ArrowRight className="w-4 h-4" aria-hidden="true" />
       </Link>
       <div className="covenant-share x-eq-phonebar-share">
         <ShareCardButton
           instant
-          entry={{ id: 'x-equals-x', title: 'For the planet. For all of us.' }}
+          entry={COVENANT_ENTRY}
           build={buildCovenantCard}
           label="Share"
           link={recordAddress('/x=x')}
           description={COVENANT_SHARE}
           includeMessage
-          windowTitle="Share why this record exists"
+          windowTitle="Share x=x"
         />
       </div>
     </div>

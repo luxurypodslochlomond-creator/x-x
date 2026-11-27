@@ -1,176 +1,141 @@
-/* One reading sheet. Only actual controls have button or door treatments. */
+/* A public stand: the mark, the actual painting, and ways to use the record. */
 #x-equals-x.covenant-page {
-  min-height: 100vh;
   color: rgb(var(--record-ink));
   background: rgb(var(--record-paper));
   font-family: var(--font-record-ui);
-  font-size: 1rem;
-  line-height: 1.65;
+  line-height: 1.6;
 }
-#x-equals-x p { margin: 0; }
-#x-equals-x p + p { margin-top: .9rem; }
+#x-equals-x p { margin: 0; font-size: 1rem !important; line-height: 1.6 !important; }
+#x-equals-x p + p { margin-top: .85rem; }
 #x-equals-x :is(h1, h2, h3) {
-  font-family: var(--font-record-ui) !important;
-  text-transform: none;
-  letter-spacing: -.02em !important;
-  font-weight: 700 !important;
-  text-wrap: pretty;
+  margin: 0; font-family: var(--font-record-ui) !important;
+  text-transform: none; font-weight: 800 !important;
+  letter-spacing: -.045em !important; text-wrap: balance;
 }
-#x-equals-x h2 { margin: 0 0 1rem; font-size: clamp(1.5rem, 2.2vw, 2rem) !important; line-height: 1.2 !important; }
-#x-equals-x h3 { margin: 0; font-size: 1.125rem !important; line-height: 1.4 !important; }
+#x-equals-x h2 { font-size: clamp(1.9rem, 3.3vw, 2.9rem) !important; line-height: 1.08 !important; margin-bottom: 1.15rem; }
+#x-equals-x h3 { font-size: 1.25rem !important; line-height: 1.2 !important; }
 #x-equals-x strong { font-weight: 700; }
+#x-equals-x a { color: inherit; text-underline-offset: .2em; }
 #x-equals-x .covenant-kicker {
-  margin: 0 0 .7rem;
-  color: rgb(var(--record-muted));
-  font-size: .75rem !important;
-  line-height: 1.4 !important;
-  font-weight: 600;
-  letter-spacing: .03em;
+  margin: 0 0 .85rem; font-size: .69rem !important; line-height: 1.4 !important;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .12em;
 }
-#x-equals-x .covenant-hero { position: relative; overflow: hidden; background: rgb(var(--record-ink)); }
-#x-equals-x .covenant-hero-veil {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgb(var(--record-ink) / .55), rgb(var(--record-ink) / .86));
-}
-#x-equals-x .covenant-hero-inner {
-  position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;
-  gap: 1.2rem; max-width: 62rem; margin: 0 auto; padding: 3rem 1.2rem;
-  color: rgb(var(--record-paper)); text-align: center;
-}
+#x-equals-x .covenant-hero { background: rgb(var(--cartoon-sun)); }
+#x-equals-x .covenant-hero-heading { max-width: 72rem; margin: auto; padding: 1.4rem 1.25rem 1.65rem; }
 #x-equals-x .covenant-title {
-  margin: .15rem 0; font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
-  line-height: 1.06 !important; color: rgb(var(--record-paper));
+  color: rgb(var(--record-mark)); font-size: clamp(8.25rem, 38vw, 15rem) !important;
+  font-weight: 900 !important; line-height: .88 !important;
+  letter-spacing: -.075em !important; white-space: nowrap; margin: 0 0 1.1rem;
 }
-#x-equals-x .covenant-front-note {
-  max-width: 34ch; color: rgb(var(--record-light-signal));
-  font-size: .75rem !important; line-height: 1.55 !important;
+#x-equals-x .covenant-hero-voice .covenant-kicker { margin-bottom: .55rem; }
+#x-equals-x .covenant-front-line {
+  font-size: clamp(1.8rem, 4.5vw, 3.6rem) !important;
+  font-weight: 800; line-height: 1.04 !important; letter-spacing: -.045em;
 }
-#x-equals-x .covenant-purpose { max-width: 43ch; font-size: 1.125rem !important; line-height: 1.6 !important; }
-#x-equals-x .covenant-hero-detail { max-width: 43ch; color: rgb(var(--record-paper) / .88); }
-#x-equals-x .covenant-hero-inner p + p { margin-top: 0; }
-#x-equals-x .covenant-hero-actions,
-#x-equals-x .covenant-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; width: 100%; margin-top: .45rem; }
-#x-equals-x .covenant-btn,
-#x-equals-x .covenant-share > button {
-  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-  min-height: 3rem; padding: .8rem 1rem; border: 2px solid rgb(var(--record-ink));
-  background: rgb(var(--record-ink)); color: rgb(var(--record-paper));
-  font-family: var(--font-record-ui); font-size: .875rem; font-weight: 700;
-  line-height: 1.25; text-decoration: none; border-radius: 0; cursor: pointer;
+#x-equals-x .covenant-purpose { max-width: 35ch; margin-top: .8rem; font-size: .9rem !important; }
+#x-equals-x .covenant-painting { margin: 0; background: rgb(var(--record-paper)); }
+#x-equals-x .covenant-painting img { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 901; }
+#x-equals-x .covenant-painting figcaption {
+  padding: .45rem 1.25rem; border-bottom: 1px solid rgb(var(--record-ink) / .2);
+  color: rgb(var(--record-muted)); font-size: .67rem; line-height: 1.45;
 }
-#x-equals-x .covenant-hero .covenant-btn { background: rgb(var(--record-paper)); border-color: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
-#x-equals-x .covenant-hero .covenant-share > button { background: transparent; color: rgb(var(--record-paper)); border-color: rgb(var(--record-paper) / .7); }
-#x-equals-x .covenant-share > button { min-width: 6.25rem; }
+#x-equals-x .covenant-hero-actions, #x-equals-x .covenant-close {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .65rem .75rem;
+  padding: 1rem 1.25rem; background: rgb(var(--record-paper));
+}
+#x-equals-x .covenant-btn, #x-equals-x .covenant-share > button {
+  display: inline-flex; justify-content: center; align-items: center; gap: .5rem;
+  min-height: 3rem; padding: .75rem 1rem; border: 2px solid rgb(var(--record-mark));
+  border-radius: 0; font-family: var(--font-record-ui); font-size: .875rem;
+  font-weight: 700; line-height: 1.25; text-decoration: none; cursor: pointer;
+}
+#x-equals-x .covenant-btn { color: rgb(var(--record-paper)); background: rgb(var(--record-mark)); }
+#x-equals-x .covenant-share > button { min-width: 6.25rem; color: rgb(var(--record-ink)); background: transparent; border-color: rgb(var(--record-ink)); }
 #x-equals-x .covenant-share > button:disabled { cursor: wait; }
-#x-equals-x .covenant-btn:active,
-#x-equals-x .covenant-share > button:active { background: rgb(var(--cartoon-sun)); border-color: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
-#x-equals-x .covenant-band--centre { padding: 2rem 1.2rem; background: rgb(var(--record-bone)); border-bottom: 1px solid rgb(var(--record-ink) / .2); }
-#x-equals-x .covenant-band--centre > section { max-width: 48rem; margin: 0 auto; text-align: left; }
-#x-equals-x .covenant-band--centre .covenant-text-link { margin-top: 1.15rem; }
-#x-equals-x .covenant-stack { max-width: 65rem; margin: 0 auto; }
-#x-equals-x .covenant-card { padding: 2rem 1.2rem; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
-#x-equals-x .covenant-card > section { max-width: 48rem; margin: 0 auto; }
-#x-equals-x .covenant-text-link,
-#x-equals-x .covenant-entry h3 a,
-#x-equals-x .covenant-licence a {
-  color: rgb(var(--record-ink)); text-decoration: underline;
-  text-decoration-color: rgb(var(--record-mark)); text-decoration-thickness: 1px;
-  text-underline-offset: .2em;
-}
-#x-equals-x .covenant-text-link { display: inline-block; padding-block: .35rem; font-weight: 600; }
-#x-equals-x .covenant-caption { color: rgb(var(--record-muted)); font-size: .875rem !important; line-height: 1.65 !important; }
-#x-equals-x .covenant-plain-list { list-style: none; margin: 1.35rem 0; padding: 0; }
-#x-equals-x .covenant-plain-list li { padding: 1rem 0; border-top: 1px solid rgb(var(--record-ink) / .15); }
-#x-equals-x .covenant-plain-list p { margin-top: .35rem; }
-#x-equals-x .covenant-plain-list .covenant-text-link { margin-top: .4rem; font-size: .875rem; }
-#x-equals-x .covenant-entry h3 { margin-block: .5rem .75rem; }
-#x-equals-x .covenant-trace {
-  display: flex; flex-direction: column; gap: .6rem; list-style: none;
-  margin: 1rem 0 0; padding: 1rem; background: rgb(var(--record-bone));
-}
-#x-equals-x .covenant-trace li { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); gap: .65rem; }
-#x-equals-x .covenant-trace .covenant-trace-label { margin: 0; font-size: .75rem !important; line-height: 1.65 !important; }
-#x-equals-x .covenant-trace a { color: inherit; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); text-underline-offset: .2em; overflow-wrap: anywhere; }
-#x-equals-x .covenant-entry-open {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  min-height: 3rem; margin-top: .5rem; padding-block: .6rem;
-  font-weight: 700; color: rgb(var(--record-ink)); text-decoration: underline; text-underline-offset: .2em;
-}
-#x-equals-x .covenant-entry-open > :last-child { color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-doors { display: grid; gap: .75rem; list-style: none; margin: 1.25rem 0 0; padding: 0; }
-#x-equals-x .covenant-door {
-  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-  height: 100%; padding: 1.1rem; background: rgb(var(--record-bone));
-  border: 1px solid rgb(var(--record-ink) / .3); color: rgb(var(--record-ink)); text-decoration: none;
-}
-#x-equals-x .covenant-door-title { display: block; text-decoration: underline; text-underline-offset: .2em; text-decoration-color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-door-detail { display: block; margin-top: .4rem; font-size: .9375rem; }
-#x-equals-x .covenant-door > svg { flex-shrink: 0; color: rgb(var(--record-mark)); }
-#x-equals-x .covenant-door:active { background: rgb(var(--cartoon-sun)); }
-#x-equals-x .covenant-inline-links { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; margin-top: .8rem; }
+#x-equals-x .covenant-access { grid-column: 1 / -1; font-size: .75rem !important; text-align: center; }
+#x-equals-x .covenant-position { max-width: 72rem; margin: auto; display: grid; }
+#x-equals-x .covenant-stand { padding: 2.1rem 1.25rem; border-top: 3px solid rgb(var(--record-mark)); }
+#x-equals-x .covenant-source-note { margin-top: 1.4rem; padding-left: .9rem; border-left: 2px solid rgb(var(--record-mark)); }
+#x-equals-x .covenant-source-note p { color: rgb(var(--record-muted)); font-size: .78rem !important; line-height: 1.5 !important; }
+#x-equals-x .covenant-source-note a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .78rem; font-weight: 700; text-decoration: underline; }
+#x-equals-x .covenant-source-note p + p { margin-top: 0; }
+#x-equals-x .covenant-identity { padding: 2.1rem 1.25rem; background: rgb(var(--cartoon-sun)); }
+#x-equals-x .covenant-mark-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.2rem; margin-top: 1.3rem; }
+#x-equals-x .covenant-mark { color: rgb(var(--record-mark)); font-size: 3rem !important; font-weight: 800 !important; }
 .x-eq-stack { display: grid; }
 .x-eq-layer { grid-area: 1 / 1; transition: opacity 220ms ease; }
-#x-equals-x .covenant-mark-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.4rem; }
-#x-equals-x .covenant-mark {
-  display: block; min-height: 3rem; color: rgb(var(--record-mark));
-  font-family: var(--font-record-ui) !important; font-size: 2.5rem !important;
-  font-weight: 700 !important; letter-spacing: -.03em;
-}
 #x-equals-x .covenant-mark .x-eq-layer { display: flex; align-items: center; justify-content: center; gap: .15em; }
-#x-equals-x .covenant-close { max-width: 65rem; margin: 0 auto; padding: 1.25rem 1.2rem 2rem; }
-#x-equals-x .covenant-licence { max-width: 65rem; margin: 0 auto; padding: 2rem 1.2rem; border-top: 1px solid rgb(var(--record-ink) / .2); }
-#x-equals-x .covenant-licence h2 { max-width: 48rem; margin-inline: auto; }
-#x-equals-x .covenant-licence-says,
-#x-equals-x .covenant-licence-give { max-width: 48rem; margin: 1rem auto 0; }
-#x-equals-x .covenant-licence-give { font-size: .875rem !important; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-licence-terms { display: grid; gap: 1.75rem; max-width: 48rem; margin: 1.5rem auto; }
-#x-equals-x .covenant-licence-term { display: flex; flex-direction: column; align-items: flex-start; gap: .55rem; min-width: 0; }
-#x-equals-x .covenant-licence-label { font-size: .75rem; color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-licence-name { font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.2; font-weight: 700; letter-spacing: -.03em; }
-#x-equals-x .covenant-licence-means { font-size: .9375rem !important; }
+#x-equals-x .covenant-caption { font-size: .75rem; line-height: 1.5; }
+#x-equals-x .covenant-rules, #x-equals-x .covenant-use { max-width: 72rem; margin: auto; padding: 2.1rem 1.25rem; }
+#x-equals-x .covenant-rule-list { list-style: none; padding: 0; margin: 1.6rem 0 0; }
+#x-equals-x .covenant-rule-list li {
+  display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: .25rem .8rem;
+  padding: 1.2rem 0; border-top: 1px solid rgb(var(--record-ink) / .25);
+}
+#x-equals-x .covenant-rule-number { color: rgb(var(--record-mark)); font-size: 1.8rem; font-weight: 800; line-height: 1; letter-spacing: -.06em; }
+#x-equals-x .covenant-rule-list p { margin-top: .45rem; font-size: .95rem !important; }
+#x-equals-x .covenant-text-link { grid-column: 2; display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; font-size: .85rem; font-weight: 700; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-use { padding-top: 0; }
+#x-equals-x .covenant-doors { display: grid; list-style: none; padding: 0; margin: 1.5rem 0 0; }
+#x-equals-x .covenant-doors li { border-top: 1px solid rgb(var(--record-ink)); }
+#x-equals-x .covenant-door { display: flex; justify-content: space-between; align-items: center; gap: 1rem; height: 100%; padding: 1.15rem 0; text-decoration: none; }
+#x-equals-x .covenant-door-title { display: block; font-size: 1.35rem; font-weight: 800; letter-spacing: -.03em; }
+#x-equals-x .covenant-door-detail { display: block; margin-top: .25rem; font-size: .875rem; }
+#x-equals-x .covenant-door > svg { width: 1.65rem; height: 1.65rem; flex-shrink: 0; color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-future { background: rgb(var(--cartoon-sun)); }
+#x-equals-x .covenant-future-inner { max-width: 72rem; margin: auto; padding: 2.1rem 1.25rem; }
+#x-equals-x .covenant-future-inner > p { max-width: 50ch; }
+#x-equals-x .covenant-inline-links { display: flex; flex-wrap: wrap; gap: .25rem 1.3rem; margin-top: .8rem; }
+#x-equals-x .covenant-inline-links a { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .85rem; font-weight: 700; text-decoration: underline; }
+#x-equals-x .covenant-small-print { padding: 1.25rem; background: rgb(var(--record-paper)); border-top: 1px solid rgb(var(--record-ink) / .2); }
+#x-equals-x .covenant-small-print > * { max-width: 69.5rem; margin-inline: auto; }
+#x-equals-x .covenant-small-print p { color: rgb(var(--record-muted)); font-size: .78rem !important; line-height: 1.6 !important; }
+#x-equals-x .covenant-small-print p:last-child { margin-top: .9rem; }
+#x-equals-x .covenant-close { max-width: 72rem; margin: auto; padding-bottom: 1.5rem; }
 #x-equals-x :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 4px; }
-#x-equals-x .covenant-hero :is(a, button):focus-visible { outline-color: rgb(var(--record-paper)); }
-#x-equals-x ::selection { background: rgb(var(--cartoon-sun) / .5); }
+#x-equals-x :is(.covenant-btn, .covenant-share > button, .covenant-door):active { background: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
+#x-equals-x ::selection { background: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
 .x-eq-phonebar {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
   display: flex; align-items: stretch; gap: .5rem;
   padding: .55rem .9rem calc(.55rem + env(safe-area-inset-bottom));
-  background: rgb(var(--record-paper)); border-top: 1px solid rgb(var(--record-ink));
+  background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-mark));
   transform: translateY(115%); pointer-events: none; transition: transform 200ms ease;
 }
 .x-eq-phonebar[data-shown] { transform: none; pointer-events: auto; }
-.x-eq-phonebar-main,
-.x-eq-phonebar .covenant-share > button {
+.x-eq-phonebar-main, .x-eq-phonebar .covenant-share > button {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
   min-height: 3rem; padding: .75rem .8rem; font-family: var(--font-record-ui);
   font-size: .875rem; font-weight: 700; line-height: 1.2; border-radius: 0;
 }
-.x-eq-phonebar-main { flex: 1; background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); text-decoration: none; }
-.x-eq-phonebar .covenant-share > button { min-width: 6rem; background: transparent; color: rgb(var(--record-ink)); border: 1px solid rgb(var(--record-ink)); }
+.x-eq-phonebar-main { flex: 1; background: rgb(var(--record-mark)); color: rgb(var(--record-paper)); text-decoration: none; }
+.x-eq-phonebar .covenant-share > button { min-width: 6.25rem; background: transparent; color: rgb(var(--record-ink)); border: 1px solid rgb(var(--record-ink)); }
 .x-eq-phonebar :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 3px; }
 @media (min-width: 640px) {
-  #x-equals-x .covenant-doors,
-  #x-equals-x .covenant-licence-terms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #x-equals-x .covenant-doors { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+  #x-equals-x .covenant-hero-actions, #x-equals-x .covenant-close { grid-template-columns: auto auto 1fr; }
+  #x-equals-x .covenant-access { grid-column: auto; text-align: right; align-self: center; }
 }
 @media (min-width: 1024px) {
-  #x-equals-x .covenant-hero-inner { padding: 4rem 2.5rem; }
-  #x-equals-x .covenant-band--centre { padding: 2.5rem; }
-  #x-equals-x .covenant-card,
-  #x-equals-x .covenant-licence { padding: 2.5rem 2.1rem; }
+  #x-equals-x .covenant-hero-heading { display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 3rem; padding: 2.4rem 2.5rem; }
+  #x-equals-x .covenant-title { margin-bottom: 0; font-size: 14rem !important; }
+  #x-equals-x .covenant-hero-actions { padding-inline: max(2.5rem, calc((100% - 67rem) / 2)); }
+  #x-equals-x .covenant-position { grid-template-columns: 1fr 1fr; }
+  #x-equals-x .covenant-stand, #x-equals-x .covenant-identity { padding: 3rem 2.5rem; }
+  #x-equals-x .covenant-identity { border-top: 3px solid rgb(var(--record-mark)); }
+  #x-equals-x .covenant-rules, #x-equals-x .covenant-use, #x-equals-x .covenant-future-inner { padding: 3rem 2.5rem; }
+  #x-equals-x .covenant-use { padding-top: 0; }
+  #x-equals-x .covenant-rule-list li { grid-template-columns: 3rem minmax(0, 1fr) auto; gap: 1.2rem; align-items: start; }
+  #x-equals-x .covenant-text-link { grid-column: auto; }
+  #x-equals-x .covenant-close, #x-equals-x .covenant-small-print { padding-inline: 2.5rem; }
   .x-eq-phonebar { display: none; }
 }
 @media (max-width: 1023px) {
-  #x-equals-x.covenant-page { padding-bottom: 1rem; }
-  #x-equals-x .covenant-hero-actions .covenant-btn { flex: 1; }
   body:has(.x-eq-phonebar) footer { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .x-eq-phonebar, .x-eq-layer { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .x-eq-phonebar, .x-eq-layer { transition: none; } }
 html[data-tongue="th"] #x-equals-x :is(p, li) { line-height: 1.95 !important; overflow-wrap: normal; }
 @media print {
-  #x-equals-x :is(.covenant-hero-actions, .covenant-actions, .covenant-mark-row), .x-eq-phonebar { display: none; }
-  #x-equals-x .covenant-hero { background: none; }
-  #x-equals-x .covenant-hero-veil, #x-equals-x .covenant-hero .record-cover { display: none; }
-  #x-equals-x :is(.covenant-hero-inner, .covenant-title, .covenant-purpose, .covenant-hero-detail, .covenant-front-note) { color: rgb(var(--record-ink)); }
+  #x-equals-x :is(.covenant-hero-actions, .covenant-close, .covenant-mark-row), .x-eq-phonebar { display: none; }
+  #x-equals-x .covenant-position { display: block; }
 }
