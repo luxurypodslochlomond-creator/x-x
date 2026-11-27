@@ -1,4 +1,5 @@
 import { recordOrigin } from './recordAddress';
+import { wireAddress } from './recordSlug';
 import { RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
 import buildRecordPlate from '@/components/climate/recordPlate';
 
@@ -233,7 +234,7 @@ export async function buildWireShareCard(entry, options = {}) {
   ctx.textAlign = 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
-  ctx.fillText(fitText(ctx, `${origin}/ClimateWireEntry/${entry.id}`, MAXW), PAD, FOOTER_TOP + 100);
+  ctx.fillText(fitText(ctx, `${recordOrigin()}${wireAddress(entry)}`, MAXW), PAD, FOOTER_TOP + 100);
 
   // Signal edge, drawn last so it stays on top of the picture.
   ctx.fillStyle = SIGNAL;

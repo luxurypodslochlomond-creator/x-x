@@ -194,6 +194,8 @@ const ClimateWirePage = React.lazy(() => import('./pages/ClimateWire'));
 const ClimateMethodPage = React.lazy(() => import('./pages/ClimateMethod'));
 const ClimateSearchPage = React.lazy(() => import('./pages/ClimateSearch'));
 const ClimateWireEntryPage = React.lazy(() => import('./pages/ClimateWireEntry'));
+// One wire entry's own name as its address: /wire/antarctic-ozone-hole-closes
+const ClimateWireShortPage = React.lazy(() => import('./pages/ClimateWireShort'));
 const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
@@ -440,6 +442,13 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateMethod" element={<ClimateLayout currentPage="ClimateMethod"><ClimateMethodPage /></ClimateLayout>} />
       <Route path="/ClimateSearch" element={<ClimateLayout currentPage="ClimateSearch"><ClimateSearchPage /></ClimateLayout>} />
       <Route path="/ClimateWireEntry/:id" element={<ClimateLayout currentPage="ClimateWire"><ClimateWireEntryPage /></ClimateLayout>} />
+      {/* ── AN ENTRY'S OWN NAME, AS AN ADDRESS ──
+          Brian, 27 November: the drawings got short names, so "is it the same for the wire?"
+          It was. An entry was only reachable at /ClimateWireEntry/6afde227…, which is not a
+          thing anyone sends. It now also answers to its own headline: /wire/<name>. The long
+          address keeps working, and the card, the picture and the citation all print the
+          short one, because the card is what actually gets passed on. */}
+      <Route path="/wire/:slug" element={<ClimateLayout currentPage="ClimateWire"><ClimateWireShortPage /></ClimateLayout>} />
       <Route path="/ClimateGuide" element={<ClimateLayout currentPage="ClimateGuide"><ClimateGuidePage /></ClimateLayout>} />
       <Route path="/ClimateMusic" element={<ClimateLayout currentPage="ClimateMusic"><ClimateMusicPage /></ClimateLayout>} />
       {/* ── THE ROOM OF CARTOONS ──

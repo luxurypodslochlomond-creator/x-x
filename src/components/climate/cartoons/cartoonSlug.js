@@ -9,26 +9,10 @@
 // stops working is a worse fault than a link with a long number in it.
 //
 // The name is taken from the drawing's own title, never invented. Where a drawing has no
-// title it is named by its hand. Long titles are cut at a word, because a slug that runs
-// off the end of a line is the same problem in a shorter coat.
-const MAX = 34;
+// title it is named by its hand. The cutting lives in recordSlug, because the wire's
+// entries need exactly the same thing and one rule is easier to trust than two.
+import { recordSlug } from '@/components/climate/recordSlug';
 
 export function cartoonSlug(cartoon) {
-  const words = String(cartoon?.title || cartoon?.artist_name || 'drawing')
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/['’]/g, '')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim()
-    .split(' ')
-    .filter(Boolean);
-  const kept = [];
-  let length = 0;
-  for (const word of words) {
-    if (length + word.length + 1 > MAX) break;
-    kept.push(word);
-    length += word.length + 1;
-  }
-  return kept.join('-') || 'drawing';
+  return recordSlug(cartoon?.title || cartoon?.artist_name || 'drawing', 34);
 }

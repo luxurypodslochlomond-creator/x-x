@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Share2, Check } from 'lucide-react';
 import { buildWireShareCard } from './shareCardImage';
 import { recordAddress, recordOrigin } from './recordAddress';
+import { wireAddress } from './recordSlug';
 
 // The preview and its dialog tools are only needed after a card has been made.
 const ShareCardPreview = lazy(() => import('@/components/climate/ShareCardPreview'));
@@ -22,7 +23,9 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const [warm, setWarm] = useState(null);
-  const link = givenLink || (build === buildWireShareCard && entry.id ? recordAddress(`/ClimateWireEntry/${entry.id}`) : recordAddress());
+  // The card carries the entry's own name, not its id: a card is the thing that gets sent
+  // on, so the address printed on it has to be one a person can read and type back.
+  const link = givenLink || (build === buildWireShareCard && entry.id ? recordAddress(wireAddress(entry)) : recordAddress());
   // A drawing is known by the hand that made it, so a card carrying one is introduced by the
   // artist's name rather than by the record's own title.
   const title = entry.headline || entry.title || entry.artist_name || 'Record of the time';

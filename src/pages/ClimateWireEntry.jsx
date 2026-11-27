@@ -7,6 +7,7 @@ import '@/components/climate/wire-mobile.css';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import NewsEntryBody from '@/components/climate/NewsEntryBody';
 import { recordAddress } from '@/components/climate/recordAddress';
+import { wireAddress } from '@/components/climate/recordSlug';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import TapToPlayFilm from '@/components/climate/TapToPlayFilm';
 import recordKindOf from '@/components/climate/recordKinds';
@@ -14,8 +15,11 @@ import recordKindOf from '@/components/climate/recordKinds';
 // One entry on its own permanent address. A researcher cites this page, not the front
 // page, so the entry, its source and how well it is known all travel together in the link.
 
-export default function ClimateWireEntry() {
-  const { id } = useParams();
+export default function ClimateWireEntry({ id: idProp }) {
+  // The short door (/wire/…) resolves the entry and hands it in here, so the record keeps
+  // one account page rather than a second copy of one.
+  const { id: idParam } = useParams();
+  const id = idProp || idParam;
   const [entry, setEntry] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +45,7 @@ export default function ClimateWireEntry() {
   }, [entry]);
 
   const citation = entry
-    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — an entry on the record, ${entry.when_label}. ${recordAddress()}`
+    ? `${entry.source_name}. "${entry.headline}" Together We Can Change Climate — an entry on the record, ${entry.when_label}. ${recordAddress(wireAddress(entry))}`
     : '';
 
   return (
