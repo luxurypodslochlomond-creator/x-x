@@ -87,7 +87,13 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
               of times an entry was opened, and the plate says so plainly underneath. The
               stored value and the mode's own name are untouched — only the word a reader
               sees has changed. */}
-          Times opened
+          {/* ── AND "TIMES OPENED" STILL SOUNDED LIKE A SCOREBOARD ──────────────────
+              Brian, 27 November, one line later: "sure times opened right bro sounds like
+              counting and social media extraction". Right again, and it is the same fault
+              one layer down: a heading built round a number reads as a metric, and a metric
+              is what a platform takes off people. The subject of this layer was never the
+              number — it is the place. So the place leads now, and the count follows it. */}
+          Where it was opened
         </button>
       </div>
     </div>

@@ -137,7 +137,7 @@ export default function ClimateReachPlace() {
                     {s.title}
                   </p>
                   <p className="record-meta text-[#5a5246]">
-                    <span className="font-black text-[#b3261e]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'read' : 'reads'} from {displayName}
+                    <span className="font-black text-[#b3261e]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'opening' : 'openings'} from {displayName}
                   </p>
                 </Link>
               </motion.div>
@@ -148,7 +148,7 @@ export default function ClimateReachPlace() {
         <div className="px-5 lg:px-10 py-16 text-center">
           <Eye className="w-12 h-12 text-[#5a5246] mx-auto mb-4" />
           <p className="text-[13px] font-mono text-[#5a5246] leading-relaxed max-w-[300px] mx-auto">
-            No stories have reached {displayName} yet. When someone here reads the record, the stories they read will appear on this page.
+            No stories have reached {displayName} yet. When someone here opens the record, what they opened appears on this page — never who they were.
           </p>
           <Link to={createPageUrl('TogetherChangeClimate')} className="mt-6 inline-block px-5 py-3 bg-[#141210] text-[#efe7d6] text-[11px] font-black font-mono uppercase border-2 border-[#141210] active:bg-[#e2602a] active:text-[#141210] transition-colors">
             Read the record

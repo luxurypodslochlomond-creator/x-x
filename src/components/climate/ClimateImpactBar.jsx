@@ -30,7 +30,7 @@ export default function ClimateImpactBar() {
           <>Reads could not be counted from here just now<span className="text-[#e2602a]/60 ml-1">→</span></>
         ) : views > 0 ? (
           <>
-            <span className="font-black text-[#e2602a]">{views}</span> {views === 1 ? 'read' : 'reads'} of the record, from{' '}
+            <span className="font-black text-[#e2602a]">{views}</span> {views === 1 ? 'opening' : 'openings'} of the record, from{' '}
             <span className="font-black text-[#e2602a]">{countries}</span> {countries === 1 ? 'country' : 'countries'}
             <span className="text-[#e2602a]/60 ml-1">→</span>
           </>

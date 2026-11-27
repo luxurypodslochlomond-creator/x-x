@@ -55,7 +55,7 @@ export default function ImpactWorldMap({ stats }) {
         <div className="flex items-center gap-3 text-[9px] font-mono font-bold uppercase tracking-[0.1em] text-[#141210]">
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#b3261e' }} />Country</span>
           <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{ background: '#0f5f7a' }} />Nation</span>
-          <span className="text-[#5a5246] normal-case">bigger dot · more reads</span>
+          <span className="text-[#5a5246] normal-case">bigger dot · more openings</span>
         </div>
       </div>
 

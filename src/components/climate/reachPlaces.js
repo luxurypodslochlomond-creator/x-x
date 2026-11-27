@@ -55,7 +55,9 @@ export function reachPlaces(data) {
         dx,
         dy,
         size: readDot(r.views),
-        reads: `${r.views.toLocaleString()} ${r.views === 1 ? 'read' : 'reads'}`,
+        // "Reads" was the newspaper's word for how many people read something, which this
+        // count cannot honestly say. It counts openings, so it says openings.
+        reads: `${r.views.toLocaleString()} ${r.views === 1 ? 'opening' : 'openings'}`,
       };
     })
     .filter(Boolean);

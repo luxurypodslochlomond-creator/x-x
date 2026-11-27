@@ -75,7 +75,7 @@ export default function WorldReadingFeed({ stories }) {
               <p className="record-meta text-[#5a5246]">
                 Reaching <span className="font-black text-[#b3261e]">{s.countries}</span> {s.countries === 1 ? 'country' : 'countries'}
                 <span className="text-[#141210]/30 mx-1.5">·</span>
-                <span className="font-black text-[#141210]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'read' : 'reads'}
+                <span className="font-black text-[#141210]">{s.readers.toLocaleString()}</span> {s.readers === 1 ? 'opening' : 'openings'}
               </p>
             </Link>
           </motion.div>

@@ -135,11 +135,11 @@ export default function RecordReachEarth() {
                 {(picked.views || 0).toLocaleString()}
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-record-bone/70">
-                {picked.views === 1 ? 'read' : 'reads'}
+                {picked.views === 1 ? 'opening' : 'openings'}
               </span>
             </p>
             <p className="mt-1 max-w-[62ch] font-mono text-[10px] leading-relaxed text-record-bone/60">
-              A read is one entry opened. No account, no cookie, no address, no name. The
+              One opening is one entry opened. No account, no cookie, no address, no name. The
               place is where a reader’s own device or their own words say they are — never
               a precise location, and never proof of what a particular reader thought.
             </p>
