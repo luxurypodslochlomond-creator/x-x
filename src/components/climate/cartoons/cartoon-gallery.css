@@ -56,6 +56,10 @@
 .cartoon-byline span { font-weight: 400; color: rgb(var(--record-muted)); }
 .record-pages .cartoon-room .cartoon-caption h3 { margin: .45rem 0 .7rem; font-size: 1.55rem; letter-spacing: -.035em !important; line-height: 1.13 !important; }
 .record-pages .cartoon-room .cartoon-own-words { font-size: .91rem; line-height: 1.65; font-weight: 400; max-inline-size: 52ch; }
+/* Who the hand is, in the sender's own words. Smaller and quieter than the drawing's own
+   line, because it is about the person rather than the picture — and absent on most
+   drawings, which is the point: nothing is invented to fill it. */
+.record-pages .cartoon-room .cartoon-who-line { font-size: .82rem; line-height: 1.6; font-weight: 400; color: rgb(var(--record-muted)); max-inline-size: 52ch; margin: 0 0 .7rem; }
 .cartoon-provenance { margin-top: 1rem; padding-top: .7rem; border-top: 1px solid rgb(var(--record-ink) / .16); }
 .record-pages .cartoon-room .cartoon-provenance p { font-size: .66rem; line-height: 1.5; color: rgb(var(--record-muted)); }
 .cartoon-source { display: inline-flex; align-items: center; min-height: 2.75rem; font-size: .72rem; font-weight: 700; text-decoration: underline; }

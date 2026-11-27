@@ -1,6 +1,7 @@
 import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTongue';
+import { readingsFor } from '@/components/climate/cartoons/cartoonGoals';
 
 // ── ONE DRAWING, AS A CARD ────────────────────────────────────────────────────
 // A drawing travels out of this room as a screenshot with its artist cut off, and that is
@@ -171,6 +172,38 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
     ctx.fillText(fit(ctx, cartoon.origin, MAXW), edge, y);
   }
 
+  // ── WHO HOLDS IT, ON THE CARD TOO ────────────────────────────────────────────
+  // The card carried the artist and the origin but not the credit, so a drawing shared out
+  // of this room arrived with the copyright line stripped off it — the one line a holder
+  // asked to be kept beside the work. It travels now, wrapped to two lines.
+  if (cartoon.credit) {
+    y += 26;
+    ctx.fillStyle = MUTED;
+    ctx.font = `400 17px ${MONO}`;
+    const creditLines = wrapLines(ctx, cartoon.credit, MAXW, 2);
+    creditLines.forEach((line, i) => ctx.fillText(line, edge, y + i * 22));
+    y += (creditLines.length - 1) * 22;
+  }
+
+  // ── AND WHAT THE ROOM READ IT ONTO ───────────────────────────────────────────
+  // A picture sent into a chat used to arrive with no argument attached. The goal it was
+  // read against travels with it, in the record's red. The reason for that reading is
+  // printed in full beside the drawing in the room — which is where the address on this
+  // card leads — so the card names the claim and the room carries the proof. Never a badge
+  // with nothing behind it.
+  const readings = readingsFor(cartoon.title);
+  const reading = readings.length === 1
+    ? `READ ONTO GOAL ${readings[0].n} · ${readings[0].name}`
+    : readings.length
+    ? `READ ONTO GOALS ${readings.map((r) => r.n).join(' AND ')}`
+    : '';
+  if (reading) {
+    y += 34;
+    ctx.fillStyle = MARK;
+    ctx.font = `700 17px ${MONO}`;
+    ctx.fillText(fit(ctx, reading, MAXW), edge, y);
+  }
+
   // The drawer's own words, quoted exactly, in whatever tongue they wrote them.
   const own = String(cartoon.for_line || '').trim();
   if (own) {
@@ -183,8 +216,11 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
     // Three lines, not four: the taller art area took the room the fourth line needed, and
     // the drawer's sentence is more use to a reader as three lines and an ellipsis than as
     // four lines printed over the footer.
-    const lines = wrapLines(ctx, own, MAXW - 34, 3);
-    const top = y + 54;
+    // Three lines at most, and fewer when the credit and the reading have taken the room:
+    // counted from the space actually left, rather than assumed to still be there.
+    const top = y + 46;
+    const room = Math.max(1, Math.floor((FOOTER_TOP - 30 - top) / 38) + 1);
+    const lines = wrapLines(ctx, own, MAXW - 34, Math.min(3, room));
     ctx.fillStyle = MARK;
     ctx.fillRect(ownRtl ? W - PAD + 12 : PAD - 28, top - 24, 5, lines.length * 38 + 6);
     ctx.fillStyle = 'rgba(20,18,16,0.9)';

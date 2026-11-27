@@ -23,6 +23,10 @@
       "type": "string",
       "description": "One line, in the drawer's own words, on what the drawing is for. The record never writes this for them and never corrects it."
     },
+    "who_line": {
+      "type": "string",
+      "description": "Who the hand is, in the words of whoever sent the drawing in \u2014 a sentence or two, quoted, printed under the drawing so a reader is never shown a name and told nothing about it. Kept apart from for_line because this is not the drawer speaking about the drawing: it is the sender's account of the artist, and the wall shows exactly what was given. Empty wherever nobody said who the hand is, which is most drawings, and the wall then says nothing rather than writing a biography the record was not given. Never a profile page: a line, under one picture, for the picture's sake."
+    },
     "image_url": {
       "type": "string",
       "description": "The drawing itself, stored publicly so the wall can show it to anyone without a sign-in. Shrunk in the browser before it was stored, so it opens fast on a phone at a workshop."

@@ -150,4 +150,11 @@ export const GOALS = [
 // looked up from this table rather than copied into the record.
 export const goalByNumber = (n) => GOALS.find((g) => g.n === Number(n)) || null;
 
+// Every goal the record has read one drawing onto, in goal order. Used where a drawing
+// travels on its own — a card sent into a chat has to say what the room placed it against,
+// or the picture arrives with no argument attached.
+export const readingsFor = (title) => GOALS
+  .map((g) => ({ n: g.n, name: g.name, why: (g.drawings.find((d) => d.title === title) || {}).why }))
+  .filter((r) => r.why);
+
 export const UNPLACED = ['Hidden in Plain Sight'];

@@ -6,7 +6,7 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 import { goalByNumber } from '@/components/climate/cartoons/cartoonGoals';
 
 export default function CartoonCaption({ cartoon, instant = false }) {
-  const { title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title, goal } = cartoon;
+  const { title, artist_name, origin, for_line, who_line, credit, source_url, crisis_id, crisis_title, goal } = cartoon;
   // A drawing offered from a goal's own panel says so where it hangs, in the goal's own name,
   // and points at the goal's own page — the same shape as the line above it for a crisis.
   const goalEntry = goal ? goalByNumber(goal) : null;
@@ -14,6 +14,10 @@ export default function CartoonCaption({ cartoon, instant = false }) {
     <figcaption className="cartoon-caption">
       <p className="cartoon-byline record-meta">{artist_name}{origin && <span> · {origin}</span>}</p>
       {title && <h3>{title}</h3>}
+      {/* Who the hand is, in the sender's own words, where the sender gave one. A line under
+          one picture, never a profile page: most hands send nothing here, and the wall then
+          says nothing rather than writing a biography nobody gave it. */}
+      {who_line && <p className="cartoon-who-line record-meta" dir="auto">{who_line}</p>}
       {for_line && <p className="cartoon-own-words record-meta" dir="auto">{for_line}</p>}
       {crisis_id && <Link className="cartoon-source" to={`/ClimateDetail/climate_crisis/${crisis_id}`}>Drawn about: {crisis_title || 'an entry on the record'} ↗</Link>}
       {goalEntry && (
