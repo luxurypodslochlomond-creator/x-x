@@ -2,6 +2,7 @@ import { loadRecordCardFonts } from '@/components/climate/recordTypography';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTongue';
 import { readingsFor } from '@/components/climate/cartoons/cartoonGoals';
+import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 
 // ── ONE DRAWING, AS A CARD ────────────────────────────────────────────────────
 // A drawing travels out of this room as a screenshot with its artist cut off, and that is
@@ -242,7 +243,13 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
   ctx.textAlign = rtl ? 'right' : 'left';
   ctx.fillStyle = BONE;
   ctx.font = `700 18px ${MONO}`;
-  ctx.fillText(fit(ctx, `${origin}/ClimateCartoons`, MAXW), edge, FOOTER_TOP + 100);
+  // ── THE ADDRESS ON THE PICTURE IS THE DRAWING'S OWN ──────────────────────────
+  // It printed the room — /ClimateCartoons — while the link that travelled beside it
+  // pointed at the drawing, so a card and the message it arrived in disagreed about where
+  // the thing lives. It prints the drawing's own short door now, the same address the room
+  // and the print sheet already give: /w/rain-check, which a person can read off the card
+  // and type back.
+  ctx.fillText(fit(ctx, `${origin}/w/${cartoonSlug(cartoon)}`, MAXW), edge, FOOTER_TOP + 100);
 
   // Signal edge, drawn last so it stays on top of the picture.
   ctx.fillStyle = SIGNAL;

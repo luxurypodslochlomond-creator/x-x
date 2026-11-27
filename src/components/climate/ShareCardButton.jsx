@@ -24,7 +24,7 @@ const ShareCardPreview = lazy(() => import('@/components/climate/ShareCardPrevie
 // further, with every app on the phone in it. Nothing is lost; the doors are no longer
 // hidden behind a device that happens to accept a file.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, icon: GivenIcon, previewFirst = false, instant = false, inline = false, includeMessage = false }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, icon: GivenIcon, previewFirst = false, instant = false, inline = false, includeMessage = false, windowTitle, alt }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const [warm, setWarm] = useState(null);
@@ -35,7 +35,10 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   // artist's name rather than by the record's own title.
   const title = entry.headline || entry.title || entry.artist_name || 'Record of the time';
   const description = givenDescription || entry.summary || entry.description || entry.what_changed || '';
-  const text = [title, description, entry.image_credit, link].filter(Boolean).join('\n');
+  // The credit travels with the words, whichever field it is kept in: a photograph's credit
+  // lives in image_credit, a drawing's in credit, and a drawing sent out with its holder's
+  // line stripped off is the one thing this record must never do.
+  const text = [title, description, entry.image_credit || entry.credit, link].filter(Boolean).join('\n');
 
   const prepare = async () => {
     const blob = await build(entry, { origin: recordOrigin() });
@@ -76,7 +79,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
     </button>
     {state === 'error' && <span className="record-share-error" role="alert">The image could not be prepared. Please try again.</span>}
     {card && <Suspense fallback={<span role="status" className="text-sm text-record-muted">Preparing image…</span>}>
-      <ShareCardPreview open onClose={() => setCard(null)} blob={card.blob} fileName={card.fileName} link={link} headline={title} text={text} credit={entry.image_credit} includeMessage={includeMessage} />
+      <ShareCardPreview open onClose={() => setCard(null)} blob={card.blob} fileName={card.fileName} link={link} headline={title} text={text} credit={entry.image_credit || entry.credit} includeMessage={includeMessage} windowTitle={windowTitle} alt={alt} />
     </Suspense>}
   </>;
 }

@@ -27,6 +27,9 @@ export default function CartoonEventShare() {
         description={CARTOON_EVENT.shareLine}
         icon={InkArrow}
         previewFirst
+        includeMessage
+        windowTitle="Share the room"
+        alt="The cover of the African Cartoon Biennial book, drawn by Francis Umendu Odupute"
       />
       {/* The dates and the place, under the plate, in the record's small voice: whoever
           passes this on should know what they are passing on before they pass it. */}

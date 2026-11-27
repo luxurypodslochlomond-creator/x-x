@@ -44,7 +44,18 @@ export default function RecordHomeVoice({ copy }) {
             world on every device. */}
         <div className="record-home-pass mt-3">
           <span className="record-header-type text-xs uppercase tracking-[0.12em] text-record-bone">{copy.service}</span>
-          <ShareCardButton entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }} build={buildRecordShareCard} link={RECORD_LINK} description={RECORD_SHARE_LINE} label="Share the record" instant includeMessage inline />
+          <ShareCardButton
+            entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }}
+            build={buildRecordShareCard}
+            link={RECORD_LINK}
+            description={RECORD_SHARE_LINE}
+            label="Share the record"
+            instant
+            includeMessage
+            inline
+            windowTitle="Share the record"
+            alt="The record’s painting: the living Earth beneath a star-filled sky"
+          />
         </div>
       </div>
     </section>

@@ -65,7 +65,7 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
         that is not allowed to open the share sheet — the words are offered as a quiet line
         instead of the heaviest object in the window, because a button that offers words
         under a painting is the thing that made it feel wrong. */}
-    {canShareImage && <button type="button" onClick={share} className="flex min-h-12 items-center justify-center gap-2 rounded bg-record-ink px-4 text-sm font-bold text-record-paper"><Share2 size={18} />{includeMessage ? 'Share painting + words' : 'Share image'}</button>}
+    {canShareImage && <button type="button" onClick={share} className="flex min-h-12 items-center justify-center gap-2 rounded bg-record-ink px-4 text-sm font-bold text-record-paper"><Share2 size={18} />{includeMessage ? 'Share picture + words' : 'Share image'}</button>}
 
     <div className="flex flex-wrap items-center justify-center gap-x-5">
       <a href={imageUrl || undefined} download={fileName} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Download size={15} className="shrink-0" />Save image</a>

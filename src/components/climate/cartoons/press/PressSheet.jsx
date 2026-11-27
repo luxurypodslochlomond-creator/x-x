@@ -4,6 +4,7 @@ import CartoonArtwork from '@/components/climate/cartoons/CartoonArtwork';
 import cartoonSubject from '@/components/climate/cartoons/cartoonSubjects';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildDrawingShareCard, drawingShareLine } from '@/components/climate/cartoons/drawingCard';
+import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 import { recordOrigin } from '@/components/climate/recordAddress';
 
 // ── ONE DRAWING, GIVEN THE PAGE ────────────────────────────────────────────────
@@ -54,7 +55,10 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
             build={buildDrawingShareCard}
             label="Share this drawing"
             description={drawingShareLine(cartoon)}
-            link={`${recordOrigin()}/ClimateCartoons?drawing=${cartoon.id}`}
+            includeMessage
+            windowTitle="Share this drawing"
+            alt={cartoon.title ? `${cartoon.title}, drawn by ${cartoon.artist_name}` : `A drawing by ${cartoon.artist_name}`}
+            link={`${recordOrigin()}/w/${cartoonSlug(cartoon)}`}
           />
         </div>
         {crisis_id && (
