@@ -22,24 +22,31 @@
   .marks-plate:not(.marks-plate--fitted) .marks-plate-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
 }
 
-/* The phone opens on the entire plate. Selection never moves or replaces the grid. */
+/* ── THE DRAWING IS THE ONE THING THAT CANNOT BE ALLOWED TO SHRINK ───────────────
+   On 27 November this grid sized each drawing with flex: 1 1 0% and min-height: 0, which
+   was harmless while a phone printed no names. The moment every cell carried a name, the
+   name took the height first and the drawing — with a basis of zero — collapsed to nothing.
+   The plate went up looking like a list of words with empty squares beside them, and Brian,
+   opening it: "coolasfuck symbols gone."
+   So the drawing now has a fixed height of its own, the rows are as tall as their contents,
+   and if the whole plate is taller than the sheet it scrolls rather than shrinking a mark.
+   A drawing at a set size cannot disappear because a name got long. */
 .marks-plate--fitted { display: flex; flex-direction: column; flex: 1; height: 100%; min-height: 0; }
-.marks-plate--fitted .marks-plate-grid { flex: 1 1 0%; min-height: 0; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); }
-.marks-plate--fitted .marks-plate-cell { aspect-ratio: auto; flex-direction: column; min-width: 0; min-height: 44px; gap: 4px; padding: 5px 2px; }
-.marks-plate--fitted .marks-plate-art { flex: 1 1 0%; min-height: 0; width: min(72%, 64px); max-height: 60px; }
+.marks-plate--fitted .marks-plate-grid { flex: none; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: auto; }
+.marks-plate--fitted .marks-plate-cell { aspect-ratio: auto; flex-direction: column; min-width: 0; gap: 3px; padding: 7px 2px; }
+.marks-plate--fitted .marks-plate-art { flex: none; width: 38px; height: 38px; }
 .marks-plate-name { display: block; flex: none; max-width: 100%; font-size: 11px; line-height: 1.15; text-align: center; }
-.marks-plate--fitted .marks-plate-caption { flex: none; height: 8.25rem; min-height: 8.25rem; }
-.rec-doors-body--marks { display: flex; overflow: hidden; scrollbar-gutter: auto; }
+.marks-plate--fitted .marks-plate-name { font-size: 10px; }
+.marks-plate--fitted .marks-plate-caption { flex: none; margin-top: auto; }
+.rec-doors-body--marks { display: flex; overflow-x: hidden; overflow-y: auto; scrollbar-gutter: auto; }
 
 /* A wide, short handset gets the same 24 marks in four rows instead of six. */
 @media (max-height: 600px) and (min-width: 480px) {
-  .marks-plate--fitted .marks-plate-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); }
-  .marks-plate--fitted .marks-plate-caption { height: 7rem; min-height: 7rem; }
+  .marks-plate--fitted .marks-plate-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 }
-/* Respect enlarged text and very short windows without hiding a mark or its caption. */
+/* Respect enlarged text and very short windows: the plate keeps its real size and scrolls. */
 @media (max-height: 540px) and (max-width: 479px), (max-height: 430px) and (min-width: 480px) {
-  .rec-doors-body--marks { overflow-y: auto; }
-  .marks-plate--fitted { height: auto; min-height: 440px; }
+  .marks-plate--fitted { height: auto; }
 }
 @media (min-width: 640px) and (max-width: 1023px) {
   .rec-doors .rec-doors-plate { height: 92dvh !important; }
