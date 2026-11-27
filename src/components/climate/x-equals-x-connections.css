@@ -43,6 +43,7 @@
 #x-equals-x .covenant-three-name { display: block; font-size: 1.15rem; font-weight: 800; letter-spacing: -.025em; }
 #x-equals-x .covenant-three-question { display: block; margin-top: .18rem; color: rgb(var(--record-red)); font-size: .82rem; font-weight: 700; }
 #x-equals-x .covenant-three p { margin-top: .45rem; font-size: .92rem !important; }
+#x-equals-x .covenant-three-plain { display: block; margin-top: .4rem; color: rgb(var(--record-muted)); font-family: ui-monospace, monospace; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; }
 #x-equals-x .covenant-arrangement-line { margin-top: 1.5rem; font-family: var(--font-display); font-size: clamp(1.2rem, 4.4vw, 1.7rem) !important; line-height: 1.25 !important; letter-spacing: -.03em; font-weight: 800; }
 #x-equals-x .covenant-arrangement-drawings { margin-top: 1.1rem; }
 #x-equals-x .covenant-platform-part { margin-top: 1.5rem; padding: 1.2rem 1.15rem; background: rgb(var(--record-bone)); border-top: 3px solid rgb(var(--record-mark)); }
