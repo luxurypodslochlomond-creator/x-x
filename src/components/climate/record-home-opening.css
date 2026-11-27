@@ -31,6 +31,10 @@ html .climate-record.record-home-field .record-book {
 /* The ask wears the record's own signal plate, so it reads as a door rather than small print. */
 .record-home-page .record-home-pass .record-share-inline {
   min-height: 44px;
+  /* The label becomes "Preparing image…" for a moment, and a plate that changes width
+     drags the row sideways under the thumb that just pressed it. One fixed width, and the
+     plate stays exactly where the finger left it. */
+  min-width: 12.5rem;
   padding: .55rem 1rem;
   border: 0;
   border-radius: 2px;

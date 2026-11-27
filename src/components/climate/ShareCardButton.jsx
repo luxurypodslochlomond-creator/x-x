@@ -7,17 +7,22 @@ import { wireAddress } from './recordSlug';
 // The preview and its dialog tools are only needed after a card has been made.
 const ShareCardPreview = lazy(() => import('@/components/climate/ShareCardPreview'));
 
-// ── ONE TAP, AND THE PLATE IS ALREADY IN THE PHONE'S HAND ────────────────────
-// Brian, 27 November: "one coolasfuck share… instant". The card used to be drawn after
-// the tap and then a window opened to show it — so passing the record on meant reading a
-// second screen first, which is the opposite of passing something on.
+// ── ONE DOOR, THE SAME ON EVERY SCREEN ───────────────────────────────────────
+// Brian, 27 November, looking at the live app: "sharing coolasfuck not working right on
+// live… we don't get this… to all the destinations you mentioned."
 //
-// With `instant` the plate is drawn while the page is standing still, so by the time a
-// thumb reaches the mark there is a finished picture waiting. The tap then opens the
-// phone's own share sheet inside the gesture — no await before it, which is what a browser
-// requires — and the picture goes wherever that person already sends things. The window is
-// not gone: it opens when the device will not take a file, which is a desk, or an app's own
-// browser, and there the words, the named doors and the code are all still one tap away.
+// He had found a real fault, and it was ours. This button used to hand the phone's own
+// share sheet the picture straight from the tap, and open the window only when the device
+// refused a file. That is lovely on a handset and it quietly deleted everything else: the
+// named doors, the code, the words — all of it lived in the window, and on live the window
+// never opened. Two different experiences from one button, and the richer one was the one
+// nobody saw.
+//
+// So the window is the share now, everywhere, on preview and on live. `instant` still does
+// its work — the plate is drawn while the page is standing still, so the window opens on a
+// finished picture rather than a spinner — and the sheet still opens from inside it, one tap
+// further, with every app on the phone in it. Nothing is lost; the doors are no longer
+// hidden behind a device that happens to accept a file.
 
 export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, icon: GivenIcon, previewFirst = false, instant = false, inline = false, includeMessage = false }) {
   const [state, setState] = useState('idle');
@@ -50,31 +55,12 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [instant]);
 
-  const canTakeFile = (file) => !!(file && navigator.share && navigator.canShare?.({ files: [file] }));
-
+  // One path, on every device: the plate, then the window that holds every door.
   const share = async () => {
     if (state === 'building') return;
-    // The sheet opens inside the tap, with a plate that is already finished.
-    if (instant && canTakeFile(warm?.file)) {
-      try {
-        await navigator.share({ files: [warm.file], title, text });
-        setState('shared');
-        return;
-      } catch (error) {
-        if (error?.name === 'AbortError') { setState('idle'); return; }
-      }
-    }
     setState('building');
     try {
       const ready = warm || await prepare();
-      const wantsSheet = instant || !previewFirst;
-      if (wantsSheet && canTakeFile(ready.file)) {
-        try {
-          await navigator.share({ files: [ready.file], title, text });
-          setState('shared');
-          return;
-        } catch (error) { if (error?.name === 'AbortError') { setState('idle'); return; } }
-      }
       setCard({ blob: ready.blob, fileName: ready.fileName });
       setState('idle');
     } catch { setState('error'); }

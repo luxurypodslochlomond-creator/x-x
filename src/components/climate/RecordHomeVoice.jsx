@@ -1,7 +1,6 @@
 import React from 'react';
 import PeaceBell from '@/components/climate/PeaceBell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
-import PostToLinkedIn from '@/components/climate/PostToLinkedIn';
 import { buildRecordShareCard } from '@/components/climate/shareCardImage';
 import { RECORD_LINK, RECORD_SHARE_TITLE, RECORD_SHARE_LINE } from '@/components/climate/shareRecordCard';
 import '@/components/climate/record-home-opening.css';
@@ -33,16 +32,19 @@ export default function RecordHomeVoice({ copy }) {
           <span className="text-cartoon-sun">{copy.title_b}</span>{' '}
           {copy.title_c}
         </h1>
-        {/* ── TWO DOORS, BECAUSE THEY GO TO TWO DIFFERENT PLACES ────────────────────
-            The share mark hands the phone a picture. That is right for a chat and useless
-            for LinkedIn, whose app will not take a picture from a web page's share sheet —
-            which is why it never appeared in the list on Janine's phone at all. So the door
-            her peers actually use is named, beside it, and opens LinkedIn's own composer on
-            the record's address with the words already on the clipboard. See PostToLinkedIn. */}
+        {/* ── ONE DOOR, AND EVERY ROOM BEHIND IT ────────────────────────────────────
+            There were two yellow plates here, and the second one — "Post to LinkedIn" —
+            was a garish patch over a fault that belonged to the share itself: on live, the
+            share handed the phone's sheet a picture and the window (with the code, the words
+            and every named door, LinkedIn among them) never opened at all. Brian: "shouldn't
+            have LinkedIn big garish button like that… sharing needs to work when published."
+
+            He is right, so the patch is gone and the fault is mended where it lived. One
+            plate, and the window behind it carries LinkedIn, the code and the rest of the
+            world on every device. */}
         <div className="record-home-pass mt-3">
           <span className="record-header-type text-xs uppercase tracking-[0.12em] text-record-bone">{copy.service}</span>
           <ShareCardButton entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }} build={buildRecordShareCard} link={RECORD_LINK} description={RECORD_SHARE_LINE} label="Share the record" instant includeMessage inline />
-          <PostToLinkedIn />
         </div>
       </div>
     </section>
