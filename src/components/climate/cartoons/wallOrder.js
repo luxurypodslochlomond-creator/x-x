@@ -22,11 +22,16 @@ export const WALL_ORDER = [
   // line out (and the drawing off the wall) once he sends the real one with his own line.
   'Urbanisation and Sanitation…',
   // ── FRANCIS'S CAMPAIGN, HANGING BEHIND HIS OWN DRAWING ───────────────────────
-  // The CAIB SDG cartoon campaign is why this room exists, so the two drawings he gathered
-  // for it from Paul Monthe hang immediately behind his own test drawing, in the order he
-  // sent them: the Bafoussam poster first, then the one that asks the reader to plant.
+  // The CAIB SDG cartoon campaign is why this room exists, so the drawings he gathers for it
+  // hang immediately behind his own test drawing, in the order he sends them: the Bafoussam
+  // poster first, then the one that asks the reader to plant, then Mushi Mushi's three from
+  // Tanzania, which arrived numbered 1 to 3 and keep that numbering here. This block grows
+  // as he sends; the order below is his, not the record's.
   "Défenseurs de l'Environnement (Defenders of the Environment)",
   'Plant a Tree!',
+  'The Last Shade',
+  'Earth in ICU: The Only Medicine is a Tree',
+  'Cutting Our Own Home',
   // A comic is a different shape from a single frame, and it hangs last in Francis's block
   // on purpose: it is the one drawing in the room that argues with its reader for six
   // panels before it lets them go, so it closes the body rather than interrupting it.
