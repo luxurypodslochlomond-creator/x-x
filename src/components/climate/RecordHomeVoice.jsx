@@ -34,7 +34,7 @@ export default function RecordHomeVoice({ copy }) {
         </h1>
         <div className="record-home-pass mt-3">
           <span className="record-header-type text-xs uppercase tracking-[0.12em] text-record-bone">{copy.service}</span>
-          <ShareCardButton entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }} build={buildRecordShareCard} link={RECORD_LINK} description={RECORD_SHARE_LINE} label="Share the record" previewFirst includeMessage inline />
+          <ShareCardButton entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }} build={buildRecordShareCard} link={RECORD_LINK} description={RECORD_SHARE_LINE} label="Share the record" instant includeMessage inline />
         </div>
       </div>
     </section>

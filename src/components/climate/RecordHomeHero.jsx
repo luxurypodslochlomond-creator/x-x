@@ -35,7 +35,7 @@ export default function RecordHomeHero({ copy }) {
           build={buildRecordShareCard}
           link={RECORD_LINK}
           description={copy.sub}
-          previewFirst
+          instant
           inline
         />
       </div>
