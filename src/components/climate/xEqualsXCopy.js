@@ -16,8 +16,13 @@ export const COVENANT = {
 // for nothing, promises nothing it cannot keep, and does not mention the person who built
 // the record — the only ego it serves is the reader's, who gets to send somebody something
 // honest.
+// 27 November: "the description isn't doing it for me bro, not sure it feels relevant to
+// us". Fair — it read like a policy abstract. So it now says the thing the sign itself
+// says first: nobody above it, nobody below it, nothing taken from either side. That is
+// also the honest answer to why x = x is the opposite of an extraction model, and it is
+// said in the same breath as the limit, because the limit is what makes it trustworthy.
 export const COVENANT_SHARE =
-  'We are all one. Not equal evidence. The same standard for every claim: keep its source, name what is uncertain, show what changes. An editorial commitment, not a certificate of truth.';
+  'x = x. We are all one — nobody above the sign and nobody below it, and nothing taken from either side. Not equal evidence: every claim held to the same standard, its source kept, its uncertainty named, its corrections shown. An editorial commitment, not a certificate of truth.';
 
 export const COVENANT_TERMS = [
   {

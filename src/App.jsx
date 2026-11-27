@@ -692,7 +692,12 @@ const AuthenticatedApp = () => {
           x = x cannot be a domain: an equals sign is not allowed in one. It can be a path,
           and it should be, because the mark is the record's own name and a reader who has
           heard it should be able to type it and arrive. uf51.love/x=x opens the record. */}
-      <Route path="/x=x" element={<Navigate to="/TogetherChangeClimate" replace />} />
+      {/* ── THE MARK'S OWN ADDRESS OPENS THE MARK'S OWN PAGE ──────────────────────
+          Brian, 27 November: "x = x page not connected linked anywhere bri, feels not
+          right". He was feeling a real fault: typing the record's own name arrived at the
+          record's home, so the one address the mark has never once opened the page that
+          says what the mark means. It does now, and that page carries the doors onward. */}
+      <Route path="/x=x" element={<Navigate to="/XEqualsX" replace />} />
       {/* ── THE SHORT DOORS ──
           One address carries the identity (uf51.love/x=x); the rooms carry the content, and
           they should be sayable out loud. "uf51.love/wire" is a sentence; "uf51.love/ClimateWire"
