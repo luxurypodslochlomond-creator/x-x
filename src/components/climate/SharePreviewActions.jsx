@@ -20,6 +20,7 @@ import ShareQr from '@/components/climate/ShareQr';
 // small labels and on x = x — so the eye finds the structure without being shouted at.
 export default function SharePreviewActions({ blob, fileName, link, headline, text, imageUrl, includeMessage }) {
   const [copied, setCopied] = useState(false);
+  const [pasted, setPasted] = useState(false);
   const [error, setError] = useState('');
   const file = blob && typeof File === 'function' ? new File([blob], fileName, { type: blob.type || 'image/png' }) : null;
   const canShareImage = !!(file && navigator.share && navigator.canShare?.({ files: [file] }));
@@ -33,19 +34,26 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
     setCopied(ok); setError(ok ? '' : 'Select and copy the words below.');
   };
   const share = async () => {
+    // ── WHATSAPP KEEPS THE PICTURE AND DROPS THE WORDS ────────────────────────
+    // Brian, 27 November, from a real chat: the card arrived in WhatsApp with no bio under
+    // it. Nothing here is broken — a phone cannot hand a file and a message over as one
+    // bubble, so iOS and Android send the picture and quietly leave the text behind. The
+    // facts are printed on the card for exactly that reason, and this puts the words on the
+    // clipboard at the same moment, so pasting them under the picture is one tap rather than
+    // a hunt through the page. It is started BEFORE the sheet opens and not awaited, so the
+    // clipboard write and the sheet both belong to the same tap — awaiting one would cost
+    // the other its permission.
+    const words = canShareImage && includeMessage ? copyText(text).catch(() => false) : Promise.resolve(false);
     try {
       await navigator.share(canShareImage ? { files: [file], title: headline, text: text || link } : { title: headline, text: text || link });
       setError('');
+      setPasted(await words);
     } catch (err) {
       if (err.name !== 'AbortError') setError('This browser could not open the share sheet. Save the image and copy the words instead.');
     }
   };
 
-  return <div className="space-y-2.5">
-    {includeMessage && (
-      <p className="whitespace-pre-line border-l-2 border-record-signal pl-3 text-sm leading-relaxed text-record-ink">{text}</p>
-    )}
-
+  return <div className="space-y-3">
     {/* ── THE STAMP COMES FIRST ──────────────────────────────────────────────
         "Get this is too much bro, need to scroll to see QR code." He was right, and the
         reason was an inversion: the code sat last, under the longest list, when it is the
@@ -67,20 +75,35 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
         under a painting is the thing that made it feel wrong. */}
     {canShareImage && <button type="button" onClick={share} className="flex min-h-12 items-center justify-center gap-2 rounded bg-record-ink px-4 text-sm font-bold text-record-paper"><Share2 size={18} />{includeMessage ? 'Share picture + words' : 'Share image'}</button>}
 
+    {/* Said only once it has happened, and in the record's own voice: a phone cannot hand a
+        picture and a message over as one bubble, so the words are already on the clipboard
+        and one paste puts them under the picture. No blame, no apology, just the next move. */}
+    {pasted && <p className="border-l-2 border-record-signal pl-3 text-[12px] leading-snug text-record-ink" role="status">Picture sent. The words are on your clipboard — paste them under it, because a chat drops the message when a picture travels with it.</p>}
+
     <div className="flex flex-wrap items-center justify-center gap-x-5">
       <a href={imageUrl || undefined} download={fileName} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Download size={15} className="shrink-0" />Save image</a>
       <button type="button" onClick={copy} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4">{copied ? <Check size={15} className="shrink-0" /> : <Copy size={15} className="shrink-0" />}{copied ? 'Copied' : includeMessage ? 'Copy words + link' : 'Copy link'}</button>
       {!canShareImage && canShareText && <button type="button" onClick={share} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Share2 size={15} className="shrink-0" />Send words + link</button>}
     </div>
 
-    {/* Everything else waits behind one line, so the things a person actually does are all
-        above the fold on a phone. Nothing is removed; nothing is hunted for. */}
-    <details className="border-t border-record-ink/15 pt-3">
-      <summary className="cursor-pointer text-xs font-bold text-record-ink">Everywhere else it can go</summary>
-      <div className="mt-3">
-        <ShareDestinations link={link} title={headline} message={message} />
+    {/* ── EVERY DOOR, WITHOUT HUNTING ─────────────────────────────────────────
+        Brian, 27 November, on a phone: "need to scroll down to see who can share too — sms,
+        whats, linkedin… on desktop looks fine but mobile it's hard to get to everywhere
+        else." He was right, and it was two faults at once: the doors were folded behind a
+        line, and the longest thing in the window — the words themselves — stood above them,
+        so the thing a person came for was the last thing on the screen.
+        The words now sit at the foot, where reading them is a choice; the doors stand open
+        directly under the one black button. Nothing has been removed from this window. */}
+    <div className="border-t border-record-ink/15 pt-3">
+      <ShareDestinations link={link} title={headline} message={message} />
+    </div>
+
+    {includeMessage && (
+      <div className="border-t border-record-ink/15 pt-3">
+        <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-record-signal">The words that travel with it</p>
+        <p className="whitespace-pre-line text-sm leading-relaxed text-record-ink">{text}</p>
       </div>
-    </details>
+    )}
 
     {error && <><p className="text-sm text-record-red" role="alert">{error}</p><p className="whitespace-pre-line rounded border border-record-ink/20 p-3 text-xs">{message}</p></>}
   </div>;

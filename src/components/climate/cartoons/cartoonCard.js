@@ -118,4 +118,8 @@ export const CARTOON_CARD = {
   id: 'caib-2026-event',
   title: CARTOON_EVENT.biennial,
   image: CARTOON_COVER,
+  // The hand that drew the cover travels in the words as well as on the card: a chat that
+  // drops the message still has the picture, but a person who copies the words should not
+  // get a poster's title with the artist missing from it.
+  credit: CARTOON_EVENT.coverArt,
 };

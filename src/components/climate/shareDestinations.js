@@ -52,7 +52,7 @@ export const SHARE_GROUPS = [
       { name: 'QQ', href: ({ link, title }) => `https://connect.qq.com/widget/shareqq/index.html?url=${enc(link)}&title=${enc(title)}` },
       { name: 'Line', href: ({ link }) => `https://social-plugins.line.me/lineit/share?url=${enc(link)}` },
       { name: 'Mastodon', href: ({ link, title }) => `https://mastodon.social/share?text=${enc(`${title} ${link}`)}` },
-      { name: 'WeChat', href: null, how: 'scan the QR below' },
+      { name: 'WeChat', href: null, how: 'scan the QR above' },
       { name: 'KakaoTalk', href: null, how: 'the share sheet above' },
     ],
   },
