@@ -4,6 +4,8 @@ import { ArrowRight } from 'lucide-react';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXSignalBand from '@/components/climate/XEqualsXSignalBand';
 import XEqualsXWhyTheName from '@/components/climate/XEqualsXWhyTheName';
+import XEqualsXJanineStory from '@/components/climate/XEqualsXJanineStory';
+import XEqualsXCollective from '@/components/climate/XEqualsXCollective';
 import XEqualsXStand from '@/components/climate/XEqualsXStand';
 import XEqualsXOnRecord from '@/components/climate/XEqualsXOnRecord';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
@@ -15,16 +17,19 @@ import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { COVENANT_ENTRY, COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
 import '@/components/climate/x-equals-x-page.css';
+import '@/components/climate/x-equals-x-connections.css';
 
 export default function XEqualsX() {
   return (
     <div id="x-equals-x" className="covenant-page" data-record-technical>
       <XEqualsXOpening />
-      <XEqualsXSignalBand />
       <XEqualsXWhyTheName />
+      <XEqualsXJanineStory />
+      <XEqualsXCollective />
       <XEqualsXStand />
       <XEqualsXOnRecord />
       <XEqualsXPromises />
+      <XEqualsXSignalBand />
       <XEqualsXCheck />
       <XEqualsXClosing />
       <div className="covenant-close">

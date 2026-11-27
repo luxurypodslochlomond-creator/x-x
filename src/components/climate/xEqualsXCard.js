@@ -52,7 +52,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.fillRect(0, imageBottom, W, 7);
   g.fillStyle = muted;
   g.font = `400 22px ${sans}`;
-  g.fillText('Cover painting · made for this record with AI', W / 2, 985);
+  g.fillText('Cover painting · made for this record with BASE 1 (AI)', W / 2, 985);
   g.fillStyle = ink;
   g.font = `700 70px ${sans}`;
   g.fillText(COVENANT.title, W / 2, 1064);

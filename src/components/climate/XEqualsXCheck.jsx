@@ -3,17 +3,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 const DOORS = [
-  { title: 'Find the evidence.', body: 'Search crises, solutions and actions.', to: '/ClimateSearch' },
+  { title: 'Read the record.', body: 'Crises, solutions and actions, with their sources.', to: '/TogetherChangeClimate' },
+  { title: 'Open the Wall.', body: 'Cartoonists from Africa, Asia and beyond. Each hand named.', to: '/ClimateCartoons' },
+  { title: 'Follow the Wire.', body: 'Dated reports, with links to where they came from.', to: '/ClimateWire' },
+  { title: 'Hear the music.', body: 'Artists’ work. Pressed to play, never played at you.', to: '/ClimateMusic' },
   { title: 'Put work on the record.', body: 'Offer a source, a solution or an action.', to: '/TogetherChangeClimate?submit=1' },
-  { title: 'Bring a drawing.', body: 'The Wall. Your name stays on your work.', to: '/ClimateCartoons#cartoon-your-turn' },
-  { title: 'Help check it.', body: 'See what checking sources involves.', to: '/ClimateFellows' },
+  { title: 'Help check it.', body: 'Bring a careful pair of eyes. Learn what checking involves.', to: '/ClimateFellows' },
 ];
 
 export default function XEqualsXCheck() {
   return (
     <section id="checkable" className="covenant-use" aria-labelledby="ways-in">
-      <p className="covenant-kicker">Off the feed. Into the world.</p>
-      <h2 id="ways-in">Put it to work.</h2>
+      <p className="covenant-kicker">One record · many ways to take part</p>
+      <h2 id="ways-in">Find your way in.<br />Bring what you can.</h2>
       <ul className="covenant-doors">
         {DOORS.map(({ title, body, to }) => (
           <li key={to}>

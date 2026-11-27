@@ -21,10 +21,11 @@ export default function XEqualsXOpening() {
         <h1 id="why-this-record" className="covenant-title" translate="no" aria-label="x equals x">x=x</h1>
         <p className="covenant-front-line">{COVENANT.title}<br />{COVENANT.distinction}</p>
         <p className="covenant-purpose">{COVENANT.meaning}</p>
+        <p className="covenant-opening-intent">A place to turn what we know into what we do for one another.</p>
       </div>
       <figure className="covenant-painting">
         <img src={RECORD_COVER_SCREEN} width="1600" height="901" alt="The record’s cover painting: the living Earth beneath a luminous sky." loading="eager" decoding="async" />
-        <figcaption>Cover painting · made for this record with AI</figcaption>
+        <figcaption>Cover painting · made for this record with BASE 1 (AI)</figcaption>
       </figure>
       <div className="covenant-hero-actions">
         <Link to="/TogetherChangeClimate" className="covenant-btn">Open the record <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>

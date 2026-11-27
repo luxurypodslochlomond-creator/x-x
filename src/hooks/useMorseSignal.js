@@ -34,6 +34,7 @@ export default function useMorseSignal() {
   const timers = useRef([]);
   const [playing, setPlaying] = useState(false);
   const [lit, setLit] = useState(-1);
+  const [activeMark, setActiveMark] = useState(null);
 
   const clearTimers = useCallback(() => {
     timers.current.forEach((id) => clearTimeout(id));
@@ -67,8 +68,11 @@ export default function useMorseSignal() {
       const startsAt = at;
       timers.current.push(setTimeout(() => setLit(groupIndex), startsAt * 1000));
 
-      for (const mark of marks) {
+      for (const [markIndex, mark] of [...marks].entries()) {
         const length = mark === '-' ? DOT * 3 : DOT;
+        const key = `${groupIndex}:${markIndex}`;
+        timers.current.push(setTimeout(() => setActiveMark(key), at * 1000));
+        timers.current.push(setTimeout(() => setActiveMark(null), (at + length) * 1000));
 
         if (ctx) {
           const t = ctx.currentTime + at;
@@ -96,10 +100,11 @@ export default function useMorseSignal() {
     timers.current.push(
       setTimeout(() => {
         setLit(-1);
+        setActiveMark(null);
         setPlaying(false);
       }, at * 1000 + 120)
     );
   }, [playing, clearTimers]);
 
-  return { playing, lit, play };
+  return { playing, lit, activeMark, play };
 }

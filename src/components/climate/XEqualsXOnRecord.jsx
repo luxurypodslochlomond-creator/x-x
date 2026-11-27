@@ -20,14 +20,14 @@ export default function XEqualsXOnRecord() {
   return (
     <section className="covenant-onrecord" aria-labelledby="on-the-record">
       <div className="covenant-onrecord-inner">
-        <p className="covenant-kicker">Not a promise. What is on it.</p>
+        <p className="covenant-kicker">A record being made · not an audience being sold</p>
         <h2 id="on-the-record" className="sr-only">What is on the record now</h2>
         <dl className="covenant-onrecord-figures">
           <div><dt>Entries</dt><dd>{entries}</dd></div>
           <div><dt>Drawings</dt><dd>{drawings}</dd></div>
           <div><dt>Adverts or paid placements</dt><dd>0</dd></div>
         </dl>
-        <p className="covenant-onrecord-line">Every one with a source or an artist named beside it. Counted from the record itself, not from us.</p>
+        <p className="covenant-onrecord-line">Entry and drawing totals come from the published record. They count work, not impact. To judge the work, open its sources, credits and checking notes.</p>
       </div>
     </section>
   );

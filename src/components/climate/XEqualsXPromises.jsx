@@ -2,17 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PROMISES = [
-  { title: 'No engagement-ranked feed.', body: 'No advertising. No paid boosts. Browse by subject, not by likes.', to: '/ClimateMethod', link: 'The method' },
-  { title: 'Names stay on the work.', body: 'Sources, artists and credits travel with what you share.', to: '/ClimateCartoons', link: 'The Wall' },
-  { title: 'Changes leave a trace.', body: 'Read the corrections. Question the record, including us.', to: '/ClimateCorrections', link: 'The corrections' },
+  { title: 'Follow a claim to its source.', body: 'Read the original. Check what it actually supports, and what remains uncertain.', to: '/ClimateSearch', link: 'Search the evidence' },
+  { title: 'Read what we got wrong.', body: 'Corrections need a date and a reason. A changed mind should leave a visible trail.', to: '/ClimateCorrections', link: 'Read the corrections' },
+  { title: 'Check a saved version.', body: 'A digital seal can reveal a change to saved content. It cannot prove that the original claim was true.', to: '/ClimateSeals', link: 'Check the seals' },
+  { title: 'Inspect the rules, too.', body: 'No advertising or paid boosts. Sources and artists stay named. Read the commitments and their limits.', to: '/ExtractionProofCovenant', link: 'Read the commitments' },
 ];
 
 export default function XEqualsXPromises() {
   return (
     <section id="what-is-promised" className="covenant-rules" aria-labelledby="promised-heading">
-      <p className="covenant-kicker">What we do about it</p>
-      <h2 id="promised-heading">A platform is not a protest.<br />It is what people use between them.</h2>
-      <p className="covenant-rules-lead">We cannot rebuild the internet. We can make one corner of it work differently, in the open, where anyone can check us.</p>
+      <p className="covenant-kicker">Show the work · share the power</p>
+      <h2 id="promised-heading">Check the work.<br />Including ours.</h2>
+      <p className="covenant-rules-lead">A stand against extraction has to show its own workings. Do not believe a claim because it carries our mark. Follow it. Question it. Help correct it.</p>
       <ol className="covenant-rule-list">
         {PROMISES.map(({ title, body, to, link }, index) => (
           <li key={title}>
@@ -22,6 +23,7 @@ export default function XEqualsXPromises() {
           </li>
         ))}
       </ol>
+      <p className="covenant-proof-limit">Some early entries are unsigned. An automatic screening pass is not verification. <Link to="/ClimateMethod">The method names these gaps and who is accountable →</Link></p>
     </section>
   );
 }

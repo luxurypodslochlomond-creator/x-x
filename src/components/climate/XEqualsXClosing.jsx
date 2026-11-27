@@ -5,21 +5,28 @@ export default function XEqualsXClosing() {
   return (
     <section className="covenant-future" aria-labelledby="who-comes-after">
       <div className="covenant-future-inner">
-        <p className="covenant-kicker">Why it matters</p>
-        <h2 id="who-comes-after">For the people<br />who come after us.</h2>
-        <p>They deserve more than a history of what we scrolled past. They deserve the evidence, the warnings, and the work people did to change things.</p>
-        <p className="covenant-future-strong"><strong>A platform cannot do that work for us. It can help us do it together.</strong></p>
-        <p className="covenant-future-origin">
-          The record began with Janine Selendy’s lifetime of work on climate solutions. It is not a monument to it: it is built so the work outlives any one person.
-          <Link to="/ClimateFounder"> Her page →</Link>
-        </p>
+        <p className="covenant-kicker">For life · for one another · for what comes next</p>
+        <h2 id="who-comes-after">Leave more<br />than a warning.</h2>
+        <p>Leave the evidence. The drawing that made someone look again. The response that helped, and an honest account of where it did not.</p>
+        <p className="covenant-future-strong"><strong>A university, a village, a studio, a kitchen table. Different places to begin. The same planet to care for.</strong></p>
+        <p className="covenant-future-origin">We cannot claim to have changed the world by building a record. We can keep useful work within reach, and invite one another to put it to use.</p>
         <div className="covenant-inline-links">
           <Link to="/ClimateMethod">How the record works →</Link>
           <Link to="/ClimateSeals">Check a seal →</Link>
         </div>
       </div>
       <div className="covenant-small-print">
-        <p>AI assists screening and translation; it can be wrong. A seal checks a saved version, not whether a claim is true. This is not a confidential whistleblowing service.</p>
+        <p className="covenant-makers-heading">Human and machine intelligence. One shared brief.</p>
+        <p>This work did not begin with AI. Janine’s life’s work gives it direction. Researchers, communities and artists made the work it points to. Brian Hughes built this platform with BASE 1, the name used here for the AI assistant. The source work keeps its own authors.</p>
+        <details className="covenant-provenance">
+          <summary>Who made what, and who is accountable</summary>
+          <div>
+            <p>BASE 1 helped draft, organise, check links and build the platform; it assists screening and translation. Its contributions are real, and so are its limits. An AI output is not independent evidence, and it cannot supply a person’s sign-off.</p>
+            <p>People decide what stays and are accountable for what is published. The method discloses automatically cleared and unsigned entries. Machine readings of drawings are labelled separately from the artist’s own words.</p>
+            <Link to="/ClimateMethod">Read the editorial account →</Link>
+          </div>
+        </details>
+        <p>A seal checks a saved version, not whether a claim is true. This is not a confidential whistleblowing service.</p>
         <nav className="covenant-inline-links" aria-label="Accountability and origins">
           <Link to="/ClimatePrivacy">What we keep</Link>
           <Link to="/ExtractionProofCovenant">Our commitments</Link>

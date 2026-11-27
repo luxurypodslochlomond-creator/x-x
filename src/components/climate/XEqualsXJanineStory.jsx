@@ -3,13 +3,28 @@ import { Link } from 'react-router-dom';
 
 export default function XEqualsXJanineStory() {
   return (
-    <section aria-labelledby="janines-work">
-      <p className="covenant-kicker">Where this begins</p>
-      <h2 id="janines-work">A lifetime of looking for what helps.</h2>
-      <p>At fifteen, Janine Selendy surfaced from a dive in Beirut harbour covered in oil. She has described that moment as her first awareness of damage to Earth.</p>
-      <p>Through four decades of Horizon International, she brought people’s practical answers to problems of health, poverty and the environment into books, films and the Solutions Site.</p>
-      <p><strong>This record grows from that work.</strong> Not just a place to look back, but somewhere to keep finding, questioning and sharing what can help.</p>
-      <Link to="/ClimateFounder" className="covenant-text-link">Meet Janine and her work <span aria-hidden="true">→</span></Link>
+    <section className="covenant-origin" aria-labelledby="janines-work">
+      <div className="covenant-origin-inner">
+        <p className="covenant-kicker">A life’s work, still reaching out</p>
+        <h2 id="janines-work">She was fifteen.<br />The water left her covered in oil.</h2>
+        <p>In Janine Selendy’s own account, a dive in Beirut harbour became her first awareness of damage to Earth.</p>
+        <p>Her work through Horizon International brought together health, the environment and practical responses. This platform takes its direction from that life’s work: do not only describe the damage. Find what helps. Make it possible for others to use it.</p>
+        <blockquote>“Together we can change the course of climate change.”<cite>Janine M. H. Selendy</cite></blockquote>
+        <p>That is why the drawings belong here, too. Cartoonists from Africa, Asia and beyond bring their own ways of seeing the same world. The Wall is not decoration around the evidence. It is another way to ask what must change.</p>
+        <div className="covenant-inline-links">
+          <Link to="/ClimateFounder">Janine’s account and work →</Link>
+          <Link to="/ClimateCartoons">Meet the hands on the Wall →</Link>
+        </div>
+        <details className="covenant-provenance">
+          <summary>Trace the connection to her published work</summary>
+          <div>
+            <p>Wiley lists Janine M. H. Selendy as an editor of <em>Water and Sanitation-Related Diseases and the Changing Environment</em>, and identifies her with Horizon International at Yale University. Its chapters connect water, health, climate and practical interventions.</p>
+            <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781119415961" target="_blank" rel="noopener noreferrer">Wiley · the book and editor’s biography ↗<span className="sr-only"> (opens a new tab)</span></a>
+            <p>This documents her work. It does not claim university endorsement of this platform. The Wall carries each artist’s own credit; it is not the CartoonAFRICA Biennial itself.</p>
+            <Link to="/ClimateCartoons/CAIB">The Wall and CartoonAFRICA: the distinction →</Link>
+          </div>
+        </details>
+      </div>
     </section>
   );
 }
