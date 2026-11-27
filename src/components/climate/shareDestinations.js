@@ -46,6 +46,8 @@ export const SHARE_GROUPS = [
   {
     label: 'Across borders',
     doors: [
+      { name: 'VK', href: ({ link, title }) => `https://vk.com/share.php?url=${enc(link)}&title=${enc(title)}` },
+      { name: 'OK.ru', href: ({ link, title }) => `https://connect.ok.ru/offer?url=${enc(link)}&title=${enc(title)}` },
       { name: 'Weibo', href: ({ link, title }) => `https://service.weibo.com/share/share.php?url=${enc(link)}&title=${enc(title)}` },
       { name: 'QQ', href: ({ link, title }) => `https://connect.qq.com/widget/shareqq/index.html?url=${enc(link)}&title=${enc(title)}` },
       { name: 'Line', href: ({ link }) => `https://social-plugins.line.me/lineit/share?url=${enc(link)}` },
