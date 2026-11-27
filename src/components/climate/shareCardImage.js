@@ -1,6 +1,6 @@
 import { recordOrigin } from './recordAddress';
 import { RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
-import buildArtworkShare from '@/components/climate/buildArtworkShare';
+import buildRecordPlate from '@/components/climate/recordPlate';
 
 // ── RECORD OF THE TIME · THE WIRE CARD ──
 // One entry, drawn as a picture that can be sent anywhere. It carries the headline,
@@ -813,6 +813,8 @@ export async function buildWayInShareCard(card = {}, options = {}) {
 
 // Share the existing phone-sized painting, not a second, text-heavy canvas design.
 // Its bytes are passed through unchanged; the description and link travel as the message.
+// The record's own plate: the painting whole, and beneath it the promise, what the record
+// is, and the address — printed on the picture, so it still says everything with no signal.
 export async function buildRecordShareCard() {
-  return buildArtworkShare({ image_url: RECORD_COVER_SCREEN });
+  return buildRecordPlate(RECORD_COVER_SCREEN);
 }
