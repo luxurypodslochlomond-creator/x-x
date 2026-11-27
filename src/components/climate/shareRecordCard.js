@@ -11,7 +11,17 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // the one thing this record must never sound like. So the share says what the record
 // is and asks nothing of anybody.
 
-export const RECORD_SHARE_TITLE = 'Together We Can Change Climate';
+// ── THE STATEMENT IS JANINE'S, WHOLE ──────────────────────────────────────────
+// It travelled short — "Together We Can Change Climate" — and because the line underneath it
+// opens "Climate crises", the two ran together in a chat window as "climate climate". Francis
+// Odupute caught it in a WhatsApp message on 27 November and said so plainly: it's climate
+// change, not climate climate.
+//
+// He is right, and the missing words are the whole sentence. The object was never "climate" —
+// it is the course of climate change, which is what Janine wrote and what the record's own
+// front page says at the top. A share that shortens a host's sentence until it stops being
+// true is the one thing a card must never do, so it goes out whole.
+export const RECORD_SHARE_TITLE = 'Together we can change the course of climate change';
 export const RECORD_SHARE_LINE =
   'Climate crises. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names. Read it. Take what works. Use it.';
 

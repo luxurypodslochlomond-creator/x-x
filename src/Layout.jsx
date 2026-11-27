@@ -348,7 +348,7 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     const ogTags = {
       'og:title': currentPageName === 'Stoneymollan' ? 'Stoneymollan — a morning walk on the John Muir Way over Loch Lomond'
-        : isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together We Can Change Climate — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
+        : isCB51 ? 'CB51 : CitizenBand51 : Avoid the Noise' : isPS51Page ? 'PetSounds51 • Heal Animals' : isWristPage ? 'Wrist Healing Protocol • Acoustic Recovery for Musicians' : isSortedPage ? 'SORTED — We\'ve Got You' : isClimatePage ? 'Together we can change the course of climate change — Record of the Time' : 'Universal Frequency 51 • Heal the Planet',
       'og:description': isCB51 
         ? 'CB51 : CitizenBand51 : Avoid the Noise'
         : isPS51Page
