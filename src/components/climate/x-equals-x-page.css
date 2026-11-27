@@ -1,1184 +1,176 @@
-/* Founder parity: centred opening and bands, left-aligned card content.
-   Reading text is upright; italics are reserved for the founder's direct quotation.
-   This page opts out of the shared prose enlargement so each role keeps its own size. */
-/* ── THE PAGE SITS ON THE PAINTING, NOT IN FRONT OF IT ───────────────────────────
-   The ground was solid bone, so the record's own painting — running fixed underneath every
-   page of the book — stopped dead at this one and the page read as a sheet of card laid
-   over the record rather than a page of it. It is bone at 84 per cent now: the painting
-   comes up through the gutters and the margins exactly the way it does on every other page
-   of the record, and every word still sits on a solid band or a solid card. Contrast is
-   spent on the bands, never on the ground. */
-/* ── AND THEN THE GROUND WAS STILL CREAM ────────────────────────────────────────
-   The note above was right about the idea and timid about the number: at 84 per cent the
-   painting only ever showed as a stain in the gutters, so the page still read as a sheet of
-   card with a photograph somewhere behind it. Brian, 18 November, looking at it on a phone:
-   "x = x page still sane and have that cream bs ground a lot". It does, and a record about
-   nothing being hidden should not hide its own painting.
-   So the ground is bone at three tenths — the painting is the room the page stands in — and
-   every word is moved onto a sheet that is now properly solid rather than 80 per cent solid.
-   Contrast was never in the ground: it is in the cards, and the cards have more of it now
-   than they did when the ground was carrying the work. */
+/* One reading sheet. Only actual controls have button or door treatments. */
 #x-equals-x.covenant-page {
-  position: relative;
   min-height: 100vh;
-  background-color: rgb(var(--record-bone) / .3);
   color: rgb(var(--record-ink));
-  /* ── THE FOOT'S TYPE, ALL THE WAY UP ──────────────────────────────────────────
-     The foot got this right and the page did not. Thirteen-pixel uppercase across every
-     sentence on a page is a memo, and reading two screens of a memo hurts the eye — that
-     was the complaint, and it was a fair one. So the page now keeps the foot's habits:
-     the machine's mono caps for the labels and the facts, real sentences set at a size a
-     person actually reads, and the record's own red and yellow carrying the colour.
-     Hierarchy comes from size and air, not from shouting every line. */
-  font-family: var(--font-reading);
-  font-size: 0.9375rem;
-  line-height: 1.7;
+  background: rgb(var(--record-paper));
+  font-family: var(--font-record-ui);
+  font-size: 1rem;
+  line-height: 1.65;
 }
-#x-equals-x :is(p, li, dd, figcaption):not(dialog *):not([role="dialog"] *) {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  letter-spacing: 0;
-  /* Follow the containing section, rather than overriding its centred alignment. */
-  text-align: inherit;
-  overflow-wrap: break-word;
+#x-equals-x p { margin: 0; }
+#x-equals-x p + p { margin-top: .9rem; }
+#x-equals-x :is(h1, h2, h3) {
+  font-family: var(--font-record-ui) !important;
+  text-transform: none;
+  letter-spacing: -.02em !important;
+  font-weight: 700 !important;
+  text-wrap: pretty;
 }
+#x-equals-x h2 { margin: 0 0 1rem; font-size: clamp(1.5rem, 2.2vw, 2rem) !important; line-height: 1.2 !important; }
+#x-equals-x h3 { margin: 0; font-size: 1.125rem !important; line-height: 1.4 !important; }
 #x-equals-x strong { font-weight: 700; }
-
-/* ── THE HEADER'S HAND, ALL THE WAY DOWN ────────────────────────────────────────
-   The climate header sets its words one way, and it is the best setting on the whole
-   record: the record's own sans, uppercase, cut open with wide tracking, at one weight.
-   A masthead. This page had drifted the other way — tight, heavy, very large uppercase,
-   which is not a masthead, it is a shout, and a page that shouts every heading leaves a
-   reader nothing to be quiet with.
-
-   So every heading on this page now wears the header's setting: same face, uppercase,
-   tracking out at .12em (.18em on a desk, exactly as the record's header type does), and
-   sized like a masthead rather than a poster. Nothing is bold-but-tight any more, and the
-   sizes below are the header's sizes, not twice them. Prose is unchanged: sentences stay
-   in the reading face at a size a person reads, which is the other half of not shouting. */
-
-/* ── THE EPIGRAPH STRIP ──────────────────────────────────────────────────────────
-   Her page opens on a short dark strip with the mark in it. Same strip, same job: it says
-   what kind of page this is before the plate says anything louder. */
-#x-equals-x .covenant-epigraph {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.875rem 1.25rem;
-  background-color: #141210;
-  border-bottom: 1px solid rgb(var(--cartoon-sun) / .4);
-  animation: twcc-epigraph 1.2s ease-out both;
+#x-equals-x .covenant-kicker {
+  margin: 0 0 .7rem;
+  color: rgb(var(--record-muted));
+  font-size: .75rem !important;
+  line-height: 1.4 !important;
+  font-weight: 600;
+  letter-spacing: .03em;
 }
-#x-equals-x .covenant-epigraph-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 0 !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
-  font-size: 0.625rem !important;
-  font-weight: 700;
-  line-height: 1.3 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.15em !important;
-  text-align: center;
-  color: rgba(239, 231, 214, 0.6) !important;
-}
-#x-equals-x .covenant-epigraph-dot {
-  width: 4px;
-  height: 4px;
-  flex-shrink: 0;
-  border-radius: 9999px;
-  background-color: rgb(var(--cartoon-sun));
-}
-#x-equals-x .covenant-epigraph-mark {
-  margin: 0 !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
-  font-size: 0.6875rem !important;
-  font-weight: 700;
-  line-height: 1 !important;
-  letter-spacing: 0.2em !important;
-  color: rgb(var(--record-mark)) !important;
-}
-
-/* ── THE PLATE, AND THE PAINTING LET THROUGH ────────────────────────────────────
-   Ink with the record's painting behind it was the right idea at four tenths of the veil's
-   weight — except the veil was mixed at 0.6 to 0.93, which is a black plate with a rumour of
-   a painting under it. The whole point of this page is that nothing on it is hidden, and a
-   cover veiled to nine tenths is a cover hidden.
-   It is lit now: the painting reads as the night sky it is, the drawn stars and the meteors
-   sit in it, and the veil is only as heavy as the words need — deepest at the foot, where
-   the detail runs into the band below. The type carried it at four tenths; it carries it at
-   three, because bone on a veiled night is still the highest contrast thing in the room. */
-#x-equals-x .covenant-hero {
-  position: relative;
-  overflow: hidden;
-  background-color: #141210;
-}
+#x-equals-x .covenant-hero { position: relative; overflow: hidden; background: rgb(var(--record-ink)); }
 #x-equals-x .covenant-hero-veil {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(20, 18, 16, 0.34) 0%, rgba(20, 18, 16, 0.5) 52%, rgba(20, 18, 16, 0.84) 100%);
-}
-#x-equals-x .covenant-hero-scan {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.06;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, #efe7d6 2px, #efe7d6 3px);
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .55), rgb(var(--record-ink) / .86));
 }
 #x-equals-x .covenant-hero-inner {
-  position: relative;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 2.25rem 1.5rem;
-  text-align: center;
+  position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center;
+  gap: 1.2rem; max-width: 62rem; margin: 0 auto; padding: 3rem 1.2rem;
+  color: rgb(var(--record-paper)); text-align: center;
 }
-#x-equals-x .covenant-equation {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.12em;
-  margin: 0 !important;
-  font-family: var(--font-display) !important;
-  /* ── THE NAME, AT THE SIZE OF A NAME ──────────────────────────────────────────
-     It was capped at 46 pixels, which on a 1945-pixel screen made the record's own
-     name smaller than a heading inside one of the cards further down. A page whose
-     subject is two letters and a sign should open with those two letters filling the
-     plate. Brian, 26 November: "flat and not coolasfuck". */
-  font-size: clamp(2.5rem, 5.2vw, 4.75rem) !important;
-  font-weight: 700 !important;
-  line-height: 1 !important;
-  letter-spacing: .06em !important;
-  /* ── THE MARK IS ONE COLOUR, AND THIS WAS THE ONLY PLACE IT WASN'T ─────────────
-     Brian, 18 November: "x = x should be red right like footer or is this art coolasfuck
-     bro?" He is right, and the fault was consistency rather than taste. The foot of every
-     page says it in the borrowed red. The epigraph on this page says it in the borrowed
-     red. The band at the top of the map says it in the borrowed red. Only the biggest
-     statement of it — the one on the cover, the one this whole page exists for — was
-     cream with a yellow equals, which made the mark look like decoration that changed
-     costume from page to page. A signature is not a costume.
-     So the whole line is the mark's red, equals and all, exactly as the foot prints it,
-     and the page and the foot finally say the same thing in the same ink. The equals
-     keeps the same red rather than being dimmed: it is not punctuation between two marks,
-     it is the claim. */
-  color: rgb(var(--record-mark));
-}
-#x-equals-x .covenant-equation span:nth-child(2) { color: rgb(var(--record-mark)); }
-/* ── THE FLIP IS A CROSSFADE, NOT A SWAP ───────────────────────────────────────────
-   Brian, 26 November: "why is it a wee bit jumpy bro". Because it was. The glyph and the
-   code replaced one another in a single frame, and the code is set smaller than the glyph,
-   so the mark's line box shrank and everything under it moved up and back down.
-   Two layers stacked in one grid cell fix both faults at once: the box is always as tall
-   and as wide as the larger layer, so nothing on the page can move, and the two states
-   dissolve through each other instead of cutting. The colour does not change and that is
-   deliberate — the ink stays the mark's red and only its strength rises, because a signal
-   is a lamp going on, not a costume change. */
-.x-eq-stack { display: grid; }
-.x-eq-layer { grid-area: 1 / 1; transition: opacity 220ms ease; }
-#x-equals-x .covenant-equation-btn {
-  display: block;
-  color: inherit;
-  letter-spacing: inherit;
-}
-#x-equals-x .covenant-equation-btn .x-eq-layer {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.12em;
-}
-#x-equals-x .covenant-purpose {
-  margin: 0 !important;
-  max-inline-size: 48rem;
-  font-family: var(--font-reading) !important;
-  font-size: clamp(1.0625rem, 1.35vw, 1.25rem) !important;
-  line-height: 1.55 !important;
-  text-align: center;
-  text-wrap: pretty;
-  color: rgb(var(--record-bone));
-}
-#x-equals-x .covenant-hero-detail {
-  margin: 0;
-  max-inline-size: 32rem;
-  text-align: center;
-  color: rgb(var(--record-bone) / .85);
+#x-equals-x .covenant-title {
+  margin: .15rem 0; font-size: clamp(2.5rem, 5vw, 4.5rem) !important;
+  line-height: 1.06 !important; color: rgb(var(--record-paper));
 }
 #x-equals-x .covenant-front-note {
-  margin: 0 !important;
-  max-inline-size: 26rem;
-  font-size: .75rem !important;
-  font-weight: 700;
-  line-height: 1.5 !important;
-  text-transform: uppercase;
-  letter-spacing: .08em !important;
-  text-align: center;
-  color: rgb(var(--record-light-signal));
+  max-width: 34ch; color: rgb(var(--record-light-signal));
+  font-size: .75rem !important; line-height: 1.55 !important;
 }
-#x-equals-x .covenant-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 0.4rem;
+#x-equals-x .covenant-purpose { max-width: 43ch; font-size: 1.125rem !important; line-height: 1.6 !important; }
+#x-equals-x .covenant-hero-detail { max-width: 43ch; color: rgb(var(--record-paper) / .88); }
+#x-equals-x .covenant-hero-inner p + p { margin-top: 0; }
+#x-equals-x .covenant-hero-actions,
+#x-equals-x .covenant-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; width: 100%; margin-top: .45rem; }
+#x-equals-x .covenant-btn,
+#x-equals-x .covenant-share > button {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 3rem; padding: .8rem 1rem; border: 2px solid rgb(var(--record-ink));
+  background: rgb(var(--record-ink)); color: rgb(var(--record-paper));
+  font-family: var(--font-record-ui); font-size: .875rem; font-weight: 700;
+  line-height: 1.25; text-decoration: none; border-radius: 0; cursor: pointer;
 }
-
-/* ── THE BUTTON, ONCE ───────────────────────────────────────────────────────────
-   Her page's button, verbatim: a block, an ink border, eleven-to-twelve pixel black
-   monospace caps, and orange under the thumb. */
-#x-equals-x .covenant-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  min-height: 2.75rem;
-  padding: 1rem 1.25rem;
-  background-color: rgb(var(--record-bone));
-  border: 2px solid rgb(var(--record-bone));
-  color: rgb(var(--record-ink));
-  font-family: inherit;
-  font-size: .75rem;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  text-decoration: none;
-  transition: background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
+#x-equals-x .covenant-hero .covenant-btn { background: rgb(var(--record-paper)); border-color: rgb(var(--record-paper)); color: rgb(var(--record-ink)); }
+#x-equals-x .covenant-hero .covenant-share > button { background: transparent; color: rgb(var(--record-paper)); border-color: rgb(var(--record-paper) / .7); }
+#x-equals-x .covenant-share > button { min-width: 6.25rem; }
+#x-equals-x .covenant-share > button:disabled { cursor: wait; }
+#x-equals-x .covenant-btn:active,
+#x-equals-x .covenant-share > button:active { background: rgb(var(--cartoon-sun)); border-color: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
+#x-equals-x .covenant-band--centre { padding: 2rem 1.2rem; background: rgb(var(--record-bone)); border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+#x-equals-x .covenant-band--centre > section { max-width: 48rem; margin: 0 auto; text-align: left; }
+#x-equals-x .covenant-band--centre .covenant-text-link { margin-top: 1.15rem; }
+#x-equals-x .covenant-stack { max-width: 65rem; margin: 0 auto; }
+#x-equals-x .covenant-card { padding: 2rem 1.2rem; border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+#x-equals-x .covenant-card > section { max-width: 48rem; margin: 0 auto; }
+#x-equals-x .covenant-text-link,
+#x-equals-x .covenant-entry h3 a,
+#x-equals-x .covenant-licence a {
+  color: rgb(var(--record-ink)); text-decoration: underline;
+  text-decoration-color: rgb(var(--record-mark)); text-decoration-thickness: 1px;
+  text-underline-offset: .2em;
 }
-#x-equals-x .covenant-btn:active {
-  background-color: rgb(var(--cartoon-sun));
-  border-color: rgb(var(--cartoon-sun));
-  color: #141210;
-}
-
-/* Sharing, on the plate: an outline beside the solid, never louder than the way in. */
-#x-equals-x .covenant-hero .covenant-share button {
-  display: inline-flex;
-  justify-content: center;
-  width: auto;
-  min-height: 2.75rem;
-  padding: 1rem 1.25rem;
-  background-color: transparent;
-  border: 2px solid rgb(var(--record-bone) / .55);
-  color: rgb(var(--record-bone));
-  font-family: inherit;
-  font-size: .75rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  transition: background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
-}
-#x-equals-x .covenant-hero .covenant-share button:active {
-  background-color: rgb(var(--cartoon-sun));
-  border-color: rgb(var(--cartoon-sun));
-  color: #141210;
-}
-
-/* ── THE SIGNAL BAND ────────────────────────────────────────────────────────────
-   One line of blue with ink on it, as her page uses its band: not decoration, a summary
-   you could read from across a room. It is the only band of colour on the page. */
-/* The band is the foot's yellow, not a paler cousin of it: the masthead opens on that
-   yellow, the foot closes on it, and the one line of the page's own argument sits in it —
-   the same colour at the top, the middle and the bottom, so the page reads as one plate. */
-#x-equals-x .covenant-signal {
-  padding: 0.9rem 1.25rem;
-  background-color: rgb(var(--cartoon-sun));
-  border-block: 1px solid rgb(var(--record-ink) / .35);
-  text-align: center;
-}
-#x-equals-x .covenant-signal p {
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: .6875rem;
-  font-weight: 700;
-  line-height: 1.5;
-  text-transform: uppercase;
-  letter-spacing: .18em;
-  text-align: center;
-  color: rgb(var(--record-ink));
-}
-
-/* ── HER BAND ───────────────────────────────────────────────────────────────────
-   The bone band her page opens with, carrying her name at display size, her sentence in
-   the reading face, and the provenance underneath in the machine's own hand. */
-#x-equals-x .covenant-band--centre {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-  padding: 1.5rem 1.25rem;
-  /* Solid now, for the same reason the cards are: the ground no longer carries any cream,
-     so a band held at four fifths would have been the one washed-out sheet on a page of
-     sharp ones. The painting is in the margins and behind the plate at the top; the words
-     stand on paper. */
-  background-color: rgb(247 241 229 / .97);
-  border-bottom: 2px solid rgb(var(--record-ink));
-  text-align: center;
-}
-#x-equals-x .covenant-band--centre > section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-}
-#x-equals-x .covenant-band--centre p {
-  margin: 0;
-  max-inline-size: 24rem;
-  text-align: center;
-}
-#x-equals-x .covenant-band--centre :is(.covenant-kicker, .covenant-label) {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: .6875rem !important;
-  font-weight: 700;
-  line-height: 1.4 !important;
-  text-transform: uppercase;
-  letter-spacing: .2em !important;
-  color: rgb(var(--record-mark));
-}
-#x-equals-x .covenant-band--centre h2 {
-  margin: 0 !important;
-  font-family: var(--font-display) !important;
-  font-size: clamp(1.1875rem, 1.6vw, 1.6875rem) !important;
-  font-weight: 700 !important;
-  line-height: 1.35 !important;
-  text-transform: uppercase;
-  letter-spacing: .12em !important;
-  text-align: center;
-}
-#x-equals-x .covenant-band--centre h2 a { color: inherit; text-decoration: none; }
-#x-equals-x .covenant-band--centre .covenant-founder-words {
-  margin: .25rem auto !important;
-  max-inline-size: 43ch;
-  padding: 0;
-  border: 0;
-  font-family: var(--font-reading) !important;
-  font-style: italic;
-  font-size: clamp(1.25rem, 2.4vw, 1.6875rem) !important;
-  line-height: 1.5 !important;
-  text-wrap: pretty;
-  text-align: center;
-  color: rgb(var(--record-ink));
-}
-#x-equals-x .covenant-band--centre .covenant-founder-source { margin-top: .25rem !important; }
-#x-equals-x .covenant-band--centre .covenant-founder-source a {
-  color: #5a5246;
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--record-red));
-}
-/* ── WHAT THE RECORD OWES ───────────────────────────────────────────────────────
-   Five debts in the centre band, set as a numbered account rather than a list of virtues:
-   the promise in ink caps, the thing that makes it true underneath, one hairline between
-   each. The numeral is set in the record's display face and coloured with the mark's own
-   red, so the sequence reads as a count of something owed rather than as five paragraphs
-   somebody hoped would look tidy. */
-#x-equals-x .covenant-promises-open {
-  margin: 0 auto !important;
-  max-inline-size: 44ch !important;
-  font-size: 1.0625rem !important;
-  line-height: 1.6 !important;
-  color: rgb(var(--record-ink)) !important;
-}
-#x-equals-x .covenant-promises {
-  width: 100%;
-  max-inline-size: 44rem;
-  margin: 0.5rem auto 0;
-  padding: 0;
-  list-style: none;
-  text-align: left;
-}
-#x-equals-x .covenant-promises li {
-  display: grid;
-  grid-template-columns: 1.5rem minmax(0, 1fr);
-  column-gap: 0.85rem;
-  padding: 0.85rem 0;
-  border-top: 1px solid rgba(20, 18, 16, 0.16);
-  text-align: left;
-}
-#x-equals-x .covenant-promises li:first-child { border-top: 0; }
-#x-equals-x .covenant-promises li::before {
-  content: attr(data-n);
-  grid-column: 1;
-  grid-row: 1;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.4;
-  color: rgb(var(--record-mark));
-}
-#x-equals-x .covenant-promises strong {
-  display: block;
-  font-family: var(--font-reading);
-  font-size: 1.0625rem;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-  color: rgb(var(--record-ink));
-}
-#x-equals-x .covenant-promises span {
-  display: block;
-  margin-top: 0.3rem;
-  max-inline-size: 62ch;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: #5a5246;
-}
-@media (min-width: 1024px) {
-  /* The promises are the page's spine, so at a desk they are set at the size of the
-     page's argument rather than a size below it. */
-  #x-equals-x .covenant-promises strong { font-size: 1.3125rem; }
-  #x-equals-x .covenant-promises span { font-size: 1rem; }
-  #x-equals-x .covenant-promises li::before { font-size: 1.25rem; }
-}
-/* ── THE RECORD'S OWN LINE, UNDER THE PROMISE IT KEEPS ─────────────────────────
-   Brian, 26 November: "needs truth and simplicity". The promise is the page's sentence;
-   the line beneath it is the record's, quoted back in its own words with the thing it does
-   not establish — so a reader sees the claim, the limit and the voice it is written in,
-   without a second list to reconcile it against. It is marked off by a hairline rather
-   than a box, because a box would have made it a second card inside a promise. */
-#x-equals-x .covenant-promise-kept {
-  margin-top: 0.75rem;
-  padding-left: 0.85rem;
-  border-left: 2px solid rgba(20, 18, 16, 0.18);
-}
-#x-equals-x .covenant-promise-mark {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: rgb(var(--record-mark));
-}
-#x-equals-x .covenant-promise-plain {
-  margin-top: 0.3rem;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: #4a4239;
-}
-#x-equals-x .covenant-promise-limit {
-  margin-top: 0.4rem;
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: rgb(var(--record-muted));
-}
-#x-equals-x .covenant-promise-foot {
-  max-width: 62ch;
-  margin: 1.4rem auto 0;
-  font-size: 0.8125rem;
-  line-height: 1.65;
-  color: rgb(var(--record-muted));
-}
-#x-equals-x .covenant-promise-foot a {
-  color: rgb(var(--record-ink));
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--record-mark));
-  text-underline-offset: 0.18em;
-}
-#x-equals-x .covenant-source-name { display: block; margin-top: 0.25rem; }
-#x-equals-x cite { font-style: normal; }
-#x-equals-x .covenant-caption {
-  font-family: var(--font-record-ui) !important;
-  font-size: 0.8125rem !important;
-  line-height: 1.6 !important;
-  color: #5a5246;
-}
-
-/* ── THE CARDS ──────────────────────────────────────────────────────────────────
-   Her achievements, to the pixel: the lighter card on the bone ground, one ink hairline,
-   a four-pixel coloured edge along the top, and inside it a small black caps heading with
-   the body underneath in the machine's voice. Two accents, alternating, so a stack of
-   four cards has a rhythm instead of a texture. */
-#x-equals-x .covenant-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-  max-width: 820px;
-  margin: 0 auto;
-  padding: 1.25rem 1rem;
-}
-#x-equals-x .covenant-card {
-  padding: 1.25rem;
-  /* Solid, and now properly solid: the ground gave up its cream, so the cards take it back.
-     A card that was 80 per cent paper over a dark painting would have gone grey the moment
-     the painting came through — this one stays paper, so the reading is sharper than it was
-     and the photograph is the thing between the cards rather than a stain under them. */
-  background-color: rgb(247 241 229 / .97);
-  border: 1px solid rgb(var(--record-ink));
-  border-top: 4px solid rgb(var(--record-red));
-}
-/* Her cards carry their body at 12px on a phone, 13.5px on a desk — one step under the
-   13px headings above them. Inheriting the page's 13px made heading and body the same
-   size, which is the flatness that read as squashed. */
-#x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) {
-  font-size: 0.9375rem;
-  max-inline-size: 66ch;
-}
-#x-equals-x .covenant-card--ocean { border-top-color: rgb(var(--cartoon-sun)); }
-/* ── A SECTION HEADING HAS TO BE BIGGER THAN THE SENTENCES UNDER IT ─────────────
-   It was thirteen pixels of tracked caps over sixteen-pixel prose, so every section on
-   the page announced itself more quietly than its own first sentence. That is the whole
-   of the flatness: a page where nothing is bigger than anything else has no shape to
-   read down. The heading is a heading now — the display face, a size that carries at a
-   desk, and the tracking pulled in from .16em, because .16em is how a label is set and
-   this is no longer a label. */
-#x-equals-x .covenant-card h2 {
-  margin: 0 0 .9rem !important;
-  max-inline-size: none;
-  font-family: var(--font-display) !important;
-  font-size: clamp(1.1875rem, 1.9vw, 1.5rem) !important;
-  font-weight: 700 !important;
-  line-height: 1.18 !important;
-  text-transform: uppercase;
-  letter-spacing: .045em !important;
-  color: rgb(var(--record-ink));
-}
-#x-equals-x .covenant-card :is(.covenant-kicker, .covenant-label),
-#x-equals-x .covenant-commitments > div:first-child p {
-  margin: 0 0 .55rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: .6875rem !important;
-  font-weight: 700;
-  line-height: 1.4 !important;
-  text-transform: uppercase;
-  letter-spacing: .18em !important;
-  color: rgb(var(--record-mark));
-}
-/* ── A CARD IS ONE OBJECT, WHATEVER IS PUT IN IT ────────────────────────────────
-   Brian, 26 November: "why x=x page not feel still quite right ... chunky ... think got
-   duplications". One of the faults was structural and it was this: two of the five cards
-   are built out of the record's own bands (the checkable one and the commitments one), and
-   a band carries a forty-pixel margin and a hairline rule at its head — which is right on
-   an open page and wrong inside a card that is already ruled and already has a head. The
-   commitments card had been patched by hand and the checkable one had not, so one card in
-   five sat lower and looser than its neighbours for no reason a reader could name.
-   The rule applies to every band put inside a card now, so the five cards read as one
-   object repeated rather than two objects and three. */
-#x-equals-x .covenant-card > section {
-  margin: 0;
-  padding-top: 0;
-  border-top: 0;
-}
-/* And the band's own label wears the card's kicker, because a card cannot have two
-   different small-caps labels in two different inks on one plate. */
-#x-equals-x .covenant-card > section > div:first-child > p {
-  font-size: .6875rem;
-  letter-spacing: .18em;
-  color: rgb(var(--record-mark));
-}
-
-/* ── THE THREE TERMS ────────────────────────────────────────────────────────────
-   A counted sequence, not a glossary: the numeral carries the weight, the term answers
-   it, one hairline between each. */
-#x-equals-x .covenant-evidence-standard { margin-bottom: 1rem !important; }
-#x-equals-x .covenant-terms { display: flex; flex-direction: column; margin: 0; gap: 0; }
-#x-equals-x .covenant-term {
-  display: grid;
-  grid-template-columns: 2rem minmax(0, 1fr);
-  column-gap: 0.75rem;
-  padding: 0.8rem 0;
-  border-top: 1px solid rgba(20, 18, 16, 0.15);
-}
-#x-equals-x .covenant-term:first-child { border-top: 0; padding-top: 0; }
-#x-equals-x .covenant-term::before {
-  content: attr(data-number);
-  grid-column: 1;
-  grid-row: 1 / span 2;
-  font-family: var(--font-display);
-  font-size: 1.375rem;
-  line-height: 1;
-  letter-spacing: 0;
-  color: #141210;
-}
-#x-equals-x .covenant-term dt {
-  grid-column: 2;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.4;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: rgb(var(--record-mark));
-}
-#x-equals-x .covenant-term dd {
-  grid-column: 2;
-  margin: 0.3rem 0 0;
-  color: #4a4239;
-}
-#x-equals-x .covenant-standard { margin-top: 1rem !important; }
-
-/* ── ONE ENTRY, ITS EVIDENCE ────────────────────────────────────────────────────
-   The entry is the headline; the three lines that let a reader check it are a small ruled
-   block, because a source is a fact and facts look like that on this record. */
-#x-equals-x .covenant-entry h3 {
-  margin: .75rem 0 !important;
-  font-family: var(--font-record-ui) !important;
-  font-size: clamp(1rem, 1.25vw, 1.1875rem) !important;
-  font-weight: 700 !important;
-  line-height: 1.45 !important;
-  text-transform: uppercase;
-  letter-spacing: .12em !important;
-}
-#x-equals-x .covenant-entry h3 a { color: inherit; text-decoration: none; }
+#x-equals-x .covenant-text-link { display: inline-block; padding-block: .35rem; font-weight: 600; }
+#x-equals-x .covenant-caption { color: rgb(var(--record-muted)); font-size: .875rem !important; line-height: 1.65 !important; }
+#x-equals-x .covenant-plain-list { list-style: none; margin: 1.35rem 0; padding: 0; }
+#x-equals-x .covenant-plain-list li { padding: 1rem 0; border-top: 1px solid rgb(var(--record-ink) / .15); }
+#x-equals-x .covenant-plain-list p { margin-top: .35rem; }
+#x-equals-x .covenant-plain-list .covenant-text-link { margin-top: .4rem; font-size: .875rem; }
+#x-equals-x .covenant-entry h3 { margin-block: .5rem .75rem; }
 #x-equals-x .covenant-trace {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  margin: 0.9rem 0 0;
-  padding: 0.75rem;
-  list-style: none;
-  background-color: #efe7d6;
-  border: 1px solid #141210;
+  display: flex; flex-direction: column; gap: .6rem; list-style: none;
+  margin: 1rem 0 0; padding: 1rem; background: rgb(var(--record-bone));
 }
-#x-equals-x .covenant-trace li {
-  display: grid;
-  grid-template-columns: 4.75rem minmax(0, 1fr);
-  gap: 0.5rem;
-  align-items: baseline;
-}
-#x-equals-x .covenant-trace-label {
-  font-size: 0.75rem !important;
-  letter-spacing: 0.12em !important;
-  color: #5a5246 !important;
-}
-#x-equals-x .covenant-trace a { color: #141210; text-decoration: underline; text-decoration-color: rgb(var(--record-red)); }
+#x-equals-x .covenant-trace li { display: grid; grid-template-columns: 4.25rem minmax(0, 1fr); gap: .65rem; }
+#x-equals-x .covenant-trace .covenant-trace-label { margin: 0; font-size: .75rem !important; line-height: 1.65 !important; }
+#x-equals-x .covenant-trace a { color: inherit; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); text-underline-offset: .2em; overflow-wrap: anywhere; }
 #x-equals-x .covenant-entry-open {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  min-height: 2.75rem;
-  margin-top: 0.9rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid rgba(20, 18, 16, 0.15);
-  font-family: var(--font-record-ui);
-  font-size: 0.75rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-decoration: none;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  min-height: 3rem; margin-top: .5rem; padding-block: .6rem;
+  font-weight: 700; color: rgb(var(--record-ink)); text-decoration: underline; text-underline-offset: .2em;
 }
-#x-equals-x .covenant-entry-open > :last-child { color: rgb(var(--record-red)); }
-
-/* ── WHAT IT CANNOT DO ──────────────────────────────────────────────────────────
-   Three doors, each drawn as her page draws a link: a bone block inside an ink hairline,
-   mark on the left, the sentence in the middle, the way through on the right. */
-#x-equals-x .covenant-limits {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+#x-equals-x .covenant-entry-open > :last-child { color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-doors { display: grid; gap: .75rem; list-style: none; margin: 1.25rem 0 0; padding: 0; }
+#x-equals-x .covenant-door {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  height: 100%; padding: 1.1rem; background: rgb(var(--record-bone));
+  border: 1px solid rgb(var(--record-ink) / .3); color: rgb(var(--record-ink)); text-decoration: none;
 }
-#x-equals-x .covenant-limit a {
-  display: grid;
-  grid-template-columns: 1.75rem minmax(0, 1fr) auto;
-  gap: 0.75rem;
-  align-items: start;
-  padding: 0.8rem;
-  background-color: #efe7d6;
-  border: 1px solid #141210;
-  color: #141210;
-  text-decoration: none;
-  transition: background-color 140ms ease-out;
+#x-equals-x .covenant-door-title { display: block; text-decoration: underline; text-underline-offset: .2em; text-decoration-color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-door-detail { display: block; margin-top: .4rem; font-size: .9375rem; }
+#x-equals-x .covenant-door > svg { flex-shrink: 0; color: rgb(var(--record-mark)); }
+#x-equals-x .covenant-door:active { background: rgb(var(--cartoon-sun)); }
+#x-equals-x .covenant-inline-links { display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; margin-top: .8rem; }
+.x-eq-stack { display: grid; }
+.x-eq-layer { grid-area: 1 / 1; transition: opacity 220ms ease; }
+#x-equals-x .covenant-mark-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.4rem; }
+#x-equals-x .covenant-mark {
+  display: block; min-height: 3rem; color: rgb(var(--record-mark));
+  font-family: var(--font-record-ui) !important; font-size: 2.5rem !important;
+  font-weight: 700 !important; letter-spacing: -.03em;
 }
-#x-equals-x .covenant-limit a:active { background-color: rgb(var(--cartoon-sun)); }
-#x-equals-x .covenant-limit-mark svg { width: 1.5rem; height: 1.5rem; }
-#x-equals-x .covenant-limit-says { display: block; }
-#x-equals-x .covenant-limit-where {
-  display: block;
-  margin-top: 0.35rem;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.12em !important;
-  color: #5a5246 !important;
-}
-#x-equals-x .covenant-limit-arrow { color: rgb(var(--record-red)); }
-
-/* ── WHAT THE RECORD PROMISES ───────────────────────────────────────────────────
-   The marks on these are sentences — "equal worth ≠ equal size", "no ranking" — so they
-   are set as the record's headings are set, in display caps, rather than whispered as
-   small bold captions. They are the best lines on the page. */
-#x-equals-x .covenant-commitment {
-  padding: 0.9rem 0;
-  border-top: 1px solid rgba(20, 18, 16, 0.15);
-}
-#x-equals-x .covenant-commitment:first-child { border-top: 0; padding-top: 0; }
-#x-equals-x .covenant-commitment h3 {
-  margin: 0 0 .5rem !important;
-  font-family: var(--font-record-ui) !important;
-  font-size: clamp(1rem, 1.25vw, 1.1875rem) !important;
-  font-weight: 700 !important;
-  line-height: 1.45 !important;
-  text-transform: uppercase;
-  letter-spacing: .12em !important;
-}
-#x-equals-x .covenant-commitment-limit { color: rgb(var(--record-muted)); }
-#x-equals-x .covenant-limit-label {
-  font-family: var(--font-record-ui);
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-#x-equals-x .covenant-signature-note { margin-top: 0.9rem !important; }
-#x-equals-x .covenant-signature-note a {
-  color: #141210;
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--record-red));
-}
-
-/* ── THE CLOSE ──────────────────────────────────────────────────────────────────
-   The close is centred, like hers, with both actions side by side. Nothing is left in a
-   bottom corner where a phone will not find it.
-
-   There was a "further reading" line here pointing at a book about the industry. Janine
-   asked for it off the platform, and she was right to: the record quotes one person and
-   argues from her words, and a shelf of recommended reading underneath turns a promise
-   into a reading list with a favourite on it. The close is the two ways onward now. */
-#x-equals-x .covenant-close {
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: 0 1.25rem 2rem;
-}
-
-#x-equals-x .covenant-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-#x-equals-x .covenant-actions .covenant-btn {
-  background-color: #141210;
-  border-color: #141210;
-  color: #efe7d6;
-}
-#x-equals-x .covenant-actions .covenant-btn:active {
-  background-color: rgb(var(--cartoon-sun));
-  border-color: rgb(var(--cartoon-sun));
-  color: #141210;
-}
-#x-equals-x .covenant-actions .covenant-share button {
-  display: inline-flex;
-  justify-content: center;
-  width: auto;
-  min-height: 2.75rem;
-  padding: 1rem 1.25rem;
-  background-color: rgb(var(--record-ink));
-  border: 2px solid rgb(var(--record-ink));
-  color: rgb(var(--record-bone));
-  font-family: inherit;
-  font-size: .75rem;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  transition: background-color 140ms ease-out, color 140ms ease-out;
-}
-#x-equals-x .covenant-actions .covenant-share button:active {
-  background-color: rgb(var(--cartoon-sun));
-  border-color: rgb(var(--cartoon-sun));
-  color: #141210;
-}
-#x-equals-x .covenant-dedication {
-  margin: 1.25rem 0 0 !important;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.12em !important;
-  text-align: center;
-  color: #5a5246 !important;
-}
-#x-equals-x .covenant-dedication a { color: inherit; text-decoration: underline; text-decoration-color: rgb(var(--record-red)); }
-
-/* ── THE RETURN, AS HER PAGE ENDS ───────────────────────────────────────────────
-   The page closes dark rather than on a second band of colour: one blue band above the
-   work, one dark band below it. Two coloured bands would have made the whole page read
-   as a tint; the dark plate at the foot closes the book instead. */
-#x-equals-x .covenant-return {
-  padding: 1.25rem;
-  background-color: #141210;
-  text-align: center;
-}
-#x-equals-x .covenant-return .covenant-btn--ink {
-  background-color: #efe7d6;
-  border-color: #efe7d6;
-  color: #141210;
-}
-#x-equals-x .covenant-return .covenant-btn--ink:active {
-  background-color: rgb(var(--cartoon-sun));
-  border-color: rgb(var(--cartoon-sun));
-  color: #141210;
-}
-#x-equals-x .covenant-foot {
-  margin: 0 !important;
-  padding: 1.5rem 1.25rem 1.75rem;
-  font-family: var(--font-record-ui) !important;
-  font-size: 0.75rem !important;
-  line-height: 1.7 !important;
-  letter-spacing: 0.06em !important;
-  text-align: center;
-  color: #5a5246 !important;
-}
-
-#x-equals-x :is(a, button):focus-visible { outline: 2px solid #141210; outline-offset: 3px; }
-#x-equals-x .covenant-hero :is(a, button):focus-visible { outline-color: #efe7d6; }
-#x-equals-x ::selection { background: rgb(var(--cartoon-sun) / .45); }
-
-/* ── DESK, TIGHTENED ────────────────────────────────────────────────────────────
-   The wide screen was mostly air: five rem of padding over the plate, three and a half
-   over every band, and a stack that opened with a gap the height of a card. On a 1945px
-   glass that is not calm, it is a page that has come apart — the complaint that keeps
-   coming back. The measure stays (nothing runs past 900px), the air between things is
-   what came down. Text is a size bigger at desk width as well, because a 1945px screen
-   set at thirteen pixels is the other half of the same mistake. */
-@media (min-width: 1024px) {
-  #x-equals-x .covenant-hero-scan { display: none; }
-  #x-equals-x.covenant-page { font-size: 1rem; line-height: 1.7; }
-  #x-equals-x .covenant-hero-inner { padding: 4rem 2.5rem; }
-  #x-equals-x .covenant-band--centre { padding: 2.25rem 2.5rem; }
-  #x-equals-x .covenant-band--centre p { max-inline-size: 46rem; }
-  /* ── THE FOUR SECTIONS ARE ONE SHEET, NOT FOUR PLATES ────────────────────────
-     They were four separate cards with a gap between them, floating in a column 880
-     pixels wide on a screen nearly twice that: four rectangles that had nothing to do
-     with each other, which is exactly the "doesn't feel connected" Brian named on 26
-     November. So on a desk they share their rules and sit flush, the way ruled sections
-     of one printed sheet do, and the sheet is wide enough to hold the room it is in. The
-     red top edge belongs to the sheet, not to each card, so the eye is told once that
-     this is one object. */
-  #x-equals-x .covenant-stack { max-width: 1040px; gap: 0; padding: 2rem 0; }
-  #x-equals-x .covenant-card { padding: 1.9rem 2.1rem; border-top: 0; }
-  #x-equals-x .covenant-card:first-child { border-top: 4px solid rgb(var(--record-red)); }
-  #x-equals-x .covenant-card :is(p, li, dd):not([class*="covenant-trace-label"]) { font-size: 1rem; }
-  /* The close is held to the sheet's width too, so the column does not step in a hundred
-     and sixty pixels at the foot. The buttons stay centred inside it; what changes is that
-     the page keeps one measure from the first card to the last way out. */
-  #x-equals-x .covenant-close { max-width: 1040px; padding: 0 0 2rem; }
-}
-
-html[data-tongue="th"] #x-equals-x :is(p, li, dd) { line-height: 1.95 !important; overflow-wrap: normal !important; }
-html[data-tongue="th"] #x-equals-x :is(h1, h2, h3, dt, .covenant-btn) { letter-spacing: 0 !important; }
-html[data-tongue="th"] #x-equals-x .covenant-equation { letter-spacing: 0 !important; }
-
-@media (prefers-reduced-motion: reduce) {
-  #x-equals-x .covenant-epigraph,
-  #x-equals-x .covenant-signal,
-  #x-equals-x .covenant-card { animation: none; }
-}
-
-@media print {
-  #x-equals-x { background: #fff; }
-  #x-equals-x :is(.covenant-hero-actions, .covenant-actions, .covenant-return, .covenant-hero-scan) { display: none; }
-  #x-equals-x .covenant-hero { background: none; }
-  #x-equals-x .covenant-hero-veil,
-  #x-equals-x .covenant-hero .record-cover { display: none; }
-  #x-equals-x :is(.covenant-equation, .covenant-purpose, .covenant-hero-detail, .covenant-front-note) { color: #141210 !important; }
-  #x-equals-x .covenant-equation span:nth-child(2) { color: #141210; }
-}
-
-/* ── THE MARK, IN MORSE ────────────────────────────────────────────────────────────
-   A code belongs on a signal, not in the list of tongues — so it is printed on the mark
-   itself, once, in the record's red. Nothing moves: a signal that animated would be a
-   gimmick, and this one is a fact a reader can count. */
-#x-equals-x .covenant-morse {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.55rem;
-  /* It sits at the foot now, under the argument and above the two ways out, so the space
-     it needs is above it rather than below. */
-  padding: 2.1rem 1.25rem 1.6rem;
-  text-align: center;
-}
-#x-equals-x .covenant-morse-code {
-  display: flex;
-  gap: 1.4rem;
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 17px;
-  letter-spacing: 0.16em;
-  color: rgb(var(--record-mark));
-}
-/* ── SAID OUT LOUD, ONCE ───────────────────────────────────────────────────────────
-   The same rule the music room keeps: a thing is pressed to play, never played at
-   anyone, and never on a loop. A loop would turn a fact a reader can count into a
-   ringtone, and a page that beeps when it opens is a page shouting. */
-#x-equals-x .covenant-morse-play {
-  appearance: none;
-  margin: 0.2rem 0 0;
-  padding: 0.55rem 0.95rem;
-  background: transparent;
-  border: 1px solid rgb(var(--record-ink) / 0.45);
-  color: rgb(var(--record-ink));
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  cursor: pointer;
-  transition: background-color 0.14s ease-out, color 0.14s ease-out;
-}
-#x-equals-x .covenant-morse-play:hover,
-#x-equals-x .covenant-morse-play:focus-visible {
-  background: rgb(var(--record-ink));
-  color: rgb(var(--record-bone));
-}
-#x-equals-x .covenant-morse-play[disabled] { cursor: default; opacity: 0.55; }
-/* The group being sounded goes to ink, so the ear and the eye are reading one event. */
-#x-equals-x .covenant-morse-code span[data-lit] { color: rgb(var(--record-ink)); }
-
-/* ── THE LICENCE IS A PLATE, NOT A FOOTNOTE ───────────────────────────────────────
-   These two names were set at ten pixels of grey monospace — the size and colour a legal
-   notice wears when the site hopes you will not read it. On the one page of this record
-   that gives everything away, the giving away was the quietest thing on it. So the two
-   licences are now the largest words here after the argument itself: named plainly, in
-   the record's own display face, at the size a promise is set in. The sentence beneath
-   them stays small and readable, because it is an explanation and not a stamp. */
-#x-equals-x .covenant-licence {
-  max-width: 54rem;
-  margin: 0 auto;
-  padding: 2.75rem 1.25rem 3rem;
-  border-top: 1px solid rgba(20, 18, 16, 0.14);
-  text-align: center;
-}
-#x-equals-x .covenant-licence-kicker {
-  margin: 0 0 1.75rem;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgb(var(--record-red));
-}
-#x-equals-x .covenant-licence-terms {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: clamp(1.75rem, 5vw, 5rem);
-  margin: 0;
-}
-#x-equals-x .covenant-licence-term {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  min-width: 0;
-}
-#x-equals-x .covenant-licence-label {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 9.5px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgb(var(--record-muted));
-}
-#x-equals-x .covenant-licence-name {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 3.2vw, 3rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: rgb(var(--record-ink));
-  white-space: nowrap;
-}
-/* The name is the door to the deed itself, so it wears a line rather than a button: the
-   plain sentence underneath is the courtesy, and this is where the law actually lives. */
-#x-equals-x a.covenant-licence-name {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-decoration-color: rgb(var(--record-red));
-  text-underline-offset: 0.16em;
-}
-#x-equals-x a.covenant-licence-name:hover,
-#x-equals-x a.covenant-licence-name:focus-visible {
-  text-decoration-color: rgb(var(--record-ink));
-}
-/* ── THE SCORE, IN PLAIN WORDS, WITHOUT LEAVING THE PAGE ──────────────────────────
-   Set in the reading face at a size a person can actually read, because this is the one
-   paragraph on the page that decides what a stranger is allowed to do with the work. */
-/* ── THE LINE ABOUT WHO PAYS FOR THE LICENCES ────────────────────────────────────
-   Brian, 26 November: "all need to help each other bro". Set as a sentence rather than a
-   button, at the size a note is set in, because it is a fact about two organisations who
-   gave this record its licence — not a request from the record itself. */
-#x-equals-x .covenant-licence-give {
-  max-width: 56ch;
-  margin: 1.1rem auto 0;
-  font-family: var(--font-reading);
-  font-size: 13px;
-  line-height: 1.7;
-  color: rgb(var(--record-muted));
-}
-#x-equals-x .covenant-licence-give a {
-  color: rgb(var(--record-ink));
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--record-red));
-  text-underline-offset: 0.18em;
-}
-#x-equals-x .covenant-licence-means {
-  max-width: 27ch;
-  margin: 0.4rem auto 0;
-  font-family: var(--font-reading);
-  font-size: 13.5px;
-  line-height: 1.65;
-  color: rgb(var(--record-muted));
-}
-#x-equals-x .covenant-licence-says {
-  max-width: 48ch;
-  margin: 1.9rem auto 0;
-  font-family: var(--font-reading);
-  font-size: 14.5px;
-  line-height: 1.7;
-  color: rgb(var(--record-muted));
-}
-#x-equals-x .covenant-licence-says a {
-  color: rgb(var(--record-ink));
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--record-red));
-  text-underline-offset: 0.18em;
-}
-
-#x-equals-x .covenant-morse-note {
-  max-width: 40ch;
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 9.5px;
-  line-height: 1.7;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgb(var(--record-muted));
-}
-
-/* ── THE PHONE IS NOT A NARROW DESK ──────────────────────────────────────────────
-   Brian, 26 November, holding it: "why does it feel like old website on device and not
-   coolasfuck". The answer was in the shape rather than in the words. On a desk this page
-   is a sheet with margins; on a phone it was a column of small inset boxes with gaps
-   between them, which is the shape of a blog post and not the shape of a record. The
-   record's own foot never has that problem, because it runs edge to edge and says one
-   thing at the full width of the glass.
-
-   So on a phone the page becomes one continuous printed sheet: every section runs to both
-   edges, the rules between them are the only division, and the mark opens at the width of
-   the phone instead of sitting in it like a logo. Nothing about the order or the argument
-   changes — a phone gets the same document, printed for the size of paper it is on. */
-@media (max-width: 1023px) {
-  #x-equals-x.covenant-page {
-    font-size: 1rem;
-    line-height: 1.7;
-    padding-bottom: 3rem;
-  }
-  #x-equals-x .covenant-epigraph { padding: 0.8rem 1rem; }
-
-  /* The name, at the width of the phone. */
-  #x-equals-x .covenant-equation { font-size: clamp(3.25rem, 21vw, 5rem) !important; }
-  #x-equals-x .covenant-hero-inner { padding: 2.75rem 1.15rem 3rem; gap: 1.1rem; }
-  #x-equals-x .covenant-hero-actions { width: 100%; }
-  #x-equals-x .covenant-hero-actions .covenant-btn,
-  #x-equals-x .covenant-hero .covenant-share button { flex: 1 1 auto; }
-
-  #x-equals-x .covenant-band--centre { padding: 1.75rem 1.15rem; }
-
-  /* Edge to edge, ruled rows: one sheet rather than four cards. */
-  #x-equals-x .covenant-stack { padding: 0; gap: 0; }
-  #x-equals-x .covenant-card {
-    border: 0;
-    border-bottom: 1px solid rgb(var(--record-ink));
-    padding: 1.45rem 1.15rem;
-    background-color: rgb(247 241 229 / 0.98);
-  }
-  #x-equals-x .covenant-card:first-child { border-top: 4px solid rgb(var(--record-red)); }
-
-  #x-equals-x .covenant-promises strong { font-size: 1.125rem; }
-  #x-equals-x .covenant-close { padding: 0 1.15rem 1.75rem; }
-  #x-equals-x .covenant-morse { padding: 1.75rem 1.15rem 1.4rem; }
-  #x-equals-x .covenant-morse-code { font-size: 15px; gap: 1rem; }
-  /* A thumb is not a cursor. The press was ten-pixel type on a thirty-pixel block, which
-     is under the size a finger can be sure of — so on a phone it is a real target. */
-  #x-equals-x .covenant-morse-play {
-    min-height: 2.75rem;
-    padding: 0 1.15rem;
-    font-size: 11px;
-  }
-  #x-equals-x .covenant-licence { padding: 2rem 1.15rem 2.25rem; }
-
-  /* The bar floats over the foot of the record, so the foot is given the room back and
-     the names printed on it are never hidden behind a button. */
-  body:has(.x-eq-phonebar) footer { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
-}
-
-/* ── THE BAR AT THE FOOT OF THE GLASS ───────────────────────────────────────────
-   Only on a phone, in the record's own clothes: the machine's mono caps, one ink rule, the
-   paper underneath, and the safe-area padding so it clears the home indicator. */
+#x-equals-x .covenant-mark .x-eq-layer { display: flex; align-items: center; justify-content: center; gap: .15em; }
+#x-equals-x .covenant-close { max-width: 65rem; margin: 0 auto; padding: 1.25rem 1.2rem 2rem; }
+#x-equals-x .covenant-licence { max-width: 65rem; margin: 0 auto; padding: 2rem 1.2rem; border-top: 1px solid rgb(var(--record-ink) / .2); }
+#x-equals-x .covenant-licence h2 { max-width: 48rem; margin-inline: auto; }
+#x-equals-x .covenant-licence-says,
+#x-equals-x .covenant-licence-give { max-width: 48rem; margin: 1rem auto 0; }
+#x-equals-x .covenant-licence-give { font-size: .875rem !important; color: rgb(var(--record-muted)); }
+#x-equals-x .covenant-licence-terms { display: grid; gap: 1.75rem; max-width: 48rem; margin: 1.5rem auto; }
+#x-equals-x .covenant-licence-term { display: flex; flex-direction: column; align-items: flex-start; gap: .55rem; min-width: 0; }
+#x-equals-x .covenant-licence-label { font-size: .75rem; color: rgb(var(--record-muted)); }
+#x-equals-x .covenant-licence-name { font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.2; font-weight: 700; letter-spacing: -.03em; }
+#x-equals-x .covenant-licence-means { font-size: .9375rem !important; }
+#x-equals-x :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 4px; }
+#x-equals-x .covenant-hero :is(a, button):focus-visible { outline-color: rgb(var(--record-paper)); }
+#x-equals-x ::selection { background: rgb(var(--cartoon-sun) / .5); }
 .x-eq-phonebar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 60;
-  display: flex;
-  align-items: stretch;
-  gap: 0.5rem;
-  padding: 0.55rem 0.9rem calc(0.55rem + env(safe-area-inset-bottom));
-  background-color: rgb(var(--record-bone) / 0.97);
-  border-top: 2px solid rgb(var(--record-ink));
-  /* It waits below the glass until the plate at the head of the page has gone past, so it
-     can never stand on the two doors that plate already carries. */
-  transform: translateY(115%);
-  pointer-events: none;
-  transition: transform 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+  display: flex; align-items: stretch; gap: .5rem;
+  padding: .55rem .9rem calc(.55rem + env(safe-area-inset-bottom));
+  background: rgb(var(--record-paper)); border-top: 1px solid rgb(var(--record-ink));
+  transform: translateY(115%); pointer-events: none; transition: transform 200ms ease;
 }
 .x-eq-phonebar[data-shown] { transform: none; pointer-events: auto; }
-@media (prefers-reduced-motion: reduce) {
-  .x-eq-phonebar { transition: none; }
+.x-eq-phonebar-main,
+.x-eq-phonebar .covenant-share > button {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  min-height: 3rem; padding: .75rem .8rem; font-family: var(--font-record-ui);
+  font-size: .875rem; font-weight: 700; line-height: 1.2; border-radius: 0;
 }
-.x-eq-phonebar-main {
-  flex: 1 1 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 3rem;
-  padding: 0 0.9rem;
-  background-color: rgb(var(--record-ink));
-  color: rgb(var(--record-bone));
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  text-decoration: none;
-}
-.x-eq-phonebar-main:active { background-color: rgb(var(--cartoon-sun)); color: rgb(var(--record-ink)); }
-.x-eq-phonebar .x-eq-phonebar-share { flex: 0 0 auto; display: flex; }
-.x-eq-phonebar .covenant-share button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  min-height: 3rem;
-  padding: 0 0.95rem;
-  background-color: transparent;
-  border: 2px solid rgb(var(--record-ink));
-  color: rgb(var(--record-ink));
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  white-space: nowrap;
-}
-.x-eq-phonebar .covenant-share button:active {
-  background-color: rgb(var(--cartoon-sun));
-  border-color: rgb(var(--cartoon-sun));
+.x-eq-phonebar-main { flex: 1; background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); text-decoration: none; }
+.x-eq-phonebar .covenant-share > button { min-width: 6rem; background: transparent; color: rgb(var(--record-ink)); border: 1px solid rgb(var(--record-ink)); }
+.x-eq-phonebar :is(a, button):focus-visible { outline: 2px solid rgb(var(--record-mark)); outline-offset: 3px; }
+@media (min-width: 640px) {
+  #x-equals-x .covenant-doors,
+  #x-equals-x .covenant-licence-terms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1024px) {
+  #x-equals-x .covenant-hero-inner { padding: 4rem 2.5rem; }
+  #x-equals-x .covenant-band--centre { padding: 2.5rem; }
+  #x-equals-x .covenant-card,
+  #x-equals-x .covenant-licence { padding: 2.5rem 2.1rem; }
   .x-eq-phonebar { display: none; }
+}
+@media (max-width: 1023px) {
+  #x-equals-x.covenant-page { padding-bottom: 1rem; }
+  #x-equals-x .covenant-hero-actions .covenant-btn { flex: 1; }
+  body:has(.x-eq-phonebar) footer { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .x-eq-phonebar, .x-eq-layer { transition: none; }
+}
+html[data-tongue="th"] #x-equals-x :is(p, li) { line-height: 1.95 !important; overflow-wrap: normal; }
+@media print {
+  #x-equals-x :is(.covenant-hero-actions, .covenant-actions, .covenant-mark-row), .x-eq-phonebar { display: none; }
+  #x-equals-x .covenant-hero { background: none; }
+  #x-equals-x .covenant-hero-veil, #x-equals-x .covenant-hero .record-cover { display: none; }
+  #x-equals-x :is(.covenant-hero-inner, .covenant-title, .covenant-purpose, .covenant-hero-detail, .covenant-front-note) { color: rgb(var(--record-ink)); }
 }

@@ -21,69 +21,41 @@ import RecordEpigraph from '@/components/climate/RecordEpigraph';
 const PILLARS = [
   {
     n: '01',
-    status: 'BUILT · LIVE',
-    title: 'The smallest set of data a record needs',
-    // "No accounts" was too big a claim: keepers and checkers do sign in to work on the
-    // record. What is true is narrower and better — a reader never has to, and neither does
-    // anyone sending something in.
-    body: 'What you submit, a contact email so we can reach you about it, and the country a reader reads from. No IP address is stored. No tracking cookies. No ad profiles. No reader accounts: nothing to sign up to before you read, or before you send something in. Anyone who copies this code inherits a reviewed, minimal database — not a surveillance engine. There is nothing here worth harvesting.',
+    status: 'IN USE',
+    title: 'Read without joining',
+    body: 'You do not need an account to read the record or send something in. Submissions and the contact details needed to handle them are stored. Entry openings are counted with a country where one is available. This is not a claim that nothing is stored: the privacy note explains what is kept, why it is kept and how to ask about it.',
   },
   {
     n: '02',
     status: 'LICENCES IN PLACE',
-    title: 'CC BY-SA 4.0 and AGPL-3.0',
-    // Both halves, named together, because this record gives away two different things and a
-    // covenant that named only the code would leave the words — the entries themselves — with
-    // no stated terms at all. Irrevocable is the load-bearing word: a licence of this kind,
-    // once given, cannot be taken back, by this record or by anyone who takes it over.
-    // ── THE DAY THE REPOSITORY EXISTED ────────────────────────────────────────────
-    // This line used to say there was no public repository, and that the day one existed its
-    // link would go here and the line would change. That day was 26 November 2026: the code
-    // was pushed to GitHub and the repository was made public, and the page was checked from
-    // outside a signed-in account before the link went on it — a private repository answers
-    // 404 to every reader, and a link that fails is worse than the honest sentence it replaced.
-    //
-    // The words after it are deliberately modest. The repository holds two licence files: one
-    // for the code and one for the words, each naming the full text it stands on rather than
-    // reprinting it. So the page says exactly that, and no more than that.
-    body: 'Both are already given, and both are irrevocable: once given, a licence of this kind cannot be taken back. The words: everything published on this record is under Creative Commons BY-SA 4.0 — take it, change it, print it, sell it, keep the name on it, and let whatever you make be this free too. The code: the GNU AGPL-3.0, open in its licence and in every line of it, with one condition — anyone who runs a modified version as a service must publish their changes too. Good actors are unaffected. The classic extraction play — take free code, close it, add tracking, sell it — stops being a clever move and becomes a licence violation anyone can point at, in public. The repository is public as of 26 November 2026, so none of this has to be taken on trust: every line can be read, copied and checked at github.com/luxurypodslochlomond-creator/x-x. Two licence files sit in it, one for the code and one for the words, and each names the full text it stands on.',
-    // The names are the law, and the law is one tap away. A page asking a reader to take its
-    // word on a licence should hand them the licence: same addresses as the plate on x = x.
+    title: 'Give others the right to build on it',
+    body: 'Our own words are offered under CC BY-SA 4.0: you may copy and adapt them, including commercially, with attribution, changes identified and adaptations shared under the same terms. The code is offered under GNU AGPL-3.0. If people interact with a modified version over a network, they must be offered its corresponding source under that licence. These permissions cover work we can license, not other people’s drawings, photographs or source material. Those retain their own rights and credits. The licences give rights and responsibilities; they do not prevent every misuse, prohibit tracking in a copy or guarantee that a service will stay online.',
     links: [
-      { label: 'Read the code on GitHub', href: 'https://github.com/luxurypodslochlomond-creator/x-x' },
+      { label: 'Read the public code', href: 'https://github.com/luxurypodslochlomond-creator/x-x' },
       { label: 'Read CC BY-SA 4.0', href: 'https://creativecommons.org/licenses/by-sa/4.0/legalcode' },
-      { label: 'Read the GNU AGPL-3.0', href: 'https://www.gnu.org/licenses/agpl-3.0.html' },
+      { label: 'Read GNU AGPL-3.0', href: 'https://www.gnu.org/licenses/agpl-3.0.html' },
     ],
   },
   {
     n: '03',
-    status: 'PLANNED',
-    title: 'The name stays with the record',
-    body: 'Together We Change Climate, and the record itself. The code can be copied; the name, and the trust readers have placed in it, cannot be taken along with it. Anyone building on this starts under their own name, in the open, from zero.',
+    status: 'STILL TO SETTLE',
+    title: 'People still have to look after it',
+    body: 'A licence does not decide who controls a service, pays for its hosting or takes responsibility for its future. Long-term stewardship needs people and clear agreements. A name or a symbol cannot settle that for them. Copying the code does not transfer anyone else’s identity or endorsement.',
   },
   {
     n: '04',
-    status: 'GROWING DAILY',
-    title: 'The part nobody can copy: the evidence',
-    body: 'The public counts of entries and readers, the review trail behind every entry, the outcome data — that history exists only here. A copy begins with none of it. In a record kept for the public, trust is the whole product: it cannot be copied, only earned.',
+    status: 'ONGOING WORK',
+    title: 'Let the work be questioned',
+    body: 'Sources, dates, editorial names where a person has decided, and visible corrections help readers check the record. They do not make it infallible. Its public history can be read and, within the relevant rights, reused. Trust is not something this site owns or a reader owes it; it has to be earned through how the work is kept.',
   },
 ];
 
 const COMMITMENTS = [
-  'The good use is the default path — extraction is not in the codebase to exploit.',
-  'AI does the understanding; the human always keeps the deciding.',
-  'Free to read, always. Money never buys a place on the record.',
-  // The page twice tells a reader to check it against the privacy note, so it hands them the
-  // note rather than sending them looking. A claim you can check is worth more than a claim
-  // you are asked to trust, and only if the checking is one tap away.
-  <>
-    Every privacy claim is verifiable in the architecture, and in the record’s own{' '}
-    <Link to="/ClimatePrivacy" className="underline decoration-dotted underline-offset-2 hover:text-[#b3261e]">
-      privacy note
-    </Link>{' '}
-    — not only in the marketing.
-  </>,
-  'Anyone may copy this to help people. No one may quietly close it to harvest them.',
+  'Help people find something useful, not keep them watching.',
+  'Do not present AI screening or translation as proof. Make human editorial decisions identifiable.',
+  'Free to read. No advertising or paid placement in the record.',
+  <>Say what is stored and why, in the record’s <Link to="/ClimatePrivacy" className="underline underline-offset-2">privacy note</Link>.</>,
+  'Keep sources and credits with the work. Say what changed when something is corrected.',
 ];
 
 function Pillar({ n, status, title, body, links }) {
@@ -126,18 +98,17 @@ function Pillar({ n, status, title, body, links }) {
 export default function ExtractionProofCovenant() {
   return (
     <ClimateRecordShell
-      eyebrow="Public covenant"
-      marker="Open source · extraction-proof"
-      title="Open source. Extraction-proof."
-      statement="Anyone can copy this record's code — we invite it. What no one can copy is a reason to betray the people using it. Helping is the easy path; extraction is the pointless one."
+      eyebrow="Our commitments"
+      marker="Open code · named sources · visible corrections"
+      title="Open to use. Open to question."
+      statement="This record is meant to help people, not turn their attention or their work into something to sell. Here is what we commit to, what can be reused, and what still depends on people."
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel="Back to the record"
-      footer="This page is part of the record's method: it says what the record is made of, so that anyone — a reader, a funder, a review panel — can check it against the code and the privacy note, and say so if it does not hold."
+      footer="These commitments can be questioned against the record, its public code and its privacy note. A promise on a page is not proof that it has been kept."
     >
       <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed lg:leading-[1.75] text-[#141210] mb-6">
-        This record is built so that copying it helps people, and closing it does not pay. Four things hold that
-        up. Each one says out loud how far along it is, because a promise about the future is worth less than a
-        thing already done.
+        No website is made safe from exploitation by calling itself extraction-proof. What matters is what it
+        does, what people are allowed to reuse, and who is accountable when something goes wrong.
       </p>
 
       <div className="space-y-3">
@@ -179,8 +150,8 @@ export default function ExtractionProofCovenant() {
           they are easier to read on paper than they were in cream on black. */}
       <section className="mt-6 border-2 border-[#141210] bg-[#f7f1e5] px-5 py-6">
         <p className="text-[12px] lg:text-[13px] font-mono leading-relaxed text-[#141210] mb-4">
-          You cannot stop bad actors from using AI. You can make the good version the easiest one to build, use
-          and fund — by leaving the honest path as the shortest one through the code.
+          The purpose is practical: keep useful knowledge available, credit the people behind it, and give
+          others a way to build on it. The technology supports that work; it does not replace responsibility.
         </p>
         {/* The close of the argument is her line, marked as hers — quoted, signed, and with the
             limit on it stated underneath, because the whole page is about saying plainly what
@@ -188,7 +159,7 @@ export default function ExtractionProofCovenant() {
         <RecordEpigraph compact label="The line this record is named after" />
         <p className="mt-3 text-[10px] font-mono text-[#5a5246] leading-relaxed">
           <Link to="/XEqualsX" className="underline decoration-dotted underline-offset-2 hover:text-[#e2602a]">
-            What is borrowed, and what is owed
+            Why this record exists
           </Link>
           .
         </p>
