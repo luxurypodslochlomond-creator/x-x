@@ -94,9 +94,47 @@ export default function PressOpening() {
               color: '#2b251e',
             }}
           >
-            The name is older than this room: <strong>Iya</strong>, the Walls of Benin, raised one
-            basket of earth at a time by hands nobody wrote down. A wall is what a small gesture
-            becomes when enough people make it and nobody is in a hurry.
+            The name is older than this room: <strong>Iya</strong>, the earthworks of Benin — some
+            16,000 km of ditches, banks and ramparts enclosing around 6,500 km², raised one basket
+            of earth at a time over something like eight hundred years, by hands nobody wrote down.
+            We do not have eight hundred years. A wall is what a small gesture becomes when enough
+            people make it — and this one has to be made in a hurry.
+          </p>
+          {/* ── THE SCALE, AND WHERE IT CAME FROM, IN TEN POINT TYPE ────────────────
+              Janine Selendy sent the scale on 27 November 2026, quoting Wikipedia's account of
+              the earthworks; the length is Guinness's record of the longest pre-mechanical
+              earthworks in the world. Two sources, named and linked, rather than a bare number
+              dropped at the door — because a figure without its source is a rumour with a
+              typeface, and Francis and every cartoonist in this room would smell it in a second.
+              The room's rule holds: no new section, no apparatus, one line under the sentence. */}
+          <p
+            style={{
+              marginTop: '6px',
+              fontSize: '10px',
+              lineHeight: 1.6,
+              color: '#6b6258',
+              fontFamily: 'var(--font-record-ui)',
+            }}
+          >
+            Scale:{' '}
+            <a
+              className="underline"
+              href="https://www.guinnessworldrecords.com/world-records/97959-longest-earthworks-of-the-pre-mechanical-era"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Guinness World Records
+            </a>
+            {' · '}
+            <a
+              className="underline"
+              href="https://en.wikipedia.org/wiki/Benin_Moat"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Wikipedia’s Benin Moat
+            </a>
+            , as Janine Selendy sent it on 27 November 2026.
           </p>
           <CartoonSignal />
         </header>
