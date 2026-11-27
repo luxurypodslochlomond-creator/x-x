@@ -43,7 +43,12 @@ export default function RecordPagesPanel({ open, onClose }) {
   // rather than torn out of the frame.
   const [mounted, setMounted] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const [showNames, setShowNames] = useState(true);
+  // ── THE SHEET OPENS ON THE DRAWINGS ────────────────────────────────────────────
+  // It opened on the written index, which meant the twenty-four marks — the thing Brian
+  // calls "the coolasfuck symbols" — were one tap away behind a toggle nobody had pressed.
+  // A drawer of drawings is what this sheet is; the index is the second page of it, and the
+  // toggle beside the close button turns to it.
+  const [showNames, setShowNames] = useState(false);
 
   // ── A DESK IS NOT A PHONE, AND THE LOCK IS THE DIFFERENCE ─────────────────────
   // On a handset the sheet covers the glass, so the page behind is held still. On a desk it
