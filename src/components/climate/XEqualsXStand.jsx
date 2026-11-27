@@ -1,17 +1,33 @@
 import React from 'react';
 
-const CASE_SOURCE = 'https://www.selendygay.com/news/general/2026-06-25-meta-sued-over-surveillance-and-gag-order-silencing-whistleblower-sarah-wynn-williams';
-
 // ── THE WORLD WE ARE IN, SAID WITHOUT A LECTURE ────────────────────────────────
-// Brian, 27 November: "can't point out Facebook … all the platforms doing this with ads".
-// He is right, and naming one company would have made the argument smaller than it is. The
-// trade is the industry's, not one firm's: attention sold to advertisers, and a feed that
-// gives you what holds you rather than what helps you. Facebook is the example everybody
-// already knows, so it is used as one — in the case note, where it belongs, and nowhere else.
-//
-// The case itself is written carefully, because a real person is inside it. She is named
-// because she is named in public; the page says what she alleges, says plainly that these
-// are allegations, and does not speak for her or turn her into a poster.
+// Brian, 27 November: no named individual. He is right — the page does not need a person's
+// case to make this argument, and naming one makes a shared problem look like one company's
+// fault. So the section points at what everybody already knows, and cites three bodies
+// nobody can wave away: the climate scientists, the World Health Organization, and the US
+// Surgeon General. Three links, checked, and nothing more — an activist does not need a
+// bibliography, they need to know the ground is solid.
+const FACTS = [
+  {
+    title: 'The climate is warming because of us.',
+    body: 'The IPCC’s own summary is blunt: human influence has warmed the atmosphere, ocean and land.',
+    source: 'IPCC · Climate Change 2021',
+    href: 'https://www.ipcc.ch/report/ar6/wg1/resources/spm-headline-statements/',
+  },
+  {
+    title: 'The air alone kills millions a year.',
+    body: 'The World Health Organization puts outdoor and household air pollution together at 6.7 million premature deaths a year.',
+    source: 'World Health Organization',
+    href: 'https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health',
+  },
+  {
+    title: 'The feed is built to hold children.',
+    body: 'The US Surgeon General issued an advisory on social media and young people’s mental health, because the evidence warranted one.',
+    source: 'US Surgeon General · 2023',
+    href: 'https://www.hhs.gov/surgeongeneral/reports-and-publications/youth-mental-health/social-media/index.html',
+  },
+];
+
 export default function XEqualsXStand() {
   return (
     <section className="covenant-world" aria-labelledby="the-world">
@@ -31,11 +47,20 @@ export default function XEqualsXStand() {
           It is of attention, of evidence, and of the time people need to act on either. The planet is not losing for lack of facts. It is losing because the facts do not reach the people with the power to move.
         </li>
       </ul>
-      <aside className="covenant-case" aria-label="A named example, in the open">
-        <p className="covenant-case-label">What speaking up can cost</p>
-        <p>Sarah Wynn-Williams, a former Facebook public-policy director, sued Meta in June 2026. She alleges the company surveilled her and used a private arbitration gag order to silence her. She is represented by Selendy Gay and Katz Banks Kumin.</p>
-        <a href={CASE_SOURCE} target="_blank" rel="noopener noreferrer">Read the announcement, 25 June 2026 ↗<span className="sr-only"> (opens a new tab)</span></a>
-        <p className="covenant-case-small">Allegations in a live case, not findings — and not one company’s fault alone. We name it because it shows the scale of what people are up against, not to speak for her.</p>
+      <aside className="covenant-case" aria-label="Three sources you can check yourself">
+        <p className="covenant-case-label">Check it yourself</p>
+        <dl className="covenant-facts">
+          {FACTS.map(({ title, body, source, href }) => (
+            <div key={title}>
+              <dt>{title}</dt>
+              <dd>{body}</dd>
+              <dd className="covenant-facts-source">
+                <a href={href} target="_blank" rel="noopener noreferrer">{source} ↗<span className="sr-only"> (opens a new tab)</span></a>
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p className="covenant-case-small">Three links, from bodies that cannot be waved away. Check them yourself — that is the only thing that makes a claim worth anything.</p>
       </aside>
     </section>
   );

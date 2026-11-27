@@ -137,6 +137,16 @@
   color: rgb(var(--cartoon-sun)); font-size: .8rem; font-weight: 700;
   text-decoration: underline; text-underline-offset: .22em;
 }
+#x-equals-x .covenant-facts { margin: 0; }
+#x-equals-x .covenant-facts > div { padding: .85rem 0; border-top: 1px solid rgb(var(--record-paper) / .2); }
+#x-equals-x .covenant-facts dt { font-size: 1rem; font-weight: 700; line-height: 1.3; letter-spacing: -.01em; }
+#x-equals-x .covenant-facts dd { margin: .3rem 0 0; color: rgb(var(--record-paper) / .78); font-size: .84rem; line-height: 1.55; }
+#x-equals-x .covenant-facts .covenant-facts-source { margin-top: .1rem; }
+#x-equals-x .covenant-facts-source a {
+  display: inline-flex; align-items: center; min-height: 2.4rem;
+  color: rgb(var(--cartoon-sun)); font-size: .74rem; font-weight: 700;
+  text-decoration: underline; text-underline-offset: .2em;
+}
 #x-equals-x .covenant-case-small { color: rgb(var(--record-paper) / .62) !important; font-size: .76rem !important; line-height: 1.55 !important; }
 
 /* ── NOT A PROMISE. WHAT IS ON IT. ──────────────────────────────────────────── */
