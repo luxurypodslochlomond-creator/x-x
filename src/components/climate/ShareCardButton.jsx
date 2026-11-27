@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { Share2, Check } from 'lucide-react';
+import { Share2, Check, Loader2 } from 'lucide-react';
 import { buildWireShareCard } from './shareCardImage';
 import { recordAddress, recordOrigin } from './recordAddress';
 import { wireAddress } from './recordSlug';
@@ -45,7 +45,11 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   const source = entry.source_name
     ? `Source: ${entry.source_name}${entry.corroborating_source ? ` · also ${entry.corroborating_source}` : ''}`
     : entry.corroborating_source ? `Also reported: ${entry.corroborating_source}` : '';
-  const text = [title, description, source, credit, link].filter(Boolean).join('\n');
+  // And when it happened, where the entry carries a date. A news account pasted on without
+  // its date reads as though it happened this morning, which on a record about time is the
+  // quietest kind of wrong thing to pass on.
+  const when = entry.when_label || entry.when_date || '';
+  const text = [title, description, when, source, credit, link].filter(Boolean).join('\n');
 
   const prepare = async () => {
     const blob = await build(entry, { origin: recordOrigin() });
@@ -78,14 +82,22 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   // A room may hand in its own mark for this button: the cartoon room draws its own arrow,
   // because the network glyph is the sign for broadcasting and this record passes things on
   // by hand. Everything else keeps the standard one.
-  const Icon = state === 'shared' ? Check : (GivenIcon || Share2);
-  const label = state === 'building' ? 'Preparing image…' : state === 'shared' ? 'Shared' : state === 'error' ? 'Try sharing again' : givenLabel || (compact ? 'Share' : 'Share this entry as a card');
+  const Icon = state === 'building' ? Loader2 : state === 'shared' ? Check : (GivenIcon || Share2);
+  // ── THE LABEL NEVER CHANGES LENGTH ───────────────────────────────────────────
+  // It used to say "Preparing image…" and then "Shared", so the button grew and shrank
+  // under the reader's thumb and everything standing beside it jumped with it — the small
+  // shudder Brian kept seeing, worst on the wire where Share sits in a row next to Read.
+  // The work is now said by the icon turning, and by a line only a screen reader hears, so
+  // the button is one size from the tap to the finished card.
+  const label = givenLabel || (compact ? 'Share' : 'Share this entry as a card');
+  const doing = state === 'building' ? 'Preparing the image' : state === 'shared' ? 'Shared' : '';
   return <>
     <button type="button" onClick={share} disabled={state === 'building'} aria-busy={state === 'building'} className={inline ? 'record-share-inline' : compact ? 'record-share-compact' : 'record-share-button'}>
-      <Icon size={17} aria-hidden="true" />{label}
+      <Icon size={17} aria-hidden="true" className={state === 'building' ? 'animate-spin' : undefined} />{label}
+      <span className="sr-only" role="status">{doing}</span>
     </button>
     {state === 'error' && <span className="record-share-error" role="alert">The image could not be prepared. Please try again.</span>}
-    {card && <Suspense fallback={<span role="status" className="text-sm text-record-muted">Preparing image…</span>}>
+    {card && <Suspense fallback={<span role="status" className="sr-only">Preparing the image</span>}>
       <ShareCardPreview open onClose={() => setCard(null)} blob={card.blob} fileName={card.fileName} link={link} headline={title} text={text} credit={credit} includeMessage={includeMessage} windowTitle={windowTitle} alt={alt} />
     </Suspense>}
   </>;
