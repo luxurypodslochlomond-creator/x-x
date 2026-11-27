@@ -6,6 +6,7 @@ import XEqualsXSignalBand from '@/components/climate/XEqualsXSignalBand';
 import XEqualsXWhyTheName from '@/components/climate/XEqualsXWhyTheName';
 import XEqualsXJanineStory from '@/components/climate/XEqualsXJanineStory';
 import XEqualsXCollective from '@/components/climate/XEqualsXCollective';
+import XEqualsXArrangement from '@/components/climate/XEqualsXArrangement';
 import XEqualsXStand from '@/components/climate/XEqualsXStand';
 import XEqualsXOnRecord from '@/components/climate/XEqualsXOnRecord';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
@@ -27,6 +28,7 @@ export default function XEqualsX() {
       <XEqualsXJanineStory />
       <XEqualsXCollective />
       <XEqualsXStand />
+      <XEqualsXArrangement />
       <XEqualsXOnRecord />
       <XEqualsXPromises />
       <XEqualsXSignalBand />
