@@ -1,10 +1,11 @@
 import React from 'react';
-import { SHARE_GROUPS } from '@/components/climate/shareDestinations';
+import { SHARE_GROUPS, SHARE_REST } from '@/components/climate/shareDestinations';
 
 // ── THE LIST, NOT THE GRID ────────────────────────────────────────────────────
 // Three short lines of names. Nothing is drawn, nothing competes with the painting above
 // it, and the whole planet is on it. A door that cannot be opened by a web address says so
-// in words beside its name rather than pretending to be a button that does nothing.
+// in words beside its name rather than pretending to be a button that does nothing — and
+// the last line names the rest of the world so that nobody reads this as a shortlist.
 export default function ShareDestinations({ link, title, message }) {
   return (
     <div className="space-y-3 border-t border-record-ink/15 pt-3">
@@ -30,6 +31,7 @@ export default function ShareDestinations({ link, title, message }) {
           </p>
         </div>
       ))}
+      <p className="text-[11px] leading-relaxed text-record-muted">{SHARE_REST}</p>
     </div>
   );
 }

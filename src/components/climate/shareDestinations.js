@@ -37,6 +37,8 @@ export const SHARE_GROUPS = [
       { name: 'Threads', href: ({ link, title }) => `https://www.threads.net/intent/post?text=${enc(`${title} ${link}`)}` },
       { name: 'Reddit', href: ({ link, title }) => `https://www.reddit.com/submit?url=${enc(link)}&title=${enc(title)}` },
       { name: 'Pinterest', href: ({ link, title }) => `https://pinterest.com/pin/create/button/?url=${enc(link)}&description=${enc(title)}` },
+      { name: 'Tumblr', href: ({ link, title }) => `https://www.tumblr.com/widgets/share/tool?canonicalUrl=${enc(link)}&caption=${enc(title)}&posttype=link` },
+      { name: 'Lemmy', href: ({ link, title }) => `https://lemmy.world/create_post?url=${enc(link)}&title=${enc(title)}` },
       { name: 'Discord', href: null, how: 'copy the link into the channel' },
       { name: 'Signal', href: null, how: 'copy the link into the chat' },
     ],
@@ -53,3 +55,14 @@ export const SHARE_GROUPS = [
     ],
   },
 ];
+
+// ── THE SENTENCE THAT LEAVES NOBODY OUT ──────────────────────────────────────
+// Every door above needs a web address to open, and most of the apps a young activist
+// actually lives in do not publish one. Naming them and then offering a button that does
+// nothing would be worse than silence. So they are named once, here, and pointed at the
+// one thing that really does reach them: the share sheet, which knows every app installed
+// on the phone. TikTok and Snapchat will not take a link from a browser at all; Twitch and
+// YouTube have no share address; Nostr and Matrix belong to networks with no single home.
+// None of them is left out. They simply open the way they open.
+export const SHARE_REST =
+  'TikTok, Snapchat, YouTube, Twitch, Nostr, Matrix, WhatsApp groups and every other app on this phone — the share sheet above.';
