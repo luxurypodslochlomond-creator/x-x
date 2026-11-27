@@ -161,9 +161,18 @@
   .record-home-page .record-room-drawing svg { inline-size: 4rem; block-size: 4rem; }
 }
 @media (max-width: 1023px) {
-  .record-home-page .record-room-cell:nth-child(even) { border-inline-start: 1px solid rgb(var(--record-ink) / .14); }
-  .record-home-page .record-room-cell:nth-child(n+3) { border-block-start: 1px solid rgb(var(--record-ink) / .14); }
+  /* ── THREE ROOMS IN ONE ROW, AND THE TWO HAIRLINES BETWEEN THEM ──────────────
+     These two rules were written for four cells in two columns: a divider down the
+     middle and a rule across the third and fourth. With the groups out of the row there
+     are three, so the old rules would have put the last one alone in the second row beside
+     an empty half — which is the "unbalanced" Brian kept seeing without being able to name.
+     A divider between neighbours is all it needs now, and the row reads as one band. */
+  .record-home-page .record-room-cell + .record-room-cell { border-inline-start: 1px solid rgb(var(--record-ink) / .14); }
   .record-home-page .record-room-link { width: 100%; height: 100%; }
+  /* A third of a phone is a narrow cell, so the furniture under each word gives way
+     rather than pushing the row into a paragraph with drawings in it. */
+  .record-home-page .record-room-label { font-size: 12px; letter-spacing: .07em; }
+  .record-home-page .record-room-link .record-description { font-size: 11.5px; }
 }
 @media (hover: hover) {
   .record-home-page .record-room-link:hover { background-color: rgb(var(--record-kind-ink, var(--record-red)) / .06); }

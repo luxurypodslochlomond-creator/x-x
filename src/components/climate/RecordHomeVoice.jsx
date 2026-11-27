@@ -1,6 +1,7 @@
 import React from 'react';
 import PeaceBell from '@/components/climate/PeaceBell';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import PostToLinkedIn from '@/components/climate/PostToLinkedIn';
 import { buildRecordShareCard } from '@/components/climate/shareCardImage';
 import { RECORD_LINK, RECORD_SHARE_TITLE, RECORD_SHARE_LINE } from '@/components/climate/shareRecordCard';
 import '@/components/climate/record-home-opening.css';
@@ -32,9 +33,16 @@ export default function RecordHomeVoice({ copy }) {
           <span className="text-cartoon-sun">{copy.title_b}</span>{' '}
           {copy.title_c}
         </h1>
+        {/* ── TWO DOORS, BECAUSE THEY GO TO TWO DIFFERENT PLACES ────────────────────
+            The share mark hands the phone a picture. That is right for a chat and useless
+            for LinkedIn, whose app will not take a picture from a web page's share sheet —
+            which is why it never appeared in the list on Janine's phone at all. So the door
+            her peers actually use is named, beside it, and opens LinkedIn's own composer on
+            the record's address with the words already on the clipboard. See PostToLinkedIn. */}
         <div className="record-home-pass mt-3">
           <span className="record-header-type text-xs uppercase tracking-[0.12em] text-record-bone">{copy.service}</span>
           <ShareCardButton entry={{ id: 'record-of-the-time', title: RECORD_SHARE_TITLE }} build={buildRecordShareCard} link={RECORD_LINK} description={RECORD_SHARE_LINE} label="Share the record" instant includeMessage inline />
+          <PostToLinkedIn />
         </div>
       </div>
     </section>
