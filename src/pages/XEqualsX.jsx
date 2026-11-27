@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
+import XEqualsXRooms from '@/components/climate/XEqualsXRooms';
 import XEqualsXTwentyNinth from '@/components/climate/XEqualsXTwentyNinth';
 import XEqualsXSignalBand from '@/components/climate/XEqualsXSignalBand';
 import XEqualsXWhyTheName from '@/components/climate/XEqualsXWhyTheName';
@@ -25,6 +26,7 @@ export default function XEqualsX() {
   return (
     <div id="x-equals-x" className="covenant-page" data-record-technical>
       <XEqualsXOpening />
+      <XEqualsXRooms />
       <XEqualsXTwentyNinth />
       <XEqualsXCollective />
       <XEqualsXArrangement />

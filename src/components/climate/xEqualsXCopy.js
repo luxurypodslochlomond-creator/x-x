@@ -1,6 +1,10 @@
 export const COVENANT = {
   kicker: 'A public climate record',
   title: 'A record of the time.',
+  // Split so the last word can be printed in the record's yellow, the way the record's own
+  // name carries one word in it. `title` stays whole for the card and the share.
+  titleLead: 'A record of the',
+  titleMark: 'time.',
   distinction: 'For what we do together.',
   meaning: 'Climate evidence. Creative voices. Collective action. A place to turn what we know into what we do for one another.',
   limit: 'No ads. No paid boosts. Sources stay named.',

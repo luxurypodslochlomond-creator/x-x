@@ -9,7 +9,6 @@ export default function XEqualsXJanineStory() {
         <h2 id="janines-work">The work this builds on.</h2>
         <p>In Janine Selendy’s own account, a dive in Beirut harbour became her first awareness of damage to Earth.</p>
         <p>Her work through Horizon International brought together health, the environment and practical responses. This record follows that approach: document the damage, examine responses and make the source material accessible.</p>
-        <blockquote>“Together we can change the course of climate change.”<cite>Janine M. H. Selendy</cite></blockquote>
         <p>The Wall carries cartoonists’ work as commentary and witness, not as decoration or scientific evidence. The artist’s name, context and rights stay with the work. A drawing can stand on its own or be linked to an entry.</p>
         <div className="covenant-inline-links">
           <Link to="/ClimateFounder">Janine’s account and work →</Link>
