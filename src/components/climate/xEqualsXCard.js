@@ -56,6 +56,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.fillStyle = ink;
   g.font = `700 70px ${sans}`;
   g.fillText(COVENANT.title, W / 2, 1064, W - PAD * 2);
+  g.font = `700 48px ${sans}`;
   g.fillText(COVENANT.distinction, W / 2, 1145, W - PAD * 2);
   g.font = `400 30px ${sans}`;
   g.fillText(COVENANT.meaning, W / 2, 1202, W - PAD * 2);

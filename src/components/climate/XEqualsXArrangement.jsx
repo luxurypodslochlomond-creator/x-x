@@ -1,19 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Three entry types, linked to their actual sections in the record.
 const THREE = [
-  { name: 'Crises', body: 'Name the harm. Locate it. Keep the source.', to: '/TogetherChangeClimate#record-room-climate_crisis' },
-  { name: 'Solutions', body: 'Show the response. Keep the evidence. Say where it falls short.', to: '/TogetherChangeClimate#record-room-solution' },
-  { name: 'Actions', body: 'Name the work. Find the organiser. Take part.', to: '/TogetherChangeClimate#record-room-actions' },
+  { name: 'Follow the answer to its sources.', body: 'Search the record. Follow the entries an answer cites. Read the original sources and decide what they actually support.', to: '/ClimateSearch' },
+  { name: 'Check the saved content yourself.', body: 'Compare an entry’s SHA-256 fingerprint in your own browser. A matching seal checks the saved content, not whether its claims are true.', to: '/ClimateSeals' },
+  { name: 'See how publication is decided.', body: 'The method names the screening process, unsigned entries and the gaps still to close. Automatic clearance is not independent verification.', to: '/ClimateMethod' },
 ];
 
 export default function XEqualsXArrangement() {
   return (
     <section id="arrangement" className="covenant-arrangement" aria-labelledby="arrangement-heading">
       <div className="covenant-arrangement-inner">
-        <p className="covenant-kicker">How the work connects</p>
-        <h2 id="arrangement-heading">The harm. The response.<br />The people acting.</h2>
+        <p className="covenant-kicker">Technology · BASE 1 · accountability</p>
+        <h2 id="arrangement-heading">Machine speed.<br />Human responsibility.</h2>
+        <p className="covenant-arrangement-line">BASE 1 works on the tools. It does not get the last word.</p>
+        <p>BASE 1 is the name used here for the AI assistant. Brian Hughes builds this platform with it. AI assists search, screening and translation: practical work that makes the record more usable. It can also be wrong. Fluency is not evidence. An automatic pass is not a human signature.</p>
         <ol className="covenant-three">
           {THREE.map(({ name, body, to }) => (
             <li key={name}>
@@ -22,14 +23,12 @@ export default function XEqualsXArrangement() {
             </li>
           ))}
         </ol>
-        <p className="covenant-arrangement-line">A shared subject connects related crises, solutions and actions. A group names the subject it works on. A custodian can link a drawing to the entry it answers.</p>
-        <p className="covenant-arrangement-drawings"><strong>Those are real links, not a claim that everything is already joined.</strong> Open an entry to follow related work. Open a drawing to follow its linked entry, where one has been assigned. Find a group through the contact its organiser chose to publish. Art also stands in its own right: it does not have to illustrate a report to belong here.</p>
         <div className="covenant-platform-part">
-          <p><strong>Technology in service of the living world.</strong> We build and maintain the platform. Researchers, communities and artists bring work that keeps its own authors, sources and rights. The technology connects it without taking the credit for it.</p>
-          <p>The purpose is collective power: knowledge people can challenge, art people can encounter, and work people can find and join. What changes beyond the screen has to be shown, not claimed.</p>
-          <p className="covenant-platform-mark">x = x &middot; no one left behind</p>
+          <p><strong>Technical capability is not editorial authority.</strong> A machine can help find and connect work. It cannot stand in for a community’s knowledge, an artist’s voice or a person willing to put their name to a decision.</p>
+          <p>We are responsible for what we build and publish. Researchers, communities and artists keep the credit for their work. The platform’s code is public: the design is open to scrutiny, too.</p>
+          <p className="covenant-platform-mark">In defence of our planet and life.</p>
         </div>
-        <Link to="/ClimateMethod" className="covenant-text-link">How an entry gets on, and who signs it <span aria-hidden="true">→</span></Link>
+        <a href="https://github.com/luxurypodslochlomond-creator/x-x" target="_blank" rel="noopener noreferrer" className="covenant-text-link">Inspect the public code <span aria-hidden="true">↗</span><span className="sr-only"> (opens a new tab)</span></a>
       </div>
     </section>
   );

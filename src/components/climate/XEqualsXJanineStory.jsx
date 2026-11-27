@@ -10,7 +10,7 @@ export default function XEqualsXJanineStory() {
         <p>In Janine Selendy’s own account, a dive in Beirut harbour became her first awareness of damage to Earth.</p>
         <p>Her work through Horizon International brought together health, the environment and practical responses. This platform takes its direction from that life’s work: do not only describe the damage. Find what helps. Make it possible for others to use it.</p>
         <blockquote>“Together we can change the course of climate change.”<cite>Janine M. H. Selendy</cite></blockquote>
-        <p>That is why the drawings belong here, too. Cartoonists from Africa, Asia and beyond bring their own ways of seeing the same world. The Wall is not decoration around the evidence. It is another way to ask what must change.</p>
+        <p>The cartoonists on the Wall are not here to make the crisis look better. Satire questions power. Drawings bear witness. Artists from Africa, Asia and beyond speak in their own visual languages, with their names, context and rights intact. Their work does not need to illustrate a report to belong here, and it is never passed off as scientific evidence.</p>
         <div className="covenant-inline-links">
           <Link to="/ClimateFounder">Janine’s account and work →</Link>
           <Link to="/ClimateCartoons">Meet the hands on the Wall →</Link>

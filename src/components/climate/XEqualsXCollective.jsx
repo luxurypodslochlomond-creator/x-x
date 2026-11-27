@@ -1,21 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Network, Palette, Users } from 'lucide-react';
+import { TriangleAlert, Lightbulb, Users } from 'lucide-react';
 
 const CONNECTIONS = [
-  { name: 'Art', detail: 'The Wall. The artists. The work itself.', to: '/ClimateCartoons', Icon: Palette },
-  { name: 'Intelligence', detail: 'Search the record. Question the evidence.', to: '/ClimateSearch', Icon: Network },
-  { name: 'Activism', detail: 'Find an action. Contact its organiser.', to: '/TogetherChangeClimate#record-room-actions', Icon: Users },
+  { name: 'Crises', detail: 'The harm. The place. The source.', to: '/TogetherChangeClimate#record-room-climate_crisis', Icon: TriangleAlert },
+  { name: 'Solutions', detail: 'The response. The evidence. The limits.', to: '/TogetherChangeClimate#record-room-solution', Icon: Lightbulb },
+  { name: 'Actions', detail: 'The work. The organiser. A way to take part.', to: '/TogetherChangeClimate#record-room-actions', Icon: Users },
 ];
 
 export default function XEqualsXCollective() {
   return (
     <section id="collective" className="covenant-collective" aria-labelledby="collective-heading">
       <div className="covenant-collective-inner">
-        <p className="covenant-kicker">The platform · connected work, not collected attention</p>
-        <h2 id="collective-heading">Connect the work.<br />Build collective power.</h2>
-        <p>Art can confront what a report cannot. Evidence can expose what power would rather leave unseen. People can turn both into organised action. This platform brings those kinds of work within reach of one another.</p>
-        <nav className="covenant-connections" aria-label="Explore art, intelligence and activism">
+        <p className="covenant-kicker">The record · evidence into action</p>
+        <h2 id="collective-heading">Confront the harm.<br />Organise the response.</h2>
+        <p>A warning is not enough. The harm needs a record. A proposed solution needs scrutiny. Action needs people who can carry it through.</p>
+        <nav className="covenant-connections" aria-label="Explore crises, solutions and actions">
           {CONNECTIONS.map(({ name, detail, to, Icon }) => (
             <Link to={to} key={name} className="covenant-connection">
               <span className="covenant-connection-node"><Icon aria-hidden="true" /></span>
@@ -23,9 +23,9 @@ export default function XEqualsXCollective() {
             </Link>
           ))}
         </nav>
-        <p><strong>Art is not decoration. People are not an audience. Life is not a resource to exhaust.</strong> The work belongs to the people who make it, not to the platform that carries it.</p>
-        <p className="covenant-love-line">Human knowledge.<br />Machine assistance.<br />Collective action.</p>
-        <p>AI helps with searching and translation. It does not replace an artist’s voice, lived knowledge or an accountable decision. Collective intelligence means we can question one another, connect what we know and act without having to become the same.</p>
+        <p><strong>The aim is not another audience. It is informed, organised action.</strong> Researchers, communities, artists and organisers bring different knowledge. The record makes that work easier to find without claiming it as its own.</p>
+        <p className="covenant-love-line">Find the source.<br />Question the claim.<br />Act with others.</p>
+        <p>Related entries share a subject. Groups name the subject they work on. Custodians can link a drawing to the entry it answers. These are links people can follow, not a claim that every connection has already been made.</p>
         <div className="covenant-inline-links">
           <Link to="/TogetherChangeClimate#record-room-groups">Find people working on the same thing →</Link>
           <Link to="/TogetherChangeClimate?submit=1&type=group">Start a group →</Link>

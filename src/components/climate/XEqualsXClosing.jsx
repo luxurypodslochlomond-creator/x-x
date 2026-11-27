@@ -9,19 +9,19 @@ export default function XEqualsXClosing() {
         <h2 id="who-comes-after">Leave more<br />than a warning.</h2>
         <p>Leave the evidence. The drawing that made someone look again. The response that helped, and an honest account of where it did not.</p>
         <p className="covenant-future-strong"><strong>A university, a village, a studio, a kitchen table. Different places to begin. The same planet to care for.</strong></p>
-        <p className="covenant-future-origin">We cannot claim to have changed the world by building a record. We can keep useful work within reach, and invite one another to put it to use.</p>
+        <p className="covenant-future-origin">The measure is not how much we publish. It is whether this work is useful to people protecting life. That has to be demonstrated beyond the screen.</p>
         <div className="covenant-inline-links">
           <Link to="/ClimateMethod">How the record works →</Link>
           <Link to="/ClimateSeals">Check a seal →</Link>
         </div>
       </div>
       <div className="covenant-small-print">
-        <p className="covenant-makers-heading">Human and machine intelligence. One shared brief.</p>
+        <p className="covenant-makers-heading">Built with BASE 1. Human responsibility, on the record.</p>
         <p>This work did not begin with AI. Janine’s life’s work gives it direction. Researchers, communities and artists made the work it points to. Brian Hughes built this platform with BASE 1, the name used here for the AI assistant. The source work keeps its own authors.</p>
         <details className="covenant-provenance">
           <summary>Who made what, and who is accountable</summary>
           <div>
-            <p>BASE 1 helped draft, organise, check links and build the platform; it assists screening and translation. Its contributions are real, and so are its limits. An AI output is not independent evidence, and it cannot supply a person’s sign-off.</p>
+            <p>BASE 1 helped draft, organise, check links and build the platform. AI also assists search, screening and translation. These contributions are named so they can be questioned, not presented as scientific validation. No machine output counts as independent verification or a person’s sign-off.</p>
             <p>People decide what stays and are accountable for what is published. The method discloses automatically cleared and unsigned entries. Machine readings of drawings are labelled separately from the artist’s own words.</p>
             <Link to="/ClimateMethod">Read the editorial account →</Link>
           </div>
