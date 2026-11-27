@@ -21,6 +21,10 @@ export const WALL_ORDER = [
   // room begins with him. It is still a rehearsal, not a finished submission — take this
   // line out (and the drawing off the wall) once he sends the real one with his own line.
   'Urbanisation and Sanitation…',
+  // His second own drawing, sent the same afternoon: the egg under the hammer. It hangs
+  // beside his first because a hand's own work belongs together at the head of its block,
+  // not at the bottom behind the artists he gathered.
+  'Last Wish',
   // ── FRANCIS'S CAMPAIGN, HANGING BEHIND HIS OWN DRAWING ───────────────────────
   // The CAIB SDG cartoon campaign is why this room exists, so the drawings he gathers for it
   // hang immediately behind his own test drawing, in the order he sends them: the Bafoussam
