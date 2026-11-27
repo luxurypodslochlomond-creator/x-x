@@ -1,38 +1,84 @@
 import React, { useEffect, useState } from 'react';
 
-// ── THE DOOR THAT OPENS WHERE A LINK DOES NOT ────────────────────────────────
-// A record that will not leave anybody out cannot hand WeChat a foreign address: the link
-// is stopped before it is ever opened. A QR code is not a link — it is the address, drawn —
-// so it crosses that wall, and it crosses a workshop room too, where the fastest way to get
-// the record onto forty phones is to hold one screen up.
+// ── THE MARK INSIDE THE CODE ─────────────────────────────────────────────────
+// Brian, 27 November: "thought QR code could carry the record's mark inside it… could have
+// layers… is this possible?"
 //
-// And it is the one picture on this record that is also a fact: a grid of marks that holds
-// an entire page and gives it back exactly, unchanged, to anyone who points at it. No
-// account, no app, no permission, nothing counted. It is x = x with squares instead of
-// letters — the same thing said in a language a camera reads. So the mark stands beside it
-// rather than the code standing alone looking like a barcode.
+// It is possible, and it is not a trick. A QR code is built to survive damage: at the
+// highest correction level it can lose nearly a third of itself and still give back exactly
+// what it holds. So the middle of this one carries x = x — not printed on top of the code,
+// but cut into it, with the code's own spare capacity doing the work. Nothing about the
+// address changes. Point a camera at it and the same page comes back.
 //
-// Drawn here, in the reader's own browser, so the address never leaves the device to
-// become a picture.
+// That is why it earns its place. It is the record's own argument, made in a picture: a
+// mark and a fact occupying the same square, neither of them damaged by the other. Nothing
+// is measured, nothing is asked for, and it opens with no account and no app — which is the
+// opposite of what a code on a poster usually does.
+//
+// And it is layered honestly: white quiet zone, the mark's own plate, the ink of the code
+// around it, the record's paper beneath. Four layers, each doing one job.
 export default function ShareQr({ link }) {
   const [src, setSrc] = useState(null);
+  const [failed, setFailed] = useState(false);
+
   useEffect(() => {
     let live = true;
-    import('qrcode')
-      .then((module) => module.default.toDataURL(link, { margin: 0, width: 420, color: { dark: '#1a1612', light: '#ffffff' } }))
-      .then((url) => { if (live) setSrc(url); })
-      .catch(() => { /* no picture is better than a broken one */ });
+    const draw = async () => {
+      const module = await import('qrcode');
+      const QRCode = module.default;
+
+      // Highest correction level: the centre can be covered and the code still resolves.
+      const canvas = document.createElement('canvas');
+      await QRCode.toCanvas(canvas, link, {
+        errorCorrectionLevel: 'H',
+        margin: 0,
+        width: 420,
+        color: { dark: '#1a1612', light: '#ffffff' },
+      });
+
+      const ctx = canvas.getContext('2d');
+      const size = canvas.width;
+      const plate = Math.round(size * 0.24);
+      const x = Math.round((size - plate) / 2);
+
+      // A breath of white around the plate, so the mark never touches a module.
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x - 8, x - 8, plate + 16, plate + 16);
+      // The plate itself: the record's ink, so the mark sits in the same square as the code.
+      ctx.fillStyle = '#1a1612';
+      ctx.fillRect(x, x, plate, plate);
+      // The mark, on paper, in the record's own hand.
+      ctx.fillStyle = '#f4efe4';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = `700 ${Math.round(plate * 0.34)}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+      ctx.fillText('x = x', size / 2, size / 2 + plate * 0.02);
+
+      if (live) setSrc(canvas.toDataURL('image/png'));
+    };
+    draw().catch(async () => {
+      // If the marked code cannot be drawn, a plain one is still a door.
+      try {
+        const module = await import('qrcode');
+        const url = await module.default.toDataURL(link, { margin: 0, width: 420, color: { dark: '#1a1612', light: '#ffffff' } });
+        if (live) setSrc(url);
+      } catch { if (live) setFailed(true); }
+    });
     return () => { live = false; };
   }, [link]);
+
+  if (failed) return null;
   if (!src) return <p className="text-xs text-record-muted">Drawing the code…</p>;
   return (
     <div className="rounded border border-record-ink/15 bg-record-bone p-3">
       <div className="flex items-center gap-3">
-        <img src={src} alt={`QR code for ${link}`} className="h-32 w-32 shrink-0 bg-white p-1.5" />
+        <img src={src} alt={`QR code for ${link}, carrying the record's mark`} className="h-32 w-32 shrink-0 bg-white" />
         <div className="min-w-0">
-          <p className="font-mono text-sm font-black tracking-[0.24em] text-record-ink">x = x</p>
+          <p className="text-xs leading-relaxed text-record-muted">
+            The address, drawn — with x = x cut into the middle of it. The code is built to lose a third of itself and still open, so the mark costs it nothing.
+          </p>
           <p className="mt-1 text-xs leading-relaxed text-record-muted">
-            The same address, drawn. Point a phone camera at it — it opens where a link is stopped, and it needs no account to open.
+            Point a phone camera at it. No account, no app, and it opens where a link is stopped.
           </p>
         </div>
       </div>

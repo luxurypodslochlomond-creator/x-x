@@ -35,7 +35,7 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
   };
 
   return <>
-    {includeMessage && <textarea aria-label="Words and link to share" readOnly rows={6} value={text} onFocus={(event) => event.target.select()} className="w-full resize-none rounded border border-record-ink/20 bg-record-bone p-3 text-sm leading-relaxed text-record-ink" />}
+    {includeMessage && <textarea aria-label="Words and link to share" readOnly rows={4} value={text} onFocus={(event) => event.target.select()} className="w-full resize-none rounded border border-record-ink/20 bg-record-bone p-3 text-sm leading-relaxed text-record-ink" />}
 
     {(canShareImage || canShareText) && <button type="button" onClick={share} className="flex min-h-12 items-center justify-center gap-2 rounded bg-record-ink px-4 text-sm font-bold text-record-paper"><Share2 size={18} />{canShareImage ? (includeMessage ? 'Share painting + words' : 'Share image') : 'Share words + link'}</button>}
 
@@ -44,11 +44,17 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
       <button type="button" onClick={copy} className="flex min-h-12 items-center justify-center gap-2 rounded border border-record-ink/20 px-2 text-xs font-bold">{copied ? <Check size={17} className="shrink-0" /> : <Copy size={17} className="shrink-0" />}{copied ? 'Copied' : includeMessage ? 'Copy words + link' : 'Copy link'}</button>
     </div>
 
-    <ShareDestinations link={link} title={headline} message={message} />
-
-    <details>
-      <summary className="cursor-pointer text-xs font-bold text-record-muted">Show a QR code</summary>
-      <div className="mt-2"><ShareQr link={link} /></div>
+    {/* ── THE DOORS, ONE TAP AWAY ──
+        The three things a person actually does — share it, save it, copy it — now sit
+        together at the top, so nothing has to be scrolled for or hunted for on a phone.
+        Every door is still here, in full, and so is the code; they simply wait behind one
+        line instead of pushing the share button off the screen. */}
+    <details className="border-t border-record-ink/15 pt-3">
+      <summary className="cursor-pointer text-xs font-bold text-record-ink">Everywhere else it can go — and the QR</summary>
+      <div className="mt-3 space-y-3">
+        <ShareDestinations link={link} title={headline} message={message} />
+        <ShareQr link={link} />
+      </div>
     </details>
 
     {error && <><p className="text-sm text-record-red" role="alert">{error}</p><textarea aria-label="Message to copy manually" readOnly value={message} onFocus={(event) => event.target.select()} className="w-full rounded border border-record-ink/20 bg-record-paper p-3 text-xs" /></>}

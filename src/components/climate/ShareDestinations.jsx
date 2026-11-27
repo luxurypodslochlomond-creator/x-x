@@ -8,7 +8,7 @@ import { SHARE_GROUPS, SHARE_REST } from '@/components/climate/shareDestinations
 // the last line names the rest of the world so that nobody reads this as a shortlist.
 export default function ShareDestinations({ link, title, message }) {
   return (
-    <div className="space-y-3 border-t border-record-ink/15 pt-3">
+    <div className="space-y-3">
       {SHARE_GROUPS.map((group) => (
         <div key={group.label}>
           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-record-muted">{group.label}</p>

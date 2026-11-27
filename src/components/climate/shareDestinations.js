@@ -65,4 +65,4 @@ export const SHARE_GROUPS = [
 // YouTube have no share address; Nostr and Matrix belong to networks with no single home.
 // None of them is left out. They simply open the way they open.
 export const SHARE_REST =
-  'TikTok, Snapchat, YouTube, Twitch, Nostr, Matrix, WhatsApp groups and every other app on this phone — the share sheet above.';
+  'TikTok, Snapchat, YouTube, Twitch, Nostr, Matrix, ShareChat, WhatsApp groups and every other app on this phone — the share sheet above.';
