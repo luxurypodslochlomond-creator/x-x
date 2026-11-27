@@ -198,6 +198,8 @@ const ClimateGuidePage = React.lazy(() => import('./pages/ClimateGuide'));
 const ClimateMusicPage = React.lazy(() => import('./pages/ClimateMusic'));
 const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
+// The short door to one drawing: /w/rain-check, a name a person can say out loud.
+const ClimateCartoonShortPage = React.lazy(() => import('./pages/ClimateCartoonShort'));
 const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
 // One hand's own address — Francis Umendu Odupute, who started the biennial, drew its cover
 // and edits its book, and whose new work needs somewhere on the record to show the world.
@@ -456,6 +458,12 @@ const AuthenticatedApp = () => {
           printer gets the drawing and not the navigation. The artist's page stays inside the
           record, because it is part of the record. */}
       <Route path="/ClimateCartoons/Sheet/:id" element={<ClimateCartoonSheetPage />} />
+      {/* ── A DRAWING'S OWN NAME, AS AN ADDRESS ──
+          Brian, 27 November: the id address was too long to say, type or send. Every
+          drawing now also answers to its own title: /w/rain-check, /w/keeping-it-cool.
+          The long address keeps working, and /wall opens the room. */}
+      <Route path="/w/:slug" element={<ClimateCartoonShortPage />} />
+      <Route path="/wall" element={<Navigate to="/ClimateCartoons" replace />} />
       <Route path="/ClimateCartoons/Artist/:name" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonArtistPage /></ClimateLayout>} />
       {/* Francis's own page. Written by hand rather than generated from the wall, because a
           man who has been carrying this campaign since 2012 is not a row in a table: his own

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
+import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 import ArtworkShareButton from '@/components/climate/ArtworkShareButton';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import '@/components/climate/cartoons/sheet/sheet.css';
@@ -23,13 +24,14 @@ function creditLine(cartoon, address) {
   return parts.join(' · ');
 }
 
-export default function ClimateCartoonSheet() {
-  const { id } = useParams();
+export default function ClimateCartoonSheet({ id: idProp }) {
+  const { id: idParam } = useParams();
+  // The short door (/w/rain-check) resolves the drawing and hands it in here, so the record
+  // keeps one sheet rather than a second copy of one. The long address still opens it.
+  const id = idProp || idParam;
   const [cartoon, setCartoon] = useState(null);
   const [state, setState] = useState('loading');
   const [copied, setCopied] = useState(false);
-
-  const address = `${recordOrigin()}/ClimateCartoons/Sheet/${id}`;
 
   useEffect(() => {
     let cancelled = false;
@@ -87,6 +89,9 @@ export default function ClimateCartoonSheet() {
     );
   }
 
+  // The address printed on the paper is the short one, because it is the one a person
+  // reads out, types into a phone, or copies off a printout in a classroom.
+  const address = `${recordOrigin()}/w/${cartoonSlug(cartoon)}`;
   const printed = address.replace(/^https?:\/\//, '');
 
   return (
