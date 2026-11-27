@@ -17,7 +17,10 @@ export default function MarkGrid({ openIndex, onSelect, fitted }) {
             className={`marks-plate-cell ${selected ? 'bg-record-ink text-record-paper' : 'text-record-ink'}`}
           >
             <span aria-hidden="true" className="marks-plate-art"><Mark size={40} /></span>
-            {fitted && <span className="marks-plate-name">{name}</span>}
+            {/* The name is always printed. It used to appear on a phone only, so a desk got a
+                plate of drawings with nothing written under them and no way to know what any
+                of them was without pressing it. A door says its own name. */}
+            <span className="marks-plate-name">{name}</span>
           </button>
         );
       })}

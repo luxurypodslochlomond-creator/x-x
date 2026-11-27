@@ -20,8 +20,11 @@ export default function MarkCaption({ chosen, onNavigate }) {
         </div>
       ) : (
         <div className="py-1">
-          <p className="text-[17px] font-bold leading-tight text-record-ink">Press a mark to read it.</p>
-          <p className="mt-2 text-pretty text-[13px] leading-relaxed text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>Its meaning appears here. Follow its name to go through.</p>
+          {/* Six doors, each already named under its own drawing, so there is nothing here to
+              decode. What this line has to do is stop a reader thinking the record is only six
+              rooms: everything else is a line in the list behind this plate. */}
+          <p className="text-[17px] font-bold leading-tight text-record-ink">Six rooms, and the way in.</p>
+          <p className="mt-2 text-pretty text-[13px] leading-relaxed text-record-muted" style={{ fontFamily: 'var(--font-reading)' }}>Every other door on the record is in the list behind this sheet, and written out in the guide.</p>
         </div>
       )}
     </figcaption>
