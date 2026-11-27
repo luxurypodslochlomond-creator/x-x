@@ -46,7 +46,7 @@ export default function ClimateWireEntry() {
 
   return (
     <div className="news-detail text-record-ink" data-record-kind={recordKindOf(entry?.kind)} data-record-layout="compact">
-      <RecordBackBar eyebrow="The Wire · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact previewFirst /></div> : null} />
+      <RecordBackBar eyebrow="The Wire · full account" fallback="/ClimateWire" right={entry ? <div className="news-share"><ShareCardButton entry={entry} compact instant /></div> : null} />
       <div className="news-detail-column">
         {loading && <p className="news-state" role="status">Loading the account…</p>}
         {!loading && !entry && <div className="news-state"><p>This account is not available on the public record.</p><Link to="/ClimateWire" className="news-text-action">← Back to the Wire</Link></div>}

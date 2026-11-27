@@ -270,6 +270,7 @@ export default function ClimateDetail() {
           <div className="mt-4">
             <ShareCardButton
               entry={record}
+              instant
               build={(entry, opts) => buildEntryShareCard(entry, { ...opts, kindLabel: meta.label })}
             />
           </div>
@@ -403,6 +404,7 @@ export default function ClimateDetail() {
         <div className="mt-4">
           <ShareCardButton
             entry={record}
+            instant
             build={(entry, opts) => buildEntryShareCard(entry, { ...opts, kindLabel: isSolution ? 'Solution' : 'Climate crisis' })}
           />
         </div>
