@@ -111,11 +111,25 @@ export const GOALS = [
       read("Heat's Got Nowhere to Hide!", 'Because it draws the heat itself, and not only the people standing in it.'),
       read('The Cooler Influencer', 'Because it says the cooling comes from turning emissions down, not from the weather.'),
       read('Keeping It Cool!', 'Because it is a household answering a hotter summer with what it has.'),
+      // Gado's own line is the weather arriving as something the Earth is blamed for, and
+      // the poster's own banner names the fight against climate change in French. Neither
+      // reason is reached for: both are written on the drawings.
+      read("Never mind, it's the Earth again crying over El-Nino, the ghost they helped to create...!", 'Because its own line is the Earth crying over El-Nino, the weather it is being blamed for.'),
+      read("Défenseurs de l'Environnement (Defenders of the Environment)", 'Because the banner across it names the fight against climate change in its own words.'),
     ]),
   goal(14, 'Life Below Water',
     'Conserve and sustainably use the oceans, seas and marine resources for sustainable development.', 10, []),
   goal(15, 'Life on Land',
-    'Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.', 12, []),
+    'Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.', 12, [
+      // ── THE GOAL THE WALL HAD NOTHING FOR, ANSWERED FOUR TIMES ────────────────
+      // This was the emptiest goal on the page and the drawings that fill it were already
+      // hanging: two hands, two countries, twenty-eight years apart, all four of them about
+      // what is taken off the ground. Every reason below is on the drawing itself.
+      read('After destroying everything on the ground, mankind wants to destroy the Earth!', 'Because its own line is about destroying everything on the ground, and the globe it draws is nothing but stumps.'),
+      read('Why Kenyans will become extinct...', 'Because the map of Kenya in it is drawn as a field of stumps.'),
+      read("Défenseurs de l'Environnement (Defenders of the Environment)", 'Because its banner names the forests and sacred sites of Bafoussam, and the drawing stands under one tree.'),
+      read('Plant a Tree!', 'Because the whole drawing is a person with a sapling in a pot, about to put it in the ground.'),
+    ]),
   goal(16, 'Peace, Justice and Strong Institutions',
     'Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels.', 12, []),
   goal(17, 'Partnerships for the Goals',

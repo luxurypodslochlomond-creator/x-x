@@ -21,6 +21,12 @@ export const WALL_ORDER = [
   // room begins with him. It is still a rehearsal, not a finished submission — take this
   // line out (and the drawing off the wall) once he sends the real one with his own line.
   'Urbanisation and Sanitation…',
+  // ── FRANCIS'S CAMPAIGN, HANGING BEHIND HIS OWN DRAWING ───────────────────────
+  // The CAIB SDG cartoon campaign is why this room exists, so the two drawings he gathered
+  // for it from Paul Monthe hang immediately behind his own test drawing, in the order he
+  // sent them: the Bafoussam poster first, then the one that asks the reader to plant.
+  "Défenseurs de l'Environnement (Defenders of the Environment)",
+  'Plant a Tree!',
   "Heat's Got Nowhere to Hide!",
   'Keeping It Cool!',
   'The Cooler Influencer',
