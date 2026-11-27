@@ -6,7 +6,7 @@ export default function XEqualsXStand() {
     <section className="covenant-world" aria-labelledby="the-world">
       <p className="covenant-kicker">Sources</p>
       <h2 id="the-world">What the evidence says.</h2>
-      <p>We are against the extraction of living places, people’s work and the attention they need to act. This record chooses another job: keep knowledge connected to the people who can use it.</p>
+      <p>Two things are documented at once. The planet is being damaged. And the machinery that could tell everybody is paid to keep them scrolling. One set of numbers comes from climate scientists, the other from the platforms’ own researchers — nobody had to invent either. This is not a conspiracy and it is not a reason to give up. It is a reason to build something that cannot be bought.</p>
       <aside className="covenant-case" aria-label="Evidence behind the argument">
         <p className="covenant-case-label">Read the original sources</p>
         <dl className="covenant-facts">
