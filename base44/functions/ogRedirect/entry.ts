@@ -176,6 +176,72 @@ const PAGE_META = {
     color: '#0f5f7a',
   },
 
+  // ── EVERY ROOM ARRIVES AS ITSELF ────────────────────────────────────────
+  // These were all falling through to the record's own card, so a link to the wire, the music
+  // or the map landed in a chat as the building rather than the room. Each one says what a
+  // reader will find behind the link, and none of them asks anybody for anything: a person
+  // passing on the music page wants the music named, not a slogan attached to it.
+  ClimateWire: {
+    title: 'The Wire — Together We Can Change Climate',
+    description: 'The wire: what changed, what was published, and what is being said about the climate — every line with its source and its date.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateMusic: {
+    title: 'Music given to the record — Together We Can Change Climate',
+    description: 'Music given to the record by the people who made it, heard here whole with the artist’s name on it. Nothing sold, nothing counted.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateMethod: {
+    title: 'How this record is made — Together We Can Change Climate',
+    description: 'What gets on the record, what waits for a person, what comes off, and every correction written in the open.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateSearch: {
+    title: 'Search the record — Together We Can Change Climate',
+    description: 'Search the whole record — crises, solutions, actions and drawings — in any tongue a reader names.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateGuide: {
+    title: 'Guide to the record — Together We Can Change Climate',
+    description: 'What is on the record, room by room, and the way into any of it.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateSeals: {
+    title: 'Verify the record yourself — Together We Can Change Climate',
+    description: 'Every entry fingerprinted, and the check run in your own browser. Verify the record without trusting anyone who built it.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateRoll: {
+    title: 'The roll — who checks this record',
+    description: 'The people who check this record, in their own words.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateFounder: {
+    title: 'Why this record exists',
+    description: 'Why this record exists, in the founder’s own words — and in whose honour it is kept.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  ClimateSupport: {
+    title: 'How the record is paid for',
+    description: 'How the record is paid for, said in the open. Money never buys a place on it.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+  XEqualsX: {
+    title: 'x = x — what the record promises',
+    description: 'What the record promises, what it refuses, and what it cannot do.',
+    image: RECORD_CARD,
+    color: '#0f5f7a',
+  },
+
   // ── THE CARTOON ROOM ────────────────────────────────────────────────────
   // A link to this room arrives as the room: the real CAIB cover rather than the record's
   // mark, which is what everybody was seeing. A stored public picture, at its own real

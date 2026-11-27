@@ -48,6 +48,28 @@ const DESCRIPTION = 'A public record of the climate. Solutions, Crises and Actio
 const CARTOON_TITLE = 'The Wall — the record’s cartoon room';
 const CARTOON_DESCRIPTION = 'Drawings gathered for the 8th CartoonAFRICA International Biennial, and Janine Selendy’s workshop on Sunday 29 November. The wall is open: send a drawing and it goes up with your name on it.';
 
+// ── EACH ROOM SAYS WHAT IT IS ─────────────────────────────────────────────────
+// One sentence for every page meant a link to the wire, the music or the map arrived in a
+// chat as the record introducing itself rather than the room the sender was actually sending.
+// Somebody passing on a track wants the track named, not the building described.
+//
+// So each room carries its own line, and every line says what a reader will find there rather
+// than what the record thinks of itself. No adjective does any work that a fact could do: no
+// "groundbreaking", no "vital", no "join us". The record's own sentence stays the fallback,
+// because a room with nothing particular to say should not invent something to say.
+const ROOM_DESCRIPTIONS = {
+  ClimateWire: 'The wire: what changed, what was published, and what is being said about the climate — every line with its source and its date.',
+  ClimateMusic: 'Music given to the record by the people who made it, heard here whole with the artist’s name on it. Nothing sold, nothing counted.',
+  ClimateMethod: 'How this record is made: what gets on it, what waits for a person, what comes off, and every correction written in the open.',
+  ClimateSearch: 'Search the whole record — crises, solutions, actions and drawings — in any tongue a reader names.',
+  ClimateGuide: 'What is on the record, room by room, and the way into any of it.',
+  ClimateSeals: 'Every entry fingerprinted, and the check run in your own browser. Verify the record without trusting anyone who built it.',
+  ClimateRoll: 'The people who check this record, in their own words.',
+  ClimateFounder: 'Why this record exists, in the founder’s own words — and in whose honour it is kept.',
+  ClimateSupport: 'How the record is paid for, said in the open. Money never buys a place on it.',
+  XEqualsX: 'x = x — what the record promises, what it refuses, and what it cannot do.',
+};
+
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.
 // The full directory lives on the existing guide page, not in a second menu on every page.
 
@@ -110,7 +132,7 @@ export default function ClimateLayout({ children, currentPage }) {
     });
     const isCartoonRoom = currentPage === 'ClimateCartoons';
     const pageTitle = isCartoonRoom ? CARTOON_TITLE : TITLE;
-    const pageDescription = isCartoonRoom ? CARTOON_DESCRIPTION : DESCRIPTION;
+    const pageDescription = isCartoonRoom ? CARTOON_DESCRIPTION : (ROOM_DESCRIPTIONS[currentPage] || DESCRIPTION);
     document.title = pageTitle;
 
     const setMeta = (attr, key, value) => {
