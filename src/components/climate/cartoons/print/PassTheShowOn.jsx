@@ -46,8 +46,10 @@ export default function PassTheShowOn({ showName, count }) {
         if (error && error.name === 'AbortError') return;
       }
     }
+    // The words travel with the address, never the address alone: a link pasted on its own
+    // arrives as a bare string in a group chat and nobody knows what they are opening.
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(`${line}\n${url}`);
       setSaid('Copied. Paste it into the group chat.');
     } catch {
       setAddress(url);
