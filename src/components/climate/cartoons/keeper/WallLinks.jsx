@@ -79,6 +79,10 @@ export default function WallLinks() {
         shows the drawing underneath it. The record will not guess this for you, so it is said here, by hand, one at a
         time. Nothing goes public until you choose it.
       </p>
+      <p className="mt-2 max-w-[52ch] text-[13px] leading-[1.6] text-record-muted" style={reading}>
+        None of this is needed for the hour itself. Her agenda has the drawings presented as the artists speak, not
+        filed against entries — so this is a quiet-morning job, and the wall stands perfectly well without a line of it.
+      </p>
       <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-record-ink">
         {tied} of {drawings.length} joined · {drawings.length - tied} still standing alone
       </p>
@@ -87,17 +91,35 @@ export default function WallLinks() {
       <div className="mt-5 space-y-3">
         {ordered.map((drawing) => (
           <div key={drawing.id} className="flex gap-3 border border-record-ink/20 bg-record-bone/40 p-2.5">
-            <img
-              src={drawing.image_url}
-              alt=""
-              loading="lazy"
-              className="h-[68px] w-[68px] flex-shrink-0 border border-record-ink/15 bg-record-paper object-contain"
-            />
+            {/* ── THE DRAWING, OPENED WHEN IT IS TAPPED ────────────────────────────
+                You cannot say which entry a drawing answers without looking at the
+                drawing, and a thumbnail on a phone is not enough to look at. Tapping it
+                opens the sheet in a new tab, so the desk stays where it was. */}
+            <a
+              href={`/ClimateCartoons/Sheet/${drawing.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0"
+              aria-label={`Open ${drawing.title || drawing.artist_name} full size`}
+            >
+              <img
+                src={drawing.image_url}
+                alt={drawing.title || drawing.artist_name}
+                loading="lazy"
+                className="h-[84px] w-[84px] border border-record-ink/15 bg-record-paper object-contain"
+              />
+            </a>
             <div className="min-w-0 flex-1">
+              {/* A drawing with no name of its own is known by the hand that made it —
+                  the wall's own rule. "Untitled" is a printer's word, not a person's. */}
               <p className="text-[13.5px] font-semibold leading-tight text-record-ink" style={reading}>
-                {drawing.title || 'Untitled'}
+                {drawing.title || drawing.artist_name}
               </p>
-              <p className="text-[11.5px] leading-snug text-record-muted" style={reading}>{drawing.artist_name}</p>
+              {(drawing.title || drawing.credit) && (
+                <p className="text-[11.5px] leading-snug text-record-muted" style={reading}>
+                  {drawing.title ? drawing.artist_name : drawing.credit}
+                </p>
+              )}
               <select
                 value={drawing.crisis_id || ''}
                 disabled={busy === drawing.id}
@@ -107,8 +129,10 @@ export default function WallLinks() {
                 style={reading}
               >
                 <option value="">Not tied to an entry</option>
+                {/* The count goes in the header, because a list you cannot see the end of
+                    reads as a list that is missing something. */}
                 {groups.map((group) => (
-                  <optgroup key={group.label} label={group.label}>
+                  <optgroup key={group.label} label={`${group.label} · ${group.items.length}`}>
                     {group.items.map((entry) => (
                       <option key={entry.id} value={entry.id}>{entry.title}</option>
                     ))}
