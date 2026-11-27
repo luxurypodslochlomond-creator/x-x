@@ -74,6 +74,8 @@ export default function ClimateRoll() {
             entry={{ ...data.me, title: data.me.name }}
             build={buildCheckerShareCard}
             label="Send this as a card"
+            includeMessage
+            windowTitle="Send this as a card"
           />
         </div>
       )}

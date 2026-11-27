@@ -40,7 +40,7 @@ export default function SendThisPage() {
       </div>
 
       <div className="mt-3 pt-3 border-t border-[#141210]/20">
-        <ShareCardButton entry={CARD} instant build={buildGuideShareCard} label="Share the answers as a card" />
+        <ShareCardButton entry={CARD} instant build={buildGuideShareCard} label="Share the answers as a card" includeMessage windowTitle="Share the answers" />
       </div>
 
       <p className="text-[10px] font-mono text-[#8a8375] leading-snug mt-2 break-all">{address}</p>

@@ -14,6 +14,6 @@ export default function NewsRow({ entry }) {
       <p className="news-row-excerpt">{entry.what_changed}</p>
       <NewsEntryStanding entry={entry} className="news-row-source" />
     </div>
-    <div className="news-row-actions"><Link to={to} className="news-read">Read <ArrowUpRight size={16} /></Link><ShareCardButton entry={entry} compact previewFirst /></div>
+    <div className="news-row-actions"><Link to={to} className="news-read">Read <ArrowUpRight size={16} /></Link><ShareCardButton entry={entry} compact previewFirst includeMessage windowTitle="Share this entry" /></div>
   </article>;
 }

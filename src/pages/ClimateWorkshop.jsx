@@ -236,7 +236,7 @@ export default function ClimateWorkshop() {
       <div className="no-print mt-8 border-t border-record-ink/15 pt-4">
         <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-record-muted">Share</p>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-          <ShareCardButton entry={WORKSHOP_CARD} build={buildWorkshopShareCard} label="Send the card" />
+          <ShareCardButton entry={WORKSHOP_CARD} build={buildWorkshopShareCard} label="Send the card" includeMessage windowTitle="Send the hour" />
           <button
             type="button"
             onClick={() => window.print()}

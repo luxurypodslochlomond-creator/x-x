@@ -17,7 +17,7 @@ export default function NewsLead({ entry }) {
       {entry.replicable && <div className="news-lead-use"><h3>What others can use</h3><p>{entry.replicable}</p></div>}
       <NewsEntryStanding entry={entry} className="news-lead-meta" />
       {!entry.image_url && entry.image_credit && <p className="news-credit">Picture credited, not held here · {entry.image_credit}</p>}
-      <div className="news-lead-actions"><Link to={to} className="news-read">Full account <ArrowUpRight size={17} /></Link><ShareCardButton entry={entry} compact previewFirst />{entry.image_url && <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} link={recordAddress(to)} />}</div>
+      <div className="news-lead-actions"><Link to={to} className="news-read">Full account <ArrowUpRight size={17} /></Link><ShareCardButton entry={entry} compact previewFirst includeMessage windowTitle="Share this entry" />{entry.image_url && <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} link={recordAddress(to)} />}</div>
     </div>
   </article>;
 }

@@ -136,6 +136,8 @@ export default function ClimateCartoonFrancis() {
             build={buildFrancisShareCard}
             link={address}
             label={w('label')}
+            includeMessage
+            windowTitle="Share this hand"
             description={`${w('event')} ${w('where')} ${address}`}
           />
         </div>

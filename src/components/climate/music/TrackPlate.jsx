@@ -99,7 +99,7 @@ export default function TrackPlate({ track }) {
             </a>
           )}
         </div>
-        <ShareCardButton entry={card} build={buildTransmissionShareCard} compact />
+        <ShareCardButton entry={card} build={buildTransmissionShareCard} compact includeMessage windowTitle="Share this track" />
       </div>
 
       {track.master_sha256 && (

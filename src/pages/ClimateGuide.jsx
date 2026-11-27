@@ -216,12 +216,16 @@ export default function ClimateGuide() {
           entry={BUTTONS_CARD}
           build={buildGuideShareCard}
           label="Share the manual as a card"
+          includeMessage
+          windowTitle="Share the manual"
         />
         <ShareCardButton
           instant
           entry={WAY_IN_CARD}
           build={buildWayInShareCard}
           label="Send the way in as a card"
+          includeMessage
+          windowTitle="Send the way in"
         />
       </div>
 

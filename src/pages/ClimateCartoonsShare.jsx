@@ -139,6 +139,8 @@ export default function ClimateCartoonsShare() {
               entry={WORKSHOP_CARD}
               build={buildWorkshopCard}
               label="Save or share the picture"
+              includeMessage
+              windowTitle="Share the hour"
               link={HOUR_ADDRESS}
               description="A climate workshop · Sunday 29 November · 3pm West Africa · 2pm UK · online, free. Janine Selendy hosts, Francis Umendu Odupute brings the cartoonists, Alina Sen presents CEEW’s What On Earth!."
               icon={InkArrow}

@@ -35,6 +35,8 @@ export default function RecordHomeHero({ copy }) {
           build={buildRecordShareCard}
           link={RECORD_LINK}
           description={copy.sub}
+          includeMessage
+          windowTitle="Share the record"
           instant
           inline
         />

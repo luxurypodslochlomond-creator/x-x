@@ -83,6 +83,8 @@ export default function XEqualsXOpening() {
               label="Share"
               link={recordAddress('/XEqualsX')}
               description={COVENANT_SHARE}
+              includeMessage
+              windowTitle="Share x = x"
             />
           </div>
         </div>

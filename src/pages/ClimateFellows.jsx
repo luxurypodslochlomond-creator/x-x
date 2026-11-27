@@ -158,7 +158,7 @@ export default function ClimateFellows() {
         <p className="text-[13px] text-[#141210] leading-relaxed mb-3" style={{ fontFamily: 'var(--font-reading)' }}>
           Know somebody with an hour — a researcher, a student? Send them this page as a card. It carries its own address, so they land here rather than on a screenshot.
         </p>
-        <ShareCardButton entry={FELLOWS_CARD} instant build={buildGuideShareCard} label="Send this page as a card" />
+        <ShareCardButton entry={FELLOWS_CARD} instant build={buildGuideShareCard} label="Send this page as a card" includeMessage windowTitle="Send this page" />
       </section>
     </ClimateRecordShell>
   );

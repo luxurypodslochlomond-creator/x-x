@@ -277,6 +277,8 @@ export default function ClimateDetail({ type: typeProp, id: idProp }) {
               entry={record}
               instant
               build={(entry, opts) => buildEntryShareCard(entry, { ...opts, kindLabel: meta.label })}
+              includeMessage
+              windowTitle="Share this entry"
             />
           </div>
 
@@ -411,6 +413,8 @@ export default function ClimateDetail({ type: typeProp, id: idProp }) {
             entry={record}
             instant
             build={(entry, opts) => buildEntryShareCard(entry, { ...opts, kindLabel: isSolution ? 'Solution' : 'Climate crisis' })}
+            includeMessage
+            windowTitle="Share this entry"
           />
         </div>
 

@@ -68,7 +68,7 @@ export default function Transmission() {
             to buy, no paywall, no ad. The name stays on it, and the record never charges for it.
           </p>
         </div>
-        <ShareCardButton entry={card} instant build={buildTransmissionShareCard} compact />
+        <ShareCardButton entry={card} instant build={buildTransmissionShareCard} compact includeMessage windowTitle="Share this piece" />
       </div>
 
       {/* ── ON THE RECORD ── provenance and a citation, so the work can be checked and quoted ── */}
