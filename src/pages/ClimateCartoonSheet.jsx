@@ -99,7 +99,7 @@ export default function ClimateCartoonSheet() {
               whole — never cropped, never re-drawn — with their name, the origin and the
               record's address travelling beside it. No upload, no account, nothing sent
               anywhere until they choose where it goes. */}
-          <ArtworkShareButton id={cartoon.id} imageUrl={cartoon.display_image_url} title={cartoon.title || `A drawing by ${cartoon.artist_name}`} credit={creditLine(cartoon, address)} link={address} />
+          <ArtworkShareButton instant id={cartoon.id} imageUrl={cartoon.display_image_url} title={cartoon.title || `A drawing by ${cartoon.artist_name}`} credit={creditLine(cartoon, address)} link={address} />
           <button type="button" onClick={copyCredit}>{copied ? 'Credit copied' : 'Copy the credit line'}</button>
           <button type="button" onClick={() => window.print()}>Print or save as PDF</button>
         </div>
