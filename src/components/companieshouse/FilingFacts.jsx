@@ -77,7 +77,7 @@ export default function FilingFacts({ facts }) {
       <CopyLine
         label="Company authentication code"
         value={facts['Company authentication code']}
-        note="Six characters. If it is empty here and not in your hands, request a new one now — it comes by post."
+        note="Six characters, different from the Gateway password and from the 11-character personal codes. This record does not hold it yet. If it is in your hands, save it in the box at the foot of this page; if not, request a new one today, because it comes by post."
       />
       <p className="mt-4 text-[13.5px] leading-relaxed text-[#6b6258]">
         The Government Gateway passwords are on{' '}

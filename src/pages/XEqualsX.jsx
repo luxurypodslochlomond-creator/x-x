@@ -5,6 +5,7 @@ import XEqualsXOpening from '@/components/climate/XEqualsXOpening';
 import XEqualsXSignalBand from '@/components/climate/XEqualsXSignalBand';
 import XEqualsXWhyTheName from '@/components/climate/XEqualsXWhyTheName';
 import XEqualsXStand from '@/components/climate/XEqualsXStand';
+import XEqualsXOnRecord from '@/components/climate/XEqualsXOnRecord';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
 import XEqualsXClosing from '@/components/climate/XEqualsXClosing';
@@ -22,6 +23,7 @@ export default function XEqualsX() {
       <XEqualsXSignalBand />
       <XEqualsXWhyTheName />
       <XEqualsXStand />
+      <XEqualsXOnRecord />
       <XEqualsXPromises />
       <XEqualsXCheck />
       <XEqualsXClosing />

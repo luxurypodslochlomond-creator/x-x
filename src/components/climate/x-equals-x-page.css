@@ -139,6 +139,22 @@
 }
 #x-equals-x .covenant-case-small { color: rgb(var(--record-paper) / .62) !important; font-size: .76rem !important; line-height: 1.55 !important; }
 
+/* ── NOT A PROMISE. WHAT IS ON IT. ──────────────────────────────────────────── */
+#x-equals-x .covenant-onrecord { padding: 2.2rem 1.25rem; background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-mark)); }
+#x-equals-x .covenant-onrecord-inner { max-width: 46rem; margin: auto; }
+#x-equals-x .covenant-onrecord-figures { display: grid; gap: 1px; margin: 0; background: rgb(var(--record-ink) / .2); }
+#x-equals-x .covenant-onrecord-figures > div { background: rgb(var(--record-paper)); padding: .9rem .2rem; }
+#x-equals-x .covenant-onrecord-figures dt {
+  font-size: .66rem; font-weight: 700; text-transform: uppercase; letter-spacing: .13em;
+  color: rgb(var(--record-muted));
+}
+#x-equals-x .covenant-onrecord-figures dd {
+  margin: .1rem 0 0; color: rgb(var(--record-mark));
+  font-size: clamp(2.2rem, 11vw, 3.2rem); font-weight: 800; line-height: 1;
+  letter-spacing: -.07em; font-variant-numeric: tabular-nums;
+}
+#x-equals-x .covenant-onrecord-line { margin-top: 1rem; max-width: 44ch; font-size: .86rem !important; color: rgb(var(--record-ink) / .82); }
+
 /* ── WHAT WE DO ABOUT IT ────────────────────────────────────────────────────── */
 #x-equals-x .covenant-rules { padding: 2.4rem 1.25rem; background: rgb(var(--record-bone)); }
 #x-equals-x .covenant-rules > * { max-width: 46rem; margin-inline: auto; }
@@ -244,7 +260,9 @@
   #x-equals-x .covenant-signal-inner { padding: 2rem 2.5rem; }
   #x-equals-x .covenant-signal-dot { width: .72rem; height: .72rem; }
   #x-equals-x .covenant-signal-dash { width: 2.2rem; height: .72rem; }
-  #x-equals-x :is(.covenant-identity, .covenant-world, .covenant-rules, .covenant-use, .covenant-future-inner) { padding: 3.4rem 2.5rem; }
+  #x-equals-x :is(.covenant-identity, .covenant-world, .covenant-rules, .covenant-use, .covenant-future-inner, .covenant-onrecord-inner) { padding: 3.4rem 2.5rem; }
+  #x-equals-x .covenant-onrecord-figures { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #x-equals-x .covenant-onrecord-figures dd { font-size: 4rem; }
   #x-equals-x .covenant-hero-actions, #x-equals-x .covenant-close { padding-inline: max(2.5rem, calc((100% - 42rem) / 2)); }
   #x-equals-x .covenant-small-print { padding: 1.6rem 2.5rem; }
   #x-equals-x .covenant-rule-list li { grid-template-columns: 3rem minmax(0, 1fr) auto; gap: 1.2rem; align-items: start; }
