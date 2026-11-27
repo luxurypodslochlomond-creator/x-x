@@ -5,6 +5,7 @@ const VERIFY = 'https://www.gov.uk/guidance/verify-your-identity-for-companies-h
 const AUTH_CODE = 'https://www.gov.uk/guidance/company-authentication-codes-for-online-filing';
 const FILE = 'https://www.gov.uk/file-your-confirmation-statement-with-companies-house';
 const GATEWAY = 'https://access.service.gov.uk/';
+const CS01 = 'https://www.gov.uk/government/publications/confirmation-statement-cs01';
 const DIRECTOR = 'https://www.gov.uk/guidance/being-a-company-director';
 
 // Seven steps, in the order the Companies House service asks for them. Each one says what
@@ -28,12 +29,13 @@ export const STEPS = [
     title: 'Have the company authentication code ready',
     body: (
       <>
-        Six characters, posted to the registered office when the company was formed. It is not the same as the
-        Government Gateway password. If it is not in your hands, request a new one today: it comes by post, so this
-        is the step that decides whether 2 December is comfortable or a scramble.
+        Six characters, posted to the registered office — never emailed, so no search of an inbox will find it. The
+        code sent when the company was formed went by post to G83 8QU shortly after incorporation: look for that
+        letter first. A replacement can take up to 10 working days, so it is the one thing that decides whether
+        2 December is comfortable or a scramble.
       </>
     ),
-    links: [{ label: 'Get or request a code', href: AUTH_CODE }],
+    links: [{ label: 'Get or request a code', href: AUTH_CODE }, { label: 'If it cannot arrive in time: form CS01 by post (£110)', href: CS01 }],
   },
   {
     n: '3',
@@ -91,7 +93,7 @@ export const STEPS = [
 export const STUCK = [
   {
     title: 'No authentication code',
-    body: 'Request it today and allow up to five working days for the post. If it has not arrived, phone Companies House on 0303 1234 500.',
+    body: 'It is posted, never emailed — the six-character codes in a Government Gateway email expire in 30 minutes and are a different thing entirely. Request a replacement today: it goes to the registered office and can take up to 10 working days. If it will not arrive by 2 December, form CS01 can be posted instead, at a cost of £110. Phone Companies House on 0303 1234 500 and ask them which they advise.',
   },
   {
     title: 'Gateway password forgotten',
