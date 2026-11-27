@@ -7,7 +7,14 @@
 // and never a change to the wall. A drawing added tomorrow appears here in its own group
 // without anybody editing this file, which matters because the artists are still sending.
 
-const isFrancis = (c) => /odupute|francodus/i.test(`${c.artist_name || ''} ${c.credit || ''}`);
+// ── HIS HAND, NOT HIS CURATING ──────────────────────────────────────────────────
+// This read the credit as well as the name, which was fine until every drawing in the CAIB
+// campaign started carrying "curated by Francis Umendu Odupute" in its credit line. From
+// then on, Monthe's, Odiase's, Mushi's and Hanan's drawings all matched this test and were
+// listed under "Francis, first — his own drawing" on the sheet he presents from: the exact
+// misattribution the credit line was added to prevent, printed on the one page used live.
+// A curator is not a hand. Only the artist name decides whose drawing it is.
+const isFrancis = (c) => /odupute|francodus/i.test(c.artist_name || '');
 const isCeew = (c) => /what on earth|ceew|council on energy/i.test(`${c.artist_name || ''} ${c.origin || ''} ${c.credit || ''}`);
 
 export function presentOrder(cartoons = []) {
