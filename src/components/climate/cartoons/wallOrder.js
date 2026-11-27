@@ -27,6 +27,10 @@ export const WALL_ORDER = [
   // sent them: the Bafoussam poster first, then the one that asks the reader to plant.
   "Défenseurs de l'Environnement (Defenders of the Environment)",
   'Plant a Tree!',
+  // A comic is a different shape from a single frame, and it hangs last in Francis's block
+  // on purpose: it is the one drawing in the room that argues with its reader for six
+  // panels before it lets them go, so it closes the body rather than interrupting it.
+  'Beach Date Saved',
   "Heat's Got Nowhere to Hide!",
   'Keeping It Cool!',
   'The Cooler Influencer',

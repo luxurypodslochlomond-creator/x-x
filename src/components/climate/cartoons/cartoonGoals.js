@@ -69,7 +69,11 @@ export const GOALS = [
   goal(5, 'Gender Equality',
     'Achieve gender equality and empower all women and girls.', 9, []),
   goal(6, 'Clean Water and Sanitation',
-    'Ensure availability and sustainable management of water and sanitation for all.', 8, []),
+    'Ensure availability and sustainable management of water and sanitation for all.', 8, [
+      // The strip's own yellow caption does the work here, so the record only has to point
+      // at it: the waterways, and the three Nigerian rivers among the twenty worst.
+      read('Beach Date Saved', 'Because its own caption says the waterways take the hit, and names three of the world’s twenty worst plastic-polluting rivers as Nigerian.'),
+    ]),
   goal(7, 'Affordable and Clean Energy',
     'Ensure access to affordable, reliable, sustainable and modern energy for all.', 5, [
       read('The Energy Relay', 'Because it is a drawing about how power actually reaches a home.'),
@@ -104,7 +108,9 @@ export const GOALS = [
       read('The Way to Live Longer!', 'Because the journey it draws is a city street, not a country road.'),
     ]),
   goal(12, 'Responsible Consumption and Production',
-    'Ensure sustainable consumption and production patterns.', 11, []),
+    'Ensure sustainable consumption and production patterns.', 11, [
+      read('Beach Date Saved', 'Because its whole argument is one can of litter against the 32 million tonnes of waste Nigeria makes in a year.'),
+    ]),
   goal(13, 'Climate Action',
     'Take urgent action to combat climate change and its impacts.', 5, [
       read('Rain Check!', 'Because the rain in it is the weather arriving differently, not just wetter.'),
