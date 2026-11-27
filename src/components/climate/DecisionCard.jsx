@@ -16,6 +16,7 @@ const TONE = {
   Groups: 'bg-record-ink text-record-paper',
   Music: 'bg-record-muted text-record-paper',
   Comment: 'bg-record-bone text-record-ink border border-record-ink',
+  Drawing: 'bg-record-ink text-record-paper',
 };
 
 // The three answers a checker can give, in the keeper's words — the same three that were
@@ -58,6 +59,21 @@ export default function DecisionCard({ item, onDecide, busy, first = false, comp
 
       <div className="px-3 py-2.5">
         <h3 className="room-review-title text-[15px] font-semibold leading-snug text-[#141210]" style={{ fontFamily: 'var(--font-reading)' }}>{item.title}</h3>
+        {/* ── A DRAWING IS DECIDED BY LOOKING AT IT ────────────────────────────────
+            Every other kind in this room is a claim in words, so a title and a source are
+            enough to decide on. A drawing is not: a custodian shown a name and one line
+            would be saying yes to a picture she has never seen. So when the entry carries a
+            picture, the picture is on the card — and for every other kind nothing changes,
+            because nothing else has one. */}
+        {item.image_url ? (
+          <img
+            src={item.image_url}
+            alt={item.title ? `The drawing: ${item.title}` : 'The drawing'}
+            loading="lazy"
+            className="mt-2 block w-full border border-[#141210]/25 bg-white"
+          />
+        ) : null}
+
         {compact ? <KeeperEntryText text={item.body} /> : item.body ? (
           <p className="text-[14px] leading-[1.5] text-[#3a342c] mt-1" style={{ fontFamily: 'var(--font-reading)' }}>{item.body}</p>
         ) : null}

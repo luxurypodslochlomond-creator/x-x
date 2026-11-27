@@ -24,6 +24,9 @@ const KIND = {
   news: { entity: 'ClimateNews', seal: 'news' },
   group: { entity: 'ClimateGroup', seal: 'group' },
   track: { entity: 'ClimateTrack', seal: 'track' },
+  // A drawing waits here too, and is not sealed: a drawing is somebody's hand, not a
+  // claim with a source that can be fingerprinted. See QUEUE below for why it was absent.
+  cartoon: { entity: 'ClimateCartoon', seal: null },
 };
 
 // ── WHAT THIS ROOM ASKS HER TO DECIDE ────────────────────────────────────────
@@ -35,7 +38,16 @@ const KIND = {
 // opened this room to decide whether a source holds up should never have to step past a
 // tracklist to find it. The music room keeps its own door and its own keeper control, so
 // nothing was taken away from the tracks: they simply stopped arriving here.
-const QUEUE = ['solution', 'action', 'comment', 'news', 'group'];
+// ── AND THE DRAWINGS, WHICH WERE WAITING SOMEWHERE ELSE ─────────────────────
+// The cartoon room was built for the 29 November workshop, after this queue was written,
+// and it came with its own keeper strip on the wall itself. So a drawing sent in appeared
+// on the wall page and nowhere else — and a keeper who opened this room on the morning of
+// the workshop would read "The record is caught up" while the wall held drawings waiting
+// for her. Two desks, and the one she reaches for by habit was the empty one.
+//
+// A drawing arrives here now with everything else. The strip on the wall still works
+// exactly as it did; nothing was taken away from it.
+const QUEUE = ['solution', 'action', 'comment', 'news', 'group', 'cartoon'];
 
 // The kinds of entry that carry a person's name on them. A group, a comment and a track are
 // signed by the record in other ways; these three carry the editor field.
@@ -83,6 +95,17 @@ function shape(type, r) {
     base.label = 'Music';
     base.source_url = r.audio_url || '';
     base.source_name = r.artist_name || '';
+  } else if (type === 'cartoon') {
+    // A drawing is decided by looking at it, so the card carries the picture. The name on
+    // the wall belongs to the hand that drew it, so the artist leads and any title follows.
+    base.label = 'Drawing';
+    base.title = r.title ? `${r.title} — ${r.artist_name}` : r.artist_name || 'Untitled';
+    base.body = r.for_line || '';
+    base.image_url = r.image_url || '';
+    base.source_name = r.origin || '';
+    // The machine's own reading travels as the note-not-a-decision, which is exactly what
+    // it is: the record's machine looked at the drawing and said one line about it.
+    base.ai = r.machine_line || '';
   }
   return base;
 }
