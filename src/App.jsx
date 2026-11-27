@@ -186,6 +186,11 @@ const AdminClimateCheckersPage = React.lazy(() => import('./pages/AdminClimateCh
 const AdminClimateDeskPage = React.lazy(() => import('./pages/AdminClimateDesk'));
 const AdminSecureVaultPage = React.lazy(() => import('./pages/AdminSecureVault'));
 const AdminSponsorRoutePage = React.lazy(() => import('./pages/AdminSponsorRoute'));
+// ── THE FILING, IN ONE PLACE ──
+// The reminder that arrived on 20 November named a date and a penalty, and nothing about
+// what to do first. The company's facts were already in the vault; this page puts them
+// beside the steps that need them, so the filing can be done in one sitting.
+const AdminCompaniesHouseFilingPage = React.lazy(() => import('./pages/AdminCompaniesHouseFiling'));
 const Uf51RoadPage = React.lazy(() => import('./pages/Uf51Road'));
 const ClimateTermsPage = React.lazy(() => import('./pages/ClimateTerms'));
 const ClimatePrivacyPage = React.lazy(() => import('./pages/ClimatePrivacy'));
@@ -669,6 +674,7 @@ const AuthenticatedApp = () => {
       <Route path="/CB51FinanceAdmin" element={<LayoutWrapper currentPageName="CB51FinanceAdmin"><CB51FinanceAdmin /></LayoutWrapper>} />
       <Route path="/CB51Todo" element={<LayoutWrapper currentPageName="CB51Todo"><CB51Todo /></LayoutWrapper>} />
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminOnly><AdminHMRCTrackerPage /></AdminOnly></LayoutWrapper>} />
+      <Route path="/AdminCompaniesHouseFiling" element={<LayoutWrapper currentPageName="AdminCompaniesHouseFiling"><AdminOnly><AdminCompaniesHouseFilingPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminOnly><AdminLogoUploadPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminOnly><AdminPWAPushGuidePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminOnly><AdminStoneymollanLegalPage /></AdminOnly></LayoutWrapper>} />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Building, User, FileText, CheckCircle, ExternalLink, Key } from 'lucide-react';
@@ -19,7 +20,16 @@ export default function AdminCompaniesHouseDetailsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-indigo-950 to-black text-white p-6">
       <div className="max-w-4xl mx-auto space-y-8">
-        
+        {/* The reminder that arrived on 20 November carries a date, a penalty and a personal
+            responsibility on a named director. It belongs above the paperwork, not below it. */}
+        <Link
+          to="/AdminCompaniesHouseFiling"
+          className="block border-2 border-red-400 bg-red-900/30 px-4 py-3 hover:bg-red-900/50 transition-colors"
+        >
+          <p className="text-red-300 font-black text-sm uppercase tracking-widest">Confirmation statement · due 2 December 2026</p>
+          <p className="text-white text-sm mt-1">Seven steps, with the company number, both personal codes and the Gateway logins already beside them. Open the filing →</p>
+        </Link>
+
         <div className="text-center space-y-4">
           <div className="flex items-center justify-center gap-3">
             <Shield className="w-12 h-12 text-green-400" />

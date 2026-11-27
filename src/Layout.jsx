@@ -617,6 +617,9 @@ const LayoutInner = ({ children, currentPageName }) => {
     // Show BUILD section if logged in as admin OR if inside the Base44 builder iframe
     const isInBuilder = window.self !== window.top && window.location.hostname.includes('base44');
     const adminNav = (user?.role === 'admin' || isInBuilder) ? [
+      // The one deadline on this list that carries a penalty, a public note and a personal
+      // responsibility on a named director. It goes first, and it says the date.
+      { title: "🚨 Companies House filing", url: "/AdminCompaniesHouseFiling", icon: FileText, highlight: true, description: "Confirmation statement · due 2 December" },
       { title: "Analytics", url: createPageUrl("AdminAnalytics"), icon: Activity },
       { title: "Logo Upload", url: createPageUrl("AdminLogoUpload"), icon: Image, description: "Update UF51 branding" },
       { title: "Frequency Evidence", url: createPageUrl("AdminFrequencyAnalytics"), icon: Waves, description: "Device intel" },
