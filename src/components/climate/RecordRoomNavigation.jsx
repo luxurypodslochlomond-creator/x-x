@@ -12,7 +12,11 @@ const ROOMS = [
   { key: 'groups', type: 'group', label: 'Groups', line: 'People working on the same thing.', Mark: RoomMarkGroups },
 ];
 
-export default function RecordRoomNavigation({ counts = {}, selected, onSelect, onAdd }) {
+// The "+ Add" that used to hang inside each room cell is gone. It was the only way to add
+// anything on a phone, and it was a nine-pixel link inside a grid cell — Brian, 27 November:
+// "when try to add one very clunky." There is one way in now, on every width: the plate of
+// four drawn doors that stands on the page itself (RecordAddPlate), where a thumb can hit it.
+export default function RecordRoomNavigation({ counts = {}, selected, onSelect }) {
   return (
     <nav aria-label="Explore or add to the record" className="record-room-nav grid w-full grid-cols-2 lg:grid-cols-4">
       {ROOMS.map(({ key, type, label, line, Mark }) => (
@@ -32,11 +36,6 @@ export default function RecordRoomNavigation({ counts = {}, selected, onSelect, 
             </span>
             <span className="record-description text-pretty">{line}</span>
           </button>
-          {onAdd && (
-            <button type="button" className="record-room-add sm:hidden" onClick={() => onAdd(type)} aria-label={`Add ${type === 'climate_crisis' ? 'a climate crisis' : `a ${type}`}`}>
-              + Add
-            </button>
-          )}
         </div>
       ))}
     </nav>

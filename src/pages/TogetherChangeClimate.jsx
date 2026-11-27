@@ -509,7 +509,6 @@ export default function TogetherChangeClimate() {
         <RecordRoomNavigation
           counts={doorCounts}
           selected={selectedType}
-          onAdd={(type) => { setSubmitType(type); setShowSubmit(true); }}
           onSelect={(key) => {
             setSelectedCategory('all');
             setQuery('');
@@ -560,8 +559,17 @@ export default function TogetherChangeClimate() {
       {/* ── THE PICTURES — what people are doing and what is at risk, held up now that the
              reader knows what the record is made of. The space is held while it loads, so
              nothing jumps on arrival. ── */}
+      {/* ── ONE SET OF PICTURES ON A PHONE, TWO ON A DESK ───────────────────────────
+          Brian, 27 November: "record image at top is coolasfuck but when scroll down it's
+          annoying." The cover at the head of the page is already a wall of photographs, and
+          this band put a second row of them directly underneath it — so a reader on a phone
+          scrolled through two screens of pictures before reaching a single word about what
+          is actually on the record. On a desk there is room for both and both stay. On a
+          phone the cover carries the pictures, and the record gets on with saying what it
+          holds. Nothing is taken off the record: every picture here is still on its own
+          entry, one tap away. ── */}
       {(loading || featured.length > 0) && (
-        <div className="record-featured-section record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
+        <div className="hidden lg:block record-featured-section record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-10 bg-[#efe7d6]">
           {/* ── NOT "SIGNALS" ────────────────────────────────────────────────────────────
               This band used to be headed "Signals", which is also the name of the wire in the
               top nav — so the page had two different things wearing one word, and Brian asked
@@ -590,7 +598,15 @@ export default function TogetherChangeClimate() {
       {/* ── TOOLBAR — the record's subjects on one side, the one way in with something of
              your own on the other. The search that reaches everything is the one pill in
              the header: one search, not two. ── */}
-      <div className="record-home-entry-toolbar hidden sm:block px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
+      {/* ── AND THE WAY IN IS ON THE PHONE TOO ──────────────────────────────────────
+          Brian, 27 November: "when try to add one very clunky… can't submit a new one."
+          The truth was worse than clunky: this whole band was `hidden sm:block`, so on a
+          393-pixel phone the record's only way to add an entry did not exist at all. The
+          four ways in were four underlined words that only appeared if you scrolled back
+          to the rooms at the top. It is on every width now, in the same place on both, and
+          it is the one door — the tiny "+ Add" links that used to hang under the room cells
+          are gone with it, because two ways in at two sizes is how the page got confusing. */}
+      <div className="record-home-entry-toolbar block px-4 lg:px-10 pb-5 pt-4 lg:pb-6 bg-[#efe7d6]">
         {/* ── ONE LINE, ONE PLATE, FOUR WAYS TO ADD — IN THAT ORDER ────────────────────
             Brian, 19 November: "explore by theme squashed on desktop… doesn't feel like in
             right position for record… should add solution and crisis etc be underneath the
@@ -686,16 +702,25 @@ export default function TogetherChangeClimate() {
                 </span>
               </button>
             )}
-            {showEntries && solutions.length > 0 && (
-              <section id="record-room-solution" data-record-kind="solution" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
-                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" mark={RoomMarkSolution} />
-                <RecordEntryList items={solutions} />
-              </section>
-            )}
+            {/* ── THE ROOMS IN THE SAME ORDER AS THE DOORS ────────────────────────────
+                Brian, 27 November: "different colours weird sequence… don't feel right."
+                He is describing a real fault, and it was mine. The doors at the top of the
+                page have always read Crises · Solutions · Actions · Groups — emergencies
+                first, because that is Janine's own order: what is at risk, then what works.
+                The page underneath them read Solutions · Crises. So the FIRST door carried
+                you to the SECOND section, past a whole room you had not asked for, and the
+                record contradicted itself between the top of the screen and the bottom.
+                Crises now stand first, exactly where the door says they are. ── */}
             {showEntries && crises.length > 0 && (
               <section id="record-room-climate_crisis" data-record-kind="crisis" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
                 <RecordSectionHeading title={t.crises} count={crises.length} tone="text-record-red" mark={RoomMarkCrisis} />
                 <RecordEntryList items={crises} />
+              </section>
+            )}
+            {showEntries && solutions.length > 0 && (
+              <section id="record-room-solution" data-record-kind="solution" className="record-image-section px-4 lg:px-10 pt-9 pb-7 lg:pt-12 lg:pb-11">
+                <RecordSectionHeading title={t.solutions} count={solutions.length} tone="text-record-botanical" mark={RoomMarkSolution} />
+                <RecordEntryList items={solutions} />
               </section>
             )}
             {showEntries && (solutions.length + crises.length) === 0 && (
