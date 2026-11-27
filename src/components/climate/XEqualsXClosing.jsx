@@ -5,11 +5,10 @@ export default function XEqualsXClosing() {
   return (
     <section className="covenant-future" aria-labelledby="who-comes-after">
       <div className="covenant-future-inner">
-        <p className="covenant-kicker">For life · for one another · for what comes next</p>
-        <h2 id="who-comes-after">Leave more<br />than a warning.</h2>
-        <p>Leave the evidence. The drawing that made someone look again. The response that helped, and an honest account of where it did not.</p>
-        <p className="covenant-future-strong"><strong>A university, a village, a studio, a kitchen table. Different places to begin. The same planet to care for.</strong></p>
-        <p className="covenant-future-origin">The measure is not how much we publish. It is whether this work is useful to people protecting life. That has to be demonstrated beyond the screen.</p>
+        <p className="covenant-kicker">Purpose</p>
+        <h2 id="who-comes-after">For the work beyond this page.</h2>
+        <p>To make climate evidence, critical art and practical responses available to people doing the work.</p>
+        <p className="covenant-future-strong"><strong>A public record is a tool, not an outcome.</strong> Its value depends on what people can use, challenge and act on. A growing collection is not evidence of environmental change.</p>
         <div className="covenant-inline-links">
           <Link to="/ClimateMethod">How the record works →</Link>
           <Link to="/ClimateSeals">Check a seal →</Link>

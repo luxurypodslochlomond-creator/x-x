@@ -48,10 +48,19 @@
   margin: 0 0 .5rem;
 }
 #x-equals-x .covenant-front-line {
-  font-size: clamp(1.65rem, 7vw, 2.9rem) !important;
-  font-weight: 800; line-height: 1.06 !important; letter-spacing: -.045em;
+  margin-top: .8rem; font-size: clamp(1.35rem, 4.5vw, 2rem) !important;
+  font-weight: 600; line-height: 1.25 !important; letter-spacing: -.03em;
 }
-#x-equals-x .covenant-purpose { max-width: 32ch; margin: .9rem auto 0; font-size: .95rem !important; color: rgb(var(--record-ink) / .82); }
+#x-equals-x .covenant-primary-links {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem;
+  max-width: 32rem; margin: 1.2rem auto 0;
+}
+#x-equals-x .covenant-primary-links a {
+  display: flex; align-items: center; justify-content: center; min-height: 2.75rem;
+  font-size: clamp(.78rem, 2.7vw, 1.05rem); font-weight: 800; letter-spacing: .04em;
+  text-decoration: underline; text-decoration-color: rgb(var(--record-mark));
+  text-decoration-thickness: 2px; text-underline-offset: .35em;
+}
 #x-equals-x .covenant-painting { margin: 0; background: rgb(var(--record-paper)); }
 #x-equals-x .covenant-painting img { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 901; }
 #x-equals-x .covenant-painting figcaption {

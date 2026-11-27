@@ -14,8 +14,8 @@ const DOORS = [
 export default function XEqualsXCheck() {
   return (
     <section id="checkable" className="covenant-use" aria-labelledby="ways-in">
-      <p className="covenant-kicker">Use the platform · add to the collective work</p>
-      <h2 id="ways-in">Bring evidence.<br />Bring art. Bring action.</h2>
+      <p className="covenant-kicker">Read · contribute · check</p>
+      <h2 id="ways-in">Use the record.</h2>
       <ul className="covenant-doors">
         {DOORS.map(({ title, body, to }) => (
           <li key={to}>

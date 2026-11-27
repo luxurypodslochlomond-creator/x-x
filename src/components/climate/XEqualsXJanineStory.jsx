@@ -5,12 +5,12 @@ export default function XEqualsXJanineStory() {
   return (
     <section className="covenant-origin" aria-labelledby="janines-work">
       <div className="covenant-origin-inner">
-        <p className="covenant-kicker">A life’s work, still reaching out</p>
-        <h2 id="janines-work">She was fifteen.<br />The water left her covered in oil.</h2>
+        <p className="covenant-kicker">Janine Selendy · Horizon International</p>
+        <h2 id="janines-work">The work this builds on.</h2>
         <p>In Janine Selendy’s own account, a dive in Beirut harbour became her first awareness of damage to Earth.</p>
-        <p>Her work through Horizon International brought together health, the environment and practical responses. This platform takes its direction from that life’s work: do not only describe the damage. Find what helps. Make it possible for others to use it.</p>
+        <p>Her work through Horizon International brought together health, the environment and practical responses. This record follows that approach: document the damage, examine responses and make the source material accessible.</p>
         <blockquote>“Together we can change the course of climate change.”<cite>Janine M. H. Selendy</cite></blockquote>
-        <p>The cartoonists on the Wall are not here to make the crisis look better. Satire questions power. Drawings bear witness. Artists from Africa, Asia and beyond speak in their own visual languages, with their names, context and rights intact. Their work does not need to illustrate a report to belong here, and it is never passed off as scientific evidence.</p>
+        <p>The Wall carries cartoonists’ work as commentary and witness, not as decoration or scientific evidence. The artist’s name, context and rights stay with the work. A drawing can stand on its own or be linked to an entry.</p>
         <div className="covenant-inline-links">
           <Link to="/ClimateFounder">Janine’s account and work →</Link>
           <Link to="/ClimateCartoons">Meet the hands on the Wall →</Link>

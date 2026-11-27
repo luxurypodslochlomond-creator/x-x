@@ -12,9 +12,9 @@ export default function XEqualsXCollective() {
   return (
     <section id="collective" className="covenant-collective" aria-labelledby="collective-heading">
       <div className="covenant-collective-inner">
-        <p className="covenant-kicker">The record · evidence into action</p>
-        <h2 id="collective-heading">Confront the harm.<br />Organise the response.</h2>
-        <p>A warning is not enough. The harm needs a record. A proposed solution needs scrutiny. Action needs people who can carry it through.</p>
+        <p className="covenant-kicker">The record</p>
+        <h2 id="collective-heading">What the record holds.</h2>
+        <p>Reported harm, responses and organised work, with links to the people and sources behind them. Filing a response under “Solutions” is not proof that it works.</p>
         <nav className="covenant-connections" aria-label="Explore crises, solutions and actions">
           {CONNECTIONS.map(({ name, detail, to, Icon }) => (
             <Link to={to} key={name} className="covenant-connection">
@@ -23,9 +23,7 @@ export default function XEqualsXCollective() {
             </Link>
           ))}
         </nav>
-        <p><strong>The aim is not another audience. It is informed, organised action.</strong> Researchers, communities, artists and organisers bring different knowledge. The record makes that work easier to find without claiming it as its own.</p>
-        <p className="covenant-love-line">Find the source.<br />Question the claim.<br />Act with others.</p>
-        <p>Related entries share a subject. Groups name the subject they work on. Custodians can link a drawing to the entry it answers. These are links people can follow, not a claim that every connection has already been made.</p>
+        <p>Entries and groups can be found by subject. Custodians can link a drawing to the entry it addresses. Researchers, communities, artists and organisers keep the credit for their work.</p>
         <div className="covenant-inline-links">
           <Link to="/TogetherChangeClimate#record-room-groups">Find people working on the same thing →</Link>
           <Link to="/TogetherChangeClimate?submit=1&type=group">Start a group →</Link>
