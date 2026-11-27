@@ -10,6 +10,7 @@ import XEqualsXPhoneBar from '@/components/climate/XEqualsXPhoneBar';
 import XEqualsXMarkSignal from '@/components/climate/XEqualsXMarkSignal';
 import XEqualsXPromises from '@/components/climate/XEqualsXPromises';
 import XEqualsXWhatItAsks from '@/components/climate/XEqualsXWhatItAsks';
+import XEqualsXWhyTheName from '@/components/climate/XEqualsXWhyTheName';
 import RecordInPractice from '@/components/climate/RecordInPractice';
 import XEqualsXCheck from '@/components/climate/XEqualsXCheck';
 import XEqualsXLimits from '@/components/climate/XEqualsXLimits';
@@ -71,6 +72,14 @@ export default function XEqualsX() {
 
       {/* The work, card by card, exactly as her achievements are set. */}
       <div className="covenant-stack">
+        {/* ── THE ARGUMENT FOR THE NAME, FIRST ────────────────────────────────────
+            The page argued about what the record does and never argued for the name
+            itself, which is the one thing a sceptical host or institute actually asks.
+            It leads the stack now, before the mechanism, because a reader who is not
+            persuaded by this card will not read the three under it. */}
+        <div className="covenant-card">
+          <XEqualsXWhyTheName />
+        </div>
         <div className="covenant-card">
           <XEqualsXWhatItAsks />
         </div>
