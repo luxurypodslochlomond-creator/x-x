@@ -38,6 +38,17 @@ const CB51PrivacyPage = React.lazy(() => import('./pages/CB51Privacy'));
 const StoneymollanPage = React.lazy(() => import('./pages/Stoneymollan'));
 const PetSounds51ResearchOutreach = React.lazy(() => import('./pages/PetSounds51ResearchOutreach'));
 const PetSounds51 = React.lazy(() => import('./pages/PetSounds51'));
+// ── CTRL51 — A PRODUCT ON THE FRONT PAGE WITH NO DOOR ────────────────────────
+// The Welcome page has offered CTRL51 since it was written, and all six of its screens
+// have been sitting in the app with no route at all: a tap on the product opened the
+// not-found page. They wear their own CTRL51 header, like PetSounds51 and TRACKT, so
+// they are mounted without the UF51 sidebar around them.
+const CTRL51Page = React.lazy(() => import('./pages/CTRL51'));
+const CTRL51PricingPage = React.lazy(() => import('./pages/CTRL51Pricing'));
+const CTRL51DashboardPage = React.lazy(() => import('./pages/CTRL51Dashboard'));
+const CTRL51TermsPage = React.lazy(() => import('./pages/CTRL51Terms'));
+const CTRL51PrivacyPage = React.lazy(() => import('./pages/CTRL51Privacy'));
+const CTRL51CheckoutSuccessPage = React.lazy(() => import('./pages/CTRL51CheckoutSuccess'));
 const CB51CalendarView = React.lazy(() => import('./pages/CB51CalendarView'));
 const CB51MessageInbox = React.lazy(() => import('./pages/CB51MessageInbox'));
 const CB51FinanceAdmin = React.lazy(() => import('./pages/CB51FinanceAdmin'));
@@ -292,6 +303,15 @@ const AuthenticatedApp = () => {
         </LayoutWrapper>
       } />
       <Route path="/PetSounds51" element={<PetSounds51 />} />
+      {/* ── CTRL51 — THE PRODUCT THE FRONT PAGE ALREADY OFFERS ──
+          Every one of these screens was built and linked from Welcome, and none of them
+          had a door: the one product on the front page that opened onto nothing. */}
+      <Route path="/CTRL51" element={<CTRL51Page />} />
+      <Route path="/CTRL51Pricing" element={<CTRL51PricingPage />} />
+      <Route path="/CTRL51Dashboard" element={<CTRL51DashboardPage />} />
+      <Route path="/CTRL51Terms" element={<CTRL51TermsPage />} />
+      <Route path="/CTRL51Privacy" element={<CTRL51PrivacyPage />} />
+      <Route path="/CTRL51CheckoutSuccess" element={<CTRL51CheckoutSuccessPage />} />
       {/* TRACKT — nine pages were imported here and not one of them had a route, so the
           TRACKT product sitting in the main nav opened the not-found page. Each page
           already wears its own TracktLayout, so nothing is wrapped around them. */}
@@ -654,6 +674,23 @@ const AuthenticatedApp = () => {
       <Route path="/seals" element={<Navigate to="/ClimateSeals" replace />} />
       <Route path="/roll" element={<Navigate to="/ClimateRoll" replace />} />
       <Route path="/founder" element={<Navigate to="/ClimateFounder" replace />} />
+      {/* ── THE DOORS PEOPLE SAY OUT LOUD ──
+          Brian, 27 November: "/TheWire and /TheWire/Method and /x=x etc". He is right: the
+          rooms are called the wire, the method, the wall, and a reader who has heard the name
+          types it with a capital and gets the not-found page. So the spoken name opens the room
+          it names. Short doors only — every real address keeps working exactly as it is. */}
+      <Route path="/TheWire" element={<Navigate to="/ClimateWire" replace />} />
+      <Route path="/TheWire/Method" element={<Navigate to="/ClimateMethod" replace />} />
+      <Route path="/TheWire/Cartoons" element={<Navigate to="/ClimateCartoons" replace />} />
+      <Route path="/TheWire/Search" element={<Navigate to="/ClimateSearch" replace />} />
+      <Route path="/TheMethod" element={<Navigate to="/ClimateMethod" replace />} />
+      <Route path="/TheCartoons" element={<Navigate to="/ClimateCartoons" replace />} />
+      <Route path="/TheMusic" element={<Navigate to="/ClimateMusic" replace />} />
+      <Route path="/TheGuide" element={<Navigate to="/ClimateGuide" replace />} />
+      <Route path="/TheSeals" element={<Navigate to="/ClimateSeals" replace />} />
+      <Route path="/TheRoll" element={<Navigate to="/ClimateRoll" replace />} />
+      <Route path="/TheSearch" element={<Navigate to="/ClimateSearch" replace />} />
+      <Route path="/TheFounder" element={<Navigate to="/ClimateFounder" replace />} />
       <Route path="/BrandMark" element={<BrandMarkPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
