@@ -5,7 +5,7 @@ import { buildDrawingShareCard, drawingShareLine } from '@/components/climate/ca
 import { recordOrigin } from '@/components/climate/recordAddress';
 import { goalByNumber } from '@/components/climate/cartoons/cartoonGoals';
 
-export default function CartoonCaption({ cartoon }) {
+export default function CartoonCaption({ cartoon, instant = false }) {
   const { title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title, goal } = cartoon;
   // A drawing offered from a goal's own panel says so where it hangs, in the goal's own name,
   // and points at the goal's own page — the same shape as the line above it for a crisis.
@@ -28,6 +28,7 @@ export default function CartoonCaption({ cartoon }) {
             their own line. Read full size, this is where somebody decides to pass it on. */}
         <ShareCardButton
           inline
+          instant={instant}
           entry={cartoon}
           build={buildDrawingShareCard}
           label="Share this drawing"
