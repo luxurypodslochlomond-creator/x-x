@@ -33,6 +33,18 @@ export const WALL_ORDER = [
   'Solar Thriller',
   'The Way to Live Longer!',
   'Love At First Light',
+
+  // ── THE NAIROBI BODY, IN THE CURATOR'S OWN ORDER ─────────────────────────────
+  // Zahid Rajan sent these four on 27 November in this sequence, and the sequence is his,
+  // not the record's: Maddo's aeroplane first, because it is the joke that opens a door,
+  // and then Gado's three — the stumped globe, the stumped Kenya, and the Earth crying
+  // over El Niño to aliens who have seen it all before. Read in that order they move from
+  // laughter to the ground under the reader's own feet to the weather, which is the
+  // argument the body is making.
+  'Ladies and gentlemen, this is your Captain speaking, we are now flying straight into a break in the Ozone layer - I hope you remembered to carry along some radiation suits!',
+  'After destroying everything on the ground, mankind wants to destroy the Earth!',
+  'Why Kenyans will become extinct...',
+  "Never mind, it's the Earth again crying over El-Nino, the ghost they helped to create...!",
 ];
 
 const key = (t) => String(t || '').trim().toLowerCase();
@@ -50,12 +62,18 @@ const key = (t) => String(t || '').trim().toLowerCase();
 // buried behind a hundred others.
 const HAND_CEEW = 0;
 const HAND_FRANCIS = 1;
-const HAND_OTHER = 2;
+// The Nairobi body, gathered and sent by Zahid Rajan: Maddo and Gado, both of the Daily
+// Nation, both looking at what was already being done to Kenya's ground in 1997 and 1998.
+// Their own room, beside the other two, because a curator sending four drawings of his own
+// country's record is not a scattering of strangers to be dropped at the bottom of the wall.
+const HAND_AFRICA = 2;
+const HAND_OTHER = 3;
 
 const handOf = (cartoon) => {
   const said = `${cartoon.credit || ''} ${cartoon.artist_name || ''}`.toLowerCase();
   if (said.includes('council on energy') || said.includes('what on earth')) return HAND_CEEW;
   if (said.includes('francis') || said.includes('francodus')) return HAND_FRANCIS;
+  if (said.includes('zahid') || said.includes('african press')) return HAND_AFRICA;
   return HAND_OTHER;
 };
 
