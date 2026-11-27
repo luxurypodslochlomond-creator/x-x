@@ -32,6 +32,11 @@ export const WALL_ORDER = [
   'The Last Shade',
   'Earth in ICU: The Only Medicine is a Tree',
   'Cutting Our Own Home',
+  // Hanan AlKarargy's two from Alexandria, in the order the campaign numbered them: the city
+  // held in one woman's hands, then the children who hold the shoreline. The second answers
+  // the first, so they hang side by side and nothing is put between them.
+  'Alexandria – A City Worth Protecting',
+  'Together We Can Protect Our Coast – Alexandria',
   // A comic is a different shape from a single frame, and it hangs last in Francis's block
   // on purpose: it is the one drawing in the room that argues with its reader for six
   // panels before it lets them go, so it closes the body rather than interrupting it.
@@ -75,8 +80,16 @@ const key = (t) => String(t || '').trim().toLowerCase();
 // hand the editorial order below still runs, and a hand nobody has named keeps the order
 // it arrived in — so Francis's room grows as he sends, and a stranger's drawing is never
 // buried behind a hundred others.
-const HAND_CEEW = 0;
-const HAND_FRANCIS = 1;
+// ── THE CAMPAIGN LEADS ───────────────────────────────────────────────────────────
+// Brian, 27 November: "since CAIB event and Francis curating shout CAIB go first on the
+// wall." He is right, and the reason is not rank. This room was opened FOR the biennial, the
+// workshop on the 29th is its workshop, and the hands Francis gathered for it are what the
+// room was built to hold. A visitor arriving before the event should meet the campaign the
+// event is about, not a body that was already here. The others are not demoted: every hand
+// still gets the same size, the same three lines and the same way in. Only who goes first
+// has changed, and it changed because the room is Francis's room this week.
+const HAND_CAIB = 0;
+const HAND_CEEW = 1;
 // The Nairobi body, gathered and sent by Zahid Rajan: Maddo and Gado, both of the Daily
 // Nation, both looking at what was already being done to Kenya's ground in 1997 and 1998.
 // Their own room, beside the other two, because a curator sending four drawings of his own
@@ -86,8 +99,10 @@ const HAND_OTHER = 3;
 
 const handOf = (cartoon) => {
   const said = `${cartoon.credit || ''} ${cartoon.artist_name || ''}`.toLowerCase();
+  // Read CAIB first: its credit names Francis as curator, and a drawing that is both his
+  // campaign's and his own hand still belongs to the campaign it was gathered for.
+  if (said.includes('caib') || said.includes('francis') || said.includes('francodus')) return HAND_CAIB;
   if (said.includes('council on energy') || said.includes('what on earth')) return HAND_CEEW;
-  if (said.includes('francis') || said.includes('francodus')) return HAND_FRANCIS;
   if (said.includes('zahid') || said.includes('african press')) return HAND_AFRICA;
   return HAND_OTHER;
 };
