@@ -33,7 +33,10 @@ import { CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 // x = x.
 
 const TITLE = 'Together we can change the course of climate change — Record of the Time';
-const DESCRIPTION = 'Climate crises. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.';
+// One description for the whole record, and it is the record's own promise — the same sentence
+// the share sends and the preview tags carry, so a link opened from a chat lands on a page that
+// says exactly what the chat said. See shareRecordCard.js for why it asks nothing of anybody.
+const DESCRIPTION = 'A public record of the climate. Solutions, Crises and Actions: each one dated, sourced and signed. Nothing sold, nothing ranked.';
 
 // ── THE CARTOON ROOM IS AN EVENT, AND IT TRAVELS AS ONE ───────────────────────
 // Every page of the record was sharing the record's own mark, so a link to the cartoon room

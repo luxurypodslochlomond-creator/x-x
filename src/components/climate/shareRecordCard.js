@@ -22,8 +22,22 @@ import { recordAddress, recordOrigin } from './recordAddress';
 // front page says at the top. A share that shortens a host's sentence until it stops being
 // true is the one thing a card must never do, so it goes out whole.
 export const RECORD_SHARE_TITLE = 'Together we can change the course of climate change';
+// ── THE LINE THAT TRAVELS IS A PROMISE, NOT A SLOGAN ─────────────────────────
+// Brian, 27 November: "maximum impact across the world… will motivate and encourage people to
+// share… but don't want to be cheesy… I remember 'sharing is caring' and it drove a lot of
+// people insane… we need to be coolasfuck for all the right reasons."
+//
+// He is right about why that one curdled. "Sharing is caring" asked the reader to feel good
+// about themselves for pressing a button, and the people who chanted it loudest were selling
+// something. An ask is the one thing this record can never make: the moment it says "share
+// this", it is advertising, and a stranger is right to ignore it.
+//
+// So the line does no asking. It states four things that can be checked — dated, sourced,
+// signed, and the two refusals — and then stops. A record that promises nothing is sold and
+// nothing ranked is worth passing on because of what it is, not because it begged. That is
+// the only kind of sharing that does not turn into the thing it was warning about.
 export const RECORD_SHARE_LINE =
-  'Climate crises. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names. Read it. Take what works. Use it.';
+  'A public record of the climate. Solutions, Crises and Actions: each one dated, sourced and signed. Nothing sold, nothing ranked.';
 
 export const RECORD_LINK = recordAddress('/TogetherChangeClimate');
 

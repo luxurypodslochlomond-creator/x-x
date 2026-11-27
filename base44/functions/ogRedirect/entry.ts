@@ -149,7 +149,7 @@ const PAGE_META = {
   // ── TOGETHER WE CAN CHANGE CLIMATE — Janine Selendy's record ────────────
   TogetherChangeClimate: {
     title: 'Together we can change the course of climate change — Record of the Time',
-    description: 'Climate emergencies. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.',
+    description: 'A public record of the climate. Solutions, Crises and Actions: each one dated, sourced and signed. Nothing sold, nothing ranked.',
     image: RECORD_CARD,
     imageWidth: 1600,
     imageHeight: 901,
@@ -157,7 +157,7 @@ const PAGE_META = {
   },
   ClimatePlatform: {
     title: 'Together we can change the course of climate change — Record of the Time',
-    description: 'Climate emergencies. Solutions that work. People taking action. A free public record, with sources you can follow, in any language a reader names.',
+    description: 'A public record of the climate. Solutions, Crises and Actions: each one dated, sourced and signed. Nothing sold, nothing ranked.',
     image: RECORD_CARD,
     imageWidth: 1600,
     imageHeight: 901,
