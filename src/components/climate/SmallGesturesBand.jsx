@@ -73,11 +73,22 @@ export default function SmallGesturesBand() {
       {/* ── WHERE THE ARGUMENT HAS ALREADY BEEN PROVED, IN THE SAME CITY ────────────
           A claim that small repeated gestures build something vast needs a proof, or it is
           just a nice sentence. The proof is Benin's, and the biennial is held in the city that
-          built it: the Walls of Benin — Iya — which Guinness records as the longest earthworks
-          of the pre-mechanical era. Archaeologist Patrick Darling estimated their total length
-          at around 16,000 km in 1977, in a mosaic of hundreds of interconnected boundaries,
-          with ramparts reaching some twenty metres; the Metropolitan Museum dates their
-          construction from roughly the seventh to the fourteenth century.
+          built it: the Walls of Benin — Iya. Archaeologist Patrick Darling estimated their total
+          length at around 16,000 km, in a mosaic of hundreds of interconnected boundaries, with
+          ramparts reaching some twenty metres; the Metropolitan Museum dates their construction
+          from roughly the seventh to the fourteenth century.
+
+          ── AND GUINNESS IS OFF THE PAGE ─────────────────────────────────────────────
+          Brian, 27 November: "you sure mention Guinness? They coolasfuck bri not sure?"
+          He is right to stop it. Guinness World Records is an entertainment brand — stunts,
+          television, a book at Christmas — and it is not the body a Yale archaeologist, a
+          Tufts climate researcher or a Nigerian cartoonist would accept as the authority on
+          what Edo built. Worse, it was never the authority here: the figure is Darling's, and
+          Guinness only repeated it. So the record now cites the archaeology that cites him —
+          a 2025 peer-reviewed paper in the African Archaeological Review, which gives 16,000 km
+          and 6,500 km² to Darling (1984) — and the superlative goes with it. A number with a
+          survey behind it is worth more than a title from a record book, and it is the number
+          that is impressive anyway.
 
           Every figure here is attributed rather than asserted, and the 16,000 km is named as
           Darling's estimate rather than as a measurement, because on this record a number
@@ -94,18 +105,18 @@ export default function SmallGesturesBand() {
         style={{ fontFamily: 'var(--font-reading)' }}
       >
         And it has already been proved once, in the city this biennial is held in. The Walls of
-        Benin — Iya — are recorded by Guinness as the longest earthworks of the pre-mechanical
-        era: archaeologist Patrick Darling estimated their total length at around 16,000 km in
-        1977, in a mosaic of hundreds of interconnected boundaries, with ramparts reaching some
-        twenty metres, built between roughly the seventh and fourteenth centuries and enclosing
-        around 6,500 km². Nobody built that in one act, and it took the better part of a
-        millennium — which is the one thing we have not got. It is one basket of earth, repeated
-        until it became the longest structure of the pre-mechanical world — which is exactly
-        Janine’s argument, made in Edo soil several centuries before anyone wrote it down, and
-        the reason the small gesture is not a slow answer but the only fast one.
+        Benin — Iya — run to an estimated 16,000 km in all, enclosing around 6,500 km², in a
+        mosaic of hundreds of interconnected boundaries with ramparts reaching some twenty
+        metres. That estimate is Patrick Darling’s, from his surveys of the earthworks, and it is
+        still the one the archaeology cites; the Metropolitan Museum dates the work around Benin
+        City from roughly the seventh to the fourteenth century. Nobody built that in one act,
+        and it took the better part of a millennium — which is the one thing we have not got. It
+        is one basket of earth, repeated at a scale no single act could produce — which is
+        exactly Janine’s argument, made in Edo soil several centuries before anyone wrote it
+        down, and the reason the small gesture is not a slow answer but the only fast one.
       </p>
       <p className="mb-3 text-[10px] font-mono leading-relaxed text-[#5a5246]">
-        Sources: <a className="underline" href="https://www.guinnessworldrecords.com/world-records/97959-longest-earthworks-of-the-pre-mechanical-era" target="_blank" rel="noopener noreferrer">Guinness World Records</a>
+        Sources: <a className="underline" href="https://link.springer.com/article/10.1007/s10437-025-09630-y" target="_blank" rel="noopener noreferrer">African Archaeological Review, 2025 — citing Darling’s survey estimate</a>
         {' · '}
         <a className="underline" href="https://www.metmuseum.org/perspectives/benin-city-earthworks" target="_blank" rel="noopener noreferrer">The Metropolitan Museum of Art</a>
         {' · '}

@@ -73,10 +73,11 @@ export default function PressOpening() {
               gesture becomes when enough people make it. */}
           {/* ── THE NAME IS OLDER THAN THE ROOM ─────────────────────────────────────
               Brian, 26 November: "we called it the wall bro". We did, and so did Benin, eight
-              centuries earlier. Iya — the Walls of Benin — is recorded by Guinness as the
-              longest earthworks of the pre-mechanical era: around 16,000 km on Patrick
-              Darling's 1977 estimate, ramparts to some twenty metres, built between roughly
-              the seventh and fourteenth centuries. Nobody built that in one act.
+              centuries earlier. Iya — the Walls of Benin — runs to an estimated 16,000 km and
+              around 6,500 km² on Patrick Darling's survey estimate, with ramparts to some
+              twenty metres, dated by the Metropolitan Museum to roughly the seventh to the
+              fourteenth century. Nobody built that in one act, and it took the better part of
+              a millennium.
 
               This is the one line in the doorway that earns its place, and it is here rather
               than further down because a reader meets the word "wall" in the title and should
@@ -96,16 +97,19 @@ export default function PressOpening() {
           >
             The name is older than this room: <strong>Iya</strong>, the earthworks of Benin — some
             16,000 km of ditches, banks and ramparts enclosing around 6,500 km², raised one basket
-            of earth at a time over something like eight hundred years, by hands nobody wrote down.
-            We do not have eight hundred years. A wall is what a small gesture becomes when enough
-            people make it — and this one has to be made in a hurry.
+            of earth at a time over the better part of a millennium, by hands nobody wrote down.
+            We have not got a millennium. A wall is what a small gesture becomes when enough people
+            make it — and this one has to be made in a hurry.
           </p>
           {/* ── THE SCALE, AND WHERE IT CAME FROM, IN TEN POINT TYPE ────────────────
-              Janine Selendy sent the scale on 27 November 2026, quoting Wikipedia's account of
-              the earthworks; the length is Guinness's record of the longest pre-mechanical
-              earthworks in the world. Two sources, named and linked, rather than a bare number
-              dropped at the door — because a figure without its source is a rumour with a
-              typeface, and Francis and every cartoonist in this room would smell it in a second.
+              Janine Selendy sent the scale on 27 November 2026. It first sat here credited to
+              Guinness World Records, and Brian stopped it the same hour: "you sure mention
+              Guinness? They coolasfuck bri not sure?" He was right. Guinness is a record book
+              for stunts, not the body that measures Edo's earthworks, and the figure was never
+              theirs — it is Patrick Darling's survey estimate, and the archaeology still cites
+              it. So the door now names the peer-reviewed paper that carries it and the museum
+              that dates the work, which is what a researcher at Yale, Tufts or Columbia would
+              actually check, and what a cartoonist in Benin City would not find insulting.
               The room's rule holds: no new section, no apparatus, one line under the sentence. */}
           <p
             style={{
@@ -119,22 +123,22 @@ export default function PressOpening() {
             Scale:{' '}
             <a
               className="underline"
-              href="https://www.guinnessworldrecords.com/world-records/97959-longest-earthworks-of-the-pre-mechanical-era"
+              href="https://link.springer.com/article/10.1007/s10437-025-09630-y"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Guinness World Records
+              Patrick Darling’s survey estimate, as cited in the African Archaeological Review
             </a>
             {' · '}
             <a
               className="underline"
-              href="https://en.wikipedia.org/wiki/Benin_Moat"
+              href="https://www.metmuseum.org/perspectives/benin-city-earthworks"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Wikipedia’s Benin Moat
+              The Metropolitan Museum of Art
             </a>
-            , as Janine Selendy sent it on 27 November 2026.
+            {' — '}sent by Janine Selendy, 27 November 2026.
           </p>
           <CartoonSignal />
         </header>
