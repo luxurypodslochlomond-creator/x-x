@@ -1,13 +1,21 @@
 import React from 'react';
-import { MarkStamp, MarkEye, MarkGate, MarkLedger } from './KeeperMarks';
-
-// Four marks and one word per job. The phone keeps its index above the work;
-// only the overview carries a count, so one queue never looks like two.
+// ── FOUR WORDS, AND NOTHING DRAWN ABOVE THEM ───────────────────────────────────
+// Brian, 27 November, standing in this room on a phone: "lots going on and symbols and marks
+// not right, my brain hurts and eyes too, it's confusing."
+//
+// Each of these four doors carried a drawing — a stamp, an eye, a gate, a ledger — over a
+// word that already said the same thing. Four pictures to read, on four doors whose names
+// were printed underneath them anyway: noise dressed as navigation. The shed's own rail made
+// this exact argument months ago ("four pictures nobody has to read, which is exactly what
+// makes them slower than four words") and this dock never got the message. The words stay,
+// and they are the whole door.
+//
+// One word per job, and the same word on the phone and on the desk.
 const TABS = [
-  { id: 'decide', Mark: MarkStamp, word: 'Decide', unit: 'to decide', keeperOnly: true },
-  { id: 'check', Mark: MarkEye, word: 'Check', unit: 'to read' },
-  { id: 'people', Mark: MarkGate, word: 'People', unit: 'need attention', keeperOnly: true },
-  { id: 'record', Mark: MarkLedger, word: 'Record', unit: '', keeperOnly: true },
+  { id: 'decide', word: 'Decide', unit: 'to decide', keeperOnly: true },
+  { id: 'check', word: 'Check', unit: 'to read' },
+  { id: 'people', word: 'People', unit: 'need attention', keeperOnly: true },
+  { id: 'record', word: 'Record', unit: '', keeperOnly: true },
 ];
 
 export default function WorkDock({ counts, keeper, view, onView, failed }) {
@@ -19,7 +27,7 @@ export default function WorkDock({ counts, keeper, view, onView, failed }) {
       className="room-work-nav border-t border-record-ink/20 bg-record-bone lg:mt-3 lg:border-y"
     >
       <div className="mx-auto flex max-w-[520px]">
-        {tabs.map(({ id, Mark, word, unit }, i) => {
+        {tabs.map(({ id, word, unit }, i) => {
           // A failed count is not a zero. When the question did not come back, the cell
           // says nothing rather than saying "clear" — the one lie this room cannot afford.
           const n = failed ? null : counts?.[id] ?? null;
@@ -36,9 +44,10 @@ export default function WorkDock({ counts, keeper, view, onView, failed }) {
                 i < tabs.length - 1 ? 'border-r border-[#141210]/15' : ''
               } ${on ? 'bg-[#f4efe4]' : 'active:bg-[#f4efe4]/70'}`}
             >
-              <span className="room-nav-mark"><Mark size={19} className={on ? 'text-[#1e3a2b]' : waiting ? 'text-[#b3261e]' : 'text-[#4a443a]'} /></span>
+              {/* The word is the door now, so it is set at the size a door's name should be
+                  rather than as a caption under a drawing. */}
               <span
-                className="room-nav-word text-[10.5px] font-semibold leading-none"
+                className="room-nav-word text-[12px] font-semibold leading-none"
                 style={{ fontFamily: 'var(--font-reading)', color: on ? '#1e3a2b' : '#141210' }}
               >
                 {/* One name per job, on the phone and on the desk. The phone used to call the

@@ -31,7 +31,12 @@ export default function RoomOverview({ who, headline, total, counted, failed, su
           <span><span className="hidden lg:inline">Keys held by </span>{keeperNames || who.name || 'you'}{checkingNow > 0 && <span> · {checkingNow} active witnesses</span>}</span>
         </p>
       )}
-      {who.isKeeper && summary && !failed && <div role="status" className="room-score col-span-full mt-2 text-sm leading-relaxed text-record-muted">{summary.decide} awaiting decisions · {summary.approvals} access approvals · {summary.invitations} invitations to check<span className="block text-xs">Updated {new Date(summary.counted_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}. Checking sources is a separate job, not a second count of these decisions.</span></div>}
+      {/* ── THE COUNT IS SAID ONCE, ON THE DOOR IT BELONGS TO ──────────────────────
+          This line printed the whole count a third time — in the headline above it, here, and
+          again under each door in the dock — and then spent a sentence explaining that one
+          figure was not a second count of another. A custodian opening her own room at midnight
+          should not have to read a footnote defending the arithmetic. The dock says the numbers,
+          each on the door it opens; the room says the state in one line and nothing else. */}
       {who.isKeeper && onInvite && <button type="button" onClick={onInvite} className="col-span-full mt-3 inline-flex min-h-11 w-fit items-center gap-2 rounded bg-record-red px-4 py-2 text-sm font-semibold text-record-paper hover:bg-record-red/90"><MarkGate size={21} />Invite a witness</button>}
     </div>
   );
