@@ -1,32 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, PenLine, Users } from 'lucide-react';
+import { Network, Palette, Users } from 'lucide-react';
 
 const CONNECTIONS = [
-  { name: 'Evidence', detail: 'Find what is known', to: '/ClimateSearch', Icon: BookOpen },
-  { name: 'Imagination', detail: 'See through other eyes', to: '/ClimateCartoons', Icon: PenLine },
-  { name: 'Action', detail: 'Find a way to help', to: '/TogetherChangeClimate', Icon: Users },
+  { name: 'Art', detail: 'The Wall. The artists. The work itself.', to: '/ClimateCartoons', Icon: Palette },
+  { name: 'Intelligence', detail: 'Search the record. Question the evidence.', to: '/ClimateSearch', Icon: Network },
+  { name: 'Activism', detail: 'Find an action. Contact its organiser.', to: '/TogetherChangeClimate#record-room-actions', Icon: Users },
 ];
 
 export default function XEqualsXCollective() {
   return (
     <section id="collective" className="covenant-collective" aria-labelledby="collective-heading">
       <div className="covenant-collective-inner">
-        <p className="covenant-kicker">Love · connection · collective action</p>
-        <h2 id="collective-heading">No one holds<br />the whole picture.</h2>
-        <p>A researcher brings evidence. A community brings knowledge of the place it lives. A cartoonist makes a question impossible to ignore. Each can notice what another misses.</p>
-        <div className="covenant-connections" aria-label="Three connected ways into the work, none ranked">
+        <p className="covenant-kicker">The platform · connected work, not collected attention</p>
+        <h2 id="collective-heading">Connect the work.<br />Build collective power.</h2>
+        <p>Art can confront what a report cannot. Evidence can expose what power would rather leave unseen. People can turn both into organised action. This platform brings those kinds of work within reach of one another.</p>
+        <nav className="covenant-connections" aria-label="Explore art, intelligence and activism">
           {CONNECTIONS.map(({ name, detail, to, Icon }) => (
             <Link to={to} key={name} className="covenant-connection">
               <span className="covenant-connection-node"><Icon aria-hidden="true" /></span>
               <strong>{name}</strong><span>{detail}</span>
             </Link>
           ))}
+        </nav>
+        <p><strong>Art is not decoration. People are not an audience. Life is not a resource to exhaust.</strong> The work belongs to the people who make it, not to the platform that carries it.</p>
+        <p className="covenant-love-line">Human knowledge.<br />Machine assistance.<br />Collective action.</p>
+        <p>AI helps with searching and translation. It does not replace an artist’s voice, lived knowledge or an accountable decision. Collective intelligence means we can question one another, connect what we know and act without having to become the same.</p>
+        <div className="covenant-inline-links">
+          <Link to="/TogetherChangeClimate#record-room-groups">Find people working on the same thing →</Link>
+          <Link to="/TogetherChangeClimate?submit=1&type=group">Start a group →</Link>
         </div>
-        <p><strong>Collective intelligence is not everyone agreeing.</strong> It is different people being able to question, connect and improve what we know, without losing their own voice.</p>
-        <p className="covenant-love-line">Love is the intention. Care is the work.</p>
-        <p>Here, that means protecting life, sharing what helps, crediting the hand that made it, and changing our minds when the evidence asks us to. A commitment to one another, not a claim about a mysterious force.</p>
-        <Link to="/TogetherChangeClimate#record-room-groups" className="covenant-text-link">Find people working on the same thing <span aria-hidden="true">→</span></Link>
       </div>
     </section>
   );

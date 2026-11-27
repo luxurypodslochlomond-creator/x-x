@@ -24,11 +24,11 @@ export default function XEqualsX() {
   return (
     <div id="x-equals-x" className="covenant-page" data-record-technical>
       <XEqualsXOpening />
+      <XEqualsXCollective />
+      <XEqualsXArrangement />
       <XEqualsXWhyTheName />
       <XEqualsXJanineStory />
-      <XEqualsXCollective />
       <XEqualsXStand />
-      <XEqualsXArrangement />
       <XEqualsXOnRecord />
       <XEqualsXPromises />
       <XEqualsXSignalBand />

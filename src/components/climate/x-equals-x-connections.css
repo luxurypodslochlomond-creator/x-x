@@ -26,7 +26,10 @@
   border: 2px solid rgb(var(--cartoon-sun)); border-radius: 50%; background: rgb(var(--record-red)); color: rgb(var(--cartoon-sun));
 }
 #x-equals-x .covenant-connection-node svg { width: 1.4rem; height: 1.4rem; }
-#x-equals-x .covenant-connection strong { font-size: .85rem; line-height: 1.25; }
+#x-equals-x .covenant-connection strong { font-size: 1.15rem; font-weight: 800; line-height: 1.25; }
+#x-equals-x .covenant-platform-jump { margin-top: .85rem; }
+#x-equals-x a.covenant-three-name { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.75rem; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); text-underline-offset: .25em; }
+#x-equals-x a.covenant-three-name > span { color: rgb(var(--record-mark)); }
 #x-equals-x .covenant-connection > span:last-child { max-width: 13ch; margin-top: .3rem; font-size: .7rem; line-height: 1.45; }
 #x-equals-x .covenant-connection:hover strong { text-decoration: underline; text-underline-offset: .25em; }
 #x-equals-x .covenant-love-line { margin-top: 1.3rem; color: rgb(var(--cartoon-sun)); font-size: clamp(1.4rem, 5.2vw, 2rem) !important; line-height: 1.15 !important; letter-spacing: -.035em; font-weight: 800; }
@@ -82,7 +85,7 @@
 @media (min-width: 1024px) {
   #x-equals-x :is(.covenant-origin, .covenant-collective) { padding: 3.4rem 2.5rem; }
   #x-equals-x .covenant-connections { margin-block: 2rem; }
-  #x-equals-x .covenant-connection strong { font-size: 1.05rem; }
+  #x-equals-x .covenant-connection strong { font-size: 1.65rem; }
   #x-equals-x .covenant-connection > span:last-child { max-width: none; font-size: .8rem; }
   #x-equals-x .covenant-signal-drawing { padding: 1.1rem 1.3rem; }
 }

@@ -41,7 +41,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.textAlign = 'center';
   g.fillStyle = ink;
   g.font = `700 24px ${sans}`;
-  g.fillText('A PUBLIC CLIMATE RECORD', W / 2, 53);
+  g.fillText(COVENANT.kicker.toUpperCase(), W / 2, 53, W - PAD * 2);
   g.fillStyle = red;
   g.font = `700 256px ${sans}`;
   g.fillText('x=x', W / 2, 284);
@@ -55,10 +55,10 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.fillText('Cover painting · made for this record with BASE 1 (AI)', W / 2, 985);
   g.fillStyle = ink;
   g.font = `700 70px ${sans}`;
-  g.fillText(COVENANT.title, W / 2, 1064);
-  g.fillText(COVENANT.distinction, W / 2, 1145);
+  g.fillText(COVENANT.title, W / 2, 1064, W - PAD * 2);
+  g.fillText(COVENANT.distinction, W / 2, 1145, W - PAD * 2);
   g.font = `400 30px ${sans}`;
-  g.fillText(COVENANT.meaning, W / 2, 1202);
+  g.fillText(COVENANT.meaning, W / 2, 1202, W - PAD * 2);
   g.font = `700 27px ${sans}`;
   const terms = COVENANT_TERMS.map(term => term.title).join('  ');
   wrap(g, terms, W - PAD * 2).forEach((line, index) => g.fillText(line, W / 2, 1250 + index * 34));

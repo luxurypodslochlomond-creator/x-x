@@ -17,11 +17,12 @@ export default function XEqualsXOpening() {
   return (
     <section className="covenant-hero" aria-labelledby="why-this-record">
       <div className="covenant-hero-inner">
-        <p className="covenant-kicker">A public climate record</p>
+        <p className="covenant-kicker">{COVENANT.kicker}</p>
         <h1 id="why-this-record" className="covenant-title" translate="no" aria-label="x equals x">x=x</h1>
         <p className="covenant-front-line">{COVENANT.title}<br />{COVENANT.distinction}</p>
         <p className="covenant-purpose">{COVENANT.meaning}</p>
-        <p className="covenant-opening-intent">A place to turn what we know into what we do for one another.</p>
+        <p className="covenant-opening-intent">Connect the evidence. Confront the harm. Organise the response.</p>
+        <a href="#collective" className="covenant-text-link covenant-platform-jump">Explore the connected platform <span aria-hidden="true">↓</span></a>
       </div>
       <figure className="covenant-painting">
         <img src={RECORD_COVER_SCREEN} width="1600" height="901" alt="The record’s cover painting: the living Earth beneath a luminous sky." loading="eager" decoding="async" />
