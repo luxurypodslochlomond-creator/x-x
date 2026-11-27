@@ -6,6 +6,8 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 const DecideQueue = lazy(() => import('@/components/climate/DecideQueue'));
 const ClimateChecking = lazy(() => import('@/pages/ClimateChecking'));
 const GuestList = lazy(() => import('@/components/climate/keeper/GuestList'));
+// The wall's join lives in the room now, not on an address of its own.
+const WallLinks = lazy(() => import('@/components/climate/cartoons/keeper/WallLinks'));
 import WorkDock from '@/components/climate/keeper/WorkDock';
 import RoomOverview from '@/components/climate/keeper/RoomOverview';
 import RecordLife from '@/components/climate/keeper/RecordLife';
@@ -31,6 +33,9 @@ const FROM_TAB = {
   counts: 'record',
   record: 'record',
   sourcing: 'record',
+  // /WallLinks lands here, so the desk that ties drawings to entries is one room
+  // with the rest of the keeper's work and not a second house next door.
+  wall: 'wall',
 };
 
 export default function ClimateKeeperRoom() {
@@ -208,6 +213,7 @@ export default function ClimateKeeperRoom() {
             {activeView === 'decide' && who.isKeeper && <DecideQueue plain onChange={count} />}
             {activeView === 'check' && <ClimateChecking plain onChange={count} />}
             {activeView === 'people' && who.isKeeper && <GuestList onChange={count} />}
+            {activeView === 'wall' && who.isKeeper && <WallLinks />}
 
             {/* What the record holds, and where a claim comes from — two questions a panel
                 asks, kept on one door rather than under a long page of footnotes. */}

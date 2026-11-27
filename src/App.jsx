@@ -230,8 +230,6 @@ const ClimateWorkshopAnswersPage = React.lazy(() => import('./pages/ClimateWorks
 const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorkshopWords'));
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
-// The keeper's desk for the join between the wall and the record's three doors.
-const ClimateWallLinksPage = React.lazy(() => import('./pages/ClimateWallLinks'));
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 const ClimateRollPage = React.lazy(() => import('./pages/ClimateRoll'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
@@ -551,7 +549,12 @@ const AuthenticatedApp = () => {
           wall and the record's three doors stood in separate rooms. This is the keeper's
           desk for the join, one drawing at a time. Behind the record's key, because it is
           the record's work and a keeper holds the record's keys, not the building's. */}
-      <Route path="/WallLinks" element={<ClimateLayout currentPage="ClimateCartoons"><KeeperKey><ClimateWallLinksPage /></KeeperKey></ClimateLayout>} />
+      {/* One room, not two. The join between the wall and the doors was given its own
+          address when it was built, and Brian asked the obvious question an hour later:
+          why is there a keeper's room AND a wall room? It is the fifth door of the room
+          now — /CustodianRoom?tab=wall — and this address opens that door, so a link
+          already sent still lands and nobody has to remember two houses. */}
+      <Route path="/WallLinks" element={<Navigate to="/CustodianRoom?tab=wall" replace />} />
       <Route path="/ClimateCorrections" element={<RecordSectionRedirect to="/ClimateMethod" fallbackHash="#corrections" />} />
       {/* The seal: every entry fingerprinted, and the check run in the reader's own
           browser rather than on our server. The one page that lets a sceptic verify

@@ -16,6 +16,12 @@ const TABS = [
   { id: 'check', word: 'Check', unit: 'to read' },
   { id: 'people', word: 'People', unit: 'need attention', keeperOnly: true },
   { id: 'record', word: 'Record', unit: '', keeperOnly: true },
+  // ── THE WALL'S JOIN, IN THE ROOM IT BELONGS TO ──────────────────────────────
+  // Brian, 27 November, half an hour after the desk was built: "why have keepers room
+  // and the new wall lost room?" He was right — two doors to one person's work is one
+  // door too many, and the wall's join was standing in the street beside the room that
+  // holds everything else. It is the fifth door here now, and its old address opens it.
+  { id: 'wall', word: 'Wall', unit: 'joined', keeperOnly: true },
 ];
 
 export default function WorkDock({ counts, keeper, view, onView, failed }) {
