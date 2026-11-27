@@ -6,9 +6,10 @@ import buildArtworkShare from '@/components/climate/buildArtworkShare';
 // it fetches the picture once, quietly, so the tap opens the share sheet with the artwork
 // already in hand. A wall of entries must not set it — every card would fetch its picture
 // a second time just in case somebody pressed it.
-export default function ArtworkShareButton({ imageUrl, title, credit, link, id = 'artwork', instant = false }) {
+export default function ArtworkShareButton({ imageUrl, title, credit, source, link, id = 'artwork', instant = false }) {
   // The picture alone, but never the picture alone as a bare link: the credit and the
   // address travel with it, because a photograph sent on with its credit stripped off is
-  // the one thing this record must never do.
-  return <ShareCardButton entry={{ id, title, image_url: imageUrl, image_credit: credit }} build={buildArtworkShare} link={link} label="Share image" previewFirst={!instant} instant={instant} compact includeMessage windowTitle="Share this picture" />;
+  // the one thing this record must never do. A picture taken from a story also names who
+  // says so, since a photograph passed on without its source is a picture of nothing.
+  return <ShareCardButton entry={{ id, title, image_url: imageUrl, image_credit: credit, source_name: source }} build={buildArtworkShare} link={link} label="Share image" previewFirst={!instant} instant={instant} compact includeMessage windowTitle="Share this picture" />;
 }

@@ -9,7 +9,7 @@ export default function NewsEntryImage({ entry, preview = false }) {
     <figure className={`news-entry-image${preview ? ' news-entry-image-preview' : ''}`}>
       <img src={entry.image_url} alt={entry.headline} loading="lazy" decoding="async" />
       {entry.image_credit && <figcaption>{entry.image_credit}</figcaption>}
-      <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} link={recordAddress(wireAddress(entry))} />
+      <ArtworkShareButton id={entry.id} imageUrl={entry.image_url} title={entry.headline} credit={entry.image_credit} source={entry.source_name} link={recordAddress(wireAddress(entry))} />
     </figure>
   );
 }

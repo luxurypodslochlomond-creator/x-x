@@ -42,7 +42,7 @@ export default function Transmission() {
     spec: track.spec || 'WAV · 44.1 kHz · 16-bit',
     body: 'Made for the record and given to it. Free to listen — nothing to buy, no paywall, no ad. The name stays on it, and the record never charges for it.',
     image_url: track.cover_url || FILM_POSTER,
-    image_credit: track.cover_url ? '' : "Frame from Dillon Squire's film · Stoneymollan, Loch Lomond, Scotland",
+    image_credit: track.cover_url ? `Picture given by ${track.artist_name}` : "Frame from Dillon Squire's film · Stoneymollan, Loch Lomond, Scotland",
     url_path: '/ClimateMusic',
   };
 
