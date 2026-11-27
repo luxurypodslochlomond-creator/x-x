@@ -39,7 +39,7 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
     }
   };
 
-  return <>
+  return <div className="space-y-2.5">
     {includeMessage && (
       <p className="whitespace-pre-line border-l-2 border-record-signal pl-3 text-sm leading-relaxed text-record-ink">{text}</p>
     )}
@@ -62,5 +62,5 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
     </details>
 
     {error && <><p className="text-sm text-record-red" role="alert">{error}</p><p className="whitespace-pre-line rounded border border-record-ink/20 p-3 text-xs">{message}</p></>}
-  </>;
+  </div>;
 }
