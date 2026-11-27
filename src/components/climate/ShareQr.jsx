@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
-// ── THE MARK IS A HOLE IN THE CODE ───────────────────────────────────────────
-// Brian, 27 November: "x = x in the QR looks odd… anything coolasfuck new like that?"
+// ── THE CODE IS PRINTED ON THE RECORD'S PAPER ────────────────────────────────
+// Brian, 27 November: "can the pattern be different and our OG colours?"
 //
-// Two faults, and one of them was real.
+// The colours, yes — and it is the one change that makes it look like it belongs here. The
+// code was ink on pure white, which is the colour of a utility. It is now ink on the record's
+// own paper, so it reads as something printed on this page rather than an image pasted into it.
+// (Contrast is still enormous: near-black on bone, which is all a scanner ever asks for.)
 //
-// The real one: the code was drawn to a fixed 480 pixels whatever its module count, so the
-// modules landed on fractional pixels and came out slightly different sizes — soft edges,
-// uneven squares. That is exactly what makes a scanner hesitate in a bad light. It is now
-// sized to a whole multiple of its own module count, so every square is identical and sharp.
+// The pattern, no — and this is worth saying plainly rather than trying it. Rounded dots,
+// diamonds, little pictures in the gaps: they all scan beautifully on the phone that made
+// them and fail on a cheap camera under a kitchen light, which is exactly where this code
+// will be used. A code that is pretty and does not open is worse than no code at all. So the
+// squares stay square, every one of them exactly the same size, and the only thing done to
+// the pattern is the one thing that is free: the × is missing from it.
 //
-// The odd one: the mark was a solid black plate with white letters stuck in the middle, like
-// a sticker on a window. So it is a knockout now — the × is simply missing from the code,
-// punched clean through it. Nothing is pasted on top, nothing is covered: the code was built
-// around the mark, and at the highest correction level it never notices losing it. And it is
-// one stroke rather than five letters, because "x = x" at the size a phone shows a code is
-// four pixels tall and reads as dirt. The full mark sits under the code, at the size a person
-// can actually read it.
+// And no more explaining. Two words under it. The paragraph that used to sit here was the
+// record lecturing somebody who had already understood.
 export default function ShareQr({ link }) {
   const [src, setSrc] = useState(null);
   const [failed, setFailed] = useState(false);
@@ -26,7 +26,7 @@ export default function ShareQr({ link }) {
     const draw = async () => {
       const QRCode = (await import('qrcode')).default;
 
-      // Whole pixels per module, so no square is ever a fraction bigger than its neighbour.
+      // Whole pixels per module: no square is ever a fraction bigger than its neighbour.
       const probe = QRCode.create(link, { errorCorrectionLevel: 'H' });
       const count = probe.modules.size;
       const scale = Math.max(4, Math.round(480 / count));
@@ -37,10 +37,10 @@ export default function ShareQr({ link }) {
         errorCorrectionLevel: 'H',
         margin: 0,
         width: size,
-        color: { dark: '#1a1612', light: '#ffffff' },
+        color: { dark: '#1a1612', light: '#f4efe4' },
       });
 
-      // The × punched through the middle: the record's paper, no plate, no border.
+      // The × punched straight through the middle, in the paper's own colour.
       const ctx = canvas.getContext('2d');
       const arm = size * 0.105;
       const centre = size / 2;
@@ -59,7 +59,7 @@ export default function ShareQr({ link }) {
     draw().catch(async () => {
       try {
         const QRCode = (await import('qrcode')).default;
-        const url = await QRCode.toDataURL(link, { margin: 0, width: 480, color: { dark: '#1a1612', light: '#ffffff' } });
+        const url = await QRCode.toDataURL(link, { margin: 0, width: 480, color: { dark: '#1a1612', light: '#f4efe4' } });
         if (live) setSrc(url);
       } catch { if (live) setFailed(true); }
     });
@@ -70,12 +70,10 @@ export default function ShareQr({ link }) {
   if (!src) return <p className="text-xs text-record-muted">Drawing the code…</p>;
   return (
     <div className="flex items-center gap-4">
-      <img src={src} alt={`QR code for ${link}, with the record's × punched through it`} className="h-40 w-40 shrink-0 bg-white" />
+      <img src={src} alt={`QR code for ${link}, with the record's × punched through it`} className="h-44 w-44 shrink-0" />
       <div>
-        <p className="font-mono text-sm font-bold text-record-signal">x = x</p>
-        <p className="mt-1 text-xs leading-relaxed text-record-muted">
-          The address, drawn — the × is missing from the code itself, and it still opens. Point a phone camera at it: no account, no app, and it works where a link is stopped.
-        </p>
+        <p className="font-mono text-base font-bold leading-none text-record-signal">x = x</p>
+        <p className="mt-2 text-[11px] leading-snug text-record-muted">Point a camera at it. No app, no account.</p>
       </div>
     </div>
   );
