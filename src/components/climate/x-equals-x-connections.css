@@ -25,7 +25,9 @@
   display: grid; place-items: center; width: 3.5rem; height: 3.5rem; margin-bottom: .6rem;
   border: 2px solid rgb(var(--cartoon-sun)); border-radius: 50%; background: rgb(var(--record-red)); color: rgb(var(--cartoon-sun));
 }
-#x-equals-x .covenant-connection-node svg { width: 1.4rem; height: 1.4rem; }
+#x-equals-x .covenant-connection-node svg { width: 1.7rem; height: 1.7rem; }
+/* The mass is paper on the record's red; the one cut part stays the signal yellow. */
+#x-equals-x .covenant-connection-node { --room-accent: rgb(var(--cartoon-sun)); color: rgb(var(--record-paper)); }
 #x-equals-x .covenant-connection strong { font-size: 1.15rem; font-weight: 800; line-height: 1.25; }
 #x-equals-x .covenant-platform-jump { margin-top: .85rem; }
 #x-equals-x a.covenant-three-name { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.75rem; text-decoration: underline; text-decoration-color: rgb(var(--record-mark)); text-underline-offset: .25em; }

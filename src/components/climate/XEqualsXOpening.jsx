@@ -7,13 +7,16 @@ import { buildCovenantCard } from '@/components/climate/xEqualsXCard';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { COVENANT, COVENANT_ENTRY, COVENANT_SHARE } from '@/components/climate/xEqualsXCopy';
 
-// The mark, the record’s name and three direct ways into the work.
+// The mark, the record’s name, what it is for, and three direct ways into the work.
 export default function XEqualsXOpening() {
   return (
     <section className="covenant-hero" aria-labelledby="why-this-record">
       <div className="covenant-hero-inner">
+        <p className="covenant-kicker">{COVENANT.kicker}</p>
         <h1 id="why-this-record" className="covenant-title" translate="no" aria-label="x equals x">x=x</h1>
         <p className="covenant-front-line">{COVENANT.title}</p>
+        <p className="covenant-purpose-line">{COVENANT.distinction}</p>
+        <p className="covenant-purpose">{COVENANT.meaning}</p>
         <nav className="covenant-primary-links" aria-label="Open the climate record by type">
           <Link to="/TogetherChangeClimate#record-room-climate_crisis">CRISIS</Link>
           <Link to="/TogetherChangeClimate#record-room-solution">SOLUTIONS</Link>

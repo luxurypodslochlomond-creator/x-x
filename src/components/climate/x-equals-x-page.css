@@ -48,12 +48,21 @@
   margin: 0 0 .5rem;
 }
 #x-equals-x .covenant-front-line {
-  margin-top: .8rem; font-size: clamp(1.35rem, 4.5vw, 2rem) !important;
-  font-weight: 600; line-height: 1.25 !important; letter-spacing: -.03em;
+  font-size: clamp(1.65rem, 7vw, 2.9rem) !important;
+  font-weight: 800; line-height: 1.06 !important; letter-spacing: -.045em;
+}
+#x-equals-x .covenant-purpose-line {
+  margin-top: .45rem; font-size: clamp(1.15rem, 4.4vw, 1.7rem) !important;
+  font-weight: 700; line-height: 1.15 !important; letter-spacing: -.03em;
+}
+#x-equals-x .covenant-purpose {
+  max-width: 34ch; margin: .9rem auto 0;
+  font-size: .95rem !important; color: rgb(var(--record-ink) / .82);
 }
 #x-equals-x .covenant-primary-links {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem;
-  max-width: 32rem; margin: 1.2rem auto 0;
+  max-width: 32rem; margin: 1.4rem auto 0; padding-top: 1.1rem;
+  border-top: 1px solid rgb(var(--record-ink) / .2);
 }
 #x-equals-x .covenant-primary-links a {
   display: flex; align-items: center; justify-content: center; min-height: 2.75rem;
@@ -81,6 +90,18 @@
 #x-equals-x .covenant-share > button { min-width: 6.25rem; color: rgb(var(--record-ink)); background: transparent; border-color: rgb(var(--record-ink)); }
 #x-equals-x .covenant-share > button:disabled { cursor: wait; }
 #x-equals-x .covenant-access { grid-column: 1 / -1; font-size: .75rem !important; text-align: center; }
+
+/* ── THE ONE DATE THE PAGE HAS TO CARRY ─────────────────────────────────────── */
+#x-equals-x .covenant-ninth { background: rgb(var(--record-bone)); border-top: 3px solid rgb(var(--record-ink)); }
+#x-equals-x .covenant-ninth-inner { max-width: 46rem; margin: auto; padding: 1.9rem 1.25rem; }
+#x-equals-x .covenant-ninth h2 { margin-bottom: .8rem; }
+#x-equals-x .covenant-ninth-ask { margin-top: .85rem !important; }
+#x-equals-x .covenant-ninth-links { display: flex; flex-wrap: wrap; gap: 0 1.4rem; margin-top: .7rem; }
+#x-equals-x .covenant-ninth-links a {
+  display: inline-flex; align-items: center; min-height: 2.75rem;
+  font-size: .84rem; font-weight: 700; text-decoration: underline;
+  text-decoration-color: rgb(var(--record-mark)); text-decoration-thickness: 2px; text-underline-offset: .25em;
+}
 
 /* ── THE SIGNAL: held on paper, beside the reason for sending it ────────────── */
 #x-equals-x .covenant-signal { background: rgb(var(--record-bone)); border-top: 3px solid rgb(var(--record-mark)); }
