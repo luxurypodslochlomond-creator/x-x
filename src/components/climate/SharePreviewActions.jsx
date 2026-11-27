@@ -23,7 +23,9 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
   const [error, setError] = useState('');
   const file = blob && typeof File === 'function' ? new File([blob], fileName, { type: blob.type || 'image/png' }) : null;
   const canShareImage = !!(file && navigator.share && navigator.canShare?.({ files: [file] }));
-  const canShareText = includeMessage && !!navigator.share;
+  // Words can still go to any app on the phone even when the picture cannot — which is the
+  // normal case on a desk, and inside a preview frame that is not allowed to share files.
+  const canShareText = !!navigator.share;
   const message = includeMessage ? text : link;
 
   const copy = async () => {
@@ -44,20 +46,39 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
       <p className="whitespace-pre-line border-l-2 border-record-signal pl-3 text-sm leading-relaxed text-record-ink">{text}</p>
     )}
 
-    {(canShareImage || canShareText) && <button type="button" onClick={share} className="flex min-h-12 items-center justify-center gap-2 rounded bg-record-ink px-4 text-sm font-bold text-record-paper"><Share2 size={18} />{canShareImage ? (includeMessage ? 'Share painting + words' : 'Share image') : 'Share words + link'}</button>}
-
-    <div className="flex items-center justify-center gap-5">
-      <a href={imageUrl || undefined} download={fileName} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Download size={15} className="shrink-0" />Save image</a>
-      <button type="button" onClick={copy} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4">{copied ? <Check size={15} className="shrink-0" /> : <Copy size={15} className="shrink-0" />}{copied ? 'Copied' : includeMessage ? 'Copy words + link' : 'Copy link'}</button>
+    {/* ── THE STAMP COMES FIRST ──────────────────────────────────────────────
+        "Get this is too much bro, need to scroll to see QR code." He was right, and the
+        reason was an inversion: the code sat last, under the longest list, when it is the
+        only door that needs no list at all — no app, no account, and the one way in where
+        a foreign link is stopped at the wall. So it stands at the top beside the address,
+        at the size of a stamp. Nothing below it has been removed. */}
+    <div className="flex items-center gap-3 border-y border-record-ink/15 py-2.5">
+      <ShareQr link={link} compact />
+      <div className="min-w-0">
+        <p className="break-all font-mono text-[11px] font-bold leading-snug text-record-ink/80">{link.replace(/^https?:\/\//, '')}</p>
+        <p className="mt-1 text-[11px] leading-snug text-record-muted">Point a camera at it. No app, no account.</p>
+      </div>
     </div>
 
-    {/* Everything else waits behind one line, so the three things a person actually does
-        are all above the fold on a phone. Nothing is removed; nothing is hunted for. */}
+    {/* The black slab is kept for the one case it is honest in: when the phone really can
+        carry the picture into another app. When it cannot — a desktop, or a preview frame
+        that is not allowed to open the share sheet — the words are offered as a quiet line
+        instead of the heaviest object in the window, because a button that offers words
+        under a painting is the thing that made it feel wrong. */}
+    {canShareImage && <button type="button" onClick={share} className="flex min-h-12 items-center justify-center gap-2 rounded bg-record-ink px-4 text-sm font-bold text-record-paper"><Share2 size={18} />{includeMessage ? 'Share painting + words' : 'Share image'}</button>}
+
+    <div className="flex flex-wrap items-center justify-center gap-x-5">
+      <a href={imageUrl || undefined} download={fileName} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Download size={15} className="shrink-0" />Save image</a>
+      <button type="button" onClick={copy} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4">{copied ? <Check size={15} className="shrink-0" /> : <Copy size={15} className="shrink-0" />}{copied ? 'Copied' : includeMessage ? 'Copy words + link' : 'Copy link'}</button>
+      {!canShareImage && canShareText && <button type="button" onClick={share} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Share2 size={15} className="shrink-0" />Send words + link</button>}
+    </div>
+
+    {/* Everything else waits behind one line, so the things a person actually does are all
+        above the fold on a phone. Nothing is removed; nothing is hunted for. */}
     <details className="border-t border-record-ink/15 pt-3">
-      <summary className="cursor-pointer text-xs font-bold text-record-ink">Everywhere else it can go — and the QR</summary>
-      <div className="mt-3 space-y-3">
+      <summary className="cursor-pointer text-xs font-bold text-record-ink">Everywhere else it can go</summary>
+      <div className="mt-3">
         <ShareDestinations link={link} title={headline} message={message} />
-        <ShareQr link={link} />
       </div>
     </details>
 

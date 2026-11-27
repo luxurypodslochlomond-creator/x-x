@@ -17,7 +17,7 @@ import React, { useEffect, useState } from 'react';
 //
 // And no more explaining. Two words under it. The paragraph that used to sit here was the
 // record lecturing somebody who had already understood.
-export default function ShareQr({ link }) {
+export default function ShareQr({ link, compact = false }) {
   const [src, setSrc] = useState(null);
   const [failed, setFailed] = useState(false);
 
@@ -67,6 +67,13 @@ export default function ShareQr({ link }) {
   }, [link]);
 
   if (failed) return null;
+  // The stamp: the same code at the size of a postage stamp, for the top of the window.
+  // It is the one door that needs no list, so it must never be the thing you scroll to.
+  if (compact) {
+    return src
+      ? <img src={src} alt={`QR code for ${link}, with the record's × punched through it`} className="h-[76px] w-[76px] shrink-0" />
+      : <div className="h-[76px] w-[76px] shrink-0" />;
+  }
   if (!src) return <p className="text-xs text-record-muted">Drawing the code…</p>;
   return (
     <div className="flex items-center gap-4">
