@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
+import { findBySlug } from '@/components/climate/recordSlug';
+import ShortDoorChooser from '@/components/climate/ShortDoorChooser';
 import ClimateCartoonSheet from '@/pages/ClimateCartoonSheet';
 import '@/components/climate/cartoons/sheet/sheet.css';
 
@@ -9,16 +10,14 @@ import '@/components/climate/cartoons/sheet/sheet.css';
 // /w/rain-check — a drawing's address that a person can say out loud, type into a
 // phone, or copy off a printout without getting it wrong.
 //
-// It resolves the name against the wall as the record actually stands: every published
-// drawing is read, and the one whose name matches opens on its own sheet. The sheet is
-// the same component the long address opens, so there is one sheet and not two.
-//
-// A name that matches nothing is a real 404, the same as a sheet that is not there:
-// a link into the record should never open a page that pretends to be a drawing.
+// It resolves the name against the wall as the record actually stands. If two drawings are
+// honestly called the same thing, the address shows both and the reader chooses, because
+// opening the wrong drawing under the right name is the one mistake this record must never
+// make. The sheet is the same component the long address opens: one drawing, not two.
 export default function ClimateCartoonShort() {
   const { slug } = useParams();
   const [state, setState] = useState('loading');
-  const [cartoon, setCartoon] = useState(null);
+  const [matches, setMatches] = useState([]);
 
   useEffect(() => {
     let alive = true;
@@ -35,9 +34,9 @@ export default function ClimateCartoonShort() {
         cursor = page.has_more ? page.next_cursor : null;
       } while (cursor && alive);
       if (!alive) return;
-      const found = all.find((c) => cartoonSlug(c) === slug);
-      setCartoon(found || null);
-      setState(found ? 'ready' : 'missing');
+      const found = findBySlug(all, slug, (c) => c.title || c.artist_name, 34);
+      setMatches(found);
+      setState(found.length ? 'ready' : 'missing');
     })().catch(() => { if (alive) setState('missing'); });
     return () => { alive = false; };
   }, [slug]);
@@ -59,7 +58,7 @@ export default function ClimateCartoonShort() {
     );
   }
 
-  if (state === 'missing' || !cartoon) {
+  if (state === 'missing') {
     return (
       <div className="sheet-page">
         <div className="sheet-state">
@@ -71,5 +70,18 @@ export default function ClimateCartoonShort() {
     );
   }
 
-  return <ClimateCartoonSheet id={cartoon.id} />;
+  if (matches.length > 1) {
+    return (
+      <ShortDoorChooser
+        slug={slug}
+        items={matches.map((c) => ({
+          label: c.title || `A drawing by ${c.artist_name}`,
+          note: c.artist_name,
+          to: `/ClimateCartoons/Sheet/${c.id}`,
+        }))}
+      />
+    );
+  }
+
+  return <ClimateCartoonSheet id={matches[0].id} />;
 }

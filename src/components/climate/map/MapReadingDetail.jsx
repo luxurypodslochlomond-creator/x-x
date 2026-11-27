@@ -12,9 +12,12 @@ export default function MapReadingDetail({ place, onClose }) {
             something, so the heading was promising a fact the count cannot give — on the
             one page whose whole argument is that a guessed fact is worse than no fact.
             Readings is what it is: times an entry was opened. The stored value and the
-            mode's own name are untouched; only the words a reader sees have changed. */}
-        <span className="record-meta text-record-muted">Readings · approximate place</span>
-        <button type="button" onClick={onClose} aria-label="Close readings detail" className="grid h-11 w-11 shrink-0 place-items-center"><X size={18} /></button>
+            mode's own name are untouched; only the words a reader sees have changed.
+            Brian, 27 November, on "Readings": "does that sound a bit tarot card to you bro?"
+            It does — a reading is what a fortune-teller gives you. So the plate now says
+            Times opened, which is the whole of what the number can honestly mean. */}
+        <span className="record-meta text-record-muted">Times opened · approximate place</span>
+        <button type="button" onClick={onClose} aria-label="Close times opened" className="grid h-11 w-11 shrink-0 place-items-center"><X size={18} /></button>
       </div>
       <h2 className="text-xl text-record-ink">{place.name}</h2>
       <p className="mt-3 font-bold text-record-ink">{place.reads}</p>

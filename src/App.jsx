@@ -170,6 +170,8 @@ const ExtractionProofCovenantPage = React.lazy(() => import('./pages/ExtractionP
 const UF51OverviewPage = React.lazy(() => import('./pages/UF51Overview'));
 const TogetherChangeClimatePage = React.lazy(() => import('./pages/TogetherChangeClimate'));
 const ClimateDetailPage = React.lazy(() => import('./pages/ClimateDetail'));
+// A solution, crisis or action's own name as its address: /e/mangrove-restoration-bonaire
+const ClimateEntryShortPage = React.lazy(() => import('./pages/ClimateEntryShort'));
 const UF51TokenPage = React.lazy(() => import('./pages/UF51Token'));
 const UF51ThreadJournalPage = React.lazy(() => import('./pages/UF51ThreadJournal'));
 const ClimateBriefPage = React.lazy(() => import('./pages/ClimateBrief'));
@@ -438,6 +440,14 @@ const AuthenticatedApp = () => {
       <Route path="/TogetherChangeClimate" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
       <Route path="/ClimatePlatform" element={<ClimateLayout currentPage="TogetherChangeClimate"><TogetherChangeClimatePage /></ClimateLayout>} />
       <Route path="/ClimateDetail/:type/:id" element={<ClimateLayout currentPage="TogetherChangeClimate"><ClimateDetailPage /></ClimateLayout>} />
+      {/* ── AN ENTRY'S OWN NAME, AS AN ADDRESS ──
+          A solution, a crisis or an action was only reachable at
+          /ClimateDetail/solution/6afde227… — the same fault the drawings had. Each now also
+          answers to its own title: /e/<name>. The long address keeps working, and the card
+          and the citation print the short one, because those are what get passed on.
+          Where two entries honestly share a name, the address shows both and the reader
+          chooses: the record never opens the wrong thing under the right name. */}
+      <Route path="/e/:slug" element={<ClimateLayout currentPage="TogetherChangeClimate"><ClimateEntryShortPage /></ClimateLayout>} />
       <Route path="/ClimateWire" element={<ClimateLayout currentPage="ClimateWire"><ClimateWirePage /></ClimateLayout>} />
       <Route path="/ClimateMethod" element={<ClimateLayout currentPage="ClimateMethod"><ClimateMethodPage /></ClimateLayout>} />
       <Route path="/ClimateSearch" element={<ClimateLayout currentPage="ClimateSearch"><ClimateSearchPage /></ClimateLayout>} />
@@ -708,6 +718,30 @@ const AuthenticatedApp = () => {
       <Route path="/TheRoll" element={<Navigate to="/ClimateRoll" replace />} />
       <Route path="/TheSearch" element={<Navigate to="/ClimateSearch" replace />} />
       <Route path="/TheFounder" element={<Navigate to="/ClimateFounder" replace />} />
+      {/* ── THE REST OF THE DOORS, SAID THE WAY A PERSON SAYS THEM ──
+          Brian, 27 November: "make it all coolasfuck every page bro down to terms privacy
+          etc". The rooms were already sayable; these are the ones that were not, or that a
+          reader types without the capital letters. Short doors only — every real address
+          keeps working exactly as it is.
+          Terms and privacy sit under /record/ because /Terms and /PrivacyPolicy already
+          belong to the platform's own pages, and a short door must never take a reader to a
+          different document than the one they asked for. */}
+      <Route path="/record" element={<Navigate to="/TogetherChangeClimate" replace />} />
+      <Route path="/record/terms" element={<Navigate to="/ClimateTerms" replace />} />
+      <Route path="/record/privacy" element={<Navigate to="/ClimatePrivacy" replace />} />
+      <Route path="/brief" element={<Navigate to="/ClimateBrief" replace />} />
+      <Route path="/workshop" element={<Navigate to="/ClimateWorkshop" replace />} />
+      <Route path="/answers" element={<Navigate to="/ClimateWorkshopAnswers" replace />} />
+      <Route path="/fellows" element={<Navigate to="/ClimateFellows" replace />} />
+      <Route path="/support" element={<Navigate to="/ClimateSupport" replace />} />
+      <Route path="/print" element={<Navigate to="/ClimateCartoons/Print" replace />} />
+      <Route path="/thread" element={<Navigate to="/ClimateCartoons/Thread" replace />} />
+      <Route path="/present" element={<Navigate to="/ClimateCartoons/Present" replace />} />
+      <Route path="/francis" element={<Navigate to="/ClimateCartoons/Francis" replace />} />
+      <Route path="/caib" element={<Navigate to="/ClimateCartoons/CAIB" replace />} />
+      <Route path="/whatthisis" element={<Navigate to="/ClimateCartoons/WhatThisIs" replace />} />
+      <Route path="/baseone" element={<Navigate to="/ClimateCartoons/BaseOne" replace />} />
+      <Route path="/host" element={<Navigate to="/ClimateHost" replace />} />
       <Route path="/BrandMark" element={<BrandMarkPage />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

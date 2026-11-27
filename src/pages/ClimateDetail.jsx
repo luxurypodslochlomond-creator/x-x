@@ -23,6 +23,7 @@ import SourceBlock from '@/components/climate/SourceBlock';
 import SourceArchiveNote from '@/components/climate/SourceArchiveNote';
 import VerificationBadge from '@/components/climate/VerificationBadge';
 import { recordAddress } from '@/components/climate/recordAddress';
+import { entryAddress } from '@/components/climate/recordSlug';
 import { verificationNoteOf } from '@/components/climate/verification';
 import VerificationControl from '@/components/admin/VerificationControl';
 import useRecordImage from '@/components/climate/useRecordImage';
@@ -70,8 +71,12 @@ function fmtDate(d) {
   } catch { return ''; }
 }
 
-export default function ClimateDetail() {
-  const { type, id } = useParams();
+export default function ClimateDetail({ type: typeProp, id: idProp }) {
+  // The short door (/e/…) resolves the entry and hands it in here, so the record keeps one
+  // entry page rather than a second copy of one.
+  const { type: typeParam, id: idParam } = useParams();
+  const type = typeProp || typeParam;
+  const id = idProp || idParam;
   const navigate = useNavigate();
   const location = useLocation();
   const backLabel = location.state?.recordReturn === 'map' ? 'Back to the map' : 'Back';
@@ -261,7 +266,7 @@ export default function ClimateDetail() {
           <SourceArchiveNote entryId={record.id} sourceUrl={record.source_url} />
 
           <RecordCitation
-            citation={`Together We Can Change Climate. "${record.title}" — ${meta.label}${record.region_rough ? ', ' + record.region_rough : ''}. ${recordAddress()}`}
+            citation={`Together We Can Change Climate. "${record.title}" — ${meta.label}${record.region_rough ? ', ' + record.region_rough : ''}. ${recordAddress(entryAddress(record))}`}
             note={record.source_url
               ? 'Quoting this action? The citation carries the record and the permanent address with it, so it can always be traced back.'
               : 'This action names no source on the record: quote it as the record\u2019s own, and tell us the organiser\u2019s origin if you have it.'}
@@ -395,7 +400,7 @@ export default function ClimateDetail() {
         <SourceArchiveNote entryId={record.id} sourceUrl={record.source_url} />
 
         <RecordCitation
-          citation={`${record.source_name ? record.source_name + '. ' : ''}"${record.title}" Together We Can Change Climate — ${isSolution ? 'solution' : 'climate crisis'}${record.country ? ', ' + record.country : ''}. ${recordAddress()}`}
+          citation={`${record.source_name ? record.source_name + '. ' : ''}"${record.title}" Together We Can Change Climate — ${isSolution ? 'solution' : 'climate crisis'}${record.country ? ', ' + record.country : ''}. ${recordAddress(entryAddress(record))}`}
           note={record.source_url
             ? 'Quoting this entry? The citation carries its origin, the record and the permanent address with it.'
             : 'This entry names no source on the record, so it can only be quoted as the record\u2019s own. If you know its origin, tell us and it is corrected in daylight, with the date.'}

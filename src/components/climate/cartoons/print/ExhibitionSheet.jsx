@@ -1,5 +1,6 @@
 import React from 'react';
 import { recordOrigin } from '@/components/climate/recordAddress';
+import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 
 // ── ONE DRAWING, ONE PAGE, TO BE PINNED TO A WALL ──────────────────────────────
 // The picture whole and nothing over it, and then the three things a cartoon must never
@@ -8,7 +9,9 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 // assumed, because a photocopied cartoon with no sentence on it becomes a cartoon with no
 // owner.
 export default function ExhibitionSheet({ cartoon, plate }) {
-  const address = `${recordOrigin().replace(/^https?:\/\//, '')}/ClimateCartoons/Sheet/${cartoon.id}`;
+  // The address printed on a sheet pinned to a wall is the short one: it is read out and
+  // typed in by hand, off paper, by someone who has no link to tap.
+  const address = `${recordOrigin().replace(/^https?:\/\//, '')}/w/${cartoonSlug(cartoon)}`;
   return (
     <article className="ex-sheet">
       <header className="ex-head">

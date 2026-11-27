@@ -1,5 +1,5 @@
 import { recordOrigin } from './recordAddress';
-import { wireAddress } from './recordSlug';
+import { wireAddress, entryAddress } from './recordSlug';
 import { RECORD_COVER_SCREEN } from '@/components/climate/categoryImages';
 import buildRecordPlate from '@/components/climate/recordPlate';
 
@@ -417,10 +417,9 @@ export async function buildEntryShareCard(entry = {}, options = {}) {
       : entry.entry_type === 'climate_crisis' ? 'Climate crisis'
         : 'Action');
 
-  // Where the entry lives. An action carries no entry_type of its own.
-  const path = entry.entry_type
-    ? `/ClimateDetail/${entry.entry_type}/${entry.id}`
-    : `/ClimateDetail/action/${entry.id}`;
+  // Where the entry lives — its own name, not its id. A card is the thing that gets sent
+  // on, so the address printed on it has to be one a person can read and type back.
+  const path = entryAddress(entry);
 
   const canvas = document.createElement('canvas');
   canvas.width = W;

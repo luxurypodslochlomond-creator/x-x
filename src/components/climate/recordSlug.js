@@ -13,8 +13,11 @@ const WIRE_CUT_AT = 44;
 
 // A long headline always ends its cut somewhere, and a name that trails off on "in", "its"
 // or "of" reads like a mistake rather than a name. So the last word is dropped while it is
-// only glue — the address keeps the words that carry the meaning.
+// only glue — the address keeps the words that carry the meaning. A name is also capped at
+// seven words, because past that it stops reading like a name and starts reading like a
+// sentence somebody interrupted.
 const GLUE = new Set(['a', 'an', 'and', 'are', 'as', 'at', 'be', 'but', 'by', 'for', 'from', 'in', 'into', 'is', 'it', 'its', 'of', 'on', 'or', 'that', 'the', 'their', 'this', 'to', 'was', 'with']);
+const MAX_WORDS = 7;
 
 export function recordSlug(text, max = CUT_AT) {
   const words = String(text || '')
@@ -29,6 +32,7 @@ export function recordSlug(text, max = CUT_AT) {
   const kept = [];
   let length = 0;
   for (const word of words) {
+    if (kept.length >= MAX_WORDS) break;
     if (length + word.length + 1 > max) break;
     kept.push(word);
     length += word.length + 1;
@@ -42,4 +46,23 @@ export function recordSlug(text, max = CUT_AT) {
 // picture and the citation can never drift apart and point at different things.
 export function wireAddress(entry) {
   return `/wire/${recordSlug(entry?.headline, WIRE_CUT_AT)}`;
+}
+
+// A solution, a crisis or an action: the three things a reader most often sends to
+// somebody else. Same rule — the entry's own title, and /e/ for entry.
+export function entryAddress(record) {
+  return `/e/${recordSlug(record?.title, WIRE_CUT_AT)}`;
+}
+
+// ── TWO THINGS WITH ONE NAME ─────────────────────────────────────────────────
+// A name is taken from the thing itself, so two things can honestly end up with the same
+// one: two drawings called Rain Check, a solution and an action that share a headline.
+//
+// The rule is that nothing is guessed and nothing is silently picked. If one thing answers
+// to a name, that is what opens. If more than one does, the address opens a short list of
+// them and the reader chooses — because opening the wrong drawing under the right name is
+// the one mistake this record must never make, and an address that quietly picks the oldest
+// is exactly that mistake, dressed as convenience.
+export function findBySlug(records, slug, nameOf, max = WIRE_CUT_AT) {
+  return (records || []).filter((record) => recordSlug(nameOf(record), max) === slug);
 }

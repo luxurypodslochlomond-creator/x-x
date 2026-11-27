@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
-import { recordSlug } from '@/components/climate/recordSlug';
+import { findBySlug } from '@/components/climate/recordSlug';
+import ShortDoorChooser from '@/components/climate/ShortDoorChooser';
 import ClimateWireEntry from '@/pages/ClimateWireEntry';
 import '@/components/climate/news-index.css';
 
 // ── THE SHORT DOOR TO ONE WIRE ENTRY ──────────────────────────────────────────
-// /wire/antarctic-ozone-hole-closes — an entry's own address, short enough to say out
-// loud, type into a phone, or read off a card. It was an id before, and an id is not a
-// name: nobody sends one to a friend, and nobody reads one down a telephone.
+// /wire/antarctic-ozone-hole-closes — an entry's own headline as its address, short
+// enough to say out loud, type into a phone, or read off a card. It was an id before, and
+// an id is not a name: nobody sends one to a friend, and nobody reads one down a telephone.
 //
-// The name is the entry's own headline, so the address says what it opens. It resolves
-// against the record as it actually stands — every published entry is read, and the one
-// whose name matches opens. The entry page itself is the same page the long address
-// opens, so there is one account and not two copies of one.
+// Two entries that honestly share a headline are shown together and the reader chooses,
+// rather than the address quietly opening one of them. The entry page is the same page the
+// long address opens: one account, not two.
 export default function ClimateWireShort() {
   const { slug } = useParams();
   const [state, setState] = useState('loading');
-  const [entry, setEntry] = useState(null);
+  const [matches, setMatches] = useState([]);
 
   useEffect(() => {
     let alive = true;
@@ -34,9 +34,9 @@ export default function ClimateWireShort() {
         cursor = page.has_more ? page.next_cursor : null;
       } while (cursor && alive);
       if (!alive) return;
-      const found = all.find((e) => recordSlug(e.headline, 44) === slug);
-      setEntry(found || null);
-      setState(found ? 'ready' : 'missing');
+      const found = findBySlug(all, slug, (e) => e.headline, 44);
+      setMatches(found);
+      setState(found.length ? 'ready' : 'missing');
     })().catch(() => { if (alive) setState('missing'); });
     return () => { alive = false; };
   }, [slug]);
@@ -52,7 +52,7 @@ export default function ClimateWireShort() {
 
   if (state === 'loading') return <p className="news-state" role="status">Loading the account…</p>;
 
-  if (state === 'missing' || !entry) {
+  if (state === 'missing') {
     return (
       <div className="news-state">
         <p>No account at this address on the public record.</p>
@@ -61,5 +61,18 @@ export default function ClimateWireShort() {
     );
   }
 
-  return <ClimateWireEntry id={entry.id} />;
+  if (matches.length > 1) {
+    return (
+      <ShortDoorChooser
+        slug={slug}
+        items={matches.map((e) => ({
+          label: e.headline,
+          note: e.when_label || e.source_name,
+          to: `/ClimateWireEntry/${e.id}`,
+        }))}
+      />
+    );
+  }
+
+  return <ClimateWireEntry id={matches[0].id} />;
 }

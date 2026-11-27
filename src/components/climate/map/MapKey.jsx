@@ -35,7 +35,7 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
     : loading
       ? 'Setting the entries…'
       : mode === 'readership'
-        ? `${lights.length} ${lights.length === 1 ? 'place' : 'places'} reading`
+        ? `${lights.length} ${lights.length === 1 ? 'place' : 'places'} where an entry was opened`
         : only
           ? `${placed} of ${showing} placed · ${only === 'cartoon' ? 'drawings' : only}`
           : showing < total
@@ -81,7 +81,13 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
           className="record-map-key-kind record-map-key-reader"
         >
           <LampMark />
-          Readings
+          {/* ── "READINGS" WAS THE LAST TAROT WORD ON THE RECORD ────────────────────
+              Brian, 27 November: "in map etc 'readings' does that sound a bit tarot card to
+              you bro?" It does. A reading is what a fortune-teller gives you; this is a count
+              of times an entry was opened, and the plate says so plainly underneath. The
+              stored value and the mode's own name are untouched — only the word a reader
+              sees has changed. */}
+          Times opened
         </button>
       </div>
     </div>
