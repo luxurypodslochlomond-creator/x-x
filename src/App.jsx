@@ -643,6 +643,10 @@ const AuthenticatedApp = () => {
           already has a Map page and React Router matches without caring about case. */}
       <Route path="/wire" element={<Navigate to="/ClimateWire" replace />} />
       <Route path="/cartoons" element={<Navigate to="/ClimateCartoons" replace />} />
+      {/* Brian, 27 November: "thought /TheWall?" — the room has been called the wall all along, so
+          the address people say out loud should open it too. A short door, like /wire and /music:
+          the room itself stays where it is, and a link already spoken or written down still lands. */}
+      <Route path="/TheWall" element={<Navigate to="/ClimateCartoons" replace />} />
       <Route path="/music" element={<Navigate to="/ClimateMusic" replace />} />
       <Route path="/method" element={<Navigate to="/ClimateMethod" replace />} />
       <Route path="/search" element={<Navigate to="/ClimateSearch" replace />} />
