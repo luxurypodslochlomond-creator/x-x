@@ -28,27 +28,30 @@ export default function XEqualsXPhoneBar() {
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setShown(window.scrollY > 420);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const hero = document.querySelector('#x-equals-x .covenant-hero');
+    if (!hero) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setShown(!entry.isIntersecting && entry.boundingClientRect.bottom <= 0);
+    });
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="x-eq-phonebar" data-shown={shown ? '' : undefined} aria-hidden={shown ? undefined : 'true'}>
+    <div className="x-eq-phonebar" data-shown={shown ? '' : undefined} aria-hidden={shown ? undefined : 'true'} inert={shown ? undefined : ''}>
       <Link to="/TogetherChangeClimate" className="x-eq-phonebar-main" tabIndex={shown ? undefined : -1}>
-        Read the record <ArrowRight className="w-4 h-4" aria-hidden="true" />
+        Explore the record <ArrowRight className="w-4 h-4" aria-hidden="true" />
       </Link>
       <div className="covenant-share x-eq-phonebar-share">
         <ShareCardButton
           instant
-          entry={{ id: 'x-equals-x', title: 'x = x' }}
+          entry={{ id: 'x-equals-x', title: 'For the planet. For all of us.' }}
           build={buildCovenantCard}
           label="Share"
-          link={recordAddress('/XEqualsX')}
+          link={recordAddress('/x=x')}
           description={COVENANT_SHARE}
           includeMessage
-          windowTitle="Share x = x"
+          windowTitle="Share why this record exists"
         />
       </div>
     </div>

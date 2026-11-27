@@ -40,7 +40,7 @@
 const PLATFORM_DOOR = {
   label: 'PLATFORM',
   to: '/XEqualsX',
-  what: 'x = x — the platform’s own principle: equal human worth, drawn rather than argued.',
+  what: 'Why this record exists: Janine’s work, the planet, and how this is meant to help.',
 };
 
 const BASE_ONE_DOOR = {
@@ -252,7 +252,7 @@ export const DESK_NAV = DESK_NAV_ROWS.flat();
 // The terms of the record, stated in the masthead and again at its foot — these four
 // are not destinations competing with the bar, they are the record's own rulebook.
 export const FOOTER_NAV = [
-  { label: 'Why this record', to: '/XEqualsX', what: 'The covenant: equal human worth, drawn rather than argued.' },
+  { label: 'Why this record', to: '/XEqualsX', what: 'Where this began, what it is for, and ways to use it.' },
   { label: 'Method & corrections', to: '/ClimateMethod', what: 'How entries are checked, who decides and what has been corrected.' },
   // "Contents" pointed here, and this is not the contents — the contents is the sheet the
   // masthead's Doors mark opens. This is the written guide: every control on the record, in

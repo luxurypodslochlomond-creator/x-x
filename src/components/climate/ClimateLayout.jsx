@@ -67,7 +67,7 @@ const ROOM_DESCRIPTIONS = {
   ClimateRoll: 'The people who check this record, in their own words.',
   ClimateFounder: 'Why this record exists, in the founder’s own words — and in whose honour it is kept.',
   ClimateSupport: 'How the record is paid for, said in the open. Money never buys a place on it.',
-  XEqualsX: 'x = x — what the record promises, what it refuses, and what it cannot do.',
+  XEqualsX: 'For the planet. For all of us. A public climate record growing from Janine Selendy’s work, with sources, drawings and ways to act.',
 };
 
 // Public navigation stays the same for every reader. Reviewer access belongs in the footer.

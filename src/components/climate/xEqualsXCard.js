@@ -50,7 +50,7 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.font = `700 25px ${MONO}`;
   g.fillStyle = red;
   letterSpacing(g, '4px');
-  g.fillText('THE PRINCIPLE', PAD, 92);
+  g.fillText('WHY THIS RECORD', PAD, 92);
   g.fillStyle = paper;
   g.textAlign = 'right';
   g.fillText('RECORD OF THE TIME', W - PAD, 92);
@@ -99,8 +99,8 @@ export async function buildCovenantCard(_entry, { origin } = {}) {
   g.fillStyle = muted;
   wrap(g, COVENANT.limit, MAXW).forEach((line, index) => g.fillText(line, PAD, 1158 + index * 40));
   g.font = `500 24px ${MONO}`;
-  g.fillText('NOT YET SIGNED BY A PERSON', PAD, 1244);
-  const address = String(origin || '').replace(/^https?:\/\//, '');
+  g.fillText(COVENANT.dedication, PAD, 1244);
+  const address = origin ? `${String(origin).replace(/^https?:\/\//, '').replace(/\/$/, '')}/x=x` : '';
   if (address) {
     g.font = `400 24px ${sans}`;
     wrap(g, address, MAXW).forEach((line, index) => g.fillText(line, PAD, 1303 + index * 29));
