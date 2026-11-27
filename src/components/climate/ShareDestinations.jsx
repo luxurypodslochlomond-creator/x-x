@@ -11,7 +11,7 @@ export default function ShareDestinations({ link, title, message }) {
     <div className="space-y-3">
       {SHARE_GROUPS.map((group) => (
         <div key={group.label}>
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-record-muted">{group.label}</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-record-signal">{group.label}</p>
           <p className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             {group.doors.map((door) => door.href ? (
               <a
