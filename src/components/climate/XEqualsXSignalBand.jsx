@@ -49,17 +49,19 @@ export default function XEqualsXSignalBand() {
             Two facts, both checkable: Maxwell and Bell were both Edinburgh men, and Bell
             was trying to send several Morse messages down one wire when he got the
             telephone instead. The rest is the argument, not a claim. */}
+          <p className="covenant-signal-why-lead">
+            Two states and an agreement at each end. That is a network. Everything since has been about who
+            owns the wire.
+          </p>
           <p className="covenant-signal-why">
-            Two states and an agreement at each end: that is the whole of it. Morse put it on a wire in 1844,
-            and the first thing he sent was a question — <em>What hath God wrought</em>. Maxwell wrote the
-            mathematics of that wave in Edinburgh; Bell, also Edinburgh, tried to send several messages down
-            one wire and got the telephone instead. A dot and a dash are rhythm before they are data, which is
-            why an artist hears what a machine has to spell out.
+            Morse put it on a line in 1844 and his first message was a question — <em>What hath God wrought</em>.
+            Maxwell wrote the mathematics of that wave in Edinburgh. A dot and a dash are rhythm before they are
+            data, which is why a musician hears what a machine has to spell out.
           </p>
           <p className="covenant-signal-why-strong">
-            What the code promises is what this record is trying to keep: what is sent arrives whole, the wire
-            keeps no copy, and the carrier is not the owner. Agree the code, send the truth, keep nothing that
-            was not given.
+            Neither of them needed to know who you were in order to carry what you said. That is the test this
+            record exists to pass: what is sent arrives whole, the wire keeps no copy, and the carrier is not the
+            owner. Agree the code. Send the truth. Keep nothing that was not given.
           </p>
         </div>
     </section>
