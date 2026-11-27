@@ -37,7 +37,7 @@ const AGENDA = [
   {
     n: '02',
     head: 'Janine thanks Francis, and tells how they met in Sweden.',
-    body: 'Then her opening remarks: the conditions of climate change, leading into “Together we can change the course of climate change” — the importance of everyone becoming involved, with 5.8 billion smartphones, social media, and use of the web platform now in its testing stage.',
+    body: 'Then her opening remarks: the conditions of climate change, leading into “Together we can change the course of climate change” — the importance of everyone becoming involved, with 5.86 billion smartphones, social media, and use of the web platform now in its testing stage.',
     who: 'Janine',
     mine: false,
   },
@@ -135,19 +135,15 @@ export default function JanineAgenda() {
         ))}
       </ol>
 
-      {/* ── ONE NUMBER, TWO FIGURES ───────────────────────────────────────────────
-          Swept on 26 November, three days before the hour. Her own description of the
-          initiative — the one quoted in her words on the cartoon room's share lines and in
-          the small gestures band — gives 5.86 billion smartphones. The draft agenda gives
-          5.8. Both are printed as they came, and neither is quietly corrected here, because
-          the alternative is a record that edits a host's figure for her and then cannot say
-          which number she actually said. It is hers to settle; when she does, this line goes
-          and the agenda follows. */}
+      {/* ── SETTLED, BY HER ───────────────────────────────────────────────────────
+          The agenda's figure was 5.8 billion while her own description of the initiative
+          gave 5.86, and this page held both rather than choosing for her. Janine settled it
+          on 27 November: 5.86. So the agenda above now reads her number, and the line that
+          held the two apart has gone, because a record that keeps a question open after it
+          has been answered is only pretending to be careful. */}
       <p className="mt-3 max-w-[54ch] text-[12px] leading-relaxed text-record-muted lg:text-[13px]">
-        One number, two figures. Her own description of the initiative gives 5.86 billion
-        smartphones; the draft agenda gives 5.8. Both are printed as they came and neither is
-        corrected here: the figure is hers to settle, and when she settles it this line goes
-        and the agenda follows.
+        The figure is hers and she has settled it: 5.86 billion smartphones. The agenda above
+        reads her number, and the page it was corrected on says so.
       </p>
 
       {/* ── THE TWO LINES AT THE TOP OF HER EMAIL THAT NOBODY READS ─────────────
