@@ -38,7 +38,30 @@ export default function XEqualsXSignalBand() {
           </span>
           <span className="covenant-signal-press">{playing ? 'Sounding' : 'Press to hear it'}</span>
         </button>
-      </div>
+
+        {/* ── WHY THE CODE, IN WORDS ────────────────────────────────────────────
+            Brian, 27 November: "the Norse code is coolasfuck but what is this a symbol
+            of… about communications and networks and signals and what we need to do as
+            intelligent life on this planet". The marks were standing there unexplained,
+            which made them a decoration with a good rhythm. This is the reason, in the
+            shortest form that still carries it: where the code comes from, what it is
+            made of, and the one promise in it the record is trying to keep.
+            Two facts, both checkable: Maxwell and Bell were both Edinburgh men, and Bell
+            was trying to send several Morse messages down one wire when he got the
+            telephone instead. The rest is the argument, not a claim. */}
+          <p className="covenant-signal-why">
+            Two states and an agreement at each end: that is the whole of it. Morse put it on a wire in 1844,
+            and the first thing he sent was a question — <em>What hath God wrought</em>. Maxwell wrote the
+            mathematics of that wave in Edinburgh; Bell, also Edinburgh, tried to send several messages down
+            one wire and got the telephone instead. A dot and a dash are rhythm before they are data, which is
+            why an artist hears what a machine has to spell out.
+          </p>
+          <p className="covenant-signal-why-strong">
+            What the code promises is what this record is trying to keep: what is sent arrives whole, the wire
+            keeps no copy, and the carrier is not the owner. Agree the code, send the truth, keep nothing that
+            was not given.
+          </p>
+        </div>
     </section>
   );
 }
