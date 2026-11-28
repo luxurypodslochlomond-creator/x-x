@@ -219,6 +219,9 @@ const ClimateCartoonFrancisPage = React.lazy(() => import('./pages/ClimateCartoo
 const ClimateCartoonsWhatThisIsPage = React.lazy(() => import('./pages/ClimateCartoonsWhatThisIs'));
 // The line between CAIB and this record, drawn in public after Francis asked where it was.
 const ClimateCartoonsCAIBPage = React.lazy(() => import('./pages/ClimateCartoonsCAIB'));
+// The page Francis can send to his cartoonists: what a drawing is worth here, what they keep,
+// and where each of them can say their own price without having to argue for it.
+const ClimateCartoonsPaidPage = React.lazy(() => import('./pages/ClimateCartoonsPaid'));
 // The machine's own hand: one more hand in the same room, hung beside the wall of real ones.
 const ClimateCartoonsBaseOnePage = React.lazy(() => import('./pages/ClimateCartoonsBaseOne'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
@@ -499,6 +502,11 @@ const AuthenticatedApp = () => {
       <Route path="/ClimateCartoons/Francis" element={<ClimateCartoonFrancisPage />} />
       <Route path="/ClimateCartoons/WhatThisIs" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsWhatThisIsPage /></ClimateLayout>} />
       <Route path="/ClimateCartoons/CAIB" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsCAIBPage /></ClimateLayout>} />
+      {/* ── WHAT A DRAWING IS WORTH ──
+          Written the morning Francis asked, in writing, what to tell cartoonists who have
+          been waiting fourteen years to be paid. Public, sendable, and honest about what has
+          not been secured — with a door for each artist to state their own price. */}
+      <Route path="/ClimateCartoons/Paid" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsPaidPage /></ClimateLayout>} />
 
       {/* ── THE PRINT ROOM, AND THE SHOW IT MAKES ────────────────────────────────────
           Two addresses, and only one of them is a room. /ClimateCartoons/Print is a room of
@@ -770,6 +778,8 @@ const AuthenticatedApp = () => {
       <Route path="/present" element={<Navigate to="/ClimateCartoons/Present" replace />} />
       <Route path="/francis" element={<Navigate to="/ClimateCartoons/Francis" replace />} />
       <Route path="/caib" element={<Navigate to="/ClimateCartoons/CAIB" replace />} />
+      <Route path="/paid" element={<Navigate to="/ClimateCartoons/Paid" replace />} />
+      <Route path="/worth" element={<Navigate to="/ClimateCartoons/Paid" replace />} />
       <Route path="/whatthisis" element={<Navigate to="/ClimateCartoons/WhatThisIs" replace />} />
       <Route path="/baseone" element={<Navigate to="/ClimateCartoons/BaseOne" replace />} />
       <Route path="/host" element={<Navigate to="/ClimateHost" replace />} />

@@ -109,6 +109,7 @@ export default function ClimateCartoonsWhatThisIs() {
             <li><Link to="/ClimateCartoons#cartoon-drawing-desk" style={ink}>Send a drawing in</Link> — a photograph of a paper drawing, or one drawn on the page.</li>
             <li><Link to="/ClimateCartoons" style={ink}>The wall</Link> — every drawing on the record, in the order it arrived.</li>
             <li><Link to="/ClimateCartoons/Francis" style={ink}>Francis’s own page</Link> — the cover he drew, and everything he has given the room.</li>
+            <li><Link to="/ClimateCartoons/Paid" style={ink}>What a drawing is worth</Link> — what you keep, how payment is meant to work, and where to say your own price.</li>
           </ul>
         </section>
 
