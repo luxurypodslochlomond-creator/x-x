@@ -44,6 +44,7 @@
 #root .press-room .wall-room .wall-event-spread .cartoon-sessions { margin: 0; }
 #root .press-room .wall-room .wall-money { margin-top: 1rem; padding: clamp(1.1rem, 2.5vw, 2.5rem); background: rgb(var(--record-paper)); border-top: 3px solid rgb(var(--record-red)); }
 #root .press-room .wall-room .wall-money-lede { max-width: 70ch; margin: .6rem 0 1.2rem; font-size: 1.02rem; line-height: 1.65; color: rgb(var(--record-ink)); }
+#root .press-room .wall-room .wall-money-lede strong { display: block; margin-bottom: .4rem; font-size: 1.2rem; font-weight: 800; letter-spacing: -.02em; }
 #root .press-room .wall-room .wall-money-terms { display: grid; gap: .8rem; margin: 0 0 1.2rem; padding: 0; list-style: none; }
 #root .press-room .wall-room .wall-money-terms li { padding-left: .8rem; border-left: 2px solid rgb(var(--record-ink) / .2); font-size: .95rem; line-height: 1.62; color: rgb(var(--record-ink)); }
 #root .press-room .wall-room .wall-money-terms strong { font-weight: 700; }

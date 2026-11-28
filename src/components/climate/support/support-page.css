@@ -1,0 +1,33 @@
+/* A support page that asks a person to do something, and says plainly what it costs. */
+#root .support-page .record-room-content { background: rgb(var(--record-paper)); }
+#root .support-page .record-room-intro h1 { max-width: 18ch; }
+#root .support-page .support-claim { margin: 0; padding: 1.4rem 0; border-block: 3px solid rgb(var(--record-ink)); font: 850 clamp(1.9rem, 4vw, 3.2rem)/1.1 var(--font-record-ui); letter-spacing: -.04em; }
+#root .support-page .support-claim span { color: rgb(var(--record-red)); }
+#root .support-page .support-intro { max-width: 62ch; margin: 1.1rem 0 0; font: 400 1.05rem/1.65 var(--font-record-ui); color: rgb(var(--record-ink)); }
+#root .support-page .support-doors { display: grid; gap: 0; margin: 1.8rem 0 0; border-top: 1px solid rgb(var(--record-ink) / .3); }
+#root .support-page .support-door { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: .2rem .9rem; padding: 1.3rem 0; border-bottom: 1px solid rgb(var(--record-ink) / .3); color: rgb(var(--record-ink)); text-decoration: none; }
+#root .support-page .support-door-number { grid-row: 1 / 4; font: 800 1rem/1.3 var(--font-record-ui); letter-spacing: -.03em; color: rgb(var(--record-red)); font-variant-numeric: tabular-nums; }
+#root .support-page .support-door-title { font: 800 clamp(1.25rem, 2.4vw, 1.75rem)/1.15 var(--font-record-ui); letter-spacing: -.03em; }
+#root .support-page .support-door-line { max-width: 54ch; font: 400 1rem/1.6 var(--font-record-ui); color: rgb(var(--record-muted)); }
+#root .support-page .support-door-action { margin-top: .45rem; font: 750 .85rem/1.4 var(--font-record-ui); letter-spacing: .06em; text-transform: uppercase; color: rgb(var(--record-red)); }
+#root .support-page .support-door:hover :is(.support-door-title, .support-door-action),
+#root .support-page .support-door:focus-visible :is(.support-door-title, .support-door-action) { color: rgb(var(--record-red)); }
+#root .support-page .support-door:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
+#root .support-page .support-give { margin-top: 2.5rem; }
+#root .support-page .support-give-head { margin: 0 0 .35rem; font: 800 clamp(1.6rem, 3vw, 2.3rem)/1.1 var(--font-record-ui); letter-spacing: -.035em; }
+#root .support-page .support-section-head { margin: 2.5rem 0 .35rem; padding-top: 1.2rem; border-top: 3px solid rgb(var(--record-ink)); font: 800 clamp(1.5rem, 2.8vw, 2.1rem)/1.15 var(--font-record-ui); letter-spacing: -.035em; }
+#root .support-page .support-promise { margin-top: 2.5rem; }
+#root .support-page .support-promise ul { margin: 1rem 0 0; padding: 0; list-style: none; display: grid; gap: .7rem; }
+#root .support-page .support-promise li { padding-left: 1rem; border-left: 3px solid rgb(var(--record-red)); font: 400 1rem/1.6 var(--font-record-ui); }
+#root .support-page :is(.support-give, .support-promise) { scroll-margin-top: 6rem; }
+@media (min-width: 900px) {
+  #root .support-page .support-doors { grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid rgb(var(--record-ink) / .3); }
+  #root .support-page .support-door { grid-template-columns: minmax(0, 1fr); border-bottom: 0; border-right: 1px solid rgb(var(--record-ink) / .25); padding: 1.5rem 1.4rem 1.6rem; }
+  #root .support-page .support-door:last-child { border-right: 0; }
+  #root .support-page .support-door-number { grid-row: auto; margin-bottom: .5rem; }
+}
+@media (max-width: 639px) {
+  #root .support-page .support-claim { font-size: 1.85rem; }
+  #root .support-page .support-door { grid-template-columns: 2rem minmax(0, 1fr); }
+  #root .support-page .support-door-line { font-size: .95rem; }
+}

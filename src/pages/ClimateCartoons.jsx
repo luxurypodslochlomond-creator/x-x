@@ -21,6 +21,7 @@ import '@/components/climate/cartoons/wall-room.css';
 import '@/components/climate/cartoons/wall-continuity.css';
 import '@/components/climate/cartoons/wall-working.css';
 import '@/components/climate/cartoons/wall-phone-reading.css';
+import '@/components/climate/cartoons/wall-stability.css';
 
 export default function ClimateCartoons() {
   return (

@@ -1,0 +1,30 @@
+/* ── NOTHING MOVES WHILE IT LOADS ────────────────────────────────────────────────
+   Brian, 28 November: "on desktop the images and copy change from one to another makes us
+   look broken and incompetent in places."
+
+   Two real faults, both of them geometry rather than taste:
+
+   1. A drawing and its caption were vertically centred against each other, so the caption
+      sat at a different height on every sheet. Reading down the wall, the words appeared to
+      jump sideways from drawing to drawing. They now start together at the top of the sheet,
+      on the same baseline, every time.
+
+   2. A picture with no reserved space is zero pixels tall until it arrives, so the words
+      beneath it are pushed down the page as each one loads. Every artwork box now holds its
+      own shape before the file lands: the drawing is fitted inside it, never cropped. */
+@media screen and (min-width: 1024px) {
+  #root .record-cartoon-field .press-room .press-wall .press-sheet { align-items: start; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet-rail { padding-top: .15rem; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet-art { aspect-ratio: 4 / 3; }
+  #root .record-cartoon-field .press-room .press-wall .press-sheet-art .comic-wall-artwork {
+    position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: contain;
+  }
+  #root .record-cartoon-field .press-room .comic-catalogue > img { aspect-ratio: 3 / 4; object-fit: contain; }
+  #root .record-cartoon-field .press-room .cartoon-goal-line-art { aspect-ratio: 4 / 3; }
+  #root .record-cartoon-field .press-room .cartoon-goal-line-art img { height: 100%; object-fit: contain; }
+}
+
+/* The same rule on every screen: a reserved shape, so no drawing pushes the words down. */
+#root .record-cartoon-field .press-room .cartoon-goal-line-art { aspect-ratio: 4 / 3; }
+#root .record-cartoon-field .press-room .cartoon-goal-line-art img { width: 100%; height: 100%; object-fit: contain; }
+#root .record-cartoon-field .press-room .wall-event-cover img { aspect-ratio: 3 / 4; object-fit: contain; }

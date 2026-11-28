@@ -7,6 +7,8 @@ import { SUPPORT_STRINGS } from '@/components/climate/support/supportStrings';
 import DonationForm from '@/components/climate/support/DonationForm';
 import SupportWall from '@/components/climate/support/SupportWall';
 import SupportThanks from '@/components/climate/support/SupportThanks';
+import SupportDoors from '@/components/climate/support/SupportDoors';
+import '@/components/climate/support/support-page.css';
 
 // ── KEEPING THE RECORD ──
 // Not a begging page. The record says no advertising, no sponsorship, nothing for
@@ -70,32 +72,36 @@ export default function ClimateSupport() {
       returnTo={createPageUrl('TogetherChangeClimate')}
       returnLabel={t.back}
       footer={`${t.pledge_2} ${t.pledge_3}`}
+      className="support-page"
     >
-      <p className="mt-6 text-[12px] font-mono leading-relaxed text-[#141210]">{t.intro}</p>
+      <p className="support-claim">Free to see. <span>Not free to make.</span></p>
+      <p className="support-intro">{t.intro}</p>
 
-      <div className="mt-6 space-y-6">
+      <SupportDoors />
+
+      <div className="support-give" id="give">
+        <h2 className="support-give-head">Keep the record.</h2>
         {result && <SupportThanks result={result} t={t} />}
-
         {loadingWall ? (
-          <p className="border border-[#141210] bg-[#f7f1e5] p-5 text-[11px] font-mono text-[#5a5246]">{t.wall_loading}</p>
+          <p className="mt-3 text-[13px] leading-relaxed text-record-muted">{t.wall_loading}</p>
         ) : (
-          <>
-            <DonationForm t={t} open={givingOpen} />
-            <SupportWall names={wall.names} supporters={wall.supporters} t={t} />
-          </>
+          <div className="mt-3"><DonationForm t={t} open={givingOpen} /></div>
         )}
-
-        <section className="border-t-2 border-[#141210] pt-6">
-          <h2 className="font-black uppercase text-[#141210]" style={{ fontFamily: 'var(--font-display)', fontSize: '22px', letterSpacing: '-0.02em' }}>
-            {t.pledge_heading}
-          </h2>
-          <ul className="mt-3 space-y-2">
-            {pledge.map(line => (
-              <li key={line} className="text-[12px] font-mono leading-relaxed text-[#141210]">· {line}</li>
-            ))}
-          </ul>
-        </section>
       </div>
+
+      {!loadingWall && (
+        <>
+          <h2 className="support-section-head">{t.wall_heading}</h2>
+          <SupportWall names={wall.names} supporters={wall.supporters} t={t} />
+        </>
+      )}
+
+      <section className="support-promise">
+        <h2 className="support-section-head mt-0">{t.pledge_heading}</h2>
+        <ul>
+          {pledge.map(line => <li key={line}>{line}</li>)}
+        </ul>
+      </section>
     </ClimateRecordShell>
   );
 }

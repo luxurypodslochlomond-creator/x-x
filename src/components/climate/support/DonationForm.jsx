@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import AmountPicker from './AmountPicker';
 import NameChoice from './NameChoice';
@@ -20,6 +21,10 @@ export default function DonationForm({ t, open }) {
         <h2 className="font-display text-[22px] font-black uppercase leading-tight text-[#141210]">{t.closed_heading}</h2>
         <p className="mt-2 text-[12px] leading-relaxed text-record-muted">{t.closed_body}</p>
         <p className="mt-3 pt-3 border-t border-record-ink/15 text-[11px] leading-relaxed text-record-muted">{t.closed_note}</p>
+        <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 text-[12px] font-bold">
+          <Link to="/ClimateLedger#offer-help" className="text-record-red underline underline-offset-4">Stand behind an artist →</Link>
+          <Link to="/ClimateCartoons/Print" className="text-record-red underline underline-offset-4">Give the work a place →</Link>
+        </p>
       </section>
     );
   }
