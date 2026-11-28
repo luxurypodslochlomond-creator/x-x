@@ -20,6 +20,7 @@ import '@/components/climate/cartoons/press/press-band-heads.css';
 import '@/components/climate/cartoons/wall-room.css';
 import '@/components/climate/cartoons/wall-continuity.css';
 import '@/components/climate/cartoons/wall-working.css';
+import '@/components/climate/cartoons/wall-phone-reading.css';
 
 export default function ClimateCartoons() {
   return (

@@ -10,7 +10,7 @@ export default function WorkshopInvitation({ join, onJoinChange }) {
   const messages = workshopLines({ join: join.trim() });
   return <div className="invitation-main">
     <p className="invitation-kicker">Sunday 29 November · one hour online</p>
-    <h2 className="invitation-heading">An invitation. Not an essay.</h2>
+    <h2 className="invitation-heading">Come for the cartoons.</h2>
     <div className="invitation-join">
       <label htmlFor="join-line">Host’s joining link and passcode, if supplied</label>
       <textarea id="join-line" rows={2} maxLength={320} value={join} onChange={event => onJoinChange(event.target.value)} placeholder="Paste the host’s joining details" />
@@ -19,7 +19,7 @@ export default function WorkshopInvitation({ join, onJoinChange }) {
     <ShareWord where={messages[0].where} text={messages[0].text} />
     <section className="invitation-picture" aria-labelledby="invitation-picture-title">
       <h2 id="invitation-picture-title">Send the picture with it.</h2>
-      <p>Francis’s complete cover, his credit, the speakers and the working QR.</p>
+      <p>Francis’s complete cover, his credit, the speakers and a code back to the workshop.</p>
       <ShareCardButton entry={{ ...WORKSHOP_CARD, join: join.trim() }} build={buildWorkshopCard} label="Save or share the invitation" includeMessage windowTitle="Workshop invitation" link={HOUR_ADDRESS} description={messages[0].text} icon={false} previewFirst />
     </section>
     <details className="invitation-fold">

@@ -31,7 +31,7 @@ export default function ShareTargets({ text, subject }) {
   const canShare = typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 
   return (
-    <div className="mt-2 flex flex-wrap items-center gap-1.5">
+    <div className="share-targets mt-2 flex flex-wrap items-center gap-1.5">
       {targets.map((t) => (
         <a
           key={t.label}
