@@ -88,7 +88,9 @@
   color: rgb(var(--record-muted));
 }
 
-@media screen and (min-width: 900px) {
+/* The room's own wide layout starts at 1024, so the band becomes two columns there and not
+   a moment before: between 900 and 1023 there is not the width for a panel beside the words. */
+@media screen and (min-width: 1024px) {
   /* ── THE BAND BECOMES TWO COLUMNS, AND THE VOID GOES ──────────────────────
      The masthead is full width at this size, so the opening words were sitting in a 46ch
      column with a thousand pixels of nothing beside them. The words keep the left, the

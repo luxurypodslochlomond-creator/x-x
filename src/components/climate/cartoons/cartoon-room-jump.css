@@ -1,0 +1,45 @@
+/* ── THE HAND ON THE SHOULDER AT THE DOOR ─────────────────────────────────────
+   One line, the room's chapters in the order they are set. Quiet enough to read as part of
+   the wall rather than as furniture, and it wraps rather than scrolling on a phone. */
+
+.cartoon-room-jump {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .35rem .9rem;
+  padding: .7rem 0;
+  border-top: 1px solid rgb(var(--record-ink) / .2);
+  border-bottom: 1px solid rgb(var(--record-ink) / .2);
+}
+
+.cartoon-room-jump-label {
+  font-family: var(--font-record-ui);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-room-jump ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cartoon-room-jump a {
+  font-size: .78rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-ink) / .3);
+  text-underline-offset: 3px;
+}
+
+.cartoon-room-jump a:hover {
+  color: rgb(var(--record-red));
+  text-decoration-color: rgb(var(--record-red));
+}

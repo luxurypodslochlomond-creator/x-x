@@ -7,6 +7,7 @@ import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonHumour from '@/components/climate/cartoons/CartoonHumour';
+import CartoonRoomJump from '@/components/climate/cartoons/CartoonRoomJump';
 import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonLongRead from '@/components/climate/cartoons/CartoonLongRead';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
@@ -64,6 +65,13 @@ export default function ClimateCartoons() {
           to look and then asks you to add. It does not ask you to read three essays first. */}
       <div className="press-room-inner">
         <PressOpening />
+
+        {/* ── THE WAY ALONG A LONG ROOM ────────────────────────────────────────────────
+            One line, directly under the door, because the set list that does this job
+            properly stands at the very bottom — a contents page you can only reach by
+            walking past everything it lists. The drawings still open the room; this only
+            tells a reader who has come for the goals that the goals are down there. */}
+        <CartoonRoomJump />
 
         {/* 1 · THE DRAWINGS. Everything after them is about them. */}
         <PressWall />

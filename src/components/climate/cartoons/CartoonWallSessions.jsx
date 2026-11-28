@@ -31,7 +31,9 @@ import '@/components/climate/cartoons/cartoon-wall-sessions.css';
 export default function CartoonWallSessions() {
   return (
     <aside className="cartoon-sessions" aria-label="When the biennial is, and the hours that are online">
-      <p className="cartoon-sessions-eyebrow">The three days</p>
+      {/* Not "the three days" — that is the name of the programme chapter further down, and
+          two blocks with one name is how a room starts repeating itself. */}
+      <p className="cartoon-sessions-eyebrow">When, and where</p>
       <p className="cartoon-sessions-days">{CARTOON_EVENT.when}</p>
       <p className="cartoon-sessions-where">{CARTOON_EVENT.where}</p>
 
@@ -43,6 +45,14 @@ export default function CartoonWallSessions() {
       <p className="cartoon-sessions-when">
         Sunday 29 November · 3pm West Africa · 2pm UK · the festival lists this hour as online
       </p>
+      {/* ── WHY THERE IS NO LINK IN THIS BOX ────────────────────────────────────
+          Brian, 28 November: "the Dutch guy had zoom details etc bro, we don't."
+          He did, and that was the point of his post: a notice you can act on. We have not
+          got Janine's joining link, and this record does not publish a room's address that
+          was not given to it — the same rule as the workshop page. So the absence is said
+          out loud rather than left as a hole a reader fills with a wrong idea. If she gives
+          us the link and her word, it goes here in one line. */}
+      <p className="cartoon-sessions-note">Online · the joining link is Janine’s to send.</p>
       <p className="cartoon-sessions-door">
         <Link to="/ClimateWorkshop">What happens in the hour →</Link>
       </p>
