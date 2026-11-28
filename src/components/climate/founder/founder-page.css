@@ -40,6 +40,10 @@ html .climate-record[data-record-page="ClimateFounder"] .record-book { backgroun
 #record-founder .record-founder-evidence-head .record-founder-h2 { color: rgb(var(--record-signal)); max-width: 21ch; }
 #record-founder .record-founder-evidence-head > p:last-child { margin: 0; max-width: 65ch; }
 #record-founder .record-founder-evidence { margin: 0; }
+/* On a desk the ledger runs two abreast, so nine countries do not become nine screens. */
+@media (min-width: 1200px) {
+  #record-founder .record-founder-evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; }
+}
 #record-founder .record-founder-evidence-row { display: grid; grid-template-columns: minmax(8rem, .65fr) minmax(0, 2fr); gap: 1.8rem; padding: 1.5rem 0; border-bottom: 1px solid rgb(var(--record-ink) / .32); }
 #record-founder .record-founder-evidence-row dt strong { display: block; color: rgb(var(--record-red)); font-size: clamp(2rem, 3.6vw, 3.1rem); font-weight: 700; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; }
 #record-founder .record-founder-evidence-row dt > span { display: block; max-width: 17ch; margin-top: .5rem; color: rgb(var(--record-muted)); font-size: .72rem; line-height: 1.4; text-transform: uppercase; letter-spacing: .06em; }

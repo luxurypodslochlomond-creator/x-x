@@ -87,6 +87,24 @@ export const WOMEN_EVIDENCE = [
   },
 ];
 
+// Two figures that are almost never printed next to each other.
+export const MONEY_EVIDENCE = [
+  {
+    id: 'military', value: '$2,718bn', unit: 'military spending, 2024',
+    title: 'Eighty-two times the entire humanitarian appeal.',
+    claim: 'World military expenditure reached $2,718 billion in 2024, the highest total SIPRI has ever recorded and the steepest yearly rise since the end of the Cold War. The UN asked for $33 billion to assist 135 million people in 2026.',
+    source: 'SIPRI · Trends in World Military Expenditure · 28 April 2025',
+    href: 'https://www.sipri.org/publications/2025/sipri-fact-sheets/trends-world-military-expenditure-2024',
+  },
+  {
+    id: 'waste', value: '1.05bn', unit: 'tonnes of food wasted',
+    title: 'A fifth of the food, thrown away.',
+    claim: 'In 2022, 1.05 billion tonnes of food were wasted at retail, food service and household level — 19% of everything available to consumers, 132 kilograms per person — in the same year 783 million people faced hunger.',
+    source: 'UNEP · Food Waste Index Report 2024',
+    href: 'https://www.unep.org/en/news-and-stories/press-release/world-squanders-over-1-billion-meals-day-un-report',
+  },
+];
+
 // War is not weather. These are people in need of assistance, not death tolls,
 // except where a toll is named as one.
 export const HUMANITARIAN_EVIDENCE = [

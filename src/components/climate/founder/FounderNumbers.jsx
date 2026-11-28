@@ -1,7 +1,7 @@
 import React from 'react';
 import FounderEvidenceRow from '@/components/climate/founder/FounderEvidenceRow';
 import FounderCompactLedger from '@/components/climate/founder/FounderCompactLedger';
-import { GLOBAL_EVIDENCE, HUMANITARIAN_EVIDENCE, POVERTY_EVIDENCE, WOMEN_EVIDENCE } from '@/components/climate/founder/founderEvidence';
+import { GLOBAL_EVIDENCE, HUMANITARIAN_EVIDENCE, POVERTY_EVIDENCE, WOMEN_EVIDENCE, MONEY_EVIDENCE } from '@/components/climate/founder/founderEvidence';
 
 export default function FounderNumbers() {
   return (
@@ -35,6 +35,12 @@ export default function FounderNumbers() {
           intro="The violence is counted, named and dated. What is missing is not evidence. It is the will to act on it."
           rows={WOMEN_EVIDENCE}
           tone="ink"
+        />
+        <FounderCompactLedger
+          kicker="The ledger · what was spent instead"
+          title="The money was never missing."
+          intro="Nothing on this page is a shortage of resources. It is a decision about what the resources are for."
+          rows={MONEY_EVIDENCE}
         />
         <p className="record-founder-evidence-note">Not only these. The 2026 humanitarian appeal also names Haiti, Myanmar, South Sudan, Somalia, Lebanon, Chad, Mali, Burkina Faso and the Sahel. This page lists a few of the largest and best documented, not a ranking of who suffers most, and leaving a country out here does not mean it has been counted as safe.</p>
         <p className="record-founder-evidence-note"><strong>And where the record will not guess.</strong> No figure is printed here for the Democratic People’s Republic of Korea, Eritrea or Turkmenistan, because no figure for 2026 exists that this record can check. That is not the same as nothing happening there. A blank is not a zero.</p>
