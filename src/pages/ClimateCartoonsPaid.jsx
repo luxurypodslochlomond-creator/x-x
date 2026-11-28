@@ -69,6 +69,22 @@ export default function ClimateCartoonsPaid() {
     </section>
 
     <section className="paid-section">
+      <h2 className="paid-head">Selling the catalogue, which is the practical idea</h2>
+      <p className="paid-lede" style={{ marginTop: 0 }}>
+        Janine Selendy put this on the table on 28 November, in writing, and it is the first
+        proposal in fourteen years that ends with money reaching a hand: sell the biennial’s
+        catalogue, in the ordinary way books are sold, with the artists agreeing.
+      </p>
+      <ul className="paid-lines">
+        <li><strong>It is Francis’s book, not this record’s.</strong>The catalogue, its cover, its print run and its selling are the biennial’s own business. This record does not need to agree, and takes nothing from it.</li>
+        <li><strong>Nobody’s drawing is sold without their word.</strong>Each hand says yes in writing, for the drawing they made, before it is offered for sale. A sale that skips a hand is not a sale this record will point at or link to.</li>
+        <li><strong>What each hand gets is agreed first, and printed after.</strong>A share named in writing before the book goes on sale, and printed on the <Link to="/ClimateLedger#ledger-lines" className="underline text-record-red">open ledger</Link> when it is paid. A share that cannot be paid stays marked owed.</li>
+        <li><strong>The account, the tax and the postage are the seller’s.</strong>Whoever lists it holds the seller account, the returns and the paperwork — that is a real job, and it belongs to the biennial or a publisher, not to a record that sells nothing.</li>
+        <li><strong>One thing this record will not do:</strong>say a book was sold for the artists when no artist has been paid. If a copy sells and nothing reaches a hand, the ledger will say so, in the same public place as everything else.</li>
+      </ul>
+    </section>
+
+    <section className="paid-section">
       <h2 className="paid-head">Say what would make it right</h2>
       <p className="paid-lede" style={{ marginTop: 0 }}>
         Not a price list, and not a favour asked. One line in your own words: a fee for a new drawing, a paid
