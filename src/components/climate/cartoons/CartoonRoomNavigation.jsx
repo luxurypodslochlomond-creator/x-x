@@ -36,8 +36,8 @@ const IN_ROOM = [
   // The case for the joke, which is the argument under the three lines above: the record's
   // own figures, and why a drawing gets a person through a door a figure cannot open.
   { n: '03', href: '#cartoon-humour', label: 'The missing piece is a laugh', line: 'What the movement keeps leaving out', Mark: MarkArgument },
-  { n: '04', href: '#cartoon-goals', label: 'Seventeen goals', line: 'The wall counted against them, the blanks printed', Mark: MarkCounted },
-  { n: '05', href: '#cartoon-your-turn', label: 'Take part', line: 'Send one — it goes up under your name', Mark: MarkTakePart },
+  { n: '04', href: '#cartoon-your-turn', label: 'Take part', line: 'Send one — it goes up under your name', Mark: MarkTakePart },
+  { n: '05', href: '#cartoon-goals', label: 'Seventeen goals', line: 'The wall counted against them, the blanks printed', Mark: MarkCounted },
   { n: '06', href: '#press-book', label: 'The book', line: 'The biennial, its editors, the three days', Mark: MarkBook },
   { n: '07', href: '#press-world', label: 'Cartoonists before these', line: 'Who drew power first, and where', Mark: MarkRing },
 ];

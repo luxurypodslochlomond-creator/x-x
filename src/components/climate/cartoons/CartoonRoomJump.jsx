@@ -20,8 +20,8 @@ const CHAPTERS = [
   { href: '#press-wall', label: 'The drawings' },
   { href: '#cartoon-why-title', label: 'Why a cartoon' },
   { href: '#cartoon-humour', label: 'The missing laugh' },
-  { href: '#cartoon-goals', label: 'Seventeen goals' },
   { href: '#cartoon-your-turn', label: 'Send one' },
+  { href: '#cartoon-goals', label: 'Seventeen goals' },
   { href: '#press-book', label: 'The three days' },
 ];
 
