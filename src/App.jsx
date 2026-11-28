@@ -258,6 +258,9 @@ const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
 // The ledger: what money does here, and every payment printed as it moves. Built the
 // morning Francis asked what to tell cartoonists who want paying.
 const ClimateLedgerPage = React.lazy(() => import('./pages/ClimateLedger'));
+// The page Janine asked for: what the last two years of work actually were, with every
+// claim opening the thing it claims.
+const WhatWeBuiltPage = React.lazy(() => import('./pages/WhatWeBuilt'));
 const ClimateRollPage = React.lazy(() => import('./pages/ClimateRoll'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
@@ -623,6 +626,7 @@ const AuthenticatedApp = () => {
           arrives with, it is the answer to the one a cartoonist asks after the wall. It sits
           on the room's set list as a door out, and on the record's own foot. */}
       <Route path="/ClimateLedger" element={<ClimateLayout currentPage="ClimateLedger"><ClimateLedgerPage /></ClimateLayout>} />
+      <Route path="/WhatWeBuilt" element={<ClimateLayout currentPage="WhatWeBuilt"><WhatWeBuiltPage /></ClimateLayout>} />
       {/* A letter is one person writing to another, so it is not printed on the brief and
           not linked from the record. It opens only to a keeper's key. */}
       <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />
@@ -802,6 +806,7 @@ const AuthenticatedApp = () => {
       <Route path="/record/terms" element={<Navigate to="/ClimateTerms" replace />} />
       <Route path="/record/privacy" element={<Navigate to="/ClimatePrivacy" replace />} />
       <Route path="/brief" element={<Navigate to="/ClimateBrief" replace />} />
+      <Route path="/work" element={<Navigate to="/WhatWeBuilt" replace />} />
       <Route path="/workshop" element={<Navigate to="/ClimateWorkshop" replace />} />
       <Route path="/answers" element={<Navigate to="/ClimateWorkshopAnswers" replace />} />
       <Route path="/fellows" element={<Navigate to="/ClimateFellows" replace />} />

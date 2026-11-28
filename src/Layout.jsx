@@ -510,6 +510,10 @@ const LayoutInner = ({ children, currentPageName }) => {
 
     // 6. LEARN (understand the ecosystem)
     const learnNav = [
+      // Brian, 28 November: Janine asked what the last two years of work had been, and the
+      // answer needed somewhere to live that she could be sent. It goes first in LEARN
+      // because it is the door into everything else rather than one more product.
+      { title: "What we built", url: "/WhatWeBuilt", icon: FileText, highlight: true, description: "Everything since we started · one page" },
       { title: "👁️ ALETHEIA — Truth Engine", url: createPageUrl("Aletheia"), icon: Eye, highlight: true, description: "Ask · every claim sourced · any language" },
       { title: "🔓 Platform & Open APIs", url: createPageUrl("Platform"), icon: PlatformIcon, highlight: true, description: "Open source · build on UF51 · free" },
       { title: "Extraction-Proof Covenant", url: "/ExtractionProofCovenant", icon: Shield, description: "Open source · impossible to exploit" },
