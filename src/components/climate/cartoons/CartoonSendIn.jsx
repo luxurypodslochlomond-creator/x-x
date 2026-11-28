@@ -81,16 +81,32 @@ export default function CartoonSendIn({ goal = null }) {
   const [linkNote, setLinkNote] = useState('');
 
   // ── A DRAWING CAN BE ABOUT SOMETHING ALREADY ON THE RECORD ──────────────────
-  // The crises this drawing could answer: published entries only, newest first. A drawing
+  // Any of the record's three doors: a crisis it is looking at, a solution it is arguing
+  // for, or something people are doing. Brian, 28 November: "does the cartoon go to crisis,
+  // solution or action?" It can answer any of them, and until now this door only offered
+  // crises — so a drawing about a mangrove planting or a repair café had nowhere to say so.
+  //
+  // Published entries only, newest first, grouped by the door they belong to. A drawing
   // offered about an entry that has since been held back would point at nothing, so the
-  // list is the record's own live list rather than anything the page remembers.
-  const [crises, setCrises] = useState([]);
+  // list is the record's own live list rather than anything the page remembers. All three
+  // groups are optional: a drawing that answers nothing stands on the wall on its own.
+  const [entries, setEntries] = useState({ crisis: [], solution: [], action: [] });
   useEffect(() => {
     let cancelled = false;
-    base44.entities.ClimateSolution
-      .filter({ entry_type: 'climate_crisis', status: 'published' }, { sort: '-created_date', limit: 40 })
-      .then((page) => { if (!cancelled) setCrises(page?.items || []); })
-      .catch(() => {});
+    const open = async () => {
+      const [solutions, actions] = await Promise.all([
+        base44.entities.ClimateSolution.filter({ status: 'published' }, { sort: '-created_date', limit: 40 }).catch(() => null),
+        base44.entities.ClimateAction.filter({ status: 'published' }, { sort: '-created_date', limit: 40 }).catch(() => null),
+      ]);
+      if (cancelled) return;
+      const held = solutions?.items || [];
+      setEntries({
+        crisis: held.filter((e) => e.entry_type === 'climate_crisis'),
+        solution: held.filter((e) => e.entry_type !== 'climate_crisis'),
+        action: actions?.items || [],
+      });
+    };
+    open();
     return () => { cancelled = true; };
   }, []);
 
@@ -352,14 +368,28 @@ export default function CartoonSendIn({ goal = null }) {
                 <input className={field} placeholder="Where it came from — the workshop, the school, the group" value={form.origin} onChange={set('origin')} />
                 <input className={field} placeholder="Which country it was drawn in (so it can stand on the map)" value={form.country} onChange={set('country')} />
                 <input className={field} placeholder="What it is called (if it has a name)" value={form.title} onChange={set('title')} />
-                {crises.length > 0 && (
+                {(entries.crisis.length > 0 || entries.solution.length > 0 || entries.action.length > 0) && (
                   <label className="block">
-                    <span className="sr-only">Is the drawing about one entry on the record?</span>
+                    <span className="mb-1 block text-[12px] leading-[1.5] text-record-muted" style={reading}>
+                      Is it about one entry on the record? A crisis, a solution, or something being done.
+                    </span>
                     <select className={field} value={form.crisis_id} onChange={set('crisis_id')}>
                       <option value="">Not about one particular entry</option>
-                      {crises.map((c) => (
-                        <option key={c.id} value={c.id}>{c.title}</option>
-                      ))}
+                      {entries.crisis.length > 0 && (
+                        <optgroup label="A crisis">
+                          {entries.crisis.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
+                        </optgroup>
+                      )}
+                      {entries.solution.length > 0 && (
+                        <optgroup label="A solution">
+                          {entries.solution.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
+                        </optgroup>
+                      )}
+                      {entries.action.length > 0 && (
+                        <optgroup label="Something being done">
+                          {entries.action.map((c) => <option key={c.id} value={c.id}>{c.title}</option>)}
+                        </optgroup>
+                      )}
                     </select>
                   </label>
                 )}

@@ -171,25 +171,33 @@ export default async function (req: Request): Promise<Response> {
         return Response.json({ error: 'The drawing did not arrive. Try it once more.' }, { status: 400 });
       }
 
-      // ── THE DRAWING MAY ANSWER A CRISIS ON THE RECORD ───────────────────────────
-      // A drawing can be offered about one entry — the crisis it is looking at — so the
-      // crisis gets a face and the drawing gets a reason. The link is resolved here, against
-      // the record itself, and the headline is copied from that entry rather than taken from
-      // the browser: the wall must never name a crisis in words the sender typed, and an id
-      // that is not a published crisis leaves the drawing unlinked instead of putting a
-      // wrong headline under somebody's work.
+      // ── THE DRAWING MAY ANSWER ANY ONE OF THE THREE DOORS ───────────────────────
+      // Brian, 28 November: "when a cartoonist uploads a cartoon does the cartoon go to
+      // crisis, solution or action — or is that mental?" Not mental, and it was half-built:
+      // the record has kept three kinds of entry since the beginning, the wall already
+      // builds the right address for each, and a keeper could tie a drawing to any of them
+      // — but the door a cartoonist actually uses only ever offered crises. So a drawing
+      // about a solution, or about something people are doing, had no way to say so.
+      //
+      // All three are open now. The link is still resolved HERE, against the record itself,
+      // and the headline is copied from the entry rather than taken from the browser: the
+      // wall must never name an entry in words the sender typed, and an id that is not a
+      // published entry leaves the drawing standing on its own rather than putting a wrong
+      // headline under somebody's work.
       let crisis_id = '';
       let crisis_title = '';
-      const askedCrisis = clean(body?.crisis_id, 60);
-      if (askedCrisis) {
-        try {
-          const crisis = await base44.asServiceRole.entities.ClimateSolution.get(askedCrisis);
-          if (crisis && crisis.entry_type === 'climate_crisis' && crisis.status === 'published') {
-            crisis_id = crisis.id;
-            crisis_title = clean(crisis.title, 160);
-          }
-        } catch {
-          // Not an entry on the record: the drawing simply stands on its own.
+      let crisis_type = '';
+      const askedEntry = clean(body?.crisis_id, 60);
+      if (askedEntry) {
+        const solution = await base44.asServiceRole.entities.ClimateSolution.get(askedEntry).catch(() => null);
+        const doing = solution ? null : await base44.asServiceRole.entities.ClimateAction.get(askedEntry).catch(() => null);
+        const entry = solution || doing;
+        if (entry && entry.status === 'published') {
+          crisis_id = entry.id;
+          crisis_title = clean(entry.title, 160);
+          crisis_type = solution
+            ? (solution.entry_type === 'climate_crisis' ? 'climate_crisis' : 'solution')
+            : 'action';
         }
       }
 
@@ -218,6 +226,10 @@ export default async function (req: Request): Promise<Response> {
         image_url,
         crisis_id,
         crisis_title,
+        // Which door it answers, kept with the link so the drawing opens the solution it
+        // was drawn about rather than a crisis that happens to share its id. Absent on a
+        // drawing that stands on its own.
+        ...(crisis_type ? { crisis_type } : {}),
         // Only present when it was sent from a goal: an empty field would otherwise claim
         // the drawing was filed against nothing on purpose.
         ...(goal ? { goal } : {}),
