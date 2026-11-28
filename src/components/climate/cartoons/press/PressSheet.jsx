@@ -21,7 +21,8 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
     <div className="press-sheet-rail">
       <div className="press-sheet-meta">
         <p className="press-sheet-number" aria-hidden="true">{String(index).padStart(2, '0')}</p>
-        <p className="press-sheet-subject">{cartoonSubject(cartoon)}</p>
+        {/* Printed only where the record has a real signpost. See cartoonSubjects.js. */}
+        {cartoonSubject(cartoon) && <p className="press-sheet-subject">{cartoonSubject(cartoon)}</p>}
         <ShareCardButton inline iconOnly instant entry={cartoon} build={buildDrawingShareCard}
           label={`Share ${title || 'this drawing'} by ${artist_name}`} description={drawingShareLine(cartoon)}
           includeMessage windowTitle="Share this drawing"

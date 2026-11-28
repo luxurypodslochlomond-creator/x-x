@@ -14,6 +14,15 @@ const subjects = {
   'Love At First Light': 'Sunlight & household bills',
   'The Energy Relay': 'The energy transition',
 };
+// ── THE LINE THAT SAID NOTHING, THIRTY TIMES ─────────────────────────────────
+// This returned 'A different way of seeing' for every drawing that had no signpost, which on
+// the wall is nearly all of them — the CAIB drawings, Francis's, Mushi's, Hanan's, Odiase's,
+// Platini's. So a reader scrolling a phone met the same sentence under drawing after drawing
+// and learned nothing from any of them. Brian, 28 November: "looks like repeating."
+//
+// A signpost that is the same for everything is not a signpost. Where there is no real
+// subject the line is now simply absent, and the drawing stands on its own title, its hand
+// and its origin — which is all it ever had to say.
 export default function cartoonSubject(cartoon) {
-  return subjects[cartoon?.title] || 'A different way of seeing';
+  return subjects[cartoon?.title] || '';
 }
