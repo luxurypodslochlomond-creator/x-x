@@ -33,7 +33,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
         aria-label={`Look closer at ${title || 'this drawing'} by ${artist_name}`}
       >
         <CartoonArtwork cartoon={cartoon} lead={lead} linkSource={false} />
-        <span className="press-sheet-look">Look closer</span>
+        <span className="press-sheet-look">Open full size</span>
       </button>
 
       <div className="press-sheet-rail">
@@ -50,6 +50,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
             name, where it came from, the drawer's own line quoted exactly — drawn on the
             reader's own device, in the tongue they have picked. */}
         <div className="press-sheet-share">
+          <button type="button" className="wall-enlarge-drawing" onClick={onOpen}>Open full size</button>
           <ShareCardButton
             inline
             instant

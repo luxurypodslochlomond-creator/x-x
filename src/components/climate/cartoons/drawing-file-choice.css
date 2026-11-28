@@ -1,0 +1,8 @@
+.drawing-file-choice { margin-top: 1rem; padding: 1.2rem; border: 2px dashed rgb(var(--record-ink) / .45); background: rgb(var(--record-paper)); text-align: center; }
+.drawing-file-choice[data-over="true"] { border-color: rgb(var(--record-red)); background: rgb(var(--record-signal) / .2); }
+.drawing-file-choice > p { margin: 0 0 .7rem; font: 750 1.1rem/1.3 var(--font-record-ui); }
+.drawing-file-choice > div { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .7rem; }
+.drawing-file-choice button { min-height: 2.8rem; padding: .55rem .85rem; background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); border: 1px solid rgb(var(--record-ink)); font-weight: 750; }
+.drawing-file-choice button:last-child { background: transparent; }
+.drawing-file-choice button:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
+.drawing-file-choice small { display: block; margin-top: .65rem; color: rgb(var(--record-muted)); }

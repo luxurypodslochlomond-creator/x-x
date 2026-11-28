@@ -4,6 +4,7 @@ import { Loader2, Check } from 'lucide-react';
 import { factsFromFile } from '@/components/climate/cartoons/fileFacts';
 import { goalByNumber } from '@/components/climate/cartoons/cartoonGoals';
 import { goalColour, goalNumberInk } from '@/components/climate/cartoons/goalColours';
+import DrawingFileChoice from '@/components/climate/cartoons/DrawingFileChoice';
 
 // ── BRING A DRAWING ───────────────────────────────────────────────────────────
 // A photograph of the drawing goes in; the record writes one line about what it can
@@ -66,6 +67,7 @@ export default function CartoonSendIn({ goal = null }) {
     credit: '',
     crisis_id: '',
     source_url: '',
+    country: '',
   });
 
   // ── WHAT ARRIVED WITH THE FILE, AND WHAT THE WALL ALREADY HOLDS ──────────────
@@ -126,7 +128,14 @@ export default function CartoonSendIn({ goal = null }) {
 
   const onFile = async (file) => {
     if (!file) return;
+    if (!/^image\/(jpeg|png|webp|gif)$/i.test(file.type) && !/\.(jpe?g|png|webp|gif)$/i.test(file.name)) {
+      setError('Choose a JPG, PNG, WebP or GIF drawing file. Export other formats as one of these first.');
+      return;
+    }
+    if (file.size > 20 * 1024 * 1024) { setError('This file is over 20 MB. Please export a smaller copy.'); return; }
     setError('');
+    setMachineLine('');
+    setLooksLike([]);
     setStep('working');
     try {
       // Read the file's own paperwork before it is shrunk: shrinking re-encodes the
@@ -148,17 +157,26 @@ export default function CartoonSendIn({ goal = null }) {
         credit: f.credit || said.credit,
       }));
 
-      const res = await base44.functions.invoke('climateCartoon', { action: 'read', image_url: url });
-      const data = res?.data || {};
-      const line = data.line || '';
-      setMachineLine(line);
-      setLooksLike(data.looks_like || []);
-      setForm((f) => ({ ...f, for_line: f.for_line || line }));
+      // The drawing is ready without waiting for a machine description. The sender's
+      // own line stays theirs; a machine suggestion is available only if requested.
       setStep('ready');
     } catch (e) {
       setError('That did not go through. Try the drawing once more.');
       setStep('idle');
     }
+  };
+
+  const [readingBusy, setReadingBusy] = useState(false);
+  const suggestLine = async () => {
+    setReadingBusy(true);
+    setError('');
+    try {
+      const res = await base44.functions.invoke('climateCartoon', { action: 'read', image_url: imageUrl });
+      setMachineLine(res?.data?.line || '');
+      setLooksLike(res?.data?.looks_like || []);
+    } catch {
+      setError('The machine could not read it. You can still send the drawing with your own words.');
+    } finally { setReadingBusy(false); }
   };
 
   const send = async () => {
@@ -226,7 +244,7 @@ export default function CartoonSendIn({ goal = null }) {
         Your drawing, with your name
       </p>
       <p className="mt-1 text-[13px] leading-[1.6] text-record-muted" style={reading}>
-        Choose an image file or photograph. The machine offers a description; you can replace it with your own words.
+        Choose your drawing file. Add the artist’s name. Send it for a person’s review.
       </p>
 
       {/* ── BEFORE ANYBODY HANDS ANYTHING OVER ────────────────────────────────────
@@ -243,27 +261,18 @@ export default function CartoonSendIn({ goal = null }) {
       </p>
       <p className="mt-3 text-sm leading-relaxed text-record-muted">Uploads are public by link, even before a custodian approves the wall entry. Only send work you have permission to share.</p>
 
-      {step === 'idle' && (
-        <label className="mt-3 flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2 border border-dashed border-record-ink/40 bg-record-paper px-3 text-[14px] text-record-ink active:border-record-red">
-          Choose the drawing
-          <input
-            type="file"
-            accept="image/*"
-            className="sr-only"
-            onChange={(e) => onFile(e.target.files?.[0])}
-          />
-        </label>
-      )}
+      {step === 'idle' && <DrawingFileChoice onFile={onFile} />}
 
       {step === 'working' && (
         <p className="mt-3 inline-flex items-center gap-2 text-[13.5px] text-record-muted" style={reading}>
-          <Loader2 className="h-4 w-4 animate-spin" /> Storing it, then reading it…
+          <Loader2 className="h-4 w-4 animate-spin" /> Preparing your drawing…
         </p>
       )}
 
       {step === 'ready' && (
         <div className="mt-3">
           <img src={imageUrl} alt="The drawing you chose" className="block max-h-56 w-auto border border-record-ink/15" />
+          <button type="button" className="mt-2 min-h-[44px] text-sm underline text-record-red" disabled={readingBusy || busy} onClick={() => { setStep('idle'); setImageUrl(''); setMachineLine(''); setLooksLike([]); }}>Choose a different file</button>
 
           {/* ── THE WALL MAY ALREADY HAVE IT ────────────────────────────────────
               One drawing once hung twice under two names, because the two copies were
@@ -291,6 +300,7 @@ export default function CartoonSendIn({ goal = null }) {
             </p>
           )}
 
+          <button type="button" className="block min-h-[44px] text-sm underline text-record-muted" onClick={suggestLine} disabled={readingBusy}>{readingBusy ? 'Reading the drawing…' : 'Ask the machine for a description · optional'}</button>
           {machineLine && (
             <div className="mt-3 border-l-2 border-record-red/50 pl-3">
               <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-record-muted">
@@ -298,7 +308,7 @@ export default function CartoonSendIn({ goal = null }) {
               </p>
               <p className="mt-1 text-[13.5px] leading-[1.55] text-record-ink" style={reading}>{machineLine}</p>
               <p className="mt-1 text-[11.5px] leading-[1.5] text-record-muted" style={reading}>
-                A machine wrote that, and it may be wrong. The box below is yours — say it in your own words.
+                A machine wrote that, and it may be wrong. It has not been put into your words below.
               </p>
             </div>
           )}
@@ -313,10 +323,11 @@ export default function CartoonSendIn({ goal = null }) {
               hand. Not one field is removed, and nothing is required that was not required
               before: the button still asks only for the hand. */}
           <div className="mt-3 space-y-2">
-            <input className={field} placeholder="Who drew it — their name as it should appear" value={form.artist_name} onChange={set('artist_name')} />
+            <label className="block text-sm font-semibold text-record-ink">Artist’s name <span className="font-normal text-record-muted">· required</span><input className={`${field} mt-1`} placeholder="The name to carry with the drawing" value={form.artist_name} onChange={set('artist_name')} /></label>
             <textarea
               className={`${field} min-h-[74px] py-2`}
-              placeholder="One line on what it is for, in your own words"
+              aria-label="Your own words about the drawing, optional"
+              placeholder="One line on what it is for, in your own words · optional"
               value={form.for_line}
               onChange={set('for_line')}
             />
@@ -364,7 +375,7 @@ export default function CartoonSendIn({ goal = null }) {
 
           <button
             onClick={send}
-            disabled={busy}
+            disabled={busy || readingBusy}
             className="mt-3 inline-flex min-h-[48px] w-full items-center justify-center gap-2 bg-record-ink px-4 text-[14px] font-semibold text-record-paper disabled:opacity-40"
             style={reading}
           >

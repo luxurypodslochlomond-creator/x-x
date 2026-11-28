@@ -1,10 +1,8 @@
 import React from 'react';
-import { goToDrawing } from '@/components/climate/cartoons/goToDrawing';
-
-export default function GoalDrawing({ piece, goal }) {
+export default function GoalDrawing({ piece, goal, onOpen }) {
   const reading = goal.drawings.find(({ title }) => title === piece.title);
   return <li className="cartoon-goal-line">
-    {piece.display_image_url && <button type="button" className="cartoon-goal-line-art" onClick={() => goToDrawing(piece.id)} aria-label={`See ${piece.title || 'the drawing'} by ${piece.artist_name} on the wall`}>
+    {piece.display_image_url && <button type="button" className="cartoon-goal-line-art" onClick={onOpen} aria-label={`Open ${piece.title || 'the drawing'} by ${piece.artist_name} full size`}>
       <img src={piece.display_image_url} alt={piece.title || `Drawing by ${piece.artist_name}`} loading="lazy" />
     </button>}
     <span className="cartoon-goal-line-title">{piece.title || 'Untitled'} · {piece.artist_name}</span>

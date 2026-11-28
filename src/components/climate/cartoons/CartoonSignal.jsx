@@ -28,7 +28,7 @@ export default function CartoonSignal() {
           : `${drawings} ${drawings === 1 ? 'drawing' : 'drawings'} on the wall`}
       </span>
       <span aria-hidden="true" className="cartoon-signal-dot" />
-      <span>Every one named</span>
+      <span>Credits kept with the work</span>
       <span aria-hidden="true" className="cartoon-signal-dot" />
       <span>Open to any hand</span>
     </p>

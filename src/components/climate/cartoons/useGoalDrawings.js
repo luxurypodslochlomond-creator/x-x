@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { base44 } from '@/api/base44Client';
 import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
+import goalQuery from '@/components/climate/cartoons/goalQuery';
 
 export default function useGoalDrawings(goal, enabled) {
   const readings = goal.drawings.map(({ title }) => title);
@@ -9,7 +10,7 @@ export default function useGoalDrawings(goal, enabled) {
     enabled,
     initialPageParam: null,
     queryFn: ({ pageParam }) => base44.entities.ClimateCartoon.filter(
-      { status: 'published', $or: [{ title: { $in: readings } }, { goal: goal.n }] },
+      goalQuery(goal),
       { sort: '-created_date', limit: 12, ...(pageParam ? { cursor: pageParam } : {}) },
     ),
     getNextPageParam: (page) => page.has_more ? page.next_cursor : undefined,

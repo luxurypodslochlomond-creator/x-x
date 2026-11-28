@@ -1,5 +1,5 @@
 import React from 'react';
-
+import WallChapterMark from '@/components/climate/cartoons/WallChapterMark';
 import '@/components/climate/cartoons/cartoon-room-jump.css';
 
 const SECTIONS = [
@@ -13,7 +13,7 @@ export default function CartoonRoomJump({ active, onNavigate }) {
   return <nav className="cartoon-room-jump" aria-label="Explore the wall">
     <ul>{SECTIONS.map(({ id, href, label }) => <li key={id}>
       <a href={href} aria-current={active === id ? 'location' : undefined} onClick={(event) => { event.preventDefault(); onNavigate(href); }}>
-        <span>{label}</span>
+        <WallChapterMark kind={id} /><span>{label}</span>
       </a>
     </li>)}</ul>
   </nav>;

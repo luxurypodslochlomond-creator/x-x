@@ -13,14 +13,9 @@ export default function WallRoom() {
   return <div className="press-room-inner wall-room wall-continuous">
     <CartoonRoomJump active={active} onNavigate={navigate} />
     <WallEventNotice />
-    <div className="wall-view"><PressWall /></div>
-    <WallMoney />
-    <div className="wall-view"><CartoonRoomActions /></div>
-    <details className="wall-chapter-details" open={active === 'goals' ? true : undefined}>
-      <summary>The drawings through the 17 UN goals</summary><CartoonGoals />
-    </details>
-    <details className="wall-chapter-details" open={active === 'about' ? true : undefined}>
-      <summary>The people, the purpose and the sources</summary><WallAbout />
-    </details>
+    <div className="wall-view" hidden={active !== 'drawings'}><PressWall visible={active === 'drawings'} /><WallMoney /></div>
+    <div className="wall-view" hidden={active !== 'send'}><CartoonRoomActions /></div>
+    <div className="wall-view" hidden={active !== 'goals'}><CartoonGoals visible={active === 'goals'} /></div>
+    <div className="wall-view" hidden={active !== 'about'}><WallAbout /></div>
   </div>;
 }

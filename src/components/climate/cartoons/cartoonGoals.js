@@ -119,8 +119,8 @@ export const GOALS = [
     ]),
   goal(12, 'Responsible Consumption and Production',
     'Ensure sustainable consumption and production patterns.', 11, [
-      read('Beach Date Saved', 'Because its whole argument is one can of litter against the 32 million tonnes of waste Nigeria makes in a year.'),
-      read('Unfortunate Sequins Events', 'Because a sequin is made to be worn once and washed away, which is the pattern this goal is about.'),
+      read('Beach Date Saved', 'Because it connects discarded plastic with polluted waterways, putting waste and consumption in the same argument.'),
+      read('Unfortunate Sequins Events', 'Because CEEW’s published caption contrasts long-lived polyester clothing with nature-based materials.'),
     ]),
   goal(13, 'Climate Action',
     'Take urgent action to combat climate change and its impacts.', 5, [
@@ -133,8 +133,8 @@ export const GOALS = [
       // reason is reached for: both are written on the drawings.
       read("Never mind, it's the Earth again crying over El-Nino, the ghost they helped to create...!", 'Because its own line is the Earth crying over El-Nino, the weather it is being blamed for.'),
       read("Défenseurs de l'Environnement (Defenders of the Environment)", 'Because the banner across it names the fight against climate change in its own words.'),
-      read('Ladies and gentlemen, this is your Captain speaking, we are now flying straight into a break in the Ozone layer - I hope you remembered to carry along some radiation suits!', 'Because its own caption is the atmosphere opening, announced to the passengers as a change of course.'),
-      read('Earth Day', 'Because a day the world agrees to look at the same thing at once is the action this goal asks for.'),
+      // Removed on review: ozone depletion alone does not establish a Goal 13
+      // connection; the title "Earth Day" alone does not establish one either.
     ]),
   goal(14, 'Life Below Water',
     'Conserve and sustainably use the oceans, seas and marine resources for sustainable development.', 10, [
@@ -180,4 +180,8 @@ export const readingsFor = (title) => GOALS
 // prints — that is arithmetic on the wall itself, so it cannot go stale. This is the note a
 // keeper leaves beside the two that have nothing to read: a picture with no title and no line
 // cannot be placed honestly, and forcing it somewhere would be the first lie on this wall.
-export const UNPLACED = ['Last Wish'];
+export const UNPLACED = [
+  'Last Wish',
+  'Earth Day',
+  'Ladies and gentlemen, this is your Captain speaking, we are now flying straight into a break in the Ozone layer - I hope you remembered to carry along some radiation suits!',
+];

@@ -20,6 +20,7 @@ import '@/components/climate/cartoons/press/press-wall-wide.css';
 import '@/components/climate/cartoons/press/press-band-heads.css';
 import '@/components/climate/cartoons/wall-room.css';
 import '@/components/climate/cartoons/wall-continuity.css';
+import '@/components/climate/cartoons/wall-working.css';
 
 export default function ClimateCartoons() {
   return (
@@ -29,7 +30,7 @@ export default function ClimateCartoons() {
       eyebrow="The Wall"
       marker="The record · the cartoon room"
       title="The Wall"
-      statement="Climate cartoons. Kept whole. Every credit carried forward."
+      statement="Drawn against indifference. Climate cartoons, their makers and the world they refuse to leave alone."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."

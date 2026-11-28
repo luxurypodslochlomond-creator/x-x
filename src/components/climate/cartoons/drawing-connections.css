@@ -1,3 +1,9 @@
-.drawing-connections { display: flex; flex-direction: column; align-items: flex-start; gap: .45rem; margin: 1rem 0; padding: .8rem 0; border-block: 1px solid rgb(var(--record-ink) / .25); }
-.drawing-connections a { display: block; min-height: 2.75rem; align-content: center; color: rgb(var(--record-red)); font: 650 .9rem/1.5 var(--font-record-ui); text-decoration: underline; text-underline-offset: .2em; }
+.drawing-connections { display: flex; flex-wrap: wrap; align-items: flex-start; gap: .55rem 1rem; margin: .65rem 0; padding: .65rem 0; border-block: 1px solid rgb(var(--record-ink) / .25); }
+.drawing-connections a { min-height: 2.75rem; color: rgb(var(--record-ink)); font: 650 .84rem/1.35 var(--font-record-ui); text-decoration: none; }
+.drawing-connections .drawing-goal-connection { display: inline-flex; align-items: center; gap: .55rem; }
+.drawing-connections .drawing-goal-number { display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 2.65rem; min-height: 2.8rem; border-left: 3px solid rgb(var(--record-red)); background: rgb(var(--record-bone)); font-size: 1.5rem; font-weight: 850; line-height: 1; }
+.drawing-connections small { display: block; margin-top: .2rem; font-size: .63rem; font-weight: 450; color: rgb(var(--record-muted)); }
+.drawing-connections .drawing-goal-number small { margin: 0 0 .15rem; color: rgb(var(--record-red)); font-size: .5rem; font-weight: 750; letter-spacing: .1em; }
+.drawing-connections .drawing-support-connection { width: 100%; min-height: 2rem; padding-block: .3rem; color: rgb(var(--record-red)); font-size: .75rem; text-decoration: underline; text-underline-offset: .2em; }
 .drawing-connections a:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
+.drawing-connections a:hover { color: rgb(var(--record-red)); }

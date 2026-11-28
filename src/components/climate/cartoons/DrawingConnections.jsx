@@ -9,8 +9,8 @@ export default function DrawingConnections({ cartoon, onNavigate }) {
   const named = cartoon.artist_name && !/not yet named/i.test(cartoon.artist_name);
   const proposal = new URLSearchParams({ artist: cartoon.artist_name || '', work: cartoon.title || '' });
   return <nav className="drawing-connections" aria-label={`Follow the connections for ${cartoon.title || 'this drawing'}`}>
-    {offered && <a href={`/ClimateCartoons#goal-button-${offered.n}`} onClick={onNavigate}>Submitted for Goal {offered.n} · {offered.name}</a>}
-    {readings.map(goal => <a key={goal.n} href={`/ClimateCartoons#goal-button-${goal.n}`} onClick={onNavigate}>The record’s reading: Goal {goal.n} · {goal.name}</a>)}
-    {named && <Link to={`/ClimateLedger?${proposal}#offer-help`} onClick={onNavigate}>Offer paid support for {cartoon.artist_name}</Link>}
+    {offered && <a className="drawing-goal-connection" href={`/ClimateCartoons#goal-button-${offered.n}`} onClick={onNavigate}><span className="drawing-goal-number"><small>GOAL</small>{String(offered.n).padStart(2, '0')}</span><span>{offered.name}<small>Sender’s choice</small></span></a>}
+    {readings.map(goal => <a key={goal.n} className="drawing-goal-connection" href={`/ClimateCartoons#goal-button-${goal.n}`} onClick={onNavigate}><span className="drawing-goal-number"><small>GOAL</small>{String(goal.n).padStart(2, '0')}</span><span>{goal.name}<small>The record’s reading</small></span></a>)}
+    {named && <Link className="drawing-support-connection" to={`/ClimateLedger?${proposal}#offer-help`} onClick={onNavigate}>Support this artist’s work · terms &amp; ledger</Link>}
   </nav>;
 }

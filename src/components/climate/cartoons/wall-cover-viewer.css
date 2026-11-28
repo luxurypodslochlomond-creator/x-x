@@ -1,0 +1,12 @@
+.wall-cover-viewer { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; padding: 0; margin: 0; border: 0; color: rgb(var(--record-ink)); background: rgb(var(--record-paper)); font-family: var(--font-record-ui); }
+.wall-cover-viewer[open] { display: flex; flex-direction: column; }
+.wall-cover-viewer::backdrop { background: rgb(var(--record-ink) / .8); }
+.wall-cover-viewer header { display: flex; flex-shrink: 0; align-items: center; gap: 1rem; padding: .65rem 1rem; border-bottom: 1px solid rgb(var(--record-ink) / .25); }
+.wall-cover-viewer header > div { flex: 1; }
+.wall-cover-viewer h2 { font-size: .9rem; font-weight: 700; }
+.wall-cover-viewer p { font-size: .75rem; color: rgb(var(--record-muted)); }
+.wall-cover-viewer button { min-height: 2.75rem; padding: .5rem; font-weight: 700; }
+.wall-cover-viewer button:focus-visible { outline: 2px solid rgb(var(--record-red)); }
+.wall-cover-scroll { flex: 1; min-height: 0; overflow: auto; padding: 1rem; }
+.wall-cover-scroll img { display: block; width: auto; max-width: 100%; height: auto; max-height: calc(100dvh - 8rem); margin: auto; object-fit: contain; }
+.wall-cover-scroll[data-zoom="true"] img { width: max(100%, 70rem); max-width: none; max-height: none; }

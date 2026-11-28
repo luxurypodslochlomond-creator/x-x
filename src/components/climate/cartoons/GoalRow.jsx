@@ -3,7 +3,7 @@ import { goalColour, goalNumberInk } from '@/components/climate/cartoons/goalCol
 import CartoonSendIn from '@/components/climate/cartoons/CartoonSendIn';
 import GoalDrawings from '@/components/climate/cartoons/GoalDrawings';
 
-export default function GoalRow({ goal, open, onToggle }) {
+export default function GoalRow({ goal, count, countFailed, open, onToggle }) {
   const [offering, setOffering] = useState(false);
   const panelId = `goal-panel-${goal.n}`;
   const buttonId = `goal-button-${goal.n}`;
@@ -11,6 +11,7 @@ export default function GoalRow({ goal, open, onToggle }) {
     <button id={buttonId} type="button" className="cartoon-goal-head" aria-expanded={open} aria-controls={open ? panelId : undefined} onClick={onToggle}>
       <span className="cartoon-goal-number" style={{ background: goalColour(goal.n), color: goalNumberInk(goal.n) }}>{String(goal.n).padStart(2, '0')}</span>
       <span className="cartoon-goal-name">{goal.name}</span>
+      <span className="cartoon-goal-meta" aria-live="polite"><strong>{count === null ? '—' : count}</strong><span>{count === null ? (countFailed ? 'not checked' : 'counting…') : count === 1 ? 'drawing' : 'drawings'}</span></span>
       <span className="cartoon-goal-cue" aria-hidden="true">{open ? '−' : '+'}</span>
     </button>
     {open && <div className="cartoon-goal-panel" id={panelId} role="region" aria-labelledby={buttonId}>
