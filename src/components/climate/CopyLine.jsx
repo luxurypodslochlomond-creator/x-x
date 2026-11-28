@@ -20,7 +20,7 @@ export default function CopyLine({ text, label = 'Copy', className = '' }) {
   return (
     <button
       onClick={take}
-      className={`px-2.5 py-1.5 border-2 border-[#141210]/30 text-[9px] font-black font-mono uppercase tracking-wide text-[#141210] active:border-[#b3261e] active:text-[#b3261e] transition-colors flex-shrink-0 ${className}`}
+      className={`min-w-[9rem] justify-center text-center px-2.5 py-1.5 border-2 border-[#141210]/30 text-[9px] font-black font-mono uppercase tracking-wide text-[#141210] active:border-[#b3261e] active:text-[#b3261e] transition-colors flex-shrink-0 inline-flex items-center ${className}`}
       aria-label={`${label}: ${text.slice(0, 40)}`}
     >
       {copied ? 'Copied' : label}

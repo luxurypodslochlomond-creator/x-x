@@ -69,10 +69,12 @@ export default function ClimateCartoonsPaid() {
     </section>
 
     <section className="paid-section">
-      <h2 className="paid-head">Say what you charge</h2>
+      <h2 className="paid-head">Say what would make it right</h2>
       <p className="paid-lede" style={{ marginTop: 0 }}>
-        Put your own price in front of the people who can go and find the money. It is private, it is not a payment,
-        and it is not a promise — it is the number that answers “what would it cost?” without you having to argue for it.
+        Not a price list, and not a favour asked. One line in your own words: a fee for a new drawing, a paid
+        workshop, materials, your name on an application for money — or the promise, kept in writing. Money is one
+        honest answer. Reach, followers and being seen are not answers, and this record will not offer them as
+        though they were.
       </p>
       <RateForm />
     </section>
