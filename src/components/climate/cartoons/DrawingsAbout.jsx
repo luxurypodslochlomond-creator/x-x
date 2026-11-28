@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import { BalloonStar } from '@/components/climate/cartoons/CartoonInkIcons';
+import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 
 // ── THE OTHER END OF THE LINK ─────────────────────────────────────────────────
 // Brian, 18 November: "can be linked to climate crises entries and platform bro". This is
-// the crisis's end of it. Where a drawing was offered about this entry, the entry shows it:
-// the crisis gets a face, and a reader who has just read what is happening can see what
+// the entry's end of it. Where a drawing was offered about this entry, the entry shows it:
+// the entry gets a face, and a reader who has just read what is happening can see what
 // somebody drew about it. Nothing is shown unless a keeper has put the drawing on the wall,
 // so this can never become a back door onto unpublished work.
+//
+// It was printed for crises alone, which left half the join missing: a solution that had been
+// drawn about showed nothing, so the join only worked in the direction of the wall. It now
+// prints for every kind of entry, and each drawing opens its own page rather than the room.
 //
 // The block prints nothing at all when there are no drawings — no heading, no empty state,
 // no invitation. A crisis that nobody has drawn yet should read as a crisis, not as a page
@@ -37,7 +42,7 @@ export default function DrawingsAbout({ entryId }) {
         {drawings.map((drawing) => (
           <Link
             key={drawing.id}
-            to="/ClimateCartoons"
+            to={`/w/${cartoonSlug(drawing)}`}
             className="block border-2 border-[#141210] bg-[#f7f1e5]"
           >
             <img
@@ -46,8 +51,12 @@ export default function DrawingsAbout({ entryId }) {
               loading="lazy"
               className="block aspect-[4/3] w-full bg-[#efe7d6] object-contain"
             />
+            {/* The drawing's own name, then the hand. A card that names only the artist
+                asks a reader to open it to find out what it is about, which is the one
+                thing a picture on an entry page should not do. */}
             <p className="border-t border-[#141210]/20 px-2 py-1.5 text-[11px] leading-tight">
-              <span className="font-bold">{drawing.artist_name}</span>
+              <span className="block font-bold">{drawing.title || drawing.artist_name}</span>
+              {drawing.title && <span className="block">{drawing.artist_name}</span>}
             </p>
           </Link>
         ))}

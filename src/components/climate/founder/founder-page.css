@@ -95,6 +95,22 @@ html .climate-record[data-record-page="ClimateFounder"] .record-book { backgroun
 #record-founder .record-founder-working h3 a { color: inherit; text-decoration: underline; }
 #record-founder .record-founder-working p { margin: .55rem 0 0; font-size: .9rem !important; }
 
+/* Who says so, printed under the work rather than behind a door that leaves the record.
+   Quiet, because it is provenance and not the argument. */
+#record-founder .record-founder-working-source {
+  margin-top: .35rem !important;
+  font-size: .74rem !important;
+  letter-spacing: .04em;
+  color: rgb(var(--record-muted));
+}
+
+/* The one line that says where her column was printed, and why the record keeps its own
+   copy of it. A reader should never have to wonder whether they are being sent somewhere. */
+#record-founder .record-founder-elsewhere {
+  font-size: .82rem !important;
+  color: rgb(var(--record-muted));
+}
+
 #record-founder .record-founder-work { color: rgb(var(--record-paper)); background: linear-gradient(rgb(var(--record-ink) / .8), rgb(var(--record-ink) / .94)); border-top: 3px solid rgb(var(--record-signal)); }
 #record-founder .record-founder-work-inner { max-width: 72rem; margin: auto; padding: 2.2rem 2rem; }
 #record-founder .record-founder-work-title { margin: 0 0 1.5rem; color: rgb(var(--record-signal)); font-size: clamp(1.8rem, 3.5vw, 3rem); text-transform: uppercase !important; }

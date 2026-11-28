@@ -1,9 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Her published argument and the record's response are deliberately separate.
-const COLUMN = 'https://nigerianobservernews.com/2026/08/the-changing-course-of-climate-change/';
+// ── HER COLUMN IS ON THE RECORD, SO THE DOOR STAYS ON THE RECORD ──────────────
+// Brian, 28 November, reading the live page: "Janine's article takes us to Nigerian observer —
+// I'm sure we have that on record, why take us there bro." He was right, and the fault was
+// ours. The column is the record's own wire entry: its headline, what it says, the paper that
+// printed it, and a full archived copy fingerprinted on the day it was fetched. This page was
+// sending a reader out to the newspaper to read something the record already keeps — and a
+// reader who leaves for the paper has been handed to somebody else's advertising, on a page
+// whose whole argument is that knowledge should not be sold back to the person who needs it.
+//
+// The address is the entry's own id, not its readable name. This link is written by hand, so
+// it has to survive the headline being edited: a door that stops working is a worse fault than
+// an address with a number in it.
+const COLUMN = '/ClimateWireEntry/6ad91a4e045e7a35a043fd57';
 
+// Her published argument and the record's response are deliberately separate.
 export default function FounderColumn() {
   return (
     <section className="record-founder-sheet" aria-labelledby="founder-column">
@@ -13,8 +25,9 @@ export default function FounderColumn() {
       </blockquote>
       <p className="record-founder-attrib">
         <span>Janine M. H. Selendy</span>
-        <a href={COLUMN} target="_blank" rel="noopener noreferrer">Read the column ↗<span className="sr-only"> (opens a new tab)</span></a>
+        <Link to={COLUMN}>Read her column, here on the record →</Link>
       </p>
+      <p className="record-founder-plain record-founder-elsewhere">Printed by The Nigerian Observer, August 2026. The record keeps its own copy, with the paper named, so nobody has to leave to read it.</p>
       <p className="record-founder-plain">Her argument is practical: make the emergencies known, make the responses known, so people can act. Not another audience to build. Knowledge people can use.</p>
       <p className="record-founder-plain">This record puts technology and AI to that work. A machine’s answer is not proof: the source, the uncertainty and the correction must stay visible. The point is to make the harm harder to hide, not to make the reader easier to watch.</p>
       <p className="record-founder-plain"><strong>Intelligence is not a licence to extract.</strong> A tool that learns from a person to sell them back to themselves is the same greed in a newer coat. Here, love outranks money, the record outranks the ranking, and nothing on this page is for sale.</p>

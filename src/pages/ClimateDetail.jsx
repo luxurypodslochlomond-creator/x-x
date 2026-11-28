@@ -429,10 +429,14 @@ export default function ClimateDetail({ type: typeProp, id: idProp }) {
 
         <WorkingGroupLine category={record.category} />
 
-        {/* A crisis that has been drawn about shows the drawings, because the room of
-            cartoons and the record are one thing: the drawing answers this entry, and this
-            entry is where a reader who cares about it already is. */}
-        {!isSolution && <DrawingsAbout entryId={record.id} />}
+        {/* A drawing that answers this entry shows here, because the room of cartoons and the
+            record are one thing: the drawing answers this entry, and this entry is where a
+            reader who cares about it already is.
+            It used to print for a crisis only. So a solution that had been drawn about — the
+            electric-vehicle entry, the renewables entry, the coastal-defence entry — showed
+            nothing at all, and every drawing tied to one was reachable from the wall alone.
+            Half a join is not a join. */}
+        <DrawingsAbout entryId={record.id} />
 
         <ClimateCommentSection entryId={record.id} entryType={record.entry_type} />
       </div>
