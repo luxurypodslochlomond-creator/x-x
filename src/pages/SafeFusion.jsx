@@ -19,6 +19,22 @@ export default function SafeFusion() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-4 pb-32">
             
+            {/* ── READ THIS FIRST ────────────────────────────────────────────────
+                Written on 28 November 2026, because this page was telling people to
+                put a cup of something in a microwave and stand near it, and calling
+                that safe. It is not a build guide and it never was tested. */}
+            <div className="mx-auto mb-6 max-w-3xl border-2 border-red-500 bg-red-950/60 px-4 py-3">
+                <p className="font-black text-red-300 text-sm tracking-wide">THIS IS THINKING, NOT A BUILD GUIDE. PLEASE DO NOT BUILD ANY OF IT.</p>
+                <p className="mt-2 text-xs leading-relaxed text-red-100/90">
+                    Nothing on this page has been measured, tested or checked by anyone qualified.
+                    Some of the safety claims in the steps below are wrong — current kills, not
+                    voltage, and a microwave is not a chamber to work near — and the page was written
+                    by someone imagining what might be possible, not reporting what is. It is kept
+                    because the question underneath it, whether plasma can ever be made safely enough
+                    for a person to touch, is a real question for people who do this for a living.
+                </p>
+            </div>
+
             {/* HEADER */}
             <div className="max-w-4xl mx-auto mb-12 px-4 pt-8">
                 <motion.div

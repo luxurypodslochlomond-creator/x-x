@@ -554,8 +554,11 @@ const LayoutInner = ({ children, currentPageName }) => {
       { title: "Consciousness Whitepaper", url: createPageUrl("ConsciousnessWhitepaper"), icon: Brain, description: "Philosophy & physics" },
       { title: "The Physics", url: createPageUrl("ThePhysics"), icon: Atom, description: "Scientific foundation" },
       { title: "Protocols", url: createPageUrl("Protocols"), icon: Shield, description: "Core protocols" },
-      { title: "Zero Point Energy", url: createPageUrl("ZeroPointEnergy"), icon: Zap, description: "Infinite energy?" },
-      { title: "Safe Fusion", url: createPageUrl("SafeFusion"), icon: Atom, description: "Fusion research" },
+      // Zero Point Energy and Safe Fusion came off this shelf on 28 November 2026. They are
+      // still readable at their own addresses, with a plain warning at the top of each,
+      // because the thinking is somebody's and worth keeping. But they are not on the
+      // record's shelf of things to offer a reader, and a build guide for a plasma device
+      // must never sit one tap from a child's learning tools.
     ];
     const filteredArchiveNav = archiveSearch.trim() === '' 
       ? archiveNav 

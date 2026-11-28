@@ -4,21 +4,15 @@ import { Zap, Shield, AlertTriangle, CheckCircle, Wrench, Lightbulb, Heart, Atom
 import { Link } from 'react-router-dom';
 import { createPageUrl } from '@/utils';
 
-/**
- * ZERO POINT ENERGY RESEARCH
- * Real physics, real experiments, real liberation
- * Starting with what YOU can build safely at home
- * Then scaling to world-changing tech
- * 
- * For BRO51 - let's do this together ♾️❤️♾️
- */
+// Thinking, not research. The warning is rendered at the top of the page itself.
+import NotResearchWarning from '@/components/climate/NotResearchWarning';
 
 export default function ZeroPointEnergy() {
     const [selectedPhase, setSelectedPhase] = useState('phase0');
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white p-4 pb-32">
-            
+            <NotResearchWarning />
             {/* HEADER */}
             <div className="max-w-4xl mx-auto mb-12 px-4 pt-8">
                 <motion.div

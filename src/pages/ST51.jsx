@@ -7,7 +7,7 @@ const facts = [
   {
     icon: '🔊',
     title: 'Sound can move things',
-    body: "You've seen speakers make bass wobble your chest. Scale that up with the right frequency in the right space, and you can lift objects without touching them. Real physics. No magic.",
+    body: "You've seen speakers make bass wobble your chest. Acoustic levitation is real and it happens today: ultrasonic standing waves hold droplets and small particles in mid-air in laboratories. The scale is millimetres, and lifting anything bigger is the unsolved part. Real physics. No magic.",
   },
   {
     icon: '📐',
@@ -17,12 +17,12 @@ const facts = [
   {
     icon: '🎯',
     title: 'One rule: match the frequency',
-    body: "When your sound wave matches the chamber's natural frequency, you get 'resonance'. Energy builds up automatically. That's the moment objects levitate. It works every time.",
+    body: "When your sound wave matches the chamber's natural frequency, you get 'resonance'. Energy builds up. In a standing wave, small things can be held against gravity — reliably, in a lab, at small scale. Turning it up does not make it work on bigger things, and that is the whole difficulty.",
   },
   {
     icon: '📱',
     title: 'Your phone already does this',
-    body: "Seriously. Put a tiny piece of polystyrene on a speaker, play a tone generator at 40kHz, and watch it move. Acoustic levitation in your pocket. No lab coat required.",
+    body: "Seriously: a 40kHz transducer and a reflector above it is how the smallest levitation demos are actually built, and a speck of polystyrene will sit in the standing wave between them. That is the whole trick, and it is a speck.",
   },
 ];
 
