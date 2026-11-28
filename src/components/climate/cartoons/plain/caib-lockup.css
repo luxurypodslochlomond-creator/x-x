@@ -1,0 +1,73 @@
+/* ── THE BIENNIAL'S MARK ──
+   A programme's mark set beside its own credit, on the record's paper and in the record's
+   ink. The mark is never tinted, cropped or framed: it is somebody else's logo and it goes
+   up exactly as it was sent. */
+.caib-lockup {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  margin: 0 0 2rem;
+  padding: 1.15rem 0 0;
+  border-top: 1px solid rgba(26, 22, 18, 0.18);
+}
+
+.caib-lockup-mark {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  padding: .35rem;
+  box-sizing: border-box;
+}
+
+.caib-lockup-words { min-width: 0; }
+
+.caib-lockup-head {
+  margin: 0 0 .4rem;
+  font-family: var(--font-record-ui), system-ui, sans-serif;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+
+.caib-lockup-line {
+  margin: 0 0 .55rem;
+  font-family: var(--font-record-ui), system-ui, sans-serif;
+  font-size: .95rem;
+  line-height: 1.45;
+  color: rgb(var(--record-ink));
+}
+
+.caib-lockup-note {
+  margin: 0;
+  font-family: var(--font-record-ui), system-ui, sans-serif;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: rgb(var(--record-muted));
+}
+
+.caib-lockup-door {
+  display: inline-block;
+  margin-top: .6rem;
+  font-family: var(--font-record-ui), system-ui, sans-serif;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: rgb(var(--record-red));
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+/* On a phone the mark sits above its words rather than squeezing them into a column. */
+@media (max-width: 639px) {
+  .caib-lockup {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .9rem;
+  }
+  .caib-lockup-mark {
+    width: 8.5rem;
+  }
+}

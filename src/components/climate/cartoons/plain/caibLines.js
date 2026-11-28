@@ -67,6 +67,23 @@ export const CORRECTION = [
   'If he wants the wording above put differently, in his words rather than ours, his wording goes up.',
 ];
 
+// ── WHO POWERS CAIB ───────────────────────────────────────────────────────────
+// Francis, 28 November, with the hi-res mark: "Don't forget to indicate that CAIB is a
+// program jointly powered by African Press Cartoon in association with two other
+// founding/implementing partners…" Brian, reading it: "Ok - who are they? I can check but
+// best you verify." He is right to ask, and the record does not answer for Francis.
+//
+// So the sentence Francis dictated is printed as he dictated it, and the two partners are
+// left unnamed until he names them. A record that filled that gap with a plausible body
+// would be putting a name on somebody else's programme — the exact fault this page exists
+// to prevent.
+export const PARTNERS = {
+  head: 'Who powers CAIB',
+  logo: 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/62db9931490bd56497e4f0d6d781d3ca_caib-logo.jpg',
+  line: 'CAIB is a programme jointly powered by African Press Cartoon, in association with two other founding and implementing partners.',
+  note: 'Those two partner bodies are not named here yet. Francis asked for the credit; he has not yet said who they are, and this record prints a programme’s partners in the programme’s own words rather than from a guess. Their names go in the moment he confirms them.',
+};
+
 export const DOORS = [
   { to: '/ClimateCartoons', label: 'The wall', note: 'every drawing on the record, in the order it arrived.' },
   { to: '/ClimateCartoons/Francis', label: 'Francis’s own page', note: 'the cover he drew, and everything he has given the room.' },

@@ -2,6 +2,7 @@ import React from 'react';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import RecordLinkCards from '@/components/climate/RecordLinkCards';
 import { TWO_THINGS, HERE, NOT_HERE, ANTHOLOGY, CORRECTION, DOORS } from '@/components/climate/cartoons/plain/caibLines';
+import CaibLockup from '@/components/climate/cartoons/plain/CaibLockup';
 import '@/components/climate/cartoons/plain/plain-sheet.css';
 
 // ── TWO NAMES, TWO THINGS ─────────────────────────────────────────────────────
@@ -25,6 +26,10 @@ export default function ClimateCartoonsCAIB() {
       footer="Nothing here is sold, ranked or sponsored. Where this page says a thing will come off, it comes off."
     >
       <div className="plain-sheet">
+        {/* The biennial's own mark, and the credit its chair asked for, before the page says
+            anything in this record's voice — the programme speaks first, on its own page. */}
+        <CaibLockup />
+
         <section className="plain-section" aria-labelledby="caib-two-head">
           <h2 className="plain-head" id="caib-two-head">Two things, not one</h2>
           <div className="plain-compare">

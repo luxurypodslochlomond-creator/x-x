@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
+import CaibLockup from '@/components/climate/cartoons/plain/CaibLockup';
 
 // ── WHO IS ACTUALLY BEHIND THIS WALL ───────────────────────────────────────────
 // Brian, 28 November: "people and sources, not sure right words bro and not sure what it's
@@ -82,5 +83,9 @@ export default function WallPeople() {
     {hands === null && <p className="wall-people-lede">Reading the wall for every name…</p>}
     {hands && hands.length === 0 && <p className="wall-people-lede">No drawing on the wall carries a name yet.</p>}
     <p className="wall-people-lede">A few drawings are still waiting for the name of the hand that made them. The wall leaves the gap rather than filling it with a guess.</p>
+    {/* The workshop this wall was hung for is held under the biennial's name, so the
+        biennial is credited where the room says who it stands on — with the mark Francis
+        sent and the line he asked for, and with the two partner bodies still to be named. */}
+    <CaibLockup showDoor />
   </section>;
 }
