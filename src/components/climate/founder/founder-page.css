@@ -1,173 +1,507 @@
-/* ── HER PAGE STANDS IN THE PAINTING ─────────────────────────────────────────────
-   Brian, 19 November: "there's grey background colours ... can't see coolasfuck
-   painting." He was right, and the fault was one class: every plate on this page was
-   warm paper at seventy-five per cent laid over ink, which is neither paper nor
-   painting — a pale grey slab with the one picture he commissioned for the door shut
-   out behind it. This page was the page he called coolasfuck, and the reason was
-   simply that nothing painted over its ground.
+/* ── HER PAGE, PRINTED IN THE RECORD'S HAND ──────────────────────────────────────
+   Brian, 28 November: "founder page lifeless bro… doesn't do Janine any justice or us…
+   needs to be coolasfuck like record and x=x… page is soulless and empty feeling".
 
-   So the plates are the record's photographic plate again: the painting, held back by
-   ink rather than replaced by paper, with the signal rule across the top edge and her
-   name lit in the record's yellow. The veil is at the strength the record's own bands
-   already use — strongest where the words are, so a paragraph never fights a picture —
-   which is why nothing is lost in legibility. The room is visible; the words win. */
-.record-founder-page .record-founder-plate {
-  background-color: rgb(var(--record-earth));
-  background-image:
-    linear-gradient(
-      rgb(var(--record-earth) / .66) 0%,
-      rgb(var(--record-earth) / .8) 44%,
-      rgb(var(--record-earth) / .92) 82%,
-      rgb(var(--record-earth)) 100%
-    ),
-    var(--record-cover);
-  background-size: cover;
-  background-position: center 32%;
-  border-top-color: rgb(var(--record-signal));
-  backdrop-filter: none;
-}
+   He was right, and it was not a colour problem. The page was four grey slabs of equal
+   weight, each with a copy of the same painting behind it, a filing label at the top and a
+   beacon where the argument should have been. Nothing on it was allowed to be the biggest
+   thing on it. So the page now has one shape, borrowed from the record itself:
 
-/* Every word on a plate is light on the painting. */
-.record-founder-page .record-founder-plate :is(h1, h2, h3, p, blockquote, span, a, li) {
-  color: rgb(var(--record-paper));
-}
-.record-founder-page .record-founder-plate :is(.text-record-muted) { color: rgb(var(--record-paper) / .84); }
-.record-founder-page .record-founder-plate :is(.text-record-red) { color: rgb(var(--record-signal)); }
-.record-founder-page .record-founder-plate .border-record-ink\/20 { border-color: rgb(var(--record-paper) / .3); }
+     · her name at the size a name is set, in the record's yellow, over the painting;
+     · one hard line under it, and her own sentence quoted rather than described;
+     · the argument on a paper sheet, in three numbered steps, each carrying its source;
+     · her work as one painted register — a number, the thing, what it actually was;
+     · the platform in its own band, after her work, as what we answer for;
+     · her own two doors, and the page closing on her sentence.
 
-/* The two paper slips she is signed on stay paper: a card on a painting, not a hole in it. */
-.record-founder-page .record-founder-plate :is(.bg-record-bone, .bg-record-bone *) { color: rgb(var(--record-ink)); }
-.record-founder-page .record-founder-plate :is(.bg-record-bone) { border-color: rgb(var(--record-ink) / .4); }
+   Everything is full-bleed on a phone, because the record is met on a phone; the sheets
+   come in from the edge on a desk so the painting breathes in the gutters. */
 
-/* ── HER NAME, IN THE LETTERING HE POINTED AT ────────────────────────────────────
-   The line he stopped on was "— JANINE M. H. SELENDY, 1956": upper case, tracked, in the
-   record's yellow. Her name was set in sentence case and ink, so the biggest name on the
-   page was the quietest thing on it. It is now the same voice as that line, at the size of
-   a name. */
-.record-founder-page #founder-name {
-  color: rgb(var(--record-signal));
-  text-transform: uppercase;
-  letter-spacing: .04em !important;
-  text-wrap: balance;
-}
-@media (max-width: 639px) {
-  .record-founder-page #founder-name {
-    font-size: clamp(1.9rem, 8.4vw, 2.6rem);
-    line-height: 1.04;
-  }
-}
+.record-founder-page { background: transparent; }
 
-/* The plates' own headings take the same tracked signal voice, so the page reads as one
-   poster rather than a card index of paragraphs. */
-.record-founder-page .record-founder-plate :is(h2, h3) {
-  color: rgb(var(--record-signal));
-  text-transform: uppercase;
-  letter-spacing: .05em !important;
-}
-
-/* ── FOUR SLABS BECOME ONE PAINTING RUNNING DOWN THE PAGE ───────────────────────
-   Every work plate carried the painting at the same crop, so the page read as the same
-   dark rectangle printed four times. Each plate now holds a different part of the one
-   picture, so the room moves as the reader walks down it — the same painting, the way a
-   book's plates take different parts of a single colour sheet. Nothing else changes: the
-   veil, the rule and the words are exactly where they were. */
-.record-founder-page .record-founder-plate:nth-of-type(2) { background-position: center 46%; }
-.record-founder-page .record-founder-plate:nth-of-type(3) { background-position: center 64%; }
-.record-founder-page .record-founder-plate:nth-of-type(4) { background-position: center 40%; }
-
-/* The count in the corner of each plate: a number, never a rank. Faint enough that it
-   never argues with the work, present enough that the four read as a sequence. */
-.record-founder-page .record-founder-plate .record-founder-number {
-  position: absolute;
-  top: .55rem;
-  right: 1rem;
+/* ── THE SMALL LINE ABOVE EVERY BAND ──────────────────────────────────────────── */
+.record-founder-kicker {
+  display: inline-block;
+  margin: 0 0 .9rem;
+  padding: .3rem .6rem;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
   font-family: var(--font-record-ui);
-  font-size: 2.2rem;
+  font-size: .66rem !important;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -.04em;
-  font-variant-numeric: tabular-nums;
-  color: rgb(var(--record-signal) / .3);
+  line-height: 1.4 !important;
+  letter-spacing: .14em;
+  text-transform: uppercase;
 }
-/* The title never runs under the count. */
-.record-founder-page .record-founder-plate h3 { padding-right: 2.6rem; }
-
-/* Her work is read, not scanned: the paragraphs on the plates get the leading a long
-   sentence needs on a phone, where most of this record is met. */
-.record-founder-page .record-founder-plate > p {
-  font-size: 1rem;
-  line-height: 1.72;
-  text-wrap: pretty;
-}
-@media (max-width: 639px) {
-  .record-founder-page .record-founder-plate { padding: 1.35rem 1.15rem 1.5rem; }
-  .record-founder-page .record-founder-plate .record-founder-number { top: .5rem; right: .9rem; font-size: 1.9rem; }
-}
-
-/* ── THE COMPANY, UNDER HER NAME, AS A HAIRLINE AND NOT A SLAB ───────────────────
-   This was a full record-red plate in wide-tracked capitals — the loudest furniture on the
-   record, standing directly under her name, so the second loudest thing on the founder's
-   page was a copyright line. A page written in honour of somebody's work should not open
-   with a warning label.
-
-   Now it is a hairline rule and two lines of small muted ink: the same weight as the
-   signature at the foot of a letter, which is what it is. Nothing about it changed except
-   how loudly it says itself. The full statement — held and published by, and where it is
-   made — is still printed in the imprint the page closes on, and again at the foot of the
-   record. */
-.record-founder-page .record-founder-cic {
-  margin-top: 2rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid rgb(var(--record-ink) / .16);
+/* On a painted or ink band the chip is dropped: yellow type is enough there, and a second
+   yellow block would make the small line louder than her name. */
+.record-founder-kicker-light {
+  padding: 0;
   background: none;
+  color: rgb(var(--record-signal));
+  letter-spacing: .16em;
 }
-.record-founder-page .record-founder-cic .record-founder-cic-line {
+
+/* ── THE OPENING ──────────────────────────────────────────────────────────────── */
+.record-founder-hero { border-bottom: 3px solid rgb(var(--record-signal)); }
+.record-founder-hero-inner {
+  max-width: 60rem;
+  margin: auto;
+  padding: 2.1rem 1.25rem 2.2rem;
+  text-align: center;
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .58) 0%, rgb(var(--record-ink) / .2) 46%, rgb(var(--record-ink) / .78) 100%);
+}
+.record-founder-name {
+  margin: 0;
+  color: rgb(var(--record-signal));
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 11vw, 5.6rem);
+  font-weight: 700;
+  line-height: .96;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  text-shadow: 0 3px 22px rgb(var(--record-ink) / .9);
+}
+.record-founder-hardline {
+  max-width: 30ch;
+  margin: 1.1rem auto 0;
+  color: rgb(var(--record-paper));
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 3.4vw, 1.5rem) !important;
+  font-weight: 700;
+  line-height: 1.24 !important;
+  text-transform: uppercase;
+  letter-spacing: .01em;
+  text-wrap: balance;
+  text-shadow: 0 2px 14px rgb(var(--record-ink) / .9);
+}
+.record-founder-hero .record-founder-quote {
+  max-width: 38ch;
+  margin: 1.5rem auto 0;
+  padding-left: .9rem;
+  border-left: 3px solid rgb(var(--record-signal));
+  color: rgb(var(--record-paper) / .94);
+  text-align: left;
+  text-shadow: 0 1px 12px rgb(var(--record-ink) / .85);
+}
+.record-founder-plate-signal {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .15rem .9rem;
+  margin-top: 1.3rem;
+  padding: .45rem .85rem;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-red));
   font-family: var(--font-record-ui);
   font-size: .7rem;
-  letter-spacing: .1em;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.record-founder-credit {
+  margin-top: 1rem;
+  color: rgb(var(--record-paper) / .72);
+  font-family: var(--font-record-ui);
+  font-size: .66rem !important;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+/* ── A PAPER SHEET LAID ON THE PAINTING ───────────────────────────────────────── */
+.record-founder-sheet {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 2.3rem 1.25rem 2.5rem;
+  background: rgb(var(--record-paper) / .97);
+  border-top: 3px solid rgb(var(--record-mark));
+  color: rgb(var(--record-ink));
+}
+.record-founder-sheet > * { max-width: 46rem; margin-inline: auto; }
+.record-founder-sheet > .record-founder-kicker { display: inline-block; }
+.record-founder-h2 {
+  margin: 0 0 1.1rem;
+  color: rgb(var(--record-red));
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8.4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.record-founder-lede {
+  max-width: 40ch;
+  margin: 0 0 1.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 3.6vw, 1.4rem) !important;
+  line-height: 1.32 !important;
+  color: rgb(var(--record-ink) / .92);
+  text-wrap: pretty;
+}
+
+/* ── THE ARGUMENT, IN THREE STEPS ─────────────────────────────────────────────── */
+.record-founder-argument {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.record-founder-argument li {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr);
+  gap: .15rem .85rem;
+  padding: 1.15rem 0;
+  border-top: 1px solid rgb(var(--record-ink) / .28);
+}
+.record-founder-argument li:last-child { border-bottom: 1px solid rgb(var(--record-ink) / .28); }
+.record-founder-argument-number {
+  color: rgb(var(--record-mark));
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.06em;
+}
+.record-founder-argument h3 {
+  margin: 0;
+  color: rgb(var(--record-red));
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: .005em;
+  text-transform: uppercase;
+}
+.record-founder-argument p {
+  margin: .4rem 0 0;
+  font-size: .95rem !important;
+  line-height: 1.66 !important;
+  color: rgb(var(--record-ink) / .88);
+  text-wrap: pretty;
+}
+.record-founder-slogan {
+  margin: 1.9rem auto 0;
+  padding-top: 1.15rem;
+  border-top: 2px solid rgb(var(--record-ink));
+  color: rgb(var(--record-red));
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 5.4vw, 2.1rem) !important;
+  font-weight: 800;
+  line-height: 1.08 !important;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+.record-founder-sources {
+  margin: .9rem auto 0;
+  color: rgb(var(--record-muted));
+  font-size: .78rem !important;
+  line-height: 1.6 !important;
+}
+.record-founder-sources a {
+  color: rgb(var(--record-red));
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+/* ── HER WORK, AS ONE PAINTED REGISTER ────────────────────────────────────────── */
+.record-founder-work {
+  margin: 0;
+  color: rgb(var(--record-paper));
+  background-color: rgb(var(--record-earth));
+  background-image:
+    linear-gradient(rgb(var(--record-earth) / .72) 0%, rgb(var(--record-earth) / .86) 46%, rgb(var(--record-earth) / .96) 100%),
+    var(--record-cover);
+  background-size: cover;
+  background-position: center 40%;
+  border-top: 3px solid rgb(var(--record-signal));
+}
+.record-founder-work-inner { max-width: 68rem; margin: auto; padding: 2.4rem 1.25rem 2.6rem; }
+.record-founder-work-title {
+  margin: 0 0 1.7rem;
+  color: rgb(var(--record-paper));
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7.4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -.025em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.record-founder-register {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.record-founder-register li {
+  position: relative;
+  padding: 1.3rem 0 1.4rem;
+  border-top: 1px solid rgb(var(--record-paper) / .28);
+}
+.record-founder-register li:last-child { border-bottom: 1px solid rgb(var(--record-paper) / .28); }
+.record-founder-register-number {
+  display: block;
+  margin-bottom: .45rem;
+  color: rgb(var(--record-signal));
+  font-family: var(--font-record-ui);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+}
+.record-founder-register h3 {
+  margin: 0;
+  padding-right: 2.5rem;
+  color: rgb(var(--record-signal));
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 4.4vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -.005em;
+  text-transform: uppercase;
+}
+.record-founder-register p {
+  max-width: 62ch;
+  margin: .55rem 0 0;
+  color: rgb(var(--record-paper) / .88);
+  font-size: .93rem !important;
+  line-height: 1.68 !important;
+  text-wrap: pretty;
+}
+
+/* ── THE HANDOVER: HER WORK ABOVE, OUR NAME BELOW ─────────────────────────────── */
+.record-founder-handover {
+  color: rgb(var(--record-paper));
+  background: rgb(var(--record-ink) / .95);
+  border-top: 3px solid rgb(var(--record-signal));
+}
+.record-founder-handover-inner { max-width: 68rem; margin: auto; padding: 2.4rem 1.25rem 2.6rem; }
+.record-founder-handover h2 {
+  margin: 0;
+  color: rgb(var(--record-paper));
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 9vw, 4.2rem);
+  font-weight: 800;
+  line-height: .98;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.record-founder-handover-by {
+  margin: .8rem 0 1.5rem;
+  color: rgb(var(--record-signal));
+  font-family: var(--font-record-ui);
+  font-size: clamp(.85rem, 3vw, 1.05rem) !important;
+  font-weight: 700;
+  line-height: 1.3 !important;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.record-founder-handover-copy p {
+  max-width: 58ch;
+  margin: 0 0 .9rem;
+  color: rgb(var(--record-paper) / .9);
+  font-size: .96rem !important;
+  line-height: 1.7 !important;
+  text-wrap: pretty;
+}
+.record-founder-handover-mark {
+  margin: 1.4rem 0 0;
+  padding-top: 1rem;
+  border-top: 2px solid rgb(var(--record-signal));
+  color: rgb(var(--record-signal));
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 4.4vw, 1.6rem) !important;
+  font-weight: 800;
+  line-height: 1.15 !important;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+}
+.record-founder-handover-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem 1.4rem;
+  margin-top: 1.3rem;
+}
+.record-founder-handover-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 2.75rem;
+  color: rgb(var(--record-paper));
+  font-size: .84rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--record-signal));
+  text-decoration-thickness: 2px;
+  text-underline-offset: .25em;
+}
+.record-founder-handover-main {
+  padding: .6rem .9rem;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink)) !important;
+  text-decoration: none !important;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.record-founder-handover-links a:focus-visible,
+.record-founder-cta-button:focus-visible { outline: 2px solid rgb(var(--record-signal)); outline-offset: 4px; }
+
+/* ── HER OWN TWO DOORS ────────────────────────────────────────────────────────── */
+.record-founder-links { display: grid; gap: .6rem; margin: 0 0 1.4rem; }
+.record-founder-links a {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: 1rem 1.1rem;
+  background: rgb(var(--record-bone));
+  border: 1px solid rgb(var(--record-ink) / .2);
+  border-left: 4px solid rgb(var(--record-mark));
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+}
+.record-founder-links a:hover { background: rgb(var(--record-signal) / .28); }
+.record-founder-links span {
+  font-family: var(--font-record-ui);
+  font-size: .66rem;
+  letter-spacing: .12em;
   text-transform: uppercase;
   color: rgb(var(--record-muted));
 }
-.record-founder-page .record-founder-cic a {
+.record-founder-links strong { font-size: .95rem; overflow-wrap: anywhere; }
+.record-founder-note {
+  margin: 0 0 .7rem;
+  color: rgb(var(--record-muted));
+  font-size: .82rem !important;
+  line-height: 1.65 !important;
+}
+
+/* ── THE CLOSING ──────────────────────────────────────────────────────────────── */
+.record-founder-close-band { border-top: 3px solid rgb(var(--record-signal)); }
+.record-founder-close-inner {
+  max-width: 46rem;
+  margin: auto;
+  padding: 2.2rem 1.25rem 2.3rem;
+  text-align: center;
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .6), rgb(var(--record-ink) / .3) 50%, rgb(var(--record-ink) / .82));
+}
+.record-founder-close-inner .record-founder-quote {
+  max-width: 26ch;
+  margin: 0 auto;
+  color: rgb(var(--record-paper));
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 6.4vw, 2.6rem) !important;
+  font-weight: 700;
+  line-height: 1.14 !important;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  text-wrap: balance;
+  text-shadow: 0 2px 16px rgb(var(--record-ink) / .9);
+}
+.record-founder-cta {
+  padding: 1.1rem 1.25rem 1.2rem;
+  background: rgb(var(--record-signal));
+  text-align: center;
+}
+.record-founder-cta-button {
   display: inline-flex;
   align-items: center;
-  margin-top: .2rem;
-  min-height: 44px;
+  gap: .55rem;
+  min-height: 3rem;
+  padding: .7rem 1.2rem;
+  background: rgb(var(--record-ink));
+  color: rgb(var(--record-paper));
   font-family: var(--font-record-ui);
-  font-size: .7rem;
-  letter-spacing: .1em;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: rgb(var(--record-ink));
-  text-decoration: underline;
-  text-decoration-color: rgb(var(--record-red) / .5);
-  text-underline-offset: .32em;
+  text-decoration: none;
 }
-.record-founder-page .record-founder-cic a:hover { text-decoration-color: rgb(var(--record-red)); }
-
-/* ── THE IMPRINT THE PAGE CLOSES ON ──────────────────────────────────────────────
-   Paper, not another dark slab: the reader has come through the room and arrives at the
-   sheet that says who holds it. Her honour line, one red rule, and the company. */
-.record-founder-page .record-founder-imprint { background: rgb(var(--record-paper)); }
-.record-founder-page .record-founder-imprint-honour {
-  font-family: var(--font-reading);
-  font-size: .95rem;
-  line-height: 1.65;
+.record-founder-cta p {
+  margin: .7rem 0 0;
+  color: rgb(var(--record-ink) / .8);
+  font-size: .74rem !important;
+  letter-spacing: .04em;
+}
+.record-founder-imprint {
+  padding: 1.9rem 1.25rem 2.2rem;
+  background: rgb(var(--record-paper));
+  text-align: center;
+  border-top: 3px solid rgb(var(--record-ink));
+}
+.record-founder-imprint-honour {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem !important;
+  line-height: 1.55 !important;
   color: rgb(var(--record-ink));
 }
-.record-founder-page .record-founder-imprint-rule {
+.record-founder-imprint-rule {
   display: block;
   width: 2.5rem;
   height: 2px;
-  margin: 1.15rem auto;
+  margin: 1.1rem auto;
   background: rgb(var(--record-mark));
 }
-.record-founder-page .record-founder-imprint-role {
+.record-founder-imprint-role {
   max-width: 34ch;
-  margin-inline: auto;
-  font-family: var(--font-record-ui);
-  font-size: .68rem;
-  line-height: 1.8;
-  letter-spacing: .14em;
-  text-transform: uppercase;
+  margin: 0 auto;
   color: rgb(var(--record-muted));
+  font-family: var(--font-record-ui);
+  font-size: .66rem !important;
+  line-height: 1.8 !important;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.record-founder-imprint-note {
+  max-width: 52ch;
+  margin: 1.1rem auto 0;
+  color: rgb(var(--record-muted));
+  font-size: .74rem !important;
+  line-height: 1.65 !important;
+}
+.record-founder-imprint-contact {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: .5rem;
+  color: rgb(var(--record-red));
+  font-family: var(--font-record-ui);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: .3em;
+}
+
+/* ── THE DESK ─────────────────────────────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .record-founder-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .record-founder-hero-inner { padding: 2.8rem 2.5rem 2.6rem; }
+  .record-founder-hero .record-founder-quote { font-size: 1.35rem !important; max-width: 42ch; }
+  .record-founder-sheet { margin-block: 1.3rem; padding: 2.6rem 2.6rem 2.8rem; }
+  .record-founder-argument li { grid-template-columns: 3rem minmax(0, 1fr) ; gap: 1.2rem; }
+  .record-founder-work-inner { padding: 2.8rem 2.6rem 3rem; }
+  .record-founder-register { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; }
+  .record-founder-register li:nth-child(2) { border-top: 1px solid rgb(var(--record-paper) / .28); }
+  .record-founder-register li:nth-last-child(2) { border-bottom: 1px solid rgb(var(--record-paper) / .28); }
+  .record-founder-handover-inner { padding: 3rem 2.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; align-items: start; }
+  .record-founder-handover h2 { grid-column: 1; }
+  .record-founder-handover-by { grid-column: 1; }
+  .record-founder-handover-copy { grid-column: 2; grid-row: 1 / span 3; }
+  .record-founder-handover-mark { grid-column: 1; }
+  .record-founder-handover-links { grid-column: 1 / -1; margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid rgb(var(--record-paper) / .2); }
+}
+
+@media print {
+  .record-founder-work { background: none; color: rgb(var(--record-ink)); border-color: rgb(var(--record-ink)); }
+  .record-founder-work :is(h2, h3, p, span) { color: rgb(var(--record-ink)) !important; }
+  .record-founder-handover { background: none; color: rgb(var(--record-ink)); }
+  .record-founder-handover :is(h2, p, a) { color: rgb(var(--record-ink)) !important; }
+  .record-founder-cta { display: none; }
 }
