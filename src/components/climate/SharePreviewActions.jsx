@@ -23,7 +23,33 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
   const [pasted, setPasted] = useState(false);
   const [error, setError] = useState('');
   const file = blob && typeof File === 'function' ? new File([blob], fileName, { type: blob.type || 'image/png' }) : null;
-  const canShareImage = !!(file && navigator.share && navigator.canShare?.({ files: [file] }));
+  // canShare throws in some browsers when it is handed files, and a throw here used to
+  // take the whole window down with it — so the picture was unreachable, not just unshareable.
+  const canShareImage = (() => {
+    if (!file || !navigator.share || typeof navigator.canShare !== 'function') return false;
+    try { return !!navigator.canShare({ files: [file] }); } catch { return false; }
+  })();
+
+  // ── THE PICTURE HAS TO BE OBTAINABLE EVERYWHERE ─────────────────────────────
+  // In the preview frame a download is blocked silently, and a plain <a download> on a
+  // phone that does not support it opens nothing at all. So the save is done by hand:
+  // the file is downloaded where that works, and where it cannot be, the card opens as
+  // a picture in its own tab, where a long press saves it to the camera roll.
+  const save = () => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const framed = window.self !== window.top;
+    const downloadWorks = 'download' in document.createElement('a');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    if (framed || !downloadWorks) window.open(url, '_blank', 'noopener');
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  };
   // Words can still go to any app on the phone even when the picture cannot — which is the
   // normal case on a desk, and inside a preview frame that is not allowed to share files.
   const canShareText = !!navigator.share;
@@ -81,7 +107,7 @@ export default function SharePreviewActions({ blob, fileName, link, headline, te
     {pasted && <p className="border-l-2 border-record-signal pl-3 text-[12px] leading-snug text-record-ink" role="status">Picture sent. The words are on your clipboard — paste them under it, because a chat drops the message when a picture travels with it.</p>}
 
     <div className="flex flex-wrap items-center justify-center gap-x-5">
-      <a href={imageUrl || undefined} download={fileName} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Download size={15} className="shrink-0" />Save image</a>
+      <button type="button" onClick={save} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Download size={15} className="shrink-0" />Save image</button>
       <button type="button" onClick={copy} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4">{copied ? <Check size={15} className="shrink-0" /> : <Copy size={15} className="shrink-0" />}{copied ? 'Copied' : includeMessage ? 'Copy words + link' : 'Copy link'}</button>
       {!canShareImage && canShareText && <button type="button" onClick={share} className="flex items-center gap-1.5 py-2 text-xs font-bold text-record-ink underline decoration-record-ink/25 underline-offset-4"><Share2 size={15} className="shrink-0" />Send words + link</button>}
     </div>

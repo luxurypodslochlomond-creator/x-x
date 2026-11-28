@@ -58,9 +58,15 @@ function loadImage(src) {
   });
 }
 
+// ── A CARD THAT WILL NOT DRAW IS WORSE THAN A CARD WITH NO PAINTING ────────────
+// The painting is fetched from the media host. When that fetch is refused — a strict
+// network, a blocked CDN, a phone on a bad line — this builder used to throw, the share
+// window never opened, and the reader was told the image could not be prepared. The
+// promise, the address and the mark are the part that has to survive a bad connection,
+// so the painting is now optional and the plate is still printed without it.
 export default async function buildRecordPlate(imageUrl) {
   const img = await loadImage(imageUrl);
-  if (!img || !img.width) throw new Error('This picture could not be opened. Please try again.');
+  const hasPicture = !!(img && img.width);
 
   const { DISPLAY, MONO, colors } = await loadRecordCardFonts();
 
@@ -78,8 +84,7 @@ export default async function buildRecordPlate(imageUrl) {
   measure.font = `400 ${whatSize}px ${DISPLAY}`;
   const whatLines = wrapLines(measure, WHAT_IT_IS, W - PAD * 2, 4);
 
-  const scale = W / img.width;
-  const pictureH = Math.round(img.height * scale);
+  const pictureH = hasPicture ? Math.round(img.height * (W / img.width)) : 0;
   const bandH = PAD + promiseLines.length * promiseLine + 18
     + whatLines.length * whatLine + 34 + footSize + PAD;
 
@@ -89,7 +94,13 @@ export default async function buildRecordPlate(imageUrl) {
   const ctx = canvas.getContext('2d');
 
   // The painting, whole, at the top — never cropped to fit the words.
-  ctx.drawImage(img, 0, 0, W, pictureH);
+  if (hasPicture) {
+    ctx.drawImage(img, 0, 0, W, pictureH);
+  } else {
+    // No painting: the record's own signal rule stands at the head instead.
+    ctx.fillStyle = colors.MARK || colors.RED || colors.INK;
+    ctx.fillRect(0, 0, W, 14);
+  }
 
   // The record's paper beneath it, and a hairline where the two meet.
   ctx.fillStyle = colors.PAPER;

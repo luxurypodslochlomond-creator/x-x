@@ -37,8 +37,17 @@ export const X_EQUALS_X_EVIDENCE = [
     href: 'https://wmo.int/publication-series/state-of-global-climate/state-of-global-climate-2025',
   },
   {
+    title: 'The deadliest harm is man-made too.',
+    field: '05 / Conflict',
+    published: '2026',
+    body: 'As 2026 begins, just over 239 million people are in urgent need of humanitarian assistance and protection. At least 56,000 civilians were killed in conflict between January and mid-October 2025, and three of every four civilian deaths in conflict happened in countries with a humanitarian plan. Conflict, not weather, is the main driver of that need.',
+    scope: 'UN planning figures and a verified minimum for a ten-month window. Not a death toll for all wars, and not a claim that conflict explains every crisis or that climate explains every war.',
+    source: 'UN OCHA · Global Humanitarian Overview 2026 · published December 2025',
+    href: 'https://humanitarianaction.info/document/global-humanitarian-overview-2026/article/trends-crises-and-needs-world-breaking-point',
+  },
+  {
     title: 'Public will is being underestimated.',
-    field: '05 / Collective power',
+    field: '06 / Collective power',
     published: '2025',
     body: 'A study published in 2025 asked 191 attendees at the 2024 UN Environment Assembly to estimate global willingness to contribute 1% of personal income to climate action. Their average estimate was 37%; the earlier global survey benchmark was 69%. In this sample, even people in environmental policy rooms underestimated the public’s stated willingness to act.',
     scope: 'A sample of assembly attendees, not the whole UN. The benchmark measures stated willingness, not donations made, and is not a new 2025 global poll.',

@@ -17,6 +17,7 @@ export default function FounderColumn() {
       </p>
       <p className="record-founder-plain">Her argument is practical: make the emergencies known, make the responses known, so people can act. Not another audience to build. Knowledge people can use.</p>
       <p className="record-founder-plain">This record puts technology and AI to that work. A machine’s answer is not proof: the source, the uncertainty and the correction must stay visible. The point is to make the harm harder to hide, not to make the reader easier to watch.</p>
+      <p className="record-founder-plain"><strong>Intelligence is not a licence to extract.</strong> A tool that learns from a person to sell them back to themselves is the same greed in a newer coat. Here, love outranks money, the record outranks the ranking, and nothing on this page is for sale.</p>
       <p className="record-founder-thread">
         <Link to="/ClimateCartoons/Francis">Francis Odupute</Link>, of the same paper, brings his drawings to the wall.
       </p>
