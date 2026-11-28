@@ -1,7 +1,7 @@
 import React from 'react';
 import FounderEvidenceRow from '@/components/climate/founder/FounderEvidenceRow';
 import FounderCompactLedger from '@/components/climate/founder/FounderCompactLedger';
-import { GLOBAL_EVIDENCE, HUMANITARIAN_EVIDENCE, POVERTY_EVIDENCE, WOMEN_EVIDENCE, MONEY_EVIDENCE } from '@/components/climate/founder/founderEvidence';
+import { GLOBAL_EVIDENCE, HUMANITARIAN_EVIDENCE, POVERTY_EVIDENCE, WOMEN_EVIDENCE, MONEY_EVIDENCE, CHINA_INDIA_EVIDENCE } from '@/components/climate/founder/founderEvidence';
 
 export default function FounderNumbers() {
   return (
@@ -11,10 +11,17 @@ export default function FounderNumbers() {
           <p className="record-founder-kicker record-founder-kicker-light">The harm · evidence checked 28 November 2026</p>
           <h2 id="founder-harm" className="record-founder-h2">This is not a future crisis.</h2>
           <p>Hunger. Unsafe water. Poverty. A heating planet. The connected concerns her life’s work confronts, at the scale the primary reports record.</p>
+          <p className="record-founder-order"><strong>The order is the argument.</strong> The world’s totals. Then the two largest countries, because they are always named first and are usually left out. Then the wars. Then poverty. Then the women and girls, who are counted last everywhere. Then what the money bought instead.</p>
         </header>
         <dl className="record-founder-evidence">
           {GLOBAL_EVIDENCE.map(item => <FounderEvidenceRow key={item.id} item={item} />)}
         </dl>
+        <FounderCompactLedger
+          kicker="The ledger · the two largest countries"
+          title="The harm is not only in the small places."
+          intro="Two countries, 2.8 billion people, and the figures that belong to each. What is printed is what each one reports — not what is assumed about it, and not what would make the page easier to write."
+          rows={CHINA_INDIA_EVIDENCE}
+        />
         <div className="record-founder-humanitarian-head">
           <p className="record-founder-kicker">People, not collateral</p>
           <h3>War is not a weather event.</h3>

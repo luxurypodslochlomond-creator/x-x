@@ -105,6 +105,27 @@ export const MONEY_EVIDENCE = [
   },
 ];
 
+// The two largest countries, and the figures that belong to each. They were the obvious
+// absence: a page about harm that leaves out 2.8 billion people is not a record, it is a
+// selection. What is printed is what each country reports, not what is assumed about it —
+// so China carries the emissions figure and the near-zeroes, both, and neither is hidden.
+export const CHINA_INDIA_EVIDENCE = [
+  {
+    id: 'china', value: '30%', unit: 'of the world’s fossil CO₂, 2025',
+    title: 'China · the largest emitter there is.',
+    claim: 'China released roughly 30% of the world’s fossil CO₂ in 2025, more than the United States and the European Union combined, and kept approving new coal capacity while doing it. The same country reports almost none of the harm on this page: extreme poverty at the international line ended in 2021, and undernourishment sits below 2.5%. Both things are true at once, and a record that prints only one of them is a leaflet.',
+    source: 'Global Carbon Budget 2025 · Global Carbon Project',
+    href: 'https://globalcarbonbudget.org/',
+  },
+  {
+    id: 'india', value: '2.1m', unit: 'deaths from air pollution, 2021',
+    title: 'India · the harm inside the border.',
+    claim: 'Air pollution was linked to about 2.1 million deaths in India in 2021, the largest toll of any country, and it comes from the same burning that heats the planet. India emits about a third of the world average per person — the country carrying the harm is not the country that caused most of it.',
+    source: 'State of Global Air 2024 · Health Effects Institute',
+    href: 'https://www.stateofglobalair.org/',
+  },
+];
+
 // War is not weather. These are people in need of assistance, not death tolls,
 // except where a toll is named as one.
 export const HUMANITARIAN_EVIDENCE = [

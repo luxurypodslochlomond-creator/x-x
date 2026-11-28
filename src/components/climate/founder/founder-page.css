@@ -40,17 +40,17 @@ html .climate-record[data-record-page="ClimateFounder"] .record-book { backgroun
 #record-founder .record-founder-evidence-head .record-founder-h2 { color: rgb(var(--record-signal)); max-width: 21ch; }
 #record-founder .record-founder-evidence-head > p:last-child { margin: 0; max-width: 65ch; }
 #record-founder .record-founder-evidence { margin: 0; }
-/* On a desk the ledger runs two abreast, so nine countries do not become nine screens.
-   Each row then stacks — the figure above its own sentence — because half a page is not
-   wide enough for a number and a paragraph side by side: the figure ran out of its column
-   and landed in the text, so "1,47" and "56,000+" were split by somebody else's words. */
+/* One figure per line, all the way down. Two abreast halved the scroll but gave every
+   figure half a page to live in, so the number ran out of its own column and landed in
+   the sentence beside it — "1,47" and "56,000+" split by somebody else's words. A ledger
+   is read one line at a time, so it is laid out one line at a time: a fixed column for
+   the figure on the left, the words taking all the rest. */
 @media (min-width: 1200px) {
-  #record-founder .record-founder-evidence { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3rem; }
-  #record-founder .record-founder-evidence-row { grid-template-columns: minmax(0, 1fr); gap: .5rem; padding: 1.2rem 0; }
-  #record-founder .record-founder-evidence-row dt strong { font-size: clamp(1.6rem, 1.9vw, 2.05rem); }
-  #record-founder .record-founder-evidence-row dt > span { max-width: none; margin-top: .3rem; }
-  #record-founder .record-founder-evidence-row h3 { margin-bottom: .4rem; font-size: 1.05rem; }
+  #record-founder .record-founder-evidence-row { grid-template-columns: 13rem minmax(0, 1fr); gap: 2.75rem; }
+  #record-founder .record-founder-evidence-row dt strong { font-size: clamp(1.9rem, 2.1vw, 2.35rem); }
 }
+#record-founder .record-founder-evidence-head .record-founder-order { max-width: 62ch; margin: 1rem 0 0; color: rgb(var(--record-paper) / .78); font-size: .8rem !important; line-height: 1.6 !important; }
+#record-founder .record-founder-evidence-head .record-founder-order strong { color: rgb(var(--record-signal)); }
 #record-founder .record-founder-evidence-row { display: grid; grid-template-columns: minmax(9rem, .7fr) minmax(0, 2fr); gap: 1.8rem; padding: 1.5rem 0; border-bottom: 1px solid rgb(var(--record-ink) / .32); }
 #record-founder .record-founder-evidence-row dt { min-width: 0; }
 #record-founder .record-founder-evidence-row dt strong { display: block; color: rgb(var(--record-red)); font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 700; line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; white-space: nowrap; }
