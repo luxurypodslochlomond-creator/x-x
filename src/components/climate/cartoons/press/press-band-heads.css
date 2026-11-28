@@ -1,0 +1,104 @@
+/* ── THE WALL, NAMED THE WAY x = x NAMES ITS BANDS ──────────────────────────────
+   Brian, 28 November: "doesn't have the coolasfuck as x = x sections… the red and caps and
+   the yellow… the x = x jumps out bro its coolasfuck… you sure can't do something with the
+   wall to give same feeling?"
+
+   He is right, and the difference is not decoration. On x = x every band is named the same
+   way: a small chip of the record's signal yellow, ink type in caps inside it, and under it
+   the band's name in the record's red — large, in the display face, in caps. THE PLANET IS
+   NOT CONTENT. TECHNOLOGY IN DEFENCE OF LIFE. Red name, yellow chip, paper. That pairing is
+   most of why that page jumps and the wall read like a brochure.
+
+   So the wall's chapters are named the same way now: the same chip, the same red, the same
+   caps, in the same order. Nothing about any chapter changed except how it says its name,
+   and the names are the room's own words — not one of them rewritten to sound bigger.
+
+   Kept off phones on purpose: at 390px a line of caps at this size is a shout with nowhere
+   to go, and the wall on a handset is walked along one drawing at a time. */
+@media screen and (min-width: 640px) {
+  /* ── THE CHIP: THE RECORD'S YELLOW, INK TYPE, CAPS ─────────────────────────── */
+  #root .record-cartoon-field .press-room .press-room-inner :is(
+    .press-eyebrow,
+    .comic-session-eyebrow,
+    .cartoon-programme-eyebrow,
+    .comic-anthology-eyebrow,
+    .cartoon-longread-kicker,
+    .cartoon-lineage-kicker
+  ) {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 0 0 .95rem;
+    padding: .34rem .62rem;
+    background: rgb(var(--record-signal));
+    color: rgb(var(--record-ink));
+    font-family: var(--font-record-ui);
+    font-size: .68rem !important;
+    font-weight: 700;
+    line-height: 1.35 !important;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-shadow: none;
+  }
+  /* The drawn mark riding inside the chip is the room's own, so it takes the ink. */
+  #root .record-cartoon-field .press-room .press-room-inner :is(
+    .press-eyebrow,
+    .comic-session-eyebrow,
+    .cartoon-programme-eyebrow,
+    .comic-anthology-eyebrow,
+    .cartoon-longread-kicker,
+    .cartoon-lineage-kicker
+  ) svg {
+    /* The drawn marks ride inside the chip, so they are sized to the type rather than to
+       the sheet: a 30-pixel drawing inside a 10-pixel label makes the label a box. */
+    width: 1.1em;
+    height: 1.1em;
+    color: rgb(var(--record-ink));
+  }
+
+  /* ── THE NAME: THE RECORD'S RED, IN CAPS, IN THE DISPLAY FACE ──────────────── */
+  #root .record-cartoon-field .press-room .press-room-inner :is(
+    .press-wall-title,
+    .comic-section-title,
+    .comic-session-title,
+    .comic-anthology-title,
+    .cartoon-lineage-title,
+    .cartoon-programme-title,
+    .room-new-head
+  ) {
+    /* The room printed every chapter name on a block of solid yellow. That was the right
+       instinct — it is the record's own colour doing the naming — but two yellow blocks
+       stacked (chip over heading) is a highlighter, and x = x settles it the other way
+       round: the small line wears the yellow, the name is red and in caps on the paper.
+       So the plate comes off the heading and stays on the chip above it, which is the
+       pairing that makes x = x jump. */
+    display: inline-block;
+    width: fit-content;
+    margin-bottom: .55rem;
+    padding: 0;
+    background: transparent;
+    color: rgb(var(--record-red));
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 2.5vw, 2.9rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.02 !important;
+    letter-spacing: -.02em !important;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  /* The wall's own name is the loudest of them, because it is the room. */
+  #root .record-cartoon-field .press-room .press-room-inner .press-wall-title {
+    font-size: clamp(2.3rem, 3.3vw, 3.9rem) !important;
+    letter-spacing: -.028em !important;
+  }
+  /* The one heading that is a whole sentence is set a step down, so a reader meets it as a
+     sentence rather than as a shout across the room. */
+  #root .record-cartoon-field .press-room .press-room-inner #cartoon-your-turn {
+    font-size: clamp(1.5rem, 1.9vw, 2.1rem) !important;
+  }
+  /* The line under a name stays the room's ordinary reading voice: the caps are the name,
+     never the paragraph under it. */
+  #root .record-cartoon-field .press-room .press-room-inner :is(.press-wall-line, .comic-why-list > li) {
+    text-transform: none;
+  }
+}

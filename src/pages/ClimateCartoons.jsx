@@ -26,6 +26,8 @@ import '@/components/climate/cartoons/press/press-desktop-ground.css';
 // The desk treatment of the wall itself — the drawings hanging on the painting, two across.
 // Last, so it is the rule that wins over the chapter-sheet geometry above it.
 import '@/components/climate/cartoons/press/press-wall-wide.css';
+// The room's chapters named the way x = x names its bands: red caps, yellow chip.
+import '@/components/climate/cartoons/press/press-band-heads.css';
 
 export default function ClimateCartoons() {
   return (
