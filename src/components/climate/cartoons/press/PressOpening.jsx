@@ -26,6 +26,13 @@ export default function PressOpening() {
     <section className="press-opening" aria-labelledby="press-room-title">
       <div className="press-opening-words">
         <header className="press-opening-masthead">
+          {/* ── THE RECORD'S YELLOW, ABOVE THE NAME ─────────────────────────────────
+              Brian, 28 November: "give the wall the same coolasfuck treatment too bro".
+              Every room that opens in the painting now signs itself the same way — a short
+              bar of the record's signal, then the room's name in the display face. The wall
+              had the name and the cover and not the bar, so it stood beside those rooms
+              rather than in them. One line, one bar: the room is signed before it is named. */}
+          <p className="press-kicker">The record · the cartoon room</p>
           <h1 id="press-room-title" className="press-title">The Wall</h1>
           <p className="press-standfirst">Drawn by hand. Hung on the wall.</p>
           {/* ── WHEN AND WHERE, IN ONE LINE, AT THE TOP ─────────────────────────────

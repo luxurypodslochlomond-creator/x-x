@@ -78,3 +78,44 @@
   padding-bottom: 1px;
 }
 #root .record-cartoon-field .press-room .press-wall-print a:hover { color: rgb(var(--record-ink)); border-bottom-color: rgb(var(--record-ink)); }
+
+/* ── 5. THE ROOM SIGNS ITSELF THE WAY EVERY PAINTED ROOM DOES ───────────────────
+   Brian, 28 November: "give the wall the same coolasfuck treatment too bro". The
+   founder's page, the method, the roll, the seals, the music and the machine's hand all
+   open with the same gesture — a short bar of the record's signal over a small line in
+   caps, then the name in the display face. The wall had the name and the cover but not
+   the bar, so it read as a room beside the record instead of a room of it. This is that
+   gesture, at the same size and in the same place, and the way out at the foot gets the
+   same plate of yellow the other painted rooms give it. */
+#root .record-cartoon-field .press-room .press-opening-masthead .press-kicker {
+  position: relative;
+  margin: 0 0 .9rem;
+  padding-top: .7rem;
+  font-family: var(--font-record-ui);
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+}
+#root .record-cartoon-field .press-room .press-opening-masthead .press-kicker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.6rem;
+  height: 3px;
+  background: currentColor;
+}
+
+#root .record-cartoon-field .press-room .record-room-return a {
+  padding: .55rem .9rem;
+  border-radius: 2px;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}

@@ -26,6 +26,7 @@ const ink = { color: 'rgb(var(--record-red))', textDecoration: 'underline' };
 export default function ClimateCartoonsWhatThisIs() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="The cartoon room · in plain words"
       title="What this is"
       statement="Three lines, then the difference between a website and a wall."

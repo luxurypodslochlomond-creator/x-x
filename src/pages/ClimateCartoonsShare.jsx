@@ -79,6 +79,7 @@ export default function ClimateCartoonsShare() {
 
   return (
     <ClimateRecordShell
+      painted
       eyebrow="The cartoon room · words to carry it"
       marker="One picture, the words for every place, one address"
       title="Words for wherever you send it"

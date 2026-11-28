@@ -38,6 +38,7 @@ export default function ClimateCartoonPresent() {
 
   return (
     <ClimateRecordShell
+      painted
       eyebrow="The cartoon room · for the presenter"
       marker="Sunday 29 November · share this window, not the whole screen"
       title="The drawings, in the order of the hour"

@@ -16,6 +16,7 @@ import '@/components/climate/cartoons/plain/plain-sheet.css';
 export default function ClimateCartoonsCAIB() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="The cartoon room · two names, two things"
       title="CAIB and this record"
       statement="CAIB is Francis's. This record is Janine's brief. Here is exactly where the line is."
