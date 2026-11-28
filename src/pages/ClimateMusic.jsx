@@ -134,6 +134,7 @@ export default function ClimateMusic() {
   return (
     <>
     <ClimateRecordShell
+      painted
       eyebrow="The record's music"
       marker="Given to the record · never sold · no plays counted, no cut taken"
       title="FORK"

@@ -46,6 +46,7 @@ export default function ClimateRoll() {
   return (
     <ClimateRecordShell
       className="record-room-veiled"
+      painted
       eyebrow="THE RECORD"
       marker="The roll · who keeps this record honest"
       title="The people who check this record"

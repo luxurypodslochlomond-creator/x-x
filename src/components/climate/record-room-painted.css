@@ -1,0 +1,201 @@
+/* ── A ROOM THAT OPENS IN THE PAINTING ─────────────────────────────────────────
+   Brian, 28 November: "can you do same for method, BASE 1, roll and seals please bro
+   and music … only if you want bro took our breath away there".
+
+   The founder's page and x = x open in a painted band: the picture as the ground, the
+   name in the record's display face, a small line above it in the record's signal yellow,
+   and the reading laid on a paper sheet so the painting breathes between the bands.
+
+   Every other room of the record shares one shell — the back bar, an intro, a content
+   card, a way back — and that intro was a flat sheet of paper with a 16-pixel chip on it.
+   So the same painting that stands behind the whole record was, in those rooms, simply
+   not there: the page began with a heading on white.
+
+   This is the one hand, applied to the rooms that opt in with `painted` on the shell. It
+   changes nothing about what a room holds: the intro already carries a marker, a name and
+   a statement, and those three are now printed the way the founder's opening prints them.
+   Colour stays meaning, never decoration — the yellow is the record's signal line, the red
+   is the record's mark, and nothing else is invented. */
+html .climate-record .record-book:has(.record-room-painted) {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.climate-record.record-connected-shell.record-room-painted .record-room-intro {
+  max-width: none;
+  margin: 0;
+  padding: 2.6rem clamp(1rem, 6vw, 7rem) 1.9rem;
+  color: rgb(var(--record-paper));
+  background-color: rgb(var(--record-ink));
+  background-image:
+    linear-gradient(180deg, rgb(var(--record-ink) / .52), rgb(var(--record-ink) / .16) 46%, rgb(var(--record-ink) / .8)),
+    var(--record-cover);
+  background-size: cover;
+  background-position: center 32%;
+  border-bottom: 3px solid rgb(var(--record-signal));
+}
+
+/* The mark, as a solid plate of the record's signal — the same mass the kind stamps use,
+   so the room is signed before it is named. */
+.climate-record.record-connected-shell.record-room-painted .record-room-intro > svg {
+  padding: .7rem;
+  border-radius: 0;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  box-shadow: none;
+}
+
+/* The small line above the name: the record's yellow, in caps, with the short bar the
+   founder's opening wears. */
+.climate-record.record-connected-shell.record-room-painted .record-room-intro small {
+  position: relative;
+  margin: 1rem 0 1rem;
+  padding-top: .7rem;
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+}
+.climate-record.record-connected-shell.record-room-painted .record-room-intro small::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.6rem;
+  height: 3px;
+  background: currentColor;
+}
+
+.climate-record.record-connected-shell.record-room-painted .record-room-intro h1 {
+  max-width: 22ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6.2vw, 5rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: .04em;
+  text-transform: none;
+  color: rgb(var(--record-paper));
+  text-shadow: 0 2px 18px rgb(var(--record-ink) / .9);
+  text-wrap: balance;
+}
+
+.climate-record.record-connected-shell.record-room-painted .record-room-intro p {
+  margin-top: 1.1rem;
+  max-width: 58ch;
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  line-height: 1.6;
+  color: rgb(var(--record-paper) / .92);
+  text-shadow: 0 1px 10px rgb(var(--record-ink) / .85);
+  text-wrap: pretty;
+}
+
+.climate-record.record-connected-shell.record-room-painted .record-room-intro > a {
+  gap: .45rem;
+  margin-top: 1.3rem;
+  padding: .5rem .8rem;
+  border: 2px solid rgb(var(--record-paper) / .5);
+  border-radius: 2px;
+  color: rgb(var(--record-paper));
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.climate-record.record-connected-shell.record-room-painted .record-room-intro > a:hover {
+  border-color: rgb(var(--record-signal));
+  color: rgb(var(--record-signal));
+}
+
+/* ── THE READING, ON A SHEET LAID ON THE PAINTING ─────────────────────────────── */
+.climate-record.record-connected-shell.record-room-painted .record-room-body { padding: 0; }
+.climate-record.record-connected-shell.record-room-painted .record-room-content {
+  max-width: 68rem;
+  margin: 1.15rem auto 1.4rem;
+  padding: 2.2rem clamp(1rem, 3vw, 2.4rem) 2.4rem;
+  border: 0;
+  border-top: 3px solid rgb(var(--record-mark));
+  border-radius: 0;
+  background: rgb(var(--record-paper) / .98);
+  box-shadow: none;
+}
+
+/* The way back and the line under it stand on the painting, so they are set to be read
+   there: the door in the record's signal, the sentence in paper. */
+.climate-record.record-connected-shell.record-room-painted .record-room-return {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 3vw, 2.4rem) 1.4rem;
+}
+.climate-record.record-connected-shell.record-room-painted .record-room-return a {
+  padding: .55rem .9rem;
+  border-radius: 2px;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.climate-record.record-connected-shell.record-room-painted .record-room-footnote {
+  padding-bottom: 2.2rem;
+  color: rgb(var(--record-paper) / .8);
+  text-shadow: 0 1px 8px rgb(var(--record-ink) / .9);
+}
+
+@media (max-width: 639px) {
+  .climate-record.record-connected-shell.record-room-painted .record-room-intro {
+    padding: 2rem 1rem 1.5rem;
+  }
+  .climate-record.record-connected-shell.record-room-painted .record-room-content {
+    margin-top: 0;
+    padding: 1.5rem 1rem 2rem;
+  }
+}
+
+/* ── THE METHOD'S OWN OPENING ──────────────────────────────────────────────────
+   The method keeps its own head inside the page (it carries the two jumps a sceptic
+   needs first), so it is not the shell's intro — but it is the same room, and it is set
+   in the same hand: the yellow kicker, then the name in the record's display face. Its
+   dark plate over the painting is left exactly as it is; only the lettering changes. */
+.record-method-page .record-method-kicker {
+  position: relative;
+  margin: 0 0 1rem;
+  padding-top: .7rem;
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+}
+.record-method-page .record-method-kicker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.6rem;
+  height: 3px;
+  background: currentColor;
+}
+.record-method-page .record-method-intro h1 {
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: .03em;
+  text-wrap: balance;
+}
+.record-method-page .record-method-intro > p {
+  max-width: 58ch;
+}
+.record-method-page .record-method-intro a {
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+}

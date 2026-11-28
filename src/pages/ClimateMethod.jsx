@@ -32,6 +32,7 @@ export default function ClimateMethod() {
       footer="Together we can change the course of climate change. Built in honour of Janine M. H. Selendy and Horizon International — and released to the world, the planet, all of us."
     >
       <header className="record-method-intro p-4 lg:p-6">
+        <p className="record-method-kicker">The record · how it is made</p>
         <h1 className="max-w-xl text-[30px] font-bold leading-[1.1] tracking-tight lg:text-[42px]">How we check. What we correct.</h1>
         <p className="mt-4 max-w-2xl text-[16px] leading-[1.7] text-record-muted">The method explains the checks. The corrections show what changed. Sources, responsibility and mistakes, in one place.</p>
         <div className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-sm font-bold text-record-red">

@@ -166,6 +166,7 @@ export default function ClimateSeals() {
   return (
     <ClimateRecordShell
       className="record-room-veiled"
+      painted
       eyebrow="The seal"
       marker="Checked in your browser, not on our server"
       title="A fingerprint on every entry"

@@ -4,11 +4,16 @@ import { ArrowRight } from 'lucide-react';
 import RecordBackBar from '@/components/climate/RecordBackBar';
 import { MarkEqual } from '@/components/climate/RecordFootMarks';
 import { markFor } from '@/components/climate/pageMarks';
+import '@/components/climate/record-room-painted.css';
 
-export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, showReturn = true, compact = false, mobileCompact = false, wide = false, onBack, backLabel, className = '', children }) {
+// `painted` opens the room in the record's painting — the founder's hand: the picture as
+// the ground, the name in the record's display face, the small line above it in the
+// record's yellow, the reading on a paper sheet. Opted into room by room, so no other
+// page of the record changes.
+export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title, statement, returnTo, returnLabel, footer, showReturn = true, compact = false, mobileCompact = false, wide = false, painted = false, onBack, backLabel, className = '', children }) {
   const { pathname } = useLocation();
   const Icon = markFor(pathname);
-  return <div dir={dir} data-compact={compact} data-mobile-compact={mobileCompact} className={`climate-record record-page-shell record-connected-shell relative text-record-ink ${className}`}>
+  return <div dir={dir} data-compact={compact} data-mobile-compact={mobileCompact} className={`climate-record record-page-shell record-connected-shell relative text-record-ink ${painted ? 'record-room-painted' : ''} ${className}`}>
     <RecordBackBar eyebrow={eyebrow} fallback={returnTo} onBack={onBack} label={backLabel} />
     {!compact && <header className="record-room-intro">
       <Icon size={30} aria-hidden="true" />
