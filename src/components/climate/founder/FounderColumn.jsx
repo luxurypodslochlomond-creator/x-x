@@ -1,18 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// ── HER OWN WORDS, WHICH WERE ALWAYS THE BRIEF ──────────────────────────────────
-// Brian, 28 November: "her August article in Nigerian Observer is the key she said… don't
-// make about us about her bro."
-//
-// He is right, and it is the difference between a founder's page and a company page. In that
-// column she wrote the specification herself: spread knowledge of the emergencies AND of the
-// work being done, on the phones already in everybody's hands, so people gain hope and do
-// what they can. That is not our idea borrowed. It is hers, in print, in August 2026.
-//
-// So the quote is the heading. No preamble, no adjectives, no "our mission". One line under
-// it says the only thing worth adding: the harm travels at the speed of a phone, so the
-// evidence and the answers must travel at that speed too.
+// Her published argument and the record's response are deliberately separate.
 const COLUMN = 'https://nigerianobservernews.com/2026/08/the-changing-course-of-climate-change/';
 
 export default function FounderColumn() {
@@ -26,7 +15,8 @@ export default function FounderColumn() {
         <span>Janine M. H. Selendy</span>
         <a href={COLUMN} target="_blank" rel="noopener noreferrer">Read the column ↗<span className="sr-only"> (opens a new tab)</span></a>
       </p>
-      <p className="record-founder-plain">Her figure for the phones already in people’s hands: 5.86 billion. Her column, as printed in August, said 7.4 billion; she settled on 5.86 on 27 November.</p>
+      <p className="record-founder-plain">Her argument is practical: make the emergencies known, make the responses known, so people can act. Not another audience to build. Knowledge people can use.</p>
+      <p className="record-founder-plain">This record puts technology and AI to that work. A machine’s answer is not proof: the source, the uncertainty and the correction must stay visible. The point is to make the harm harder to hide, not to make the reader easier to watch.</p>
       <p className="record-founder-thread">
         <Link to="/ClimateCartoons/Francis">Francis Odupute</Link>, of the same paper, brings his drawings to the wall.
       </p>

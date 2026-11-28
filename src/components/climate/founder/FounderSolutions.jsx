@@ -8,19 +8,19 @@ import React from 'react';
 const WORKING = [
   {
     place: 'Burkina Faso',
-    title: 'Plastic is money',
+    title: 'Women turning waste into livelihoods',
     body: 'Women and youth of the NEERE group weave discarded plastic into cloth for clothes and bags.',
     source: 'https://www.unep.org/youngchampions/news/story/weaving-brighter-future-plastic-burkina-faso',
   },
   {
     place: 'The Sahara',
-    title: 'Six thousand bottles',
+    title: 'Shelter in a Sahrawi refugee camp',
     body: 'Tateh Lehbib built his grandmother a shelter using 6,000 discarded bottles in a Sahrawi refugee camp.',
     source: 'https://www.globalcitizen.org/en/content/plastic-bottle-houses-sahrawi-refugees-algeria/',
   },
   {
     place: 'Plymouth & the Solent',
-    title: 'Eight hectares',
+    title: 'Restoring seagrass habitat',
     body: 'Seagrass restoration work across eight hectares, reported by the Ocean Conservation Trust in November 2024. An area worked on, not a claim that every plant survived.',
     source: 'https://oceanconservationtrust.org/success-for-englands-largest-seagrass-restoration-project/',
   },
@@ -36,8 +36,8 @@ export default function FounderSolutions() {
   return (
     <section className="record-founder-sheet record-founder-sheet-bone" aria-labelledby="founder-solutions">
       <p className="record-founder-kicker">The response · her examples</p>
-      <h2 id="founder-solutions" className="record-founder-h2">Work already underway.</h2>
-      <p className="record-founder-lede">Her own examples, place by place. Each heading opens the account behind it.</p>
+      <h2 id="founder-solutions" className="record-founder-h2">The people doing something about it.</h2>
+      <p className="record-founder-lede">Examples she chose for her August column. Not a substitute for cutting fossil-fuel dependence, protecting rights or providing essential public services. Work to learn from, with the people and places still attached.</p>
       <ol className="record-founder-working">
         {WORKING.map(({ place, title, body, source }) => (
           <li key={place}>

@@ -1,26 +1,24 @@
 import React from 'react';
 import RecordPaintedBand from '@/components/climate/RecordPaintedBand';
 
-// ── HER PAGE OPENS THE WAY THE RECORD DOES ──────────────────────────────────────
-// Brian, 28 November: "founder page lifeless bro… doesn't do Janine any justice… needs to be
-// coolasfuck like record and x=x". He was right, and the fault was that the page opened with
-// a filing label and a 40-pixel beacon instead of the one thing that makes her undeniable:
-// a fifteen-year-old coming up through oil and never once looking away from it.
-//
-// So the opening is the record's own opening: the painting, her name set at the size a name
-// is set, one hard line underneath it, and her sentence quoted in her own words with the
-// yellow plate under it the way the record plates a voice it is quoting. No adjectives about
-// her. The fact is louder than any adjective could be.
+// Her recollection stays her words. The painting is revealed by the page's own
+// transparent book, rather than buried under the shared paper and two ink veils.
 export default function FounderOpening() {
   return (
     <RecordPaintedBand continuous className="record-founder-hero">
       <div className="record-founder-hero-inner">
-        <p className="record-founder-kicker">The founder · Beirut</p>
-        <h1 className="record-founder-name">Janine M.<br className="hidden sm:block" />{' '}H. Selendy</h1>
-        <blockquote className="record-founder-quote">
-          “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
-        </blockquote>
-        <p className="record-founder-credit">Horizon International · at Yale University</p>
+        <div className="record-founder-nameplate">
+          <p className="record-founder-kicker record-founder-kicker-light">The founder · in defence of life</p>
+          <h1 className="record-founder-name"><span>Janine M. H.</span><span>Selendy</span></h1>
+          <p className="record-founder-credit">Founder, Horizon International</p>
+        </div>
+        <figure className="record-founder-first-voice">
+          <blockquote className="record-founder-quote">
+            “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
+          </blockquote>
+          <figcaption>Janine’s recollection · Beirut, aged fifteen</figcaption>
+        </figure>
+        <p className="record-founder-painting-credit">Painting made for the record with BASE 1 (AI).</p>
       </div>
     </RecordPaintedBand>
   );

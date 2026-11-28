@@ -10,9 +10,8 @@ import FounderClosing from '@/components/climate/founder/FounderClosing';
 import '@/components/climate/founder/founder-page.css';
 import '@/components/climate/founder/founder-mobile.css';
 
-// Her page in six beats: the moment, her own argument, what it costs, what is already
-// working, what she built, and her own doors. Her voice carries it; our name appears once,
-// at the foot, where a credit belongs.
+// Janine's voice, a dated primary-source evidence ledger, and the work behind it.
+// This page does not make the independent evidence compilation her words.
 export default function ClimateFounder() {
   return (
     <div id="record-founder" className="record-founder-page relative min-h-screen font-body text-record-ink">
