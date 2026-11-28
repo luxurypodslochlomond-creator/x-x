@@ -7,7 +7,25 @@
 .wall-seventeen { display: inline-flex; flex-shrink: 0; align-items: baseline; gap: .15rem; font: 900 2.3rem/.9 var(--font-record-ui); letter-spacing: -.1em; }
 .wall-seventeen > span { font-size: .55rem; letter-spacing: 0; color: rgb(var(--record-red)); }
 #root .record-cartoon-field .press-room .wall-continuous { --wall-nav-height: 4.8rem; }
-#root .record-cartoon-field .press-room .wall-continuous .wall-event-notice { margin-block: .85rem; padding: 1.15rem; grid-template-columns: 8rem minmax(0, 1fr); align-items: center; border-left: 5px solid rgb(var(--record-red)); }
+#root .record-cartoon-field .press-room .wall-continuous .wall-event-notice {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.1rem;
+  margin-block: .85rem; padding: clamp(1rem, 1.6vw, 1.6rem);
+  align-items: start; border: 0; border-top: 4px solid rgb(var(--record-red));
+  border-bottom: 1px solid rgb(var(--record-ink) / .25); background: rgb(var(--record-paper));
+}
+#root .record-cartoon-field .press-room .wall-event-plate { margin: 0; }
+#root .record-cartoon-field .press-room .wall-event-cover { display: block; width: 100%; padding: 0; border: 0; background: rgb(var(--record-bone)); cursor: zoom-in; }
+#root .record-cartoon-field .press-room .wall-event-cover img { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; }
+#root .record-cartoon-field .press-room .wall-event-cover span { display: block; padding: .35rem .6rem; background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); font: 750 .7rem/1.2 var(--font-record-ui); letter-spacing: .06em; text-transform: uppercase; }
+#root .record-cartoon-field .press-room .wall-event-credit { margin: .4rem 0 0; font-size: .7rem; color: rgb(var(--record-muted)); }
+#root .record-cartoon-field .press-room .wall-event-band { display: grid; gap: .5rem; align-content: start; }
+#root .record-cartoon-field .press-room .wall-event-band .wall-event-kicker { margin: 0; font: 750 .7rem/1.5 var(--font-record-ui); letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--record-red)); }
+#root .record-cartoon-field .press-room .wall-event-band .wall-event-name { margin: 0; font: 800 clamp(1.6rem, 2.6vw, 2.7rem)/1.04 var(--font-record-ui); letter-spacing: -.035em; color: rgb(var(--record-ink)); }
+#root .record-cartoon-field .press-room .wall-event-band .wall-event-host { margin: 0; font: 650 1rem/1.45 var(--font-record-ui); color: rgb(var(--record-ink)); }
+#root .record-cartoon-field .press-room .wall-event-band .wall-event-when { margin: 0; font: 400 .92rem/1.6 var(--font-record-ui); color: rgb(var(--record-muted)); }
+@media (min-width: 900px) {
+  #root .record-cartoon-field .press-room .wall-continuous .wall-event-notice { grid-template-columns: minmax(13rem, 22rem) minmax(0, 1fr); gap: clamp(1.2rem, 2.4vw, 2.4rem); }
+}
 #root .press-room .wall-event-cover { position: relative; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 #root .press-room .wall-event-cover span { display: block; padding: .3rem; background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); font-size: .7rem; font-weight: 750; }
 #root .press-room .wall-event-notice .wall-event-name { margin-top: .35rem; font-size: clamp(1.4rem, 2.1vw, 2.1rem); line-height: 1.1; color: rgb(var(--record-red)); }

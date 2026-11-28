@@ -1,38 +1,56 @@
 import React, { useState } from 'react';
-import WallCoverViewer from '@/components/climate/cartoons/WallCoverViewer';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
+import WallCoverViewer from '@/components/climate/cartoons/WallCoverViewer';
 import { CARTOON_EVENT, CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 import { buildWorkshopCard, WORKSHOP_CARD } from '@/components/climate/cartoons/workshopCard';
 import { recordAddress } from '@/components/climate/recordAddress';
 
+// ── THE INVITATION, SET AS A PLATE RATHER THAN A CARD ─────────────────────────
+// It was a six-rem thumbnail in a cream box with a column of small grey lines beside it:
+// a listing, not an invitation, and the cover — a real drawing by the man who edits the
+// book — was the smallest thing in the room.
+//
+// So the cover is printed at the width a print deserves, the words are set as the record
+// sets its own bands (red caps, a rule, then the name), and the one thing a person does
+// with this — send it on — is a single line rather than a row of buttons. Nothing was
+// added that the room could not already prove: the hour, the host, the place, the credit.
 export default function WallEventNotice() {
   const [looking, setLooking] = useState(false);
-  // ── THE HOST'S JOINING DETAILS, ON THE CARD ────────────────────────────────
-  // The card said "joining link and passcode: supplied by the host" and there was nowhere
-  // on the wall to supply them, so the card could never carry the thing Alina asked for.
-  // Whoever holds the Zoom pastes it here; it is printed on the card they share and it is
-  // never sent to the record — it lives in this box until the page is closed.
+  // The host's joining details, pasted once by whoever holds the Zoom. Printed on the card
+  // they share; never sent to the record, never stored, gone when the page closes.
   const [join, setJoin] = useState('');
+
   return <aside className="wall-event-notice" aria-label="The biennial and Janine’s climate hour">
-    <button type="button" className="wall-event-cover" onClick={() => setLooking(true)} aria-label="Enlarge the catalogue cover by Francis Umendu Odupute"><img src={CARTOON_COVER} alt="CartoonAFRICA’s catalogue cover, drawn by Francis Umendu Odupute" decoding="async" /><span>Enlarge</span></button>
-    <div><p className="wall-event-kicker">CartoonAFRICA · Benin City · {CARTOON_EVENT.when}</p>
-      <p className="wall-event-name">{CARTOON_EVENT.title}</p>
-      <p className="wall-event-host">Online workshop led by Janine Selendy · part of CartoonAFRICA at the National Museum, Benin City</p>
-      <p>Sunday 29 November · 9am EST · 2pm UK · 3pm West Africa · online</p>
-      <p className="wall-event-note">The host supplies the joining link. Add it to your own invite before sharing.</p>
-      <div className="wall-event-actions"><Link to="/ClimateWorkshop">The hour and the people</Link><Link to="/ClimateCartoons/Share">Add joining details</Link>
-        <ShareCardButton compact entry={{ ...WORKSHOP_CARD, join }} build={buildWorkshopCard} label="Share the picture" icon={ArrowRight} includeMessage link={recordAddress('/ClimateWorkshop')} description={CARTOON_EVENT.shareLine} alt={`The CartoonAFRICA workshop invitation. ${CARTOON_EVENT.coverArt}.`} />
-      </div>
-      <details className="wall-event-join">
-        <summary>Joining details for the invite</summary>
-        <p className="wall-event-note">Paste the host’s Zoom link and passcode. They are printed on the card you share and are never sent to the record or stored.</p>
-        <textarea value={join} onChange={(event) => setJoin(event.target.value)} rows={3} placeholder="Join here: https://… · passcode: …" aria-label="Joining link and passcode from the host" />
-        <p className="wall-event-note">{join.trim() ? 'These words will be printed on the card.' : 'Empty, the card says the joining details come from the host.'}</p>
-      </details>
+    <div className="wall-event-plate">
+      <button type="button" className="wall-event-cover" onClick={() => setLooking(true)} aria-label="Open the catalogue cover full size">
+        <img src={CARTOON_COVER} alt="CartoonAFRICA’s catalogue cover, drawn by Francis Umendu Odupute" decoding="async" />
+        <span>Open full size</span>
+      </button>
       <p className="wall-event-credit">{CARTOON_EVENT.coverArt}</p>
     </div>
+
+    <div className="wall-event-band">
+      <p className="wall-event-kicker">CartoonAFRICA · National Museum, Benin City · {CARTOON_EVENT.when}</p>
+      <p className="wall-event-name">{CARTOON_EVENT.title}</p>
+      <p className="wall-event-host">Online workshop led by Janine Selendy · Horizon International, Yale</p>
+      <p className="wall-event-when">Sunday 29 November · 2pm UK · 9am EST · 3pm West Africa · one hour · free · no account</p>
+
+      <div className="wall-event-actions">
+        <Link to="/ClimateWorkshop">The hour, written down</Link>
+        <Link to="/ClimateCartoons/Share">The words for wherever you send it</Link>
+        <ShareCardButton compact entry={{ ...WORKSHOP_CARD, join }} build={buildWorkshopCard} label="Send the invitation" icon={ArrowRight} includeMessage link={recordAddress('/ClimateWorkshop')} description={CARTOON_EVENT.shareLine} alt={`The CartoonAFRICA workshop invitation. ${CARTOON_EVENT.coverArt}.`} />
+      </div>
+
+      <details className="wall-event-join">
+        <summary>Add the host’s Zoom link and passcode</summary>
+        <p className="wall-event-note">Printed on the card you send, and nowhere else. It is never sent to the record and never stored.</p>
+        <textarea value={join} onChange={(event) => setJoin(event.target.value)} rows={3} placeholder="Join here: https://… · passcode: …" aria-label="Joining link and passcode from the host" />
+        <p className="wall-event-note">{join.trim() ? 'These words will be printed on the card.' : 'Left empty, the card says the joining details come from the host.'}</p>
+      </details>
+    </div>
+
     {looking && <WallCoverViewer onClose={() => setLooking(false)} />}
   </aside>;
 }
