@@ -33,25 +33,28 @@ import '@/components/climate/cartoons/wall-navigation.css';
 const IN_ROOM = [
   { n: '01', href: '#press-wall', label: 'Drawings', line: 'Everything on the wall, whole and signed', Mark: MarkDrawings },
   { n: '02', href: '#cartoon-why-title', label: 'Why a cartoon', line: 'The case for a pen over a graph', Mark: MarkArgument },
-  { n: '03', href: '#cartoon-goals', label: 'Seventeen goals', line: 'The wall counted against them, the blanks printed', Mark: MarkCounted },
-  { n: '04', href: '#cartoon-your-turn', label: 'Take part', line: 'Send one — it goes up under your name', Mark: MarkTakePart },
-  { n: '05', href: '#press-book', label: 'The book', line: 'The biennial, its editors, the three days', Mark: MarkBook },
-  { n: '06', href: '#press-world', label: 'Cartoonists before these', line: 'Who drew power first, and where', Mark: MarkRing },
+  // The case for the joke, which is the argument under the three lines above: the record's
+  // own figures, and why a drawing gets a person through a door a figure cannot open.
+  { n: '03', href: '#cartoon-humour', label: 'The laugh is the door', line: 'Why a joke gets in where a figure cannot', Mark: MarkArgument },
+  { n: '04', href: '#cartoon-goals', label: 'Seventeen goals', line: 'The wall counted against them, the blanks printed', Mark: MarkCounted },
+  { n: '05', href: '#cartoon-your-turn', label: 'Take part', line: 'Send one — it goes up under your name', Mark: MarkTakePart },
+  { n: '06', href: '#press-book', label: 'The book', line: 'The biennial, its editors, the three days', Mark: MarkBook },
+  { n: '07', href: '#press-world', label: 'Cartoonists before these', line: 'Who drew power first, and where', Mark: MarkRing },
 ];
 
 const OUT_OF_ROOM = [
-  { n: '07', href: '/ClimateCartoons/Print', label: 'Print a show', line: 'Choose drawings, print them, hang them', Mark: MarkContactSheet, page: true },
-  { n: '08', href: '/ClimateCartoons/Thread', label: 'Read them in order', line: 'The whole wall, one drawing after another', Mark: MarkInOrder, page: true },
-  { n: '09', href: '/ClimateCartoons/Francis', label: 'One hand’s own page', line: 'Francis, and every hand’s own address', Mark: MarkOneHand, page: true },
-  { n: '10', href: '/ClimateCartoons/CAIB', label: 'Where this stands', line: 'The line between CAIB and this record', Mark: MarkTwoEdges, page: true },
-  { n: '11', href: '/ClimateCartoons/WhatThisIs', label: 'What this is', line: 'Your work and your rights, in plain words', Mark: MarkRoom, page: true },
+  { n: '08', href: '/ClimateCartoons/Print', label: 'Print a show', line: 'Choose drawings, print them, hang them', Mark: MarkContactSheet, page: true },
+  { n: '09', href: '/ClimateCartoons/Thread', label: 'Read them in order', line: 'The whole wall, one drawing after another', Mark: MarkInOrder, page: true },
+  { n: '10', href: '/ClimateCartoons/Francis', label: 'One hand’s own page', line: 'Francis, and every hand’s own address', Mark: MarkOneHand, page: true },
+  { n: '11', href: '/ClimateCartoons/CAIB', label: 'Where this stands', line: 'The line between CAIB and this record', Mark: MarkTwoEdges, page: true },
+  { n: '12', href: '/ClimateCartoons/WhatThisIs', label: 'What this is', line: 'Your work and your rights, in plain words', Mark: MarkRoom, page: true },
   // ── THE DOOR THE ROOM WAS MISSING ────────────────────────────────────────────
   // The map has carried every drawing since it was built — a layer of its own, each one
   // standing at the country that gave it, and each one opening back onto the wall — and the
   // wall had no way of saying so. So a reader who wanted to see where these came from had to
   // already know the map existed. It is a door out of the room now, on the list, where a
   // reader looks for the ways out.
-  { n: '12', href: '/ClimateMap', label: 'Where they were drawn', line: 'Every drawing, standing at the country that gave it', Mark: MarkWhere, page: true },
+  { n: '13', href: '/ClimateMap', label: 'Where they were drawn', line: 'Every drawing, standing at the country that gave it', Mark: MarkWhere, page: true },
 ];
 
 const WAYS_IN = IN_ROOM.length + OUT_OF_ROOM.length;

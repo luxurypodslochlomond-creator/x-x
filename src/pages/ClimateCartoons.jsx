@@ -6,6 +6,7 @@ import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand
 import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
+import CartoonHumour from '@/components/climate/cartoons/CartoonHumour';
 import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonLongRead from '@/components/climate/cartoons/CartoonLongRead';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
@@ -74,6 +75,16 @@ export default function ClimateCartoons() {
             a visitor has at the end of a wall: why am I looking at drawings on a climate
             record? Straight after the drawings is where that question is actually asked. */}
         <CartoonWhy />
+
+        {/* ── 2b · THE CASE FOR THE JOKE ───────────────────────────────────────────────
+            Francis sent DELIAH's session — "How can humour inspire action?", given at his own
+            biennial on 28 November — and Brian asked the right question of it: could this
+            room make its own case rather than point at somebody else's? It sits directly
+            under the three lines above, because those three lines are the claim and this is
+            the argument for it: the record's own figures, what a drawing does that a figure
+            cannot, the honest edge of the whole idea, and the one thing this room can do for
+            the people who drew the wall for nothing. */}
+        <CartoonHumour />
 
         {/* ── 3 · THE GOALS, BACK IN THE OPEN ─────────────────────────────────────────
             Brian, 28 November: "were UN GOALS bro thought they were coolasfuck… where did

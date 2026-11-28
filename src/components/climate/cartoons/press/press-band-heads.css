@@ -24,7 +24,8 @@
     .comic-anthology-eyebrow,
     .cartoon-longread-kicker,
     .cartoon-lineage-kicker,
-    .cartoon-goals-eyebrow
+    .cartoon-goals-eyebrow,
+    .cartoon-humour-eyebrow
   ) {
     display: inline-flex;
     align-items: center;
@@ -49,7 +50,8 @@
     .comic-anthology-eyebrow,
     .cartoon-longread-kicker,
     .cartoon-lineage-kicker,
-    .cartoon-goals-eyebrow
+    .cartoon-goals-eyebrow,
+    .cartoon-humour-eyebrow
   ) svg {
     /* The drawn marks ride inside the chip, so they are sized to the type rather than to
        the sheet: a 30-pixel drawing inside a 10-pixel label makes the label a box. */

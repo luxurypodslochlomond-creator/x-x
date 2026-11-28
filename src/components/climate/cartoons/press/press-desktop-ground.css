@@ -111,5 +111,5 @@
   #root .record-cartoon-field .press-room .cartoon-lineage-doors a:first-child { background: none; padding-inline: 0; text-decoration: underline; color: rgb(var(--record-red)); }
   #root .record-cartoon-field .press-room .cartoon-lineage-odoi { border-left-width: 1px; background: rgb(var(--record-bone)); }
   #root .record-cartoon-field .press-room .comic-sources { max-width: none; }
-  #root .record-cartoon-field .press-room :is(#press-wall, #cartoon-strip, #press-book, #cartoon-your-turn, #cartoon-why-title, #cartoon-goals) { scroll-margin-top: 18rem; }
+  #root .record-cartoon-field .press-room :is(#press-wall, #cartoon-strip, #press-book, #cartoon-your-turn, #cartoon-why-title, #cartoon-humour, #cartoon-goals) { scroll-margin-top: 18rem; }
 }

@@ -1028,7 +1028,7 @@
 }
 
 /* ── the masthead pins, so a jump down must clear it ────────────────────────── */
-.press-room :is(#press-wall, #cartoon-strip, #press-book, #cartoon-your-turn, #cartoon-why-title) {
+.press-room :is(#press-wall, #cartoon-strip, #press-book, #cartoon-your-turn, #cartoon-why-title, #cartoon-humour) {
   scroll-margin-top: 6.5rem;
 }
 
