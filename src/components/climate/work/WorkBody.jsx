@@ -6,6 +6,7 @@ import WorkDoors from '@/components/climate/work/WorkDoors';
 import WorkScale from '@/components/climate/work/WorkScale';
 import WorkMoney from '@/components/climate/work/WorkMoney';
 import WorkClose from '@/components/climate/work/WorkClose';
+import WorkShare from '@/components/climate/work/WorkShare';
 import '@/components/climate/work/work-page.css';
 
 // ── ONE SHEET, FOR JANINE ─────────────────────────────────────────────────────
@@ -39,6 +40,7 @@ export default function WorkBody() {
       <WorkScale />
       <WorkMoney />
       <WorkClose />
+      <WorkShare />
     </div>
   );
 }

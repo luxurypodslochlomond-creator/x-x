@@ -64,7 +64,17 @@ function loadImage(src) {
 // window never opened, and the reader was told the image could not be prepared. The
 // promise, the address and the mark are the part that has to survive a bad connection,
 // so the painting is now optional and the plate is still printed without it.
-export default async function buildRecordPlate(imageUrl) {
+// ── THE SAME PLATE, FOR A PAGE THAT IS NOT THE FRONT ONE ──────────────────────
+// Brian, 28 November: "can the page be sent as a coolasfuck share card to her once you're
+// finished?" A page that can only be sent as a bare address is a page that arrives as a
+// blue line in a chat. So the plate takes the words it should carry, and every other page
+// that wants a card of its own uses the same paper, the same rule and the same mark —
+// rather than a second card being drawn somewhere else and drifting away from this one.
+export default async function buildRecordPlate(imageUrl, overrides = {}) {
+  const promise = overrides.promise || PROMISE;
+  const whatItIs = overrides.whatItIs || WHAT_IT_IS;
+  const address = overrides.address || printedAddress();
+
   const img = await loadImage(imageUrl);
   const hasPicture = !!(img && img.width);
 
@@ -79,10 +89,10 @@ export default async function buildRecordPlate(imageUrl) {
   const measure = document.createElement('canvas').getContext('2d');
 
   measure.font = `700 ${promiseSize}px ${DISPLAY}`;
-  const promiseLines = wrapLines(measure, PROMISE, W - PAD * 2, 3);
+  const promiseLines = wrapLines(measure, promise, W - PAD * 2, 3);
 
   measure.font = `400 ${whatSize}px ${DISPLAY}`;
-  const whatLines = wrapLines(measure, WHAT_IT_IS, W - PAD * 2, 4);
+  const whatLines = wrapLines(measure, whatItIs, W - PAD * 2, 5);
 
   const pictureH = hasPicture ? Math.round(img.height * (W / img.width)) : 0;
   const bandH = PAD + promiseLines.length * promiseLine + 18
@@ -127,7 +137,7 @@ export default async function buildRecordPlate(imageUrl) {
   // The address on the left, so it can be read and typed with no signal at all.
   ctx.fillStyle = colors.INK;
   ctx.font = `400 ${footSize}px ${MONO}`;
-  ctx.fillText(printedAddress(), PAD, y);
+  ctx.fillText(address, PAD, y);
 
   // The mark on the right, in the record's red — the one line the whole thing rests on.
   ctx.fillStyle = colors.RED || colors.INK;

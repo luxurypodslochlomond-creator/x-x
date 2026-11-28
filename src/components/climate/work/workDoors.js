@@ -45,9 +45,15 @@ export const DOOR_GROUPS = [
     note: 'This is the part Janine has been building towards for thirty years, and it is now a room she can walk into.',
     doors: [
       { name: 'The record', line: 'Climate solutions, crises and actions, each dated, sourced and signed. Nothing sold, nothing ranked.', to: '/TogetherChangeClimate' },
-      { name: 'The Wall', line: 'Thirty-two drawings by thirteen hands, each with the artist named and the drawing kept after the exhibition comes down.', to: '/ClimateCartoons' },
+      { name: 'The Wall', line: 'Thirty-two drawings by thirteen hands, each credited to the hand that made it and kept after the exhibition comes down.', to: '/ClimateCartoons' },
       { name: 'Photo51', line: 'A photograph of litter picked becomes a token, and the tokens are meant to become food, essentials and kit for the people doing the picking.', to: '/NewCleanup' },
-      { name: 'P2P Food Rescue', line: 'Surplus food moved between food banks directly, over mesh, with the design published for anybody to build.', to: '/P2PFoodRescue' },
+      // ── A DESIGN, NOT A SERVICE ──
+      // Brian, 28 November, reading this page before sending it: "when click on links to p2p
+      // Mesh's and papers etc feels really odd you sure bit talking bullshit". He was right.
+      // The line described a running network. What exists is a published design, and the door
+      // says so now, because the one thing this page cannot afford is a sentence that turns out
+      // to be a hope when the person reading it opens the door.
+      { name: 'P2P Food Rescue', line: 'A design rather than a running service: surplus food moved between food banks directly over mesh, published in full so anybody can build it.', to: '/P2PFoodRescue' },
       { name: 'Aletheia', line: 'A question asked, an answer given, and the source beside every sentence of it.', to: '/Aletheia' },
     ],
   },

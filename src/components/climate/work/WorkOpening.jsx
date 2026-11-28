@@ -18,6 +18,16 @@ export default function WorkOpening() {
         the money that keeps it alive is printed in the open beside it, so the reader can check
         both.
       </p>
+      {/* ── THE HEAT, SAID ONCE AND NOT SHOUTED ──
+          Brian, 28 November: "we know planet needing help it's fucked bri she knows it so want
+          to be activist feeling cause that's who we are". She does know. So the page does not
+          tell her the planet is in trouble; it says the one thing she has not been able to say,
+          which is that the counting is not the problem. */}
+      <p>
+        Nobody reading this needs to be told how bad it is. Janine has been counting it for
+        thirty years and the count has not improved. What is missing is not more alarm. It is a
+        place where the alarm can be checked, and where the hand that did the work is named.
+      </p>
       <p>
         Two years of work went into making that true rather than saying it. Some of the result
         is a tool a person can use tonight. Some of it is a room a child can walk into without

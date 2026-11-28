@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// The tongue count is read from the list itself rather than typed in, so it cannot drift
+// away from the thing it describes. It said 225 and the list holds 223.
+import { TONGUE_EN } from '@/components/climate/tongueNames';
 
 // ── 04 · WHAT IT COULD BECOME AT HER SCALE ────────────────────────────────────
 // Three arguments, and they are arguments rather than claims. The figures are the ones
@@ -33,7 +36,7 @@ const ARGUMENTS = [
     ],
     figures: [
       { n: '1', l: 'source beside every sentence, or the sentence does not stand' },
-      { n: '225', l: 'tongues the record names in their own words, with the English name beside each' },
+      { n: String(Object.keys(TONGUE_EN).length), l: 'tongues the record names in their own words, with the English name beside each' },
       { n: '0', l: 'answers the reader is asked to take on trust' },
     ],
     source: 'The record’s own search and answer pages, built on the same entry set as the wire',
@@ -48,7 +51,7 @@ const ARGUMENTS = [
       'It is an experiment and it is described as one. It is not a coin sale, there is nothing to speculate on, and no reader is ever asked to buy a position. But the question underneath it is serious, and it is the question her whole field is circling: the money that moves for the planet currently moves through instruments and intermediaries, and almost none of it reaches the hand that did the work. This asks whether it can.',
     ],
     figures: [
-      { n: '$650B', l: 'of green bonds issued in 2025, every one of them needing an intermediary to verify it' },
+      { n: '$653.5B', l: 'of green bonds issued in 2025, almost every one of them needing a third party to vouch for it' },
       { n: '1kg', l: 'of litter = 1 token, with the photograph, the place and the time kept as evidence' },
       { n: '£0', l: 'taken from anybody to date. The ledger is built and standing empty, in public' },
     ],
