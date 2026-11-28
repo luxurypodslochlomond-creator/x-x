@@ -68,5 +68,7 @@
    over a photograph, never on the photograph itself.
    Scoped to .record-room-veiled on purpose: it is these two rooms tonight, and one class
    added to any other shell the day it wants the same room. */
-.record-connected-shell.record-room-veiled .record-room-intro { background: transparent; }
-.record-connected-shell.record-room-veiled .record-room-content { background: rgb(var(--record-paper) / .25); }
+/* 28 November: the veil was a whisper of paper over the painting, and it read as neither —
+   a translucent sheet is a room that has not decided. Both rooms now open in the painting
+   itself, the way the founder's page does, so the two rules that drew the veil have no
+   selector left wearing them and are gone. Kept in the record as what was tried first. */

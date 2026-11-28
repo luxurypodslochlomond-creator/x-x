@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { base44 } from '@/api/base44Client';
 import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 import PersonOnTheRoll from '@/components/climate/roll/PersonOnTheRoll';
+import RollCounts from '@/components/climate/roll/RollCounts';
 import RollOwnLine from '@/components/climate/roll/RollOwnLine';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import { buildCheckerShareCard } from '@/components/climate/roll/checkerCard';
@@ -45,7 +46,6 @@ export default function ClimateRoll() {
 
   return (
     <ClimateRecordShell
-      className="record-room-veiled"
       painted
       eyebrow="THE RECORD"
       marker="The roll · who keeps this record honest"
@@ -93,13 +93,15 @@ export default function ClimateRoll() {
 
       {data && (
         <>
-          {/* The facts of the list itself, which need no one's permission to be true. */}
-          <p className="font-mono text-[11px] leading-[1.7] text-record-muted">
-            {totals.on_list || 0} {totals.on_list === 1 ? 'person holds' : 'people hold'} a place on this list ·{' '}
-            {totals.keepers || 0} {totals.keepers === 1 ? 'holds' : 'hold'} the keys ·{' '}
-            {totals.signed || 0} {totals.signed === 1 ? 'entry' : 'entries'} signed
-            {totals.signers ? ` · by ${totals.signers} ${totals.signers === 1 ? 'person' : 'people'}` : ''}
-          </p>
+          {/* The facts of the list itself, which need no one's permission to be true —
+              and set the way the seal sets its own: three figures in the record's display
+              face, ruled beside each other, in the record's yellow. */}
+          <RollCounts totals={totals} />
+          {totals.signers ? (
+            <p className="mt-2 font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-record-signal">
+              signed by {totals.signers} {totals.signers === 1 ? 'person' : 'people'}
+            </p>
+          ) : null}
 
           {/* ── WHY A KEEPER'S NAME CAN BE ON A PAGE ABOUT CHECKING ───────────────
               The founder asked, and it is a fair question: if this is the volunteers'
