@@ -1,0 +1,47 @@
+/* ── THE WORKSHOP'S SENTENCE, IN THE COVER'S OWN COLOURS ──────────────────────
+   Taken from Francis Umendu Odupute's catalogue cover: deep green, a bright red
+   block with cream knocked out of it, and black for the connective words. Scoped to
+   this one heading so the record's own red and ink keep doing everything else. */
+.wall-poster-title {
+  display: grid;
+  gap: .14em;
+  max-width: 24ch;
+  font-family: var(--font-record-ui);
+  line-height: .98;
+}
+
+.wall-poster-line { display: block; line-height: 1; }
+
+.wall-poster-line--green {
+  color: #1a521a;
+  font-size: clamp(1.65rem, 2.35vw, 2.45rem);
+  font-weight: 900;
+  letter-spacing: -.045em;
+  text-transform: uppercase;
+}
+
+.wall-poster-line--quiet {
+  color: rgb(var(--record-ink));
+  font-size: clamp(.7rem, .82vw, .84rem);
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+/* The one move that carries the poster: white on red, tight to the words. */
+.wall-poster-line--red {
+  justify-self: start;
+  margin-block: .1em;
+  padding: .07em .3em .12em;
+  background: #e60000;
+  color: #fffacd;
+  font-size: clamp(1.35rem, 2vw, 2.1rem);
+  font-weight: 900;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+}
+
+@media print {
+  .wall-poster-line--red { background: #e60000 !important; color: #fffacd !important; }
+  .wall-poster-line--green { color: #1a521a !important; }
+}

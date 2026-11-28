@@ -28,7 +28,6 @@
   #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-notice { grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem; margin-block: .8rem; padding: 1.1rem 1.4rem; }
   #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-cover img { height: 14rem; max-height: none; object-fit: contain; }
   #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-band { gap: .4rem; }
-  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-name { max-width: 52ch; font-size: clamp(1.5rem, 1.8vw, 2rem); line-height: 1.12; }
   #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-actions { gap: .3rem 1rem; margin: 0; }
   #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-join { margin-top: 0; padding-top: 0; }
 

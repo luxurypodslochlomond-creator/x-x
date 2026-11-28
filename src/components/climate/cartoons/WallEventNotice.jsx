@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Maximize2 } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import WallCoverViewer from '@/components/climate/cartoons/WallCoverViewer';
+import WallPosterTitle from '@/components/climate/cartoons/WallPosterTitle';
 import { CARTOON_EVENT, CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
 import { buildWorkshopCard, WORKSHOP_CARD } from '@/components/climate/cartoons/workshopCard';
 import { recordAddress } from '@/components/climate/recordAddress';
@@ -33,7 +34,7 @@ export default function WallEventNotice() {
 
     <div className="wall-event-band">
       <p className="wall-event-kicker">CartoonAFRICA · National Museum, Benin City · {CARTOON_EVENT.when}</p>
-      <p className="wall-event-name">{CARTOON_EVENT.title}</p>
+      <WallPosterTitle />
       <p className="wall-event-host">Online workshop led by Janine Selendy · Horizon International, Yale</p>
       <p className="wall-event-when">Sunday 29 November · 2pm UK · 9am EST · 3pm West Africa · one hour · free · no account</p>
 
