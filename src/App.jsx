@@ -209,6 +209,10 @@ const ClimateCartoonsPage = React.lazy(() => import('./pages/ClimateCartoons'));
 const ClimateCartoonSheetPage = React.lazy(() => import('./pages/ClimateCartoonSheet'));
 // The short door to one drawing: /w/rain-check, a name a person can say out loud.
 const ClimateCartoonShortPage = React.lazy(() => import('./pages/ClimateCartoonShort'));
+// ── A SHORT DOOR TO "HELP THIS ONE" ──
+// The offer link reached Janine's inbox as four broken lines. /help/<hand> is the same
+// offer, sayable and printable, and it resolves the hand against the wall itself.
+const ClimateHelpShortPage = React.lazy(() => import('./pages/ClimateHelpShort'));
 const ClimateCartoonArtistPage = React.lazy(() => import('./pages/ClimateCartoonArtist'));
 // One hand's own address — Francis Umendu Odupute, who started the biennial, drew its cover
 // and edits its book, and whose new work needs somewhere on the record to show the world.
@@ -496,6 +500,12 @@ const AuthenticatedApp = () => {
           drawing now also answers to its own title: /w/rain-check, /w/keeping-it-cool.
           The long address keeps working, and /wall opens the room. */}
       <Route path="/w/:slug" element={<ClimateCartoonShortPage />} />
+      {/* ── HELP ONE HAND, IN ONE LINE ──
+          /help/francis-umendu-odupte opens the offer with that artist's name already in it.
+          The long query address still works — this is a short door in front of it, so a link
+          can be read out loud, printed, or pasted into an email without breaking in four. */}
+      <Route path="/help/:artist" element={<ClimateHelpShortPage />} />
+      <Route path="/help/:artist/:work" element={<ClimateHelpShortPage />} />
       <Route path="/wall" element={<Navigate to="/ClimateCartoons" replace />} />
       <Route path="/ClimateCartoons/Artist/:name" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonArtistPage /></ClimateLayout>} />
       {/* Francis's own page. Written by hand rather than generated from the wall, because a
