@@ -13,8 +13,7 @@ import '@/components/climate/cartoons/press/press-phone.css';
 import '@/components/climate/cartoons/press/press-workshop.css';
 import '@/components/climate/cartoons/baseone/base-one.css';
 import '@/components/climate/cartoons/press/press-desktop-ground.css';
-// The desk treatment of the wall itself — the drawings hanging on the painting, two across.
-// Last, so it is the rule that wins over the chapter-sheet geometry above it.
+// Desktop composition and equal artwork tiles; phone swipe layout stays separate.
 import '@/components/climate/cartoons/press/press-wall-wide.css';
 // The room's chapters named the way x = x names its bands: red caps, yellow chip.
 import '@/components/climate/cartoons/press/press-band-heads.css';

@@ -77,7 +77,7 @@ export const CARTOON_PROGRAMME = {
       name: 'Climate change and the power of collective actions and creative interventions',
       time: 'Sunday 29 November · 3pm West Africa (2pm UK)',
       detail: 'A virtual workshop led by Janine Selendy, founder of Horizon International at Yale University.',
-      link: { label: 'The hour itself, written down', href: '/ClimateWorkshop', internal: true },
+      link: { label: 'Janine’s draft agenda', href: '/ClimateWorkshop#workshop-agenda', internal: true },
     },
     {
       n: '04',

@@ -165,8 +165,8 @@ export default function CartoonSessionBand() {
         <p className="record-meta">{ALINA}</p>
         <p className="comic-session-attrib record-meta">In CEEW’s own words, written to introduce her at the workshop.</p>
       </details>
-      <Link to="/ClimateWorkshop" className="comic-session-link">
-        The hour itself, written down <span aria-hidden="true">→</span>
+      <Link to="/ClimateWorkshop#workshop-agenda" className="comic-session-link">
+        Janine’s draft agenda <span aria-hidden="true">→</span>
       </Link>
     </section>
   );

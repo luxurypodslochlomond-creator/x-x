@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowLeft, ArrowRight, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, X, ZoomIn, ZoomOut } from 'lucide-react';
 import CartoonArtwork from '@/components/climate/cartoons/CartoonArtwork';
 import CartoonCaption from '@/components/climate/cartoons/CartoonCaption';
 import useBodyScrollLock from '@/hooks/useBodyScrollLock';
@@ -91,7 +91,7 @@ export default function CartoonCloseReading({ cartoons, index, onTurn, onClose }
       onKeyDown={(event) => { if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); turn(event.key === 'ArrowRight' ? 1 : -1); } }}>
       <div className="cartoon-close-top">
         <p aria-live="polite">{cartoon.title || cartoon.artist_name}<span>{cartoon.artist_name} · the human wall</span></p>
-        <button type="button" onClick={() => setZoomed(!zoomed)} aria-pressed={zoomed}>{zoomed ? 'Fit drawing' : 'Enlarge'}</button>
+        <button type="button" onClick={() => setZoomed(!zoomed)} aria-pressed={zoomed} aria-label={zoomed ? 'Fit drawing to screen' : 'Enlarge drawing'} title={zoomed ? 'Fit drawing to screen' : 'Enlarge drawing'}>{zoomed ? <ZoomOut size={22} aria-hidden="true" /> : <ZoomIn size={22} aria-hidden="true" />}</button>
         <button type="button" onClick={onClose} aria-label="Close drawing and return to the wall" autoFocus><X size={22} /></button>
       </div>
       <div className="cartoon-close-scroll" ref={scroll}>

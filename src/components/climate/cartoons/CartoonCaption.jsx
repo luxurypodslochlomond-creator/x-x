@@ -42,7 +42,7 @@ export default function CartoonCaption({ cartoon, instant = false, onNavigate })
           entry={cartoon}
           build={buildDrawingShareCard}
           label="Share this drawing"
-          icon={false}
+          iconOnly
           description={drawingShareLine(cartoon)}
           includeMessage
           windowTitle="Share this drawing"

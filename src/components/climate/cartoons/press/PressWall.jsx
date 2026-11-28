@@ -6,7 +6,7 @@ import PressSheet from '@/components/climate/cartoons/press/PressSheet';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
-import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
+import WallDrawingHead from '@/components/climate/cartoons/WallDrawingHead';
 
 // The wall, unchanged in what it does: the same published drawings, the same order, the
 // same close-reading viewer, the same keeper strip, the same "more from the wall". Only
@@ -53,62 +53,7 @@ export default function PressWall({ visible = true }) {
 
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">
-      <header className="press-wall-head">
-        {/* The wall names itself with the mark drawn for it: a line with two drawings
-            pegged to it and one space still empty. Not a brick wall — a wall is also the
-            thing that keeps people out, and this one is the opposite. */}
-        {/* ── THE CHAPTER NAMED LIKE A CHAPTER OF x = x, NOT LIKE A SECTION OF A WEBSITE ──
-            Brian, 28 November: "the peoples pages sounds a bit weak bro… seen it before bro…
-            not as punchy and coolasfuck as x = x sections… feels like we're nursery children
-            trying to create activist coolasfuck."
-
-            "The people's pages" was the weakest kind of title: a category, true of any site
-            with contributors on it, saying nothing a reader could not have guessed. It also
-            undersold what is actually hanging here — working cartoonists answering power
-            with a pen, in countries where that is not a safe hobby. So the chapter says the
-            claim instead of the category, in the shape this record already uses for its own
-            name: not a feed, a record.
-
-            And the second go, later the same night: "doesn't feel coolasfuck for some reason
-            bro… the words feel like accountant wrote them." Right again. "Not decoration. An
-            argument." is a diagram of a sentence: two nouns and a bit of cleverness, and it
-            never names anybody. What this room actually argues is narrower and angrier — a
-            drawing is the one thing power cannot buy, ban or bury, because it costs nothing
-            to make and it travels in a pocket. So the chapter says that, in the trade's own
-            two words. The press and the pen. */}
-        <p className="press-eyebrow">CartoonAFRICA · CEEW’s What On Earth! · contributing artists</p>
-        <h2 id="press-wall-title" className="press-wall-title">The drawings.</h2>
-        <CartoonSignal />
-        <p className="press-wall-line">Look closer at any drawing. Its artist, source and sharing options stay with it.</p>
-        {/* "Read the picture. Stay with the idea. Tap any drawing to look closer." stood here,
-            and it was the last instruction in a stack of them: tap this, swipe that, read
-            those in order. A reader knows how to look at a picture, and a wall that explains
-            itself three times reads as a user guide with drawings in it. The swipe line
-            stays, because on a phone it says something a reader genuinely cannot guess. */}
-        {/* On a phone the wall is walked along, so it says so out loud: the record never
-            asks a reader to guess that something slides. Hidden on the desk, where the
-            drawings already run down the page. */}
-        {/* The old line promised "every drawing at the width it was drawn", which was true and
-            was the fault: a tall strip became two screens and a wide one a band. Every plate is
-            one size now, so the line says what a reader will actually meet. */}
-        <p className="press-wall-line press-wall-swipe">Swipe along the wall — every drawing the same size, the hand named under it.</p>
-        {/* The ↗ has come off this one: that arrow means "this leaves the site", and this
-            link stays inside the room. Every other borrowed arrow was taken out of this room
-            for the same reason, and one left behind is the sort of detail a reader notices
-            without being able to say why. */}
-        <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Present the wall</Link> · <Link to="/ClimateCartoons/Print">Print a show</Link> · <a href="#wall-money">Stand behind the work</a></p>
-        {/* ── THE WALL IS STILL BEING HUNG, AND IT SAYS SO ────────────────────────
-            The artists Francis introduces are still sending, so this wall is not finished and
-            a reader can see that it is not: fourteen drawings where a biennial's anthology
-            would hold hundreds. Saying it out loud is the honest move and the better one —
-            a wall that admits it is filling is a room being worked in, while a wall that
-            pretends to be complete invites the question "is this all there is?". Each
-            drawing goes up under the name of the hand that made it, and that is the only
-            promise the line needs to make. */}
-        <p className="press-wall-line press-wall-filling">
-          Still being hung. Every contribution is checked by a person before it goes up.
-        </p>
-      </header>
+      <WallDrawingHead />
 
       {wall.isPending && (
         <p className="press-state" role="status"><Loader2 size={17} className="animate-spin" />Opening the original drawings…</p>

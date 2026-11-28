@@ -80,9 +80,9 @@ const AGENDA = [
 
 export default function JanineAgenda() {
   return (
-    <section className="mt-8">
+    <section id="workshop-agenda" className="mt-8 scroll-mt-48">
       <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-record-red lg:text-[11px]">
-        01 · The hour · her agenda
+        01 · Draft agenda
       </p>
       {/* ── HER AGENDA, AND IT SAYS SO ─────────────────────────────────────────────
           Brian, 25 November, 8:29pm: "the hour itself written down isn't right bro, it's

@@ -24,7 +24,7 @@ const ShareCardPreview = lazy(() => import('@/components/climate/ShareCardPrevie
 // further, with every app on the phone in it. Nothing is lost; the doors are no longer
 // hidden behind a device that happens to accept a file.
 
-export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, icon: GivenIcon, previewFirst = false, instant = false, inline = false, includeMessage = false, windowTitle, alt }) {
+export default function ShareCardButton({ entry, compact = false, build = buildWireShareCard, label: givenLabel, link: givenLink, description: givenDescription, icon: GivenIcon, previewFirst = false, instant = false, inline = false, iconOnly = false, includeMessage = false, windowTitle, alt }) {
   const [state, setState] = useState('idle');
   const [card, setCard] = useState(null);
   const [warm, setWarm] = useState(null);
@@ -92,8 +92,8 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   const label = givenLabel || (compact ? 'Share' : 'Share this entry as a card');
   const doing = state === 'building' ? 'Preparing the image' : state === 'shared' ? 'Shared' : '';
   return <>
-    <button type="button" onClick={share} disabled={state === 'building'} aria-busy={state === 'building'} className={inline ? 'record-share-inline' : compact ? 'record-share-compact' : 'record-share-button'}>
-      {Icon && <Icon size={17} aria-hidden="true" className={state === 'building' ? 'animate-spin' : undefined} />}{label}
+    <button type="button" onClick={share} disabled={state === 'building'} aria-busy={state === 'building'} title={iconOnly ? label : undefined} className={iconOnly ? 'record-share-mark inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-none border-0 bg-transparent p-0 text-record-red hover:bg-record-signal/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-record-red disabled:opacity-50' : inline ? 'record-share-inline' : compact ? 'record-share-compact' : 'record-share-button'}>
+      {Icon && <Icon size={iconOnly ? 21 : 17} aria-hidden="true" className={state === 'building' ? 'animate-spin' : undefined} />}<span className={iconOnly ? 'sr-only' : undefined}>{label}</span>
       <span className="sr-only" role="status">{doing}</span>
     </button>
     {state === 'error' && <span className="record-share-error" role="alert">The image could not be prepared. Please try again.</span>}

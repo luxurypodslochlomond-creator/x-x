@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { Maximize2 } from 'lucide-react';
 import ShareCardButton from '@/components/climate/ShareCardButton';
 import WallCoverViewer from '@/components/climate/cartoons/WallCoverViewer';
 import { CARTOON_EVENT, CARTOON_COVER } from '@/components/climate/cartoons/cartoonEvent';
@@ -26,7 +26,7 @@ export default function WallEventNotice() {
     <div className="wall-event-plate">
       <button type="button" className="wall-event-cover" onClick={() => setLooking(true)} aria-label="Open the catalogue cover full size">
         <img src={CARTOON_COVER} alt="CartoonAFRICA’s catalogue cover, drawn by Francis Umendu Odupute" decoding="async" />
-        <span>Open full size</span>
+        <span className="wall-art-mark" aria-hidden="true"><Maximize2 size={19} /></span>
       </button>
       <p className="wall-event-credit">{CARTOON_EVENT.coverArt}</p>
     </div>
@@ -38,15 +38,16 @@ export default function WallEventNotice() {
       <p className="wall-event-when">Sunday 29 November · 2pm UK · 9am EST · 3pm West Africa · one hour · free · no account</p>
 
       <div className="wall-event-actions">
-        <Link to="/ClimateWorkshop">The hour, written down</Link>
-        <Link to="/ClimateCartoons/Share">The words for wherever you send it</Link>
-        <ShareCardButton compact entry={{ ...WORKSHOP_CARD, join }} build={buildWorkshopCard} label="Send the invitation" icon={ArrowRight} includeMessage link={recordAddress('/ClimateWorkshop')} description={CARTOON_EVENT.shareLine} alt={`The CartoonAFRICA workshop invitation. ${CARTOON_EVENT.coverArt}.`} />
+        <ShareCardButton iconOnly entry={{ ...WORKSHOP_CARD, join }} build={buildWorkshopCard} label="Share the workshop invitation" includeMessage windowTitle="Workshop invitation" link={recordAddress('/ClimateWorkshop')} description={CARTOON_EVENT.shareLine} alt={`The CartoonAFRICA workshop invitation. ${CARTOON_EVENT.coverArt}.`} />
+        <Link to="/ClimateCartoons/Share">Invitation text</Link>
       </div>
 
       <details className="wall-event-join">
-        <summary>Add the host’s Zoom link and passcode</summary>
-        <p className="wall-event-note">Printed on the card you send, and nowhere else. It is never sent to the record and never stored.</p>
-        <textarea value={join} onChange={(event) => setJoin(event.target.value)} rows={3} placeholder="Join here: https://… · passcode: …" aria-label="Joining link and passcode from the host" />
+        <summary>Workshop details</summary>
+        <p className="wall-event-note"><Link to="/ClimateWorkshop#workshop-agenda">Janine’s draft agenda</Link> · subject to change.</p>
+        <label className="wall-event-note" htmlFor="wall-host-joining">Host’s Zoom link and passcode</label>
+        <p className="wall-event-note">Only on the invitation you make here. Not saved to the record.</p>
+        <textarea id="wall-host-joining" value={join} onChange={(event) => setJoin(event.target.value)} rows={3} placeholder="Join here: https://… · passcode: …" aria-label="Joining link and passcode from the host" />
         <p className="wall-event-note">{join.trim() ? 'These words will be printed on the card.' : 'Left empty, the card says the joining details come from the host.'}</p>
       </details>
     </div>

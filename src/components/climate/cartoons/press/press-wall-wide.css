@@ -1,107 +1,62 @@
-/* ── THE WALL OPENS OUT ON A DESK ───────────────────────────────────────────────
-   Brian, 28 November: "on desktop not using space super intelligently bro… visually
-   still feels a bit old magazine… think we could go further down the wall make it
-   coolasfuck as well bro… like x = x page know what I mean bro?"
-
-   He was right, and the fault was one rule. Every chapter of this room was one cream
-   rectangle the same width, stacked down a column: head, drawings, why, the book, the
-   sources, the reading, the set list. Fourteen drawings, one per band, each with a
-   hairline rule between them — that is a magazine's contents, not a wall.
-
-   This room's own stylesheet has said the opposite since it was written: "the drawings
-   are objects placed on the world, not pictures inside a frame." It was true of the
-   painting and not of the drawings. So on a desk the drawings chapter now keeps no
-   sheet of its own at all — its head and its foot keep their paper, and between them
-   the drawings hang on the painting itself, two across and the first one given the
-   whole wall. A print with its citation underneath is the shape this room was always
-   describing.
-
-   Nothing about the drawings changed: same order, same sheets of information, same
-   share, same close reading. Only where they hang. Phones and tablets are untouched —
-   there the wall is walked along, one drawing at a time, which is what a handset is for. */
-
-@media screen and (min-width: 1280px) {
-  /* The wall is the one room of the record that opens wider than the book, because a
-     wall is looked at from across a room. */
+/* Desktop wall: one reading order, equal artwork spaces, no oversized lead.
+   These selectors own the wall's geometry; phone swipe styles stay independent. */
+@media screen and (min-width: 1024px) {
   #root .record-cartoon-field .record-book { max-width: min(1560px, 94vw); }
+  #root .record-cartoon-field .press-room .record-room-content { margin: .75rem 0 1.4rem; }
+  #root .record-cartoon-field .press-room .press-room-inner.wall-room { padding: 0 0 1.5rem; }
 
-  /* ── THE DRAWINGS CHAPTER STANDS ON THE PAINTING ───────────────────────────── */
-  #root .record-cartoon-field .press-room .press-room-inner > .press-wall-section {
-    padding: 0;
-    background: transparent;
-    box-shadow: none;
+  /* A short, two-sided opening instead of a tall stack of labels. */
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro {
+    display: grid; grid-template-columns: 2.5rem minmax(12rem, .9fr) minmax(20rem, 1.1fr);
+    grid-template-areas: 'mark label copy' '. title copy' '. title link';
+    align-items: center; gap: .35rem 1rem; padding: 1.5rem 2rem;
+    background-position: center 40%;
   }
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro > svg { grid-area: mark; box-sizing: border-box; width: 2.5rem; height: 2.5rem; padding: .5rem; margin: 0; }
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro > small { grid-area: label; margin: 0; padding: 0; }
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro > small::before { display: none; }
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro h1 { grid-area: title; font: 850 clamp(3.6rem, 5vw, 5rem)/1 var(--font-record-ui); letter-spacing: -.055em; }
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro > p { grid-area: copy; margin: 0; max-width: 44ch; font-size: 1.15rem; line-height: 1.5; align-self: end; }
+  #root .record-cartoon-field .press-room.record-room-painted .record-room-intro > a { grid-area: link; justify-self: start; margin: .45rem 0 0; padding: .3rem 0; border: 0; align-self: start; }
 
-  /* Its head is still paper — the room's name, the count, the way in — and it is signed
-     with the record's own bar, so the first thing under the painted opening is the
-     record speaking, not a caption. */
-  #root .record-cartoon-field .press-room .press-wall-head {
-    padding: clamp(1.2rem, 1.5vw, 1.7rem) clamp(1.2rem, 2vw, 2rem) clamp(1.1rem, 1.4vw, 1.5rem);
-    border-top: 3px solid rgb(var(--record-signal));
-    background: rgb(var(--record-paper));
-    box-shadow: 0 16px 38px -30px rgb(var(--record-ink) / .65);
-  }
-  #root .record-cartoon-field .press-room .press-wall-title { font-size: clamp(2.6rem, 3.1vw, 3.7rem); }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous > .cartoon-room-jump { --wall-nav-height: 3.7rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .cartoon-room-jump a { min-height: 3.6rem; padding: .6rem 1rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .cartoon-room-jump svg { width: 1.7rem; height: 1.7rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous { --wall-nav-height: 3.7rem; }
 
-  /* ── TWO PRINTS ACROSS, THE FIRST ONE GIVEN THE WHOLE WALL ─────────────────── */
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1.1rem, 1.7vw, 1.8rem);
-    margin: clamp(1.1rem, 1.7vw, 1.8rem) 0;
-  }
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 0;
-    padding: clamp(.9rem, 1vw, 1.2rem);
-    border: 0;
-    background: rgb(var(--record-paper));
-    box-shadow: 0 28px 56px -38px rgb(var(--record-ink));
-  }
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet:first-child {
-    padding-top: clamp(.9rem, 1vw, 1.2rem);
-  }
-  /* The lead drawing: the picture at size, the hand beside it, the way the room opened
-     before — and it is the only one that takes the whole wall. */
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet--lead {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 1fr);
-    align-items: center;
-    gap: clamp(1.4rem, 2.2vw, 2.4rem);
-    padding: clamp(1.1rem, 1.4vw, 1.7rem);
-  }
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet--lead:first-child {
-    padding-top: clamp(1.1rem, 1.4vw, 1.7rem);
-  }
+  /* A whole, credited cover and a short event notice, not a second hero. */
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-notice { grid-template-columns: 11rem minmax(0, 1fr); gap: 1.5rem; margin-block: .8rem; padding: 1.1rem 1.4rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-cover img { height: 14rem; max-height: none; object-fit: contain; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-band { gap: .4rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-name { max-width: 52ch; font-size: clamp(1.5rem, 1.8vw, 2rem); line-height: 1.12; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-actions { gap: .3rem 1rem; margin: 0; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .wall-event-join { margin-top: 0; padding-top: 0; }
 
-  /* ── THE PRINT ITSELF ─────────────────────────────────────────────────────────
-     The picture sits on the room's bone, as it always has; the citation sits under it,
-     inside the same sheet of paper, so a caption is never floating on the painting. */
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-art { background: rgb(var(--record-bone)); }
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-rail { padding-top: .95rem; }
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet--lead .press-sheet-rail { padding-top: 0; }
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall .comic-wall-artwork {
-    max-height: min(54vh, 33rem);
-  }
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet--lead .comic-wall-artwork {
-    max-height: min(72vh, 46rem);
-  }
-  /* The hand, at a size a room can read from across it. */
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-by { font-size: clamp(1.22rem, 1.25vw, 1.55rem); }
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-title { font-size: clamp(1.08rem, 1.1vw, 1.3rem); }
-  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-words { font-size: clamp(.98rem, 1vw, 1.08rem); }
-
-  /* ── THE FOOT OF THE CHAPTER, BACK ON ITS OWN PAPER ──────────────────────────
-     The colophon, the way to print the wall, the way to open more of it and the line
-     about whose hands are still working: one sheet under the drawings, so the chapter
-     closes the way it opened. */
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall-foot {
-    padding: clamp(1rem, 1.3vw, 1.5rem) clamp(1.2rem, 2vw, 2rem) clamp(1.2rem, 1.5vw, 1.7rem);
-    background: rgb(var(--record-paper));
-    box-shadow: 0 16px 38px -30px rgb(var(--record-ink) / .65);
-  }
-  #root .record-cartoon-field .press-room .press-wall-section .press-wall-foot .press-wall-colophon { margin-top: 0; }
+  /* Equal tiles, in numbered rows. The art fits the space; it is never cropped. */
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-section { padding: 1.1rem 1.4rem; background: rgb(var(--record-paper)); }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-head { padding: 0 0 .8rem; border: 0; background: transparent; box-shadow: none; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-title { font-size: 2rem; margin: .25rem 0 0; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-section .press-wall { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1.25rem; margin: 0; align-items: start; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall > .press-sheet,
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall > .press-sheet:first-child { display: flex; flex-direction: column; grid-column: auto; grid-template-columns: none; align-self: start; align-items: stretch; gap: .6rem; min-width: 0; padding: 0 0 1rem; margin: 0; border: 0; border-bottom: 1px solid rgb(var(--record-ink) / .25); background: transparent; box-shadow: none; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall .press-sheet-art { display: grid; place-items: center; width: 100%; height: auto; min-height: 0; aspect-ratio: 4 / 3; padding: .4rem; margin: 0; background: rgb(var(--record-bone) / .45); }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall .press-sheet-art .comic-wall-artwork { position: absolute; inset: .4rem; width: calc(100% - .8rem); height: calc(100% - .8rem); max-height: none; min-height: 0; max-width: none; margin: 0; aspect-ratio: auto; object-fit: contain; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-sheet-rail { display: grid; grid-template-columns: minmax(0, 1fr); gap: .35rem; padding: 0; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-sheet-by { font-size: 1.2rem; line-height: 1.2; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-sheet-title { font-size: 1.05rem; line-height: 1.3; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-sheet-origin { font-size: .7rem; line-height: 1.4; letter-spacing: .035em; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-sheet-words { font-size: .9rem; line-height: 1.5; margin: .25rem 0; padding-left: .65rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-sheet-provenance { margin-top: .25rem; padding-top: .4rem; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-foot { margin-top: 1rem; padding: .75rem 0 0; background: transparent; box-shadow: none; }
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-colophon { margin-top: 0; }
+  #root .press-room .wall-drawings-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+  #root .press-room .wall-drawings-tools { justify-content: flex-end; }
 }
+@media screen and (min-width: 1280px) {
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-section .press-wall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media screen and (min-width: 1720px) {
+  #root .record-cartoon-field .press-room .wall-room.wall-continuous .press-wall-section .press-wall { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.wall-drawings-tools { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; padding-block: .45rem; font: 700 .8rem/1.5 var(--font-record-ui); }
+.wall-drawings-tools a { color: rgb(var(--record-red)); text-decoration: underline; text-underline-offset: .2em; }
