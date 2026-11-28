@@ -18,7 +18,7 @@ const LIMITS = [
   // years in between. So the room says that out loud, in the room, before a reader decides for
   // itself that a numeral is a date. Francis would spot the other version in a second.
   'These are not one mark per edition. Eight drawings and eight festivals are not the same eight: the festival’s own eight years are listed on the wall, with three themes still missing, and this room will not draw a year it cannot read.',
-  'These marks are not a portrait of the planet and not a census of its people. They draw a way of working — mostly the way the comfortable work, and once the way this machine works. The people carrying the cost are on the wall, drawn by hands that have been somewhere; a machine that has never stood in it should not draw them.',
+  'These marks are not a portrait of the planet and not a census of its people. They draw a way of working — mostly the way the comfortable work, and once the way this machine works. The people carrying the cost are on the wall, drawn by hands that have been somewhere; a machine that has never stood in it should not draw them. Nor are these eight counted among the drawings on the wall: the wall counts hands, and this room is not one.',
 ];
 
 export default function BaseOneLimits() {

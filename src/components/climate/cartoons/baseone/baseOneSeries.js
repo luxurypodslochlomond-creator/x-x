@@ -77,6 +77,18 @@
 //   4. No name, no nation, no party, and no number that needs explaining. Those belong in
 //      the caption or in the entry, where somebody can check them, never inside the line.
 
+// ── A DOOR IS A PROMISE, AND THREE OF THESE WERE BREAKING ONE ───────────────────
+// Brian, 28 November: "you sure we're connected… for right reasons." Reading the room back
+// with him, three doors were wrong in the way this record exists to catch.
+//
+// The queue — people waiting at a standpipe with one container each — opened the map, which
+// shows who reads the record and from where, not who waits for water. The record holds an
+// entry on exactly that, from the World Meteorological Organization, and it is where a reader
+// can check the mark. So the door goes there now.
+//
+// And two doors said "what changed this week" over a wire whose newest entry is from October.
+// A room that refuses every number it cannot stand behind cannot label a door with a claim
+// about a date. A door says what is actually behind it, and nothing more.
 const DIR = 'https://media.base44.com/images/public/6889f31e76713b9cd47e043c';
 
 export const BASE_ONE_SERIES = [
@@ -87,8 +99,8 @@ export const BASE_ONE_SERIES = [
     alt: 'Ink drawing: a row of people stand in a queue at one standpipe, each holding a single container, seen from behind in hard sun, with a long shadow across the ground.',
     answers: 'Who waits for the water',
     line: 'The queue is the infrastructure. Nobody counted it.',
-    to: '/ClimateMap',
-    door: 'The map: who is answering, and where',
+    to: '/ClimateDetail/climate_crisis/6abf6cdaaeaa351c56a9f2ce',
+    door: 'The entry on water supply, and who says so',
   },
   {
     id: 'roof',
@@ -108,7 +120,7 @@ export const BASE_ONE_SERIES = [
     answers: 'Warmth, sold by the unit',
     line: 'Warmth is sold by the unit. Cold is free.',
     to: '/ClimateWire',
-    door: 'The wire: what changed this week',
+    door: 'The wire: what the record has been told, and by whom',
   },
   {
     id: 'witness',
@@ -135,7 +147,7 @@ export const BASE_ONE_SERIES = [
     answers: 'Business as usual, with lunch',
     line: 'He has a meeting at two. The meeting is about it.',
     to: '/ClimateWire',
-    door: 'The wire: what changed this week',
+    door: 'The wire: what the record has been told, and by whom',
   },
   {
     id: 'form',
