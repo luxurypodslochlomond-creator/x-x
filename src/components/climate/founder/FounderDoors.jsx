@@ -6,8 +6,8 @@ import React from 'react';
 export default function FounderDoors() {
   return (
     <section className="record-founder-sheet" aria-labelledby="founder-doors">
-      <p className="record-founder-kicker">Her own doors</p>
-      <h2 id="founder-doors" className="record-founder-h2">Do not take<br />our word for it.</h2>
+      <p className="record-founder-kicker">Go to the work</p>
+      <h2 id="founder-doors" className="record-founder-h2">Her own record.</h2>
       <div className="record-founder-links">
         <a href="https://www.solutions-site.org" target="_blank" rel="noopener noreferrer">
           <span>Horizon International Solutions Site</span>

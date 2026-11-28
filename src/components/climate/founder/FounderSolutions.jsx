@@ -10,41 +10,44 @@ const WORKING = [
     place: 'Burkina Faso',
     title: 'Plastic is money',
     body: 'Women and youth of the NEERE group weave discarded plastic into cloth for clothes and bags.',
+    source: 'https://www.unep.org/youngchampions/news/story/weaving-brighter-future-plastic-burkina-faso',
   },
   {
     place: 'The Sahara',
     title: 'Six thousand bottles',
-    body: 'Tateh Lehbib, a 28-year-old Sahrawi refugee engineer, built his grandmother a shelter from plastic bottles packed with sand, straw, cement and limestone, in heat that reaches 110°F.',
+    body: 'Tateh Lehbib built his grandmother a shelter using 6,000 discarded bottles in a Sahrawi refugee camp.',
+    source: 'https://www.globalcitizen.org/en/content/plastic-bottle-houses-sahrawi-refugees-algeria/',
   },
   {
-    place: 'Plymouth Sound',
+    place: 'Plymouth & the Solent',
     title: 'Eight hectares',
-    body: 'England is restoring seagrass across the Plymouth Sound and Solent Maritime conservation areas — coastline, nursery and carbon store in one.',
+    body: 'Seagrass restoration work across eight hectares, reported by the Ocean Conservation Trust in November 2024. An area worked on, not a claim that every plant survived.',
+    source: 'https://oceanconservationtrust.org/success-for-englands-largest-seagrass-restoration-project/',
   },
   {
     place: 'Uruguay',
-    title: 'Ninety-eight per cent',
-    body: 'Uruguay makes over 98% of its electricity from wind, hydro, biomass and solar.',
+    title: 'Renewable electricity',
+    body: 'Uruguay’s wind, hydro, biomass and solar generation, highlighted in her column. The electricity share varies by year.',
+    source: 'https://www.solutions-site.org/node/1648',
   },
 ];
 
 export default function FounderSolutions() {
   return (
     <section className="record-founder-sheet record-founder-sheet-bone" aria-labelledby="founder-solutions">
-      <p className="record-founder-kicker">The other half of her argument</p>
-      <h2 id="founder-solutions" className="record-founder-h2">The answers<br />already exist.</h2>
-      <p className="record-founder-lede">They are just scattered, uncredited, and hard to find — which is the problem a record solves and a feed never will.</p>
+      <p className="record-founder-kicker">The response · her examples</p>
+      <h2 id="founder-solutions" className="record-founder-h2">Work already underway.</h2>
+      <p className="record-founder-lede">The other half of her column: people doing something about it, place by place.</p>
       <ol className="record-founder-working">
-        {WORKING.map(({ place, title, body }) => (
+        {WORKING.map(({ place, title, body, source }) => (
           <li key={place}>
             <span className="record-founder-working-place">{place}</span>
-            <h3>{title}</h3>
+            <h3><a href={source} target="_blank" rel="noopener noreferrer">{title} ↗</a></h3>
             <p>{body}</p>
           </li>
         ))}
       </ol>
-      <p className="record-founder-plain">And when the whole world was asked to stay home in 2020, emissions fell by more than 5% in weeks, and the Himalayas were visible from 200 kilometres away for the first time in thirty years. That is what a shared instruction can do.</p>
-      <p className="record-founder-thread">Her account, after David Attenborough’s <em>The Year the Earth Changed</em>.</p>
+      <p className="record-founder-thread">Examples from <a href="https://www.solutions-site.org/node/1648" target="_blank" rel="noopener noreferrer">her full column ↗</a>. Each heading opens the account behind it.</p>
     </section>
   );
 }

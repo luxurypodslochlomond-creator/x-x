@@ -225,6 +225,8 @@
   font-size: .78rem;
   line-height: 1.5;
 }
+.record-founder-figure-source { display: block; margin-top: .35rem; color: inherit; font-size: .72rem; text-decoration: underline; text-underline-offset: .2em; }
+.record-founder-working h3 a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .2em; }
 .record-founder-numbers-source {
   margin: .9rem 0 0;
   color: rgb(var(--record-paper) / .6);

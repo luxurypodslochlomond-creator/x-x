@@ -10,7 +10,7 @@ const WORK = [
   {
     number: '01',
     title: 'Horizon International',
-    body: 'Founded at Yale University, formerly a Guest of Harvard: forty years finding and advancing solutions where global health, the environment and poverty meet.',
+    body: 'Founder, Chair and Publisher of Horizon International, at Yale University, working across global health, environment and poverty.',
   },
   {
     number: '02',
@@ -25,7 +25,7 @@ const WORK = [
   {
     number: '04',
     title: 'What others credit her with',
-    body: 'The UN credited her and her Horizon team with advancing shea butter production and use by women and children. IUCN, WWF and the Government of Peru credited her with helping save the vicuña.',
+    body: 'Her biography records UNDP and UNIFEM credit for the team’s work on women’s shea-butter production, and her role in protecting the vicuña.',
   },
 ];
 
@@ -33,8 +33,8 @@ export default function FounderWork() {
   return (
     <section className="record-founder-work" aria-labelledby="founder-work">
       <div className="record-founder-work-inner">
-        <p className="record-founder-kicker record-founder-kicker-light">Forty years · the work</p>
-        <h2 id="founder-work" className="record-founder-work-title">She did not write<br />about it. She did it.</h2>
+        <p className="record-founder-kicker record-founder-kicker-light">Her work · Horizon International</p>
+        <h2 id="founder-work" className="record-founder-work-title">Research. Film. Action.</h2>
         <ol className="record-founder-register">
           {WORK.map(({ number, title, body }) => (
             <li key={number}>
@@ -49,7 +49,7 @@ export default function FounderWork() {
           <p>National Science Foundation PI for a grant on oceans. Collaborator with several UN entities. Lecturer at Harvard, Yale, Tufts and Johns Hopkins. Speaker at the World Bank, for the Government of Pakistan, and for the Princess Chulabhorn conference in Thailand. Cancer research at Tufts New-England Medical Center.</p>
           <p>Horizon International endorsed the One Health Initiative in 2013 — medicine, veterinary science and the environment working as one — joining more than 700 scientists and physicians worldwide. Fellow Emeritus of the Explorers Club, 1996.</p>
           <p>The two books, in full: <em>Water and Sanitation-Related Diseases and the Environment</em>, and <em>Water and Sanitation-Related Diseases and the Changing Environment</em> — Challenges, Interventions, and Preventive Measures. Lynn Redgrave, Raso Ouedraogo, Johan Forssblad and Sam Waterston were among the hosts and narrators of the films.</p>
-          <a href="https://www.solutions-site.org" target="_blank" rel="noopener noreferrer">Her work in full, on her own site ↗<span className="sr-only"> (opens a new tab)</span></a>
+          <a href="https://www.solutions-site.org/node/1089" target="_blank" rel="noopener noreferrer">Source: Horizon International’s biography ↗<span className="sr-only"> (opens a new tab)</span></a>
         </details>
       </div>
     </section>

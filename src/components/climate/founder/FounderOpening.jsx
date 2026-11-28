@@ -16,15 +16,11 @@ export default function FounderOpening() {
     <RecordPaintedBand continuous className="record-founder-hero">
       <div className="record-founder-hero-inner">
         <p className="record-founder-kicker">The founder · Beirut, 1956</p>
-        <h1 className="record-founder-name">Janine M.<br />H. Selendy</h1>
-        <p className="record-founder-hardline">Fifteen years old, surfacing through oil. She has been answering it ever since.</p>
+        <h1 className="record-founder-name">Janine M.<br className="hidden sm:block" />{' '}H. Selendy</h1>
+        <p className="record-founder-hardline">Fifteen years old, surfacing through oil.</p>
         <blockquote className="record-founder-quote">
           “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
         </blockquote>
-        <div className="record-founder-plate-signal">
-          <span>Janine M. H. Selendy</span>
-          <span>1956</span>
-        </div>
         <p className="record-founder-credit">Horizon International · at Yale University</p>
       </div>
     </RecordPaintedBand>

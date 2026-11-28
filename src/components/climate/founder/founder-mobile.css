@@ -1,0 +1,97 @@
+/* The long-form book rules use high-specificity !important selectors. This page's
+   mobile hierarchy owns its sizes; the desktop and shared record stay untouched. */
+@media (max-width: 639px) {
+  #record-founder { font-family: var(--font-record-ui); }
+  #record-founder :is(p, li, blockquote) {
+    max-inline-size: none;
+    font-family: var(--font-record-ui) !important;
+    font-size: .875rem !important;
+    line-height: 1.5 !important;
+    letter-spacing: 0;
+  }
+  #record-founder :is(h1, h2, h3) {
+    font-family: var(--font-record-ui) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -.02em !important;
+    text-wrap: pretty;
+  }
+  #record-founder :is(.record-founder-hero, .record-founder-sheet, .record-founder-numbers, .record-founder-work, .record-founder-close-band) {
+    border-top: 0;
+    border-bottom: 1px solid rgb(var(--record-mark));
+  }
+  #record-founder :is(.record-founder-hero-inner, .record-founder-sheet, .record-founder-numbers-inner, .record-founder-work-inner, .record-founder-close-inner) {
+    position: relative;
+    margin-block: 0;
+    padding: 1.25rem 1rem 1.35rem 1.875rem;
+    text-align: left;
+  }
+  /* A single aligned rule connects the painted voice, evidence and work. */
+  #record-founder :is(.record-founder-hero-inner, .record-founder-sheet, .record-founder-numbers-inner, .record-founder-work-inner, .record-founder-close-inner)::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 .875rem;
+    width: 2px;
+    background: rgb(var(--record-mark));
+    pointer-events: none;
+  }
+  #record-founder :is(.record-founder-hero-inner, .record-founder-work-inner, .record-founder-close-inner)::before { background: rgb(var(--record-signal)); }
+  #record-founder .record-founder-name {
+    font-size: clamp(1rem, 5.4vw, 1.4rem);
+    font-weight: 800 !important;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+  #record-founder .record-founder-hardline { margin: .75rem 0 0; font-style: normal; font-weight: 700; }
+  #record-founder .record-founder-hero .record-founder-quote { margin: .75rem 0 0; padding: 0; border: 0; }
+  #record-founder .record-founder-kicker {
+    margin: 0 0 .8rem;
+    padding: .3rem .45rem;
+    font-size: .6875rem !important;
+    line-height: 1.4 !important;
+    font-weight: 700;
+    letter-spacing: .07em;
+  }
+  #record-founder .record-founder-kicker-light { padding: 0; }
+  #record-founder .record-founder-credit { margin: .85rem 0 0; font-size: .6875rem !important; line-height: 1.5 !important; letter-spacing: .05em; }
+  #record-founder :is(.record-founder-h2, .record-founder-work-title) { margin: 0 0 .85rem; font-size: 1.25rem; text-transform: uppercase; }
+  #record-founder .record-founder-pull { padding-top: .75rem; font-size: 1rem !important; line-height: 1.45 !important; font-weight: 600; }
+  #record-founder .record-founder-attrib { margin: .45rem 0 0; gap: .1rem .65rem; font-size: .6875rem !important; letter-spacing: .04em; }
+  #record-founder .record-founder-attrib a { min-height: 2.75rem; }
+  #record-founder .record-founder-plain { margin-top: .65rem; }
+  #record-founder .record-founder-thread { margin-top: .8rem; padding-top: .65rem; font-size: .75rem !important; line-height: 1.5 !important; }
+  #record-founder .record-founder-lede { margin-bottom: .8rem; }
+  #record-founder .record-founder-numbers { color: rgb(var(--record-ink)); background: rgb(var(--record-bone) / .97); }
+  #record-founder .record-founder-figures > div { grid-template-columns: 4.25rem minmax(0, 1fr); gap: .65rem; padding: .75rem 0; border-color: rgb(var(--record-ink) / .2); }
+  #record-founder .record-founder-figures dt { color: rgb(var(--record-red)); font-size: 1.5rem; line-height: 1.1; }
+  #record-founder .record-founder-figures dd { color: rgb(var(--record-ink)); font-size: .8125rem; line-height: 1.45; }
+  #record-founder .record-founder-figure-source { margin-top: .3rem; color: rgb(var(--record-red)); font-size: .6875rem; line-height: 1.5; }
+  #record-founder .record-founder-numbers-source { margin-top: .7rem; color: rgb(var(--record-muted)); font-size: .75rem !important; }
+  #record-founder .record-founder-working li { display: grid; grid-template-columns: 4.75rem minmax(0, 1fr); gap: .25rem .75rem; padding: .85rem 0; }
+  #record-founder .record-founder-working-place { grid-column: 1; grid-row: 1 / span 2; margin: .1rem 0 0; font-size: .6875rem; line-height: 1.45; letter-spacing: .04em; }
+  #record-founder .record-founder-working h3 { grid-column: 2; font-size: .875rem; }
+  #record-founder .record-founder-working p { grid-column: 2; margin: 0; font-size: .8125rem !important; }
+  #record-founder .record-founder-work { background: rgb(var(--record-ink) / .8); }
+  #record-founder .record-founder-register li { display: grid; grid-template-columns: 1.35rem minmax(0, 1fr); gap: .3rem .6rem; padding: .85rem 0; }
+  #record-founder .record-founder-register-number { grid-row: 1 / span 2; margin: .1rem 0 0; font-size: .6875rem; }
+  #record-founder .record-founder-register h3 { font-size: .875rem; }
+  #record-founder .record-founder-register p { grid-column: 2; margin: 0; font-size: .8125rem !important; }
+  #record-founder .record-founder-more { margin-top: .8rem; }
+  #record-founder .record-founder-more summary { padding-block: .85rem; font-size: .6875rem; line-height: 1.5; letter-spacing: .04em; }
+  #record-founder .record-founder-more p { font-size: .8125rem !important; }
+  #record-founder .record-founder-links { gap: 0; margin-bottom: .8rem; }
+  #record-founder .record-founder-links a { min-height: 2.75rem; padding: .8rem 0; background: transparent; border: 0; border-top: 1px solid rgb(var(--record-ink) / .2); }
+  #record-founder .record-founder-links a:last-child { border-bottom: 1px solid rgb(var(--record-ink) / .2); }
+  #record-founder .record-founder-links span { font-size: .6875rem; letter-spacing: .04em; }
+  #record-founder .record-founder-links strong { font-size: .8125rem; }
+  #record-founder .record-founder-note { font-size: .75rem !important; }
+  #record-founder .record-founder-close-inner .record-founder-quote { margin: 0; font-size: 1rem !important; line-height: 1.4 !important; text-wrap: pretty; }
+  #record-founder .record-founder-plate-signal { margin-top: .8rem; padding: .4rem .55rem; font-size: .6875rem; letter-spacing: .04em; justify-content: flex-start; }
+  #record-founder .record-founder-cta { padding: .9rem 1rem; }
+  #record-founder .record-founder-cta p { margin-top: .5rem; font-size: .75rem !important; }
+  #record-founder .record-founder-imprint { padding: 1.25rem 1rem; border-top-width: 1px; }
+  #record-founder .record-founder-imprint-honour { font-size: .8125rem !important; }
+  #record-founder .record-founder-imprint-role { font-size: .6875rem !important; line-height: 1.6 !important; letter-spacing: .05em; }
+  #record-founder .record-founder-imprint-note { margin-top: .8rem; font-size: .75rem !important; }
+  #record-founder .record-founder-imprint-rule { margin-block: .8rem; }
+}
