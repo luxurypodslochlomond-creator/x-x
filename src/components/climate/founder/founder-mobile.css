@@ -34,7 +34,12 @@
   #record-founder .record-founder-evidence-source { font-size: .72rem; }
   #record-founder .record-founder-humanitarian-head { padding-top: 1.5rem; }
   #record-founder .record-founder-evidence-note { font-size: .74rem !important; }
-  #record-founder :is(.record-founder-working, .record-founder-register, .record-founder-links) { grid-template-columns: minmax(0, 1fr); }
+  #record-founder :is(.record-founder-working, .record-founder-register, .record-founder-links, .record-founder-ledger-rows) { grid-template-columns: minmax(0, 1fr); }
+  #record-founder .record-founder-ledger { margin-top: 1.5rem; padding-top: 1.2rem; }
+  #record-founder .record-founder-ledger-ink { margin-inline: -1.15rem; padding: 1.4rem 1.15rem 1.5rem; }
+  #record-founder .record-founder-ledger-title { font-size: 1.35rem; }
+  #record-founder .record-founder-ledger-claim { font-size: .875rem !important; }
+  #record-founder .record-founder-ledger-row .record-founder-evidence-source { font-size: .72rem; }
   #record-founder .record-founder-work-inner { padding: 1.5rem 1.15rem; }
   #record-founder .record-founder-work-title { font-size: 1.8rem; }
   #record-founder .record-founder-register-number { font-size: .68rem; }

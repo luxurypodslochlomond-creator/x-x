@@ -38,6 +38,55 @@ export const GLOBAL_EVIDENCE = [
   },
 ];
 
+// Poverty and violence are not confined to the places a rich reader expects.
+export const POVERTY_EVIDENCE = [
+  {
+    id: 'near-poor', value: '3.7', unit: 'billion people', title: 'Below $8.30 a day.',
+    claim: 'Nearly half of humanity lives on less than $8.30 a day at 2021 purchasing power parity. The World Bank calls most of them one shock away from falling back.',
+    source: 'World Bank · Poverty, Prosperity and Planet Report 2026',
+    href: 'https://www.worldbank.org/en/publication/poverty-prosperity-and-planet',
+  },
+  {
+    id: 'us-poverty', value: '35.9', unit: 'million people', title: 'In poverty in the United States.',
+    claim: 'The US Census Bureau counted 35.9 million people below the official poverty line in 2024 — 10.6% of the country. The wealthiest large economy on earth has not ended it.',
+    source: 'US Census Bureau · Income, Poverty and Health Insurance · 2024',
+    href: 'https://www.census.gov/newsroom/press-releases/2025/income-poverty-health-insurance-coverage.html',
+  },
+  {
+    id: 'us-food', value: '13.7%', unit: 'of US households', title: 'Food insecure in America.',
+    claim: '13.7% of US households were food insecure in 2024, and 5.4% had very low food security — someone ate less because there was not enough money for food.',
+    source: 'USDA Economic Research Service · Household Food Security in the US · 2024',
+    href: 'https://ers.usda.gov/publications/pub-details?pubid=113622',
+  },
+  {
+    id: 'school', value: '273', unit: 'million children', title: 'Out of school.',
+    claim: 'UNESCO counts 273 million children and young people out of school as of 2024. In low-income countries that is 33% of school-age children, against 3% in high-income ones.',
+    source: 'UNESCO · Out-of-school rates and population · 2024',
+    href: 'https://www.unesco.org/en/education/view/outofschool',
+  },
+];
+
+export const WOMEN_EVIDENCE = [
+  {
+    id: 'vaw', value: '840', unit: 'million women', title: 'Beaten or sexually violated, in their lifetime.',
+    claim: 'WHO estimates nearly one in three women — 840 million — have been subjected to physical or sexual violence by a partner, or sexual violence by someone else. The figure has barely moved since 2000.',
+    source: 'WHO · Violence against women estimates · 19 November 2025',
+    href: 'https://www.who.int/news/item/19-11-2025-lifetime-toll--840-million-women-faced-partner-or-sexual-violence',
+  },
+  {
+    id: 'femicide', value: '47,000', unit: 'women and girls', title: 'Killed by a partner or relative in 2025.',
+    claim: '78,000 women and girls were killed intentionally in 2025. 47,000 of them — 60% — were killed by an intimate partner or family member: about 129 a day, or one every eleven minutes.',
+    source: 'UNODC & UN Women · Femicides in 2025 · 24 November 2026',
+    href: 'https://www.unodc.org/unodc/en/press/releases/2026/November/five-women-killed-every-hour-by-a-partner-or-close-relative-in-2025.html',
+  },
+  {
+    id: 'maternal', value: '260,000', unit: 'women', title: 'Died in pregnancy or childbirth, 2023.',
+    claim: 'An estimated 260,000 women died from maternal causes in 2023 — about one every two minutes. Around 160,000 of those deaths were in countries in conflict or institutional and social fragility.',
+    source: 'WHO, UNICEF, UNFPA, World Bank & UNDESA · Trends in Maternal Mortality · 2025',
+    href: 'https://www.who.int/news-room/fact-sheets/detail/maternal-mortality',
+  },
+];
+
 // War is not weather. These are people in need of assistance, not death tolls,
 // except where a toll is named as one.
 export const HUMANITARIAN_EVIDENCE = [

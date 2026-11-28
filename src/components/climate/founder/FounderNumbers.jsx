@@ -1,6 +1,7 @@
 import React from 'react';
 import FounderEvidenceRow from '@/components/climate/founder/FounderEvidenceRow';
-import { GLOBAL_EVIDENCE, HUMANITARIAN_EVIDENCE } from '@/components/climate/founder/founderEvidence';
+import FounderCompactLedger from '@/components/climate/founder/FounderCompactLedger';
+import { GLOBAL_EVIDENCE, HUMANITARIAN_EVIDENCE, POVERTY_EVIDENCE, WOMEN_EVIDENCE } from '@/components/climate/founder/founderEvidence';
 
 export default function FounderNumbers() {
   return (
@@ -22,6 +23,19 @@ export default function FounderNumbers() {
         <dl className="record-founder-evidence">
           {HUMANITARIAN_EVIDENCE.map(item => <FounderEvidenceRow key={item.id} item={item} />)}
         </dl>
+        <FounderCompactLedger
+          kicker="The ledger · poverty"
+          title="Poverty is not only elsewhere."
+          intro="Not a developing-world problem, and not a weather event. It is a decision about who is allowed to have enough, taken again every year, in every country."
+          rows={POVERTY_EVIDENCE}
+        />
+        <FounderCompactLedger
+          kicker="The ledger · women and girls"
+          title="Half of humanity is not a footnote."
+          intro="The violence is counted, named and dated. What is missing is not evidence. It is the will to act on it."
+          rows={WOMEN_EVIDENCE}
+          tone="ink"
+        />
         <p className="record-founder-evidence-note">Not only these. The 2026 humanitarian appeal also names Haiti, Myanmar, South Sudan, Somalia, Lebanon, Chad, Mali, Burkina Faso and the Sahel. This page lists a few of the largest and best documented, not a ranking of who suffers most, and leaving a country out here does not mean it has been counted as safe.</p>
         <p className="record-founder-evidence-note">A dated evidence record, not a live counter. Reference years differ; populations overlap. Do not add these figures together or read them all as deaths caused by climate change. Estimates, projections, assistance targets and verified minimums are labelled separately.</p>
         <p className="record-founder-evidence-note">Compiled for this page, not quotations from Janine or claims of endorsement by the organisations cited. Each link opens the original report or its issuing agency’s account. Where a figure has been revised, the later figure is named rather than swapped in silently.</p>

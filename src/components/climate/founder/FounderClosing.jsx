@@ -31,6 +31,7 @@ export default function FounderClosing() {
         <p className="record-founder-imprint-honour">In honour of her life’s work.</p>
         <span aria-hidden="true" className="record-founder-imprint-rule" />
         <p className="record-founder-imprint-role">A platform built for the planet · Universal Frequency 51 CIC · Scotland</p>
+        <p className="record-founder-imprint-note">This is not a tribute page. It is a machine for checking: every figure dated, sourced, and open to correction by anyone, whether or not they have ever heard of Horizon International.</p>
         <p className="record-founder-imprint-note">Horizon International’s work at Yale is her own. This record is not a Yale publication and claims no endorsement from Yale or from any institution named on this page.</p>
         <a href="mailto:family@uf51.love" className="record-founder-imprint-contact">Contact Universal Frequency 51</a>
       </div>
