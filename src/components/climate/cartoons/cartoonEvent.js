@@ -39,7 +39,7 @@ export const CARTOON_EVENT = {
   // an hour they did not know was online. The picture already says all of this; the message
   // has to say it too, because most people read the words before they open the picture.
   // Every fact here is one already held in this file — nothing new is claimed.
-  shareLine: 'A room of climate cartoons from Africa, Asia and beyond, gathered for the 8th CartoonAFRICA Biennial · 28–30 November 2026, National Museum, Benin City. Janine Selendy’s workshop is Sunday 29 November, 3pm West Africa · 2pm UK, online. Every drawing keeps the name of the hand that made it.',
+  shareLine: 'A wall of climate cartoons from Africa, Asia and beyond — drawn by hand, signed, and hung whole for the 8th CartoonAFRICA Biennial in Benin City, 28–30 November 2026. Janine Selendy takes the wall into an hour online: Sunday 29 November, 3pm West Africa · 2pm UK. The joining link is hers to send. Every drawing keeps the name of the hand that made it.',
 };
 
 // ── THE THREE DAYS, IN THE FESTIVAL'S OWN ORDER ────────────────────────────────

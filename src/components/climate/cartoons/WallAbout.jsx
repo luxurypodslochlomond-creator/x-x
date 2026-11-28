@@ -12,8 +12,8 @@ import CartoonRoomNavigation from '@/components/climate/cartoons/CartoonRoomNavi
 
 export default function WallAbout() {
   return <section className="wall-about" id="wall-about" aria-labelledby="wall-about-title">
-    <h2 className="comic-section-title" id="wall-about-title">Behind the wall</h2>
-    <p>The work belongs to the artists. This record keeps their drawings, names and source links together, so the work can be read, checked and carried beyond this screen.</p>
+    <h2 className="comic-section-title" id="wall-about-title">What holds the wall up</h2>
+    <p>The drawings are the argument. This is the rest of it: why a pen does what a graph cannot, whose book this is, the hands that drew power before any of us were in the room — and the rule that keeps the work whole and the money printed.</p>
     <details className="wall-background" id="wall-purpose">
       <summary>Why cartoons, and what humour can do</summary>
       <CartoonWhy />

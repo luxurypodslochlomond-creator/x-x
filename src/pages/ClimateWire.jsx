@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NewsIndex from '@/components/climate/NewsIndex';
 import WireOpening from '@/components/climate/wire/WireOpening';
+import WireEventNote from '@/components/climate/wire/WireEventNote';
 import NewsSubmitForm from '@/components/climate/NewsSubmitForm';
 import useRecordViewState from '@/components/climate/useRecordViewState';
 import useSignalPage from '@/components/climate/useSignalPage';
@@ -13,6 +14,7 @@ export default function ClimateWire() {
   const signals = useSignalPage({ query: q, kind, verification: filter });
   return <div id="record-wire" className="news-page text-record-ink" data-record-kind={recordKindOf(kind)}>
     <WireOpening onAdd={() => setFormOpen(true)} />
+    <WireEventNote />
     <NewsIndex entries={signals.entries} keptDay={signals.keptDay} loading={signals.isPending || signals.searching} query={q} onQueryChange={setQ} kind={kind} onKindChange={setKind} verification={filter} onVerificationChange={setFilter} hasMore={signals.hasNextPage} loadingMore={signals.isFetchingNextPage} onMore={() => signals.fetchNextPage()} />
     {formOpen && <NewsSubmitForm initialKind={kind} onClose={() => setFormOpen(false)} onSent={() => signals.refetch()} />}
   </div>;
