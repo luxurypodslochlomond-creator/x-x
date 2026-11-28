@@ -144,3 +144,16 @@ export function MarkRoom({ size = 22 }) {
     </Mark>
   );
 }
+
+// 13 · Where they were drawn — the edge of the world, with the wall's own strokes standing
+// inside it. Not a globe with continents on it: a map mark at twenty-two pixels is a smudge,
+// and the idea here is only that these drawings have a ground under them.
+export function MarkWhere({ size = 22 }) {
+  return (
+    <Mark size={size} stroke={2.6}>
+      <path d="M5 21a15 8.5 0 1 0 30 0a15 8.5 0 1 0 -30 0" />
+      <path d="M14 25V20M26 25V22" strokeWidth="1.8" />
+      <path d="M20 25V16" style={{ stroke: RED }} />
+    </Mark>
+  );
+}

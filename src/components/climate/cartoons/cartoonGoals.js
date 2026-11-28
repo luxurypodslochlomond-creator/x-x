@@ -55,12 +55,15 @@ export const GOALS = [
   goal(1, 'No Poverty',
     'End poverty in all its forms everywhere.', 7, []),
   goal(2, 'Zero Hunger',
-    'End hunger, achieve food security and improved nutrition and promote sustainable agriculture.', 8, []),
+    'End hunger, achieve food security and improved nutrition and promote sustainable agriculture.', 8, [
+      read('Hidden in Plain Sight', 'Because the water it names is the water that grows the food: the green water in soils and plants is what sustains the farms.'),
+    ]),
   goal(3, 'Good Health and Well-being',
     'Ensure healthy lives and promote well-being for all at all ages.', 13, [
       read("Heat's Got Nowhere to Hide!", 'Because a heatwave is a health emergency before it is anything else.'),
       read('Keeping It Cool!', 'Because cooling a room is, for some people, the difference between living and not.'),
       read('The Way to Live Longer!', 'Because the air a child breathes decides how long that child lives.'),
+      read('Earth in ICU: The Only Medicine is a Tree', 'Because it puts the planet in a hospital bed and prescribes a tree, which makes the loss of trees a health question and not only a landscape one.'),
     ]),
   goal(4, 'Quality Education',
     'Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.', 10, [
@@ -73,6 +76,8 @@ export const GOALS = [
       // The strip's own yellow caption does the work here, so the record only has to point
       // at it: the waterways, and the three Nigerian rivers among the twenty worst.
       read('Beach Date Saved', 'Because its own caption says the waterways take the hit, and names three of the world’s twenty worst plastic-polluting rivers as Nigerian.'),
+      read('Urbanisation and Sanitation…', 'Because sanitation is the goal’s own subject and the drawing is about a city that has not built it.'),
+      read('Hidden in Plain Sight', 'Because its line is about water — the green water held in soils and plants, which no pipe carries and no map shows.'),
     ]),
   goal(7, 'Affordable and Clean Energy',
     'Ensure access to affordable, reliable, sustainable and modern energy for all.', 5, [
@@ -89,6 +94,7 @@ export const GOALS = [
       // that costs in power — was a reading of the title, not of the drawing, and a
       // placement argued from a title is exactly the kind of claim a reader should refuse.
       read('The Cooler Influencer', 'Because its own line names clean energy as the real influencer, not the heatwave.'),
+      read('Cut the Crude!', 'Because cutting the crude is the energy transition in three words: the fuel not taken out of the ground is the fuel not burned.'),
     ]),
   goal(8, 'Decent Work and Economic Growth',
     'Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all.', 12, [
@@ -99,17 +105,22 @@ export const GOALS = [
       read('The Transformation Nobody Saw Coming', 'Because it is about what a new machine takes out of the ground and off the grid.'),
     ]),
   goal(10, 'Reduced Inequalities',
-    'Reduce inequality within and among countries.', 10, []),
+    'Reduce inequality within and among countries.', 10, [
+      read('Developing Nations Are Shouldering Unfair Climate Responsibilities', 'Because that is the inequality the goal names between countries, in the drawing’s own title.'),
+    ]),
   goal(11, 'Sustainable Cities and Communities',
     'Make cities and human settlements inclusive, safe, resilient and sustainable.', 10, [
       read('Revolution EV-olution!', 'Because it is about how a city moves, and who can afford to move that way.'),
       read('Rain Check!', 'Because it is about a city having to hold water it never planned for.'),
       read('A Tale of Two Cities', 'Because it puts two ways of building a city side by side and lets you choose.'),
       read('The Way to Live Longer!', 'Because the journey it draws is a city street, not a country road.'),
+      read('Alexandria – A City Worth Protecting', 'Because its own line is about people, a city’s identity and the environment they live in, which is this goal in one sentence.'),
+      read('Urbanisation and Sanitation…', 'Because it is about what a city does to the people who have to live in it.'),
     ]),
   goal(12, 'Responsible Consumption and Production',
     'Ensure sustainable consumption and production patterns.', 11, [
       read('Beach Date Saved', 'Because its whole argument is one can of litter against the 32 million tonnes of waste Nigeria makes in a year.'),
+      read('Unfortunate Sequins Events', 'Because a sequin is made to be worn once and washed away, which is the pattern this goal is about.'),
     ]),
   goal(13, 'Climate Action',
     'Take urgent action to combat climate change and its impacts.', 5, [
@@ -122,9 +133,13 @@ export const GOALS = [
       // reason is reached for: both are written on the drawings.
       read("Never mind, it's the Earth again crying over El-Nino, the ghost they helped to create...!", 'Because its own line is the Earth crying over El-Nino, the weather it is being blamed for.'),
       read("Défenseurs de l'Environnement (Defenders of the Environment)", 'Because the banner across it names the fight against climate change in its own words.'),
+      read('Ladies and gentlemen, this is your Captain speaking, we are now flying straight into a break in the Ozone layer - I hope you remembered to carry along some radiation suits!', 'Because its own caption is the atmosphere opening, announced to the passengers as a change of course.'),
+      read('Earth Day', 'Because a day the world agrees to look at the same thing at once is the action this goal asks for.'),
     ]),
   goal(14, 'Life Below Water',
-    'Conserve and sustainably use the oceans, seas and marine resources for sustainable development.', 10, []),
+    'Conserve and sustainably use the oceans, seas and marine resources for sustainable development.', 10, [
+      read('Together We Can Protect Our Coast – Alexandria', 'Because its own title is a coast being protected, which is this goal in the artist’s words.'),
+    ]),
   goal(15, 'Life on Land',
     'Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.', 12, [
       // ── THE GOAL THE WALL HAD NOTHING FOR, ANSWERED FOUR TIMES ────────────────
@@ -135,11 +150,15 @@ export const GOALS = [
       read('Why Kenyans will become extinct...', 'Because the map of Kenya in it is drawn as a field of stumps.'),
       read("Défenseurs de l'Environnement (Defenders of the Environment)", 'Because its banner names the forests and sacred sites of Bafoussam, and the drawing stands under one tree.'),
       read('Plant a Tree!', 'Because the whole drawing is a person with a sapling in a pot, about to put it in the ground.'),
+      read('Cutting Our Own Home', 'Because it draws the branch being sawn off the tree the saw is standing on.'),
+      read('The Last Shade', 'Because it counts what a tree does that a stump cannot: the shade left under it.'),
     ]),
   goal(16, 'Peace, Justice and Strong Institutions',
     'Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels.', 12, []),
   goal(17, 'Partnerships for the Goals',
-    'Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.', 19, []),
+    'Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.', 19, [
+      read('Developing Nations Are Shouldering Unfair Climate Responsibilities', 'Because a burden shared fairly is the partnership this goal is asking for, and the drawing says plainly that it is not shared fairly yet.'),
+    ]),
 ];
 
 // A drawing the record has read onto no goal at all. Printed rather than forced: an honest
@@ -157,4 +176,8 @@ export const readingsFor = (title) => GOALS
   .map((g) => ({ n: g.n, name: g.name, why: (g.drawings.find((d) => d.title === title) || {}).why }))
   .filter((r) => r.why);
 
-export const UNPLACED = ['Hidden in Plain Sight'];
+// The drawings the record has read onto no goal at all. This is not the count the page
+// prints — that is arithmetic on the wall itself, so it cannot go stale. This is the note a
+// keeper leaves beside the two that have nothing to read: a picture with no title and no line
+// cannot be placed honestly, and forcing it somewhere would be the first lie on this wall.
+export const UNPLACED = ['Last Wish'];

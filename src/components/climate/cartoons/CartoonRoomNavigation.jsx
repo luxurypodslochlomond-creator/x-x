@@ -12,6 +12,7 @@ import {
   MarkOneHand,
   MarkTwoEdges,
   MarkRoom,
+  MarkWhere,
 } from '@/components/climate/cartoons/SetListMarks';
 import '@/components/climate/cartoons/wall-navigation.css';
 
@@ -44,6 +45,13 @@ const OUT_OF_ROOM = [
   { n: '09', href: '/ClimateCartoons/Francis', label: 'One hand’s own page', line: 'Francis, and every hand’s own address', Mark: MarkOneHand, page: true },
   { n: '10', href: '/ClimateCartoons/CAIB', label: 'Where this stands', line: 'The line between CAIB and this record', Mark: MarkTwoEdges, page: true },
   { n: '11', href: '/ClimateCartoons/WhatThisIs', label: 'What this is', line: 'Your work and your rights, in plain words', Mark: MarkRoom, page: true },
+  // ── THE DOOR THE ROOM WAS MISSING ────────────────────────────────────────────
+  // The map has carried every drawing since it was built — a layer of its own, each one
+  // standing at the country that gave it, and each one opening back onto the wall — and the
+  // wall had no way of saying so. So a reader who wanted to see where these came from had to
+  // already know the map existed. It is a door out of the room now, on the list, where a
+  // reader looks for the ways out.
+  { n: '12', href: '/ClimateMap', label: 'Where they were drawn', line: 'Every drawing, standing at the country that gave it', Mark: MarkWhere, page: true },
 ];
 
 const WAYS_IN = IN_ROOM.length + OUT_OF_ROOM.length;
