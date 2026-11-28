@@ -58,6 +58,14 @@ export default function CartoonGoals() {
     () => cartoons.filter((c) => c.title && !placedTitles.has(c.title)).map((c) => c.title),
     [cartoons, placedTitles]
   );
+  // The other half of the count, and the one a cartoonist looks for: how much of the wall
+  // the record has actually read. Counted on the whole wall, including the drawings that
+  // came without a title — a wall of thirty-two is a wall of thirty-two, and a count that
+  // quietly leaves one out to make the arithmetic tidier is the kind of figure this record
+  // exists to refuse.
+  const wallCount = cartoons.length;
+  const untitled = useMemo(() => cartoons.filter((c) => !c.title).length, [cartoons]);
+  const readCount = wallCount - unplaced.length - untitled;
   const shown = waitingOnly ? GOALS.filter((g) => !answered(g)) : GOALS;
 
   return (
@@ -77,15 +85,23 @@ export default function CartoonGoals() {
           explain the goals to the people who have been drawing them. Open any goal: the goal’s
           own sentence, the cartoonists’ own sentences, and the page where you can check both.
         </p>
+        {/* "Made from each drawing's published line" was true of the first drawings and false
+            of most of them: eighteen of the thirty-two on this wall came with no line at all.
+            A method that describes a source the record did not have is the one sentence on
+            this page a sceptic could pull out and be right about, so it now says what the
+            readings were actually made from — the drawing as it hangs, its title, and its
+            line wherever there is one. */}
         <p className="cartoon-goals-method">
-          This reading is the record’s own, made from each drawing’s published line. It is not
-          the United Nations’ reading, and the UN has not endorsed this room.
+          This reading is the record’s own, made from each drawing as it hangs: the drawing
+          itself, its title, and the artist’s line wherever one came with it. It is not the
+          United Nations’ reading, and the UN has not endorsed this room.
         </p>
       </header>
 
       <div className="cartoon-goals-bar">
         <p className="cartoon-goals-count">
           <span><strong>{held}</strong> of 17 goals answered</span>
+          <span><strong>{readCount}</strong> of {wallCount} drawings read onto one</span>
           <span><strong>{open}</strong> still waiting for a drawing</span>
         </p>
         <button
@@ -121,6 +137,8 @@ export default function CartoonGoals() {
             ) {unplaced.length === 1 ? 'is' : 'are'} read onto no goal at all, and{' '}
             {unplaced.length === 1 ? 'is' : 'are'} left where they are. A room that puts every
             drawing somewhere has stopped looking at them.
+            {untitled > 0 &&
+              ` ${untitled === 1 ? 'One more' : `${untitled} more`} came without a title and ${untitled === 1 ? 'is' : 'are'} left alone for the same reason: a picture with no name cannot be read onto anything honestly.`}
           </p>
         )}
         <p>

@@ -12,6 +12,14 @@ export default function GoalRow({ goal, open, onToggle, art, cartoons = [] }) {
   // answered by a line in a file: the picture itself has to be there.
   const onWall = goal.drawings.filter((d) => art[d.title]);
   const has = onWall.length > 0;
+  // ── WHOSE WORDS ARE ACTUALLY IN THE PANEL ─────────────────────────────────────
+  // The label said "in the artists' own words" over a list where most drawings have no
+  // words from the artist at all — eighteen of the thirty-two on this wall came with none.
+  // A heading that promises a voice and prints only the record's own reason is the quiet
+  // kind of overclaim, and it is exactly the thing a reader would catch first. So the
+  // label is decided by what is really there, and when the record is the only one speaking
+  // the panel says so before it says anything else.
+  const hasArtistWords = onWall.some(({ title }) => Boolean(art[title]?.for_line));
   const colour = goalColour(goal.n);
 
   // ── THE OTHER CLAIM A DRAWING CAN CARRY ──────────────────────────────────────
@@ -67,7 +75,9 @@ export default function GoalRow({ goal, open, onToggle, art, cartoons = [] }) {
           <div className="cartoon-goal-said">
             <p className="cartoon-goal-label">
               {has
-                ? 'What the drawings say, in the artists’ own words'
+                ? hasArtistWords
+                  ? 'What the drawings say, in the artists’ own words'
+                  : 'What the record reads into them'
                 : offered.length
                 ? 'Offered for this goal, in the senders’ own words'
                 : 'What is missing here'}
@@ -76,8 +86,13 @@ export default function GoalRow({ goal, open, onToggle, art, cartoons = [] }) {
               <p className="cartoon-goal-note">
                 The line in red under each title is the record’s own reason for reading that
                 drawing onto this goal. It is not the artist’s claim and not the UN’s reading:
-                the drawing opens onto its own place on the wall, where the artist’s line sits
-                beside it, and you can judge the reading yourself.
+                the drawing opens onto its own place on the wall,{' '}
+                {hasArtistWords
+                  ? 'where the artist’s line sits beside it'
+                  : 'where it hangs with whatever its artist gave us'}, and you can judge the
+                reading yourself.
+                {!hasArtistWords &&
+                  ' None of these drawings came with a line from the artist, so the reason in red is the record’s alone, and the drawing is the only evidence for it.'}
               </p>
             )}
             {has ? (
@@ -105,6 +120,14 @@ export default function GoalRow({ goal, open, onToggle, art, cartoons = [] }) {
                           first, so the claim can be checked against their words underneath. */}
                       {why && <span className="cartoon-goal-line-why">{why}</span>}
                       {piece?.for_line && <span className="cartoon-goal-line-text">{piece.for_line}</span>}
+                      {/* ── THE HOLDER'S LINE TRAVELS WITH THE PICTURE ──────────────
+                          The record's own rule is that a credit is never separated from the
+                          drawing it belongs to, and this ledger was the one place breaking it:
+                          the wall prints the holder's line under every plate, and the goals
+                          reproduced the same pictures without it. Half of these were first
+                          published by somebody else, and a drawing lifted out of the wall
+                          without its holder's name is the exact thing this record refuses. */}
+                      {piece?.credit && <span className="cartoon-goal-line-credit">{piece.credit}</span>}
                     </li>
                   );
                 })}
@@ -137,6 +160,7 @@ export default function GoalRow({ goal, open, onToggle, art, cartoons = [] }) {
                       is their word, not the record’s reading.
                     </span>
                     {piece.for_line && <span className="cartoon-goal-line-text">{piece.for_line}</span>}
+                    {piece.credit && <span className="cartoon-goal-line-credit">{piece.credit}</span>}
                   </li>
                 ))}
               </ul>

@@ -210,8 +210,11 @@
    hairline above each one keeps it an index of works rather than a gallery. */
 .press-room .cartoon-goal-line {
   display: grid;
-  grid-template-columns: clamp(7rem, 14vw, 10.5rem) minmax(0, 1fr);
-  grid-template-areas: "art title" "art why" "art text";
+  /* A hundred and sixty-eight pixels is a thumbnail, and a caption gag does not survive it.
+     The ledger is a full-width chapter now rather than a panel in a drawer, so the drawing
+     gets the width of a drawing. */
+  grid-template-columns: clamp(9rem, 18vw, 15rem) minmax(0, 1fr);
+  grid-template-areas: "art title" "art why" "art text" "art credit";
   align-content: start;
   gap: .15rem .85rem;
   padding-top: .7rem;
@@ -240,6 +243,21 @@
 .press-room .cartoon-goal-line .cartoon-goal-line-why { grid-area: why; }
 .press-room .cartoon-goal-line .cartoon-goal-line-text { grid-area: text; }
 
+/* The holder's line, under the picture it belongs to. Quiet enough not to compete with the
+   artist's words, and never dropped: a drawing on this record travels with the name of
+   whoever holds it. */
+.press-room .cartoon-goal-line-credit {
+  grid-area: credit;
+  display: block;
+  margin-top: .18rem;
+  font-family: var(--font-record-ui);
+  font-size: .6rem;
+  line-height: 1.45;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted) / .85);
+}
+
 /* ── WHY IT IS HERE ──────────────────────────────────────────────────────────────
    A goal no longer opens onto a drawing with no reason attached. The record's reason runs
    under the title behind the record's own red rule: short, specific and answerable. It sits
@@ -260,6 +278,9 @@
    claim is theirs rather than the record's. Muted, because it is a note about a claim and not
    the claim itself — the artist's own words sit under it in ink. */
 .press-room .cartoon-goal-who {
+  /* Pinned to the claim's own row: an offered drawing's "who says so" stands where a read
+     drawing's red reason stands, and it must not be auto-placed into the credit line. */
+  grid-area: why;
   display: block;
   max-width: 52ch;
   font-family: var(--font-reading);
