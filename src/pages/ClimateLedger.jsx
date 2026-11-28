@@ -15,7 +15,7 @@ export default function ClimateLedger() {
   });
   return <ClimateRecordShell painted wide className="stand-page" eyebrow="Stand with the work" marker="x = x · artists, people, planet"
     title="Stand behind the work."
-    statement="A drawing can be given freely. The person making it still has to live. Bring money, knowledge, a place or a skill, without buying control."
+    statement="Pay an artist. Give the work a place. Bring a skill. Nothing here buys control."
     returnTo="/ClimateCartoons" returnLabel="Back to the drawings"
     footer="The artists keep their rights. Every offer needs consent. Every recorded payment stays open to scrutiny.">
     <p className="stand-principle">Free to see. <span>Not free to make.</span></p>

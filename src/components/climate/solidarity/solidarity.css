@@ -1,33 +1,38 @@
-/* The supplied full-width editorial accordion, on the record's paper. */
-.solidarity-section { width: 100%; margin: 3rem 0; padding: 0; }
-.solidarity-accordion { container: solidarity / inline-size; width: 100%; background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); font-family: var(--font-record-ui); }
-.solidarity-heading { margin: 0; border-left: 1px solid rgb(var(--record-ink)); }
-.solidarity-toggle { display: flex; align-items: center; width: 100%; gap: 1.1rem; min-height: 4.5rem; padding: 1rem clamp(.9rem, 3cqi, 1.5rem); border: 0; border-bottom: 1px solid rgb(var(--record-ink)); background: transparent; color: inherit; text-align: start; cursor: pointer; }
-.solidarity-toggle span { font-size: clamp(1.1rem, 2.7cqi, 1.55rem); font-weight: 650; line-height: 1.22; letter-spacing: -.025em; }
-.solidarity-toggle svg { flex-shrink: 0; }
-.solidarity-toggle svg path[d="M12 5v14"] { transform-origin: 12px 12px; transition: transform .3s, opacity .3s; }
-.solidarity-open .solidarity-toggle svg path[d="M12 5v14"] { transform: scaleY(0); opacity: 0; }
-.solidarity-toggle:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: -4px; }
-.solidarity-content { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows .4s ease, opacity .4s ease, visibility 0s linear .4s; }
-.solidarity-open .solidarity-content { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition: grid-template-rows .4s ease, opacity .4s ease, visibility 0s; }
-.solidarity-inner { overflow: hidden; min-height: 0; }
-.solidarity-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 1rem 1.5rem; padding: .9rem 0; }
-.solidarity-photo { min-width: min(100%, 15rem); flex: 368 1 0; align-self: flex-start; aspect-ratio: 368 / 247; overflow: hidden; transform: translateX(-2rem); opacity: 0; transition: transform .5s ease, opacity .5s ease; }
-.solidarity-photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.solidarity-open .solidarity-photo { transform: translateX(0); opacity: 1; }
-.solidarity-text { min-width: min(100%, 15rem); flex: 343 1 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 1.2rem; padding: 1rem clamp(.9rem, 3cqi, 1.5rem) 1.5rem 0; opacity: 0; transition: opacity .45s ease .15s; }
-.solidarity-open .solidarity-text { opacity: 1; }
-.solidarity-body { margin: 0; font-size: clamp(1rem, 2cqi, 1.1rem); line-height: 1.65; max-width: 43ch; }
-.solidarity-text > a { align-self: flex-start; min-height: 2.75rem; align-content: center; color: rgb(var(--record-red)); font-weight: 750; text-decoration: underline; text-underline-offset: .25em; }
-.solidarity-caption { margin: 0; color: rgb(var(--record-muted)); font-size: .85rem; line-height: 1.5; font-style: italic; }
-.stand-page .record-room-intro > svg { display: none; }
-.stand-page.record-room-painted .record-room-intro h1 { max-width: 15ch; font-weight: 750; letter-spacing: -.04em; }
-.stand-page .stand-principle { margin: 0; padding: 1rem 0; border-block: 2px solid rgb(var(--record-ink)); font: 700 clamp(1.1rem, 2.4vw, 1.65rem)/1.35 var(--font-record-ui); }
-.stand-page .stand-principle span { color: rgb(var(--record-red)); }
-.stand-page .stand-section-title { font: 750 clamp(1.8rem, 3vw, 2.7rem)/1.1 var(--font-record-ui); letter-spacing: -.035em; }
-.stand-page .stand-kicker { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgb(var(--record-muted)); }
-.stand-page .stand-links { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; margin-top: 1rem; }
-.stand-page .stand-links a { min-height: 2.75rem; align-content: center; color: rgb(var(--record-red)); text-decoration: underline; text-underline-offset: .2em; font-weight: 700; }
-.stand-page :is(#offer-help, #ledger-lines, #ledger-rule) { scroll-margin-top: 8rem; }
-@container solidarity (max-width: 34rem) { .solidarity-text { padding: .5rem 1rem 1.5rem; } }
-@media (prefers-reduced-motion: reduce) { .solidarity-accordion * { transition: none !important; transform: none !important; } }
+/* A numbered support sheet, not a gallery of generated stand-ins. */
+#root .stand-page .record-room-content { background: rgb(var(--record-paper)); }
+#root .stand-page .record-room-intro > svg { display: none; }
+#root .stand-page .record-room-intro h1 { max-width: 16ch; font-weight: 800; letter-spacing: -.045em; }
+#root .stand-page .stand-principle { max-width: none; margin: 0; padding: 1.2rem 0; border-block: 3px solid rgb(var(--record-ink)); font: 850 clamp(1.65rem, 3.2vw, 2.7rem)/1.15 var(--font-record-ui); letter-spacing: -.035em; }
+#root .stand-page .stand-principle span { display: block; color: rgb(var(--record-red)); }
+#root .stand-page .stand-section-title { font: 800 clamp(1.7rem, 3vw, 2.5rem)/1.12 var(--font-record-ui); letter-spacing: -.035em; overflow-wrap: anywhere; }
+#root .stand-page .stand-kicker { margin: 0; color: rgb(var(--record-red)); font: 750 .75rem/1.5 var(--font-record-ui); letter-spacing: .1em; text-transform: uppercase; }
+#root .stand-page .stand-links { display: flex; flex-wrap: wrap; gap: .3rem 1.5rem; margin-top: .8rem; }
+#root .stand-page .stand-links a { display: inline-flex; align-items: center; min-height: 2.75rem; color: rgb(var(--record-red)); text-decoration: underline; text-underline-offset: .25em; font: 700 .95rem/1.4 var(--font-record-ui); }
+#root .stand-page :is(#stand-contribute, #offer-help, #ledger-lines, #ledger-rule) { scroll-margin-top: 8rem; }
+#root .stand-page .solidarity-section { width: 100%; margin: 2.5rem 0; padding: 0; }
+#root .stand-page .solidarity-accordion { width: 100%; border-top: 3px solid rgb(var(--record-ink)); color: rgb(var(--record-ink)); font-family: var(--font-record-ui); }
+#root .stand-page .solidarity-item { border-bottom: 1px solid rgb(var(--record-ink) / .35); }
+#root .stand-page .solidarity-heading { margin: 0; border: 0; }
+#root .stand-page .solidarity-toggle { display: grid; grid-template-columns: 3rem minmax(0, 1fr) auto; align-items: baseline; width: 100%; gap: 1rem; min-height: 5rem; padding: 1.3rem 0; border: 0; background: transparent; color: inherit; text-align: start; cursor: pointer; }
+#root .stand-page .solidarity-number { font: 800 1.1rem/1 var(--font-record-ui); letter-spacing: -.04em; color: rgb(var(--record-muted)); font-variant-numeric: tabular-nums; }
+#root .stand-page .solidarity-name { min-width: 0; font: 800 clamp(1.25rem, 2.8vw, 2rem)/1.15 var(--font-record-ui); letter-spacing: -.035em; overflow-wrap: anywhere; }
+#root .stand-page .solidarity-toggle svg { align-self: center; }
+#root .stand-page .solidarity-open .solidarity-toggle { color: rgb(var(--record-red)); }
+#root .stand-page .solidarity-open .solidarity-number { color: inherit; }
+#root .stand-page .solidarity-open .solidarity-toggle svg path[d="M12 5v14"] { display: none; }
+#root .stand-page .solidarity-toggle:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
+#root .stand-page .solidarity-content[hidden] { display: none; }
+#root .stand-page .solidarity-text { min-width: 0; padding: 0 2rem 1.4rem 4rem; }
+#root .stand-page .solidarity-body { max-width: 60ch; margin: 0; color: rgb(var(--record-ink)); font: 400 1.05rem/1.65 var(--font-record-ui); overflow-wrap: anywhere; }
+#root .stand-page .solidarity-text > a { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: .75rem; color: rgb(var(--record-red)); font-weight: 750; text-decoration: underline; text-underline-offset: .25em; }
+#root .stand-page :is(input, select, textarea) { max-width: 100%; min-width: 0; }
+@media (min-width: 768px) {
+  #root .stand-page .stand-principle span { display: inline; }
+}
+@media (max-width: 639px) {
+  #root .stand-page .solidarity-toggle { grid-template-columns: 2rem minmax(0, 1fr) auto; gap: .65rem; min-height: 4.7rem; }
+  #root .stand-page .solidarity-number { font-size: .9rem; }
+  #root .stand-page .solidarity-text { padding: 0 0 1.2rem 2.65rem; }
+  #root .stand-page .solidarity-body { font-size: 1rem; line-height: 1.6; }
+  #root .stand-page .stand-links { gap: .15rem 1rem; }
+}

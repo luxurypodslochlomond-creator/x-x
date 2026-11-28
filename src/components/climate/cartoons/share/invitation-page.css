@@ -1,0 +1,43 @@
+/* One invitation first; reference words stay available without swallowing the page. */
+#root .invitation-page .record-room-content { background: rgb(var(--record-paper)); }
+#root .invitation-page .invitation-layout { display: grid; gap: 2rem; min-width: 0; }
+#root .invitation-page .invitation-main { min-width: 0; }
+#root .invitation-page .invitation-kicker { margin: 0; font: 750 .78rem/1.5 var(--font-record-ui); color: rgb(var(--record-red)); letter-spacing: .09em; text-transform: uppercase; }
+#root .invitation-page .invitation-heading { margin: .45rem 0 1.25rem; font: 800 clamp(1.6rem, 3vw, 2.5rem)/1.12 var(--font-record-ui); color: rgb(var(--record-ink)); letter-spacing: -.035em; }
+#root .invitation-page .invitation-join { margin: 1.2rem 0; padding: 1rem 0; border-block: 1px solid rgb(var(--record-ink) / .3); }
+#root .invitation-page .invitation-join label { display: block; font-size: .85rem; font-weight: 700; line-height: 1.5; }
+#root .invitation-page .invitation-join textarea { display: block; width: 100%; min-width: 0; resize: vertical; margin-top: .5rem; padding: .65rem; border: 1px solid rgb(var(--record-ink) / .4); background: rgb(var(--record-paper)); color: rgb(var(--record-ink)); font: 400 1rem/1.5 var(--font-record-ui); }
+#root .invitation-page .invitation-join textarea:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 2px; }
+#root .invitation-page .invitation-join p { margin: .5rem 0 0; font-size: .85rem; line-height: 1.5; color: rgb(var(--record-muted)); }
+#root .invitation-page .share-word { min-width: 0; margin-top: 1.25rem; padding-top: 1rem; }
+#root .invitation-page .share-word-label { min-width: 0; font: 750 .78rem/1.45 var(--font-record-ui); letter-spacing: .06em; }
+#root .invitation-page .share-word-copy { margin-top: .85rem; font: 400 1.05rem/1.6 var(--font-record-ui); color: rgb(var(--record-ink)); overflow-wrap: anywhere; }
+#root .invitation-page .share-word-note { font-size: .85rem; line-height: 1.5; }
+#root .invitation-page .share-word button { min-height: 2.75rem; }
+#root .invitation-page .share-targets a, #root .invitation-page .share-targets button { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding: .45rem .65rem; font-size: .72rem; letter-spacing: .04em; }
+#root .invitation-page .invitation-picture { margin: 1.8rem 0; padding: 1.3rem 0; border-block: 2px solid rgb(var(--record-ink)); }
+#root .invitation-page .invitation-picture h2 { margin: 0; font: 800 1.35rem/1.2 var(--font-record-ui); letter-spacing: -.025em; }
+#root .invitation-page .invitation-picture p { margin: .5rem 0 1rem; font-size: .95rem; line-height: 1.55; color: rgb(var(--record-muted)); }
+#root .invitation-page .invitation-fold { min-width: 0; border-bottom: 1px solid rgb(var(--record-ink) / .3); }
+#root .invitation-page .invitation-fold > summary { min-height: 3.4rem; padding: .9rem 0; cursor: pointer; font: 750 1rem/1.5 var(--font-record-ui); color: rgb(var(--record-ink)); overflow-wrap: anywhere; }
+#root .invitation-page .invitation-fold > summary:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
+#root .invitation-page .invitation-fold[open] > summary { color: rgb(var(--record-red)); }
+#root .invitation-page .invitation-fold > .share-word { padding-bottom: 1.4rem; }
+#root .invitation-page .invitation-reference { min-width: 0; margin-top: 2rem; padding-top: 1.5rem; border-top: 3px solid rgb(var(--record-ink)); }
+#root .invitation-page .invitation-address { min-width: 0; padding-top: 1rem; border-top: 3px solid rgb(var(--record-ink)); }
+#root .invitation-page .invitation-address-line { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+#root .invitation-page .invitation-address-line p { min-width: 0; margin: 0; font: 500 .85rem/1.5 var(--font-record-ui); overflow-wrap: anywhere; }
+#root .invitation-page .invitation-address-line button { min-height: 2.75rem; }
+#root .invitation-page .invitation-address figcaption { min-width: 0; font-size: .85rem; line-height: 1.5; overflow-wrap: anywhere; }
+#root .invitation-page .invitation-offline { margin: .7rem 0 0; font-size: .82rem; line-height: 1.55; color: rgb(var(--record-muted)); }
+@media (min-width: 1024px) {
+  #root .invitation-page .invitation-layout { grid-template-columns: minmax(0, 1fr) 16rem; gap: 2.5rem; align-items: start; }
+  #root .invitation-page .invitation-address { position: sticky; top: 1.5rem; }
+  #root .invitation-page .invitation-reference-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+}
+@media (max-width: 639px) {
+  #root .invitation-page .record-room-intro h1 { font-size: 2.5rem; letter-spacing: -.035em; }
+  #root .invitation-page .invitation-layout { gap: 1.5rem; }
+  #root .invitation-page .invitation-heading { font-size: 1.75rem; }
+  #root .invitation-page .invitation-address { padding-top: 1rem; }
+}
