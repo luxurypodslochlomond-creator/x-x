@@ -6,6 +6,7 @@ import FounderNumbers from '@/components/climate/founder/FounderNumbers';
 import FounderSolutions from '@/components/climate/founder/FounderSolutions';
 import FounderWork from '@/components/climate/founder/FounderWork';
 import FounderDoors from '@/components/climate/founder/FounderDoors';
+import FounderRule from '@/components/climate/founder/FounderRule';
 import FounderClosing from '@/components/climate/founder/FounderClosing';
 import '@/components/climate/founder/founder-page.css';
 import '@/components/climate/founder/founder-mobile.css';
@@ -22,6 +23,7 @@ export default function ClimateFounder() {
       <FounderSolutions />
       <FounderWork />
       <FounderDoors />
+      <FounderRule />
       <FounderClosing />
     </div>
   );

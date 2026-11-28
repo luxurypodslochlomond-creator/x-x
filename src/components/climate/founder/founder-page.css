@@ -129,6 +129,15 @@ html .climate-record[data-record-page="ClimateFounder"] .record-book { backgroun
 #record-founder .record-founder-imprint-note { max-width: 65ch; margin: 1rem auto 0; color: rgb(var(--record-muted)); font-size: .76rem !important; }
 #record-founder .record-founder-imprint-contact { display: inline-flex; align-items: center; min-height: 2.75rem; margin-top: .5rem; color: rgb(var(--record-red)); font-size: .74rem; text-decoration: underline; }
 
+/* ── THE RULE: WHY THE RECORD NAMES INSTITUTIONS AND NOT PRIVATE PEOPLE ──────── */
+#record-founder .record-founder-rule { background: rgb(var(--record-bone) / .92); border-top: 3px solid rgb(var(--record-signal)); }
+#record-founder .record-founder-rule-inner { max-width: 62rem; margin: auto; padding: 2.2rem 2rem; }
+#record-founder .record-founder-rule-title { max-width: 26ch; margin: 0 0 1rem; color: rgb(var(--record-ink)); font-size: clamp(1.5rem, 2.8vw, 2.3rem); line-height: 1.1; text-transform: uppercase !important; }
+#record-founder .record-founder-rule p { max-width: 68ch; margin: 0 0 .9rem; font-size: .94rem !important; line-height: 1.65 !important; }
+#record-founder .record-founder-rule strong { color: rgb(var(--record-red)); }
+#record-founder .record-founder-rule-links { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: 1.2rem; }
+#record-founder .record-founder-rule-links a { display: inline-flex; align-items: center; min-height: 2.75rem; color: rgb(var(--record-red)); font-size: .8rem; font-weight: 700; text-decoration: underline; }
+
 @media (min-width: 1024px) {
   #record-founder .record-founder-hero-inner { grid-template-columns: 1fr 1fr; column-gap: 3rem; padding-top: 2.5rem; }
   #record-founder .record-founder-first-voice { border-left: 1px solid rgb(var(--record-paper) / .4); padding-left: 2rem; }
