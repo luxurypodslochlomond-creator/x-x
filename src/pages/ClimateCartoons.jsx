@@ -37,7 +37,7 @@ export default function ClimateCartoons() {
       eyebrow="The Wall"
       marker="The record · the cartoon room"
       title="The Wall"
-      statement="Drawn by hand, aimed at the harm, signed by the hand that made it."
+      statement="Drawn by the people it’s happening to. Aimed at the people doing it."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."

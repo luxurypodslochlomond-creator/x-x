@@ -140,12 +140,19 @@ export default function ClimateCartoonArtist() {
             rather than the mood, and the mechanism is the lock: a page here is built from
             published drawings under a name, so there is nothing to follow, nothing to count
             and nothing that survives the work coming down. */}
+        {/* Brian, 28 November, on the note that stood here: "you sure peoples pages resonate
+            with you… this is opportunity to help the cartoons bro not stifle them."
+
+            It was three no's in a row — no profile, no follows, no numbers — which is a rule
+            read out to a cartoonist rather than a thing given to one. Same rule, same lock,
+            said the other way round: what they get first, and the reason it can be sent to an
+            editor second. */}
         <p className="hand-not-account">
-          No profile. No follows. No numbers.
+          The work, the name, the address. Nothing else.
           <span>
-            A page here exists only while a drawing does, so there is nothing to join and nothing to
-            collect. That is the rule that lets a cartoonist send this address to an editor without
-            becoming anybody’s content.
+            No profile, no follows, no numbers — a page here exists only while a drawing does, which
+            is why a cartoonist can send it to an editor, a paper or a ministry without becoming
+            anybody’s account.
           </span>
         </p>
       </div>

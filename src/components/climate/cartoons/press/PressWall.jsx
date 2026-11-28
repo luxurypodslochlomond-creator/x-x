@@ -69,9 +69,17 @@ export default function PressWall() {
             undersold what is actually hanging here — working cartoonists answering power
             with a pen, in countries where that is not a safe hobby. So the chapter says the
             claim instead of the category, in the shape this record already uses for its own
-            name: not a feed, a record. Not decoration, an argument. */}
-        <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />The trade at work · every hand named</p>
-        <h2 id="press-wall-title" className="press-wall-title">Not decoration. An argument.</h2>
+            name: not a feed, a record.
+
+            And the second go, later the same night: "doesn't feel coolasfuck for some reason
+            bro… the words feel like accountant wrote them." Right again. "Not decoration. An
+            argument." is a diagram of a sentence: two nouns and a bit of cleverness, and it
+            never names anybody. What this room actually argues is narrower and angrier — a
+            drawing is the one thing power cannot buy, ban or bury, because it costs nothing
+            to make and it travels in a pocket. So the chapter says that, in the trade's own
+            two words. The press and the pen. */}
+        <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />Satire, signed · every hand named</p>
+        <h2 id="press-wall-title" className="press-wall-title">They own the press. They don’t own the pen.</h2>
         {/* "Read the picture. Stay with the idea. Tap any drawing to look closer." stood here,
             and it was the last instruction in a stack of them: tap this, swipe that, read
             those in order. A reader knows how to look at a picture, and a wall that explains

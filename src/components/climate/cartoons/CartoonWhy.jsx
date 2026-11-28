@@ -34,9 +34,9 @@ export default function CartoonWhy() {
     <section className="comic-why" aria-labelledby="cartoon-why-title">
       <h2 id="cartoon-why-title" className="comic-section-title">Why a cartoon, and not a graph.</h2>
       <ul className="comic-why-list">
-        <li>One frame names who is doing it and who is paying for it. A report takes forty pages, a footnote and a lawyer, and still leaves that sentence out.</li>
-        <li>It goes where the report never goes — a phone, a classroom, a taxi, a kitchen — in a language nobody has to be taught to read.</li>
-        <li>The record keeps the drawing whole, the hand that made it and the drawer’s own line. A viewpoint is not proof, and this record never dresses one up as proof: the evidence stands beside it.</li>
+        <li>A report is written for the people it is about. A cartoon is written for everybody else.</li>
+        <li>One frame: who did it, who paid, and who is lying about it. No footnote to hide in.</li>
+        <li>Kept whole and signed, in the drawer’s own words. A viewpoint is not proof, and this record never pretends it is — the evidence stands beside the drawing.</li>
       </ul>
     </section>
   );
