@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
-import { GESTURES, THE_WALL } from '@/components/climate/smallGestures';
+import useGestureDoors from '@/components/climate/useGestureDoors';
 
 // Janine's list of the smallest gestures. Not advice, not a campaign — the things a
 // person can start today with nothing bought and nothing asked of anyone. x = x.
@@ -10,17 +10,18 @@ import { GESTURES, THE_WALL } from '@/components/climate/smallGestures';
 // major item on the record, not a small gesture. It now lives under the Mangroves
 // category and its own entries, the Bonaire film among them.
 
-// ── THE GESTURES GO TO THE REAL DRAWINGS, NOT TO OURS ──────────────────────────
-// These five used to open the record's own illustrated strips. Brian, 19 November: "maybe
-// smallest gestures goes to real cartoonists bro". He is right, and for the room's own
-// reason: a strip a machine illustrated is fiction, and a list of things a person can do
-// today should send a reader to work a human hand made. So every line here opens the wall
-// of real drawings — and the machine-drawn strips that used to sit below it came off the
-// record on 19 November, so the wall is now all there is: drawings, and the hands that made
-// them.
-// The five live in smallGestures.js, so the map's foot and this band cannot disagree.
+// ── FIVE GESTURES, FIVE DOORS ──────────────────────────────────────────────────
+// These five used to open the wall of drawings, all five to the same address. Brian,
+// 28 November: "small gestures theres probably many more but they dont go to right place
+// bro". He is right, and the fault was mine: a person who presses "using mass
+// transportation" wants the thing, not a picture of somebody's feelings about it. Each
+// line now opens the entry the record actually holds on that subject — and where it
+// holds none, the record's own search, which says so plainly.
+// The five live in smallGestures.js and their doors in useGestureDoors.js, so the map's
+// foot and this band cannot disagree.
 
 export default function SmallGesturesBand() {
+  const doors = useGestureDoors();
   return (
     <section className="px-4 pb-7 pt-9 lg:px-10 lg:pt-12">
       <RecordSectionHeading title="The smallest gestures" />
@@ -53,13 +54,13 @@ export default function SmallGesturesBand() {
         can do”.
       </p>
       <div className="flex flex-wrap gap-2">
-        {GESTURES.map(gesture => (
+        {doors.map(({ label, to }) => (
           <Link
-            key={gesture}
-            to={THE_WALL}
+            key={label}
+            to={to}
             className="border-2 border-record-ink bg-record-signal px-3 py-2 font-display text-xs font-bold uppercase tracking-wide text-record-ink underline decoration-transparent transition-colors hover:decoration-record-ink active:translate-y-px active:bg-record-ink active:text-record-paper"
           >
-            {gesture}
+            {label}
           </Link>
         ))}
       </div>

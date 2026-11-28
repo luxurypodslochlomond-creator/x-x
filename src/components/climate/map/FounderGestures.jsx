@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { GESTURES, THE_WALL } from '@/components/climate/smallGestures';
+import useGestureDoors from '@/components/climate/useGestureDoors';
 
 /* ── THE SIZE A PERSON CAN START ────────────────────────────────────────────────────
    The plate above this prints 33.7 million people in need in one country and 840 million
@@ -12,6 +12,7 @@ import { GESTURES, THE_WALL } from '@/components/climate/smallGestures';
    It is not a new list and it is not a summary of hers: it is the same five the record's
    home prints, read from one file, so the two pages cannot drift apart. */
 export default function FounderGestures() {
+  const doors = useGestureDoors();
   return (
     <section
       aria-labelledby="founder-gestures"
@@ -22,17 +23,17 @@ export default function FounderGestures() {
         The numbers are the reason. This is the size a person can start.
       </h2>
       <p className="mt-2 max-w-[64ch] text-[13px] leading-relaxed text-[#3a342c]">
-        Janine’s own five, in her words — small enough to start today, and free. Each one opens the
-        wall, where the drawings hang.
+        Janine’s own five, in her words — small enough to start today, and free. Each one opens what
+        the record actually holds on it, and says so plainly where it holds nothing.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
-        {GESTURES.map((gesture) => (
+        {doors.map(({ label, to }) => (
           <Link
-            key={gesture}
-            to={THE_WALL}
+            key={label}
+            to={to}
             className="border-2 border-record-ink bg-record-signal px-3 py-2 font-display text-xs font-bold uppercase tracking-wide text-record-ink underline decoration-transparent transition-colors hover:decoration-record-ink active:translate-y-px active:bg-record-ink active:text-record-paper"
           >
-            {gesture}
+            {label}
           </Link>
         ))}
       </div>
