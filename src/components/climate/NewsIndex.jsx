@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Plus, LoaderCircle, ArrowDown } from 'lucide-react';
+import { LoaderCircle, ArrowDown } from 'lucide-react';
 import SignalsWhoAnswers from '@/components/climate/SignalsWhoAnswers';
 import NewsIndexTools from '@/components/climate/NewsIndexTools';
 import NewsLead from '@/components/climate/NewsLead';
@@ -11,15 +10,16 @@ import '@/components/climate/news-index.css';
 import '@/components/climate/wire-mobile.css';
 import '@/components/climate/wire-desktop.css';
 import '@/components/climate/wire-phone.css';
-export default function NewsIndex({ entries, keptDay, loading, query, onQueryChange, kind, onKindChange, verification, onVerificationChange, onSubmit, hasMore, loadingMore, onMore }) {
+export default function NewsIndex({ entries, keptDay, loading, query, onQueryChange, kind, onKindChange, verification, onVerificationChange, hasMore, loadingMore, onMore }) {
   const [lead, ...rest] = entries;
   // A search settling must not empty the page under the reader's thumb: the list stays
   // and one quiet line says it is looking. Only a first load has nothing to keep.
   const firstLoad = loading && !entries.length;
   const searching = loading && entries.length > 0;
-  return <section className="news-index" data-record-layout="compact" aria-labelledby="climate-news-title">
-    <header className="news-index-heading"><div><span className="news-eyebrow">The record · sourced updates</span><h1 id="climate-news-title">The Wire</h1></div><button type="button" className="news-send" onClick={onSubmit} aria-label="Add to the Wire" title="Add a dated update to the Wire"><Plus size={22} aria-hidden="true" /><span>Add to the Wire</span></button></header>
-    <p className="news-index-intro">Dated updates, filed as crises, solutions or actions. For methods, ongoing crises, groups and things to join, <Link to="/TogetherChangeClimate" className="text-record-ink underline underline-offset-4">browse the Record by subject</Link>. Both belong to the same public record.</p>
+  return <section className="news-index" data-record-layout="compact" aria-label="The Wire">
+    {/* The name, the standfirst and the way in are the opening band's, so the list begins
+        with the tools and the entries rather than repeating its own heading. */}
+
     <NewsIndexTools query={query} onQueryChange={onQueryChange} kind={kind} onKindChange={onKindChange} verification={verification} onVerificationChange={onVerificationChange} />
     {searching && <p className="news-searching" role="status">Searching the Wire…</p>}
     {/* No signal: the copy this phone kept, and the day it kept it. Never presented as live. */}

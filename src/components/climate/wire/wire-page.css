@@ -1,0 +1,222 @@
+/* ── THE WIRE, PRINTED IN THE RECORD'S OWN ROOM ───────────────────────────────
+   Brian, 28 November: "thinking the wire needs same magic as founder and x=x and record
+   bro … sure everything connected and colour evident … and font etc".
+
+   The Wire was already a good register: stamps, dates set like a document, a bar of each
+   kind's ink down the left of an entry, every label a door. What it did not have was the
+   record behind it. The page was mounted inside the record's shell with the painting
+   already fixed, and then painted itself opaque paper on the first band — so the room that
+   carries the dated updates was the one room with nothing under it.
+
+   So it now does what the founder's page and x = x do:
+     · the painting is the ground and the book is see-through, so it is never covered;
+     · the Wire opens in a painted band, its name in the record's display face, wide and
+       light, not in a shout;
+     · the small line above it is the record's signal yellow, in caps and letterspaced;
+     · the three kinds are solid blocks of their own ink, so colour says what a thing is
+       before a word is read;
+     · the list sits on a paper sheet laid on the painting, so the painting breathes between
+       the opening and the entries instead of being hidden by them.
+   Nothing about what the Wire holds, counts or signs has changed. Only the hand it is
+   printed in. */
+html .climate-record[data-record-page="ClimateWire"] .record-book {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+#record-wire {
+  background: transparent;
+  color: rgb(var(--record-ink));
+  font-family: var(--font-record-ui);
+}
+
+/* The list keeps its own rules; only the paper it was painting is taken off. */
+#record-wire .news-page { background: transparent; }
+
+/* ── THE OPENING: THE RECORD'S OWN FOUR PARTS ──────────────────────────────────
+   The wash opens at half ink, clears through the middle of the painting, and darkens at the
+   foot, so the picture is a room rather than a black box. The yellow rule at the bottom is
+   the same edge the founder's opening wears. */
+#record-wire .wire-hero {
+  color: rgb(var(--record-paper));
+  background: linear-gradient(180deg, rgb(var(--record-ink) / .52), rgb(var(--record-ink) / .16) 46%, rgb(var(--record-ink) / .8));
+  border-bottom: 3px solid rgb(var(--record-signal));
+}
+#record-wire .wire-hero-inner {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 2.6rem clamp(1rem, 4vw, 2.4rem) 1.7rem;
+}
+#record-wire .wire-kicker {
+  position: relative;
+  margin: 0 0 1.1rem;
+  padding-top: .7rem;
+  font-size: .68rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-signal));
+}
+#record-wire .wire-kicker::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.6rem;
+  height: 3px;
+  background: currentColor;
+}
+#record-wire .wire-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.9rem, 8vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: .05em;
+  text-transform: none;
+  color: rgb(var(--record-paper));
+  text-shadow: 0 2px 18px rgb(var(--record-ink) / .9);
+  text-wrap: balance;
+}
+#record-wire .wire-standfirst {
+  margin: 1.1rem 0 0;
+  max-width: 58ch;
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+  color: rgb(var(--record-paper) / .92);
+  text-shadow: 0 1px 10px rgb(var(--record-ink) / .85);
+  text-wrap: pretty;
+}
+
+/* ── THREE KINDS, THREE INKS ──────────────────────────────────────────────────
+   Colour is the record's own meaning, not decoration: red is a crisis, green a solution,
+   blue an action — the same three inks the rail, the map key and the entries use. Printed
+   as solid blocks so the eye reads them before the words. */
+#record-wire .wire-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem 1.5rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+#record-wire .wire-key {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .78rem;
+  line-height: 1.4;
+  color: rgb(var(--record-paper) / .84);
+}
+#record-wire .wire-key-mark {
+  padding: .18rem .45rem .22rem;
+  font-family: var(--font-heading);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-paper));
+}
+#record-wire .wire-key-crisis { background: rgb(var(--record-red)); }
+#record-wire .wire-key-solution { background: rgb(var(--record-botanical)); }
+#record-wire .wire-key-action { background: rgb(var(--record-action)); }
+
+/* ── THE TWO DOORS OUT OF THE OPENING ─────────────────────────────────────────── */
+#record-wire .wire-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: 1.6rem;
+}
+#record-wire .wire-add {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 46px;
+  padding: .6rem 1rem;
+  border: 0;
+  border-radius: 2px;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+  font-family: var(--font-record-ui);
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+#record-wire .wire-add:active { background: rgb(var(--cartoon-sun)); }
+#record-wire .wire-record-door {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 46px;
+  padding: .6rem 1rem;
+  border: 2px solid rgb(var(--record-paper) / .55);
+  border-radius: 2px;
+  color: rgb(var(--record-paper));
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+#record-wire .wire-record-door:hover { border-color: rgb(var(--record-signal)); color: rgb(var(--record-signal)); }
+#record-wire .wire-hero-foot {
+  margin: 1.2rem 0 0;
+  font-size: .7rem;
+  line-height: 1.5;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgb(var(--record-paper) / .72);
+}
+#record-wire .wire-hero-foot a { color: rgb(var(--record-signal)); text-decoration: underline; text-underline-offset: .2em; }
+
+/* ── THE READING, ON A SHEET LAID ON THE PAINTING ─────────────────────────────── */
+#record-wire .news-index {
+  max-width: 68rem;
+  margin: 1.15rem auto 2rem;
+  padding: 2.2rem clamp(1rem, 3vw, 2.4rem) 2.4rem;
+  background: rgb(var(--record-paper) / .98);
+  border-top: 3px solid rgb(var(--record-mark));
+}
+#record-wire .news-index :is(a, button, input, summary):focus-visible {
+  outline: 2px solid rgb(var(--record-mark));
+  outline-offset: 4px;
+}
+
+/* The lead wears its kind as a rule, the way each row wears it as a bar — so on a desktop,
+   where the rows run full width, colour still says what the entry is before it is read. */
+#record-wire .news-lead { border-radius: 0; }
+#record-wire .news-lead[data-kind="emergency"] { border-top: 3px solid rgb(var(--record-red)); }
+#record-wire .news-lead[data-kind="milestone"] { border-top: 3px solid rgb(var(--record-botanical)); }
+#record-wire .news-lead[data-kind="initiative"] { border-top: 3px solid rgb(var(--record-action)); }
+
+/* ── IN THE HAND ──────────────────────────────────────────────────────────────── */
+/* On a handset the book is solid paper, so the band carries the painting itself — the same
+   rule the founder's opening follows, or the wash would be ink over paper: flat grey. */
+@media (max-width: 1023px) {
+  #record-wire .wire-hero {
+    background-color: rgb(var(--record-ink));
+    background-image:
+      linear-gradient(180deg, rgb(var(--record-ink) / .4), rgb(var(--record-ink) / .18) 40%, rgb(var(--record-ink) / .82)),
+      var(--record-cover);
+    background-size: cover;
+    background-position: center 35%;
+  }
+}
+
+@media (max-width: 639px) {
+  #record-wire .wire-hero-inner { padding: 2rem 1rem 1.4rem; }
+  #record-wire .wire-keys { gap: .5rem .9rem; }
+  #record-wire .wire-hero-actions > * { flex: 1 1 100%; justify-content: space-between; }
+  #record-wire .news-index {
+    margin: 0 0 calc(1.5rem + env(safe-area-inset-bottom));
+    padding: 1.5rem 1rem 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #record-wire .wire-hero,
+  #record-wire .wire-hero * { animation: none; transition: none; }
+}
