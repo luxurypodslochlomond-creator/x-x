@@ -45,6 +45,18 @@ function lines(ctx, text, width) {
   return result;
 }
 
+// A code printed on the card itself, so a card forwarded with no words under it still
+// opens something. It points at the hour's own page, never at a redirect.
+async function code(link) {
+  try {
+    const QRCode = (await import('qrcode')).default;
+    const url = await QRCode.toDataURL(link, { errorCorrectionLevel: 'H', margin: 0, width: 480, color: { dark: '#1a1612', light: '#efe7d6' } });
+    return await artwork(url);
+  } catch {
+    return null;
+  }
+}
+
 function artwork(src) {
   return new Promise((resolve, reject) => {
     const image = new Image();
@@ -111,6 +123,13 @@ export async function buildWorkshopCard(card = {}, options = {}) {
   ctx.fillText(t(ORGS), pad, band + 392);
 
   const origin = String(options.origin || recordOrigin()).replace(/^https?:\/\//, '').replace(/\/$/, '');
+  const hourLink = `${String(options.origin || recordOrigin()).replace(/\/$/, '')}/ClimateWorkshop`;
+  const square = await code(hourLink);
+  const codeSize = 132;
+  const codeX = W - pad - codeSize;
+  const textWidth = W - pad * 2 - (square ? codeSize + 24 : 0);
+  if (square) ctx.drawImage(square, codeX, band + 430, codeSize, codeSize);
+
   ctx.fillStyle = colors.INK;
   ctx.font = `700 28px ${DISPLAY}`;
   ctx.fillText(`${origin}/ClimateWorkshop`, pad, band + 440);
@@ -120,13 +139,18 @@ export async function buildWorkshopCard(card = {}, options = {}) {
   const joining = String(card.join || '').trim();
   let joiningSize = 21;
   ctx.font = `400 ${joiningSize}px ${DISPLAY}`;
-  let joiningLines = lines(ctx, joining || t(JOIN_NOTE), W - pad * 2);
+  let joiningLines = lines(ctx, joining || t(JOIN_NOTE), textWidth);
   while (joiningLines.length > 5 && joiningSize > 12) {
     joiningSize -= 1;
     ctx.font = `400 ${joiningSize}px ${DISPLAY}`;
-    joiningLines = lines(ctx, joining || t(JOIN_NOTE), W - pad * 2);
+    joiningLines = lines(ctx, joining || t(JOIN_NOTE), textWidth);
   }
   joiningLines.forEach((line, i) => ctx.fillText(line, pad, band + 492 + i * 27));
+  if (square) {
+    ctx.fillStyle = colors.MUTED;
+    ctx.font = `400 15px ${DISPLAY}`;
+    ctx.fillText('The hour', codeX, band + 430 + codeSize + 20);
+  }
   ctx.fillStyle = colors.MUTED;
   ctx.font = `400 18px ${DISPLAY}`;
   ctx.fillText(t(CARTOON_EVENT.coverArt), pad, band + 646);

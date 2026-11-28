@@ -12,6 +12,10 @@
 #root .press-room .wall-event-cover span { display: block; padding: .3rem; background: rgb(var(--record-signal)); color: rgb(var(--record-ink)); font-size: .7rem; font-weight: 750; }
 #root .press-room .wall-event-notice .wall-event-name { margin-top: .35rem; font-size: clamp(1.4rem, 2.1vw, 2.1rem); line-height: 1.1; color: rgb(var(--record-red)); }
 #root .press-room .wall-event-notice .wall-event-host { font-weight: 650; }
+#root .press-room .wall-event-join { margin-top: .7rem; border-top: 1px solid rgb(var(--record-ink) / .2); padding-top: .5rem; }
+#root .press-room .wall-event-join > summary { min-height: 2.5rem; align-content: center; cursor: pointer; font: 700 .8rem/1.3 var(--font-record-ui); color: rgb(var(--record-red)); text-decoration: underline; text-underline-offset: .2em; }
+#root .press-room .wall-event-join textarea { width: 100%; margin-top: .4rem; padding: .5rem; background: rgb(var(--record-paper)); border: 1px solid rgb(var(--record-ink) / .35); color: rgb(var(--record-ink)); font: 400 .85rem/1.5 var(--font-record-ui); }
+#root .press-room .wall-event-join textarea:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 2px; }
 #root .press-room .wall-enlarge-drawing { color: rgb(var(--record-ink)); background: rgb(var(--record-signal)); min-height: 2.75rem; padding: .45rem .8rem; font: 750 .85rem/1.2 var(--font-record-ui); }
 #root .press-room .press-sheet-share { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
 #root .record-cartoon-field .press-room .wall-continuous .press-sheet-art { cursor: zoom-in; }

@@ -42,7 +42,10 @@ export default function ShareQr({ link, compact = false }) {
 
       // The × punched straight through the middle, in the paper's own colour.
       const ctx = canvas.getContext('2d');
-      const arm = size * 0.105;
+      // Kept small on purpose: the × is a signature, not a hole. At this size every
+      // scanner that reads the code without it reads it with it, which is the only test
+      // a code printed on a card handed across a room has to pass.
+      const arm = size * 0.072;
       const centre = size / 2;
       ctx.strokeStyle = '#f4efe4';
       ctx.lineWidth = Math.max(6, scale * 1.7);
