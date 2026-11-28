@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
 import CartoonHumour from '@/components/climate/cartoons/CartoonHumour';
 import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
@@ -33,6 +34,7 @@ export default function WallAbout() {
         <CartoonSources />
       </div>
       <CartoonLongRead />
+      <p className="wall-event-note"><Link to="/ClimateCartoons/Answered">Whose the idea is, and whose the drawing</Link> — on a commissioned cartoon the idea and the commission belong to the team that had them, the drawing to the hand that made it, and both are printed.</p>
     </details>
     <CartoonRoomNavigation />
   </section>;

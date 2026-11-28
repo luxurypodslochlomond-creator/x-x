@@ -4,6 +4,8 @@ import '@/components/climate/cartoons/cartoon-room-jump.css';
 
 const SECTIONS = [
   { id: 'drawings', href: '#press-wall', label: 'The drawings' },
+  // What a cartoonist is paid is a chapter of the room, not a footnote under the pictures.
+  { id: 'money', href: '#wall-money', label: 'Pay an artist' },
   { id: 'send', href: '#cartoon-your-turn', label: 'Send a drawing' },
   { id: 'goals', href: '#cartoon-goals', label: '17 UN goals' },
   { id: 'about', href: '#wall-about', label: 'People & sources' },
