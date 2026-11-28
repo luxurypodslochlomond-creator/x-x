@@ -126,8 +126,26 @@
   }
 
   /* ── THE WALL'S OWN VOICE, SIZED FOR A HAND ─────────────────────────────────── */
-  #root .press-room .press-wall-colophon { font-size: .8rem; line-height: 1.5; }
-  #root .press-room .press-wall-print { margin-top: 1rem; }
+  /* ── THE FOOT OF THE WALL, ON A PLATE, BECAUSE ON A PHONE IT COULD NOT BE READ ──
+     Brian, 28 November: "on mobile can't see a lot of text". The permission line and
+     the door to the print room stand on the painting, and on a phone that is small type
+     over a photograph of the earth. They get a sheet of paper of their own here — which
+     is what every other line of the room already stands on — and the type goes up with
+     it. The words are untouched. */
+  #root .press-room .press-wall-foot {
+    margin-top: 1.1rem;
+    padding: .85rem .95rem 1rem;
+    border-left: 3px solid rgb(var(--record-red));
+    background: rgb(var(--record-paper) / .97);
+  }
+  #root .press-room .press-wall-colophon {
+    border-left: 0;
+    padding-left: 0;
+    font-size: .92rem;
+    line-height: 1.55;
+    color: rgb(var(--record-ink));
+  }
+  #root .press-room .press-wall-print { margin-top: 1rem; font-size: .7rem; }
   #root .press-room .comic-why-list { gap: .85rem; }
   #root .press-room .press-more,
   #root .press-room .press-state { margin-top: 1rem; }

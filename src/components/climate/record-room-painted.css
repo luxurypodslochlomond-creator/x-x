@@ -200,6 +200,37 @@ html .climate-record .record-book:has(.record-room-painted) {
   color: rgb(var(--record-signal));
 }
 
+/* ── THE WALL'S STANDING LINE, SET TO CARRY THE ROOM ───────────────────────────
+   Brian, 28 November: "this line bro it's great on sent but not heavy duty coolasfuck
+   on mobile … looks weird on mobile and desktop".
+
+   He is right, and the fault is a typographic one rather than a wording one: the line
+   was set at body size on a painting, so the sentence that says what the room is for
+   read as a caption under the name. A room of drawings made against indifference needs
+   its standing line to stand. So on the wall — and only the wall, because other painted
+   rooms carry two or three sentences and this treatment would shout them — the statement
+   is set in the record's reading face at display size, in three or four lines that land,
+   balanced so no line is left hanging by a word. The words themselves are untouched. */
+.climate-record.record-connected-shell.record-room-painted.press-room .record-room-intro p {
+  max-width: 26ch;
+  margin-top: 1.35rem;
+  font-family: var(--font-reading);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.32;
+  letter-spacing: -.005em;
+  color: rgb(var(--record-paper));
+  text-shadow: 0 2px 18px rgb(var(--record-ink) / .95), 0 1px 3px rgb(var(--record-ink) / .7);
+  text-wrap: balance;
+}
+@media (max-width: 639px) {
+  .climate-record.record-connected-shell.record-room-painted.press-room .record-room-intro p {
+    max-width: none;
+    font-size: 1.22rem;
+    line-height: 1.34;
+  }
+}
+
 /* ── THE MARK ON A ROOM THAT KEEPS ITS OWN HEAD ────────────────────────────────
    The guide, the search, the machine's hand and the wall's own sheets open straight
    onto their reading, with no intro to carry the record's symbol — so on those the
