@@ -38,3 +38,21 @@ export function founderPlaces() {
 
   return [...byPlace.values()];
 }
+
+// The same places, shaped as marks for the record's one plate. The founder's figures are a
+// reading of the world, not a second map: they are handed to the same plate as the entries
+// and the reach, and chosen by the reader rather than layered on top of them.
+export function founderMarks() {
+  return founderPlaces().map((p) => {
+    const one = p.figures[0];
+    return {
+      id: p.place,
+      lat: p.lat,
+      lng: p.lng,
+      tone: 'crisis',
+      count: p.figures.length,
+      aria: p.figures.length === 1 ? `${p.place}: ${one.value} ${one.unit}` : `${p.place}: ${p.figures.length} figures`,
+      title: p.figures.length === 1 ? `${p.place} · ${one.value} ${one.unit}` : `${p.place} · ${p.figures.length} figures`,
+    };
+  });
+}

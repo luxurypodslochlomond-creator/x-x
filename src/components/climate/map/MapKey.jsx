@@ -28,9 +28,11 @@ function LampMark() {
    dashboard with a map in it. The counts are still here: the sentence says how much of
    the record has a place, and pressing a mark opens that place's own line. A legend only
    has to say what the marks mean. */
-export default function MapKey({ mode, onMode, only, onOnly, counts, placed, total, lights, loading, isError, newestArrival }) {
+export default function MapKey({ mode, onMode, only, onOnly, counts, placed, total, lights, loading, isError, newestArrival, harmCountries }) {
   const showing = counts.crisis + counts.solution + counts.action + counts.wire + counts.cartoon;
-  const sentence = isError
+  const sentence = mode === 'harm'
+    ? `${harmCountries} ${harmCountries === 1 ? 'country' : 'countries'} where the founder’s page counts a figure`
+    : isError
     ? 'Entries could not be loaded'
     : loading
       ? 'Setting the entries…'
@@ -46,7 +48,7 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
     <div className="record-map-key">
       <p className="record-map-key-count">
         {sentence}
-        {!loading && !isError && newestArrival && mode !== 'readership' && (
+        {!loading && !isError && newestArrival && mode === 'entries' && (
           <span className="record-map-key-newest">Newest standing here arrived {newestArrival}.</span>
         )}
       </p>
@@ -94,6 +96,21 @@ export default function MapKey({ mode, onMode, only, onOnly, counts, placed, tot
               is what a platform takes off people. The subject of this layer was never the
               number — it is the place. So the place leads now, and the count follows it. */}
           Where it was opened
+        </button>
+        {/* ── THE THIRD READING, ON THE SAME PLATE ────────────────────────────────
+            The founder's figures had a world of their own under this one, which made the
+            map page two maps. They are a reading of the same world, so they are a choice
+            in this key, in the founder's own red — and the sentence above says what they
+            are, so nobody mistakes a counted figure for an entry the record wrote. */}
+        <button
+          type="button"
+          data-kind="crisis"
+          aria-pressed={mode === 'harm'}
+          onClick={() => { onMode(mode === 'harm' ? 'entries' : 'harm'); onOnly(null); }}
+          className="record-map-key-kind record-map-key-reader"
+        >
+          <MapSignalMark kind="crisis" className="record-map-key-symbol" />
+          Where the harm is counted
         </button>
       </div>
     </div>

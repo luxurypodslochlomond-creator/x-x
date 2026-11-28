@@ -6,6 +6,8 @@ import MapEntryDetail from '@/components/climate/map/MapEntryDetail';
 import MapReadingDetail from '@/components/climate/map/MapReadingDetail';
 import MapKey from '@/components/climate/map/MapKey';
 import MapFigures from '@/components/climate/map/MapFigures';
+import FounderFigureReading from '@/components/climate/map/FounderFigureReading';
+import { founderMarks, founderPlaces } from '@/components/climate/map/founderPlaces';
 import WorldPlate from './WorldPlate';
 import PlatePlaceIndex from './PlatePlaceIndex';
 
@@ -44,6 +46,17 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
   const [only, setOnly] = useRecordViewState('map-kind', null);
   const [readingMode, setReadingMode] = useRecordViewState('map-readership', false);
   const [readingPlace, setReadingPlace] = useRecordViewState('map-reading-place', null);
+  // ── THE THIRD READING OF THE ONE WORLD ─────────────────────────────────────────
+  // The founder's figures used to stand on a second plate drawn under this one: two
+  // worlds on one page, and a reader left to work out which of them was the map. They
+  // are a reading of the same world, so they are chosen here, in this plate's own key,
+  // and they open in the same line under the planet. Chosen, never layered — nobody
+  // should have to guess whether a red mark is a crisis the record wrote or a number
+  // somebody else counted.
+  const [harmMode, setHarmMode] = useRecordViewState('map-harm', false);
+  const [harmPicked, setHarmPicked] = useRecordViewState('map-harm-place', null);
+  const founderOn = useMemo(() => founderPlaces(), []);
+  const harmMarks = useMemo(() => founderMarks(), []);
   const { categories } = useClimateCategories();
   const catLabel = (id) => categories.find((c) => c.id === id)?.label || (id || '').replaceAll('_', ' ');
 
@@ -110,7 +123,7 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
   // One press opens, a second press on the same thing puts it down — the same act whether
   // it came from a mark on the plate or a name in the index under it.
   const pick = (mark) => { setPicked(marks.find((entry) => entry.id === mark.id) || mark); setReadingPlace(null); };
-  const closeDetail = () => { setPicked(null); setReadingPlace(null); };
+  const closeDetail = () => { setPicked(null); setReadingPlace(null); setHarmPicked(null); };
 
   // Pressing a mark opens its line under the planet — but on a wide screen the planet is
   // taller than the window, so the line could open entirely out of sight and the press
@@ -142,8 +155,9 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
       {/* The count and the key, on the same paper as the plate — a plate is captioned
           above its engraving, not over it. */}
       <MapKey
-        mode={readingMode ? 'readership' : 'entries'}
-        onMode={(next) => { setReadingMode(next === 'readership'); closeDetail(); }}
+        mode={harmMode ? 'harm' : readingMode ? 'readership' : 'entries'}
+        onMode={(next) => { setReadingMode(next === 'readership'); setHarmMode(next === 'harm'); closeDetail(); }}
+        harmCountries={harmMarks.length}
         only={only}
         onOnly={setOnly}
         counts={counts}
@@ -157,32 +171,39 @@ export default function RecordWorldMap({ lights = [], alive = false, tone = 'pap
 
       <div className="record-map-stage">
       <WorldPlate
-        marks={readingMode ? [] : clusters}
-        lights={lights}
+        marks={harmMode ? harmMarks : readingMode ? [] : clusters}
+        lights={harmMode ? [] : lights}
         alive={alive}
-        selectedId={picked?.id}
-        onSelect={pick}
+        selectedId={harmMode ? harmPicked : picked?.id}
+        onSelect={harmMode ? (m) => setHarmPicked(harmPicked === m.id ? null : m.id) : pick}
         onLight={(place) => { setReadingPlace(place); setPicked(null); }}
         selectedLightId={readingPlace?.id}
-        label={readingMode ? `Readership in ${lights.length} approximate places` : `${marks.length} entries, grouped by approximate place`}
+        label={
+          harmMode
+            ? `The founder's figures in ${harmMarks.length} countries`
+            : readingMode
+              ? `Readership in ${lights.length} approximate places`
+              : `${marks.length} entries, grouped by approximate place`
+        }
         tone={tone}
       />
       <aside ref={detailRef} className="record-map-reading" aria-label="Selected place" data-record-layout="compact">
         <div className="record-map-detail" aria-live="polite">
           {isError && !readingMode ? <div className="record-map-picked" role="alert"><p>The entries could not be loaded. The map is not empty.</p><button type="button" onClick={() => refetch()} className="record-map-open">Try again</button></div>
+            : harmPicked ? <FounderFigureReading place={founderOn.find((p) => p.place === harmPicked)} onClose={closeDetail} />
             : readingPlace ? <MapReadingDetail place={readingPlace} onClose={closeDetail} />
               : picked ? <MapEntryDetail entry={picked} here={here} onPick={pick} onClose={closeDetail} category={catLabel} />
-                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{loading ? 'Setting the entries in their places…' : readingMode ? 'Select a lit place to read its count. A light is entry openings, never people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. A ring around a mark means several entries share an approximate place. A cartoon is a page hung on the plate. A lamp with an amber halo is a place reading the record.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
+                : <p className="record-map-help text-sm leading-relaxed text-record-muted">{harmMode ? 'Choose a country to read the figure counted there, what it measures and who published it. These are not entries: they are the reason the record is written.' : loading ? 'Setting the entries in their places…' : readingMode ? 'Select a lit place to read its count. A light is entry openings, never people.' : marks.length ? 'Choose a mark or a place below. Its entry opens here, beside the map. A ring around a mark means several entries share an approximate place. A cartoon is a page hung on the plate. A lamp with an amber halo is a place reading the record.' : 'No entries in this selection have a stated place. Nothing is guessed onto the map.'}</p>}
         </div>
       </aside>
       </div>
 
-      <MapFigures figures={figures} loading={loading} isError={isError} />
+      {!harmMode && <MapFigures figures={figures} loading={loading} isError={isError} />}
 
       {/* The plate read out: the places it actually holds, so a reader never has to hunt
           for a mark to find out where the record is standing. It comes after the line a
           press opens, never before it. */}
-      {!readingMode && <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />}
+      {!readingMode && !harmMode && <PlatePlaceIndex marks={marks} selectedId={picked?.id} onPick={pick} />}
 
       {tone === 'ink' && alive && (
         <p className="record-map-geography-credit bg-record-bone px-3 py-2 font-mono text-xs text-record-muted">

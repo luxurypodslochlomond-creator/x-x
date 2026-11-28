@@ -5,7 +5,6 @@ import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
 import ImpactSignal from '@/components/climate/ImpactSignal';
 import WhyThisPlate from '@/components/climate/map/WhyThisPlate';
-import FounderPlate from '@/components/climate/map/FounderPlate';
 import FounderGestures from '@/components/climate/map/FounderGestures';
 import MapArtworkView from '@/components/climate/map/MapArtworkView';
 import ClimateImpact from '@/pages/ClimateImpact';
@@ -56,7 +55,10 @@ export default function ClimateMapPage() {
       </section>
 
       {/* The shell owns the one painting. This section draws geography, not another cover. */}
-      <section className="record-map-band w-full" aria-label="Entries and readership on the world map">
+      {/* The anchor the founder page points at. The figures are a reading of this plate
+          now, so a link that says "the figures, set where they happen" must land on the
+          plate itself — not on a second world that no longer exists. */}
+      <section id="founder-figures" className="record-map-band w-full scroll-mt-36" aria-label="Entries, readership and the founder's figures on the one world map">
         <div className="relative z-10 mx-auto max-w-[1640px] px-2 py-4 lg:px-6 lg:py-6">
           <div className="record-map-frame p-1 lg:p-2">
             <RecordWorldMap lights={lights} alive tone="ink" />
@@ -68,10 +70,16 @@ export default function ClimateMapPage() {
           from a legend. */}
       <div className="mx-auto max-w-[1640px] px-2 lg:px-0">
         <WhyThisPlate />
-        {/* The harm, on the same world. The founder page's figures are the reason the
-            entries exist, so the plate that holds the entries holds them too — in their
-            own band, with their own sources, never mixed into the record's own marks. */}
-        <FounderPlate />
+        {/* ── ONE WORLD, THREE READINGS, ONE PLATE ────────────────────────────────
+            Brian, 28 November: "do we need two maps bro im sure we have three cant we
+            unify into single coolasfuck map". He was right, and the second world was one
+            I had put there myself the day before: the founder's figures were drawn on a
+            plate of their own under the record's, so the page asked a reader to look at
+            two planets and work out which one was the map.
+            There is one plate now. It holds where the record stands, where it is opened
+            and where the harm is counted — chosen in its own key, never layered on top of
+            each other, because a mark must never mean two things at once. The figures'
+            line opens in the same place every other mark's line opens: under the planet. */}
         {/* Harm at the top, the size a person can start at the foot: Janine's own five,
             read from the same list the record's home prints. */}
         <FounderGestures />
