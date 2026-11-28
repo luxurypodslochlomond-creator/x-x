@@ -37,6 +37,7 @@ export default function FounderNumbers() {
           tone="ink"
         />
         <p className="record-founder-evidence-note">Not only these. The 2026 humanitarian appeal also names Haiti, Myanmar, South Sudan, Somalia, Lebanon, Chad, Mali, Burkina Faso and the Sahel. This page lists a few of the largest and best documented, not a ranking of who suffers most, and leaving a country out here does not mean it has been counted as safe.</p>
+        <p className="record-founder-evidence-note"><strong>And where the record will not guess.</strong> No figure is printed here for the Democratic People’s Republic of Korea, Eritrea or Turkmenistan, because no figure for 2026 exists that this record can check. That is not the same as nothing happening there. A blank is not a zero.</p>
         <p className="record-founder-evidence-note">A dated evidence record, not a live counter. Reference years differ; populations overlap. Do not add these figures together or read them all as deaths caused by climate change. Estimates, projections, assistance targets and verified minimums are labelled separately.</p>
         <p className="record-founder-evidence-note">Compiled for this page, not quotations from Janine or claims of endorsement by the organisations cited. Each link opens the original report or its issuing agency’s account. Where a figure has been revised, the later figure is named rather than swapped in silently.</p>
       </div>
