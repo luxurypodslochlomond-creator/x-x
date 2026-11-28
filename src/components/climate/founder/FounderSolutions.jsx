@@ -37,7 +37,7 @@ export default function FounderSolutions() {
     <section className="record-founder-sheet record-founder-sheet-bone" aria-labelledby="founder-solutions">
       <p className="record-founder-kicker">The response · her examples</p>
       <h2 id="founder-solutions" className="record-founder-h2">Work already underway.</h2>
-      <p className="record-founder-lede">The other half of her column: people doing something about it, place by place.</p>
+      <p className="record-founder-lede">Her own examples, place by place. Each heading opens the account behind it.</p>
       <ol className="record-founder-working">
         {WORKING.map(({ place, title, body, source }) => (
           <li key={place}>
@@ -47,7 +47,7 @@ export default function FounderSolutions() {
           </li>
         ))}
       </ol>
-      <p className="record-founder-thread">Examples from <a href="https://www.solutions-site.org/node/1648" target="_blank" rel="noopener noreferrer">her full column ↗</a>. Each heading opens the account behind it.</p>
+      <p className="record-founder-thread">Read in <a href="https://www.solutions-site.org/node/1648" target="_blank" rel="noopener noreferrer">her full column ↗</a>.</p>
     </section>
   );
 }

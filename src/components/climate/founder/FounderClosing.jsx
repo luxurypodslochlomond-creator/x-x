@@ -28,9 +28,9 @@ export default function FounderClosing() {
           sentence that matters to her: her work at Yale is hers, and this record is not a
           Yale publication and claims no endorsement from Yale or anyone named here. */}
       <div className="record-founder-imprint">
-        <p className="record-founder-imprint-honour">In honour of her life’s work.<br />Horizon International · Yale University</p>
+        <p className="record-founder-imprint-honour">In honour of her life’s work.</p>
         <span aria-hidden="true" className="record-founder-imprint-rule" />
-        <p className="record-founder-imprint-role">A platform built for the planet · Universal Frequency 51 CIC<br />Made in Scotland from photons</p>
+        <p className="record-founder-imprint-role">A platform built for the planet · Universal Frequency 51 CIC · Scotland</p>
         <p className="record-founder-imprint-note">Horizon International’s work at Yale is her own. This record is not a Yale publication and claims no endorsement from Yale or from any institution named on this page.</p>
         <a href="mailto:family@uf51.love" className="record-founder-imprint-contact">Contact Universal Frequency 51</a>
       </div>

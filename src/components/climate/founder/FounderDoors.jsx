@@ -18,7 +18,7 @@ export default function FounderDoors() {
           <strong>youtube.com/user/jselendy ↗</strong>
         </a>
       </div>
-      <p className="record-founder-note">The Solutions Site was created by Horizon International with UNEP, UNDP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard — a forum where every accepted entry has been reviewed before publication.</p>
+      <p className="record-founder-note">The Solutions Site was developed by Horizon International with UNDP, UNEP, UNFPA, UNICEF, the IDRC of Canada, Yale University and colleagues at Harvard. Entries are reviewed before they are published.</p>
     </section>
   );
 }

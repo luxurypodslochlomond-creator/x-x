@@ -26,9 +26,9 @@ export default function FounderColumn() {
         <span>Janine M. H. Selendy</span>
         <a href={COLUMN} target="_blank" rel="noopener noreferrer">Read the column ↗<span className="sr-only"> (opens a new tab)</span></a>
       </p>
-      <p className="record-founder-plain">Climate emergencies. Work that responds. Knowledge people can use and pass on.</p>
+      <p className="record-founder-plain">Her figure for the phones already in people’s hands: 5.86 billion. Her column, as printed in August, said 7.4 billion; she settled on 5.86 on 27 November.</p>
       <p className="record-founder-thread">
-        The Nigerian Observer published her column. <Link to="/ClimateCartoons/Francis">Francis Odupute</Link>, of the same paper, brings his drawings to the wall.
+        <Link to="/ClimateCartoons/Francis">Francis Odupute</Link>, of the same paper, brings his drawings to the wall.
       </p>
     </section>
   );

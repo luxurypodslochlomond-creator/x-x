@@ -15,9 +15,8 @@ export default function FounderOpening() {
   return (
     <RecordPaintedBand continuous className="record-founder-hero">
       <div className="record-founder-hero-inner">
-        <p className="record-founder-kicker">The founder · Beirut, 1956</p>
+        <p className="record-founder-kicker">The founder · Beirut</p>
         <h1 className="record-founder-name">Janine M.<br className="hidden sm:block" />{' '}H. Selendy</h1>
-        <p className="record-founder-hardline">Fifteen years old, surfacing through oil.</p>
         <blockquote className="record-founder-quote">
           “Startled by oil coating me as I surfaced after my long dive from the deck of the freighter into the Beirut, Lebanon, harbor water, it aroused my initial awareness to damage to Earth. I was 15 years old.”
         </blockquote>
