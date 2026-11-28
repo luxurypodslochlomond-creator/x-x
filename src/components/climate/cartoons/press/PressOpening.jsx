@@ -23,18 +23,24 @@ import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 // paragraph. It needed fewer.)
 export default function PressOpening() {
   return (
-    <section className="press-opening" aria-labelledby="press-room-title">
+    <section className="press-opening" aria-label="The wall">
       <div className="press-opening-words">
         <header className="press-opening-masthead">
-          {/* ── THE RECORD'S YELLOW, ABOVE THE NAME ─────────────────────────────────
-              Brian, 28 November: "give the wall the same coolasfuck treatment too bro".
-              Every room that opens in the painting now signs itself the same way — a short
-              bar of the record's signal, then the room's name in the display face. The wall
-              had the name and the cover and not the bar, so it stood beside those rooms
-              rather than in them. One line, one bar: the room is signed before it is named. */}
-          <p className="press-kicker">The record · the cartoon room</p>
-          <h1 id="press-room-title" className="press-title">The Wall</h1>
-          <p className="press-standfirst">Drawn by hand. Hung on the wall.</p>
+          {/* ── THE ROOM'S NAME IS NOT SAID TWICE ───────────────────────────────────
+              Brian, 28 November: "the wall could be doing with the same coolasfuck as roll
+              and seal bro… the wall icon on the left like roll and seal."
+
+              He was right, and what the wall was missing was the one thing every other
+              painted room of the record has: the record's own opening — the mark on its
+              plate of yellow, the short bar of signal above the name, the name in the
+              display face, standing ON the painting rather than on a sheet of paper. The
+              room had the name and the words and a white page; it did not have the door.
+
+              So the name, the line and the bar are printed by the record's own opening
+              now, the same code the roll and the seal use, and this file keeps only what
+              belongs to this room alone: when it is, where it is, why a wall is the right
+              word for it, and whose cover is on it. One name, said once, in the same hand
+              as every other room — and the drawings below it start one screen sooner. */}
           {/* ── WHEN AND WHERE, IN ONE LINE, AT THE TOP ─────────────────────────────
               Brian, 26 November: "should the event details etc be more at top… not sure
               layout and sequence right."

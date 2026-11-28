@@ -27,9 +27,12 @@ import '@/components/climate/cartoons/press/press-desktop-ground.css';
 export default function ClimateCartoons() {
   return (
     <ClimateRecordShell
-      compact
+      painted
       className="cartoon-room press-room"
-      eyebrow="The record · the cartoon room"
+      eyebrow="The Wall"
+      marker="The record · the cartoon room"
+      title="The Wall"
+      statement="Drawn by hand. Hung on the wall."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
