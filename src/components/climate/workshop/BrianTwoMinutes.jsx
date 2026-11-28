@@ -86,7 +86,27 @@ export default function BrianTwoMinutes() {
           more than the buttons. If she wants the walkthrough, it is two sentences and it goes straight back in.
         </p>
 
-        <div className="mt-4 border-l-2 border-record-red pl-3">
+        {/* ── WHAT HE ACTUALLY DOES, BEFORE WHAT HE SAYS ──────────────────────────
+            Brian, 28 November: "in agenda what the fuck am I doing bro". The answer was on
+            this page and it was underneath two hundred words of script, in small type, on a
+            phone. So the day's jobs come first and the words come after: a person reading
+            this the night before needs to know what they do before they need to know what
+            they say. */}
+        <div className="mt-4">
+          <p className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-record-red">Your part, in her hour</p>
+          <dl className="mt-2 space-y-2">
+            {JOBS.map(([term, line]) => (
+              <div key={term} className="border-t border-record-ink/15 pt-2">
+                <dt className="font-mono text-[10px] font-black uppercase tracking-wide text-record-ink">{term}</dt>
+                <dd className="mt-0.5 text-[12.5px] leading-relaxed text-record-ink/85">{line}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <p className="mt-5 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-record-red">Then the two minutes, written out</p>
+
+        <div className="mt-2 border-l-2 border-record-red pl-3">
           {SCRIPT.map((line, i) => (
             <p
               key={i}
@@ -118,15 +138,6 @@ export default function BrianTwoMinutes() {
             Open the form, as they will see it
           </Link>
         </div>
-
-        <dl className="mt-4 space-y-2">
-          {JOBS.map(([term, line]) => (
-            <div key={term} className="border-t border-record-ink/15 pt-2">
-              <dt className="font-mono text-[10px] font-black uppercase tracking-wide text-record-ink">{term}</dt>
-              <dd className="mt-0.5 text-[12.5px] leading-relaxed text-record-ink/85">{line}</dd>
-            </div>
-          ))}
-        </dl>
 
         <p className="mt-3 font-mono text-[10px] leading-relaxed text-record-muted">
           If her draft changes, this follows her draft — not the other way round.

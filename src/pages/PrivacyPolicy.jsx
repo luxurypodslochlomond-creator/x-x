@@ -175,7 +175,7 @@ export default function PrivacyPolicyPage() {
                                 </div>
                             </div>
                             <p className="text-cyan-300 text-sm mt-3">
-                                📖 Read more in our <a href="/privacy-mathematics" className="underline">Privacy Mathematics</a> page
+                                📖 Read more in our <a href="/PrivacyMathematics" className="underline">Privacy Mathematics</a> page
                             </p>
                         </section>
 

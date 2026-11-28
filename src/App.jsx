@@ -33,6 +33,15 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 const CorporateBuyerPage = React.lazy(() => import('./pages/CorporateBuyer'));
 const Draw51Page = React.lazy(() => import('./pages/Draw51'));
 const CheeseAndOnionBakePage = React.lazy(() => import('./pages/CheeseAndOnionBake'));
+// ── DOORS THAT OPENED ONTO NOTHING ──
+// Six pages existed and were linked from real screens, and not one of them had a route, so
+// every one of those links fell through to the not-found page. Found by reading every
+// literal link in the app against the router on 28 November.
+const CB51TermsShortPage = React.lazy(() => import('./pages/CB51Terms'));
+const CB51PrivacyShortPage = React.lazy(() => import('./pages/CB51Privacy'));
+const TechnicalSpecificationPage = React.lazy(() => import('./pages/TechnicalSpecification'));
+const PrivacyMathematicsPage = React.lazy(() => import('./pages/PrivacyMathematics'));
+const AdminCompaniesHouseDetailsPage = React.lazy(() => import('./pages/AdminCompaniesHouseDetails'));
 const CB51TermsPage = React.lazy(() => import('./pages/CB51Terms'));
 const CB51PrivacyPage = React.lazy(() => import('./pages/CB51Privacy'));
 const StoneymollanPage = React.lazy(() => import('./pages/Stoneymollan'));
@@ -433,6 +442,13 @@ const AuthenticatedApp = () => {
       <Route path="/CB51Join" element={<CB51JoinPage />} />
       <Route path="/CB51" element={<Suspense fallback={<div className="min-h-screen flex items-center justify-center" style={{ background: '#f7f5f0' }}><div className="w-8 h-8 rounded-full animate-spin" style={{ border: '2px solid rgba(8,145,178,0.2)', borderTopColor: '#0891b2' }} /></div>}><CB51MainPage /></Suspense>} />
       <Route path="/CB51How" element={<CB51HowPage />} />
+      {/* The six doors found opening onto nothing on 28 November — each page already existed
+          and was linked from a real screen. Plain routes: they wear their own frames. */}
+      <Route path="/CB51Terms" element={<CB51TermsShortPage />} />
+      <Route path="/CB51Privacy" element={<CB51PrivacyShortPage />} />
+      <Route path="/CheeseAndOnionBake" element={<CheeseAndOnionBakePage />} />
+      <Route path="/TechnicalSpecification" element={<TechnicalSpecificationPage />} />
+      <Route path="/PrivacyMathematics" element={<PrivacyMathematicsPage />} />
       <Route path="/WalshyPitch" element={<WalshyPitchPage />} />
 
       <Route path="/Zapp" element={<ZappPage />} />
@@ -705,6 +721,9 @@ const AuthenticatedApp = () => {
       <Route path="/CB51Todo" element={<LayoutWrapper currentPageName="CB51Todo"><CB51Todo /></LayoutWrapper>} />
       <Route path="/AdminHMRCTracker" element={<LayoutWrapper currentPageName="AdminHMRCTracker"><AdminOnly><AdminHMRCTrackerPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminCompaniesHouseFiling" element={<LayoutWrapper currentPageName="AdminCompaniesHouseFiling"><AdminOnly><AdminCompaniesHouseFilingPage /></AdminOnly></LayoutWrapper>} />
+      {/* The filing page's own "the details" door, which three of its lines pointed at and
+          which had no route: a keeper checking the facts for the form fell onto a dead page. */}
+      <Route path="/AdminCompaniesHouseDetails" element={<LayoutWrapper currentPageName="AdminCompaniesHouseDetails"><AdminOnly><AdminCompaniesHouseDetailsPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminLogoUpload" element={<LayoutWrapper currentPageName="AdminLogoUpload"><AdminOnly><AdminLogoUploadPage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminPWAPushGuide" element={<LayoutWrapper currentPageName="AdminPWAPushGuide"><AdminOnly><AdminPWAPushGuidePage /></AdminOnly></LayoutWrapper>} />
       <Route path="/AdminStoneymollanLegal" element={<LayoutWrapper currentPageName="AdminStoneymollanLegal"><AdminOnly><AdminStoneymollanLegalPage /></AdminOnly></LayoutWrapper>} />

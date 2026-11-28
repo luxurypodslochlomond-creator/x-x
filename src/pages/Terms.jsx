@@ -293,7 +293,7 @@ export default function TermsPage() {
                                 </div>
                             </div>
                             <p className="text-yellow-300 mt-3 text-sm">
-                                📖 Read more in our <a href="/privacy-policy" className="underline">Privacy Policy</a>
+                                📖 Read more in our <a href="/PrivacyPolicy" className="underline">Privacy Policy</a>
                             </p>
                         </section>
 
