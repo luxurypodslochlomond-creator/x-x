@@ -9,6 +9,7 @@ import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 import entryHref from '@/components/climate/cartoons/entryHref';
 import { recordOrigin } from '@/components/climate/recordAddress';
 import DrawingConnections from '@/components/climate/cartoons/DrawingConnections';
+import CartoonCredit from '@/components/climate/cartoons/CartoonCredit';
 
 export default function PressSheet({ cartoon, index, lead = false, marked = false, onOpen }) {
   const { title, artist_name, origin, for_line, credit, source_url, crisis_id, crisis_title } = cartoon;
@@ -34,7 +35,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
       {crisis_id && <Link className="press-sheet-link" to={entryHref(cartoon)}>Drawn about: {crisis_title || 'an entry on the record'}</Link>}
       <DrawingConnections cartoon={cartoon} />
       <div className="press-sheet-provenance">
-        {credit && <p>{credit}</p>}
+        <CartoonCredit credit={credit} />
         <div className="press-sheet-links">
           {source_url && <a href={source_url} target="_blank" rel="noopener noreferrer">Source ↗</a>}
           <Link to={`/ClimateCartoons/Sheet/${cartoon.id}`}>Print</Link>

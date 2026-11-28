@@ -222,6 +222,9 @@ const ClimateCartoonsCAIBPage = React.lazy(() => import('./pages/ClimateCartoons
 // The page Francis can send to his cartoonists: what a drawing is worth here, what they keep,
 // and where each of them can say their own price without having to argue for it.
 const ClimateCartoonsPaidPage = React.lazy(() => import('./pages/ClimateCartoonsPaid'));
+// Alina Sen's four questions, answered from the wall itself: the working link, the real count
+// of CEEW drawings, whose the idea is, and what the record can and cannot promise for 28–30.
+const ClimateCartoonsAnsweredPage = React.lazy(() => import('./pages/ClimateCartoonsAnswered'));
 // The machine's own hand: one more hand in the same room, hung beside the wall of real ones.
 const ClimateCartoonsBaseOnePage = React.lazy(() => import('./pages/ClimateCartoonsBaseOne'));
 const ClimateCartoonPrintPage = React.lazy(() => import('./pages/ClimateCartoonPrint'));
@@ -507,6 +510,7 @@ const AuthenticatedApp = () => {
           been waiting fourteen years to be paid. Public, sendable, and honest about what has
           not been secured — with a door for each artist to state their own price. */}
       <Route path="/ClimateCartoons/Paid" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsPaidPage /></ClimateLayout>} />
+      <Route path="/ClimateCartoons/Answered" element={<ClimateLayout currentPage="ClimateCartoons"><ClimateCartoonsAnsweredPage /></ClimateLayout>} />
 
       {/* ── THE PRINT ROOM, AND THE SHOW IT MAKES ────────────────────────────────────
           Two addresses, and only one of them is a room. /ClimateCartoons/Print is a room of
@@ -780,6 +784,7 @@ const AuthenticatedApp = () => {
       <Route path="/caib" element={<Navigate to="/ClimateCartoons/CAIB" replace />} />
       <Route path="/paid" element={<Navigate to="/ClimateCartoons/Paid" replace />} />
       <Route path="/worth" element={<Navigate to="/ClimateCartoons/Paid" replace />} />
+      <Route path="/answered" element={<Navigate to="/ClimateCartoons/Answered" replace />} />
       <Route path="/whatthisis" element={<Navigate to="/ClimateCartoons/WhatThisIs" replace />} />
       <Route path="/baseone" element={<Navigate to="/ClimateCartoons/BaseOne" replace />} />
       <Route path="/host" element={<Navigate to="/ClimateHost" replace />} />

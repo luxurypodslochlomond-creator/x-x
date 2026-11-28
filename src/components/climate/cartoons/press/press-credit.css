@@ -1,0 +1,4 @@
+/* Two facts where there used to be one: the idea, then the drawing. */
+#root .press-room .press-credit-idea { margin: 0 0 .3rem; font: 400 .82rem/1.5 var(--font-record-ui); color: rgb(var(--record-ink)); }
+#root .press-room .press-credit-idea span { display: block; font-weight: 800; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: rgb(var(--record-red)); }
+#root .press-room .press-credit-line { margin: 0; }
