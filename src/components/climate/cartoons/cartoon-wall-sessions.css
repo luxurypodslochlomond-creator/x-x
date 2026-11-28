@@ -1,0 +1,106 @@
+/* ── THE THREE DAYS, IN THE HALF OF THE BAND THAT WAS EMPTY ────────────────────
+   On a phone this sits under the Iya paragraph and above the cover: the details arrive
+   early, which is the whole point of moving them. On a desk it takes the right-hand column
+   beside the room's opening words, which is the space Brian was looking at when he said the
+   section was off balance. */
+
+.cartoon-sessions {
+  margin: 1.4rem 0 0;
+  padding: 1rem 1rem 1.1rem;
+  border: 2px solid rgb(var(--record-ink));
+  background: rgb(var(--record-paper));
+}
+
+.cartoon-sessions-eyebrow {
+  margin: 0 0 .35rem;
+  font-family: var(--font-record-ui);
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-sessions-days {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4.6vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  color: rgb(var(--record-red));
+}
+
+.cartoon-sessions-where {
+  margin: .3rem 0 0;
+  font-size: .84rem;
+  line-height: 1.5;
+  color: rgb(var(--record-ink));
+}
+
+.cartoon-sessions-rule {
+  margin: .85rem 0;
+  border: 0;
+  border-top: 1px solid rgb(var(--record-ink) / .22);
+}
+
+.cartoon-sessions-label {
+  margin: 0 0 .2rem;
+  font-family: var(--font-record-ui);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-sessions-title {
+  margin: 0;
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: rgb(var(--record-ink));
+}
+
+.cartoon-sessions-when {
+  margin: .25rem 0 0;
+  font-size: .82rem;
+  line-height: 1.55;
+  color: rgb(var(--record-muted));
+}
+
+.cartoon-sessions-door {
+  margin: .4rem 0 0;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+.cartoon-sessions-door a {
+  color: rgb(var(--record-red));
+  text-decoration: underline;
+}
+
+.cartoon-sessions-note {
+  margin: .5rem 0 0;
+  font-size: .72rem;
+  line-height: 1.5;
+  color: rgb(var(--record-muted));
+}
+
+@media screen and (min-width: 900px) {
+  /* ── THE BAND BECOMES TWO COLUMNS, AND THE VOID GOES ──────────────────────
+     The masthead is full width at this size, so the opening words were sitting in a 46ch
+     column with a thousand pixels of nothing beside them. The words keep the left, the
+     three days take the right, and nothing else in the room moves. */
+  #root .record-cartoon-field .press-room .press-opening-masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+    column-gap: clamp(2rem, 4vw, 5rem);
+    align-items: start;
+  }
+
+  #root .record-cartoon-field .press-room .cartoon-sessions {
+    margin-top: .1rem;
+  }
+}

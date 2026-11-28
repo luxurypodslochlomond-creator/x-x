@@ -35,7 +35,7 @@ const IN_ROOM = [
   { n: '02', href: '#cartoon-why-title', label: 'Why a cartoon', line: 'The case for a pen over a graph', Mark: MarkArgument },
   // The case for the joke, which is the argument under the three lines above: the record's
   // own figures, and why a drawing gets a person through a door a figure cannot open.
-  { n: '03', href: '#cartoon-humour', label: 'The laugh is the door', line: 'Why a joke gets in where a figure cannot', Mark: MarkArgument },
+  { n: '03', href: '#cartoon-humour', label: 'The missing piece is a laugh', line: 'What the movement keeps leaving out', Mark: MarkArgument },
   { n: '04', href: '#cartoon-goals', label: 'Seventeen goals', line: 'The wall counted against them, the blanks printed', Mark: MarkCounted },
   { n: '05', href: '#cartoon-your-turn', label: 'Take part', line: 'Send one — it goes up under your name', Mark: MarkTakePart },
   { n: '06', href: '#press-book', label: 'The book', line: 'The biennial, its editors, the three days', Mark: MarkBook },

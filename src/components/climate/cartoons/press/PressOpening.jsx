@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CartoonCatalogueBand from '@/components/climate/cartoons/CartoonCatalogueBand';
 import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
+import CartoonWallSessions from '@/components/climate/cartoons/CartoonWallSessions';
 
 // ── THE ROOM OPENS ON A DRAWING, NOT ON A CONTENTS PAGE ────────────────────────
 // Brian, 25 November: "fuck bro it feels corporate now… what would make Francis etc all go
@@ -56,6 +57,15 @@ export default function PressOpening() {
               funding report. So one line goes here — the facts a visitor needs to place the
               room, and the door to the hour — and the band stays where it is, for the reader
               who has seen the wall and wants the three days. */}
+          {/* ── THE OPENING WORDS, AND THE HALF OF THE BAND THAT WAS EMPTY ──────
+              Brian, 28 November: "on desktop a lot of empty space and this section looks
+              off balance… we have all event details, they're just lost down the page."
+
+              The words sit in a column at the left; at desk width the right half of this
+              band was bare paper while the dates and the hours sat three chapters below.
+              So the words are wrapped, and the three days stand beside them — see
+              CartoonWallSessions. Nothing above was rewritten and nothing moved. */}
+          <div className="press-opening-lead">
           <p
             style={{
               marginTop: '10px',
@@ -154,6 +164,8 @@ export default function PressOpening() {
             {' — '}sent by Janine Selendy, 27 November 2026.
           </p>
           <CartoonSignal />
+          </div>
+          <CartoonWallSessions />
         </header>
       </div>
       <div className="press-opening-cover">

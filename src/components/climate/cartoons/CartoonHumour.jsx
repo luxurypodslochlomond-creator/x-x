@@ -79,14 +79,14 @@ export default function CartoonHumour() {
         <ShareCardButton
           entry={HUMOUR_CARD}
           build={buildHumourShareCard}
-          label="Pass the case on"
+          label="Pass it on"
           link={`${recordOrigin()}/ClimateCartoons`}
           description={HUMOUR.shareLine}
           icon={InkArrow}
           previewFirst
           includeMessage
-          windowTitle="Pass the case on"
-          alt="The laugh is the door: the record’s five counted figures, printed on the record’s yellow"
+          windowTitle="Pass it on"
+          alt="The missing piece is a laugh: the record’s five counted figures, printed on the record’s yellow"
         />
       </div>
     </section>
