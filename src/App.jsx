@@ -236,6 +236,9 @@ const ClimateWorkshopWordsPage = React.lazy(() => import('./pages/ClimateWorksho
 const ClimateHostPage = React.lazy(() => import('./pages/ClimateHost'));
 const ClimateHandoverPage = React.lazy(() => import('./pages/ClimateHandover'));
 const ClimateFellowsPage = React.lazy(() => import('./pages/ClimateFellows'));
+// The ledger: what money does here, and every payment printed as it moves. Built the
+// morning Francis asked what to tell cartoonists who want paying.
+const ClimateLedgerPage = React.lazy(() => import('./pages/ClimateLedger'));
 const ClimateRollPage = React.lazy(() => import('./pages/ClimateRoll'));
 const ClimateYaleBriefPage = React.lazy(() => import('./pages/ClimateYaleBrief'));
 const ClimateSealsPage = React.lazy(() => import('./pages/ClimateSeals'));
@@ -577,6 +580,11 @@ const AuthenticatedApp = () => {
           doing it. It is not on the five-door rail and should not be — a roll is something
           a reader goes looking for, and a volunteer is proud of, not a room everyone enters. */}
       <Route path="/ClimateRoll" element={<ClimateLayout currentPage="ClimateRoll"><ClimateRollPage /></ClimateLayout>} />
+      {/* ── WHAT MONEY DOES HERE ──
+          Not in the five-door rail, and deliberately not: it is not a question a reader
+          arrives with, it is the answer to the one a cartoonist asks after the wall. It sits
+          on the room's set list as a door out, and on the record's own foot. */}
+      <Route path="/ClimateLedger" element={<ClimateLayout currentPage="ClimateLedger"><ClimateLedgerPage /></ClimateLayout>} />
       {/* A letter is one person writing to another, so it is not printed on the brief and
           not linked from the record. It opens only to a keeper's key. */}
       <Route path="/ClimateLetterToJanine" element={<ClimateLayout currentPage="ClimateLetterToJanine"><ClimateLetterToJaninePage /></ClimateLayout>} />
@@ -722,6 +730,7 @@ const AuthenticatedApp = () => {
       <Route path="/guide" element={<Navigate to="/ClimateGuide" replace />} />
       <Route path="/seals" element={<Navigate to="/ClimateSeals" replace />} />
       <Route path="/roll" element={<Navigate to="/ClimateRoll" replace />} />
+      <Route path="/ledger" element={<Navigate to="/ClimateLedger" replace />} />
       <Route path="/founder" element={<Navigate to="/ClimateFounder" replace />} />
       {/* ── THE DOORS PEOPLE SAY OUT LOUD ──
           Brian, 27 November: "/TheWire and /TheWire/Method and /x=x etc". He is right: the

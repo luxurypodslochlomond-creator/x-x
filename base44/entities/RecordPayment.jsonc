@@ -1,0 +1,83 @@
+{
+  "name": "RecordPayment",
+  "type": "object",
+  "description": "One line of money that actually moved, printed in the open. This table exists so that the record's promise about money can be checked instead of believed: every payment that reaches a hand, or is held for a hand that cannot be paid yet, appears here with the payer, the amount, what it bought, the fee taken on the way and the receipt. It is a ledger, not a shop: nothing on the record is sold from it, no work is gated by it, and a line here never changes what a reader may see. Written only by a keeper, never from a browser, because a ledger anyone can edit is worth nothing. A line marked owed is money set aside for a hand with no way to receive it yet; it stays on the page until it is paid, and it is never quietly moved to somebody else.",
+  "properties": {
+    "paid_on": {
+      "type": "string",
+      "format": "date",
+      "description": "The day the money moved, or the day a share was set aside. Required."
+    },
+    "from_name": {
+      "type": "string",
+      "description": "Who paid, as they are to be named on the page \u2014 a person, a body, or 'Anonymous'. Required, because an unnamed payment is the one kind of line this page cannot print."
+    },
+    "amount": {
+      "type": "number",
+      "description": "What arrived, in the currency named below. Required."
+    },
+    "currency": {
+      "type": "string",
+      "default": "GBP",
+      "description": "The currency of the amount and the fee, so a line is never added up against the wrong one."
+    },
+    "fee": {
+      "type": "number",
+      "default": 0,
+      "description": "What the payment processor took on the way. Printed on every line, because a cost that is not shown is a cut."
+    },
+    "to_hand": {
+      "type": "string",
+      "description": "The hand it reached \u2014 the artist, cartoonist or musician by the name they are known by on the record. Empty on a gift that is held for the whole wall before shares are worked out."
+    },
+    "for_what": {
+      "type": "string",
+      "description": "What the money bought, in plain words: a commission for a new drawing, custody of the archive, an unearmarked gift and its shares. Required \u2014 a line that does not say what it bought is not a ledger entry."
+    },
+    "receipt_ref": {
+      "type": "string",
+      "description": "The payment reference or receipt number, so anyone can ask the payer whether the line is true."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "paid",
+        "owed"
+      ],
+      "enumColors": [
+        "green",
+        "yellow"
+      ],
+      "default": "paid",
+      "description": "paid \u2014 the money reached the hand. owed \u2014 the share is set aside and waiting for a hand that has no way to receive it yet. An owed line is never deleted and never moved to somebody else."
+    },
+    "note": {
+      "type": "string",
+      "description": "One line of context, where the line needs it \u2014 which exhibition, which grant, which fee was waived."
+    }
+  },
+  "required": [
+    "paid_on",
+    "from_name",
+    "amount",
+    "for_what"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -55,6 +55,13 @@ const OUT_OF_ROOM = [
   // already know the map existed. It is a door out of the room now, on the list, where a
   // reader looks for the ways out.
   { n: '13', href: '/ClimateMap', label: 'Where they were drawn', line: 'Every drawing, standing at the country that gave it', Mark: MarkWhere, page: true },
+  // ── THE QUESTION A CARTOONIST ASKS NEXT ─────────────────────────────────────
+  // Francis, the morning this was built: the hands who sent work are asking about
+  // compensation, and nobody could answer them. So the answer is a page, and it belongs on
+  // this list rather than in a drawer: what is never for sale here, the three ways money may
+  // arrive, the rule for dividing a gift nobody earmarked, and every payment printed with
+  // the fee taken on the way.
+  { n: '14', href: '/ClimateLedger', label: 'What money does here', line: 'The rule for paying hands, and every line printed', Mark: MarkCounted, page: true },
 ];
 
 const WAYS_IN = IN_ROOM.length + OUT_OF_ROOM.length;
