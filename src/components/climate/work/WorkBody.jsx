@@ -3,6 +3,7 @@ import WorkOpening from '@/components/climate/work/WorkOpening';
 import WorkNumbers from '@/components/climate/work/WorkNumbers';
 import WorkRecord from '@/components/climate/work/WorkRecord';
 import WorkDoors from '@/components/climate/work/WorkDoors';
+import WorkPlates from '@/components/climate/work/WorkPlates';
 import WorkScale from '@/components/climate/work/WorkScale';
 import WorkMoney from '@/components/climate/work/WorkMoney';
 import WorkClose from '@/components/climate/work/WorkClose';
@@ -37,6 +38,7 @@ export default function WorkBody() {
 
       <WorkRecord />
       <WorkDoors />
+      <WorkPlates />
       <WorkScale />
       <WorkMoney />
       <WorkClose />

@@ -398,10 +398,18 @@ export const CONTENT_GROUPS = [
     // A shelf label that answers the reader's question in plain words — what is this,
     // why would I open it — turns the same doors into a walk through the record. The
     // line is a sentence, never a label: it is the only prose in the index.
-    line: 'What this is, and whose name is on it.',
+    line: 'What this is, what has been built, and whose name is on it.',
     doors: [
       PRIMARY_NAV.find(({ to }) => to === '/TogetherChangeClimate'),
       FOOTER_NAV.find(({ to }) => to === '/XEqualsX'),
+      // ── THE WORK IS A DOOR OF THE RECORD, NOT A LETTER BESIDE IT ──
+      // Brian, 28 November: "should include the record too level nav? might be useful if she
+      // can imagine an ecosystem tuning into the record". It was reachable only from the
+      // platform's own sidebar, so a reader who arrived on the record could not find the one
+      // page that accounts for everything behind it. It sits on the record's own contents now,
+      // beside the mark and the founder, because that is where provenance is checked: what
+      // this is, what was built, and whose it is.
+      { label: 'What we built', to: '/WhatWeBuilt', what: 'Every door of the last two years, counted live, and the money in the open.' },
       FOUNDER_DOOR,
     ],
   },

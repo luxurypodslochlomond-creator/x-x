@@ -12,27 +12,68 @@
   padding-top: .2rem;
 }
 
+/* ── A CHAPTER HEAD HAS TO LOOK LIKE A CHAPTER ────────────────────────────────
+   Brian, 28 November: "you sure page doesn't feel flat bro". Ten bands of one size of prose
+   reads as a list however thick the rules are, so the shelf names are set larger and the
+   numerals larger again — the page has to sound like it is turning a page, not adding a row. */
 .work-band-head {
   display: flex;
   align-items: baseline;
   gap: .6rem;
   margin: 0;
   font-family: var(--font-record-ui);
-  font-size: .68rem;
+  font-size: clamp(.76rem, 2.6vw, .86rem);
   font-weight: 800;
-  letter-spacing: .18em;
-  line-height: 1.4;
+  letter-spacing: .16em;
+  line-height: 1.35;
   text-transform: uppercase;
   color: rgb(var(--record-ink));
 }
 .work-band-head span {
   flex: none;
-  padding: .12rem .38rem;
+  padding: .16rem .46rem;
   background: rgb(var(--record-signal));
   color: rgb(var(--record-ink));
-  font-size: .62rem;
+  font-size: clamp(.68rem, 2.3vw, .76rem);
   letter-spacing: .1em;
 }
+
+/* ── THE WALL, SET AS AN INSET PLATE ──────────────────────────────────────────── */
+.work-band--plates { border-top-width: 1px; }
+.work-plates {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .7rem;
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+.work-plate { display: block; text-decoration: none; color: rgb(var(--record-ink)); }
+.work-plate img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid rgb(var(--record-ink));
+  background: rgb(var(--record-bone));
+}
+.work-plate b {
+  display: block;
+  margin-top: .45rem;
+  font-family: var(--font-record-ui);
+  font-size: .64rem;
+  font-weight: 800;
+  letter-spacing: .07em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.work-plate span {
+  display: block;
+  margin-top: .15rem;
+  font-size: .64rem;
+  line-height: 1.35;
+  color: rgb(var(--record-muted));
+}
+.work-plate:hover b { color: rgb(var(--record-red)); }
 
 .work-band p {
   margin: .85rem 0 0;
@@ -411,6 +452,20 @@
 }
 
 @media (max-width: 639px) {
+  /* More air between chapters, and the count set at poster size: on a phone the bands were
+     sitting on top of each other at one size of everything, which is what read as flat. */
+  .work-band { padding: 1.9rem 0 1.5rem; }
+  .work-number b { font-size: clamp(2.1rem, 9vw, 2.5rem); }
+  /* Three drawings at a thumb's width would be three thumbnails. On a handset the inset is a
+     strip you push along instead, so each drawing is big enough to actually see. */
+  .work-plates {
+    display: flex;
+    gap: .6rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: .5rem;
+  }
+  .work-plates li { flex: 0 0 64%; scroll-snap-align: start; }
   .work-numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .work-band p { font-size: 1rem; line-height: 1.62; }
   .work-doors em { font-size: .92rem; }
