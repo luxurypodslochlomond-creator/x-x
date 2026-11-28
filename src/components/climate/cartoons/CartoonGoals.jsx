@@ -17,8 +17,8 @@ export default function CartoonGoals() {
   return <section className="cartoon-goals" id="cartoon-goals" aria-labelledby="cartoon-goals-title">
     <header className="cartoon-goals-head">
       <p className="cartoon-goals-eyebrow">A way into the same drawings</p>
-      <h2 id="cartoon-goals-title" className="cartoon-goals-title">Seventeen goals. One wall. The gaps left open.</h2>
-      <p className="cartoon-goals-lede">Not a second collection. Choose a goal to see the drawings connected to it, or put one there yourself. Where a goal is empty, the record says so rather than filling it with something that only looks like an answer.</p>
+      <h2 id="cartoon-goals-title" className="cartoon-goals-title">The same wall. Seventeen connections.</h2>
+      <p className="cartoon-goals-lede">Choose a goal to follow its drawings. Each connection names whose reading it is; an empty goal stays empty.</p>
       <p className="cartoon-goals-method">Connections are labelled as the record’s reading or the sender’s choice. Neither is a UN endorsement.</p>
     </header>
     <ol className="cartoon-goals-list">{GOALS.map((goal) => <GoalRow key={goal.n} goal={goal} open={openGoal === goal.n} onToggle={() => setOpenGoal((current) => current === goal.n ? null : goal.n)} />)}</ol>

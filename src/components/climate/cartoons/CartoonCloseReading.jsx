@@ -107,7 +107,7 @@ export default function CartoonCloseReading({ cartoons, index, onTurn, onClose }
         >
           <CartoonArtwork key={cartoon.id} cartoon={cartoon} lead />
         </div>
-        <figure className="cartoon-close-caption"><CartoonCaption cartoon={cartoon} instant /></figure>
+        <figure className="cartoon-close-caption"><CartoonCaption cartoon={cartoon} instant onNavigate={onClose} /></figure>
       </div>
       <div className="cartoon-close-bottom">
         <button type="button" onClick={() => turn(-1)} aria-label="Previous drawing"><ArrowLeft size={18} />Previous</button>

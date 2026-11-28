@@ -3,6 +3,7 @@ import { recordOrigin } from '@/components/climate/recordAddress';
 import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTongue';
 import { readingsFor } from '@/components/climate/cartoons/cartoonGoals';
 import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
+import cartoonImageSource from '@/components/climate/cartoons/cartoonImageSources';
 
 // ── ONE DRAWING, AS A CARD ────────────────────────────────────────────────────
 // A drawing travels out of this room as a screenshot with its artist cut off, and that is
@@ -45,12 +46,12 @@ const CARD_LINES = [
 const RTL_SCRIPT = /[\u0590-\u05FF\u0600-\u06FF\u0700-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]/;
 
 function loadImage(src) {
-  return new Promise((resolve) => {
-    if (!src) { resolve(null); return; }
+  return new Promise((resolve, reject) => {
+    if (!src) { reject(new Error('This drawing has no image to share.')); return; }
     const img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = () => resolve(img);
-    img.onerror = () => resolve(null);
+    img.onerror = () => reject(new Error('The drawing could not be loaded. Please try again.'));
     img.src = src;
   });
 }
@@ -107,7 +108,7 @@ export async function buildDrawingShareCard(cartoon = {}, options = {}) {
   const ctx = canvas.getContext('2d');
 
   const { DISPLAY, MONO, colors: { PAPER, BONE, INK, SIGNAL, MARK, SIGNAL_BRIGHT, MUTED } } = await loadRecordCardFonts();
-  const img = await loadImage(cartoon.display_image_url || cartoon.image_url);
+  const img = await loadImage(cartoonImageSource(cartoon));
 
   const rtl = cardTongueIsRightToLeft();
   const edge = rtl ? W - PAD : PAD;

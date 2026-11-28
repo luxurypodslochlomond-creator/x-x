@@ -5,7 +5,6 @@ import { SHOW_DRAWING } from '@/components/climate/cartoons/goToDrawing';
 import PressSheet from '@/components/climate/cartoons/press/PressSheet';
 import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReading';
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
-import { HungWall } from '@/components/climate/cartoons/CartoonInkIcons';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 
@@ -77,10 +76,10 @@ export default function PressWall({ visible = true }) {
             drawing is the one thing power cannot buy, ban or bury, because it costs nothing
             to make and it travels in a pocket. So the chapter says that, in the trade's own
             two words. The press and the pen. */}
-        <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />Satire, signed · every hand named</p>
-        <h2 id="press-wall-title" className="press-wall-title">They own the press. They don’t own the pen.</h2>
+        <p className="press-eyebrow">CartoonAFRICA · CEEW’s What On Earth! · contributing artists</p>
+        <h2 id="press-wall-title" className="press-wall-title">The drawings.</h2>
         <CartoonSignal />
-        <p className="press-wall-line">Look at the drawings, or read the same wall through the <a href="#cartoon-goals">17 UN goals</a>. <a href="#cartoon-your-turn">Send one of your own.</a></p>
+        <p className="press-wall-line">Look closer at any drawing. Its artist, source and sharing options stay with it.</p>
         {/* "Read the picture. Stay with the idea. Tap any drawing to look closer." stood here,
             and it was the last instruction in a stack of them: tap this, swipe that, read
             those in order. A reader knows how to look at a picture, and a wall that explains
@@ -97,7 +96,7 @@ export default function PressWall({ visible = true }) {
             link stays inside the room. Every other borrowed arrow was taken out of this room
             for the same reason, and one left behind is the sort of detail a reader notices
             without being able to say why. */}
-        <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Read the drawings one after another →</Link></p>
+        <p className="press-wall-line"><Link to="/ClimateCartoons/Thread">Present the wall</Link> · <Link to="/ClimateCartoons/Print">Print a show</Link> · <a href="#wall-money">Stand behind the work</a></p>
         {/* ── THE WALL IS STILL BEING HUNG, AND IT SAYS SO ────────────────────────
             The artists Francis introduces are still sending, so this wall is not finished and
             a reader can see that it is not: fourteen drawings where a biennial's anthology
@@ -123,7 +122,7 @@ export default function PressWall({ visible = true }) {
       {!wall.isPending && !wall.isError && !wall.cartoons.length && (
         <div className="press-state">
           <p>The first page is still blank. A space for a real drawing, with its artist’s name.</p>
-          <a href="#cartoon-your-turn">Make it yours ↗</a>
+          <a href="#cartoon-your-turn">Send a drawing</a>
         </div>
       )}
 
@@ -154,7 +153,7 @@ export default function PressWall({ visible = true }) {
         {/* The way off the screen that does not take anything off the record: a show printed
             from the wall, with every artist's name and address already on the paper. */}
         <p className="press-wall-print">
-          Take the wall with you: <Link to="/ClimateCartoons/Print">print a show of it ↗</Link>
+          Take the wall with you: <Link to="/ClimateCartoons/Print">print a show of it</Link>
         </p>
 
         {wall.hasNextPage && (

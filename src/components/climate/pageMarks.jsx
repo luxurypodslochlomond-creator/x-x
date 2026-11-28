@@ -88,6 +88,7 @@ const MARKS = {
   '/ClimateHost': MarkHandover,
   '/ClimateKeeperRoom': MarkHost,
   '/ClimateSupport': MarkSupport,
+  '/ClimateLedger': MarkXEqualsX,
   '/ExtractionProofCovenant': MarkCovenant,
 };
 

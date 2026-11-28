@@ -82,7 +82,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   // A room may hand in its own mark for this button: the cartoon room draws its own arrow,
   // because the network glyph is the sign for broadcasting and this record passes things on
   // by hand. Everything else keeps the standard one.
-  const Icon = state === 'building' ? Loader2 : state === 'shared' ? Check : (GivenIcon || Share2);
+  const Icon = state === 'building' ? Loader2 : state === 'shared' ? Check : GivenIcon === false ? null : (GivenIcon || Share2);
   // ── THE LABEL NEVER CHANGES LENGTH ───────────────────────────────────────────
   // It used to say "Preparing image…" and then "Shared", so the button grew and shrank
   // under the reader's thumb and everything standing beside it jumped with it — the small
@@ -93,7 +93,7 @@ export default function ShareCardButton({ entry, compact = false, build = buildW
   const doing = state === 'building' ? 'Preparing the image' : state === 'shared' ? 'Shared' : '';
   return <>
     <button type="button" onClick={share} disabled={state === 'building'} aria-busy={state === 'building'} className={inline ? 'record-share-inline' : compact ? 'record-share-compact' : 'record-share-button'}>
-      <Icon size={17} aria-hidden="true" className={state === 'building' ? 'animate-spin' : undefined} />{label}
+      {Icon && <Icon size={17} aria-hidden="true" className={state === 'building' ? 'animate-spin' : undefined} />}{label}
       <span className="sr-only" role="status">{doing}</span>
     </button>
     {state === 'error' && <span className="record-share-error" role="alert">The image could not be prepared. Please try again.</span>}

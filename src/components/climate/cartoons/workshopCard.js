@@ -20,7 +20,8 @@ import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTon
 // biennial's own cover and not somebody else's drawing borrowed for a poster.
 const HEAD = 'Climate change and the power of collective actions and creative interventions';
 const KICKER = 'A CLIMATE WORKSHOP · ONLINE · FREE';
-const HOUR = 'Sunday 29 November · 3pm West Africa · 2pm UK · one hour';
+const HOUR = 'Sunday 29 November 2026 · 9am EST · 2pm UK · 3pm West Africa';
+const JOIN_NOTE = 'Joining link and passcode: supplied by the host.';
 const SPEAKERS = [
   'Janine Selendy · Horizon International, Yale · host',
   'Francis Umendu Odupute · CartoonAFRICA Biennial · the cartoonists',
@@ -33,10 +34,14 @@ function lines(ctx, text, width) {
   const result = [];
   let line = '';
   for (const word of text.split(/\s+/)) {
-    if (line && ctx.measureText(`${line} ${word}`).width > width) { result.push(line); line = word; }
-    else line = line ? `${line} ${word}` : word;
+    if (line && ctx.measureText(`${line} ${word}`).width > width) { result.push(line); line = ''; }
+    for (const character of word) {
+      if (line && ctx.measureText(line + character).width > width) { result.push(line); line = ''; }
+      line += character;
+    }
+    line += ' ';
   }
-  if (line) result.push(line);
+  if (line.trim()) result.push(line.trim());
   return result;
 }
 
@@ -54,12 +59,12 @@ export async function buildWorkshopCard(card = {}, options = {}) {
   const [image, { DISPLAY, colors }, words] = await Promise.all([
     artwork(card.image || CARTOON_COVER),
     loadRecordCardFonts(),
-    cardWords([HEAD, KICKER, HOUR, ...SPEAKERS, ORGS, CARTOON_EVENT.coverArt]),
+    cardWords([HEAD, KICKER, HOUR, JOIN_NOTE, ...SPEAKERS, ORGS, CARTOON_EVENT.coverArt]),
   ]);
   const t = (line) => words[line] || line;
 
-  // A feed-shaped card rather than a story: 1080 × 1350 is the portrait a post holds whole.
-  const W = 1080, H = 1350, pad = 56, band = 810;
+  // The supplied artwork stays whole; the extra height keeps joining details clear of the credit.
+  const W = 1080, H = 1500, pad = 56, band = 810;
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
@@ -95,7 +100,7 @@ export async function buildWorkshopCard(card = {}, options = {}) {
   }
   head.slice(0, 2).forEach((line, i) => ctx.fillText(line, pad, band + 96 + i * (titleSize + 6)));
 
-  ctx.font = `700 26px ${DISPLAY}`;
+  ctx.font = `700 24px ${DISPLAY}`;
   ctx.fillText(t(HOUR), pad, band + 196);
 
   ctx.font = `400 24px ${DISPLAY}`;
@@ -110,11 +115,21 @@ export async function buildWorkshopCard(card = {}, options = {}) {
   ctx.font = `700 28px ${DISPLAY}`;
   ctx.fillText(`${origin}/ClimateWorkshop`, pad, band + 440);
 
-  ctx.textAlign = 'right';
+  // Joining details stay on this device, out of translation requests and saved records.
+  ctx.fillStyle = colors.INK;
+  const joining = String(card.join || '').trim();
+  let joiningSize = 21;
+  ctx.font = `400 ${joiningSize}px ${DISPLAY}`;
+  let joiningLines = lines(ctx, joining || t(JOIN_NOTE), W - pad * 2);
+  while (joiningLines.length > 5 && joiningSize > 12) {
+    joiningSize -= 1;
+    ctx.font = `400 ${joiningSize}px ${DISPLAY}`;
+    joiningLines = lines(ctx, joining || t(JOIN_NOTE), W - pad * 2);
+  }
+  joiningLines.forEach((line, i) => ctx.fillText(line, pad, band + 492 + i * 27));
   ctx.fillStyle = colors.MUTED;
   ctx.font = `400 18px ${DISPLAY}`;
-  ctx.fillText(t(CARTOON_EVENT.coverArt), W - pad, band + 486);
-  ctx.textAlign = 'left';
+  ctx.fillText(t(CARTOON_EVENT.coverArt), pad, band + 646);
 
   return new Promise((resolve, reject) =>
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('The card could not be saved. Please try again.'))), 'image/png'),

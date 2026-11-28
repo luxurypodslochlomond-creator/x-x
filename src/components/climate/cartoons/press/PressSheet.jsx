@@ -7,6 +7,7 @@ import { buildDrawingShareCard, drawingShareLine } from '@/components/climate/ca
 import { cartoonSlug } from '@/components/climate/cartoons/cartoonSlug';
 import entryHref from '@/components/climate/cartoons/entryHref';
 import { recordOrigin } from '@/components/climate/recordAddress';
+import DrawingConnections from '@/components/climate/cartoons/DrawingConnections';
 
 // ── ONE DRAWING, GIVEN THE PAGE ────────────────────────────────────────────────
 // A wall of equal cards makes every drawing the same size and every artist equally
@@ -32,7 +33,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
         aria-label={`Look closer at ${title || 'this drawing'} by ${artist_name}`}
       >
         <CartoonArtwork cartoon={cartoon} lead={lead} linkSource={false} />
-        <span className="press-sheet-look">Look closer ↗</span>
+        <span className="press-sheet-look">Look closer</span>
       </button>
 
       <div className="press-sheet-rail">
@@ -55,6 +56,7 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
             entry={cartoon}
             build={buildDrawingShareCard}
             label="Share this drawing"
+            icon={false}
             description={drawingShareLine(cartoon)}
             includeMessage
             windowTitle="Share this drawing"
@@ -64,16 +66,17 @@ export default function PressSheet({ cartoon, index, lead = false, marked = fals
         </div>
         {crisis_id && (
           <Link className="press-sheet-link" to={entryHref(cartoon)}>
-            Drawn about: {crisis_title || 'an entry on the record'} ↗
+            Drawn about: {crisis_title || 'an entry on the record'}
           </Link>
         )}
+        <DrawingConnections cartoon={cartoon} />
         <div className="press-sheet-provenance">
           {credit && <p>{credit}</p>}
           {source_url && <a href={source_url} target="_blank" rel="noopener noreferrer">At its source ↗</a>}
           {/* Two addresses a cartoonist can carry away: the drawing as a sheet to print and
               hang, and every drawing they have given the record, on one page of their own. */}
-          <Link to={`/ClimateCartoons/Sheet/${cartoon.id}`}>Print this drawing ↗</Link>
-          <Link to={`/ClimateCartoons/Artist/${encodeURIComponent(artist_name)}`}>Every drawing by {artist_name} ↗</Link>
+          <Link to={`/ClimateCartoons/Sheet/${cartoon.id}`}>Print this drawing</Link>
+          <Link to={`/ClimateCartoons/Artist/${encodeURIComponent(artist_name)}`}>Every drawing by {artist_name}</Link>
         </div>
       </div>
     </article>

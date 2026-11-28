@@ -7,7 +7,7 @@ import RoomCode from '@/components/climate/cartoons/RoomCode';
 import SendToAlina from '@/components/climate/cartoons/share/SendToAlina';
 import KeeperKey from '@/components/climate/KeeperKey';
 import ShareCardButton from '@/components/climate/ShareCardButton';
-import { InkArrow } from '@/components/climate/cartoons/CartoonInkIcons';
+import { CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 import { buildWorkshopCard, WORKSHOP_CARD } from '@/components/climate/cartoons/workshopCard';
 import {
   shareLines,
@@ -83,7 +83,7 @@ export default function ClimateCartoonsShare() {
       eyebrow="The cartoon room · words to carry it"
       marker="One picture, the words for every place, one address"
       title="Words for wherever you send it"
-      statement="The drawings travel hand to hand, and a link on its own says nothing. So here is the room described for the occasion it is going to — a group chat, a story, a caption, an institution’s feed, one line, one email, a printed sheet — each with the address on the end. It opens with the picture and the invite for Sunday, then the initiative in Janine Selendy’s own words, because that is the shortest true description of what this room is part of."
+      statement="The real picture, its credit and the words to go with it. Add the host’s joining details for an invite; leave them out for a public poster."
       returnTo="/ClimateCartoons"
       returnLabel="The room"
       footer="Every figure on this page is read from the wall itself when the page opens. Nothing here is a claim the room cannot show."
@@ -121,10 +121,7 @@ export default function ClimateCartoonsShare() {
 
         <div className="lg:order-1">
           <p className="mt-3 text-[13.5px] leading-relaxed text-record-ink/90 lg:mt-0 lg:max-w-[62ch] lg:text-[15px]" style={{ fontFamily: 'var(--font-reading)' }}>
-            Copy whichever one fits, or tap the app it is going to and send it — the words open already in
-            it, with the address on the end. Change them to your own if you would rather: they are written
-            plainly on purpose, so what the wall is, whose hands are on it and where to look all survive
-            being forwarded by somebody who never read this page.
+            Choose a message or share the picture. The artist’s credit and the wall’s address travel with it.
           </p>
 
           {/* ── THE PICTURE FIRST ─────────────────────────────────────────────────────
@@ -132,19 +129,19 @@ export default function ClimateCartoonsShare() {
               organisations in one creative for the biennial's own accounts. It sits first because
               a picture is what gets sent, and the words are what travel with it. */}
           <GroupHead
-            title="The first creative · one picture for the accounts that carry the workshop"
-            note="Workshop-first: the subject, the drawing, the four speakers with what each is doing, and the three organisations behind it. Save it or share it from the card itself."
+            title="The picture to send"
+            note="Francis’s cover, the speakers and the hour. If you add joining details below, make a new card to include them."
           />
           <div className="mt-3">
             <ShareCardButton
-              entry={WORKSHOP_CARD}
+              entry={{ ...WORKSHOP_CARD, join: join.trim() }}
               build={buildWorkshopCard}
               label="Save or share the picture"
               includeMessage
               windowTitle="Share the hour"
               link={HOUR_ADDRESS}
-              description="A climate workshop · Sunday 29 November · 3pm West Africa · 2pm UK · online, free. Janine Selendy hosts, Francis Umendu Odupute brings the cartoonists, Alina Sen presents CEEW’s What On Earth!."
-              icon={InkArrow}
+              description={`${CARTOON_EVENT.shareLine}${join.trim() ? `\nJoining details from the sender: ${join.trim()}` : ''}`}
+              icon={false}
               previewFirst
             />
           </div>
@@ -161,13 +158,13 @@ export default function ClimateCartoonsShare() {
             <input
               id="join-line"
               value={join}
+              maxLength={320}
               onChange={(e) => setJoin(e.target.value)}
               placeholder="zoom.us/j/… · passcode …"
               className="mt-2 w-full border-0 border-b border-record-ink/30 bg-transparent px-0 py-1.5 text-[13.5px] text-record-ink outline-none focus:border-record-red"
             />
             <p className="mt-1.5 text-[11px] leading-snug text-record-muted">
-              Typed here only, and gone when the page closes. Left empty, the words say the link is the
-              host’s to hand out rather than sending anybody to a door that will not open.
+              Included in both the picture and its message when you make a new card. Not saved by the record; anyone receiving the card can read these details. Share them only with the host’s permission.
             </p>
           </div>
 

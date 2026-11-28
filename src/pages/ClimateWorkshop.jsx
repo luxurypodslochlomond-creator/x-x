@@ -13,6 +13,7 @@ import BrianTwoMinutes from '@/components/climate/workshop/BrianTwoMinutes';
 import CopyLine from '@/components/climate/CopyLine';
 import { recordAddress } from '@/components/climate/recordAddress';
 import { buildWorkshopShareCard, WORKSHOP_CARD } from '@/components/climate/workshopCard';
+import { CARTOON_EVENT } from '@/components/climate/cartoons/cartoonEvent';
 
 // ── WHAT A STRANGER NEEDS, BECAUSE THESE THINGS GET FORWARDED ───────────────────
 // A page sent to one person is read by six, and one of them is in another country with no
@@ -237,7 +238,7 @@ export default function ClimateWorkshop() {
       <div className="no-print mt-8 border-t border-record-ink/15 pt-4">
         <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-record-muted">Share</p>
         <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-          <ShareCardButton entry={WORKSHOP_CARD} build={buildWorkshopShareCard} label="Send the card" includeMessage windowTitle="Send the hour" />
+          <ShareCardButton entry={WORKSHOP_CARD} build={buildWorkshopShareCard} label="Send the card" icon={false} includeMessage windowTitle="Send the hour" link={recordAddress('/ClimateWorkshop')} description={CARTOON_EVENT.shareLine} alt={`Workshop invitation with the catalogue cover. ${CARTOON_EVENT.coverArt}.`} />
           <button
             type="button"
             onClick={() => window.print()}
@@ -247,8 +248,9 @@ export default function ClimateWorkshop() {
           </button>
         </div>
         <p className="mt-2 font-mono text-[10.5px] leading-relaxed text-record-muted">
-          The card is drawn here, on your own device: the festival’s own header, the three things every drawing on the record carries, and the day. No addresses, no joining link, nothing about anybody — and nothing asked of the room.
+          The card carries Francis’s cover artwork, its credit, the speakers and the confirmed hour. To include the host’s joining details in a private invite, use the sharing page.
         </p>
+        <Link to="/ClimateCartoons/Share" className="inline-flex min-h-11 items-center text-record-red underline font-semibold">Add the host’s joining details to an invite</Link>
         {/* The address, so it can be pasted into a message rather than retyped from a card. */}
         <div className="mt-3 flex items-center gap-2 border border-record-ink/20 bg-record-bone/50 px-2 py-1.5">
           <code className="min-w-0 flex-1 truncate font-mono text-[11px] text-record-ink">{recordAddress('/ClimateWorkshop')}</code>

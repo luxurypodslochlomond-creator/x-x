@@ -19,6 +19,7 @@ import '@/components/climate/cartoons/press/press-wall-wide.css';
 // The room's chapters named the way x = x names its bands: red caps, yellow chip.
 import '@/components/climate/cartoons/press/press-band-heads.css';
 import '@/components/climate/cartoons/wall-room.css';
+import '@/components/climate/cartoons/wall-continuity.css';
 
 export default function ClimateCartoons() {
   return (
@@ -28,7 +29,7 @@ export default function ClimateCartoons() {
       eyebrow="The Wall"
       marker="The record · the cartoon room"
       title="The Wall"
-      statement="Drawn by the people it’s happening to. Aimed at the people doing it."
+      statement="Climate cartoons. Kept whole. Every credit carried forward."
       returnTo="/TogetherChangeClimate"
       returnLabel="Back to real-world climate solutions"
       footer="Every contributed cartoon keeps its artist’s name, its origin and the drawer’s own words. A person looks before it goes up."
