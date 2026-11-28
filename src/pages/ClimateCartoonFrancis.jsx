@@ -154,8 +154,8 @@ export default function ClimateCartoonFrancis() {
               : drawings.length === 1
                 ? 'His drawing on the wall'
                 : drawings.length
-                  ? 'His drawings on the wall'
-                  : 'Room for what is coming'}
+                  ? 'His work, on the wall'
+                  : 'The wall is holding a place'}
           </h2>
 
           {drawings !== null && drawings.length === 0 && (
@@ -230,11 +230,11 @@ export default function ClimateCartoonFrancis() {
             What the page is for, said once at the foot rather than in a section about itself:
             a link to send to a paper, a festival, a ministry or a school. */}
         <section className="hand-section">
-          <h2 className="hand-head">Send this address</h2>
+          <h2 className="hand-head">This address does not move.</h2>
           <HandAddress address={address} />
           <p className="hand-where">
-            Benin City, Nigeria. Send it to a paper, a festival, a ministry or a school — the address does
-            not move, and his name stays on the drawing wherever the drawing goes.
+            Benin City, Nigeria. Send it to a paper, a festival, a ministry, a school — his name stays on the
+            drawing wherever the drawing goes, and the link keeps working.
           </p>
         </section>
       </div>

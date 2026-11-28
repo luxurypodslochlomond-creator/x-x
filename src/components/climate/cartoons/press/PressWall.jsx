@@ -59,8 +59,19 @@ export default function PressWall() {
         {/* The wall names itself with the mark drawn for it: a line with two drawings
             pegged to it and one space still empty. Not a brick wall — a wall is also the
             thing that keeps people out, and this one is the opposite. */}
-        <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />Human hands · different perspectives</p>
-        <h2 id="press-wall-title" className="press-wall-title">The people’s pages.</h2>
+        {/* ── THE CHAPTER NAMED LIKE A CHAPTER OF x = x, NOT LIKE A SECTION OF A WEBSITE ──
+            Brian, 28 November: "the peoples pages sounds a bit weak bro… seen it before bro…
+            not as punchy and coolasfuck as x = x sections… feels like we're nursery children
+            trying to create activist coolasfuck."
+
+            "The people's pages" was the weakest kind of title: a category, true of any site
+            with contributors on it, saying nothing a reader could not have guessed. It also
+            undersold what is actually hanging here — working cartoonists answering power
+            with a pen, in countries where that is not a safe hobby. So the chapter says the
+            claim instead of the category, in the shape this record already uses for its own
+            name: not a feed, a record. Not decoration, an argument. */}
+        <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />The trade at work · every hand named</p>
+        <h2 id="press-wall-title" className="press-wall-title">Not decoration. An argument.</h2>
         {/* "Read the picture. Stay with the idea. Tap any drawing to look closer." stood here,
             and it was the last instruction in a stack of them: tap this, swipe that, read
             those in order. A reader knows how to look at a picture, and a wall that explains
@@ -87,7 +98,8 @@ export default function PressWall() {
             drawing goes up under the name of the hand that made it, and that is the only
             promise the line needs to make. */}
         <p className="press-wall-line press-wall-filling">
-          Still being hung: artists are sending their drawings now, and each one goes up under the name of the hand that made it.
+          Still being hung. Artists are sending now, and every drawing goes up under the name of the hand
+          that made it — no house style, no softening, nothing corrected.
         </p>
       </header>
 

@@ -22,8 +22,11 @@ export default function CartoonRoomActions() {
           on the wall — the same door Francis's artists and CEEW's artists came through — and
           it now says whose door it is. The id is kept because links and the room's own set
           list point at it. */}
-      <h2 id="cartoon-your-turn" className="comic-section-title">If you draw, there is a place for it here.</h2>
-      <p className="record-meta comic-workshop-note">For a cartoonist with work to hang. A drawing made by hand, with your name on it.</p>
+      {/* "If you draw, there is a place for it here" was a form asking politely. A door to a
+          wall of working cartoonists should sound like the wall: draw it, we hang it, your
+          name stays on it. Same door, same drawer, no hedging. */}
+      <h2 id="cartoon-your-turn" className="comic-section-title">Draw it. It goes up under your name.</h2>
+      <p className="record-meta comic-workshop-note">For working cartoonists. Made by hand, signed by you, printed here exactly as you sent it.</p>
       {/* ── THE PHOTOGRAPH COMES FIRST, AND THE DRAWING DESK COMES SECOND ──────────
           Brian, 25 November: "on the wall it says now your turn… it's not about a draw
           strip to bring a paper drawing, right? should be easy and coolasfuck to get

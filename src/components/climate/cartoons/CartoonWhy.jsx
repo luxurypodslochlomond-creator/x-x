@@ -18,14 +18,25 @@ import React from 'react';
 // The doors this room does keep are its own, and they are all inside it: the drawing desk
 // below, the thread, the print, and the page that says what the room is. Nothing here needs
 // a door to another product to be understood.
+// ── AND THEN THE WORDS THEMSELVES, ON 28 NOVEMBER ────────────────────────────
+// Brian: "why we holding back with the words bro… needs to be statement bro of intent
+// that we're going to go to town with these bastards."
+//
+// He was reading the three lines and hearing a brochure. "A cartoon is a way of seeing the
+// climate" is the sentence on the back of a school leaflet; it asks nothing and accuses
+// nobody. These lines are the room's case, and the case is harder than that: a drawing says
+// the thing a report is built to avoid saying, it travels where a report cannot, and this
+// record keeps it whole and does not pretend a drawing is data.
+//
+// Still three lines. Nothing added but the spine.
 export default function CartoonWhy() {
   return (
     <section className="comic-why" aria-labelledby="cartoon-why-title">
-      <h2 id="cartoon-why-title" className="comic-section-title">Why cartoons?</h2>
+      <h2 id="cartoon-why-title" className="comic-section-title">Why a cartoon, and not a graph.</h2>
       <ul className="comic-why-list">
-        <li>A cartoon is a way of seeing the climate: witness, argument, satire.</li>
-        <li>Anyone can answer with a pen. A child, a farmer, a grandmother.</li>
-        <li>The record keeps the work, the artist’s name and their own words. A viewpoint is not scientific proof.</li>
+        <li>One frame names who is doing it and who is paying for it. A report takes forty pages, a footnote and a lawyer, and still leaves that sentence out.</li>
+        <li>It goes where the report never goes — a phone, a classroom, a taxi, a kitchen — in a language nobody has to be taught to read.</li>
+        <li>The record keeps the drawing whole, the hand that made it and the drawer’s own line. A viewpoint is not proof, and this record never dresses one up as proof: the evidence stands beside it.</li>
       </ul>
     </section>
   );

@@ -53,17 +53,17 @@ export default function ClimateCartoonArtist() {
       eyebrow="The record · the cartoon room"
       returnTo="/ClimateCartoons"
       returnLabel="Back to the room of cartoons"
-      footer="Every drawing keeps the name of the hand that made it, where it came from, and the drawer’s own line."
+      footer="Nothing here is cropped, softened or credited to nobody. The hand that drew it is on it, and the words are the drawer’s own."
     >
       <div className="hand-page">
         {drawings !== null && drawings.length === 0 && (
           <section className="hand-section">
-            <h2 className="hand-head">Nothing on the wall under this name yet</h2>
+            <h2 className="hand-head">No drawing under this name. Yet.</h2>
             <p className="hand-open-what" style={{ textTransform: 'none', letterSpacing: 0, fontSize: '.9rem' }}>
               <Link to="/ClimateCartoons#cartoon-drawing-desk" style={{ color: 'rgb(var(--record-red))', textDecoration: 'underline' }}>
-                Draw one
+                Make one
               </Link>{' '}
-              and it goes up on this wall, under this name.
+              and it goes up here — under this name, in your own words, exactly as you drew it.
             </p>
             <div style={{ marginTop: '1rem' }}>
               <HandAddress address={address} />
@@ -102,7 +102,7 @@ export default function ClimateCartoonArtist() {
         {rest.length > 0 && (
           <section className="hand-section">
             <h2 className="hand-head">
-              {rest.length === 1 ? 'One more drawing' : `${rest.length} more drawings`}
+              {rest.length === 1 ? 'One more, in the order it came' : `${rest.length} more, in the order they came`}
             </h2>
             <ArtistSequence drawings={rest} />
             <p className="hand-where">
@@ -114,11 +114,11 @@ export default function ClimateCartoonArtist() {
         {/* ── THE ADDRESS ──────────────────────────────────────────────────── */}
         {drawings !== null && drawings.length > 0 && (
           <section className="hand-section">
-            <h2 className="hand-head">Send this address</h2>
+            <h2 className="hand-head">This address does not move.</h2>
             <HandAddress address={address} />
             <p className="hand-where">
               {[country, places.join(' · ')].filter(Boolean).join(' · ') || 'On the wall'}
-              {' — send it to a paper, a festival, a ministry or a school. The address does not move.'}
+              {' — send it to a paper, a festival, a ministry, a school. The link keeps working and the work stays under this name.'}
             </p>
           </section>
         )}
@@ -134,11 +134,18 @@ export default function ClimateCartoonArtist() {
             there is nobody to follow, nothing to count and nothing to join. Add a follow
             button and this line becomes a lie in public, which is the strongest lock a
             record can put on its own future. */}
+        {/* The old line was a promise with no teeth: "a page of work, not an account", which
+            is what every platform says in the week it launches. Brian, 28 November: "reeks of
+            bshhhhet haha… needs to be statement bro of intent." So it states the mechanism
+            rather than the mood, and the mechanism is the lock: a page here is built from
+            published drawings under a name, so there is nothing to follow, nothing to count
+            and nothing that survives the work coming down. */}
         <p className="hand-not-account">
-          A page of work, not an account. No follows, no counts, nothing to join.
+          No profile. No follows. No numbers.
           <span>
-            It exists because these drawings do — nothing here is kept about the person who drew them
-            except the name they sign.
+            A page here exists only while a drawing does, so there is nothing to join and nothing to
+            collect. That is the rule that lets a cartoonist send this address to an editor without
+            becoming anybody’s content.
           </span>
         </p>
       </div>
