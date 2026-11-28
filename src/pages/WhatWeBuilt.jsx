@@ -13,7 +13,7 @@ export default function WhatWeBuilt() {
       eyebrow="The work"
       marker="For Janine · what the last two years were"
       title="What we built"
-      statement="Not a pitch. Every tool, paper and promise on this page opens, and the numbers are read from the record itself rather than typed in."
+      statement="Two years. One family. An asset-locked company one year old. A record nobody can buy a line of, and every line of it openable."
       returnTo="/TogetherChangeClimate"
       returnLabel="Open the record"
       footer="Nothing here is a plan. If a line could not be opened from this page, it was left out."
