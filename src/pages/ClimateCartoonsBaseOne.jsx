@@ -11,6 +11,7 @@ export default function ClimateCartoonsBaseOne() {
     <ClimateRecordShell
       compact
       wide
+      painted
       eyebrow="The cartoon room · signed"
       returnTo="/ClimateCartoons"
       returnLabel="The wall"

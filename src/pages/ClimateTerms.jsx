@@ -10,6 +10,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 export default function ClimateTerms() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="Terms"
       marker="The ground we stand on"
       title="The Ground We Stand On"

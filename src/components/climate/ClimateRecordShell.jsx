@@ -23,7 +23,13 @@ export default function ClimateRecordShell({ dir = 'ltr', eyebrow, marker, title
       <Link to="/XEqualsX"><MarkEqual size={23} /><span>Why this record</span></Link>
     </header>}
     <div className="record-room-body">
-      <div className={`record-shell-content record-room-content mx-auto ${wide ? 'max-w-[1080px]' : 'max-w-3xl'}`}>{children}</div>
+      <div className={`record-shell-content record-room-content mx-auto ${wide ? 'max-w-[1080px]' : 'max-w-3xl'}`}>
+        {/* A room that keeps its own head has no intro to carry the mark, so the record's
+            own symbol is pressed at the top of the sheet instead — the same plate of
+            yellow, in the same place on every compact room, so the room is still signed. */}
+        {painted && compact && <span className="record-room-mark"><Icon size={20} aria-hidden="true" /></span>}
+        {children}
+      </div>
     </div>
     {showReturn && <div className="record-room-return"><Link to={returnTo || '/TogetherChangeClimate'}>{returnLabel || 'The record'}<ArrowRight size={18} aria-hidden="true" /></Link></div>}
     {footer && <p className="record-room-footnote">{footer}</p>}

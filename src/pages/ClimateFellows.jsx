@@ -45,6 +45,7 @@ function Label({ children }) {
 export default function ClimateFellows() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="For whoever is coming to help"
       marker="The job · what you keep · the way in"
       title="If you are coming to help"

@@ -58,6 +58,7 @@ export default function ClimateWorkshopAnswers() {
 
   return (
     <ClimateRecordShell
+      painted
       eyebrow="The record · answers for CEEW · 26 November 2026"
       marker="Six questions asked by Alina Sen · answered in her order"
       title="Before the five-minute call"

@@ -201,6 +201,7 @@ export default function ClimateGuide() {
   return (
     <ClimateRecordShell
       compact
+      painted
       eyebrow="The record · the way through"
       title="The guide"
       returnTo={createPageUrl('TogetherChangeClimate')}

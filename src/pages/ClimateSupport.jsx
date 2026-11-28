@@ -63,6 +63,7 @@ export default function ClimateSupport() {
   return (
     <ClimateRecordShell
       dir={isRTL ? 'rtl' : 'ltr'}
+      painted
       eyebrow={(t.eyebrow || '').replace(/^●\s*/, '')}
       marker={t.pledge_1}
       title={t.heading}

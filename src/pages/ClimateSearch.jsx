@@ -49,6 +49,7 @@ export default function ClimateSearch() {
   return (
     <ClimateRecordShell
       compact
+      painted
       onBack={back}
       backLabel="Back"
       eyebrow="BASE 1 · the record’s own index"

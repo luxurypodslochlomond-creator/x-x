@@ -10,6 +10,7 @@ import ClimateRecordShell from '@/components/climate/ClimateRecordShell';
 export default function ClimatePrivacy() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="Privacy"
       marker="What we hold · what we don't"
       title="What We Hold, What We Don't"

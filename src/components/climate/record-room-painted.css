@@ -199,3 +199,16 @@ html .climate-record .record-book:has(.record-room-painted) {
   text-transform: uppercase;
   color: rgb(var(--record-signal));
 }
+
+/* ── THE MARK ON A ROOM THAT KEEPS ITS OWN HEAD ────────────────────────────────
+   The guide, the search, the machine's hand and the wall's own sheets open straight
+   onto their reading, with no intro to carry the record's symbol — so on those the
+   room went unsigned. One plate of the record's yellow, at the top of the sheet, the
+   same size and in the same place on each: the room is signed before it is read. */
+.climate-record.record-connected-shell.record-room-painted .record-room-mark {
+  display: inline-flex;
+  margin: 0 0 1.2rem;
+  padding: .55rem;
+  background: rgb(var(--record-signal));
+  color: rgb(var(--record-ink));
+}

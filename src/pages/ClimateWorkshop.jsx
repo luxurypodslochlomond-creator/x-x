@@ -81,6 +81,7 @@ const Section = ({ n, title, children }) => (
 export default function ClimateWorkshop() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="The record · 29 November 2026"
       marker="03 · Janine M. H. Selendy’s session · CartoonAFRICA 8th Biennial · Benin City"
       title={`“${TOPIC}”`}

@@ -98,6 +98,7 @@ function Pillar({ n, status, title, body, links }) {
 export default function ExtractionProofCovenant() {
   return (
     <ClimateRecordShell
+      painted
       eyebrow="Our commitments"
       marker="Open code · named sources · visible corrections"
       title="Open to use. Open to question."

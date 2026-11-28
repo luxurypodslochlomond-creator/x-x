@@ -35,16 +35,20 @@
    strength and the same crop — the earth behind the words, never a second picture at a
    different angle. The ink stays exactly where it was, so the type keeps every point of
    contrast it had; what changes is only what is behind it. A desk is untouched. */
-@media (max-width: 1023px) {
-  .record-trust-page .record-method-intro,
-  .record-trust-page .record-method-sheet {
-    background-image:
-      linear-gradient(rgb(var(--record-ink) / .58) 0%, rgb(var(--record-ink) / .68) 60%, rgb(var(--record-ink) / .78) 100%),
-      var(--record-cover);
-    background-size: cover;
-    background-position: center 30%;
-    background-attachment: scroll;
-  }
+/* Brian, 28 November, on a desk: "method still same for me bro". It was — the painting
+   had been let into the plates only below 1024 pixels, so a wide window still got two
+   slabs of flat ink over paper and the one picture the record is made of was shut out of
+   the page that explains how it is made. The same crop, the same strength, at every
+   width now: the earth behind the words, and the ink left where it was so no point of
+   contrast is lost. */
+.record-trust-page .record-method-intro,
+.record-trust-page .record-method-sheet {
+  background-image:
+    linear-gradient(rgb(var(--record-ink) / .58) 0%, rgb(var(--record-ink) / .68) 60%, rgb(var(--record-ink) / .78) 100%),
+    var(--record-cover);
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: scroll;
 }
 .record-trust-page .record-method-contact { background-color: rgb(var(--record-paper)); }
 
