@@ -1,0 +1,90 @@
+/* ── PEOPLE AND SOURCES, SET SO A STRANGER CAN READ THEM ───────────────────────
+   A name, what the person did, and a door. Then the drawings' origin in one sentence and one
+   dated list. Nothing here is decoration: the rule and the numbers do the work. */
+#root .press-room .wall-credits-plate { display: grid; gap: 2.5rem; margin-top: .5rem; }
+#root .press-room .wall-people-title,
+#root .press-room .wall-sources-title {
+  margin: 0;
+  padding-top: .9rem;
+  border-top: 4px solid rgb(var(--record-ink));
+  font: 850 clamp(1.5rem, 2.6vw, 2.15rem)/1.1 var(--font-record-ui);
+  letter-spacing: -.04em;
+  color: rgb(var(--record-ink));
+}
+#root .press-room .wall-people-lede,
+#root .press-room .wall-sources-lede {
+  max-width: 58ch;
+  margin: .7rem 0 1.3rem;
+  font: 400 1.02rem/1.65 var(--font-record-ui);
+  color: rgb(var(--record-ink));
+}
+#root .press-room .wall-people-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgb(var(--record-ink) / .25); }
+#root .press-room .wall-people-list > li { border-bottom: 1px solid rgb(var(--record-ink) / .25); }
+#root .press-room .wall-person {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  gap: .1rem .9rem;
+  padding: 1.1rem 0;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+}
+#root .press-room .wall-person-number { grid-row: 1 / 4; font: 800 .95rem/1.35 var(--font-record-ui); color: rgb(var(--record-red)); font-variant-numeric: tabular-nums; }
+#root .press-room .wall-person-name { font: 800 clamp(1.15rem, 2vw, 1.45rem)/1.2 var(--font-record-ui); letter-spacing: -.03em; }
+#root .press-room .wall-person-role { font: 700 .82rem/1.45 var(--font-record-ui); letter-spacing: .06em; text-transform: uppercase; color: rgb(var(--record-muted)); }
+#root .press-room .wall-person-line { max-width: 56ch; margin-top: .3rem; font: 400 .98rem/1.6 var(--font-record-ui); color: rgb(var(--record-ink)); }
+#root .press-room .wall-person:hover :is(.wall-person-name, .wall-person-line),
+#root .press-room .wall-person:focus-visible :is(.wall-person-name, .wall-person-line) { color: rgb(var(--record-red)); }
+#root .press-room .wall-person:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
+#root .press-room .wall-sources-door {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 2.9rem;
+  padding: .6rem 1rem;
+  background: rgb(var(--record-red));
+  color: rgb(var(--record-paper));
+  font: 800 .82rem/1.2 var(--font-record-ui);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+#root .press-room .wall-sources-door:hover,
+#root .press-room .wall-sources-door:focus-visible { background: rgb(var(--record-ink)); color: rgb(var(--record-paper)); }
+#root .press-room .wall-sources-list { margin-top: 1.2rem; border-top: 1px solid rgb(var(--record-ink) / .25); border-bottom: 1px solid rgb(var(--record-ink) / .25); }
+#root .press-room .wall-sources-list > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.2rem;
+  padding: .85rem 0;
+  cursor: pointer;
+  font: 750 1rem/1.4 var(--font-record-ui);
+  color: rgb(var(--record-ink));
+}
+#root .press-room .wall-sources-list > summary:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 3px; }
+#root .press-room .wall-sources-list > ol { margin: 0 0 1rem; padding: 0; list-style: none; }
+#root .press-room .wall-sources-list > ol > li + li { border-top: 1px solid rgb(var(--record-ink) / .15); }
+#root .press-room .wall-sources-list a {
+  display: grid;
+  grid-template-columns: 2.2rem minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: .3rem .8rem;
+  padding: .7rem 0;
+  color: rgb(var(--record-ink));
+  text-decoration: none;
+  font: 700 .98rem/1.4 var(--font-record-ui);
+}
+#root .press-room .wall-sources-list a:hover,
+#root .press-room .wall-sources-list a:focus-visible { color: rgb(var(--record-red)); }
+#root .press-room .wall-source-number { font-size: .82rem; color: rgb(var(--record-red)); font-variant-numeric: tabular-nums; }
+#root .press-room .wall-source-when { font: 400 .82rem/1.4 var(--font-record-ui); color: rgb(var(--record-muted)); white-space: nowrap; }
+#root .press-room .wall-sources-copyright { margin: 1rem 0 0; font: 400 .82rem/1.5 var(--font-record-ui); color: rgb(var(--record-muted)); }
+@media (min-width: 1024px) {
+  #root .press-room .wall-credits-plate { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 3.5rem; align-items: start; }
+}
+@media (max-width: 639px) {
+  #root .press-room .wall-person { grid-template-columns: 2rem minmax(0, 1fr); }
+  #root .press-room .wall-sources-list a { grid-template-columns: 1.8rem minmax(0, 1fr) auto; }
+  #root .press-room .wall-sources-list a > svg { display: none; }
+}
