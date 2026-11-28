@@ -9,6 +9,6 @@ export default function WallMoney() {
     {/* Francis, 28 November: cartoonists kept asking what a drawing is worth here and could
         not find the answer, because it sat behind a quiet link at the foot of sixteen
         drawings. The question a cartoonist arrives with is the first door now. */}
-    <p className="wall-money-door"><Link to="/ClimateCartoons/Paid" className="wall-money-button">If you draw: what a drawing is worth</Link> <Link to="/ClimateLedger" className="wall-money-button">Stand behind the work</Link> <Link to="/ClimateLedger#ledger-lines" className="wall-money-quiet">The money, in public</Link> <Link to="/ClimateCartoons/Answered" className="wall-money-quiet">Whose the idea is, whose the drawing</Link></p>
+    <p className="wall-money-door"><Link to="/ClimateCartoons/Paid" className="wall-money-button">If you draw: what a drawing is worth</Link> <Link to="/ClimateLedger" className="wall-money-button">Support the work</Link> <Link to="/ClimateLedger#ledger-lines" className="wall-money-quiet">The money, in public</Link> <Link to="/ClimateCartoons/Answered" className="wall-money-quiet">Whose the idea is, whose the drawing</Link></p>
   </section>;
 }

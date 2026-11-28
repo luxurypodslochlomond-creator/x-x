@@ -42,6 +42,7 @@ export default function WallEventNotice() {
       <div className="wall-event-actions">
         <ShareCardButton iconOnly entry={{ ...WORKSHOP_CARD, join }} build={buildWorkshopCard} label="Share the workshop invitation" includeMessage windowTitle="Workshop invitation" link={recordAddress('/ClimateWorkshop')} description={CARTOON_EVENT.shareLine} alt={`The CartoonAFRICA workshop invitation. ${CARTOON_EVENT.coverArt}.`} />
         <Link to="/ClimateCartoons/Share">Invitation text</Link>
+        <Link to="/ClimateCartoons/Paid">If you draw: what a drawing is worth</Link>
       </div>
 
       <details className="wall-event-join">
