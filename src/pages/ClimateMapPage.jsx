@@ -5,6 +5,7 @@ import RecordWorldMap from '@/components/climate/RecordWorldMap';
 import NextActionNear from '@/components/climate/NextActionNear';
 import ImpactSignal from '@/components/climate/ImpactSignal';
 import WhyThisPlate from '@/components/climate/map/WhyThisPlate';
+import FounderPlate from '@/components/climate/map/FounderPlate';
 import MapArtworkView from '@/components/climate/map/MapArtworkView';
 import ClimateImpact from '@/pages/ClimateImpact';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
@@ -66,6 +67,10 @@ export default function ClimateMapPage() {
           from a legend. */}
       <div className="mx-auto max-w-[1640px] px-2 lg:px-0">
         <WhyThisPlate />
+        {/* The harm, on the same world. The founder page's figures are the reason the
+            entries exist, so the plate that holds the entries holds them too — in their
+            own band, with their own sources, never mixed into the record's own marks. */}
+        <FounderPlate />
       </div>
 
       <div className="record-map-desk">

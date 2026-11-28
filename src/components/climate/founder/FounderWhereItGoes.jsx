@@ -24,8 +24,8 @@ export default function FounderWhereItGoes() {
           <span>Thirty-two drawings from the hands doing the work</span>
           <strong>The wall</strong>
         </Link>
-        <Link to="/ClimateMap">
-          <span>Every entry, standing where it happens</span>
+        <Link to="/ClimateMap#founder-figures">
+          <span>Every entry — and these figures — standing where they happen</span>
           <strong>The map</strong>
         </Link>
       </div>
