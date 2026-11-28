@@ -120,29 +120,36 @@ export default function PressWall() {
         ))}
       </div>
 
-      <p className="press-wall-colophon">
-        The artists’ own words, kept with their work. Shown with permission. Every new contribution
-        waits for a person’s look.
-      </p>
-
-      {/* The way off the screen that does not take anything off the record: a show printed
-          from the wall, with every artist's name and address already on the paper. */}
-      <p className="press-wall-print">
-        Take the wall with you: <Link to="/ClimateCartoons/Print">print a show of it ↗</Link>
-      </p>
-
-      {wall.hasNextPage && (
-        <button type="button" className="press-more" disabled={wall.isFetchingNextPage} onClick={() => wall.fetchNextPage()}>
-          {wall.isFetchingNextPage ? 'Opening more…' : 'More from the wall'}
-        </button>
-      )}
-      {wall.isFetchNextPageError && (
-        <p className="press-state press-state--error" role="alert">
-          More drawings could not be opened. Use “More from the wall” to try again.
+      {/* ── THE FOOT OF THE CHAPTER, IN ONE PIECE ────────────────────────────────
+          On a desk the drawings hang on the painting itself, so this chapter has no sheet
+          of its own any more — its head keeps one and so does its foot, and the wall stands
+          between them. That needs the foot to be one element rather than five loose ones,
+          or each line would have to be given its own paper. The words are untouched. */}
+      <div className="press-wall-foot">
+        <p className="press-wall-colophon">
+          The artists’ own words, kept with their work. Shown with permission. Every new contribution
+          waits for a person’s look.
         </p>
-      )}
 
-      <CartoonsWaiting />
+        {/* The way off the screen that does not take anything off the record: a show printed
+            from the wall, with every artist's name and address already on the paper. */}
+        <p className="press-wall-print">
+          Take the wall with you: <Link to="/ClimateCartoons/Print">print a show of it ↗</Link>
+        </p>
+
+        {wall.hasNextPage && (
+          <button type="button" className="press-more" disabled={wall.isFetchingNextPage} onClick={() => wall.fetchNextPage()}>
+            {wall.isFetchingNextPage ? 'Opening more…' : 'More from the wall'}
+          </button>
+        )}
+        {wall.isFetchNextPageError && (
+          <p className="press-state press-state--error" role="alert">
+            More drawings could not be opened. Use “More from the wall” to try again.
+          </p>
+        )}
+
+        <CartoonsWaiting />
+      </div>
 
       {reading !== null && wall.cartoons[reading] && (
         <CartoonCloseReading cartoons={wall.cartoons} index={reading} onTurn={setReading} onClose={() => setReading(null)} />

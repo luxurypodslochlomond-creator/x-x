@@ -1,0 +1,107 @@
+/* ── THE WALL OPENS OUT ON A DESK ───────────────────────────────────────────────
+   Brian, 28 November: "on desktop not using space super intelligently bro… visually
+   still feels a bit old magazine… think we could go further down the wall make it
+   coolasfuck as well bro… like x = x page know what I mean bro?"
+
+   He was right, and the fault was one rule. Every chapter of this room was one cream
+   rectangle the same width, stacked down a column: head, drawings, why, the book, the
+   sources, the reading, the set list. Fourteen drawings, one per band, each with a
+   hairline rule between them — that is a magazine's contents, not a wall.
+
+   This room's own stylesheet has said the opposite since it was written: "the drawings
+   are objects placed on the world, not pictures inside a frame." It was true of the
+   painting and not of the drawings. So on a desk the drawings chapter now keeps no
+   sheet of its own at all — its head and its foot keep their paper, and between them
+   the drawings hang on the painting itself, two across and the first one given the
+   whole wall. A print with its citation underneath is the shape this room was always
+   describing.
+
+   Nothing about the drawings changed: same order, same sheets of information, same
+   share, same close reading. Only where they hang. Phones and tablets are untouched —
+   there the wall is walked along, one drawing at a time, which is what a handset is for. */
+
+@media screen and (min-width: 1280px) {
+  /* The wall is the one room of the record that opens wider than the book, because a
+     wall is looked at from across a room. */
+  #root .record-cartoon-field .record-book { max-width: min(1560px, 94vw); }
+
+  /* ── THE DRAWINGS CHAPTER STANDS ON THE PAINTING ───────────────────────────── */
+  #root .record-cartoon-field .press-room .press-room-inner > .press-wall-section {
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  /* Its head is still paper — the room's name, the count, the way in — and it is signed
+     with the record's own bar, so the first thing under the painted opening is the
+     record speaking, not a caption. */
+  #root .record-cartoon-field .press-room .press-wall-head {
+    padding: clamp(1.2rem, 1.5vw, 1.7rem) clamp(1.2rem, 2vw, 2rem) clamp(1.1rem, 1.4vw, 1.5rem);
+    border-top: 3px solid rgb(var(--record-signal));
+    background: rgb(var(--record-paper));
+    box-shadow: 0 16px 38px -30px rgb(var(--record-ink) / .65);
+  }
+  #root .record-cartoon-field .press-room .press-wall-title { font-size: clamp(2.6rem, 3.1vw, 3.7rem); }
+
+  /* ── TWO PRINTS ACROSS, THE FIRST ONE GIVEN THE WHOLE WALL ─────────────────── */
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.1rem, 1.7vw, 1.8rem);
+    margin: clamp(1.1rem, 1.7vw, 1.8rem) 0;
+  }
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: clamp(.9rem, 1vw, 1.2rem);
+    border: 0;
+    background: rgb(var(--record-paper));
+    box-shadow: 0 28px 56px -38px rgb(var(--record-ink));
+  }
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet:first-child {
+    padding-top: clamp(.9rem, 1vw, 1.2rem);
+  }
+  /* The lead drawing: the picture at size, the hand beside it, the way the room opened
+     before — and it is the only one that takes the whole wall. */
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet--lead {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(19rem, 1fr);
+    align-items: center;
+    gap: clamp(1.4rem, 2.2vw, 2.4rem);
+    padding: clamp(1.1rem, 1.4vw, 1.7rem);
+  }
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall > .press-sheet--lead:first-child {
+    padding-top: clamp(1.1rem, 1.4vw, 1.7rem);
+  }
+
+  /* ── THE PRINT ITSELF ─────────────────────────────────────────────────────────
+     The picture sits on the room's bone, as it always has; the citation sits under it,
+     inside the same sheet of paper, so a caption is never floating on the painting. */
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-art { background: rgb(var(--record-bone)); }
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-rail { padding-top: .95rem; }
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet--lead .press-sheet-rail { padding-top: 0; }
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall .comic-wall-artwork {
+    max-height: min(54vh, 33rem);
+  }
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet--lead .comic-wall-artwork {
+    max-height: min(72vh, 46rem);
+  }
+  /* The hand, at a size a room can read from across it. */
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-by { font-size: clamp(1.22rem, 1.25vw, 1.55rem); }
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-title { font-size: clamp(1.08rem, 1.1vw, 1.3rem); }
+  #root .record-cartoon-field .press-room .press-wall-section .press-sheet-words { font-size: clamp(.98rem, 1vw, 1.08rem); }
+
+  /* ── THE FOOT OF THE CHAPTER, BACK ON ITS OWN PAPER ──────────────────────────
+     The colophon, the way to print the wall, the way to open more of it and the line
+     about whose hands are still working: one sheet under the drawings, so the chapter
+     closes the way it opened. */
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall-foot {
+    padding: clamp(1rem, 1.3vw, 1.5rem) clamp(1.2rem, 2vw, 2rem) clamp(1.2rem, 1.5vw, 1.7rem);
+    background: rgb(var(--record-paper));
+    box-shadow: 0 16px 38px -30px rgb(var(--record-ink) / .65);
+  }
+  #root .record-cartoon-field .press-room .press-wall-section .press-wall-foot .press-wall-colophon { margin-top: 0; }
+}

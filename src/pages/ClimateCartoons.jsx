@@ -23,6 +23,9 @@ import '@/components/climate/cartoons/press/press-phone.css';
 import '@/components/climate/cartoons/press/press-workshop.css';
 import '@/components/climate/cartoons/baseone/base-one.css';
 import '@/components/climate/cartoons/press/press-desktop-ground.css';
+// The desk treatment of the wall itself — the drawings hanging on the painting, two across.
+// Last, so it is the rule that wins over the chapter-sheet geometry above it.
+import '@/components/climate/cartoons/press/press-wall-wide.css';
 
 export default function ClimateCartoons() {
   return (
