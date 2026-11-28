@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonWorld from '@/components/climate/cartoons/CartoonWorld';
 import '@/components/climate/cartoons/cartoon-longread.css';
 
@@ -22,7 +21,11 @@ import '@/components/climate/cartoons/cartoon-longread.css';
 // The drawer opens itself when something points inside it — the set list's "seventeen
 // goals", a goal row's own link, an address somebody pasted to a colleague — because a
 // door that silently refuses to open is worse than no door.
-const INSIDE = ['#cartoon-goals', '#press-world'];
+// The goals came back out into the room on 28 November — Brian went looking for them and
+// could not find them, which is the whole test a chapter has to pass. What stays in the
+// drawer is the one thing that is genuinely apparatus: the longer line of cartoonists who
+// drew power before this room existed. So the one address that opens this drawer is theirs.
+const INSIDE = ['#press-world'];
 
 export default function CartoonLongRead() {
   const drawer = useRef(null);
@@ -44,15 +47,13 @@ export default function CartoonLongRead() {
     <details className="cartoon-longread" ref={drawer}>
       <summary>
         <span>
-          <span className="cartoon-longread-kicker">The record’s own argument</span>
-          Seventeen goals, and the hands that drew before these
+          <span className="cartoon-longread-kicker">The longer line</span>
+          The hands that drew power before these
         </span>
       </summary>
       <p className="cartoon-longread-line">
-        Two readings of the wall, for anyone who wants them: which of the seventeen goals the
-        drawings actually answer — and which are still blank — and the longer line of
-        cartoonists who made power visible before this room existed. Neither is needed to look
-        at a drawing.
+        Cartoonists who made power visible before this room existed — where they drew, what it
+        cost them, and what they drew. Not needed to look at a drawing.
       </p>
       {/* ── THE HISTORY, MOVED DOWN FROM THE DOOR ────────────────────────────────
           This paragraph opened the room and it was the reason the room did not read as a
@@ -66,7 +67,6 @@ export default function CartoonLongRead() {
         Nobody wrote down the names of the people who built it. They built it anyway, one
         basket of earth at a time, and it stood for six hundred years.
       </p>
-      <CartoonGoals />
       <CartoonWorld />
     </details>
   );

@@ -6,6 +6,7 @@ import CartoonSessionBand from '@/components/climate/cartoons/CartoonSessionBand
 import CartoonProgramme from '@/components/climate/cartoons/CartoonProgramme';
 import CartoonAnthology from '@/components/climate/cartoons/CartoonAnthology';
 import CartoonWhy from '@/components/climate/cartoons/CartoonWhy';
+import CartoonGoals from '@/components/climate/cartoons/CartoonGoals';
 import CartoonLongRead from '@/components/climate/cartoons/CartoonLongRead';
 import CartoonRoomActions from '@/components/climate/cartoons/CartoonRoomActions';
 import CartoonRoomNew from '@/components/climate/cartoons/CartoonRoomNew';
@@ -53,9 +54,10 @@ export default function ClimateCartoons() {
           So there is one order now, and it is this one. It reads the same on a phone and on
           a desk:
 
-            the room's name and the cover   →   the drawings   →   the machine's hand
-            →   your turn   →   the book it feeds   →   the count, the argument, the
-            lineage   →   whose work this is
+            the room's name and the cover   →   the drawings   →   the case for a pen
+            →   the seventeen goals, counted   →   your turn   →   the book it feeds
+            →   whose work this is   →   the hands that drew before these   →   the
+            set list
 
           The invitation sits third, immediately after the drawings, because a wall asks you
           to look and then asks you to add. It does not ask you to read three essays first. */}
@@ -72,6 +74,24 @@ export default function ClimateCartoons() {
             a visitor has at the end of a wall: why am I looking at drawings on a climate
             record? Straight after the drawings is where that question is actually asked. */}
         <CartoonWhy />
+
+        {/* ── 3 · THE GOALS, BACK IN THE OPEN ─────────────────────────────────────────
+            Brian, 28 November: "were UN GOALS bro thought they were coolasfuck… where did
+            UN fellas go bro?"
+
+            They were folded into the drawer at the foot on the 25th, with the lineage, when
+            the room was being stripped of apparatus. That was half right: the lineage is
+            history and belongs in a drawer. The goals are not apparatus — they are the
+            campaign Francis has been running since 2012, read against the wall, with the
+            blank ones left blank on purpose. A workshop on Sunday needs to see the empty
+            space. Folding it away hid the one part of this room that asks something of the
+            reader: here are seventeen things that matter, here is what the wall has answered,
+            here is what nobody has drawn yet.
+
+            So it is a chapter again, and it sits before the invitation rather than after it,
+            because the blanks are the argument for the invitation. */}
+        <CartoonGoals />
+
         {/* ── 2 · THE MACHINE'S HAND IS NOT IN THIS ROOM ──────────────────────────
             Brian, 25 November, twice: "you sure the cartoonists and Janine want to see base 1
             cartoons bro?" and then "can take out base 1 drawings okesse". He was right and I

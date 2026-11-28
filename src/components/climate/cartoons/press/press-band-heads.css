@@ -23,7 +23,8 @@
     .cartoon-programme-eyebrow,
     .comic-anthology-eyebrow,
     .cartoon-longread-kicker,
-    .cartoon-lineage-kicker
+    .cartoon-lineage-kicker,
+    .cartoon-goals-eyebrow
   ) {
     display: inline-flex;
     align-items: center;
@@ -47,7 +48,8 @@
     .cartoon-programme-eyebrow,
     .comic-anthology-eyebrow,
     .cartoon-longread-kicker,
-    .cartoon-lineage-kicker
+    .cartoon-lineage-kicker,
+    .cartoon-goals-eyebrow
   ) svg {
     /* The drawn marks ride inside the chip, so they are sized to the type rather than to
        the sheet: a 30-pixel drawing inside a 10-pixel label makes the label a box. */
@@ -64,6 +66,7 @@
     .comic-anthology-title,
     .cartoon-lineage-title,
     .cartoon-programme-title,
+    .cartoon-goals-title,
     .room-new-head
   ) {
     /* The room printed every chapter name on a block of solid yellow. That was the right

@@ -18,6 +18,24 @@
   font: 700 .58rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
   letter-spacing: .16em; text-transform: uppercase; color: rgb(var(--record-red));
 }
+/* ── THE LIST SPLIT WHERE THE ROOM IS SPLIT ────────────────────────────────────
+   The six chapters you have just walked, then the five doors that leave the page. The head
+   is the record's red in the machine's small caps, so the split reads as a change of key
+   rather than as another row. */
+#root .press-room .wall-setlist-group-block + .wall-setlist-group-block { margin-top: .7rem; }
+#root .press-room .wall-setlist-group {
+  margin: .85rem 0 .1rem;
+  font: 700 .56rem/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .18em; text-transform: uppercase; color: rgb(var(--record-red));
+}
+/* What is behind each line, said in the room's words — the thing that stops eleven labels
+   reading as a filing list. Set as a second line inside the label, so the row keeps one
+   tap target and one height. */
+#root .press-room .wall-setlist-line {
+  display: block; margin-top: .2rem;
+  font: 400 .76rem/1.35 var(--font-reading);
+  letter-spacing: 0; color: rgb(var(--record-ink) / .7);
+}
 #root .press-room .wall-setlist ol { margin: 0; padding: 0; list-style: none; }
 #root .press-room .wall-setlist li + li { border-top: 1px solid rgb(var(--record-ink) / .14); }
 #root .press-room .wall-setlist a {
@@ -53,5 +71,8 @@
   #root .press-room .wall-setlist a { grid-template-columns: 1.6rem minmax(0, 1fr); gap: .45rem; padding: .5rem 0; }
   #root .press-room .wall-setlist svg { display: none; }
   #root .press-room .wall-setlist-label { font-size: .8rem; line-height: 1.25; }
+  /* Two columns of twelve rows is already a scroll before a drawing; the second line comes
+     off on a phone so the list stays a contents plate rather than an essay. */
+  #root .press-room .wall-setlist-line { display: none; }
   #root .press-room .wall-setlist-n { font-size: .58rem; }
 }
