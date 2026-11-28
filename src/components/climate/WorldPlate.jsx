@@ -122,8 +122,14 @@ export default function WorldPlate({ marks = [], lights = [], selectedId, onSele
                 stipple of ink. The water is left exactly as it was painted — open, deep
                 and alive — so a reader is looking at the planet, with the record standing
                 on it, rather than at a chart about the planet. */}
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".1" />
-            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-paper))" fillOpacity=".3" mask={`url(#${landId})`} />
+            {/* The land was washed at a third, which let the painting through so strongly
+                that the continents read as dark shapes rather than as ground — a reader
+                could not tell where the land was, only where the paint was. The wash is
+                half the paper now, so the land mass stands up pale and unmistakable and
+                the brushwork still moves underneath it. The sea is barely veiled at all,
+                because the sea is the painting's. */}
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-ink))" fillOpacity=".06" />
+            <rect width={PLATE_W} height={PLATE_H} fill="rgb(var(--record-paper))" fillOpacity=".52" mask={`url(#${landId})`} />
           </g>
         )}
         {/* The atlas holds still. The symbols, not a moving wash, carry the signal. */}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
+import { GESTURES, THE_WALL } from '@/components/climate/smallGestures';
 
 // Janine's list of the smallest gestures. Not advice, not a campaign — the things a
 // person can start today with nothing bought and nothing asked of anyone. x = x.
@@ -17,15 +18,7 @@ import RecordSectionHeading from '@/components/climate/RecordSectionHeading';
 // of real drawings — and the machine-drawn strips that used to sit below it came off the
 // record on 19 November, so the wall is now all there is: drawings, and the hands that made
 // them.
-const GESTURES = [
-  'Repairing a sweater / cardigan',
-  'Buying less',
-  'Walking',
-  'Using mass transportation',
-  'Not wasting food',
-];
-
-const THE_WALL = '/ClimateCartoons#press-wall';
+// The five live in smallGestures.js, so the map's foot and this band cannot disagree.
 
 export default function SmallGesturesBand() {
   return (

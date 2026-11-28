@@ -6,6 +6,7 @@ import NextActionNear from '@/components/climate/NextActionNear';
 import ImpactSignal from '@/components/climate/ImpactSignal';
 import WhyThisPlate from '@/components/climate/map/WhyThisPlate';
 import FounderPlate from '@/components/climate/map/FounderPlate';
+import FounderGestures from '@/components/climate/map/FounderGestures';
 import MapArtworkView from '@/components/climate/map/MapArtworkView';
 import ClimateImpact from '@/pages/ClimateImpact';
 import { useClimateImpactStats } from '@/hooks/useClimateImpactStats';
@@ -71,6 +72,9 @@ export default function ClimateMapPage() {
             entries exist, so the plate that holds the entries holds them too — in their
             own band, with their own sources, never mixed into the record's own marks. */}
         <FounderPlate />
+        {/* Harm at the top, the size a person can start at the foot: Janine's own five,
+            read from the same list the record's home prints. */}
+        <FounderGestures />
       </div>
 
       <div className="record-map-desk">
