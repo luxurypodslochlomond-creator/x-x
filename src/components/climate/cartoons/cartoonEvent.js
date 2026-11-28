@@ -14,6 +14,20 @@ export const CARTOON_EVENT = {
   when: '28–30 November 2026',
   where: 'National Museum, Benin City, Edo State, Nigeria',
   workshop: 'Janine Selendy’s workshop · Sunday 29 November · 3pm West Africa',
+  // ── THE HOST'S JOINING DETAILS, IN FRANCIS'S OWN WORDS ───────────────────────
+  // Francis sent these on WhatsApp at 14:11 on 28 November with one request: "Please share far
+  // and wide among your friends. Let them join the meeting tomorrow." Until then the room said
+  // the joining details came from the host, and left a box to paste them into. The host has now
+  // given them, so the wall prints them: a person handed a flyer in a chat should be able to
+  // walk straight in instead of asking somebody for a code.
+  joining: {
+    sentBy: 'Francis Umendu Odupute',
+    link: 'https://us06web.zoom.us/j/72371978193?pwd=iV7l8AaKHPdgalL65Dmeqo-UVONhBSh.1',
+    notes: 'https://us06web.zoom.us/j/72371978193?pwd=iV7l8AaKHPdgalL65Dmeqo-UVONhBSh.1&mynotes=on',
+    meetingId: '723 7197 8193',
+    passcode: '8skwa5',
+    short: 'To join: us06web.zoom.us/j/72371978193 · passcode 8skwa5',
+  },
   editors: 'Francis Umendu Odupute and Janine Selendy',
   // Janine, by WhatsApp on the evening of 18 November 2026: "By the way the art work of the
   // cover is by Francis." So the cover is not a house picture and not an unattributed
@@ -39,7 +53,7 @@ export const CARTOON_EVENT = {
   // an hour they did not know was online. The picture already says all of this; the message
   // has to say it too, because most people read the words before they open the picture.
   // Every fact here is one already held in this file — nothing new is claimed.
-  shareLine: 'CartoonAFRICA 2026 · Benin City · 28–30 November. Climate cartoons and the people who draw them. Janine Selendy hosts one hour online: Sunday 29 November, 2pm UK · 3pm West Africa · 9am EST. Free. Joining details from the host. Every drawing credited.',
+  shareLine: 'CartoonAFRICA 2026 · Benin City · 28–30 November. Climate cartoons and the people who draw them. Janine Selendy hosts one hour online: Sunday 29 November, 2pm UK · 3pm West Africa · 9am EST. Free. To join: us06web.zoom.us/j/72371978193 · passcode 8skwa5. Every drawing credited.',
 };
 
 // ── THE THREE DAYS, IN THE FESTIVAL'S OWN ORDER ────────────────────────────────

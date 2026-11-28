@@ -19,9 +19,10 @@ import { recordAddress } from '@/components/climate/recordAddress';
 // added that the room could not already prove: the hour, the host, the place, the credit.
 export default function WallEventNotice() {
   const [looking, setLooking] = useState(false);
-  // The host's joining details, pasted once by whoever holds the Zoom. Printed on the card
-  // they share; never sent to the record, never stored, gone when the page closes.
-  const [join, setJoin] = useState('');
+  // The host's joining details, given by Francis on 28 November. They are printed on the wall
+  // below, and they are what the share card carries by default; the box stays so a different
+  // host's details can be pasted in later. Nothing here is stored.
+  const [join, setJoin] = useState(CARTOON_EVENT.joining.short);
 
   return <aside className="wall-event-notice" aria-label="The biennial and Janine’s climate hour">
     <div className="wall-event-plate">
@@ -46,10 +47,11 @@ export default function WallEventNotice() {
       <details className="wall-event-join">
         <summary>Workshop details</summary>
         <p className="wall-event-note"><Link to="/ClimateWorkshop#workshop-agenda">Janine’s draft agenda</Link> · subject to change.</p>
-        <label className="wall-event-note" htmlFor="wall-host-joining">Host’s Zoom link and passcode</label>
-        <p className="wall-event-note">Only on the invitation you make here. Not saved to the record.</p>
-        <textarea id="wall-host-joining" value={join} onChange={(event) => setJoin(event.target.value)} rows={3} placeholder="Join here: https://… · passcode: …" aria-label="Joining link and passcode from the host" />
-        <p className="wall-event-note">{join.trim() ? 'These words will be printed on the card.' : 'Left empty, the card says the joining details come from the host.'}</p>
+        <p className="wall-event-note"><strong>To join, on the day:</strong> <a href={CARTOON_EVENT.joining.link} target="_blank" rel="noopener noreferrer">open the Zoom room</a> · <a href={CARTOON_EVENT.joining.notes} target="_blank" rel="noopener noreferrer">join and take notes</a></p>
+        <p className="wall-event-note">Meeting ID {CARTOON_EVENT.joining.meetingId} · passcode {CARTOON_EVENT.joining.passcode} · sent by {CARTOON_EVENT.joining.sentBy}</p>
+        <label className="wall-event-note" htmlFor="wall-host-joining">What the invitation card carries</label>
+        <textarea id="wall-host-joining" value={join} onChange={(event) => setJoin(event.target.value)} rows={2} placeholder="Join here: https://… · passcode: …" aria-label="Joining link and passcode printed on the card" />
+        <p className="wall-event-note">Change these words to send a different card. Not saved to the record.</p>
       </details>
     </div>
 

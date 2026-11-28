@@ -21,7 +21,9 @@ import { cardWords, cardTongueIsRightToLeft } from '@/components/climate/cardTon
 const HEAD = 'Climate change and the power of collective actions and creative interventions';
 const KICKER = 'A CLIMATE WORKSHOP · ONLINE · FREE';
 const HOUR = 'Sunday 29 November 2026 · 9am EST · 2pm UK · 3pm West Africa';
-const JOIN_NOTE = 'Joining link and passcode: supplied by the host.';
+// The host's own details now, not a note saying to ask for them: Francis sent them on
+// 28 November and asked for the invitation to be shared as widely as possible.
+const JOIN_NOTE = CARTOON_EVENT.joining.short;
 const SPEAKERS = [
   'Janine Selendy · Horizon International, Yale · host',
   'Francis Umendu Odupute · CartoonAFRICA Biennial · the cartoonists',
