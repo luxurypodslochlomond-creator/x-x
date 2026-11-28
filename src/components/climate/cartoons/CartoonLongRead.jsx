@@ -67,6 +67,7 @@ export default function CartoonLongRead() {
         Nobody wrote down the names of the people who built it. They built it anyway, one
         basket of earth at a time, and it stood for six hundred years.
       </p>
+      <p className="cartoon-longread-line">Scale: <a href="https://link.springer.com/article/10.1007/s10437-025-09630-y" target="_blank" rel="noopener noreferrer">Patrick Darling’s survey estimate, cited in the African Archaeological Review</a>. Dating: <a href="https://www.metmuseum.org/perspectives/benin-city-earthworks" target="_blank" rel="noopener noreferrer">The Metropolitan Museum of Art</a>. Sent by Janine Selendy, 27 November 2026.</p>
       <CartoonWorld />
     </details>
   );

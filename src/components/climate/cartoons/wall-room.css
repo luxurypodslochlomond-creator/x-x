@@ -1,0 +1,74 @@
+/* One working wall, four named views. Existing artwork and record colours stay intact. */
+#root .record-cartoon-field .press-room .wall-room { --wall-nav-height: 5.3rem; display: block; }
+#root .record-cartoon-field .press-room .wall-room > [hidden] { display: none !important; }
+#root .record-cartoon-field .press-room .wall-room > .cartoon-room-jump {
+  position: sticky; top: var(--wall-header-offset, 0px); z-index: 30;
+  display: block; margin: 0; padding: .45rem; border: 0;
+  border-bottom: 3px solid rgb(var(--record-red)); background: rgb(var(--record-paper));
+}
+#root .press-room .wall-room .cartoon-room-jump ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; }
+#root .press-room .wall-room .cartoon-room-jump a {
+  display: flex; align-items: center; justify-content: center; gap: .65rem; min-height: 3.25rem;
+  padding: .7rem .5rem; border: 1px solid transparent; color: rgb(var(--record-ink));
+  text-decoration: none; font: 700 .95rem/1.25 var(--font-record-ui);
+}
+#root .press-room .wall-room .cartoon-room-jump a[aria-current] { background: rgb(var(--record-signal)); border-color: rgb(var(--record-ink)); }
+#root .press-room .wall-room .cartoon-room-jump a:hover { border-color: rgb(var(--record-red)); }
+#root .press-room .wall-room .cartoon-room-jump a:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: -3px; }
+#root .press-room .wall-room .cartoon-room-jump svg { flex-shrink: 0; width: 1.5rem; height: 1.5rem; }
+#root .record-cartoon-field .press-room .wall-room > .wall-event-line {
+  margin: 0; padding: .65rem 1rem; border-bottom: 1px solid rgb(var(--record-ink) / .2);
+  font: 400 .8rem/1.6 var(--font-record-ui); background: rgb(var(--record-paper)); color: rgb(var(--record-muted));
+}
+#root .press-room .wall-event-line a { color: rgb(var(--record-red)); text-decoration: underline; text-underline-offset: .2em; }
+#root .record-cartoon-field .press-room .wall-room > .wall-view { margin: 1.2rem 0 0; padding: 0; background: transparent; }
+#root .press-room .wall-room :is(.press-wall-section, .comic-workshop, .room-new, .cartoon-goals, .wall-about) { margin-top: 0; }
+#root .press-room .wall-room :is(.cartoon-goals, .wall-about, .comic-workshop, .room-new) {
+  padding: clamp(1.1rem, 2.5vw, 2.5rem); background: rgb(var(--record-paper));
+}
+#root .press-room .wall-room .room-new { margin-bottom: 1rem; }
+#root .press-room .wall-room :is(#press-wall, #cartoon-goals, #cartoon-your-turn, #wall-about, [id^="drawing-"], .wall-background, #cartoon-humour, #cartoon-why-title, #press-world, #room-new-title) {
+  scroll-margin-top: calc(var(--wall-header-offset, 0px) + var(--wall-nav-height) + .75rem);
+}
+#root .press-room .wall-room .press-wall-head .cartoon-signal { margin: .5rem 0; }
+#root .press-room .wall-room .press-wall-line { max-width: 80ch; }
+#root .press-room .wall-room .wall-about > p { max-width: 72ch; margin: .5rem 0 1.8rem; line-height: 1.65; }
+#root .press-room .wall-room .wall-background { margin: 0; padding: 1rem 0; border-top: 1px solid rgb(var(--record-ink) / .25); }
+#root .press-room .wall-room .wall-background > summary { min-height: 2.5rem; align-content: center; cursor: pointer; font: 700 1.1rem/1.4 var(--font-record-ui); }
+#root .press-room .wall-room .wall-background[open] > summary { margin-bottom: 1.5rem; color: rgb(var(--record-red)); }
+#root .press-room .wall-room .wall-background > summary:focus-visible { outline: 2px solid rgb(var(--record-red)); outline-offset: 4px; }
+#root .press-room .wall-room .wall-background .comic-why { margin: 0; padding-top: .5rem; }
+#root .press-room .wall-room .wall-background .cartoon-humour { margin-top: 2rem; }
+#root .press-room .wall-room .wall-background .press-facing { margin-top: 2rem; }
+#root .press-room .wall-room .wall-event-spread { display: grid; gap: 2rem; align-items: start; }
+#root .press-room .wall-room .wall-event-spread .cartoon-sessions { margin: 0; }
+#root .press-room .wall-room .wall-setlist { margin-top: 1.5rem; }
+#root .press-room .wall-room .wall-setlist ul { list-style: none; margin: 0; padding: 0; }
+#root .press-room .wall-room .wall-setlist a { grid-template-columns: minmax(0, 1fr) auto; padding-block: .8rem; }
+#root .press-room .wall-room .wall-setlist-line { display: block; }
+#root .press-room .wall-room .cartoon-goals-head { max-width: 80ch; }
+#root .press-room .wall-room .cartoon-goals-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+#root .press-room .wall-room .cartoon-goal { border: 1px solid rgb(var(--record-ink) / .2); padding: .65rem .85rem; background: rgb(var(--record-bone) / .45); }
+#root .press-room .wall-room .cartoon-goal.is-open { grid-column: 1 / -1; background: rgb(var(--record-paper)); border-color: rgb(var(--record-red)); }
+#root .press-room .wall-room .cartoon-goal-head { grid-template-columns: 2.6rem minmax(0, 1fr) 1rem; gap: .65rem; min-height: 4.3rem; align-items: center; padding: .15rem 0; }
+#root .press-room .wall-room .cartoon-goal-number { font-size: 1.5rem; }
+#root .press-room .wall-room .cartoon-goal-name { font-size: 1rem; }
+#root .press-room .wall-room .cartoon-goal-panel { padding: 1.5rem 0 .5rem; }
+#root .press-room .wall-room .cartoon-goal-line { grid-template-areas: "art title" "art why" "art text" "art credit"; }
+#root .press-room .wall-room .cartoon-goal-line-art img { width: 100%; height: auto; object-fit: contain; }
+#root .press-room .wall-room .cartoon-goal-empty { color: rgb(var(--record-muted)); line-height: 1.6; }
+@media (min-width: 1024px) {
+  #root .press-room .wall-room .wall-event-spread { grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); }
+}
+@media (max-width: 767px) {
+  #root .press-room .wall-room .cartoon-goals-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  #root .record-cartoon-field .press-room .wall-room { --wall-nav-height: 4.7rem; }
+  #root .press-room .wall-room .cartoon-room-jump a { flex-direction: column; gap: .25rem; padding: .45rem .1rem; font-size: .72rem; }
+  #root .press-room .wall-room .cartoon-room-jump svg { width: 1.25rem; height: 1.25rem; }
+  #root .press-room .wall-room .cartoon-goal { padding: .5rem; }
+  #root .press-room .wall-room .cartoon-goal-head { grid-template-columns: 2rem minmax(0, 1fr) .6rem; gap: .3rem; }
+  #root .press-room .wall-room .cartoon-goal-number { min-width: 1.8rem; padding-inline: .1rem; font-size: 1.2rem; }
+  #root .press-room .wall-room .cartoon-goal-name { font-size: .82rem; }
+}

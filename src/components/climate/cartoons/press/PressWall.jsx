@@ -7,13 +7,15 @@ import CartoonCloseReading from '@/components/climate/cartoons/CartoonCloseReadi
 import CartoonsWaiting from '@/components/climate/cartoons/CartoonsWaiting';
 import { HungWall } from '@/components/climate/cartoons/CartoonInkIcons';
 import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
+import CartoonSignal from '@/components/climate/cartoons/CartoonSignal';
 
 // The wall, unchanged in what it does: the same published drawings, the same order, the
 // same close-reading viewer, the same keeper strip, the same "more from the wall". Only
 // its dress has gone — the black plates, the numbered caption bars, the alternating tilt.
-export default function PressWall() {
+export default function PressWall({ visible = true }) {
   const wall = useCartoonWall(true);
   const [reading, setReading] = useState(null);
+  const [requested, setRequested] = useState(null);
 
   // A drawing met in the seventeen goals is brought to its own place on the wall — its
   // sheet, its artist, its origin, its line, its credit — rather than opened in a floating
@@ -23,10 +25,7 @@ export default function PressWall() {
   useEffect(() => {
     const show = (event) => {
       const id = event.detail?.id;
-      const node = id ? document.getElementById(`drawing-${id}`) : null;
-      if (!node) return;
-      node.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      setMarked(id);
+      if (id) setRequested(id);
     };
     window.addEventListener(SHOW_DRAWING, show);
     return () => window.removeEventListener(SHOW_DRAWING, show);
@@ -39,10 +38,10 @@ export default function PressWall() {
 
   // A link from a cartoonist's own page — or one they sent to a gallery — carries the drawing's
   // id in the address, so the wall opens at that drawing rather than at the top of the room.
-  const wanted = new URLSearchParams(window.location.search).get('drawing');
+  const wanted = window.location.hash.startsWith('#drawing-') ? window.location.hash.slice(9) : requested || new URLSearchParams(window.location.search).get('drawing');
   const located = useRef(null);
   useEffect(() => {
-    if (!wanted || located.current === wanted || wall.isPending) return;
+    if (!visible || !wanted || located.current === wanted || wall.isPending) return;
     const node = document.getElementById(`drawing-${wanted}`);
     if (!node) {
       if (wall.hasNextPage && !wall.isFetchingNextPage && !wall.isFetchNextPageError) wall.fetchNextPage();
@@ -51,7 +50,7 @@ export default function PressWall() {
     located.current = wanted;
     node.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
     setMarked(wanted);
-  }, [wanted, wall.cartoons.length, wall.isPending, wall.hasNextPage, wall.isFetchingNextPage, wall.isFetchNextPageError, wall.fetchNextPage]);
+  }, [visible, wanted, wall.cartoons.length, wall.isPending, wall.hasNextPage, wall.isFetchingNextPage, wall.isFetchNextPageError, wall.fetchNextPage]);
 
   return (
     <section className="press-wall-section" id="press-wall" aria-labelledby="press-wall-title">
@@ -80,6 +79,8 @@ export default function PressWall() {
             two words. The press and the pen. */}
         <p className="press-eyebrow"><HungWall size={30} className="cmark-inline" />Satire, signed · every hand named</p>
         <h2 id="press-wall-title" className="press-wall-title">They own the press. They don’t own the pen.</h2>
+        <CartoonSignal />
+        <p className="press-wall-line">Look at the drawings, or read the same wall through the <a href="#cartoon-goals">17 UN goals</a>. <a href="#cartoon-your-turn">Send one of your own.</a></p>
         {/* "Read the picture. Stay with the idea. Tap any drawing to look closer." stood here,
             and it was the last instruction in a stack of them: tap this, swipe that, read
             those in order. A reader knows how to look at a picture, and a wall that explains
@@ -106,8 +107,7 @@ export default function PressWall() {
             drawing goes up under the name of the hand that made it, and that is the only
             promise the line needs to make. */}
         <p className="press-wall-line press-wall-filling">
-          Still being hung. Artists are sending now, and every drawing goes up under the name of the hand
-          that made it — no house style, no softening, nothing corrected.
+          Still being hung. Every contribution is checked by a person before it goes up.
         </p>
       </header>
 

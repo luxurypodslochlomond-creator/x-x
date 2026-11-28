@@ -1,159 +1,30 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GOALS, GOALS_SOURCE } from '@/components/climate/cartoons/cartoonGoals';
-import useCartoonWall from '@/components/climate/cartoons/useCartoonWall';
 import GoalRow from '@/components/climate/cartoons/GoalRow';
 import '@/components/climate/cartoons/cartoon-goals.css';
 
-// ── SEVENTEEN GOALS, ONE WALL, AND THE GAPS PRINTED ───────────────────────────
-// The room's answer to the campaign Francis has been running since 2012. It does not
-// congratulate the wall. It counts it, opens each goal to the goal's own words and the
-// cartoonists' own words, and leaves the blank ones blank — because a workshop needs to see
-// the empty space, not a tidy index that pretends the wall is finished.
 export default function CartoonGoals() {
-  const { cartoons } = useCartoonWall();
   const [openGoal, setOpenGoal] = useState(null);
-  const [waitingOnly, setWaitingOnly] = useState(false);
-
-  // The wall's real drawings, keyed by their real title, so every goal opens onto the
-  // pictures themselves and every quoted sentence is the artist's own. Brian, 19 November:
-  // "where are the drawings in like good health and well being bro got decryption but no
-  // drawing bro" — right. The ledger was printing the goal's words and the artist's words
-  // with the drawing left up the page, which is a citation of a picture rather than a
-  // picture. A drawing is the thing; its line is the caption.
-  const art = useMemo(() => {
-    const map = {};
-    cartoons.forEach((c) => { if (c.title) map[c.title] = c; });
-    return map;
-  }, [cartoons]);
-
-  // Counted from the wall itself, not from the table above it. A goal is answered when a
-  // drawing it names is actually standing on the wall today; a reading whose drawing has
-  // been taken down does not get to keep answering the goal by itself.
-  // A goal is answered by a drawing the record has read onto it, or by one the person who drew
-  // it offered for it from the goal's own panel. Both are drawings standing against the goal;
-  // the row keeps the two claims apart, and this count does not have to pretend one is the other.
-  const answered = (g) =>
-    g.drawings.some((d) => art[d.title]) ||
-    cartoons.some((c) => Number(c.goal) === g.n && c.title && !art[c.title]);
-
-  const held = GOALS.filter(answered).length;
-  const open = GOALS.length - held;
-
-  // ── THE DRAWINGS READ ONTO NO GOAL, COUNTED RATHER THAN REMEMBERED ────────────
-  // This line used to name one drawing from a hand-written list, and on 25 November the
-  // wall held four that no goal names: Francis's "Urbanisation and Sanitation…", "Heat's Got
-  // Nowhere to Hide!", "The Game's Gone Green!" and "Hidden in Plain Sight". So the page was
-  // telling a cartoonist his drawing had been read when it had not — and worse, it would go
-  // stale again the moment a new drawing arrived, which is exactly what Sunday is for.
-  //
-  // Which drawings are unread is arithmetic, not an editorial judgement: it is the wall minus
-  // the titles the goals name. So it is counted here from the wall itself, and it cannot drift.
-  // What a drawing MEANS is still hand-written in cartoonGoals.js, and still has to earn its
-  // place — that rule is untouched.
-  const placedTitles = useMemo(
-    () => new Set(GOALS.flatMap((g) => g.drawings.map((d) => d.title))),
-    []
-  );
-  const unplaced = useMemo(
-    () => cartoons.filter((c) => c.title && !placedTitles.has(c.title)).map((c) => c.title),
-    [cartoons, placedTitles]
-  );
-  // The other half of the count, and the one a cartoonist looks for: how much of the wall
-  // the record has actually read. Counted on the whole wall, including the drawings that
-  // came without a title — a wall of thirty-two is a wall of thirty-two, and a count that
-  // quietly leaves one out to make the arithmetic tidier is the kind of figure this record
-  // exists to refuse.
-  const wallCount = cartoons.length;
-  const untitled = useMemo(() => cartoons.filter((c) => !c.title).length, [cartoons]);
-  const readCount = wallCount - unplaced.length - untitled;
-  const shown = waitingOnly ? GOALS.filter((g) => !answered(g)) : GOALS;
-
-  return (
-    <section className="cartoon-goals" id="cartoon-goals" aria-labelledby="cartoon-goals-title">
-      <header className="cartoon-goals-head">
-        <p className="cartoon-goals-eyebrow">The wall, read against the goals</p>
-        <h2 id="cartoon-goals-title" className="cartoon-goals-title">Seventeen goals. One wall.</h2>
-        {/* ── THE LEDE, CUT TO THE TWO SENTENCES THAT ARE DOING WORK ────────────
-            It used to open by explaining the campaign to the people who have been drawing it
-            for fourteen years, and then explain the room's method in four clauses. Both are
-            true and both belong in the record — but a reader standing at a wall of drawings
-            does not need either to open a goal. What is kept is the promise the section
-            actually makes: the goal's sentence, the cartoonists' sentences, and the page to
-            check them on. */}
-        <p className="cartoon-goals-lede">
-          CartoonAFRICA has carried an SDG cartoon campaign since 2012, so this room does not
-          explain the goals to the people who have been drawing them. Open any goal: the goal’s
-          own sentence, the cartoonists’ own sentences, and the page where you can check both.
-        </p>
-        {/* "Made from each drawing's published line" was true of the first drawings and false
-            of most of them: eighteen of the thirty-two on this wall came with no line at all.
-            A method that describes a source the record did not have is the one sentence on
-            this page a sceptic could pull out and be right about, so it now says what the
-            readings were actually made from — the drawing as it hangs, its title, and its
-            line wherever there is one. */}
-        <p className="cartoon-goals-method">
-          This reading is the record’s own, made from each drawing as it hangs: the drawing
-          itself, its title, and the artist’s line wherever one came with it. It is not the
-          United Nations’ reading, and the UN has not endorsed this room.
-        </p>
-      </header>
-
-      <div className="cartoon-goals-bar">
-        <p className="cartoon-goals-count">
-          <span><strong>{held}</strong> of 17 goals answered</span>
-          <span><strong>{readCount}</strong> of {wallCount} drawings read onto one</span>
-          <span><strong>{open}</strong> still waiting for a drawing</span>
-        </p>
-        <button
-          type="button"
-          className="cartoon-goals-filter"
-          aria-pressed={waitingOnly}
-          onClick={() => setWaitingOnly((v) => !v)}
-        >
-          {waitingOnly ? 'Show all seventeen' : 'Show only the blank ones'}
-        </button>
-      </div>
-
-      <ol className="cartoon-goals-list">
-        {shown.map((goal) => (
-          <GoalRow
-            key={goal.n}
-            goal={goal}
-            art={art}
-            cartoons={cartoons}
-            open={openGoal === goal.n}
-            onToggle={() => setOpenGoal((current) => (current === goal.n ? null : goal.n))}
-          />
-        ))}
-      </ol>
-
-      <div className="cartoon-goals-foot">
-        {unplaced.length > 0 && (
-          <p>
-            {unplaced.length === 1 ? 'One drawing' : `${unplaced.length} drawings`} (
-            {unplaced.length === 1
-              ? unplaced[0]
-              : `${unplaced.slice(0, -1).join(', ')} and ${unplaced[unplaced.length - 1]}`}
-            ) {unplaced.length === 1 ? 'is' : 'are'} read onto no goal at all, and{' '}
-            {unplaced.length === 1 ? 'is' : 'are'} left where they are. A room that puts every
-            drawing somewhere has stopped looking at them.
-            {untitled > 0 &&
-              ` ${untitled === 1 ? 'One more' : `${untitled} more`} came without a title and ${untitled === 1 ? 'is' : 'are'} left alone for the same reason: a picture with no name cannot be read onto anything honestly.`}
-          </p>
-        )}
-        <p>
-          {GOALS_SOURCE.line}{' '}
-          <a href={GOALS_SOURCE.url} target="_blank" rel="noopener noreferrer">{GOALS_SOURCE.name} ↗</a>
-        </p>
-        <p className="cartoon-goals-ask">
-          {/* This said "it is the workshop's brief", which put a drawing exercise into an hour
-              that has none — the same fault as the nineteen-minute slot, one paragraph down.
-              A blank goal is not a task set for the room on Sunday. It is simply a place where
-              a cartoonist could put something. */}
-          {open} goals are still blank. Not a gap to be hidden — a place a cartoonist could put
-          something. <a href="#cartoon-your-turn">Send one in →</a>
-        </p>
-      </div>
-    </section>
-  );
+  useEffect(() => {
+    const openFromAddress = () => {
+      const match = window.location.hash.match(/^#goal-(?:button|panel)-(\d+)$/);
+      if (match) setOpenGoal(Number(match[1]));
+    };
+    openFromAddress();
+    window.addEventListener('hashchange', openFromAddress);
+    return () => window.removeEventListener('hashchange', openFromAddress);
+  }, []);
+  return <section className="cartoon-goals" id="cartoon-goals" aria-labelledby="cartoon-goals-title">
+    <header className="cartoon-goals-head">
+      <p className="cartoon-goals-eyebrow">A way into the same drawings</p>
+      <h2 id="cartoon-goals-title" className="cartoon-goals-title">Seventeen goals. The same wall.</h2>
+      <p className="cartoon-goals-lede">Not a second collection. Choose a UN goal to see the drawings connected to it, or offer one of your own.</p>
+      <p className="cartoon-goals-method">Connections are labelled as the record’s reading or the sender’s choice. Neither is a UN endorsement.</p>
+    </header>
+    <ol className="cartoon-goals-list">{GOALS.map((goal) => <GoalRow key={goal.n} goal={goal} open={openGoal === goal.n} onToggle={() => setOpenGoal((current) => current === goal.n ? null : goal.n)} />)}</ol>
+    <div className="cartoon-goals-foot">
+      <p>{GOALS_SOURCE.line} <a href={GOALS_SOURCE.url} target="_blank" rel="noopener noreferrer">{GOALS_SOURCE.name} ↗</a></p>
+      <p><a href="#press-wall">Back to the drawings</a> · <a href="#cartoon-your-turn">Send a drawing without choosing a goal</a></p>
+    </div>
+  </section>;
 }
