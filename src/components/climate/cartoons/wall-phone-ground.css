@@ -1,0 +1,35 @@
+/* ── A PHONE GETS THE PAPER BACK UNDER THE WALL ────────────────────────────────
+   Brian, 28 November, on a handset: "styling coolasfuck off balance and can't see some
+   areas… the image isn't coming though bro."
+
+   He was looking at a real fault, and it was one line doing it. wall-room.css sets every
+   view of the room to `background: transparent; padding: 0` so the four views sit on one
+   continuous sheet at desk width — where the sheet is the record's own book and the
+   painting is only ever above the words. On a phone the painting runs edge to edge behind
+   the whole room instead, so that same line laid the catalogue band, the chapter heads and
+   the drawing credits straight onto the earth: dark picture, dark words, and no margin to
+   hold them apart. Nothing was "off balance" by accident — the words had no page under them.
+
+   This file is loaded last, on purpose. Same selector as the rule it answers, later in the
+   cascade, inside the phone width only: the desk keeps its one continuous sheet and the
+   handset gets a sheet under each view, with the margin that makes it readable.
+   ------------------------------------------------------------------------- */
+@media screen and (max-width: 639px) {
+  #root .record-cartoon-field .press-room .wall-room > .wall-view {
+    margin: 0 0 1.4rem;
+    padding: 1.15rem 1rem;
+    background: rgb(var(--record-paper));
+    box-shadow: 0 20px 44px -32px rgb(var(--record-ink));
+  }
+  /* The view is the sheet. What is inside it does not need a second one. */
+  #root .record-cartoon-field .press-room .wall-room > .wall-view > * {
+    background: none;
+    box-shadow: none;
+  }
+  /* The four doors and the event line are bars, not chapters: they keep their own edges
+     and sit above the sheet rather than inside it. */
+  #root .record-cartoon-field .press-room .wall-room > .cartoon-room-jump,
+  #root .record-cartoon-field .press-room .wall-room > .wall-event-line {
+    margin: 0 0 .9rem;
+  }
+}

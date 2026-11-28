@@ -12,7 +12,10 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.54';
 // what a raw "api/functions/ogRedirect?page=..." looks like arriving in a chat. So the record
 // draws its own card as real PNG bytes, at the 1.91:1 shape a link preview actually wants:
 // paper, one signal pulse, no lettering that could be misspelled.
-const RECORD_CARD = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/cc94d332d_record-cover-mobile.png';
+// Measured, not assumed: the card this used to name was a 2.6 MB PNG, and WhatsApp gives up
+// on a preview past roughly 600 KB without saying so — so every link handed to a crawler
+// arrived as a naked address. This one is the same painting at 900 × 472, 227 KB.
+const RECORD_CARD = 'https://base44.app/api/apps/6889f31e76713b9cd47e043c/files/mp/public/6889f31e76713b9cd47e043c/b204beb34c6ef6f597df924caa5f6d66_record-share-card.png';
 
 const PAGE_META = {
 

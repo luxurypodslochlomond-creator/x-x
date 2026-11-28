@@ -23,6 +23,9 @@ import '@/components/climate/cartoons/wall-working.css';
 import '@/components/climate/cartoons/wall-phone-reading.css';
 import '@/components/climate/cartoons/wall-stability.css';
 import '@/components/climate/cartoons/press/press-credit.css';
+// Last on purpose: it answers wall-room.css's transparent views on a phone, and only wins
+// the cascade by being after it. See the file's own note.
+import '@/components/climate/cartoons/wall-phone-ground.css';
 
 export default function ClimateCartoons() {
   return (

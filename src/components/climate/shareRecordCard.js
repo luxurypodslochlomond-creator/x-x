@@ -64,7 +64,14 @@ export async function shareRecord() {
       }
     } else if (navigator.share) {
       try {
-        await navigator.share({ title: RECORD_SHARE_TITLE, text });
+        // ── THE ADDRESS GOES IN ITS OWN FIELD, NOT BURIED IN THE WORDS ────────────
+        // Brian, 28 November, sending the card to Gill: "the image isn't coming though bro."
+        // On a phone that will not share a file, this branch drew the card and then handed
+        // over text alone, with the address sitting inside the sentence. WhatsApp builds a
+        // link preview from the `url` field, so a message sent this way had no attached card
+        // AND no preview of the page: just two lines of type. The sentence travels as text
+        // and the address as the url now, so the picture comes from the record itself.
+        await navigator.share({ title: RECORD_SHARE_TITLE, text: RECORD_SHARE_LINE, url: RECORD_LINK });
         return 'shared';
       } catch (err) {
         if (err?.name === 'AbortError') return 'cancelled';
